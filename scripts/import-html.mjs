@@ -1,26 +1,24 @@
 // Script d'importació de HTML a fitxes.
 // Ús:  npm run import
 //
-// Llegeix tots els fitxers .html dins de /_import (recursiu) i els copia
-// TAL QUAL (preservant tot el disseny: colors, gradients, timelines,
-// icones, etc.) dins de /content/<modul>/<slug>.html
+// Què fa:
+//   1. BUIDA les carpetes de /content (només els .html) perquè la importació
+//      sigui idempotent i no deixi duplicats.
+//   2. Llegeix tots els .html dins de /_import (recursiu) i els copia
+//      TAL QUAL (preservant tot el disseny) a /content/<modul>/<slug>.html
+//   3. Classifica cada fitxer:
+//        a) Regles explícites del manifest _import/rules.txt (si existeix).
+//        b) Regles de paraules clau (nom del fitxer → contingut).
+//        c) Si no hi ha coincidència clara → /content/_sense-classificar/
 //
-// Classificació (regles explícites + paraules clau):
-//   1r) Si el nom de fitxer/carpeta conté una "regla explícita" (més avall),
-//       s'hi assigna directament. Això cobreix:
-//         - codi-penal:  només el Codi penal (cp, codi penal, codigo penal)
-//         - fcs:         codi ètica, armament, llei 4/2003, 16/91, LO 2/86, reglament armes
-//         - municipi:    llei 7/1985 i ordenances
-//         - transit:     catàleg infraccions (incloent VMP)
-//         - ce78:        constitució espanyola
-//         - eac:         estatut d'autonomia de Catalunya
-//         - sc:          seguretat ciutadana / LOPSC
-//         - lecrim:      enjudiciament criminal
-//         - menors:      menors (LO 5/2000, LORPM)
-//   2n) Si no, es revisa el contingut (primers ~8 KB).
-//   3r) Si encara no es pot classificar, va a /content/_sense-classificar/.
+// Els fitxers .md escrits a mà NO es toquen.
+//
+// Manifest (opcional): crea un fitxer _import/rules.txt amb línies tipus:
+//     nom-fitxer.html -> fcs
+//     un-altre.html -> transit
+// Les coincidències poden ser parcials (substring del nom del fitxer).
 
-import { readFile, writeFile, mkdir, readdir, stat } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, readdir, stat, unlink } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -31,32 +29,28 @@ const IMPORT_DIR = path.join(ROOT, '_import');
 const CONTENT_DIR = path.join(ROOT, 'content');
 const UNCLASSIFIED_DIR = path.join(CONTENT_DIR, '_sense-classificar');
 
+// Mòduls vàlids. Han de coincidir amb els slugs de src/lib/content.ts.
+const MODULE_SLUGS = [
+  'ce78',
+  'codi-penal',
+  'eac',
+  'fcs',
+  'lecrim',
+  'menors',
+  'municipi',
+  'sc',
+  'transit',
+];
+
 // ---- Regles de classificació ---------------------------------------------
-// Les regles s'avaluen EN ORDRE (la primera que encaixa, guanya).
-// Per cada mòdul indiquem paraules clau que han de coincidir a la ruta
-// (nom de fitxer o subcarpeta) o al contingut.
 //
-// Algunes regles incorporen "exclusions" (exclude): si el text coincideix
-// amb una paraula que no ha d'estar, es descarta la regla.
-// Això evita que, p.ex., una fitxa de "FCS" que menciona "Codi penal"
-// acabi en codi-penal.
+// IMPORTANT: l'ordre importa. La primera regla que encaixa, guanya.
+// Posem les regles MÉS ESPECÍFIQUES primer; Codi penal va al final per no
+// "robar" fitxes d'altres mòduls que facin referència al Codi penal.
+//
+// `pathOnly: true` significa que la regla només es comprova al nom del fitxer
+// (no al contingut). És útil per Codi penal, que només hi ha de ser el propi CP.
 const RULES = [
-  // Codi penal: només fitxes del propi Codi penal
-  {
-    slug: 'codi-penal',
-    include: [
-      'codi-penal',
-      'codi penal',
-      'codigo-penal',
-      'codigo penal',
-      'codi_penal',
-      'lo 10/1995',
-      'lo 10-1995',
-      'lo10-1995',
-      'lo 10 1995',
-    ],
-    exclude: [],
-  },
   // FCS
   {
     slug: 'fcs',
@@ -73,22 +67,21 @@ const RULES = [
       'ley 4/2003',
       'ley 4-2003',
       '4/2003',
+      '16/1991',
+      '16-1991',
       '16/91',
       '16-91',
-      '16 91',
-      'lo 2/86',
-      'lo 2-86',
       'lo 2/1986',
       'lo 2-1986',
+      'lo 2/86',
+      'lo 2-86',
       '2/1986',
       'reglament armes',
-      'reglament d armes',
       "reglament d'armes",
+      'reglament d armes',
       'reglamento armas',
       'reglamento de armas',
-      'fcs',
     ],
-    exclude: [],
   },
   // Municipi
   {
@@ -99,37 +92,40 @@ const RULES = [
       'ley 7/1985',
       'ley 7-1985',
       '7/1985',
-      'ordenan',
+      '7-1985',
+      'lbrl',
       'bases del regim local',
       'bases del régimen local',
-      'lbrl',
-      'municipi',
-      'municipal',
-      'viladecans',
+      'ordenan', // cobreix "ordenança", "ordenanza", "ordenanzas", "ordenances"
     ],
-    exclude: [],
   },
-  // Trànsit
+  // Trànsit — ESTRICTE: només catàleg d'infraccions i VMP
   {
     slug: 'transit',
     include: [
-      'cataleg-infraccions',
-      'catàleg infraccions',
       'cataleg infraccions',
-      'catálogo infracciones',
+      'catàleg infraccions',
+      'cataleg-infraccions',
       'catalogo infracciones',
+      'catálogo infracciones',
+      'catalogo-infracciones',
       'vmp',
-      'transit',
-      'trànsit',
-      'tráfico',
-      'trafico',
-      'circulació',
-      'circulacion',
-      'seguretat viaria',
-      'seguretat viària',
-      'seguridad vial',
     ],
-    exclude: [],
+  },
+  // Menors
+  {
+    slug: 'menors',
+    include: [
+      'lorpm',
+      'lo 5/2000',
+      'lo 5-2000',
+      '5/2000',
+      '5-2000',
+      'responsabilitat penal del menor',
+      'responsabilidad penal del menor',
+      'menor edat',
+      'menor de edad',
+    ],
   },
   // CE78
   {
@@ -138,13 +134,14 @@ const RULES = [
       'ce78',
       'ce-78',
       'ce 78',
-      'constitució espanyola',
-      'constitucion española',
+      'constitucio espanyola',
+      'constitución española',
+      'constitucion espanola',
       'constitucion espanyola',
-      'constitucion',
-      'constitucional',
+      'constitució espanyola',
+      'constitucion 1978',
+      'constitució 1978',
     ],
-    exclude: [],
   },
   // EAC
   {
@@ -157,11 +154,10 @@ const RULES = [
       'lo 6/2006',
       'lo 6-2006',
       '6/2006',
-      'generalitat de catalunya',
+      '6-2006',
     ],
-    exclude: [],
   },
-  // SC (Seguretat Ciutadana)
+  // SC
   {
     slug: 'sc',
     include: [
@@ -171,37 +167,33 @@ const RULES = [
       'lo 4/2015',
       'lo 4-2015',
       '4/2015',
+      '4-2015',
     ],
-    exclude: [],
   },
   // LECrim
   {
     slug: 'lecrim',
     include: [
       'lecrim',
-      'lecr',
       'enjudiciament criminal',
       'enjuiciamiento criminal',
-      'atestat',
-      'atestado',
-      'habeas corpus',
     ],
-    exclude: [],
   },
-  // Menors
+  // Codi penal — ÚLTIM i només per nom de fitxer.
   {
-    slug: 'menors',
+    slug: 'codi-penal',
+    pathOnly: true,
     include: [
-      'menors',
-      'menores',
-      'lorpm',
-      'lo 5/2000',
-      'lo 5-2000',
-      '5/2000',
-      'responsabilitat penal del menor',
-      'responsabilidad penal del menor',
+      'codi-penal',
+      'codi penal',
+      'codi_penal',
+      'codigo-penal',
+      'codigo penal',
+      'codigo_penal',
+      'lo 10/1995',
+      'lo 10-1995',
+      '10/1995',
     ],
-    exclude: [],
   },
 ];
 
@@ -251,29 +243,61 @@ function extractTitle(html, fallback) {
   return fallback;
 }
 
-function ruleMatchesHaystack(rule, haystack) {
-  for (const ex of rule.exclude) {
-    if (haystack.includes(normalize(ex))) return false;
-  }
+function ruleMatches(rule, haystack) {
   for (const kw of rule.include) {
     if (haystack.includes(normalize(kw))) return true;
   }
   return false;
 }
 
-// Retorna { slug, reason } o null.
-function classify(relPath, htmlContentNormalized) {
+function classifyByRules(relPath, htmlNormalized) {
   const pathHay = normalize(relPath);
-  // 1) Per ruta
+  // 1) Per ruta: totes les regles
   for (const r of RULES) {
-    if (ruleMatchesHaystack(r, pathHay)) {
-      return { slug: r.slug, reason: `ruta coincideix amb regla de ${r.slug}` };
+    if (ruleMatches(r, pathHay)) {
+      return { slug: r.slug, reason: `ruta (${r.slug})` };
     }
   }
-  // 2) Per contingut
+  // 2) Per contingut: només regles que NO siguin `pathOnly`
   for (const r of RULES) {
-    if (ruleMatchesHaystack(r, htmlContentNormalized)) {
-      return { slug: r.slug, reason: `contingut coincideix amb regla de ${r.slug}` };
+    if (r.pathOnly) continue;
+    if (ruleMatches(r, htmlNormalized)) {
+      return { slug: r.slug, reason: `contingut (${r.slug})` };
+    }
+  }
+  return null;
+}
+
+// Llegeix _import/rules.txt (opcional). Format:
+//   nom-parcial-del-fitxer.html -> slug-modul
+//   ...
+// Línies que comencen amb # són comentaris.
+async function loadManifest() {
+  const p = path.join(IMPORT_DIR, 'rules.txt');
+  if (!existsSync(p)) return [];
+  const text = await readFile(p, 'utf8');
+  const rules = [];
+  for (const raw of text.split(/\r?\n/)) {
+    const line = raw.trim();
+    if (!line || line.startsWith('#')) continue;
+    const m = line.match(/^(.+?)\s*->\s*([a-z0-9-]+)\s*$/i);
+    if (!m) continue;
+    const pattern = m[1].trim();
+    const slug = m[2].trim();
+    if (!MODULE_SLUGS.includes(slug)) {
+      console.warn(`  ⚠ Regla ignorada (mòdul desconegut): ${line}`);
+      continue;
+    }
+    rules.push({ pattern: normalize(pattern), slug });
+  }
+  return rules;
+}
+
+function classifyByManifest(relPath, manifest) {
+  const hay = normalize(relPath);
+  for (const r of manifest) {
+    if (hay.includes(r.pattern)) {
+      return { slug: r.slug, reason: `manifest (${r.pattern} → ${r.slug})` };
     }
   }
   return null;
@@ -293,6 +317,26 @@ async function uniquePath(dir, baseSlug, ext) {
   return candidate;
 }
 
+// Esborra tots els .html dels mòduls i de _sense-classificar perquè la
+// importació sigui idempotent. Els .md i els .gitkeep no es toquen.
+async function cleanContent() {
+  const dirs = [
+    ...MODULE_SLUGS.map((s) => path.join(CONTENT_DIR, s)),
+    UNCLASSIFIED_DIR,
+  ];
+  let removed = 0;
+  for (const d of dirs) {
+    if (!existsSync(d)) continue;
+    for (const entry of await readdir(d)) {
+      if (entry.toLowerCase().endsWith('.html')) {
+        await unlink(path.join(d, entry));
+        removed++;
+      }
+    }
+  }
+  return removed;
+}
+
 async function main() {
   if (!existsSync(IMPORT_DIR)) {
     console.error(`No existeix la carpeta ${IMPORT_DIR}.`);
@@ -300,16 +344,31 @@ async function main() {
     process.exit(1);
   }
 
+  const manifest = await loadManifest();
+  if (manifest.length > 0) {
+    console.log(`Manifest _import/rules.txt: ${manifest.length} regla/es carregades.`);
+  }
+
+  const removed = await cleanContent();
+  if (removed > 0) {
+    console.log(`Neteja prèvia: eliminats ${removed} fitxers .html antics.\n`);
+  }
+
   let processed = 0;
   let unclassified = 0;
   const stats = {};
 
   for await (const file of walk(IMPORT_DIR)) {
+    // Ignorem el propi rules.txt i qualsevol no-.html.
+    if (path.basename(file).toLowerCase() === 'rules.txt') continue;
     const html = await readFile(file, 'utf8');
     const rel = path.relative(IMPORT_DIR, file);
     const htmlNormalized = normalize(html.slice(0, 16000));
 
-    const cls = classify(rel, htmlNormalized);
+    // 1) Manifest → 2) Regles
+    const cls =
+      classifyByManifest(rel, manifest) ?? classifyByRules(rel, htmlNormalized);
+
     const fallbackName = path.basename(file, path.extname(file));
     const title = extractTitle(html, fallbackName);
 
@@ -317,18 +376,17 @@ async function main() {
     let decisionMsg;
     if (cls) {
       targetDir = path.join(CONTENT_DIR, cls.slug);
-      decisionMsg = `→ ${cls.slug} (${cls.reason})`;
+      decisionMsg = `→ ${cls.slug}   ${cls.reason}`;
       stats[cls.slug] = (stats[cls.slug] ?? 0) + 1;
     } else {
       targetDir = UNCLASSIFIED_DIR;
-      decisionMsg = '→ _sense-classificar (cap regla no ha coincidit)';
+      decisionMsg = '→ _sense-classificar   cap regla no ha coincidit';
       unclassified++;
     }
 
     await ensureDir(targetDir);
     const baseSlug = slugify(title) || slugify(fallbackName);
     const outPath = await uniquePath(targetDir, baseSlug, '.html');
-    // Copiem el HTML TAL QUAL (preservem tot el disseny).
     await writeFile(outPath, html, 'utf8');
 
     processed++;
@@ -338,19 +396,26 @@ async function main() {
     console.log(`    ${path.relative(ROOT, outPath)}`);
   }
 
-  console.log('\nResum:');
-  for (const [slug, n] of Object.entries(stats).sort()) {
-    console.log(`  ${slug}: ${n}`);
+  console.log('\n──────── Resum ────────');
+  for (const slug of MODULE_SLUGS) {
+    const n = stats[slug] ?? 0;
+    console.log(`  ${slug.padEnd(14)}: ${n}`);
   }
   if (unclassified > 0) {
     console.log(`  _sense-classificar: ${unclassified}`);
-    console.log(
-      '\nRevisa la carpeta content/_sense-classificar/ i mou els .html a',
-    );
-    console.log('la carpeta del mòdul correcte. Un cop moguts, refresca la');
-    console.log('pàgina (npm run dev es recarrega sol).');
   }
-  console.log(`\nTotal importat: ${processed}`);
+  console.log(`  Total importat: ${processed}`);
+
+  if (unclassified > 0) {
+    console.log(
+      '\nHi ha fitxers sense classificar a content/_sense-classificar/.',
+    );
+    console.log(
+      'Pots moure-ls a mà a la carpeta correcta, o afegir una regla al',
+    );
+    console.log('manifest _import/rules.txt (p. ex.):');
+    console.log('    nom-parcial.html -> transit');
+  }
 }
 
 async function getStatLabel(file) {

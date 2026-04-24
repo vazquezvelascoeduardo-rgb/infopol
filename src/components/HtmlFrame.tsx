@@ -54,12 +54,14 @@ export default function HtmlFrame({ html, title }: Props) {
       // els seus propis scripts (animacions, detalls, col·lapsables)
       // i nosaltres podem mesurar el contingut.
       sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+      // Fons transparent perquè agafi el color del body de l'app
+      // mentre carrega (evita un "parche" blanc momentani).
       style={{
         width: '100%',
         height: `${height}px`,
         border: '0',
         display: 'block',
-        colorScheme: 'normal',
+        background: 'transparent',
       }}
     />
   );

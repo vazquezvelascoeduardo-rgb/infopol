@@ -1,7 +1,8 @@
 // Pàgina d'una fitxa concreta.
-// Si la fitxa és HTML, la mostrem dins d'un iframe perquè conservi tot
-// el seu disseny original (colors, gradients, timelines, icones, etc.).
-// Si és Markdown, la renderitzem amb el nostre mini-renderer.
+// - Si la fitxa és HTML: ocupa tot l'ample de la pantalla ("edge-to-edge"),
+//   sense cap caixa al voltant. Damunt hi ha una fina barra de navegació
+//   amb les molles de pa, visualment continuada amb la capçalera.
+// - Si és Markdown: es mostra en una columna còmoda de lectura.
 import { Link, useParams } from 'react-router-dom';
 import { MODULES, getCard } from '../lib/content';
 import { Markdown } from '../lib/markdown';
@@ -14,39 +15,58 @@ export default function CardPage() {
 
   if (!mod || !card) {
     return (
-      <div className="px-4 py-6">
-        <p className="text-slate-400">Fitxa no trobada.</p>
-        <Link to="/" className="text-amber-400 underline">
+      <div className="mx-auto w-full max-w-5xl px-4 py-6">
+        <p className="text-slate-600 dark:text-slate-400">Fitxa no trobada.</p>
+        <Link to="/" className="text-amber-600 dark:text-amber-400 underline">
           Torna a l'inici
         </Link>
       </div>
     );
   }
 
-  return (
-    <article>
-      <nav className="text-sm text-slate-400 mb-3">
-        <Link to="/" className="hover:underline">
-          Inici
-        </Link>
-        <span className="mx-2">/</span>
-        <Link to={`/s/${mod.slug}`} className="hover:underline">
+  // Breadcrumb reutilitzable. Per HTML va a ample complet; per Markdown,
+  // dins del contenidor.
+  const breadcrumb = (
+    <nav className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2">
+      <Link to="/" className="hover:underline">Inici</Link>
+      <span aria-hidden>/</span>
+      <Link to={`/s/${mod.slug}`} className="hover:underline">
+        <span className="inline-flex items-center gap-1">
+          <span
+            aria-hidden
+            className={`inline-block h-2 w-2 rounded-full bg-gradient-to-br ${mod.accent}`}
+          />
           {mod.title}
-        </Link>
-        <span className="mx-2">/</span>
-        <span className="text-slate-200">{card.title}</span>
-      </nav>
+        </span>
+      </Link>
+      <span aria-hidden>/</span>
+      <span className="truncate text-slate-700 dark:text-slate-200">{card.title}</span>
+    </nav>
+  );
 
-      {card.kind === 'html' ? (
-        // Iframe aïllat: 0 interferències entre els estils de la ficha i l'app.
-        <div className="rounded-2xl overflow-hidden bg-slate-950 shadow-lg ring-1 ring-white/10">
-          <HtmlFrame html={card.body} title={card.title} />
+  if (card.kind === 'html') {
+    return (
+      <article>
+        {/* Tira de breadcrumb a amplada completa, enganxada visualment a la capçalera */}
+        <div className="w-full border-b border-slate-200 dark:border-white/10 bg-white/60 dark:bg-[#0a1628]/60 backdrop-blur">
+          <div className="mx-auto max-w-5xl px-4 py-2">
+            {breadcrumb}
+          </div>
         </div>
-      ) : (
-        <div className="fitxa max-w-3xl">
-          <Markdown source={card.body} />
-        </div>
-      )}
+
+        {/* Iframe edge-to-edge (sense caixa ni vora), s'ajusta sol a l'alçada */}
+        <HtmlFrame html={card.body} title={card.title} />
+      </article>
+    );
+  }
+
+  // Markdown: columna de lectura còmoda
+  return (
+    <article className="mx-auto w-full max-w-3xl px-4 py-6">
+      {breadcrumb}
+      <div className="fitxa mt-4">
+        <Markdown source={card.body} />
+      </div>
     </article>
   );
 }

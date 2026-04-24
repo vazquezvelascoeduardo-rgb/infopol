@@ -8,17 +8,17 @@ export default function SearchResults() {
   const results = q ? searchCards(q) : [];
 
   return (
-    <div>
+    <div className="mx-auto w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-3">
-        <span className="h-6 w-1 rounded-full bg-amber-400" />
-        <h1 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-300">
+        <span className="h-6 w-1 rounded-full bg-amber-500 dark:bg-amber-400" />
+        <h1 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-600 dark:text-slate-300">
           Resultats
         </h1>
       </div>
-      <p className="mt-2 text-lg text-slate-100">
-        <span className="text-slate-400">Cerca:</span>{' '}
-        <span className="font-semibold text-amber-400">“{q}”</span>
-        <span className="ml-2 text-sm text-slate-400">
+      <p className="mt-2 text-lg">
+        <span className="text-slate-500 dark:text-slate-400">Cerca:</span>{' '}
+        <span className="font-semibold text-amber-600 dark:text-amber-400">“{q}”</span>
+        <span className="ml-2 text-sm text-slate-500 dark:text-slate-400">
           {results.length === 0
             ? '· cap coincidència'
             : `· ${results.length} ${results.length === 1 ? 'resultat' : 'resultats'}`}
@@ -32,14 +32,16 @@ export default function SearchResults() {
             <li key={`${c.moduleSlug}/${c.slug}`}>
               <Link
                 to={`/s/${c.moduleSlug}/${c.slug}`}
-                className="group block rounded-xl border border-white/10 bg-[#0f1d34] px-4 py-3 hover:border-amber-400/40 hover:bg-[#13243e] transition"
+                className="group block rounded-xl border px-4 py-3 transition
+                  border-slate-200 bg-white hover:border-amber-400/60 hover:bg-amber-50/50
+                  dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-amber-400/40 dark:hover:bg-[#13243e]"
               >
-                <div className="text-[10px] uppercase tracking-[0.2em] text-amber-400/80">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
                   {mod?.title ?? c.moduleSlug}
                 </div>
-                <div className="font-semibold text-slate-100">{c.title}</div>
+                <div className="font-semibold">{c.title}</div>
                 <div
-                  className="mt-1 text-sm text-slate-400"
+                  className="mt-1 text-sm text-slate-500 dark:text-slate-400"
                   dangerouslySetInnerHTML={{ __html: snippet(c.searchText, q) }}
                 />
               </Link>
@@ -51,7 +53,6 @@ export default function SearchResults() {
   );
 }
 
-// Construeix un petit fragment amb el terme cercat ressaltat.
 function snippet(text: string, q: string): string {
   const plain = text.replace(/\s+/g, ' ').trim();
   const re = new RegExp(escapeRegExp(q), 'i');
@@ -64,7 +65,8 @@ function snippet(text: string, q: string): string {
   const after = end < plain.length ? '…' : '';
   const highlighted = escapeHtml(slice).replace(
     new RegExp(escapeRegExp(escapeHtml(q)), 'ig'),
-    (m) => `<mark class="bg-amber-300/30 text-amber-100 rounded px-0.5">${m}</mark>`,
+    (m) =>
+      `<mark class="rounded px-0.5 bg-amber-200/80 text-amber-900 dark:bg-amber-300/30 dark:text-amber-100">${m}</mark>`,
   );
   return before + highlighted + after;
 }
