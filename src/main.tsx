@@ -6,13 +6,16 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import { applyInitialTheme } from './lib/theme';
+import { LocaleProvider } from './lib/i18n';
 
 applyInitialTheme();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <LocaleProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </LocaleProvider>
   </React.StrictMode>,
 );

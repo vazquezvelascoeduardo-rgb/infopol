@@ -1,10 +1,9 @@
 // Marc general de l'app: capçalera i peu.
-// La capçalera té cerca + toggle de tema (clar/fosc) i sempre s'hi veu.
-// El <main> NO imposa ample màxim, perquè la vista de fitxa HTML ha de
-// poder ocupar tota l'amplada. Cada pàgina decideix el seu propi contenidor.
+// La capçalera té: logo, cerca, toggle de tema (clar/fosc) i toggle d'idioma.
 import { type ReactNode, useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { applyTheme, getInitialTheme, type Theme } from '../lib/theme';
+import { useT } from '../lib/i18n';
 import PoliceCarIcon from './PoliceCarIcon';
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -12,6 +11,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
+  const { t, locale, setLocale } = useT();
 
   useEffect(() => {
     applyTheme(theme);
@@ -37,29 +37,31 @@ export default function Layout({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="min-h-dvh flex flex-col bg-slate-50 text-slate-900 dark:bg-[#0a1628] dark:text-slate-100 transition-colors">
-      <header className="sticky top-0 z-30 backdrop-blur bg-white/85 dark:bg-[#0a1628]/85 border-b border-slate-200 dark:border-white/10">
-        <div className="mx-auto max-w-5xl px-4 py-3 flex items-center gap-3">
-          <Link to="/" className="flex items-center gap-2.5 shrink-0" aria-label="Inici">
+    <div className="min-h-dvh flex flex-col bg-white text-slate-900 dark:bg-[#0a1628] dark:text-slate-100 transition-colors">
+      <header className="sticky top-0 z-30 backdrop-blur bg-white/95 dark:bg-[#0a1628]/85 border-b border-slate-200 dark:border-white/10">
+        <div className="mx-auto max-w-5xl px-4 py-3 flex items-center gap-2 sm:gap-3">
+          <Link to="/" className="flex items-center gap-2.5 shrink-0" aria-label={t('nav.home')}>
             <PoliceCarIcon className="h-9 w-auto drop-shadow-sm" />
             <div className="hidden sm:flex flex-col leading-tight">
               <span className="font-black tracking-tight text-lg">
                 Info<span className="text-blue-800 dark:text-blue-400">Pol</span>
               </span>
               <span className="text-[10px] uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
-                Consulta operativa
+                {t('app.tagline')}
               </span>
             </div>
           </Link>
 
-          <form onSubmit={onSubmit} className="flex-1">
-            <label htmlFor="cerca" className="sr-only">Cerca</label>
+          <form onSubmit={onSubmit} className="flex-1 min-w-0">
+            <label htmlFor="cerca" className="sr-only">
+              {t('search.label')}
+            </label>
             <div className="relative">
               <svg
                 aria-hidden
                 width="18" height="18" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-400"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
               >
                 <circle cx="11" cy="11" r="7" />
                 <path d="m20 20-3.5-3.5" />
@@ -69,22 +71,43 @@ export default function Layout({ children }: { children: ReactNode }) {
                 type="search"
                 inputMode="search"
                 autoComplete="off"
-                placeholder="Cerca per article, norma, paraula clau…"
+                placeholder={t('search.placeholder')}
                 value={query}
                 onChange={onChange}
-                className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 pl-10 pr-4 py-2 text-base outline-none focus:ring-2 focus:ring-amber-400/60 focus:border-amber-400/60
+                className="w-full rounded-xl border pl-10 pr-4 py-2 text-base outline-none focus:ring-2 focus:ring-amber-400/60
+                  border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-amber-400/60
                   dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:placeholder-slate-500"
               />
             </div>
           </form>
 
+          {/* Toggle d'idioma: ES | CA */}
+          <button
+            type="button"
+            onClick={() => setLocale(locale === 'es' ? 'ca' : 'es')}
+            aria-label={t('lang.toggle')}
+            title={t('lang.toggle')}
+            className="shrink-0 inline-flex h-10 items-center rounded-xl border px-2 text-xs font-bold tracking-wide transition
+              border-slate-200 bg-white hover:bg-slate-50
+              dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
+          >
+            <span className={locale === 'es' ? 'text-slate-900 dark:text-slate-100' : 'text-slate-400 dark:text-slate-500'}>
+              ES
+            </span>
+            <span className="mx-1 text-slate-300 dark:text-slate-600" aria-hidden>·</span>
+            <span className={locale === 'ca' ? 'text-slate-900 dark:text-slate-100' : 'text-slate-400 dark:text-slate-500'}>
+              CA
+            </span>
+          </button>
+
+          {/* Toggle de tema */}
           <button
             type="button"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            aria-label={theme === 'dark' ? 'Canvia a mode clar' : 'Canvia a mode fosc'}
-            title={theme === 'dark' ? 'Tema clar' : 'Tema fosc'}
+            aria-label={theme === 'dark' ? t('theme.toLight') : t('theme.toDark')}
+            title={theme === 'dark' ? t('theme.light') : t('theme.dark')}
             className="shrink-0 inline-flex h-10 w-10 items-center justify-center rounded-xl border transition
-              border-slate-300 bg-white hover:bg-slate-100 text-slate-700
+              border-slate-200 bg-white hover:bg-slate-50 text-slate-700
               dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10 dark:text-slate-200"
           >
             {theme === 'dark' ? (
@@ -104,7 +127,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <main className="flex-1">{children}</main>
 
       <footer className="border-t border-slate-200 dark:border-white/10 py-4 text-center text-xs text-slate-500 dark:text-slate-400">
-        InfoPol · Consulta personal · Informació no oficial.
+        {t('footer')}
       </footer>
     </div>
   );
