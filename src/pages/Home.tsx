@@ -3,6 +3,7 @@
 // daurat), amb variants per mode clar.
 import { Link } from 'react-router-dom';
 import { MODULES, getCardsByModule } from '../lib/content';
+import PoliceCarIcon from '../components/PoliceCarIcon';
 
 export default function Home() {
   return (
@@ -12,15 +13,14 @@ export default function Home() {
         border-slate-200 bg-white
         dark:border-white/10 dark:bg-gradient-to-br dark:from-[#0f1d34] dark:to-[#0a1628]">
         <div className="flex items-start gap-4">
-          <span className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-slate-900 font-black text-xl shadow ring-1 ring-amber-300/40">
-            PL
-          </span>
+          <PoliceCarIcon className="h-16 w-auto shrink-0 drop-shadow-sm" />
           <div className="min-w-0">
             <div className="text-[11px] uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400/90">
               Esquema operatiu policial
             </div>
             <h1 className="mt-1 text-2xl sm:text-3xl font-black tracking-tight">
-              InfoPol · Consulta ràpida
+              Info<span className="text-blue-800 dark:text-blue-400">Pol</span>{' '}
+              · Consulta ràpida
             </h1>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
               Normativa, infografies i fitxes operatives per a l'agent de

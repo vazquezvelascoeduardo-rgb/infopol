@@ -5,6 +5,7 @@
 import { type ReactNode, useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { applyTheme, getInitialTheme, type Theme } from '../lib/theme';
+import PoliceCarIcon from './PoliceCarIcon';
 
 export default function Layout({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => getInitialTheme());
@@ -39,15 +40,12 @@ export default function Layout({ children }: { children: ReactNode }) {
     <div className="min-h-dvh flex flex-col bg-slate-50 text-slate-900 dark:bg-[#0a1628] dark:text-slate-100 transition-colors">
       <header className="sticky top-0 z-30 backdrop-blur bg-white/85 dark:bg-[#0a1628]/85 border-b border-slate-200 dark:border-white/10">
         <div className="mx-auto max-w-5xl px-4 py-3 flex items-center gap-3">
-          <Link to="/" className="flex items-center gap-2 shrink-0" aria-label="Inici">
-            <span
-              aria-hidden
-              className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 text-slate-900 font-black shadow-md ring-1 ring-amber-300/50"
-            >
-              iP
-            </span>
+          <Link to="/" className="flex items-center gap-2.5 shrink-0" aria-label="Inici">
+            <PoliceCarIcon className="h-9 w-auto drop-shadow-sm" />
             <div className="hidden sm:flex flex-col leading-tight">
-              <span className="font-bold tracking-wide">InfoPol</span>
+              <span className="font-black tracking-tight text-lg">
+                Info<span className="text-blue-800 dark:text-blue-400">Pol</span>
+              </span>
               <span className="text-[10px] uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
                 Consulta operativa
               </span>
