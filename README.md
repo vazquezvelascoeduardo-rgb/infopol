@@ -44,16 +44,21 @@ Cada **fitxa** és un fitxer amb extensió `.md` (Markdown) dins de la carpeta `
 
 Les carpetes disponibles són:
 
-| Secció a l'app         | Carpeta                              |
-| ---------------------- | ------------------------------------ |
-| Trànsit                | `content/transit/`                   |
-| Ordenances Viladecans  | `content/ordenances-viladecans/`     |
-| Dret penal             | `content/dret-penal/`                |
-| Dret administratiu     | `content/dret-administratiu/`        |
-| Policia administrativa | `content/policia-administrativa/`    |
-| LOPSC                  | `content/lopsc/`                     |
+| Secció a l'app | Descripció                                 | Carpeta              |
+| -------------- | ------------------------------------------ | -------------------- |
+| CE78           | Constitució Espanyola de 1978              | `content/ce78/`      |
+| Codi penal     | Llei Orgànica 10/1995, del Codi penal      | `content/codi-penal/`|
+| EAC            | Estatut d'Autonomia de Catalunya           | `content/eac/`       |
+| FCS            | Forces i Cossos de Seguretat               | `content/fcs/`       |
+| LECrim         | Llei d'Enjudiciament Criminal              | `content/lecrim/`    |
+| Menors         | Normativa relativa a menors                | `content/menors/`    |
+| Municipi       | Règim municipal i ordenances               | `content/municipi/`  |
+| SC             | Seguretat Ciutadana (LOPSC)                | `content/sc/`        |
+| Trànsit        | Trànsit, circulació i seguretat viària     | `content/transit/`   |
 
 ### 2) Crea un fitxer `.md` dins d'aquesta carpeta
+
+
 
 El nom del fitxer ha d'estar **en minúscules, sense accents ni espais**, amb guions. Per exemple:
 
@@ -114,6 +119,78 @@ npm run build
 ```
 
 Això genera la carpeta `dist/` amb l'app a punt per publicar.
+
+---
+
+## Importar fitxes en bloc des de HTML (p. ex. Google Drive)
+
+Si tens un munt de documents a Google Drive i els vols passar a l'app de cop,
+fes això:
+
+### 1) Baixa els documents com a HTML
+
+A Google Drive, obre la carpeta, **selecciona-ho tot** (`Ctrl+A`), botó dret →
+**Descarregar**. Drive t'enviarà un **ZIP**.
+
+Si són Google Docs natius, Drive els exportarà com a HTML automàticament.
+
+### 2) Descomprimeix i posa els HTML a `_import/`
+
+Dins de la carpeta del projecte, crea una carpeta `_import/` i copia-hi
+**tots els fitxers .html** (poden estar en subcarpetes; no passa res).
+
+```
+infopol/
+└── _import/
+    ├── Constitució art 17.html
+    ├── trànsit/
+    │   └── alcoholèmia.html
+    └── … (tots els teus fitxers)
+```
+
+### 3) Executa la importació
+
+Des del terminal, dins la carpeta `infopol`:
+
+```bash
+npm run import
+```
+
+El script farà això automàticament:
+
+- Llegirà tots els `.html` dins de `_import/`.
+- Convertirà cada un a **Markdown** net.
+- **Classificarà** cada fitxa al mòdul correcte mirant el nom del fitxer i
+  el contingut (busca paraules clau com *Constitució*, *Codi penal*,
+  *Trànsit*, *LOPSC*, *alcoholèmia*, *menor*, etc.).
+- Desarà cada fitxa a `content/<modul>/<nom>.md` amb el títol al
+  _frontmatter_ (ja llest per aparèixer a l'app).
+
+### 4) Revisa el resum
+
+Al final veuràs un resum com aquest:
+
+```
+Resum:
+  ce78: 5
+  codi-penal: 12
+  transit: 8
+  _sense-classificar: 2
+```
+
+Si n'hi ha cap a **`_sense-classificar`**, vol dir que no ha trobat pistes
+clares al nom ni al contingut. Obre `content/_sense-classificar/`, mira cada
+`.md` i mou-lo a la carpeta correcta.
+
+### 5) Comprova a l'app
+
+Engega `npm run dev` i navega per les seccions. Si alguna fitxa ha caigut al
+mòdul equivocat, **arrossega-la** a la carpeta correcta: no cal tocar cap codi.
+
+### 6) Neteja
+
+Quan estiguis content amb el resultat, pots **esborrar la carpeta `_import/`**.
+Ja és a `.gitignore`, així que no es puja mai al repositori.
 
 ---
 
@@ -183,12 +260,15 @@ redirigeixi totes les rutes no trobades al `index.html` (per a la PWA cal **HTTP
 ```
 infopol/
 ├── content/                         ← LES TEVES FITXES (edita aquí)
-│   ├── transit/
-│   ├── ordenances-viladecans/
-│   ├── dret-penal/
-│   ├── dret-administratiu/
-│   ├── policia-administrativa/
-│   └── lopsc/
+│   ├── ce78/
+│   ├── codi-penal/
+│   ├── eac/
+│   ├── fcs/
+│   ├── lecrim/
+│   ├── menors/
+│   ├── municipi/
+│   ├── sc/
+│   └── transit/
 ├── public/                          ← icones i favicon
 ├── src/                             ← codi de l'app (normalment no cal tocar-ho)
 ├── index.html
@@ -228,3 +308,4 @@ dins de `content/`.
 - `npm run preview` — Serveix la versió compilada localment.
 - `npm run typecheck` — Comprova els tipus de TypeScript.
 - `npm run icons` — Regenera els PNGs de la PWA a partir de `public/favicon.svg`.
+- `npm run import` — Importa i classifica els HTML de `_import/` a `content/`.

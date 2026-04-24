@@ -11,3 +11,6 @@ dist-ssr
 !.env.example
 dev-dist
 *.tsbuildinfo
+
+# Carpeta temporal per a la importació d'HTML (vegeu scripts/import-html.mjs).
+_import/
