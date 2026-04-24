@@ -1,0 +1,38 @@
+/* Fulla d'estils global. Importem les capes de Tailwind. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estils base per a la tipografia de les fitxes (prose manual lleugera). */
+@layer components {
+  .fitxa h1 {
+    @apply text-2xl font-bold mt-4 mb-2;
+  }
+  .fitxa h2 {
+    @apply text-xl font-semibold mt-4 mb-2;
+  }
+  .fitxa h3 {
+    @apply text-lg font-semibold mt-3 mb-2;
+  }
+  .fitxa p {
+    @apply my-2 leading-relaxed;
+  }
+  .fitxa ul {
+    @apply list-disc pl-6 my-2;
+  }
+  .fitxa ol {
+    @apply list-decimal pl-6 my-2;
+  }
+  .fitxa code {
+    @apply rounded bg-slate-200 dark:bg-slate-800 px-1 py-0.5 text-sm;
+  }
+  .fitxa blockquote {
+    @apply border-l-4 border-slate-300 dark:border-slate-700 pl-3 italic text-slate-600 dark:text-slate-300 my-3;
+  }
+  .fitxa a {
+    @apply text-blue-600 dark:text-blue-400 underline;
+  }
+  .fitxa hr {
+    @apply my-4 border-slate-200 dark:border-slate-800;
+  }
+}
