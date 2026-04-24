@@ -1,5 +1,4 @@
 // Pàgina de resultats de cerca.
-// Agafa el paràmetre `q` de la URL i mostra totes les fitxes que coincideixen.
 import { Link, useSearchParams } from 'react-router-dom';
 import { MODULES, searchCards } from '../lib/content';
 
@@ -10,31 +9,38 @@ export default function SearchResults() {
 
   return (
     <div>
-      <h1 className="text-xl font-semibold">
-        Resultats per a <span className="text-blue-600 dark:text-blue-400">“{q}”</span>
-      </h1>
-      <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-        {results.length === 0
-          ? 'Cap coincidència.'
-          : `${results.length} ${results.length === 1 ? 'resultat' : 'resultats'}`}
+      <div className="flex items-center gap-3">
+        <span className="h-6 w-1 rounded-full bg-amber-400" />
+        <h1 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-300">
+          Resultats
+        </h1>
+      </div>
+      <p className="mt-2 text-lg text-slate-100">
+        <span className="text-slate-400">Cerca:</span>{' '}
+        <span className="font-semibold text-amber-400">“{q}”</span>
+        <span className="ml-2 text-sm text-slate-400">
+          {results.length === 0
+            ? '· cap coincidència'
+            : `· ${results.length} ${results.length === 1 ? 'resultat' : 'resultats'}`}
+        </span>
       </p>
 
-      <ul className="mt-4 divide-y divide-slate-200 dark:divide-slate-800 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+      <ul className="mt-5 grid grid-cols-1 gap-2">
         {results.map((c) => {
           const mod = MODULES.find((m) => m.slug === c.moduleSlug);
           return (
             <li key={`${c.moduleSlug}/${c.slug}`}>
               <Link
                 to={`/s/${c.moduleSlug}/${c.slug}`}
-                className="block px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/60"
+                className="group block rounded-xl border border-white/10 bg-[#0f1d34] px-4 py-3 hover:border-amber-400/40 hover:bg-[#13243e] transition"
               >
-                <div className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-amber-400/80">
                   {mod?.title ?? c.moduleSlug}
                 </div>
-                <div className="font-medium">{c.title}</div>
+                <div className="font-semibold text-slate-100">{c.title}</div>
                 <div
-                  className="mt-0.5 text-sm text-slate-500 dark:text-slate-400"
-                  dangerouslySetInnerHTML={{ __html: snippet(c.body, q) }}
+                  className="mt-1 text-sm text-slate-400"
+                  dangerouslySetInnerHTML={{ __html: snippet(c.searchText, q) }}
                 />
               </Link>
             </li>
@@ -46,8 +52,8 @@ export default function SearchResults() {
 }
 
 // Construeix un petit fragment amb el terme cercat ressaltat.
-function snippet(body: string, q: string): string {
-  const plain = body.replace(/\s+/g, ' ').trim();
+function snippet(text: string, q: string): string {
+  const plain = text.replace(/\s+/g, ' ').trim();
   const re = new RegExp(escapeRegExp(q), 'i');
   const idx = plain.search(re);
   if (idx < 0) return escapeHtml(plain.slice(0, 140)) + (plain.length > 140 ? '…' : '');
@@ -58,7 +64,7 @@ function snippet(body: string, q: string): string {
   const after = end < plain.length ? '…' : '';
   const highlighted = escapeHtml(slice).replace(
     new RegExp(escapeRegExp(escapeHtml(q)), 'ig'),
-    (m) => `<mark class="bg-yellow-200 dark:bg-yellow-500/40 rounded px-0.5">${m}</mark>`,
+    (m) => `<mark class="bg-amber-300/30 text-amber-100 rounded px-0.5">${m}</mark>`,
   );
   return before + highlighted + after;
 }

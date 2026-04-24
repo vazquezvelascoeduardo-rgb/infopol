@@ -1,24 +1,29 @@
-// Script d'importació automàtica de HTML a fitxes Markdown.
+// Script d'importació de HTML a fitxes.
 // Ús:  npm run import
 //
-// Llegeix tots els fitxers .html dins de /_import (recursiu),
-// els converteix a Markdown i els desa a /content/<modul>/<slug>.md
-// classificant-los automàticament per paraules clau.
+// Llegeix tots els fitxers .html dins de /_import (recursiu) i els copia
+// TAL QUAL (preservant tot el disseny: colors, gradients, timelines,
+// icones, etc.) dins de /content/<modul>/<slug>.html
 //
-// Classificació:
-//   1r) Si el nom del fitxer o la subcarpeta conté una paraula clau
-//       d'un mòdul, s'hi assigna directament.
-//   2r) Si no, s'analitza el contingut (primers 4 KB) i es compten
-//       coincidències de les paraules clau de cada mòdul. Guanya el
-//       que tingui més.
-//   3r) Si no hi ha cap coincidència clara, va a /content/_sense-classificar/
-//       perquè el revisis manualment.
+// Classificació (regles explícites + paraules clau):
+//   1r) Si el nom de fitxer/carpeta conté una "regla explícita" (més avall),
+//       s'hi assigna directament. Això cobreix:
+//         - codi-penal:  només el Codi penal (cp, codi penal, codigo penal)
+//         - fcs:         codi ètica, armament, llei 4/2003, 16/91, LO 2/86, reglament armes
+//         - municipi:    llei 7/1985 i ordenances
+//         - transit:     catàleg infraccions (incloent VMP)
+//         - ce78:        constitució espanyola
+//         - eac:         estatut d'autonomia de Catalunya
+//         - sc:          seguretat ciutadana / LOPSC
+//         - lecrim:      enjudiciament criminal
+//         - menors:      menors (LO 5/2000, LORPM)
+//   2n) Si no, es revisa el contingut (primers ~8 KB).
+//   3r) Si encara no es pot classificar, va a /content/_sense-classificar/.
 
 import { readFile, writeFile, mkdir, readdir, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import TurndownService from 'turndown';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -26,135 +31,195 @@ const IMPORT_DIR = path.join(ROOT, '_import');
 const CONTENT_DIR = path.join(ROOT, 'content');
 const UNCLASSIFIED_DIR = path.join(CONTENT_DIR, '_sense-classificar');
 
-// Definició dels mòduls i paraules clau que fem servir per classificar.
-// Les claus han de coincidir amb els slugs dels mòduls a src/lib/content.ts.
-const MODULE_KEYWORDS = {
-  ce78: [
-    'constitució espanyola',
-    'constitucion española',
-    'ce 78',
-    'ce78',
-    'ce-78',
-    'constitució',
-    'constitucional',
-  ],
-  'codi-penal': [
-    'codi penal',
-    'código penal',
-    'lo 10/1995',
-    'art. cp',
-    'art cp',
-    'del·licte',
-    'delicte',
-    'delito',
-    'lesions',
-    'furts',
-    'robatori',
-    'homicidi',
-  ],
-  eac: [
-    "estatut d'autonomia",
-    'estatut autonomia',
-    'eac',
-    'lo 6/2006',
-    'generalitat',
-  ],
-  fcs: [
-    'forces i cossos',
-    'fuerzas y cuerpos',
-    'fcs',
-    'lo 2/1986',
-    'mossos',
-    'policia local',
-    'policía local',
-    'guàrdia civil',
-    'guardia civil',
-    "policia nacional",
-    "policía nacional",
-  ],
-  lecrim: [
-    "enjudiciament criminal",
-    "enjuiciamiento criminal",
-    'lecrim',
-    'lecr',
-    'atestat',
-    'atestado',
-    'detenció',
-    'detención',
-    'habeas corpus',
-  ],
-  menors: [
-    'menor',
-    'menors',
-    'menores',
-    'lo 5/2000',
-    'lorpm',
-    'responsabilitat penal del menor',
-  ],
-  municipi: [
-    'municipi',
-    'municipal',
-    'ordenança',
-    'ordenanza',
-    'ajuntament',
-    'ayuntamiento',
-    'llei municipal',
-    'ley municipal',
-    'regim local',
-    'règim local',
-    'viladecans',
-  ],
-  sc: [
-    'seguretat ciutadana',
-    'seguridad ciudadana',
-    'lopsc',
-    'lo 4/2015',
-    'protecció de la seguretat',
-  ],
-  transit: [
-    'trànsit',
-    'transit',
-    'tráfico',
-    'trafico',
-    'circulació',
-    'circulación',
-    'seguretat viària',
-    'seguridad vial',
-    'rdl 6/2015',
-    'rgc',
-    'reglament general',
-    'reglamento general',
-    'permís de conduir',
-    'permiso de conducir',
-    'alcoholèmia',
-    'alcoholemia',
-  ],
-};
+// ---- Regles de classificació ---------------------------------------------
+// Les regles s'avaluen EN ORDRE (la primera que encaixa, guanya).
+// Per cada mòdul indiquem paraules clau que han de coincidir a la ruta
+// (nom de fitxer o subcarpeta) o al contingut.
+//
+// Algunes regles incorporen "exclusions" (exclude): si el text coincideix
+// amb una paraula que no ha d'estar, es descarta la regla.
+// Això evita que, p.ex., una fitxa de "FCS" que menciona "Codi penal"
+// acabi en codi-penal.
+const RULES = [
+  // Codi penal: només fitxes del propi Codi penal
+  {
+    slug: 'codi-penal',
+    include: [
+      'codi-penal',
+      'codi penal',
+      'codigo-penal',
+      'codigo penal',
+      'codi_penal',
+      'lo 10/1995',
+      'lo 10-1995',
+      'lo10-1995',
+      'lo 10 1995',
+    ],
+    exclude: [],
+  },
+  // FCS
+  {
+    slug: 'fcs',
+    include: [
+      'codi etica',
+      'codi-etica',
+      "codi d'etica",
+      'codi d etica',
+      'etica policial',
+      'armament',
+      'armamento',
+      'llei 4/2003',
+      'llei 4-2003',
+      'ley 4/2003',
+      'ley 4-2003',
+      '4/2003',
+      '16/91',
+      '16-91',
+      '16 91',
+      'lo 2/86',
+      'lo 2-86',
+      'lo 2/1986',
+      'lo 2-1986',
+      '2/1986',
+      'reglament armes',
+      'reglament d armes',
+      "reglament d'armes",
+      'reglamento armas',
+      'reglamento de armas',
+      'fcs',
+    ],
+    exclude: [],
+  },
+  // Municipi
+  {
+    slug: 'municipi',
+    include: [
+      'llei 7/1985',
+      'llei 7-1985',
+      'ley 7/1985',
+      'ley 7-1985',
+      '7/1985',
+      'ordenan',
+      'bases del regim local',
+      'bases del régimen local',
+      'lbrl',
+      'municipi',
+      'municipal',
+      'viladecans',
+    ],
+    exclude: [],
+  },
+  // Trànsit
+  {
+    slug: 'transit',
+    include: [
+      'cataleg-infraccions',
+      'catàleg infraccions',
+      'cataleg infraccions',
+      'catálogo infracciones',
+      'catalogo infracciones',
+      'vmp',
+      'transit',
+      'trànsit',
+      'tráfico',
+      'trafico',
+      'circulació',
+      'circulacion',
+      'seguretat viaria',
+      'seguretat viària',
+      'seguridad vial',
+    ],
+    exclude: [],
+  },
+  // CE78
+  {
+    slug: 'ce78',
+    include: [
+      'ce78',
+      'ce-78',
+      'ce 78',
+      'constitució espanyola',
+      'constitucion española',
+      'constitucion espanyola',
+      'constitucion',
+      'constitucional',
+    ],
+    exclude: [],
+  },
+  // EAC
+  {
+    slug: 'eac',
+    include: [
+      'eac',
+      "estatut d'autonomia",
+      'estatut autonomia',
+      'estatut de catalunya',
+      'lo 6/2006',
+      'lo 6-2006',
+      '6/2006',
+      'generalitat de catalunya',
+    ],
+    exclude: [],
+  },
+  // SC (Seguretat Ciutadana)
+  {
+    slug: 'sc',
+    include: [
+      'lopsc',
+      'seguretat ciutadana',
+      'seguridad ciudadana',
+      'lo 4/2015',
+      'lo 4-2015',
+      '4/2015',
+    ],
+    exclude: [],
+  },
+  // LECrim
+  {
+    slug: 'lecrim',
+    include: [
+      'lecrim',
+      'lecr',
+      'enjudiciament criminal',
+      'enjuiciamiento criminal',
+      'atestat',
+      'atestado',
+      'habeas corpus',
+    ],
+    exclude: [],
+  },
+  // Menors
+  {
+    slug: 'menors',
+    include: [
+      'menors',
+      'menores',
+      'lorpm',
+      'lo 5/2000',
+      'lo 5-2000',
+      '5/2000',
+      'responsabilitat penal del menor',
+      'responsabilidad penal del menor',
+    ],
+    exclude: [],
+  },
+];
 
-// Configurem el convertidor HTML → Markdown.
-const td = new TurndownService({
-  headingStyle: 'atx', // # en comptes de ===
-  bulletListMarker: '-',
-  codeBlockStyle: 'fenced',
-  emDelimiter: '*',
-});
-// Netegem tags que Google Docs afegeix i no aporten res.
-td.remove(['style', 'script']);
+// ---- Utilitats -----------------------------------------------------------
 
-// Normalitza un text: minúscules i sense accents. Útil per cercar paraules clau.
 function normalize(s) {
   return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
-// Genera un slug apte per nom de fitxer (minúscules, sense accents, amb guions).
 function slugify(s) {
-  return normalize(s)
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 80) || 'fitxa';
+  return (
+    normalize(s)
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .slice(0, 80) || 'fitxa'
+  );
 }
 
-// Recorre un directori recursivament i retorna tots els fitxers .html.
 async function* walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   for (const e of entries) {
@@ -164,17 +229,8 @@ async function* walk(dir) {
   }
 }
 
-// Extreu un títol a partir del HTML: prova <title>, després el primer <h1>.
-function extractTitle(html, fallback) {
-  const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
-  if (title && title[1].trim()) return decodeEntities(stripTags(title[1])).trim();
-  const h1 = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
-  if (h1 && h1[1].trim()) return decodeEntities(stripTags(h1[1])).trim();
-  return fallback;
-}
-
 function stripTags(s) {
-  return s.replace(/<[^>]+>/g, '');
+  return s.replace(/<[^>]+>/g, ' ');
 }
 
 function decodeEntities(s) {
@@ -187,57 +243,51 @@ function decodeEntities(s) {
     .replace(/&nbsp;/g, ' ');
 }
 
-// Classifica un fitxer mirant primer la ruta (nom de fitxer + carpeta) i
-// després el cos normalitzat. Retorna { slug, reason } o null si no hi ha
-// cap coincidència.
-function classify(filePath, htmlNormalized) {
-  const hay = normalize(filePath);
-  // 1) Per ruta: si una paraula clau apareix al path, assignem directament.
-  for (const [slug, kws] of Object.entries(MODULE_KEYWORDS)) {
-    for (const kw of kws) {
-      if (hay.includes(normalize(kw))) return { slug, reason: `ruta conté “${kw}”` };
-    }
-  }
-  // 2) Per contingut: comptem coincidències.
-  const scores = {};
-  for (const [slug, kws] of Object.entries(MODULE_KEYWORDS)) {
-    let s = 0;
-    for (const kw of kws) {
-      const n = normalize(kw);
-      // Comptem ocurrències (aproximades).
-      const re = new RegExp(n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
-      const matches = htmlNormalized.match(re);
-      if (matches) s += matches.length;
-    }
-    if (s > 0) scores[slug] = s;
-  }
-  const entries = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-  if (entries.length === 0) return null;
-  const [best, bestScore] = entries[0];
-  return { slug: best, reason: `contingut (${bestScore} coincidències)` };
+function extractTitle(html, fallback) {
+  const t = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+  if (t && t[1].trim()) return decodeEntities(stripTags(t[1])).trim();
+  const h1 = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+  if (h1 && h1[1].trim()) return decodeEntities(stripTags(h1[1])).trim();
+  return fallback;
 }
 
-// Converteix HTML a Markdown net.
-function htmlToMarkdown(html) {
-  // Eliminem la capçalera Head (amb tot el CSS de Google Docs) per evitar soroll.
-  const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
-  const body = bodyMatch ? bodyMatch[1] : html;
-  let md = td.turndown(body);
-  // Netegem línies buides consecutives i trailing spaces.
-  md = md.replace(/[ \t]+$/gm, '').replace(/\n{3,}/g, '\n\n').trim();
-  return md;
+function ruleMatchesHaystack(rule, haystack) {
+  for (const ex of rule.exclude) {
+    if (haystack.includes(normalize(ex))) return false;
+  }
+  for (const kw of rule.include) {
+    if (haystack.includes(normalize(kw))) return true;
+  }
+  return false;
+}
+
+// Retorna { slug, reason } o null.
+function classify(relPath, htmlContentNormalized) {
+  const pathHay = normalize(relPath);
+  // 1) Per ruta
+  for (const r of RULES) {
+    if (ruleMatchesHaystack(r, pathHay)) {
+      return { slug: r.slug, reason: `ruta coincideix amb regla de ${r.slug}` };
+    }
+  }
+  // 2) Per contingut
+  for (const r of RULES) {
+    if (ruleMatchesHaystack(r, htmlContentNormalized)) {
+      return { slug: r.slug, reason: `contingut coincideix amb regla de ${r.slug}` };
+    }
+  }
+  return null;
 }
 
 async function ensureDir(d) {
   await mkdir(d, { recursive: true });
 }
 
-// Evita col·lisions de noms afegint un sufix numèric si cal.
-async function uniquePath(dir, baseSlug) {
-  let candidate = path.join(dir, `${baseSlug}.md`);
+async function uniquePath(dir, baseSlug, ext) {
+  let candidate = path.join(dir, `${baseSlug}${ext}`);
   let i = 2;
   while (existsSync(candidate)) {
-    candidate = path.join(dir, `${baseSlug}-${i}.md`);
+    candidate = path.join(dir, `${baseSlug}-${i}${ext}`);
     i++;
   }
   return candidate;
@@ -246,7 +296,7 @@ async function uniquePath(dir, baseSlug) {
 async function main() {
   if (!existsSync(IMPORT_DIR)) {
     console.error(`No existeix la carpeta ${IMPORT_DIR}.`);
-    console.error("Crea-la i copia-hi els .html que vulguis importar.");
+    console.error('Crea-la i copia-hi els .html que vulguis importar.');
     process.exit(1);
   }
 
@@ -257,12 +307,11 @@ async function main() {
   for await (const file of walk(IMPORT_DIR)) {
     const html = await readFile(file, 'utf8');
     const rel = path.relative(IMPORT_DIR, file);
-    const htmlNormalized = normalize(html.slice(0, 8000)); // primers ~8 KB
+    const htmlNormalized = normalize(html.slice(0, 16000));
 
     const cls = classify(rel, htmlNormalized);
     const fallbackName = path.basename(file, path.extname(file));
     const title = extractTitle(html, fallbackName);
-    const body = htmlToMarkdown(html);
 
     let targetDir;
     let decisionMsg;
@@ -272,18 +321,19 @@ async function main() {
       stats[cls.slug] = (stats[cls.slug] ?? 0) + 1;
     } else {
       targetDir = UNCLASSIFIED_DIR;
-      decisionMsg = '→ _sense-classificar (no s’ha pogut assignar cap mòdul)';
+      decisionMsg = '→ _sense-classificar (cap regla no ha coincidit)';
       unclassified++;
     }
 
     await ensureDir(targetDir);
-    const outPath = await uniquePath(targetDir, slugify(title) || slugify(fallbackName));
-    const frontmatter = `---\ntitle: ${JSON.stringify(title)}\n---\n\n`;
-    await writeFile(outPath, frontmatter + body + '\n', 'utf8');
+    const baseSlug = slugify(title) || slugify(fallbackName);
+    const outPath = await uniquePath(targetDir, baseSlug, '.html');
+    // Copiem el HTML TAL QUAL (preservem tot el disseny).
+    await writeFile(outPath, html, 'utf8');
 
     processed++;
-    const fileLabel = await getStatLabel(file);
-    console.log(`[${processed}] ${rel}  ${fileLabel}`);
+    const sizeLabel = await getStatLabel(file);
+    console.log(`[${processed}] ${rel}  ${sizeLabel}`);
     console.log(`    ${decisionMsg}`);
     console.log(`    ${path.relative(ROOT, outPath)}`);
   }
@@ -294,8 +344,11 @@ async function main() {
   }
   if (unclassified > 0) {
     console.log(`  _sense-classificar: ${unclassified}`);
-    console.log('\nRevisa la carpeta content/_sense-classificar/ i mou els fitxers');
-    console.log('al mòdul correcte manualment.');
+    console.log(
+      '\nRevisa la carpeta content/_sense-classificar/ i mou els .html a',
+    );
+    console.log('la carpeta del mòdul correcte. Un cop moguts, refresca la');
+    console.log('pàgina (npm run dev es recarrega sol).');
   }
   console.log(`\nTotal importat: ${processed}`);
 }

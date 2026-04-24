@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="96" fill="#0f172a"/>
+  <rect width="512" height="512" rx="96" fill="#0a1628"/>
   <path d="M256 80 L392 136 V264 C392 344 332 404 256 432 C180 404 120 344 120 264 V136 Z"
-        fill="#3b82f6" stroke="#e2e8f0" stroke-width="12"/>
-  <text x="256" y="296" text-anchor="middle"
+        fill="#d4a045" stroke="#f6e3b4" stroke-width="10"/>
+  <text x="256" y="300" text-anchor="middle"
         font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
-        font-size="140" font-weight="700" fill="#f8fafc">iP</text>
+        font-size="150" font-weight="900" fill="#0a1628">iP</text>
 </svg>

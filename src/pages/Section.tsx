@@ -1,4 +1,4 @@
-// Pàgina d'un mòdul: mostra el llistat de fitxes.
+// Pàgina d'un mòdul: capçalera amb accent de color i llistat de fitxes.
 import { Link, useParams } from 'react-router-dom';
 import { MODULES, getCardsByModule } from '../lib/content';
 
@@ -9,8 +9,8 @@ export default function Section() {
   if (!mod) {
     return (
       <div>
-        <p className="text-slate-600 dark:text-slate-400">Secció no trobada.</p>
-        <Link to="/" className="text-blue-600 dark:text-blue-400 underline">
+        <p className="text-slate-400">Secció no trobada.</p>
+        <Link to="/" className="text-amber-400 underline">
           Torna a l'inici
         </Link>
       </div>
@@ -21,34 +21,73 @@ export default function Section() {
 
   return (
     <div>
-      <nav className="text-sm text-slate-500 dark:text-slate-400">
+      <nav className="text-sm text-slate-400">
         <Link to="/" className="hover:underline">
           Inici
         </Link>
         <span className="mx-2">/</span>
-        <span>{mod.title}</span>
+        <span className="text-slate-200">{mod.title}</span>
       </nav>
 
-      <h1 className="mt-1 text-2xl font-bold tracking-tight">{mod.title}</h1>
-      <p className="mt-1 text-slate-600 dark:text-slate-400">{mod.description}</p>
+      {/* Capçalera del mòdul amb accent de color */}
+      <section className="relative mt-3 overflow-hidden rounded-2xl border border-white/10 bg-[#0f1d34] p-5 sm:p-6 shadow">
+        <span
+          aria-hidden
+          className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${mod.accent}`}
+        />
+        <div className="flex items-center gap-3">
+          <span
+            aria-hidden
+            className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${mod.accent} text-xl text-white shadow-inner`}
+          >
+            {mod.icon}
+          </span>
+          <div>
+            <h1 className="text-xl sm:text-2xl font-black tracking-tight text-slate-50">
+              {mod.title}
+            </h1>
+            <p className="text-sm text-slate-300">{mod.description}</p>
+          </div>
+          <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300 ring-1 ring-white/10">
+            {cards.length} {cards.length === 1 ? 'fitxa' : 'fitxes'}
+          </span>
+        </div>
+      </section>
 
       {cards.length === 0 ? (
-        <div className="mt-6 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 p-6 text-center text-slate-500 dark:text-slate-400">
+        <div className="mt-6 rounded-xl border border-dashed border-white/15 p-6 text-center text-slate-400">
           Encara no hi ha fitxes en aquesta secció.
           <br />
-          Afegeix un fitxer <code>.md</code> a <code>content/{mod.slug}/</code>.
+          Afegeix un fitxer <code className="rounded bg-white/10 px-1 text-slate-200">.html</code>{' '}
+          o <code className="rounded bg-white/10 px-1 text-slate-200">.md</code> a{' '}
+          <code className="rounded bg-white/10 px-1 text-slate-200">content/{mod.slug}/</code>.
         </div>
       ) : (
-        <ul className="mt-5 divide-y divide-slate-200 dark:divide-slate-800 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+        <ul className="mt-5 grid grid-cols-1 gap-2">
           {cards.map((c) => (
             <li key={c.slug}>
               <Link
                 to={`/s/${c.moduleSlug}/${c.slug}`}
-                className="block px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/60"
+                className="group block rounded-xl border border-white/10 bg-[#0f1d34] px-4 py-3 hover:border-amber-400/40 hover:bg-[#13243e] transition"
               >
-                <div className="font-medium">{c.title}</div>
-                <div className="mt-0.5 text-sm text-slate-500 dark:text-slate-400 truncate">
-                  {summary(c.body)}
+                <div className="flex items-center gap-3">
+                  <span
+                    aria-hidden
+                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/5 text-sm text-slate-300 ring-1 ring-white/10"
+                  >
+                    {c.kind === 'html' ? '🖼️' : '📝'}
+                  </span>
+                  <div className="min-w-0">
+                    <div className="font-semibold text-slate-100 truncate">
+                      {c.title}
+                    </div>
+                    <div className="mt-0.5 text-xs text-slate-400 truncate">
+                      {summary(c.searchText)}
+                    </div>
+                  </div>
+                  <span className="ml-auto text-amber-400 opacity-0 group-hover:opacity-100 transition" aria-hidden>
+                    →
+                  </span>
                 </div>
               </Link>
             </li>
@@ -59,12 +98,8 @@ export default function Section() {
   );
 }
 
-// Extreu un resum curt del cos per mostrar al llistat.
-function summary(body: string): string {
-  const text = body
-    .replace(/^#.*$/gm, '') // treu encapçalaments
-    .replace(/[*_`>#-]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-  return text.length > 120 ? text.slice(0, 117) + '…' : text;
+// Extreu un resum curt del text pla.
+function summary(text: string): string {
+  const t = text.replace(/\s+/g, ' ').trim();
+  return t.length > 140 ? t.slice(0, 137) + '…' : t;
 }
