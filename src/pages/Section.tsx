@@ -73,11 +73,11 @@ export default function Section() {
                 <div className="flex items-center gap-3">
                   <span
                     aria-hidden
-                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-sm ring-1
-                      bg-slate-100 text-slate-600 ring-slate-200
-                      dark:bg-white/5 dark:text-slate-300 dark:ring-white/10"
+                    className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-lg ring-1
+                      bg-slate-100 ring-slate-200
+                      dark:bg-white/5 dark:ring-white/10"
                   >
-                    {c.kind === 'html' ? '🖼️' : '📝'}
+                    {c.icon}
                   </span>
                   <div className="min-w-0">
                     <div className="font-semibold truncate">{c.title}</div>

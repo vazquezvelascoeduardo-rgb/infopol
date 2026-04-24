@@ -13,7 +13,7 @@ export type Module = {
   title: string; // títol visible
   description: string; // subtítol curt
   accent: string; // classes Tailwind per l'accent de color de la targeta
-  icon: string; // nom d'emoji/icona senzilla per decorar la targeta
+  icon: string; // icona per defecte del mòdul (fallback si la fitxa no en té)
 };
 
 export const MODULES: Module[] = [
@@ -93,6 +93,7 @@ export type Card = {
   raw: string; // fitxer complet, útil per a cerca
   path: string; // ruta relativa al projecte
   searchText: string; // versió text pla del cos, usada per cerca
+  icon: string; // icona emoji de la fitxa
 };
 
 // Globs que carreguen TOT el contingut de /content en temps de build.
@@ -108,10 +109,13 @@ const htmlFiles = import.meta.glob('/content/**/*.html', {
 }) as Record<string, string>;
 
 // Parser minimalista de frontmatter YAML senzill (només `clau: valor`).
-// Retorna { data, body } amb `title` com a camp principal.
-function parseFrontmatter(raw: string): { title?: string; body: string } {
+// Retorna { data, body }.
+function parseFrontmatter(raw: string): {
+  data: Record<string, string>;
+  body: string;
+} {
   const match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
-  if (!match) return { body: raw };
+  if (!match) return { data: {}, body: raw };
   const [, front, body] = match;
   const data: Record<string, string> = {};
   for (const line of front.split('\n')) {
@@ -120,7 +124,7 @@ function parseFrontmatter(raw: string): { title?: string; body: string } {
     const [, key, value] = kv;
     data[key] = value.trim().replace(/^["'](.*)["']$/, '$1');
   }
-  return { title: data.title, body };
+  return { data, body };
 }
 
 // Deriva un títol a partir del primer H1 del cos si no hi ha frontmatter.
@@ -136,6 +140,19 @@ function titleFromHtml(raw: string, fallback: string): string {
   const h1 = raw.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
   if (h1 && h1[1].trim()) return decodeEntities(stripTags(h1[1])).trim();
   return fallback;
+}
+
+// Extreu un override d'icona d'un HTML via <meta name="infopol-icon" content="…"> o
+// <meta name="icon" content="…"> (només quan és un emoji, no una URL).
+function iconFromHtmlMeta(raw: string): string | undefined {
+  const m = raw.match(
+    /<meta\s+name=["'](?:infopol-icon|icon)["']\s+content=["']([^"']+)["']/i,
+  );
+  if (!m) return undefined;
+  const v = m[1].trim();
+  // Si sembla una URL / ruta d'imatge, no la fem servir com a "emoji".
+  if (/\.(png|jpg|jpeg|svg|ico|webp)$/i.test(v) || v.includes('/')) return undefined;
+  return v;
 }
 
 function stripTags(s: string): string {
@@ -156,14 +173,80 @@ function fileSlug(name: string): string {
   return name.replace(/\.(md|html)$/i, '');
 }
 
+// Taula d'inferència d'icones per paraula clau. L'ordre importa: la
+// PRIMERA coincidència guanya. Posem primer les paraules més específiques.
+const ICON_HINTS: { kws: string[]; icon: string }[] = [
+  // Trànsit / mobilitat — específiques primer
+  { kws: ['vmp', 'patinet'], icon: '🛴' },
+  { kws: ['alcoholemia', 'alcoholèmia'], icon: '🍷' },
+  { kws: ['cataleg infraccions', 'catàleg infraccions', 'catalogo infracciones'], icon: '🚦' },
+  { kws: ['permis de conduir', 'permiso de conducir', 'carnet'], icon: '🪪' },
+  { kws: ['tràfic', 'transit', 'trànsit', 'tráfico', 'circulacio', 'circulació'], icon: '🚗' },
+  // FCS
+  { kws: ['armament', 'arma de foc', "arma de foc", 'reglament d armes', 'reglamento de armas'], icon: '🔫' },
+  { kws: ['etica', 'ètica', 'deontologia', 'codi etic', 'codi ètic'], icon: '🎖️' },
+  { kws: ['policies locals', 'policia local', 'mossos', 'guardia civil', 'guàrdia civil', 'fcs', 'fcse'], icon: '👮' },
+  // Penal
+  { kws: ['homicidi', 'assassinat'], icon: '🩸' },
+  { kws: ['furt', 'robatori', 'robo', 'hurto'], icon: '🪙' },
+  { kws: ['lesions', 'lesiones'], icon: '🤕' },
+  { kws: ['codi penal', 'codigo penal', 'delicte', 'delito'], icon: '📕' },
+  // LECrim
+  { kws: ['atestat', 'atestado'], icon: '📄' },
+  { kws: ['detencio', 'detenció', 'detencion'], icon: '🚓' },
+  { kws: ['habeas corpus'], icon: '⚖️' },
+  { kws: ['lecrim', 'enjudiciament', 'enjuiciamiento'], icon: '📋' },
+  // Constitució / drets
+  { kws: ['drets fonamentals', 'derechos fundamentales'], icon: '📜' },
+  { kws: ['constitucio', 'constitució', 'constitucion', 'ce78', 'ce 78'], icon: '⚖️' },
+  // EAC
+  { kws: ['generalitat', 'estatut', 'eac', 'catalunya'], icon: '🏛️' },
+  // Municipi / ordenances
+  { kws: ['civisme'], icon: '🧑‍⚖️' },
+  { kws: ['soroll', 'ruido'], icon: '🔊' },
+  { kws: ['animal', 'gossos'], icon: '🐕' },
+  { kws: ['viladecans'], icon: '🏙️' },
+  { kws: ['ordenan', 'ajuntament', 'ayuntamiento', 'municipi', 'municipal', 'lbrl'], icon: '🏢' },
+  // Menors
+  { kws: ['lorpm', 'menor edat', 'menor de edad', 'menors', 'menores', 'menor'], icon: '👦' },
+  // Seguretat ciutadana
+  { kws: ['lopsc', 'seguretat ciutadana', 'seguridad ciudadana'], icon: '🛡️' },
+];
+
+// Inferència d'icona a partir del títol + un petit tros del cos.
+// Retorna `undefined` si no troba cap coincidència (llavors es farà servir
+// l'icona del mòdul com a fallback).
+function inferIcon(title: string, bodyText: string): string | undefined {
+  const hay = normalize(title + ' ' + bodyText.slice(0, 600));
+  for (const hint of ICON_HINTS) {
+    for (const kw of hint.kws) {
+      if (hay.includes(normalize(kw))) return hint.icon;
+    }
+  }
+  return undefined;
+}
+
+function resolveIcon(
+  moduleSlug: string,
+  title: string,
+  bodyText: string,
+  explicit?: string,
+): string {
+  if (explicit && explicit.length > 0) return explicit;
+  const inferred = inferIcon(title, bodyText);
+  if (inferred) return inferred;
+  return MODULES.find((m) => m.slug === moduleSlug)?.icon ?? '📄';
+}
+
 // Construïm les fitxes Markdown.
 const mdCards: Card[] = Object.entries(mdFiles).map(([path, raw]) => {
   const parts = path.replace(/^\/content\//, '').split('/');
   const moduleSlug = parts[0];
   const file = parts[parts.length - 1];
   const slug = fileSlug(file);
-  const { title, body } = parseFrontmatter(raw);
-  const finalTitle = title ?? titleFromMarkdown(body, slug);
+  const { data, body } = parseFrontmatter(raw);
+  const finalTitle = data.title ?? titleFromMarkdown(body, slug);
+  const icon = resolveIcon(moduleSlug, finalTitle, body, data.icon);
   return {
     moduleSlug,
     slug,
@@ -173,6 +256,7 @@ const mdCards: Card[] = Object.entries(mdFiles).map(([path, raw]) => {
     raw,
     path,
     searchText: body,
+    icon,
   };
 });
 
@@ -183,21 +267,24 @@ const htmlCards: Card[] = Object.entries(htmlFiles).map(([path, raw]) => {
   const file = parts[parts.length - 1];
   const slug = fileSlug(file);
   const title = titleFromHtml(raw, slug);
-  // Per a la cerca, agafem el <body> en text pla.
+  // Text pla per cerca i inferència d'icona.
   const bodyMatch = raw.match(/<body[^>]*>([\s\S]*)<\/body>/i);
   const bodyHtml = bodyMatch ? bodyMatch[1] : raw;
   const searchText = decodeEntities(stripTags(bodyHtml))
     .replace(/\s+/g, ' ')
     .trim();
+  const explicitIcon = iconFromHtmlMeta(raw);
+  const icon = resolveIcon(moduleSlug, title, searchText, explicitIcon);
   return {
     moduleSlug,
     slug,
     title,
     kind: 'html',
-    body: raw, // el cos és el HTML complet (l'iframe espera un document)
+    body: raw,
     raw,
     path,
     searchText,
+    icon,
   };
 });
 

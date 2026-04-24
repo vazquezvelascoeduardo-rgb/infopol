@@ -205,8 +205,26 @@ No cal posar accents: "transit" troba "trànsit".
 ## Mode clar / fosc
 
 El botó de la dreta del cercador canvia entre tema clar i fosc. La preferència
-es desa al navegador. Si no toques res, l'app fa servir la preferència del
-sistema operatiu.
+es desa al navegador. Per defecte, l'app s'obre en **mode fosc** (l'estètica
+principal de les infografies).
+
+Les **infografies HTML també respecten el tema**: quan poses la app en clar,
+s'inverteixen automàticament la lluminositat i el fons de la ficha (sense
+perdre els colors d'accent com vermell, blau o daurat), de manera que tot
+quedi llegible.
+
+---
+
+## Icones per a cada ficha
+
+Cada ficha mostra un icona a la llista. L'icona es tria d'aquesta manera:
+
+1. **Override explícit** (opcional). Si el fitxer HTML té un `<meta name="infopol-icon" content="🚗">` al `<head>`, es fa servir aquest. En un fitxer Markdown, afegeix `icon: 🚗` al frontmatter.
+2. **Inferit pel títol i el contingut** (p. ex., "alcoholèmia" → 🍷, "VMP" → 🛴, "constitució" → ⚖️, "armament" → 🔫, "ordenança" → 🏢, ...).
+3. **Icona del mòdul** com a fallback.
+
+Per tant, **no cal que hi facis res**: el que tinguis es classificarà sol.
+Si vols forçar un icona concret, fes servir la meta tag.
 
 ---
 

@@ -32,18 +32,28 @@ export default function SearchResults() {
             <li key={`${c.moduleSlug}/${c.slug}`}>
               <Link
                 to={`/s/${c.moduleSlug}/${c.slug}`}
-                className="group block rounded-xl border px-4 py-3 transition
+                className="group flex items-start gap-3 rounded-xl border px-4 py-3 transition
                   border-slate-200 bg-white hover:border-amber-400/60 hover:bg-amber-50/50
                   dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-amber-400/40 dark:hover:bg-[#13243e]"
               >
-                <div className="text-[10px] uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
-                  {mod?.title ?? c.moduleSlug}
+                <span
+                  aria-hidden
+                  className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-lg ring-1
+                    bg-slate-100 ring-slate-200
+                    dark:bg-white/5 dark:ring-white/10"
+                >
+                  {c.icon}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
+                    {mod?.title ?? c.moduleSlug}
+                  </div>
+                  <div className="font-semibold">{c.title}</div>
+                  <div
+                    className="mt-1 text-sm text-slate-500 dark:text-slate-400"
+                    dangerouslySetInnerHTML={{ __html: snippet(c.searchText, q) }}
+                  />
                 </div>
-                <div className="font-semibold">{c.title}</div>
-                <div
-                  className="mt-1 text-sm text-slate-500 dark:text-slate-400"
-                  dangerouslySetInnerHTML={{ __html: snippet(c.searchText, q) }}
-                />
               </Link>
             </li>
           );
