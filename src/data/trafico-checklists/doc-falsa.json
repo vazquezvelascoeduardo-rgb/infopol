@@ -1,0 +1,95 @@
+{
+  "id": "doc-falsa",
+  "titol": "Documentació falsa",
+  "categoria": "transit",
+  "icono": "📄",
+  "base_legal": ["Arts. 390-392 CP", "Art. 393 CP", "Art. 400 CP"],
+  "inici": "tipus_document",
+  "nodes": {
+    "tipus_document": {
+      "titol": "Quin document és fals o sospitós?",
+      "text": "Tria:",
+      "opcions": [
+        { "etiqueta": "Permís de conduir",                    "va_a": "doc_sospita" },
+        { "etiqueta": "DNI / NIE / passaport",                "va_a": "doc_sospita" },
+        { "etiqueta": "Permís de circulació / fitxa tècnica", "va_a": "doc_sospita" },
+        { "etiqueta": "Matrícula manipulada/canviada",        "va_a": "matricula_tipus" },
+        { "etiqueta": "Adhesiu ITV / segell fals",            "va_a": "doc_sospita" },
+        { "etiqueta": "Assegurança falsificada",              "va_a": "doc_sospita" }
+      ]
+    },
+    "doc_sospita": {
+      "titol": "Nivell de certesa",
+      "text": "Quin grau de certesa tens que és fals?",
+      "opcions": [
+        { "etiqueta": "Sospita per indicis (lletra, mida, hologrames…)","va_a": "fi_retenir_investigar" },
+        { "etiqueta": "Evidència clara (comparativa, eines SIP, DGT)","va_a": "fi_penal_392" },
+        { "etiqueta": "Reconeix que és fals",                 "va_a": "fi_penal_392" }
+      ]
+    },
+    "matricula_tipus": {
+      "titol": "Matrícula",
+      "text": "Quina situació és?",
+      "opcions": [
+        { "etiqueta": "Matrícula canviada / d'un altre vehicle","va_a": "fi_penal_matricula" },
+        { "etiqueta": "Matrícula sense autoritzar / artesanal","va_a": "fi_penal_matricula" },
+        { "etiqueta": "Matrícula doblegada/tapada intencionalment","va_a": "fi_mg_matricula_tapada" }
+      ]
+    },
+
+    "fi_retenir_investigar": {
+      "final": true,
+      "tipus": "mixta",
+      "titol": "🔍 Retenció per investigació",
+      "accions": [
+        "Retenció del document per comprovació (NO detenció de la persona encara)",
+        "Consulta SIP / DGT / TIE-DNI",
+        "Contactar amb sala per comprovació",
+        "Si es confirma falsedat → passa a via penal (Art. 392 CP)",
+        "Si s'aclareix que és vàlid → tornar-lo"
+      ],
+      "document": "Diligència de retenció i comprovació"
+    },
+    "fi_penal_392": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Art. 392 CP (falsedat en document oficial)",
+      "text": "Particular que comet falsedat en document oficial o l'utilitza sabent que és fals.",
+      "pena": "Presó 6 mesos - 3 anys + multa 6-12 mesos",
+      "accions": [
+        "Detenció del sospitós",
+        "Lectura de drets (Art. 520 LECrim)",
+        "Intervenció i precinte del document (cadena de custòdia)",
+        "Atestat penal amb fotos i descripció dels indicis de falsedat",
+        "Possible delicte d'Art. 400 CP (tinença de falsificació)",
+        "Posada a disposició del Jutjat de Guàrdia"
+      ],
+      "document": "Atestat + acta intervenció + cadena custòdia",
+      "base_legal": ["Art. 392 CP", "Art. 393 CP (ús)", "Art. 400 CP"]
+    },
+    "fi_penal_matricula": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Matrícula falsificada/canviada",
+      "text": "Es pot incloure en la falsificació documental i també pot ser robatori del vehicle (cal comprovar bastidor VIN).",
+      "accions": [
+        "Comprovar bastidor VIN amb permís de circulació",
+        "Consulta sala sobre sostraccions",
+        "Detenció del conductor",
+        "Immobilització del vehicle",
+        "Atestat penal",
+        "Jutjat de Guàrdia"
+      ],
+      "base_legal": ["Art. 392 CP", "Arts. 237-242 CP (si robatori)"]
+    },
+    "fi_mg_matricula_tapada": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🔴 Infracció MOLT GREU — Matrícula il·legible / manipulada",
+      "text": "Si només està tapada/plegada però és la correcta: administrativa. Si sospita d'intenció d'evadir radars, també.",
+      "import": "500 €",
+      "punts": "0 punts",
+      "base_legal": ["Art. 77 TRLSV"]
+    }
+  }
+}

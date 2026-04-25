@@ -1,0 +1,115 @@
+{
+  "id": "assegurança",
+  "titol": "Sense assegurança obligatòria (SOA)",
+  "categoria": "transit",
+  "icono": "🛡️",
+  "base_legal": ["Art. 2.1 RDL 8/2004 (LRCSCVM)", "Art. 3 LRCSCVM (immobilització)"],
+  "inici": "comprovacio",
+  "nota": "Imports segons Catàleg SCT 2026 (barem per tipus de vehicle).",
+  "nodes": {
+    "comprovacio": {
+      "titol": "Comprovació d'assegurança",
+      "text": "Consulta a la base de dades FIVA (Fitxer Informatiu de Vehicles Assegurats). Resultat?",
+      "opcions": [
+        { "etiqueta": "Vehicle ASSEGURAT",                    "va_a": "fi_ok_assegurat" },
+        { "etiqueta": "Sense assegurança vigent",             "va_a": "tipus_vehicle" },
+        { "etiqueta": "FIVA no respon / dubte",               "va_a": "requerir_rebut" }
+      ]
+    },
+    "requerir_rebut": {
+      "titol": "Requerir justificant",
+      "text": "Requerir darrer rebut de pagament o pòlissa. El presenta?",
+      "opcions": [
+        { "etiqueta": "Presenta justificant vàlid",           "va_a": "fi_ok_assegurat" },
+        { "etiqueta": "No el presenta / caducat",             "va_a": "tipus_vehicle" }
+      ]
+    },
+    "tipus_vehicle": {
+      "titol": "Tipus de vehicle (barem per tipus de permís)",
+      "text": "Quin tipus de vehicle és?",
+      "opcions": [
+        { "etiqueta": "VMP (>25 kg i >14 km/h)",                           "va_a": "fi_vmp" },
+        { "etiqueta": "Vehicle personal lleuger / agrícola / PMR",          "va_a": "fi_lleuger" },
+        { "etiqueta": "Ciclomotor (permís AM)",                             "va_a": "fi_am" },
+        { "etiqueta": "Motocicleta (A1, A2, A)",                            "va_a": "fi_moto" },
+        { "etiqueta": "Turisme / furgoneta (B, B+E)",                       "va_a": "fi_turisme" },
+        { "etiqueta": "Camió (C1, C1+E, C, C+E)",                           "va_a": "fi_camio" },
+        { "etiqueta": "Autobús (D1, D1+E, D, D+E)",                         "va_a": "fi_bus" }
+      ]
+    },
+
+    "fi_ok_assegurat": {
+      "final": true,
+      "tipus": "ok",
+      "titol": "✅ Vehicle correctament assegurat",
+      "accio": "Es deixa circular"
+    },
+    "fi_vmp": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Sense SOA — VMP",
+      "import": "350 € (DTE 175 €)",
+      "punts": "0 punts",
+      "accions": [
+        "Immobilització del vehicle (Art. 3 LRCSCVM)",
+        "Notificació al Consorci de Compensació d'Assegurances",
+        "Dipòsit fins a justificar assegurança"
+      ],
+      "document": "Butlletí + acta d'immobilització",
+      "base_legal": ["Art. 2.1 RDL 8/2004"]
+    },
+    "fi_lleuger": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Sense SOA — Vehicle lleuger / agrícola / PMR",
+      "import": "650 € (DTE 325 €)",
+      "accions": ["Immobilització", "Notificació Consorci", "Dipòsit"],
+      "base_legal": ["Art. 2.1 RDL 8/2004"]
+    },
+    "fi_am": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Sense SOA — Ciclomotor (AM)",
+      "import": "1.000 € (DTE 500 €)",
+      "accions": ["Immobilització", "Notificació Consorci", "Dipòsit"],
+      "base_legal": ["Art. 2.1 RDL 8/2004"]
+    },
+    "fi_moto": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Sense SOA — Motocicleta (A1/A2/A)",
+      "import": "1.250 € (DTE 625 €)",
+      "accions": ["Immobilització", "Notificació Consorci", "Dipòsit"],
+      "base_legal": ["Art. 2.1 RDL 8/2004"]
+    },
+    "fi_turisme": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Sense SOA — Turisme / Furgoneta (B/B+E)",
+      "import": "1.500 € (DTE 750 €)",
+      "accions": ["Immobilització", "Notificació Consorci", "Dipòsit"],
+      "base_legal": ["Art. 2.1 RDL 8/2004"]
+    },
+    "fi_camio": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🔴 Sense SOA — Camió (C1/C1+E/C/C+E)",
+      "import": "2.800 € (DTE 1.400 €)",
+      "accions": ["Immobilització", "Notificació Consorci", "Dipòsit"],
+      "base_legal": ["Art. 2.1 RDL 8/2004"]
+    },
+    "fi_bus": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🔴 Sense SOA — Autobús (D1/D1+E/D/D+E)",
+      "import": "2.800 € (DTE 1.400 €)",
+      "accions": ["Immobilització", "Notificació Consorci", "Dipòsit"],
+      "base_legal": ["Art. 2.1 RDL 8/2004"]
+    }
+  },
+  "notes": [
+    "La sanció la tramita el Consorci de Compensació d'Assegurances, no l'ajuntament.",
+    "Si el conductor no és el titular, la infracció va al titular.",
+    "Recorda: VMP >25 kg i >14 km/h també considerats vehicles a motor."
+  ]
+}

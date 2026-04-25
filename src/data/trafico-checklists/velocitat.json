@@ -1,0 +1,242 @@
+{
+  "id": "velocitat",
+  "titol": "Excés de velocitat",
+  "categoria": "transit",
+  "icono": "⚡",
+  "base_legal": ["Art. 48 RGC", "Annex IV TRLSV (barem)", "Art. 76.A / 77.A TRLSV", "Art. 379.1 CP"],
+  "inici": "tipus_via",
+  "nota": "Barem segons Catàleg SCT 2026. Punts: Tram 1=0, Tram 2=2, Tram 3=4, Tram 4=6, MG=6.",
+  "nodes": {
+    "tipus_via": {
+      "titol": "Límit de la via",
+      "text": "Quin és el límit genèric de la via?",
+      "opcions": [
+        { "etiqueta": "20 km/h (plataforma única / S-28)",        "va_a": "via_20" },
+        { "etiqueta": "30 km/h (zona 30)",                        "va_a": "via_30" },
+        { "etiqueta": "40 km/h",                                   "va_a": "via_40" },
+        { "etiqueta": "50 km/h (via urbana general)",             "va_a": "via_50" },
+        { "etiqueta": "60 km/h",                                   "va_a": "via_60" },
+        { "etiqueta": "70 km/h",                                   "va_a": "via_70" },
+        { "etiqueta": "80 km/h",                                   "va_a": "via_80" },
+        { "etiqueta": "90 km/h (convencional)",                   "va_a": "via_90" },
+        { "etiqueta": "100 km/h (via ràpida/autovia accés)",      "va_a": "via_100" },
+        { "etiqueta": "110 km/h",                                  "va_a": "via_110" },
+        { "etiqueta": "120 km/h (autopista/autovia)",             "va_a": "via_120" }
+      ]
+    },
+
+    "via_20": {
+      "titol": "Excés en via de 20 km/h",
+      "text": "Velocitat detectada?",
+      "opcions": [
+        { "etiqueta": "21-40 km/h (excés 1-20)",     "va_a": "fi_lleu_100" },
+        { "etiqueta": "41-50 km/h",                   "va_a": "fi_greu_300" },
+        { "etiqueta": "51-60 km/h",                   "va_a": "fi_greu_400" },
+        { "etiqueta": "61-70 km/h",                   "va_a": "fi_greu_500" },
+        { "etiqueta": "71-80 km/h",                   "va_a": "fi_mg_600" },
+        { "etiqueta": "> 80 km/h (excés > 60)",      "va_a": "avis_penal_urbana" }
+      ]
+    },
+    "via_30": {
+      "titol": "Excés en via de 30 km/h",
+      "text": "Velocitat detectada?",
+      "opcions": [
+        { "etiqueta": "31-50 km/h",                   "va_a": "fi_lleu_100" },
+        { "etiqueta": "51-60 km/h",                   "va_a": "fi_greu_300" },
+        { "etiqueta": "61-70 km/h",                   "va_a": "fi_greu_400" },
+        { "etiqueta": "71-80 km/h",                   "va_a": "fi_greu_500" },
+        { "etiqueta": "81-90 km/h",                   "va_a": "fi_mg_600" },
+        { "etiqueta": "> 90 km/h (excés > 60)",      "va_a": "avis_penal_urbana" }
+      ]
+    },
+    "via_40": {
+      "titol": "Excés en via de 40 km/h",
+      "text": "Velocitat detectada?",
+      "opcions": [
+        { "etiqueta": "41-60 km/h",                   "va_a": "fi_lleu_100" },
+        { "etiqueta": "61-70 km/h",                   "va_a": "fi_greu_300" },
+        { "etiqueta": "71-80 km/h",                   "va_a": "fi_greu_400" },
+        { "etiqueta": "81-90 km/h",                   "va_a": "fi_greu_500" },
+        { "etiqueta": "91-100 km/h",                  "va_a": "fi_mg_600" },
+        { "etiqueta": "> 100 km/h (excés > 60)",     "va_a": "avis_penal_urbana" }
+      ]
+    },
+    "via_50": {
+      "titol": "Excés en via de 50 km/h",
+      "text": "Velocitat detectada?",
+      "opcions": [
+        { "etiqueta": "51-70 km/h",                   "va_a": "fi_lleu_100" },
+        { "etiqueta": "71-80 km/h",                   "va_a": "fi_greu_300" },
+        { "etiqueta": "81-90 km/h",                   "va_a": "fi_greu_400" },
+        { "etiqueta": "91-100 km/h",                  "va_a": "fi_greu_500" },
+        { "etiqueta": "101-110 km/h",                 "va_a": "fi_mg_600" },
+        { "etiqueta": "> 110 km/h (excés > 60)",     "va_a": "avis_penal_urbana" }
+      ]
+    },
+    "via_60": {
+      "titol": "Excés en via de 60 km/h",
+      "text": "Velocitat detectada?",
+      "opcions": [
+        { "etiqueta": "61-90 km/h",                   "va_a": "fi_lleu_100" },
+        { "etiqueta": "91-110 km/h",                  "va_a": "fi_greu_300" },
+        { "etiqueta": "111-120 km/h",                 "va_a": "fi_greu_400" },
+        { "etiqueta": "121-130 km/h",                 "va_a": "fi_greu_500" },
+        { "etiqueta": "131-140 km/h",                 "va_a": "fi_mg_600" },
+        { "etiqueta": "> 140 km/h (excés > 80)",     "va_a": "avis_penal_inter" }
+      ]
+    },
+    "via_70": {
+      "titol": "Excés en via de 70 km/h",
+      "text": "Velocitat detectada?",
+      "opcions": [
+        { "etiqueta": "71-100 km/h",                  "va_a": "fi_lleu_100" },
+        { "etiqueta": "101-120 km/h",                 "va_a": "fi_greu_300" },
+        { "etiqueta": "121-130 km/h",                 "va_a": "fi_greu_400" },
+        { "etiqueta": "131-140 km/h",                 "va_a": "fi_greu_500" },
+        { "etiqueta": "141-150 km/h",                 "va_a": "fi_mg_600" },
+        { "etiqueta": "> 150 km/h (excés > 80)",     "va_a": "avis_penal_inter" }
+      ]
+    },
+    "via_80": {
+      "titol": "Excés en via de 80 km/h",
+      "text": "Velocitat detectada?",
+      "opcions": [
+        { "etiqueta": "81-110 km/h",                  "va_a": "fi_lleu_100" },
+        { "etiqueta": "111-130 km/h",                 "va_a": "fi_greu_300" },
+        { "etiqueta": "131-140 km/h",                 "va_a": "fi_greu_400" },
+        { "etiqueta": "141-150 km/h",                 "va_a": "fi_greu_500" },
+        { "etiqueta": "151-160 km/h",                 "va_a": "fi_mg_600" },
+        { "etiqueta": "> 160 km/h (excés > 80)",     "va_a": "avis_penal_inter" }
+      ]
+    },
+    "via_90": {
+      "titol": "Excés en via de 90 km/h (convencional)",
+      "text": "Velocitat detectada?",
+      "opcions": [
+        { "etiqueta": "91-120 km/h",                  "va_a": "fi_lleu_100" },
+        { "etiqueta": "121-140 km/h",                 "va_a": "fi_greu_300" },
+        { "etiqueta": "141-150 km/h",                 "va_a": "fi_greu_400" },
+        { "etiqueta": "151-160 km/h",                 "va_a": "fi_greu_500" },
+        { "etiqueta": "161-170 km/h",                 "va_a": "fi_mg_600" },
+        { "etiqueta": "> 170 km/h (excés > 80)",     "va_a": "avis_penal_inter" }
+      ]
+    },
+    "via_100": {
+      "titol": "Excés en via de 100 km/h",
+      "text": "Velocitat detectada?",
+      "opcions": [
+        { "etiqueta": "101-130 km/h",                 "va_a": "fi_lleu_100" },
+        { "etiqueta": "131-150 km/h",                 "va_a": "fi_greu_300" },
+        { "etiqueta": "151-160 km/h",                 "va_a": "fi_greu_400" },
+        { "etiqueta": "161-170 km/h",                 "va_a": "fi_greu_500" },
+        { "etiqueta": "171-180 km/h",                 "va_a": "fi_mg_600" },
+        { "etiqueta": "> 180 km/h (excés > 80)",     "va_a": "avis_penal_inter" }
+      ]
+    },
+    "via_110": {
+      "titol": "Excés en via de 110 km/h",
+      "text": "Velocitat detectada?",
+      "opcions": [
+        { "etiqueta": "111-140 km/h",                 "va_a": "fi_lleu_100" },
+        { "etiqueta": "141-160 km/h",                 "va_a": "fi_greu_300" },
+        { "etiqueta": "161-170 km/h",                 "va_a": "fi_greu_400" },
+        { "etiqueta": "171-180 km/h",                 "va_a": "fi_greu_500" },
+        { "etiqueta": "181-190 km/h",                 "va_a": "fi_mg_600" },
+        { "etiqueta": "> 190 km/h (excés > 80)",     "va_a": "avis_penal_inter" }
+      ]
+    },
+    "via_120": {
+      "titol": "Excés en via de 120 km/h (autopista)",
+      "text": "Velocitat detectada?",
+      "opcions": [
+        { "etiqueta": "121-150 km/h",                 "va_a": "fi_lleu_100" },
+        { "etiqueta": "151-170 km/h",                 "va_a": "fi_greu_300" },
+        { "etiqueta": "171-180 km/h",                 "va_a": "fi_greu_400" },
+        { "etiqueta": "181-190 km/h",                 "va_a": "fi_greu_500" },
+        { "etiqueta": "191-200 km/h",                 "va_a": "fi_mg_600" },
+        { "etiqueta": "> 200 km/h (excés > 80)",     "va_a": "avis_penal_inter" }
+      ]
+    },
+
+    "avis_penal_urbana": {
+      "titol": "🚔 Via penal — Art. 379.1 CP",
+      "text": "En via URBANA, excés superior a 60 km/h sobre el límit és delicte.",
+      "opcions": [
+        { "etiqueta": "Confirmar excés > 60 km/h",   "va_a": "fi_penal_velocitat" }
+      ]
+    },
+    "avis_penal_inter": {
+      "titol": "🚔 Via penal — Art. 379.1 CP",
+      "text": "En via INTERURBANA, excés superior a 80 km/h sobre el límit és delicte.",
+      "opcions": [
+        { "etiqueta": "Confirmar excés > 80 km/h",   "va_a": "fi_penal_velocitat" }
+      ]
+    },
+
+    "fi_lleu_100": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "ℹ️ Tram 1 — GREU (sense punts)",
+      "import": "100 € (50 € amb pagament voluntari 50%)",
+      "punts": "0 punts",
+      "document": "Butlletí de denúncia",
+      "base_legal": ["Art. 48 RGC", "Annex IV TRLSV"]
+    },
+    "fi_greu_300": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Tram 2 — GREU",
+      "import": "300 € (150 € amb pagament voluntari)",
+      "punts": "–2 punts",
+      "document": "Butlletí de denúncia",
+      "base_legal": ["Art. 48 RGC", "Annex IV TRLSV"]
+    },
+    "fi_greu_400": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Tram 3 — GREU",
+      "import": "400 € (200 € amb pagament voluntari)",
+      "punts": "–4 punts",
+      "document": "Butlletí de denúncia",
+      "base_legal": ["Art. 48 RGC", "Annex IV TRLSV"]
+    },
+    "fi_greu_500": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Tram 4 — GREU",
+      "import": "500 € (250 € amb pagament voluntari)",
+      "punts": "–6 punts",
+      "document": "Butlletí de denúncia",
+      "base_legal": ["Art. 48 RGC", "Annex IV TRLSV"]
+    },
+    "fi_mg_600": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🔴 MOLT GREU",
+      "import": "600 € (sense reducció 50% per via general)",
+      "punts": "–6 punts",
+      "document": "Butlletí de denúncia",
+      "base_legal": ["Art. 77.A TRLSV", "Annex IV TRLSV"]
+    },
+    "fi_penal_velocitat": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Art. 379.1 CP",
+      "text": "Velocitat superior al límit en més de 60 km/h (urbà) o 80 km/h (interurbà).",
+      "pena": "Presó 3-6 mesos O multa 6-12 mesos O TBC 31-90 dies + privació permís 1-4 anys",
+      "accions": [
+        "Immobilització del vehicle",
+        "Detenció o citació segons cas",
+        "Lectura de drets si detenció",
+        "Atestat penal + tiquet cinemòmetre (homologat i calibrat)",
+        "Jutjat de Guàrdia"
+      ],
+      "document": "Atestat penal + certificat homologació + tiquet radar",
+      "base_legal": ["Art. 379.1 CP"]
+    }
+  },
+  "notes": [
+    "Autopistes/autovies d'accés a ciutats amb límit <100 km/h: s'aplica la multa corresponent al límit però la detracció de punts com a 100 km/h.",
+    "Límits per camions > 3.500 kg: 80 km/h interurbana. Novells (<2 anys): 80 km/h interurbà."
+  ]
+}
