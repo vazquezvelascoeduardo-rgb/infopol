@@ -1,0 +1,147 @@
+{
+  "id": "vehicle-abandonat",
+  "titol": "Vehicle abandonat / immobilització / retirada grua",
+  "categoria": "transit",
+  "icono": "🚗",
+  "base_legal": ["Art. 104 TRLSV (immobilització)", "Art. 105 TRLSV (retirada)", "Art. 106 TRLSV (vehicle abandonat)"],
+  "inici": "supost",
+  "nodes": {
+    "supost": {
+      "titol": "Tipus de supòsit",
+      "text": "Quina és la situació del vehicle?",
+      "opcions": [
+        { "etiqueta": "Immobilització per infracció (alcohol, assegurança, ITV…)","va_a": "fi_immobilitzacio" },
+        { "etiqueta": "Estacionament que destorba / perillós",      "va_a": "estacionament_tipus" },
+        { "etiqueta": "Vehicle en runes / semiabandonat a la via",  "va_a": "abandonat_temps" },
+        { "etiqueta": "Vehicle sense placa / bastidor esborrat",    "va_a": "fi_abandonat_directe" }
+      ]
+    },
+    "estacionament_tipus": {
+      "titol": "Tipus d'estacionament problemàtic",
+      "text": "Quin motiu justifica la retirada?",
+      "opcions": [
+        { "etiqueta": "Obstrueix la circulació / perill per altres", "va_a": "fi_grua_perill" },
+        { "etiqueta": "Lloc reservat (minusvàlids, càrrega…)",       "va_a": "fi_grua_reservat" },
+        { "etiqueta": "Passos de vianants / guals",                  "va_a": "fi_grua_gual" },
+        { "etiqueta": "Zona blava/verda excedint molt el temps",     "va_a": "fi_grua_zona" },
+        { "etiqueta": "Esdeveniment / treballs senyalitzats",        "va_a": "fi_grua_esdeveniment" }
+      ]
+    },
+    "abandonat_temps": {
+      "titol": "Temps a la via",
+      "text": "Quant temps porta en l'estat d'abandonament? Presenta signes (pols, rodes desinflades, vegetació, brutícia…)?",
+      "opcions": [
+        { "etiqueta": "Més de 2 mesos amb signes evidents",          "va_a": "fi_abandonat_106" },
+        { "etiqueta": "Baixa de circulació i abandonat a la via",    "va_a": "fi_abandonat_baixa" },
+        { "etiqueta": "Tècnicament abandonat (art. 106.2 TRLSV)",    "va_a": "fi_abandonat_106_2" }
+      ]
+    },
+
+    "fi_immobilitzacio": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🔒 Immobilització — Art. 104 TRLSV",
+      "text": "Procedeix immobilitzar per: manca de documentació, alcohol/drogues, excés càrrega, manca assegurança, ITV desfavorable, etc.",
+      "accions": [
+        "Acta d'immobilització",
+        "Comunicar al conductor el motiu",
+        "Precintar i/o grua a dipòsit",
+        "El vehicle queda fins que se solucioni la causa",
+        "Les despeses són a càrrec del titular o conductor"
+      ],
+      "document": "Acta d'immobilització + butlletí"
+    },
+    "fi_grua_perill": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🚛 Retirada per grua — Art. 105 TRLSV (perill)",
+      "accions": [
+        "Fotografies abans de la retirada",
+        "Avís a l'empresa de grua",
+        "Butlletí per estacionament antireglamentari",
+        "Anotació del trasllat al dipòsit",
+        "Avís al titular si és possible"
+      ],
+      "base_legal": ["Art. 105.1.a TRLSV"]
+    },
+    "fi_grua_reservat": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🚛 Retirada per ocupar lloc reservat",
+      "text": "Places PMR (minusvàlids), càrrega/descàrrega, taxis, emergències…",
+      "accions": ["Fotografies", "Butlletí", "Grua", "Especial atenció plaça PMR: sanció més alta"],
+      "base_legal": ["Art. 105 TRLSV"]
+    },
+    "fi_grua_gual": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🚛 Retirada per ocupar gual / pas vianants",
+      "accions": ["Fotografies", "Butlletí per estacionament prohibit", "Grua"],
+      "base_legal": ["Art. 105 TRLSV"]
+    },
+    "fi_grua_zona": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🚛 Retirada per excés zona regulada",
+      "accions": ["Comprovar tiquet/app", "Butlletí", "Valorar grua segons ordenança"],
+      "base_legal": ["Art. 105 TRLSV", "Ordenança municipal"]
+    },
+    "fi_grua_esdeveniment": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🚛 Retirada per esdeveniment senyalitzat",
+      "text": "Cal que la senyalització estigui col·locada amb 48h d'antelació",
+      "accions": [
+        "Verificar senyalització prèvia (fotografies)",
+        "Grua",
+        "Notificació al titular de l'adreça on es trasllada"
+      ]
+    },
+    "fi_abandonat_directe": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🚛 Vehicle abandonat — Art. 106.2 TRLSV",
+      "accions": [
+        "Fotografies",
+        "Comunicació a l'ajuntament (departament medi ambient)",
+        "Possible inscripció com a residu (tractament com a RAEE)",
+        "Trasllat a dipòsit municipal"
+      ]
+    },
+    "fi_abandonat_106": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🚛 Vehicle abandonat — signes evidents",
+      "text": "Vehicle estacionat > 2 mesos amb signes d'abandonament (Art. 106.1.a TRLSV)",
+      "accions": [
+        "Informe amb fotos i data d'inici observació",
+        "Notificació al titular (requeriment per retirar)",
+        "Si no respon: tramitació com a abandonat",
+        "Passat el termini: baixa i desguàs"
+      ],
+      "base_legal": ["Art. 106 TRLSV"]
+    },
+    "fi_abandonat_baixa": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🚛 Vehicle de baixa a la via",
+      "accions": [
+        "Comprovar baixa DGT",
+        "Tramitar com a abandonat",
+        "Trasllat directe a dipòsit/desguàs"
+      ],
+      "base_legal": ["Art. 106 TRLSV"]
+    },
+    "fi_abandonat_106_2": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🚛 Abandonament tècnic — Art. 106.2 TRLSV",
+      "text": "Desperfectes que facin impossible moure's pels seus propis mitjans.",
+      "accions": [
+        "Fotografies",
+        "Notificació al titular amb termini retirada",
+        "Sense resposta → tractament com a residu"
+      ]
+    }
+  }
+}

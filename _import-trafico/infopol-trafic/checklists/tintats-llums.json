@@ -1,0 +1,88 @@
+{
+  "id": "tintats-llums",
+  "titol": "Tintats i llums",
+  "categoria": "transit",
+  "icono": "🪟",
+  "base_legal": ["Art. 19 RGC", "Arts. 41-46 RGC (llums)", "Art. 76.l TRLSV"],
+  "inici": "tipus",
+  "nodes": {
+    "tipus": {
+      "titol": "Quin element?",
+      "text": "Tria:",
+      "opcions": [
+        { "etiqueta": "Vidres tintats",                         "va_a": "tintats_ubicacio" },
+        { "etiqueta": "Llums — cap llum funciona",              "va_a": "fi_llums_cap" },
+        { "etiqueta": "Llums — falta una llum (llarga, creuada, posició)","va_a": "fi_llums_una" },
+        { "etiqueta": "Llums — antireglamentàries (color, altura)","va_a": "fi_llums_antireg" },
+        { "etiqueta": "Llums — no les encén quan cal (nit, túnel, pluja)","va_a": "fi_llums_no_encendre" }
+      ]
+    },
+    "tintats_ubicacio": {
+      "titol": "Ubicació dels tintats",
+      "text": "On estan col·locats els tintats?",
+      "opcions": [
+        { "etiqueta": "Darrere (a partir del muntant B)",       "va_a": "fi_ok_tintats_darrere" },
+        { "etiqueta": "Davant (parabrisa o vidres davanters)",  "va_a": "fi_greu_tintats_davant" }
+      ]
+    },
+
+    "fi_ok_tintats_darrere": {
+      "final": true,
+      "tipus": "ok",
+      "titol": "✅ Tintats permesos",
+      "accio": "Els vidres posteriors del muntant B cap enrere es poden enfosquir sense límit (excepte en alguns vehicles específics)"
+    },
+    "fi_greu_tintats_davant": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció GREU — Tintats no homologats al davant",
+      "import": "200 € (100 € amb pagament voluntari)",
+      "punts": "0 punts",
+      "accions": [
+        "Butlletí al titular",
+        "Possible immobilització si la visibilitat és molt dolenta",
+        "NO es pot exigir passar ITV per aquest motiu si la ITV és vigent i favorable"
+      ],
+      "info": "Article 19.1 RGC: els vidres del parabrisa i els davanters laterals no poden portar làmines ni elements que redueixin la transparència per sota dels mínims reglamentaris.",
+      "document": "Butlletí + fotografies",
+      "base_legal": ["Art. 19.1 RGC", "Art. 76.l TRLSV"]
+    },
+    "fi_llums_cap": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🔴 Infracció MOLT GREU — Circular sense cap llum en condicions que l'exigeixen",
+      "import": "500 €",
+      "accions": [
+        "Immobilització (Art. 104 TRLSV)",
+        "Grua a taller si de nit o visibilitat reduïda"
+      ],
+      "base_legal": ["Art. 43 RGC", "Art. 77.l TRLSV"]
+    },
+    "fi_llums_una": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció GREU — Llum fosa o que no funciona",
+      "import": "200 €",
+      "accions": ["Butlletí", "Advertir de reparar-ho com més aviat millor"],
+      "base_legal": ["Art. 42 RGC"]
+    },
+    "fi_llums_antireg": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció GREU — Llums antireglamentàries",
+      "text": "Colors no permesos, LEDs no homologats, altures incorrectes…",
+      "import": "200 €",
+      "accions": ["Butlletí", "Possible immobilització si modificació greu"],
+      "base_legal": ["Art. 42 RGC"]
+    },
+    "fi_llums_no_encendre": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció GREU — No encendre llums quan és obligatori",
+      "text": "Túnels, pluja, boira, nit, visibilitat reduïda",
+      "import": "200 €",
+      "punts": "0 punts",
+      "base_legal": ["Art. 43 RGC", "Art. 76.l TRLSV"]
+    }
+  }
+}

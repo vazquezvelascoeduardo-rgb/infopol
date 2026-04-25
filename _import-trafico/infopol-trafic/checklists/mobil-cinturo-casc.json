@@ -1,0 +1,122 @@
+{
+  "id": "mobil-cinturo-casc",
+  "titol": "Mòbil / cinturó / casc",
+  "categoria": "transit",
+  "icono": "📱",
+  "base_legal": ["Art. 18 RGC", "Arts. 117-118 RGC", "Llei 18/2021"],
+  "inici": "tipus_infraccio",
+  "nodes": {
+    "tipus_infraccio": {
+      "titol": "Quina infracció has detectat?",
+      "text": "Tria la conducta observada:",
+      "opcions": [
+        { "etiqueta": "Ús del telèfon mòbil a la mà",        "va_a": "mobil_tipus" },
+        { "etiqueta": "Ús d'auriculars / cascos mentre condueix","va_a": "fi_auriculars" },
+        { "etiqueta": "Pantalla manipulada mentre condueix",  "va_a": "fi_pantalla" },
+        { "etiqueta": "Sense cinturó (conductor adult)",      "va_a": "fi_cinturo_adult" },
+        { "etiqueta": "Sense cinturó (passatger adult)",      "va_a": "fi_cinturo_passatger" },
+        { "etiqueta": "Menor sense sistema de retenció",      "va_a": "fi_menor_srif" },
+        { "etiqueta": "Sense casc (conductor moto/ciclomotor)","va_a": "fi_casc_conductor" },
+        { "etiqueta": "Sense casc (passatger moto)",          "va_a": "fi_casc_passatger" },
+        { "etiqueta": "Sense casc (ciclista en via interurbana o menor)","va_a": "fi_casc_bici" }
+      ]
+    },
+    "mobil_tipus": {
+      "titol": "Ús del mòbil",
+      "text": "Com l'està utilitzant?",
+      "opcions": [
+        { "etiqueta": "Agafant-lo amb la mà",                  "va_a": "fi_mobil_ma" },
+        { "etiqueta": "Manipulant-lo (encara que estigui en suport)","va_a": "fi_mobil_ma" },
+        { "etiqueta": "Mans lliures / veu (Bluetooth correctament)","va_a": "fi_ok_mobil" }
+      ]
+    },
+
+    "fi_ok_mobil": {
+      "final": true,
+      "tipus": "ok",
+      "titol": "✅ Ús correcte",
+      "accio": "El mans lliures no sancionable si no distreu"
+    },
+    "fi_mobil_ma": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció GREU — Ús del mòbil a la mà",
+      "import": "200 € (100 € amb pagament voluntari)",
+      "punts": "–6 punts",
+      "document": "Butlletí",
+      "base_legal": ["Art. 76.G TRLSV"]
+    },
+    "fi_auriculars": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció GREU — Ús d'auriculars",
+      "import": "200 € (100 € amb pagament voluntari)",
+      "punts": "–3 punts",
+      "base_legal": ["Art. 18.2 RGC"]
+    },
+    "fi_pantalla": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció GREU — Pantalla incompatible amb atenció",
+      "text": "Pantalles visuals incompatibles amb l'atenció permanent a la conducció",
+      "import": "200 € (100 € amb pagament voluntari)",
+      "punts": "–3 punts",
+      "base_legal": ["Art. 18.1 RGC"]
+    },
+    "fi_cinturo_adult": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció GREU — Sense cinturó (conductor)",
+      "import": "200 € (100 € amb pagament voluntari)",
+      "punts": "–4 punts",
+      "base_legal": ["Art. 117.1 RGC"]
+    },
+    "fi_cinturo_passatger": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció GREU — Passatger sense cinturó",
+      "import": "200 € (100 € amb pagament voluntari)",
+      "punts": "0 punts (els 4 punts només al conductor)",
+      "info": "Si el passatger és menor: sanció al conductor. Si és adult: al passatger.",
+      "base_legal": ["Art. 117.1 RGC"]
+    },
+    "fi_menor_srif": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció GREU — Menor ≤135 cm sense SRI",
+      "import": "200 € (100 € amb pagament voluntari)",
+      "punts": "–4 punts al conductor",
+      "info": "Sistemes de Retenció Infantil obligatoris per menors de 135 cm",
+      "accions": [
+        "Si la situació és de perill clar: immobilitzar fins que es solucioni",
+        "Art. 117.5 RGC (no tenir cinturons instal·lats) = MG 500€"
+      ],
+      "base_legal": ["Art. 117.3 RGC"]
+    },
+    "fi_casc_conductor": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció GREU — Conductor sense casc",
+      "import": "200 € (100 € amb pagament voluntari)",
+      "punts": "–4 punts",
+      "base_legal": ["Art. 118.1 RGC"]
+    },
+    "fi_casc_passatger": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció GREU — Passatger sense casc",
+      "import": "200 € (100 € amb pagament voluntari)",
+      "punts": "–4 punts al conductor",
+      "base_legal": ["Art. 118.1 RGC"]
+    },
+    "fi_casc_bici": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció GREU — Ciclista sense casc",
+      "text": "Obligatori en via interurbana sempre; en urbana només menors de 16 anys",
+      "import": "200 €",
+      "punts": "0 punts",
+      "base_legal": ["Art. 118 RGC"]
+    }
+  }
+}

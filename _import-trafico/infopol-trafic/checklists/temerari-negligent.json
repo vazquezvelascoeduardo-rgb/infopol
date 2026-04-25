@@ -1,0 +1,100 @@
+{
+  "id": "temerari-negligent",
+  "titol": "Conducció temerària / negligent",
+  "categoria": "transit",
+  "icono": "🚨",
+  "base_legal": ["Art. 77.e TRLSV", "Arts. 380-381 CP"],
+  "inici": "gravetat",
+  "nodes": {
+    "gravetat": {
+      "titol": "Caracterització de la conducta",
+      "text": "Com qualificaries la conducció?",
+      "opcions": [
+        { "etiqueta": "Negligent sense temeritat",               "va_a": "fi_greu_negligent" },
+        { "etiqueta": "Temerària sense perill concret",          "va_a": "fi_mg_temerari" },
+        { "etiqueta": "Temerària amb perill concret",            "va_a": "amb_alcohol_velocitat" },
+        { "etiqueta": "Manifest menyspreu per la vida",          "va_a": "fi_penal_381" }
+      ]
+    },
+    "amb_alcohol_velocitat": {
+      "titol": "Circumstàncies concurrents",
+      "text": "Concorre alguna d'aquestes circumstàncies? (Art. 380.2 CP — presumpció de temeritat)",
+      "opcions": [
+        { "etiqueta": "Excés velocitat penal + alcohol/drogues penal", "va_a": "fi_penal_380_presumpcio" },
+        { "etiqueta": "Només temeritat manifesta amb perill concret", "va_a": "fi_penal_380" }
+      ]
+    },
+
+    "fi_greu_negligent": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció GREU — Conducció negligent",
+      "text": "Conducció descurada sense arribar a temeritat.",
+      "import": "200 € (100 € amb pagament voluntari)",
+      "punts": "0 punts",
+      "document": "Butlletí amb descripció detallada de la conducta observada",
+      "base_legal": ["Art. 3.1 RGC"]
+    },
+    "fi_mg_temerari": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🔴 Infracció MOLT GREU — Conducció temerària",
+      "text": "Conducció temerària sense arribar a perill concret penal.",
+      "import": "500 € (250 € amb pagament voluntari)",
+      "punts": "–6 punts",
+      "document": "Butlletí amb descripció detallada del tipus de conducció temerària",
+      "base_legal": ["Art. 3.1 RGC"]
+    },
+    "fi_penal_380": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Art. 380.1 CP (conducció temerària amb perill concret)",
+      "text": "Conducció manifestament temerària posant en perill concret la vida o integritat d'altres persones.",
+      "pena": "Presó 6 mesos - 2 anys + privació permís 1-6 anys",
+      "accions": [
+        "Detenció",
+        "Lectura de drets",
+        "Immobilització del vehicle",
+        "Atestat amb descripció molt detallada: maniobres, testimonis, càmeres",
+        "Fotografies / vídeos si és possible",
+        "Jutjat de Guàrdia"
+      ],
+      "document": "Atestat penal + diligències amb testimonis + prova gràfica",
+      "base_legal": ["Art. 380 CP"]
+    },
+    "fi_penal_380_presumpcio": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Art. 380.2 CP (presumpció legal)",
+      "text": "Es presumeix la temeritat quan concorre velocitat penal (Art. 379.1) + alcohol/drogues penal (Art. 379.2).",
+      "pena": "Presó 6 mesos - 2 anys + privació permís 1-6 anys",
+      "accions": [
+        "Detenció",
+        "Atestat amb constància dels dos elements (velocitat + alcohol/drogues)",
+        "Jutjat de Guàrdia"
+      ],
+      "base_legal": ["Art. 380.2 CP", "Art. 379 CP"]
+    },
+    "fi_penal_381": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Art. 381 CP (manifest menyspreu per la vida)",
+      "text": "Conducció temerària amb manifest menyspreu per la vida (actuar amb consciència del risc greu).",
+      "pena_perill": "Si hi ha perill concret: presó 2-5 anys + multa 12-24 mesos + privació permís 6-10 anys",
+      "pena_sense_perill": "Sense posar en perill concret: presó 1-2 anys + altres penes",
+      "accions": [
+        "Detenció",
+        "Atestat molt detallat: cal acreditar el dol eventual",
+        "Descripció de totes les circumstàncies (trànsit intens, zones escolars, hora punta…)",
+        "Testimonis imprescindibles",
+        "Jutjat de Guàrdia"
+      ],
+      "base_legal": ["Art. 381 CP"]
+    }
+  },
+  "notes": [
+    "Documentar MOLT bé la conducta: descripció narrativa, velocitat, maniobres, context (trànsit, vianants, zona), hora, meteorologia.",
+    "Testimonis són clau per sostenir Art. 380-381 CP al judici.",
+    "Si és possible: dashcam, càmeres de trànsit, particulars que gravin."
+  ]
+}

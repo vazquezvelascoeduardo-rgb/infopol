@@ -1,0 +1,103 @@
+{
+  "id": "drogues",
+  "titol": "Drogues al volant",
+  "categoria": "transit",
+  "icono": "💊",
+  "base_legal": ["Art. 14 TRLSV", "Art. 27 RGC", "Art. 379.2 CP", "Art. 383 CP"],
+  "inici": "indicis",
+  "nodes": {
+    "indicis": {
+      "titol": "Indicis de consum",
+      "text": "Hi ha indicis suficients de consum? (ulls vermells, pupil·les dilatades/contretes, olor, conducció errática, manifestació del conductor, substància visible…)",
+      "opcions": [
+        { "etiqueta": "Sí, indicis clars",          "va_a": "oferiment_test" },
+        { "etiqueta": "No, només control rutinari", "va_a": "oferiment_test" }
+      ]
+    },
+    "oferiment_test": {
+      "titol": "Oferiment de prova salival",
+      "text": "Oferiment del test indiciari de saliva (drogotest). Resposta del conductor?",
+      "info": "Advertir: negativa = delicte Art. 383 CP",
+      "opcions": [
+        { "etiqueta": "Accepta fer la prova",       "va_a": "resultat_salival" },
+        { "etiqueta": "Es nega",                    "va_a": "fi_383_drogues" }
+      ]
+    },
+    "resultat_salival": {
+      "titol": "Resultat prova salival indiciària",
+      "text": "Resultat del drogotest?",
+      "opcions": [
+        { "etiqueta": "Negatiu",                    "va_a": "fi_negatiu_drogues" },
+        { "etiqueta": "Positiu a una o més substàncies", "va_a": "evidencial_salival" }
+      ]
+    },
+    "evidencial_salival": {
+      "titol": "Segona prova evidencial",
+      "text": "Es recull mostra salival per anàlisi al laboratori. Hi ha signes d'influència evident (inseguretat, parla confusa, conducció anòmala)?",
+      "info": "La influència + positiu evidencial pot derivar a via penal",
+      "opcions": [
+        { "etiqueta": "Positiu sense símptomes d'influència", "va_a": "fi_admin_drogues" },
+        { "etiqueta": "Positiu AMB influència evident",       "va_a": "fi_penal_drogues" }
+      ]
+    },
+
+    "fi_negatiu_drogues": {
+      "final": true,
+      "tipus": "ok",
+      "titol": "✅ Prova negativa",
+      "accio": "Es deixa marxar el conductor"
+    },
+    "fi_admin_drogues": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Infracció MOLT GREU — Art. 77.c TRLSV",
+      "text": "Presència de drogues a l'organisme sense signes d'influència penal.",
+      "import": "1.000 € (500 € amb pagament voluntari 50%)",
+      "punts": "–6 punts",
+      "accions": [
+        "Immobilització del vehicle (Art. 104 TRLSV)",
+        "Enviar mostra salival al laboratori per confirmació",
+        "Lliurament a conductor substitut o grua"
+      ],
+      "document": "Butlletí + acta drogues + mostra precintada + full de custòdia",
+      "base_legal": ["Art. 77.c TRLSV", "Art. 27 RGC"]
+    },
+    "fi_penal_drogues": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Art. 379.2 CP (conducció sota influència de drogues)",
+      "pena": "Presó 3-6 mesos O multa 6-12 mesos O TBC 31-90 dies + privació permís 1-4 anys",
+      "clau": "No n'hi ha prou amb el positiu: cal acreditar INFLUÈNCIA en la conducció. Documentar símptomes i conducta.",
+      "accions": [
+        "Detenció (o citació segons cas)",
+        "Lectura de drets",
+        "Atestat amb descripció detallada de símptomes observats",
+        "Testimonis (agents actuants)",
+        "Cadena de custòdia de la mostra",
+        "Posada a disposició del Jutjat"
+      ],
+      "document": "Atestat penal + acta + mostra amb cadena de custòdia",
+      "base_legal": ["Art. 379.2 CP"]
+    },
+    "fi_383_drogues": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Art. 383 CP (negativa a test de drogues)",
+      "requisits": [
+        "Oferiment formal de la prova",
+        "Advertiment exprés de conseqüències penals",
+        "Reiteració",
+        "Constància documental"
+      ],
+      "pena": "Presó 6 mesos - 1 any + privació permís 1-4 anys",
+      "accions": [
+        "Detenció",
+        "Lectura de drets",
+        "Immobilització del vehicle",
+        "Atestat amb diligència de la negativa i testimonis",
+        "Posada a disposició del Jutjat de Guàrdia"
+      ],
+      "base_legal": ["Art. 383 CP"]
+    }
+  }
+}

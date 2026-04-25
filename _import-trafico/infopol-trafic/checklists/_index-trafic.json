@@ -1,0 +1,19 @@
+{
+  "modul": "transit",
+  "titol": "Trànsit — Checklists operatius",
+  "descripcio": "Arbres de decisió per escenaris de trànsit. Basats en TRLSV (RDL 6/2015), RGC, RGV, Codi Penal (arts. 379-385), Llei 18/2021 i Catàleg SCT.",
+  "escenaris": [
+    { "id": "alcoholemia",        "titol": "🍺 Alcoholèmia",                    "fitxer": "alcoholemia.json",         "ordre": 1 },
+    { "id": "drogues",            "titol": "💊 Drogues al volant",              "fitxer": "drogues.json",             "ordre": 2 },
+    { "id": "velocitat",          "titol": "⚡ Excés de velocitat",              "fitxer": "velocitat.json",           "ordre": 3 },
+    { "id": "assegurança",        "titol": "🛡️ Sense assegurança (SOA)",         "fitxer": "assegurança.json",         "ordre": 4 },
+    { "id": "itv",                "titol": "🔧 ITV caducada / desfavorable",     "fitxer": "itv.json",                 "ordre": 5 },
+    { "id": "permis",             "titol": "🪪 Permís de conduir",               "fitxer": "permis.json",              "ordre": 6 },
+    { "id": "mobil-cinturo-casc", "titol": "📱 Mòbil / cinturó / casc",          "fitxer": "mobil-cinturo-casc.json",  "ordre": 7 },
+    { "id": "tintats-llums",      "titol": "🪟 Tintats i llums",                 "fitxer": "tintats-llums.json",       "ordre": 8 },
+    { "id": "doc-falsa",          "titol": "📄 Documentació falsa",              "fitxer": "doc-falsa.json",           "ordre": 9 },
+    { "id": "temerari-negligent", "titol": "🚨 Conducció temerària / negligent", "fitxer": "temerari-negligent.json",  "ordre": 10 },
+    { "id": "accident",           "titol": "💥 Accident de trànsit",             "fitxer": "accident.json",            "ordre": 11 },
+    { "id": "vehicle-abandonat",  "titol": "🚗 Vehicle abandonat / immobilització","fitxer": "vehicle-abandonat.json", "ordre": 12 }
+  ]
+}
