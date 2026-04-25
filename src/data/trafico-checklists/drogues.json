@@ -167,20 +167,21 @@
       "diferencia_amb_admin": "L'administrativa (Art. 14.1) és per la mera presència. El delicte (379.2) requereix que el TS doni per provada la INFLUÈNCIA — per això cal documentar molt bé els símptomes.",
       "accions_ordenades": [
         "1. Avisar Mossos / Sala",
-        "2. DETENCIÓ del conductor",
-        "3. Lectura de drets (Art. 520 LECrim)",
+        "2. CITACIÓ a procediment ràpid (Art. 795 LECrim) — per regla general NO es deté",
+        "3. Informar el conductor de la citació al Jutjat de Guàrdia i dels seus drets",
         "4. Mostra evidencial salival amb totes les garanties",
         "5. Oferiment d'analítica de sang (centre sanitari)",
         "6. Intervenció permís",
-        "7. Immobilització vehicle",
+        "7. Immobilització vehicle (lliurament a familiar / conductor sustitut o grua)",
         "8. ATESTAT PENAL amb:",
-        "   - Diligència manifestació detingut",
+        "   - Diligència de citació a judici ràpid",
         "   - Diligència informació drets",
         "   - DILIGÈNCIA EXHAUSTIVA DE SÍMPTOMES — clau per al jutjat",
         "   - Diligència recollida mostra + cadena custòdia",
         "   - Tiquets / kit drogotest",
         "9. Informe a Toxicologia (laboratori)",
-        "10. Posada a disposició Jutjat Guàrdia"
+        "10. Posada a disposició Jutjat Guàrdia",
+        "11. NOMÉS es deté si concorren circumstàncies excepcionals: risc de fuga, identificació dubtosa, conducta agressiva o reiteració"
       ],
       "elements_provatoris_clau": [
         "Resultat positiu indiciari (drogotest)",
