@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LO 5/2000 LORPM — Esquema Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #0A1628;
+    --bg-section: #0E2244;
+    --gold: #C8A028;
+    --blue-royal: #1A5C96;
+    --red: #C8281E;
+    --green: #1A7A3C;
+    --text-main: #F0F4FF;
+    --text-secondary: #A8BAD4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+  body {
+    background-color: var(--bg-main);
+    background-image:
+      radial-gradient(ellipse at 15% 10%, rgba(26,92,150,0.2) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 85%, rgba(200,160,40,0.07) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.022)'/%3E%3C/svg%3E");
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-main);
+    padding: 20px 12px 40px;
+  }
+
+  .wrapper { max-width: 720px; margin: 0 auto; }
+
+  /* ── CABECERA ── */
+  .header {
+    display: flex; align-items: center; gap: 18px;
+    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
+    border: 2px solid var(--gold); border-radius: 10px;
+    padding: 22px 24px; margin-bottom: 14px;
+    animation: fadeUp .5s ease both;
+    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+  }
+  .header-text .label {
+    font-family: 'Oswald', sans-serif; font-size: 10px;
+    letter-spacing: 3px; color: var(--gold); text-transform: uppercase;
+  }
+  .header-text h1 {
+    font-family: 'Oswald', sans-serif; font-size: 26px;
+    font-weight: 700; text-transform: uppercase; color: var(--text-main); line-height: 1.1;
+  }
+  .header-text h1 span { color: var(--gold); }
+  .header-text .subtitle { font-size: 12px; color: var(--text-secondary); margin-top: 4px; line-height: 1.5; }
+
+  /* ── FRANJA EDADES ── */
+  .edades-banner {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 8px;
+    margin-bottom: 14px; animation: fadeUp .55s ease .07s both;
+  }
+  .edad-card {
+    border-radius: 8px; padding: 12px 8px; text-align: center;
+    border: 1px solid rgba(200,160,40,0.25);
+  }
+  .edad-card .ec-rango {
+    font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700;
+  }
+  .edad-card .ec-label {
+    font-size: 11px; color: var(--text-secondary); margin-top: 3px; line-height: 1.3;
+  }
+  .ec-menor14  { background: rgba(26,122,60,0.12); border-color:#1A7A3C; }
+  .ec-menor14 .ec-rango { color: #4ACD7A; }
+  .ec-14a15    { background: rgba(200,160,40,0.1); border-color:var(--gold); }
+  .ec-14a15 .ec-rango  { color: var(--gold); }
+  .ec-16a17    { background: rgba(200,40,30,0.15); border-color:var(--red); }
+  .ec-16a17 .ec-rango  { color: #E86050; }
+  .ec-18       { background: rgba(26,92,150,0.2); border-color:var(--blue-royal); }
+  .ec-18 .ec-rango     { color: #6AADDC; }
+
+  /* ── CATEGORÍA ── */
+  .categoria {
+    background: var(--bg-section); border-radius: 10px;
+    margin-bottom: 14px; overflow: hidden;
+    border: 1px solid rgba(200,160,40,0.18);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .categoria:nth-child(1){ animation: fadeUp .6s ease .12s both; }
+  .categoria:nth-child(2){ animation: fadeUp .6s ease .17s both; }
+  .categoria:nth-child(3){ animation: fadeUp .6s ease .22s both; }
+  .categoria:nth-child(4){ animation: fadeUp .6s ease .27s both; }
+  .categoria:nth-child(5){ animation: fadeUp .6s ease .32s both; }
+  .categoria:nth-child(6){ animation: fadeUp .6s ease .37s both; }
+  .categoria:nth-child(7){ animation: fadeUp .6s ease .42s both; }
+  .categoria:nth-child(8){ animation: fadeUp .6s ease .47s both; }
+
+  .cat-header {
+    background: var(--blue-royal); padding: 12px 18px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none; transition: background .2s;
+  }
+  .cat-header:hover { background: #1e6db0; }
+  .cat-header .cat-icon { font-size: 20px; }
+  .cat-header h2 {
+    font-family: 'Oswald', sans-serif; font-size: 17px;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; flex: 1;
+  }
+  .cat-header .art-ref { font-size: 11px; color: rgba(240,244,255,.6); white-space: nowrap; }
+  .cat-header .toggle { font-size: 14px; transition: transform .3s; color: var(--gold); }
+  .cat-header.open .toggle { transform: rotate(180deg); }
+
+  .cat-body { padding: 6px 0; }
+
+  /* ── BLOQUE ── */
+  .bloque {
+    border-left: 3px solid var(--gold); margin: 8px 14px;
+    background: rgba(10,22,40,0.5); border-radius: 0 7px 7px 0; padding: 11px 14px;
+  }
+  .bloque-top { display: flex; align-items: flex-start; gap: 8px; flex-wrap: wrap; }
+  .bloque-nombre {
+    font-family: 'Oswald', sans-serif; font-size: 15px; font-weight: 600;
+    color: var(--text-main); flex: 1; min-width: 160px;
+  }
+  .art-badge {
+    font-size: 10px; font-family: 'Oswald', sans-serif; font-weight: 700;
+    background: rgba(200,160,40,0.15); border: 1px solid var(--gold);
+    color: var(--gold); padding: 2px 7px; border-radius: 4px; white-space: nowrap;
+  }
+  .badge-red {
+    font-size: 10px; font-family: 'Oswald', sans-serif; font-weight: 700;
+    background: rgba(200,40,30,0.25); border: 1px solid var(--red);
+    color: #FF8870; padding: 2px 8px; border-radius: 4px; white-space: nowrap;
+  }
+  .badge-green {
+    font-size: 10px; font-family: 'Oswald', sans-serif; font-weight: 700;
+    background: rgba(26,122,60,0.3); border: 1px solid var(--green);
+    color: #4ACD7A; padding: 2px 8px; border-radius: 4px; white-space: nowrap;
+  }
+  .badge-nuevo {
+    font-size: 9px; font-family: 'Oswald', sans-serif; font-weight: 700;
+    padding: 2px 6px; border-radius: 3px;
+    background: var(--red); color: white; letter-spacing: .5px;
+    animation: pulse 2s infinite; white-space: nowrap;
+  }
+
+  .bloque-desc { font-size: 12.5px; color: var(--text-secondary); margin-top: 5px; line-height: 1.5; }
+  .bloque-desc b { color: var(--gold); font-weight: 700; }
+
+  /* ── PASO LISTA ── */
+  .paso-lista { list-style: none; margin-top: 8px; }
+  .paso-lista li {
+    display: flex; gap: 8px; align-items: flex-start;
+    font-size: 12.5px; color: var(--text-secondary);
+    padding: 4px 0; border-bottom: 1px solid rgba(200,160,40,0.08); line-height: 1.45;
+  }
+  .paso-lista li:last-child { border-bottom: none; }
+  .paso-lista li .num {
+    font-family: 'Oswald', sans-serif; font-size: 11px; font-weight: 700;
+    background: var(--blue-royal); color: white;
+    min-width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .paso-lista li .dot { color: var(--gold); font-size: 16px; line-height: 1; flex-shrink: 0; margin-top: 1px; }
+  .paso-lista b { color: var(--gold); font-weight: 700; }
+
+  /* ── CHIPS ── */
+  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chip {
+    font-size: 11px;
+    background: rgba(26,92,150,0.25); border: 1px solid rgba(26,92,150,0.55);
+    color: var(--text-main); padding: 3px 9px; border-radius: 20px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .chip.rojo  { background: rgba(200,40,30,0.2);  border-color: rgba(200,40,30,0.5); }
+  .chip.verde { background: rgba(26,122,60,0.25); border-color: rgba(26,122,60,0.6); color: #4ACD7A; }
+  .chip.dorado{ background: rgba(200,160,40,0.12);border-color: rgba(200,160,40,0.4); color: var(--gold); }
+
+  /* ── NOTAS ── */
+  .nota-pol {
+    margin-top: 7px; font-size: 11.5px; color: #A8D4C0;
+    background: rgba(26,122,60,0.1); border-left: 2px solid var(--green);
+    padding: 5px 9px; border-radius: 0 5px 5px 0; line-height: 1.5;
+  }
+  .nota-alert {
+    margin-top: 7px; font-size: 11.5px; color: #FFB8A8;
+    background: rgba(200,40,30,0.1); border-left: 3px solid var(--red);
+    padding: 5px 9px; border-radius: 0 5px 5px 0; line-height: 1.5;
+  }
+  .nota-info {
+    margin-top: 7px; font-size: 11.5px; color: #A8C4E0;
+    background: rgba(26,92,150,0.15); border-left: 2px solid var(--blue-royal);
+    padding: 5px 9px; border-radius: 0 5px 5px 0; line-height: 1.5;
+  }
+  .nota-pol b, .nota-alert b, .nota-info b { font-weight: 700; }
+
+  /* ── TABLA ── */
+  .tabla {
+    width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px;
+  }
+  .tabla th {
+    background: rgba(26,92,150,0.4); color: var(--gold);
+    font-family: 'Oswald', sans-serif; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 1px;
+    padding: 7px 10px; text-align: left;
+  }
+  .tabla td {
+    padding: 6px 10px; color: var(--text-secondary);
+    border-bottom: 1px solid rgba(200,160,40,0.08); line-height: 1.4; vertical-align: top;
+  }
+  .tabla tr:last-child td { border-bottom: none; }
+  .tabla td:first-child { color: var(--text-main); font-weight: 600; white-space: nowrap; }
+  .tabla td b { color: var(--gold); }
+
+  /* ── MEDIDAS GRID ── */
+  .medidas-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px;
+  }
+  .medida-card {
+    background: rgba(10,22,40,0.7); border: 1px solid rgba(200,160,40,0.2);
+    border-radius: 6px; padding: 9px 11px;
+  }
+  .medida-card.no-privativa { border-color: rgba(26,122,60,0.4); }
+  .medida-card.privativa    { border-color: rgba(200,40,30,0.4); }
+  .medida-card .mc-tipo {
+    font-size: 9px; font-family: 'Oswald', sans-serif; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
+  }
+  .medida-card.no-privativa .mc-tipo { color: #4ACD7A; }
+  .medida-card.privativa    .mc-tipo { color: #E86050; }
+  .medida-card .mc-nombre {
+    font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 600;
+    color: var(--text-main); line-height: 1.2; margin-bottom: 3px;
+  }
+  .medida-card .mc-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.35; }
+  .medida-card .mc-plazo { font-size: 10.5px; color: var(--gold); margin-top: 3px; font-weight: 700; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg,transparent,var(--gold),transparent);
+    margin: 4px 14px 2px; opacity: .3;
+  }
+
+  /* ── RECUERDA ── */
+  .recuerda {
+    background: var(--gold); border-radius: 10px;
+    padding: 20px 22px; margin-top: 6px;
+    animation: fadeUp .6s ease .7s both;
+  }
+  .recuerda h3 {
+    font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700;
+    text-transform: uppercase; color: #0A1628; margin-bottom: 12px;
+    letter-spacing: 2px; display: flex; align-items: center; gap: 8px;
+  }
+  .recuerda ul { list-style: none; }
+  .recuerda ul li {
+    font-size: 13px; color: #0A1628; padding: 4px 0;
+    display: flex; align-items: flex-start; gap: 6px;
+    border-bottom: 1px solid rgba(10,22,40,0.15); line-height: 1.4;
+  }
+  .recuerda ul li:last-child { border-bottom: none; }
+  .recuerda ul li::before { content:"▶"; font-size:9px; margin-top:4px; flex-shrink:0; }
+
+  /* ── BOTÓN ── */
+  .btn-print {
+    display: block; width: 100%; margin-top: 20px; padding: 14px;
+    background: var(--blue-royal); border: 2px solid var(--gold);
+    color: var(--text-main); font-family: 'Oswald', sans-serif;
+    font-size: 16px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; border-radius: 8px; cursor: pointer;
+    transition: all .2s; animation: fadeUp .6s ease .8s both;
+  }
+  .btn-print:hover { background: var(--gold); color: #0A1628; }
+
+  @media print {
+    body { background: white; color: black; }
+    .btn-print { display: none; }
+    .categoria { break-inside: avoid; }
+    .cat-body { display: block !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- CABECERA -->
+  <div class="header">
+    <div class="escudo">
+      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
+        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
+        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICÍA</text>
+        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
+        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <div class="label">Esquema Operativo Policial</div>
+      <h1>LO <span>5/2000</span> — LORPM</h1>
+      <div class="subtitle">
+        Ley Orgánica reguladora de la <b style="color:var(--gold)">Responsabilidad Penal de los Menores</b><br>
+        12 de enero de 2000 · Modificada por LO 8/2006 y LO 4/2015 (LOPSC) · Ámbito: 14–17 años
+      </div>
+    </div>
+  </div>
+
+  <!-- FRANJA EDADES -->
+  <div class="edades-banner">
+    <div class="edad-card ec-menor14">
+      <div class="ec-rango">– 14</div>
+      <div class="ec-label">Inimputables<br>Solo medidas de protección</div>
+    </div>
+    <div class="edad-card ec-14a15">
+      <div class="ec-rango">14–15</div>
+      <div class="ec-label">LORPM — Tramo I<br>Régimen general (penas más leves)</div>
+    </div>
+    <div class="edad-card ec-16a17">
+      <div class="ec-rango">16–17</div>
+      <div class="ec-label">LORPM — Tramo II<br>Mayor dureza. Posible internamiento largo</div>
+    </div>
+    <div class="edad-card ec-18">
+      <div class="ec-rango">18 +</div>
+      <div class="ec-label">Código Penal ordinario<br>(+ de 18: adultos)</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       1. PRINCIPIOS Y ÁMBITO
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">📖</span>
+      <h2>Principios y Ámbito de Aplicación</h2>
+      <span class="art-ref">Arts. 1–5 LORPM</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Principios Rectores del Sistema</div>
+          <span class="art-badge">Art. 1</span>
+        </div>
+        <div class="bloque-desc">
+          El sistema de responsabilidad penal del menor se basa en el <b>interés superior del menor</b> (no en la retribución punitiva). El objetivo es <b>educativo y rehabilitador</b>, no sancionador en sentido estricto.
+        </div>
+        <div class="chip-row">
+          <span class="chip verde">✔ Interés superior del menor</span>
+          <span class="chip verde">✔ Mínima intervención</span>
+          <span class="chip verde">✔ Resocialización</span>
+          <span class="chip verde">✔ Proporcionalidad</span>
+          <span class="chip dorado">⚖️ Flexibilidad de las medidas</span>
+        </div>
+        <div class="nota-info">ℹ️ La LORPM no es un Derecho Penal de adultos «rebajado». Es un sistema <b>autónomo</b> con principios, órganos y procedimientos propios.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Ámbito Subjetivo — ¿A quién se aplica?</div>
+          <span class="art-badge">Arts. 1–2</span>
+        </div>
+        <table class="tabla">
+          <thead><tr><th>Edad</th><th>Régimen aplicable</th><th>Observaciones</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>Menos de 14</b></td>
+              <td>Inimputable. <b>Protección civil</b> (sistema de protección de menores)</td>
+              <td>Comunicar a la Fiscalía de Menores. No se le puede imputar ningún delito.</td>
+            </tr>
+            <tr>
+              <td><b>14 y 15 años</b></td>
+              <td>LORPM — Tramo I</td>
+              <td>Medidas más leves. Internamiento en régimen cerrado excepcional.</td>
+            </tr>
+            <tr>
+              <td><b>16 y 17 años</b></td>
+              <td>LORPM — Tramo II</td>
+              <td>Mayor responsabilidad. Posible internamiento de hasta 8 años en delitos graves.</td>
+            </tr>
+            <tr>
+              <td><b>18–21 años</b></td>
+              <td>CP ordinario</td>
+              <td>Posibilidad excepcional de aplicar LORPM si el Juez lo estima pertinente y la pena es &lt; 5 años (derogado en la práctica por LO 8/2006).</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="nota-alert">⚠️ <b>Clave operativa:</b> Ante un menor del que se desconoce la edad, se actúa como si fuera menor hasta que se acredite lo contrario. La duda beneficia al menor.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Hechos Delictivos — ¿Qué delitos cubre?</div>
+          <span class="art-badge">Art. 1.1</span>
+        </div>
+        <div class="bloque-desc">
+          Se aplica a menores que cometan <b>hechos tipificados como delito o falta en el Código Penal</b> o en leyes especiales. No exige dolo; basta con que el hecho sea objetivamente delictivo.
+        </div>
+        <div class="chip-row">
+          <span class="chip verde">✔ Delitos y delitos leves (antiguas faltas)</span>
+          <span class="chip verde">✔ Delitos imprudentes</span>
+          <span class="chip rojo">❌ Infracciones administrativas (no aplica LORPM)</span>
+          <span class="chip rojo">❌ Menor de 14 años (no aplica LORPM)</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       2. ACTUACIÓN POLICIAL CON MENORES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🚔</span>
+      <h2>Actuación Policial con Menores</h2>
+      <span class="art-ref">Arts. 17 · 520 bis LECrim</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Detención del Menor — Reglas Específicas</div>
+          <span class="art-badge">Art. 17 LORPM</span>
+          <span class="badge-red">⏱ PLAZOS ESTRICTOS</span>
+        </div>
+        <div class="bloque-desc">
+          La detención de un menor tiene las mismas causas que en adultos, pero con <b>garantías adicionales reforzadas</b>. El menor es especialmente vulnerable.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="num">1</span><span>Informar al menor de sus derechos <b>de inmediato</b> y en lenguaje adaptado a su madurez.</span></li>
+          <li><span class="num">2</span><span>Notificar la detención a los <b>padres, tutores o representante legal</b> inmediatamente. Si no se localizan, al Ministerio Fiscal.</span></li>
+          <li><span class="num">3</span><span>Custodiar al menor en <b>dependencias separadas</b> de los adultos detenidos.</span></li>
+          <li><span class="num">4</span><span>Poner al menor a disposición del <b>Ministerio Fiscal de Menores</b> en el plazo más breve posible (máx. <b>24 horas</b>).</span></li>
+          <li><span class="num">5</span><span>Si el Fiscal no puede recibirlo en ese plazo, el menor queda a disposición del <b>Juez de Menores</b>.</span></li>
+        </ul>
+        <div class="nota-alert">⚠️ El menor detenido <b>NUNCA</b> puede pasar la noche en dependencias policiales ordinarias si hay otra alternativa. Su custodia debe ser en módulo específico o entregado a sus tutores con compromiso de comparecencia.</div>
+        <div class="nota-pol">🚔 <b>Plazo clave:</b> 24 h para ponerle a disposición del Fiscal de Menores (no del Juez de Guardia ordinario como en adultos).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Derechos del Menor Detenido</div>
+          <span class="art-badge">Art. 17.2 LORPM</span>
+        </div>
+        <div class="bloque-desc">Son los mismos que los del adulto (art. 520 LECrim) <b>más derechos adicionales específicos</b>:</div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span>Todos los derechos del <b>art. 520 LECrim</b> (guardar silencio, abogado, médico, intérprete…).</span></li>
+          <li><span class="dot">▸</span><span>Derecho a que se ponga en conocimiento de sus <b>padres/tutores o representante legal</b> la detención.</span></li>
+          <li><span class="dot">▸</span><span>Derecho a ser <b>custodiado separado de adultos</b> en todo momento.</span></li>
+          <li><span class="dot">▸</span><span>El abogado designado para menores debe tener <b>formación especializada</b> (turno de oficio de menores).</span></li>
+          <li><span class="dot">▸</span><span>En la declaración, <b>presencia del letrado es obligatoria e irrenunciable</b> (no puede renunciarse como en adultos).</span></li>
+        </ul>
+        <div class="nota-alert">⚠️ La renuncia al abogado <b>NO es posible en menores</b>. La declaración sin letrado es nula de pleno derecho.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">El Atestado con Menor Implicado</div>
+          <span class="art-badge">Art. 16 LORPM</span>
+        </div>
+        <div class="bloque-desc">El atestado policial tiene particularidades cuando implica a menores como <b>autores</b>.</div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span>Se remite al <b>Ministerio Fiscal de Menores</b> (no al Juzgado de Instrucción ordinario).</span></li>
+          <li><span class="dot">▸</span><span>Debe incluir: <b>datos de filiación del menor, datos de padres/tutores, circunstancias familiares y sociales</b> (si constan).</span></li>
+          <li><span class="dot">▸</span><span>Descripción detallada de los hechos, diligencias practicadas y efectos intervenidos.</span></li>
+          <li><span class="dot">▸</span><span>Se protegen especialmente los <b>datos personales del menor</b>: no se facilitan a medios de comunicación.</span></li>
+        </ul>
+        <div class="nota-pol">🚔 Copia del atestado al Fiscal de Menores. Si hay víctima adulta, también se envía copia al Juzgado de Instrucción para el ejercicio de la acción civil.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Menor de 14 años — Inimputable</div>
+          <span class="art-badge">Art. 3 LORPM</span>
+        </div>
+        <div class="bloque-desc">
+          El menor de 14 años que comete hechos tipificados como delito <b>no puede ser imputado ni sometido a medidas de la LORPM</b>. Se activa el sistema de protección.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span>Comunicar los hechos a la <b>Fiscalía de Menores</b> y a las <b>entidades de protección de menores</b> de la CCAA.</span></li>
+          <li><span class="dot">▸</span><span>Notificar a los <b>padres o tutores</b>.</span></li>
+          <li><span class="dot">▸</span><span>El menor queda bajo la custodia de sus representantes legales o del sistema de protección.</span></li>
+        </ul>
+        <div class="nota-info">ℹ️ Responsabilidad civil: los padres o tutores del menor inimputable sí responden civilmente de los daños causados (arts. 61–64 LORPM).</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       3. MEDIDAS CAUTELARES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">⛓️</span>
+      <h2>Medidas Cautelares</h2>
+      <span class="art-ref">Art. 28 LORPM</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Tipos de Medidas Cautelares</div>
+          <span class="art-badge">Art. 28</span>
+          <span class="badge-red">Solo el Juez de Menores</span>
+        </div>
+        <div class="bloque-desc">
+          Las medidas cautelares las dicta exclusivamente el <b>Juez de Menores</b>, a instancia del Ministerio Fiscal o del abogado del menor. La Policía no puede adoptarlas.
+        </div>
+        <table class="tabla">
+          <thead><tr><th>Medida</th><th>En qué consiste</th><th>Duración máx.</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>Internamiento cautelar</b></td>
+              <td>En centro de menores, régimen cerrado. Solo para delitos graves o reincidencia peligrosa.</td>
+              <td><b>3 meses</b> (prorrogable 1 mes)</td>
+            </tr>
+            <tr>
+              <td><b>Libertad vigilada cautelar</b></td>
+              <td>El menor queda bajo supervisión del equipo técnico. Reglas de conducta.</td>
+              <td>Hasta la sentencia</td>
+            </tr>
+            <tr>
+              <td><b>Convivencia con grupo educativo</b></td>
+              <td>El menor convive con una familia o grupo formativo alternativa a su entorno.</td>
+              <td>Hasta la sentencia</td>
+            </tr>
+            <tr>
+              <td><b>Alejamiento de la víctima</b></td>
+              <td>Prohibición de acercarse o comunicarse con la víctima o testigos.</td>
+              <td>Hasta la sentencia</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="nota-alert">⚠️ El internamiento cautelar de menores es la medida más restrictiva y debe ser <b>excepcional, proporcional y revisable</b>. La privación de libertad de un menor siempre tiene que ser último recurso.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       4. MEDIDAS DEFINITIVAS (SENTENCIA)
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">📜</span>
+      <h2>Medidas Definitivas — Sentencia</h2>
+      <span class="art-ref">Arts. 7 · 9–11 LORPM</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Medidas No Privativas de Libertad</div>
+          <span class="badge-green">✔ Preferentes</span>
+        </div>
+        <div class="medidas-grid">
+          <div class="medida-card no-privativa">
+            <div class="mc-tipo">No privativa</div>
+            <div class="mc-nombre">Amonestación</div>
+            <div class="mc-desc">Reprensión del Juez al menor. La medida más leve. Para delitos leves de primer infractor.</div>
+          </div>
+          <div class="medida-card no-privativa">
+            <div class="mc-tipo">No privativa</div>
+            <div class="mc-nombre">Libertad Vigilada</div>
+            <div class="mc-desc">Seguimiento por el equipo técnico. Reglas de conducta, obligaciones de asistencia.</div>
+            <div class="mc-plazo">⏱ Máx. 2 años (14-15) · 3 años (16-17)</div>
+          </div>
+          <div class="medida-card no-privativa">
+            <div class="mc-tipo">No privativa</div>
+            <div class="mc-nombre">Prestaciones en Beneficio de la Comunidad</div>
+            <div class="mc-desc">Trabajos no retribuidos en beneficio de la comunidad. Con consentimiento del menor.</div>
+            <div class="mc-plazo">⏱ Máx. 100 horas (14-15) · 150 h (16-17)</div>
+          </div>
+          <div class="medida-card no-privativa">
+            <div class="mc-tipo">No privativa</div>
+            <div class="mc-nombre">Permanencia de Fin de Semana</div>
+            <div class="mc-desc">Permanecer en domicilio o centro los fines de semana. Sin privación total de libertad.</div>
+            <div class="mc-plazo">⏱ Máx. 8 fines de semana (14-15) · 12 (16-17)</div>
+          </div>
+          <div class="medida-card no-privativa">
+            <div class="mc-tipo">No privativa</div>
+            <div class="mc-nombre">Convivencia con Grupo Educativo</div>
+            <div class="mc-desc">Convivir con familia o grupo educativo distinto al de origen durante un período.</div>
+            <div class="mc-plazo">⏱ Máx. 2 años</div>
+          </div>
+          <div class="medida-card no-privativa">
+            <div class="mc-tipo">No privativa</div>
+            <div class="mc-nombre">Tratamiento Ambulatorio / Internamiento Terapéutico No Cerrado</div>
+            <div class="mc-desc">Para menores con adicciones o alteraciones psíquicas. Seguimiento profesional.</div>
+          </div>
+          <div class="medida-card no-privativa">
+            <div class="mc-tipo">No privativa</div>
+            <div class="mc-nombre">Asistencia a Centro de Día</div>
+            <div class="mc-desc">El menor acude a un centro educativo o formativo durante el día. Mantiene su domicilio.</div>
+          </div>
+          <div class="medida-card no-privativa">
+            <div class="mc-tipo">No privativa</div>
+            <div class="mc-nombre">Prohibición de Actividades / Aproximarse</div>
+            <div class="mc-desc">Prohibición de acudir a determinados lugares, comunicarse con víctima o con ciertas personas.</div>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Medidas Privativas de Libertad — Internamiento</div>
+          <span class="art-badge">Arts. 9–11</span>
+          <span class="badge-red">⚠️ Último recurso</span>
+        </div>
+        <div class="medidas-grid">
+          <div class="medida-card privativa">
+            <div class="mc-tipo">Privativa — Régimen Cerrado</div>
+            <div class="mc-nombre">Internamiento Cerrado</div>
+            <div class="mc-desc">El menor reside en el centro. Actividades formativas, educativas y laborales dentro del recinto.</div>
+            <div class="mc-plazo">
+              ⏱ 14-15: máx. 2 años (6 años en delitos graves)<br>
+              ⏱ 16-17: máx. 6 años (8–10 años en delitos muy graves)
+            </div>
+          </div>
+          <div class="medida-card privativa">
+            <div class="mc-tipo">Privativa — Régimen Semiabierto</div>
+            <div class="mc-nombre">Internamiento Semiabierto</div>
+            <div class="mc-desc">Residencia en centro, pero con salidas para actividades educativas, laborales o de ocio fuera.</div>
+            <div class="mc-plazo">⏱ Mismos plazos que cerrado</div>
+          </div>
+          <div class="medida-card privativa">
+            <div class="mc-tipo">Privativa — Régimen Abierto</div>
+            <div class="mc-nombre">Internamiento Abierto</div>
+            <div class="mc-desc">Realiza todas las actividades en el entorno comunitario. Pernocta en el centro. Menor restricción.</div>
+          </div>
+          <div class="medida-card privativa">
+            <div class="mc-tipo">Privativa — Terapéutico</div>
+            <div class="mc-nombre">Internamiento Terapéutico</div>
+            <div class="mc-desc">Para menores con adicciones, anomalías psíquicas o alteraciones de la percepción. Centros especializados.</div>
+          </div>
+        </div>
+        <div class="nota-alert">⚠️ <b>Delitos muy graves (asesinato, agresión sexual con penetración…):</b> 16-17 años → hasta <b>10 años de internamiento cerrado</b> + 5 años libertad vigilada. En homicidio/asesinato en grupo: hasta <b>8 años cerrado</b>.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Duración Máxima de las Medidas según Edad y Delito</div>
+          <span class="art-badge">Art. 9 LORPM</span>
+        </div>
+        <table class="tabla">
+          <thead><tr><th>Supuesto</th><th>14–15 años</th><th>16–17 años</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>Delito leve / menos grave sin violencia</b></td>
+              <td>Máx. <b>1 año</b> cualquier medida</td>
+              <td>Máx. <b>2 años</b></td>
+            </tr>
+            <tr>
+              <td><b>Delito grave (pena adulto &gt; 5 años)</b></td>
+              <td>Internamiento cerrado máx. <b>2 años</b></td>
+              <td>Internamiento cerrado máx. <b>6 años</b></td>
+            </tr>
+            <tr>
+              <td><b>Homicidio / Asesinato / Agresión sexual grave</b></td>
+              <td>Internamiento cerrado máx. <b>6 años</b></td>
+              <td>Internamiento cerrado máx. <b>8–10 años</b></td>
+            </tr>
+            <tr>
+              <td><b>Terrorismo</b></td>
+              <td>Hasta <b>6 años</b></td>
+              <td>Hasta <b>10 años</b> + libertad vigilada</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       5. EL PROCEDIMIENTO — FASES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🏛️</span>
+      <h2>El Procedimiento de Menores — Fases</h2>
+      <span class="art-ref">Arts. 16–41 LORPM</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Órganos del Sistema de Menores</div>
+        </div>
+        <table class="tabla">
+          <thead><tr><th>Órgano</th><th>Función</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>Policía Judicial</b></td>
+              <td>Investiga hechos, detiene al menor, elabora atestado y lo remite al Fiscal de Menores.</td>
+            </tr>
+            <tr>
+              <td><b>Fiscal de Menores</b></td>
+              <td>Director de la investigación. Decide incoar expediente, archivarlo o solicitar mediación. Ejerce la acusación.</td>
+            </tr>
+            <tr>
+              <td><b>Equipo Técnico</b></td>
+              <td>Psicólogos, pedagogos y trabajadores sociales. Elaboran informe sobre el menor para orientar la medida.</td>
+            </tr>
+            <tr>
+              <td><b>Juez de Menores</b></td>
+              <td>Impone las medidas cautelares y definitivas. Controla la ejecución de las medidas.</td>
+            </tr>
+            <tr>
+              <td><b>Entidad pública (CCAA)</b></td>
+              <td>Ejecuta las medidas de internamiento y de medio abierto.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Fases del Procedimiento</div>
+        </div>
+        <ul class="paso-lista">
+          <li><span class="num">1</span><span><b>Investigación policial:</b> Policía actúa, redacta atestado y lo remite al Fiscal de Menores (no al Juzgado de Instrucción).</span></li>
+          <li><span class="num">2</span><span><b>Fase de instrucción (Fiscal):</b> El Fiscal dirige la investigación. Puede archivar, derivar a mediación o incoar expediente.</span></li>
+          <li><span class="num">3</span><span><b>Informe del Equipo Técnico:</b> Evaluación psicosocial del menor. El Juez lo tiene en cuenta para la medida.</span></li>
+          <li><span class="num">4</span><span><b>Audiencia (juicio):</b> Ante el Juez de Menores. Presencia obligatoria del menor, letrado, Fiscal y representantes legales.</span></li>
+          <li><span class="num">5</span><span><b>Sentencia y ejecución:</b> El Juez dicta medida. La CCAA la ejecuta. El Juez controla la ejecución.</span></li>
+          <li><span class="num">6</span><span><b>Recursos:</b> Apelación ante la Audiencia Provincial. Casación ante el Tribunal Supremo.</span></li>
+        </ul>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Soluciones Extrajudiciales — Mediación</div>
+          <span class="art-badge">Art. 19 LORPM</span>
+          <span class="badge-green">✔ Prioritario</span>
+        </div>
+        <div class="bloque-desc">
+          El Fiscal puede pedir al Equipo Técnico que intente una <b>solución extrajudicial</b> (conciliación o reparación) entre el menor y la víctima. Si tiene éxito, el Fiscal puede <b>desistir del expediente</b>.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span><b>Conciliación:</b> el menor reconoce el daño causado y se disculpa. La víctima acepta las disculpas.</span></li>
+          <li><span class="dot">▸</span><span><b>Reparación:</b> el menor realiza actividades en beneficio de la víctima o de la comunidad.</span></li>
+          <li><span class="dot">▸</span><span>Solo para delitos <b>menos graves sin violencia ni intimidación graves</b>.</span></li>
+        </ul>
+        <div class="nota-info">ℹ️ La mediación es coherente con el principio educativo de la ley. Un menor que repara el daño interioriza mejor las consecuencias de sus actos.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       6. RESPONSABILIDAD CIVIL
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">💶</span>
+      <h2>Responsabilidad Civil de Padres y Tutores</h2>
+      <span class="art-ref">Arts. 61–64 LORPM</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Responsabilidad Solidaria de Padres / Tutores</div>
+          <span class="art-badge">Art. 61</span>
+        </div>
+        <div class="bloque-desc">
+          Los <b>padres, tutores, acogedores o guardadores</b> del menor son <b>responsables civiles solidarios</b> por los daños y perjuicios causados por los hechos del menor.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span>La responsabilidad civil se exige en el <b>mismo procedimiento de menores</b>, no en un juicio civil separado.</span></li>
+          <li><span class="dot">▸</span><span>Es <b>solidaria:</b> la víctima puede reclamar al menor o directamente a los padres/tutores.</span></li>
+          <li><span class="dot">▸</span><span>Los padres pueden quedar exentos si prueban que <b>no tuvieron culpa ni negligencia</b> en los hechos.</span></li>
+          <li><span class="dot">▸</span><span>También responden civilmente los <b>aseguradores</b> del menor o de los padres (pólizas de hogar, responsabilidad civil familiar).</span></li>
+        </ul>
+        <div class="nota-pol">🚔 En el atestado, identificar siempre a los padres/tutores del menor y sus datos de contacto. Facilitará la reclamación civil posterior de la víctima.</div>
+        <div class="nota-info">ℹ️ Menor inimputable (&lt; 14 años): también responden civilmente los padres/tutores por los daños causados por su hijo.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       7. MENORES VÍCTIMAS
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🛡️</span>
+      <h2>El Menor como Víctima — Protección Especial</h2>
+      <span class="art-ref">LO 8/2021 · Estatuto Víctima · CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Principios de Actuación con Menor Víctima</div>
+          <span class="badge-red">⚠️ Máxima protección</span>
+        </div>
+        <div class="bloque-desc">
+          Cuando el menor es <b>víctima</b> de un delito (maltrato, abuso sexual, abandono, explotación…), la actuación policial tiene protocolos específicos de especial protección.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span><b>Declaración única:</b> evitar que el menor repita su relato. Una sola declaración grabada en vídeo (prueba preconstituida).</span></li>
+          <li><span class="dot">▸</span><span>La declaración la toma un <b>agente especializado</b> (si existe unidad UFAM, GRUME o similar) en sala adaptada.</span></li>
+          <li><span class="dot">▸</span><span>El menor NO puede ser confrontado con el presunto agresor.</span></li>
+          <li><span class="dot">▸</span><span>Notificación inmediata a los <b>Servicios de Protección de Menores</b> de la CCAA.</span></li>
+          <li><span class="dot">▸</span><span>Si el agresor es un <b>progenitor</b>, el menor queda bajo tutela cautelar de la Administración hasta decisión judicial.</span></li>
+        </ul>
+        <div class="nota-alert">⚠️ <b>Abuso sexual a menor:</b> Nunca preguntar detalles del abuso más allá de lo imprescindible para garantizar su seguridad inmediata. El interrogatorio lo hace el equipo especializado.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Maltrato — Obligación de Comunicar</div>
+          <span class="art-badge">LO 8/2021 Art. 13</span>
+        </div>
+        <div class="bloque-desc">
+          Cualquier persona —y especialmente los profesionales que trabajan con menores— tiene <b>obligación de comunicar</b> a la autoridad cualquier indicio o sospecha de maltrato a un menor.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span>Indicios físicos: moratones en zonas no habituales, quemaduras, fracturas sin explicación coherente.</span></li>
+          <li><span class="dot">▸</span><span>Indicios conductuales: retraimiento, miedo, agresividad, comportamiento sexualizado inapropiado para la edad.</span></li>
+          <li><span class="dot">▸</span><span>No es necesaria certeza: con <b>indicios razonables</b> basta para comunicar a Servicios Sociales y Fiscalía de Menores.</span></li>
+        </ul>
+        <div class="nota-pol">🚔 Fotografiar lesiones visibles (con consentimiento del menor o de quien le representa, o por urgencia). El parte médico de urgencias es prueba fundamental.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       8. SITUACIONES ESPECIALES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">⚠️</span>
+      <h2>Situaciones Especiales y Delitos Graves</h2>
+      <span class="art-ref">Arts. 10 · 14 · 25 LORPM</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Menor Reincidente — Endurecimiento</div>
+          <span class="art-badge">Art. 10.2 · LO 8/2006</span>
+        </div>
+        <div class="bloque-desc">
+          La reforma de 2006 introdujo un endurecimiento para menores <b>reincidentes o autores de delitos graves</b>. La reincidencia permite elevar significativamente las medidas.
+        </div>
+        <div class="chip-row">
+          <span class="chip rojo">⬆ Internamiento cerrado cuando hay reincidencia</span>
+          <span class="chip rojo">⬆ Medidas más duras para 16-17 años</span>
+          <span class="chip dorado">Antecedentes penales de menores: se cancelan a los 3 meses de cumplir 18 años si no hay nueva condena</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Bandas Juveniles / Grupos Organizados</div>
+          <span class="art-badge">Arts. 9.2 · 10 LORPM</span>
+        </div>
+        <div class="bloque-desc">
+          Participar en un grupo organizado para cometer delitos es <b>circunstancia agravante</b> en menores. Permite acceder a los regímenes más duros de la LORPM.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span>Documentar la pertenencia al grupo en el atestado (mensajes, tatuajes, testigos, objetos…).</span></li>
+          <li><span class="dot">▸</span><span>Identificar a todos los miembros del grupo aunque solo uno sea detenido.</span></li>
+          <li><span class="dot">▸</span><span>Comunicar al <b>Fiscal de Menores</b> y, si hay adultos implicados, también al Fiscal ordinario.</span></li>
+        </ul>
+        <div class="nota-pol">🚔 Si el grupo tiene miembros mayores y menores, se abren dos procedimientos paralelos: CP ordinario para los adultos y LORPM para los menores.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Menor No Acompañado Extranjero (MENA)</div>
+        </div>
+        <div class="bloque-desc">
+          El menor extranjero no acompañado tiene los <b>mismos derechos que un menor español</b>. Su condición de extranjero no modifica la aplicación de la LORPM.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span>Verificar la edad si hay dudas (remisión a medicina forense para prueba ósea).</span></li>
+          <li><span class="dot">▸</span><span>Comunicar a la <b>entidad de protección de menores</b> de la CCAA para su tutela.</span></li>
+          <li><span class="dot">▸</span><span>Comunicar a la <b>oficina consular</b> del país de origen si se conoce.</span></li>
+          <li><span class="dot">▸</span><span>Garantizar intérprete en todas las actuaciones.</span></li>
+        </ul>
+        <div class="nota-alert">⚠️ La duda sobre la edad se resuelve a favor del menor: se le aplica la LORPM hasta que se acredite que tiene 18 o más años.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       RECUERDA
+  ══════════════════════════════════════════ -->
+  <div class="recuerda">
+    <h3>📋 Recuerda — Claves LORPM</h3>
+    <ul>
+      <li><b>Menos de 14 años:</b> inimputable. No se aplica LORPM. Comunicar a Fiscalía de Menores y Servicios de Protección. Los padres responden civilmente.</li>
+      <li><b>14–17 años:</b> LORPM. Atestado al Fiscal de Menores (no al Juzgado de Instrucción ordinario).</li>
+      <li>El menor detenido se pone a disposición del <b>Fiscal de Menores en máximo 24 horas</b>. Custodiarlo separado de adultos siempre.</li>
+      <li>La renuncia al abogado <b>NO es posible en menores</b>. La declaración sin letrado presente es nula de pleno derecho.</li>
+      <li>Siempre notificar la detención a los <b>padres o tutores de forma inmediata</b>. Si no se localizan, al Ministerio Fiscal.</li>
+      <li>La <b>reincidencia</b> permite aplicar medidas más graves (internamiento cerrado). Reflejar antecedentes en el atestado.</li>
+      <li>Con <b>menores de grupos mixtos</b> (adultos + menores): dos atestados separados. Uno al Juzgado de Instrucción y otro al Fiscal de Menores.</li>
+      <li>El menor como <b>víctima</b>: declaración única grabada, evitar repetir el relato, notificar a Servicios de Protección.</li>
+      <li>Los <b>datos personales del menor</b> (infractor o víctima) no se facilitan a medios de comunicación bajo ningún concepto.</li>
+      <li>MENA — menor extranjero no acompañado: mismos derechos que menor español. La duda sobre la edad siempre favorece al menor.</li>
+      <li>Los <b>antecedentes penales de menores</b> se cancelan a los 3 meses de cumplir 18 años (si no hay nueva condena).</li>
+    </ul>
+  </div>
+
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+
+</div>
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    if (body.style.display === 'none' || body.style.display === '') {
+      body.style.display = 'block';
+      body.style.animation = 'fadeUp .3s ease';
+    } else {
+      body.style.display = 'none';
+    }
+  }
+  document.querySelector('.cat-body').style.display = 'block';
+</script>
+</body>
+</html>

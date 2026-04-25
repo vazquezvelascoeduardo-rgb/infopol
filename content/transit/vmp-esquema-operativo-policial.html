@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VMP — Esquema Operativo Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #0A1628;
+    --bg-section: #0E2244;
+    --gold: #C8A028;
+    --blue-royal: #1A5C96;
+    --red: #C8281E;
+    --green: #1A7A3C;
+    --text-main: #F0F4FF;
+    --text-secondary: #A8BAD4;
+    --border: #C8A028;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  body {
+    background-color: var(--bg-main);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-main);
+    padding: 20px 12px 40px;
+  }
+
+  .wrapper { max-width: 720px; margin: 0 auto; }
+
+  /* ── CABECERA ── */
+  .header {
+    display: flex; align-items: center; gap: 18px;
+    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 8px;
+    animation: fadeUp .5s ease both;
+    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+  }
+  .escudo svg { flex-shrink: 0; }
+  .header-text { flex: 1; }
+  .header-text .label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .header-text h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px; font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-main); line-height: 1.1;
+  }
+  .header-text h1 span { color: var(--gold); }
+  .header-text .subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* ── CLASIFICACIÓN GENERAL ── */
+  .clasificacion {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px; margin-bottom: 20px;
+    animation: fadeUp .6s ease .1s both;
+  }
+  .clas-card {
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+    border: 1px solid rgba(200,160,40,0.3);
+  }
+  .clas-card .icon { font-size: 22px; margin-bottom: 4px; }
+  .clas-card .tipo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .clas-card .pena-max {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+  }
+  .clas-leve   { background: rgba(26,122,60,0.15); border-color: var(--green); }
+  .clas-menos  { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
+  .clas-grave  { background: rgba(200,40,30,0.15); border-color: var(--red); }
+  .clas-leve .tipo   { color: #4ACD7A; }
+  .clas-menos .tipo  { color: #6AADDC; }
+  .clas-grave .tipo  { color: #E86050; }
+
+  /* ── BLOQUE CATEGORÍA ── */
+  .categoria {
+    background: var(--bg-section);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(200,160,40,0.2);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
+  .categoria:nth-child(2)  { animation: fadeUp .6s ease .3s both; }
+  .categoria:nth-child(3)  { animation: fadeUp .6s ease .35s both; }
+  .categoria:nth-child(4)  { animation: fadeUp .6s ease .4s both; }
+  .categoria:nth-child(5)  { animation: fadeUp .6s ease .45s both; }
+  .categoria:nth-child(6)  { animation: fadeUp .6s ease .5s both; }
+  .categoria:nth-child(7)  { animation: fadeUp .6s ease .55s both; }
+  .categoria:nth-child(8)  { animation: fadeUp .6s ease .6s both; }
+
+  .cat-header {
+    background: var(--blue-royal);
+    padding: 12px 18px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none;
+    transition: background .2s;
+  }
+  .cat-header:hover { background: #1e6db0; }
+  .cat-header .cat-icon { font-size: 20px; }
+  .cat-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px; flex: 1;
+  }
+  .cat-header .art-ref {
+    font-size: 11px;
+    color: rgba(240,244,255,0.65);
+    white-space: nowrap;
+  }
+  .cat-header .toggle {
+    font-size: 14px;
+    transition: transform .3s;
+    color: var(--gold);
+  }
+  .cat-header.open .toggle { transform: rotate(180deg); }
+
+  .cat-body { padding: 6px 0; }
+
+  /* ── ARTÍCULO / DELITO ── */
+  .delito {
+    border-left: 3px solid var(--gold);
+    margin: 8px 14px;
+    background: rgba(10,22,40,0.5);
+    border-radius: 0 7px 7px 0;
+    padding: 10px 14px;
+  }
+  .delito-top {
+    display: flex; align-items: flex-start;
+    gap: 10px; flex-wrap: wrap;
+  }
+  .delito-nombre {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px; font-weight: 600;
+    color: var(--text-main);
+    flex: 1; min-width: 160px;
+  }
+  .art-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    background: rgba(200,160,40,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .tipo-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .badge-leve   { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
+  .badge-menos  { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
+  .badge-grave  { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
+  .badge-mixto  { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
+
+  .delito-desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    line-height: 1.5;
+  }
+  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
+
+  .pena-row {
+    display: flex; flex-wrap: wrap;
+    gap: 6px; margin-top: 7px;
+  }
+  .pena-chip {
+    font-size: 11px;
+    background: rgba(26,92,150,0.25);
+    border: 1px solid rgba(26,92,150,0.6);
+    color: var(--text-main);
+    padding: 3px 9px;
+    border-radius: 20px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .pena-chip.agravada {
+    background: rgba(200,40,30,0.2);
+    border-color: rgba(200,40,30,0.5);
+  }
+  .pena-chip.multa {
+    background: rgba(200,160,40,0.12);
+    border-color: rgba(200,160,40,0.4);
+    color: var(--gold);
+  }
+
+  /* ── FICHA NOMENCLÁTOR ── */
+  .nomenclator {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 0;
+    margin-top: 8px;
+    background: rgba(10,22,40,0.8);
+    border: 1px solid rgba(200,160,40,0.35);
+    border-radius: 5px;
+    overflow: hidden;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+  .nomenclator .nom-header {
+    background: rgba(200,160,40,0.15);
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    text-align: center;
+    border-right: 1px solid rgba(200,160,40,0.2);
+  }
+  .nomenclator .nom-header:last-child { border-right: none; }
+  .nomenclator .nom-cell {
+    padding: 6px 8px;
+    font-size: 11.5px;
+    color: var(--text-main);
+    text-align: center;
+    border-right: 1px solid rgba(200,160,40,0.15);
+    background: rgba(10,22,40,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+  .nomenclator .nom-cell:last-child { border-right: none; }
+  .nomenclator .nom-cell.nom-art { color: var(--gold); font-family: 'Oswald', sans-serif; letter-spacing: 0.5px; }
+  .nomenclator .nom-cell.nom-cal-L { color: #4ACD7A; }
+  .nomenclator .nom-cell.nom-cal-G { color: #6AADDC; }
+  .nomenclator .nom-cell.nom-cal-MG { color: #E86050; }
+  .nomenclator .nom-cell.nom-multa { 
+    color: var(--gold); 
+    font-family: 'Oswald', sans-serif; 
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .nomenclator .nom-cell.nom-multa-alta { color: #E86050; }
+
+  .nota-agrav {
+    margin-top: 6px; font-size: 11.5px;
+    color: #E08888;
+    background: rgba(200,40,30,0.08);
+    border-left: 2px solid var(--red);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+  }
+  .nota-policial {
+    margin-top: 6px; font-size: 11.5px;
+    color: #A8D4C0;
+    background: rgba(26,122,60,0.1);
+    border-left: 2px solid var(--green);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+  }
+
+
+  /* ── CHAPA MULTA (Nomenclátor rápido) ── */
+  .multa-badge {
+    font-size: 11.5px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    background: var(--gold);
+    color: #0A1628;
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--gold);
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(200,160,40,0.25);
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .multa-badge.multa-alta {
+    background: var(--red);
+    color: #FFEBE8;
+    border-color: var(--red);
+    box-shadow: 0 1px 3px rgba(200,40,30,0.3);
+  }
+  .multa-badge.multa-penal {
+    background: linear-gradient(135deg, #1a0c0c 0%, #3a1414 100%);
+    color: #FF8070;
+    border: 1px solid var(--red);
+    box-shadow: 0 1px 4px rgba(200,40,30,0.4);
+  }
+  .multa-badge.multa-baja {
+    background: var(--green);
+    color: #E0FFF0;
+    border-color: var(--green);
+  }
+  @media (max-width: 500px) {
+    .multa-badge { font-size: 10.5px; padding: 2px 7px; }
+  }
+
+  /* ── RECUERDA ── */
+  .recuerda {
+    background: var(--gold);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-top: 6px;
+    animation: fadeUp .6s ease .7s both;
+  }
+  .recuerda h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px; font-weight: 700;
+    text-transform: uppercase;
+    color: #0A1628;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .recuerda ul { list-style: none; }
+  .recuerda ul li {
+    font-size: 13px;
+    color: #0A1628;
+    padding: 4px 0;
+    display: flex; align-items: flex-start; gap: 6px;
+    border-bottom: 1px solid rgba(10,22,40,0.15);
+    line-height: 1.4;
+  }
+  .recuerda ul li:last-child { border-bottom: none; }
+  .recuerda ul li::before {
+    content: "▶";
+    font-size: 9px; margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── REFORMA BANNER ── */
+  .reforma-banner {
+    background: linear-gradient(135deg, #8B1A10 0%, #C8281E 50%, #8B1A10 100%);
+    border: 2px solid #FF6050;
+    border-radius: 8px;
+    padding: 10px 18px;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 12px;
+    animation: fadeUp .55s ease .05s both;
+    box-shadow: 0 0 20px rgba(200,40,30,0.3);
+  }
+  .reforma-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
+  .reforma-banner .ref-text { flex: 1; }
+  .reforma-banner .ref-ley {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: #FFD0CC;
+  }
+  .reforma-banner .ref-desc {
+    font-size: 12px;
+    color: rgba(255,220,215,0.85);
+    margin-top: 2px;
+  }
+  .reforma-banner .ref-fecha {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px; font-weight: 700;
+    color: #FFD0CC;
+    background: rgba(0,0,0,0.2);
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    border: 1px solid rgba(255,200,190,0.3);
+  }
+
+  /* ── NUEVO etiqueta ── */
+  .badge-nuevo {
+    font-size: 9px;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: #C8281E; color: white;
+    letter-spacing: 0.5px;
+    animation: pulse 2s infinite;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .nota-reforma {
+    margin-top: 6px; font-size: 11.5px;
+    color: #FFB8B0;
+    background: rgba(200,40,30,0.12);
+    border-left: 3px solid #C8281E;
+    padding: 5px 9px;
+    border-radius: 0 5px 5px 0;
+    line-height: 1.5;
+  }
+  .nota-reforma b { color: #FF8070; }
+
+  /* ── BOTÓN IMPRIMIR ── */
+  .btn-print {
+    display: block; width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: var(--blue-royal);
+    border: 2px solid var(--gold);
+    color: var(--text-main);
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px;
+    border-radius: 8px;
+    cursor: pointer; transition: all .2s;
+    animation: fadeUp .6s ease .8s both;
+  }
+  .btn-print:hover {
+    background: var(--gold);
+    color: #0A1628;
+  }
+
+  /* ── DIVISOR ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 4px 14px 2px;
+    opacity: .35;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 500px) {
+    .nomenclator .nom-header { font-size: 8px; padding: 3px 4px; }
+    .nomenclator .nom-cell { font-size: 10.5px; padding: 5px 4px; }
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .btn-print { display: none; }
+    .categoria { break-inside: avoid; }
+    .cat-body { display: block !important; }
+    .nomenclator { background: #f5f5f5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- CABECERA -->
+  <div class="header">
+    <div class="escudo">
+      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
+        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
+        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICÍA</text>
+        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
+        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <div class="label">Esquema Operativo Policial</div>
+      <h1>VMP · Patinete <span>Eléctrico</span></h1>
+      <div class="subtitle">Nomenclátor, normativa y operativa · Precepto · Calificación · Multa · Policía Local</div>
+    </div>
+  </div>
+
+  <!-- CLASIFICACIÓN -->
+  <div class="clasificacion">
+    <div class="clas-card clas-leve">
+      <div class="icon">🛴</div>
+      <div class="tipo">VMP Estándar</div>
+      <div class="pena-max">Eléctrico, 1 plaza<br>6–25 km/h diseño<br>&lt; 25 kg / &lt; 14 km/h extra</div>
+    </div>
+    <div class="clas-card clas-menos">
+      <div class="icon">⚡</div>
+      <div class="tipo">VMP Pesado</div>
+      <div class="pena-max">&gt; 25 kg o &gt; 14 km/h<br>Seguro desde 26/01/2026<br>Sin registro previo</div>
+    </div>
+    <div class="clas-card clas-grave">
+      <div class="icon">🚫</div>
+      <div class="tipo">Asimilado Ciclomotor</div>
+      <div class="pena-max">&gt; 25 km/h diseño<br>Patinete "trucado"<br>Matrícula + carnet AM</div>
+    </div>
+  </div>
+
+  <!-- BANNER REFORMA -->
+  <div class="reforma-banner">
+    <div class="ref-icon">🔴</div>
+    <div class="ref-text">
+      <div class="ref-ley">⚡ Ley 5/2025 + RD 52/2026 · Seguro + Registro DGT</div>
+      <div class="ref-desc">Seguro RC obligatorio desde 26/01/2026 · Registro DGT con placa M0000LLL · Solo VMP certificados desde 22/01/2027</div>
+    </div>
+    <div class="ref-fecha">BOE 25/07/2025<br>En vigor 26/01/2026</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       1. DEFINICIÓN VMP · QUÉ ES Y QUÉ NO ES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">📖</span>
+      <h2>Definición VMP · Qué es y qué no es</h2>
+      <span class="art-ref">RD 970/2020 · Ley 5/2025</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Vehículo de Movilidad Personal (VMP)</div>
+          <span class="art-badge">Anexo I LTSV</span>
+          <span class="tipo-badge badge-mixto">Definición legal</span>
+        </div>
+        <div class="delito-desc">
+          Vehículo de <b>una o más ruedas</b>, dotado de <b>una única plaza</b>, propulsado <b>exclusivamente por motor eléctrico</b>, con <b>velocidad máxima por diseño entre 6 y 25 km/h</b>. Incluye: patinetes eléctricos, monociclos, hoverboards autoequilibrantes y similares.
+        </div>
+        <div class="nota-policial">🚔 Primer filtro en control: ¿eléctrico puro + 1 plaza + Vmáx ≤ 25 km/h? Sí → VMP · No → ciclomotor (requiere matrícula y carnet AM) o excluido.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Vehículos NO considerados VMP</div>
+          <span class="art-badge">Anexo I excl.</span>
+          <span class="tipo-badge badge-menos">Exclusiones</span>
+        </div>
+        <div class="delito-desc">
+          Quedan <b>excluidos</b>: <b>bicicletas de pedaleo asistido</b> (EPAC) con motor ≤ 250 W cortado a 25 km/h · <b>sillas de ruedas eléctricas</b> y ayudas a la movilidad para discapacidad · <b>juguetes</b> eléctricos infantiles · vehículos para Fuerzas Armadas.
+        </div>
+        <div class="nota-agrav">⚠️ <b>Speed pedelec</b> (asistencia &gt; 25 km/h, motor &gt; 250 W o acelerador sin pedalear) → <b>ciclomotor L1e-B</b>: requiere matrícula, carnet AM, casco y seguro de automóvil.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Patinete Asimilado a Ciclomotor</div>
+          <span class="art-badge">RGV Anexo II</span>
+          <span class="tipo-badge badge-grave">Ciclomotor L1e-B</span>
+        <span class="multa-badge multa-alta">⚠️ 500 € + inmov.</span>
+        </div>
+        <div class="delito-desc">
+          Si el patinete <b>supera por diseño los 25 km/h</b> o ha sido <b>manipulado ("trucado")</b>, deja de ser VMP y se asimila a ciclomotor: requiere matrícula, permiso AM, ITV, seguro de automóvil y casco.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Sanción</div>
+          <div class="nom-cell nom-art">Art. 4 LTSV + Anexo II RGV</div>
+          <div class="nom-cell nom-cal-MG">MUY GRAVE</div>
+          <div class="nom-cell nom-multa nom-multa-alta">500 € + inmov.</div>
+        </div>
+        <div class="nota-policial">🚔 Inmovilización + verificación ficha técnica. Si circula sin carnet AM → atestado por <b>Art. 384 CP</b> (conducción sin permiso).</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       2. REQUISITOS TÉCNICOS · MANUAL DGT
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🔧</span>
+      <h2>Requisitos Técnicos · Manual DGT</h2>
+      <span class="art-ref">Manual Características · RGV Anexo XIX</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Certificado de Circulación</div>
+          <span class="art-badge">Manual DGT</span>
+          <span class="tipo-badge badge-menos">Obligatorio</span>
+        <span class="multa-badge">💶 200 €</span>
+        </div>
+        <div class="delito-desc">
+          Desde el <b>22 de enero de 2024</b>, todo VMP comercializado debe contar con <b>certificado de circulación</b> emitido por laboratorio autorizado. Se materializa en <b>placa de marcaje</b> visible.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 11 LTSV</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">200 €</div>
+        </div>
+        <div class="nota-agrav">⚠️ <b>Periodo transitorio</b>: VMP adquiridos antes del 22/01/2024 pueden circular sin certificado hasta el <b>22 de enero de 2027</b>, si están inscritos en el registro DGT como "no certificado".</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Alumbrado y Reflectantes</div>
+          <span class="art-badge">Art. 98 RGC</span>
+          <span class="tipo-badge badge-menos">Grave</span>
+        <span class="multa-badge">💶 200 €</span>
+        </div>
+        <div class="delito-desc">
+          Luz <b>delantera blanca</b> + <b>trasera roja</b> permanentes · <b>reflectantes laterales</b> · <b>ropa reflectante</b> de noche o visibilidad reducida obligatoria en todo el territorio.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 98 RGC · 76.b LTSV</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">200 €</div>
+        </div>
+        <div class="nota-policial">🚔 En control nocturno: luces <b>encendidas y permanentes</b>. Falta de luces o ropa reflectante fuera de casco urbano → 200 € (art. 76.b LTSV).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Timbre · Frenado · Estabilización</div>
+          <span class="art-badge">Manual DGT</span>
+          <span class="tipo-badge badge-menos">Equipamiento</span>
+        <span class="multa-badge">💶 200 €</span>
+        </div>
+        <div class="delito-desc">
+          Doble sistema de frenado · avisador acústico (timbre) · pata de cabra o estabilizador (VMP &lt; 3 ruedas). Falta del equipamiento obligatorio → infracción grave.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 19 LTSV · 76.b</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">200 €</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Manipulación Técnica · "Trucar"</div>
+          <span class="art-badge">Art. 11 LTSV</span>
+          <span class="tipo-badge badge-grave">Muy Grave</span>
+        <span class="multa-badge multa-alta">⚠️ 500 € + inmov.</span>
+        </div>
+        <div class="delito-desc">
+          Alterar limitador de velocidad, potencia o cualquier característica técnica del VMP para superar 25 km/h. Convierte el vehículo en ciclomotor.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 11 LTSV · 77.n</div>
+          <div class="nom-cell nom-cal-MG">MUY GRAVE</div>
+          <div class="nom-cell nom-multa nom-multa-alta">500 € + inmov.</div>
+        </div>
+        <div class="nota-agrav">⚠️ Si la manipulación causa o agrava un accidente → <b>derecho de repetición</b> del Consorcio de Compensación de Seguros contra el conductor/propietario (art. 11 LRCSCVM).</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       3. REGISTRO DGT Y SEGURO OBLIGATORIO
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">📋</span>
+      <h2>Registro DGT y Seguro Obligatorio</h2>
+      <span class="art-ref">RD 52/2026 · Ley 5/2025 · LRCSCVM</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Falta de Inscripción en Registro DGT</div>
+          <span class="art-badge">RD 52/2026</span>
+          <span class="tipo-badge badge-menos">Grave</span>
+          <span class="badge-nuevo">⚡ NUEVO 2026</span>
+        <span class="multa-badge">💶 200 – 500 €</span>
+        </div>
+        <div class="delito-desc">
+          Todo VMP debe estar inscrito en el <b>Registro Nacional de Vehículos Personales Ligeros</b> gestionado por la DGT. Trámite en Sede Electrónica.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">RD 52/2026 + Art. 76.l LTSV</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">200 – 500 €</div>
+        </div>
+        <div class="nota-reforma">🔴 VMP pesados (&gt;25 kg / &gt;14 km/h) exentos de registro previo para el seguro, pero obligados a inscripción cuando sea operativo el sistema.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Etiqueta Identificativa · Falta / Ilegible</div>
+          <span class="art-badge">RD 52/2026</span>
+          <span class="tipo-badge badge-leve">Leve</span>
+          <span class="badge-nuevo">⚡ NUEVO 2026</span>
+        <span class="multa-badge">💶 80 – 200 €</span>
+        </div>
+        <div class="delito-desc">
+          Placa adhesiva <b>M 0000 LLL</b> en la parte trasera, dimensiones mínimas 52,8 × 65 mm, borde inferior ≥ 50 mm del suelo.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">RD 52/2026 + Art. 75 LTSV</div>
+          <div class="nom-cell nom-cal-L">LEVE</div>
+          <div class="nom-cell nom-multa">80 – 200 €</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Circular Sin Seguro de RC</div>
+          <span class="art-badge">Art. 3 LRCSCVM</span>
+          <span class="tipo-badge badge-grave">Régimen propio</span>
+          <span class="badge-nuevo">⚡ NUEVO 2026</span>
+        <span class="multa-badge multa-alta">⚠️ 601 – 3.005 €</span>
+        </div>
+        <div class="delito-desc">
+          Circular con un VMP sin seguro de RC en vigor. Régimen sancionador autónomo (LRCSCVM), distinto del de tráfico.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 3 + 36 LRCSCVM</div>
+          <div class="nom-cell nom-cal-MG">GRAVE</div>
+          <div class="nom-cell nom-multa nom-multa-alta">601 – 3.005 €</div>
+        </div>
+        <div class="nota-reforma">🔴 <b>Ley 5/2025:</b> desde 26/01/2026 VMP pesados · 30/01/2026 régimen general. + <b>inmovilización</b> del vehículo hasta regularizar. El CCS cubre a la víctima y <b>repite</b> contra el propietario.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Titular Sin Seguro Contratado</div>
+          <span class="art-badge">Art. 3 LRCSCVM</span>
+          <span class="tipo-badge badge-menos">Leve</span>
+        <span class="multa-badge">💶 202 – 610 €</span>
+        </div>
+        <div class="delito-desc">
+          El titular del VMP no ha contratado póliza, aunque el vehículo no esté circulando en ese momento. Sanción menor que la de circular sin seguro.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 3 LRCSCVM</div>
+          <div class="nom-cell nom-cal-L">LEVE</div>
+          <div class="nom-cell nom-multa">202 – 610 €</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       4. CIRCULACIÓN · DÓNDE SÍ Y DÓNDE NO
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🛣️</span>
+      <h2>Circulación · Vías y velocidad</h2>
+      <span class="art-ref">Arts. 20, 25.5 LTSV · 121 RGC</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Circular por Acera o Zona Peatonal</div>
+          <span class="art-badge">Art. 121.5 RGC</span>
+          <span class="tipo-badge badge-menos">Grave</span>
+        <span class="multa-badge">💶 200 €</span>
+        </div>
+        <div class="delito-desc">
+          Prohibido circular con VMP por aceras, zonas peatonales, ramblas, paseos y pasos de travesía. Es la infracción más frecuente detectada por PL.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 121.5 RGC · 76.f LTSV</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">200 €</div>
+        </div>
+        <div class="nota-policial">🚔 Si pone en riesgo al peatón o ignora señales con peligro → puede elevarse a <b>conducción temeraria</b> (77.d LTSV) o, en casos extremos, art. 380 CP.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Circular por Autopista / Autovía</div>
+          <span class="art-badge">Art. 38.4 RGC</span>
+          <span class="tipo-badge badge-grave">Muy Grave</span>
+        <span class="multa-badge multa-alta">⚠️ 500 €</span>
+        </div>
+        <div class="delito-desc">
+          Absolutamente prohibida la circulación de VMP por autopistas, autovías, vías interurbanas y túneles urbanos.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 25.5 LTSV · 77.h</div>
+          <div class="nom-cell nom-cal-MG">MUY GRAVE</div>
+          <div class="nom-cell nom-multa nom-multa-alta">500 €</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Exceso de Velocidad (&gt; 25 km/h)</div>
+          <span class="art-badge">Art. 48 RGC</span>
+          <span class="tipo-badge badge-menos">Grave</span>
+        <span class="multa-badge">💶 100 – 500 €</span>
+        </div>
+        <div class="delito-desc">
+          Velocidad máxima del VMP = 25 km/h. Si supera por diseño → no es VMP (ciclomotor). Si lo supera por manipulación → infracción + inmovilización.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 48 RGC · 76.a LTSV</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">100 – 500 €</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Saltarse Semáforo en Rojo</div>
+          <span class="art-badge">Art. 146 RGC</span>
+          <span class="tipo-badge badge-menos">Grave</span>
+        <span class="multa-badge">💶 200 €</span>
+        </div>
+        <div class="delito-desc">
+          No respetar la luz roja o ámbar fija de un semáforo, o la señal del agente de tráfico.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 146 RGC · 76.h</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">200 €</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">No Respetar STOP / CEDA</div>
+          <span class="art-badge">Art. 151 RGC</span>
+          <span class="tipo-badge badge-menos">Grave</span>
+        <span class="multa-badge">💶 200 €</span>
+        </div>
+        <div class="delito-desc">
+          No detenerse ante señal de STOP, CEDA EL PASO o similar.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 151 RGC · 76.h</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">200 €</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Estacionamiento Indebido</div>
+          <span class="art-badge">Ordenanza</span>
+          <span class="tipo-badge badge-leve">Leve</span>
+        <span class="multa-badge multa-baja">💶 Hasta 100 €</span>
+        </div>
+        <div class="delito-desc">
+          Estacionar obstaculizando paso peatonal, rampas, accesos o reservas. Sanción según ordenanza municipal.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Ordenanza municipal</div>
+          <div class="nom-cell nom-cal-L">LEVE</div>
+          <div class="nom-cell nom-multa">Hasta 100 €</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       5. CONDUCTOR · EDAD, CASCO, ALCOHOL
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">👤</span>
+      <h2>Conductor · Edad, casco, alcohol, distracciones</h2>
+      <span class="art-ref">LTSV arts. 14, 18, 47 · RGC</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Conducir Menor de Edad Mínima</div>
+          <span class="art-badge">Ordenanza</span>
+          <span class="tipo-badge badge-menos">Grave</span>
+        <span class="multa-badge">💶 200 €</span>
+        </div>
+        <div class="delito-desc">
+          Catalunya (ordenanza tipo SCT): 16 años. Algunas CCAA 15 o 14 años. Menores → responsables padres/tutores (art. 82 LTSV).
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Ordenanza + Art. 76.e LTSV</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">200 €</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">No Llevar Casco (cuando obligatorio)</div>
+          <span class="art-badge">Art. 47 LTSV</span>
+          <span class="tipo-badge badge-menos">Grave</span>
+        <span class="multa-badge">💶 200 €</span>
+        </div>
+        <div class="delito-desc">
+          Casco obligatorio en Catalunya por ordenanza tipo SCT, siempre para menores de 18 y en muchos municipios en todos los casos.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 47 LTSV · 76.o</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">200 €</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Alcoholemia 0,25 – 0,50 mg/l</div>
+          <span class="art-badge">Art. 20 RGC</span>
+          <span class="tipo-badge badge-grave">Muy Grave</span>
+        <span class="multa-badge multa-alta">⚠️ 500 €</span>
+        </div>
+        <div class="delito-desc">
+          Tasa en aire espirado superior a 0,25 mg/l (o 0,50 g/l sangre). Misma regla que conductores a motor.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 20 RGC · 77.c LTSV</div>
+          <div class="nom-cell nom-cal-MG">MUY GRAVE</div>
+          <div class="nom-cell nom-multa nom-multa-alta">500 €</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Alcoholemia &gt; 0,50 mg/l</div>
+          <span class="art-badge">Art. 20 RGC</span>
+          <span class="tipo-badge badge-grave">Muy Grave</span>
+        <span class="multa-badge multa-alta">⚠️ 1.000 €</span>
+        </div>
+        <div class="delito-desc">
+          Tasa doble de la permitida. Sanción agravada y próxima al umbral del tipo penal (0,60 mg/l).
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 20 RGC · 77.c LTSV</div>
+          <div class="nom-cell nom-cal-MG">MUY GRAVE</div>
+          <div class="nom-cell nom-multa nom-multa-alta">1.000 €</div>
+        </div>
+        <div class="nota-agrav">⚠️ <b>VÍA PENAL:</b> tasa &gt; <b>0,60 mg/l</b> aire (1,2 g/l sangre) o conducción bajo efectos notorios → <b>Art. 379.2 CP</b>. Atestado al Juzgado.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Positivo en Drogas</div>
+          <span class="art-badge">Art. 27 RGC</span>
+          <span class="tipo-badge badge-grave">Muy Grave</span>
+        <span class="multa-badge multa-alta">⚠️ 1.000 €</span>
+        </div>
+        <div class="delito-desc">
+          Presencia de drogas detectada por drogotest y confirmada analíticamente. Tolerancia cero.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 14 LTSV · 77.c</div>
+          <div class="nom-cell nom-cal-MG">MUY GRAVE</div>
+          <div class="nom-cell nom-multa nom-multa-alta">1.000 €</div>
+        </div>
+        <div class="nota-agrav">⚠️ Con efectos notorios → <b>Art. 379.2 CP</b> (delito). Atestado al juzgado.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Negativa a Someterse a Prueba</div>
+          <span class="art-badge">Art. 21 RGC · 383 CP</span>
+          <span class="tipo-badge badge-grave">DELITO</span>
+        <span class="multa-badge multa-penal">⚖️ 6m – 1a prisión</span>
+        </div>
+        <div class="delito-desc">
+          Negarse a realizar la prueba de alcoholemia o drogas es directamente <b>delito autónomo</b>, con independencia del resultado.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Sanción</div>
+          <div class="nom-cell nom-art">Art. 383 CP</div>
+          <div class="nom-cell nom-cal-MG">DELITO</div>
+          <div class="nom-cell nom-multa nom-multa-alta">6m – 1a prisión</div>
+        </div>
+        <div class="nota-policial">🚔 Tres requerimientos formales con advertencia expresa de consecuencias. Constar en acta con firma (o negativa a firmar + testigos). Atestado al juzgado sin demora.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Uso de Teléfono Móvil</div>
+          <span class="art-badge">Art. 18.1 RGC</span>
+          <span class="tipo-badge badge-menos">Grave</span>
+        <span class="multa-badge">💶 200 €</span>
+        </div>
+        <div class="delito-desc">
+          Conducir VMP utilizando teléfono móvil de forma manual durante la marcha.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 18.1 RGC · 76.d LTSV</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">200 €</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Uso de Auriculares / Cascos</div>
+          <span class="art-badge">Art. 18.2 RGC</span>
+          <span class="tipo-badge badge-menos">Grave</span>
+        <span class="multa-badge">💶 200 €</span>
+        </div>
+        <div class="delito-desc">
+          Utilizar cascos o auriculares conectados a aparatos receptores o reproductores de sonido.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 18.2 RGC · 76.d LTSV</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">200 €</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Transporte de Pasajero</div>
+          <span class="art-badge">Art. 12.1 RGC</span>
+          <span class="tipo-badge badge-leve">Leve / Grave</span>
+        <span class="multa-badge multa-baja">💶 100 €</span>
+        </div>
+        <div class="delito-desc">
+          El VMP es vehículo <b>de una única plaza</b>. Prohibido transportar a otra persona.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 12.1 RGC · 76.i LTSV</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">100 €</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       6. OTRAS INFRACCIONES FRECUENTES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">📑</span>
+      <h2>Otras Infracciones Frecuentes</h2>
+      <span class="art-ref">LTSV · RGC · Ordenanzas</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Conducción Temeraria</div>
+          <span class="art-badge">Art. 13 LTSV</span>
+          <span class="tipo-badge badge-grave">Muy Grave</span>
+        <span class="multa-badge multa-alta">⚠️ 500 €</span>
+        </div>
+        <div class="delito-desc">
+          Conducción con manifiesta falta de precaución o atención, creando situación de riesgo. En VMP: zigzag entre peatones, alta velocidad en zona con personas.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 13 LTSV · 77.d</div>
+          <div class="nom-cell nom-cal-MG">MUY GRAVE</div>
+          <div class="nom-cell nom-multa nom-multa-alta">500 €</div>
+        </div>
+        <div class="nota-agrav">⚠️ Si hay <b>manifiesto desprecio por la vida</b> → <b>Art. 380 CP</b> (prisión 6m–2 años). Atestado al juzgado.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Abandono del Lugar del Accidente</div>
+          <span class="art-badge">Art. 129 RGC</span>
+          <span class="tipo-badge badge-grave">Muy Grave</span>
+        <span class="multa-badge multa-alta">⚠️ 500 €</span>
+        </div>
+        <div class="delito-desc">
+          No detenerse tras un accidente del que se es parte o testigo, o no prestar colaboración.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 129 RGC · 77.i</div>
+          <div class="nom-cell nom-cal-MG">MUY GRAVE</div>
+          <div class="nom-cell nom-multa nom-multa-alta">500 €</div>
+        </div>
+        <div class="nota-agrav">⚠️ Si hay lesionados y omisión dolosa del deber de socorro → <b>Art. 195 CP</b> (omisión del deber de socorro).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">No Obedecer Señales del Agente</div>
+          <span class="art-badge">Art. 53 RGC</span>
+          <span class="tipo-badge badge-menos">Grave</span>
+        <span class="multa-badge">💶 200 €</span>
+        </div>
+        <div class="delito-desc">
+          No obedecer las señales de los agentes de tráfico (PL, GC, MMEE) que regulan la circulación.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 53 RGC · 76.h LTSV</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">200 €</div>
+        </div>
+        <div class="nota-agrav">⚠️ Desobediencia grave o reiterada → <b>Art. 556 CP</b> (desobediencia) o <b>Art. 550 CP</b> (atentado si hay resistencia activa).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Negarse a Identificarse</div>
+          <span class="art-badge">Art. 4 LOPSC</span>
+          <span class="tipo-badge badge-menos">Grave</span>
+        <span class="multa-badge">💶 601 – 30.000 €</span>
+        </div>
+        <div class="delito-desc">
+          Negarse a identificarse ante requerimiento del agente o proporcionar datos falsos.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Art. 36.6 LOPSC</div>
+          <div class="nom-cell nom-cal-G">GRAVE</div>
+          <div class="nom-cell nom-multa">601 – 30.000 €</div>
+        </div>
+        <div class="nota-policial">🚔 Si la negativa es grave/activa → <b>Art. 556 CP</b>. Vía LOPSC para desobediencia leve a la autoridad.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Acceso a Transporte Público</div>
+          <span class="art-badge">Operador</span>
+          <span class="tipo-badge badge-leve">Leve</span>
+        <span class="multa-badge">💶 100 – 200 €</span>
+        </div>
+        <div class="delito-desc">
+          Renfe, Metro, EMT, TMB etc. prohíben el acceso con VMP por riesgo de baterías de litio. Sanción propia del operador.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Multa</div>
+          <div class="nom-cell nom-art">Reglamento interno operador</div>
+          <div class="nom-cell nom-cal-L">LEVE</div>
+          <div class="nom-cell nom-multa">100 – 200 €</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       7. VÍA PENAL · DELITOS CONTRA SEGURIDAD VIAL
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">⚖️</span>
+      <h2>Vía Penal · Delitos contra la Seguridad Vial</h2>
+      <span class="art-ref">Arts. 379–385 CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Conducción con Exceso de Alcohol</div>
+          <span class="art-badge">Art. 379.2 CP</span>
+          <span class="tipo-badge badge-grave">DELITO</span>
+        <span class="multa-badge multa-penal">⚖️ 3–6m prisión o alternativa</span>
+        </div>
+        <div class="delito-desc">
+          Conducir VMP con tasa superior a <b>0,60 mg/l en aire espirado</b> (1,2 g/l en sangre), o bajo efectos notorios de alcohol.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Sanción</div>
+          <div class="nom-cell nom-art">Art. 379.2 CP</div>
+          <div class="nom-cell nom-cal-MG">DELITO MG</div>
+          <div class="nom-cell nom-multa nom-multa-alta">3–6m prisión o alternativa</div>
+        </div>
+        <div class="nota-policial">🚔 Atestado al Juzgado de Guardia + privación del derecho a conducir 1–4 años + multa 6–12 meses o trabajos comunitarios 31–90 días.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Conducción Bajo Drogas (notorio)</div>
+          <span class="art-badge">Art. 379.2 CP</span>
+          <span class="tipo-badge badge-grave">DELITO</span>
+        <span class="multa-badge multa-penal">⚖️ 3–6m prisión o alternativa</span>
+        </div>
+        <div class="delito-desc">
+          Conducir bajo influencia de drogas tóxicas, estupefacientes o psicotrópicos con signos notorios que mermen las capacidades.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Sanción</div>
+          <div class="nom-cell nom-art">Art. 379.2 CP</div>
+          <div class="nom-cell nom-cal-MG">DELITO MG</div>
+          <div class="nom-cell nom-multa nom-multa-alta">3–6m prisión o alternativa</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Conducción Temeraria</div>
+          <span class="art-badge">Art. 380 CP</span>
+          <span class="tipo-badge badge-grave">DELITO GRAVE</span>
+        <span class="multa-badge multa-penal">⚖️ 6m – 2a prisión</span>
+        </div>
+        <div class="delito-desc">
+          Conducir con <b>manifiesto desprecio por la vida de los demás</b>. Exceso notorio de velocidad + desprecio por la seguridad = presunción legal.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Sanción</div>
+          <div class="nom-cell nom-art">Art. 380 CP</div>
+          <div class="nom-cell nom-cal-MG">DELITO G</div>
+          <div class="nom-cell nom-multa nom-multa-alta">6m – 2a prisión</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Negativa a Prueba Alcohol/Drogas</div>
+          <span class="art-badge">Art. 383 CP</span>
+          <span class="tipo-badge badge-grave">DELITO</span>
+        <span class="multa-badge multa-penal">⚖️ 6m – 1a prisión</span>
+        </div>
+        <div class="delito-desc">
+          Delito autónomo de negarse a las pruebas legalmente establecidas, aunque la tasa real fuera inferior al umbral penal.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Sanción</div>
+          <div class="nom-cell nom-art">Art. 383 CP</div>
+          <div class="nom-cell nom-cal-MG">DELITO MG</div>
+          <div class="nom-cell nom-multa nom-multa-alta">6m – 1a prisión</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Conducción sin Permiso (ciclomotor)</div>
+          <span class="art-badge">Art. 384 CP</span>
+          <span class="tipo-badge badge-grave">DELITO</span>
+        <span class="multa-badge multa-penal">⚖️ 3–6m prisión o alternativa</span>
+        </div>
+        <div class="delito-desc">
+          Aplicable <b>solo si el VMP está trucado o supera 25 km/h</b> (se asimila a ciclomotor). <b>NO se aplica al VMP estándar</b> (que no requiere carnet).
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Sanción</div>
+          <div class="nom-cell nom-art">Art. 384 CP</div>
+          <div class="nom-cell nom-cal-MG">DELITO MG</div>
+          <div class="nom-cell nom-multa nom-multa-alta">3–6m prisión o alternativa</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Homicidio por Imprudencia</div>
+          <span class="art-badge">Art. 142 CP</span>
+          <span class="tipo-badge badge-grave">DELITO GRAVE</span>
+        <span class="multa-badge multa-penal">⚖️ 1–4a prisión</span>
+        </div>
+        <div class="delito-desc">
+          Causar la muerte a un peatón u otro usuario por imprudencia grave al conducir VMP.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Sanción</div>
+          <div class="nom-cell nom-art">Art. 142.1 CP</div>
+          <div class="nom-cell nom-cal-MG">DELITO G</div>
+          <div class="nom-cell nom-multa nom-multa-alta">1–4a prisión</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Lesiones por Imprudencia</div>
+          <span class="art-badge">Art. 152 CP</span>
+          <span class="tipo-badge badge-grave">DELITO</span>
+        <span class="multa-badge multa-penal">⚖️ 3m – 3a prisión</span>
+        </div>
+        <div class="delito-desc">
+          Atropello con lesiones que requieran tratamiento médico, causado por imprudencia grave al conducir VMP.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Sanción</div>
+          <div class="nom-cell nom-art">Art. 152 CP</div>
+          <div class="nom-cell nom-cal-MG">DELITO MG/G</div>
+          <div class="nom-cell nom-multa nom-multa-alta">3m – 3a prisión</div>
+        </div>
+        <div class="nota-policial">🚔 En caso de accidente con lesiones con tto. médico: atestado al juzgado, fotografías, testigos, drogotest al conductor VMP, datos de seguro.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Omisión del Deber de Socorro</div>
+          <span class="art-badge">Art. 195 CP</span>
+          <span class="tipo-badge badge-grave">DELITO</span>
+        <span class="multa-badge multa-penal">⚖️ 6m – 4a prisión</span>
+        </div>
+        <div class="delito-desc">
+          No socorrer a la víctima de un accidente provocado por el propio VMP, cuando no concurra riesgo propio.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Sanción</div>
+          <div class="nom-cell nom-art">Art. 195.3 CP</div>
+          <div class="nom-cell nom-cal-MG">DELITO MG</div>
+          <div class="nom-cell nom-multa nom-multa-alta">6m – 4a prisión</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       8. OPERATIVA POLICIAL · PROCEDIMIENTO PL
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🚔</span>
+      <h2>Operativa Policial · Procedimiento PL</h2>
+      <span class="art-ref">LTSV · LOPSC · Ley 16/1991 PL Cat.</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Protocolo de Control Rutinario</div>
+          <span class="art-badge">Operativa</span>
+          <span class="tipo-badge badge-menos">Pasos</span>
+        </div>
+        <div class="delito-desc">
+          Secuencia de actuación en un control a un VMP:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">① Detención segura + ID</span>
+          <span class="pena-chip">② Verificar edad</span>
+          <span class="pena-chip">③ Etiqueta M0000LLL</span>
+          <span class="pena-chip">④ Seguro (app/papel)</span>
+          <span class="pena-chip">⑤ Ficha técnica / placa</span>
+          <span class="pena-chip">⑥ Examen equipamiento</span>
+          <span class="pena-chip">⑦ Alcohol/drogas si procede</span>
+          <span class="pena-chip">⑧ Boletín / inmovilización</span>
+        </div>
+        <div class="nota-policial">🚔 En el paso ⑤, si se aprecia que el VMP podría estar <b>trucado</b> (aceleración anómala, sin limitador), consignar sospecha en acta y proponer verificación técnica en depósito.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Inmovilización del Vehículo</div>
+          <span class="art-badge">Art. 104 LTSV</span>
+          <span class="tipo-badge badge-menos">Medida cautelar</span>
+        <span class="multa-badge multa-alta">⚠️ Depósito + gastos</span>
+        </div>
+        <div class="delito-desc">
+          Inmovilización del VMP cuando carezca de seguro, esté manipulado (&gt;25 km/h), conductor con alcohol/drogas, falta de identificación o deficiencia técnica grave.
+        </div>
+        <div class="nomenclator">
+          <div class="nom-header">Precepto</div>
+          <div class="nom-header">Calificación</div>
+          <div class="nom-header">Efectos</div>
+          <div class="nom-cell nom-art">Art. 104 LTSV</div>
+          <div class="nom-cell nom-cal-G">CAUTELAR</div>
+          <div class="nom-cell nom-multa">Depósito + gastos</div>
+        </div>
+        <div class="nota-policial">🚔 Acta de inmovilización con reseña del vehículo + depósito municipal. Gastos de custodia acumulados a la sanción, a cargo del titular.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Cuándo Elevar Atestado al Juzgado</div>
+          <span class="art-badge">Criterio</span>
+          <span class="tipo-badge badge-grave">Vía penal</span>
+        </div>
+        <div class="delito-desc">
+          Remitir <b>atestado al Juzgado de Guardia</b> cuando:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">🔴 Alcohol &gt; 0,60 mg/l</span>
+          <span class="pena-chip agravada">🔴 Bajo efectos notorios</span>
+          <span class="pena-chip agravada">🔴 Drogas con síntomas</span>
+          <span class="pena-chip agravada">🔴 Negativa a prueba</span>
+          <span class="pena-chip agravada">🔴 Conducción temeraria</span>
+          <span class="pena-chip agravada">🔴 Lesiones con tto. médico</span>
+          <span class="pena-chip agravada">🔴 Fallecimiento</span>
+          <span class="pena-chip agravada">🔴 Ciclomotor sin AM</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Accidente con VMP · Protocolo</div>
+          <span class="art-badge">Operativa</span>
+          <span class="tipo-badge badge-grave">Siniestro</span>
+        </div>
+        <div class="delito-desc">
+          Actuación ante siniestro con VMP:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">① Seguridad del lugar</span>
+          <span class="pena-chip">② Asistencia urgente</span>
+          <span class="pena-chip">③ Identificar conductor VMP</span>
+          <span class="pena-chip">④ Verificar seguro RC</span>
+          <span class="pena-chip">⑤ Prueba alcohol/drogas</span>
+          <span class="pena-chip">⑥ Testigos + fotografías</span>
+          <span class="pena-chip">⑦ Atestado si lesiones</span>
+          <span class="pena-chip">⑧ Comunicar CCS si sin seguro</span>
+        </div>
+        <div class="nota-policial">🚔 Si el VMP <b>no tiene seguro</b>: comunicar al <b>Consorcio de Compensación de Seguros</b> (Fondo de Garantía). El CCS indemniza a la víctima y repite contra el propietario/conductor. Si hay manipulación del VMP, repetición reforzada (art. 11 LRCSCVM).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Coordinación entre Cuerpos</div>
+          <span class="art-badge">Operativa</span>
+          <span class="tipo-badge badge-menos">FCS</span>
+        </div>
+        <div class="delito-desc">
+          <b>Policía Local</b>: control urbano, denuncia administrativa, inmovilización, atestado · <b>Mossos d'Esquadra</b>: policía judicial (delitos contra seguridad vial) · <b>SCT Catalunya</b>: órgano sancionador en interurbanas · <b>Ayuntamiento</b>: órgano sancionador urbano (art. 84 LTSV) · <b>CCS</b>: seguros y Fondo de Garantía.
+        </div>
+        <div class="nota-agrav">⚠️ En Catalunya, la competencia sancionadora en tráfico urbano corresponde al <b>Alcalde</b> (art. 84 LTSV). En interurbano al <b>SCT</b>. Los delitos van siempre al <b>Juzgado de Guardia</b>.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       CUADRO RECUERDA
+  ══════════════════════════════════════════ -->
+  <div class="recuerda">
+    <h3>📋 Recuerda — Nomenclátor VMP</h3>
+    <ul>
+      <li>⚡ <b>Sin seguro RC (Art. 3 LRCSCVM):</b> 601 – 3.005 € + inmovilización. Titular sin póliza: 202 – 610 €. En vigor desde 26/01/2026.</li>
+      <li>⚡ <b>Sin registro DGT (RD 52/2026):</b> 200 – 500 € (art. 76.l LTSV) · Sin etiqueta M0000LLL: 80 – 200 € (leve).</li>
+      <li><b>Acera/peatonal (Art. 121.5 RGC):</b> 200 € grave · <b>Autovía/autopista (25.5 LTSV):</b> 500 € muy grave · <b>Exceso velocidad (48 RGC):</b> 100 – 500 € grave.</li>
+      <li><b>Semáforo rojo (146 RGC):</b> 200 € · <b>STOP/CEDA (151 RGC):</b> 200 € · <b>Desobedecer agente (53 RGC):</b> 200 €.</li>
+      <li><b>Casco (47 LTSV):</b> 200 € grave (menores siempre + ordenanza SCT Catalunya) · <b>Sin luces (98 RGC):</b> 200 € grave.</li>
+      <li><b>Alcohol 0,25–0,50 mg/l (20 RGC):</b> 500 € · <b>&gt;0,50 mg/l:</b> 1.000 € · <b>&gt;0,60 mg/l:</b> Art. 379.2 CP delito.</li>
+      <li><b>Drogas positivas (14 LTSV):</b> 1.000 € · Bajo efectos notorios: Art. 379.2 CP delito.</li>
+      <li><b>Negativa a prueba (21 RGC):</b> directamente <b>Art. 383 CP</b> → 6m–1 año prisión + privación derecho conducir.</li>
+      <li><b>Móvil (18.1 RGC):</b> 200 € · <b>Auriculares (18.2 RGC):</b> 200 € · <b>Dos personas (12.1 RGC):</b> 100 € grave.</li>
+      <li><b>Menor de edad mínima (ordenanza SCT):</b> 200 € grave. Responden padres/tutores (art. 82 LTSV).</li>
+      <li><b>Patinete trucado &gt;25 km/h (11 LTSV):</b> 500 € muy grave + inmovilización + conversión a ciclomotor.</li>
+      <li><b>Ciclomotor sin AM → Art. 384 CP</b> (no aplicable al VMP estándar, que no requiere carnet).</li>
+      <li><b>Abandono lugar accidente (129 RGC):</b> 500 € muy grave · Con víctimas lesionadas sin socorro → Art. 195 CP.</li>
+      <li><b>Conducción temeraria (13 LTSV):</b> 500 € muy grave · Con desprecio vida → Art. 380 CP (6m–2a prisión).</li>
+      <li><b>Lesiones por imprudencia (152 CP):</b> 3m–3a prisión · <b>Homicidio imprudencia (142 CP):</b> 1–4a prisión.</li>
+      <li><b>Negativa a identificarse (36.6 LOPSC):</b> 601 – 30.000 € (grave) o art. 556 CP si desobediencia grave.</li>
+      <li><b>Presunción veracidad (88 LTSV):</b> el boletín del agente = prueba. Describir hechos presenciados de forma objetiva.</li>
+      <li><b>Competencia:</b> Alcalde (urbano) · SCT (interurbano Catalunya) · Juzgado de Guardia (delitos) · CCS (accidentes sin seguro).</li>
+    </ul>
+  </div>
+
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+
+</div>
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    if (body.style.display === 'none' || body.style.display === '') {
+      body.style.display = 'block';
+      body.style.animation = 'fadeUp .3s ease';
+    } else {
+      body.style.display = 'none';
+    }
+  }
+  document.querySelector('.cat-body').style.display = 'block';
+</script>
+</body>
+</html>

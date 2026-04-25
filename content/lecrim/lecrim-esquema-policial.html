@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LECrim — Esquema Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #0A1628;
+    --bg-section: #0E2244;
+    --gold: #C8A028;
+    --blue-royal: #1A5C96;
+    --red: #C8281E;
+    --green: #1A7A3C;
+    --text-main: #F0F4FF;
+    --text-secondary: #A8BAD4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%,100% { opacity:1; } 50% { opacity:.65; }
+  }
+
+  body {
+    background-color: var(--bg-main);
+    background-image:
+      radial-gradient(ellipse at 15% 10%, rgba(26,92,150,0.2) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 85%, rgba(200,160,40,0.07) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.022)'/%3E%3C/svg%3E");
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-main);
+    padding: 20px 12px 40px;
+  }
+
+  .wrapper { max-width: 720px; margin: 0 auto; }
+
+  /* ── CABECERA ── */
+  .header {
+    display: flex; align-items: center; gap: 18px;
+    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
+    border: 2px solid var(--gold); border-radius: 10px;
+    padding: 22px 24px; margin-bottom: 14px;
+    animation: fadeUp .5s ease both;
+    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+  }
+  .header-text .label {
+    font-family: 'Oswald', sans-serif; font-size: 10px;
+    letter-spacing: 3px; color: var(--gold); text-transform: uppercase;
+  }
+  .header-text h1 {
+    font-family: 'Oswald', sans-serif; font-size: 30px;
+    font-weight: 700; text-transform: uppercase; color: var(--text-main); line-height:1.1;
+  }
+  .header-text h1 span { color: var(--gold); }
+  .header-text .subtitle { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+
+  /* ── FICHA LEY ── */
+  .ficha-ley {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 8px;
+    margin-bottom: 16px; animation: fadeUp .55s ease .08s both;
+  }
+  .ficha-card {
+    background: var(--bg-section); border: 1px solid rgba(200,160,40,0.25);
+    border-radius: 8px; padding: 10px 12px; text-align: center;
+  }
+  .ficha-card .fc-label {
+    font-size: 10px; color: var(--text-secondary); text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 3px;
+  }
+  .ficha-card .fc-val {
+    font-family: 'Oswald', sans-serif; font-size: 13px;
+    font-weight: 700; color: var(--gold);
+  }
+
+  /* ── CATEGORÍA ── */
+  .categoria {
+    background: var(--bg-section); border-radius: 10px;
+    margin-bottom: 14px; overflow: hidden;
+    border: 1px solid rgba(200,160,40,0.18);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .categoria:nth-child(1){ animation: fadeUp .6s ease .12s both; }
+  .categoria:nth-child(2){ animation: fadeUp .6s ease .18s both; }
+  .categoria:nth-child(3){ animation: fadeUp .6s ease .24s both; }
+  .categoria:nth-child(4){ animation: fadeUp .6s ease .30s both; }
+  .categoria:nth-child(5){ animation: fadeUp .6s ease .36s both; }
+  .categoria:nth-child(6){ animation: fadeUp .6s ease .42s both; }
+  .categoria:nth-child(7){ animation: fadeUp .6s ease .48s both; }
+  .categoria:nth-child(8){ animation: fadeUp .6s ease .54s both; }
+  .categoria:nth-child(9){ animation: fadeUp .6s ease .60s both; }
+
+  .cat-header {
+    background: var(--blue-royal); padding: 12px 18px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none; transition: background .2s;
+  }
+  .cat-header:hover { background: #1e6db0; }
+  .cat-header .cat-icon { font-size: 20px; }
+  .cat-header h2 {
+    font-family: 'Oswald', sans-serif; font-size: 17px;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; flex: 1;
+  }
+  .cat-header .art-ref { font-size: 11px; color: rgba(240,244,255,.6); white-space: nowrap; }
+  .cat-header .toggle { font-size: 14px; transition: transform .3s; color: var(--gold); }
+  .cat-header.open .toggle { transform: rotate(180deg); }
+
+  .cat-body { padding: 6px 0; }
+
+  /* ── BLOQUE ── */
+  .bloque {
+    border-left: 3px solid var(--gold); margin: 8px 14px;
+    background: rgba(10,22,40,0.5); border-radius: 0 7px 7px 0; padding: 11px 14px;
+  }
+  .bloque-top {
+    display: flex; align-items: flex-start; gap: 8px; flex-wrap: wrap;
+  }
+  .bloque-nombre {
+    font-family: 'Oswald', sans-serif; font-size: 15px; font-weight: 600;
+    color: var(--text-main); flex: 1; min-width: 150px;
+  }
+  .art-badge {
+    font-size: 10px; font-family: 'Oswald', sans-serif; font-weight: 700;
+    background: rgba(200,160,40,0.15); border: 1px solid var(--gold);
+    color: var(--gold); padding: 2px 7px; border-radius: 4px; white-space: nowrap;
+  }
+  .badge-plazo {
+    font-size: 10px; font-family: 'Oswald', sans-serif; font-weight: 700;
+    background: rgba(200,40,30,0.25); border: 1px solid var(--red);
+    color: #FF8870; padding: 2px 8px; border-radius: 4px; white-space: nowrap;
+  }
+  .badge-ok {
+    font-size: 10px; font-family: 'Oswald', sans-serif; font-weight: 700;
+    background: rgba(26,122,60,0.3); border: 1px solid var(--green);
+    color: #4ACD7A; padding: 2px 8px; border-radius: 4px; white-space: nowrap;
+  }
+  .badge-nuevo {
+    font-size: 9px; font-family: 'Oswald', sans-serif; font-weight: 700;
+    padding: 2px 6px; border-radius: 3px;
+    background: var(--red); color: white; letter-spacing: .5px;
+    animation: pulse 2s infinite; white-space: nowrap;
+  }
+
+  .bloque-desc { font-size: 12.5px; color: var(--text-secondary); margin-top: 5px; line-height: 1.5; }
+  .bloque-desc b { color: var(--gold); font-weight: 700; }
+
+  /* ── LISTAS DE PASOS / REQUISITOS ── */
+  .paso-lista { list-style: none; margin-top: 8px; }
+  .paso-lista li {
+    display: flex; gap: 8px; align-items: flex-start;
+    font-size: 12.5px; color: var(--text-secondary);
+    padding: 4px 0; border-bottom: 1px solid rgba(200,160,40,0.08);
+    line-height: 1.45;
+  }
+  .paso-lista li:last-child { border-bottom: none; }
+  .paso-lista li .num {
+    font-family: 'Oswald', sans-serif; font-size: 11px; font-weight: 700;
+    background: var(--blue-royal); color: white;
+    min-width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .paso-lista li .dot {
+    color: var(--gold); font-size: 16px; line-height: 1; flex-shrink: 0; margin-top: 1px;
+  }
+  .paso-lista b { color: var(--gold); font-weight: 700; }
+
+  /* ── CHIPS ROW ── */
+  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chip {
+    font-size: 11px;
+    background: rgba(26,92,150,0.25); border: 1px solid rgba(26,92,150,0.55);
+    color: var(--text-main); padding: 3px 9px; border-radius: 20px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .chip.rojo { background: rgba(200,40,30,0.2); border-color: rgba(200,40,30,0.5); }
+  .chip.verde { background: rgba(26,122,60,0.25); border-color: rgba(26,122,60,0.6); color:#4ACD7A; }
+  .chip.dorado { background: rgba(200,160,40,0.12); border-color: rgba(200,160,40,0.4); color: var(--gold); }
+
+  /* ── NOTAS ── */
+  .nota-pol {
+    margin-top: 7px; font-size: 11.5px; color: #A8D4C0;
+    background: rgba(26,122,60,0.1); border-left: 2px solid var(--green);
+    padding: 5px 9px; border-radius: 0 5px 5px 0; line-height: 1.5;
+  }
+  .nota-alert {
+    margin-top: 7px; font-size: 11.5px; color: #FFB8A8;
+    background: rgba(200,40,30,0.1); border-left: 3px solid var(--red);
+    padding: 5px 9px; border-radius: 0 5px 5px 0; line-height: 1.5;
+  }
+  .nota-info {
+    margin-top: 7px; font-size: 11.5px; color: #A8C4E0;
+    background: rgba(26,92,150,0.15); border-left: 2px solid var(--blue-royal);
+    padding: 5px 9px; border-radius: 0 5px 5px 0; line-height: 1.5;
+  }
+  .nota-reforma {
+    margin-top: 7px; font-size: 11.5px; color: #FFB8B0;
+    background: rgba(200,40,30,0.12); border-left: 3px solid #C8281E;
+    padding: 5px 9px; border-radius: 0 5px 5px 0; line-height: 1.5;
+  }
+  .nota-alert b, .nota-pol b, .nota-info b, .nota-reforma b { font-weight: 700; }
+
+  /* ── TABLA DE PLAZOS ── */
+  .tabla-plazos {
+    width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px;
+  }
+  .tabla-plazos th {
+    background: rgba(26,92,150,0.4); color: var(--gold);
+    font-family: 'Oswald', sans-serif; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 1px;
+    padding: 6px 10px; text-align: left;
+  }
+  .tabla-plazos td {
+    padding: 6px 10px; color: var(--text-secondary);
+    border-bottom: 1px solid rgba(200,160,40,0.08);
+    line-height: 1.4;
+  }
+  .tabla-plazos tr:last-child td { border-bottom: none; }
+  .tabla-plazos td:first-child { color: var(--text-main); font-weight: 600; }
+  .tabla-plazos td b { color: var(--gold); }
+
+  /* ── CUADRO DERECHOS ── */
+  .derechos-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px;
+  }
+  .derecho-item {
+    background: rgba(26,92,150,0.15); border: 1px solid rgba(26,92,150,0.35);
+    border-radius: 6px; padding: 8px 10px;
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .derecho-item .di-num {
+    font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 700;
+    color: var(--gold); flex-shrink: 0; line-height: 1;
+  }
+  .derecho-item .di-texto {
+    font-size: 11.5px; color: var(--text-secondary); line-height: 1.4;
+  }
+  .derecho-item .di-texto b { color: var(--text-main); font-weight: 700; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 4px 14px 2px; opacity: .3;
+  }
+
+  /* ── RECUERDA ── */
+  .recuerda {
+    background: var(--gold); border-radius: 10px;
+    padding: 20px 22px; margin-top: 6px;
+    animation: fadeUp .6s ease .7s both;
+  }
+  .recuerda h3 {
+    font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700;
+    text-transform: uppercase; color: #0A1628; margin-bottom: 12px;
+    letter-spacing: 2px; display: flex; align-items: center; gap: 8px;
+  }
+  .recuerda ul { list-style: none; }
+  .recuerda ul li {
+    font-size: 13px; color: #0A1628; padding: 4px 0;
+    display: flex; align-items: flex-start; gap: 6px;
+    border-bottom: 1px solid rgba(10,22,40,0.15); line-height: 1.4;
+  }
+  .recuerda ul li:last-child { border-bottom: none; }
+  .recuerda ul li::before { content:"▶"; font-size:9px; margin-top:4px; flex-shrink:0; }
+
+  /* ── BOTÓN ── */
+  .btn-print {
+    display: block; width: 100%; margin-top: 20px; padding: 14px;
+    background: var(--blue-royal); border: 2px solid var(--gold);
+    color: var(--text-main); font-family: 'Oswald', sans-serif;
+    font-size: 16px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; border-radius: 8px; cursor: pointer;
+    transition: all .2s; animation: fadeUp .6s ease .8s both;
+  }
+  .btn-print:hover { background: var(--gold); color: #0A1628; }
+
+  @media print {
+    body { background: white; color: black; }
+    .btn-print { display: none; }
+    .categoria { break-inside: avoid; }
+    .cat-body { display: block !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- CABECERA -->
+  <div class="header">
+    <div class="escudo">
+      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
+        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
+        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICÍA</text>
+        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
+        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <div class="label">Esquema Operativo Policial</div>
+      <h1>L<span>E</span>Crim</h1>
+      <div class="subtitle">Ley de Enjuiciamiento Criminal · Real Decreto de 14 septiembre 1882 · Actuaciones policiales y procesales de referencia</div>
+    </div>
+  </div>
+
+  <!-- FICHA LEY -->
+  <div class="ficha-ley">
+    <div class="ficha-card">
+      <div class="fc-label">Norma</div>
+      <div class="fc-val">RD 14/09/1882</div>
+    </div>
+    <div class="ficha-card">
+      <div class="fc-label">Última reforma</div>
+      <div class="fc-val">LO 1/2026</div>
+    </div>
+    <div class="ficha-card">
+      <div class="fc-label">Ámbito</div>
+      <div class="fc-val">Proceso Penal</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       1. POLICÍA JUDICIAL Y ATESTADO
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">📋</span>
+      <h2>Policía Judicial y el Atestado</h2>
+      <span class="art-ref">Arts. 282–298 LECrim</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Función de la Policía Judicial</div>
+          <span class="art-badge">Art. 282</span>
+        </div>
+        <div class="bloque-desc">
+          La Policía Judicial tiene como misión <b>averiguar los delitos públicos, practicar las primeras diligencias</b> de prevención y asegurar al delincuente. Actúa bajo las órdenes de Jueces y Fiscales.
+        </div>
+        <div class="chip-row">
+          <span class="chip verde">✔ Averiguación del delito</span>
+          <span class="chip verde">✔ Aseguramiento del culpable</span>
+          <span class="chip verde">✔ Recogida de efectos e instrumentos</span>
+          <span class="chip verde">✔ Protección a la víctima</span>
+        </div>
+        <div class="nota-pol">🚔 Toda Policía Local ejerce funciones de Policía Judicial en su ámbito territorial (art. 30 LO 2/1986 de FFCCSE).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">El Atestado Policial</div>
+          <span class="art-badge">Arts. 292–298</span>
+        </div>
+        <div class="bloque-desc">
+          Documento oficial que recoge las <b>diligencias practicadas por la Policía Judicial</b> ante la comisión de un hecho delictivo. Tiene valor de <b>denuncia</b> (no de prueba por sí mismo).
+        </div>
+        <ul class="paso-lista">
+          <li><span class="num">1</span><span>Encabezamiento: unidad actuante, lugar, fecha, hora, funcionarios intervinientes.</span></li>
+          <li><span class="num">2</span><span>Exposición de hechos: relato cronológico y objetivo. Sin valoraciones jurídicas.</span></li>
+          <li><span class="num">3</span><span>Diligencias practicadas: inspección ocular, declaraciones, detención, registros…</span></li>
+          <li><span class="num">4</span><span>Efectos intervenidos: descripción, número, estado. Cadena de custodia.</span></li>
+          <li><span class="num">5</span><span>Cierre: fecha, firma del instructor y del secretario (agente fedatario).</span></li>
+        </ul>
+        <div class="nota-alert">⚠️ El atestado tiene valor de <b>denuncia</b>, no de prueba plena. Las declaraciones tomadas en él deberán ratificarse en sede judicial para tener valor probatorio.</div>
+        <div class="nota-pol">🚔 <b>Cadena de custodia:</b> cada traslado de evidencias debe quedar documentado (quién, cuándo, cómo). Una ruptura puede invalidar la prueba.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       2. DETENCIÓN
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🔒</span>
+      <h2>La Detención</h2>
+      <span class="art-ref">Arts. 489–501 · 17 CE</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <!-- CAUSAS -->
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Causas para Detener (Obligación y Facultad)</div>
+          <span class="art-badge">Arts. 490–492</span>
+        </div>
+        <div class="bloque-desc">
+          La Policía <b>tiene la obligación</b> de detener (art. 492) y <b>cualquier persona puede detener</b> (art. 490) en determinados supuestos.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span><b>In fraganti:</b> sorprendido en el momento de ejecutar el delito.</span></li>
+          <li><span class="dot">▸</span><span><b>Fugado</b> de establecimiento penitenciario o de conducción.</span></li>
+          <li><span class="dot">▸</span><span><b>Procesado o condenado</b> en rebeldía por delito grave.</span></li>
+          <li><span class="dot">▸</span><span>Cuando hay <b>motivos racionalmente bastantes</b> para creer que ha participado en un delito y exista riesgo de fuga o de actuación.</span></li>
+          <li><span class="dot">▸</span><span>Para <b>identificación</b> cuando no pueda acreditarse identidad (riesgo de alterar el orden o por indicios de haber participado en infracción).</span></li>
+        </ul>
+        <div class="nota-alert">⚠️ La detención debe ser la <b>última medida</b. Valorar siempre si basta con citación para declarar o reseña.</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- PLAZOS -->
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Plazos de la Detención</div>
+          <span class="art-badge">Art. 496 · Art. 17.2 CE</span>
+          <span class="badge-plazo">⏱ PLAZOS CRÍTICOS</span>
+        </div>
+        <table class="tabla-plazos">
+          <thead>
+            <tr><th>Plazo</th><th>Quién</th><th>Qué hacer</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>6 horas</b></td>
+              <td>Policía Judicial</td>
+              <td>Poner en libertad o <b>entregar al Juez</b> si la detención está justificada.</td>
+            </tr>
+            <tr>
+              <td><b>24 horas</b></td>
+              <td>Policía / Juzgado</td>
+              <td>Plazo ordinario máximo de Policía. Excepcionalmente puede prorrogarse hasta <b>72 h</b> con autorización judicial.</td>
+            </tr>
+            <tr>
+              <td><b>72 horas</b></td>
+              <td>Autoridad judicial</td>
+              <td>Máximo constitucional (art. 17.2 CE). <b>Nunca puede superarse</b> sin pasar a prisión provisional o libertad.</td>
+            </tr>
+            <tr>
+              <td><b>5 días</b></td>
+              <td>Juez — Terrorismo</td>
+              <td>Excepcionalmente en delitos de terrorismo (prórroga judicial de 48 h sobre las 72 h).</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="nota-alert">⚠️ El cómputo comienza desde el <b>momento efectivo de la detención</b>, no desde el ingreso en dependencias policiales. Anota siempre hora exacta en el atestado.</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- DERECHOS DETENIDO -->
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Derechos del Detenido — Lectura de Derechos</div>
+          <span class="art-badge">Art. 520</span>
+          <span class="badge-plazo">⏱ INMEDIATO</span>
+        </div>
+        <div class="bloque-desc">Deben comunicarse <b>de forma inmediata, en lenguaje comprensible</b> y por escrito (formulario de derechos). El detenido firma el recibí.</div>
+        <div class="derechos-grid">
+          <div class="derecho-item">
+            <div class="di-num">1</div>
+            <div class="di-texto"><b>Guardar silencio</b> y no declarar. No está obligado a responder preguntas.</div>
+          </div>
+          <div class="derecho-item">
+            <div class="di-num">2</div>
+            <div class="di-texto"><b>No declarar contra sí mismo</b> ni confesarse culpable.</div>
+          </div>
+          <div class="derecho-item">
+            <div class="di-num">3</div>
+            <div class="di-texto">Designar <b>abogado</b> y solicitar su presencia en declaraciones y reconocimientos.</div>
+          </div>
+          <div class="derecho-item">
+            <div class="di-num">4</div>
+            <div class="di-texto">Ser <b>asistido gratuitamente</b> por intérprete si no entiende el castellano.</div>
+          </div>
+          <div class="derecho-item">
+            <div class="di-num">5</div>
+            <div class="di-texto">Que se ponga en conocimiento del <b>familiar o persona</b> que designe su situación y lugar de custodia.</div>
+          </div>
+          <div class="derecho-item">
+            <div class="di-num">6</div>
+            <div class="di-texto">Ser reconocido por el <b>médico forense</b> o médico del cuerpo de guardia.</div>
+          </div>
+          <div class="derecho-item">
+            <div class="di-num">7</div>
+            <div class="di-texto">Acceder a los <b>elementos esenciales</b> de las actuaciones para impugnar la detención.</div>
+          </div>
+          <div class="derecho-item">
+            <div class="di-num">8</div>
+            <div class="di-texto">Si es extranjero: comunicarlo a la <b>oficina consular</b> de su país.</div>
+          </div>
+        </div>
+        <div class="nota-alert">⚠️ <b>Incomunicación:</b> Solo puede decretarla el Juez (máx. 5 días en terrorismo). La Policía NUNCA puede incomunicar por sí sola.</div>
+        <div class="nota-pol">🚔 El formulario de lectura de derechos firmado por el detenido debe incorporarse al atestado. Si no sabe leer o escribir: testigos o grabación.</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- DETENCIÓN INCOMUNICADA -->
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Detención por Identificación</div>
+          <span class="art-badge">Arts. 20 LOPSC · 16 LOSeg</span>
+        </div>
+        <div class="bloque-desc">
+          Cuando no sea posible identificar a una persona en la vía pública y existan indicios de participación en infracción o riesgo para el orden. <b>No es detención a efectos de art. 17 CE</b>, pero sí debe respetarse la proporcionalidad.
+        </div>
+        <div class="chip-row">
+          <span class="chip dorado">⏱ Máx. 6 horas (LOPSC)</span>
+          <span class="chip">Solo en dependencias policiales</span>
+          <span class="chip verde">✔ Derechos informativos igualmente aplicables</span>
+        </div>
+        <div class="nota-info">ℹ️ Finalidad exclusiva: identificación. No puede usarse para investigar o interrogar sobre hechos delictivos sin convertirse en detención.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       3. HÁBEAS CORPUS
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">⚖️</span>
+      <h2>Hábeas Corpus</h2>
+      <span class="art-ref">LO 6/1984 · Art. 17.4 CE</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Procedimiento de Hábeas Corpus</div>
+          <span class="art-badge">LO 6/1984</span>
+          <span class="badge-plazo">⏱ URGENTE</span>
+        </div>
+        <div class="bloque-desc">
+          Procedimiento especial para el control judicial <b>inmediato</b> de toda detención ilegal. Cualquier persona puede iniciarlo.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span><b>Quién puede solicitarlo:</b> el detenido, su cónyuge, descendientes, ascendientes, hermanos, representante legal, el Ministerio Fiscal o de oficio.</span></li>
+          <li><span class="dot">▸</span><span><b>Ante quién:</b> Juez de Instrucción del lugar de detención.</span></li>
+          <li><span class="dot">▸</span><span><b>Obligación policial:</b> poner al detenido a disposición judicial <b>de inmediato</b> una vez recibida la orden. No puede demorarse.</span></li>
+          <li><span class="dot">▸</span><span><b>El Juez:</b> en 24 h decide si la detención es legal o la declara ilegal y ordena la libertad inmediata.</span></li>
+        </ul>
+        <div class="nota-alert">⚠️ Causas de detención ilegal: sin causa legal, fuera de casos previstos, con garantías infringidas, o plazo <b>superado</b>. Cualquiera de ellas activa el hábeas corpus.</div>
+        <div class="nota-pol">🚔 Si recibes una solicitud de hábeas corpus dirigida al Juez, debes trasladarla <b>inmediatamente</b> sin filtros ni demoras. Ignorarla puede ser delito (art. 530 CP).</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       4. ENTRADA Y REGISTRO
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🏠</span>
+      <h2>Entrada y Registro en Domicilio</h2>
+      <span class="art-ref">Arts. 545–572 · Art. 18 CE</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Regla General — Inviolabilidad del Domicilio</div>
+          <span class="art-badge">Art. 18.2 CE</span>
+        </div>
+        <div class="bloque-desc">
+          El domicilio es <b>inviolable</b>. Nadie puede entrar sin consentimiento del titular o resolución judicial, salvo flagrante delito.
+        </div>
+        <div class="chip-row">
+          <span class="chip verde">✔ Con autorización judicial (auto motivado)</span>
+          <span class="chip verde">✔ Con consentimiento del titular</span>
+          <span class="chip verde">✔ Flagrante delito — urgencia (art. 553)</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Con Autorización Judicial — Procedimiento</div>
+          <span class="art-badge">Arts. 546–556</span>
+        </div>
+        <ul class="paso-lista">
+          <li><span class="num">1</span><span>Solicitar <b>auto de entrada y registro</b> al Juzgado de Guardia (por escrito o telefónicamente con confirmación posterior).</span></li>
+          <li><span class="num">2</span><span>El auto debe especificar: <b>domicilio concreto, finalidad, funcionarios autorizados y plazo</b> (habitualmente 3 días).</span></li>
+          <li><span class="num">3</span><span>El registro se hace <b>de día</b> (salvo urgencia o autorización nocturna expresa). Siempre con el <b>Secretario judicial</b> o fedatario.</span></li>
+          <li><span class="num">4</span><span>Presencia del <b>interesado o familiar</b>. Si no está, dos testigos del lugar.</span></li>
+          <li><span class="num">5</span><span>Levantar <b>acta detallada</b> de todo lo hallado y lo intervenido. Firma de todos los presentes.</span></li>
+        </ul>
+        <div class="nota-pol">🚔 El acta del registro es prueba documental clave. Fotografiar y referenciar cada efecto intervenido antes de moverlo. Numerar cada objeto.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Entrada en Flagrante Delito (Sin Orden Judicial)</div>
+          <span class="art-badge">Art. 553</span>
+          <span class="badge-plazo">⚡ URGENCIA</span>
+        </div>
+        <div class="bloque-desc">
+          Excepción constitucional. La Policía puede entrar <b>sin orden judicial</b> cuando sea necesario para <b>impedir o interrumpir un delito flagrante</b>.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span><b>Flagrante delito:</b> el delito se está cometiendo o se acaba de cometer (humo, gritos, víctima visible…).</span></li>
+          <li><span class="dot">▸</span><span>También si hay <b>persecución ininterrumpida</b> del sospechoso que se refugia en un domicilio.</span></li>
+          <li><span class="dot">▸</span><span>La entrada debe ser <b>proporcional y mínima</b>: solo lo necesario para cesar el delito.</span></li>
+          <li><span class="dot">▸</span><span>Comunicación <b>inmediata</b> al Juez de guardia tras la entrada (nunca más tarde del turno).</span></li>
+        </ul>
+        <div class="nota-alert">⚠️ Si tras entrar no se confirma el delito flagrante, la entrada puede declararse <b>ilícita</b> y lo incautado podría ser prueba nula (art. 11.1 LOPJ).</div>
+        <div class="nota-info">ℹ️ <b>Consentimiento del titular:</b> debe ser libre, informado y expreso. Si hay dudas, esperar la orden judicial. Un consentimiento viciado invalida la entrada.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       5. DILIGENCIAS DE INVESTIGACIÓN
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🔍</span>
+      <h2>Diligencias de Investigación</h2>
+      <span class="art-ref">Arts. 326–367 · 574–588 LECrim</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Inspección Ocular</div>
+          <span class="art-badge">Arts. 326–333</span>
+        </div>
+        <div class="bloque-desc">
+          Examen directo y documentado del <b>lugar de los hechos</b>. Es la primera diligencia a practicar. La escena del crimen debe preservarse antes que nada.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span><b>Acordonar</b> la zona. Establecer perímetros de seguridad (interno y externo).</span></li>
+          <li><span class="dot">▸</span><span><b>Fotografía y vídeo:</b> documentar la escena antes de tocar nada (plano general → plano medio → detalle).</span></li>
+          <li><span class="dot">▸</span><span><b>Croquis</b> acotado de la escena con indicación de cada evidencia.</span></li>
+          <li><span class="dot">▸</span><span>Recogida de vestigios con <b>guantes y embalajes individuales</b> etiquetados (cadena de custodia).</span></li>
+          <li><span class="dot">▸</span><span>Identificar y separar testigos presenciales antes de que intercambien información.</span></li>
+        </ul>
+        <div class="nota-pol">🚔 Cuanto menos se contamine la escena, mayor valor tendrán las pruebas. Limitar el acceso al mínimo imprescindible.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Declaración del Detenido / Testigo</div>
+          <span class="art-badge">Arts. 385–409 · 520</span>
+        </div>
+        <div class="bloque-desc">Toda declaración en sede policial <b>tiene valor de denuncia</b>. Para tener valor probatorio debe ratificarse ante el Juez.</div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span><b>Detenido:</b> siempre con abogado presente (salvo renuncia expresa y libre). Informar derechos antes.</span></li>
+          <li><span class="dot">▸</span><span><b>Testigo:</b> no tiene derecho a letrado pero sí a no declarar contra familiares (art. 416).</span></li>
+          <li><span class="dot">▸</span><span>Transcribir literalmente. No resumir ni interpretar las manifestaciones.</span></li>
+          <li><span class="dot">▸</span><span>Firmar cada página. Si se niega, hacerlo constar expresamente.</span></li>
+        </ul>
+        <div class="nota-alert">⚠️ <b>Art. 416 LECrim:</b> los parientes del investigado en línea directa, colaterales hasta 2º grado y cónyuge están <b>dispensados de declarar</b>. Deben ser informados de esta dispensa.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Reconocimiento en Rueda</div>
+          <span class="art-badge">Arts. 369–374</span>
+        </div>
+        <div class="bloque-desc">
+          Diligencia para identificar al sospechoso cuando la víctima o testigo dice conocerle. Debe realizarse con <b>garantías de imparcialidad</b>.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span>Mínimo <b>4–5 personas</b> con características similares (estatura, complexión, edad, raza).</span></li>
+          <li><span class="dot">▸</span><span>El sospechoso elige su posición. No puede ser destacado visualmente.</span></li>
+          <li><span class="dot">▸</span><span>La víctima/testigo: <b>solo, sin presión</b>. Declarar si reconoce y con qué grado de seguridad.</span></li>
+          <li><span class="dot">▸</span><span>Presencia del <b>abogado defensor</b> (si el sospechoso está detenido).</span></li>
+          <li><span class="dot">▸</span><span>Fotografiar la rueda completa. Documentar todo en acta.</span></li>
+        </ul>
+        <div class="nota-info">ℹ️ Alternativa: <b>álbum fotográfico</b> cuando no hay detenido. Debe contener suficientes fotos neutrales y no inducir al testigo.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Interceptación de Comunicaciones / Dispositivos</div>
+          <span class="art-badge">Arts. 588 bis – 588 octies</span>
+        </div>
+        <div class="bloque-desc">
+          Escuchas telefónicas, acceso a dispositivos electrónicos, captación de imágenes. <b>SIEMPRE requieren autorización judicial previa</b> (art. 18.3 CE).
+        </div>
+        <div class="chip-row">
+          <span class="chip rojo">🔴 Siempre con auto judicial motivado</span>
+          <span class="chip">Plazo inicial: 3 meses (prorrogable)</span>
+          <span class="chip dorado">Proporcionalidad, necesidad, excepcionalidad</span>
+        </div>
+        <div class="nota-alert">⚠️ Acceder a un móvil sin autorización judicial es inconstitucional (art. 18.3 CE). Las pruebas obtenidas serán nulas (art. 11.1 LOPJ). Excepción: el propio titular consiente.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       6. MEDIDAS CAUTELARES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🔗</span>
+      <h2>Medidas Cautelares</h2>
+      <span class="art-ref">Arts. 502–544 LECrim</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Prisión Provisional</div>
+          <span class="art-badge">Arts. 502–519</span>
+          <span class="badge-plazo">⏱ Solo el Juez</span>
+        </div>
+        <div class="bloque-desc">
+          Privación de libertad acordada por el Juez antes de condena. Medida excepcional, subsidiaria y revisable.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span><b>Requisitos:</b> delito con pena &gt; 2 años, indicios de criminalidad, riesgo de fuga / destrucción de pruebas / reiteración delictiva.</span></li>
+          <li><span class="dot">▸</span><span><b>Plazo ordinario:</b> 1 año (prorrogable hasta 2 años). Graves o muy complejos hasta 4 años.</span></li>
+        </ul>
+        <div class="nota-pol">🚔 La Policía no acuerda prisión provisional. Solo la solicita al Fiscal para que la pida al Juez en la comparecencia.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Orden de Alejamiento / Protección</div>
+          <span class="art-badge">Arts. 544 bis – 544 ter</span>
+          <span class="badge-nuevo">⚡ Reforma LO 1/2026</span>
+        </div>
+        <div class="bloque-desc">
+          Medida cautelar que <b>prohíbe al investigado</b> aproximarse o comunicarse con la víctima.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span><b>Orden de alejamiento (544 bis):</b> en cualquier delito. La dicta el Juez.</span></li>
+          <li><span class="dot">▸</span><span><b>Orden de protección (544 ter):</b> específica para VG/VD. Acumulable con medidas civiles (uso vivienda, custodia).</span></li>
+          <li><span class="dot">▸</span><span><b>LO 1/2026:</b> se refuerzan las medidas cautelares de prohibición de residencia o aproximación en la LECrim.</span></li>
+        </ul>
+        <div class="nota-reform" style="margin-top:7px;font-size:11.5px;color:#FFB8B0;background:rgba(200,40,30,0.12);border-left:3px solid #C8281E;padding:5px 9px;border-radius:0 5px 5px 0;line-height:1.5;">
+          🔴 <b>Reforma LO 1/2026:</b> Se refuerza la adopción de medidas cautelares de prohibición de residencia y aproximación, ampliando su alcance en casos de reincidencia y multirreincidencia patrimonial.
+        </div>
+        <div class="nota-alert">⚠️ El quebrantamiento de la OAP es <b>delito autónomo</b> (art. 468 CP), incluso si la víctima consiente. Actuar de oficio siempre.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Libertad Provisional con / sin Cargos</div>
+          <span class="art-badge">Arts. 528–544</span>
+        </div>
+        <div class="bloque-desc">El Juez puede acordar libertad con <b>fianza, obligación de comparecer, retirada de pasaporte</b> o prohibición de ausentarse del territorio.</div>
+        <div class="chip-row">
+          <span class="chip verde">✔ Fianza (económica o personal)</span>
+          <span class="chip verde">✔ Presentación periódica en dependencias</span>
+          <span class="chip verde">✔ Retirada de pasaporte</span>
+          <span class="chip rojo">❌ Incumplimiento → prisión provisional</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       7. DENUNCIA Y QUERELLA
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">📝</span>
+      <h2>Denuncia, Querella y Formas de Inicio</h2>
+      <span class="art-ref">Arts. 259–278 · 102–127 LECrim</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Denuncia</div>
+          <span class="art-badge">Arts. 259–269</span>
+        </div>
+        <div class="bloque-desc">
+          Comunicación de un hecho presuntamente delictivo a la autoridad. <b>No requiere abogado ni procurador.</b>
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span><b>Obligación de denunciar</b> (art. 259): todo ciudadano que presencie un delito público. Excepciones: abogados, médicos (secreto profesional), familiares.</span></li>
+          <li><span class="dot">▸</span><span>Puede presentarse ante Policía, Guardia Civil, Juzgado o Fiscalía.</span></li>
+          <li><span class="dot">▸</span><span><b>Verbal o escrita.</b> Siempre con firma e identificación del denunciante.</span></li>
+          <li><span class="dot">▸</span><span>El denunciante <b>no es parte</b> en el proceso (salvo que ejercite la acción penal mediante querella).</span></li>
+        </ul>
+        <div class="nota-info">ℹ️ <b>Denuncia anónima:</b> la Policía puede iniciar investigación, pero no puede ser la única base para detener o registrar. Requiere verificación.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Querella</div>
+          <span class="art-badge">Arts. 270–281</span>
+        </div>
+        <div class="bloque-desc">
+          El querellante <b>se convierte en parte acusadora</b> en el proceso. Requiere abogado y procurador. Debe ir ante el Juez competente.
+        </div>
+        <div class="chip-row">
+          <span class="chip rojo">Solo con abogado + procurador</span>
+          <span class="chip">Ante el Juzgado competente</span>
+          <span class="chip verde">Querellante = acusación particular</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Delitos Públicos / Semipúblicos / Privados</div>
+          <span class="art-badge">Arts. 104–107</span>
+        </div>
+        <table class="tabla-plazos">
+          <thead><tr><th>Tipo</th><th>Quién puede perseguir</th><th>Ejemplos</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>Público</b></td>
+              <td>Policía de oficio, Fiscal y cualquier ciudadano</td>
+              <td>Robo, homicidio, atentado, tráfico drogas</td>
+            </tr>
+            <tr>
+              <td><b>Semipúblico</b></td>
+              <td>Solo con denuncia del ofendido (o representante)</td>
+              <td>Agresión sexual (salvo menores), lesiones leves, malos tratos</td>
+            </tr>
+            <tr>
+              <td><b>Privado</b></td>
+              <td>Solo por querella del ofendido. Nunca Fiscal ni Policía.</td>
+              <td>Injurias y calumnias entre particulares</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="nota-alert">⚠️ En delitos semipúblicos con menores o personas con discapacidad, el Fiscal puede actuar aunque no haya denuncia.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       8. PROCEDIMIENTOS PENALES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🏛️</span>
+      <h2>Tipos de Procedimiento Penal</h2>
+      <span class="art-ref">Arts. 757–803 bis · Juicios Rápidos</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Comparativa de Procedimientos</div>
+        </div>
+        <table class="tabla-plazos">
+          <thead><tr><th>Procedimiento</th><th>Cuándo se aplica</th><th>Órgano competente</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>Juicio de Delitos Leves</b></td>
+              <td>Delito leve (pena ≤ 3 meses prisión o multa)</td>
+              <td>Juzgado de Instrucción / Paz</td>
+            </tr>
+            <tr>
+              <td><b>Proc. Abreviado</b></td>
+              <td>Delitos con pena ≤ 9 años</td>
+              <td>Juzgado Penal / Audiencia Prov.</td>
+            </tr>
+            <tr>
+              <td><b>Proc. Ordinario</b></td>
+              <td>Delitos graves (pena &gt; 9 años)</td>
+              <td>Audiencia Provincial (Jurado si toca)</td>
+            </tr>
+            <tr>
+              <td><b>Juicio Rápido</b></td>
+              <td>Delito flagrante, pena ≤ 5 años, autor detenido</td>
+              <td>Juzgado Guardia → Juzgado Penal</td>
+            </tr>
+            <tr>
+              <td><b>Proc. Ante Tribunal del Jurado</b></td>
+              <td>Delitos tasados (homicidio, allanamiento…)</td>
+              <td>Audiencia Provincial con jurado</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Juicio Rápido — Rol Policial Clave</div>
+          <span class="art-badge">Arts. 795–803</span>
+          <span class="badge-plazo">⏱ PLAZOS ESTRICTOS</span>
+        </div>
+        <div class="bloque-desc">
+          El juicio rápido se inicia cuando hay detenido o imputado citado, el delito es flagrante y la instrucción es sencilla. La Policía tiene un papel <b>central y urgente</b>.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="num">1</span><span>Policía detiene / cita al imputado + recoge atestado.</span></li>
+          <li><span class="num">2</span><span>Trasladar al detenido al <b>Juzgado de Guardia en el plazo más breve</b> posible. Límite: siguiente día hábil.</span></li>
+          <li><span class="num">3</span><span>El atestado del juicio rápido incluye: ofrecimiento de acciones a la víctima, solicitud de orden de protección si procede.</span></li>
+          <li><span class="num">4</span><span>El Juez de Guardia celebra la comparecencia y puede <b>dictar sentencia de conformidad</b> en el mismo acto.</span></li>
+        </ul>
+        <div class="nota-pol">🚔 En el juicio rápido, el atestado debe incluir el <b>ofrecimiento de acciones</b> a la víctima (art. 771.1 LECrim) y la información sobre las <b>OAP</b> si aplica. Sin esto, el expediente puede volver.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       9. PRUEBA Y NULIDAD
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🧪</span>
+      <h2>Prueba, Nulidad y Tutela Judicial</h2>
+      <span class="art-ref">Arts. 656–731 · Art. 11.1 LOPJ</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Principios de la Prueba Penal</div>
+        </div>
+        <div class="chip-row">
+          <span class="chip verde">✔ Contradicción</span>
+          <span class="chip verde">✔ Publicidad</span>
+          <span class="chip verde">✔ Inmediación (ante el Juez)</span>
+          <span class="chip verde">✔ Oralidad</span>
+          <span class="chip dorado">⚖️ Presunción de inocencia (art. 24 CE)</span>
+        </div>
+        <div class="bloque-desc" style="margin-top:8px;">
+          Solo tiene valor de <b>prueba plena</b> la practicada en juicio oral con todas las garantías. Las diligencias policiales son <b>pre-procesales</b> (valor de denuncia).
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Nulidad de la Prueba — Árbol del Fruto Envenenado</div>
+          <span class="art-badge">Art. 11.1 LOPJ</span>
+        </div>
+        <div class="bloque-desc">
+          Las pruebas obtenidas <b>violando derechos fundamentales</b> son nulas de pleno derecho. Y las pruebas derivadas de ellas también son nulas (<i>"fruto del árbol envenenado"</i>).
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span><b>Entrada sin orden</b> ni flagrancia → lo incautado: nulo.</span></li>
+          <li><span class="dot">▸</span><span><b>Móvil accedido sin autorización</b> → mensajes y contactos: nulos.</span></li>
+          <li><span class="dot">▸</span><span><b>Declaración sin letrado</b> (cuando era obligatoria) → declaración: nula.</span></li>
+          <li><span class="dot">▸</span><span><b>Escucha sin auto judicial</b> → grabación y todo lo derivado: nulo.</span></li>
+        </ul>
+        <div class="nota-alert">⚠️ Una sola actuación policial irregular puede arruinar todo el trabajo de investigación. La legalidad en la obtención de prueba es tan importante como encontrarla.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="bloque">
+        <div class="bloque-top">
+          <div class="bloque-nombre">Ofrecimiento de Acciones a la Víctima</div>
+          <span class="art-badge">Art. 771.1 LECrim</span>
+        </div>
+        <div class="bloque-desc">
+          La Policía Judicial tiene la obligación de <b>informar a la víctima</b> de su derecho a mostrarse parte en el proceso y ejercer la acción penal y civil.
+        </div>
+        <ul class="paso-lista">
+          <li><span class="dot">▸</span><span>Informar del derecho a ejercer la <b>acción penal</b> (querellarse o mantenerse como denunciante).</span></li>
+          <li><span class="dot">▸</span><span>Informar del derecho a <b>indemnización</b> (responsabilidad civil derivada del delito).</span></li>
+          <li><span class="dot">▸</span><span>Informar de los <b>servicios de asistencia a víctimas</b> disponibles.</span></li>
+          <li><span class="dot">▸</span><span>Recoger su voluntad en diligencia separada firmada por la víctima.</span></li>
+        </ul>
+        <div class="nota-pol">🚔 Obligatorio en todo atestado con víctima identificada. Omitirlo es defecto procesal que puede retrasar el juicio rápido.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       RECUERDA
+  ══════════════════════════════════════════ -->
+  <div class="recuerda">
+    <h3>📋 Recuerda — Claves LECrim</h3>
+    <ul>
+      <li>El <b>atestado</b> es denuncia, no prueba. Las declaraciones deben ratificarse en sede judicial para tener valor probatorio pleno.</li>
+      <li>Plazo de detención: <b>6 h</b> para entregar al Juez o liberar, <b>72 h</b> máximo constitucional. El cómputo empieza en el momento de la detención efectiva.</li>
+      <li>Los derechos del detenido (art. 520) se leen <b>inmediatamente</b>, antes de cualquier diligencia. El formulario firmado va al atestado.</li>
+      <li>El domicilio es inviolable. Solo se entra con <b>auto judicial, consentimiento del titular o flagrante delito</b>. En este último caso, comunicar al Juez inmediatamente.</li>
+      <li>Una prueba obtenida vulnerando derechos fundamentales es <b>nula</b>, y arrastra en su nulidad a todo lo derivado de ella (art. 11.1 LOPJ).</li>
+      <li>El <b>hábeas corpus</b> debe tramitarse de inmediato. Retrasar su traslado al Juez puede ser constitutivo de delito (art. 530 CP).</li>
+      <li>En el <b>juicio rápido</b>: llevar el atestado completo con ofrecimiento de acciones y, si aplica, solicitud de OAP. Sin estos, el expediente vuelve.</li>
+      <li>El <b>art. 416</b> dispensa a parientes directos y cónyuge de declarar. Deben ser informados de esta dispensa antes de su declaración.</li>
+      <li>Acceder a un <b>teléfono móvil</b> sin orden judicial es inconstitucional. Sin importar la urgencia aparente: pedir autorización primero.</li>
+      <li>⚡ <b>LO 1/2026:</b> Se refuerzan las medidas cautelares de prohibición de residencia/aproximación. Coordinación activa con el Juzgado de Guardia en casos de reincidencia patrimonial.</li>
+    </ul>
+  </div>
+
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+
+</div>
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    if (body.style.display === 'none' || body.style.display === '') {
+      body.style.display = 'block';
+      body.style.animation = 'fadeUp .3s ease';
+    } else {
+      body.style.display = 'none';
+    }
+  }
+  document.querySelector('.cat-body').style.display = 'block';
+</script>
+</body>
+</html>

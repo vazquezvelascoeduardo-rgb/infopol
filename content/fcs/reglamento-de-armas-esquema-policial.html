@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reglamento de Armas — Esquema Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #0A1628;
+    --bg-section: #0E2244;
+    --gold: #C8A028;
+    --blue-royal: #1A5C96;
+    --red: #C8281E;
+    --green: #1A7A3C;
+    --text-main: #F0F4FF;
+    --text-secondary: #A8BAD4;
+    --border: #C8A028;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  body {
+    background-color: var(--bg-main);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-main);
+    padding: 20px 12px 40px;
+  }
+
+  .wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* ── CABECERA ── */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 8px;
+    animation: fadeUp .5s ease both;
+    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+  }
+  .escudo svg { flex-shrink: 0; }
+  .header-text { flex: 1; }
+  .header-text .label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .header-text h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-main);
+    line-height: 1.1;
+  }
+  .header-text h1 span { color: var(--gold); }
+  .header-text .subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* ── CLASIFICACIÓN GENERAL ── */
+  .clasificacion {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+    animation: fadeUp .6s ease .1s both;
+  }
+  .clas-card {
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+    border: 1px solid rgba(200,160,40,0.3);
+  }
+  .clas-card .icon { font-size: 22px; margin-bottom: 4px; }
+  .clas-card .tipo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .clas-card .pena-max {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+  }
+  .clas-leve   { background: rgba(26,122,60,0.15); border-color: var(--green); }
+  .clas-menos  { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
+  .clas-grave  { background: rgba(200,40,30,0.15); border-color: var(--red); }
+  .clas-leve .tipo   { color: #4ACD7A; }
+  .clas-menos .tipo  { color: #6AADDC; }
+  .clas-grave .tipo  { color: #E86050; }
+
+  /* ── BLOQUE CATEGORÍA ── */
+  .categoria {
+    background: var(--bg-section);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(200,160,40,0.2);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
+  .categoria:nth-child(2)  { animation: fadeUp .6s ease .3s both; }
+  .categoria:nth-child(3)  { animation: fadeUp .6s ease .35s both; }
+  .categoria:nth-child(4)  { animation: fadeUp .6s ease .4s both; }
+  .categoria:nth-child(5)  { animation: fadeUp .6s ease .45s both; }
+  .categoria:nth-child(6)  { animation: fadeUp .6s ease .5s both; }
+  .categoria:nth-child(7)  { animation: fadeUp .6s ease .55s both; }
+  .categoria:nth-child(8)  { animation: fadeUp .6s ease .6s both; }
+
+  .cat-header {
+    background: var(--blue-royal);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: background .2s;
+  }
+  .cat-header:hover { background: #1e6db0; }
+  .cat-header .cat-icon { font-size: 20px; }
+  .cat-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    flex: 1;
+  }
+  .cat-header .art-ref {
+    font-size: 11px;
+    color: rgba(240,244,255,0.65);
+    white-space: nowrap;
+  }
+  .cat-header .toggle {
+    font-size: 14px;
+    transition: transform .3s;
+    color: var(--gold);
+  }
+  .cat-header.open .toggle { transform: rotate(180deg); }
+
+  .cat-body { padding: 6px 0; }
+
+  /* ── ARTÍCULO / DELITO ── */
+  .delito {
+    border-left: 3px solid var(--gold);
+    margin: 8px 14px;
+    background: rgba(10,22,40,0.5);
+    border-radius: 0 7px 7px 0;
+    padding: 10px 14px;
+  }
+  .delito-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .delito-nombre {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+    flex: 1;
+    min-width: 160px;
+  }
+  .art-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    background: rgba(200,160,40,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .tipo-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .badge-leve   { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
+  .badge-menos  { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
+  .badge-grave  { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
+  .badge-mixto  { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
+
+  .delito-desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    line-height: 1.5;
+  }
+  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
+
+  .pena-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 7px;
+  }
+  .pena-chip {
+    font-size: 11px;
+    background: rgba(26,92,150,0.25);
+    border: 1px solid rgba(26,92,150,0.6);
+    color: var(--text-main);
+    padding: 3px 9px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .pena-chip.agravada {
+    background: rgba(200,40,30,0.2);
+    border-color: rgba(200,40,30,0.5);
+  }
+  .pena-chip.multa {
+    background: rgba(200,160,40,0.12);
+    border-color: rgba(200,160,40,0.4);
+    color: var(--gold);
+  }
+
+  .nota-agrav {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: #E08888;
+    background: rgba(200,40,30,0.08);
+    border-left: 2px solid var(--red);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+  }
+  .nota-policial {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: #A8D4C0;
+    background: rgba(26,122,60,0.1);
+    border-left: 2px solid var(--green);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ── RECUERDA ── */
+  .recuerda {
+    background: var(--gold);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-top: 6px;
+    animation: fadeUp .6s ease .7s both;
+  }
+  .recuerda h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #0A1628;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .recuerda ul { list-style: none; }
+  .recuerda ul li {
+    font-size: 13px;
+    color: #0A1628;
+    padding: 4px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    border-bottom: 1px solid rgba(10,22,40,0.15);
+    line-height: 1.4;
+  }
+  .recuerda ul li:last-child { border-bottom: none; }
+  .recuerda ul li::before { content: "▶"; font-size: 9px; margin-top: 4px; flex-shrink: 0; }
+
+  /* ── REFORMA BANNER ── */
+  .reforma-banner {
+    background: linear-gradient(135deg, #8B1A10 0%, #C8281E 50%, #8B1A10 100%);
+    border: 2px solid #FF6050;
+    border-radius: 8px;
+    padding: 10px 18px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp .55s ease .05s both;
+    box-shadow: 0 0 20px rgba(200,40,30,0.3);
+  }
+  .reforma-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
+  .reforma-banner .ref-text { flex: 1; }
+  .reforma-banner .ref-ley {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #FFD0CC;
+  }
+  .reforma-banner .ref-desc {
+    font-size: 12px;
+    color: rgba(255,220,215,0.85);
+    margin-top: 2px;
+  }
+  .reforma-banner .ref-fecha {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #FFD0CC;
+    background: rgba(0,0,0,0.2);
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    border: 1px solid rgba(255,200,190,0.3);
+  }
+
+  /* ── NUEVO etiqueta ── */
+  .badge-nuevo {
+    font-size: 9px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: #C8281E;
+    color: white;
+    letter-spacing: 0.5px;
+    animation: pulse 2s infinite;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .nota-reforma {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: #FFB8B0;
+    background: rgba(200,40,30,0.12);
+    border-left: 3px solid #C8281E;
+    padding: 5px 9px;
+    border-radius: 0 5px 5px 0;
+    line-height: 1.5;
+  }
+  .nota-reforma b { color: #FF8070; }
+
+  /* ── BOTÓN IMPRIMIR ── */
+  .btn-print {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: var(--blue-royal);
+    border: 2px solid var(--gold);
+    color: var(--text-main);
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .2s;
+    animation: fadeUp .6s ease .8s both;
+  }
+  .btn-print:hover {
+    background: var(--gold);
+    color: #0A1628;
+  }
+
+  /* ── DIVISOR ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 4px 14px 2px;
+    opacity: .35;
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .btn-print { display: none; }
+    .categoria { break-inside: avoid; }
+    .cat-body { display: block !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- CABECERA -->
+  <div class="header">
+    <div class="escudo">
+      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
+        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
+        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICÍA</text>
+        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
+        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <div class="label">Esquema Operativo Policial</div>
+      <h1>Reglamento <span>de Armas</span></h1>
+      <div class="subtitle">RD 137/1993 · Tenencia, uso, régimen sancionador y operativa de campo · Policía Local</div>
+    </div>
+  </div>
+
+  <!-- CLASIFICACIÓN -->
+  <div class="clasificacion">
+    <div class="clas-card clas-leve">
+      <div class="icon">🟢</div>
+      <div class="tipo">Infracción Leve</div>
+      <div class="pena-max">Multa ≤ 300,51 €<br>Art. 157 Reglamento<br>Prescribe 6 meses</div>
+    </div>
+    <div class="clas-card clas-menos">
+      <div class="icon">🔵</div>
+      <div class="tipo">Infracción Grave</div>
+      <div class="pena-max">Multa 300 – 30.050 €<br>Art. 156 Reglamento<br>Prescribe 2 años</div>
+    </div>
+    <div class="clas-card clas-grave">
+      <div class="icon">🔴</div>
+      <div class="tipo">Infracción M. Grave</div>
+      <div class="pena-max">Multa 30.050 – 601.012 €<br>Art. 155 Reglamento<br>Prescribe 3 años</div>
+    </div>
+  </div>
+
+  <!-- BANNER CONSOLIDACIÓN -->
+  <div class="reforma-banner">
+    <div class="ref-icon">🔴</div>
+    <div class="ref-text">
+      <div class="ref-ley">⚡ Texto consolidado · RD 137/1993 vigente</div>
+      <div class="ref-desc">Última modificación 04/04/2025 · Marcado único UE · Armas acústicas y de salvas · ITC actualizadas · Inutilización irreversible</div>
+    </div>
+    <div class="ref-fecha">BOE 05/03/1993<br>Consol. 04/04/2025</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       1. DISPOSICIONES COMUNES · TENENCIA Y USO
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">📋</span>
+      <h2>Disposiciones Comunes · Tenencia y Uso</h2>
+      <span class="art-ref">Arts. 144–149 Regl.</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Obligaciones del Tenedor</div>
+          <span class="art-badge">Art. 144</span>
+          <span class="tipo-badge badge-mixto">Deber legal</span>
+        </div>
+        <div class="delito-desc">
+          Personas físicas y jurídicas que posean armas de fuego están obligadas a: <b>guardarlas en lugar seguro</b>, <b>presentarlas a los agentes</b> a requerimiento, <b>declarar inmediatamente</b> pérdida o robo, no dejar arma y munición <b>fácilmente accesibles de manera conjunta</b> y ejercer <b>supervisión adecuada</b> durante transporte y uso.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Custodia en lugar seguro</span>
+          <span class="pena-chip">🔵 Exhibición a agentes</span>
+          <span class="pena-chip">🔵 Declaración inmediata pérdida</span>
+        </div>
+        <div class="nota-policial">🚔 A requerimiento del agente, el tenedor debe exhibir licencia y guía de pertenencia. La no exhibición sin causa justificada es infracción leve (art. 157.b). Si hay arma con munición accesible, valorar arts. 155.d / 156.c-d.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Prohibiciones de Portar y Exhibir</div>
+          <span class="art-badge">Art. 146</span>
+          <span class="tipo-badge badge-grave">Prohibición</span>
+        </div>
+        <div class="delito-desc">
+          Prohibido <b>portar, exhibir y usar fuera del domicilio</b>, lugar de trabajo o actividades deportivas, cualquier <b>arma de fuego corta</b> y <b>armas blancas puntiagudas</b>, así como en general armas de las <b>categorías 5ª, 6ª y 7ª</b>. Queda al criterio prudente del agente apreciar la necesidad según ocasión, momento y circunstancia.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">⚠️ En establecimientos y reuniones → ilícito</span>
+          <span class="pena-chip">🔵 Ponderar razón especial seg.</span>
+        </div>
+        <div class="nota-agrav">⚠️ Se estima ilícito en todo caso portar armas en <b>establecimientos públicos, lugares de reunión, concentración, recreo o esparcimiento</b>, y por quien haya sido condenado por delito contra personas/propiedad o sancionado por este Reglamento.</div>
+        <div class="nota-policial">🚔 Ante duda en vía pública: solicitar licencia + guía + causa del portador (razón de servicio, trayecto a club, etc.). Si no la acredita, intervenir el arma (art. 148).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Uso Prohibido</div>
+          <span class="art-badge">Art. 147</span>
+          <span class="tipo-badge badge-grave">Prohibición</span>
+        </div>
+        <div class="delito-desc">
+          Queda prohibido portar, exhibir o usar armas: <b>sin necesidad o de modo negligente o temerario</b>; con <b>cascos o auriculares</b> conectados a aparatos de sonido; y bajo efectos de <b>bebidas alcohólicas, estupefacientes, psicotrópicos, estimulantes o análogas</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">⚠️ Alcohol/drogas → infracción grave 156.j</span>
+          <span class="pena-chip agravada">⚠️ Uso temerario → intervención inmediata</span>
+        </div>
+        <div class="nota-policial">🚔 Clave: conductor bajo alcohol con arma en vehículo → intervención cautelar + depósito Intervención Armas GC + denuncia. Si hay peligro concreto para terceros, valorar <b>vía penal</b> (art. 564 CP tenencia ilícita).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Facultades del Agente · Ocupación</div>
+          <span class="art-badge">Art. 148</span>
+          <span class="tipo-badge badge-menos">Facultad policial</span>
+        </div>
+        <div class="delito-desc">
+          Los <b>agentes de la autoridad</b> (incluida Policía Local) pueden realizar <b>en todo caso</b> comprobaciones para impedir que en vías y establecimientos públicos se porten o utilicen armas ilegalmente. Pueden <b>ocupar temporalmente</b> las armas —incluso con licencia— para prevenir delito o garantizar seguridad, depositándolas en Intervención de Armas GC.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Comprobación sin causa previa</span>
+          <span class="pena-chip">🔵 Ocupación cautelar inmediata</span>
+          <span class="pena-chip agravada">⚠️ Manifestaciones → vía penal</span>
+        </div>
+        <div class="nota-policial">🚔 <b>Base legal directa para PL.</b> Procedimiento: 1) identificación + documentación · 2) ocupación con acta y testigos · 3) traslado a Intervención de Armas GC · 4) boletín denuncia Subdelegación Gobierno · 5) comunicación a Mossos si hay indicio penal.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Transporte en Vía Pública</div>
+          <span class="art-badge">Art. 149</span>
+          <span class="tipo-badge badge-menos">Regla</span>
+        </div>
+        <div class="delito-desc">
+          Las armas reglamentadas solo se pueden llevar por vías y lugares públicos urbanos <b>desmontadas o en sus cajas o fundas</b>, durante el trayecto desde el lugar de custodia al lugar de uso autorizado (campo/galería/polígono de tiro, espacio de caza).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Desmontada o en funda</span>
+          <span class="pena-chip">🔵 Trayecto directo custodia → uso</span>
+          <span class="pena-chip agravada">⚠️ Fuera del trayecto → irregular</span>
+        </div>
+        <div class="nota-policial">🚔 Arma vista <b>montada, cargada o fuera de funda</b> en vía pública urbana es <b>prima facie irregular</b>. Incluso con licencia válida, exigir acreditación del trayecto autorizado.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       2. PÉRDIDA O SUSTRACCIÓN
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🔍</span>
+      <h2>Pérdida o Sustracción de Armas</h2>
+      <span class="art-ref">Arts. 145, 155.d, 156.c-d, 157.c-d</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Obligación de Comunicar · Armas</div>
+          <span class="art-badge">Art. 145</span>
+          <span class="tipo-badge badge-mixto">Procedimiento</span>
+        </div>
+        <div class="delito-desc">
+          En todo caso de <b>pérdida, destrucción, robo o sustracción</b> de armas de las categorías 1ª, 2ª y 3ª, el titular debe dar <b>cuenta inmediata</b> a la Intervención de Armas de la Guardia Civil, <b>entregando la guía de pertenencia</b>. Si se comprueba destrucción o no hay responsabilidad del titular → conserva la licencia y puede adquirir otra arma, sin sanción.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Dar cuenta inmediata a GC</span>
+          <span class="pena-chip">🔵 Entregar guía de pertenencia</span>
+          <span class="pena-chip">🔵 Sin culpa → conserva licencia</span>
+        </div>
+        <div class="nota-policial">🚔 Cuando la PL recoge una denuncia por robo/pérdida de arma: comunicación inmediata a la Intervención de Armas GC competente. No puede retenerse el arma en dependencia PL más del tiempo imprescindible.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Pérdida de Licencia o Guía</div>
+          <span class="art-badge">Art. 145.2</span>
+          <span class="tipo-badge badge-mixto">Procedimiento</span>
+        </div>
+        <div class="delito-desc">
+          Si se pierden, destruyen, roban o sustraen las <b>licencias o guías de pertenencia</b>: comunicación inmediata. La Intervención de Armas puede extender <b>autorización temporal de uso</b> durante la tramitación o exigir <b>depósito inmediato</b> del arma.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Autorización temporal de uso</span>
+          <span class="pena-chip">🔵 O depósito del arma</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">No Comunicar Pérdida del Arma</div>
+          <span class="art-badge">Art. 157.c</span>
+          <span class="tipo-badge badge-leve">Infracción Leve</span>
+        </div>
+        <div class="delito-desc">
+          Incumplimiento de la obligación de dar cuenta a la Guardia Civil de la pérdida, destrucción, robo o sustracción de las <b>armas</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip multa">🟢 Multa hasta 300,51 €</span>
+          <span class="pena-chip agravada">⚠️ + Retirada de licencia</span>
+          <span class="pena-chip">🟢 Sin licencia → hasta 150,25 €</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">No Comunicar Pérdida de Licencia/Guía</div>
+          <span class="art-badge">Art. 157.d</span>
+          <span class="tipo-badge badge-leve">Infracción Leve</span>
+        </div>
+        <div class="delito-desc">
+          Incumplimiento de la obligación de dar cuenta de la pérdida, destrucción, robo o sustracción de las <b>licencias o guías de pertenencia</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip multa">🟢 Multa hasta 150,25 €</span>
+          <span class="pena-chip agravada">⚠️ + Retirada del arma</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Omisión Medidas · Pérdida Particular</div>
+          <span class="art-badge">Art. 156.c / d</span>
+          <span class="tipo-badge badge-menos">Infracción Grave</span>
+        </div>
+        <div class="delito-desc">
+          Omisión, insuficiencia o ineficacia de las <b>medidas de seguridad obligatorias</b> en domicilio o lugar de uso que provoquen pérdida, sustracción o robo del arma. Particulares: armas de defensa, vigilancia o largas rayadas (156.c) o largas ánima lisa (156.d).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip multa">🔵 156.c → hasta 6.010 €</span>
+          <span class="pena-chip multa">🔵 156.d → hasta 3.005 €</span>
+          <span class="pena-chip agravada">⚠️ Retirada licencia ≤ 6 meses</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Omisión Medidas · Fábrica/Comercio</div>
+          <span class="art-badge">Art. 155.d</span>
+          <span class="tipo-badge badge-grave">Infracción Muy Grave</span>
+        </div>
+        <div class="delito-desc">
+          Omisión, insuficiencia o ineficacia de medidas de seguridad en <b>fabricación, reparación, almacenamiento, distribución o comercio</b> de armas de defensa personal, vigilancia o largas rayadas, con resultado de pérdida, sustracción o robo.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip multa">🔴 Multa 30.050 – 300.506 €</span>
+          <span class="pena-chip agravada">⚠️ Clausura 6m – 2 años</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       3. CONTROL ADMINISTRATIVO
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🏛️</span>
+      <h2>Control Administrativo · Armas y Pirotecnia</h2>
+      <span class="art-ref">Arts. 7–10, 88–90, 96</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Autoridades que Intervienen</div>
+          <span class="art-badge">Art. 7</span>
+          <span class="tipo-badge badge-menos">Competencias</span>
+        </div>
+        <div class="delito-desc">
+          <b>M. Interior</b> (DG Guardia Civil): fabricación, comercio, tenencia y uso · <b>M. Defensa</b> (DG Armamento): armas de guerra · <b>M. Industria</b>: licencias import/export · <b>M. Hacienda</b> (Aduanas): control comercio exterior · <b>M. Asuntos Exteriores</b>: tránsito internacional.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 PL → denuncia y ocupación</span>
+          <span class="pena-chip">🔵 GC → Intervención Central</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Registro Nacional de Armas</div>
+          <span class="art-badge">Art. 9</span>
+          <span class="tipo-badge badge-menos">Trazabilidad</span>
+        </div>
+        <div class="delito-desc">
+          Gestionado por la <b>Intervención Central de Armas y Explosivos</b> (DG Guardia Civil). Contiene datos de todas las armas: tipo, marca, modelo, calibre, número de serie, marcado único, datos de proveedores y adquirentes. <b>Conservación: 30 años</b> tras destrucción.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Trazabilidad 30 años</span>
+          <span class="pena-chip">🔵 Cesión a FCS para investigación</span>
+        </div>
+        <div class="nota-policial">🚔 Art. 8.8 — <b>Colaboración obligatoria entre FCS</b>: comunicar circunstancias de interés policial (tráfico ilícito, pérdidas, sustracciones, decomisos). La PL canaliza siempre por Intervención de Armas GC.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Guía de Pertenencia</div>
+          <span class="art-badge">Arts. 88–89</span>
+          <span class="tipo-badge badge-menos">Documentación</span>
+        </div>
+        <div class="delito-desc">
+          Toda arma de las categorías <b>1ª, 2ª, 3ª, 6ª, 7ª (1,2,3,4) y 8ª</b> debe estar documentada con <b>guía de pertenencia</b> individual. Expedida por Intervención de Armas. <b>Acompaña siempre al arma</b> en uso, depósito y transporte.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Una guía por arma</span>
+          <span class="pena-chip">🔵 Siempre con el arma</span>
+          <span class="pena-chip">🔵 Reseña calibres intercambiables</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Revista de Armas</div>
+          <span class="art-badge">Art. 90</span>
+          <span class="tipo-badge badge-menos">Periódica</span>
+        </div>
+        <div class="delito-desc">
+          Las armas con guía de pertenencia pasan revista <b>cada 5 años</b>, coincidiendo con la renovación de licencia. <b>No pasar dos revistas consecutivas</b> → anulación y retirada de la guía, depósito obligatorio.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Cada 5 años</span>
+          <span class="pena-chip agravada">⚠️ 2 no pasadas → anulación guía</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Clases de Licencias</div>
+          <span class="art-badge">Art. 96</span>
+          <span class="tipo-badge badge-menos">Autorizaciones</span>
+        </div>
+        <div class="delito-desc">
+          <b>A</b> FFAA/FCS · <b>B</b> armas cortas particulares (restrictiva) · <b>C</b> seguridad privada · <b>D</b> caza mayor (arma larga rayada) · <b>E</b> escopetas y 7ª 2-3 · <b>F</b> armas de concurso deportivo. Para armas 4ª → <b>tarjeta de armas</b> municipal (Alcalde).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Validez 5 años</span>
+          <span class="pena-chip">🔵 &gt;67 años → visado 3 años</span>
+          <span class="pena-chip agravada">⚠️ Mayor edad + aptitud psicofísica</span>
+        </div>
+        <div class="nota-policial">🚔 Licencia B es <b>excepcional y restrictiva</b>: exige riesgo especial y necesidad concreta. La defensa personal por sí sola no justifica su concesión.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       4. LEY 4/2015 (LOPSC)
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">⚖️</span>
+      <h2>LO 4/2015 · Armas y Objetos Peligrosos</h2>
+      <span class="art-ref">Arts. 36.9, 36.10, 37.7, 37.13</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Uso Indebido de Armas de Fuego</div>
+          <span class="art-badge">Art. 36.9 LOPSC</span>
+          <span class="tipo-badge badge-menos">Infracción Grave</span>
+        </div>
+        <div class="delito-desc">
+          El uso <b>público e indebido de armas de fuego</b> en lugares, acontecimientos o manifestaciones públicas, o en circunstancias que <b>puedan causar alarma</b> o lesionar la seguridad.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip multa">🔵 Multa 601 € – 30.000 €</span>
+          <span class="pena-chip agravada">⚠️ + Retirada del arma</span>
+        </div>
+        <div class="nota-policial">🚔 Típico en festejos, verbenas y disparos al aire. PL → denuncia + intervención cautelar. Si hay peligro concreto para personas, valorar vía penal.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Portar Armas Prohibidas o Sin Licencia</div>
+          <span class="art-badge">Art. 36.10 LOPSC</span>
+          <span class="tipo-badge badge-menos">Infracción Grave</span>
+        </div>
+        <div class="delito-desc">
+          Portar, exhibir o usar <b>armas prohibidas</b>, así como armas reglamentadas <b>careciendo de la licencia</b>, autorización o guía necesarias, fuera del domicilio y sin constituir delito.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip multa">🔵 Multa 601 € – 30.000 €</span>
+          <span class="pena-chip agravada">⚠️ Decomiso del arma</span>
+        </div>
+        <div class="nota-agrav">⚠️ Si la tenencia del arma de fuego es sin licencia y cumple tipo del art. 564 CP → <b>vía penal</b> (tenencia ilícita de armas).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Armas Blancas Indebidas · Llevar con Riesgo</div>
+          <span class="art-badge">Art. 37.7 LOPSC</span>
+          <span class="tipo-badge badge-leve">Infracción Leve</span>
+        </div>
+        <div class="delito-desc">
+          Portar armas o instrumentos peligrosos <b>en lugares o acontecimientos</b> donde esté prohibido, o en <b>circunstancias que motiven temor o peligro</b> para la seguridad. Incluye cuchillos, navajas, objetos punzantes sin justificación.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip multa">🟢 Multa 100 € – 600 €</span>
+          <span class="pena-chip agravada">⚠️ + Decomiso</span>
+        </div>
+        <div class="nota-policial">🚔 <b>Uso más frecuente por PL:</b> control de fiestas, salida de discotecas, peleas de bar, concentraciones. Pensar siempre en navaja &gt; 11 cm de hoja o puño americano (este último ya es arma prohibida, pasa a 36.10).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Uso Irregular de Armas con Licencia</div>
+          <span class="art-badge">Art. 37.13 LOPSC</span>
+          <span class="tipo-badge badge-leve">Infracción Leve</span>
+        </div>
+        <div class="delito-desc">
+          Uso <b>irregular o negligente</b> de armas con licencia fuera de los supuestos permitidos por la normativa, sin llegar a constituir infracción grave del art. 36.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip multa">🟢 Multa 100 € – 600 €</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Armas Prohibidas (Art. 4 Regl.)</div>
+          <span class="art-badge">Art. 4 Regl.</span>
+          <span class="tipo-badge badge-grave">Prohibidas</span>
+        </div>
+        <div class="delito-desc">
+          Son <b>armas prohibidas</b>: fabricación ilícita, armas largas con dispositivos ocultos, pistolas con culatín, <b>bastones-estoque</b>, <b>puñales</b> (hoja &lt; 11 cm, doble filo y puntiaguda), <b>navajas automáticas</b>, armas de fuego combinadas con blancas, <b>defensas de alambre o plomo</b>, <b>puños americanos</b>, rompe-cabezas, munchacos, cerbatanas perfeccionadas.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">🔴 Tenencia → art. 36.10 LOPSC</span>
+          <span class="pena-chip agravada">🔴 Uso → art. 155.b Regl.</span>
+        </div>
+        <div class="nota-agrav">⚠️ Art. 5: también prohibidas a particulares las <b>defensas eléctricas, porras extensibles, tonfas</b>, silenciadores, sprays defensa (salvo los autorizados por Sanidad), municiones perforantes/explosivas/incendiarias/dum-dum.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       5. RÉGIMEN SANCIONADOR
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">📑</span>
+      <h2>Régimen Sancionador · Reglamento</h2>
+      <span class="art-ref">Arts. 155–157 Regl.</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Infracciones Muy Graves</div>
+          <span class="art-badge">Art. 155</span>
+          <span class="tipo-badge badge-grave">Muy Grave</span>
+        </div>
+        <div class="delito-desc">
+          <b>155.a.1</b> Fabricación/comercio armas prohibidas o de guerra sin habilitación · <b>155.a.2</b> Sin autorización para armas de defensa/vigilancia/largas rayadas o ánima lisa · <b>155.b</b> Uso de armas prohibidas · <b>155.c</b> Uso armas cortas sin licencia/guía · <b>155.d</b> Omisión medidas de seguridad en fabricación/comercio.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip multa">🔴 155.a.1 → 30.050 – 601.012 €</span>
+          <span class="pena-chip multa">🔴 155.b-c → 30.050 – 60.101 €</span>
+          <span class="pena-chip agravada">⚠️ Clausura 6m–2 años</span>
+          <span class="pena-chip agravada">⚠️ Decomiso</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Infracciones Graves</div>
+          <span class="art-badge">Art. 156</span>
+          <span class="tipo-badge badge-menos">Grave</span>
+        </div>
+        <div class="delito-desc">
+          <b>156.a</b> Fabricación/comercio armas cat. 4ª–7ª sin autorización · <b>156.f</b> Adquisición, tenencia, cesión o enajenación por particulares sin autorización · <b>156.g</b> Uso armas reglamentadas (no cortas) sin licencia/guía · <b>156.h</b> Uso con omisión de medidas con peligro · <b>156.i</b> <b>Portar armas en establecimientos y reuniones</b> · <b>156.j</b> Uso negligente o contra el art. 146 · <b>156.k</b> Cargadores no autorizados (&gt;20 arma corta, &gt;10 larga).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip multa">🔵 156.a → 300 – 30.050 €</span>
+          <span class="pena-chip multa">🔵 156.f → 300 – 1.202 €</span>
+          <span class="pena-chip multa">🔵 156.g-j → 300 – 601 €</span>
+          <span class="pena-chip multa">🔵 156.h/k → hasta 6.010 €</span>
+          <span class="pena-chip agravada">⚠️ 156.i → 300–450 € + decomiso</span>
+        </div>
+        <div class="nota-policial">🚔 La mayoría de boletines PL en materia de armas caerán en <b>156.f, 156.g, 156.i o 156.j</b>. Precisar siempre el tipo concreto en el boletín para evitar archivo.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Infracciones Leves</div>
+          <span class="art-badge">Art. 157</span>
+          <span class="tipo-badge badge-leve">Leve</span>
+        </div>
+        <div class="delito-desc">
+          <b>157.a</b> Conductas de 156 referidas a armas blancas, aire comprimido o cat. 4ª–7ª · <b>157.b</b> Omisión de revista, depósito o exhibición obligatorios · <b>157.c</b> No comunicar pérdida/robo de armas · <b>157.d</b> No comunicar pérdida/robo de licencias o guías · <b>157.e</b> Omisión de otras informaciones obligatorias · <b>157.f</b> Resto de contravenciones no tipificadas.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip multa">🟢 Tope general → 300,51 €</span>
+          <span class="pena-chip multa">🟢 157.c sin licencia → 150,25 €</span>
+          <span class="pena-chip agravada">⚠️ + Retirada arma/licencia</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       6. SANCIONES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">💶</span>
+      <h2>Sanciones · Accesorias y Competencia</h2>
+      <span class="art-ref">Arts. 158–163 Regl.</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Retirada de Armas</div>
+          <span class="art-badge">Art. 158.1</span>
+          <span class="tipo-badge badge-menos">Accesoria</span>
+        </div>
+        <div class="delito-desc">
+          Desposesión del arma y <b>prohibición de adquirir ni tener otras</b> durante el plazo fijado, con un <b>máximo de 2 años</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">⚠️ Máx. 2 años sin adquirir</span>
+          <span class="pena-chip">🔵 Inscripción Registro Nacional</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Retirada de Licencias</div>
+          <span class="art-badge">Art. 158.2</span>
+          <span class="tipo-badge badge-menos">Accesoria</span>
+        </div>
+        <div class="delito-desc">
+          Supone la <b>revocación</b> de la licencia o autorización especial. Durante el plazo (máx. 2 años) constituye <b>impedimento para renovar</b> e implica <b>depósito obligatorio</b> de las armas.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">⚠️ Revocación + depósito arma</span>
+          <span class="pena-chip">🔵 Anotación en Tarjeta Europea</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Competencia Sancionadora</div>
+          <span class="art-badge">Art. 159</span>
+          <span class="tipo-badge badge-menos">Órganos</span>
+        </div>
+        <div class="delito-desc">
+          <b>Subdelegado/Delegado del Gobierno</b>: infracciones <b>graves y leves</b> (regla general) · <b>Alcaldes</b>: infracciones leves relacionadas con arts. 105 (tarjetas armas 4ª) y 149.5 (aire comprimido) · <b>Director Seguridad del Estado</b>: <b>muy graves</b> en fabricación/comercio · <b>DG Guardia Civil</b>: graves y leves en fabricación/comercio.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 PL → instruye y remite</span>
+          <span class="pena-chip">🔵 Subdelegación → resuelve</span>
+          <span class="pena-chip agravada">⚠️ Alcalde → tarjeta armas 4ª</span>
+        </div>
+        <div class="nota-policial">🚔 La PL <b>denuncia pero no resuelve</b>. Boletín al órgano competente: Subdelegación del Gobierno (general) o Alcaldía (art. 105 y 149.5). Remitir copia a Intervención de Armas GC si procede.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Infracciones por FCS en Servicio</div>
+          <span class="art-badge">Art. 160</span>
+          <span class="tipo-badge badge-menos">Disciplinario</span>
+        </div>
+        <div class="delito-desc">
+          Las infracciones cometidas por miembros de <b>FFAA, FCS del Estado, Policía Autonómica y Policía Local</b> en relación con la tenencia y uso de armas en <b>ejercicio de funciones</b>, se sancionan conforme a sus <b>respectivos regímenes disciplinarios</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Vía disciplinaria interna</span>
+          <span class="pena-chip agravada">⚠️ Paralela a vía penal si procede</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Hechos con Relevancia Penal</div>
+          <span class="art-badge">Art. 161</span>
+          <span class="tipo-badge badge-grave">Prejudicialidad</span>
+        </div>
+        <div class="delito-desc">
+          Cuando de las actuaciones se deduzca que los hechos pueden constituir <b>infracción penal</b>, se remiten los antecedentes al <b>Ministerio Fiscal</b> y se suspende el procedimiento administrativo.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Suspensión expediente admvo.</span>
+          <span class="pena-chip agravada">⚠️ Prevalece vía penal</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Graduación de la Sanción</div>
+          <span class="art-badge">Art. 163</span>
+          <span class="tipo-badge badge-menos">Criterios</span>
+        </div>
+        <div class="delito-desc">
+          La autoridad sancionadora atenderá a: <b>gravedad</b> de la infracción, <b>cuantía del perjuicio</b>, trascendencia para la seguridad ciudadana, <b>grado de culpabilidad</b>, <b>reincidencia</b> y <b>capacidad económica</b> del infractor.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 6 criterios de graduación</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       7. MEDIDAS CAUTELARES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">⛔</span>
+      <h2>Medidas Cautelares</h2>
+      <span class="art-ref">Arts. 148, 164–166 · 49 LOPSC</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Ocupación Temporal por Agente</div>
+          <span class="art-badge">Art. 148</span>
+          <span class="tipo-badge badge-menos">Facultad de agente</span>
+        </div>
+        <div class="delito-desc">
+          Los agentes pueden ocupar temporalmente el arma, <b>incluso con licencia</b>, para prevenir comisión de delito o garantizar seguridad. Depósito en dependencias policiales por el <b>tiempo imprescindible</b> para instruir diligencias, con comunicación inmediata a la Intervención de Armas.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Sin acto admvo. previo</span>
+          <span class="pena-chip">🔵 Comunicación inmediata GC</span>
+          <span class="pena-chip agravada">⚠️ Tiempo imprescindible</span>
+        </div>
+        <div class="nota-policial">🚔 Base jurídica directa para cualquier agente de PL. Importante: <b>acta con reseña del arma</b> (marca, modelo, nº serie, calibre) y testigos cuando sea posible.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Medidas en Procedimiento Sancionador</div>
+          <span class="art-badge">Art. 164 / 49 LOPSC</span>
+          <span class="tipo-badge badge-menos">En expediente</span>
+        </div>
+        <div class="delito-desc">
+          Durante el expediente sancionador: <b>depósito de armas</b> en Intervención GC · <b>suspensión o clausura preventiva</b> de fábricas/locales · <b>suspensión de actividades</b> · <b>retirada preventiva de autorizaciones</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Depósito del arma</span>
+          <span class="pena-chip">🔵 Suspensión actividad</span>
+          <span class="pena-chip agravada">⚠️ Clausura preventiva</span>
+        </div>
+        <div class="nota-agrav">⚠️ Si la sanción previsible es <b>solo pecuniaria</b>, <b>no cabe</b> adoptar clausura, suspensión de actividad ni retirada de autorización (art. 164.3).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Destino del Arma Intervenida</div>
+          <span class="art-badge">Arts. 165–166</span>
+          <span class="tipo-badge badge-menos">Depósito</span>
+        </div>
+        <div class="delito-desc">
+          Toda autoridad o agente que decomise o intervenga armas, piezas fundamentales o componentes esenciales, <b>dará cuenta a la Guardia Civil</b> y las depositará en la <b>Intervención de Armas y Explosivos</b>, indicando datos de identificación y procedimiento.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Nunca retener en dep. PL</span>
+          <span class="pena-chip">🔵 Cat. 1ª y guerra → M. Defensa</span>
+        </div>
+        <div class="nota-policial">🚔 <b>Protocolo PL:</b> no mantener nunca armas intervenidas en dependencias PL más allá del tiempo de diligencias. Trasladar a Intervención de Armas GC con acta detallada y recibo firmado.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       8. PRESCRIPCIÓN · PRUEBA · RESPONSABLES · OPERATIVA
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🚔</span>
+      <h2>Prescripción · Prueba · Responsables · Operativa PL</h2>
+      <span class="art-ref">Arts. 30, 38, 52 LOPSC</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Prescripción de Infracciones y Sanciones</div>
+          <span class="art-badge">Art. 38 LOPSC</span>
+          <span class="tipo-badge badge-menos">Plazos</span>
+        </div>
+        <div class="delito-desc">
+          Plazos aplicables al régimen sancionador de armas vía LOPSC y, por régimen supletorio, al Reglamento.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">🔴 Muy graves → 3 años / 3 años</span>
+          <span class="pena-chip">🔵 Graves → 2 años / 2 años</span>
+          <span class="pena-chip">🟢 Leves → 6 meses / 1 año</span>
+        </div>
+        <div class="nota-policial">🚔 El cómputo se inicia desde el <b>día de comisión</b> de la infracción. Se interrumpe con la <b>notificación del inicio del procedimiento sancionador</b> al interesado.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Valor Probatorio de los Agentes</div>
+          <span class="art-badge">Art. 52 LOPSC</span>
+          <span class="tipo-badge badge-menos">Presunción</span>
+        </div>
+        <div class="delito-desc">
+          Las <b>denuncias de los agentes de la autoridad</b> en ejercicio de funciones y referidas a hechos <b>presenciados directamente</b> son <b>base suficiente</b> para adoptar la resolución procedente, y gozan de <b>presunción de veracidad</b>, salvo prueba en contrario del interesado.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Presunción de veracidad</span>
+          <span class="pena-chip agravada">⚠️ Solo hechos presenciados</span>
+          <span class="pena-chip">🔵 PL · MMEE · PN · GC</span>
+        </div>
+        <div class="nota-policial">🚔 <b>Redacción del boletín</b>: clara, objetiva y concreta. Hora, lugar, identificación, arma/objeto (marca, modelo, nº), actitud, testigos. Si no se presenció directamente, indicarlo y aportar la fuente (denunciante, cámaras).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Sujetos Responsables</div>
+          <span class="art-badge">Art. 30 LOPSC</span>
+          <span class="tipo-badge badge-menos">Imputación</span>
+        </div>
+        <div class="delito-desc">
+          <b>Autores directos</b> (persona física o jurídica) · <b>Menores de 14 años</b>: no responsables; responden padres/tutores · <b>14–18 años</b>: responsabilidad propia con solidaridad pecuniaria padres/tutores · <b>Organizadores</b> de eventos: responsabilidad por falta de diligencia · <b>Empresas de seguridad</b> (art. 128 Regl.): superiores responden por falta de control sobre armas del personal.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 &lt;14 años → no responsable</span>
+          <span class="pena-chip">🔵 14–18 → solidaria padres</span>
+          <span class="pena-chip agravada">⚠️ Organizador → culpa in vigilando</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Operativa Policial · PL</div>
+          <span class="art-badge">Art. 148 + LL. 16/1991</span>
+          <span class="tipo-badge badge-menos">Protocolo</span>
+        </div>
+        <div class="delito-desc">
+          Protocolo de actuación ante arma u objeto peligroso en vía pública:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">① Identificación tenedor</span>
+          <span class="pena-chip">② Exigir licencia + guía</span>
+          <span class="pena-chip">③ Ocupación cautelar (art. 148)</span>
+          <span class="pena-chip">④ Acta con testigos</span>
+          <span class="pena-chip">⑤ Depósito Intervención GC</span>
+          <span class="pena-chip">⑥ Boletín Subdelegación</span>
+          <span class="pena-chip agravada">⑦ Comunicación MMEE si hay delito</span>
+        </div>
+        <div class="nota-policial">🚔 <b>Supuestos típicos PL:</b> arma en vía pública urbana · navaja &gt; 11 cm en festejos · porra extensible o tonfa en discoteca · aire comprimido cat. 4ª sin tarjeta · violencia doméstica con arma en casa (coordinar con MMEE) · disparos al aire en fiestas mayores.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Coordinación entre Cuerpos</div>
+          <span class="art-badge">Art. 8.8 Regl.</span>
+          <span class="tipo-badge badge-menos">FCS</span>
+        </div>
+        <div class="delito-desc">
+          <b>Policía Local</b>: detección, intervención inmediata, boletín, decomiso, traslado a GC · <b>Mossos d'Esquadra</b>: policía judicial en Catalunya; indicios penales · <b>Guardia Civil (Intervención Armas)</b>: control administrativo, depósito, Registro Nacional · <b>Subdelegación Gobierno</b>: órgano sancionador de graves y leves.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 PL → frontal visible</span>
+          <span class="pena-chip">🔵 MMEE → policía judicial</span>
+          <span class="pena-chip">🔵 GC → control técnico</span>
+          <span class="pena-chip">🔵 Subdelegación → sanción</span>
+        </div>
+        <div class="nota-agrav">⚠️ Vía penal: <b>Art. 563 CP</b> tenencia de armas prohibidas · <b>Art. 564 CP</b> tenencia ilícita de armas de fuego reglamentadas sin licencia · <b>Arts. 566–570 CP</b> depósito y tráfico. Si hay duda entre vía administrativa y penal, elevar atestado y que decida el juzgado.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       CUADRO RECUERDA
+  ══════════════════════════════════════════ -->
+  <div class="recuerda">
+    <h3>📋 Recuerda — Claves Operativas</h3>
+    <ul>
+      <li><b>Categorías armas</b> (art. 3): 1ª pistolas/revólveres · 2ª largas caza mayor · 3ª escopetas y aire &gt; 24,2 J · 4ª aire comprimido · 5ª blancas · 6ª antiguas · 7ª varios · 8ª acústicas · 9ª inutilizadas.</li>
+      <li><b>Licencias</b> (art. 96): A (FFAA/FCS) · B (cortas particulares, restrictiva) · C (seguridad privada) · D (caza mayor) · E (escopetas) · F (concurso). Cat. 4ª → tarjeta municipal (art. 105).</li>
+      <li><b>Vigencia licencias</b>: 5 años. Mayores de 67 años → visado psicofísico a los 3 años.</li>
+      <li><b>Transporte art. 149</b>: armas desmontadas o en funda durante el trayecto custodia → lugar de uso autorizado. Fuera de esto, irregular.</li>
+      <li><b>Prohibiciones art. 146</b>: no portar armas cortas fuera de domicilio/trabajo/deporte. Ilícito en establecimientos, reuniones y concentraciones.</li>
+      <li><b>Prohibiciones art. 147</b>: nunca con alcohol/drogas, ni con auriculares, ni de forma negligente o temeraria.</li>
+      <li><b>Ocupación cautelar art. 148</b>: la PL puede intervenir armas incluso con licencia si hay riesgo. Depósito en Intervención de Armas GC, nunca en dependencia PL.</li>
+      <li><b>Pérdida / sustracción</b>: el titular debe comunicar inmediatamente (art. 145). No hacerlo → 157.c (leve, hasta 300,51 €).</li>
+      <li><b>Revista cada 5 años</b>: dos no pasadas consecutivas → anulación de la guía de pertenencia.</li>
+      <li><b>Armas prohibidas art. 4</b>: bastón-estoque, puñal (&lt;11 cm, doble filo), navaja automática, puño americano, rompe-cabezas, defensas de plomo/alambre.</li>
+      <li><b>Navajas no automáticas</b>: hoja máxima 11 cm para llevarla fuera del domicilio. Mayor → art. 37.7 LOPSC (leve).</li>
+      <li><b>Vía LOPSC 4/2015</b>: 36.9 (uso indebido, grave) · 36.10 (portar sin licencia o prohibidas, grave) · 37.7 (objetos peligrosos, leve) · 37.13 (uso irregular con licencia, leve).</li>
+      <li><b>Prescripción</b>: muy graves 3 años · graves 2 años · leves 6 meses. Sanciones: 3 / 2 / 1 año.</li>
+      <li><b>Presunción veracidad art. 52 LOPSC</b>: solo hechos <b>presenciados directamente</b>. Redacción objetiva y concreta del boletín.</li>
+      <li><b>Competencia sancionadora</b>: Subdelegación Gobierno (general) · Alcalde (art. 105 y 149.5) · DG Seguridad Estado (muy graves fabricación).</li>
+      <li><b>Retirada arma/licencia</b>: máximo 2 años. Impide adquirir nuevas armas y renovar durante el plazo.</li>
+      <li><b>Menores</b>: &lt;14 no responden; 14–18 responsabilidad propia con solidaridad pecuniaria de padres/tutores.</li>
+      <li><b>Vía penal</b>: arts. 563 (prohibidas), 564 (ilícita), 566–570 CP (depósito y tráfico). Ante la duda, atestado al Juzgado.</li>
+    </ul>
+  </div>
+
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+
+</div>
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    if (body.style.display === 'none' || body.style.display === '') {
+      body.style.display = 'block';
+      body.style.animation = 'fadeUp .3s ease';
+    } else {
+      body.style.display = 'none';
+    }
+  }
+  // Abrir primera categoría por defecto
+  document.querySelector('.cat-body').style.display = 'block';
+</script>
+</body>
+</html>

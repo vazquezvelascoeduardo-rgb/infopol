@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fons quadrat arrodonit amb el color marí de l'app -->
+  <rect width="512" height="512" rx="96" fill="#0a1628"/>
+  <!-- Cotxe patrulla, proporcional al canvas -->
+  <g transform="translate(42,118)">
+    <!-- Cos inferior -->
+    <rect x="10" y="150" width="408" height="110" rx="20" fill="#1d4ed8"/>
+    <!-- Cabina -->
+    <path d="M82 150 L130 80 L298 80 L346 150 Z" fill="#1e40af"/>
+    <!-- Finestres -->
+    <path d="M140 92 L200 92 L200 146 L124 146 Z" fill="#dbeafe"/>
+    <path d="M216 92 L288 92 L338 146 L216 146 Z" fill="#dbeafe"/>
+    <!-- Muntant central -->
+    <rect x="200" y="92" width="16" height="54" fill="#1e40af"/>
+    <!-- Franja groga -->
+    <rect x="10" y="184" width="408" height="18" fill="#fbbf24"/>
+    <!-- Barra de llums -->
+    <rect x="154" y="54" width="120" height="26" rx="4" fill="#0f172a"/>
+    <rect x="154" y="54" width="60" height="26" fill="#ef4444"/>
+    <rect x="214" y="54" width="60" height="26" fill="#3b82f6"/>
+    <!-- Llum davantera -->
+    <rect x="10" y="160" width="16" height="18" rx="3" fill="#fef3c7"/>
+    <!-- Rodes -->
+    <circle cx="96" cy="260" r="34" fill="#0f172a"/>
+    <circle cx="332" cy="260" r="34" fill="#0f172a"/>
+    <circle cx="96" cy="260" r="14" fill="#94a3b8"/>
+    <circle cx="332" cy="260" r="14" fill="#94a3b8"/>
+  </g>
+</svg>

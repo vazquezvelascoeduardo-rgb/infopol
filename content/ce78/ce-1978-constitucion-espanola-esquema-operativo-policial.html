@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CE 1978 · Constitución Española — Esquema Operativo Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #0A1628;
+    --bg-section: #0E2244;
+    --gold: #C8A028;
+    --blue-royal: #1A5C96;
+    --red: #C8281E;
+    --green: #1A7A3C;
+    --text-main: #F0F4FF;
+    --text-secondary: #A8BAD4;
+    --border: #C8A028;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  body {
+    background-color: var(--bg-main);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-main);
+    padding: 20px 12px 40px;
+  }
+
+  .wrapper { max-width: 720px; margin: 0 auto; }
+
+  /* ── CABECERA ── */
+  .header {
+    display: flex; align-items: center; gap: 18px;
+    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 8px;
+    animation: fadeUp .5s ease both;
+    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+  }
+  .escudo svg { flex-shrink: 0; }
+  .header-text { flex: 1; }
+  .header-text .label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .header-text h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px; font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-main); line-height: 1.1;
+  }
+  .header-text h1 span { color: var(--gold); }
+  .header-text .subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* ── CLASIFICACIÓN GENERAL ── */
+  .clasificacion {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px; margin-bottom: 14px;
+    animation: fadeUp .6s ease .1s both;
+  }
+  .clas-card {
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+    border: 1px solid rgba(200,160,40,0.3);
+  }
+  .clas-card .icon { font-size: 22px; margin-bottom: 4px; }
+  .clas-card .tipo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .clas-card .pena-max {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+  }
+  .clas-leve   { background: rgba(26,122,60,0.15); border-color: var(--green); }
+  .clas-menos  { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
+  .clas-grave  { background: rgba(200,40,30,0.15); border-color: var(--red); }
+  .clas-leve .tipo   { color: #4ACD7A; }
+  .clas-menos .tipo  { color: #6AADDC; }
+  .clas-grave .tipo  { color: #E86050; }
+
+  /* ── BANNER INFO ── */
+  .info-banner {
+    background: linear-gradient(135deg, #12345E 0%, #1A5C96 50%, #12345E 100%);
+    border: 2px solid #6AADDC;
+    border-radius: 8px;
+    padding: 10px 18px;
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 12px;
+    animation: fadeUp .55s ease .05s both;
+    box-shadow: 0 0 20px rgba(26,92,150,0.3);
+  }
+  .info-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
+  .info-banner .ref-text { flex: 1; }
+  .info-banner .ref-ley {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: #D8EBFF;
+  }
+  .info-banner .ref-desc {
+    font-size: 12px;
+    color: rgba(216,235,255,0.85);
+    margin-top: 2px;
+  }
+  .info-banner .ref-fecha {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px; font-weight: 700;
+    color: #D8EBFF;
+    background: rgba(0,0,0,0.25);
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    border: 1px solid rgba(216,235,255,0.3);
+    text-align: center;
+  }
+
+  /* ── CRONOLOGÍA ── */
+  .cronologia {
+    background: linear-gradient(135deg, #0E2244 0%, #12345E 100%);
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    animation: fadeUp .6s ease .15s both;
+  }
+  .cronologia h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 6px; top: 4px; bottom: 4px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold) 0%, var(--blue-royal) 100%);
+  }
+  .timeline-item {
+    position: relative;
+    padding: 4px 0 10px;
+    font-size: 12.5px;
+    color: var(--text-main);
+  }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -24px; top: 7px;
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(200,160,40,0.2);
+  }
+  .timeline-item .fecha {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 11.5px;
+    letter-spacing: 0.5px;
+    display: block;
+  }
+  .timeline-item .evento {
+    color: var(--text-main);
+    line-height: 1.4;
+  }
+  .timeline-item .evento b { color: #FFD060; }
+
+  /* ── BLOQUE CATEGORÍA ── */
+  .categoria {
+    background: var(--bg-section);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(200,160,40,0.2);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
+  .categoria:nth-child(2)  { animation: fadeUp .6s ease .25s both; }
+  .categoria:nth-child(3)  { animation: fadeUp .6s ease .3s both; }
+  .categoria:nth-child(4)  { animation: fadeUp .6s ease .35s both; }
+  .categoria:nth-child(5)  { animation: fadeUp .6s ease .4s both; }
+  .categoria:nth-child(6)  { animation: fadeUp .6s ease .45s both; }
+  .categoria:nth-child(7)  { animation: fadeUp .6s ease .5s both; }
+  .categoria:nth-child(8)  { animation: fadeUp .6s ease .55s both; }
+  .categoria:nth-child(9)  { animation: fadeUp .6s ease .6s both; }
+  .categoria:nth-child(10) { animation: fadeUp .6s ease .65s both; }
+
+  .cat-header {
+    background: var(--blue-royal);
+    padding: 12px 18px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none;
+    transition: background .2s;
+  }
+  .cat-header:hover { background: #1e6db0; }
+  .cat-header .cat-icon { font-size: 20px; }
+  .cat-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px; flex: 1;
+  }
+  .cat-header .art-ref {
+    font-size: 11px;
+    color: rgba(240,244,255,0.65);
+    white-space: nowrap;
+  }
+  .cat-header .toggle {
+    font-size: 14px;
+    transition: transform .3s;
+    color: var(--gold);
+  }
+  .cat-header.open .toggle { transform: rotate(180deg); }
+
+  .cat-body { padding: 6px 0; }
+
+  /* ── ARTÍCULO ── */
+  .delito {
+    border-left: 3px solid var(--gold);
+    margin: 8px 14px;
+    background: rgba(10,22,40,0.5);
+    border-radius: 0 7px 7px 0;
+    padding: 10px 14px;
+  }
+  .delito-top {
+    display: flex; align-items: flex-start;
+    gap: 8px; flex-wrap: wrap;
+  }
+  .delito-nombre {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14.5px; font-weight: 600;
+    color: var(--text-main);
+    flex: 1; min-width: 160px;
+  }
+  .art-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    background: rgba(200,160,40,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .tipo-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .badge-clave    { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
+  .badge-info     { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
+  .badge-grave    { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
+  .badge-local    { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
+
+  /* ── CHAPA RÁPIDA ── */
+  .multa-badge {
+    font-size: 11px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    background: var(--gold);
+    color: #0A1628;
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--gold);
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(200,160,40,0.25);
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .multa-badge.multa-alta {
+    background: var(--red);
+    color: #FFEBE8;
+    border-color: var(--red);
+    box-shadow: 0 1px 3px rgba(200,40,30,0.3);
+  }
+  .multa-badge.multa-organ {
+    background: var(--blue-royal);
+    color: #E0F0FF;
+    border-color: var(--blue-royal);
+  }
+  .multa-badge.multa-ok {
+    background: var(--green);
+    color: #E0FFF0;
+    border-color: var(--green);
+  }
+
+  .delito-desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    line-height: 1.5;
+  }
+  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
+
+  .pena-row {
+    display: flex; flex-wrap: wrap;
+    gap: 6px; margin-top: 7px;
+  }
+  .pena-chip {
+    font-size: 11px;
+    background: rgba(26,92,150,0.25);
+    border: 1px solid rgba(26,92,150,0.6);
+    color: var(--text-main);
+    padding: 3px 9px;
+    border-radius: 20px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .pena-chip.positivo {
+    background: rgba(26,122,60,0.25);
+    border-color: rgba(26,122,60,0.6);
+  }
+  .pena-chip.agravada {
+    background: rgba(200,40,30,0.2);
+    border-color: rgba(200,40,30,0.5);
+  }
+
+  /* ── MINI TABLA ── */
+  .mini-tabla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .mini-tabla .celda {
+    background: rgba(10,22,40,0.6);
+    border: 1px solid rgba(200,160,40,0.2);
+    border-radius: 5px;
+    padding: 6px 9px;
+    font-size: 11.5px;
+  }
+  .mini-tabla .celda b {
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* ── TABLA COMPARATIVA ── */
+  .tabla-discip {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    gap: 0;
+    margin-top: 8px;
+    background: rgba(10,22,40,0.7);
+    border: 1px solid rgba(200,160,40,0.3);
+    border-radius: 5px;
+    overflow: hidden;
+    font-size: 11.5px;
+  }
+  .tabla-discip .td-header {
+    background: rgba(200,160,40,0.15);
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    text-align: center;
+    border-right: 1px solid rgba(200,160,40,0.2);
+    border-bottom: 1px solid rgba(200,160,40,0.2);
+  }
+  .tabla-discip .td-header:last-child { border-right: none; }
+  .tabla-discip .td-cell {
+    padding: 5px 8px;
+    color: var(--text-main);
+    border-right: 1px solid rgba(200,160,40,0.1);
+    border-bottom: 1px solid rgba(200,160,40,0.1);
+  }
+  .tabla-discip .td-cell:last-child { border-right: none; }
+  .tabla-discip .td-pob {
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+  }
+
+  /* ── NOTAS ── */
+  .nota-agrav {
+    margin-top: 6px; font-size: 11.5px;
+    color: #E08888;
+    background: rgba(200,40,30,0.08);
+    border-left: 2px solid var(--red);
+    padding: 5px 9px;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+  }
+  .nota-agrav b { color: #FF8070; }
+  .nota-policial {
+    margin-top: 6px; font-size: 11.5px;
+    color: #A8D4C0;
+    background: rgba(26,122,60,0.1);
+    border-left: 2px solid var(--green);
+    padding: 5px 9px;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+  }
+  .nota-policial b { color: #4ACD7A; }
+  .nota-clave {
+    margin-top: 6px; font-size: 11.5px;
+    color: #E8D890;
+    background: rgba(200,160,40,0.1);
+    border-left: 2px solid var(--gold);
+    padding: 5px 9px;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+  }
+  .nota-clave b { color: #FFD060; }
+
+  /* ── RECUERDA ── */
+  .recuerda {
+    background: var(--gold);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-top: 6px;
+    animation: fadeUp .6s ease .8s both;
+  }
+  .recuerda h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px; font-weight: 700;
+    text-transform: uppercase;
+    color: #0A1628;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .recuerda ul { list-style: none; }
+  .recuerda ul li {
+    font-size: 13px;
+    color: #0A1628;
+    padding: 5px 0;
+    display: flex; align-items: flex-start; gap: 6px;
+    border-bottom: 1px solid rgba(10,22,40,0.15);
+    line-height: 1.4;
+  }
+  .recuerda ul li:last-child { border-bottom: none; }
+  .recuerda ul li::before {
+    content: "▶";
+    font-size: 9px; margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── BOTÓN IMPRIMIR ── */
+  .btn-print {
+    display: block; width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: var(--blue-royal);
+    border: 2px solid var(--gold);
+    color: var(--text-main);
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px;
+    border-radius: 8px;
+    cursor: pointer; transition: all .2s;
+    animation: fadeUp .6s ease .9s both;
+  }
+  .btn-print:hover {
+    background: var(--gold);
+    color: #0A1628;
+  }
+
+  /* ── DIVISOR ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 4px 14px 2px;
+    opacity: .35;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 500px) {
+    .clasificacion { grid-template-columns: 1fr; }
+    .header-text h1 { font-size: 22px; }
+    .cat-header h2 { font-size: 14px; }
+    .multa-badge { font-size: 10.5px; padding: 2px 7px; }
+    .tabla-discip { grid-template-columns: 1fr 1.5fr; }
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .btn-print { display: none; }
+    .categoria { break-inside: avoid; }
+    .cat-body { display: block !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- CABECERA -->
+  <div class="header">
+    <div class="escudo">
+      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
+        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
+        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICIA</text>
+        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
+        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <div class="label">Esquema Operativo Policial</div>
+      <h1>CE · Constitución <span>1978</span></h1>
+      <div class="subtitle">Génesis, estructura, Título I (derechos) y Título VIII (organización territorial) · Aplicación operativa PL</div>
+    </div>
+  </div>
+
+  <!-- CLASIFICACIÓN -->
+  <div class="clasificacion">
+    <div class="clas-card clas-leve">
+      <div class="icon">📜</div>
+      <div class="tipo">Principios</div>
+      <div class="pena-max">Tít. Preliminar<br>Arts. 1–9<br>Estado social y democrático</div>
+    </div>
+    <div class="clas-card clas-menos">
+      <div class="icon">🔒</div>
+      <div class="tipo">Derechos Fund.</div>
+      <div class="pena-max">Título I<br>Arts. 10–55<br>Protección + amparo TC</div>
+    </div>
+    <div class="clas-card clas-grave">
+      <div class="icon">🏛️</div>
+      <div class="tipo">Org. Territorial</div>
+      <div class="pena-max">Título VIII<br>Arts. 137–158<br>CCAA + Prov. + Mun.</div>
+    </div>
+  </div>
+
+  <!-- BANNER INFO -->
+  <div class="info-banner">
+    <div class="ref-icon">📘</div>
+    <div class="ref-text">
+      <div class="ref-ley">📘 Constitución Española · 169 artículos · 11 títulos</div>
+      <div class="ref-desc">Referéndum 6 dic 1978 (87,87% SÍ) · Publicación BOE 29 dic 1978 · 2 reformas (1992 y 2011) · Norma suprema del ordenamiento</div>
+    </div>
+    <div class="ref-fecha">29/12/1978<br>Vigente</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       CRONOLOGÍA · NACIMIENTO DE LA CE
+  ══════════════════════════════════════════ -->
+  <div class="cronologia">
+    <h3>🕰️ Cronología · De la Transición a la CE 1978</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="fecha">20 NOV 1975</span>
+        <span class="evento">Muerte de Franco · Fin del régimen dictatorial (1939-1975)</span>
+      </div>
+      <div class="timeline-item">
+        <span class="fecha">22 NOV 1975</span>
+        <span class="evento">Proclamación de <b>Juan Carlos I</b> como Rey de España</span>
+      </div>
+      <div class="timeline-item">
+        <span class="fecha">JUL 1976</span>
+        <span class="evento"><b>Adolfo Suárez</b> presidente del Gobierno · Inicio de la Transición democrática</span>
+      </div>
+      <div class="timeline-item">
+        <span class="fecha">15 DIC 1976</span>
+        <span class="evento"><b>Ley para la Reforma Política</b> aprobada en referéndum (94,2% SÍ) · Suicidio legal del franquismo</span>
+      </div>
+      <div class="timeline-item">
+        <span class="fecha">15 JUN 1977</span>
+        <span class="evento">Primeras <b>elecciones democráticas</b> · Cortes constituyentes</span>
+      </div>
+      <div class="timeline-item">
+        <span class="fecha">25 JUL 1977</span>
+        <span class="evento">Constitución de la <b>Ponencia Constitucional</b> (los 7 "padres de la Constitución")</span>
+      </div>
+      <div class="timeline-item">
+        <span class="fecha">31 OCT 1978</span>
+        <span class="evento">Aprobación del texto por <b>Congreso y Senado</b> (325 sí / 6 no / 14 abstenciones)</span>
+      </div>
+      <div class="timeline-item">
+        <span class="fecha">6 DIC 1978</span>
+        <span class="evento"><b>Referéndum nacional</b>: 87,87% SÍ · 7,89% NO · Participación 67,11%</span>
+      </div>
+      <div class="timeline-item">
+        <span class="fecha">27 DIC 1978</span>
+        <span class="evento"><b>Sanción y promulgación</b> por el Rey Juan Carlos I en las Cortes</span>
+      </div>
+      <div class="timeline-item">
+        <span class="fecha">29 DIC 1978</span>
+        <span class="evento">Publicación en el <b>BOE</b> · <b>Entrada en vigor</b> de la Constitución</span>
+      </div>
+    </div>
+    <div class="nota-clave" style="margin-top:12px">💡 <b>Los 7 padres de la Constitución:</b> Cisneros, Herrero de Miñón, Pérez-Llorca (UCD) · Peces-Barba (PSOE) · Solé Tura (PSUC-PCE) · Fraga Iribarne (AP) · Roca i Junyent (Minoria Catalana).</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       1. ESTRUCTURA Y PRINCIPIOS (TIT. PRELIMINAR)
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">📐</span>
+      <h2>Estructura y Principios Generales</h2>
+      <span class="art-ref">Preámbulo · Tít. Preliminar · Arts. 1–9</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Estructura de la Constitución</div>
+          <span class="art-badge">Estructura</span>
+          <span class="tipo-badge badge-local">11 Títulos</span>
+          <span class="multa-badge">📋 169 artículos</span>
+        </div>
+        <div class="delito-desc">
+          La CE se compone de: <b>Preámbulo</b> + <b>Título Preliminar</b> (principios) + <b>10 Títulos numerados</b> + <b>4 Disposiciones Adicionales</b> + <b>9 Disposiciones Transitorias</b> + <b>1 Disposición Derogatoria</b> + <b>1 Disposición Final</b>.
+        </div>
+        <div class="tabla-discip">
+          <div class="td-header">Título</div>
+          <div class="td-header">Contenido / Arts.</div>
+          <div class="td-cell td-pob">Preliminar</div>
+          <div class="td-cell">Principios (Arts. 1-9)</div>
+          <div class="td-cell td-pob">Título I</div>
+          <div class="td-cell">Derechos y deberes fundamentales (Arts. 10-55)</div>
+          <div class="td-cell td-pob">Título II</div>
+          <div class="td-cell">La Corona (Arts. 56-65)</div>
+          <div class="td-cell td-pob">Título III</div>
+          <div class="td-cell">Cortes Generales (Arts. 66-96)</div>
+          <div class="td-cell td-pob">Título IV</div>
+          <div class="td-cell">Gobierno y Administración (Arts. 97-107)</div>
+          <div class="td-cell td-pob">Título V</div>
+          <div class="td-cell">Relaciones Gobierno-Cortes (Arts. 108-116)</div>
+          <div class="td-cell td-pob">Título VI</div>
+          <div class="td-cell">Poder Judicial (Arts. 117-127)</div>
+          <div class="td-cell td-pob">Título VII</div>
+          <div class="td-cell">Economía y Hacienda (Arts. 128-136)</div>
+          <div class="td-cell td-pob">Título VIII</div>
+          <div class="td-cell">Organización Territorial (Arts. 137-158)</div>
+          <div class="td-cell td-pob">Título IX</div>
+          <div class="td-cell">Tribunal Constitucional (Arts. 159-165)</div>
+          <div class="td-cell td-pob">Título X</div>
+          <div class="td-cell">Reforma constitucional (Arts. 166-169)</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">España como Estado</div>
+          <span class="art-badge">Art. 1 CE</span>
+          <span class="tipo-badge badge-grave">⭐ Fundamental</span>
+          <span class="multa-badge multa-alta">🇪🇸 Estado social y democrático</span>
+        </div>
+        <div class="delito-desc">
+          (1) España se constituye en un Estado <b>social y democrático de Derecho</b>, que propugna como valores superiores: <b>libertad, justicia, igualdad y pluralismo político</b>.<br>(2) La <b>soberanía nacional reside en el pueblo español</b>, del que emanan los poderes del Estado.<br>(3) La forma política del Estado es la <b>Monarquía parlamentaria</b>.
+        </div>
+        <div class="nota-clave">💡 <b>Los 4 valores superiores</b> (art. 1.1 CE) son la base axiológica de todo el ordenamiento: libertad, justicia, igualdad, pluralismo político. Cualquier norma que los vulnere es inconstitucional.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Unidad y Autonomías</div>
+          <span class="art-badge">Art. 2 CE</span>
+          <span class="tipo-badge badge-info">Principio</span>
+          <span class="multa-badge multa-organ">🏛️ Unidad + autonomía</span>
+        </div>
+        <div class="delito-desc">
+          La CE se fundamenta en la <b>indisoluble unidad de la Nación española</b>, patria común e indivisible de todos los españoles, y reconoce y garantiza el <b>derecho a la autonomía</b> de las nacionalidades y regiones que la integran, y la <b>solidaridad</b> entre ellas.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Lenguas de España</div>
+          <span class="art-badge">Art. 3 CE</span>
+          <span class="tipo-badge badge-local">Cataluña</span>
+          <span class="multa-badge multa-ok">🗣️ Cooficialidad</span>
+        </div>
+        <div class="delito-desc">
+          (1) El <b>castellano</b> es la lengua española oficial del Estado · Todos tienen el deber de conocerla y el derecho a usarla.<br>(2) Las <b>demás lenguas españolas</b> serán también oficiales en las respectivas CCAA de acuerdo con sus Estatutos.<br>(3) La riqueza de las distintas modalidades lingüísticas es patrimonio cultural objeto de especial respeto y protección.
+        </div>
+        <div class="nota-policial">🚔 En Catalunya el <b>catalán</b> es lengua propia y oficial junto con el castellano (art. 6 EAC). La PL debe poder atender y redactar en ambas lenguas. El <b>aranés</b> es oficial en la Val d'Aran.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Partidos y Sindicatos</div>
+          <span class="art-badge">Arts. 6–7 CE</span>
+          <span class="tipo-badge badge-info">Pluralismo</span>
+          <span class="multa-badge">📋 Cauce democrático</span>
+        </div>
+        <div class="delito-desc">
+          <b>Art. 6:</b> Los <b>partidos políticos</b> expresan el pluralismo, concurren a la formación y manifestación de la voluntad popular, son instrumento fundamental para la participación. Estructura interna y funcionamiento democráticos.<br><b>Art. 7:</b> Los <b>sindicatos</b> y las <b>asociaciones empresariales</b> contribuyen a la defensa y promoción de los intereses económicos y sociales que les son propios.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Fuerzas Armadas</div>
+          <span class="art-badge">Art. 8 CE</span>
+          <span class="tipo-badge badge-grave">Seguridad</span>
+          <span class="multa-badge multa-alta">🛡️ Soberanía + integridad</span>
+        </div>
+        <div class="delito-desc">
+          Las <b>Fuerzas Armadas</b> (Ejército de Tierra, Armada, Ejército del Aire) tienen como misión <b>garantizar la soberanía e independencia</b> de España, <b>defender su integridad territorial</b> y el <b>ordenamiento constitucional</b>.
+        </div>
+        <div class="nota-clave">💡 Las FFAA están en el Tít. Preliminar por su trascendencia constitucional. La <b>Guardia Civil</b> es cuerpo de naturaleza militar pero de seguridad (dependencia funcional Interior + Defensa). La PL es puramente civil (Llei 16/1991).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Principios Jerarquía y Legalidad</div>
+          <span class="art-badge">Art. 9 CE</span>
+          <span class="tipo-badge badge-grave">⭐ Legalidad</span>
+          <span class="multa-badge multa-alta">⚖️ Sometimiento a la Ley</span>
+        </div>
+        <div class="delito-desc">
+          (1) Ciudadanos y poderes públicos están <b>sujetos a la Constitución</b> y al resto del ordenamiento.<br>(3) La Constitución garantiza los siguientes principios:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">Legalidad</span>
+          <span class="pena-chip agravada">Jerarquía normativa</span>
+          <span class="pena-chip agravada">Publicidad de las normas</span>
+          <span class="pena-chip agravada">Irretroactividad no favorable</span>
+          <span class="pena-chip agravada">Seguridad jurídica</span>
+          <span class="pena-chip agravada">Responsabilidad poderes públicos</span>
+          <span class="pena-chip agravada">Interdicción de arbitrariedad</span>
+        </div>
+        <div class="nota-policial">🚔 <b>Principio de legalidad (art. 9.1 + 9.3 CE):</b> ninguna actuación policial puede fundamentarse al margen de una norma habilitante. La identificación, detención, registro o cacheo requieren cobertura legal expresa (LOPSC, LECrim, LTSV, etc.).</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       2. REFORMAS DE LA CONSTITUCIÓN
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">✏️</span>
+      <h2>Reformas de la Constitución</h2>
+      <span class="art-ref">Arts. 166–169</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Procedimiento Ordinario de Reforma</div>
+          <span class="art-badge">Art. 167 CE</span>
+          <span class="tipo-badge badge-info">Procedimiento</span>
+          <span class="multa-badge multa-organ">⏱️ 3/5 ambas Cámaras</span>
+        </div>
+        <div class="delito-desc">
+          Reforma de cualquier parte de la CE <b>salvo</b> Tít. Preliminar, Cap. II Sección 1ª Tít. I, y Tít. II (Corona). Requiere: <b>3/5 de cada Cámara</b>. Si no hay acuerdo, Comisión paritaria. Si aprobado por el Senado por mayoría absoluta, el Congreso puede aprobar la reforma por <b>2/3</b>. <b>Referéndum opcional</b> si lo solicitan 1/10 de miembros de cualquier Cámara.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Procedimiento Agravado de Reforma</div>
+          <span class="art-badge">Art. 168 CE</span>
+          <span class="tipo-badge badge-grave">Excepcional</span>
+          <span class="multa-badge multa-alta">⚠️ 2/3 + disolución + ratificación</span>
+        </div>
+        <div class="delito-desc">
+          Para revisión total de la CE o reforma del <b>Tít. Preliminar</b>, <b>Cap. II Sección 1ª del Tít. I</b> (derechos fundamentales, arts. 15-29) o del <b>Tít. II</b> (Corona). Requiere: (1) <b>2/3 de cada Cámara</b>; (2) <b>disolución inmediata</b> de las Cortes; (3) nueva ratificación por 2/3 de cada nueva Cámara; (4) <b>referéndum obligatorio</b>.
+        </div>
+        <div class="nota-clave">💡 Este procedimiento agravado <b>nunca se ha activado</b>. Protege los contenidos más sensibles: forma de Estado, valores superiores, derechos fundamentales con amparo y la Corona.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">1ª Reforma · Art. 13.2 CE (1992)</div>
+          <span class="art-badge">Reforma 1992</span>
+          <span class="tipo-badge badge-info">Ordinaria</span>
+          <span class="multa-badge">📅 27 AGO 1992</span>
+        </div>
+        <div class="delito-desc">
+          Añadido del inciso «<b>y pasivo</b>» al art. 13.2 CE para permitir a los ciudadanos de otros Estados miembros de la <b>UE</b> ser <b>elegibles</b> (no solo electores) en elecciones municipales. Motivo: <b>Tratado de Maastricht</b>.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">2ª Reforma · Art. 135 CE (2011)</div>
+          <span class="art-badge">Reforma 2011</span>
+          <span class="tipo-badge badge-info">Ordinaria</span>
+          <span class="multa-badge">📅 27 SEP 2011</span>
+        </div>
+        <div class="delito-desc">
+          Reforma del <b>art. 135 CE</b> para introducir el principio de <b>estabilidad presupuestaria</b> en todas las Administraciones Públicas y priorizar el pago de la <b>deuda pública</b>. Motivo: crisis económica y requerimientos de la UE.
+        </div>
+        <div class="nota-clave">💡 Solo ha habido <b>2 reformas</b> de la CE (ambas por procedimiento ordinario del art. 167). La CE es una de las más estables de Europa occidental.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       3. TÍTULO I · NACIONALIDAD Y EXTRANJERÍA
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🛂</span>
+      <h2>Tít. I · Cap. I · Españoles y Extranjeros</h2>
+      <span class="art-ref">Arts. 10–13</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Dignidad y Derechos de la Persona</div>
+          <span class="art-badge">Art. 10 CE</span>
+          <span class="tipo-badge badge-grave">⭐ Fundamento</span>
+          <span class="multa-badge multa-alta">👤 Dignidad</span>
+        </div>
+        <div class="delito-desc">
+          (1) La <b>dignidad de la persona</b>, los derechos inviolables que le son inherentes, el libre desarrollo de la personalidad, el respeto a la ley y a los derechos de los demás son <b>fundamento del orden político y la paz social</b>.<br>(2) Las normas relativas a derechos fundamentales se interpretarán de conformidad con la <b>DUDH</b> y los tratados internacionales ratificados por España.
+        </div>
+        <div class="nota-policial">🚔 Fundamento constitucional de la <b>actuación proporcional y respetuosa</b> de la PL. Cualquier intervención debe respetar la dignidad personal (prohibición tratos degradantes, uso proporcional de la fuerza).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Nacionalidad Española</div>
+          <span class="art-badge">Art. 11 CE</span>
+          <span class="tipo-badge badge-info">Estatuto</span>
+          <span class="multa-badge">📋 Adquisición por ley</span>
+        </div>
+        <div class="delito-desc">
+          (1) La nacionalidad española se <b>adquiere, conserva y pierde</b> de acuerdo con lo establecido por la ley (CC arts. 17-26).<br>(2) <b>Ningún español de origen podrá ser privado</b> de su nacionalidad.<br>(3) El Estado podrá concertar tratados de <b>doble nacionalidad</b> con países iberoamericanos o con especial vinculación (Portugal, Filipinas, Guinea Ecuatorial, Andorra).
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Mayoría de Edad</div>
+          <span class="art-badge">Art. 12 CE</span>
+          <span class="tipo-badge badge-info">Edad</span>
+          <span class="multa-badge multa-ok">👤 18 años</span>
+        </div>
+        <div class="delito-desc">
+          Los españoles son <b>mayores de edad a los 18 años</b>.
+        </div>
+        <div class="nota-policial">🚔 Referencia para identificación de menor/mayor (LOPSC art. 16, LORPM). Menores de 18: protocolo ERM, comunicación Fiscalía, entrega a padres/tutores o centro.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Derechos de los Extranjeros</div>
+          <span class="art-badge">Art. 13 CE</span>
+          <span class="tipo-badge badge-info">Estatuto</span>
+          <span class="multa-badge multa-organ">📋 Según tratados + ley</span>
+        </div>
+        <div class="delito-desc">
+          (1) Los <b>extranjeros</b> gozarán en España de las libertades públicas del Tít. I <b>en los términos que establezcan los tratados y la ley</b>.<br>(2) Solo los españoles tendrán los derechos del art. 23 CE (sufragio activo y pasivo), salvo que, por <b>tratado o ley</b>, y atendiendo a <b>reciprocidad</b>, se permita el sufragio activo <b>y pasivo</b> en elecciones municipales (reforma 1992).<br>(3) La <b>extradición</b> solo se concederá en cumplimiento de tratado o ley, con principio de reciprocidad. Excluidos: delitos políticos (no se consideran tales los actos terroristas).<br>(4) La ley establecerá los términos del <b>derecho de asilo</b>.
+        </div>
+        <div class="nota-policial">🚔 Base constitucional de la <b>Ley Orgánica 4/2000 de Extranjería</b>. Los derechos fundamentales del núcleo duro (arts. 15-29) se reconocen también a los extranjeros con independencia de su situación administrativa.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       4. TÍTULO I · CAP. II SEC. 1ª - DERECHOS FUNDAMENTALES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">🔒</span>
+      <h2>Derechos Fundamentales y Libertades Públicas</h2>
+      <span class="art-ref">Cap. II · Sec. 1ª · Arts. 14–29</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Principio de Igualdad</div>
+          <span class="art-badge">Art. 14 CE</span>
+          <span class="tipo-badge badge-grave">⭐ Fundamento</span>
+          <span class="multa-badge multa-alta">⚖️ Igualdad ante la ley</span>
+        </div>
+        <div class="delito-desc">
+          Los españoles son <b>iguales ante la ley</b>, sin que pueda prevalecer discriminación alguna por razón de <b>nacimiento, raza, sexo, religión, opinión o cualquier otra condición o circunstancia personal o social</b>.
+        </div>
+        <div class="nota-clave">💡 El art. 14 CE <b>encabeza</b> la Sección 1ª pero con matiz propio: está en el ámbito de amparo del TC (art. 53.2) aunque técnicamente precede a los derechos fundamentales en sentido estricto.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Derecho a la Vida e Integridad</div>
+          <span class="art-badge">Art. 15 CE</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE PL</span>
+          <span class="multa-badge multa-alta">🚫 Prohibición tortura</span>
+        </div>
+        <div class="delito-desc">
+          Todos tienen <b>derecho a la vida</b> y a la <b>integridad física y moral</b>, sin que, en ningún caso, puedan ser sometidos a <b>tortura</b> ni a <b>penas o tratos inhumanos o degradantes</b>. Queda abolida la <b>pena de muerte</b>, salvo lo dispuesto en leyes militares en tiempo de guerra.
+        </div>
+        <div class="nota-policial">🚔 <b>Límite absoluto de la actuación policial</b>. El uso de la fuerza y de medios coercitivos debe ser <b>necesario, proporcional y congruente</b> (art. 5 LO 2/1986 FCS). Cualquier exceso puede ser <b>art. 174-176 CP</b> (tortura) o <b>art. 173 CP</b> (tratos degradantes).</div>
+        <div class="nota-agrav">⚠️ La pena de muerte se abolió totalmente (incluso en tiempo de guerra) por la <b>LO 11/1995</b>. España es parte del Protocolo 13 CEDH.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Libertad Ideológica y Religiosa</div>
+          <span class="art-badge">Art. 16 CE</span>
+          <span class="tipo-badge badge-info">Libertad</span>
+          <span class="multa-badge">🕊️ Ideología + Religión</span>
+        </div>
+        <div class="delito-desc">
+          (1) Se garantiza la <b>libertad ideológica, religiosa y de culto</b> de individuos y comunidades sin más limitación en sus manifestaciones que el <b>orden público</b> protegido por la ley.<br>(2) <b>Nadie podrá ser obligado a declarar sobre su ideología, religión o creencias</b>.<br>(3) <b>Ninguna confesión tendrá carácter estatal</b> (aconfesionalidad). Los poderes públicos tendrán en cuenta las creencias religiosas y mantendrán relaciones de cooperación con la Iglesia Católica y demás confesiones.
+        </div>
+        <div class="nota-policial">🚔 La PL no puede preguntar por ideología o religión en una identificación. Los datos del padrón (art. 16 LRBRL) no incluyen religión. Las manifestaciones y cultos públicos están protegidos salvo alteración del orden público.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Derecho a la Libertad y Seguridad · Detención</div>
+          <span class="art-badge">Art. 17 CE</span>
+          <span class="tipo-badge badge-grave">⭐⭐ CLAVE PL</span>
+          <span class="multa-badge multa-alta">🚔 72 horas máximo</span>
+        </div>
+        <div class="delito-desc">
+          (1) Toda persona tiene derecho a la <b>libertad y seguridad</b>. Nadie puede ser privado de su libertad, salvo con la observancia de lo establecido y en los casos previstos por la ley.<br>(2) La <b>detención preventiva</b> no podrá durar más del tiempo estrictamente necesario para realizar las averiguaciones para el esclarecimiento de los hechos, y <b>máximo 72 horas</b>, el detenido deberá ser puesto en libertad o a disposición judicial.<br>(3) Toda persona detenida debe ser informada <b>de forma inmediata</b>, y en modo comprensible, de sus <b>derechos</b> y las razones de su detención, no pudiendo ser obligada a declarar. Se garantiza la <b>asistencia de abogado</b> al detenido en las diligencias policiales y judiciales.<br>(4) La ley regulará el procedimiento de <b>"habeas corpus"</b> para producir la inmediata puesta a disposición judicial de toda persona detenida ilegalmente.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">① Información inmediata de derechos</span>
+          <span class="pena-chip agravada">② Información motivos de la detención</span>
+          <span class="pena-chip agravada">③ No ser obligado a declarar</span>
+          <span class="pena-chip agravada">④ Asistencia letrada (abogado)</span>
+          <span class="pena-chip agravada">⑤ Máx. 72 h · Habeas Corpus</span>
+          <span class="pena-chip agravada">⑥ Intérprete si procede</span>
+        </div>
+        <div class="nota-policial">🚔 <b>ARTÍCULO CLAVE PARA PL</b>. Desarrollado por <b>LECrim arts. 489-527</b> (detención) y <b>LO 6/1984</b> (Habeas Corpus). La lectura de derechos debe hacerse inmediatamente y de forma comprensible. Toda detención sin cumplir → puede derivar en <b>Habeas Corpus</b> + responsabilidad del agente (art. 530 CP detención ilegal).</div>
+        <div class="nota-agrav">⚠️ En delitos de <b>terrorismo</b>, el plazo puede prorrogarse hasta <b>5 días</b> (72h + 48h) con autorización judicial (art. 520 bis LECrim + art. 55.2 CE).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Intimidad · Domicilio · Comunicaciones</div>
+          <span class="art-badge">Art. 18 CE</span>
+          <span class="tipo-badge badge-grave">⭐⭐ CLAVE PL</span>
+          <span class="multa-badge multa-alta">🏠 Inviolabilidad</span>
+        </div>
+        <div class="delito-desc">
+          (1) Se garantiza el derecho al <b>honor, intimidad personal y familiar</b> y a la <b>propia imagen</b>.<br>(2) El <b>domicilio es inviolable</b>. Ninguna entrada o registro podrá hacerse sin <b>consentimiento del titular</b> o <b>resolución judicial</b>, <b>salvo flagrante delito</b>.<br>(3) Se garantiza el <b>secreto de las comunicaciones</b> y, en especial, de las postales, telegráficas y telefónicas, salvo resolución judicial.<br>(4) La ley limitará el uso de la <b>informática</b> para garantizar el honor, la intimidad personal y familiar y el pleno ejercicio de los derechos.
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>Entrada en domicilio</b>(1) Consentimiento · (2) Autorización judicial · (3) Flagrante delito</div>
+          <div class="celda"><b>Intervención comunicaciones</b>Solo con autorización judicial motivada</div>
+          <div class="celda"><b>Tratamiento de datos</b>RGPD + LOPDGDD 3/2018 + art. 18.4 CE</div>
+          <div class="celda"><b>Captación imagen</b>LO 1/1982 · LO 4/1997 videovigilancia</div>
+        </div>
+        <div class="nota-policial">🚔 <b>ARTÍCULO CLAVE PARA PL</b>. El <b>flagrante delito</b> habilita entrada sin autorización judicial (STC 341/1993). Sin consentimiento ni flagrancia ni autorización judicial → <b>entrada ilegal</b> (art. 534 CP delito del funcionario). El concepto de "domicilio" es amplio: incluye habitaciones de hotel, caravanas habitadas, trasteros anexos.</div>
+        <div class="nota-agrav">⚠️ La PL <b>no puede grabar</b> comunicaciones privadas ni intervenir teléfonos sin auto judicial. El uso de cámaras corporales (body-cam) en vía pública está regulado por LO 4/1997 y normativa autonómica.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Libertad de Circulación y Residencia</div>
+          <span class="art-badge">Art. 19 CE</span>
+          <span class="tipo-badge badge-grave">CLAVE PL</span>
+          <span class="multa-badge multa-alta">🚶 Circular + entrar/salir</span>
+        </div>
+        <div class="delito-desc">
+          Los <b>españoles</b> tienen derecho a <b>elegir libremente su residencia</b> y a <b>circular</b> por el territorio nacional. Asimismo, tienen derecho a <b>entrar y salir libremente de España</b> en los términos que la ley establezca. Este derecho <b>no podrá ser limitado por motivos políticos o ideológicos</b>.
+        </div>
+        <div class="nota-policial">🚔 Fundamento de las <b>identificaciones</b> (art. 16 LOPSC) y <b>controles preventivos</b> (art. 17 LOPSC). Deben ser motivados, proporcionales y no discriminatorios. Las restricciones por emergencia sanitaria requieren ley (pandemia COVID → estado de alarma/excepción).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Libertad de Expresión e Información</div>
+          <span class="art-badge">Art. 20 CE</span>
+          <span class="tipo-badge badge-info">Libertad</span>
+          <span class="multa-badge">🗣️ Expresión + información veraz</span>
+        </div>
+        <div class="delito-desc">
+          Se reconocen y protegen los derechos a: (a) <b>expresar libremente</b> pensamientos, ideas y opiniones por cualquier medio; (b) a la <b>producción y creación literaria, artística, científica y técnica</b>; (c) a la <b>libertad de cátedra</b>; (d) a <b>comunicar o recibir libremente información veraz</b>.<br>(2) No puede restringirse mediante ningún tipo de <b>censura previa</b>.<br>(4) <b>Límites:</b> respeto a los derechos del Tít. I, preceptos legales desarrollo, derecho al honor, intimidad, imagen y protección juventud e infancia.
+        </div>
+        <div class="nota-policial">🚔 La PL debe <b>permitir grabaciones en vía pública</b> de su actuación mientras no se obstaculice el servicio (STS + doctrina TC). <b>No existe delito de "desacato"</b>: criticar a un agente no es delito, salvo que se infrinjan límites penales (injurias graves, amenazas).</div>
+        <div class="nota-agrav">⚠️ <b>Prohibición de secuestro</b> de publicaciones salvo por <b>resolución judicial</b> (art. 20.5 CE). La LOPSC art. 36.23 sanciona el uso no autorizado de imágenes de agentes que ponga en peligro su seguridad personal o familiar.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Derecho de Reunión · Manifestaciones</div>
+          <span class="art-badge">Art. 21 CE</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE PL</span>
+          <span class="multa-badge multa-alta">✊ Comunicación previa</span>
+        </div>
+        <div class="delito-desc">
+          (1) Se reconoce el derecho de <b>reunión pacífica y sin armas</b>. El ejercicio de este derecho <b>no necesitará de autorización previa</b>.<br>(2) En los casos de <b>reuniones en lugares de tránsito público</b> y manifestaciones, se dará <b>comunicación previa</b> a la autoridad (<b>mín. 10 días, máx. 30</b>, LO 9/1983), que <b>solo podrá prohibirlas</b> cuando existan razones fundadas de <b>alteración del orden público</b>, con peligro para personas o bienes.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip positivo">✓ Reunión pacífica y sin armas</span>
+          <span class="pena-chip positivo">✓ NO requiere autorización (comunicación)</span>
+          <span class="pena-chip positivo">✓ Comunicación 10-30 días antes</span>
+          <span class="pena-chip agravada">✗ Prohibición solo por orden público</span>
+          <span class="pena-chip agravada">✗ Reuniones armadas = ilícitas</span>
+        </div>
+        <div class="nota-policial">🚔 La LO 9/1983 reguladora del <b>derecho de reunión</b> desarrolla este artículo. La PL cumple funciones de acompañamiento, seguridad vial y mediación. Solo autoridad gubernativa (Subdelegación/Delegación) puede <b>prohibir</b> una manifestación. Las concentraciones <b>espontáneas</b> (sin comunicación) están amparadas si son pacíficas (STC 66/1995).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Derecho de Asociación</div>
+          <span class="art-badge">Art. 22 CE</span>
+          <span class="tipo-badge badge-info">Libertad</span>
+          <span class="multa-badge">🤝 Libre + inscripción</span>
+        </div>
+        <div class="delito-desc">
+          (1) Se reconoce el derecho de <b>asociación</b>.<br>(2) Las asociaciones que persigan <b>fines o utilicen medios tipificados como delito son ilegales</b>.<br>(3) Deberán inscribirse en un registro a los solos efectos de publicidad.<br>(4) Solo podrán ser disueltas o suspendidas por <b>resolución judicial motivada</b>.<br>(5) Se prohíben las asociaciones <b>secretas</b> y las de <b>carácter paramilitar</b>.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Participación Política y Sufragio</div>
+          <span class="art-badge">Art. 23 CE</span>
+          <span class="tipo-badge badge-info">Participación</span>
+          <span class="multa-badge multa-ok">🗳️ Voto + cargos</span>
+        </div>
+        <div class="delito-desc">
+          (1) Los ciudadanos tienen el derecho a <b>participar</b> en los asuntos públicos, <b>directamente o por medio de representantes</b>, libremente elegidos en elecciones periódicas por sufragio universal.<br>(2) Asimismo, tienen derecho a <b>acceder en condiciones de igualdad</b> a las funciones y cargos públicos, con los requisitos que señalen las leyes.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Tutela Judicial Efectiva</div>
+          <span class="art-badge">Art. 24 CE</span>
+          <span class="tipo-badge badge-grave">⭐ Garantía</span>
+          <span class="multa-badge multa-alta">⚖️ Juez + defensa</span>
+        </div>
+        <div class="delito-desc">
+          (1) Todas las personas tienen derecho a la <b>tutela efectiva de jueces y tribunales</b> en el ejercicio de sus derechos e intereses legítimos, <b>sin que, en ningún caso, pueda producirse indefensión</b>.<br>(2) Asimismo: derecho al <b>juez ordinario predeterminado</b> por ley, a la <b>defensa y asistencia de letrado</b>, a ser <b>informados de la acusación</b>, a un <b>proceso público sin dilaciones</b>, a utilizar los <b>medios de prueba</b> pertinentes, a <b>no declarar contra sí mismos</b>, a <b>no confesarse culpables</b> y a la <b>presunción de inocencia</b>. La ley regulará los casos en que no se esté obligado a declarar por parentesco o secreto profesional.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">Juez predeterminado por ley</span>
+          <span class="pena-chip agravada">Defensa y asistencia letrada</span>
+          <span class="pena-chip agravada">Información de la acusación</span>
+          <span class="pena-chip agravada">Proceso público sin dilaciones</span>
+          <span class="pena-chip agravada">Medios de prueba pertinentes</span>
+          <span class="pena-chip agravada">No declarar contra sí mismo</span>
+          <span class="pena-chip agravada">No confesarse culpable</span>
+          <span class="pena-chip agravada">Presunción de inocencia</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Principio de Legalidad Penal</div>
+          <span class="art-badge">Art. 25 CE</span>
+          <span class="tipo-badge badge-grave">⭐ Garantía</span>
+          <span class="multa-badge multa-alta">⚖️ Nullum crimen sine lege</span>
+        </div>
+        <div class="delito-desc">
+          (1) <b>Nadie puede ser condenado o sancionado</b> por acciones u omisiones que en el momento de producirse <b>no constituyan delito, falta o infracción administrativa</b>, según la legislación vigente en aquel momento.<br>(2) Las penas privativas de libertad estarán orientadas hacia la <b>reeducación y reinserción social</b>. El condenado a pena de prisión conservará los derechos fundamentales de este Capítulo, a excepción de los limitados por el contenido del fallo, el sentido de la pena y la ley penitenciaria.<br>(3) La Administración civil <b>no podrá imponer sanciones que impliquen privación de libertad</b>.
+        </div>
+        <div class="nota-policial">🚔 Las sanciones administrativas por infracciones (LOPSC, LTSV, ordenanzas) <b>nunca pueden ser privativas de libertad</b>. El impago solo puede derivar en embargo o apremio, nunca arresto sustitutorio (sí en el ámbito penal, pero impuesto por juez).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Derecho a la Educación</div>
+          <span class="art-badge">Art. 27 CE</span>
+          <span class="tipo-badge badge-info">Derecho social</span>
+          <span class="multa-badge multa-ok">📚 Obligatoria y gratuita</span>
+        </div>
+        <div class="delito-desc">
+          (1) Todos tienen derecho a la <b>educación</b>. Se reconoce la <b>libertad de enseñanza</b>.<br>(4) La enseñanza básica es <b>obligatoria y gratuita</b>.<br>(6) Se reconoce a las personas físicas y jurídicas la <b>libertad de creación de centros docentes</b>, dentro del respeto a los principios constitucionales.<br>(7) Los profesores, los padres y, en su caso, los alumnos intervendrán en el control y gestión de todos los centros sostenidos por la Administración con fondos públicos.
+        </div>
+        <div class="nota-policial">🚔 Fundamento del <b>absentismo escolar</b> como deber. Los servicios sociales y PL cooperan en protocolos de absentismo escolar (menores 6-16 años, escolaridad obligatoria).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Derecho de Sindicación y Huelga</div>
+          <span class="art-badge">Art. 28 CE</span>
+          <span class="tipo-badge badge-info">Derecho social</span>
+          <span class="multa-badge">✊ Sindicato + huelga</span>
+        </div>
+        <div class="delito-desc">
+          (1) Todos tienen derecho a <b>sindicarse libremente</b>. La ley podrá limitar o exceptuar el ejercicio de este derecho a las <b>Fuerzas o Institutos armados</b> o a los demás Cuerpos sometidos a disciplina militar y regulará las peculiaridades para los funcionarios públicos.<br>(2) Se reconoce el derecho a la <b>huelga</b> de los trabajadores para la defensa de sus intereses. La ley regulará el ejercicio y establecerá las garantías precisas para asegurar el mantenimiento de los <b>servicios esenciales</b>.
+        </div>
+        <div class="nota-policial">🚔 Las <b>FFCCSE tienen el derecho de sindicación limitado</b>: no pueden ir a la huelga (servicios esenciales permanentes). Pueden afiliarse a asociaciones profesionales (SPPL, SAP, SPC...). La Guardia Civil tiene régimen propio (LO 11/2007).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Derecho de Petición</div>
+          <span class="art-badge">Art. 29 CE</span>
+          <span class="tipo-badge badge-info">Participación</span>
+          <span class="multa-badge">📝 Individual o colectiva</span>
+        </div>
+        <div class="delito-desc">
+          (1) Todos los españoles tendrán el derecho de <b>petición individual y colectiva, por escrito</b>, en la forma y con los efectos que determine la ley (LO 4/2001).<br>(2) Los miembros de las <b>Fuerzas o Institutos armados</b> o de los Cuerpos sometidos a disciplina militar podrán ejercer este derecho <b>solo individualmente</b> y con arreglo a lo dispuesto en su legislación específica.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       5. TÍTULO I · CAP. II SEC. 2ª - DERECHOS Y DEBERES CIUDADANOS
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">📋</span>
+      <h2>Derechos y Deberes de los Ciudadanos</h2>
+      <span class="art-ref">Cap. II · Sec. 2ª · Arts. 30–38</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Defensa de España · Servicio Militar</div>
+          <span class="art-badge">Art. 30 CE</span>
+          <span class="tipo-badge badge-info">Deber</span>
+          <span class="multa-badge">🛡️ Derecho + deber</span>
+        </div>
+        <div class="delito-desc">
+          (1) Los españoles tienen el <b>derecho y el deber</b> de defender a España.<br>(2) La ley fijará las obligaciones militares y regulará la <b>objeción de conciencia</b>.<br>(3) Podrá establecerse un <b>servicio civil</b> para el cumplimiento de fines de interés general.<br>(4) Mediante ley podrán regularse los deberes de los ciudadanos en los casos de <b>grave riesgo, catástrofe o calamidad pública</b>.
+        </div>
+        <div class="nota-clave">💡 El <b>servicio militar obligatorio</b> fue suprimido por la Ley 17/1999 (profesionalización FFAA). Persiste el deber de defensa y las obligaciones derivadas de protección civil (Ley 17/2015).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Sistema Tributario</div>
+          <span class="art-badge">Art. 31 CE</span>
+          <span class="tipo-badge badge-info">Deber</span>
+          <span class="multa-badge">💰 Capacidad económica</span>
+        </div>
+        <div class="delito-desc">
+          (1) Todos contribuirán al sostenimiento de los gastos públicos de acuerdo con su <b>capacidad económica</b> mediante un sistema tributario justo inspirado en los principios de <b>igualdad y progresividad</b> que, en ningún caso, tendrá alcance <b>confiscatorio</b>.<br>(3) Solo podrán establecerse <b>prestaciones personales o patrimoniales de carácter público con arreglo a la ley</b>.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Derecho al Matrimonio</div>
+          <span class="art-badge">Art. 32 CE</span>
+          <span class="tipo-badge badge-info">Derecho</span>
+          <span class="multa-badge multa-ok">💍 Igualdad jurídica</span>
+        </div>
+        <div class="delito-desc">
+          (1) El hombre y la mujer tienen derecho a <b>contraer matrimonio con plena igualdad jurídica</b>.<br>(2) La ley regulará las formas de matrimonio, la edad y capacidad para contraerlo, los derechos y deberes de los cónyuges, las causas de separación y disolución y sus efectos.
+        </div>
+        <div class="nota-clave">💡 La <b>Ley 13/2005</b> extendió el derecho al matrimonio a personas del mismo sexo. El STC 198/2012 confirmó su constitucionalidad.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Propiedad Privada y Herencia</div>
+          <span class="art-badge">Art. 33 CE</span>
+          <span class="tipo-badge badge-info">Derecho</span>
+          <span class="multa-badge">🏘️ Función social</span>
+        </div>
+        <div class="delito-desc">
+          (1) Se reconoce el derecho a la <b>propiedad privada y a la herencia</b>.<br>(2) La <b>función social</b> de estos derechos delimitará su contenido, de acuerdo con las leyes.<br>(3) Nadie podrá ser privado de sus bienes y derechos sino por causa <b>justificada de utilidad pública o interés social</b>, mediante la correspondiente <b>indemnización</b> y de conformidad con lo dispuesto por las leyes (<b>expropiación forzosa</b>).
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Libertad de Empresa</div>
+          <span class="art-badge">Art. 38 CE</span>
+          <span class="tipo-badge badge-info">Derecho</span>
+          <span class="multa-badge">🏢 Economía de mercado</span>
+        </div>
+        <div class="delito-desc">
+          Se reconoce la <b>libertad de empresa</b> en el marco de la <b>economía de mercado</b>. Los poderes públicos garantizan y protegen su ejercicio y la defensa de la productividad, de acuerdo con las exigencias de la economía general y, en su caso, de la planificación.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       6. TÍTULO I · CAP. III - PRINCIPIOS RECTORES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🎯</span>
+      <h2>Principios Rectores Política Social y Económica</h2>
+      <span class="art-ref">Cap. III · Arts. 39–52</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Protección de la Familia e Infancia</div>
+          <span class="art-badge">Art. 39 CE</span>
+          <span class="tipo-badge badge-info">Principio</span>
+          <span class="multa-badge multa-ok">👨‍👩‍👧 Familia + menores</span>
+        </div>
+        <div class="delito-desc">
+          (1) Los poderes públicos aseguran la <b>protección social, económica y jurídica de la familia</b>.<br>(2) Los poderes públicos aseguran, asimismo, la protección integral de los hijos, iguales estos ante la ley con independencia de su filiación.<br>(4) Los niños gozarán de la protección prevista en los <b>acuerdos internacionales</b> que velan por sus derechos (CDN Naciones Unidas 1989).
+        </div>
+        <div class="nota-policial">🚔 Base constitucional del protocolo de protección de menores en riesgo (LO 1/1996 Protección Jurídica del Menor) que activan PL y Servicios Sociales.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Otros Principios Rectores · Resumen</div>
+          <span class="art-badge">Arts. 40–52 CE</span>
+          <span class="tipo-badge badge-info">Principios</span>
+          <span class="multa-badge">📋 13 principios</span>
+        </div>
+        <div class="delito-desc">
+          Principios rectores a promover por los poderes públicos:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">Art. 40 · Pleno empleo + formación</span>
+          <span class="pena-chip">Art. 41 · Seguridad Social</span>
+          <span class="pena-chip">Art. 42 · Emigrantes</span>
+          <span class="pena-chip">Art. 43 · Protección de la salud</span>
+          <span class="pena-chip">Art. 44 · Cultura + investigación</span>
+          <span class="pena-chip">Art. 45 · Medio ambiente</span>
+          <span class="pena-chip">Art. 46 · Patrimonio histórico</span>
+          <span class="pena-chip">Art. 47 · Vivienda digna</span>
+          <span class="pena-chip">Art. 48 · Juventud</span>
+          <span class="pena-chip">Art. 49 · Personas con discapacidad</span>
+          <span class="pena-chip">Art. 50 · Tercera edad</span>
+          <span class="pena-chip">Art. 51 · Consumidores</span>
+          <span class="pena-chip">Art. 52 · Organizaciones profesionales</span>
+        </div>
+        <div class="nota-clave">💡 Los principios rectores <b>no son derechos subjetivos directamente exigibles</b>. Requieren desarrollo legislativo (art. 53.3 CE). Solo pueden alegarse ante la jurisdicción según la ley de desarrollo.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       7. TÍTULO I · CAP. IV Y V - GARANTÍAS Y SUSPENSIÓN
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">🛡️</span>
+      <h2>Garantías y Suspensión de Derechos</h2>
+      <span class="art-ref">Cap. IV-V · Arts. 53–55</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Niveles de Protección de los Derechos</div>
+          <span class="art-badge">Art. 53 CE</span>
+          <span class="tipo-badge badge-grave">⭐ Garantía</span>
+          <span class="multa-badge multa-alta">🛡️ 3 niveles</span>
+        </div>
+        <div class="delito-desc">
+          Sistema de protección escalonada según la ubicación del derecho en el Título I:
+        </div>
+        <div class="tabla-discip">
+          <div class="td-header">Nivel</div>
+          <div class="td-header">Protección</div>
+          <div class="td-cell td-pob">Arts. 14 + 15-29 + 30.2</div>
+          <div class="td-cell"><b>Máxima:</b> LO + vincula todos poderes + recurso <b>AMPARO TC</b> + preferente y sumario</div>
+          <div class="td-cell td-pob">Arts. 30-38</div>
+          <div class="td-cell"><b>Media:</b> Ley ordinaria + respeto contenido esencial + tutela ordinaria</div>
+          <div class="td-cell td-pob">Arts. 39-52</div>
+          <div class="td-cell"><b>Mínima:</b> Principios rectores · Solo aplicables según desarrollo legal</div>
+        </div>
+        <div class="nota-policial">🚔 Los derechos fundamentales del núcleo duro (<b>arts. 15-29 + 14</b>) solo pueden regularse por <b>Ley Orgánica</b> (mayoría absoluta Congreso) y son directamente invocables ante juzgados con procedimiento preferente y sumario, más recurso de amparo TC.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Defensor del Pueblo</div>
+          <span class="art-badge">Art. 54 CE</span>
+          <span class="tipo-badge badge-info">Garantía</span>
+          <span class="multa-badge multa-organ">🏛️ Comisionado Cortes</span>
+        </div>
+        <div class="delito-desc">
+          Ley orgánica regulará la institución del <b>Defensor del Pueblo</b>, como <b>alto comisionado de las Cortes Generales</b>, designado por éstas para la defensa de los derechos comprendidos en este Título, a cuyo efecto podrá supervisar la actividad de la Administración, dando cuenta a las Cortes Generales.
+        </div>
+        <div class="nota-clave">💡 En Catalunya existe el <b>Síndic de Greuges</b> (Ley 24/2009) con funciones similares para las AAPP catalanas. Puede investigar actuaciones de PL en Cataluña.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Suspensión de Derechos</div>
+          <span class="art-badge">Art. 55 CE</span>
+          <span class="tipo-badge badge-grave">⭐ Excepcional</span>
+          <span class="multa-badge multa-alta">⚠️ Estado excepción + terrorismo</span>
+        </div>
+        <div class="delito-desc">
+          (1) Los derechos reconocidos en los arts. <b>17 (libertad/detención), 18.2-3 (domicilio/comunicaciones), 19 (circulación), 20.1.a+d y 5 (expresión), 21 (reunión), 28.2 (huelga)</b> y <b>37.2 (conflicto colectivo)</b> podrán ser <b>suspendidos</b> cuando se acuerde la declaración del <b>estado de excepción o de sitio</b> (arts. 17.3 participación abogado no puede suspenderse).<br>(2) Una LO podrá determinar la forma y los casos en los que, de forma <b>individual</b> y con la <b>necesaria intervención judicial y control parlamentario</b>, los derechos de los <b>arts. 17.2 y 18.2-3</b> pueden ser suspendidos para personas determinadas, en relación con investigaciones correspondientes a la actuación de <b>bandas armadas o elementos terroristas</b>.
+        </div>
+        <div class="nota-agrav">⚠️ La <b>utilización injustificada o abusiva</b> de estas suspensiones produce <b>responsabilidad penal</b>, como violación de los derechos y libertades reconocidos por las leyes.</div>
+        <div class="nota-policial">🚔 En investigaciones por <b>terrorismo</b>: prórroga detención 48h (total 120h), posible incomunicación, entradas y registros domiciliarios sin autorización judicial previa por urgencia (siempre con control judicial ex post). Regulado por LO 4/1988 y arts. 509, 520 bis, 553 LECrim.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       8. TÍTULO VIII · CAP. 1 - PRINCIPIOS GENERALES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">🗺️</span>
+      <h2>Tít. VIII · Cap. 1 · Principios Generales</h2>
+      <span class="art-ref">Arts. 137–139</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Organización Territorial del Estado</div>
+          <span class="art-badge">Art. 137 CE</span>
+          <span class="tipo-badge badge-grave">⭐ Fundamental</span>
+          <span class="multa-badge multa-alta">🏛️ 3 niveles territoriales</span>
+        </div>
+        <div class="delito-desc">
+          El Estado se organiza territorialmente en <b>municipios</b>, en <b>provincias</b> y en las <b>Comunidades Autónomas</b> que se constituyan. Todas estas entidades gozan de <b>autonomía para la gestión de sus respectivos intereses</b>.
+        </div>
+        <div class="nota-clave">💡 Este artículo es la <b>base constitucional de la estructura territorial</b>. La autonomía local se desarrolla en la LRBRL 7/1985 y en Cat. por la Llei 16/1991 (PL), Llei 8/1987 / DLeg 2/2003 (RL), Llei 4/2003 Seguretat.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Solidaridad Interterritorial</div>
+          <span class="art-badge">Art. 138 CE</span>
+          <span class="tipo-badge badge-info">Principio</span>
+          <span class="multa-badge multa-ok">🤝 Equilibrio entre CCAA</span>
+        </div>
+        <div class="delito-desc">
+          (1) El Estado garantiza la realización efectiva del principio de <b>solidaridad</b> consagrado en el art. 2 CE, velando por el establecimiento de un <b>equilibrio económico, adecuado y justo</b> entre las diversas partes del territorio español, y atendiendo en particular a las <b>circunstancias del hecho insular</b>.<br>(2) Las diferencias entre los Estatutos de las distintas CCAA no podrán implicar, en ningún caso, <b>privilegios económicos o sociales</b>.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Igualdad de los Españoles</div>
+          <span class="art-badge">Art. 139 CE</span>
+          <span class="tipo-badge badge-info">Principio</span>
+          <span class="multa-badge multa-ok">⚖️ Mismos derechos</span>
+        </div>
+        <div class="delito-desc">
+          (1) Todos los españoles tienen los <b>mismos derechos y obligaciones</b> en cualquier parte del territorio del Estado.<br>(2) Ninguna autoridad podrá adoptar medidas que directa o indirectamente obstaculicen la <b>libertad de circulación y establecimiento</b> de las personas y la libre circulación de bienes en todo el territorio español.
+        </div>
+        <div class="nota-policial">🚔 Este artículo complementa el art. 19 CE. Garantiza que un ciudadano pueda ser identificado o transitar por cualquier territorio del Estado sin restricciones por razón de su origen geográfico (principio de <b>unidad de mercado</b>).</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       9. TÍTULO VIII · CAP. 2 - ADMINISTRACIÓN LOCAL
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">🏘️</span>
+      <h2>Tít. VIII · Cap. 2 · Administración Local</h2>
+      <span class="art-ref">Arts. 140–142</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Autonomía Municipal</div>
+          <span class="art-badge">Art. 140 CE</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE PL</span>
+          <span class="multa-badge multa-alta">🏛️ Personalidad jurídica plena</span>
+        </div>
+        <div class="delito-desc">
+          La CE garantiza la <b>autonomía de los municipios</b>. Estos gozarán de <b>personalidad jurídica plena</b>. Su gobierno y administración corresponde a sus respectivos <b>Ayuntamientos</b>, integrados por los <b>Alcaldes y los Concejales</b>. Los Concejales serán elegidos por los vecinos del municipio mediante <b>sufragio universal, igual, libre, directo y secreto</b>, en la forma establecida por la ley. Los Alcaldes serán elegidos por los Concejales o por los vecinos. La ley regulará las condiciones en las que proceda el régimen del <b>concejo abierto</b>.
+        </div>
+        <div class="nota-policial">🚔 Base constitucional directa del <b>art. 21.1.i LRBRL</b> (Jefatura del Alcalde sobre la Policía Municipal). La PL es personal al servicio del municipio dentro del régimen de autonomía local constitucionalmente garantizado.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">La Provincia</div>
+          <span class="art-badge">Art. 141 CE</span>
+          <span class="tipo-badge badge-info">Entidad local</span>
+          <span class="multa-badge multa-organ">🗺️ Agrupación de municipios</span>
+        </div>
+        <div class="delito-desc">
+          (1) La <b>Provincia</b> es una entidad local con <b>personalidad jurídica propia</b>, determinada por la <b>agrupación de municipios</b> y división territorial para el cumplimiento de las actividades del Estado. Cualquier alteración de los límites provinciales habrá de ser aprobada por las Cortes Generales mediante <b>ley orgánica</b>.<br>(2) El gobierno y administración autónoma de las provincias estarán encomendados a <b>Diputaciones</b> u otras Corporaciones de carácter representativo.<br>(3) Se podrán crear <b>agrupaciones de municipios</b> diferentes de la provincia.<br>(4) En los <b>archipiélagos</b>, las islas tendrán su administración propia (Cabildos o Consejos).
+        </div>
+        <div class="nota-clave">💡 En Catalunya: 4 provincias (Barcelona, Girona, Lleida, Tarragona) y 4 Diputaciones. Coexisten con las <b>veguerías</b> (Llei 30/2010) y las <b>comarques</b> (DLeg 4/2003) como ejemplo de agrupaciones del art. 141.3.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Haciendas Locales</div>
+          <span class="art-badge">Art. 142 CE</span>
+          <span class="tipo-badge badge-info">Suficiencia</span>
+          <span class="multa-badge">💰 Suficiencia financiera</span>
+        </div>
+        <div class="delito-desc">
+          Las <b>Haciendas locales</b> deberán disponer de los <b>medios suficientes</b> para el desempeño de las funciones que la ley atribuye a las Corporaciones respectivas y se nutrirán fundamentalmente de <b>tributos propios</b> y de <b>participación en los del Estado y de las Comunidades Autónomas</b>.
+        </div>
+        <div class="nota-clave">💡 Desarrollado por el <b>Real Decreto Legislativo 2/2004</b> (Texto Refundido de la Ley Reguladora de las Haciendas Locales). Los municipios financian con: IBI, IAE, IVTM, ICIO, tasas, PIE (Participación Ingresos del Estado), transferencias Generalitat y recaudación sanciones.</div>
+        <div class="nota-policial">🚔 Las <b>multas de tráfico</b> impuestas por la PL en vía urbana <b>ingresan en las arcas municipales</b> (art. 84 LTSV + art. 142 CE). Financian parte de los servicios públicos locales.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       CUADRO RECUERDA
+  ══════════════════════════════════════════ -->
+  <div class="recuerda">
+    <h3>📋 Recuerda — Constitución Española 1978</h3>
+    <ul>
+      <li>📅 <b>Cronología:</b> Referéndum 6 dic 1978 (87,87% SÍ) · Sanción 27 dic · Publicación BOE y entrada en vigor 29 dic 1978.</li>
+      <li>📐 <b>Estructura:</b> Preámbulo + Tít. Preliminar + 10 títulos + 169 artículos + 4 DA + 9 DT + 1 Disp. Derogatoria + 1 Disp. Final.</li>
+      <li>✏️ <b>Reformas:</b> Solo 2 · Art. 13.2 CE (27 ago 1992, Maastricht) · Art. 135 CE (27 sep 2011, estabilidad presupuestaria).</li>
+      <li><b>Art. 1 CE:</b> Estado social y democrático de Derecho · 4 valores superiores (libertad, justicia, igualdad, pluralismo) · Soberanía del pueblo · Monarquía parlamentaria.</li>
+      <li><b>Art. 2 CE:</b> Unidad de la Nación + autonomía de nacionalidades y regiones + solidaridad.</li>
+      <li><b>Art. 3 CE:</b> Castellano oficial del Estado + cooficialidad de otras lenguas en sus CCAA (catalán en Cat).</li>
+      <li><b>Art. 9 CE:</b> Principios de legalidad, jerarquía, publicidad, irretroactividad desfavorable, seguridad jurídica, responsabilidad, interdicción de la arbitrariedad.</li>
+      <li>⭐ <b>Art. 14 CE:</b> Igualdad ante la ley · No discriminación por nacimiento, raza, sexo, religión, opinión...</li>
+      <li>⭐ <b>Art. 15 CE:</b> Derecho a la vida + integridad física y moral · Prohibición tortura y tratos inhumanos/degradantes · Pena de muerte abolida.</li>
+      <li>⭐⭐ <b>Art. 17 CE (CLAVE PL):</b> Libertad · Detención máx. 72 h · Información inmediata derechos y motivos · No declarar · Asistencia letrada · Habeas Corpus.</li>
+      <li>⭐⭐ <b>Art. 18 CE (CLAVE PL):</b> Honor, intimidad, imagen · Inviolabilidad domicilio (salvo consentimiento, autorización judicial o flagrante delito) · Secreto comunicaciones · Protección datos.</li>
+      <li><b>Art. 19 CE:</b> Libertad de circulación y residencia · Entrar y salir de España libremente.</li>
+      <li><b>Art. 20 CE:</b> Libertad expresión, creación, cátedra, información veraz · No censura previa · Secuestro solo por resolución judicial.</li>
+      <li>⭐ <b>Art. 21 CE (CLAVE PL):</b> Reunión pacífica y sin armas · NO autorización previa (sí comunicación 10-30 días si tránsito público) · Prohibición solo por orden público.</li>
+      <li><b>Art. 22 CE:</b> Asociación · Ilegales las de fines o medios tipificados como delito · Disolución solo judicial · Prohibidas secretas y paramilitares.</li>
+      <li><b>Art. 24 CE:</b> Tutela judicial efectiva · Juez predeterminado · Defensa letrada · No declarar contra sí mismo · Presunción de inocencia.</li>
+      <li><b>Art. 25 CE:</b> Principio de legalidad penal (nullum crimen sine lege) · Administración civil NO puede imponer sanciones privativas de libertad.</li>
+      <li><b>Art. 53 CE:</b> 3 niveles de protección · Máxima (14 + 15-29 + 30.2): LO + amparo TC · Media (30-38): ley ordinaria · Mínima (39-52): principios rectores.</li>
+      <li><b>Art. 54 CE:</b> Defensor del Pueblo (nacional) · En Cat: Síndic de Greuges (Ley 24/2009).</li>
+      <li>⚠️ <b>Art. 55 CE:</b> Suspensión de derechos · (1) Estado de excepción o sitio · (2) Individual en terrorismo (arts. 17.2, 18.2-3) con intervención judicial.</li>
+      <li><b>Art. 137 CE:</b> Organización territorial en municipios + provincias + CCAA · Todas con autonomía para gestión de sus intereses.</li>
+      <li>⭐ <b>Art. 140 CE (CLAVE PL):</b> Autonomía municipal + personalidad jurídica plena + Alcalde y Concejales por sufragio directo + Concejo abierto.</li>
+      <li><b>Art. 141 CE:</b> Provincia = agrupación de municipios + Diputaciones · Alteración límites por LO.</li>
+      <li><b>Art. 142 CE:</b> Suficiencia financiera de Haciendas Locales · Tributos propios + participación Estado/CCAA.</li>
+      <li>⚠️ La CE es la <b>norma suprema</b> del ordenamiento (art. 9.1) · Todas las leyes deben respetarla · Control por el TC.</li>
+    </ul>
+  </div>
+
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+
+</div>
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    if (body.style.display === 'none' || body.style.display === '') {
+      body.style.display = 'block';
+      body.style.animation = 'fadeUp .3s ease';
+    } else {
+      body.style.display = 'none';
+    }
+  }
+</script>
+</body>
+</html>

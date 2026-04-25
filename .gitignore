@@ -1,0 +1,16 @@
+node_modules
+dist
+dist-ssr
+.DS_Store
+*.log
+.vscode/*
+!.vscode/extensions.json
+.idea
+.env
+.env.*
+!.env.example
+dev-dist
+*.tsbuildinfo
+
+# Carpeta temporal per a la importació d'HTML (vegeu scripts/import-html.mjs).
+_import/

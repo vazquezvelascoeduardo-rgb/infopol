@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LO 2/1986 FCS — Esquema Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #0A1628;
+    --bg-section: #0E2244;
+    --gold: #C8A028;
+    --blue-royal: #1A5C96;
+    --red: #C8281E;
+    --green: #1A7A3C;
+    --text-main: #F0F4FF;
+    --text-secondary: #A8BAD4;
+    --border: #C8A028;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  body {
+    background-color: var(--bg-main);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-main);
+    padding: 20px 12px 40px;
+  }
+
+  .wrapper { max-width: 720px; margin: 0 auto; }
+
+  /* ── CABECERA ── */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 8px;
+    animation: fadeUp .5s ease both;
+    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+  }
+  .escudo svg { flex-shrink: 0; }
+  .header-text { flex: 1; }
+  .header-text .label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .header-text h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-main);
+    line-height: 1.1;
+  }
+  .header-text h1 span { color: var(--gold); }
+  .header-text .subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* ── CLASIFICACIÓN ── */
+  .clasificacion {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+    animation: fadeUp .6s ease .1s both;
+  }
+  .clas-card {
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+    border: 1px solid rgba(200,160,40,0.3);
+  }
+  .clas-card .icon { font-size: 22px; margin-bottom: 4px; }
+  .clas-card .tipo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .clas-card .pena-max {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+    line-height: 1.3;
+  }
+  .clas-leve   { background: rgba(26,122,60,0.15); border-color: var(--green); }
+  .clas-menos  { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
+  .clas-grave  { background: rgba(200,160,40,0.15); border-color: var(--gold); }
+  .clas-leve .tipo   { color: #4ACD7A; }
+  .clas-menos .tipo  { color: #6AADDC; }
+  .clas-grave .tipo  { color: var(--gold); }
+
+  /* ── BANNER INFO ── */
+  .reforma-banner {
+    background: linear-gradient(135deg, #0E2244 0%, #1A5C96 50%, #0E2244 100%);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    padding: 10px 18px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp .55s ease .05s both;
+    box-shadow: 0 0 20px rgba(200,160,40,0.15);
+  }
+  .reforma-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
+  .reforma-banner .ref-text { flex: 1; }
+  .reforma-banner .ref-ley {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+  }
+  .reforma-banner .ref-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+  .reforma-banner .ref-fecha {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(0,0,0,0.25);
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    border: 1px solid rgba(200,160,40,0.4);
+  }
+
+  /* ── CATEGORÍA ── */
+  .categoria {
+    background: var(--bg-section);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(200,160,40,0.2);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
+  .categoria:nth-child(2)  { animation: fadeUp .6s ease .25s both; }
+  .categoria:nth-child(3)  { animation: fadeUp .6s ease .3s both; }
+  .categoria:nth-child(4)  { animation: fadeUp .6s ease .35s both; }
+  .categoria:nth-child(5)  { animation: fadeUp .6s ease .4s both; }
+  .categoria:nth-child(6)  { animation: fadeUp .6s ease .45s both; }
+  .categoria:nth-child(7)  { animation: fadeUp .6s ease .5s both; }
+  .categoria:nth-child(8)  { animation: fadeUp .6s ease .55s both; }
+  .categoria:nth-child(9)  { animation: fadeUp .6s ease .6s both; }
+
+  .cat-header {
+    background: var(--blue-royal);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: background .2s;
+  }
+  .cat-header:hover { background: #1e6db0; }
+  .cat-header .cat-icon { font-size: 20px; }
+  .cat-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    flex: 1;
+  }
+  .cat-header .art-ref {
+    font-size: 11px;
+    color: rgba(240,244,255,0.65);
+    white-space: nowrap;
+  }
+  .cat-header .toggle {
+    font-size: 14px;
+    transition: transform .3s;
+    color: var(--gold);
+  }
+  .cat-header.open .toggle { transform: rotate(180deg); }
+  .cat-header.local {
+    background: linear-gradient(135deg, var(--blue-royal) 0%, #0E2244 70%);
+    border-left: 4px solid var(--gold);
+  }
+
+  .cat-body { padding: 6px 0; }
+
+  /* ── DELITO / ARTÍCULO ── */
+  .delito {
+    border-left: 3px solid var(--gold);
+    margin: 8px 14px;
+    background: rgba(10,22,40,0.5);
+    border-radius: 0 7px 7px 0;
+    padding: 10px 14px;
+  }
+  .delito-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .delito-nombre {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+    flex: 1;
+    min-width: 160px;
+  }
+  .art-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    background: rgba(200,160,40,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .tipo-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .badge-comun  { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
+  .badge-fcse   { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
+  .badge-ccaa   { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
+  .badge-local  { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
+
+  .delito-desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    line-height: 1.5;
+  }
+  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
+
+  .pena-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 7px;
+  }
+  .pena-chip {
+    font-size: 11px;
+    background: rgba(26,92,150,0.25);
+    border: 1px solid rgba(26,92,150,0.6);
+    color: var(--text-main);
+    padding: 3px 9px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .pena-chip.agravada {
+    background: rgba(200,40,30,0.2);
+    border-color: rgba(200,40,30,0.5);
+  }
+  .pena-chip.multa {
+    background: rgba(200,160,40,0.12);
+    border-color: rgba(200,160,40,0.4);
+    color: var(--gold);
+  }
+  .pena-chip.positivo {
+    background: rgba(26,122,60,0.2);
+    border-color: rgba(26,122,60,0.5);
+    color: #A8D4C0;
+  }
+
+  .nota-agrav {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: #E08888;
+    background: rgba(200,40,30,0.08);
+    border-left: 2px solid var(--red);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+  }
+  .nota-policial {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: #A8D4C0;
+    background: rgba(26,122,60,0.1);
+    border-left: 2px solid var(--green);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+  }
+  .nota-clave {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: #E8CC80;
+    background: rgba(200,160,40,0.08);
+    border-left: 2px solid var(--gold);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ── RECUERDA ── */
+  .recuerda {
+    background: var(--gold);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-top: 6px;
+    animation: fadeUp .6s ease .7s both;
+  }
+  .recuerda h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #0A1628;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .recuerda ul { list-style: none; }
+  .recuerda ul li {
+    font-size: 13px;
+    color: #0A1628;
+    padding: 5px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    border-bottom: 1px solid rgba(10,22,40,0.15);
+    line-height: 1.4;
+  }
+  .recuerda ul li:last-child { border-bottom: none; }
+  .recuerda ul li::before { content: "▶"; font-size: 9px; margin-top: 4px; flex-shrink: 0; }
+
+  /* ── BOTÓN ── */
+  .btn-print {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: var(--blue-royal);
+    border: 2px solid var(--gold);
+    color: var(--text-main);
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .2s;
+    animation: fadeUp .6s ease .8s both;
+  }
+  .btn-print:hover { background: var(--gold); color: #0A1628; }
+
+  /* ── DIVISOR ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 4px 14px 2px;
+    opacity: .35;
+  }
+
+  /* ── TABLA MINI ── */
+  .mini-tabla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 7px;
+  }
+  .mini-tabla .celda {
+    background: rgba(26,92,150,0.15);
+    border: 1px solid rgba(26,92,150,0.4);
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 11.5px;
+    color: var(--text-main);
+  }
+  .mini-tabla .celda b { color: var(--gold); }
+
+  @media print {
+    body { background: white; color: black; }
+    .btn-print { display: none; }
+    .categoria { break-inside: avoid; }
+    .cat-body { display: block !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- CABECERA -->
+  <div class="header">
+    <div class="escudo">
+      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
+        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
+        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICÍA</text>
+        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
+        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <div class="label">Esquema Operativo Policial</div>
+      <h1>LO <span>2/1986</span></h1>
+      <div class="subtitle">Fuerzas y Cuerpos de Seguridad · Jefatura del Estado · 13 marzo · BOE 14/03/1986</div>
+    </div>
+  </div>
+
+  <!-- CLASIFICACIÓN: Los 3 tipos de FCS -->
+  <div class="clasificacion">
+    <div class="clas-card clas-menos">
+      <div class="icon">🛡️</div>
+      <div class="tipo">FCSE</div>
+      <div class="pena-max">Gobierno de la Nación<br>CNP + Guardia Civil<br>Arts. 9–36</div>
+    </div>
+    <div class="clas-card clas-leve">
+      <div class="icon">🏛️</div>
+      <div class="tipo">Policía CCAA</div>
+      <div class="pena-max">Comunidades Autónomas<br>Naturaleza civil<br>Arts. 37–44</div>
+    </div>
+    <div class="clas-card clas-grave">
+      <div class="icon">⭐</div>
+      <div class="tipo">Policía Local</div>
+      <div class="pena-max">Corporaciones Locales<br>Ámbito municipal<br>Arts. 51–54</div>
+    </div>
+  </div>
+
+  <!-- BANNER INFO -->
+  <div class="reforma-banner">
+    <div class="ref-icon">📜</div>
+    <div class="ref-text">
+      <div class="ref-ley">Desarrollo del art. 104 CE</div>
+      <div class="ref-desc">Funciones · Principios básicos · Estatutos de las FCS · 5 Títulos · 54 artículos · Texto consolidado</div>
+    </div>
+    <div class="ref-fecha">Última modif.<br>29/07/2015</div>
+  </div>
+
+  <!-- 1. DISPOSICIONES GENERALES -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">📖</span>
+      <h2>Disposiciones Generales</h2>
+      <span class="art-ref">Arts. 1–4 · Título I</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Seguridad Pública</div>
+          <span class="art-badge">Art. 1</span>
+          <span class="tipo-badge badge-comun">Competencia</span>
+        </div>
+        <div class="delito-desc">
+          La Seguridad Pública es <b>competencia exclusiva del Estado</b>. Su mantenimiento corresponde al Gobierno de la Nación.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip positivo">✓ Participan CCAA según Estatutos</span>
+          <span class="pena-chip positivo">✓ Participan Corp. Locales (LBRL)</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">¿Quiénes son FCS?</div>
+          <span class="art-badge">Art. 2</span>
+          <span class="tipo-badge badge-comun">Clave</span>
+        </div>
+        <div class="delito-desc">Son Fuerzas y Cuerpos de Seguridad:</div>
+        <div class="mini-tabla">
+          <div class="celda"><b>a)</b> FCSE (Gobierno Nación)</div>
+          <div class="celda"><b>b)</b> Policías de las CCAA</div>
+          <div class="celda" style="grid-column: 1 / -1;"><b>c)</b> Cuerpos de Policía dependientes de las Corporaciones Locales</div>
+        </div>
+        <div class="nota-policial">🚔 Memoriza el orden: <b>a) Estado — b) CCAA — c) Locales</b>. Es pregunta típica de oposición.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Cooperación y Auxilio</div>
+          <span class="art-badge">Arts. 3 y 4</span>
+          <span class="tipo-badge badge-comun">Principio</span>
+        </div>
+        <div class="delito-desc">
+          Las FCS actúan bajo <b>cooperación recíproca</b> y su <b>coordinación</b> se realiza por los órganos que establece esta Ley.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Todos tienen deber de auxilio en investigación de delitos</span>
+          <span class="pena-chip agravada">⚠️ Seguridad privada: especial obligación de colaborar</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2. PRINCIPIOS BÁSICOS (ART. 5) -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">⚖️</span>
+      <h2>Principios Básicos de Actuación</h2>
+      <span class="art-ref">Art. 5 · Cap. II</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">1. Adecuación al Ordenamiento Jurídico</div>
+          <span class="art-badge">Art. 5.1</span>
+          <span class="tipo-badge badge-comun">Común</span>
+        </div>
+        <div class="delito-desc">
+          <b>a)</b> Respeto a la <b>Constitución</b> y ordenamiento jurídico.<br>
+          <b>b)</b> <b>Neutralidad política</b> e imparcialidad, sin discriminación por raza, religión u opinión.<br>
+          <b>c)</b> <b>Integridad y dignidad</b>; oposición resuelta a la corrupción.<br>
+          <b>d)</b> <b>Jerarquía y subordinación</b>.<br>
+          <b>e)</b> Colaboración con la Administración de Justicia.
+        </div>
+        <div class="nota-agrav">⚠️ La <b>obediencia debida NO ampara</b> órdenes que constituyan delito o sean contrarias a la Constitución o a las Leyes.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">2. Relaciones con la Comunidad</div>
+          <span class="art-badge">Art. 5.2</span>
+          <span class="tipo-badge badge-comun">Común</span>
+        </div>
+        <div class="delito-desc">
+          <b>a)</b> Impedir prácticas <b>abusivas, arbitrarias o discriminatorias</b> con violencia física o moral.<br>
+          <b>b)</b> Trato <b>correcto y esmerado</b>; informar al ciudadano de causas y finalidad.<br>
+          <b>c)</b> Actuar con <b>decisión y sin demora</b> si es necesario evitar un daño grave, inmediato e irreparable.<br>
+          <b>d)</b> Uso de armas: solo si hay riesgo racionalmente grave para la vida o integridad.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip multa">🟡 Principios: congruencia · oportunidad · proporcionalidad</span>
+        </div>
+        <div class="nota-policial">🚔 Los tres principios (congruencia, oportunidad y proporcionalidad) son la clave del uso de la fuerza. Memoriza «COP».</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">3. Tratamiento de Detenidos</div>
+          <span class="art-badge">Art. 5.3</span>
+          <span class="tipo-badge badge-comun">Común</span>
+        </div>
+        <div class="delito-desc">
+          <b>a)</b> <b>Identificarse</b> debidamente al efectuar la detención.<br>
+          <b>b)</b> Velar por <b>vida, integridad física, honor y dignidad</b> del detenido.<br>
+          <b>c)</b> Cumplir <b>trámites, plazos y requisitos</b> legales.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">4, 5 y 6 — Dedicación, Secreto y Responsabilidad</div>
+          <span class="art-badge">Art. 5.4–6</span>
+          <span class="tipo-badge badge-comun">Común</span>
+        </div>
+        <div class="delito-desc">
+          <b>4. Dedicación profesional:</b> intervenir en todo tiempo y lugar, estén o no de servicio.<br>
+          <b>5. Secreto profesional:</b> riguroso respecto de las informaciones conocidas por razón del cargo.<br>
+          <b>6. Responsabilidad:</b> <b>personal y directa</b> por los actos que lleven a cabo.
+        </div>
+        <div class="nota-clave">💡 La responsabilidad del funcionario <b>NO excluye</b> la responsabilidad patrimonial de la Administración.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. ESTATUTO COMÚN -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🛡️</span>
+      <h2>Disposiciones Estatutarias Comunes</h2>
+      <span class="art-ref">Arts. 6–8 · Cap. III</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Derechos y Condiciones Profesionales</div>
+          <span class="art-badge">Art. 6</span>
+          <span class="tipo-badge badge-comun">Común</span>
+        </div>
+        <div class="delito-desc">
+          Promoción profesional, formación <b>permanente</b>, jura/promesa de la Constitución, remuneración justa, régimen de horarios adaptado.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip positivo">✓ Criterios: mérito · capacidad · antigüedad</span>
+          <span class="pena-chip agravada">✗ NO huelga ni acciones sustitutivas (art. 6.8)</span>
+          <span class="pena-chip agravada">✗ Incompatibilidad con otras actividades</span>
+        </div>
+        <div class="nota-agrav">⚠️ La <b>prohibición de huelga</b> es absoluta y se aplica a TODOS los cuerpos (FCSE, CCAA y Locales). Pregunta clásica.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Agentes de la Autoridad</div>
+          <span class="art-badge">Art. 7</span>
+          <span class="tipo-badge badge-comun">Común</span>
+        </div>
+        <div class="delito-desc">
+          En el ejercicio de sus funciones, los miembros de las FCS tendrán <b>a todos los efectos legales el carácter de agentes de la autoridad</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">⚠️ Si hay atentado con armas de fuego/explosivos → consideración de AUTORIDAD</span>
+        </div>
+        <div class="nota-clave">💡 La Guardia Civil sólo es <b>fuerza armada</b> en el cumplimiento de misiones militares.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Jurisdicción Ordinaria</div>
+          <span class="art-badge">Art. 8</span>
+          <span class="tipo-badge badge-comun">Común</span>
+        </div>
+        <div class="delito-desc">
+          La <b>jurisdicción ordinaria</b> conoce de los delitos cometidos contra miembros de las FCS y por éstos en el ejercicio de sus funciones (salvo competencia de jurisdicción militar).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Prisión: centros ordinarios con <b>separación</b> del resto</span>
+          <span class="pena-chip">🔵 Procedimiento penal y disciplinario: <b>compatibles</b></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. FCSE: CNP Y GC -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">👮</span>
+      <h2>FCSE: CNP y Guardia Civil</h2>
+      <span class="art-ref">Arts. 9–15 · Título II</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Cuerpo Nacional de Policía (CNP)</div>
+          <span class="art-badge">Art. 9.a)</span>
+          <span class="tipo-badge badge-fcse">FCSE</span>
+        </div>
+        <div class="delito-desc">
+          <b>Instituto armado de naturaleza CIVIL</b>, dependiente del <b>Ministro del Interior</b>.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Guardia Civil</div>
+          <span class="art-badge">Arts. 9.b), 13–15</span>
+          <span class="tipo-badge badge-fcse">FCSE</span>
+        </div>
+        <div class="delito-desc">
+          <b>Instituto armado de naturaleza MILITAR</b>. Depende del <b>Mº Interior</b> (funciones de esta Ley) y del <b>Mº Defensa</b> (misiones militares). En tiempo de guerra y estado de sitio → solo Mº Defensa.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">✗ NO pueden pertenecer a partidos políticos ni sindicatos</span>
+          <span class="pena-chip agravada">✗ NO peticiones colectivas (sí individuales)</span>
+        </div>
+        <div class="nota-clave">💡 La separación del servicio la impone el <b>Mº Defensa</b> a propuesta del de <b>Interior</b>.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Mando Superior</div>
+          <span class="art-badge">Art. 10</span>
+          <span class="tipo-badge badge-fcse">FCSE</span>
+        </div>
+        <div class="delito-desc">
+          <b>Ministro del Interior</b>: administración general y mando superior de las FCSE.<br>
+          <b>Director de la Seguridad del Estado</b>: mando inmediato, del que dependen las DGP y DGGC.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 5. FUNCIONES Y COMPETENCIAS FCSE -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🎯</span>
+      <h2>Funciones y Competencias FCSE</h2>
+      <span class="art-ref">Arts. 11–12</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Funciones Comunes (CNP + GC)</div>
+          <span class="art-badge">Art. 11.1</span>
+          <span class="tipo-badge badge-fcse">FCSE</span>
+        </div>
+        <div class="delito-desc">
+          Proteger el libre ejercicio de los <b>derechos y libertades</b> y garantizar la <b>seguridad ciudadana</b> mediante:
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>a)</b> Velar cumplimiento leyes</div>
+          <div class="celda"><b>b)</b> Auxiliar y proteger personas y bienes</div>
+          <div class="celda"><b>c)</b> Vigilar edificios públicos</div>
+          <div class="celda"><b>d)</b> Proteger altas personalidades</div>
+          <div class="celda"><b>e)</b> Mantener orden y seguridad</div>
+          <div class="celda"><b>f)</b> Prevenir actos delictivos</div>
+          <div class="celda"><b>g)</b> Investigar delitos</div>
+          <div class="celda"><b>h)</b> Captar y analizar información</div>
+          <div class="celda" style="grid-column: 1 / -1;"><b>i)</b> Colaborar con Protección Civil en casos de catástrofe</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Distribución Territorial</div>
+          <span class="art-badge">Art. 11.2</span>
+          <span class="tipo-badge badge-fcse">Clave</span>
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 <b>CNP</b>: capitales de provincia y núcleos urbanos determinados</span>
+          <span class="pena-chip positivo">🟢 <b>GC</b>: resto del territorio nacional y mar territorial</span>
+        </div>
+        <div class="nota-policial">🚔 En conflicto de competencias: el Cuerpo que hizo las <b>primeras actuaciones</b> continúa hasta resolución del Mº Interior.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Competencias Exclusivas del CNP</div>
+          <span class="art-badge">Art. 12.A</span>
+          <span class="tipo-badge badge-fcse">CNP</span>
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>a)</b> DNI y pasaportes</div>
+          <div class="celda"><b>b)</b> Entrada/salida territorio</div>
+          <div class="celda"><b>c)</b> Extranjería, asilo, extradición</div>
+          <div class="celda"><b>d)</b> Juego</div>
+          <div class="celda"><b>e)</b> Delitos de droga</div>
+          <div class="celda"><b>f)</b> Policías extranjeras</div>
+          <div class="celda" style="grid-column: 1 / -1;"><b>g)</b> Seguridad privada (personal, medios y actuaciones)</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Competencias Exclusivas de la Guardia Civil</div>
+          <span class="art-badge">Art. 12.B</span>
+          <span class="tipo-badge badge-fcse">GC</span>
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>a)</b> Armas y explosivos</div>
+          <div class="celda"><b>b)</b> Resguardo fiscal · contrabando</div>
+          <div class="celda"><b>c)</b> Tráfico interurbano</div>
+          <div class="celda"><b>d)</b> Costas, fronteras, puertos, aeropuertos</div>
+          <div class="celda"><b>e)</b> Naturaleza y medio ambiente (SEPRONA)</div>
+          <div class="celda"><b>f)</b> Conducción interurbana de presos</div>
+        </div>
+        <div class="nota-clave">💡 Regla mnemotécnica: «GC → todo lo que sale del casco urbano y la tierra/naturaleza».</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 6. POLICÍA JUDICIAL -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🔍</span>
+      <h2>Unidades de Policía Judicial</h2>
+      <span class="art-ref">Arts. 29–36 · Cap. V</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Naturaleza y Colaboradores</div>
+          <span class="art-badge">Art. 29</span>
+          <span class="tipo-badge badge-comun">Clave</span>
+        </div>
+        <div class="delito-desc">
+          Las funciones del <b>art. 126 CE</b> se ejercen por las FCSE mediante Unidades de Policía Judicial. La <b>Policía CCAA</b> y la <b>Policía Local</b> tienen carácter <b>COLABORADOR</b>.
+        </div>
+        <div class="nota-policial">🚔 Pregunta típica de test: la Policía Local NO forma parte de la PJ orgánica, solo es <b>colaboradora</b>.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Dependencia Dual</div>
+          <span class="art-badge">Art. 31</span>
+          <span class="tipo-badge badge-comun">Clave</span>
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 <b>Orgánica</b>: Ministerio del Interior</span>
+          <span class="pena-chip multa">🟡 <b>Funcional</b>: Jueces, Tribunales y Mº Fiscal</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Diploma Especializado</div>
+          <span class="art-badge">Art. 32</span>
+          <span class="tipo-badge badge-comun">Requisito</span>
+        </div>
+        <div class="delito-desc">
+          La posesión del <b>diploma de Policía Judicial</b> es <b>requisito necesario</b> para ocupar puestos en las Unidades de PJ.
+        </div>
+        <div class="nota-agrav">⚠️ <b>Inamovilidad (art. 34):</b> los funcionarios NO pueden ser apartados de una investigación hasta que finalice, salvo decisión del Juez o Fiscal competente.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 7. POLICÍAS CCAA -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🏛️</span>
+      <h2>Policías de las Comunidades Autónomas</h2>
+      <span class="art-ref">Arts. 37–44 · Título III</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Creación y Naturaleza</div>
+          <span class="art-badge">Arts. 37 y 41</span>
+          <span class="tipo-badge badge-ccaa">CCAA</span>
+        </div>
+        <div class="delito-desc">
+          Pueden crear Cuerpos propios las CCAA cuyo <b>Estatuto lo prevea</b>. Son <b>Institutos armados de naturaleza CIVIL</b>, con estructura jerarquizada.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Pueden portar armas</span>
+          <span class="pena-chip agravada">⚠️ Licencia de armas: siempre Gobierno de la Nación</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Funciones (3 grupos)</div>
+          <span class="art-badge">Art. 38</span>
+          <span class="tipo-badge badge-ccaa">CCAA</span>
+        </div>
+        <div class="delito-desc">
+          <b>1. Propias:</b> velar cumplimiento normas CCAA, protección edificios autonómicos, inspección, coacción ejecutiva.<br>
+          <b>2. Colaboración con FCSE:</b> leyes estatales, Policía Judicial, vigilancia espacios públicos y manifestaciones.<br>
+          <b>3. Prestación simultánea:</b> conflictos privados, protección civil, medio ambiente.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Cuerpos Históricos</div>
+          <span class="art-badge">Disp. Finales 1ª–3ª</span>
+          <span class="tipo-badge badge-ccaa">Excepciones</span>
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>Ertzaintza</b> (País Vasco)</div>
+          <div class="celda"><b>Mossos d'Esquadra</b> (Cataluña)</div>
+          <div class="celda" style="grid-column: 1 / -1;"><b>Policía Foral de Navarra</b> (LO 13/1982 Amejoramiento)</div>
+        </div>
+        <div class="nota-clave">💡 Arts. 5, 6, 7 y 8 (principios básicos y estatuto) se aplican <b>directamente</b> a todas las policías autonómicas históricas.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Coordinación de Policías Locales</div>
+          <span class="art-badge">Art. 39</span>
+          <span class="tipo-badge badge-ccaa">CCAA</span>
+        </div>
+        <div class="delito-desc">
+          Las CCAA coordinan las Policías Locales en su ámbito mediante: <b>normas-marco</b>, homogeneización, criterios de <b>selección, formación, promoción y movilidad</b>, y creación de <b>Escuelas de Formación</b>.
+        </div>
+        <div class="nota-policial">🚔 Muy importante para Policía Local: tu Academia y tu reglamento dependen de esta competencia autonómica.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 8. ⭐ POLICÍAS LOCALES (destacado, abierto por defecto) -->
+  <div class="categoria">
+    <div class="cat-header open local" onclick="toggle(this)">
+      <span class="cat-icon">⭐</span>
+      <h2>Policías Locales</h2>
+      <span class="art-ref">Arts. 51–54 · Título V</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Creación y Ámbito Territorial</div>
+          <span class="art-badge">Art. 51</span>
+          <span class="tipo-badge badge-local">Local</span>
+        </div>
+        <div class="delito-desc">
+          Los <b>municipios</b> pueden crear cuerpos propios. Actuación limitada al <b>término municipal</b>. Excepciones: situaciones de <b>emergencia</b> con requerimiento, o protección de autoridades locales (con autorización).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip multa">🟡 Sin Policía Local: guardas, vigilantes, alguaciles</span>
+        </div>
+        <div class="nota-agrav">⚠️ Salida del término: solo con <b>autorización del Mº Interior</b> o de la autoridad autonómica correspondiente (si la actuación se desarrolla íntegramente en esa CCAA).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Naturaleza Jurídica</div>
+          <span class="art-badge">Art. 52</span>
+          <span class="tipo-badge badge-local">Local</span>
+        </div>
+        <div class="delito-desc">
+          Son <b>Institutos armados de naturaleza CIVIL</b>, con estructura y organización <b>jerarquizada</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Régimen: Caps. II y III Título I + autonómica + reglamento municipal</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">FUNCIONES — Las 9 del art. 53</div>
+          <span class="art-badge">Art. 53.1</span>
+          <span class="tipo-badge badge-local">Clave</span>
+        </div>
+        <div class="delito-desc">Memoriza las 9 funciones por el orden de la Ley:</div>
+        <div class="mini-tabla">
+          <div class="celda"><b>a)</b> Proteger autoridades locales y edificios</div>
+          <div class="celda"><b>b)</b> Ordenar, señalizar y dirigir <b>tráfico urbano</b></div>
+          <div class="celda"><b>c)</b> Instruir <b>atestados</b> accidentes en casco urbano</div>
+          <div class="celda"><b>d)</b> <b>Policía Administrativa</b> (ordenanzas y bandos)</div>
+          <div class="celda"><b>e)</b> Participar en <b>Policía Judicial</b> (art. 29.2)</div>
+          <div class="celda"><b>f)</b> Auxilio en catástrofes (<b>Protección Civil</b>)</div>
+          <div class="celda"><b>g)</b> <b>Prevención</b> de actos delictivos</div>
+          <div class="celda"><b>h)</b> Vigilar espacios públicos y colaborar</div>
+          <div class="celda" style="grid-column: 1 / -1;"><b>i)</b> Cooperar en <b>conflictos privados</b> cuando sean requeridos</div>
+        </div>
+        <div class="nota-agrav">⚠️ <b>Art. 53.2 — Comunicación obligatoria:</b> las actuaciones de las letras <b>c) atestados</b> y <b>g) prevención delictual</b> deben comunicarse a las FCSE competentes.</div>
+        <div class="nota-policial">🚔 Mnemotecnia: <b>«Proteger · Tráfico · Atestados · Ordenanzas · Judicial · Protección Civil · Prevención · Vigilancia · Conflictos»</b>.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Agentes «uniformados» de tráfico</div>
+          <span class="art-badge">Art. 53.3</span>
+          <span class="tipo-badge badge-local">Local</span>
+        </div>
+        <div class="delito-desc">
+          En municipios de <b>gran población</b> y Ciudades con Estatuto de Autonomía, el Pleno puede asignar la función <b>b) tráfico</b> a funcionarios específicos, que tendrán <b>consideración de agentes de la autoridad</b> pero <b>no</b> se integran en las FCS.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Junta Local de Seguridad</div>
+          <span class="art-badge">Art. 54</span>
+          <span class="tipo-badge badge-local">Coordinación</span>
+        </div>
+        <div class="delito-desc">
+          Órgano de coordinación en municipios con Cuerpo propio. Presidida por el <b>Alcalde</b> (compartida con el Subdelegado/Gobernador Civil si asiste).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip positivo">✓ Establece formas y procedimientos de colaboración entre FCS</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Asociación de Municipios</div>
+          <span class="art-badge">Disp. Ad. 5ª</span>
+          <span class="tipo-badge badge-local">Local</span>
+        </div>
+        <div class="delito-desc">
+          Dos o más municipios <b>limítrofes</b> de la misma CCAA sin recursos suficientes pueden <b>asociarse</b> para la prestación de servicios de Policía Local (con autorización del Mº Interior o CCAA).
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 9. ÓRGANOS DE COORDINACIÓN -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🤝</span>
+      <h2>Órganos de Coordinación</h2>
+      <span class="art-ref">Arts. 45–50 · Título IV</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Consejo de Política de Seguridad</div>
+          <span class="art-badge">Art. 48</span>
+          <span class="tipo-badge badge-fcse">Estatal</span>
+        </div>
+        <div class="delito-desc">
+          Órgano de coordinación entre Estado y CCAA. Presidido por el <b>Ministro del Interior</b> e integrado por los <b>Consejeros de Interior/Gobernación</b> de las CCAA y un número igual de representantes del Estado (composición <b>paritaria</b>).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Aprueba planes de coordinación</span>
+          <span class="pena-chip">🔵 Informa plantillas de Policías CCAA</span>
+          <span class="pena-chip">🔵 Aprueba directivas generales</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Comité de Expertos</div>
+          <span class="art-badge">Art. 49</span>
+          <span class="tipo-badge badge-fcse">Técnico</span>
+        </div>
+        <div class="delito-desc">
+          Asiste al Consejo de Política de Seguridad. <b>8 miembros</b>: 4 del Estado + 4 de las CCAA.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Juntas de Seguridad (CCAA)</div>
+          <span class="art-badge">Art. 50</span>
+          <span class="tipo-badge badge-ccaa">Autonómica</span>
+        </div>
+        <div class="delito-desc">
+          En las CCAA con Cuerpos propios. Composición <b>paritaria</b> Estado-CCAA. Coordina actuación FCSE y Policía autonómica. Resuelve incidencias.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Esquema Completo de Coordinación</div>
+          <span class="art-badge">Arts. 48–50, 54</span>
+          <span class="tipo-badge badge-comun">Resumen</span>
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>🏛️ Estatal</b><br>Consejo Pol. Seguridad</div>
+          <div class="celda"><b>⚙️ Técnico</b><br>Comité de Expertos</div>
+          <div class="celda"><b>🏛️ Autonómico</b><br>Junta de Seguridad</div>
+          <div class="celda"><b>🏘️ Local</b><br>Junta Local Seguridad</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CUADRO RECUERDA -->
+  <div class="recuerda">
+    <h3>📋 Recuerda — Claves LO 2/1986</h3>
+    <ul>
+      <li><b>Art. 104 CE</b> es la base constitucional. La LO 2/1986 determina <b>funciones, principios básicos y estatutos</b> de las FCS.</li>
+      <li><b>Art. 2:</b> Son FCS → <b>a) FCSE · b) Policías CCAA · c) Policías Locales</b> (en ese orden).</li>
+      <li>Los <b>arts. 5, 6, 7 y 8</b> (principios básicos y estatuto común) se aplican a <b>TODOS</b> los cuerpos, incluidos los históricos (Ertzaintza, Mossos, P. Foral).</li>
+      <li><b>Uso de armas:</b> solo ante riesgo racional grave. Principios: <b>Congruencia, Oportunidad, Proporcionalidad</b> (COP).</li>
+      <li>La <b>obediencia debida NUNCA</b> ampara actos manifiestamente ilegales o contrarios a la Constitución.</li>
+      <li><b>Prohibición de huelga</b> y acciones sustitutivas: absoluta para todos los cuerpos (art. 6.8).</li>
+      <li><b>CNP</b>: naturaleza civil, Mº Interior. <b>Guardia Civil</b>: naturaleza militar, Mº Interior + Mº Defensa.</li>
+      <li><b>CNP</b> → capitales de provincia y núcleos urbanos. <b>GC</b> → resto del territorio y mar territorial.</li>
+      <li>En conflicto de competencias FCSE: continúa el Cuerpo que hizo las <b>primeras actuaciones</b>.</li>
+      <li><b>Policía Judicial (art. 29):</b> FCSE son orgánicas; Policía CCAA y Local son <b>COLABORADORAS</b>.</li>
+      <li><b>Policía Local (art. 53):</b> 9 funciones. Las letras <b>c) atestados</b> y <b>g) prevención</b> deben comunicarse a FCSE.</li>
+      <li>Policía Local: actuación solo en <b>término municipal</b> (salvo emergencia o protección de autoridades locales autorizada).</li>
+      <li><b>Licencia de armas</b> para policías autonómicas: siempre la otorga el <b>Gobierno de la Nación</b> (art. 41.4).</li>
+      <li>Los <b>Municipios</b> pueden <b>asociarse</b> para prestar servicios de Policía Local (Disp. Ad. 5ª).</li>
+      <li>Preside la <b>Junta Local de Seguridad</b> el <b>Alcalde</b>; se comparte con el Subdelegado si éste asiste.</li>
+    </ul>
+  </div>
+
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+
+</div>
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    if (body.style.display === 'none' || body.style.display === '') {
+      body.style.display = 'block';
+      body.style.animation = 'fadeUp .3s ease';
+    } else {
+      body.style.display = 'none';
+    }
+  }
+</script>
+</body>
+</html>

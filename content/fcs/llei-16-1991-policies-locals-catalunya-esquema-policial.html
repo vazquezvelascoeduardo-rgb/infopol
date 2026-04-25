@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Llei 16/1991 Policies Locals Catalunya — Esquema Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #0A1628;
+    --bg-section: #0E2244;
+    --gold: #C8A028;
+    --blue-royal: #1A5C96;
+    --red: #C8281E;
+    --green: #1A7A3C;
+    --text-main: #F0F4FF;
+    --text-secondary: #A8BAD4;
+    --border: #C8A028;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  body {
+    background-color: var(--bg-main);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-main);
+    padding: 20px 12px 40px;
+  }
+
+  .wrapper { max-width: 720px; margin: 0 auto; }
+
+  /* ── CABECERA ── */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 8px;
+    animation: fadeUp .5s ease both;
+    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+  }
+  .escudo svg { flex-shrink: 0; }
+  .header-text { flex: 1; }
+  .header-text .label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .header-text h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-main);
+    line-height: 1.1;
+  }
+  .header-text h1 span { color: var(--gold); }
+  .header-text .subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* ── CLASIFICACIÓN (4 escalas) ── */
+  .clasificacion {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+    animation: fadeUp .6s ease .1s both;
+  }
+  .clas-card {
+    border-radius: 8px;
+    padding: 12px 8px;
+    text-align: center;
+    border: 1px solid rgba(200,160,40,0.3);
+  }
+  .clas-card .icon { font-size: 20px; margin-bottom: 4px; }
+  .clas-card .tipo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .clas-card .pena-max {
+    font-size: 10px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+    line-height: 1.3;
+  }
+  .clas-superior { background: rgba(200,160,40,0.15); border-color: var(--gold); }
+  .clas-ejec     { background: rgba(200,40,30,0.15); border-color: var(--red); }
+  .clas-inter    { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
+  .clas-basica   { background: rgba(26,122,60,0.15); border-color: var(--green); }
+  .clas-superior .tipo { color: var(--gold); }
+  .clas-ejec .tipo     { color: #E86050; }
+  .clas-inter .tipo    { color: #6AADDC; }
+  .clas-basica .tipo   { color: #4ACD7A; }
+
+  /* ── BANNER ── */
+  .reforma-banner {
+    background: linear-gradient(135deg, #0E2244 0%, #1A5C96 50%, #0E2244 100%);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    padding: 10px 18px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp .55s ease .05s both;
+    box-shadow: 0 0 20px rgba(200,160,40,0.15);
+  }
+  .reforma-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
+  .reforma-banner .ref-text { flex: 1; }
+  .reforma-banner .ref-ley {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+  }
+  .reforma-banner .ref-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+  .reforma-banner .ref-fecha {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(0,0,0,0.25);
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    border: 1px solid rgba(200,160,40,0.4);
+  }
+
+  /* ── CATEGORÍA ── */
+  .categoria {
+    background: var(--bg-section);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(200,160,40,0.2);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
+  .categoria:nth-child(2)  { animation: fadeUp .6s ease .25s both; }
+  .categoria:nth-child(3)  { animation: fadeUp .6s ease .3s both; }
+  .categoria:nth-child(4)  { animation: fadeUp .6s ease .35s both; }
+  .categoria:nth-child(5)  { animation: fadeUp .6s ease .4s both; }
+  .categoria:nth-child(6)  { animation: fadeUp .6s ease .45s both; }
+  .categoria:nth-child(7)  { animation: fadeUp .6s ease .5s both; }
+  .categoria:nth-child(8)  { animation: fadeUp .6s ease .55s both; }
+  .categoria:nth-child(9)  { animation: fadeUp .6s ease .6s both; }
+  .categoria:nth-child(10) { animation: fadeUp .6s ease .65s both; }
+  .categoria:nth-child(11) { animation: fadeUp .6s ease .7s both; }
+
+  .cat-header {
+    background: var(--blue-royal);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: background .2s;
+  }
+  .cat-header:hover { background: #1e6db0; }
+  .cat-header .cat-icon { font-size: 20px; }
+  .cat-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    flex: 1;
+  }
+  .cat-header .art-ref {
+    font-size: 11px;
+    color: rgba(240,244,255,0.65);
+    white-space: nowrap;
+  }
+  .cat-header .toggle {
+    font-size: 14px;
+    transition: transform .3s;
+    color: var(--gold);
+  }
+  .cat-header.open .toggle { transform: rotate(180deg); }
+  .cat-header.local {
+    background: linear-gradient(135deg, var(--blue-royal) 0%, #0E2244 70%);
+    border-left: 4px solid var(--gold);
+  }
+  .cat-header.disciplinario {
+    background: linear-gradient(135deg, #8B1A10 0%, #C8281E 100%);
+    border-left: 4px solid var(--gold);
+  }
+
+  .cat-body { padding: 6px 0; }
+
+  /* ── DELITO / PUNTO ── */
+  .delito {
+    border-left: 3px solid var(--gold);
+    margin: 8px 14px;
+    background: rgba(10,22,40,0.5);
+    border-radius: 0 7px 7px 0;
+    padding: 10px 14px;
+  }
+  .delito-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .delito-nombre {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+    flex: 1;
+    min-width: 160px;
+  }
+  .art-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    background: rgba(200,160,40,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .tipo-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .badge-clave   { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
+  .badge-info    { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
+  .badge-grave   { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
+  .badge-local   { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
+
+  .delito-desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    line-height: 1.5;
+  }
+  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
+
+  .pena-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 7px;
+  }
+  .pena-chip {
+    font-size: 11px;
+    background: rgba(26,92,150,0.25);
+    border: 1px solid rgba(26,92,150,0.6);
+    color: var(--text-main);
+    padding: 3px 9px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .pena-chip.agravada {
+    background: rgba(200,40,30,0.2);
+    border-color: rgba(200,40,30,0.5);
+  }
+  .pena-chip.multa {
+    background: rgba(200,160,40,0.12);
+    border-color: rgba(200,160,40,0.4);
+    color: var(--gold);
+  }
+  .pena-chip.positivo {
+    background: rgba(26,122,60,0.2);
+    border-color: rgba(26,122,60,0.5);
+    color: #A8D4C0;
+  }
+
+  .nota-agrav {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: #E08888;
+    background: rgba(200,40,30,0.08);
+    border-left: 2px solid var(--red);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+  }
+  .nota-policial {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: #A8D4C0;
+    background: rgba(26,122,60,0.1);
+    border-left: 2px solid var(--green);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+  }
+  .nota-clave {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: #E8CC80;
+    background: rgba(200,160,40,0.08);
+    border-left: 2px solid var(--gold);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ── RECUERDA ── */
+  .recuerda {
+    background: var(--gold);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-top: 6px;
+    animation: fadeUp .6s ease .75s both;
+  }
+  .recuerda h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #0A1628;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .recuerda ul { list-style: none; }
+  .recuerda ul li {
+    font-size: 13px;
+    color: #0A1628;
+    padding: 5px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    border-bottom: 1px solid rgba(10,22,40,0.15);
+    line-height: 1.4;
+  }
+  .recuerda ul li:last-child { border-bottom: none; }
+  .recuerda ul li::before { content: "▶"; font-size: 9px; margin-top: 4px; flex-shrink: 0; }
+
+  /* ── BOTÓN ── */
+  .btn-print {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: var(--blue-royal);
+    border: 2px solid var(--gold);
+    color: var(--text-main);
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .2s;
+    animation: fadeUp .6s ease .8s both;
+  }
+  .btn-print:hover { background: var(--gold); color: #0A1628; }
+
+  /* ── DIVISOR ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 4px 14px 2px;
+    opacity: .35;
+  }
+
+  /* ── TABLA MINI ── */
+  .mini-tabla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 7px;
+  }
+  .mini-tabla .celda {
+    background: rgba(26,92,150,0.15);
+    border: 1px solid rgba(26,92,150,0.4);
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 11.5px;
+    color: var(--text-main);
+  }
+  .mini-tabla .celda b { color: var(--gold); }
+  .mini-tabla.cuatro { grid-template-columns: repeat(2, 1fr); }
+
+  /* ── TABLA DISCIPLINARIA ── */
+  .tabla-discip {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 2px;
+    margin-top: 8px;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .tabla-discip .th {
+    background: var(--blue-royal);
+    padding: 7px 10px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+  .tabla-discip .td {
+    background: rgba(10,22,40,0.7);
+    padding: 7px 10px;
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  .tabla-discip .td.centro { text-align: center; font-weight: 700; color: var(--gold); font-family: 'Oswald', sans-serif; }
+  .tabla-discip .td.grave  { background: rgba(200,40,30,0.15); }
+  .tabla-discip .td.medio  { background: rgba(200,160,40,0.1); }
+  .tabla-discip .td.leve   { background: rgba(26,122,60,0.12); }
+
+  @media print {
+    body { background: white; color: black; }
+    .btn-print { display: none; }
+    .categoria { break-inside: avoid; }
+    .cat-body { display: block !important; }
+  }
+
+  @media (max-width: 480px) {
+    .clasificacion { grid-template-columns: repeat(2, 1fr); }
+    .mini-tabla { grid-template-columns: 1fr; }
+    .tabla-discip { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- CABECERA -->
+  <div class="header">
+    <div class="escudo">
+      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
+        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
+        <!-- Franjas senyera horizontales en la parte superior -->
+        <rect x="13" y="14" width="38" height="1.5" fill="#C8A028" opacity=".9"/>
+        <rect x="13" y="17" width="38" height="1.5" fill="#C8A028" opacity=".9"/>
+        <text x="32" y="28" text-anchor="middle" font-family="Oswald,sans-serif" font-size="8" font-weight="700" fill="#C8A028" letter-spacing="1">POLICIA</text>
+        <text x="32" y="37" text-anchor="middle" font-family="Oswald,sans-serif" font-size="8" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
+        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <div class="label">Esquema Operativo Policial · Catalunya</div>
+      <h1>Llei <span>16/1991</span></h1>
+      <div class="subtitle">Policies Locals de Catalunya · Generalitat · 10 julio · DOGC 1469 · BOE 09/08/1991</div>
+    </div>
+  </div>
+
+  <!-- CLASIFICACIÓN: Las 4 escalas -->
+  <div class="clasificacion">
+    <div class="clas-card clas-superior">
+      <div class="icon">⭐</div>
+      <div class="tipo">Superior</div>
+      <div class="pena-max">Grupo A1<br>Superintendente<br>Int. Mayor · Intendente</div>
+    </div>
+    <div class="clas-card clas-ejec">
+      <div class="icon">🎖️</div>
+      <div class="tipo">Ejecutiva</div>
+      <div class="pena-max">Grupo A2<br>Inspector</div>
+    </div>
+    <div class="clas-card clas-inter">
+      <div class="icon">🏅</div>
+      <div class="tipo">Intermedia</div>
+      <div class="pena-max">Grupo C1<br>Subinspector<br>Sargento</div>
+    </div>
+    <div class="clas-card clas-basica">
+      <div class="icon">👮</div>
+      <div class="tipo">Básica</div>
+      <div class="pena-max">Grupo C1<br>Cabo · Agente</div>
+    </div>
+  </div>
+
+  <!-- BANNER INFO -->
+  <div class="reforma-banner">
+    <div class="ref-icon">🏛️</div>
+    <div class="ref-text">
+      <div class="ref-ley">Art. 13.3 Estatut d'Autonomia</div>
+      <div class="ref-desc">Competencia exclusiva de la Generalitat en coordinación de Policías Locales · 6 Títulos · 58 artículos</div>
+    </div>
+    <div class="ref-fecha">Última modif.<br>17/03/2023</div>
+  </div>
+
+  <!-- 1. DISPOSICIONES GENERALES -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">📖</span>
+      <h2>Disposiciones Generales</h2>
+      <span class="art-ref">Arts. 1–7 · Título I</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Ámbito de aplicación</div>
+          <span class="art-badge">Art. 1</span>
+          <span class="tipo-badge badge-clave">Clave</span>
+        </div>
+        <div class="delito-desc">
+          Aplica a <b>todos los Cuerpos de Policía</b> dependientes de los Municipios de Cataluña, denominados genéricamente <b>«Policías locales»</b>. Los municipios sin Policía Local pueden tener <b>Vigilantes</b> (guardias, alguaciles, agentes o similares).
+        </div>
+        <div class="nota-agrav">⚠️ <b>Prohibición de gestión indirecta:</b> el servicio se presta <b>directamente</b> por la Corporación. NO caben concesiones, arrendamientos ni órganos especiales de gestión.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Naturaleza y denominación</div>
+          <span class="art-badge">Art. 2</span>
+          <span class="tipo-badge badge-clave">Clave</span>
+        </div>
+        <div class="delito-desc">
+          <b>Institutos armados de naturaleza CIVIL</b> con estructura y organización <b>jerarquizadas</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Denominación genérica: <b>Policía Local</b></span>
+          <span class="pena-chip multa">🟡 Por tradición histórica: <b>Policía Municipal</b> o <b>Guardia Urbana</b></span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Creación por tramos de población</div>
+          <span class="art-badge">Art. 3</span>
+          <span class="tipo-badge badge-info">Población</span>
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>&gt; 10.000 hab</b><br>Pueden crear PL libremente</div>
+          <div class="celda"><b>&lt; 10.000 hab</b><br>Mayoría absoluta + autorización Conseller</div>
+        </div>
+        <div class="nota-clave">💡 En menos de 10.000 hab: previo <b>informe de la Comisión de Coordinación</b> de las Policías Locales.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Cuerpo único y Mando</div>
+          <span class="art-badge">Art. 4</span>
+          <span class="tipo-badge badge-clave">Clave</span>
+        </div>
+        <div class="delito-desc">
+          La Policía Local se integra en un <b>CUERPO ÚNICO</b>, sin perjuicio de su organización interna.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Mando superior: <b>Alcalde</b> (puede delegar)</span>
+          <span class="pena-chip multa">🟡 Mando inmediato: <b>Jefe del Cuerpo</b></span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Ámbito territorial</div>
+          <span class="art-badge">Art. 5</span>
+          <span class="tipo-badge badge-clave">Territorio</span>
+        </div>
+        <div class="delito-desc">
+          Actuación limitada al <b>territorio del municipio</b>. Fuera solo en <b>situaciones de emergencia</b> y con <b>autorización previa</b> de autoridades competentes.
+        </div>
+        <div class="nota-policial">🚔 Se dará cuenta de estas actuaciones al <b>Departament de Governació</b> (actual Departament d'Interior).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Juramento y Agentes de la Autoridad</div>
+          <span class="art-badge">Arts. 6 y 7</span>
+          <span class="tipo-badge badge-clave">Clave</span>
+        </div>
+        <div class="delito-desc">
+          Antes de tomar posesión, juran o prometen acatar la <b>Constitución</b> y respetar el <b>Estatuto de Autonomía</b>. Los Policías Locales tienen en todo caso la condición de <b>agentes de la autoridad</b>.
+        </div>
+        <div class="nota-agrav">⚠️ Los <b>Vigilantes</b> solo son agentes de la autoridad si: (1) están identificados, (2) ejercen funciones del art. 13 y (3) el municipio NO dispone de Policía Local. Si hay PL, NUNCA son agentes de la autoridad.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2. ARMAMENTO Y UNIFORME -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🔫</span>
+      <h2>Armamento y Uniforme</h2>
+      <span class="art-ref">Arts. 8–9 · Cap. II</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Armamento Reglamentario</div>
+          <span class="art-badge">Art. 8</span>
+          <span class="tipo-badge badge-info">Medios</span>
+        </div>
+        <div class="delito-desc">
+          Los Policías Locales, como integrantes de un instituto armado, llevan el armamento reglamentario que se les asigne.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 <b>Alcalde</b> determina (motivadamente) qué servicios se prestan sin armas</span>
+          <span class="pena-chip agravada">✗ Vigilantes: <b>NO pueden portar armas de fuego</b></span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Uniforme Reglamentario</div>
+          <span class="art-badge">Art. 9</span>
+          <span class="tipo-badge badge-info">Imagen</span>
+        </div>
+        <div class="delito-desc">
+          Obligatorio usar el uniforme reglamentario, que solo puede utilizarse en el cumplimiento del servicio. El <b>Alcalde</b> puede autorizar servicios sin uniforme, en cuyo caso el agente llevará la <b>documentación acreditativa</b>.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. PRINCIPIOS DE ACTUACIÓN -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">⚖️</span>
+      <h2>Principios Básicos de Actuación</h2>
+      <span class="art-ref">Art. 10 · Cap. III</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">1º · Adecuación al ordenamiento jurídico</div>
+          <span class="art-badge">Art. 10.1.1º</span>
+          <span class="tipo-badge badge-clave">Principio</span>
+        </div>
+        <div class="delito-desc">
+          <b>a)</b> Respeto a <b>Constitución, Estatuto de Autonomía</b> y ordenamiento.<br>
+          <b>b)</b> Neutralidad política, imparcialidad, sin discriminación.<br>
+          <b>c)</b> Integridad, dignidad; oposición a la corrupción.<br>
+          <b>d)</b> Jerarquía y subordinación.<br>
+          <b>e)</b> Colaboración con la Administración de Justicia.
+        </div>
+        <div class="nota-agrav">⚠️ La <b>obediencia debida NO ampara</b> órdenes que entrañen delito o contrarias a la Constitución, al <b>Estatuto</b> o a las Leyes.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">2º · Relaciones con la comunidad</div>
+          <span class="art-badge">Art. 10.1.2º</span>
+          <span class="tipo-badge badge-clave">Principio</span>
+        </div>
+        <div class="delito-desc">
+          Impedir prácticas abusivas o discriminatorias; trato correcto y esmerado; actuar con decisión y sin demora ante daño grave; uso de armas solo con riesgo racionalmente grave.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip multa">🟡 Principios del uso de la fuerza: <b>congruencia, oportunidad y proporcionalidad</b> (COP)</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">3º · Tratamiento de detenidos</div>
+          <span class="art-badge">Art. 10.1.3º</span>
+          <span class="tipo-badge badge-clave">Principio</span>
+        </div>
+        <div class="delito-desc">
+          Identificarse al detener · velar por vida, integridad, honor y dignidad · cumplir trámites, plazos y requisitos del ordenamiento jurídico.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">4º y 5º · Dedicación y Secreto profesional</div>
+          <span class="art-badge">Art. 10.1.4º-5º</span>
+          <span class="tipo-badge badge-clave">Principio</span>
+        </div>
+        <div class="delito-desc">
+          <b>Dedicación total:</b> intervenir siempre, estén o no de servicio.<br>
+          <b>Secreto profesional:</b> riguroso respecto de la información conocida por razón del cargo.
+        </div>
+        <div class="nota-clave">💡 La <b>responsabilidad es personal y directa</b> (art. 10.2); no excluye la responsabilidad patrimonial de la Administración.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. FUNCIONES -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🎯</span>
+      <h2>Funciones Policía Local y Vigilantes</h2>
+      <span class="art-ref">Arts. 11–13</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">FUNCIONES POLICÍA LOCAL — Las 13 del art. 11</div>
+          <span class="art-badge">Art. 11</span>
+          <span class="tipo-badge badge-local">Memorizar</span>
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>a)</b> Proteger autoridades y edificios locales</div>
+          <div class="celda"><b>b)</b> Ordenar, señalizar y dirigir tráfico urbano</div>
+          <div class="celda"><b>c)</b> Instruir atestados accidentes en núcleo urbano</div>
+          <div class="celda"><b>d)</b> Policía administrativa (ordenanzas, bandos)</div>
+          <div class="celda"><b>e)</b> Policía judicial (art. 12)</div>
+          <div class="celda"><b>f)</b> Diligencias de prevención de delitos</div>
+          <div class="celda"><b>g)</b> Colaborar en manifestaciones y concentraciones</div>
+          <div class="celda"><b>h)</b> Cooperar en conflictos privados (si requeridos)</div>
+          <div class="celda"><b>i)</b> Vigilar espacios públicos</div>
+          <div class="celda"><b>j)</b> Auxilio en accidentes/catástrofes (Prot. Civil)</div>
+          <div class="celda"><b>k)</b> Velar por medio ambiente y entorno</div>
+          <div class="celda"><b>l)</b> Actuaciones de seguridad vial</div>
+          <div class="celda" style="grid-column: 1 / -1;"><b>m)</b> Cualquier otra función de Policía y seguridad encomendada</div>
+        </div>
+        <div class="nota-agrav">⚠️ Las letras <b>c) atestados</b> y <b>f) prevención</b> → las actuaciones deben <b>comunicarse a las FCSE competentes</b>.</div>
+        <div class="nota-policial">🚔 Diferencias con LO 2/1986 art. 53: la 16/1991 añade explícitamente <b>k) medio ambiente, i) vigilar espacios públicos y l) seguridad vial</b>.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Policía Judicial (funciones del art. 11.e)</div>
+          <span class="art-badge">Art. 12</span>
+          <span class="tipo-badge badge-info">Judicial</span>
+        </div>
+        <div class="delito-desc">
+          <b>a)</b> Auxiliar a Jueces, Tribunales y Mº Fiscal en investigación y detención, <b>cuando sean requeridos</b>.<br>
+          <b>b)</b> Practicar <b>primeras diligencias de prevención</b> y custodia de detenidos y objetos del delito (por iniciativa propia o requerimiento).
+        </div>
+        <div class="nota-clave">💡 Cooperación mutua y colaboración recíproca con el resto de FCS. Son <b>COLABORADORAS</b> de las FCSE (art. 29.2 LO 2/1986).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Funciones de los VIGILANTES (limitadas)</div>
+          <span class="art-badge">Art. 13</span>
+          <span class="tipo-badge badge-info">Vigilantes</span>
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>a)</b> Custodiar bienes e instalaciones municipales</div>
+          <div class="celda"><b>b)</b> Ordenar y regular tráfico en núcleo urbano</div>
+          <div class="celda"><b>c)</b> Auxilio al ciudadano y Protección Civil</div>
+          <div class="celda"><b>d)</b> Velar cumplimiento ordenanzas y bandos</div>
+        </div>
+        <div class="nota-agrav">⚠️ Los Vigilantes <b>SOLO</b> tienen estas 4 funciones. NO pueden ejercer Policía Judicial, ni prevención de delitos, ni atestados.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 5. COORDINACIÓN -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🤝</span>
+      <h2>Coordinación y Colaboración</h2>
+      <span class="art-ref">Arts. 14–23 · Título II</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Concepto de Coordinación</div>
+          <span class="art-badge">Art. 14</span>
+          <span class="tipo-badge badge-clave">Definición</span>
+        </div>
+        <div class="delito-desc">
+          Determinación de <b>medios y sistemas de relación</b> para la acción conjunta de las Policías Locales, integrándolas en el sistema de seguridad ciudadana de Cataluña.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Funciones de coordinación</div>
+          <span class="art-badge">Art. 15</span>
+          <span class="tipo-badge badge-info">Generalitat</span>
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>a)</b> Homogeneizar medios técnicos</div>
+          <div class="celda"><b>b)</b> Sistema de información recíproca</div>
+          <div class="celda"><b>c)</b> Asesorar a Policías Locales</div>
+          <div class="celda"><b>d)</b> Canalizar colaboración interadmin.</div>
+          <div class="celda"><b>e)</b> Coordinar protección civil</div>
+          <div class="celda"><b>f)</b> Normas de estructura y formación</div>
+          <div class="celda" style="grid-column: 1 / -1;"><b>g)</b> Actuaciones comunes en seguridad vial</div>
+        </div>
+        <div class="nota-clave">💡 Todo con <b>respeto a la autonomía local</b> y las competencias municipales en materia de Policía Local.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Junta Local de Seguridad</div>
+          <span class="art-badge">Art. 17</span>
+          <span class="tipo-badge badge-info">Junta</span>
+        </div>
+        <div class="delito-desc">
+          En municipios con Policía Local que creen la <b>Junta Local de Seguridad</b> (art. 54 LO 2/1986), pueden integrar representantes del <b>Departament de Governació</b>.
+        </div>
+        <div class="nota-agrav">⚠️ La participación del Departament es <b>preceptiva</b> en los municipios con presencia operativa de la Policía autonómica (Mossos d'Esquadra).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Envío anual de Memoria</div>
+          <span class="art-badge">Art. 20</span>
+          <span class="tipo-badge badge-info">Deber</span>
+        </div>
+        <div class="delito-desc">
+          Las Corporaciones Locales con PL o Vigilantes envían al Departament, en el <b>primer trimestre</b> de cada año:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Memoria de servicios del año anterior</span>
+          <span class="pena-chip">🔵 Dotación de recursos humanos y materiales</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Convenios de cooperación</div>
+          <span class="art-badge">Art. 23</span>
+          <span class="tipo-badge badge-info">Convenios</span>
+        </div>
+        <div class="delito-desc">
+          <b>1.</b> Municipios sin PL pueden convenir con el Departament para que la Policía autonómica ejerza funciones locales.<br>
+          <b>2.</b> Municipios con PL pueden solicitar apoyo de la Policía autonómica para servicios temporales/concretos.<br>
+          <b>3.</b> Municipios limítrofes pueden suscribir acuerdos de cooperación entre sus Policías (previa autorización del Conseller).
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 6. ESCALAS Y CATEGORÍAS (destacado) -->
+  <div class="categoria">
+    <div class="cat-header open local" onclick="toggle(this)">
+      <span class="cat-icon">🏗️</span>
+      <h2>Escalas y Categorías</h2>
+      <span class="art-ref">Arts. 24–25 · Título III</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Las 4 Escalas y 7 Categorías</div>
+          <span class="art-badge">Art. 24</span>
+          <span class="tipo-badge badge-local">Memorizar</span>
+        </div>
+        <div class="tabla-discip">
+          <div class="th">Escala</div>
+          <div class="th">Categorías</div>
+          <div class="th">Grupo</div>
+
+          <div class="td centro grave">Superior</div>
+          <div class="td grave">Superintendente · Intendente Mayor · Intendente</div>
+          <div class="td centro grave">A1</div>
+
+          <div class="td centro medio">Ejecutiva</div>
+          <div class="td medio">Inspector</div>
+          <div class="td centro medio">A2</div>
+
+          <div class="td centro">Intermedia</div>
+          <div class="td">Subinspector · Sargento</div>
+          <div class="td centro">C1</div>
+
+          <div class="td centro leve">Básica</div>
+          <div class="td leve">Cabo · Agente</div>
+          <div class="td centro leve">C1</div>
+        </div>
+        <div class="nota-policial">🚔 <b>Disposición adicional 7ª:</b> Agente y Cabo están clasificados a efectos económicos en el <b>C1</b> (antes C2). No tiene equivalencia académica.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Creación de categorías por población</div>
+          <span class="art-badge">Art. 25.3</span>
+          <span class="tipo-badge badge-local">Pregunta típica</span>
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>&gt; 200.000 hab</b><br>Puede haber Superintendente</div>
+          <div class="celda"><b>&gt; 100.000 hab</b><br>Puede haber Int. Mayor e Intendente</div>
+          <div class="celda" style="grid-column: 1 / -1;"><b>Excepción</b> (&lt; 100.000 hab): puede crearse Int. Mayor si &gt; 250 agentes · Intendente si &gt; 100 agentes, por características especiales</div>
+        </div>
+        <div class="nota-agrav">⚠️ Pregunta muy repetida: <b>Superintendente SOLO en &gt; 200.000 hab</b>. Intendente Mayor e Intendente en &gt; 100.000 hab (o excepcionalmente con muchos agentes).</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 7. JEFE DEL CUERPO -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">👔</span>
+      <h2>Jefe del Cuerpo</h2>
+      <span class="art-ref">Arts. 26–27</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Designación del Jefe</div>
+          <span class="art-badge">Art. 26</span>
+          <span class="tipo-badge badge-info">Jefatura</span>
+        </div>
+        <div class="delito-desc">
+          Es Jefe del Cuerpo el miembro de <b>mayor graduación</b>. En caso de igualdad, nombra el Alcalde según principios de <b>objetividad, mérito, capacidad e igualdad</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Bajo el mando del <b>Alcalde</b> (o persona delegada)</span>
+          <span class="pena-chip multa">🟡 El Alcalde designa al sustituto entre los de mayor graduación</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Funciones del Jefe</div>
+          <span class="art-badge">Art. 27</span>
+          <span class="tipo-badge badge-info">Funciones</span>
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>a)</b> Dirigir, coordinar y supervisar operaciones</div>
+          <div class="celda"><b>b)</b> Evaluar recursos y hacer propuestas</div>
+          <div class="celda"><b>c)</b> Transformar directrices en órdenes concretas</div>
+          <div class="celda"><b>d)</b> Informar al Alcalde del funcionamiento</div>
+          <div class="celda" style="grid-column: 1 / -1;"><b>e)</b> Cualquier otra función del Reglamento municipal</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 8. ACCESO Y PROMOCIÓN -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">📝</span>
+      <h2>Acceso y Promoción</h2>
+      <span class="art-ref">Arts. 28–33 · Título IV</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Acceso a AGENTE (libre)</div>
+          <span class="art-badge">Art. 29</span>
+          <span class="tipo-badge badge-clave">Acceso</span>
+        </div>
+        <div class="delito-desc">
+          Por <b>oposición</b> o <b>concurso-oposición libre</b>. Requisitos mínimos: ser español, edad entre mín./máx. del Reglamento, condiciones para ejercer funciones, no estar inhabilitado ni separado del servicio.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Pruebas mínimas: <b>culturales, físicas, médicas y psicotécnicas</b></span>
+          <span class="pena-chip positivo">✓ Curso selectivo en la <b>Escuela de Policía de Cataluña (ISPC)</b></span>
+        </div>
+        <div class="nota-clave">💡 Exentos del curso selectivo quienes aporten diploma acreditativo de haber superado el curso básico del ISPC.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Acceso a Cabo, Sargento y Subinspector</div>
+          <span class="art-badge">Art. 30</span>
+          <span class="tipo-badge badge-clave">Promoción</span>
+        </div>
+        <div class="delito-desc">
+          <b>Promoción interna</b> mediante concurso-oposición entre miembros con <b>mínimo 2 años</b> en la categoría inmediatamente inferior, con titulación adecuada y curso específico del ISPC.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Acceso a Escalas Superior y Ejecutiva</div>
+          <span class="art-badge">Art. 31</span>
+          <span class="tipo-badge badge-clave">Acceso</span>
+        </div>
+        <div class="delito-desc">
+          Inspector, Intendente, Intendente Mayor y Superintendente: <b>concurso-oposición libre</b>. Puede reservarse hasta el <b>50%</b> para promoción interna (mín. 2 años en categoría inmediatamente inferior).
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Tribunal de oposiciones (composición 1/3 - 1/3 - 1/3)</div>
+          <span class="art-badge">Art. 32</span>
+          <span class="tipo-badge badge-info">Tribunal</span>
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>1/3</b> Miembros o funcionarios de la Corporación</div>
+          <div class="celda"><b>1/3</b> Personal técnico especializado</div>
+          <div class="celda" style="grid-column: 1 / -1;"><b>1/3</b> Representantes del Departament de Governació (mínimo: 1 del ISPC + 1 de la DG de Seguridad Ciudadana)</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Paridad de género (Disp. Ad. 8ª)</div>
+          <span class="art-badge">Disp. Ad. 8ª</span>
+          <span class="tipo-badge badge-local">Actual</span>
+        </div>
+        <div class="delito-desc">
+          Convocatorias desde <b>1/1/2020</b>: deben reservar plazas para mujeres para <b>equilibrar</b> la presencia en plantillas.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Máximo: <b>40%</b> de las plazas convocadas</span>
+          <span class="pena-chip multa">🟡 Mínimo general: <b>25%</b> (si &gt; 3 plazas)</span>
+          <span class="pena-chip positivo">✓ NO aplica si ya hay ≥ <b>33%</b> de mujeres en el cuerpo/escala/categoría</span>
+        </div>
+        <div class="nota-agrav">⚠️ Condición: diferencial negativo de puntuación de la candidata seleccionada <b>no superior al 15%</b> respecto al candidato preterido.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 9. RÉGIMEN ESTATUTARIO -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">📋</span>
+      <h2>Régimen Estatutario</h2>
+      <span class="art-ref">Arts. 34–45 · Título V</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Derechos económicos y profesionales</div>
+          <span class="art-badge">Arts. 34–36</span>
+          <span class="tipo-badge badge-info">Derechos</span>
+        </div>
+        <div class="delito-desc">
+          Jornada, horario, vacaciones y permisos fijados por cada Entidad Local.<br>
+          Retribuciones: <b>básicas</b> (igual que el resto de funcionarios) + <b>complementarias</b> (fijadas por el Pleno).
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Incompatibilidad y Huelga</div>
+          <span class="art-badge">Arts. 37–38</span>
+          <span class="tipo-badge badge-grave">Prohibiciones</span>
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">✗ Incompatibilidad con cualquier otra actividad pública o privada</span>
+          <span class="pena-chip agravada">✗ <b>NO huelga</b> ni acciones sustitutivas</span>
+        </div>
+        <div class="nota-agrav">⚠️ El derecho sindical sí se reconoce (Disp. Ad. 1ª y Ley 9/1987, de 12 de junio).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Defensa jurídica y Seguridad e higiene</div>
+          <span class="art-badge">Arts. 41–42</span>
+          <span class="tipo-badge badge-info">Derechos</span>
+        </div>
+        <div class="delito-desc">
+          La Corporación garantiza la <b>defensa jurídica</b> en causas por actuaciones en el ejercicio de sus funciones.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip positivo">✓ Revisión médica <b>anual</b></span>
+          <span class="pena-chip positivo">✓ Prevención de enfermedades contagiosas</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Segunda Actividad</div>
+          <span class="art-badge">Arts. 43–44</span>
+          <span class="tipo-badge badge-local">Segunda actividad</span>
+        </div>
+        <div class="delito-desc">
+          Pase a segunda actividad por: <b>edad (nunca &lt; 57 años)</b> o <b>dictamen médico</b> de disminución de capacidad.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip positivo">✓ Preferencia: <b>mismo Cuerpo</b>, otras funciones según categoría</span>
+          <span class="pena-chip">🔵 Subsidiario: otros puestos de la Corporación</span>
+          <span class="pena-chip multa">🟡 NO supone disminución de retribuciones básicas ni del grado personal</span>
+        </div>
+        <div class="nota-clave">💡 <b>Tribunal médico (art. 44):</b> 3 médicos → 1 designado por el Ayto. + 1 por el interesado + 1 por sorteo entre facultativos del Servei Català de la Salut.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 10. RÉGIMEN DISCIPLINARIO (destacado) -->
+  <div class="categoria">
+    <div class="cat-header disciplinario" onclick="toggle(this)">
+      <span class="cat-icon">⚠️</span>
+      <h2>Régimen Disciplinario · Faltas</h2>
+      <span class="art-ref">Arts. 46–53 · Título VI</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Clasificación de las Faltas</div>
+          <span class="art-badge">Art. 47</span>
+          <span class="tipo-badge badge-grave">Tipología</span>
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">🔴 Muy graves (art. 48)</span>
+          <span class="pena-chip multa">🟡 Graves (art. 49)</span>
+          <span class="pena-chip positivo">🟢 Leves (art. 50)</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">FALTAS MUY GRAVES (algunas de las 22)</div>
+          <span class="art-badge">Art. 48</span>
+          <span class="tipo-badge badge-grave">Muy Grave</span>
+        </div>
+        <div class="delito-desc">Las más importantes:</div>
+        <div class="mini-tabla">
+          <div class="celda"><b>a)</b> Incumplir deber de fidelidad a la CE/Estatut</div>
+          <div class="celda"><b>b)</b> Discriminación por raza, sexo, orientación...</div>
+          <div class="celda"><b>d)</b> Torturas, maltratos, tratos degradantes</div>
+          <div class="celda"><b>e)</b> Conducta constitutiva de delito doloso</div>
+          <div class="celda"><b>f)</b> Prevaricación o soborno (o no denunciarlo)</div>
+          <div class="celda"><b>g)</b> Abandono del servicio</div>
+          <div class="celda"><b>h)</b> Insubordinación a mandos</div>
+          <div class="celda"><b>i)</b> Denegación de auxilio / falta de intervención</div>
+          <div class="celda"><b>j)</b> Pérdida de armas o permitir sustracción</div>
+          <div class="celda"><b>k)</b> Participar en huelgas</div>
+          <div class="celda"><b>n)</b> Incumplir incompatibilidades</div>
+          <div class="celda"><b>r)</b> Embriagarse en servicio / drogas</div>
+          <div class="celda" style="grid-column: 1 / -1;"><b>u)</b> <b>Reincidencia</b> en la comisión de faltas graves</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">FALTAS GRAVES (las 16)</div>
+          <span class="art-badge">Art. 49</span>
+          <span class="tipo-badge badge-info">Grave</span>
+        </div>
+        <div class="delito-desc">Las más preguntadas:</div>
+        <div class="mini-tabla">
+          <div class="celda"><b>a)</b> Desobediencia a superiores</div>
+          <div class="celda"><b>b)</b> Faltas de respeto graves</div>
+          <div class="celda"><b>d)</b> Daños graves al patrimonio de la Corp.</div>
+          <div class="celda"><b>j)</b> Consumir bebidas alcohólicas en servicio</div>
+          <div class="celda"><b>k)</b> Pérdida de credenciales</div>
+          <div class="celda"><b>l)</b> Falta de asistencia injustificada</div>
+          <div class="celda"><b>m)</b> <b>Reincidencia</b> en faltas leves</div>
+          <div class="celda"><b>n)</b> Pérdida de armas por negligencia simple</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">FALTAS LEVES (las 8)</div>
+          <span class="art-badge">Art. 50</span>
+          <span class="tipo-badge badge-clave">Leve</span>
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>a)</b> Incorrección con superiores/compañeros/ciudadanos</div>
+          <div class="celda"><b>b)</b> Demora o negligencia en cumplimiento</div>
+          <div class="celda"><b>c)</b> Descuido en presentación personal</div>
+          <div class="celda"><b>d)</b> Descuido en locales/material</div>
+          <div class="celda"><b>e)</b> Incumplir jornada de trabajo</div>
+          <div class="celda"><b>f)</b> Permuta de destino con ánimo de lucro</div>
+          <div class="celda"><b>g)</b> Prescindir del conducto reglamentario</div>
+          <div class="celda"><b>h)</b> Impuntualidad repetida en un mes</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">SANCIONES (por tipo de falta)</div>
+          <span class="art-badge">Art. 52</span>
+          <span class="tipo-badge badge-grave">Memorizar</span>
+        </div>
+        <div class="tabla-discip">
+          <div class="th">Falta</div>
+          <div class="th">Sanción</div>
+          <div class="th">Duración</div>
+
+          <div class="td centro grave">Muy Grave</div>
+          <div class="td grave">Separación del servicio <b>o</b> suspensión de funciones</div>
+          <div class="td centro grave">&gt; 1 año y &lt; 6</div>
+
+          <div class="td centro medio">Grave</div>
+          <div class="td medio">Suspensión <b>o</b> traslado</div>
+          <div class="td centro medio">&gt; 15 días y &lt; 1 año</div>
+
+          <div class="td centro leve">Leve</div>
+          <div class="td leve">Suspensión · traslado · deducción retrib. · amonestación</div>
+          <div class="td centro leve">1–15 días</div>
+        </div>
+        <div class="nota-agrav">⚠️ La <b>separación del servicio</b> solo procede por falta muy grave y la impone el <b>Pleno</b> (no el Alcalde).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Graduación de sanciones (principio proporcionalidad)</div>
+          <span class="art-badge">Art. 53</span>
+          <span class="tipo-badge badge-info">Criterios</span>
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>a)</b> Intencionalidad</div>
+          <div class="celda"><b>b)</b> Perturbación de servicios</div>
+          <div class="celda"><b>c)</b> Daños y perjuicios causados</div>
+          <div class="celda"><b>d)</b> Reincidencia</div>
+          <div class="celda"><b>e)</b> Grado de participación</div>
+          <div class="celda"><b>f)</b> Trascendencia para la seguridad pública</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 11. PROCEDIMIENTO Y PRESCRIPCIÓN -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">📅</span>
+      <h2>Procedimiento y Prescripción</h2>
+      <span class="art-ref">Arts. 54–58</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Competencia sancionadora</div>
+          <span class="art-badge">Art. 54</span>
+          <span class="tipo-badge badge-info">Competencias</span>
+        </div>
+        <div class="delito-desc">
+          <b>Alcalde</b>: incoa el expediente, nombra instructor y secretario. Impone sanciones por faltas muy graves (salvo separación), graves y leves.<br>
+          <b>Pleno</b>: impone la <b>separación del servicio</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">⚠️ Faltas graves y muy graves: SIEMPRE con expediente</span>
+          <span class="pena-chip positivo">✓ Faltas leves: basta audiencia al interesado</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Suspensión provisional y medidas cautelares</div>
+          <span class="art-badge">Arts. 55–57</span>
+          <span class="tipo-badge badge-info">Cautelares</span>
+        </div>
+        <div class="delito-desc">
+          Suspensión provisional inicial: <b>1 mes</b>, prorrogable hasta máximo <b>6 meses</b> (salvo causa imputable al expedientado o procedimiento penal).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">⚠️ Suspensión: pérdida de complemento específico y gratificaciones</span>
+          <span class="pena-chip">🔵 Retirada de arma, credencial y prohibición de uniforme</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">⏰ PRESCRIPCIÓN DE FALTAS Y SANCIONES</div>
+          <span class="art-badge">Art. 58</span>
+          <span class="tipo-badge badge-grave">Clave</span>
+        </div>
+        <div class="tabla-discip">
+          <div class="th">Tipo</div>
+          <div class="th">Falta (desde comisión)</div>
+          <div class="th">Sanción (desde notif.)</div>
+
+          <div class="td centro grave">Muy Grave</div>
+          <div class="td grave centro"><b>6 años</b></div>
+          <div class="td grave centro"><b>6 años</b></div>
+
+          <div class="td centro medio">Grave</div>
+          <div class="td medio centro"><b>2 años</b></div>
+          <div class="td medio centro"><b>2 años</b></div>
+
+          <div class="td centro leve">Leve</div>
+          <div class="td leve centro"><b>1 mes</b></div>
+          <div class="td leve centro"><b>1 mes</b></div>
+        </div>
+        <div class="nota-policial">🚔 Regla mnemotécnica: <b>«6 · 2 · 1»</b> — 6 años muy graves · 2 años graves · 1 mes leves. Aplica TANTO a faltas como a sanciones.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CUADRO RECUERDA -->
+  <div class="recuerda">
+    <h3>📋 Recuerda — Claves Llei 16/1991</h3>
+    <ul>
+      <li>Basada en el <b>art. 13.3 Estatut d'Autonomia</b>. Cataluña tiene competencia exclusiva en coordinación de PPLL.</li>
+      <li>La Policía Local es <b>institut armat de naturalesa civil</b> con estructura jerarquizada (art. 2).</li>
+      <li>Denominación genérica: <b>Policía Local</b>. Por tradición: Policía Municipal o <b>Guardia Urbana</b>.</li>
+      <li>Solo puede haber PL en municipios <b>&gt; 10.000 hab</b>; en &lt; 10.000 hab, con mayoría absoluta + autorización del Conseller.</li>
+      <li>Se integra en <b>Cuerpo Único</b>. Mando: Alcalde (superior) y Jefe del Cuerpo (inmediato).</li>
+      <li>Ámbito: <b>término municipal</b>. Salida solo en emergencia y con autorización previa.</li>
+      <li>Juran/prometen la <b>Constitución</b> y el <b>Estatut</b>. Son siempre <b>agentes de la autoridad</b>.</li>
+      <li>Los <b>Vigilantes</b> solo son agentes de la autoridad si: identificados + funciones art. 13 + NO hay PL en el municipio.</li>
+      <li>Art. 11: <b>13 funciones</b> (a-m). Destacan c) atestados, f) prevención (ambas con comunicación a FCSE), y añadidos propios: i) espacios públicos, k) medio ambiente, l) seguridad vial.</li>
+      <li><b>4 Escalas, 7 Categorías</b>: Superior (A1) · Ejecutiva (A2) · Intermedia (C1) · Básica (C1).</li>
+      <li>Superintendente solo en &gt; <b>200.000 hab</b>; Intendente Mayor e Intendente en &gt; <b>100.000 hab</b>.</li>
+      <li>Acceso a <b>Agente</b>: oposición/concurso-oposición libre + curso ISPC (Escuela de Policía de Cataluña).</li>
+      <li>Promoción interna: mínimo <b>2 años</b> en la categoría inmediatamente inferior + curso específico.</li>
+      <li>Tribunal de oposición: composición <b>1/3 · 1/3 · 1/3</b> (Corporación, técnicos especializados, Departament).</li>
+      <li>Segunda actividad: edad mínima <b>57 años</b> o dictamen médico. NO reduce retribuciones básicas ni grado personal.</li>
+      <li><b>Tribunal médico</b> (segunda actividad): 3 médicos → 1 Ayto. + 1 interesado + 1 sorteo Servei Català de la Salut.</li>
+      <li>Sanción de <b>separación del servicio</b>: la impone el <b>Pleno</b> (no el Alcalde).</li>
+      <li><b>Prescripción 6-2-1</b>: muy grave 6 años · grave 2 años · leve 1 mes (faltas y sanciones, igual).</li>
+      <li>Suspensión provisional: máximo <b>6 meses</b> (salvo proceso penal o dilación imputable al expedientado).</li>
+      <li>Paridad (Disp. Ad. 8ª): reserva 25%-40% mujeres desde 2020 si presencia femenina &lt; 33%.</li>
+    </ul>
+  </div>
+
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+
+</div>
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    if (body.style.display === 'none' || body.style.display === '') {
+      body.style.display = 'block';
+      body.style.animation = 'fadeUp .3s ease';
+    } else {
+      body.style.display = 'none';
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LRBRL · Ley 7/1985 Bases del Régimen Local — Esquema Operativo Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #0A1628;
+    --bg-section: #0E2244;
+    --gold: #C8A028;
+    --blue-royal: #1A5C96;
+    --red: #C8281E;
+    --green: #1A7A3C;
+    --text-main: #F0F4FF;
+    --text-secondary: #A8BAD4;
+    --border: #C8A028;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  body {
+    background-color: var(--bg-main);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-main);
+    padding: 20px 12px 40px;
+  }
+
+  .wrapper { max-width: 720px; margin: 0 auto; }
+
+  /* ── CABECERA ── */
+  .header {
+    display: flex; align-items: center; gap: 18px;
+    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 8px;
+    animation: fadeUp .5s ease both;
+    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+  }
+  .escudo svg { flex-shrink: 0; }
+  .header-text { flex: 1; }
+  .header-text .label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .header-text h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 26px; font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-main); line-height: 1.1;
+  }
+  .header-text h1 span { color: var(--gold); }
+  .header-text .subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* ── CLASIFICACIÓN GENERAL ── */
+  .clasificacion {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px; margin-bottom: 14px;
+    animation: fadeUp .6s ease .1s both;
+  }
+  .clas-card {
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+    border: 1px solid rgba(200,160,40,0.3);
+  }
+  .clas-card .icon { font-size: 22px; margin-bottom: 4px; }
+  .clas-card .tipo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .clas-card .pena-max {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+  }
+  .clas-leve   { background: rgba(26,122,60,0.15); border-color: var(--green); }
+  .clas-menos  { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
+  .clas-grave  { background: rgba(200,40,30,0.15); border-color: var(--red); }
+  .clas-leve .tipo   { color: #4ACD7A; }
+  .clas-menos .tipo  { color: #6AADDC; }
+  .clas-grave .tipo  { color: #E86050; }
+
+  /* ── BANNER INFO ── */
+  .info-banner {
+    background: linear-gradient(135deg, #12345E 0%, #1A5C96 50%, #12345E 100%);
+    border: 2px solid #6AADDC;
+    border-radius: 8px;
+    padding: 10px 18px;
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 12px;
+    animation: fadeUp .55s ease .05s both;
+    box-shadow: 0 0 20px rgba(26,92,150,0.3);
+  }
+  .info-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
+  .info-banner .ref-text { flex: 1; }
+  .info-banner .ref-ley {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: #D8EBFF;
+  }
+  .info-banner .ref-desc {
+    font-size: 12px;
+    color: rgba(216,235,255,0.85);
+    margin-top: 2px;
+  }
+  .info-banner .ref-fecha {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px; font-weight: 700;
+    color: #D8EBFF;
+    background: rgba(0,0,0,0.25);
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    border: 1px solid rgba(216,235,255,0.3);
+    text-align: center;
+  }
+
+  /* ── BLOQUE CATEGORÍA ── */
+  .categoria {
+    background: var(--bg-section);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(200,160,40,0.2);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
+  .categoria:nth-child(2)  { animation: fadeUp .6s ease .25s both; }
+  .categoria:nth-child(3)  { animation: fadeUp .6s ease .3s both; }
+  .categoria:nth-child(4)  { animation: fadeUp .6s ease .35s both; }
+  .categoria:nth-child(5)  { animation: fadeUp .6s ease .4s both; }
+  .categoria:nth-child(6)  { animation: fadeUp .6s ease .45s both; }
+  .categoria:nth-child(7)  { animation: fadeUp .6s ease .5s both; }
+  .categoria:nth-child(8)  { animation: fadeUp .6s ease .55s both; }
+  .categoria:nth-child(9)  { animation: fadeUp .6s ease .6s both; }
+  .categoria:nth-child(10) { animation: fadeUp .6s ease .65s both; }
+  .categoria:nth-child(11) { animation: fadeUp .6s ease .7s both; }
+  .categoria:nth-child(12) { animation: fadeUp .6s ease .75s both; }
+
+  .cat-header {
+    background: var(--blue-royal);
+    padding: 12px 18px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none;
+    transition: background .2s;
+  }
+  .cat-header:hover { background: #1e6db0; }
+  .cat-header .cat-icon { font-size: 20px; }
+  .cat-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px; flex: 1;
+  }
+  .cat-header .art-ref {
+    font-size: 11px;
+    color: rgba(240,244,255,0.65);
+    white-space: nowrap;
+  }
+  .cat-header .toggle {
+    font-size: 14px;
+    transition: transform .3s;
+    color: var(--gold);
+  }
+  .cat-header.open .toggle { transform: rotate(180deg); }
+
+  .cat-body { padding: 6px 0; }
+
+  /* ── ARTÍCULO ── */
+  .delito {
+    border-left: 3px solid var(--gold);
+    margin: 8px 14px;
+    background: rgba(10,22,40,0.5);
+    border-radius: 0 7px 7px 0;
+    padding: 10px 14px;
+  }
+  .delito-top {
+    display: flex; align-items: flex-start;
+    gap: 8px; flex-wrap: wrap;
+  }
+  .delito-nombre {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14.5px; font-weight: 600;
+    color: var(--text-main);
+    flex: 1; min-width: 160px;
+  }
+  .art-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    background: rgba(200,160,40,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .tipo-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .badge-clave    { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
+  .badge-info     { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
+  .badge-grave    { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
+  .badge-local    { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
+
+  /* ── CHAPA RÁPIDA (Competencia / Órgano / Plazo) ── */
+  .multa-badge {
+    font-size: 11px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    background: var(--gold);
+    color: #0A1628;
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--gold);
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(200,160,40,0.25);
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .multa-badge.multa-alta {
+    background: var(--red);
+    color: #FFEBE8;
+    border-color: var(--red);
+    box-shadow: 0 1px 3px rgba(200,40,30,0.3);
+  }
+  .multa-badge.multa-organ {
+    background: var(--blue-royal);
+    color: #E0F0FF;
+    border-color: var(--blue-royal);
+  }
+  .multa-badge.multa-ok {
+    background: var(--green);
+    color: #E0FFF0;
+    border-color: var(--green);
+  }
+
+  .delito-desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    line-height: 1.5;
+  }
+  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
+
+  .pena-row {
+    display: flex; flex-wrap: wrap;
+    gap: 6px; margin-top: 7px;
+  }
+  .pena-chip {
+    font-size: 11px;
+    background: rgba(26,92,150,0.25);
+    border: 1px solid rgba(26,92,150,0.6);
+    color: var(--text-main);
+    padding: 3px 9px;
+    border-radius: 20px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .pena-chip.positivo {
+    background: rgba(26,122,60,0.25);
+    border-color: rgba(26,122,60,0.6);
+  }
+  .pena-chip.agravada {
+    background: rgba(200,40,30,0.2);
+    border-color: rgba(200,40,30,0.5);
+  }
+
+  /* ── MINI TABLA ── */
+  .mini-tabla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .mini-tabla .celda {
+    background: rgba(10,22,40,0.6);
+    border: 1px solid rgba(200,160,40,0.2);
+    border-radius: 5px;
+    padding: 6px 9px;
+    font-size: 11.5px;
+  }
+  .mini-tabla .celda b {
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* ── TABLA POBLACIÓN ── */
+  .tabla-discip {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    gap: 0;
+    margin-top: 8px;
+    background: rgba(10,22,40,0.7);
+    border: 1px solid rgba(200,160,40,0.3);
+    border-radius: 5px;
+    overflow: hidden;
+    font-size: 11.5px;
+  }
+  .tabla-discip .td-header {
+    background: rgba(200,160,40,0.15);
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    text-align: center;
+    border-right: 1px solid rgba(200,160,40,0.2);
+    border-bottom: 1px solid rgba(200,160,40,0.2);
+  }
+  .tabla-discip .td-header:last-child { border-right: none; }
+  .tabla-discip .td-cell {
+    padding: 5px 8px;
+    color: var(--text-main);
+    border-right: 1px solid rgba(200,160,40,0.1);
+    border-bottom: 1px solid rgba(200,160,40,0.1);
+  }
+  .tabla-discip .td-cell:last-child { border-right: none; }
+  .tabla-discip .td-pob {
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+  }
+
+  /* ── NOTAS ── */
+  .nota-agrav {
+    margin-top: 6px; font-size: 11.5px;
+    color: #E08888;
+    background: rgba(200,40,30,0.08);
+    border-left: 2px solid var(--red);
+    padding: 5px 9px;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+  }
+  .nota-agrav b { color: #FF8070; }
+  .nota-policial {
+    margin-top: 6px; font-size: 11.5px;
+    color: #A8D4C0;
+    background: rgba(26,122,60,0.1);
+    border-left: 2px solid var(--green);
+    padding: 5px 9px;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+  }
+  .nota-policial b { color: #4ACD7A; }
+  .nota-clave {
+    margin-top: 6px; font-size: 11.5px;
+    color: #E8D890;
+    background: rgba(200,160,40,0.1);
+    border-left: 2px solid var(--gold);
+    padding: 5px 9px;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+  }
+  .nota-clave b { color: #FFD060; }
+
+  /* ── RECUERDA ── */
+  .recuerda {
+    background: var(--gold);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-top: 6px;
+    animation: fadeUp .6s ease .8s both;
+  }
+  .recuerda h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px; font-weight: 700;
+    text-transform: uppercase;
+    color: #0A1628;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .recuerda ul { list-style: none; }
+  .recuerda ul li {
+    font-size: 13px;
+    color: #0A1628;
+    padding: 5px 0;
+    display: flex; align-items: flex-start; gap: 6px;
+    border-bottom: 1px solid rgba(10,22,40,0.15);
+    line-height: 1.4;
+  }
+  .recuerda ul li:last-child { border-bottom: none; }
+  .recuerda ul li::before {
+    content: "▶";
+    font-size: 9px; margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── BOTÓN IMPRIMIR ── */
+  .btn-print {
+    display: block; width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: var(--blue-royal);
+    border: 2px solid var(--gold);
+    color: var(--text-main);
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px;
+    border-radius: 8px;
+    cursor: pointer; transition: all .2s;
+    animation: fadeUp .6s ease .9s both;
+  }
+  .btn-print:hover {
+    background: var(--gold);
+    color: #0A1628;
+  }
+
+  /* ── DIVISOR ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 4px 14px 2px;
+    opacity: .35;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 500px) {
+    .clasificacion { grid-template-columns: 1fr; }
+    .header-text h1 { font-size: 22px; }
+    .cat-header h2 { font-size: 14px; }
+    .multa-badge { font-size: 10.5px; padding: 2px 7px; }
+    .tabla-discip { grid-template-columns: 1fr 1.5fr; }
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .btn-print { display: none; }
+    .categoria { break-inside: avoid; }
+    .cat-body { display: block !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- CABECERA -->
+  <div class="header">
+    <div class="escudo">
+      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
+        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
+        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICIA</text>
+        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
+        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <div class="label">Esquema Operativo Policial</div>
+      <h1>LRBRL · Ley <span>7/1985</span> Bases RL</h1>
+      <div class="subtitle">Ley Reguladora de las Bases del Régimen Local · Municipio, Provincia, Competencias · Policía Local</div>
+    </div>
+  </div>
+
+  <!-- CLASIFICACIÓN -->
+  <div class="clasificacion">
+    <div class="clas-card clas-leve">
+      <div class="icon">🏛️</div>
+      <div class="tipo">Municipio</div>
+      <div class="pena-max">Entidad local básica<br>Alcalde + Pleno + JGL<br>Arts. 11–30</div>
+    </div>
+    <div class="clas-card clas-menos">
+      <div class="icon">🗺️</div>
+      <div class="tipo">Provincia</div>
+      <div class="pena-max">Agrupación municipios<br>Diputación provincial<br>Arts. 31–41</div>
+    </div>
+    <div class="clas-card clas-grave">
+      <div class="icon">🤝</div>
+      <div class="tipo">Otras EELL</div>
+      <div class="pena-max">Comarca, Àrea Metrop.<br>Mancomunidad<br>Arts. 42–45</div>
+    </div>
+  </div>
+
+  <!-- BANNER INFO -->
+  <div class="info-banner">
+    <div class="ref-icon">📘</div>
+    <div class="ref-text">
+      <div class="ref-ley">📘 Ley 7/1985 · BOE 3 abril 1985 · Norma básica estatal (art. 149.1.18 CE)</div>
+      <div class="ref-desc">141 artículos · 18 DDAA · 10 DDTT · 5 DDFF · Última modificación: 21/03/2026 · Aplicación en Cat: DDAA 17ª + 18ª</div>
+    </div>
+    <div class="ref-fecha">LRBRL<br>Vigente</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       1. DISPOSICIONES GENERALES · AUTONOMÍA LOCAL
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">📖</span>
+      <h2>Disposiciones Generales · Autonomía Local</h2>
+      <span class="art-ref">Arts. 1–10</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Entidades Locales Territoriales</div>
+          <span class="art-badge">Art. 3.1 LRBRL</span>
+          <span class="tipo-badge badge-local">Estructura</span>
+          <span class="multa-badge">📋 3 niveles</span>
+        </div>
+        <div class="delito-desc">
+          Son <b>Entidades Locales territoriales</b>: (a) el <b>Municipio</b>, (b) la <b>Provincia</b>, (c) la <b>Isla</b> en archipiélagos balear y canario. También gozan de condición de EELL: <b>Comarcas</b>, <b>Áreas Metropolitanas</b> y <b>Mancomunidades</b>.
+        </div>
+        <div class="nota-policial">🚔 En Catalunya operan las <b>comarcas</b> (Llei 4/2003) y las <b>vegueries</b> como entes de ámbito supramunicipal. La PL actúa siempre en el ámbito municipal.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Potestades de las EELL</div>
+          <span class="art-badge">Art. 4 LRBRL</span>
+          <span class="tipo-badge badge-clave">Potestades</span>
+          <span class="multa-badge">📋 8 potestades</span>
+        </div>
+        <div class="delito-desc">
+          Corresponden a Municipios, Provincias e Islas como Administraciones públicas territoriales:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">① Reglamentaria + Autoorganización</span>
+          <span class="pena-chip">② Tributaria y financiera</span>
+          <span class="pena-chip">③ Programación / Planificación</span>
+          <span class="pena-chip">④ Expropiatoria</span>
+          <span class="pena-chip">⑤ Deslinde / Recuperación bienes</span>
+          <span class="pena-chip">⑥ Presunción legitimidad + ejecutividad</span>
+          <span class="pena-chip">⑦ Ejecución forzosa + Sancionadora</span>
+          <span class="pena-chip">⑧ Revisión de oficio</span>
+        </div>
+        <div class="nota-clave">💡 La <b>potestad sancionadora</b> municipal fundamenta la denuncia administrativa del agente de PL por ordenanzas, tráfico urbano (por delegación art. 84 LTSV) y ámbitos competencia local.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Tipos de Competencias Locales</div>
+          <span class="art-badge">Art. 7 LRBRL</span>
+          <span class="tipo-badge badge-info">Clave</span>
+          <span class="multa-badge multa-organ">🏛️ Propias / Delegadas</span>
+        </div>
+        <div class="delito-desc">
+          Las competencias son <b>propias</b> (determinadas por Ley, ejercidas con autonomía y responsabilidad propia) o <b>atribuidas por delegación</b> (sujetas a dirección y control). Solo podrán ejercer <b>competencias distintas</b> si no hay duplicidad y si la sostenibilidad financiera lo permite (<b>informe previo vinculante</b>).
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>Propias</b>Ley · autonomía · bajo propia responsabilidad</div>
+          <div class="celda"><b>Delegadas</b>Estado/CCAA · con control · mín. 5 años</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Deberes Interadministrativos</div>
+          <span class="art-badge">Art. 10 LRBRL</span>
+          <span class="tipo-badge badge-info">Principios</span>
+          <span class="multa-badge multa-ok">🤝 Cooperación</span>
+        </div>
+        <div class="delito-desc">
+          Relaciones recíprocas basadas en: <b>información mutua</b>, <b>colaboración</b>, <b>coordinación</b> y <b>respeto de ámbitos competenciales</b>. La coordinación procede cuando las actividades locales trasciendan el interés propio o incidan en otras Administraciones.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       2. EL MUNICIPIO · TERRITORIO Y POBLACIÓN
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🏘️</span>
+      <h2>El Municipio · Territorio, Padrón, Vecindad</h2>
+      <span class="art-ref">Arts. 11–18</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Concepto y Elementos del Municipio</div>
+          <span class="art-badge">Art. 11 LRBRL</span>
+          <span class="tipo-badge badge-local">Definición</span>
+          <span class="multa-badge">📋 3 elementos</span>
+        </div>
+        <div class="delito-desc">
+          El Municipio es la <b>entidad local básica</b> de la organización territorial del Estado, con <b>personalidad jurídica</b> y plena capacidad. Elementos: <b>territorio</b>, <b>población</b> y <b>organización</b>.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Creación y Alteración de Municipios</div>
+          <span class="art-badge">Art. 13 LRBRL</span>
+          <span class="tipo-badge badge-info">Procedimiento</span>
+          <span class="multa-badge">📋 4.000 hab. mín.</span>
+        </div>
+        <div class="delito-desc">
+          Regulada por legislación CCAA. Creación de nuevos municipios: mínimo <b>4.000 habitantes</b> + sostenibilidad financiera + no reducción calidad servicios. <b>Fusión</b> entre colindantes: mayoría simple de cada pleno, irreversible <b>10 años</b>.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Obligación de Empadronamiento</div>
+          <span class="art-badge">Art. 15 LRBRL</span>
+          <span class="tipo-badge badge-clave">Obligación</span>
+          <span class="multa-badge multa-ok">🏠 Vecino = inscrito</span>
+        </div>
+        <div class="delito-desc">
+          <b>Toda persona que viva en España</b> está obligada a inscribirse en el Padrón del municipio donde resida habitualmente. Si vive en varios, en el que pase más tiempo al año. La <b>condición de vecino</b> se adquiere en el momento de la inscripción.
+        </div>
+        <div class="nota-policial">🚔 En una identificación (art. 16 LOPSC), el DNI y el padrón son las fuentes principales para verificar domicilio habitual. La PL consulta padrón en comprobaciones de convivencia, notificaciones y servicios sociales.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Datos del Padrón Municipal</div>
+          <span class="art-badge">Art. 16 LRBRL</span>
+          <span class="tipo-badge badge-info">Registro</span>
+          <span class="multa-badge">📋 Prueba residencia</span>
+        </div>
+        <div class="delito-desc">
+          Los datos del Padrón constituyen <b>prueba de residencia</b> y <b>domicilio habitual</b>. Certificaciones = documento público. Datos obligatorios: nombre, sexo, domicilio (con ref. catastral), nacionalidad, fecha/lugar nacimiento, DNI/NIE, titulación.
+        </div>
+        <div class="nota-agrav">⚠️ <b>Renovación cada 2 años</b> para extranjeros sin autorización de residencia de larga duración (no UE/EEE). Transcurrido el plazo sin renovar → <b>caducidad sin audiencia previa</b>.</div>
+        <div class="nota-policial">🚔 Cesión de datos a otras AAPP <b>sin consentimiento previo</b> solo cuando residencia/domicilio sean datos relevantes para su competencia. La Dirección General de la Policía (DA 7ª) accede al padrón para control de extranjeros.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Derechos y Deberes de los Vecinos</div>
+          <span class="art-badge">Art. 18 LRBRL</span>
+          <span class="tipo-badge badge-clave">Derechos</span>
+          <span class="multa-badge multa-ok">✓ Sufragio + Servicios</span>
+        </div>
+        <div class="delito-desc">
+          Son derechos del vecino: ser <b>elector y elegible</b>; <b>participar</b> en la gestión municipal; <b>utilizar servicios públicos</b> y aprovechamientos comunales; contribuir con prestaciones; ser informado (art. 105 CE); pedir <b>consulta popular</b>; exigir prestación de servicio obligatorio; <b>iniciativa popular</b> (art. 70 bis).
+        </div>
+        <div class="nota-clave">💡 La inscripción del extranjero en el padrón <b>no constituye prueba de residencia legal</b> ni atribuye derechos distintos a los de la Ley de Extranjería.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       3. ORGANIZACIÓN MUNICIPAL · ÓRGANOS
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">⚖️</span>
+      <h2>Organización Municipal · Alcalde, Pleno, JGL</h2>
+      <span class="art-ref">Arts. 19–24 bis</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Órganos Municipales Necesarios</div>
+          <span class="art-badge">Art. 20 LRBRL</span>
+          <span class="tipo-badge badge-info">Organización</span>
+          <span class="multa-badge multa-organ">🏛️ 3 órganos base</span>
+        </div>
+        <div class="delito-desc">
+          Existen en <b>todos</b> los ayuntamientos: <b>Alcalde</b>, <b>Tenientes de Alcalde</b> y <b>Pleno</b>. La <b>Junta de Gobierno Local</b> existe obligatoriamente en municipios &gt; <b>5.000 hab</b> (y en los menores si lo acuerda el Pleno/ROM). Existe siempre la <b>Comisión Especial de Cuentas</b>.
+        </div>
+        <div class="tabla-discip">
+          <div class="td-header">Órgano</div>
+          <div class="td-header">Ámbito obligatorio</div>
+          <div class="td-cell td-pob">Alcalde + Tenientes + Pleno</div>
+          <div class="td-cell">Todos los municipios</div>
+          <div class="td-cell td-pob">Junta Gobierno Local</div>
+          <div class="td-cell">&gt; 5.000 hab (o por ROM)</div>
+          <div class="td-cell td-pob">Comisiones informativas</div>
+          <div class="td-cell">&gt; 5.000 hab</div>
+          <div class="td-cell td-pob">Concejo Abierto</div>
+          <div class="td-cell">Tradicional o &lt;100 hab (opcional)</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Atribuciones del Alcalde · Jefatura PL</div>
+          <span class="art-badge">Art. 21 LRBRL</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE PL</span>
+          <span class="multa-badge multa-alta">👮 Jefatura PL</span>
+        </div>
+        <div class="delito-desc">
+          El Alcalde dirige el gobierno y administración municipal. Atribuciones destacadas para PL:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">⭐ Jefatura Policía Municipal (21.1.i)</span>
+          <span class="pena-chip">Dictar bandos (21.1.e)</span>
+          <span class="pena-chip agravada">Medidas en catástrofe (21.1.m)</span>
+          <span class="pena-chip">Sancionar ordenanzas (21.1.n)</span>
+          <span class="pena-chip">Otorgar licencias (21.1.q)</span>
+          <span class="pena-chip">Jefatura personal (21.1.h)</span>
+        </div>
+        <div class="nota-policial">🚔 <b>Art. 21.1.i LRBRL — JEFATURA DE LA POLICÍA MUNICIPAL</b>: el Alcalde es el máximo responsable jerárquico. Las órdenes operativas en servicio provienen del jefe del cuerpo por delegación; las órdenes extraordinarias (bandos, catástrofe, 21.1.m) pueden ser directas del Alcalde.</div>
+        <div class="nota-agrav">⚠️ El Alcalde <b>no puede delegar</b> la jefatura de la PL (art. 21.3 LRBRL). Sí puede delegar gestión de servicios policiales (Concejal de Seguridad), pero la <b>jefatura institucional</b> permanece en la Alcaldía.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Atribuciones del Pleno</div>
+          <span class="art-badge">Art. 22 LRBRL</span>
+          <span class="tipo-badge badge-info">Órgano</span>
+          <span class="multa-badge multa-organ">🏛️ Control + Normativa</span>
+        </div>
+        <div class="delito-desc">
+          El Pleno (Alcalde + Concejales) ejerce: <b>control y fiscalización</b> de órganos de gobierno; aprobación inicial del planeamiento urbanístico; aprobación de <b>reglamento orgánico</b> y <b>ordenanzas</b>; determinación de tributos; aprobación de <b>presupuestos</b>; moción de censura al Alcalde; declaración de lesividad; conflictos de competencia.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Junta de Gobierno Local</div>
+          <span class="art-badge">Art. 23 LRBRL</span>
+          <span class="tipo-badge badge-info">Órgano</span>
+          <span class="multa-badge multa-organ">🏛️ Máx. 1/3 concejales</span>
+        </div>
+        <div class="delito-desc">
+          Integrada por el Alcalde y un número de Concejales <b>no superior a 1/3</b> del número legal, nombrados libremente por el Alcalde. Asiste al Alcalde y ejerce las atribuciones que éste o el Pleno le deleguen. Los <b>Tenientes de Alcalde</b> (sustitutos del Alcalde) se designan <b>entre miembros de la JGL</b>.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       4. COMPETENCIAS Y SERVICIOS OBLIGATORIOS
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">🚔</span>
+      <h2>Competencias Municipales · Policía Local</h2>
+      <span class="art-ref">Arts. 25–28</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Competencias Propias del Municipio</div>
+          <span class="art-badge">Art. 25.2 LRBRL</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE PL</span>
+          <span class="multa-badge multa-alta">👮 Seguridad local</span>
+        </div>
+        <div class="delito-desc">
+          El Municipio ejerce como competencias propias, entre otras materias:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">a) Urbanismo</span>
+          <span class="pena-chip">b) Medio ambiente urbano</span>
+          <span class="pena-chip">c) Agua potable y residuales</span>
+          <span class="pena-chip">d) Infraestructura viaria</span>
+          <span class="pena-chip">e) Servicios sociales urgentes</span>
+          <span class="pena-chip agravada">⭐ f) Policía local + Protección civil + Incendios</span>
+          <span class="pena-chip agravada">⭐ g) Tráfico, estacionamiento, movilidad</span>
+          <span class="pena-chip">h) Turismo local</span>
+          <span class="pena-chip">i) Ferias, mercados</span>
+          <span class="pena-chip">j) Salubridad pública</span>
+          <span class="pena-chip">k) Cementerios</span>
+          <span class="pena-chip">l) Deporte</span>
+          <span class="pena-chip">m) Cultura</span>
+          <span class="pena-chip">n) Educación (cooperación)</span>
+          <span class="pena-chip">ñ) TIC</span>
+          <span class="pena-chip">o) Igualdad + violencia género</span>
+          <span class="pena-chip">p) Transición energética</span>
+        </div>
+        <div class="nota-policial">🚔 <b>Art. 25.2.f — POLICÍA LOCAL + PROTECCIÓN CIVIL + INCENDIOS</b>: base competencial de la actividad de la PL. <b>Art. 25.2.g — TRÁFICO URBANO</b>: competencia municipal (regulada por LTSV y ordenanzas, la PL denuncia y sanciona).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Servicios Mínimos Obligatorios</div>
+          <span class="art-badge">Art. 26 LRBRL</span>
+          <span class="tipo-badge badge-grave">Escalonado</span>
+          <span class="multa-badge">📋 Según población</span>
+        </div>
+        <div class="delito-desc">
+          Servicios que <b>todos los municipios</b> deben prestar según población:
+        </div>
+        <div class="tabla-discip">
+          <div class="td-header">Población</div>
+          <div class="td-header">Servicios obligatorios añadidos</div>
+          <div class="td-cell td-pob">Todos</div>
+          <div class="td-cell">Alumbrado, cementerio, residuos, limpieza viaria, agua potable, alcantarillado, acceso, pavimentación</div>
+          <div class="td-cell td-pob">&gt; 5.000 hab</div>
+          <div class="td-cell">+ Parque público, biblioteca, tratamiento de residuos</div>
+          <div class="td-cell td-pob">&gt; 20.000 hab</div>
+          <div class="td-cell">+ <b>Protección civil</b>, servicios sociales, <b>prevención/extinción incendios</b>, instalaciones deportivas</div>
+          <div class="td-cell td-pob">&gt; 50.000 hab</div>
+          <div class="td-cell">+ Transporte colectivo urbano, medio ambiente urbano</div>
+        </div>
+        <div class="nota-clave">💡 La <b>Policía Local</b> no es servicio obligatorio según población (es competencia propia art. 25.2.f), pero muchos municipios de más de 5.000 habitantes la tienen. En &lt;5.000 hab puede suplirse con agents cívics, vigilancia Mossos o Guardia Civil.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Delegación de Competencias</div>
+          <span class="art-badge">Art. 27 LRBRL</span>
+          <span class="tipo-badge badge-info">Procedimiento</span>
+          <span class="multa-badge multa-organ">⏱️ Mínimo 5 años</span>
+        </div>
+        <div class="delito-desc">
+          Estado y CCAA pueden delegar en municipios. Duración <b>mínima 5 años</b>. Debe mejorar eficiencia, eliminar duplicidades y respetar sostenibilidad financiera. Requiere <b>financiación adecuada</b> + <b>aceptación</b> por el municipio + memoria económica.
+        </div>
+        <div class="nota-policial">🚔 La delegación de la gestión del <b>tráfico urbano</b> (art. 25.2.g + LTSV) fundamenta la actuación sancionadora de PL en vías urbanas. En Catalunya el SCT tiene competencia interurbana.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       5. PROVINCIA · DIPUTACIÓN
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🗺️</span>
+      <h2>La Provincia · Diputación Provincial</h2>
+      <span class="art-ref">Arts. 31–41</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Concepto y Fines de la Provincia</div>
+          <span class="art-badge">Art. 31 LRBRL</span>
+          <span class="tipo-badge badge-local">Definición</span>
+          <span class="multa-badge">📋 Solidaridad</span>
+        </div>
+        <div class="delito-desc">
+          La Provincia es una <b>entidad local determinada por agrupación de municipios</b>, con personalidad jurídica propia. Fines: garantizar <b>solidaridad y equilibrio intermunicipal</b>; asegurar prestación integral de servicios municipales; coordinar con CA y Estado.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Competencias de la Diputación</div>
+          <span class="art-badge">Art. 36 LRBRL</span>
+          <span class="tipo-badge badge-info">Asistencia</span>
+          <span class="multa-badge multa-organ">🤝 Cooperación</span>
+        </div>
+        <div class="delito-desc">
+          Competencias propias: <b>coordinación</b> de servicios municipales; <b>asistencia jurídica, económica y técnica</b> a los municipios (especialmente pequeños); servicios supramunicipales; <b>tratamiento de residuos en &lt;5.000 hab</b>; <b>prevención/extinción incendios en &lt;20.000 hab</b>; recaudación tributaria y administración electrónica en &lt;20.000 hab.
+        </div>
+        <div class="nota-policial">🚔 En Catalunya las Diputaciones (Barcelona, Tarragona, Lleida, Girona) prestan <b>apoyo técnico y formativo</b> a las PL a través de sus áreas de seguridad ciudadana (cursos ISPC, material, etc.).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Regímenes Especiales Provinciales</div>
+          <span class="art-badge">Arts. 39–41 LRBRL</span>
+          <span class="tipo-badge badge-info">Particularidad</span>
+          <span class="multa-badge">📋 País Vasco + Canarias + Baleares</span>
+        </div>
+        <div class="delito-desc">
+          <b>País Vasco</b> (art. 39): Diputaciones Forales de Álava, Gipuzkoa y Bizkaia mantienen régimen peculiar (Concierto Económico). <b>CCAA uniprovinciales</b> + Navarra (art. 40) asumen competencias de Diputación. <b>Canarias</b> (art. 41): Cabildos Insulares. <b>Baleares</b>: Consejos Insulares.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       6. OTRAS ENTIDADES LOCALES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🤝</span>
+      <h2>Otras Entidades Locales</h2>
+      <span class="art-ref">Arts. 42–45</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Comarcas</div>
+          <span class="art-badge">Art. 42 LRBRL</span>
+          <span class="tipo-badge badge-local">Cataluña</span>
+          <span class="multa-badge multa-ok">🏛️ Llei 4/2003</span>
+        </div>
+        <div class="delito-desc">
+          Las CCAA pueden crear en su territorio <b>comarcas u otras entidades</b> que agrupen municipios. No pueden oponerse 2/5 de los municipios que representen la mitad del censo. La creación <b>no suprime</b> competencias municipales del art. 26.
+        </div>
+        <div class="nota-policial">🚔 En Catalunya las <b>comarcas</b> (41 + Aran) están reguladas por el Decret Legislatiu 4/2003. No tienen competencias directas en seguridad ciudadana (es competencia PG-ME y PL).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Áreas Metropolitanas</div>
+          <span class="art-badge">Art. 43 LRBRL</span>
+          <span class="tipo-badge badge-info">Entidad</span>
+          <span class="multa-badge">📋 AMB</span>
+        </div>
+        <div class="delito-desc">
+          Entidades locales integradas por municipios de <b>grandes aglomeraciones urbanas</b> con vinculaciones económicas y sociales que requieran planificación conjunta y coordinación de servicios.
+        </div>
+        <div class="nota-clave">💡 En Catalunya: <b>Àrea Metropolitana de Barcelona (AMB)</b> — 36 municipios, transporte, residuos, agua, urbanismo. <b>No tiene policía propia</b>: cada municipio mantiene su PL.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Mancomunidades de Municipios</div>
+          <span class="art-badge">Art. 44 LRBRL</span>
+          <span class="tipo-badge badge-info">Asociativo</span>
+          <span class="multa-badge">📋 Voluntario</span>
+        </div>
+        <div class="delito-desc">
+          Los municipios tienen <b>derecho a asociarse</b> en mancomunidades para ejecución conjunta de <b>obras y servicios</b> determinados. Personalidad jurídica propia, regidas por <b>Estatutos</b>. Órganos representativos de los ayuntamientos mancomunados.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       7. FUNCIONAMIENTO Y ACUERDOS
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">📝</span>
+      <h2>Funcionamiento · Sesiones y Acuerdos</h2>
+      <span class="art-ref">Arts. 46–54</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Periodicidad de las Sesiones del Pleno</div>
+          <span class="art-badge">Art. 46 LRBRL</span>
+          <span class="tipo-badge badge-info">Funcionamiento</span>
+          <span class="multa-badge multa-organ">⏱️ Según población</span>
+        </div>
+        <div class="delito-desc">
+          Sesiones ordinarias según tamaño:
+        </div>
+        <div class="tabla-discip">
+          <div class="td-header">Población</div>
+          <div class="td-header">Periodicidad del Pleno</div>
+          <div class="td-cell td-pob">&gt; 20.000 hab + Diputaciones</div>
+          <div class="td-cell">Cada mes</div>
+          <div class="td-cell td-pob">5.001 a 20.000 hab</div>
+          <div class="td-cell">Cada 2 meses</div>
+          <div class="td-cell td-pob">Hasta 5.000 hab</div>
+          <div class="td-cell">Cada 3 meses</div>
+        </div>
+        <div class="nota-clave">💡 Sesiones <b>extraordinarias</b>: a decisión del Alcalde o a solicitud de al menos <b>1/4 de los concejales</b> (máximo 3 anuales por concejal). Convocatoria mín. <b>2 días hábiles</b> de antelación.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Mayorías para Acuerdos</div>
+          <span class="art-badge">Art. 47 LRBRL</span>
+          <span class="tipo-badge badge-grave">CLAVE</span>
+          <span class="multa-badge multa-alta">⚠️ Mayoría absoluta</span>
+        </div>
+        <div class="delito-desc">
+          <b>Regla general:</b> mayoría simple (votos afirmativos &gt; negativos). <b>Mayoría absoluta</b> del número legal para:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">Creación/supresión municipios</span>
+          <span class="pena-chip agravada">Delimitación término</span>
+          <span class="pena-chip agravada">Bandera, escudo, capitalidad</span>
+          <span class="pena-chip agravada">ROM (reglamento orgánico)</span>
+          <span class="pena-chip agravada">Mancomunidades</span>
+          <span class="pena-chip agravada">Concesiones &gt; 5 años</span>
+          <span class="pena-chip agravada">Monopolio servicios</span>
+          <span class="pena-chip agravada">Planeamiento urbanístico</span>
+          <span class="pena-chip agravada">Enajenación &gt;20% recursos</span>
+          <span class="pena-chip agravada">Cesión bienes comunales</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Aprobación de Ordenanzas Locales</div>
+          <span class="art-badge">Art. 49 LRBRL</span>
+          <span class="tipo-badge badge-info">Procedimiento</span>
+          <span class="multa-badge multa-organ">⏱️ 30 días info. pública</span>
+        </div>
+        <div class="delito-desc">
+          Tramitación: (a) <b>aprobación inicial</b> por el Pleno; (b) <b>información pública + audiencia</b> a los interesados mínimo <b>30 días</b>; (c) resolución de reclamaciones + <b>aprobación definitiva</b>. Si no hay reclamaciones, se entiende definitivamente adoptado el acuerdo.
+        </div>
+        <div class="nota-policial">🚔 Las <b>ordenanzas municipales</b> (convivencia, terrazas, ruidos, circulación, tenencia de animales, etc.) son el marco sancionador ordinario de la PL. Se publican en el <b>BOP</b> y entran en vigor tras su publicación íntegra + 15 días (art. 70.2 + 65.2).</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       8. RELACIONES INTERADMINISTRATIVAS E IMPUGNACIÓN
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">⚖️</span>
+      <h2>Relaciones Interadministrativas · Impugnación</h2>
+      <span class="art-ref">Arts. 55–68</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Impugnación por Estado / CCAA</div>
+          <span class="art-badge">Art. 65 LRBRL</span>
+          <span class="tipo-badge badge-info">Control</span>
+          <span class="multa-badge multa-organ">⏱️ 15 días requerimiento</span>
+        </div>
+        <div class="delito-desc">
+          Si el Estado o CCAA considera que un acto local <b>infringe el ordenamiento jurídico</b>, puede <b>requerir anulación</b> en <b>15 días hábiles</b> (plazo máximo 1 mes para anularlo). Puede luego impugnar ante la <b>jurisdicción contencioso-administrativa</b>.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Suspensión por el Delegado del Gobierno</div>
+          <span class="art-badge">Art. 67 LRBRL</span>
+          <span class="tipo-badge badge-grave">Muy grave</span>
+          <span class="multa-badge multa-alta">⚠️ Interés general España</span>
+        </div>
+        <div class="delito-desc">
+          Si una EELL adopta actos que <b>atenten gravemente al interés general de España</b>, el <b>Delegado del Gobierno</b>, previo requerimiento (máx. 5 días), puede <b>suspenderlos</b> (plazo 10 días) y adoptar medidas. Debe impugnar ante la jurisdicción en 10 días.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Disolución de la Corporación Local</div>
+          <span class="art-badge">Art. 61 LRBRL</span>
+          <span class="tipo-badge badge-grave">Extraordinario</span>
+          <span class="multa-badge multa-alta">⚠️ Consejo de Ministros</span>
+        </div>
+        <div class="delito-desc">
+          El <b>Consejo de Ministros</b>, previo acuerdo favorable del <b>Senado</b>, puede disolver por RD los órganos de la Corporación por <b>gestión gravemente dañosa</b>. Se consideran gravemente dañosos los acuerdos que den <b>cobertura al terrorismo</b> o menosprecien a víctimas.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Ejecución Subsidiaria (Sustitución)</div>
+          <span class="art-badge">Art. 60 LRBRL</span>
+          <span class="tipo-badge badge-info">Sustitución</span>
+          <span class="multa-badge multa-organ">⏱️ Mín. 1 mes aviso</span>
+        </div>
+        <div class="delito-desc">
+          Si la EELL <b>incumple obligaciones legales</b> que afecten al ejercicio competencial del Estado o CA con cobertura financiera garantizada, tras plazo mínimo <b>1 mes</b>, el Estado o CA adopta <b>medidas a costa y en sustitución</b> de la entidad local.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       9. PARTICIPACIÓN CIUDADANA
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🗳️</span>
+      <h2>Información y Participación Ciudadana</h2>
+      <span class="art-ref">Arts. 69–72</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Sesiones Públicas del Pleno</div>
+          <span class="art-badge">Art. 70 LRBRL</span>
+          <span class="tipo-badge badge-clave">Publicidad</span>
+          <span class="multa-badge multa-ok">✓ Públicas</span>
+        </div>
+        <div class="delito-desc">
+          Las sesiones del <b>Pleno son públicas</b>. Pueden ser <b>secretos</b> debate y votación de asuntos que afecten al derecho fundamental del art. 18.1 CE (honor, intimidad, imagen) por mayoría absoluta. Las sesiones de la <b>JGL no son públicas</b>.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Iniciativa Popular Vecinal</div>
+          <span class="art-badge">Art. 70 bis LRBRL</span>
+          <span class="tipo-badge badge-clave">Participación</span>
+          <span class="multa-badge multa-organ">📋 Según habitantes</span>
+        </div>
+        <div class="delito-desc">
+          Los vecinos con derecho de sufragio pueden presentar <b>propuestas de acuerdo, actuaciones o reglamentos</b>. Firmas requeridas:
+        </div>
+        <div class="tabla-discip">
+          <div class="td-header">Población</div>
+          <div class="td-header">% mínimo de firmas</div>
+          <div class="td-cell td-pob">Hasta 5.000 hab</div>
+          <div class="td-cell">20 %</div>
+          <div class="td-cell td-pob">5.001 – 20.000 hab</div>
+          <div class="td-cell">15 %</div>
+          <div class="td-cell td-pob">&gt; 20.000 hab</div>
+          <div class="td-cell">10 %</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Consulta Popular</div>
+          <span class="art-badge">Art. 71 LRBRL</span>
+          <span class="tipo-badge badge-info">Consulta</span>
+          <span class="multa-badge multa-organ">📋 3 requisitos</span>
+        </div>
+        <div class="delito-desc">
+          El Alcalde puede someter a consulta popular asuntos de competencia municipal de especial relevancia para los vecinos, previa: (1) <b>acuerdo por mayoría absoluta</b> del Pleno; (2) <b>autorización del Gobierno</b> de la Nación; (3) <b>excepto</b> materia de Hacienda local.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       10. PERSONAL · FUNCIONARIOS HABILITACIÓN NACIONAL
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">👨‍💼</span>
+      <h2>Personal al Servicio de las EELL</h2>
+      <span class="art-ref">Arts. 89–104 bis</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Tipos de Personal Local</div>
+          <span class="art-badge">Art. 89 LRBRL</span>
+          <span class="tipo-badge badge-info">Estructura</span>
+          <span class="multa-badge multa-organ">🏛️ 3 categorías</span>
+        </div>
+        <div class="delito-desc">
+          El personal de las EELL está integrado por: <b>funcionarios de carrera</b> (régimen ordinario), <b>contratados en régimen laboral</b> y <b>personal eventual</b> (puestos de confianza o asesoramiento especial).
+        </div>
+        <div class="nota-policial">🚔 Los agentes de <b>Policía Local</b> son <b>funcionarios de carrera</b> de la Administración local. Se rigen por Llei 16/1991 (Cat.) + Llei orgànica 2/1986 FCS + LRBRL. Selección por la propia Corporación (oposición).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Funciones Reservadas · Habilitación Nacional</div>
+          <span class="art-badge">Art. 92 bis LRBRL</span>
+          <span class="tipo-badge badge-grave">Reserva funcional</span>
+          <span class="multa-badge multa-alta">⚠️ Fe pública + control</span>
+        </div>
+        <div class="delito-desc">
+          Son <b>funciones públicas necesarias</b> en todas las Corporaciones locales, reservadas a funcionarios con habilitación de carácter nacional:
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>Secretaría</b>Fe pública + asesoramiento legal preceptivo</div>
+          <div class="celda"><b>Intervención-Tesorería</b>Control + fiscalización + contabilidad + tesorería + recaudación</div>
+          <div class="celda"><b>Secretaría-Intervención</b>Ambas funciones (municipios pequeños)</div>
+          <div class="celda"><b>Categorías</b>Entrada · Superior · Por concurso</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Personal Eventual (Confianza)</div>
+          <span class="art-badge">Art. 104 bis LRBRL</span>
+          <span class="tipo-badge badge-info">Límites</span>
+          <span class="multa-badge multa-organ">📋 Según población</span>
+        </div>
+        <div class="delito-desc">
+          Límites al personal eventual según población del municipio:
+        </div>
+        <div class="tabla-discip">
+          <div class="td-header">Población</div>
+          <div class="td-header">Máx. personal eventual</div>
+          <div class="td-cell td-pob">&lt; 2.000 hab</div>
+          <div class="td-cell">0 (excepción: 1 si sin dedicación exclusiva)</div>
+          <div class="td-cell td-pob">2.001 – 5.000</div>
+          <div class="td-cell">1</div>
+          <div class="td-cell td-pob">5.001 – 10.000</div>
+          <div class="td-cell">1</div>
+          <div class="td-cell td-pob">10.001 – 20.000</div>
+          <div class="td-cell">2</div>
+          <div class="td-cell td-pob">20.001 – 50.000</div>
+          <div class="td-cell">7</div>
+          <div class="td-cell td-pob">50.001 – 75.000</div>
+          <div class="td-cell">1/2 de concejales</div>
+          <div class="td-cell td-pob">75.001 – 500.000</div>
+          <div class="td-cell">Nº de concejales</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       11. MUNICIPIOS DE GRAN POBLACIÓN (TÍT. X)
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🏙️</span>
+      <h2>Municipios de Gran Población (Título X)</h2>
+      <span class="art-ref">Arts. 121–138</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Ámbito de Aplicación (Gran Población)</div>
+          <span class="art-badge">Art. 121 LRBRL</span>
+          <span class="tipo-badge badge-info">Clasificación</span>
+          <span class="multa-badge multa-organ">🏛️ &gt; 250.000 hab</span>
+        </div>
+        <div class="delito-desc">
+          El régimen especial se aplica a:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip positivo">&gt; 250.000 hab</span>
+          <span class="pena-chip positivo">Capitales provincia &gt; 175.000</span>
+          <span class="pena-chip positivo">Capitales autonómicas</span>
+          <span class="pena-chip positivo">Sedes instituciones autonómicas</span>
+          <span class="pena-chip positivo">&gt; 75.000 hab con especialidades (decisión Asamblea)</span>
+        </div>
+        <div class="nota-clave">💡 En Catalunya, aplican el Tít. X: <b>Barcelona</b> (Llei 1/2006 Carta Municipal), <b>L'Hospitalet, Badalona, Terrassa, Sabadell, Tarragona, Lleida, Girona, Mataró, Santa Coloma</b> y otros municipios &gt; 75.000 hab.</div>
+        <div class="nota-policial">🚔 En Barcelona la <b>Guàrdia Urbana</b> funciona con régimen propio por la Carta Municipal. En otros municipios del Tit. X, la PL se rige por el régimen común de Llei 16/1991.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Alcalde en Gran Población</div>
+          <span class="art-badge">Art. 124 LRBRL</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE PL</span>
+          <span class="multa-badge multa-alta">👮 Jefatura PL (124.4.j)</span>
+        </div>
+        <div class="delito-desc">
+          El Alcalde ostenta la <b>máxima representación</b> del municipio y responsabilidad política ante el Pleno. Tratamiento de <b>Excelencia</b>. Competencias destacadas para PL:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">⭐ 124.4.j · Jefatura Policía Municipal</span>
+          <span class="pena-chip agravada">124.4.h · Medidas urgente necesidad</span>
+          <span class="pena-chip">124.4.g · Bandos, decretos, instrucciones</span>
+          <span class="pena-chip">124.4.i · Superior dirección personal</span>
+          <span class="pena-chip">124.4.l · Ejercicio acciones judiciales</span>
+        </div>
+        <div class="nota-policial">🚔 Al igual que en el art. 21.1.i (régimen común), en gran población el Alcalde mantiene la <b>jefatura institucional de la PL indelegable</b> (art. 124.5 LRBRL).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Distritos · División Territorial Propia</div>
+          <span class="art-badge">Art. 128 LRBRL</span>
+          <span class="tipo-badge badge-info">Desconcentración</span>
+          <span class="multa-badge multa-organ">🏛️ Obligatorios</span>
+        </div>
+        <div class="delito-desc">
+          Los ayuntamientos de gran población <b>deberán crear distritos</b> como divisiones territoriales propias, con órganos de gestión desconcentrada. Gestionarán <b>un % mínimo de recursos</b> fijado por el ROM. Presidencia del distrito: siempre un concejal.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Consejo Social de la Ciudad</div>
+          <span class="art-badge">Art. 131 LRBRL</span>
+          <span class="tipo-badge badge-info">Participación</span>
+          <span class="multa-badge multa-ok">🤝 Sociedad civil</span>
+        </div>
+        <div class="delito-desc">
+          Órgano integrado por representantes de <b>organizaciones económicas, sociales, profesionales y de vecinos</b> más representativas. Emite informes y propuestas sobre desarrollo económico local, planificación estratégica y grandes proyectos urbanos.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       12. TIPIFICACIÓN DE INFRACCIONES (TÍT. XI)
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">⚠️</span>
+      <h2>Infracciones y Sanciones Locales (Tít. XI)</h2>
+      <span class="art-ref">Arts. 139–141</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Potestad Sancionadora Local</div>
+          <span class="art-badge">Art. 139 LRBRL</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE PL</span>
+          <span class="multa-badge multa-alta">⚠️ Ordenanzas municipales</span>
+        </div>
+        <div class="delito-desc">
+          En defecto de normativa sectorial específica, las EELL pueden establecer <b>tipos de infracciones</b> e imponer <b>sanciones</b> por incumplimiento de deberes, prohibiciones o limitaciones de las ordenanzas. Objetivo: <b>adecuada ordenación de la convivencia</b> y uso de servicios, infraestructuras, instalaciones y espacios públicos.
+        </div>
+        <div class="nota-policial">🚔 Base legal para <b>ordenanzas de convivencia ciudadana</b> (ruidos, limpieza, consumo vía pública, animales, terrazas, etc.). La PL denuncia por ordenanza y el Alcalde sanciona (art. 21.1.n).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Clasificación de las Infracciones</div>
+          <span class="art-badge">Art. 140 LRBRL</span>
+          <span class="tipo-badge badge-grave">3 niveles</span>
+          <span class="multa-badge multa-alta">⚠️ MG / G / L</span>
+        </div>
+        <div class="delito-desc">
+          Las infracciones se clasifican en <b>muy graves</b>, <b>graves</b> y <b>leves</b>. Son <b>MUY GRAVES</b>:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip agravada">a) Perturbación relevante convivencia</span>
+          <span class="pena-chip agravada">b) Impedir uso servicio público</span>
+          <span class="pena-chip agravada">c) Obstrucción grave servicio público</span>
+          <span class="pena-chip agravada">d) Deterioro grave equipamientos público</span>
+          <span class="pena-chip agravada">e) Impedir uso espacio público</span>
+          <span class="pena-chip agravada">f) Deterioro grave espacios públicos</span>
+        </div>
+        <div class="nota-agrav">⚠️ La infracción del art. 140.1.a) LRBRL solo se aplica cuando la conducta <b>NO sea subsumible</b> en los tipos del <b>capítulo IV Ley 1/1992</b> (hoy derogada, sustituida por la LO 4/2015 LOPSC). Principio de especialidad: primero LOPSC, subsidiariamente LRBRL.</div>
+        <div class="nota-policial">🚔 Las infracciones <b>graves y leves</b> se clasifican según intensidad de la perturbación en convivencia, salubridad, ornato, uso de servicio/espacio público, o daños a equipamientos.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Límites de las Sanciones Económicas</div>
+          <span class="art-badge">Art. 141 LRBRL</span>
+          <span class="tipo-badge badge-grave">Cuantía máxima</span>
+          <span class="multa-badge multa-alta">⚠️ Hasta 3.000 €</span>
+        </div>
+        <div class="delito-desc">
+          Salvo previsión legal distinta, las multas por ordenanzas locales respetarán las siguientes cuantías:
+        </div>
+        <div class="tabla-discip">
+          <div class="td-header">Gravedad</div>
+          <div class="td-header">Multa máxima</div>
+          <div class="td-cell td-pob">Muy graves</div>
+          <div class="td-cell">Hasta <b>3.000 €</b></div>
+          <div class="td-cell td-pob">Graves</div>
+          <div class="td-cell">Hasta <b>1.500 €</b></div>
+          <div class="td-cell td-pob">Leves</div>
+          <div class="td-cell">Hasta <b>750 €</b></div>
+        </div>
+        <div class="nota-clave">💡 Estos límites aplican <b>solo en defecto de normativa sectorial</b>. Para tráfico aplica LTSV; para seguridad ciudadana aplica LOPSC (hasta 600.000 €); para espectáculos la Llei 11/2009 Cat. (hasta 300.000 €).</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       13. ESPECIALIDADES DE CATALUÑA
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">🇪🇸</span>
+      <h2>Aplicación en Catalunya · Particularidades</h2>
+      <span class="art-ref">DDAA 17ª, 18ª, 4ª</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Derechos Históricos de Catalunya</div>
+          <span class="art-badge">DA 17ª LRBRL</span>
+          <span class="tipo-badge badge-local">Autonomía</span>
+          <span class="multa-badge multa-ok">🇪🇸 EAC + CE</span>
+        </div>
+        <div class="delito-desc">
+          Las previsiones de la LRBRL se aplican <b>respetando la posición singular</b> en materia de sistema institucional recogida en el <b>art. 5 del Estatuto de Autonomía de Catalunya</b> (EAC), así como las <b>competencias exclusivas y compartidas</b> en régimen local y organización territorial previstas en el EAC.
+        </div>
+        <div class="nota-policial">🚔 Catalunya tiene <b>competencia exclusiva en régimen local</b> (art. 160 EAC). Leyes autonómicas de referencia: <b>Llei 8/1987 municipal i de règim local</b> (refundida por Decret Legislatiu 2/2003) y <b>Llei 4/2003 Sistema de Seguretat</b>.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Funcionarios Habilitación Nacional en Cat.</div>
+          <span class="art-badge">DA 18ª LRBRL</span>
+          <span class="tipo-badge badge-info">Autogobierno</span>
+          <span class="multa-badge multa-organ">🏛️ Generalitat asume</span>
+        </div>
+        <div class="delito-desc">
+          En Catalunya las facultades del art. 92 bis sobre personal con habilitación nacional se asumen por la <b>Generalitat</b>: creación, clasificación y supresión de puestos; oferta pública; selección, formación y habilitación; convocatoria coordinada con el Estado de procesos de provisión; nombramientos y situaciones administrativas.
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Organización Comarcal General</div>
+          <span class="art-badge">DA 4ª LRBRL</span>
+          <span class="tipo-badge badge-local">Cataluña</span>
+          <span class="multa-badge multa-ok">🗺️ 41 comarques + Aran</span>
+        </div>
+        <div class="delito-desc">
+          La <b>Generalitat de Cataluña</b>, por haber tenido organización comarcal en el pasado y prever su Estatuto una organización comarcal general, puede <b>mediante ley por mayoría absoluta</b> constituir las comarcas que falten para extender esa organización a todo su territorio.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       CUADRO RECUERDA
+  ══════════════════════════════════════════ -->
+  <div class="recuerda">
+    <h3>📋 Recuerda — LRBRL para Policía Local</h3>
+    <ul>
+      <li>⭐ <b>Art. 21.1.i LRBRL:</b> JEFATURA de la POLICÍA MUNICIPAL corresponde al ALCALDE · Indelegable (art. 21.3).</li>
+      <li>⭐ <b>Art. 124.4.j LRBRL:</b> En municipios de gran población, jefatura PL también al Alcalde · Régimen Tít. X.</li>
+      <li>⭐ <b>Art. 25.2.f LRBRL:</b> POLICÍA LOCAL + PROTECCIÓN CIVIL + PREVENCIÓN/EXTINCIÓN INCENDIOS = competencia propia municipal.</li>
+      <li>⭐ <b>Art. 25.2.g LRBRL:</b> TRÁFICO, estacionamiento y movilidad = competencia propia municipal (base LTSV para denuncias PL).</li>
+      <li><b>Art. 3 LRBRL:</b> EELL territoriales = Municipio + Provincia + Isla · También: Comarca, Área Metropolitana, Mancomunidad.</li>
+      <li><b>Art. 4 LRBRL:</b> Potestades = reglamentaria, autoorganización, tributaria, expropiatoria, ejecución forzosa, sancionadora, revisión.</li>
+      <li><b>Art. 7 LRBRL:</b> Competencias PROPIAS (ley) · DELEGADAS (Estado/CA, min. 5 años) · Distintas (solo si sostenibilidad + no duplicidad).</li>
+      <li><b>Art. 15 LRBRL:</b> Padrón obligatorio para todo residente habitual · Inscripción = condición de vecino.</li>
+      <li><b>Art. 16 LRBRL:</b> Padrón = prueba de residencia · Renovación 2 años extranjeros no UE sin residencia larga duración.</li>
+      <li><b>Art. 20 LRBRL:</b> Alcalde + Tenientes + Pleno en todos los municipios · JGL obligatoria &gt;5.000 hab.</li>
+      <li><b>Art. 26 LRBRL:</b> Servicios obligatorios según población · &gt;20.000 hab: protección civil + prev. incendios.</li>
+      <li><b>Art. 46 LRBRL:</b> Pleno cada mes (&gt;20.000) · cada 2 meses (5.001-20.000) · cada 3 meses (&lt;5.000).</li>
+      <li><b>Art. 47 LRBRL:</b> Mayoría absoluta para ROM, ordenanzas orgánicas, monopolio servicios, cesión comunales, enajenaciones.</li>
+      <li><b>Art. 49 LRBRL:</b> Ordenanzas = aprobación inicial + información pública 30 días + aprobación definitiva.</li>
+      <li><b>Art. 65 LRBRL:</b> Estado/CA pueden requerir anulación de actos locales en 15 días · Impugnación contenciosa.</li>
+      <li><b>Art. 67 LRBRL:</b> Delegado Gobierno puede suspender actos que atenten gravemente al interés general (plazo 10 días).</li>
+      <li><b>Art. 70 LRBRL:</b> Sesiones Pleno son PÚBLICAS · JGL no pública · Ordenanzas entran en vigor tras publicación íntegra BOP + 15 días.</li>
+      <li><b>Art. 92 bis LRBRL:</b> Funciones reservadas = Secretaría (fe pública) + Intervención-Tesorería (control, contabilidad, tesorería, recaudación).</li>
+      <li><b>Art. 121 LRBRL:</b> Gran población = &gt;250.000 · capitales provincia &gt;175.000 · capitales autonómicas · sedes instituciones CA.</li>
+      <li><b>Arts. 139-141 LRBRL:</b> Tipificación ordenanzas · Multas: MG hasta 3.000 € · G hasta 1.500 € · L hasta 750 € (defecto legislación sectorial).</li>
+      <li><b>DA 17ª y 18ª:</b> En Catalunya prevalece el EAC art. 160 (régimen local exclusivo) · Generalitat asume facultades sobre personal habilitación nacional.</li>
+      <li><b>DA 4ª:</b> Catalunya puede extender la organización comarcal a todo el territorio por ley autonómica (mayoría absoluta).</li>
+      <li>⚠️ <b>Ámbito local es competencia propia del Alcalde:</b> PL depende del Alcalde, pero en tráfico urbano el órgano sancionador es también el Alcalde (art. 84 LTSV).</li>
+    </ul>
+  </div>
+
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+
+</div>
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    if (body.style.display === 'none' || body.style.display === '') {
+      body.style.display = 'block';
+      body.style.animation = 'fadeUp .3s ease';
+    } else {
+      body.style.display = 'none';
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ordenança Soroll i Vibracions · Viladecans</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #0A1628;
+    color: #F0F4FF;
+    line-height: 1.5;
+    padding: 20px 10px;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(200,160,40,0.04) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(26,92,150,0.06) 0%, transparent 40%);
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #0E2244 0%, #0A1628 100%);
+    border: 2px solid #C8A028;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,160,40,0.3);
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(135deg, #0E2244 0%, #0A1628 100%);
+    padding: 28px 24px 20px;
+    border-bottom: 3px solid #C8A028;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(200,160,40,0.02) 20px, rgba(200,160,40,0.02) 21px);
+    pointer-events: none;
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 1;
+  }
+  .escut {
+    flex-shrink: 0;
+    width: 70px;
+    height: 78px;
+  }
+  .header-text h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #C8A028;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .header-text h2 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #A8BAD4;
+    text-transform: uppercase;
+  }
+  .title-block {
+    background: rgba(10,22,40,0.6);
+    border: 1px solid #C8A028;
+    border-left: 5px solid #C8A028;
+    padding: 16px 18px;
+    position: relative;
+    z-index: 1;
+  }
+  .title-block .llei-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #C8A028;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .title-block .llei-nom {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #F0F4FF;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.2;
+  }
+  .title-block .llei-sub {
+    font-size: 13px;
+    color: #A8BAD4;
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* ===== CLASIFICACIÓ CARDS ===== */
+  .clasif-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 20px;
+    background: #0A1628;
+    border-bottom: 1px solid rgba(200,160,40,0.2);
+  }
+  .clasif-card {
+    background: #0E2244;
+    border: 1px solid rgba(200,160,40,0.3);
+    border-top: 3px solid #C8A028;
+    padding: 14px 10px;
+    text-align: center;
+    border-radius: 3px;
+    animation: fadeUp 0.6s ease backwards;
+  }
+  .clasif-card:nth-child(1) { animation-delay: 0.1s; }
+  .clasif-card:nth-child(2) { animation-delay: 0.2s; }
+  .clasif-card:nth-child(3) { animation-delay: 0.3s; }
+  .clasif-card .num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #C8A028;
+    line-height: 1;
+  }
+  .clasif-card .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #A8BAD4;
+    margin-top: 4px;
+  }
+  .clasif-card.lleu { border-top-color: #1A7A3C; }
+  .clasif-card.lleu .num { color: #2AA858; }
+  .clasif-card.greu { border-top-color: #D68A00; }
+  .clasif-card.greu .num { color: #E8A028; }
+  .clasif-card.molt-greu { border-top-color: #C8281E; }
+  .clasif-card.molt-greu .num { color: #E84038; }
+
+  /* ===== BANNER INFO ===== */
+  .banner-info {
+    background: linear-gradient(90deg, #1A5C96 0%, #0E2244 100%);
+    padding: 12px 20px;
+    font-size: 12px;
+    color: #F0F4FF;
+    border-bottom: 2px solid #C8A028;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .banner-info span {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .banner-info strong {
+    color: #C8A028;
+    font-weight: 700;
+  }
+
+  /* ===== SECCIONS / CATEGORIES ===== */
+  .content {
+    padding: 20px;
+  }
+  .categoria {
+    margin-bottom: 16px;
+    background: #0E2244;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(200,160,40,0.2);
+    animation: fadeUp 0.6s ease backwards;
+  }
+  .categoria:nth-child(1) { animation-delay: 0.1s; }
+  .categoria:nth-child(2) { animation-delay: 0.2s; }
+  .categoria:nth-child(3) { animation-delay: 0.3s; }
+  .categoria:nth-child(4) { animation-delay: 0.4s; }
+  .categoria:nth-child(5) { animation-delay: 0.5s; }
+  .categoria:nth-child(6) { animation-delay: 0.6s; }
+  .categoria:nth-child(7) { animation-delay: 0.7s; }
+  .categoria:nth-child(8) { animation-delay: 0.8s; }
+
+  .cat-header {
+    background: #1A5C96;
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .cat-header:hover { background: #1E6AA8; }
+  .cat-header h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #F0F4FF;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .cat-header .arrow {
+    color: #C8A028;
+    font-size: 14px;
+    transition: transform 0.3s;
+  }
+  .categoria.open .cat-header .arrow { transform: rotate(180deg); }
+  .cat-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .categoria.open .cat-body { max-height: 10000px; }
+  .cat-content { padding: 18px; }
+
+  /* ===== DELICTES / ARTICLES ===== */
+  .delicte {
+    background: rgba(10,22,40,0.4);
+    border-left: 3px solid #C8A028;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    border-radius: 0 3px 3px 0;
+  }
+  .delicte:last-child { margin-bottom: 0; }
+
+  .delicte-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .art-badge {
+    background: #C8A028;
+    color: #0A1628;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 3px 9px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+  .delicte-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #F0F4FF;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex: 1;
+    min-width: 200px;
+  }
+  .tipo-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .badge-clave { background: #1A7A3C; color: #F0F4FF; }
+  .badge-info { background: #1A5C96; color: #F0F4FF; }
+  .badge-grave { background: #C8281E; color: #F0F4FF; }
+  .badge-local { background: #C8A028; color: #0A1628; }
+
+  .delicte-desc {
+    font-size: 13px;
+    color: #D8E0EE;
+    margin-bottom: 8px;
+    line-height: 1.55;
+  }
+  .delicte-desc strong { color: #C8A028; font-weight: 700; }
+
+  .pena-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .pena-chip {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .pena-chip.normal { background: rgba(26,92,150,0.3); color: #8FB8E0; border: 1px solid #1A5C96; }
+  .pena-chip.agravada { background: rgba(200,40,30,0.2); color: #E88880; border: 1px solid #C8281E; }
+  .pena-chip.multa { background: rgba(200,160,40,0.15); color: #E8C060; border: 1px solid #C8A028; }
+  .pena-chip.positivo { background: rgba(26,122,60,0.25); color: #5EC880; border: 1px solid #1A7A3C; }
+
+  /* ===== NOTAS ===== */
+  .nota {
+    padding: 10px 14px;
+    margin-top: 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .nota-agrav {
+    background: rgba(200,40,30,0.12);
+    border-left: 3px solid #C8281E;
+    color: #F8C8C0;
+  }
+  .nota-policial {
+    background: rgba(26,122,60,0.12);
+    border-left: 3px solid #1A7A3C;
+    color: #B0E8C0;
+  }
+  .nota-clave {
+    background: rgba(200,160,40,0.1);
+    border-left: 3px solid #C8A028;
+    color: #F0D888;
+  }
+  .nota strong { color: inherit; font-weight: 700; }
+
+  /* ===== MINI-TABLA (2 cols) ===== */
+  .mini-tabla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .mini-celda {
+    background: rgba(26,92,150,0.15);
+    border: 1px solid rgba(200,160,40,0.2);
+    padding: 10px;
+    border-radius: 3px;
+    text-align: center;
+  }
+  .mini-celda .periodo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    color: #C8A028;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .mini-celda .valor {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #F0F4FF;
+  }
+  .mini-celda .unidad {
+    font-size: 10px;
+    color: #A8BAD4;
+  }
+
+  /* ===== TABLA DISCIPLINARIA (valors límit) ===== */
+  .tabla-discip {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 2px;
+    background: rgba(200,160,40,0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 10px;
+    font-size: 11px;
+  }
+  .tabla-discip .celda {
+    background: #0E2244;
+    padding: 8px 6px;
+    text-align: center;
+  }
+  .tabla-discip .celda.header {
+    background: #1A5C96;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    color: #F0F4FF;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 10px;
+  }
+  .tabla-discip .celda.zona {
+    background: rgba(200,160,40,0.1);
+    font-weight: 600;
+    color: #F0D888;
+    text-align: left;
+    padding-left: 10px;
+    font-size: 10px;
+  }
+  .tabla-discip .celda.valor-fuerte { color: #C8A028; font-weight: 700; }
+
+  /* ===== RECUERDA FINAL ===== */
+  .recorda {
+    background: linear-gradient(135deg, #C8A028 0%, #A88020 100%);
+    color: #0A1628;
+    padding: 22px;
+    margin: 24px 20px;
+    border-radius: 4px;
+    border: 2px solid #0A1628;
+    box-shadow: 0 4px 20px rgba(200,160,40,0.3);
+  }
+  .recorda h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    border-bottom: 2px solid #0A1628;
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .recorda ul {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+  }
+  .recorda ul li {
+    font-size: 13px;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .recorda ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 4px;
+    top: 0;
+    color: #0A1628;
+    font-weight: 700;
+  }
+  .recorda strong { font-weight: 700; background: rgba(10,22,40,0.12); padding: 1px 5px; border-radius: 2px; }
+
+  /* ===== FOOTER / IMPRIMIR ===== */
+  footer {
+    background: #0A1628;
+    padding: 20px;
+    text-align: center;
+    border-top: 2px solid #C8A028;
+  }
+  .btn-imprimir {
+    background: #C8A028;
+    color: #0A1628;
+    border: none;
+    padding: 12px 30px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 3px 10px rgba(200,160,40,0.3);
+  }
+  .btn-imprimir:hover {
+    background: #E8C050;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(200,160,40,0.4);
+  }
+  .footer-text {
+    margin-top: 12px;
+    font-size: 10px;
+    color: #6080A0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ===== ANIMACIONES ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 520px) {
+    body { padding: 10px 5px; }
+    .clasif-grid { grid-template-columns: 1fr; }
+    .title-block .llei-num { font-size: 26px; }
+    .title-block .llei-nom { font-size: 15px; }
+    .header-top { flex-direction: column; text-align: center; gap: 10px; }
+    .cat-header h3 { font-size: 13px; }
+    .tabla-discip { font-size: 10px; grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+    .tabla-discip .celda { padding: 6px 3px; }
+    .mini-tabla { grid-template-columns: 1fr; }
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    body { background: white; padding: 0; color: #000; }
+    .container { border: 1px solid #000; box-shadow: none; }
+    .btn-imprimir, footer { display: none; }
+    .categoria { max-height: none !important; page-break-inside: avoid; }
+    .categoria .cat-body { max-height: none !important; }
+    .cat-header { background: #333 !important; -webkit-print-color-adjust: exact; }
+    header, .banner-info, .recorda { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="header-top">
+      <svg class="escut" viewBox="0 0 70 78" xmlns="http://www.w3.org/2000/svg">
+        <!-- Escut Policia Local -->
+        <path d="M35 2 L65 12 L65 40 Q65 62 35 76 Q5 62 5 40 L5 12 Z"
+              fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
+        <path d="M35 8 L58 16 L58 40 Q58 58 35 70 Q12 58 12 40 L12 16 Z"
+              fill="none" stroke="#C8A028" stroke-width="0.8" opacity="0.6"/>
+        <!-- Estrella 8 puntas -->
+        <g transform="translate(35,36)">
+          <path d="M0,-16 L3,-3 L16,0 L3,3 L0,16 L-3,3 L-16,0 L-3,-3 Z"
+                fill="#C8A028" opacity="0.9"/>
+          <circle cx="0" cy="0" r="5" fill="#0A1628" stroke="#C8A028" stroke-width="1"/>
+        </g>
+        <text x="35" y="58" text-anchor="middle" font-family="Oswald, sans-serif"
+              font-size="6" fill="#C8A028" font-weight="700" letter-spacing="1">POLICIA</text>
+        <text x="35" y="65" text-anchor="middle" font-family="Oswald, sans-serif"
+              font-size="6" fill="#C8A028" font-weight="700" letter-spacing="1">LOCAL</text>
+      </svg>
+      <div class="header-text">
+        <h1>Policia Local · Viladecans</h1>
+        <h2>Ordenança Municipal · Consulta Operativa</h2>
+      </div>
+    </div>
+    <div class="title-block">
+      <div class="llei-num">ORD. 37/2010</div>
+      <div class="llei-nom">Soroll i Vibracions de Viladecans</div>
+      <div class="llei-sub">Regulació de la contaminació acústica en el terme municipal</div>
+    </div>
+  </header>
+
+  <!-- ===== CLASIFICACIÓ CARDS ===== -->
+  <div class="clasif-grid">
+    <div class="clasif-card lleu">
+      <div class="num">≤ 5 dB</div>
+      <div class="label">Infracció Lleu</div>
+    </div>
+    <div class="clasif-card greu">
+      <div class="num">5-10 dB</div>
+      <div class="label">Infracció Greu</div>
+    </div>
+    <div class="clasif-card molt-greu">
+      <div class="num">> 10 dB</div>
+      <div class="label">Molt Greu</div>
+    </div>
+  </div>
+
+  <!-- ===== BANNER INFO ===== -->
+  <div class="banner-info">
+    <span>📅 En vigor: <strong>20/12/2010</strong></span>
+    <span>Modif. BOP <strong>14/02/2012</strong></span>
+    <span>43 articles · 13 annexos</span>
+  </div>
+
+  <!-- ===== CONTENIDO ===== -->
+  <div class="content">
+
+    <!-- CAT 1: OBJECTE I DEFINICIONS -->
+    <div class="categoria open">
+      <div class="cat-header" onclick="toggleCat(this)">
+        <h3>📘 Objecte i àmbit d'aplicació</h3>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="cat-body">
+        <div class="cat-content">
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 1-2</span>
+              <span class="delicte-title">Objecte de l'ordenança</span>
+              <span class="tipo-badge badge-info">Base</span>
+            </div>
+            <div class="delicte-desc">
+              Regula les mesures municipals per <strong>prevenir i corregir la contaminació acústica</strong> produïda per: instal·lacions, maquinària, obres, relacions de veïnat, comportament ciutadà i activitats públiques o privades.
+            </div>
+            <div class="nota nota-policial">
+              🚔 <strong>Aplicació PL:</strong> Qualsevol font de soroll al terme municipal de Viladecans queda sotmesa a aquesta ordenança, incloent via pública, domicilis privats i vehicles.
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 3</span>
+              <span class="delicte-title">Definicions clau</span>
+              <span class="tipo-badge badge-clave">Essencial</span>
+            </div>
+            <div class="delicte-desc">
+              <strong>Emissor acústic:</strong> qualsevol infraestructura, instal·lació, maquinària, activitat o comportament que generi soroll/vibracions.<br>
+              <strong>Immissió exterior:</strong> contaminació acústica provinent d'emissors al medi exterior.<br>
+              <strong>Immissió interior:</strong> soroll d'emissors al mateix edifici o edificis contigus.<br>
+              <strong>L<sub>AEQ,T</sub>:</strong> nivell de pressió acústica equivalent ponderat A, mesurat en el període T.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 2: ZONIFICACIÓ -->
+    <div class="categoria">
+      <div class="cat-header" onclick="togglecat(this)">
+        <h3>🗺️ Zonificació acústica</h3>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="cat-body">
+        <div class="cat-content">
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 5-7</span>
+              <span class="delicte-title">Zones de sensibilitat</span>
+              <span class="tipo-badge badge-info">Mapa</span>
+            </div>
+            <div class="delicte-desc">
+              El <strong>Mapa de Capacitat Acústica</strong> delimita les zones i fixa els valors límit segons l'ús del sòl:
+            </div>
+
+            <div class="tabla-discip">
+              <div class="celda header">Zona / Ús</div>
+              <div class="celda header">Dia<br>7-21h</div>
+              <div class="celda header">Vespre<br>21-23h</div>
+              <div class="celda header">Nit<br>23-7h</div>
+
+              <div class="celda zona">A2 · Sanitari/Docent</div>
+              <div class="celda">55</div>
+              <div class="celda">55</div>
+              <div class="celda valor-fuerte">45</div>
+
+              <div class="celda zona">A4 · Residencial</div>
+              <div class="celda">60</div>
+              <div class="celda">60</div>
+              <div class="celda valor-fuerte">50</div>
+
+              <div class="celda zona">B1 · Residencial + trànsit</div>
+              <div class="celda">65</div>
+              <div class="celda">65</div>
+              <div class="celda valor-fuerte">55</div>
+
+              <div class="celda zona">C1 · Recreatiu/Espectacles</div>
+              <div class="celda">68</div>
+              <div class="celda">68</div>
+              <div class="celda valor-fuerte">58</div>
+
+              <div class="celda zona">C2 · Industrial</div>
+              <div class="celda">70</div>
+              <div class="celda">70</div>
+              <div class="celda valor-fuerte">60</div>
+            </div>
+            <div class="nota nota-clave">
+              💡 <strong>ZEPQA:</strong> Zones d'Especial Protecció (parcs, zones enjardinades). <strong>ZARE:</strong> Zones Acústiques de Règim Especial (saturades, declarades a petició del 50% dels veïns).
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 3: ACTIVITATS -->
+    <div class="categoria">
+      <div class="cat-header" onclick="toggleCat(this)">
+        <h3>🏢 Classificació d'activitats</h3>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="cat-body">
+        <div class="cat-content">
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 12</span>
+              <span class="delicte-title">Grups segons immissió interior</span>
+              <span class="tipo-badge badge-local">Clau PL</span>
+            </div>
+            <div class="delicte-desc">
+              Tota activitat es classifica en un dels 4 grups segons el nivell de soroll <strong>dins el seu recinte</strong>:
+            </div>
+
+            <div class="pena-chips">
+              <span class="pena-chip agravada">GRUP I · 95-100 dB(A)</span>
+              <span class="pena-chip agravada">GRUP II · 90-94 dB(A)</span>
+              <span class="pena-chip multa">GRUP III · 85-89 dB(A)</span>
+              <span class="pena-chip positivo">GRUP IV · ≤ 84 dB(A)</span>
+            </div>
+
+            <div class="nota nota-policial" style="margin-top:12px;">
+              🚔 <strong>Exemples operatius:</strong><br>
+              • <strong>Grup I:</strong> discoteques, karaokes, sales ball, cinemes, serralleries<br>
+              • <strong>Grup II:</strong> bars musicals, tallers mecànics, fusteries<br>
+              • <strong>Grup III:</strong> restaurants amb música >75 dB, gimnasos, garatges<br>
+              • <strong>Grup IV:</strong> bars/restaurants normals, comerços, oficines
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 13</span>
+              <span class="delicte-title">Requeriments tècnics obligatoris</span>
+              <span class="tipo-badge badge-info">Control</span>
+            </div>
+            <div class="delicte-desc">
+              <strong>Grups I i II</strong> en pública concurrència:<br>
+              · Portes i finestres <strong>tancades</strong> en funcionament<br>
+              · <strong>Doble porta</strong> amb molles de retorn i tancament hermètic<br>
+              · <strong>Limitador-enregistrador</strong> obligatori (Annex 10)<br>
+              · Titular responsable de les molèsties dels usuaris
+            </div>
+            <div class="nota nota-clave">
+              💡 <strong>TV/equips so bars:</strong> Grup III màx <strong>80 dB(A)</strong> · Grup IV màx <strong>75 dB(A)</strong> a 1 metre de la font.
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 14</span>
+              <span class="delicte-title">Càrrega i descàrrega</span>
+              <span class="tipo-badge badge-info">Horari</span>
+            </div>
+            <div class="delicte-desc">
+              Horari preferent: <strong>8h - 21h</strong>. Excepció polígons industrials. Contenidors i carros han d'estar condicionats per evitar transmissió de soroll.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 4: VIA PÚBLICA I VEÏNAT -->
+    <div class="categoria">
+      <div class="cat-header" onclick="toggleCat(this)">
+        <h3>🏘️ Via pública i relacions de veïnat</h3>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="cat-body">
+        <div class="cat-content">
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 16</span>
+              <span class="delicte-title">Activitats festives i actes públics</span>
+              <span class="tipo-badge badge-info">Autoritz.</span>
+            </div>
+            <div class="delicte-desc">
+              Revetlles, festes, fires, cercaviles, mítings: <strong>autorització municipal expressa</strong>. Sistemes electroamplificats limitats a:
+            </div>
+            <div class="mini-tabla">
+              <div class="mini-celda">
+                <div class="periodo">Accés públic</div>
+                <div class="valor">100</div>
+                <div class="unidad">dB(A) L<sub>AEQ,60s</sub></div>
+              </div>
+              <div class="mini-celda">
+                <div class="periodo">Façana exposada</div>
+                <div class="valor">80</div>
+                <div class="unidad">dB(A) 30 min</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 17</span>
+              <span class="delicte-title">Megafonia a l'aire lliure</span>
+              <span class="tipo-badge badge-info">Horari</span>
+            </div>
+            <div class="delicte-desc">
+              Horari màxim: <strong>8h-22h</strong> laborables · <strong>9h-22h</strong> dissabtes/diumenges/festius. Direccionals, orientats cap a instal·lacions.
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 18</span>
+              <span class="delicte-title">Espectacles pirotècnics</span>
+              <span class="tipo-badge badge-grave">Distància</span>
+            </div>
+            <div class="delicte-desc">
+              Mínim <strong>200 metres</strong> d'edificis hospitalaris o espais a preservar.
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 19</span>
+              <span class="delicte-title">Comportament ciutadà</span>
+              <span class="tipo-badge badge-local">Clau PL</span>
+            </div>
+            <div class="delicte-desc">
+              Evitar molèsties amb sorolls, <strong>especialment entre les 23h i les 8h</strong>. Quan no sigui possible mesurar amb sonòmetre (veus, cops, arrossegar mobles, TV), l'<strong>agent de la Policia Local</strong> avalua amb criteris d'<strong>intencionalitat i desproporcionalitat</strong>.
+            </div>
+            <div class="nota nota-policial">
+              🚔 <strong>Actuació PL:</strong> L'agent pot considerar el soroll com a excessiu per apreciació directa quan sigui clarament desproporcionat (Art. 19.2). Es tipifica com a infracció lleu ex Art. 34.1.f.
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 20</span>
+              <span class="delicte-title">Animals de companyia</span>
+              <span class="tipo-badge badge-info">Veïnat</span>
+            </div>
+            <div class="delicte-desc">
+              Propietaris responsables dels lladrucs, crits, cants. Especial atenció entre <strong>22h i 8h</strong>.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 5: VEHICLES -->
+    <div class="categoria open">
+      <div class="cat-header" onclick="toggleCat(this)">
+        <h3>🚗 Vehicles de motor i ciclomotors</h3>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="cat-body">
+        <div class="cat-content">
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 21</span>
+              <span class="delicte-title">Conductes prohibides</span>
+              <span class="tipo-badge badge-local">Clau PL</span>
+            </div>
+            <div class="delicte-desc">
+              Els propietaris/usuaris <strong>no poden</strong>:
+            </div>
+            <div class="pena-chips">
+              <span class="pena-chip normal">a) Ús reiterat clàxon</span>
+              <span class="pena-chip agravada">b) Silenciadors modificats</span>
+              <span class="pena-chip normal">c) Voltes, derrapades, acceleracions</span>
+              <span class="pena-chip normal">d) Música a volum alt amb finestres obertes</span>
+              <span class="pena-chip normal">e) Motor en marxa parat >2 min</span>
+              <span class="pena-chip normal">f) Camions frigorífics en zones residencials (nit)</span>
+            </div>
+            <div class="nota nota-agrav">
+              ⚠️ <strong>Atenció Art. 21.1.b:</strong> Circular amb <strong>silenciador incomplet, inadequat o deteriorat</strong> és infracció <strong>GREU</strong> directament (Art. 34.2.d). La resta del Art. 21.1 són lleus.
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Annex 6</span>
+              <span class="delicte-title">Valor límit emissió vehicles</span>
+              <span class="tipo-badge badge-info">Mesura</span>
+            </div>
+            <div class="delicte-desc">
+              Valor límit = <strong>nivell fitxa d'homologació + 4 dB(A)</strong> (assaig vehicle aturat). Ciclomotors sense fitxa: <strong>87 dB(A)</strong>.
+            </div>
+            <div class="nota nota-policial">
+              🚔 <strong>Procediment mesura (Annex 6):</strong> micròfon a <strong>0,5 m</strong> del tub d'escapament, orientació <strong>45°</strong>, alçada mín. 0,2 m. Mínim 3 mesuraments vàlids (diferència ≤ 3 dB(A)).
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 22</span>
+              <span class="delicte-title">Vehicles d'urgències</span>
+              <span class="tipo-badge badge-local">PL/Bombers</span>
+            </div>
+            <div class="delicte-desc">
+              Sirenes només en <strong>urgència extrema</strong> i quan la senyalització lluminosa sigui insuficient.
+            </div>
+            <div class="mini-tabla">
+              <div class="mini-celda">
+                <div class="periodo">Dia (8-21h)</div>
+                <div class="valor">95</div>
+                <div class="unidad">dB(A) màx</div>
+              </div>
+              <div class="mini-celda">
+                <div class="periodo">Nit (21-8h)</div>
+                <div class="valor">70-90</div>
+                <div class="unidad">dB(A) segons necessitat</div>
+              </div>
+            </div>
+            <div class="nota nota-clave">
+              💡 <strong>Nit:</strong> Prioritzar avisadors <strong>lluminosos</strong>. Si no és suficient, màxim <strong>70 dB(A)</strong>; només en casos estrictament necessaris fins 90 dB(A). Si el vehicle s'atura per trànsit, <strong>apagar sirena</strong>.
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 41</span>
+              <span class="delicte-title">Diagnòstic i mesures cautelars</span>
+              <span class="tipo-badge badge-grave">Procediment</span>
+            </div>
+            <div class="delicte-desc">
+              Segons resultat de la inspecció:
+            </div>
+            <div class="pena-chips">
+              <span class="pena-chip positivo">Favorable · Sense infracció</span>
+              <span class="pena-chip multa">Desfavorable · 15 dies per reparar</span>
+              <span class="pena-chip agravada">Molt desfavorable · IMMOBILITZACIÓ</span>
+            </div>
+            <div class="nota nota-policial">
+              🚔 <strong>Desfavorable:</strong> Lliurar còpia acta + denúncia, requerir presentació del vehicle en <strong>15 dies</strong> per nou mesurament o certificació ITV.<br>
+              🚔 <strong>Molt desfavorable:</strong> Intervenció <strong>permís/llicència de circulació</strong> + <strong>immobilització</strong> i trasllat al dipòsit municipal.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 6: ALARMES I SIRENES -->
+    <div class="categoria">
+      <div class="cat-header" onclick="toggleCat(this)">
+        <h3>🚨 Sistemes d'avís acústic</h3>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="cat-body">
+        <div class="cat-content">
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 23-24</span>
+              <span class="delicte-title">Alarmes i funcionament anormal</span>
+              <span class="tipo-badge badge-info">Control</span>
+            </div>
+            <div class="delicte-desc">
+              No es permet activar elements d'avís en període nocturn (excepte excepcionalitat). El toc de campanes en horari nocturn segueix pactes municipals.
+            </div>
+            <div class="nota nota-policial">
+              🚔 <strong>Alarma descontrolada sense titular localitzable:</strong> l'Administració municipal pot <strong>desmuntar i retirar</strong> el sistema (despeses a càrrec del titular).
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Annex 9</span>
+              <span class="delicte-title">Nivells màxims alarmes</span>
+              <span class="tipo-badge badge-info">Límits</span>
+            </div>
+            <div class="delicte-desc">
+              · Alarma exterior: màx <strong>85 dB(A)</strong> a 3 m<br>
+              · Alarma interior comuna: màx <strong>70 dB(A)</strong> a 3 m<br>
+              · Durada màxima continu: <strong>60 segons</strong><br>
+              · Màxim <strong>3 cicles</strong> separats 30-60 segons
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 7: OBRES I CONSTRUCCIÓ -->
+    <div class="categoria">
+      <div class="cat-header" onclick="toggleCat(this)">
+        <h3>🔨 Obres i construccions</h3>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="cat-body">
+        <div class="cat-content">
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 26</span>
+              <span class="delicte-title">Horari obres de construcció</span>
+              <span class="tipo-badge badge-local">Clau PL</span>
+            </div>
+            <div class="delicte-desc">
+              Franges horàries estrictes:
+            </div>
+            <div class="mini-tabla">
+              <div class="mini-celda">
+                <div class="periodo">Dies laborables</div>
+                <div class="valor">8h - 21h</div>
+                <div class="unidad">treball / 8h-20h maquinària</div>
+              </div>
+              <div class="mini-celda">
+                <div class="periodo">Dissabtes / festius</div>
+                <div class="valor">9h - 21h</div>
+                <div class="unidad">treball / 9h-20h maquinària</div>
+              </div>
+            </div>
+            <div class="nota nota-policial">
+              🚔 <strong>Excepcions (sense horari):</strong> restabliment serveis essencials (llum, aigua, gas, telèfon), risc/perill imminent, obres que per característiques pròpies no es poden fer de dia.
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 26.5</span>
+              <span class="delicte-title">Requeriments maquinària</span>
+              <span class="tipo-badge badge-info">Tècnic</span>
+            </div>
+            <div class="delicte-desc">
+              · Generadors: màx <strong>90 dB PWL</strong><br>
+              · Motors combustió: amb silenciadors<br>
+              · Motors aturats quan no s'utilitzin<br>
+              · Compressors <50m d'edificis: <strong>capot tancat</strong><br>
+              · Martells pneumàtics: mecanisme silenciador
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 8: RÈGIM SANCIONADOR -->
+    <div class="categoria open">
+      <div class="cat-header" onclick="toggleCat(this)">
+        <h3>⚖️ Règim sancionador</h3>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="cat-body">
+        <div class="cat-content">
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 33-34</span>
+              <span class="delicte-title">Classificació infraccions</span>
+              <span class="tipo-badge badge-grave">Essencial</span>
+            </div>
+            <div class="delicte-desc">
+              Classificació segons <strong>superació dels valors límit</strong>:
+            </div>
+            <div class="tabla-discip" style="grid-template-columns: 1fr 1fr 1fr;">
+              <div class="celda header">LLEU</div>
+              <div class="celda header">GREU</div>
+              <div class="celda header">MOLT GREU</div>
+
+              <div class="celda">Fins a <strong>5 dB</strong></div>
+              <div class="celda">De <strong>5 a 10 dB</strong></div>
+              <div class="celda valor-fuerte">Més de <strong>10 dB</strong></div>
+            </div>
+            <div class="nota nota-clave">
+              💡 <strong>També són GREUS:</strong> circular amb silenciador defectuós, incomplir condicions d'autorització, impedir inspecció, informació falsa, reincidència lleu en 2 anys.<br>
+              ⚠️ <strong>MOLT GREUS:</strong> posar en marxa focus precintats, superar límits en ZEPQA/ZARE, danys greus al medi ambient o salut.
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 37</span>
+              <span class="delicte-title">Quantia sancions</span>
+              <span class="tipo-badge badge-grave">€€€</span>
+            </div>
+            <div class="pena-chips">
+              <span class="pena-chip positivo">LLEU · Fins 900 €</span>
+              <span class="pena-chip multa">GREU · 901 - 12.000 €</span>
+              <span class="pena-chip agravada">MOLT GREU · 12.001 - 300.000 €</span>
+            </div>
+            <div class="nota nota-agrav">
+              ⚠️ <strong>Greus:</strong> poden afegir suspensió activitat ≤ 6 mesos + precintament focus emissors.<br>
+              ⚠️ <strong>Molt greus:</strong> suspensió >6 mesos o definitiva + retirada autorització + precintament.
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 36</span>
+              <span class="delicte-title">Mesures provisionals</span>
+              <span class="tipo-badge badge-grave">Urgència</span>
+            </div>
+            <div class="delicte-desc">
+              En cas d'<strong>urgència</strong> (superació nivells greu/molt greu o incompliment reiterat):
+            </div>
+            <div class="pena-chips">
+              <span class="pena-chip normal">a) Mesures de correcció</span>
+              <span class="pena-chip agravada">b) Precintament focus emissor</span>
+              <span class="pena-chip agravada">c) Clausura temporal</span>
+              <span class="pena-chip agravada">d) Suspensió autorització</span>
+            </div>
+            <div class="nota nota-policial">
+              🚔 S'han de ratificar, modificar o aixecar en els <strong>15 dies següents</strong> a l'adopció, en l'acord d'inici del procediment sancionador.
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 43</span>
+              <span class="delicte-title">Prescripció</span>
+              <span class="tipo-badge badge-info">Terminis</span>
+            </div>
+            <div class="tabla-discip" style="grid-template-columns: 1.5fr 1fr 1fr;">
+              <div class="celda header">Tipus</div>
+              <div class="celda header">Infracció</div>
+              <div class="celda header">Sanció</div>
+
+              <div class="celda zona">Molt greus</div>
+              <div class="celda valor-fuerte">3 anys</div>
+              <div class="celda valor-fuerte">3 anys</div>
+
+              <div class="celda zona">Greus</div>
+              <div class="celda valor-fuerte">2 anys</div>
+              <div class="celda valor-fuerte">2 anys</div>
+
+              <div class="celda zona">Lleus</div>
+              <div class="celda valor-fuerte">6 mesos</div>
+              <div class="celda valor-fuerte">1 any</div>
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 42</span>
+              <span class="delicte-title">Òrgan competent</span>
+              <span class="tipo-badge badge-info">Autoritat</span>
+            </div>
+            <div class="delicte-desc">
+              La imposició de les sancions correspon a <strong>l'Alcalde</strong> o persona en qui delegui.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CAT 9: INSPECCIÓ I ACTA -->
+    <div class="categoria">
+      <div class="cat-header" onclick="toggleCat(this)">
+        <h3>🔍 Inspecció i actuació policial</h3>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="cat-body">
+        <div class="cat-content">
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 30-31</span>
+              <span class="delicte-title">Qui pot inspeccionar</span>
+              <span class="tipo-badge badge-local">Clau PL</span>
+            </div>
+            <div class="delicte-desc">
+              Inspecció realitzada per:
+            </div>
+            <div class="pena-chips">
+              <span class="pena-chip normal">Tècnics municipals</span>
+              <span class="pena-chip multa">Agents Policia Local</span>
+              <span class="pena-chip normal">Entitats supramunicipals</span>
+            </div>
+            <div class="nota nota-policial">
+              🚔 <strong>Els agents de PL tenen caràcter d'agents de l'autoritat</strong> i poden accedir a instal·lacions de titularitat pública o privada (amb autorització pertinent) per dur a terme mesuraments i comprovacions.
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 32</span>
+              <span class="delicte-title">Acta d'inspecció</span>
+              <span class="tipo-badge badge-info">Documentació</span>
+            </div>
+            <div class="delicte-desc">
+              Obligatòria en cada comprovació. Còpia lliurada al titular/responsable. En vehicles ha de constar el resultat: <strong>favorable / desfavorable / molt desfavorable</strong>.
+            </div>
+            <div class="nota nota-clave">
+              💡 Els <strong>conductors de vehicles estan obligats a facilitar la comprovació</strong> dels nivells d'emissió sonora als agents de la Policia (Art. 30.3).
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Annex 5</span>
+              <span class="delicte-title">Mesuraments vàlids</span>
+              <span class="tipo-badge badge-info">Tècnic</span>
+            </div>
+            <div class="delicte-desc">
+              Mínim <strong>3 mesuraments</strong>, diferència entre extrems <strong>≤ 3 dB(A)</strong>. Verificació acústica inicial i final (desviació màx 0,5 dB(A)). Vent < 5 m/s amb paravent.
+            </div>
+          </div>
+
+          <div class="delicte">
+            <div class="delicte-head">
+              <span class="art-badge">Art. 40</span>
+              <span class="delicte-title">Multes coercitives</span>
+              <span class="tipo-badge badge-grave">Coerció</span>
+            </div>
+            <div class="delicte-desc">
+              Per incompliment de requeriments: fins <strong>600 €</strong> cada una, màxim <strong>3 consecutives</strong>.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== RECORDA FINAL ===== -->
+  <div class="recorda">
+    <h3>📋 Recorda · Claus operatives</h3>
+    <ul>
+      <li><strong>Horari nocturn</strong> de control veïnat: <strong>23h a 8h</strong> (Art. 19); animals <strong>22h a 8h</strong> (Art. 20).</li>
+      <li>Sorolls veïnat no mesurables amb sonòmetre: l'agent PL avalua per <strong>intencionalitat i desproporcionalitat</strong>.</li>
+      <li>Silenciador defectiu/modificat = infracció <strong>GREU directa</strong> (Art. 34.2.d), no lleu.</li>
+      <li>Vehicle amb diagnòstic <strong>molt desfavorable</strong> (>10 dB): <strong>intervenció permís</strong> + immobilització + dipòsit.</li>
+      <li>Vehicle desfavorable (1-10 dB): <strong>15 dies</strong> per reparar i presentar certificació ITV.</li>
+      <li>Càrrega i descàrrega: horari preferent <strong>8h-21h</strong> (excepte polígons).</li>
+      <li>Obres: laborables <strong>8h-21h</strong>, dissabtes i festius <strong>9h-21h</strong>. Maquinària fins les 20h.</li>
+      <li>Pirotècnia: mínim <strong>200 m</strong> d'hospitals.</li>
+      <li>Megafonia aire lliure: màxim fins a les <strong>22h</strong> tots els dies.</li>
+      <li>Sirenes urgències <strong>de nit</strong>: prioritzar llum; si acústic, màx <strong>70 dB(A)</strong>.</li>
+      <li>Grups acústics: <strong>I</strong>=95-100 / <strong>II</strong>=90-94 / <strong>III</strong>=85-89 / <strong>IV</strong>≤84 dB(A).</li>
+      <li>TV/música bars: Grup III màx <strong>80 dB(A)</strong>, Grup IV màx <strong>75 dB(A)</strong> a 1m.</li>
+      <li>Classificació infracció: <strong>≤5 dB</strong> lleu · <strong>5-10 dB</strong> greu · <strong>>10 dB</strong> molt greu.</li>
+      <li>Sancions: lleu fins 900€ · greu 901-12.000€ · molt greu 12.001-300.000€.</li>
+      <li>Alarma exterior: màx <strong>85 dB(A)</strong> · durada contínua <strong>60s</strong> · màx 3 cicles.</li>
+      <li>Agents PL = <strong>agents de l'autoritat</strong> amb accés a instal·lacions per inspecció.</li>
+      <li>Conductors <strong>obligats</strong> a facilitar comprovació emissió sonora (Art. 30.3).</li>
+      <li>Mesurament vehicle: micròfon a <strong>0,5 m</strong>, orientació <strong>45°</strong>, vehicle aturat.</li>
+      <li>Prescripció: lleus <strong>6 mesos</strong> · greus <strong>2 anys</strong> · molt greus <strong>3 anys</strong>.</li>
+      <li>Competència sanció: <strong>Alcalde</strong> o delegat; mesures provisionals ratificades en 15 dies.</li>
+    </ul>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+    <div class="footer-text">Ordenança Soroll Viladecans · Consulta Policia Local</div>
+  </footer>
+
+</div>
+
+<script>
+  function toggleCat(header) {
+    const cat = header.parentElement;
+    cat.classList.toggle('open');
+  }
+  // Compatibilidad con typos
+  function toggleCategoria(header) { toggleCat(header); }
+  function toggleCategoria(header) { toggleCat(header); }
+  function toggleCategoria(h){ toggleCat(h); }
+  window.toggleCategoria = toggleCat;
+  // Por si algún handler se llamó con minúsculas
+  window.togglecat = toggleCat;
+</script>
+
+</body>
+</html>
