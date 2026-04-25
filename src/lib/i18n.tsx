@@ -49,6 +49,10 @@ const DICT: Record<Locale, Dict> = {
 
     // Card
     'card.notFound': 'Ficha no encontrada.',
+    'card.lang.notice.es': 'Esta ficha está en castellano.',
+    'card.lang.notice.ca': 'Esta ficha está en catalán.',
+    'card.lang.notice.hint':
+      'El contenido todavía no está traducido al idioma seleccionado.',
 
     // Search
     'search.resultsLabel': 'Resultados',
@@ -111,6 +115,10 @@ const DICT: Record<Locale, Dict> = {
 
     // Card
     'card.notFound': 'Fitxa no trobada.',
+    'card.lang.notice.es': 'Aquesta fitxa està en castellà.',
+    'card.lang.notice.ca': 'Aquesta fitxa està en català.',
+    'card.lang.notice.hint':
+      "El contingut encara no està traduït a l'idioma seleccionat.",
 
     // Search
     'search.resultsLabel': 'Resultats',

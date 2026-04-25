@@ -11,7 +11,7 @@ export default function CardPage() {
   const { moduleSlug = '', slug = '' } = useParams();
   const mod = MODULES.find((m) => m.slug === moduleSlug);
   const card = getCard(moduleSlug, slug);
-  const { t } = useT();
+  const { t, locale } = useT();
 
   if (!mod || !card) {
     return (
@@ -25,6 +25,7 @@ export default function CardPage() {
   }
 
   const modTitle = t(`module.${mod.slug}.title`);
+  const langMismatch = card.lang !== locale;
 
   const breadcrumb = (
     <nav className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2">
@@ -44,12 +45,40 @@ export default function CardPage() {
     </nav>
   );
 
+  // Avís quan l'idioma de la fitxa no coincideix amb l'idioma de l'app
+  // (a hores d'ara les infografies HTML no es tradueixen al canviar el
+  // toggle ES/CA, així que avisem que el contingut estarà en l'altre).
+  const langNotice = langMismatch ? (
+    <div className="flex items-start gap-2 rounded-lg border px-3 py-2 text-xs
+      border-amber-300/70 bg-amber-50 text-amber-900
+      dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-200">
+      <svg
+        aria-hidden
+        width="14" height="14" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+        className="mt-0.5 shrink-0"
+      >
+        <path d="M5 8l6 6" />
+        <path d="M4 14l6-6 2-3" />
+        <path d="M2 5h12" />
+        <path d="M7 2h1" />
+        <path d="M22 22l-5-10-5 10" />
+        <path d="M14 18h6" />
+      </svg>
+      <div className="min-w-0">
+        <div className="font-semibold">{t(`card.lang.notice.${card.lang}`)}</div>
+        <div className="opacity-80">{t('card.lang.notice.hint')}</div>
+      </div>
+    </div>
+  ) : null;
+
   if (card.kind === 'html') {
     return (
       <article>
         <div className="w-full border-b border-slate-200 dark:border-white/10 bg-white/85 dark:bg-[#0a1628]/60 backdrop-blur">
-          <div className="mx-auto max-w-5xl px-4 py-2">
+          <div className="mx-auto max-w-5xl px-4 py-2 space-y-2">
             {breadcrumb}
+            {langNotice}
           </div>
         </div>
         <HtmlInline html={card.body} title={card.title} />
@@ -60,6 +89,7 @@ export default function CardPage() {
   return (
     <article className="mx-auto w-full max-w-3xl px-4 py-6">
       {breadcrumb}
+      {langNotice ? <div className="mt-3">{langNotice}</div> : null}
       <div className="fitxa mt-4">
         <Markdown source={card.body} />
       </div>

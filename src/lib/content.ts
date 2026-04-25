@@ -84,6 +84,11 @@ export const MODULES: Module[] = [
 
 export type CardKind = 'html' | 'md';
 
+// Idioma detectat del cos de la fitxa. S'utilitza per mostrar un avís
+// quan no coincideix amb l'idioma actiu de l'app (perquè avui les
+// infografies HTML no es tradueixen al canviar el toggle).
+export type CardLang = 'es' | 'ca';
+
 export type Card = {
   moduleSlug: string;
   slug: string; // derivat del nom de fitxer (sense extensió)
@@ -94,6 +99,7 @@ export type Card = {
   path: string; // ruta relativa al projecte
   searchText: string; // versió text pla del cos, usada per cerca
   icon: string; // icona emoji de la fitxa
+  lang: CardLang; // idioma detectat del cos
 };
 
 // Globs que carreguen TOT el contingut de /content en temps de build.
@@ -173,6 +179,21 @@ function fileSlug(name: string): string {
   return name.replace(/\.(md|html)$/i, '');
 }
 
+// Detecta l'idioma del text basant-se en marques pràcticament
+// inequívoques: les terminacions "-ción" (castellà) vs "-ció" (català).
+// Tornem el guanyador per recompte; com a últim recurs, fallback a 'es'
+// perquè és l'idioma per defecte de l'app i evita avisos falsos.
+function detectLang(text: string): CardLang {
+  const cion = (text.match(/ción/g) || []).length;
+  const cio = (text.match(/ció[^n]/g) || []).length;
+  if (cio > cion) return 'ca';
+  if (cion > cio) return 'es';
+  // Empat o cap senyal: comprovem caràcters distintius.
+  if (/ç/.test(text)) return 'ca';
+  if (/ñ/.test(text)) return 'es';
+  return 'es';
+}
+
 // Taula d'inferència d'icones per paraula clau. L'ordre importa: la
 // PRIMERA coincidència guanya. Posem primer les paraules més específiques.
 const ICON_HINTS: { kws: string[]; icon: string }[] = [
@@ -247,6 +268,8 @@ const mdCards: Card[] = Object.entries(mdFiles).map(([path, raw]) => {
   const { data, body } = parseFrontmatter(raw);
   const finalTitle = data.title ?? titleFromMarkdown(body, slug);
   const icon = resolveIcon(moduleSlug, finalTitle, body, data.icon);
+  const lang: CardLang =
+    data.lang === 'ca' || data.lang === 'es' ? data.lang : detectLang(body);
   return {
     moduleSlug,
     slug,
@@ -257,6 +280,7 @@ const mdCards: Card[] = Object.entries(mdFiles).map(([path, raw]) => {
     path,
     searchText: body,
     icon,
+    lang,
   };
 });
 
@@ -275,6 +299,11 @@ const htmlCards: Card[] = Object.entries(htmlFiles).map(([path, raw]) => {
     .trim();
   const explicitIcon = iconFromHtmlMeta(raw);
   const icon = resolveIcon(moduleSlug, title, searchText, explicitIcon);
+  // Detectem l'idioma a partir del text. NO confiem en l'atribut
+  // <html lang="..."> perquè a la pràctica sovint és incorrecte
+  // (les fitxes en català tenen lang="es" per haver-se copiat de
+  // plantilles).
+  const lang = detectLang(searchText);
   return {
     moduleSlug,
     slug,
@@ -285,6 +314,7 @@ const htmlCards: Card[] = Object.entries(htmlFiles).map(([path, raw]) => {
     path,
     searchText,
     icon,
+    lang,
   };
 });
 
