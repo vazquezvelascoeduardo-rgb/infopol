@@ -1,101 +1,163 @@
 {
   "id": "itv",
-  "titol": "ITV caducada / desfavorable",
+  "titol": "ITV — caducada / desfavorable / negativa",
   "categoria": "transit",
   "icono": "🔧",
-  "base_legal": ["Art. 10 RGV", "Art. 76.l TRLSV", "Art. 77.l TRLSV"],
+  "base_legal": [
+    "Art. 10.1 RGV",
+    "Art. 7.2 RGV (reformes)",
+    "Annex IV RGV (terminis ITV)"
+  ],
+  "terminis_itv_vigents": {
+    "turisme_general": "Primera ITV als 4 anys, després cada 2 anys (fins als 10 anys), després anual",
+    "moto_ciclomotor": "Primera als 4 anys (moto) / 3 anys (ciclomotor), després cada 2 anys",
+    "vehicle_us_intensiu": "Taxis, lloguer, autoescola: primera als 2 anys, després anual",
+    "camions_furgones_3500kg": "Primera als 2 anys, després anual fins els 10, després semestral"
+  },
+  "estats_itv_possibles": {
+    "favorable": "Tot correcte. Pot circular.",
+    "favorable_amb_defectes_lleus": "Pot circular. Reparar abans propera ITV.",
+    "desfavorable": "No pot circular més que per anar al taller o a una nova ITV. Termini de 2 mesos.",
+    "negativa": "Defectes molt greus que impedeixen circular amb seguretat. NO pot circular fins reparar i passar nova ITV."
+  },
   "inici": "estat_itv",
   "nodes": {
+
     "estat_itv": {
-      "titol": "Estat de la ITV",
-      "text": "Comprovació a la base de dades / adhesiu. Quin és l'estat?",
+      "titol": "Comprovació estat ITV",
+      "text": "Consulta DGT / adhesiu parabrisa. Estat?",
       "opcions": [
-        { "etiqueta": "ITV favorable vigent",           "va_a": "fi_ok_itv" },
-        { "etiqueta": "ITV caducada (no passada a temps)","va_a": "fi_greu_itv_caducada" },
-        { "etiqueta": "ITV desfavorable",                "va_a": "itv_desfavorable" },
-        { "etiqueta": "ITV negativa",                    "va_a": "fi_mg_itv_negativa" },
-        { "etiqueta": "Mai no ha passat ITV",            "va_a": "fi_mg_itv_mai" }
+        { "etiqueta": "FAVORABLE vigent",                                  "va_a": "fi_ok_itv" },
+        { "etiqueta": "Caducada (no presentada en termini)",               "va_a": "fi_caducada" },
+        { "etiqueta": "Desfavorable (encara dins els 2 mesos)",            "va_a": "desfavorable_us" },
+        { "etiqueta": "Desfavorable (més de 2 mesos)",                     "va_a": "fi_desfavorable_fora" },
+        { "etiqueta": "NEGATIVA (defectes greus)",                          "va_a": "fi_negativa" },
+        { "etiqueta": "Mai no ha passat ITV (vehicle sense estrenar ITV)", "va_a": "fi_mai_itv" },
+        { "etiqueta": "Reforma sense homologar",                           "va_a": "fi_reforma" }
       ]
     },
-    "itv_desfavorable": {
-      "titol": "ITV desfavorable — temps transcorregut",
-      "text": "La ITV desfavorable permet circular 2 mesos només per anar a reparar i repassar. Han passat més de 2 mesos?",
-      "info": "El vehicle només pot anar directe al taller o a la propera ITV",
+
+    "desfavorable_us": {
+      "titol": "ITV desfavorable — destinació del vehicle",
+      "text": "On va el vehicle?",
+      "info": "Amb ITV desfavorable, només es pot circular per anar AL TALLER o a una nova ITV. Termini màxim 2 mesos.",
       "opcions": [
-        { "etiqueta": "Menys de 2 mesos (anant al taller/ITV)", "va_a": "fi_ok_desfavorable" },
-        { "etiqueta": "Més de 2 mesos / circulant normal",      "va_a": "fi_greu_itv_desfavorable_fora" }
+        { "etiqueta": "Va al taller / nova ITV (acreditat)",  "va_a": "fi_ok_desfavorable_camí" },
+        { "etiqueta": "Circulació normal (no va al taller)",   "va_a": "fi_desfavorable_circulant" }
       ]
     },
 
     "fi_ok_itv": {
       "final": true,
       "tipus": "ok",
-      "titol": "✅ ITV vigent i favorable",
+      "titol": "✅ ITV en regla",
       "accio": "Es deixa circular"
     },
-    "fi_ok_desfavorable": {
+
+    "fi_ok_desfavorable_camí": {
       "final": true,
       "tipus": "ok",
-      "titol": "ℹ️ ITV desfavorable — dins del termini legal",
-      "accio": "Es permet continuar només si va al taller o a la ITV. Advertir."
+      "titol": "ℹ️ ITV desfavorable — anant al taller",
+      "accio": "Es permet continuar només si va al taller/ITV. Advertir.",
+      "documentacio": "Anotar al servei. Si dubte d'autenticitat: butlletí preventiu"
     },
-    "fi_greu_itv_caducada": {
+
+    "fi_caducada": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — ITV caducada",
-      "import": "200 € (100 € amb pagament voluntari)",
+      "titol": "⚠️ GREU — ITV caducada",
+      "concepte_butlleta": "No haver presentat a la inspecció tècnica periòdica, en el termini establert, el vehicle ressenyat",
+      "article_butlleta": "Art. 10.1 RGV",
+      "import": "200 € (DTE 100 €)",
       "punts": "0 punts",
-      "accions": [
-        "Butlletí de denúncia al titular (no al conductor)",
-        "Requerir que passi ITV com més aviat millor",
-        "No cal immobilitzar (excepte si hi ha risc evident)"
+      "accions_operatives": [
+        "Butlletí al TITULAR (no al conductor)",
+        "Advertir que ha de passar ITV com més aviat millor",
+        "NO immobilitzar (excepte risc evident)",
+        "Si el vehicle no s'utilitza: aconsellar baixa temporal"
       ],
-      "document": "Butlletí",
-      "base_legal": ["Art. 10 RGV", "Art. 76.l TRLSV"]
+      "info": "La sanció es considera infracció continuada — pot arribar més d'una sanció si no es passa ITV"
     },
-    "fi_greu_itv_desfavorable_fora": {
+
+    "fi_desfavorable_circulant": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Circular amb ITV desfavorable fora termini",
-      "text": "El Catàleg SCT tipifica 'Circular sense autorització per ITV desfavorable' com a GREU.",
-      "import": "200 € (100 € amb pagament voluntari)",
-      "punts": "0 punts",
-      "accions": [
+      "titol": "⚠️ GREU — Circulant amb ITV desfavorable (no al taller)",
+      "concepte_butlleta": "Circular amb el vehicle ressenyat sense tenir l'autorització administrativa per circular a causa d'una inspecció tècnica desfavorable",
+      "article_butlleta": "Art. 10.1 RGV",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
+      "accions_operatives": [
         "Butlletí al titular",
-        "Advertiment que ha de passar nova ITV",
-        "Immobilització només si hi ha risc evident per la seguretat"
-      ],
-      "base_legal": ["Art. 10.1 RGV"]
+        "Possible immobilització si risc per la seguretat",
+        "Indicar que cal anar al taller / nova ITV"
+      ]
     },
-    "fi_mg_itv_negativa": {
+
+    "fi_desfavorable_fora": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "🔴 Infracció MOLT GREU — ITV negativa",
-      "text": "Vehicle amb deficiències que impedeixen circular amb seguretat",
-      "import": "500 €",
-      "accions": [
-        "Immobilització immediata",
-        "Grua a taller",
-        "No pot circular fins reparació i nova ITV"
-      ],
-      "base_legal": ["Art. 10 RGV", "Art. 77.l TRLSV"]
+      "titol": "⚠️ GREU — ITV desfavorable fora dels 2 mesos",
+      "article_butlleta": "Art. 10.1 RGV",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0"
     },
-    "fi_mg_itv_mai": {
+
+    "fi_negativa": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "🔴 Infracció MOLT GREU — Vehicle mai inspeccionat",
-      "import": "500 €",
-      "accions": [
+      "titol": "🔴 MOLT GREU — ITV negativa (defectes greus)",
+      "concepte_butlleta": "Circular amb el vehicle ressenyat la inspecció tècnica del qual ha resultat negativa, per incomplir aquest vehicle les condicions tècniques que afecten greument a la seguretat viària",
+      "article_butlleta": "Art. 10.1 RGV",
+      "import": "500 € (DTE 250 €)",
+      "punts": "0",
+      "accions_operatives": [
+        "IMMOBILITZACIÓ immediata",
+        "Grua a taller (no a domicili)",
+        "Butlletí al titular",
+        "No pot circular fins reparació + nova ITV favorable"
+      ]
+    },
+
+    "fi_mai_itv": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🔴 MOLT GREU — Vehicle mai inspeccionat",
+      "concepte_butlleta": "Circular amb el vehicle ressenyat sense tenir l'autorització administrativa per circular a causa d'una inspecció tècnica negativa per incompliment de condicions tècniques",
+      "article_butlleta": "Art. 10.1 RGV",
+      "import": "500 € (DTE 250 €)",
+      "accions_operatives": [
         "Immobilització",
-        "Grua",
-        "Butlletí al titular",
-        "Comprovar si a més està matriculat i assegurat"
-      ],
-      "base_legal": ["Art. 10 RGV"]
+        "Comprovar que efectivament està matriculat",
+        "Si no matriculat: Art. 1.1 RGV (MG 500€)",
+        "Comprovar assegurança"
+      ]
+    },
+
+    "fi_reforma": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Reforma d'importància no homologada",
+      "concepte_butlleta": "Efectuar en el vehicle ressenyat una reforma d'importància sense autorització o sense haver passat la inspecció tècnica corresponent (cal especificar la reforma)",
+      "article_butlleta": "Art. 7.2 RGV",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
+      "info_reformes_habituals": [
+        "Canvi de motor / sistema d'alimentació",
+        "Suspensió rebaixada / pujada / canviada",
+        "Pneumàtics / llantes mides no homologades",
+        "Carrosseria modificada (paragolps, eixamples, etc.)",
+        "Tracció afegida / modificada",
+        "Sistema d'escapament modificat (sense homologació)",
+        "Sistema d'enllumenat (LEDs no homologats, cèrcols, etc.)"
+      ]
     }
   },
-  "notes": [
-    "NO es pot exigir ITV per motiu de tintats o altres modificacions aïllades si la ITV vigent és favorable (Sentència TSJ Catalunya).",
-    "La infracció és del TITULAR, no del conductor."
+  "notes_finals": [
+    "ATENCIÓ: NO es pot exigir passar ITV per motiu únic de tintats o altres modificacions estètiques aïllades si la ITV vigent és FAVORABLE — així ho ha establert jurisprudència (TSJ Catalunya). Cal que la deficiència estigui dins el barem ITV.",
+    "La infracció és del TITULAR, no del conductor (excepte coincidència).",
+    "Si vehicle ha passat ITV el mateix dia (i va camí d'arxivar adhesiu): donar marge raonable.",
+    "Adhesiu parabrisa: és informatiu. La realitat la marca la base de dades DGT.",
+    "Si ITV desfavorable per defecte que afecta seguretat (frens, direcció...): immobilització encara que digui 'desfavorable'."
   ]
 }

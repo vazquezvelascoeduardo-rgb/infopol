@@ -3,190 +3,235 @@
   "titol": "Accident de trànsit",
   "categoria": "transit",
   "icono": "💥",
-  "base_legal": ["Art. 51 TRLSV (auxili)", "Art. 195 CP (omissió socors)", "Art. 382 CP", "Art. 382 bis CP (fuga)"],
+  "base_legal": [
+    "Art. 51 TRLSV (auxili)",
+    "Art. 129 RGC (comportament)",
+    "Art. 195 CP (omissió socors)",
+    "Art. 382 CP (concurs)",
+    "Art. 382 bis CP (fuga amb víctimes)",
+    "Arts. 142, 152 CP (homicidi/lesions imprudents)"
+  ],
+  "prioritats_actuacio": [
+    "1r: Seguretat agents i víctimes",
+    "2n: Auxili sanitari (SEM)",
+    "3r: Senyalització i protecció escena",
+    "4t: Identificació i recollida proves",
+    "5è: Atestat i diligències"
+  ],
   "inici": "tipus_accident",
   "nodes": {
+
     "tipus_accident": {
       "titol": "Tipus d'accident",
-      "text": "Quina és la situació?",
       "opcions": [
-        { "etiqueta": "Sense víctimes, només danys materials",  "va_a": "danys_tipus" },
-        { "etiqueta": "Amb ferits lleus",                       "va_a": "amb_victimes" },
-        { "etiqueta": "Amb ferits greus o morts",               "va_a": "amb_victimes" },
-        { "etiqueta": "Atropellament de vianant/ciclista",      "va_a": "amb_victimes" },
-        { "etiqueta": "Fuga després de l'accident",             "va_a": "fuga_circumstancies" }
-      ]
-    },
-    "danys_tipus": {
-      "titol": "Només danys materials",
-      "text": "Estan presents els conductors i intercanvien dades?",
-      "opcions": [
-        { "etiqueta": "Sí, col·laboren",                       "va_a": "fi_ok_comunicat" },
-        { "etiqueta": "No col·laboren / discussió",            "va_a": "fi_actuacio_desavinenca" },
-        { "etiqueta": "Un s'ha fugat",                         "va_a": "fuga_circumstancies" }
-      ]
-    },
-    "amb_victimes": {
-      "titol": "Actuació prioritària — auxili",
-      "text": "La primera obligació és auxiliar. Seguir aquesta seqüència:",
-      "info": "1) Seguretat de l'escena 2) Sanitaris (112/SEM) 3) Bombers si atrapats 4) Protecció dels vehicles 5) Desviament trànsit",
-      "opcions": [
-        { "etiqueta": "Auxili prestat i sanitaris a camí — continuar amb el procediment", "va_a": "alcohol_drogues_obligat" }
-      ]
-    },
-    "alcohol_drogues_obligat": {
-      "titol": "Proves obligatòries",
-      "text": "En accidents amb víctimes, TOTS els conductors implicats han de fer proves d'alcohol i drogues (Art. 14.2 TRLSV).",
-      "opcions": [
-        { "etiqueta": "Totes negatives — continuar",                 "va_a": "tipus_lesions" },
-        { "etiqueta": "Alguna positiva administrativa",               "va_a": "fi_atestat_victimes_admin" },
-        { "etiqueta": "Alguna positiva penal (>0,60 / influència)",   "va_a": "fi_atestat_victimes_penal" },
-        { "etiqueta": "Es nega algun a fer la prova",                 "va_a": "fi_atestat_383" }
-      ]
-    },
-    "tipus_lesions": {
-      "titol": "Gravetat de les lesions",
-      "text": "Com valoren el SEM les lesions?",
-      "opcions": [
-        { "etiqueta": "Ferits lleus (parte mèdic senzill)",           "va_a": "fi_atestat_lleus" },
-        { "etiqueta": "Ferits greus (tractament mèdic/quirúrgic)",    "va_a": "fi_atestat_greus" },
-        { "etiqueta": "Mort en l'acte o a l'hospital",                "va_a": "fi_atestat_mort" }
-      ]
-    },
-    "fuga_circumstancies": {
-      "titol": "Fuga — circumstàncies",
-      "text": "Hi ha víctimes o només danys?",
-      "opcions": [
-        { "etiqueta": "Fuga sense víctimes (només danys)",            "va_a": "fi_fuga_admin" },
-        { "etiqueta": "Fuga amb víctimes (ferits o mort)",            "va_a": "fi_fuga_382bis" }
+        { "etiqueta": "Sense víctimes — només danys materials",            "va_a": "danys_situacio" },
+        { "etiqueta": "Amb ferits lleus (parte mèdic senzill)",            "va_a": "amb_victimes" },
+        { "etiqueta": "Amb ferits greus o tractament mèdic/quirúrgic",     "va_a": "amb_victimes" },
+        { "etiqueta": "Amb mort/s",                                         "va_a": "amb_victimes" },
+        { "etiqueta": "Atropellament vianant/ciclista",                    "va_a": "amb_victimes" },
+        { "etiqueta": "Fuga del lloc",                                     "va_a": "fuga_circumstancies" }
       ]
     },
 
-    "fi_ok_comunicat": {
+    "danys_situacio": {
+      "titol": "Només danys — situació",
+      "opcions": [
+        { "etiqueta": "Conductors col·laboren, intercanvien dades",  "va_a": "fi_amistos" },
+        { "etiqueta": "No col·laboren / disputa",                    "va_a": "fi_diligencies_admin" },
+        { "etiqueta": "Un conductor s'ha fugat",                     "va_a": "fuga_circumstancies" }
+      ]
+    },
+
+    "amb_victimes": {
+      "titol": "Actuació prioritària — auxili",
+      "info": "Seqüència: 1) Seguretat 2) SEM/112 3) Bombers si atrapats 4) Protecció vehicles 5) Desviament trànsit",
+      "opcions": [
+        { "etiqueta": "Auxili prestat — continuar procediment", "va_a": "alcohol_drogues_obligat" }
+      ]
+    },
+
+    "alcohol_drogues_obligat": {
+      "titol": "Proves d'alcohol/drogues OBLIGATÒRIES",
+      "text": "Tots els conductors implicats han de fer prova (Art. 14.2 TRLSV)",
+      "opcions": [
+        { "etiqueta": "Totes negatives",                       "va_a": "tipus_lesions" },
+        { "etiqueta": "Alguna positiva ADMINISTRATIVA",        "va_a": "fi_atestat_victimes_admin" },
+        { "etiqueta": "Alguna POSITIVA PENAL (>0,60 / influència drogues)", "va_a": "fi_atestat_victimes_penal" },
+        { "etiqueta": "Algun es nega a fer prova",             "va_a": "fi_atestat_383" }
+      ]
+    },
+
+    "tipus_lesions": {
+      "titol": "Gravetat lesions (valoració SEM)",
+      "opcions": [
+        { "etiqueta": "Ferits lleus (sense tractament)",       "va_a": "fi_atestat_lleus" },
+        { "etiqueta": "Lesions amb tractament (Art. 147 CP)",  "va_a": "fi_atestat_greus" },
+        { "etiqueta": "Lesions molt greus (149/150 CP)",       "va_a": "fi_atestat_greus" },
+        { "etiqueta": "Mort en l'acte / hospital",             "va_a": "fi_atestat_mort" }
+      ]
+    },
+
+    "fuga_circumstancies": {
+      "titol": "Fuga — circumstàncies",
+      "opcions": [
+        { "etiqueta": "Sense víctimes (només danys)",          "va_a": "fi_fuga_admin" },
+        { "etiqueta": "Amb víctimes (ferits/morts)",           "va_a": "fi_fuga_382bis" }
+      ]
+    },
+
+    "fi_amistos": {
       "final": true,
       "tipus": "ok",
-      "titol": "ℹ️ Gestió amistosa",
-      "accio": "Si només hi ha danys i col·laboren: omplir part amistós. Policia pot no intervenir-hi formalment, només assistir si es demana."
+      "titol": "ℹ️ Gestió amistosa — declaració amistosa",
+      "accio": "Si hi ha col·laboració: omplir part amistós (DAA). Policia pot no intervenir formalment, només assistir si es demana.",
+      "documentacio": "Si l'agent hi acut, anotació al servei. No cal atestat."
     },
-    "fi_actuacio_desavinenca": {
+
+    "fi_diligencies_admin": {
       "final": true,
       "tipus": "administrativa",
       "titol": "📋 Diligències de trànsit",
-      "accions": [
-        "Recollir dades de tots dos: DNI, permís, assegurança, matrícula",
-        "Fotografies de l'escena, vehicles, danys",
-        "Croquis si cal",
-        "Determinar responsabilitats segons normativa (prioritat, senyals…)",
-        "Butlletí al responsable de la infracció causant"
+      "accions_ordenades": [
+        "1. Recollir DADES tots dos: DNI, permís, assegurança, matrícula, vehicle, asseguradora",
+        "2. FOTOGRAFIES exhaustives: escena, vehicles, danys, posicions",
+        "3. CROQUIS si cal (esquemàtic, mesures aproximades)",
+        "4. DECLARACIONS conductors i testimonis",
+        "5. Determinar RESPONSABILITAT (prioritat, semàfors, senyals)",
+        "6. BUTLLETÍ al causant per la infracció que ha originat l'accident",
+        "7. Diligència d'accident"
       ],
-      "document": "Acta d'accident + butlletí si escau"
+      "documentacio": "Acta accident + butlletí al responsable + croquis + fotos"
     },
+
     "fi_atestat_lleus": {
       "final": true,
       "tipus": "mixta",
-      "titol": "📋 Atestat per lesions lleus",
-      "text": "Lesions que no requereixen tractament mèdic o quirúrgic → no és delicte de lesions (Art. 147 CP requereix tractament). Via administrativa + civil.",
-      "accions": [
-        "Recollida dades complerta",
-        "Parte mèdic",
-        "Fotografies, croquis",
+      "titol": "📋 Atestat — lesions lleus",
+      "text": "Lesions sense tractament = NO és delicte de lesions (cal tractament per Art. 147 CP). Via administrativa + civil.",
+      "accions_ordenades": [
+        "Recollida exhaustiva dades",
+        "Parte mèdic preceptiu (insistir que vagin a urgències)",
+        "Fotografies + croquis",
         "Alcohol/drogues a tots els conductors",
-        "Butlletí pel responsable de la infracció causant"
-      ],
-      "document": "Atestat de trànsit + butlletí"
+        "Butlletí al responsable de la infracció causant"
+      ]
     },
+
     "fi_atestat_greus": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 Atestat PENAL — Lesions greus per imprudència",
-      "text": "Si hi ha imprudència greu + lesions greus: Art. 152 CP",
-      "pena_reference": "Art. 152 CP — presó 3 mesos-3 anys + privació permís 1-4 anys",
-      "accions": [
-        "Auxili prioritari",
-        "Alcohol/drogues obligatori",
-        "Protecció de l'escena fins que arribin ATGC/Mossos Trànsit si cal",
-        "Inspecció ocular i recollida d'evidències",
-        "Atestat penal complet",
-        "Comunicació al Jutjat"
+      "titol": "🚔 Atestat PENAL — lesions amb tractament (Art. 152 CP)",
+      "pena_referencial": "Imprudència greu: presó 3 mesos-3 anys + privació permís 1-4 anys",
+      "accions_ordenades": [
+        "1. AUXILI prioritari + SEM",
+        "2. Alcohol/drogues OBLIGATORI tots conductors",
+        "3. PROTECCIÓ ESCENA fins arribada ATGC/Mossos Trànsit (si correspongui)",
+        "4. INSPECCIÓ OCULAR amb fotografies, croquis, mesures",
+        "5. RECOLLIDA D'EVIDÈNCIES (vidres, fragments, traces frenada)",
+        "6. DECLARACIONS conductors i testimonis",
+        "7. PARTES MÈDICS (originals i còpies)",
+        "8. ATESTAT PENAL complet",
+        "9. Comunicació Jutjat"
       ],
-      "base_legal": ["Art. 152 CP", "Art. 142 CP si mort"]
+      "documentacio": "Atestat penal + acta inspecció ocular + parte mèdic + declaracions + fotos + croquis amb mesures"
     },
+
     "fi_atestat_mort": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 Atestat PENAL — Homicidi per imprudència (Art. 142 CP)",
-      "pena_reference": "Imprudència greu: presó 1-4 anys + privació 1-6 anys. Imprudència menys greu: multa 3-18 mesos + privació fins 18 mesos.",
-      "accions": [
-        "Preservació escena (no moure res)",
-        "Comunicar Jutjat de Guàrdia immediatament",
-        "Comunicar a la família amb assistència (treball social, psicòleg)",
-        "Inspecció tècnica — avisar unitat especialitzada",
-        "Fotografia, croquis detallat, mesurament",
-        "Alcohol/drogues obligatori al conductor supervivent",
-        "Atestat complet amb totes les diligències"
+      "titol": "🚔 Atestat PENAL — Homicidi imprudent (Art. 142 CP)",
+      "pena_imprudencia_greu": "Presó 1-4 anys + privació permís 1-6 anys",
+      "pena_imprudencia_menys_greu": "Multa 3-18 mesos + privació fins 18 mesos",
+      "accions_ordenades_critiques": [
+        "1. PRESERVACIÓ ESCENA com escena de crim — NO moure res",
+        "2. Comunicació IMMEDIATA Jutjat Guàrdia",
+        "3. Comunicar família amb tacte (treball social, psicòleg si possible)",
+        "4. Inspecció TÈCNICA — avisar unitat especialitzada",
+        "5. Fotografies, croquis MOLT detallat amb mesures",
+        "6. Recollida fragments, vidres, frenades",
+        "7. Alcohol/drogues OBLIGATORI conductor supervivent",
+        "8. ESPERAR aixecament cadàver judicial",
+        "9. ATESTAT COMPLET amb totes les diligències"
       ],
-      "base_legal": ["Art. 142 CP"]
+      "documentacio_clau": "Atestat penal + inspecció ocular + croquis amb mesures + fotos + alcohol/drogues + parte mèdic forense"
     },
+
     "fi_atestat_victimes_admin": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Accident amb víctimes + alcohol/drogues administratiu",
+      "titol": "⚠️ Accident + alcohol/drogues administratiu",
       "accions": [
         "Auxili prioritari",
-        "Tramitar sanció administrativa (500€/1000€ + 4/6 punts)",
-        "Atestat d'accident amb valoració mèdica",
-        "Si lesions greus/mort → via penal"
+        "Tramitar sanció alcohol (500€/1000€ + 4/6 punts)",
+        "Atestat accident",
+        "Si lesions greus/mort: derivar a via penal igualment"
       ]
     },
+
     "fi_atestat_victimes_penal": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 Accident + alcohol/drogues PENAL",
-      "text": "Concurrència: Art. 379.2 CP + Art. 152 / 142 CP (lesions o homicidi imprudent)",
-      "accions": [
-        "Detenció del conductor",
+      "text": "Concurs ideal: Art. 379.2 CP + Art. 152/142 CP",
+      "accions_ordenades": [
+        "Detenció conductor",
         "Alcohol evidencial amb totes les garanties",
-        "Atestat penal",
-        "Jutjat de Guàrdia"
+        "Atestat penal amb concurs",
+        "Posada a disposició Jutjat Guàrdia"
       ]
     },
+
     "fi_atestat_383": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 Accident + negativa a proves (Art. 383 CP)",
-      "accions": [
-        "Advertiment formal reiterat",
+      "titol": "🚔 Accident + negativa proves (Art. 383 CP)",
+      "accions_ordenades": [
+        "Advertiment formal reiterat documentat",
         "Detenció",
-        "Atestat penal amb diligència de negativa",
-        "Jutjat de Guàrdia"
+        "Atestat penal amb diligència negativa",
+        "Posada a disposició Jutjat Guàrdia"
       ]
     },
+
     "fi_fuga_admin": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Fuga sense víctimes",
-      "text": "No és delicte penal si no hi ha víctimes, però sí infracció administrativa greu (Art. 76.n TRLSV — no facilitar identitat) + possible denúncia civil.",
+      "titol": "⚠️ GREU — Fuga sense víctimes",
+      "concepte_butlleta": "Fugir del lloc de l'accident, estant-hi implicat, sense facilitar les dades a la resta de persones implicades o als agents de l'autoritat",
+      "article_butlleta": "Art. 129.2.b RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
       "accions": [
-        "Recopilar dades/matrícula per testimonis o càmeres",
-        "Localitzar el titular del vehicle fugat",
-        "Butlletí per fugir sense donar dades"
-      ],
-      "base_legal": ["Art. 76.n TRLSV"]
+        "Recopilar dades/matrícula via testimonis o càmeres",
+        "Localitzar titular del vehicle fugat",
+        "Butlletí per fugir i Art. 129.2.f (no facilitar identitat)"
+      ]
     },
+
     "fi_fuga_382bis": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE — Art. 382 bis CP (abandonament lloc accident)",
-      "text": "Conductor causant que, havent ocasionat ferits greus o mort, abandona el lloc sense estar justificat.",
-      "pena": "Presó 6 mesos - 4 anys + privació permís 1-4 anys",
-      "accions": [
-        "Auxili a víctimes com a prioritat absoluta",
+      "titol": "🚔 DELICTE — Art. 382 bis CP (fuga amb víctimes)",
+      "text": "Conductor causant que abandona víctimes greus o mortes sense justificació",
+      "pena_apartat_1": "Si víctimes mortes/greus: presó 6 mesos - 4 anys + privació 2-6 anys",
+      "pena_apartat_2": "Forma bàsica: presó 3 mesos - 1 any + privació 1-4 anys",
+      "concurs_195_cp": "Possible concurs amb Art. 195 CP (omissió socors): presó 6 mesos - 1 any si causant",
+      "accions_ordenades": [
+        "Auxili a víctimes — PRIORITAT ABSOLUTA",
         "Recerca activa del fugat",
         "Atestat penal complet",
-        "Jutjat de Guàrdia",
-        "Possible concurrència amb Art. 195 CP (omissió del deure de socors): presó 6 mesos-1 any"
-      ],
-      "base_legal": ["Art. 382 bis CP", "Art. 195 CP"]
+        "Possible concurs Art. 195 CP",
+        "Posada a disposició Jutjat Guàrdia"
+      ]
     }
-  }
+  },
+  "notes_finals": [
+    "L'art. 195 CP (omissió socors) és COMPATIBLE amb 382 bis. Si causant + omissió: pot ser presó 6 mesos - 4 anys.",
+    "El parte mèdic és la PROVA que decideix Art. 147 CP (lesions). Insistir en obtenir-lo.",
+    "Tots els implicats: alcohol/drogues OBLIGATORI (Art. 14.2 TRLSV).",
+    "Croquis: ha d'incloure mesures, posicions, sentit marxa, senyalització, semàfors, hora, condicions.",
+    "Inspecció ocular: NO moure res fins documentació completa.",
+    "Si vehicle no assegurat: addicionalment Consorci.",
+    "Si causant fuga sense localitzar: butlletí provisional al titular del vehicle (DGT) + recerca."
+  ]
 }

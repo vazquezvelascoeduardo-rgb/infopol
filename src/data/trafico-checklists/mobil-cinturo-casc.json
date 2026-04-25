@@ -1,122 +1,211 @@
 {
   "id": "mobil-cinturo-casc",
-  "titol": "Mòbil / cinturó / casc",
+  "titol": "Mòbil / cinturó / casc / armilla",
   "categoria": "transit",
   "icono": "📱",
-  "base_legal": ["Art. 18 RGC", "Arts. 117-118 RGC", "Llei 18/2021"],
+  "base_legal": [
+    "Art. 18.1 i 18.2 RGC",
+    "Arts. 117 i 118 RGC",
+    "Art. 76.G i 76.M TRLSV"
+  ],
   "inici": "tipus_infraccio",
   "nodes": {
+
     "tipus_infraccio": {
       "titol": "Quina infracció has detectat?",
-      "text": "Tria la conducta observada:",
+      "text": "Tria la conducta:",
       "opcions": [
-        { "etiqueta": "Ús del telèfon mòbil a la mà",        "va_a": "mobil_tipus" },
-        { "etiqueta": "Ús d'auriculars / cascos mentre condueix","va_a": "fi_auriculars" },
-        { "etiqueta": "Pantalla manipulada mentre condueix",  "va_a": "fi_pantalla" },
-        { "etiqueta": "Sense cinturó (conductor adult)",      "va_a": "fi_cinturo_adult" },
-        { "etiqueta": "Sense cinturó (passatger adult)",      "va_a": "fi_cinturo_passatger" },
-        { "etiqueta": "Menor sense sistema de retenció",      "va_a": "fi_menor_srif" },
-        { "etiqueta": "Sense casc (conductor moto/ciclomotor)","va_a": "fi_casc_conductor" },
-        { "etiqueta": "Sense casc (passatger moto)",          "va_a": "fi_casc_passatger" },
-        { "etiqueta": "Sense casc (ciclista en via interurbana o menor)","va_a": "fi_casc_bici" }
-      ]
-    },
-    "mobil_tipus": {
-      "titol": "Ús del mòbil",
-      "text": "Com l'està utilitzant?",
-      "opcions": [
-        { "etiqueta": "Agafant-lo amb la mà",                  "va_a": "fi_mobil_ma" },
-        { "etiqueta": "Manipulant-lo (encara que estigui en suport)","va_a": "fi_mobil_ma" },
-        { "etiqueta": "Mans lliures / veu (Bluetooth correctament)","va_a": "fi_ok_mobil" }
+        { "etiqueta": "Mòbil — agafat amb la mà",                            "va_a": "fi_mobil_ma" },
+        { "etiqueta": "Mòbil — ajustat entre casc i cap",                    "va_a": "fi_mobil_casc" },
+        { "etiqueta": "Mòbil — manipulant en suport (toques pantalla)",      "va_a": "fi_mobil_manipulant" },
+        { "etiqueta": "Auriculars / cascos connectats",                       "va_a": "fi_auriculars" },
+        { "etiqueta": "Pantalla incompatible amb atenció (TV, GPS amb intervenció)", "va_a": "fi_pantalla" },
+        { "etiqueta": "Sense cinturó — conductor adult",                     "va_a": "fi_cinturo_adult" },
+        { "etiqueta": "Sense cinturó — passatger adult",                     "va_a": "fi_cinturo_passatger" },
+        { "etiqueta": "Menor ≤135 cm sense SRI al darrere",                  "va_a": "fi_menor_srif_darrere" },
+        { "etiqueta": "Menor ≤135 cm al davant (prohibit en general)",       "va_a": "fi_menor_davant" },
+        { "etiqueta": "Vehicle sense cinturons instal·lats (havent-ho de tenir)", "va_a": "fi_no_instal_lats" },
+        { "etiqueta": "No informar passatgers (transport >9 places)",        "va_a": "fi_no_informar" },
+        { "etiqueta": "Conductor moto/ciclomotor sense casc",                "va_a": "fi_casc_conductor" },
+        { "etiqueta": "Passatger moto/ciclomotor sense casc",                "va_a": "fi_casc_passatger" },
+        { "etiqueta": "Ciclista sense casc (interurbà o menor)",             "va_a": "fi_casc_bici" },
+        { "etiqueta": "Sense armilla reflectant fora del vehicle",           "va_a": "fi_armilla" }
       ]
     },
 
-    "fi_ok_mobil": {
-      "final": true,
-      "tipus": "ok",
-      "titol": "✅ Ús correcte",
-      "accio": "El mans lliures no sancionable si no distreu"
-    },
     "fi_mobil_ma": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Ús del mòbil a la mà",
-      "import": "200 € (100 € amb pagament voluntari)",
+      "titol": "⚠️ GREU — Mòbil agafat amb la mà",
+      "concepte_butlleta": "Utilitzar, mantenint-lo amb la mà, dispositius de telefonia mòbil mentre es condueix",
+      "article_butlleta": "Art. 76.G TRLSV",
+      "import": "200 € (DTE 100 €)",
       "punts": "–6 punts",
-      "document": "Butlletí",
-      "base_legal": ["Art. 76.G TRLSV"]
+      "info": "Inclou consultar pantalla, escriure, parlar, fotografiar, etc., qualsevol manipulació amb el dispositiu a la mà"
     },
+
+    "fi_mobil_casc": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Mòbil entre casc i cap (motorista)",
+      "concepte_butlleta": "Utilitzar, mantenint-lo ajustat entre el casc i el cap, un dispositiu de telefonia mòbil mentre es condueix",
+      "article_butlleta": "Art. 76.G TRLSV",
+      "import": "200 € (DTE 100 €)",
+      "punts": "–3 punts"
+    },
+
+    "fi_mobil_manipulant": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Mòbil/navegador requerint intervenció manual",
+      "concepte_butlleta": "Conduir utilitzant dispositius de telefonia mòbil, navegadors o qualsevol altre sistema de comunicació que requereix intervenció manual del conductor",
+      "article_butlleta": "Art. 18.2 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "–3 punts",
+      "info": "Permet mans lliures (Bluetooth, micròfons) si NO requereix manipulació manual"
+    },
+
     "fi_auriculars": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Ús d'auriculars",
-      "import": "200 € (100 € amb pagament voluntari)",
+      "titol": "⚠️ GREU — Auriculars/cascos",
+      "concepte_butlleta": "Conduir utilitzant cascos o auriculars connectats a aparells receptors o reproductors de so",
+      "article_butlleta": "Art. 18.2 RGC",
+      "import": "200 € (DTE 100 €)",
       "punts": "–3 punts",
-      "base_legal": ["Art. 18.2 RGC"]
+      "excepcions": "Ensenyament conducció + proves examen moto"
     },
+
     "fi_pantalla": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Pantalla incompatible amb atenció",
-      "text": "Pantalles visuals incompatibles amb l'atenció permanent a la conducció",
-      "import": "200 € (100 € amb pagament voluntari)",
+      "titol": "⚠️ GREU — Pantalla incompatible",
+      "concepte_butlleta": "Circular amb un vehicle utilitzant pantalles visuals incompatibles amb l'atenció permanent a la conducció (especificar tipus d'aparell)",
+      "article_butlleta": "Art. 18.1 RGC",
+      "import": "200 € (DTE 100 €)",
       "punts": "–3 punts",
-      "base_legal": ["Art. 18.1 RGC"]
+      "exemples": "TV, vídeo/DVD, pantalles amb internet (Netflix, etc.). Permès: GPS, càmera maniobres, accés/baixada vianants"
     },
+
     "fi_cinturo_adult": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Sense cinturó (conductor)",
-      "import": "200 € (100 € amb pagament voluntari)",
-      "punts": "–4 punts",
-      "base_legal": ["Art. 117.1 RGC"]
+      "titol": "⚠️ GREU — Conductor sense cinturó",
+      "concepte_butlleta": "No utilitzar, o utilitzar inadequadament, la persona denunciada, el cinturó de seguretat",
+      "article_butlleta": "Art. 117.1 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "–4 punts (només al conductor)"
     },
+
     "fi_cinturo_passatger": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Passatger sense cinturó",
-      "import": "200 € (100 € amb pagament voluntari)",
-      "punts": "0 punts (els 4 punts només al conductor)",
-      "info": "Si el passatger és menor: sanció al conductor. Si és adult: al passatger.",
-      "base_legal": ["Art. 117.1 RGC"]
+      "titol": "⚠️ GREU — Passatger sense cinturó",
+      "concepte_butlleta": "No utilitzar, o utilitzar inadequadament, la persona denunciada, el cinturó de seguretat",
+      "article_butlleta": "Art. 117.1 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0 al passatger / 4 al conductor si passatger és menor",
+      "info": "Si passatger és adult: sanció al passatger. Si menor: sanció al conductor (responsabilitat). Si vehicle transport >9 places: sanció al passatger directament."
     },
-    "fi_menor_srif": {
+
+    "fi_menor_srif_darrere": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Menor ≤135 cm sense SRI",
-      "import": "200 € (100 € amb pagament voluntari)",
-      "punts": "–4 punts al conductor",
-      "info": "Sistemes de Retenció Infantil obligatoris per menors de 135 cm",
-      "accions": [
-        "Si la situació és de perill clar: immobilitzar fins que es solucioni",
-        "Art. 117.5 RGC (no tenir cinturons instal·lats) = MG 500€"
-      ],
-      "base_legal": ["Art. 117.3 RGC"]
+      "titol": "⚠️ GREU — Menor ≤135 cm sense SRI",
+      "concepte_butlleta": "Circular amb un menor d'edat d'alçada igual o inferior a 135 cm en el seient posterior sense utilitzar, o utilitzant inadequadament un sistema de subjecció homologat",
+      "article_butlleta": "Art. 117.3 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "–4 punts al CONDUCTOR",
+      "responsabilitat": "Sempre del CONDUCTOR del vehicle (vehicles <9 places)"
     },
+
+    "fi_menor_davant": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Menor ≤135 cm al seient davanter",
+      "concepte_butlleta": "Circular amb un menor d'edat d'alçada igual o inferior a 135 cm en el seient davanter del vehicle quan està prohibit fer-ho",
+      "article_butlleta": "Art. 117.3 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "–4 punts al conductor (si SRI inadequat)",
+      "excepcions_legitimes": [
+        "Vehicle no disposa de seients posteriors",
+        "Tots els seients posteriors estan ocupats per altres menors",
+        "No es pot instal·lar tots els SRI als seients posteriors"
+      ],
+      "info": "Si l'excepció es compleix, el menor pot anar al davant però SEMPRE amb SRI homologat"
+    },
+
+    "fi_no_instal_lats": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🔴 MOLT GREU — Cinturons no instal·lats",
+      "concepte_butlleta": "No tenir instal·lats en el vehicle els cinturons de seguretat",
+      "article_butlleta": "Art. 117.5 RGC",
+      "import": "500 € (DTE 250 €)",
+      "punts": "0",
+      "info_aplicabilitat": "Obligatoris en vehicles matriculats des del 15-06-1992. Vehicles transport > 8 places i mercaderies > 3.500 kg: matriculats des del 20-10-2007."
+    },
+
+    "fi_no_informar": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "ℹ️ LLEU — No informar passatgers",
+      "concepte_butlleta": "Incomplir l'obligació d'informar als passatgers sobre l'ús del cinturó de seguretat o sistema de retenció homologat en els vehicles destinats al transport de passatgers de més de nou places",
+      "article_butlleta": "Art. 117.2 RGC",
+      "import": "80 € (DTE 40 €)",
+      "punts": "0",
+      "info": "Conductors d'autobusos: obligació d'informar abans de l'inici del trajecte"
+    },
+
     "fi_casc_conductor": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Conductor sense casc",
-      "import": "200 € (100 € amb pagament voluntari)",
+      "titol": "⚠️ GREU — Conductor moto/ciclomotor sense casc",
+      "concepte_butlleta": "No utilitzar, o utilitzar inadequadament, la persona denunciada, el casc de protecció homologat",
+      "article_butlleta": "Art. 118.1 RGC",
+      "import": "200 € (DTE 100 €)",
       "punts": "–4 punts",
-      "base_legal": ["Art. 118.1 RGC"]
+      "excepcions": "Motos/quads/ciclomotors amb estructura d'autoprotecció + cinturons (si consta a fitxa tècnica)"
     },
+
     "fi_casc_passatger": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Passatger sense casc",
-      "import": "200 € (100 € amb pagament voluntari)",
-      "punts": "–4 punts al conductor",
-      "base_legal": ["Art. 118.1 RGC"]
+      "titol": "⚠️ GREU — Passatger moto sense casc",
+      "concepte_butlleta": "No utilitzar, o utilitzar inadequadament, la persona denunciada, el casc de protecció homologat",
+      "article_butlleta": "Art. 118.1 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0 passatger / 4 al conductor si passatger menor"
     },
+
     "fi_casc_bici": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Ciclista sense casc",
-      "text": "Obligatori en via interurbana sempre; en urbana només menors de 16 anys",
-      "import": "200 €",
-      "punts": "0 punts",
-      "base_legal": ["Art. 118 RGC"]
+      "titol": "⚠️ GREU — Ciclista sense casc",
+      "concepte_butlleta": "No utilitzar, el conductor o el passatger d'una bicicleta, un casc de protecció homologat",
+      "article_butlleta": "Art. 118.1 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
+      "obligatorietat": "Vies interurbanes SEMPRE (excepte rampes ascendents llargues, raons mèdiques, calor extrema). Vies urbanes: només menors de 16 anys."
+    },
+
+    "fi_armilla": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Sense armilla reflectant",
+      "concepte_butlleta": "No utilitzar, o utilitzar inadequadament el conductor del vehicle ressenyat, que està fora del vehicle i ocupa la calçada o el voral de la via, una armilla reflectant d'alta visibilitat",
+      "article_butlleta": "Art. 118.3 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "–4 punts",
+      "obligatorietat": "Vies INTERURBANES quan el conductor surt del vehicle i ocupa la calçada/voral"
     }
-  }
+  },
+  "notes_finals": [
+    "Mòbil: el TS estableix que la simple acció de tenir-lo a la mà ja és infracció (no cal demostrar ús actiu).",
+    "El mans lliures no exempta de la responsabilitat si distreu greument la conducció.",
+    "Cinturons no instal·lats: vehicles antics (matriculats abans de 1992): NO obligatoris, però si en porten cal usar-los.",
+    "SRI menors: la responsabilitat és SEMPRE del conductor del vehicle (vehicles <9 places).",
+    "Casc de bici: legalment menors de 16 anys SEMPRE (urbà i interurbà). Adults: només interurbà.",
+    "L'armilla reflectant és obligatòria al vehicle (V-16 o similar) i s'ha de portar abans de baixar."
+  ]
 }

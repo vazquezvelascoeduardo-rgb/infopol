@@ -3,98 +3,127 @@
   "titol": "Conducció temerària / negligent",
   "categoria": "transit",
   "icono": "🚨",
-  "base_legal": ["Art. 77.e TRLSV", "Arts. 380-381 CP"],
+  "base_legal": [
+    "Art. 3.1 RGC",
+    "Arts. 380-381 CP",
+    "Art. 380.2 CP (presumpció)"
+  ],
+  "diferencia_clau": {
+    "negligent_admin": "Conducta descurada sense temeritat = Art. 3.1 RGC GREU 200€",
+    "temerari_admin": "Temeritat sense perill concret = Art. 3.1 RGC MG 500€/6pts",
+    "temerari_penal_380": "Temeritat AMB perill concret = Art. 380 CP",
+    "temerari_penal_381": "Manifest menyspreu vida = Art. 381 CP (més greu)"
+  },
   "inici": "gravetat",
   "nodes": {
+
     "gravetat": {
       "titol": "Caracterització de la conducta",
-      "text": "Com qualificaries la conducció?",
+      "text": "Com qualifiquies la conducció?",
       "opcions": [
-        { "etiqueta": "Negligent sense temeritat",               "va_a": "fi_greu_negligent" },
-        { "etiqueta": "Temerària sense perill concret",          "va_a": "fi_mg_temerari" },
-        { "etiqueta": "Temerària amb perill concret",            "va_a": "amb_alcohol_velocitat" },
-        { "etiqueta": "Manifest menyspreu per la vida",          "va_a": "fi_penal_381" }
+        { "etiqueta": "Negligent (descuidada, sense temeritat)",        "va_a": "fi_greu_negligent" },
+        { "etiqueta": "Temerària sense perill concret a tercers",       "va_a": "fi_mg_temerari" },
+        { "etiqueta": "Temerària AMB perill concret",                    "va_a": "circumstancies_concurrents" },
+        { "etiqueta": "Manifest menyspreu vida (extrem)",                "va_a": "fi_penal_381" }
       ]
     },
-    "amb_alcohol_velocitat": {
-      "titol": "Circumstàncies concurrents",
-      "text": "Concorre alguna d'aquestes circumstàncies? (Art. 380.2 CP — presumpció de temeritat)",
+
+    "circumstancies_concurrents": {
+      "titol": "Circumstàncies concurrents (Art. 380.2 CP)",
+      "text": "Concorre alcohol/drogues penal + velocitat penal?",
+      "info": "Si concorre 379.1 (velocitat penal) + 379.2 (alcohol/drogues penal) = PRESUMPCIÓ legal de temeritat",
       "opcions": [
-        { "etiqueta": "Excés velocitat penal + alcohol/drogues penal", "va_a": "fi_penal_380_presumpcio" },
-        { "etiqueta": "Només temeritat manifesta amb perill concret", "va_a": "fi_penal_380" }
+        { "etiqueta": "Sí, concorren velocitat penal + alcohol/drogues penal", "va_a": "fi_penal_380_presumpcio" },
+        { "etiqueta": "Només temeritat manifesta amb perill concret",          "va_a": "fi_penal_380" }
       ]
     },
 
     "fi_greu_negligent": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Conducció negligent",
-      "text": "Conducció descurada sense arribar a temeritat.",
-      "import": "200 € (100 € amb pagament voluntari)",
-      "punts": "0 punts",
-      "document": "Butlletí amb descripció detallada de la conducta observada",
-      "base_legal": ["Art. 3.1 RGC"]
+      "titol": "⚠️ GREU — Conducció negligent",
+      "concepte_butlleta": "Conduir de forma negligent (indicar la conducta)",
+      "article_butlleta": "Art. 3.1 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0 (GREU)",
+      "info": "S'INDICA la conducta concreta (parar bruscament sense motiu, fer ziga-zagues lentes, no respectar distàncies sense risc)"
     },
+
     "fi_mg_temerari": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "🔴 Infracció MOLT GREU — Conducció temerària",
-      "text": "Conducció temerària sense arribar a perill concret penal.",
-      "import": "500 € (250 € amb pagament voluntari)",
+      "titol": "🔴 MOLT GREU — Conducció temerària",
+      "concepte_butlleta": "Conduir de forma temerària (indicar detalladament el tipus de conducció)",
+      "article_butlleta": "Art. 3.1 RGC",
+      "import": "500 € (DTE 250 €)",
       "punts": "–6 punts",
-      "document": "Butlletí amb descripció detallada del tipus de conducció temerària",
-      "base_legal": ["Art. 3.1 RGC"]
+      "exemples": [
+        "Adelantaments perillosos repetits",
+        "Conducció a alta velocitat amb maniobres brusques",
+        "Saltar-se semàfors repetidament"
+      ]
     },
+
     "fi_penal_380": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE — Art. 380.1 CP (conducció temerària amb perill concret)",
-      "text": "Conducció manifestament temerària posant en perill concret la vida o integritat d'altres persones.",
+      "titol": "🚔 DELICTE — Art. 380.1 CP (temeritat amb perill concret)",
       "pena": "Presó 6 mesos - 2 anys + privació permís 1-6 anys",
-      "accions": [
-        "Detenció",
-        "Lectura de drets",
-        "Immobilització del vehicle",
-        "Atestat amb descripció molt detallada: maniobres, testimonis, càmeres",
-        "Fotografies / vídeos si és possible",
-        "Jutjat de Guàrdia"
+      "elements_a_acreditar": [
+        "Conducta manifestament temerària (descripció detallada)",
+        "PERILL CONCRET per a la vida o integritat de persona/es identificable/s",
+        "Conscient del risc"
       ],
-      "document": "Atestat penal + diligències amb testimonis + prova gràfica",
-      "base_legal": ["Art. 380 CP"]
+      "exemples_jurisprudència": [
+        "Conducció en sentit contrari per llarga distància",
+        "Ziga-zagues perilloses entre vehicles",
+        "Saltar semàfors repetidament amb trànsit",
+        "Embriaguesa evident amb perill a tercers"
+      ],
+      "accions_ordenades": [
+        "Aturada del vehicle (amb suport si cal)",
+        "Detenció",
+        "Lectura drets",
+        "Immobilització vehicle",
+        "Atestat amb DESCRIPCIÓ MOLT DETALLADA: maniobres concretes, velocitats, ubicacions, hora, trànsit, condicions",
+        "TESTIMONIS imprescindibles (altres conductors, vianants)",
+        "Fotografies/vídeos si possible",
+        "Posada a disposició Jutjat Guàrdia"
+      ]
     },
+
     "fi_penal_380_presumpcio": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Art. 380.2 CP (presumpció legal)",
-      "text": "Es presumeix la temeritat quan concorre velocitat penal (Art. 379.1) + alcohol/drogues penal (Art. 379.2).",
+      "text": "Es presumeix la temeritat per concurrència de velocitat penal + alcohol/drogues penal",
       "pena": "Presó 6 mesos - 2 anys + privació permís 1-6 anys",
-      "accions": [
-        "Detenció",
-        "Atestat amb constància dels dos elements (velocitat + alcohol/drogues)",
-        "Jutjat de Guàrdia"
-      ],
-      "base_legal": ["Art. 380.2 CP", "Art. 379 CP"]
+      "accions": "Mateixes que 380.1, acreditant ambdós elements (velocitat + alcohol/drogues)"
     },
+
     "fi_penal_381": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE GREU — Art. 381 CP (manifest menyspreu per la vida)",
-      "text": "Conducció temerària amb manifest menyspreu per la vida (actuar amb consciència del risc greu).",
-      "pena_perill": "Si hi ha perill concret: presó 2-5 anys + multa 12-24 mesos + privació permís 6-10 anys",
-      "pena_sense_perill": "Sense posar en perill concret: presó 1-2 anys + altres penes",
-      "accions": [
-        "Detenció",
-        "Atestat molt detallat: cal acreditar el dol eventual",
-        "Descripció de totes les circumstàncies (trànsit intens, zones escolars, hora punta…)",
-        "Testimonis imprescindibles",
-        "Jutjat de Guàrdia"
+      "titol": "🚔 DELICTE GREU — Art. 381 CP (manifest menyspreu vida)",
+      "pena_amb_perill": "Presó 2-5 anys + multa 12-24 mesos + privació permís 6-10 anys",
+      "pena_sense_perill_concret": "Presó 1-2 anys + altres",
+      "exemples": [
+        "Conducció en sentit contrari en autopista",
+        "Velocitat extrema en zona urbana molt poblada",
+        "Escapar de persecució policial en contramà"
       ],
-      "base_legal": ["Art. 381 CP"]
+      "elements_a_acreditar": [
+        "Temeritat 380",
+        "MENYSPREU MANIFEST per la vida d'altres (DOL EVENTUAL)",
+        "Consciència del risc greu i continuada"
+      ]
     }
   },
-  "notes": [
-    "Documentar MOLT bé la conducta: descripció narrativa, velocitat, maniobres, context (trànsit, vianants, zona), hora, meteorologia.",
-    "Testimonis són clau per sostenir Art. 380-381 CP al judici.",
-    "Si és possible: dashcam, càmeres de trànsit, particulars que gravin."
+  "notes_finals": [
+    "La diferència entre administratiu i penal és la PERILLOSITAT CONCRETA (no abstracta).",
+    "Documentar MOLT bé: descripció narrativa, velocitat, maniobres, context (trànsit, vianants, zona escolar/centre comercial), hora, meteorologia.",
+    "Testimonis són clau per sostenir 380-381 CP al judici.",
+    "Si possible: dashcam, càmeres trànsit, particulars que gravin.",
+    "Si combinat amb mort/lesions per imprudència: Art. 382 CP — concurs ideal."
   ]
 }

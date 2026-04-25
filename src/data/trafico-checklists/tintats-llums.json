@@ -3,86 +3,172 @@
   "titol": "Tintats i llums",
   "categoria": "transit",
   "icono": "🪟",
-  "base_legal": ["Art. 19 RGC", "Arts. 41-46 RGC (llums)", "Art. 76.l TRLSV"],
+  "base_legal": [
+    "Art. 19.1 i 19.2 RGC",
+    "Arts. 98-106 RGC (enllumenat)",
+    "Arts. 15-16 RGV"
+  ],
   "inici": "tipus",
   "nodes": {
+
     "tipus": {
-      "titol": "Quin element?",
-      "text": "Tria:",
+      "titol": "Element a denunciar",
       "opcions": [
-        { "etiqueta": "Vidres tintats",                         "va_a": "tintats_ubicacio" },
-        { "etiqueta": "Llums — cap llum funciona",              "va_a": "fi_llums_cap" },
-        { "etiqueta": "Llums — falta una llum (llarga, creuada, posició)","va_a": "fi_llums_una" },
-        { "etiqueta": "Llums — antireglamentàries (color, altura)","va_a": "fi_llums_antireg" },
-        { "etiqueta": "Llums — no les encén quan cal (nit, túnel, pluja)","va_a": "fi_llums_no_encendre" }
-      ]
-    },
-    "tintats_ubicacio": {
-      "titol": "Ubicació dels tintats",
-      "text": "On estan col·locats els tintats?",
-      "opcions": [
-        { "etiqueta": "Darrere (a partir del muntant B)",       "va_a": "fi_ok_tintats_darrere" },
-        { "etiqueta": "Davant (parabrisa o vidres davanters)",  "va_a": "fi_greu_tintats_davant" }
+        { "etiqueta": "Tintats / làmines vidres davanters",            "va_a": "fi_tintats_davant" },
+        { "etiqueta": "Tintats darrere sense miralls reglamentaris",   "va_a": "fi_tintats_sense_miralls" },
+        { "etiqueta": "Vidres tintats no homologats (col·locats)",     "va_a": "fi_tintats_no_homologats" },
+        { "etiqueta": "Cap llum funciona (de nit/visibilitat reduïda)", "va_a": "fi_llums_cap" },
+        { "etiqueta": "Una llum no funciona (1 dels 2 frontals/posteriors)", "va_a": "fi_llums_una" },
+        { "etiqueta": "Llums no homologades / antireglamentàries (LEDs, color)", "va_a": "fi_llums_antireg" },
+        { "etiqueta": "No encén llums obligatòriament (nit, túnel, pluja)", "va_a": "fi_llums_no_encendre" },
+        { "etiqueta": "Enlluerna (llargues davant trànsit oposat)",   "va_a": "fi_enlluernament" },
+        { "etiqueta": "Llums boira sense condicions",                 "va_a": "fi_boira_sense_motiu" },
+        { "etiqueta": "Llargues en vehicle parat",                    "va_a": "fi_llargues_parat" },
+        { "etiqueta": "Centelleig amb llargues sense motiu",          "va_a": "fi_centelleig" },
+        { "etiqueta": "Sense placa matrícula il·luminada (de nit)",   "va_a": "fi_placa_no_iluminada" },
+        { "etiqueta": "Moto sense encreuament encès de dia",          "va_a": "fi_moto_dia" }
       ]
     },
 
-    "fi_ok_tintats_darrere": {
-      "final": true,
-      "tipus": "ok",
-      "titol": "✅ Tintats permesos",
-      "accio": "Els vidres posteriors del muntant B cap enrere es poden enfosquir sense límit (excepte en alguns vehicles específics)"
-    },
-    "fi_greu_tintats_davant": {
+    "fi_tintats_davant": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Tintats no homologats al davant",
-      "import": "200 € (100 € amb pagament voluntari)",
-      "punts": "0 punts",
-      "accions": [
-        "Butlletí al titular",
-        "Possible immobilització si la visibilitat és molt dolenta",
-        "NO es pot exigir passar ITV per aquest motiu si la ITV és vigent i favorable"
-      ],
-      "info": "Article 19.1 RGC: els vidres del parabrisa i els davanters laterals no poden portar làmines ni elements que redueixin la transparència per sota dels mínims reglamentaris.",
-      "document": "Butlletí + fotografies",
-      "base_legal": ["Art. 19.1 RGC", "Art. 76.l TRLSV"]
+      "titol": "⚠️ GREU — Tintats davanters / parabrisa",
+      "concepte_butlleta": "Circular amb un vehicle la superfície de cristall del qual no permet al seu conductor la visibilitat diàfana sobre tota la via per la col·locació de làmines o adhesius",
+      "article_butlleta": "Art. 19.1 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
+      "info_clau": "PROHIBIDES làmines/adhesius al PARABRISA i als VIDRES DAVANTERS LATERALS (muntant B endavant). DARRERE permès sense limitació si té dos miralls retrovisors.",
+      "accions_operatives": [
+        "Butlletí",
+        "Fotografies",
+        "NO es pot exigir passar ITV per aquest motiu si la ITV vigent és FAVORABLE",
+        "Possible immobilització si visibilitat molt deficient i risc"
+      ]
     },
+
+    "fi_tintats_sense_miralls": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Tintats darrere sense miralls",
+      "concepte_butlleta": "Circular amb un vehicle proveït de làmines adhesives o cortinetes contra el sol en les finestres posteriors sense dur els dos miralls retrovisors exteriors reglamentaris",
+      "article_butlleta": "Art. 19.1 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0"
+    },
+
+    "fi_tintats_no_homologats": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Vidres tintats no homologats",
+      "concepte_butlleta": "Col·locar en un vehicle vidres tintats o acolorits no homologats",
+      "article_butlleta": "Art. 19.2 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0"
+    },
+
     "fi_llums_cap": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "🔴 Infracció MOLT GREU — Circular sense cap llum en condicions que l'exigeixen",
-      "import": "500 €",
-      "accions": [
-        "Immobilització (Art. 104 TRLSV)",
-        "Grua a taller si de nit o visibilitat reduïda"
-      ],
-      "base_legal": ["Art. 43 RGC", "Art. 77.l TRLSV"]
+      "titol": "🔴 MOLT GREU — Sense cap llum (de nit / poca visibilitat)",
+      "concepte_butlleta": "Circular amb els llums de posició apagats estant-hi obligat",
+      "article_butlleta": "Art. 99.1 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
+      "info_immobilitzacio": "Considerar IMMOBILITZACIÓ per perill greu — Art. 104 TRLSV"
     },
+
     "fi_llums_una": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Llum fosa o que no funciona",
-      "import": "200 €",
-      "accions": ["Butlletí", "Advertir de reparar-ho com més aviat millor"],
-      "base_legal": ["Art. 42 RGC"]
+      "titol": "⚠️ GREU — Una llum fosa",
+      "concepte_butlleta": "Circular amb el vehicle ressenyat sense els dispositius d'enllumenat i senyalització òptica reglamentaris (detallar incompliment)",
+      "article_butlleta": "Art. 16 RGV",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
+      "accions": "Advertir i butlletí. Si els 2 frontals fosos: immobilitzar"
     },
+
     "fi_llums_antireg": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Llums antireglamentàries",
-      "text": "Colors no permesos, LEDs no homologats, altures incorrectes…",
-      "import": "200 €",
-      "accions": ["Butlletí", "Possible immobilització si modificació greu"],
-      "base_legal": ["Art. 42 RGC"]
+      "titol": "⚠️ GREU — Llums no homologades",
+      "concepte_butlleta": "Circular amb el vehicle ressenyat sense ajustar-se els dispositius d'enllumenat i senyalització òptica a les prescripcions reglamentàries (detallar incompliment)",
+      "article_butlleta": "Art. 15 RGV",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
+      "exemples": "LEDs no homologats, llums de color (blau, verd particulars), neons baix vehicle, llums extra no autoritzades"
     },
+
     "fi_llums_no_encendre": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — No encendre llums quan és obligatori",
-      "text": "Túnels, pluja, boira, nit, visibilitat reduïda",
-      "import": "200 €",
-      "punts": "0 punts",
-      "base_legal": ["Art. 43 RGC", "Art. 76.l TRLSV"]
+      "titol": "⚠️ GREU — No encendre llums quan obligatori",
+      "concepte_butlleta": "Circular amb els llums de curt abast o d'encreuament apagats quan s'està obligat",
+      "article_butlleta": "Art. 101.1 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
+      "obligatorietat": "Entre vespre i alba, túnels, condicions meteorològiques que disminueixin visibilitat"
+    },
+
+    "fi_enlluernament": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Enlluernament",
+      "concepte_butlleta": "No substituir els llums de carretera pels d'encreuament i enlluernar als usuaris que circulen en sentit contrari",
+      "article_butlleta": "Art. 102.1 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0"
+    },
+
+    "fi_boira_sense_motiu": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Llums boira sense motiu",
+      "concepte_butlleta": "Utilitzar els llums de boira de davant sense una causa que ho justifiqui",
+      "article_butlleta": "Art. 106.2 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0"
+    },
+
+    "fi_llargues_parat": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Llargues amb vehicle parat",
+      "concepte_butlleta": "Utilitzar els llums de carretera quan el vehicle està parat o estacionat",
+      "article_butlleta": "Art. 100.2 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0"
+    },
+
+    "fi_centelleig": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Centelleig sense motiu",
+      "concepte_butlleta": "Utilitzar alternativament els llums de carretera i els d'encreuament (centelleigs) amb finalitats diferents a les previstes reglamentàriament",
+      "article_butlleta": "Art. 100.2 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0"
+    },
+
+    "fi_placa_no_iluminada": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Placa no il·luminada",
+      "concepte_butlleta": "No portar il·luminada la placa posterior de matrícula quan s'està obligat",
+      "article_butlleta": "Art. 103 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0"
+    },
+
+    "fi_moto_dia": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Moto sense encreuament de dia",
+      "concepte_butlleta": "Circular amb una motocicleta amb els llums d'encreuament apagats",
+      "article_butlleta": "Art. 104 RGC",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0"
     }
   }
 }

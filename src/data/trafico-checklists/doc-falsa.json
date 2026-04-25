@@ -1,95 +1,121 @@
 {
   "id": "doc-falsa",
-  "titol": "Documentació falsa",
+  "titol": "Documentació falsa / matrícula manipulada",
   "categoria": "transit",
   "icono": "📄",
-  "base_legal": ["Arts. 390-392 CP", "Art. 393 CP", "Art. 400 CP"],
+  "base_legal": [
+    "Arts. 390-393 CP (falsedat documental)",
+    "Art. 399 CP (despatx documents falsos)",
+    "Art. 400 CP (tinença útils falsificació)",
+    "Art. 76.P TRLSV (matrícules il·legibles)"
+  ],
   "inici": "tipus_document",
   "nodes": {
+
     "tipus_document": {
-      "titol": "Quin document és fals o sospitós?",
-      "text": "Tria:",
+      "titol": "Quin element és sospitós?",
       "opcions": [
-        { "etiqueta": "Permís de conduir",                    "va_a": "doc_sospita" },
-        { "etiqueta": "DNI / NIE / passaport",                "va_a": "doc_sospita" },
-        { "etiqueta": "Permís de circulació / fitxa tècnica", "va_a": "doc_sospita" },
-        { "etiqueta": "Matrícula manipulada/canviada",        "va_a": "matricula_tipus" },
-        { "etiqueta": "Adhesiu ITV / segell fals",            "va_a": "doc_sospita" },
-        { "etiqueta": "Assegurança falsificada",              "va_a": "doc_sospita" }
-      ]
-    },
-    "doc_sospita": {
-      "titol": "Nivell de certesa",
-      "text": "Quin grau de certesa tens que és fals?",
-      "opcions": [
-        { "etiqueta": "Sospita per indicis (lletra, mida, hologrames…)","va_a": "fi_retenir_investigar" },
-        { "etiqueta": "Evidència clara (comparativa, eines SIP, DGT)","va_a": "fi_penal_392" },
-        { "etiqueta": "Reconeix que és fals",                 "va_a": "fi_penal_392" }
-      ]
-    },
-    "matricula_tipus": {
-      "titol": "Matrícula",
-      "text": "Quina situació és?",
-      "opcions": [
-        { "etiqueta": "Matrícula canviada / d'un altre vehicle","va_a": "fi_penal_matricula" },
-        { "etiqueta": "Matrícula sense autoritzar / artesanal","va_a": "fi_penal_matricula" },
-        { "etiqueta": "Matrícula doblegada/tapada intencionalment","va_a": "fi_mg_matricula_tapada" }
+        { "etiqueta": "Permís de conduir",                        "va_a": "doc_sospita" },
+        { "etiqueta": "DNI / NIE / passaport",                    "va_a": "doc_sospita" },
+        { "etiqueta": "Permís circulació / fitxa tècnica",         "va_a": "doc_sospita" },
+        { "etiqueta": "Matrícula (placa) manipulada/canviada",     "va_a": "matricula_tipus" },
+        { "etiqueta": "Matrícula tapada/il·legible (no canviada)","va_a": "fi_matricula_tapada" },
+        { "etiqueta": "Adhesiu ITV fals",                         "va_a": "doc_sospita" },
+        { "etiqueta": "Pòlissa assegurança falsificada",          "va_a": "doc_sospita" },
+        { "etiqueta": "Permís internacional fals",                "va_a": "doc_sospita" }
       ]
     },
 
-    "fi_retenir_investigar": {
+    "doc_sospita": {
+      "titol": "Nivell de certesa",
+      "opcions": [
+        { "etiqueta": "Sospita per indicis (lletra, mida, hologrames, etc.)", "va_a": "fi_retencio_investigar" },
+        { "etiqueta": "Evidència clara (comparativa SIP, DGT)",              "va_a": "fi_penal_392" },
+        { "etiqueta": "Reconeix que és fals",                                 "va_a": "fi_penal_392" }
+      ]
+    },
+
+    "matricula_tipus": {
+      "titol": "Tipus de manipulació",
+      "opcions": [
+        { "etiqueta": "Matrícula d'un altre vehicle",                "va_a": "fi_penal_392_matricula" },
+        { "etiqueta": "Matrícula artesanal / no oficial",            "va_a": "fi_penal_392_matricula" },
+        { "etiqueta": "Bastidor (VIN) esborrat o manipulat",         "va_a": "fi_penal_392_bastidor" }
+      ]
+    },
+
+    "fi_retencio_investigar": {
       "final": true,
       "tipus": "mixta",
-      "titol": "🔍 Retenció per investigació",
-      "accions": [
-        "Retenció del document per comprovació (NO detenció de la persona encara)",
-        "Consulta SIP / DGT / TIE-DNI",
-        "Contactar amb sala per comprovació",
-        "Si es confirma falsedat → passa a via penal (Art. 392 CP)",
-        "Si s'aclareix que és vàlid → tornar-lo"
+      "titol": "🔍 Retenció del document — investigació",
+      "accions_ordenades": [
+        "1. RETENIR el document (no la persona, encara)",
+        "2. Consulta SIP / DGT / TIE-DNI / Mossos",
+        "3. Si s'aclareix que és vàlid: retornar i fi del cas",
+        "4. Si es confirma falsedat: passar a via penal (Art. 392 CP)"
       ],
-      "document": "Diligència de retenció i comprovació"
+      "documentacio": "Diligència de retenció amb constància de l'hora i motiu"
     },
+
     "fi_penal_392": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE — Art. 392 CP (falsedat en document oficial)",
-      "text": "Particular que comet falsedat en document oficial o l'utilitza sabent que és fals.",
+      "titol": "🚔 DELICTE — Falsedat document oficial (Art. 392 CP)",
+      "text": "Particular que comet falsedat o utilitza document oficial sabent que és fals",
       "pena": "Presó 6 mesos - 3 anys + multa 6-12 mesos",
-      "accions": [
-        "Detenció del sospitós",
-        "Lectura de drets (Art. 520 LECrim)",
-        "Intervenció i precinte del document (cadena de custòdia)",
-        "Atestat penal amb fotos i descripció dels indicis de falsedat",
-        "Possible delicte d'Art. 400 CP (tinença de falsificació)",
-        "Posada a disposició del Jutjat de Guàrdia"
+      "accions_ordenades": [
+        "1. DETENCIÓ del sospitós",
+        "2. Lectura de drets (Art. 520 LECrim)",
+        "3. INTERVENCIÓ i precintat del document",
+        "4. Cadena de custòdia",
+        "5. ATESTAT PENAL amb fotografies i descripció dels indicis",
+        "6. Possible Art. 400 CP (tinença útils falsificació) si es troben al vehicle/domicili",
+        "7. Posada a disposició Jutjat Guàrdia"
       ],
-      "document": "Atestat + acta intervenció + cadena custòdia",
-      "base_legal": ["Art. 392 CP", "Art. 393 CP (ús)", "Art. 400 CP"]
+      "documentacio": "Atestat + acta intervenció + cadena custòdia + fotografies"
     },
-    "fi_penal_matricula": {
+
+    "fi_penal_392_matricula": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Matrícula falsificada/canviada",
-      "text": "Es pot incloure en la falsificació documental i també pot ser robatori del vehicle (cal comprovar bastidor VIN).",
-      "accions": [
-        "Comprovar bastidor VIN amb permís de circulació",
-        "Consulta sala sobre sostraccions",
-        "Detenció del conductor",
-        "Immobilització del vehicle",
-        "Atestat penal",
-        "Jutjat de Guàrdia"
-      ],
-      "base_legal": ["Art. 392 CP", "Arts. 237-242 CP (si robatori)"]
+      "text": "Pot ser falsedat documental + possible substracció vehicle",
+      "pena": "Presó 6 mesos - 3 anys + multa",
+      "accions_ordenades": [
+        "1. Comprovar BASTIDOR VIN amb permís de circulació",
+        "2. Consulta sala sobre vehicles sustrets",
+        "3. DETENCIÓ del conductor",
+        "4. IMMOBILITZACIÓ del vehicle (no pot circular fins clarificar)",
+        "5. Atestat penal — possible concurs amb robatori (237-242 CP) si vehicle sustret",
+        "6. Cadena custòdia matrícules",
+        "7. Jutjat Guàrdia"
+      ]
     },
-    "fi_mg_matricula_tapada": {
+
+    "fi_penal_392_bastidor": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Bastidor manipulat",
+      "text": "El bastidor (VIN) manipulat indica gairebé sempre un vehicle sustret, robat o destinat a tràfic il·lícit",
+      "accions_ordenades": [
+        "Detenció",
+        "Immobilització i intervenció vehicle",
+        "Avisar Mossos UCSP / DIC (Vehicles)",
+        "Atestat amb informe pericial sol·licitat (laboratori)",
+        "Cadena custòdia",
+        "Jutjat Guàrdia"
+      ]
+    },
+
+    "fi_matricula_tapada": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "🔴 Infracció MOLT GREU — Matrícula il·legible / manipulada",
-      "text": "Si només està tapada/plegada però és la correcta: administrativa. Si sospita d'intenció d'evadir radars, també.",
-      "import": "500 €",
-      "punts": "0 punts",
-      "base_legal": ["Art. 77 TRLSV"]
+      "titol": "🔴 MOLT GREU — Matrícula il·legible / amb obstacles",
+      "concepte_butlleta": "Incomplir l'obligació de tot conductor de verificar que les plaques matrícules del vehicle no presenten obstacles que impedeixen o dificultin la seva lectura i identificació",
+      "article_butlleta": "Art. 76.P TRLSV",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
+      "info": "Si hi ha intencionalitat clara (per evitar radars/càmeres): valorar concurs amb obstaculització a vigilància i Art. 77.H TRLSV (inhibidors)"
     }
   }
 }

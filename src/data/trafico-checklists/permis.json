@@ -3,46 +3,40 @@
   "titol": "Permís de conduir",
   "categoria": "transit",
   "icono": "🪪",
-  "base_legal": ["RD 818/2009 RGCond", "Art. 76.f TRLSV", "Art. 77.k TRLSV", "Art. 384 CP"],
+  "base_legal": [
+    "Reglament General de Conductors (RD 818/2009)",
+    "Art. 76.G TRLSV",
+    "Art. 384 CP"
+  ],
+  "terminis_caducitat_permis": {
+    "AM_A1_A2_A_B_BE": "10 anys (fins 65 anys) / 5 anys (a partir 65)",
+    "C1_C_D1_D_i_E": "5 anys (fins 65 anys) / 3 anys (a partir 65)"
+  },
+  "diferencia_clau_admin_penal": {
+    "caducat": "Administratiu (200€ greu) — només cal renovar (paper)",
+    "perdua_punts_no_ferma": "Administratiu (200€ + 4pts)",
+    "perdua_punts_ferma": "PENAL (Art. 384 CP)",
+    "retirat_judicialment": "PENAL (Art. 384 CP)",
+    "mai_obtingut": "PENAL (Art. 384 CP) si vehicle requereix permís"
+  },
   "inici": "situacio",
   "nodes": {
+
     "situacio": {
-      "titol": "Situació del conductor",
-      "text": "Quina és la situació del permís?",
+      "titol": "Situació del permís",
+      "text": "Quina és la situació?",
       "opcions": [
-        { "etiqueta": "Permís vigent i adequat",             "va_a": "fi_ok_permis" },
-        { "etiqueta": "Permís caducat",                      "va_a": "caducat_temps" },
-        { "etiqueta": "Conduint classe de permís inadequada","va_a": "fi_greu_classe" },
-        { "etiqueta": "Permís estranger sense canviar",      "va_a": "estranger_temps" },
-        { "etiqueta": "Sense permís (mai no ha obtingut)",   "va_a": "fi_penal_384_mai" },
-        { "etiqueta": "Pèrdua total de punts",               "va_a": "fi_penal_384_punts" },
-        { "etiqueta": "Retirat per sentència judicial",      "va_a": "fi_penal_384_judicial" },
-        { "etiqueta": "No el porta físicament a sobre",      "va_a": "fi_lleu_no_porta" }
-      ]
-    },
-    "caducat_temps": {
-      "titol": "Temps des de la caducitat",
-      "text": "Quant fa que està caducat?",
-      "info": "Caducitat NO és el mateix que pèrdua de vigència. Caducat = només cal renovar (tràmit administratiu).",
-      "opcions": [
-        { "etiqueta": "Caducat (independentment del temps)", "va_a": "fi_greu_caducat" }
-      ]
-    },
-    "estranger_temps": {
-      "titol": "Permís estranger",
-      "text": "Origen del permís i temps de residència a Espanya?",
-      "opcions": [
-        { "etiqueta": "UE / EEE (sempre vàlid)",             "va_a": "fi_ok_permis" },
-        { "etiqueta": "Conveni amb Espanya (pot canviar)",   "va_a": "estranger_residencia" },
-        { "etiqueta": "País sense conveni",                  "va_a": "estranger_residencia" }
-      ]
-    },
-    "estranger_residencia": {
-      "titol": "Residència",
-      "text": "Porta més de 6 mesos residint a Espanya?",
-      "opcions": [
-        { "etiqueta": "Menys de 6 mesos",                    "va_a": "fi_ok_temporal" },
-        { "etiqueta": "Més de 6 mesos sense canviar/obtenir","va_a": "fi_greu_estranger" }
+        { "etiqueta": "Vigent i adequat al vehicle",                                "va_a": "fi_ok_permis" },
+        { "etiqueta": "Permís caducat (administrativa)",                            "va_a": "fi_caducat" },
+        { "etiqueta": "Permís que no habilita pel vehicle (classe inadequada)",     "va_a": "fi_classe_inadequada" },
+        { "etiqueta": "Permís estranger sense canviar (>6 mesos)",                  "va_a": "fi_estranger" },
+        { "etiqueta": "Permís UE/EEE (sempre vàlid)",                              "va_a": "fi_ok_permis" },
+        { "etiqueta": "MAI no ha obtingut permís",                                  "va_a": "fi_penal_384_mai" },
+        { "etiqueta": "Pèrdua TOTAL de punts (notificada i ferma)",                "va_a": "fi_penal_384_punts" },
+        { "etiqueta": "Permís suspès cautelarment (no ferm)",                      "va_a": "fi_suspes_cautelar" },
+        { "etiqueta": "Retirat per resolució judicial",                            "va_a": "fi_penal_384_judicial" },
+        { "etiqueta": "No el porta físicament a sobre (té permís vigent)",         "va_a": "fi_lleu_no_porta" },
+        { "etiqueta": "Permís amb condicions restrictives no complertes",          "va_a": "fi_condicions_restrictives" }
       ]
     },
 
@@ -52,94 +46,172 @@
       "titol": "✅ Permís correcte",
       "accio": "Es deixa circular"
     },
-    "fi_ok_temporal": {
-      "final": true,
-      "tipus": "ok",
-      "titol": "✅ Permís estranger vàlid temporalment",
-      "accio": "Recordar que disposa de 6 mesos per al canvi o nou permís"
-    },
+
     "fi_lleu_no_porta": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "ℹ️ Infracció LLEU — No portar el permís",
-      "text": "El conductor té permís vigent però no el porta físicament a sobre.",
-      "import": "80 € (40 € amb pagament voluntari)",
-      "punts": "0 punts",
-      "accio": "Comprovar a la base de dades i permetre continuar",
-      "base_legal": ["Art. 3.2 RG Conductors"]
+      "titol": "ℹ️ LLEU — No portar permís",
+      "concepte_butlleta": "Conduir un vehicle de motor o ciclomotor sense portar la corresponent llicència de conducció o permís de conduir",
+      "article_butlleta": "Art. 3.2 RG Conductors",
+      "import": "80 € (DTE 40 €)",
+      "punts": "0",
+      "accions_operatives": [
+        "Comprovar a base de dades que efectivament té permís vigent",
+        "Si confirmat: butlletí lleu i deixar continuar",
+        "Si no es pot confirmar: retenció fins aclarir"
+      ]
     },
-    "fi_greu_caducat": {
+
+    "fi_caducat": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Permís caducat",
-      "import": "200 € (100 € amb pagament voluntari)",
-      "punts": "0 punts",
-      "accions": [
-        "Butlletí al conductor",
-        "Immobilització possible si no hi ha conductor substitut",
-        "Si és caducat administratiu NO és delicte Art. 384 CP"
-      ],
-      "base_legal": ["Art. 76.f TRLSV"]
+      "titol": "⚠️ GREU — Permís caducat",
+      "concepte_butlleta": "Conduir un vehicle amb l'autorització administrativa caducada",
+      "article_butlleta": "Art. 12.4 RG Conductors",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
+      "info_clau": "Permís CADUCAT NO és delicte 384 CP — només cal renovar (tràmit administratiu). NO confondre amb pèrdua de vigència.",
+      "accions_operatives": [
+        "Butlletí",
+        "Immobilització POSSIBLE si no hi ha conductor sustitut (recomanable)",
+        "Indicar que ha de renovar a la prefectura DGT"
+      ]
     },
-    "fi_greu_classe": {
+
+    "fi_classe_inadequada": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "🔴 Infracció MOLT GREU — Permís que no habilita pel vehicle",
-      "text": "Exemple: conduint camió amb permís B, o motocicleta amb permís B",
-      "import": "500 € (250 € amb pagament voluntari)",
+      "titol": "🔴 MOLT GREU — Permís inadequat al vehicle",
+      "concepte_butlleta": "Conduir un vehicle de motor o un ciclomotor amb un permís o llicència que no l'habilita per fer-ho",
+      "article_butlleta": "Art. 1.1 RG Conductors",
+      "import": "500 € (DTE 250 €)",
       "punts": "–4 punts",
-      "accions": ["Butlletí", "Immobilització", "Buscar conductor habilitat"],
-      "base_legal": ["Art. 1.1 RG Conductors"]
+      "exemples": [
+        "Conduir camió amb permís B",
+        "Conduir motocicleta gran amb A1 quan cal A2 o A",
+        "Conduir bus amb permís D1 quan cal D",
+        "Conduir conjunt amb remolc > 750 kg sense E"
+      ],
+      "accions_operatives": [
+        "Butlletí",
+        "IMMOBILITZACIÓ del vehicle (no pot continuar conduint-lo)",
+        "Buscar conductor habilitat o grua",
+        "Comunicar a empresa si transport professional"
+      ]
     },
-    "fi_greu_estranger": {
+
+    "fi_estranger": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció GREU — Permís estranger no canviat",
-      "import": "200 €",
-      "accions": ["Butlletí", "Immobilització possible"],
-      "base_legal": ["Art. 76.f TRLSV"]
+      "titol": "⚠️ GREU — Permís estranger no canviat",
+      "concepte_butlleta": "Conduir el vehicle ressenyat amb una autorització que no té validesa a Espanya per no haver sol·licitat la seva renovació a la Prefectura Provincial de Trànsit",
+      "article_butlleta": "Art. 15.4 RG Conductors",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
+      "info": "Permisos UE/EEE sempre vàlids. Permisos extracomunitaris: 6 mesos de gràcia des de l'establiment de la residència. Convenis bilaterals (Suïssa, Andorra, Argentina, etc.): canvi possible sense examen.",
+      "accions_operatives": [
+        "Butlletí",
+        "Immobilització possible si no pot acreditar permís vàlid",
+        "Indicar tràmit a Prefectura DGT"
+      ]
     },
+
+    "fi_suspes_cautelar": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Conduir amb permís suspès cautelarment",
+      "concepte_butlleta": "Conduir el vehicle ressenyat tenint el permís de conduir suspès com a mesura cautelar",
+      "article_butlleta": "Art. 39.3 RG Conductors",
+      "import": "200 € (DTE 100 €)",
+      "punts": "–4 punts",
+      "info": "La mesura cautelar (suspensió no ferma, recurs pendent) és VIA ADMINISTRATIVA. Si la suspensió és FERMA → Art. 384 CP (delicte)."
+    },
+
+    "fi_condicions_restrictives": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Incompliment condicions del permís",
+      "concepte_butlleta": "Conduir el vehicle ressenyat incomplint les condicions restrictives de la llicència de conducció o del permís de conduir (indicar condició incomplerta)",
+      "article_butlleta": "Art. 3.1 RG Conductors",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
+      "exemples_condicions": [
+        "Codi 01 — Ulleres/lents obligatòries (no les porta)",
+        "Codi 02 — Audífon (no el porta)",
+        "Codi 78 — Vehicle automàtic (condueix manual)",
+        "Codi 70 — Vehicle adaptat",
+        "Codi 105 — Condicions específiques de l'autoritat sanitària"
+      ],
+      "accions_operatives": "Butlletí + indicació de la condició incomplerta"
+    },
+
     "fi_penal_384_mai": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Art. 384 CP (mai no ha obtingut permís)",
+      "concepte_butlleta_paral·lel": "Conduir un vehicle a motor o ciclomotor sense haver obtingut mai permís o llicència",
+      "article_paralel_admin": "Art. 1.1 RG Conductors (sanció administrativa paral·lela MG 500€)",
       "pena": "Presó 3-6 mesos O multa 12-24 mesos O TBC 31-90 dies",
-      "accions": [
-        "Detenció o citació",
-        "Lectura de drets si detenció",
-        "Immobilització del vehicle",
-        "Atestat penal",
-        "Posada a disposició del Jutjat"
+      "accions_ordenades": [
+        "1. Comprovar exhaustivament a la DGT (a vegades és error de base de dades)",
+        "2. DETENCIÓ o citació segons cas i identificació clara",
+        "3. Lectura drets si detenció (Art. 520 LECrim)",
+        "4. INTERVENCIÓ del vehicle (no pot continuar conduint)",
+        "5. Immobilització + grua o sustitut",
+        "6. ATESTAT PENAL amb consulta DGT (FI-DGT) com a prova",
+        "7. Posada a disposició Jutjat Guàrdia"
       ],
-      "document": "Atestat penal + consulta DGT (FI-DGT)",
-      "base_legal": ["Art. 384 apartat 2 CP"]
+      "info": "Aplicable quan el vehicle requereix permís (no si bici/VMP). Pels que no requereixen permís: simple infracció administrativa o cap.",
+      "competencia": "Jutjat Instrucció Guàrdia"
     },
+
     "fi_penal_384_punts": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE — Art. 384 CP (pèrdua total de punts)",
-      "text": "Conduir després de ser notificada la pèrdua de vigència per pèrdua total de punts.",
-      "requisits": [
-        "Que consti la notificació fefaent de la pèrdua de vigència",
-        "Consultar DGT per confirmar"
-      ],
+      "titol": "🚔 DELICTE — Art. 384 CP (pèrdua total de punts ferma)",
+      "concepte_butlleta_paral·lel": "Conduir el vehicle ressenyat amb la llicència o el permís no vigent per pèrdua total de punts",
+      "article_paralel_admin": "Art. 3.2 RG Conductors (sanció administrativa paral·lela MG 500€)",
       "pena": "Presó 3-6 mesos O multa 12-24 mesos O TBC 31-90 dies",
-      "accions": ["Detenció/citació", "Immobilització", "Atestat", "Jutjat"],
-      "base_legal": ["Art. 384 apartat 1 CP"]
+      "requisits_clau": [
+        "La pèrdua de punts ha d'haver estat NOTIFICADA fefaentment",
+        "La resolució ha de ser FERMA (no recurs pendent)",
+        "Comprovar a DGT/Sala que efectivament és ferma"
+      ],
+      "accions_ordenades": [
+        "Confirmar amb Sala que pèrdua és ferma",
+        "Detenció / citació",
+        "Lectura drets",
+        "Intervenció permís físicament",
+        "Immobilització vehicle",
+        "Atestat amb consulta DGT",
+        "Jutjat Guàrdia"
+      ]
     },
+
     "fi_penal_384_judicial": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Art. 384 CP (privació judicial)",
-      "text": "Conduir havent estat privat del permís per decisió judicial.",
+      "text": "Conduir havent estat privat del permís per resolució judicial (sentència).",
       "pena": "Presó 3-6 mesos O multa 12-24 mesos O TBC 31-90 dies",
-      "accions": [
+      "accions_ordenades": [
+        "Confirmar resolució judicial vigent",
         "Detenció",
-        "Immobilització",
-        "Atestat amb antecedents judicials",
-        "Comunicació al Jutjat que va dictar la privació"
-      ],
-      "base_legal": ["Art. 384 apartat 1 CP"]
+        "Lectura drets",
+        "Intervenció permís si encara el porta",
+        "Immobilització vehicle",
+        "Atestat amb antecedents",
+        "Comunicació al Jutjat que va dictar la privació",
+        "Posada a disposició Jutjat Guàrdia"
+      ]
     }
-  }
+  },
+  "notes_finals": [
+    "Permís UE/EEE residents: vàlid sempre. Si caduca, RENOVAR a la DGT espanyola.",
+    "Permís de tercer país amb conveni: 6 mesos de gràcia + canvi sense examen.",
+    "Permís de tercer país sense conveni: canvi amb examen.",
+    "Si conductor té permís PROVISIONAL: vàlid només per pràctiques amb professor.",
+    "Permís físic vs vigència: el suport físic pot estar caducat però la vigència legal estar OK (renovació en tràmit). Cal comprovar amb DGT.",
+    "Recordar: caducitat ≠ pèrdua de vigència. Caducat = renovar (admin). Pèrdua vigència ferma = penal."
+  ]
 }

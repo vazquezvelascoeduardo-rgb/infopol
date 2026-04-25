@@ -3,113 +3,185 @@
   "titol": "Sense assegurança obligatòria (SOA)",
   "categoria": "transit",
   "icono": "🛡️",
-  "base_legal": ["Art. 2.1 RDL 8/2004 (LRCSCVM)", "Art. 3 LRCSCVM (immobilització)"],
+  "base_legal": [
+    "Art. 2.1 RDL 8/2004 (LRCSCVM consolidada)",
+    "Art. 3 LRCSCVM (immobilització)",
+    "Art. 76.G TRLSV"
+  ],
+  "barem_oficial_sct": "Barem específic per tipus de permís/vehicle. Sense punts. Sanció administrativa tramitada pel Consorci de Compensació d'Assegurances.",
+  "comprovacions_previes": [
+    "Consulta al FIVA (Fitxer Informatiu de Vehicles Assegurats) — base de dades en temps real",
+    "Si FIVA marca 'sense assegurança': demanar al conductor justificant",
+    "El justificant ha de ser: pòlissa vigent, rebut últim pagament, certificat companyia",
+    "FIVA pot tenir desfasament 24-48h respecte a la realitat — donar marge si rebut recent",
+    "VMP: només > 25 kg i velocitat > 14 km/h estan obligats a assegurança"
+  ],
   "inici": "comprovacio",
-  "nota": "Imports segons Catàleg SCT 2026 (barem per tipus de vehicle).",
   "nodes": {
+
     "comprovacio": {
-      "titol": "Comprovació d'assegurança",
-      "text": "Consulta a la base de dades FIVA (Fitxer Informatiu de Vehicles Assegurats). Resultat?",
+      "titol": "Comprovació al FIVA",
+      "text": "Resultat de la consulta?",
       "opcions": [
-        { "etiqueta": "Vehicle ASSEGURAT",                    "va_a": "fi_ok_assegurat" },
-        { "etiqueta": "Sense assegurança vigent",             "va_a": "tipus_vehicle" },
-        { "etiqueta": "FIVA no respon / dubte",               "va_a": "requerir_rebut" }
+        { "etiqueta": "ASSEGURAT — pòlissa vigent",                "va_a": "fi_ok_assegurat" },
+        { "etiqueta": "Sense assegurança vigent al FIVA",          "va_a": "requerir_justificant" },
+        { "etiqueta": "FIVA sense resposta / no consulta possible","va_a": "requerir_justificant" }
       ]
     },
-    "requerir_rebut": {
-      "titol": "Requerir justificant",
-      "text": "Requerir darrer rebut de pagament o pòlissa. El presenta?",
+
+    "requerir_justificant": {
+      "titol": "Requerir justificant al conductor/titular",
+      "text": "Es demana pòlissa, rebut o certificat. Què presenta?",
       "opcions": [
-        { "etiqueta": "Presenta justificant vàlid",           "va_a": "fi_ok_assegurat" },
-        { "etiqueta": "No el presenta / caducat",             "va_a": "tipus_vehicle" }
+        { "etiqueta": "Justificant vàlid i vigent",                 "va_a": "fi_ok_assegurat" },
+        { "etiqueta": "Pòlissa caducada / no vigent",              "va_a": "tipus_vehicle_permis" },
+        { "etiqueta": "No pot acreditar (sense documentació)",      "va_a": "tipus_vehicle_permis" },
+        { "etiqueta": "Diu que la té però no acredita",            "va_a": "advertencia_acreditar" }
       ]
     },
-    "tipus_vehicle": {
-      "titol": "Tipus de vehicle (barem per tipus de permís)",
-      "text": "Quin tipus de vehicle és?",
+
+    "advertencia_acreditar": {
+      "titol": "Termini per acreditar",
+      "text": "Donar termini raonable (presentar pòlissa). Si no, butlletí.",
       "opcions": [
-        { "etiqueta": "VMP (>25 kg i >14 km/h)",                           "va_a": "fi_vmp" },
-        { "etiqueta": "Vehicle personal lleuger / agrícola / PMR",          "va_a": "fi_lleuger" },
-        { "etiqueta": "Ciclomotor (permís AM)",                             "va_a": "fi_am" },
-        { "etiqueta": "Motocicleta (A1, A2, A)",                            "va_a": "fi_moto" },
-        { "etiqueta": "Turisme / furgoneta (B, B+E)",                       "va_a": "fi_turisme" },
-        { "etiqueta": "Camió (C1, C1+E, C, C+E)",                           "va_a": "fi_camio" },
-        { "etiqueta": "Autobús (D1, D1+E, D, D+E)",                         "va_a": "fi_bus" }
+        { "etiqueta": "Acredita en termini",                        "va_a": "fi_ok_assegurat" },
+        { "etiqueta": "No acredita",                                "va_a": "tipus_vehicle_permis" }
+      ]
+    },
+
+    "tipus_vehicle_permis": {
+      "titol": "Tipus de vehicle (determina l'import)",
+      "text": "Categoria del vehicle?",
+      "opcions": [
+        { "etiqueta": "VMP > 25 kg i > 14 km/h",                                       "va_a": "fi_vmp" },
+        { "etiqueta": "Vehicle agrícola / cotxe minusvàlid (llicència LCC, LVA)",      "va_a": "fi_lleuger" },
+        { "etiqueta": "Ciclomotor (permís AM)",                                        "va_a": "fi_am" },
+        { "etiqueta": "Motocicleta (permís A1, A2, A)",                                "va_a": "fi_moto" },
+        { "etiqueta": "Turisme / furgoneta (permís B, B+E)",                           "va_a": "fi_turisme" },
+        { "etiqueta": "Camió (permís C1, C1+E, C, C+E)",                               "va_a": "fi_camio" },
+        { "etiqueta": "Autobús (permís D1, D1+E, D, D+E)",                             "va_a": "fi_bus" },
+        { "etiqueta": "Vehicle ressenyat genèric (no encaixa categories)",             "va_a": "fi_resenyat" }
       ]
     },
 
     "fi_ok_assegurat": {
       "final": true,
       "tipus": "ok",
-      "titol": "✅ Vehicle correctament assegurat",
+      "titol": "✅ Assegurança vigent",
       "accio": "Es deixa circular"
     },
+
     "fi_vmp": {
       "final": true,
       "tipus": "administrativa",
       "titol": "⚠️ Sense SOA — VMP",
+      "concepte_butlleta": "Circular el vehicle personal lleuger sense que consti que el propietari tingui subscrit i mantingui en vigor un contracte d'assegurança que cobreixi la responsabilitat civil derivada de la seva circulació",
+      "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "350 € (DTE 175 €)",
-      "punts": "0 punts",
-      "accions": [
-        "Immobilització del vehicle (Art. 3 LRCSCVM)",
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí denúncia",
+        "Acta d'immobilització (Art. 3 LRCSCVM)",
         "Notificació al Consorci de Compensació d'Assegurances",
-        "Dipòsit fins a justificar assegurança"
-      ],
-      "document": "Butlletí + acta d'immobilització",
-      "base_legal": ["Art. 2.1 RDL 8/2004"]
+        "Dipòsit fins a justificar pòlissa o titular abonar la franquícia",
+        "Si propietari distint del conductor: butlletí al titular"
+      ]
     },
+
     "fi_lleuger": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Sense SOA — Vehicle lleuger / agrícola / PMR",
+      "titol": "⚠️ Sense SOA — Vehicle agrícola / minusvàlid",
+      "concepte_butlleta": "No tenir concertada l'assegurança obligatòria de responsabilitat civil, el vehicle ressenyat, la conducció del qual s'autoritza mitjançant llicència de conducció",
+      "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "650 € (DTE 325 €)",
-      "accions": ["Immobilització", "Notificació Consorci", "Dipòsit"],
-      "base_legal": ["Art. 2.1 RDL 8/2004"]
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí + immobilització + Consorci",
+        "Avís al titular si distint"
+      ]
     },
+
     "fi_am": {
       "final": true,
       "tipus": "administrativa",
       "titol": "⚠️ Sense SOA — Ciclomotor (AM)",
+      "concepte_butlleta": "No tenir concertada l'assegurança obligatòria de responsabilitat civil, el vehicle ressenyat, la conducció del qual s'autoritza mitjançant permís de conducció de la classe AM",
+      "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "1.000 € (DTE 500 €)",
-      "accions": ["Immobilització", "Notificació Consorci", "Dipòsit"],
-      "base_legal": ["Art. 2.1 RDL 8/2004"]
+      "punts": "0",
+      "accions_operatives": "Butlletí + immobilització + Consorci"
     },
+
     "fi_moto": {
       "final": true,
       "tipus": "administrativa",
       "titol": "⚠️ Sense SOA — Motocicleta (A1/A2/A)",
+      "concepte_butlleta": "No tenir concertada l'assegurança obligatòria de responsabilitat civil, el vehicle ressenyat, la conducció del qual s'autoritza mitjançant permís de conducció de la classe A2, A1 o A",
+      "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "1.250 € (DTE 625 €)",
-      "accions": ["Immobilització", "Notificació Consorci", "Dipòsit"],
-      "base_legal": ["Art. 2.1 RDL 8/2004"]
+      "punts": "0"
     },
+
     "fi_turisme": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Sense SOA — Turisme / Furgoneta (B/B+E)",
+      "titol": "⚠️ Sense SOA — Turisme/Furgoneta (B/B+E)",
+      "concepte_butlleta": "No tenir concertada l'assegurança obligatòria de responsabilitat civil, el vehicle ressenyat, la conducció del qual s'autoritza mitjançant permís de conducció de la classe B i B+E",
+      "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "1.500 € (DTE 750 €)",
-      "accions": ["Immobilització", "Notificació Consorci", "Dipòsit"],
-      "base_legal": ["Art. 2.1 RDL 8/2004"]
+      "punts": "0"
     },
+
     "fi_camio": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "🔴 Sense SOA — Camió (C1/C1+E/C/C+E)",
+      "titol": "🔴 Sense SOA — Camió (C/C+E)",
+      "concepte_butlleta": "No tenir concertada l'assegurança obligatòria de responsabilitat civil, el vehicle ressenyat, la conducció del qual s'autoritza mitjançant permís de conducció de la classe C1, C1+E, C i C+E",
+      "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "2.800 € (DTE 1.400 €)",
-      "accions": ["Immobilització", "Notificació Consorci", "Dipòsit"],
-      "base_legal": ["Art. 2.1 RDL 8/2004"]
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí + immobilització",
+        "Comunicació Consorci",
+        "Avís a Inspecció de Transports si transport professional",
+        "Avís a empresa titular"
+      ]
     },
+
     "fi_bus": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "🔴 Sense SOA — Autobús (D1/D1+E/D/D+E)",
+      "titol": "🔴 Sense SOA — Autobús (D/D+E)",
+      "concepte_butlleta": "No tenir concertada l'assegurança obligatòria de responsabilitat civil, el vehicle ressenyat, la conducció del qual s'autoritza mitjançant permís de conducció de la classe D1, D1+E, D i D+E",
+      "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "2.800 € (DTE 1.400 €)",
-      "accions": ["Immobilització", "Notificació Consorci", "Dipòsit"],
-      "base_legal": ["Art. 2.1 RDL 8/2004"]
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí + immobilització immediata",
+        "Si transport viatgers: traslladar passatgers amb seguretat (vehicle alternatiu)",
+        "Comunicació Consorci + Inspecció de Transports + empresa titular"
+      ]
+    },
+
+    "fi_resenyat": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Sense SOA — Vehicle ressenyat genèric",
+      "concepte_butlleta": "Circular el vehicle ressenyat sense que consti que el propietari tingui subscrit i mantingui en vigor un contracte d'assegurança que cobreixi la responsabilitat civil derivada de la seva circulació",
+      "article_butlleta": "Art. 2.1 RDL 8/2004",
+      "import": "800 € (DTE 400 €)",
+      "punts": "0"
     }
   },
-  "notes": [
-    "La sanció la tramita el Consorci de Compensació d'Assegurances, no l'ajuntament.",
-    "Si el conductor no és el titular, la infracció va al titular.",
-    "Recorda: VMP >25 kg i >14 km/h també considerats vehicles a motor."
+  "notes_finals": [
+    "La sanció va al TITULAR del vehicle, no al conductor (excepte si el conductor és el titular).",
+    "Si conductor distint del titular: identificar tots dos i indicar-ho a la butlleta.",
+    "Immobilització: cost grua + dipòsit a càrrec del titular.",
+    "Per recuperar el vehicle: presentar pòlissa vigent (o nova) + abonar despeses.",
+    "El Consorci tramita la sanció — no l'ajuntament. Però la denúncia inicial sí la fa policia local.",
+    "Reincidència: no hi ha agreujament directe a l'import, però sí valora el procediment sancionador.",
+    "VMP < 25 kg: NO obligats a assegurança per ara (segons normativa). Les ordenances locals poden exigir-la.",
+    "Si vehicle implicat en accident sense SOA: el Consorci respon a tercers i després repeteix contra el titular."
   ]
 }

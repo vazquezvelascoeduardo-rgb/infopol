@@ -3,101 +3,224 @@
   "titol": "Drogues al volant",
   "categoria": "transit",
   "icono": "💊",
-  "base_legal": ["Art. 14 TRLSV", "Art. 27 RGC", "Art. 379.2 CP", "Art. 383 CP"],
-  "inici": "indicis",
+  "base_legal": [
+    "Art. 14.1 i 14.2 TRLSV",
+    "Art. 27 RGC",
+    "Art. 379.2 CP",
+    "Art. 383 CP"
+  ],
+  "diferencia_clau": "Mera presència = MG administrativa (Art. 14.1 TRLSV, 1.000€/6pts). INFLUÈNCIA acreditada = delicte penal (Art. 379.2 CP). La frontera és la influència en la conducció — calen símptomes objectius.",
+  "substancies_detectades_drogotest": [
+    "Cànnabis (THC)",
+    "Cocaïna",
+    "Opiacis (heroïna, morfina, codeïna)",
+    "Amfetamines",
+    "Metamfetamines (incl. MDMA, èxtasi)",
+    "Benzodiazepines"
+  ],
+  "inici": "indicis_inicial",
   "nodes": {
-    "indicis": {
-      "titol": "Indicis de consum",
-      "text": "Hi ha indicis suficients de consum? (ulls vermells, pupil·les dilatades/contretes, olor, conducció errática, manifestació del conductor, substància visible…)",
+
+    "indicis_inicial": {
+      "titol": "Pas previ — context de la prova",
+      "text": "En quin context fas la prova?",
+      "info": "El control de drogues pot ser preventiu (sense indicis) com l'alcohol — STS 24/03/2017",
       "opcions": [
-        { "etiqueta": "Sí, indicis clars",          "va_a": "oferiment_test" },
-        { "etiqueta": "No, només control rutinari", "va_a": "oferiment_test" }
-      ]
-    },
-    "oferiment_test": {
-      "titol": "Oferiment de prova salival",
-      "text": "Oferiment del test indiciari de saliva (drogotest). Resposta del conductor?",
-      "info": "Advertir: negativa = delicte Art. 383 CP",
-      "opcions": [
-        { "etiqueta": "Accepta fer la prova",       "va_a": "resultat_salival" },
-        { "etiqueta": "Es nega",                    "va_a": "fi_383_drogues" }
-      ]
-    },
-    "resultat_salival": {
-      "titol": "Resultat prova salival indiciària",
-      "text": "Resultat del drogotest?",
-      "opcions": [
-        { "etiqueta": "Negatiu",                    "va_a": "fi_negatiu_drogues" },
-        { "etiqueta": "Positiu a una o més substàncies", "va_a": "evidencial_salival" }
-      ]
-    },
-    "evidencial_salival": {
-      "titol": "Segona prova evidencial",
-      "text": "Es recull mostra salival per anàlisi al laboratori. Hi ha signes d'influència evident (inseguretat, parla confusa, conducció anòmala)?",
-      "info": "La influència + positiu evidencial pot derivar a via penal",
-      "opcions": [
-        { "etiqueta": "Positiu sense símptomes d'influència", "va_a": "fi_admin_drogues" },
-        { "etiqueta": "Positiu AMB influència evident",       "va_a": "fi_penal_drogues" }
+        { "etiqueta": "Control preventiu rutinari",                                "va_a": "oferiment_test" },
+        { "etiqueta": "Conductor amb símptomes evidents",                          "va_a": "documentar_simptomes" },
+        { "etiqueta": "Implicat en accident",                                      "va_a": "oferiment_test_obligatori" },
+        { "etiqueta": "Cometent una altra infracció",                              "va_a": "oferiment_test" }
       ]
     },
 
-    "fi_negatiu_drogues": {
+    "documentar_simptomes": {
+      "titol": "DOCUMENTAR símptomes ABANS de la prova",
+      "text": "Anotar al diari/PDA els símptomes observats. Aquests són clau si el cas deriva a penal.",
+      "checklist_simptomes": [
+        "Pupil·les: midriasi (cocaïna, amfet, MDMA, cànnabis recent) o miosi (opiacis)",
+        "Conjuntiva ocular vermellosa o brillant",
+        "Reflex pupil·lar lent",
+        "Parla: lenta, embaridada, repetitiva, accelerada, fragmentada",
+        "Marxa: vacil·lant, descoordinada, base ampla",
+        "Equilibri: prova Romberg",
+        "Olor a marihuana al vehicle/persona",
+        "Tremolors mans",
+        "Suor excessiva",
+        "Conducta: agitació, somnolència, eufòria, paranoia, riures inadequats",
+        "Conducció errática prèvia: oscil·lació, infraccions, reaccions lentes",
+        "Manifestacions del propi conductor (consum admès)",
+        "Substància o útils de consum visibles al vehicle"
+      ],
+      "opcions": [
+        { "etiqueta": "Símptomes documentats — continuar prova", "va_a": "oferiment_test" }
+      ]
+    },
+
+    "oferiment_test": {
+      "titol": "Oferiment formal del test salival",
+      "text": "Li requereixes la prova. Resposta?",
+      "info": "L'advertiment de conseqüències penals si es nega és OBLIGATORI per poder aplicar després l'Art. 383 CP.",
+      "frase_advertiment": "'Li requereixo formalment a sotmetre's a la prova de detecció de drogues. L'adverteixo que la negativa pot constituir un delicte de l'article 383 del Codi Penal, castigat amb presó de 6 mesos a 1 any i privació del permís d'1 a 4 anys.'",
+      "opcions": [
+        { "etiqueta": "Accepta la prova",                                          "va_a": "resultat_indiciari" },
+        { "etiqueta": "Es nega (advertit i reiterat)",                             "va_a": "fi_383_drogues" }
+      ]
+    },
+
+    "oferiment_test_obligatori": {
+      "titol": "Prova obligatòria — accident",
+      "text": "En accidents, TOTS els conductors implicats han de fer prova (Art. 14.2 TRLSV). La negativa és delicte sí o sí.",
+      "opcions": [
+        { "etiqueta": "Accepta",                                                   "va_a": "resultat_indiciari" },
+        { "etiqueta": "Es nega",                                                   "va_a": "fi_383_drogues" }
+      ]
+    },
+
+    "resultat_indiciari": {
+      "titol": "Resultat prova indiciària salival",
+      "text": "Resultat del cribratge salival (Dräger DrugTest 5000 o equivalent)?",
+      "info": "Drogotest indiciari té un cert percentatge de falsos positius — sempre confirmar amb evidencial al laboratori.",
+      "opcions": [
+        { "etiqueta": "NEGATIU a totes les substàncies",                           "va_a": "fi_negativa_drogues" },
+        { "etiqueta": "POSITIU a una o més substàncies",                           "va_a": "recollida_evidencial" }
+      ]
+    },
+
+    "recollida_evidencial": {
+      "titol": "Recollida mostra evidencial salival",
+      "text": "Procediment de recollida amb cadena de custòdia per al laboratori.",
+      "checklist_evidencial": [
+        "Kit oficial precintat (Quantisal o equivalent homologat)",
+        "Mostra prou volum (mínim segons fabricant)",
+        "Etiquetatge: data, hora, agent, conductor, vehicle, lloc",
+        "Precintat davant del conductor",
+        "Acta de cadena de custòdia signada (3 còpies)",
+        "Trasllat a laboratori homologat (refrigeració si > 24h)"
+      ],
+      "info": "Comprovar a continuació SÍMPTOMES INFLUÈNCIA per derivar via penal o administrativa",
+      "opcions": [
+        { "etiqueta": "Símptomes clars d'INFLUÈNCIA en la conducció",              "va_a": "fi_penal_379_2_drogues" },
+        { "etiqueta": "Sense símptomes d'influència acreditats",                   "va_a": "comprovacio_recepta" }
+      ]
+    },
+
+    "comprovacio_recepta": {
+      "titol": "Comprovació de prescripció mèdica",
+      "text": "Si el positiu és per benzodiazepines o opiacis, té recepta mèdica vigent?",
+      "info": "Recepta mèdica eximeix de la sanció administrativa — sempre que no hi hagi influència. Si hi ha influència, la recepta NO eximeix del 379.2 CP.",
+      "opcions": [
+        { "etiqueta": "Presenta recepta mèdica vàlida (i no hi ha influència)",   "va_a": "fi_recepta_ok" },
+        { "etiqueta": "No presenta recepta / no és justificada",                  "va_a": "fi_admin_drogues" },
+        { "etiqueta": "Recepta vàlida però hi ha influència en la conducció",     "va_a": "fi_penal_379_2_drogues" }
+      ]
+    },
+
+    "fi_negativa_drogues": {
       "final": true,
       "tipus": "ok",
-      "titol": "✅ Prova negativa",
-      "accio": "Es deixa marxar el conductor"
+      "titol": "✅ Negativa a drogues",
+      "accio": "Es deixa marxar el conductor",
+      "documentacio": "Anotació al servei"
     },
+
+    "fi_recepta_ok": {
+      "final": true,
+      "tipus": "ok",
+      "titol": "✅ Justificat per recepta mèdica",
+      "text": "El positiu queda explicat per medicació prescrita. Sense influència = no infracció.",
+      "accions": [
+        "Verificar recepta (data, fàrmac, posologia)",
+        "Anotar al servei",
+        "Aconsellar conduir amb prudència",
+        "Si dubtes greus: enviar mostra a laboratori igualment per confirmar"
+      ]
+    },
+
     "fi_admin_drogues": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Infracció MOLT GREU — Art. 77.c TRLSV",
-      "text": "Presència de drogues a l'organisme sense signes d'influència penal.",
-      "import": "1.000 € (500 € amb pagament voluntari 50%)",
+      "titol": "⚠️ MOLT GREU — Presència de drogues (Art. 14.1 TRLSV)",
+      "concepte_butlleta": "Conduir un vehicle amb presència de drogues a l'organisme",
+      "article_butlleta": "Art. 14.1 TRLSV",
+      "import": "1.000 € (DTE 500 € amb pagament voluntari)",
       "punts": "–6 punts",
-      "accions": [
-        "Immobilització del vehicle (Art. 104 TRLSV)",
-        "Enviar mostra salival al laboratori per confirmació",
-        "Lliurament a conductor substitut o grua"
+      "punts_bici_vmp": "0 punts si conduïa bicicleta/VMP",
+      "accions_operatives": [
+        "1. Butlletí de denúncia",
+        "2. Acta d'intervenció amb mostra evidencial precintada",
+        "3. Cadena de custòdia documentada",
+        "4. Tramesa al laboratori homologat (Toxicologia, INTCF)",
+        "5. IMMOBILITZACIÓ del vehicle (Art. 104.1.a TRLSV)",
+        "6. Conductor sustitut o grua",
+        "7. Informar del dret a contrastació (anàlisi de sang)"
       ],
-      "document": "Butlletí + acta drogues + mostra precintada + full de custòdia",
-      "base_legal": ["Art. 77.c TRLSV", "Art. 27 RGC"]
+      "documentacio": "Butlletí + acta intervenció mostra + cadena custòdia + tiquet drogotest",
+      "info_extra": "Si en confirmar-se al laboratori NO surt positiu: anul·lació de la sanció (raons, anar a l'instructor)"
     },
-    "fi_penal_drogues": {
+
+    "fi_penal_379_2_drogues": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE — Art. 379.2 CP (conducció sota influència de drogues)",
+      "titol": "🚔 DELICTE — Art. 379.2 CP (sota INFLUÈNCIA de drogues)",
+      "text": "Conducció sota la influència de drogues. CAL acreditar que les drogues afectaven la capacitat de conduir.",
       "pena": "Presó 3-6 mesos O multa 6-12 mesos O TBC 31-90 dies + privació permís 1-4 anys",
-      "clau": "No n'hi ha prou amb el positiu: cal acreditar INFLUÈNCIA en la conducció. Documentar símptomes i conducta.",
-      "accions": [
-        "Detenció (o citació segons cas)",
-        "Lectura de drets",
-        "Atestat amb descripció detallada de símptomes observats",
-        "Testimonis (agents actuants)",
-        "Cadena de custòdia de la mostra",
-        "Posada a disposició del Jutjat"
+      "diferencia_amb_admin": "L'administrativa (Art. 14.1) és per la mera presència. El delicte (379.2) requereix que el TS doni per provada la INFLUÈNCIA — per això cal documentar molt bé els símptomes.",
+      "accions_ordenades": [
+        "1. Avisar Mossos / Sala",
+        "2. DETENCIÓ del conductor",
+        "3. Lectura de drets (Art. 520 LECrim)",
+        "4. Mostra evidencial salival amb totes les garanties",
+        "5. Oferiment d'analítica de sang (centre sanitari)",
+        "6. Intervenció permís",
+        "7. Immobilització vehicle",
+        "8. ATESTAT PENAL amb:",
+        "   - Diligència manifestació detingut",
+        "   - Diligència informació drets",
+        "   - DILIGÈNCIA EXHAUSTIVA DE SÍMPTOMES — clau per al jutjat",
+        "   - Diligència recollida mostra + cadena custòdia",
+        "   - Tiquets / kit drogotest",
+        "9. Informe a Toxicologia (laboratori)",
+        "10. Posada a disposició Jutjat Guàrdia"
       ],
-      "document": "Atestat penal + acta + mostra amb cadena de custòdia",
-      "base_legal": ["Art. 379.2 CP"]
+      "elements_provatoris_clau": [
+        "Resultat positiu indiciari (drogotest)",
+        "Resultat positiu evidencial (laboratori)",
+        "INFORME D'AGENT amb símptomes objectivats (clau per acreditar influència)",
+        "Conducta del conductor (manifestacions, conducció, fets)",
+        "Possibles testimonis",
+        "Substància intervinguda al vehicle si n'hi ha"
+      ],
+      "competencia": "Jutjat d'Instrucció de Guàrdia"
     },
+
     "fi_383_drogues": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE — Art. 383 CP (negativa a test de drogues)",
-      "requisits": [
-        "Oferiment formal de la prova",
-        "Advertiment exprés de conseqüències penals",
-        "Reiteració",
-        "Constància documental"
-      ],
+      "titol": "🚔 DELICTE — Art. 383 CP (negativa a proves de drogues)",
       "pena": "Presó 6 mesos - 1 any + privació permís 1-4 anys",
+      "requisits": [
+        "Oferiment formal documentat",
+        "Advertiment exprés conseqüències penals",
+        "Reiteració",
+        "Constància (testimoni, càmera, atestat detallat)"
+      ],
       "accions": [
         "Detenció",
-        "Lectura de drets",
-        "Immobilització del vehicle",
-        "Atestat amb diligència de la negativa i testimonis",
-        "Posada a disposició del Jutjat de Guàrdia"
+        "Lectura drets",
+        "Immobilització vehicle",
+        "Atestat penal amb diligència específica de la negativa",
+        "Posada a disposició Jutjat de Guàrdia"
       ],
-      "base_legal": ["Art. 383 CP"]
+      "compatible_amb": "Art. 379.2 CP si hi ha indicis d'influència (símptomes) — concurs"
     }
-  }
+  },
+  "notes_finals": [
+    "Drogotest té falsos positius (CBD legal pot donar positiu THC en alguns kits — informar conductor del seu dret a contrast).",
+    "Cànnabis: THC pot ser detectable dies/setmanes després del consum sense estar sota influència actual. Per això cal documentar símptomes.",
+    "Cocaïna: detecció 2-3 dies. Influència pot durar hores.",
+    "Mostres salivals: refrigerar si trasllat > 24h. Sempre cadena custòdia.",
+    "Si el conductor és menor: AVÍS a tutors + Serveis Socials. Investigar origen substància.",
+    "Si conductor té substàncies al vehicle: valorar 36.16 LOPSC (consum/tinença en via pública) o Art. 368 CP (tràfic) — veure mòdul penal.",
+    "Hospitals: alguns CAPs no tenen capacitat anàlisi sang per drogues — derivar a hospital de referència."
+  ]
 }
