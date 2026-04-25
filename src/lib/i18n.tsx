@@ -88,6 +88,75 @@ const DICT: Record<Locale, Dict> = {
     'checklist.kind.penal': 'Delito (vía penal)',
     'checklist.kind.procediment': 'Procedimiento',
 
+    // Sanción (campos de la butlleta y variantes de pena)
+    'checklist.forTicket': 'Para el boletín de denuncia',
+    'checklist.parallelTicket': 'Sanción administrativa paralela',
+    'checklist.pointsBiciVmp': 'Puntos (bici/VMP)',
+    'checklist.penaltyVariants': 'Variantes de pena',
+    'checklist.penaltySection1': 'Apartado 1',
+    'checklist.penaltySection2': 'Apartado 2',
+    'checklist.penaltyWithDanger': 'Con peligro concreto',
+    'checklist.penaltyNoDanger': 'Sin peligro concreto',
+    'checklist.penaltyGrossNeg': 'Imprudencia grave',
+    'checklist.penaltyLessNeg': 'Imprudencia menos grave',
+    'checklist.penaltyRef': 'Pena referencial',
+    'checklist.standardWarning': 'Frase de advertencia estándar',
+
+    // Acciones / actuaciones
+    'checklist.criticalSteps': 'Pasos críticos (orden estricto)',
+    'checklist.orderedSteps': 'Pasos ordenados',
+    'checklist.operativeActions': 'Actuaciones operativas',
+
+    // Documentación
+    'checklist.documentation': 'Documentación',
+    'checklist.keyDocumentation': 'Documentación clave',
+    'checklist.ticket': 'Tique / comprobante',
+
+    // Drets, símptomes, elements, requisits, excepcions, exemples
+    'checklist.driverRights': 'Derechos a informar al conductor',
+    'checklist.symptomsToProve': 'Síntomas a acreditar',
+    'checklist.elementsToProve': 'Elementos a acreditar',
+    'checklist.keyEvidence': 'Elementos probatorios clave',
+    'checklist.keyRequirements': 'Requisitos clave',
+    'checklist.mandatoryRequirements': 'Requisitos obligatorios',
+    'checklist.exceptions': 'Excepciones',
+    'checklist.legitExceptions': 'Excepciones legítimas',
+    'checklist.examples': 'Ejemplos',
+    'checklist.conditionExamples': 'Ejemplos de condiciones',
+    'checklist.caseLaw': 'Jurisprudencia',
+
+    // Notas info_*
+    'checklist.keyInfo': 'Información clave',
+    'checklist.extraInfo': 'Información adicional',
+    'checklist.ticketInfo': 'Sobre el boletín',
+    'checklist.applicabilityInfo': 'Aplicabilidad',
+    'checklist.immobilizationInfo': 'Inmovilización',
+    'checklist.commonModifications': 'Reformas habituales',
+
+    // Misc
+    'checklist.obligation': 'Obligatoriedad',
+    'checklist.responsibility': 'Responsabilidad',
+    'checklist.competence': 'Competencia',
+    'checklist.compatibleWith': 'Compatible con',
+    'checklist.concurrenceArt195': 'Concurso con art. 195 CP',
+    'checklist.differenceWithAdmin': 'Diferencia con vía administrativa',
+
+    // Notas técnicas (raíz del checklist)
+    'checklist.tech.title': 'Notas técnicas y referencias rápidas',
+    'checklist.tech.alcoholMargins': 'Márgenes de error etilómetro',
+    'checklist.tech.speedMargins': 'Márgenes de error cinemómetros',
+    'checklist.tech.speedCameraTypes': 'Tipos de cinemómetros',
+    'checklist.tech.speedLimits': 'Límites genéricos por vía',
+    'checklist.tech.itvDeadlines': 'ITV — plazos vigentes',
+    'checklist.tech.itvStates': 'Estados posibles de la ITV',
+    'checklist.tech.permitDeadlines': 'Caducidad del permiso',
+    'checklist.tech.diffAdminPenal': 'Diferencias clave admin / penal',
+    'checklist.tech.priorChecks': 'Comprobaciones previas',
+    'checklist.tech.actionPriorities': 'Prioridades de actuación',
+    'checklist.tech.drugsDetected': 'Sustancias detectadas (drogotest)',
+    'checklist.tech.keyDiff': 'Diferencia clave',
+    'checklist.tech.finalNotes': 'Notas finales (recordatorios)',
+
     // Counts
     'cards.one': 'ficha',
     'cards.other': 'fichas',
@@ -204,6 +273,75 @@ const DICT: Record<Locale, Dict> = {
     'checklist.kind.administrativa': 'Infracció administrativa',
     'checklist.kind.penal': 'Delicte (via penal)',
     'checklist.kind.procediment': 'Procediment',
+
+    // Sanció (camps de la butlleta i variants de pena)
+    'checklist.forTicket': 'Per a la butlleta de denúncia',
+    'checklist.parallelTicket': 'Sanció administrativa paral·lela',
+    'checklist.pointsBiciVmp': 'Punts (bici/VMP)',
+    'checklist.penaltyVariants': 'Variants de pena',
+    'checklist.penaltySection1': 'Apartat 1',
+    'checklist.penaltySection2': 'Apartat 2',
+    'checklist.penaltyWithDanger': 'Amb perill concret',
+    'checklist.penaltyNoDanger': 'Sense perill concret',
+    'checklist.penaltyGrossNeg': 'Imprudència greu',
+    'checklist.penaltyLessNeg': 'Imprudència menys greu',
+    'checklist.penaltyRef': 'Pena referencial',
+    'checklist.standardWarning': "Frase d'advertiment estàndard",
+
+    // Accions / actuacions
+    'checklist.criticalSteps': 'Passos crítics (ordre estricte)',
+    'checklist.orderedSteps': 'Passos ordenats',
+    'checklist.operativeActions': 'Actuacions operatives',
+
+    // Documentació
+    'checklist.documentation': 'Documentació',
+    'checklist.keyDocumentation': 'Documentació clau',
+    'checklist.ticket': 'Tiquet / comprovant',
+
+    // Drets, símptomes, elements, requisits, excepcions, exemples
+    'checklist.driverRights': 'Drets a informar al conductor',
+    'checklist.symptomsToProve': 'Símptomes a acreditar',
+    'checklist.elementsToProve': 'Elements a acreditar',
+    'checklist.keyEvidence': 'Elements probatoris clau',
+    'checklist.keyRequirements': 'Requisits clau',
+    'checklist.mandatoryRequirements': 'Requisits obligatoris',
+    'checklist.exceptions': 'Excepcions',
+    'checklist.legitExceptions': 'Excepcions legítimes',
+    'checklist.examples': 'Exemples',
+    'checklist.conditionExamples': 'Exemples de condicions',
+    'checklist.caseLaw': 'Jurisprudència',
+
+    // Notes info_*
+    'checklist.keyInfo': 'Informació clau',
+    'checklist.extraInfo': 'Informació addicional',
+    'checklist.ticketInfo': 'Sobre la butlleta',
+    'checklist.applicabilityInfo': 'Aplicabilitat',
+    'checklist.immobilizationInfo': 'Immobilització',
+    'checklist.commonModifications': 'Reformes habituals',
+
+    // Misc
+    'checklist.obligation': 'Obligatorietat',
+    'checklist.responsibility': 'Responsabilitat',
+    'checklist.competence': 'Competència',
+    'checklist.compatibleWith': 'Compatible amb',
+    'checklist.concurrenceArt195': 'Concurs amb art. 195 CP',
+    'checklist.differenceWithAdmin': 'Diferència amb via administrativa',
+
+    // Notes tècniques (arrel del checklist)
+    'checklist.tech.title': 'Notes tècniques i referències ràpides',
+    'checklist.tech.alcoholMargins': "Marges d'error etilòmetre",
+    'checklist.tech.speedMargins': "Marges d'error cinemòmetres",
+    'checklist.tech.speedCameraTypes': 'Tipus de cinemòmetres',
+    'checklist.tech.speedLimits': 'Límits genèrics per via',
+    'checklist.tech.itvDeadlines': 'ITV — terminis vigents',
+    'checklist.tech.itvStates': 'Estats possibles de la ITV',
+    'checklist.tech.permitDeadlines': 'Caducitat del permís',
+    'checklist.tech.diffAdminPenal': 'Diferències clau admin / penal',
+    'checklist.tech.priorChecks': 'Comprovacions prèvies',
+    'checklist.tech.actionPriorities': 'Prioritats d\'actuació',
+    'checklist.tech.drugsDetected': 'Substàncies detectades (drogotest)',
+    'checklist.tech.keyDiff': 'Diferència clau',
+    'checklist.tech.finalNotes': 'Notes finals (recordatoris)',
 
     // Counts
     'cards.one': 'fitxa',
