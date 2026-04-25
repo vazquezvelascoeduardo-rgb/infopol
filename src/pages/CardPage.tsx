@@ -4,7 +4,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { MODULES, getCard } from '../lib/content';
 import { Markdown } from '../lib/markdown';
-import HtmlFrame from '../components/HtmlFrame';
+import HtmlInline from '../components/HtmlInline';
 import { useT } from '../lib/i18n';
 
 export default function CardPage() {
@@ -52,7 +52,7 @@ export default function CardPage() {
             {breadcrumb}
           </div>
         </div>
-        <HtmlFrame html={card.body} title={card.title} />
+        <HtmlInline html={card.body} title={card.title} />
       </article>
     );
   }
