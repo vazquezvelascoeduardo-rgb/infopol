@@ -8,26 +8,59 @@ import { useEffect, useRef, useState } from 'react';
 
 type Props = { html: string; title: string };
 
-// CSS que s'injecta dins de l'iframe quan l'app està en MODE CLAR.
-// Invertim la lluminositat i rotem 180° el to (color) perquè les
-// infografies fosques es vegin clares però conservin els tons d'accent
-// (el vermell continua sent vermell, el blau blau, el daurat groguenc...).
-// Les imatges, vídeos i icones es reinvertien perquè no surtin "foto
-// negatiu".
+// CSS injectat dins de l'iframe quan l'app està en MODE CLAR.
+//
+// Estratègia: en lloc d'invertir colors (que produïa un blanc trencat /
+// grisós), sobreescrivim les variables CSS que totes les infografies
+// fan servir per construir la paleta navy + dorat. D'aquesta manera
+// obtenim un tema clar "real" amb fons blanc pur, mantenint els accents
+// (daurat, blau, vermell, verd) lleugerament ajustats per al contrast.
+//
+// També tenim un fallback `html.ipol-light body { ... }` per a fitxes
+// que no fan servir variables CSS i hardcodejen els colors al body.
 const LIGHT_THEME_CSS = `
   html.ipol-light {
-    filter: invert(92%) hue-rotate(180deg);
-    background: #f8fafc;
+    background: #ffffff !important;
+
+    /* Esquema de variables principal (la majoria de fitxes) */
+    --bg-main: #ffffff !important;
+    --bg-section: #f8fafc !important;
+    --text-main: #0a1628 !important;
+    --text-secondary: #475569 !important;
+    --border: #c8a028 !important;
+
+    /* Variants per a fitxes que fan servir noms d'accent ("accent-*") */
+    --accent-gold: #b8920e !important;
+    --accent-blue: #1a5c96 !important;
+    --alert-red: #b91c1c !important;
+    --positive-green: #15803d !important;
+
+    /* Variants per a fitxes amb noms curts (catàleg de trànsit) */
+    --bg: #ffffff !important;
+    --txt: #0a1628 !important;
+    --gold: #b8920e !important;
+    --blue: #1a5c96 !important;
+    --blue-royal: #1a5c96 !important;
+    --green: #15803d !important;
+    --red: #b91c1c !important;
   }
-  html.ipol-light img,
-  html.ipol-light video,
-  html.ipol-light picture,
-  html.ipol-light svg image,
-  html.ipol-light iframe,
-  html.ipol-light embed,
-  html.ipol-light object,
-  html.ipol-light [data-no-invert] {
-    filter: invert(100%) hue-rotate(180deg);
+
+  /* Cobertura per a fitxes que no fan servir variables a body. */
+  html.ipol-light body {
+    background-color: #ffffff !important;
+    background-image: none !important;
+    color: #0a1628 !important;
+  }
+
+  /* Reforç visual: en mode clar, les targetes/seccions necessiten una
+     vora suau perquè es distingeixin sobre el fons blanc. */
+  html.ipol-light .section,
+  html.ipol-light .subsection,
+  html.ipol-light .card,
+  html.ipol-light .panel,
+  html.ipol-light .box {
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
   }
 `;
 
