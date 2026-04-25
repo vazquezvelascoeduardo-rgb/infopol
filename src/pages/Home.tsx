@@ -1,16 +1,16 @@
-// Pantalla d'inici: tauler amb targetes per cada mòdul.
-// Disseny minimalista en mode clar (blanc pur, ombres suaus) i estètica
-// infogràfica en mode fosc (navy + daurat).
+// Pantalla principal de l'app: dues seccions grans.
+//   1) Lleis      → tot el contingut de temari (CE78, Codi penal, FCS, etc.).
+//   2) Operativa  → procediments per situació (Trànsit, Seguretat ciutadana…).
 import { Link } from 'react-router-dom';
-import { MODULES, getCardsByModule } from '../lib/content';
-import { plural, useT } from '../lib/i18n';
+import { useT } from '../lib/i18n';
 import PoliceCarIcon from '../components/PoliceCarIcon';
 
 export default function Home() {
   const { t } = useT();
+
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-6">
-      {/* Banda superior tipus "esquema operatiu" */}
+      {/* Banda superior */}
       <section className="rounded-2xl border p-5 sm:p-7 shadow-sm
         border-slate-200 bg-white
         dark:border-white/10 dark:bg-gradient-to-br dark:from-[#0f1d34] dark:to-[#0a1628] dark:shadow-none">
@@ -32,63 +32,81 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Títol seccions */}
-      <div className="mt-7 mb-3 flex items-center gap-3">
-        <span className="h-6 w-1 rounded-full bg-amber-500 dark:bg-amber-400"></span>
-        <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-600 dark:text-slate-300">
-          {t('home.sections')}
-        </h2>
-      </div>
-
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {MODULES.map((m) => {
-          const count = getCardsByModule(m.slug).length;
-          const title = t(`module.${m.slug}.title`);
-          const desc = t(`module.${m.slug}.desc`);
-          return (
-            <li key={m.slug}>
-              <Link
-                to={`/s/${m.slug}`}
-                className="group relative block overflow-hidden rounded-2xl border p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md
-                  border-slate-200 bg-white hover:border-amber-400/60
-                  dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-amber-400/40"
+      {/* Dues targetes grans */}
+      <ul className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* LLEIS */}
+        <li>
+          <Link
+            to="/leyes"
+            className="group relative block h-full overflow-hidden rounded-2xl border p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md
+              border-slate-200 bg-white hover:border-amber-400/60
+              dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-amber-400/40"
+          >
+            <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-amber-500 to-amber-700" />
+            <div className="flex items-start gap-4">
+              <span
+                aria-hidden
+                className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-amber-700 text-3xl text-white shadow-inner"
               >
-                <span
-                  aria-hidden
-                  className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${m.accent}`}
-                />
-                <div className="flex items-center gap-3">
-                  <span
-                    aria-hidden
-                    className={`inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${m.accent} text-lg text-white shadow-inner`}
-                  >
-                    {m.icon}
-                  </span>
-                  <div className="min-w-0">
-                    <div className="font-bold truncate">{title}</div>
-                    <div className="text-xs text-slate-500 dark:text-slate-400 truncate">
-                      {desc}
-                    </div>
-                  </div>
+                ⚖️
+              </span>
+              <div className="min-w-0">
+                <div className="text-[10px] uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400/90">
+                  {t('home.leyes.badge')}
                 </div>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs ring-1
-                    bg-slate-50 text-slate-600 ring-slate-200
-                    dark:bg-white/5 dark:text-slate-300 dark:ring-white/10">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                      <polyline points="14 2 14 8 20 8" />
-                    </svg>
-                    {count} {plural(t, count, 'cards')}
-                  </span>
-                  <span className="text-amber-600 dark:text-amber-400 opacity-0 group-hover:opacity-100 transition" aria-hidden>
-                    →
-                  </span>
+                <h2 className="mt-1 text-2xl font-black tracking-tight">
+                  {t('home.leyes.title')}
+                </h2>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                  {t('home.leyes.desc')}
+                </p>
+              </div>
+            </div>
+            <div className="mt-5 flex items-center justify-end text-amber-600 dark:text-amber-400">
+              <span className="text-sm font-semibold">
+                {t('home.leyes.cta')}
+              </span>
+              <span className="ml-1 transition group-hover:translate-x-1" aria-hidden>→</span>
+            </div>
+          </Link>
+        </li>
+
+        {/* OPERATIVA */}
+        <li>
+          <Link
+            to="/operativa"
+            className="group relative block h-full overflow-hidden rounded-2xl border p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md
+              border-slate-200 bg-white hover:border-blue-400/60
+              dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-blue-400/40"
+          >
+            <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 to-blue-800" />
+            <div className="flex items-start gap-4">
+              <span
+                aria-hidden
+                className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-800 text-3xl text-white shadow-inner"
+              >
+                🚨
+              </span>
+              <div className="min-w-0">
+                <div className="text-[10px] uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400/90">
+                  {t('home.operativa.badge')}
                 </div>
-              </Link>
-            </li>
-          );
-        })}
+                <h2 className="mt-1 text-2xl font-black tracking-tight">
+                  {t('home.operativa.title')}
+                </h2>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                  {t('home.operativa.desc')}
+                </p>
+              </div>
+            </div>
+            <div className="mt-5 flex items-center justify-end text-blue-600 dark:text-blue-400">
+              <span className="text-sm font-semibold">
+                {t('home.operativa.cta')}
+              </span>
+              <span className="ml-1 transition group-hover:translate-x-1" aria-hidden>→</span>
+            </div>
+          </Link>
+        </li>
       </ul>
     </div>
   );

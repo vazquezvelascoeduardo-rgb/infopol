@@ -30,12 +30,58 @@ const DICT: Record<Locale, Dict> = {
     'lang.toggle': 'Cambiar idioma',
     'footer': 'InfoPol · Consulta personal · Información no oficial.',
 
-    // Home
+    // Home (landing principal: 2 grandes opciones)
     'home.badge': 'Esquema operativo policial',
     'home.title': 'Consulta rápida',
     'home.subtitle':
-      'Normativa, infografías y fichas operativas para el agente de policía local. Elige una sección o usa el buscador para ir directo.',
+      'Normativa, infografías y procedimientos operativos para el agente de policía local. Elige una sección.',
     'home.sections': 'Secciones',
+    'home.leyes.badge': 'Temario',
+    'home.leyes.title': 'Leyes',
+    'home.leyes.desc':
+      'Constitución, Código Penal, LECrim, FCS, Tráfico, Seguridad Ciudadana y más. Todas las infografías y normativa.',
+    'home.leyes.cta': 'Abrir leyes',
+    'home.operativa.badge': 'En la calle',
+    'home.operativa.title': 'Operativa',
+    'home.operativa.desc':
+      'Procedimientos por situación: tráfico, seguridad ciudadana… Selecciona y obtén la norma aplicable.',
+    'home.operativa.cta': 'Abrir operativa',
+
+    // Leyes
+    'leyes.badge': 'Temario · Normativa',
+    'leyes.title': 'Leyes',
+    'leyes.subtitle':
+      'Normativa, infografías y fichas operativas para el agente de policía local. Elige una sección o usa el buscador para ir directo.',
+
+    // Operativa
+    'operativa.badge': 'Procedimientos en la calle',
+    'operativa.title': 'Operativa',
+    'operativa.subtitle': 'Selecciona el tema operativo con el que estás trabajando.',
+    'operativa.comingSoon': 'En construcción',
+    'operativa.open': 'Abrir',
+    'operativa.trafico.title': 'Tráfico',
+    'operativa.trafico.desc': 'Identifica la infracción y aplica la norma',
+    'operativa.seguretat-ciutadana.title': 'Seguridad Ciudadana',
+    'operativa.seguretat-ciutadana.desc': 'Procedimientos de seguridad ciudadana',
+
+    // Tráfico (árbol interactivo)
+    'trafico.notFound': 'Esa opción no existe.',
+    'trafico.startOver': 'Volver al inicio de Tráfico',
+    'trafico.back': 'Atrás',
+    'trafico.selectOption': 'Selecciona una opción',
+    'trafico.continue': 'Continuar',
+    'trafico.viewResult': 'Ver resultado',
+    'trafico.severity.leve': 'Infracción leve',
+    'trafico.severity.grave': 'Infracción grave',
+    'trafico.severity.muy-grave': 'Infracción muy grave',
+    'trafico.result.law': 'Ley aplicable',
+    'trafico.result.article': 'Artículo',
+    'trafico.result.fine': 'Multa',
+    'trafico.result.points': 'Puntos',
+    'trafico.result.notes': 'Notas operativas',
+    'trafico.result.penal': 'Vía penal',
+    'trafico.points.one': 'punto',
+    'trafico.points.other': 'puntos',
 
     // Counts
     'cards.one': 'ficha',
@@ -96,12 +142,58 @@ const DICT: Record<Locale, Dict> = {
     'lang.toggle': "Canvia d'idioma",
     'footer': 'InfoPol · Consulta personal · Informació no oficial.',
 
-    // Home
+    // Home (landing principal: 2 grans opcions)
     'home.badge': 'Esquema operatiu policial',
     'home.title': 'Consulta ràpida',
     'home.subtitle':
-      "Normativa, infografies i fitxes operatives per a l'agent de policia local. Tria una secció o usa el cercador per anar directe.",
+      "Normativa, infografies i procediments operatius per a l'agent de policia local. Tria una secció.",
     'home.sections': 'Seccions',
+    'home.leyes.badge': 'Temari',
+    'home.leyes.title': 'Lleis',
+    'home.leyes.desc':
+      'Constitució, Codi penal, LECrim, FCS, Trànsit, Seguretat Ciutadana i més. Totes les infografies i normativa.',
+    'home.leyes.cta': 'Obrir lleis',
+    'home.operativa.badge': 'Al carrer',
+    'home.operativa.title': 'Operativa',
+    'home.operativa.desc':
+      "Procediments per situació: trànsit, seguretat ciutadana… Selecciona i obtén la norma aplicable.",
+    'home.operativa.cta': 'Obrir operativa',
+
+    // Lleis
+    'leyes.badge': 'Temari · Normativa',
+    'leyes.title': 'Lleis',
+    'leyes.subtitle':
+      "Normativa, infografies i fitxes operatives per a l'agent de policia local. Tria una secció o usa el cercador per anar directe.",
+
+    // Operativa
+    'operativa.badge': 'Procediments al carrer',
+    'operativa.title': 'Operativa',
+    'operativa.subtitle': "Tria el tema operatiu amb el qual estàs treballant.",
+    'operativa.comingSoon': 'En construcció',
+    'operativa.open': 'Obrir',
+    'operativa.trafico.title': 'Trànsit',
+    'operativa.trafico.desc': "Identifica la infracció i aplica la norma",
+    'operativa.seguretat-ciutadana.title': 'Seguretat Ciutadana',
+    'operativa.seguretat-ciutadana.desc': 'Procediments de seguretat ciutadana',
+
+    // Trànsit (arbre interactiu)
+    'trafico.notFound': 'Aquesta opció no existeix.',
+    'trafico.startOver': "Torna a l'inici de Trànsit",
+    'trafico.back': 'Enrere',
+    'trafico.selectOption': 'Tria una opció',
+    'trafico.continue': 'Continua',
+    'trafico.viewResult': 'Veure resultat',
+    'trafico.severity.leve': 'Infracció lleu',
+    'trafico.severity.grave': 'Infracció greu',
+    'trafico.severity.muy-grave': 'Infracció molt greu',
+    'trafico.result.law': 'Llei aplicable',
+    'trafico.result.article': 'Article',
+    'trafico.result.fine': 'Multa',
+    'trafico.result.points': 'Punts',
+    'trafico.result.notes': 'Notes operatives',
+    'trafico.result.penal': 'Via penal',
+    'trafico.points.one': 'punt',
+    'trafico.points.other': 'punts',
 
     // Counts
     'cards.one': 'fitxa',

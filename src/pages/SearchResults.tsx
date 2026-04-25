@@ -34,7 +34,7 @@ export default function SearchResults() {
           return (
             <li key={`${c.moduleSlug}/${c.slug}`}>
               <Link
-                to={`/s/${c.moduleSlug}/${c.slug}`}
+                to={`/leyes/s/${c.moduleSlug}/${c.slug}`}
                 className="group flex items-start gap-3 rounded-xl border px-4 py-3 transition
                   border-slate-200 bg-white hover:border-amber-400/60 hover:bg-slate-50
                   dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-amber-400/40 dark:hover:bg-[#13243e]"

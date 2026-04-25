@@ -28,6 +28,8 @@ export default function Section() {
       <nav className="text-sm text-slate-500 dark:text-slate-400">
         <Link to="/" className="hover:underline">{t('nav.home')}</Link>
         <span className="mx-2" aria-hidden>/</span>
+        <Link to="/leyes" className="hover:underline">{t('leyes.title')}</Link>
+        <span className="mx-2" aria-hidden>/</span>
         <span className="text-slate-700 dark:text-slate-200">{modTitle}</span>
       </nav>
 
@@ -68,7 +70,7 @@ export default function Section() {
           {cards.map((c) => (
             <li key={c.slug}>
               <Link
-                to={`/s/${c.moduleSlug}/${c.slug}`}
+                to={`/leyes/s/${c.moduleSlug}/${c.slug}`}
                 className="group block rounded-xl border px-4 py-3 transition
                   border-slate-200 bg-white hover:border-amber-400/60 hover:bg-slate-50
                   dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-amber-400/40 dark:hover:bg-[#13243e]"

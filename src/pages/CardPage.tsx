@@ -31,10 +31,12 @@ export default function CardPage() {
   const langMismatch = bodyLang !== locale;
 
   const breadcrumb = (
-    <nav className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2">
+    <nav className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2 flex-wrap">
       <Link to="/" className="hover:underline">{t('nav.home')}</Link>
       <span aria-hidden>/</span>
-      <Link to={`/s/${mod.slug}`} className="hover:underline">
+      <Link to="/leyes" className="hover:underline">{t('leyes.title')}</Link>
+      <span aria-hidden>/</span>
+      <Link to={`/leyes/s/${mod.slug}`} className="hover:underline">
         <span className="inline-flex items-center gap-1">
           <span
             aria-hidden
