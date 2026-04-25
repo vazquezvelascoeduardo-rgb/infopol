@@ -15,46 +15,386 @@ type Props = { html: string; title: string };
 
 const SCOPE_CLASS = 'fitxa-html-scope';
 
-// Sobreescriptura de variables CSS per al MODE CLAR. La classe
+// Sobreescriptura de variables CSS i estils per al MODE CLAR. La classe
 // `ipol-light` s'afegeix al contenidor quan l'app està en mode clar i
 // força una paleta blanc/dorat real (no inversió de colors).
+//
+// Estratègia (en quatre capes):
+//   1) Sobreescrivim TOTES les variables CSS conegudes per girar la
+//      paleta navy → blanca.
+//   2) Forcem el text a colors foscos i el fons del scope a blanc.
+//   3) Reescrivim els fons "hardcodejats" (gradients de contenidors com
+//      .header, .cronologia, .info-banner, etc.) a versions clares.
+//   4) Reescrivim els colors de text "clars" (#FFD060, #6AADDC, #E86050…)
+//      a versions amb prou contrast sobre blanc.
 const LIGHT_THEME_CSS = `
+  /* ── 1) Variables CSS ── */
   .${SCOPE_CLASS}.ipol-light {
     background: #ffffff !important;
     background-image: none !important;
     color: #0a1628 !important;
 
-    /* Esquema de variables principal */
     --bg-main: #ffffff !important;
     --bg-section: #f8fafc !important;
     --text-main: #0a1628 !important;
     --text-secondary: #475569 !important;
     --border: #c8a028 !important;
 
-    /* Variants amb prefix "accent-" */
-    --accent-gold: #b8920e !important;
-    --accent-blue: #1a5c96 !important;
+    --accent-gold: #a16207 !important;
+    --accent-blue: #1e40af !important;
     --alert-red: #b91c1c !important;
     --positive-green: #15803d !important;
 
-    /* Variants amb noms curts (catàleg de trànsit) */
     --bg: #ffffff !important;
     --txt: #0a1628 !important;
-    --gold: #b8920e !important;
-    --blue: #1a5c96 !important;
-    --blue-royal: #1a5c96 !important;
+    --gold: #a16207 !important;
+    --blue: #1e40af !important;
+    --blue-royal: #1e40af !important;
     --green: #15803d !important;
     --red: #b91c1c !important;
   }
 
-  /* En mode clar, donar més definició a les seccions sobre fons blanc. */
+  /* ── 2) Text per defecte fosc dins del scope ── */
+  .${SCOPE_CLASS}.ipol-light,
+  .${SCOPE_CLASS}.ipol-light p,
+  .${SCOPE_CLASS}.ipol-light li,
+  .${SCOPE_CLASS}.ipol-light span:not([style*="color"]),
+  .${SCOPE_CLASS}.ipol-light div:not([style*="color"]),
+  .${SCOPE_CLASS}.ipol-light td,
+  .${SCOPE_CLASS}.ipol-light th {
+    color: #0f172a;
+  }
+
+  /* ── 3) Contenidors amb fons fosc hardcodejat → versió clara ── */
+
+  /* Capçaleres amb gradients navy (.header, .escudo, .poster) */
+  .${SCOPE_CLASS}.ipol-light .header,
+  .${SCOPE_CLASS}.ipol-light .poster > .header,
+  .${SCOPE_CLASS}.ipol-light .header-block,
+  .${SCOPE_CLASS}.ipol-light .escudo-wrap {
+    background: linear-gradient(135deg, #fffbea 0%, #fef3c7 100%) !important;
+    border-color: #a16207 !important;
+    color: #0f172a !important;
+    box-shadow: 0 1px 3px rgba(15,23,42,0.06) !important;
+  }
+
+  /* Cronologia / línies de temps */
+  .${SCOPE_CLASS}.ipol-light .cronologia,
+  .${SCOPE_CLASS}.ipol-light .timeline-wrap,
+  .${SCOPE_CLASS}.ipol-light .historia,
+  .${SCOPE_CLASS}.ipol-light .evolucio {
+    background: linear-gradient(135deg, #fafafa 0%, #f1f5f9 100%) !important;
+    border-color: #a16207 !important;
+    color: #0f172a !important;
+    box-shadow: 0 1px 2px rgba(15,23,42,0.04) !important;
+  }
+
+  /* Info banners (gradient blue) */
+  .${SCOPE_CLASS}.ipol-light .info-banner,
+  .${SCOPE_CLASS}.ipol-light .banner-info,
+  .${SCOPE_CLASS}.ipol-light .notice,
+  .${SCOPE_CLASS}.ipol-light .info-box {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%) !important;
+    border-color: #2563eb !important;
+    color: #1e3a8a !important;
+    box-shadow: 0 1px 2px rgba(37,99,235,0.08) !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .info-banner *,
+  .${SCOPE_CLASS}.ipol-light .banner-info *,
+  .${SCOPE_CLASS}.ipol-light .info-box * {
+    color: #1e3a8a !important;
+  }
+
+  /* Reforma / alerta banners (gradient red) */
+  .${SCOPE_CLASS}.ipol-light .reforma-banner,
+  .${SCOPE_CLASS}.ipol-light .alerta-box,
+  .${SCOPE_CLASS}.ipol-light .alerta-banner,
+  .${SCOPE_CLASS}.ipol-light .warning,
+  .${SCOPE_CLASS}.ipol-light .stc-banner {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%) !important;
+    border-color: #dc2626 !important;
+    color: #7f1d1d !important;
+    box-shadow: 0 1px 2px rgba(220,38,38,0.08) !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .reforma-banner *,
+  .${SCOPE_CLASS}.ipol-light .alerta-box *,
+  .${SCOPE_CLASS}.ipol-light .alerta-banner *,
+  .${SCOPE_CLASS}.ipol-light .stc-banner * {
+    color: #7f1d1d !important;
+  }
+
+  /* Categoria + section blocks (the "panels" and accordion containers) */
+  .${SCOPE_CLASS}.ipol-light .categoria,
   .${SCOPE_CLASS}.ipol-light .section,
-  .${SCOPE_CLASS}.ipol-light .subsection,
-  .${SCOPE_CLASS}.ipol-light .card,
   .${SCOPE_CLASS}.ipol-light .panel,
-  .${SCOPE_CLASS}.ipol-light .box {
+  .${SCOPE_CLASS}.ipol-light .card,
+  .${SCOPE_CLASS}.ipol-light .box,
+  .${SCOPE_CLASS}.ipol-light .clas-card,
+  .${SCOPE_CLASS}.ipol-light .principis-box,
+  .${SCOPE_CLASS}.ipol-light .clasif-card,
+  .${SCOPE_CLASS}.ipol-light .org,
+  .${SCOPE_CLASS}.ipol-light .w3 {
+    background: #ffffff !important;
     border-color: #e2e8f0 !important;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+    box-shadow: 0 1px 2px rgba(15,23,42,0.04) !important;
+  }
+
+  /* Cat-header (clickable accordion bar — usually blue) */
+  .${SCOPE_CLASS}.ipol-light .cat-header {
+    background: linear-gradient(135deg, #fbf3d8 0%, #fef9e8 100%) !important;
+    color: #0f172a !important;
+    border-bottom: 1px solid #c8a028 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .cat-header * {
+    color: #0f172a !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .cat-icon {
+    color: #a16207 !important;
+  }
+
+  /* Delito / article entries (left-bordered cards) */
+  .${SCOPE_CLASS}.ipol-light .delito,
+  .${SCOPE_CLASS}.ipol-light .article,
+  .${SCOPE_CLASS}.ipol-light .item,
+  .${SCOPE_CLASS}.ipol-light .agravada {
+    background: #f8fafc !important;
+    border-left-color: #a16207 !important;
+    color: #0f172a !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .delito *,
+  .${SCOPE_CLASS}.ipol-light .article *,
+  .${SCOPE_CLASS}.ipol-light .agravada * {
+    color: #0f172a;
+  }
+
+  /* Tables */
+  .${SCOPE_CLASS}.ipol-light .mini-tabla,
+  .${SCOPE_CLASS}.ipol-light .tabla-discip,
+  .${SCOPE_CLASS}.ipol-light .inf-table,
+  .${SCOPE_CLASS}.ipol-light table {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #e2e8f0 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .td-header,
+  .${SCOPE_CLASS}.ipol-light .td-cell,
+  .${SCOPE_CLASS}.ipol-light .celda,
+  .${SCOPE_CLASS}.ipol-light th,
+  .${SCOPE_CLASS}.ipol-light tbody tr,
+  .${SCOPE_CLASS}.ipol-light tbody td {
+    background: transparent !important;
+    color: #0f172a !important;
+    border-color: #e2e8f0 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .td-header,
+  .${SCOPE_CLASS}.ipol-light thead,
+  .${SCOPE_CLASS}.ipol-light thead th {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    font-weight: 700;
+  }
+
+  /* Subtle "key" highlight, "art-ref", badges */
+  .${SCOPE_CLASS}.ipol-light .key,
+  .${SCOPE_CLASS}.ipol-light .art-ref,
+  .${SCOPE_CLASS}.ipol-light .art-badge,
+  .${SCOPE_CLASS}.ipol-light .badge-clave {
+    color: #a16207 !important;
+  }
+
+  /* Notes (notas policiales / clave) */
+  .${SCOPE_CLASS}.ipol-light .nota-policial {
+    background: #f0fdf4 !important;
+    color: #14532d !important;
+    border-left-color: #15803d !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .nota-policial * { color: #14532d !important; }
+
+  .${SCOPE_CLASS}.ipol-light .nota-clave,
+  .${SCOPE_CLASS}.ipol-light .nota-agrav {
+    background: #fffbeb !important;
+    color: #713f12 !important;
+    border-left-color: #a16207 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .nota-clave *,
+  .${SCOPE_CLASS}.ipol-light .nota-agrav * { color: #713f12 !important; }
+
+  /* "Recuerda" highlight box (full gold) — invertim per llegibilitat */
+  .${SCOPE_CLASS}.ipol-light .recuerda {
+    background: #fef3c7 !important;
+    color: #422006 !important;
+    border: 2px solid #a16207 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .recuerda * { color: #422006 !important; }
+
+  /* Reference labels (light blue / light text) → readable on white */
+  .${SCOPE_CLASS}.ipol-light .ref-ley { color: #1e3a8a !important; }
+  .${SCOPE_CLASS}.ipol-light .ref-desc { color: #1e40af !important; }
+  .${SCOPE_CLASS}.ipol-light .ref-fecha {
+    color: #1e3a8a !important;
+    background: rgba(255,255,255,0.7) !important;
+    border-color: #2563eb !important;
+  }
+
+  /* Subtitles, secondary text */
+  .${SCOPE_CLASS}.ipol-light .subtitle,
+  .${SCOPE_CLASS}.ipol-light .label,
+  .${SCOPE_CLASS}.ipol-light .pena-max,
+  .${SCOPE_CLASS}.ipol-light .delito-desc {
+    color: #475569 !important;
+  }
+
+  /* Header label / "esquema operativo policial" tag */
+  .${SCOPE_CLASS}.ipol-light .header-text .label,
+  .${SCOPE_CLASS}.ipol-light .header .label,
+  .${SCOPE_CLASS}.ipol-light .law-id {
+    color: #a16207 !important;
+  }
+
+  /* H1 spans that were gold accents */
+  .${SCOPE_CLASS}.ipol-light h1 span,
+  .${SCOPE_CLASS}.ipol-light .header-text h1 span {
+    color: #a16207 !important;
+  }
+
+  /* Timeline items: gold dates, dark events */
+  .${SCOPE_CLASS}.ipol-light .timeline-item .fecha,
+  .${SCOPE_CLASS}.ipol-light .timeline-item .data {
+    color: #a16207 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .timeline-item .evento,
+  .${SCOPE_CLASS}.ipol-light .timeline-item .esdeveniment {
+    color: #1e293b !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .timeline-item .evento b,
+  .${SCOPE_CLASS}.ipol-light .timeline-item b {
+    color: #a16207 !important;
+  }
+
+  /* Severity tags: keep their semantic colors but darker for contrast */
+  .${SCOPE_CLASS}.ipol-light .clas-leve { background: #dcfce7 !important; border-color: #15803d !important; }
+  .${SCOPE_CLASS}.ipol-light .clas-leve .tipo { color: #166534 !important; }
+  .${SCOPE_CLASS}.ipol-light .clas-menos { background: #dbeafe !important; border-color: #2563eb !important; }
+  .${SCOPE_CLASS}.ipol-light .clas-menos .tipo { color: #1e40af !important; }
+  .${SCOPE_CLASS}.ipol-light .clas-grave { background: #fee2e2 !important; border-color: #dc2626 !important; }
+  .${SCOPE_CLASS}.ipol-light .clas-grave .tipo { color: #991b1b !important; }
+
+  /* Generic colored badges — assume their accent color comes from
+     border/background; just darken text so it's readable on white. */
+  .${SCOPE_CLASS}.ipol-light .badge-grave,
+  .${SCOPE_CLASS}.ipol-light .badge-info,
+  .${SCOPE_CLASS}.ipol-light .badge-local,
+  .${SCOPE_CLASS}.ipol-light .tipo-badge,
+  .${SCOPE_CLASS}.ipol-light .pena-chip,
+  .${SCOPE_CLASS}.ipol-light .multa-badge,
+  .${SCOPE_CLASS}.ipol-light .multa-alta {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+  }
+
+  /* ── 4) Text de colors clars hardcodejats → variants foscos ── */
+
+  /* Or pàl·lid → or fosc */
+  .${SCOPE_CLASS}.ipol-light [style*="color:#FFD060"],
+  .${SCOPE_CLASS}.ipol-light [style*="color: #FFD060"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#E8C060"],
+  .${SCOPE_CLASS}.ipol-light [style*="color: #E8C060"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#E8CC80"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#F0D888"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#E8D890"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#E8A028"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#e0a050"] {
+    color: #a16207 !important;
+  }
+
+  /* Vermell pàl·lid → vermell fosc */
+  .${SCOPE_CLASS}.ipol-light [style*="color:#FF8070"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#FF8870"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#E86050"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#E84038"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#E08888"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#E88880"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#FFB8B0"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#FFB8A8"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#F8C8C0"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#FFEBE8"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#FFD0CC"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#e05050"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#ff7070"] {
+    color: #b91c1c !important;
+  }
+
+  /* Verd pàl·lid → verd fosc */
+  .${SCOPE_CLASS}.ipol-light [style*="color:#4ACD7A"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#5EC880"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#5AE090"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#2AA858"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#B0E8C0"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#A8D4C0"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#E0FFF0"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#4bc878"] {
+    color: #15803d !important;
+  }
+
+  /* Blau pàl·lid → blau fosc */
+  .${SCOPE_CLASS}.ipol-light [style*="color:#6AADDC"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#6ab0f0"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#8FB8E0"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#A8C4E0"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#A8BAD4"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#D8E0EE"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#D8EBFF"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#DCE8FF"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#E0F0FF"],
+  .${SCOPE_CLASS}.ipol-light [style*="color:#F0F4FF"] {
+    color: #1e40af !important;
+  }
+
+  /* Lila → lila fosc (tags morats poc freqüents) */
+  .${SCOPE_CLASS}.ipol-light [style*="color:#c49af0"] {
+    color: #6b21a8 !important;
+  }
+
+  /* Background fosc en línia → fons clar */
+  .${SCOPE_CLASS}.ipol-light [style*="background:rgba(10,22,40"],
+  .${SCOPE_CLASS}.ipol-light [style*="background: rgba(10,22,40"],
+  .${SCOPE_CLASS}.ipol-light [style*="background:rgba(0,0,0"],
+  .${SCOPE_CLASS}.ipol-light [style*="background: rgba(0,0,0"] {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+  }
+
+  /* Botons "imprimir" tipus pill */
+  .${SCOPE_CLASS}.ipol-light .btn-print,
+  .${SCOPE_CLASS}.ipol-light .print-btn,
+  .${SCOPE_CLASS}.ipol-light .clear-btn {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .btn-print:hover,
+  .${SCOPE_CLASS}.ipol-light .print-btn:hover,
+  .${SCOPE_CLASS}.ipol-light .clear-btn:hover {
+    background: #e2e8f0 !important;
+  }
+
+  /* Search bar + tabs (catàleg de trànsit) */
+  .${SCOPE_CLASS}.ipol-light .search-bar,
+  .${SCOPE_CLASS}.ipol-light .search-bar input {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .tab-btn {
+    background: #f8fafc !important;
+    color: #475569 !important;
+    border-color: #cbd5e1 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .tab-btn.active {
+    background: #fef3c7 !important;
+    color: #422006 !important;
+    border-color: #a16207 !important;
   }
 `;
 

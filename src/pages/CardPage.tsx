@@ -2,7 +2,7 @@
 // - Si la fitxa és HTML: ocupa tot l'ample de la pantalla ("edge-to-edge").
 // - Si és Markdown: columna còmoda de lectura.
 import { Link, useParams } from 'react-router-dom';
-import { MODULES, getCard } from '../lib/content';
+import { MODULES, getCard, pickBody } from '../lib/content';
 import { Markdown } from '../lib/markdown';
 import HtmlInline from '../components/HtmlInline';
 import { useT } from '../lib/i18n';
@@ -25,7 +25,10 @@ export default function CardPage() {
   }
 
   const modTitle = t(`module.${mod.slug}.title`);
-  const langMismatch = card.lang !== locale;
+  const { body, lang: bodyLang } = pickBody(card, locale);
+  // Mostrem l'avís d'idioma només quan no hi ha versió en l'idioma
+  // actiu i estem ensenyant un fallback en l'altre idioma.
+  const langMismatch = bodyLang !== locale;
 
   const breadcrumb = (
     <nav className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2">
@@ -45,9 +48,6 @@ export default function CardPage() {
     </nav>
   );
 
-  // Avís quan l'idioma de la fitxa no coincideix amb l'idioma de l'app
-  // (a hores d'ara les infografies HTML no es tradueixen al canviar el
-  // toggle ES/CA, així que avisem que el contingut estarà en l'altre).
   const langNotice = langMismatch ? (
     <div className="flex items-start gap-2 rounded-lg border px-3 py-2 text-xs
       border-amber-300/70 bg-amber-50 text-amber-900
@@ -66,7 +66,7 @@ export default function CardPage() {
         <path d="M14 18h6" />
       </svg>
       <div className="min-w-0">
-        <div className="font-semibold">{t(`card.lang.notice.${card.lang}`)}</div>
+        <div className="font-semibold">{t(`card.lang.notice.${bodyLang}`)}</div>
         <div className="opacity-80">{t('card.lang.notice.hint')}</div>
       </div>
     </div>
@@ -81,7 +81,7 @@ export default function CardPage() {
             {langNotice}
           </div>
         </div>
-        <HtmlInline html={card.body} title={card.title} />
+        <HtmlInline html={body} title={card.title} key={bodyLang} />
       </article>
     );
   }
@@ -91,7 +91,7 @@ export default function CardPage() {
       {breadcrumb}
       {langNotice ? <div className="mt-3">{langNotice}</div> : null}
       <div className="fitxa mt-4">
-        <Markdown source={card.body} />
+        <Markdown source={body} />
       </div>
     </article>
   );

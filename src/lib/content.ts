@@ -84,23 +84,38 @@ export const MODULES: Module[] = [
 
 export type CardKind = 'html' | 'md';
 
-// Idioma detectat del cos de la fitxa. S'utilitza per mostrar un avís
-// quan no coincideix amb l'idioma actiu de l'app (perquè avui les
-// infografies HTML no es tradueixen al canviar el toggle).
+// Idioma del cos d'una fitxa.
 export type CardLang = 'es' | 'ca';
 
+// Per a fitxes amb diverses versions d'idioma, guardem el cos per
+// idioma. La resta de la fitxa (títol, slug, icona…) és comuna.
 export type Card = {
   moduleSlug: string;
-  slug: string; // derivat del nom de fitxer (sense extensió)
+  slug: string; // slug "base" sense sufix d'idioma, usat a la URL
   title: string;
   kind: CardKind;
-  body: string; // cos (HTML complet o Markdown sense frontmatter)
-  raw: string; // fitxer complet, útil per a cerca
-  path: string; // ruta relativa al projecte
-  searchText: string; // versió text pla del cos, usada per cerca
-  icon: string; // icona emoji de la fitxa
-  lang: CardLang; // idioma detectat del cos
+  bodyByLang: Partial<Record<CardLang, string>>; // versions per idioma
+  rawByLang: Partial<Record<CardLang, string>>; // fitxer cru per idioma
+  pathByLang: Partial<Record<CardLang, string>>; // ruta per idioma
+  langs: CardLang[]; // idiomes disponibles, ordenats (es, ca)
+  searchText: string; // text pla combinat de TOTES les versions, per a cerca
+  icon: string;
 };
+
+// Tria el cos d'una fitxa donat un idioma. Si no hi ha versió en aquest
+// idioma, retorna l'altre disponible (fallback) i l'idioma realment
+// utilitzat. Sempre retorna alguna cosa si la fitxa té com a mínim una
+// versió.
+export function pickBody(card: Card, locale: CardLang): {
+  body: string;
+  lang: CardLang;
+} {
+  if (card.bodyByLang[locale]) {
+    return { body: card.bodyByLang[locale]!, lang: locale };
+  }
+  const fallback = card.langs[0];
+  return { body: card.bodyByLang[fallback] ?? '', lang: fallback };
+}
 
 // Globs que carreguen TOT el contingut de /content en temps de build.
 const mdFiles = import.meta.glob('/content/**/*.md', {
@@ -177,6 +192,20 @@ function decodeEntities(s: string): string {
 
 function fileSlug(name: string): string {
   return name.replace(/\.(md|html)$/i, '');
+}
+
+// Separa el sufix d'idioma (".es" o ".ca") del slug del fitxer si hi és.
+// Exemple:
+//   "vmp-esquema-operativo-policial.es"   →  { slug: "vmp-esquema-operativo-policial", lang: "es" }
+//   "viladecans-soroll.ca"                →  { slug: "viladecans-soroll", lang: "ca" }
+//   "fitxa-vella-sense-sufix"             →  { slug: "fitxa-vella-sense-sufix", lang: null }
+function splitLangFromSlug(rawSlug: string): {
+  slug: string;
+  lang: CardLang | null;
+} {
+  const m = rawSlug.match(/^(.+)\.(es|ca)$/i);
+  if (m) return { slug: m[1], lang: m[2].toLowerCase() as CardLang };
+  return { slug: rawSlug, lang: null };
 }
 
 // Detecta l'idioma del text basant-se en marques pràcticament
@@ -259,67 +288,127 @@ function resolveIcon(
   return MODULES.find((m) => m.slug === moduleSlug)?.icon ?? '📄';
 }
 
-// Construïm les fitxes Markdown.
-const mdCards: Card[] = Object.entries(mdFiles).map(([path, raw]) => {
-  const parts = path.replace(/^\/content\//, '').split('/');
-  const moduleSlug = parts[0];
-  const file = parts[parts.length - 1];
-  const slug = fileSlug(file);
-  const { data, body } = parseFrontmatter(raw);
-  const finalTitle = data.title ?? titleFromMarkdown(body, slug);
-  const icon = resolveIcon(moduleSlug, finalTitle, body, data.icon);
-  const lang: CardLang =
-    data.lang === 'ca' || data.lang === 'es' ? data.lang : detectLang(body);
-  return {
-    moduleSlug,
-    slug,
-    title: finalTitle,
-    kind: 'md',
-    body,
-    raw,
-    path,
-    searchText: body,
-    icon,
-    lang,
-  };
-});
+// Construcció de l'índex de fitxes.
+// Agrupem per (moduleSlug, slug-base). Cada fitxa pot tenir versions
+// `<base>.es.html` i/o `<base>.ca.html`. Si una fitxa només té un
+// idioma, l'altre quedarà undefined (el component mostrarà l'únic
+// disponible amb un avís d'idioma).
+type CardBuilder = {
+  moduleSlug: string;
+  slug: string;
+  kind: CardKind;
+  bodyByLang: Partial<Record<CardLang, string>>;
+  rawByLang: Partial<Record<CardLang, string>>;
+  pathByLang: Partial<Record<CardLang, string>>;
+  titleByLang: Partial<Record<CardLang, string>>;
+  searchTextByLang: Partial<Record<CardLang, string>>;
+  iconHint?: string;
+};
 
-// Construïm les fitxes HTML.
-const htmlCards: Card[] = Object.entries(htmlFiles).map(([path, raw]) => {
+const builders = new Map<string, CardBuilder>();
+
+function ensureBuilder(
+  moduleSlug: string,
+  slug: string,
+  kind: CardKind,
+): CardBuilder {
+  const key = `${moduleSlug}/${slug}`;
+  let b = builders.get(key);
+  if (!b) {
+    b = {
+      moduleSlug,
+      slug,
+      kind,
+      bodyByLang: {},
+      rawByLang: {},
+      pathByLang: {},
+      titleByLang: {},
+      searchTextByLang: {},
+    };
+    builders.set(key, b);
+  }
+  return b;
+}
+
+// Markdown
+for (const [path, raw] of Object.entries(mdFiles)) {
   const parts = path.replace(/^\/content\//, '').split('/');
   const moduleSlug = parts[0];
   const file = parts[parts.length - 1];
-  const slug = fileSlug(file);
-  const title = titleFromHtml(raw, slug);
-  // Text pla per cerca i inferència d'icona.
+  const rawSlug = fileSlug(file);
+  const { slug, lang: filenameLang } = splitLangFromSlug(rawSlug);
+  const { data, body } = parseFrontmatter(raw);
+  const lang: CardLang =
+    data.lang === 'ca' || data.lang === 'es'
+      ? data.lang
+      : filenameLang ?? detectLang(body);
+  const title = data.title ?? titleFromMarkdown(body, slug);
+  const b = ensureBuilder(moduleSlug, slug, 'md');
+  b.bodyByLang[lang] = body;
+  b.rawByLang[lang] = raw;
+  b.pathByLang[lang] = path;
+  b.titleByLang[lang] = title;
+  b.searchTextByLang[lang] = body;
+  if (data.icon) b.iconHint = data.icon;
+}
+
+// HTML
+for (const [path, raw] of Object.entries(htmlFiles)) {
+  const parts = path.replace(/^\/content\//, '').split('/');
+  const moduleSlug = parts[0];
+  const file = parts[parts.length - 1];
+  const rawSlug = fileSlug(file);
+  const { slug, lang: filenameLang } = splitLangFromSlug(rawSlug);
   const bodyMatch = raw.match(/<body[^>]*>([\s\S]*)<\/body>/i);
   const bodyHtml = bodyMatch ? bodyMatch[1] : raw;
   const searchText = decodeEntities(stripTags(bodyHtml))
     .replace(/\s+/g, ' ')
     .trim();
+  const lang: CardLang = filenameLang ?? detectLang(searchText);
+  const title = titleFromHtml(raw, slug);
   const explicitIcon = iconFromHtmlMeta(raw);
-  const icon = resolveIcon(moduleSlug, title, searchText, explicitIcon);
-  // Detectem l'idioma a partir del text. NO confiem en l'atribut
-  // <html lang="..."> perquè a la pràctica sovint és incorrecte
-  // (les fitxes en català tenen lang="es" per haver-se copiat de
-  // plantilles).
-  const lang = detectLang(searchText);
+  const b = ensureBuilder(moduleSlug, slug, 'html');
+  b.bodyByLang[lang] = raw;
+  b.rawByLang[lang] = raw;
+  b.pathByLang[lang] = path;
+  b.titleByLang[lang] = title;
+  b.searchTextByLang[lang] = searchText;
+  if (explicitIcon) b.iconHint = explicitIcon;
+}
+
+// Convertim els builders en Cards finals.
+function buildCard(b: CardBuilder): Card {
+  const langs: CardLang[] = (['ca', 'es'] as CardLang[]).filter(
+    (l) => b.bodyByLang[l] !== undefined,
+  );
+  // Títol: prioritzem CA, fallback ES.
+  const title =
+    b.titleByLang.ca ?? b.titleByLang.es ?? b.slug;
+  // Text de cerca: combinem totes les versions perquè la cerca trobi
+  // el contingut sigui quin sigui l'idioma actiu.
+  const searchText = Object.values(b.searchTextByLang)
+    .filter((s): s is string => typeof s === 'string')
+    .join('\n');
+  // Icona: usem el text de cerca per inferir-la (té text en clar de
+  // les versions disponibles).
+  const icon = resolveIcon(b.moduleSlug, title, searchText, b.iconHint);
   return {
-    moduleSlug,
-    slug,
+    moduleSlug: b.moduleSlug,
+    slug: b.slug,
     title,
-    kind: 'html',
-    body: raw,
-    raw,
-    path,
+    kind: b.kind,
+    bodyByLang: b.bodyByLang,
+    rawByLang: b.rawByLang,
+    pathByLang: b.pathByLang,
+    langs,
     searchText,
     icon,
-    lang,
   };
-});
+}
 
-// Índex global: HTML + Markdown, ordenat per títol en català.
-export const ALL_CARDS: Card[] = [...htmlCards, ...mdCards]
+export const ALL_CARDS: Card[] = Array.from(builders.values())
+  .map(buildCard)
+  .filter((c) => c.langs.length > 0)
   .filter((c) => MODULES.some((m) => m.slug === c.moduleSlug))
   .sort((a, b) => a.title.localeCompare(b.title, 'ca'));
 
