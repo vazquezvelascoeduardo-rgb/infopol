@@ -1,0 +1,282 @@
+{
+  "id": "suicidi",
+  "titol": "Crisi suïcida / temptativa / ideació",
+  "categoria": "emergencies",
+  "icono": "🆘",
+  "base_legal": [
+    "Art. 17 CE (llibertat personal)",
+    "Art. 763 LEC (internament involuntari urgent)",
+    "Art. 26 LO 4/2015 (mesures provisionals)",
+    "Art. 143 CP (induir/cooperar suïcidi)",
+    "Art. 195 CP (omissió de socors)",
+    "Llei 12/2009 educació (situació risc menors)"
+  ],
+
+  "principi_clau": "L'objectiu PRIORITARI és preservar la vida. La crisi suïcida és emergència sanitària, no policial-disciplinària. Coordinació amb Salut Mental imprescindible.",
+
+  "recursos_clau": {
+    "024": "Telèfon atenció conducta suïcida — 24h gratuït — assistència especialitzada",
+    "112": "Emergències general",
+    "061": "Emergències sanitàries Catalunya",
+    "telefon_esperanza": "717 003 717 (Telèfon de l'Esperança)",
+    "112_text": "112 per persones amb dificultats auditives (SMS)",
+    "fundacio_anar": "900 20 20 10 (menors)",
+    "salut_mental": "Centre Salut Mental referència"
+  },
+
+  "factors_risc": [
+    "Intents previs (× 40 risc)",
+    "Ideació suïcida verbal o escrita",
+    "Pla concret + mètode disponible",
+    "Aïllament social",
+    "Pèrdues recents (parella, feina, ser estimat)",
+    "Malaltia mental (depressió greu, esquizofrènia, bipolar)",
+    "Consum substàncies",
+    "Situació econòmica límit",
+    "Antecedents familiars",
+    "Context bullying / assetjament (especialment menors)"
+  ],
+
+  "inici": "situacio",
+  "nodes": {
+
+    "situacio": {
+      "titol": "Quina situació tens davant?",
+      "opcions": [
+        { "etiqueta": "Persona en CRISI ACTIVA — encara viva, considera suïcidar-se ARA",   "va_a": "crisi_activa_lloc" },
+        { "etiqueta": "TEMPTATIVA en curs — persona ferida amb intent",                     "va_a": "fi_temptativa_curs" },
+        { "etiqueta": "Suïcidi CONSUMAT (ja mort) — anar a checklist Cadàver",               "va_a": "fi_remetre_cadaver" },
+        { "etiqueta": "IDEACIÓ verbalitzada (ha dit 'em vull matar')",                       "va_a": "fi_ideacio" },
+        { "etiqueta": "Familiar/conegut detecta indicadors — demana ajuda",                  "va_a": "fi_familiar_alerta" },
+        { "etiqueta": "Avís de tercer per persona desapareguda + indicis suïcides",         "va_a": "fi_remetre_desaparicio" },
+        { "etiqueta": "Menor amb ideació o conducta autolesiva",                            "va_a": "fi_menor_suicidi" }
+      ]
+    },
+
+    "crisi_activa_lloc": {
+      "titol": "Localització de la persona en crisi",
+      "opcions": [
+        { "etiqueta": "Lloc accessible (carrer, vorera, plaça)",                            "va_a": "fi_crisi_carrer" },
+        { "etiqueta": "Domicili (a la finestra, balcó, dins amb porta tancada)",            "va_a": "fi_crisi_domicili" },
+        { "etiqueta": "PONT, edifici alt, terrassa…",                                        "va_a": "fi_crisi_alçada" },
+        { "etiqueta": "Vies tren / metro",                                                   "va_a": "fi_crisi_via_tren" },
+        { "etiqueta": "Mar / riu / aigua",                                                   "va_a": "fi_crisi_aigua" },
+        { "etiqueta": "Amb ARMA (foc, blanca)",                                              "va_a": "fi_crisi_arma" }
+      ]
+    },
+
+    "fi_temptativa_curs": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🆘 TEMPTATIVA EN CURS — AUXILI VITAL",
+      "info_critica": "Persona viva amb lesions per intent. Prioritat absoluta: SALVAR la vida.",
+      "accions_ordenades": [
+        "1. SEM 061/112 IMMEDIATAMENT",
+        "2. Si hi ha hemorràgia: contenir amb pressió (guants si possible)",
+        "3. Si penjat: si encara viu, sostenir el cos sense baixar — esperar SEM",
+        "4. Si intoxicació medicamentosa: identificar fàrmacs (capses, blísters)",
+        "5. Si ofegament: rescatar amb seguretat propi",
+        "6. NO interrogar sobre motius — això vindrà després",
+        "7. PRESERVAR escena (carta, mètode, posició) per investigació posterior",
+        "8. Trasllat a hospital amb suport agent (custòdia preventiva)",
+        "9. Comunicació Salut Mental hospital",
+        "10. Avís Jutjat si calgui internament involuntari (763 LEC)",
+        "11. Família avisada amb sensibilitat",
+        "12. Atestat: DILIGÈNCIA d'auxili — NO és atestat penal contra la víctima"
+      ],
+      "documentacio": "Diligència auxili + parte mèdic + identificació + comunicació Salut Mental",
+      "internament_involuntari_763_LEC": "Si la persona, un cop estabilitzada, NO accepta tractament i continua en risc imminent: el metge pot sol·licitar internament urgent (763 LEC). Comunicació Jutjat en 24h."
+    },
+
+    "fi_crisi_carrer": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🆘 CRISI ACTIVA — carrer",
+      "accions_ordenades": [
+        "1. CONTACTE INICIAL: presentar-se calmadament. Ús del nom de l'agent",
+        "2. NO uniformitat agressiva (treure casc, mantenir distància)",
+        "3. ESCOLTA ACTIVA — més escoltar que parlar",
+        "4. RECONÈIXER el patiment ('És evident que estàs patint molt')",
+        "5. Demanar el seu NOM — humanitzar el contacte",
+        "6. Allunyar PUBLIC — generar bombolla privada",
+        "7. AVISAR sala + SEM en discreció",
+        "8. Si pot ser, professional Salut Mental (el 024 pot guiar)",
+        "9. NO PROMETRE el que no es pot complir",
+        "10. NO confrontar / NO desafiar / NO minimitzar",
+        "11. Buscar PERSONA SIGNIFICATIVA (família, amic) si la persona ho accepta",
+        "12. Trasllat voluntari hospital o, si rebuig + risc imminent: trasllat 17 LOPSC + 763 LEC"
+      ],
+      "frases_utils": [
+        "'Veig que estàs passant un moment molt dur'",
+        "'No estàs sol/a en això'",
+        "'Hi ha gent que pot ajudar-te. Estem aquí'",
+        "'No et demanaré que prenguis decisions ara, només que parlem'"
+      ],
+      "frases_evitar": [
+        "❌ 'No facis cap tonteria'",
+        "❌ 'Pensa en la teva família'",
+        "❌ 'Tots tenim problemes'",
+        "❌ 'Demà ho veuràs diferent'"
+      ]
+    },
+
+    "fi_crisi_domicili": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🆘 CRISI ACTIVA — domicili",
+      "accions_ordenades": [
+        "1. SEM + sala + Bombers (per accés si calgui)",
+        "2. Negociació a través de porta/finestra inicialment",
+        "3. Mateixos principis comunicació crisi carrer",
+        "4. Si es nega obrir + risc imminent: ENTRADA per ESTAT DE NECESSITAT (Art. 20.5 CP)",
+        "5. Bombers: obertura sense danys greus si possible",
+        "6. Un cop dins: prioritat reduir + auxili",
+        "7. Família: NO entrar al lloc fins assegurat",
+        "8. Si arma al lloc: precaució extrema, sol·licitar suport",
+        "9. Si finalment desisteix voluntàriament: no detenció — SÍ trasllat Salut Mental",
+        "10. Si menor: DGAIA + tutors"
+      ]
+    },
+
+    "fi_crisi_alçada": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🆘 CRISI EN ALÇADA — pont, edifici, terrassa",
+      "info_critica": "Risc altíssim. Suport especialitzat IMPRESCINDIBLE.",
+      "accions_ordenades": [
+        "1. ACORDONAR perímetre (a sota també)",
+        "2. SEM + Bombers (xarxa, escala) IMMEDIATAMENT",
+        "3. Sol·licitar Mossos NEGOCIACIÓ DE CRISI",
+        "4. UN agent referent — la resta NO interfereix",
+        "5. NO acostar-se ràpid — pot precipitar",
+        "6. Establir CONTACTE VERBAL pacient",
+        "7. Convèncer perquè s'allunyi de la vora — no obligar",
+        "8. Esperar especialistes negociació (psicòleg policial)",
+        "9. NO TIRAR-LO ràpid (jurisprudència internacional desaconsella)",
+        "10. Si tem els bombers / sirenes: silenciar discretament"
+      ]
+    },
+
+    "fi_crisi_via_tren": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🆘 CRISI VIES TREN/METRO",
+      "accions_ordenades": [
+        "1. AVÍS IMMEDIAT companyia ferroviària per ATURAR circulació",
+        "2. Acordonar accessos",
+        "3. SEM + Bombers",
+        "4. Negociació amb persona — preferentment des de plataforma (no baixar a vies)",
+        "5. Si baixa agent: prèvia confirmació via tallada",
+        "6. Esperar reforç + negociació especialitzada",
+        "7. Atenció a possible electrificació (catenàries)"
+      ]
+    },
+
+    "fi_crisi_aigua": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🆘 CRISI MAR/RIU",
+      "accions_ordenades": [
+        "1. SEM + Bombers + GEAS (si Mossos) + Salvament Marítim",
+        "2. NO entrar a l'aigua sense equip — risc agent",
+        "3. Si proper: llançar element flotant (boia, salvavides)",
+        "4. Mantenir contacte verbal",
+        "5. Coordinació amb embarcacions"
+      ]
+    },
+
+    "fi_crisi_arma": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🆘 CRISI AMB ARMA",
+      "info_clau": "Risc TRIPLE: víctima + agents + tercers. Coordinació total.",
+      "accions_ordenades": [
+        "1. AVÍS Mossos UCAR / GEI (si Mossos) o ARRO",
+        "2. ACORDONAR amplament",
+        "3. EVACUAR ciutadans propers",
+        "4. NO confrontar — esperar especialistes",
+        "5. Establir contacte si possible (a distància)",
+        "6. Negociació de crisi amb psicòleg policial",
+        "7. Família allunyada però disponible si pot ajudar",
+        "8. Conducció bombers si calgui (per si dispara)",
+        "9. ÚS DE FORÇA: només com a últim recurs proporcional (legítima defensa o tercers)"
+      ]
+    },
+
+    "fi_ideacio": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "📋 IDEACIÓ verbalitzada — sense intent",
+      "info": "Persona amb pensaments de suïcidi però sense intent ni pla immediat. Priorització: connectar amb recursos sanitaris.",
+      "accions_ordenades": [
+        "1. ESCOLTA ACTIVA — no minimitzar",
+        "2. Validar el patiment",
+        "3. Preguntar (sense por): pla concret? mitjans disponibles? quan?",
+        "4. Si pla concret + mitjans + immediatesa: tractar com crisi activa",
+        "5. Si ideació sense pla: oferir TRASLLAT VOLUNTARI urgències / Salut Mental",
+        "6. Trucar 024 amb la persona — escolta professional",
+        "7. Família/amic de confiança presència",
+        "8. Si refusa tot: anotació al servei + comunicació Salut Mental + seguiment",
+        "9. Recursos: 024, 061, telèfon esperança"
+      ]
+    },
+
+    "fi_familiar_alerta": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "📋 Família/conegut alerta — actuació preventiva",
+      "accions_ordenades": [
+        "1. Recopilar informació: indicis, antecedents, accés a mitjans",
+        "2. Si possible: visita conjunta amb professional Salut Mental",
+        "3. Trucada amb tacte a la persona",
+        "4. Coordinació SS + CSM",
+        "5. NO atemorir (no aparèixer com policia uniformada si possible)",
+        "6. Si risc imminent: actuació crisi"
+      ]
+    },
+
+    "fi_menor_suicidi": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🆘 MENOR — ideació o autolesió",
+      "info_clau": "Menors amb ideació suïcida = altíssim risc. Bullying habitual com a desencadenant.",
+      "accions_ordenades": [
+        "1. Coordinació TOTAL: tutors + escola + DGAIA + EAP / CSMIJ",
+        "2. Si crisi activa: protocol crisi adults + UFAM Mossos",
+        "3. Hospital pediàtric (Sant Joan de Déu, Vall d'Hebron)",
+        "4. Investigar BULLYING (delicte tracte degradant 173 CP)",
+        "5. Si autolesions sense intent: no minimitzar, derivació especialitzada",
+        "6. Comunicació Fiscalia Menors si menor desemparat / sense adequada cura",
+        "7. Recursos: ANAR (900 20 20 10), CSMIJ"
+      ]
+    },
+
+    "fi_remetre_cadaver": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🔀 Anar a checklist 'Cadàver'",
+      "accio": "Si suïcidi consumat: protocol Cadàver — preservació, Mossos DIC, aixecament judicial."
+    },
+
+    "fi_remetre_desaparicio": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🔀 Anar a checklist 'Desaparició'",
+      "accio": "Si persona desapareguda amb indicis suïcides: ALT RISC. Cerca activa amb llocs habituals + zones risc (ponts, vies, alçades)."
+    }
+  },
+  "notes_finals": [
+    "EL 024 és el RECURS especialitzat. Trucar SEMPRE en crisi activa.",
+    "NO MINIMITZAR mai una verbalització de suïcidi (ni quan sembla 'crida d'atenció').",
+    "L'agent NO és terapeuta. Connectar amb recursos especialitzats és la prioritat.",
+    "AUTOCURA AGENTS: aquestes intervencions són traumàtiques. Suport psicològic policial existent.",
+    "INTERNAMENT INVOLUNTARI (763 LEC): ho indica metge, no policia. Policia auxilia.",
+    "Si suïcidi en context VG: investigar possible homicidi simulat. Atestat al JVM.",
+    "MENORS: SEMPRE comunicació tutors + DGAIA + Fiscalia Menors + serveis especialitzats.",
+    "BULLYING que indueix suïcidi: pot ser delicte (173 CP tracte degradant + induir 143.1 CP).",
+    "INSTIGADOR del suïcidi: Art. 143 CP (induir, cooperar, consumar).",
+    "NO INFORMAR mitjans: respectar dol i evitar 'efecte Werther' (imitació).",
+    "POLICIES en risc: programa específic recursos psicològics policial. Trucada confidencial.",
+    "Resum: ESCOLTA, EMPATIA, NO PROMETRE, CONNECTAR AMB RECURSOS, PRESERVAR VIDA."
+  ]
+}

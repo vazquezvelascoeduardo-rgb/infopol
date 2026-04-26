@@ -592,6 +592,13 @@ function FinalCard({
         <MiniField label={t('checklist.differenceWithAdmin')} value={node.diferencia_amb_admin} icon="↔️" />
       )}
 
+      {/* Camps "extra" no enumerats explícitament. Pinten qualsevol
+          camp string o string[] que el JSON tingui i que no s'hagi
+          renderitzat ja en seccions anteriors. Útil per al mòdul Penal,
+          que té dotzenes de camps específics (pena_149, accions_clau,
+          frases_prohibides_pautes_3_3, criteris_habitualitat_TS, etc.) */}
+      <ExtraFields node={node} />
+
       {/* Base legal */}
       {node.base_legal && node.base_legal.length > 0 && (
         <Section label={t('checklist.legalBasis')} icon="📕">
@@ -767,6 +774,240 @@ function DictTable({ label, dict }: { label: string; dict: Record<string, string
   );
 }
 
+// Camps que ja s'han renderitzat explícitament a FinalCard. La resta
+// es pinten amb el renderer genèric ExtraFields.
+const HANDLED_FIELDS = new Set<string>([
+  'final', 'tipus', 'titol', 'text', 'info',
+  // Butlleta
+  'concepte_butlleta', 'article_butlleta', 'barem',
+  'concepte_butlleta_paral·lel', 'article_paralel_admin',
+  // Multa / punts / pena
+  'import', 'punts', 'punts_bici_vmp', 'pena',
+  'pena_apartat_1', 'pena_apartat_2', 'pena_amb_perill',
+  'pena_sense_perill_concret', 'pena_imprudencia_greu',
+  'pena_imprudencia_menys_greu', 'pena_referencial',
+  // Accions
+  'accio', 'accions', 'accions_operatives',
+  'accions_ordenades', 'accions_ordenades_critiques',
+  // Documentació
+  'document', 'documentacio', 'documentacio_clau', 'tiquet',
+  // Drets / símptomes / requisits / excepcions / exemples
+  'drets_informar_conductor', 'simptomes_clau_acreditar',
+  'elements_a_acreditar', 'elements_provatoris_clau',
+  'requisits', 'requisits_clau', 'requisits_obligatoris',
+  'excepcions', 'excepcions_legitimes',
+  'exemples', 'exemples_condicions', 'exemples_jurisprudència',
+  // Notes
+  'frase_advertiment_estandard',
+  'info_clau', 'info_extra', 'info_butlleta', 'info_aplicabilitat',
+  'info_immobilitzacio', 'info_reformes_habituals',
+  // Misc
+  'obligatorietat', 'responsabilitat', 'competencia',
+  'compatible_amb', 'concurs_195_cp', 'diferencia_amb_admin',
+  'base_legal',
+]);
+
+// Etiquetes humanes per a camps coneguts del mòdul Penal. Si un camp
+// no és aquí, fem un format automàtic des del nom.
+const FIELD_LABELS: Record<string, { label: string; icon?: string; tone?: 'warn' | 'info' | 'critical' }> = {
+  // Penes específiques (CP)
+  pena_basica: { label: 'Pena bàsica', icon: '⚖️' },
+  pena_basica_163: { label: 'Pena bàsica (Art. 163)', icon: '⚖️' },
+  pena_agreujada: { label: 'Pena agreujada', icon: '⚖️' },
+  pena_combinada: { label: 'Pena combinada', icon: '⚖️' },
+  pena_mort: { label: 'Pena (mort)', icon: '⚖️' },
+  pena_violencia: { label: 'Pena (amb violència)', icon: '⚖️' },
+  pena_sense_violencia: { label: 'Pena (sense violència)', icon: '⚖️' },
+  pena_amb_violencia: { label: 'Pena (amb violència)', icon: '⚖️' },
+  pena_amb_penetracio: { label: 'Pena (amb penetració)', icon: '⚖️' },
+  pena_persona_vulnerable: { label: 'Pena (persona vulnerable)', icon: '⚖️' },
+  pena_menor_165: { label: 'Pena (menor — Art. 165)', icon: '⚖️' },
+  pena_segrest_164: { label: 'Pena (segrest — Art. 164)', icon: '⚖️' },
+  pena_extrema_370: { label: 'Pena extrema (Art. 370)', icon: '⚖️' },
+  pena_VG_VD: { label: 'Pena VG / VD', icon: '⚖️' },
+  pena_no_greu: { label: 'Pena (no greu)', icon: '⚖️' },
+  pena_greu_dany: { label: 'Pena (dany greu)', icon: '⚖️' },
+  pena_habitada: { label: 'Pena (vivenda habitada)', icon: '⚖️' },
+  pena_lesions_149: { label: 'Pena lesions (Art. 149)', icon: '⚖️' },
+  pena_lesions_150: { label: 'Pena lesions (Art. 150)', icon: '⚖️' },
+  pena_restitucio_48h: { label: 'Pena (sense restitució 48h)', icon: '⚖️' },
+  pena_agreujada_estranger: { label: 'Pena agreujada (estranger)', icon: '⚖️' },
+  // Accions específiques
+  accio_immediata: { label: 'Acció immediata', icon: '⚡', tone: 'critical' },
+  accions_clau: { label: 'Actuacions clau', icon: '🔑' },
+  accions_essencials: { label: 'Actuacions essencials', icon: '⭐' },
+  accions_ordenades_completes: { label: 'Actuacions ordenades (completes)', icon: '📋' },
+  accions_ordenades_pautes: { label: 'Actuacions (Pautes UF)', icon: '📋' },
+  accions_ordenades_pautes_3_3: { label: 'Actuacions (Pautes UF 3.3)', icon: '📋' },
+  accions_pautes_3_3: { label: 'Actuacions (Pautes 3.3)', icon: '📋' },
+  accions_operatives_ordenades: { label: 'Actuacions operatives ordenades', icon: '🚓' },
+  accions_per_tipus: { label: 'Actuacions per tipus', icon: '📂' },
+  accions_policia: { label: 'Actuacions policials', icon: '👮' },
+  // Articles / concursos
+  article: { label: 'Article aplicable', icon: '§' },
+  articles: { label: 'Articles aplicables', icon: '§' },
+  concepte: { label: 'Concepte', icon: '📝' },
+  concepte_butlleta_atestat: { label: 'Concepte butlleta / atestat', icon: '📝' },
+  concurs: { label: 'Concurs', icon: '🤝' },
+  concurs_aplicable: { label: 'Concurs aplicable', icon: '🤝' },
+  concurs_possible: { label: 'Concurs possible', icon: '🤝' },
+  // Documentació
+  documentacio_obligatoria: { label: 'Documentació obligatòria', icon: '📑' },
+  documentacio_si_intervencio: { label: 'Documentació si hi ha intervenció', icon: '📑' },
+  // Drets
+  drets_a_llegir: { label: 'Drets a llegir', icon: '📢' },
+  drets_obligatoris_informar: { label: 'Drets obligatoris a informar', icon: '📢' },
+  drets_victima_obligatoris: { label: 'Drets víctima (obligatoris)', icon: '📢' },
+  // Exemples
+  exemple: { label: 'Exemple', icon: '💡' },
+  exemples_36_6_pautes: { label: 'Exemples Art. 36.6 (Pautes)', icon: '💡' },
+  exemples_pautes: { label: 'Exemples (Pautes)', icon: '💡' },
+  exemples_per_sobre_80000: { label: 'Exemples > 80.000€', icon: '💡' },
+  // Frases
+  frases_prohibides_pautes_3_3: { label: 'Frases PROHIBIDES (Pautes 3.3)', icon: '🚫', tone: 'critical' },
+  frases_evitar: { label: "Frases a evitar", icon: '🚫', tone: 'warn' },
+  frases_utils: { label: 'Frases útils', icon: '💬', tone: 'info' },
+  // Info
+  info_VPR: { label: 'Info VPR (valoració risc)', icon: 'ℹ️', tone: 'info' },
+  info_acta_A20: { label: "Info acta A-20", icon: 'ℹ️', tone: 'info' },
+  info_concurs: { label: 'Info concurs', icon: 'ℹ️', tone: 'info' },
+  info_critica: { label: 'Info crítica', icon: '🚨', tone: 'critical' },
+  info_dubte_jutjat: { label: 'Dubte → Jutjat', icon: 'ℹ️', tone: 'info' },
+  info_operativa_pautes: { label: 'Info operativa (Pautes)', icon: 'ℹ️', tone: 'info' },
+  info_pautes_3_3: { label: 'Info (Pautes 3.3)', icon: 'ℹ️', tone: 'info' },
+  info_suspensio_80_2: { label: "Info suspensió Art. 80.2", icon: 'ℹ️', tone: 'info' },
+  informacio: { label: 'Informació', icon: 'ℹ️' },
+  informacio_familia: { label: "Informació a la família", icon: 'ℹ️' },
+  informacio_propietari: { label: "Informació al propietari", icon: 'ℹ️' },
+  // Regla / criteris
+  regla: { label: 'Regla', icon: '📐' },
+  regla_concurs_pautes: { label: 'Regla del concurs (Pautes)', icon: '📐' },
+  regla_pautes: { label: 'Regla (Pautes)', icon: '📐' },
+  regla_principi_especialitat: { label: 'Principi d\'especialitat', icon: '📐' },
+  criteri_clau_pautes: { label: 'Criteri clau (Pautes)', icon: '🔑' },
+  criteris_habitualitat_TS: { label: 'Criteris d\'habitualitat (TS)', icon: '⚖️' },
+  criteris_penal_229: { label: 'Criteris penals (Art. 229)', icon: '⚖️' },
+  // Subjectes / àmbit / supòsits
+  subjectes: { label: 'Subjectes', icon: '👥' },
+  context_aplicable: { label: 'Context aplicable', icon: '🎯' },
+  supòsits: { label: 'Supòsits', icon: '📂' },
+  supòsits_agreujats: { label: 'Supòsits agreujats', icon: '⬆️' },
+  supòsits_aplicables: { label: 'Supòsits aplicables', icon: '📂' },
+  supòsits_típics: { label: 'Supòsits típics', icon: '📂' },
+  conductes_típiques: { label: 'Conductes típiques', icon: '📂' },
+  // Diferenciacions
+  diferencia_admin: { label: 'Diferència amb via administrativa', icon: '↔️', tone: 'info' },
+  diferencia_lleu: { label: 'Diferència (lleu)', icon: '↔️', tone: 'info' },
+  diferencia_penal: { label: 'Diferència (penal)', icon: '↔️', tone: 'info' },
+  diferenciacio: { label: 'Diferenciació', icon: '↔️' },
+  // Altres
+  agreujants: { label: 'Agreujants', icon: '⬆️', tone: 'warn' },
+  agreujants_180: { label: 'Agreujants (Art. 180)', icon: '⬆️', tone: 'warn' },
+  evidencies_clau: { label: 'Evidències clau', icon: '🔍' },
+  internament_involuntari_763_LEC: { label: 'Internament involuntari (Art. 763 LEC)', icon: '🏥', tone: 'info' },
+  perseguibilitat: { label: 'Perseguibilitat', icon: '⚖️' },
+  que_NO_fer: { label: 'Què NO fer', icon: '🚫', tone: 'critical' },
+  que_es_pot_revisar: { label: 'Què es pot revisar', icon: '👀' },
+  requisit_clau: { label: 'Requisit clau', icon: '🔑' },
+  requisits_per_practicar: { label: 'Requisits per practicar', icon: '✅' },
+  requisits_pautes_3_3: { label: 'Requisits (Pautes 3.3)', icon: '✅' },
+  subsupòsits: { label: 'Subsupòsits', icon: '📂' },
+  tipologia_pautes_3_3: { label: 'Tipologia (Pautes 3.3)', icon: '📂' },
+  tipus_accident: { label: 'Tipus d\'accident', icon: '💥' },
+  transparencia_clau: { label: 'Transparència (clau)', icon: '🔍' },
+  vies_aplicables: { label: 'Vies aplicables', icon: '🛣️' },
+  vies_per_propietari: { label: 'Vies per al propietari', icon: '🛣️' },
+  base_legal_extra: { label: 'Base legal addicional', icon: '📕' },
+  delictes_aplicables: { label: 'Delictes aplicables', icon: '⚖️' },
+  elements_essencials: { label: 'Elements essencials', icon: '🧷' },
+  import_LOPSC: { label: 'Import (LOPSC)', icon: '💶' },
+  import_llei_11_2009: { label: 'Import (Llei 11/2009)', icon: '💶' },
+  indicis_homicidi_simulat: { label: 'Indicis d\'homicidi simulat', icon: '🚨', tone: 'critical' },
+  casos_aixecament_obligatori_tot_i_natural: { label: 'Casos d\'aixecament obligatori', icon: '⚖️' },
+};
+
+// Converteix snake_case a "Snake case" amb la primera majúscula.
+function humanize(key: string): string {
+  return key
+    .replace(/_/g, ' ')
+    .replace(/^(.)/, (m) => m.toUpperCase());
+}
+
+function ExtraFields({ node }: { node: ChecklistFinalNode }) {
+  // Iterem totes les claus del node, saltant les ja gestionades.
+  const items: { key: string; value: string | string[] }[] = [];
+  for (const [k, v] of Object.entries(node)) {
+    if (HANDLED_FIELDS.has(k)) continue;
+    if (v == null) continue;
+    if (typeof v === 'string') {
+      items.push({ key: k, value: v });
+    } else if (Array.isArray(v) && v.every((x) => typeof x === 'string')) {
+      items.push({ key: k, value: v as string[] });
+    }
+    // (objectes anidats: no els pintem aquí — molt rar a final node)
+  }
+  if (items.length === 0) return null;
+  return (
+    <div className="space-y-3">
+      {items.map(({ key, value }) => {
+        const meta = FIELD_LABELS[key];
+        const label = meta?.label ?? humanize(key);
+        const icon = meta?.icon;
+        const tone = meta?.tone;
+        if (Array.isArray(value)) {
+          if (tone === 'critical' || tone === 'warn') {
+            return (
+              <div
+                key={key}
+                className={`rounded-xl border-l-4 p-3 text-sm ${
+                  tone === 'critical'
+                    ? 'border-l-red-500 bg-red-50 text-red-900 dark:border-l-red-400/70 dark:bg-red-400/10 dark:text-red-100'
+                    : 'border-l-amber-500 bg-amber-50 text-amber-900 dark:border-l-amber-400/70 dark:bg-amber-400/10 dark:text-amber-100'
+                }`}
+              >
+                <div className="text-[10px] uppercase tracking-wider font-bold mb-1.5 flex items-center gap-1.5">
+                  {icon && <span aria-hidden>{icon}</span>}
+                  {label}
+                </div>
+                <ul className="list-disc pl-5 space-y-1">
+                  {value.map((it, i) => <li key={i}>{it}</li>)}
+                </ul>
+              </div>
+            );
+          }
+          return (
+            <Section key={key} label={label} icon={icon}>
+              <ul className="list-disc pl-5 space-y-1.5">
+                {value.map((it, i) => <li key={i}>{it}</li>)}
+              </ul>
+            </Section>
+          );
+        }
+        // String: el pintem com a InfoBox (info-style) o MiniField segons el to.
+        if (tone === 'critical') {
+          return (
+            <div
+              key={key}
+              className="rounded-xl border-l-4 border-l-red-500 bg-red-50 p-3 text-sm text-red-900
+                dark:border-l-red-400/70 dark:bg-red-400/10 dark:text-red-100"
+            >
+              <div className="text-[10px] uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                {icon && <span aria-hidden>{icon}</span>}
+                {label}
+              </div>
+              <p>{value}</p>
+            </div>
+          );
+        }
+        if (tone === 'info') {
+          return <InfoBox key={key} label={label} icon={icon} text={value} />;
+        }
+        return <MiniField key={key} label={label} value={value} icon={icon} />;
+      })}
+    </div>
+  );
+}
+
 // Camp inline curt: etiqueta + valor en una sola línia.
 function MiniField({
   label,
@@ -864,6 +1105,20 @@ function kindStyle(kind: ChecklistResultKind | undefined) {
         bg: 'bg-red-50 dark:bg-red-400/10',
         text: 'text-red-900 dark:text-red-100',
         label: 'text-red-700 dark:text-red-300',
+      };
+    case 'mixta':
+      return {
+        border: 'border-l-purple-500 dark:border-l-purple-400/70',
+        bg: 'bg-purple-50 dark:bg-purple-400/10',
+        text: 'text-purple-900 dark:text-purple-100',
+        label: 'text-purple-700 dark:text-purple-300',
+      };
+    case 'avis':
+      return {
+        border: 'border-l-yellow-500 dark:border-l-yellow-400/70',
+        bg: 'bg-yellow-50 dark:bg-yellow-400/10',
+        text: 'text-yellow-900 dark:text-yellow-100',
+        label: 'text-yellow-700 dark:text-yellow-300',
       };
     case 'procediment':
     default:

@@ -1,0 +1,332 @@
+{
+  "id": "drogues-via-publica",
+  "titol": "Drogues en via pública",
+  "categoria": "ordre",
+  "icono": "💊",
+  "base_legal": [
+    "Art. 36.16 LOPSC (consum/tinença en vies)",
+    "Art. 36.17 LOPSC (trasllat per facilitar accés)",
+    "Art. 36.18 LOPSC (cultiu visible)",
+    "Art. 36.19 LOPSC (tolerància en establiments)",
+    "Art. 47.b Llei 11/2009 (tolerància locals)",
+    "Art. 80.2 LOPSC (suspensió sanció amb tractament)",
+    "Art. 368 CP (tràfic drogues)",
+    "Art. 368 paràgraf 2 CP (cas menor entitat)",
+    "Art. 369 CP (tràfic agreujat)",
+    "Art. 370 CP (tràfic extrema gravetat)"
+  ],
+
+  "definicions_pautes_3_3": {
+    "lloc_public": "Seus administratives, judicials, centres docents, hospitals, CAP",
+    "via_publica": "Carrers, carreteres, boscos, platges",
+    "establiments_publics": "Bars, restaurants, discoteques, comerços",
+    "transports_publics": "Taxis, autobusos, ferrocarrils"
+  },
+
+  "taula_dosis_consum_propi_pautes_3_3": {
+    "Heroïna": "3 g màxim (50-150 mg/dosi)",
+    "Cocaïna": "7,5 g màxim (100-260 mg/dosi)",
+    "Marihuana": "100 g màxim (1,5-2 g/dosi)",
+    "Haixix": "25 g màxim (0,3-0,5 g/dosi)",
+    "LSD": "3 mg màxim",
+    "Sulfat amfetamina": "900 mg màxim",
+    "MDA/MDMA/MDEA": "2,4 mg màxim",
+    "Trankimazin": "75 mg màxim",
+    "Rohipnol": "50 mg màxim",
+    "Tranxilium": "750 mg màxim",
+    "Metamfetamina": "300 mg màxim",
+    "Ketamina": "1 g màxim",
+    "GHB/GBL": "15 g màxim",
+    "2CB (tusi/cocaïna rosa)": "3 g màxim"
+  },
+
+  "indicis_trafic_pautes_3_3": [
+    "Quantitat preordenada al tràfic (taula INTCF)",
+    "Substància en DOSIS individuals o a l'engròs",
+    "TINENÇA de DIVERSOS TIPUS de substància",
+    "DINERS FRACCIONATS en bitllets petits, en diversos llocs",
+    "BALANCES o ESTRIS per tallar substància",
+    "Manifestació persones presents",
+    "Manifestació testimonis aliens",
+    "Observació directa dotació policial",
+    "Llistats de persones (suposats clients)"
+  ],
+
+  "actes_aplicables": {
+    "via_admin_consum": "ACTA D-10 (denúncia LOPSC)",
+    "via_admin_cultiu": "ACTA A-10 (denúncia oberta)",
+    "via_admin_troballa": "ACTA A-10 (sense propietari)",
+    "via_penal_trafic": "ACTA A-20 (pesada/aprehensió) + ATESTAT"
+  },
+
+  "inici": "conducta",
+  "nodes": {
+
+    "conducta": {
+      "titol": "Conducta detectada",
+      "opcions": [
+        { "etiqueta": "Consum directe en via pública / lloc públic",                     "va_a": "fi_consum_36_16" },
+        { "etiqueta": "Tinença per autoconsum en via pública",                           "va_a": "comprovacio_quantitat_admin" },
+        { "etiqueta": "Indicis de TRÀFIC / venda observada",                              "va_a": "tipus_substancia_penal" },
+        { "etiqueta": "Cultiu visible al públic (balcó, jardí…)",                         "va_a": "fi_cultiu_36_18" },
+        { "etiqueta": "MENOR consumint o amb drogues",                                   "va_a": "fi_menor_drogues" },
+        { "etiqueta": "Tolerància consum en establiment (bar, discoteca)",                "va_a": "fi_tolerancia_36_19" },
+        { "etiqueta": "Trasllat persones en vehicle per facilitar consum",               "va_a": "fi_36_17_trasllat" },
+        { "etiqueta": "Substància TROBADA sense propietari",                              "va_a": "fi_troballa_a10" },
+        { "etiqueta": "Abandonament d'instruments de consum (xeringues, paperines…)",   "va_a": "fi_abandon_instruments" }
+      ]
+    },
+
+    "comprovacio_quantitat_admin": {
+      "titol": "Quantitat — comprovar taula consum propi",
+      "text": "La quantitat està DINS la taula de consum propi (Pautes UF 3.3)?",
+      "opcions": [
+        { "etiqueta": "Sí, quantitat dins consum propi i sense indicis tràfic",         "va_a": "fi_tinenca_36_16" },
+        { "etiqueta": "Quantitat superior a consum propi",                              "va_a": "tipus_substancia_penal" },
+        { "etiqueta": "Dins quantitat consum PERÒ amb indicis tràfic (dosis, diners…)", "va_a": "tipus_substancia_penal" }
+      ]
+    },
+
+    "tipus_substancia_penal": {
+      "titol": "Tipus de substància (Art. 368 CP)",
+      "info": "Greu dany salut: heroïna, cocaïna, amfetamines, MDMA, crack, LSD, GHB, ketamina. NO greu dany: hachís, marihuana, derivats cànnabics.",
+      "opcions": [
+        { "etiqueta": "Substància GREU dany (heroïna, cocaïna…)",                       "va_a": "quantitat_greu" },
+        { "etiqueta": "Substància NO greu (cànnabis, hachís…)",                         "va_a": "quantitat_no_greu" }
+      ]
+    },
+
+    "quantitat_greu": {
+      "titol": "Quantitat substància greu dany",
+      "opcions": [
+        { "etiqueta": "Quantitat petita + indicis tràfic (menudeig)",                   "va_a": "fi_368_2_menor" },
+        { "etiqueta": "Quantitat significativa (heroïna >3g, cocaïna >7,5g…)",          "va_a": "fi_368_1_greu" },
+        { "etiqueta": "Quantitat MOLT GRAN — gros tràfic",                              "va_a": "fi_369_agreujat" }
+      ]
+    },
+
+    "quantitat_no_greu": {
+      "titol": "Quantitat substància no greu dany",
+      "opcions": [
+        { "etiqueta": "Petita + indicis tràfic (menudeig)",                              "va_a": "fi_368_2_menor" },
+        { "etiqueta": "Important amb tràfic (marihuana >100g, haixix >25g…)",           "va_a": "fi_368_1_no_greu" },
+        { "etiqueta": "Plantació/cultiu d'envergadura",                                  "va_a": "fi_369_agreujat" }
+      ]
+    },
+
+    "fi_consum_36_16": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Consum en via pública (Art. 36.16 LOPSC)",
+      "concepte_butlleta": "El consum o la tinença il·lícits de drogues tòxiques, estupefaents o substàncies psicotròpiques, encara que no estiguessin destinades al tràfic, en llocs, vies, establiments públics o transports col·lectius, així com l'abandonament dels instruments o efectes utilitzats per a aquests amb independència que poguessin no haver-se causat efectiu perill",
+      "article_butlleta": "Art. 36.16 LO 4/2015",
+      "import": "601 € - 30.000 € (mínim 601 € si consum tradicional)",
+      "accions_operatives_ordenades": [
+        "1. ESCORCOLL superficial (Art. 20 LOPSC)",
+        "2. INTERVENCIÓ substància + acta",
+        "3. CADENA de custòdia",
+        "4. ACTA D-10 (denúncia LOPSC) — número OAC",
+        "5. Identificació plena infractor (DNI/NIE/passaport)",
+        "6. Descripció DETALLADA del que s'ha intervingut",
+        "7. Comunicar dret a sol·licitar SUSPENSIÓ sanció pel tractament (Art. 80.2 LOPSC) — per consumidors",
+        "8. Tramesa al laboratori si dubtes substància",
+        "9. Si menor: comunicació tutors + Servei Menors"
+      ],
+      "documentacio": "Acta D-10 + acta intervenció substància + cadena custòdia",
+      "info_suspensio_80_2": "Si l'infractor és consumidor i sol·licita tractament/rehabilitació, la sanció pot ser suspesa. Si abandona el tractament, s'executa la sanció."
+    },
+
+    "fi_tinenca_36_16": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Tinença per autoconsum en via pública (Art. 36.16)",
+      "info_clau": "Mera tinença per autoconsum en àmbit privat NO és delicte ni infracció (jurisprudència TS). En VIA PÚBLICA SÍ és infracció administrativa.",
+      "concepte_butlleta": "El consum o la tinença il·lícits de drogues tòxiques, estupefaents o substàncies psicotròpiques en llocs, vies, establiments públics o transports col·lectius",
+      "article_butlleta": "Art. 36.16 LOPSC",
+      "import": "601 € - 30.000 €",
+      "accions": [
+        "Intervenció substància + acta D-10",
+        "Cadena custòdia",
+        "Informar dret suspensió Art. 80.2",
+        "Si dubte quantitat → laboratori"
+      ]
+    },
+
+    "fi_368_2_menor": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Tràfic cas menor entitat (Art. 368 paràgraf 2 CP)",
+      "concepte": "Tràfic de drogues amb escassa entitat per quantitat petita + circumstàncies (menudeig)",
+      "pena_greu_dany": "Presó 1 any i 6 mesos - 3 anys (substància greu dany)",
+      "pena_no_greu": "Presó 6 mesos - 1 any i 6 mesos (no greu dany)",
+      "accions_ordenades_pautes": [
+        "1️⃣ IDENTIFICACIÓ comprador i venedor PER SEPARAT (no parlar entre ells)",
+        "2️⃣ ESCORCOLL — comprovar substància en comprador, més substància/diners en venedor",
+        "3️⃣ DECLARACIÓ TESTIMONI: si comprador per consum propi, oferir declarar com a testimoni (finalitat, preu, contacte, freqüència)",
+        "4️⃣ COMPAREIXENÇA / MINUTA: detallar intercanvi presenciat (mans, ubicació substància)",
+        "5️⃣ REQUISITÒRIA totes les persones implicades + identificar",
+        "6️⃣ Detenció venedor",
+        "7️⃣ Lectura drets",
+        "8️⃣ ACTA A-20 (pesada/aprehensió) — origen, embolcall, mètode obtenció, bàscula precisió ABP/farmàcia",
+        "9️⃣ Si diverses persones implicades: actes A-20 SEPARADES per cadascú",
+        "🔟 Atestat penal + Jutjat Guàrdia"
+      ],
+      "documentacio_clau": "Atestat + acta A-20 (pesada) + cadena custòdia + identificacions + diligència manifestacions",
+      "info_acta_A20": "L'acta A-20 ha de contenir: origen, embolcall, característiques externes, aparença, mètode obtenció, bàscula utilitzada (ABP/farmàcia amb segell), descripció detallada (paperina, pols blanca, bossa, paquet tabac…), circumstàncies localització (mans, butxaques, indumentària, cavitats naturals, llençat a terra), nombre unitats, pes en brut"
+    },
+
+    "fi_368_1_greu": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Tràfic drogues greu dany salut (Art. 368.1 CP)",
+      "pena": "Presó 3-6 anys + multa del tant al triple del valor",
+      "accions": [
+        "Detenció",
+        "Intervenció COMPLETA substància + diners + estris",
+        "Comunicació UDYCO / Mossos DIC (Crim Organitzat)",
+        "ACTA A-20 (pesada) rigorosa",
+        "Cadena custòdia",
+        "Atestat penal exhaustiu",
+        "Jutjat Guàrdia"
+      ]
+    },
+
+    "fi_368_1_no_greu": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Tràfic no greu dany (Art. 368.1 CP)",
+      "pena": "Presó 1-3 anys + multa del tant al doble",
+      "accions": "Mateixes que 368.1 greu"
+    },
+
+    "fi_369_agreujat": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Tràfic agreujat (Art. 369 CP)",
+      "supòsits": [
+        "Pertinença a organització",
+        "Quantitat NOTÒRIA importància (taula INTCF)",
+        "Centres educatius / militars / penitenciaris / esportius",
+        "Adulteració amb augment dany",
+        "Menor 18 anys / disminuït psíquic / dona embarassada",
+        "Persona sotmesa a tractament desintoxicació"
+      ],
+      "pena": "Pena superior en grau (fins 9 anys + multa)",
+      "pena_extrema_370": "Pena 12-18 anys (cap d'organització, ús menors, falsificació passaports)",
+      "accions": [
+        "Mossos DIC + UDYCO",
+        "Investigació coordinada (intervencions telefòniques si cal)",
+        "Atestat exhaustiu",
+        "Possible competència Audiència Nacional"
+      ]
+    },
+
+    "fi_cultiu_36_18": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Cultiu visible al públic (Art. 36.18)",
+      "concepte_butlleta": "L'execució d'actes de plantació i cultiu il·lícits de drogues tòxiques, estupefaents o substàncies psicotròpiques en llocs visibles al públic, quan no siguin constitutius d'infracció penal",
+      "article_butlleta": "Art. 36.18 LOPSC",
+      "import": "601 € - 30.000 €",
+      "accions_pautes_3_3": [
+        "1. Comprovar VISIBILITAT al públic (finques, balcons, jardins privats…)",
+        "2. ACTA A-10 (denúncia oberta)",
+        "3. NO accedir a espais privats SENSE consentiment exprés titular",
+        "4. RECOLLIR MOSTRA REPRESENTATIVA — OBLIGATÒRIA: 20 cm apicals (part superior), NO tiges, NO arrels",
+        "5. Conservar mostra: lloc fresc + embalatge transpirable (paper o cartró), MAI plàstic ni hermètic",
+        "6. Si conducta podria ser PENAL (per quantitat/ubicació/indicis): instruir atestat",
+        "7. Foto plantació in situ",
+        "8. Identificar titular del lloc"
+      ],
+      "diferencia_penal": "Si no és visible al públic / quantitat industrial / context tràfic → 368 CP penal"
+    },
+
+    "fi_tolerancia_36_19": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Tolerància en establiment (Art. 36.19)",
+      "concepte_butlleta": "La tolerància del consum il·legal o el tràfic de drogues tòxiques, estupefaents o substàncies psicotròpiques en locals o establiments públics o la falta de diligència a fi d'impedir-los per part dels seus propietaris, administradors o encarregats",
+      "article_butlleta": "Art. 36.19 LOPSC",
+      "regla_principi_especialitat": "PRIORITÀRIAMENT s'aplica Llei 11/2009 (Art. 47.b) per ESPECIALITAT — infracció MOLT GREU",
+      "import_LOPSC": "601 € - 30.000 €",
+      "import_llei_11_2009": "Fins 600.000 € (MG)",
+      "accions": [
+        "ACTA A-10 segons especialitat",
+        "Documentar fets (testimonis, observació, càmeres)",
+        "Comunicació Departament responsable establiment",
+        "Si TITULAR PROMOU activament: passa a delicte 368 CP — atestat"
+      ]
+    },
+
+    "fi_36_17_trasllat": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Trasllat per facilitar accés (Art. 36.17)",
+      "concepte_butlleta": "El trasllat de persones, amb qualsevol tipus de vehicle, a llocs on es faciliti l'accés a drogues",
+      "article_butlleta": "Art. 36.17 LOPSC",
+      "import": "601 € - 30.000 €",
+      "info": "Sovint anomenat 'narcotaxi'. Cal acreditar el trasllat conscient amb finalitat de facilitar accés."
+    },
+
+    "fi_menor_drogues": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Menor amb drogues",
+      "info_pautes_3_3": "Menor < 14 anys: EXEMPT de responsabilitat — notificar tutors + Ministeri Fiscal. 14-17 anys: comunicar tutors + acta inicia expedient + suspensió possible per tractament/reeducació (DA 5a LOPSC).",
+      "accions_ordenades": [
+        "1. Identificar menor",
+        "2. Intervenir substància + acta",
+        "3. < 14 anys: notificar tutors + Fiscalia Menors. NO sancionar.",
+        "4. 14-17 anys: ACTA D-10 (s'inicia expedient sancionador)",
+        "5. Comunicació tutors + anotar a l'acta",
+        "6. Informar de la POSSIBLE SUSPENSIÓ pecuniària amb tractament (DA 5a LOPSC)",
+        "7. Si menor en RISC: trasllat dependències + comunicació tutors",
+        "8. Si DESEMPARAMENT: trasllat + comunicació Fiscalia Menors + DGAIA",
+        "9. Investigar origen substància (possible 368 CP per qui l'hagi proveït a menor)"
+      ]
+    },
+
+    "fi_troballa_a10": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "📋 Troballa de substància sense propietari",
+      "accions_ordenades_pautes_3_3": [
+        "1. Recollir substància amb cura",
+        "2. ACTA OBERTA A-10:",
+        "   - Recollida (lloc, hora, agent)",
+        "   - Descripció substància (aparença, embolcall, pes aprox.)",
+        "   - Lloc on s'ha trobat",
+        "   - Motiu pel qual no s'atribueix tinença",
+        "3. Lliurar acta A-10 a l'OAC referència → introduïda a l'aplicatiu Atestats i denúncies",
+        "4. Tipificar com 'Faltes administratives Llei 4/15 — No es detecta cap infracció'",
+        "5. UTPC s'encarrega tràmits DESTRUCCIÓ posterior"
+      ],
+      "documentacio": "Acta A-10 oberta + cadena custòdia"
+    },
+
+    "fi_abandon_instruments": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Abandonament instruments (Art. 36.16 paràgraf in fine)",
+      "concepte_butlleta": "L'abandonament dels instruments o efectes utilitzats per al consum [de drogues] en els llocs i circumstàncies indicades",
+      "import": "601 € - 30.000 €",
+      "accions": [
+        "Recollida instruments (xeringues, paperines, pipes…) amb seguretat",
+        "Si autor identificat: butlletí + acta D-10",
+        "Si no: recollida + servei neteja",
+        "ATENCIÓ: xeringues — risc punxada accidental — usar pinces"
+      ]
+    }
+  },
+  "notes_finals": [
+    "AUTOCONSUM EN ÀMBIT PRIVAT: NO és delicte ni infracció (jurisprudència TS). En via pública: SEMPRE infracció admin.",
+    "DIFERÈNCIA ADMIN/PENAL: la finalitat última (consum propi vs tràfic). Indicis tràfic: taules quantitat + dosis + diners + balances + llistats.",
+    "TAULA INTCF (Institut Nacional Toxicologia): referència oficial quantitats. Per damunt presumpció tràfic.",
+    "ACTES: D-10 (LOPSC), A-10 (oberta sense propietari/cultiu), A-20 (pesada penal). Diferents segons via.",
+    "MOSTRES: Mai en plàstic ni hermètic per cànnabis (es degrada). Paper o cartró transpirable.",
+    "CLUB CONSUMIDORS: persona jurídica amb inviolabilitat. Entrada policial requereix consentiment titular, resolució judicial, o flagrant delicte.",
+    "MENORS: <14 NO sancionables. 14-17 sancionables amb DA 5a (suspensió pel tractament).",
+    "DROGUES + ARMES: concurs. Si arma + tràfic > organització → DIC Mossos.",
+    "DROGUES + VEHICLE: si conducció influenciada → veure mòdul Trànsit (Art. 379.2 CP)."
+  ]
+}

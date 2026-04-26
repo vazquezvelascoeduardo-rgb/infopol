@@ -1,0 +1,72 @@
+{
+  "modul": "seguretat_ciutadana_penal",
+  "titol": "Seguretat Ciutadana / Penal — Checklists operatius v2",
+  "descripcio": "Arbres de decisió contrastats amb Codi Penal (BOE-A-1995-25444 consolidat), LO 4/2015 LOPSC, LECrim, i Pautes Operatives ISPC UF 3.3 (febrer 2026). Inclou conceptes literals per actes/butlletins, articles exactes, ramificacions admin/penal, accions operatives, documentació obligatòria, frases prohibides i drets de la víctima/detingut.",
+  "data_versio": "2026-02",
+  "blocs": [
+    {
+      "bloc": "OPERATIU / LOPSC",
+      "color": "#3b82f6",
+      "icono": "🛡️",
+      "escenaris": [
+        { "id": "identificacio",         "titol": "🪪 Identificació de persones",                     "fitxer": "identificacio.json",          "ordre": 1 },
+        { "id": "escorcoll",             "titol": "🔍 Escorcoll / registre corporal",                 "fitxer": "escorcoll.json",              "ordre": 2 },
+        { "id": "entrada-domicili",      "titol": "🏠 Entrada a domicili",                            "fitxer": "entrada-domicili.json",       "ordre": 3 },
+        { "id": "detencio",              "titol": "🚔 Detenció",                                       "fitxer": "detencio.json",               "ordre": 4 },
+        { "id": "atemptat-resistencia",  "titol": "🛡️ Atemptat / resistència / desobediència",         "fitxer": "atemptat-resistencia.json",   "ordre": 5 },
+        { "id": "armes",                 "titol": "🔫 Armes prohibides / il·legals",                  "fitxer": "armes.json",                  "ordre": 6 }
+      ]
+    },
+    {
+      "bloc": "PERSONES",
+      "color": "#ef4444",
+      "icono": "👤",
+      "escenaris": [
+        { "id": "lesions",               "titol": "🤕 Lesions",                                       "fitxer": "lesions.json",                "ordre": 7 },
+        { "id": "amenaces-coaccions",    "titol": "😡 Amenaces i coaccions",                          "fitxer": "amenaces-coaccions.json",     "ordre": 8 },
+        { "id": "violencia-genere",      "titol": "💔 Violència de gènere (VG)",                      "fitxer": "violencia-genere.json",       "ordre": 9 },
+        { "id": "violencia-domestica",   "titol": "🏚️ Violència domèstica (VD)",                      "fitxer": "violencia-domestica.json",    "ordre": 10 },
+        { "id": "llibertat-sexual",      "titol": "⚠️ Llibertat sexual",                              "fitxer": "llibertat-sexual.json",       "ordre": 11 },
+        { "id": "desaparicio",           "titol": "🔎 Desaparició de persones",                       "fitxer": "desaparicio.json",            "ordre": 12 }
+      ]
+    },
+    {
+      "bloc": "PATRIMONI",
+      "color": "#f59e0b",
+      "icono": "💰",
+      "escenaris": [
+        { "id": "robatori-furt",         "titol": "💰 Robatori / furt",                                "fitxer": "robatori-furt.json",          "ordre": 13 },
+        { "id": "danys",                 "titol": "🔨 Danys",                                          "fitxer": "danys.json",                  "ordre": 14 },
+        { "id": "ocupacio",              "titol": "🏘️ Ocupació d'immobles",                            "fitxer": "ocupacio.json",               "ordre": 15 }
+      ]
+    },
+    {
+      "bloc": "ORDRE PÚBLIC",
+      "color": "#8b5cf6",
+      "icono": "🚨",
+      "escenaris": [
+        { "id": "drogues-via-publica",   "titol": "💊 Drogues via pública",                            "fitxer": "drogues-via-publica.json",    "ordre": 16 },
+        { "id": "desordres-baralla",     "titol": "👊 Desordres / baralla",                            "fitxer": "desordres-baralla.json",      "ordre": 17 }
+      ]
+    },
+    {
+      "bloc": "EMERGÈNCIES",
+      "color": "#10b981",
+      "icono": "🆘",
+      "escenaris": [
+        { "id": "cadaver",               "titol": "⚰️ Troballa de cadàver",                            "fitxer": "cadaver.json",                "ordre": 18 },
+        { "id": "suicidi",               "titol": "🆘 Crisi suïcida / temptativa",                    "fitxer": "suicidi.json",                "ordre": 19 }
+      ]
+    }
+  ],
+  "total_escenaris": 19,
+  "actes_referencies": [
+    "D-10: Denúncia LOPSC (LO 4/2015) — número OAC",
+    "D-10.b: Intervenció temporal objecte (Art. 18.2 LOPSC)",
+    "A-10: Acta administrativa oberta (drogues sense propietari, cultiu)",
+    "A-20: Acta pesada/aprehensió (drogues penal)",
+    "Atestat: Document complet penal",
+    "Diligència: Document específic dins atestat",
+    "Minuta: Resum/informe complementari"
+  ]
+}

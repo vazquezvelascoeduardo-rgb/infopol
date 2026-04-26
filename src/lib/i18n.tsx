@@ -61,8 +61,10 @@ const DICT: Record<Locale, Dict> = {
     'operativa.open': 'Abrir',
     'operativa.trafico.title': 'Tráfico',
     'operativa.trafico.desc': 'Identifica la infracción y aplica la norma',
-    'operativa.seguretat-ciutadana.title': 'Seguridad Ciudadana',
-    'operativa.seguretat-ciutadana.desc': 'Procedimientos de seguridad ciudadana',
+    'operativa.seguretat-ciutadana.title': 'Seguridad Ciudadana / Penal',
+    'operativa.seguretat-ciutadana.desc': 'Procedimientos operativos: identificación, escorcoll, detención, lesiones, VG/VD…',
+    'penal.totalScenarios': 'escenarios',
+    'penal.backToList': 'Volver al listado de Seguridad Ciudadana / Penal',
 
     // Tráfico — listado y runner de checklists
     'checklist.notFound': 'Ese checklist no existe.',
@@ -87,6 +89,8 @@ const DICT: Record<Locale, Dict> = {
     'checklist.kind.administrativa': 'Infracción administrativa',
     'checklist.kind.penal': 'Delito (vía penal)',
     'checklist.kind.procediment': 'Procedimiento',
+    'checklist.kind.mixta': 'Vía mixta (administrativa + penal)',
+    'checklist.kind.avis': 'Aviso / atención',
 
     // Sanción (campos de la butlleta y variantes de pena)
     'checklist.forTicket': 'Para el boletín de denuncia',
@@ -247,8 +251,10 @@ const DICT: Record<Locale, Dict> = {
     'operativa.open': 'Obrir',
     'operativa.trafico.title': 'Trànsit',
     'operativa.trafico.desc': "Identifica la infracció i aplica la norma",
-    'operativa.seguretat-ciutadana.title': 'Seguretat Ciutadana',
-    'operativa.seguretat-ciutadana.desc': 'Procediments de seguretat ciutadana',
+    'operativa.seguretat-ciutadana.title': 'Seguretat Ciutadana / Penal',
+    'operativa.seguretat-ciutadana.desc': 'Procediments operatius: identificació, escorcoll, detenció, lesions, VG/VD…',
+    'penal.totalScenarios': 'escenaris',
+    'penal.backToList': 'Torna al llistat de Seguretat Ciutadana / Penal',
 
     // Trànsit — llistat i runner de checklists
     'checklist.notFound': 'Aquest checklist no existeix.',
@@ -273,6 +279,8 @@ const DICT: Record<Locale, Dict> = {
     'checklist.kind.administrativa': 'Infracció administrativa',
     'checklist.kind.penal': 'Delicte (via penal)',
     'checklist.kind.procediment': 'Procediment',
+    'checklist.kind.mixta': 'Via mixta (administrativa + penal)',
+    'checklist.kind.avis': 'Avís / atenció',
 
     // Sanció (camps de la butlleta i variants de pena)
     'checklist.forTicket': 'Per a la butlleta de denúncia',

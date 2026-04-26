@@ -1,0 +1,290 @@
+{
+  "id": "armes",
+  "titol": "Armes prohibides / il·legals / sense documentació",
+  "categoria": "operatiu",
+  "icono": "🔫",
+  "base_legal": [
+    "RD 137/1993 Reglament d'Armes",
+    "Art. 36.10 LOPSC (armes prohibides administratiu)",
+    "Art. 36.11 LOPSC (sense documentació)",
+    "Art. 36.12 LOPSC (mancances documentació/seguretat)",
+    "Art. 37.13 LOPSC (lleu)",
+    "Art. 563 CP (tinença armes prohibides)",
+    "Art. 564 CP (tinença armes reglamentades sense llicència)",
+    "Art. 566-568 CP (armes guerra, explosius)"
+  ],
+
+  "classificacio_armes_pautes_3_3": {
+    "reglamentades_art_3": [
+      "1a categoria: armes curtes (pistoles, revòlvers)",
+      "2a categoria: armes llargues vigilància / caça major",
+      "3a categoria: aire/gas >24,2 J, escopetes",
+      "4a categoria: carabines/pistoles aire/gas, semiautomàtiques/repetició",
+      "5a categoria: blanques, ganivets",
+      "6a categoria: antigues",
+      "7a categoria: injecció, ballestes",
+      "8a categoria: acústiques",
+      "9a categoria: inutilitzades"
+    ],
+    "prohibides_art_4_5": [
+      "Modificades / camuflades",
+      "Punyals (<11 cm, dos talls)",
+      "Navalles automàtiques",
+      "Defenses elèctriques / goma (excepte funcionaris)",
+      "Esprais no homologats",
+      "Nunchaku, manyoples ferro, papallones..."
+    ]
+  },
+
+  "llicencies": {
+    "A": "FCS — armes 1a, 2a, 3a categoria",
+    "B": "Particulars — armes de foc curtes",
+    "C": "Vigilància i seguretat — armes de dotació personal",
+    "D": "Caça major — arma llarga ratllada",
+    "E": "Armes 3a i 7a.2/7a.3 categoria",
+    "F": "Tir esportiu — concursos"
+  },
+
+  "armes_de_guerra": "Particulars NO les poden adquirir, tenir ni usar. Inclou: foc >20mm, calibres NATO (5,56, 7,62...), automàtiques, granades, mines, míssils, bombes. Reservades a FCS i casos especials autoritzats pel Govern de l'Estat.",
+
+  "inici": "tipus_arma",
+  "nodes": {
+
+    "tipus_arma": {
+      "titol": "Tipus d'arma o objecte intervingut",
+      "opcions": [
+        { "etiqueta": "Arma de foc reglamentada SENSE guia/permís",                    "va_a": "arma_foc_situacio" },
+        { "etiqueta": "Arma de foc reglamentada AMB documentació però mal portada",   "va_a": "fi_36_12_doc" },
+        { "etiqueta": "Arma de GUERRA (calibre >20mm, NATO, automàtica, granades…)",   "va_a": "fi_penal_566" },
+        { "etiqueta": "Arma blanca prohibida (papallona, nunchaku, defensa…)",         "va_a": "fi_36_10_blanca" },
+        { "etiqueta": "Navalla / ganivet legal però portat indegudament a la via",     "va_a": "fi_36_10_navalla" },
+        { "etiqueta": "Arma simulada / pneumàtica / airsoft",                          "va_a": "arma_simulada_us" },
+        { "etiqueta": "Esprai pebre / defensa elèctrica / porra (particular)",         "va_a": "fi_36_10_defensa" },
+        { "etiqueta": "Reproducció realista (sense usar)",                              "va_a": "fi_37_armes" },
+        { "etiqueta": "Objectes que poden servir d'agressió (cúter, tornavís, bastó…)", "va_a": "fi_18_2_intervencio" },
+        { "etiqueta": "Arma manipulada o modificada (números esborrats…)",             "va_a": "fi_penal_564_modificada" },
+        { "etiqueta": "Explosius / matèries inflamables / pirotècnia il·legal",        "va_a": "fi_penal_568" }
+      ]
+    },
+
+    "arma_foc_situacio": {
+      "titol": "Situació concreta de l'arma de foc",
+      "opcions": [
+        { "etiqueta": "Pistola/revòlver/escopeta sense guia ni permís",            "va_a": "fi_penal_564" },
+        { "etiqueta": "L'usuari té llicència però no la porta físicament",         "va_a": "fi_36_11_no_porta" },
+        { "etiqueta": "Permís caducat o no renovat",                                "va_a": "fi_36_12_doc" },
+        { "etiqueta": "Manipulada (número esborrat, calibre canviat…)",            "va_a": "fi_penal_564_modificada" }
+      ]
+    },
+
+    "arma_simulada_us": {
+      "titol": "Arma simulada — ús",
+      "text": "S'ha usat per intimidar/cometre un delicte?",
+      "opcions": [
+        { "etiqueta": "Sí, usada en amenaces, robatori o delicte",                 "va_a": "fi_arma_intimidacio" },
+        { "etiqueta": "No, només la porta sense ús delictiu",                       "va_a": "fi_37_armes" },
+        { "etiqueta": "La porta de manera que causa alarma social",                 "va_a": "fi_37_armes_alarma" }
+      ]
+    },
+
+    "fi_36_10_blanca": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Arma blanca prohibida (Art. 36.10 LOPSC)",
+      "concepte_butlleta": "Portar, exhibir o utilitzar armes prohibides per la legislació, així com portar, exhibir o utilitzar armes de foc de manera negligent o temerària o fora dels llocs habilitats per fer-ho",
+      "article_butlleta": "Art. 36.10 LOPSC + Art. 4 RD 137/1993",
+      "import": "601 € - 30.000 €",
+      "exemples": "Defensa amb doble fil, balística, papallona, nunchaku, manyopla, ganivets prohibits...",
+      "accions_ordenades": [
+        "1. Intervenció de l'arma + acta D-10.b (intervenció)",
+        "2. Acta D-10 (denúncia LOPSC)",
+        "3. Cadena de custòdia",
+        "4. Dipòsit a Intervenció d'Armes (Guàrdia Civil)",
+        "5. Si reincidència o context delictiu: valorar via penal"
+      ],
+      "documentacio": "Acta D-10 (denúncia) + Acta D-10.b (intervenció temporal) + cadena custòdia"
+    },
+
+    "fi_36_10_navalla": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Navalla a la via sense justificació",
+      "concepte_butlleta": "Portar, exhibir o utilitzar armes prohibides per la legislació",
+      "article_butlleta": "Art. 36.10 LOPSC",
+      "import": "601 € - 30.000 €",
+      "info": "Navalla amb fulla > 11 cm sense motiu professional/recreatiu legítim. Si fulla < 11 cm: pot no ser sancionable si no concorre alarma o ús perillós.",
+      "documentacio": "Acta D-10 + D-10.b"
+    },
+
+    "fi_36_11_no_porta": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — No portar documentació de l'arma",
+      "concepte_butlleta": "La tinença d'armes que es porten o utilitzen sense estar emparades per la documentació corresponent",
+      "article_butlleta": "Art. 36.11 LOPSC",
+      "import": "601 € - 30.000 €",
+      "accions": [
+        "Retenció provisional de l'arma",
+        "Comprovació a Intervenció d'Armes (IGC)",
+        "Si confirma legalitat: tornar arma + butlletí",
+        "Si NO té llicència: anar a 564 CP (penal)"
+      ],
+      "documentacio": "Acta D-10 + D-10.b"
+    },
+
+    "fi_36_12_doc": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Mancances documentació/seguretat (Art. 36.12)",
+      "concepte_butlleta": "L'incompliment de la normativa vigent i les mesures de seguretat sobre la fabricació, reparació, emmagatzematge, circulació, comerç, exposició, transport, distribució o utilització d'armes",
+      "article_butlleta": "Art. 36.12 LOPSC",
+      "import": "601 € - 30.000 €",
+      "exemples": "Permís caducat, incompliment normativa transport, defectes documentació",
+      "documentacio": "Acta D-10"
+    },
+
+    "fi_36_10_defensa": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Arma defensa per particular",
+      "concepte_butlleta": "Portar, exhibir o utilitzar armes prohibides",
+      "article_butlleta": "Art. 36.10 LOPSC",
+      "import": "601 € - 30.000 €",
+      "exemples": [
+        "Esprais defensa NO homologats",
+        "Defenses elèctriques (TASER) particular",
+        "Porres particulars"
+      ],
+      "documentacio": "Acta D-10 + D-10.b + dipòsit IGC"
+    },
+
+    "fi_37_armes": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "ℹ️ LLEU LOPSC — Reproducció / arma simulada (sense ús delictiu)",
+      "concepte_butlleta": "L'incompliment de l'obligació d'obtenir l'autorització administrativa o de comunicar a l'administració la titularitat o l'adquisició d'objectes prohibits",
+      "article_butlleta": "Art. 37.13 LOPSC (lleu)",
+      "import": "100 € - 600 €",
+      "info": "Generalment, simples reproduccions o airsoft sense ús delictiu no són sancionables. Però si causen ALARMA SOCIAL: 37.16 LOPSC."
+    },
+
+    "fi_37_armes_alarma": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "ℹ️ LLEU LOPSC — Causar alarma amb reproducció",
+      "concepte_butlleta": "Portar de manera ostensible o exhibir armes en llocs on causi alarma o pugui ser confosa amb arma real",
+      "article_butlleta": "Art. 37.16 LOPSC",
+      "import": "100 € - 600 €",
+      "documentacio": "Acta D-10 + intervenció reproducció"
+    },
+
+    "fi_18_2_intervencio": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "📋 Intervenció temporal Art. 18.2 LOPSC",
+      "text": "Objectes que NO són armes però poden servir d'agressió: bastó, cúter, tornavís, navalla petita...",
+      "regla": "L'agent pot ocupar TEMPORALMENT qualsevol objecte que pugui servir d'agressió per prevenir delictes / perill per persones-béns",
+      "accions": [
+        "Aixecar acta D-10.b (intervenció temporal)",
+        "Custòdia provisional",
+        "Decisió: retorn al ciutadà (un cop cessat el risc) o destrucció"
+      ],
+      "documentacio": "Acta D-10.b"
+    },
+
+    "fi_arma_intimidacio": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Ús d'arma simulada per intimidació",
+      "text": "Portar o usar armes simulades en la comissió d'un delicte NO eximeix: es valora com si fos arma real per intimidació (TS).",
+      "concurs_aplicable": [
+        "Robatori amb intimidació (Art. 242.1 o 242.3 CP) si robatori",
+        "Amenaces (Art. 169 CP) si amenaça",
+        "Coaccions (Art. 172 CP) si coacció"
+      ],
+      "accions": [
+        "Detenció",
+        "Intervenció + precintat arma",
+        "Atestat penal del delicte principal + arma simulada com a instrument",
+        "Cadena custòdia",
+        "Jutjat Guàrdia"
+      ]
+    },
+
+    "fi_penal_564": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Tinença il·lícita arma reglamentada (Art. 564 CP)",
+      "text": "Persona sense llicència que té arma de foc reglamentada (1a, 2a, 3a, 7a categoria).",
+      "pena_564_1": "Presó 1-2 anys (armes 1a-3a sense documentació)",
+      "pena_564_2": "Presó 1-3 anys (sense que les armes constin a registre o estan adquirides en àmbits il·lícits)",
+      "accions_ordenades": [
+        "1. Detenció",
+        "2. Lectura drets (520 LECrim)",
+        "3. INTERVENCIÓ arma + acta amb cadena custòdia",
+        "4. Sol·licitar INFORME BALÍSTIC al laboratori",
+        "5. Atestat penal complet",
+        "6. Comunicació Intervenció d'Armes (IGC)",
+        "7. Posada a disposició Jutjat Guàrdia"
+      ],
+      "documentacio": "Atestat + acta intervenció + cadena custòdia + fotos arma + sol·licitud informe balístic"
+    },
+
+    "fi_penal_564_modificada": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Arma manipulada (Art. 564.2 CP)",
+      "text": "Arma amb número de sèrie esborrat, modificada de calibre, o conjunts de peces fonamentals manipulats.",
+      "pena": "Presó 1-3 anys (modalitat agreujada)",
+      "accions": [
+        "Detenció",
+        "Intervenció + precintat",
+        "Avisar UCSP / DIC Mossos (especialistes)",
+        "Informe balístic + pericial",
+        "Atestat penal",
+        "Jutjat Guàrdia"
+      ]
+    },
+
+    "fi_penal_566": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE MOLT GREU — Armes de guerra (Art. 566 CP)",
+      "text": "Particulars amb armes reservades a FCS o de guerra: pistoles automàtiques, calibres NATO, granades, mines, etc.",
+      "pena": "Presó 5-10 anys",
+      "pena_agreujada_567": "Si dipòsit, organització o tràfic: pena meitat superior",
+      "accions_ordenades": [
+        "1. ALERTA màxima — sol·licitar suport especialitzat (Mossos UCSP, TEDAX si explosius)",
+        "2. Detenció",
+        "3. Intervenció amb màxima cura (perill)",
+        "4. Atestat penal",
+        "5. Comunicació immediata Jutjat Guàrdia + Audiència Nacional si delicte grau"
+      ]
+    },
+
+    "fi_penal_568": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE MOLT GREU — Explosius / inflamables (Art. 568 CP)",
+      "text": "Tinença, fabricació o tràfic d'explosius, inflamables, asfixiants o substàncies corrosives.",
+      "pena": "Presó 4-8 anys (tinença) / 5-10 anys (estralls)",
+      "accions_ordenades": [
+        "1. ALERTA TEDAX immediata (no manipular)",
+        "2. Evacuació zona",
+        "3. Detenció amb extrema precaució",
+        "4. Esperar Mossos / GEDEX",
+        "5. Atestat amb peritatge",
+        "6. Possible competència Audiència Nacional"
+      ]
+    }
+  },
+  "notes_finals": [
+    "INTERVENCIÓ D'ARMES (IGC) Guàrdia Civil: organisme competent per a tota la documentació d'armes. Comunicar TOTES les intervencions.",
+    "Si l'arma està declarada robada: comunicació prefectura policial corresponent.",
+    "Menor amb arma: comunicació tutors + Fiscal Menors. Investigar origen.",
+    "ACTA D-10.b és la específica per intervenció temporal d'objectes (Art. 18.2 LOPSC).",
+    "Si sospita organització criminal armada: avisar Mossos DIC (Crim Organitzat).",
+    "REPRODUCCIONS realistes (airsoft, etc.): si tenen marcat color taronja al canó, generalment no perseguibles. Sense marca: investigar.",
+    "Munició: la mera tinença SENSE arma també pot ser delicte (564.2 si és il·legal o de guerra)."
+  ]
+}

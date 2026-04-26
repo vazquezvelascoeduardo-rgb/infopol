@@ -1,0 +1,260 @@
+{
+  "id": "desordres-baralla",
+  "titol": "Desordres públics / baralla",
+  "categoria": "ordre",
+  "icono": "👊",
+  "base_legal": [
+    "Art. 154 CP (baralla tumultuària)",
+    "Art. 557 CP (desordres públics bàsics)",
+    "Art. 557 bis CP (desordres greus)",
+    "Art. 557 ter CP (entrada/permanència local pertorbant)",
+    "Art. 36.1 LOPSC (alteració seguretat ciutadana)",
+    "Art. 36.2 LOPSC (manifestacions)",
+    "Art. 36.3 LOPSC (reunions/manifestacions sense comunicar)",
+    "Art. 36.4 LOPSC (alteració actes públics)",
+    "Art. 37.4 LOPSC (manca respecte agents)",
+    "Art. 37.14 LOPSC (obstrucció via)",
+    "Art. 147-150 CP (lesions)",
+    "Art. 550-556 CP (atemptat/resistència)"
+  ],
+
+  "diferencia_clau": {
+    "admin_36_1_LOPSC": "Pertorbacions seguretat ciutadana sense violència greu — multa 601-30.000 €",
+    "penal_557_CP": "GRUP + violència contra persones/coses + alteració pau pública — presó 6m-3 anys",
+    "penal_557_bis_agreujat": "Amb armes / col·lectiu nombrós / etc. — presó 1-6 anys",
+    "penal_154_CP": "BARALLA tumultuària amb mitjans perillosos i autors indeterminats — presó 3m-1 any",
+    "penal_atemptat_550": "Si la baralla involucra agressió a agents → atemptat"
+  },
+
+  "inici": "situacio",
+  "nodes": {
+
+    "situacio": {
+      "titol": "Situació detectada",
+      "opcions": [
+        { "etiqueta": "BARALLA entre PARTICULARS (no col·lectiva)",                       "va_a": "baralla_lesions" },
+        { "etiqueta": "BARALLA TUMULTUÀRIA en grup amb armes/mitjans perillosos",       "va_a": "fi_154_baralla_tumult" },
+        { "etiqueta": "DESORDRES públics — grup pertorba pau pública",                   "va_a": "desordres_gravetat" },
+        { "etiqueta": "Insults/crits SENSE arribar a violència",                         "va_a": "respecte_destinatari" },
+        { "etiqueta": "DESOBEDIÈNCIA / RESISTÈNCIA a agents",                             "va_a": "fi_remetre_atemptat" },
+        { "etiqueta": "MANIFESTACIÓ amb alteració greu",                                 "va_a": "manifestacio_tipus" },
+        { "etiqueta": "Espectacle esportiu / lúdic — desordres",                          "va_a": "fi_557_557_ter_esport" },
+        { "etiqueta": "Obstrucció via pública (no manif)",                                "va_a": "fi_37_14_obstruccio" }
+      ]
+    },
+
+    "baralla_lesions": {
+      "titol": "Resultat de la baralla particulars",
+      "opcions": [
+        { "etiqueta": "Sí, hi ha LESIONS (anar checklist Lesions)",                       "va_a": "fi_remetre_lesions" },
+        { "etiqueta": "Només empentes / amenaces mútues sense lesió",                    "va_a": "fi_36_1_lopsc" },
+        { "etiqueta": "Lesions a UN sense saber autor concret (autors indeterminats)",   "va_a": "fi_154_indeterminats" }
+      ]
+    },
+
+    "desordres_gravetat": {
+      "titol": "Gravetat dels desordres",
+      "opcions": [
+        { "etiqueta": "Obstrucció via / pertorbació LLEU sense violència",               "va_a": "fi_37_14_obstruccio" },
+        { "etiqueta": "GRUP amb violència contra persones/coses (557 CP)",                "va_a": "fi_557_basic" },
+        { "etiqueta": "Amb ARMES o COL·LECTIVITAT NOMBROSA (557 bis)",                   "va_a": "fi_557_bis_agreujat" },
+        { "etiqueta": "Manifestacions / espais públics amb alteració",                    "va_a": "fi_36_2_lopsc" }
+      ]
+    },
+
+    "respecte_destinatari": {
+      "titol": "Destinatari dels insults / crits",
+      "opcions": [
+        { "etiqueta": "Particulars (no autoritats)",                                      "va_a": "fi_no_delicte_admin" },
+        { "etiqueta": "Manca respecte AGENTS DE L'AUTORITAT",                              "va_a": "fi_37_4_manca_respecte" },
+        { "etiqueta": "AUTORITAT (jutge, alcalde…) — delicte lleu",                      "va_a": "fi_remetre_atemptat" }
+      ]
+    },
+
+    "manifestacio_tipus": {
+      "titol": "Tipus manifestació",
+      "opcions": [
+        { "etiqueta": "Manifestació autoritzada amb alteracions",                         "va_a": "fi_36_2_lopsc" },
+        { "etiqueta": "Manifestació SENSE comunicar amb risc",                           "va_a": "fi_36_3_lopsc" },
+        { "etiqueta": "Escalada amb violència → desordres greus",                        "va_a": "fi_557_basic" }
+      ]
+    },
+
+    "fi_36_1_lopsc": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Pertorbació seguretat ciutadana (Art. 36.1)",
+      "concepte_butlleta": "La pertorbació de la seguretat ciutadana en actes públics, espectacles esportius o culturals, solemnitats i oficis religiosos o altres reunions a les quals assisteixen nombroses persones",
+      "article_butlleta": "Art. 36.1 LOPSC",
+      "import": "601 € - 30.000 €",
+      "accions": [
+        "Separar implicats",
+        "Identificar TOTES les parts",
+        "ACTA D-10 als implicats",
+        "Si denúncia creuada lesions: atestat 147.2",
+        "Valorar detenció si reiteració / alteració greu"
+      ]
+    },
+
+    "fi_36_2_lopsc": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Manifestació amb pertorbació (Art. 36.2)",
+      "concepte_butlleta": "La pertorbació greu de la seguretat ciutadana que es produeixi amb motiu de reunions o manifestacions davant les seus del Congrés dels Diputats, el Senat i les assemblees legislatives de les comunitats autònomes, encara que no estiguin reunits, quan alterin el seu normal funcionament",
+      "article_butlleta": "Art. 36.2 LOPSC",
+      "import": "601 € - 30.000 €",
+      "accions": [
+        "COORDINACIÓ amb comandament — mai actuació individual",
+        "Identificació coordinada",
+        "Acta D-10 individuals",
+        "Si escalada violència: passar a 557 CP"
+      ]
+    },
+
+    "fi_36_3_lopsc": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Reunió/manifestació no comunicada (Art. 36.3)",
+      "concepte_butlleta": "Causar desordres en les vies, espais o establiments públics, o obstaculitzar les vies públiques amb mobiliari urbà, vehicles, contenidors, neumàtics o altres objectes, quan en ambdós casos s'ocasionin alteracions greus de la seguretat ciutadana",
+      "article_butlleta": "Art. 36.3 LOPSC",
+      "import": "601 € - 30.000 €"
+    },
+
+    "fi_37_4_manca_respecte": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "ℹ️ LLEU LOPSC — Manca respecte agents (Art. 37.4)",
+      "concepte_butlleta": "Les faltes de respecte i consideració al exercici de les seves funcions, a un membre de les Forces i Cossos de Seguretat, quan aquestes conductes no constitueixin infracció penal",
+      "article_butlleta": "Art. 37.4 LOPSC",
+      "import": "100 € - 600 €",
+      "accions": ["Advertir", "Acta D-10 si persisteix", "Si insults greus + violència: valorar atemptat"]
+    },
+
+    "fi_37_14_obstruccio": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "ℹ️ LLEU LOPSC — Obstrucció via pública (Art. 37.14)",
+      "concepte_butlleta": "L'ocupació de qualsevol immoble, vivenda o edifici aliens, o la permanència en ells, contra la voluntat del seu propietari [...] o l'obstrucció de la via pública mitjançant la instal·lació o ubicació no autoritzada de qualsevol tipus de mobiliari, atraccions, taules, cadires o altres mobles fora dels espais habilitats",
+      "article_butlleta": "Art. 37.14 LOPSC",
+      "import": "100 € - 600 €",
+      "accions": ["Advertiment", "Butlletí si persisteix"]
+    },
+
+    "fi_154_baralla_tumult": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Baralla tumultuària (Art. 154 CP)",
+      "concepte": "Participar en baralla utilitzant mitjans/instruments perillosos per a la vida o integritat, amb autors INDETERMINATS del resultat",
+      "pena": "Presó 3 mesos - 1 any O multa 6-24 mesos",
+      "requisit_clau": "Indeterminació autors del resultat lesiu (si autor concret identificable: 147 lesions, no 154)",
+      "accions_ordenades": [
+        "1. DISPERSAR + controlar (suport si cal)",
+        "2. AUXILI lesionats + SEM",
+        "3. IDENTIFICAR TOTS els participants",
+        "4. INTERVENCIÓ armes/instruments",
+        "5. Fotografies + testimonis + càmeres",
+        "6. Detenció dels més implicats / violents",
+        "7. Atestat penal + Jutjat Guàrdia"
+      ]
+    },
+
+    "fi_154_indeterminats": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Baralla amb autor indeterminat (Art. 154 CP)",
+      "info": "Hi ha lesionat però no es pot identificar l'autor del cop concret entre el grup",
+      "accions": "Mateixes 154 baralla tumult + recollida proves exhaustiva"
+    },
+
+    "fi_557_basic": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Desordres públics bàsics (Art. 557 CP)",
+      "concepte": "Actuar en GRUP amb la finalitat d'atemptar contra la pau pública executant actes de violència sobre persones o coses, o amenaçant a tercers",
+      "article": "Art. 557.1 CP",
+      "pena": "Presó 6 mesos - 3 anys",
+      "elements_essencials": [
+        "GRUP (com a mínim 4 persones segons jurisprudència)",
+        "Finalitat alterar pau pública",
+        "VIOLÈNCIA sobre persones/coses, amenaces, o INVASIÓ instal·lacions"
+      ],
+      "accions_ordenades": [
+        "1. SUPORT (ARRO, Mossos antidisturbis si calgui)",
+        "2. Identificar instigadors + col·laboradors",
+        "3. Intervenció armes/instruments",
+        "4. Detencions selectives (no genèriques)",
+        "5. GRAVACIÓ si possible (vídeo, càmeres)",
+        "6. Atestat amb identificació individualitzada de cada conducta",
+        "7. Jutjat Guàrdia"
+      ]
+    },
+
+    "fi_557_bis_agreujat": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Desordres agreujats (Art. 557 bis CP)",
+      "supòsits_agreujats": [
+        "Concorre violència que pugui causar perill vida/integritat",
+        "Actes pirotècnics, materials inflamables, armes",
+        "Multitud nombrosa",
+        "Membres organitzats",
+        "Encobertament del rostre",
+        "Servei públic essencial afectat"
+      ],
+      "pena": "Presó 1-6 anys",
+      "accions": [
+        "Coordinació total Mossos / FCS",
+        "Documentació exhaustiva",
+        "Detenció + atestat",
+        "Possible competència Audiència Nacional si terrorisme"
+      ]
+    },
+
+    "fi_557_557_ter_esport": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Desordres en espectacle esportiu (Art. 557 ter CP)",
+      "concepte": "Entrada / permanència contra voluntat o pertorbant gravement esdeveniment esportiu/cultural",
+      "pena": "Presó 3 mesos - 1 any",
+      "accions": [
+        "Identificar organització esdeveniment",
+        "Detenció",
+        "Atestat amb suport gravacions/càmeres recinte"
+      ]
+    },
+
+    "fi_no_delicte_admin": {
+      "final": true,
+      "tipus": "ok",
+      "titol": "ℹ️ Sense delicte aparent (insults entre particulars)",
+      "info": "Insults entre particulars: NO és delicte públic. Vies civils (injúries privades 208 CP — denúncia perjudicat) o privades.",
+      "accio": "Mediar, separar, advertir. Si reiterat o greus: registrar i informar dels drets civils."
+    },
+
+    "fi_remetre_lesions": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🔀 Anar a checklist 'Lesions'",
+      "accio": "Si hi ha lesions: aplicar Arts. 147-150 CP segons gravetat."
+    },
+
+    "fi_remetre_atemptat": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🔀 Anar a checklist 'Atemptat / resistència'",
+      "accio": "Si hi ha agressió, escomesa, resistència, desobediència a agents: anar a checklist específic. Aplicar 550-556 CP segons modalitat."
+    }
+  },
+  "notes_finals": [
+    "DIFERENCIAR LOPSC (admin) de CP (penal) segons VIOLÈNCIA i GRAVETAT.",
+    "BARALLA TUMULTUÀRIA (154 CP) requereix INDETERMINACIÓ autors del resultat. Si autor concret identificable: 147 lesions.",
+    "GRUPS GRANS: actuar amb SUPORT i COORDINACIÓ. No actuacions aïllades.",
+    "MANIFESTACIONS: tractament especial. Coordinació amb comandament. Identificacions selectives.",
+    "DESORDRES + ATEMPTAT: concurs. Si en el desordre s'agredeix a agent: 557 + 550 CP.",
+    "GRAVACIÓ: clau per atestat. Càmeres ciutat, ARRO, mòbils, dashcams.",
+    "FUTBOL / CONCERTS: Llei 19/2007 contra violència esportiva — sancions específiques + 557 ter CP.",
+    "ENCAPUTXATS / ENMASCARATS: Art. 557 bis afegeix agreujant.",
+    "PERSONES VULNERABLES (gent gran, menors) implicades: extremar prudència.",
+    "PRINCIPI PROPORCIONALITAT: la força usada ha de ser proporcionada. Mai 'mínima força imprescindible' (frase prohibida Pautes 3.3) — concretar."
+  ]
+}

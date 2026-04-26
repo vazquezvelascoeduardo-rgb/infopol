@@ -1,0 +1,265 @@
+{
+  "id": "danys",
+  "titol": "Danys",
+  "categoria": "patrimoni",
+  "icono": "🔨",
+  "base_legal": [
+    "Art. 263 CP (danys dolosos bàsics)",
+    "Art. 263.2 CP (danys agreujats)",
+    "Art. 264 CP (danys informàtics)",
+    "Art. 264 bis CP (atac sistemes informàtics)",
+    "Art. 265 CP (danys béns militars)",
+    "Art. 266 CP (mitjans perillosos / incendi)",
+    "Art. 267 CP (danys imprudents > 80.000 €)",
+    "Art. 323 CP (danys béns patrimoni cultural)"
+  ],
+
+  "diferencia_clau": {
+    "danys_lleus_263_1_paragraf_2": "≤ 400 € — multa 1-3 mesos — denúncia perjudicat",
+    "danys_basics_263_1": "> 400 € — multa 6-24 mesos — d'ofici",
+    "danys_agreujats_263_2": "Patrimoni cultural / servei públic / catàstrofe — presó 1-3 anys",
+    "danys_informatics_264": "Esborrar dades/sistemes — presó 6 mesos - 3 anys",
+    "danys_imprudents_267": "Només si > 80.000 € — multa 3-9 mesos"
+  },
+
+  "inici": "tipus_dany",
+  "nodes": {
+
+    "tipus_dany": {
+      "titol": "Tipus de dany causat",
+      "opcions": [
+        { "etiqueta": "Dany a bé MATERIAL (dolós)",                                    "va_a": "valor_dany" },
+        { "etiqueta": "Grafits / pintades (vandalisme)",                                "va_a": "fi_grafits_mixt" },
+        { "etiqueta": "Dany a bé PÚBLIC (mobiliari urbà, fonts, monuments)",             "va_a": "fi_263_2_servei_public" },
+        { "etiqueta": "Dany a PATRIMONI CULTURAL/HISTÒRIC",                             "va_a": "fi_323_patrimoni" },
+        { "etiqueta": "Dany INFORMÀTIC (dades, sistemes)",                              "va_a": "fi_264_informatic" },
+        { "etiqueta": "Dany per IMPRUDÈNCIA",                                           "va_a": "fi_267_imprudent" },
+        { "etiqueta": "Dany amb INCENDI",                                                "va_a": "fi_266_incendi" },
+        { "etiqueta": "Dany a SERVEI PÚBLIC ESSENCIAL (aigua, llum, transport…)",       "va_a": "fi_263_2_servei_public" },
+        { "etiqueta": "Dany animal (no propi) — maltractament animal",                   "va_a": "fi_337_animal" },
+        { "etiqueta": "Dany propi simulat (frau assegurança)",                           "va_a": "fi_frau_assegurança" }
+      ]
+    },
+
+    "valor_dany": {
+      "titol": "Valor del dany",
+      "opcions": [
+        { "etiqueta": "≤ 400 € (DELICTE LLEU)",                                        "va_a": "fi_263_1_lleu" },
+        { "etiqueta": "> 400 € sense agreujants",                                       "va_a": "fi_263_1_basic" },
+        { "etiqueta": "> 400 € amb agreujants 263.2",                                   "va_a": "fi_263_2_agreujats" }
+      ]
+    },
+
+    "fi_grafits_mixt": {
+      "final": true,
+      "tipus": "mixta",
+      "titol": "📋 Grafits / pintades — vies admin + penal",
+      "info": "Depèn del valor del dany i del tipus de bé (privat / públic / patrimoni).",
+      "vies_aplicables": [
+        "ORDENANÇA Civisme local: 100-3.000 € (administrativa)",
+        "Art. 263.1 paràgraf 2 CP: si dany ≤ 400 € — delicte lleu",
+        "Art. 263.1 CP: si > 400 €",
+        "Art. 263.2 CP: si patrimoni històric/cultural",
+        "Art. 323 CP: si béns patrimoni cultural amb agreujants"
+      ],
+      "accions_ordenades": [
+        "1. Identificar autor (si flagrant: parar-lo)",
+        "2. FOTOGRAFIES abans i després (si possible)",
+        "3. VALORACIÓ ECONÒMICA (cost neteja/restauració) — sol·licitar a Brigada / propietari",
+        "4. Si privat: declaració perjudicat",
+        "5. Si públic: comunicació responsable manteniment",
+        "6. SEGONS VALOR I BÉ: butlletí ordenança o atestat penal",
+        "7. Si autor desconegut: arxiu provisional fins identificació"
+      ],
+      "documentacio": "Acta + fotografies + valoració + denúncia perjudicat"
+    },
+
+    "fi_263_1_lleu": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "⚖️ DELICTE LLEU — Danys menors (Art. 263.1 paràgraf 2 CP)",
+      "pena": "Multa 1-3 mesos",
+      "perseguibilitat": "Denúncia perjudicat",
+      "accions": [
+        "Declaració perjudicat",
+        "Valoració econòmica (factura, pressupost)",
+        "Fotografies",
+        "Atestat simplificat",
+        "Si autor present: identificació + citació"
+      ]
+    },
+
+    "fi_263_1_basic": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Danys (Art. 263.1 CP)",
+      "pena": "Multa 6-24 mesos",
+      "perseguibilitat": "D'ofici",
+      "accions": [
+        "Declaració perjudicat",
+        "VALORACIÓ pericial dels danys (cost reparació o substitució)",
+        "Fotografies exhaustives",
+        "Detenció si flagrant",
+        "Atestat penal + Jutjat"
+      ]
+    },
+
+    "fi_263_2_agreujats": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE AGREUJAT — Danys (Art. 263.2 CP)",
+      "pena": "Presó 1-3 anys + multa 12-24 mesos",
+      "supòsits_aplicables": [
+        "1. Patrimoni HISTÒRIC, ARTÍSTIC, CULTURAL o CIENTÍFIC",
+        "2. En cas d'incendi, inundació o altra catàstrofe",
+        "3. Perill MANIFEST per a tercers",
+        "4. SERVEI PÚBLIC essencial (aigua, llum, telecom, transport, sanitat)",
+        "5. Béns d'INTERÈS GENERAL, defensa o seguretat nacional"
+      ],
+      "accions": [
+        "Valoració pericial",
+        "Documentació fotogràfica",
+        "Declaracions responsables servei afectat",
+        "Atestat + Jutjat"
+      ]
+    },
+
+    "fi_263_2_servei_public": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE AGREUJAT — Dany servei públic (Art. 263.2.4 CP)",
+      "pena": "Presó 1-3 anys + multa",
+      "exemples": [
+        "Mobiliari urbà (fonts, semàfors, papereres, marquesines bus)",
+        "Cablejat infraestructura (fibra, cabines, electricitat)",
+        "Vehicles transport públic",
+        "Centres educatius / sanitaris públics",
+        "Esculptures / monuments públics"
+      ],
+      "accions": [
+        "Comunicació al servei municipal/concessionari",
+        "Fotografies + valoració",
+        "Si flagrant: detenció",
+        "Si càmeres ciutat: requeriment urgent",
+        "Atestat penal + Jutjat"
+      ]
+    },
+
+    "fi_323_patrimoni": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Danys patrimoni cultural (Art. 323 CP)",
+      "concepte": "Danys a béns valor històric/artístic/cultural/científic protegits",
+      "pena": "Presó 6 mesos - 3 anys + multa 12-24 mesos",
+      "pena_agreujada": "Si destrucció total o danys irreparables: pena meitat superior",
+      "accions_ordenades": [
+        "Comunicació URGENT a Patrimoni Cultural (Generalitat)",
+        "Pericial especialitzat (Mossos DIC patrimoni o ajuntament)",
+        "Preservació total escena",
+        "Fotografies amb escala",
+        "Atestat amb informe peritatge",
+        "Jutjat"
+      ]
+    },
+
+    "fi_264_informatic": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Danys informàtics (Art. 264 CP)",
+      "concepte": "Esborrar, danyar, alterar, suprimir o fer inaccessibles dades, programes o documents electrònics",
+      "pena_basica": "Presó 6 mesos - 3 anys + multa",
+      "pena_agreujada_264_2": "Presó 2-5 anys (organització, danys greus, fins polítics/ideològics)",
+      "info": "Art. 264 bis: atacs a sistemes informàtics (DDoS, etc.) — pena similar",
+      "accions_ordenades": [
+        "1. PRESERVAR EVIDÈNCIA DIGITAL (NO TOCAR RES)",
+        "2. Avisar Mossos DGTC (Delictes Telemàtics)",
+        "3. Declaració perjudicat",
+        "4. Documentació del sistema afectat",
+        "5. Cadena custòdia DIGITAL (clonatges, hashes)",
+        "6. Si IP coneguda: preservar logs",
+        "7. Atestat + Jutjat"
+      ],
+      "documentacio_clau": "Atestat + informe pericial digital + cadena custòdia digital"
+    },
+
+    "fi_267_imprudent": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "⚖️ DELICTE LLEU — Danys imprudència greu (Art. 267 CP)",
+      "info_clau": "Només delicte si quantia > 80.000 € (Llei 41/2015). Per sota: via civil pura.",
+      "pena": "Multa 3-9 mesos",
+      "perseguibilitat": "Denúncia perjudicat",
+      "exemples_per_sobre_80000": [
+        "Incendi accidental edifici",
+        "Inundació gran per imprudència obres",
+        "Col·lisió vehicle contra patrimoni"
+      ],
+      "accions": [
+        "Recollida detallada fets",
+        "Valoració pericial",
+        "Atestat si supera quantia",
+        "Si menys de 80.000 €: via civil — informar perjudicat"
+      ]
+    },
+
+    "fi_266_incendi": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Danys per incendi/explosió (Art. 266 CP)",
+      "concepte": "Danys causats mitjançant incendi, explosió, mitjans perillosos",
+      "pena": "Presó 1-3 anys + multa (concurs si forestal: Art. 351-358)",
+      "info": "Si incendi forestal: Arts. 352-355 CP. Si incendi habitatge habitat: 351 CP (pena greu)",
+      "accions": [
+        "Auxili víctimes + Bombers",
+        "Preservar escena com escena de crim",
+        "Avisar Mossos DIC",
+        "Pericial especialitzat causes incendi",
+        "Atestat + Jutjat Guàrdia"
+      ]
+    },
+
+    "fi_337_animal": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Maltractament animal (Art. 340 bis - 340 quinquies CP, reformat per LO 3/2023)",
+      "info": "REFORMA 2023: animals domèstics/amansits = víctima específica protegida. Maltractament greu = delicte.",
+      "pena_basica": "Presó 3-18 mesos O multa 6-12 mesos + inhabilitació tinença animals 1-3 anys",
+      "pena_mort": "Presó 12-24 mesos + inhabilitació 2-5 anys (si causa la mort)",
+      "pena_agreujada": "Pena meitat superior si: zoofília, mitjans dolorosos, presència menors, animals especialment vulnerables",
+      "accions": [
+        "Auxili immediat animal (veterinari urgent)",
+        "Detenció autor",
+        "Informe veterinari pericial",
+        "Si animal abandonat: Servei municipal animals + acta",
+        "Comunicació SEPRONA (Guàrdia Civil) si rural",
+        "Atestat + Jutjat"
+      ]
+    },
+
+    "fi_frau_assegurança": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Frau a l'assegurança (Art. 248-251 CP)",
+      "concepte": "Danys autoinfligits o simulats per cobrar assegurança",
+      "pena": "Estafa Art. 248: presó 6 mesos - 3 anys (si quantia > 400 €)",
+      "info": "Configura ESTAFA (no danys). Tipologia que sovint apareix en sinistres dubtosos.",
+      "accions": [
+        "Investigació exhaustiva escena",
+        "Pericial",
+        "Coordinació amb companyia asseguradora",
+        "Atestat penal per estafa"
+      ]
+    }
+  },
+  "notes_finals": [
+    "VALORACIÓ ECONÒMICA: clau per delimitar lleu/bàsic/agreujat. Sempre demanar pressupost o factura.",
+    "DANY CONTINUAT: si múltiples danys del mateix subjecte → delicte continuat (recopilar tots).",
+    "GRAFITS: si autor reincident habitual → pot ser delicte continuat amb acumulació de quanties.",
+    "DANYS A SERVEI PÚBLIC: SEMPRE informar a l'empresa concessionària / municipal.",
+    "DANYS EN MANIFESTACIÓ: pot concorre amb desordres públics (557 CP) — atestat conjunt.",
+    "DANYS INFORMÀTICS: NO MANIPULAR dispositius. Cadena custòdia digital. Coordinar DGTC.",
+    "PATRIMONI HISTÒRIC: comunicació Generalitat (Patrimoni). Tramitació conjunta amb Mossos.",
+    "ANIMALS: si abandó/maltractament → veterinari + servei animals + atestat. Reforma 2023 dóna més protecció.",
+    "DANYS PER MENORS: responsabilitat civil dels pares (Codi Civil) + responsabilitat penal del menor (LRPM)."
+  ]
+}

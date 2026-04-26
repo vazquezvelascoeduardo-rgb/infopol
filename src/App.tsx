@@ -18,6 +18,7 @@ import SearchResults from './pages/SearchResults';
 import NotFound from './pages/NotFound';
 import Operativa from './pages/Operativa';
 import Trafico from './pages/operativa/Trafico';
+import Penal from './pages/operativa/Penal';
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/leyes/s/:moduleSlug/:slug" element={<CardPage />} />
         <Route path="/operativa" element={<Operativa />} />
         <Route path="/operativa/trafico/*" element={<Trafico />} />
+        <Route path="/operativa/penal/*" element={<Penal />} />
         <Route path="/cerca" element={<SearchResults />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

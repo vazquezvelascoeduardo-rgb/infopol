@@ -1,0 +1,179 @@
+{
+  "id": "ocupacio",
+  "titol": "Ocupació d'immobles",
+  "categoria": "patrimoni",
+  "icono": "🏘️",
+  "base_legal": [
+    "Art. 18.2 CE (inviolabilitat domicili)",
+    "Art. 202 CP (allanament de morada)",
+    "Art. 203 CP (allanament establiment)",
+    "Art. 245.2 CP (usurpació immobles)",
+    "Art. 255 CP (defraudació fluid)",
+    "Llei 5/2018 (procediment civil sumari recuperació)",
+    "Art. 8 LECiv (acció possessòria)"
+  ],
+
+  "diferencia_clau_pautes": {
+    "habitatge_202_CP": "Habitatge habitual o segona residència = ALLANAMENT — pena 6m-2anys (sense violència) o 1-4 anys (amb)",
+    "usurpacio_245_2": "Immoble que NO és habitatge = USURPACIÓ — multa 3-6 mesos",
+    "diferencia_temporal": "Recent (24-72h primeres): FLAGRÀNCIA permet actuació policial directa. Consolidada: cal via judicial."
+  },
+
+  "concepte_domicili": [
+    "Habitatge habitual",
+    "Segona residència en ús",
+    "Habitació hotel ocupada",
+    "Caravana/autocaravana com a residència",
+    "Embarcació amb cabines residencials"
+  ],
+
+  "inici": "estat_immoble",
+  "nodes": {
+
+    "estat_immoble": {
+      "titol": "Estat de l'immoble ocupat",
+      "opcions": [
+        { "etiqueta": "Habitatge habitual (algú hi viu actualment)",                       "va_a": "fi_202_allanament" },
+        { "etiqueta": "Segona residència en ús (titular ve regularment)",                  "va_a": "fi_202_allanament" },
+        { "etiqueta": "Habitatge buit però privat (particular / SAREB / banca)",           "va_a": "temps_ocupacio" },
+        { "etiqueta": "Local / nau / solar NO habitable",                                  "va_a": "fi_245_usurpacio" },
+        { "etiqueta": "Local comercial obert al públic (allanament establiment)",          "va_a": "fi_203_establiment" },
+        { "etiqueta": "Habitatge social / amb conveni",                                    "va_a": "temps_ocupacio" }
+      ]
+    },
+
+    "temps_ocupacio": {
+      "titol": "Temps transcorregut des de l'ocupació",
+      "info": "Clau operativa: dins les primeres 24-72h hi ha FLAGRÀNCIA — actuació policial directa amb denúncia titular. Consolidada → via judicial.",
+      "opcions": [
+        { "etiqueta": "FLAGRANT (menys de 24-48h)",                                        "va_a": "fi_flagrant" },
+        { "etiqueta": "Recent (48-72h)",                                                    "va_a": "fi_flagrant_consultar" },
+        { "etiqueta": "Consolidada (dies/setmanes)",                                        "va_a": "fi_via_judicial_civil" },
+        { "etiqueta": "Molt consolidada (mesos)",                                           "va_a": "fi_via_judicial_civil" }
+      ]
+    },
+
+    "fi_202_allanament": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Allanament de morada (Art. 202 CP)",
+      "concepte": "Entrar o mantenir-se en domicili aliè CONTRA la voluntat del seu morador",
+      "article": "Art. 202 CP",
+      "pena_sense_violencia": "Presó 6 mesos - 2 anys",
+      "pena_amb_violencia": "Presó 1-4 anys + multa 6-12 mesos",
+      "info_clau": "Protegeix INVIOLABILITAT DOMICILI (CE 18.2). Habitatge habitual / segona residència = SEMPRE allanament, no usurpació.",
+      "accions_ordenades": [
+        "1. INTERVENCIÓ IMMEDIATA — la flagrància permet entrada (Art. 553 LECrim)",
+        "2. Identificar tots els ocupants",
+        "3. DESALLOTJAR-los",
+        "4. Detenció autors",
+        "5. Lectura drets",
+        "6. Declaració morador / titular",
+        "7. Comprovar si hi ha menors / persones vulnerables → DGAIA si menors",
+        "8. Inspecció ocular (mode entrada, danys, efectes intervenció)",
+        "9. Atestat penal complet",
+        "10. Posada a disposició Jutjat Guàrdia"
+      ],
+      "documentacio": "Atestat + acta intervenció + declaracions + inspecció ocular + fotografies"
+    },
+
+    "fi_203_establiment": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Allanament establiment obert al públic (Art. 203 CP)",
+      "info": "Mantenir-se contra la voluntat del titular en establiment obert al públic fora hores",
+      "pena": "Multa 6-10 mesos (203.1)",
+      "pena_amb_violencia": "Presó 6 mesos - 3 anys (203.2)",
+      "accions": [
+        "Identificació",
+        "Desallotjament",
+        "Detenció si flagrant + violència",
+        "Atestat + Jutjat"
+      ]
+    },
+
+    "fi_flagrant": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 OCUPACIÓ FLAGRANT — Usurpació recent (Art. 245.2 CP)",
+      "concepte": "Ocupació recent (24-48h) d'habitatge buit o immoble — flagrància permet actuació",
+      "pena": "Multa 3-6 mesos",
+      "info_operativa_pautes": "TC + jurisprudència: actuació policial directa permesa en les primeres 24-48h amb DENÚNCIA del propietari. Passat aquest temps: via judicial.",
+      "accions_ordenades": [
+        "1. DENÚNCIA del propietari (imprescindible — sense ella no es pot actuar)",
+        "2. Verificar titularitat (escriptura, contracte, registre)",
+        "3. Identificar ocupants",
+        "4. Desallotjar (en flagrància)",
+        "5. Si hi ha menors: comunicació DGAIA + Serveis Socials",
+        "6. Si troben drogues / armes: concurs",
+        "7. Si defraudació elèctrica: Art. 255 CP concurs",
+        "8. Atestat + Jutjat Guàrdia"
+      ],
+      "info_dubte_jutjat": "Si dubtes sobre flagrància, consulta Jutjat de Guàrdia abans d'entrar."
+    },
+
+    "fi_flagrant_consultar": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "⚠️ Consultar Jutjat de Guàrdia",
+      "info": "Entre 48-72h: zona gris jurídica. Recomanable consulta abans d'actuar.",
+      "accions": [
+        "Denúncia propietari",
+        "Identificar exterior ocupants",
+        "Consultar Jutjat de Guàrdia (telèfon de guàrdia)",
+        "Si JG autoritza: actuació immediata",
+        "Si JG diu via civil: derivar al propietari"
+      ]
+    },
+
+    "fi_245_usurpacio": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Usurpació (Art. 245.2 CP)",
+      "concepte": "Ocupació d'immoble, vivenda o edifici aliè que NO constitueix domicili",
+      "article": "Art. 245.2 CP",
+      "pena": "Multa 3-6 mesos",
+      "perseguibilitat": "D'ofici (no requereix denúncia perjudicat — encara que ajuda)",
+      "accions": [
+        "Denúncia propietari (recomanable)",
+        "Identificació ocupants",
+        "Fotografies, comprovació titularitat (Registre Propietat)",
+        "Atestat + Jutjat (procediment lent)",
+        "Si fets concrets concurrents: actuar (drogues, danys, defraudació)"
+      ]
+    },
+
+    "fi_via_judicial_civil": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "⚖️ Ocupació consolidada — via judicial",
+      "info": "Un cop transcorreguts dies de flagrància, el desallotjament requereix RESOLUCIÓ JUDICIAL.",
+      "vies_per_propietari": [
+        "ACCIÓ CIVIL DESNONAMENT (Llei 5/2018) — procediment ràpid per particulars i entitats sense ànim lucre",
+        "DENÚNCIA PENAL Art. 245.2 CP (procediment més lent)",
+        "ACCIÓ POSSESSÒRIA (Art. 250.1.4 LEC) — recuperació possessió"
+      ],
+      "accions_policia": [
+        "Atendre denúncia del propietari",
+        "Identificar ocupants si col·laboren",
+        "Atestat + remissió Jutjat Instrucció",
+        "NO desallotjar sense resolució",
+        "Si fets concrets paral·lels (robatori electricitat, danys, amenaces, drogues): actuar independentment"
+      ],
+      "informacio_propietari": "Recomanar consulta amb advocat / via civil ràpida (Llei 5/2018) si vol recuperar abans"
+    }
+  },
+  "notes_finals": [
+    "DISTINCIÓ CLAU: habitatge habitual o segona residència = ALLANAMENT (delicte greu 202). Immoble buit / no habitatge = USURPACIÓ (multa).",
+    "DEFRAUDACIÓ FLUID ELÈCTRIC (Art. 255 CP) és delicte INDEPENDENT i pot perseguir-se tot i que ocupació estigui consolidada — acta i atestat.",
+    "MENORS al pis ocupat: comunicació DGAIA SEMPRE.",
+    "PERSONES VULNERABLES (gent gran, malalts mentals): coordinar amb Serveis Socials abans desallotjament.",
+    "DANYS al pis (estructura): valorar concurs 263 CP.",
+    "PROFESSIONALS DE L'OCUPACIÓ (organitzacions): coordinació Mossos DIC — pot ser tracta de persones / explotació.",
+    "Llei 5/2018: procediment civil ràpid (15 dies) per recuperació immobles particulars i entitats sense ànim lucre. NO bancs ni grans tenidors.",
+    "OCUPACIÓ + TRÀFIC DROGUES: concurs 245 + 368 CP. Sovint pisos del 'narcopisos'.",
+    "NARCOPISOS: avisar Mossos UDYCO / DIC. Investigació coordinada.",
+    "Si propietari menor / incapaç: tutor legal pot denunciar.",
+    "ESCALAMENT, FRACTURA per accedir → afegir Art. 240 CP (robatori amb força) si va a buscar coses, no si només per ocupar."
+  ]
+}

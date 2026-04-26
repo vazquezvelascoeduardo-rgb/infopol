@@ -24,7 +24,8 @@ const OPERATIVA_THEMES: OperativaTheme[] = [
     slug: 'seguretat-ciutadana',
     icon: '🛡️',
     accent: 'from-slate-500 to-slate-700',
-    ready: false,
+    ready: true,
+    to: '/operativa/penal',
   },
 ];
 

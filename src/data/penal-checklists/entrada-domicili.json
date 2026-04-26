@@ -1,0 +1,193 @@
+{
+  "id": "entrada-domicili",
+  "titol": "Entrada a domicili",
+  "categoria": "operatiu",
+  "icono": "🏠",
+  "base_legal": [
+    "Art. 18.2 CE (inviolabilitat domicili)",
+    "Art. 15 LO 4/2015 LOPSC",
+    "Arts. 545-572 LECrim (registre domiciliari)",
+    "Art. 553 LECrim (flagrant delicte)",
+    "Art. 20.5 CP (estat de necessitat)"
+  ],
+  "principi_general": "L'inviolabilitat del domicili és dret fonamental (CE 18.2). Només TRES vies legals: (1) consentiment titular, (2) flagrant delicte, (3) autorització judicial. Quart supòsit excepcional: estat de necessitat (vida en perill, incendi…).",
+  "concepte_domicili": [
+    "Vivenda habitual",
+    "Segona residència",
+    "Habitació hotel ocupada",
+    "Caravana / autocaravana en ús com a residència",
+    "Embarcació amb cabines residencials",
+    "Vestidor/oficina personal dins centre laboral (jurisprudència)",
+    "Despatx d'advocat (privilegis especials)",
+    "NO és domicili: vehicle, local comercial obert al públic, magatzem comercial sense ús residencial"
+  ],
+  "inici": "supost",
+  "nodes": {
+
+    "supost": {
+      "titol": "Per quina via es planteja l'entrada?",
+      "opcions": [
+        { "etiqueta": "Consentiment del titular",                               "va_a": "verificar_consentiment" },
+        { "etiqueta": "Flagrant delicte",                                       "va_a": "verificar_flagrancia" },
+        { "etiqueta": "Autorització judicial (mandat)",                          "va_a": "fi_judicial" },
+        { "etiqueta": "Estat de necessitat (vida/incendi/auxili urgent)",       "va_a": "fi_necessitat" },
+        { "etiqueta": "Cap dels anteriors",                                     "va_a": "fi_no_entrar" }
+      ]
+    },
+
+    "verificar_consentiment": {
+      "titol": "Requisits del consentiment",
+      "text": "Es donen TOTS aquests requisits?",
+      "checklist_requisits": [
+        "✓ Titular AMB CAPACITAT (no menor sol, no incapaç)",
+        "✓ Lliure (sense coacció)",
+        "✓ Exprés (no presumpte)",
+        "✓ INFORMAT del motiu (saber per què entres)",
+        "✓ Pot REVOCAR-SE en qualsevol moment"
+      ],
+      "opcions": [
+        { "etiqueta": "Sí, tots els requisits",                                 "va_a": "fi_consentiment_ok" },
+        { "etiqueta": "Cotitulars i un s'oposa",                                "va_a": "fi_no_entrar_cotitular" },
+        { "etiqueta": "Menor sol",                                              "va_a": "fi_no_entrar_menor" },
+        { "etiqueta": "Sospita coacció / por",                                  "va_a": "fi_no_entrar_coaccio" }
+      ]
+    },
+
+    "verificar_flagrancia": {
+      "titol": "Requisits acumulatius del flagrant delicte (TC)",
+      "text": "Es donen els TRES requisits acumulatius?",
+      "info": "Si en falta UN, l'entrada serà nul·la i les proves invalides (fruit arbre enverinat). Els 3 requisits són una doctrina TC consolidada.",
+      "checklist_3_requisits": [
+        "✓ IMMEDIATESA TEMPORAL: el delicte s'està cometent o acaba de cometre's (no fa hores)",
+        "✓ IMMEDIATESA PERSONAL: el delinqüent és al lloc o evident al lloc",
+        "✓ NECESSITAT URGENT D'INTERVENCIÓ POLICIAL: per aturar delicte / evitar fugida / preservar prova"
+      ],
+      "info_clau": "Crits, soroll de violència, persona demanant auxili, perill imminent vida = causes típiques que JUSTIFIQUEN.",
+      "opcions": [
+        { "etiqueta": "Sí, els 3 requisits acumulatius",                        "va_a": "fi_flagrant_ok" },
+        { "etiqueta": "Només sospita / dubte",                                  "va_a": "fi_no_entrar_sospita" }
+      ]
+    },
+
+    "fi_consentiment_ok": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "✅ Entrada amb consentiment",
+      "accions_ordenades": [
+        "1. Documentar PER ESCRIT: titular, data, hora, motiu",
+        "2. SIGNATURA del titular consentint",
+        "3. Entrar amb acompanyament del titular si possible",
+        "4. ENTRADA LIMITADA a allò que justifiqui el consentiment",
+        "5. Si revoca consentiment: SORTIR immediatament",
+        "6. EXCEPCIÓ: si entretant apareix flagrant delicte, es pot continuar (canvi de via legal)",
+        "7. Diligència d'actuació amb tot el procés"
+      ],
+      "documentacio": "Diligència d'entrada + acta de consentiment signada + acta d'intervenció si troba alguna cosa"
+    },
+
+    "fi_flagrant_ok": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "✅ Entrada per flagrant delicte (Art. 553 LECrim)",
+      "accions_ordenades": [
+        "1. ENTRAR proporcionalment per aturar el delicte / detenir / evitar fugida",
+        "2. PRESERVAR escena al mínim necessari",
+        "3. NO practicar registre general (això requereix mandat)",
+        "4. Si troba flagrant: detenció + atestat",
+        "5. COMUNICACIÓ IMMEDIATA al Jutjat de Guàrdia",
+        "6. Diligència MOLT detallada amb justificació flagrància (3 requisits)",
+        "7. Si calgui registre posterior: sol·licitar mandat",
+        "8. Si menors al lloc: comunicació DGAIA"
+      ],
+      "documentacio_clau": "Atestat + diligència de la urgència i flagrància (descrivint els 3 requisits) + acta d'intervenció",
+      "info": "L'entrada per flagrant és per a actuació immediata, NO per a un registre exhaustiu. Per registrar exhaustivament, sol·licitar mandat al Jutjat."
+    },
+
+    "fi_judicial": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "✅ Entrada amb autorització judicial",
+      "accions_ordenades": [
+        "1. COMPROVAR la resolució (data, destinatari concret, abast del registre, vigència)",
+        "2. NOTIFICAR al titular abans d'entrar",
+        "3. Presència del LLETRAT DE L'ADMINISTRACIÓ DE JUSTÍCIA si la resolució ho disposa",
+        "4. DOS TESTIMONIS si possible (Art. 569 LECrim)",
+        "5. Registre LIMITAT a l'abast autoritzat (no es pot ampliar 'si fa la sensació')",
+        "6. ACTA detallada amb inventari complet de tot el que s'intervé",
+        "7. Cadena de custòdia rigorosa",
+        "8. Lliurar còpia de la resolució i de l'acta al titular"
+      ],
+      "documentacio_clau": "Acta d'entrada i registre + acta de cadena de custòdia + còpia signada per testimonis i lletrat"
+    },
+
+    "fi_necessitat": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "✅ Entrada per estat de necessitat",
+      "supòsits_típics": [
+        "Vida o integritat en perill imminent (víctima cridant auxili)",
+        "Incendi al domicili",
+        "Cadàver dins (sense ningú més)",
+        "Inundació / fugida de gas",
+        "Animal en greu perill",
+        "Prevenció de suïcidi en curs"
+      ],
+      "accions_ordenades": [
+        "1. ACTUAR amb proporcionalitat — només per aturar el perill",
+        "2. AUXILI sanitari / bombers / SEM si cal",
+        "3. SORTIR quan cessi l'emergència",
+        "4. SI durant l'actuació apareixen indicis delictius: PRESERVAR i sol·licitar mandat",
+        "5. DILIGÈNCIA detallada justificant la urgència",
+        "6. Comunicar Jutjat de Guàrdia"
+      ],
+      "documentacio": "Diligència d'urgència justificant l'estat de necessitat + informe complet",
+      "base_legal_extra": "Art. 20.5 CP (justificació) — exempció responsabilitat per estat de necessitat"
+    },
+
+    "fi_no_entrar": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "⚠️ NO entrar — falta via legal",
+      "accio": "Sense una de les 4 vies, l'entrada és il·lícita. Mantenir l'immoble vigilat i sol·licitar mandat al Jutjat."
+    },
+
+    "fi_no_entrar_cotitular": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "⚠️ Cotitulars: un s'oposa",
+      "info": "El TS (sentència 13/05/2014) estableix que en cas de cotitularitat (matrimoni, parella, copropietaris), si UN s'oposa, no es pot entrar amb el sol consentiment de l'altre.",
+      "accio": "No entrar. Sol·licitar autorització judicial o esperar evolució"
+    },
+
+    "fi_no_entrar_menor": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "⚠️ Menor sol no pot consentir",
+      "accio": "No entrar. Esperar tutors o sol·licitar mandat. Si emergència → estat de necessitat."
+    },
+
+    "fi_no_entrar_coaccio": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "⚠️ Sospita de coacció",
+      "accio": "Si el consentiment no és lliure (por, amenaça): no és vàlid. Documentar i actuar segons cas."
+    },
+
+    "fi_no_entrar_sospita": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "⚠️ Només sospita — risc de nul·litat",
+      "accio": "Sense els 3 requisits acumulatius: no entrar. Vigilància exterior + sol·licitud de mandat urgent."
+    }
+  },
+  "notes_finals": [
+    "FLAGRANT DELICTE no és el delicte 'que s'ha comès', sinó el que 'està succeint o just acaba'. Crit + soroll = típic.",
+    "VIOLÈNCIA DE GÈNERE en curs: entrada per flagrància pot ser justificada (perill imminent + crits + lesions previsibles).",
+    "MENORS EN PERILL al domicili: estat de necessitat. Sempre comunicació DGAIA posterior.",
+    "Habitació d'hotel: és domicili mentre està ocupada. Buida o no llogada: no.",
+    "Despatx d'advocat: privilegis especials (Art. 552 LECrim) — comunicació al Col·legi d'Advocats si registre.",
+    "NO MOURE res si no és imprescindible. Preservar l'escena.",
+    "Si registre per drogues: esperar Mossos UTPC / DIC si quantitats grans.",
+    "Si troba arma de foc al lloc: precintar-la i avisar Intervenció d'Armes (Guàrdia Civil)."
+  ]
+}

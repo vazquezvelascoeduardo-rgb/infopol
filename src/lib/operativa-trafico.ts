@@ -14,7 +14,9 @@ export type ChecklistResultKind =
   | 'ok' // tot correcte
   | 'administrativa' // infracció administrativa
   | 'penal' // delicte
-  | 'procediment'; // procediment a seguir (no implica sanció directa)
+  | 'procediment' // procediment a seguir (no implica sanció directa)
+  | 'mixta' // combinació admin + penal
+  | 'avis'; // avís / atenció (no és sanció ni procediment formal)
 
 export type ChecklistOption = {
   etiqueta: string;
