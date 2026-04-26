@@ -23,6 +23,7 @@ import PenalTaulaActes from './pages/operativa/PenalTaulaActes';
 import PenalTaulaDrogues from './pages/operativa/PenalTaulaDrogues';
 import PenalRecursos from './pages/operativa/PenalRecursos';
 import PenalDretsDetingut from './pages/operativa/PenalDretsDetingut';
+import Superbuscador from './pages/Superbuscador';
 
 export default function App() {
   return (
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="/operativa/penal/drets-detingut" element={<PenalDretsDetingut />} />
         <Route path="/operativa/penal/*" element={<Penal />} />
         <Route path="/cerca" element={<SearchResults />} />
+        <Route path="/superbuscador" element={<Superbuscador />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>

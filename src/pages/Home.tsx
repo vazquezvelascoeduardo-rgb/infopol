@@ -32,7 +32,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Dues targetes grans */}
+      {/* Targetes principals: Lleis · Operativa · Superbuscador */}
       <ul className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* LLEIS */}
         <li>
@@ -108,6 +108,42 @@ export default function Home() {
           </Link>
         </li>
       </ul>
+
+      {/* SUPERBUSCADOR — accés directe destacat (full width) */}
+      <Link
+        to="/superbuscador"
+        className="group relative mt-4 block overflow-hidden rounded-2xl border p-5 sm:p-6 shadow-sm transition
+          hover:-translate-y-0.5 hover:shadow-md
+          border-purple-200/70 bg-gradient-to-r from-purple-50/70 via-white to-fuchsia-50/60
+          hover:border-purple-400/60
+          dark:border-white/10 dark:bg-gradient-to-r dark:from-[#1a0f2e] dark:to-[#0a1628] dark:hover:border-purple-400/40"
+      >
+        <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-purple-500 to-fuchsia-700" />
+        <div aria-hidden className="absolute -top-12 -right-12 h-44 w-44 rounded-full bg-fuchsia-200/30 blur-3xl dark:hidden" />
+        <div className="relative flex items-center gap-4">
+          <span
+            aria-hidden
+            className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-fuchsia-700 text-3xl text-white shadow-inner"
+          >
+            🔍
+          </span>
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] uppercase tracking-[0.25em] text-purple-700 dark:text-purple-400/90 font-semibold">
+              {t('home.superbuscador.badge')}
+            </div>
+            <h2 className="mt-1 text-xl sm:text-2xl font-black tracking-tight">
+              {t('home.superbuscador.title')}
+            </h2>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
+              {t('home.superbuscador.desc')}
+            </p>
+          </div>
+          <span className="hidden sm:inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-purple-700 dark:text-purple-400">
+            {t('home.superbuscador.cta')}
+            <span className="ml-1 transition group-hover:translate-x-1" aria-hidden>→</span>
+          </span>
+        </div>
+      </Link>
     </div>
   );
 }

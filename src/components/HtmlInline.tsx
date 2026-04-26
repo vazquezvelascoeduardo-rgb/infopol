@@ -167,8 +167,84 @@ const LIGHT_THEME_CSS = `
     color: #1e3a8a !important;
   }
 
-  /* Capçalera CP (Codi Penal) — versió clara amb to vermell saturat per
-     mantenir la identitat del bloc penal. */
+  /* ── NOMENCLÀTOR (taula gridada de la fitxa VMP i altres) ──
+     Estructura amb capçalera daurada i cel·les amb gravetat
+     codificada per color (.nom-cal-L verd, -G blau, -MG vermell). */
+  .${SCOPE_CLASS}.ipol-light .nomenclator {
+    background: #ffffff !important;
+    border-color: #e5b04a !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .nomenclator .nom-header {
+    background: #fef3c7 !important;
+    color: #92400e !important;
+    border-bottom: 1px solid #fbbf24 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .nomenclator .nom-cell {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #fde68a !important;
+  }
+  /* Article — sempre or */
+  .${SCOPE_CLASS}.ipol-light .nomenclator .nom-cell.nom-art,
+  .${SCOPE_CLASS}.ipol-light .nom-art {
+    background: #fffbeb !important;
+    color: #92400e !important;
+    font-weight: 700;
+  }
+  /* Calificació per gravetat */
+  .${SCOPE_CLASS}.ipol-light .nomenclator .nom-cell.nom-cal-L,
+  .${SCOPE_CLASS}.ipol-light .nom-cal-L {
+    background: #dcfce7 !important;
+    color: #166534 !important;
+    font-weight: 700;
+  }
+  .${SCOPE_CLASS}.ipol-light .nomenclator .nom-cell.nom-cal-G,
+  .${SCOPE_CLASS}.ipol-light .nom-cal-G {
+    background: #fef3c7 !important;
+    color: #854d0e !important;
+    font-weight: 700;
+  }
+  .${SCOPE_CLASS}.ipol-light .nomenclator .nom-cell.nom-cal-MG,
+  .${SCOPE_CLASS}.ipol-light .nom-cal-MG {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+    font-weight: 700;
+  }
+  /* Multa econòmica — verd (els diners) */
+  .${SCOPE_CLASS}.ipol-light .nomenclator .nom-cell.nom-multa,
+  .${SCOPE_CLASS}.ipol-light .nom-multa {
+    background: #d1fae5 !important;
+    color: #065f46 !important;
+    font-weight: 700;
+  }
+  .${SCOPE_CLASS}.ipol-light .nomenclator .nom-cell.nom-multa-alta,
+  .${SCOPE_CLASS}.ipol-light .nom-multa-alta {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+    font-weight: 700;
+  }
+
+  /* ── MULTA-BADGE (chip ràpid d'import a la VMP) ── */
+  .${SCOPE_CLASS}.ipol-light .multa-badge {
+    background: #fef3c7 !important;
+    color: #92400e !important;
+    border-color: #fbbf24 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .multa-badge.multa-alta {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+    border-color: #fca5a5 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .multa-badge.multa-baja {
+    background: #dcfce7 !important;
+    color: #166534 !important;
+    border-color: #86efac !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .multa-badge.multa-penal {
+    background: linear-gradient(135deg, #fee2e2 0%, #fef2f2 100%) !important;
+    color: #7f1d1d !important;
+    border-color: #f87171 !important;
+  }
   .${SCOPE_CLASS}.ipol-light .cp-card-title,
   .${SCOPE_CLASS}.ipol-light .cp-header {
     background: linear-gradient(135deg, #fecaca 0%, #fef2f2 100%) !important;

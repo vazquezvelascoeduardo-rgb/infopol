@@ -46,6 +46,22 @@ const DICT: Record<Locale, Dict> = {
     'home.operativa.desc':
       'Procedimientos por situación: tráfico, seguridad ciudadana… Selecciona y obtén la norma aplicable.',
     'home.operativa.cta': 'Abrir operativa',
+    'home.superbuscador.badge': 'Búsqueda rápida',
+    'home.superbuscador.title': 'Superbuscador infraccions de tráfico',
+    'home.superbuscador.desc':
+      'Busca cualquier infracción del Catálogo SCT 2026 (LSV, RGC, RGCond, RGV, Asseguranza, CP). Concepto, artículo, multa, puntos.',
+    'home.superbuscador.cta': 'Buscar',
+    'superbuscador.title': 'Superbuscador d’infraccions de trànsit',
+    'superbuscador.badge': 'Catàleg SCT 2026',
+    'superbuscador.subtitle':
+      'Busca a la vegada en TOTES les lleis i reglaments del catàleg. Sense haver de canviar de pestanya.',
+    'superbuscador.placeholder':
+      'Escribe: alcoholèmia, 14.1, mòbil, 500, cinturó, drogues...',
+    'superbuscador.totalRows': 'infracciones indexadas',
+    'superbuscador.minChars': 'Mínimo 2 caracteres para buscar.',
+    'superbuscador.noResults': 'Sin coincidencias para',
+    'superbuscador.resultsFound': 'resultados encontrados',
+    'superbuscador.tipsTitle': 'Cómo buscar',
 
     // Leyes
     'leyes.badge': 'Temario · Normativa',
@@ -265,6 +281,22 @@ const DICT: Record<Locale, Dict> = {
     'home.operativa.desc':
       "Procediments per situació: trànsit, seguretat ciutadana… Selecciona i obtén la norma aplicable.",
     'home.operativa.cta': 'Obrir operativa',
+    'home.superbuscador.badge': 'Cerca ràpida',
+    'home.superbuscador.title': 'Superbuscador infraccions de trànsit',
+    'home.superbuscador.desc':
+      'Busca qualsevol infracció del Catàleg SCT 2026 (LSV, RGC, RGCond, RGV, Assegurança, CP). Concepte, article, multa, punts.',
+    'home.superbuscador.cta': 'Buscar',
+    'superbuscador.title': "Superbuscador d'infraccions de trànsit",
+    'superbuscador.badge': 'Catàleg SCT 2026',
+    'superbuscador.subtitle':
+      "Busca alhora a TOTES les lleis i reglaments del catàleg. Sense haver de canviar de pestanya.",
+    'superbuscador.placeholder':
+      "Escriu: alcoholèmia, 14.1, mòbil, 500, cinturó, drogues...",
+    'superbuscador.totalRows': 'infraccions indexades',
+    'superbuscador.minChars': 'Mínim 2 caràcters per buscar.',
+    'superbuscador.noResults': 'Cap coincidència per a',
+    'superbuscador.resultsFound': 'resultats trobats',
+    'superbuscador.tipsTitle': 'Com buscar',
 
     // Lleis
     'leyes.badge': 'Temari · Normativa',

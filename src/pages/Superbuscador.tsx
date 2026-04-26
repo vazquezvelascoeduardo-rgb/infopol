@@ -1,0 +1,340 @@
+// SuperBuscador d'infraccions de Trànsit.
+// Cerca transversal a TOT el catàleg SCT 2026 (LSV, RGC, RGCond, RGV,
+// Asseguranca i Codi Penal) sense haver de canviar de pestanya.
+//
+// Estratègia: parseig de l'HTML del catàleg amb DOMParser (lazy, una
+// sola vegada, cache en memòria). Cerca multi-paraula amb normalització
+// d'accents.
+import { useDeferredValue, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  searchCataleg,
+  getCatalegRows,
+  getLawColor,
+  getCatalegLaws,
+  type CatalegRow,
+  type Severity,
+} from '../lib/cataleg-parser';
+import { useT } from '../lib/i18n';
+
+export default function Superbuscador() {
+  const { t } = useT();
+  const [q, setQ] = useState('');
+  const dq = useDeferredValue(q);
+
+  const allRows = useMemo(() => getCatalegRows(), []);
+  const results = useMemo(() => (dq.length >= 2 ? searchCataleg(dq) : []), [dq]);
+
+  // Agrupem els resultats per llei per visualitzar-los amb capçaleres
+  // de color.
+  const grouped = useMemo(() => {
+    const m = new Map<string, CatalegRow[]>();
+    for (const r of results) {
+      if (!m.has(r.lawId)) m.set(r.lawId, []);
+      m.get(r.lawId)!.push(r);
+    }
+    return [...m.entries()];
+  }, [results]);
+
+  const laws = getCatalegLaws();
+
+  return (
+    <div className="mx-auto w-full max-w-5xl px-4 py-6">
+      {/* Breadcrumb */}
+      <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3">
+        <Link to="/" className="hover:underline">{t('nav.home')}</Link>
+        <span className="mx-2" aria-hidden>/</span>
+        <span className="text-slate-700 dark:text-slate-200">{t('superbuscador.title')}</span>
+      </nav>
+
+      {/* Header */}
+      <header className="rounded-2xl border p-5 sm:p-6 mb-4
+        border-purple-200/70 bg-gradient-to-br from-purple-50/60 via-white to-fuchsia-50/40
+        shadow-[0_1px_2px_rgba(15,23,42,0.04)]
+        dark:border-white/10 dark:bg-gradient-to-br dark:from-[#1a0f2e] dark:to-[#0a1628]">
+        <div className="flex items-start gap-4">
+          <span aria-hidden className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-fuchsia-700 text-3xl text-white shadow-inner">
+            🔍
+          </span>
+          <div className="min-w-0 flex-1">
+            <div className="text-[11px] uppercase tracking-[0.25em] font-semibold text-purple-700 dark:text-purple-400/90">
+              {t('superbuscador.badge')}
+            </div>
+            <h1 className="mt-1 text-2xl sm:text-3xl font-black tracking-tight">
+              {t('superbuscador.title')}
+            </h1>
+            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              {t('superbuscador.subtitle')}
+            </p>
+            {/* Etiquetes de les lleis indexades */}
+            <ul className="mt-3 flex flex-wrap gap-1.5">
+              {laws.map((l) => (
+                <li
+                  key={l.id}
+                  className="inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-[10px] font-mono"
+                  style={{
+                    borderColor: getLawColor(l.id) + '60',
+                    color: getLawColor(l.id),
+                    backgroundColor: getLawColor(l.id) + '10',
+                  }}
+                  title={l.full}
+                >
+                  {l.short}
+                </li>
+              ))}
+              <li className="ml-1 text-[11px] text-slate-500 dark:text-slate-400 self-center">
+                · {allRows.length} {t('superbuscador.totalRows')}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      {/* Input gran */}
+      <div className="relative mb-4">
+        <svg
+          aria-hidden
+          width="22" height="22" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+        >
+          <circle cx="11" cy="11" r="7" />
+          <path d="m20 20-3.5-3.5" />
+        </svg>
+        <input
+          type="search"
+          autoFocus
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder={t('superbuscador.placeholder')}
+          className="w-full rounded-2xl border-2 pl-12 pr-4 py-3.5 text-base outline-none
+            border-slate-200 bg-white text-slate-900 placeholder-slate-400
+            focus:border-purple-500/60 focus:ring-2 focus:ring-purple-500/20
+            dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:placeholder-slate-500
+            dark:focus:border-purple-400/60 dark:focus:ring-purple-400/20"
+        />
+        {q && (
+          <button
+            type="button"
+            onClick={() => setQ('')}
+            aria-label="Esborra"
+            className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex h-7 w-7 items-center justify-center rounded-full
+              text-slate-400 hover:bg-slate-100 hover:text-slate-700
+              dark:hover:bg-white/10 dark:hover:text-slate-200"
+          >
+            ✕
+          </button>
+        )}
+      </div>
+
+      {/* Resultats */}
+      {q.length === 0 && (
+        <EmptyState />
+      )}
+      {q.length > 0 && q.length < 2 && (
+        <p className="text-sm text-slate-500 dark:text-slate-400 italic">
+          {t('superbuscador.minChars')}
+        </p>
+      )}
+      {q.length >= 2 && results.length === 0 && (
+        <div className="rounded-xl border border-dashed p-8 text-center text-sm
+          border-slate-300 bg-slate-50/50 text-slate-500
+          dark:border-white/15 dark:bg-white/5 dark:text-slate-400">
+          {t('superbuscador.noResults')} <span className="font-semibold">"{q}"</span>
+        </div>
+      )}
+
+      {results.length > 0 && (
+        <>
+          <p className="mb-4 text-sm">
+            <span className="font-bold text-purple-700 dark:text-purple-400">{results.length}</span>
+            <span className="text-slate-600 dark:text-slate-400">
+              {' '}{t('superbuscador.resultsFound')}
+            </span>
+          </p>
+
+          <div className="space-y-6">
+            {grouped.map(([lawId, items]) => (
+              <LawSection key={lawId} lawId={lawId} items={items} q={dq} />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+function EmptyState() {
+  const { t } = useT();
+  return (
+    <div className="rounded-xl border border-dashed p-8 text-center
+      border-slate-300 bg-slate-50/50
+      dark:border-white/15 dark:bg-white/5">
+      <div className="text-4xl mb-2" aria-hidden>💡</div>
+      <p className="text-sm font-semibold mb-2 text-slate-700 dark:text-slate-300">
+        {t('superbuscador.tipsTitle')}
+      </p>
+      <ul className="text-xs text-slate-500 dark:text-slate-400 space-y-1 max-w-md mx-auto">
+        <li>• <span className="font-mono">alcoholèmia</span>, <span className="font-mono">drogues</span>, <span className="font-mono">cinturó</span>...</li>
+        <li>• Per article: <span className="font-mono">14.1</span>, <span className="font-mono">76.l</span>, <span className="font-mono">art. 47</span>...</li>
+        <li>• Per multa: <span className="font-mono">500</span>, <span className="font-mono">1000</span>...</li>
+        <li>• Multi-paraula: <span className="font-mono">cinturó conductor</span>, <span className="font-mono">mòbil mà</span>...</li>
+      </ul>
+    </div>
+  );
+}
+
+function LawSection({ lawId, items, q }: { lawId: string; items: CatalegRow[]; q: string }) {
+  const color = getLawColor(lawId);
+  const lawShort = items[0].lawShort;
+  const lawFull = items[0].lawFull;
+
+  return (
+    <section>
+      <div
+        className="flex items-center gap-3 mb-2 px-3 py-2 rounded-xl"
+        style={{ backgroundColor: color + '14', borderLeft: `4px solid ${color}` }}
+      >
+        <span className="font-mono font-bold text-sm" style={{ color }}>
+          {lawShort}
+        </span>
+        <span className="text-xs font-medium opacity-80" style={{ color }}>
+          {lawFull}
+        </span>
+        <span className="ml-auto text-xs font-mono opacity-70" style={{ color }}>
+          {items.length}
+        </span>
+      </div>
+      <ul className="space-y-1.5">
+        {items.map((r, i) => (
+          <ResultRow key={i} row={r} q={q} color={color} />
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function ResultRow({ row, q, color }: { row: CatalegRow; q: string; color: string }) {
+  return (
+    <li
+      className="grid grid-cols-1 sm:grid-cols-[1fr_auto_auto_auto_auto] gap-2 sm:gap-3 items-start
+        rounded-xl border p-3 transition
+        border-slate-200/80 bg-white
+        hover:border-slate-300 hover:shadow-[0_2px_8px_-2px_rgba(15,23,42,0.08)]
+        dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-purple-400/40"
+      style={{ borderLeftWidth: '4px', borderLeftColor: color }}
+    >
+      {/* Concepte (col·lapsable a sm) */}
+      <div className="min-w-0 sm:pr-3">
+        <div
+          className="text-sm leading-snug text-slate-900 dark:text-slate-100"
+          dangerouslySetInnerHTML={{ __html: highlight(row.concepte, q) }}
+        />
+      </div>
+
+      {/* Article */}
+      {row.article && (
+        <span
+          className="rounded-md border px-2 py-0.5 text-xs font-mono whitespace-nowrap self-start
+            bg-amber-50 text-amber-800 border-amber-200
+            dark:bg-amber-400/10 dark:text-amber-200 dark:border-amber-400/30"
+        >
+          §{row.article}
+        </span>
+      )}
+
+      {/* Gravetat */}
+      {row.severity && <SeverityPill severity={row.severity} />}
+
+      {/* Multa + DTE */}
+      {row.fine && (
+        <div className="flex flex-col items-start sm:items-end gap-0.5">
+          <span className="rounded-md border px-2 py-0.5 text-xs font-mono font-bold whitespace-nowrap
+            bg-emerald-50 text-emerald-800 border-emerald-200
+            dark:bg-emerald-400/10 dark:text-emerald-200 dark:border-emerald-400/30">
+            {row.fine}{isNumericFine(row.fine) ? ' €' : ''}
+          </span>
+          {row.dte && row.dte !== '—' && isNumericFine(row.dte) && (
+            <span className="text-[10px] text-slate-500 dark:text-slate-400">
+              DTE: {row.dte} €
+            </span>
+          )}
+        </div>
+      )}
+
+      {/* Punts */}
+      {row.points && (
+        <span className="rounded-md border px-2 py-0.5 text-xs font-mono font-bold whitespace-nowrap self-start
+          bg-red-50 text-red-800 border-red-200
+          dark:bg-red-400/10 dark:text-red-200 dark:border-red-400/30">
+          –{row.points} pts
+        </span>
+      )}
+    </li>
+  );
+}
+
+function SeverityPill({ severity }: { severity: Severity }) {
+  const meta: Record<Severity, { label: string; cls: string }> = {
+    MG: {
+      label: 'MG',
+      cls:
+        'bg-red-100 text-red-800 border-red-300 dark:bg-red-400/15 dark:text-red-200 dark:border-red-400/40',
+    },
+    G: {
+      label: 'G',
+      cls:
+        'bg-amber-100 text-amber-800 border-amber-300 dark:bg-amber-400/15 dark:text-amber-200 dark:border-amber-400/40',
+    },
+    L: {
+      label: 'L',
+      cls:
+        'bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-400/15 dark:text-blue-200 dark:border-blue-400/40',
+    },
+  };
+  const m = meta[severity];
+  return (
+    <span
+      className={`rounded-md border px-2 py-0.5 text-xs font-bold whitespace-nowrap self-start ${m.cls}`}
+      title={severity === 'MG' ? 'Molt greu' : severity === 'G' ? 'Greu' : 'Lleu'}
+    >
+      {m.label}
+    </span>
+  );
+}
+
+function isNumericFine(s: string): boolean {
+  // Si comença per dígit (eventualment amb separador de milers).
+  return /^\d/.test(s.replace(/\./g, ''));
+}
+
+function highlight(text: string, q: string): string {
+  const tokens = q
+    .trim()
+    .split(/\s+/)
+    .filter((t) => t.length >= 2);
+  if (tokens.length === 0) return escapeHtml(text);
+  let out = escapeHtml(text);
+  for (const tk of tokens) {
+    const re = new RegExp(escapeRegExp(escapeHtml(tk)), 'ig');
+    out = out.replace(
+      re,
+      (m) =>
+        `<mark class="rounded px-0.5 bg-purple-200/80 text-purple-900 dark:bg-purple-400/30 dark:text-purple-100">${m}</mark>`,
+    );
+  }
+  return out;
+}
+
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
