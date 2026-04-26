@@ -153,13 +153,32 @@ const BASE_LAYOUT_CSS = `
   }
 
   /* Taules: si són massa amples, scroll horitzontal local en lloc
-     de desbordar tota la pàgina. */
+     de desbordar tota la pàgina. Cobrim tots els noms de classes que
+     apareixen als HTMLs. */
   .${SCOPE_CLASS} table,
-  .${SCOPE_CLASS} .inf-table {
+  .${SCOPE_CLASS} .inf-table,
+  .${SCOPE_CLASS} .tabla,
+  .${SCOPE_CLASS} .tabla-discip,
+  .${SCOPE_CLASS} .tabla-plazos,
+  .${SCOPE_CLASS} .mini-tabla {
     display: block !important;
     overflow-x: auto !important;
     max-width: 100% !important;
     -webkit-overflow-scrolling: touch;
+  }
+  /* Graelles addicionals que poden desbordar a mòbil */
+  @media (max-width: 600px) {
+    .${SCOPE_CLASS} .clasif-grid,
+    .${SCOPE_CLASS} .derechos-grid,
+    .${SCOPE_CLASS} .medidas-grid,
+    .${SCOPE_CLASS} .chip-row {
+      grid-template-columns: 1fr !important;
+      flex-wrap: wrap !important;
+    }
+  }
+  /* chip-row sempre amb wrap (no només mòbil) */
+  .${SCOPE_CLASS} .chip-row {
+    flex-wrap: wrap !important;
   }
 
   /* Imatges i SVG no han de sortir mai de la viewport */
@@ -400,6 +419,51 @@ const LIGHT_THEME_CSS = `
     color: #7f1d1d !important;
     border-color: #f87171 !important;
   }
+  /* Variants amb noms diferents als HTMLs concrets:
+     - .bloque (LECrim, LO 5/2000) en lloc de .delito
+     - .delicte (Ordenança soroll, en català) en lloc de .delito
+     - .ficha-card (LECrim), .edad-card / .medida-card (LO 5/2000) */
+  .${SCOPE_CLASS}.ipol-light .bloque,
+  .${SCOPE_CLASS}.ipol-light .delicte,
+  .${SCOPE_CLASS}.ipol-light .ficha-card,
+  .${SCOPE_CLASS}.ipol-light .edad-card,
+  .${SCOPE_CLASS}.ipol-light .medida-card,
+  .${SCOPE_CLASS}.ipol-light .clasif-card,
+  .${SCOPE_CLASS}.ipol-light .clas-basica,
+  .${SCOPE_CLASS}.ipol-light .clas-ejec,
+  .${SCOPE_CLASS}.ipol-light .clas-inter,
+  .${SCOPE_CLASS}.ipol-light .clas-superior {
+    background: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    color: #0f172a !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .bloque,
+  .${SCOPE_CLASS}.ipol-light .delicte {
+    background: #f8fafc !important;
+    border-left-color: #a16207 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .bloque *,
+  .${SCOPE_CLASS}.ipol-light .delicte *,
+  .${SCOPE_CLASS}.ipol-light .ficha-card *,
+  .${SCOPE_CLASS}.ipol-light .edad-card *,
+  .${SCOPE_CLASS}.ipol-light .medida-card * { color: #0f172a; }
+  .${SCOPE_CLASS}.ipol-light .bloque-nombre,
+  .${SCOPE_CLASS}.ipol-light .delicte-title,
+  .${SCOPE_CLASS}.ipol-light .mc-nombre {
+    color: #1e293b !important;
+    font-weight: 700;
+  }
+  .${SCOPE_CLASS}.ipol-light .bloque-desc,
+  .${SCOPE_CLASS}.ipol-light .delicte-desc,
+  .${SCOPE_CLASS}.ipol-light .mc-desc {
+    color: #475569 !important;
+  }
+  /* Targetes d'edat (LO 5/2000) per franja */
+  .${SCOPE_CLASS}.ipol-light .ec-menor14 { background: #dcfce7 !important; color: #166534 !important; }
+  .${SCOPE_CLASS}.ipol-light .ec-14a15  { background: #fef3c7 !important; color: #854d0e !important; }
+  .${SCOPE_CLASS}.ipol-light .ec-16a17  { background: #fee2e2 !important; color: #991b1b !important; }
+  .${SCOPE_CLASS}.ipol-light .ec-18     { background: #ede9fe !important; color: #5b21b6 !important; }
+
   .${SCOPE_CLASS}.ipol-light .cp-card-title,
   .${SCOPE_CLASS}.ipol-light .cp-header {
     background: linear-gradient(135deg, #fecaca 0%, #fef2f2 100%) !important;
@@ -554,12 +618,16 @@ const LIGHT_THEME_CSS = `
   }
 
   /* Notes (notas policiales / clave) */
-  .${SCOPE_CLASS}.ipol-light .nota-policial {
+  .${SCOPE_CLASS}.ipol-light .nota-policial,
+  .${SCOPE_CLASS}.ipol-light .nota-pol,
+  .${SCOPE_CLASS}.ipol-light .nota-reform {
     background: #f0fdf4 !important;
     color: #14532d !important;
     border-left-color: #15803d !important;
   }
-  .${SCOPE_CLASS}.ipol-light .nota-policial * { color: #14532d !important; }
+  .${SCOPE_CLASS}.ipol-light .nota-policial *,
+  .${SCOPE_CLASS}.ipol-light .nota-pol *,
+  .${SCOPE_CLASS}.ipol-light .nota-reform * { color: #14532d !important; }
 
   .${SCOPE_CLASS}.ipol-light .nota-clave,
   .${SCOPE_CLASS}.ipol-light .nota-agrav {
@@ -567,6 +635,60 @@ const LIGHT_THEME_CSS = `
     color: #713f12 !important;
     border-left-color: #a16207 !important;
   }
+  /* Variants nota- d'avís i informació (LECrim, LO 5/2000, Ordenança) */
+  .${SCOPE_CLASS}.ipol-light .nota-alert {
+    background: #fee2e2 !important;
+    color: #7f1d1d !important;
+    border-left-color: #dc2626 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .nota-alert * { color: #7f1d1d !important; }
+  .${SCOPE_CLASS}.ipol-light .nota-info,
+  .${SCOPE_CLASS}.ipol-light .banner-info {
+    background: #dbeafe !important;
+    color: #1e3a8a !important;
+    border-left-color: #2563eb !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .nota-info *,
+  .${SCOPE_CLASS}.ipol-light .banner-info * { color: #1e3a8a !important; }
+  /* Banner d'edats (LO 5/2000) */
+  .${SCOPE_CLASS}.ipol-light .edades-banner {
+    background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%) !important;
+    color: #713f12 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .edades-banner * { color: #713f12 !important; }
+  /* Chips genèrics (.chip) i variants per color (dorado/verde/rojo) */
+  .${SCOPE_CLASS}.ipol-light .chip {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .chip.dorado,
+  .${SCOPE_CLASS}.ipol-light .badge-plazo {
+    background: #fef3c7 !important;
+    color: #92400e !important;
+    border-color: #fbbf24 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .chip.verde,
+  .${SCOPE_CLASS}.ipol-light .badge-green {
+    background: #dcfce7 !important;
+    color: #166534 !important;
+    border-color: #86efac !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .chip.rojo,
+  .${SCOPE_CLASS}.ipol-light .badge-red {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+    border-color: #fca5a5 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .badge-nuevo {
+    background: #ede9fe !important;
+    color: #5b21b6 !important;
+    border-color: #c4b5fd !important;
+  }
+  /* Classes de color com a text estandalone (fora de chip) */
+  .${SCOPE_CLASS}.ipol-light .dorado { color: #92400e !important; }
+  .${SCOPE_CLASS}.ipol-light .verde  { color: #166534 !important; }
+  .${SCOPE_CLASS}.ipol-light .rojo   { color: #991b1b !important; }
   .${SCOPE_CLASS}.ipol-light .nota-clave *,
   .${SCOPE_CLASS}.ipol-light .nota-agrav * { color: #713f12 !important; }
 
@@ -629,6 +751,124 @@ const LIGHT_THEME_CSS = `
   .${SCOPE_CLASS}.ipol-light .clas-menos .tipo { color: #1e40af !important; }
   .${SCOPE_CLASS}.ipol-light .clas-grave { background: #fee2e2 !important; border-color: #dc2626 !important; }
   .${SCOPE_CLASS}.ipol-light .clas-grave .tipo { color: #991b1b !important; }
+
+  /* Severitats catalanes (Ordenança soroll-vibracions): lleu/greu/molt-greu */
+  .${SCOPE_CLASS}.ipol-light .lleu,
+  .${SCOPE_CLASS}.ipol-light .leve {
+    background: #dcfce7 !important;
+    color: #166534 !important;
+    border-color: #86efac !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .greu,
+  .${SCOPE_CLASS}.ipol-light .grave {
+    background: #fef3c7 !important;
+    color: #854d0e !important;
+    border-color: #fbbf24 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .molt-greu {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+    border-color: #fca5a5 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .normal {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .positivo {
+    background: #dcfce7 !important;
+    color: #166534 !important;
+  }
+
+  /* Capçalera de l'Ordenança soroll: header-top, title-block, llei-* */
+  .${SCOPE_CLASS}.ipol-light .header-top,
+  .${SCOPE_CLASS}.ipol-light .title-block { color: #0f172a !important; }
+  .${SCOPE_CLASS}.ipol-light .llei-nom { color: #1e293b !important; }
+  .${SCOPE_CLASS}.ipol-light .llei-num { color: #a16207 !important; }
+  .${SCOPE_CLASS}.ipol-light .llei-sub { color: #475569 !important; }
+
+  /* "valor" / "unidad" / "zona" / "periodo" (Ordenança soroll) */
+  .${SCOPE_CLASS}.ipol-light .valor,
+  .${SCOPE_CLASS}.ipol-light .valor-fuerte {
+    color: #1e293b !important;
+    font-weight: 700;
+  }
+  .${SCOPE_CLASS}.ipol-light .unidad,
+  .${SCOPE_CLASS}.ipol-light .periodo,
+  .${SCOPE_CLASS}.ipol-light .zona {
+    color: #475569 !important;
+  }
+
+  /* Recorda (català) — semblant a recuerda */
+  .${SCOPE_CLASS}.ipol-light .recorda {
+    background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%) !important;
+    color: #422006 !important;
+    border-left: 4px solid #a16207 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .recorda * { color: #422006 !important; }
+
+  /* Drets / derecho-item (LECrim) */
+  .${SCOPE_CLASS}.ipol-light .derecho-item {
+    background: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+    color: #0f172a !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .di-num {
+    background: #a16207 !important;
+    color: #ffffff !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .di-texto { color: #1e293b !important; }
+
+  /* Cat-content (variant Ordenança), container/content/footer-text */
+  .${SCOPE_CLASS}.ipol-light .cat-content {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .container,
+  .${SCOPE_CLASS}.ipol-light .content {
+    background: transparent !important;
+    color: #0f172a !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .footer-text {
+    color: #475569 !important;
+  }
+
+  /* Taules de plazos / disciplinari / mini-tabla */
+  .${SCOPE_CLASS}.ipol-light .tabla-discip,
+  .${SCOPE_CLASS}.ipol-light .tabla-plazos,
+  .${SCOPE_CLASS}.ipol-light .mini-tabla,
+  .${SCOPE_CLASS}.ipol-light .tabla {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .tabla-discip th,
+  .${SCOPE_CLASS}.ipol-light .tabla-plazos th,
+  .${SCOPE_CLASS}.ipol-light .mini-tabla th,
+  .${SCOPE_CLASS}.ipol-light .tabla th {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .celda,
+  .${SCOPE_CLASS}.ipol-light .mini-celda {
+    color: #0f172a !important;
+  }
+
+  /* "Disciplinari" / "centre" / "compart" / "local" (Llei 16/91, 4/2003) */
+  .${SCOPE_CLASS}.ipol-light .disciplinario,
+  .${SCOPE_CLASS}.ipol-light .centro,
+  .${SCOPE_CLASS}.ipol-light .compart,
+  .${SCOPE_CLASS}.ipol-light .local,
+  .${SCOPE_CLASS}.ipol-light .medio { color: #1e293b !important; }
+  .${SCOPE_CLASS}.ipol-light .privativa {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+    border-color: #fca5a5 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .no-privativa {
+    background: #dcfce7 !important;
+    color: #166534 !important;
+    border-color: #86efac !important;
+  }
 
   /* ── BADGES SEMÀNTICS — paletes clares amb significat ── */
 
