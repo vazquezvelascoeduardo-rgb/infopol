@@ -268,9 +268,31 @@ const DICT: Record<Locale, Dict> = {
     'recursos.grua.title': 'Grúa municipal',
     'recursos.grua.note': 'Para inmovilizaciones y traslados al depósito.',
     'recursos.codi.badge': 'Comunicaciones · radio',
-    'recursos.codi.title': 'Código alfanumérico',
+    'recursos.codi.title': 'Código alfanumérico (NATO)',
     'recursos.codi.desc':
-      'Alfabeto fonético policial (español) con extensiones catalanas Ñ y Ç.',
+      'Alfabeto fonético internacional NATO/ICAO con extensiones Ç=Capça y Ñ=Ñoño.',
+    'recursos.openMaps': 'Abrir en Google Maps',
+    // Calculadora alcoholèmia
+    'recursos.alcohol.title': 'Calculadora alcoholemia',
+    'recursos.alcohol.desc':
+      'Introduce la lectura confirmada del etilómetro y el tipo de conductor: te dice tramo, multa, puntos y vía aplicable.',
+    'recursos.alcohol.driverType': 'Tipo de conductor',
+    'recursos.alcohol.general': 'General (>2 años)',
+    'recursos.alcohol.novell': 'Novel / Profesional',
+    'recursos.alcohol.menor': 'Menor de edad',
+    'recursos.alcohol.bici': 'Bicicleta / VMP',
+    'recursos.alcohol.reincident': 'Reincidente (sancionado año anterior)',
+    'recursos.alcohol.reincidentHint':
+      'Sanción firme por alcohol en los 12 meses previos. Duplica el importe pero mantiene los puntos.',
+    'recursos.alcohol.reading': 'Lectura confirmada (mg/l aire espirado)',
+    'recursos.alcohol.readingHint':
+      'Usa la 2ª medición del etilómetro evidencial. Criterio prudente: penal solo si > 0,65 mg/l confirmado.',
+    'recursos.alcohol.fine': 'Multa',
+    'recursos.alcohol.points': 'Puntos',
+    'recursos.alcohol.article': 'Artículo',
+    'recursos.alcohol.action': 'Acción operativa',
+    'recursos.alcohol.disclaimer':
+      'Orientativo. La determinación final depende del aparato (homologado y verificado), las dos mediciones, el procedimiento y la valoración judicial cuando aplique.',
     'recursos.matricules.title': 'Códigos provinciales de matrículas',
     'recursos.matricules.desc':
       'Matrículas anteriores al 2000 (formato letra-letra-número).',
@@ -568,9 +590,31 @@ const DICT: Record<Locale, Dict> = {
     'recursos.grua.title': 'Grua municipal',
     'recursos.grua.note': "Per a immobilitzacions i trasllats al dipòsit.",
     'recursos.codi.badge': 'Comunicacions · ràdio',
-    'recursos.codi.title': 'Codi alfanumèric',
+    'recursos.codi.title': 'Codi alfanumèric (NATO)',
     'recursos.codi.desc':
-      "Alfabet fonètic policial (espanyol) amb extensions catalanes Ñ i Ç.",
+      "Alfabet fonètic internacional NATO/ICAO amb extensions Ç=Capça i Ñ=Ñoño.",
+    'recursos.openMaps': 'Obrir a Google Maps',
+    // Calculadora alcoholèmia
+    'recursos.alcohol.title': 'Calculadora alcoholèmia',
+    'recursos.alcohol.desc':
+      "Introdueix la lectura confirmada de l'etilòmetre i el tipus de conductor: et diu tram, multa, punts i via aplicable.",
+    'recursos.alcohol.driverType': 'Tipus de conductor',
+    'recursos.alcohol.general': 'General (>2 anys)',
+    'recursos.alcohol.novell': 'Novell / Professional',
+    'recursos.alcohol.menor': "Menor d'edat",
+    'recursos.alcohol.bici': 'Bicicleta / VMP',
+    'recursos.alcohol.reincident': 'Reincident (sancionat any anterior)',
+    'recursos.alcohol.reincidentHint':
+      "Sanció ferma per alcohol en els 12 mesos previs. Duplica l'import però manté els punts.",
+    'recursos.alcohol.reading': 'Lectura confirmada (mg/l aire espirat)',
+    'recursos.alcohol.readingHint':
+      "Usa la 2a medició de l'etilòmetre evidencial. Criteri prudent: penal només si > 0,65 mg/l confirmat.",
+    'recursos.alcohol.fine': 'Multa',
+    'recursos.alcohol.points': 'Punts',
+    'recursos.alcohol.article': 'Article',
+    'recursos.alcohol.action': 'Acció operativa',
+    'recursos.alcohol.disclaimer':
+      "Orientatiu. La determinació final depèn de l'aparell (homologat i verificat), les dues mediciones, el procediment i la valoració judicial quan apliqui.",
     'recursos.matricules.title': 'Codis provincials de matrícules',
     'recursos.matricules.desc':
       "Matrícules anteriors al 2000 (format lletra-lletra-número).",

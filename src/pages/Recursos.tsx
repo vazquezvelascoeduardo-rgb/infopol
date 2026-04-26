@@ -1,97 +1,26 @@
-// Pàgina de recursos ràpids — eines, enllaços externs, telèfons útils
-// i taules de referència per a una intervenció policial.
-//
-// Les eines interactives (validador DNI, llibreta…) viuen en components
-// propis a sota perquè el fitxer principal sigui llegible.
+// Pàgina de recursos ràpids — eines, enllaços externs i informació
+// local útil per a una intervenció policial.
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useT } from '../lib/i18n';
 
-// ════════════════════════════════════════════════════════════════════
-// DADES DE REFERÈNCIA
-// ════════════════════════════════════════════════════════════════════
-
-// Codi alfanumèric (alfabet fonètic policial espanyol + Ñ + Ç).
+// Codi alfanumèric (alfabet fonètic NATO/ICAO + Ç + Ñ).
 const CODI_ALFANUMERIC: Array<{ letra: string; paraula: string }> = [
-  { letra: 'A', paraula: 'Antonio' }, { letra: 'B', paraula: 'Barcelona' },
-  { letra: 'C', paraula: 'Carmen' }, { letra: 'Ç', paraula: 'Capça' },
-  { letra: 'D', paraula: 'Daniel' }, { letra: 'E', paraula: 'Enrique' },
-  { letra: 'F', paraula: 'Francia' }, { letra: 'G', paraula: 'Granada' },
-  { letra: 'H', paraula: 'Historia' }, { letra: 'I', paraula: 'Inés' },
-  { letra: 'J', paraula: 'José' }, { letra: 'K', paraula: 'Kilo' },
-  { letra: 'L', paraula: 'Lorenzo' }, { letra: 'M', paraula: 'Madrid' },
-  { letra: 'N', paraula: 'Navarra' }, { letra: 'Ñ', paraula: 'Ñoño' },
-  { letra: 'O', paraula: 'Oviedo' }, { letra: 'P', paraula: 'París' },
-  { letra: 'Q', paraula: 'Querido' }, { letra: 'R', paraula: 'Ramón' },
-  { letra: 'S', paraula: 'Sábado' }, { letra: 'T', paraula: 'Toledo' },
-  { letra: 'U', paraula: 'Ulises' }, { letra: 'V', paraula: 'Valencia' },
-  { letra: 'W', paraula: 'Washington' }, { letra: 'X', paraula: 'Xilófono' },
-  { letra: 'Y', paraula: 'Yegua' }, { letra: 'Z', paraula: 'Zaragoza' },
+  { letra: 'A', paraula: 'Alfa' }, { letra: 'B', paraula: 'Bravo' },
+  { letra: 'C', paraula: 'Charlie' }, { letra: 'Ç', paraula: 'Capça' },
+  { letra: 'D', paraula: 'Delta' }, { letra: 'E', paraula: 'Echo' },
+  { letra: 'F', paraula: 'Foxtrot' }, { letra: 'G', paraula: 'Golf' },
+  { letra: 'H', paraula: 'Hotel' }, { letra: 'I', paraula: 'India' },
+  { letra: 'J', paraula: 'Juliett' }, { letra: 'K', paraula: 'Kilo' },
+  { letra: 'L', paraula: 'Lima' }, { letra: 'M', paraula: 'Mike' },
+  { letra: 'N', paraula: 'November' }, { letra: 'Ñ', paraula: 'Ñoño' },
+  { letra: 'O', paraula: 'Oscar' }, { letra: 'P', paraula: 'Papa' },
+  { letra: 'Q', paraula: 'Quebec' }, { letra: 'R', paraula: 'Romeo' },
+  { letra: 'S', paraula: 'Sierra' }, { letra: 'T', paraula: 'Tango' },
+  { letra: 'U', paraula: 'Uniform' }, { letra: 'V', paraula: 'Victor' },
+  { letra: 'W', paraula: 'Whiskey' }, { letra: 'X', paraula: 'X-Ray' },
+  { letra: 'Y', paraula: 'Yankee' }, { letra: 'Z', paraula: 'Zulu' },
 ];
-
-// Telèfons útils. Genèrics + locals (Viladecans). Edita els
-// 'TODO' amb les dades reals quan els tinguis.
-type Telefon = {
-  num: string;
-  nom: string;
-  desc: string;
-  cat: 'emergencia' | 'policial' | 'salut' | 'social' | 'local';
-};
-const TELEFONS: Telefon[] = [
-  { num: '112', nom: 'Emergències', desc: 'Telèfon únic emergències (24h)', cat: 'emergencia' },
-  { num: '061', nom: 'Emergències sanitàries', desc: 'SEM (24h)', cat: 'salut' },
-  { num: '080', nom: 'Bombers', desc: 'Bombers de la Generalitat (24h)', cat: 'emergencia' },
-  { num: '088', nom: "Mossos d'Esquadra", desc: 'Policia de Catalunya (24h)', cat: 'policial' },
-  { num: '091', nom: 'Policia Nacional', desc: 'CNP (24h)', cat: 'policial' },
-  { num: '092', nom: 'Policia Local', desc: 'Policia Local (24h)', cat: 'policial' },
-  { num: '062', nom: 'Guàrdia Civil', desc: 'Guàrdia Civil (24h)', cat: 'policial' },
-  { num: '016', nom: 'Atenció violència gènere', desc: '24h · NO deixa rastre · sms 600 000 016', cat: 'social' },
-  { num: '024', nom: 'Conducta suïcida', desc: 'Línia atenció suïcidi (24h)', cat: 'salut' },
-  { num: '900 20 20 10', nom: 'Fundació ANAR', desc: "Ajuda a infància i adolescència (24h)", cat: 'social' },
-];
-
-// Codis provincials de matrícules antigues (abans del 2000). Encara
-// és habitual veure'n a la via pública.
-const MATRICULES_PROV: Array<{ codi: string; provincia: string }> = [
-  { codi: 'A', provincia: 'Alacant' }, { codi: 'AB', provincia: 'Albacete' },
-  { codi: 'AL', provincia: 'Almeria' }, { codi: 'AV', provincia: 'Àvila' },
-  { codi: 'B', provincia: 'Barcelona' }, { codi: 'BA', provincia: 'Badajoz' },
-  { codi: 'BI', provincia: 'Bizkaia' }, { codi: 'BU', provincia: 'Burgos' },
-  { codi: 'C', provincia: 'A Coruña' }, { codi: 'CA', provincia: 'Cadis' },
-  { codi: 'CC', provincia: 'Càceres' }, { codi: 'CO', provincia: 'Còrdova' },
-  { codi: 'CR', provincia: 'Ciudad Real' }, { codi: 'CS', provincia: 'Castelló' },
-  { codi: 'CU', provincia: 'Conca' }, { codi: 'GC', provincia: 'Gran Canària' },
-  { codi: 'GI', provincia: 'Girona' }, { codi: 'GR', provincia: 'Granada' },
-  { codi: 'GU', provincia: 'Guadalajara' }, { codi: 'H', provincia: 'Huelva' },
-  { codi: 'HU', provincia: 'Osca' }, { codi: 'J', provincia: 'Jaén' },
-  { codi: 'L', provincia: 'Lleida' }, { codi: 'LE', provincia: 'Lleó' },
-  { codi: 'LO', provincia: 'La Rioja' }, { codi: 'LU', provincia: 'Lugo' },
-  { codi: 'M', provincia: 'Madrid' }, { codi: 'MA', provincia: 'Màlaga' },
-  { codi: 'MU', provincia: 'Múrcia' }, { codi: 'NA', provincia: 'Navarra' },
-  { codi: 'O', provincia: 'Astúries' }, { codi: 'OR', provincia: 'Ourense' },
-  { codi: 'P', provincia: 'Palència' }, { codi: 'PM', provincia: 'Mallorca' },
-  { codi: 'PO', provincia: 'Pontevedra' }, { codi: 'S', provincia: 'Cantàbria' },
-  { codi: 'SA', provincia: 'Salamanca' }, { codi: 'SE', provincia: 'Sevilla' },
-  { codi: 'SG', provincia: 'Segòvia' }, { codi: 'SO', provincia: 'Sòria' },
-  { codi: 'SS', provincia: 'Gipuzkoa' }, { codi: 'T', provincia: 'Tarragona' },
-  { codi: 'TE', provincia: 'Terol' }, { codi: 'TF', provincia: 'Tenerife' },
-  { codi: 'TO', provincia: 'Toledo' }, { codi: 'V', provincia: 'València' },
-  { codi: 'VA', provincia: 'Valladolid' }, { codi: 'VI', provincia: 'Àlaba' },
-  { codi: 'Z', provincia: 'Saragossa' }, { codi: 'ZA', provincia: 'Zamora' },
-  { codi: 'CE', provincia: 'Ceuta' }, { codi: 'ML', provincia: 'Melilla' },
-];
-
-// ════════════════════════════════════════════════════════════════════
-// UI
-// ════════════════════════════════════════════════════════════════════
-
-const TIPUS_COLOR: Record<Telefon['cat'], string> = {
-  emergencia: '#ef4444',
-  policial: '#1e40af',
-  salut: '#10b981',
-  social: '#a16207',
-  local: '#7c3aed',
-};
 
 export default function Recursos() {
   const { t } = useT();
@@ -149,28 +78,11 @@ export default function Recursos() {
         </div>
       </Section>
 
-      {/* TELÈFONS ÚTILS */}
-      <Section icon="📞" label={t('recursos.section.phones')}>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
-          {TELEFONS.map((p) => (
-            <PhoneCard key={p.num + p.nom} phone={p} />
-          ))}
-        </ul>
-        {/* Grúa municipal Viladecans (placeholder editable a la mateixa
-            constant del fitxer) */}
-        <LocalCard
-          icon="🚛"
-          color="#7c3aed"
-          badge={t('recursos.grua.badge')}
-          title={t('recursos.grua.title')}
-          phone="TODO 93 xxx xx xx"
-          address="TODO Carrer ___, Viladecans"
-          extra={t('recursos.grua.note')}
-        />
-      </Section>
-
       {/* EINES INTERACTIVES */}
       <Section icon="🛠️" label={t('recursos.section.tools')}>
+        <CollapsibleTool icon="🍷" title={t('recursos.alcohol.title')} desc={t('recursos.alcohol.desc')}>
+          <AlcoholCalculator />
+        </CollapsibleTool>
         <CollapsibleTool icon="🆔" title={t('recursos.dni.title')} desc={t('recursos.dni.desc')}>
           <DniValidator />
         </CollapsibleTool>
@@ -181,7 +93,6 @@ export default function Recursos() {
 
       {/* REFERÈNCIA RÀPIDA */}
       <Section icon="📋" label={t('recursos.section.reference')}>
-        {/* Codi alfanumèric */}
         <CollapsibleTool icon="🔤" title={t('recursos.codi.title')} desc={t('recursos.codi.desc')} defaultOpen>
           <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1">
             {CODI_ALFANUMERIC.map((item) => (
@@ -200,60 +111,34 @@ export default function Recursos() {
             ))}
           </ul>
         </CollapsibleTool>
-
-        {/* Codis provincials matrícules */}
-        <CollapsibleTool icon="🅿️" title={t('recursos.matricules.title')} desc={t('recursos.matricules.desc')}>
-          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1">
-            {MATRICULES_PROV.map((m) => (
-              <li
-                key={m.codi}
-                className="flex items-baseline gap-2 rounded-lg px-3 py-2 transition
-                  hover:bg-slate-50 dark:hover:bg-white/5"
-              >
-                <span className="font-mono font-bold text-sm text-amber-700 dark:text-amber-400 min-w-[28px] text-center bg-amber-50 dark:bg-amber-400/10 rounded px-1" aria-hidden>
-                  {m.codi}
-                </span>
-                <span className="text-sm text-slate-700 dark:text-slate-200">
-                  {m.provincia}
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-3 text-xs text-slate-500 dark:text-slate-400 italic">
-            {t('recursos.matricules.note')}
-          </p>
-        </CollapsibleTool>
       </Section>
 
-      {/* INFORMACIÓ LOCAL (placeholders per omplir) */}
+      {/* INFORMACIÓ LOCAL · enllaços a Google Maps */}
       <Section icon="🗺️" label={t('recursos.section.local')}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <LocalCard
+          <MapsLink
+            icon="🚛"
+            color="#7c3aed"
+            badge={t('recursos.grua.badge')}
+            title={t('recursos.grua.title')}
+            desc={t('recursos.grua.note')}
+            mapsUrl="https://share.google/x47lOfnrP53phZagm"
+          />
+          <MapsLink
             icon="⚖️"
             color="#1e40af"
             badge={t('recursos.jutjats.badge')}
             title={t('recursos.jutjats.title')}
-            phone="TODO 93 xxx xx xx"
-            address="TODO Adreça Jutjats Gavà"
-            extra={t('recursos.jutjats.note')}
+            desc={t('recursos.jutjats.note')}
+            mapsUrl="https://share.google/GOtHtw11AabsPfuGz"
           />
-          <LocalCard
+          <MapsLink
             icon="🏥"
             color="#10b981"
             badge={t('recursos.hospital.badge')}
             title={t('recursos.hospital.title')}
-            phone="TODO"
-            address="TODO Adreça CAP / Hospital de referència"
-            extra={t('recursos.hospital.note')}
-          />
-          <LocalCard
-            icon="🔫"
-            color="#dc2626"
-            badge={t('recursos.tir.badge')}
-            title={t('recursos.tir.title')}
-            phone="—"
-            address="TODO Llistat camps de tir autoritzats"
-            extra={t('recursos.tir.note')}
+            desc={t('recursos.hospital.note')}
+            mapsUrl="https://share.google/CkxhdodGk1eXNAwNs"
           />
         </div>
       </Section>
@@ -296,21 +181,10 @@ function Section({
 }
 
 function ExternalLink({
-  href,
-  icon,
-  color,
-  badge,
-  title,
-  desc,
-  host,
+  href, icon, color, badge, title, desc, host,
 }: {
-  href: string;
-  icon: string;
-  color: string;
-  badge: string;
-  title: string;
-  desc: string;
-  host: string;
+  href: string; icon: string; color: string; badge: string;
+  title: string; desc: string; host: string;
 }) {
   return (
     <a
@@ -327,9 +201,7 @@ function ExternalLink({
           aria-hidden
           className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-2xl text-white shadow-inner"
           style={{ background: `linear-gradient(135deg, ${color}, ${color})` }}
-        >
-          {icon}
-        </span>
+        >{icon}</span>
         <div className="min-w-0 flex-1">
           <div className="text-[10px] uppercase tracking-[0.2em] font-semibold" style={{ color }}>
             {badge}
@@ -346,54 +218,19 @@ function ExternalLink({
   );
 }
 
-function PhoneCard({ phone }: { phone: Telefon }) {
-  const color = TIPUS_COLOR[phone.cat];
-  const tel = phone.num.replace(/\s+/g, '');
-  return (
-    <li>
-      <a
-        href={`tel:${tel}`}
-        className="group flex items-start gap-3 rounded-xl border p-3 transition shadow-sm hover:-translate-y-0.5 hover:shadow-md
-          border-slate-200 bg-white
-          dark:border-white/10 dark:bg-[#0f1d34]"
-        style={{ borderLeft: `4px solid ${color}` }}
-      >
-        <span
-          className="rounded-md px-2.5 py-1.5 font-mono font-bold text-white text-sm shrink-0"
-          style={{ backgroundColor: color }}
-        >
-          {phone.num}
-        </span>
-        <div className="min-w-0">
-          <div className="font-semibold text-sm leading-tight">{phone.nom}</div>
-          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{phone.desc}</div>
-        </div>
-      </a>
-    </li>
-  );
-}
-
-function LocalCard({
-  icon,
-  color,
-  badge,
-  title,
-  phone,
-  address,
-  extra,
+function MapsLink({
+  icon, color, badge, title, desc, mapsUrl,
 }: {
-  icon: string;
-  color: string;
-  badge: string;
-  title: string;
-  phone: string;
-  address: string;
-  extra?: string;
+  icon: string; color: string; badge: string;
+  title: string; desc: string; mapsUrl: string;
 }) {
-  const isTodo = phone.startsWith('TODO') || address.startsWith('TODO');
+  const { t } = useT();
   return (
-    <div
-      className="rounded-xl border p-4 shadow-sm
+    <a
+      href={mapsUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block rounded-xl border p-4 transition shadow-sm hover:-translate-y-0.5 hover:shadow-md
         border-slate-200 bg-white
         dark:border-white/10 dark:bg-[#0f1d34]"
       style={{ borderLeft: `4px solid ${color}` }}
@@ -403,60 +240,28 @@ function LocalCard({
           aria-hidden
           className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-2xl text-white shadow-inner"
           style={{ background: `linear-gradient(135deg, ${color}, ${color})` }}
-        >
-          {icon}
-        </span>
+        >{icon}</span>
         <div className="min-w-0 flex-1">
           <div className="text-[10px] uppercase tracking-[0.2em] font-semibold" style={{ color }}>
             {badge}
           </div>
-          <div className="mt-0.5 font-bold">{title}</div>
-          <div className="mt-2 space-y-1 text-sm">
-            <div className="flex items-start gap-2">
-              <span aria-hidden className="opacity-60">📞</span>
-              {phone.startsWith('TODO') ? (
-                <span className="text-amber-700 dark:text-amber-400 italic">{phone.replace(/^TODO\s*/, '— Per completar: ')}</span>
-              ) : (
-                <a href={`tel:${phone.replace(/\s+/g, '')}`} className="text-blue-700 dark:text-blue-400 underline">{phone}</a>
-              )}
-            </div>
-            <div className="flex items-start gap-2">
-              <span aria-hidden className="opacity-60">📍</span>
-              {address.startsWith('TODO') ? (
-                <span className="text-amber-700 dark:text-amber-400 italic">{address.replace(/^TODO\s*/, '— Per completar: ')}</span>
-              ) : (
-                <span className="text-slate-700 dark:text-slate-200">{address}</span>
-              )}
-            </div>
-            {extra && (
-              <div className="text-[11px] text-slate-500 dark:text-slate-400 italic mt-1">
-                {extra}
-              </div>
-            )}
+          <div className="mt-0.5 font-bold leading-tight">{title}</div>
+          <div className="mt-1 text-xs text-slate-600 dark:text-slate-300">{desc}</div>
+          <div className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold" style={{ color }}>
+            <span aria-hidden>📍</span> {t('recursos.openMaps')}
           </div>
-          {isTodo && (
-            <div className="mt-2 text-[10px] uppercase tracking-wider font-semibold text-amber-600 dark:text-amber-400">
-              ⚠️ Pendent d'omplir amb dades reals
-            </div>
-          )}
         </div>
+        <span aria-hidden className="text-xl shrink-0" style={{ color }}>↗</span>
       </div>
-    </div>
+    </a>
   );
 }
 
 function CollapsibleTool({
-  icon,
-  title,
-  desc,
-  defaultOpen = false,
-  children,
+  icon, title, desc, defaultOpen = false, children,
 }: {
-  icon: string;
-  title: string;
-  desc: string;
-  defaultOpen?: boolean;
-  children: React.ReactNode;
+  icon: string; title: string; desc: string;
+  defaultOpen?: boolean; children: React.ReactNode;
 }) {
   return (
     <details
@@ -481,7 +286,293 @@ function CollapsibleTool({
   );
 }
 
+// ── EINA: Calculadora alcoholèmia ───────────────────────────────────
+
+type ConductorTipus = 'general' | 'novell' | 'menor' | 'bici';
+
+type AlcoholResult = {
+  kind: 'ok' | 'admin' | 'admin-alt' | 'penal';
+  titol: string;
+  multa?: string;
+  punts?: string;
+  article?: string;
+  accio?: string;
+  color: string;
+};
+
+function calculateAlcohol(
+  tipus: ConductorTipus,
+  reincident: boolean,
+  mg: number,
+): AlcoholResult | null {
+  if (isNaN(mg) || mg < 0) return null;
+
+  // Penal (>0,65 mg/l confirmat) — criteri prudent amb marge d'error.
+  if (mg > 0.65) {
+    return {
+      kind: 'penal',
+      titol: '🚔 DELICTE — Art. 379.2 CP (taxa objectiva)',
+      multa: 'Penal: presó 3-6 mesos O multa 6-12 mesos O TBC 31-90 dies + privació permís 1-4 anys',
+      article: 'Art. 379.2 CP',
+      accio: 'CITACIÓ a procediment ràpid (Art. 795 LECrim) · evidencial amb totes les garanties · informar drets 520.2 LECrim · oferir contrast per sang · intervenir permís · immobilització vehicle.',
+      color: '#dc2626',
+    };
+  }
+
+  // Bicicleta / VMP (adult)
+  if (tipus === 'bici') {
+    if (mg <= 0.25) return { kind: 'ok', titol: '✅ Negativa', color: '#15803d' };
+    if (mg <= 0.50) {
+      return {
+        kind: 'admin', titol: '⚠️ MOLT GREU — Bicicleta/VMP',
+        multa: '500 € (DTE 250 €)', punts: '0 punts (no permís)',
+        article: 'Art. 20 RGC', color: '#a16207',
+      };
+    }
+    return {
+      kind: 'admin-alt', titol: '🔴 MOLT GREU — Bicicleta/VMP tram alt',
+      multa: '1.000 € (DTE 500 €)', punts: '0 punts (no permís)',
+      article: 'Art. 20 RGC', color: '#dc2626',
+    };
+  }
+
+  // Menor d'edat (taxa zero)
+  if (tipus === 'menor') {
+    if (mg === 0) return { kind: 'ok', titol: '✅ Negativa', color: '#15803d' };
+    if (mg <= 0.15) {
+      return {
+        kind: 'admin', titol: '⚠️ MOLT GREU — Menor amb taxa > 0',
+        multa: '500 € (DTE 250 €)', punts: '0 punts (sense permís) o 4 punts (amb permís AM)',
+        article: 'Art. 14.1 TRLSV', color: '#a16207',
+        accio: 'Avisar pares/tutors per recollir el menor.',
+      };
+    }
+    if (mg <= 0.30) {
+      return {
+        kind: 'admin', titol: '⚠️ MOLT GREU — Menor amb permís (tram baix)',
+        multa: '500 € (DTE 250 €)', punts: '–4 punts',
+        article: 'Art. 20 RGC', color: '#a16207',
+      };
+    }
+    return {
+      kind: 'admin-alt', titol: '🔴 MOLT GREU — Menor amb permís (tram alt)',
+      multa: '1.000 € (DTE 500 €)', punts: '–6 punts',
+      article: 'Art. 20 RGC', color: '#dc2626',
+    };
+  }
+
+  // Novell (<2 anys) o Professional
+  if (tipus === 'novell') {
+    if (mg <= 0.15) return { kind: 'ok', titol: '✅ Negativa', color: '#15803d' };
+    if (mg <= 0.30) {
+      return reincident
+        ? {
+            kind: 'admin', titol: '⚠️ MOLT GREU — Tram baix REINCIDENT (novell/professional)',
+            multa: '1.000 € (DTE 500 €)', punts: '–4 punts',
+            article: 'Art. 20 RGC + Art. 80.2.a TRLSV', color: '#a16207',
+          }
+        : {
+            kind: 'admin', titol: '⚠️ MOLT GREU — Tram baix (novell/professional)',
+            multa: '500 € (DTE 250 €)', punts: '–4 punts',
+            article: 'Art. 20 RGC', color: '#a16207',
+          };
+    }
+    return {
+      kind: 'admin-alt', titol: '🔴 MOLT GREU — Tram alt (novell/professional)',
+      multa: '1.000 € (DTE 500 €)', punts: '–6 punts',
+      article: 'Art. 20 RGC', color: '#dc2626',
+    };
+  }
+
+  // General (permís > 2 anys)
+  if (mg <= 0.25) return { kind: 'ok', titol: '✅ Negativa', color: '#15803d' };
+  if (mg <= 0.50) {
+    return reincident
+      ? {
+          kind: 'admin', titol: '⚠️ MOLT GREU — Tram 1 REINCIDENT (general)',
+          multa: '1.000 € (DTE 500 €)', punts: '–4 punts',
+          article: 'Art. 20 RGC + Art. 80.2.a TRLSV', color: '#a16207',
+        }
+      : {
+          kind: 'admin', titol: '⚠️ MOLT GREU — Tram 1 (general)',
+          multa: '500 € (DTE 250 €)', punts: '–4 punts',
+          article: 'Art. 20 RGC', color: '#a16207',
+        };
+  }
+  // 0,51 - 0,65 → admin tram alt
+  return {
+    kind: 'admin-alt', titol: '🔴 MOLT GREU — Tram alt (general)',
+    multa: '1.000 € (DTE 500 €)', punts: '–6 punts',
+    article: 'Art. 20 RGC', color: '#dc2626',
+  };
+}
+
+function AlcoholCalculator() {
+  const { t } = useT();
+  const [tipus, setTipus] = useState<ConductorTipus>('general');
+  const [reincident, setReincident] = useState(false);
+  const [lectura, setLectura] = useState('');
+
+  const mg = parseFloat(lectura.replace(',', '.'));
+  const result = lectura.trim() === '' ? null : calculateAlcohol(tipus, reincident, mg);
+
+  return (
+    <div className="space-y-3">
+      {/* Tipus de conductor */}
+      <div>
+        <label className="block text-xs uppercase tracking-wider font-semibold text-slate-600 dark:text-slate-300 mb-1.5">
+          {t('recursos.alcohol.driverType')}
+        </label>
+        <div className="grid grid-cols-2 gap-2">
+          {([
+            ['general', t('recursos.alcohol.general')],
+            ['novell', t('recursos.alcohol.novell')],
+            ['menor', t('recursos.alcohol.menor')],
+            ['bici', t('recursos.alcohol.bici')],
+          ] as const).map(([val, lab]) => (
+            <button
+              key={val}
+              type="button"
+              onClick={() => setTipus(val)}
+              className={`rounded-lg border px-3 py-2 text-sm font-medium transition
+                ${tipus === val
+                  ? 'border-blue-500 bg-blue-50 text-blue-900 dark:border-blue-400 dark:bg-blue-400/15 dark:text-blue-100'
+                  : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-white/20'}`}
+            >
+              {lab}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Reincident (només si té sentit) */}
+      {(tipus === 'general' || tipus === 'novell') && (
+        <label className="flex items-start gap-2 cursor-pointer text-sm">
+          <input
+            type="checkbox"
+            checked={reincident}
+            onChange={(e) => setReincident(e.target.checked)}
+            className="mt-0.5"
+          />
+          <span>
+            <span className="font-medium">{t('recursos.alcohol.reincident')}</span>
+            <span className="block text-[11px] text-slate-500 dark:text-slate-400">
+              {t('recursos.alcohol.reincidentHint')}
+            </span>
+          </span>
+        </label>
+      )}
+
+      {/* Lectura mg/l */}
+      <div>
+        <label htmlFor="alc-input" className="block text-xs uppercase tracking-wider font-semibold text-slate-600 dark:text-slate-300 mb-1">
+          {t('recursos.alcohol.reading')}
+        </label>
+        <div className="relative">
+          <input
+            id="alc-input"
+            type="text"
+            inputMode="decimal"
+            value={lectura}
+            onChange={(e) => setLectura(e.target.value.replace(/[^0-9.,]/g, ''))}
+            placeholder="0,28"
+            className="w-full rounded-xl border-2 px-4 py-3 pr-16 text-base font-mono outline-none
+              border-slate-200 bg-white text-slate-900
+              focus:border-blue-500/60 focus:ring-2 focus:ring-blue-500/20
+              dark:border-white/10 dark:bg-white/5 dark:text-slate-100"
+          />
+          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-slate-400 font-mono pointer-events-none">
+            mg/l
+          </span>
+        </div>
+        <p className="mt-1 text-[11px] text-slate-500 dark:text-slate-400">
+          {t('recursos.alcohol.readingHint')}
+        </p>
+      </div>
+
+      {/* Resultat */}
+      {result && (
+        <div
+          className="rounded-xl border-l-4 p-4 mt-2"
+          style={{ borderLeftColor: result.color, backgroundColor: result.color + '14' }}
+        >
+          <div className="font-bold text-base mb-2" style={{ color: result.color }}>
+            {result.titol}
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+            {result.multa && (
+              <Field label={t('recursos.alcohol.fine')} value={result.multa} />
+            )}
+            {result.punts && (
+              <Field label={t('recursos.alcohol.points')} value={result.punts} />
+            )}
+            {result.article && (
+              <Field label={t('recursos.alcohol.article')} value={result.article} />
+            )}
+          </div>
+          {result.accio && (
+            <div className="mt-3 text-sm">
+              <div className="text-[10px] uppercase tracking-wider font-bold mb-1 opacity-70">
+                {t('recursos.alcohol.action')}
+              </div>
+              {result.accio}
+            </div>
+          )}
+        </div>
+      )}
+
+      <p className="text-[11px] text-slate-500 dark:text-slate-400 italic">
+        {t('recursos.alcohol.disclaimer')}
+      </p>
+    </div>
+  );
+}
+
+function Field({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-lg bg-white/60 dark:bg-black/20 px-3 py-2">
+      <div className="text-[10px] uppercase tracking-wider font-bold opacity-70 mb-0.5">
+        {label}
+      </div>
+      <div className="font-semibold">{value}</div>
+    </div>
+  );
+}
+
 // ── EINA: Validador DNI/NIE ─────────────────────────────────────────
+
+const DNI_LETTERS = 'TRWAGMYFPDXBNJZSQVHLCKE';
+
+function validateDniNie(s: string): {
+  kind: 'valid' | 'invalid' | 'incomplete';
+  type: string;
+  message: string;
+  expected?: string;
+} {
+  const v = s.trim().toUpperCase();
+  if (!v) return { kind: 'incomplete', type: '', message: 'Escriu un DNI o NIE.' };
+  const dniMatch = v.match(/^(\d{8})([A-Z])$/);
+  if (dniMatch) {
+    const num = parseInt(dniMatch[1], 10);
+    const letter = dniMatch[2];
+    const expected = DNI_LETTERS[num % 23];
+    return letter === expected
+      ? { kind: 'valid', type: 'DNI', message: `Número ${dniMatch[1]} amb lletra ${letter}.` }
+      : { kind: 'invalid', type: 'DNI', message: `La lletra no correspon al número.`, expected };
+  }
+  const nieMatch = v.match(/^([XYZ])(\d{7})([A-Z])$/);
+  if (nieMatch) {
+    const prefix = nieMatch[1];
+    const numStr = (prefix === 'X' ? '0' : prefix === 'Y' ? '1' : '2') + nieMatch[2];
+    const num = parseInt(numStr, 10);
+    const letter = nieMatch[3];
+    const expected = DNI_LETTERS[num % 23];
+    return letter === expected
+      ? { kind: 'valid', type: 'NIE', message: `${prefix}${nieMatch[2]} amb lletra ${letter}.` }
+      : { kind: 'invalid', type: 'NIE', message: `La lletra no correspon al número.`, expected };
+  }
+  return { kind: 'incomplete', type: '', message: 'Format esperat: 8 dígits + lletra (DNI) o X/Y/Z + 7 dígits + lletra (NIE).' };
+}
 
 function DniValidator() {
   const [input, setInput] = useState('');
@@ -525,59 +616,16 @@ function DniValidator() {
           <div className="text-xs">
             {result.message}
             {result.kind === 'invalid' && result.expected && (
-              <div className="mt-1 font-mono">
-                Lletra correcta: <strong>{result.expected}</strong>
-              </div>
+              <div className="mt-1 font-mono">Lletra correcta: <strong>{result.expected}</strong></div>
             )}
           </div>
         </div>
       )}
       <p className="text-[11px] text-slate-500 dark:text-slate-400 italic">
-        Calcula la lletra de control segons el càlcul oficial (mòdul 23 sobre 23 lletres).
-        Útil per detectar documents amb format incorrecte / falsificacions barates.
+        Calcula la lletra de control segons el càlcul oficial (mòdul 23).
       </p>
     </div>
   );
-}
-
-// Algoritme oficial DNI/NIE: número mòdul 23 → índex en cadena fixa.
-// Per al NIE, X→0, Y→1, Z→2, després mateix algoritme.
-const DNI_LETTERS = 'TRWAGMYFPDXBNJZSQVHLCKE';
-
-function validateDniNie(s: string): {
-  kind: 'valid' | 'invalid' | 'incomplete';
-  type: string;
-  message: string;
-  expected?: string;
-} {
-  const v = s.trim().toUpperCase();
-  if (!v) return { kind: 'incomplete', type: '', message: 'Escriu un DNI o NIE.' };
-
-  // DNI: 8 dígits + 1 lletra
-  const dniMatch = v.match(/^(\d{8})([A-Z])$/);
-  if (dniMatch) {
-    const num = parseInt(dniMatch[1], 10);
-    const letter = dniMatch[2];
-    const expected = DNI_LETTERS[num % 23];
-    return letter === expected
-      ? { kind: 'valid', type: 'DNI', message: `Número ${dniMatch[1]} amb lletra ${letter}.` }
-      : { kind: 'invalid', type: 'DNI', message: `La lletra no correspon al número.`, expected };
-  }
-
-  // NIE: X/Y/Z + 7 dígits + 1 lletra
-  const nieMatch = v.match(/^([XYZ])(\d{7})([A-Z])$/);
-  if (nieMatch) {
-    const prefix = nieMatch[1];
-    const numStr = (prefix === 'X' ? '0' : prefix === 'Y' ? '1' : '2') + nieMatch[2];
-    const num = parseInt(numStr, 10);
-    const letter = nieMatch[3];
-    const expected = DNI_LETTERS[num % 23];
-    return letter === expected
-      ? { kind: 'valid', type: 'NIE', message: `${prefix}${nieMatch[2]} amb lletra ${letter}.` }
-      : { kind: 'invalid', type: 'NIE', message: `La lletra no correspon al número.`, expected };
-  }
-
-  return { kind: 'incomplete', type: '', message: 'Format esperat: 8 dígits + lletra (DNI) o X/Y/Z + 7 dígits + lletra (NIE).' };
 }
 
 // ── EINA: Llibreta operativa (notes amb localStorage) ───────────────
@@ -588,34 +636,26 @@ function Notepad() {
   const [text, setText] = useState('');
   const [savedAt, setSavedAt] = useState<Date | null>(null);
 
-  // Carrega inicial
   useEffect(() => {
     try {
       const v = localStorage.getItem(NOTES_KEY);
       if (v) setText(v);
-    } catch {
-      // localStorage podria estar deshabilitat
-    }
+    } catch { /* localStorage podria estar deshabilitat */ }
   }, []);
 
-  // Auto-desa amb debounce de 500ms
   useEffect(() => {
     const id = setTimeout(() => {
       try {
         localStorage.setItem(NOTES_KEY, text);
         setSavedAt(new Date());
-      } catch {
-        // silent
-      }
+      } catch { /* silent */ }
     }, 500);
     return () => clearTimeout(id);
   }, [text]);
 
   function clearAll() {
     if (!text.trim()) return;
-    if (confirm('Esborrar totes les notes?')) {
-      setText('');
-    }
+    if (confirm('Esborrar totes les notes?')) setText('');
   }
 
   return (
