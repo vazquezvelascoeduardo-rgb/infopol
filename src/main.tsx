@@ -10,10 +10,15 @@ import { LocaleProvider } from './lib/i18n';
 
 applyInitialTheme();
 
+// Basename del React Router: en producció a GitHub Pages la app viu
+// a /infopol/, en dev és '/'. import.meta.env.BASE_URL ho fa servir
+// el valor de `base` de vite.config.ts. Treiem la barra final.
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined;
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <LocaleProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <App />
       </BrowserRouter>
     </LocaleProvider>
