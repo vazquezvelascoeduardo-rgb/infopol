@@ -31,13 +31,13 @@ export default function CardPage() {
   const langMismatch = bodyLang !== locale;
 
   const breadcrumb = (
-    <nav className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2 flex-wrap">
-      <Link to="/" className="hover:underline">{t('nav.home')}</Link>
-      <span aria-hidden>/</span>
-      <Link to="/leyes" className="hover:underline">{t('leyes.title')}</Link>
-      <span aria-hidden>/</span>
-      <Link to={`/leyes/s/${mod.slug}`} className="hover:underline">
-        <span className="inline-flex items-center gap-1">
+    <nav className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1.5 flex-wrap">
+      <Link to="/" className="hover:text-slate-900 hover:underline transition dark:hover:text-slate-100">{t('nav.home')}</Link>
+      <span aria-hidden className="text-slate-300 dark:text-slate-600">/</span>
+      <Link to="/leyes" className="hover:text-slate-900 hover:underline transition dark:hover:text-slate-100">{t('leyes.title')}</Link>
+      <span aria-hidden className="text-slate-300 dark:text-slate-600">/</span>
+      <Link to={`/leyes/s/${mod.slug}`} className="hover:text-slate-900 hover:underline transition dark:hover:text-slate-100">
+        <span className="inline-flex items-center gap-1.5">
           <span
             aria-hidden
             className={`inline-block h-2 w-2 rounded-full bg-gradient-to-br ${mod.accent}`}
@@ -45,8 +45,8 @@ export default function CardPage() {
           {modTitle}
         </span>
       </Link>
-      <span aria-hidden>/</span>
-      <span className="truncate text-slate-700 dark:text-slate-200">{card.title}</span>
+      <span aria-hidden className="text-slate-300 dark:text-slate-600">/</span>
+      <span className="truncate font-medium text-slate-700 dark:text-slate-200">{card.title}</span>
     </nav>
   );
 
