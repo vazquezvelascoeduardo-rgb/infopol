@@ -121,6 +121,40 @@ export default function Home() {
           </span>
         </div>
       </Link>
+
+      {/* RECURSOS RÀPIDS — accés directe més compacte */}
+      <Link
+        to="/recursos"
+        className="group relative mt-3 block overflow-hidden rounded-xl border p-4 shadow-sm transition
+          hover:-translate-y-0.5 hover:shadow-md
+          border-emerald-200/70 bg-gradient-to-r from-emerald-50/70 via-white to-teal-50/50
+          hover:border-emerald-400/60
+          dark:border-white/10 dark:bg-gradient-to-r dark:from-[#0f2a1f] dark:to-[#0a1628] dark:hover:border-emerald-400/40"
+      >
+        <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-700" />
+        <div className="relative flex items-center gap-3">
+          <span
+            aria-hidden
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 text-xl text-white shadow-inner"
+          >
+            🧰
+          </span>
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400/90 font-semibold">
+              {t('home.recursos.badge')}
+            </div>
+            <h2 className="mt-0.5 text-base font-bold tracking-tight">
+              {t('home.recursos.title')}
+            </h2>
+            <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
+              {t('home.recursos.desc')}
+            </p>
+          </div>
+          <span className="inline-flex shrink-0 items-center text-emerald-700 dark:text-emerald-400 text-base font-semibold">
+            <span aria-hidden className="transition group-hover:translate-x-1">→</span>
+          </span>
+        </div>
+      </Link>
     </div>
   );
 }

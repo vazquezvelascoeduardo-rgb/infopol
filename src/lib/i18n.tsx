@@ -51,6 +51,10 @@ const DICT: Record<Locale, Dict> = {
     'home.superbuscador.desc':
       'Busca cualquier infracción del Catálogo SCT 2026 (LSV, RGC, RGCond, RGV, Asseguranza, CP). Concepto, artículo, multa, puntos.',
     'home.superbuscador.cta': 'Buscar',
+    'home.recursos.badge': 'Atajos',
+    'home.recursos.title': 'Recursos rápidos',
+    'home.recursos.desc':
+      'AIAC, farmacia de guardia, validador DNI, libreta, calculadora alcoholemia y más.',
     'superbuscador.title': 'Superbuscador d’infraccions de trànsit',
     'superbuscador.badge': 'Catàleg SCT 2026',
     'superbuscador.subtitle':
@@ -373,6 +377,10 @@ const DICT: Record<Locale, Dict> = {
     'home.superbuscador.desc':
       'Busca qualsevol infracció del Catàleg SCT 2026 (LSV, RGC, RGCond, RGV, Assegurança, CP). Concepte, article, multa, punts.',
     'home.superbuscador.cta': 'Buscar',
+    'home.recursos.badge': 'Dreceres',
+    'home.recursos.title': 'Recursos ràpids',
+    'home.recursos.desc':
+      "AIAC, farmàcia de guàrdia, validador DNI, llibreta, calculadora alcoholèmia i més.",
     'superbuscador.title': "Superbuscador d'infraccions de trànsit",
     'superbuscador.badge': 'Catàleg SCT 2026',
     'superbuscador.subtitle':
