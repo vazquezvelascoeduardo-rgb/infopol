@@ -1,1 +1,253 @@
-{}
+{
+  "id": "cadaver",
+  "titol": "Troballa de cadàver",
+  "categoria": "emergencies",
+  "icono": "⚰️",
+  "base_legal": [
+    "Art. 326 LECrim (inspecció ocular)",
+    "Art. 340 LECrim (aixecament cadàver)",
+    "Art. 778 LECrim (procediment abreujat)",
+    "Llei 49/1978 (enterraments)",
+    "Decret 297/1997 (Reglament Policia Sanitària Mortuòria)",
+    "Art. 142 CP (homicidi imprudent)",
+    "Art. 138-140 CP (homicidi i assassinat)",
+    "Art. 195 CP (omissió socors)"
+  ],
+
+  "principi_clau": "TOTA mort ha de ser tractada com a POSSIBLE escena de crim fins que es demostri el contrari. La preservació de l'escena és INNEGOCIABLE. L'aixecament del cadàver el realitza l'autoritat judicial (Art. 340 LECrim) — la policia preserva i col·labora.",
+
+  "tipus_morts": {
+    "natural_hospital": "Mort en centre sanitari amb assistència — certificat metge fàcil",
+    "natural_domicili": "Mort coneguda d'antecedents — metge atestor signa",
+    "violenta": "Indicis trauma, ferida, agressió — atestat penal sempre",
+    "suïcidi_consumat": "Causa autoinfligida evident — atestat",
+    "accidental": "Caiguda, ofegament, accident — atestat",
+    "dubtosa": "No clar si natural o no — atestat sempre",
+    "sobtada": "Persona aparentment sana — autòpsia obligatòria"
+  },
+
+  "inici": "primera_intervencio",
+  "nodes": {
+
+    "primera_intervencio": {
+      "titol": "Primera intervenció — protocol immediat",
+      "text": "Pas 0: Comprovacions inicials. Hi ha indicis vitals?",
+      "info_critica": "MAI declarar la mort com agent. Cal SEM/metge per certificació. Mentrestant: seguir indicacions servei sanitari.",
+      "checklist_immediat": [
+        "Avaluar SEGURETAT escena (atacant present? gas? incendi?)",
+        "Comprovar SIGNES VITALS si dubte (tàcticament — no contaminar)",
+        "Avisar SEM IMMEDIATAMENT si dubte vital",
+        "PRESERVAR escena des del primer moment",
+        "Anotar HORA exacta arribada"
+      ],
+      "opcions": [
+        { "etiqueta": "Hi ha possibles signes vitals — actuar com auxili",                "va_a": "fi_auxili_vital" },
+        { "etiqueta": "Mort evident i confirmada per SEM",                                "va_a": "tipus_mort" },
+        { "etiqueta": "Cadàver clarament en descomposició",                               "va_a": "tipus_mort" }
+      ]
+    },
+
+    "tipus_mort": {
+      "titol": "Tipus de mort segons primers indicis",
+      "info": "En cas de DUBTE: tractar com a violenta. La preservació excessiva no fa mal, l'escassa sí.",
+      "opcions": [
+        { "etiqueta": "VIOLENTA (ferida, hematomes, signes lluita, arma…)",              "va_a": "fi_morta_violenta" },
+        { "etiqueta": "SUÏCIDI APARENT (carta, mètode evident, antecedents)",            "va_a": "fi_suicidi_consumat" },
+        { "etiqueta": "ACCIDENTAL (caiguda, ofegament, accident treball…)",              "va_a": "fi_accidental" },
+        { "etiqueta": "NATURAL (persona gran, malaltia coneguda, llit…)",                "va_a": "natural_circumstancies" },
+        { "etiqueta": "SOBTADA (persona jove sense antecedents)",                         "va_a": "fi_sobtada" },
+        { "etiqueta": "DUBTOSA (no clara la causa)",                                      "va_a": "fi_morta_violenta" },
+        { "etiqueta": "Cadàver TROBAT al carrer / espai públic",                          "va_a": "fi_morta_violenta" },
+        { "etiqueta": "Cadàver descomposat / restes humanes / ossos",                    "va_a": "fi_descomposicio" },
+        { "etiqueta": "Mort en CUSTÒDIA POLICIAL / centre tancat",                        "va_a": "fi_custodia" }
+      ]
+    },
+
+    "natural_circumstancies": {
+      "titol": "Mort natural — circumstàncies",
+      "opcions": [
+        { "etiqueta": "Persona amb antecedents mèdics + metge atestor disposat",          "va_a": "fi_natural_atestor" },
+        { "etiqueta": "Sense antecedents clars / sense metge atestor",                    "va_a": "fi_morta_violenta" },
+        { "etiqueta": "Persona vivint sola sense control mèdic recent",                   "va_a": "fi_morta_violenta" }
+      ]
+    },
+
+    "fi_auxili_vital": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🆘 Auxili vital — no és checklist mort",
+      "accio": "Si hi ha possibles signes vitals: SEM prioritari, RCP si cal, no perdre temps amb aquest checklist. Tornar quan SEM hagi confirmat la mort."
+    },
+
+    "fi_morta_violenta": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 MORT VIOLENTA / DUBTOSA — atestat penal complet",
+      "accions_ordenades": [
+        "1️⃣ AVISAR sala + Mossos DIC (Investigació Criminal) IMMEDIATAMENT",
+        "2️⃣ AVISAR Jutjat de Guàrdia (Art. 340 LECrim — aixecament judicial)",
+        "3️⃣ Avisar METGE FORENSE (a través del Jutjat)",
+        "4️⃣ PRESERVAR ESCENA — perímetre amb cinta policial",
+        "5️⃣ NO MOURE res — ni el cadàver ni objectes propers",
+        "6️⃣ NO TOCAR — només si cal certificació mort per SEM",
+        "7️⃣ ANOTAR cronologia exacta: hora arribada, hora avisos, persones que han accedit",
+        "8️⃣ Fotografies generals de l'escena (sense moure)",
+        "9️⃣ Identificar i SEPARAR testimonis — declaracions per separat",
+        "🔟 Si família present: oferir suport (psicòleg si possible) però mantenir distància escena",
+        "1️⃣1️⃣ Cuidar PROVES BIOLÒGIQUES (sang, cabells, fluids)",
+        "1️⃣2️⃣ Esperar arribada COMITIVA JUDICIAL (jutge + secretari + forense)",
+        "1️⃣3️⃣ Després aixecament: ATESTAT POLICIAL exhaustiu"
+      ],
+      "que_NO_fer": [
+        "❌ NO moure el cadàver",
+        "❌ NO tocar objectes",
+        "❌ NO permetre família/curiosos a l'escena",
+        "❌ NO declarar mort sense SEM",
+        "❌ NO contaminar amb cigarrets, beguda, mòbils sense guants",
+        "❌ NO trepitjar zones rellevants",
+        "❌ NO retirar elements (notes, armes, drogues…)"
+      ],
+      "documentacio_clau": [
+        "Atestat penal (mort violenta/dubtosa)",
+        "Acta inspecció ocular (Mossos DIC + Científica)",
+        "Acta intervenció efectes",
+        "Diligències testimonis",
+        "Diligència aixecament cadàver judicial",
+        "Cronologia detallada"
+      ],
+      "informacio_familia": "Trasllat al Forense (Anatòmic Forense Barcelona o IMLCFC) per autòpsia. Informar família que NO podran veure el cos fins acabat el procediment."
+    },
+
+    "fi_suicidi_consumat": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "💔 SUÏCIDI CONSUMAT — atestat amb sensibilitat",
+      "info_critica": "La hipòtesi suïcidi NO eximeix de preservació escena. Cal descartar HOMICIDI SIMULAT (típicament en context VG, herències). Tractar com violenta fins confirmació.",
+      "accions_ordenades": [
+        "1. Mateixa preservació que mort violenta",
+        "2. Avís Mossos DIC + Jutjat Guàrdia + Forense",
+        "3. PRESERVAR notes/cartes (no obrir, no manipular)",
+        "4. Preservar mètode (medicació, arma, corda…)",
+        "5. ANTECEDENTS: depressió coneguda, intents previs, tractament Salut Mental?",
+        "6. Recollida testimonis: família, professionals salut mental",
+        "7. Atestat amb hipòtesi suïcidi però SENSE descartar altres",
+        "8. Coordinació amb família (suport psicològic)",
+        "9. Si menor: comunicació DGAIA + Fiscalia Menors",
+        "10. Si VG context (parella dona morta + agressor previ): atestat al JVM"
+      ],
+      "indicis_homicidi_simulat": [
+        "Lesions defensives (mans, braços)",
+        "Posició incompatible amb suïcidi",
+        "Mètode incompatible amb capacitat víctima",
+        "Carta sospitosa (cal·ligrafia, contingut)",
+        "Antecedents de violència de la parella",
+        "Robatori d'objectes",
+        "Indicis lluita"
+      ]
+    },
+
+    "fi_accidental": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "📋 MORT ACCIDENTAL — atestat",
+      "tipus_accident": [
+        "Trànsit (veure mòdul Trànsit + Art. 142 CP)",
+        "Laboral (caiguda altura, atrapament, electrocució…)",
+        "Domèstic (escala, banyera, gas…)",
+        "Activitat lúdica (esport, muntanya, mar…)",
+        "Ofegament"
+      ],
+      "accions_ordenades": [
+        "1. Preservar escena com possible delicte 142 CP (imprudència)",
+        "2. Avís Jutjat Guàrdia + Forense",
+        "3. Si laboral: avís Inspecció Treball + EMPRESA",
+        "4. Si trànsit: anar a mòdul Accident",
+        "5. Inspecció ocular",
+        "6. Testimonis",
+        "7. Atestat amb investigació imprudència possible"
+      ]
+    },
+
+    "fi_natural_atestor": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "📋 MORT NATURAL — metge atestor",
+      "info": "Si metge atestor (metge habitual del difunt) signa el certificat de defunció = NO cal aixecament judicial",
+      "accions_ordenades": [
+        "1. Comprovar identificació difunt",
+        "2. Esperar metge atestor (de capçalera, residència, etc.)",
+        "3. Si signa certificat defunció: gestió funerària normal (família + funerària)",
+        "4. Si dubtes / metge no disposat: AIXECAMENT JUDICIAL (anar via violenta)",
+        "5. Anotació al servei",
+        "6. Suport família si necessari"
+      ],
+      "casos_aixecament_obligatori_tot_i_natural": [
+        "Sense metge atestor",
+        "Persona vivint sola sense control mèdic",
+        "Indicis sospitosos al lloc",
+        "Mort sobtada en persona aparentment sana",
+        "Manifestacions familiars contradictòries"
+      ]
+    },
+
+    "fi_sobtada": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "📋 MORT SOBTADA — investigació",
+      "info": "Persona jove sense antecedents mèdics: SEMPRE aixecament judicial + autòpsia per descartar causes",
+      "accions": "Procedir com a mort dubtosa (preservació + Mossos DIC + Jutjat + Forense)"
+    },
+
+    "fi_descomposicio": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "📋 CADÀVER DESCOMPOSAT / RESTES — protocol especial",
+      "accions_ordenades": [
+        "1. PRESERVACIÓ extrema (cuc del temps fa avançar la descomposició)",
+        "2. Avís IMMEDIAT Mossos DIC + Policia Científica",
+        "3. Forense + antropòleg si restes òssies",
+        "4. Aixecament judicial",
+        "5. Mostres ADN per identificació posterior",
+        "6. Cotejament amb CNDES (persones desaparegudes)",
+        "7. Cura especial amb fauna cadavèrica (entomologia forense — info data mort)",
+        "8. Atestat exhaustiu",
+        "9. Comunicació Fiscalia"
+      ],
+      "informacio": "Cadàvers en avançat estat: investigació pot durar mesos. Identificació via ADN, dental, etc."
+    },
+
+    "fi_custodia": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🚨 MORT EN CUSTÒDIA — protocol crític",
+      "info_clau": "Mort de detingut en dependències policials: protocol estrictíssim. Garantir total transparència davant possibles imputacions als agents.",
+      "accions_ordenades": [
+        "1. AUXILI sanitari urgent + SEM",
+        "2. NO MOURE",
+        "3. AVÍS COMANDAMENT immediat",
+        "4. Avís Jutjat Guàrdia + Forense + Fiscalia",
+        "5. Comunicació al MECANISME NACIONAL DE PREVENCIÓ DE LA TORTURA (Defensor del Poble)",
+        "6. PRESERVACIÓ TOTAL (gravacions, cèl·lula, registres)",
+        "7. Identificació TOTS els agents que han tingut contacte",
+        "8. NO declarar res inicialment — esperar instruccions Comandament + advocat",
+        "9. Atestat exhaustiu amb cronologia minut a minut",
+        "10. INVESTIGACIÓ INTERNA paral·lela (Afers Interns)",
+        "11. Comunicació família amb sensibilitat extrema"
+      ],
+      "transparencia_clau": "Tota mort en custòdia es presumeix sospitosa fins demostració. Total transparència és la millor defensa institucional."
+    }
+  },
+  "notes_finals": [
+    "L'AIXECAMENT del cadàver és COMPETÈNCIA JUDICIAL (Art. 340 LECrim). La policia preserva i col·labora.",
+    "MEMÒRIA TÈCNICA: registrar TOT (hora arribada, hora avisos, persones presents, accions). Pot ser clau a judici anys després.",
+    "FAMÍLIA: tracte sensible però mai permetre accés escena. Trasllat psicològic si possible.",
+    "MITJANS DE COMUNICACIÓ: NO informar res. Coordinació via gabinet.",
+    "MENORS víctimes: comunicació DGAIA + Fiscalia Menors + tractament prova preconstituïda si germà testimoni.",
+    "AUTÒPSIA: obligatòria en violenta/dubtosa/sobtada. Family NO pot veure cos fins després.",
+    "ANTROPOLOGIA FORENSE: per restes òssies — IMLCFC (Institut Medicina Legal Catalunya).",
+    "ENTOMOLOGIA FORENSE: cucs i insectes ajuden a determinar data mort.",
+    "MOSTRES BIOLÒGIQUES: cura extrema. ADN clau per identificació.",
+    "CNDES: cotejar tota troballa amb base nacional desapareguts.",
+    "MORTS AL CARRER (vagabunds, etc.): no menystenir investigació pel context — tota vida importa."
+  ]
+}

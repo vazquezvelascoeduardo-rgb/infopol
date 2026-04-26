@@ -1,1 +1,324 @@
-{}
+{
+  "id": "lesions",
+  "titol": "Lesions",
+  "categoria": "persones",
+  "icono": "🤕",
+  "base_legal": [
+    "Art. 147 CP (lesions bàsiques i delicte lleu)",
+    "Art. 148 CP (lesions agreujades)",
+    "Art. 149 CP (lesions molt greus — pèrdua òrgan principal/sentit)",
+    "Art. 150 CP (lesions greus — pèrdua membre no principal/deformitat)",
+    "Art. 151 CP (provocació, conspiració)",
+    "Art. 152 CP (lesions imprudents)",
+    "Art. 153 CP (lesions VG/VD)",
+    "Art. 156 CP (consentiment)",
+    "Art. 173 CP (tracte degradant)"
+  ],
+
+  "criteri_clau_pautes": "El 'tractament mèdic o quirúrgic' és la frontera entre delicte LLEU (147.2) i delicte BÀSIC (147.1). Tractament = més enllà d'una primera assistència facultativa. Inclou: punts de sutura, immobilització, medicació pautada, fisioteràpia.",
+
+  "perseguibilitat": {
+    "147_2_lleu": "Denúncia perjudicat (excepte víctima vulnerable)",
+    "147_1_basic": "D'ofici",
+    "148_agreujat": "D'ofici",
+    "149_150_greus": "D'ofici",
+    "153_VG_VD": "D'ofici (perseguible encara que la víctima retiri)"
+  },
+
+  "inici": "tractament_medic",
+  "nodes": {
+
+    "tractament_medic": {
+      "titol": "Valoració mèdica — frontera clau",
+      "text": "Les lesions requereixen tractament mèdic o quirúrgic més enllà d'una primera assistència?",
+      "info": "TRACTAMENT MÈDIC: punts de sutura, immobilització (escaiola, fèrules), medicació pautada més de 5 dies, fisioteràpia, intervenció quirúrgica. PRIMERA ASSISTÈNCIA SOLA: cura simple, antiinflamatori puntual, antisèptic.",
+      "opcions": [
+        { "etiqueta": "Sí, requereix tractament (sutura, escaiola, cirurgia, etc.)",  "va_a": "context_lesions" },
+        { "etiqueta": "Només primera assistència (cura, analgèsic puntual)",          "va_a": "context_lleu" },
+        { "etiqueta": "Lesions MOLT GREUS (pèrdua òrgan, sentit, esterilitat)",       "va_a": "fi_149" },
+        { "etiqueta": "Lesions GREUS (deformitat, pèrdua membre no principal)",       "va_a": "fi_150" },
+        { "etiqueta": "Maltractament d'obra SENSE causar lesió",                       "va_a": "context_lleu_vg_vd" }
+      ]
+    },
+
+    "context_lesions": {
+      "titol": "Context — agreujants Art. 148",
+      "text": "Concorre alguna circumstància agreujant?",
+      "opcions": [
+        { "etiqueta": "Lesions BÀSIQUES (cap agreujant)",                              "va_a": "fi_147_basic" },
+        { "etiqueta": "Amb ARMES o mitjans perillosos (Art. 148.1)",                  "va_a": "fi_148_armes" },
+        { "etiqueta": "Amb ENSANYAMENT o premeditació (Art. 148.2)",                  "va_a": "fi_148_ensanyament" },
+        { "etiqueta": "Víctima MENOR de 14 anys / vulnerable (Art. 148.3)",           "va_a": "fi_148_menor" },
+        { "etiqueta": "Víctima parella/ex-parella DONA (VG → 148.4 CP)",              "va_a": "fi_vg_lesions_148_4" },
+        { "etiqueta": "Víctima VULNERABLE convivent (Art. 148.5)",                    "va_a": "fi_148_vulnerable" },
+        { "etiqueta": "Víctima familiar convivent (no parella) → VD",                  "va_a": "fi_vd_lesions" },
+        { "etiqueta": "Imprudència greu/menys greu",                                  "va_a": "fi_152_imprudent" }
+      ]
+    },
+
+    "context_lleu": {
+      "titol": "Context — lesions sense tractament",
+      "opcions": [
+        { "etiqueta": "Lesions lleus 'normals' (entre adults sense relació especial)", "va_a": "fi_147_2_lleu" },
+        { "etiqueta": "Víctima parella DONA (VG)",                                     "va_a": "fi_vg_153_1" },
+        { "etiqueta": "Víctima familiar convivent (VD)",                               "va_a": "fi_vd_153_2" },
+        { "etiqueta": "Tracte vexatori reiterat",                                       "va_a": "fi_173_vexacions" }
+      ]
+    },
+
+    "context_lleu_vg_vd": {
+      "titol": "Maltractament sense lesió",
+      "info": "Empenta, bufetada sense marca, immobilització violenta sense lesió: pot ser delicte si context VG/VD.",
+      "opcions": [
+        { "etiqueta": "Parella DONA (VG)",                                             "va_a": "fi_vg_153_1" },
+        { "etiqueta": "Familiar convivent (VD)",                                       "va_a": "fi_vd_153_2" },
+        { "etiqueta": "Sense relació especial — no constitutiu de delicte",            "va_a": "fi_no_delicte" }
+      ]
+    },
+
+    "fi_147_2_lleu": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "⚖️ DELICTE LLEU — Lesions sense tractament (Art. 147.2 CP)",
+      "concepte": "Lesió sense tractament mèdic o quirúrgic més enllà d'una primera assistència",
+      "article": "Art. 147.2 CP",
+      "pena": "Multa 1-3 mesos",
+      "perseguibilitat": "Denúncia del perjudicat (excepte víctima vulnerable)",
+      "accions_ordenades": [
+        "1. Auxili a la víctima + SEM si cal",
+        "2. PARTE MÈDIC obligatori (urgències del CAP/hospital)",
+        "3. Declaració de la víctima — IMPRESCINDIBLE per perseguibilitat",
+        "4. Informar la víctima del DRET A DENÚNCIA i del termini",
+        "5. Si no vol denunciar: fer constar i arxivar (excepte vulnerable)",
+        "6. Identificar autor i testimonis",
+        "7. Atestat simplificat / minuta",
+        "8. Si autor present: identificació i citació (no detenció normalment)"
+      ],
+      "documentacio": "Atestat simplificat + parte mèdic + declaració víctima + identificació autor",
+      "info_clau": "Sense denúncia del perjudicat NO es persegueix (excepte víctima vulnerable: menor, persona amb discapacitat o necessitat especial protecció)"
+    },
+
+    "fi_147_basic": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Lesions bàsiques (Art. 147.1 CP)",
+      "concepte": "Causar lesió que requereix tractament mèdic o quirúrgic, a més d'una primera assistència",
+      "article": "Art. 147.1 CP",
+      "pena": "Presó 3 mesos - 3 anys O multa 6-12 mesos",
+      "perseguibilitat": "D'ofici (no requereix denúncia)",
+      "accions_ordenades": [
+        "1. Auxili PRIORITARI a la víctima + SEM",
+        "2. PARTE MÈDIC complet (acreditació tractament)",
+        "3. PRESERVAR ESCENA si rellevant (escena a la via, etc.)",
+        "4. DETENCIÓ autor si present i identificat",
+        "5. Lectura de drets (520 LECrim)",
+        "6. Recollida testimonis",
+        "7. FOTOGRAFIES de les lesions (amb consentiment víctima)",
+        "8. Si arma: intervenció + cadena custòdia",
+        "9. ATESTAT PENAL complet",
+        "10. Posada a disposició Jutjat Guàrdia"
+      ],
+      "documentacio_clau": [
+        "Atestat penal",
+        "Parte mèdic (acreditació tractament)",
+        "Declaració víctima i testimonis",
+        "Fotografies lesions (amb consentiment)",
+        "Acta intervenció arma si n'hi ha",
+        "Diligència detenció + lectura drets"
+      ]
+    },
+
+    "fi_148_armes": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE AGREUJAT — Lesions amb armes/mitjans perillosos (Art. 148.1 CP)",
+      "pena": "Presó 2-5 anys",
+      "exemples": [
+        "Ganivet, navalla, arma blanca",
+        "Arma de foc",
+        "Objecte contundent (martell, ferro, vidre trencat)",
+        "Vehicle usat com a arma",
+        "Líquids càustics, foc"
+      ],
+      "accions": [
+        "Auxili + SEM PRIORITARI",
+        "INTERVENCIÓ arma amb cadena custòdia",
+        "Preservar escena",
+        "Detenció autor + lectura drets",
+        "Atestat penal",
+        "Jutjat Guàrdia"
+      ],
+      "documentacio": "Atestat + acta intervenció arma + parte mèdic + cadena custòdia"
+    },
+
+    "fi_148_ensanyament": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE AGREUJAT — Ensanyament/premeditació (Art. 148.2 CP)",
+      "pena": "Presó 2-5 anys",
+      "exemples": [
+        "Lesions reiterades innecessàries un cop dominat",
+        "Tortura abans de provocar lesió final",
+        "Premeditació amb planificació prèvia"
+      ],
+      "accions": [
+        "Recollida exhaustiva testimonis",
+        "Reconstrucció dels fets",
+        "Detenció",
+        "Atestat detallat amb cronologia",
+        "Jutjat Guàrdia"
+      ]
+    },
+
+    "fi_148_menor": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE AGREUJAT — Lesions a menor 14 anys o vulnerable (Art. 148.3 CP)",
+      "pena": "Presó 2-5 anys",
+      "accions_ordenades": [
+        "Auxili + SEM",
+        "Comunicació URGENT a DGAIA i Fiscalia de Menors",
+        "Si maltractament familiar: valorar retirada cautelar custòdia",
+        "Detenció autor",
+        "UFAM Mossos d'Esquadra si possible",
+        "NO repetir interrogatoris al menor (prova preconstituïda)",
+        "Atestat penal + Jutjat"
+      ],
+      "documentacio_clau": "Atestat + parte mèdic pediàtric + comunicació DGAIA + Fiscalia"
+    },
+
+    "fi_148_vulnerable": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE AGREUJAT — Víctima vulnerable convivent (Art. 148.5 CP)",
+      "pena": "Presó 2-5 anys",
+      "info": "Persona discapacitada o especialment vulnerable que conviu amb l'autor",
+      "accions": [
+        "Auxili + SEM",
+        "Protecció víctima (separació)",
+        "Comunicació Serveis Socials",
+        "Detenció + atestat penal",
+        "Jutjat Guàrdia"
+      ]
+    },
+
+    "fi_149": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE MOLT GREU — Lesions Art. 149 CP",
+      "supòsits": [
+        "Pèrdua o inutilitat d'ÒRGAN o membre PRINCIPAL",
+        "Pèrdua o inutilitat d'un SENTIT",
+        "IMPOTÈNCIA, esterilitat",
+        "GREU DEFORMITAT",
+        "GREU malaltia somàtica o psíquica"
+      ],
+      "pena": "Presó 6-12 anys",
+      "pena_agreujada_149_2": "Si víctima menor o discapacitat amb mutilació genital: presó 8-12 anys + inhabilitació pàtria potestat 4-10 anys",
+      "accions_ordenades": [
+        "1. Auxili VITAL urgent + SEM prioritari + Bombers si cal",
+        "2. PRESERVAR escena com escena de crim",
+        "3. Avisar DIC Mossos d'Esquadra",
+        "4. Detenció autor (si present)",
+        "5. NO MANIPULAR escena fins inspecció ocular",
+        "6. Recollida fotos + croquis",
+        "7. Si arma: cadena custòdia rigorosa",
+        "8. Testimonis identificats i declaració",
+        "9. ATESTAT PENAL complet",
+        "10. Jutjat de Guàrdia immediat"
+      ],
+      "documentacio": "Atestat + parte mèdic + inspecció ocular + fotos + croquis"
+    },
+
+    "fi_150": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE MOLT GREU — Lesions Art. 150 CP",
+      "supòsits": [
+        "Pèrdua o inutilitat d'òrgan o membre NO principal",
+        "DEFORMITAT (no greu)"
+      ],
+      "pena": "Presó 3-6 anys",
+      "accions": "Mateixes que 149 — auxili prioritari + preservació escena + detenció + atestat complet"
+    },
+
+    "fi_152_imprudent": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Lesions per imprudència (Art. 152 CP)",
+      "info": "Imprudència greu (sempre delicte si lesió 147.1 o més greu) o menys greu (només 149/150)",
+      "pena_imprudencia_greu": "Presó 3 mesos - 3 anys (segons gravetat lesió)",
+      "pena_imprudencia_menys_greu": "Multa 3 mesos - 12 mesos",
+      "accions": "Auxili + SEM + parte mèdic + atestat amb descripció imprudència"
+    },
+
+    "fi_vg_lesions_148_4": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Lesions VG amb tractament (Art. 148.4 CP)",
+      "info": "Anar a checklist 'Violència de gènere' per procediment complet (VPR, ordres, etc.)",
+      "pena": "Presó 2-5 anys",
+      "accions_essencials": [
+        "Detenció",
+        "Auxili + SEM + parte mèdic",
+        "VPR (Valoració Policial del Risc)",
+        "Informar drets víctima",
+        "Atestat al JVM (NO Jutjat ordinari)"
+      ]
+    },
+
+    "fi_vg_153_1": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Maltractament VG sense tractament (Art. 153.1 CP)",
+      "info": "Veure checklist 'Violència de gènere'",
+      "pena": "Presó 6 mesos - 1 any O TBC 31-80 dies + inhabilitació + privació tinença armes 1-3 anys",
+      "accions_essencials": [
+        "Detenció",
+        "Protecció víctima",
+        "VPR",
+        "Atestat al JVM"
+      ]
+    },
+
+    "fi_vd_lesions": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Lesions VD amb tractament",
+      "info": "Lesions a familiar convivent (no parella dona) — concurs Art. 147.1/148 + agreujant 153 si correspon",
+      "accions": "Veure checklist 'Violència domèstica'"
+    },
+
+    "fi_vd_153_2": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Maltractament VD sense tractament (Art. 153.2 CP)",
+      "info": "Veure checklist 'Violència domèstica'",
+      "pena": "Presó 3 mesos - 1 any O TBC 31-80 dies + privació armes 1-3 anys"
+    },
+
+    "fi_173_vexacions": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Tracte degradant (Art. 173.1 CP)",
+      "pena": "Presó 6 mesos - 2 anys",
+      "info": "Tracte degradant que menyscaba greument la integritat moral. Si habitual + familiar: 173.2"
+    },
+
+    "fi_no_delicte": {
+      "final": true,
+      "tipus": "ok",
+      "titol": "ℹ️ Sense delicte aparent",
+      "accio": "Si no hi ha lesió, ni context VG/VD, ni habitualitat: pot no ser delicte. Possible via civil o lleu via administrativa."
+    }
+  },
+  "notes_finals": [
+    "PARTE MÈDIC = prova clau. Sempre insistir perquè la víctima vagi a urgències i recollir còpia.",
+    "FOTOGRAFIES de lesions: SEMPRE amb consentiment. Si víctima no vol: fer constar.",
+    "Lesions mútues entre adversaris: cada un denuncia independentment. Atestat amb les dues versions.",
+    "Si víctima menor: NO repetir interrogatoris. Coordinar amb UFAM.",
+    "Si autor menor: Fiscalia Menors, no Jutjat Instrucció ordinari.",
+    "Si lesions per arma de foc o blanca important: avisar UCSP / DIC Mossos.",
+    "EVIDÈNCIES BIOLÒGIQUES (sang): cadena de custòdia rigorosa per ADN si autor no identificat."
+  ]
+}

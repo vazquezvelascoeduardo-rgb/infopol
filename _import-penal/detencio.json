@@ -1,1 +1,145 @@
-{}
+{
+  "id": "detencio",
+  "titol": "Detenció",
+  "categoria": "operatiu",
+  "icono": "🚔",
+  "base_legal": [
+    "Art. 17 CE (llibertat personal)",
+    "Arts. 489-501 LECrim (causes detenció)",
+    "Art. 492 LECrim (qui pot detenir i quan)",
+    "Art. 520 LECrim (drets del detingut)",
+    "Art. 520 bis LECrim (terrorisme)",
+    "LO 6/1984 (Habeas Corpus)"
+  ],
+  "tipus_detencio": {
+    "policial_flagrant": "L'agent l'ha vist o és evident la flagrància",
+    "policial_no_flagrant": "Detenció per indicis racionals + risc fuga (492.4 LECrim)",
+    "judicial": "Per ordre judicial (Mandat de detenció, busca i captura)",
+    "ciutadana": "Particular pot detenir flagrant — Art. 490 LECrim"
+  },
+  "drets_obligatoris_520_lecrim": [
+    "Dret a guardar silenci (no declarar contra si mateix)",
+    "Dret a no confessar-se culpable",
+    "Dret a no declarar contra cònjuge i parents (Art. 416 LECrim)",
+    "Dret a designar ADVOCAT (o d'ofici)",
+    "Dret a entrevista reservada amb l'advocat",
+    "Dret a comunicar la detenció a UN FAMILIAR o persona designada",
+    "Dret a INTÈRPRET (gratuïtament si no entén l'idioma)",
+    "Dret a RECONEIXEMENT MÈDIC",
+    "Dret a accés als ELEMENTS ESSENCIALS de la investigació per impugnar la detenció",
+    "Dret al HABEAS CORPUS (sol·licitar control judicial)",
+    "Estrangers: dret a NOTIFICACIÓ CONSULAR (Art. 520.2.e)",
+    "Menors: comunicació immediata FISCAL DE MENORS i tutors"
+  ],
+  "terminis": {
+    "general": "MÀXIM 72 hores des de la detenció — en aquest temps cal posar a disposició judicial o alliberar",
+    "menors": "Màxim 24 hores (LO 5/2000) — abans de la posada a disposició Fiscal Menors",
+    "terrorisme": "+48 hores prorrogables amb autorització judicial (520 bis LECrim)"
+  },
+  "inici": "justificacio",
+  "nodes": {
+
+    "justificacio": {
+      "titol": "Causa de la detenció",
+      "text": "Quina causa la justifica? (Art. 492 LECrim)",
+      "info": "L'Art. 492 LECrim diu QUI pot detenir: l'agent SEMPRE quan: (1) sorprèn delinqüent en flagrant; (2) intent flagrant; (3) reu fugat; (4) processat / condemnat amb ordre detenció; (5) indicis racionals + risc fuga.",
+      "opcions": [
+        { "etiqueta": "FLAGRANT delicte o intent (492.1, 492.2 LECrim)",            "va_a": "fi_procediment_detencio" },
+        { "etiqueta": "ORDRE judicial / busca i captura (492.3, 492.4 LECrim)",     "va_a": "fi_procediment_detencio" },
+        { "etiqueta": "Indicis racionals d'autoria + risc fuga (492.4)",            "va_a": "fi_procediment_detencio" },
+        { "etiqueta": "Reu fugat (492.2)",                                          "va_a": "fi_procediment_detencio" },
+        { "etiqueta": "Delicte LLEU amb risc d'incompareixença",                    "va_a": "delicte_lleu" },
+        { "etiqueta": "Només per identificar (no delicte)",                         "va_a": "fi_no_detencio_17" }
+      ]
+    },
+
+    "delicte_lleu": {
+      "titol": "Detenció per delicte lleu",
+      "text": "Per delicte lleu només procedeix detenció si NO té domicili conegut o NO ofereix garanties de comparèixer.",
+      "opcions": [
+        { "etiqueta": "Té domicili i ofereix garanties → CITACIÓ",               "va_a": "fi_citacio_lleu" },
+        { "etiqueta": "Sense domicili / sense garanties → DETENCIÓ",            "va_a": "fi_procediment_detencio" }
+      ]
+    },
+
+    "fi_no_detencio_17": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "⚠️ No procedeix detenció — anar a Identificació Art. 17 LOPSC",
+      "accio": "Sense delicte no es detén. Si cal identificar i no és possible al lloc → trasllat 17 LOPSC."
+    },
+
+    "fi_citacio_lleu": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "ℹ️ Citació per delicte lleu",
+      "accions": [
+        "Filiació completa",
+        "Atestat descrivint els fets",
+        "Citar per al Jutjat (lloc, data, hora)",
+        "Lliurar còpia de la citació"
+      ]
+    },
+
+    "fi_procediment_detencio": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🚔 Procediment de DETENCIÓ — pas a pas",
+      "accions_ordenades_completes": [
+        "1️⃣ COMUNICAR la detenció: 'Queda vostè detingut per [delicte concret]'. Llenguatge clar i comprensible.",
+        "2️⃣ ESCORCOLL incident: superficial, mateix sexe preferentment. Acta d'intervenció efectes.",
+        "3️⃣ EMMANILLAR si procedeix: només si hi ha resistència, risc fuga, perill agents/víctimes/tercers o el detingut. Mai als menors si no és imprescindible. Documentar el motiu.",
+        "4️⃣ LECTURA DE DRETS al moment de la detenció (no esperar a comissaria) — Art. 520.2 LECrim",
+        "5️⃣ TRASLLAT a dependències amb garanties (no maltractes, condicions adequades)",
+        "6️⃣ RECEPCIÓ a comissaria: revisió mèdica visual, anotació al llibre de detinguts",
+        "7️⃣ COMUNICACIÓ a familiar/persona designada (520.2.d) — facilitar trucada o comunicació",
+        "8️⃣ DESIGNACIÓ D'ADVOCAT — si no en designa, d'ofici (Col·legi)",
+        "9️⃣ ENTREVISTA RESERVADA detingut-advocat abans de la declaració",
+        "🔟 RECONEIXEMENT MÈDIC: si ho demana, si té lesions, si està sota efectes alcohol/drogues, si menor",
+        "1️⃣1️⃣ DECLARACIÓ: amb advocat present, amb intèrpret si cal, dret a no declarar",
+        "1️⃣2️⃣ DILIGÈNCIES policials necessàries (entrevistes, identificacions, reconstruccions…)",
+        "1️⃣3️⃣ POSADA A DISPOSICIÓ judicial DINS dels terminis (72h general, 24h menors)",
+        "1️⃣4️⃣ Si no es posa a disposició: ALLIBERAR amb diligència de fi"
+      ],
+      "documentacio_obligatoria": [
+        "Atestat policial complet",
+        "Diligència de detenció (data, hora, motiu, lloc)",
+        "Diligència de LECTURA DE DRETS amb signatura del detingut (o constància de negativa)",
+        "Diligència d'INTERVENCIÓ EFECTES + cadena custòdia",
+        "Diligència de COMUNICACIÓ FAMÍLIA",
+        "Diligència de DESIGNACIÓ ADVOCAT",
+        "Diligència de RECONEIXEMENT MÈDIC (si fet)",
+        "Diligència de DECLARACIÓ (o de no voler declarar)",
+        "Anotació al llibre-registre de detinguts"
+      ],
+      "drets_a_llegir": [
+        "Dret a guardar silenci",
+        "Dret a no contestar preguntes",
+        "Dret a no declarar contra si mateix ni confessar-se culpable",
+        "Dret a designar advocat / advocat d'ofici",
+        "Dret a entrevista reservada amb l'advocat",
+        "Dret que s'avisi de la detenció a un familiar/persona designada",
+        "Dret a intèrpret",
+        "Dret a reconeixement mèdic",
+        "Dret a accedir als elements essencials per impugnar",
+        "Dret al Habeas Corpus",
+        "[Estrangers] Dret a notificació consular",
+        "[Menors] Dret a presència de pares/tutors"
+      ],
+      "competencia": "Jutjat d'Instrucció de Guàrdia (excepte VG → JVM)"
+    }
+  },
+  "notes_finals": [
+    "MENORS d'edat (14-17 anys): comunicació IMMEDIATA al Ministeri Fiscal de Menors i tutors. Termini màxim 24h. Mai emmanilles llevat de risc real. Atestat va a Fiscalia Menors.",
+    "MENORS de 14 anys: NO poden ser detinguts. Si flagrant: contenció + comunicació tutors + Fiscal Menors + Serveis Socials.",
+    "ESTRANGERS: dret a notificació consular (Art. 520.2.e). Si CIRR: comunicació també.",
+    "VIOLÈNCIA DE GÈNERE: atestat va al Jutjat de Violència sobre la Dona (JVM), no a Guàrdia ordinari.",
+    "Si HABEAS CORPUS: el detingut té dret a sol·licitar-lo. L'agent ha de FACILITAR la sol·licitud i comunicar al jutjat competent immediatament.",
+    "Si NEGATIVA del detingut a signar drets: NO invalida. Fer constar 'es nega a signar'.",
+    "RECONEIXEMENT MÈDIC: obligatori si lesions evidents, si manifesta dolor, si menor, si embaràs, si sota efectes substàncies. Hospital o metge forense.",
+    "FRASES PROHIBIDES (Pautes UF 3.3): NO usar 'utilitzant la mínima força imprescindible'. Cal CONCRETAR la força usada.",
+    "Si lesions agent: anar al CAP/hospital. INFORME amb dades professionals (TIP), no personals.",
+    "Si lesions detingut: anar primer a l'hospital. Si es nega: fer constar.",
+    "DETENCIÓ INCOMUNICADA (terrorisme, banda armada): requisits especials Art. 520 bis. NO és habitual."
+  ]
+}

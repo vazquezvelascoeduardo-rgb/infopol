@@ -1,1 +1,210 @@
-{}
+{
+  "id": "violencia-domestica",
+  "titol": "Violència domèstica (VD)",
+  "categoria": "persones",
+  "icono": "🏚️",
+  "base_legal": [
+    "Art. 153.2 CP (maltractament VD)",
+    "Art. 173.2 CP (violència habitual)",
+    "Art. 171.5 CP (amenaces lleus VD)",
+    "Art. 172.3 CP (coaccions lleus VD)",
+    "Art. 153.3 CP (agreujants menors/armes/domicili)"
+  ],
+
+  "ambit_VD_173_2": [
+    "Cònjuge (HOME víctima de la seva parella dona)",
+    "Ex-cònjuge home",
+    "Descendents (fills, néts)",
+    "Ascendents (pares, avis)",
+    "Germans per consanguinitat",
+    "Menors o incapaços convivents",
+    "Persones amb discapacitat especialment vulnerables al nucli familiar",
+    "Persones integrades al nucli familiar (parella propi pare/mare, etc.)"
+  ],
+
+  "diferencia_VG_VD": "VG = dona víctima de parella/ex-parella HOME → JVM. VD = altres àmbits familiars → Jutjat Instrucció ordinari.",
+
+  "competencia_judicial": "Jutjat d'Instrucció de Guàrdia (NO JVM, llevat que també hi hagi VG simultània)",
+
+  "inici": "victima",
+  "nodes": {
+
+    "victima": {
+      "titol": "Qui és la víctima?",
+      "opcions": [
+        { "etiqueta": "Dona parella/ex-parella → és VG (anar checklist VG)",         "va_a": "fi_remetre_VG" },
+        { "etiqueta": "Fill/filla MENOR d'edat",                                     "va_a": "menor_tipus" },
+        { "etiqueta": "Pare/mare (ascendent)",                                       "va_a": "tipus_violencia" },
+        { "etiqueta": "Germà/germana convivent",                                     "va_a": "tipus_violencia" },
+        { "etiqueta": "Persona vulnerable / discapacitat al nucli",                  "va_a": "tipus_violencia" },
+        { "etiqueta": "HOME víctima de la seva parella DONA",                         "va_a": "tipus_violencia" },
+        { "etiqueta": "Parella del MATEIX SEXE",                                      "va_a": "tipus_violencia" },
+        { "etiqueta": "Persona integrada al nucli (parella del pare/mare…)",          "va_a": "tipus_violencia" }
+      ]
+    },
+
+    "menor_tipus": {
+      "titol": "Violència contra menor — tipus",
+      "opcions": [
+        { "etiqueta": "Maltractament físic / lesions",                              "va_a": "fi_VD_menor_153" },
+        { "etiqueta": "Negligència / abandonament greu",                            "va_a": "fi_negligencia_229" },
+        { "etiqueta": "ABÚS SEXUAL (anar a checklist específic)",                    "va_a": "fi_abus_sexual_ref" },
+        { "etiqueta": "Maltractament habitual al nucli familiar",                   "va_a": "fi_173_2_habitual" }
+      ]
+    },
+
+    "tipus_violencia": {
+      "titol": "Tipus de violència detectada",
+      "opcions": [
+        { "etiqueta": "Maltractament/lesió SENSE tractament (153.2)",                "va_a": "fi_153_2" },
+        { "etiqueta": "Lesions amb tractament (concurs 147/148)",                   "va_a": "fi_lesions_VD_ref" },
+        { "etiqueta": "Lesions GREUS (149/150)",                                     "va_a": "fi_lesions_greus_VD" },
+        { "etiqueta": "Amenaces lleus (171.5)",                                      "va_a": "fi_171_5" },
+        { "etiqueta": "Coaccions lleus (172.3)",                                     "va_a": "fi_172_3" },
+        { "etiqueta": "VIOLÈNCIA HABITUAL — múltiples episodis (173.2)",            "va_a": "fi_173_2_habitual" }
+      ]
+    },
+
+    "fi_remetre_VG": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🔀 Anar a checklist 'Violència de gènere'",
+      "accio": "Si víctima és dona parella/ex-parella d'home: és VG (LO 1/2004), JVM."
+    },
+
+    "fi_153_2": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Maltractament VD ocasional (Art. 153.2 CP)",
+      "concepte": "Lesió/maltractament d'obra sense tractament a familiar/convivent (excepte parella dona)",
+      "article": "Art. 153.2 CP",
+      "pena": "Presó 3 mesos - 1 any O TBC 31-80 dies + privació armes 1-3 anys",
+      "pena_agreujada_153_3": "Si presència menors, domicili comú, armes, ordre allunyament vigent: pena meitat superior",
+      "accions_ordenades": [
+        "1. Separació física víctima-agressor",
+        "2. Detenció agressor",
+        "3. Auxili + SEM si cal",
+        "4. Parte mèdic",
+        "5. Comunicació Serveis Socials",
+        "6. Si menors: DGAIA",
+        "7. Atestat al Jutjat de GUÀRDIA (NO JVM — és VD, no VG)",
+        "8. Valorar risc i mesures protecció"
+      ]
+    },
+
+    "fi_171_5": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Amenaces lleus VD (Art. 171.5 CP)",
+      "pena": "Presó 3 mesos - 1 any O TBC + privació armes 1-3 anys",
+      "accions": ["Detenció", "Atestat Jutjat Guàrdia", "Recollir proves"]
+    },
+
+    "fi_172_3": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Coaccions lleus VD (Art. 172.3 CP)",
+      "pena": "Presó 3 mesos - 1 any O TBC + privació armes",
+      "accions": ["Detenció", "Atestat Jutjat Guàrdia"]
+    },
+
+    "fi_173_2_habitual": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Violència habitual (Art. 173.2 CP)",
+      "concepte": "Exercici habitual de violència física o psíquica al nucli familiar",
+      "article": "Art. 173.2 CP",
+      "pena": "Presó 6 mesos - 3 anys + privació armes 3-5 anys + possible inhabilitació pàtria potestat 1-5 anys",
+      "criteris_habitualitat_TS": [
+        "Nombre d'actes acreditats",
+        "Proximitat temporal entre ells",
+        "Independent de si han estat o no enjudiciats abans",
+        "Independent de si víctima és la mateixa o diverses al nucli"
+      ],
+      "concurs": "Cada acte específic es jutja per separat A MÉS del 173.2 (concurs)",
+      "accions_ordenades": [
+        "1. DECLARACIONS detallades i cronològiques",
+        "2. RECOLLIR tots els EPISODIS anteriors:",
+        "   - Denúncies prèvies",
+        "   - Partes mèdics anteriors",
+        "   - Atestats anteriors",
+        "   - Testimonis (familiars, veïns, professionals)",
+        "3. Detenció agressor",
+        "4. Protecció INTEGRAL víctima (separació, casa acollida si cal)",
+        "5. Si menors implicats: DGAIA + Fiscalia Menors",
+        "6. Atestat EXHAUSTIU al Jutjat de Guàrdia",
+        "7. Sol·licitar mesura protecció"
+      ],
+      "documentacio_clau": "Atestat amb cronologia + recopilació antecedents + parte mèdic + declaracions múltiples"
+    },
+
+    "fi_VD_menor_153": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Maltractament a menor (Art. 153.2 + 153.3 CP)",
+      "pena": "Meitat superior 153.2: fins 1 any presó",
+      "accions_ordenades": [
+        "1. AUXILI i protecció del menor",
+        "2. Comunicació URGENT a DGAIA / EAIA",
+        "3. Valorar RETIRADA CAUTELAR de la custòdia",
+        "4. Detenció agressor",
+        "5. Coordinació Serveis Socials",
+        "6. Atestat + Jutjat Guàrdia + comunicació Fiscalia Menors",
+        "7. UFAM Mossos si possible",
+        "8. NO repetir interrogatoris al menor"
+      ]
+    },
+
+    "fi_negligencia_229": {
+      "final": true,
+      "tipus": "mixta",
+      "titol": "📋 Negligència / abandonament — valorar gravetat",
+      "info": "Pot ser via administrativa (Serveis Socials) o penal (Art. 229-230 CP).",
+      "criteris_penal_229": [
+        "Abandonament de menor de 16 anys",
+        "Si compromet la vida/salut: pena meitat superior",
+        "Si abandó més greu (delegant a tercer): 230 CP"
+      ],
+      "pena_229": "Presó 1-2 anys",
+      "accions_ordenades": [
+        "Avaluar grau de desamparament",
+        "Comunicació URGENT DGAIA (sempre)",
+        "Si perill imminent: retirada cautelar",
+        "Atestat si indicis penals (229 CP)",
+        "Si només negligència sense perill greu: comunicar SS i fer informe"
+      ]
+    },
+
+    "fi_abus_sexual_ref": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🔀 Anar a checklist 'Llibertat sexual'",
+      "info": "Abús sexual a menor: LO 10/2022 ('només sí és sí') + LO 8/2021 (protecció menors). Articles 178-189 CP.",
+      "accio": "Procediment específic UFAM, prova preconstituïda, evitar repetir interrogatoris."
+    },
+
+    "fi_lesions_VD_ref": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🔀 Anar a checklist 'Lesions'",
+      "accio": "Lesions amb tractament: aplicar Art. 147.1 + agreujant 153.3 si presència menors/domicili/armes."
+    },
+
+    "fi_lesions_greus_VD": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE MOLT GREU — Lesions greus VD (149/150 CP)",
+      "info": "Concurs amb 153.3 si circumstàncies agreujants",
+      "accions": "Auxili vital + detenció + atestat exhaustiu Jutjat Guàrdia"
+    }
+  },
+  "notes_finals": [
+    "Distinció CLAU: VG = dona víctima parella home → JVM. VD = altres àmbits familiars → Jutjat Instrucció ordinari.",
+    "Una mateixa actuació pot tenir VG + VD simultàniament (p.ex. agressor maltracta esposa I fills) — competència JVM (atrau).",
+    "Si menors: comunicació DGAIA i Fiscalia Menors SEMPRE.",
+    "VD no té formulari VPR oficial (a diferència de VG) — però sí cal valorar risc de manera fonamentada al sistema.",
+    "L'art. 173.2 CP requereix HABITUALITAT (no acte aïllat). Recopilar proves d'episodis anteriors és clau.",
+    "Si el maltractador és un menor (fill maltractant a pares): Llei Penal del Menor + Fiscalia Menors.",
+    "Persones grans víctimes de fills/néts: comunicació SS + valoració maltractament. Possible 173.2 si habitual."
+  ]
+}

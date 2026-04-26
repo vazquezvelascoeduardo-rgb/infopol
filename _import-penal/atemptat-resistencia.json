@@ -1,1 +1,273 @@
-{}
+{
+  "id": "atemptat-resistencia",
+  "titol": "Atemptat / resistència / desobediència a agents",
+  "categoria": "operatiu",
+  "icono": "🛡️",
+  "base_legal": [
+    "Art. 550 CP (atemptat)",
+    "Art. 551 CP (modalitats agreujades)",
+    "Art. 554 CP (subjectes assimilats)",
+    "Art. 556 CP (resistència i desobediència greus)",
+    "Art. 36.6 LOPSC (resistència/desobediència no greu)",
+    "Art. 37.4 LOPSC (manca de respecte)"
+  ],
+  "principi_clau": "DISTINCIÓ CRÍTICA segons Pautes UF 3.3 (febrer 2026):\n• Resistència ACTIVA + GREU = ATEMPTAT (550 CP)\n• Resistència PASSIVA + GREU = RESISTÈNCIA (556 CP)\n• Resistència ACTIVA + NO GREU = RESISTÈNCIA (556 CP)\n• Resistència PASSIVA + NO GREU = INFRACCIÓ ADMINISTRATIVA (36.6 LOPSC)",
+
+  "subjectes_passius": {
+    "550_atemptat_directe": [
+      "Autoritats (jutges, fiscals, regidors, alcaldes…)",
+      "Agents de l'autoritat (FCS, policia local, Mossos, Guàrdia Civil…)",
+      "Funcionaris públics (incloent interins i en pràctiques)",
+      "Funcionaris docents (només si són funcionaris públics, no privats — Consulta Fiscalia 2/2008)",
+      "Funcionaris sanitaris (només públics)"
+    ],
+    "554_assimilats": [
+      "Bombers",
+      "Personal sanitari / d'emergències en sinistres",
+      "Personal de SEGURETAT PRIVADA (només si identificat i sota comandament FCS)",
+      "Particulars que ACUDEIXEN EN AUXILI dels agents"
+    ]
+  },
+
+  "condicio_essencial": "L'autor ha de CONÈIXER la condició d'autoritat/agent de la víctima. Si l'agent va de paisà, és REQUISIT INDISPENSABLE haver-se IDENTIFICAT clarament abans de l'agressió.",
+
+  "inici": "tipus_conducta",
+  "nodes": {
+
+    "tipus_conducta": {
+      "titol": "Quina conducta s'ha produït?",
+      "opcions": [
+        { "etiqueta": "Agressió física consumada (cop, puntada, mossegada, etc.)",  "va_a": "agressio_resultat" },
+        { "etiqueta": "Escomesa (intent agressió, llançament objectes…)",            "va_a": "fi_atemptat_550_escomesa" },
+        { "etiqueta": "Resistència activa GREU (puntades evitant detenció amb força)", "va_a": "fi_atemptat_550_resistencia_greu" },
+        { "etiqueta": "Resistència activa NO greu (forçament per evitar escorcoll)",  "va_a": "fi_556_resistencia_activa_no_greu" },
+        { "etiqueta": "Resistència passiva GREU (encadenar-se, immobilitzar-se)",    "va_a": "fi_556_resistencia_passiva_greu" },
+        { "etiqueta": "Resistència passiva NO greu ('arrencar cebes', seure)",       "va_a": "fi_36_6_passiva_no_greu" },
+        { "etiqueta": "DESOBEDIÈNCIA greu (negativa formal a ordre clara)",          "va_a": "fi_556_desobediencia_greu" },
+        { "etiqueta": "Desobediència LLEU (donar dades falses, dificultar identificació)", "va_a": "fi_36_6_desobediencia_lleu" },
+        { "etiqueta": "Faltes de respecte / insults",                                 "va_a": "respecte_destinatari" },
+        { "etiqueta": "Amenaces greus a l'agent",                                     "va_a": "fi_amenaces_169" }
+      ]
+    },
+
+    "agressio_resultat": {
+      "titol": "Resultat de l'agressió",
+      "text": "Hi ha lesions a l'agent?",
+      "info": "Si lesions: concurs de delictes — atemptat + lesions (147 o 152 CP segons gravetat).",
+      "opcions": [
+        { "etiqueta": "Sense lesions (cop sense efecte)",                          "va_a": "fi_atemptat_550_simple" },
+        { "etiqueta": "Lesions sense tractament mèdic (delicte lleu lesions)",     "va_a": "fi_atemptat_lesions_lleu" },
+        { "etiqueta": "Lesions amb tractament (Art. 147 CP — concurs)",            "va_a": "fi_atemptat_lesions_147" },
+        { "etiqueta": "Lesions GREUS (149/150 CP — concurs)",                       "va_a": "fi_atemptat_lesions_greus" }
+      ]
+    },
+
+    "respecte_destinatari": {
+      "titol": "Destinatari de la falta de respecte",
+      "opcions": [
+        { "etiqueta": "Manca de respecte a AUTORITAT (jutge, regidor, alcalde…)",   "va_a": "fi_delicte_lleu_respecte_autoritat" },
+        { "etiqueta": "Manca de respecte a AGENT de l'autoritat",                  "va_a": "fi_37_4_respecte_agent" }
+      ]
+    },
+
+    "fi_atemptat_550_simple": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Atemptat sense lesions (Art. 550 CP)",
+      "concepte_butlleta_atestat": "Acometer a, intimidar gravement o emprear violencia o resistencia grave contra agente de l'autoritat en l'exercici de les seves funcions",
+      "article": "Art. 550 CP",
+      "pena_basica": "Presó 1-4 anys + multa 3-6 mesos",
+      "pena_agreujada_551": "Si concorren circumstàncies (arma, vehicle, MMPP…): pena meitat superior",
+      "accions_ordenades": [
+        "1️⃣ Reduir el subjecte amb força proporcional (sense excessos)",
+        "2️⃣ DETENCIÓ pel delicte d'atemptat",
+        "3️⃣ Lectura de drets (520 LECrim)",
+        "4️⃣ Si l'agent té lesions: anar a CAP/hospital amb dades PROFESSIONALS (TIP), no personals (Pautes UF 3.3)",
+        "5️⃣ Trasllat detingut a dependències",
+        "6️⃣ ATESTAT PENAL amb diligències:",
+        "   - Manifestació detingut",
+        "   - Lectura drets",
+        "   - DESCRIPCIÓ EXHAUSTIVA conducta agressora — concretar TOT",
+        "   - Testimonis (altres agents)",
+        "   - Parte mèdic agent (amb TIP, no DNI personal)",
+        "7️⃣ Posada a disposició Jutjat de Guàrdia"
+      ],
+      "frases_prohibides_pautes_3_3": "NO usar 'utilitzant la mínima força imprescindible'. CAL concretar exactament com es va utilitzar la força i com es van produir les lesions",
+      "documentacio": "Atestat penal + diligències + parte mèdic amb TIP"
+    },
+
+    "fi_atemptat_550_escomesa": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Atemptat per escomesa (Art. 550 CP)",
+      "text": "Intent d'agressió que no es consuma o no produeix resultat lesiu (llançament d'objectes, intent puntada que no arriba…).",
+      "pena": "Presó 1-4 anys + multa 3-6 mesos",
+      "exemples_pautes": "Llançament de pedres o objectes, intent de cop que no arriba",
+      "accions": "Mateixes que atemptat consumat"
+    },
+
+    "fi_atemptat_550_resistencia_greu": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Atemptat per resistència activa greu (Art. 550 CP)",
+      "text": "Resistència ACTIVA + GREU (intimidació greu o violència).",
+      "exemples_pautes": "Donar puntades de peu i cops de puny per evitar la detenció",
+      "pena": "Presó 1-4 anys + multa 3-6 mesos",
+      "diferenciacio": "Si fos resistència PASSIVA greu: 556 CP (resistència). Si activa NO greu: 556 CP (resistència). Aquí: ACTIVA + GREU = atemptat."
+    },
+
+    "fi_atemptat_lesions_lleu": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Atemptat + delicte lleu de lesions",
+      "regla_concurs_pautes": "Si l'agent pateix lesions, s'instrueix per atemptat MÉS el delicte/delicte lleu de lesions corresponent (concurs)",
+      "articles": "Art. 550 CP + Art. 147.2 CP (lesions sense tractament — delicte lleu)",
+      "pena_combinada": "Presó 1-4 anys + multa atemptat + multa 1-3 mesos lesions lleus"
+    },
+
+    "fi_atemptat_lesions_147": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Atemptat + lesions amb tractament (Art. 147 CP)",
+      "articles": "Art. 550 CP + Art. 147.1 CP",
+      "pena_combinada": "Presó 1-4 anys (atemptat) + presó 3 mesos-3 anys o multa 6-12 mesos (lesions)",
+      "regla_concurs_pautes": "Si una persona agredeix DIVERSOS agents en un sol acte: s'imputa UN sol delicte d'atemptat, però se SUMEN les lesions individuals de cada agent",
+      "documentacio_clau": "Parte mèdic exhaustiu de l'agent. Important: dades professionals (TIP) — no personals"
+    },
+
+    "fi_atemptat_lesions_greus": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Atemptat + lesions greus (Art. 149/150 CP)",
+      "pena_lesions_149": "Presó 6-12 anys (pèrdua òrgan principal/sentit)",
+      "pena_lesions_150": "Presó 3-6 anys (membre no principal, deformitat)",
+      "pena_combinada": "Concurs amb atemptat — pena en meitat superior"
+    },
+
+    "fi_556_resistencia_activa_no_greu": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Resistència (Art. 556 CP)",
+      "text": "Resistència ACTIVA però NO greu",
+      "exemples_pautes": "Forçament per intentar ser neutralitzat o escorcollat",
+      "pena": "Presó 3 mesos - 1 any O multa 6-18 mesos",
+      "subjectes": "NOMÉS contra autoritats i agents (no funcionaris públics — al revés que 550)",
+      "accions": "Detenció + atestat penal + lectura drets + Jutjat Guàrdia"
+    },
+
+    "fi_556_resistencia_passiva_greu": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Resistència passiva greu (Art. 556 CP)",
+      "text": "Resistència PASSIVA però GREU.",
+      "exemples_pautes": "Encadenar-se a un bidó de ciment per intentar evitar el treball de la maquinària (desnonament, manifestació, etc.)",
+      "pena": "Presó 3 mesos - 1 any O multa 6-18 mesos",
+      "diferencia_admin": "La passiva NO greu (seure al terra) és 36.6 LOPSC administrativa"
+    },
+
+    "fi_556_desobediencia_greu": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Desobediència greu (Art. 556 CP)",
+      "requisits_pautes_3_3": [
+        "✓ ORDRE/MANDAT dictat per autoritat competent dins de les seves funcions",
+        "✓ ORDRE EXPRESSA, CLARA i DIRECTA (no abstracta)",
+        "✓ NOTIFICADA formalment al destinatari",
+        "✓ NEGATIVA a complir-la amb actitud de REBEL·LIA o MANIFESTA OPOSICIÓ"
+      ],
+      "exemples_pautes": "Negativa formal i clara a identificar-se amb actitud de rebel·lia (no simple inactivitat)",
+      "pena": "Presó 3 mesos - 1 any O multa 6-18 mesos",
+      "diferencia_lleu": "Desobediència LLEU = 36.6 LOPSC. Per exemple, donar dades falses verbals."
+    },
+
+    "fi_36_6_passiva_no_greu": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Resistència passiva no greu (Art. 36.6 LOPSC)",
+      "concepte_butlleta": "La desobediència o la resistència a l'autoritat o als seus agents en l'exercici de les seves funcions, així com la negativa a identificar-se a requeriment de l'autoritat o dels seus agents",
+      "article_butlleta": "Art. 36.6 LOPSC",
+      "import": "601 € a 30.000 €",
+      "exemples_pautes": [
+        "Col·locar-se davant la porta d'un edifici per intentar evitar un desnonament",
+        "Seure al terra per evitar una actuació policial i que els agents hagin d'\"arrencar cebes\""
+      ],
+      "documentacio": "Acta D-10 (denúncia LOPSC)"
+    },
+
+    "fi_36_6_desobediencia_lleu": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU LOPSC — Desobediència lleu (Art. 36.6 LOPSC)",
+      "concepte_butlleta": "La desobediència o la resistència a l'autoritat o als seus agents en l'exercici de les seves funcions",
+      "article_butlleta": "Art. 36.6 LOPSC",
+      "import": "601 € a 30.000 €",
+      "exemples_pautes": [
+        "Trencament d'immobilització",
+        "Dificultar una identificació",
+        "Donar dades falses o inexactes verbalment en la identificació"
+      ],
+      "documentacio": "Acta D-10"
+    },
+
+    "fi_delicte_lleu_respecte_autoritat": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "⚖️ DELICTE LLEU — Manca de respecte a AUTORITAT",
+      "info": "Insults, faltes de respecte greus contra autoritat (jutge, alcalde, regidor…) en exercici funcions = delicte lleu (CP art. 556 simplificat o 631).",
+      "pena": "Multa 1-3 mesos",
+      "perseguibilitat": "Denúncia perjudicat (autoritat)",
+      "accions": "Atestat simplificat + identificació autor + posada en coneixement Jutjat"
+    },
+
+    "fi_37_4_respecte_agent": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "ℹ️ LLEU LOPSC — Manca de respecte a AGENT (Art. 37.4 LOPSC)",
+      "concepte_butlleta": "Les faltes de respecte i consideració al exercici de les seves funcions, a un membre de les Forces i Cossos de Seguretat, quan aquestes conductes no constitueixin infracció penal",
+      "article_butlleta": "Art. 37.4 LOPSC",
+      "import": "100 € - 600 €",
+      "exemples": "Insults verbals, gestos despectius, frases ofensives sense violència",
+      "documentacio": "Acta D-10"
+    },
+
+    "fi_amenaces_169": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Amenaces a agent (no atemptat sinó amenaces)",
+      "regla_pautes": "Si hi ha amenaces greus, s'instr"fi_amenaces_169": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Amenaces a agent (no atemptat sinó amenaces)",
+      "regla_pautes": "Si hi ha amenaces greus, s'instrueix per AMENACES (Art. 169-171 CP), no per atemptat",
+      "pena_169_2": "Presó 6 mesos - 2 anys (amenaces de mal constitutiu de delicte)",
+      "pena_169_1": "Presó 1-5 anys (amenaces condicionades)",
+      "accions": "Veure checklist 'Amenaces i coaccions' per detalls",
+      "info_concurs": "L'atemptat ABSORBEIX conductes més lleus (desobediència, resistència) que tinguin lloc en la mateixa actuació. Però les amenaces greus van per separat."
+    }
+  },
+  "notes_finals": [
+    "REGLES DE CONCURS (Pautes UF 3.3):",
+    "1. Atemptat + lesions = ATESTAT per atemptat + delicte/delicte lleu de lesions corresponent",
+    "2. Una persona agredeix a diversos agents en un sol acte = UN sol atemptat amb suma de lesions individuals",
+    "3. Amenaces greus = AMENACES (no atemptat)",
+    "4. Atemptat ABSORBEIX desobediència/resistència de la mateixa actuació",
+    "",
+    "AUTOENCOBRIMENT IMPUNE: La fugida per evitar la detenció NO és desobediència (és atípica), TRET QUE s'usi força o es posi en perill els agents/usuaris.",
+    "",
+    "EXTRALIMITACIÓ POLICIAL (Pautes UF 3.3):",
+    "Si els agents s'extralimiten notòriament en les funcions, perden la PROTECCIÓ ESPECIAL d'agent de l'autoritat i passen a ser considerats particulars. La reacció del ciutadà podria no ser atemptat i considerar-se LEGÍTIMA DEFENSA si hi va haver violència innecessària per part del policia.",
+    "",
+    "AGENTS DE PAISÀ: cal IDENTIFICACIÓ CLARA prèvia (TIP/placa visible). Sense identificació prèvia, l'autor pot al·legar desconeixement de la condició d'agent.",
+    "",
+    "PERSONAL SEGURETAT PRIVADA: només protegit per 554 CP si està IDENTIFICAT i actua sota comandament FCS.",
+    "",
+    "ASSISTÈNCIA MÈDICA AGENT (Pautes 3.3):",
+    "- Si l'agent té lesions: anar al CAP/hospital",
+    "- L'informe ha de portar dades PROFESSIONALS (TIP), no DNI personal",
+    "- Adjuntar a l'atestat policial",
+    "",
+    "ASSISTÈNCIA MÈDICA DETINGUT:",
+    "- Si lesions: trasllat directe a hospital",
+    "- Si es nega: NO obligar, però fer constar a diligències"
+  ]
+}

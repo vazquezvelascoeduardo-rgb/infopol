@@ -1,1 +1,143 @@
-{}
+{
+  "id": "_taula-actes-policials",
+  "titol": "Actes policials — taula de referència",
+  "descripcio": "Document transversal a tot el mòdul. Estipula quan usar cada tipus d'acta segons la situació i la base legal.",
+
+  "actes_administratives": [
+    {
+      "tipus": "D-10",
+      "nom_complet": "Denúncia per infracció LOPSC",
+      "base_legal": "LO 4/2015 LOPSC + RD 137/1993 (armes)",
+      "quan_usar": [
+        "Infraccions LOPSC (Art. 36 i 37)",
+        "Drogues consum/tinença via pública (36.16)",
+        "Manca respecte agents (37.4)",
+        "Resistència/desobediència no greu (36.6)",
+        "Armes prohibides (36.10) o sense documentació (36.11)"
+      ],
+      "contingut_obligatori": [
+        "Persona: nom, naixement, DNI/NIE/passaport, adreça",
+        "Fet: lloc, data, hora, descripció",
+        "Concepte infracció (literal)",
+        "Article infringit",
+        "Mesures preses (intervenció)",
+        "Descripció detallada actuació + objectes/substàncies",
+        "Número de registre OAC"
+      ],
+      "lliurament": "Còpia al ciutadà + tramitació via OAC",
+      "tramitacio": "Si delicte concurrent: instruir atestat i fer D-10 indicant número de diligències"
+    },
+    {
+      "tipus": "D-10.b",
+      "nom_complet": "Intervenció temporal d'objecte d'agressió",
+      "base_legal": "Art. 18.2 LO 4/2015 LOPSC",
+      "quan_usar": [
+        "Intervenció temporal objectes que poden servir d'agressió",
+        "Bastons, cúters, tornavisos, navalles petites…",
+        "Objectes prevenir delicte / perill persones-béns"
+      ],
+      "diferencia_amb_D10": "D-10 és denúncia per infracció comesa. D-10.b és INTERVENCIÓ TEMPORAL preventiva (no infracció necessàriament)",
+      "destinacio": "Custòdia provisional → retorn al ciutadà (cessat risc) o destrucció"
+    },
+    {
+      "tipus": "A-10",
+      "nom_complet": "Acta administrativa oberta",
+      "base_legal": "LOPSC + Pautes UF 3.3",
+      "quan_usar": [
+        "Plantació/cultiu drogues visible al públic (Art. 36.18)",
+        "Tolerància consum/tràfic en establiments (Art. 36.19) — preferent Llei 11/2009 Art. 47.b",
+        "Troballa substàncies sense propietari",
+        "Casos sense identificació clara d'infractor però amb element infraccional"
+      ],
+      "contingut": [
+        "Recollida (lloc, hora, agent)",
+        "Descripció substància / element",
+        "Lloc on s'ha trobat",
+        "Motiu pel qual no s'atribueix tinença (si pertinent)"
+      ],
+      "destinacio": "OAC referència → aplicació Atestats i denúncies. Tipificació: 'Faltes administratives Llei 4/15 — No es detecta cap infracció' (en troballes)",
+      "destrucció": "UTPC tràmits destrucció substàncies sense propietari (ABP regió policial)"
+    }
+  ],
+
+  "actes_penals": [
+    {
+      "tipus": "A-20",
+      "nom_complet": "Acta de pesada/aprehensió",
+      "base_legal": "LECrim + Pautes UF 3.3",
+      "quan_usar": [
+        "Drogues amb indicis tràfic (Art. 368 CP)",
+        "Aprehensió substància amb finalitat penal",
+        "Cadena de custòdia per a Toxicologia / Jutjat"
+      ],
+      "contingut_obligatori_pautes_3_3": [
+        "Origen substància",
+        "Embolcall (paperina, bossa, paquet…)",
+        "Característiques externes i aparença",
+        "Mètode obtenció mostra",
+        "Bàscula utilitzada (precisió ABP o farmàcia amb segell)",
+        "Si diversos implicats: ACTES SEPARADES per cadascú",
+        "Descripció detallada (tros vegetal, paperina, pols blanca, bossa, paquet tabac…)",
+        "Circumstàncies localització (mans, butxaques, indumentària, cavitats, llençat a terra)",
+        "Nombre d'unitats i pes en brut"
+      ],
+      "destinacio": "Atestat penal → Jutjat Guàrdia + Toxicologia (laboratori INTCF)"
+    }
+  ],
+
+  "documents_atestat": [
+    {
+      "tipus": "Atestat policial",
+      "definicio": "Document complet que recull tota actuació davant un fet presumptament delictiu",
+      "estructura_basica": [
+        "1. Encapçalament (data, lloc, agents intervinents amb TIP)",
+        "2. Origen del coneixement dels fets (denúncia, observació directa, avís…)",
+        "3. Diligències (numerades correlativament)",
+        "4. Resum dels fets",
+        "5. Conclusions / qualificació jurídica",
+        "6. Annexos (proves, fotografies, partes mèdics…)"
+      ],
+      "diligencies_habituals": [
+        "Diligència de manifestació (denunciant, perjudicat, testimoni, detingut)",
+        "Diligència de detenció + lectura drets",
+        "Diligència d'intervenció efectes + cadena custòdia",
+        "Diligència de comunicació família / advocat",
+        "Diligència d'inspecció ocular",
+        "Diligència de reconeixement mèdic",
+        "Diligència de declaració amb advocat",
+        "Diligència de posada a disposició judicial"
+      ]
+    },
+    {
+      "tipus": "Diligència",
+      "definicio": "Document específic dins l'atestat que recull una actuació concreta",
+      "exemples": [
+        "Diligència de drets (lectura Art. 520 LECrim)",
+        "Diligència de manifestació",
+        "Diligència de descripció de símptomes (alcoholèmia/drogues)",
+        "Diligència d'auxili",
+        "Diligència de circumstàncies trobada cadàver"
+      ]
+    },
+    {
+      "tipus": "Minuta",
+      "definicio": "Resum/informe que precedeix l'atestat o el complementa amb informació rellevant",
+      "us": "Síntesi inicial dels fets, narrativa cronològica, observacions agent"
+    }
+  ],
+
+  "frases_prohibides_pautes_UF_3_3": [
+    "❌ NO usar: 'utilitzant la mínima força imprescindible' (subjectiva)",
+    "✅ Concretar: 'es va aplicar una clau d'immobilització al braç dret per neutralitzar la resistència...'"
+  ],
+
+  "consideracions_transversals": [
+    "Tots els atestats penals: posada a disposició Jutjat de Guàrdia (excepte VG: JVM)",
+    "Menors detinguts: atestat a Fiscalia de Menors",
+    "Frase del concepte literalment del Catàleg/article",
+    "Article exacte amb format 'Art. X.Y CP' o 'Art. X.Y LOPSC'",
+    "Cadena de custòdia rigorosa per qualsevol efecte intervingut",
+    "Lectura de drets ABANS de qualsevol declaració de detingut",
+    "Frases prohibides: substituir per descripcions concretes"
+  ]
+}

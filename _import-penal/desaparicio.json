@@ -1,1 +1,245 @@
-{}
+{
+  "id": "desaparicio",
+  "titol": "Desaparició de persones",
+  "categoria": "persones",
+  "icono": "🔎",
+  "base_legal": [
+    "Instrucció 1/2009 Secretaria Estat Seguretat (Protocol)",
+    "Llei 6/1996 Sistema CNDES",
+    "Art. 225 bis CP (sostracció menors per progenitor)",
+    "Art. 162-163 CP (segrest il·legal)",
+    "RD 1796/2010 Centre Nacional Desapareguts"
+  ],
+
+  "principi_clau": "NO HI HA TEMPS MÍNIM d'espera per denunciar. El mite de les 24/48h és FALS. Cal denunciar i tramitar IMMEDIATAMENT.",
+
+  "nivells_risc_oficial": {
+    "alt": "Indicadors greus de perill (suïcidi, malaltia, edat extrema, indicis violència)",
+    "mig": "Sense indicadors greus però sense localització en temps raonable",
+    "baix": "Adult sense indicadors, probable desaparició voluntària"
+  },
+
+  "registre_obligatori": "Tota desaparició s'introdueix al CNDES (Centre Nacional Desapareguts) — base de dades nacional connectada amb Schengen i Interpol.",
+
+  "inici": "tipus_persona",
+  "nodes": {
+
+    "tipus_persona": {
+      "titol": "Tipus de persona desapareguda",
+      "opcions": [
+        { "etiqueta": "Menor d'edat",                                                   "va_a": "menor_context" },
+        { "etiqueta": "Adult vulnerable (Alzheimer, demència, malaltia mental greu)",   "va_a": "fi_alt_risc_vulnerable" },
+        { "etiqueta": "Adult amb indicis suïcides / depressió greu coneguda",          "va_a": "fi_alt_risc_suïcida" },
+        { "etiqueta": "Adult sense vulnerabilitat — circumstàncies",                    "va_a": "adult_circumstancies" },
+        { "etiqueta": "Persona de la 3a edat sense vulnerabilitat coneguda",            "va_a": "adult_circumstancies" }
+      ]
+    },
+
+    "menor_context": {
+      "titol": "Context del menor",
+      "opcions": [
+        { "etiqueta": "Sostracció parental (custòdia disputada)",                       "va_a": "fi_225_bis" },
+        { "etiqueta": "Fugida d'un centre de protecció",                                "va_a": "fi_fugida_centre" },
+        { "etiqueta": "Fugida de casa",                                                 "va_a": "fi_alt_risc_menor" },
+        { "etiqueta": "Desconeguda — possible segrest",                                  "va_a": "fi_segrest_163" },
+        { "etiqueta": "Nadó / menor de 5 anys",                                          "va_a": "fi_alta_prioritat" }
+      ]
+    },
+
+    "adult_circumstancies": {
+      "titol": "Circumstàncies de la desaparició adulta",
+      "opcions": [
+        { "etiqueta": "Indicis VIOLÈNCIA / desaparició forçada",                        "va_a": "fi_alt_risc_violencia" },
+        { "etiqueta": "Cap indicador, possible desaparició voluntària",                  "va_a": "fi_baix_risc" },
+        { "etiqueta": "Primera absència inexplicada (rutines alterades)",                "va_a": "fi_risc_mitja" },
+        { "etiqueta": "Sortida amb tercer sospitós",                                     "va_a": "fi_risc_mitja_tercer" }
+      ]
+    },
+
+    "fi_alt_risc_vulnerable": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🆘 ALT RISC — Adult vulnerable",
+      "accions_ordenades": [
+        "1️⃣ ACTIVACIÓ IMMEDIATA — NO esperar 24/48h",
+        "2️⃣ Comunicació Sala + Mossos coordinació",
+        "3️⃣ Registre CNDES URGENT",
+        "4️⃣ FOTOGRAFIA recent",
+        "5️⃣ Recollida exhaustiva: roba, objectes, rutines, punts habituals, medicació",
+        "6️⃣ Entrevista familiars/conviventes (cronologia última hora)",
+        "7️⃣ RASTREIG zona: hospitals, residències, transport públic, càmeres",
+        "8️⃣ Coordinació amb Cossos especialitzats (Mossos GRUME)",
+        "9️⃣ Si malaltia mental greu: contacte Salut Mental",
+        "🔟 Atestat + actualització contínua CNDES"
+      ],
+      "documentacio": "Denúncia + fitxa CNDES + atestat"
+    },
+
+    "fi_alt_risc_suïcida": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🆘 ALT RISC — Indicis suïcides",
+      "accions_ordenades": [
+        "Activació IMMEDIATA",
+        "Llocs habituals + llocs RISC suïcida (ponts, vies tren, alçades)",
+        "Comprovar accés a mitjans (armes, medicació)",
+        "Coordinació Salut Mental",
+        "Família + entorn proper",
+        "Trucada al telèfon (geolocalització si possible)",
+        "Telèfon 024 (atenció conducta suïcida)"
+      ]
+    },
+
+    "fi_alt_risc_violencia": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🆘 ALT RISC — Indicis violència",
+      "info": "Possible segrest, desaparició forçada, víctima de delicte",
+      "accions_ordenades": [
+        "Atenció a Mossos DIC",
+        "Activació immediata",
+        "Investigació context (problemes recents, amenaces, deutes, conflictes…)",
+        "Recerca telefonia (Jutjat) — geolocalització",
+        "Càmeres de la zona",
+        "Si tracta éssers humans sospita: protocol especialitzat"
+      ]
+    },
+
+    "fi_alt_risc_menor": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🆘 MENOR DESAPAREGUT — alt risc",
+      "accions_ordenades": [
+        "1️⃣ ACTIVACIÓ IMMEDIATA (zero espera)",
+        "2️⃣ Sala + GRUME (Mossos) + CNDES",
+        "3️⃣ Fotografia recent + descripció EXACTA roba",
+        "4️⃣ DISPOSITIUS: patrulles + càmeres + punts pas",
+        "5️⃣ Entrevista entorn: amistats, escola, xarxes socials",
+        "6️⃣ Telefonia / xarxes socials (procediment judicial)",
+        "7️⃣ Informar Fiscalia Menors",
+        "8️⃣ Activar ALERTA INFANCIA / Alert Espai si pertinent",
+        "9️⃣ Reunir pares/tutors (coordinació informació)",
+        "🔟 Si possible, coordinació Interpol si sortida fronteres"
+      ]
+    },
+
+    "fi_alta_prioritat": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🚨 NADÓ/MENOR <5 ANYS — MÀXIMA PRIORITAT",
+      "info": "Risc EXTREM. Coordinació total i immediata.",
+      "accions_ordenades_critiques": [
+        "1️⃣ ALERTA MÀXIMA — activació total Mossos + recursos",
+        "2️⃣ GRUME + DIC + Sala regional + UFAM",
+        "3️⃣ Cercle de cerca per PROXIMITAT (radi inicial 500m, ampliar)",
+        "4️⃣ Examen DOMICILI — possible ocultació involuntària (armari, nevera, neveres horitzontals…)",
+        "5️⃣ Hospitals + serveis sanitaris propers",
+        "6️⃣ Interlocució amb família — possible sostracció (separació, conflicte)",
+        "7️⃣ ALERT INFANCIA / crida massiva mitjans",
+        "8️⃣ Coordinació amb gènere si VG en context",
+        "9️⃣ Vigilància aeroports, estacions, ports si fugida"
+      ]
+    },
+
+    "fi_225_bis": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Sostracció de menors (Art. 225 bis CP)",
+      "concepte": "Progenitor que sostreu menor sense consentiment de l'altre o vulnerant resolució judicial",
+      "pena": "Presó 2-4 anys + inhabilitació pàtria potestat 4-10 anys",
+      "pena_agreujada": "Si trasllat fora d'Espanya: pena meitat superior",
+      "accions_ordenades": [
+        "1. Comprovar règim CUSTÒDIA / visites",
+        "2. Verificar resolució judicial (sentència)",
+        "3. Denúncia progenitor afectat",
+        "4. Activació CNDES + Interpol si sortida país",
+        "5. Possible alerta SIRENE (Schengen)",
+        "6. Atestat + Jutjat",
+        "7. Si VG en context: coordinar amb JVM",
+        "8. Comunicació DGAIA"
+      ]
+    },
+
+    "fi_segrest_163": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Segrest / detenció il·legal (Art. 163-164 CP)",
+      "info": "Segrest amb exigència de condició: pena agreujada (Art. 164)",
+      "pena_basica_163": "Presó 4-6 anys",
+      "pena_segrest_164": "Presó 6-10 anys + multa",
+      "pena_menor_165": "Pena meitat superior si víctima menor o vulnerable",
+      "accions": [
+        "ALERTA màxima",
+        "Mossos DIC + Negociació Crisi (segrest amb condició)",
+        "Telefonia + càmeres",
+        "Cooperació internacional si pertinent",
+        "Atestat + Jutjat / Audiència Nacional"
+      ]
+    },
+
+    "fi_risc_mitja": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "📋 Risc mitjà",
+      "accions": [
+        "Denúncia immediata",
+        "Fitxa CNDES",
+        "Consultes hospitals, centres, Mossos",
+        "Entrevista entorn",
+        "Seguiment 24-48h",
+        "Si no apareix: ESCALAR a alt risc"
+      ]
+    },
+
+    "fi_risc_mitja_tercer": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "📋 Risc mitjà — sortida amb tercer sospitós",
+      "accions": [
+        "Identificar tercer (noms, descripció, vehicle)",
+        "Si conegut: comprovar antecedents",
+        "Càmeres zona",
+        "Si indicis delictius: escalar a alt risc"
+      ]
+    },
+
+    "fi_baix_risc": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "📋 Baix risc",
+      "info": "Adult sense indicadors, probable desaparició voluntària. Igualment cal denunciar.",
+      "accions": [
+        "DENÚNCIA (sempre, també baix risc)",
+        "Fitxa CNDES",
+        "Comprovacions rutinàries",
+        "Arxiu si es localitza",
+        "Reobertura si s'allarga el temps"
+      ]
+    },
+
+    "fi_fugida_centre": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "📋 Fugida centre protecció",
+      "accions": [
+        "Avís del centre",
+        "Recerca activa segons grau risc del menor",
+        "Rutes habituals + família + amistats",
+        "Coordinació DGAIA",
+        "Localització → retorn al centre + acta",
+        "Si reiteració: informe DGAIA"
+      ]
+    }
+  },
+  "notes_finals": [
+    "CNDES (Centre Nacional Desapareguts): registre OBLIGATORI. Connectat amb Schengen, Interpol, ICMEC.",
+    "NO ESPERAR temps mínim. Cap mite de 24/48h.",
+    "ALERT INFANCIA / Alert Espai: activació per casos d'alt risc menors. Difusió massiva.",
+    "INTERPOL: per desaparicions amb sortida fronteres. SIRENE per Schengen.",
+    "Coordinació amb FUNDACIÓ ANAR (menors): 900 20 20 10 + suport especialitzat.",
+    "FUNDACIÓ QSDGLOBAL: localització persones desaparegudes — col·laboració.",
+    "Si víctima de tracta: protocol específic. Amparo víctimes.",
+    "Si reaparició: comunicació immediata CNDES + tancament fitxa.",
+    "Si CADÀVER trobat sense identificar: cotejar amb persones desaparegudes (CNDES nacional + DNA)."
+  ]
+}

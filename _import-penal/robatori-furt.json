@@ -1,1 +1,366 @@
-{}
+{
+  "id": "robatori-furt",
+  "titol": "Robatori / furt / sostracció",
+  "categoria": "patrimoni",
+  "icono": "💰",
+  "base_legal": [
+    "Art. 234 CP (furt)",
+    "Art. 235 CP (furt agreujat)",
+    "Arts. 237-238 CP (concepte robatori i força en les coses)",
+    "Art. 240 CP (robatori amb força)",
+    "Art. 241 CP (robatori en habitatge)",
+    "Art. 242 CP (robatori amb violència o intimidació)",
+    "Art. 243 CP (extorsió)",
+    "Art. 244 CP (sostracció de vehicle de motor)",
+    "Art. 246-247 CP (alteració de fites, defraudació de fluid)"
+  ],
+
+  "diferencia_clau": {
+    "furt_234": "Apoderament SENSE força ni violència",
+    "robatori_force_237": "Apoderament AMB FORÇA en les coses (escalament, fractura, claus falses…)",
+    "robatori_violencia_242": "Apoderament AMB VIOLÈNCIA o intimidació en persones",
+    "sostraccio_244": "Ús temporal vehicle motor SENSE ànim apropiació definitiva"
+  },
+
+  "modalitats_forca_238": [
+    "Escalament (entrar per lloc no destinat a accés)",
+    "Trencament de paret, sostre o terra",
+    "Ruptura de portes o finestres",
+    "Fractura d'armaris, caixes fortes, baüls",
+    "Ús de claus falses (incloent originals furtades, retingudes, oblidades)",
+    "Inutilització de sistemes d'alarma o protecció específica",
+    "Desconnexió/inutilització dispositius antifurt"
+  ],
+
+  "agreujants_235": [
+    "1. Coses de valor artístic/històric/cultural/científic",
+    "2. Coses de primera necessitat amb greu situació desproveïment",
+    "3. Conduccions, cablejat, equipament o components infraestructures (subministrament elèctric, telecomunicacions…)",
+    "4. Productes agraris/ramaders amb greu perjudici explotació agrícola/ramadera",
+    "5. Especial gravetat per valor o efectes greus",
+    "6. Aprofitant calamitat o desgràcia",
+    "7. MULTIRREINCIDÈNCIA: 3+ condemnes per furt en últims 3 anys",
+    "8. Utilitzant menors de 16 anys"
+  ],
+
+  "inici": "modalitat",
+  "nodes": {
+
+    "modalitat": {
+      "titol": "Modalitat d'apoderament",
+      "opcions": [
+        { "etiqueta": "Apoderament SENSE força ni violència (FURT)",                    "va_a": "furt_valor" },
+        { "etiqueta": "Amb FORÇA en les coses (ROBATORI)",                              "va_a": "robatori_force_lloc" },
+        { "etiqueta": "Amb VIOLÈNCIA o INTIMIDACIÓ a persones",                          "va_a": "robatori_violencia" },
+        { "etiqueta": "Vehicle a motor — ús temporal",                                  "va_a": "fi_244_sostraccio" },
+        { "etiqueta": "EXTORSIÓ (forçar amb violència acte jurídic perjudicial)",       "va_a": "fi_243_extorsio" },
+        { "etiqueta": "Defraudació fluid elèctric / aigua / gas",                       "va_a": "fi_255_defraudacio" },
+        { "etiqueta": "Apoderament intentat — frustrat",                                "va_a": "fi_temptativa" }
+      ]
+    },
+
+    "furt_valor": {
+      "titol": "Furt — valor del sostret + circumstàncies",
+      "opcions": [
+        { "etiqueta": "Valor ≤ 400 € (delicte LLEU)",                                  "va_a": "fi_furt_lleu" },
+        { "etiqueta": "Valor > 400 € (delicte bàsic)",                                  "va_a": "fi_furt_basic" },
+        { "etiqueta": "Multireincidència (3+ condemnes en 3 anys)",                    "va_a": "fi_furt_habitual_235" },
+        { "etiqueta": "Furt amb agreujants 235 (valor especial, ART/HISTÒRIC, infraestructures…)", "va_a": "fi_furt_agreujat_235" },
+        { "etiqueta": "Furt en establiment + multireincidència",                        "va_a": "fi_furt_habitual_235" }
+      ]
+    },
+
+    "robatori_force_lloc": {
+      "titol": "On s'ha comès el robatori amb força?",
+      "opcions": [
+        { "etiqueta": "HABITATGE habitual / segona residència",                         "va_a": "fi_241_habitatge" },
+        { "etiqueta": "Establiment / local OBERT al públic",                            "va_a": "fi_240_basic" },
+        { "etiqueta": "Vehicle aparcat (sostraccions de l'interior)",                   "va_a": "fi_240_basic" },
+        { "etiqueta": "Edifici/local en construcció",                                   "va_a": "fi_240_basic" },
+        { "etiqueta": "Element infraestructura crítica (estació, hospital, etc.)",     "va_a": "fi_240_agreujat_235" }
+      ]
+    },
+
+    "robatori_violencia": {
+      "titol": "Robatori amb violència — circumstàncies",
+      "opcions": [
+        { "etiqueta": "Bàsic (estrebada, empenta, amenaça verbal)",                    "va_a": "fi_242_1_basic" },
+        { "etiqueta": "A casa habitada (entrant)",                                      "va_a": "fi_242_2_habitat" },
+        { "etiqueta": "Amb ARMES o mitjans perillosos",                                 "va_a": "fi_242_3_armes" },
+        { "etiqueta": "Amb arma + casa habitada (concurs greu)",                       "va_a": "fi_242_concurs" }
+      ]
+    },
+
+    "fi_furt_lleu": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "⚖️ DELICTE LLEU — Furt menor (Art. 234.2 CP)",
+      "concepte": "Apoderament de coses mobles alienes sense voluntat del seu amo amb valor ≤ 400 €",
+      "article": "Art. 234.2 CP",
+      "pena": "Multa 1-3 mesos",
+      "perseguibilitat": "Denúncia perjudicat (excepció víctima vulnerable)",
+      "accions_ordenades": [
+        "1. Denúncia perjudicat",
+        "2. Si flagrant: identificació autor + escorcoll",
+        "3. Recuperació objecte amb acta intervenció",
+        "4. Si no autor identificat: denúncia oberta (per recerca posterior)",
+        "5. Atestat simplificat",
+        "6. Comprovar antecedents (multireincidència fa pujar a 235)",
+        "7. Si autor menor 14 anys: no responsabilitat penal — comunicació tutors + Fiscalia Menors",
+        "8. Si autor 14-17 anys: Fiscalia Menors"
+      ],
+      "documentacio": "Atestat + acta intervenció efectes + denúncia perjudicat"
+    },
+
+    "fi_furt_basic": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Furt (Art. 234.1 CP)",
+      "concepte": "Apoderament coses mobles alienes sense voluntat del seu amo amb ànim de lucre, valor > 400 €",
+      "article": "Art. 234.1 CP",
+      "pena": "Presó 6-18 mesos",
+      "perseguibilitat": "D'ofici",
+      "accions_ordenades": [
+        "1. DETENCIÓ si flagrant + lectura drets",
+        "2. Escorcoll incident detenció",
+        "3. RECUPERACIÓ objecte + acta intervenció + cadena custòdia",
+        "4. Identificar perjudicat (si comerç, dependent autoritzat)",
+        "5. Declaracions perjudicat i testimonis",
+        "6. Tasació dels objectes (factura, valoració)",
+        "7. Si càmeres: requerir gravacions",
+        "8. Atestat penal complet",
+        "9. Posada a disposició Jutjat Guàrdia"
+      ],
+      "documentacio": "Atestat penal + acta intervenció + cadena custòdia + tasació + gravacions càmeres si n'hi ha"
+    },
+
+    "fi_furt_habitual_235": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Furt agreujat per multireincidència (Art. 235.1.7 CP)",
+      "info_clau": "3 o més condemnes per furt en els últims 3 anys agreuja a delicte 235 ENCARA QUE el valor sigui ≤ 400 €",
+      "pena": "Presó 1-3 anys",
+      "accions_ordenades": [
+        "Comprovació antecedents URGENT (Sala / SIRAJ / SIP)",
+        "Detenció",
+        "Lectura drets",
+        "Atestat amb HISTORIAL ANTECEDENTS adjunt",
+        "Posada a disposició Jutjat Guàrdia"
+      ],
+      "documentacio": "Atestat + antecedents + acta intervenció efectes"
+    },
+
+    "fi_furt_agreujat_235": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Furt amb agreujants (Art. 235 CP)",
+      "supòsits_aplicables": [
+        "Béns valor artístic/històric/cultural",
+        "Béns primera necessitat",
+        "Conduccions/cablejat infraestructures",
+        "Productes agraris",
+        "Especial gravetat per valor",
+        "Aprofitant calamitat",
+        "Utilitzant menors de 16 anys"
+      ],
+      "pena": "Presó 1-3 anys",
+      "accions": [
+        "Detenció",
+        "Documentació pericial valor",
+        "Si amb menors: comunicació DGAIA + Fiscalia Menors",
+        "Atestat + Jutjat Guàrdia"
+      ]
+    },
+
+    "fi_240_basic": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Robatori amb força bàsic (Art. 240 CP)",
+      "concepte": "Apoderament amb força en les coses (Art. 238: escalament, fractura, claus falses, inutilització alarmes…)",
+      "article": "Art. 240.1 CP",
+      "pena": "Presó 1-3 anys",
+      "accions_ordenades": [
+        "1. INSPECCIÓ OCULAR — preservar escena",
+        "2. Avisar Mossos DIC / Policia Científica per recollida d'EMPREMTES",
+        "3. ADN si traces biològiques (sang, cabells)",
+        "4. CÀMERES de la zona (requeriment urgent)",
+        "5. Declaració perjudicat amb INVENTARI EXHAUSTIU del sostret",
+        "6. Tasació dels objectes",
+        "7. Identificació via accés (com va entrar)",
+        "8. Detenció si autor localitzat",
+        "9. Atestat penal + Jutjat Guàrdia"
+      ],
+      "documentacio_clau": "Atestat + acta inspecció ocular + recollida indicis (empremtes, ADN) + inventari + tasació + càmeres"
+    },
+
+    "fi_240_agreujat_235": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Robatori amb força + agreujants 235",
+      "pena": "Presó 2-5 anys (concurrència Art. 240 + 235)",
+      "accions": "Mateixes que 240 bàsic + comunicació especialitzada (si infraestructura crítica)"
+    },
+
+    "fi_241_habitatge": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE AGREUJAT — Robatori en habitatge (Art. 241.1 CP)",
+      "concepte": "Robatori amb força en habitatge habitual o segona residència",
+      "pena_basica": "Presó 2-5 anys",
+      "pena_habitada": "Presó 5-8 anys (si la víctima hi era + violència o intimidació posterior)",
+      "subsupòsits": [
+        "241.1: Robatori amb força en habitatge",
+        "241.2: Local obert al públic fora hores obertura amb força",
+        "241.4: Habitatge HABITAT (gent dins) — pena agreujada"
+      ],
+      "accions_ordenades": [
+        "1. PRESERVACIÓ ESCENA com escena de crim",
+        "2. Avisar DIC / Policia Científica IMMEDIATAMENT",
+        "3. Esperar inspecció ocular abans d'entrar (excepte víctimes)",
+        "4. Declaració perjudicats amb INVENTARI MINUCIÓS i VALORACIÓ",
+        "5. Fotografies de TOT (escena, danys, accés)",
+        "6. Càmeres zona + edifici",
+        "7. Veïns: testimonis recents",
+        "8. Si tenia alarma: requerir registres a empresa",
+        "9. Atestat penal complet",
+        "10. Jutjat Guàrdia urgent"
+      ],
+      "documentacio": "Atestat + inspecció ocular + acta intervenció efectes + cadena custòdia + tasació + gravacions càmeres + testimonis"
+    },
+
+    "fi_242_1_basic": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Robatori amb violència/intimidació (Art. 242.1 CP)",
+      "pena": "Presó 2-5 anys",
+      "accions_ordenades": [
+        "1. AUXILI VÍCTIMA + SEM si lesions",
+        "2. Parte mèdic SI hi ha lesions",
+        "3. Descripció EXHAUSTIVA autor: alçada, complexió, color cabell/pell, vestimenta, tatuatges, accent",
+        "4. Càmeres zona — recerca urgent",
+        "5. Testimonis presencials",
+        "6. Detenció si flagrant",
+        "7. Si arma: intervenció + cadena custòdia",
+        "8. Atestat penal",
+        "9. Jutjat Guàrdia"
+      ],
+      "documentacio": "Atestat + parte mèdic + descripció autor + identificació posada a disposició"
+    },
+
+    "fi_242_2_habitat": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Robatori violent a casa habitada (Art. 242.2 CP)",
+      "pena": "Presó 3 anys i 6 mesos - 5 anys",
+      "info": "Casa HABITADA = els residents hi són en aquell moment",
+      "accions": [
+        "Auxili víctima",
+        "Preservar escena",
+        "DIC / Científica",
+        "Atestat + Jutjat Guàrdia"
+      ]
+    },
+
+    "fi_242_3_armes": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Amb armes/mitjans perillosos (Art. 242.3 CP)",
+      "concepte": "Robatori amb violència portant armes o instruments perillosos, o amb amenaça d'armes",
+      "pena": "Pena superior en grau (fins 7 anys i 6 mesos)",
+      "info": "Inclou armes simulades si crea intimidació real (TS)",
+      "accions_ordenades": [
+        "AUXILI víctima + SEM",
+        "PRESERVACIÓ escena",
+        "Recerca arma (pot ser abandonada)",
+        "Càmeres + testimonis",
+        "Avisar Mossos DIC (atracaments)",
+        "Si arma intervinguda: cadena custòdia rigorosa + balística",
+        "Atestat + Jutjat Guàrdia"
+      ]
+    },
+
+    "fi_242_concurs": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE MOLT GREU — Robatori violent amb arma a casa habitada",
+      "pena": "Pot arribar a 8-10 anys (concurs 242.2 + 242.3 + 235 si correspon)",
+      "accions": "Mateixes 242.3 + actuació coordinada Mossos DIC"
+    },
+
+    "fi_244_sostraccio": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Sostracció vehicle motor (Art. 244 CP)",
+      "concepte": "Ús temporal sense consentiment, sense ànim apropiació definitiva",
+      "pena_basica": "Multa 2-12 mesos",
+      "pena_restitucio_48h": "TBC 31-90 dies (si restitueix en 48h sense violència)",
+      "pena_violencia": "Pena del 242 superior en grau (si amb violència/intimidació)",
+      "diferenciacio": "Si ÀNIM APROPIACIÓ DEFINITIVA: és FURT (234) o ROBATORI (240/242), no sostracció",
+      "accions_ordenades": [
+        "1. Denúncia titular obligatòria",
+        "2. Recerca matrícula a Sala (registres alerta)",
+        "3. Si localitzat: inspecció + restitució titular",
+        "4. Comprovació estat (desperfectes per sostracció)",
+        "5. Atestat + Jutjat"
+      ]
+    },
+
+    "fi_243_extorsio": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Extorsió (Art. 243 CP)",
+      "concepte": "Forçar amb violència o intimidació a realitzar/ometre acte jurídic perjudicial pel patrimoni propi/aliè",
+      "pena": "Presó 1-5 anys",
+      "exemples": [
+        "Forçar a signar document",
+        "Forçar a transferir diners (online o en efectiu)",
+        "Forçar a retirar denúncia/testimoni",
+        "Pagar 'protecció'"
+      ],
+      "accions": [
+        "Auxili víctima",
+        "Investigar mètode (telefonia, missatges, presencial)",
+        "Si en línia: preservació proves digitals",
+        "Atestat + Jutjat Guàrdia"
+      ]
+    },
+
+    "fi_255_defraudacio": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Defraudació fluid elèctric/aigua/gas (Art. 255 CP)",
+      "concepte": "Connectar-se sense pagar a subministraments (llum, aigua, gas, telecom)",
+      "pena": "Multa 3-12 mesos (defraudació > 400 €)",
+      "perseguibilitat": "Denúncia perjudicat (companyia)",
+      "accions": [
+        "Inspecció instal·lació",
+        "Documentació empresa subministradora",
+        "Atestat amb informe pericial",
+        "Si concorre amb ocupació: concurs"
+      ]
+    },
+
+    "fi_temptativa": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Temptativa de furt/robatori",
+      "info": "Apoderament intentat però no consumat. Pena inferior 1-2 graus.",
+      "accions": [
+        "Documentar intent (acte d'execució objectiu)",
+        "Detenció si flagrant",
+        "Atestat com a temptativa"
+      ]
+    }
+  },
+  "notes_finals": [
+    "RECUPERAR objecte sostret = afebleix la prova del furt si es lliura abans (lluny de comissaria). Cal acta intervenció al moment.",
+    "MULTIRREINCIDÈNCIA (235.1.7): comprovar SIRAJ. 3 condemnes en 3 anys = agreujat encara que valor < 400 €.",
+    "ROBATORI EN HABITATGE: tendència jurisprudencial molt severa. Pena alta per protegir intimitat.",
+    "SOSTRACCIÓ vs FURT vehicle: clau l'ÀNIM. Si consta restituir → 244. Si volia quedar-se → 234/240/242.",
+    "BOTONS DE PÀNIC: si comerç té sistema d'avís amb gravació, requerir-la com a prova.",
+    "CÀMERES PRIVADES: cadena custòdia rigorosa. Avisar a propietari de no esborrar.",
+    "DESCRIPCIÓ AUTOR: ALÇADA / COMPLEXIÓ / EDAT APROXIMADA / SEXE / VESTIMENTA (color, marca) / SIGNES PARTICULARS (tatuatges, cicatrius, accent).",
+    "Si autor menor: NO detenció <14 anys. 14-17: Fiscalia Menors. Custòdia diferent (no comissaria adults).",
+    "JOIES, MARCS NUMERATS: registrar tot el que té número de sèrie. Permet recerca posterior."
+  ]
+}

@@ -1,1 +1,306 @@
-{}
+{
+  "id": "violencia-genere",
+  "titol": "Violència de gènere (VG)",
+  "categoria": "persones",
+  "icono": "💔",
+  "base_legal": [
+    "LO 1/2004 Mesures Protecció Integral Violència Gènere",
+    "LO 10/2022 (modificacions)",
+    "Art. 153.1 CP (maltractament ocasional VG)",
+    "Art. 148.4 CP (lesions VG)",
+    "Art. 171.4 CP (amenaces lleus VG)",
+    "Art. 172.2 CP (coaccions lleus VG)",
+    "Art. 173.4 CP (vexacions lleus VG)",
+    "Art. 173.2 CP (violència habitual)",
+    "Art. 468 CP (trencament d'allunyament)",
+    "Art. 544 ter LECrim (ordre protecció)"
+  ],
+
+  "ambit_VG_LO_1_2004": "Violència exercida sobre la DONA per part de qui sigui o hagi estat la seva PARELLA (cònjuge, ex-cònjuge, parella anàloga afectivitat). Article 1.1 LO 1/2004. Inclou parelles sense convivència.",
+
+  "competencia_judicial": "JUTJAT DE VIOLÈNCIA SOBRE LA DONA (JVM) — NO Jutjat Instrucció ordinari",
+
+  "delictes_VG_basics": {
+    "153_1_maltractament": "Lesió/maltractament SENSE tractament: 6 mesos-1 any presó O TBC 31-80 dies + privació armes 1-3 anys",
+    "148_4_lesions": "Lesions amb tractament: 2-5 anys presó",
+    "171_4_amenaces": "Amenaces lleus: 6 mesos-1 any presó O TBC + privació armes",
+    "172_2_coaccions": "Coaccions lleus: 6 mesos-1 any presó O TBC + privació armes",
+    "173_4_vexacions": "Injúries/vexacions lleus: multa 1-3 mesos",
+    "468_trencament": "Trencament allunyament: 6 mesos-1 any presó"
+  },
+
+  "VPR_nivells": {
+    "no_apreciat": "Sense indicadors de risc",
+    "baix": "Indicadors lleus, sense urgència especial",
+    "mig": "Concurrència de factors, mesures protecció bàsiques",
+    "alt": "Risc elevat, mesures intensives + seguiment",
+    "extrem": "Risc imminent vida, mesures màximes"
+  },
+
+  "inici": "situacio",
+  "nodes": {
+
+    "situacio": {
+      "titol": "Situació inicial",
+      "opcions": [
+        { "etiqueta": "Intervenció en CALENT (acabat de passar/ara mateix)",       "va_a": "calent_prioritats" },
+        { "etiqueta": "Denúncia POSTERIOR a comissaria (fa hores/dies)",            "va_a": "denuncia_posterior" },
+        { "etiqueta": "TRENCAMENT d'ordre d'allunyament detectat",                  "va_a": "fi_468_trencament" },
+        { "etiqueta": "Auxili a víctima en PERILL IMMINENT",                        "va_a": "fi_perill_imminent" },
+        { "etiqueta": "Comunicació de tercer (veí, familiar) — víctima no parla",   "va_a": "tercer_avis" }
+      ]
+    },
+
+    "calent_prioritats": {
+      "titol": "Intervenció en calent — actuació prioritària",
+      "info": "Ordre: 1) Separar agressor-víctima, 2) Auxili sanitari, 3) Recollida proves, 4) VPR",
+      "opcions": [
+        { "etiqueta": "Hi ha LESIONS físiques",                                     "va_a": "lesions_gravetat" },
+        { "etiqueta": "Sense lesions — només amenaces/coaccions/vexacions",         "va_a": "sense_lesions_tipus" },
+        { "etiqueta": "Hi ha menors al lloc",                                        "va_a": "lesions_gravetat" }
+      ]
+    },
+
+    "lesions_gravetat": {
+      "titol": "Gravetat lesions",
+      "opcions": [
+        { "etiqueta": "Maltractament SENSE tractament (153.1)",                    "va_a": "fi_153_1_VG" },
+        { "etiqueta": "Lesions amb tractament (148.4)",                             "va_a": "fi_148_4_VG" },
+        { "etiqueta": "Lesions GREUS / permanents (149/150)",                      "va_a": "fi_lesions_greus_VG" }
+      ]
+    },
+
+    "sense_lesions_tipus": {
+      "titol": "Tipus de conducta",
+      "opcions": [
+        { "etiqueta": "Amenaces lleus (171.4)",                                    "va_a": "fi_171_4_VG" },
+        { "etiqueta": "Coaccions lleus (172.2)",                                   "va_a": "fi_172_2_VG" },
+        { "etiqueta": "Injúries / vexacions lleus (173.4)",                         "va_a": "fi_173_4_VG" },
+        { "etiqueta": "Amenaces GREUS (concurs 169 CP)",                            "va_a": "fi_amenaces_greus_VG" }
+      ]
+    },
+
+    "tercer_avis": {
+      "titol": "Avís de tercer — víctima reticent",
+      "info": "Cas habitual: veí truca per crits, víctima nega o està espantada. Cal actuar amb tacte però amb fermesa: la VG és perseguible D'OFICI, no requereix denúncia de la víctima.",
+      "opcions": [
+        { "etiqueta": "Víctima accepta col·laborar",                                "va_a": "calent_prioritats" },
+        { "etiqueta": "Víctima nega però hi ha indicis (lesions, escena…)",        "va_a": "fi_oficials_indicis" },
+        { "etiqueta": "Sense indicis i víctima nega",                                "va_a": "fi_anotacio_seguiment" }
+      ]
+    },
+
+    "denuncia_posterior": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "📋 Denúncia posterior — procediment complet",
+      "accions_ordenades": [
+        "1️⃣ ATENDRE víctima en espai RESERVAT (no rebedor)",
+        "2️⃣ Empatia, escolta activa, sense pressió",
+        "3️⃣ Si víctima ve sola: oferir suport (SIAD, SARA, ATENPRO)",
+        "4️⃣ INFORMAR DRETS (Arts. 17-19 LO 1/2004 i Llei 4/2015 estatut víctima)",
+        "5️⃣ DECLARACIÓ DETALLADA: cronologia, episodis anteriors, testimonis, lesions actuals i passades",
+        "6️⃣ PARTE MÈDIC actual (insistir anar urgències)",
+        "7️⃣ Documentar lesions ANTIGES si encara visibles (fotografies amb consentiment)",
+        "8️⃣ RECOLLIR PROVES: missatges WhatsApp, xarxes, gravacions, testimonis",
+        "9️⃣ VPR (Valoració Policial del Risc) — qüestionari oficial VioGén",
+        "🔟 Informar de DRET A ORDRE DE PROTECCIÓ (Art. 544 ter LECrim)",
+        "1️⃣1️⃣ Posar en contacte amb SIAD / SARA si la víctima ho vol",
+        "1️⃣2️⃣ ATESTAT al JVM (Jutjat Violència sobre Dona)",
+        "1️⃣3️⃣ Seguiment segons VPR (alta/extrema → contacte intensiu)"
+      ],
+      "documentacio_clau": "Atestat VG + VPR + parte mèdic + còpia proves + acta drets víctima",
+      "drets_obligatoris_informar": [
+        "Dret a denunciar i ordre de protecció",
+        "Dret a assistència jurídica gratuïta",
+        "Dret a serveis socials integrals",
+        "Dret a renda d'inserció",
+        "Dret a casa d'acollida",
+        "Dret a teleassistència ATENPRO",
+        "Dret a punts de trobada",
+        "Dret a no comparèixer al judici en presència de l'agressor"
+      ]
+    },
+
+    "fi_perill_imminent": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🆘 PERILL IMMINENT — actuació urgent",
+      "accions_ordenades": [
+        "1️⃣ SEPARAR i protegir la víctima (trasllat lloc segur)",
+        "2️⃣ DETENCIÓ de l'agressor",
+        "3️⃣ Auxili sanitari + SEM si lesions",
+        "4️⃣ Atenció als MENORS presents (víctimes indirectes)",
+        "5️⃣ Comunicació DGAIA si menors",
+        "6️⃣ Activar TELEASSISTÈNCIA (ATENPRO)",
+        "7️⃣ Informar drets víctima",
+        "8️⃣ Casa d'acollida si necessari (coordinar amb Serveis Socials)",
+        "9️⃣ ATESTAT URGENT al JVM",
+        "🔟 VPR immediata"
+      ]
+    },
+
+    "fi_oficials_indicis": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🔍 Indicis sense denúncia — actuar d'OFICI",
+      "info": "VG és perseguible D'OFICI. Si hi ha indicis (lesions visibles, escena de violència, manifestacions de tercer) cal actuar encara que la víctima no denunciï.",
+      "accions_ordenades": [
+        "Documentar indicis (fotos escena, lesions amb consentiment, testimonis)",
+        "Si lesions visibles: parte mèdic d'ofici",
+        "Recollida testimonis veïns",
+        "Atestat d'ofici al JVM amb totes les diligències",
+        "Informar víctima dels seus drets (encara que no denunciï)",
+        "Comunicació SIAD/SARA per acompanyament",
+        "VPR amb dades disponibles"
+      ]
+    },
+
+    "fi_anotacio_seguiment": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "📋 Anotació + seguiment",
+      "accions": [
+        "Anotació detallada al servei (data, hora, fets, persones)",
+        "Comunicació SIAD per visita posterior",
+        "Si reincidència de trucades: actuació més contundent"
+      ]
+    },
+
+    "fi_153_1_VG": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Maltractament ocasional VG (Art. 153.1 CP)",
+      "concepte": "Lesió lleu o maltractament d'obra a parella/ex-parella DONA, sense necessitat de tractament mèdic",
+      "article": "Art. 153.1 CP",
+      "pena": "Presó 6 mesos - 1 any O TBC 31-80 dies + inhabilitació especial pàtria potestat 1-5 anys + privació tinença/port d'armes 1-3 anys",
+      "pena_agreujada_153_3": "Si es comet en presència de menors, al domicili comú, amb armes: pena meitat superior",
+      "accions_ordenades": [
+        "1. Detenció agressor",
+        "2. Lectura drets",
+        "3. Protecció víctima (separació física)",
+        "4. Auxili + SEM si cal",
+        "5. Parte mèdic",
+        "6. VPR (qüestionari complet)",
+        "7. Informar drets víctima",
+        "8. Si menors: comunicació DGAIA",
+        "9. ATESTAT al JVM",
+        "10. Posada a disposició JVM (NO Jutjat Guàrdia ordinari)"
+      ],
+      "documentacio_obligatoria": [
+        "Atestat penal VG",
+        "VPR (formulari oficial)",
+        "Diligència informació drets víctima",
+        "Parte mèdic (tot i no haver tractament)",
+        "Fotografies (amb consentiment)",
+        "Declaració víctima",
+        "Diligència detenció + lectura drets",
+        "Comunicació DGAIA si menors"
+      ]
+    },
+
+    "fi_148_4_VG": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Lesions VG amb tractament (Art. 148.4 CP)",
+      "pena": "Presó 2-5 anys",
+      "accions_ordenades": [
+        "1. Detenció agressor",
+        "2. Auxili + SEM PRIORITARI",
+        "3. Parte mèdic detallat",
+        "4. Fotografies lesions",
+        "5. Preservar escena si cal",
+        "6. VPR",
+        "7. Atestat penal exhaustiu al JVM",
+        "8. Posada a disposició JVM"
+      ]
+    },
+
+    "fi_lesions_greus_VG": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE MOLT GREU — Lesions VG permanents (Art. 149/150 CP)",
+      "pena_149": "Presó 8-12 anys (agreujada per gènere) + inhabilitació pàtria potestat 4-10 anys",
+      "pena_150": "Presó 4-8 anys (agreujada)",
+      "accions_ordenades": [
+        "Auxili VITAL urgent",
+        "Detenció",
+        "Preservació escena",
+        "Avisar Mossos DIC / UFAM",
+        "Atestat urgent al JVM o Guàrdia segons cas",
+        "VPR EXTREMA"
+      ]
+    },
+
+    "fi_171_4_VG": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Amenaces lleus VG (Art. 171.4 CP)",
+      "pena": "Presó 6 mesos - 1 any O TBC 31-80 dies + inhabilitació + privació armes 1-3 anys",
+      "info": "AMENACES lleus en context VG SEMPRE són delicte (no requereixen denúncia perjudicat com en general)",
+      "accions": [
+        "Detenció",
+        "Recollida proves (missatges)",
+        "VPR",
+        "Atestat al JVM"
+      ]
+    },
+
+    "fi_172_2_VG": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Coaccions lleus VG (Art. 172.2 CP)",
+      "pena": "Presó 6 mesos - 1 any O TBC 31-80 dies + inhabilitació + privació armes",
+      "accions": ["Detenció", "VPR", "Atestat JVM"]
+    },
+
+    "fi_173_4_VG": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE LLEU — Vexacions/injúries lleus VG (Art. 173.4 CP)",
+      "pena": "Multa 1-3 mesos",
+      "perseguibilitat": "Denúncia perjudicada (excepció a la regla general d'ofici de VG)",
+      "accions": ["Declaració víctima", "VPR", "Atestat simplificat"]
+    },
+
+    "fi_amenaces_greus_VG": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Amenaces greus en context VG",
+      "info": "Concurs entre 169 CP (amenaces greus) + circumstàncies VG. Pena meitat superior.",
+      "accions": "Mateixes que amenaces 169 + VPR + JVM"
+    },
+
+    "fi_468_trencament": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Trencament allunyament (Art. 468 CP)",
+      "info_clau": "El trencament és delicte FINS I TOT amb consentiment de la víctima (TS jurisprudència consolidada)",
+      "pena": "Presó 6 mesos - 1 any",
+      "accions_ordenades": [
+        "1. DETENCIÓ IMMEDIATA agressor (sense excepcions)",
+        "2. Comprovar resolució vigent (Sala/JVM emissor)",
+        "3. PROTEGIR víctima",
+        "4. Lectura drets",
+        "5. Atestat penal urgent",
+        "6. Comunicació al JVM emissor de l'ordre",
+        "7. REVISAR VPR (el trencament eleva el risc)",
+        "8. Posada a disposició Jutjat Guàrdia (excepcionalment, si urgent) o JVM"
+      ],
+      "info_VPR": "El trencament és INDICADOR fort de risc — sempre cal revaluar VPR cap amunt"
+    }
+  },
+  "notes_finals": [
+    "VPR (Valoració Policial del Risc) OBLIGATÒRIA en TOTS els casos VG. Formulari oficial VioGén.",
+    "Nivells VPR: No apreciat / Baix / Mig / Alt / Extrem. Alt/Extrem: protecció intensiva.",
+    "MENORS presents = víctimes indirectes (Llei VG 2004 modificada). Comunicació DGAIA SEMPRE.",
+    "ORDRE DE PROTECCIÓ (Art. 544 ter LECrim): pot sol·licitar-se a comissaria, JVM, Fiscalia. Resolució en 72h.",
+    "RECURSOS víctimes: 016 (24h gratuït no deixa rastre factura), SIAD municipals, SARA, ATENPRO, cases d'acollida, RAI (Renda Activa Inserció).",
+    "ESTATUT VÍCTIMA (Llei 4/2015): drets a informació, traducció, assistència, no comparèixer amb agressor, etc.",
+    "JUTJAT VIOLÈNCIA SOBRE DONA (JVM): competència exclusiva. NO al Jutjat Instrucció ordinari.",
+    "VG sense convivència: també és VG (parella afectiva sense convivència, ex-parella).",
+    "Si víctima vol RETIRAR DENÚNCIA: la VG és perseguible d'OFICI, no es pot arxivar només per voluntat víctima.",
+    "Si víctima manifesta no voler ordre protecció: respectar, però documentar i fer seguiment.",
+    "ESTRANGERIA: víctimes irregulars NO es poden expulsar durant procediment VG (Llei 4/2000 modificada)."
+  ]
+}

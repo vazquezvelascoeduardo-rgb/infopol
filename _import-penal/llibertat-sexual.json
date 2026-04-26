@@ -1,1 +1,278 @@
-{}
+{
+  "id": "llibertat-sexual",
+  "titol": "Llibertat sexual / agressions sexuals",
+  "categoria": "persones",
+  "icono": "⚠️",
+  "base_legal": [
+    "LO 10/2022 garantia integral llibertat sexual ('només sí és sí')",
+    "LO 8/2021 protecció integral infants i adolescents davant violència",
+    "Art. 178 CP (agressió sexual — paraigua únic)",
+    "Art. 179 CP (violació)",
+    "Art. 180 CP (agreujants)",
+    "Art. 181 CP (agressió sexual a menor 16 anys)",
+    "Art. 183 CP (abús menors / contacte digital)",
+    "Art. 187-189 CP (prostitució i explotació sexual)",
+    "Art. 197.7 CP (sexting / difusió íntima)"
+  ],
+
+  "canvi_clau_LO_10_2022": "Desapareix la distinció ABÚS / AGRESSIÓ. Tot és AGRESSIÓ SEXUAL (Art. 178). El consentiment ha de ser EXPRÉS, lliure, no viciat. Silenci o passivitat NO és consentiment. Inversió de la càrrega: el sospitós ha d'acreditar el consentiment exprés.",
+
+  "consentiment_definicio": "Manifestació LLIURE de la voluntat (verbal, expressa, gestos clars). NO consentiment: silenci, passivitat, intimidació, abús d'autoritat, intoxicació, son, menor 16 anys.",
+
+  "competencia": "Jutjat d'Instrucció de Guàrdia (excepte si víctima en context VG: JVM)",
+
+  "inici": "tipus_acte",
+  "nodes": {
+
+    "tipus_acte": {
+      "titol": "Tipus d'acte denunciat",
+      "info": "Tot s'analitza pel paràmetre del CONSENTIMENT exprés (LO 10/2022)",
+      "opcions": [
+        { "etiqueta": "Penetració vaginal/anal/bucal o introducció objectes (VIOLACIÓ)",  "va_a": "victima_edat_violacio" },
+        { "etiqueta": "Atac sexual sense penetració (tocaments, manipulacions)",         "va_a": "victima_edat_agressio" },
+        { "etiqueta": "Acte sexual realitzat amb intoxicació, drogues submissió química", "va_a": "fi_178_180_5" },
+        { "etiqueta": "Contacte sexual amb MENOR de 16 anys (qualsevol acte)",            "va_a": "fi_181_menor_16" },
+        { "etiqueta": "Online: contactar MENOR per propòsit sexual (grooming)",            "va_a": "fi_183_grooming" },
+        { "etiqueta": "DIFUSIÓ d'imatges íntimes sense consentiment",                     "va_a": "fi_197_7_sexting" },
+        { "etiqueta": "Prostitució amb menor o forçada / explotació sexual",              "va_a": "fi_187_explotacio" },
+        { "etiqueta": "Exhibicionisme / provocació sexual a menors",                      "va_a": "fi_185_exhibicionisme" }
+      ]
+    },
+
+    "victima_edat_violacio": {
+      "titol": "Edat víctima i circumstàncies (violació)",
+      "opcions": [
+        { "etiqueta": "Adult — agressió bàsica (sense agreujants)",                       "va_a": "fi_179_basica" },
+        { "etiqueta": "Adult — amb agreujants (180 CP)",                                  "va_a": "fi_179_agreujada" },
+        { "etiqueta": "Menor 16 anys",                                                    "va_a": "fi_181_violacio_menor" },
+        { "etiqueta": "Menor 12 anys",                                                    "va_a": "fi_181_violacio_menor_12" }
+      ]
+    },
+
+    "victima_edat_agressio": {
+      "titol": "Agressió sexual sense penetració",
+      "opcions": [
+        { "etiqueta": "Adult — bàsica",                                                   "va_a": "fi_178_basica" },
+        { "etiqueta": "Adult — amb agreujants",                                            "va_a": "fi_178_agreujada" },
+        { "etiqueta": "Menor 16 anys",                                                    "va_a": "fi_181_menor_16" }
+      ]
+    },
+
+    "fi_178_basica": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Agressió sexual bàsica (Art. 178 CP)",
+      "concepte": "Realitzar actes que atemptin contra la llibertat sexual sense consentiment de l'altra persona",
+      "pena": "Presó 1-4 anys",
+      "accions_ordenades": [
+        "1️⃣ ATENCIÓ MÀXIMA víctima — espai privat",
+        "2️⃣ Trasllat a centre hospitalari de referència (no qualsevol)",
+        "3️⃣ Si possible, agent del MATEIX SEXE de la víctima",
+        "4️⃣ NO obligar a parlar — escolta activa, sense pressió",
+        "5️⃣ Coordinar amb GAV Mossos / unitat especialitzada",
+        "6️⃣ PRESERVAR EVIDÈNCIES (no rentar-se, no canviar roba)",
+        "7️⃣ Recollida de mostres biològiques (centre sanitari)",
+        "8️⃣ Cadena de custòdia rigorosa",
+        "9️⃣ DETENCIÓ autor si identificat",
+        "🔟 ATESTAT amb prova preconstituïda si possible",
+        "1️⃣1️⃣ Informar drets víctima (Estatut + LO 10/2022)",
+        "1️⃣2️⃣ Posada a disposició Jutjat Guàrdia"
+      ],
+      "evidencies_clau": [
+        "Roba que portava (bossa de paper, no plàstic)",
+        "Mostres biològiques (centre sanitari)",
+        "Lesions fotografiades",
+        "Missatges previs/posteriors entre víctima i autor",
+        "Càmeres del lloc",
+        "Testimonis"
+      ],
+      "drets_victima_obligatoris": [
+        "Dret a no comparèixer amb autor",
+        "Dret a representació jurídica gratuïta",
+        "Dret a recursos especialitzats (CIMASCAM, SARA)",
+        "Dret a no repetir declaració (prova preconstituïda)",
+        "Dret a privacitat absoluta"
+      ]
+    },
+
+    "fi_178_agreujada": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Agressió sexual agreujada (Art. 178.3 i 180 CP)",
+      "pena_178_3": "Presó 4-6 anys (si especial vulnerabilitat o ús violència/intimidació)",
+      "agreujants_180": [
+        "Caràcter especialment degradant o vexatori",
+        "Per dues o més persones (en grup)",
+        "Especial vulnerabilitat víctima",
+        "Sotmetiment per parentiu, dependència, autoritat",
+        "Ús d'armes o instruments perillosos",
+        "Submissió química (drogues facilitadores)"
+      ],
+      "pena_180": "Presó 7-15 anys (si concorren agreujants en violació)",
+      "accions": "Mateixes que 178 bàsica + UFAM + DIC + GAV Mossos"
+    },
+
+    "fi_178_180_5": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Submissió química (Art. 180.5 CP)",
+      "info": "Acte sexual amb persona privada de sentit (alcohol, drogues, son), o anul·lant la seva voluntat amb fàrmacs/drogues/substàncies",
+      "pena": "Aplicar agreujant Art. 180.5 sobre la pena base — meitat superior",
+      "accions_clau": [
+        "Trasllat URGENT centre hospitalari amb capacitat anàlisi tòxica",
+        "Mostres SANG i ORINA en les primeres hores",
+        "Investigació consum involuntari (begudes amb GHB, escopolamina, etc.)",
+        "Càmeres lloc del consum",
+        "Informe toxicològic urgent"
+      ]
+    },
+
+    "fi_179_basica": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Violació (Art. 179 CP)",
+      "concepte": "Agressió sexual amb penetració vaginal, anal o bucal, o introducció de membres corporals/objectes",
+      "pena": "Presó 4-12 anys",
+      "accions": [
+        "Mateixes que 178",
+        "Hospital obligatori per recollida mostres + protocols",
+        "GAV Mossos / UFAM",
+        "Píndola anticonceptiva oferida si pertinent",
+        "Informe forense"
+      ]
+    },
+
+    "fi_179_agreujada": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE MOLT GREU — Violació agreujada (Art. 180 CP)",
+      "pena": "Presó 7-15 anys (amb agreujants 180)",
+      "agreujants": "Veure 178 agreujada",
+      "info": "Pena pot arribar a 15 anys si concorren múltiples agreujants"
+    },
+
+    "fi_181_menor_16": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE MOLT GREU — Acte sexual amb menor 16 anys (Art. 181 CP)",
+      "info_clau": "QUALSEVOL acte sexual amb menor de 16 anys és delicte (sense importar consentiment). Excepció ÚNICA: 'consentiment lliure de menor proper a 16 anys per persona pròxima en edat i grau de maduresa' (181.2 CP).",
+      "pena_basica": "Presó 2-6 anys (sense penetració)",
+      "pena_amb_penetracio": "Presó 6-12 anys (amb penetració)",
+      "pena_agreujada": "Pena meitat superior si víctima < 4 anys o concorren agreujants 180",
+      "accions_ordenades": [
+        "1️⃣ ATENCIÓ MÀXIMA al menor",
+        "2️⃣ NO repetir interrogatoris — UFAM Mossos especialista",
+        "3️⃣ PROVA PRECONSTITUÏDA (declaració davant jutge amb totes garanties — una sola vegada)",
+        "4️⃣ Trasllat hospital de referència (Sant Joan de Déu o equivalent)",
+        "5️⃣ Comunicació immediata DGAIA + Fiscalia Menors",
+        "6️⃣ Detenció autor",
+        "7️⃣ Preservació TOTAL evidències",
+        "8️⃣ Recollida mostres + lesions + roba",
+        "9️⃣ Informe pediatra forense",
+        "🔟 Atestat al Jutjat Guàrdia"
+      ]
+    },
+
+    "fi_181_violacio_menor": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE MOLT GREU — Violació menor 16 anys",
+      "pena": "Presó 6-12 anys",
+      "accions": "Veure 181 menor 16 — UFAM, DGAIA, prova preconstituïda"
+    },
+
+    "fi_181_violacio_menor_12": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE EXTREMADAMENT GREU — Violació menor 12 anys",
+      "pena": "Presó pot arribar a 12-15 anys (meitat superior 181)",
+      "info": "Aplicar SEMPRE meitat superior. Investigació exhaustiva possible context familiar / autoritat.",
+      "accions": "Mateixes 181 + valorar context familiar (incest possible)"
+    },
+
+    "fi_183_grooming": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Grooming online (Art. 183 CP)",
+      "concepte": "Contactar a través TIC amb menor de 16 anys per propòsit sexual",
+      "pena": "Presó 1-3 anys + multa 12-24 mesos",
+      "pena_agreujada": "Si embaucament + entrevista física: presó meitat superior",
+      "accions_ordenades": [
+        "1. Preservar EVIDÈNCIES DIGITALS — pantallades amb metadades, NO modificar dispositiu",
+        "2. UFAM Mossos especialista",
+        "3. Coordinació amb DGTC (delictes telemàtics)",
+        "4. NO esborrar res del dispositiu",
+        "5. Cadena custòdia digital",
+        "6. Si possible, identificació autor (IP, perfil)",
+        "7. Comunicació DGAIA",
+        "8. Atestat amb prova digital"
+      ]
+    },
+
+    "fi_197_7_sexting": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Difusió imatges íntimes (Art. 197.7 CP)",
+      "concepte": "Difondre, revelar o cedir imatges/àudio obtinguts amb consentiment íntim però difoses sense autorització",
+      "pena": "Presó 3 mesos - 1 any O multa 6-12 mesos",
+      "pena_agreujada": "Si víctima parella/ex-parella: pena meitat superior; si menor: pena agreujada",
+      "accions": [
+        "Preservar evidències digitals (pantallades amb metadades)",
+        "Identificar plataformes",
+        "Sol·licitar BORRAT URGENT a la plataforma",
+        "Coordinar amb DGTC",
+        "Atestat amb prova digital",
+        "Si menor: DGAIA + Fiscalia"
+      ]
+    },
+
+    "fi_187_explotacio": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE GREU — Prostitució i explotació sexual (Art. 187-188 CP)",
+      "delictes_aplicables": [
+        "Art. 187 CP — Determinar a prostitució amb violència/intimidació/abús",
+        "Art. 187.1 CP — Lucrar-se de la prostitució aliena",
+        "Art. 188 CP — Tracta éssers humans per explotació sexual",
+        "Art. 189 CP — Pornografia infantil"
+      ],
+      "pena_187": "Presó 2-5 anys + multa",
+      "pena_188_agreujada": "Presó 5-8 anys (víctima vulnerable)",
+      "pena_189": "Presó 1-5 anys (pornografia infantil bàsica)",
+      "accions": [
+        "Coordinació Mossos UCRAI / DIC",
+        "Protecció víctima (casa acollida)",
+        "Documentació exhaustiva",
+        "Possible tracta: Article 177 bis CP",
+        "Si menor: prioritat absoluta DGAIA"
+      ]
+    },
+
+    "fi_185_exhibicionisme": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — Exhibicionisme / provocació sexual (Art. 185-186 CP)",
+      "info": "Art. 185 CP — Davant menors o discapacitats. Art. 186 — Vendre, difondre o exhibir material pornogràfic a menors",
+      "pena_185": "Presó 6 mesos - 1 any O multa 12-24 mesos",
+      "accions": [
+        "Detenció autor",
+        "Identificar víctimes (poden ser múltiples si lloc públic)",
+        "Comunicació DGAIA",
+        "Atestat penal"
+      ]
+    }
+  },
+  "notes_finals": [
+    "REVOLUCIÓ LO 10/2022: TOT és agressió sexual. Desapareix abús. Consentiment EXPRÉS.",
+    "MENORS DE 16 ANYS: qualsevol acte sexual és delicte (excepte excepció 181.2 CP de proximitat edat).",
+    "PROVA PRECONSTITUÏDA: declaració menor davant Jutge UNA sola vegada amb totes les garanties. NO repetir interrogatoris.",
+    "UFAM (Unitat Familiar i Atenció Menors) Mossos d'Esquadra: especialistes. Coordinar SEMPRE.",
+    "GAV (Grup Atenció Víctima) Mossos: assistència especialitzada víctimes adultes.",
+    "HOSPITALS DE REFERÈNCIA: Clínic, Vall d'Hebron, Sant Joan de Déu (menors). Tenen protocols i unitats especialitzades.",
+    "RECURSOS: 016 (totes víctimes violència), CIMASCAM, SARA, FUNDACIÓ ANAR (menors).",
+    "DRETS VÍCTIMA: no comparèixer amb agressor, declaració per videoconferència, expulsar premsa, anonimitzar identitat.",
+    "MOSTRES: roba (paper, no plàstic), mostres biològiques (hospital), no rentar-se la víctima.",
+    "DELICTES TELEMÀTICS: coordinació amb DGTC Mossos. No manipular dispositius — preservació digital.",
+    "DENÚNCIA POSTERIOR: víctimes poden denunciar tot i passar molt temps. NO arxivar pel temps."
+  ]
+}

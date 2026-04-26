@@ -1,1 +1,188 @@
-{}
+{
+  "id": "escorcoll",
+  "titol": "Escorcoll / registre corporal",
+  "categoria": "operatiu",
+  "icono": "🔍",
+  "base_legal": [
+    "Art. 18.2 LOPSC (intervenció temporal d'objectes)",
+    "Art. 20 LO 4/2015 LOPSC (registres corporals externs)",
+    "Art. 18 CE (intimitat)",
+    "Art. 282 LECrim (escorcoll incident a detenció)"
+  ],
+  "tipus_escorcoll": {
+    "superficial": "Palpació externa, butxaques, bossa, cartera. Any tipus de registre que no implica despullament. Cobert per Art. 20 LOPSC amb causa objectiva.",
+    "amb_despullament": "Implica retirada parcial o total de la roba. Requisits estrictes (Art. 20.2 LOPSC): lloc reservat, mateix sexe, indicis sòlids, proporcionalitat, motivació específica.",
+    "intim_cavitats": "Exploració de cavitats corporals. NOMÉS amb autorització judicial + personal sanitari + centre sanitari."
+  },
+  "inici": "context",
+  "nodes": {
+
+    "context": {
+      "titol": "Context de l'escorcoll",
+      "text": "En quin context vols fer l'escorcoll?",
+      "info": "L'escorcoll incident a detenció no requereix Art. 20 — és inherent a la detenció (sistemàtic per seguretat). Fora de detenció, sí cal causa objectiva.",
+      "opcions": [
+        { "etiqueta": "Detenció consumada (escorcoll incident)",                "va_a": "fi_registre_detencio" },
+        { "etiqueta": "Indicis racionals d'infracció/delicte",                  "va_a": "tipus_intrusio" },
+        { "etiqueta": "Seguretat agents (control armes)",                       "va_a": "tipus_intrusio" },
+        { "etiqueta": "Sospita en escorcoll d'un local/vehicle",                "va_a": "vehicle_local" },
+        { "etiqueta": "Sense indicis objectius",                                "va_a": "fi_no_procedeix" }
+      ]
+    },
+
+    "tipus_intrusio": {
+      "titol": "Nivell d'intrusió necessari",
+      "text": "Quin nivell?",
+      "opcions": [
+        { "etiqueta": "Superficial (butxaques, bossa, palpació)",               "va_a": "fi_superficial" },
+        { "etiqueta": "Despullament parcial/total",                              "va_a": "verificar_requisits_despullament" },
+        { "etiqueta": "Cavitats corporals (rectal/vaginal/oral)",                "va_a": "fi_cavitats" }
+      ]
+    },
+
+    "verificar_requisits_despullament": {
+      "titol": "Requisits del registre amb despullament (Art. 20.2 LOPSC)",
+      "text": "Es donen TOTS aquests requisits acumulatius?",
+      "info": "Sense els 5 requisits, l'escorcoll és nul i les proves obtingudes són il·lícites (fruit arbre enverinat).",
+      "checklist_requisits": [
+        "✓ Lloc RESERVAT (no via pública / a la vista)",
+        "✓ Agents del MATEIX SEXE que el subjecte",
+        "✓ INDICIS SÒLIDS, no meres sospites",
+        "✓ PROPORCIONALITAT amb la gravetat del fet investigat",
+        "✓ MOTIVACIÓ específica documentada"
+      ],
+      "opcions": [
+        { "etiqueta": "Sí, els 5 requisits es compleixen",                      "va_a": "fi_despullament_ok" },
+        { "etiqueta": "Falta algun requisit",                                   "va_a": "fi_no_procedeix" }
+      ]
+    },
+
+    "vehicle_local": {
+      "titol": "Escorcoll de vehicle o local",
+      "text": "Tipus d'espai?",
+      "opcions": [
+        { "etiqueta": "Vehicle (no domicili)",                                  "va_a": "fi_vehicle" },
+        { "etiqueta": "Local obert al públic",                                  "va_a": "fi_local_obert" },
+        { "etiqueta": "Domicili / part privada",                                "va_a": "fi_remetre_domicili" }
+      ]
+    },
+
+    "fi_superficial": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "✅ Registre superficial — Art. 20 LOPSC",
+      "accions_ordenades": [
+        "1. INFORMAR del motiu",
+        "2. Realitzar al lloc, ràpid i proporcionat",
+        "3. Preferentment AGENT DEL MATEIX SEXE si hi ha contacte corporal",
+        "4. Si troba alguna cosa rellevant: ACTA D'INTERVENCIÓ + testimonis",
+        "5. Si no troba res: deixar continuar (anotació al servei)"
+      ],
+      "que_es_pot_revisar": [
+        "Butxaques",
+        "Cartera, bossa de mà, motxilla",
+        "Cinturó, peces externes (jaqueta, abric)",
+        "Palpació externa de la roba"
+      ],
+      "documentacio_si_intervencio": "Acta D-10.b (intervenció temporal) o A-20 si drogues/diners — segons cas"
+    },
+
+    "fi_despullament_ok": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "✅ Registre amb despullament — requisits OK",
+      "accions_ordenades": [
+        "1. Trasllat a lloc RESERVAT (vehicle policial, local privat, comissaria)",
+        "2. Agents MATEIX SEXE",
+        "3. Procés ràpid i respectuós",
+        "4. TESTIMONI present si possible",
+        "5. Diligència MOTIVADA detallant indicis i justificació",
+        "6. Acta intervenció si troba alguna cosa",
+        "7. Si no troba res: diligència igualment per constància"
+      ],
+      "documentacio": "Diligència motivada de l'escorcoll + acta intervenció efectes (D-10.b o A-20 segons cas)"
+    },
+
+    "fi_cavitats": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "⛔ NO — Cavitats requereixen autorització judicial",
+      "text": "L'exploració de cavitats corporals (rectal, vaginal, oral profund) és intrusió greu en la intimitat. NO es pot fer sense autorització judicial.",
+      "requisits_per_practicar": [
+        "Autorització JUDICIAL EXPRESSA",
+        "Realitzat per PERSONAL MÈDIC",
+        "En CENTRE SANITARI",
+        "Indicis SÒLIDS (no meres sospites)",
+        "Proporcionalitat amb la gravetat"
+      ],
+      "accio_immediata": "Sol·licitar autorització Jutjat de Guàrdia + trasllat a centre sanitari acompanyat de l'agent. Si urgència extrema: contactar amb fiscalia/jutjat per resolució urgent."
+    },
+
+    "fi_registre_detencio": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "✅ Escorcoll incident a detenció",
+      "text": "Sistemàtic per a tota detenció — finalitat: seguretat (armes, instruments) + intervenció efectes relacionats amb el delicte.",
+      "accions_ordenades": [
+        "1. AL MOMENT de la detenció (no esperar a comissaria)",
+        "2. Mateix sexe preferentment",
+        "3. Inventari de TOT el que es retira (clau, mòbil, cartera, diners, drogues, armes…)",
+        "4. ACTA D'INTERVENCIÓ d'efectes",
+        "5. Cadena de custòdia per als objectes relacionats amb el delicte",
+        "6. Custòdia separada dels efectes personals (es retornen al final)",
+        "7. Inventari signat pel detingut (si s'hi nega: fer constar 'es nega a signar')"
+      ],
+      "documentacio": "Acta intervenció d'efectes + cadena de custòdia + inventari amb signatura"
+    },
+
+    "fi_vehicle": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "✅ Escorcoll de vehicle",
+      "text": "El vehicle NO té el mateix nivell de protecció constitucional que el domicili (TC). Es pot escorcollar amb causa objectiva i sense mandat judicial.",
+      "accions_ordenades": [
+        "1. Comunicar al titular/conductor el motiu",
+        "2. Documentar la causa (per què)",
+        "3. Registre per parts (interior, maleter, guantera, sots-seients)",
+        "4. Acta d'intervenció si troba alguna cosa",
+        "5. Ull als 'amagatalls': revestiments, sostre, paragolps, dipòsits"
+      ],
+      "documentacio": "Diligència d'escorcoll vehicle + acta intervenció (D-10.b, A-20 o atestat segons cas)"
+    },
+
+    "fi_local_obert": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "✅ Local obert al públic",
+      "text": "Bars, restaurants, comerços: obert al públic ≠ domicili. Però si hi ha part privada (rebost, magatzem, oficina, traster), aquesta sí que té protecció.",
+      "regla": "PART OBERTA AL PÚBLIC: lliure inspecció policial dins context. PART PRIVADA: cal consentiment del titular o mandat judicial.",
+      "accions": [
+        "Identificar titular",
+        "Documentar quina part s'inspecciona",
+        "Si entrar en part privada: consentiment exprés (millor escrit) o mandat"
+      ]
+    },
+
+    "fi_remetre_domicili": {
+      "final": true,
+      "tipus": "procediment",
+      "titol": "🔀 Anar a checklist 'Entrada domicili'",
+      "accio": "L'entrada a part privada / domicili requereix anar al checklist específic d'Entrada a domicili."
+    },
+
+    "fi_no_procedeix": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "⚠️ NO procedeix l'escorcoll",
+      "accio": "Sense indicis objectius o sense complir requisits, l'escorcoll seria il·lícit i tota prova obtinguda nul·la."
+    }
+  },
+  "notes_finals": [
+    "INTERVENCIÓ D'OBJECTES (Art. 18.2 LOPSC): es poden ocupar temporalment objectes que puguin servir d'agressió (bastó, cúter, tornavís…) per prevenir delictes. Acta D-10.b.",
+    "REGLA DEL TS: l'escorcoll superficial sense detenció requereix causa objectiva, no consentiment.",
+    "Si el subjecte CONSENT explícitament l'escorcoll: documentar-ho. El consentiment lliure i informat valida l'actuació.",
+    "Si menor: presència preferent d'un tutor/representant si possible.",
+    "Si dona embarassada/lactant: extremar prudència, evitar despullament si no és imprescindible.",
+    "Si discapacitat sensorial/cognitiu: assistència per garantir comprensió."
+  ]
+}
