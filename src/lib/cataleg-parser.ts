@@ -72,7 +72,12 @@ function normalize(s: string): string {
   return s
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '');
+    .replace(/[̀-ͯ]/g, '')
+    // Apòstrofs i altres signes que parteixen paraules: els convertim
+    // en espai per a què "d'assegurança" coincideixi amb "assegurança".
+    .replace(/['''`·]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function detectSeverity(tr: Element): Severity | undefined {
@@ -165,16 +170,126 @@ export function getCatalegRows(): CatalegRow[] {
 }
 
 // Cerca al catàleg. Match per concepte, article, llei o multa.
-// La consulta es normalitza (sense accents, minúscules).
+// La consulta es normalitza (sense accents, minúscules, sense apòstrofs)
+// i s'expandeix amb sinònims abans de filtrar.
 export function searchCataleg(query: string): CatalegRow[] {
   const q = query.trim();
   if (q.length < 2) return [];
-  const qn = normalize(q);
+  const tokens = normalize(q).split(/\s+/).filter((t) => t.length >= 2);
+  if (tokens.length === 0) return [];
+
+  // Per cada token, l'expandim al seu grup de sinònims (si en té).
+  const expanded = tokens.map(expandToken);
+
   const all = getCatalegRows();
-  // Splittem per espais per fer cerca multi-paraula (totes han de coincidir).
-  const tokens = qn.split(/\s+/).filter(Boolean);
-  const out = all.filter((r) => tokens.every((t) => r.searchText.includes(t)));
-  return out;
+  return all.filter((r) =>
+    // Cada grup ha de tenir AL MENYS un sinònim al text de la fila.
+    expanded.every((group) => group.some((syn) => r.searchText.includes(syn))),
+  );
+}
+
+// ── Sinònims i variacions habituals ──────────────────────────────
+//
+// Mapeig per a què el buscador entengui paraules quotidianes encara
+// que el catàleg les tingui escrites d'una altra manera. Cada grup és
+// un conjunt de paraules considerades equivalents per a la cerca.
+//
+// Exemple: si l'usuari escriu "seguro", buscarem qualsevol fila que
+// contingui "assegurança", "asseguranca", "soa", "responsabilitat
+// civil", etc.
+const SYNONYM_GROUPS: string[][] = [
+  // Assegurança
+  ['assegurança', 'asseguranca', 'seguro', 'soa', 'responsabilitat civil',
+   'responsabilidad civil', 'rc obligatori', 'rc obligatoria'],
+  // Mòbil / Telèfon
+  ['mòbil', 'mobil', 'movil', 'telèfon', 'telefon', 'telefono',
+   'smartphone', 'auricular', 'mans lliures', 'manos libres',
+   'pantalla', 'dispositiu manual'],
+  // Alcohol
+  ['alcohol', 'alcoholèmia', 'alcoholemia', 'alcoholémia',
+   'etilòmetre', 'etilometre', 'etilometria', 'beguda',
+   'bebida alcoholica', 'bevent', 'borracho', 'borratxo'],
+  // Drogues
+  ['drogues', 'drogas', 'droga', 'estupefaents', 'estupefacientes',
+   'narcòtics', 'narcoticos', 'cocaïna', 'cocaina', 'marihuana',
+   'haixix', 'hachis', 'mdma', 'amfetamines', 'amfetaminas',
+   'substància', 'substancia', 'tòxic', 'toxic'],
+  // Cinturó
+  ['cinturó', 'cinturon', 'cinturó de seguretat',
+   'cinturon de seguridad', 'retenció', 'retencion'],
+  // Casc
+  ['casc', 'casco', 'casc moto', 'casco moto'],
+  // Velocitat
+  ['velocitat', 'velocidad', 'velocitat excessiva',
+   'velocidad excesiva', 'excés velocitat', 'exceso velocidad',
+   'km/h', 'kmh', 'radar', 'cinemòmetre', 'cinemometre',
+   'rapid', 'rapido', 'molt ràpid'],
+  // ITV
+  ['itv', 'inspecció tècnica', 'inspeccion tecnica',
+   'inspecció vehicle', 'fitxa tècnica', 'ficha tecnica'],
+  // Permís de conduir
+  ['permís', 'permiso', 'permis', 'llicència', 'licencia', 'carnet',
+   'carné', 'carne', 'permis conduir', 'permiso conducir',
+   'permís de conduir', 'permis a', 'permis b', 'permis am'],
+  // VMP / Patinet
+  ['vmp', 'patinet', 'patinete', 'patinet electric',
+   'patinete electrico', 'scooter', 'segway',
+   'vehicle de mobilitat personal'],
+  // Bicicleta
+  ['bicicleta', 'bici', 'ciclisme', 'ciclista'],
+  // Ciclomotor / motocicleta
+  ['ciclomotor', 'cyclomotor', 'moto', 'motocicleta', 'motorista'],
+  // Documentació
+  ['documentació', 'documentacion', 'documents', 'documentos',
+   'dni', 'nie', 'passaport', 'pasaporte', 'identificació',
+   'identificacion'],
+  // Detenció / citació
+  ['detenció', 'detencion', 'detingut', 'detenido',
+   'citació', 'citacion', 'citar', 'judici ràpid', 'juicio rapido',
+   'procediment ràpid'],
+  // Multa / sanció
+  ['multa', 'sanció', 'sancion', 'denúncia', 'denuncia',
+   'butlleta', 'boletin', 'boleta'],
+  // Negativa a proves
+  ['negativa', 'negar-se', 'negarse', 'no sotmetre',
+   'no someter', 'rebutjar', 'rechazar', 'no bufar', 'no soplar'],
+  // Llums / tintats
+  ['llums', 'luces', 'llum', 'luz', 'fars', 'faros',
+   'tintats', 'tintados', 'vidres', 'cristalls', 'cristales'],
+  // Vehicle abandonat
+  ['abandonat', 'abandonado', 'abandó', 'abandono', 'immobilitzat',
+   'inmovilizado', 'grua', 'depòsit', 'deposito'],
+  // Accident
+  ['accident', 'accidente', 'col·lisió', 'colision', 'topada',
+   'choque', 'sinistre', 'siniestro', 'fuga', 'omissió socors',
+   'omision socorro'],
+  // Documents falsos
+  ['fals', 'falso', 'falsa', 'falsificació', 'falsificacion',
+   'documentació falsa', 'documentacion falsa', 'doctored',
+   'manipulat', 'manipulado'],
+  // Temerària / negligent
+  ['temerari', 'temerari', 'temerario', 'temeraria',
+   'negligent', 'negligente', 'imprudent', 'imprudente',
+   'imprudència', 'imprudencia'],
+];
+
+// Expandeix un token a tots els seus sinònims (com a substrings
+// normalitzats). Si el token no pertany a cap grup, retorna només
+// el token mateix.
+function expandToken(token: string): string[] {
+  const tn = normalize(token);
+  const matched = new Set<string>();
+  for (const group of SYNONYM_GROUPS) {
+    const groupHasMatch = group.some((s) => {
+      const sn = normalize(s);
+      return sn === tn || sn.includes(tn) || tn.includes(sn);
+    });
+    if (groupHasMatch) {
+      for (const s of group) matched.add(normalize(s));
+    }
+  }
+  matched.add(tn);
+  return [...matched];
 }
 
 export function getLawColor(lawId: string): string {

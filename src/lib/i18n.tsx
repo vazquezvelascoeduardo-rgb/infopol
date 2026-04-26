@@ -231,6 +231,7 @@ const DICT: Record<Locale, Dict> = {
     // Not found
     'notFound.text': 'Página no encontrada.',
     'back.home': 'Volver al inicio',
+    'back.button': 'Atrás',
 
     // Modules
     'module.ce78.title': 'CE78',
@@ -466,6 +467,7 @@ const DICT: Record<Locale, Dict> = {
     // Not found
     'notFound.text': 'Pàgina no trobada.',
     'back.home': "Torna a l'inici",
+    'back.button': 'Enrere',
 
     // Modules
     'module.ce78.title': 'CE78',

@@ -5,6 +5,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { applyTheme, getInitialTheme, type Theme } from '../lib/theme';
 import { useT } from '../lib/i18n';
 import PoliceCarIcon from './PoliceCarIcon';
+import BackButton from './BackButton';
 
 export default function Layout({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => getInitialTheme());
@@ -123,6 +124,8 @@ export default function Layout({ children }: { children: ReactNode }) {
           </button>
         </div>
       </header>
+
+      <BackButton />
 
       <main className="flex-1">{children}</main>
 
