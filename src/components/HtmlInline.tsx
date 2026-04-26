@@ -167,18 +167,55 @@ const LIGHT_THEME_CSS = `
     color: #1e3a8a !important;
   }
 
-  /* Capçalera CP (Codi Penal) amb fons rgba(200,40,30,.2) → versió clara
-     amb to vermell suau perquè es mantingui la jerarquia visual. */
+  /* Capçalera CP (Codi Penal) — versió clara amb to vermell saturat per
+     mantenir la identitat del bloc penal. */
   .${SCOPE_CLASS}.ipol-light .cp-card-title,
   .${SCOPE_CLASS}.ipol-light .cp-header {
-    background: linear-gradient(135deg, #fee2e2 0%, #fef2f2 100%) !important;
+    background: linear-gradient(135deg, #fecaca 0%, #fef2f2 100%) !important;
     color: #7f1d1d !important;
     border-color: #fca5a5 !important;
+    border-bottom: 1px solid #fca5a5 !important;
   }
   .${SCOPE_CLASS}.ipol-light .cp-card-title *,
   .${SCOPE_CLASS}.ipol-light .cp-header * {
     color: #7f1d1d !important;
   }
+  /* Tota la cp-card amb un tint vermell molt suau perque els articles
+     penals es distingeixin visualment dels administratius. */
+  .${SCOPE_CLASS}.ipol-light .cp-card {
+    background: linear-gradient(180deg, #fef2f2 0%, #ffffff 60%) !important;
+    border-left: 4px solid #dc2626 !important;
+    box-shadow: 0 1px 2px rgba(220, 38, 38, 0.05) !important;
+  }
+  /* Separadors entre articles dins d'una cp-card (fila .cp-row) */
+  .${SCOPE_CLASS}.ipol-light .cp-row,
+  .${SCOPE_CLASS}.ipol-light .cp-divider {
+    border-bottom: 1px solid #fee2e2 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .cp-row:last-child {
+    border-bottom: none !important;
+  }
+  /* Notes especials dins del bloc CP (rgba(200,40,30,.06) o similar) */
+  .${SCOPE_CLASS}.ipol-light .cp-note {
+    background: #fef2f2 !important;
+    color: #7f1d1d !important;
+    border-color: #fca5a5 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .cp-note * { color: #7f1d1d !important; }
+  /* Detalls / desplegables del CP */
+  .${SCOPE_CLASS}.ipol-light .cp-desc,
+  .${SCOPE_CLASS}.ipol-light .cp-body {
+    color: #1e293b !important;
+  }
+  /* Recordatorios "💡 Tres supòsits diferenciats..." en gold */
+  .${SCOPE_CLASS}.ipol-light .recorda,
+  .${SCOPE_CLASS}.ipol-light .nota-reforma {
+    background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%) !important;
+    color: #713f12 !important;
+    border-left: 4px solid #d97706 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .recorda *,
+  .${SCOPE_CLASS}.ipol-light .nota-reforma * { color: #713f12 !important; }
 
   /* Subtítols de grup amb fons rgba(0,0,0,.2) — passar a slate clar. */
   .${SCOPE_CLASS}.ipol-light .sub-group-title {
@@ -446,31 +483,98 @@ const LIGHT_THEME_CSS = `
     color: #991b1b !important;
   }
 
-  /* Pena penal (no monetària) — neutral però distingible */
+  /* ── PENA PENAL — cada tipus el seu color (paleta semàntica intuïtiva) ──
+     Presó      → vermell (mes severa)
+     Multa      → ambre/dorada (econòmic)
+     Treballs   → verd (alternativa "menys dura")
+     Permís     → blau (relacionada amb el permís de conduir)
+     Genèrica   → lila neutral
+     Així d'un cop d'ull es veu el ventall de penes possibles. */
+
+  /* Default (.pena-chip / .pena-tag sense modificador específic) */
   .${SCOPE_CLASS}.ipol-light .pena-chip,
-  .${SCOPE_CLASS}.ipol-light .pena-tag,
-  .${SCOPE_CLASS}.ipol-light .pena-preso,
-  .${SCOPE_CLASS}.ipol-light .pena-treb,
-  .${SCOPE_CLASS}.ipol-light .pena-perm,
-  .${SCOPE_CLASS}.ipol-light .pena-alt {
+  .${SCOPE_CLASS}.ipol-light .pena-tag {
     background: #ede9fe !important;
     color: #5b21b6 !important;
     border-color: #c4b5fd !important;
   }
-  .${SCOPE_CLASS}.ipol-light .pena-preso *,
-  .${SCOPE_CLASS}.ipol-light .pena-treb *,
-  .${SCOPE_CLASS}.ipol-light .pena-perm * {
-    color: #5b21b6 !important;
-  }
 
-  /* Tipus-badge (codi-penal): subordinat al tipus específic. Per defecte
-     ambre (com a "no-greu" / informatiu) — quan a la classe hi ha .greu/.menys
-     s'aplica les regles d'amunt. */
+  /* Presó → vermell */
+  .${SCOPE_CLASS}.ipol-light .pena-preso,
+  .${SCOPE_CLASS}.ipol-light .pena-chip.pena-preso {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+    border-color: #fca5a5 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .pena-preso * { color: #991b1b !important; }
+
+  /* Multa → ambre/or */
+  .${SCOPE_CLASS}.ipol-light .pena-multa,
+  .${SCOPE_CLASS}.ipol-light .pena-chip.pena-multa {
+    background: #fef3c7 !important;
+    color: #92400e !important;
+    border-color: #fbbf24 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .pena-multa * { color: #92400e !important; }
+
+  /* Treballs (TBC) → verd */
+  .${SCOPE_CLASS}.ipol-light .pena-treb,
+  .${SCOPE_CLASS}.ipol-light .pena-chip.pena-treb {
+    background: #dcfce7 !important;
+    color: #166534 !important;
+    border-color: #86efac !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .pena-treb * { color: #166534 !important; }
+
+  /* Privació permís → blau */
+  .${SCOPE_CLASS}.ipol-light .pena-perm,
+  .${SCOPE_CLASS}.ipol-light .pena-chip.pena-perm {
+    background: #dbeafe !important;
+    color: #1e40af !important;
+    border-color: #93c5fd !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .pena-perm * { color: #1e40af !important; }
+
+  /* Pena alta gravetat (variant intensa) → vermell més fort */
+  .${SCOPE_CLASS}.ipol-light .pena-alt,
+  .${SCOPE_CLASS}.ipol-light .pena-chip.pena-alt {
+    background: #fecaca !important;
+    color: #7f1d1d !important;
+    border-color: #f87171 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .pena-alt * { color: #7f1d1d !important; }
+
+  /* Tipus-badge — variants per gravetat (codi-penal) */
   .${SCOPE_CLASS}.ipol-light .tipo-badge {
     background: #fef3c7 !important;
     color: #854d0e !important;
     border-color: #fbbf24 !important;
   }
+  .${SCOPE_CLASS}.ipol-light .tipo-badge.menys,
+  .${SCOPE_CLASS}.ipol-light .tipo-badge.tipo-menys {
+    background: #fef3c7 !important;
+    color: #854d0e !important;
+    border-color: #fbbf24 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .tipo-badge.greu,
+  .${SCOPE_CLASS}.ipol-light .tipo-badge.tipo-greu {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+    border-color: #fca5a5 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .tipo-badge.alt,
+  .${SCOPE_CLASS}.ipol-light .tipo-badge.tipo-alt {
+    background: #fecaca !important;
+    color: #7f1d1d !important;
+    border-color: #f87171 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .tipo-badge.lleu,
+  .${SCOPE_CLASS}.ipol-light .tipo-badge.tipo-lleu {
+    background: #dbeafe !important;
+    color: #1e40af !important;
+    border-color: #93c5fd !important;
+  }
+
   .${SCOPE_CLASS}.ipol-light .badge-clave,
   .${SCOPE_CLASS}.ipol-light .badge-local {
     background: #dbeafe !important;
@@ -478,12 +582,21 @@ const LIGHT_THEME_CSS = `
     border-color: #93c5fd !important;
   }
 
-  /* Article badge / referència — gold pill (manté la identitat) */
+  /* Article badge / referència — gold pill per defecte (manté identitat),
+     però vermell quan l'article forma part d'un capítol penal (cp-card)
+     per a coherència visual amb el bloc roig. */
   .${SCOPE_CLASS}.ipol-light .art-badge,
   .${SCOPE_CLASS}.ipol-light .art-ref {
     background: #fef3c7 !important;
     color: #92400e !important;
     border-color: #fbbf24 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .cp-card .art-ref,
+  .${SCOPE_CLASS}.ipol-light .cp-card-title .art-ref,
+  .${SCOPE_CLASS}.ipol-light .cp-row .art-ref {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+    border-color: #fca5a5 !important;
   }
 
   /* ── 4) Text de colors clars hardcodejats → variants foscos ── */
