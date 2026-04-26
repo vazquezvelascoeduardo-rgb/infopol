@@ -3,37 +3,14 @@
 //   2) Operativa  → procediments per situació (Trànsit, Seguretat ciutadana…).
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
-import PoliceCarIcon from '../components/PoliceCarIcon';
 
 export default function Home() {
   const { t } = useT();
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-6">
-      {/* Banda superior */}
-      <section className="rounded-2xl border p-5 sm:p-7 shadow-sm
-        border-slate-200 bg-white
-        dark:border-white/10 dark:bg-gradient-to-br dark:from-[#0f1d34] dark:to-[#0a1628] dark:shadow-none">
-        <div className="flex items-start gap-4">
-          <PoliceCarIcon className="h-16 w-auto shrink-0 drop-shadow-sm" />
-          <div className="min-w-0">
-            <div className="text-[11px] uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400/90">
-              {t('home.badge')}
-            </div>
-            <h1 className="mt-1 text-2xl sm:text-3xl font-black tracking-tight">
-              Info<span className="text-blue-800 dark:text-blue-400">Pol</span>
-              <span className="mx-2 text-slate-300 dark:text-slate-600">·</span>
-              <span>{t('home.title')}</span>
-            </h1>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-              {t('home.subtitle')}
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Targetes principals: Lleis · Operativa · Superbuscador */}
-      <ul className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* LLEIS */}
         <li>
           <Link
