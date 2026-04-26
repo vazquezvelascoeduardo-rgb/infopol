@@ -244,6 +244,23 @@ const DICT: Record<Locale, Dict> = {
     'sidebar.operativa': 'Operativa',
     'sidebar.operativa.home': 'Operativa (inicio)',
     'sidebar.references': 'Referencias rápidas',
+    'sidebar.recursos': 'Recursos rápidos',
+
+    // Recursos rápidos (página)
+    'recursos.title': 'Recursos rápidos',
+    'recursos.badge': 'Herramientas',
+    'recursos.subtitle':
+      'Acceso directo a información útil durante una intervención.',
+    'recursos.farmacia.badge': 'Salud · Viladecans',
+    'recursos.farmacia.title': 'Farmacia de guardia · Viladecans',
+    'recursos.farmacia.desc':
+      'Localiza la farmacia de guardia más cercana en Viladecans (FarmaGuia.net).',
+    'recursos.codi.badge': 'Comunicaciones · radio',
+    'recursos.codi.title': 'Código alfanumérico',
+    'recursos.codi.desc':
+      'Alfabeto fonético policial (español) con extensiones catalanas Ñ y Ç.',
+    'recursos.moreToCome':
+      'Más recursos próximamente. ¿Tienes ideas? Dímelas.',
 
     // Modules
     'module.ce78.title': 'CE78',
@@ -492,6 +509,23 @@ const DICT: Record<Locale, Dict> = {
     'sidebar.operativa': 'Operativa',
     'sidebar.operativa.home': 'Operativa (inici)',
     'sidebar.references': 'Referències ràpides',
+    'sidebar.recursos': 'Recursos ràpids',
+
+    // Recursos ràpids (pàgina)
+    'recursos.title': 'Recursos ràpids',
+    'recursos.badge': 'Eines',
+    'recursos.subtitle':
+      "Accés directe a informació útil durant una intervenció.",
+    'recursos.farmacia.badge': 'Salut · Viladecans',
+    'recursos.farmacia.title': 'Farmàcia de guàrdia · Viladecans',
+    'recursos.farmacia.desc':
+      "Localitza la farmàcia de guàrdia més propera a Viladecans (FarmaGuia.net).",
+    'recursos.codi.badge': 'Comunicacions · ràdio',
+    'recursos.codi.title': 'Codi alfanumèric',
+    'recursos.codi.desc':
+      "Alfabet fonètic policial (espanyol) amb extensions catalanes Ñ i Ç.",
+    'recursos.moreToCome':
+      'Més recursos pròximament. Tens idees? Digue-me-les.',
 
     // Modules
     'module.ce78.title': 'CE78',

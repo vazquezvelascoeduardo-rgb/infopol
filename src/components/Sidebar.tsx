@@ -106,6 +106,13 @@ export default function Sidebar({ open, onClose }: Props) {
             accent="purple"
           />
 
+          {/* Recursos rapids */}
+          <SimpleLink
+            to="/recursos"
+            icon="🧰"
+            label={t('sidebar.recursos')}
+          />
+
           {/* Lleis (col·lapsable) */}
           <details className="group rounded-lg border border-slate-200/70 dark:border-white/10 mt-2">
             <summary className="flex items-center gap-3 px-3 py-2.5 cursor-pointer
