@@ -233,6 +233,18 @@ const DICT: Record<Locale, Dict> = {
     'back.home': 'Volver al inicio',
     'back.button': 'Atrás',
 
+    // Sidebar (menú lateral)
+    'sidebar.title': 'Menú',
+    'sidebar.open': 'Abrir menú',
+    'sidebar.close': 'Cerrar menú',
+    'sidebar.home': 'Inicio',
+    'sidebar.superbuscador': 'Superbuscador tráfico',
+    'sidebar.leyes': 'Leyes',
+    'sidebar.leyes.all': 'Todas las leyes',
+    'sidebar.operativa': 'Operativa',
+    'sidebar.operativa.home': 'Operativa (inicio)',
+    'sidebar.references': 'Referencias rápidas',
+
     // Modules
     'module.ce78.title': 'CE78',
     'module.ce78.desc': 'Constitución Española de 1978.',
@@ -468,6 +480,18 @@ const DICT: Record<Locale, Dict> = {
     'notFound.text': 'Pàgina no trobada.',
     'back.home': "Torna a l'inici",
     'back.button': 'Enrere',
+
+    // Sidebar (menú lateral)
+    'sidebar.title': 'Menú',
+    'sidebar.open': 'Obre el menú',
+    'sidebar.close': 'Tanca el menú',
+    'sidebar.home': 'Inici',
+    'sidebar.superbuscador': 'Superbuscador trànsit',
+    'sidebar.leyes': 'Lleis',
+    'sidebar.leyes.all': 'Totes les lleis',
+    'sidebar.operativa': 'Operativa',
+    'sidebar.operativa.home': 'Operativa (inici)',
+    'sidebar.references': 'Referències ràpides',
 
     // Modules
     'module.ce78.title': 'CE78',

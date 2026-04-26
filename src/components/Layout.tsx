@@ -6,10 +6,12 @@ import { applyTheme, getInitialTheme, type Theme } from '../lib/theme';
 import { useT } from '../lib/i18n';
 import PoliceCarIcon from './PoliceCarIcon';
 import BackButton from './BackButton';
+import Sidebar from './Sidebar';
 
 export default function Layout({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => getInitialTheme());
   const [query, setQuery] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { t, locale, setLocale } = useT();
@@ -41,6 +43,23 @@ export default function Layout({ children }: { children: ReactNode }) {
     <div className="min-h-dvh flex flex-col bg-white text-slate-900 dark:bg-[#0a1628] dark:text-slate-100 transition-colors">
       <header className="sticky top-0 z-30 backdrop-blur bg-white/95 dark:bg-[#0a1628]/85 border-b border-slate-200 dark:border-white/10">
         <div className="mx-auto max-w-5xl px-4 py-3 flex items-center gap-2 sm:gap-3">
+          {/* Botó hamburguesa per obrir el menú lateral */}
+          <button
+            type="button"
+            onClick={() => setSidebarOpen(true)}
+            aria-label={t('sidebar.open')}
+            className="shrink-0 inline-flex h-10 w-10 items-center justify-center rounded-xl border transition
+              border-slate-200 bg-white hover:bg-slate-50 text-slate-700
+              dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10 dark:text-slate-200"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+
           <Link to="/" className="flex items-center gap-2.5 shrink-0" aria-label={t('nav.home')}>
             <PoliceCarIcon className="h-9 w-auto drop-shadow-sm" />
             <div className="hidden sm:flex flex-col leading-tight">
@@ -132,6 +151,9 @@ export default function Layout({ children }: { children: ReactNode }) {
       <footer className="border-t border-slate-200 dark:border-white/10 py-4 text-center text-xs text-slate-500 dark:text-slate-400">
         {t('footer')}
       </footer>
+
+      {/* Menú lateral desplegable */}
+      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
     </div>
   );
 }
