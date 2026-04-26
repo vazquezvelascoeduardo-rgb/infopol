@@ -15,6 +15,161 @@ type Props = { html: string; title: string };
 
 const SCOPE_CLASS = 'fitxa-html-scope';
 
+// CSS base aplicat SEMPRE (mode clar i fosc) — millora la llegibilitat
+// al mòbil i evita que el contingut se surti lateralment.
+//
+// Els HTMLs de les fitxes estan dissenyats per a desktop print/poster i
+// fan servir tipografies de 10-13px que al mòbil són difícils de
+// llegir. També tenen graelles de N columnes que poden desbordar la
+// viewport en dispositius estrets. Aquest bloc:
+//   1) Bumpa font-sizes a tots els elements de text habituals.
+//   2) Força max-width: 100% i overflow-x: hidden a les fitxes per
+//      evitar scroll horizontal a la pàgina.
+//   3) Permet flex-wrap a totes les files de chips/badges.
+//   4) Embolcalla taules en un contenidor scrollable horitzontal.
+const BASE_LAYOUT_CSS = `
+  /* ── Tipografia més gran per a llegibilitat mòbil ── */
+  .${SCOPE_CLASS} {
+    font-size: 15px !important;
+    line-height: 1.55 !important;
+  }
+  .${SCOPE_CLASS} p,
+  .${SCOPE_CLASS} li,
+  .${SCOPE_CLASS} td,
+  .${SCOPE_CLASS} th,
+  .${SCOPE_CLASS} .delito-desc,
+  .${SCOPE_CLASS} .alc-taxa,
+  .${SCOPE_CLASS} .step-desc,
+  .${SCOPE_CLASS} .note,
+  .${SCOPE_CLASS} .ref-desc,
+  .${SCOPE_CLASS} .seg-class,
+  .${SCOPE_CLASS} .item-text,
+  .${SCOPE_CLASS} .nota-policial,
+  .${SCOPE_CLASS} .nota-clave,
+  .${SCOPE_CLASS} .nota-agrav,
+  .${SCOPE_CLASS} .nom-cell,
+  .${SCOPE_CLASS} .items li,
+  .${SCOPE_CLASS} .timeline-item,
+  .${SCOPE_CLASS} .timeline-item .evento,
+  .${SCOPE_CLASS} .delito-desc {
+    font-size: 14.5px !important;
+    line-height: 1.55 !important;
+  }
+  .${SCOPE_CLASS} .delito-nombre,
+  .${SCOPE_CLASS} .step-title,
+  .${SCOPE_CLASS} .subsection-title {
+    font-size: 16px !important;
+  }
+  .${SCOPE_CLASS} h1,
+  .${SCOPE_CLASS} .header-text h1 {
+    font-size: 26px !important;
+    line-height: 1.2 !important;
+  }
+  .${SCOPE_CLASS} h2,
+  .${SCOPE_CLASS} .cat-header h2 {
+    font-size: 18px !important;
+    line-height: 1.3 !important;
+  }
+  .${SCOPE_CLASS} h3 {
+    font-size: 17px !important;
+  }
+  .${SCOPE_CLASS} .s-title,
+  .${SCOPE_CLASS} .alc-card-title,
+  .${SCOPE_CLASS} .cp-card-title,
+  .${SCOPE_CLASS} .section-title,
+  .${SCOPE_CLASS} .nom-header {
+    font-size: 14px !important;
+  }
+  .${SCOPE_CLASS} .subtitle {
+    font-size: 13px !important;
+  }
+  .${SCOPE_CLASS} .label,
+  .${SCOPE_CLASS} .law-id,
+  .${SCOPE_CLASS} .ref-ley,
+  .${SCOPE_CLASS} .ref-fecha {
+    font-size: 12px !important;
+  }
+  /* Pills i badges curts mantenen mida petita (intencionada) */
+  .${SCOPE_CLASS} .pill,
+  .${SCOPE_CLASS} .art-ref,
+  .${SCOPE_CLASS} .art-badge,
+  .${SCOPE_CLASS} .pts,
+  .${SCOPE_CLASS} .badge-grave,
+  .${SCOPE_CLASS} .badge-leve,
+  .${SCOPE_CLASS} .badge-menos,
+  .${SCOPE_CLASS} .badge-mixto,
+  .${SCOPE_CLASS} .badge-clave,
+  .${SCOPE_CLASS} .badge-local,
+  .${SCOPE_CLASS} .badge-info,
+  .${SCOPE_CLASS} .tipo-badge {
+    font-size: 11px !important;
+  }
+
+  /* ── Evitar scroll horitzontal a la pàgina ── */
+  .${SCOPE_CLASS} {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+  }
+  .${SCOPE_CLASS} * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .${SCOPE_CLASS} .poster,
+  .${SCOPE_CLASS} .wrapper {
+    max-width: 100% !important;
+  }
+
+  /* Files de chips / badges / classes que han de poder fer wrap */
+  .${SCOPE_CLASS} .pena-row,
+  .${SCOPE_CLASS} .badge-row,
+  .${SCOPE_CLASS} .clasificacion,
+  .${SCOPE_CLASS} .infraction-grid,
+  .${SCOPE_CLASS} .alc-grid,
+  .${SCOPE_CLASS} .cons-grid,
+  .${SCOPE_CLASS} .seg-grid,
+  .${SCOPE_CLASS} .class-grid,
+  .${SCOPE_CLASS} .clas-grid,
+  .${SCOPE_CLASS} .delito-top,
+  .${SCOPE_CLASS} .seg-amounts,
+  .${SCOPE_CLASS} .alc-data {
+    flex-wrap: wrap !important;
+  }
+  /* Graelles que tenen 2-3 columnes a desktop → 1 columna a mòbil */
+  @media (max-width: 600px) {
+    .${SCOPE_CLASS} .two-col,
+    .${SCOPE_CLASS} .clas-grid,
+    .${SCOPE_CLASS} .clasificacion,
+    .${SCOPE_CLASS} .alc-grid,
+    .${SCOPE_CLASS} .cons-grid,
+    .${SCOPE_CLASS} .infraction-grid,
+    .${SCOPE_CLASS} .class-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .${SCOPE_CLASS} .nomenclator {
+      grid-template-columns: 1.4fr 0.7fr 1fr !important;
+    }
+  }
+
+  /* Taules: si són massa amples, scroll horitzontal local en lloc
+     de desbordar tota la pàgina. */
+  .${SCOPE_CLASS} table,
+  .${SCOPE_CLASS} .inf-table {
+    display: block !important;
+    overflow-x: auto !important;
+    max-width: 100% !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Imatges i SVG no han de sortir mai de la viewport */
+  .${SCOPE_CLASS} img,
+  .${SCOPE_CLASS} svg {
+    max-width: 100% !important;
+    height: auto;
+  }
+`;
+
 // Sobreescriptura de variables CSS i estils per al MODE CLAR. La classe
 // `ipol-light` s'afegeix al contenidor quan l'app està en mode clar i
 // força una paleta blanc/dorat real (no inversió de colors).
@@ -932,12 +1087,17 @@ export default function HtmlInline({ html }: Props) {
     if (cssScoped.trim()) {
       const styleNode = document.createElement('style');
       styleNode.setAttribute('data-fitxa-style', '');
-      styleNode.textContent = cssScoped + '\n' + LIGHT_THEME_CSS;
+      // Ordre: estils originals scopejats → tema clar → layout base
+      // (BASE_LAYOUT_CSS al final per a què els bumps de font-size i
+      // els fixes d'overflow guanyin als estils originals via cascada
+      // i els seus !important).
+      styleNode.textContent =
+        cssScoped + '\n' + LIGHT_THEME_CSS + '\n' + BASE_LAYOUT_CSS;
       container.appendChild(styleNode);
     } else {
-      // Fitxa sense estils propis: només el bloc de tema clar.
+      // Fitxa sense estils propis: només els blocs base de tema i layout.
       const styleNode = document.createElement('style');
-      styleNode.textContent = LIGHT_THEME_CSS;
+      styleNode.textContent = LIGHT_THEME_CSS + '\n' + BASE_LAYOUT_CSS;
       container.appendChild(styleNode);
     }
 
