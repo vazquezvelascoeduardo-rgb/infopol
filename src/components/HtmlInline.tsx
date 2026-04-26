@@ -48,6 +48,16 @@ const BASE_LAYOUT_CSS = `
   .${SCOPE_CLASS} .nota-clave,
   .${SCOPE_CLASS} .nota-agrav,
   .${SCOPE_CLASS} .nom-cell,
+  /* Cataleg - tab Delictes CP: les files i descripcions eren molt petites
+     (12.5px). Les pugem a 14.5 per llegibilitat. La nota inferior puja
+     a 13. */
+  .${SCOPE_CLASS} .cp-row,
+  .${SCOPE_CLASS} .cp-desc,
+  .${SCOPE_CLASS} .cp-art,
+  .${SCOPE_CLASS} .cp-pena,
+  .${SCOPE_CLASS} .pena-tag,
+  .${SCOPE_CLASS} .cp-body,
+  .${SCOPE_CLASS} .alerta-box,
   .${SCOPE_CLASS} .items li,
   .${SCOPE_CLASS} .timeline-item,
   .${SCOPE_CLASS} .timeline-item .evento,
@@ -82,6 +92,11 @@ const BASE_LAYOUT_CSS = `
   }
   .${SCOPE_CLASS} .subtitle {
     font-size: 13px !important;
+  }
+  /* Cataleg - .cp-note (era 11px, massa petit per llegir cómodament) */
+  .${SCOPE_CLASS} .cp-note {
+    font-size: 13px !important;
+    line-height: 1.55 !important;
   }
   .${SCOPE_CLASS} .label,
   .${SCOPE_CLASS} .law-id,
