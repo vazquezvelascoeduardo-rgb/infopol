@@ -58,16 +58,16 @@ export default function Sidebar({ open, onClose }: Props) {
           ${open ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
       />
 
-      {/* Drawer */}
+      {/* Drawer (lliscant des de la dreta) */}
       <aside
         role="dialog"
         aria-label={t('sidebar.title')}
         aria-hidden={!open}
-        className={`fixed inset-y-0 left-0 z-50 w-[85%] max-w-sm overflow-y-auto
+        className={`fixed inset-y-0 right-0 z-50 w-[85%] max-w-sm overflow-y-auto
           bg-white text-slate-900 shadow-2xl
           dark:bg-[#0a1628] dark:text-slate-100
           transition-transform duration-300 ease-out
-          ${open ? 'translate-x-0' : '-translate-x-full'}`}
+          ${open ? 'translate-x-0' : 'translate-x-full'}`}
       >
         {/* Capçalera amb botó tancar */}
         <header className="sticky top-0 flex items-center gap-3 border-b px-4 py-3
