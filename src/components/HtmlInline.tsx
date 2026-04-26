@@ -46,7 +46,9 @@ const LIGHT_THEME_CSS = `
     --positive-green: #15803d !important;
 
     --bg: #ffffff !important;
+    --bg2: #f8fafc !important;
     --txt: #0a1628 !important;
+    --txt2: #475569 !important;
     --gold: #a16207 !important;
     --blue: #1e40af !important;
     --blue-royal: #1e40af !important;
@@ -150,6 +152,87 @@ const LIGHT_THEME_CSS = `
   }
   .${SCOPE_CLASS}.ipol-light .cat-icon {
     color: #a16207 !important;
+  }
+
+  /* Capçaleres de secció amb fons hardcoded navy/blau-royal als HTMLs:
+     les passem a una paleta blava clara amb text fosc per a llegibilitat. */
+  .${SCOPE_CLASS}.ipol-light .s-title,
+  .${SCOPE_CLASS}.ipol-light .alc-card-title {
+    background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%) !important;
+    color: #1e3a8a !important;
+    border-bottom: 1px solid #93c5fd !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .s-title *,
+  .${SCOPE_CLASS}.ipol-light .alc-card-title * {
+    color: #1e3a8a !important;
+  }
+
+  /* Capçalera CP (Codi Penal) amb fons rgba(200,40,30,.2) → versió clara
+     amb to vermell suau perquè es mantingui la jerarquia visual. */
+  .${SCOPE_CLASS}.ipol-light .cp-card-title,
+  .${SCOPE_CLASS}.ipol-light .cp-header {
+    background: linear-gradient(135deg, #fee2e2 0%, #fef2f2 100%) !important;
+    color: #7f1d1d !important;
+    border-color: #fca5a5 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .cp-card-title *,
+  .${SCOPE_CLASS}.ipol-light .cp-header * {
+    color: #7f1d1d !important;
+  }
+
+  /* Subtítols de grup amb fons rgba(0,0,0,.2) — passar a slate clar. */
+  .${SCOPE_CLASS}.ipol-light .sub-group-title {
+    background: #f1f5f9 !important;
+    color: #a16207 !important;
+    border-top-color: #fbbf24 !important;
+  }
+
+  /* Tabs (catàleg de trànsit) — text fosc en mode clar. */
+  .${SCOPE_CLASS}.ipol-light .tab-btn {
+    background: #ffffff !important;
+    color: #475569 !important;
+    border-color: #cbd5e1 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .tab-btn:hover {
+    color: #a16207 !important;
+    border-color: #a16207 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .tab-btn.active {
+    background: #fef3c7 !important;
+    color: #422006 !important;
+    border-color: #a16207 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .tab-btn.active * {
+    color: #422006 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .tab-btn .badge-count {
+    background: #f1f5f9 !important;
+    color: #475569 !important;
+  }
+
+  /* Capçaleres CP card de la cataleg — bg navy ara passa a blanc. */
+  .${SCOPE_CLASS}.ipol-light .cp-card,
+  .${SCOPE_CLASS}.ipol-light .alc-card {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  /* Files i cel·les de taula d'infraccions */
+  .${SCOPE_CLASS}.ipol-light .inf-table thead tr {
+    background: #f1f5f9 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .inf-table th {
+    color: #475569 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .inf-table td {
+    color: #0f172a !important;
+    border-bottom-color: #e2e8f0 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .inf-table tr:hover td {
+    background: #fef3c7 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .inf-table tr.highlight td {
+    background: #fee2e2 !important;
   }
 
   /* Delito / article entries (left-bordered cards) */
@@ -279,18 +362,128 @@ const LIGHT_THEME_CSS = `
   .${SCOPE_CLASS}.ipol-light .clas-grave { background: #fee2e2 !important; border-color: #dc2626 !important; }
   .${SCOPE_CLASS}.ipol-light .clas-grave .tipo { color: #991b1b !important; }
 
-  /* Generic colored badges — assume their accent color comes from
-     border/background; just darken text so it's readable on white. */
+  /* ── BADGES SEMÀNTICS — paletes clares amb significat ── */
+
+  /* MOLT GREU / GRAVE / "Greu" → vermell clar */
   .${SCOPE_CLASS}.ipol-light .badge-grave,
+  .${SCOPE_CLASS}.ipol-light .pill-MG,
+  .${SCOPE_CLASS}.ipol-light .badge-mixto,
+  .${SCOPE_CLASS}.ipol-light .multa-mg,
+  .${SCOPE_CLASS}.ipol-light .pts,
+  .${SCOPE_CLASS}.ipol-light .cc-greu,
+  .${SCOPE_CLASS}.ipol-light .vel-mg,
+  .${SCOPE_CLASS}.ipol-light .dc-greu {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+    border-color: #fca5a5 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .badge-grave *,
+  .${SCOPE_CLASS}.ipol-light .pill-MG *,
+  .${SCOPE_CLASS}.ipol-light .pts *,
+  .${SCOPE_CLASS}.ipol-light .vel-mg *,
+  .${SCOPE_CLASS}.ipol-light .cc-greu * {
+    color: #991b1b !important;
+  }
+
+  /* GRAVE / Menys greu (intermedi) → ambre clar */
   .${SCOPE_CLASS}.ipol-light .badge-info,
-  .${SCOPE_CLASS}.ipol-light .badge-local,
-  .${SCOPE_CLASS}.ipol-light .tipo-badge,
-  .${SCOPE_CLASS}.ipol-light .pena-chip,
+  .${SCOPE_CLASS}.ipol-light .pill-G,
+  .${SCOPE_CLASS}.ipol-light .badge-menos,
+  .${SCOPE_CLASS}.ipol-light .multa-g,
+  .${SCOPE_CLASS}.ipol-light .cc-menys,
+  .${SCOPE_CLASS}.ipol-light .vel-g,
+  .${SCOPE_CLASS}.ipol-light .dc-menys,
+  .${SCOPE_CLASS}.ipol-light .nota-agrav {
+    background: #fef3c7 !important;
+    color: #854d0e !important;
+    border-color: #fbbf24 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .pill-G *,
+  .${SCOPE_CLASS}.ipol-light .vel-g *,
+  .${SCOPE_CLASS}.ipol-light .cc-menys *,
+  .${SCOPE_CLASS}.ipol-light .nota-agrav * {
+    color: #854d0e !important;
+  }
+
+  /* LLEU / Lleve / OK → verd clar */
+  .${SCOPE_CLASS}.ipol-light .pill-L,
+  .${SCOPE_CLASS}.ipol-light .badge-leve,
+  .${SCOPE_CLASS}.ipol-light .badge-nuevo,
+  .${SCOPE_CLASS}.ipol-light .cc-lleu,
+  .${SCOPE_CLASS}.ipol-light .dc-lleu {
+    background: #dcfce7 !important;
+    color: #166534 !important;
+    border-color: #86efac !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .pill-L *,
+  .${SCOPE_CLASS}.ipol-light .cc-lleu * {
+    color: #166534 !important;
+  }
+
+  /* MULTA / IMPORT (€) — verd clar (els diners "positius" en green/emerald) */
+  .${SCOPE_CLASS}.ipol-light .multa,
   .${SCOPE_CLASS}.ipol-light .multa-badge,
-  .${SCOPE_CLASS}.ipol-light .multa-alta {
-    background: #f1f5f9 !important;
-    color: #0f172a !important;
-    border-color: #cbd5e1 !important;
+  .${SCOPE_CLASS}.ipol-light .multa-alta,
+  .${SCOPE_CLASS}.ipol-light .pena-multa,
+  .${SCOPE_CLASS}.ipol-light .amount,
+  .${SCOPE_CLASS}.ipol-light .amount.gold,
+  .${SCOPE_CLASS}.ipol-light .seg-amounts {
+    background: #d1fae5 !important;
+    color: #065f46 !important;
+    border-color: #6ee7b7 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .multa *,
+  .${SCOPE_CLASS}.ipol-light .multa-badge *,
+  .${SCOPE_CLASS}.ipol-light .multa-alta *,
+  .${SCOPE_CLASS}.ipol-light .pena-multa *,
+  .${SCOPE_CLASS}.ipol-light .amount *,
+  .${SCOPE_CLASS}.ipol-light .seg-amounts * {
+    color: #065f46 !important;
+  }
+  /* Però si hi ha .amount.red (categòricament negatiu), es queda en vermell */
+  .${SCOPE_CLASS}.ipol-light .amount.red {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+  }
+
+  /* Pena penal (no monetària) — neutral però distingible */
+  .${SCOPE_CLASS}.ipol-light .pena-chip,
+  .${SCOPE_CLASS}.ipol-light .pena-tag,
+  .${SCOPE_CLASS}.ipol-light .pena-preso,
+  .${SCOPE_CLASS}.ipol-light .pena-treb,
+  .${SCOPE_CLASS}.ipol-light .pena-perm,
+  .${SCOPE_CLASS}.ipol-light .pena-alt {
+    background: #ede9fe !important;
+    color: #5b21b6 !important;
+    border-color: #c4b5fd !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .pena-preso *,
+  .${SCOPE_CLASS}.ipol-light .pena-treb *,
+  .${SCOPE_CLASS}.ipol-light .pena-perm * {
+    color: #5b21b6 !important;
+  }
+
+  /* Tipus-badge (codi-penal): subordinat al tipus específic. Per defecte
+     ambre (com a "no-greu" / informatiu) — quan a la classe hi ha .greu/.menys
+     s'aplica les regles d'amunt. */
+  .${SCOPE_CLASS}.ipol-light .tipo-badge {
+    background: #fef3c7 !important;
+    color: #854d0e !important;
+    border-color: #fbbf24 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .badge-clave,
+  .${SCOPE_CLASS}.ipol-light .badge-local {
+    background: #dbeafe !important;
+    color: #1e40af !important;
+    border-color: #93c5fd !important;
+  }
+
+  /* Article badge / referència — gold pill (manté la identitat) */
+  .${SCOPE_CLASS}.ipol-light .art-badge,
+  .${SCOPE_CLASS}.ipol-light .art-ref {
+    background: #fef3c7 !important;
+    color: #92400e !important;
+    border-color: #fbbf24 !important;
   }
 
   /* ── 4) Text de colors clars hardcodejats → variants foscos ── */
