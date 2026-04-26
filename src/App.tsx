@@ -19,6 +19,10 @@ import NotFound from './pages/NotFound';
 import Operativa from './pages/Operativa';
 import Trafico from './pages/operativa/Trafico';
 import Penal from './pages/operativa/Penal';
+import PenalTaulaActes from './pages/operativa/PenalTaulaActes';
+import PenalTaulaDrogues from './pages/operativa/PenalTaulaDrogues';
+import PenalRecursos from './pages/operativa/PenalRecursos';
+import PenalDretsDetingut from './pages/operativa/PenalDretsDetingut';
 
 export default function App() {
   return (
@@ -30,6 +34,10 @@ export default function App() {
         <Route path="/leyes/s/:moduleSlug/:slug" element={<CardPage />} />
         <Route path="/operativa" element={<Operativa />} />
         <Route path="/operativa/trafico/*" element={<Trafico />} />
+        <Route path="/operativa/penal/taula-actes" element={<PenalTaulaActes />} />
+        <Route path="/operativa/penal/taula-drogues" element={<PenalTaulaDrogues />} />
+        <Route path="/operativa/penal/recursos" element={<PenalRecursos />} />
+        <Route path="/operativa/penal/drets-detingut" element={<PenalDretsDetingut />} />
         <Route path="/operativa/penal/*" element={<Penal />} />
         <Route path="/cerca" element={<SearchResults />} />
         <Route path="*" element={<NotFound />} />

@@ -69,12 +69,55 @@ function PenalList() {
         </div>
       </header>
 
+      {/* Accés ràpid a pantalles de referència */}
+      <div className="mt-5">
+        <div className="flex items-center gap-3 mb-2">
+          <span className="h-5 w-1 rounded-full bg-slate-500"></span>
+          <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-600 dark:text-slate-300">
+            {t('penal.references')}
+          </h2>
+        </div>
+        <ul className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <ReferenceQuickLink to="/operativa/penal/taula-actes" icon="📋" label={t('penal.taulaActes')} color="#3b82f6" />
+          <ReferenceQuickLink to="/operativa/penal/taula-drogues" icon="💊" label={t('penal.taulaDrogues')} color="#8b5cf6" />
+          <ReferenceQuickLink to="/operativa/penal/recursos" icon="📞" label={t('penal.recursos')} color="#dc2626" />
+          <ReferenceQuickLink to="/operativa/penal/drets-detingut" icon="📜" label={t('penal.dretsDetingut')} color="#ef4444" />
+        </ul>
+      </div>
+
       <div className="mt-6 space-y-7">
         {PENAL_INDEX.blocs.map((bloc) => (
           <BlockSection key={bloc.bloc} bloc={bloc} />
         ))}
       </div>
     </div>
+  );
+}
+
+function ReferenceQuickLink({
+  to,
+  icon,
+  label,
+  color,
+}: {
+  to: string;
+  icon: string;
+  label: string;
+  color: string;
+}) {
+  return (
+    <li>
+      <Link
+        to={to}
+        className="group flex items-center gap-2 rounded-xl border p-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md min-h-[60px]
+          border-slate-200 bg-white
+          dark:border-white/10 dark:bg-[#0f1d34]"
+        style={{ borderLeft: `4px solid ${color}` }}
+      >
+        <span aria-hidden className="text-2xl shrink-0">{icon}</span>
+        <span className="text-sm font-semibold leading-tight">{label}</span>
+      </Link>
+    </li>
   );
 }
 
