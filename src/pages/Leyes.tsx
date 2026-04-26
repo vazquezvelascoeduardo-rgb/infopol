@@ -4,7 +4,6 @@
 import { Link } from 'react-router-dom';
 import { MODULES, getCardsByModule } from '../lib/content';
 import { plural, useT } from '../lib/i18n';
-import PoliceCarIcon from '../components/PoliceCarIcon';
 
 export default function Leyes() {
   const { t } = useT();
@@ -17,32 +16,8 @@ export default function Leyes() {
         <span className="text-slate-700 dark:text-slate-200">{t('leyes.title')}</span>
       </nav>
 
-      {/* Banda superior — hero amb tint càlid suau en mode clar */}
-      <section className="relative overflow-hidden rounded-2xl border p-5 sm:p-7
-        border-slate-200/70 bg-gradient-to-br from-white via-amber-50/30 to-white
-        shadow-[0_1px_2px_rgba(15,23,42,0.04)]
-        dark:border-white/10 dark:bg-gradient-to-br dark:from-[#0f1d34] dark:to-[#0a1628] dark:shadow-none dark:via-[#0f1d34]">
-        {/* Decoració: cercles subtils només en mode clar */}
-        <div aria-hidden className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-amber-200/30 blur-3xl dark:hidden" />
-        <div aria-hidden className="absolute -bottom-12 -left-12 h-44 w-44 rounded-full bg-blue-200/20 blur-3xl dark:hidden" />
-        <div className="relative flex items-start gap-4">
-          <PoliceCarIcon className="h-16 w-auto shrink-0 drop-shadow-sm" />
-          <div className="min-w-0">
-            <div className="text-[11px] uppercase tracking-[0.25em] font-semibold text-amber-700 dark:text-amber-400/90">
-              {t('leyes.badge')}
-            </div>
-            <h1 className="mt-1 text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100">
-              {t('leyes.title')}
-            </h1>
-            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              {t('leyes.subtitle')}
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Títol seccions — accent més pronunciat */}
-      <div className="mt-8 mb-4 flex items-center gap-3">
+      <div className="mt-2 mb-4 flex items-center gap-3">
         <span className="h-6 w-1.5 rounded-full bg-gradient-to-b from-amber-400 to-amber-600 dark:from-amber-300 dark:to-amber-500"></span>
         <h2 className="text-xs font-black uppercase tracking-[0.25em] text-slate-700 dark:text-slate-300">
           {t('home.sections')}

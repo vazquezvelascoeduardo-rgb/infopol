@@ -464,6 +464,42 @@ const LIGHT_THEME_CSS = `
   .${SCOPE_CLASS}.ipol-light .ec-16a17  { background: #fee2e2 !important; color: #991b1b !important; }
   .${SCOPE_CLASS}.ipol-light .ec-18     { background: #ede9fe !important; color: #5b21b6 !important; }
 
+  /* Header HTML semantic (Ordenança soroll usa <header>, no .header) +
+     wrappers exteriors amb fons navy hardcoded → versió clara. */
+  .${SCOPE_CLASS}.ipol-light header,
+  .${SCOPE_CLASS}.ipol-light .container,
+  .${SCOPE_CLASS}.ipol-light .content {
+    background: linear-gradient(135deg, #fffbea 0%, #fef3c7 100%) !important;
+    border-color: #fbbf24 !important;
+    color: #0f172a !important;
+    box-shadow: 0 1px 3px rgba(15,23,42,0.06) !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .container .categoria {
+    background: #ffffff !important;
+  }
+  /* Acentos de marca dins del header semantic (gold per al títol/label) */
+  .${SCOPE_CLASS}.ipol-light header .header-text h1,
+  .${SCOPE_CLASS}.ipol-light header h1,
+  .${SCOPE_CLASS}.ipol-light header .law-id,
+  .${SCOPE_CLASS}.ipol-light header .label {
+    color: #92400e !important;
+  }
+  .${SCOPE_CLASS}.ipol-light header .subtitle {
+    color: #475569 !important;
+  }
+
+  /* .subsection amb fons rgba(10,22,40,0.4) (LO 4/2015) → claret per a
+     llegibilitat amb el text fosc per defecte. */
+  .${SCOPE_CLASS}.ipol-light .subsection {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border-left-color: #a16207 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .subsection * { color: #0f172a; }
+  .${SCOPE_CLASS}.ipol-light .subsection-title {
+    color: #92400e !important;
+  }
+
   .${SCOPE_CLASS}.ipol-light .cp-card-title,
   .${SCOPE_CLASS}.ipol-light .cp-header {
     background: linear-gradient(135deg, #fecaca 0%, #fef2f2 100%) !important;
