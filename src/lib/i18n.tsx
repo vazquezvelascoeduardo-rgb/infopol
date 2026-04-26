@@ -208,6 +208,9 @@ const DICT: Record<Locale, Dict> = {
     'search.resultsLabel': 'Resultados',
     'search.query': 'Búsqueda:',
     'search.none': 'sin coincidencias',
+    'search.operativaSection': 'Operativa (procedimientos en la calle)',
+    'search.leyesSection': 'Leyes (temario)',
+    'search.openChecklist': 'Abrir checklist',
 
     // Not found
     'notFound.text': 'Página no encontrada.',
@@ -424,6 +427,9 @@ const DICT: Record<Locale, Dict> = {
     'search.resultsLabel': 'Resultats',
     'search.query': 'Cerca:',
     'search.none': 'cap coincidència',
+    'search.operativaSection': 'Operativa (procediments al carrer)',
+    'search.leyesSection': 'Lleis (temari)',
+    'search.openChecklist': 'Obrir checklist',
 
     // Not found
     'notFound.text': 'Pàgina no trobada.',
