@@ -215,6 +215,8 @@ function LawSection({ lawId, items, q }: { lawId: string; items: CatalegRow[]; q
 }
 
 function ResultRow({ row, q, color }: { row: CatalegRow; q: string; color: string }) {
+  // Compose context: section title + subgroup (when present)
+  const ctx = [row.sectionTitle, row.subgroup].filter(Boolean).join(' · ');
   return (
     <li
       className="grid grid-cols-1 sm:grid-cols-[1fr_auto_auto_auto_auto] gap-2 sm:gap-3 items-start
@@ -224,8 +226,16 @@ function ResultRow({ row, q, color }: { row: CatalegRow; q: string; color: strin
         dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-purple-400/40"
       style={{ borderLeftWidth: '4px', borderLeftColor: color }}
     >
-      {/* Concepte (col·lapsable a sm) */}
+      {/* Concepte amb context al damunt (si en té) */}
       <div className="min-w-0 sm:pr-3">
+        {ctx && (
+          <div
+            className="text-[10px] uppercase tracking-wider font-semibold mb-0.5 truncate"
+            style={{ color }}
+            title={ctx}
+            dangerouslySetInnerHTML={{ __html: highlight(ctx, q) }}
+          />
+        )}
         <div
           className="text-sm leading-snug text-slate-900 dark:text-slate-100"
           dangerouslySetInnerHTML={{ __html: highlight(row.concepte, q) }}

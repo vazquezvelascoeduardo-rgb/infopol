@@ -15,10 +15,17 @@ import catalegRaw from '../../content/transit/cataleg-d-infraccions-de-transit-s
 export type Severity = 'MG' | 'G' | 'L';
 
 export type CatalegRow = {
-  // Codi curt de la llei/reglament (lsv, rgc, rgcond, rgv, seg).
+  // Codi curt de la llei/reglament (lsv, rgc, rgcond, rgv, seg, vel).
   lawId: string;
   lawShort: string; // "LSV"
   lawFull: string; // "Llei de Seguretat Vial — RDL 6/2015"
+  // Títol de la secció dins de la llei (p.ex. "Assegurança obligatòria
+  // de Responsabilitat Civil (RDL 8/2004 art. 2.1)"). Pot ser undefined
+  // si la fila no té secció.
+  sectionTitle?: string;
+  // Subgrup dins d'una secció (p.ex. "Conductors generals majors d'edat"
+  // dins del barem d'alcoholèmia). Només present a les taules de barems.
+  subgroup?: string;
   // Concepte sancionat (text pla, sense HTML).
   concepte: string;
   // Mateix concepte amb HTML original (per a renderitzar amb <strong>).
@@ -34,7 +41,8 @@ export type CatalegRow = {
   dte?: string;
   // Punts retirats (p.ex. "-4", "-6", o buit si no n'hi ha).
   points?: string;
-  // Text combinat per a la cerca (sense accents, minúscules).
+  // Text combinat per a la cerca (sense accents, minúscules), inclou
+  // sectionTitle i subgroup perquè el filtre els tingui en compte.
   searchText: string;
 };
 
@@ -63,6 +71,10 @@ const LAW_META: Record<string, { short: string; full: string }> = {
   cp: {
     short: 'CP',
     full: 'Codi Penal (delictes contra la seguretat viària)',
+  },
+  vel: {
+    short: 'Barems',
+    full: "Barems sancionadors (velocitat / alcoholèmia)",
   },
 };
 
@@ -100,67 +112,90 @@ export function getCatalegRows(): CatalegRow[] {
   const doc = parser.parseFromString(catalegRaw, 'text/html');
   const rows: CatalegRow[] = [];
 
-  // Iterem totes les pestanyes que tinguin id="tab-XX".
+  // Iterem cada pestanya (id="tab-XX") i dins per .section, així
+  // capturem el .s-title de cada bloc i el propaguem a totes les
+  // seves filades. Així una cerca per "assegurança" troba també
+  // les filades on només surt al títol del bloc.
   const tabs = doc.querySelectorAll('[id^="tab-"]');
   for (const tab of Array.from(tabs)) {
     const id = (tab as HTMLElement).id.replace(/^tab-/, '');
     const meta = LAW_META[id];
-    if (!meta) continue; // saltem 'rec', 'vel' (no taula estandarditzada)
+    if (!meta) continue;
 
-    // Cerquem totes les taules d'infraccions dins de la pestanya
-    // (poden ser-ne diverses per agrupacions temàtiques).
-    const tables = tab.querySelectorAll('table');
-    for (const table of Array.from(tables)) {
-      const trs = table.querySelectorAll('tbody tr');
-      for (const tr of Array.from(trs)) {
-        const tds = tr.querySelectorAll('td');
-        if (tds.length < 2) continue;
+    const sections = tab.querySelectorAll('.section');
+    for (const section of Array.from(sections)) {
+      const sTitle = clean(section.querySelector('.s-title')?.textContent);
 
-        // Concepte (1a cel·la — pot tenir <strong> dintre)
-        const conceptCell = tds[0] as HTMLElement;
-        const concepte = clean(conceptCell.textContent);
-        if (!concepte || concepte.length < 4) continue;
-
-        // Article (2a cel·la)
-        const article = clean(tds[1]?.textContent);
-
-        // Gravetat (.pill-XX dins de la fila)
-        const severity = detectSeverity(tr);
-
-        // Multa: 4a cel·la — pot ser un nombre, "Veure barem", colspan, etc.
-        const fineCell = tds[3];
-        let fine: string | undefined;
-        if (fineCell) {
-          // Si té colspan i diu "veure barem" o similar, agafem el text sencer.
-          const f = clean(fineCell.textContent);
-          if (f) fine = f;
+      // (a) Taules d'infraccions estàndard
+      for (const table of Array.from(section.querySelectorAll('table'))) {
+        for (const tr of Array.from(table.querySelectorAll('tbody tr'))) {
+          const tds = tr.querySelectorAll('td');
+          if (tds.length < 2) continue;
+          const conceptCell = tds[0] as HTMLElement;
+          const concepte = clean(conceptCell.textContent);
+          if (!concepte || concepte.length < 4) continue;
+          const article = clean(tds[1]?.textContent);
+          const severity = detectSeverity(tr);
+          const fine = clean(tds[3]?.textContent) || undefined;
+          const dte = tds[4] ? clean(tds[4].textContent) : undefined;
+          let points: string | undefined;
+          if (tds[5]) {
+            const t = clean(tds[5].textContent);
+            if (t && t !== '—') points = t;
+          }
+          rows.push({
+            lawId: id,
+            lawShort: meta.short,
+            lawFull: meta.full,
+            sectionTitle: sTitle || undefined,
+            concepte,
+            conceptHtml: conceptCell.innerHTML,
+            article: article || undefined,
+            severity,
+            fine,
+            dte,
+            points,
+            searchText: normalize(
+              `${sTitle ?? ''} ${concepte} ${article ?? ''} ${fine ?? ''} ${meta.short} ${meta.full}`,
+            ),
+          });
         }
+      }
 
-        // DTE (5a cel·la)
-        const dteCell = tds[4];
-        const dte = dteCell ? clean(dteCell.textContent) : undefined;
-
-        // Punts (6a cel·la)
-        const ptsCell = tds[5];
-        let points: string | undefined;
-        if (ptsCell) {
-          const t = clean(ptsCell.textContent);
-          if (t && t !== '—') points = t;
+      // (b) Barems custom amb .alc-card (alcoholèmia, velocitat) o
+      // estructures similars amb .alc-row dins. Cada .alc-card té un
+      // sub-títol propi (.alc-card-title) que també capturem.
+      for (const card of Array.from(section.querySelectorAll('.alc-card'))) {
+        const subgroup = clean(card.querySelector('.alc-card-title')?.textContent);
+        for (const row of Array.from(card.querySelectorAll('.alc-row'))) {
+          const concepte = clean(row.querySelector('.alc-taxa')?.textContent);
+          if (!concepte) continue;
+          const dataEl = row.querySelector('.alc-data') as HTMLElement | null;
+          // Multa: text dels .amount; punts: text dels .pts.
+          const amountEl = dataEl?.querySelector('.amount');
+          const ptsEl = dataEl?.querySelector('.pts');
+          const fine = amountEl ? clean(amountEl.textContent) : undefined;
+          const points = ptsEl ? clean(ptsEl.textContent) : undefined;
+          // Inferim gravetat per la classe del .amount (gold = mig, red = alt).
+          let severity: Severity | undefined;
+          if (amountEl?.classList.contains('red')) severity = 'MG';
+          else if (amountEl?.classList.contains('gold')) severity = 'G';
+          rows.push({
+            lawId: id,
+            lawShort: meta.short,
+            lawFull: meta.full,
+            sectionTitle: sTitle || undefined,
+            subgroup: subgroup || undefined,
+            concepte,
+            conceptHtml: concepte,
+            severity,
+            fine,
+            points: points && points !== '—' ? points : undefined,
+            searchText: normalize(
+              `${sTitle ?? ''} ${subgroup ?? ''} ${concepte} ${fine ?? ''} ${meta.short} ${meta.full}`,
+            ),
+          });
         }
-
-        rows.push({
-          lawId: id,
-          lawShort: meta.short,
-          lawFull: meta.full,
-          concepte,
-          conceptHtml: conceptCell.innerHTML,
-          article: article || undefined,
-          severity,
-          fine,
-          dte,
-          points,
-          searchText: normalize(`${concepte} ${article ?? ''} ${fine ?? ''} ${meta.short}`),
-        });
       }
     }
   }
