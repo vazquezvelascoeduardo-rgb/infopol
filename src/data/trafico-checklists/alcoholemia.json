@@ -102,18 +102,19 @@
       "opcions": [
         { "etiqueta": "Taxa imputable ≤ 0,25 mg/l (cau a negativa)",              "va_a": "fi_negativa" },
         { "etiqueta": "Taxa imputable 0,26 a 0,50 mg/l",                          "va_a": "comprovacio_reincidencia_4p" },
-        { "etiqueta": "Taxa imputable > 0,50 mg/l",                               "va_a": "fi_admin_1000_6p" },
-        { "etiqueta": "Taxa imputable > 0,60 mg/l (DELICTE)",                     "va_a": "fi_penal_379_2_alcohol" }
+        { "etiqueta": "Lectura confirmada 0,51 a 0,65 mg/l (admin tram alt)",     "va_a": "fi_admin_1000_6p" },
+        { "etiqueta": "Lectura confirmada > 0,65 mg/l (DELICTE — criteri prudent amb marge)", "va_a": "fi_penal_379_2_alcohol" }
       ]
     },
 
     "evidencial_general_alta": {
       "titol": "Prova evidencial — tram alt",
       "text": "Lectura indiciària > 0,40 mg/l. Cal evidencial. Resultat 2a lectura?",
+      "info": "Criteri operatiu: per damunt de 0,60 mg/l aplicarem el marge d'error abans de qualificar penal. La franja 0,60-0,65 es manté com a infracció administrativa molt greu (1.000€/6 pts) per evitar nul·litats.",
       "opcions": [
         { "etiqueta": "0,26 a 0,50 mg/l",                                         "va_a": "comprovacio_reincidencia_4p" },
-        { "etiqueta": "0,51 a 0,60 mg/l",                                         "va_a": "fi_admin_1000_6p" },
-        { "etiqueta": "> 0,60 mg/l (DELICTE objectiu)",                           "va_a": "fi_penal_379_2_alcohol" }
+        { "etiqueta": "0,51 a 0,65 mg/l",                                         "va_a": "fi_admin_1000_6p" },
+        { "etiqueta": "> 0,65 mg/l (DELICTE objectiu — criteri prudent amb marge)", "va_a": "fi_penal_379_2_alcohol" }
       ]
     },
 
@@ -123,8 +124,8 @@
       "opcions": [
         { "etiqueta": "≤ 0,15 mg/l (negativa)",                                   "va_a": "fi_negativa" },
         { "etiqueta": "0,16 a 0,30 mg/l",                                          "va_a": "comprovacio_reincidencia_especial" },
-        { "etiqueta": "> 0,30 i ≤ 0,60 mg/l",                                     "va_a": "fi_admin_1000_6p_especial" },
-        { "etiqueta": "> 0,60 mg/l (DELICTE)",                                    "va_a": "fi_penal_379_2_alcohol" }
+        { "etiqueta": "> 0,30 i ≤ 0,65 mg/l",                                     "va_a": "fi_admin_1000_6p_especial" },
+        { "etiqueta": "> 0,65 mg/l (DELICTE — criteri prudent amb marge)",        "va_a": "fi_penal_379_2_alcohol" }
       ]
     },
 
@@ -239,13 +240,14 @@
       "titol": "🔴 MOLT GREU — Tram alt (general)",
       "concepte_butlleta": "Conduir un vehicle amb taxa d'alcohol en aire espirat superior a 0,50 mg/l",
       "article_butlleta": "Art. 20 RGC",
-      "barem": "0,51 a 0,60 mg/l (general)",
+      "barem": "0,51 a 0,65 mg/l (general) — criteri prudent amb marge d'error",
       "import": "1.000 € (DTE 500 €)",
       "punts": "–6 punts",
+      "info_clau": "La franja 0,60-0,65 mg/l, tot i superar el límit legal del 379.2 CP, es manté com a sanció administrativa molt greu per evitar nul·litats penals derivades del marge d'error de l'aparell.",
       "accions_operatives": [
         "Mateixes que tram 1",
         "ATENCIÓ: si pèrdua total de punts, comunicació especial DGT",
-        "Vigilància addicional a símptomes — pot derivar a penal si > 0,60"
+        "Vigilància addicional a símptomes — si > 0,65 confirmat, derivar a via penal"
       ]
     },
 
@@ -255,7 +257,7 @@
       "titol": "🔴 MOLT GREU — Tram alt (novell/professional)",
       "concepte_butlleta": "Conduir el vehicle ressenyat amb taxa superior a 0,30 mg/l (vehicle especial / novell)",
       "article_butlleta": "Art. 20 RGC",
-      "barem": "0,31 a 0,60 mg/l",
+      "barem": "0,31 a 0,65 mg/l (criteri prudent amb marge d'error)",
       "import": "1.000 € (DTE 500 €)",
       "punts": "–6 punts"
     },
@@ -315,37 +317,118 @@
     "fi_penal_379_2_alcohol": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE — Art. 379.2 CP (taxa objectiva)",
-      "text": "Taxa > 0,60 mg/l aire espirat o > 1,2 g/l sang = delicte automàtic per taxa objectiva. NO cal acreditar influència.",
-      "pena": "Presó 3-6 mesos O multa 6-12 mesos O TBC 31-90 dies + privació permís 1-4 anys",
-      "accions_ordenades": [
-        "1. AVISAR Mossos d'Esquadra (Sala) — coordinació amb seguretat ciutadana",
-        "2. CITACIÓ a procediment ràpid (Art. 795 LECrim) — per regla general NO es deté",
-        "3. INFORMAR el conductor dels seus drets i de la citació al Jutjat de Guàrdia",
-        "4. PROVA EVIDENCIAL: cal repetir-la igualment amb totes les garanties",
-        "5. INFORMAR del dret a contrastació per sang (laboratori designat pel jutjat)",
-        "6. INTERVENIR el permís físicament (no es pot conduir)",
-        "7. IMMOBILITZACIÓ vehicle + grua o lliurament a familiar / conductor sustitut sobri",
-        "8. ATESTAT POLICIAL PENAL amb diligències:",
-        "   - Diligència de citació a judici ràpid",
-        "   - Diligència informació drets",
-        "   - Diligència descripció símptomes (imprès normalitzat)",
-        "   - Diligència immobilització",
-        "   - Tiquets etilòmetre i acta",
-        "9. POSADA A DISPOSICIÓ Jutjat de Guàrdia (procediment ràpid Art. 795 LECrim)",
-        "10. NOMÉS es deté si concorren circumstàncies excepcionals: risc evident de fuga, identificació dubtosa, conductor estranger sense arrelament, conducta agressiva o reiteració immediata"
+      "titol": "🚔 DELICTE — Art. 379.2 CP (taxa objectiva) → JUDICI RÀPID",
+      "text": "Lectura confirmada en les DUES insuflacions evidencials superior a 0,65 mg/l aire (criteri prudent amb marge d'error sobre el límit legal de 0,60 mg/l) o > 1,2 g/l sang. Delicte automàtic per taxa objectiva: NO cal acreditar influència. Es tramita per JUDICI RÀPID amb CITACIÓ — no es deté llevat de circumstàncies excepcionals.",
+      "pena": "Presó 3-6 mesos O multa 6-12 mesos O TBC 31-90 dies + privació permís 1-4 anys (Art. 379.2 CP)",
+      "info_clau": "Criteri operatiu: NO es considera penal fins que la lectura confirmada en les DUES mediciones evidencials supera 0,65 mg/l. La franja 0,60-0,65 es manté com a infracció administrativa molt greu (1.000€/6 pts) per evitar nul·litats per marge d'error.",
+      "info_butlleta": "Concepte ESCRIT al butlletí: 'Conducció amb taxa d'alcohol superior a la reglamentària per delicte contra la seguretat viària, art. 379.2 CP, atestat núm. ___'",
+      "concepte_butlleta_paral·lel": "ATENCIÓ: NO es tramita butlleta administrativa paral·lela quan ja hi ha atestat penal per 379.2. La via penal absorbeix la sanció administrativa.",
+      "requisits_obligatoris": [
+        "Etilòmetre evidencial homologat (Dräger 7110, 7510 o equivalent) amb certificat de verificació periòdica vigent del CEM",
+        "DUES insuflacions evidencials amb un MÍNIM de 10 minuts entre elles (i 10-15 min des de l'última ingesta/fumar abans de la 1a)",
+        "Boquilla nova precintada per a CADA insuflació",
+        "Tiquet imprès per cada medició (s'adjunten a l'atestat)",
+        "Identificació del TIP de l'agent que practica la prova",
+        "Doble lectura de drets documentada (RGCirc + 520 LECrim)",
+        "Oferiment exprés de prova de contrast per sang"
       ],
-      "documentacio": "Atestat penal complet + acta alcoholèmia + tiquets + diligència drets + acta intervenció permís",
+      "drets_informar_conductor": [
+        "🅰️ DRETS COM A SOTMÈS A LA PROVA (Arts. 23-24 RGCirc) — abans de l'evidencial:",
+        "  • Ser informat de les conseqüències administratives i penals de la prova",
+        "  • Ser informat de les conseqüències de negar-se (delicte 383 CP)",
+        "  • Dret a la 2a medició (és una garantia legal)",
+        "  • Dret a contrast per anàlisi de sang/orina en centre sanitari (cost del conductor si confirma; gratuït si la desmenteix)",
+        "  • Dret a formular al·legacions/observacions que s'han de fer constar a l'acta",
+        "  • Dret que l'etilòmetre estigui homologat i verificat",
+        "🅱️ DRETS COM A INVESTIGAT (Art. 520.2 LECrim) — confirmada la 2a medició > 0,65:",
+        "  a) Guardar silenci i no declarar",
+        "  b) No declarar contra si mateix ni confessar-se culpable",
+        "  c) Designar advocat (de la seva elecció o d'ofici) i entrevistar-se reservadament amb ell",
+        "  d) Accedir als elements essencials de les actuacions per impugnar la legalitat",
+        "  e) Que es comuniqui la seva detenció o citació a un familiar",
+        "  f) Comunicar-se telefònicament amb un tercer",
+        "  g) Assistència gratuïta d'intèrpret si és estranger o no entén el castellà",
+        "  h) Ser reconegut per metge forense",
+        "  i) Sol·licitar assistència jurídica gratuïta",
+        "  j) Termini màxim de detenció i procediment d'habeas corpus",
+        "ℹ️ Si es decideix CITAR i no detenir (Art. 796.1.4 LECrim) igualment s'informen els drets del 520.2 a, b, c i e"
+      ],
+      "accions_ordenades_critiques": [
+        "Lectura de drets ABANS de la prova evidencial (Arts. 23-24 RGCirc) — si es fa després pot anul·lar",
+        "RESPECTAR els 10 minuts entre les dues mediciones evidencials",
+        "Lectura de drets del 520 LECrim EN EL MOMENT en què passa a investigat (després de confirmar 2a medició > 0,65)",
+        "Adjuntar TOTS els tiquets impresos al atestat",
+        "Documentar l'acta de simptomatologia (clau si en judici la taxa cau a zona gris)"
+      ],
+      "accions_ordenades": [
+        "1. PARADA i observació de signes externs (sintomatologia)",
+        "2. 1a PROVA INDICIÀRIA (etilòmetre de cribratge — 1 sola insuflació). Si > 0,60 → continuar",
+        "3. INFORMAR EL CONDUCTOR (abans de l'evidencial): que la 1a ha estat positiva, que s'ha de sotmetre a l'evidencial (2 mediciones), i que negar-se constitueix delicte del 383 CP",
+        "4. TRASLLAT a etilòmetre evidencial homologat",
+        "5. LECTURA DE DRETS com a sotmès a la prova (Arts. 23-24 RGCirc) i firma o constància de negativa a firmar",
+        "6. 1a INSUFLACIÓ EVIDENCIAL (boquilla nova, ticket imprès)",
+        "7. ESPERAR ≥ 10 MINUTS",
+        "8. 2a INSUFLACIÓ EVIDENCIAL (boquilla nova, ticket imprès)",
+        "9. Si AMBDUES > 0,65 mg/l → DELICTE confirmat. Passa a investigat",
+        "10. LECTURA DE DRETS del 520.2 LECrim (íntegra) — firma o constància",
+        "11. OFERIR PROVA DE CONTRAST per sang/orina (cost del conductor si confirma)",
+        "12. Si l'accepta: trasllat a centre sanitari (Hospital de Bellvitge / centre de referència). 2 mostres (anàlisi + reserva). Cadena de custòdia documentada",
+        "13. DILIGÈNCIA DE MANIFESTACIÓ del investigat (declaració voluntària o constància de silenci)",
+        "14. INMOBILITZACIÓ vehicle (Art. 104 TRLSV): familiar amb permís i sense alcohol o grua a dipòsit",
+        "15. RETIRADA CAUTELAR del permís físic (Art. 770.6 LECrim) — a disposició del Jutjat",
+        "16. CITACIÓ a JUDICI RÀPID (Art. 795 i ss. LECrim): cèdula amb data, hora i Jutjat de Guàrdia",
+        "17. APERCIBIMENT que la no compareixença pot motivar ordre de detenció",
+        "18. Indicar-li que ha d'acudir amb advocat (preceptiu) o pot sol·licitar advocat d'ofici",
+        "19. ENTREGAR còpia al investigat (cèdula + drets)",
+        "20. REMISSIÓ atestat al Jutjat de Guàrdia + còpia al Ministeri Fiscal (Art. 772.2 LECrim)",
+        "🚨 EXCEPCIÓ — DETENCIÓ enlloc de citació si concorren: tasses molt elevades, accident, conducció molt perillosa, falta d'arrelament, antecedents, conducta agressiva, risc evident de fuga"
+      ],
+      "documentacio_clau": [
+        "Diligència d'inici / encapçalament (lloc, data, hora, agents amb TIP, motiu)",
+        "Diligència dels fets (què ha passat, conducció, parada, observació inicial)",
+        "ACTA DE SIMPTOMATOLOGIA — signes externs observats (clau per al jutjat si la taxa baixa a zona gris)",
+        "Acta/diligència de prova indiciària (resultat, hora, model d'aparell)",
+        "Acta d'INFORMACIÓ DE DRETS Art. 520 LECrim (firmada o amb constància de negativa a firmar)",
+        "Acta d'informació de drets del sotmès a la prova (Arts. 23-24 RGCirc; pot anar en formulari unificat)",
+        "Acta de PROVA EVIDENCIAL: marca, model, núm. sèrie etilòmetre + data del darrer certificat de verificació + hora 1a mesura + hora 2a mesura (≥10 min) + tiquets adjunts",
+        "Diligència de manifestació del investigat (declaració o silenci)",
+        "Diligència de prova de contrast (sol·licitada / no sol·licitada / renúncia firmada)",
+        "Diligència d'IMMOBILITZACIÓ del vehicle (Art. 104 TRLSV)",
+        "Diligència de RETIRADA CAUTELAR del permís (Art. 770.6 LECrim)",
+        "Diligència de CITACIÓ a judici ràpid (entrega cèdula amb data i jutjat)",
+        "Diligència d'entrega de còpia al investigat",
+        "Diligència de REMISSIÓ al Jutjat de Guàrdia i al Ministeri Fiscal",
+        "ANNEXOS: tiquets, certificat d'homologació/verificació de l'etilòmetre, fotografies si n'hi ha"
+      ],
+      "info_extra": "⚠️ ERRORS FREQÜENTS QUE INVALIDEN L'ATESTAT: (1) no respectar els 10 min entre les 2 mediciones, (2) no constar el certificat de verificació vigent, (3) ometre la informació del dret a contrast, (4) no documentar l'acta de simptomatologia, (5) lectura del 520 després de l'evidencial sense justificar-ho, (6) tiquets no adjuntats o il·legibles, (7) no identificar TIP dels agents, (8) no fer constar la renúncia al contrast firmada o la negativa a firmar.",
       "simptomes_clau_acreditar": [
         "Conjuntiva ocular: vermellosa, brillant, midriasi",
         "Parla: lenta, repetitiva, escandida, balbuceig",
         "Marxa: insegura, vacil·lant, base ampla",
         "Equilibri: prova Romberg (peus junts ulls tancats)",
         "Conducció: oscil·lacions, frenades brusques, infraccions reiterades",
-        "Olor a alcohol",
-        "Conducta: agressiva/eufòrica/abatiment"
+        "Olor d'alcohol",
+        "Conducta: agressiva / eufòrica / abatiment"
       ],
-      "competencia": "Jutjat d'Instrucció de Guàrdia (NO Jutjat Violència Dona)"
+      "elements_provatoris_clau": [
+        "Tiquets de les DUES insuflacions evidencials",
+        "Certificat vigent de verificació de l'etilòmetre (CEM)",
+        "Acta de simptomatologia signada per l'agent",
+        "Acta d'informació de drets (520 LECrim + RGCirc) firmada o amb constància de negativa",
+        "Resultat del contrast per sang si s'ha demanat (cadena de custòdia)",
+        "Si n'hi ha: vídeo de càmera corporal o testimonis"
+      ],
+      "competencia": "Jutjat d'Instrucció de Guàrdia (en zona Gavà segons partit judicial). Còpia al Ministeri Fiscal. Termini de compareixença en judici ràpid: 72 hores des de la citació",
+      "base_legal": [
+        "Art. 379.2 CP",
+        "Art. 795 i ss. LECrim (judici ràpid)",
+        "Art. 796.1.4 LECrim (citació sense detenció)",
+        "Art. 520.2 LECrim (drets del investigat)",
+        "Art. 772.2 LECrim (còpia al Fiscal)",
+        "Art. 770.6 LECrim (retirada cautelar permís)",
+        "Arts. 23-24 RGCirc (drets sotmès a la prova)",
+        "Art. 104 TRLSV (immobilització)"
+      ]
     },
 
     "fi_383_cp": {
