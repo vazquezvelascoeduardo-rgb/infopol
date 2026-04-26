@@ -229,7 +229,7 @@ function FinalCard({
         )}
       </header>
 
-      {/* Bloc "Per a la butlleta" — concepte i article */}
+      {/* Bloc "Per a la butlleta" — concepte i article (amb botó copiar) */}
       {(node.concepte_butlleta || node.article_butlleta || node.barem) && (
         <div className="rounded-xl border-2 p-4
           border-current/40 bg-white/60 dark:bg-black/20">
@@ -237,15 +237,19 @@ function FinalCard({
             📝 {t('checklist.forTicket')}
           </div>
           {node.concepte_butlleta && (
-            <p className="text-sm font-medium leading-snug">
-              {node.concepte_butlleta}
-            </p>
+            <div className="flex items-start gap-2">
+              <p className="text-sm font-medium leading-snug flex-1">
+                {node.concepte_butlleta}
+              </p>
+              <CopyButton text={node.concepte_butlleta} />
+            </div>
           )}
-          <div className="mt-2 flex flex-wrap gap-3 text-xs">
+          <div className="mt-2 flex flex-wrap gap-3 text-xs items-center">
             {node.article_butlleta && (
               <span className="inline-flex items-center gap-1 rounded-md border px-2 py-0.5 font-mono
                 border-current/40 bg-white/40 dark:bg-black/30">
                 <span aria-hidden>§</span> {node.article_butlleta}
+                <CopyButton text={node.article_butlleta} compact />
               </span>
             )}
             {node.barem && (
@@ -771,6 +775,49 @@ function DictTable({ label, dict }: { label: string; dict: Record<string, string
         ))}
       </dl>
     </div>
+  );
+}
+
+// Botó per copiar text al porta-retalls amb feedback visual breu.
+function CopyButton({ text, compact }: { text: string; compact?: boolean }) {
+  const [copied, setCopied] = useState(false);
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      // Fallback si clipboard API no disponible (HTTP, etc.)
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      } catch {
+        // Silent fail.
+      }
+    }
+  }
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      title="Copiar al porta-retalls"
+      aria-label="Copiar"
+      className={`inline-flex items-center justify-center shrink-0 rounded-md border transition
+        ${compact ? 'h-5 w-5 text-[10px]' : 'h-7 w-7 text-xs'}
+        border-current/40 hover:bg-white/40 dark:hover:bg-black/30
+        ${copied ? 'bg-green-200 dark:bg-green-400/30' : ''}`}
+    >
+      <span aria-hidden>{copied ? '✓' : '📋'}</span>
+    </button>
   );
 }
 
