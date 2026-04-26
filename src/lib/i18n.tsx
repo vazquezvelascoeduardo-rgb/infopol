@@ -251,14 +251,49 @@ const DICT: Record<Locale, Dict> = {
     'recursos.badge': 'Herramientas',
     'recursos.subtitle':
       'Acceso directo a información útil durante una intervención.',
+    'recursos.section.external': 'Enlaces externos',
+    'recursos.section.phones': 'Teléfonos útiles',
+    'recursos.section.tools': 'Herramientas',
+    'recursos.section.reference': 'Referencia rápida',
+    'recursos.section.local': 'Información local · Viladecans',
     'recursos.farmacia.badge': 'Salud · Viladecans',
     'recursos.farmacia.title': 'Farmacia de guardia · Viladecans',
     'recursos.farmacia.desc':
       'Localiza la farmacia de guardia más cercana en Viladecans (FarmaGuia.net).',
+    'recursos.aiac.badge': 'Animales · Catalunya',
+    'recursos.aiac.title': 'AIAC — Buscar chip animal',
+    'recursos.aiac.desc':
+      'Arxiu d\'Identificació d\'Animals de Companyia (Veterinaris de Catalunya).',
+    'recursos.grua.badge': 'Tráfico · Viladecans',
+    'recursos.grua.title': 'Grúa municipal',
+    'recursos.grua.note': 'Para inmovilizaciones y traslados al depósito.',
     'recursos.codi.badge': 'Comunicaciones · radio',
     'recursos.codi.title': 'Código alfanumérico',
     'recursos.codi.desc':
       'Alfabeto fonético policial (español) con extensiones catalanas Ñ y Ç.',
+    'recursos.matricules.title': 'Códigos provinciales de matrículas',
+    'recursos.matricules.desc':
+      'Matrículas anteriores al 2000 (formato letra-letra-número).',
+    'recursos.matricules.note':
+      'Desde el 2000 las matrículas son uniformes (NNNN-LLL) sin código provincial.',
+    'recursos.dni.title': 'Validador DNI/NIE',
+    'recursos.dni.desc':
+      'Comprueba si la letra de control es correcta. Útil contra documentación falsa.',
+    'recursos.notes.title': 'Libreta operativa',
+    'recursos.notes.desc':
+      'Notas privadas (matrículas, observaciones, recordatorios). Solo en tu dispositivo.',
+    'recursos.jutjats.badge': 'Judicial',
+    'recursos.jutjats.title': 'Juzgados de Gavà',
+    'recursos.jutjats.note':
+      'Juzgado de Guardia · puesta a disposición · juicios rápidos.',
+    'recursos.hospital.badge': 'Salud',
+    'recursos.hospital.title': 'Hospital / CAP de referencia',
+    'recursos.hospital.note':
+      'Para evacuaciones, atestados de lesiones, contraste alcoholemia.',
+    'recursos.tir.badge': 'Armas · Reglamento',
+    'recursos.tir.title': 'Centros de tiro autorizados',
+    'recursos.tir.note':
+      'Para verificar uso de licencias y prácticas obligatorias.',
     'recursos.moreToCome':
       'Más recursos próximamente. ¿Tienes ideas? Dímelas.',
 
@@ -516,14 +551,49 @@ const DICT: Record<Locale, Dict> = {
     'recursos.badge': 'Eines',
     'recursos.subtitle':
       "Accés directe a informació útil durant una intervenció.",
+    'recursos.section.external': 'Enllaços externs',
+    'recursos.section.phones': 'Telèfons útils',
+    'recursos.section.tools': 'Eines',
+    'recursos.section.reference': 'Referència ràpida',
+    'recursos.section.local': 'Informació local · Viladecans',
     'recursos.farmacia.badge': 'Salut · Viladecans',
     'recursos.farmacia.title': 'Farmàcia de guàrdia · Viladecans',
     'recursos.farmacia.desc':
       "Localitza la farmàcia de guàrdia més propera a Viladecans (FarmaGuia.net).",
+    'recursos.aiac.badge': 'Animals · Catalunya',
+    'recursos.aiac.title': 'AIAC — Cerca xip animal',
+    'recursos.aiac.desc':
+      "Arxiu d'Identificació d'Animals de Companyia (Veterinaris de Catalunya).",
+    'recursos.grua.badge': 'Trànsit · Viladecans',
+    'recursos.grua.title': 'Grua municipal',
+    'recursos.grua.note': "Per a immobilitzacions i trasllats al dipòsit.",
     'recursos.codi.badge': 'Comunicacions · ràdio',
     'recursos.codi.title': 'Codi alfanumèric',
     'recursos.codi.desc':
       "Alfabet fonètic policial (espanyol) amb extensions catalanes Ñ i Ç.",
+    'recursos.matricules.title': 'Codis provincials de matrícules',
+    'recursos.matricules.desc':
+      "Matrícules anteriors al 2000 (format lletra-lletra-número).",
+    'recursos.matricules.note':
+      "Des del 2000 les matrícules són uniformes (NNNN-LLL) sense codi provincial.",
+    'recursos.dni.title': 'Validador DNI/NIE',
+    'recursos.dni.desc':
+      "Comprova si la lletra de control és correcta. Útil contra documentació falsa.",
+    'recursos.notes.title': 'Llibreta operativa',
+    'recursos.notes.desc':
+      "Notes privades (matrícules, observacions, recordatoris). Només al teu dispositiu.",
+    'recursos.jutjats.badge': 'Judicial',
+    'recursos.jutjats.title': 'Jutjats de Gavà',
+    'recursos.jutjats.note':
+      "Jutjat de Guàrdia · posada a disposició · judicis ràpids.",
+    'recursos.hospital.badge': 'Salut',
+    'recursos.hospital.title': 'Hospital / CAP de referència',
+    'recursos.hospital.note':
+      "Per a evacuacions, atestats de lesions, contrast alcoholèmia.",
+    'recursos.tir.badge': 'Armes · Reglament',
+    'recursos.tir.title': 'Centres de tir autoritzats',
+    'recursos.tir.note':
+      "Per a verificar ús de llicències i pràctiques obligatòries.",
     'recursos.moreToCome':
       'Més recursos pròximament. Tens idees? Digue-me-les.',
 
