@@ -108,7 +108,7 @@ const DICT: Record<Locale, Dict> = {
       'Procedimientos por situación: tráfico, seguridad ciudadana… Selecciona y obtén la norma aplicable.',
     'home.operativa.cta': 'Abrir operativa',
     'home.superbuscador.badge': 'Tráfico · Catálogo SCT',
-    'home.superbuscador.title': 'Multas e infracciones de tráfico',
+    'home.superbuscador.title': 'Superbuscador de infracciones de tráfico',
     'home.superbuscador.desc':
       'Busca por concepto, artículo, multa o puntos en LSV, RGC, RGCond, RGV, Aseguranza y CP. Resultados con cuantía y DTE.',
     'home.superbuscador.cta': 'Buscar multa',
@@ -130,7 +130,7 @@ const DICT: Record<Locale, Dict> = {
     'fav.remove': 'Quitar de favoritos',
     'fav.save': 'Guardar',
     'fav.saved': 'Guardado',
-    'superbuscador.title': 'Multas e infracciones de tráfico',
+    'superbuscador.title': 'Superbuscador de infracciones de tráfico',
     'superbuscador.badge': 'Catálogo SCT 2026',
     'superbuscador.subtitle':
       'Busca por concepto, artículo, multa o puntos a la vez en TODAS las leyes y reglamentos del catálogo (LSV, RGC, RGCond, RGV, Aseguranza y CP).',
@@ -331,7 +331,7 @@ const DICT: Record<Locale, Dict> = {
     'sidebar.open': 'Abrir menú',
     'sidebar.close': 'Cerrar menú',
     'sidebar.home': 'Inicio',
-    'sidebar.superbuscador': 'Multas tráfico',
+    'sidebar.superbuscador': 'Superbuscador tráfico',
     'sidebar.leyes': 'Leyes',
     'sidebar.leyes.all': 'Todas las leyes',
     'sidebar.operativa': 'Operativa',
@@ -547,7 +547,7 @@ const DICT: Record<Locale, Dict> = {
       "Procediments per situació: trànsit, seguretat ciutadana… Selecciona i obtén la norma aplicable.",
     'home.operativa.cta': 'Obrir operativa',
     'home.superbuscador.badge': 'Trànsit · Catàleg SCT',
-    'home.superbuscador.title': "Multes i infraccions de trànsit",
+    'home.superbuscador.title': "Superbuscador d'infraccions de trànsit",
     'home.superbuscador.desc':
       "Busca per concepte, article, multa o punts a LSV, RGC, RGCond, RGV, Assegurança i CP. Resultats amb quantia i DTE.",
     'home.superbuscador.cta': 'Buscar multa',
@@ -569,7 +569,7 @@ const DICT: Record<Locale, Dict> = {
     'fav.remove': 'Treure dels favorits',
     'fav.save': 'Desar',
     'fav.saved': 'Desat',
-    'superbuscador.title': "Multes i infraccions de trànsit",
+    'superbuscador.title': "Superbuscador d'infraccions de trànsit",
     'superbuscador.badge': 'Catàleg SCT 2026',
     'superbuscador.subtitle':
       "Busca per concepte, article, multa o punts alhora a TOTES les lleis i reglaments del catàleg (LSV, RGC, RGCond, RGV, Assegurança i CP).",
@@ -770,7 +770,7 @@ const DICT: Record<Locale, Dict> = {
     'sidebar.open': 'Obre el menú',
     'sidebar.close': 'Tanca el menú',
     'sidebar.home': 'Inici',
-    'sidebar.superbuscador': 'Multes trànsit',
+    'sidebar.superbuscador': 'Superbuscador trànsit',
     'sidebar.leyes': 'Lleis',
     'sidebar.leyes.all': 'Totes les lleis',
     'sidebar.operativa': 'Operativa',
