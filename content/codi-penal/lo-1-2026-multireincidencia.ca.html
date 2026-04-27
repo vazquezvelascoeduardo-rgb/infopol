@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LO 1/2026 Multirreincidencia — Esquema Operativo Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #0A1628;
+    --bg-section: #0E2244;
+    --gold: #C8A028;
+    --blue-royal: #1A5C96;
+    --red: #C8281E;
+    --green: #1A7A3C;
+    --text-main: #F0F4FF;
+    --text-secondary: #A8BAD4;
+    --border: #C8A028;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  body {
+    background-color: var(--bg-main);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-main);
+    padding: 20px 12px 40px;
+  }
+
+  .wrapper { max-width: 720px; margin: 0 auto; }
+
+  /* ── CABECERA ── */
+  .header {
+    display: flex; align-items: center; gap: 18px;
+    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 8px;
+    animation: fadeUp .5s ease both;
+    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+  }
+  .escudo svg { flex-shrink: 0; }
+  .header-text { flex: 1; }
+  .header-text .label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .header-text h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 26px; font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-main); line-height: 1.1;
+  }
+  .header-text h1 span { color: var(--gold); }
+  .header-text .subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* ── CLASIFICACIÓN ── */
+  .clasificacion {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px; margin-bottom: 14px;
+    animation: fadeUp .6s ease .1s both;
+  }
+  .clas-card {
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+    border: 1px solid rgba(200,160,40,0.3);
+  }
+  .clas-card .icon { font-size: 22px; margin-bottom: 4px; }
+  .clas-card .tipo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .clas-card .pena-max {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+  }
+  .clas-leve   { background: rgba(26,122,60,0.15); border-color: var(--green); }
+  .clas-menos  { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
+  .clas-grave  { background: rgba(200,40,30,0.15); border-color: var(--red); }
+  .clas-leve .tipo   { color: #4ACD7A; }
+  .clas-menos .tipo  { color: #6AADDC; }
+  .clas-grave .tipo  { color: #E86050; }
+
+  /* ── BANNER INFO ── */
+  .info-banner {
+    background: linear-gradient(135deg, #12345E 0%, #1A5C96 50%, #12345E 100%);
+    border: 2px solid #6AADDC;
+    border-radius: 8px;
+    padding: 10px 18px;
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 12px;
+    animation: fadeUp .55s ease .05s both;
+    box-shadow: 0 0 20px rgba(26,92,150,0.3);
+  }
+  .info-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
+  .info-banner .ref-text { flex: 1; }
+  .info-banner .ref-ley {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: #D8EBFF;
+  }
+  .info-banner .ref-desc {
+    font-size: 12px;
+    color: rgba(216,235,255,0.85);
+    margin-top: 2px;
+  }
+  .info-banner .ref-fecha {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px; font-weight: 700;
+    color: #D8EBFF;
+    background: rgba(0,0,0,0.25);
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    border: 1px solid rgba(216,235,255,0.3);
+    text-align: center;
+  }
+
+  /* ── ANTES/DESPUÉS BLOC ── */
+  .antes-despues {
+    background: linear-gradient(135deg, #0E2244 0%, #12345E 100%);
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    animation: fadeUp .6s ease .15s both;
+  }
+  .antes-despues h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ad-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .ad-box {
+    background: rgba(10,22,40,0.6);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  .ad-box .tag {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 11px;
+    margin-bottom: 4px;
+    display: block;
+  }
+  .ad-box .desc {
+    color: var(--text-secondary);
+    line-height: 1.4;
+    font-size: 11.5px;
+  }
+  .ad-antes { border-left: 3px solid var(--red); }
+  .ad-antes .tag { color: #E86050; }
+  .ad-despues { border-left: 3px solid var(--green); }
+  .ad-despues .tag { color: #4ACD7A; }
+
+  /* ── BLOQUE CATEGORÍA ── */
+  .categoria {
+    background: var(--bg-section);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(200,160,40,0.2);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
+  .categoria:nth-child(2)  { animation: fadeUp .6s ease .25s both; }
+  .categoria:nth-child(3)  { animation: fadeUp .6s ease .3s both; }
+  .categoria:nth-child(4)  { animation: fadeUp .6s ease .35s both; }
+  .categoria:nth-child(5)  { animation: fadeUp .6s ease .4s both; }
+  .categoria:nth-child(6)  { animation: fadeUp .6s ease .45s both; }
+  .categoria:nth-child(7)  { animation: fadeUp .6s ease .5s both; }
+  .categoria:nth-child(8)  { animation: fadeUp .6s ease .55s both; }
+
+  .cat-header {
+    background: var(--blue-royal);
+    padding: 12px 18px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none;
+    transition: background .2s;
+  }
+  .cat-header:hover { background: #1e6db0; }
+  .cat-header .cat-icon { font-size: 20px; }
+  .cat-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px; flex: 1;
+  }
+  .cat-header .art-ref {
+    font-size: 11px;
+    color: rgba(240,244,255,0.65);
+    white-space: nowrap;
+  }
+  .cat-header .toggle {
+    font-size: 14px;
+    transition: transform .3s;
+    color: var(--gold);
+  }
+  .cat-header.open .toggle { transform: rotate(180deg); }
+
+  .cat-body { padding: 6px 0; }
+
+  /* ── ARTÍCULO ── */
+  .delito {
+    border-left: 3px solid var(--gold);
+    margin: 8px 14px;
+    background: rgba(10,22,40,0.5);
+    border-radius: 0 7px 7px 0;
+    padding: 10px 14px;
+  }
+  .delito-top {
+    display: flex; align-items: flex-start;
+    gap: 8px; flex-wrap: wrap;
+  }
+  .delito-nombre {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14.5px; font-weight: 600;
+    color: var(--text-main);
+    flex: 1; min-width: 160px;
+  }
+  .art-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    background: rgba(200,160,40,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .tipo-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .badge-clave    { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
+  .badge-info     { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
+  .badge-grave    { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
+  .badge-local    { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
+  .badge-nuevo    { background: rgba(200,40,30,0.4);  color: #FFE0DC;  border: 1px solid var(--red); animation: pulseNew 2s infinite; }
+
+  @keyframes pulseNew {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(200,40,30,0.4); }
+    50%      { box-shadow: 0 0 0 4px rgba(200,40,30,0.0); }
+  }
+
+  /* ── CHAPA RÁPIDA ── */
+  .multa-badge {
+    font-size: 11px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    background: var(--gold);
+    color: #0A1628;
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--gold);
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(200,160,40,0.25);
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .multa-badge.multa-alta {
+    background: var(--red);
+    color: #FFEBE8;
+    border-color: var(--red);
+    box-shadow: 0 1px 3px rgba(200,40,30,0.3);
+  }
+  .multa-badge.multa-organ {
+    background: var(--blue-royal);
+    color: #E0F0FF;
+    border-color: var(--blue-royal);
+  }
+  .multa-badge.multa-ok {
+    background: var(--green);
+    color: #E0FFF0;
+    border-color: var(--green);
+  }
+
+  .delito-desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    line-height: 1.5;
+  }
+  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
+
+  .pena-row {
+    display: flex; flex-wrap: wrap;
+    gap: 6px; margin-top: 7px;
+  }
+  .pena-chip {
+    font-size: 11px;
+    background: rgba(26,92,150,0.25);
+    border: 1px solid rgba(26,92,150,0.6);
+    color: var(--text-main);
+    padding: 3px 9px;
+    border-radius: 20px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .pena-chip.positivo {
+    background: rgba(26,122,60,0.25);
+    border-color: rgba(26,122,60,0.6);
+  }
+  .pena-chip.agravada {
+    background: rgba(200,40,30,0.2);
+    border-color: rgba(200,40,30,0.5);
+  }
+
+  /* ── MINI TABLA ── */
+  .mini-tabla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .mini-tabla .celda {
+    background: rgba(10,22,40,0.6);
+    border: 1px solid rgba(200,160,40,0.2);
+    border-radius: 5px;
+    padding: 6px 9px;
+    font-size: 11.5px;
+  }
+  .mini-tabla .celda b {
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* ── TABLA COMPARATIVA ── */
+  .tabla-discip {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    gap: 0;
+    margin-top: 8px;
+    background: rgba(10,22,40,0.7);
+    border: 1px solid rgba(200,160,40,0.3);
+    border-radius: 5px;
+    overflow: hidden;
+    font-size: 11.5px;
+  }
+  .tabla-discip.col3 { grid-template-columns: 1fr 1fr 1fr; }
+  .tabla-discip .td-header {
+    background: rgba(200,160,40,0.15);
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    text-align: center;
+    border-right: 1px solid rgba(200,160,40,0.2);
+    border-bottom: 1px solid rgba(200,160,40,0.2);
+  }
+  .tabla-discip .td-header:last-child { border-right: none; }
+  .tabla-discip .td-cell {
+    padding: 5px 8px;
+    color: var(--text-main);
+    border-right: 1px solid rgba(200,160,40,0.1);
+    border-bottom: 1px solid rgba(200,160,40,0.1);
+  }
+  .tabla-discip .td-cell:last-child { border-right: none; }
+  .tabla-discip .td-pob {
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+  }
+
+  /* ── NOTAS ── */
+  .nota-agrav {
+    margin-top: 6px; font-size: 11.5px;
+    color: #E08888;
+    background: rgba(200,40,30,0.08);
+    border-left: 2px solid var(--red);
+    padding: 5px 9px;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+  }
+  .nota-agrav b { color: #FF8070; }
+  .nota-policial {
+    margin-top: 6px; font-size: 11.5px;
+    color: #A8D4C0;
+    background: rgba(26,122,60,0.1);
+    border-left: 2px solid var(--green);
+    padding: 5px 9px;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+  }
+  .nota-policial b { color: #4ACD7A; }
+  .nota-clave {
+    margin-top: 6px; font-size: 11.5px;
+    color: #E8D890;
+    background: rgba(200,160,40,0.1);
+    border-left: 2px solid var(--gold);
+    padding: 5px 9px;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+  }
+  .nota-clave b { color: #FFD060; }
+
+  /* ── RECUERDA ── */
+  .recuerda {
+    background: var(--gold);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-top: 6px;
+    animation: fadeUp .6s ease .8s both;
+  }
+  .recuerda h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px; font-weight: 700;
+    text-transform: uppercase;
+    color: #0A1628;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .recuerda ul { list-style: none; }
+  .recuerda ul li {
+    font-size: 13px;
+    color: #0A1628;
+    padding: 5px 0;
+    display: flex; align-items: flex-start; gap: 6px;
+    border-bottom: 1px solid rgba(10,22,40,0.15);
+    line-height: 1.4;
+  }
+  .recuerda ul li:last-child { border-bottom: none; }
+  .recuerda ul li::before {
+    content: "▶";
+    font-size: 9px; margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── BOTÓN IMPRIMIR ── */
+  .btn-print {
+    display: block; width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: var(--blue-royal);
+    border: 2px solid var(--gold);
+    color: var(--text-main);
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px;
+    border-radius: 8px;
+    cursor: pointer; transition: all .2s;
+    animation: fadeUp .6s ease .9s both;
+  }
+  .btn-print:hover {
+    background: var(--gold);
+    color: #0A1628;
+  }
+
+  /* ── DIVISOR ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 4px 14px 2px;
+    opacity: .35;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 500px) {
+    .clasificacion { grid-template-columns: 1fr; }
+    .header-text h1 { font-size: 20px; }
+    .cat-header h2 { font-size: 14px; }
+    .multa-badge { font-size: 10.5px; padding: 2px 7px; }
+    .tabla-discip { grid-template-columns: 1fr 1fr; }
+    .tabla-discip.col3 { grid-template-columns: 1fr; }
+    .ad-grid { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .btn-print { display: none; }
+    .categoria { break-inside: avoid; }
+    .cat-body { display: block !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- CABECERA -->
+  <div class="header">
+    <div class="escudo">
+      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
+        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
+        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICIA</text>
+        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
+        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <div class="label">Esquema Operativo Policial</div>
+      <h1>LO 1/2026 · <span>Multirreincidencia</span></h1>
+      <div class="subtitle">Reforma del Código Penal y LECrim · Hurtos, estafas leves, móviles, petaqueo · Aplicación operativa PL</div>
+    </div>
+  </div>
+
+  <!-- CLASIFICACIÓN -->
+  <div class="clasificacion">
+    <div class="clas-card clas-leve">
+      <div class="icon">📜</div>
+      <div class="tipo">Cód. Penal</div>
+      <div class="pena-max">9 artículos<br>Arts. 22, 66, 80, 234, 235, 248, 250, 255, 568</div>
+    </div>
+    <div class="clas-card clas-menos">
+      <div class="icon">⚖️</div>
+      <div class="tipo">LECrim</div>
+      <div class="pena-max">3 artículos<br>Arts. 13, 105, 544 bis</div>
+    </div>
+    <div class="clas-card clas-grave">
+      <div class="icon">🆕</div>
+      <div class="tipo">Novedades</div>
+      <div class="pena-max">Móviles · Petaqueo · Multirrein. leve · Acción penal Ayuntamientos</div>
+    </div>
+  </div>
+
+  <!-- BANNER INFO -->
+  <div class="info-banner">
+    <div class="ref-icon">⚖️</div>
+    <div class="ref-text">
+      <div class="ref-ley">⚖️ LO 1/2026, de 8 de abril · Multirreincidencia</div>
+      <div class="ref-desc">Reforma LO 10/1995 (CP) + LECrim · BOE núm. 87 de 9-abr-2026 · Sustituye la fallida LO 9/2022 · Origen: proposición de Junts (mar 2024) · Inspiración: Plan Mossos d'Esquadra contra multirreincidencia</div>
+    </div>
+    <div class="ref-fecha">10/04/2026<br>Vigente</div>
+  </div>
+
+  <!-- ANTES / DESPUÉS -->
+  <div class="antes-despues">
+    <h3>🔄 Cambio de paradigma · Antes vs. Después</h3>
+    <div class="ad-grid">
+      <div class="ad-box ad-antes">
+        <span class="tag">❌ Antes (LO 9/2022)</span>
+        <span class="desc">Hurtos leves &lt;400 € → solo <b style="color:#FFD060">multa 1-3 meses</b>. Para agravar, exigía que <b style="color:#FFD060">el total sustraído de las 3 condenas previas superara 400 €</b> · Difícil prueba · "Puerta giratoria"</span>
+      </div>
+      <div class="ad-box ad-despues">
+        <span class="tag">✅ Ahora (LO 1/2026)</span>
+        <span class="desc">Hurto leve + 3 condenas previas (1 leve mín.) → <b style="color:#FFD060">prisión 6-18 meses</b> · <b style="color:#FFD060">Desaparece el criterio cuantitativo</b> de los 400 € de las condenas previas · Solo cuenta la firmeza</span>
+      </div>
+    </div>
+    <div class="nota-policial">🚔 <b>La gran novedad:</b> los delitos leves antes no contaban para la reincidencia. Ahora SÍ cuentan, pero solo cuando integren un tipo agravado por multirreincidencia (art. 22.8ª CP). En la práctica: un mecherista con 3 condenas previas ya entra en prisión.</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       1. RÉGIMEN GENERAL: REINCIDENCIA Y PENA
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">⚖️</span>
+      <h2>Régimen General · Reincidencia y Pena</h2>
+      <span class="art-ref">Arts. 22, 66 y 80 CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Concepto de reincidencia</div>
+          <span class="art-badge">Art. 22.8ª CP</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE PL</span>
+          <span class="multa-badge multa-alta">📚 Mismo título + misma naturaleza</span>
+        </div>
+        <div class="delito-desc">
+          Hay reincidencia cuando, al delinquir, el culpable haya sido <b>condenado ejecutoriamente</b> por un delito <b>comprendido en el mismo título</b> del Código Penal, siempre que sea <b>de la misma naturaleza</b>.
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>❌ NO computan</b>Antecedentes cancelados o que debieran serlo + Delitos leves (regla general)</div>
+          <div class="celda"><b>✅ EXCEPCIÓN nueva</b>Delitos leves SÍ computan en tipos agravados por multirreincidencia (234.2 y 248)</div>
+          <div class="celda"><b>🇪🇺 UE</b>Las condenas firmes de jueces o tribunales de otros Estados UE producen efecto de reincidencia</div>
+          <div class="celda"><b>📅 Ejecutoriedad</b>Solo cuenta si la condena anterior es firme antes del nuevo hecho</div>
+        </div>
+        <div class="nota-clave">💡 <b>Cambio operativo:</b> antes los delitos leves nunca computaban. Ahora computan SOLO para activar la multirreincidencia agravada de hurtos (234.2) y estafas (248). Es la "puerta de entrada" al endurecimiento.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Reglas de aplicación de la pena</div>
+          <span class="art-badge">Art. 66.2 CP</span>
+          <span class="tipo-badge badge-info">Determinación pena</span>
+        </div>
+        <div class="delito-desc">
+          En delitos leves e imprudentes, los jueces aplican las reglas a su <b>prudente arbitrio</b>, SIN sujetarse a las reglas del 66.1, <b>SALVO en los tipos agravados por multirreincidencia de delitos leves</b>.
+        </div>
+        <div class="nota-policial">🚔 Significado práctico: cuando el juez juzgue un hurto leve por multirreincidencia, ya NO tiene libertad para "graduar suave" — tiene que aplicar las reglas tasadas como si fuera un delito menos grave.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Suspensión de la pena</div>
+          <span class="art-badge">Art. 80.2.1ª CP</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE</span>
+          <span class="multa-badge multa-alta">🔒 Ingreso en prisión real</span>
+        </div>
+        <div class="delito-desc">
+          Para ser considerado "delincuente primario" (y poder suspender la pena), <b>los antecedentes por delitos leves NO impiden serlo</b>, <b>SALVO</b> cuando esos delitos leves integren un tipo agravado por multirreincidencia.
+        </div>
+        <div class="nota-agrav">⚠️ <b>Efecto demoledor:</b> antes un mecherista con muchos antecedentes leves entraba y salía con suspensiones de pena. Ahora, si el caso encaja en el 234.2 multirreincidencia, los leves cuentan → se le deniega la suspensión → <b>ingresa en prisión efectiva</b>.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       2. HURTO Y MULTIRREINCIDENCIA
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">🛒</span>
+      <h2>Hurto · El Núcleo de la Reforma</h2>
+      <span class="art-ref">Arts. 234 y 235 CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Hurto leve y multirreincidencia</div>
+          <span class="art-badge">Art. 234.2 CP</span>
+          <span class="tipo-badge badge-grave">⭐⭐ CLAVE PL</span>
+          <span class="multa-badge multa-alta">🔒 Prisión 6-18 meses</span>
+        </div>
+        <div class="delito-desc">
+          Si la cuantía sustraída <b>no excede de 400 €</b> → <b>multa 1 a 3 meses</b> (delito leve), salvo que concurra alguna agravante del 235.<br>
+          <b>NOVEDAD:</b> Si el autor ha sido condenado ejecutoriamente <b>al menos por 3 delitos de la misma naturaleza</b> comprendidos en el Título XIII (delitos contra el patrimonio), <b>siendo al menos uno de ellos leve</b> → se aplica la pena del 234.1 (<b>prisión 6-18 meses</b>).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip positivo">≤400 € + sin antecedentes → multa 1-3 meses</span>
+          <span class="pena-chip agravada">≤400 € + 3 condenas (1 leve) → PRISIÓN 6-18 meses</span>
+        </div>
+        <div class="nota-policial">🚔 <b>Aplicación operativa PL:</b> en hurto en comercio (mecherista habitual), tras la identificación, consultar SIDENPOL/antecedentes. Si tiene 3 condenas firmes anteriores por delitos del Título XIII (hurto, robo, etc., uno mín. leve), el atestado debe consignar expresamente la <b>multirreincidencia del 234.2</b> con copia de las hojas histórico-penales.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Explotaciones agrícolas y ganaderas</div>
+          <span class="art-badge">Art. 235.1.4º</span>
+          <span class="tipo-badge badge-info">Simplificación</span>
+          <span class="multa-badge">🌾 Solo cuantía &gt; 400 €</span>
+        </div>
+        <div class="delito-desc">
+          <b>SIMPLIFICACIÓN del tipo:</b> antes había que probar la "especial gravedad" del perjuicio. Ahora <b>basta acreditar que el valor de lo sustraído supera los 400 €</b>. Pena del 235: <b>prisión 1-3 años</b>.
+        </div>
+        <div class="nota-clave">💡 Razón: los productos y herramientas agrarias tienen escaso valor de reventa pero <b>elevado coste de reposición</b>, dejando al sector en vulnerabilidad. Aplicación: hurto de aceitunas, fruta, herramientas, sistemas de riego en finca rústica.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Multirreincidencia "grave"</div>
+          <span class="art-badge">Art. 235.1.7º</span>
+          <span class="tipo-badge badge-grave">Reincidencia</span>
+          <span class="multa-badge multa-alta">⚠️ Distinguir del 234.2</span>
+        </div>
+        <div class="delito-desc">
+          La agravante por reincidencia clásica del 235 exige <b>al menos 3 condenas por delitos MENOS GRAVES o GRAVES</b> del mismo título y de la misma naturaleza (no leves).
+        </div>
+        <div class="nota-agrav">⚠️ <b>OJO al examen y al atestado:</b> hay <b>DOS multirreincidencias</b> distintas:<br>• <b>234.2</b> (leve): 3 condenas, <b>al menos una leve</b> · pena 6-18 m prisión<br>• <b>235.1.7º</b> (grave): 3 condenas <b>menos graves o graves</b> (no leves) · pena 1-3 a prisión</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">🆕 Hurto agravado de móviles y dispositivos digitales</div>
+          <span class="art-badge">Art. 235.1.10º</span>
+          <span class="tipo-badge badge-nuevo">🆕 NUEVO</span>
+          <span class="multa-badge multa-alta">📱 Prisión 1-3 años</span>
+        </div>
+        <div class="delito-desc">
+          <b>Nuevo apartado 10º:</b> hurto agravado para <b>teléfonos móviles, cualquier dispositivo móvil de comunicación o de almacenamiento masivo de información digital susceptible de contener datos personales</b> (tablets, portátiles, smartwatches, pendrives con datos…).<br>
+          <b>Pena: prisión 1 a 3 años (con independencia de la cuantía)</b>.
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>✅ SÍ se aplica</b>Móvil sustraído en vía pública, terraza, transporte, vivienda, sala de cine, etc.</div>
+          <div class="celda"><b>❌ NO se aplica</b>Dispositivos a la venta, en almacén o en exposición en establecimiento comercial</div>
+        </div>
+        <div class="nota-policial">🚔 <b>Justificación legal:</b> los móviles son los objetos más sustraídos en el espacio público. Su pérdida genera daños que <b>exceden con creces el valor material</b>: incomunicación, exposición de datos privados, acceso a banca, geolocalización, redes sociales. Aplica aunque el móvil cueste 50 €.</div>
+        <div class="nota-clave">💡 La excepción comercial es lógica: si el ladrón roba un móvil expuesto en una FNAC, va al hurto ordinario o agravado por otra vía (apertura de vitrina, etc.), no por el 235.1.10º.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       3. ESTAFA Y MULTIRREINCIDENCIA
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">💸</span>
+      <h2>Estafa · Misma Lógica que el Hurto</h2>
+      <span class="art-ref">Arts. 248 y 250 CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Estafa leve y multirreincidencia</div>
+          <span class="art-badge">Art. 248 CP</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE</span>
+          <span class="multa-badge multa-alta">🔒 Prisión 6 m – 3 años</span>
+        </div>
+        <div class="delito-desc">
+          <b>Pena base (art. 248):</b> prisión 6 meses a 3 años.<br>
+          <b>Estafa leve (≤400 €):</b> multa 1-3 meses, salvo agravantes del 250.<br>
+          <b>NOVEDAD multirreincidencia:</b> si el culpable ha sido condenado ejecutoriamente <b>por al menos 3 delitos de la misma naturaleza</b> (capítulo VI, defraudaciones), <b>siendo al menos uno leve</b> → se aplica la pena del tipo básico (<b>prisión 6 m – 3 años</b>).
+        </div>
+        <div class="nota-clave">💡 Mismo esquema que el hurto. Especialmente relevante para estafas a personas mayores (timo del trile, falsos técnicos, cargos repetidos), <b>banca electrónica fraccionada</b>, fraudes de pequeñas cuantías reiterados.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Estafa agravada por multirreincidencia "grave"</div>
+          <span class="art-badge">Art. 250.1.8º</span>
+          <span class="tipo-badge badge-grave">Reincidencia</span>
+          <span class="multa-badge">📚 Paralelo al 235.1.7º</span>
+        </div>
+        <div class="delito-desc">
+          La agravante específica de reincidencia se aplica si hay <b>al menos 3 condenas previas por delitos MENOS GRAVES o GRAVES</b> del mismo capítulo (defraudaciones), de la misma naturaleza, no cancelados.
+        </div>
+        <div class="nota-policial">🚔 Aplicación: estafadores profesionales, redes organizadas de timos a personas mayores, ciberestafas reiteradas. Pena del 250: <b>prisión 1-6 años + multa 6-12 meses</b>.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       4. NARCO INDIRECTO: FLUIDO Y PETAQUEO
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">⚡</span>
+      <h2>Narco indirecto · Fluido y "Petaqueo"</h2>
+      <span class="art-ref">Arts. 255 y 568 CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">🆕 Defraudación de fluido eléctrico para narco</div>
+          <span class="art-badge">Art. 255.3 CP</span>
+          <span class="tipo-badge badge-nuevo">🆕 NUEVO</span>
+          <span class="multa-badge multa-alta">⚡ Prisión 6-18 m o multa 12-24 m</span>
+        </div>
+        <div class="delito-desc">
+          Cuando la defraudación de energía eléctrica, <b>cualquiera que sea su cuantía</b>, se cometa con la finalidad de <b>abastecer instalaciones utilizadas para conductas del art. 368 CP</b> (tráfico de drogas) → <b>prisión 6-18 meses o multa 12-24 meses</b>.
+        </div>
+        <div class="nota-policial">🚔 <b>Aplicación operativa típica:</b> "narcopisos" y plantaciones indoor de marihuana con conexión irregular (pinchazo) a la red eléctrica. <b>Antes</b>: si era ≤400 €, era multa simbólica. <b>Ahora</b>: la cuantía es indiferente — basta probar la finalidad de abastecer una instalación de tráfico de drogas. Coordinación con UDYCO/EDOA y compañía eléctrica para el atestado.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">🆕 "Petaqueo" · Suministro de combustible a narcolanchas</div>
+          <span class="art-badge">Art. 568.2 CP</span>
+          <span class="tipo-badge badge-nuevo">🆕 NUEVO</span>
+          <span class="multa-badge multa-alta">⛽ Prisión 3-5 años</span>
+        </div>
+        <div class="delito-desc">
+          Nuevo apartado 2 al art. 568. Cuando la sustancia inflamable sea un <b>combustible líquido</b> destinado al avituallamiento de embarcaciones de narcotráfico ("petaqueo") → <b>prisión 3 a 5 años</b>. Posibilidad de pena inferior en grado en conductas de menor entidad.
+        </div>
+        <div class="nota-clave">💡 <b>"Petaqueo":</b> suministro logístico de combustible (gasolina/gasóleo) a narcolanchas (semirrígidas) en costa, normalmente desde la playa o muelles. Hasta ahora sin tipo penal específico. Especial impacto en el <b>Estrecho, Levante y Galicia</b>.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       5. NOVEDADES PROCESALES (LECrim)
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">📋</span>
+      <h2>Novedades Procesales · LECrim</h2>
+      <span class="art-ref">Arts. 13, 105 y 544 bis LECrim</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Primeras diligencias · Reiteración delictiva</div>
+          <span class="art-badge">Art. 13 LECrim</span>
+          <span class="tipo-badge badge-info">Procesal</span>
+          <span class="multa-badge multa-organ">🛡️ Protección víctimas</span>
+        </div>
+        <div class="delito-desc">
+          Las primeras diligencias incluyen ahora EXPRESAMENTE: <b>proteger a víctimas y terceros</b> y <b>evitar la reiteración delictiva</b>. Para ello pueden adoptarse desde el inicio:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">📍 Medidas cautelares del 544 bis</span>
+          <span class="pena-chip">🛡️ Orden de protección 544 ter</span>
+          <span class="pena-chip">🌐 Retirada/bloqueo de contenidos en delitos por internet</span>
+        </div>
+        <div class="nota-policial">🚔 <b>Cambio cultural importante:</b> antes el atestado priorizaba esclarecer el hecho. Ahora, desde la primera intervención, hay que documentar también el <b>riesgo de reiteración</b> (informe de antecedentes, situación, modus operandi) para que el juez pueda imponer medidas cautelares ya en las primeras 72 h.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">🆕 Acción penal de las Entidades Locales</div>
+          <span class="art-badge">Art. 105.3 LECrim</span>
+          <span class="tipo-badge badge-nuevo">🆕 CLAVE PL</span>
+          <span class="multa-badge multa-alta">🏛️ Ayuntamientos como acusación</span>
+        </div>
+        <div class="delito-desc">
+          Las <b>entidades locales (Ayuntamientos)</b> podrán ejercer la <b>acción penal</b> en los delitos de hurto del Capítulo I, Título XIII, Libro II del CP (todos los hurtos, leves y agravados).
+        </div>
+        <div class="nota-policial">🚔 <b>Impacto directo en PL:</b> el Ayuntamiento puede personarse como acusación particular en los hurtos reiterados que afectan al comercio local y la convivencia, <b>sin depender del Ministerio Fiscal</b>. La PL puede aportar atestados y antecedentes para nutrir esa acusación. Reclamación histórica de los municipios catalanes (atendida la propuesta del Plan Mossos).</div>
+        <div class="nota-clave">💡 Es la única parte de la ley con rango de ley ordinaria (no orgánica), junto con la disposición sobre planta judicial.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Medidas cautelares de alejamiento territorial</div>
+          <span class="art-badge">Art. 544 bis LECrim</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE</span>
+          <span class="multa-badge multa-alta">📍 Prohibición territorial</span>
+        </div>
+        <div class="delito-desc">
+          El juez/tribunal puede imponer cautelarmente, motivadamente, cuando sea estrictamente necesario para proteger a la víctima o evitar la reiteración delictiva, prohibiciones de:
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>📍 Lugar / Barrio</b>Espacios concretos de actuación delictiva</div>
+          <div class="celda"><b>🏘️ Municipio / Provincia</b>Ámbito ampliado · Novedad importante</div>
+          <div class="celda"><b>🗺️ Entidad local / CCAA</b>Hasta nivel autonómico</div>
+          <div class="celda"><b>👥 Aproximación / Comunicación</b>Respecto a personas determinadas</div>
+        </div>
+        <div class="nota-agrav">⚠️ <b>Incumplimiento:</b> el juez convoca comparecencia del 505 LECrim para valorar <b>prisión provisional</b> (503), orden de protección (544 ter) u otra medida más limitativa. Posible además quebrantamiento del 468 CP.</div>
+        <div class="nota-policial">🚔 <b>Delitos contra libertad sexual (LO 10/2022):</b> se permite expresamente acordar el uso de <b>dispositivos telemáticos</b> (pulsera) para controlar el cumplimiento. Se aplica solo a delitos del art. 57 CP.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       6. APLICACIÓN OPERATIVA POLICIAL
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🚔</span>
+      <h2>Aplicación Operativa · Workflow PL</h2>
+      <span class="art-ref">Atestado · Identificación · Antecedentes</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Detención de mecherista habitual · Pasos</div>
+          <span class="art-badge">Praxis PL</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE</span>
+        </div>
+        <div class="delito-desc">
+          Workflow operativo recomendado al detener un autor por hurto en establecimiento comercial:
+        </div>
+        <div class="tabla-discip col3">
+          <div class="td-header">Fase</div>
+          <div class="td-header">Acción</div>
+          <div class="td-header">Documento</div>
+          <div class="td-cell td-pob">1. Aprehensión</div>
+          <div class="td-cell">Identificación + comprobación efectos</div>
+          <div class="td-cell">Acta de aprehensión</div>
+          <div class="td-cell td-pob">2. Antecedentes</div>
+          <div class="td-cell">Consulta SIDENPOL/SIP/Registro Central Penados</div>
+          <div class="td-cell">Hoja histórico-penal</div>
+          <div class="td-cell td-pob">3. Calificación</div>
+          <div class="td-cell">¿Tiene 3 condenas firmes Tít. XIII (1 leve)?</div>
+          <div class="td-cell">→ Multirrein. 234.2</div>
+          <div class="td-cell td-pob">4. Detención</div>
+          <div class="td-cell">Si encaja en 234.2 → delito menos grave → detención procedente</div>
+          <div class="td-cell">Acta detención + derechos</div>
+          <div class="td-cell td-pob">5. Atestado</div>
+          <div class="td-cell">Consignar EXPRESAMENTE las 3 condenas previas con sentencias</div>
+          <div class="td-cell">Atestado + diligencias</div>
+          <div class="td-cell td-pob">6. Coordinación</div>
+          <div class="td-cell">Aviso al Ayuntamiento (105.3 LECrim) si procede</div>
+          <div class="td-cell">Comunicación municipal</div>
+        </div>
+        <div class="nota-clave">💡 <b>Crítico para el atestado:</b> sin las copias o referencias de las 3 sentencias firmes anteriores, el Fiscal y el Juez no pueden aplicar el 234.2. Adjuntar al menos: número de procedimiento, juzgado, fecha de firmeza y tipo penal de cada condena previa.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Hurto de móvil en vía pública · 235.1.10º</div>
+          <span class="art-badge">Praxis PL</span>
+          <span class="tipo-badge badge-info">Aplicación 235.1.10º</span>
+          <span class="multa-badge">📱 Detención procedente siempre</span>
+        </div>
+        <div class="delito-desc">
+          Toda sustracción de móvil en vía pública o establecimiento (no comercial del propio móvil) ya NO es nunca delito leve: <b>siempre menos grave</b> con prisión 1-3 años.
+        </div>
+        <div class="nota-policial">🚔 Implicaciones operativas: (1) detención procedente sin necesidad de cuantía; (2) se justifica cacheo + IMEI; (3) consulta inmediata IMEI en bases (¿está reportado?); (4) en delitos múltiples (carteristas), agrupación de víctimas en un solo atestado por delito continuado del 74 CP.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       CUADRO RECUERDA
+  ══════════════════════════════════════════ -->
+  <div class="recuerda">
+    <h3>📋 Recuerda — LO 1/2026 Multirreincidencia</h3>
+    <ul>
+      <li>📅 <b>Cronología:</b> Proposición de Junts (mar 2024) · Aprobada Congreso febrero 2026 · BOE 9-abr-2026 · Vigor 10-abr-2026 (al día siguiente).</li>
+      <li>📚 <b>Estructura:</b> Modifica 9 artículos del CP (22, 66, 80, 234, 235, 248, 250, 255, 568) y 3 de la LECrim (13, 105, 544 bis).</li>
+      <li>⚖️ <b>Cambio de paradigma:</b> los delitos leves SÍ cuentan ahora para la reincidencia, pero solo cuando integren un tipo agravado por multirreincidencia (art. 22.8ª CP).</li>
+      <li>🛒 <b>Hurto leve multirreincidente (234.2):</b> ≤400 € + 3 condenas firmes Tít. XIII (1 leve mín.) → <b>prisión 6-18 meses</b> (antes solo multa).</li>
+      <li>📱 <b>NUEVO 235.1.10º:</b> hurto de móviles y dispositivos con datos personales → <b>prisión 1-3 años</b>, con independencia de cuantía. Excepto: a la venta/almacén/exposición.</li>
+      <li>🌾 <b>235.1.4º simplificado:</b> hurto en explotación agrícola/ganadera → basta valor &gt;400 € (sin probar especial gravedad). Pena 1-3 años.</li>
+      <li>🔁 <b>235.1.7º (multirrein. grave):</b> 3 condenas menos graves o graves del mismo título · NO confundir con la del 234.2 (que admite leves).</li>
+      <li>💸 <b>Estafa leve multirreincidente (248):</b> ≤400 € + 3 condenas firmes (1 leve) → <b>prisión 6 m – 3 años</b>. Mismo esquema que el hurto.</li>
+      <li>👴 <b>250.1.8º:</b> agravada por reincidencia (3 condenas menos graves/graves) en estafa → 1-6 años + multa 6-12 meses.</li>
+      <li>⚡ <b>NUEVO 255.3 CP:</b> defraudación eléctrica para narcopisos/plantaciones (368) → 6-18 m prisión o multa 12-24 m, <b>cualquiera que sea la cuantía</b>.</li>
+      <li>⛽ <b>NUEVO 568.2 CP "petaqueo":</b> combustible líquido para narcolanchas → prisión 3-5 años. Posible inferior en grado en conductas menores.</li>
+      <li>🔒 <b>Suspensión de pena (80.2.1ª):</b> en multirreincidencia leve, los antecedentes leves SÍ impiden la suspensión → ingreso efectivo en prisión.</li>
+      <li>📋 <b>Art. 13 LECrim:</b> primeras diligencias incluyen <b>evitar la reiteración delictiva</b> + adopción inmediata de medidas cautelares.</li>
+      <li>🏛️ <b>NUEVO 105.3 LECrim:</b> Ayuntamientos pueden ejercer <b>acción penal</b> en hurtos (Cap. I, Tít. XIII, Lib. II CP).</li>
+      <li>📍 <b>544 bis LECrim ampliado:</b> medidas cautelares de prohibición territorial hasta nivel barrio/municipio/provincia/CCAA + aproximación/comunicación.</li>
+      <li>📵 <b>Pulsera telemática:</b> en delitos contra libertad sexual (LO 10/2022) puede acordarse motivadamente para controlar el alejamiento.</li>
+      <li>⚠️ <b>Incumplimiento medidas cautelares:</b> comparecencia 505 LECrim → prisión provisional (503), orden protección (544 ter) o medida más limitativa.</li>
+      <li>📊 <b>Disposición transitoria:</b> los delitos cometidos antes del 10-abr-2026 se juzgan con la ley anterior, salvo que la nueva sea más favorable.</li>
+      <li>👥 <b>Planta judicial:</b> mínimo 1 juez de adscripción territorial por cada 100.000 habitantes en plazo máximo 2 años.</li>
+      <li>🚔 <b>Atestado PL clave:</b> en hurtos reiterados, adjuntar siempre histórico-penal con las 3 condenas firmes (juzgado + nº procedimiento + fecha firmeza + tipo penal).</li>
+    </ul>
+  </div>
+
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+
+</div>
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    if (body.style.display === 'none' || body.style.display === '') {
+      body.style.display = 'block';
+      body.style.animation = 'fadeUp .3s ease';
+    } else {
+      body.style.display = 'none';
+    }
+  }
+</script>
+</body>
+</html>

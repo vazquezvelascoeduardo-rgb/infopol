@@ -907,6 +907,37 @@ const LIGHT_THEME_CSS = `
   }
   .${SCOPE_CLASS}.ipol-light .bandera.vermella .nom { color: #b91c1c !important; }
 
+  /* ── Comparativa Antes / Després (LO 1/2026 multireincidència) ──
+     Caixa "abans" amb to vermellós + caixa "després" amb to verd. */
+  .${SCOPE_CLASS}.ipol-light .antes-despues,
+  .${SCOPE_CLASS}.ipol-light .ad-grid {
+    background: transparent !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .ad-box {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    box-shadow: 0 1px 2px rgba(15,23,42,0.05) !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .ad-box .desc { color: #0f172a !important; }
+  .${SCOPE_CLASS}.ipol-light .ad-antes {
+    background: #fef2f2 !important;
+    border-left-color: #b91c1c !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .ad-antes .tag { color: #b91c1c !important; font-weight: 700; }
+  .${SCOPE_CLASS}.ipol-light .ad-despues {
+    background: #ecfdf5 !important;
+    border-left-color: #15803d !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .ad-despues .tag { color: #15803d !important; font-weight: 700; }
+
+  /* Badge "NUEVO" (variant del tipo-badge amb pulsació vermella) */
+  .${SCOPE_CLASS}.ipol-light .tipo-badge.badge-nuevo,
+  .${SCOPE_CLASS}.ipol-light .badge-nuevo {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+    border: 1px solid #b91c1c !important;
+  }
+
   /* Drets / derecho-item (LECrim) */
   .${SCOPE_CLASS}.ipol-light .derecho-item {
     background: #f8fafc !important;
