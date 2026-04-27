@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codi Penal — Esquema Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #0A1628;
+    --bg-section: #0E2244;
+    --gold: #C8A028;
+    --blue-royal: #1A5C96;
+    --red: #C8281E;
+    --green: #1A7A3C;
+    --text-main: #F0F4FF;
+    --text-secondary: #A8BAD4;
+    --border: #C8A028;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  body {
+    background-color: var(--bg-main);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-main);
+    padding: 20px 12px 40px;
+  }
+
+  .wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* ── CABECERA ── */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 8px;
+    animation: fadeUp .5s ease both;
+    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+  }
+  .escudo svg { flex-shrink: 0; }
+  .header-text { flex: 1; }
+  .header-text .label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .header-text h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-main);
+    line-height: 1.1;
+  }
+  .header-text h1 span { color: var(--gold); }
+  .header-text .subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* ── CLASIFICACIÓN GENERAL ── */
+  .clasificacion {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+    animation: fadeUp .6s ease .1s both;
+  }
+  .clas-card {
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+    border: 1px solid rgba(200,160,40,0.3);
+  }
+  .clas-card .icon { font-size: 22px; margin-bottom: 4px; }
+  .clas-card .tipo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .clas-card .pena-max {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+  }
+  .clas-leve   { background: rgba(26,122,60,0.15); border-color: var(--green); }
+  .clas-menos  { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
+  .clas-grave  { background: rgba(200,40,30,0.15); border-color: var(--red); }
+  .clas-leve .tipo   { color: #4ACD7A; }
+  .clas-menos .tipo  { color: #6AADDC; }
+  .clas-grave .tipo  { color: #E86050; }
+
+  /* ── BLOQUE CATEGORÍA ── */
+  .categoria {
+    background: var(--bg-section);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(200,160,40,0.2);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
+  .categoria:nth-child(2)  { animation: fadeUp .6s ease .3s both; }
+  .categoria:nth-child(3)  { animation: fadeUp .6s ease .35s both; }
+  .categoria:nth-child(4)  { animation: fadeUp .6s ease .4s both; }
+  .categoria:nth-child(5)  { animation: fadeUp .6s ease .45s both; }
+  .categoria:nth-child(6)  { animation: fadeUp .6s ease .5s both; }
+  .categoria:nth-child(7)  { animation: fadeUp .6s ease .55s both; }
+  .categoria:nth-child(8)  { animation: fadeUp .6s ease .6s both; }
+
+  .cat-header {
+    background: var(--blue-royal);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: background .2s;
+  }
+  .cat-header:hover { background: #1e6db0; }
+  .cat-header .cat-icon { font-size: 20px; }
+  .cat-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    flex: 1;
+  }
+  .cat-header .art-ref {
+    font-size: 11px;
+    color: rgba(240,244,255,0.65);
+    white-space: nowrap;
+  }
+  .cat-header .toggle {
+    font-size: 14px;
+    transition: transform .3s;
+    color: var(--gold);
+  }
+  .cat-header.open .toggle { transform: rotate(180deg); }
+
+  .cat-body { padding: 6px 0; }
+
+  /* ── ARTÍCULO / DELITO ── */
+  .delito {
+    border-left: 3px solid var(--gold);
+    margin: 8px 14px;
+    background: rgba(10,22,40,0.5);
+    border-radius: 0 7px 7px 0;
+    padding: 10px 14px;
+  }
+  .delito-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .delito-nombre {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+    flex: 1;
+    min-width: 160px;
+  }
+  .art-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    background: rgba(200,160,40,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .tipo-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .badge-leve   { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
+  .badge-menos  { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
+  .badge-grave  { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
+  .badge-mixto  { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
+
+  .delito-desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    line-height: 1.5;
+  }
+  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
+
+  .pena-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 7px;
+  }
+  .pena-chip {
+    font-size: 11px;
+    background: rgba(26,92,150,0.25);
+    border: 1px solid rgba(26,92,150,0.6);
+    color: var(--text-main);
+    padding: 3px 9px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .pena-chip.agravada {
+    background: rgba(200,40,30,0.2);
+    border-color: rgba(200,40,30,0.5);
+  }
+  .pena-chip.multa {
+    background: rgba(200,160,40,0.12);
+    border-color: rgba(200,160,40,0.4);
+    color: var(--gold);
+  }
+
+  .nota-agrav {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: #E08888;
+    background: rgba(200,40,30,0.08);
+    border-left: 2px solid var(--red);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+  }
+  .nota-policial {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: #A8D4C0;
+    background: rgba(26,122,60,0.1);
+    border-left: 2px solid var(--green);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ── RECORDA ── */
+  .recorda {
+    background: var(--gold);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-top: 6px;
+    animation: fadeUp .6s ease .7s both;
+  }
+  .recorda h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #0A1628;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .recorda ul { list-style: none; }
+  .recorda ul li {
+    font-size: 13px;
+    color: #0A1628;
+    padding: 4px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    border-bottom: 1px solid rgba(10,22,40,0.15);
+    line-height: 1.4;
+  }
+  .recorda ul li:last-child { border-bottom: none; }
+  .recorda ul li::before { content: "▶"; font-size: 9px; margin-top: 4px; flex-shrink: 0; }
+
+  /* ── REFORMA BANNER ── */
+  .reforma-banner {
+    background: linear-gradient(135deg, #8B1A10 0%, #C8281E 50%, #8B1A10 100%);
+    border: 2px solid #FF6050;
+    border-radius: 8px;
+    padding: 10px 18px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp .55s ease .05s both;
+    box-shadow: 0 0 20px rgba(200,40,30,0.3);
+  }
+  .reforma-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
+  .reforma-banner .ref-text { flex: 1; }
+  .reforma-banner .ref-ley {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #FFD0CC;
+  }
+  .reforma-banner .ref-desc {
+    font-size: 12px;
+    color: rgba(255,220,215,0.85);
+    margin-top: 2px;
+  }
+  .reforma-banner .ref-fecha {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #FFD0CC;
+    background: rgba(0,0,0,0.2);
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    border: 1px solid rgba(255,200,190,0.3);
+  }
+
+  /* ── NOU etiqueta ── */
+  .badge-nuevo {
+    font-size: 9px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: #C8281E;
+    color: white;
+    letter-spacing: 0.5px;
+    animation: pulse 2s infinite;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .nota-reforma {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: #FFB8B0;
+    background: rgba(200,40,30,0.12);
+    border-left: 3px solid #C8281E;
+    padding: 5px 9px;
+    border-radius: 0 5px 5px 0;
+    line-height: 1.5;
+  }
+  .nota-reforma b { color: #FF8070; }
+
+  /* ── BOTÓN IMPRIMIR ── */
+  .btn-print {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: var(--blue-royal);
+    border: 2px solid var(--gold);
+    color: var(--text-main);
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .2s;
+    animation: fadeUp .6s ease .8s both;
+  }
+  .btn-print:hover {
+    background: var(--gold);
+    color: #0A1628;
+  }
+
+  /* ── DIVISOR ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 4px 14px 2px;
+    opacity: .35;
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .btn-print { display: none; }
+    .categoria { break-inside: avoid; }
+    .cat-body { display: block !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- CABECERA -->
+  <div class="header">
+    <div class="escudo">
+      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
+        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
+        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICÍA</text>
+        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
+        <!-- Laureles simplificados -->
+        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <!-- Estrella central -->
+        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <div class="label">Esquema Operatiu Policial</div>
+      <h1>Codi <span>Penal</span></h1>
+      <div class="subtitle">Delictes de rellevància policial · LO 10/1995 i modificacions · Referència pràctica de camp</div>
+    </div>
+  </div>
+
+  <!-- CLASIFICACIÓN -->
+  <div class="clasificacion">
+    <div class="clas-card clas-leve">
+      <div class="icon">🟢</div>
+      <div class="tipo">Delicte Lleu</div>
+      <div class="pena-max">Presó ≤ 3 mesos<br>Multa ≤ 3 mesos<br>Treballs ≤ 30 dies</div>
+    </div>
+    <div class="clas-card clas-menos">
+      <div class="icon">🔵</div>
+      <div class="tipo">Menys Greu</div>
+      <div class="pena-max">Presó 3 mesos – 5 anys<br>Multa > 3 mesos<br>Inhabilitació ≤ 5 anys</div>
+    </div>
+    <div class="clas-card clas-grave">
+      <div class="icon">🔴</div>
+      <div class="tipo">Delicte Greu</div>
+      <div class="pena-max">Presó > 5 anys<br>Inhabilitació > 5 anys</div>
+    </div>
+  </div>
+
+  <!-- BANNER REFORMA -->
+  <div class="reforma-banner">
+    <div class="ref-icon">🔴</div>
+    <div class="ref-text">
+      <div class="ref-ley">⚡ Reforma en vigor · LO 1/2026, de 8 d'abril</div>
+      <div class="ref-desc">Multireincidència patrimonial · Furt de mòbils agreujat · Estafa lleu reiterada · Petaqueo · Legitimació Ajuntaments</div>
+    </div>
+    <div class="ref-fecha">BOE 09/04/2026<br>En vigor 10/04/2026</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       1. DELITOS CONTRA EL PATRIMONIO
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">💰</span>
+      <h2>Delictes contra el Patrimoni</h2>
+      <span class="art-ref">Arts. 234–304 CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <!-- HURTO -->
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Furt</div>
+          <span class="art-badge">Art. 234</span>
+          <span class="tipo-badge badge-mixto">Lleu / Menys greu</span>
+        </div>
+        <div class="delito-desc">
+          Apoderament de béns aliens <b>sense violència ni intimidació</b> i sense força a les coses.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🟢 Lleu: valor ≤ 400 € → multa 1–3 mesos</span>
+          <span class="pena-chip">🔵 &gt; 400 € → 6–18 mesos presó</span>
+          <span class="pena-chip agravada">⚠️ Agrav. art. 235 → 1–3 anys presó</span>
+        </div>
+        <div class="nota-reforma">🔴 <b>NOU · LO 1/2026 · Multireincidència:</b> El furt de <b>valor ≤ 400 €</b> passa a ser <b>menys greu (6–18 mesos presó)</b> si l'autor té ≥ 3 condemnes prèvies per delictes de la mateixa naturalesa, sent almenys 1 d'elles lleu. De multa de setmanes es passa a presó de fins a un any i mig.</div>
+        <div class="nota-agrav">⚠️ Agreujants art. 235: especial gravetat, casa habitada, xarxa organitzada, persones vulnerables, explotacions agrícoles/ramaderes (des de LO 1/2026: n'hi ha prou amb valor > 400 €, ja no exigeix provar «especial gravetat»).</div>
+        <div class="nota-policial">🚔 Clau: verificar antecedents del detingut al moment (ADEXTTRA/SIDENPOL). Amb 3+ condemnes prèvies, el furt lleu es converteix en menys greu. Consignar a l'atestat. Els <b>Ajuntaments</b> poden ara exercir acció penal en furts (reforma LECrim art. 105).</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- HURTO DE MÓVIL -->
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Furt de Telèfon Mòbil (tipus agreujat)</div>
+          <span class="art-badge">Art. 234 / 235</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+          <span class="badge-nuevo">⚡ NOU LO 1/2026</span>
+        </div>
+        <div class="delito-desc">
+          La LO 1/2026 introdueix un <b>tipus agreujat específic</b> per a la sostracció de telèfons mòbils, reconeixent que no és només la pèrdua econòmica sinó també dades personals, comptes bancaris, fotos i informació privada.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Pena base → 6–18 mesos presó</span>
+          <span class="pena-chip agravada">⚠️ Amb multireincidència → fins a 3 anys</span>
+        </div>
+        <div class="nota-reforma">🔴 <b>Excepció:</b> Dispositius exposats al públic en establiments comercials (aparadors, botigues) — poden mantenir la qualificació anterior.</div>
+        <div class="nota-policial">🚔 Documentar sempre l'IMEI del terminal sostret. Permet bloqueig i localització. La víctima pot sol·licitar bloqueig urgent al seu operador.</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- ROBO CON FUERZA -->
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Robatori amb Força a les Coses</div>
+          <span class="art-badge">Arts. 237–241</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Apoderament utilitzant <b>força a les coses</b> (escalament, trencament, claus falses, etc.). Sense violència personal.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 1–3 anys presó (tipus bàsic)</span>
+          <span class="pena-chip agravada">⚠️ Casa habitada → 2–5 anys</span>
+          <span class="pena-chip agravada">⚠️ Establiment obert → 1–5 anys</span>
+        </div>
+        <div class="nota-policial">🚔 Documentar mètode d'accés (fractura, escalada, rossinyol). És clau per qualificar.</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- ROBO CON VIOLENCIA -->
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Robatori amb Violència o Intimidació</div>
+          <span class="art-badge">Arts. 237, 242</span>
+          <span class="tipo-badge badge-grave">Greu</span>
+        </div>
+        <div class="delito-desc">
+          Apoderament utilitzant <b>violència o intimidació</b> contra persones. L'arma o lesions agreugen notablement la pena.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔴 2–5 anys presó (tipus bàsic)</span>
+          <span class="pena-chip agravada">⚠️ Armes/mitjans perillosos → 3,5–5 anys</span>
+          <span class="pena-chip agravada">⚠️ Casa habitada → meitat superior</span>
+        </div>
+        <div class="nota-agrav">⚠️ Si concurren lesions: el robatori se juzga en concurso real amb les lesions causadas.</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- ESTAFA -->
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Estafa</div>
+          <span class="art-badge">Arts. 248–251</span>
+          <span class="tipo-badge badge-mixto">Lleu / Menys greu</span>
+        </div>
+        <div class="delito-desc">
+          Engaño n'hi ha prounte per a producir <b>error en altre</b> que realice un acto de disposición en su perjudici.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🟢 Lleu: ≤ 400 € → multa</span>
+          <span class="pena-chip">🔵 &gt;400 € → 6 mesos–3 anys</span>
+          <span class="pena-chip agravada">⚠️ Especial gravetat → 1–6 anys</span>
+        </div>
+        <div class="nota-reforma">🔴 <b>NOU · LO 1/2026 · Multireincidència:</b> La estafa de <b>≤ 400 €</b> passa a pena del tipus bàsic (<b>6 mesos–3 anys</b>) si l'autor acumula ≥ 3 condemnes prèvies de la mateixa naturalesa, sent almenys 1 lleu. Mateix esquema que el furt.</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- DAÑOS -->
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Danys</div>
+          <span class="art-badge">Arts. 263–267</span>
+          <span class="tipo-badge badge-mixto">Lleu / Menys greu</span>
+        </div>
+        <div class="delito-desc">
+          Destrucción, deterioro o inutilización de béns aliens. No incluye violència personal.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🟢 Lleu: ≤ 400 € → multa 1–3 mesos</span>
+          <span class="pena-chip">🔵 &gt;400 € → 6 mesos–3 anys / multa</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- APROPIACIÓN INDEBIDA -->
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Apropiación Indebida</div>
+          <span class="art-badge">Arts. 253–254</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Quien recibe dinero, efectos o qualsevol cosa mueble en <b>depósito, comisión o custodia</b> i el apropia o distrae.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 6 mesos–3 anys / multa (tipus bàsic)</span>
+          <span class="pena-chip agravada">⚠️ Especial gravetat → 1–6 anys</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- USURPACIÓN -->
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Usurpación (Ocupación Ilegal)</div>
+          <span class="art-badge">Arts. 245–246</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          <b>Art. 245.1:</b> Amb violència/intimidació ocupar inmueble alien. <b>Art. 245.2 (ocupación pacífica):</b> sense consentiment del titular.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 245.1 → 1–2 anys presó</span>
+          <span class="pena-chip multa">🟡 245.2 → multa 3–6 mesos</span>
+        </div>
+        <div class="nota-policial">🚔 Art. 245.2: Només escau si hi ha denuncia del titular. La Policia ha de abstenirse de actuar en desahucios civiles salvo orden judicial.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       2. DELITOS CONTRA LAS PERSONAS - LESIONES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🩺</span>
+      <h2>Vida i Integritat Física</h2>
+      <span class="art-ref">Arts. 138–156 CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Homicidi</div>
+          <span class="art-badge">Art. 138</span>
+          <span class="tipo-badge badge-grave">Greu</span>
+        </div>
+        <div class="delito-desc">Matar a altre <b>sin concurrir circunstancias cualificadoras</b> de assassinat.</div>
+        <div class="pena-row">
+          <span class="pena-chip">🔴 10–15 anys presó</span>
+          <span class="pena-chip agravada">⚠️ Víctima vulnerable o violència intrafamiliar → 15–22,5 anys</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Assassinat</div>
+          <span class="art-badge">Art. 139</span>
+          <span class="tipo-badge badge-grave">Greu</span>
+        </div>
+        <div class="delito-desc">
+          Homicidi amb <b>alevosía, precio/recompensa, ensañamiento</b> o per a facilitar altre delicte.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔴 15–25 anys presó</span>
+          <span class="pena-chip agravada">⚠️ Dos o más circunstancias → 20–25 anys</span>
+          <span class="pena-chip agravada">⚠️ Víctima menor/vulnerable + alevosía → 25 anys</span>
+        </div>
+        <div class="nota-agrav">⚠️ Feminicidio (art. 140.1.1ª): Víctima dona per ser dona → presó permanente revisable.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Homicidi Imprudente</div>
+          <span class="art-badge">Art. 142</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">Causa la muerte per <b>imprudència greu</b> (ej: accidente de tráfico per excés de velocitat).</div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 1–4 anys presó + inhabilitació</span>
+          <span class="pena-chip">🟢 Imprudència menys greu → 3 mesos–1 any / multa</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Lesions Greus (tipus bàsic)</div>
+          <span class="art-badge">Art. 147.1</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Lesions que requieren <b>objetivamente primera assistència facultativa + tractament mèdic o quirúrgico</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 3 mesos–3 anys presó</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Lesions Lleus</div>
+          <span class="art-badge">Art. 147.2</span>
+          <span class="tipo-badge badge-leve">Delicte Lleu</span>
+        </div>
+        <div class="delito-desc">Només requieren <b>primera assistència facultativa</b>. Sense tractament posterior.</div>
+        <div class="pena-row">
+          <span class="pena-chip">🟢 Multa 1–3 mesos</span>
+        </div>
+        <div class="nota-policial">🚔 Clau: ¿requiere tractament mèdic posterior? Sí → art. 147.1. No → art. 147.2.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Lesions Molt Greus (resultado)</div>
+          <span class="art-badge">Arts. 149–150</span>
+          <span class="tipo-badge badge-grave">Greu</span>
+        </div>
+        <div class="delito-desc">
+          <b>Art. 149:</b> Pérdida/inutilidad de órgano, miembro principal, sentido, impotencia, greu enfermedad somática/psíquica, mutilación genital.<br>
+          <b>Art. 150:</b> Pérdida de órgano no principal, deformidad greu.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔴 Art. 149 → 6–12 anys presó</span>
+          <span class="pena-chip">🔴 Art. 150 → 3–6 anys presó</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Malos Tratos — Violència Doméstica/Género</div>
+          <span class="art-badge">Art. 153</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Menoscabo psíquico, lesió no constitutiva de delicte o golpear/maltratar de obra a <b>cònjuge o persona amb relación de afectividad análoga</b> (o descendiente, ascendiente, persona vulnerable).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 6 mesos–1 any presó</span>
+          <span class="pena-chip">+ Privación derecho tenencia armes 3 anys</span>
+          <span class="pena-chip agravada">⚠️ Domicilio común / presencia menors → meitat superior</span>
+        </div>
+        <div class="nota-policial">🚔 Actuar d'ofici. Sempre valorar riesgo VioGén. Separar a la víctima per a tomar declaración.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       3. VIOLENCIA DE GÉNERO I DOMÉSTICA
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🛡️</span>
+      <h2>Violència de Gènere i Domèstica</h2>
+      <span class="art-ref">Arts. 153, 171, 172, 173 CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Amenaces en contexto VG/VD</div>
+          <span class="art-badge">Art. 171.4–5</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">Amenazar a cònjuge o persona vinculada per análoga relación de afectividad.</div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 6 mesos–1 any presó o multa 12–24 mesos</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Coaccions en contexto VG/VD</div>
+          <span class="art-badge">Art. 172.2</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">Coaccions lleus sobre parella o ex-parella.</div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 6 mesos–1 any / multa 12–24 mesos</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Violència Habitual en el Hogar</div>
+          <span class="art-badge">Art. 173.2</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Violència física o psíquica <b>habitual</b> sobre cònjuge, conviviente, descendiente, ascendiente, menors o persones amb discapacidad. La <b>habitualitat</b> se mide per número de actos, proximidad temporal i demás circunstancias.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 6 mesos–3 anys presó</span>
+          <span class="pena-chip">+ Privación derecho tenencia armes 3–5 anys</span>
+          <span class="pena-chip agravada">⚠️ Menors presentes → meitat superior</span>
+        </div>
+        <div class="nota-policial">🚔 Protocolo VioGén obligatori. Valoración de riesgo: NO RIESGO / BAJO / MEDIO / ALTO / EXTREMO.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Trencament de Condena / OAP</div>
+          <span class="art-badge">Art. 468</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Incumplir penas, medidas de seguridad, <b>órdenes de alejamiento o protección</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 6 mesos–1 any presó</span>
+          <span class="pena-chip agravada">⚠️ OAP amb víctima VG → 1–3 anys (incluso amb consentiment víctima)</span>
+        </div>
+        <div class="nota-policial">🚔 El consentiment de la víctima NO exime de responsabilidad al agresor ni al agent que no denuncia.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       4. DELITOS CONTRA LA LIBERTAD
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">⛓️</span>
+      <h2>Delictes contra la Llibertat</h2>
+      <span class="art-ref">Arts. 163–172 CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Detención Ilegal</div>
+          <span class="art-badge">Art. 163</span>
+          <span class="tipo-badge badge-grave">Greu</span>
+        </div>
+        <div class="delito-desc">Encerrar o detenir a altre, privándole de <b>libertad ambulatoria</b>.</div>
+        <div class="pena-row">
+          <span class="pena-chip">🔴 4–8 anys presó (tipus bàsic)</span>
+          <span class="pena-chip agravada">⚠️ > 15 dies → 5–8 anys</span>
+          <span class="pena-chip agravada">⚠️ Simulando función pública → 5–10 anys</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Secuestro</div>
+          <span class="art-badge">Art. 164</span>
+          <span class="tipo-badge badge-grave">Greu</span>
+        </div>
+        <div class="delito-desc">Detenció il·legal <b>exigiendo condiciones per a poner en libertad</b>.</div>
+        <div class="pena-row">
+          <span class="pena-chip">🔴 6–10 anys presó</span>
+          <span class="pena-chip agravada">⚠️ Amb amenaça a vida o integridad → 10–15 anys</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Amenaces</div>
+          <span class="art-badge">Arts. 169–171</span>
+          <span class="tipo-badge badge-mixto">Lleu / Menys greu</span>
+        </div>
+        <div class="delito-desc">
+          Amenazar a altre amb causar <b>mal que constituya delito</b> (a persona, familia o béns).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Greus amb condición → 1–5 anys / multa</span>
+          <span class="pena-chip">🔵 Greus sense condición → 6 mesos–2 anys</span>
+          <span class="pena-chip">🟢 Lleus → multa 1–3 mesos</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Coaccions</div>
+          <span class="art-badge">Art. 172</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Impedir a alguien far el que la ley no prohíbe u obligarle a far el que no quiere, amb <b>violència</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 6 mesos–3 anys / multa 12–24 mesos</span>
+          <span class="pena-chip">🟢 Lleus → multa 1–3 mesos</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Assetjament (Stalking)</div>
+          <span class="art-badge">Art. 172 ter</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Hostigar a una persona <b>de forma insistente i reiterada</b> (vigilancia, comunicaciones no deseadas, intentos de contacto) alterando greumente su vida cotidiana.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 6 mesos–2 anys / trabajos comunidad</span>
+          <span class="pena-chip agravada">⚠️ Víctima vulnerable o parella → 1–2 anys</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       5. DELITOS CONTRA LIBERTAD SEXUAL
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🚫</span>
+      <h2>Delictes contra la Llibertat Sexual</h2>
+      <span class="art-ref">Arts. 178–194 CP (LO 10/2022)</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Agresión Sexual</div>
+          <span class="art-badge">Arts. 178–179</span>
+          <span class="tipo-badge badge-grave">Greu</span>
+        </div>
+        <div class="delito-desc">
+          <b>Només sí és sí (LO 10/2022):</b> qualsevol acto sexual <b>sense consentiment</b> de la víctima és agressió sexual. Desaparece la distinción abuso/agresión.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔴 Art. 178 → 1–4 anys (tipus bàsic)</span>
+          <span class="pena-chip agravada">⚠️ Amb penetración (art. 179) → 4–12 anys</span>
+          <span class="pena-chip agravada">⚠️ Circunstancias agreujadas → fins a 15 anys</span>
+        </div>
+        <div class="nota-policial">🚔 Preservar provas biológicas urgent. Víctima a SACIS/Urgencias sense dilación. No obligar a repetir relato.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Agresión Sexual a Menors de 16</div>
+          <span class="art-badge">Arts. 183–184</span>
+          <span class="tipo-badge badge-grave">Greu</span>
+        </div>
+        <div class="delito-desc">
+          Edad de consentiment sexual en España: <b>16 anys</b>. Qualsevol acto amb menor de 16 és delicte encara que haya aparente consentiment.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔴 2–10 anys segons acto i circunstancias</span>
+          <span class="pena-chip agravada">⚠️ Amb penetración → 8–15 anys</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Assetjament Sexual</div>
+          <span class="art-badge">Art. 184</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">Solicitar favores sexuales en ámbito laboral/docente creando situación objetivamente intimidatoria, degradante u hostil.</div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 3–5 mesos / multa 6–10 mesos</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       6. DELITOS DE TRÁFICO
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🚗</span>
+      <h2>Delictes contra la Seguretat Viària</h2>
+      <span class="art-ref">Arts. 379–385 CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Conducció sota influència de alcohol</div>
+          <span class="art-badge">Art. 379.2</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Conduir amb <b>taxa d'alcohol en aire espirat &gt; 0,60 mg/l</b> o en sangre &gt; 1,2 g/l. També bajo efectos de drogues tóxicas.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 3–6 mesos presó / multa 6–12 mesos / TBC 31–90 dies</span>
+          <span class="pena-chip">+ Privación carné 1–4 anys</span>
+        </div>
+        <div class="nota-policial">🚔 Tasa 0,25–0,60 mg/l: infracción administrativa (no delicte). El delicte comença en 0,60 mg/l.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Exceso de Velocitat (Penal)</div>
+          <span class="art-badge">Art. 379.1</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Superar en <b>&gt; 60 km/h</b> el límit en vías urbanas o en <b>&gt; 80 km/h</b> en vías interurbanas.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 3–6 mesos presó / multa / TBC</span>
+          <span class="pena-chip">+ Privación carné 1–4 anys</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Conducció Temeraria</div>
+          <span class="art-badge">Art. 380</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Conduir amb <b>temeridad manifiesta</b> poniendo en concret peligro la vida o integridad de persones.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 6 mesos–2 anys presó</span>
+          <span class="pena-chip">+ Privación carné 1–6 anys</span>
+          <span class="pena-chip agravada">⚠️ Amb manifiesto desprecio a vida → fins a 5 anys</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Negativa a Prova de Alcoholemia</div>
+          <span class="art-badge">Art. 383</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Negarse a someterse a les provas legalmente establecidas de alcohol o drogues, requerido per agent de l'autoritat.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 6 mesos–1 any presó / TBC 31–90 dies</span>
+          <span class="pena-chip">+ Privación carné 1–4 anys</span>
+        </div>
+        <div class="nota-policial">🚔 Reflejar a l'atestat la negativa expresa. Dos controles positivos i uno negativo a continuar = negativa. Documentar testigos.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Conducció sense Permís / Carné Retirado</div>
+          <span class="art-badge">Art. 384</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Conduir <b>privat judicialmente del carné</b>, tras resolución firme de privación o sense haver obtenido mai el permís.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 3–6 mesos presó / multa 12–24 mesos / TBC 31–90 dies</span>
+        </div>
+        <div class="nota-policial">🚔 Consultar DGT en temps real. Privación judicial ≠ caducidad administrativa (la caducidad no és delicte).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Homicidi / Lesions per Imprudència Vial</div>
+          <span class="art-badge">Arts. 142, 152</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Causar muerte o lesions greus per <b>imprudència greu</b> al volante.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Muerte imprud. greu → 1–4 anys + privación carné 4–8 anys</span>
+          <span class="pena-chip">🔵 Lesions greus → 6 mesos–2 anys + carné 1–4 anys</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       7. DELITOS CONTRA ORDEN PÚBLICO / AUTORIDAD
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🚔</span>
+      <h2>Ordre Públic i Autoritat</h2>
+      <span class="art-ref">Arts. 550–562 CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Atentado contra Agente de la Autoridad</div>
+          <span class="art-badge">Arts. 550–551</span>
+          <span class="tipo-badge badge-grave">Greu</span>
+        </div>
+        <div class="delito-desc">
+          Acometer, resistir activamente amb violència o intimidació <b>greu</b> a agents de la autoritat en el ejercicio de sus funciones, o quan accionen amb motivo de éstas.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔴 2–4 anys presó (tipus bàsic)</span>
+          <span class="pena-chip agravada">⚠️ Arma u objeto perillós → 3–6 anys</span>
+          <span class="pena-chip agravada">⚠️ Resultado de lesions → pena superior en grado</span>
+        </div>
+        <div class="nota-policial">🚔 Incluye Policia Local, GC, CNP, agents forestales, bomberos i personal sanitario en emergencias.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Resistència i Desobediència Greu</div>
+          <span class="art-badge">Art. 556</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Resistència activa <b>no greu</b> o desobediència greu a la autoritat o sus agents. Diferencia clau amb atentado: <b>sin violència o intimidació greu</b>.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 3 mesos–1 any presó / multa 6–18 mesos</span>
+        </div>
+        <div class="nota-policial">🚔 Resistència pasiva (forcejeo sense agresión) → art. 556. Resistència activa amb golpes → art. 550.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Desórdenes Públics</div>
+          <span class="art-badge">Arts. 557–558</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Actuar en grupo alterando greumente el orden públic amb violència, intimidació o amb força sobre persones o cosas.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 6 mesos–3 anys presó</span>
+          <span class="pena-chip agravada">⚠️ Amb armes → 3–5 anys</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Usurpación de Funciones Públicas</div>
+          <span class="art-badge">Art. 402</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">Ejercer actos propios d'una autoritat o funcionario sense serlo, o fares passar per agent.</div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 1–3 anys presó</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       8. DROGAS I ARMAS
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">⚠️</span>
+      <h2>Drogues i Tinença Il·lícita d'Armes</h2>
+      <span class="art-ref">Arts. 368–370, 563–564 CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Tráfico de Drogues — Substàncies Greus per a la Salud</div>
+          <span class="art-badge">Arts. 368–369</span>
+          <span class="tipo-badge badge-grave">Greu</span>
+        </div>
+        <div class="delito-desc">
+          Promover, favorecer o facilitar el consumo ilegal de drogues que <b>causan greu daño a la salud</b> (cocaïna, heroína, MDMA, etc.).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔴 3–6 anys presó + multa</span>
+          <span class="pena-chip agravada">⚠️ Agreujat (art. 369) → 4,5–10 anys</span>
+          <span class="pena-chip agravada">⚠️ Organización, notoria importancia → fins a 12 anys</span>
+        </div>
+        <div class="nota-policial">🚔 Consumo propio no és delicte. La cantidad habitual de consumo (dosis personal) excluye el tipo. Tabla orientativa de cantidades → tablas Fiscalía.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Tráfico de Drogues — Substàncies Lleus per a la Salud</div>
+          <span class="art-badge">Art. 368 (cannabis, etc.)</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Drogues que <b>no causan greu daño</b> a la salud (cannabis/haixix principalmente).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 1–3 anys presó + multa</span>
+          <span class="pena-chip agravada">⚠️ Notoria importancia → 2–4,5 anys</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Tinença Ilícita de Armas</div>
+          <span class="art-badge">Arts. 563–564</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Tinença de <b>armas de guerra</b>, armes de fuego reglamentadas sense licencia, armes prohibides (navajas automáticas, puños americanos, etc.).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Armas de guerra → 2–4 anys</span>
+          <span class="pena-chip">🔵 Armas reglamentadas sense licencia → 1–2 anys / multa</span>
+          <span class="pena-chip">🔵 Armes prohibides → 6 mesos–2 anys</span>
+        </div>
+        <div class="nota-policial">🚔 El portador ha de mostrar licencia/guía de pertenencia. Registrar l'arma i su munición. Intervención cautelar i parte a Intervención de Armas.</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- PETAQUEO -->
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">«Petaqueo» — Suministro de Combustible a Narcolanchas</div>
+          <span class="art-badge">Art. 568 CP (nou)</span>
+          <span class="tipo-badge badge-grave">Greu</span>
+          <span class="badge-nuevo">⚡ NOU LO 1/2026</span>
+        </div>
+        <div class="delito-desc">
+          Uso de <b>combustible líquido com substància inflamable</b> per a abastecer embarcaciones dedicadas al tràfic de drogues. Práctica habitual en el Estrecho de Gibraltar i Costa del Sol.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔴 3–5 anys presó (vs. pena general art. 568: 1–3 anys)</span>
+          <span class="pena-chip">⬇️ Si conducta de menor entidad → pena inferior en grado</span>
+        </div>
+        <div class="nota-policial">🚔 Coordinación amb Guardia Civil (Servei Marítimo) i Vigilancia Aduanera. Documentar tipo i cantidad de combustible, embarcación i conexión amb tràfic de drogues.</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- DEFRAUDACIÓN ELÉCTRICA PARA DROGAS -->
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Defraudació de Fluido Eléctrico per a Cultivo de Drogues</div>
+          <span class="art-badge">Art. 255.3 CP (nou)</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+          <span class="badge-nuevo">⚡ NOU LO 1/2026</span>
+        </div>
+        <div class="delito-desc">
+          Defraudar energía eléctrica (enganche ilegal) amb la <b>finalidad de abastecer instalaciones usadas per al cultivo o producción de drogues</b> (art. 368 CP).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 6–18 mesos presó o multa del tant al triplo</span>
+        </div>
+        <div class="nota-policial">🚔 Molt frecuente en plantaciones indoor de cannabis. Documentar el enganche eléctrico com delicte autónomo a més del art. 368. Coordinar amb la compañía eléctrica per a acreditar la defraudació.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       9. DELITOS CONTRA LA INTEGRIDAD MORAL
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🧠</span>
+      <h2>Integritat Moral, Honor i Privadesa</h2>
+      <span class="art-ref">Arts. 173, 205–213, 197 CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Trato Degradante</div>
+          <span class="art-badge">Art. 173.1</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">Infligir a altra persona un trato degradante, menoscabando greumente su integridad moral.</div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 6 mesos–2 anys presó</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Calumnia i Injuria</div>
+          <span class="art-badge">Arts. 205–213</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          <b>Calumnia (art. 205):</b> imputar a alguien un delicte sabiendo que és falso. <b>Injuria (art. 208):</b> expresión que lesiona dignidad o fama de altre.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Calumnia → multa 6–24 mesos</span>
+          <span class="pena-chip multa">🟡 Injuria greu → multa 3–12 mesos</span>
+        </div>
+        <div class="nota-agrav">⚠️ Són delictes semipúblics: exigeixn denúncia de l'ofès per a perseguir-se, salvo que afecten a funcionario públic.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Delictes contra la Intimidad (Sexting no consentido)</div>
+          <span class="art-badge">Art. 197 i 197.7</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Difundir imágenes o grabaciones íntimas <b>sense consentiment</b> de la persona afectada, obtenidas amb su anuencia en un contexto de intimidad.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 3 mesos–1 any / multa 6–12 mesos</span>
+          <span class="pena-chip agravada">⚠️ Cónyuge / parella → meitat superior</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       10. DELITOS CONTRA LA ADMINISTRACIÓN DE JUSTICIA
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">⚖️</span>
+      <h2>Administració de Justícia i Fe Pública</h2>
+      <span class="art-ref">Arts. 390–396, 458–462 CP</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body" style="display:none">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Falsedat Documental</div>
+          <span class="art-badge">Arts. 390–392</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Alterar un documento, suponer intervención de persones que no la han tenido, o faltar a la verdad en la narración de fets (en documentos públics, privats u oficiales).
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔴 Funcionario → 3–6 anys + inhabilitació</span>
+          <span class="pena-chip">🔵 Particular, doc. públic → 6 mesos–3 anys + multa</span>
+          <span class="pena-chip multa">🟡 Particular, doc. privat → multa 6–24 mesos</span>
+        </div>
+        <div class="nota-policial">🚔 Molt frecuente: DNI, permíss conducció, partes accidente, contratos. Conservar documento original per a pericial.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Falso Testimonio</div>
+          <span class="art-badge">Arts. 458–460</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">Declarar com testigo faltando a la verdad en causa judicial.</div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Causa criminal → 1–3 anys + multa 6–12 mesos</span>
+          <span class="pena-chip multa">🟡 Causa civil → multa 6–24 mesos</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Encobriment</div>
+          <span class="art-badge">Art. 451</span>
+          <span class="tipo-badge badge-menos">Menys Greu</span>
+        </div>
+        <div class="delito-desc">
+          Auxiliar als autors d'un delicte per a <b>beneficiar-se del mateix o impedir su descobriment</b>, sense haver participat en ell.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🔵 Multa / presó segons delicte encobert</span>
+        </div>
+        <div class="nota-agrav">⚠️ Exclòs el encobriment de parents pròxims (art. 454 CP).</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       CUADRO RECORDA
+  ══════════════════════════════════════════ -->
+  <div class="recorda">
+    <h3>📋 Recorda — Claus Operatives</h3>
+    <ul>
+      <li>⚡ <b>LO 1/2026 (en vigor 10/04/2026):</b> El furt de <b>≤ 400 €</b> passa a ser <b>MENYS GREU</b> (6–18 mesos presó) si l'autor té <b>3+ condemnes prèvies</b> de la mateixa naturalesa, almenys 1 lleu. Comprova antecedents SEMPRE abans de qualificar.</li>
+      <li>⚡ <b>Furt de mòbil (LO 1/2026):</b> Tipus agreujat propi. Anota sempre el <b>IMEI</b> a l'atestat. Pena: 6–18 mesos (pot arribar a 3 anys amb multireincidència).</li>
+      <li>⚡ <b>Els Ajuntaments</b> ja poden exercir acció penal en delictes de furt (reforma art. 105 LECrim). Coordina amb el servei jurídic municipal si escau.</li>
+      <li>La clasificación <b>lleu / menys greu / greu</b> depèn de la pena en abstracte, no la que s'imposi en el cas concret.</li>
+      <li>Els delictes <b>lleus</b> prescriuen en 1 any; els menys greus en 3 i els greus segons la seva penalitat (art. 131 CP).</li>
+      <li>En <b>delictes semipúblics</b> (injúries, calúmnies) només pot perseguir-se amb denúncia de l'ofès. En els <b>delictes públics</b> actues d'ofici.</li>
+      <li>El umbral del delicte de <b>furt</b> i <b>danys</b> bàsic és <b>400 €</b>. Per damunt → menys greu. Per debajo → lleu (salvo multireincidència).</li>
+      <li>En <b>tráfico</b>: el delicte de alcoholemia comença en <b>0,60 mg/l</b> en aire espirat (0,25–0,60 → infracción administrativa).</li>
+      <li>La <b>negativa a la prova de alcoholemia</b> se persigue encara que el conductor no hubiera dado positivo.</li>
+      <li>En <b>VG/VD</b>: actuar sempre d'ofici. El consentiment de la víctima no eliminal delicte de trencament de OAP.</li>
+      <li>La <b>resistència pasiva</b> és art. 556 (desobediència). La resistència activa amb golpes/agresión és <b>atentado</b> (art. 550).</li>
+      <li>En drogues: les cantidades de <b>consumo propio</b> siguen les tablas orientativas de la Fiscalía segons substància.</li>
+    </ul>
+  </div>
+
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+
+</div>
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    if (body.style.display === 'none' || body.style.display === '') {
+      body.style.display = 'block';
+      body.style.animation = 'fadeUp .3s ease';
+    } else {
+      body.style.display = 'none';
+    }
+  }
+  // Abrir primera categoría per defecto
+  document.querySelector('.cat-body').style.display = 'block';
+</script>
+</body>
+</html>
