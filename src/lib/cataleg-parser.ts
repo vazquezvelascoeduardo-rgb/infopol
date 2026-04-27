@@ -197,6 +197,48 @@ export function getCatalegRows(): CatalegRow[] {
           });
         }
       }
+
+      // (c) Bloc d'Assegurança Obligatòria (RDL 8/2004): estructura
+      // custom amb .seg-row (no és <table> ni .alc-card). Cada fila té
+      // .seg-class amb el concepte i .seg-amounts amb dos .amount
+      // (multa i DTE). L'article és comú a tota la secció ("2.1") i
+      // el deduïm del títol de la secció si el conté.
+      const segRows = Array.from(section.querySelectorAll('.seg-row'));
+      if (segRows.length > 0) {
+        // Extreu "2.1" del títol "...(RDL 8/2004 Art. 2.1)".
+        const artMatch = sTitle?.match(/Art\.?\s*([\d.]+)/i);
+        const sectionArticle = artMatch ? artMatch[1] : undefined;
+        for (const row of segRows) {
+          const conceptEl = row.querySelector('.seg-class') as HTMLElement | null;
+          const concepte = clean(conceptEl?.textContent);
+          if (!concepte) continue;
+          const amounts = row.querySelectorAll('.seg-amounts .amount');
+          const fineEl = amounts[0] as HTMLElement | undefined;
+          const dteEl = amounts[1] as HTMLElement | undefined;
+          const fine = fineEl ? clean(fineEl.textContent) : undefined;
+          const dte = dteEl ? clean(dteEl.textContent) : undefined;
+          // Gravetat segons la classe del .amount (red = MG, gold = G, blue = L).
+          let severity: Severity | undefined;
+          if (fineEl?.classList.contains('red')) severity = 'MG';
+          else if (fineEl?.classList.contains('gold')) severity = 'G';
+          else if (fineEl?.classList.contains('blue')) severity = 'L';
+          rows.push({
+            lawId: id,
+            lawShort: meta.short,
+            lawFull: meta.full,
+            sectionTitle: sTitle || undefined,
+            concepte,
+            conceptHtml: conceptEl?.innerHTML ?? concepte,
+            article: sectionArticle,
+            severity,
+            fine,
+            dte,
+            searchText: normalize(
+              `${sTitle ?? ''} ${concepte} ${sectionArticle ?? ''} ${fine ?? ''} ${meta.short} ${meta.full}`,
+            ),
+          });
+        }
+      }
     }
   }
 
