@@ -116,16 +116,22 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
             label={t('sidebar.recursos')}
           />
 
-          {/* Lleis (col·lapsable) */}
+          {/* Lleis (col·lapsable) — el chevron desplega les categories;
+              el titol mateix es enllaç al llistat complet. */}
           <details className="group rounded-lg border border-slate-200/70 dark:border-white/10 mt-2">
             <summary className="flex items-center gap-3 px-3 py-2.5 cursor-pointer
               hover:bg-amber-50 dark:hover:bg-white/5 rounded-lg select-none">
               <span aria-hidden className="text-lg">⚖️</span>
-              <span className="font-semibold flex-1">{t('sidebar.leyes')}</span>
+              <Link
+                to="/leyes"
+                onClick={(e) => e.stopPropagation()}
+                className="font-semibold flex-1 hover:text-amber-700 dark:hover:text-amber-400"
+              >
+                {t('sidebar.leyes')}
+              </Link>
               <span aria-hidden className="text-slate-400 group-open:rotate-90 transition-transform">▶</span>
             </summary>
             <div className="border-t border-slate-200/70 dark:border-white/10">
-              <SubLink to="/leyes" icon="📚" label={t('sidebar.leyes.all')} />
               {MODULES.map((m) => (
                 <SubLink
                   key={m.slug}
@@ -137,16 +143,22 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
             </div>
           </details>
 
-          {/* Operativa (col·lapsable) */}
+          {/* Operativa (col·lapsable) — el titol enllaca al llistat
+              i el chevron desplega les sub-categories. */}
           <details className="group rounded-lg border border-slate-200/70 dark:border-white/10 mt-2">
             <summary className="flex items-center gap-3 px-3 py-2.5 cursor-pointer
               hover:bg-blue-50 dark:hover:bg-white/5 rounded-lg select-none">
               <span aria-hidden className="text-lg">🚨</span>
-              <span className="font-semibold flex-1">{t('sidebar.operativa')}</span>
+              <Link
+                to="/operativa"
+                onClick={(e) => e.stopPropagation()}
+                className="font-semibold flex-1 hover:text-blue-700 dark:hover:text-blue-400"
+              >
+                {t('sidebar.operativa')}
+              </Link>
               <span aria-hidden className="text-slate-400 group-open:rotate-90 transition-transform">▶</span>
             </summary>
             <div className="border-t border-slate-200/70 dark:border-white/10">
-              <SubLink to="/operativa" icon="🏠" label={t('sidebar.operativa.home')} />
               <SubLink to="/operativa/trafico" icon="🚦" label={t('operativa.trafico.title')} />
               <SubLink
                 to="/operativa/penal"
