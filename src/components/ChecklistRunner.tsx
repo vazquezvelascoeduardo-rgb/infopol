@@ -135,6 +135,7 @@ function QuestionPanel({
   node: Exclude<ChecklistNode, ChecklistFinalNode>;
   onSelect: (id: string) => void;
 }) {
+  const { t } = useT();
   return (
     <>
       {/* Pregunta */}
@@ -160,13 +161,13 @@ function QuestionPanel({
 
       {/* Llistes auxiliars opcionals (preparació, evidencial, símptomes…) */}
       {node.checklist_previ && node.checklist_previ.length > 0 && (
-        <PreCheckBox label="Comprovacions prèvies" icon="✅" items={node.checklist_previ} />
+        <PreCheckBox label={t('checklist.previousChecks')} icon="✅" items={node.checklist_previ} />
       )}
       {node.checklist_evidencial && node.checklist_evidencial.length > 0 && (
-        <PreCheckBox label="Prova evidencial — passos" icon="🧪" items={node.checklist_evidencial} />
+        <PreCheckBox label={t('checklist.evidentialTest')} icon="🧪" items={node.checklist_evidencial} />
       )}
       {node.checklist_simptomes && node.checklist_simptomes.length > 0 && (
-        <PreCheckBox label="Símptomes a observar" icon="👁️" items={node.checklist_simptomes} />
+        <PreCheckBox label={t('checklist.symptoms')} icon="👁️" items={node.checklist_simptomes} />
       )}
       {node.frase_advertiment && (
         <blockquote className="rounded-xl border-l-4 border-l-amber-500 bg-amber-50 p-4 text-amber-900 italic
@@ -780,6 +781,7 @@ function DictTable({ label, dict }: { label: string; dict: Record<string, string
 
 // Botó per copiar text al porta-retalls amb feedback visual breu.
 function CopyButton({ text, compact }: { text: string; compact?: boolean }) {
+  const { t } = useT();
   const [copied, setCopied] = useState(false);
   async function copy() {
     try {
@@ -809,8 +811,8 @@ function CopyButton({ text, compact }: { text: string; compact?: boolean }) {
     <button
       type="button"
       onClick={copy}
-      title="Copiar al porta-retalls"
-      aria-label="Copiar"
+      title={t('checklist.copyToClipboard')}
+      aria-label={t('checklist.copy')}
       className={`inline-flex items-center justify-center shrink-0 rounded-md border transition
         ${compact ? 'h-5 w-5 text-[10px]' : 'h-7 w-7 text-xs'}
         border-current/40 hover:bg-white/40 dark:hover:bg-black/30

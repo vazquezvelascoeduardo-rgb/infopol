@@ -117,7 +117,7 @@ export default function Superbuscador() {
           <button
             type="button"
             onClick={() => setQ('')}
-            aria-label="Esborra"
+            aria-label={t('superbuscador.clear')}
             className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex h-7 w-7 items-center justify-center rounded-full
               text-slate-400 hover:bg-slate-100 hover:text-slate-700
               dark:hover:bg-white/10 dark:hover:text-slate-200"
@@ -175,10 +175,10 @@ function EmptyState() {
         {t('superbuscador.tipsTitle')}
       </p>
       <ul className="text-xs text-slate-500 dark:text-slate-400 space-y-1 max-w-md mx-auto">
-        <li>• <span className="font-mono">alcoholèmia</span>, <span className="font-mono">drogues</span>, <span className="font-mono">cinturó</span>...</li>
-        <li>• Per article: <span className="font-mono">14.1</span>, <span className="font-mono">76.l</span>, <span className="font-mono">art. 47</span>...</li>
-        <li>• Per multa: <span className="font-mono">500</span>, <span className="font-mono">1000</span>...</li>
-        <li>• Multi-paraula: <span className="font-mono">cinturó conductor</span>, <span className="font-mono">mòbil mà</span>...</li>
+        <li>• <span className="font-mono">{t('superbuscador.tip1.examples')}</span></li>
+        <li>• {t('superbuscador.tip2.byArticle')}: <span className="font-mono">14.1</span>, <span className="font-mono">76.l</span>, <span className="font-mono">art. 47</span>...</li>
+        <li>• {t('superbuscador.tip3.byFine')}: <span className="font-mono">500</span>, <span className="font-mono">1000</span>...</li>
+        <li>• {t('superbuscador.tip4.multiword')}: <span className="font-mono">{t('superbuscador.tip4.examples')}</span></li>
       </ul>
     </div>
   );
@@ -285,6 +285,7 @@ function ResultRow({ row, q, color }: { row: CatalegRow; q: string; color: strin
 }
 
 function SeverityPill({ severity }: { severity: Severity }) {
+  const { t } = useT();
   const meta: Record<Severity, { label: string; cls: string }> = {
     MG: {
       label: 'MG',
@@ -303,10 +304,15 @@ function SeverityPill({ severity }: { severity: Severity }) {
     },
   };
   const m = meta[severity];
+  const title = severity === 'MG'
+    ? t('superbuscador.veryGrave')
+    : severity === 'G'
+    ? t('superbuscador.grave')
+    : t('superbuscador.minor');
   return (
     <span
       className={`rounded-md border px-2 py-0.5 text-xs font-bold whitespace-nowrap self-start ${m.cls}`}
-      title={severity === 'MG' ? 'Molt greu' : severity === 'G' ? 'Greu' : 'Lleu'}
+      title={title}
     >
       {m.label}
     </span>

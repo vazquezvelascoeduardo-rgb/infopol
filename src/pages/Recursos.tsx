@@ -543,22 +543,22 @@ function Field({ label, value }: { label: string; value: string }) {
 
 const DNI_LETTERS = 'TRWAGMYFPDXBNJZSQVHLCKE';
 
-function validateDniNie(s: string): {
+function validateDniNie(s: string, t: (key: string) => string): {
   kind: 'valid' | 'invalid' | 'incomplete';
   type: string;
   message: string;
   expected?: string;
 } {
   const v = s.trim().toUpperCase();
-  if (!v) return { kind: 'incomplete', type: '', message: 'Escriu un DNI o NIE.' };
+  if (!v) return { kind: 'incomplete', type: '', message: t('recursos.dni.empty') };
   const dniMatch = v.match(/^(\d{8})([A-Z])$/);
   if (dniMatch) {
     const num = parseInt(dniMatch[1], 10);
     const letter = dniMatch[2];
     const expected = DNI_LETTERS[num % 23];
     return letter === expected
-      ? { kind: 'valid', type: 'DNI', message: `Número ${dniMatch[1]} amb lletra ${letter}.` }
-      : { kind: 'invalid', type: 'DNI', message: `La lletra no correspon al número.`, expected };
+      ? { kind: 'valid', type: 'DNI', message: t('recursos.dni.validMsg').replace('{n}', dniMatch[1]).replace('{l}', letter) }
+      : { kind: 'invalid', type: 'DNI', message: t('recursos.dni.invalidMsg'), expected };
   }
   const nieMatch = v.match(/^([XYZ])(\d{7})([A-Z])$/);
   if (nieMatch) {
@@ -568,21 +568,22 @@ function validateDniNie(s: string): {
     const letter = nieMatch[3];
     const expected = DNI_LETTERS[num % 23];
     return letter === expected
-      ? { kind: 'valid', type: 'NIE', message: `${prefix}${nieMatch[2]} amb lletra ${letter}.` }
-      : { kind: 'invalid', type: 'NIE', message: `La lletra no correspon al número.`, expected };
+      ? { kind: 'valid', type: 'NIE', message: t('recursos.dni.validMsg').replace('{n}', `${prefix}${nieMatch[2]}`).replace('{l}', letter) }
+      : { kind: 'invalid', type: 'NIE', message: t('recursos.dni.invalidMsg'), expected };
   }
-  return { kind: 'incomplete', type: '', message: 'Format esperat: 8 dígits + lletra (DNI) o X/Y/Z + 7 dígits + lletra (NIE).' };
+  return { kind: 'incomplete', type: '', message: t('recursos.dni.formatHint') };
 }
 
 function DniValidator() {
+  const { t } = useT();
   const [input, setInput] = useState('');
-  const result = validateDniNie(input);
+  const result = validateDniNie(input, t);
 
   return (
     <div className="space-y-3">
       <div>
         <label htmlFor="dni-input" className="block text-xs uppercase tracking-wider font-semibold text-slate-600 dark:text-slate-300 mb-1">
-          Document
+          {t('recursos.dni.docLabel')}
         </label>
         <input
           id="dni-input"
@@ -609,20 +610,20 @@ function DniValidator() {
           }`}
         >
           <div className="font-bold mb-1">
-            {result.kind === 'valid' && `✅ ${result.type} vàlid`}
-            {result.kind === 'invalid' && `❌ ${result.type} INVÀLID`}
-            {result.kind === 'incomplete' && '⚠️ Incomplet o format desconegut'}
+            {result.kind === 'valid' && `✅ ${result.type} ${t('recursos.dni.valid')}`}
+            {result.kind === 'invalid' && `❌ ${result.type} ${t('recursos.dni.invalid')}`}
+            {result.kind === 'incomplete' && `⚠️ ${t('recursos.dni.incomplete')}`}
           </div>
           <div className="text-xs">
             {result.message}
             {result.kind === 'invalid' && result.expected && (
-              <div className="mt-1 font-mono">Lletra correcta: <strong>{result.expected}</strong></div>
+              <div className="mt-1 font-mono">{t('recursos.dni.expectedLetter')}: <strong>{result.expected}</strong></div>
             )}
           </div>
         </div>
       )}
       <p className="text-[11px] text-slate-500 dark:text-slate-400 italic">
-        Calcula la lletra de control segons el càlcul oficial (mòdul 23).
+        {t('recursos.dni.footer')}
       </p>
     </div>
   );
@@ -633,6 +634,7 @@ function DniValidator() {
 const NOTES_KEY = 'infopol-llibreta';
 
 function Notepad() {
+  const { t, locale } = useT();
   const [text, setText] = useState('');
   const [savedAt, setSavedAt] = useState<Date | null>(null);
 
@@ -655,15 +657,17 @@ function Notepad() {
 
   function clearAll() {
     if (!text.trim()) return;
-    if (confirm('Esborrar totes les notes?')) setText('');
+    if (confirm(t('recursos.notes.confirmClear'))) setText('');
   }
+
+  const localeStr = locale === 'ca' ? 'ca-ES' : 'es-ES';
 
   return (
     <div className="space-y-2">
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Notes operatives del torn (matrícules, observacions, recordatoris…). Es desa al teu navegador automàticament."
+        placeholder={t('recursos.notes.placeholder')}
         rows={10}
         className="w-full rounded-xl border-2 px-3 py-2 text-sm outline-none resize-y font-mono
           border-slate-200 bg-white text-slate-900
@@ -673,8 +677,8 @@ function Notepad() {
       <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
         <span>
           {savedAt
-            ? `💾 Desat ${savedAt.toLocaleTimeString('ca-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}`
-            : 'Es desa automàticament al teu dispositiu'}
+            ? `💾 ${t('recursos.notes.saved')} ${savedAt.toLocaleTimeString(localeStr, { hour: '2-digit', minute: '2-digit', second: '2-digit' })}`
+            : t('recursos.notes.autosave')}
         </span>
         <button
           type="button"
@@ -683,11 +687,11 @@ function Notepad() {
             border-red-200 text-red-700 hover:bg-red-50
             dark:border-red-400/30 dark:text-red-300 dark:hover:bg-red-400/10"
         >
-          🗑️ Esborrar
+          🗑️ {t('recursos.notes.clear')}
         </button>
       </div>
       <p className="text-[11px] text-slate-500 dark:text-slate-400 italic">
-        Privadesa: les notes només es guarden al teu navegador (localStorage), mai s'envien a cap servidor.
+        {t('recursos.notes.privacy')}
       </p>
     </div>
   );
