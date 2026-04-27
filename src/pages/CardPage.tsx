@@ -119,7 +119,12 @@ export default function CardPage() {
             {langNotice}
           </div>
         </div>
-        <HtmlInline html={body} title={card.title} key={bodyLang} />
+        {/* Wrapper centrat: a movil amb un padding minim, a desktop
+            amb max-w-5xl per no trencar el ritme amb la resta de la app.
+            La fitxa interna te el seu propi maxim (.wrapper a 720px). */}
+        <div className="mx-auto w-full max-w-5xl px-1 sm:px-4">
+          <HtmlInline html={body} title={card.title} key={bodyLang} />
+        </div>
       </article>
     );
   }
