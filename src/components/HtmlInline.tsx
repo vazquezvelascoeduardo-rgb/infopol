@@ -858,6 +858,55 @@ const LIGHT_THEME_CSS = `
   }
   .${SCOPE_CLASS}.ipol-light .recorda * { color: #422006 !important; }
 
+  /* ── Ordenança Platges Viladecans: classes específiques ──
+     Bloc de les 4 platges, fitxes individuals i banderes de bany. */
+  .${SCOPE_CLASS}.ipol-light .platges-bloc {
+    background: linear-gradient(135deg, #ffffff 0%, #fef9e8 100%) !important;
+    border-color: #a16207 !important;
+    color: #0f172a !important;
+    box-shadow: 0 1px 3px rgba(15,23,42,0.05) !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .platges-bloc h3 {
+    color: #a16207 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .platja {
+    background: #fffbeb !important;
+    border-left-color: #a16207 !important;
+    color: #0f172a !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .platja .desc {
+    color: #475569 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .platja.protegida {
+    background: #ecfdf5 !important;
+    border-left-color: #15803d !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .platja.protegida .nom {
+    color: #15803d !important;
+  }
+
+  /* Banderes de bany (verda / groga / vermella) */
+  .${SCOPE_CLASS}.ipol-light .bandera {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .bandera .desc { color: #0f172a !important; }
+  .${SCOPE_CLASS}.ipol-light .bandera.verda {
+    background: #dcfce7 !important;
+    border-color: #15803d !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .bandera.verda .nom { color: #15803d !important; }
+  .${SCOPE_CLASS}.ipol-light .bandera.groga {
+    background: #fef3c7 !important;
+    border-color: #a16207 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .bandera.groga .nom { color: #a16207 !important; }
+  .${SCOPE_CLASS}.ipol-light .bandera.vermella {
+    background: #fee2e2 !important;
+    border-color: #b91c1c !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .bandera.vermella .nom { color: #b91c1c !important; }
+
   /* Drets / derecho-item (LECrim) */
   .${SCOPE_CLASS}.ipol-light .derecho-item {
     background: #f8fafc !important;
