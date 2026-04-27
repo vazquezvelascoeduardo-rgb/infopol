@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baliza V16 Conectada — Esquema Operativo Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #0A1628;
+    --bg-section: #0E2244;
+    --gold: #C8A028;
+    --blue-royal: #1A5C96;
+    --red: #C8281E;
+    --green: #1A7A3C;
+    --text-main: #F0F4FF;
+    --text-secondary: #A8BAD4;
+    --border: #C8A028;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes flashV16 {
+    0%, 100% { opacity: 1; box-shadow: 0 0 24px 4px rgba(255,200,40,0.85); }
+    50%      { opacity: 0.4; box-shadow: 0 0 8px 0 rgba(255,200,40,0.2); }
+  }
+
+  body {
+    background-color: var(--bg-main);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-main);
+    padding: 20px 12px 40px;
+  }
+
+  .wrapper { max-width: 720px; margin: 0 auto; }
+
+  /* ── CABECERA ── */
+  .header {
+    display: flex; align-items: center; gap: 18px;
+    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 8px;
+    animation: fadeUp .5s ease both;
+    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+    position: relative;
+  }
+  .escudo svg { flex-shrink: 0; }
+  .header-text { flex: 1; }
+  .header-text .label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .header-text h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 26px; font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-main); line-height: 1.1;
+  }
+  .header-text h1 span { color: var(--gold); }
+  .header-text .subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* Animated V16 light in header corner */
+  .v16-light {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 14px; height: 14px;
+    background: #FFD040;
+    border-radius: 50%;
+    border: 2px solid #FFE080;
+    animation: flashV16 1.2s infinite;
+  }
+
+  /* ── CLASIFICACIÓN ── */
+  .clasificacion {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px; margin-bottom: 14px;
+    animation: fadeUp .6s ease .1s both;
+  }
+  .clas-card {
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+    border: 1px solid rgba(200,160,40,0.3);
+  }
+  .clas-card .icon { font-size: 22px; margin-bottom: 4px; }
+  .clas-card .tipo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .clas-card .pena-max {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+  }
+  .clas-leve   { background: rgba(26,122,60,0.15); border-color: var(--green); }
+  .clas-menos  { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
+  .clas-grave  { background: rgba(200,40,30,0.15); border-color: var(--red); }
+  .clas-leve .tipo   { color: #4ACD7A; }
+  .clas-menos .tipo  { color: #6AADDC; }
+  .clas-grave .tipo  { color: #E86050; }
+
+  /* ── BANNER INFO ── */
+  .info-banner {
+    background: linear-gradient(135deg, #12345E 0%, #1A5C96 50%, #12345E 100%);
+    border: 2px solid #6AADDC;
+    border-radius: 8px;
+    padding: 10px 18px;
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 12px;
+    animation: fadeUp .55s ease .05s both;
+    box-shadow: 0 0 20px rgba(26,92,150,0.3);
+  }
+  .info-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
+  .info-banner .ref-text { flex: 1; }
+  .info-banner .ref-ley {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: #D8EBFF;
+  }
+  .info-banner .ref-desc {
+    font-size: 12px;
+    color: rgba(216,235,255,0.85);
+    margin-top: 2px;
+  }
+  .info-banner .ref-fecha {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px; font-weight: 700;
+    color: #D8EBFF;
+    background: rgba(0,0,0,0.25);
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    border: 1px solid rgba(216,235,255,0.3);
+    text-align: center;
+  }
+
+  /* ── CRONOLOGÍA ── */
+  .cronologia {
+    background: linear-gradient(135deg, #0E2244 0%, #12345E 100%);
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    animation: fadeUp .6s ease .15s both;
+  }
+  .cronologia h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 6px; top: 4px; bottom: 4px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold) 0%, var(--blue-royal) 100%);
+  }
+  .timeline-item {
+    position: relative;
+    padding: 4px 0 10px;
+    font-size: 12.5px;
+    color: var(--text-main);
+  }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -24px; top: 7px;
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(200,160,40,0.2);
+  }
+  .timeline-item.activo::before {
+    background: #FFD040;
+    box-shadow: 0 0 0 3px rgba(255,208,64,0.3), 0 0 12px rgba(255,208,64,0.6);
+  }
+  .timeline-item .fecha {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 11.5px;
+    letter-spacing: 0.5px;
+    display: block;
+  }
+  .timeline-item .evento {
+    color: var(--text-main);
+    line-height: 1.4;
+  }
+  .timeline-item .evento b { color: #FFD060; }
+
+  /* ── BLOQUE CATEGORÍA ── */
+  .categoria {
+    background: var(--bg-section);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(200,160,40,0.2);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
+  .categoria:nth-child(2)  { animation: fadeUp .6s ease .25s both; }
+  .categoria:nth-child(3)  { animation: fadeUp .6s ease .3s both; }
+  .categoria:nth-child(4)  { animation: fadeUp .6s ease .35s both; }
+  .categoria:nth-child(5)  { animation: fadeUp .6s ease .4s both; }
+  .categoria:nth-child(6)  { animation: fadeUp .6s ease .45s both; }
+  .categoria:nth-child(7)  { animation: fadeUp .6s ease .5s both; }
+  .categoria:nth-child(8)  { animation: fadeUp .6s ease .55s both; }
+
+  .cat-header {
+    background: var(--blue-royal);
+    padding: 12px 18px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none;
+    transition: background .2s;
+  }
+  .cat-header:hover { background: #1e6db0; }
+  .cat-header .cat-icon { font-size: 20px; }
+  .cat-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px; flex: 1;
+  }
+  .cat-header .art-ref {
+    font-size: 11px;
+    color: rgba(240,244,255,0.65);
+    white-space: nowrap;
+  }
+  .cat-header .toggle {
+    font-size: 14px;
+    transition: transform .3s;
+    color: var(--gold);
+  }
+  .cat-header.open .toggle { transform: rotate(180deg); }
+
+  .cat-body { padding: 6px 0; }
+
+  /* ── ARTÍCULO ── */
+  .delito {
+    border-left: 3px solid var(--gold);
+    margin: 8px 14px;
+    background: rgba(10,22,40,0.5);
+    border-radius: 0 7px 7px 0;
+    padding: 10px 14px;
+  }
+  .delito-top {
+    display: flex; align-items: flex-start;
+    gap: 8px; flex-wrap: wrap;
+  }
+  .delito-nombre {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14.5px; font-weight: 600;
+    color: var(--text-main);
+    flex: 1; min-width: 160px;
+  }
+  .art-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    background: rgba(200,160,40,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .tipo-badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .badge-clave    { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
+  .badge-info     { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
+  .badge-grave    { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
+  .badge-local    { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
+
+  /* ── CHAPA RÁPIDA ── */
+  .multa-badge {
+    font-size: 11px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    background: var(--gold);
+    color: #0A1628;
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--gold);
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(200,160,40,0.25);
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .multa-badge.multa-alta {
+    background: var(--red);
+    color: #FFEBE8;
+    border-color: var(--red);
+    box-shadow: 0 1px 3px rgba(200,40,30,0.3);
+  }
+  .multa-badge.multa-organ {
+    background: var(--blue-royal);
+    color: #E0F0FF;
+    border-color: var(--blue-royal);
+  }
+  .multa-badge.multa-ok {
+    background: var(--green);
+    color: #E0FFF0;
+    border-color: var(--green);
+  }
+
+  .delito-desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    line-height: 1.5;
+  }
+  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
+
+  .pena-row {
+    display: flex; flex-wrap: wrap;
+    gap: 6px; margin-top: 7px;
+  }
+  .pena-chip {
+    font-size: 11px;
+    background: rgba(26,92,150,0.25);
+    border: 1px solid rgba(26,92,150,0.6);
+    color: var(--text-main);
+    padding: 3px 9px;
+    border-radius: 20px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .pena-chip.positivo {
+    background: rgba(26,122,60,0.25);
+    border-color: rgba(26,122,60,0.6);
+  }
+  .pena-chip.agravada {
+    background: rgba(200,40,30,0.2);
+    border-color: rgba(200,40,30,0.5);
+  }
+
+  /* ── MINI TABLA ── */
+  .mini-tabla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .mini-tabla .celda {
+    background: rgba(10,22,40,0.6);
+    border: 1px solid rgba(200,160,40,0.2);
+    border-radius: 5px;
+    padding: 6px 9px;
+    font-size: 11.5px;
+  }
+  .mini-tabla .celda b {
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* ── TABLA COMPARATIVA ── */
+  .tabla-discip {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    gap: 0;
+    margin-top: 8px;
+    background: rgba(10,22,40,0.7);
+    border: 1px solid rgba(200,160,40,0.3);
+    border-radius: 5px;
+    overflow: hidden;
+    font-size: 11.5px;
+  }
+  .tabla-discip.col3 { grid-template-columns: 1fr 1fr 1fr; }
+  .tabla-discip .td-header {
+    background: rgba(200,160,40,0.15);
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    text-align: center;
+    border-right: 1px solid rgba(200,160,40,0.2);
+    border-bottom: 1px solid rgba(200,160,40,0.2);
+  }
+  .tabla-discip .td-header:last-child { border-right: none; }
+  .tabla-discip .td-cell {
+    padding: 5px 8px;
+    color: var(--text-main);
+    border-right: 1px solid rgba(200,160,40,0.1);
+    border-bottom: 1px solid rgba(200,160,40,0.1);
+  }
+  .tabla-discip .td-cell:last-child { border-right: none; }
+  .tabla-discip .td-pob {
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+  }
+
+  /* ── BLOQUE BULOS (FAQ) ── */
+  .bulo-item {
+    margin: 8px 14px;
+    background: rgba(10,22,40,0.5);
+    border-radius: 7px;
+    padding: 10px 14px;
+    border-left: 3px solid var(--green);
+  }
+  .bulo-item .bulo-pregunta {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #E86050;
+    margin-bottom: 4px;
+  }
+  .bulo-item .bulo-respuesta {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .bulo-item .bulo-respuesta b { color: #4ACD7A; }
+  .bulo-item .falso-tag {
+    font-family: 'Oswald', sans-serif;
+    font-size: 9px;
+    background: var(--red);
+    color: white;
+    padding: 1px 6px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    margin-left: 6px;
+  }
+
+  /* ── NOTAS ── */
+  .nota-agrav {
+    margin-top: 6px; font-size: 11.5px;
+    color: #E08888;
+    background: rgba(200,40,30,0.08);
+    border-left: 2px solid var(--red);
+    padding: 5px 9px;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+  }
+  .nota-agrav b { color: #FF8070; }
+  .nota-policial {
+    margin-top: 6px; font-size: 11.5px;
+    color: #A8D4C0;
+    background: rgba(26,122,60,0.1);
+    border-left: 2px solid var(--green);
+    padding: 5px 9px;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+  }
+  .nota-policial b { color: #4ACD7A; }
+  .nota-clave {
+    margin-top: 6px; font-size: 11.5px;
+    color: #E8D890;
+    background: rgba(200,160,40,0.1);
+    border-left: 2px solid var(--gold);
+    padding: 5px 9px;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+  }
+  .nota-clave b { color: #FFD060; }
+
+  /* ── RECUERDA ── */
+  .recuerda {
+    background: var(--gold);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-top: 6px;
+    animation: fadeUp .6s ease .8s both;
+  }
+  .recuerda h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px; font-weight: 700;
+    text-transform: uppercase;
+    color: #0A1628;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .recuerda ul { list-style: none; }
+  .recuerda ul li {
+    font-size: 13px;
+    color: #0A1628;
+    padding: 5px 0;
+    display: flex; align-items: flex-start; gap: 6px;
+    border-bottom: 1px solid rgba(10,22,40,0.15);
+    line-height: 1.4;
+  }
+  .recuerda ul li:last-child { border-bottom: none; }
+  .recuerda ul li::before {
+    content: "▶";
+    font-size: 9px; margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── BOTÓN IMPRIMIR ── */
+  .btn-print {
+    display: block; width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: var(--blue-royal);
+    border: 2px solid var(--gold);
+    color: var(--text-main);
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px;
+    border-radius: 8px;
+    cursor: pointer; transition: all .2s;
+    animation: fadeUp .6s ease .9s both;
+  }
+  .btn-print:hover {
+    background: var(--gold);
+    color: #0A1628;
+  }
+
+  /* ── DIVISOR ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 4px 14px 2px;
+    opacity: .35;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 500px) {
+    .clasificacion { grid-template-columns: 1fr; }
+    .header-text h1 { font-size: 20px; }
+    .cat-header h2 { font-size: 14px; }
+    .multa-badge { font-size: 10.5px; padding: 2px 7px; }
+    .tabla-discip { grid-template-columns: 1fr 1fr; }
+    .tabla-discip.col3 { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .btn-print { display: none; }
+    .categoria { break-inside: avoid; }
+    .cat-body { display: block !important; }
+    .v16-light { animation: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- CABECERA -->
+  <div class="header">
+    <div class="v16-light"></div>
+    <div class="escudo">
+      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
+        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
+        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICIA</text>
+        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
+        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
+        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
+        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <div class="label">Esquema Operativo Policial</div>
+      <h1>Baliza <span>V16 Conectada</span></h1>
+      <div class="subtitle">Sustitución obligatoria de los triángulos · Conectividad DGT 3.0 · Aplicación operativa PL · Vigente desde 1-ene-2026</div>
+    </div>
+  </div>
+
+  <!-- CLASIFICACIÓN -->
+  <div class="clasificacion">
+    <div class="clas-card clas-leve">
+      <div class="icon">📜</div>
+      <div class="tipo">Norma</div>
+      <div class="pena-max">RD 159/2021<br>Modifica RD 2822/1998<br>Anexo XI · LTSV</div>
+    </div>
+    <div class="clas-card clas-menos">
+      <div class="icon">📡</div>
+      <div class="tipo">Conectividad</div>
+      <div class="pena-max">DGT 3.0 · NB-IoT<br>SIM no extraíble<br>12 años incluidos</div>
+    </div>
+    <div class="clas-card clas-grave">
+      <div class="icon">💰</div>
+      <div class="tipo">Sanción</div>
+      <div class="pena-max">Infracción LEVE<br><b style="color:#E86050">80 €</b> (40 € pronto pago)<br>Sin pérdida de puntos</div>
+    </div>
+  </div>
+
+  <!-- BANNER INFO -->
+  <div class="info-banner">
+    <div class="ref-icon">🚨</div>
+    <div class="ref-text">
+      <div class="ref-ley">🚨 Dispositivo de preseñalización V16 conectado</div>
+      <div class="ref-desc">Sustituye a los triángulos · Único válido en España desde 1-ene-2026 · Datos remitidos a DGT, Servei Català de Trànsit y Tráfico Vasco · Justificación: ~25 atropellos mortales/año al colocar triángulos</div>
+    </div>
+    <div class="ref-fecha">01/01/2026<br>Vigente</div>
+  </div>
+
+  <!-- CRONOLOGÍA -->
+  <div class="cronologia">
+    <h3>🕰️ Cronología · Del triángulo a la V16 conectada</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="fecha">1 JUL 2021</span>
+        <span class="evento"><b>RD 159/2021</b> · La V16 (no conectada) se autoriza como <b>alternativa voluntaria</b> a los triángulos</span>
+      </div>
+      <div class="timeline-item">
+        <span class="fecha">ENE 2023</span>
+        <span class="evento">Comienza la venta de los primeros modelos <b>conectados</b> (DGT 3.0)</span>
+      </div>
+      <div class="timeline-item">
+        <span class="fecha">31 DIC 2025</span>
+        <span class="evento">Fin del periodo transitorio · Último día válido para triángulos y V16 sin conexión</span>
+      </div>
+      <div class="timeline-item">
+        <span class="fecha">FIN DIC 2025</span>
+        <span class="evento">DGT retira la homologación de <b>4 modelos</b> (Don Feliz, Boutique For Your Car, Ikrea, Call SOS) por caducidad de certificados</span>
+      </div>
+      <div class="timeline-item activo">
+        <span class="fecha">1 ENE 2026 · VIGOR</span>
+        <span class="evento"><b>Obligatoriedad efectiva</b> · La V16 conectada se convierte en el ÚNICO dispositivo legal de preseñalización</span>
+      </div>
+      <div class="timeline-item">
+        <span class="fecha">ENE-PRIMAVERA 2026</span>
+        <span class="evento">Periodo de "tolerancia razonable" anunciado por Interior · Prioridad informativa, no sancionadora</span>
+      </div>
+      <div class="timeline-item">
+        <span class="fecha">2.º SEM 2026</span>
+        <span class="evento">Revisión prevista del protocolo · Posible exclusión de modelos baratos sin conectividad real</span>
+      </div>
+    </div>
+    <div class="nota-clave">💡 La obligación nace del <b>Reglamento General de Vehículos</b> (RD 2822/1998, Anexo XI "Señales en los vehículos") modificado por el RD 159/2021. El régimen sancionador procede de la <b>LTSV (RDLeg 6/2015)</b>.</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       1. MARCO NORMATIVO Y OBLIGACIÓN
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">📐</span>
+      <h2>Marco Normativo y Obligación</h2>
+      <span class="art-ref">RD 2822/1998 · RD 159/2021 · Anexo XI</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">¿Qué es la baliza V16?</div>
+          <span class="art-badge">Anexo XI RGV</span>
+          <span class="tipo-badge badge-info">Definición</span>
+          <span class="multa-badge multa-organ">🚨 Preseñalización de peligro</span>
+        </div>
+        <div class="delito-desc">
+          Dispositivo luminoso portátil de <b>preseñalización de peligro</b> que indica que un vehículo ha quedado <b>inmovilizado en la calzada</b> (avería o accidente) o que su <b>carga ha caído</b> sobre la misma. Sustituye a los tradicionales triángulos.
+        </div>
+        <div class="nota-policial">🚔 <b>Concepto clave:</b> es <b>preseñalización</b>, no llamada de emergencia. La V16 NO sustituye al 112 ni a la grúa: solo señala visualmente y geolocaliza el vehículo en los sistemas de tráfico.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Obligación general · Vehículos obligados</div>
+          <span class="art-badge">RD 159/2021</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE PL</span>
+          <span class="multa-badge multa-alta">🚗 Todos los vehículos a 4 ruedas</span>
+        </div>
+        <div class="delito-desc">
+          Desde <b>1-ene-2026</b>, <b>obligatorio en todos los vehículos matriculados en España</b> sujetos a la obligación de llevar dispositivo de preseñalización. La <b>V16 conectada</b> es el ÚNICO medio legal: triángulos y V16 sin conexión <b>ya no son válidos</b>.
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>✅ Obligados</b>Turismos, furgonetas, camiones, autocares, autobuses, autocaravanas</div>
+          <div class="celda"><b>❌ No obligados</b>Motocicletas y ciclomotores · Bicicletas · Vehículos extranjeros en circulación internacional</div>
+          <div class="celda"><b>🌍 Validez</b>Todo territorio nacional · Convenio Viena 1968: válida también en países firmantes</div>
+          <div class="celda"><b>🔄 Reutilización</b>La misma baliza puede usarse en distintos vehículos (no se vincula a la matrícula)</div>
+        </div>
+        <div class="nota-clave">💡 Vehículos extranjeros: pueden seguir usando triángulos en virtud del Convenio sobre Circulación Vial de Viena (1968). La PL no debe denunciarles por no llevar V16 si están en circulación internacional.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Ámbito · ¿Vale en zona urbana?</div>
+          <span class="art-badge">Norma única</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE PL</span>
+          <span class="multa-badge multa-alta">🏙️ También en CASCO URBANO</span>
+        </div>
+        <div class="delito-desc">
+          La normativa <b>NO distingue entre vías interurbanas y urbanas</b>. Si el vehículo queda inmovilizado en vía pública (incluida zona urbana), debe señalizarse con la V16 conectada. La obligación de <b>llevarla</b> en el vehículo es independiente del tipo de vía.
+        </div>
+        <div class="nota-policial">🚔 <b>Aplicación PL:</b> en accidente de tráfico urbano o avería en calle/avenida, los conductores deben señalizar con la V16. La PL puede denunciar tanto la ausencia del dispositivo como su no uso. La denuncia por no llevarla es competencia tanto de Guardia Civil (Tráfico) como de la PL en su ámbito territorial.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       2. CARACTERÍSTICAS TÉCNICAS
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">⚙️</span>
+      <h2>Características Técnicas Obligatorias</h2>
+      <span class="art-ref">Anexo XI RGV · Orden PCI/810/2018</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Especificaciones físicas y luminosas</div>
+          <span class="art-badge">Anexo XI</span>
+          <span class="tipo-badge badge-info">Técnicas</span>
+        </div>
+        <div class="delito-desc">
+          Para ser homologada, debe cumplir <b>todas</b> estas características:
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>💡 Color luz</b>Amarillo auto (ámbar)</div>
+          <div class="celda"><b>🔄 Visibilidad</b>360° horizontal · ±8° vertical</div>
+          <div class="celda"><b>📏 Alcance</b>Visible hasta <b style="color:#FFD060">1 km</b> en óptimas condiciones</div>
+          <div class="celda"><b>⚡ Frecuencia</b>Destello entre <b style="color:#FFD060">0,8 y 2 Hz</b></div>
+          <div class="celda"><b>⏱️ Autonomía emergencia</b>Mínimo <b style="color:#FFD060">30 minutos</b> de funcionamiento continuo</div>
+          <div class="celda"><b>🔋 Vida útil reposo</b>Mínimo <b style="color:#FFD060">18 meses</b> sin recargar</div>
+          <div class="celda"><b>🌧️ Resistencia</b>Lluvia · Viento · Temperaturas extremas (IP54+)</div>
+          <div class="celda"><b>🧲 Fijación</b>Base imantada estable · Apoyo en superficie plana</div>
+        </div>
+        <div class="nota-clave">💡 La baliza debe poder mantenerse <b>estable sobre una superficie plana</b> (parte más alta del vehículo, normalmente el techo). NO puede incorporar funcionalidades adicionales (botón SOS para grúa, app, etc.) más allá de la señalización y geolocalización.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Conectividad DGT 3.0</div>
+          <span class="art-badge">Plataforma DGT</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE</span>
+          <span class="multa-badge multa-organ">📡 NB-IoT · 100 segundos</span>
+        </div>
+        <div class="delito-desc">
+          La conectividad es la <b>gran novedad</b> respecto a la V16 antigua. El dispositivo lleva integrados:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">📍 Chip GPS</span>
+          <span class="pena-chip">📶 Tarjeta SIM IoT no extraíble</span>
+          <span class="pena-chip">🛰️ Redes NB-IoT amplia cobertura</span>
+          <span class="pena-chip">⏰ Envío cada 100 s mientras activa</span>
+          <span class="pena-chip">🆓 12 años conectividad incluida (sin cuota)</span>
+          <span class="pena-chip">🇪🇸 Identificador único de fábrica</span>
+        </div>
+        <div class="nota-policial">🚔 La baliza envía: (1) <b>activación</b>, (2) <b>geoposición</b> cada 100 segundos, (3) <b>desactivación</b>. Receptores: <b>DGT</b>, <b>Servei Català de Trànsit (SCT)</b> en Catalunya, y <b>Dirección de Tráfico del Gobierno Vasco</b>. Esos datos se difunden a paneles de carretera, app DGT y navegadores conectados.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Homologación obligatoria</div>
+          <span class="art-badge">Anexo XI</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE</span>
+          <span class="multa-badge multa-alta">🏷️ Solo modelos certificados</span>
+        </div>
+        <div class="delito-desc">
+          Solo son válidos los modelos que han superado el proceso de certificación en <b>laboratorios autorizados</b>. Listado oficial publicado en la web de la DGT (<b>actualizado</b>: la DGT retiró 4 modelos a finales de 2025).
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>🔬 IDIADA</b>Laboratorio técnico autorizado (Catalunya)</div>
+          <div class="celda"><b>🔬 LCOE</b>Laboratorio Central Oficial de Electrotecnia</div>
+        </div>
+        <div class="nota-agrav">⚠️ <b>"Falsas balizas":</b> circulan dispositivos fake o luces de emergencia genéricas vendidas como "homologadas" sin serlo. <b>NO valen aunque emitan luz</b>. Hay que comprobar la marca/modelo en la lista oficial de la DGT antes de aceptar como válida.</div>
+        <div class="nota-clave">💡 <b>Modelos retirados a finales de 2025</b> (caducidad de certificados, NO fallos técnicos): Don Feliz, The Boutique For Your Car, Ikrea, Call SOS. Los conductores que las compraron antes <b>pueden seguir usándolas</b> al cumplir los requisitos técnicos.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       3. USO CORRECTO
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header open" onclick="toggle(this)">
+      <span class="cat-icon">🪧</span>
+      <h2>Uso Correcto · Protocolo de Activación</h2>
+      <span class="art-ref">Recomendaciones DGT</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Pasos en caso de avería o accidente</div>
+          <span class="art-badge">Praxis</span>
+          <span class="tipo-badge badge-info">Operativo</span>
+        </div>
+        <div class="delito-desc">
+          Protocolo recomendado por la DGT para minimizar el riesgo de atropello:
+        </div>
+        <div class="tabla-discip col3">
+          <div class="td-header">Paso</div>
+          <div class="td-header">Acción</div>
+          <div class="td-header">Objetivo</div>
+          <div class="td-cell td-pob">1</div>
+          <div class="td-cell">Detener el vehículo en lugar lo más seguro posible</div>
+          <div class="td-cell">Reducir riesgo de impacto</div>
+          <div class="td-cell td-pob">2</div>
+          <div class="td-cell">Conectar luces de emergencia + freno de mano</div>
+          <div class="td-cell">Aviso visual inmediato</div>
+          <div class="td-cell td-pob">3</div>
+          <div class="td-cell">Coger la V16 de la guantera SIN bajar del coche</div>
+          <div class="td-cell">Evitar exposición a la calzada</div>
+          <div class="td-cell td-pob">4</div>
+          <div class="td-cell">Activarla DENTRO del vehículo</div>
+          <div class="td-cell">Inicio envío geoposición</div>
+          <div class="td-cell td-pob">5</div>
+          <div class="td-cell">Sacar el brazo y colocarla con la base imantada en el techo (parte más alta)</div>
+          <div class="td-cell">Visibilidad máxima 360°</div>
+          <div class="td-cell td-pob">6</div>
+          <div class="td-cell">Permanecer DENTRO si la vía es peligrosa</div>
+          <div class="td-cell">Reducir riesgo atropello</div>
+          <div class="td-cell td-pob">7</div>
+          <div class="td-cell">Llamar a asistencia/grúa/112 si procede</div>
+          <div class="td-cell">Resolución del incidente</div>
+        </div>
+        <div class="nota-policial">🚔 <b>El chaleco reflectante NO desaparece:</b> sigue siendo OBLIGATORIO ponérselo si el conductor sale del vehículo en vía interurbana. La V16 reduce la necesidad de salir, pero no la elimina (cambiar rueda, esperar fuera por incendio, etc.).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Dónde guardarla y revisarla</div>
+          <span class="art-badge">Diligencia</span>
+          <span class="tipo-badge badge-info">Mantenimiento</span>
+        </div>
+        <div class="delito-desc">
+          La baliza debe guardarse <b>accesible desde el asiento del conductor</b> (guantera, compartimento de puerta) y debe estar <b>cargada</b>. Comprobar periódicamente el estado de la batería (algunos modelos llevan indicador integrado).
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       4. SUJETOS, EXCEPCIONES Y CASOS ESPECIALES
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">👥</span>
+      <h2>Sujetos Obligados y Excepciones</h2>
+      <span class="art-ref">Vehículos · Catalunya · Internacional</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Catalunya · Servei Català de Trànsit</div>
+          <span class="art-badge">SCT</span>
+          <span class="tipo-badge badge-grave">⭐ CATALUNYA</span>
+          <span class="multa-badge multa-organ">🇨🇦 Receptor de los datos</span>
+        </div>
+        <div class="delito-desc">
+          En Catalunya, las balizas V16 envían sus datos también al <b>Servei Català de Trànsit (SCT)</b>, además de a la DGT, en virtud de la integración con la plataforma del vehículo conectado. Los datos se incorporan a paneles de carretera, mapas de incidencias y sistemas de información del SCT.
+        </div>
+        <div class="nota-policial">🚔 <b>Aplicación PL Catalunya:</b> los Mossos d'Esquadra (especialmente la División de Tráfico) tienen acceso operativo a esos datos a través del SCT. La PL puede coordinarse con Mossos en accidentes de tráfico para obtener información de geolocalización V16 si es relevante.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Excepciones a la obligación</div>
+          <span class="art-badge">RGV</span>
+          <span class="tipo-badge badge-clave">Casos NO obligados</span>
+        </div>
+        <div class="delito-desc">
+          Las siguientes categorías NO están obligadas a llevar V16:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip positivo">🏍️ Motocicletas</span>
+          <span class="pena-chip positivo">🛵 Ciclomotores</span>
+          <span class="pena-chip positivo">🚲 Bicicletas y VMP</span>
+          <span class="pena-chip positivo">🌍 Vehículos extranjeros (Convenio Viena)</span>
+          <span class="pena-chip positivo">🚜 Maquinaria agrícola sin obligación de preseñalización</span>
+        </div>
+        <div class="nota-clave">💡 <b>Las motos NO están obligadas</b> a llevar dispositivo de preseñalización (ni triángulos ni V16). Los vehículos extranjeros en <b>circulación internacional</b> pueden seguir utilizando triángulos según el Convenio de Viena de 1968.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Vehículos policiales y de emergencia</div>
+          <span class="art-badge">Praxis</span>
+          <span class="tipo-badge badge-info">PL · Mossos · GUB</span>
+        </div>
+        <div class="delito-desc">
+          Los vehículos policiales (PL, Mossos, Guardia Urbana, FCSE) <b>también deben llevar la V16</b> al estar matriculados como turismos/furgonetas. En servicio, ante una avería del vehículo policial, la baliza debe usarse igualmente, además de los dispositivos lumínicos propios (rotativos azules).
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       5. RÉGIMEN SANCIONADOR
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">💰</span>
+      <h2>Régimen Sancionador</h2>
+      <span class="art-ref">RDLeg 6/2015 LTSV · Anexo IV</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Infracción base · No llevar la V16</div>
+          <span class="art-badge">Art. 76 LTSV</span>
+          <span class="tipo-badge badge-clave">🟢 LEVE</span>
+          <span class="multa-badge">💰 80 € (40 € pronto pago)</span>
+        </div>
+        <div class="delito-desc">
+          No llevar la baliza V16 conectada (o llevar una V16 NO conectada después del 1-ene-2026) constituye una <b>infracción LEVE</b> equivalente a la antigua sanción por no llevar triángulos. Pago en plazo de 20 días naturales con descuento del 50%.
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">💸 80 € (sin pronto pago)</span>
+          <span class="pena-chip positivo">💸 40 € (con pronto pago en 20 días)</span>
+          <span class="pena-chip">🚫 SIN pérdida de puntos</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Dispositivo no homologado</div>
+          <span class="art-badge">LTSV</span>
+          <span class="tipo-badge badge-grave">⚠️ Posible agravación</span>
+          <span class="multa-badge multa-alta">💰 Hasta 200 € (algunas fuentes)</span>
+        </div>
+        <div class="delito-desc">
+          Si el dispositivo NO está homologado o no transmite correctamente la ubicación, el vehículo se considera <b>no señalizado conforme a la normativa</b>. Diversas fuentes especializadas señalan posibles <b>multas de hasta 200 €</b> e incluso <b>4 puntos del carnet</b> en supuestos extremos, aunque la sanción base oficial DGT sigue siendo 80 €.
+        </div>
+        <div class="nota-agrav">⚠️ <b>Cautela en la calle:</b> la sanción base (80 €) es la oficial DGT. Las multas más elevadas dependen de la calificación que el juez/órgano sancionador haga del hecho concreto (no señalizar = posible riesgo para otros usuarios). Verifica boletín y artículo invocado.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Período de "tolerancia razonable"</div>
+          <span class="art-badge">Crit. Interior</span>
+          <span class="tipo-badge badge-info">Praxis 2026</span>
+          <span class="multa-badge multa-organ">📢 Información primero</span>
+        </div>
+        <div class="delito-desc">
+          El Ministerio del Interior anunció en enero 2026 una <b>actitud flexible</b> "durante un tiempo prudencial", priorizando la <b>información sobre la sanción</b>. La normativa, sin embargo, está vigente desde el 1-ene-2026 y la denuncia es jurídicamente válida desde el primer día.
+        </div>
+        <div class="nota-policial">🚔 <b>Criterio operativo PL:</b> en denuncias por avería/accidente, primero verificar si hay V16; si no la lleva, advertir e informar antes de denunciar. Si la avería no causa peligro y el conductor desconoce la norma → advertencia. Si hay riesgo (autovía, cambio de rasante, niebla, baja visibilidad), la denuncia procede.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Recurso · Alegaciones</div>
+          <span class="art-badge">L. 39/2015</span>
+          <span class="tipo-badge badge-info">Garantías</span>
+        </div>
+        <div class="delito-desc">
+          El conductor sancionado dispone de <b>20 días naturales</b> desde la notificación para presentar alegaciones (Sede Electrónica DGT, Correos o registro público). Motivos habituales aceptados:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">📸 Aportar prueba fotográfica de tener la V16</span>
+          <span class="pena-chip">🧾 Factura de compra anterior a la denuncia</span>
+          <span class="pena-chip">📝 Defectos de forma del boletín</span>
+        </div>
+        <div class="nota-clave">💡 <b>Pagar el descuento del 50% = renunciar al recurso.</b> El conductor debe decidir entre pagar 40 € (rápido, no recurrible) o esperar y alegar (con riesgo de pagar 80 € si pierde).</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       6. PRIVACIDAD Y BULOS (AEPD)
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🛡️</span>
+      <h2>Privacidad · AEPD · Bulos Frecuentes</h2>
+      <span class="art-ref">Nota AEPD · DGT</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="bulo-item">
+        <div class="bulo-pregunta">"La V16 me geolocaliza permanentemente y comparte mis datos personales" <span class="falso-tag">FALSO</span></div>
+        <div class="bulo-respuesta">La AEPD ha confirmado que la baliza <b>solo emite cuando se activa</b>. No registra velocidad ni hace seguimiento. <b>NO transmite datos personales ni puede identificar la matrícula</b>. Los datos a DGT/SCT son anonimizados.</div>
+      </div>
+
+      <div class="bulo-item">
+        <div class="bulo-pregunta">"Necesita una app o un móvil para funcionar" <span class="falso-tag">FALSO</span></div>
+        <div class="bulo-respuesta">La V16 incluye internamente <b>GPS + SIM no extraíble</b>. <b>No requiere apps, ni emparejamientos, ni dar datos personales</b>. Basta encenderla y colocarla en el exterior del vehículo.</div>
+      </div>
+
+      <div class="bulo-item">
+        <div class="bulo-pregunta">"Hay que pagar una cuota mensual de conectividad" <span class="falso-tag">FALSO</span></div>
+        <div class="bulo-respuesta">La conectividad está incluida en el precio. La normativa exige <b>mínimo 12 años sin coste adicional</b>. Las operadoras no cobran al usuario por el envío de datos.</div>
+      </div>
+
+      <div class="bulo-item">
+        <div class="bulo-pregunta">"No funciona en túneles ni zonas sin cobertura" <span class="falso-tag">FALSO</span></div>
+        <div class="bulo-respuesta">Usa redes <b>IoT especializadas</b> con cobertura amplia. En zonas sin red, la baliza <b>sigue funcionando como señal luminosa visual</b>, aunque no envíe geoposición.</div>
+      </div>
+
+      <div class="bulo-item">
+        <div class="bulo-pregunta">"La V16 llama al 112 o avisa a la grúa" <span class="falso-tag">FALSO</span></div>
+        <div class="bulo-respuesta">La V16 <b>NO llama a emergencias</b> ni determina la naturaleza del incidente. Solo geoposiciona el vehículo en sistemas de tráfico. Para asistencia hay que llamar manualmente al 112 o a la aseguradora/grúa.</div>
+      </div>
+
+      <div class="bulo-item">
+        <div class="bulo-pregunta">"Multas hasta 30.000 € por no llevarla" <span class="falso-tag">FALSO</span></div>
+        <div class="bulo-respuesta">La infracción es <b>LEVE: 80 € (40 € con pronto pago)</b>, igual que la antigua sanción por no llevar triángulos. No se pierden puntos.</div>
+      </div>
+
+      <div class="bulo-item">
+        <div class="bulo-pregunta">"Hay que registrar la baliza en la DGT con DNI/matrícula" <span class="falso-tag">FALSO</span></div>
+        <div class="bulo-respuesta">La baliza tiene un <b>identificador único de fábrica</b> que va con el dispositivo, NO con el coche. El usuario <b>no facilita ningún dato</b> al adquirirla. Por eso la misma baliza puede usarse en distintos vehículos.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       7. APLICACIÓN OPERATIVA POLICIAL
+  ══════════════════════════════════════════ -->
+  <div class="categoria">
+    <div class="cat-header" onclick="toggle(this)">
+      <span class="cat-icon">🚔</span>
+      <h2>Aplicación Operativa · Workflow PL</h2>
+      <span class="art-ref">Atestado · Identificación · Coordinación</span>
+      <span class="toggle">▼</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Intervención en avería o accidente urbano</div>
+          <span class="art-badge">Praxis PL</span>
+          <span class="tipo-badge badge-grave">⭐ CLAVE</span>
+        </div>
+        <div class="delito-desc">
+          Protocolo recomendado al llegar a un vehículo inmovilizado en vía urbana:
+        </div>
+        <div class="tabla-discip col3">
+          <div class="td-header">Fase</div>
+          <div class="td-header">Acción PL</div>
+          <div class="td-header">Resultado</div>
+          <div class="td-cell td-pob">1. Llegada</div>
+          <div class="td-cell">Asegurar zona · Conos · Rotativo</div>
+          <div class="td-cell">Protección víctimas y agentes</div>
+          <div class="td-cell td-pob">2. Verificación</div>
+          <div class="td-cell">¿Lleva V16 activada y visible?</div>
+          <div class="td-cell">Sí → continuar · No → 3</div>
+          <div class="td-cell td-pob">3. Comprobación</div>
+          <div class="td-cell">¿Tiene V16 en el vehículo aunque no la haya activado?</div>
+          <div class="td-cell">Cumple posesión · Advertencia uso</div>
+          <div class="td-cell td-pob">4. Sin V16</div>
+          <div class="td-cell">Verificar homologación (etiqueta + lista DGT)</div>
+          <div class="td-cell">Posible denuncia art. 76 LTSV</div>
+          <div class="td-cell td-pob">5. Boletín</div>
+          <div class="td-cell">Si procede: boletín 80 € (leve, sin puntos)</div>
+          <div class="td-cell">Notificación + plazo 20 días</div>
+          <div class="td-cell td-pob">6. Coordinación</div>
+          <div class="td-cell">Si grave: avisar Mossos Tráfico o GC para vías rápidas</div>
+          <div class="td-cell">Traspaso jurisdicción</div>
+        </div>
+        <div class="nota-policial">🚔 <b>Criterio razonable de tolerancia 2026:</b> en los primeros meses la prioridad es informar. Si el conductor manifiesta desconocimiento, advertir e informar de la obligación. Reservar la denuncia para casos donde la falta de señalización <b>genere riesgo real</b> (alta velocidad, baja visibilidad, accidente con víctimas).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">¿Cómo verifico si una V16 es válida?</div>
+          <span class="art-badge">Praxis</span>
+          <span class="tipo-badge badge-info">Comprobación</span>
+        </div>
+        <div class="delito-desc">
+          Tres comprobaciones en orden:
+        </div>
+        <div class="mini-tabla">
+          <div class="celda"><b>1️⃣ Etiqueta física</b>Código de homologación grabado en la carcasa</div>
+          <div class="celda"><b>2️⃣ Marca y modelo</b>Consultar lista oficial DGT (web dgt.es)</div>
+          <div class="celda"><b>3️⃣ Conectividad</b>Indicador LED de envío DGT 3.0 al activarla</div>
+          <div class="celda"><b>4️⃣ Laboratorio</b>Certificación IDIADA o LCOE</div>
+        </div>
+        <div class="nota-clave">💡 Si la baliza es <b>roja, blanca, azul o sin certificación visible</b> → NO es V16. Si emite luz pero NO geolocaliza → NO es V16 conectada. Las compradas antes del 31-dic-2025 pero homologadas en su momento siguen siendo válidas (incluso aunque la marca haya perdido la homologación posteriormente).</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="delito">
+        <div class="delito-top">
+          <div class="delito-nombre">Coordinación con SCT y Mossos en Catalunya</div>
+          <span class="art-badge">Praxis Cat.</span>
+          <span class="tipo-badge badge-grave">⭐ CATALUNYA</span>
+        </div>
+        <div class="delito-desc">
+          En accidentes de tráfico complejos en zona urbana:
+        </div>
+        <div class="pena-row">
+          <span class="pena-chip">🚨 Activar protocolo accidente con víctimas</span>
+          <span class="pena-chip">📡 Solicitar info SCT sobre balizas activas en la zona</span>
+          <span class="pena-chip">🚓 Coordinar con Mossos División Tráfico si es vía interurbana</span>
+          <span class="pena-chip">📝 Atestado: hacer constar si víctima/conductor llevaba o no V16</span>
+        </div>
+        <div class="nota-policial">🚔 La PL es competente para denunciar la falta de V16 en su <b>ámbito territorial municipal</b>. En vías interurbanas (autovías, autopistas, carreteras), la competencia es de la <b>ATGC (Guardia Civil de Tráfico)</b> o de los <b>Mossos d'Esquadra (División de Tráfico)</b> en Catalunya según el tramo.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       CUADRO RECUERDA
+  ══════════════════════════════════════════ -->
+  <div class="recuerda">
+    <h3>📋 Recuerda — Baliza V16 Conectada</h3>
+    <ul>
+      <li>📅 <b>Vigor:</b> 1-ene-2026 · Único dispositivo legal de preseñalización · RD 159/2021 modifica el RD 2822/1998 (RGV, Anexo XI).</li>
+      <li>🚨 <b>Sustituye totalmente a los triángulos</b> · Justificación: ~25 atropellos mortales/año al colocarlos.</li>
+      <li>✅ <b>Obligados:</b> turismos, furgonetas, camiones, autobuses, autocaravanas matriculados en España.</li>
+      <li>❌ <b>NO obligados:</b> motocicletas, ciclomotores, bicicletas, VMP, vehículos extranjeros en circulación internacional (Convenio Viena).</li>
+      <li>🏙️ <b>Ámbito:</b> también obligatoria en CASCO URBANO. La norma no distingue entre vías.</li>
+      <li>💡 <b>Características:</b> luz amarilla auto, 360° horizontal, visible 1 km, destello 0,8-2 Hz, mín. 30 min autonomía emergencia, 18 meses en reposo.</li>
+      <li>📡 <b>Conectividad obligatoria:</b> GPS + SIM IoT no extraíble + envío cada 100 s a DGT 3.0 + 12 años conectividad incluida (sin cuota).</li>
+      <li>🇨🇦 <b>Catalunya:</b> los datos llegan también al <b>Servei Català de Trànsit (SCT)</b>, no solo a la DGT.</li>
+      <li>🔬 <b>Homologación:</b> certificación obligatoria por <b>IDIADA</b> o <b>LCOE</b>. Lista oficial en dgt.es.</li>
+      <li>⚠️ <b>4 modelos retirados</b> (dic-2025): Don Feliz, Boutique For Your Car, Ikrea, Call SOS (caducidad de certificados, las ya compradas siguen valiendo).</li>
+      <li>💰 <b>Sanción base:</b> infracción LEVE · 80 € (40 € pronto pago) · SIN pérdida de puntos.</li>
+      <li>💰 <b>Dispositivo no homologado:</b> hasta 200 € según interpretación + posibles 4 puntos en supuestos extremos.</li>
+      <li>📢 <b>Tolerancia 2026:</b> Interior anunció flexibilidad inicial · Prioridad informativa · Norma legalmente vigente desde el 1-ene-2026.</li>
+      <li>🛡️ <b>AEPD confirma:</b> datos anonimizados · NO matrícula · NO datos personales · solo emite al activarse.</li>
+      <li>🪧 <b>Uso correcto:</b> activar DENTRO del coche · sacar brazo · imán al techo · permanecer dentro si vía peligrosa.</li>
+      <li>🦺 <b>Chaleco reflectante:</b> SIGUE siendo obligatorio si el conductor sale del vehículo en vía interurbana.</li>
+      <li>🔄 <b>Reutilizable:</b> la misma baliza vale para varios coches. No se vincula a la matrícula.</li>
+      <li>🚫 <b>NO sustituye al 112:</b> solo es preseñalización + geolocalización en sistemas de tráfico. No avisa a emergencias ni a grúa.</li>
+      <li>🚔 <b>Workflow PL:</b> verificar V16 en avería/accidente urbano · advertir antes de denunciar · denunciar si hay riesgo real · coordinar con Mossos en vías interurbanas.</li>
+      <li>📝 <b>Recurso:</b> 20 días naturales desde notificación · pago 50% = renuncia al recurso · pruebas: foto + factura previa.</li>
+    </ul>
+  </div>
+
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+
+</div>
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    if (body.style.display === 'none' || body.style.display === '') {
+      body.style.display = 'block';
+      body.style.animation = 'fadeUp .3s ease';
+    } else {
+      body.style.display = 'none';
+    }
+  }
+</script>
+</body>
+</html>

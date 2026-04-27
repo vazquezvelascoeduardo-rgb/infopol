@@ -938,6 +938,45 @@ const LIGHT_THEME_CSS = `
     border: 1px solid #b91c1c !important;
   }
 
+  /* ── Timeline cronològic (.timeline > .timeline-item amb .fecha + .evento) ── */
+  .${SCOPE_CLASS}.ipol-light .timeline {
+    background: transparent !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .timeline-item {
+    color: #0f172a !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .timeline-item .fecha {
+    color: #a16207 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .timeline-item .evento {
+    color: #0f172a !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .timeline-item .evento b {
+    color: #a16207 !important;
+  }
+
+  /* ── Bulos / FAQ desmentides (Balises V16) ──
+     Pregunta en vermell (mite), resposta en gris fosc, tag "FALS" amb
+     fons vermell. */
+  .${SCOPE_CLASS}.ipol-light .bulo-item {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    box-shadow: 0 1px 2px rgba(15,23,42,0.05) !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .bulo-item .bulo-pregunta {
+    color: #b91c1c !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .bulo-item .bulo-respuesta {
+    color: #475569 !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .bulo-item .bulo-respuesta b {
+    color: #15803d !important;
+  }
+  .${SCOPE_CLASS}.ipol-light .bulo-item .falso-tag {
+    background: #b91c1c !important;
+    color: #ffffff !important;
+  }
+
   /* Drets / derecho-item (LECrim) */
   .${SCOPE_CLASS}.ipol-light .derecho-item {
     background: #f8fafc !important;
