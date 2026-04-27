@@ -104,19 +104,19 @@ const DICT: Record<Locale, Dict> = {
     'home.operativa.desc':
       'Procedimientos por situación: tráfico, seguridad ciudadana… Selecciona y obtén la norma aplicable.',
     'home.operativa.cta': 'Abrir operativa',
-    'home.superbuscador.badge': 'Búsqueda rápida',
-    'home.superbuscador.title': 'Superbuscador infraccions de tráfico',
+    'home.superbuscador.badge': 'Tráfico · Catálogo SCT',
+    'home.superbuscador.title': 'Multas e infracciones de tráfico',
     'home.superbuscador.desc':
-      'Busca cualquier infracción del Catálogo SCT 2026 (LSV, RGC, RGCond, RGV, Asseguranza, CP). Concepto, artículo, multa, puntos.',
-    'home.superbuscador.cta': 'Buscar',
+      'Busca por concepto, artículo, multa o puntos en LSV, RGC, RGCond, RGV, Aseguranza y CP. Resultados con cuantía y DTE.',
+    'home.superbuscador.cta': 'Buscar multa',
     'home.recursos.badge': 'Atajos',
     'home.recursos.title': 'Recursos rápidos',
     'home.recursos.desc':
       'AIAC, farmacia de guardia, validador DNI, libreta, calculadora alcoholemia y más.',
-    'superbuscador.title': 'Superbuscador de infracciones de tráfico',
+    'superbuscador.title': 'Multas e infracciones de tráfico',
     'superbuscador.badge': 'Catálogo SCT 2026',
     'superbuscador.subtitle':
-      'Busca a la vez en TODAS las leyes y reglamentos del catálogo. Sin tener que cambiar de pestaña.',
+      'Busca por concepto, artículo, multa o puntos a la vez en TODAS las leyes y reglamentos del catálogo (LSV, RGC, RGCond, RGV, Aseguranza y CP).',
     'superbuscador.placeholder':
       'Escribe: alcoholemia, 14.1, móvil, 500, cinturón, drogas...',
     'superbuscador.totalRows': 'infracciones indexadas',
@@ -314,7 +314,7 @@ const DICT: Record<Locale, Dict> = {
     'sidebar.open': 'Abrir menú',
     'sidebar.close': 'Cerrar menú',
     'sidebar.home': 'Inicio',
-    'sidebar.superbuscador': 'Superbuscador tráfico',
+    'sidebar.superbuscador': 'Multas tráfico',
     'sidebar.leyes': 'Leyes',
     'sidebar.leyes.all': 'Todas las leyes',
     'sidebar.operativa': 'Operativa',
@@ -518,19 +518,19 @@ const DICT: Record<Locale, Dict> = {
     'home.operativa.desc':
       "Procediments per situació: trànsit, seguretat ciutadana… Selecciona i obtén la norma aplicable.",
     'home.operativa.cta': 'Obrir operativa',
-    'home.superbuscador.badge': 'Cerca ràpida',
-    'home.superbuscador.title': 'Superbuscador infraccions de trànsit',
+    'home.superbuscador.badge': 'Trànsit · Catàleg SCT',
+    'home.superbuscador.title': "Multes i infraccions de trànsit",
     'home.superbuscador.desc':
-      'Busca qualsevol infracció del Catàleg SCT 2026 (LSV, RGC, RGCond, RGV, Assegurança, CP). Concepte, article, multa, punts.',
-    'home.superbuscador.cta': 'Buscar',
+      "Busca per concepte, article, multa o punts a LSV, RGC, RGCond, RGV, Assegurança i CP. Resultats amb quantia i DTE.",
+    'home.superbuscador.cta': 'Buscar multa',
     'home.recursos.badge': 'Dreceres',
     'home.recursos.title': 'Recursos ràpids',
     'home.recursos.desc':
       "AIAC, farmàcia de guàrdia, validador DNI, llibreta, calculadora alcoholèmia i més.",
-    'superbuscador.title': "Superbuscador d'infraccions de trànsit",
+    'superbuscador.title': "Multes i infraccions de trànsit",
     'superbuscador.badge': 'Catàleg SCT 2026',
     'superbuscador.subtitle':
-      "Busca alhora a TOTES les lleis i reglaments del catàleg. Sense haver de canviar de pestanya.",
+      "Busca per concepte, article, multa o punts alhora a TOTES les lleis i reglaments del catàleg (LSV, RGC, RGCond, RGV, Assegurança i CP).",
     'superbuscador.placeholder':
       "Escriu: alcoholèmia, 14.1, mòbil, 500, cinturó, drogues...",
     'superbuscador.totalRows': 'infraccions indexades',
@@ -728,7 +728,7 @@ const DICT: Record<Locale, Dict> = {
     'sidebar.open': 'Obre el menú',
     'sidebar.close': 'Tanca el menú',
     'sidebar.home': 'Inici',
-    'sidebar.superbuscador': 'Superbuscador trànsit',
+    'sidebar.superbuscador': 'Multes trànsit',
     'sidebar.leyes': 'Lleis',
     'sidebar.leyes.all': 'Totes les lleis',
     'sidebar.operativa': 'Operativa',

@@ -102,7 +102,7 @@ export default function Home() {
             aria-hidden
             className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-fuchsia-700 text-3xl text-white shadow-inner"
           >
-            🔍
+            💸
           </span>
           <div className="min-w-0 flex-1">
             <div className="text-[10px] uppercase tracking-[0.25em] text-purple-700 dark:text-purple-400/90 font-semibold">

@@ -54,7 +54,7 @@ export default function Superbuscador() {
         dark:border-white/10 dark:bg-gradient-to-br dark:from-[#1a0f2e] dark:to-[#0a1628]">
         <div className="flex items-start gap-4">
           <span aria-hidden className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-fuchsia-700 text-3xl text-white shadow-inner">
-            🔍
+            💸
           </span>
           <div className="min-w-0 flex-1">
             <div className="text-[11px] uppercase tracking-[0.25em] font-semibold text-purple-700 dark:text-purple-400/90">

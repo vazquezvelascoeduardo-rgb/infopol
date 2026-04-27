@@ -101,7 +101,7 @@ export default function Sidebar({ open, onClose }: Props) {
           {/* Superbuscador */}
           <SimpleLink
             to="/superbuscador"
-            icon="🔍"
+            icon="💸"
             label={t('sidebar.superbuscador')}
             accent="purple"
           />
