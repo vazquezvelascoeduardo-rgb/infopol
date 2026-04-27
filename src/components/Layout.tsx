@@ -5,7 +5,6 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { applyTheme, getInitialTheme, type Theme } from '../lib/theme';
 import { useT } from '../lib/i18n';
 import LogoIcon from './LogoIcon';
-import BackButton from './BackButton';
 import Sidebar from './Sidebar';
 import GdprBanner from './GdprBanner';
 
@@ -210,8 +209,6 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
         )}
       </header>
-
-      <BackButton />
 
       <main className="flex-1">{children}</main>
 
