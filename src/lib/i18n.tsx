@@ -113,6 +113,15 @@ const DICT: Record<Locale, Dict> = {
     'home.recursos.title': 'Recursos rápidos',
     'home.recursos.desc':
       'AIAC, farmacia de guardia, validador DNI, libreta, calculadora alcoholemia y más.',
+    'home.bookmarks.title': 'Lo tuyo',
+    'home.bookmarks.favs': 'Favoritos',
+    'home.bookmarks.recents': 'Recientes',
+    'home.bookmarks.empty': 'Las fichas que abras y marques como favoritas aparecerán aquí para acceso rápido.',
+    'home.bookmarks.clearRecents': 'Borrar recientes',
+    'fav.add': 'Marcar como favorito',
+    'fav.remove': 'Quitar de favoritos',
+    'fav.save': 'Guardar',
+    'fav.saved': 'Guardado',
     'superbuscador.title': 'Multas e infracciones de tráfico',
     'superbuscador.badge': 'Catálogo SCT 2026',
     'superbuscador.subtitle':
@@ -527,6 +536,15 @@ const DICT: Record<Locale, Dict> = {
     'home.recursos.title': 'Recursos ràpids',
     'home.recursos.desc':
       "AIAC, farmàcia de guàrdia, validador DNI, llibreta, calculadora alcoholèmia i més.",
+    'home.bookmarks.title': 'El teu espai',
+    'home.bookmarks.favs': 'Favorits',
+    'home.bookmarks.recents': 'Recents',
+    'home.bookmarks.empty': 'Les fitxes que obris i marquis com a favorites apareixeran aquí per accés ràpid.',
+    'home.bookmarks.clearRecents': 'Esborrar recents',
+    'fav.add': 'Marcar com a favorit',
+    'fav.remove': 'Treure dels favorits',
+    'fav.save': 'Desar',
+    'fav.saved': 'Desat',
     'superbuscador.title': "Multes i infraccions de trànsit",
     'superbuscador.badge': 'Catàleg SCT 2026',
     'superbuscador.subtitle':

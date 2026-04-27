@@ -3,12 +3,122 @@
 //   2) Operativa  → procediments per situació (Trànsit, Seguretat ciutadana…).
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
+import { useFavorites, useRecents, type Bookmark } from '../lib/bookmarks';
+import { MODULES } from '../lib/content';
+
+function BookmarksBlock() {
+  const { t } = useT();
+  const { items: favs, toggle: toggleFav } = useFavorites();
+  const { items: recents, clear: clearRecents } = useRecents();
+
+  // Recents que no son ja favorits (per no duplicar visualment).
+  const recentsFiltered = recents.filter(
+    (r) => !favs.some((f) => f.moduleSlug === r.moduleSlug && f.slug === r.slug),
+  );
+
+  if (favs.length === 0 && recentsFiltered.length === 0) return null;
+
+  return (
+    <section className="mb-5 rounded-2xl border p-4 sm:p-5
+      border-slate-200/80 bg-white
+      dark:border-white/10 dark:bg-[#0f1d34]">
+      <div className="flex items-center gap-3 mb-3">
+        <span className="h-5 w-1.5 rounded-full bg-gradient-to-b from-amber-400 to-amber-600 dark:from-amber-300 dark:to-amber-500" />
+        <h2 className="text-xs font-black uppercase tracking-[0.25em] text-slate-700 dark:text-slate-300">
+          {t('home.bookmarks.title')}
+        </h2>
+        <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
+      </div>
+
+      {favs.length > 0 && (
+        <div className="mb-3">
+          <div className="text-[10px] uppercase tracking-wider font-semibold text-amber-600 dark:text-amber-400/90 mb-1.5">
+            ★ {t('home.bookmarks.favs')}
+          </div>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+            {favs.map((b) => (
+              <BookmarkItem key={`fav-${b.moduleSlug}-${b.slug}`} b={b} accent="amber"
+                onRemove={() => toggleFav(b)} />
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {recentsFiltered.length > 0 && (
+        <div>
+          <div className="flex items-center justify-between mb-1.5">
+            <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">
+              ⏱ {t('home.bookmarks.recents')}
+            </div>
+            <button
+              type="button"
+              onClick={clearRecents}
+              className="text-[10px] uppercase tracking-wider font-semibold text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+            >
+              {t('home.bookmarks.clearRecents')}
+            </button>
+          </div>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+            {recentsFiltered.slice(0, 6).map((b) => (
+              <BookmarkItem key={`rec-${b.moduleSlug}-${b.slug}`} b={b} accent="slate" />
+            ))}
+          </ul>
+        </div>
+      )}
+    </section>
+  );
+}
+
+function BookmarkItem({
+  b,
+  accent,
+  onRemove,
+}: {
+  b: Bookmark;
+  accent: 'amber' | 'slate';
+  onRemove?: () => void;
+}) {
+  const mod = MODULES.find((m) => m.slug === b.moduleSlug);
+  const accentRing = accent === 'amber'
+    ? 'hover:border-amber-300 dark:hover:border-amber-400/40'
+    : 'hover:border-slate-300 dark:hover:border-white/20';
+  return (
+    <li className="group relative">
+      <Link
+        to={`/leyes/s/${b.moduleSlug}/${b.slug}`}
+        className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition pr-9
+          border-slate-200/80 bg-slate-50/40
+          dark:border-white/10 dark:bg-white/5
+          ${accentRing}`}
+      >
+        {mod && (
+          <span aria-hidden className={`inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br ${mod.accent}`} />
+        )}
+        <span className="truncate text-slate-700 dark:text-slate-200">{b.title}</span>
+      </Link>
+      {onRemove && (
+        <button
+          type="button"
+          onClick={onRemove}
+          aria-label="✕"
+          className="absolute right-1 top-1/2 -translate-y-1/2 inline-flex h-7 w-7 items-center justify-center rounded-md
+            text-slate-400 hover:bg-slate-200 hover:text-slate-700
+            dark:hover:bg-white/10 dark:hover:text-slate-200 opacity-0 group-hover:opacity-100 transition"
+        >
+          ✕
+        </button>
+      )}
+    </li>
+  );
+}
 
 export default function Home() {
   const { t } = useT();
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-6">
+      <BookmarksBlock />
+
       {/* Targetes principals: Lleis · Operativa · Superbuscador */}
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* LLEIS */}

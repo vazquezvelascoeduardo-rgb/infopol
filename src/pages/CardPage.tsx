@@ -1,17 +1,50 @@
 // Pàgina d'una fitxa concreta.
 // - Si la fitxa és HTML: ocupa tot l'ample de la pantalla ("edge-to-edge").
 // - Si és Markdown: columna còmoda de lectura.
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MODULES, getCard, pickBody } from '../lib/content';
 import { Markdown } from '../lib/markdown';
 import HtmlInline from '../components/HtmlInline';
 import { useT } from '../lib/i18n';
+import { useFavorites, useRecents } from '../lib/bookmarks';
+
+function FavButton({ moduleSlug, slug, title }: { moduleSlug: string; slug: string; title: string }) {
+  const { t } = useT();
+  const { isFav, toggle } = useFavorites();
+  const fav = isFav(moduleSlug, slug);
+  return (
+    <button
+      type="button"
+      onClick={() => toggle({ moduleSlug, slug, title })}
+      aria-pressed={fav}
+      aria-label={fav ? t('fav.remove') : t('fav.add')}
+      title={fav ? t('fav.remove') : t('fav.add')}
+      className={`shrink-0 inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition
+        ${fav
+          ? 'border-amber-400 bg-amber-50 text-amber-800 hover:bg-amber-100 dark:border-amber-400/50 dark:bg-amber-400/15 dark:text-amber-200'
+          : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:text-slate-100'}`}
+    >
+      <span aria-hidden className="text-base leading-none">{fav ? '★' : '☆'}</span>
+      <span className="hidden sm:inline">{fav ? t('fav.saved') : t('fav.save')}</span>
+    </button>
+  );
+}
 
 export default function CardPage() {
   const { moduleSlug = '', slug = '' } = useParams();
   const mod = MODULES.find((m) => m.slug === moduleSlug);
   const card = getCard(moduleSlug, slug);
   const { t, locale } = useT();
+  const { register } = useRecents();
+
+  // Registra la visita per que aparegui a "Recents" de la home.
+  useEffect(() => {
+    if (mod && card) {
+      register({ moduleSlug: mod.slug, slug: card.slug, title: card.title });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mod?.slug, card?.slug]);
 
   if (!mod || !card) {
     return (
@@ -31,23 +64,26 @@ export default function CardPage() {
   const langMismatch = bodyLang !== locale;
 
   const breadcrumb = (
-    <nav className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1.5 flex-wrap">
-      <Link to="/" className="hover:text-slate-900 hover:underline transition dark:hover:text-slate-100">{t('nav.home')}</Link>
-      <span aria-hidden className="text-slate-300 dark:text-slate-600">/</span>
-      <Link to="/leyes" className="hover:text-slate-900 hover:underline transition dark:hover:text-slate-100">{t('leyes.title')}</Link>
-      <span aria-hidden className="text-slate-300 dark:text-slate-600">/</span>
-      <Link to={`/leyes/s/${mod.slug}`} className="hover:text-slate-900 hover:underline transition dark:hover:text-slate-100">
-        <span className="inline-flex items-center gap-1.5">
-          <span
-            aria-hidden
-            className={`inline-block h-2 w-2 rounded-full bg-gradient-to-br ${mod.accent}`}
-          />
-          {modTitle}
-        </span>
-      </Link>
-      <span aria-hidden className="text-slate-300 dark:text-slate-600">/</span>
-      <span className="truncate font-medium text-slate-700 dark:text-slate-200">{card.title}</span>
-    </nav>
+    <div className="flex items-center justify-between gap-3">
+      <nav className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1.5 flex-wrap min-w-0">
+        <Link to="/" className="hover:text-slate-900 hover:underline transition dark:hover:text-slate-100">{t('nav.home')}</Link>
+        <span aria-hidden className="text-slate-300 dark:text-slate-600">/</span>
+        <Link to="/leyes" className="hover:text-slate-900 hover:underline transition dark:hover:text-slate-100">{t('leyes.title')}</Link>
+        <span aria-hidden className="text-slate-300 dark:text-slate-600">/</span>
+        <Link to={`/leyes/s/${mod.slug}`} className="hover:text-slate-900 hover:underline transition dark:hover:text-slate-100">
+          <span className="inline-flex items-center gap-1.5">
+            <span
+              aria-hidden
+              className={`inline-block h-2 w-2 rounded-full bg-gradient-to-br ${mod.accent}`}
+            />
+            {modTitle}
+          </span>
+        </Link>
+        <span aria-hidden className="text-slate-300 dark:text-slate-600">/</span>
+        <span className="truncate font-medium text-slate-700 dark:text-slate-200">{card.title}</span>
+      </nav>
+      <FavButton moduleSlug={mod.slug} slug={card.slug} title={card.title} />
+    </div>
   );
 
   const langNotice = langMismatch ? (
