@@ -5,14 +5,15 @@
   <title>InfoPol</title>
   <!--
     Single Page App + GitHub Pages: aquesta pàgina rep qualsevol URL
-    desconeguda (com /infopol/leyes/codi-penal) i la redirigeix a la
-    home preservant la ruta a la query string. Allà, un script a
-    index.html descodifica la query i restaura la URL original via
+    desconeguda (com /leyes/codi-penal) i la redirigeix a la home
+    preservant la ruta a la query string. Allà, un script a index.html
+    descodifica la query i restaura la URL original via
     history.replaceState. Així el routing client-side funciona.
     Tècnica: rafgraph/spa-github-pages.
   -->
   <script type="text/javascript">
-    var pathSegmentsToKeep = 1; // /infopol/
+    // Domini propi a l'arrel: cap segment a preservar.
+    var pathSegmentsToKeep = 0;
 
     var l = window.location;
     l.replace(

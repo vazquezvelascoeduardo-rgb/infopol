@@ -6,31 +6,42 @@ import { VitePWA } from 'vite-plugin-pwa';
 // El plugin VitePWA genera el service worker, el manifest i registra
 // automàticament la PWA perquè es pugui instal·lar al mòbil o escriptori.
 //
-// `base` controla el prefix d'URL on viuen els assets:
-//  - En desenvolupament (`npm run dev`) → '/' (servidor a localhost:5173/)
-//  - En producció build a GitHub Pages → '/infopol/' (servit a
-//    https://vazquezvelascoeduardo-rgb.github.io/infopol/)
-// Si en el futur muntem a un domini propi (p. ex. infopol.app) on l'app
-// estigui a l'arrel, només cal canviar la condició a sota.
-export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/infopol/' : '/',
+// L'app es serveix sota el domini propi (infopol.app) a l'arrel, així
+// que `base` és sempre '/'.
+export default defineConfig({
+  base: '/',
+  build: {
+    // Code-splitting: separem dependències grans (React, Router) en chunks
+    // propis perquè es cachegin entre desplegaments i el bundle inicial
+    // baixi més ràpid.
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 800,
+  },
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
-        name: 'InfoPol',
+        name: 'InfoPol — Consulta operativa',
         short_name: 'InfoPol',
-        description: 'Consulta ràpida per a agents de policia local (Catalunya)',
+        description: 'Consulta ràpida de normativa, infografies i operativa per a agents de policia local (Catalunya).',
         lang: 'ca',
+        dir: 'ltr',
+        categories: ['education', 'productivity', 'utilities', 'reference'],
         theme_color: '#0a1628',
         background_color: '#0a1628',
         display: 'standalone',
-        // start_url i scope han de ser relatius perquè el service worker
-        // funcioni correctament sota el subpath de GitHub Pages.
-        start_url: '.',
-        scope: '.',
+        orientation: 'portrait',
+        start_url: '/',
+        scope: '/',
         icons: [
           {
             src: 'pwa-192x192.png',
@@ -55,8 +66,10 @@ export default defineConfig(({ mode }) => ({
         globPatterns: ['**/*.{js,css,html,svg,png,ico,webmanifest}'],
         // SPA fallback per a qualsevol ruta no cachejada.
         navigateFallback: 'index.html',
+        // Augmentem el límit perquè algunes fitxes HTML són grans.
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
       },
     }),
   ],
-}));
+});
 

@@ -8,44 +8,59 @@
 //   /operativa                 → temes operatius (Trànsit, Seguretat ciutadana…)
 //   /operativa/trafico/*       → arbre interactiu de Trànsit
 //   /cerca                     → resultats de cerca
+//
+// Lazy loading: les pàgines es carreguen sota demanda per reduir el
+// bundle inicial. Home s'inclou directament (és la primera vista).
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
-import Leyes from './pages/Leyes';
-import Section from './pages/Section';
-import CardPage from './pages/CardPage';
-import SearchResults from './pages/SearchResults';
-import NotFound from './pages/NotFound';
-import Operativa from './pages/Operativa';
-import Trafico from './pages/operativa/Trafico';
-import Penal from './pages/operativa/Penal';
-import PenalTaulaActes from './pages/operativa/PenalTaulaActes';
-import PenalTaulaDrogues from './pages/operativa/PenalTaulaDrogues';
-import PenalRecursos from './pages/operativa/PenalRecursos';
-import PenalDretsDetingut from './pages/operativa/PenalDretsDetingut';
-import Superbuscador from './pages/Superbuscador';
-import Recursos from './pages/Recursos';
+
+const Leyes = lazy(() => import('./pages/Leyes'));
+const Section = lazy(() => import('./pages/Section'));
+const CardPage = lazy(() => import('./pages/CardPage'));
+const SearchResults = lazy(() => import('./pages/SearchResults'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+const Operativa = lazy(() => import('./pages/Operativa'));
+const Trafico = lazy(() => import('./pages/operativa/Trafico'));
+const Penal = lazy(() => import('./pages/operativa/Penal'));
+const PenalTaulaActes = lazy(() => import('./pages/operativa/PenalTaulaActes'));
+const PenalTaulaDrogues = lazy(() => import('./pages/operativa/PenalTaulaDrogues'));
+const PenalRecursos = lazy(() => import('./pages/operativa/PenalRecursos'));
+const PenalDretsDetingut = lazy(() => import('./pages/operativa/PenalDretsDetingut'));
+const Superbuscador = lazy(() => import('./pages/Superbuscador'));
+const Recursos = lazy(() => import('./pages/Recursos'));
+
+function PageFallback() {
+  return (
+    <div className="mx-auto max-w-5xl px-4 py-12 text-center text-slate-500 dark:text-slate-400">
+      <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-slate-300 border-t-blue-600 dark:border-slate-700 dark:border-t-blue-400" />
+    </div>
+  );
+}
 
 export default function App() {
   return (
     <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/leyes" element={<Leyes />} />
-        <Route path="/leyes/s/:moduleSlug" element={<Section />} />
-        <Route path="/leyes/s/:moduleSlug/:slug" element={<CardPage />} />
-        <Route path="/operativa" element={<Operativa />} />
-        <Route path="/operativa/trafico/*" element={<Trafico />} />
-        <Route path="/operativa/penal/taula-actes" element={<PenalTaulaActes />} />
-        <Route path="/operativa/penal/taula-drogues" element={<PenalTaulaDrogues />} />
-        <Route path="/operativa/penal/recursos" element={<PenalRecursos />} />
-        <Route path="/operativa/penal/drets-detingut" element={<PenalDretsDetingut />} />
-        <Route path="/operativa/penal/*" element={<Penal />} />
-        <Route path="/cerca" element={<SearchResults />} />
-        <Route path="/superbuscador" element={<Superbuscador />} />
-        <Route path="/recursos" element={<Recursos />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Suspense fallback={<PageFallback />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/leyes" element={<Leyes />} />
+          <Route path="/leyes/s/:moduleSlug" element={<Section />} />
+          <Route path="/leyes/s/:moduleSlug/:slug" element={<CardPage />} />
+          <Route path="/operativa" element={<Operativa />} />
+          <Route path="/operativa/trafico/*" element={<Trafico />} />
+          <Route path="/operativa/penal/taula-actes" element={<PenalTaulaActes />} />
+          <Route path="/operativa/penal/taula-drogues" element={<PenalTaulaDrogues />} />
+          <Route path="/operativa/penal/recursos" element={<PenalRecursos />} />
+          <Route path="/operativa/penal/drets-detingut" element={<PenalDretsDetingut />} />
+          <Route path="/operativa/penal/*" element={<Penal />} />
+          <Route path="/cerca" element={<SearchResults />} />
+          <Route path="/superbuscador" element={<Superbuscador />} />
+          <Route path="/recursos" element={<Recursos />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </Layout>
   );
 }
