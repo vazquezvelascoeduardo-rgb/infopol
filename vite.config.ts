@@ -6,10 +6,14 @@ import { VitePWA } from 'vite-plugin-pwa';
 // El plugin VitePWA genera el service worker, el manifest i registra
 // automàticament la PWA perquè es pugui instal·lar al mòbil o escriptori.
 //
-// L'app es serveix sota el domini propi (infopol.app) a l'arrel, així
-// que `base` és sempre '/'.
-export default defineConfig({
-  base: '/',
+// `base` controla el prefix d'URL on viuen els assets:
+//  - En desenvolupament (`npm run dev`) → '/' (servidor a localhost:5173/)
+//  - En producció a GitHub Pages → '/infopol/'
+//    (https://vazquezvelascoeduardo-rgb.github.io/infopol/)
+// Quan migrem al domini propi (infopol.app) canviarem aquesta condició
+// a sempre '/'.
+export default defineConfig(({ mode }) => ({
+  base: mode === 'production' ? '/infopol/' : '/',
   build: {
     // Code-splitting: separem dependències grans (React, Router) en chunks
     // propis perquè es cachegin entre desplegaments i el bundle inicial
@@ -40,8 +44,10 @@ export default defineConfig({
         background_color: '#0a1628',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/',
-        scope: '/',
+        // start_url i scope han de ser relatius perquè el service worker
+        // funcioni correctament sota el subpath de GitHub Pages.
+        start_url: '.',
+        scope: '.',
         icons: [
           {
             src: 'pwa-192x192.png',
@@ -71,5 +77,5 @@ export default defineConfig({
       },
     }),
   ],
-});
+}));
 
