@@ -12,14 +12,17 @@ import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MODULES } from '../lib/content';
 import { useT } from '../lib/i18n';
+import type { Theme } from '../lib/theme';
 
 type Props = {
   open: boolean;
   onClose: () => void;
+  theme: Theme;
+  onThemeChange: (t: Theme) => void;
 };
 
-export default function Sidebar({ open, onClose }: Props) {
-  const { t } = useT();
+export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) {
+  const { t, locale, setLocale } = useT();
   const location = useLocation();
 
   // Tanca el menú quan canviem de ruta (l'usuari ha clicat un enllaç).
@@ -161,6 +164,73 @@ export default function Sidebar({ open, onClose }: Props) {
               <SubLink to="/operativa/penal/drets-detingut" icon="📜" label={t('penal.dretsDetingut')} />
             </div>
           </details>
+
+          {/* Ajustes — toggles de tema i idioma */}
+          <div className="mt-4 pt-3 border-t border-slate-200/70 dark:border-white/10">
+            <div className="px-3 mb-2 text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">
+              {t('sidebar.settings')}
+            </div>
+
+            {/* Idioma: ES / CA com a pills clares */}
+            <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg">
+              <span aria-hidden className="text-base">🌐</span>
+              <span className="text-sm font-medium flex-1">{t('sidebar.language')}</span>
+              <div className="inline-flex rounded-lg border overflow-hidden border-slate-200 dark:border-white/10" role="group">
+                <button
+                  type="button"
+                  onClick={() => setLocale('es')}
+                  aria-pressed={locale === 'es'}
+                  className={`px-3 py-1 text-xs font-bold tracking-wide transition
+                    ${locale === 'es'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-white text-slate-500 hover:bg-slate-50 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10'}`}
+                >
+                  ES
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLocale('ca')}
+                  aria-pressed={locale === 'ca'}
+                  className={`px-3 py-1 text-xs font-bold tracking-wide transition border-l border-slate-200 dark:border-white/10
+                    ${locale === 'ca'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-white text-slate-500 hover:bg-slate-50 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10'}`}
+                >
+                  CA
+                </button>
+              </div>
+            </div>
+
+            {/* Tema: clar / fosc com a pills */}
+            <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg">
+              <span aria-hidden className="text-base">{theme === 'dark' ? '🌙' : '☀️'}</span>
+              <span className="text-sm font-medium flex-1">{t('sidebar.theme')}</span>
+              <div className="inline-flex rounded-lg border overflow-hidden border-slate-200 dark:border-white/10" role="group">
+                <button
+                  type="button"
+                  onClick={() => onThemeChange('light')}
+                  aria-pressed={theme === 'light'}
+                  className={`px-3 py-1 text-xs font-bold tracking-wide transition
+                    ${theme === 'light'
+                      ? 'bg-amber-500 text-white'
+                      : 'bg-white text-slate-500 hover:bg-slate-50 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10'}`}
+                >
+                  ☀ {t('theme.light')}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onThemeChange('dark')}
+                  aria-pressed={theme === 'dark'}
+                  className={`px-3 py-1 text-xs font-bold tracking-wide transition border-l border-slate-200 dark:border-white/10
+                    ${theme === 'dark'
+                      ? 'bg-slate-700 text-white'
+                      : 'bg-white text-slate-500 hover:bg-slate-50 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10'}`}
+                >
+                  🌙 {t('theme.dark')}
+                </button>
+              </div>
+            </div>
+          </div>
         </nav>
 
         {/* Peu */}

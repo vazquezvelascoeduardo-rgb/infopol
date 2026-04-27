@@ -334,6 +334,9 @@ const DICT: Record<Locale, Dict> = {
     'sidebar.operativa.home': 'Operativa (inicio)',
     'sidebar.references': 'Referencias rápidas',
     'sidebar.recursos': 'Recursos rápidos',
+    'sidebar.settings': 'Ajustes',
+    'sidebar.language': 'Idioma',
+    'sidebar.theme': 'Tema',
 
     // Recursos rápidos (página)
     'recursos.title': 'Recursos rápidos',
@@ -762,6 +765,9 @@ const DICT: Record<Locale, Dict> = {
     'sidebar.operativa.home': 'Operativa (inici)',
     'sidebar.references': 'Referències ràpides',
     'sidebar.recursos': 'Recursos ràpids',
+    'sidebar.settings': 'Ajustos',
+    'sidebar.language': 'Idioma',
+    'sidebar.theme': 'Tema',
 
     // Recursos ràpids (pàgina)
     'recursos.title': 'Recursos ràpids',

@@ -1,5 +1,6 @@
 // Marc general de l'app: capçalera i peu.
-// La capçalera té: logo, cerca, toggle de tema (clar/fosc) i toggle d'idioma.
+// La capçalera nomes te logo + cerca + boto del menu lateral.
+// Els toggles de tema i idioma viuen al menu lateral (apartat Ajustes).
 import { type ReactNode, useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { applyTheme, getInitialTheme, type Theme } from '../lib/theme';
@@ -17,7 +18,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const { t, locale, setLocale } = useT();
+  const { t } = useT();
 
   useEffect(() => {
     applyTheme(theme);
@@ -114,47 +115,6 @@ export default function Layout({ children }: { children: ReactNode }) {
             </svg>
           </button>
 
-          {/* Toggle d'idioma: ES | CA */}
-          <button
-            type="button"
-            onClick={() => setLocale(locale === 'es' ? 'ca' : 'es')}
-            aria-label={t('lang.toggle')}
-            title={t('lang.toggle')}
-            className="shrink-0 inline-flex h-10 items-center rounded-xl border px-2 text-xs font-bold tracking-wide transition
-              border-slate-200 bg-white hover:bg-slate-50
-              dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
-          >
-            <span className={locale === 'es' ? 'text-slate-900 dark:text-slate-100' : 'text-slate-400 dark:text-slate-500'}>
-              ES
-            </span>
-            <span className="mx-1 text-slate-300 dark:text-slate-600" aria-hidden>·</span>
-            <span className={locale === 'ca' ? 'text-slate-900 dark:text-slate-100' : 'text-slate-400 dark:text-slate-500'}>
-              CA
-            </span>
-          </button>
-
-          {/* Toggle de tema */}
-          <button
-            type="button"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            aria-label={theme === 'dark' ? t('theme.toLight') : t('theme.toDark')}
-            title={theme === 'dark' ? t('theme.light') : t('theme.dark')}
-            className="shrink-0 inline-flex h-10 w-10 items-center justify-center rounded-xl border transition
-              border-slate-200 bg-white hover:bg-slate-50 text-slate-700
-              dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10 dark:text-slate-200"
-          >
-            {theme === 'dark' ? (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <circle cx="12" cy="12" r="4" />
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-              </svg>
-            ) : (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-              </svg>
-            )}
-          </button>
-
           {/* Botó hamburguesa — dreta del tot. Obre el menú lateral. */}
           <button
             type="button"
@@ -227,7 +187,12 @@ export default function Layout({ children }: { children: ReactNode }) {
       </footer>
 
       {/* Menú lateral desplegable */}
-      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <Sidebar
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        theme={theme}
+        onThemeChange={setTheme}
+      />
 
       {/* Banner RGPD a la primera visita */}
       <GdprBanner />
