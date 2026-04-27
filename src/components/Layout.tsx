@@ -134,14 +134,15 @@ export default function Layout({ children }: { children: ReactNode }) {
           </button>
         </div>
 
-        {/* Barra de cerca expandida a mòbil. Apareix sota el header. */}
+        {/* Barra de cerca expandida a mòbil. Apareix sota el header.
+            Inclou input gran + botó '✕' que tanca la barra. */}
         {mobileSearchOpen && (
           <div className="sm:hidden border-t border-slate-200 dark:border-white/10 px-4 py-2 bg-white dark:bg-[#0a1628]">
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className="flex items-center gap-2">
               <label htmlFor="cerca-mobile" className="sr-only">
                 {t('search.label')}
               </label>
-              <div className="relative">
+              <div className="relative flex-1 min-w-0">
                 <svg
                   aria-hidden
                   width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -160,11 +161,34 @@ export default function Layout({ children }: { children: ReactNode }) {
                   placeholder={t('search.placeholder')}
                   value={query}
                   onChange={onChange}
-                  className="w-full rounded-xl border pl-10 pr-4 py-2 text-base outline-none focus:ring-2 focus:ring-amber-400/60
-                    border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-amber-400/60
-                    dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:placeholder-slate-500"
+                  className="w-full rounded-xl border-2 pl-10 pr-9 py-2.5 text-base outline-none focus:ring-2 focus:ring-amber-400/60
+                    border-amber-300 bg-white text-slate-900 placeholder-slate-400 focus:border-amber-400/80
+                    dark:border-amber-400/40 dark:bg-white/5 dark:text-slate-100 dark:placeholder-slate-500"
                 />
+                {query && (
+                  <button
+                    type="button"
+                    onClick={() => setQuery('')}
+                    aria-label={t('search.clearQuery')}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex h-6 w-6 items-center justify-center rounded-full
+                      text-slate-400 hover:bg-slate-100 hover:text-slate-700
+                      dark:hover:bg-white/10 dark:hover:text-slate-200"
+                  >
+                    ✕
+                  </button>
+                )}
               </div>
+              <button
+                type="button"
+                onClick={() => setMobileSearchOpen(false)}
+                aria-label={t('search.close')}
+                title={t('search.close')}
+                className="shrink-0 inline-flex h-10 px-3 items-center justify-center rounded-lg text-sm font-medium transition
+                  text-slate-600 hover:bg-slate-100 hover:text-slate-900
+                  dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-slate-100"
+              >
+                {t('search.close')}
+              </button>
             </form>
           </div>
         )}
