@@ -30,6 +30,8 @@ const PenalRecursos = lazy(() => import('./pages/operativa/PenalRecursos'));
 const PenalDretsDetingut = lazy(() => import('./pages/operativa/PenalDretsDetingut'));
 const Superbuscador = lazy(() => import('./pages/Superbuscador'));
 const Recursos = lazy(() => import('./pages/Recursos'));
+const AvisLegal = lazy(() => import('./pages/AvisLegal'));
+const Privacitat = lazy(() => import('./pages/Privacitat'));
 
 function PageFallback() {
   return (
@@ -58,6 +60,8 @@ export default function App() {
           <Route path="/cerca" element={<SearchResults />} />
           <Route path="/superbuscador" element={<Superbuscador />} />
           <Route path="/recursos" element={<Recursos />} />
+          <Route path="/avis-legal" element={<AvisLegal />} />
+          <Route path="/privacitat" element={<Privacitat />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

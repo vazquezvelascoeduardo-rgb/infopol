@@ -7,6 +7,7 @@ import { useT } from '../lib/i18n';
 import LogoIcon from './LogoIcon';
 import BackButton from './BackButton';
 import Sidebar from './Sidebar';
+import GdprBanner from './GdprBanner';
 
 export default function Layout({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => getInitialTheme());
@@ -215,11 +216,24 @@ export default function Layout({ children }: { children: ReactNode }) {
       <main className="flex-1">{children}</main>
 
       <footer className="border-t border-slate-200 dark:border-white/10 py-4 text-center text-xs text-slate-500 dark:text-slate-400">
-        {t('footer')}
+        <div>{t('footer')}</div>
+        <div className="mt-1">© 2026 Infopol.app · {t('footer.rights')}</div>
+        <div className="mt-1 flex justify-center gap-3">
+          <Link to="/avis-legal" className="hover:text-blue-700 dark:hover:text-blue-400">
+            {t('footer.legal')}
+          </Link>
+          <span aria-hidden>·</span>
+          <Link to="/privacitat" className="hover:text-blue-700 dark:hover:text-blue-400">
+            {t('footer.privacy')}
+          </Link>
+        </div>
       </footer>
 
       {/* Menú lateral desplegable */}
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
+      {/* Banner RGPD a la primera visita */}
+      <GdprBanner />
     </div>
   );
 }
