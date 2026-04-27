@@ -112,7 +112,11 @@ const DICT: Record<Locale, Dict> = {
     'home.recursos.badge': 'Atajos',
     'home.recursos.title': 'Recursos rápidos',
     'home.recursos.desc':
-      'AIAC, farmacia de guardia, validador DNI, libreta, calculadora alcoholemia y más.',
+      'AIAC, farmacia de guardia, validador DNI, libreta, NATO/ICAO y más.',
+    'home.alcohol.badge': 'Calculadora',
+    'home.alcohol.title': 'Alcoholemia',
+    'home.alcohol.desc':
+      'Régimen sancionador según mg/l y tipo de conductor (general, novel, menor, bici/VMP).',
     'home.bookmarks.title': 'Lo tuyo',
     'home.bookmarks.favs': 'Favoritos',
     'home.bookmarks.recents': 'Recientes',
@@ -358,6 +362,7 @@ const DICT: Record<Locale, Dict> = {
       'Alfabeto fonético internacional NATO/ICAO con extensiones Ç=Capça y Ñ=Ñoño.',
     'recursos.openMaps': 'Abrir en Google Maps',
     // Calculadora alcoholèmia
+    'recursos.alcohol.badge': 'Operativa de tráfico',
     'recursos.alcohol.title': 'Calculadora alcoholemia',
     'recursos.alcohol.desc':
       'Introduce la lectura confirmada del etilómetro y el tipo de conductor: te dice tramo, multa, puntos y vía aplicable.',
@@ -535,7 +540,11 @@ const DICT: Record<Locale, Dict> = {
     'home.recursos.badge': 'Dreceres',
     'home.recursos.title': 'Recursos ràpids',
     'home.recursos.desc':
-      "AIAC, farmàcia de guàrdia, validador DNI, llibreta, calculadora alcoholèmia i més.",
+      "AIAC, farmàcia de guàrdia, validador DNI, llibreta, NATO/ICAO i més.",
+    'home.alcohol.badge': 'Calculadora',
+    'home.alcohol.title': 'Alcoholèmia',
+    'home.alcohol.desc':
+      "Règim sancionador segons mg/l i tipus de conductor (general, novell, menor, bici/VMP).",
     'home.bookmarks.title': 'El teu espai',
     'home.bookmarks.favs': 'Favorits',
     'home.bookmarks.recents': 'Recents',
@@ -781,6 +790,7 @@ const DICT: Record<Locale, Dict> = {
       "Alfabet fonètic internacional NATO/ICAO amb extensions Ç=Capça i Ñ=Ñoño.",
     'recursos.openMaps': 'Obrir a Google Maps',
     // Calculadora alcoholèmia
+    'recursos.alcohol.badge': 'Operativa de trànsit',
     'recursos.alcohol.title': 'Calculadora alcoholèmia',
     'recursos.alcohol.desc':
       "Introdueix la lectura confirmada de l'etilòmetre i el tipus de conductor: et diu tram, multa, punts i via aplicable.",
