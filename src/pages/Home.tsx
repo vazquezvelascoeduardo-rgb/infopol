@@ -129,7 +129,6 @@ export default function Home() {
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-6">
       <FavoritesBlock />
-      <NewsBlock />
 
       {/* Targetes principals: Lleis · Operativa · Superbuscador */}
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -344,6 +343,10 @@ export default function Home() {
             </span>
           </div>
         </Link>
+      </div>
+
+      <div className="mt-5">
+        <NewsBlock />
       </div>
     </div>
   );
