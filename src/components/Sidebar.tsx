@@ -8,11 +8,12 @@
 //   ⚖️ Lleis (col·lapsable → 9 mòduls)
 //   🚨 Operativa (col·lapsable → Trànsit + Seguretat Ciutadana + 4
 //       referències ràpides)
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MODULES } from '../lib/content';
 import { useT } from '../lib/i18n';
 import type { Theme } from '../lib/theme';
+import { applyTextSize, getInitialTextSize, type TextSize } from '../lib/fontSize';
 
 type Props = {
   open: boolean;
@@ -24,6 +25,12 @@ type Props = {
 export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) {
   const { t, locale, setLocale } = useT();
   const location = useLocation();
+  const [textSize, setTextSize] = useState<TextSize>(() => getInitialTextSize());
+
+  function changeTextSize(s: TextSize) {
+    setTextSize(s);
+    applyTextSize(s);
+  }
 
   // Tanca el menú quan canviem de ruta (l'usuari ha clicat un enllaç).
   useEffect(() => {
@@ -240,6 +247,35 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
                 >
                   🌙 {t('theme.dark')}
                 </button>
+              </div>
+            </div>
+
+            {/* Mida del text: petit / mitja / gran */}
+            <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg">
+              <span aria-hidden className="text-base">🔠</span>
+              <span className="text-sm font-medium flex-1">{t('sidebar.textSize')}</span>
+              <div className="inline-flex rounded-lg border overflow-hidden border-slate-200 dark:border-white/10" role="group">
+                {([
+                  { val: 'sm' as TextSize, fontSize: '11px' },
+                  { val: 'md' as TextSize, fontSize: '14px' },
+                  { val: 'lg' as TextSize, fontSize: '17px' },
+                ]).map(({ val, fontSize }, i) => (
+                  <button
+                    key={val}
+                    type="button"
+                    onClick={() => changeTextSize(val)}
+                    aria-pressed={textSize === val}
+                    title={t(`sidebar.textSize.${val}`)}
+                    className={`px-3 py-1 font-bold transition leading-none w-10 text-center
+                      ${i > 0 ? 'border-l border-slate-200 dark:border-white/10' : ''}
+                      ${textSize === val
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-white text-slate-500 hover:bg-slate-50 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10'}`}
+                    style={{ fontSize }}
+                  >
+                    A
+                  </button>
+                ))}
               </div>
             </div>
           </div>

@@ -68,7 +68,7 @@ export default function Recursos() {
             host="farmaguia.net"
           />
           <ExternalLink
-            href="https://aiac.veterinaris.cat/ords/ws_ccvc/r/cerques/inicial?session=11290977264299"
+            href="https://aiac.veterinaris.cat/"
             icon="🐾"
             color="#7c3aed"
             badge={t('recursos.aiac.badge')}

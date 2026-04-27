@@ -1489,16 +1489,25 @@ function clearSearch() {
   if (cur) cur.style.display = 'block';
 }
 
-// Init: show only first tab on load
-document.addEventListener('DOMContentLoaded', function() {
+// Init: mostrar nomes la primera pestanya. S'executa immediatament
+// (no DOMContentLoaded) perque aquest HTML s'injecta a l'app despres
+// que el DOM hagi carregat, i DOMContentLoaded ja no dispararia.
+(function init() {
   document.querySelectorAll('.tab-content').forEach(function(t) { t.style.display = 'none'; });
-  var first = document.getElementById('tab-lsv');
+  var first = document.getElementById('tab-' + activeTabId);
   if (first) first.style.display = 'block';
-});
 
-document.getElementById('searchInput').addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') clearSearch();
-});
+  // Adjuntem listeners per codi (mes robust quan s'injecta dinamicament).
+  var input = document.getElementById('searchInput');
+  if (input) {
+    // Cobrim el cas en que oninput="doSearch()" no troba la funcio per
+    // viure dins d'una IIFE: l'invoquem directament aqui.
+    input.addEventListener('input', doSearch);
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') clearSearch();
+    });
+  }
+})();
 </script>
 </body>
 </html>

@@ -6,9 +6,11 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import { applyInitialTheme } from './lib/theme';
+import { applyInitialTextSize } from './lib/fontSize';
 import { LocaleProvider } from './lib/i18n';
 
 applyInitialTheme();
+applyInitialTextSize();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

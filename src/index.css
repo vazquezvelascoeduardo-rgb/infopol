@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Talla de lletra base ajustable des de Sidebar > Ajustes.
+   Tailwind utilitza rems, aixi que canviar el font-size del root
+   escala TOTES les mesures (padding, gap, font-size...) proporcionalment.
+   El default de Tailwind/HTML es 16px. */
+html[data-text-size="sm"] { font-size: 14px; }
+html[data-text-size="md"] { font-size: 16px; }
+html[data-text-size="lg"] { font-size: 18px; }
+
 /* Estils base per a la tipografia de les fitxes (prose manual lleugera). */
 @layer components {
   .fitxa h1 {

@@ -1,13 +1,12 @@
 // Pàgina d'una fitxa concreta.
 // - Si la fitxa és HTML: ocupa tot l'ample de la pantalla ("edge-to-edge").
 // - Si és Markdown: columna còmoda de lectura.
-import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MODULES, getCard, pickBody } from '../lib/content';
 import { Markdown } from '../lib/markdown';
 import HtmlInline from '../components/HtmlInline';
 import { useT } from '../lib/i18n';
-import { useFavorites, useRecents } from '../lib/bookmarks';
+import { useFavorites } from '../lib/bookmarks';
 
 function FavButton({ moduleSlug, slug, title }: { moduleSlug: string; slug: string; title: string }) {
   const { t } = useT();
@@ -36,15 +35,6 @@ export default function CardPage() {
   const mod = MODULES.find((m) => m.slug === moduleSlug);
   const card = getCard(moduleSlug, slug);
   const { t, locale } = useT();
-  const { register } = useRecents();
-
-  // Registra la visita per que aparegui a "Recents" de la home.
-  useEffect(() => {
-    if (mod && card) {
-      register({ moduleSlug: mod.slug, slug: card.slug, title: card.title });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mod?.slug, card?.slug]);
 
   if (!mod || !card) {
     return (

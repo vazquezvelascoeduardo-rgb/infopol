@@ -1,22 +1,78 @@
 // Pantalla principal de l'app: dues seccions grans.
 //   1) Lleis      → tot el contingut de temari (CE78, Codi penal, FCS, etc.).
 //   2) Operativa  → procediments per situació (Trànsit, Seguretat ciutadana…).
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
-import { useFavorites, useRecents, type Bookmark } from '../lib/bookmarks';
+import { useFavorites, type Bookmark } from '../lib/bookmarks';
 import { MODULES } from '../lib/content';
+import { NEWS, useNewCount, markNewsSeen } from '../lib/news';
 
-function BookmarksBlock() {
+function NewsBlock() {
+  const { t } = useT();
+  const newCount = useNewCount();
+
+  // Quan l'usuari arriba a home, marquem com a vistes les novetats.
+  useEffect(() => {
+    if (newCount > 0) {
+      const t = setTimeout(() => markNewsSeen(), 1500);
+      return () => clearTimeout(t);
+    }
+  }, [newCount]);
+
+  // Sempre mostrem les ultimes 3, pero amb un badge 'NOU' si encara
+  // no s'havien vist.
+  const recent = NEWS.slice(0, 3);
+  if (recent.length === 0) return null;
+
+  return (
+    <section className="mb-5 rounded-2xl border p-4 sm:p-5
+      border-blue-200/70 bg-gradient-to-br from-blue-50/50 via-white to-white
+      dark:border-blue-400/20 dark:bg-gradient-to-br dark:from-[#0e2244] dark:to-[#0f1d34]">
+      <div className="flex items-center gap-3 mb-3">
+        <span className="h-5 w-1.5 rounded-full bg-gradient-to-b from-blue-500 to-blue-700" />
+        <h2 className="text-xs font-black uppercase tracking-[0.25em] text-blue-700 dark:text-blue-400">
+          ✨ {t('home.news.title')}
+        </h2>
+        {newCount > 0 && (
+          <span className="inline-flex items-center justify-center rounded-full bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5">
+            {newCount} {t('home.news.badge')}
+          </span>
+        )}
+        <span className="h-px flex-1 bg-gradient-to-r from-blue-200 to-transparent dark:from-blue-400/20" />
+      </div>
+      <ul className="space-y-1.5">
+        {recent.map((n) => {
+          const mod = MODULES.find((m) => m.slug === n.moduleSlug);
+          return (
+            <li key={`news-${n.moduleSlug}-${n.slug}`}>
+              <Link
+                to={`/leyes/s/${n.moduleSlug}/${n.slug}`}
+                className="flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition
+                  border-slate-200/80 bg-white hover:border-blue-300
+                  dark:border-white/10 dark:bg-white/5 dark:hover:border-blue-400/40"
+              >
+                {mod && (
+                  <span aria-hidden className={`inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br ${mod.accent}`} />
+                )}
+                <span className="truncate text-slate-700 dark:text-slate-200 flex-1">{n.title}</span>
+                <span className="text-[10px] font-mono text-slate-400 dark:text-slate-500 shrink-0">
+                  {n.addedAt.slice(5)}
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}
+
+function FavoritesBlock() {
   const { t } = useT();
   const { items: favs, toggle: toggleFav } = useFavorites();
-  const { items: recents, clear: clearRecents } = useRecents();
 
-  // Recents que no son ja favorits (per no duplicar visualment).
-  const recentsFiltered = recents.filter(
-    (r) => !favs.some((f) => f.moduleSlug === r.moduleSlug && f.slug === r.slug),
-  );
-
-  if (favs.length === 0 && recentsFiltered.length === 0) return null;
+  if (favs.length === 0) return null;
 
   return (
     <section className="mb-5 rounded-2xl border p-4 sm:p-5
@@ -25,89 +81,44 @@ function BookmarksBlock() {
       <div className="flex items-center gap-3 mb-3">
         <span className="h-5 w-1.5 rounded-full bg-gradient-to-b from-amber-400 to-amber-600 dark:from-amber-300 dark:to-amber-500" />
         <h2 className="text-xs font-black uppercase tracking-[0.25em] text-slate-700 dark:text-slate-300">
-          {t('home.bookmarks.title')}
+          ★ {t('home.favorites.title')}
         </h2>
         <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
       </div>
-
-      {favs.length > 0 && (
-        <div className="mb-3">
-          <div className="text-[10px] uppercase tracking-wider font-semibold text-amber-600 dark:text-amber-400/90 mb-1.5">
-            ★ {t('home.bookmarks.favs')}
-          </div>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-            {favs.map((b) => (
-              <BookmarkItem key={`fav-${b.moduleSlug}-${b.slug}`} b={b} accent="amber"
-                onRemove={() => toggleFav(b)} />
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {recentsFiltered.length > 0 && (
-        <div>
-          <div className="flex items-center justify-between mb-1.5">
-            <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">
-              ⏱ {t('home.bookmarks.recents')}
-            </div>
-            <button
-              type="button"
-              onClick={clearRecents}
-              className="text-[10px] uppercase tracking-wider font-semibold text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
-            >
-              {t('home.bookmarks.clearRecents')}
-            </button>
-          </div>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-            {recentsFiltered.slice(0, 6).map((b) => (
-              <BookmarkItem key={`rec-${b.moduleSlug}-${b.slug}`} b={b} accent="slate" />
-            ))}
-          </ul>
-        </div>
-      )}
+      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+        {favs.map((b) => (
+          <FavItem key={`fav-${b.moduleSlug}-${b.slug}`} b={b} onRemove={() => toggleFav(b)} />
+        ))}
+      </ul>
     </section>
   );
 }
 
-function BookmarkItem({
-  b,
-  accent,
-  onRemove,
-}: {
-  b: Bookmark;
-  accent: 'amber' | 'slate';
-  onRemove?: () => void;
-}) {
+function FavItem({ b, onRemove }: { b: Bookmark; onRemove: () => void }) {
   const mod = MODULES.find((m) => m.slug === b.moduleSlug);
-  const accentRing = accent === 'amber'
-    ? 'hover:border-amber-300 dark:hover:border-amber-400/40'
-    : 'hover:border-slate-300 dark:hover:border-white/20';
   return (
     <li className="group relative">
       <Link
         to={`/leyes/s/${b.moduleSlug}/${b.slug}`}
-        className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition pr-9
-          border-slate-200/80 bg-slate-50/40
-          dark:border-white/10 dark:bg-white/5
-          ${accentRing}`}
+        className="flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition pr-9
+          border-slate-200/80 bg-slate-50/40 hover:border-amber-300
+          dark:border-white/10 dark:bg-white/5 dark:hover:border-amber-400/40"
       >
         {mod && (
           <span aria-hidden className={`inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br ${mod.accent}`} />
         )}
         <span className="truncate text-slate-700 dark:text-slate-200">{b.title}</span>
       </Link>
-      {onRemove && (
-        <button
-          type="button"
-          onClick={onRemove}
-          aria-label="✕"
-          className="absolute right-1 top-1/2 -translate-y-1/2 inline-flex h-7 w-7 items-center justify-center rounded-md
-            text-slate-400 hover:bg-slate-200 hover:text-slate-700
-            dark:hover:bg-white/10 dark:hover:text-slate-200 opacity-0 group-hover:opacity-100 transition"
-        >
-          ✕
-        </button>
-      )}
+      <button
+        type="button"
+        onClick={onRemove}
+        aria-label="✕"
+        className="absolute right-1 top-1/2 -translate-y-1/2 inline-flex h-7 w-7 items-center justify-center rounded-md
+          text-slate-400 hover:bg-slate-200 hover:text-slate-700
+          dark:hover:bg-white/10 dark:hover:text-slate-200 opacity-0 group-hover:opacity-100 transition"
+      >
+        ✕
+      </button>
     </li>
   );
 }
@@ -117,7 +128,8 @@ export default function Home() {
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-6">
-      <BookmarksBlock />
+      <FavoritesBlock />
+      <NewsBlock />
 
       {/* Targetes principals: Lleis · Operativa · Superbuscador */}
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -232,8 +244,41 @@ export default function Home() {
         </div>
       </Link>
 
-      {/* CALCULADORA ALCOHOL + RECURSOS — fila d'atajos */}
-      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {/* CATÀLEG · ALCOHOL · RECURSOS — fila d'atajos rapids */}
+      <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <Link
+          to="/leyes/s/transit/cataleg-d-infraccions-de-transit-sct-2026"
+          className="group relative block overflow-hidden rounded-xl border p-4 shadow-sm transition
+            hover:-translate-y-0.5 hover:shadow-md
+            border-amber-200/70 bg-gradient-to-r from-amber-50/70 via-white to-yellow-50/50
+            hover:border-amber-400/60
+            dark:border-white/10 dark:bg-gradient-to-r dark:from-[#2a210f] dark:to-[#0a1628] dark:hover:border-amber-400/40"
+        >
+          <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-amber-500 to-yellow-600" />
+          <div className="relative flex items-center gap-3">
+            <span
+              aria-hidden
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-yellow-600 text-xl text-white shadow-inner"
+            >
+              📖
+            </span>
+            <div className="min-w-0 flex-1">
+              <div className="text-[10px] uppercase tracking-[0.2em] text-amber-700 dark:text-amber-400/90 font-semibold">
+                {t('home.cataleg.badge')}
+              </div>
+              <h2 className="mt-0.5 text-base font-bold tracking-tight">
+                {t('home.cataleg.title')}
+              </h2>
+              <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
+                {t('home.cataleg.desc')}
+              </p>
+            </div>
+            <span className="inline-flex shrink-0 items-center text-amber-700 dark:text-amber-400 text-base font-semibold">
+              <span aria-hidden className="transition group-hover:translate-x-1">→</span>
+            </span>
+          </div>
+        </Link>
+
         <Link
           to="/calculadora-alcohol"
           className="group relative block overflow-hidden rounded-xl border p-4 shadow-sm transition
