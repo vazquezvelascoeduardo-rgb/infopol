@@ -45,7 +45,10 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-dvh flex flex-col bg-white text-slate-900 dark:bg-[#0a1628] dark:text-slate-100 transition-colors">
-      <header className="sticky top-0 z-30 backdrop-blur bg-white/95 dark:bg-[#0a1628]/85 border-b border-slate-200 dark:border-white/10">
+      <header
+        className="sticky top-0 z-30 backdrop-blur bg-white/95 dark:bg-[#0a1628]/85 border-b border-slate-200 dark:border-white/10"
+        style={{ paddingTop: 'env(safe-area-inset-top)' }}
+      >
         <div className="mx-auto max-w-5xl px-4 py-3 flex items-center gap-2 sm:gap-3">
           <Link to="/" className="flex items-center gap-2.5 shrink-0" aria-label={t('nav.home')}>
             <LogoIcon className="h-10 w-10 text-blue-700 dark:text-white drop-shadow-sm" />

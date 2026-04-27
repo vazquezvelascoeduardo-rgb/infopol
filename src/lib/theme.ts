@@ -6,13 +6,12 @@ const STORAGE_KEY = 'infopol-theme';
 
 export type Theme = 'light' | 'dark';
 
-// Llegeix la preferència desada; per defecte (sense preferència), mode fosc,
-// perquè l'estètica de l'app és principalment fosca (tipus infografia operativa).
+// Llegeix la preferència desada; per defecte (sense preferència), mode clar.
 export function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') return 'dark';
+  if (typeof window === 'undefined') return 'light';
   const saved = window.localStorage.getItem(STORAGE_KEY) as Theme | null;
   if (saved === 'light' || saved === 'dark') return saved;
-  return 'dark';
+  return 'light';
 }
 
 // Aplica el tema afegint/traient la classe `dark` al <html>.
