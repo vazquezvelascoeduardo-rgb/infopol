@@ -32,6 +32,7 @@ const DICT: Record<Locale, Dict> = {
     'footer.rights': 'Todos los derechos reservados.',
     'footer.legal': 'Aviso legal',
     'footer.privacy': 'Política de privacidad',
+    'footer.unofficial': 'Información no oficial',
 
     // Aviso legal
     'legal.title': 'Aviso legal',
@@ -463,6 +464,7 @@ const DICT: Record<Locale, Dict> = {
     'footer.rights': 'Tots els drets reservats.',
     'footer.legal': 'Avís legal',
     'footer.privacy': 'Política de privacitat',
+    'footer.unofficial': 'Informació no oficial',
 
     // Avís legal
     'legal.title': 'Avís legal',

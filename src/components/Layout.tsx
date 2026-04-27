@@ -172,17 +172,19 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       <main className="flex-1">{children}</main>
 
-      <footer className="border-t border-slate-200 dark:border-white/10 py-4 text-center text-xs text-slate-500 dark:text-slate-400">
-        <div>{t('footer')}</div>
-        <div className="mt-1">© 2026 Infopol.app · {t('footer.rights')}</div>
-        <div className="mt-1 flex justify-center gap-3">
+      <footer className="border-t border-slate-200 dark:border-white/10 py-3 px-4 text-center text-[11px] text-slate-500 dark:text-slate-400">
+        <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5">
+          <span>© 2026 Infopol.app</span>
+          <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
           <Link to="/avis-legal" className="hover:text-blue-700 dark:hover:text-blue-400">
             {t('footer.legal')}
           </Link>
-          <span aria-hidden>·</span>
+          <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
           <Link to="/privacitat" className="hover:text-blue-700 dark:hover:text-blue-400">
             {t('footer.privacy')}
           </Link>
+          <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
+          <span className="text-slate-400 dark:text-slate-500">{t('footer.unofficial')}</span>
         </div>
       </footer>
 
