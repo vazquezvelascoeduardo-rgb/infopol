@@ -9,6 +9,7 @@ import lrbrl from './lrbrl-7-1985';
 import lpc from './lpc-16-1991';
 import lofcs from './lofcs-2-1986';
 import cp from './cp-10-1995';
+import lossp from './lossp-4-2003';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -18,6 +19,7 @@ export const TOPICS: TestTopic[] = [
   lpc,
   lofcs,
   cp,
+  lossp,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
