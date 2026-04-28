@@ -6,12 +6,14 @@ import ce78 from './ce78';
 import lopsc from './lopsc-4-2015';
 import eac from './eac';
 import lrbrl from './lrbrl-7-1985';
+import lpc from './lpc-16-1991';
 
 export const TOPICS: TestTopic[] = [
   ce78,
   lopsc,
   eac,
   lrbrl,
+  lpc,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
