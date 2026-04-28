@@ -15,6 +15,7 @@ import codiEtica from './codi-etica-policia';
 import lecrim from './lecrim';
 import armamentPl from './armament-pl';
 import lopvvd from './lopvvd-27-2003';
+import lorpm from './lorpm-5-2000';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -30,6 +31,7 @@ export const TOPICS: TestTopic[] = [
   lecrim,
   armamentPl,
   lopvvd,
+  lorpm,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
