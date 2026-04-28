@@ -3,9 +3,11 @@
 //   2. Importa'l aqui i afegeix-lo a l'array TOPICS
 import type { TestTopic } from './types';
 import ce78 from './ce78';
+import lopsc from './lopsc-4-2015';
 
 export const TOPICS: TestTopic[] = [
   ce78,
+  lopsc,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
