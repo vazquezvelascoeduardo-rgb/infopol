@@ -1,13 +1,19 @@
 // Llistat dels temes de test disponibles.
 import { Link } from 'react-router-dom';
-import { TOPICS, getAllQuestions } from '../../data/tests';
-import { useTopicProgress } from '../../lib/testProgress';
+import { TOPICS } from '../../data/tests';
+import { getTopicStats, levelFromBest, type Level } from '../../lib/testStats';
 import { useT } from '../../lib/i18n';
+
+const LEVEL_META: Record<Level, { icon: string; label: string; cls: string }> = {
+  none:         { icon: '·',  label: 'Sense empezar', cls: 'text-slate-400 dark:text-slate-500' },
+  novice:       { icon: '🌱', label: 'Principiant',   cls: 'text-emerald-600 dark:text-emerald-400' },
+  intermediate: { icon: '📘', label: 'Intermedi',     cls: 'text-blue-600 dark:text-blue-400' },
+  advanced:     { icon: '🎯', label: 'Avançat',       cls: 'text-amber-600 dark:text-amber-400' },
+  expert:       { icon: '🏆', label: 'Expert',        cls: 'text-purple-600 dark:text-purple-400' },
+};
 
 export default function TestList() {
   const { t } = useT();
-
-  const totalQuestions = getAllQuestions().length;
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-6">
@@ -42,7 +48,7 @@ export default function TestList() {
         {TOPICS.map((topic) => (
           <TopicCard key={topic.slug} slug={topic.slug} icon={topic.icon}
             accent={topic.accent} title={topic.title}
-            description={topic.description} total={topic.questions.length} />
+            description={topic.description} />
         ))}
 
         {/* Mode 'tots els temes' */}
@@ -62,7 +68,7 @@ export default function TestList() {
               <div className="min-w-0 flex-1">
                 <div className="font-bold text-base">{t('test.list.allMixed')}</div>
                 <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                  {t('test.list.allMixedDesc').replace('{n}', String(totalQuestions))}
+                  {t('test.list.allMixedDescShort')}
                 </div>
               </div>
               <span className="shrink-0 text-purple-700 dark:text-purple-400 text-sm font-semibold inline-flex items-center gap-1">
@@ -78,15 +84,14 @@ export default function TestList() {
 }
 
 function TopicCard({
-  slug, icon, accent, title, description, total,
+  slug, icon, accent, title, description,
 }: {
   slug: string; icon: string; accent: string;
-  title: string; description?: string; total: number;
+  title: string; description?: string;
 }) {
-  const { t } = useT();
-  const { answeredCount } = useTopicProgress(slug);
-  const remaining = total - answeredCount;
-  const progress = total > 0 ? Math.round((answeredCount / total) * 100) : 0;
+  const stats = getTopicStats(slug);
+  const level = levelFromBest(stats?.best);
+  const meta = LEVEL_META[level];
 
   return (
     <li>
@@ -108,21 +113,27 @@ function TopicCard({
                 {description}
               </div>
             )}
-            <div className="mt-2 flex items-center gap-2 text-[11px]">
-              <span className="font-mono text-slate-600 dark:text-slate-300">
-                {answeredCount} / {total}
+            <div className="mt-2 flex items-center gap-3 text-[11px]">
+              {/* Nivell qualitatiu */}
+              <span className={`inline-flex items-center gap-1 font-semibold uppercase tracking-wide ${meta.cls}`}>
+                <span aria-hidden>{meta.icon}</span>
+                <span>{meta.label}</span>
               </span>
-              <div className="flex-1 h-1.5 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
-                <div
-                  className={`h-full bg-gradient-to-r ${accent} transition-all`}
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-              <span className="font-mono text-slate-500 dark:text-slate-400">
-                {remaining > 0 ? `${remaining} ${t('test.list.remaining')}` : `✓ ${t('test.list.allDone')}`}
-              </span>
+              {stats && stats.attempts > 0 && (
+                <>
+                  <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
+                  <span className="font-mono text-slate-600 dark:text-slate-300">
+                    ⭐ {stats.best.toFixed(1)}
+                  </span>
+                  <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
+                  <span className="font-mono text-slate-500 dark:text-slate-400">
+                    {stats.attempts} {stats.attempts === 1 ? 'test' : 'tests'}
+                  </span>
+                </>
+              )}
             </div>
           </div>
+          <span aria-hidden className="shrink-0 text-slate-400 group-hover:translate-x-1 transition">→</span>
         </div>
       </Link>
     </li>
