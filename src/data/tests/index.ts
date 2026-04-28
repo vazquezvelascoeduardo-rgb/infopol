@@ -7,6 +7,7 @@ import lopsc from './lopsc-4-2015';
 import eac from './eac';
 import lrbrl from './lrbrl-7-1985';
 import lpc from './lpc-16-1991';
+import lofcs from './lofcs-2-1986';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -14,6 +15,7 @@ export const TOPICS: TestTopic[] = [
   eac,
   lrbrl,
   lpc,
+  lofcs,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
