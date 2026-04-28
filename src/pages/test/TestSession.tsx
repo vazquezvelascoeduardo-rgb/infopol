@@ -443,6 +443,7 @@ function RunPhase({
       <div className="rounded-2xl border-2 p-5 sm:p-6 mb-4
         border-slate-200 bg-white
         dark:border-white/10 dark:bg-[#0f1d34]">
+        <TopicBadge question={cur.question} />
         <div className="text-base sm:text-lg font-semibold leading-snug mb-4">
           {cur.question.text}
         </div>
@@ -632,6 +633,7 @@ function ResultPhase({
                   {isBlank ? '⚪' : isCorrect ? '✅' : '❌'}
                 </span>
                 <div className="min-w-0 flex-1">
+                  <TopicBadge question={q.question} compact />
                   <div className="font-semibold leading-snug mb-1">
                     {i + 1}. {q.question.text}
                   </div>
@@ -675,5 +677,38 @@ function ResultPhase({
         <span className="hidden">{slug}{isAll ? 'all' : ''}</span>
       </div>
     </>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════
+// HELPER — Badge del tema d'origen (només visible al mode 'tot')
+// ════════════════════════════════════════════════════════════════════
+
+function TopicBadge({
+  question,
+  compact = false,
+}: {
+  question: TestQuestion;
+  compact?: boolean;
+}) {
+  // Quan venim del pool combinat (slug 'tot'), getAllQuestions afegeix
+  // un camp topicSlug a cada pregunta. Si no hi és, no mostrem badge.
+  const topicSlug = (question as TestQuestion & { topicSlug?: string }).topicSlug;
+  if (!topicSlug) return null;
+  const topic = TOPICS.find((tp) => tp.slug === topicSlug);
+  if (!topic) return null;
+
+  return (
+    <div className={compact ? 'mb-1' : 'mb-2'}>
+      <span
+        className={`inline-flex items-center gap-1.5 rounded-full border font-semibold uppercase tracking-wide
+          border-slate-200 bg-slate-50 text-slate-700
+          dark:border-white/10 dark:bg-white/5 dark:text-slate-300
+          ${compact ? 'px-2 py-0.5 text-[9px]' : 'px-2.5 py-1 text-[10px]'}`}
+      >
+        <span aria-hidden>{topic.icon}</span>
+        <span>{topic.title}</span>
+      </span>
+    </div>
   );
 }
