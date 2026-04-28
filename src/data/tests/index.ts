@@ -11,6 +11,7 @@ import lofcs from './lofcs-2-1986';
 import cp from './cp-10-1995';
 import lossp from './lossp-4-2003';
 import transit from './transit-lsv';
+import codiEtica from './codi-etica-policia';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -22,6 +23,7 @@ export const TOPICS: TestTopic[] = [
   cp,
   lossp,
   transit,
+  codiEtica,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
