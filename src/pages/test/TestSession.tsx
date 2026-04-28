@@ -14,10 +14,25 @@ import {
 } from '../../lib/testRunner';
 import { useT } from '../../lib/i18n';
 
+type Mode = 'exam' | 'study'; // exam = simulacre, study = interactiu
+
 type SessionState =
   | { phase: 'select' }
-  | { phase: 'run'; questions: ShuffledQuestion[]; index: number; answers: Array<number | null> }
-  | { phase: 'result'; questions: ShuffledQuestion[]; answers: Array<number | null> };
+  | {
+      phase: 'run';
+      mode: Mode;
+      questions: ShuffledQuestion[];
+      index: number;
+      answers: Array<number | null>;
+      /** Indexs de preguntes ja revelades (mode 'study'). */
+      revealedIdx: Set<number>;
+    }
+  | {
+      phase: 'result';
+      mode: Mode;
+      questions: ShuffledQuestion[];
+      answers: Array<number | null>;
+    };
 
 const ALL_TOPICS_SLUG = 'tot';
 
@@ -66,15 +81,17 @@ export default function TestSession() {
   const accent = isAll ? 'from-purple-500 to-fuchsia-700' : topic!.accent;
   const remaining = pool.length - answeredIds.size;
 
-  function startTest(count: number) {
+  function startTest(count: number, mode: Mode) {
     const { questions, exhausted } = pickQuestions(pool, answeredIds, count);
     if (exhausted || questions.length === 0) return;
     const shuffled = questions.map((q) => shuffleQuestion(q));
     setState({
       phase: 'run',
+      mode,
       questions: shuffled,
       index: 0,
       answers: new Array(shuffled.length).fill(null),
+      revealedIdx: new Set(),
     });
   }
 
@@ -89,9 +106,49 @@ export default function TestSession() {
 
   function answerCurrent(idx: number | null) {
     if (state.phase !== 'run') return;
+
+    // Mode interactiu: una vegada revelada, no es pot canviar.
+    if (state.mode === 'study' && state.revealedIdx.has(state.index)) return;
+
+    // 'En blanc' (idx null): nomes esborra, no avanca.
+    if (idx === null) {
+      const next = [...state.answers];
+      next[state.index] = null;
+      setState({ ...state, answers: next });
+      return;
+    }
+
+    // Si re-clic a la mateixa opcio, en mode simulacre desmarca.
+    if (state.answers[state.index] === idx && state.mode === 'exam') {
+      const next = [...state.answers];
+      next[state.index] = null;
+      setState({ ...state, answers: next });
+      return;
+    }
+
+    // Nova resposta: marca-la i (en study) revela-la.
     const next = [...state.answers];
     next[state.index] = idx;
-    setState({ ...state, answers: next });
+    let nextRevealed = state.revealedIdx;
+    if (state.mode === 'study') {
+      nextRevealed = new Set(state.revealedIdx);
+      nextRevealed.add(state.index);
+    }
+    setState({ ...state, answers: next, revealedIdx: nextRevealed });
+
+    // Auto-avanca si no es l'ultima pregunta. En interactiu donem mes
+    // temps per veure el feedback de la correccio.
+    const isLast = state.index >= state.questions.length - 1;
+    if (!isLast) {
+      const delay = state.mode === 'study' ? 1700 : 450;
+      setTimeout(() => {
+        setState((curr) => {
+          if (curr.phase !== 'run') return curr;
+          if (curr.index >= curr.questions.length - 1) return curr;
+          return { ...curr, index: curr.index + 1 };
+        });
+      }, delay);
+    }
   }
 
   function goNext() {
@@ -140,6 +197,7 @@ export default function TestSession() {
     }
     setState({
       phase: 'result',
+      mode: state.mode,
       questions: state.questions,
       answers: state.answers,
     });
@@ -200,10 +258,11 @@ function SelectPhase({
 }: {
   title: string; accent: string;
   total: number; remaining: number;
-  onStart: (count: number) => void;
+  onStart: (count: number, mode: Mode) => void;
   onReset: () => void;
 }) {
   const { t } = useT();
+  const [mode, setMode] = useState<Mode>('exam');
   const choices = [10, 25, 50].filter((n) => n <= remaining);
   if (remaining > 0 && !choices.includes(remaining)) choices.push(remaining);
   const exhausted = remaining === 0;
@@ -246,6 +305,47 @@ function SelectPhase({
         </div>
       ) : (
         <div className="rounded-2xl border p-5 border-slate-200/80 bg-white dark:bg-[#0f1d34] dark:border-white/10">
+          {/* Selector de mode */}
+          <div className="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-2">
+            {t('test.session.modeLabel')}
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-5">
+            <button
+              type="button"
+              onClick={() => setMode('exam')}
+              aria-pressed={mode === 'exam'}
+              className={`text-left rounded-xl border-2 p-4 transition
+                ${mode === 'exam'
+                  ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-400/10'
+                  : 'border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20'}`}
+            >
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-lg" aria-hidden>🧪</span>
+                <span className="font-bold">{t('test.session.modeExam')}</span>
+              </div>
+              <div className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
+                {t('test.session.modeExamDesc')}
+              </div>
+            </button>
+            <button
+              type="button"
+              onClick={() => setMode('study')}
+              aria-pressed={mode === 'study'}
+              className={`text-left rounded-xl border-2 p-4 transition
+                ${mode === 'study'
+                  ? 'border-emerald-500 bg-emerald-50 dark:border-emerald-400 dark:bg-emerald-400/10'
+                  : 'border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20'}`}
+            >
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-lg" aria-hidden>🎯</span>
+                <span className="font-bold">{t('test.session.modeStudy')}</span>
+              </div>
+              <div className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
+                {t('test.session.modeStudyDesc')}
+              </div>
+            </button>
+          </div>
+
           <div className="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-3">
             {t('test.session.howMany')}
           </div>
@@ -254,7 +354,7 @@ function SelectPhase({
               <button
                 key={n}
                 type="button"
-                onClick={() => onStart(n)}
+                onClick={() => onStart(n, mode)}
                 className={`rounded-xl border-2 px-4 py-3 text-base font-bold transition
                   border-slate-200 bg-white text-slate-700 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700
                   dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-blue-400 dark:hover:bg-blue-400/10`}
@@ -349,25 +449,69 @@ function RunPhase({
         <div className="space-y-2">
           {cur.options.map((opt, i) => {
             const isSelected = selected === i;
+            const revealed = state.mode === 'study' && state.revealedIdx.has(state.index);
+            const isCorrect = i === cur.correctIndex;
+            const isWrongPicked = revealed && isSelected && !isCorrect;
+            const isCorrectShown = revealed && isCorrect;
+
+            // Estil base
+            let cls = 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-white/20 dark:hover:bg-white/10';
+            let badgeCls = 'border-slate-300 text-slate-500 dark:border-white/20 dark:text-slate-400';
+            if (revealed) {
+              if (isCorrectShown) {
+                cls = 'border-emerald-500 bg-emerald-50 text-emerald-900 dark:border-emerald-400 dark:bg-emerald-400/15 dark:text-emerald-100';
+                badgeCls = 'border-emerald-500 bg-emerald-500 text-white';
+              } else if (isWrongPicked) {
+                cls = 'border-red-500 bg-red-50 text-red-900 dark:border-red-400 dark:bg-red-400/15 dark:text-red-100';
+                badgeCls = 'border-red-500 bg-red-500 text-white';
+              } else {
+                cls = 'border-slate-200 bg-white text-slate-400 opacity-60 dark:border-white/10 dark:bg-white/5 dark:text-slate-500';
+                badgeCls = 'border-slate-300 text-slate-400 dark:border-white/15 dark:text-slate-500';
+              }
+            } else if (isSelected) {
+              cls = 'border-blue-500 bg-blue-50 text-blue-900 dark:border-blue-400 dark:bg-blue-400/15 dark:text-blue-100';
+              badgeCls = 'border-blue-500 bg-blue-500 text-white';
+            }
+
             return (
               <button
                 key={i}
                 type="button"
                 onClick={() => onAnswer(isSelected ? null : i)}
+                disabled={revealed}
                 className={`w-full text-left rounded-xl border-2 px-4 py-3 transition flex items-start gap-3
-                  ${isSelected
-                    ? 'border-blue-500 bg-blue-50 text-blue-900 dark:border-blue-400 dark:bg-blue-400/15 dark:text-blue-100'
-                    : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-white/20 dark:hover:bg-white/10'}`}
+                  ${cls}
+                  ${revealed ? 'cursor-default' : ''}`}
               >
-                <span className={`shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 font-bold text-xs
-                  ${isSelected ? 'border-blue-500 bg-blue-500 text-white' : 'border-slate-300 text-slate-500 dark:border-white/20 dark:text-slate-400'}`}>
-                  {String.fromCharCode(65 + i)}
+                <span className={`shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 font-bold text-xs ${badgeCls}`}>
+                  {isCorrectShown ? '✓' : isWrongPicked ? '✗' : String.fromCharCode(65 + i)}
                 </span>
-                <span className="text-sm sm:text-base leading-snug">{opt}</span>
+                <span className="text-sm sm:text-base leading-snug flex-1">{opt}</span>
               </button>
             );
           })}
         </div>
+
+        {/* Feedback de la correccio en mode interactiu */}
+        {state.mode === 'study' && state.revealedIdx.has(state.index) && (
+          <div className="mt-4 rounded-lg border-l-4 p-3 text-sm
+            border-l-emerald-500 bg-emerald-50/60 text-emerald-900
+            dark:border-l-emerald-400/70 dark:bg-emerald-400/10 dark:text-emerald-100">
+            {selected === cur.correctIndex ? (
+              <div className="font-bold">✅ {t('test.session.correctFeedback')}</div>
+            ) : (
+              <div>
+                <div className="font-bold">❌ {t('test.session.wrongFeedback')}</div>
+                <div className="text-xs mt-1">
+                  {t('test.result.correctAnswer')}: <span className="font-mono font-bold">{String.fromCharCode(65 + cur.correctIndex)}</span> · {cur.options[cur.correctIndex]}
+                </div>
+              </div>
+            )}
+            {cur.question.reference && (
+              <div className="text-[11px] mt-1 font-mono opacity-80">📖 {cur.question.reference}</div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Controls */}
