@@ -35,6 +35,7 @@ const AvisLegal = lazy(() => import('./pages/AvisLegal'));
 const Privacitat = lazy(() => import('./pages/Privacitat'));
 const TestList = lazy(() => import('./pages/test/TestList'));
 const TestSession = lazy(() => import('./pages/test/TestSession'));
+const Achievements = lazy(() => import('./pages/test/Achievements'));
 
 function PageFallback() {
   return (
@@ -68,6 +69,7 @@ export default function App() {
           <Route path="/privacitat" element={<Privacitat />} />
           {/* Tests — no enllaçats des del menu (acces per URL directa). */}
           <Route path="/test" element={<TestList />} />
+          <Route path="/test/logros" element={<Achievements />} />
           <Route path="/test/:slug" element={<TestSession />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

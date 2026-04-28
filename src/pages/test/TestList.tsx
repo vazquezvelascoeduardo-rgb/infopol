@@ -1,7 +1,10 @@
-// Llistat dels temes de test disponibles.
+// Llistat dels temes de test disponibles + dashboard global de stats.
 import { Link } from 'react-router-dom';
 import { TOPICS } from '../../data/tests';
-import { getTopicStats, levelFromBest, type Level } from '../../lib/testStats';
+import {
+  getTopicStats, globalAverage, levelFromBest, useGlobalStats, type Level,
+} from '../../lib/testStats';
+import { ACHIEVEMENTS } from '../../lib/achievements';
 import { useT } from '../../lib/i18n';
 
 const LEVEL_META: Record<Level, { icon: string; label: string; cls: string }> = {
@@ -44,6 +47,9 @@ export default function TestList() {
         </div>
       </header>
 
+      {/* Dashboard d'estats globals */}
+      <Dashboard />
+
       <ul className="space-y-3">
         {TOPICS.map((topic) => (
           <TopicCard key={topic.slug} slug={topic.slug} icon={topic.icon}
@@ -80,6 +86,67 @@ export default function TestList() {
         </li>
       </ul>
     </div>
+  );
+}
+
+function Dashboard() {
+  const { t } = useT();
+  const stats = useGlobalStats();
+  const { attempts, avgGrade } = globalAverage(stats);
+  const unlocked = stats.achievements.length;
+  const totalAch = ACHIEVEMENTS.length;
+
+  if (attempts === 0) {
+    return (
+      <div className="rounded-2xl border border-dashed p-4 mb-5 text-center text-sm
+        border-slate-300 bg-slate-50/60 text-slate-500
+        dark:border-white/15 dark:bg-white/5 dark:text-slate-400">
+        💡 {t('test.dashboard.empty')}
+      </div>
+    );
+  }
+
+  return (
+    <section className="grid grid-cols-3 gap-2 mb-5">
+      <div className="rounded-xl border p-3 text-center
+        border-slate-200/80 bg-white
+        dark:border-white/10 dark:bg-[#0f1d34]">
+        <div className="text-xl" aria-hidden>📝</div>
+        <div className="text-2xl font-black leading-none text-blue-700 dark:text-blue-400">
+          {attempts}
+        </div>
+        <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mt-0.5">
+          {t('test.dashboard.attempts')}
+        </div>
+      </div>
+
+      <div className="rounded-xl border p-3 text-center
+        border-slate-200/80 bg-white
+        dark:border-white/10 dark:bg-[#0f1d34]">
+        <div className="text-xl" aria-hidden>📊</div>
+        <div className="text-2xl font-black leading-none text-emerald-700 dark:text-emerald-400">
+          {avgGrade.toFixed(1)}
+        </div>
+        <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mt-0.5">
+          {t('test.dashboard.avg')}
+        </div>
+      </div>
+
+      <Link
+        to="/test/logros"
+        className="rounded-xl border p-3 transition text-center hover:shadow-md
+          border-amber-200/70 bg-gradient-to-br from-amber-50 to-yellow-50
+          dark:border-white/10 dark:from-[#2a210f] dark:to-[#0f1d34]"
+      >
+        <div className="text-xl" aria-hidden>🏅</div>
+        <div className="text-2xl font-black leading-none text-amber-700 dark:text-amber-400">
+          {unlocked}<span className="text-base font-bold opacity-50">/{totalAch}</span>
+        </div>
+        <div className="text-[10px] uppercase tracking-wider font-semibold text-amber-700/70 dark:text-amber-400/70 mt-0.5">
+          {t('test.dashboard.achievements')}
+        </div>
+      </Link>
+    </section>
   );
 }
 

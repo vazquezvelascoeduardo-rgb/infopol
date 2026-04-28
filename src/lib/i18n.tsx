@@ -93,6 +93,12 @@ const DICT: Record<Locale, Dict> = {
     'test.result.perQuestion': '/pregunta',
     'test.result.unlockedTitle': '¡Logros desbloqueados!',
     'test.session.elapsed': 'Tiempo transcurrido',
+    'test.dashboard.empty': 'Aún no has hecho ningún test. ¡Empieza con cualquier tema!',
+    'test.dashboard.attempts': 'Tests realizados',
+    'test.dashboard.avg': 'Nota media',
+    'test.dashboard.achievements': 'Logros',
+    'test.achievements.title': 'Logros',
+    'test.achievements.unlocked': 'desbloqueados',
 
     // Aviso legal
     'legal.title': 'Aviso legal',
@@ -590,6 +596,12 @@ const DICT: Record<Locale, Dict> = {
     'test.result.perQuestion': '/pregunta',
     'test.result.unlockedTitle': 'Logros desbloquejats!',
     'test.session.elapsed': 'Temps transcorregut',
+    'test.dashboard.empty': 'Encara no has fet cap test. Comença amb qualsevol tema!',
+    'test.dashboard.attempts': 'Tests fets',
+    'test.dashboard.avg': 'Nota mitjana',
+    'test.dashboard.achievements': 'Logros',
+    'test.achievements.title': 'Logros',
+    'test.achievements.unlocked': 'desbloquejats',
 
     // Avís legal
     'legal.title': 'Avís legal',
