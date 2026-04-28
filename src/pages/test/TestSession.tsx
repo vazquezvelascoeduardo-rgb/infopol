@@ -263,8 +263,14 @@ function SelectPhase({
 }) {
   const { t } = useT();
   const [mode, setMode] = useState<Mode>('exam');
-  const choices = [10, 25, 50].filter((n) => n <= remaining);
-  if (remaining > 0 && !choices.includes(remaining)) choices.push(remaining);
+  // Maxim 50 preguntes per test (encara que el pool tingui mes).
+  const MAX_PER_TEST = 50;
+  const cappedRemaining = Math.min(remaining, MAX_PER_TEST);
+  const choices = [10, 25, 50].filter((n) => n <= cappedRemaining);
+  // Si queden < 50, afegim el nombre exacte com a opcio (p.ex. 37).
+  if (cappedRemaining > 0 && cappedRemaining < 50 && !choices.includes(cappedRemaining)) {
+    choices.push(cappedRemaining);
+  }
   const exhausted = remaining === 0;
 
   return (
@@ -359,7 +365,7 @@ function SelectPhase({
                   border-slate-200 bg-white text-slate-700 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700
                   dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-blue-400 dark:hover:bg-blue-400/10`}
               >
-                {n === remaining && n > 50 ? `${n} (${t('test.session.allRemaining')})` : n}
+                {n === cappedRemaining && cappedRemaining < 50 ? `${n} (${t('test.session.allRemaining')})` : n}
               </button>
             ))}
           </div>
@@ -398,14 +404,16 @@ function RunPhase({
   const progress = ((state.index + 1) / total) * 100;
   const answeredCount = state.answers.filter((a) => a !== null).length;
   const blanks = total - answeredCount;
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   function requestFinish() {
     if (blanks === 0) {
       onFinish();
       return;
     }
-    const msg = t('test.session.confirmFinish').replace('{n}', String(blanks));
-    if (window.confirm(msg)) onFinish();
+    // window.confirm() es ignorat en PWA standalone iOS; fem servir
+    // un modal propi sempre per consistencia.
+    setConfirmOpen(true);
   }
 
   return (
@@ -556,6 +564,54 @@ function RunPhase({
           </button>
         )}
       </div>
+
+      {/* Modal propi de confirmacio (window.confirm() no funciona a iOS PWA) */}
+      {confirmOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        >
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setConfirmOpen(false)}
+            aria-hidden
+          />
+          <div className="relative w-full max-w-sm rounded-2xl border-2 p-5 shadow-2xl
+            border-amber-300 bg-white
+            dark:border-amber-400/40 dark:bg-[#0f1d34]">
+            <div className="flex items-start gap-3 mb-4">
+              <span className="text-2xl shrink-0" aria-hidden>⚠️</span>
+              <div>
+                <h3 className="font-bold text-base mb-1">
+                  {t('test.session.confirmTitle')}
+                </h3>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-snug">
+                  {t('test.session.confirmFinish').replace('{n}', String(blanks))}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col-reverse sm:flex-row gap-2 justify-end">
+              <button
+                type="button"
+                onClick={() => setConfirmOpen(false)}
+                className="rounded-xl border-2 px-4 py-2.5 text-sm font-semibold transition
+                  border-slate-200 bg-white text-slate-700 hover:bg-slate-50
+                  dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
+              >
+                {t('test.session.confirmCancel')}
+              </button>
+              <button
+                type="button"
+                onClick={() => { setConfirmOpen(false); onFinish(); }}
+                className="rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 shadow-md"
+              >
+                {t('test.session.confirmYes')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
