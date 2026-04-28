@@ -136,18 +136,18 @@ export default function TestSession() {
     }
     setState({ ...state, answers: next, revealedIdx: nextRevealed });
 
-    // Auto-avanca si no es l'ultima pregunta. En interactiu donem mes
-    // temps per veure el feedback de la correccio.
+    // Auto-avanca nomes en mode simulacre. En interactiu deixem que
+    // l'usuari llegeixi la correccio i premi 'Seguent' quan vulgui
+    // (aixi s'interioritza la resposta correcta).
     const isLast = state.index >= state.questions.length - 1;
-    if (!isLast) {
-      const delay = state.mode === 'study' ? 1700 : 450;
+    if (!isLast && state.mode === 'exam') {
       setTimeout(() => {
         setState((curr) => {
           if (curr.phase !== 'run') return curr;
           if (curr.index >= curr.questions.length - 1) return curr;
           return { ...curr, index: curr.index + 1 };
         });
-      }, delay);
+      }, 450);
     }
   }
 
