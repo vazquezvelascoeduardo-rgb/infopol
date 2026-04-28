@@ -1,7 +1,7 @@
 // Sessio de test: gestiona els 3 estats (select → run → result) en una
 // sola pagina amb React state. URL parametritzada per :slug; si slug
 // es 'tot' fem mescla de tots els temes.
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { TOPICS, getAllQuestions, getTopic } from '../../data/tests';
 import type { TestQuestion } from '../../data/tests/types';
@@ -12,6 +12,11 @@ import {
 import {
   computeScore, pickQuestions, shuffleQuestion, type ShuffledQuestion,
 } from '../../lib/testRunner';
+import {
+  recordTestResult, getGlobalStats, getTopicStats,
+  type TopicStats,
+} from '../../lib/testStats';
+import { checkAchievements, type Achievement } from '../../lib/achievements';
 import { useT } from '../../lib/i18n';
 
 type Mode = 'exam' | 'study'; // exam = simulacre, study = interactiu
@@ -26,12 +31,20 @@ type SessionState =
       answers: Array<number | null>;
       /** Indexs de preguntes ja revelades (mode 'study'). */
       revealedIdx: Set<number>;
+      /** Timestamp en ms quan s'ha iniciat el test. */
+      startedAt: number;
     }
   | {
       phase: 'result';
       mode: Mode;
       questions: ShuffledQuestion[];
       answers: Array<number | null>;
+      /** Segons que ha durat el test. */
+      durationSec: number;
+      /** Stats del tema ABANS d'aquest test (per comparativa). */
+      prevStats: TopicStats | null;
+      /** Logros nous desbloquejats en aquest test. */
+      newAchievements: Achievement[];
     };
 
 const ALL_TOPICS_SLUG = 'tot';
@@ -92,6 +105,7 @@ export default function TestSession() {
       index: 0,
       answers: new Array(shuffled.length).fill(null),
       revealedIdx: new Set(),
+      startedAt: Date.now(),
     });
   }
 
@@ -195,11 +209,43 @@ export default function TestSession() {
     } else {
       markAnswered(slug, answeredQuestionIds);
     }
+
+    // Calculem el resum, registrem stats i comprovem logros.
+    const score = computeScore(state.questions, state.answers);
+    const durationSec = Math.max(1, Math.round((Date.now() - state.startedAt) / 1000));
+    const statsSlug = isAll ? 'tot' : slug;
+    const prevStatsSnapshot = getGlobalStats(); // copia ABANS de gravar
+    const prevTopicStats = getTopicStats(statsSlug);
+    recordTestResult({
+      topicSlug: statsSlug,
+      grade: score.grade,
+      correct: score.correct,
+      wrong: score.wrong,
+      blank: score.blank,
+      total: score.total,
+      seconds: durationSec,
+    });
+    const newAchievements = checkAchievements(
+      {
+        topicSlug: statsSlug,
+        grade: score.grade,
+        correct: score.correct,
+        wrong: score.wrong,
+        blank: score.blank,
+        total: score.total,
+        seconds: durationSec,
+      },
+      prevStatsSnapshot,
+    );
+
     setState({
       phase: 'result',
       mode: state.mode,
       questions: state.questions,
       answers: state.answers,
+      durationSec,
+      prevStats: prevTopicStats,
+      newAchievements,
     });
   }
 
@@ -406,6 +452,15 @@ function RunPhase({
   const blanks = total - answeredCount;
   const [confirmOpen, setConfirmOpen] = useState(false);
 
+  // Cronometre reactiu — re-render cada segon per actualitzar el display.
+  const [, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  const elapsedSec = Math.max(0, Math.floor((Date.now() - state.startedAt) / 1000));
+  const elapsedDisplay = formatMMSS(elapsedSec);
+
   function requestFinish() {
     if (blanks === 0) {
       onFinish();
@@ -418,14 +473,24 @@ function RunPhase({
 
   return (
     <>
-      {/* Barra de progrés + boto acabar */}
+      {/* Barra de progrés + cronometre + boto acabar */}
       <div className="mb-4">
-        <div className="flex items-center justify-between gap-2 text-xs mb-1.5">
-          <span className="font-mono text-slate-500 dark:text-slate-400">
-            {t('test.session.questionN')
-              .replace('{n}', String(state.index + 1))
-              .replace('{total}', String(total))}
-          </span>
+        <div className="flex items-center justify-between gap-2 text-xs mb-1.5 flex-wrap">
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-slate-500 dark:text-slate-400">
+              {t('test.session.questionN')
+                .replace('{n}', String(state.index + 1))
+                .replace('{total}', String(total))}
+            </span>
+            <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
+            <span
+              className="font-mono text-slate-500 dark:text-slate-400 inline-flex items-center gap-1"
+              title={t('test.session.elapsed')}
+            >
+              <span aria-hidden>⏱</span>
+              {elapsedDisplay}
+            </span>
+          </div>
           <div className="flex items-center gap-2">
             <span className="font-mono text-slate-500 dark:text-slate-400">
               {answeredCount} / {total} {t('test.session.answered')}
@@ -630,26 +695,80 @@ function ResultPhase({
 }) {
   const { t } = useT();
   const score = computeScore(state.questions, state.answers);
+  const durationSec = state.durationSec;
+  const avgPerQuestion = score.total > 0 ? durationSec / score.total : 0;
 
-  const gradeColor =
-    score.grade >= 7 ? 'text-emerald-600 dark:text-emerald-400'
-    : score.grade >= 5 ? 'text-amber-600 dark:text-amber-400'
-    : 'text-red-600 dark:text-red-400';
+  // Color, fons i missatge segons rang de nota.
+  const tier =
+    score.grade >= 9 ? 'excellent'
+    : score.grade >= 7 ? 'notable'
+    : score.grade >= 5 ? 'pass'
+    : 'fail';
+
+  const tierStyle: Record<string, { grade: string; ring: string; bg: string; emoji: string }> = {
+    excellent: {
+      grade: 'text-purple-600 dark:text-purple-400',
+      ring: 'ring-purple-200 dark:ring-purple-400/30',
+      bg: 'bg-gradient-to-br from-purple-50 to-fuchsia-50 dark:from-[#1a0f2e] dark:to-[#0f1d34]',
+      emoji: '🏆',
+    },
+    notable: {
+      grade: 'text-emerald-600 dark:text-emerald-400',
+      ring: 'ring-emerald-200 dark:ring-emerald-400/30',
+      bg: 'bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-[#0f2a1f] dark:to-[#0f1d34]',
+      emoji: '🌟',
+    },
+    pass: {
+      grade: 'text-amber-600 dark:text-amber-400',
+      ring: 'ring-amber-200 dark:ring-amber-400/30',
+      bg: 'bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-[#2a210f] dark:to-[#0f1d34]',
+      emoji: '✅',
+    },
+    fail: {
+      grade: 'text-red-600 dark:text-red-400',
+      ring: 'ring-red-200 dark:ring-red-400/30',
+      bg: 'bg-gradient-to-br from-red-50 to-rose-50 dark:from-[#2a0f1a] dark:to-[#0f1d34]',
+      emoji: '💪',
+    },
+  };
+  const ts = tierStyle[tier];
+
+  // Comparativa amb la propia mitjana del tema (si existia).
+  const prev = state.prevStats;
+  const diff = prev && prev.attempts > 0 ? score.grade - prev.last : null;
+  const wasNewBest = prev && score.grade > prev.best;
 
   return (
     <>
-      <div className="rounded-2xl border p-6 mb-5 text-center
-        border-slate-200 bg-white
-        dark:border-white/10 dark:bg-[#0f1d34]">
-        <div className="text-xs uppercase tracking-[0.25em] font-semibold text-slate-500 dark:text-slate-400 mb-2">
-          {t('test.result.grade')}
+      <div className={`rounded-2xl border p-6 mb-5 text-center ring-2 ${ts.ring} ${ts.bg} dark:border-white/10`}>
+        <div className="text-3xl mb-1" aria-hidden>{ts.emoji}</div>
+        <div className="text-xs uppercase tracking-[0.25em] font-semibold text-slate-500 dark:text-slate-400 mb-1">
+          {t(`test.result.tier.${tier}`)}
         </div>
-        <div className={`text-6xl sm:text-7xl font-black tracking-tight ${gradeColor}`}>
+        <div className={`text-6xl sm:text-7xl font-black tracking-tight ${ts.grade}`}>
           {score.grade.toFixed(2)}
         </div>
         <div className="text-sm text-slate-500 dark:text-slate-400 mt-1">
           {t('test.result.outOf10')}
         </div>
+
+        {/* Bandera nou rècord */}
+        {wasNewBest && (
+          <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-amber-500 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 shadow-md">
+            🏅 {t('test.result.newBest')}
+          </div>
+        )}
+
+        {/* Comparativa amb l'ultim test */}
+        {diff !== null && !wasNewBest && (
+          <div className="mt-3 text-xs text-slate-500 dark:text-slate-400">
+            {diff > 0
+              ? `📈 +${diff.toFixed(2)} ${t('test.result.vsLast')}`
+              : diff < 0
+                ? `📉 ${diff.toFixed(2)} ${t('test.result.vsLast')}`
+                : `${t('test.result.sameAsLast')}`}
+          </div>
+        )}
 
         <div className="mt-5 grid grid-cols-3 gap-2 text-sm">
           <div className="rounded-lg bg-emerald-50 dark:bg-emerald-400/10 p-3">
@@ -665,10 +784,48 @@ function ResultPhase({
             <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-600/70 dark:text-slate-400/70">{t('test.result.blank')}</div>
           </div>
         </div>
+
+        {/* Cronometre + velocitat */}
+        <div className="mt-4 flex items-center justify-center gap-4 text-xs text-slate-500 dark:text-slate-400">
+          <span className="inline-flex items-center gap-1">
+            <span aria-hidden>⏱</span>
+            <span className="font-mono">{formatMMSS(durationSec)}</span>
+          </span>
+          {avgPerQuestion > 0 && (
+            <>
+              <span aria-hidden>·</span>
+              <span className="font-mono">
+                {avgPerQuestion.toFixed(1)}s {t('test.result.perQuestion')}
+              </span>
+            </>
+          )}
+        </div>
+
         <div className="mt-3 text-xs text-slate-500 dark:text-slate-400 font-mono">
           {t('test.result.formula').replace('{raw}', score.raw.toFixed(2))}
         </div>
       </div>
+
+      {/* Logros nous desbloquejats */}
+      {state.newAchievements.length > 0 && (
+        <div className="rounded-2xl border-2 border-amber-300 bg-gradient-to-r from-amber-50 to-yellow-50
+          dark:border-amber-400/40 dark:from-[#2a210f] dark:to-[#0f1d34] p-4 mb-5">
+          <div className="text-xs uppercase tracking-wider font-bold text-amber-700 dark:text-amber-300 mb-2">
+            🎉 {t('test.result.unlockedTitle')}
+          </div>
+          <ul className="space-y-1.5">
+            {state.newAchievements.map((a) => (
+              <li key={a.id} className="flex items-start gap-2">
+                <span className="text-xl" aria-hidden>{a.icon}</span>
+                <div className="min-w-0">
+                  <div className="font-bold text-sm">{a.title}</div>
+                  <div className="text-xs text-slate-600 dark:text-slate-300">{a.description}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Llistat de correcció */}
       <div className="space-y-2 mb-5">
@@ -767,4 +924,18 @@ function TopicBadge({
       </span>
     </div>
   );
+}
+
+// ════════════════════════════════════════════════════════════════════
+// HELPER — Format de durada (MM:SS o HH:MM:SS)
+// ════════════════════════════════════════════════════════════════════
+
+function formatMMSS(totalSec: number): string {
+  const s = Math.max(0, Math.floor(totalSec));
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
+  const pad = (n: number) => n.toString().padStart(2, '0');
+  if (h > 0) return `${h}:${pad(m)}:${pad(sec)}`;
+  return `${pad(m)}:${pad(sec)}`;
 }

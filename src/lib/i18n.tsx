@@ -83,6 +83,16 @@ const DICT: Record<Locale, Dict> = {
     'test.result.correctAnswer': 'Correcta',
     'test.result.another': 'Otro test',
     'test.result.backToList': 'Volver a la lista',
+    'test.result.tier.excellent': '¡Sobresaliente!',
+    'test.result.tier.notable': '¡Notable!',
+    'test.result.tier.pass': 'Aprobado',
+    'test.result.tier.fail': 'No aprobado',
+    'test.result.newBest': 'Nuevo récord personal',
+    'test.result.vsLast': 'sobre tu última nota',
+    'test.result.sameAsLast': 'Igual que tu última nota',
+    'test.result.perQuestion': '/pregunta',
+    'test.result.unlockedTitle': '¡Logros desbloqueados!',
+    'test.session.elapsed': 'Tiempo transcurrido',
 
     // Aviso legal
     'legal.title': 'Aviso legal',
@@ -570,6 +580,16 @@ const DICT: Record<Locale, Dict> = {
     'test.result.correctAnswer': 'Correcta',
     'test.result.another': 'Un altre test',
     'test.result.backToList': 'Tornar a la llista',
+    'test.result.tier.excellent': "Excel·lent!",
+    'test.result.tier.notable': 'Notable!',
+    'test.result.tier.pass': 'Aprovat',
+    'test.result.tier.fail': 'No aprovat',
+    'test.result.newBest': 'Nou rècord personal',
+    'test.result.vsLast': 'sobre la teva última nota',
+    'test.result.sameAsLast': "Igual que la teva última nota",
+    'test.result.perQuestion': '/pregunta',
+    'test.result.unlockedTitle': 'Logros desbloquejats!',
+    'test.session.elapsed': 'Temps transcorregut',
 
     // Avís legal
     'legal.title': 'Avís legal',
