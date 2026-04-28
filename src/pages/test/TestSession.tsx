@@ -297,20 +297,42 @@ function RunPhase({
   const isLast = state.index === total - 1;
   const progress = ((state.index + 1) / total) * 100;
   const answeredCount = state.answers.filter((a) => a !== null).length;
+  const blanks = total - answeredCount;
+
+  function requestFinish() {
+    if (blanks === 0) {
+      onFinish();
+      return;
+    }
+    const msg = t('test.session.confirmFinish').replace('{n}', String(blanks));
+    if (window.confirm(msg)) onFinish();
+  }
 
   return (
     <>
-      {/* Barra de progrés */}
+      {/* Barra de progrés + boto acabar */}
       <div className="mb-4">
-        <div className="flex items-center justify-between text-xs mb-1.5">
+        <div className="flex items-center justify-between gap-2 text-xs mb-1.5">
           <span className="font-mono text-slate-500 dark:text-slate-400">
             {t('test.session.questionN')
               .replace('{n}', String(state.index + 1))
               .replace('{total}', String(total))}
           </span>
-          <span className="font-mono text-slate-500 dark:text-slate-400">
-            {answeredCount} / {total} {t('test.session.answered')}
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-slate-500 dark:text-slate-400">
+              {answeredCount} / {total} {t('test.session.answered')}
+            </span>
+            <button
+              type="button"
+              onClick={requestFinish}
+              title={t('test.session.finishNow')}
+              className="rounded-md border px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide transition
+                border-emerald-300 bg-emerald-50 text-emerald-700 hover:bg-emerald-100
+                dark:border-emerald-400/40 dark:bg-emerald-400/10 dark:text-emerald-300 dark:hover:bg-emerald-400/20"
+            >
+              ✓ {t('test.session.finishNow')}
+            </button>
+          </div>
         </div>
         <div className="h-2 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
           <div className={`h-full bg-gradient-to-r ${accent} transition-all duration-300`} style={{ width: `${progress}%` }} />
@@ -374,7 +396,7 @@ function RunPhase({
         {isLast ? (
           <button
             type="button"
-            onClick={onFinish}
+            onClick={requestFinish}
             className="rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 shadow-md"
           >
             {t('test.session.finish')} ✓
