@@ -7,7 +7,7 @@ import type { TestTopic } from './types';
 const codiEtica: TestTopic = {
   slug: 'codi-etica-policia',
   title: "Codi d'ètica de la Policia de Catalunya (GOV/25/2015)",
-  description: '10 preguntes (nivell alt) · principis, valors, Comitè d\'Ètica',
+  description: 'principis, valors, Comitè d\'Ètica',
   icon: '⚜️',
   accent: 'from-indigo-500 to-violet-700',
   questions: [

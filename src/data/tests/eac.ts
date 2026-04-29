@@ -6,7 +6,7 @@ import type { TestTopic } from './types';
 const eac: TestTopic = {
   slug: 'eac',
   title: "Estatut d'Autonomia de Catalunya (LO 6/2006)",
-  description: '50 preguntes (nivell alt) · institucions, drets, competències, organització territorial',
+  description: 'institucions, drets, competències, organització territorial',
   icon: '🟨🟥',
   accent: 'from-yellow-500 to-red-600',
   questions: [

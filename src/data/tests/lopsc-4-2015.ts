@@ -6,7 +6,7 @@ import type { TestTopic } from './types';
 const lopsc: TestTopic = {
   slug: 'lopsc-4-2015',
   title: 'LO 4/2015 Seguretat Ciutadana',
-  description: '50 preguntes (nivell alt) · drets, identificació, infraccions, sancions, agents',
+  description: 'drets, identificació, infraccions, sancions, agents',
   icon: '🛡️',
   accent: 'from-blue-500 to-indigo-700',
   questions: [

@@ -7,7 +7,7 @@ import type { TestTopic } from './types';
 const lorpm: TestTopic = {
   slug: 'lorpm-5-2000',
   title: 'LO 5/2000 Responsabilitat penal del menor',
-  description: '30 preguntes (nivell alt) · 14-18 anys, MF instructor, mesures, durades',
+  description: '14-18 anys, MF instructor, mesures, durades',
   icon: '🧒',
   accent: 'from-cyan-500 to-blue-700',
   questions: [

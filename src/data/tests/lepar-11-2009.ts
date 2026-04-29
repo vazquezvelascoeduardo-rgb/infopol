@@ -7,7 +7,7 @@ import type { TestTopic } from './types';
 const lepar: TestTopic = {
   slug: 'lepar-11-2009',
   title: 'Llei 11/2009 Espectacles públics i activitats recreatives',
-  description: '30 preguntes (nivell alt) · llicències, dret admissió, infraccions, sancions',
+  description: 'llicències, dret admissió, infraccions, sancions',
   icon: '🎭',
   accent: 'from-violet-500 to-purple-700',
   questions: [

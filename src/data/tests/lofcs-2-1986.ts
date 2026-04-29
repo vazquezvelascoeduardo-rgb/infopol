@@ -7,7 +7,7 @@ import type { TestTopic } from './types';
 const lofcs: TestTopic = {
   slug: 'lofcs-2-1986',
   title: 'LO 2/1986 Forces i Cossos de Seguretat',
-  description: '50 preguntes (nivell alt) · principis bàsics, FCSE, policies autonòmiques i locals',
+  description: 'principis bàsics, FCSE, policies autonòmiques i locals',
   icon: '🛂',
   accent: 'from-slate-600 to-slate-800',
   questions: [

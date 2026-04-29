@@ -6,7 +6,7 @@ import type { TestTopic } from './types';
 const lpc: TestTopic = {
   slug: 'lpc-16-1991',
   title: 'Llei 16/1991 Policies Locals Catalunya',
-  description: '50 preguntes (nivell alt) · funcions, escales, règim disciplinari, sancions',
+  description: 'funcions, escales, règim disciplinari, sancions',
   icon: '🚓',
   accent: 'from-blue-500 to-cyan-700',
   questions: [

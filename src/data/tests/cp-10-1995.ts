@@ -8,7 +8,7 @@ import type { TestTopic } from './types';
 const cp: TestTopic = {
   slug: 'cp-10-1995',
   title: 'Codi Penal (LO 10/1995)',
-  description: '50 preguntes (nivell alt) · delictes, penes, agreujants, atemptat i resistència',
+  description: 'delictes, penes, agreujants, atemptat i resistència',
   icon: '⚖️',
   accent: 'from-red-500 to-rose-700',
   questions: [

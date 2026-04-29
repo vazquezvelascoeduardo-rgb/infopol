@@ -8,7 +8,7 @@ import type { TestTopic } from './types';
 const lossp: TestTopic = {
   slug: 'lossp-4-2003',
   title: 'Llei 4/2003 Sistema Seguretat Pública Catalunya',
-  description: '50 preguntes (nivell alt) · autoritats, Mossos, policies locals, òrgans de coordinació',
+  description: 'autoritats, Mossos, policies locals, òrgans de coordinació',
   icon: '🧭',
   accent: 'from-teal-500 to-cyan-700',
   questions: [

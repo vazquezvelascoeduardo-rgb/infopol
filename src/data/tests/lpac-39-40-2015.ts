@@ -7,7 +7,7 @@ import type { TestTopic } from './types';
 const lpac: TestTopic = {
   slug: 'lpac-39-40-2015',
   title: 'Procediment Administratiu (Lleis 39/2015 i 40/2015)',
-  description: '20 preguntes (nivell alt) · terminis, silenci, recursos, notificacions',
+  description: 'terminis, silenci, recursos, notificacions',
   icon: '📋',
   accent: 'from-sky-500 to-blue-700',
   questions: [

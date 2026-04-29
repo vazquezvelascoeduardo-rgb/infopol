@@ -7,7 +7,7 @@ import type { TestTopic } from './types';
 const transit: TestTopic = {
   slug: 'transit-lsv',
   title: 'Trànsit i Seguretat Viària (LSV · RGC · RGV · RGCo)',
-  description: '50 preguntes (nivell alt) · velocitats, alcohol, punts, sancions, VMP',
+  description: 'velocitats, alcohol, punts, sancions, VMP',
   icon: '🚦',
   accent: 'from-amber-500 to-amber-700',
   questions: [

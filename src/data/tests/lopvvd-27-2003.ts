@@ -7,7 +7,7 @@ import type { TestTopic } from './types';
 const lopvvd: TestTopic = {
   slug: 'lopvvd-27-2003',
   title: "Llei 27/2003 Ordre de protecció víctimes violència domèstica",
-  description: "50 preguntes (nivell alt) · art. 544 ter LECrim, mesures civils i penals, audiència 72h",
+  description: "art. 544 ter LECrim, mesures civils i penals, audiència 72h",
   icon: '🛟',
   accent: 'from-pink-500 to-rose-700',
   questions: [

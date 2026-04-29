@@ -6,7 +6,7 @@ import type { TestTopic } from './types';
 const cultura: TestTopic = {
   slug: 'cultura-general',
   title: 'Cultura General',
-  description: '120 preguntes (nivell alt) · geografia, història, art, llengua, ciències, actualitat',
+  description: 'geografia, història, art, llengua, ciències, actualitat',
   icon: '🌍',
   accent: 'from-slate-500 to-slate-700',
   category: 'cultura',

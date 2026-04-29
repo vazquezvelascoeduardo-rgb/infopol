@@ -4,7 +4,7 @@ import type { TestTopic } from './types';
 const ce78: TestTopic = {
   slug: 'ce78',
   title: 'Constitució Espanyola de 1978',
-  description: '50 preguntes (nivell alt) · drets, institucions, organització territorial, reforma',
+  description: 'drets, institucions, organització territorial, reforma',
   icon: '📜',
   accent: 'from-amber-500 to-amber-700',
   questions: [

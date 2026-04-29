@@ -7,7 +7,7 @@ import type { TestTopic } from './types';
 const armamentPl: TestTopic = {
   slug: 'armament-pl',
   title: 'Policia Local com a cos armat (RD 137/1993 i Decret 219/1996)',
-  description: '50 preguntes (nivell alt) · armes, llicències, mitjans de defensa, ús progressiu',
+  description: 'armes, llicències, mitjans de defensa, ús progressiu',
   icon: '🔫',
   accent: 'from-zinc-600 to-zinc-800',
   questions: [

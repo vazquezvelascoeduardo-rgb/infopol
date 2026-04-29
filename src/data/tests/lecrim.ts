@@ -7,7 +7,7 @@ import type { TestTopic } from './types';
 const lecrim: TestTopic = {
   slug: 'lecrim',
   title: "Llei d'Enjudiciament Criminal (LECrim)",
-  description: '50 preguntes (nivell alt) · denúncia, detenció, drets, atestat, habeas corpus',
+  description: 'denúncia, detenció, drets, atestat, habeas corpus',
   icon: '🧑‍⚖️',
   accent: 'from-stone-500 to-stone-800',
   questions: [

@@ -6,7 +6,7 @@ import type { TestTopic } from './types';
 const lrbrl: TestTopic = {
   slug: 'lrbrl-7-1985',
   title: 'Llei 7/1985 Bases Règim Local',
-  description: '50 preguntes (nivell alt) · municipi, províncies, organs, competencies, serveis mínims',
+  description: 'municipi, províncies, organs, competencies, serveis mínims',
   icon: '🏛️',
   accent: 'from-orange-500 to-amber-700',
   questions: [
