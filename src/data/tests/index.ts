@@ -16,6 +16,7 @@ import lecrim from './lecrim';
 import armamentPl from './armament-pl';
 import lopvvd from './lopvvd-27-2003';
 import lorpm from './lorpm-5-2000';
+import lepar from './lepar-11-2009';
 import cultura from './cultura-general';
 
 export const TOPICS: TestTopic[] = [
@@ -33,6 +34,7 @@ export const TOPICS: TestTopic[] = [
   armamentPl,
   lopvvd,
   lorpm,
+  lepar,
   cultura,
 ];
 
