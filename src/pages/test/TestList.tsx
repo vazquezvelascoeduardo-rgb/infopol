@@ -1,6 +1,6 @@
 // Llistat dels temes de test disponibles + dashboard global de stats.
 import { Link } from 'react-router-dom';
-import { TOPICS } from '../../data/tests';
+import { getTopicsByCategory } from '../../data/tests';
 import {
   getTopicStats, globalAverage, levelFromBest, useGlobalStats, type Level,
 } from '../../lib/testStats';
@@ -50,14 +50,16 @@ export default function TestList() {
       {/* Dashboard d'estats globals */}
       <Dashboard />
 
-      <ul className="space-y-3">
-        {TOPICS.map((topic) => (
+      {/* TEMARI OFICIAL */}
+      <SectionTitle icon="📚" label={t('test.list.section.temari')} />
+      <ul className="space-y-3 mb-6">
+        {getTopicsByCategory('temari').map((topic) => (
           <TopicCard key={topic.slug} slug={topic.slug} icon={topic.icon}
             accent={topic.accent} title={topic.title}
             description={topic.description} />
         ))}
 
-        {/* Mode 'tots els temes' */}
+        {/* Mode 'tots els temes' (només del temari) */}
         <li>
           <Link
             to="/test/tot"
@@ -85,6 +87,38 @@ export default function TestList() {
           </Link>
         </li>
       </ul>
+
+      {/* CULTURA GENERAL — separat visualment */}
+      {getTopicsByCategory('cultura').length > 0 && (
+        <>
+          <SectionTitle icon="🌍" label={t('test.list.section.cultura')} variant="cultura" />
+          <ul className="space-y-3">
+            {getTopicsByCategory('cultura').map((topic) => (
+              <TopicCard key={topic.slug} slug={topic.slug} icon={topic.icon}
+                accent={topic.accent} title={topic.title}
+                description={topic.description} />
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  );
+}
+
+function SectionTitle({
+  icon, label, variant = 'temari',
+}: { icon: string; label: string; variant?: 'temari' | 'cultura' }) {
+  const cls = variant === 'cultura'
+    ? 'from-slate-400 to-slate-600 dark:from-slate-300 dark:to-slate-500'
+    : 'from-amber-400 to-amber-600 dark:from-amber-300 dark:to-amber-500';
+  return (
+    <div className="flex items-center gap-3 my-3">
+      <span className={`h-5 w-1.5 rounded-full bg-gradient-to-b ${cls}`} />
+      <h2 className="text-xs font-black uppercase tracking-[0.25em] text-slate-700 dark:text-slate-300 inline-flex items-center gap-2">
+        <span aria-hidden>{icon}</span>
+        {label}
+      </h2>
+      <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
     </div>
   );
 }

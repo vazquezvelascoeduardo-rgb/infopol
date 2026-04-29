@@ -16,6 +16,7 @@ import lecrim from './lecrim';
 import armamentPl from './armament-pl';
 import lopvvd from './lopvvd-27-2003';
 import lorpm from './lorpm-5-2000';
+import cultura from './cultura-general';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -32,6 +33,7 @@ export const TOPICS: TestTopic[] = [
   armamentPl,
   lopvvd,
   lorpm,
+  cultura,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
@@ -39,15 +41,23 @@ export function getTopic(slug: string): TestTopic | undefined {
 }
 
 // Pool de TOTES les preguntes etiquetades amb el slug del tema d'origen.
-// Util per al mode 'test de tots els temes'.
+// Util per al mode 'test de tots els temes'. NOMÉS inclou els temes
+// de category 'temari' (per defecte); els de category 'cultura' s'exclouen
+// del pool combinat — tenen el seu propi mode.
 export type TaggedQuestion = TestTopic['questions'][number] & { topicSlug: string };
 
 export function getAllQuestions(): TaggedQuestion[] {
   const out: TaggedQuestion[] = [];
   for (const t of TOPICS) {
+    if (t.category && t.category !== 'temari') continue;
     for (const q of t.questions) {
       out.push({ ...q, topicSlug: t.slug });
     }
   }
   return out;
+}
+
+/** Filtre per categoria. */
+export function getTopicsByCategory(category: 'temari' | 'cultura'): TestTopic[] {
+  return TOPICS.filter((t) => (t.category ?? 'temari') === category);
 }

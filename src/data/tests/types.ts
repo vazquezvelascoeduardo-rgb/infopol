@@ -33,4 +33,10 @@ export type TestTopic = {
   accent: string;
   /** Llista de preguntes. */
   questions: TestQuestion[];
+  /**
+   * Categoria del tema. 'temari' (default): forma part del temari oficial.
+   * 'cultura': cultura general (es separa visualment i no entra al pool
+   * combinat 'Tots els temes').
+   */
+  category?: 'temari' | 'cultura';
 };
