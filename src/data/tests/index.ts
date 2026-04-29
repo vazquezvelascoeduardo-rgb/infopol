@@ -21,6 +21,7 @@ import lpac from './lpac-39-40-2015';
 import cultura from './cultura-general';
 import terrassa from './terrassa';
 import manresa from './manresa';
+import elprat from './elprat';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -42,6 +43,7 @@ export const TOPICS: TestTopic[] = [
   cultura,
   terrassa,
   manresa,
+  elprat,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
