@@ -207,45 +207,6 @@ export default function Home() {
         </li>
       </ul>
 
-      {/* TESTS — entrada destacada (full width, badge NOU) */}
-      <Link
-        to="/test"
-        className="group relative mt-4 block overflow-hidden rounded-2xl border p-5 sm:p-6 shadow-sm transition
-          hover:-translate-y-0.5 hover:shadow-md
-          border-blue-200/70 bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-cyan-50/50
-          hover:border-blue-400/60
-          dark:border-white/10 dark:bg-gradient-to-r dark:from-[#0e2244] dark:via-[#0f1d34] dark:to-[#0e2a3e] dark:hover:border-blue-400/40"
-      >
-        <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-600" />
-        <div aria-hidden className="absolute -top-12 -right-12 h-44 w-44 rounded-full bg-blue-200/30 blur-3xl dark:hidden" />
-        <span className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-2 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow">
-          {t('home.tests.badgeNew')}
-        </span>
-        <div className="relative flex items-center gap-4">
-          <span
-            aria-hidden
-            className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-600 to-cyan-700 text-3xl text-white shadow-inner"
-          >
-            📝
-          </span>
-          <div className="min-w-0 flex-1 pr-12 sm:pr-0">
-            <div className="text-[10px] uppercase tracking-[0.25em] text-blue-700 dark:text-blue-400/90 font-semibold">
-              {t('home.tests.badge')}
-            </div>
-            <h2 className="mt-1 text-xl sm:text-2xl font-black tracking-tight">
-              {t('home.tests.title')}
-            </h2>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
-              {t('home.tests.desc')}
-            </p>
-          </div>
-          <span className="hidden sm:inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-blue-700 dark:text-blue-400">
-            {t('home.tests.cta')}
-            <span className="ml-1 transition group-hover:translate-x-1" aria-hidden>→</span>
-          </span>
-        </div>
-      </Link>
-
       {/* SUPERBUSCADOR — accés directe destacat (full width) */}
       <Link
         to="/superbuscador"
@@ -383,6 +344,45 @@ export default function Home() {
           </div>
         </Link>
       </div>
+
+      {/* TESTS — entrada destacada (full width, badge NOU) */}
+      <Link
+        to="/test"
+        className="group relative mt-4 block overflow-hidden rounded-2xl border p-5 sm:p-6 shadow-sm transition
+          hover:-translate-y-0.5 hover:shadow-md
+          border-blue-200/70 bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-cyan-50/50
+          hover:border-blue-400/60
+          dark:border-white/10 dark:bg-gradient-to-r dark:from-[#0e2244] dark:via-[#0f1d34] dark:to-[#0e2a3e] dark:hover:border-blue-400/40"
+      >
+        <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-600" />
+        <div aria-hidden className="absolute -top-12 -right-12 h-44 w-44 rounded-full bg-blue-200/30 blur-3xl dark:hidden" />
+        <span className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-2 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow">
+          {t('home.tests.badgeNew')}
+        </span>
+        <div className="relative flex items-center gap-4">
+          <span
+            aria-hidden
+            className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-600 to-cyan-700 text-3xl text-white shadow-inner"
+          >
+            📝
+          </span>
+          <div className="min-w-0 flex-1 pr-12 sm:pr-0">
+            <div className="text-[10px] uppercase tracking-[0.25em] text-blue-700 dark:text-blue-400/90 font-semibold">
+              {t('home.tests.badge')}
+            </div>
+            <h2 className="mt-1 text-xl sm:text-2xl font-black tracking-tight">
+              {t('home.tests.title')}
+            </h2>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
+              {t('home.tests.desc')}
+            </p>
+          </div>
+          <span className="hidden sm:inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-blue-700 dark:text-blue-400">
+            {t('home.tests.cta')}
+            <span className="ml-1 transition group-hover:translate-x-1" aria-hidden>→</span>
+          </span>
+        </div>
+      </Link>
 
       <div className="mt-5">
         <NewsBlock />

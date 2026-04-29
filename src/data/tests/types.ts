@@ -36,7 +36,13 @@ export type TestTopic = {
   /**
    * Categoria del tema. 'temari' (default): forma part del temari oficial.
    * 'cultura': cultura general (es separa visualment i no entra al pool
-   * combinat 'Tots els temes').
+   * combinat 'Tots els temes'). 'municipi': test específic d'un municipi
+   * (es separa visualment i tampoc entra al pool combinat).
    */
-  category?: 'temari' | 'cultura';
+  category?: 'temari' | 'cultura' | 'municipi';
+  /**
+   * Si category='municipi', nom del municipi al qual pertany (ex. 'Terrassa').
+   * Permet agrupar diversos tests sota un mateix municipi.
+   */
+  municipi?: string;
 };

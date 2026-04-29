@@ -1,6 +1,6 @@
 // Llistat dels temes de test disponibles + dashboard global de stats.
 import { Link } from 'react-router-dom';
-import { getTopicsByCategory } from '../../data/tests';
+import { getTopicsByCategory, getMunicipiGroups } from '../../data/tests';
 import {
   getTopicStats, globalAverage, levelFromBest, useGlobalStats, type Level,
 } from '../../lib/testStats';
@@ -103,15 +103,38 @@ export default function TestList() {
           </ul>
         </>
       )}
+
+      {/* MUNICIPI — agrupats per ciutat */}
+      {getMunicipiGroups().length > 0 && (
+        <div className="mt-6">
+          <SectionTitle icon="🏛️" label={t('test.list.section.municipi')} variant="municipi" />
+          {getMunicipiGroups().map(({ municipi, topics }) => (
+            <div key={municipi} className="mb-4">
+              <div className="px-1 mb-2 text-[11px] uppercase tracking-[0.2em] font-bold text-red-700 dark:text-red-300">
+                {municipi}
+              </div>
+              <ul className="space-y-3">
+                {topics.map((topic) => (
+                  <TopicCard key={topic.slug} slug={topic.slug} icon={topic.icon}
+                    accent={topic.accent} title={topic.title}
+                    description={topic.description} />
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
 function SectionTitle({
   icon, label, variant = 'temari',
-}: { icon: string; label: string; variant?: 'temari' | 'cultura' }) {
+}: { icon: string; label: string; variant?: 'temari' | 'cultura' | 'municipi' }) {
   const cls = variant === 'cultura'
     ? 'from-slate-400 to-slate-600 dark:from-slate-300 dark:to-slate-500'
+    : variant === 'municipi'
+    ? 'from-red-500 to-amber-600 dark:from-red-400 dark:to-amber-500'
     : 'from-amber-400 to-amber-600 dark:from-amber-300 dark:to-amber-500';
   return (
     <div className="flex items-center gap-3 my-3">

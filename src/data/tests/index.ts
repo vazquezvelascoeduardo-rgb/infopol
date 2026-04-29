@@ -19,6 +19,7 @@ import lorpm from './lorpm-5-2000';
 import lepar from './lepar-11-2009';
 import lpac from './lpac-39-40-2015';
 import cultura from './cultura-general';
+import terrassa from './terrassa';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -38,6 +39,7 @@ export const TOPICS: TestTopic[] = [
   lepar,
   lpac,
   cultura,
+  terrassa,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
@@ -62,6 +64,20 @@ export function getAllQuestions(): TaggedQuestion[] {
 }
 
 /** Filtre per categoria. */
-export function getTopicsByCategory(category: 'temari' | 'cultura'): TestTopic[] {
+export function getTopicsByCategory(
+  category: 'temari' | 'cultura' | 'municipi',
+): TestTopic[] {
   return TOPICS.filter((t) => (t.category ?? 'temari') === category);
+}
+
+/** Agrupa els temes 'municipi' pel camp `municipi` (ex. Terrassa → [...]). */
+export function getMunicipiGroups(): { municipi: string; topics: TestTopic[] }[] {
+  const groups = new Map<string, TestTopic[]>();
+  for (const t of TOPICS) {
+    if (t.category !== 'municipi') continue;
+    const key = t.municipi ?? t.title;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key)!.push(t);
+  }
+  return Array.from(groups, ([municipi, topics]) => ({ municipi, topics }));
 }
