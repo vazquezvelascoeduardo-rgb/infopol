@@ -108,6 +108,14 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
           {/* Inici */}
           <SimpleLink to="/" icon="🏠" label={t('sidebar.home')} />
 
+          {/* Tests — entrada destacada */}
+          <FeatureLink
+            to="/test"
+            icon="📝"
+            label={t('sidebar.tests')}
+            badge={t('sidebar.tests.badge')}
+          />
+
           {/* Superbuscador */}
           <SimpleLink
             to="/superbuscador"
@@ -316,6 +324,31 @@ function SimpleLink({
     >
       <span aria-hidden className="text-lg">{icon}</span>
       <span className="font-medium">{label}</span>
+    </Link>
+  );
+}
+
+function FeatureLink({
+  to, icon, label, badge,
+}: { to: string; icon: string; label: string; badge?: string }) {
+  return (
+    <Link
+      to={to}
+      className="relative flex items-center gap-3 rounded-lg px-3 py-2.5 transition
+        bg-gradient-to-r from-blue-50 via-indigo-50/60 to-purple-50/60
+        ring-1 ring-blue-200/70
+        hover:from-blue-100 hover:to-purple-100 hover:ring-blue-300
+        dark:from-blue-500/15 dark:via-indigo-500/10 dark:to-purple-500/15
+        dark:ring-blue-400/20 dark:hover:ring-blue-400/40"
+    >
+      <span aria-hidden className="text-lg">{icon}</span>
+      <span className="font-bold text-blue-800 dark:text-blue-200 flex-1">{label}</span>
+      {badge && (
+        <span className="rounded-full bg-gradient-to-r from-blue-600 to-indigo-600
+          px-2 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow">
+          {badge}
+        </span>
+      )}
     </Link>
   );
 }

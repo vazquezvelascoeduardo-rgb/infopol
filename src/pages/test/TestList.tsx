@@ -50,6 +50,36 @@ export default function TestList() {
       {/* Dashboard d'estats globals */}
       <Dashboard />
 
+      {/* HERO: 'tots els temes' barrejats — acció destacada */}
+      <Link
+        to="/test/tot"
+        className="group relative block overflow-hidden rounded-2xl border p-5 sm:p-6 mb-6 transition
+          border-purple-300/70 bg-gradient-to-br from-purple-50 via-white to-fuchsia-50
+          hover:border-purple-400 hover:shadow-lg
+          dark:border-purple-400/30 dark:bg-gradient-to-br dark:from-[#1a0f2e] dark:via-[#150a26] dark:to-[#0a1628]
+          dark:hover:border-purple-400/60"
+      >
+        <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-purple-500 to-fuchsia-600" />
+        <div className="flex items-center gap-4">
+          <span aria-hidden className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-fuchsia-700 text-3xl text-white shadow-inner">
+            🎲
+          </span>
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] uppercase tracking-[0.25em] font-bold text-purple-700 dark:text-purple-300">
+              {t('test.list.allMixedBadge')}
+            </div>
+            <div className="font-bold text-lg sm:text-xl mt-0.5">{t('test.list.allMixed')}</div>
+            <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5">
+              {t('test.list.allMixedDescShort')}
+            </div>
+          </div>
+          <span className="shrink-0 text-purple-700 dark:text-purple-300 text-sm font-semibold inline-flex items-center gap-1">
+            <span className="hidden sm:inline">{t('test.start')}</span>
+            <span aria-hidden className="transition group-hover:translate-x-1">→</span>
+          </span>
+        </div>
+      </Link>
+
       {/* TEMARI OFICIAL */}
       <SectionTitle icon="📚" label={t('test.list.section.temari')} />
       <ul className="space-y-3 mb-6">
@@ -58,34 +88,6 @@ export default function TestList() {
             accent={topic.accent} title={topic.title}
             description={topic.description} />
         ))}
-
-        {/* Mode 'tots els temes' (només del temari) */}
-        <li>
-          <Link
-            to="/test/tot"
-            className="group block rounded-2xl border p-5 transition
-              border-purple-200/70 bg-gradient-to-br from-purple-50/60 via-white to-fuchsia-50/40
-              hover:border-purple-400/60 hover:shadow-md
-              dark:border-white/10 dark:bg-gradient-to-br dark:from-[#1a0f2e] dark:to-[#0a1628]
-              dark:hover:border-purple-400/40"
-          >
-            <div className="flex items-center gap-4">
-              <span aria-hidden className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-fuchsia-700 text-2xl text-white shadow-inner">
-                🎲
-              </span>
-              <div className="min-w-0 flex-1">
-                <div className="font-bold text-base">{t('test.list.allMixed')}</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                  {t('test.list.allMixedDescShort')}
-                </div>
-              </div>
-              <span className="shrink-0 text-purple-700 dark:text-purple-400 text-sm font-semibold inline-flex items-center gap-1">
-                <span className="hidden sm:inline">{t('test.start')}</span>
-                <span aria-hidden className="transition group-hover:translate-x-1">→</span>
-              </span>
-            </div>
-          </Link>
-        </li>
       </ul>
 
       {/* CULTURA GENERAL — separat visualment */}

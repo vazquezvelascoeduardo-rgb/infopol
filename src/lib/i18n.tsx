@@ -43,6 +43,7 @@ const DICT: Record<Locale, Dict> = {
     'test.list.allMixed': 'Todos los temas (mezclado)',
     'test.list.allMixedDesc': 'Mezcla aleatoria de las {n} preguntas disponibles.',
     'test.list.allMixedDescShort': 'Mezcla aleatoria de todos los temas.',
+    'test.list.allMixedBadge': 'Modo destacado',
     'test.list.section.temari': 'Temario oficial',
     'test.list.section.cultura': 'Cultura general',
     'test.list.remaining': 'restantes',
@@ -178,6 +179,12 @@ const DICT: Record<Locale, Dict> = {
     'home.superbuscador.desc':
       'Busca por concepto, artículo, multa o puntos en LSV, RGC, RGCond, RGV, Aseguranza y CP. Resultados con cuantía y DTE.',
     'home.superbuscador.cta': 'Buscar multa',
+    'home.tests.badge': 'Estudio · oposiciones',
+    'home.tests.badgeNew': 'Nuevo',
+    'home.tests.title': 'Tests de oposición',
+    'home.tests.desc':
+      'Pon a prueba tus conocimientos del temario oficial. 17 temas, modo simulacro o interactivo, niveles y logros.',
+    'home.tests.cta': 'Empezar test',
     'home.recursos.badge': 'Atajos',
     'home.recursos.title': 'Recursos rápidos',
     'home.recursos.desc':
@@ -397,6 +404,8 @@ const DICT: Record<Locale, Dict> = {
     'sidebar.open': 'Abrir menú',
     'sidebar.close': 'Cerrar menú',
     'sidebar.home': 'Inicio',
+    'sidebar.tests': 'Tests',
+    'sidebar.tests.badge': 'Nuevo',
     'sidebar.superbuscador': 'Superbuscador tráfico',
     'sidebar.leyes': 'Leyes',
     'sidebar.leyes.all': 'Todas las leyes',
@@ -548,6 +557,7 @@ const DICT: Record<Locale, Dict> = {
     'test.list.allMixed': 'Tots els temes (mesclat)',
     'test.list.allMixedDesc': "Mescla aleatòria de les {n} preguntes disponibles.",
     'test.list.allMixedDescShort': "Mescla aleatòria de tots els temes.",
+    'test.list.allMixedBadge': 'Mode destacat',
     'test.list.section.temari': 'Temari oficial',
     'test.list.section.cultura': 'Cultura general',
     'test.list.remaining': 'restants',
@@ -683,6 +693,12 @@ const DICT: Record<Locale, Dict> = {
     'home.superbuscador.desc':
       "Busca per concepte, article, multa o punts a LSV, RGC, RGCond, RGV, Assegurança i CP. Resultats amb quantia i DTE.",
     'home.superbuscador.cta': 'Buscar multa',
+    'home.tests.badge': 'Estudi · oposicions',
+    'home.tests.badgeNew': 'Nou',
+    'home.tests.title': "Tests d'oposició",
+    'home.tests.desc':
+      'Posa a prova els teus coneixements del temari oficial. 17 temes, mode simulacre o interactiu, nivells i assoliments.',
+    'home.tests.cta': 'Començar test',
     'home.recursos.badge': 'Dreceres',
     'home.recursos.title': 'Recursos ràpids',
     'home.recursos.desc':
@@ -902,6 +918,8 @@ const DICT: Record<Locale, Dict> = {
     'sidebar.open': 'Obre el menú',
     'sidebar.close': 'Tanca el menú',
     'sidebar.home': 'Inici',
+    'sidebar.tests': 'Tests',
+    'sidebar.tests.badge': 'Nou',
     'sidebar.superbuscador': 'Superbuscador trànsit',
     'sidebar.leyes': 'Lleis',
     'sidebar.leyes.all': 'Totes les lleis',
