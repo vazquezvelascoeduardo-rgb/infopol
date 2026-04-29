@@ -1,0 +1,255 @@
+// Test Procediment Administratiu — Lleis 39/2015 (LPAC) i 40/2015
+// (LRJSP), d'1 d'octubre.
+// 20 preguntes nivell alt: terminis, silenci, recursos (alcada/reposicio),
+// notificacions, capacitat d'obrar, abstencio, principis.
+import type { TestTopic } from './types';
+
+const lpac: TestTopic = {
+  slug: 'lpac-39-40-2015',
+  title: 'Procediment Administratiu (Lleis 39/2015 i 40/2015)',
+  description: '20 preguntes (nivell alt) · terminis, silenci, recursos, notificacions',
+  icon: '📋',
+  accent: 'from-sky-500 to-blue-700',
+  questions: [
+    {
+      id: 'lpac-1',
+      text: 'El procediment administratiu comú es regula a:',
+      options: [
+        "La Llei 39/2015, d'1 d'octubre, del procediment administratiu comú.",
+        "La Llei 40/2015, d'1 d'octubre, del règim jurídic del sector públic.",
+        'La Llei 30/1992, de 26 de novembre, del règim jurídic comú.',
+        'La Llei 7/1985, de 2 d\'abril, reguladora de les bases del règim local.',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'lpac-2',
+      text: 'El règim jurídic del sector públic es regula a:',
+      options: [
+        "La Llei 39/2015, d'1 d'octubre, del procediment administratiu comú.",
+        'La Llei 7/1985, de 2 d\'abril, reguladora de les bases del règim local.',
+        "La Llei 40/2015, d'1 d'octubre, del règim jurídic del sector públic.",
+        'La Llei 19/2014, del 29 de desembre, de transparència autonòmica.',
+      ],
+      correct: 2,
+    },
+    {
+      id: 'lpac-3',
+      text: "Quan els terminis s'expressen en dies, segons la Llei 39/2015, s'entenen:",
+      options: [
+        "Dies naturals, en tot cas i sense excepció ni distinció possible.",
+        "Dies laborables, segons el calendari de l'administració actuant.",
+        "Dies hàbils, llevat que per llei o normativa europea es digui naturals.",
+        "Dies de servei, segons l'horari de l'administració actuant en cada cas.",
+      ],
+      correct: 2,
+      reference: 'Art. 30 LPAC',
+    },
+    {
+      id: 'lpac-4',
+      text: 'Quins dies són inhàbils, segons la Llei 39/2015?',
+      options: [
+        "Únicament els diumenges i les festes oficials nacionals.",
+        "Únicament els festius oficials del municipi corresponent al cas.",
+        "Únicament els dies de tancament de l'administració actuant.",
+        'Els dissabtes, els diumenges i els festius oficials.',
+      ],
+      correct: 3,
+      reference: 'Art. 30.2 LPAC',
+    },
+    {
+      id: 'lpac-5',
+      text: "El termini màxim per a la resolució i notificació, si la norma reguladora no fixa un altre, és de:",
+      options: [
+        '1 mes, com a termini general supletori per defecte.',
+        '3 mesos, com a termini general supletori per defecte.',
+        '6 mesos, com a termini general supletori per defecte.',
+        '12 mesos, com a termini general supletori per defecte.',
+      ],
+      correct: 1,
+      reference: 'Art. 21.3 LPAC',
+    },
+    {
+      id: 'lpac-6',
+      text: "El silenci administratiu en procediments iniciats a sol·licitud de l'interessat és, com a regla general:",
+      options: [
+        'Negatiu, en tot cas i sense excepció ni distinció possible.',
+        'Positiu, llevat de les excepcions previstes per la llei.',
+        "Inexistent, ja que sempre cal una resolució expressa de l'òrgan.",
+        "Indeterminat, segons la valoració de l'administració actuant.",
+      ],
+      correct: 1,
+      reference: 'Art. 24 LPAC',
+    },
+    {
+      id: 'lpac-7',
+      text: "El silenci administratiu en el recurs d'alçada és:",
+      options: [
+        'Positiu, segons la regla general del procediment administratiu comú.',
+        "Inexistent, ja que sempre cal una resolució expressa de l'òrgan.",
+        "Indeterminat, segons la valoració de l'administració actuant.",
+        'Negatiu, com a regla general per als recursos administratius.',
+      ],
+      correct: 3,
+      reference: 'Art. 122 LPAC',
+    },
+    {
+      id: 'lpac-8',
+      text: "El termini per interposar el recurs d'alçada davant un acte exprés és de:",
+      options: [
+        "1 mes, comptat des de la notificació de l'acte exprés.",
+        "15 dies, comptats des de la notificació de l'acte exprés.",
+        "3 mesos, comptats des de la notificació de l'acte exprés.",
+        "2 mesos, comptats des de la notificació de l'acte exprés.",
+      ],
+      correct: 0,
+      reference: 'Art. 122.1 LPAC',
+    },
+    {
+      id: 'lpac-9',
+      text: "El termini per interposar el recurs d'alçada davant un acte presumpte és de:",
+      options: [
+        '1 mes des del moment del silenci administratiu produït.',
+        '3 mesos des del moment del silenci administratiu produït.',
+        '6 mesos des del moment del silenci administratiu produït.',
+        '15 dies des del moment del silenci administratiu produït.',
+      ],
+      correct: 1,
+      reference: 'Art. 122.1 LPAC',
+    },
+    {
+      id: 'lpac-10',
+      text: "El termini per resoldre el recurs d'alçada és de:",
+      options: [
+        '1 mes, transcorregut el qual el silenci és negatiu.',
+        '6 mesos, transcorregut el qual el silenci és negatiu.',
+        '3 mesos, transcorregut el qual el silenci és negatiu.',
+        '2 mesos, transcorregut el qual el silenci és negatiu.',
+      ],
+      correct: 2,
+      reference: 'Art. 122.2 LPAC',
+    },
+    {
+      id: 'lpac-11',
+      text: "El termini per interposar el recurs de reposició davant un acte exprés és de:",
+      options: [
+        "3 mesos, comptats des de la notificació de l'acte exprés.",
+        "1 mes, comptat des de la notificació de l'acte exprés.",
+        "15 dies, comptats des de la notificació de l'acte exprés.",
+        "2 mesos, comptats des de la notificació de l'acte exprés.",
+      ],
+      correct: 1,
+      reference: 'Art. 124 LPAC',
+    },
+    {
+      id: 'lpac-12',
+      text: 'El termini per resoldre el recurs de reposició és de:',
+      options: [
+        '3 mesos, transcorregut el qual el silenci és negatiu.',
+        '6 mesos, transcorregut el qual el silenci és negatiu.',
+        '2 mesos, transcorregut el qual el silenci és negatiu.',
+        '1 mes, transcorregut el qual el silenci és negatiu.',
+      ],
+      correct: 3,
+      reference: 'Art. 124.2 LPAC',
+    },
+    {
+      id: 'lpac-13',
+      text: "Estan obligats a relacionar-se electrònicament amb l'administració:",
+      options: [
+        'Les persones jurídiques i altres entitats sense personalitat jurídica.',
+        "Únicament les persones físiques amb formació tècnica acreditada.",
+        "Únicament les persones que voluntàriament ho sol·licitin a l'administració.",
+        "Únicament els funcionaris públics en exercici del càrrec institucional.",
+      ],
+      correct: 0,
+      reference: 'Art. 14 LPAC',
+    },
+    {
+      id: 'lpac-14',
+      text: "La notificació d'un acte administratiu s'ha de practicar dins del termini de:",
+      options: [
+        "10 dies des de la data en què s'ha dictat l'acte administratiu.",
+        "15 dies des de la data en què s'ha dictat l'acte administratiu.",
+        "20 dies des de la data en què s'ha dictat l'acte administratiu.",
+        "5 dies des de la data en què s'ha dictat l'acte administratiu.",
+      ],
+      correct: 0,
+      reference: 'Art. 40 LPAC',
+    },
+    {
+      id: 'lpac-15',
+      text: "Si l'interessat rebutja la notificació, segons la Llei 39/2015:",
+      options: [
+        "S'arxiva el procediment immediatament i sense més tràmit posterior.",
+        "Es deixa sense efecte la notificació, fins a un nou intent de tràmit.",
+        "Es té per efectuada i es continua el procediment administratiu del cas.",
+        "Es practica obligatòriament en presència del Ministeri Fiscal de torn.",
+      ],
+      correct: 2,
+      reference: 'Art. 41.5 LPAC',
+    },
+    {
+      id: 'lpac-16',
+      text: "La capacitat d'obrar davant l'Administració s'inicia, amb caràcter general:",
+      options: [
+        "Als 16 anys, com a edat de capacitat laboral i d'emancipació limitada.",
+        "Als 14 anys, com a edat de responsabilitat penal del menor.",
+        "Als 21 anys, com a edat de plena capacitat civil i social.",
+        "Als 18 anys, sense perjudici de les excepcions legals dels menors.",
+      ],
+      correct: 3,
+      reference: 'Art. 3 LPAC',
+    },
+    {
+      id: 'lpac-17',
+      text: "Constitueix una causa d'abstenció, segons la Llei 40/2015:",
+      options: [
+        "L'amistat íntima o l'enemistat manifesta amb un interessat del procediment.",
+        "La participació professional anterior al procediment iniciat sense vincle directe.",
+        "El simple coneixement personal d'un interessat del procediment iniciat.",
+        "La pertinença a un partit polític sense relació amb els fets enjudiciats.",
+      ],
+      correct: 0,
+      reference: 'Art. 23 LRJSP',
+    },
+    {
+      id: 'lpac-18',
+      text: 'El procediment administratiu sancionador, segons les Lleis 39/2015 i 40/2015, requereix:',
+      options: [
+        "L'aplicació immediata de la sanció sense més tràmit ni procediment previ.",
+        "Únicament una comunicació verbal a l'interessat sense més formalitats afegides.",
+        "Únicament un informe intern de l'autoritat administrativa actuant en el moment.",
+        "La separació entre l'instructor i l'òrgan que dicta la resolució.",
+      ],
+      correct: 3,
+      reference: 'Art. 63.1 LPAC / 25 LRJSP',
+    },
+    {
+      id: 'lpac-19',
+      text: 'Els actes administratius que posen fi a la via administrativa són recurribles davant:',
+      options: [
+        "Únicament la mateixa administració mitjançant el recurs d'alçada en tot cas.",
+        'La jurisdicció contenciosa administrativa o, potestativament, mitjançant reposició.',
+        'Únicament el Tribunal Constitucional mitjançant el recurs d\'empara directe.',
+        "Únicament el Defensor del Poble com a defensor dels drets dels ciutadans.",
+      ],
+      correct: 1,
+      reference: 'Art. 123-124 LPAC',
+    },
+    {
+      id: 'lpac-20',
+      text: "Els principis d'actuació de les administracions públiques, segons la Llei 40/2015, inclouen:",
+      options: [
+        "Únicament l'eficàcia i la jerarquia administrativa interna del cos actuant.",
+        "Únicament la transparència i la planificació estratègica anual del Govern.",
+        "Servei efectiu, eficàcia, eficiència, transparència, bona fe i confiança legítima.",
+        "Únicament la legalitat i la submissió plena als acords del Consell de Ministres.",
+      ],
+      correct: 2,
+      reference: 'Art. 3 LRJSP',
+    },
+  ],
+};
+
+export default lpac;
