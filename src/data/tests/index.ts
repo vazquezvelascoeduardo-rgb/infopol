@@ -23,6 +23,7 @@ import terrassa from './terrassa';
 import manresa from './manresa';
 import elprat from './elprat';
 import lhospitalet from './lhospitalet';
+import badalona from './badalona';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -46,6 +47,7 @@ export const TOPICS: TestTopic[] = [
   manresa,
   elprat,
   lhospitalet,
+  badalona,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
