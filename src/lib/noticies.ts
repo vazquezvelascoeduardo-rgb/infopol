@@ -1284,6 +1284,414 @@ També rellevant per a tràmits d'asil i protecció internacional: Espanya mant�
     source: 'Premsa internacional, març 2026',
     tags: ['internacional', 'Veneçuela', 'EUA', 'transició política'],
   },
+
+  // ─── FEBRER 2026 — LEGISLACIÓ ESTATAL ──────────────────────────────
+
+  {
+    slug: 'feb2026-rdl-2-2026-vulnerabilitat',
+    title: 'RDL 2/2026 — mesures urgents en vulnerabilitat social i finançament territorial (DEROGAT)',
+    summary: 'Ampliava la suspensió de desnonaments, prorrogava bo social i prohibia talls de subministraments. Derogat pel Congrés el 26 de febrer; gran part del contingut va tornar al RDL 7/2026 de març.',
+    body: `Reial Decret-llei aprovat per fer front a situacions de vulnerabilitat social, en matèria tributària i relativa als recursos dels sistemes de finançament territorial.
+
+## Què contemplava
+
+- **Actualització de les entregues a compte** a les CCAA per al 2026.
+- **Suspensió de desnonaments i llançaments** en supòsits de vulnerabilitat fins al 31 de desembre de 2026.
+- **Pròrroga del bo social elèctric i tèrmic**.
+- **Prohibició de tall de subministraments bàsics** a consumidors vulnerables.
+- **Deduccions fiscals** per obres d'eficiència energètica i vehicles elèctrics.
+
+## Derogació al Congrés
+
+> El **26 de febrer de 2026** el Congrés dels Diputats el va derogar (BOE-A-2026-4667). Una part important del contingut es va reintroduir posteriorment al **RDL 7/2026 de març** (Pla Integral de Resposta a la Crisi a Orient Mitjà; vegeu notícia separada de març).
+
+## Implicació operativa
+
+Durant el període de vigència (4 al 26 de febrer), les mesures eren plenament aplicables. Tot i la derogació posterior, els actes administratius dictats al seu empara mantenen la seva validesa.
+
+> Per a la PL: rellevant en intervencions per desnonaments durant aquell període. La cobertura del decret derogat continua aplicable als procediments iniciats abans del 26 de febrer.`,
+    publishedAt: '2026-02-04',
+    source: 'BOE núm. 31, de 4 de febrer de 2026. Ref. BOE-A-2026-2547. Derogació: BOE-A-2026-4667',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2026-2547',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png',
+    imageAlt: "Bandera d'Espanya — legislació estatal",
+    tags: ['legislació', 'vulnerabilitat', 'desnonaments', 'bo social', 'derogat'],
+    featured: true,
+  },
+
+  {
+    slug: 'feb2026-rdl-3-2026-revaloritzacio-pensions',
+    title: 'RDL 3/2026 — revalorització de pensions del 2,7% i altres mesures urgents',
+    summary: 'Pensions contributives +2,7% respecte 31/12/2025. Límit màxim 3.359,60 €/mes. Complement de bretxa de gènere a 36,90 €/mes. Pensions no contributives 8.803,20 €/any.',
+    body: `Per al 2026 les pensions contributives i les de classes passives es revaloritzen amb caràcter general en un **2,7%** respecte al seu import a 31 de desembre de 2025.
+
+## Xifres clau
+
+- **Límit màxim** de pensions públiques: **3.359,60 €/mes**.
+- **Complement de bretxa de gènere**: **36,90 €/mes**.
+- **Pensions no contributives** d'invalidesa i jubilació: **8.803,20 €/any**.
+
+## Bombers i agents forestals
+
+Estableix un **tipus de cotització addicional del 10,60%** per a bombers forestals i agents forestals com a contrapartida del reconeixement d'un coeficient reductor a la seva edat de jubilació.
+
+## Metges del SNS
+
+Prorroga fins al **31 de desembre de 2026** la mesura que permet a metges de família i pediatres del SNS **compatibilitzar el 75% de la seva pensió** de jubilació amb la continuïtat al servei actiu.
+
+## Per a opositors
+
+> Si estàs opositant a Mossos, Bombers de la Generalitat o Agents Rurals, recorda que aquests cossos també tenen coeficients reductors propis a la seva edat de jubilació, regulats per normativa específica.`,
+    publishedAt: '2026-02-04',
+    source: 'BOE núm. 31, de 4 de febrer de 2026. Ref. BOE-A-2026-2548',
+    sourceUrl: 'https://www.boe.es/boe/dias/2026/02/04/pdfs/BOE-S-2026-31.pdf',
+    tags: ['legislació', 'pensions', 'seguretat social', 'bombers forestals', 'SNS'],
+  },
+
+  {
+    slug: 'feb2026-conveni-oit-maternitat',
+    title: 'Espanya publica el Conveni OIT sobre protecció de la maternitat',
+    summary: 'Reconeix llicència de maternitat d\'almenys 14 setmanes i prohibeix l\'acomiadament d\'embarassades. Revisa el Conveni de 1952.',
+    body: `Espanya publica al BOE el **Conveni sobre la protecció de la maternitat de l'OIT**, que revisa el Conveni (revisat) de 1952.
+
+## Mesures principals
+
+- Reconeix a tota dona una **llicència de maternitat d'almenys 14 setmanes**.
+- Estableix que les **prestacions pecuniàries** han de garantir a la dona i al fill **condicions de salut adequades i nivell de vida adequat**.
+- **Prohibeix a l'empresari acomiadar** una dona embarassada.
+
+## Marc jurídic intern
+
+> A Espanya, la durada del permís de maternitat ja era de 16 setmanes (i el de paternitat també està equiparat des del 2021). El Conveni OIT estableix un mínim que la legislació espanyola supera.
+
+## Per a la PL
+
+A diligències per VG / VD on hi hagi una víctima embarassada o amb fills lactants, la coordinació amb els serveis socials i de salut ha d'incloure l'aplicació de protocols específics i recordar el dret a la prestació econòmica.`,
+    publishedAt: '2026-02-10',
+    source: 'BOE núm. 36, de 10 de febrer de 2026. Ref. BOE-A-2026-3010',
+    sourceUrl: 'https://www.boe.es/buscar/doc.php?id=BOE-A-2026-3010',
+    tags: ['legislació', 'OIT', 'maternitat', 'drets laborals'],
+  },
+
+  // ─── FEBRER 2026 — TRÀNSIT I DGT ───────────────────────────────────
+
+  {
+    slug: 'feb2026-activacio-33-radars',
+    title: 'Activació dels 33 nous radars (fase informativa) — 27 de febrer',
+    summary: '20 radars fixos i 13 de tramo en 11 CCAA. El primer mes envien carta sense sancionar; sancions efectives al final de març.',
+    body: `La DGT va posar en funcionament **33 nous punts de control de velocitat** a carreteres de **11 comunitats autònomes** el 27 de febrer de 2026: 20 radars fixos i 13 de tramo.
+
+## Pla 2025-2026
+
+Forma part del Pla d'instal·lació de **122 nous punts** de control per al període 2025-2026.
+
+## Calendari de l'activació
+
+- **27 de febrer** — Activació amb fase informativa: carta als conductors que excedeixen el límit, sense sanció.
+- **Final de març** — Inici del període sancionador efectiu.
+
+## Marc sancionador
+
+> Les multes per excés de velocitat poden anar de **100 a 600 €** i comportar la pèrdua de punts del carnet en funció de l'excés comès.
+
+## Continuïtat al març
+
+A l'abril, la totalitat dels 33 radars ja estan sancionant. Vegeu la notícia de març amb les ubicacions detallades.`,
+    publishedAt: '2026-02-27',
+    source: 'Direcció General de Trànsit',
+    sourceUrl: 'https://www.dgt.es/comunicacion/notas-de-prensa/20260227-Trafico-33-nuevos-radares-carreteras/',
+    tags: ['trànsit', 'DGT', 'radars', 'velocitat'],
+  },
+
+  {
+    slug: 'feb2026-balisa-v16-vigor',
+    title: 'Balisa V-16 connectada — obligatorietat plena consolidada al febrer',
+    summary: 'Únic mitjà legal per senyalitzar vehicles aturats. Substitueix definitivament els triangles. Sanció 80 €. AEPD confirma que les dades són anonimitzades.',
+    body: `Des de l'1 de gener de 2026 (i consolidada al febrer), la **balisa V-16 connectada** és l'**únic mitjà legal** per senyalitzar vehicles immobilitzats per avaria o accident, substituint definitivament els triangles d'emergència.
+
+## Sanció
+
+La infracció per **no portar la balisa V-16** és lleu: **80 €**.
+
+## Funcionament i privacitat
+
+El dispositiu emet una senyal mentre està encès i deixa de fer-ho en apagar-lo, **sense generar historial de moviments**. L'**AEPD** (Agència Espanyola de Protecció de Dades) ha confirmat:
+
+> La balisa **NO està associada a una persona o matrícula**. Les dades enviades a la DGT són **anonimitzades**.
+
+## Plataforma DGT 3.0
+
+A través de la plataforma DGT 3.0 es centralitza la informació en temps real per a:
+
+- Conductors (avisos via apps i navegadors).
+- Serveis d'emergència.
+- Gestors d'infraestructures.
+
+També integra dades del **Servei Català de Trànsit** i de la **Direcció de Trànsit del Govern Basc**.
+
+## Implicació per a la PL
+
+> A controls rutinaris, comprovar que el conductor porta la V-16 connectada (no l'antiga V-16 sense connectivitat IoT, que ja NO compleix la normativa). Si en mostra una de no connectada → infracció (80 €).`,
+    publishedAt: '2026-02-15',
+    source: 'DGT + AEPD',
+    sourceUrl: 'https://www.dgt.es/muevete-con-seguridad/tecnologia-e-innovacion-en-carretera/Dispositivos-de-presenalizacion-V16/',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Logotipo_DGT_Espa%C3%B1a.svg/1200px-Logotipo_DGT_Espa%C3%B1a.svg.png',
+    imageAlt: 'Logotip de la Direcció General de Trànsit',
+    tags: ['trànsit', 'DGT', 'V16', 'AEPD', 'DGT 3.0'],
+  },
+
+  // ─── FEBRER 2026 — CATALUNYA ───────────────────────────────────────
+
+  {
+    slug: 'feb2026-llei-1-2026-presons',
+    title: 'Llei 1/2026 — personal de centres penitenciaris reconegut com a agents de l\'autoritat',
+    summary: 'Equipara els funcionaris de presons al règim dels Mossos d\'Esquadra: condició d\'agent de l\'autoritat + obligació d\'indemnització de la Generalitat per lesions o danys en servei.',
+    body: `Modificació del text únic de la Llei de la funció pública de l'Administració de la Generalitat de Catalunya (DL 1/1997).
+
+## Què reconeix
+
+- **La condició d'agents de l'autoritat** al personal funcionari i al personal directiu que exerceixen funcions de **règim interior i de rehabilitació** als **centres penitenciaris catalans** i que depenen orgànicament del departament competent en execució penitenciària.
+
+## Equiparació amb altres cossos
+
+> Equipara aquest personal a altres servidors públics especialment exposats a l'exercici de les seves funcions, com el **Cos de Mossos d'Esquadra**.
+
+## Indemnitat
+
+Reconeix expressament l'**obligació de la Generalitat d'indemnitzar** les lesions personals i danys materials que el personal pugui patir en l'exercici de les seves funcions, **llevat de dol o negligència**, garantint el principi d'indemnitat.
+
+## Implicació operativa
+
+A intervencions a centres penitenciaris, la Mossos pot requerir suport del personal de presons amb la mateixa consideració jurídica que entre cossos policials. També rellevant per a:
+
+- Atestats per agressions a personal penitenciari (Art. 550 CP — atemptat a agent de l'autoritat).
+- Coordinació en gestió d'incidents (motins, fugues).`,
+    publishedAt: '2026-02-06',
+    source: 'DOGC núm. 9599, de 6 de febrer de 2026. BOE núm. 46, de 20 de febrer de 2026',
+    sourceUrl: 'https://noticias.juridicas.com/base_datos/CCAA/986751-l-1-2026-de-4-feb-ca-cataluna-modificacion-del-texto-unico-de-la-ley-de-la.html',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/1200px-Flag_of_Catalonia.svg.png',
+    imageAlt: 'Bandera de Catalunya — Generalitat',
+    tags: ['catalunya', 'execució penal', 'agents autoritat', 'funcionaris'],
+    featured: true,
+  },
+
+  {
+    slug: 'feb2026-erratas-llei-11-2025-habitatge',
+    title: 'Correcció d\'errates de la Llei 11/2025 sobre habitatge i urbanisme',
+    summary: 'Modifica diverses normes (Llei 3/2007 obra pública, Llei 13/1996 fiances, TRLU, Llei 18/2007, Decret-llei 1/2015, Llei 11/2022).',
+    body: `Correcció d'errates de la **Llei 11/2025**, de 29 de desembre, de mesures en matèria d'habitatge i urbanisme. Modifica diversa normativa:
+
+## Normes modificades
+
+- **Llei 3/2007** de l'obra pública.
+- **Llei 13/1996** del Registre i dipòsit de fiances dels contractes de lloguer.
+- **Text refós de la Llei d'urbanisme (DL 1/2010)**.
+- **Llei 18/2007** del dret a l'habitatge.
+- **Decret-llei 1/2015** de mobilització d'habitatges després de processos d'execució hipotecària.
+- **Llei 11/2022** de millorament urbà, ambiental i social dels barris.
+
+## Per què és rellevant
+
+Encara que es tracti formalment d'una correcció d'errates, els canvis poden afectar **procediments en curs** d'execució hipotecària, dipòsit de fiances o sancionadors urbanístics.
+
+## Implicació per a la PL
+
+> A intervencions per ocupacions, desnonaments o sancions urbanístiques municipals, comprovar la versió actualitzada de la norma. La PL no aplica directament aquesta legislació però sovint és primer interlocutor en incidents derivats.`,
+    publishedAt: '2026-02-19',
+    source: 'DOGC, 19 de febrer de 2026',
+    sourceUrl: 'https://noticias.juridicas.com/base_datos/CCAA/983141-l-11-2025-de-29-dic-ca-cataluna-medidas-en-materia-de-vivienda-y-urbanismo.html',
+    tags: ['catalunya', 'habitatge', 'urbanisme', 'fiances'],
+  },
+
+  {
+    slug: 'feb2026-mossos-radicalitzacio-2025',
+    title: 'Mossos detecten 204 casos de radicalització violenta el 2025',
+    summary: 'Comissaria General d\'Informació. 161 casos de radicalització violenta + 47 impactes educatius/socials. 62% jihadisme · 11% ultradreta · 6% altres.',
+    body: `La **Comissaria General d'Informació** dels Mossos d'Esquadra ha publicat el balanç de processos de radicalització detectats el 2025: **204 casos** en total.
+
+## Distribució global
+
+- **161 casos** de radicalització violenta.
+- **47 impactes** educatius o socials gestionats mitjançant els **protocols Prev**.
+
+## Distribució per tipologies
+
+- **62% jihadisme** — la majoria dels casos.
+- **11% ultradreta**.
+- **6% altres tipologies extremistes**.
+- Resta: pendent de catalogació.
+
+## Coordinació
+
+> Els Mossos van participar en **366 reunions** de coordinació interna i multiagència, incloent **policies locals i meses territorials**.
+
+## Operació online
+
+A l'àmbit digital, l'última operació conjunta mitjançant el **Protocol europeu de resposta davant crisis online**, coordinada per **Europol i Citco**, va retirar **més de 2.000 continguts** relacionats amb terrorisme i extremismes violents.
+
+## Implicació per a la PL
+
+A municipis amb meses territorials de radicalització:
+
+- Coordinació regular amb Mossos i amb serveis socials.
+- Detecció primerenca de canvis de comportament a entorns escolars o juvenils.
+- No "criminalitzar" perfils prematurament: el protocol Prev és preventiu, no punitiu.`,
+    publishedAt: '2026-02-15',
+    source: 'Mossos d\'Esquadra — Comissaria General d\'Informació',
+    sourceUrl: 'https://www.catalunyapress.es/articulo/sucesos-cataluna/2026-02-15/5772848-mossos-desquadra-detectan-204-casos-posible-radicalizacion-violenta-2025',
+    tags: ['catalunya', 'mossos', 'radicalització', 'antiterrorisme', 'protocol prev'],
+    featured: true,
+  },
+
+  // ─── FEBRER 2026 — SUCCESSOS DESTACATS ─────────────────────────────
+
+  {
+    slug: 'feb2026-pandilla-barrio-18',
+    title: 'Detinguts líders de la Pandilla Barrio 18 a Barcelona — operatiu CGI + FBI',
+    summary: '3 detinguts. Pretenien establir una nova "clica" a Barcelona ocupant l\'espai d\'una estructura desarticulada al 2023. Operació CGI + Brigada Provincial Informació + FBI.',
+    body: `Operatiu de la **Comissaria General d'Informació (CGI)** i la **Brigada Provincial d'Informació de Barcelona**, amb suport del **FBI estadounidenc**.
+
+## Resultats
+
+- **3 detinguts**.
+- Lideraven una nova **"cancha" o "clica" de la Mara Pandilla Barrio 18 ("Calle 18")** que pretenia establir-se a Barcelona, ocupant l'espai d'una estructura similar desarticulada el febrer de 2023 (**Operació Salvaguarda**).
+
+## Càrrecs
+
+- **Pertinença a organització criminal** (Art. 570 bis CP).
+- **Lesions** (Art. 147 CP).
+- **Amenaces** (Art. 169 CP).
+- **Tinença il·lícita d'armes de foc** (Art. 564 CP).
+
+## Modus operandi
+
+> Realitzaven labors de **proselitisme a Nou Barris i L'Hospitalet de Llobregat**. S'havien dirigit a ciutadans d'origen llatinoamericà amb amenaces i agressions.
+
+## Material intervingut
+
+- Una **arma de foc artesanal** apta per a ús (coneguda com a "chilena") amb munició de calibre 12.
+- **Simbologia de la banda**.
+
+## Implicació per a la PL
+
+A municipis amb població llatinoamericana significativa (Barcelona, L'Hospitalet, Badalona, Santa Coloma de Gramenet, Cornellà, Mataró), la PL ha de:
+
+- Coordinar amb Mossos i CNP davant qualsevol indici de proselitisme de bandes (símbols, grafits, conductes intimidants).
+- Recordar que la pertinença per simple membre és Art. 570 ter (penes inferiors al líder de l'Art. 570 bis).
+- Documentar amb fotografies tota simbologia per facilitar identificació posterior.`,
+    publishedAt: '2026-02-20',
+    source: 'Policia Nacional / Mossos d\'Esquadra',
+    sourceUrl: 'https://www.policia.es/_es/comunicacion_prensa_detalle.php?ID=16079',
+    tags: ['successos', 'CNP', 'mossos', 'FBI', 'bandes', 'pandilla barrio 18'],
+    featured: true,
+  },
+
+  // ─── FEBRER 2026 — INTERNACIONAL ───────────────────────────────────
+
+  {
+    slug: 'feb2026-inici-guerra-eua-israel-iran',
+    title: 'Inici de la guerra EUA + Israel contra Iran — 28 de febrer',
+    summary: 'Atacs sorpresa coordinats sobre ciutats iranianes durant negociacions a Ginebra. Resposta iraniana amb míssils sobre Israel i bases EUA al Golf. Cierre selectiu d\'Ormuz. Mort d\'Alí Khameneí.',
+    body: `Les aviacions d'**Estats Units i Israel** van llançar **per sorpresa** una sèrie de bombardeigs coordinats sobre diverses ciutats d'Iran el dissabte **28 de febrer de 2026**, mentre estaven en curs negociacions diplomàtiques a Ginebra. L'operació havia estat planificada durant mesos.
+
+## Resposta iraniana
+
+- Llançament de **míssils balístics i drons** contra Israel i bases militars estadounidenques a **Bahrain, Kuwait, Catar, Emirats Àrabs Units, Aràbia Saudita, Jordània i Iraq**.
+- **Cierre selectiu de l'estret d'Ormuz**, ruta crítica del comerç mundial de petroli i gas.
+
+## Conseqüències immediates
+
+- **Assassinat del líder suprem iranià Alí Khameneí** i d'alts comandaments militars.
+- Atacs contra civils iranians, especialment l'atac contra l'**escola primària Shajare Tayebé** i el **pavelló esportiu de Lamerd**.
+- Forta pujada del preu del petroli i gas natural a nivell global.
+- Caiguda generalitzada de les borses mundials i disrupció del trànsit aeri.
+
+## Resposta espanyola
+
+> Aquest conflicte és la causa directa del **Reial Decret-llei 7/2026 espanyol** aprovat el 20 de març (Pla Integral de Resposta a la Crisi a Orient Mitjà; vegeu notícia separada de març).
+
+## Antecedents
+
+La guerra és la continuació de la **"Guerra dels Dotze Dies" (juny de 2025)** i de les **protestes iranianes de 2025-2026**, en un context de sancions agreujades per l'Administració Trump i reactivació de sancions de l'ONU a petició de França, Alemanya i Regne Unit.
+
+## Implicació indirecta a Espanya
+
+Vigilància reforçada a llocs sensibles (sinagogues, mesquites, ambaixades). Diàspora iraniana, israeliana i àrab a Catalunya pot patir tensions internes.`,
+    publishedAt: '2026-02-28',
+    source: 'Premsa internacional, febrer 2026',
+    sourceUrl: 'https://es.wikipedia.org/wiki/Guerra_de_Estados_Unidos_e_Israel_contra_Ir%C3%A1n',
+    tags: ['internacional', 'EUA', 'Israel', 'Iran', 'orient mitjà', 'guerra'],
+    featured: true,
+  },
+
+  {
+    slug: 'feb2026-veneçuela-intervencio-eua',
+    title: 'Continuïtat de la intervenció dels EUA a Veneçuela',
+    summary: 'Després de la captura de Maduro el 3 de gener, el febrer es consolida la nova situació amb Delcy Rodríguez encarregada. ~70 morts. Trump: EUA "administrarà" Veneçuela.',
+    body: `Després de la captura de **Nicolás Maduro i la seva esposa el 3 de gener de 2026** mitjançant una operació militar estadounidenca amb bombardeigs a Caracas, Aragua i La Guaira, i el reconeixement formal del govern de **Delcy Rodríguez** per part dels EUA, durant el febrer es consolida la nova situació.
+
+## Xifres
+
+- La intervenció va causar **almenys 70 morts** segons fonts estadounidenques.
+- Inclosos **32 agents cubans** identificats pel govern de Cuba.
+
+## Mesures de l'administració Trump
+
+- Designa el **Tren de Aragua, Mara Salvatrucha i altres 6 grups** amb seu a Mèxic com a **organitzacions terroristes estrangeres**.
+- Restableix el reconeixement diplomàtic i consular amb el nou govern veneçolà (5 de març).
+- Anuncia que **EUA "administrarà" Veneçuela** a l'espera d'una transició de poder, que Trump declara podria durar anys.
+- Concedeix preferència a empreses estatunidenques en contractes petroliers i auríferes.
+
+## Reacció internacional
+
+> Experts en dret internacional qualifiquen l'operació de **contrària al dret internacional**, sense autorització del Consell de Seguretat de l'ONU ni del Congrés estadounidenc. El Ple del Consell de Drets Humans de l'ONU denuncia el bloqueig com a **"agressió armada il·legal"**.
+
+## Implicació indirecta a Espanya
+
+Espanya té una de les **diàspores veneçolanes més grans d'Europa** (especialment Madrid, Galícia, Canàries i Catalunya). Possibles concentracions als consolats i embaixada; vigilància reforçada per part de FCS.
+
+També rellevant per a tràmits d'asil i protecció internacional: Espanya manté línia de protecció subsidiària per a veneçolans amb perfil polític sensible.`,
+    publishedAt: '2026-02-15',
+    source: 'Premsa internacional, gener-febrer 2026',
+    sourceUrl: 'https://es.wikipedia.org/wiki/Ataque_estadounidense_a_Venezuela_de_2026',
+    tags: ['internacional', 'Veneçuela', 'EUA', 'intervenció militar', 'transició política'],
+  },
+
+  {
+    slug: 'feb2026-cartels-organitzacions-terroristes',
+    title: 'Designació de càrtels llatinoamericans com a organitzacions terroristes',
+    summary: 'Tren de Aragua, MS-13, CJNG i Cártel de los Soles entre els designats per Trump. Implicacions operatives per a cossos policials europeus en perseguir xarxes amb presència a Espanya.',
+    body: `Confirmació durant el febrer del procés iniciat per l'**Administració Trump** de designar diverses organitzacions criminals transnacionals com a **organitzacions terroristes estrangeres**.
+
+## Càrtels designats
+
+- **Tren de Aragua** (Veneçuela).
+- **Mara Salvatrucha (MS-13)** (centramericana, presència àmplia a EUA i Europa).
+- **Cártel Jalisco Nueva Generación (CJNG)** (Mèxic, presència a 100 països).
+- **Cártel de los Soles** (Veneçuela).
+
+## Implicacions operatives a Europa
+
+> Encara que la designació és estatunidenca, té impacte a Europa: més coordinació trinacional (DEA + Europol + cossos policials europeus), priorització en investigacions transnacionals i intercanvi reforçat d'informació.
+
+## Implicació per a Espanya
+
+Espanya té cèl·lules conegudes:
+
+- **Tren de Aragua** — costa mediterrània, Andalusia, Catalunya.
+- **MS-13** — Madrid, Barcelona, ciutats amb diàspora salvadorenca.
+- **CJNG** — costa llevant i andalusa.
+
+A municipis amb diàspora llatinoamericana significativa, la PL ha de:
+
+- Estar atenta a símbols, grafits, conductes intimidants.
+- Coordinar amb Mossos / CNP davant qualsevol indici de presència organitzada.
+- Recordar la connexió possible amb la notícia de Pandilla Barrio 18 al febrer (vegeu notícia separada).`,
+    publishedAt: '2026-02-22',
+    source: 'Premsa internacional, febrer 2026',
+    sourceUrl: 'https://es.wikipedia.org/wiki/Intervenci%C3%B3n_de_Estados_Unidos_en_Venezuela_de_2025-2026',
+    tags: ['internacional', 'EUA', 'càrtels', 'terrorisme', 'tren de aragua', 'MS-13', 'CJNG'],
+  },
 ];
 
 // ════════════════════════════════════════════════════════════════════
