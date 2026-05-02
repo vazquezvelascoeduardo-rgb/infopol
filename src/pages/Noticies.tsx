@@ -1,28 +1,18 @@
-// Llistat de notícies. Filtres per categoria + cerca textual.
+// Llistat de notícies agrupades per mes (any-mes desc).
 // Marca totes les notícies com a llegides quan l'usuari arriba a la
-// pàgina (per netejar el badge no-llegides).
+// pàgina (per netejar el badge de no-llegides).
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
 import {
-  NOTICIES, type Noticia, type NoticiaCategoria, markNoticiesSeen,
+  NOTICIES, type Noticia, groupByMonth, getMonthLabel, markNoticiesSeen,
 } from '../lib/noticies';
 
-const CATEGORIES: { id: NoticiaCategoria | 'all'; icon: string; tone: string }[] = [
-  { id: 'all',             icon: '📰', tone: 'from-slate-500 to-slate-700' },
-  { id: 'normativa',       icon: '📜', tone: 'from-amber-500 to-amber-700' },
-  { id: 'jurisprudencia',  icon: '⚖️', tone: 'from-purple-500 to-purple-700' },
-  { id: 'oposicions',      icon: '🎓', tone: 'from-blue-500 to-blue-700' },
-  { id: 'sector',          icon: '🛡️', tone: 'from-rose-500 to-rose-700' },
-  { id: 'app',             icon: '✨', tone: 'from-emerald-500 to-emerald-700' },
-];
-
 export default function Noticies() {
-  const { t } = useT();
-  const [activeCat, setActiveCat] = useState<NoticiaCategoria | 'all'>('all');
+  const { t, locale } = useT();
   const [query, setQuery] = useState('');
 
-  // Marca com a llegides quan l'usuari obre la llista (al cap d'1 segon
+  // Marca com a llegides quan l'usuari obre la llista (al cap d'1.5s
   // — així si entra de rebot no perd el badge).
   useEffect(() => {
     const id = setTimeout(() => markNoticiesSeen(), 1500);
@@ -30,22 +20,17 @@ export default function Noticies() {
   }, []);
 
   const filtered = useMemo(() => {
-    let list = NOTICIES;
-    if (activeCat !== 'all') list = list.filter((n) => n.category === activeCat);
-    if (query.trim()) {
-      const q = query.toLowerCase().trim();
-      list = list.filter((n) =>
-        n.title.toLowerCase().includes(q)
-        || n.summary.toLowerCase().includes(q)
-        || n.body.toLowerCase().includes(q)
-        || (n.tags ?? []).some((tg) => tg.toLowerCase().includes(q))
-      );
-    }
-    // Ordena per data desc (per si NOTICIES no estigués ordenat).
-    return [...list].sort((a, b) =>
-      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+    if (!query.trim()) return NOTICIES;
+    const q = query.toLowerCase().trim();
+    return NOTICIES.filter((n) =>
+      n.title.toLowerCase().includes(q)
+      || n.summary.toLowerCase().includes(q)
+      || n.body.toLowerCase().includes(q)
+      || (n.tags ?? []).some((tg) => tg.toLowerCase().includes(q))
     );
-  }, [activeCat, query]);
+  }, [query]);
+
+  const grouped = useMemo(() => groupByMonth(filtered), [filtered]);
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-6">
@@ -77,7 +62,7 @@ export default function Noticies() {
       </header>
 
       {/* Cerca */}
-      <div className="mb-3">
+      <div className="mb-5">
         <input
           type="search"
           value={query}
@@ -90,32 +75,8 @@ export default function Noticies() {
         />
       </div>
 
-      {/* Filtres per categoria */}
-      <div className="flex flex-wrap gap-1.5 mb-5">
-        {CATEGORIES.map((c) => (
-          <button
-            key={c.id}
-            type="button"
-            onClick={() => setActiveCat(c.id)}
-            aria-pressed={activeCat === c.id}
-            className={`inline-flex items-center gap-1.5 rounded-full border-2 px-3 py-1 text-xs font-semibold transition
-              ${activeCat === c.id
-                ? `bg-gradient-to-r ${c.tone} text-white border-transparent shadow-md`
-                : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10'}`}
-          >
-            <span aria-hidden>{c.icon}</span>
-            {t(`noticies.cat.${c.id}`)}
-            {activeCat === c.id && (
-              <span className="inline-flex items-center justify-center rounded-full bg-white/20 px-1.5 text-[10px] font-bold">
-                {filtered.length}
-              </span>
-            )}
-          </button>
-        ))}
-      </div>
-
-      {/* Resultats */}
-      {filtered.length === 0 ? (
+      {/* Resultats agrupats per mes */}
+      {grouped.length === 0 ? (
         <div className="rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/60 dark:bg-white/5 p-6 text-center">
           <div className="text-4xl mb-2" aria-hidden>🔍</div>
           <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -123,13 +84,29 @@ export default function Noticies() {
           </p>
         </div>
       ) : (
-        <ul className="space-y-3">
-          {filtered.map((n) => (
-            <li key={n.slug}>
-              <NoticiaCard noticia={n} />
-            </li>
+        <div className="space-y-7">
+          {grouped.map(({ key, items }) => (
+            <section key={key}>
+              <div className="flex items-baseline gap-3 mb-3">
+                <h2 className="text-lg sm:text-xl font-black tracking-tight text-slate-800 dark:text-slate-100 inline-flex items-baseline gap-2">
+                  <span aria-hidden className="text-base">📅</span>
+                  {getMonthLabel(key, locale)}
+                </h2>
+                <span className="rounded-full bg-slate-200 dark:bg-white/10 px-2 py-0.5 text-[11px] font-mono text-slate-600 dark:text-slate-300">
+                  {items.length}
+                </span>
+                <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
+              </div>
+              <ul className="space-y-3">
+                {items.map((n) => (
+                  <li key={n.slug}>
+                    <NoticiaCard noticia={n} />
+                  </li>
+                ))}
+              </ul>
+            </section>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
@@ -137,7 +114,6 @@ export default function Noticies() {
 
 function NoticiaCard({ noticia }: { noticia: Noticia }) {
   const { t } = useT();
-  const cat = CATEGORIES.find((c) => c.id === noticia.category);
   return (
     <Link
       to={`/noticies/${encodeURIComponent(noticia.slug)}`}
@@ -145,21 +121,10 @@ function NoticiaCard({ noticia }: { noticia: Noticia }) {
         border-slate-200 bg-white hover:border-blue-300 hover:shadow-md
         dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-blue-400/40"
     >
-      {cat && (
-        <span aria-hidden className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${cat.tone}`} />
-      )}
+      <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-700" />
       <div className="flex items-start gap-3">
-        {cat && (
-          <span aria-hidden className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${cat.tone} text-xl text-white shadow-inner`}>
-            {cat.icon}
-          </span>
-        )}
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-x-2 text-[10px] uppercase tracking-wider mb-1">
-            <span className="font-bold text-slate-700 dark:text-slate-300">
-              {t(`noticies.cat.${noticia.category}`)}
-            </span>
-            <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
             <time className="font-mono text-slate-500 dark:text-slate-400">
               {formatDate(noticia.publishedAt)}
             </time>
@@ -180,7 +145,7 @@ function NoticiaCard({ noticia }: { noticia: Noticia }) {
           </p>
           {noticia.tags && noticia.tags.length > 0 && (
             <div className="mt-2 flex flex-wrap gap-1">
-              {noticia.tags.slice(0, 4).map((tg) => (
+              {noticia.tags.slice(0, 5).map((tg) => (
                 <span key={tg}
                   className="rounded-md border px-1.5 py-0.5 text-[10px] font-mono
                     border-slate-200 bg-slate-50 text-slate-600
@@ -200,7 +165,7 @@ function NoticiaCard({ noticia }: { noticia: Noticia }) {
 function formatDate(iso: string): string {
   try {
     const d = new Date(iso);
-    return d.toLocaleDateString('ca-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+    return d.toLocaleDateString('ca-ES', { day: 'numeric', month: 'short' });
   } catch {
     return iso;
   }

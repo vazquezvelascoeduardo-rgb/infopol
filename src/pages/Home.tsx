@@ -433,11 +433,7 @@ export default function Home() {
                     dark:border-white/10 dark:bg-white/5 dark:hover:border-blue-400/40"
                 >
                   <span aria-hidden className="text-base shrink-0 mt-0.5">
-                    {n.category === 'normativa' ? '📜'
-                      : n.category === 'jurisprudencia' ? '⚖️'
-                      : n.category === 'oposicions' ? '🎓'
-                      : n.category === 'sector' ? '🛡️'
-                      : '✨'}
+                    📰
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="font-semibold text-slate-800 dark:text-slate-100 leading-snug truncate">

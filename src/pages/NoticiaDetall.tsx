@@ -20,9 +20,10 @@ export default function NoticiaDetall() {
     );
   }
 
-  // Notícies relacionades: mateixa categoria, excloent l'actual, max 3.
+  // Notícies relacionades: mateix mes (any-mes), excloent l'actual, max 3.
+  const monthKey = noticia.publishedAt.slice(0, 7);
   const related = NOTICIES
-    .filter((n) => n.category === noticia.category && n.slug !== noticia.slug)
+    .filter((n) => n.publishedAt.slice(0, 7) === monthKey && n.slug !== noticia.slug)
     .slice(0, 3);
 
   return (
@@ -40,10 +41,6 @@ export default function NoticiaDetall() {
         dark:border-white/10 dark:bg-[#0f1d34]">
         {/* Cabecera amb metadades */}
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] uppercase tracking-wider mb-3">
-          <span className="font-bold text-blue-700 dark:text-blue-300">
-            {t(`noticies.cat.${noticia.category}`)}
-          </span>
-          <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
           <time className="font-mono text-slate-500 dark:text-slate-400">
             {formatDate(noticia.publishedAt)}
           </time>
