@@ -27,6 +27,13 @@ const OPERATIVA_THEMES: OperativaTheme[] = [
     ready: true,
     to: '/operativa/penal',
   },
+  {
+    slug: 'matricules',
+    icon: '🔢',
+    accent: 'from-emerald-500 to-teal-700',
+    ready: true,
+    to: '/operativa/matricules',
+  },
 ];
 
 export default function Operativa() {
