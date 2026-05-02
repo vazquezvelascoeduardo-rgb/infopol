@@ -1,0 +1,632 @@
+{
+  "id": "matricules",
+  "titol": "Matrícules de vehicles",
+  "categoria": "transit",
+  "icono": "🔢",
+  "base_legal": [
+    "RD 2822/1998 (RGV) art. 25-30",
+    "Ordre INT/3215/2008 (format placa)",
+    "Llei 38/1992 (IEDMT) art. 65 — vehicle estranger >6 mesos a Espanya",
+    "Art. 76.h TRLSV (RDL 6/2015) — placa no visible / coberta",
+    "Art. 392 CP — falsedat documental",
+    "Art. 399 CP — ús de placa o document oficial fals"
+  ],
+  "comprovacions_previes": [
+    "Anota la matrícula EXACTAMENT com es llegeix (espais, guions, banda blava).",
+    "Fes foto general (vehicle + entorn) i de detall (placa davantera i posterior).",
+    "Consulta SIPER / DGT abans de qualsevol decisió: titular, ITV, SOA, vehicles de cerca i captura.",
+    "Si format inusual o sospita de manipulació: comprova també el bastidor (VIN gravat, segons UNE 26-019)."
+  ],
+  "prioritats_actuacio": [
+    "1) Verifica autenticitat de la placa (format vàlid + concorda amb permís de circulació).",
+    "2) Verifica autenticitat del vehicle (VIN al bastidor + a la documentació).",
+    "3) Si NO concorden → escala a delicte (art. 399/392 CP) i atestat.",
+    "4) Si concorden però estètica deficient (bruta, tapada): infracció administrativa LSV."
+  ],
+  "inici": "que_detectes",
+  "nodes": {
+    "que_detectes": {
+      "titol": "Què has detectat / vols comprovar?",
+      "text": "Tria l'escenari més proper.",
+      "opcions": [
+        { "etiqueta": "Vehicle SENSE matrícula visible (ni davantera ni posterior)", "va_a": "sense_matricula" },
+        { "etiqueta": "Matrícula NO llegible (bruta, tapada, adhesiu, suport)",      "va_a": "no_llegible" },
+        { "etiqueta": "Sospita de placa FALSA / manipulada",                          "va_a": "falsa_inici" },
+        { "etiqueta": "Sospita de DUPLICAT (cloning — placa real d'un altre vehicle)", "va_a": "duplicada" },
+        { "etiqueta": "Vehicle ESTRANGER (UE, fora UE, Andorra...)",                  "va_a": "estranger" },
+        { "etiqueta": "Matrícula PROVISIONAL / TEMPORAL (P, S, TR)",                  "va_a": "temporal" },
+        { "etiqueta": "IDENTIFICAR un tipus / format de matrícula",                   "va_a": "identificacio" }
+      ]
+    },
+
+    "sense_matricula": {
+      "titol": "Vehicle sense matrícula",
+      "text": "Comprovacions abans de decidir què és el supòsit.",
+      "checklist_previ": [
+        "Confirma que NO porta cap placa (ni provisional, ni de paper, ni de cartró).",
+        "Si en porta una temporal manuscrita: tracta-la com a 'placa falsa' (va a falsa_placa).",
+        "Comprova el bastidor (VIN) per saber de quin vehicle es tracta.",
+        "Consulta SIPER per saber si el vehicle està matriculat en algun moment."
+      ],
+      "opcions": [
+        { "etiqueta": "Vehicle MAI matriculat o donat de baixa (no consta)",           "va_a": "fi_sense_matricula_no_consta" },
+        { "etiqueta": "Sí consta a SIPER però circula sense placa",                    "va_a": "fi_sense_matricula_sense_placa" },
+        { "etiqueta": "Vehicle robat o cerca i captura",                                "va_a": "fi_sense_matricula_robat" }
+      ]
+    },
+
+    "fi_sense_matricula_no_consta": {
+      "final": true,
+      "tipus": "mixta",
+      "titol": "🔴 Vehicle no matriculat circulant per via pública",
+      "concepte_butlleta": "Circular un vehicle no matriculat / donat de baixa per la via pública",
+      "article_butlleta": "Art. 25 RGV · Art. 76.G TRLSV",
+      "import": "500 €",
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí d'infracció LSV.",
+        "IMMOBILITZACIÓ del vehicle (Art. 84 TRLSV).",
+        "Fer constar bastidor (VIN) a l'acta.",
+        "Si no s'acredita propietat → diligència policial. Posar a disposició de l'autoritat judicial.",
+        "Si l'usuari porta documentació de compravenda recent: es valora bona fe i termini per matricular."
+      ],
+      "info_clau": "Si NO acredita propietat (factura, contracte, document compravenda), valora obertura d'atestat per receptació o ús de vehicle d'origen desconegut.",
+      "base_legal": [
+        "Art. 25-30 RGV",
+        "Art. 76.G TRLSV",
+        "Art. 84 TRLSV (immobilització)"
+      ]
+    },
+
+    "fi_sense_matricula_sense_placa": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Vehicle matriculat però sense placa muntada",
+      "concepte_butlleta": "Circular sense portar la placa de matrícula reglamentària, o portar-la en condicions que no permeten la lectura",
+      "article_butlleta": "Art. 76.h TRLSV",
+      "import": "200 €",
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí d'infracció LSV.",
+        "Si la placa s'ha desprès accidentalment i la porta el conductor: atestat de pèrdua + termini per duplicat (5 dies hàbils).",
+        "Si la placa està a casa o desapareguda: valora immobilització fins a posar la placa correcta."
+      ],
+      "info_clau": "Reglament: placa davantera + posterior obligatòries en turismes. Motos només posterior."
+    },
+
+    "fi_sense_matricula_robat": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚨 Vehicle robat / cerca i captura sense matrícula",
+      "text": "Procediment penal per sostracció de vehicle.",
+      "accions_ordenades_critiques": [
+        "PRECAUCIÓ: pot tractar-se de fugida o que el conductor estigui armat. Demanar suport.",
+        "Detenció dels ocupants (informar drets art. 520 LECrim).",
+        "Atestat per sostracció (Art. 244 CP — robatori d'ús; o Art. 237 CP — robatori amb força segons el cas).",
+        "Inspecció ocular del vehicle (forçats, cables solts a la columna...).",
+        "Trasllat a dipòsit judicial / dependències per a entrega al titular."
+      ],
+      "base_legal": [
+        "Art. 244 CP (robatori d'ús de vehicle a motor)",
+        "Art. 237 CP (robatori amb força)",
+        "Art. 520 LECrim (drets del detingut)",
+        "Art. 282 LECrim (atestat)"
+      ]
+    },
+
+    "no_llegible": {
+      "titol": "Matrícula no llegible",
+      "text": "És bruta accidentalment o està coberta intencionalment?",
+      "checklist_previ": [
+        "Foto general + foto de detall.",
+        "Si es pot netejar amb facilitat (pluja, fang lleuger): valora advertiment + neteja in situ.",
+        "Si està tapada per adhesiu, pintura, ratlles o suport portabicicletes: és intencional."
+      ],
+      "opcions": [
+        { "etiqueta": "Bruta accidentalment (fang, pols, pluja)",                  "va_a": "fi_no_llegible_bruta" },
+        { "etiqueta": "Tapada per suport (portabicicletes, remolc...)",            "va_a": "fi_no_llegible_suport" },
+        { "etiqueta": "Coberta intencionalment (adhesiu, paper, pintura, mans)",   "va_a": "fi_no_llegible_intencional" },
+        { "etiqueta": "Manipulada per dificultar lectura (ratlles, lletres modificades)", "va_a": "fi_no_llegible_manipulada" }
+      ]
+    },
+
+    "fi_no_llegible_bruta": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Placa bruta / no llegible",
+      "concepte_butlleta": "Portar la placa de matrícula en condicions que no permetin la lectura completa de l'inscripció",
+      "article_butlleta": "Art. 76.h TRLSV",
+      "import": "200 €",
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí d'infracció LSV.",
+        "Es pot demanar al conductor que la netegi in situ (no exigible per llei, però recomanable).",
+        "Si la placa torna a ser llegible després de neteja: valora advertiment sense butlletí en cas lleu."
+      ],
+      "info_clau": "La sanció és per la lectura, no pel motiu. Si està bruta però es llegeix: NO hi ha infracció."
+    },
+
+    "fi_no_llegible_suport": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Placa tapada per suport (portabicicletes / remolc)",
+      "concepte_butlleta": "Portar la placa de matrícula en condicions que no permetin la lectura, per accessoris no homologats",
+      "article_butlleta": "Art. 76.h TRLSV",
+      "import": "200 €",
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí d'infracció LSV.",
+        "Si porta portabicicletes amb placa addicional homologada (placa duplicada al portabicicletes): NO hi ha infracció.",
+        "Recordar al conductor que el suport ha de tenir matrícula visible."
+      ],
+      "info_clau": "RGV permet portar una placa addicional (duplicat) al portabicicletes / remolc. Sense placa addicional → infracció."
+    },
+
+    "fi_no_llegible_intencional": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🔴 Placa coberta intencionalment",
+      "concepte_butlleta": "Portar elements als vehicles que dificultin o impedeixin la identificació o la lectura de la matrícula",
+      "article_butlleta": "Art. 76.h TRLSV (en relació art. 18.4 RGV)",
+      "import": "500 €",
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí d'infracció LSV (sanció greu).",
+        "Retirar l'adhesiu / element / paper en presència de l'agent.",
+        "Si el conductor es nega a retirar-lo: immobilització fins a posar la placa visible.",
+        "Foto abans/després de la retirada com a evidència."
+      ],
+      "info_clau": "Quan l'ocultació és evident i intencional (foradat, escotxat, paper adhesiu...) → estem davant d'una conducta dolosa, no negligent."
+    },
+
+    "fi_no_llegible_manipulada": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚨 Placa MANIPULADA per dificultar lectura",
+      "text": "Modificar caràcters de la placa (pintar, ratllar, afegir línies que canvien dígits) és FALSEDAT, no infracció.",
+      "concepte_butlleta_paral·lel": "Sanció administrativa accessòria per placa no llegible",
+      "article_paralel_admin": "Art. 76.h TRLSV (200 €)",
+      "pena": "6 mesos a 3 anys de presó + multa 6-12 mesos (Art. 392 CP)",
+      "accions_ordenades_critiques": [
+        "Diligència de constatació amb fotografies abans/després.",
+        "Inspecció del vehicle: comprovar que la matrícula original (registrada) coincideixi amb la del bastidor (VIN).",
+        "Atestat per FALSEDAT DOCUMENTAL (Art. 392 CP) o ús de placa falsa (Art. 399 CP, segons grau de manipulació).",
+        "Detenció del conductor si es confirma manipulació deliberada → drets art. 520 LECrim.",
+        "Posada a disposició judicial."
+      ],
+      "diferencia_amb_admin": "Manipulació = canviar caràcters per fer que es llegeixi una altra matrícula. Coberta = ocultar tota la placa. La primera és penal, la segona administrativa.",
+      "base_legal": [
+        "Art. 392 CP (falsedat documental)",
+        "Art. 399 CP (ús de placa oficial falsa)",
+        "Art. 520 LECrim (drets del detingut)"
+      ]
+    },
+
+    "falsa_inici": {
+      "titol": "Placa presumptament falsa",
+      "text": "Què t'ha fet sospitar?",
+      "checklist_previ": [
+        "Format del caràcter (font, mida, espaiat) sembla irregular.",
+        "Banda blava UE absent o incorrecta.",
+        "Material plàstic en lloc d'alumini reflector.",
+        "Placa enganxada en lloc de cargolada (suport o cinta adhesiva).",
+        "Consulta DGT/SIPER: la combinació no existeix o no correspon al model del vehicle."
+      ],
+      "opcions": [
+        { "etiqueta": "Combinació INEXISTENT a DGT (no consta cap vehicle amb aquesta matrícula)", "va_a": "fi_falsa_inexistent" },
+        { "etiqueta": "Combinació EXISTEIX però NO correspon a aquest model/color de vehicle",       "va_a": "duplicada" },
+        { "etiqueta": "Format clarament irregular (caràcter, mida, banda)",                          "va_a": "fi_falsa_format" }
+      ]
+    },
+
+    "fi_falsa_inexistent": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚨 Placa FALSA — combinació inexistent",
+      "text": "La matrícula no consta a la DGT. Estem davant de placa fabricada de zero o adaptada.",
+      "pena": "6 mesos a 3 anys de presó + multa 6-12 mesos (Art. 399 CP)",
+      "accions_ordenades_critiques": [
+        "PRECAUCIÓ: el vehicle pot tenir origen il·lícit. Demanar suport.",
+        "Comprovació del bastidor (VIN) — gravat al xassís + a documentació + a etiqueta de fabricant.",
+        "Si VIN també és inexistent o manipulat: vehicle d'origen desconegut → presumpció de receptació (Art. 298 CP).",
+        "Detenció del conductor (drets art. 520 LECrim).",
+        "Atestat per Art. 399 CP (ús de placa oficial falsa) + receptació si correspon.",
+        "Vehicle a dependències / dipòsit judicial.",
+        "Si hi ha indicis de banda organitzada (vehicle preparat per a delictes): comunicació a UCSI / Mossos GIE."
+      ],
+      "documentacio_clau": [
+        "Acta detallada amb fotografies (placa, VIN, documentació, conductor).",
+        "Inspecció ocular.",
+        "Declaració del conductor (si vol)."
+      ],
+      "base_legal": [
+        "Art. 399 CP (ús de placa o document oficial fals)",
+        "Art. 298 CP (receptació)",
+        "Art. 520 LECrim (drets del detingut)",
+        "Art. 282 LECrim (atestat)"
+      ]
+    },
+
+    "fi_falsa_format": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚨 Placa amb format IRREGULAR",
+      "text": "Aspecte físic clarament no reglamentari (font, material, mida, banda blava). Falsedat documental.",
+      "pena": "6 mesos a 3 anys de presó + multa 6-12 mesos (Art. 399 CP)",
+      "accions_ordenades_critiques": [
+        "Documentació fotogràfica detallada (font, espaiat, banda blava, material, sistema de fixació).",
+        "Comparativa amb placa reglamentària (Ordre INT/3215/2008).",
+        "Comprovació VIN i documentació.",
+        "Detenció + atestat per Art. 399 CP.",
+        "Posada a disposició judicial."
+      ],
+      "elements_a_acreditar": [
+        "Material no reflector (placa de plàstic en lloc de metàl·lic).",
+        "Caràcter d'una font tipogràfica diferent a la reglamentària.",
+        "Mides incorrectes (520×110 vs 340×110 per davantera).",
+        "Banda blava UE absent, mal posicionada o amb estrelles incorrectes.",
+        "Sistema de subjecció no reglamentari (cinta adhesiva, velcro)."
+      ]
+    },
+
+    "duplicada": {
+      "titol": "Sospita de DUPLICAT (cloning)",
+      "text": "La placa existeix legalment però NO correspon a aquest vehicle. Procediment penal.",
+      "checklist_previ": [
+        "Confirma a SIPER el model, color i titular del vehicle ASSOCIAT a la matrícula.",
+        "Compara amb el vehicle que tens davant (model, color, característiques).",
+        "Comprova el VIN al bastidor (no només a la documentació)."
+      ],
+      "opcions": [
+        { "etiqueta": "VIN coincideix amb la placa: és el vehicle correcte (cas no és duplicació)", "va_a": "que_detectes" },
+        { "etiqueta": "VIN NO coincideix amb la placa registrada — confirmat duplicat", "va_a": "fi_duplicat_confirmat" }
+      ]
+    },
+
+    "fi_duplicat_confirmat": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚨 DUPLICAT confirmat — vehicle clonat",
+      "text": "El vehicle real porta una placa que correspon a un altre vehicle. Falsedat + presumpta receptació o robatori d'origen.",
+      "pena": "6 mesos a 3 anys de presó (Art. 399 CP) — concurrent amb 392 CP",
+      "accions_ordenades_critiques": [
+        "Demanar suport: pot ser vehicle robat o utilitzat per a delictes.",
+        "Detenció del conductor (drets art. 520 LECrim).",
+        "Comprovació exhaustiva del VIN: bastidor (xassís) + xapa fabricant + documentació.",
+        "Si VIN gravat al xassís és diferent al de la documentació → afegir Art. 392 CP (manipulació de número de bastidor).",
+        "Coordinació amb la unitat investigadora (Mossos GIE / UCSI Trànsit).",
+        "Vehicle a dipòsit judicial — NO es retorna fins a investigació.",
+        "Comunicació al titular de la placa real (víctima del cloning) per al seu coneixement."
+      ],
+      "documentacio_clau": [
+        "Foto de la placa, del bastidor (VIN) i de l'etiqueta del fabricant.",
+        "Comparativa SIPER vs realitat.",
+        "Acta amb tots els elements concurrents."
+      ],
+      "base_legal": [
+        "Art. 399 CP (ús de placa oficial falsa)",
+        "Art. 392 CP (falsedat documental — VIN manipulat)",
+        "Art. 298 CP (receptació)",
+        "Art. 244 / 237 CP (robatori si vehicle d'origen)",
+        "Art. 520 LECrim",
+        "Art. 282 LECrim"
+      ]
+    },
+
+    "estranger": {
+      "titol": "Vehicle estranger",
+      "text": "Identifica origen. Banda blava UE, format de placa, adhesiu oval...",
+      "checklist_previ": [
+        "Banda blava esquerra amb 12 estrelles + codi país → vehicle UE/EEE.",
+        "Sense banda blava + adhesiu oval blanc (CH, NO, AND, MA, RUS...) → fora UE.",
+        "UK post-Brexit: codi 'UK' (no 'GB') + bandera anglesa.",
+        "Comprova permís de conduir, assegurança internacional (Carta Verda) i IDV / Carnet UE."
+      ],
+      "opcions": [
+        { "etiqueta": "Vehicle UE/EEE — circulació puntual (turisme, visita)",  "va_a": "fi_estranger_ue_puntual" },
+        { "etiqueta": "Vehicle UE/EEE però resident a Espanya >6 mesos",         "va_a": "fi_estranger_ue_residencial" },
+        { "etiqueta": "Vehicle FORA UE (Andorra, Marroc, etc.)",                 "va_a": "fi_estranger_no_ue" },
+        { "etiqueta": "Vehicle UK post-Brexit",                                  "va_a": "fi_estranger_uk" }
+      ]
+    },
+
+    "fi_estranger_ue_puntual": {
+      "final": true,
+      "tipus": "ok",
+      "titol": "✅ Vehicle UE — circulació puntual",
+      "accio": "Es deixa circular si compleix requisits",
+      "requisits_clau": [
+        "Permís de conducció UE (vàlid a tota la UE).",
+        "Assegurança vigent (Carta Verda o equivalent UE — el sistema multilateral fa que les pòlisses UE siguin vàlides automàticament).",
+        "ITV vigent del país d'origen (homologació mútua entre estats UE).",
+        "Documentació del vehicle (permís de circulació)."
+      ],
+      "info_clau": "Vehicle estranger UE sense complir requisits → mateixa sanció que un vehicle espanyol equivalent.",
+      "info_extra": "FIVA pot no detectar pòlisses estrangeres. Si no consta a FIVA però porta Carta Verda: assegurança vàlida."
+    },
+
+    "fi_estranger_ue_residencial": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ Vehicle UE — obligació de matricular a Espanya",
+      "concepte_butlleta": "Vehicle estranger circulant a Espanya per persona resident habitual sense matriculació espanyola en el termini legal",
+      "article_butlleta": "Art. 65.1.d Llei 38/1992 (IEDMT)",
+      "import": "Sanció administrativa — variable + IEDMT (impost matriculació) + recàrrec",
+      "accions_operatives": [
+        "Verificar residència habitual a Espanya (empadronament, contracte de treball, etc.).",
+        "Si confirmat resident >6 mesos: butlletí + comunicació a Hisenda (IEDMT).",
+        "El vehicle ha de tramitar matrícula espanyola (DGT Servei de Matriculacions).",
+        "Si circula sense haver iniciat cap tràmit: pot ser sancionat repetidament fins a regularitzar."
+      ],
+      "info_clau": "Excepcions: estudiants, treballadors transfronterers, vehicles d'empresa, diplomàtics.",
+      "info_aplicabilitat": "El termini de 6 mesos compta des que la persona té residència fiscal a Espanya. Si una persona viu 6 mesos+ a Espanya, és resident encara que no estigui empadronada.",
+      "base_legal": [
+        "Llei 38/1992 (IEDMT) art. 65",
+        "RD 2822/1998 (RGV) art. 25"
+      ]
+    },
+
+    "fi_estranger_no_ue": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "🌍 Vehicle FORA UE — règim duaner",
+      "text": "Comprovacions específiques per a vehicles d'Andorra, Marroc, Suïssa, etc.",
+      "requisits_clau": [
+        "Importació temporal (TIP) — Carta Verda + permís de conducció vàlid + còpia del passaport.",
+        "Permís Internacional de Conduir (IDP) si el carnet del país d'origen no és reconegut directament.",
+        "Carta Verda (CIB - Certificat Internacional Bureau) — assegurança internacional.",
+        "Termini màxim d'estada: 6 mesos en un any natural (excepte tinguin permís duaner especial).",
+        "Adhesiu oval blanc al darrere (CH = Suïssa, MA = Marroc, AND = Andorra, RUS = Rússia, NO = Noruega...)."
+      ],
+      "info_clau": "Vehicle d'Andorra: NO és UE. La placa és NNNN-LL (2 lletres) + adhesiu AND. Fiscal: si el resident té domicili a Andorra però treballa a Espanya → controvers, valora coordinació amb Duana.",
+      "accio": "Si compleix requisits: deixar circular. Si no: butlletí (LSV) + comunicació Duana / Hisenda (IEDMT)."
+    },
+
+    "fi_estranger_uk": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "🇬🇧 Vehicle UK post-Brexit",
+      "text": "Des del Brexit, UK és tercer estat. Mateix règim que Andorra/Suïssa.",
+      "requisits_clau": [
+        "Codi 'UK' (no 'GB' — l'antic codi GB es va deixar d'usar el 2021).",
+        "Carnet de conduir britànic vàlid fins a 6 mesos a Espanya (després cal IDP o canvi).",
+        "Carta Verda obligatòria (no es pressuposa la cobertura UE).",
+        "Adhesiu UK ovalat o nova placa amb codi UK i bandera anglesa.",
+        "Importació temporal màxim 6 mesos."
+      ],
+      "info_clau": "Vehicles UK matriculats abans del 28 set 2021 poden encara portar 'GB'. Vàlid per a circulació però recomanable canviar adhesiu."
+    },
+
+    "temporal": {
+      "titol": "Matrícula provisional / temporal",
+      "text": "Quina sèrie? Cada una té vigència i ús diferent.",
+      "checklist_previ": [
+        "P (vermella + blanc) → permet circular abans de matriculació definitiva.",
+        "S (vermella + blanc) → vehicles de prova / fabricants / concessionaris.",
+        "TR (vermella + blanc) → vehicles estrangers en règim turístic temporal.",
+        "Totes tenen DATA DE CADUCITAT impresa o documentada — comprova vigència."
+      ],
+      "opcions": [
+        { "etiqueta": "Provisional 'P' (NNNNN-P o P-NNNN-LLL)",          "va_a": "fi_temporal_p" },
+        { "etiqueta": "Prova / fabricant 'S' (S-NNNN-LLL)",               "va_a": "fi_temporal_s" },
+        { "etiqueta": "Turística 'TR' (TR-NNNNN o NNNN-TR)",              "va_a": "fi_temporal_tr" }
+      ]
+    },
+
+    "fi_temporal_p": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "🟥 Matrícula PROVISIONAL (P)",
+      "text": "Comprova vigència i ús legítim.",
+      "requisits_clau": [
+        "Vigent màxim 60 dies (ampliable a 90 amb sol·licitud DGT).",
+        "Document de matriculació provisional (DGT) que acompanya el vehicle.",
+        "Concebuda per: trasllat de fàbrica/concessionari fins a domicili o ITV / matriculació posterior.",
+        "Color: fons vermell amb caràcters blancs."
+      ],
+      "info_clau": "Si data CADUCADA → infracció (Art. 76.G TRLSV) + immobilització fins a regularitzar.",
+      "info_extra": "Si circula amb 'P' però NO porta el document de matriculació provisional: butlletí per documentació deficient."
+    },
+
+    "fi_temporal_s": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "🟥 Matrícula de PROVES (S)",
+      "text": "Reservada per a fabricants, concessionaris, tallers homologats.",
+      "requisits_clau": [
+        "Permís especial de la DGT al portador (empresa / particular autoritzat).",
+        "Llibre o registre de proves (cada ús ha de constar amb data, conductor, motiu, ruta).",
+        "Vigència típica: 1 any renovable.",
+        "Color: fons vermell amb caràcters blancs."
+      ],
+      "info_clau": "Si circula sense el permís de proves o sense que consti al llibre: butlletí (Art. 76.G TRLSV) + comunicació a la DGT que va expedir l'autorització.",
+      "info_extra": "Una persona física no pot tenir matrícula 'S' permanent al seu vehicle particular: és de l'empresa autoritzada."
+    },
+
+    "fi_temporal_tr": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "🟥 Matrícula TURÍSTICA (TR)",
+      "text": "Per a vehicles estrangers en règim duaner temporal a Espanya.",
+      "requisits_clau": [
+        "Vigència màxima 6 mesos (ampliable amb autorització Duana).",
+        "Document d'importació temporal de l'AEAT (Agència Tributària).",
+        "Pòlissa d'assegurança vàlida (Carta Verda o pòlissa espanyola).",
+        "El conductor ha de ser no-resident a Espanya."
+      ],
+      "info_clau": "Caducada → Hisenda + Duana. Comunicar via UCSI Trànsit.",
+      "info_extra": "Una persona resident a Espanya NO pot circular amb matrícula TR (els privilegis duaners no apliquen)."
+    },
+
+    "identificacio": {
+      "titol": "Identificar tipus / format de matrícula",
+      "text": "Tria el tipus que vols comprovar.",
+      "opcions": [
+        { "etiqueta": "Format ACTUAL (NNNN-LLL, des del 2000)",            "va_a": "fi_id_format_actual" },
+        { "etiqueta": "Format ANTIC provincial (XX-NNNN-LL, fins 2000)",   "va_a": "fi_id_format_antic" },
+        { "etiqueta": "Vehicle històric (H-NNNN-LLL)",                     "va_a": "fi_id_historic" },
+        { "etiqueta": "Remolc / semiremolc (R-NNNN-LLL)",                  "va_a": "fi_id_remolc" },
+        { "etiqueta": "Ciclomotor (C-NNNN-LLL)",                           "va_a": "fi_id_ciclomotor" },
+        { "etiqueta": "Vehicle oficial / FCS / FAS (PGC, CME, ET, FN, EA...)", "va_a": "fi_id_oficial" },
+        { "etiqueta": "Cos diplomàtic / consular (CD, CC, OI, TA, E)",     "va_a": "fi_id_diplomatic" },
+        { "etiqueta": "Identificar pels COLORS de fons",                   "va_a": "fi_id_colors" }
+      ]
+    },
+
+    "fi_id_format_actual": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "🔢 Format actual (des del 18 set. 2000)",
+      "text": "NNNN-LLL — 4 dígits + 3 lletres consonants.",
+      "info_clau": "Sèrie correlativa estatal. Al 2025 es circula per la sèrie M (M-N).",
+      "requisits_clau": [
+        "20 lletres permeses: B C D F G H J K L M N P R S T V W X Y Z.",
+        "Excloses: vocals (A E I O U), Q, Ñ, CH, LL.",
+        "Combinacions totals: 10.000 × 20³ = 80 milions.",
+        "Banda blava UE obligatòria (12 estrelles + 'E').",
+        "Mides: 520×110 mm (davantera estàndard) o 340×110 mm; posterior idem o 220×220 mm (motos)."
+      ],
+      "base_legal": [
+        "RD 2822/1998 (RGV) art. 25-30",
+        "Ordre INT/3215/2008"
+      ]
+    },
+
+    "fi_id_format_antic": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "🗺️ Format provincial antic (vàlid fins 2000)",
+      "text": "XX-NNNN-LL — codi provincial + 4 dígits + 2 lletres.",
+      "info_clau": "Encara legítim si el vehicle no s'ha rematriculat. Convertir en motiu de canvi és voluntari.",
+      "exemples": [
+        "Barcelona: B-1234-XY",
+        "Girona: GI-1234-XY (o GE-1234-XY abans de 1995)",
+        "Lleida: L-1234-XY",
+        "Tarragona: T-1234-XY",
+        "Madrid: M-1234-XY",
+        "Saragossa: Z-1234-XY",
+        "Sevilla: SE-1234-XY",
+        "Càceres: CC-1234-XY (NO confondre amb cos consular)"
+      ],
+      "info_extra": "Format pre-1971: només 'PROV-NNNNNN' (sense lletres finals). Encara als vehicles històrics."
+    },
+
+    "fi_id_historic": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "🏛️ Vehicle històric (H)",
+      "text": "Format H-NNNN-LLL.",
+      "requisits_clau": [
+        "Vehicle amb >30 anys d'antiguitat des de la fabricació.",
+        "Estat original conservat (modificacions limitades).",
+        "Resolució de catalogació com a històric (CCAA).",
+        "Restriccions específiques de circulació (no diari, ZBE adaptades).",
+        "ITV amb periodicitat reduïda."
+      ],
+      "info_clau": "Es pot tenir simultàniament al vehicle: matrícula original + placa H. La placa H facilita la identificació com a històric (avantatges fiscals i ZBE).",
+      "base_legal": [
+        "RD 1247/1995 (vehicles històrics)",
+        "Ordre INT/3215/2008"
+      ]
+    },
+
+    "fi_id_remolc": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "🔗 Remolc / semiremolc (R)",
+      "text": "Format R-NNNN-LLL.",
+      "requisits_clau": [
+        "Obligatòria si MMA > 750 kg.",
+        "Si MMA ≤ 750 kg: NO cal matrícula pròpia (porta duplicat de la del vehicle tractor).",
+        "Permís de circulació propi del remolc.",
+        "ITV pròpia (depèn de la categoria O1/O2/O3/O4)."
+      ],
+      "info_clau": "Si remolc lleuger circula amb la placa duplicada del cotxe i la del cotxe es desmunta o canvia: revisa que coincideixin.",
+      "info_extra": "Categories: O1 (≤750 kg), O2 (750-3500 kg), O3 (3500-10.000 kg), O4 (>10.000 kg)."
+    },
+
+    "fi_id_ciclomotor": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "🛵 Ciclomotor (C)",
+      "text": "Format C-NNNN-LLL. Vehicles ≤50 cc / ≤45 km/h.",
+      "requisits_clau": [
+        "Placa quadrada al darrere (220×220 mm).",
+        "Permís AM (mínim 15 anys).",
+        "Assegurança SOA obligatòria.",
+        "ITV als 3 anys de matriculació + cada 2 anys."
+      ],
+      "info_clau": "Distingir de motocicleta (>50 cc o >45 km/h, requereix permís A1/A2/A i placa estàndard).",
+      "info_extra": "Si un ciclomotor circula amb placa de motocicleta o viceversa → infracció + comprovació de modificacions tècniques no homologades."
+    },
+
+    "fi_id_oficial": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "🛡️ Vehicles oficials i Forces Armades / FCS",
+      "text": "Sèries reservades per identificar coordinacions ràpides.",
+      "exemples": [
+        "PGC = Guàrdia Civil (placa amb fons vermell + lletres blanques)",
+        "CNP = Cos Nacional de Policia",
+        "CME = Mossos d'Esquadra",
+        "ET-NNNNNN = Exèrcit de Terra (FAS)",
+        "FN-NNNNNN = Armada (FAS)",
+        "EA-NNNNNN = Exèrcit de l'Aire i de l'Espai (FAS)",
+        "MT / MTA = Vehicles civils Ministeri de Defensa",
+        "PMM = Parc Mòbil de l'Estat (vehicles oficials civils)"
+      ],
+      "info_clau": "Vehicles oficials gaudeixen de prioritat de pas en serveis d'urgència però NO d'immunitat. Si comet infracció en servei: valora abans coordinar amb el comandament del cos abans de denunciar.",
+      "info_extra": "FCS i FAS NO porten ITV ordinària: tenen règim propi de manteniment intern."
+    },
+
+    "fi_id_diplomatic": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "🌐 Cos diplomàtic / consular / OI",
+      "text": "Fons blau marí, lletres blanques. Privilegis i immunitats — Convenció de Viena.",
+      "exemples": [
+        "CD = Cos Diplomàtic (ambaixadors, agents diplomàtics) — inviolabilitat personal i immunitat de jurisdicció",
+        "CC = Cos Consular — immunitat funcional (només actes propis del càrrec)",
+        "OI = Organismes Internacionals (UE, ONU, OCDE...) — privilegis segons acord seu",
+        "TA = Personal Tècnic Administratiu d'ambaixades / consolats — privilegi limitat",
+        "E = Personal de servei estranger (xofers, etc.) — sense immunitat però règim duaner especial"
+      ],
+      "accions_ordenades_critiques": [
+        "Identificar tipus de matrícula i col·lectiu (CD/CC/OI/TA/E).",
+        "Si CD: NO hi ha detenció possible, ni multa imposable directament. Comunicar via Ministeri d'Afers Exteriors.",
+        "Si CC: només immunitat per actes del càrrec. Per fets privats (alcoholèmia, conducció temerària fora de servei) → procediment normal.",
+        "Si TA / E: procediment normal però comunicar a Mossos / GC per coneixement diplomàtic.",
+        "Sempre: ser exquisit en el tracte. Aixecar acta amb tota la informació, encara que no es pugui sancionar."
+      ],
+      "info_clau": "ATENCIÓ: la immunitat és del CÀRREC, no de la persona. La placa indica el règim aplicable, però cal verificar acreditacions (carnet diplomàtic, passaport diplomàtic).",
+      "base_legal": [
+        "Convenció de Viena 1961 (relacions diplomàtiques)",
+        "Convenció de Viena 1963 (relacions consulars)"
+      ]
+    },
+
+    "fi_id_colors": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "🎨 Identificació pels colors de fons",
+      "text": "El color de la placa indica el règim del vehicle.",
+      "exemples": [
+        "Blanc + lletres negres = vehicles ordinaris (turismes, motos, camions, autobusos privats)",
+        "Groc + lletres negres = servei públic (taxi, autobús urbà, ambulància, lloguer sense conductor antic)",
+        "Vermell + lletres blanques = provisional (P), proves (S), turística (TR) — vigència limitada",
+        "Verd + lletres blanques = vehicles oficials (Estat, CCAA, ens locals) i agents de l'autoritat",
+        "Blau + lletres blanques = cos diplomàtic / consular / OI",
+        "Negre + lletres grogues = format antic pre-1971 (encara legítim si no s'ha rematriculat)"
+      ],
+      "info_clau": "El color confirma el règim però NO el legitima per si sol. Sempre acreditar amb documentació (permís circulació, autoritzacions especials)."
+    }
+  },
+  "notes_finals": [
+    "Davant de qualsevol sospita de manipulació, comprova SEMPRE el VIN gravat al bastidor (no només a la documentació) — UNE 26-019.",
+    "Una placa coberta intencionalment és infracció administrativa (500 €). Una placa MANIPULADA (caràcters canviats) és delicte (Art. 392/399 CP).",
+    "El cloning (placa que existeix però no correspon al vehicle) és la forma més sofisticada: només es detecta amb VIN.",
+    "Les matrícules diplomàtiques NO impedeixen aixecar acta — només impedeixen sancionar directament. El Ministeri Afers Exteriors fa de canal.",
+    "Vehicle estranger >6 mesos a Espanya per resident: obligació de matriculació espanyola + IEDMT (Llei 38/1992).",
+    "Si tens dubte: foto, acta, consulta SIPER, demana suport. La precipitació davant d'una placa irregular és font d'errors processals."
+  ]
+}

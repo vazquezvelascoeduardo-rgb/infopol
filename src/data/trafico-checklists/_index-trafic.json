@@ -14,6 +14,7 @@
     { "id": "doc-falsa",          "titol": "📄 Documentació falsa",              "fitxer": "doc-falsa.json",           "ordre": 9 },
     { "id": "temerari-negligent", "titol": "🚨 Conducció temerària / negligent", "fitxer": "temerari-negligent.json",  "ordre": 10 },
     { "id": "accident",           "titol": "💥 Accident de trànsit",             "fitxer": "accident.json",            "ordre": 11 },
-    { "id": "vehicle-abandonat",  "titol": "🚗 Vehicle abandonat / immobilització","fitxer": "vehicle-abandonat.json", "ordre": 12 }
+    { "id": "vehicle-abandonat",  "titol": "🚗 Vehicle abandonat / immobilització","fitxer": "vehicle-abandonat.json", "ordre": 12 },
+    { "id": "matricules",         "titol": "🔢 Matrícules de vehicles",            "fitxer": "matricules.json",          "ordre": 13 }
   ]
 }

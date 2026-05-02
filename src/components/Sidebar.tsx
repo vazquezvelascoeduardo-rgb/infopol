@@ -176,11 +176,6 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
                 icon="🛡️"
                 label={t('operativa.seguretat-ciutadana.title')}
               />
-              <SubLink
-                to="/operativa/matricules"
-                icon="🔢"
-                label={t('operativa.matricules.title')}
-              />
               <div className="my-1 px-3">
                 <div className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 py-1.5">
                   {t('sidebar.references')}
