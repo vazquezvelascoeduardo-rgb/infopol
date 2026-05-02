@@ -134,14 +134,12 @@ export default function TestList() {
 
 function RepasCard() {
   const { t } = useT();
-  const { total, due, mastered } = useFailuresCounts();
+  const { total, due, learned, pending } = useFailuresCounts();
 
   // Si no hi ha cap fallat guardat, no mostrem la card.
-  // (Si l'usuari no s'ha equivocat encara, no té sentit oferir repàs.)
-  if (total === 0 && mastered === 0) return null;
+  if (total === 0) return null;
 
   const hasDue = due > 0;
-  const hasFailures = total > 0;
 
   return (
     <Link
@@ -172,11 +170,9 @@ function RepasCard() {
           <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5">
             {hasDue
               ? t('test.list.repasDescDue').replace('{n}', String(due))
-              : hasFailures
-                ? t('test.list.repasDescAll').replace('{n}', String(total))
-                : t('test.list.repasDescMastered').replace('{n}', String(mastered))}
+              : t('test.list.repasDescAll').replace('{n}', String(total))}
           </div>
-          {/* Stats compactes: due / total / mastered */}
+          {/* Stats compactes: due / pending / learned */}
           <div className="mt-2 flex items-center gap-3 text-[11px]">
             {hasDue && (
               <span className="inline-flex items-center gap-1 font-mono font-bold text-rose-700 dark:text-rose-300">
@@ -184,19 +180,19 @@ function RepasCard() {
                 {due} {t('test.list.repasDueShort')}
               </span>
             )}
-            {hasFailures && (
+            {pending > 0 && (
               <>
                 {hasDue && <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>}
-                <span className="font-mono text-slate-600 dark:text-slate-300">
-                  📚 {total} {t('test.list.repasTotalShort')}
+                <span className="font-mono text-amber-700 dark:text-amber-300">
+                  📚 {pending} {t('test.list.repasPendingShort')}
                 </span>
               </>
             )}
-            {mastered > 0 && (
+            {learned > 0 && (
               <>
                 <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
                 <span className="font-mono text-emerald-700 dark:text-emerald-300">
-                  ✓ {mastered} {t('test.list.repasMasteredShort')}
+                  ✓ {learned} {t('test.list.repasLearnedShort')}
                 </span>
               </>
             )}

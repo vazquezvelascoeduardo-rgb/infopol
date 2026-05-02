@@ -1,40 +1,39 @@
-// Sistema de revisió de preguntes errades (Leitner / Anki-style).
+// Sistema de revisió de preguntes errades (estil Anki / SRS).
 //
-// Cada vegada que l'usuari falla una pregunta, en deixem constància aquí
-// amb la seva "caixa" Leitner. Una resposta correcta puja la caixa; una
-// resposta errada la baixa a 1 (que vol dir 'cal repassar aviat').
-// Cada caixa té un interval de repàs:
+// Cada vegada que l'usuari falla una pregunta, en deixem constància aquí.
+// Els intervals entre revisions els calculem a partir del comptador
+// d'èxits consecutius des de l'últim error (`successStreak`):
 //
-//   Caixa 1 → 1 dia    (acabat de fallar, repàs immediat)
-//   Caixa 2 → 2 dies
-//   Caixa 3 → 4 dies
-//   Caixa 4 → 8 dies
-//   Caixa 5 → 16 dies  (després de 2 èxits seguits → 'mastered')
+//   0 (acabat de fallar) → repàs en 1 dia
+//   1                    → 2 dies
+//   2                    → 4 dies
+//   3 (APRESA)           → 30 dies
+//   4                    → 60 dies
+//   5                    → 120 dies
+//   6+                   → 240 dies (cap màxim)
 //
-// Tot al localStorage (clau 'infopol-test-failures'). Sense backend; les
-// dades viuen al dispositiu. Si en el futur volem sincronització entre
-// dispositius, només cal afegir una capa de sync sobre aquest mateix
-// model.
+// Quan arriba a 3 èxits seguits, la pregunta queda marcada com a
+// "apresa" però NO surt del cicle: torna a aparèixer cada cop més
+// espaiada per refrescar la memòria a llarg termini. Si alguna vegada
+// l'usuari la torna a fallar, reseteja a 0 èxits → caixa 1.
+//
+// Tot al localStorage (clau 'infopol-test-failures'). Sense backend.
 import { useEffect, useState } from 'react';
 import { TOPICS } from '../data/tests';
 import type { TestQuestion } from '../data/tests/types';
 
 const STORAGE_KEY = 'infopol-test-failures';
 
-export type Box = 1 | 2 | 3 | 4 | 5;
-
 export type FailureRecord = {
   /** ID de la pregunta (ex. 'manresa-42'). */
   questionId: string;
-  /** Slug del tema d'origen (ex. 'manresa'). */
+  /** Slug del tema d'origen. */
   topicSlug: string;
-  /** Caixa Leitner actual (1-5). */
-  box: Box;
-  /** Vegades que l'usuari ha fallat aquesta pregunta. */
+  /** Vegades totals que l'usuari ha fallat aquesta pregunta. */
   failures: number;
-  /** Èxits consecutius des de l'últim error. */
+  /** Èxits consecutius des de l'últim error (0 = acabat de fallar). */
   successStreak: number;
-  /** Timestamp ms del primer error (per ordenar 'noves'). */
+  /** Timestamp ms del primer error registrat. */
   firstFailedAt: number;
   /** Timestamp ms de l'últim error. */
   lastFailedAt: number;
@@ -42,24 +41,63 @@ export type FailureRecord = {
   lastReviewedAt?: number;
   /** Timestamp ms de la pròxima revisió programada. */
   nextReviewAt: number;
-  /** True quan l'usuari ha demostrat dominar la pregunta (caixa 5 + 2 èxits). */
-  mastered: boolean;
+  /** True quan l'usuari ha demostrat saber-la (3+ èxits seguits). */
+  learned: boolean;
 };
 
 type FailuresState = Record<string, FailureRecord>;
-
 const EMPTY: FailuresState = {};
 
-// Intervals en dies per caixa.
-const BOX_INTERVAL_DAYS: Record<Box, number> = {
-  1: 1,
-  2: 2,
-  3: 4,
-  4: 8,
-  5: 16,
-};
-
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+
+/**
+ * Dies fins al pròxim repàs en funció del nombre d'èxits consecutius.
+ * 0 = acabat de fallar; 3+ = ja apresa (intervals creixents).
+ */
+export function intervalDaysForStreak(streak: number): number {
+  if (streak <= 0) return 1;
+  if (streak === 1) return 2;
+  if (streak === 2) return 4;
+  if (streak === 3) return 30;   // APRESA
+  if (streak === 4) return 60;
+  if (streak === 5) return 120;
+  return 240; // cap màxim
+}
+
+/** Threshold a partir del qual una pregunta es considera 'apresa'. */
+export const LEARNED_THRESHOLD = 3;
+
+// ── Lectura/escriptura amb migració de versions anteriors ───────────
+
+function migrateOne(raw: unknown): FailureRecord | null {
+  if (!raw || typeof raw !== 'object') return null;
+  const r = raw as Record<string, unknown>;
+  const id = typeof r.questionId === 'string' ? r.questionId : null;
+  const slug = typeof r.topicSlug === 'string' ? r.topicSlug : null;
+  if (!id || !slug) return null;
+  // Versió anterior tenia `box: 1..5` i `mastered: bool`. Convertim a streak.
+  const successStreak = typeof r.successStreak === 'number'
+    ? r.successStreak
+    : typeof r.box === 'number'
+      ? Math.max(0, (r.box as number) - 1)
+      : 0;
+  const learned = typeof r.learned === 'boolean'
+    ? (r.learned as boolean)
+    : typeof r.mastered === 'boolean'
+      ? (r.mastered as boolean)
+      : successStreak >= LEARNED_THRESHOLD;
+  return {
+    questionId: id,
+    topicSlug: slug,
+    failures: typeof r.failures === 'number' ? r.failures : 1,
+    successStreak,
+    firstFailedAt: typeof r.firstFailedAt === 'number' ? r.firstFailedAt : (r.lastFailedAt as number) || Date.now(),
+    lastFailedAt: typeof r.lastFailedAt === 'number' ? r.lastFailedAt : Date.now(),
+    lastReviewedAt: typeof r.lastReviewedAt === 'number' ? r.lastReviewedAt : undefined,
+    nextReviewAt: typeof r.nextReviewAt === 'number' ? r.nextReviewAt : Date.now(),
+    learned,
+  };
+}
 
 function read(): FailuresState {
   if (typeof window === 'undefined') return EMPTY;
@@ -68,7 +106,12 @@ function read(): FailuresState {
     if (!raw) return EMPTY;
     const parsed = JSON.parse(raw);
     if (!parsed || typeof parsed !== 'object') return EMPTY;
-    return parsed as FailuresState;
+    const out: FailuresState = {};
+    for (const [id, val] of Object.entries(parsed as Record<string, unknown>)) {
+      const m = migrateOne(val);
+      if (m) out[id] = m;
+    }
+    return out;
   } catch {
     return EMPTY;
   }
@@ -81,68 +124,54 @@ function write(s: FailuresState) {
   } catch { /* silent */ }
 }
 
-function nextReviewFromBox(box: Box, now: number): number {
-  return now + BOX_INTERVAL_DAYS[box] * ONE_DAY_MS;
+function nextReviewFromStreak(streak: number, now: number): number {
+  return now + intervalDaysForStreak(streak) * ONE_DAY_MS;
 }
 
-/** Registra que l'usuari ha fallat una pregunta. Baixa a caixa 1. */
+// ── API pública ──────────────────────────────────────────────────────
+
+/** Registra que l'usuari ha fallat una pregunta. Reseteja successStreak. */
 export function recordFailure(questionId: string, topicSlug: string): void {
   const s = read();
   const now = Date.now();
   const prev = s[questionId];
-  if (prev) {
-    s[questionId] = {
-      ...prev,
-      box: 1,
-      failures: prev.failures + 1,
-      successStreak: 0,
-      lastFailedAt: now,
-      lastReviewedAt: now,
-      nextReviewAt: nextReviewFromBox(1, now),
-      mastered: false,
-    };
-  } else {
-    s[questionId] = {
-      questionId,
-      topicSlug,
-      box: 1,
-      failures: 1,
-      successStreak: 0,
-      firstFailedAt: now,
-      lastFailedAt: now,
-      lastReviewedAt: now,
-      nextReviewAt: nextReviewFromBox(1, now),
-      mastered: false,
-    };
-  }
-  write(s);
-}
-
-/**
- * Registra un èxit en una pregunta. Només fa res si la pregunta ja era
- * un fallat conegut: en aquest cas, puja la caixa i programa el següent
- * repàs. Si arriba a caixa 5 amb successStreak >= 2 → 'mastered'.
- */
-export function recordSuccess(questionId: string): void {
-  const s = read();
-  const prev = s[questionId];
-  if (!prev) return; // no era un fallat → res a fer
-  const now = Date.now();
-  const newBox: Box = Math.min(5, prev.box + 1) as Box;
-  const newStreak = prev.successStreak + 1;
-  const mastered = newBox === 5 && newStreak >= 2;
   s[questionId] = {
-    ...prev,
-    box: newBox,
-    successStreak: newStreak,
+    questionId,
+    topicSlug,
+    failures: (prev?.failures ?? 0) + 1,
+    successStreak: 0,
+    firstFailedAt: prev?.firstFailedAt ?? now,
+    lastFailedAt: now,
     lastReviewedAt: now,
-    nextReviewAt: nextReviewFromBox(newBox, now),
-    mastered,
+    nextReviewAt: nextReviewFromStreak(0, now),
+    learned: false,
   };
   write(s);
 }
 
-/** Esborra una pregunta de la llista de fallats (l'usuari la considera dominada). */
+/**
+ * Registra un èxit en una pregunta. Només té efecte si la pregunta
+ * existia com a fallat: en aquest cas, incrementa successStreak,
+ * marca com a 'apresa' si arriba a 3, i programa el següent repàs
+ * més espaiat.
+ */
+export function recordSuccess(questionId: string): void {
+  const s = read();
+  const prev = s[questionId];
+  if (!prev) return;
+  const now = Date.now();
+  const newStreak = prev.successStreak + 1;
+  s[questionId] = {
+    ...prev,
+    successStreak: newStreak,
+    lastReviewedAt: now,
+    nextReviewAt: nextReviewFromStreak(newStreak, now),
+    learned: newStreak >= LEARNED_THRESHOLD,
+  };
+  write(s);
+}
+
+/** Esborra una pregunta del registre (l'usuari la considera dominada). */
 export function removeFailure(questionId: string): void {
   const s = read();
   if (!s[questionId]) return;
@@ -150,50 +179,54 @@ export function removeFailure(questionId: string): void {
   write(s);
 }
 
-/** Esborra TOTS els registres de fallats. */
+/** Esborra TOTS els registres. */
 export function resetAllFailures(): void {
   write(EMPTY);
 }
 
-/** Retorna tots els registres ordenats per `nextReviewAt` ascendent. */
+/** Tots els registres ordenats per `nextReviewAt` ascendent (els due primer). */
 export function getAllFailures(): FailureRecord[] {
   const s = read();
   return Object.values(s).sort((a, b) => a.nextReviewAt - b.nextReviewAt);
 }
 
-/** Retorna els registres que toca repassar ara (no masterats i due). */
+/** Retorna els registres que toca repassar ara. */
 export function getDueFailures(now: number = Date.now()): FailureRecord[] {
-  return getAllFailures().filter((r) => !r.mastered && r.nextReviewAt <= now);
+  return getAllFailures().filter((r) => r.nextReviewAt <= now);
 }
 
-/** Comptadors per al dashboard. */
+/** Comptadors per al dashboard / badges. */
 export type FailuresCounts = {
-  total: number;       // tots els registres no-masterats
-  due: number;         // due ara
-  mastered: number;    // ja dominats
+  /** Total de preguntes guardades (incloent apreses). */
+  total: number;
+  /** Due ara (apreses incloses si toca refrescar-les). */
+  due: number;
+  /** Apreses (3+ èxits). */
+  learned: number;
+  /** Encara per aprendre (< 3 èxits). */
+  pending: number;
 };
 
 export function getFailuresCounts(now: number = Date.now()): FailuresCounts {
   const all = getAllFailures();
   let total = 0;
   let due = 0;
-  let mastered = 0;
+  let learned = 0;
+  let pending = 0;
   for (const r of all) {
-    if (r.mastered) mastered++;
-    else {
-      total++;
-      if (r.nextReviewAt <= now) due++;
-    }
+    total++;
+    if (r.learned) learned++; else pending++;
+    if (r.nextReviewAt <= now) due++;
   }
-  return { total, due, mastered };
+  return { total, due, learned, pending };
 }
 
 // ── Cerca de la pregunta original a partir de l'ID ──────────────────
 
 /**
  * Donat un questionId, retorna la pregunta original (amb topicSlug
- * etiquetat per al render) o null si no existeix (pot passar si la
- * pregunta s'ha eliminat del codi font des que es va guardar).
+ * etiquetat) o null si no existeix (pot passar si la pregunta s'ha
+ * eliminat del codi font des que es va guardar).
  */
 export function lookupQuestion(
   questionId: string,
@@ -206,14 +239,15 @@ export function lookupQuestion(
 }
 
 /**
- * Construeix la pool de preguntes per al mode repàs. Per defecte, només
- * les due ara; opció `all` per repassar totes les no-masterades.
+ * Construeix la pool de preguntes per al mode repàs. Per defecte només
+ * les due ara; si `onlyDue=false`, totes les guardades (incloent
+ * apreses no-due, perquè l'usuari pugui forçar un repàs).
  */
 export function buildRepasPool(
   opts: { onlyDue?: boolean; max?: number; now?: number } = {},
 ): Array<TestQuestion & { topicSlug: string }> {
   const { onlyDue = true, max = 50, now = Date.now() } = opts;
-  const records = onlyDue ? getDueFailures(now) : getAllFailures().filter((r) => !r.mastered);
+  const records = onlyDue ? getDueFailures(now) : getAllFailures();
   const out: Array<TestQuestion & { topicSlug: string }> = [];
   for (const r of records) {
     const q = lookupQuestion(r.questionId);
@@ -235,11 +269,33 @@ export function useFailuresCounts(): FailuresCounts {
     }
     refresh();
     window.addEventListener('storage', refresh);
-    // Tornem a calcular quan torna el focus per refrescar 'due'.
-    window.addEventListener('focus', () => refresh());
+    const onFocus = () => setCounts(getFailuresCounts());
+    window.addEventListener('focus', onFocus);
     return () => {
       window.removeEventListener('storage', refresh);
+      window.removeEventListener('focus', onFocus);
     };
   }, []);
   return counts;
+}
+
+/** Hook reactiu per a la llista completa (auto-refresca amb localStorage). */
+export function useAllFailures(): FailureRecord[] {
+  const [list, setList] = useState<FailureRecord[]>(() => getAllFailures());
+  useEffect(() => {
+    function refresh(e?: StorageEvent) {
+      if (!e || e.key === STORAGE_KEY || e.key === null) {
+        setList(getAllFailures());
+      }
+    }
+    refresh();
+    window.addEventListener('storage', refresh);
+    const onFocus = () => setList(getAllFailures());
+    window.addEventListener('focus', onFocus);
+    return () => {
+      window.removeEventListener('storage', refresh);
+      window.removeEventListener('focus', onFocus);
+    };
+  }, []);
+  return list;
 }

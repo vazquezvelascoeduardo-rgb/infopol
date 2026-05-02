@@ -7,6 +7,7 @@ import { useT } from '../lib/i18n';
 import { useFavorites, type Bookmark } from '../lib/bookmarks';
 import { MODULES } from '../lib/content';
 import { NEWS, useNewCount, markNewsSeen } from '../lib/news';
+import { useFailuresCounts } from '../lib/failures';
 
 function NewsBlock() {
   const { t } = useT();
@@ -125,6 +126,7 @@ function FavItem({ b, onRemove }: { b: Bookmark; onRemove: () => void }) {
 
 export default function Home() {
   const { t } = useT();
+  const { due: failuresDue } = useFailuresCounts();
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-6">
@@ -356,9 +358,19 @@ export default function Home() {
       >
         <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-600" />
         <div aria-hidden className="absolute -top-12 -right-12 h-44 w-44 rounded-full bg-blue-200/30 blur-3xl dark:hidden" />
-        <span className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-2 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow">
-          {t('home.tests.badgeNew')}
-        </span>
+        {failuresDue > 0 ? (
+          <span
+            title={t('home.tests.duePending')}
+            className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-rose-600 to-orange-600 px-2 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow inline-flex items-center gap-1"
+          >
+            <span aria-hidden>🔁</span>
+            {failuresDue} {t('home.tests.duePendingShort')}
+          </span>
+        ) : (
+          <span className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-2 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow">
+            {t('home.tests.badgeNew')}
+          </span>
+        )}
         <div className="relative flex items-center gap-4">
           <span
             aria-hidden

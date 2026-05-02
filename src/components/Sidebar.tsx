@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MODULES } from '../lib/content';
 import { useT } from '../lib/i18n';
+import { useFailuresCounts } from '../lib/failures';
 import type { Theme } from '../lib/theme';
 import { applyTextSize, getInitialTextSize, type TextSize } from '../lib/fontSize';
 
@@ -109,12 +110,7 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
           <SimpleLink to="/" icon="🏠" label={t('sidebar.home')} />
 
           {/* Tests — entrada destacada */}
-          <FeatureLink
-            to="/test"
-            icon="📝"
-            label={t('sidebar.tests')}
-            badge={t('sidebar.tests.badge')}
-          />
+          <TestsFeatureLink t={t} />
 
           {/* Superbuscador */}
           <SimpleLink
@@ -330,6 +326,45 @@ function SimpleLink({
       <span aria-hidden className="text-lg">{icon}</span>
       <span className="font-medium">{label}</span>
     </Link>
+  );
+}
+
+/**
+ * Variant per a Tests: si hi ha repassos pendents, mostra un comptador
+ * vermell. Si no, manté el badge 'Nou'.
+ */
+function TestsFeatureLink({ t }: { t: (k: string) => string }) {
+  const { due } = useFailuresCounts();
+  if (due > 0) {
+    return (
+      <Link
+        to="/test"
+        className="relative flex items-center gap-3 rounded-lg px-3 py-2.5 transition
+          bg-gradient-to-r from-blue-50 via-indigo-50/60 to-purple-50/60
+          ring-1 ring-blue-200/70
+          hover:from-blue-100 hover:to-purple-100 hover:ring-blue-300
+          dark:from-blue-500/15 dark:via-indigo-500/10 dark:to-purple-500/15
+          dark:ring-blue-400/20 dark:hover:ring-blue-400/40"
+      >
+        <span aria-hidden className="text-lg">📝</span>
+        <span className="font-bold text-blue-800 dark:text-blue-200 flex-1">{t('sidebar.tests')}</span>
+        <span
+          title={t('sidebar.tests.duePending')}
+          className="rounded-full bg-gradient-to-r from-rose-600 to-orange-600 px-2 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow inline-flex items-center gap-1"
+        >
+          <span aria-hidden>🔁</span>
+          {due}
+        </span>
+      </Link>
+    );
+  }
+  return (
+    <FeatureLink
+      to="/test"
+      icon="📝"
+      label={t('sidebar.tests')}
+      badge={t('sidebar.tests.badge')}
+    />
   );
 }
 

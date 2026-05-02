@@ -16,7 +16,7 @@ import {
   recordTestResult, getGlobalStats, getTopicStats,
   type TopicStats,
 } from '../../lib/testStats';
-import { recordFailure, recordSuccess, buildRepasPool } from '../../lib/failures';
+import { recordFailure, recordSuccess, buildRepasPool, useAllFailures, removeFailure, resetAllFailures, LEARNED_THRESHOLD, type FailureRecord } from '../../lib/failures';
 import { checkAchievements, type Achievement } from '../../lib/achievements';
 import { useT } from '../../lib/i18n';
 
@@ -115,6 +115,26 @@ export default function TestSession() {
     setState({
       phase: 'run',
       mode,
+      questions: shuffled,
+      index: 0,
+      answers: new Array(shuffled.length).fill(null),
+      revealedIdx: new Set(),
+      startedAt: Date.now(),
+    });
+  }
+
+  /**
+   * Inicia una sessió de repàs. Si `includeNotDue=true` agafa també
+   * les preguntes que encara no estan due (forçar repàs total).
+   * Sempre en mode 'study' (estudi amb feedback immediat).
+   */
+  function startRepas(includeNotDue: boolean) {
+    const newPool = buildRepasPool({ onlyDue: !includeNotDue, max: 50 });
+    if (newPool.length === 0) return;
+    const shuffled = newPool.map((q) => shuffleQuestion(q));
+    setState({
+      phase: 'run',
+      mode: 'study',
       questions: shuffled,
       index: 0,
       answers: new Array(shuffled.length).fill(null),
@@ -311,15 +331,19 @@ export default function TestSession() {
       </nav>
 
       {state.phase === 'select' && (
-        <SelectPhase
-          title={title}
-          accent={accent}
-          total={pool.length}
-          remaining={remaining}
-          onStart={startTest}
-          onReset={onResetTopic}
-          isRepas={isRepas}
-        />
+        isRepas ? (
+          <RepasListPhase onStart={startRepas} />
+        ) : (
+          <SelectPhase
+            title={title}
+            accent={accent}
+            total={pool.length}
+            remaining={remaining}
+            onStart={startTest}
+            onReset={onResetTopic}
+            isRepas={isRepas}
+          />
+        )
       )}
 
       {state.phase === 'run' && (
@@ -958,6 +982,362 @@ function ResultPhase({
       </div>
     </>
   );
+}
+
+// ════════════════════════════════════════════════════════════════════
+// REPÀS — Llistat de totes les preguntes guardades + accions
+// ════════════════════════════════════════════════════════════════════
+
+function RepasListPhase({
+  onStart,
+}: {
+  onStart: (includeNotDue: boolean) => void;
+}) {
+  const { t } = useT();
+  const failures = useAllFailures();
+  const now = Date.now();
+
+  const due = failures.filter((r) => !r.learned && r.nextReviewAt <= now);
+  const upcoming = failures.filter((r) => !r.learned && r.nextReviewAt > now);
+  const learned = failures.filter((r) => r.learned);
+  const total = failures.length;
+
+  const dueCount = due.length;
+  const learnedDueCount = learned.filter((r) => r.nextReviewAt <= now).length;
+  // Tots els due (incloent apreses que toquin refrescar)
+  const allDue = dueCount + learnedDueCount;
+
+  function onResetAll() {
+    if (typeof window === 'undefined') return;
+    if (window.confirm(t('test.repas.resetConfirm'))) {
+      resetAllFailures();
+    }
+  }
+
+  return (
+    <>
+      {/* Capçalera */}
+      <header className="rounded-2xl border p-5 sm:p-6 mb-5
+        border-rose-200/70 bg-gradient-to-br from-rose-50 via-white to-orange-50
+        dark:border-rose-400/30 dark:from-[#2a0f1a] dark:via-[#170c14] dark:to-[#1a0f08]">
+        <div className="flex items-start gap-4">
+          <span aria-hidden className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-500 to-orange-600 text-3xl text-white shadow-inner">
+            🔁
+          </span>
+          <div className="min-w-0">
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight">
+              {t('test.repas.title')}
+            </h1>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+              {total === 0
+                ? t('test.repas.emptyDesc')
+                : t('test.repas.summary')
+                    .replace('{total}', String(total))
+                    .replace('{due}', String(allDue))}
+            </p>
+          </div>
+        </div>
+      </header>
+
+      {/* Comptadors compactes */}
+      {total > 0 && (
+        <section className="grid grid-cols-3 gap-2 mb-5">
+          <CountBox
+            value={allDue}
+            label={t('test.repas.statDue')}
+            icon="⏰"
+            tone={allDue > 0 ? 'rose' : 'slate'}
+          />
+          <CountBox
+            value={total - learned.length}
+            label={t('test.repas.statPending')}
+            icon="📚"
+            tone="amber"
+          />
+          <CountBox
+            value={learned.length}
+            label={t('test.repas.statLearned')}
+            icon="✓"
+            tone="emerald"
+          />
+        </section>
+      )}
+
+      {/* Botons d'acció */}
+      {total === 0 ? (
+        <div className="rounded-2xl border-2 border-dashed border-emerald-300 bg-emerald-50/50 dark:bg-emerald-400/5 p-6 text-center mb-5">
+          <div className="text-4xl mb-2" aria-hidden>✨</div>
+          <h2 className="font-bold text-lg mb-1 text-emerald-800 dark:text-emerald-300">
+            {t('test.repas.zeroTitle')}
+          </h2>
+          <p className="text-sm text-emerald-700 dark:text-emerald-200/80">
+            {t('test.repas.zeroDesc')}
+          </p>
+        </div>
+      ) : (
+        <div className="flex flex-col sm:flex-row gap-2 mb-5">
+          <button
+            type="button"
+            disabled={allDue === 0}
+            onClick={() => onStart(false)}
+            className="flex-1 rounded-xl bg-gradient-to-r from-rose-500 to-orange-600 hover:from-rose-600 hover:to-orange-700 text-white font-bold px-5 py-3 shadow-md
+              disabled:opacity-50 disabled:cursor-not-allowed disabled:from-slate-400 disabled:to-slate-500"
+          >
+            ▶ {t('test.repas.startDue').replace('{n}', String(allDue))}
+          </button>
+          {total > allDue && (
+            <button
+              type="button"
+              onClick={() => onStart(true)}
+              className="flex-1 rounded-xl border-2 px-5 py-3 text-sm font-bold transition
+                border-slate-200 bg-white text-slate-700 hover:bg-slate-50
+                dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
+            >
+              ↻ {t('test.repas.startAll').replace('{n}', String(Math.min(total, 50)))}
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* LLISTA — Pendents (due) */}
+      {due.length > 0 && (
+        <FailureSection
+          icon="⏰"
+          label={t('test.repas.sectionDue')}
+          tone="rose"
+          records={due}
+        />
+      )}
+
+      {/* LLISTA — Programades (no due encara) */}
+      {upcoming.length > 0 && (
+        <FailureSection
+          icon="📅"
+          label={t('test.repas.sectionUpcoming')}
+          tone="amber"
+          records={upcoming}
+        />
+      )}
+
+      {/* LLISTA — Apreses */}
+      {learned.length > 0 && (
+        <FailureSection
+          icon="✓"
+          label={t('test.repas.sectionLearned')}
+          tone="emerald"
+          records={learned}
+        />
+      )}
+
+      {/* Reset all */}
+      {total > 0 && (
+        <div className="mt-6 text-center">
+          <button
+            type="button"
+            onClick={onResetAll}
+            className="text-xs uppercase tracking-wider font-semibold text-slate-400 hover:text-red-600 dark:hover:text-red-400"
+          >
+            🗑 {t('test.repas.resetAll')}
+          </button>
+        </div>
+      )}
+    </>
+  );
+}
+
+function CountBox({
+  value, label, icon, tone,
+}: {
+  value: number;
+  label: string;
+  icon: string;
+  tone: 'rose' | 'amber' | 'emerald' | 'slate';
+}) {
+  const toneCls: Record<string, string> = {
+    rose: 'border-rose-200/70 bg-rose-50 text-rose-700 dark:border-rose-400/30 dark:bg-rose-500/10 dark:text-rose-300',
+    amber: 'border-amber-200/70 bg-amber-50 text-amber-700 dark:border-amber-400/30 dark:bg-amber-500/10 dark:text-amber-300',
+    emerald: 'border-emerald-200/70 bg-emerald-50 text-emerald-700 dark:border-emerald-400/30 dark:bg-emerald-500/10 dark:text-emerald-300',
+    slate: 'border-slate-200 bg-slate-50 text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-slate-400',
+  };
+  return (
+    <div className={`rounded-xl border p-3 text-center ${toneCls[tone]}`}>
+      <div className="text-xl" aria-hidden>{icon}</div>
+      <div className="text-2xl font-black leading-none">{value}</div>
+      <div className="text-[10px] uppercase tracking-wider font-semibold opacity-80 mt-0.5">
+        {label}
+      </div>
+    </div>
+  );
+}
+
+function FailureSection({
+  icon, label, tone, records,
+}: {
+  icon: string;
+  label: string;
+  tone: 'rose' | 'amber' | 'emerald';
+  records: FailureRecord[];
+}) {
+  const toneCls: Record<string, string> = {
+    rose: 'from-rose-400 to-orange-500 dark:from-rose-300 dark:to-orange-400',
+    amber: 'from-amber-400 to-amber-600 dark:from-amber-300 dark:to-amber-500',
+    emerald: 'from-emerald-400 to-teal-500 dark:from-emerald-300 dark:to-teal-400',
+  };
+  return (
+    <section className="mb-5">
+      <div className="flex items-center gap-3 mb-2">
+        <span className={`h-5 w-1.5 rounded-full bg-gradient-to-b ${toneCls[tone]}`} />
+        <h2 className="text-xs font-black uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300 inline-flex items-center gap-2">
+          <span aria-hidden>{icon}</span>
+          {label}
+          <span className="rounded-full bg-slate-200 dark:bg-white/10 px-2 py-0.5 text-[10px] font-mono">
+            {records.length}
+          </span>
+        </h2>
+        <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
+      </div>
+      <ul className="space-y-2">
+        {records.map((r) => (
+          <FailureItem key={r.questionId} record={r} />
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function FailureItem({ record }: { record: FailureRecord }) {
+  const { t } = useT();
+  const q = useMemo(
+    () => TOPICS.find((tp) => tp.slug === record.topicSlug)?.questions.find((qq) => qq.id === record.questionId),
+    [record],
+  );
+  const topic = TOPICS.find((tp) => tp.slug === record.topicSlug);
+  const [expanded, setExpanded] = useState(false);
+  const [confirming, setConfirming] = useState(false);
+
+  if (!q) {
+    // Pregunta orfena (s'ha eliminat del codi font). Permetre eliminar.
+    return (
+      <li className="rounded-xl border p-3 text-sm border-dashed border-slate-300 bg-slate-50/60 dark:border-white/10 dark:bg-white/5 flex items-center justify-between">
+        <span className="text-slate-500 dark:text-slate-400 italic">
+          {t('test.repas.orphan').replace('{id}', record.questionId)}
+        </span>
+        <button
+          type="button"
+          onClick={() => removeFailure(record.questionId)}
+          className="text-xs font-semibold text-red-600 dark:text-red-400 hover:underline"
+        >
+          {t('test.repas.delete')}
+        </button>
+      </li>
+    );
+  }
+
+  const now = Date.now();
+  const isDue = record.nextReviewAt <= now;
+  const dueIn = record.nextReviewAt - now;
+  const dueText = isDue
+    ? t('test.repas.dueNow')
+    : formatRelative(dueIn, t);
+  const streakLabel = record.successStreak >= LEARNED_THRESHOLD
+    ? t('test.repas.learned')
+    : t('test.repas.streak').replace('{n}', String(record.successStreak)).replace('{th}', String(LEARNED_THRESHOLD));
+
+  function onDelete() {
+    if (confirming) {
+      removeFailure(record.questionId);
+    } else {
+      setConfirming(true);
+      setTimeout(() => setConfirming(false), 3000);
+    }
+  }
+
+  return (
+    <li className="rounded-xl border p-3 text-sm
+      border-slate-200 bg-white
+      dark:border-white/10 dark:bg-[#0f1d34]">
+      <div className="flex items-start gap-3">
+        {topic && (
+          <span aria-hidden className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${topic.accent} text-base text-white shadow-inner`}>
+            {topic.icon}
+          </span>
+        )}
+        <div className="min-w-0 flex-1">
+          {topic && (
+            <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-0.5">
+              {topic.title}
+            </div>
+          )}
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            className="text-left w-full font-medium leading-snug text-slate-800 dark:text-slate-100 hover:text-blue-700 dark:hover:text-blue-300"
+          >
+            {expanded
+              ? q.text
+              : (q.text.length > 110 ? q.text.slice(0, 110) + '…' : q.text)}
+          </button>
+
+          {expanded && (
+            <ol className="mt-2 space-y-1 text-xs">
+              {q.options.map((opt, i) => (
+                <li key={i}
+                  className={`rounded-md px-2 py-1 flex items-start gap-2
+                    ${i === q.correct
+                      ? 'bg-emerald-50 text-emerald-900 dark:bg-emerald-400/10 dark:text-emerald-200 font-semibold'
+                      : 'bg-slate-50 text-slate-600 dark:bg-white/5 dark:text-slate-400'}`}>
+                  <span className="font-mono shrink-0">{String.fromCharCode(65 + i)}.</span>
+                  <span>{opt}</span>
+                  {i === q.correct && <span aria-hidden className="ml-auto">✓</span>}
+                </li>
+              ))}
+            </ol>
+          )}
+
+          <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[11px]">
+            <span className={`font-mono font-bold ${isDue ? 'text-rose-700 dark:text-rose-300' : 'text-slate-500 dark:text-slate-400'}`}>
+              {isDue ? '⏰' : '📅'} {dueText}
+            </span>
+            <span className="text-slate-300 dark:text-slate-600" aria-hidden>·</span>
+            <span className="font-mono text-slate-500 dark:text-slate-400">
+              {streakLabel}
+            </span>
+            <span className="text-slate-300 dark:text-slate-600" aria-hidden>·</span>
+            <span className="font-mono text-slate-500 dark:text-slate-400">
+              ✗ {record.failures}
+            </span>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={onDelete}
+          title={t('test.repas.delete')}
+          className={`shrink-0 rounded-md px-2 py-1 text-xs font-semibold transition
+            ${confirming
+              ? 'bg-red-600 text-white'
+              : 'text-slate-400 hover:bg-red-50 hover:text-red-700 dark:hover:bg-red-500/10 dark:hover:text-red-300'}`}
+        >
+          {confirming ? t('test.repas.confirmDelete') : '✕'}
+        </button>
+      </div>
+    </li>
+  );
+}
+
+/**
+ * Format relatiu d'un interval (ms) → "en 2 dies", "en 3 hores", etc.
+ * Si negatiu, retorna "ara".
+ */
+function formatRelative(ms: number, t: (k: string) => string): string {
+  if (ms <= 0) return t('test.repas.dueNow');
+  const minutes = Math.floor(ms / (60 * 1000));
+  if (minutes < 60) return t('test.repas.inMinutes').replace('{n}', String(Math.max(1, minutes)));
+  const hours = Math.floor(ms / (60 * 60 * 1000));
+  if (hours < 24) return t('test.repas.inHours').replace('{n}', String(hours));
+  const days = Math.floor(ms / (24 * 60 * 60 * 1000));
+  if (days < 30) return t('test.repas.inDays').replace('{n}', String(days));
+  const months = Math.floor(days / 30);
+  return t('test.repas.inMonths').replace('{n}', String(months));
 }
 
 // ════════════════════════════════════════════════════════════════════
