@@ -36,6 +36,8 @@ const Privacitat = lazy(() => import('./pages/Privacitat'));
 const TestList = lazy(() => import('./pages/test/TestList'));
 const TestSession = lazy(() => import('./pages/test/TestSession'));
 const Achievements = lazy(() => import('./pages/test/Achievements'));
+const Noticies = lazy(() => import('./pages/Noticies'));
+const NoticiaDetall = lazy(() => import('./pages/NoticiaDetall'));
 
 function PageFallback() {
   return (
@@ -71,6 +73,8 @@ export default function App() {
           <Route path="/test" element={<TestList />} />
           <Route path="/test/logros" element={<Achievements />} />
           <Route path="/test/:slug" element={<TestSession />} />
+          <Route path="/noticies" element={<Noticies />} />
+          <Route path="/noticies/:slug" element={<NoticiaDetall />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

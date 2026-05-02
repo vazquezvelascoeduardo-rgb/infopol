@@ -13,6 +13,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { MODULES } from '../lib/content';
 import { useT } from '../lib/i18n';
 import { useFailuresCounts } from '../lib/failures';
+import { useUnreadNoticiesCount } from '../lib/noticies';
 import type { Theme } from '../lib/theme';
 import { applyTextSize, getInitialTextSize, type TextSize } from '../lib/fontSize';
 
@@ -126,6 +127,9 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
             icon="🧰"
             label={t('sidebar.recursos')}
           />
+
+          {/* Noticies */}
+          <NoticiesLink t={t} />
 
           {/* Lleis (col·lapsable) — el chevron desplega les categories;
               el titol mateix es enllaç al llistat complet. */}
@@ -360,6 +364,27 @@ function TestsFeatureLink({ t }: { t: (k: string) => string }) {
       label={t('sidebar.tests')}
       badge={t('sidebar.tests.badge')}
     />
+  );
+}
+
+/**
+ * Entrada de Notícies amb badge numèric quan n'hi ha de no llegides.
+ */
+function NoticiesLink({ t }: { t: (k: string) => string }) {
+  const unread = useUnreadNoticiesCount();
+  return (
+    <Link
+      to="/noticies"
+      className="flex items-center gap-3 rounded-lg px-3 py-2.5 transition hover:bg-slate-50 dark:hover:bg-white/5"
+    >
+      <span aria-hidden className="text-lg">📰</span>
+      <span className="font-medium flex-1">{t('sidebar.noticies')}</span>
+      {unread > 0 && (
+        <span className="rounded-full bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider">
+          {unread}
+        </span>
+      )}
+    </Link>
   );
 }
 

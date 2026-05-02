@@ -8,6 +8,7 @@ import { useFavorites, type Bookmark } from '../lib/bookmarks';
 import { MODULES } from '../lib/content';
 import { NEWS, useNewCount, markNewsSeen } from '../lib/news';
 import { useFailuresCounts } from '../lib/failures';
+import { NOTICIES, useUnreadNoticiesCount } from '../lib/noticies';
 
 function NewsBlock() {
   const { t } = useT();
@@ -127,6 +128,8 @@ function FavItem({ b, onRemove }: { b: Bookmark; onRemove: () => void }) {
 export default function Home() {
   const { t } = useT();
   const { due: failuresDue } = useFailuresCounts();
+  const unreadNoticies = useUnreadNoticiesCount();
+  const recentNoticies = NOTICIES.slice(0, 3);
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-6">
@@ -395,6 +398,64 @@ export default function Home() {
           </span>
         </div>
       </Link>
+
+      {/* NOTÍCIES — secció pròpia: actualitat normativa, sentències, oposicions */}
+      {recentNoticies.length > 0 && (
+        <section className="mt-5 rounded-2xl border p-4 sm:p-5
+          border-blue-200/70 bg-gradient-to-br from-blue-50/50 via-white to-indigo-50/30
+          dark:border-blue-400/20 dark:bg-gradient-to-br dark:from-[#0e2244] dark:to-[#0f1d34]">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="h-5 w-1.5 rounded-full bg-gradient-to-b from-blue-500 to-indigo-700" />
+            <h2 className="text-xs font-black uppercase tracking-[0.25em] text-blue-700 dark:text-blue-400 inline-flex items-center gap-2">
+              <span aria-hidden>📰</span>
+              {t('home.noticies.title')}
+            </h2>
+            {unreadNoticies > 0 && (
+              <span className="rounded-full bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider">
+                {unreadNoticies} {t('home.noticies.newBadge')}
+              </span>
+            )}
+            <span className="h-px flex-1 bg-gradient-to-r from-blue-200 to-transparent dark:from-blue-400/20" />
+            <Link
+              to="/noticies"
+              className="text-xs font-semibold text-blue-700 dark:text-blue-400 hover:underline shrink-0"
+            >
+              {t('home.noticies.viewAll')} →
+            </Link>
+          </div>
+          <ul className="space-y-1.5">
+            {recentNoticies.map((n) => (
+              <li key={n.slug}>
+                <Link
+                  to={`/noticies/${encodeURIComponent(n.slug)}`}
+                  className="flex items-start gap-2 rounded-lg border px-3 py-2 text-sm transition
+                    border-slate-200/80 bg-white hover:border-blue-300
+                    dark:border-white/10 dark:bg-white/5 dark:hover:border-blue-400/40"
+                >
+                  <span aria-hidden className="text-base shrink-0 mt-0.5">
+                    {n.category === 'normativa' ? '📜'
+                      : n.category === 'jurisprudencia' ? '⚖️'
+                      : n.category === 'oposicions' ? '🎓'
+                      : n.category === 'sector' ? '🛡️'
+                      : '✨'}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="font-semibold text-slate-800 dark:text-slate-100 leading-snug truncate">
+                      {n.title}
+                    </div>
+                    <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                      {n.summary}
+                    </div>
+                  </div>
+                  <time className="text-[10px] font-mono text-slate-400 dark:text-slate-500 shrink-0 mt-1">
+                    {n.publishedAt.slice(5)}
+                  </time>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <div className="mt-5">
         <NewsBlock />
