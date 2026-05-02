@@ -16,6 +16,7 @@ import {
   recordTestResult, getGlobalStats, getTopicStats,
   type TopicStats,
 } from '../../lib/testStats';
+import { recordFailure, recordSuccess, buildRepasPool } from '../../lib/failures';
 import { checkAchievements, type Achievement } from '../../lib/achievements';
 import { useT } from '../../lib/i18n';
 
@@ -48,22 +49,27 @@ type SessionState =
     };
 
 const ALL_TOPICS_SLUG = 'tot';
+const REPAS_SLUG = 'repas';
 
 export default function TestSession() {
   const { slug = '' } = useParams();
   const { t } = useT();
 
   const isAll = slug === ALL_TOPICS_SLUG;
-  const topic = isAll ? null : getTopic(slug);
+  const isRepas = slug === REPAS_SLUG;
+  const topic = (isAll || isRepas) ? null : getTopic(slug);
 
-  // Pool de preguntes per a aquest tema (o tots).
+  // Pool de preguntes per a aquest tema (o tots, o repàs).
   const pool: TestQuestion[] = useMemo(() => {
+    if (isRepas) return buildRepasPool({ onlyDue: true, max: 50 });
     if (isAll) return getAllQuestions();
     return topic?.questions ?? [];
-  }, [isAll, topic]);
+  }, [isAll, isRepas, topic]);
 
   // Per a 'tot', el progrés és la unió de tots els temes.
+  // Per a 'repas', no usem progrés (les preguntes es repeteixen segons SRS).
   const answeredIds: Set<string> = useMemo(() => {
+    if (isRepas) return new Set<string>();
     if (isAll) {
       const set = new Set<string>();
       for (const tp of TOPICS) {
@@ -72,14 +78,14 @@ export default function TestSession() {
       return set;
     }
     return getAnsweredIds(slug);
-  }, [slug, isAll]);
+  }, [slug, isAll, isRepas]);
 
   // Nomes per al hook reactiu (re-render quan canvia localStorage).
   useTopicProgress(slug);
 
   const [state, setState] = useState<SessionState>({ phase: 'select' });
 
-  if (!isAll && !topic) {
+  if (!isAll && !isRepas && !topic) {
     return (
       <div className="mx-auto w-full max-w-3xl px-4 py-6">
         <p className="text-slate-600 dark:text-slate-400">{t('test.notFound')}</p>
@@ -90,9 +96,17 @@ export default function TestSession() {
     );
   }
 
-  const title = isAll ? t('test.list.allMixed') : topic!.title;
-  const accent = isAll ? 'from-purple-500 to-fuchsia-700' : topic!.accent;
-  const remaining = pool.length - answeredIds.size;
+  const title = isRepas
+    ? t('test.repas.title')
+    : isAll
+      ? t('test.list.allMixed')
+      : topic!.title;
+  const accent = isRepas
+    ? 'from-rose-500 to-orange-600'
+    : isAll
+      ? 'from-purple-500 to-fuchsia-700'
+      : topic!.accent;
+  const remaining = isRepas ? pool.length : pool.length - answeredIds.size;
 
   function startTest(count: number, mode: Mode) {
     const { questions, exhausted } = pickQuestions(pool, answeredIds, count);
@@ -183,7 +197,42 @@ export default function TestSession() {
 
   function finishTest() {
     if (state.phase !== 'run') return;
-    // Marquem com a respostes les preguntes que el usuari ha contestat
+
+    // ── 1) Actualitzem el SRS de cada pregunta resposta ──
+    // - Si correcta → recordSuccess (puja la caixa Leitner si era un fallat)
+    // - Si errada   → recordFailure (l'afegeix com a fallat o reseteja a caixa 1)
+    // Saltades (blank) no toquen el SRS.
+    for (let i = 0; i < state.questions.length; i++) {
+      const ans = state.answers[i];
+      if (ans === null || ans === undefined) continue;
+      const q = state.questions[i].question as TestQuestion & { topicSlug?: string };
+      const isCorrect = ans === state.questions[i].correctIndex;
+      // Slug d'origen: per 'tot' i 'repas' ve etiquetat al question;
+      // altrament és el slug actual de la URL.
+      const sourceSlug = q.topicSlug || slug;
+      if (isCorrect) {
+        recordSuccess(q.id);
+      } else {
+        recordFailure(q.id, sourceSlug);
+      }
+    }
+
+    // ── 2) Mode repàs: no toca el progrés del temari ni les stats globals ──
+    if (isRepas) {
+      const durationSec = Math.max(1, Math.round((Date.now() - state.startedAt) / 1000));
+      setState({
+        phase: 'result',
+        mode: state.mode,
+        questions: state.questions,
+        answers: state.answers,
+        durationSec,
+        prevStats: null,
+        newAchievements: [],
+      });
+      return;
+    }
+
+    // ── 3) Marquem com a respostes les preguntes contestades ──
     // (saltades segueixen "no respostes" per que tornin a aparèixer).
     const answeredQuestionIds: string[] = [];
     for (let i = 0; i < state.questions.length; i++) {
@@ -210,7 +259,7 @@ export default function TestSession() {
       markAnswered(slug, answeredQuestionIds);
     }
 
-    // Calculem el resum, registrem stats i comprovem logros.
+    // ── 4) Calculem el resum, registrem stats i comprovem logros ──
     const score = computeScore(state.questions, state.answers);
     const durationSec = Math.max(1, Math.round((Date.now() - state.startedAt) / 1000));
     const statsSlug = isAll ? 'tot' : slug;
@@ -269,6 +318,7 @@ export default function TestSession() {
           remaining={remaining}
           onStart={startTest}
           onReset={onResetTopic}
+          isRepas={isRepas}
         />
       )}
 
@@ -300,15 +350,18 @@ export default function TestSession() {
 // ════════════════════════════════════════════════════════════════════
 
 function SelectPhase({
-  title, accent, total, remaining, onStart, onReset,
+  title, accent, total, remaining, onStart, onReset, isRepas = false,
 }: {
   title: string; accent: string;
   total: number; remaining: number;
   onStart: (count: number, mode: Mode) => void;
   onReset: () => void;
+  isRepas?: boolean;
 }) {
   const { t } = useT();
-  const [mode, setMode] = useState<Mode>('exam');
+  // Per defecte interactiu (study) al mode repàs — té sentit estudiar
+  // amb feedback immediat. A la resta de modes, manté simulacre.
+  const [mode, setMode] = useState<Mode>(isRepas ? 'study' : 'exam');
   // Maxim 50 preguntes per test (encara que el pool tingui mes).
   const MAX_PER_TEST = 50;
   const cappedRemaining = Math.min(remaining, MAX_PER_TEST);
@@ -325,36 +378,50 @@ function SelectPhase({
         dark:bg-gradient-to-br dark:from-[#0f1d34] dark:to-[#0a1628] border-slate-200/70 dark:border-white/10`}>
         <div className="flex items-start gap-4">
           <span aria-hidden className={`inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${accent} text-3xl text-white shadow-inner`}>
-            📝
+            {isRepas ? '🔁' : '📝'}
           </span>
           <div className="min-w-0">
             <h1 className="text-2xl sm:text-3xl font-black tracking-tight">{title}</h1>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-              {t('test.session.poolStatus')
-                .replace('{remaining}', String(remaining))
-                .replace('{total}', String(total))}
+              {isRepas
+                ? t('test.repas.poolStatus').replace('{n}', String(remaining))
+                : t('test.session.poolStatus')
+                    .replace('{remaining}', String(remaining))
+                    .replace('{total}', String(total))}
             </p>
           </div>
         </div>
       </header>
 
       {exhausted ? (
-        <div className="rounded-2xl border-2 border-dashed border-amber-300 bg-amber-50/50 dark:bg-amber-400/5 p-6 text-center">
-          <div className="text-4xl mb-2" aria-hidden>🎓</div>
-          <h2 className="font-bold text-lg mb-1 text-amber-800 dark:text-amber-300">
-            {t('test.session.exhaustedTitle')}
-          </h2>
-          <p className="text-sm text-amber-700 dark:text-amber-200/80 mb-4">
-            {t('test.session.exhaustedDesc')}
-          </p>
-          <button
-            type="button"
-            onClick={onReset}
-            className="rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold px-5 py-2.5 shadow-md"
-          >
-            🔄 {t('test.session.reset')}
-          </button>
-        </div>
+        isRepas ? (
+          <div className="rounded-2xl border-2 border-dashed border-emerald-300 bg-emerald-50/50 dark:bg-emerald-400/5 p-6 text-center">
+            <div className="text-4xl mb-2" aria-hidden>✨</div>
+            <h2 className="font-bold text-lg mb-1 text-emerald-800 dark:text-emerald-300">
+              {t('test.repas.emptyTitle')}
+            </h2>
+            <p className="text-sm text-emerald-700 dark:text-emerald-200/80">
+              {t('test.repas.emptyDesc')}
+            </p>
+          </div>
+        ) : (
+          <div className="rounded-2xl border-2 border-dashed border-amber-300 bg-amber-50/50 dark:bg-amber-400/5 p-6 text-center">
+            <div className="text-4xl mb-2" aria-hidden>🎓</div>
+            <h2 className="font-bold text-lg mb-1 text-amber-800 dark:text-amber-300">
+              {t('test.session.exhaustedTitle')}
+            </h2>
+            <p className="text-sm text-amber-700 dark:text-amber-200/80 mb-4">
+              {t('test.session.exhaustedDesc')}
+            </p>
+            <button
+              type="button"
+              onClick={onReset}
+              className="rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold px-5 py-2.5 shadow-md"
+            >
+              🔄 {t('test.session.reset')}
+            </button>
+          </div>
+        )
       ) : (
         <div className="rounded-2xl border p-5 border-slate-200/80 bg-white dark:bg-[#0f1d34] dark:border-white/10">
           {/* Selector de mode */}

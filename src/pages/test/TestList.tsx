@@ -5,6 +5,7 @@ import {
   getTopicStats, globalAverage, levelFromBest, useGlobalStats, type Level,
 } from '../../lib/testStats';
 import { ACHIEVEMENTS } from '../../lib/achievements';
+import { useFailuresCounts } from '../../lib/failures';
 import { useT } from '../../lib/i18n';
 
 const LEVEL_META: Record<Level, { icon: string; label: string; cls: string }> = {
@@ -49,6 +50,9 @@ export default function TestList() {
 
       {/* Dashboard d'estats globals */}
       <Dashboard />
+
+      {/* HERO: REPÀS de fallades (només si hi ha fallades guardades) */}
+      <RepasCard />
 
       {/* HERO: 'tots els temes' barrejats — acció destacada */}
       <Link
@@ -125,6 +129,87 @@ export default function TestList() {
         </div>
       )}
     </div>
+  );
+}
+
+function RepasCard() {
+  const { t } = useT();
+  const { total, due, mastered } = useFailuresCounts();
+
+  // Si no hi ha cap fallat guardat, no mostrem la card.
+  // (Si l'usuari no s'ha equivocat encara, no té sentit oferir repàs.)
+  if (total === 0 && mastered === 0) return null;
+
+  const hasDue = due > 0;
+  const hasFailures = total > 0;
+
+  return (
+    <Link
+      to="/test/repas"
+      className={`group relative block overflow-hidden rounded-2xl border p-5 sm:p-6 mb-6 transition
+        ${hasDue
+          ? 'border-rose-300/70 bg-gradient-to-br from-rose-50 via-white to-orange-50 hover:border-rose-400 hover:shadow-lg dark:border-rose-400/30 dark:bg-gradient-to-br dark:from-[#2a0f1a] dark:via-[#170c14] dark:to-[#1a0f08] dark:hover:border-rose-400/60'
+          : 'border-slate-200/80 bg-white hover:border-slate-300 hover:shadow-md dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-white/20'}`}
+    >
+      <span aria-hidden className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${
+        hasDue ? 'from-rose-500 to-orange-600' : 'from-slate-400 to-slate-500'
+      }`} />
+      <div className="flex items-center gap-4">
+        <span aria-hidden className={`inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-3xl text-white shadow-inner bg-gradient-to-br ${
+          hasDue ? 'from-rose-500 to-orange-600' : 'from-slate-400 to-slate-600'
+        }`}>
+          🔁
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className={`text-[10px] uppercase tracking-[0.25em] font-bold ${
+            hasDue
+              ? 'text-rose-700 dark:text-rose-300'
+              : 'text-slate-500 dark:text-slate-400'
+          }`}>
+            {hasDue ? t('test.list.repasBadgeDue') : t('test.list.repasBadge')}
+          </div>
+          <div className="font-bold text-lg sm:text-xl mt-0.5">{t('test.list.repasTitle')}</div>
+          <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5">
+            {hasDue
+              ? t('test.list.repasDescDue').replace('{n}', String(due))
+              : hasFailures
+                ? t('test.list.repasDescAll').replace('{n}', String(total))
+                : t('test.list.repasDescMastered').replace('{n}', String(mastered))}
+          </div>
+          {/* Stats compactes: due / total / mastered */}
+          <div className="mt-2 flex items-center gap-3 text-[11px]">
+            {hasDue && (
+              <span className="inline-flex items-center gap-1 font-mono font-bold text-rose-700 dark:text-rose-300">
+                <span aria-hidden>⏰</span>
+                {due} {t('test.list.repasDueShort')}
+              </span>
+            )}
+            {hasFailures && (
+              <>
+                {hasDue && <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>}
+                <span className="font-mono text-slate-600 dark:text-slate-300">
+                  📚 {total} {t('test.list.repasTotalShort')}
+                </span>
+              </>
+            )}
+            {mastered > 0 && (
+              <>
+                <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
+                <span className="font-mono text-emerald-700 dark:text-emerald-300">
+                  ✓ {mastered} {t('test.list.repasMasteredShort')}
+                </span>
+              </>
+            )}
+          </div>
+        </div>
+        <span className={`shrink-0 text-sm font-semibold inline-flex items-center gap-1 ${
+          hasDue ? 'text-rose-700 dark:text-rose-300' : 'text-slate-500 dark:text-slate-400'
+        }`}>
+          <span className="hidden sm:inline">{t('test.start')}</span>
+          <span aria-hidden className="transition group-hover:translate-x-1">→</span>
+        </span>
+      </div>
+    </Link>
   );
 }
 
