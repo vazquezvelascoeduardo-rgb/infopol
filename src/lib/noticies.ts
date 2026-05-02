@@ -690,6 +690,580 @@ L'informe és material de referència per a opositors a FCS (especialment Mossos
     sourceUrl: 'https://www.amnesty.org',
     tags: ['internacional', 'drets humans', 'amnistia internacional'],
   },
+
+  // ─── MARÇ 2026 — LEGISLACIÓ ESTATAL ────────────────────────────────
+
+  {
+    slug: 'mar2026-rdl-7-2026-pla-orient-mitja',
+    title: 'RDL 7/2026 — Pla Integral de Resposta a la Crisi a Orient Mitjà',
+    summary: 'Resposta urgent a la guerra oberta entre EUA-Israel i Iran (28 feb). Bloqueig d\'Ormuz, caiguda de borses, disrupció aèria. Mesures energètiques, laborals i tributàries. Vigent des del 22 de març.',
+    body: `Pla integral aprovat al Consell de Ministres extraordinari del 20 de març de 2026 en resposta a l'inici de la **guerra oberta a Orient Mitjà** després de l'operació militar conjunta EUA-Israel contra Iran del 28 de febrer i la resposta iraniana.
+
+## Context
+
+El conflicte va provocar caiguda generalitzada de les borses, disrupció del trànsit aeri internacional i **bloqueig de l'estret d'Ormuz** (ruta del 20% del comerç mundial de petroli i gas).
+
+## Mesures energètiques
+
+- **Baixada** de l'Impost sobre Hidrocarburs i de l'Impost Especial sobre Electricitat.
+- **IVA al 10%** de carburants i electricitat fins al 30 de juny de 2026 (sotmès a evolució de l'IPC).
+- **Rebaixa del 80%** als peatges d'accés a les xarxes de transport i distribució durant tot 2026.
+- **Reforç i pròrroga** del bo social elèctric i tèrmic durant 2026.
+- **Prohibició de tall de subministrament** d'aigua i energia a consumidors vulnerables, ampliada fins al 31/12/2026.
+- Flexibilització temporal dels contractes de subministrament elèctric i de gas natural.
+
+## Mesures laborals
+
+- Les empreses beneficiàries d'ajudes directes **no podran acomiadar** per causes econòmiques, tècniques, organitzatives, de producció ni per força major fins al 30 de juny de 2026.
+- S'avança 12 mesos (al 5 de desembre de 2026) l'entrada en vigor de l'obligació d'elaborar **Plans de Mobilitat Sostenible al Treball** en empreses i entitats públiques amb més de 200 treballadors (o 100 per torn).
+
+## Mesures tributàries
+
+Es reintrodueixen les deduccions per:
+- Obres de millora de l'eficiència energètica en habitatges.
+- Adquisició de vehicles elèctrics endollables i de pila de combustible.
+- Instal·lació de sistemes d'autoconsum renovable.
+
+## Implicació indirecta per a la PL
+
+> Vigilar tensions als sectors afectats (taxis, transport pesat, repartidors). Possible increment de protestes i bloquejos, sobretot a accessos a zones industrials i refineries. Coordinar amb Mossos / GC per als dispositius de manteniment de l'ordre públic.`,
+    publishedAt: '2026-03-22',
+    source: 'BOE núm. 71, de 21 de març de 2026 (correcció en BOE núm. 74). Convalidat al Congrés el 26 de març. Ref. BOE-A-2026-6544',
+    sourceUrl: 'https://www.boe.es/buscar/doc.php?id=BOE-A-2026-6544',
+    tags: ['legislació', 'crisi energètica', 'orient mitjà', 'IVA', 'plans mobilitat'],
+    featured: true,
+  },
+
+  {
+    slug: 'mar2026-rdl-8-2026-lloguer',
+    title: 'RDL 8/2026 — Pròrroga extraordinària per a contractes de lloguer d\'habitatge habitual',
+    summary: 'Aprovat en paral·lel al RDL 7/2026. Permet a l\'arrendatari sol·licitar pròrroga de fins a 2 anys addicionals per als contractes que vencin abans del 31/12/2027.',
+    body: `Adoptat en paral·lel al RDL 7/2026, aquest decret introdueix una **pròrroga extraordinària** per als contractes d'arrendament d'habitatge habitual subjectes a la Llei 29/1994 que estiguessin vigents a l'entrada en vigor del decret i el període de pròrroga obligatòria o tàcita acabi abans del 31 de desembre de 2027.
+
+## Característiques
+
+- Pròrroga per **terminis anuals**, fins a un màxim de **2 anys addicionals**.
+- A sol·licitud de l'arrendatari (no automàtica).
+- L'arrendador està obligat a acceptar-la, llevat d'excepcions taxades:
+  - Acord diferent entre les parts.
+  - Nou contracte ja firmat.
+  - Necessitat acreditada de l'arrendador d'ocupar l'habitatge.
+
+## Per què
+
+> Mesura conjuntural per protegir els llogaters davant la pujada generalitzada de preus i el context d'inestabilitat econòmica derivat de la crisi a Orient Mitjà.
+
+## Implicació per a la PL
+
+A intervencions per desnonaments o conflictes per impagament, comprovar si el contracte podia gaudir de pròrroga extraordinària. Si l'arrendador ha incomplert l'obligació de prorrogar, el desnonament pot ser nul.`,
+    publishedAt: '2026-03-21',
+    source: 'BOE de 21 de març de 2026',
+    sourceUrl: 'https://www.boe.es',
+    tags: ['legislació', 'lloguer', 'habitatge', 'desnonaments'],
+  },
+
+  {
+    slug: 'mar2026-oep-estatal-2026',
+    title: 'OEP estatal 2026: 2.704 places CNP escala bàsica + 150 escala executiva + Guàrdia Civil',
+    summary: 'RD 207/2026 i RD 206/2026. CNP: 2.704 + 150 + 225 promoció interna. GC: 1.296 places militars + 240 Colegio Guardias Jóvenes.',
+    body: `El Consell de Ministres va aprovar l'11 de març de 2026 dos reials decrets que estableixen l'oferta d'ocupació pública per als principals cossos estatals.
+
+## Policia Nacional (RD 207/2026)
+
+- **2.704 places** a l'escala bàsica (segona categoria).
+  - **541 reservades a militars professionals de tropa i marineria** amb almenys 5 anys de servei.
+- **150 places** a l'escala executiva (segona categoria).
+- **225 places addicionals** per promoció interna des de subinspector.
+
+Total CNP: **3.079 places** (incloent promoció).
+
+## Guàrdia Civil (RD 206/2026)
+
+- **1.296 places** reservades a militars de tropa/marineria.
+- **240 places** per al Colegio de Guardias Jóvenes.
+
+## Implicació per a opositors
+
+> Si estàs preparant CNP o GC, aquesta és la convocatòria de l'any. Calendari habitual: bases al BOE durant el 2n trimestre, exàmens al 4t trimestre.
+
+## Comparativa amb altres convocatòries
+
+- Mossos d'Esquadra: 1.604 places (escala bàsica).
+- PL Catalunya: ~1.200 places previstes en diversos municipis.
+
+Total places de seguretat 2026: ~6.000 entre estatals + autonòmics + locals catalans.`,
+    publishedAt: '2026-03-13',
+    source: 'BOE núm. 62, de 13 de març de 2026. Ref. BOE-A-2026-5999 (CNP) i RD 206/2026 (GC)',
+    sourceUrl: 'https://www.boe.es/buscar/doc.php?id=BOE-A-2026-5999',
+    tags: ['legislació', 'oposicions', 'CNP', 'guàrdia civil', 'OEP estatal'],
+    featured: true,
+  },
+
+  {
+    slug: 'mar2026-rd-180-2026-sanitat-estrangers',
+    title: 'RD 180/2026 — Atenció sanitària a estrangers en situació irregular',
+    summary: 'Regula el dret a la protecció de la salut amb càrrec a fons públics per a persones estrangeres sense residència legal a Espanya.',
+    body: `Regula el reconeixement del **dret a la protecció de la salut i a l'atenció sanitària amb càrrec a fons públics** per a persones estrangeres que es trobin a Espanya sense residència legal.
+
+## Per què és rellevant
+
+Reactiva i clarifica el dret de l'estranger irregular a l'atenció sanitària, després d'anys d'incertesa normativa des del RDL 16/2012.
+
+## Implicació per a la PL
+
+> En intervencions amb persones estrangeres en situació irregular que requereixin atenció mèdica:
+>
+> - Activar 061 / SEM com en qualsevol cas.
+> - NO condicionar l'accés a l'atenció a la situació administrativa.
+> - Si la persona requereix internament o ha estat víctima de delicte: facilitar accés a sanitat pública sense més requisits.
+
+També rellevant per a unitats de proximitat amb població migrant.`,
+    publishedAt: '2026-03-12',
+    source: 'BOE de 12 de març de 2026',
+    sourceUrl: 'https://www.boe.es',
+    tags: ['legislació', 'sanitat', 'estrangeria', 'drets'],
+  },
+
+  {
+    slug: 'mar2026-rd-238-2026-factura-electronica',
+    title: 'RD 238/2026 — Factura electrònica obligatòria entre empresaris',
+    summary: 'Estableix els requisits tècnics i d\'informació del sistema espanyol de factura electrònica obligatòria entre empresaris i professionals.',
+    body: `Desenvolupa l'article 2 bis de la Llei 56/2007 i estableix:
+
+- Requisits tècnics i d'informació del sistema espanyol de **factura electrònica obligatòria** entre empresaris i professionals.
+- Requisits de les **plataformes d'intercanvi** de factures electròniques: interoperabilitat i interconnexió mínima.
+- Regulació dels diferents **estats de les factures**.
+- Obligacions de **subministrament d'informació** a l'administració.
+
+## Implicació per a la PL
+
+> Operacions amb facturacions sospitoses (frau fiscal, blanqueig): a partir d'ara, l'evidència electrònica ha d'estar al sistema oficial. Coordinar amb AEAT (Agència Tributària) i unitats especialitzades (Mossos GIE / Hisenda) en investigacions econòmiques.`,
+    publishedAt: '2026-03-27',
+    source: 'BOE de 27 de març de 2026',
+    sourceUrl: 'https://www.boe.es',
+    tags: ['legislació', 'factura electrònica', 'AEAT', 'frau fiscal'],
+  },
+
+  {
+    slug: 'mar2026-rd-241-2026-revaloritzacio-pensions',
+    title: 'RD 241/2026 — Revalorització de pensions per al 2026',
+    summary: 'Estableix la limitació de la quantia inicial i la revalorització de les pensions del sistema de la Seguretat Social i altres prestacions per al 2026.',
+    body: `Estableix:
+
+- **Limitació** de la quantia inicial de les pensions públiques.
+- **Revalorització** de les pensions del sistema de la Seguretat Social.
+- Mateixes mesures per a **Classes Passives de l'Estat** i altres prestacions socials públiques per a l'exercici 2026.
+
+## Per qui afecta
+
+Beneficiaris de pensions de jubilació, invalidesa, viduïtat, orfandat, o altres prestacions a càrrec de la Seguretat Social.`,
+    publishedAt: '2026-03-26',
+    source: 'BOE de 26 de març de 2026',
+    sourceUrl: 'https://www.boe.es',
+    tags: ['legislació', 'pensions', 'seguretat social'],
+  },
+
+  // ─── MARÇ 2026 — TRÀNSIT I DGT ─────────────────────────────────────
+
+  {
+    slug: 'mar2026-33-radars-nous',
+    title: '33 nous radars en 11 CCAA — comencen a sancionar a finals de març',
+    summary: '20 fixos i 13 de tramo. Activació informativa el 27 de febrer; sanció efectiva des de finals de març (Setmana Santa). Forma part del Pla 2025-2026 (122 punts).',
+    body: `La DGT va posar en marxa **33 nous punts de control de velocitat** entre febrer i març de 2026: **20 radars fixos i 13 de tramo**, repartits en onze comunitats autònomes.
+
+## Calendari
+
+- **27 de febrer de 2026**: activació operativa amb fase informativa (carta sense sanció).
+- **Finals de març (Setmana Santa)**: comencen a sancionar amb normalitat.
+
+## Pla 2025-2026
+
+Forma part del Pla d'instal·lació de **122 nous punts** de control per a 2025-2026, dels quals ja són operatius **106**.
+
+## Ubicacions destacades
+
+- **Comunitat Valenciana**: dos radars de tramo a Alacant (A-31 i A-7), un fix addicional a Alacant.
+- **Castella i Lleó**: Àvila (4 radars de tramo: dos a la AV-562 i dos a la N-403), Lleó (CL-623), Segòvia (SG-205), Valladolid (VA-30).
+- **Cantàbria**: tres fixos a N-611, CA-142 i CA-141.
+- **Astúries**: AS-116 i AS-377.
+- **Galícia**: A Corunya (N-550), Pontevedra (VG-20).
+- **Aragó**: dos a la N-232 (Saragossa).
+- **Madrid**: nous radars a Galapagar operatius des del 23 de març.
+
+## Implicació per a la PL
+
+> Si patrulles a vies on hi ha nous radars de tramo, recordar que la mesura és la **velocitat mitjana** entre dos punts (no la puntual). Això redueix les possibilitats d'accelerar només davant la càmera.`,
+    publishedAt: '2026-03-27',
+    source: 'Direcció General de Trànsit',
+    sourceUrl: 'https://www.dgt.es',
+    tags: ['trànsit', 'DGT', 'radars', 'velocitat'],
+  },
+
+  {
+    slug: 'mar2026-campanya-peatons-mobil',
+    title: 'Campanya DGT sobre vianants i mòbil: "no quieres perderte nada y terminas perdiéndolo todo"',
+    summary: 'Del 24 de març al 13 d\'abril de 2026. Alerta del risc del telèfon mòbil al creuar la calçada. 1 de cada 3 vianants creua mirant el dispositiu.',
+    body: `La Direcció General de Trànsit va llançar la campanya amb el lema **"no quieres perderte nada y terminas perdiéndolo todo"**, centrada a alertar del risc de l'ús del telèfon mòbil al creuar la calçada.
+
+## Període
+
+Del **24 de març al 13 d'abril de 2026**.
+
+## Dades clau
+
+- Segons la DGT, **1 de cada 3 vianants** creua el carrer mirant el mòbil.
+- Augmenta significativament el risc d'atropellament.
+
+## Implicació per a la PL
+
+> Encara que el vianant no comet sanció administrativa per anar mirant el mòbil, sí que pot ser un argument important en la **valoració de la culpa concurrent** en un atropellament. A diligències de sinistre amb vianant atropellat, fer constar a l'atestat si hi ha indicis (testimonis, càmeres) que el vianant anava utilitzant el mòbil.`,
+    publishedAt: '2026-03-24',
+    source: 'Direcció General de Trànsit',
+    sourceUrl: 'https://www.dgt.es',
+    tags: ['trànsit', 'DGT', 'campanyes', 'vianants', 'mòbil'],
+  },
+
+  // ─── MARÇ 2026 — CATALUNYA ─────────────────────────────────────────
+
+  {
+    slug: 'mar2026-decret-llei-1-2026-dependencia',
+    title: 'Decret-llei 1/2026 — prestacions per a grau III+ de dependència extrema',
+    summary: 'Antecedent directe del Decret-llei 4/2026 d\'abril. Regula prestacions econòmiques per a persones amb grau III+ i modifica la Llei 12/2007 de serveis socials.',
+    body: `Regula les **prestacions econòmiques** per a persones amb **grau III+ de dependència extrema** i modifica la Llei 12/2007, d'11 d'octubre, de serveis socials.
+
+## Per què és rellevant
+
+És l'**antecedent directe** del Decret-llei 4/2026 d'abril, que va ampliar i aprofundir aquestes mesures (vegeu notícia separada d'abril). Els dos decrets responen a la saturació estructural dels serveis socials i els equips de valoració de la dependència.
+
+## Implicació per a la PL
+
+> Les PL són sovint el primer punt de contacte amb persones grans soles, persones amb discapacitat severa o famílies en risc. En detectar una situació de dependència no atesa, derivar a serveis socials municipals i, si és greu, activar el protocol d'urgència social.`,
+    publishedAt: '2026-03-19',
+    source: 'DOGC núm. 9628, de 19 de març de 2026',
+    sourceUrl: 'https://dogc.gencat.cat',
+    tags: ['catalunya', 'serveis socials', 'dependència', 'decret-llei'],
+  },
+
+  {
+    slug: 'mar2026-decret-llei-2-2026-suplement-credit',
+    title: 'Decret-llei 2/2026 — suplement de crèdit als pressupostos prorrogats',
+    summary: 'Concessió d\'un suplement de crèdit als pressupostos de la Generalitat per al 2023, prorrogats per segon any consecutiu davant la falta d\'aprovació de pressupostos propis.',
+    body: `Concessió d'un **suplement de crèdit** als pressupostos de la Generalitat de Catalunya per al 2023, **prorrogats per segon any consecutiu** per al 2026 davant la manca d'aprovació de pressupostos propis.
+
+## Context polític
+
+> Catalunya viu en pròrroga pressupostària des del 2023. Aquesta situació limita la capacitat d'inversió i obliga a aprovar suplements de crèdit puntuals per cobrir necessitats sobrevingudes (sanitat, educació, serveis socials, seguretat).
+
+## Implicació indirecta per a la PL
+
+Encara que el decret no afecti directament la policia, els pressupostos prorrogats limiten la capacitat de noves places, equipaments i programes específics. Cal seguir l'evolució dels pressupostos 2027 per saber l'horitzó de noves convocatòries.`,
+    publishedAt: '2026-03-23',
+    source: 'DOGC de 23 de març de 2026',
+    sourceUrl: 'https://dogc.gencat.cat',
+    tags: ['catalunya', 'pressupostos', 'generalitat', 'pròrroga'],
+  },
+
+  {
+    slug: 'mar2026-decret-llei-3-2026-fiscal-urbanisme',
+    title: 'Decret-llei 3/2026 — paquet de mesures urgents (fiscal, urbanisme, habitatge, personal)',
+    summary: 'Modifica diverses normes (funció interventora, finances públiques, dret a l\'habitatge, TRLU). Inclou modificacions que afecten Agents Rurals i Agència de Ciberseguretat.',
+    body: `Paquet de **mesures urgents** en diversos àmbits: fiscal, simplificació i agilització en la gestió, urbanisme i habitatge, personal, i altres mesures urgents en pròrroga pressupostària.
+
+## Què modifica
+
+- **Llei 16/1984** de la funció interventora.
+- **Text refós de la Llei de finances públiques**.
+- **Llei 18/2007** del dret a l'habitatge.
+- **TRLU** (Text refós de la Llei d'urbanisme).
+- Normativa relativa al **cos d'Agents Rurals** i a l'**Agència de Ciberseguretat de Catalunya**.
+
+## Tarifa CO₂ vehicles N1
+
+Aprova la **tarifa de l'impost sobre les emissions de CO₂ dels vehicles de tracció mecànica** de l'exercici 2025 corresponent a vehicles de la **categoria N1 (furgonetes)**.
+
+## Implicació per a la PL
+
+> A controls d'identificació i circulació, recordar:
+>
+> - Els canvis al règim d'Agents Rurals poden afectar les coordinacions amb aquest cos en territoris naturals (parcs, espais protegits).
+> - L'Agència de Ciberseguretat reforça la seva capacitat: les PL han de coordinar amb ella en incidents informàtics rellevants.
+> - Tarifa CO₂ furgonetes: comprovar a SIPER el règim fiscal del vehicle si hi ha sospita d'evasió.`,
+    publishedAt: '2026-03-25',
+    source: 'DOGC núm. 9632, de 25 de març de 2026',
+    sourceUrl: 'https://dogc.gencat.cat',
+    tags: ['catalunya', 'decret-llei', 'urbanisme', 'habitatge', 'agents rurals', 'ciberseguretat'],
+  },
+
+  {
+    slug: 'mar2026-llei-3-2026-aran',
+    title: 'Llei 3/2026 — règim jurídic aplicable a Aran',
+    summary: 'Modifica el text refós de la Llei municipal i de règim local de Catalunya per reforçar la singularitat institucional, cultural, històrica i lingüística d\'Aran.',
+    body: `Modifica el text refós de la Llei municipal i de règim local de Catalunya en relació amb el **règim jurídic aplicable a Aran**, reforçant la seva singularitat institucional, cultural, històrica i lingüística com a entitat territorial occitana dins de Catalunya.
+
+## Singularitat aranesa
+
+Aran és l'única entitat territorial de Catalunya amb llengua oficial pròpia (occità, en la variant aranesa) reconeguda a l'EAC i al RD respectiu. Té institucions pròpies: el **Conselh Generau d'Aran** i el **Síndic d'Aran**.
+
+## Implicació per a la PL
+
+> Si la PL d'algun municipi català actua a Aran (o es coordina amb la PL de Vielha-Mijaran o altres municipis aranesos), recordar:
+>
+> - L'occità és llengua oficial al territori — recomanable atenció bàsica en aranès.
+> - Les ordenances municipals d'Aran poden tenir especificitats culturals (festes tradicionals com el Crema deth Haro, etc.).`,
+    publishedAt: '2026-03-13',
+    source: 'DOGC de 13 de març de 2026',
+    sourceUrl: 'https://dogc.gencat.cat',
+    tags: ['catalunya', 'aran', 'occità', 'règim local'],
+  },
+
+  {
+    slug: 'mar2026-llei-2-2026-impost-turisme',
+    title: 'Llei 2/2026 — impost sobre estades en establiments turístics (vigor 1 abril)',
+    summary: 'Modifica l\'impost i crea la taxa per la gestió del recàrrec municipal. Permet als ajuntaments aprovar imports diferents per codi postal i període, amb límit màxim.',
+    body: `**Modificació** de l'impost sobre les estades en establiments turístics i creació de la **tasa pel servei de gestió i recaptació del recàrrec municipal** de l'impost.
+
+## Novetat clau
+
+> Permet als ajuntaments aprovar **imports diferents segons codi postal i període** de liquidació, amb un límit màxim establert per la llei.
+
+Això habilita una **regulació geogràfica** del turisme dins d'un mateix municipi: tarifes més altes a zones de pressió turística (Ciutat Vella de Barcelona, Eixample, Sant Martí), més baixes a zones perifèriques.
+
+## Vigor
+
+A partir de l'**1 d'abril de 2026**.
+
+## Implicació per a la PL
+
+A intervencions a establiments turístics (HUTS, hotels, hostals, càmpings), comprovar que disposin de la documentació fiscal corresponent. La PL pot col·laborar amb Hisenda municipal a inspeccions conjuntes.
+
+També rellevant per a la lluita contra els pisos turístics il·legals: la falta d'imposició és un dels indicadors d'irregularitat.`,
+    publishedAt: '2026-03-10',
+    source: 'DOGC de 10 de març de 2026',
+    sourceUrl: 'https://dogc.gencat.cat',
+    tags: ['catalunya', 'impostos', 'turisme', 'HUTS'],
+  },
+
+  {
+    slug: 'mar2026-decret-45-2026-presidencia',
+    title: 'Decret 45/2026 — reestructuració parcial del Departament de la Presidència',
+    summary: 'Reorganització de l\'estructura interna del Departament de la Presidència de la Generalitat.',
+    body: `Reorganitza l'**estructura del Departament de la Presidència** de la Generalitat de Catalunya.
+
+## Implicació indirecta
+
+Reestructuracions departamentals afecten les vies de coordinació institucional. Els municipis i les PL han d'actualitzar contactes en cas que canviïn interlocutors a les diferents direccions generals.`,
+    publishedAt: '2026-03-26',
+    source: 'DOGC de 26 de març de 2026',
+    sourceUrl: 'https://dogc.gencat.cat',
+    tags: ['catalunya', 'generalitat', 'presidència', 'reestructuració'],
+  },
+
+  {
+    slug: 'mar2026-oep-mossos-2026-oficial',
+    title: 'OEP Mossos 2026 oficial — 1.604 places escala bàsica (objectiu 25.000 efectius)',
+    summary: 'Aprovació formal al DOGC. Forma part de l\'objectiu d\'arribar a 25.000 efectius de Mossos el 2030. Convocatòria prevista per al 2T del 2026.',
+    body: `La Generalitat va aprovar **formalment** l'oferta pública d'ocupació del 2026, amb un total de **8.474 places**.
+
+## Distribució en cossos operatius
+
+- **Mossos d'Esquadra**: **1.604 places** (escala bàsica) — supera les 1.587 de la convocatòria anterior.
+- **Bombers de la Generalitat**: 23 places.
+- **Agents Rurals**: 12 places.
+- **Execució Penal**: 174 places.
+
+## Objectiu estratègic
+
+> Forma part de l'objectiu d'arribar als **25.000 efectius de Mossos el 2030** (actualment ~20.000).
+
+## Calendari
+
+Convocatòria prevista per al **segon trimestre del 2026**. Bases definitives al DOGC pròximament.
+
+## Per a opositors
+
+L'aplicació InfoPol té tests d'oposició del temari oficial complet (CE78, EAC, LOPSC, LOFCS, CP, LECrim, LOSSP, LPC, codi ètica, armament, LECrim, LOPVVD, LO 5/2000 menors, LEPAR, LPAC). El sistema de repàs de fallades amb mètode Anki (vegeu notícia d'abril) facilita el manteniment del que ja saps.`,
+    publishedAt: '2026-03-26',
+    source: 'DOGC núm. 9633, de 26 de març de 2026',
+    sourceUrl: 'https://dogc.gencat.cat',
+    tags: ['catalunya', 'oposicions', 'mossos d\'esquadra', 'OEP'],
+    featured: true,
+  },
+
+  // ─── MARÇ 2026 — SUCCESSOS DESTACATS ───────────────────────────────
+
+  {
+    slug: 'mar2026-macrooperatiu-mafia-turca',
+    title: 'Macrooperatiu coordinat Mossos + CNP + Europol contra la mafia turca a Barcelona, Girona i Màlaga',
+    summary: 'Tràfic internacional d\'armes i drogues. Més de 6 detinguts en la primera fase. Una desena d\'entrades simultànies a 3 províncies.',
+    body: `El 23 de març de 2026 es va dur a terme un operatiu coordinat entre **Mossos d'Esquadra, Policia Nacional i Europol** iniciat a les 6 del matí a Barcelona contra una organització vinculada presumptament a la **mafia turca**, dedicada al tràfic internacional d'armes i drogues.
+
+## Resultats inicials
+
+- **Més de 6 detinguts** en la primera fase.
+- **Més d'una desena d'entrades i registres simultanis**.
+- Ubicacions: àrea metropolitana de Barcelona, demarcació de Girona, província de Màlaga.
+
+## Suport tècnic
+
+- **Policia Científica** per a inspeccions i diligències evidencials.
+- **Unitat Canina** (canins detectors d'estupefaents i armes).
+- Equips de seguretat ciutadana com a perímetre.
+- **Col·laboració internacional d'Europol**.
+
+## Per què és rellevant
+
+> Mostra el nivell de coordinació trinacional (Mossos + CNP + Europol) en operatius contra crim organitzat transnacional. La presència de la mafia turca a Espanya és creixent, sovint vinculada a tràfic d'armes i estupefaents en ruta UE-Orient Mitjà.
+
+## Implicació per a la PL
+
+Si la vostra PL participa o és perimetral en operatius d'aquest tipus, recordar:
+- Coordinar amb la sala 112 i amb el comandament de Mossos al territori.
+- Mantenir distància segura — armes i possible resistència.
+- No interferir amb la cadena de custòdia d'evidències.`,
+    publishedAt: '2026-03-23',
+    source: 'Mossos d\'Esquadra + CNP + Europol',
+    tags: ['successos', 'mossos', 'CNP', 'europol', 'mafia turca', 'crim organitzat'],
+    featured: true,
+  },
+
+  {
+    slug: 'mar2026-pla-kanpai-87-detinguts',
+    title: 'Pla Kanpai — 87 detinguts per multirreincidència a Barcelona i àrea metropolitana',
+    summary: 'Madrugada del 21 març. 293 antecedents acumulats. 1.063 identificats. Impacte també a Badalona, Sabadell i L\'Hospitalet.',
+    body: `Els Mossos d'Esquadra van detenir **87 persones** la matinada del **21 de març de 2026** a Barcelona i una desena de municipis propers en una operació contra la **multirreincidència**, amb **293 antecedents acumulats** entre tots els detinguts.
+
+## Resultats a Barcelona
+
+- **1.063 persones identificades**.
+- **42 detencions** per delictes d'estrangeria, trencaments de condemna i violència de gènere.
+- Requisades armes.
+- Tramitades més de **200 denúncies administratives**.
+
+## Impacte territorial
+
+El dispositiu va tenir impacte també a **Badalona, Sabadell i L'Hospitalet de Llobregat**, amb:
+- Incautació de patinets elèctrics (sospita de robatori).
+- Inspecció de comerços (botigues amb sospita de venda d'objectes robats o substàncies prohibides).
+
+## Per què és rellevant
+
+> El Pla Kanpai s'emmarca en l'estratègia coordinada Mossos + PL contra la multirreincidència delictiva, una línia política reforçada precisament per la **LO 1/2026 de multirreincidència** publicada al BOE l'abril de 2026 (vegeu notícia separada).
+
+## Implicació operativa
+
+A intervencions amb persones identificades amb antecedents per delicte lleu reiterat:
+- Comprovar via SIPER el nombre de condemnes anteriors.
+- Si concorre multirreincidència (3+ condemnes fermes en 5 anys del mateix tipus), la qualificació jurídica del nou fet pot canviar (delicte lleu → menys greu).`,
+    publishedAt: '2026-03-21',
+    source: 'Mossos d\'Esquadra',
+    tags: ['successos', 'mossos', 'pla kanpai', 'multirreincidència', 'barcelona', 'badalona'],
+    featured: true,
+  },
+
+  // ─── MARÇ 2026 — INTERNACIONAL ─────────────────────────────────────
+
+  {
+    slug: 'mar2026-inici-guerra-orient-mitja',
+    title: 'Inici de la guerra oberta a Orient Mitjà — Operació militar conjunta EUA + Israel contra Iran (28 feb)',
+    summary: 'Bloqueig de l\'estret d\'Ormuz, caiguda de borses, disrupció aèria internacional. Motiva el RDL 7/2026 espanyol amb mesures econòmiques d\'emergència.',
+    body: `Operació militar conjunta d'**Estats Units i Israel contra el règim d'Iran**, iniciada el 28 de febrer de 2026, i resposta iraniana. El conflicte s'ha desenvolupat durant tot març amb:
+
+## Conseqüències globals
+
+- **Caiguda generalitzada** de les borses mundials.
+- **Disrupció del trànsit aeri internacional**.
+- **Bloqueig de l'estret d'Ormuz**, ruta clau del comerç mundial de gas i petroli (~20% global).
+- **Volatilitat sostinguda** als mercats energètics, amb preus superiors als previs a la crisi.
+- **Augment de la inflació** i dels costos energètics per a llars i empreses a tota Europa.
+
+## Resposta espanyola
+
+És el conflicte que motiva el **RDL 7/2026 espanyol del Pla Integral de Resposta a la Crisi a Orient Mitjà** (vegeu notícia separada): IVA reduït de carburants, prohibició de tall de subministrament a vulnerables, deduccions fiscals per eficiència energètica i vehicles elèctrics.
+
+## Continuïtat a abril
+
+Els atacs creuats Líban / Israel / Iran continuen els primers dies d'abril (vegeu notícia d'abril 2026), incloent l'abatiment del general Majid Khademi (cap d'Intel·ligència de la Guàrdia Revolucionària iraniana).
+
+## Implicació indirecta a Espanya
+
+> Vigilància reforçada a llocs sensibles (sinagogues, mesquites, ambaixades) per part de FCS. Possibles tensions a la diàspora iraniana / israeliana / àrab a Catalunya.`,
+    publishedAt: '2026-03-01',
+    source: 'Premsa internacional, febrer-març 2026',
+    tags: ['internacional', 'EUA', 'Israel', 'Iran', 'orient mitjà', 'guerra'],
+    featured: true,
+  },
+
+  {
+    slug: 'mar2026-calendari-electoral-llatinoamerica',
+    title: 'Any electoral decisiu a Amèrica Llatina — 47% dels habitants voten el 2026',
+    summary: 'Costa Rica obre el cicle, Perú continua. Resten Colòmbia (maig), Haití (agost) i Brasil (octubre, Lula busca reelecció). Presència explícita de Trump com a agent extern.',
+    body: `Març confirma 2026 com a **any electoral decisiu a Amèrica Llatina**, amb prop del **47% dels habitants de la regió afrontant eleccions presidencials**.
+
+## Calendari electoral
+
+- **Costa Rica** — obertura del cicle (febrer).
+- **Perú** — continua (segona volta a abril).
+- **Colòmbia** — maig.
+- **Haití** — agost.
+- **Brasil** — octubre, amb **Lula da Silva** buscant reelecció.
+
+## Context geopolític
+
+> Tots els processos queden marcats per l'**omnipresència de Donald Trump com a gran agent extern**, amb un discurs explícit d'alineament hemisfèric i pressió sobre candidats.
+
+## Implicació indirecta a Espanya
+
+La diàspora llatinoamericana a Espanya és nombrosa: ecuatorians, colombians, peruans, brasilers, mexicans, veneçolans... Els processos electorals solen generar **mobilitzacions a consolats** durant les campanyes i el dia electoral.
+
+A Catalunya: vigilància reforçada a consolats de Barcelona durant els pics electorals (concentracions, possibles incidents si els resultats són controvertits).`,
+    publishedAt: '2026-03-15',
+    source: 'Premsa internacional, març 2026',
+    tags: ['internacional', 'amèrica llatina', 'eleccions', 'trump'],
+  },
+
+  {
+    slug: 'mar2026-cumbre-celac-bogota',
+    title: 'Cumbre CELAC i Foro CELAC-África a Bogotá — Petro i Lula es reuneixen',
+    summary: 'El 21 de març. Lula critica les accions d\'EUA sobre Veneçuela i Cuba; Petro qüestiona la capacitat de l\'ONU per evitar conflictes.',
+    body: `Reunió bilateral a Bogotá el 21 de març entre **Gustavo Petro** (Colòmbia) i **Luiz Inácio Lula da Silva** (Brasil) en el marc de l'encontre de la **Comunitat d'Estats Llatinoamericans i Caribenys (CELAC)** i del **Fòrum d'Alt Nivell CELAC-Àfrica**.
+
+## Posicions destacades
+
+- **Lula** va criticar les accions dels Estats Units sobre Veneçuela i Cuba.
+- **Petro** va qüestionar la capacitat de l'**ONU** per evitar conflictes (en al·lusió tant a Orient Mitjà com a Amèrica Llatina).
+
+## Per què és rellevant
+
+> Reflecteix la **polarització Sud Global vs Nord Global** que defineix la política internacional al 2026. CELAC busca consolidar un bloc llatinoamericà més autònom respecte als EUA, alhora que aprofundeix relacions amb Àfrica.`,
+    publishedAt: '2026-03-21',
+    source: 'Premsa internacional, març 2026',
+    tags: ['internacional', 'CELAC', 'Brasil', 'Colòmbia', 'diplomàcia'],
+  },
+
+  {
+    slug: 'mar2026-veneçuela-post-maduro',
+    title: 'Veneçuela post-Maduro — Delcy Rodríguez presidenta encarregada, sense calendari electoral',
+    summary: 'Després del derrocament de Maduro a inicis del 2026 per intervenció unilateral d\'EUA. Diosdado Cabello descarta eleccions a curt termini. María Corina Machado anuncia disposició a presentar-se.',
+    body: `Març de 2026 transcorre amb la nova **presidenta encarregada de Veneçuela, Delcy Rodríguez**, en un escenari obert tras el **derrocament de Nicolás Maduro** a inicis d'any per una **intervenció unilateral dels Estats Units**.
+
+## Posicions
+
+- **Diosdado Cabello** (Ministeri de l'Interior veneçolà) declara que en el curt termini **no hi ha plans d'organitzar eleccions presidencials**.
+- **María Corina Machado** (líder opositora) anuncia la seva **disposició a presentar-se com a candidata** si es convoquen comicis.
+
+## Context
+
+L'escenari veneçolà segueix sent altament inestable, amb tensions internes entre faccions del govern Rodríguez i pressió internacional per a una transició democràtica.
+
+## Implicació indirecta a Espanya
+
+> Espanya té una de les diàspores veneçolanes més grans d'Europa (especialment Madrid, Galícia, Canàries i Catalunya). Possibles concentracions als consolats veneçolans i embaixada a Madrid; vigilància reforçada per part de FCS.
+
+També rellevant per a tràmits d'asil i protecció internacional: Espanya manté línia de protecció subsidiària per a veneçolans amb perfil polític sensible.`,
+    publishedAt: '2026-03-25',
+    source: 'Premsa internacional, març 2026',
+    tags: ['internacional', 'Veneçuela', 'EUA', 'transició política'],
+  },
 ];
 
 // ════════════════════════════════════════════════════════════════════
