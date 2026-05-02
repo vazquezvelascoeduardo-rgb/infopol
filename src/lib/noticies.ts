@@ -12,6 +12,12 @@ import { useEffect, useState } from 'react';
 
 const SEEN_KEY = 'infopol-noticies-seen';
 
+/**
+ * Categoria de contingut. Cada apartat de l'app té una pestanya pròpia
+ * a /noticies. Per defecte 'noticies' (notícies generals d'actualitat).
+ */
+export type NoticiaCategoria = 'noticies' | 'personalitats' | 'premis' | 'esports';
+
 export type Noticia = {
   /** Slug URL-friendly únic. Recomanat: prefix de mes (ex. 'abr2026-...'). */
   slug: string;
@@ -36,6 +42,11 @@ export type Noticia = {
   sourceUrl?: string;
   /** Etiquetes per cerca i context. */
   tags?: string[];
+  /**
+   * Pestanya de contingut on apareix la notícia. Per defecte 'noticies'.
+   * Permet separar 'personalitats', 'premis' i 'esports' a tabs propis.
+   */
+  category?: NoticiaCategoria;
   /** Notícia destacada del mes (apareix amb badge a la home). */
   featured?: boolean;
   /**
@@ -476,6 +487,7 @@ L'aplicació InfoPol té tests d'oposició del temari oficial (CE78, EAC, LOPSC,
     publishedAt: '2026-04-15',
     source: 'Fundació Policia Espanyola',
     tags: ['premis', 'fundació policia', 'novel·la policíaca', 'cultura'],
+    category: 'premis',
   },
 
   {
@@ -502,6 +514,7 @@ Les obres premiades poden ser publicades a la revista científica **Ciencia Poli
     publishedAt: '2026-04-01',
     source: 'Fundació Policia Espanyola',
     tags: ['premis', 'fundació policia', 'investigació', 'ciència policial'],
+    category: 'premis',
   },
 
   {
@@ -524,6 +537,7 @@ Iniciativa similar a les que fan altres cossos a esdeveniments populars (jornade
     publishedAt: '2026-04-23',
     source: 'Premsa diversa, abril 2026',
     tags: ['barcelona', 'sant jordi', 'policia nacional', 'cultura'],
+    category: 'premis',
   },
 
   // ─── ABRIL 2026 — INTERNACIONAL ────────────────────────────────────
@@ -1692,6 +1706,269 @@ A municipis amb diàspora llatinoamericana significativa, la PL ha de:
     sourceUrl: 'https://es.wikipedia.org/wiki/Intervenci%C3%B3n_de_Estados_Unidos_en_Venezuela_de_2025-2026',
     tags: ['internacional', 'EUA', 'càrtels', 'terrorisme', 'tren de aragua', 'MS-13', 'CJNG'],
   },
+
+  // ════════════════════════════════════════════════════════════════════
+  // PERSONALITATS — figures clau del sector PL/FCS i Justícia
+  // ════════════════════════════════════════════════════════════════════
+
+  {
+    slug: 'personalitats-eduard-sallent-mossos',
+    title: 'Eduard Sallent — Comissari Cap dels Mossos d\'Esquadra',
+    summary: 'Cap actual del Cos de Mossos d\'Esquadra. Càrrec ratificat amb el canvi de Govern. Trajectòria operativa amb àmplia experiència en seguretat ciutadana i investigació.',
+    body: `**Eduard Sallent i Cumeres** és el màxim càrrec operatiu del Cos de Mossos d'Esquadra des de 2022.
+
+## Trajectòria
+
+- Llarga carrera dins del Cos: investigació, seguretat ciutadana, comandaments territorials.
+- Experiència en gestió d'incidents complexos (atemptat 17-A, manifestacions massives, gestió de riscos).
+- Promogut a Comissari Cap pel Govern de Pere Aragonès i ratificat amb canvis de govern posteriors.
+
+## Què defineix la seva etapa
+
+> Els objectius prioritaris públicament establerts són: arribar als **25.000 efectius el 2030** (vegeu notícia OEP Mossos), modernitzar la coordinació amb policies locals, i reforçar la unitat d'informació davant amenaces de radicalització i crim organitzat.
+
+## Per què conèixer la jerarquia
+
+Per a opositors a Mossos i PL: la jerarquia operativa de Mossos és part del temari. Conèixer els càrrecs vigents (Comissari Cap, Comissari General d'Investigació, Comissari General d'Informació, etc.) és essencial per a la prova oral i el cas pràctic.`,
+    publishedAt: '2026-04-15',
+    source: 'Generalitat de Catalunya — Institucional',
+    tags: ['personalitats', 'mossos d\'esquadra', 'comissari cap'],
+    category: 'personalitats',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/1200px-Flag_of_Catalonia.svg.png',
+    imageAlt: 'Bandera de Catalunya — Mossos d\'Esquadra',
+  },
+
+  {
+    slug: 'personalitats-mercedes-gonzalez-dgt',
+    title: 'Mercedes González — Directora General de Trànsit',
+    summary: 'Al capdavant de la DGT des de novembre de 2023, succeint Pere Navarro. Impulsora del Pla DGT 3.0, balisa V-16 connectada i nous radars 2025-2026.',
+    body: `**Mercedes González Fernández** és la Directora General de Trànsit des de novembre de 2023, en substitució de Pere Navarro Olivella, que va ocupar el càrrec entre 2018 i 2023.
+
+## Línies estratègiques de la seva etapa
+
+- Desplegament complet de la **plataforma DGT 3.0** (notícies de la balisa V-16, vegeu notícies de febrer 2026).
+- Implementació del **Pla 2025-2026 de 122 nous punts de control** de velocitat (33 dels quals operatius des de febrer-març 2026; vegeu notícia separada).
+- Consolidació de la **conducció acompanyada des dels 17 anys** (abril 2026).
+- Reforç de la coordinació amb els organismes autonòmics (Servei Català de Trànsit, Direcció de Trànsit del Govern Basc).
+
+## Implicació per a la PL
+
+> Sota la seva direcció, la coordinació DGT-PL s'ha reforçat: DGT 3.0 dóna a les PL accés a dades en temps real (FIVA, registre de vehicles, balises V-16). Coordinació amb Mossos i Servei Català de Trànsit a Catalunya.`,
+    publishedAt: '2026-04-10',
+    source: 'Direcció General de Trànsit',
+    sourceUrl: 'https://www.dgt.es',
+    tags: ['personalitats', 'DGT', 'directora general'],
+    category: 'personalitats',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Logotipo_DGT_Espa%C3%B1a.svg/1200px-Logotipo_DGT_Espa%C3%B1a.svg.png',
+    imageAlt: 'Logotip de la Direcció General de Trànsit',
+  },
+
+  {
+    slug: 'personalitats-nuria-marin-femp',
+    title: 'Núria Marín — designada presidenta de la FEMP',
+    summary: 'Ex-alcaldessa de L\'Hospitalet (2008-2024) i ex-presidenta de la Diputació de Barcelona, encara líder històrica del PSC al Barcelonès. Nova presidenta de la Federación Española de Municipios y Provincias.',
+    body: `**Núria Marín Martínez**, ex-alcaldessa de L'Hospitalet de Llobregat durant 16 anys (2008-2024) i ex-presidenta de la Diputació de Barcelona, és designada presidenta de la **FEMP** (Federación Española de Municipios y Provincias).
+
+## Trajectòria
+
+- Alcaldessa de L'Hospitalet: 2008-2024 (16 anys, 4 mandats consecutius).
+- Presidenta de la Diputació de Barcelona durant diversos períodes.
+- Vinculada al PSC, amb pes específic dins el partit a nivell autonòmic i estatal.
+- Va deixar l'alcaldia el 2024 per donar pas a David Quirós (vegeu notícia "Hospitalet" al test de municipi).
+
+## La FEMP
+
+La Federación Española de Municipios y Provincias agrupa la majoria d'ajuntaments i diputacions d'Espanya. Funcions:
+
+- Defensa dels interessos municipals davant el govern central i les CCAA.
+- Negociació de transferències i finançament local.
+- Gestió de programes nacionals (Pacte d'Estat VG, mobilitat sostenible, etc.).
+
+## Implicació per a la PL
+
+> Les decisions de la FEMP afecten directament les PL: posició institucional davant reformes (Llei de Bases del Règim Local), homogeneïtzació de procediments, fons destinats a equipaments i formació policial.`,
+    publishedAt: '2026-03-12',
+    source: 'Premsa diversa, març 2026',
+    tags: ['personalitats', 'PSC', 'FEMP', 'L\'Hospitalet', 'política local'],
+    category: 'personalitats',
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // PREMIS — convocatòries i reconeixements del sector
+  // ════════════════════════════════════════════════════════════════════
+
+  {
+    slug: 'premis-merit-mossos-2026',
+    title: 'Mèrits a la Constància — promoció anual de Mossos d\'Esquadra 2026',
+    summary: 'Reconeixements oficials lliurats el 30 d\'abril a 142 membres del Cos amb motiu de la Diada de Mossos. Categories: mèrit a la constància (25 anys) i mèrits a la trajectòria.',
+    body: `Amb motiu de la **Diada del Cos de Mossos d'Esquadra**, el 30 d'abril de 2026 es van lliurar els **Mèrits a la Constància** i altres reconeixements oficials a **142 membres del Cos**.
+
+## Categories principals
+
+- **Mèrit a la Constància 25 anys**: agents amb 25 anys de servei ininterromput.
+- **Mèrits a la trajectòria**: contribucions destacades a la investigació, seguretat ciutadana, formació o gestió.
+- **Mencions extraordinàries** per actuacions de risc personal.
+
+## Acte institucional
+
+Acte presidit per la Consellera d'Interior amb la participació de l'**Eduard Sallent** (Comissari Cap; vegeu fitxa a Personalitats) i representants institucionals.
+
+## Per qui pot interessar
+
+> Per a opositors: les diades dels diferents cossos (Mossos, GC, CNP, PL diversos) són una font important de cultura institucional. Conèixer-les pot puntuar a entrevistes i casos pràctics.`,
+    publishedAt: '2026-04-30',
+    source: 'Departament d\'Interior, Generalitat de Catalunya',
+    tags: ['premis', 'mossos d\'esquadra', 'diada', 'mèrits'],
+    category: 'premis',
+    featured: true,
+  },
+
+  {
+    slug: 'premis-catala-seguretat-2026',
+    title: 'Premi Català de Seguretat 2026 — convocatòria oberta',
+    summary: 'Convoca l\'Institut de Seguretat Pública de Catalunya. Reconeix actuacions destacades en seguretat ciutadana, prevenció, mediació i innovació. Termini: 30 de juny de 2026.',
+    body: `L'**Institut de Seguretat Pública de Catalunya (ISPC)**, en col·laboració amb el Departament d'Interior, convoca el **Premi Català de Seguretat 2026**.
+
+## Modalitats
+
+- **Actuació destacada en seguretat ciutadana** (operatius o intervencions amb impacte demostrable).
+- **Prevenció i mediació** (programes municipals d'èxit).
+- **Innovació tecnològica** (eines pròpies de PL o Mossos amb benefici general).
+- **Trajectòria professional** (consagrada).
+
+## Bases generals
+
+- **Termini**: fins al 30 de juny de 2026.
+- **Participants**: PL, Mossos, Bombers, Agents Rurals i ens de seguretat catalans.
+- **Fall**: tardor de 2026.
+- **Lliurament**: dins del **Congrés Català de Seguretat**.
+
+## Per què interessa a la PL
+
+> Una bona forma de visibilitzar projectes locals: programes de mediació, dispositius reeixits, sistemes informàtics propis. Els premis solen comportar publicació al butlletí oficial i visibilitat institucional.`,
+    publishedAt: '2026-04-05',
+    source: 'Institut de Seguretat Pública de Catalunya (ISPC)',
+    tags: ['premis', 'ISPC', 'seguretat', 'Generalitat'],
+    category: 'premis',
+  },
+
+  // ════════════════════════════════════════════════════════════════════
+  // ESPORTS — competicions amb cossos policials i seguretat en esdev.
+  // ════════════════════════════════════════════════════════════════════
+
+  {
+    slug: 'esports-marato-bcn-2026',
+    title: 'Marató de Barcelona 2026 — gran dispositiu policial conjunt',
+    summary: 'El 22 de març de 2026 es va celebrar la 46a edició. Dispositiu coordinat de Guàrdia Urbana, Mossos i voluntaris. Atletes corredors de la PL participen en les categories populars i de cossos policials.',
+    body: `La **46a edició de la Marató de Barcelona** es va disputar el **22 de març de 2026**, amb sortida i arribada a la Plaça d'Espanya i pas pel centre i la Diagonal.
+
+## Dispositiu de seguretat
+
+- **Guàrdia Urbana de Barcelona** com a coordinador principal: tancaments perimetrals, mobilitat alternativa, suport a corredors.
+- **Mossos d'Esquadra** com a suport en zones crítiques i investigació en cas d'incidents.
+- **SEM (061)** i Creu Roja per atenció sanitària.
+- Centenars de **voluntaris** acreditats per l'organització.
+
+## Participació policial
+
+Categories obertes per a cossos policials i d'emergències:
+
+- **PL i Mossos** amb rànquing intern propi.
+- Trofeu *Memorial Agents Caiguts*.
+
+## Implicació operativa
+
+> Esdeveniments massius (>5.000 corredors) requereixen coordinació anticipada entre cossos. Bona pràctica per a opositors: estudiar el manual de gestió d'esdeveniments massius del Pla d'Auto-Protecció Local.
+
+També rellevant: és el primer gran esdeveniment esportiu de la temporada que serveix de "test" per a la coordinació prèvia a la temporada estival (Festa Major, Festes de la Mercè).`,
+    publishedAt: '2026-03-22',
+    source: 'Premsa esportiva, març 2026',
+    tags: ['esports', 'marató', 'barcelona', 'dispositiu', 'guàrdia urbana'],
+    category: 'esports',
+    featured: true,
+  },
+
+  {
+    slug: 'esports-cross-pl-2026-sant-cugat',
+    title: 'Campionat Estatal de Cross PL 2026 — final a Sant Cugat',
+    summary: 'Sant Cugat del Vallès acull la final el 18 d\'abril. Participació de més de 80 PL d\'arreu d\'Espanya. Categories per edat i sexe; trofeu per equips.',
+    body: `**Sant Cugat del Vallès** va acollir el **18 d'abril de 2026** la final del **Campionat Estatal de Cross de la Policia Local 2026**.
+
+## Format
+
+- **Distàncies**: 6 km (femení) i 10 km (masculí), amb categoria mixta de 5 km.
+- **Categories per edat**: sub-25, 25-35, 35-45, 45+.
+- **Trofeu per equips**: classificació conjunta dels 4 millors corredors de cada PL.
+
+## Participació
+
+- **Més de 80 PL d'arreu d'Espanya** (entre 600-800 corredors).
+- Classificació prèvia per fases autonòmiques.
+
+## Per què és rellevant
+
+> Forma part de la cultura institucional dels cossos policials: la prova de Cooper o course-navette és comú a totes les oposicions de PL. El cross és una de les disciplines més practicades pels agents en actiu.
+
+Per a opositors a PL: si tens curiositat per veure el nivell físic mitjà, aquests campionats donen una bona referència. La marca mínima a oposicions sol estar al voltant de 11 minuts per al masculí en 2.000 m.`,
+    publishedAt: '2026-04-18',
+    source: 'Federació Espanyola de Policies Locals',
+    tags: ['esports', 'cross', 'PL', 'sant cugat', 'cursa popular'],
+    category: 'esports',
+  },
+
+  {
+    slug: 'esports-mundial-tir-policial-2026',
+    title: 'Espanya als IPSC World Police Championships 2026',
+    summary: 'Selecció policial espanyola (PN, GC, Mossos) participa al campionat mundial de tir policial. Disciplines: pistola estàtica, dinàmica, fusell d\'assalt i armes llargues.',
+    body: `La selecció policial espanyola, integrada per representants de **Policia Nacional, Guàrdia Civil i Mossos d'Esquadra**, participa als **IPSC World Police Championships 2026**, campionat mundial de tir policial organitzat per la International Practical Shooting Confederation.
+
+## Disciplines
+
+- **Pistola estàtica** (precisió a curta distància).
+- **Pistola dinàmica** (recorregut amb canvi d'objectius).
+- **Fusell d'assalt** (a partir de 100 m).
+- **Armes llargues** (precisió, fins a 300 m).
+
+## Per què és rellevant
+
+> El tir policial és part de la formació bàsica i continuada de tots els cossos. Les especialitats com els **GEO**, **EDOA**, o l'**ARRO** dels Mossos, tenen rànquing internacional i sovint participen en aquests campionats com a forma de mantenir nivell d'elit.
+
+## Per a opositors
+
+A oposicions de Mossos i PL, la prova de tir és part del curs selectiu a l'ISPC, no de l'examen d'entrada. Però conèixer el règim de l'**armament reglamentari** (arma curta semiautomàtica, normalment Glock o HK) i la legislació aplicable (LO 1/1992 de l'armament, vegeu test del temari) és essencial.`,
+    publishedAt: '2026-04-12',
+    source: 'IPSC + cossos policials espanyols',
+    tags: ['esports', 'tir policial', 'IPSC', 'mundial'],
+    category: 'esports',
+  },
+
+  {
+    slug: 'esports-bombers-rescat-internacional',
+    title: 'Bombers de Catalunya al Rescue Challenge International 2026',
+    summary: 'El Cos de Bombers de la Generalitat participa al campionat internacional de rescat tècnic, celebrat a Lió. Proves: rescat vertical, vehicular i en estructures col·lapsades.',
+    body: `El Cos de **Bombers de la Generalitat de Catalunya** participa al **Rescue Challenge International 2026**, celebrat a Lió (França) la primera setmana de març.
+
+## Proves del campionat
+
+- **Rescat vertical** (tècniques d'alpinisme i descens controlat).
+- **Rescat vehicular** (extricació amb cisalla i separadors).
+- **Estructures col·lapsades** (USAR — Urban Search And Rescue).
+- **Rescat aquàtic** (riu i immersió).
+
+## Resultats destacats
+
+L'equip català va aconseguir **classificació entre els 5 primers** en rescat vehicular i **medalla de bronze** en estructures col·lapsades.
+
+## Per qui prepara
+
+> Per a opositors a Bombers de la Generalitat (la convocatòria 2026 té només 23 places, vegeu notícies de març i abril), conèixer aquests esdeveniments dóna context del nivell exigit i de la projecció internacional del cos.
+
+Cossos de Bombers d'altres CCAA també hi van participar (Bombers de Madrid, Bombers de Bizkaia).`,
+    publishedAt: '2026-03-08',
+    source: 'Bombers de la Generalitat',
+    tags: ['esports', 'bombers', 'rescat', 'internacional', 'Lió'],
+    category: 'esports',
+  },
 ];
 
 // ════════════════════════════════════════════════════════════════════
@@ -1723,6 +2000,30 @@ export function getMonthLabel(monthKey: string, locale: 'es' | 'ca'): string {
     ? ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre']
     : ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   return `${months[monthIdx]} ${year}`;
+}
+
+/** Categoria d'una notícia (amb default a 'noticies'). */
+export function getCategory(n: Noticia): NoticiaCategoria {
+  return n.category ?? 'noticies';
+}
+
+/** Filtre pel valor de categoria. */
+export function getNoticiesByCategory(cat: NoticiaCategoria, items: Noticia[] = NOTICIES): Noticia[] {
+  return items.filter((n) => getCategory(n) === cat);
+}
+
+/** Comptadors per categoria (per badges i tabs). */
+export function getCategoryCounts(items: Noticia[] = NOTICIES): Record<NoticiaCategoria, number> {
+  const out: Record<NoticiaCategoria, number> = {
+    noticies: 0,
+    personalitats: 0,
+    premis: 0,
+    esports: 0,
+  };
+  for (const n of items) {
+    out[getCategory(n)]++;
+  }
+  return out;
 }
 
 /**

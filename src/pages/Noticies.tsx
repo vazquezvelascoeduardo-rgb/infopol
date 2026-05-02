@@ -5,26 +5,47 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
 import {
-  NOTICIES, type Noticia, groupByMonth, getMonthLabel, getMonthBuckets,
-  getMonthKey, markNoticiesSeen,
+  NOTICIES, type Noticia, type NoticiaCategoria, groupByMonth, getMonthLabel,
+  getMonthBuckets, getMonthKey, getCategory, getCategoryCounts, markNoticiesSeen,
 } from '../lib/noticies';
+
+const CATEGORIES: { id: NoticiaCategoria; icon: string; tone: string }[] = [
+  { id: 'noticies',      icon: '📰', tone: 'from-blue-500 to-indigo-700' },
+  { id: 'personalitats', icon: '👤', tone: 'from-purple-500 to-violet-700' },
+  { id: 'premis',        icon: '🏆', tone: 'from-amber-500 to-orange-600' },
+  { id: 'esports',       icon: '⚽', tone: 'from-emerald-500 to-teal-700' },
+];
 
 export default function Noticies() {
   const { t, locale } = useT();
+  const [activeCat, setActiveCat] = useState<NoticiaCategoria>('noticies');
   const [activeMonth, setActiveMonth] = useState<string | null>(null);
   const [query, setQuery] = useState('');
 
-  // Marca com a llegides 1.5s després d'entrar (per evitar pèrdues
-  // de badge per entrades de rebot).
+  // Marca com a llegides 1.5s després d'entrar.
   useEffect(() => {
     const id = setTimeout(() => markNoticiesSeen(), 1500);
     return () => clearTimeout(id);
   }, []);
 
-  const monthBuckets = useMemo(() => getMonthBuckets(NOTICIES), []);
+  // Quan canvia la categoria, descartem el filtre de mes (els mesos
+  // poden no coincidir entre categories).
+  useEffect(() => {
+    setActiveMonth(null);
+  }, [activeCat]);
+
+  const categoryCounts = useMemo(() => getCategoryCounts(NOTICIES), []);
+
+  // Articles de la categoria activa (base per a mes/cerca).
+  const inCategory = useMemo(
+    () => NOTICIES.filter((n) => getCategory(n) === activeCat),
+    [activeCat],
+  );
+
+  const monthBuckets = useMemo(() => getMonthBuckets(inCategory), [inCategory]);
 
   const filtered = useMemo(() => {
-    let list: Noticia[] = NOTICIES;
+    let list: Noticia[] = inCategory;
     if (activeMonth) {
       list = list.filter((n) => getMonthKey(n.publishedAt) === activeMonth);
     }
@@ -38,9 +59,10 @@ export default function Noticies() {
       );
     }
     return list;
-  }, [activeMonth, query]);
+  }, [inCategory, activeMonth, query]);
 
   const grouped = useMemo(() => groupByMonth(filtered), [filtered]);
+  const activeCatMeta = CATEGORIES.find((c) => c.id === activeCat) ?? CATEGORIES[0];
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-6">
@@ -71,35 +93,77 @@ export default function Noticies() {
         </div>
       </header>
 
-      {/* SELECTOR DE MES — apartat destacat al cim */}
-      <section className="mb-5 rounded-2xl border p-4 sm:p-5
+      {/* TABS DE CATEGORIA — primer nivell de divisió */}
+      <section className="mb-4 rounded-2xl border p-3
         border-slate-200 bg-white
         dark:border-white/10 dark:bg-[#0f1d34]">
-        <div className="flex items-center gap-2 mb-3">
-          <span aria-hidden className="text-base">📅</span>
-          <h2 className="text-xs font-black uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300">
-            {t('noticies.byMonth')}
-          </h2>
-          <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
-        </div>
-        <div className="flex flex-wrap gap-1.5">
-          <MonthPill
-            label={t('noticies.allMonths')}
-            count={NOTICIES.length}
-            active={activeMonth === null}
-            onClick={() => setActiveMonth(null)}
-          />
-          {monthBuckets.map((m) => (
-            <MonthPill
-              key={m.key}
-              label={getMonthLabel(m.key, locale)}
-              count={m.count}
-              active={activeMonth === m.key}
-              onClick={() => setActiveMonth(m.key)}
-            />
-          ))}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+          {CATEGORIES.map((c) => {
+            const isActive = activeCat === c.id;
+            const count = categoryCounts[c.id];
+            return (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => setActiveCat(c.id)}
+                aria-pressed={isActive}
+                className={`relative rounded-xl px-3 py-2.5 text-left transition border-2
+                  ${isActive
+                    ? `bg-gradient-to-r ${c.tone} text-white border-transparent shadow-md`
+                    : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10'}`}
+              >
+                <div className="flex items-center gap-2">
+                  <span aria-hidden className="text-xl">{c.icon}</span>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[10px] uppercase tracking-wider font-bold opacity-80 leading-none">
+                      {t(`noticies.cat.${c.id}`)}
+                    </div>
+                    <div className={`mt-0.5 text-sm font-black ${isActive ? '' : 'text-slate-900 dark:text-slate-100'}`}>
+                      {count}
+                    </div>
+                  </div>
+                </div>
+              </button>
+            );
+          })}
         </div>
       </section>
+
+      {/* SELECTOR DE MES — segon nivell, dins de la categoria activa */}
+      {monthBuckets.length > 0 && (
+        <section className="mb-5 rounded-2xl border p-4 sm:p-5
+          border-slate-200 bg-white
+          dark:border-white/10 dark:bg-[#0f1d34]">
+          <div className="flex items-center gap-2 mb-3">
+            <span aria-hidden className="text-base">📅</span>
+            <h2 className="text-xs font-black uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300">
+              {t('noticies.byMonth')}
+            </h2>
+            <span className={`h-1.5 w-1.5 rounded-full bg-gradient-to-r ${activeCatMeta.tone}`} aria-hidden />
+            <span className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">
+              {t(`noticies.cat.${activeCat}`)}
+            </span>
+            <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            <MonthPill
+              label={t('noticies.allMonths')}
+              count={inCategory.length}
+              active={activeMonth === null}
+              onClick={() => setActiveMonth(null)}
+            />
+            {monthBuckets.map((m) => (
+              <MonthPill
+                key={m.key}
+                label={getMonthLabel(m.key, locale)}
+                count={m.count}
+                active={activeMonth === m.key}
+                onClick={() => setActiveMonth(m.key)}
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Cerca */}
       <div className="mb-5">
