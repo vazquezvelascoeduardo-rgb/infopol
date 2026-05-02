@@ -1,34 +1,44 @@
-// Llistat de notícies agrupades per mes (any-mes desc).
-// Marca totes les notícies com a llegides quan l'usuari arriba a la
-// pàgina (per netejar el badge de no-llegides).
+// Llistat de notícies: selector de mes al cim + cerca textual + cards
+// agrupades per any-mes. Marca totes com a llegides quan s'arriba a
+// la pàgina (per netejar el badge de no-llegides).
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
 import {
-  NOTICIES, type Noticia, groupByMonth, getMonthLabel, markNoticiesSeen,
+  NOTICIES, type Noticia, groupByMonth, getMonthLabel, getMonthBuckets,
+  getMonthKey, markNoticiesSeen,
 } from '../lib/noticies';
 
 export default function Noticies() {
   const { t, locale } = useT();
+  const [activeMonth, setActiveMonth] = useState<string | null>(null);
   const [query, setQuery] = useState('');
 
-  // Marca com a llegides quan l'usuari obre la llista (al cap d'1.5s
-  // — així si entra de rebot no perd el badge).
+  // Marca com a llegides 1.5s després d'entrar (per evitar pèrdues
+  // de badge per entrades de rebot).
   useEffect(() => {
     const id = setTimeout(() => markNoticiesSeen(), 1500);
     return () => clearTimeout(id);
   }, []);
 
+  const monthBuckets = useMemo(() => getMonthBuckets(NOTICIES), []);
+
   const filtered = useMemo(() => {
-    if (!query.trim()) return NOTICIES;
-    const q = query.toLowerCase().trim();
-    return NOTICIES.filter((n) =>
-      n.title.toLowerCase().includes(q)
-      || n.summary.toLowerCase().includes(q)
-      || n.body.toLowerCase().includes(q)
-      || (n.tags ?? []).some((tg) => tg.toLowerCase().includes(q))
-    );
-  }, [query]);
+    let list: Noticia[] = NOTICIES;
+    if (activeMonth) {
+      list = list.filter((n) => getMonthKey(n.publishedAt) === activeMonth);
+    }
+    if (query.trim()) {
+      const q = query.toLowerCase().trim();
+      list = list.filter((n) =>
+        n.title.toLowerCase().includes(q)
+        || n.summary.toLowerCase().includes(q)
+        || n.body.toLowerCase().includes(q)
+        || (n.tags ?? []).some((tg) => tg.toLowerCase().includes(q))
+      );
+    }
+    return list;
+  }, [activeMonth, query]);
 
   const grouped = useMemo(() => groupByMonth(filtered), [filtered]);
 
@@ -60,6 +70,36 @@ export default function Noticies() {
           </div>
         </div>
       </header>
+
+      {/* SELECTOR DE MES — apartat destacat al cim */}
+      <section className="mb-5 rounded-2xl border p-4 sm:p-5
+        border-slate-200 bg-white
+        dark:border-white/10 dark:bg-[#0f1d34]">
+        <div className="flex items-center gap-2 mb-3">
+          <span aria-hidden className="text-base">📅</span>
+          <h2 className="text-xs font-black uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300">
+            {t('noticies.byMonth')}
+          </h2>
+          <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          <MonthPill
+            label={t('noticies.allMonths')}
+            count={NOTICIES.length}
+            active={activeMonth === null}
+            onClick={() => setActiveMonth(null)}
+          />
+          {monthBuckets.map((m) => (
+            <MonthPill
+              key={m.key}
+              label={getMonthLabel(m.key, locale)}
+              count={m.count}
+              active={activeMonth === m.key}
+              onClick={() => setActiveMonth(m.key)}
+            />
+          ))}
+        </div>
+      </section>
 
       {/* Cerca */}
       <div className="mb-5">
@@ -112,17 +152,59 @@ export default function Noticies() {
   );
 }
 
+function MonthPill({
+  label, count, active, onClick,
+}: {
+  label: string; count: number; active: boolean; onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      className={`inline-flex items-center gap-1.5 rounded-full border-2 px-3 py-1 text-xs font-semibold transition
+        ${active
+          ? 'bg-gradient-to-r from-blue-600 to-indigo-700 text-white border-transparent shadow-md'
+          : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10'}`}
+    >
+      <span>{label}</span>
+      <span className={`inline-flex items-center justify-center rounded-full px-1.5 text-[10px] font-bold ${
+        active ? 'bg-white/20' : 'bg-slate-100 dark:bg-white/10'
+      }`}>
+        {count}
+      </span>
+    </button>
+  );
+}
+
 function NoticiaCard({ noticia }: { noticia: Noticia }) {
   const { t } = useT();
   return (
     <Link
       to={`/noticies/${encodeURIComponent(noticia.slug)}`}
-      className="group relative block overflow-hidden rounded-2xl border p-4 sm:p-5 transition
+      className="group relative block overflow-hidden rounded-2xl border transition
         border-slate-200 bg-white hover:border-blue-300 hover:shadow-md
         dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-blue-400/40"
     >
       <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-700" />
-      <div className="flex items-start gap-3">
+
+      <div className="flex items-stretch gap-3 p-4 sm:p-5">
+        {/* Thumbnail (si hi ha imatge) */}
+        {noticia.image && (
+          <div className="hidden sm:block w-32 shrink-0 self-start">
+            <img
+              src={noticia.image}
+              alt={noticia.imageAlt ?? ''}
+              loading="lazy"
+              className="w-full aspect-[4/3] object-cover rounded-lg border border-slate-200 dark:border-white/10"
+              onError={(e) => {
+                // Si la imatge no carrega, oculta-la sense trencar el card.
+                (e.currentTarget.parentElement as HTMLElement).style.display = 'none';
+              }}
+            />
+          </div>
+        )}
+
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-x-2 text-[10px] uppercase tracking-wider mb-1">
             <time className="font-mono text-slate-500 dark:text-slate-400">
@@ -133,6 +215,14 @@ function NoticiaCard({ noticia }: { noticia: Noticia }) {
                 <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
                 <span className="rounded-full bg-amber-200 dark:bg-amber-400/20 text-amber-900 dark:text-amber-300 px-2 py-0.5 text-[9px] font-bold">
                   ⭐ {t('noticies.featured')}
+                </span>
+              </>
+            )}
+            {noticia.sourceUrl && (
+              <>
+                <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
+                <span className="font-mono text-blue-600 dark:text-blue-400 inline-flex items-center gap-0.5">
+                  🔗 {t('noticies.hasSource')}
                 </span>
               </>
             )}

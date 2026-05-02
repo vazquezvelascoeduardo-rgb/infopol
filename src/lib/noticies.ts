@@ -38,6 +38,14 @@ export type Noticia = {
   tags?: string[];
   /** Notícia destacada del mes (apareix amb badge a la home). */
   featured?: boolean;
+  /**
+   * URL d'una imatge representativa (recomanat 16:9, mín. 800px ample).
+   * Pot ser una URL externa estable (ex. Wikimedia Commons, CDN propi).
+   * Es renderitza com a thumbnail al llistat i com a hero al detall.
+   */
+  image?: string;
+  /** Text alternatiu de la imatge (accessibilitat). */
+  imageAlt?: string;
   /** Enllaç a fitxa interna del temari (si remet). */
   linkedTo?: {
     moduleSlug: string;
@@ -90,6 +98,8 @@ Recomanació: incloure consulta SIPER / Mossos al moment de la detenció i annex
     publishedAt: '2026-04-10',
     source: 'BOE núm. 87, de 9 d\'abril de 2026 (correcció en BOE núm. 88, de 10 d\'abril). Ref. BOE-A-2026-7966',
     sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2026-7966',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png',
+    imageAlt: 'Bandera d\'Espanya, símbol de la legislació estatal',
     tags: ['legislació', 'codi penal', 'LECrim', 'multirreincidència', 'narcotràfic'],
     featured: true,
   },
@@ -213,6 +223,8 @@ Si el menor circula sense acompanyant autoritzat o sense complir els requisits: 
     publishedAt: '2026-04-20',
     source: 'Direcció General de Trànsit',
     sourceUrl: 'https://www.dgt.es',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Logotipo_DGT_Espa%C3%B1a.svg/1200px-Logotipo_DGT_Espa%C3%B1a.svg.png',
+    imageAlt: 'Logotip de la Direcció General de Trànsit',
     tags: ['trànsit', 'DGT', 'conducció acompanyada', 'menors'],
     featured: true,
   },
@@ -434,6 +446,8 @@ L'aplicació InfoPol té tests d'oposició del temari oficial (CE78, EAC, LOPSC,
     publishedAt: '2026-04-30',
     source: 'Generalitat de Catalunya — DOGC',
     sourceUrl: 'https://dogc.gencat.cat',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/1200px-Flag_of_Catalonia.svg.png',
+    imageAlt: 'Bandera de Catalunya — Generalitat',
     tags: ['catalunya', 'oposicions', 'mossos d\'esquadra', 'bombers', 'agents rurals'],
     featured: true,
   },
@@ -730,6 +744,8 @@ Es reintrodueixen les deduccions per:
     publishedAt: '2026-03-22',
     source: 'BOE núm. 71, de 21 de març de 2026 (correcció en BOE núm. 74). Convalidat al Congrés el 26 de març. Ref. BOE-A-2026-6544',
     sourceUrl: 'https://www.boe.es/buscar/doc.php?id=BOE-A-2026-6544',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png',
+    imageAlt: 'Bandera d\'Espanya — Govern central',
     tags: ['legislació', 'crisi energètica', 'orient mitjà', 'IVA', 'plans mobilitat'],
     featured: true,
   },
@@ -795,6 +811,8 @@ Total places de seguretat 2026: ~6.000 entre estatals + autonòmics + locals cat
     publishedAt: '2026-03-13',
     source: 'BOE núm. 62, de 13 de març de 2026. Ref. BOE-A-2026-5999 (CNP) i RD 206/2026 (GC)',
     sourceUrl: 'https://www.boe.es/buscar/doc.php?id=BOE-A-2026-5999',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png',
+    imageAlt: 'Bandera d\'Espanya — convocatòria estatal',
     tags: ['legislació', 'oposicions', 'CNP', 'guàrdia civil', 'OEP estatal'],
     featured: true,
   },
@@ -1085,6 +1103,8 @@ L'aplicació InfoPol té tests d'oposició del temari oficial complet (CE78, EAC
     publishedAt: '2026-03-26',
     source: 'DOGC núm. 9633, de 26 de març de 2026',
     sourceUrl: 'https://dogc.gencat.cat',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/1200px-Flag_of_Catalonia.svg.png',
+    imageAlt: 'Bandera de Catalunya — Mossos d\'Esquadra',
     tags: ['catalunya', 'oposicions', 'mossos d\'esquadra', 'OEP'],
     featured: true,
   },
@@ -1295,6 +1315,21 @@ export function getMonthLabel(monthKey: string, locale: 'es' | 'ca'): string {
     ? ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre']
     : ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   return `${months[monthIdx]} ${year}`;
+}
+
+/**
+ * Llista de mesos amb notícies, ordenats desc, amb comptador.
+ * Útil per renderitzar el selector de mes al llistat.
+ */
+export function getMonthBuckets(items: Noticia[] = NOTICIES): Array<{ key: string; count: number }> {
+  const counts = new Map<string, number>();
+  for (const n of items) {
+    const k = getMonthKey(n.publishedAt);
+    counts.set(k, (counts.get(k) ?? 0) + 1);
+  }
+  return Array.from(counts.entries())
+    .sort(([a], [b]) => b.localeCompare(a))
+    .map(([key, count]) => ({ key, count }));
 }
 
 /**

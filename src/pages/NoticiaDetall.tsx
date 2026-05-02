@@ -36,9 +36,26 @@ export default function NoticiaDetall() {
         <span className="text-slate-700 dark:text-slate-200 truncate">{noticia.title}</span>
       </nav>
 
-      <article className="rounded-2xl border p-5 sm:p-7
+      <article className="rounded-2xl border overflow-hidden
         border-slate-200 bg-white
         dark:border-white/10 dark:bg-[#0f1d34]">
+        {/* Hero image (si la notícia en porta) */}
+        {noticia.image && (
+          <div className="relative w-full aspect-[16/9] bg-slate-100 dark:bg-white/5 overflow-hidden">
+            <img
+              src={noticia.image}
+              alt={noticia.imageAlt ?? noticia.title}
+              loading="eager"
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                (e.currentTarget.parentElement as HTMLElement).style.display = 'none';
+              }}
+            />
+            <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-700" />
+          </div>
+        )}
+
+        <div className="p-5 sm:p-7">
         {/* Cabecera amb metadades */}
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] uppercase tracking-wider mb-3">
           <time className="font-mono text-slate-500 dark:text-slate-400">
@@ -62,6 +79,31 @@ export default function NoticiaDetall() {
           {noticia.summary}
         </p>
 
+        {/* CTA — font original destacada (al cim, sota el resum) */}
+        {noticia.sourceUrl && (
+          <a
+            href={noticia.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-3 rounded-xl border-2 p-3 mb-5 transition
+              border-blue-200 bg-blue-50 hover:border-blue-400 hover:shadow-md
+              dark:border-blue-400/30 dark:bg-blue-500/10 dark:hover:border-blue-400/60"
+          >
+            <span aria-hidden className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-700 text-base text-white shadow-inner">
+              🔗
+            </span>
+            <div className="min-w-0 flex-1">
+              <div className="font-bold text-sm text-blue-800 dark:text-blue-200">
+                {t('noticies.externalSource')}
+              </div>
+              <div className="text-[11px] font-mono text-slate-500 dark:text-slate-400 truncate">
+                {prettyUrl(noticia.sourceUrl)}
+              </div>
+            </div>
+            <span aria-hidden className="shrink-0 text-blue-700 dark:text-blue-300 group-hover:translate-x-1 transition">↗</span>
+          </a>
+        )}
+
         {/* Cos amb format lleuger */}
         <div className="prose-content text-slate-800 dark:text-slate-200 leading-relaxed">
           {renderBody(noticia.body)}
@@ -81,21 +123,6 @@ export default function NoticiaDetall() {
           </div>
         )}
 
-        {/* Font externa */}
-        {noticia.sourceUrl && (
-          <div className="mt-3 text-sm">
-            <a
-              href={noticia.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"
-            >
-              📄 {t('noticies.externalSource')}
-              <span aria-hidden>↗</span>
-            </a>
-          </div>
-        )}
-
         {/* Enllaç a fitxa interna */}
         {noticia.linkedTo && (
           <Link
@@ -110,6 +137,7 @@ export default function NoticiaDetall() {
             <span aria-hidden className="ml-2">→</span>
           </Link>
         )}
+        </div>
       </article>
 
       {/* Notícies relacionades */}
@@ -260,5 +288,16 @@ function formatDate(iso: string): string {
     return d.toLocaleDateString('ca-ES', { day: 'numeric', month: 'long', year: 'numeric' });
   } catch {
     return iso;
+  }
+}
+
+/** Mostra un URL net per al CTA de font (ex: "boe.es/buscar/..."). */
+function prettyUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    const path = u.pathname.length > 30 ? u.pathname.slice(0, 28) + '…' : u.pathname;
+    return u.host + path;
+  } catch {
+    return url;
   }
 }
