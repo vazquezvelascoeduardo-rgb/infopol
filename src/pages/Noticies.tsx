@@ -14,6 +14,9 @@ import {
 import {
   ESPORTS, ESPORTS_UPDATED_AT,
 } from '../lib/esports';
+import {
+  PREMIS, PREMIS_UPDATED_AT,
+} from '../lib/premis';
 
 const CATEGORIES: { id: NoticiaCategoria; icon: string; tone: string }[] = [
   { id: 'noticies',      icon: '📰', tone: 'from-blue-500 to-indigo-700' },
@@ -137,8 +140,13 @@ export default function Noticies() {
         <EsportsDirectory query={query} setQuery={setQuery} />
       )}
 
+      {/* DIRECTORI DE PREMIS — vista pròpia (mateix patró) */}
+      {activeCat === 'premis' && (
+        <PremisDirectory query={query} setQuery={setQuery} />
+      )}
+
       {/* La resta de categories utilitzen el sistema d'articles + mes + cerca */}
-      {activeCat !== 'personalitats' && activeCat !== 'esports' && (
+      {activeCat !== 'personalitats' && activeCat !== 'esports' && activeCat !== 'premis' && (
         <>
 
       {/* SELECTOR DE MES — segon nivell, dins de la categoria activa */}
@@ -553,6 +561,120 @@ function EsportsDirectory({
           {sections.map((sec) => (
             // SectionView accepta el shape { id, title, icon, accent, subsections }
             // que tant LeaderSection com SportSection compleixen.
+            <SectionView key={sec.id} sec={sec as unknown as LeaderSection} />
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════
+// DIRECTORI DE PREMIS — mateix patró que Esports/Personalitats
+// ════════════════════════════════════════════════════════════════════
+
+function PremisDirectory({
+  query, setQuery,
+}: {
+  query: string;
+  setQuery: (q: string) => void;
+}) {
+  const { t } = useT();
+
+  const q = query.trim().toLowerCase();
+  const sections = q
+    ? PREMIS.map((sec) => ({
+        ...sec,
+        subsections: sec.subsections.map((sub) => ({
+          ...sub,
+          entries: sub.entries.filter(
+            (e) =>
+              e.name.toLowerCase().includes(q)
+              || e.position.toLowerCase().includes(q)
+              || (e.detail ?? '').toLowerCase().includes(q),
+          ),
+        })).filter((sub) => sub.entries.length > 0),
+      })).filter((sec) => sec.subsections.length > 0)
+    : PREMIS;
+
+  function scrollToSection(id: string) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  return (
+    <>
+      {/* Capçalera explicativa */}
+      <div className="rounded-2xl border-2 border-dashed p-4 mb-4
+        border-amber-200 bg-amber-50/40
+        dark:border-amber-400/30 dark:bg-amber-500/10">
+        <div className="flex items-start gap-3">
+          <span aria-hidden className="text-2xl shrink-0">🏆</span>
+          <div className="min-w-0">
+            <h2 className="font-bold text-base mb-0.5">
+              {t('premis.title')}
+            </h2>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
+              {t('premis.subtitle').replace('{date}', formatLongDate(PREMIS_UPDATED_AT))}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* NAVEGACIÓ RÀPIDA — pills per saltar a cada mes */}
+      <nav className="sticky top-2 z-20 mb-4 rounded-2xl border p-3 backdrop-blur
+        border-slate-200 bg-white/95
+        dark:border-white/10 dark:bg-[#0f1d34]/95">
+        <div className="flex items-center gap-2 mb-2">
+          <span aria-hidden className="text-base">🧭</span>
+          <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300">
+            {t('premis.quickNav')}
+          </h2>
+          <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {PREMIS.map((sec) => (
+            <button
+              key={sec.id}
+              type="button"
+              onClick={() => scrollToSection(sec.id)}
+              className={`inline-flex items-center gap-1.5 rounded-full border-2 px-3 py-1 text-xs font-semibold transition
+                border-transparent bg-gradient-to-r ${sec.accent} text-white shadow-sm
+                hover:shadow-md hover:-translate-y-0.5`}
+            >
+              <span aria-hidden>{sec.icon}</span>
+              <span>{sec.shortLabel}</span>
+            </button>
+          ))}
+        </div>
+      </nav>
+
+      {/* Cerca */}
+      <div className="mb-5">
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={t('premis.searchPlaceholder')}
+          className="w-full rounded-xl border-2 px-4 py-2.5 text-sm
+            border-slate-200 bg-white text-slate-800 placeholder-slate-400
+            focus:border-amber-400 focus:outline-none
+            dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:placeholder-slate-500 dark:focus:border-amber-400/40"
+        />
+      </div>
+
+      {/* Sections */}
+      {sections.length === 0 ? (
+        <div className="rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/60 dark:bg-white/5 p-6 text-center">
+          <div className="text-4xl mb-2" aria-hidden>🔍</div>
+          <p className="text-sm text-slate-600 dark:text-slate-400">
+            {t('premis.empty')}
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-5">
+          {sections.map((sec) => (
             <SectionView key={sec.id} sec={sec as unknown as LeaderSection} />
           ))}
         </div>
