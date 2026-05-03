@@ -129,10 +129,20 @@ export default function CulturaGeneral() {
 
 // ── Render d'una secció (mateix shape que els altres directoris) ──
 function SectionView({ sec }: { sec: CultSection }) {
+  // Sub-nav inline: només mostrem si hi ha 2+ subseccions amb títol.
+  const subsWithTitle = sec.subsections.filter((s) => s.title);
+  const showInlineNav = subsWithTitle.length >= 2;
+
+  function scrollToSubsection(secId: string, subIdx: number) {
+    const el = document.getElementById(`${secId}-sub-${subIdx}`);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   return (
     <section
       id={sec.id}
-      className="rounded-2xl border overflow-hidden scroll-mt-24
+      className="rounded-2xl border overflow-hidden scroll-mt-28
         border-slate-200 bg-white
         dark:border-white/10 dark:bg-[#0f1d34]"
     >
@@ -142,9 +152,32 @@ function SectionView({ sec }: { sec: CultSection }) {
           {sec.title}
         </h2>
       </header>
+
+      {/* Sub-navegació inline (només quan hi ha 2+ subseccions) */}
+      {showInlineNav && (
+        <div className="px-4 py-3 border-b border-slate-200/70 dark:border-white/10
+          bg-slate-50/50 dark:bg-white/5">
+          <div className="flex flex-wrap gap-1.5">
+            {sec.subsections.map((sub, i) => sub.title && (
+              <button
+                key={i}
+                type="button"
+                onClick={() => scrollToSubsection(sec.id, i)}
+                className="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-semibold transition
+                  border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-50 hover:-translate-y-0.5
+                  dark:border-white/15 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:border-white/30"
+              >
+                {sub.icon && <span aria-hidden>{sub.icon}</span>}
+                <span className="truncate max-w-[200px]">{sub.title}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="divide-y divide-slate-200/70 dark:divide-white/10">
         {sec.subsections.map((sub, i) => (
-          <div key={i} className="px-4 py-3">
+          <div key={i} id={`${sec.id}-sub-${i}`} className="px-4 py-3 scroll-mt-32">
             {(sub.title || sub.icon) && (
               <div className="flex items-center gap-2 mb-2">
                 {sub.icon && (
