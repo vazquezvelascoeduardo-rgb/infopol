@@ -38,6 +38,7 @@ const TestSession = lazy(() => import('./pages/test/TestSession'));
 const Achievements = lazy(() => import('./pages/test/Achievements'));
 const Noticies = lazy(() => import('./pages/Noticies'));
 const NoticiaDetall = lazy(() => import('./pages/NoticiaDetall'));
+const CulturaGeneral = lazy(() => import('./pages/CulturaGeneral'));
 
 function PageFallback() {
   return (
@@ -75,6 +76,7 @@ export default function App() {
           <Route path="/test/:slug" element={<TestSession />} />
           <Route path="/noticies" element={<Noticies />} />
           <Route path="/noticies/:slug" element={<NoticiaDetall />} />
+          <Route path="/cultura-general" element={<CulturaGeneral />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

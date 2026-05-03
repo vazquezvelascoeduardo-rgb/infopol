@@ -131,6 +131,13 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
           {/* Noticies */}
           <NoticiesLink t={t} />
 
+          {/* Cultura General */}
+          <SimpleLink
+            to="/cultura-general"
+            icon="🎓"
+            label={t('sidebar.cultura')}
+          />
+
           {/* Lleis (col·lapsable) — el chevron desplega les categories;
               el titol mateix es enllaç al llistat complet. */}
           <details className="group rounded-lg border border-slate-200/70 dark:border-white/10 mt-2">
