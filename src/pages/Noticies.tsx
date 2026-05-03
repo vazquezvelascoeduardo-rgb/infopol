@@ -8,6 +8,9 @@ import {
   NOTICIES, type Noticia, type NoticiaCategoria, groupByMonth, getMonthLabel,
   getMonthBuckets, getMonthKey, getCategory, getCategoryCounts, markNoticiesSeen,
 } from '../lib/noticies';
+import {
+  PERSONALITATS, PERSONALITATS_UPDATED_AT, type LeaderSection,
+} from '../lib/personalitats';
 
 const CATEGORIES: { id: NoticiaCategoria; icon: string; tone: string }[] = [
   { id: 'noticies',      icon: '📰', tone: 'from-blue-500 to-indigo-700' },
@@ -129,6 +132,15 @@ export default function Noticies() {
         </div>
       </section>
 
+      {/* DIRECTORI DE PERSONALITATS — vista pròpia (no cards) */}
+      {activeCat === 'personalitats' && (
+        <PersonalitatsDirectory query={query} setQuery={setQuery} />
+      )}
+
+      {/* La resta de categories utilitzen el sistema d'articles + mes + cerca */}
+      {activeCat !== 'personalitats' && (
+        <>
+
       {/* SELECTOR DE MES — segon nivell, dins de la categoria activa */}
       {monthBuckets.length > 0 && (
         <section className="mb-5 rounded-2xl border p-4 sm:p-5
@@ -211,6 +223,8 @@ export default function Noticies() {
             </section>
           ))}
         </div>
+      )}
+        </>
       )}
     </div>
   );
@@ -320,6 +334,155 @@ function formatDate(iso: string): string {
   try {
     const d = new Date(iso);
     return d.toLocaleDateString('ca-ES', { day: 'numeric', month: 'short' });
+  } catch {
+    return iso;
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════
+// DIRECTORI DE PERSONALITATS — vista pròpia
+// ════════════════════════════════════════════════════════════════════
+
+function PersonalitatsDirectory({
+  query, setQuery,
+}: {
+  query: string;
+  setQuery: (q: string) => void;
+}) {
+  const { t } = useT();
+
+  // Filtre per cerca: si hi ha query, filtrem entries que coincideixin
+  // (nom o càrrec). Si no, mostrem totes.
+  const q = query.trim().toLowerCase();
+  const sections = q
+    ? PERSONALITATS.map((sec) => ({
+        ...sec,
+        subsections: sec.subsections.map((sub) => ({
+          ...sub,
+          entries: sub.entries.filter(
+            (e) =>
+              e.name.toLowerCase().includes(q)
+              || e.position.toLowerCase().includes(q)
+              || (e.detail ?? '').toLowerCase().includes(q),
+          ),
+        })).filter((sub) => sub.entries.length > 0),
+      })).filter((sec) => sec.subsections.length > 0)
+    : PERSONALITATS;
+
+  return (
+    <>
+      {/* Capçalera explicativa */}
+      <div className="rounded-2xl border-2 border-dashed p-4 mb-5
+        border-purple-200 bg-purple-50/40
+        dark:border-purple-400/30 dark:bg-purple-500/10">
+        <div className="flex items-start gap-3">
+          <span aria-hidden className="text-2xl shrink-0">👤</span>
+          <div className="min-w-0">
+            <h2 className="font-bold text-base mb-0.5">
+              {t('personalitats.title')}
+            </h2>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
+              {t('personalitats.subtitle').replace('{date}', formatLongDate(PERSONALITATS_UPDATED_AT))}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Cerca */}
+      <div className="mb-5">
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={t('personalitats.searchPlaceholder')}
+          className="w-full rounded-xl border-2 px-4 py-2.5 text-sm
+            border-slate-200 bg-white text-slate-800 placeholder-slate-400
+            focus:border-purple-400 focus:outline-none
+            dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:placeholder-slate-500 dark:focus:border-purple-400/40"
+        />
+      </div>
+
+      {/* Sections */}
+      {sections.length === 0 ? (
+        <div className="rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/60 dark:bg-white/5 p-6 text-center">
+          <div className="text-4xl mb-2" aria-hidden>🔍</div>
+          <p className="text-sm text-slate-600 dark:text-slate-400">
+            {t('personalitats.empty')}
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-5">
+          {sections.map((sec) => (
+            <SectionView key={sec.id} sec={sec} />
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
+function SectionView({ sec }: { sec: LeaderSection }) {
+  return (
+    <section
+      id={sec.id}
+      className="rounded-2xl border overflow-hidden
+        border-slate-200 bg-white
+        dark:border-white/10 dark:bg-[#0f1d34]"
+    >
+      <header className={`flex items-center gap-3 px-4 py-3 bg-gradient-to-r ${sec.accent} text-white`}>
+        <span aria-hidden className="text-2xl">{sec.icon}</span>
+        <h2 className="font-black text-base sm:text-lg leading-tight">
+          {sec.title}
+        </h2>
+      </header>
+      <div className="divide-y divide-slate-200/70 dark:divide-white/10">
+        {sec.subsections.map((sub, i) => (
+          <div key={i} className="px-4 py-3">
+            {sub.title && (
+              <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500 dark:text-slate-400 mb-2">
+                {sub.title}
+              </div>
+            )}
+            <ul className="space-y-1.5">
+              {sub.entries.map((e, j) => (
+                <li key={j} className="rounded-lg border px-3 py-2 transition
+                  border-slate-200/70 bg-slate-50/40 hover:border-slate-300
+                  dark:border-white/5 dark:bg-white/5 dark:hover:border-white/10">
+                  <div className="flex items-start gap-2 flex-wrap">
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[11px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 leading-tight">
+                        {e.position}
+                      </div>
+                      <div className="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 leading-snug mt-0.5">
+                        {e.name}
+                      </div>
+                      {e.detail && (
+                        <div className="text-xs text-slate-500 dark:text-slate-400 leading-snug mt-0.5">
+                          {e.detail}
+                        </div>
+                      )}
+                    </div>
+                    {e.recent && (
+                      <span className="shrink-0 rounded-full bg-rose-500 text-white text-[9px] font-bold px-1.5 py-0.5 uppercase tracking-wider inline-flex items-center gap-1">
+                        <span aria-hidden>🔴</span>
+                        Nou
+                      </span>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function formatLongDate(iso: string): string {
+  try {
+    const d = new Date(iso);
+    return d.toLocaleDateString('ca-ES', { day: 'numeric', month: 'long', year: 'numeric' });
   } catch {
     return iso;
   }
