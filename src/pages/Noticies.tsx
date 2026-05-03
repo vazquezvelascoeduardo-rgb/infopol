@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
 import {
   NOTICIES, type Noticia, type NoticiaCategoria, groupByMonth, getMonthLabel,
-  getMonthBuckets, getMonthKey, getCategory, getCategoryCounts, markNoticiesSeen,
+  getMonthBuckets, getMonthKey, getCategory, markNoticiesSeen,
 } from '../lib/noticies';
 import {
   PERSONALITATS, PERSONALITATS_UPDATED_AT, type LeaderSection,
@@ -36,8 +36,6 @@ export default function Noticies() {
   useEffect(() => {
     setActiveMonth(null);
   }, [activeCat]);
-
-  const categoryCounts = useMemo(() => getCategoryCounts(NOTICIES), []);
 
   // Articles de la categoria activa (base per a mes/cerca).
   const inCategory = useMemo(
@@ -103,28 +101,22 @@ export default function Noticies() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
           {CATEGORIES.map((c) => {
             const isActive = activeCat === c.id;
-            const count = categoryCounts[c.id];
             return (
               <button
                 key={c.id}
                 type="button"
                 onClick={() => setActiveCat(c.id)}
                 aria-pressed={isActive}
-                className={`relative rounded-xl px-3 py-2.5 text-left transition border-2
+                className={`relative rounded-xl px-3 py-3 text-left transition border-2
                   ${isActive
                     ? `bg-gradient-to-r ${c.tone} text-white border-transparent shadow-md`
                     : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10'}`}
               >
                 <div className="flex items-center gap-2">
                   <span aria-hidden className="text-xl">{c.icon}</span>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-[10px] uppercase tracking-wider font-bold opacity-80 leading-none">
-                      {t(`noticies.cat.${c.id}`)}
-                    </div>
-                    <div className={`mt-0.5 text-sm font-black ${isActive ? '' : 'text-slate-900 dark:text-slate-100'}`}>
-                      {count}
-                    </div>
-                  </div>
+                  <span className="font-bold text-sm leading-tight">
+                    {t(`noticies.cat.${c.id}`)}
+                  </span>
                 </div>
               </button>
             );
@@ -160,7 +152,6 @@ export default function Noticies() {
           <div className="flex flex-wrap gap-1.5">
             <MonthPill
               label={t('noticies.allMonths')}
-              count={inCategory.length}
               active={activeMonth === null}
               onClick={() => setActiveMonth(null)}
             />
@@ -168,7 +159,6 @@ export default function Noticies() {
               <MonthPill
                 key={m.key}
                 label={getMonthLabel(m.key, locale)}
-                count={m.count}
                 active={activeMonth === m.key}
                 onClick={() => setActiveMonth(m.key)}
               />
@@ -208,9 +198,6 @@ export default function Noticies() {
                   <span aria-hidden className="text-base">📅</span>
                   {getMonthLabel(key, locale)}
                 </h2>
-                <span className="rounded-full bg-slate-200 dark:bg-white/10 px-2 py-0.5 text-[11px] font-mono text-slate-600 dark:text-slate-300">
-                  {items.length}
-                </span>
                 <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
               </div>
               <ul className="space-y-3">
@@ -231,26 +218,21 @@ export default function Noticies() {
 }
 
 function MonthPill({
-  label, count, active, onClick,
+  label, active, onClick,
 }: {
-  label: string; count: number; active: boolean; onClick: () => void;
+  label: string; active: boolean; onClick: () => void;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`inline-flex items-center gap-1.5 rounded-full border-2 px-3 py-1 text-xs font-semibold transition
+      className={`inline-flex items-center rounded-full border-2 px-3 py-1 text-xs font-semibold transition
         ${active
           ? 'bg-gradient-to-r from-blue-600 to-indigo-700 text-white border-transparent shadow-md'
           : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10'}`}
     >
-      <span>{label}</span>
-      <span className={`inline-flex items-center justify-center rounded-full px-1.5 text-[10px] font-bold ${
-        active ? 'bg-white/20' : 'bg-slate-100 dark:bg-white/10'
-      }`}>
-        {count}
-      </span>
+      {label}
     </button>
   );
 }
@@ -438,19 +420,38 @@ function SectionView({ sec }: { sec: LeaderSection }) {
       <div className="divide-y divide-slate-200/70 dark:divide-white/10">
         {sec.subsections.map((sub, i) => (
           <div key={i} className="px-4 py-3">
-            {sub.title && (
-              <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500 dark:text-slate-400 mb-2">
-                {sub.title}
+            {(sub.title || sub.icon) && (
+              <div className="flex items-center gap-2 mb-2">
+                {sub.icon && (
+                  <span aria-hidden className="text-base">{sub.icon}</span>
+                )}
+                {sub.title && (
+                  <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500 dark:text-slate-400">
+                    {sub.title}
+                  </div>
+                )}
               </div>
             )}
-            <ul className="space-y-1.5">
+            <ul className={sub.compact
+              ? 'grid grid-cols-1 sm:grid-cols-2 gap-1.5'
+              : 'space-y-1.5'}>
               {sub.entries.map((e, j) => (
                 <li key={j} className="rounded-lg border px-3 py-2 transition
                   border-slate-200/70 bg-slate-50/40 hover:border-slate-300
                   dark:border-white/5 dark:bg-white/5 dark:hover:border-white/10">
-                  <div className="flex items-start gap-2 flex-wrap">
+                  <div className="flex items-start gap-3">
+                    {e.flag && (
+                      <span
+                        aria-hidden
+                        className="shrink-0 inline-flex h-9 w-11 items-center justify-center rounded-md text-2xl select-none
+                          bg-white border border-slate-200/70
+                          dark:bg-white/10 dark:border-white/10"
+                      >
+                        {e.flag}
+                      </span>
+                    )}
                     <div className="min-w-0 flex-1">
-                      <div className="text-[11px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 leading-tight">
+                      <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 leading-tight">
                         {e.position}
                       </div>
                       <div className="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 leading-snug mt-0.5">
@@ -463,7 +464,7 @@ function SectionView({ sec }: { sec: LeaderSection }) {
                       )}
                     </div>
                     {e.recent && (
-                      <span className="shrink-0 rounded-full bg-rose-500 text-white text-[9px] font-bold px-1.5 py-0.5 uppercase tracking-wider inline-flex items-center gap-1">
+                      <span className="shrink-0 self-start rounded-full bg-rose-500 text-white text-[9px] font-bold px-1.5 py-0.5 uppercase tracking-wider inline-flex items-center gap-1">
                         <span aria-hidden>🔴</span>
                         Nou
                       </span>
