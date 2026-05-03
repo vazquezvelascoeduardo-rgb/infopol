@@ -200,6 +200,17 @@ const DICT: Record<Locale, Dict> = {
     'home.subtitle':
       'Normativa, infografías y procedimientos operativos para el agente de policía local. Elige una sección.',
     'home.sections': 'Secciones',
+    'home.hero.statusLabel': 'Disponible · PWA · Offline',
+    'home.hero.title': 'Consulta y estudio',
+    'home.hero.titleSerif': 'para tu día a día.',
+    'home.hero.subtitle':
+      'Toda la normativa, las herramientas operativas y el material de estudio que un agente de policía local de Catalunya necesita en un solo lugar.',
+    'home.modules.eyebrow': 'Lo que encontrarás',
+    'home.modules.title': 'Módulos del',
+    'home.modules.titleSerif': 'producto',
+    'home.modules.subtitle':
+      'Cada módulo está pensado para una tarea concreta del agente: estudiar, consultar al instante o resolver un procedimiento en la calle.',
+    'home.noticies.eyebrow': 'Última hora',
     'home.leyes.badge': 'Temario',
     'home.leyes.title': 'Leyes',
     'home.leyes.desc':
@@ -808,6 +819,17 @@ const DICT: Record<Locale, Dict> = {
     'home.subtitle':
       "Normativa, infografies i procediments operatius per a l'agent de policia local. Tria una secció.",
     'home.sections': 'Seccions',
+    'home.hero.statusLabel': 'Disponible · PWA · Offline',
+    'home.hero.title': 'Consulta i estudi',
+    'home.hero.titleSerif': 'per al teu dia a dia.',
+    'home.hero.subtitle':
+      "Tota la normativa, les eines operatives i el material d'estudi que un agent de policia local de Catalunya necessita en un sol lloc.",
+    'home.modules.eyebrow': 'Què hi trobaràs',
+    'home.modules.title': 'Mòduls del',
+    'home.modules.titleSerif': 'producte',
+    'home.modules.subtitle':
+      "Cada mòdul està pensat per a una tasca concreta de l'agent: estudiar, consultar a l'instant o resoldre un procediment al carrer.",
+    'home.noticies.eyebrow': 'Última hora',
     'home.leyes.badge': 'Temari',
     'home.leyes.title': 'Lleis',
     'home.leyes.desc':

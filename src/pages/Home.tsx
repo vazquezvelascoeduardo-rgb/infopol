@@ -1,6 +1,7 @@
-// Pantalla principal de l'app: dues seccions grans.
-//   1) Lleis      → tot el contingut de temari (CE78, Codi penal, FCS, etc.).
-//   2) Operativa  → procediments per situació (Trànsit, Seguretat ciutadana…).
+// Pantalla principal de l'app — disseny v2 (navy/or, mosaic asimètric).
+// Manté tot el contingut i funcionalitat actual: favorits, mòduls
+// principals (Lleis, Operativa, Tests, Superbuscador, Recursos, Alcohol,
+// Catàleg), Notícies recents i NewsBlock de novetats del temari.
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
@@ -10,65 +11,294 @@ import { NEWS, useNewCount, markNewsSeen } from '../lib/news';
 import { useFailuresCounts } from '../lib/failures';
 import { NOTICIES, useUnreadNoticiesCount } from '../lib/noticies';
 
-function NewsBlock() {
+// ════════════════════════════════════════════════════════════════════
+// HOME
+// ════════════════════════════════════════════════════════════════════
+
+export default function Home() {
   const { t } = useT();
-  const newCount = useNewCount();
-
-  // Quan l'usuari arriba a home, marquem com a vistes les novetats.
-  useEffect(() => {
-    if (newCount > 0) {
-      const t = setTimeout(() => markNewsSeen(), 1500);
-      return () => clearTimeout(t);
-    }
-  }, [newCount]);
-
-  // Sempre mostrem les ultimes 3, pero amb un badge 'NOU' si encara
-  // no s'havien vist.
-  const recent = NEWS.slice(0, 3);
-  if (recent.length === 0) return null;
+  const { due: failuresDue } = useFailuresCounts();
+  const unreadNoticies = useUnreadNoticiesCount();
+  const recentNoticies = NOTICIES.slice(0, 3);
 
   return (
-    <section className="mb-5 rounded-2xl border p-4 sm:p-5
-      border-blue-200/70 bg-gradient-to-br from-blue-50/50 via-white to-white
-      dark:border-blue-400/20 dark:bg-gradient-to-br dark:from-[#0e2244] dark:to-[#0f1d34]">
-      <div className="flex items-center gap-3 mb-3">
-        <span className="h-5 w-1.5 rounded-full bg-gradient-to-b from-blue-500 to-blue-700" />
-        <h2 className="text-xs font-black uppercase tracking-[0.25em] text-blue-700 dark:text-blue-400">
-          ✨ {t('home.news.title')}
-        </h2>
-        {newCount > 0 && (
-          <span className="inline-flex items-center justify-center rounded-full bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5">
-            {newCount} {t('home.news.badge')}
+    <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:py-10">
+      {/* HERO compacte */}
+      <Hero />
+
+      {/* FAVORITS — només si n'hi ha */}
+      <FavoritesBlock />
+
+      {/* MOSAIC DE MÒDULS — graella de 6 columnes amb spans variables */}
+      <section className="mt-8">
+        <Eyebrow label={t('home.modules.eyebrow')} />
+        <h2 className="mt-3 mb-2 text-3xl sm:text-4xl font-semibold tracking-tight leading-[1.05]">
+          {t('home.modules.title')}{' '}
+          <span className="font-serif italic font-normal text-ink-2">
+            {t('home.modules.titleSerif')}
           </span>
-        )}
-        <span className="h-px flex-1 bg-gradient-to-r from-blue-200 to-transparent dark:from-blue-400/20" />
-      </div>
-      <ul className="space-y-1.5">
-        {recent.map((n) => {
-          const mod = MODULES.find((m) => m.slug === n.moduleSlug);
-          return (
-            <li key={`news-${n.moduleSlug}-${n.slug}`}>
-              <Link
-                to={`/leyes/s/${n.moduleSlug}/${n.slug}`}
-                className="flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition
-                  border-slate-200/80 bg-white hover:border-blue-300
-                  dark:border-white/10 dark:bg-white/5 dark:hover:border-blue-400/40"
-              >
-                {mod && (
-                  <span aria-hidden className={`inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br ${mod.accent}`} />
-                )}
-                <span className="truncate text-slate-700 dark:text-slate-200 flex-1">{n.title}</span>
-                <span className="text-[10px] font-mono text-slate-400 dark:text-slate-500 shrink-0">
-                  {n.addedAt.slice(5)}
+        </h2>
+        <p className="text-muted text-base sm:text-[17px] max-w-xl leading-relaxed">
+          {t('home.modules.subtitle')}
+        </p>
+
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-6 gap-3.5">
+          {/* LLEIS — span 4 */}
+          <Link
+            to="/leyes"
+            className="mod-card sm:col-span-4 sm:min-h-[260px] flex flex-col gap-2.5"
+          >
+            <div className="flex justify-between items-start">
+              <span aria-hidden className="mod-icon mod-icon-gold">
+                <Icon name="scale" />
+              </span>
+              <Arrow />
+            </div>
+            <div className="text-[10px] uppercase tracking-[0.18em] text-muted font-semibold mt-1">
+              {t('home.leyes.badge')}
+            </div>
+            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight leading-[1.1]">
+              {t('home.leyes.title')}
+            </h3>
+            <p className="text-sm text-muted leading-relaxed">
+              {t('home.leyes.desc')}
+            </p>
+            <div className="mt-auto pt-3 flex flex-wrap items-center gap-2">
+              <span className="pill-tag">{MODULES.length} mòduls</span>
+              <span className="text-[11px] text-soft mono">·</span>
+              <span className="text-[11px] text-muted mono">CE78 · CP · LECrim · LOFCS · LSV ...</span>
+            </div>
+          </Link>
+
+          {/* OPERATIVA — span 2 */}
+          <Link
+            to="/operativa"
+            className="mod-card sm:col-span-2 sm:min-h-[260px] flex flex-col gap-2.5"
+          >
+            <div className="flex justify-between items-start">
+              <span aria-hidden className="mod-icon mod-icon-danger">
+                <Icon name="shield" />
+              </span>
+              <Arrow />
+            </div>
+            <div className="text-[10px] uppercase tracking-[0.18em] text-muted font-semibold mt-1">
+              {t('home.operativa.badge')}
+            </div>
+            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight leading-[1.1]">
+              {t('home.operativa.title')}
+            </h3>
+            <p className="text-sm text-muted leading-relaxed line-clamp-3">
+              {t('home.operativa.desc')}
+            </p>
+          </Link>
+
+          {/* TESTS — span 3 (amb badge dinàmic de pendents) */}
+          <Link
+            to="/test"
+            className="mod-card sm:col-span-3 sm:min-h-[230px] flex flex-col gap-2.5"
+          >
+            <div className="flex justify-between items-start">
+              <span aria-hidden className="mod-icon">
+                <Icon name="bookopen" />
+              </span>
+              {failuresDue > 0 ? (
+                <span
+                  title={t('home.tests.duePending')}
+                  className="rounded-pill bg-danger-soft text-danger px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider inline-flex items-center gap-1"
+                >
+                  <span aria-hidden>🔁</span>
+                  {failuresDue} {t('home.tests.duePendingShort')}
                 </span>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+              ) : (
+                <span className="rounded-pill bg-brand-soft text-brand px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider">
+                  {t('home.tests.badgeNew')}
+                </span>
+              )}
+            </div>
+            <div className="text-[10px] uppercase tracking-[0.18em] text-muted font-semibold mt-1">
+              {t('home.tests.badge')}
+            </div>
+            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight leading-[1.1]">
+              {t('home.tests.title')}
+            </h3>
+            <p className="text-sm text-muted leading-relaxed line-clamp-2">
+              {t('home.tests.desc')}
+            </p>
+          </Link>
+
+          {/* SUPERBUSCADOR — span 3 */}
+          <Link
+            to="/superbuscador"
+            className="mod-card sm:col-span-3 sm:min-h-[230px] flex flex-col gap-2.5"
+          >
+            <div className="flex justify-between items-start">
+              <span aria-hidden className="mod-icon mod-icon-ink">
+                <Icon name="search" />
+              </span>
+              <Arrow />
+            </div>
+            <div className="text-[10px] uppercase tracking-[0.18em] text-muted font-semibold mt-1">
+              {t('home.superbuscador.badge')}
+            </div>
+            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight leading-[1.1]">
+              {t('home.superbuscador.title')}
+            </h3>
+            <p className="text-sm text-muted leading-relaxed line-clamp-2">
+              {t('home.superbuscador.desc')}
+            </p>
+          </Link>
+
+          {/* CATÀLEG SCT — span 2 */}
+          <Link
+            to="/leyes/s/transit/cataleg-d-infraccions-de-transit-sct-2026"
+            className="mod-card sm:col-span-2 flex flex-col gap-2"
+          >
+            <div className="flex justify-between items-start">
+              <span aria-hidden className="mod-icon mod-icon-gold">
+                <Icon name="book" />
+              </span>
+              <Arrow />
+            </div>
+            <div className="text-[10px] uppercase tracking-[0.18em] text-muted font-semibold mt-1">
+              {t('home.cataleg.badge')}
+            </div>
+            <h3 className="text-base font-semibold tracking-tight leading-tight">
+              {t('home.cataleg.title')}
+            </h3>
+            <p className="text-xs text-muted leading-relaxed line-clamp-2">
+              {t('home.cataleg.desc')}
+            </p>
+          </Link>
+
+          {/* CALCULADORA ALCOHOL — span 2 */}
+          <Link
+            to="/calculadora-alcohol"
+            className="mod-card sm:col-span-2 flex flex-col gap-2"
+          >
+            <div className="flex justify-between items-start">
+              <span aria-hidden className="mod-icon mod-icon-warn">
+                <Icon name="droplet" />
+              </span>
+              <Arrow />
+            </div>
+            <div className="text-[10px] uppercase tracking-[0.18em] text-muted font-semibold mt-1">
+              {t('home.alcohol.badge')}
+            </div>
+            <h3 className="text-base font-semibold tracking-tight leading-tight">
+              {t('home.alcohol.title')}
+            </h3>
+            <p className="text-xs text-muted leading-relaxed line-clamp-2">
+              {t('home.alcohol.desc')}
+            </p>
+          </Link>
+
+          {/* RECURSOS — span 2 */}
+          <Link
+            to="/recursos"
+            className="mod-card sm:col-span-2 flex flex-col gap-2"
+          >
+            <div className="flex justify-between items-start">
+              <span aria-hidden className="mod-icon mod-icon-ok">
+                <Icon name="tools" />
+              </span>
+              <Arrow />
+            </div>
+            <div className="text-[10px] uppercase tracking-[0.18em] text-muted font-semibold mt-1">
+              {t('home.recursos.badge')}
+            </div>
+            <h3 className="text-base font-semibold tracking-tight leading-tight">
+              {t('home.recursos.title')}
+            </h3>
+            <p className="text-xs text-muted leading-relaxed line-clamp-2">
+              {t('home.recursos.desc')}
+            </p>
+          </Link>
+        </div>
+      </section>
+
+      {/* ACTUALITAT — Notícies recents */}
+      {recentNoticies.length > 0 && (
+        <section className="mt-10">
+          <div className="flex flex-wrap items-end justify-between gap-3 mb-5">
+            <div>
+              <Eyebrow label={t('home.noticies.eyebrow')} />
+              <h2 className="mt-2 text-2xl sm:text-3xl font-semibold tracking-tight leading-[1.05]">
+                {t('home.noticies.title')}{' '}
+                {unreadNoticies > 0 && (
+                  <span className="rounded-pill bg-danger-soft text-danger px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider align-middle inline-flex items-center gap-1">
+                    {unreadNoticies} {t('home.noticies.newBadge')}
+                  </span>
+                )}
+              </h2>
+            </div>
+            <Link
+              to="/noticies"
+              className="text-sm font-medium text-ink-2 hover:text-ink mono"
+            >
+              {t('home.noticies.viewAll')} →
+            </Link>
+          </div>
+
+          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {recentNoticies.map((n) => (
+              <li key={n.slug}>
+                <Link
+                  to={`/noticies/${encodeURIComponent(n.slug)}`}
+                  className="block rounded-card border border-line bg-paper p-4 transition hover:border-ink-2 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-18px_rgba(11,18,32,0.18)]"
+                >
+                  <time className="text-[11px] mono text-muted uppercase tracking-wider">
+                    {formatDate(n.publishedAt)}
+                  </time>
+                  <h3 className="mt-1.5 font-semibold text-base leading-snug tracking-tight line-clamp-2">
+                    {n.title}
+                  </h3>
+                  <p className="mt-1.5 text-[13px] text-muted leading-snug line-clamp-3">
+                    {n.summary}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* NOVETATS DEL TEMARI (NewsBlock — si no és buit) */}
+      <div className="mt-10">
+        <NewsBlock />
+      </div>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════
+// HERO
+// ════════════════════════════════════════════════════════════════════
+
+function Hero() {
+  const { t } = useT();
+  return (
+    <section className="relative pb-2">
+      <div className="pill mb-4">
+        <span className="w-1.5 h-1.5 rounded-full bg-ok shadow-[0_0_0_4px_rgba(31,122,77,0.22)]" />
+        <span>{t('home.hero.statusLabel')}</span>
+        <span className="pill-tag">CA · ES</span>
+      </div>
+      <h1 className="text-[40px] sm:text-[58px] leading-[0.96] tracking-[-0.028em] font-semibold mb-3">
+        {t('home.hero.title')}
+        <span className="block font-serif italic font-normal text-ink-2 text-[44px] sm:text-[64px] leading-none mt-1">
+          {t('home.hero.titleSerif')}
+        </span>
+      </h1>
+      <p className="text-base sm:text-[17px] text-muted leading-relaxed max-w-xl">
+        {t('home.hero.subtitle')}
+      </p>
     </section>
   );
 }
+
+// ════════════════════════════════════════════════════════════════════
+// FAVORITS
+// ════════════════════════════════════════════════════════════════════
 
 function FavoritesBlock() {
   const { t } = useT();
@@ -77,15 +307,13 @@ function FavoritesBlock() {
   if (favs.length === 0) return null;
 
   return (
-    <section className="mb-5 rounded-2xl border p-4 sm:p-5
-      border-slate-200/80 bg-white
-      dark:border-white/10 dark:bg-[#0f1d34]">
-      <div className="flex items-center gap-3 mb-3">
-        <span className="h-5 w-1.5 rounded-full bg-gradient-to-b from-amber-400 to-amber-600 dark:from-amber-300 dark:to-amber-500" />
-        <h2 className="text-xs font-black uppercase tracking-[0.25em] text-slate-700 dark:text-slate-300">
-          ★ {t('home.favorites.title')}
+    <section className="mt-8 rounded-card border border-line bg-paper p-4 sm:p-5">
+      <div className="flex items-center gap-2.5 mb-3">
+        <span aria-hidden className="text-gold text-base">★</span>
+        <h2 className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted">
+          {t('home.favorites.title')}
         </h2>
-        <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
+        <span className="h-px flex-1 bg-line" />
       </div>
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
         {favs.map((b) => (
@@ -97,27 +325,22 @@ function FavoritesBlock() {
 }
 
 function FavItem({ b, onRemove }: { b: Bookmark; onRemove: () => void }) {
-  const mod = MODULES.find((m) => m.slug === b.moduleSlug);
   return (
     <li className="group relative">
       <Link
         to={`/leyes/s/${b.moduleSlug}/${b.slug}`}
-        className="flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition pr-9
-          border-slate-200/80 bg-slate-50/40 hover:border-amber-300
-          dark:border-white/10 dark:bg-white/5 dark:hover:border-amber-400/40"
+        className="flex items-center gap-2 rounded-sm border border-line bg-paper px-3 py-2 text-sm transition pr-9
+          hover:border-ink-2"
       >
-        {mod && (
-          <span aria-hidden className={`inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br ${mod.accent}`} />
-        )}
-        <span className="truncate text-slate-700 dark:text-slate-200">{b.title}</span>
+        <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-brand shrink-0" />
+        <span className="truncate text-ink-2">{b.title}</span>
       </Link>
       <button
         type="button"
         onClick={onRemove}
         aria-label="✕"
         className="absolute right-1 top-1/2 -translate-y-1/2 inline-flex h-7 w-7 items-center justify-center rounded-md
-          text-slate-400 hover:bg-slate-200 hover:text-slate-700
-          dark:hover:bg-white/10 dark:hover:text-slate-200 opacity-0 group-hover:opacity-100 transition"
+          text-soft hover:bg-line-2 hover:text-ink-2 opacity-0 group-hover:opacity-100 transition"
       >
         ✕
       </button>
@@ -125,337 +348,157 @@ function FavItem({ b, onRemove }: { b: Bookmark; onRemove: () => void }) {
   );
 }
 
-export default function Home() {
+// ════════════════════════════════════════════════════════════════════
+// NEWSBLOCK (novetats del temari, sense canvis funcionals)
+// ════════════════════════════════════════════════════════════════════
+
+function NewsBlock() {
   const { t } = useT();
-  const { due: failuresDue } = useFailuresCounts();
-  const unreadNoticies = useUnreadNoticiesCount();
-  const recentNoticies = NOTICIES.slice(0, 3);
+  const newCount = useNewCount();
+
+  useEffect(() => {
+    if (newCount > 0) {
+      const t = setTimeout(() => markNewsSeen(), 1500);
+      return () => clearTimeout(t);
+    }
+  }, [newCount]);
+
+  const recent = NEWS.slice(0, 3);
+  if (recent.length === 0) return null;
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-6">
-      <FavoritesBlock />
-
-      {/* Targetes principals: Lleis · Operativa · Superbuscador */}
-      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* LLEIS */}
-        <li>
-          <Link
-            to="/leyes"
-            className="group relative block h-full overflow-hidden rounded-2xl border p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md
-              border-slate-200 bg-white hover:border-amber-400/60
-              dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-amber-400/40"
-          >
-            <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-amber-500 to-amber-700" />
-            <div className="flex items-start gap-4">
-              <span
-                aria-hidden
-                className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-amber-700 text-3xl text-white shadow-inner"
-              >
-                ⚖️
-              </span>
-              <div className="min-w-0">
-                <div className="text-[10px] uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400/90">
-                  {t('home.leyes.badge')}
-                </div>
-                <h2 className="mt-1 text-2xl font-black tracking-tight">
-                  {t('home.leyes.title')}
-                </h2>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                  {t('home.leyes.desc')}
-                </p>
-              </div>
-            </div>
-            <div className="mt-5 flex items-center justify-end text-amber-600 dark:text-amber-400">
-              <span className="text-sm font-semibold">
-                {t('home.leyes.cta')}
-              </span>
-              <span className="ml-1 transition group-hover:translate-x-1" aria-hidden>→</span>
-            </div>
-          </Link>
-        </li>
-
-        {/* OPERATIVA */}
-        <li>
-          <Link
-            to="/operativa"
-            className="group relative block h-full overflow-hidden rounded-2xl border p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md
-              border-slate-200 bg-white hover:border-blue-400/60
-              dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-blue-400/40"
-          >
-            <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 to-blue-800" />
-            <div className="flex items-start gap-4">
-              <span
-                aria-hidden
-                className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-800 text-3xl text-white shadow-inner"
-              >
-                🚨
-              </span>
-              <div className="min-w-0">
-                <div className="text-[10px] uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400/90">
-                  {t('home.operativa.badge')}
-                </div>
-                <h2 className="mt-1 text-2xl font-black tracking-tight">
-                  {t('home.operativa.title')}
-                </h2>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                  {t('home.operativa.desc')}
-                </p>
-              </div>
-            </div>
-            <div className="mt-5 flex items-center justify-end text-blue-600 dark:text-blue-400">
-              <span className="text-sm font-semibold">
-                {t('home.operativa.cta')}
-              </span>
-              <span className="ml-1 transition group-hover:translate-x-1" aria-hidden>→</span>
-            </div>
-          </Link>
-        </li>
-      </ul>
-
-      {/* SUPERBUSCADOR — accés directe destacat (full width) */}
-      <Link
-        to="/superbuscador"
-        className="group relative mt-4 block overflow-hidden rounded-2xl border p-5 sm:p-6 shadow-sm transition
-          hover:-translate-y-0.5 hover:shadow-md
-          border-purple-200/70 bg-gradient-to-r from-purple-50/70 via-white to-fuchsia-50/60
-          hover:border-purple-400/60
-          dark:border-white/10 dark:bg-gradient-to-r dark:from-[#1a0f2e] dark:to-[#0a1628] dark:hover:border-purple-400/40"
-      >
-        <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-purple-500 to-fuchsia-700" />
-        <div aria-hidden className="absolute -top-12 -right-12 h-44 w-44 rounded-full bg-fuchsia-200/30 blur-3xl dark:hidden" />
-        <div className="relative flex items-center gap-4">
-          <span
-            aria-hidden
-            className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-fuchsia-700 text-3xl text-white shadow-inner"
-          >
-            💸
-          </span>
-          <div className="min-w-0 flex-1">
-            <div className="text-[10px] uppercase tracking-[0.25em] text-purple-700 dark:text-purple-400/90 font-semibold">
-              {t('home.superbuscador.badge')}
-            </div>
-            <h2 className="mt-1 text-xl sm:text-2xl font-black tracking-tight">
-              {t('home.superbuscador.title')}
-            </h2>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
-              {t('home.superbuscador.desc')}
-            </p>
-          </div>
-          <span className="hidden sm:inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-purple-700 dark:text-purple-400">
-            {t('home.superbuscador.cta')}
-            <span className="ml-1 transition group-hover:translate-x-1" aria-hidden>→</span>
-          </span>
-        </div>
-      </Link>
-
-      {/* CATÀLEG · ALCOHOL · RECURSOS — fila d'atajos rapids */}
-      <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <Link
-          to="/leyes/s/transit/cataleg-d-infraccions-de-transit-sct-2026"
-          className="group relative block overflow-hidden rounded-xl border p-4 shadow-sm transition
-            hover:-translate-y-0.5 hover:shadow-md
-            border-amber-200/70 bg-gradient-to-r from-amber-50/70 via-white to-yellow-50/50
-            hover:border-amber-400/60
-            dark:border-white/10 dark:bg-gradient-to-r dark:from-[#2a210f] dark:to-[#0a1628] dark:hover:border-amber-400/40"
-        >
-          <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-amber-500 to-yellow-600" />
-          <div className="relative flex items-center gap-3">
-            <span
-              aria-hidden
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-yellow-600 text-xl text-white shadow-inner"
-            >
-              📖
-            </span>
-            <div className="min-w-0 flex-1">
-              <div className="text-[10px] uppercase tracking-[0.2em] text-amber-700 dark:text-amber-400/90 font-semibold">
-                {t('home.cataleg.badge')}
-              </div>
-              <h2 className="mt-0.5 text-base font-bold tracking-tight">
-                {t('home.cataleg.title')}
-              </h2>
-              <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
-                {t('home.cataleg.desc')}
-              </p>
-            </div>
-            <span className="inline-flex shrink-0 items-center text-amber-700 dark:text-amber-400 text-base font-semibold">
-              <span aria-hidden className="transition group-hover:translate-x-1">→</span>
-            </span>
-          </div>
-        </Link>
-
-        <Link
-          to="/calculadora-alcohol"
-          className="group relative block overflow-hidden rounded-xl border p-4 shadow-sm transition
-            hover:-translate-y-0.5 hover:shadow-md
-            border-rose-200/70 bg-gradient-to-r from-rose-50/70 via-white to-amber-50/50
-            hover:border-rose-400/60
-            dark:border-white/10 dark:bg-gradient-to-r dark:from-[#2a0f1a] dark:to-[#0a1628] dark:hover:border-rose-400/40"
-        >
-          <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-rose-500 to-amber-600" />
-          <div className="relative flex items-center gap-3">
-            <span
-              aria-hidden
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-rose-500 to-amber-600 text-xl text-white shadow-inner"
-            >
-              🍷
-            </span>
-            <div className="min-w-0 flex-1">
-              <div className="text-[10px] uppercase tracking-[0.2em] text-rose-700 dark:text-rose-400/90 font-semibold">
-                {t('home.alcohol.badge')}
-              </div>
-              <h2 className="mt-0.5 text-base font-bold tracking-tight">
-                {t('home.alcohol.title')}
-              </h2>
-              <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
-                {t('home.alcohol.desc')}
-              </p>
-            </div>
-            <span className="inline-flex shrink-0 items-center text-rose-700 dark:text-rose-400 text-base font-semibold">
-              <span aria-hidden className="transition group-hover:translate-x-1">→</span>
-            </span>
-          </div>
-        </Link>
-
-        <Link
-          to="/recursos"
-          className="group relative block overflow-hidden rounded-xl border p-4 shadow-sm transition
-            hover:-translate-y-0.5 hover:shadow-md
-            border-emerald-200/70 bg-gradient-to-r from-emerald-50/70 via-white to-teal-50/50
-            hover:border-emerald-400/60
-            dark:border-white/10 dark:bg-gradient-to-r dark:from-[#0f2a1f] dark:to-[#0a1628] dark:hover:border-emerald-400/40"
-        >
-          <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-700" />
-          <div className="relative flex items-center gap-3">
-            <span
-              aria-hidden
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 text-xl text-white shadow-inner"
-            >
-              🧰
-            </span>
-            <div className="min-w-0 flex-1">
-              <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400/90 font-semibold">
-                {t('home.recursos.badge')}
-              </div>
-              <h2 className="mt-0.5 text-base font-bold tracking-tight">
-                {t('home.recursos.title')}
-              </h2>
-              <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
-                {t('home.recursos.desc')}
-              </p>
-            </div>
-            <span className="inline-flex shrink-0 items-center text-emerald-700 dark:text-emerald-400 text-base font-semibold">
-              <span aria-hidden className="transition group-hover:translate-x-1">→</span>
-            </span>
-          </div>
-        </Link>
-      </div>
-
-      {/* TESTS — entrada destacada (full width, badge NOU) */}
-      <Link
-        to="/test"
-        className="group relative mt-4 block overflow-hidden rounded-2xl border p-5 sm:p-6 shadow-sm transition
-          hover:-translate-y-0.5 hover:shadow-md
-          border-blue-200/70 bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-cyan-50/50
-          hover:border-blue-400/60
-          dark:border-white/10 dark:bg-gradient-to-r dark:from-[#0e2244] dark:via-[#0f1d34] dark:to-[#0e2a3e] dark:hover:border-blue-400/40"
-      >
-        <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-600" />
-        <div aria-hidden className="absolute -top-12 -right-12 h-44 w-44 rounded-full bg-blue-200/30 blur-3xl dark:hidden" />
-        {failuresDue > 0 ? (
-          <span
-            title={t('home.tests.duePending')}
-            className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-rose-600 to-orange-600 px-2 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow inline-flex items-center gap-1"
-          >
-            <span aria-hidden>🔁</span>
-            {failuresDue} {t('home.tests.duePendingShort')}
-          </span>
-        ) : (
-          <span className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-2 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow">
-            {t('home.tests.badgeNew')}
+    <section className="rounded-card border border-line bg-paper p-4 sm:p-5">
+      <div className="flex items-center gap-2.5 mb-3">
+        <span aria-hidden className="text-gold text-base">✨</span>
+        <h2 className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted">
+          {t('home.news.title')}
+        </h2>
+        {newCount > 0 && (
+          <span className="rounded-pill bg-brand text-white text-[10px] font-bold px-2 py-0.5">
+            {newCount} {t('home.news.badge')}
           </span>
         )}
-        <div className="relative flex items-center gap-4">
-          <span
-            aria-hidden
-            className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-600 to-cyan-700 text-3xl text-white shadow-inner"
-          >
-            📝
-          </span>
-          <div className="min-w-0 flex-1 pr-12 sm:pr-0">
-            <div className="text-[10px] uppercase tracking-[0.25em] text-blue-700 dark:text-blue-400/90 font-semibold">
-              {t('home.tests.badge')}
-            </div>
-            <h2 className="mt-1 text-xl sm:text-2xl font-black tracking-tight">
-              {t('home.tests.title')}
-            </h2>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
-              {t('home.tests.desc')}
-            </p>
-          </div>
-          <span className="hidden sm:inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-blue-700 dark:text-blue-400">
-            {t('home.tests.cta')}
-            <span className="ml-1 transition group-hover:translate-x-1" aria-hidden>→</span>
-          </span>
-        </div>
-      </Link>
-
-      {/* NOTÍCIES — secció pròpia: actualitat normativa, sentències, oposicions */}
-      {recentNoticies.length > 0 && (
-        <section className="mt-5 rounded-2xl border p-4 sm:p-5
-          border-blue-200/70 bg-gradient-to-br from-blue-50/50 via-white to-indigo-50/30
-          dark:border-blue-400/20 dark:bg-gradient-to-br dark:from-[#0e2244] dark:to-[#0f1d34]">
-          <div className="flex items-center gap-3 mb-3">
-            <span className="h-5 w-1.5 rounded-full bg-gradient-to-b from-blue-500 to-indigo-700" />
-            <h2 className="text-xs font-black uppercase tracking-[0.25em] text-blue-700 dark:text-blue-400 inline-flex items-center gap-2">
-              <span aria-hidden>📰</span>
-              {t('home.noticies.title')}
-            </h2>
-            {unreadNoticies > 0 && (
-              <span className="rounded-full bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider">
-                {unreadNoticies} {t('home.noticies.newBadge')}
-              </span>
-            )}
-            <span className="h-px flex-1 bg-gradient-to-r from-blue-200 to-transparent dark:from-blue-400/20" />
-            <Link
-              to="/noticies"
-              className="text-xs font-semibold text-blue-700 dark:text-blue-400 hover:underline shrink-0"
-            >
-              {t('home.noticies.viewAll')} →
-            </Link>
-          </div>
-          <ul className="space-y-1.5">
-            {recentNoticies.map((n) => (
-              <li key={n.slug}>
-                <Link
-                  to={`/noticies/${encodeURIComponent(n.slug)}`}
-                  className="flex items-start gap-2 rounded-lg border px-3 py-2 text-sm transition
-                    border-slate-200/80 bg-white hover:border-blue-300
-                    dark:border-white/10 dark:bg-white/5 dark:hover:border-blue-400/40"
-                >
-                  <span aria-hidden className="text-base shrink-0 mt-0.5">
-                    📰
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="font-semibold text-slate-800 dark:text-slate-100 leading-snug truncate">
-                      {n.title}
-                    </div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
-                      {n.summary}
-                    </div>
-                  </div>
-                  <time className="text-[10px] font-mono text-slate-400 dark:text-slate-500 shrink-0 mt-1">
-                    {n.publishedAt.slice(5)}
-                  </time>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      <div className="mt-5">
-        <NewsBlock />
+        <span className="h-px flex-1 bg-line" />
       </div>
-    </div>
+      <ul className="space-y-1.5">
+        {recent.map((n) => {
+          const mod = MODULES.find((m) => m.slug === n.moduleSlug);
+          return (
+            <li key={`news-${n.moduleSlug}-${n.slug}`}>
+              <Link
+                to={`/leyes/s/${n.moduleSlug}/${n.slug}`}
+                className="flex items-center gap-2 rounded-sm border border-line bg-paper px-3 py-2 text-sm transition
+                  hover:border-ink-2"
+              >
+                {mod && (
+                  <span aria-hidden className="w-1.5 h-1.5 shrink-0 rounded-full bg-gold" />
+                )}
+                <span className="truncate text-ink-2 flex-1">{n.title}</span>
+                <span className="text-[10px] mono text-soft shrink-0">
+                  {n.addedAt.slice(5)}
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
+}
+
+// ════════════════════════════════════════════════════════════════════
+// HELPERS
+// ════════════════════════════════════════════════════════════════════
+
+function Eyebrow({ label }: { label: string }) {
+  return <div className="eyebrow">{label}</div>;
+}
+
+function Arrow() {
+  return (
+    <span
+      aria-hidden
+      className="text-soft transition group-hover:text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M7 17 17 7" />
+        <path d="M9 7h8v8" />
+      </svg>
+    </span>
+  );
+}
+
+function Icon({ name }: { name: string }) {
+  // Icones SVG simples per al nou disseny. Es poden enriquir més
+  // endavant; ara tenim només les necessàries per als 7 mòduls de Home.
+  switch (name) {
+    case 'scale':
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 3v18M5 7h14" />
+          <path d="M5 7 2 14a4 4 0 0 0 6 0L5 7Z" />
+          <path d="M19 7l-3 7a4 4 0 0 0 6 0l-3-7Z" />
+        </svg>
+      );
+    case 'shield':
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2 4 5v7c0 5 3.5 9 8 10 4.5-1 8-5 8-10V5l-8-3z" />
+        </svg>
+      );
+    case 'bookopen':
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M2 5a2 2 0 0 1 2-2h6v18H4a2 2 0 0 1-2-2V5z" />
+          <path d="M22 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 0 2-2V5z" />
+        </svg>
+      );
+    case 'search':
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="11" cy="11" r="7" />
+          <path d="m20 20-3.5-3.5" />
+        </svg>
+      );
+    case 'book':
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4V4z" />
+          <path d="M4 16a4 4 0 0 1 4-4h12" />
+        </svg>
+      );
+    case 'droplet':
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2c3.5 5 6 8.5 6 12a6 6 0 1 1-12 0c0-3.5 2.5-7 6-12z" />
+        </svg>
+      );
+    case 'tools':
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14.7 6.3a4 4 0 1 0 5 5l-2-2a2 2 0 0 1-3-3l2-2a4 4 0 0 0-2 2z" />
+          <path d="m9 11-7 7 3 3 7-7" />
+          <path d="M14 14l3 3" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
+function formatDate(iso: string): string {
+  try {
+    const d = new Date(iso);
+    return d.toLocaleDateString('ca-ES', { day: 'numeric', month: 'short' });
+  } catch {
+    return iso;
+  }
 }

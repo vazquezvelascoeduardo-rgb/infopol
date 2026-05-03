@@ -3,15 +3,142 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ════════════════════════════════════════════════════════════════════
+   TOKENS DEL SISTEMA DE DISSENY (v2)
+   Variables CSS per a colors, tipografia i estats. S'usen via Tailwind
+   gràcies al config (bg-ink, text-brand, border-line, etc.).
+   ════════════════════════════════════════════════════════════════════ */
+:root {
+  --ink: #0a0e1a;
+  --ink-2: #1f2735;
+  --muted: #5b6577;
+  --soft: #8893a5;
+  --line: #e6e8ee;
+  --line-2: #eef0f5;
+  --bg: #f4f4f1;
+  --paper: #ffffff;
+  --brand: #1e3a8a;       /* navy institucional */
+  --brand-2: #2952cc;
+  --brand-soft: #e7edff;
+  --gold: #c89b3c;        /* placa */
+  --gold-soft: #f6ecd1;
+  --danger: #b91c3c;
+  --danger-soft: #fde2e7;
+  --ok: #1f7a4d;
+  --ok-soft: #dcefe4;
+  --warn: #b8651b;
+  --warn-soft: #f7e3cf;
+}
+
+html.dark {
+  --ink: #f0f2f7;
+  --ink-2: #c8cfdb;
+  --muted: #8b94a6;
+  --soft: #6a7388;
+  --line: #1e2330;
+  --line-2: #161a25;
+  --bg: #0a0d14;
+  --paper: #11151f;
+  --brand: #6e8cff;
+  --brand-2: #93a9ff;
+  --brand-soft: #1a223d;
+  --gold: #e3b961;
+  --gold-soft: #2a230f;
+  --danger-soft: #2a0e15;
+  --ok-soft: #0e2a1a;
+  --warn-soft: #2a1a0e;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+::selection { background: var(--brand); color: white; }
+
 /* Talla de lletra base ajustable des de Sidebar > Ajustes.
-   Tailwind utilitza rems, aixi que canviar el font-size del root
+   Tailwind utilitza rems, així que canviar el font-size del root
    escala TOTES les mesures (padding, gap, font-size...) proporcionalment.
-   El default de Tailwind/HTML es 16px. */
+   El default de Tailwind/HTML és 16px. */
 html[data-text-size="sm"] { font-size: 14px; }
 html[data-text-size="md"] { font-size: 16px; }
 html[data-text-size="lg"] { font-size: 18px; }
 
-/* Estils base per a la tipografia de les fitxes (prose manual lleugera). */
+/* ════════════════════════════════════════════════════════════════════
+   COMPONENTS DEL SISTEMA — utilitats reutilitzables
+   ════════════════════════════════════════════════════════════════════ */
+@layer components {
+
+  /* ── Botons (escala consistent en tota l'app) ─────────────────── */
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-[9px] px-3 py-2.5 text-sm font-medium leading-none border border-transparent cursor-pointer transition;
+    @apply active:translate-y-px;
+  }
+  .btn-sm {
+    @apply px-2.5 py-1.5 text-xs rounded-[7px];
+  }
+  .btn-ghost {
+    @apply bg-transparent text-ink-2 hover:bg-line-2 hover:text-ink;
+  }
+  .btn-outline {
+    @apply bg-paper text-ink border-line hover:border-ink-2;
+  }
+  .btn-primary {
+    @apply bg-ink text-paper hover:opacity-90;
+  }
+  .btn-brand {
+    @apply bg-brand text-white hover:bg-brand-2;
+  }
+
+  /* ── Pills i etiquetes ────────────────────────────────────────── */
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-pill border border-line bg-paper px-3 py-1 text-xs text-ink-2;
+  }
+  .pill-tag {
+    @apply rounded-pill bg-line-2 px-2 py-0.5 text-[11px] font-medium text-ink;
+  }
+
+  /* ── Eyebrow (label petit amb tracking i línia) ──────────────── */
+  .eyebrow {
+    @apply inline-flex items-center gap-2.5 text-[11.5px] uppercase tracking-[0.12em] font-medium text-muted;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply w-[22px] h-px bg-ink-2;
+  }
+
+  /* ── Cards (mòduls del nou disseny) ──────────────────────────── */
+  .mod-card {
+    @apply relative bg-paper border border-line rounded-card p-5 sm:p-6 transition cursor-pointer overflow-hidden;
+    @apply hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-20px_rgba(11,18,32,0.18)] hover:border-ink-2;
+  }
+  .mod-icon {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-[10px] bg-brand-soft text-brand;
+  }
+  .mod-icon-gold { @apply bg-gold-soft text-gold; }
+  .mod-icon-danger { @apply bg-paper text-danger border border-danger; }
+  .mod-icon-ok { @apply bg-paper text-ok border border-ok; }
+  .mod-icon-warn { @apply bg-paper text-warn border border-warn; }
+  .mod-icon-ink { @apply bg-ink text-paper; }
+
+  /* ── Frase serif (els "moments display" del disseny) ─────────── */
+  .serif-italic {
+    @apply font-serif italic;
+  }
+
+  /* ── Mono (per a articles legals, codis, números) ───────────── */
+  .mono {
+    @apply font-mono;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   ESTILS DE LES FITXES DEL TEMARI (preserved de la versió anterior)
+   ════════════════════════════════════════════════════════════════════ */
 @layer components {
   .fitxa h1 {
     @apply text-2xl font-bold mt-4 mb-2;
@@ -32,15 +159,15 @@ html[data-text-size="lg"] { font-size: 18px; }
     @apply list-decimal pl-6 my-2;
   }
   .fitxa code {
-    @apply rounded bg-slate-200 dark:bg-slate-800 px-1 py-0.5 text-sm;
+    @apply rounded bg-line-2 px-1 py-0.5 text-sm font-mono;
   }
   .fitxa blockquote {
-    @apply border-l-4 border-slate-300 dark:border-slate-700 pl-3 italic text-slate-600 dark:text-slate-300 my-3;
+    @apply border-l-4 border-line pl-3 italic text-muted my-3;
   }
   .fitxa a {
-    @apply text-blue-600 dark:text-blue-400 underline;
+    @apply text-brand underline;
   }
   .fitxa hr {
-    @apply my-4 border-slate-200 dark:border-slate-800;
+    @apply my-4 border-line;
   }
 }

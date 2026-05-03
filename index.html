@@ -30,16 +30,17 @@
 
     <link rel="canonical" href="https://infopol.app/" />
     <title>InfoPol — Consulta operativa policia local</title>
-    <!-- Tipografia de les infografies (carregada de forma global perquè
-         ara es renderitzen inline al DOM, no dins d'iframes). -->
+    <!-- Tipografia: Geist (sans), Instrument Serif (display italic) i
+         Geist Mono (codis i articles legals). + Oswald/Source Sans 3
+         que ja s'usen a infografies legacy. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap"
     />
   </head>
-  <body class="bg-white text-slate-900 dark:bg-[#0a1628] dark:text-slate-100">
+  <body class="bg-paper text-ink">
     <!-- SPA + GitHub Pages: si la URL ve d'un redirect des de 404.html
          amb la ruta encodada a la query (?/leyes/codi-penal/...), ho
          desencodifiquem aquí abans que React Router agafi el control. -->

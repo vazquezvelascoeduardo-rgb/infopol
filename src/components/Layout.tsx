@@ -45,19 +45,19 @@ export default function Layout({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="min-h-dvh flex flex-col bg-white text-slate-900 dark:bg-[#0a1628] dark:text-slate-100 transition-colors">
+    <div className="min-h-dvh flex flex-col bg-bg text-ink transition-colors">
       <header
-        className="sticky top-0 z-30 backdrop-blur bg-white/95 dark:bg-[#0a1628]/85 border-b border-slate-200 dark:border-white/10"
+        className="sticky top-0 z-30 backdrop-blur bg-bg/80 border-b border-line"
         style={{ paddingTop: 'env(safe-area-inset-top)' }}
       >
         <div className="mx-auto max-w-5xl px-4 py-3 flex items-center gap-2 sm:gap-3">
           <Link to="/" className="flex items-center gap-2.5 shrink-0" aria-label={t('nav.home')}>
-            <LogoIcon className="h-10 w-10 text-blue-700 dark:text-white drop-shadow-sm" />
+            <LogoIcon className="h-10 w-10 text-brand drop-shadow-sm" />
             <div className="hidden sm:flex flex-col leading-tight">
               <span className="font-black tracking-tight text-lg">
-                Info<span className="text-blue-800 dark:text-blue-400">Pol</span>
+                Info<span className="text-brand">Pol</span>
               </span>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-gold">
                 {t('app.tagline')}
               </span>
             </div>
@@ -74,7 +74,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 aria-hidden
                 width="18" height="18" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-soft"
               >
                 <circle cx="11" cy="11" r="7" />
                 <path d="m20 20-3.5-3.5" />
@@ -87,9 +87,8 @@ export default function Layout({ children }: { children: ReactNode }) {
                 placeholder={t('search.placeholder')}
                 value={query}
                 onChange={onChange}
-                className="w-full rounded-xl border pl-10 pr-4 py-2 text-base outline-none focus:ring-2 focus:ring-amber-400/60
-                  border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:border-amber-400/60
-                  dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:placeholder-slate-500"
+                className="w-full rounded-xl border pl-10 pr-4 py-2 text-base outline-none focus:ring-2 focus:ring-brand/30
+                  border-line bg-paper text-ink placeholder-muted focus:border-brand"
               />
             </div>
           </form>
@@ -105,8 +104,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             title={t('search.label')}
             aria-expanded={mobileSearchOpen}
             className="sm:hidden shrink-0 inline-flex h-10 w-10 items-center justify-center rounded-xl border transition
-              border-slate-200 bg-white hover:bg-slate-50 text-slate-700
-              dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10 dark:text-slate-200"
+              border-line bg-paper text-ink-2 hover:bg-line-2 hover:text-ink"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -122,8 +120,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             aria-label={t('sidebar.open')}
             title={t('sidebar.open')}
             className="shrink-0 inline-flex h-10 w-10 items-center justify-center rounded-xl border transition
-              border-slate-200 bg-white hover:bg-slate-50 text-slate-700
-              dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10 dark:text-slate-200"
+              border-line bg-paper text-ink-2 hover:bg-line-2 hover:text-ink"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -137,7 +134,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         {/* Barra de cerca expandida a mòbil. Apareix sota el header.
             Inclou input gran + botó '✕' que tanca la barra. */}
         {mobileSearchOpen && (
-          <div className="sm:hidden border-t border-slate-200 dark:border-white/10 px-4 py-2 bg-white dark:bg-[#0a1628]">
+          <div className="sm:hidden border-t border-line px-4 py-2 bg-paper">
             <form onSubmit={onSubmit} className="flex items-center gap-2">
               <label htmlFor="cerca-mobile" className="sr-only">
                 {t('search.label')}
@@ -147,7 +144,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                   aria-hidden
                   width="18" height="18" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-soft"
                 >
                   <circle cx="11" cy="11" r="7" />
                   <path d="m20 20-3.5-3.5" />
@@ -161,9 +158,8 @@ export default function Layout({ children }: { children: ReactNode }) {
                   placeholder={t('search.placeholder')}
                   value={query}
                   onChange={onChange}
-                  className="w-full rounded-xl border-2 pl-10 pr-9 py-2.5 text-base outline-none focus:ring-2 focus:ring-amber-400/60
-                    border-amber-300 bg-white text-slate-900 placeholder-slate-400 focus:border-amber-400/80
-                    dark:border-amber-400/40 dark:bg-white/5 dark:text-slate-100 dark:placeholder-slate-500"
+                  className="w-full rounded-xl border-2 pl-10 pr-9 py-2.5 text-base outline-none focus:ring-2 focus:ring-brand/30
+                    border-brand/40 bg-paper text-ink placeholder-muted focus:border-brand"
                 />
                 {query && (
                   <button
@@ -171,8 +167,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                     onClick={() => setQuery('')}
                     aria-label={t('search.clearQuery')}
                     className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex h-6 w-6 items-center justify-center rounded-full
-                      text-slate-400 hover:bg-slate-100 hover:text-slate-700
-                      dark:hover:bg-white/10 dark:hover:text-slate-200"
+                      text-soft hover:bg-line-2 hover:text-ink"
                   >
                     ✕
                   </button>
@@ -184,8 +179,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 aria-label={t('search.close')}
                 title={t('search.close')}
                 className="shrink-0 inline-flex h-10 px-3 items-center justify-center rounded-lg text-sm font-medium transition
-                  text-slate-600 hover:bg-slate-100 hover:text-slate-900
-                  dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-slate-100"
+                  text-ink-2 hover:bg-line-2 hover:text-ink"
               >
                 {t('search.close')}
               </button>
@@ -196,19 +190,19 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       <main className="flex-1">{children}</main>
 
-      <footer className="border-t border-slate-200 dark:border-white/10 py-3 px-4 text-center text-[11px] text-slate-500 dark:text-slate-400">
+      <footer className="border-t border-line py-3 px-4 text-center text-[11px] text-muted bg-paper">
         <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5">
           <span>© 2026 Infopol.app</span>
-          <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
-          <Link to="/avis-legal" className="hover:text-blue-700 dark:hover:text-blue-400">
+          <span aria-hidden className="text-line">·</span>
+          <Link to="/avis-legal" className="hover:text-brand">
             {t('footer.legal')}
           </Link>
-          <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
-          <Link to="/privacitat" className="hover:text-blue-700 dark:hover:text-blue-400">
+          <span aria-hidden className="text-line">·</span>
+          <Link to="/privacitat" className="hover:text-brand">
             {t('footer.privacy')}
           </Link>
-          <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
-          <span className="text-slate-400 dark:text-slate-500">{t('footer.unofficial')}</span>
+          <span aria-hidden className="text-line">·</span>
+          <span className="text-soft">{t('footer.unofficial')}</span>
         </div>
       </footer>
 
