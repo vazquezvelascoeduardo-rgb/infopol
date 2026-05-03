@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">InfoPol</string>
+    <string name="title_activity_main">InfoPol</string>
+    <string name="package_name">app.infopol.mossos</string>
+    <string name="custom_url_scheme">app.infopol.mossos</string>
+</resources>

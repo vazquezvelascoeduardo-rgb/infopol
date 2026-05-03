@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="220" fill="#1A3B6E"/>
+  <!-- Shield body -->
+  <path d="M512 160 L760 260 L760 520 C760 660 660 780 512 840 C364 780 264 660 264 520 L264 260 Z" fill="#2A5298"/>
+  <!-- Shield highlight -->
+  <path d="M512 200 L730 290 L730 520 C730 645 643 754 512 808 C381 754 294 645 294 520 L294 290 Z" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="3"/>
+  <!-- IP lettermark -->
+  <text x="512" y="570" font-family="Georgia, serif" font-weight="700" font-size="240" fill="white" text-anchor="middle" letter-spacing="-8">IP</text>
+  <!-- Star accent top -->
+  <circle cx="512" cy="218" r="18" fill="#F0B429"/>
+</svg>
