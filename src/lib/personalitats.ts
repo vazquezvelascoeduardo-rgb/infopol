@@ -279,6 +279,26 @@ export const PERSONALITATS: LeaderSection[] = [
         ],
       },
       {
+        title: 'Forces i Cossos de Seguretat de l\'Estat (FCSE)',
+        icon: '👮',
+        entries: [
+          // ── GUÀRDIA CIVIL ────────────────────────────────────────────
+          { flag: '🚓', position: 'Directora General de la Guàrdia Civil', name: 'Mercedes González Fernández', detail: 'Des de novembre 2023 · càrrec polític designat pel Govern' },
+          { flag: '🎖️', position: 'Director Adjunt Operatiu (DAO) GC', name: 'Pedro Vázquez Jarava', detail: 'Tinent General · màxim càrrec operatiu professional del cos' },
+          { flag: '🎖️', position: 'Cap d\'Estat Major (JEME) GC', name: 'Antonio Sierras Pérez', detail: 'Tinent General · planificació, doctrina i operacions' },
+          { flag: '🚦', position: 'Cap Agrupación de Tráfico (ATGC)', name: 'Cristóbal Cremades García-Calvo', detail: 'Coronel · controls de via interurbana, accidents, BAC' },
+          { flag: '🌳', position: 'Cap del SEPRONA', name: 'Designat pel cos', detail: 'Servei de Protecció de la Natura · medi ambient, fauna, residus' },
+
+          // ── POLICIA NACIONAL (CNP) ────────────────────────────────────
+          { flag: '👮', position: 'Director General de la Policia Nacional', name: 'Francisco Pardo Piqueras', detail: 'Càrrec polític · designat pel Govern' },
+          { flag: '🎖️', position: 'Director Adjunt Operatiu (DAO) CNP', name: 'Manuel Soriano Aladrén', detail: 'Comissari Principal · màxim càrrec operatiu' },
+          { flag: '🕵️', position: 'Comissari General d\'Informació', name: 'Eugenio Pereiro Blanco', detail: 'CGI · antiterrorisme i amenaces internes' },
+          { flag: '🚔', position: 'Comissari General de Seguretat Ciutadana', name: 'Juan Carlos Castro Estévez', detail: 'Ordre públic, manifestacions, UIP' },
+          { flag: '🔍', position: 'Comissari General de Policia Judicial', name: 'María Olga Martín-Loeches Rodríguez', detail: 'Investigació criminal · UDEV, UDYCO' },
+          { flag: '🛂', position: 'Comissari General d\'Estrangeria i Fronteres', name: 'Antonio López López', detail: 'CGEF · CIE, expulsions, control fronterer' },
+        ],
+      },
+      {
         title: 'Presidents de Comunitats Autònomes',
         icon: '🗺️',
         compact: true,
