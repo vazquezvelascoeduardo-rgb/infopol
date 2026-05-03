@@ -351,10 +351,16 @@ function PersonalitatsDirectory({
       })).filter((sec) => sec.subsections.length > 0)
     : PERSONALITATS;
 
+  function scrollToSection(id: string) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   return (
     <>
       {/* Capçalera explicativa */}
-      <div className="rounded-2xl border-2 border-dashed p-4 mb-5
+      <div className="rounded-2xl border-2 border-dashed p-4 mb-4
         border-purple-200 bg-purple-50/40
         dark:border-purple-400/30 dark:bg-purple-500/10">
         <div className="flex items-start gap-3">
@@ -369,6 +375,34 @@ function PersonalitatsDirectory({
           </div>
         </div>
       </div>
+
+      {/* NAVEGACIÓ RÀPIDA — pills per saltar a cada secció */}
+      <nav className="sticky top-2 z-20 mb-4 rounded-2xl border p-3 backdrop-blur
+        border-slate-200 bg-white/95
+        dark:border-white/10 dark:bg-[#0f1d34]/95">
+        <div className="flex items-center gap-2 mb-2">
+          <span aria-hidden className="text-base">🧭</span>
+          <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300">
+            {t('personalitats.quickNav')}
+          </h2>
+          <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {PERSONALITATS.map((sec) => (
+            <button
+              key={sec.id}
+              type="button"
+              onClick={() => scrollToSection(sec.id)}
+              className={`inline-flex items-center gap-1.5 rounded-full border-2 px-3 py-1 text-xs font-semibold transition
+                border-transparent bg-gradient-to-r ${sec.accent} text-white shadow-sm
+                hover:shadow-md hover:-translate-y-0.5`}
+            >
+              <span aria-hidden>{sec.icon}</span>
+              <span>{sec.shortLabel}</span>
+            </button>
+          ))}
+        </div>
+      </nav>
 
       {/* Cerca */}
       <div className="mb-5">
@@ -407,7 +441,7 @@ function SectionView({ sec }: { sec: LeaderSection }) {
   return (
     <section
       id={sec.id}
-      className="rounded-2xl border overflow-hidden
+      className="rounded-2xl border overflow-hidden scroll-mt-24
         border-slate-200 bg-white
         dark:border-white/10 dark:bg-[#0f1d34]"
     >

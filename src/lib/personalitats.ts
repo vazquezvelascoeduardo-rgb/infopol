@@ -35,6 +35,8 @@ export type LeaderSubsection = {
 export type LeaderSection = {
   id: string;
   title: string;
+  /** Etiqueta breu per a la navegació ràpida (ex: 'Espanya'). */
+  shortLabel: string;
   icon: string;
   /** Gradient Tailwind per a la capçalera. */
   accent: string;
@@ -47,6 +49,7 @@ export const PERSONALITATS: LeaderSection[] = [
   {
     id: 'eu-internacional',
     title: 'Institucions europees i internacionals',
+    shortLabel: 'Internacional',
     icon: '🌍',
     accent: 'from-blue-500 to-indigo-700',
     subsections: [
@@ -100,6 +103,7 @@ export const PERSONALITATS: LeaderSection[] = [
   {
     id: 'europa',
     title: 'Presidents i caps de govern europeus',
+    shortLabel: 'Europa',
     icon: '🇪🇺',
     accent: 'from-indigo-500 to-blue-700',
     subsections: [
@@ -143,6 +147,7 @@ export const PERSONALITATS: LeaderSection[] = [
   {
     id: 'llatinoamerica',
     title: 'Presidents llatinoamericans',
+    shortLabel: 'Llatinoamèrica',
     icon: '🌎',
     accent: 'from-emerald-500 to-teal-700',
     subsections: [
@@ -174,6 +179,7 @@ export const PERSONALITATS: LeaderSection[] = [
   {
     id: 'altres-internacional',
     title: 'Altres líders internacionals',
+    shortLabel: 'EUA i Àsia',
     icon: '🌐',
     accent: 'from-rose-500 to-orange-600',
     subsections: [
@@ -231,6 +237,7 @@ export const PERSONALITATS: LeaderSection[] = [
   {
     id: 'espanya',
     title: 'Govern d\'Espanya (XV Legislatura)',
+    shortLabel: 'Espanya',
     icon: '🇪🇸',
     accent: 'from-amber-500 to-orange-600',
     subsections: [
@@ -330,6 +337,7 @@ export const PERSONALITATS: LeaderSection[] = [
   {
     id: 'catalunya',
     title: 'Govern de Catalunya (XV Legislatura)',
+    shortLabel: 'Catalunya',
     icon: '🏛️',
     accent: 'from-red-500 to-amber-600',
     subsections: [
