@@ -3,1389 +3,1216 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Llei 16/1991 Policies Locals Catalunya — Esquema Policial</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Llei 16/1991 · Policies Locals de Catalunya — Esquema Operativo Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* Llei 16/1991 — fitxa rebranding 2026 */
   :root {
-    --bg-main: #0A1628;
-    --bg-section: #0E2244;
-    --gold: #C8A028;
-    --blue-royal: #1A5C96;
-    --red: #C8281E;
-    --green: #1A7A3C;
-    --text-main: #F0F4FF;
-    --text-secondary: #A8BAD4;
-    --border: #C8A028;
+    --ink: #0E0E0E;
+    --ink-2: #1c1c1c;
+    --paper: #FAF6EF;
+    --paper-2: #F2EDE3;
+    --white: #FFFFFF;
+    --terracotta: #F26B1F;
+    --terracotta-2: #D9531A;
+    --terracotta-soft: #FFE9D8;
+    --text: #0E0E0E;
+    --text-2: #4a4744;
+    --text-3: #807c77;
+    --text-4: #b3afaa;
+    --c-leyes: #E89A1C;
+    --c-operativa: #2F6BD8;
+    --c-superbuscador: #9747D6;
+    --c-recursos: #2FB66B;
+    --c-red: #E5484D;
+    --c-pink: #E85D8C;
+    --c-slate: #2a3a52;
+    --line: rgba(14, 14, 14, 0.10);
+    --line-2: rgba(14, 14, 14, 0.06);
+    --shadow-md: 0 1px 2px rgba(14,14,14,0.04), 0 8px 24px -8px rgba(14,14,14,0.10);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
   body {
-    background-color: var(--bg-main);
-    background-image:
-      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
-    font-family: 'Source Sans 3', sans-serif;
-    color: var(--text-main);
-    padding: 20px 12px 40px;
+    background: var(--paper);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: 12px 8px 40px;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .wrapper { max-width: 1080px; margin: 0 auto; }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
-  .wrapper { max-width: 720px; margin: 0 auto; }
+  .meta-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-3);
+  }
 
-  /* ── CABECERA ── */
-  .header {
+  .section-head {
     display: flex;
     align-items: center;
-    gap: 18px;
-    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
-    border: 2px solid var(--gold);
-    border-radius: 10px;
-    padding: 22px 24px;
-    margin-bottom: 8px;
-    animation: fadeUp .5s ease both;
-    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+    gap: 12px;
+    margin: 32px 0 14px;
+    flex-wrap: wrap;
+    position: relative;
   }
-  .escudo svg { flex-shrink: 0; }
-  .header-text { flex: 1; }
-  .header-text .label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
+  .section-head::before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 22px;
+    background: var(--accent, var(--terracotta));
+    border-radius: 2px;
+    flex: none;
   }
-  .header-text h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--text-main);
-    line-height: 1.1;
+  .section-head .eyebrow { color: var(--accent, var(--ink)); flex: none; }
+  .section-head .rule { flex: 1; height: 1px; background: var(--line); min-width: 30px; }
+
+  /* ── HERO ── */
+  .ce-hero {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: center;
+    background: linear-gradient(180deg, #FBF1D6 0%, #FAEAC1 100%);
+    border: 1px solid #E8C97A;
+    border-radius: 18px;
+    padding: 26px 30px;
+    margin-top: 8px;
   }
-  .header-text h1 span { color: var(--gold); }
-  .header-text .subtitle {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-top: 4px;
+  .ce-shield { flex: none; }
+  .ce-title {
+    margin: 4px 0 6px;
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  .ce-title .accent { color: #9c7a1f; }
+  .ce-sub { margin: 0; color: #6b5a30; font-size: 15px; max-width: 760px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .hero-tags .tag {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #E8C97A;
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #6b5a30;
   }
 
-  /* ── CLASIFICACIÓN (4 escalas) ── */
-  .clasificacion {
+  /* ── 4 TARGETES ESCALES ── */
+  .clasif-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 14px;
-    animation: fadeUp .6s ease .1s both;
-  }
-  .clas-card {
-    border-radius: 8px;
-    padding: 12px 8px;
-    text-align: center;
-    border: 1px solid rgba(200,160,40,0.3);
-  }
-  .clas-card .icon { font-size: 20px; margin-bottom: 4px; }
-  .clas-card .tipo {
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .clas-card .pena-max {
-    font-size: 10px;
-    color: var(--text-secondary);
-    margin-top: 3px;
-    line-height: 1.3;
-  }
-  .clas-superior { background: rgba(200,160,40,0.15); border-color: var(--gold); }
-  .clas-ejec     { background: rgba(200,40,30,0.15); border-color: var(--red); }
-  .clas-inter    { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
-  .clas-basica   { background: rgba(26,122,60,0.15); border-color: var(--green); }
-  .clas-superior .tipo { color: var(--gold); }
-  .clas-ejec .tipo     { color: #E86050; }
-  .clas-inter .tipo    { color: #6AADDC; }
-  .clas-basica .tipo   { color: #4ACD7A; }
-
-  /* ── BANNER ── */
-  .reforma-banner {
-    background: linear-gradient(135deg, #0E2244 0%, #1A5C96 50%, #0E2244 100%);
-    border: 2px solid var(--gold);
-    border-radius: 8px;
-    padding: 10px 18px;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
     gap: 12px;
-    animation: fadeUp .55s ease .05s both;
-    box-shadow: 0 0 20px rgba(200,160,40,0.15);
+    margin-top: 16px;
   }
-  .reforma-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
-  .reforma-banner .ref-text { flex: 1; }
-  .reforma-banner .ref-ley {
-    font-family: 'Oswald', sans-serif;
+  .clasif {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+    border-top: 3px solid var(--accent);
+  }
+  .clasif .cl-icon { font-size: 22px; margin-bottom: 6px; }
+  .clasif h4 {
+    margin: 2px 0 4px;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--gold);
   }
-  .reforma-banner .ref-desc {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-top: 2px;
-  }
-  .reforma-banner .ref-fecha {
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--gold);
-    background: rgba(0,0,0,0.25);
-    padding: 4px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    border: 1px solid rgba(200,160,40,0.4);
-  }
-
-  /* ── CATEGORÍA ── */
-  .categoria {
-    background: var(--bg-section);
-    border-radius: 10px;
-    margin-bottom: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(200,160,40,0.2);
-    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
-  }
-  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
-  .categoria:nth-child(2)  { animation: fadeUp .6s ease .25s both; }
-  .categoria:nth-child(3)  { animation: fadeUp .6s ease .3s both; }
-  .categoria:nth-child(4)  { animation: fadeUp .6s ease .35s both; }
-  .categoria:nth-child(5)  { animation: fadeUp .6s ease .4s both; }
-  .categoria:nth-child(6)  { animation: fadeUp .6s ease .45s both; }
-  .categoria:nth-child(7)  { animation: fadeUp .6s ease .5s both; }
-  .categoria:nth-child(8)  { animation: fadeUp .6s ease .55s both; }
-  .categoria:nth-child(9)  { animation: fadeUp .6s ease .6s both; }
-  .categoria:nth-child(10) { animation: fadeUp .6s ease .65s both; }
-  .categoria:nth-child(11) { animation: fadeUp .6s ease .7s both; }
-
-  .cat-header {
-    background: var(--blue-royal);
-    padding: 12px 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    user-select: none;
-    transition: background .2s;
-  }
-  .cat-header:hover { background: #1e6db0; }
-  .cat-header .cat-icon { font-size: 20px; }
-  .cat-header h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    flex: 1;
-  }
-  .cat-header .art-ref {
+  .clasif p { margin: 0 0 4px; font-size: 12.5px; color: var(--text-2); }
+  .clasif .ant {
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    color: rgba(240,244,255,0.65);
-    white-space: nowrap;
-  }
-  .cat-header .toggle {
-    font-size: 14px;
-    transition: transform .3s;
-    color: var(--gold);
-  }
-  .cat-header.open .toggle { transform: rotate(180deg); }
-  .cat-header.local {
-    background: linear-gradient(135deg, var(--blue-royal) 0%, #0E2244 70%);
-    border-left: 4px solid var(--gold);
-  }
-  .cat-header.disciplinario {
-    background: linear-gradient(135deg, #8B1A10 0%, #C8281E 100%);
-    border-left: 4px solid var(--gold);
+    color: var(--text-3);
+    margin-top: 6px;
+    display: block;
   }
 
-  .cat-body { padding: 6px 0; }
-
-  /* ── DELITO / PUNTO ── */
-  .delito {
-    border-left: 3px solid var(--gold);
-    margin: 8px 14px;
-    background: rgba(10,22,40,0.5);
-    border-radius: 0 7px 7px 0;
-    padding: 10px 14px;
+  /* ── META STRIP ── */
+  .meta-strip {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+    background: #EAF1FE;
+    border: 1px solid #b9d0f6;
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-top: 14px;
   }
-  .delito-top {
+  .meta-strip p { margin: 4px 0 0; color: #1f3f7a; font-size: 14px; }
+  .vigente {
     display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    padding: 6px 14px;
+    background: white;
+    border: 1px solid #b9d0f6;
+    border-radius: 10px;
   }
-  .delito-nombre {
-    font-family: 'Oswald', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text-main);
-    flex: 1;
-    min-width: 160px;
+  .vigente .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); }
+  .vigente .state { font-weight: 800; color: #2F6BD8; }
+
+  /* ── ARTICLE CARDS ── */
+  .delito-grid { display: grid; gap: 10px; }
+  .delito {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 18px;
+    border-left: 3px solid var(--accent);
+  }
+  .delito.hl { background: var(--terracotta-soft); border-color: #f5c19a; border-left-color: var(--terracotta); }
+  .delito-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
   }
   .art-badge {
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
     font-weight: 700;
-    background: rgba(200,160,40,0.15);
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    padding: 2px 7px;
-    border-radius: 4px;
-    white-space: nowrap;
+    background: var(--accent);
+    color: var(--white);
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.04em;
+    flex: none;
   }
-  .tipo-badge {
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif;
+  .delito-name {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    flex: 1;
+    min-width: 200px;
+  }
+  .tipo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
     font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex: none;
   }
-  .badge-clave   { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
-  .badge-info    { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
-  .badge-grave   { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
-  .badge-local   { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
+  .tipo.info { background: rgba(47, 107, 216, 0.14); color: #1e3f7a; }
+  .tipo.key { background: rgba(232, 154, 28, 0.18); color: #854d0e; }
+  .tipo.warn { background: rgba(229, 72, 77, 0.16); color: #991b1b; }
+  .tipo.ok { background: rgba(47, 182, 107, 0.16); color: #166534; }
+  .tipo.local { background: rgba(151, 71, 214, 0.14); color: #5b21b6; }
+  .delito-desc { margin: 0 0 8px; font-size: 13.5px; color: var(--text-2); }
+  .delito-desc b { color: var(--ink); }
 
-  .delito-desc {
+  .pena-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pena {
     font-size: 12.5px;
-    color: var(--text-secondary);
-    margin-top: 5px;
+    background: var(--paper-2);
+    color: var(--text);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    font-weight: 600;
+  }
+  .pena.danger { background: #FFEFEC; color: #991b1b; border-color: #f3b9b9; }
+  .pena.warn { background: #FFF6E0; color: #854d0e; border-color: #f5d699; }
+  .pena.ok { background: #DFF7E9; color: #166534; border-color: #a8e0bf; }
+  .pena.terra { background: var(--terracotta-soft); color: #6b3818; border-color: #f5c19a; }
+  .pena.info { background: #EAF1FE; color: #1e3f7a; border-color: #b9d0f6; }
+
+  .nota {
+    margin-top: 8px;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12.5px;
     line-height: 1.5;
+    border-left: 3px solid;
   }
-  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
+  .nota.policial { background: #DFF7E9; color: #14532d; border-left-color: var(--c-recursos); }
+  .nota.policial b { color: #14532d; }
+  .nota.agrav { background: #FFEFEC; color: #991b1b; border-left-color: var(--c-red); }
+  .nota.agrav b { color: #991b1b; }
+  .nota.clave { background: #FFF6E8; color: #6b5a30; border-left-color: #E89A1C; }
+  .nota.clave b { color: #6b5a30; }
+  .nota.info { background: #EAF1FE; color: #1f3f7a; border-left-color: #2F6BD8; }
+  .nota.info b { color: #1f3f7a; }
 
-  .pena-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 7px;
+  .norm-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 13.5px;
   }
-  .pena-chip {
-    font-size: 11px;
-    background: rgba(26,92,150,0.25);
-    border: 1px solid rgba(26,92,150,0.6);
-    color: var(--text-main);
-    padding: 3px 9px;
-    border-radius: 20px;
+  .norm-table th {
+    text-align: left;
+    padding: 8px 10px;
+    background: var(--paper-2);
+    font-weight: 800;
+    color: var(--ink);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .norm-table td {
+    padding: 8px 10px;
+    border-top: 1px solid var(--line-2);
+    color: var(--text-2);
+    vertical-align: top;
+  }
+  .norm-table b { color: var(--ink); font-family: 'Plus Jakarta Sans'; }
+
+  .art-list {
+    margin: 6px 0 0;
+    padding-left: 0;
+    list-style: none;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 4px;
+    font-size: 13.5px;
+    color: var(--text-2);
   }
-  .pena-chip.agravada {
-    background: rgba(200,40,30,0.2);
-    border-color: rgba(200,40,30,0.5);
-  }
-  .pena-chip.multa {
-    background: rgba(200,160,40,0.12);
-    border-color: rgba(200,160,40,0.4);
-    color: var(--gold);
-  }
-  .pena-chip.positivo {
-    background: rgba(26,122,60,0.2);
-    border-color: rgba(26,122,60,0.5);
-    color: #A8D4C0;
-  }
-
-  .nota-agrav {
-    margin-top: 6px;
-    font-size: 11.5px;
-    color: #E08888;
-    background: rgba(200,40,30,0.08);
-    border-left: 2px solid var(--red);
-    padding: 4px 8px;
-    border-radius: 0 4px 4px 0;
-  }
-  .nota-policial {
-    margin-top: 6px;
-    font-size: 11.5px;
-    color: #A8D4C0;
-    background: rgba(26,122,60,0.1);
-    border-left: 2px solid var(--green);
-    padding: 4px 8px;
-    border-radius: 0 4px 4px 0;
-  }
-  .nota-clave {
-    margin-top: 6px;
-    font-size: 11.5px;
-    color: #E8CC80;
-    background: rgba(200,160,40,0.08);
-    border-left: 2px solid var(--gold);
-    padding: 4px 8px;
-    border-radius: 0 4px 4px 0;
+  .art-list b {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink);
+    margin-right: 8px;
+    font-weight: 700;
   }
 
   /* ── RECUERDA ── */
   .recuerda {
-    background: var(--gold);
-    border-radius: 10px;
-    padding: 20px 22px;
-    margin-top: 6px;
-    animation: fadeUp .6s ease .75s both;
+    background: linear-gradient(135deg, #1f2735 0%, #131923 100%);
+    color: var(--paper);
+    border-radius: 16px;
+    padding: 22px 26px;
+    margin-top: 28px;
+    border: 1px solid #E89A1C;
   }
-  .recuerda h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #0A1628;
-    margin-bottom: 12px;
-    letter-spacing: 2px;
+  .recuerda .r-head {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    margin-bottom: 12px;
   }
-  .recuerda ul { list-style: none; }
-  .recuerda ul li {
-    font-size: 13px;
-    color: #0A1628;
-    padding: 5px 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-    border-bottom: 1px solid rgba(10,22,40,0.15);
-    line-height: 1.4;
-  }
-  .recuerda ul li:last-child { border-bottom: none; }
-  .recuerda ul li::before { content: "▶"; font-size: 9px; margin-top: 4px; flex-shrink: 0; }
-
-  /* ── BOTÓN ── */
-  .btn-print {
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-    padding: 14px;
-    background: var(--blue-royal);
-    border: 2px solid var(--gold);
-    color: var(--text-main);
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
+  .recuerda .r-head h2 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #E89A1C;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all .2s;
-    animation: fadeUp .6s ease .8s both;
   }
-  .btn-print:hover { background: var(--gold); color: #0A1628; }
-
-  /* ── DIVISOR ── */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin: 4px 14px 2px;
-    opacity: .35;
-  }
-
-  /* ── TABLA MINI ── */
-  .mini-tabla {
+  .recuerda ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    margin-top: 7px;
+    gap: 10px;
   }
-  .mini-tabla .celda {
-    background: rgba(26,92,150,0.15);
-    border: 1px solid rgba(26,92,150,0.4);
-    padding: 6px 10px;
-    border-radius: 5px;
-    font-size: 11.5px;
-    color: var(--text-main);
-  }
-  .mini-tabla .celda b { color: var(--gold); }
-  .mini-tabla.cuatro { grid-template-columns: repeat(2, 1fr); }
-
-  /* ── TABLA DISCIPLINARIA ── */
-  .tabla-discip {
+  .recuerda li {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    gap: 2px;
-    margin-top: 8px;
-    border-radius: 6px;
-    overflow: hidden;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: start;
+    font-size: 13.5px;
+    color: rgba(250, 246, 239, 0.92);
+    line-height: 1.5;
   }
-  .tabla-discip .th {
-    background: var(--blue-royal);
-    padding: 7px 10px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: center;
-  }
-  .tabla-discip .td {
-    background: rgba(10,22,40,0.7);
-    padding: 7px 10px;
-    font-size: 11.5px;
-    color: var(--text-secondary);
-    line-height: 1.4;
-  }
-  .tabla-discip .td.centro { text-align: center; font-weight: 700; color: var(--gold); font-family: 'Oswald', sans-serif; }
-  .tabla-discip .td.grave  { background: rgba(200,40,30,0.15); }
-  .tabla-discip .td.medio  { background: rgba(200,160,40,0.1); }
-  .tabla-discip .td.leve   { background: rgba(26,122,60,0.12); }
+  .recuerda li b { color: #E89A1C; font-weight: 700; }
+  .recuerda li::before { content: "▸"; color: #E89A1C; font-weight: 800; }
 
-  @media print {
-    body { background: white; color: black; }
-    .btn-print { display: none; }
-    .categoria { break-inside: avoid; }
-    .cat-body { display: block !important; }
+  /* ── RECURSOS ── */
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
   }
+  .res-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: center;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: inherit;
+    transition: background .12s, border-color .12s;
+  }
+  .res-card:hover { background: var(--paper-2); border-color: rgba(14, 14, 14, 0.16); }
+  .res-card .res-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--paper-2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex: none;
+  }
+  .res-card h4 { margin: 0; font-size: 14px; font-weight: 700; }
+  .res-card p { margin: 2px 0 0; font-size: 12.5px; color: var(--text-2); }
 
-  @media (max-width: 480px) {
-    .clasificacion { grid-template-columns: repeat(2, 1fr); }
-    .mini-tabla { grid-template-columns: 1fr; }
-    .tabla-discip { grid-template-columns: 1fr; }
+  @media (max-width: 980px) {
+    .clasif-grid { grid-template-columns: repeat(2, 1fr); }
+    .res-grid { grid-template-columns: repeat(2, 1fr); }
+    .meta-strip { grid-template-columns: 1fr; }
+    .ce-hero { grid-template-columns: 1fr; text-align: center; }
+    .ce-shield { margin: 0 auto; }
+    .ce-title { font-size: 28px; }
+  }
+  @media (max-width: 640px) {
+    .clasif-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
-<body>
+<body data-fitxa-style="rebrand-2026">
 <div class="wrapper">
 
-  <!-- CABECERA -->
-  <div class="header">
-    <div class="escudo">
-      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
-        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
-        <!-- Franjas senyera horizontales en la parte superior -->
-        <rect x="13" y="14" width="38" height="1.5" fill="#C8A028" opacity=".9"/>
-        <rect x="13" y="17" width="38" height="1.5" fill="#C8A028" opacity=".9"/>
-        <text x="32" y="28" text-anchor="middle" font-family="Oswald,sans-serif" font-size="8" font-weight="700" fill="#C8A028" letter-spacing="1">POLICIA</text>
-        <text x="32" y="37" text-anchor="middle" font-family="Oswald,sans-serif" font-size="8" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
-        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
-        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
-        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
-        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
-        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+  <!-- ═══ HERO ═══ -->
+  <header class="ce-hero">
+    <div class="ce-shield">
+      <svg width="80" height="92" viewBox="0 0 80 92" fill="none">
+        <path d="M40 4 L74 13 V42 C74 62 60 78 40 88 C20 78 6 62 6 42 V13 Z" fill="#1f2a44" stroke="#E89A1C" stroke-width="2"/>
+        <text x="40" y="32" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="9" fill="#E89A1C" letter-spacing="1">POLICIA</text>
+        <text x="40" y="48" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#fff">⚖</text>
+        <text x="40" y="62" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#E89A1C" letter-spacing="1">LOCAL</text>
+        <text x="40" y="76" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#E89A1C" letter-spacing="1">L 16/91</text>
       </svg>
     </div>
-    <div class="header-text">
-      <div class="label">Esquema Operativo Policial · Catalunya</div>
-      <h1>Llei <span>16/1991</span></h1>
-      <div class="subtitle">Policies Locals de Catalunya · Generalitat · 10 julio · DOGC 1469 · BOE 09/08/1991</div>
+    <div>
+      <div class="eyebrow" style="color:#9c7a1f;">ESQUEMA OPERATIU POLICIAL · CATALUNYA</div>
+      <h1 class="ce-title">LLEI 16/1991 · <span class="accent">POLICIES LOCALS</span></h1>
+      <p class="ce-sub">Llei de les Policies Locals de Catalunya · Generalitat · 10 de juliol · DOGC 1469 · BOE 09/08/1991 · Basada en l'art. 13.3 EAC: Catalunya té competència exclusiva en coordinació de PPLL.</p>
+      <div class="hero-tags">
+        <span class="tag">📘 Llei 16/1991</span>
+        <span class="tag">🏛️ DOGC 1469</span>
+        <span class="tag">📚 6 títols · 58 articles</span>
+        <span class="tag">⚖️ Art. 13.3 EAC</span>
+        <span class="tag">📄 Última mod. 17/03/2023</span>
+      </div>
     </div>
-  </div>
+  </header>
 
-  <!-- CLASIFICACIÓN: Las 4 escalas -->
-  <div class="clasificacion">
-    <div class="clas-card clas-superior">
-      <div class="icon">⭐</div>
-      <div class="tipo">Superior</div>
-      <div class="pena-max">Grupo A1<br>Superintendente<br>Int. Mayor · Intendente</div>
+  <!-- ═══ 4 TARGETES ESCALES ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--terracotta);">
+      <span class="eyebrow">📋 LES 4 ESCALES I 7 CATEGORIES</span>
+      <span class="rule"></span>
     </div>
-    <div class="clas-card clas-ejec">
-      <div class="icon">🎖️</div>
-      <div class="tipo">Ejecutiva</div>
-      <div class="pena-max">Grupo A2<br>Inspector</div>
+    <div class="clasif-grid">
+      <div class="clasif" style="--accent: var(--c-red);">
+        <div class="cl-icon">⭐</div>
+        <h4>Superior</h4>
+        <p>Superintendent · Intendent Major · Intendent.</p>
+        <span class="ant">Grup A1</span>
+      </div>
+      <div class="clasif" style="--accent: var(--terracotta);">
+        <div class="cl-icon">🎖️</div>
+        <h4>Executiva</h4>
+        <p>Inspector.</p>
+        <span class="ant">Grup A2</span>
+      </div>
+      <div class="clasif" style="--accent: var(--c-operativa);">
+        <div class="cl-icon">🏅</div>
+        <h4>Intermèdia</h4>
+        <p>Sotsinspector · Sergent.</p>
+        <span class="ant">Grup C1</span>
+      </div>
+      <div class="clasif" style="--accent: var(--c-recursos);">
+        <div class="cl-icon">👮</div>
+        <h4>Bàsica</h4>
+        <p>Caporal · Agent.</p>
+        <span class="ant">Grup C1</span>
+      </div>
     </div>
-    <div class="clas-card clas-inter">
-      <div class="icon">🏅</div>
-      <div class="tipo">Intermedia</div>
-      <div class="pena-max">Grupo C1<br>Subinspector<br>Sargento</div>
-    </div>
-    <div class="clas-card clas-basica">
-      <div class="icon">👮</div>
-      <div class="tipo">Básica</div>
-      <div class="pena-max">Grupo C1<br>Cabo · Agente</div>
-    </div>
-  </div>
+    <div class="nota policial" style="margin-top:10px;"><b>🚔 Disposició addicional 7a:</b> Agent i Caporal estan classificats a efectes econòmics al <b>C1</b> (abans C2). No té equivalència acadèmica.</div>
+  </section>
 
-  <!-- BANNER INFO -->
-  <div class="reforma-banner">
-    <div class="ref-icon">🏛️</div>
-    <div class="ref-text">
-      <div class="ref-ley">Art. 13.3 Estatut d'Autonomia</div>
-      <div class="ref-desc">Competencia exclusiva de la Generalitat en coordinación de Policías Locales · 6 Títulos · 58 artículos</div>
+  <!-- ═══ META STRIP ═══ -->
+  <section class="meta-strip">
+    <div>
+      <div class="eyebrow" style="color:#2F6BD8;">📘 LLEI 16/1991 · DE 10 DE JULIOL · DOGC 1469</div>
+      <p>Generalitat de Catalunya · Llei reguladora de les Policies Locals · 6 títols · 58 articles · Basada en l'art. 13.3 EAC · Última modificació 17/03/2023.</p>
     </div>
-    <div class="ref-fecha">Última modif.<br>17/03/2023</div>
-  </div>
-
-  <!-- 1. DISPOSICIONES GENERALES -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">📖</span>
-      <h2>Disposiciones Generales</h2>
-      <span class="art-ref">Arts. 1–7 · Título I</span>
-      <span class="toggle">▼</span>
+    <div class="vigente">
+      <span class="when">10/07/1991</span>
+      <span class="state">Vigent</span>
     </div>
-    <div class="cat-body">
+  </section>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Ámbito de aplicación</div>
+  <!-- ═══ 1. DISPOSICIONS GENERALS ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-leyes);">
+      <span class="eyebrow">📖 1 · DISPOSICIONS GENERALS · TÍTOL I · ARTS. 1–7</span>
+      <span class="rule"></span>
+    </div>
+    <div class="delito-grid">
+
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
           <span class="art-badge">Art. 1</span>
-          <span class="tipo-badge badge-clave">Clave</span>
+          <span class="delito-name">Àmbit d'aplicació</span>
+          <span class="tipo info">Àmbit</span>
         </div>
-        <div class="delito-desc">
-          Aplica a <b>todos los Cuerpos de Policía</b> dependientes de los Municipios de Cataluña, denominados genéricamente <b>«Policías locales»</b>. Los municipios sin Policía Local pueden tener <b>Vigilantes</b> (guardias, alguaciles, agentes o similares).
-        </div>
-        <div class="nota-agrav">⚠️ <b>Prohibición de gestión indirecta:</b> el servicio se presta <b>directamente</b> por la Corporación. NO caben concesiones, arrendamientos ni órganos especiales de gestión.</div>
-      </div>
-      <div class="divider"></div>
+        <p class="delito-desc">Aplica a <b>tots els Cossos de Policia</b> dependents dels Municipis de Catalunya, denominats genèricament <b>«Policies Locals»</b>. Els municipis sense PL poden tenir <b>Vigilants</b> (guardies, agutzils, agents o similars).</p>
+        <div class="nota agrav"><b>⚠️ Prohibició de gestió indirecta:</b> el servei es presta <b>directament</b> per la Corporació. NO caben concessions, arrendaments ni òrgans especials de gestió.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Naturaleza y denominación</div>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
           <span class="art-badge">Art. 2</span>
-          <span class="tipo-badge badge-clave">Clave</span>
+          <span class="delito-name">Naturalesa i denominació</span>
+          <span class="tipo info">Civil</span>
         </div>
-        <div class="delito-desc">
-          <b>Institutos armados de naturaleza CIVIL</b> con estructura y organización <b>jerarquizadas</b>.
+        <p class="delito-desc"><b>Instituts armats de naturalesa CIVIL</b> amb estructura i organització <b>jerarquitzades</b>.</p>
+        <div class="pena-list">
+          <span class="pena info">Denominació genèrica · Policia Local</span>
+          <span class="pena warn">Per tradició · Policia Municipal · Guàrdia Urbana</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Denominación genérica: <b>Policía Local</b></span>
-          <span class="pena-chip multa">🟡 Por tradición histórica: <b>Policía Municipal</b> o <b>Guardia Urbana</b></span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Creación por tramos de población</div>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
           <span class="art-badge">Art. 3</span>
-          <span class="tipo-badge badge-info">Población</span>
+          <span class="delito-name">Creació per trams de població</span>
+          <span class="tipo info">10.000 hab.</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>&gt; 10.000 hab</b><br>Pueden crear PL libremente</div>
-          <div class="celda"><b>&lt; 10.000 hab</b><br>Mayoría absoluta + autorización Conseller</div>
-        </div>
-        <div class="nota-clave">💡 En menos de 10.000 hab: previo <b>informe de la Comisión de Coordinación</b> de las Policías Locales.</div>
-      </div>
-      <div class="divider"></div>
+        <table class="norm-table">
+          <thead><tr><th>Població</th><th>Règim</th></tr></thead>
+          <tbody>
+            <tr><td><b>&gt; 10.000 hab</b></td><td>Poden crear PL lliurement</td></tr>
+            <tr><td><b>&lt; 10.000 hab</b></td><td>Majoria absoluta + autorització Conseller</td></tr>
+          </tbody>
+        </table>
+        <div class="nota clave"><b>💡 En menys de 10.000 hab:</b> previ <b>informe de la Comissió de Coordinació</b> de les Policies Locals.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Cuerpo único y Mando</div>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 4</span>
-          <span class="tipo-badge badge-clave">Clave</span>
+          <span class="delito-name">Cos únic i comandament</span>
+          <span class="tipo key">⭐ Mando</span>
         </div>
-        <div class="delito-desc">
-          La Policía Local se integra en un <b>CUERPO ÚNICO</b>, sin perjuicio de su organización interna.
+        <p class="delito-desc">La Policia Local s'integra en un <b>COS ÚNIC</b>, sense perjudici de la seva organització interna.</p>
+        <div class="pena-list">
+          <span class="pena terra">🔵 Mando superior · Alcalde (pot delegar)</span>
+          <span class="pena terra">🟡 Mando immediat · Cap del Cos</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Mando superior: <b>Alcalde</b> (puede delegar)</span>
-          <span class="pena-chip multa">🟡 Mando inmediato: <b>Jefe del Cuerpo</b></span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Ámbito territorial</div>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
           <span class="art-badge">Art. 5</span>
-          <span class="tipo-badge badge-clave">Territorio</span>
+          <span class="delito-name">Àmbit territorial</span>
+          <span class="tipo info">Municipi</span>
         </div>
-        <div class="delito-desc">
-          Actuación limitada al <b>territorio del municipio</b>. Fuera solo en <b>situaciones de emergencia</b> y con <b>autorización previa</b> de autoridades competentes.
-        </div>
-        <div class="nota-policial">🚔 Se dará cuenta de estas actuaciones al <b>Departament de Governació</b> (actual Departament d'Interior).</div>
-      </div>
-      <div class="divider"></div>
+        <p class="delito-desc">Actuació limitada al <b>territori del municipi</b>. Fora només en <b>situacions d'emergència</b> i amb <b>autorització prèvia</b> d'autoritats competents.</p>
+        <div class="nota policial"><b>🚔 Es donarà compte</b> d'aquestes actuacions al <b>Departament de Governació</b> (actual Departament d'Interior).</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Juramento y Agentes de la Autoridad</div>
-          <span class="art-badge">Arts. 6 y 7</span>
-          <span class="tipo-badge badge-clave">Clave</span>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
+          <span class="art-badge">Arts. 6 i 7</span>
+          <span class="delito-name">Jurament i agents de l'autoritat</span>
+          <span class="tipo info">CE + EAC</span>
         </div>
-        <div class="delito-desc">
-          Antes de tomar posesión, juran o prometen acatar la <b>Constitución</b> y respetar el <b>Estatuto de Autonomía</b>. Los Policías Locales tienen en todo caso la condición de <b>agentes de la autoridad</b>.
-        </div>
-        <div class="nota-agrav">⚠️ Los <b>Vigilantes</b> solo son agentes de la autoridad si: (1) están identificados, (2) ejercen funciones del art. 13 y (3) el municipio NO dispone de Policía Local. Si hay PL, NUNCA son agentes de la autoridad.</div>
-      </div>
+        <p class="delito-desc">Abans de prendre possessió, juren o prometen acatar la <b>Constitució</b> i respectar l'<b>Estatut d'Autonomia</b>. Els PL tenen en tot cas la condició d'<b>agents de l'autoritat</b>.</p>
+        <div class="nota agrav"><b>⚠️ Els Vigilants</b> només són agents de l'autoritat si: (1) estan identificats, (2) exerceixen funcions de l'art. 13 i (3) el municipi NO disposa de Policia Local. Si hi ha PL, MAI són agents de l'autoritat.</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 2. ARMAMENTO Y UNIFORME -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🔫</span>
-      <h2>Armamento y Uniforme</h2>
-      <span class="art-ref">Arts. 8–9 · Cap. II</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 2. ARMAMENT I UNIFORME ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-slate);">
+      <span class="eyebrow">🔫 2 · ARMAMENT I UNIFORME · CAP. II · ARTS. 8–9</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Armamento Reglamentario</div>
+      <article class="delito" style="--accent: var(--c-slate);">
+        <div class="delito-head">
           <span class="art-badge">Art. 8</span>
-          <span class="tipo-badge badge-info">Medios</span>
+          <span class="delito-name">Armament reglamentari</span>
+          <span class="tipo info">Cos armat</span>
         </div>
-        <div class="delito-desc">
-          Los Policías Locales, como integrantes de un instituto armado, llevan el armamento reglamentario que se les asigne.
+        <p class="delito-desc">Els PL, com a integrants d'un institut armat, porten l'armament reglamentari que se'ls assigni.</p>
+        <div class="pena-list">
+          <span class="pena info">🔵 Alcalde · servicis sense armes (motivat)</span>
+          <span class="pena danger">✗ Vigilants · NO armes de foc</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 <b>Alcalde</b> determina (motivadamente) qué servicios se prestan sin armas</span>
-          <span class="pena-chip agravada">✗ Vigilantes: <b>NO pueden portar armas de fuego</b></span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Uniforme Reglamentario</div>
+      <article class="delito" style="--accent: var(--c-slate);">
+        <div class="delito-head">
           <span class="art-badge">Art. 9</span>
-          <span class="tipo-badge badge-info">Imagen</span>
+          <span class="delito-name">Uniforme reglamentari</span>
+          <span class="tipo info">Servei</span>
         </div>
-        <div class="delito-desc">
-          Obligatorio usar el uniforme reglamentario, que solo puede utilizarse en el cumplimiento del servicio. El <b>Alcalde</b> puede autorizar servicios sin uniforme, en cuyo caso el agente llevará la <b>documentación acreditativa</b>.
-        </div>
-      </div>
+        <p class="delito-desc">Obligatori usar l'uniforme reglamentari, només en compliment del servei. L'<b>Alcalde</b> pot autoritzar serveis sense uniforme, en el cas amb la <b>documentació acreditativa</b>.</p>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 3. PRINCIPIOS DE ACTUACIÓN -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">⚖️</span>
-      <h2>Principios Básicos de Actuación</h2>
-      <span class="art-ref">Art. 10 · Cap. III</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 3. PRINCIPIS BÀSICS D'ACTUACIÓ ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-operativa);">
+      <span class="eyebrow">⚖️ 3 · PRINCIPIS BÀSICS D'ACTUACIÓ · ART. 10 · CAP. III</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">1º · Adecuación al ordenamiento jurídico</div>
-          <span class="art-badge">Art. 10.1.1º</span>
-          <span class="tipo-badge badge-clave">Principio</span>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 10.1.1r</span>
+          <span class="delito-name">1r · Adequació a l'ordenament jurídic</span>
+          <span class="tipo info">Legalitat</span>
         </div>
-        <div class="delito-desc">
-          <b>a)</b> Respeto a <b>Constitución, Estatuto de Autonomía</b> y ordenamiento.<br>
-          <b>b)</b> Neutralidad política, imparcialidad, sin discriminación.<br>
-          <b>c)</b> Integridad, dignidad; oposición a la corrupción.<br>
-          <b>d)</b> Jerarquía y subordinación.<br>
-          <b>e)</b> Colaboración con la Administración de Justicia.
-        </div>
-        <div class="nota-agrav">⚠️ La <b>obediencia debida NO ampara</b> órdenes que entrañen delito o contrarias a la Constitución, al <b>Estatuto</b> o a las Leyes.</div>
-      </div>
-      <div class="divider"></div>
+        <ul class="art-list">
+          <li><b>a)</b> Respecte a <b>Constitució, Estatut i ordenament</b>.</li>
+          <li><b>b)</b> Neutralitat política, imparcialitat, sense discriminació.</li>
+          <li><b>c)</b> Integritat, dignitat; oposició a la corrupció.</li>
+          <li><b>d)</b> Jerarquia i subordinació.</li>
+          <li><b>e)</b> Col·laboració amb l'Administració de Justícia.</li>
+        </ul>
+        <div class="nota agrav"><b>⚠️ L'obediència deguda NO ampara</b> ordres que comportin delicte o contràries a la Constitució, a l'<b>Estatut</b> o a les Lleis.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">2º · Relaciones con la comunidad</div>
-          <span class="art-badge">Art. 10.1.2º</span>
-          <span class="tipo-badge badge-clave">Principio</span>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 10.1.2n</span>
+          <span class="delito-name">2n · Relacions amb la comunitat · COP</span>
+          <span class="tipo key">⭐ Ús de la força</span>
         </div>
-        <div class="delito-desc">
-          Impedir prácticas abusivas o discriminatorias; trato correcto y esmerado; actuar con decisión y sin demora ante daño grave; uso de armas solo con riesgo racionalmente grave.
+        <p class="delito-desc">Impedir pràctiques abusives o discriminatòries; tracte correcte i acurat; actuar amb decisió i sense demora davant dany greu; ús d'armes només amb risc racionalment greu.</p>
+        <div class="pena-list">
+          <span class="pena terra">🟡 Congruència</span>
+          <span class="pena terra">🟡 Oportunitat</span>
+          <span class="pena terra">🟡 Proporcionalitat (COP)</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip multa">🟡 Principios del uso de la fuerza: <b>congruencia, oportunidad y proporcionalidad</b> (COP)</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">3º · Tratamiento de detenidos</div>
-          <span class="art-badge">Art. 10.1.3º</span>
-          <span class="tipo-badge badge-clave">Principio</span>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 10.1.3r</span>
+          <span class="delito-name">3r · Tractament de detinguts</span>
+          <span class="tipo info">Drets</span>
         </div>
-        <div class="delito-desc">
-          Identificarse al detener · velar por vida, integridad, honor y dignidad · cumplir trámites, plazos y requisitos del ordenamiento jurídico.
-        </div>
-      </div>
-      <div class="divider"></div>
+        <p class="delito-desc">Identificar-se en detenir · vetllar per vida, integritat, honor i dignitat · complir tràmits, terminis i requisits de l'ordenament jurídic.</p>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">4º y 5º · Dedicación y Secreto profesional</div>
-          <span class="art-badge">Art. 10.1.4º-5º</span>
-          <span class="tipo-badge badge-clave">Principio</span>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 10.1.4-5</span>
+          <span class="delito-name">4t-5è · Dedicació i secret professional</span>
+          <span class="tipo info">Deures</span>
         </div>
-        <div class="delito-desc">
-          <b>Dedicación total:</b> intervenir siempre, estén o no de servicio.<br>
-          <b>Secreto profesional:</b> riguroso respecto de la información conocida por razón del cargo.
-        </div>
-        <div class="nota-clave">💡 La <b>responsabilidad es personal y directa</b> (art. 10.2); no excluye la responsabilidad patrimonial de la Administración.</div>
-      </div>
+        <ul class="art-list">
+          <li><b>·</b> <b>Dedicació total:</b> intervenir sempre, estiguin o no de servei.</li>
+          <li><b>·</b> <b>Secret professional:</b> rigorós respecte de la informació coneguda per raó del càrrec.</li>
+        </ul>
+        <div class="nota clave"><b>💡 Responsabilitat personal i directa</b> (art. 10.2); no exclou la responsabilitat patrimonial de l'Administració.</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 4. FUNCIONES -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🎯</span>
-      <h2>Funciones Policía Local y Vigilantes</h2>
-      <span class="art-ref">Arts. 11–13</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 4. FUNCIONS PL I VIGILANTS ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--terracotta);">
+      <span class="eyebrow">🎯 4 · FUNCIONS POLICIA LOCAL I VIGILANTS · ARTS. 11–13</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">FUNCIONES POLICÍA LOCAL — Las 13 del art. 11</div>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 11</span>
-          <span class="tipo-badge badge-local">Memorizar</span>
+          <span class="delito-name">Funcions PL · les 13 (a-m)</span>
+          <span class="tipo key">⭐ Memoritzar</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Proteger autoridades y edificios locales</div>
-          <div class="celda"><b>b)</b> Ordenar, señalizar y dirigir tráfico urbano</div>
-          <div class="celda"><b>c)</b> Instruir atestados accidentes en núcleo urbano</div>
-          <div class="celda"><b>d)</b> Policía administrativa (ordenanzas, bandos)</div>
-          <div class="celda"><b>e)</b> Policía judicial (art. 12)</div>
-          <div class="celda"><b>f)</b> Diligencias de prevención de delitos</div>
-          <div class="celda"><b>g)</b> Colaborar en manifestaciones y concentraciones</div>
-          <div class="celda"><b>h)</b> Cooperar en conflictos privados (si requeridos)</div>
-          <div class="celda"><b>i)</b> Vigilar espacios públicos</div>
-          <div class="celda"><b>j)</b> Auxilio en accidentes/catástrofes (Prot. Civil)</div>
-          <div class="celda"><b>k)</b> Velar por medio ambiente y entorno</div>
-          <div class="celda"><b>l)</b> Actuaciones de seguridad vial</div>
-          <div class="celda" style="grid-column: 1 / -1;"><b>m)</b> Cualquier otra función de Policía y seguridad encomendada</div>
-        </div>
-        <div class="nota-agrav">⚠️ Las letras <b>c) atestados</b> y <b>f) prevención</b> → las actuaciones deben <b>comunicarse a las FCSE competentes</b>.</div>
-        <div class="nota-policial">🚔 Diferencias con LO 2/1986 art. 53: la 16/1991 añade explícitamente <b>k) medio ambiente, i) vigilar espacios públicos y l) seguridad vial</b>.</div>
-      </div>
-      <div class="divider"></div>
+        <ul class="art-list">
+          <li><b>a)</b> Protegir autoritats i edificis locals.</li>
+          <li><b>b)</b> Ordenar, senyalitzar i dirigir trànsit urbà.</li>
+          <li><b>c)</b> Instruir atestats accidents al nucli urbà.</li>
+          <li><b>d)</b> Policia administrativa (ordenances, bandos).</li>
+          <li><b>e)</b> Policia judicial (art. 12).</li>
+          <li><b>f)</b> Diligències de prevenció de delictes.</li>
+          <li><b>g)</b> Col·laborar en manifestacions i concentracions.</li>
+          <li><b>h)</b> Cooperar en conflictes privats (si requerits).</li>
+          <li><b>i)</b> Vigilar espais públics.</li>
+          <li><b>j)</b> Auxili en accidents/catàstrofes (Protecció Civil).</li>
+          <li><b>k)</b> Vetllar pel medi ambient i entorn.</li>
+          <li><b>l)</b> Actuacions de seguretat viària.</li>
+          <li><b>m)</b> Qualsevol altra funció encomanada.</li>
+        </ul>
+        <div class="nota agrav"><b>⚠️ Les lletres c) atestats i f) prevenció</b> → les actuacions s'han de <b>comunicar a les FCSE competents</b>.</div>
+        <div class="nota policial"><b>🚔 Diferències amb LO 2/1986 art. 53:</b> la 16/1991 afegeix explícitament <b>k) medi ambient, i) espais públics i l) seguretat viària</b>.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Policía Judicial (funciones del art. 11.e)</div>
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
           <span class="art-badge">Art. 12</span>
-          <span class="tipo-badge badge-info">Judicial</span>
+          <span class="delito-name">Policia judicial</span>
+          <span class="tipo info">Col·laboradores FCSE</span>
         </div>
-        <div class="delito-desc">
-          <b>a)</b> Auxiliar a Jueces, Tribunales y Mº Fiscal en investigación y detención, <b>cuando sean requeridos</b>.<br>
-          <b>b)</b> Practicar <b>primeras diligencias de prevención</b> y custodia de detenidos y objetos del delito (por iniciativa propia o requerimiento).
-        </div>
-        <div class="nota-clave">💡 Cooperación mutua y colaboración recíproca con el resto de FCS. Son <b>COLABORADORAS</b> de las FCSE (art. 29.2 LO 2/1986).</div>
-      </div>
-      <div class="divider"></div>
+        <ul class="art-list">
+          <li><b>a)</b> Auxiliar Jutges, Tribunals i Mº Fiscal en investigació i detenció, <b>quan siguin requerits</b>.</li>
+          <li><b>b)</b> Practicar <b>primeres diligències de prevenció</b> i custòdia de detinguts i objectes del delicte (per iniciativa pròpia o requeriment).</li>
+        </ul>
+        <div class="nota clave"><b>💡 Cooperació mútua</b> i col·laboració recíproca amb la resta de FCS. Són <b>COL·LABORADORES</b> de les FCSE (art. 29.2 LO 2/1986).</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Funciones de los VIGILANTES (limitadas)</div>
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
           <span class="art-badge">Art. 13</span>
-          <span class="tipo-badge badge-info">Vigilantes</span>
+          <span class="delito-name">Funcions dels VIGILANTS · limitades</span>
+          <span class="tipo warn">⚠️ Només 4</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Custodiar bienes e instalaciones municipales</div>
-          <div class="celda"><b>b)</b> Ordenar y regular tráfico en núcleo urbano</div>
-          <div class="celda"><b>c)</b> Auxilio al ciudadano y Protección Civil</div>
-          <div class="celda"><b>d)</b> Velar cumplimiento ordenanzas y bandos</div>
-        </div>
-        <div class="nota-agrav">⚠️ Los Vigilantes <b>SOLO</b> tienen estas 4 funciones. NO pueden ejercer Policía Judicial, ni prevención de delitos, ni atestados.</div>
-      </div>
+        <ul class="art-list">
+          <li><b>a)</b> Custodiar béns i instal·lacions municipals.</li>
+          <li><b>b)</b> Ordenar i regular trànsit al nucli urbà.</li>
+          <li><b>c)</b> Auxili al ciutadà i Protecció Civil.</li>
+          <li><b>d)</b> Vetllar pel compliment d'ordenances i bandos.</li>
+        </ul>
+        <div class="nota agrav"><b>⚠️ Els Vigilants SOLS</b> tenen aquestes 4 funcions. <b>NO</b> poden exercir Policia Judicial, ni prevenció de delictes, ni atestats.</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 5. COORDINACIÓN -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🤝</span>
-      <h2>Coordinación y Colaboración</h2>
-      <span class="art-ref">Arts. 14–23 · Título II</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 5. COORDINACIÓ I COL·LABORACIÓ ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-recursos);">
+      <span class="eyebrow">🤝 5 · COORDINACIÓ I COL·LABORACIÓ · TÍTOL II · ARTS. 14–23</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Concepto de Coordinación</div>
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
           <span class="art-badge">Art. 14</span>
-          <span class="tipo-badge badge-clave">Definición</span>
+          <span class="delito-name">Concepte de coordinació</span>
+          <span class="tipo info">Sistema</span>
         </div>
-        <div class="delito-desc">
-          Determinación de <b>medios y sistemas de relación</b> para la acción conjunta de las Policías Locales, integrándolas en el sistema de seguridad ciudadana de Cataluña.
-        </div>
-      </div>
-      <div class="divider"></div>
+        <p class="delito-desc">Determinació de <b>mitjans i sistemes de relació</b> per a l'acció conjunta de les Policies Locals, integrant-les en el sistema de seguretat ciutadana de Catalunya.</p>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Funciones de coordinación</div>
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
           <span class="art-badge">Art. 15</span>
-          <span class="tipo-badge badge-info">Generalitat</span>
+          <span class="delito-name">Funcions de coordinació</span>
+          <span class="tipo info">7 funcions</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Homogeneizar medios técnicos</div>
-          <div class="celda"><b>b)</b> Sistema de información recíproca</div>
-          <div class="celda"><b>c)</b> Asesorar a Policías Locales</div>
-          <div class="celda"><b>d)</b> Canalizar colaboración interadmin.</div>
-          <div class="celda"><b>e)</b> Coordinar protección civil</div>
-          <div class="celda"><b>f)</b> Normas de estructura y formación</div>
-          <div class="celda" style="grid-column: 1 / -1;"><b>g)</b> Actuaciones comunes en seguridad vial</div>
-        </div>
-        <div class="nota-clave">💡 Todo con <b>respeto a la autonomía local</b> y las competencias municipales en materia de Policía Local.</div>
-      </div>
-      <div class="divider"></div>
+        <ul class="art-list">
+          <li><b>a)</b> Homogeneïtzar mitjans tècnics.</li>
+          <li><b>b)</b> Sistema d'informació recíproca.</li>
+          <li><b>c)</b> Assessorar a Policies Locals.</li>
+          <li><b>d)</b> Canalitzar col·laboració interadministrativa.</li>
+          <li><b>e)</b> Coordinar protecció civil.</li>
+          <li><b>f)</b> Normes d'estructura i formació.</li>
+          <li><b>g)</b> Actuacions comunes en seguretat viària.</li>
+        </ul>
+        <div class="nota clave"><b>💡 Tot</b> amb <b>respecte a l'autonomia local</b> i les competències municipals en matèria de PL.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Junta Local de Seguridad</div>
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
           <span class="art-badge">Art. 17</span>
-          <span class="tipo-badge badge-info">Junta</span>
+          <span class="delito-name">Junta Local de Seguretat</span>
+          <span class="tipo info">Coordinació</span>
         </div>
-        <div class="delito-desc">
-          En municipios con Policía Local que creen la <b>Junta Local de Seguridad</b> (art. 54 LO 2/1986), pueden integrar representantes del <b>Departament de Governació</b>.
-        </div>
-        <div class="nota-agrav">⚠️ La participación del Departament es <b>preceptiva</b> en los municipios con presencia operativa de la Policía autonómica (Mossos d'Esquadra).</div>
-      </div>
-      <div class="divider"></div>
+        <p class="delito-desc">En municipis amb PL que creïn la <b>Junta Local de Seguretat</b> (art. 54 LO 2/1986), poden integrar representants del <b>Departament de Governació</b>.</p>
+        <div class="nota agrav"><b>⚠️ La participació</b> del Departament és <b>preceptiva</b> en els municipis amb presència operativa de la Policia autonòmica (Mossos d'Esquadra).</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Envío anual de Memoria</div>
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
           <span class="art-badge">Art. 20</span>
-          <span class="tipo-badge badge-info">Deber</span>
+          <span class="delito-name">Memòria anual</span>
+          <span class="tipo info">1r trimestre</span>
         </div>
-        <div class="delito-desc">
-          Las Corporaciones Locales con PL o Vigilantes envían al Departament, en el <b>primer trimestre</b> de cada año:
+        <p class="delito-desc">Les Corporacions Locals amb PL o Vigilants envien al Departament, en el <b>primer trimestre</b> de cada any:</p>
+        <div class="pena-list">
+          <span class="pena info">🔵 Memòria de serveis any anterior</span>
+          <span class="pena info">🔵 Dotació RRHH i materials</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Memoria de servicios del año anterior</span>
-          <span class="pena-chip">🔵 Dotación de recursos humanos y materiales</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Convenios de cooperación</div>
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
           <span class="art-badge">Art. 23</span>
-          <span class="tipo-badge badge-info">Convenios</span>
+          <span class="delito-name">Convenis de cooperació</span>
+          <span class="tipo info">3 supòsits</span>
         </div>
-        <div class="delito-desc">
-          <b>1.</b> Municipios sin PL pueden convenir con el Departament para que la Policía autonómica ejerza funciones locales.<br>
-          <b>2.</b> Municipios con PL pueden solicitar apoyo de la Policía autonómica para servicios temporales/concretos.<br>
-          <b>3.</b> Municipios limítrofes pueden suscribir acuerdos de cooperación entre sus Policías (previa autorización del Conseller).
-        </div>
-      </div>
+        <ul class="art-list">
+          <li><b>1.</b> Municipis sense PL poden conveniar amb el Departament perquè la Policia autonòmica exerceixi funcions locals.</li>
+          <li><b>2.</b> Municipis amb PL poden sol·licitar suport de la Policia autonòmica per a serveis temporals/concrets.</li>
+          <li><b>3.</b> Municipis limítrofs poden subscriure acords de cooperació entre les seves Policies (prèvia autorització del Conseller).</li>
+        </ul>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 6. ESCALAS Y CATEGORÍAS (destacado) -->
-  <div class="categoria">
-    <div class="cat-header open local" onclick="toggle(this)">
-      <span class="cat-icon">🏗️</span>
-      <h2>Escalas y Categorías</h2>
-      <span class="art-ref">Arts. 24–25 · Título III</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 6. ESCALES I CATEGORIES ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--terracotta);">
+      <span class="eyebrow">🏗️ 6 · ESCALES I CATEGORIES · TÍTOL III · ARTS. 24–25</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Las 4 Escalas y 7 Categorías</div>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 24</span>
-          <span class="tipo-badge badge-local">Memorizar</span>
+          <span class="delito-name">Les 4 escales i 7 categories</span>
+          <span class="tipo key">⭐ Estructura</span>
         </div>
-        <div class="tabla-discip">
-          <div class="th">Escala</div>
-          <div class="th">Categorías</div>
-          <div class="th">Grupo</div>
+        <table class="norm-table">
+          <thead><tr><th>Escala</th><th>Categories</th><th>Grup</th></tr></thead>
+          <tbody>
+            <tr><td><b>Superior</b></td><td>Superintendent · Intendent Major · Intendent</td><td>A1</td></tr>
+            <tr><td><b>Executiva</b></td><td>Inspector</td><td>A2</td></tr>
+            <tr><td><b>Intermèdia</b></td><td>Sotsinspector · Sergent</td><td>C1</td></tr>
+            <tr><td><b>Bàsica</b></td><td>Caporal · Agent</td><td>C1</td></tr>
+          </tbody>
+        </table>
+      </article>
 
-          <div class="td centro grave">Superior</div>
-          <div class="td grave">Superintendente · Intendente Mayor · Intendente</div>
-          <div class="td centro grave">A1</div>
-
-          <div class="td centro medio">Ejecutiva</div>
-          <div class="td medio">Inspector</div>
-          <div class="td centro medio">A2</div>
-
-          <div class="td centro">Intermedia</div>
-          <div class="td">Subinspector · Sargento</div>
-          <div class="td centro">C1</div>
-
-          <div class="td centro leve">Básica</div>
-          <div class="td leve">Cabo · Agente</div>
-          <div class="td centro leve">C1</div>
-        </div>
-        <div class="nota-policial">🚔 <b>Disposición adicional 7ª:</b> Agente y Cabo están clasificados a efectos económicos en el <b>C1</b> (antes C2). No tiene equivalencia académica.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Creación de categorías por población</div>
+      <article class="delito" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 25.3</span>
-          <span class="tipo-badge badge-local">Pregunta típica</span>
+          <span class="delito-name">Creació de categories per població</span>
+          <span class="tipo key">⭐ Llindars</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>&gt; 200.000 hab</b><br>Puede haber Superintendente</div>
-          <div class="celda"><b>&gt; 100.000 hab</b><br>Puede haber Int. Mayor e Intendente</div>
-          <div class="celda" style="grid-column: 1 / -1;"><b>Excepción</b> (&lt; 100.000 hab): puede crearse Int. Mayor si &gt; 250 agentes · Intendente si &gt; 100 agentes, por características especiales</div>
-        </div>
-        <div class="nota-agrav">⚠️ Pregunta muy repetida: <b>Superintendente SOLO en &gt; 200.000 hab</b>. Intendente Mayor e Intendente en &gt; 100.000 hab (o excepcionalmente con muchos agentes).</div>
-      </div>
+        <table class="norm-table">
+          <thead><tr><th>Població</th><th>Categoria</th></tr></thead>
+          <tbody>
+            <tr><td><b>&gt; 200.000 hab</b></td><td>Pot haver-hi <b>Superintendent</b></td></tr>
+            <tr><td><b>&gt; 100.000 hab</b></td><td>Pot haver-hi Int. Major i Intendent</td></tr>
+            <tr><td><b>Excepció (&lt; 100.000 hab)</b></td><td>Int. Major si &gt; 250 agents · Intendent si &gt; 100 agents</td></tr>
+          </tbody>
+        </table>
+        <div class="nota agrav"><b>⚠️ Pregunta molt repetida:</b> <b>Superintendent SOLS en &gt; 200.000 hab</b>. Intendent Major i Intendent en &gt; 100.000 hab (o excepcionalment amb molts agents).</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 7. JEFE DEL CUERPO -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">👔</span>
-      <h2>Jefe del Cuerpo</h2>
-      <span class="art-ref">Arts. 26–27</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 7. CAP DEL COS ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-operativa);">
+      <span class="eyebrow">👔 7 · CAP DEL COS · ARTS. 26–27</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Designación del Jefe</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Art. 26</span>
-          <span class="tipo-badge badge-info">Jefatura</span>
+          <span class="delito-name">Designació del Cap</span>
+          <span class="tipo info">Major graduació</span>
         </div>
-        <div class="delito-desc">
-          Es Jefe del Cuerpo el miembro de <b>mayor graduación</b>. En caso de igualdad, nombra el Alcalde según principios de <b>objetividad, mérito, capacidad e igualdad</b>.
+        <p class="delito-desc">És Cap del Cos el membre de <b>major graduació</b>. En cas d'igualtat, nomena l'Alcalde segons principis d'<b>objectivitat, mèrit, capacitat i igualtat</b>.</p>
+        <div class="pena-list">
+          <span class="pena info">🔵 Sota el comandament de l'Alcalde (o delegat)</span>
+          <span class="pena warn">🟡 L'Alcalde designa el substitut entre els de major graduació</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Bajo el mando del <b>Alcalde</b> (o persona delegada)</span>
-          <span class="pena-chip multa">🟡 El Alcalde designa al sustituto entre los de mayor graduación</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Funciones del Jefe</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Art. 27</span>
-          <span class="tipo-badge badge-info">Funciones</span>
+          <span class="delito-name">Funcions del Cap</span>
+          <span class="tipo info">Comandament</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Dirigir, coordinar y supervisar operaciones</div>
-          <div class="celda"><b>b)</b> Evaluar recursos y hacer propuestas</div>
-          <div class="celda"><b>c)</b> Transformar directrices en órdenes concretas</div>
-          <div class="celda"><b>d)</b> Informar al Alcalde del funcionamiento</div>
-          <div class="celda" style="grid-column: 1 / -1;"><b>e)</b> Cualquier otra función del Reglamento municipal</div>
-        </div>
-      </div>
+        <ul class="art-list">
+          <li><b>a)</b> Dirigir, coordinar i supervisar operacions.</li>
+          <li><b>b)</b> Avaluar recursos i fer propostes.</li>
+          <li><b>c)</b> Transformar directrius en ordres concretes.</li>
+          <li><b>d)</b> Informar l'Alcalde del funcionament.</li>
+          <li><b>e)</b> Qualsevol altra funció del Reglament municipal.</li>
+        </ul>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 8. ACCESO Y PROMOCIÓN -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">📝</span>
-      <h2>Acceso y Promoción</h2>
-      <span class="art-ref">Arts. 28–33 · Título IV</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 8. ACCÉS I PROMOCIÓ ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-superbuscador);">
+      <span class="eyebrow">📝 8 · ACCÉS I PROMOCIÓ · TÍTOL IV · ARTS. 28–33</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Acceso a AGENTE (libre)</div>
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
           <span class="art-badge">Art. 29</span>
-          <span class="tipo-badge badge-clave">Acceso</span>
+          <span class="delito-name">Accés a Agent · lliure</span>
+          <span class="tipo info">Oposició + ISPC</span>
         </div>
-        <div class="delito-desc">
-          Por <b>oposición</b> o <b>concurso-oposición libre</b>. Requisitos mínimos: ser español, edad entre mín./máx. del Reglamento, condiciones para ejercer funciones, no estar inhabilitado ni separado del servicio.
+        <p class="delito-desc">Per <b>oposició</b> o <b>concurs-oposició lliure</b>. Requisits mínims: ser espanyol, edat dins els marges del Reglament, condicions per exercir funcions, no estar inhabilitat ni separat del servei.</p>
+        <div class="pena-list">
+          <span class="pena info">🔵 Proves mínimes · culturals, físiques, mèdiques i psicotècniques</span>
+          <span class="pena ok">✓ Curs selectiu a l'ISPC</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Pruebas mínimas: <b>culturales, físicas, médicas y psicotécnicas</b></span>
-          <span class="pena-chip positivo">✓ Curso selectivo en la <b>Escuela de Policía de Cataluña (ISPC)</b></span>
-        </div>
-        <div class="nota-clave">💡 Exentos del curso selectivo quienes aporten diploma acreditativo de haber superado el curso básico del ISPC.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota clave"><b>💡 Exempts</b> del curs selectiu qui aporti diploma acreditatiu d'haver superat el curs bàsic de l'ISPC.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Acceso a Cabo, Sargento y Subinspector</div>
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
           <span class="art-badge">Art. 30</span>
-          <span class="tipo-badge badge-clave">Promoción</span>
+          <span class="delito-name">Accés Caporal, Sergent i Sotsinspector</span>
+          <span class="tipo info">Promoció interna</span>
         </div>
-        <div class="delito-desc">
-          <b>Promoción interna</b> mediante concurso-oposición entre miembros con <b>mínimo 2 años</b> en la categoría inmediatamente inferior, con titulación adecuada y curso específico del ISPC.
-        </div>
-      </div>
-      <div class="divider"></div>
+        <p class="delito-desc"><b>Promoció interna</b> mitjançant concurs-oposició entre membres amb <b>mínim 2 anys</b> en la categoria immediatament inferior, amb titulació adequada i curs específic de l'ISPC.</p>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Acceso a Escalas Superior y Ejecutiva</div>
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
           <span class="art-badge">Art. 31</span>
-          <span class="tipo-badge badge-clave">Acceso</span>
+          <span class="delito-name">Accés escales superior i executiva</span>
+          <span class="tipo info">50% promoció interna</span>
         </div>
-        <div class="delito-desc">
-          Inspector, Intendente, Intendente Mayor y Superintendente: <b>concurso-oposición libre</b>. Puede reservarse hasta el <b>50%</b> para promoción interna (mín. 2 años en categoría inmediatamente inferior).
-        </div>
-      </div>
-      <div class="divider"></div>
+        <p class="delito-desc">Inspector, Intendent, Intendent Major i Superintendent: <b>concurs-oposició lliure</b>. Pot reservar-se fins al <b>50%</b> per a promoció interna (mín. 2 anys en categoria immediatament inferior).</p>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Tribunal de oposiciones (composición 1/3 - 1/3 - 1/3)</div>
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
           <span class="art-badge">Art. 32</span>
-          <span class="tipo-badge badge-info">Tribunal</span>
+          <span class="delito-name">Tribunal d'oposicions · 1/3 · 1/3 · 1/3</span>
+          <span class="tipo key">⭐ Composició</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>1/3</b> Miembros o funcionarios de la Corporación</div>
-          <div class="celda"><b>1/3</b> Personal técnico especializado</div>
-          <div class="celda" style="grid-column: 1 / -1;"><b>1/3</b> Representantes del Departament de Governació (mínimo: 1 del ISPC + 1 de la DG de Seguridad Ciudadana)</div>
-        </div>
-      </div>
-      <div class="divider"></div>
+        <table class="norm-table">
+          <tbody>
+            <tr><td><b>1/3</b></td><td>Membres o funcionaris de la Corporació</td></tr>
+            <tr><td><b>1/3</b></td><td>Personal tècnic especialitzat</td></tr>
+            <tr><td><b>1/3</b></td><td>Representants del Departament (mín. 1 ISPC + 1 DG Seguretat Ciutadana)</td></tr>
+          </tbody>
+        </table>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Paridad de género (Disp. Ad. 8ª)</div>
-          <span class="art-badge">Disp. Ad. 8ª</span>
-          <span class="tipo-badge badge-local">Actual</span>
+      <article class="delito" style="--accent: var(--c-pink);">
+        <div class="delito-head">
+          <span class="art-badge">DA 8a</span>
+          <span class="delito-name">Paritat de gènere</span>
+          <span class="tipo info">Des d'1/1/2020</span>
         </div>
-        <div class="delito-desc">
-          Convocatorias desde <b>1/1/2020</b>: deben reservar plazas para mujeres para <b>equilibrar</b> la presencia en plantillas.
+        <p class="delito-desc">Convocatòries des d'<b>1/1/2020</b>: han de reservar places per a dones per <b>equilibrar</b> la presència en plantilles.</p>
+        <div class="pena-list">
+          <span class="pena info">🔵 Màxim · 40% de les places convocades</span>
+          <span class="pena warn">🟡 Mínim general · 25% (si &gt; 3 places)</span>
+          <span class="pena ok">✓ NO aplica si ja hi ha ≥ 33% dones al cos/escala/categoria</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Máximo: <b>40%</b> de las plazas convocadas</span>
-          <span class="pena-chip multa">🟡 Mínimo general: <b>25%</b> (si &gt; 3 plazas)</span>
-          <span class="pena-chip positivo">✓ NO aplica si ya hay ≥ <b>33%</b> de mujeres en el cuerpo/escala/categoría</span>
-        </div>
-        <div class="nota-agrav">⚠️ Condición: diferencial negativo de puntuación de la candidata seleccionada <b>no superior al 15%</b> respecto al candidato preterido.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- 9. RÉGIMEN ESTATUTARIO -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">📋</span>
-      <h2>Régimen Estatutario</h2>
-      <span class="art-ref">Arts. 34–45 · Título V</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body" style="display:none">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Derechos económicos y profesionales</div>
-          <span class="art-badge">Arts. 34–36</span>
-          <span class="tipo-badge badge-info">Derechos</span>
-        </div>
-        <div class="delito-desc">
-          Jornada, horario, vacaciones y permisos fijados por cada Entidad Local.<br>
-          Retribuciones: <b>básicas</b> (igual que el resto de funcionarios) + <b>complementarias</b> (fijadas por el Pleno).
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Incompatibilidad y Huelga</div>
-          <span class="art-badge">Arts. 37–38</span>
-          <span class="tipo-badge badge-grave">Prohibiciones</span>
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">✗ Incompatibilidad con cualquier otra actividad pública o privada</span>
-          <span class="pena-chip agravada">✗ <b>NO huelga</b> ni acciones sustitutivas</span>
-        </div>
-        <div class="nota-agrav">⚠️ El derecho sindical sí se reconoce (Disp. Ad. 1ª y Ley 9/1987, de 12 de junio).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Defensa jurídica y Seguridad e higiene</div>
-          <span class="art-badge">Arts. 41–42</span>
-          <span class="tipo-badge badge-info">Derechos</span>
-        </div>
-        <div class="delito-desc">
-          La Corporación garantiza la <b>defensa jurídica</b> en causas por actuaciones en el ejercicio de sus funciones.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip positivo">✓ Revisión médica <b>anual</b></span>
-          <span class="pena-chip positivo">✓ Prevención de enfermedades contagiosas</span>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Segunda Actividad</div>
-          <span class="art-badge">Arts. 43–44</span>
-          <span class="tipo-badge badge-local">Segunda actividad</span>
-        </div>
-        <div class="delito-desc">
-          Pase a segunda actividad por: <b>edad (nunca &lt; 57 años)</b> o <b>dictamen médico</b> de disminución de capacidad.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip positivo">✓ Preferencia: <b>mismo Cuerpo</b>, otras funciones según categoría</span>
-          <span class="pena-chip">🔵 Subsidiario: otros puestos de la Corporación</span>
-          <span class="pena-chip multa">🟡 NO supone disminución de retribuciones básicas ni del grado personal</span>
-        </div>
-        <div class="nota-clave">💡 <b>Tribunal médico (art. 44):</b> 3 médicos → 1 designado por el Ayto. + 1 por el interesado + 1 por sorteo entre facultativos del Servei Català de la Salut.</div>
-      </div>
+        <div class="nota agrav"><b>⚠️ Condició:</b> diferencial negatiu de puntuació de la candidata seleccionada <b>no superior al 15%</b> respecte al candidat preterit.</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 10. RÉGIMEN DISCIPLINARIO (destacado) -->
-  <div class="categoria">
-    <div class="cat-header disciplinario" onclick="toggle(this)">
-      <span class="cat-icon">⚠️</span>
-      <h2>Régimen Disciplinario · Faltas</h2>
-      <span class="art-ref">Arts. 46–53 · Título VI</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 9. RÈGIM ESTATUTARI ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-leyes);">
+      <span class="eyebrow">📋 9 · RÈGIM ESTATUTARI · TÍTOL V · ARTS. 34–45</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Clasificación de las Faltas</div>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
+          <span class="art-badge">Arts. 34-36</span>
+          <span class="delito-name">Drets econòmics i professionals</span>
+          <span class="tipo info">Retribucions</span>
+        </div>
+        <p class="delito-desc">Jornada, horari, vacances i permisos fixats per cada Entitat Local. Retribucions: <b>bàsiques</b> (igual que la resta de funcionaris) + <b>complementàries</b> (fixades pel Ple).</p>
+      </article>
+
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
+          <span class="art-badge">Arts. 37-38</span>
+          <span class="delito-name">Incompatibilitat i vaga</span>
+          <span class="tipo warn">⚠️ NO vaga</span>
+        </div>
+        <div class="pena-list">
+          <span class="pena danger">✗ Incompatibilitat amb qualsevol altra activitat</span>
+          <span class="pena danger">✗ NO vaga ni accions substitutives</span>
+        </div>
+        <div class="nota agrav"><b>⚠️ El dret sindical sí</b> es reconeix (DA 1a i Llei 9/1987, de 12 de juny).</div>
+      </article>
+
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
+          <span class="art-badge">Arts. 41-42</span>
+          <span class="delito-name">Defensa jurídica i seguretat i higiene</span>
+          <span class="tipo ok">✓ Garanties</span>
+        </div>
+        <p class="delito-desc">La Corporació garanteix la <b>defensa jurídica</b> en causes per actuacions en l'exercici de les seves funcions.</p>
+        <div class="pena-list">
+          <span class="pena ok">✓ Revisió mèdica anual</span>
+          <span class="pena ok">✓ Prevenció de malalties contagioses</span>
+        </div>
+      </article>
+
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
+          <span class="art-badge">Arts. 43-44</span>
+          <span class="delito-name">Segona activitat</span>
+          <span class="tipo key">⭐ Edat 57</span>
+        </div>
+        <p class="delito-desc">Pas a segona activitat per: <b>edat (mai &lt; 57 anys)</b> o <b>dictamen mèdic</b> de disminució de capacitat.</p>
+        <div class="pena-list">
+          <span class="pena ok">✓ Preferència · mateix Cos, altres funcions</span>
+          <span class="pena info">🔵 Subsidiari · altres llocs de la Corporació</span>
+          <span class="pena warn">🟡 NO disminueix retribucions bàsiques ni grau personal</span>
+        </div>
+        <div class="nota clave"><b>💡 Tribunal mèdic</b> (art. 44): 3 metges → 1 designat per l'Ajuntament + 1 per l'interessat + 1 per sorteig entre facultatius del Servei Català de la Salut.</div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══ 10. RÈGIM DISCIPLINARI · FALTES ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-red);">
+      <span class="eyebrow">⚠️ 10 · RÈGIM DISCIPLINARI · FALTES · TÍTOL VI · ARTS. 46–53</span>
+      <span class="rule"></span>
+    </div>
+    <div class="delito-grid">
+
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
           <span class="art-badge">Art. 47</span>
-          <span class="tipo-badge badge-grave">Tipología</span>
+          <span class="delito-name">Classificació de les faltes</span>
+          <span class="tipo info">3 nivells</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">🔴 Muy graves (art. 48)</span>
-          <span class="pena-chip multa">🟡 Graves (art. 49)</span>
-          <span class="pena-chip positivo">🟢 Leves (art. 50)</span>
+        <div class="pena-list">
+          <span class="pena danger">🔴 Molt greus (art. 48)</span>
+          <span class="pena warn">🟡 Greus (art. 49)</span>
+          <span class="pena ok">🟢 Lleus (art. 50)</span>
         </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">FALTAS MUY GRAVES (algunas de las 22)</div>
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
           <span class="art-badge">Art. 48</span>
-          <span class="tipo-badge badge-grave">Muy Grave</span>
+          <span class="delito-name">Faltes MOLT GREUS · selecció</span>
+          <span class="tipo warn">🔴 22 supòsits</span>
         </div>
-        <div class="delito-desc">Las más importantes:</div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Incumplir deber de fidelidad a la CE/Estatut</div>
-          <div class="celda"><b>b)</b> Discriminación por raza, sexo, orientación...</div>
-          <div class="celda"><b>d)</b> Torturas, maltratos, tratos degradantes</div>
-          <div class="celda"><b>e)</b> Conducta constitutiva de delito doloso</div>
-          <div class="celda"><b>f)</b> Prevaricación o soborno (o no denunciarlo)</div>
-          <div class="celda"><b>g)</b> Abandono del servicio</div>
-          <div class="celda"><b>h)</b> Insubordinación a mandos</div>
-          <div class="celda"><b>i)</b> Denegación de auxilio / falta de intervención</div>
-          <div class="celda"><b>j)</b> Pérdida de armas o permitir sustracción</div>
-          <div class="celda"><b>k)</b> Participar en huelgas</div>
-          <div class="celda"><b>n)</b> Incumplir incompatibilidades</div>
-          <div class="celda"><b>r)</b> Embriagarse en servicio / drogas</div>
-          <div class="celda" style="grid-column: 1 / -1;"><b>u)</b> <b>Reincidencia</b> en la comisión de faltas graves</div>
-        </div>
-      </div>
-      <div class="divider"></div>
+        <ul class="art-list">
+          <li><b>a)</b> Incomplir deure de fidelitat a la CE/Estatut.</li>
+          <li><b>b)</b> Discriminació per raça, sexe, orientació…</li>
+          <li><b>d)</b> Tortures, maltractaments, tractes degradants.</li>
+          <li><b>e)</b> Conducta constitutiva de delicte dolós.</li>
+          <li><b>f)</b> Prevaricació o suborn (o no denunciar-ho).</li>
+          <li><b>g)</b> Abandó del servei.</li>
+          <li><b>h)</b> Insubordinació a comandaments.</li>
+          <li><b>i)</b> Denegació d'auxili / falta d'intervenció.</li>
+          <li><b>j)</b> Pèrdua d'armes o permetre sostracció.</li>
+          <li><b>k)</b> Participar en vagues.</li>
+          <li><b>n)</b> Incomplir incompatibilitats.</li>
+          <li><b>r)</b> Embriagar-se en servei / drogues.</li>
+          <li><b>u)</b> <b>Reincidència</b> en la comissió de faltes greus.</li>
+        </ul>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">FALTAS GRAVES (las 16)</div>
+      <article class="delito" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 49</span>
-          <span class="tipo-badge badge-info">Grave</span>
+          <span class="delito-name">Faltes GREUS</span>
+          <span class="tipo info">🟡 16 supòsits</span>
         </div>
-        <div class="delito-desc">Las más preguntadas:</div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Desobediencia a superiores</div>
-          <div class="celda"><b>b)</b> Faltas de respeto graves</div>
-          <div class="celda"><b>d)</b> Daños graves al patrimonio de la Corp.</div>
-          <div class="celda"><b>j)</b> Consumir bebidas alcohólicas en servicio</div>
-          <div class="celda"><b>k)</b> Pérdida de credenciales</div>
-          <div class="celda"><b>l)</b> Falta de asistencia injustificada</div>
-          <div class="celda"><b>m)</b> <b>Reincidencia</b> en faltas leves</div>
-          <div class="celda"><b>n)</b> Pérdida de armas por negligencia simple</div>
-        </div>
-      </div>
-      <div class="divider"></div>
+        <ul class="art-list">
+          <li><b>a)</b> Desobediència a superiors.</li>
+          <li><b>b)</b> Faltes de respecte greus.</li>
+          <li><b>d)</b> Danys greus al patrimoni de la Corporació.</li>
+          <li><b>j)</b> Consumir begudes alcohòliques en servei.</li>
+          <li><b>k)</b> Pèrdua de credencials.</li>
+          <li><b>l)</b> Falta d'assistència injustificada.</li>
+          <li><b>m)</b> <b>Reincidència</b> en faltes lleus.</li>
+          <li><b>n)</b> Pèrdua d'armes per negligència simple.</li>
+        </ul>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">FALTAS LEVES (las 8)</div>
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
           <span class="art-badge">Art. 50</span>
-          <span class="tipo-badge badge-clave">Leve</span>
+          <span class="delito-name">Faltes LLEUS</span>
+          <span class="tipo ok">🟢 8 supòsits</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Incorrección con superiores/compañeros/ciudadanos</div>
-          <div class="celda"><b>b)</b> Demora o negligencia en cumplimiento</div>
-          <div class="celda"><b>c)</b> Descuido en presentación personal</div>
-          <div class="celda"><b>d)</b> Descuido en locales/material</div>
-          <div class="celda"><b>e)</b> Incumplir jornada de trabajo</div>
-          <div class="celda"><b>f)</b> Permuta de destino con ánimo de lucro</div>
-          <div class="celda"><b>g)</b> Prescindir del conducto reglamentario</div>
-          <div class="celda"><b>h)</b> Impuntualidad repetida en un mes</div>
-        </div>
-      </div>
-      <div class="divider"></div>
+        <ul class="art-list">
+          <li><b>a)</b> Incorrecció amb superiors/companys/ciutadans.</li>
+          <li><b>b)</b> Demora o negligència en compliment.</li>
+          <li><b>c)</b> Descuit en presentació personal.</li>
+          <li><b>d)</b> Descuit en locals/material.</li>
+          <li><b>e)</b> Incomplir jornada de treball.</li>
+          <li><b>f)</b> Permuta de destí amb ànim de lucre.</li>
+          <li><b>g)</b> Prescindir del conducte reglamentari.</li>
+          <li><b>h)</b> Impuntualitat repetida en un mes.</li>
+        </ul>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">SANCIONES (por tipo de falta)</div>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 52</span>
-          <span class="tipo-badge badge-grave">Memorizar</span>
+          <span class="delito-name">Sancions per tipus de falta</span>
+          <span class="tipo key">⭐ Taula</span>
         </div>
-        <div class="tabla-discip">
-          <div class="th">Falta</div>
-          <div class="th">Sanción</div>
-          <div class="th">Duración</div>
+        <table class="norm-table">
+          <thead><tr><th>Falta</th><th>Sanció</th><th>Durada</th></tr></thead>
+          <tbody>
+            <tr><td><b>Molt greu</b></td><td>Separació del servei <b>o</b> suspensió de funcions</td><td>&gt; 1 any i &lt; 6</td></tr>
+            <tr><td><b>Greu</b></td><td>Suspensió <b>o</b> trasllat</td><td>&gt; 15 dies i &lt; 1 any</td></tr>
+            <tr><td><b>Lleu</b></td><td>Suspensió · trasllat · deducció retrib. · amonestació</td><td>1–15 dies</td></tr>
+          </tbody>
+        </table>
+        <div class="nota agrav"><b>⚠️ La separació del servei</b> només procedeix per falta molt greu i la imposa el <b>Ple</b> (no l'Alcalde).</div>
+      </article>
 
-          <div class="td centro grave">Muy Grave</div>
-          <div class="td grave">Separación del servicio <b>o</b> suspensión de funciones</div>
-          <div class="td centro grave">&gt; 1 año y &lt; 6</div>
-
-          <div class="td centro medio">Grave</div>
-          <div class="td medio">Suspensión <b>o</b> traslado</div>
-          <div class="td centro medio">&gt; 15 días y &lt; 1 año</div>
-
-          <div class="td centro leve">Leve</div>
-          <div class="td leve">Suspensión · traslado · deducción retrib. · amonestación</div>
-          <div class="td centro leve">1–15 días</div>
-        </div>
-        <div class="nota-agrav">⚠️ La <b>separación del servicio</b> solo procede por falta muy grave y la impone el <b>Pleno</b> (no el Alcalde).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Graduación de sanciones (principio proporcionalidad)</div>
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
           <span class="art-badge">Art. 53</span>
-          <span class="tipo-badge badge-info">Criterios</span>
+          <span class="delito-name">Graduació de sancions</span>
+          <span class="tipo info">6 criteris</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Intencionalidad</div>
-          <div class="celda"><b>b)</b> Perturbación de servicios</div>
-          <div class="celda"><b>c)</b> Daños y perjuicios causados</div>
-          <div class="celda"><b>d)</b> Reincidencia</div>
-          <div class="celda"><b>e)</b> Grado de participación</div>
-          <div class="celda"><b>f)</b> Trascendencia para la seguridad pública</div>
-        </div>
-      </div>
+        <ul class="art-list">
+          <li><b>a)</b> Intencionalitat.</li>
+          <li><b>b)</b> Pertorbació de serveis.</li>
+          <li><b>c)</b> Danys i perjudicis causats.</li>
+          <li><b>d)</b> Reincidència.</li>
+          <li><b>e)</b> Grau de participació.</li>
+          <li><b>f)</b> Transcendència per a la seguretat pública.</li>
+        </ul>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 11. PROCEDIMIENTO Y PRESCRIPCIÓN -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">📅</span>
-      <h2>Procedimiento y Prescripción</h2>
-      <span class="art-ref">Arts. 54–58</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 11. PROCEDIMENT I PRESCRIPCIÓ ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-leyes);">
+      <span class="eyebrow">📅 11 · PROCEDIMENT I PRESCRIPCIÓ · ARTS. 54–58</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Competencia sancionadora</div>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
           <span class="art-badge">Art. 54</span>
-          <span class="tipo-badge badge-info">Competencias</span>
+          <span class="delito-name">Competència sancionadora</span>
+          <span class="tipo info">Alcalde / Ple</span>
         </div>
-        <div class="delito-desc">
-          <b>Alcalde</b>: incoa el expediente, nombra instructor y secretario. Impone sanciones por faltas muy graves (salvo separación), graves y leves.<br>
-          <b>Pleno</b>: impone la <b>separación del servicio</b>.
+        <ul class="art-list">
+          <li><b>·</b> <b>Alcalde:</b> incoa l'expedient, nomena instructor i secretari. Imposa sancions per faltes molt greus (excepte separació), greus i lleus.</li>
+          <li><b>·</b> <b>Ple:</b> imposa la <b>separació del servei</b>.</li>
+        </ul>
+        <div class="pena-list">
+          <span class="pena warn">⚠️ Faltes greus i molt greus · SEMPRE amb expedient</span>
+          <span class="pena ok">✓ Faltes lleus · basta audiència a l'interessat</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">⚠️ Faltas graves y muy graves: SIEMPRE con expediente</span>
-          <span class="pena-chip positivo">✓ Faltas leves: basta audiencia al interesado</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Suspensión provisional y medidas cautelares</div>
-          <span class="art-badge">Arts. 55–57</span>
-          <span class="tipo-badge badge-info">Cautelares</span>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
+          <span class="art-badge">Arts. 55-57</span>
+          <span class="delito-name">Suspensió provisional · mesures cautelars</span>
+          <span class="tipo info">⏱ Màx. 6 mesos</span>
         </div>
-        <div class="delito-desc">
-          Suspensión provisional inicial: <b>1 mes</b>, prorrogable hasta máximo <b>6 meses</b> (salvo causa imputable al expedientado o procedimiento penal).
+        <p class="delito-desc">Suspensió provisional inicial: <b>1 mes</b>, prorrogable fins a màxim <b>6 mesos</b> (excepte causa imputable a l'expedientat o procediment penal).</p>
+        <div class="pena-list">
+          <span class="pena warn">⚠️ Pèrdua de complement específic i gratificacions</span>
+          <span class="pena info">🔵 Retirada d'arma, credencial i prohibició d'uniforme</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">⚠️ Suspensión: pérdida de complemento específico y gratificaciones</span>
-          <span class="pena-chip">🔵 Retirada de arma, credencial y prohibición de uniforme</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">⏰ PRESCRIPCIÓN DE FALTAS Y SANCIONES</div>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 58</span>
-          <span class="tipo-badge badge-grave">Clave</span>
+          <span class="delito-name">Prescripció de faltes i sancions · 6·2·1</span>
+          <span class="tipo key">⏰ CLAU</span>
         </div>
-        <div class="tabla-discip">
-          <div class="th">Tipo</div>
-          <div class="th">Falta (desde comisión)</div>
-          <div class="th">Sanción (desde notif.)</div>
-
-          <div class="td centro grave">Muy Grave</div>
-          <div class="td grave centro"><b>6 años</b></div>
-          <div class="td grave centro"><b>6 años</b></div>
-
-          <div class="td centro medio">Grave</div>
-          <div class="td medio centro"><b>2 años</b></div>
-          <div class="td medio centro"><b>2 años</b></div>
-
-          <div class="td centro leve">Leve</div>
-          <div class="td leve centro"><b>1 mes</b></div>
-          <div class="td leve centro"><b>1 mes</b></div>
-        </div>
-        <div class="nota-policial">🚔 Regla mnemotécnica: <b>«6 · 2 · 1»</b> — 6 años muy graves · 2 años graves · 1 mes leves. Aplica TANTO a faltas como a sanciones.</div>
-      </div>
+        <table class="norm-table">
+          <thead><tr><th>Tipus</th><th>Falta (des comissió)</th><th>Sanció (des notif.)</th></tr></thead>
+          <tbody>
+            <tr><td>🔴 <b>Molt greu</b></td><td><b>6 anys</b></td><td><b>6 anys</b></td></tr>
+            <tr><td>🟡 <b>Greu</b></td><td><b>2 anys</b></td><td><b>2 anys</b></td></tr>
+            <tr><td>🟢 <b>Lleu</b></td><td><b>1 mes</b></td><td><b>1 mes</b></td></tr>
+          </tbody>
+        </table>
+        <div class="nota policial"><b>🚔 Regla mnemotècnica:</b> «<b>6 · 2 · 1</b>» — 6 anys molt greus · 2 anys greus · 1 mes lleus. Aplica TANT a faltes com a sancions.</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- CUADRO RECUERDA -->
-  <div class="recuerda">
-    <h3>📋 Recuerda — Claves Llei 16/1991</h3>
+  <!-- ═══ RECORDA · CLAUS OPERATIVES ═══ -->
+  <section class="recuerda">
+    <div class="r-head">
+      <span style="font-size: 22px;">📋</span>
+      <h2>RECORDA · LLEI 16/1991 · POLICIES LOCALS DE CATALUNYA</h2>
+    </div>
     <ul>
-      <li>Basada en el <b>art. 13.3 Estatut d'Autonomia</b>. Cataluña tiene competencia exclusiva en coordinación de PPLL.</li>
-      <li>La Policía Local es <b>institut armat de naturalesa civil</b> con estructura jerarquizada (art. 2).</li>
-      <li>Denominación genérica: <b>Policía Local</b>. Por tradición: Policía Municipal o <b>Guardia Urbana</b>.</li>
-      <li>Solo puede haber PL en municipios <b>&gt; 10.000 hab</b>; en &lt; 10.000 hab, con mayoría absoluta + autorización del Conseller.</li>
-      <li>Se integra en <b>Cuerpo Único</b>. Mando: Alcalde (superior) y Jefe del Cuerpo (inmediato).</li>
-      <li>Ámbito: <b>término municipal</b>. Salida solo en emergencia y con autorización previa.</li>
-      <li>Juran/prometen la <b>Constitución</b> y el <b>Estatut</b>. Son siempre <b>agentes de la autoridad</b>.</li>
-      <li>Los <b>Vigilantes</b> solo son agentes de la autoridad si: identificados + funciones art. 13 + NO hay PL en el municipio.</li>
-      <li>Art. 11: <b>13 funciones</b> (a-m). Destacan c) atestados, f) prevención (ambas con comunicación a FCSE), y añadidos propios: i) espacios públicos, k) medio ambiente, l) seguridad vial.</li>
-      <li><b>4 Escalas, 7 Categorías</b>: Superior (A1) · Ejecutiva (A2) · Intermedia (C1) · Básica (C1).</li>
-      <li>Superintendente solo en &gt; <b>200.000 hab</b>; Intendente Mayor e Intendente en &gt; <b>100.000 hab</b>.</li>
-      <li>Acceso a <b>Agente</b>: oposición/concurso-oposición libre + curso ISPC (Escuela de Policía de Cataluña).</li>
-      <li>Promoción interna: mínimo <b>2 años</b> en la categoría inmediatamente inferior + curso específico.</li>
-      <li>Tribunal de oposición: composición <b>1/3 · 1/3 · 1/3</b> (Corporación, técnicos especializados, Departament).</li>
-      <li>Segunda actividad: edad mínima <b>57 años</b> o dictamen médico. NO reduce retribuciones básicas ni grado personal.</li>
-      <li><b>Tribunal médico</b> (segunda actividad): 3 médicos → 1 Ayto. + 1 interesado + 1 sorteo Servei Català de la Salut.</li>
-      <li>Sanción de <b>separación del servicio</b>: la impone el <b>Pleno</b> (no el Alcalde).</li>
-      <li><b>Prescripción 6-2-1</b>: muy grave 6 años · grave 2 años · leve 1 mes (faltas y sanciones, igual).</li>
-      <li>Suspensión provisional: máximo <b>6 meses</b> (salvo proceso penal o dilación imputable al expedientado).</li>
-      <li>Paridad (Disp. Ad. 8ª): reserva 25%-40% mujeres desde 2020 si presencia femenina &lt; 33%.</li>
+      <li><div>Basada en l'<b>art. 13.3 EAC</b>. Catalunya té competència exclusiva en coordinació de PPLL.</div></li>
+      <li><div>La PL és <b>institut armat de naturalesa civil</b> amb estructura jerarquitzada (art. 2).</div></li>
+      <li><div>Denominació genèrica: <b>Policia Local</b>. Per tradició: Policia Municipal o <b>Guàrdia Urbana</b>.</div></li>
+      <li><div>Només pot haver-hi PL en municipis <b>&gt; 10.000 hab</b>; en &lt; 10.000 hab, amb majoria absoluta + autorització del Conseller.</div></li>
+      <li><div>S'integra en <b>Cos Únic</b>. Comandament: Alcalde (superior) i Cap del Cos (immediat).</div></li>
+      <li><div>Àmbit: <b>terme municipal</b>. Sortida només en emergència i amb autorització prèvia.</div></li>
+      <li><div>Juren/prometen la <b>Constitució</b> i l'<b>Estatut</b>. Són sempre <b>agents de l'autoritat</b>.</div></li>
+      <li><div>Els <b>Vigilants</b> només són agents de l'autoritat si: identificats + funcions art. 13 + NO hi ha PL al municipi.</div></li>
+      <li><div>Art. 11: <b>13 funcions</b> (a-m). Destaquen c) atestats, f) prevenció (ambdues amb comunicació a FCSE), i afegits propis: i) espais públics, k) medi ambient, l) seguretat viària.</div></li>
+      <li><div><b>4 escales, 7 categories:</b> Superior (A1) · Executiva (A2) · Intermèdia (C1) · Bàsica (C1).</div></li>
+      <li><div><b>Superintendent</b> només en &gt; <b>200.000 hab</b>; Intendent Major i Intendent en &gt; <b>100.000 hab</b>.</div></li>
+      <li><div>Accés a <b>Agent</b>: oposició/concurs-oposició lliure + curs ISPC (Escola de Policia de Catalunya).</div></li>
+      <li><div>Promoció interna: mínim <b>2 anys</b> en la categoria immediatament inferior + curs específic.</div></li>
+      <li><div>Tribunal d'oposició: composició <b>1/3 · 1/3 · 1/3</b> (Corporació, tècnics, Departament).</div></li>
+      <li><div>Segona activitat: edat mínima <b>57 anys</b> o dictamen mèdic. NO redueix retribucions bàsiques ni grau personal.</div></li>
+      <li><div><b>Tribunal mèdic</b> (segona activitat): 3 metges → 1 Aj. + 1 interessat + 1 sorteig Servei Català de la Salut.</div></li>
+      <li><div>Sanció de <b>separació del servei:</b> la imposa el <b>Ple</b> (no l'Alcalde).</div></li>
+      <li><div><b>Prescripció 6-2-1:</b> molt greu 6 anys · greu 2 anys · lleu 1 mes (faltes i sancions, igual).</div></li>
+      <li><div>Suspensió provisional: màxim <b>6 mesos</b> (excepte procés penal o dilació imputable a l'expedientat).</div></li>
+      <li><div>Paritat (DA 8a): reserva 25-40% dones des de 2020 si presència femenina &lt; 33%.</div></li>
     </ul>
-  </div>
+  </section>
 
-  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+  <!-- ═══ RECURSOS ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-recursos);">
+      <span class="eyebrow">📚 RECURSOS I MATERIAL D'ESTUDI</span>
+      <span class="rule"></span>
+    </div>
+    <div class="res-grid">
+      <a class="res-card" href="https://portaljuridic.gencat.cat/ca/document-del-pjur/?documentId=66617" target="_blank" rel="noopener"><span class="res-icon">📄</span><div><h4>Llei 16/1991 · DOGC</h4><p>Text consolidat · Generalitat</p></div></a>
+      <a class="res-card" href="https://www.boe.es/buscar/act.php?id=BOE-A-1991-20554" target="_blank" rel="noopener"><span class="res-icon">⚖️</span><div><h4>Llei 16/1991 · BOE</h4><p>Publicació estatal 09/08/1991</p></div></a>
+      <a class="res-card" href="https://ispc.gencat.cat/" target="_blank" rel="noopener"><span class="res-icon">🎓</span><div><h4>ISPC</h4><p>Escola de Policia de Catalunya</p></div></a>
+      <a class="res-card" href="/test/lpc-16-1991"><span class="res-icon">📝</span><div><h4>Test del tema</h4><p>Preguntes · Llei 16/1991</p></div></a>
+    </div>
+  </section>
 
 </div>
-
-<script>
-  function toggle(header) {
-    header.classList.toggle('open');
-    const body = header.nextElementSibling;
-    if (body.style.display === 'none' || body.style.display === '') {
-      body.style.display = 'block';
-      body.style.animation = 'fadeUp .3s ease';
-    } else {
-      body.style.display = 'none';
-    }
-  }
-</script>
 </body>
 </html>
