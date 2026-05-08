@@ -1,1330 +1,1084 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Codi d'Ètica Policia Catalunya · Deontologia Policial — Esquema Operatiu Policial</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Codi d'Ètica de la Policia de Catalunya — Deontologia Policial · Esquema Operatiu Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* Codi d'Ètica — fitxa rebranding 2026 (paper + ink + or institucional) */
   :root {
-    --bg-main: #0A1628;
-    --bg-section: #0E2244;
-    --gold: #C8A028;
-    --blue-royal: #1A5C96;
-    --red: #C8281E;
-    --green: #1A7A3C;
-    --text-main: #F0F4FF;
-    --text-secondary: #A8BAD4;
-    --border: #C8A028;
+    --ink: #0E0E0E;
+    --ink-2: #1c1c1c;
+    --paper: #FAF6EF;
+    --paper-2: #F2EDE3;
+    --white: #FFFFFF;
+    --terracotta: #F26B1F;
+    --terracotta-2: #D9531A;
+    --terracotta-soft: #FFE9D8;
+    --text: #0E0E0E;
+    --text-2: #4a4744;
+    --text-3: #807c77;
+    --text-4: #b3afaa;
+    --c-leyes: #E89A1C;
+    --c-operativa: #2F6BD8;
+    --c-superbuscador: #9747D6;
+    --c-alcoholemia: #E85D8C;
+    --c-recursos: #2FB66B;
+    --c-tests: #2F6BD8;
+    --c-red: #E5484D;
+    --c-pink: #E85D8C;
+    --line: rgba(14, 14, 14, 0.10);
+    --line-2: rgba(14, 14, 14, 0.06);
+    --shadow-md: 0 1px 2px rgba(14,14,14,0.04), 0 8px 24px -8px rgba(14,14,14,0.10);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
   body {
-    background-color: var(--bg-main);
-    background-image:
-      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
-    font-family: 'Source Sans 3', sans-serif;
-    color: var(--text-main);
-    padding: 20px 12px 40px;
+    background: var(--paper);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: 12px 8px 40px;
   }
+  a { color: inherit; text-decoration: none; }
 
-  .wrapper { max-width: 720px; margin: 0 auto; }
+  .wrapper { max-width: 1080px; margin: 0 auto; }
 
-  /* ── CABECERA ── */
-  .header {
-    display: flex; align-items: center; gap: 18px;
-    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
-    border: 2px solid var(--gold);
-    border-radius: 10px;
-    padding: 22px 24px;
-    margin-bottom: 8px;
-    animation: fadeUp .5s ease both;
-    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
-  }
-  .escudo svg { flex-shrink: 0; }
-  .header-text { flex: 1; }
-  .header-text .label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 10px; letter-spacing: 3px;
-    color: var(--gold); text-transform: uppercase;
-  }
-  .header-text h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 26px; font-weight: 700;
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--text-main); line-height: 1.1;
-  }
-  .header-text h1 span { color: var(--gold); }
-  .header-text .subtitle {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-top: 4px;
   }
 
-  /* ── CLASIFICACIÓN GENERAL ── */
-  .clasificacion {
+  .meta-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-3);
+  }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 32px 0 14px;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  .section-head::before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 22px;
+    background: var(--accent, var(--terracotta));
+    border-radius: 2px;
+    flex: none;
+  }
+  .section-head .eyebrow { color: var(--accent, var(--ink)); flex: none; }
+  .section-head .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+    min-width: 30px;
+  }
+
+  /* ── HERO ── */
+  .ce-hero {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: center;
+    background: linear-gradient(180deg, #FBF1D6 0%, #FAEAC1 100%);
+    border: 1px solid #E8C97A;
+    border-radius: 18px;
+    padding: 26px 30px;
+    margin-top: 8px;
+  }
+  .ce-shield { flex: none; }
+  .ce-title {
+    margin: 4px 0 6px;
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  .ce-title .accent { color: #9c7a1f; }
+  .ce-sub {
+    margin: 0;
+    color: #6b5a30;
+    font-size: 15px;
+    max-width: 760px;
+  }
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .hero-tags .tag {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #E8C97A;
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #6b5a30;
+  }
+
+  /* ── 3 PILARS ── */
+  .pillars {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px; margin-bottom: 14px;
-    animation: fadeUp .6s ease .1s both;
+    gap: 14px;
+    margin-top: 16px;
   }
-  .clas-card {
-    border-radius: 8px;
-    padding: 12px 10px;
-    text-align: center;
-    border: 1px solid rgba(200,160,40,0.3);
+  .pillar {
+    background: var(--bg);
+    border: 1px solid var(--accent);
+    border-radius: 14px;
+    padding: 18px 20px;
+    color: inherit;
+    transition: transform .12s, box-shadow .12s;
   }
-  .clas-card .icon { font-size: 22px; margin-bottom: 4px; }
-  .clas-card .tipo {
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1px;
+  .pillar:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .pill-icon { display: inline-block; font-size: 24px; margin-bottom: 6px; }
+  .pillar h3 {
+    margin: 4px 0;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.03em;
   }
-  .clas-card .pena-max {
-    font-size: 11px;
-    color: var(--text-secondary);
-    margin-top: 3px;
-  }
-  .clas-leve   { background: rgba(26,122,60,0.15); border-color: var(--green); }
-  .clas-menos  { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
-  .clas-grave  { background: rgba(200,40,30,0.15); border-color: var(--red); }
-  .clas-leve .tipo   { color: #4ACD7A; }
-  .clas-menos .tipo  { color: #6AADDC; }
-  .clas-grave .tipo  { color: #E86050; }
+  .pillar .muted { margin: 0; color: var(--text-3); font-size: 13px; font-weight: 600; }
+  .pillar .art { margin: 8px 0 4px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--ink); font-weight: 600; }
+  .pillar .desc { margin: 0; font-size: 13px; color: var(--text-2); }
 
-  /* ── BANNER INFO ── */
-  .info-banner {
-    background: linear-gradient(135deg, #12345E 0%, #1A5C96 50%, #12345E 100%);
-    border: 2px solid #6AADDC;
-    border-radius: 8px;
-    padding: 10px 18px;
-    margin-bottom: 18px;
-    display: flex; align-items: center; gap: 12px;
-    animation: fadeUp .55s ease .05s both;
-    box-shadow: 0 0 20px rgba(26,92,150,0.3);
-  }
-  .info-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
-  .info-banner .ref-text { flex: 1; }
-  .info-banner .ref-ley {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1.5px;
-    color: #D8EBFF;
-  }
-  .info-banner .ref-desc {
-    font-size: 12px;
-    color: rgba(216,235,255,0.85);
-    margin-top: 2px;
-  }
-  .info-banner .ref-fecha {
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px; font-weight: 700;
-    color: #D8EBFF;
-    background: rgba(0,0,0,0.25);
-    padding: 4px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    border: 1px solid rgba(216,235,255,0.3);
-    text-align: center;
-  }
-
-  /* ── 3 PRINCIPIOS ── */
-  .principis-box {
-    background: linear-gradient(135deg, #1A5C96 0%, #0E2244 100%);
-    border: 2px solid var(--gold);
-    border-radius: 12px;
-    padding: 18px 22px;
-    margin-bottom: 18px;
-    animation: fadeUp .6s ease .15s both;
-    box-shadow: 0 0 25px rgba(200,160,40,0.18);
-  }
-  .principis-box h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 15px; font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-    text-align: center;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-  }
-  .principis-list {
+  /* ── META STRIP ── */
+  .meta-strip {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-  .principi-item {
-    background: rgba(10,22,40,0.55);
-    border-left: 4px solid var(--gold);
-    padding: 10px 14px;
-    border-radius: 0 7px 7px 0;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .principi-num {
-    font-family: 'Oswald', sans-serif;
-    font-size: 30px; font-weight: 700;
-    color: var(--gold);
-    line-height: 1;
-    min-width: 35px;
-    text-align: center;
-  }
-  .principi-text {
-    flex: 1; font-size: 13px;
-    color: var(--text-main);
-    line-height: 1.4;
-  }
-  .principi-text b { color: #FFD060; }
-
-  /* ── BLOQUE CATEGORÍA ── */
-  .categoria {
-    background: var(--bg-section);
-    border-radius: 10px;
-    margin-bottom: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(200,160,40,0.2);
-    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
-  }
-  .categoria:nth-child(1) { animation: fadeUp .6s ease .2s both; }
-  .categoria:nth-child(2) { animation: fadeUp .6s ease .25s both; }
-  .categoria:nth-child(3) { animation: fadeUp .6s ease .3s both; }
-  .categoria:nth-child(4) { animation: fadeUp .6s ease .35s both; }
-  .categoria:nth-child(5) { animation: fadeUp .6s ease .4s both; }
-  .categoria:nth-child(6) { animation: fadeUp .6s ease .45s both; }
-  .categoria:nth-child(7) { animation: fadeUp .6s ease .5s both; }
-  .categoria:nth-child(8) { animation: fadeUp .6s ease .55s both; }
-  .categoria:nth-child(9) { animation: fadeUp .6s ease .6s both; }
-
-  .cat-header {
-    background: var(--blue-royal);
-    padding: 12px 18px;
-    display: flex; align-items: center; gap: 12px;
-    cursor: pointer; user-select: none;
-    transition: background .2s;
-  }
-  .cat-header:hover { background: #1e6db0; }
-  .cat-header .cat-icon { font-size: 20px; }
-  .cat-header h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px; font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px; flex: 1;
-  }
-  .cat-header .art-ref {
-    font-size: 11px;
-    color: rgba(240,244,255,0.65);
-    white-space: nowrap;
-  }
-  .cat-header .toggle {
-    font-size: 14px;
-    transition: transform .3s;
-    color: var(--gold);
-  }
-  .cat-header.open .toggle { transform: rotate(180deg); }
-
-  .cat-body { padding: 6px 0; }
-
-  /* ── ARTÍCULO ── */
-  .delito {
-    border-left: 3px solid var(--gold);
-    margin: 8px 14px;
-    background: rgba(10,22,40,0.5);
-    border-radius: 0 7px 7px 0;
-    padding: 10px 14px;
-  }
-  .delito-top {
-    display: flex; align-items: flex-start;
-    gap: 8px; flex-wrap: wrap;
-  }
-  .delito-nombre {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14.5px; font-weight: 600;
-    color: var(--text-main);
-    flex: 1; min-width: 160px;
-  }
-  .art-badge {
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif; font-weight: 700;
-    background: rgba(200,160,40,0.15);
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    padding: 2px 7px;
-    border-radius: 4px;
-    white-space: nowrap;
-  }
-  .tipo-badge {
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif; font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-  }
-  .badge-clave    { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
-  .badge-info     { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
-  .badge-grave    { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
-  .badge-local    { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
-
-  /* ── CHAPA RÁPIDA ── */
-  .multa-badge {
-    font-size: 11px;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    background: var(--gold);
-    color: #0A1628;
-    padding: 3px 10px;
-    border-radius: 4px;
-    border: 1px solid var(--gold);
-    letter-spacing: 0.4px;
-    white-space: nowrap;
-    box-shadow: 0 1px 3px rgba(200,160,40,0.25);
-    display: inline-flex;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
     align-items: center;
-    gap: 3px;
+    background: #EAF1FE;
+    border: 1px solid #b9d0f6;
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-top: 14px;
   }
-  .multa-badge.multa-alta {
-    background: var(--red);
-    color: #FFEBE8;
-    border-color: var(--red);
-    box-shadow: 0 1px 3px rgba(200,40,30,0.3);
+  .meta-strip p { margin: 4px 0 0; color: #1f3f7a; font-size: 14px; }
+  .vigente {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6px 14px;
+    background: white;
+    border: 1px solid #b9d0f6;
+    border-radius: 10px;
   }
-  .multa-badge.multa-organ {
-    background: var(--blue-royal);
-    color: #E0F0FF;
-    border-color: var(--blue-royal);
-  }
-  .multa-badge.multa-ok {
-    background: var(--green);
-    color: #E0FFF0;
-    border-color: var(--green);
-  }
+  .vigente .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); }
+  .vigente .state { font-weight: 800; color: #2F6BD8; }
 
-  .delito-desc {
-    font-size: 12.5px;
-    color: var(--text-secondary);
-    margin-top: 5px;
-    line-height: 1.5;
-  }
-  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
-
-  .pena-row {
-    display: flex; flex-wrap: wrap;
-    gap: 6px; margin-top: 7px;
-  }
-  .pena-chip {
-    font-size: 11px;
-    background: rgba(26,92,150,0.25);
-    border: 1px solid rgba(26,92,150,0.6);
-    color: var(--text-main);
-    padding: 3px 9px;
-    border-radius: 20px;
-    display: flex; align-items: center; gap: 4px;
-  }
-  .pena-chip.positivo {
-    background: rgba(26,122,60,0.25);
-    border-color: rgba(26,122,60,0.6);
-  }
-  .pena-chip.agravada {
-    background: rgba(200,40,30,0.2);
-    border-color: rgba(200,40,30,0.5);
-  }
-
-  /* ── MINI TABLA ── */
-  .mini-tabla {
+  /* ── 3 PRINCIPIS ── */
+  .prin3-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    margin-top: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 4px;
   }
-  .mini-tabla .celda {
-    background: rgba(10,22,40,0.6);
-    border: 1px solid rgba(200,160,40,0.2);
-    border-radius: 5px;
-    padding: 6px 9px;
-    font-size: 11.5px;
+  .prin3 {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    border-left: 3px solid var(--accent);
   }
-  .mini-tabla .celda b {
-    color: var(--gold);
-    font-family: 'Oswald', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 2px;
+  .prin-n {
+    display: inline-block;
+    font-size: 28px;
+    color: var(--accent);
+    font-weight: 800;
+    line-height: 1;
   }
+  .prin3 h4 {
+    margin: 8px 0 6px;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    color: var(--accent);
+  }
+  .prin3 p { margin: 0; font-size: 13.5px; color: var(--text-2); line-height: 1.55; }
 
-  /* ── TABLA ── */
-  .tabla-discip {
-    display: grid;
-    grid-template-columns: 1.2fr 2fr;
-    gap: 0;
+  /* ── ACCORDION ── */
+  .acc {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
     margin-top: 8px;
-    background: rgba(10,22,40,0.7);
-    border: 1px solid rgba(200,160,40,0.3);
-    border-radius: 5px;
     overflow: hidden;
-    font-size: 11.5px;
   }
-  .tabla-discip .td-header {
-    background: rgba(200,160,40,0.15);
-    color: var(--gold);
-    font-family: 'Oswald', sans-serif;
-    font-size: 9.5px;
+  .acc[open] { border-color: rgba(14, 14, 14, 0.18); }
+  .acc summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 14px;
+    align-items: center;
+  }
+  .acc summary::-webkit-details-marker { display: none; }
+  .acc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 1px;
+    background: var(--ink);
+    color: var(--white);
+    padding: 4px 9px;
+    border-radius: 6px;
+    letter-spacing: 0.04em;
+  }
+  .acc-title { font-size: 15.5px; font-weight: 800; letter-spacing: -0.01em; }
+  .acc-arts { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-3); }
+  .acc-arrow { color: var(--text-3); transition: transform .2s; font-size: 12px; }
+  .acc[open] .acc-arrow { transform: rotate(180deg); }
+  .acc-body {
+    padding: 14px 18px 16px;
+    border-top: 1px solid var(--line-2);
+  }
+
+  /* Norm tables */
+  .norm-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 4px;
+    font-size: 13.5px;
+  }
+  .norm-table th {
+    text-align: left;
+    padding: 8px 10px;
+    background: var(--paper-2);
+    font-weight: 800;
+    color: var(--ink);
+    font-size: 12px;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    padding: 4px 8px;
-    text-align: center;
-    border-right: 1px solid rgba(200,160,40,0.2);
-    border-bottom: 1px solid rgba(200,160,40,0.2);
   }
-  .tabla-discip .td-header:last-child { border-right: none; }
-  .tabla-discip .td-cell {
-    padding: 5px 8px;
-    color: var(--text-main);
-    border-right: 1px solid rgba(200,160,40,0.1);
-    border-bottom: 1px solid rgba(200,160,40,0.1);
+  .norm-table td {
+    padding: 8px 10px;
+    border-top: 1px solid var(--line-2);
+    color: var(--text-2);
+    vertical-align: top;
   }
-  .tabla-discip .td-cell:last-child { border-right: none; }
-  .tabla-discip .td-pob {
-    color: var(--gold);
-    font-family: 'Oswald', sans-serif;
+  .norm-table b { color: var(--ink); font-family: 'Plus Jakarta Sans'; }
+
+  /* art-list */
+  .art-list {
+    margin: 8px 0 0;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
+    color: var(--text-2);
+  }
+  .art-list b {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink);
+    margin-right: 8px;
+    font-weight: 700;
+  }
+  .art-list.compact { font-size: 13.5px; }
+
+  /* LO 5 card */
+  .lo5-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 24px;
+    border-left: 4px solid #2F6BD8;
+  }
+  .lo5-card header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .lo5-card header h3 { margin: 0; font-size: 18px; font-weight: 800; }
+  .lo5-card h5 {
+    margin: 14px 0 6px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #2F6BD8;
+    padding: 6px 10px;
+    background: #EAF1FE;
+    border-radius: 8px;
+    display: inline-block;
+    letter-spacing: 0.02em;
+  }
+  .lo5-card h5.hl-yellow-bg {
+    color: #9c7a1f;
+    background: #FFF6E8;
+    border: 1px solid #f3d6a0;
+  }
+  .art-p { margin: 4px 0 0; font-size: 14px; color: var(--text-2); }
+  .art-p b { color: var(--ink); font-weight: 700; }
+  .lo5-foot {
+    background: #FFF4EC;
+    border: 1px solid #f5c19a;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-top: 14px;
+  }
+  .lo5-foot p { margin: 4px 0 0; font-size: 13px; color: var(--text-2); }
+  .lo5-foot p b { color: var(--terracotta); }
+
+  /* keywords */
+  .kw-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 10px 0;
+  }
+  .kw {
+    background: var(--paper-2);
+    color: var(--text-2);
+    border: 1px solid var(--line-2);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12.5px;
     font-weight: 600;
   }
 
-  /* ── NOTAS ── */
-  .nota-agrav {
-    margin-top: 6px; font-size: 11.5px;
-    color: #E08888;
-    background: rgba(200,40,30,0.08);
-    border-left: 2px solid var(--red);
-    padding: 5px 9px;
-    border-radius: 0 4px 4px 0;
-    line-height: 1.5;
+  /* Force / detención / víctimes / disc cards */
+  .force-card, .det-card, .vic-card, .disc-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-top: 10px;
   }
-  .nota-agrav b { color: #FF8070; }
-  .nota-policial {
-    margin-top: 6px; font-size: 11.5px;
-    color: #A8D4C0;
-    background: rgba(26,122,60,0.1);
-    border-left: 2px solid var(--green);
-    padding: 5px 9px;
-    border-radius: 0 4px 4px 0;
-    line-height: 1.5;
+  .force-card { border-left: 3px solid #2FB66B; }
+  .force-card.warn { border-left-color: #E89A1C; background: #FFF6E8; }
+  .force-card.kill { border-left-color: #E5484D; background: #FFEFEC; }
+  .force-card header,
+  .det-card header,
+  .vic-card header,
+  .disc-card header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 8px;
   }
-  .nota-policial b { color: #4ACD7A; }
-  .nota-clave {
-    margin-top: 6px; font-size: 11.5px;
-    color: #E8D890;
-    background: rgba(200,160,40,0.1);
-    border-left: 2px solid var(--gold);
-    padding: 5px 9px;
-    border-radius: 0 4px 4px 0;
-    line-height: 1.5;
+  .force-card h4,
+  .det-card h4,
+  .vic-card h4,
+  .disc-card h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.015em;
   }
-  .nota-clave b { color: #FFD060; }
+  .force-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.04em;
+    background: #DFF7E9;
+    color: #14532d;
+  }
+  .force-tag.warn { background: #FFF6E8; color: #9c7a1f; }
+  .force-tag.kill { background: rgba(229, 72, 77, 0.14); color: #991b1b; }
 
-  /* ── RECUERDA ── */
-  .recuerda {
-    background: var(--gold);
+  .det-card { border-left: 3px solid #9747D6; }
+  .det-card.warn { border-left-color: #E89A1C; background: #FFF6E8; }
+  .det-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.04em;
+    background: #F5E9FF;
+    color: #5b21b6;
+  }
+  .det-tag.warn { background: #FFF6E8; color: #9c7a1f; }
+  .det-tag.kill { background: #FFEFEC; color: #991b1b; }
+
+  .vic-card { border-left: 3px solid #E85D8C; }
+  .vic-card.warn { border-left-color: #E89A1C; background: #FFF6E8; }
+  .vic-card p { font-size: 14px; color: var(--text-2); margin-top: 6px; }
+  .vic-card p b { color: var(--ink); }
+
+  .disc-card { border-left: 3px solid #E5484D; }
+  .disc-card.warn { border-left-color: #E89A1C; background: #FFF6E8; }
+  .disc-card.kill { border-left-color: #E5484D; background: #FFEFEC; }
+  .disc-card p { font-size: 14px; color: var(--text-2); margin-top: 4px; }
+  .disc-card p b { color: var(--ink); }
+
+  /* CEPC */
+  .cepc-box {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 22px;
+    border-left: 3px solid #9c7a1f;
+  }
+  .cepc-box h5 {
+    margin: 14px 0 6px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #9c7a1f;
+    letter-spacing: 0.02em;
+  }
+  .cepc-box p { margin: 0; color: var(--text-2); font-size: 14px; }
+  .cepc-box b { color: var(--ink); }
+
+  /* Decàleg */
+  .decaleg-box {
+    background: linear-gradient(180deg, #FFF6E8 0%, #FBE5B5 100%);
+    border: 1px solid #f3d6a0;
+    border-radius: 18px;
+    padding: 22px 26px;
+    margin-top: 28px;
+  }
+  .decaleg-box header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .decaleg-box .rule { flex: 1; height: 1px; background: #f3d6a0; }
+  .decalist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 16px;
+  }
+  .decalist li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(156, 122, 31, 0.18);
+  }
+  .decalist .decn {
+    font-size: 22px;
+    font-weight: 800;
+    color: #9c7a1f;
+    line-height: 1;
+    min-width: 28px;
+  }
+  .decalist strong { color: var(--ink); }
+  .decalist div { font-size: 13.5px; color: #6b5a30; line-height: 1.5; }
+
+  /* Recursos */
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .res-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: center;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: inherit;
+    transition: background .12s, border-color .12s;
+  }
+  .res-card:hover {
+    background: var(--paper-2);
+    border-color: rgba(14, 14, 14, 0.16);
+  }
+  .res-card .res-icon {
+    width: 36px;
+    height: 36px;
     border-radius: 10px;
-    padding: 20px 22px;
-    margin-top: 6px;
-    animation: fadeUp .6s ease .8s both;
+    background: var(--paper-2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex: none;
   }
-  .recuerda h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px; font-weight: 700;
-    text-transform: uppercase;
-    color: #0A1628;
-    margin-bottom: 12px;
-    letter-spacing: 2px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .recuerda ul { list-style: none; }
-  .recuerda ul li {
-    font-size: 13px;
-    color: #0A1628;
-    padding: 5px 0;
-    display: flex; align-items: flex-start; gap: 6px;
-    border-bottom: 1px solid rgba(10,22,40,0.15);
-    line-height: 1.4;
-  }
-  .recuerda ul li:last-child { border-bottom: none; }
-  .recuerda ul li::before {
-    content: "▶";
-    font-size: 9px; margin-top: 4px;
-    flex-shrink: 0;
-  }
+  .res-card h4 { margin: 0; font-size: 14px; font-weight: 700; }
+  .res-card p { margin: 2px 0 0; font-size: 12.5px; color: var(--text-2); }
 
-  /* ── BOTÓN IMPRIMIR ── */
-  .btn-print {
-    display: block; width: 100%;
-    margin-top: 20px;
-    padding: 14px;
-    background: var(--blue-royal);
-    border: 2px solid var(--gold);
-    color: var(--text-main);
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 2px;
-    border-radius: 8px;
-    cursor: pointer; transition: all .2s;
-    animation: fadeUp .6s ease .9s both;
-  }
-  .btn-print:hover {
-    background: var(--gold);
-    color: #0A1628;
-  }
-
-  /* ── DIVISOR ── */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin: 4px 14px 2px;
-    opacity: .35;
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 500px) {
-    .clasificacion { grid-template-columns: 1fr; }
-    .header-text h1 { font-size: 22px; }
-    .cat-header h2 { font-size: 14px; }
-    .multa-badge { font-size: 10.5px; padding: 2px 7px; }
-    .tabla-discip { grid-template-columns: 1fr 1.5fr; }
-    .principi-num { font-size: 24px; min-width: 28px; }
-  }
-
-  @media print {
-    body { background: white; color: black; }
-    .btn-print { display: none; }
-    .categoria { break-inside: avoid; }
-    .cat-body { display: block !important; }
+  @media (max-width: 980px) {
+    .pillars, .prin3-grid { grid-template-columns: 1fr; }
+    .meta-strip { grid-template-columns: 1fr; }
+    .res-grid { grid-template-columns: repeat(2, 1fr); }
+    .decalist { grid-template-columns: 1fr; }
+    .ce-hero { grid-template-columns: 1fr; text-align: center; }
+    .ce-shield { margin: 0 auto; }
+    .ce-title { font-size: 28px; }
+    .acc summary { grid-template-columns: auto 1fr auto; }
+    .acc-arts { display: none; }
   }
 </style>
 </head>
-<body>
+<body data-fitxa-style="rebrand-2026">
 <div class="wrapper">
 
-  <!-- CABECERA -->
-  <div class="header">
-    <div class="escudo">
-      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
-        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
-        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICIA</text>
-        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
-        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
-        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
-        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
-        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
-        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+  <!-- ═══ HERO ═══ -->
+  <header class="ce-hero">
+    <div class="ce-shield">
+      <svg width="80" height="92" viewBox="0 0 80 92" fill="none">
+        <path d="M40 4 L74 13 V42 C74 62 60 78 40 88 C20 78 6 62 6 42 V13 Z" fill="#1f2a44" stroke="#E89A1C" stroke-width="2"/>
+        <text x="40" y="32" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="9" fill="#E89A1C" letter-spacing="1">POLICIA</text>
+        <text x="40" y="46" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="13" fill="#fff">⚖</text>
+        <text x="40" y="62" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#E89A1C" letter-spacing="1">DEONTOLOGIA</text>
+        <text x="40" y="76" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#E89A1C" letter-spacing="1">2015</text>
       </svg>
     </div>
-    <div class="header-text">
-      <div class="label">Esquema Operatiu Policial</div>
-      <h1>Codi d'<span>Ètica</span> · Deontologia</h1>
-      <div class="subtitle">Acord GOV/25/2015 · Codi Europeu Rec(2001)10 · LO 2/1986 art. 5 FCSE · Principis i deures policials</div>
-    </div>
-  </div>
-
-  <!-- CLASIFICACIÓN -->
-  <div class="clasificacion">
-    <div class="clas-card clas-leve">
-      <div class="icon">🌍</div>
-      <div class="tipo">Internacional</div>
-      <div class="pena-max">DUDH 1948<br>CEDH 1950<br>ONU + Rec(2001)10 Consell Europa</div>
-    </div>
-    <div class="clas-card clas-menos">
-      <div class="icon">🇪🇸</div>
-      <div class="tipo">Estatal</div>
-      <div class="pena-max">CE 1978<br>LO 2/1986 art. 5<br>Principis bàsics FCSE</div>
-    </div>
-    <div class="clas-card clas-grave">
-      <div class="icon">🏛️</div>
-      <div class="tipo">Catalunya</div>
-      <div class="pena-max">Acord GOV/25/2015<br>Llei 16/1991 PL<br>Decret 222/2013 Comitè Ètica</div>
-    </div>
-  </div>
-
-  <!-- BANNER INFO -->
-  <div class="info-banner">
-    <div class="ref-icon">📘</div>
-    <div class="ref-text">
-      <div class="ref-ley">📘 Acord GOV/25/2015, de 24 de febrer · DOGC 6819, 26/02/2015</div>
-      <div class="ref-desc">Aprova el Codi d'Ètica de la Policia de Catalunya · Aplicable a Mossos d'Esquadra + totes les Policies Locals · Eina pedagògica i inspiradora · Elaborat pel Comitè d'Ètica (CEPC, Decret 222/2013)</div>
-    </div>
-    <div class="ref-fecha">CEPC<br>2015</div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       3 PRINCIPIS FONAMENTALS
-  ══════════════════════════════════════════ -->
-  <div class="principis-box">
-    <h3>⚖️ Els 3 Principis Fonamentals del Codi</h3>
-    <div class="principis-list">
-      <div class="principi-item">
-        <div class="principi-num">①</div>
-        <div class="principi-text"><b>Garantir els drets i les llibertats</b> de totes les persones (sense discriminació)</div>
-      </div>
-      <div class="principi-item">
-        <div class="principi-num">②</div>
-        <div class="principi-text">Actuar amb <b>integritat, proporcionalitat, congruència i oportunitat</b></div>
-      </div>
-      <div class="principi-item">
-        <div class="principi-num">③</div>
-        <div class="principi-text">Actuar amb <b>absoluta neutralitat política i imparcialitat</b></div>
+    <div>
+      <div class="eyebrow" style="color:#9c7a1f;">ESQUEMA OPERATIU POLICIAL</div>
+      <h1 class="ce-title">CODI D'ÈTICA · <span class="accent">DEONTOLOGIA</span></h1>
+      <p class="ce-sub">Codi d'Ètica de la Policia de Catalunya · Acord GOV/25/2015 de 24 de febrer · Aprovat pel Govern de la Generalitat. Aplicable a Mossos d'Esquadra i Policies Locals.</p>
+      <div class="hero-tags">
+        <span class="tag">📘 4 títols</span>
+        <span class="tag">📚 ~50 articles</span>
+        <span class="tag">⚖️ Acord GOV/25/2015</span>
+        <span class="tag">🏛️ DOGC 26-02-2015</span>
+        <span class="tag">🌍 Codi Europeu d'Ètica · Rec(2001)10</span>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- ══════════════════════════════════════════
-       1. MARC NORMATIU INTERNACIONAL
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🌍</span>
-      <h2>Marc Normatiu Internacional</h2>
-      <span class="art-ref">Fonaments</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 3 PILARS · MARCS NORMATIUS ═══ -->
+  <section class="pillars">
+    <a class="pillar" style="--accent:#2FB66B; --bg:#E8F7EE;" href="#marc-internacional">
+      <span class="pill-icon">🌍</span>
+      <h3>INTERNACIONAL</h3>
+      <p class="muted">DUDH · PIDCP · CEDH</p>
+      <p class="art">Codi Europeu d'Ètica</p>
+      <p class="desc">Recomanació (2001) 10 · Consell d'Europa.</p>
+    </a>
+    <a class="pillar" style="--accent:#2F6BD8; --bg:#EAF1FE;" href="#lo-2-1986">
+      <span class="pill-icon">🇪🇸</span>
+      <h3>CE · ESTATAL</h3>
+      <p class="muted">CE 1978 + LO 2/1986</p>
+      <p class="art">Art. 5 LOFCS</p>
+      <p class="desc">Principis bàsics d'actuació FCS.</p>
+    </a>
+    <a class="pillar" style="--accent:#E89A1C; --bg:#FFF6E8;" href="#estructura">
+      <span class="pill-icon">🏛️</span>
+      <h3>CATALUNYA</h3>
+      <p class="muted">EAC + Llei 10/1994</p>
+      <p class="art">Acord GOV/25/2015</p>
+      <p class="desc">Codi d'Ètica de la Policia de Catalunya.</p>
+    </a>
+  </section>
+
+  <!-- ═══ META STRIP ═══ -->
+  <section class="meta-strip">
+    <div>
+      <div class="eyebrow" style="color:#2F6BD8;">📘 ACORD GOV/25/2015 · DE 24 DE FEBRER · DOGC 26-02-2015</div>
+      <p>Aprovació pel Govern de la Generalitat de Catalunya · Codi d'Ètica de la Policia de Catalunya · Disposicions integrades: Constitució Espanyola · Estatut · LO 2/1986 (FCSE) · Llei 10/1994 (PG-ME) · Llei 16/1991 (PL).</p>
     </div>
-    <div class="cat-body" style="display:none">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Declaracions Fonamentals sobre Drets Humans</div>
-          <span class="art-badge">ONU · Consell d'Europa</span>
-          <span class="tipo-badge badge-info">Fonament</span>
-          <span class="multa-badge multa-ok">🌍 Drets Humans</span>
-        </div>
-        <div class="delito-desc">
-          Textos internacionals que fonamenten la deontologia policial:
-        </div>
-        <div class="tabla-discip">
-          <div class="td-header">Norma</div>
-          <div class="td-header">Contingut</div>
-          <div class="td-cell td-pob">DUDH (1948)</div>
-          <div class="td-cell">Declaració Universal de Drets Humans · ONU · Dignitat + igualtat</div>
-          <div class="td-cell td-pob">CEDH (1950)</div>
-          <div class="td-cell">Conveni Europeu de Drets Humans · Tribunal de Strasbourg (TEDH)</div>
-          <div class="td-cell td-pob">Res. 34/169 ONU (1979)</div>
-          <div class="td-cell">Codi de Conducta per a funcionaris encarregats de fer complir la llei</div>
-          <div class="td-cell td-pob">Res. 690 CE (1979)</div>
-          <div class="td-cell">Declaració sobre la Policia de l'Assemblea Parlamentària</div>
-          <div class="td-cell td-pob">Carta de Rotterdam (1996)</div>
-          <div class="td-cell">Policia en societat multiètnica · No discriminació · Inclusió</div>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Codi Europeu d'Ètica de la Policia</div>
-          <span class="art-badge">Rec(2001)10</span>
-          <span class="tipo-badge badge-grave">⭐ CLAU</span>
-          <span class="multa-badge multa-alta">🇪🇺 Inspiració Codi Cat.</span>
-        </div>
-        <div class="delito-desc">
-          <b>Recomanació Rec(2001)10</b> del Comitè de Ministres del Consell d'Europa, de <b>19 de setembre de 2001</b>. Es la principal inspiració del Codi català. Recomana que els Estats membres basin la seva legislació, pràctiques internes i codis de conducta en els principis que recull aquest Codi europeu.
-        </div>
-        <div class="nota-policial">🚔 A Catalunya es va aplicar inicialment per a Mossos via la <b>Resolució INT/1828/2004</b>, de 14 de juny, abans de l'aprovació del Codi d'Ètica propi de 2015.</div>
-      </div>
-
+    <div class="vigente">
+      <span class="when">26/02/2015</span>
+      <span class="state">Vigent</span>
     </div>
-  </div>
+  </section>
 
-  <!-- ══════════════════════════════════════════
-       2. LO 2/1986 ART. 5 FCSE · PRINCIPIS BÀSICS
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">🚔</span>
-      <h2>LO 2/1986 Art. 5 · Principis Bàsics FCSE</h2>
-      <span class="art-ref">Aplicable a PL per remissió</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 3 PRINCIPIS FONAMENTALS ═══ -->
+  <section id="principis-fund">
+    <div class="section-head" style="--accent:#9c7a1f;">
+      <span class="eyebrow">⭐ ELS 3 PRINCIPIS FONAMENTALS DEL CODI</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Els 6 Principis Bàsics d'Actuació</div>
-          <span class="art-badge">Art. 5 LO 2/1986</span>
-          <span class="tipo-badge badge-grave">⭐⭐ CLAU PL</span>
-          <span class="multa-badge multa-alta">🚔 Base deontològica</span>
-        </div>
-        <div class="delito-desc">
-          L'<b>art. 5 LO 2/1986</b> estableix els principis bàsics d'actuació de les FCS, <b>aplicables a les Policies Locals</b> per remissió expressa (Llei 16/1991 art. 11 · Art. 104 CE):
-        </div>
-        <div class="tabla-discip">
-          <div class="td-header">Principi</div>
-          <div class="td-header">Contingut operatiu</div>
-          <div class="td-cell td-pob">① Adequació a l'ordenament</div>
-          <div class="td-cell">Submissió a la CE i lleis · Actuar amb absoluta <b>neutralitat política i imparcialitat</b> · Integritat i dignitat · Oposar-se a la corrupció · Subjecció a la <b>jerarquia i subordinació</b></div>
-          <div class="td-cell td-pob">② Relacions amb la comunitat</div>
-          <div class="td-cell">Impedir pràctiques abusives, arbitràries o discriminatòries · Correcció i tracte amb cura · Informació completa i precisa a la ciutadania · <b>Únicament força estrictament necessària</b> · <b>Congruència, oportunitat i proporcionalitat</b> en els mitjans · Armes només en risc greu imminent</div>
-          <div class="td-cell td-pob">③ Tractament de detinguts</div>
-          <div class="td-cell">Vetllar per la <b>vida i integritat</b> dels detinguts · Respecte a l'honor i dignitat · Complir estrictament les formalitats, terminis i requisits de les lleis processals</div>
-          <div class="td-cell td-pob">④ Dedicació professional</div>
-          <div class="td-cell">Exercir les funcions amb <b>total dedicació</b> · Intervenir sempre, sense necessitat d'estar de servei, en defensa de la llei i de la seguretat ciutadana</div>
-          <div class="td-cell td-pob">⑤ Secret professional</div>
-          <div class="td-cell">Guardar rigorós <b>secret professional</b> sobre informacions · No divulgar dades obtingudes (excepte obligació legal de col·laborar amb Justícia)</div>
-          <div class="td-cell td-pob">⑥ Responsabilitat</div>
-          <div class="td-cell">Els membres de les FCS són <b>responsables personal i directament</b> pels actes en la seva actuació professional, incorrent en ells en responsabilitat disciplinària (sens perjudici de la civil i penal)</div>
-        </div>
-        <div class="nota-policial">🚔 Aquests 6 principis són <b>directament exigibles</b> a tot policia local de Catalunya · El seu incompliment constitueix <b>falta disciplinària</b> (Llei 16/1991 + RD 884/1989 regulador del règim disciplinari) i pot comportar responsabilitat <b>penal</b> (CP arts. 404-406 prevaricació · 174-176 tortura · 529 bis detenció il·legal).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Triple Criteri d'Ús de la Força</div>
-          <span class="art-badge">Art. 5.2.c LO 2/1986</span>
-          <span class="tipo-badge badge-grave">⭐ CLAU operatiu</span>
-          <span class="multa-badge multa-alta">🛡️ OCP + mínima</span>
-        </div>
-        <div class="delito-desc">
-          Tres criteris acumulatius que han de regir tota intervenció amb ús de la força:
-        </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>Oportunitat</b>QUAN · Si és realment necessari intervenir · Situació que exigeix actuar</div>
-          <div class="celda"><b>Congruència</b>QUÈ · Mitjà adequat al fi · Correspondència amb la situació</div>
-          <div class="celda"><b>Proporcionalitat</b>COM · Intensitat ajustada al resultat · Mínima força imprescindible</div>
-          <div class="celda"><b>Principi mínima intervenció</b>Esgotar prèviament mediació i diàleg · Armes només en risc greu imminent</div>
-        </div>
-        <div class="nota-clave">💡 Per recordar: <b>O-C-P</b> = Oportunitat, Congruència, Proporcionalitat · Els 3 criteris s'han de complir <b>simultàniament</b>. Si en falta un, l'actuació pot ser irregular.</div>
-      </div>
-
+    <div class="prin3-grid">
+      <article class="prin3" style="--accent:#2F6BD8;">
+        <span class="prin-n">①</span>
+        <h4>Servei a les persones i a la societat democràtica</h4>
+        <p>La policia està al servei dels ciutadans · garantia dels drets · respecte als principis democràtics i de l'Estat de Dret.</p>
+      </article>
+      <article class="prin3" style="--accent:#E89A1C;">
+        <span class="prin-n">②</span>
+        <h4>Integritat, proporcionalitat, congruència i oportunitat</h4>
+        <p>L'actuació policial s'ajusta sempre a aquests principis: idoneïtat, necessitat i proporcionalitat estricta.</p>
+      </article>
+      <article class="prin3" style="--accent:#2FB66B;">
+        <span class="prin-n">③</span>
+        <h4>Professionalitat policial i transparència</h4>
+        <p>Formació contínua, neutralitat, retiment de comptes i submissió al control ciutadà i institucional.</p>
+      </article>
     </div>
-  </div>
+  </section>
 
-  <!-- ══════════════════════════════════════════
-       3. ESTRUCTURA DEL CODI D'ÈTICA CAT.
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">📐</span>
-      <h2>Estructura del Codi d'Ètica · Acord GOV/25/2015</h2>
-      <span class="art-ref">Preàmbul + 5 Títols</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ MARC NORMATIU INTERNACIONAL ═══ -->
+  <section id="marc-internacional">
+    <div class="section-head" style="--accent:#2FB66B;">
+      <span class="eyebrow">🌍 MARC NORMATIU INTERNACIONAL</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Finalitats del Codi</div>
-          <span class="art-badge">Preàmbul</span>
-          <span class="tipo-badge badge-info">Objectius</span>
-          <span class="multa-badge multa-ok">📋 6 finalitats</span>
-        </div>
-        <div class="delito-desc">
-          Finalitats expresses del Codi d'Ètica:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip positivo">① Enunciar principis d'actuació policial</span>
-          <span class="pena-chip positivo">② Enunciar drets, deures i normes ètiques</span>
-          <span class="pena-chip positivo">③ Contribuir a la seguretat jurídica dels agents</span>
-          <span class="pena-chip positivo">④ Fer accessibles les normes a la ciutadania</span>
-          <span class="pena-chip positivo">⑤ Promoure bones pràctiques i judici ètic</span>
-          <span class="pena-chip positivo">⑥ Reforçar la dimensió ètica en l'organització</span>
-        </div>
-        <div class="nota-clave">💡 El Codi NO té caràcter sancionador · És una eina <b>pedagògica i inspiradora</b> · No substitueix el règim disciplinari (Llei 16/1991 + RD 884/1989), però orienta la interpretació dels deures i el judici ètic.</div>
+    <details class="acc" open>
+      <summary>
+        <span class="acc-num">DDHH</span>
+        <span class="acc-title">Declaracions fonamentals sobre Drets Humans</span>
+        <span class="acc-arts">5 instruments · marc universal</span>
+        <span class="acc-arrow">▾</span>
+      </summary>
+      <div class="acc-body">
+        <table class="norm-table">
+          <thead><tr><th>Instrument</th><th>Any</th><th>Objecte</th></tr></thead>
+          <tbody>
+            <tr><td><b>DUDH</b> Declaració Universal dels Drets Humans</td><td>1948</td><td>Fonament universal · drets civils i polítics</td></tr>
+            <tr><td><b>PIDCP</b> Pacte Internacional Drets Civils i Polítics</td><td>1966</td><td>Vinculant · obligacions dels Estats</td></tr>
+            <tr><td><b>CEDH</b> Conveni Europeu de Drets Humans</td><td>1950</td><td>TEDH · jurisprudència vinculant</td></tr>
+            <tr><td><b>Conveni contra la Tortura ONU</b></td><td>1984</td><td>Prohibició absoluta · sense excepcions</td></tr>
+            <tr><td><b>Codi de Conducta · funcionaris encarregats d'aplicar la Llei (ONU)</b></td><td>1979</td><td>Resolució 34/169 · 8 articles</td></tr>
+            <tr><td><b>Principis bàsics sobre l'ús de la força i armes de foc (ONU)</b></td><td>1990</td><td>Congrés de l'Havana · 26 principis</td></tr>
+          </tbody>
+        </table>
       </div>
-      <div class="divider"></div>
+    </details>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Estructura Completa</div>
-          <span class="art-badge">Annex Acord</span>
-          <span class="tipo-badge badge-local">Estructura</span>
-          <span class="multa-badge">📋 5 Títols</span>
-        </div>
-        <div class="delito-desc">
-          El Codi es composa d'un <b>Preàmbul + 5 Títols</b>:
-        </div>
-        <div class="tabla-discip">
-          <div class="td-header">Títol</div>
-          <div class="td-header">Contingut</div>
-          <div class="td-cell td-pob">Títol I</div>
-          <div class="td-cell"><b>Principis, valors i competències</b> (5 àmbits: Funció pública · Professió · Orientació a les persones · Relacions institucionals · Entorn)</div>
-          <div class="td-cell td-pob">Títol II</div>
-          <div class="td-cell"><b>Una professió al servei de les persones</b> (Funcions, drets i deures · Drets i llibertats · Atenció a grups vulnerables)</div>
-          <div class="td-cell td-pob">Títol III</div>
-          <div class="td-cell"><b>Cossos policials · Principis rectors</b> (Relacions entre membres · Autoritats polítiques · Cooperació entre cossos)</div>
-          <div class="td-cell td-pob">Títol IV</div>
-          <div class="td-cell"><b>Actuació de la Policia · Àmbits d'aplicació</b> (Resolució conflictes i ús força · Investigació, detenció i privació llibertat · Víctimes i testimonis · Formació)</div>
-          <div class="td-cell td-pob">Títol V</div>
-          <div class="td-cell"><b>Policia i Administració de Justícia</b> + <b>Gestió de la informació</b></div>
-        </div>
+    <details class="acc" open>
+      <summary>
+        <span class="acc-num">EU</span>
+        <span class="acc-title">Codi Europeu d'Ètica de la Policia</span>
+        <span class="acc-arts">Rec(2001)10 · Consell d'Europa</span>
+        <span class="acc-arrow">▾</span>
+      </summary>
+      <div class="acc-body">
+        <p style="font-size:14px; color:var(--text-2);">Recomanació adoptada pel <b>Comitè de Ministres</b> del Consell d'Europa el <b>19 de setembre de 2001</b> (Rec(2001)10). És la principal inspiració del Codi català. Marca el codi de conducta de tots els cossos policials europeus.</p>
+        <ul class="art-list compact">
+          <li><b>I</b> Objectius de la policia: pau pública, prevenció, detecció del crim, assistència i serveis al públic.</li>
+          <li><b>II</b> Bases jurídiques · sotmesa a la llei i l'Estat de Dret.</li>
+          <li><b>III</b> La policia i el sistema de justícia penal · independència.</li>
+          <li><b>IV</b> Organització · estructures civils, professionalitat, transparència.</li>
+          <li><b>V</b> Principis d'actuació · proporcionalitat, no discriminació, no tortura.</li>
+          <li><b>VI</b> Responsabilitat i control · interns, judicials, externs i parlamentaris.</li>
+        </ul>
       </div>
-      <div class="divider"></div>
+    </details>
+  </section>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Àmbit d'Aplicació</div>
-          <span class="art-badge">Acord GOV/25/2015</span>
-          <span class="tipo-badge badge-info">Destinataris</span>
-          <span class="multa-badge multa-organ">🚔 PG-ME + PL + Vigilants</span>
-        </div>
-        <div class="delito-desc">
-          El Codi s'aplica a:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🚔 Policia de la Generalitat-Mossos d'Esquadra</span>
-          <span class="pena-chip">🚓 Totes les Policies Locals de Catalunya</span>
-          <span class="pena-chip">🛡️ Policia Aranesa</span>
-          <span class="pena-chip">👷 Vigilants municipals (com a referència)</span>
-          <span class="pena-chip">🏛️ Autoritats polítiques i administratives del sistema de seguretat</span>
-        </div>
-        <div class="nota-policial">🚔 Les PL poden <b>aprovar els seus propis codis deontològics</b> en el marc de les seves competències i del sistema de seguretat pública de Catalunya, sempre respectant els mínims del Codi català.</div>
-      </div>
-
+  <!-- ═══ LO 2/1986 · ART. 5 ═══ -->
+  <section id="lo-2-1986">
+    <div class="section-head" style="--accent:#2F6BD8;">
+      <span class="eyebrow">⚖️ LO 2/1986 · ART. 5 · PRINCIPIS BÀSICS FCSE</span>
+      <span class="rule"></span>
     </div>
-  </div>
 
-  <!-- ══════════════════════════════════════════
-       4. TÍTOL I · VALORS I COMPETÈNCIES (5 ÀMBITS)
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">💎</span>
-      <h2>Títol I · Principis, Valors i Competències</h2>
-      <span class="art-ref">5 àmbits clau</span>
-      <span class="toggle">▼</span>
+    <article class="lo5-card">
+      <header>
+        <span class="acc-num" style="background:#2F6BD8;">Art. 5 LOFCS</span>
+        <h3>Principi Bàsic d'Actuació</h3>
+        <span class="meta-mono">Aplicable a tota la PL i Cossos de Seguretat de l'Estat</span>
+      </header>
+
+      <h5>1. Adequació a l'ordenament jurídic</h5>
+      <ul class="art-list compact">
+        <li><b>a)</b> Exercir la funció amb absolut respecte a la <b>Constitució</b> i la resta de l'ordenament jurídic.</li>
+        <li><b>b)</b> Actuar amb absoluta <b>neutralitat política i imparcialitat</b>, sense discriminació per raça, religió o opinió.</li>
+        <li><b>c)</b> Actuar amb <b>integritat i dignitat</b>; oposició a qualsevol acte de corrupció.</li>
+        <li><b>d)</b> Submissió a la <b>jerarquia i subordinació</b>, sense que pugui empara ordres delictives.</li>
+        <li><b>e)</b> Col·laborar amb l'Administració de Justícia i auxili.</li>
+      </ul>
+
+      <h5>2. Relacions amb la comunitat</h5>
+      <ul class="art-list compact">
+        <li><b>a)</b> Impedir prevenció de pràctiques abusives, arbitràries o discriminatòries que comportin violència física o moral.</li>
+        <li><b>b)</b> Observar tracte <b>correcte i respectuós</b> en relacions amb els ciutadans · oferir informació, ajuda i protecció.</li>
+        <li><b>c)</b> En l'exercici de les funcions, actuar amb la <b>decisió necessària</b> · respondre amb la diligència que les circumstàncies requereixin.</li>
+        <li><b>d)</b> Solament utilitzaran les armes en situacions de risc racionalment greu per a la vida o integritat física.</li>
+      </ul>
+
+      <h5 class="hl-yellow-bg">3. Tractament de detinguts</h5>
+      <ul class="art-list compact">
+        <li><b>a)</b> S'identificaran degudament com a tals en el moment d'efectuar una <b>detenció</b>.</li>
+        <li><b>b)</b> Vetllaran per la vida i integritat física dels detinguts · respectaran l'honor i la dignitat de la persona.</li>
+        <li><b>c)</b> Donaran compliment a totes les obligacions: informar de manera immediata, comprensible, dels drets i raons de la detenció.</li>
+      </ul>
+
+      <h5>4. Dedicació professional</h5>
+      <p class="art-p">Els membres de les FCS hauran de dur a terme les seves funcions amb <b>total dedicació</b>, intervenint sempre, en qualsevol temps i lloc, en defensa de la llei i de la seguretat ciutadana.</p>
+
+      <h5>5. Secret professional</h5>
+      <p class="art-p">Hauran de guardar <b>rigorosa reserva</b> sobre totes les informacions que coneguin per raó del càrrec o tasques.</p>
+
+      <h5>6. Responsabilitat</h5>
+      <p class="art-p">Són <b>responsables personalment i directament</b> dels actes que en la seva actuació professional duguin a terme, infringint o vulnerant les normes legals, així com les reglamentàries.</p>
+
+      <div class="lo5-foot">
+        <span class="meta-mono">Recordatori</span>
+        <p>Tot l'art. 5 LOFCS ha estat <b>plenament integrat al Codi d'Ètica de Catalunya</b> com a marc estatal vinculant.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- ═══ ESTRUCTURA DEL CODI ═══ -->
+  <section id="estructura">
+    <div class="section-head" style="--accent:#E89A1C;">
+      <span class="eyebrow">📚 ESTRUCTURA DEL CODI D'ÈTICA · ACORD GOV/25/2015</span>
+      <span class="rule"></span>
+      <span class="meta-mono">Preàmbul + 4 títols + DOC complement.</span>
     </div>
-    <div class="cat-body" style="display:none">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">A · Funció Pública</div>
-          <span class="art-badge">Tít. I.A</span>
-          <span class="tipo-badge badge-info">Servei públic</span>
-          <span class="multa-badge multa-ok">🏛️ Vocació + transparència</span>
-        </div>
-        <div class="delito-desc">
-          <b>Vocació de servei</b> dels agents com a servidors públics i <b>transparència</b>, que rau a facilitar l'accés a la informació d'interès per a la defensa dels drets i llibertats de les persones. El deure de transparència no obsta preservar informacions d'interès general fins que sigui oportú fer-les públiques.
-        </div>
+    <details class="acc" open>
+      <summary>
+        <span class="acc-num">FIN</span>
+        <span class="acc-title">Finalitats del Codi</span>
+        <span class="acc-arts">Preàmbul · 4 objectius</span>
+        <span class="acc-arrow">▾</span>
+      </summary>
+      <div class="acc-body">
+        <ul class="art-list compact">
+          <li><b>1.</b> Establir un <b>marc deontològic comú</b> per a tots els cossos policials de Catalunya.</li>
+          <li><b>2.</b> <b>Reforçar la legitimitat</b> social i institucional de la policia.</li>
+          <li><b>3.</b> Servir com a <b>referent en la formació</b> bàsica i continuada.</li>
+          <li><b>4.</b> Servir com a <b>guia interpretativa</b> per a la disciplina i la inspecció.</li>
+        </ul>
       </div>
-      <div class="divider"></div>
+    </details>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">B · Professió</div>
-          <span class="art-badge">Tít. I.B</span>
-          <span class="tipo-badge badge-info">Professionalitat</span>
-          <span class="multa-badge multa-ok">📚 Formació + competència</span>
-        </div>
-        <div class="delito-desc">
-          Valors professionals de la Policia de Catalunya:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip positivo">Professionalitat</span>
-          <span class="pena-chip positivo">Formació contínua</span>
-          <span class="pena-chip positivo">Competència tècnica</span>
-          <span class="pena-chip positivo">Autoexigència</span>
-          <span class="pena-chip positivo">Innovació</span>
-        </div>
+    <details class="acc" open>
+      <summary>
+        <span class="acc-num">EST</span>
+        <span class="acc-title">Estructura completa</span>
+        <span class="acc-arts">Preàmbul + 4 títols</span>
+        <span class="acc-arrow">▾</span>
+      </summary>
+      <div class="acc-body">
+        <table class="norm-table">
+          <thead><tr><th>Títol</th><th>Objecte</th><th>Articles aprox.</th></tr></thead>
+          <tbody>
+            <tr><td><b>PRE</b> Preàmbul</td><td>Finalitat, valors, marc normatiu, principis fonamentals</td><td>—</td></tr>
+            <tr><td><b>I</b> Principis, valors i competències</td><td>Funció pública, patrimoni ètic, orientació a les persones, relacions institucionals, competència transversal, sociolaboral i ambiental</td><td>≈ 12 art.</td></tr>
+            <tr><td><b>II</b> Drets i deures dels professionals</td><td>Drets laborals, condicions, formació, salut, conciliació, perfeccionament</td><td>≈ 8 art.</td></tr>
+            <tr><td><b>III</b> Ús de la força i resolució de conflictes</td><td>Mediació, congruència, ús d'armes de foc, prohibició de tortura, escales en l'ús de la força</td><td>≈ 10 art.</td></tr>
+            <tr><td><b>IV</b> Detenció i privació de llibertat</td><td>Drets del detingut, investigació, custòdia, identificacions, registres</td><td>≈ 12 art.</td></tr>
+            <tr><td><b>DA</b> Disposicions complementàries</td><td>CEPC, règim disciplinari, mecanismes d'aplicació</td><td>—</td></tr>
+          </tbody>
+        </table>
       </div>
-      <div class="divider"></div>
+    </details>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">C · Orientació a les Persones</div>
-          <span class="art-badge">Tít. I.C</span>
-          <span class="tipo-badge badge-grave">⭐ CLAU</span>
-          <span class="multa-badge multa-alta">👤 Centrat persones</span>
-        </div>
-        <div class="delito-desc">
-          Principis operatius fonamentals:
-        </div>
-        <div class="tabla-discip">
-          <div class="td-header">Valor</div>
-          <div class="td-header">Contingut</div>
-          <div class="td-cell td-pob">Respecte drets/llibertats</div>
-          <div class="td-cell">Vetllar per llibertat de pensament, expressió, creences, associació i moviment</div>
-          <div class="td-cell td-pob">Seguretat</div>
-          <div class="td-cell">La seguretat de les persones és un <b>valor prioritari</b></div>
-          <div class="td-cell td-pob">Imparcialitat</div>
-          <div class="td-cell">Evitar qualsevol discriminació per raó de raça, sexe, edat, religió, ideologia, orientació sexual, etc.</div>
-          <div class="td-cell td-pob">Respecte</div>
-          <div class="td-cell">Actitud amable, empàtica i respectuosa amb tothom</div>
-          <div class="td-cell td-pob">Integritat</div>
-          <div class="td-cell">Refusar qualsevol acte de corrupció, soborn o favor</div>
-        </div>
+    <details class="acc">
+      <summary>
+        <span class="acc-num">APP</span>
+        <span class="acc-title">Comitè d'aplicació · CEPC</span>
+        <span class="acc-arts">Òrgan de seguiment</span>
+        <span class="acc-arrow">▾</span>
+      </summary>
+      <div class="acc-body">
+        <p style="font-size:14px; color:var(--text-2);">El <b>Comitè d'Ètica de la Policia de Catalunya (CEPC)</b> és l'òrgan responsable de vetllar per l'aplicació del Codi, emetre informes i recomanacions, i resoldre consultes. Composició mixta (Generalitat + sindicats + universitat + societat civil).</p>
       </div>
-      <div class="divider"></div>
+    </details>
+  </section>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">D · Relacions Institucionals</div>
-          <span class="art-badge">Tít. I.D</span>
-          <span class="tipo-badge badge-info">Cooperació</span>
-          <span class="multa-badge multa-organ">🤝 Pertinença + cooperació</span>
-        </div>
-        <div class="delito-desc">
-          <b>Sentiment de pertinença:</b> lleialtat i compromís amb la institució. <b>Cooperació</b>: amb altres cossos policials. Ajudar-se mútuament per defensar l'interès general i els drets i llibertats.
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">E · Entorn · Sensibilitat Social i Ambiental</div>
-          <span class="art-badge">Tít. I.E</span>
-          <span class="tipo-badge badge-info">Sensibilitat</span>
-          <span class="multa-badge multa-ok">🌱 Entorns vulnerables</span>
-        </div>
-        <div class="delito-desc">
-          Atenció a entorns socialment i econòmicament vulnerables. <b>Preservació del medi</b> i respecte a la biodiversitat. Bones pràctiques en la gestió dels residus i en l'aprofitament i ús racional dels recursos naturals.
-        </div>
-      </div>
-
+  <!-- ═══ TÍTOL I · PRINCIPIS, VALORS I COMPETÈNCIES ═══ -->
+  <section id="titol-1">
+    <div class="section-head" style="--accent:#2F6BD8;">
+      <span class="eyebrow">🌟 TÍTOL I · PRINCIPIS, VALORS I COMPETÈNCIES</span>
+      <span class="rule"></span>
     </div>
-  </div>
 
-  <!-- ══════════════════════════════════════════
-       5. TÍTOL IV · ÚS DE LA FORÇA
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">🛡️</span>
-      <h2>Títol IV · Ús de la Força i Resolució de Conflictes</h2>
-      <span class="art-ref">Àmbit IV.A</span>
-      <span class="toggle">▼</span>
+    <details class="acc" open>
+      <summary>
+        <span class="acc-num">A</span>
+        <span class="acc-title">Funció Pública</span>
+        <span class="acc-arts">T. I · Cap. A</span>
+        <span class="acc-arrow">▾</span>
+      </summary>
+      <div class="acc-body">
+        <p style="font-size:14px; color:var(--text-2);">Vocació de servei per garantir la convivència i la seguretat. La <b>policia és una institució civil de servei públic</b>, no un cos militar; la finalitat és servir a la ciutadania i les institucions democràtiques.</p>
+        <div class="kw-row">
+          <span class="kw">servei públic</span><span class="kw">vocació</span><span class="kw">civilisme</span><span class="kw">institució democràtica</span>
+        </div>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>
+        <span class="acc-num">B</span>
+        <span class="acc-title">Patrimoni</span>
+        <span class="acc-arts">Patrimoni ètic professional</span>
+        <span class="acc-arrow">▾</span>
+      </summary>
+      <div class="acc-body">
+        <p style="font-size:14px; color:var(--text-2);">Integritat, honradesa, responsabilitat. Custòdia del patrimoni de l'organització i exemplaritat fora de servei.</p>
+        <div class="kw-row">
+          <span class="kw">integritat</span><span class="kw">honradesa</span><span class="kw">responsabilitat</span><span class="kw">exemplaritat</span>
+        </div>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>
+        <span class="acc-num">C</span>
+        <span class="acc-title">Orientació a les Persones</span>
+        <span class="acc-arts">Tracte amb la ciutadania</span>
+        <span class="acc-arrow">▾</span>
+      </summary>
+      <div class="acc-body">
+        <table class="norm-table">
+          <tbody>
+            <tr><td><b>Empatia</b></td><td>Comprendre i acollir les emocions, sense jutjar.</td></tr>
+            <tr><td><b>Apoderament</b></td><td>Reconèixer la persona com a subjecte actiu de la relació.</td></tr>
+            <tr><td><b>Confidencialitat</b></td><td>Reserva sobre les dades personals i situacions íntimes.</td></tr>
+            <tr><td><b>Imparcialitat</b></td><td>Tracte igual per a tothom, sense discriminació.</td></tr>
+            <tr><td><b>Integritat</b></td><td>Coherència entre paraula, acció i deure.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>
+        <span class="acc-num">D</span>
+        <span class="acc-title">Relacions Institucionals</span>
+        <span class="acc-arts">Cooperació · respecte</span>
+        <span class="acc-arrow">▾</span>
+      </summary>
+      <div class="acc-body">
+        <p style="font-size:14px; color:var(--text-2);">Lleialtat institucional · respecte mutu entre cossos · cooperació amb la Generalitat, ens locals, FCSE i autoritat judicial. Coordinació via <b>Junta Local de Seguretat (JLS)</b>.</p>
+        <div class="kw-row">
+          <span class="kw">lleialtat</span><span class="kw">cooperació</span><span class="kw">respecte mutu</span>
+        </div>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>
+        <span class="acc-num">E</span>
+        <span class="acc-title">Transversal · Sociolaboral i Ambiental</span>
+        <span class="acc-arts">Competència transversal</span>
+        <span class="acc-arrow">▾</span>
+      </summary>
+      <div class="acc-body">
+        <p style="font-size:14px; color:var(--text-2);">Coherència interna en l'organització policial: respecte per la diversitat, no discriminació entre companys, prevenció d'assetjament, sostenibilitat ambiental en l'activitat policial.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ═══ TÍTOL III · ÚS DE LA FORÇA ═══ -->
+  <section id="titol-3">
+    <div class="section-head" style="--accent:#E5484D;">
+      <span class="eyebrow">🛡️ TÍTOL III · ÚS DE LA FORÇA I RESOLUCIÓ DE CONFLICTES</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Prioritat: Mediació i Diàleg</div>
-          <span class="art-badge">Tít. IV.A</span>
-          <span class="tipo-badge badge-grave">⭐⭐ CLAU</span>
-          <span class="multa-badge multa-alta">🕊️ Mediació PRIMER</span>
-        </div>
-        <div class="delito-desc">
-          La Policia de Catalunya ha d'intentar resoldre les situacions de conflicte a través de:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip positivo">① Mediació</span>
-          <span class="pena-chip positivo">② Diàleg</span>
-          <span class="pena-chip positivo">③ Altres mètodes no coercitius</span>
-          <span class="pena-chip positivo">④ Comunicació empàtica</span>
-          <span class="pena-chip positivo">⑤ Dissuasió</span>
-          <span class="pena-chip agravada">Només si s'esgoten → força</span>
-        </div>
-        <div class="nota-policial">🚔 La força és <b>l'últim recurs</b>. Primer: presència + verbalització + persuasió + negociació. Només quan aquests mecanismes s'han exhaurit o no són possibles, s'utilitzarà la força <b>estrictament necessària</b> amb els <b>instruments menys lesius</b>.</div>
+    <article class="force-card">
+      <header><span class="force-tag">PRIORITAT</span><h4>Mediació · Diàleg</h4></header>
+      <p style="font-size:14px; color:var(--text-2); margin-top:6px;">La policia ha de cercar sempre primer la <b style="color:var(--ink);">resolució dialogada del conflicte</b>. La força és l'<b style="color:var(--ink);">últim recurs</b>. Pretensió continuada de resoldre la situació mitjançant el diàleg, l'autoritat moral, l'avís i, només quan és imprescindible, la coacció.</p>
+      <div class="kw-row">
+        <span class="kw">presència</span><span class="kw">verbalització</span><span class="kw">control físic</span><span class="kw">mitjans de defensa</span><span class="kw">arma de foc</span>
       </div>
-      <div class="divider"></div>
+    </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Principis de l'Ús de la Força</div>
-          <span class="art-badge">Tít. IV.A + LO 2/1986</span>
-          <span class="tipo-badge badge-grave">⭐⭐ CLAU</span>
-          <span class="multa-badge multa-alta">🛡️ O · C · P</span>
-        </div>
-        <div class="delito-desc">
-          Quan l'ús de la força sigui inevitable, haurà de respectar <b>sempre</b> els 3 principis:
-        </div>
-        <div class="tabla-discip">
-          <div class="td-header">Principi</div>
-          <div class="td-header">Pregunta operativa</div>
-          <div class="td-cell td-pob">Oportunitat</div>
-          <div class="td-cell">¿És NECESSARI intervenir amb força ara mateix? ¿S'han esgotat alternatives?</div>
-          <div class="td-cell td-pob">Congruència</div>
-          <div class="td-cell">¿El MITJÀ emprat (presència/verbalització/defensa/arma) s'ajusta a la situació?</div>
-          <div class="td-cell td-pob">Proporcionalitat</div>
-          <div class="td-cell">¿La INTENSITAT/DURADA està ajustada al fi legítim? ¿És la mínima imprescindible?</div>
-        </div>
+    <article class="force-card warn">
+      <header><span class="force-tag warn">PRINCIPIS · TS 18-04-2008</span><h4>Principis de l'ús de la força</h4></header>
+      <table class="norm-table">
+        <tbody>
+          <tr><td><b>Congruència</b></td><td>L'actuació respon a una situació jurídica habilitada (legalitat).</td></tr>
+          <tr><td><b>Oportunitat</b></td><td>El moment, lloc i forma són adequats; ponderar conseqüències.</td></tr>
+          <tr><td><b>Proporcionalitat</b></td><td>Mitjà mínim necessari per a l'objectiu; gradació; cessar quan cessa la resistència.</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <article class="force-card kill">
+      <header><span class="force-tag kill">PROHIBICIÓ ABSOLUTA · ART. 15 CE</span><h4>Tortura i tractes degradants</h4></header>
+      <p style="font-size:14px; color:var(--text-2); margin-top:6px;">Sota cap circumstància, ni en estats d'excepció, es pot aplicar tortura, tracte inhumà, cruel o degradant. La <b style="color:var(--ink);">desobediència davant ordres amb aquest contingut és un deure</b>.</p>
+      <div class="kw-row">
+        <span class="kw">tortura</span><span class="kw">tracte degradant</span><span class="kw">aïllament abusiu</span><span class="kw">violència sexual</span>
       </div>
-      <div class="divider"></div>
+    </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Prohibició de Tortura i Tractes Degradants</div>
-          <span class="art-badge">Art. 15 CE + Tít. IV</span>
-          <span class="tipo-badge badge-grave">⚠️ Absolut</span>
-          <span class="multa-badge multa-alta">🚫 MAI</span>
-        </div>
-        <div class="delito-desc">
-          La Policia <b>NO pot en cap circumstància</b>:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">🚫 Tortura</span>
-          <span class="pena-chip agravada">🚫 Tractes inhumans</span>
-          <span class="pena-chip agravada">🚫 Tractes degradants</span>
-          <span class="pena-chip agravada">🚫 Coacció física injustificada</span>
-          <span class="pena-chip agravada">🚫 Humiliació</span>
-          <span class="pena-chip agravada">🚫 Amenaces intimidatòries</span>
-        </div>
-        <div class="nota-agrav">⚠️ Límit <b>ABSOLUT i INDEROGABLE</b> · Ni en estat d'excepció pot justificar-se · <b>Art. 15 CE</b> + <b>art. 3 CEDH</b> + <b>CP arts. 174-176</b> tortura + <b>CP art. 173</b> tractes degradants. La negativa a obeir ordres contràries no és insubordinació.</div>
-      </div>
-      <div class="divider"></div>
+    <article class="force-card warn">
+      <header><span class="force-tag warn">ÚS DE LES ARMES DE FOC</span><h4>Arma de foc · darrer recurs</h4></header>
+      <ul class="art-list compact">
+        <li><b>·</b> Només davant <b>perill greu, imminent i irreparable</b> per a la vida o integritat pròpia o aliena.</li>
+        <li><b>·</b> Avís previ identificant-se com a policia («ALTO! POLICIA!»).</li>
+        <li><b>·</b> Disparar evitant víctimes col·laterals i lesions innecessàries.</li>
+        <li><b>·</b> Comunicar immediatament l'incident · informe escrit.</li>
+        <li><b>·</b> Assistència sanitària immediata.</li>
+      </ul>
+    </article>
+  </section>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Ús de les Armes de Foc</div>
-          <span class="art-badge">Tít. IV.A + Decret 219/1996</span>
-          <span class="tipo-badge badge-grave">⭐ Risc greu</span>
-          <span class="multa-badge multa-alta">🔫 Último recurs</span>
-        </div>
-        <div class="delito-desc">
-          L'ús de l'arma de foc està sotmès a <b>criteris estrictíssims</b>: només quan existeixi un <b>risc racionalment greu</b> per a la vida o la integritat física de l'agent o de tercers, o per evitar un <b>dany greu, immediat i irreparable</b>. Ha de ser <b>congruent, oportú i proporcional</b>.
-        </div>
-        <div class="nota-policial">🚔 Avís reglamentari: sempre que sigui possible, precedir el dispar d'<b>avís verbal</b> + <b>dispar d'alerta a l'aire</b> (excepte impossibilitat). El dispar es dirigirà a zones no vitals quan sigui possible neutralitzar sense letalitat.</div>
-      </div>
-
+  <!-- ═══ TÍTOL IV · DETENCIÓ ═══ -->
+  <section id="titol-4">
+    <div class="section-head" style="--accent:#9747D6;">
+      <span class="eyebrow">🔒 TÍTOL IV · DETENCIÓ I PRIVACIÓ DE LLIBERTAT</span>
+      <span class="rule"></span>
     </div>
-  </div>
 
-  <!-- ══════════════════════════════════════════
-       6. TÍTOL IV · DETENCIÓ I PRIVACIÓ DE LLIBERTAT
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">⛓️</span>
-      <h2>Títol IV · Detenció i Privació de Llibertat</h2>
-      <span class="art-ref">Àmbit IV.B</span>
-      <span class="toggle">▼</span>
+    <article class="det-card">
+      <header><span class="det-tag">DRETS · ART. 17 CE · 520 LECrim</span><h4>Drets durant la detenció</h4></header>
+      <ul class="art-list compact">
+        <li><b>·</b> Informació immediata, comprensible, dels <b>drets i raons</b> de la detenció.</li>
+        <li><b>·</b> Dret a guardar silenci · a no declarar contra si mateix · a no confessar-se culpable.</li>
+        <li><b>·</b> Dret a designar advocat · entrevista reservada.</li>
+        <li><b>·</b> Dret a comunicar la detenció a un familiar · a intèrpret · a metge.</li>
+        <li><b>·</b> Termini màxim <b>72 h</b> · després ha de ser posat a disposició judicial o alliberat.</li>
+        <li><b>·</b> Habeas corpus (LO 6/1984).</li>
+      </ul>
+    </article>
+
+    <article class="det-card warn">
+      <header><span class="det-tag warn">INVESTIGACIÓ · CONFIDENCIALITAT</span><h4>Investigació policial</h4></header>
+      <p style="font-size:14px; color:var(--text-2); margin-top:6px;">Tot interrogatori s'ha de fer amb <b style="color:var(--ink);">respecte per la dignitat i la intimitat</b>. <b style="color:var(--ink);">Prohibició</b> d'usar tècniques que puguin alterar la lliure voluntat o memòria. La presumpció d'innocència regeix totes les actuacions.</p>
+    </article>
+
+    <article class="det-card">
+      <header><span class="det-tag">CUSTÒDIA · TRACTE</span><h4>Custòdia · drets bàsics</h4></header>
+      <ul class="art-list compact">
+        <li><b>·</b> Vetllar per la <b>integritat física i moral</b> del detingut.</li>
+        <li><b>·</b> Alimentació, condicions higièniques, descans suficient.</li>
+        <li><b>·</b> Assistència sanitària sempre que sigui necessària.</li>
+        <li><b>·</b> Registre videogràfic · accés a registre per part de l'advocat i l'autoritat judicial.</li>
+        <li><b>·</b> No exhibició pública del detingut · respecte a la imatge i la presumpció d'innocència.</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- ═══ ATENCIÓ A VÍCTIMES ═══ -->
+  <section id="victimes">
+    <div class="section-head" style="--accent:#E85D8C;">
+      <span class="eyebrow">💙 ATENCIÓ A VÍCTIMES, TESTIMONIS I GRUPS VULNERABLES</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Deures Durant la Detenció</div>
-          <span class="art-badge">Tít. IV.B</span>
-          <span class="tipo-badge badge-grave">⭐⭐ CLAU PL</span>
-          <span class="multa-badge multa-alta">⛓️ Art. 17 CE + LECrim</span>
-        </div>
-        <div class="delito-desc">
-          En tota detenció/privació de llibertat, la Policia haurà de:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">① Mantenir presumpció d'innocència</span>
-          <span class="pena-chip agravada">② Informació immediata de drets</span>
-          <span class="pena-chip agravada">③ Motius de la detenció</span>
-          <span class="pena-chip agravada">④ Garantir assistència jurídica</span>
-          <span class="pena-chip agravada">⑤ Tutela judicial efectiva</span>
-          <span class="pena-chip agravada">⑥ Intèrpret si escau</span>
-          <span class="pena-chip agravada">⑦ Habeas corpus</span>
-          <span class="pena-chip agravada">⑧ Màx. 72 h</span>
-        </div>
-        <div class="nota-clave">💡 Conexió normativa: <b>Art. 17 CE</b> + <b>LECrim arts. 489-527</b> + <b>LO 6/1984 Habeas Corpus</b> + <b>Directiva 2012/13/UE</b> (dret a informació en procediments penals) + <b>Directiva 2013/48/UE</b> (assistència lletrada).</div>
+    <article class="vic-card">
+      <header><span class="det-tag" style="background:#FFE9F0; color:#a01e54;">L 4/2015</span><h4>Atenció integral a les víctimes</h4></header>
+      <div class="kw-row">
+        <span class="kw">acolliment</span><span class="kw">informació de drets</span><span class="kw">protecció</span><span class="kw">no revictimització</span><span class="kw">acompanyament</span>
       </div>
-      <div class="divider"></div>
+      <p>Aplicació de la <b>Llei 4/2015 de l'Estatut de la víctima del delicte</b> i de la Llei 5/2008 (catalana) sobre violència masclista. La PL és sovint <b>el primer intervinent</b> en VG/VD; obligació d'avaluar el risc, oferir <b>recursos socials</b> i tramitar l'ordre de protecció.</p>
+    </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Investigació · Confidencialitat</div>
-          <span class="art-badge">Tít. IV.B</span>
-          <span class="tipo-badge badge-info">Secret</span>
-          <span class="multa-badge multa-organ">🔒 Confidencial</span>
-        </div>
-        <div class="delito-desc">
-          Durant la investigació: <b>respectar els drets i llibertats</b> · Mantenir la <b>presumpció d'innocència</b> dels investigats · <b>Investigació confidencial</b> · Informar de les raons de la investigació quan procedeixi · Conservar la integritat de les proves.
-        </div>
-        <div class="nota-agrav">⚠️ Filtracions periodístiques sobre persones investigades = violació del <b>secret professional</b> (art. 5.5 LO 2/1986) + possible <b>delicte de revelació de secrets</b> (CP art. 417).</div>
+    <article class="vic-card warn">
+      <header><span class="det-tag warn">VULNERABLES</span><h4>Grups vulnerables · atenció especial</h4></header>
+      <div class="kw-row">
+        <span class="kw">menors</span><span class="kw">gent gran</span><span class="kw">discapacitats</span><span class="kw">sensesostre</span><span class="kw">LGBTI+</span><span class="kw">migrants</span>
       </div>
-      <div class="divider"></div>
+      <p>Atenció especial: protocols específics, intèrpret si cal, espais segurs, derivació a serveis socials i sanitaris, formació contínua del personal.</p>
+    </article>
+  </section>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Custòdia i Trasllats</div>
-          <span class="art-badge">Tít. IV.B</span>
-          <span class="tipo-badge badge-info">Garanties</span>
-          <span class="multa-badge">🚓 Integritat física</span>
-        </div>
-        <div class="delito-desc">
-          Durant la <b>custòdia policial</b>: vetllar per la integritat física i dignitat del detingut · Atenció mèdica si es sol·licita o s'aprecia necessària · <b>Escorcollar només amb garanties de dignitat</b> (mateix sexe sempre que sigui possible, en lloc reservat) · Permetre comunicació amb família/advocat segons LECrim · Avís consolar per estrangers.
-        </div>
-        <div class="nota-policial">🚔 Custòdia en dipòsit municipal (DA 5ª LRBRL en partits judicials sense establiment penitenciari) · Revista periòdica de l'estat del detingut · Enregistrament en llibre de detinguts · Formularis d'informació de drets signats per l'interessat.</div>
-      </div>
-
+  <!-- ═══ CEPC ═══ -->
+  <section id="cepc">
+    <div class="section-head" style="--accent:#9c7a1f;">
+      <span class="eyebrow">🏛️ COMITÈ D'ÈTICA DE LA POLICIA DE CATALUNYA · CEPC</span>
+      <span class="rule"></span>
+      <span class="meta-mono">Decret 222/2017</span>
     </div>
-  </div>
 
-  <!-- ══════════════════════════════════════════
-       7. TÍTOL IV · VÍCTIMES I TESTIMONIS
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🤝</span>
-      <h2>Atenció a Víctimes, Testimonis i Grups Vulnerables</h2>
-      <span class="art-ref">Àmbit IV.C + II.C</span>
-      <span class="toggle">▼</span>
+    <article class="cepc-box">
+      <p><b>Creació i naturalesa del CEPC</b> · Decret 222/2017, de 17 d'octubre · òrgan administratiu col·legiat, adscrit al departament competent en matèria de seguretat. <b>Independència funcional plena</b>.</p>
+
+      <h5>Procés d'elecció del CEPC</h5>
+      <ul class="art-list compact">
+        <li><b>·</b> 9 membres · presidència nomenada pel Govern.</li>
+        <li><b>·</b> Mandat de 5 anys · renovable una sola vegada.</li>
+        <li><b>·</b> Composició: experts en deontologia, drets humans, psicologia, dret penal · sindicats · societat civil.</li>
+        <li><b>·</b> Elaboració d'una <b>memòria anual</b> publicada al DOGC.</li>
+      </ul>
+
+      <h5>Funcions del CEPC</h5>
+      <ul class="art-list compact">
+        <li><b>·</b> Vetllar pel <b>compliment del Codi d'Ètica</b> · emetre dictàmens i informes.</li>
+        <li><b>·</b> Resoldre <b>consultes</b> dels cossos policials de Catalunya.</li>
+        <li><b>·</b> Promoure la <b>formació deontològica</b> · proposar millores.</li>
+        <li><b>·</b> Rebre <b>denúncies anònimes i confidencials</b> sobre conductes contràries al Codi.</li>
+        <li><b>·</b> Emetre la <b>memòria anual</b> al Parlament de Catalunya.</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- ═══ DISCIPLINARI ═══ -->
+  <section id="disciplinari">
+    <div class="section-head" style="--accent:#E5484D;">
+      <span class="eyebrow">⚠️ CORRUPCIÓ, ERRORS ÈTICS I RÈGIM DISCIPLINARI</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Atenció Integral a Víctimes</div>
-          <span class="art-badge">Tít. IV.C</span>
-          <span class="tipo-badge badge-grave">Prioritari</span>
-          <span class="multa-badge multa-alta">🤝 Protecció víctimes</span>
-        </div>
-        <div class="delito-desc">
-          La policia ha de:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip positivo">Protegir víctimes i testimonis</span>
-          <span class="pena-chip positivo">Preservar la seva imatge i salut</span>
-          <span class="pena-chip positivo">Atenció empàtica i professional</span>
-          <span class="pena-chip positivo">Informació dels drets que els assisteixen</span>
-          <span class="pena-chip positivo">Derivació a serveis especialitzats</span>
-          <span class="pena-chip positivo">Evitar victimització secundària</span>
-        </div>
-        <div class="nota-clave">💡 Marc legal: <b>Llei 4/2015 Estatut Víctima del Delicte</b> (transposición Directiva 2012/29/UE) · <b>Llei 5/2008 Catalunya</b> dret dones eradicar violència masclista · <b>LO 1/2004</b> contra violència gènere.</div>
-      </div>
-      <div class="divider"></div>
+    <article class="disc-card">
+      <header><span class="det-tag" style="background:#FFEFEC; color:#E5484D;">Concepte</span><h4>Concepte de Corrupció</h4></header>
+      <p><b>Tota acció o omissió que comporti l'aprofitament del càrrec policial</b> per a obtenir un benefici personal, familiar o de tercers, en frau dels deures i dels interessos públics. Inclou: suborn, malversació, frau, tràfic d'influències.</p>
+    </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Grups Vulnerables · Atenció Especial</div>
-          <span class="art-badge">Tít. II.C</span>
-          <span class="tipo-badge badge-grave">Vulnerabilitat</span>
-          <span class="multa-badge multa-alta">👥 Protecció reforçada</span>
-        </div>
-        <div class="delito-desc">
-          La Policia prestarà atenció especial a grups en situació de vulnerabilitat:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">Menors</span>
-          <span class="pena-chip">Gent gran</span>
-          <span class="pena-chip">Persones amb discapacitat</span>
-          <span class="pena-chip">Víctimes violència gènere</span>
-          <span class="pena-chip">Víctimes violència domèstica</span>
-          <span class="pena-chip">Víctimes trata d'éssers humans</span>
-          <span class="pena-chip">MENAs</span>
-          <span class="pena-chip">Refugiats i asil</span>
-          <span class="pena-chip">Persones amb trastorn mental</span>
-          <span class="pena-chip">Persones sense llar</span>
-          <span class="pena-chip">Col·lectiu LGTBI+</span>
-          <span class="pena-chip">Minories ètniques</span>
-        </div>
-      </div>
+    <article class="disc-card warn">
+      <header><span class="det-tag warn">RD 33/1986 · L 16/1991</span><h4>Triple Responsabilitat del Policia</h4></header>
+      <table class="norm-table">
+        <thead><tr><th>Tipus</th><th>Norma</th><th>Òrgan</th></tr></thead>
+        <tbody>
+          <tr><td><b>Penal</b></td><td>Codi Penal · arts. 404-445 (delictes funcionaris)</td><td>Tribunals penals</td></tr>
+          <tr><td><b>Civil</b></td><td>Responsabilitat patrimonial · L 40/2015</td><td>Jurisdicció contenciosa</td></tr>
+          <tr><td><b>Disciplinària</b></td><td>L 16/1991 · L 10/1994 · faltes molt greus, greus, lleus</td><td>Òrgans disciplinaris cossos</td></tr>
+        </tbody>
+      </table>
+    </article>
 
+    <article class="disc-card kill">
+      <header><span class="det-tag kill">FALTES MOLT GREUS · MGV</span><h4>Obligacions deontològiques · ordre i interès</h4></header>
+      <ul class="art-list compact">
+        <li><b>·</b> Tortura, tracte cruel, inhumà o degradant.</li>
+        <li><b>·</b> Detenció il·legal · falsificació de documents.</li>
+        <li><b>·</b> Suborn · acceptació de regals incompatibles · tràfic d'influències.</li>
+        <li><b>·</b> Insubordinació greu · negativa a actuar.</li>
+        <li><b>·</b> Embriaguesa o ús de drogues en servei.</li>
+        <li><b>·</b> Acumulació de tres faltes greus en l'any.</li>
+      </ul>
+      <p class="meta-mono" style="margin-top:8px; color:var(--text-3);">Sancions: separació del servei · suspensió funcions 6 m – 6 a · trasllat forçós.</p>
+    </article>
+  </section>
+
+  <!-- ═══ DECÀLEG ═══ -->
+  <section id="decaleg" class="decaleg-box">
+    <header>
+      <span class="eyebrow" style="color:#9c7a1f;">📋 DECÀLEG · CODI D'ÈTICA · DEONTOLOGIA POLICIAL</span>
+      <span class="rule"></span>
+    </header>
+    <ol class="decalist">
+      <li><span class="decn">①</span><div><strong>Actuar sempre conforme a la Constitució i la llei</strong> · respecte a l'ordenament jurídic com a primer deure professional · neutralitat política i ideològica.</div></li>
+      <li><span class="decn">②</span><div><strong>Tracte respectuós i no discriminatori</strong> · imparcialitat absoluta · sense distinció per raça, religió, gènere, orientació, edat o condició social.</div></li>
+      <li><span class="decn">③</span><div><strong>Integritat i exemplaritat</strong> · oposició ferm a la corrupció · honradesa dins i fora del servei.</div></li>
+      <li><span class="decn">④</span><div><strong>Servei a la ciutadania</strong> · vocació de servei públic · proporcionar informació, ajuda i protecció en tot moment.</div></li>
+      <li><span class="decn">⑤</span><div><strong>Mediació i diàleg primer</strong> · la força és l'últim recurs · principis de congruència, oportunitat i proporcionalitat.</div></li>
+      <li><span class="decn">⑥</span><div><strong>Prohibició absoluta de la tortura</strong> · cap circumstància la justifica · obligació de desobeir ordres delictives.</div></li>
+      <li><span class="decn">⑦</span><div><strong>Vetllar per la integritat dels detinguts</strong> · informar dels seus drets · tracte digne · assistència sanitària si cal.</div></li>
+      <li><span class="decn">⑧</span><div><strong>Atenció especial a víctimes i grups vulnerables</strong> · evitar la revictimització · empatia · acompanyament.</div></li>
+      <li><span class="decn">⑨</span><div><strong>Confidencialitat i secret professional</strong> · reserva sobre dades personals · ús responsable de la informació.</div></li>
+      <li><span class="decn">⑩</span><div><strong>Formació contínua i autocrítica</strong> · perfeccionament professional · acceptació del control institucional, judicial i ciutadà.</div></li>
+    </ol>
+  </section>
+
+  <!-- ═══ RECURSOS ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-recursos);">
+      <span class="eyebrow">📚 RECURSOS I MATERIAL D'ESTUDI</span>
+      <span class="rule"></span>
     </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       8. COMITÈ D'ÈTICA · CEPC
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">👥</span>
-      <h2>Comitè d'Ètica de la Policia de Catalunya (CEPC)</h2>
-      <span class="art-ref">Decret 222/2013</span>
-      <span class="toggle">▼</span>
+    <div class="res-grid">
+      <a class="res-card" href="https://dogc.gencat.cat/ca/document-del-dogc/?documentId=686548" target="_blank" rel="noopener"><span class="res-icon">📄</span><div><h4>Acord GOV/25/2015</h4><p>DOGC 26-02-2015 · text íntegre</p></div></a>
+      <a class="res-card" href="https://rm.coe.int/16805e297e" target="_blank" rel="noopener"><span class="res-icon">🌍</span><div><h4>Codi Europeu d'Ètica</h4><p>Rec(2001)10 · CoE</p></div></a>
+      <a class="res-card" href="https://www.boe.es/buscar/act.php?id=BOE-A-1986-6859" target="_blank" rel="noopener"><span class="res-icon">⚖️</span><div><h4>LO 2/1986 · Art. 5</h4><p>BOE consolidat · LOFCS</p></div></a>
+      <a class="res-card" href="/test/codi-etica-policia"><span class="res-icon">📝</span><div><h4>Test del tema</h4><p>Preguntes · Codi d'Ètica</p></div></a>
     </div>
-    <div class="cat-body" style="display:none">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Creació i Naturalesa del CEPC</div>
-          <span class="art-badge">Decret 222/2013</span>
-          <span class="tipo-badge badge-info">Òrgan col·legiat</span>
-          <span class="multa-badge multa-organ">🏛️ Consultiu</span>
-        </div>
-        <div class="delito-desc">
-          El <b>Comitè d'Ètica de la Policia de Catalunya (CEPC)</b> va ser creat pel <b>Decret 222/2013</b>, de 3 de setembre, que aprova el seu reglament d'organització i funcionament. És un <b>òrgan col·legiat consultiu</b> adscrit al Departament d'Interior de la Generalitat. Els seus membres van ser nomenats per la <b>Resolució INT/322/2014</b>.
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Principis d'Actuació del CEPC</div>
-          <span class="art-badge">Art. 2.3 Decret 222/2013</span>
-          <span class="tipo-badge badge-grave">⭐ Garanties</span>
-          <span class="multa-badge multa-alta">⚖️ 4 principis</span>
-        </div>
-        <div class="delito-desc">
-          Els membres del CEPC actuen d'acord amb aquests principis:
-        </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>Independència</b>Sense subjecció jeràrquica ni pressions externes</div>
-          <div class="celda"><b>Objectivitat</b>Judicis basats en fets i evidències, no en opinions</div>
-          <div class="celda"><b>Imparcialitat</b>Equidistància davant de les parts en conflicte</div>
-          <div class="celda"><b>Integritat personal</b>Conducta íntegra i transparent dels membres</div>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Funcions del CEPC</div>
-          <span class="art-badge">Art. 2.1 Decret 222/2013</span>
-          <span class="tipo-badge badge-info">Competències</span>
-          <span class="multa-badge multa-organ">📋 Reflexió ètica</span>
-        </div>
-        <div class="delito-desc">
-          Funcions del Comitè:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">① Reflexió ètica sobre problemes de la pràctica policial</span>
-          <span class="pena-chip">② Elaborar el Codi d'Ètica (realitzat 2015)</span>
-          <span class="pena-chip">③ Promoure bones pràctiques</span>
-          <span class="pena-chip">④ Informe anual d'avaluació</span>
-          <span class="pena-chip">⑤ Assessorar sobre qüestions deontològiques</span>
-          <span class="pena-chip">⑥ Formació ètica dels agents</span>
-        </div>
-        <div class="nota-clave">💡 El CEPC <b>NO té funcions disciplinàries ni sancionadores</b>. La sanció correspon al règim disciplinari (Llei 16/1991 + RD 884/1989 + Decret regulador autonòmic). El CEPC orienta i reflexiona; no jutja casos particulars.</div>
-        <div class="nota-policial">🚔 L'<b>informe anual</b> del CEPC és el mecanisme principal de valoració del grau de compliment del Codi. Permet detectar pautes problemàtiques i proposar millores al Departament d'Interior.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       9. CORRUPCIÓ I RÈGIM DISCIPLINARI
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">⚠️</span>
-      <h2>Corrupció, Deures Ètics i Règim Disciplinari</h2>
-      <span class="art-ref">Consequències</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Concepte de Corrupció</div>
-          <span class="art-badge">Codi ONU 1979</span>
-          <span class="tipo-badge badge-grave">⭐ Prohibit</span>
-          <span class="multa-badge multa-alta">🚫 Integritat</span>
-        </div>
-        <div class="delito-desc">
-          El <b>Codi de Conducta de les Nacions Unides</b> (Res. 34/169, comentari art. 7) defineix corrupció com:
-        </div>
-        <div class="delito-desc" style="font-style:italic; border-left: 2px solid var(--gold); padding-left: 10px; margin-top: 8px">
-          "La <b>comissió o l'omissió d'un acte</b> per part del policia, en el desenvolupament de les seves funcions, en el qual s'<b>aprofita del seu càrrec</b> per acceptar béns, promeses o avantatges exigits o acceptats, o el fet de rebre'ls indegudament."
-        </div>
-        <div class="nota-agrav">⚠️ <b>Tipus delictius</b> del Codi Penal relacionats: <b>Art. 419 CP</b> suborn · <b>Art. 420 CP</b> suborn passiu · <b>Art. 428 CP</b> tràfic d'influències · <b>Art. 432 CP</b> malversació · <b>Art. 404 CP</b> prevaricació. Afegit: <b>Art. 448 CP</b> negativa a perseguir delictes.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Triple Responsabilitat del Policia</div>
-          <span class="art-badge">Art. 5.6 LO 2/1986</span>
-          <span class="tipo-badge badge-grave">⚠️ 3 via</span>
-          <span class="multa-badge multa-alta">⚖️ Penal + Civil + Disciplinària</span>
-        </div>
-        <div class="delito-desc">
-          Els membres de les FCS són <b>responsables personal i directament</b> pels actes en la seva actuació professional. Les vies de responsabilitat són concurrents:
-        </div>
-        <div class="tabla-discip">
-          <div class="td-header">Via</div>
-          <div class="td-header">Contingut</div>
-          <div class="td-cell td-pob">Penal</div>
-          <div class="td-cell">Delictes (prevaricació, tortura, detenció il·legal, suborn...) · CP + jurisdicció penal</div>
-          <div class="td-cell td-pob">Civil</div>
-          <div class="td-cell">Danys causats a tercers · Indemnització (normalment assumida per l'Ajuntament, amb acció de regrés)</div>
-          <div class="td-cell td-pob">Disciplinària</div>
-          <div class="td-cell">Faltes molt greus / greus / lleus · Llei 16/1991 + Decret 183/1995 + RD 884/1989</div>
-        </div>
-        <div class="nota-clave">💡 Les tres responsabilitats són <b>independents i compatibles</b>: un mateix fet pot generar responsabilitat penal + civil + disciplinària simultàniament. El procediment penal té preferència, però no impedeix tramitar el disciplinari en paral·lel per fets diferents.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Obligació d'Obediència vs. Ordres Il·lícites</div>
-          <span class="art-badge">LO 2/1986 + Llei 16/1991</span>
-          <span class="tipo-badge badge-grave">⭐ Dilema</span>
-          <span class="multa-badge multa-alta">⚠️ No insubordinació</span>
-        </div>
-        <div class="delito-desc">
-          La <b>jerarquia i subordinació</b> és principi d'actuació (art. 5.1.d LO 2/1986). Però <b>NO pot justificar actes il·lícits</b>:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">✗ Ordre de tortura → NO obeir</span>
-          <span class="pena-chip agravada">✗ Ordre de detenció arbitrària → NO obeir</span>
-          <span class="pena-chip agravada">✗ Ordre contrària a la llei → NO obeir</span>
-          <span class="pena-chip positivo">✓ Negar-se NO és insubordinació</span>
-          <span class="pena-chip positivo">✓ Comunicar al superior immediat</span>
-        </div>
-        <div class="nota-policial">🚔 L'obediència deguda <b>NO és eximent</b> de responsabilitat penal si l'ordre és manifestament il·lícita (CP art. 410). La responsabilitat continua sent de l'agent que executa l'acte, a més del superior que l'ordena.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Deures Ètics Fonamentals</div>
-          <span class="art-badge">Síntesi</span>
-          <span class="tipo-badge badge-grave">⭐ Resum</span>
-          <span class="multa-badge multa-alta">📋 Decàleg deontològic</span>
-        </div>
-        <div class="delito-desc">
-          Síntesi dels deures ètics del policia de Catalunya:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip positivo">① Respecte Constitució + ordenament</span>
-          <span class="pena-chip positivo">② Protegir drets i llibertats</span>
-          <span class="pena-chip positivo">③ No discriminació</span>
-          <span class="pena-chip positivo">④ Integritat · oposició a corrupció</span>
-          <span class="pena-chip positivo">⑤ Neutralitat política + imparcialitat</span>
-          <span class="pena-chip positivo">⑥ Jerarquia i subordinació</span>
-          <span class="pena-chip positivo">⑦ Força mínima imprescindible</span>
-          <span class="pena-chip positivo">⑧ Respecte dignitat i drets detingut</span>
-          <span class="pena-chip positivo">⑨ Secret professional</span>
-          <span class="pena-chip positivo">⑩ Col·laboració amb Justícia</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       CUADRO RECUERDA
-  ══════════════════════════════════════════ -->
-  <div class="recuerda">
-    <h3>📋 Recorda — Codi d'Ètica i Deontologia Policial</h3>
-    <ul>
-      <li>📘 <b>Acord GOV/25/2015, de 24 de febrer</b> · DOGC 6819 · Codi d'Ètica de la Policia de Catalunya · Eina pedagògica i inspiradora.</li>
-      <li>🌍 <b>Inspiració internacional:</b> DUDH 1948 · CEDH 1950 · Codi ONU 1979 (Res. 34/169) · <b>Recomanació Rec(2001)10 Consell d'Europa · Codi Europeu d'Ètica de la Policia</b>.</li>
-      <li>⭐⭐ <b>3 Principis fonamentals:</b> (1) Garantir drets i llibertats · (2) Integritat, proporcionalitat, congruència i oportunitat · (3) Neutralitat política i imparcialitat.</li>
-      <li>📋 <b>Estructura del Codi:</b> Preàmbul + 5 Títols (Principis/Valors · Servei persones · Cossos policials · Actuació policial · Policia-Justícia).</li>
-      <li>⭐ <b>Àmbit d'aplicació:</b> Mossos d'Esquadra + totes les Policies Locals + Policia Aranesa + vigilants (referència). Les PL poden aprovar codis deontològics propis.</li>
-      <li>⭐⭐ <b>LO 2/1986 art. 5 · 6 Principis bàsics d'actuació:</b> (1) Adequació ordenament · (2) Relacions comunitat · (3) Tracte detinguts · (4) Dedicació · (5) Secret · (6) Responsabilitat.</li>
-      <li>⭐⭐ <b>Ús de la força:</b> Mediació + diàleg PRIMER · Si cal força → <b>Oportunitat + Congruència + Proporcionalitat (O-C-P)</b> · Instruments menys lesius.</li>
-      <li>⚠️ <b>Prohibició absoluta:</b> Tortura + tractes inhumans + tractes degradants · Ni en estat d'excepció pot justificar-se (art. 15 CE + art. 3 CEDH + CP 174-176).</li>
-      <li>🔫 <b>Armes de foc:</b> Només en <b>risc racionalment greu</b> per la vida o integritat · Sempre congruent, oportú i proporcional · Avís previ si possible.</li>
-      <li>⛓️ <b>Detenció:</b> Presumpció d'innocència · Informació immediata drets · Motius · Assistència lletrada · Intèrpret · Màx. 72h · Habeas Corpus.</li>
-      <li>🤝 <b>Víctimes i grups vulnerables:</b> Protecció · Evitar victimització secundària · Atenció especial (menors, gent gran, violència gènere, discapacitat, LGTBI+, MENAs...).</li>
-      <li>🏛️ <b>Comitè d'Ètica (CEPC):</b> Decret 222/2013 · Adscrit a Interior · Òrgan consultiu · Principis: independència + objectivitat + imparcialitat + integritat personal.</li>
-      <li>📊 <b>Funcions CEPC:</b> Reflexió ètica · Elaborar Codi · Informe anual · Assessorament · NO té funcions sancionadores.</li>
-      <li>🚫 <b>Corrupció:</b> Comissió/omissió aprofitant càrrec per rebre béns/promeses/avantatges · CP arts. 419-420 suborn · 428 tràfic influències · 432 malversació · 404 prevaricació.</li>
-      <li>⚖️ <b>Triple responsabilitat:</b> Penal (delictes) + Civil (danys) + Disciplinària (faltes MG/G/L) · Són <b>independents i compatibles</b>.</li>
-      <li>⚠️ <b>Ordres il·lícites:</b> L'obediència deguda NO justifica actes il·lícits (CP 410) · Negar-s'hi NO és insubordinació · Comunicar al superior immediat.</li>
-      <li>🔒 <b>Secret professional (art. 5.5 LO 2/1986):</b> Obligació de guardar silenci sobre dades obtingudes · Excepció: col·laboració amb Justícia · Filtracions = CP 417 revelació secrets.</li>
-      <li>📜 <b>Marc deontològic català:</b> Llei 16/1991 arts. 11-12 (PL) · Llei 10/1994 (PG-ME) · Llei 4/2003 Sistema Seguretat · Decret 222/2013 (CEPC) · Acord GOV/25/2015.</li>
-      <li>💡 <b>Carta de Rotterdam 1996:</b> Policia en societat multiètnica · No discriminació · Diversitat · Formació intercultural.</li>
-      <li>📋 <b>Finalitats del Codi:</b> Enunciar principis · Drets/deures · Seguretat jurídica agents · Accessibilitat a la ciutadania · Promoció bones pràctiques · Reforçar dimensió ètica.</li>
-    </ul>
-  </div>
-
-  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+  </section>
 
 </div>
-
-<script>
-  function toggle(header) {
-    header.classList.toggle('open');
-    const body = header.nextElementSibling;
-    if (body.style.display === 'none' || body.style.display === '') {
-      body.style.display = 'block';
-      body.style.animation = 'fadeUp .3s ease';
-    } else {
-      body.style.display = 'none';
-    }
-  }
-</script>
 </body>
 </html>
