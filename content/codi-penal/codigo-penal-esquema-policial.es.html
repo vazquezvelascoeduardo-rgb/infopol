@@ -3,1437 +3,1399 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Código Penal — Esquema Policial</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Código Penal · LO 10/1995 — Esquema Operativo Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* CP — fitxa rebranding 2026 (paper + ink + terracotta) */
   :root {
-    --bg-main: #0A1628;
-    --bg-section: #0E2244;
-    --gold: #C8A028;
-    --blue-royal: #1A5C96;
-    --red: #C8281E;
-    --green: #1A7A3C;
-    --text-main: #F0F4FF;
-    --text-secondary: #A8BAD4;
-    --border: #C8A028;
+    --ink: #0E0E0E;
+    --ink-2: #1c1c1c;
+    --paper: #FAF6EF;
+    --paper-2: #F2EDE3;
+    --white: #FFFFFF;
+    --terracotta: #F26B1F;
+    --terracotta-2: #D9531A;
+    --terracotta-soft: #FFE9D8;
+    --text: #0E0E0E;
+    --text-2: #4a4744;
+    --text-3: #807c77;
+    --text-4: #b3afaa;
+    --c-leyes: #E89A1C;
+    --c-operativa: #2F6BD8;
+    --c-superbuscador: #9747D6;
+    --c-alcoholemia: #E85D8C;
+    --c-recursos: #2FB66B;
+    --c-tests: #2F6BD8;
+    --c-red: #E5484D;
+    --c-red-dark: #C13030;
+    --c-pink: #E85D8C;
+    --c-slate: #2a3a52;
+    --line: rgba(14, 14, 14, 0.10);
+    --line-2: rgba(14, 14, 14, 0.06);
+    --shadow-md: 0 1px 2px rgba(14,14,14,0.04), 0 8px 24px -8px rgba(14,14,14,0.10);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
   body {
-    background-color: var(--bg-main);
-    background-image:
-      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
-    font-family: 'Source Sans 3', sans-serif;
-    color: var(--text-main);
-    padding: 20px 12px 40px;
+    background: var(--paper);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: 12px 8px 40px;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .wrapper { max-width: 1080px; margin: 0 auto; }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
-  .wrapper {
-    max-width: 720px;
-    margin: 0 auto;
-  }
-
-  /* ── CABECERA ── */
-  .header {
+  .section-head {
     display: flex;
     align-items: center;
-    gap: 18px;
-    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
-    border: 2px solid var(--gold);
-    border-radius: 10px;
-    padding: 22px 24px;
-    margin-bottom: 8px;
-    animation: fadeUp .5s ease both;
-    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+    gap: 12px;
+    margin: 32px 0 14px;
+    position: relative;
   }
-  .escudo svg { flex-shrink: 0; }
-  .header-text { flex: 1; }
-  .header-text .label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
+  .section-head::before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 22px;
+    background: var(--accent, var(--terracotta));
+    border-radius: 2px;
+    flex: none;
   }
-  .header-text h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--text-main);
-    line-height: 1.1;
+  .section-head .eyebrow { color: var(--accent, var(--ink)); flex: none; }
+  .section-head .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
   }
-  .header-text h1 span { color: var(--gold); }
-  .header-text .subtitle {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-top: 4px;
+  .section-head .meta-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    flex: none;
   }
 
-  /* ── CLASIFICACIÓN GENERAL ── */
-  .clasificacion {
+  /* ── HERO ── */
+  .ce-hero {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: center;
+    background: linear-gradient(180deg, #2a1f1a 0%, #1a1410 100%);
+    color: var(--paper);
+    border: 1px solid var(--terracotta);
+    border-radius: 18px;
+    padding: 26px 30px;
+    margin-top: 8px;
+  }
+  .ce-shield { flex: none; }
+  .ce-title {
+    margin: 4px 0 6px;
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--paper);
+  }
+  .ce-title .accent { color: var(--terracotta); }
+  .ce-sub {
+    margin: 0;
+    color: rgba(250, 246, 239, 0.7);
+    font-size: 15px;
+    max-width: 720px;
+  }
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .hero-tags .tag {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(242, 107, 31, 0.35);
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--paper);
+  }
+
+  /* ── 3 PILARS ── */
+  .pillars {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 20px;
-    animation: fadeUp .6s ease .1s both;
+    gap: 14px;
+    margin-top: 16px;
   }
-  .clas-card {
-    border-radius: 8px;
-    padding: 12px 10px;
-    text-align: center;
-    border: 1px solid rgba(200,160,40,0.3);
+  .pillar {
+    background: var(--bg);
+    border: 1px solid var(--accent);
+    border-radius: 14px;
+    padding: 18px 20px;
+    color: inherit;
+    transition: transform .12s, box-shadow .12s;
   }
-  .clas-card .icon { font-size: 22px; margin-bottom: 4px; }
-  .clas-card .tipo {
-    font-family: 'Oswald', sans-serif;
+  .pillar:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .pill-icon {
+    display: inline-block;
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+  .pillar h3 {
+    margin: 4px 0;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+  }
+  .pillar .muted {
+    margin: 0;
+    color: var(--text-3);
     font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .clas-card .pena-max {
-    font-size: 11px;
-    color: var(--text-secondary);
-    margin-top: 3px;
-  }
-  .clas-leve   { background: rgba(26,122,60,0.15); border-color: var(--green); }
-  .clas-menos  { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
-  .clas-grave  { background: rgba(200,40,30,0.15); border-color: var(--red); }
-  .clas-leve .tipo   { color: #4ACD7A; }
-  .clas-menos .tipo  { color: #6AADDC; }
-  .clas-grave .tipo  { color: #E86050; }
-
-  /* ── BLOQUE CATEGORÍA ── */
-  .categoria {
-    background: var(--bg-section);
-    border-radius: 10px;
-    margin-bottom: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(200,160,40,0.2);
-    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
-  }
-  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
-  .categoria:nth-child(2)  { animation: fadeUp .6s ease .3s both; }
-  .categoria:nth-child(3)  { animation: fadeUp .6s ease .35s both; }
-  .categoria:nth-child(4)  { animation: fadeUp .6s ease .4s both; }
-  .categoria:nth-child(5)  { animation: fadeUp .6s ease .45s both; }
-  .categoria:nth-child(6)  { animation: fadeUp .6s ease .5s both; }
-  .categoria:nth-child(7)  { animation: fadeUp .6s ease .55s both; }
-  .categoria:nth-child(8)  { animation: fadeUp .6s ease .6s both; }
-
-  .cat-header {
-    background: var(--blue-royal);
-    padding: 12px 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    user-select: none;
-    transition: background .2s;
-  }
-  .cat-header:hover { background: #1e6db0; }
-  .cat-header .cat-icon { font-size: 20px; }
-  .cat-header h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    flex: 1;
-  }
-  .cat-header .art-ref {
-    font-size: 11px;
-    color: rgba(240,244,255,0.65);
-    white-space: nowrap;
-  }
-  .cat-header .toggle {
-    font-size: 14px;
-    transition: transform .3s;
-    color: var(--gold);
-  }
-  .cat-header.open .toggle { transform: rotate(180deg); }
-
-  .cat-body { padding: 6px 0; }
-
-  /* ── ARTÍCULO / DELITO ── */
-  .delito {
-    border-left: 3px solid var(--gold);
-    margin: 8px 14px;
-    background: rgba(10,22,40,0.5);
-    border-radius: 0 7px 7px 0;
-    padding: 10px 14px;
-  }
-  .delito-top {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .delito-nombre {
-    font-family: 'Oswald', sans-serif;
-    font-size: 15px;
     font-weight: 600;
-    color: var(--text-main);
-    flex: 1;
-    min-width: 160px;
+  }
+  .pillar .art {
+    margin: 8px 0 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .pillar .desc {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-2);
+  }
+
+  /* ── META STRIP ── */
+  .meta-strip {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+    background: #FFE9D8;
+    border: 1px solid #f5c19a;
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-top: 14px;
+  }
+  .meta-strip p {
+    margin: 4px 0 0;
+    color: #6b3818;
+    font-size: 14px;
+  }
+  .vigente {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6px 14px;
+    background: white;
+    border: 1px solid #f5c19a;
+    border-radius: 10px;
+  }
+  .vigente .when {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-3);
+  }
+  .vigente .state {
+    font-weight: 800;
+    color: var(--terracotta-2);
+  }
+
+  /* ── BANNER REFORMA LO 1/2026 ── */
+  .reform-banner {
+    background: linear-gradient(135deg, #2a1410 0%, #1a0a08 100%);
+    color: var(--paper);
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+    align-items: center;
+    border: 1px solid var(--terracotta);
+  }
+  .reform-banner .rb-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--terracotta);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex: none;
+  }
+  .reform-banner .rb-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--terracotta);
+    letter-spacing: 0.04em;
+    margin: 0 0 4px;
+    text-transform: uppercase;
+  }
+  .reform-banner .rb-text {
+    font-size: 13.5px;
+    color: rgba(250, 246, 239, 0.85);
+    margin: 0;
+  }
+  .reform-banner .rb-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: rgba(242, 107, 31, 0.18);
+    color: var(--terracotta);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    flex: none;
+  }
+
+  /* ── 3 TARGETES DE CLASSIFICACIÓ ── */
+  .clasif-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .clasif {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+    border-top: 3px solid var(--accent);
+  }
+  .clasif .cl-icon {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .clasif h4 {
+    margin: 2px 0 6px;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .clasif p {
+    margin: 0 0 4px;
+    font-size: 13px;
+    color: var(--text-2);
+  }
+  .clasif .ant {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--text-3);
+    margin-top: 6px;
+    display: block;
+  }
+
+  /* ── DELITO CARDS ── */
+  .delito-grid {
+    display: grid;
+    gap: 10px;
+  }
+  .delito {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 18px;
+    border-left: 3px solid var(--accent);
+    transition: box-shadow .12s, border-color .12s;
+  }
+  .delito:hover { box-shadow: var(--shadow-md); }
+  .delito.hl {
+    background: var(--terracotta-soft);
+    border-color: #f5c19a;
+    border-left-color: var(--terracotta);
+  }
+  .delito-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
   }
   .art-badge {
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
     font-weight: 700;
-    background: rgba(200,160,40,0.15);
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    padding: 2px 7px;
-    border-radius: 4px;
-    white-space: nowrap;
+    background: var(--accent);
+    color: var(--white);
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.04em;
+    flex: none;
   }
-  .tipo-badge {
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif;
+  .delito-name {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    flex: 1;
+    min-width: 200px;
+  }
+  .tipo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
     font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex: none;
   }
-  .badge-leve   { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
-  .badge-menos  { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
-  .badge-grave  { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
-  .badge-mixto  { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
-
+  .tipo.leve { background: rgba(47, 182, 107, 0.16); color: #166534; }
+  .tipo.menos { background: rgba(47, 107, 216, 0.14); color: #1e3f7a; }
+  .tipo.grave { background: rgba(229, 72, 77, 0.16); color: #991b1b; }
+  .tipo.mixto { background: rgba(232, 154, 28, 0.16); color: #854d0e; }
+  .tipo.nuevo { background: var(--terracotta); color: var(--white); }
   .delito-desc {
-    font-size: 12.5px;
-    color: var(--text-secondary);
-    margin-top: 5px;
-    line-height: 1.5;
+    margin: 0 0 8px;
+    font-size: 13.5px;
+    color: var(--text-2);
   }
-  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
-
-  .pena-row {
+  .pena-list {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-top: 7px;
+    margin-top: 8px;
   }
-  .pena-chip {
-    font-size: 11px;
-    background: rgba(26,92,150,0.25);
-    border: 1px solid rgba(26,92,150,0.6);
-    color: var(--text-main);
-    padding: 3px 9px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+  .pena {
+    font-size: 12.5px;
+    background: var(--paper-2);
+    color: var(--text);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    font-weight: 600;
   }
-  .pena-chip.agravada {
-    background: rgba(200,40,30,0.2);
-    border-color: rgba(200,40,30,0.5);
-  }
-  .pena-chip.multa {
-    background: rgba(200,160,40,0.12);
-    border-color: rgba(200,160,40,0.4);
-    color: var(--gold);
-  }
+  .pena.danger { background: #FFEFEC; color: #991b1b; border-color: #f3b9b9; }
+  .pena.warn { background: #FFF6E0; color: #854d0e; border-color: #f5d699; }
+  .pena.ok { background: #DFF7E9; color: #166534; border-color: #a8e0bf; }
+  .pena.terra { background: var(--terracotta-soft); color: #6b3818; border-color: #f5c19a; }
 
-  .nota-agrav {
-    margin-top: 6px;
-    font-size: 11.5px;
-    color: #E08888;
-    background: rgba(200,40,30,0.08);
-    border-left: 2px solid var(--red);
-    padding: 4px 8px;
-    border-radius: 0 4px 4px 0;
-  }
-  .nota-policial {
-    margin-top: 6px;
-    font-size: 11.5px;
-    color: #A8D4C0;
-    background: rgba(26,122,60,0.1);
-    border-left: 2px solid var(--green);
-    padding: 4px 8px;
-    border-radius: 0 4px 4px 0;
-  }
-
-  /* ── RECUERDA ── */
-  .recuerda {
-    background: var(--gold);
-    border-radius: 10px;
-    padding: 20px 22px;
-    margin-top: 6px;
-    animation: fadeUp .6s ease .7s both;
-  }
-  .recuerda h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #0A1628;
-    margin-bottom: 12px;
-    letter-spacing: 2px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .recuerda ul { list-style: none; }
-  .recuerda ul li {
-    font-size: 13px;
-    color: #0A1628;
-    padding: 4px 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-    border-bottom: 1px solid rgba(10,22,40,0.15);
-    line-height: 1.4;
-  }
-  .recuerda ul li:last-child { border-bottom: none; }
-  .recuerda ul li::before { content: "▶"; font-size: 9px; margin-top: 4px; flex-shrink: 0; }
-
-  /* ── REFORMA BANNER ── */
-  .reforma-banner {
-    background: linear-gradient(135deg, #8B1A10 0%, #C8281E 50%, #8B1A10 100%);
-    border: 2px solid #FF6050;
+  /* Notes dins del delito */
+  .nota {
+    margin-top: 8px;
     border-radius: 8px;
-    padding: 10px 18px;
-    margin-bottom: 14px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    border-left: 3px solid;
+  }
+  .nota.policial {
+    background: #DFF7E9;
+    color: #14532d;
+    border-left-color: var(--c-recursos);
+  }
+  .nota.policial b { color: #14532d; }
+  .nota.agrav {
+    background: #FFEFEC;
+    color: #991b1b;
+    border-left-color: var(--c-red);
+  }
+  .nota.agrav b { color: #991b1b; }
+  .nota.reforma {
+    background: var(--terracotta-soft);
+    color: #6b3818;
+    border-left-color: var(--terracotta);
+  }
+  .nota.reforma b { color: #6b3818; }
+
+  /* ── RECUERDA al final ── */
+  .recuerda {
+    background: linear-gradient(135deg, #1f2735 0%, #131923 100%);
+    color: var(--paper);
+    border-radius: 16px;
+    padding: 22px 26px;
+    margin-top: 28px;
+    border: 1px solid var(--terracotta);
+  }
+  .recuerda .r-head {
     display: flex;
     align-items: center;
-    gap: 12px;
-    animation: fadeUp .55s ease .05s both;
-    box-shadow: 0 0 20px rgba(200,40,30,0.3);
+    gap: 10px;
+    margin-bottom: 12px;
   }
-  .reforma-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
-  .reforma-banner .ref-text { flex: 1; }
-  .reforma-banner .ref-ley {
-    font-family: 'Oswald', sans-serif;
+  .recuerda .r-head h2 {
+    margin: 0;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--terracotta);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #FFD0CC;
   }
-  .reforma-banner .ref-desc {
-    font-size: 12px;
-    color: rgba(255,220,215,0.85);
-    margin-top: 2px;
+  .recuerda ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
   }
-  .reforma-banner .ref-fecha {
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    color: #FFD0CC;
-    background: rgba(0,0,0,0.2);
-    padding: 4px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    border: 1px solid rgba(255,200,190,0.3);
-  }
-
-  /* ── NUEVO etiqueta ── */
-  .badge-nuevo {
-    font-size: 9px;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 3px;
-    background: #C8281E;
-    color: white;
-    letter-spacing: 0.5px;
-    animation: pulse 2s infinite;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-  }
-
-  .nota-reforma {
-    margin-top: 6px;
-    font-size: 11.5px;
-    color: #FFB8B0;
-    background: rgba(200,40,30,0.12);
-    border-left: 3px solid #C8281E;
-    padding: 5px 9px;
-    border-radius: 0 5px 5px 0;
+  .recuerda li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: start;
+    font-size: 13.5px;
+    color: rgba(250, 246, 239, 0.92);
     line-height: 1.5;
   }
-  .nota-reforma b { color: #FF8070; }
+  .recuerda li b { color: var(--terracotta); font-weight: 700; }
+  .recuerda li::before {
+    content: "▸";
+    color: var(--terracotta);
+    font-weight: 800;
+  }
 
-  /* ── BOTÓN IMPRIMIR ── */
-  .btn-print {
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-    padding: 14px;
-    background: var(--blue-royal);
-    border: 2px solid var(--gold);
-    color: var(--text-main);
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px;
+  /* ── RECURSOS ── */
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .res-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: center;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: inherit;
+    transition: background .12s, border-color .12s;
+  }
+  .res-card:hover {
+    background: var(--paper-2);
+    border-color: rgba(14, 14, 14, 0.16);
+  }
+  .res-card .res-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--paper-2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex: none;
+  }
+  .res-card h4 {
+    margin: 0;
+    font-size: 14px;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all .2s;
-    animation: fadeUp .6s ease .8s both;
   }
-  .btn-print:hover {
-    background: var(--gold);
-    color: #0A1628;
+  .res-card p {
+    margin: 2px 0 0;
+    font-size: 12.5px;
+    color: var(--text-2);
   }
 
-  /* ── DIVISOR ── */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin: 4px 14px 2px;
-    opacity: .35;
-  }
-
-  @media print {
-    body { background: white; color: black; }
-    .btn-print { display: none; }
-    .categoria { break-inside: avoid; }
-    .cat-body { display: block !important; }
+  @media (max-width: 980px) {
+    .pillars, .clasif-grid { grid-template-columns: 1fr; }
+    .res-grid { grid-template-columns: repeat(2, 1fr); }
+    .meta-strip { grid-template-columns: 1fr; }
+    .reform-banner { grid-template-columns: 1fr; text-align: left; }
+    .reform-banner .rb-date { justify-self: start; }
+    .ce-hero { grid-template-columns: 1fr; text-align: center; }
+    .ce-shield { margin: 0 auto; }
+    .ce-title { font-size: 28px; }
   }
 </style>
 </head>
-<body>
+<body data-fitxa-style="rebrand-2026">
 <div class="wrapper">
 
-  <!-- CABECERA -->
-  <div class="header">
-    <div class="escudo">
-      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
-        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
-        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICÍA</text>
-        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
-        <!-- Laureles simplificados -->
-        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
-        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
-        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
-        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
-        <!-- Estrella central -->
-        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+  <!-- ═══ HERO ═══ -->
+  <header class="ce-hero">
+    <div class="ce-shield">
+      <svg width="80" height="92" viewBox="0 0 80 92" fill="none">
+        <path d="M40 4 L74 13 V42 C74 62 60 78 40 88 C20 78 6 62 6 42 V13 Z" fill="#0E0E0E" stroke="#F26B1F" stroke-width="2"/>
+        <text x="40" y="38" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="9" fill="#F26B1F" letter-spacing="1">POLICIA</text>
+        <text x="40" y="48" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="9" fill="#F26B1F" letter-spacing="1">LOCAL</text>
+        <g transform="translate(28 56)" fill="#F26B1F">
+          <polygon points="6,0 7.4,4.2 12,4.2 8.3,6.8 9.7,11 6,8.4 2.3,11 3.7,6.8 0,4.2 4.6,4.2"/>
+          <polygon points="18,0 19.4,4.2 24,4.2 20.3,6.8 21.7,11 18,8.4 14.3,11 15.7,6.8 12,4.2 16.6,4.2"/>
+        </g>
       </svg>
     </div>
-    <div class="header-text">
-      <div class="label">Esquema Operativo Policial</div>
-      <h1>Código <span>Penal</span></h1>
-      <div class="subtitle">Delitos de relevancia policial · LO 10/1995 y modificaciones · Referencia práctica de campo</div>
+    <div>
+      <div class="eyebrow" style="color: var(--terracotta);">ESQUEMA OPERATIVO POLICIAL</div>
+      <h1 class="ce-title">CP · CÓDIGO <span class="accent">PENAL</span></h1>
+      <p class="ce-sub">Delitos de relevancia policial · LO 10/1995 + reformas (incluida LO 1/2026) · Referencia práctica de campo para Policía Local.</p>
+      <div class="hero-tags">
+        <span class="tag">📕 LO 10/1995</span>
+        <span class="tag">🔄 Reforma LO 1/2026</span>
+        <span class="tag">🚓 10 categorías PL</span>
+        <span class="tag">⚡ Multirreincidencia</span>
+        <span class="tag">📱 Hurto móvil agravado</span>
+      </div>
     </div>
-  </div>
+  </header>
 
-  <!-- CLASIFICACIÓN -->
-  <div class="clasificacion">
-    <div class="clas-card clas-leve">
-      <div class="icon">🟢</div>
-      <div class="tipo">Delito Leve</div>
-      <div class="pena-max">Prisión ≤ 3 meses<br>Multa ≤ 3 meses<br>Trabajos ≤ 30 días</div>
+  <!-- ═══ 3 TARGETES CLASSIFICACIÓ (Art. 13 CP) ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--terracotta);">
+      <span class="eyebrow">📋 CLASIFICACIÓN GENERAL · ART. 13 CP</span>
+      <span class="rule"></span>
     </div>
-    <div class="clas-card clas-menos">
-      <div class="icon">🔵</div>
-      <div class="tipo">Menos Grave</div>
-      <div class="pena-max">Prisión 3 meses – 5 años<br>Multa > 3 meses<br>Inhabilitación ≤ 5 años</div>
+    <div class="clasif-grid">
+      <div class="clasif" style="--accent: var(--c-recursos);">
+        <div class="cl-icon">🟢</div>
+        <h4>Delito leve</h4>
+        <p>Prisión ≤ 3 meses · Multa ≤ 3 meses · Trabajos ≤ 30 días.</p>
+        <span class="ant">Sin antecedentes (salvo reincidencia)</span>
+      </div>
+      <div class="clasif" style="--accent: var(--c-operativa);">
+        <div class="cl-icon">🔵</div>
+        <h4>Menos grave</h4>
+        <p>Prisión 3 meses–5 años · Multa &gt; 3 meses · Inhabilitación ≤ 5 años.</p>
+        <span class="ant">Genera antecedentes</span>
+      </div>
+      <div class="clasif" style="--accent: var(--c-red);">
+        <div class="cl-icon">🔴</div>
+        <h4>Grave</h4>
+        <p>Prisión &gt; 5 años · Inhabilitación &gt; 5 años.</p>
+        <span class="ant">Genera antecedentes</span>
+      </div>
     </div>
-    <div class="clas-card clas-grave">
-      <div class="icon">🔴</div>
-      <div class="tipo">Delito Grave</div>
-      <div class="pena-max">Prisión > 5 años<br>Inhabilitación > 5 años</div>
-    </div>
-  </div>
+  </section>
 
-  <!-- BANNER REFORMA -->
-  <div class="reforma-banner">
-    <div class="ref-icon">🔴</div>
-    <div class="ref-text">
-      <div class="ref-ley">⚡ Reforma en vigor · LO 1/2026, de 8 de abril</div>
-      <div class="ref-desc">Multirreincidencia patrimonial · Hurto de móviles agravado · Estafa leve reiterada · Petaqueo · Legitimación Ayuntamientos</div>
+  <!-- ═══ BANNER REFORMA LO 1/2026 ═══ -->
+  <section class="reform-banner">
+    <span class="rb-icon">⚡</span>
+    <div>
+      <h3 class="rb-title">REFORMA LO 1/2026 · EN VIGOR 10/04/2026</h3>
+      <p class="rb-text">Multirreincidencia patrimonial · Hurto de móviles agravado · Estafa leve reiterada · Petaqueo (art. 568.2 CP) · Defraudación eléctrica para cultivo de drogas · Legitimación de Ayuntamientos para ejercer acción penal.</p>
     </div>
-    <div class="ref-fecha">BOE 09/04/2026<br>En vigor 10/04/2026</div>
-  </div>
+    <span class="rb-date">BOE 09/04/2026</span>
+  </section>
 
-  <!-- ══════════════════════════════════════════
-       1. DELITOS CONTRA EL PATRIMONIO
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">💰</span>
-      <h2>Delitos contra el Patrimonio</h2>
-      <span class="art-ref">Arts. 234–304 CP</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 1. DELITOS CONTRA EL PATRIMONIO ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-leyes);">
+      <span class="eyebrow">💰 1 · DELITOS CONTRA EL PATRIMONIO · ARTS. 234–304 CP</span>
+      <span class="rule"></span>
+      <span class="meta-mono">7 TIPOS</span>
     </div>
-    <div class="cat-body">
+    <div class="delito-grid">
 
-      <!-- HURTO -->
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Hurto</div>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
           <span class="art-badge">Art. 234</span>
-          <span class="tipo-badge badge-mixto">Leve / Menos grave</span>
+          <span class="delito-name">Hurto</span>
+          <span class="tipo mixto">Leve / Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Apoderamiento de bienes ajenos <b>sin violencia ni intimidación</b> y sin fuerza en las cosas.
+        <p class="delito-desc">Apoderamiento de bienes ajenos <b>sin violencia ni intimidación</b> y sin fuerza en las cosas.</p>
+        <div class="pena-list">
+          <span class="pena ok">🟢 Leve · valor ≤ 400 € → multa 1–3 meses</span>
+          <span class="pena">🔵 &gt; 400 € → 6–18 meses prisión</span>
+          <span class="pena warn">⚠️ Agravado art. 235 → 1–3 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Leve: valor ≤ 400 € → multa 1–3 meses</span>
-          <span class="pena-chip">🔵 &gt; 400 € → 6–18 meses prisión</span>
-          <span class="pena-chip agravada">⚠️ Agrav. art. 235 → 1–3 años prisión</span>
-        </div>
-        <div class="nota-reforma">🔴 <b>NUEVO · LO 1/2026 · Multirreincidencia:</b> El hurto de <b>valor ≤ 400 €</b> pasa a ser <b>menos grave (6–18 meses prisión)</b> si el autor tiene ≥ 3 condenas previas por delitos de la misma naturaleza, siendo al menos 1 de ellas leve. De multa de semanas se pasa a prisión de hasta año y medio.</div>
-        <div class="nota-agrav">⚠️ Agravantes art. 235: especial gravedad, casa habitada, red organizada, personas vulnerables, explotaciones agrícolas/ganaderas (desde LO 1/2026: basta con valor > 400 €, ya no exige probar «especial gravedad»).</div>
-        <div class="nota-policial">🚔 Clave: verificar antecedentes del detenido en el momento (ADEXTTRA/SIDENPOL). Con 3+ condenas previas, el hurto leve se convierte en menos grave. Consignar en atestado. Los <b>Ayuntamientos</b> pueden ahora ejercer acción penal en hurtos (reforma LECrim art. 105).</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota reforma"><b>🔴 NUEVO · LO 1/2026 · Multirreincidencia:</b> el hurto ≤ 400 € pasa a <b>menos grave (6–18 meses prisión)</b> si el autor tiene ≥ 3 condenas previas por delitos de la misma naturaleza, siendo al menos 1 de ellas leve.</div>
+        <div class="nota agrav"><b>⚠️ Agravantes art. 235:</b> especial gravedad, casa habitada, red organizada, personas vulnerables, explotaciones agrícolas/ganaderas (desde LO 1/2026 basta valor &gt; 400 €).</div>
+        <div class="nota policial"><b>🚔 Clave:</b> verificar antecedentes en el momento (ADEXTTRA/SIDENPOL). Con 3+ condenas previas, el hurto leve se convierte en menos grave. Los <b>Ayuntamientos</b> ya pueden ejercer acción penal en hurtos (art. 105 LECrim reformado).</div>
+      </article>
 
-      <!-- HURTO DE MÓVIL -->
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Hurto de Teléfono Móvil (tipo agravado)</div>
-          <span class="art-badge">Art. 234 / 235</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
-          <span class="badge-nuevo">⚡ NUEVO LO 1/2026</span>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 234/235</span>
+          <span class="delito-name">Hurto de teléfono móvil (agravado)</span>
+          <span class="tipo nuevo">⚡ Nuevo LO 1/2026</span>
         </div>
-        <div class="delito-desc">
-          La LO 1/2026 introduce un <b>tipo agravado específico</b> para la sustracción de teléfonos móviles, reconociendo que no es solo la pérdida económica sino también datos personales, cuentas bancarias, fotos e información privada.
+        <p class="delito-desc">Tipo agravado específico para sustracción de móviles: no solo pérdida económica sino datos personales, cuentas bancarias, fotos e información privada.</p>
+        <div class="pena-list">
+          <span class="pena terra">🔵 Pena base → 6–18 meses prisión</span>
+          <span class="pena danger">⚠️ Multirreincidencia → hasta 3 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Pena base → 6–18 meses prisión</span>
-          <span class="pena-chip agravada">⚠️ Con multirreincidencia → hasta 3 años</span>
-        </div>
-        <div class="nota-reforma">🔴 <b>Excepción:</b> Dispositivos expuestos al público en establecimientos comerciales (escaparates, tiendas) — pueden mantener la calificación anterior.</div>
-        <div class="nota-policial">🚔 Documentar siempre el IMEI del terminal sustraído. Permite bloqueo y localización. La víctima puede solicitar bloqueo urgente a su operadora.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota agrav"><b>⚠️ Excepción:</b> dispositivos expuestos al público en establecimientos comerciales (escaparates, tiendas) — pueden mantener la calificación anterior.</div>
+        <div class="nota policial"><b>🚔 Clave:</b> documentar siempre el <b>IMEI</b> en el atestado. Permite bloqueo y localización. La víctima puede solicitar bloqueo urgente a su operadora.</div>
+      </article>
 
-      <!-- ROBO CON FUERZA -->
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Robo con Fuerza en las Cosas</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 237–241</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Robo con fuerza en las cosas</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Apoderamiento usando <b>fuerza en las cosas</b> (escalamiento, rompimiento, llaves falsas, etc.). Sin violencia personal.
+        <p class="delito-desc">Apoderamiento usando <b>fuerza en las cosas</b> (escalamiento, rompimiento, llaves falsas, etc.). Sin violencia personal.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 1–3 años (tipo básico)</span>
+          <span class="pena warn">⚠️ Casa habitada → 2–5 años</span>
+          <span class="pena warn">⚠️ Establecimiento abierto → 1–5 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 1–3 años prisión (tipo básico)</span>
-          <span class="pena-chip agravada">⚠️ Casa habitada → 2–5 años</span>
-          <span class="pena-chip agravada">⚠️ Establecimiento abierto → 1–5 años</span>
-        </div>
-        <div class="nota-policial">🚔 Documentar método de acceso (fractura, escalada, ganzúa). Es clave para calificar.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota policial"><b>🚔 Clave:</b> documentar método de acceso (fractura, escalada, ganzúa). Es clave para calificar.</div>
+      </article>
 
-      <!-- ROBO CON VIOLENCIA -->
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Robo con Violencia o Intimidación</div>
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 237, 242</span>
-          <span class="tipo-badge badge-grave">Grave</span>
+          <span class="delito-name">Robo con violencia o intimidación</span>
+          <span class="tipo grave">Grave</span>
         </div>
-        <div class="delito-desc">
-          Apoderamiento usando <b>violencia o intimidación</b> contra personas. El arma o lesiones agravan notablemente la pena.
+        <p class="delito-desc">Apoderamiento usando <b>violencia o intimidación</b> contra personas. Arma o lesiones agravan notablemente la pena.</p>
+        <div class="pena-list">
+          <span class="pena danger">🔴 2–5 años (tipo básico)</span>
+          <span class="pena danger">⚠️ Armas / medios peligrosos → 3,5–5 años</span>
+          <span class="pena danger">⚠️ Casa habitada → mitad superior</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔴 2–5 años prisión (tipo básico)</span>
-          <span class="pena-chip agravada">⚠️ Armas/medios peligrosos → 3,5–5 años</span>
-          <span class="pena-chip agravada">⚠️ Casa habitada → mitad superior</span>
-        </div>
-        <div class="nota-agrav">⚠️ Si concurren lesiones: el robo se juzga en concurso real con las lesiones causadas.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota agrav"><b>⚠️ Concurso:</b> si concurren lesiones, el robo se juzga en concurso real con las lesiones causadas.</div>
+      </article>
 
-      <!-- ESTAFA -->
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Estafa</div>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 248–251</span>
-          <span class="tipo-badge badge-mixto">Leve / Menos grave</span>
+          <span class="delito-name">Estafa</span>
+          <span class="tipo mixto">Leve / Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Engaño bastante para producir <b>error en otro</b> que realice un acto de disposición en su perjuicio.
+        <p class="delito-desc">Engaño bastante para producir <b>error en otro</b> que realice un acto de disposición en su perjuicio.</p>
+        <div class="pena-list">
+          <span class="pena ok">🟢 Leve ≤ 400 € → multa</span>
+          <span class="pena">🔵 &gt; 400 € → 6 meses–3 años</span>
+          <span class="pena warn">⚠️ Especial gravedad → 1–6 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Leve: ≤ 400 € → multa</span>
-          <span class="pena-chip">🔵 &gt;400 € → 6 meses–3 años</span>
-          <span class="pena-chip agravada">⚠️ Especial gravedad → 1–6 años</span>
-        </div>
-        <div class="nota-reforma">🔴 <b>NUEVO · LO 1/2026 · Multirreincidencia:</b> La estafa de <b>≤ 400 €</b> pasa a pena del tipo básico (<b>6 meses–3 años</b>) si el autor acumula ≥ 3 condenas previas de la misma naturaleza, siendo al menos 1 leve. Mismo esquema que el hurto.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota reforma"><b>🔴 NUEVO · LO 1/2026 · Multirreincidencia:</b> la estafa ≤ 400 € pasa a pena del tipo básico (<b>6 meses–3 años</b>) si el autor acumula ≥ 3 condenas previas de la misma naturaleza, siendo al menos 1 leve.</div>
+      </article>
 
-      <!-- DAÑOS -->
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Daños</div>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 263–267</span>
-          <span class="tipo-badge badge-mixto">Leve / Menos grave</span>
+          <span class="delito-name">Daños</span>
+          <span class="tipo mixto">Leve / Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Destrucción, deterioro o inutilización de bienes ajenos. No incluye violencia personal.
+        <p class="delito-desc">Destrucción, deterioro o inutilización de bienes ajenos. No incluye violencia personal.</p>
+        <div class="pena-list">
+          <span class="pena ok">🟢 Leve ≤ 400 € → multa 1–3 meses</span>
+          <span class="pena">🔵 &gt; 400 € → 6 meses–3 años / multa</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Leve: ≤ 400 € → multa 1–3 meses</span>
-          <span class="pena-chip">🔵 &gt;400 € → 6 meses–3 años / multa</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <!-- APROPIACIÓN INDEBIDA -->
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Apropiación Indebida</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 253–254</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Apropiación indebida</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Quien recibe dinero, efectos o cualquier cosa mueble en <b>depósito, comisión o custodia</b> y lo apropia o distrae.
+        <p class="delito-desc">Quien recibe dinero, efectos o cualquier cosa mueble en <b>depósito, comisión o custodia</b> y lo apropia o distrae.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 6 meses–3 años / multa</span>
+          <span class="pena warn">⚠️ Especial gravedad → 1–6 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 6 meses–3 años / multa (tipo básico)</span>
-          <span class="pena-chip agravada">⚠️ Especial gravedad → 1–6 años</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <!-- USURPACIÓN -->
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Usurpación (Ocupación Ilegal)</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 245–246</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Usurpación · ocupación ilegal</span>
+          <span class="tipo mixto">Leve / Menos grave</span>
         </div>
-        <div class="delito-desc">
-          <b>Art. 245.1:</b> Con violencia/intimidación ocupar inmueble ajeno. <b>Art. 245.2 (ocupación pacífica):</b> sin consentimiento del titular.
+        <p class="delito-desc">Ocupación de inmueble ajeno sin consentimiento del titular.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 245.1 con violencia/intimidación → 1–2 años</span>
+          <span class="pena warn">🟡 245.2 ocupación pacífica → multa 3–6 meses</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 245.1 → 1–2 años prisión</span>
-          <span class="pena-chip multa">🟡 245.2 → multa 3–6 meses</span>
-        </div>
-        <div class="nota-policial">🚔 Art. 245.2: Solo procede si hay denuncia del titular. La Policía debe abstenerse de actuar en desahucios civiles salvo orden judicial.</div>
-      </div>
+        <div class="nota policial"><b>🚔 Art. 245.2:</b> solo procede si hay denuncia del titular. La PL debe abstenerse de actuar en desahucios civiles salvo orden judicial.</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- ══════════════════════════════════════════
-       2. DELITOS CONTRA LAS PERSONAS - LESIONES
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🩺</span>
-      <h2>Vida e Integridad Física</h2>
-      <span class="art-ref">Arts. 138–156 CP</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 2. VIDA E INTEGRIDAD FÍSICA ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-red);">
+      <span class="eyebrow">🩺 2 · VIDA E INTEGRIDAD FÍSICA · ARTS. 138–156 CP</span>
+      <span class="rule"></span>
+      <span class="meta-mono">7 TIPOS</span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Homicidio</div>
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
           <span class="art-badge">Art. 138</span>
-          <span class="tipo-badge badge-grave">Grave</span>
+          <span class="delito-name">Homicidio</span>
+          <span class="tipo grave">Grave</span>
         </div>
-        <div class="delito-desc">Matar a otro <b>sin concurrir circunstancias cualificadoras</b> de asesinato.</div>
-        <div class="pena-row">
-          <span class="pena-chip">🔴 10–15 años prisión</span>
-          <span class="pena-chip agravada">⚠️ Víctima vulnerable o violencia intrafamiliar → 15–22,5 años</span>
+        <p class="delito-desc">Matar a otro <b>sin concurrir circunstancias cualificadoras</b> de asesinato.</p>
+        <div class="pena-list">
+          <span class="pena danger">🔴 10–15 años prisión</span>
+          <span class="pena danger">⚠️ Víctima vulnerable / VIF → 15–22,5 años</span>
         </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Asesinato</div>
+      <article class="delito" style="--accent: var(--c-red-dark);">
+        <div class="delito-head">
           <span class="art-badge">Art. 139</span>
-          <span class="tipo-badge badge-grave">Grave</span>
+          <span class="delito-name">Asesinato</span>
+          <span class="tipo grave">Grave</span>
         </div>
-        <div class="delito-desc">
-          Homicidio con <b>alevosía, precio/recompensa, ensañamiento</b> o para facilitar otro delito.
+        <p class="delito-desc">Homicidio con <b>alevosía, precio/recompensa, ensañamiento</b> o para facilitar otro delito.</p>
+        <div class="pena-list">
+          <span class="pena danger">🔴 15–25 años prisión</span>
+          <span class="pena danger">⚠️ Dos o más circunstancias → 20–25 años</span>
+          <span class="pena danger">⚠️ Menor / vulnerable + alevosía → 25 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔴 15–25 años prisión</span>
-          <span class="pena-chip agravada">⚠️ Dos o más circunstancias → 20–25 años</span>
-          <span class="pena-chip agravada">⚠️ Víctima menor/vulnerable + alevosía → 25 años</span>
-        </div>
-        <div class="nota-agrav">⚠️ Feminicidio (art. 140.1.1ª): Víctima mujer por ser mujer → prisión permanente revisable.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota agrav"><b>⚠️ Feminicidio (art. 140.1.1ª):</b> víctima mujer por ser mujer → <b>prisión permanente revisable</b>.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Homicidio Imprudente</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Art. 142</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Homicidio imprudente</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">Causa la muerte por <b>imprudencia grave</b> (ej: accidente de tráfico por exceso de velocidad).</div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 1–4 años prisión + inhabilitación</span>
-          <span class="pena-chip">🟢 Imprudencia menos grave → 3 meses–1 año / multa</span>
+        <p class="delito-desc">Causa la muerte por <b>imprudencia grave</b> (ej: accidente de tráfico por exceso de velocidad).</p>
+        <div class="pena-list">
+          <span class="pena">🔵 1–4 años + inhabilitación</span>
+          <span class="pena ok">🟢 Imprudencia menos grave → 3 meses–1 año / multa</span>
         </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Lesiones Graves (tipo básico)</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Art. 147.1</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Lesiones graves (tipo básico)</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Lesiones que requieren <b>objetivamente primera asistencia facultativa + tratamiento médico o quirúrgico</b>.
+        <p class="delito-desc">Lesiones que requieren objetivamente <b>primera asistencia facultativa + tratamiento médico o quirúrgico</b>.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 3 meses–3 años prisión</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 3 meses–3 años prisión</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Lesiones Leves</div>
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
           <span class="art-badge">Art. 147.2</span>
-          <span class="tipo-badge badge-leve">Delito Leve</span>
+          <span class="delito-name">Lesiones leves</span>
+          <span class="tipo leve">Leve</span>
         </div>
-        <div class="delito-desc">Solo requieren <b>primera asistencia facultativa</b>. Sin tratamiento posterior.</div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Multa 1–3 meses</span>
+        <p class="delito-desc">Solo requieren <b>primera asistencia facultativa</b>. Sin tratamiento posterior.</p>
+        <div class="pena-list">
+          <span class="pena ok">🟢 Multa 1–3 meses</span>
         </div>
-        <div class="nota-policial">🚔 Clave: ¿requiere tratamiento médico posterior? Sí → art. 147.1. No → art. 147.2.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota policial"><b>🚔 Clave:</b> ¿requiere tratamiento médico posterior? <b>Sí → art. 147.1</b> · <b>No → art. 147.2</b>.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Lesiones Muy Graves (resultado)</div>
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 149–150</span>
-          <span class="tipo-badge badge-grave">Grave</span>
+          <span class="delito-name">Lesiones muy graves (resultado)</span>
+          <span class="tipo grave">Grave</span>
         </div>
-        <div class="delito-desc">
-          <b>Art. 149:</b> Pérdida/inutilidad de órgano, miembro principal, sentido, impotencia, grave enfermedad somática/psíquica, mutilación genital.<br>
-          <b>Art. 150:</b> Pérdida de órgano no principal, deformidad grave.
+        <p class="delito-desc">Pérdida o inutilidad de órgano, miembro principal, sentido, impotencia, mutilación, deformidad grave.</p>
+        <div class="pena-list">
+          <span class="pena danger">🔴 Art. 149 → 6–12 años</span>
+          <span class="pena danger">🔴 Art. 150 → 3–6 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔴 Art. 149 → 6–12 años prisión</span>
-          <span class="pena-chip">🔴 Art. 150 → 3–6 años prisión</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Malos Tratos — Violencia Doméstica/Género</div>
+      <article class="delito" style="--accent: var(--c-pink);">
+        <div class="delito-head">
           <span class="art-badge">Art. 153</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Malos tratos · violencia doméstica/género</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Menoscabo psíquico, lesión no constitutiva de delito o golpear/maltratar de obra a <b>cónyuge o persona con relación de afectividad análoga</b> (o descendiente, ascendiente, persona vulnerable).
+        <p class="delito-desc">Menoscabo psíquico, lesión no constitutiva de delito o golpear/maltratar de obra a <b>cónyuge o persona con relación de afectividad análoga</b> (descendiente, ascendiente, persona vulnerable).</p>
+        <div class="pena-list">
+          <span class="pena">🔵 6 meses–1 año prisión</span>
+          <span class="pena warn">+ Privación tenencia armas 3 años</span>
+          <span class="pena warn">⚠️ Domicilio común / menores → mitad superior</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 6 meses–1 año prisión</span>
-          <span class="pena-chip">+ Privación derecho tenencia armas 3 años</span>
-          <span class="pena-chip agravada">⚠️ Domicilio común / presencia menores → mitad superior</span>
-        </div>
-        <div class="nota-policial">🚔 Actuar de oficio. Siempre valorar riesgo VioGén. Separar a la víctima para tomar declaración.</div>
-      </div>
+        <div class="nota policial"><b>🚔 Clave:</b> actuar de oficio. Valorar siempre riesgo VioGén. Separar a la víctima para tomar declaración.</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- ══════════════════════════════════════════
-       3. VIOLENCIA DE GÉNERO Y DOMÉSTICA
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🛡️</span>
-      <h2>Violencia de Género y Doméstica</h2>
-      <span class="art-ref">Arts. 153, 171, 172, 173 CP</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 3. VIOLENCIA DE GÉNERO Y DOMÉSTICA ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-pink);">
+      <span class="eyebrow">🛡️ 3 · VIOLENCIA DE GÉNERO Y DOMÉSTICA · ARTS. 153, 171, 172, 173 CP</span>
+      <span class="rule"></span>
+      <span class="meta-mono">4 TIPOS</span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Amenazas en contexto VG/VD</div>
+      <article class="delito" style="--accent: var(--c-pink);">
+        <div class="delito-head">
           <span class="art-badge">Art. 171.4–5</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Amenazas en contexto VG/VD</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">Amenazar a cónyuge o persona vinculada por análoga relación de afectividad.</div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 6 meses–1 año prisión o multa 12–24 meses</span>
+        <p class="delito-desc">Amenazar a cónyuge o persona vinculada por análoga relación de afectividad.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 6 meses–1 año / multa 12–24 meses</span>
         </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Coacciones en contexto VG/VD</div>
+      <article class="delito" style="--accent: var(--c-pink);">
+        <div class="delito-head">
           <span class="art-badge">Art. 172.2</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Coacciones en contexto VG/VD</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">Coacciones leves sobre pareja o ex-pareja.</div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 6 meses–1 año / multa 12–24 meses</span>
+        <p class="delito-desc">Coacciones leves sobre pareja o ex-pareja.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 6 meses–1 año / multa 12–24 meses</span>
         </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Violencia Habitual en el Hogar</div>
+      <article class="delito" style="--accent: var(--c-pink);">
+        <div class="delito-head">
           <span class="art-badge">Art. 173.2</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Violencia habitual en el hogar</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Violencia física o psíquica <b>habitual</b> sobre cónyuge, conviviente, descendiente, ascendiente, menores o personas con discapacidad. La <b>habitualidad</b> se mide por número de actos, proximidad temporal y demás circunstancias.
+        <p class="delito-desc">Violencia física o psíquica <b>habitual</b> sobre cónyuge, conviviente, descendiente, ascendiente, menores o personas con discapacidad. La <b>habitualidad</b> se mide por número de actos, proximidad temporal y demás circunstancias.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 6 meses–3 años prisión</span>
+          <span class="pena warn">+ Priv. tenencia armas 3–5 años</span>
+          <span class="pena warn">⚠️ Menores presentes → mitad superior</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 6 meses–3 años prisión</span>
-          <span class="pena-chip">+ Privación derecho tenencia armas 3–5 años</span>
-          <span class="pena-chip agravada">⚠️ Menores presentes → mitad superior</span>
-        </div>
-        <div class="nota-policial">🚔 Protocolo VioGén obligatorio. Valoración de riesgo: NO RIESGO / BAJO / MEDIO / ALTO / EXTREMO.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota policial"><b>🚔 Protocolo VioGén obligatorio.</b> Valoración de riesgo: <b>NO RIESGO / BAJO / MEDIO / ALTO / EXTREMO</b>.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Quebrantamiento de Condena / OAP</div>
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
           <span class="art-badge">Art. 468</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Quebrantamiento de condena / OAP</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Incumplir penas, medidas de seguridad, <b>órdenes de alejamiento o protección</b>.
+        <p class="delito-desc">Incumplir penas, medidas de seguridad, <b>órdenes de alejamiento o protección</b>.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 6 meses–1 año prisión</span>
+          <span class="pena danger">⚠️ OAP víctima VG → 1–3 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 6 meses–1 año prisión</span>
-          <span class="pena-chip agravada">⚠️ OAP con víctima VG → 1–3 años (incluso con consentimiento víctima)</span>
-        </div>
-        <div class="nota-policial">🚔 El consentimiento de la víctima NO exime de responsabilidad al agresor ni al agente que no denuncia.</div>
-      </div>
+        <div class="nota agrav"><b>⚠️ Atención:</b> el consentimiento de la víctima <b>NO exime</b> de responsabilidad al agresor ni al agente que no denuncia.</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- ══════════════════════════════════════════
-       4. DELITOS CONTRA LA LIBERTAD
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">⛓️</span>
-      <h2>Delitos contra la Libertad</h2>
-      <span class="art-ref">Arts. 163–172 CP</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 4. DELITOS CONTRA LA LIBERTAD ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-superbuscador);">
+      <span class="eyebrow">⛓️ 4 · DELITOS CONTRA LA LIBERTAD · ARTS. 163–172 CP</span>
+      <span class="rule"></span>
+      <span class="meta-mono">5 TIPOS</span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Detención Ilegal</div>
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
           <span class="art-badge">Art. 163</span>
-          <span class="tipo-badge badge-grave">Grave</span>
+          <span class="delito-name">Detención ilegal</span>
+          <span class="tipo grave">Grave</span>
         </div>
-        <div class="delito-desc">Encerrar o detener a otro, privándole de <b>libertad ambulatoria</b>.</div>
-        <div class="pena-row">
-          <span class="pena-chip">🔴 4–8 años prisión (tipo básico)</span>
-          <span class="pena-chip agravada">⚠️ > 15 días → 5–8 años</span>
-          <span class="pena-chip agravada">⚠️ Simulando función pública → 5–10 años</span>
+        <p class="delito-desc">Encerrar o detener a otro privándole de <b>libertad ambulatoria</b>.</p>
+        <div class="pena-list">
+          <span class="pena danger">🔴 4–8 años (tipo básico)</span>
+          <span class="pena danger">⚠️ &gt; 15 días → 5–8 años</span>
+          <span class="pena danger">⚠️ Simulando función pública → 5–10 años</span>
         </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Secuestro</div>
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
           <span class="art-badge">Art. 164</span>
-          <span class="tipo-badge badge-grave">Grave</span>
+          <span class="delito-name">Secuestro</span>
+          <span class="tipo grave">Grave</span>
         </div>
-        <div class="delito-desc">Detención ilegal <b>exigiendo condiciones para poner en libertad</b>.</div>
-        <div class="pena-row">
-          <span class="pena-chip">🔴 6–10 años prisión</span>
-          <span class="pena-chip agravada">⚠️ Con amenaza a vida o integridad → 10–15 años</span>
+        <p class="delito-desc">Detención ilegal <b>exigiendo condiciones para poner en libertad</b>.</p>
+        <div class="pena-list">
+          <span class="pena danger">🔴 6–10 años prisión</span>
+          <span class="pena danger">⚠️ Amenaza vida/integridad → 10–15 años</span>
         </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Amenazas</div>
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 169–171</span>
-          <span class="tipo-badge badge-mixto">Leve / Menos grave</span>
+          <span class="delito-name">Amenazas</span>
+          <span class="tipo mixto">Leve / Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Amenazar a otro con causar <b>mal que constituya delito</b> (a persona, familia o bienes).
+        <p class="delito-desc">Amenazar a otro con causar <b>mal que constituya delito</b> (a persona, familia o bienes).</p>
+        <div class="pena-list">
+          <span class="pena">🔵 Graves con condición → 1–5 años / multa</span>
+          <span class="pena">🔵 Graves sin condición → 6 meses–2 años</span>
+          <span class="pena ok">🟢 Leves → multa 1–3 meses</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Graves con condición → 1–5 años / multa</span>
-          <span class="pena-chip">🔵 Graves sin condición → 6 meses–2 años</span>
-          <span class="pena-chip">🟢 Leves → multa 1–3 meses</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Coacciones</div>
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
           <span class="art-badge">Art. 172</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Coacciones</span>
+          <span class="tipo mixto">Leve / Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Impedir a alguien hacer lo que la ley no prohíbe u obligarle a hacer lo que no quiere, con <b>violencia</b>.
+        <p class="delito-desc">Impedir a alguien hacer lo que la ley no prohíbe u obligarle a hacer lo que no quiere, con <b>violencia</b>.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 6 meses–3 años / multa 12–24 m</span>
+          <span class="pena ok">🟢 Leves → multa 1–3 meses</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 6 meses–3 años / multa 12–24 meses</span>
-          <span class="pena-chip">🟢 Leves → multa 1–3 meses</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Acoso (Stalking)</div>
+      <article class="delito" style="--accent: var(--c-pink);">
+        <div class="delito-head">
           <span class="art-badge">Art. 172 ter</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Acoso (stalking)</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Hostigar a una persona <b>de forma insistente y reiterada</b> (vigilancia, comunicaciones no deseadas, intentos de contacto) alterando gravemente su vida cotidiana.
+        <p class="delito-desc">Hostigar a una persona <b>de forma insistente y reiterada</b> (vigilancia, comunicaciones no deseadas, intentos de contacto) alterando gravemente su vida cotidiana.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 6 meses–2 años / TBC</span>
+          <span class="pena warn">⚠️ Víctima vulnerable / pareja → 1–2 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 6 meses–2 años / trabajos comunidad</span>
-          <span class="pena-chip agravada">⚠️ Víctima vulnerable o pareja → 1–2 años</span>
-        </div>
-      </div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- ══════════════════════════════════════════
-       5. DELITOS CONTRA LIBERTAD SEXUAL
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🚫</span>
-      <h2>Delitos contra la Libertad Sexual</h2>
-      <span class="art-ref">Arts. 178–194 CP (LO 10/2022)</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 5. LIBERTAD SEXUAL ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-red-dark);">
+      <span class="eyebrow">🚫 5 · LIBERTAD SEXUAL · ARTS. 178–194 CP · LO 10/2022</span>
+      <span class="rule"></span>
+      <span class="meta-mono">3 TIPOS</span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Agresión Sexual</div>
+      <article class="delito" style="--accent: var(--c-red-dark);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 178–179</span>
-          <span class="tipo-badge badge-grave">Grave</span>
+          <span class="delito-name">Agresión sexual</span>
+          <span class="tipo grave">Grave</span>
         </div>
-        <div class="delito-desc">
-          <b>Solo sí es sí (LO 10/2022):</b> cualquier acto sexual <b>sin consentimiento</b> de la víctima es agresión sexual. Desaparece la distinción abuso/agresión.
+        <p class="delito-desc"><b>«Solo sí es sí» (LO 10/2022):</b> cualquier acto sexual <b>sin consentimiento</b> de la víctima es agresión sexual. Desaparece la distinción abuso/agresión.</p>
+        <div class="pena-list">
+          <span class="pena danger">🔴 Art. 178 → 1–4 años (tipo básico)</span>
+          <span class="pena danger">⚠️ Con penetración (art. 179) → 4–12 años</span>
+          <span class="pena danger">⚠️ Circunstancias agravadas → hasta 15 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔴 Art. 178 → 1–4 años (tipo básico)</span>
-          <span class="pena-chip agravada">⚠️ Con penetración (art. 179) → 4–12 años</span>
-          <span class="pena-chip agravada">⚠️ Circunstancias agravadas → hasta 15 años</span>
-        </div>
-        <div class="nota-policial">🚔 Preservar pruebas biológicas urgente. Víctima a SACIS/Urgencias sin dilación. No obligar a repetir relato.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota policial"><b>🚔 Clave:</b> preservar pruebas biológicas con urgencia. Víctima a SACIS / Urgencias sin dilación. <b>No obligar a repetir el relato</b>.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Agresión Sexual a Menores de 16</div>
+      <article class="delito" style="--accent: var(--c-red-dark);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 183–184</span>
-          <span class="tipo-badge badge-grave">Grave</span>
+          <span class="delito-name">Agresión sexual a menores de 16</span>
+          <span class="tipo grave">Grave</span>
         </div>
-        <div class="delito-desc">
-          Edad de consentimiento sexual en España: <b>16 años</b>. Cualquier acto con menor de 16 es delito aunque haya aparente consentimiento.
+        <p class="delito-desc">Edad de consentimiento sexual en España: <b>16 años</b>. Cualquier acto con menor de 16 es delito aunque haya aparente consentimiento.</p>
+        <div class="pena-list">
+          <span class="pena danger">🔴 2–10 años según acto y circunstancias</span>
+          <span class="pena danger">⚠️ Con penetración → 8–15 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔴 2–10 años según acto y circunstancias</span>
-          <span class="pena-chip agravada">⚠️ Con penetración → 8–15 años</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Acoso Sexual</div>
+      <article class="delito" style="--accent: var(--c-pink);">
+        <div class="delito-head">
           <span class="art-badge">Art. 184</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Acoso sexual</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">Solicitar favores sexuales en ámbito laboral/docente creando situación objetivamente intimidatoria, degradante u hostil.</div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 3–5 meses / multa 6–10 meses</span>
+        <p class="delito-desc">Solicitar favores sexuales en ámbito laboral/docente creando situación objetivamente intimidatoria, degradante u hostil.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 3–5 meses / multa 6–10 meses</span>
         </div>
-      </div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- ══════════════════════════════════════════
-       6. DELITOS DE TRÁFICO
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🚗</span>
-      <h2>Delitos contra la Seguridad Vial</h2>
-      <span class="art-ref">Arts. 379–385 CP</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 6. SEGURIDAD VIAL (PENAL) ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--terracotta);">
+      <span class="eyebrow">🚗 6 · SEGURIDAD VIAL · ARTS. 379–385 CP</span>
+      <span class="rule"></span>
+      <span class="meta-mono">6 TIPOS</span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Conducción bajo influencia de alcohol</div>
+      <article class="delito" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 379.2</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Conducción bajo influencia de alcohol</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Conducir con <b>tasa de alcohol en aire espirado &gt; 0,60 mg/l</b> o en sangre &gt; 1,2 g/l. También bajo efectos de drogas tóxicas.
+        <p class="delito-desc">Conducir con <b>tasa &gt; 0,60 mg/l</b> en aire espirado o &gt; 1,2 g/l en sangre. También bajo efectos de drogas tóxicas.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 3–6 meses / multa 6–12 m / TBC 31–90 días</span>
+          <span class="pena warn">+ Priv. carné 1–4 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 3–6 meses prisión / multa 6–12 meses / TBC 31–90 días</span>
-          <span class="pena-chip">+ Privación carné 1–4 años</span>
-        </div>
-        <div class="nota-policial">🚔 Tasa 0,25–0,60 mg/l: infracción administrativa (no delito). El delito comienza en 0,60 mg/l.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota policial"><b>🚔 Clave:</b> tasa <b>0,25–0,60 mg/l es infracción administrativa</b> (no delito). El delito comienza en 0,60 mg/l.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Exceso de Velocidad (Penal)</div>
+      <article class="delito" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 379.1</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Exceso de velocidad (penal)</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Superar en <b>&gt; 60 km/h</b> el límite en vías urbanas o en <b>&gt; 80 km/h</b> en vías interurbanas.
+        <p class="delito-desc">Superar el límite en <b>&gt; 60 km/h</b> en vías urbanas o <b>&gt; 80 km/h</b> en interurbanas.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 3–6 meses / multa / TBC</span>
+          <span class="pena warn">+ Priv. carné 1–4 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 3–6 meses prisión / multa / TBC</span>
-          <span class="pena-chip">+ Privación carné 1–4 años</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Conducción Temeraria</div>
+      <article class="delito" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 380</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Conducción temeraria</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Conducir con <b>temeridad manifiesta</b> poniendo en concreto peligro la vida o integridad de personas.
+        <p class="delito-desc">Conducir con <b>temeridad manifiesta</b> poniendo en concreto peligro la vida o integridad de personas.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 6 meses–2 años prisión</span>
+          <span class="pena warn">+ Priv. carné 1–6 años</span>
+          <span class="pena danger">⚠️ Manifiesto desprecio a la vida → hasta 5 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 6 meses–2 años prisión</span>
-          <span class="pena-chip">+ Privación carné 1–6 años</span>
-          <span class="pena-chip agravada">⚠️ Con manifiesto desprecio a vida → hasta 5 años</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Negativa a Prueba de Alcoholemia</div>
+      <article class="delito" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 383</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Negativa a prueba de alcoholemia</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Negarse a someterse a las pruebas legalmente establecidas de alcohol o drogas, requerido por agente de la autoridad.
+        <p class="delito-desc">Negarse a someterse a las pruebas legalmente establecidas de alcohol o drogas, requerido por agente de la autoridad.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 6 meses–1 año prisión / TBC 31–90 días</span>
+          <span class="pena warn">+ Priv. carné 1–4 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 6 meses–1 año prisión / TBC 31–90 días</span>
-          <span class="pena-chip">+ Privación carné 1–4 años</span>
-        </div>
-        <div class="nota-policial">🚔 Reflejar en atestado la negativa expresa. Dos controles positivos y uno negativo a continuar = negativa. Documentar testigos.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota policial"><b>🚔 Clave:</b> reflejar la negativa expresa en el atestado. Dos controles positivos y uno negativo a continuar = negativa. Documentar testigos.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Conducción sin Permiso / Carné Retirado</div>
+      <article class="delito" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 384</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Conducción sin permiso / carné retirado</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Conducir <b>privado judicialmente del carné</b>, tras resolución firme de privación o sin haber obtenido nunca el permiso.
+        <p class="delito-desc">Conducir <b>privado judicialmente del carné</b>, tras resolución firme de privación o sin haber obtenido nunca el permiso.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 3–6 meses / multa 12–24 m / TBC</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 3–6 meses prisión / multa 12–24 meses / TBC 31–90 días</span>
-        </div>
-        <div class="nota-policial">🚔 Consultar DGT en tiempo real. Privación judicial ≠ caducidad administrativa (la caducidad no es delito).</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota policial"><b>🚔 Clave:</b> consultar DGT en tiempo real. <b>Privación judicial ≠ caducidad administrativa</b> (la caducidad no es delito).</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Homicidio / Lesiones por Imprudencia Vial</div>
+      <article class="delito" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 142, 152</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Homicidio / lesiones por imprudencia vial</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Causar muerte o lesiones graves por <b>imprudencia grave</b> al volante.
+        <p class="delito-desc">Causar muerte o lesiones graves por <b>imprudencia grave</b> al volante.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 Muerte → 1–4 años + carné 4–8 años</span>
+          <span class="pena">🔵 Lesiones → 6 m–2 años + carné 1–4 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Muerte imprud. grave → 1–4 años + privación carné 4–8 años</span>
-          <span class="pena-chip">🔵 Lesiones graves → 6 meses–2 años + carné 1–4 años</span>
-        </div>
-      </div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- ══════════════════════════════════════════
-       7. DELITOS CONTRA ORDEN PÚBLICO / AUTORIDAD
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🚔</span>
-      <h2>Orden Público y Autoridad</h2>
-      <span class="art-ref">Arts. 550–562 CP</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 7. ORDEN PÚBLICO Y AUTORIDAD ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-operativa);">
+      <span class="eyebrow">🚔 7 · ORDEN PÚBLICO Y AUTORIDAD · ARTS. 550–562 CP</span>
+      <span class="rule"></span>
+      <span class="meta-mono">4 TIPOS</span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Atentado contra Agente de la Autoridad</div>
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 550–551</span>
-          <span class="tipo-badge badge-grave">Grave</span>
+          <span class="delito-name">Atentado contra agente de la autoridad</span>
+          <span class="tipo grave">Grave</span>
         </div>
-        <div class="delito-desc">
-          Acometer, resistir activamente con violencia o intimidación <b>grave</b> a agentes de la autoridad en el ejercicio de sus funciones, o cuando accionen con motivo de éstas.
+        <p class="delito-desc">Acometer, resistir activamente con violencia o intimidación <b>grave</b> a agentes de la autoridad en el ejercicio de sus funciones, o cuando accionen con motivo de éstas.</p>
+        <div class="pena-list">
+          <span class="pena danger">🔴 2–4 años (tipo básico)</span>
+          <span class="pena danger">⚠️ Arma / objeto peligroso → 3–6 años</span>
+          <span class="pena danger">⚠️ Resultado de lesiones → pena superior en grado</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔴 2–4 años prisión (tipo básico)</span>
-          <span class="pena-chip agravada">⚠️ Arma u objeto peligroso → 3–6 años</span>
-          <span class="pena-chip agravada">⚠️ Resultado de lesiones → pena superior en grado</span>
-        </div>
-        <div class="nota-policial">🚔 Incluye Policía Local, GC, CNP, agentes forestales, bomberos y personal sanitario en emergencias.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota policial"><b>🚔 Sujetos protegidos:</b> incluye Policía Local, GC, CNP, agentes forestales, bomberos y personal sanitario en emergencias.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Resistencia y Desobediencia Grave</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Art. 556</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Resistencia y desobediencia grave</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Resistencia activa <b>no grave</b> o desobediencia grave a la autoridad o sus agentes. Diferencia clave con atentado: <b>sin violencia o intimidación grave</b>.
+        <p class="delito-desc">Resistencia activa <b>no grave</b> o desobediencia grave a la autoridad o sus agentes. Diferencia clave con atentado: <b>sin violencia o intimidación grave</b>.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 3 meses–1 año / multa 6–18 m</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 3 meses–1 año prisión / multa 6–18 meses</span>
-        </div>
-        <div class="nota-policial">🚔 Resistencia pasiva (forcejeo sin agresión) → art. 556. Resistencia activa con golpes → art. 550.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota policial"><b>🚔 Clave:</b> resistencia <b>pasiva</b> (forcejeo sin agresión) → art. 556. Resistencia <b>activa</b> con golpes → art. 550.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Desórdenes Públicos</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 557–558</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Desórdenes públicos</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Actuar en grupo alterando gravemente el orden público con violencia, intimidación o con fuerza sobre personas o cosas.
+        <p class="delito-desc">Actuar en grupo alterando gravemente el orden público con violencia, intimidación o con fuerza sobre personas o cosas.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 6 meses–3 años prisión</span>
+          <span class="pena danger">⚠️ Con armas → 3–5 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 6 meses–3 años prisión</span>
-          <span class="pena-chip agravada">⚠️ Con armas → 3–5 años</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Usurpación de Funciones Públicas</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Art. 402</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Usurpación de funciones públicas</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">Ejercer actos propios de una autoridad o funcionario sin serlo, o hacerse pasar por agente.</div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 1–3 años prisión</span>
+        <p class="delito-desc">Ejercer actos propios de una autoridad o funcionario sin serlo, o hacerse pasar por agente.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 1–3 años prisión</span>
         </div>
-      </div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- ══════════════════════════════════════════
-       8. DROGAS Y ARMAS
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">⚠️</span>
-      <h2>Drogas y Tenencia Ilícita de Armas</h2>
-      <span class="art-ref">Arts. 368–370, 563–564 CP</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 8. DROGAS Y TENENCIA ILÍCITA DE ARMAS ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-slate);">
+      <span class="eyebrow">⚠️ 8 · DROGAS Y TENENCIA ILÍCITA DE ARMAS · ARTS. 368–370, 563–564 CP</span>
+      <span class="rule"></span>
+      <span class="meta-mono">5 TIPOS · 2 NUEVOS LO 1/2026</span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Tráfico de Drogas — Sustancias Graves para la Salud</div>
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 368–369</span>
-          <span class="tipo-badge badge-grave">Grave</span>
+          <span class="delito-name">Tráfico de drogas · sustancias graves</span>
+          <span class="tipo grave">Grave</span>
         </div>
-        <div class="delito-desc">
-          Promover, favorecer o facilitar el consumo ilegal de drogas que <b>causan grave daño a la salud</b> (cocaína, heroína, MDMA, etc.).
+        <p class="delito-desc">Promover, favorecer o facilitar el consumo ilegal de drogas que <b>causan grave daño a la salud</b> (cocaína, heroína, MDMA, etc.).</p>
+        <div class="pena-list">
+          <span class="pena danger">🔴 3–6 años + multa</span>
+          <span class="pena danger">⚠️ Agravado art. 369 → 4,5–10 años</span>
+          <span class="pena danger">⚠️ Organización / notoria importancia → hasta 12 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔴 3–6 años prisión + multa</span>
-          <span class="pena-chip agravada">⚠️ Agravado (art. 369) → 4,5–10 años</span>
-          <span class="pena-chip agravada">⚠️ Organización, notoria importancia → hasta 12 años</span>
-        </div>
-        <div class="nota-policial">🚔 Consumo propio no es delito. La cantidad habitual de consumo (dosis personal) excluye el tipo. Tabla orientativa de cantidades → tablas Fiscalía.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota policial"><b>🚔 Clave:</b> el <b>consumo propio no es delito</b>. La cantidad habitual de consumo (dosis personal) excluye el tipo. Tabla orientativa de cantidades → tablas Fiscalía.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Tráfico de Drogas — Sustancias Leves para la Salud</div>
-          <span class="art-badge">Art. 368 (cannabis, etc.)</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 368</span>
+          <span class="delito-name">Tráfico de drogas · sustancias leves</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Drogas que <b>no causan grave daño</b> a la salud (cannabis/hachís principalmente).
+        <p class="delito-desc">Drogas que <b>no causan grave daño</b> a la salud (cannabis/hachís principalmente).</p>
+        <div class="pena-list">
+          <span class="pena">🔵 1–3 años + multa</span>
+          <span class="pena warn">⚠️ Notoria importancia → 2–4,5 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 1–3 años prisión + multa</span>
-          <span class="pena-chip agravada">⚠️ Notoria importancia → 2–4,5 años</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Tenencia Ilícita de Armas</div>
+      <article class="delito" style="--accent: var(--c-slate);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 563–564</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Tenencia ilícita de armas</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Tenencia de <b>armas de guerra</b>, armas de fuego reglamentadas sin licencia, armas prohibidas (navajas automáticas, puños americanos, etc.).
+        <p class="delito-desc">Tenencia de <b>armas de guerra</b>, armas de fuego reglamentadas sin licencia, o armas prohibidas (navajas automáticas, puños americanos, etc.).</p>
+        <div class="pena-list">
+          <span class="pena warn">🔵 Armas de guerra → 2–4 años</span>
+          <span class="pena">🔵 Reglamentadas sin licencia → 1–2 años / multa</span>
+          <span class="pena">🔵 Armas prohibidas → 6 meses–2 años</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Armas de guerra → 2–4 años</span>
-          <span class="pena-chip">🔵 Armas reglamentadas sin licencia → 1–2 años / multa</span>
-          <span class="pena-chip">🔵 Armas prohibidas → 6 meses–2 años</span>
-        </div>
-        <div class="nota-policial">🚔 El portador debe mostrar licencia/guía de pertenencia. Registrar el arma y su munición. Intervención cautelar y parte a Intervención de Armas.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota policial"><b>🚔 Clave:</b> el portador debe mostrar licencia/guía de pertenencia. Registrar el arma y munición. Intervención cautelar y parte a Intervención de Armas.</div>
+      </article>
 
-      <!-- PETAQUEO -->
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">«Petaqueo» — Suministro de Combustible a Narcolanchas</div>
-          <span class="art-badge">Art. 568 CP (nuevo)</span>
-          <span class="tipo-badge badge-grave">Grave</span>
-          <span class="badge-nuevo">⚡ NUEVO LO 1/2026</span>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 568.2</span>
+          <span class="delito-name">«Petaqueo» · suministro combustible a narcolanchas</span>
+          <span class="tipo nuevo">⚡ Nuevo LO 1/2026 · Grave</span>
         </div>
-        <div class="delito-desc">
-          Uso de <b>combustible líquido como sustancia inflamable</b> para abastecer embarcaciones dedicadas al tráfico de drogas. Práctica habitual en el Estrecho de Gibraltar y Costa del Sol.
+        <p class="delito-desc">Uso de <b>combustible líquido como sustancia inflamable</b> para abastecer embarcaciones dedicadas al tráfico de drogas. Práctica habitual en Estrecho de Gibraltar y Costa del Sol.</p>
+        <div class="pena-list">
+          <span class="pena danger">🔴 3–5 años (vs. art. 568 general: 1–3 años)</span>
+          <span class="pena terra">⬇️ Conducta de menor entidad → pena inferior en grado</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔴 3–5 años prisión (vs. pena general art. 568: 1–3 años)</span>
-          <span class="pena-chip">⬇️ Si conducta de menor entidad → pena inferior en grado</span>
-        </div>
-        <div class="nota-policial">🚔 Coordinación con Guardia Civil (Servicio Marítimo) y Vigilancia Aduanera. Documentar tipo y cantidad de combustible, embarcación y conexión con tráfico de drogas.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota policial"><b>🚔 Clave:</b> coordinación con GC (Servicio Marítimo) y Vigilancia Aduanera. Documentar tipo y cantidad de combustible, embarcación y conexión con tráfico de drogas.</div>
+      </article>
 
-      <!-- DEFRAUDACIÓN ELÉCTRICA PARA DROGAS -->
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Defraudación de Fluido Eléctrico para Cultivo de Drogas</div>
-          <span class="art-badge">Art. 255.3 CP (nuevo)</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
-          <span class="badge-nuevo">⚡ NUEVO LO 1/2026</span>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 255.3</span>
+          <span class="delito-name">Defraudación de fluido eléctrico para cultivo de drogas</span>
+          <span class="tipo nuevo">⚡ Nuevo LO 1/2026 · Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Defraudar energía eléctrica (enganche ilegal) con la <b>finalidad de abastecer instalaciones usadas para el cultivo o producción de drogas</b> (art. 368 CP).
+        <p class="delito-desc">Defraudar energía eléctrica (enganche ilegal) con la <b>finalidad de abastecer instalaciones usadas para el cultivo o producción de drogas</b> (art. 368 CP).</p>
+        <div class="pena-list">
+          <span class="pena terra">🔵 6–18 meses prisión / multa del tanto al triplo</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 6–18 meses prisión o multa del tanto al triplo</span>
-        </div>
-        <div class="nota-policial">🚔 Muy frecuente en plantaciones indoor de cannabis. Documentar el enganche eléctrico como delito autónomo además del art. 368. Coordinar con la compañía eléctrica para acreditar la defraudación.</div>
-      </div>
+        <div class="nota policial"><b>🚔 Clave:</b> muy frecuente en plantaciones <i>indoor</i> de cannabis. Documentar el enganche eléctrico como delito autónomo además del art. 368. Coordinar con la compañía eléctrica para acreditar la defraudación.</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- ══════════════════════════════════════════
-       9. DELITOS CONTRA LA INTEGRIDAD MORAL
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🧠</span>
-      <h2>Integridad Moral, Honor y Privacidad</h2>
-      <span class="art-ref">Arts. 173, 205–213, 197 CP</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 9. INTEGRIDAD MORAL, HONOR Y PRIVACIDAD ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-recursos);">
+      <span class="eyebrow">🧠 9 · INTEGRIDAD MORAL, HONOR Y PRIVACIDAD · ARTS. 173, 197, 205–213 CP</span>
+      <span class="rule"></span>
+      <span class="meta-mono">3 TIPOS</span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Trato Degradante</div>
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
           <span class="art-badge">Art. 173.1</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Trato degradante</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">Infligir a otra persona un trato degradante, menoscabando gravemente su integridad moral.</div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 6 meses–2 años prisión</span>
+        <p class="delito-desc">Infligir a otra persona un trato degradante, menoscabando gravemente su integridad moral.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 6 meses–2 años prisión</span>
         </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Calumnia e Injuria</div>
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 205–213</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Calumnia e injuria</span>
+          <span class="tipo mixto">Leve / Menos grave</span>
         </div>
-        <div class="delito-desc">
-          <b>Calumnia (art. 205):</b> imputar a alguien un delito sabiendo que es falso. <b>Injuria (art. 208):</b> expresión que lesiona dignidad o fama de otro.
+        <p class="delito-desc"><b>Calumnia (205):</b> imputar a alguien un delito sabiendo que es falso. <b>Injuria (208):</b> expresión que lesiona dignidad o fama.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 Calumnia → multa 6–24 meses</span>
+          <span class="pena warn">🟡 Injuria grave → multa 3–12 meses</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Calumnia → multa 6–24 meses</span>
-          <span class="pena-chip multa">🟡 Injuria grave → multa 3–12 meses</span>
-        </div>
-        <div class="nota-agrav">⚠️ Son delitos semipúblicos: exigen denuncia del ofendido para perseguirse, salvo que afecten a funcionario público.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota agrav"><b>⚠️ Atención:</b> son delitos <b>semipúblicos</b> — exigen denuncia del ofendido para perseguirse, salvo que afecten a funcionario público.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Delitos contra la Intimidad (Sexting no consentido)</div>
-          <span class="art-badge">Art. 197 y 197.7</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+      <article class="delito" style="--accent: var(--c-pink);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 197 / 197.7</span>
+          <span class="delito-name">Intimidad · sexting no consentido</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Difundir imágenes o grabaciones íntimas <b>sin consentimiento</b> de la persona afectada, obtenidas con su anuencia en un contexto de intimidad.
+        <p class="delito-desc">Difundir imágenes o grabaciones íntimas <b>sin consentimiento</b> de la persona afectada, obtenidas con su anuencia en un contexto de intimidad.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 3 meses–1 año / multa 6–12 meses</span>
+          <span class="pena warn">⚠️ Cónyuge / pareja → mitad superior</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 3 meses–1 año / multa 6–12 meses</span>
-          <span class="pena-chip agravada">⚠️ Cónyuge / pareja → mitad superior</span>
-        </div>
-      </div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- ══════════════════════════════════════════
-       10. DELITOS CONTRA LA ADMINISTRACIÓN DE JUSTICIA
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">⚖️</span>
-      <h2>Administración de Justicia y Fe Pública</h2>
-      <span class="art-ref">Arts. 390–396, 458–462 CP</span>
-      <span class="toggle">▼</span>
+  <!-- ═══ 10. ADMINISTRACIÓN DE JUSTICIA Y FE PÚBLICA ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-leyes);">
+      <span class="eyebrow">⚖️ 10 · ADMINISTRACIÓN DE JUSTICIA Y FE PÚBLICA · ARTS. 390–396, 458–462 CP</span>
+      <span class="rule"></span>
+      <span class="meta-mono">3 TIPOS</span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Falsedad Documental</div>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 390–392</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Falsedad documental</span>
+          <span class="tipo mixto">Leve / Menos grave / Grave</span>
         </div>
-        <div class="delito-desc">
-          Alterar un documento, suponer intervención de personas que no la han tenido, o faltar a la verdad en la narración de hechos (en documentos públicos, privados u oficiales).
+        <p class="delito-desc">Alterar un documento, suponer intervención de personas que no la han tenido, o faltar a la verdad en la narración de hechos (en documentos públicos, privados u oficiales).</p>
+        <div class="pena-list">
+          <span class="pena danger">🔴 Funcionario → 3–6 años + inhabilitación</span>
+          <span class="pena">🔵 Particular doc. público → 6 m–3 años + multa</span>
+          <span class="pena warn">🟡 Particular doc. privado → multa 6–24 m</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔴 Funcionario → 3–6 años + inhabilitación</span>
-          <span class="pena-chip">🔵 Particular, doc. público → 6 meses–3 años + multa</span>
-          <span class="pena-chip multa">🟡 Particular, doc. privado → multa 6–24 meses</span>
-        </div>
-        <div class="nota-policial">🚔 Muy frecuente: DNI, permisos conducción, partes accidente, contratos. Conservar documento original para pericial.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota policial"><b>🚔 Clave:</b> muy frecuente — DNI, permisos de conducción, partes de accidente, contratos. Conservar el documento original para pericial.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Falso Testimonio</div>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
           <span class="art-badge">Arts. 458–460</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Falso testimonio</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">Declarar como testigo faltando a la verdad en causa judicial.</div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Causa criminal → 1–3 años + multa 6–12 meses</span>
-          <span class="pena-chip multa">🟡 Causa civil → multa 6–24 meses</span>
+        <p class="delito-desc">Declarar como testigo faltando a la verdad en causa judicial.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 Causa criminal → 1–3 años + multa 6–12 m</span>
+          <span class="pena warn">🟡 Causa civil → multa 6–24 meses</span>
         </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Encubrimiento</div>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
           <span class="art-badge">Art. 451</span>
-          <span class="tipo-badge badge-menos">Menos Grave</span>
+          <span class="delito-name">Encubrimiento</span>
+          <span class="tipo menos">Menos grave</span>
         </div>
-        <div class="delito-desc">
-          Auxiliar a los autores de un delito para <b>beneficiarse del mismo o impedir su descubrimiento</b>, sin haber participado en él.
+        <p class="delito-desc">Auxiliar a los autores de un delito para <b>beneficiarse del mismo o impedir su descubrimiento</b>, sin haber participado en él.</p>
+        <div class="pena-list">
+          <span class="pena">🔵 Multa / prisión según delito encubierto</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Multa / prisión según delito encubierto</span>
-        </div>
-        <div class="nota-agrav">⚠️ Excluido el encubrimiento de parientes próximos (art. 454 CP).</div>
-      </div>
+        <div class="nota agrav"><b>⚠️ Excepción:</b> excluido el encubrimiento de <b>parientes próximos</b> (art. 454 CP).</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- ══════════════════════════════════════════
-       CUADRO RECUERDA
-  ══════════════════════════════════════════ -->
-  <div class="recuerda">
-    <h3>📋 Recuerda — Claves Operativas</h3>
+  <!-- ═══ RECUERDA · CLAVES OPERATIVAS ═══ -->
+  <section class="recuerda">
+    <div class="r-head">
+      <span style="font-size: 22px;">📋</span>
+      <h2>RECUERDA · CLAVES OPERATIVAS</h2>
+    </div>
     <ul>
-      <li>⚡ <b>LO 1/2026 (en vigor 10/04/2026):</b> El hurto de <b>≤ 400 €</b> pasa a ser <b>MENOS GRAVE</b> (6–18 meses prisión) si el autor tiene <b>3+ condenas previas</b> de igual naturaleza, al menos 1 leve. Comprueba antecedentes SIEMPRE antes de calificar.</li>
-      <li>⚡ <b>Hurto de móvil (LO 1/2026):</b> Tipo agravado propio. Anota siempre el <b>IMEI</b> en el atestado. Pena: 6–18 meses (puede llegar a 3 años con multirreincidencia).</li>
-      <li>⚡ <b>Los Ayuntamientos</b> ya pueden ejercer acción penal en delitos de hurto (reforma art. 105 LECrim). Coordina con el servicio jurídico municipal si procede.</li>
-      <li>La clasificación <b>leve / menos grave / grave</b> depende de la pena en abstracto, no de lo que se imponga en el caso concreto.</li>
-      <li>Los delitos <b>leves</b> prescriben en 1 año; los menos graves en 3 y los graves según su penalidad (art. 131 CP).</li>
-      <li>En <b>delitos semipúblicos</b> (injurias, calumnias) solo puede perseguirse con denuncia del ofendido. En los <b>delitos públicos</b> actúas de oficio.</li>
-      <li>El umbral del delito de <b>hurto</b> y <b>daños</b> básico es <b>400 €</b>. Por encima → menos grave. Por debajo → leve (salvo multirreincidencia).</li>
-      <li>En <b>tráfico</b>: el delito de alcoholemia comienza en <b>0,60 mg/l</b> en aire espirado (0,25–0,60 → infracción administrativa).</li>
-      <li>La <b>negativa a la prueba de alcoholemia</b> se persigue aunque el conductor no hubiera dado positivo.</li>
-      <li>En <b>VG/VD</b>: actuar siempre de oficio. El consentimiento de la víctima no elimina el delito de quebrantamiento de OAP.</li>
-      <li>La <b>resistencia pasiva</b> es art. 556 (desobediencia). La resistencia activa con golpes/agresión es <b>atentado</b> (art. 550).</li>
-      <li>En drogas: las cantidades de <b>consumo propio</b> siguen las tablas orientativas de la Fiscalía según sustancia.</li>
+      <li><div><b>⚡ LO 1/2026 (en vigor 10/04/2026):</b> el hurto de ≤ 400 € pasa a <b>menos grave</b> (6–18 meses prisión) si el autor tiene <b>3+ condenas previas</b> de igual naturaleza, al menos 1 leve. Comprueba antecedentes SIEMPRE antes de calificar.</div></li>
+      <li><div><b>⚡ Hurto de móvil (LO 1/2026):</b> tipo agravado propio. Anota siempre el <b>IMEI</b> en el atestado. Pena: 6–18 meses (puede llegar a 3 años con multirreincidencia).</div></li>
+      <li><div><b>⚡ Ayuntamientos legitimados</b> para ejercer acción penal en delitos de hurto (reforma art. 105 LECrim). Coordina con el servicio jurídico municipal si procede.</div></li>
+      <li><div>La clasificación <b>leve / menos grave / grave</b> depende de la pena en abstracto, no de lo que se imponga en el caso concreto.</div></li>
+      <li><div>Los delitos <b>leves</b> prescriben en 1 año; los menos graves en 3; los graves según penalidad (art. 131 CP).</div></li>
+      <li><div>En <b>delitos semipúblicos</b> (injurias, calumnias) solo se persigue con denuncia del ofendido. En los <b>públicos</b> se actúa de oficio.</div></li>
+      <li><div>El umbral del <b>hurto</b> y <b>daños</b> básico es <b>400 €</b>: por encima → menos grave; por debajo → leve (salvo multirreincidencia).</div></li>
+      <li><div>En <b>tráfico</b>: el delito de alcoholemia comienza en <b>0,60 mg/l</b> en aire espirado (0,25–0,60 → infracción administrativa).</div></li>
+      <li><div>La <b>negativa a la prueba de alcoholemia</b> se persigue aunque el conductor no hubiera dado positivo.</div></li>
+      <li><div>En <b>VG/VD</b>: actuar siempre de oficio. El consentimiento de la víctima no elimina el delito de quebrantamiento de OAP.</div></li>
+      <li><div><b>Resistencia pasiva</b> → art. 556 (desobediencia). <b>Resistencia activa con golpes/agresión</b> → atentado (art. 550).</div></li>
+      <li><div>En drogas: las cantidades de <b>consumo propio</b> siguen las tablas orientativas de la Fiscalía según sustancia.</div></li>
     </ul>
-  </div>
+  </section>
 
-  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+  <!-- ═══ RECURSOS ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-recursos);">
+      <span class="eyebrow">📚 RECURSOS Y MATERIAL DE ESTUDIO</span>
+      <span class="rule"></span>
+    </div>
+    <div class="res-grid">
+      <a class="res-card" href="https://www.boe.es/buscar/act.php?id=BOE-A-1995-25444" target="_blank" rel="noopener"><span class="res-icon">📄</span><div><h4>Texto íntegro · BOE</h4><p>LO 10/1995 consolidada</p></div></a>
+      <a class="res-card" href="https://www.boe.es/buscar/act.php?id=BOE-A-2026-7000" target="_blank" rel="noopener"><span class="res-icon">⚡</span><div><h4>Reforma LO 1/2026</h4><p>BOE 09/04/2026</p></div></a>
+      <a class="res-card" href="/test/codi-penal"><span class="res-icon">📝</span><div><h4>Test del tema</h4><p>Preguntas de oposición · CP</p></div></a>
+      <a class="res-card" href="#"><span class="res-icon">🎯</span><div><h4>Flashcards</h4><p>Memoriza artículos clave</p></div></a>
+    </div>
+  </section>
 
 </div>
-
-<script>
-  function toggle(header) {
-    header.classList.toggle('open');
-    const body = header.nextElementSibling;
-    if (body.style.display === 'none' || body.style.display === '') {
-      body.style.display = 'block';
-      body.style.animation = 'fadeUp .3s ease';
-    } else {
-      body.style.display = 'none';
-    }
-  }
-  // Abrir primera categoría por defecto
-  document.querySelector('.cat-body').style.display = 'block';
-</script>
 </body>
 </html>
