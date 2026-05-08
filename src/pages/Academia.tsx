@@ -114,7 +114,7 @@ export default function Academia() {
 
       {/* 3 ROUTES */}
       <section className="routes">
-        <Link to="/test" className="route retos">
+        <Link to="/retos" className="route retos">
           <span className="ribbon hot">{t('academia.route.retos.ribbon')}</span>
           <div className="icon-block"><span style={{ fontSize: 44 }}>⚡</span></div>
           <h2>
