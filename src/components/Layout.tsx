@@ -8,23 +8,17 @@ import Sidebar from './Sidebar';
 import GdprBanner from './GdprBanner';
 
 function BrandShield({ className = '' }: { className?: string }) {
+  // Shield-i (rebranding 2026): escut en tinta amb la "i" d'info
+  // dibuixada com a cercle + barra terracota (sense dependència de
+  // tipografia, escala perfectament a qualsevol mida).
   return (
-    <svg className={`brand-shield ${className}`} viewBox="0 0 32 36" fill="none" aria-hidden>
+    <svg className={`brand-shield ${className}`} viewBox="0 0 64 64" fill="none" aria-hidden>
       <path
-        d="M16 1.5 L29.5 6 V18 C29.5 26 23.5 32 16 34.5 C8.5 32 2.5 26 2.5 18 V6 Z"
+        d="M32 4 L56 12 V32 C56 46 45 56 32 60 C19 56 8 46 8 32 V12 Z"
         fill="var(--ink)"
       />
-      <text
-        x="16"
-        y="22.5"
-        textAnchor="middle"
-        fontFamily="Plus Jakarta Sans, sans-serif"
-        fontWeight={800}
-        fontSize={15}
-        fill="var(--terracotta)"
-      >
-        i
-      </text>
+      <circle cx="32" cy="22" r="4.2" fill="var(--terracotta)" />
+      <rect x="28.4" y="30" width="7.2" height="20" rx="3.6" fill="var(--terracotta)" />
     </svg>
   );
 }
@@ -195,7 +189,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <footer className="border-t border-line mt-16 sm:mt-20">
         <div className="shell flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-9 sm:py-10 text-[13.5px] text-text-3">
           <div className="flex items-center gap-3">
-            <BrandShield className="!w-[22px] !h-[24px]" />
+            <BrandShield className="!w-[22px] !h-[22px]" />
             <span>© 2026 Infopol · {t('footer.unofficial')}</span>
           </div>
           <nav className="flex items-center gap-5">
