@@ -1,505 +1,464 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { T } from '../../tokens';
-import Icon from '../../components/Icon';
-import { StatusBar } from '../../components/Shared';
 import { LLEIS } from '../../data/lleis';
 
-const TABS = [
-  { id: 'resum',       label: 'Resum' },
-  { id: 'cronologia',  label: 'Cronologia' },
-  { id: 'estructura',  label: 'Estructura' },
-  { id: 'funcions',    label: 'Funcions · art. 11' },
-  { id: 'principis',   label: 'Principis' },
-  { id: 'operativa',   label: 'Operativa PL' },
-  { id: 'reformes',    label: 'Reformes' },
-];
+// ─── Theme: modo oscuro institucional Policía Local ─────────────────
+const C = {
+  bgMain:    '#0A1628',
+  bgSection: '#0E2244',
+  bgCard:    '#0F2A55',
+  bgCard2:   '#142F60',
+  line:      'rgba(200,160,40,0.22)',
+  line2:     'rgba(255,255,255,0.08)',
+  gold:      '#C8A028',
+  goldSoft:  '#E2BD3F',
+  goldBg:    'rgba(200,160,40,0.10)',
+  blue:      '#1A5C96',
+  blueSoft:  'rgba(26,92,150,0.22)',
+  red:       '#C8281E',
+  redSoft:   'rgba(200,40,30,0.18)',
+  green:     '#1A7A3C',
+  greenSoft: 'rgba(26,122,60,0.20)',
+  text:      '#F2EAD3',
+  textSoft:  '#C9C2B0',
+  textMuted: '#8E897A',
+};
 
-function Crumbs({ here }) {
+const FONT_DISPLAY = "'Oswald', 'Manrope', system-ui, sans-serif";
+const FONT_BODY    = "'Source Sans 3', 'Manrope', system-ui, sans-serif";
+const FONT_MONO    = "'JetBrains Mono', ui-monospace, monospace";
+
+// ─── Mini chips (badges) ────────────────────────────────────────────
+const CHIP_STYLE = {
+  info:     { bg: C.blueSoft,   fg: '#9BC4F0', border: 'rgba(26,92,150,0.45)' },
+  local:    { bg: C.goldBg,     fg: C.goldSoft, border: 'rgba(200,160,40,0.45)' },
+  positivo: { bg: C.greenSoft,  fg: '#74D69A', border: 'rgba(26,122,60,0.45)' },
+  negativo: { bg: C.redSoft,    fg: '#F09080', border: 'rgba(200,40,30,0.45)' },
+  agravada: { bg: 'rgba(232,154,28,0.18)', fg: '#F2C266', border: 'rgba(232,154,28,0.45)' },
+  clave:    { bg: C.goldBg,     fg: C.goldSoft, border: 'rgba(200,160,40,0.45)' },
+};
+
+function Chip({ kind = 'info', children }) {
+  const s = CHIP_STYLE[kind] || CHIP_STYLE.info;
+  return (
+    <span style={{
+      display: 'inline-flex', alignItems: 'center', gap: 6,
+      padding: '4px 9px', borderRadius: 999,
+      background: s.bg, color: s.fg, border: `1px solid ${s.border}`,
+      fontFamily: FONT_BODY, fontSize: 11.5, fontWeight: 600,
+      letterSpacing: 0.1, lineHeight: 1.3,
+    }}>{children}</span>
+  );
+}
+
+function Note({ kind, text }) {
+  const map = {
+    agrav: { color: '#F09080', icon: '⚠️', border: 'rgba(200,40,30,0.45)', bg: C.redSoft },
+    pol:   { color: '#74D69A', icon: '🚔', border: 'rgba(26,122,60,0.45)', bg: C.greenSoft },
+    clave: { color: C.goldSoft, icon: '💡', border: 'rgba(200,160,40,0.45)', bg: C.goldBg },
+  }[kind] || { color: C.textSoft, icon: 'ℹ️', border: C.line2, bg: 'rgba(255,255,255,0.04)' };
   return (
     <div style={{
-      display: 'flex', alignItems: 'center', gap: 6, padding: '0 16px',
-      fontSize: 12, color: T.inkMuted, fontWeight: 600,
-      overflowX: 'auto', whiteSpace: 'nowrap',
+      display: 'flex', gap: 8, alignItems: 'flex-start',
+      background: map.bg, border: `1px solid ${map.border}`, borderLeft: `3px solid ${map.color}`,
+      borderRadius: 8, padding: '8px 10px', marginTop: 8,
     }}>
-      <span style={{ color: T.cat.academia.solid }}>Inici</span>
-      <span style={{ color: T.inkFaint }}>/</span>
-      <span style={{ color: T.cat.academia.solid }}>Lleis</span>
-      <span style={{ color: T.inkFaint }}>/</span>
-      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-        <span style={{ width: 7, height: 7, borderRadius: 999, background: T.cat.leyes.solid }} />
-        <span style={{ color: T.cat.academia.solid }}>16/91</span>
-      </span>
-      <span style={{ color: T.inkFaint }}>/</span>
-      <span style={{ color: T.ink }}>{here}</span>
+      <span style={{ fontSize: 13, lineHeight: 1.2, marginTop: 1 }}>{map.icon}</span>
+      <span style={{
+        fontFamily: FONT_BODY, fontSize: 12.5, color: C.text, lineHeight: 1.45,
+      }}>{text}</span>
     </div>
   );
 }
 
-function ShieldSVG() {
-  // Escut estil PL (model ce1978)
+function ArtBadge({ children }) {
   return (
-    <svg width="64" height="74" viewBox="0 0 80 92" fill="none" style={{ flexShrink: 0 }}>
-      <path d="M40 4 L74 13 V42 C74 62 60 78 40 88 C20 78 6 62 6 42 V13 Z" fill="#1f2a44" stroke="#E89A1C" strokeWidth="2"/>
-      <text x="40" y="38" textAnchor="middle" fontFamily={T.fontDisplay} fontWeight="800" fontSize="9" fill="#E89A1C" letterSpacing="1">POLICIA</text>
-      <text x="40" y="48" textAnchor="middle" fontFamily={T.fontDisplay} fontWeight="800" fontSize="9" fill="#E89A1C" letterSpacing="1">LOCAL</text>
-      <g transform="translate(28 56)" fill="#E89A1C">
-        <polygon points="6,0 7.4,4.2 12,4.2 8.3,6.8 9.7,11 6,8.4 2.3,11 3.7,6.8 0,4.2 4.6,4.2"/>
-        <polygon points="18,0 19.4,4.2 24,4.2 20.3,6.8 21.7,11 18,8.4 14.3,11 15.7,6.8 12,4.2 16.6,4.2"/>
-      </g>
-    </svg>
+    <span style={{
+      fontFamily: FONT_MONO, fontSize: 10.5, fontWeight: 700,
+      color: '#0A1628', background: C.gold,
+      padding: '3px 8px', borderRadius: 4, letterSpacing: 0.6,
+      textTransform: 'uppercase', whiteSpace: 'nowrap',
+    }}>{children}</span>
   );
 }
 
-function Eyebrow({ children, color = '#9c7a1f', style = {} }) {
+function MiniTabla({ rows }) {
   return (
     <div style={{
-      fontFamily: T.fontMono, fontSize: 10.5, fontWeight: 700,
-      letterSpacing: 1.6, textTransform: 'uppercase', color, ...style,
-    }}>{children}</div>
-  );
-}
-
-function SectionHead({ kicker, accent }) {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '4px 16px 10px' }}>
-      <span style={{ width: 6, height: 16, borderRadius: 3, background: accent }} />
-      <Eyebrow color={accent}>{kicker}</Eyebrow>
-      <span style={{ flex: 1, height: 1, background: T.hairline }} />
+      display: 'grid', gridTemplateColumns: 'auto 1fr',
+      border: `1px solid ${C.line2}`, borderRadius: 8, overflow: 'hidden', marginTop: 10,
+    }}>
+      {rows.map(([k, v], i) => (
+        <div key={i} style={{ display: 'contents' }}>
+          <div style={{
+            background: C.bgCard2, color: C.goldSoft,
+            padding: '7px 10px', fontFamily: FONT_MONO, fontWeight: 700, fontSize: 11.5,
+            borderBottom: i < rows.length - 1 ? `1px solid ${C.line2}` : 'none',
+          }}>{k}</div>
+          <div style={{
+            background: C.bgCard, color: C.text,
+            padding: '7px 10px', fontFamily: FONT_BODY, fontSize: 12.5, lineHeight: 1.4,
+            borderBottom: i < rows.length - 1 ? `1px solid ${C.line2}` : 'none',
+          }}>{v}</div>
+        </div>
+      ))}
     </div>
   );
 }
 
+const TD_COLOR = {
+  grave: { bg: 'rgba(200,40,30,0.16)', fg: '#F09080' },
+  medio: { bg: 'rgba(232,154,28,0.16)', fg: '#F2C266' },
+  leve:  { bg: 'rgba(26,122,60,0.16)',  fg: '#74D69A' },
+};
+
+function Tabla({ cols, rows }) {
+  const ncols = cols.length;
+  return (
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: `repeat(${ncols}, minmax(0,1fr))`,
+      border: `1px solid ${C.line}`, borderRadius: 10, overflow: 'hidden', marginTop: 10,
+      fontSize: 12, fontFamily: FONT_BODY,
+    }}>
+      {cols.map((c, i) => (
+        <div key={'h'+i} style={{
+          background: C.bgSection, color: C.gold,
+          padding: '8px 10px', fontFamily: FONT_DISPLAY, fontWeight: 700,
+          fontSize: 11.5, letterSpacing: 0.6, textTransform: 'uppercase',
+          borderRight: i < ncols - 1 ? `1px solid ${C.line2}` : 'none',
+          borderBottom: `1px solid ${C.line}`,
+        }}>{c}</div>
+      ))}
+      {rows.map((row, ri) => {
+        const cells = row.slice(0, ncols);
+        const tone = row[ncols]; // optional tone tag at end
+        const tc = tone ? TD_COLOR[tone] : null;
+        return cells.map((cell, ci) => (
+          <div key={`${ri}-${ci}`} style={{
+            background: tc ? tc.bg : (ri % 2 ? C.bgCard2 : C.bgCard),
+            color: tc ? tc.fg : C.text,
+            padding: '8px 10px', lineHeight: 1.4,
+            borderRight: ci < ncols - 1 ? `1px solid ${C.line2}` : 'none',
+            borderBottom: ri < rows.length - 1 ? `1px solid ${C.line2}` : 'none',
+            fontWeight: ci === 0 ? 700 : 500,
+          }}>{cell}</div>
+        ));
+      })}
+    </div>
+  );
+}
+
+// ─── Block renderer ─────────────────────────────────────────────────
+function Block({ b }) {
+  return (
+    <div style={{
+      background: C.bgCard, border: `1px solid ${C.line2}`, borderLeft: `3px solid ${C.gold}`,
+      borderRadius: 10, padding: '12px 14px', marginTop: 10,
+    }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+        <ArtBadge>{b.art}</ArtBadge>
+        <span style={{
+          fontFamily: FONT_DISPLAY, fontSize: 14, fontWeight: 600,
+          color: C.text, letterSpacing: 0.3, textTransform: 'uppercase', lineHeight: 1.2,
+        }}>{b.title}</span>
+      </div>
+      {b.body && <p style={{
+        margin: '4px 0 0', fontFamily: FONT_BODY, fontSize: 13, color: C.textSoft, lineHeight: 1.5,
+      }}>{b.body}</p>}
+      {b.chips && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }}>
+          {b.chips.map((c, i) => <Chip key={i} kind={c.kind}>{c.label}</Chip>)}
+        </div>
+      )}
+      {b.mini && <MiniTabla rows={b.mini} />}
+      {b.tabla && <Tabla cols={b.tabla.cols} rows={b.tabla.rows} />}
+      {b.notes && b.notes.map((n, i) => <Note key={i} kind={n.kind} text={n.text} />)}
+    </div>
+  );
+}
+
+// ─── Section header ─────────────────────────────────────────────────
+function CatHeader({ s, open, onClick }) {
+  const isDisc  = s.isDisciplinario;
+  const isLocal = s.isLocal;
+  const bg     = isDisc ? C.red : (isLocal ? C.gold : C.bgSection);
+  const fg     = isDisc || isLocal ? '#0A1628' : C.gold;
+  const border = isDisc ? 'rgba(200,40,30,0.6)' : (isLocal ? 'rgba(200,160,40,0.6)' : C.line);
+
+  return (
+    <button onClick={onClick} style={{
+      width: '100%', textAlign: 'left', cursor: 'pointer',
+      display: 'flex', alignItems: 'center', gap: 10,
+      background: bg, border: `1px solid ${border}`, borderRadius: 10,
+      padding: '10px 12px', color: fg,
+      transition: 'background .15s',
+    }}>
+      <span style={{
+        fontFamily: FONT_MONO, fontWeight: 800, fontSize: 12,
+        background: isDisc || isLocal ? 'rgba(10,22,40,0.18)' : C.goldBg,
+        color: isDisc || isLocal ? '#0A1628' : C.gold,
+        padding: '3px 7px', borderRadius: 4, letterSpacing: 0.6,
+      }}>{s.num}</span>
+      <span style={{ fontSize: 17, lineHeight: 1 }}>{s.icon}</span>
+      <span style={{
+        flex: 1, fontFamily: FONT_DISPLAY, fontSize: 14,
+        fontWeight: 700, letterSpacing: 0.6, textTransform: 'uppercase', lineHeight: 1.2,
+      }}>{s.title}</span>
+      <span style={{
+        fontFamily: FONT_MONO, fontSize: 10.5, opacity: 0.75, whiteSpace: 'nowrap',
+      }}>{s.arts}</span>
+      <span style={{
+        marginLeft: 4, fontSize: 14, transition: 'transform .2s',
+        transform: open ? 'rotate(180deg)' : 'rotate(0)', display: 'inline-block',
+      }}>▾</span>
+    </button>
+  );
+}
+
+// ─── Hero · escudo + senyera + título ────────────────────────────────
 function Hero({ data }) {
   return (
-    <div style={{ padding: '0 16px' }}>
-      <div style={{
-        display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 14, alignItems: 'center',
-        background: 'linear-gradient(180deg, #FBF1D6 0%, #FAEAC1 100%)',
-        border: '1px solid #E8C97A', borderRadius: T.r.lg, padding: '18px 16px',
-      }}>
-        <ShieldSVG />
-        <div>
-          <Eyebrow>Esquema operatiu policial</Eyebrow>
-          <h1 style={{
-            fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 22,
-            letterSpacing: -0.6, lineHeight: 1.1, margin: '4px 0 4px',
-          }}>
-            LLEI <span style={{ color: '#9c7a1f' }}>16/1991</span>
-          </h1>
-          <div style={{ fontSize: 12.5, fontWeight: 700, color: '#6b5a30', letterSpacing: -0.1 }}>
-            Policies Locals de Catalunya
-          </div>
-        </div>
-      </div>
-
-      <p style={{ margin: '12px 4px 10px', color: T.inkSoft, fontSize: 13.5, lineHeight: 1.45 }}>{data.sub}</p>
-
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-        {data.stats.map((s, i) => (
-          <span key={i} style={{
-            background: '#fff', border: '1px solid #E8C97A',
-            padding: '5px 10px', borderRadius: 999,
-            fontSize: 11.5, fontWeight: 700, color: '#6b5a30',
-            display: 'inline-flex', alignItems: 'center', gap: 5,
-          }}>
-            <span>{s.icon}</span>{s.label}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function Pillars({ pillars }) {
-  return (
-    <div style={{ padding: '0 16px', display: 'grid', gap: 10 }}>
-      {pillars.map((p, i) => (
-        <div key={i} style={{
-          background: p.bg, border: `1px solid ${p.accent}`, borderRadius: T.r.md,
-          padding: '14px 16px',
-        }}>
-          <div style={{ fontSize: 22, lineHeight: 1 }}>{p.icon}</div>
-          <h3 style={{
-            margin: '6px 0 2px', fontSize: 14, fontWeight: 800,
-            color: p.accent, letterSpacing: 0.6,
-          }}>{p.title}</h3>
-          <div style={{ fontSize: 11, fontWeight: 700, color: T.inkMuted, letterSpacing: 0.2 }}>{p.meta}</div>
-          <div style={{ fontFamily: T.fontMono, fontSize: 12, fontWeight: 700, color: T.ink, marginTop: 6 }}>{p.art}</div>
-          <div style={{ fontSize: 12.5, color: T.inkSoft, marginTop: 2 }}>{p.desc}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function MetaStrip({ data }) {
-  return (
-    <div style={{ padding: '0 16px' }}>
-      <div style={{
-        background: '#EAF1FE', border: '1px solid #b9d0f6', borderRadius: T.r.md,
-        padding: '12px 14px', display: 'grid', gridTemplateColumns: '1fr auto', gap: 10, alignItems: 'center',
-      }}>
-        <div>
-          <Eyebrow color="#2F6BD8" style={{ fontSize: 9.5 }}>📘 LL 16/1991 · 53 ARTS · 5 TÍTOLS</Eyebrow>
-          <p style={{ margin: '4px 0 0', color: '#1f3f7a', fontSize: 12.5, lineHeight: 1.4 }}>
-            {data.publishedAtLong}. Marc fonamental de la PL a Catalunya.
-          </p>
-        </div>
-        <div style={{
-          display: 'flex', flexDirection: 'column', alignItems: 'center',
-          padding: '6px 10px', background: '#fff', border: '1px solid #b9d0f6', borderRadius: 10,
-          minWidth: 80,
-        }}>
-          <div style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted }}>{data.publishedAt}</div>
-          <div style={{ fontWeight: 800, color: '#2F6BD8', fontSize: 13 }}>{data.state}</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Cronologia({ items }) {
-  return (
-    <div style={{ padding: '0 16px' }}>
-      <div style={{
-        background: '#fff', border: `1px solid ${T.hairline}`,
-        borderRadius: T.r.md, padding: '14px 14px 12px',
-        boxShadow: T.shadow.card,
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-          <span style={{ fontSize: 16 }}>⏰</span>
-          <Eyebrow style={{ fontSize: 11 }}>Cronologia · Llei 16/91</Eyebrow>
-        </div>
-        <ol style={{ listStyle: 'none', margin: 0, padding: '0 0 0 4px', position: 'relative' }}>
-          <span style={{
-            position: 'absolute', left: 9, top: 6, bottom: 6, width: 2,
-            background: 'linear-gradient(180deg, #E89A1C, #FBE5B5)', borderRadius: 2,
-          }} />
-          {items.map((it, i) => (
-            <li key={i} style={{
-              display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 12,
-              padding: '6px 0', alignItems: 'start', position: 'relative',
-            }}>
-              <div style={{
-                width: 12, height: 12, borderRadius: 999,
-                background: it.highlight ? T.cat.academia.solid : '#E89A1C',
-                border: '3px solid #fff',
-                boxShadow: it.highlight
-                  ? `0 0 0 1px ${T.cat.academia.solid}, 0 0 0 5px rgba(255,122,26,.18)`
-                  : '0 0 0 1px #E89A1C',
-                marginTop: 4, marginLeft: 4, zIndex: 1,
-              }} />
-              <div>
-                <div style={{
-                  fontFamily: T.fontMono, fontSize: 11, fontWeight: 700,
-                  color: it.highlight ? T.cat.academia.solid : '#9c7a1f', letterSpacing: 0.6,
-                }}>{it.date}</div>
-                <div style={{ fontSize: 13, color: T.inkSoft, marginTop: 1, lineHeight: 1.4 }}>{it.text}</div>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </div>
-  );
-}
-
-function Estructura({ titols }) {
-  return (
-    <div style={{ padding: '0 16px', display: 'grid', gap: 8 }}>
-      {titols.map(t => (
-        <div key={t.id} style={{
-          background: '#fff', border: `1px solid ${T.hairline}`,
-          borderLeft: `3px solid ${t.accent}`, borderRadius: T.r.md,
-          padding: '12px 14px', boxShadow: T.shadow.card,
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 4 }}>
-            <span style={{
-              fontFamily: T.fontMono, fontSize: 11, fontWeight: 800,
-              color: t.accent, background: `color-mix(in oklab, ${t.accent} 12%, white)`,
-              padding: '3px 8px', borderRadius: 6, letterSpacing: 0.6,
-            }}>TÍT. {t.id}</span>
-            <span style={{ fontFamily: T.fontMono, fontSize: 11, color: T.inkMuted }}>{t.arts}</span>
-          </div>
-          <div style={{ fontWeight: 800, fontSize: 14, lineHeight: 1.3 }}>{t.name}</div>
-          <div style={{ fontSize: 12.5, color: T.inkSoft, marginTop: 2, lineHeight: 1.4 }}>{t.desc}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function FuncionsList({ items }) {
-  return (
-    <div style={{ padding: '0 16px' }}>
-      <div style={{
-        background: '#fff', border: `1px solid ${T.hairline}`, borderRadius: T.r.md,
-        padding: '8px 6px', boxShadow: T.shadow.card,
-      }}>
-        {items.map((txt, i) => (
-          <div key={i} style={{
-            display: 'flex', alignItems: 'flex-start', gap: 10,
-            padding: '10px 10px',
-            borderBottom: i < items.length - 1 ? `1px solid ${T.hairline}` : 'none',
-          }}>
-            <div style={{
-              width: 22, height: 22, borderRadius: 999,
-              background: T.cat.leyes.soft, color: T.cat.leyes.ink,
-              display: 'grid', placeItems: 'center', flexShrink: 0,
-              fontFamily: T.fontMono, fontWeight: 800, fontSize: 11,
-            }}>{String.fromCharCode(97 + i)}</div>
-            <div style={{ fontSize: 13, color: T.inkSoft, lineHeight: 1.45 }}>{txt}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function PrincipisGrid({ items }) {
-  return (
-    <div style={{ padding: '0 16px', display: 'grid', gap: 8 }}>
-      {items.map((p, i) => (
-        <div key={i} style={{
-          background: '#F8FBFF', border: '1px solid #b9d0f6',
-          borderRadius: T.r.md, padding: '12px 14px',
-        }}>
-          <div style={{
-            fontFamily: T.fontMono, fontSize: 11, fontWeight: 800,
-            color: '#2F6BD8', letterSpacing: 0.6,
-          }}>{p.num}</div>
-          <div style={{ fontWeight: 800, fontSize: 14, marginTop: 2 }}>{p.t}</div>
-          <div style={{ fontSize: 12.5, color: T.inkSoft, marginTop: 2, lineHeight: 1.4 }}>{p.d}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function OperativaGrid({ items }) {
-  return (
-    <div style={{ padding: '0 16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-      {items.map((c, i) => (
-        <div key={i} style={{
-          background: c.hl ? '#FFF4EC' : '#fff',
-          border: `1px solid ${c.hl ? '#f5c19a' : T.hairline}`,
-          borderRadius: T.r.md, padding: '12px 12px',
-          boxShadow: T.shadow.card,
-        }}>
-          <div style={{
-            fontFamily: T.fontMono, fontSize: 10.5, fontWeight: 800,
-            color: T.cat.academia.solid, letterSpacing: 0.8,
-          }}>{c.art}</div>
-          <div style={{ fontWeight: 800, fontSize: 13.5, marginTop: 2, letterSpacing: -0.1 }}>{c.title}</div>
-          <div style={{ fontSize: 11.5, color: T.inkSoft, marginTop: 4, lineHeight: 1.4 }}>{c.desc}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function Territorial({ items }) {
-  return (
-    <div style={{ padding: '0 16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-      {items.map((it, i) => (
-        <div key={i} style={{
-          background: '#fff', border: `1px solid ${it.highlight ? '#2FB66B' : T.hairline}`,
-          boxShadow: it.highlight ? '0 0 0 4px rgba(47,182,107,0.10)' : T.shadow.card,
-          borderRadius: T.r.md, padding: '12px 12px',
-        }}>
-          <span style={{
-            display: 'inline-grid', placeItems: 'center',
-            width: 36, height: 36, borderRadius: 10,
-            background: it.bg, color: it.accent, fontSize: 18,
-          }}>{it.icon}</span>
-          <div style={{ fontWeight: 800, fontSize: 12.5, marginTop: 8, letterSpacing: 0.5, textTransform: 'uppercase' }}>{it.name}</div>
-          <div style={{ fontSize: 11.5, color: T.inkSoft, marginTop: 2, lineHeight: 1.4 }}>{it.desc}</div>
-          <div style={{ fontFamily: T.fontMono, fontSize: 10.5, color: T.inkMuted, marginTop: 4 }}>{it.meta}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function Reformes({ items }) {
-  return (
-    <div style={{ padding: '0 16px', display: 'grid', gap: 8 }}>
-      {items.map((r, i) => (
-        <div key={i} style={{
-          background: '#fff', border: `1px solid ${T.hairline}`,
-          borderLeft: '3px solid #E85D8C',
-          borderRadius: T.r.md, padding: '12px 14px', boxShadow: T.shadow.card,
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-            <span style={{ fontWeight: 800, fontSize: 18, color: '#E85D8C' }}>{r.year}</span>
-            <span style={{
-              fontFamily: T.fontMono, fontSize: 10.5, color: T.inkMuted,
-              background: T.bg, padding: '2px 7px', borderRadius: 6,
-            }}>{r.tag}</span>
-          </div>
-          <div style={{ fontWeight: 800, fontSize: 13.5 }}>{r.title}</div>
-          <div style={{ fontSize: 12.5, color: T.inkSoft, marginTop: 2, lineHeight: 1.4 }}>{r.desc}</div>
-          <div style={{ fontFamily: T.fontMono, fontSize: 10.5, color: T.inkMuted, marginTop: 6 }}>{r.date}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function Recursos() {
-  const items = [
-    { icon: '📄', t: 'Text íntegre · DOGC',     d: 'Versió consolidada al portaljuridic' },
-    { icon: '📥', t: 'Descarregar PDF',          d: 'Esquema operatiu · 8 pàgines' },
-    { icon: '📝', t: 'Test del tema',            d: '30 preguntes · LL 16/91' },
-    { icon: '🎯', t: 'Flashcards',               d: 'Memoritza articles clau' },
-  ];
-  return (
-    <div style={{ padding: '0 16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-      {items.map((it, i) => (
-        <div key={i} style={{
-          background: '#fff', border: `1px solid ${T.hairline}`,
-          borderRadius: T.r.md, padding: '12px 12px', boxShadow: T.shadow.card,
-          display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 10, alignItems: 'center',
-        }}>
-          <span style={{
-            width: 34, height: 34, borderRadius: 10, background: T.bg,
-            display: 'grid', placeItems: 'center', fontSize: 16,
-          }}>{it.icon}</span>
-          <div>
-            <div style={{ fontWeight: 800, fontSize: 12.5 }}>{it.t}</div>
-            <div style={{ fontSize: 11, color: T.inkSoft, marginTop: 1 }}>{it.d}</div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function StickyTabs({ value, onChange }) {
-  return (
     <div style={{
-      position: 'sticky', top: 0, zIndex: 30,
-      background: 'rgba(246,244,239,0.94)',
-      backdropFilter: 'blur(12px) saturate(180%)',
-      WebkitBackdropFilter: 'blur(12px) saturate(180%)',
-      borderBottom: `1px solid ${T.hairline}`,
-      margin: '0 -16px',
-      padding: '0 16px',
+      background: C.bgSection, border: `1px solid ${C.line}`, borderRadius: 14,
+      padding: '18px 16px 16px', position: 'relative', overflow: 'hidden',
     }}>
-      <div style={{ display: 'flex', gap: 4, overflowX: 'auto', padding: '8px 0', scrollbarWidth: 'none' }}>
-        {TABS.map(t => {
-          const active = t.id === value;
+      {/* Senyera 2 franjas finas */}
+      <div style={{
+        position: 'absolute', left: 0, right: 0, top: 0, height: 4,
+        background: `linear-gradient(180deg, ${C.gold} 0%, ${C.gold} 50%, transparent 50%, transparent 56%, ${C.gold} 56%, ${C.gold} 100%)`,
+      }} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 6 }}>
+        {/* Escudo PL SVG */}
+        <svg width="56" height="64" viewBox="0 0 80 92" style={{ flexShrink: 0 }}>
+          <path d="M40 4 L74 13 V42 C74 62 60 78 40 88 C20 78 6 62 6 42 V13 Z" fill="#0A1628" stroke={C.gold} strokeWidth="2"/>
+          <text x="40" y="38" textAnchor="middle" fontFamily="Oswald" fontWeight="700" fontSize="9" fill={C.gold} letterSpacing="1">POLICIA</text>
+          <text x="40" y="48" textAnchor="middle" fontFamily="Oswald" fontWeight="700" fontSize="9" fill={C.gold} letterSpacing="1">LOCAL</text>
+          <g transform="translate(28 56)" fill={C.gold}>
+            <polygon points="6,0 7.4,4.2 12,4.2 8.3,6.8 9.7,11 6,8.4 2.3,11 3.7,6.8 0,4.2 4.6,4.2"/>
+            <polygon points="18,0 19.4,4.2 24,4.2 20.3,6.8 21.7,11 18,8.4 14.3,11 15.7,6.8 12,4.2 16.6,4.2"/>
+          </g>
+        </svg>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{
+            fontFamily: FONT_MONO, fontSize: 10, color: C.gold,
+            letterSpacing: 1.4, textTransform: 'uppercase', fontWeight: 700,
+          }}>{data.subtitle}</div>
+          <h1 style={{
+            margin: '4px 0 2px', fontFamily: FONT_DISPLAY, fontWeight: 700,
+            fontSize: 22, letterSpacing: 0.6, textTransform: 'uppercase',
+            color: C.text, lineHeight: 1.05,
+          }}>
+            LLEI <span style={{ color: C.gold }}>16/1991</span>
+          </h1>
+          <div style={{
+            fontFamily: FONT_DISPLAY, fontSize: 13, fontWeight: 600,
+            color: C.textSoft, letterSpacing: 0.6, textTransform: 'uppercase',
+          }}>{data.title}</div>
+        </div>
+      </div>
+
+      <div style={{
+        marginTop: 12, fontFamily: FONT_BODY, fontSize: 12, color: C.textSoft, lineHeight: 1.45,
+      }}>{data.meta}</div>
+
+      <div style={{
+        marginTop: 10, padding: '10px 12px',
+        background: C.blueSoft, border: '1px solid rgba(26,92,150,0.45)', borderRadius: 8,
+        fontFamily: FONT_BODY, fontSize: 12, color: '#9BC4F0', lineHeight: 1.45,
+      }}>
+        🏛️ {data.basis}
+      </div>
+
+      <div style={{
+        marginTop: 8, fontFamily: FONT_MONO, fontSize: 11, color: C.textMuted, letterSpacing: 0.6,
+      }}>{data.stats}</div>
+    </div>
+  );
+}
+
+// ─── 4 Escalas · clas-cards ──────────────────────────────────────────
+const CLAS_TONE = {
+  sup:   { color: C.gold,    bg: 'rgba(200,160,40,0.15)' },
+  ejec:  { color: '#9BC4F0', bg: 'rgba(26,92,150,0.18)' },
+  inter: { color: '#F2C266', bg: 'rgba(232,154,28,0.16)' },
+  bas:   { color: '#74D69A', bg: 'rgba(26,122,60,0.16)' },
+};
+
+function Escalas({ data }) {
+  return (
+    <div>
+      <div style={{
+        fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 13,
+        letterSpacing: 0.8, textTransform: 'uppercase',
+        color: C.gold, margin: '4px 0 8px',
+      }}>📋 Las 4 Escalas y 7 Categorías</div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+        {data.escalas.map(e => {
+          const tone = CLAS_TONE[e.key];
           return (
-            <button key={t.id} onClick={() => onChange(t.id)} style={{
-              flexShrink: 0, padding: '7px 12px', borderRadius: 999,
-              border: 'none', cursor: 'pointer',
-              background: active ? T.ink : 'transparent',
-              color: active ? '#fff' : T.inkSoft,
-              fontFamily: T.font, fontSize: 12, fontWeight: 700,
-              letterSpacing: 0.1, whiteSpace: 'nowrap',
-            }}>{t.label}</button>
+            <div key={e.key} style={{
+              background: tone.bg, border: `1px solid ${tone.color}55`, borderLeft: `3px solid ${tone.color}`,
+              borderRadius: 10, padding: '10px 12px',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span style={{ fontSize: 16, lineHeight: 1 }}>{e.icon}</span>
+                <span style={{
+                  fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 13,
+                  letterSpacing: 0.6, textTransform: 'uppercase', color: tone.color,
+                }}>{e.name}</span>
+                <span style={{
+                  marginLeft: 'auto', fontFamily: FONT_MONO, fontWeight: 700,
+                  fontSize: 10.5, color: '#0A1628', background: tone.color,
+                  padding: '2px 6px', borderRadius: 4, letterSpacing: 0.5,
+                }}>{e.grupo}</span>
+              </div>
+              <div style={{
+                marginTop: 4, fontFamily: FONT_BODY, fontSize: 11.5,
+                color: C.textSoft, lineHeight: 1.4,
+              }}>{e.cats}</div>
+            </div>
           );
         })}
       </div>
+      <div style={{
+        marginTop: 10, padding: '10px 12px',
+        background: C.goldBg, border: `1px solid ${C.line}`, borderRadius: 8,
+        fontFamily: FONT_BODY, fontSize: 12, color: C.text, lineHeight: 1.45,
+      }}>
+        🚔 <b style={{ color: C.gold }}>Disposición adicional 7ª:</b> {data.bannerEAC}
+      </div>
     </div>
   );
 }
 
+// ─── Recuerda ────────────────────────────────────────────────────────
+function Recuerda({ items }) {
+  return (
+    <div style={{
+      background: `linear-gradient(180deg, rgba(200,160,40,0.20), rgba(200,160,40,0.05))`,
+      border: `1px solid ${C.gold}`, borderRadius: 12,
+      padding: '14px 14px 12px', marginTop: 14,
+    }}>
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8,
+      }}>
+        <span style={{ fontSize: 18 }}>📋</span>
+        <span style={{
+          fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 14,
+          color: C.gold, letterSpacing: 1, textTransform: 'uppercase',
+        }}>RECUERDA · Claves Llei 16/1991</span>
+      </div>
+      <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+        {items.map((t, i) => (
+          <li key={i} style={{
+            display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 8,
+            padding: '6px 0', borderTop: i ? `1px solid rgba(200,160,40,0.25)` : 'none',
+          }}>
+            <span style={{
+              fontFamily: FONT_MONO, color: C.gold, fontSize: 11, fontWeight: 700, marginTop: 2,
+            }}>{String(i + 1).padStart(2, '0')}</span>
+            <span style={{ fontFamily: FONT_BODY, fontSize: 12.5, color: C.text, lineHeight: 1.5 }}>{t}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+// ─── Screen ─────────────────────────────────────────────────────────
 export default function ScreenLlei() {
   const { id } = useParams();
   const navigate = useNavigate();
   const data = LLEIS[id] || LLEIS['16-1991'];
-  const [tab, setTab] = useState('resum');
 
-  const sections = useMemo(() => ({
-    resum: (
-      <div style={{ display: 'grid', gap: 14 }}>
-        <Hero data={data} />
-        <Pillars pillars={data.pillars} />
-        <MetaStrip data={data} />
-      </div>
-    ),
-    cronologia: <Cronologia items={data.cronologia} />,
-    estructura: (
-      <div style={{ display: 'grid', gap: 12 }}>
-        <Estructura titols={data.titols} />
-        <SectionHead kicker="🏛️ Encaix territorial" accent="#E5484D" />
-        <Territorial items={data.territorial} />
-      </div>
-    ),
-    funcions: <FuncionsList items={data.funcions} />,
-    principis: <PrincipisGrid items={data.principis} />,
-    operativa: <OperativaGrid items={data.operativa} />,
-    reformes: <Reformes items={data.reformes} />,
-  }), [data]);
+  const [openMap, setOpenMap] = useState(() => {
+    const m = {};
+    data.secciones.forEach(s => { m[s.id] = !!s.open; });
+    return m;
+  });
+
+  const toggle = (id) => setOpenMap(m => ({ ...m, [id]: !m[id] }));
 
   return (
-    <div className="screen" style={{ paddingBottom: 90 }}>
-      <StatusBar />
-
+    <div style={{
+      minHeight: '100dvh', background: C.bgMain, color: C.text,
+      fontFamily: FONT_BODY, paddingBottom: 100,
+    }}>
       {/* Top bar */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '6px 16px 10px' }}>
+      <div style={{
+        position: 'sticky', top: 0, zIndex: 30,
+        background: 'rgba(10,22,40,0.92)',
+        backdropFilter: 'blur(10px)',
+        borderBottom: `1px solid ${C.line2}`,
+        display: 'flex', alignItems: 'center', gap: 10,
+        padding: 'env(safe-area-inset-top, 8px) 14px 8px',
+      }}>
         <button onClick={() => navigate(-1)} style={{
-          width: 36, height: 36, borderRadius: 999, border: 'none',
-          background: '#fff', boxShadow: T.shadow.card, cursor: 'pointer',
-          display: 'grid', placeItems: 'center',
-        }}>
-          <Icon name="arrow-left" size={18} color={T.ink} />
-        </button>
-        <Eyebrow>Lleis · Catalunya</Eyebrow>
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: 6 }}>
-          <button style={{
-            background: '#fff', border: `1px solid ${T.hairline}`, borderRadius: 999,
-            padding: '6px 10px', fontSize: 11, fontWeight: 800, color: T.inkSoft, cursor: 'pointer',
-          }}>↗ Compartir</button>
-          <button style={{
-            background: '#fff', border: `1px solid ${T.hairline}`, borderRadius: 999,
-            padding: '6px 10px', fontSize: 11, fontWeight: 800, color: T.inkSoft, cursor: 'pointer',
-          }}>★ Desar</button>
+          width: 34, height: 34, borderRadius: 999, border: `1px solid ${C.line2}`,
+          background: C.bgSection, color: C.text, cursor: 'pointer',
+          display: 'grid', placeItems: 'center', fontFamily: FONT_BODY,
+        }}>←</button>
+        <div style={{ flex: 1 }}>
+          <div style={{
+            fontFamily: FONT_MONO, fontSize: 9.5, color: C.gold,
+            letterSpacing: 1.4, textTransform: 'uppercase', fontWeight: 700,
+          }}>Lleis · Catalunya</div>
+          <div style={{
+            fontFamily: FONT_DISPLAY, fontSize: 14, fontWeight: 700,
+            letterSpacing: 0.4, color: C.text,
+          }}>LLEI <span style={{ color: C.gold }}>16/1991</span></div>
         </div>
+        <button onClick={() => window.print && window.print()} title="Imprimir" style={{
+          height: 34, padding: '0 12px', borderRadius: 999, border: `1px solid ${C.gold}`,
+          background: C.goldBg, color: C.gold, cursor: 'pointer',
+          fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 11.5, letterSpacing: 0.6,
+          textTransform: 'uppercase',
+        }}>🖨 Imprimir</button>
       </div>
 
-      <div style={{ padding: '0 0 6px' }}><Crumbs here={data.shortTitle} /></div>
+      <div style={{ maxWidth: 720, margin: '0 auto', padding: '14px 14px 0' }}>
+        <Hero data={data} />
 
-      {/* Tabs sticky */}
-      <div style={{ padding: '0 16px' }}>
-        <StickyTabs value={tab} onChange={setTab} />
-      </div>
+        <div style={{ height: 14 }} />
+        <Escalas data={data} />
 
-      <div style={{ height: 12 }} />
+        <div style={{ height: 14 }} />
 
-      {/* Section heading per tab */}
-      {tab === 'resum' && (
-        <SectionHead kicker={`📘 ${data.code} · ${data.title.split(',')[1] ? 'PL Catalunya' : ''}`} accent={T.cat.leyes.solid} />
-      )}
-      {tab === 'cronologia' && <SectionHead kicker="⏰ Cronologia" accent="#E89A1C" />}
-      {tab === 'estructura' && <SectionHead kicker="📚 Estructura · 5 títols" accent="#2F6BD8" />}
-      {tab === 'funcions' && <SectionHead kicker="🛡️ Art. 11 · Funcions de la PL" accent={T.cat.leyes.solid} />}
-      {tab === 'principis' && <SectionHead kicker="⚖️ Art. 11.2 · Principis bàsics d'actuació" accent="#2F6BD8" />}
-      {tab === 'operativa' && <SectionHead kicker="🚓 Aplicació operativa · 12 articles clau" accent={T.cat.academia.solid} />}
-      {tab === 'reformes' && <SectionHead kicker="🔄 Reformes i normativa connexa" accent="#E85D8C" />}
+        {/* Secciones colapsables */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {data.secciones.map(s => {
+            const open = openMap[s.id];
+            return (
+              <section key={s.id}>
+                <CatHeader s={s} open={open} onClick={() => toggle(s.id)} />
+                {open && (
+                  <div style={{ padding: '4px 2px 0' }}>
+                    {s.blocks.map((b, i) => <Block key={i} b={b} />)}
+                  </div>
+                )}
+              </section>
+            );
+          })}
+        </div>
 
-      <div>
-        {sections[tab]}
-      </div>
+        <Recuerda items={data.recuerda} />
 
-      {/* Recursos and foot */}
-      <div style={{ height: 22 }} />
-      <SectionHead kicker="📚 Recursos i material d'estudi" accent="#2FB66B" />
-      <Recursos />
-
-      <div style={{ display: 'flex', gap: 10, justifyContent: 'space-between', padding: '20px 16px 8px' }}>
-        <button onClick={() => navigate('/operativa/infraccions')} style={{
-          background: '#fff', border: `1px solid ${T.hairline}`, borderRadius: 999,
-          padding: '10px 14px', fontSize: 12.5, fontWeight: 800, color: T.inkSoft, cursor: 'pointer',
-        }}>← Lleis</button>
-        <button onClick={() => navigate('/academia/test')} style={{
-          background: T.cat.academia.solid, color: '#fff', border: 'none', borderRadius: 999,
-          padding: '10px 16px', fontSize: 12.5, fontWeight: 800, letterSpacing: 0.4,
-          textTransform: 'uppercase', cursor: 'pointer',
-          boxShadow: 'inset 0 -3px 0 rgba(0,0,0,0.18)',
-        }}>Test del tema →</button>
+        <div style={{
+          display: 'flex', justifyContent: 'space-between', gap: 10, marginTop: 18,
+        }}>
+          <button onClick={() => navigate('/operativa')} style={{
+            background: C.bgSection, border: `1px solid ${C.line2}`, color: C.text,
+            borderRadius: 999, padding: '10px 14px', fontFamily: FONT_DISPLAY, fontWeight: 700,
+            fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase', cursor: 'pointer',
+          }}>← Operativa</button>
+          <button onClick={() => navigate('/academia/test')} style={{
+            background: C.gold, border: 'none', color: '#0A1628',
+            borderRadius: 999, padding: '10px 16px', fontFamily: FONT_DISPLAY, fontWeight: 700,
+            fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase', cursor: 'pointer',
+            boxShadow: 'inset 0 -3px 0 rgba(0,0,0,0.18)',
+          }}>Test del tema →</button>
+        </div>
       </div>
     </div>
   );
