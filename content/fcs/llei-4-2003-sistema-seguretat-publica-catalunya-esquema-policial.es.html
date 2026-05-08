@@ -3,1255 +3,1117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Llei 4/2003 Sistema Seguretat Pública Catalunya — Esquema Policial</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Llei 4/2003 · Sistema de Seguretat Pública de Catalunya — Esquema Operativo Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* Llei 4/2003 — fitxa rebranding 2026 */
   :root {
-    --bg-main: #0A1628;
-    --bg-section: #0E2244;
-    --gold: #C8A028;
-    --blue-royal: #1A5C96;
-    --red: #C8281E;
-    --green: #1A7A3C;
-    --text-main: #F0F4FF;
-    --text-secondary: #A8BAD4;
-    --border: #C8A028;
+    --ink: #0E0E0E;
+    --ink-2: #1c1c1c;
+    --paper: #FAF6EF;
+    --paper-2: #F2EDE3;
+    --white: #FFFFFF;
+    --terracotta: #F26B1F;
+    --terracotta-2: #D9531A;
+    --terracotta-soft: #FFE9D8;
+    --text: #0E0E0E;
+    --text-2: #4a4744;
+    --text-3: #807c77;
+    --text-4: #b3afaa;
+    --c-leyes: #E89A1C;
+    --c-operativa: #2F6BD8;
+    --c-superbuscador: #9747D6;
+    --c-recursos: #2FB66B;
+    --c-red: #E5484D;
+    --c-pink: #E85D8C;
+    --c-slate: #2a3a52;
+    --line: rgba(14, 14, 14, 0.10);
+    --line-2: rgba(14, 14, 14, 0.06);
+    --shadow-md: 0 1px 2px rgba(14,14,14,0.04), 0 8px 24px -8px rgba(14,14,14,0.10);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
   body {
-    background-color: var(--bg-main);
-    background-image:
-      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
-    font-family: 'Source Sans 3', sans-serif;
-    color: var(--text-main);
-    padding: 20px 12px 40px;
+    background: var(--paper);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: 12px 8px 40px;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .wrapper { max-width: 1080px; margin: 0 auto; }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
-  .wrapper { max-width: 720px; margin: 0 auto; }
+  .meta-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-3);
+  }
 
-  /* ── CABECERA ── */
-  .header {
+  .section-head {
     display: flex;
     align-items: center;
-    gap: 18px;
-    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
-    border: 2px solid var(--gold);
-    border-radius: 10px;
-    padding: 22px 24px;
-    margin-bottom: 8px;
-    animation: fadeUp .5s ease both;
-    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+    gap: 12px;
+    margin: 32px 0 14px;
+    flex-wrap: wrap;
+    position: relative;
   }
-  .escudo svg { flex-shrink: 0; }
-  .header-text { flex: 1; }
-  .header-text .label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
+  .section-head::before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 22px;
+    background: var(--accent, var(--terracotta));
+    border-radius: 2px;
+    flex: none;
   }
-  .header-text h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--text-main);
-    line-height: 1.1;
+  .section-head .eyebrow { color: var(--accent, var(--ink)); flex: none; }
+  .section-head .rule { flex: 1; height: 1px; background: var(--line); min-width: 30px; }
+
+  /* HERO */
+  .ce-hero {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: center;
+    background: linear-gradient(180deg, #FBF1D6 0%, #FAEAC1 100%);
+    border: 1px solid #E8C97A;
+    border-radius: 18px;
+    padding: 26px 30px;
+    margin-top: 8px;
   }
-  .header-text h1 span { color: var(--gold); }
-  .header-text .subtitle {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-top: 4px;
+  .ce-shield { flex: none; }
+  .ce-title {
+    margin: 4px 0 6px;
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  .ce-title .accent { color: #9c7a1f; }
+  .ce-sub { margin: 0; color: #6b5a30; font-size: 15px; max-width: 760px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .hero-tags .tag {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #E8C97A;
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #6b5a30;
   }
 
-  /* ── CLASIFICACIÓN (4 órganos clave) ── */
-  .clasificacion {
+  /* 4 TARGETES ÒRGANS */
+  .clasif-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 14px;
-    animation: fadeUp .6s ease .1s both;
-  }
-  .clas-card {
-    border-radius: 8px;
-    padding: 12px 8px;
-    text-align: center;
-    border: 1px solid rgba(200,160,40,0.3);
-  }
-  .clas-card .icon { font-size: 20px; margin-bottom: 4px; }
-  .clas-card .tipo {
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .clas-card .pena-max {
-    font-size: 10px;
-    color: var(--text-secondary);
-    margin-top: 3px;
-    line-height: 1.3;
-  }
-  .clas-superior { background: rgba(200,160,40,0.15); border-color: var(--gold); }
-  .clas-ejec     { background: rgba(200,40,30,0.15); border-color: var(--red); }
-  .clas-inter    { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
-  .clas-basica   { background: rgba(26,122,60,0.15); border-color: var(--green); }
-  .clas-superior .tipo { color: var(--gold); }
-  .clas-ejec .tipo     { color: #E86050; }
-  .clas-inter .tipo    { color: #6AADDC; }
-  .clas-basica .tipo   { color: #4ACD7A; }
-
-  /* ── BANNER ── */
-  .reforma-banner {
-    background: linear-gradient(135deg, #0E2244 0%, #1A5C96 50%, #0E2244 100%);
-    border: 2px solid var(--gold);
-    border-radius: 8px;
-    padding: 10px 18px;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
     gap: 12px;
-    animation: fadeUp .55s ease .05s both;
-    box-shadow: 0 0 20px rgba(200,160,40,0.15);
+    margin-top: 16px;
   }
-  .reforma-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
-  .reforma-banner .ref-text { flex: 1; }
-  .reforma-banner .ref-ley {
-    font-family: 'Oswald', sans-serif;
+  .clasif {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+    border-top: 3px solid var(--accent);
+  }
+  .clasif .cl-icon { font-size: 22px; margin-bottom: 6px; }
+  .clasif h4 {
+    margin: 2px 0 4px;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--gold);
   }
-  .reforma-banner .ref-desc {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-top: 2px;
-  }
-  .reforma-banner .ref-fecha {
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--gold);
-    background: rgba(0,0,0,0.25);
-    padding: 4px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    border: 1px solid rgba(200,160,40,0.4);
-  }
-
-  /* ── CATEGORÍA ── */
-  .categoria {
-    background: var(--bg-section);
-    border-radius: 10px;
-    margin-bottom: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(200,160,40,0.2);
-    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
-  }
-  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
-  .categoria:nth-child(2)  { animation: fadeUp .6s ease .25s both; }
-  .categoria:nth-child(3)  { animation: fadeUp .6s ease .3s both; }
-  .categoria:nth-child(4)  { animation: fadeUp .6s ease .35s both; }
-  .categoria:nth-child(5)  { animation: fadeUp .6s ease .4s both; }
-  .categoria:nth-child(6)  { animation: fadeUp .6s ease .45s both; }
-  .categoria:nth-child(7)  { animation: fadeUp .6s ease .5s both; }
-  .categoria:nth-child(8)  { animation: fadeUp .6s ease .55s both; }
-  .categoria:nth-child(9)  { animation: fadeUp .6s ease .6s both; }
-  .categoria:nth-child(10) { animation: fadeUp .6s ease .65s both; }
-  .categoria:nth-child(11) { animation: fadeUp .6s ease .7s both; }
-
-  .cat-header {
-    background: var(--blue-royal);
-    padding: 12px 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    user-select: none;
-    transition: background .2s;
-  }
-  .cat-header:hover { background: #1e6db0; }
-  .cat-header .cat-icon { font-size: 20px; }
-  .cat-header h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    flex: 1;
-  }
-  .cat-header .art-ref {
+  .clasif p { margin: 0 0 4px; font-size: 12.5px; color: var(--text-2); }
+  .clasif .ant {
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    color: rgba(240,244,255,0.65);
-    white-space: nowrap;
-  }
-  .cat-header .toggle {
-    font-size: 14px;
-    transition: transform .3s;
-    color: var(--gold);
-  }
-  .cat-header.open .toggle { transform: rotate(180deg); }
-  .cat-header.local {
-    background: linear-gradient(135deg, var(--blue-royal) 0%, #0E2244 70%);
-    border-left: 4px solid var(--gold);
+    color: var(--text-3);
+    margin-top: 6px;
+    display: block;
   }
 
-  .cat-body { padding: 6px 0; }
-
-  /* ── DELITO / PUNTO ── */
-  .delito {
-    border-left: 3px solid var(--gold);
-    margin: 8px 14px;
-    background: rgba(10,22,40,0.5);
-    border-radius: 0 7px 7px 0;
-    padding: 10px 14px;
+  /* META STRIP */
+  .meta-strip {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+    background: #EAF1FE;
+    border: 1px solid #b9d0f6;
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-top: 14px;
   }
-  .delito-top {
+  .meta-strip p { margin: 4px 0 0; color: #1f3f7a; font-size: 14px; }
+  .vigente {
     display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    padding: 6px 14px;
+    background: white;
+    border: 1px solid #b9d0f6;
+    border-radius: 10px;
   }
-  .delito-nombre {
-    font-family: 'Oswald', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text-main);
-    flex: 1;
-    min-width: 160px;
+  .vigente .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); }
+  .vigente .state { font-weight: 800; color: #2F6BD8; }
+
+  /* ARTICLE CARDS */
+  .delito-grid { display: grid; gap: 10px; }
+  .delito {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 18px;
+    border-left: 3px solid var(--accent);
+  }
+  .delito.hl { background: var(--terracotta-soft); border-color: #f5c19a; border-left-color: var(--terracotta); }
+  .delito-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
   }
   .art-badge {
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
     font-weight: 700;
-    background: rgba(200,160,40,0.15);
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    padding: 2px 7px;
-    border-radius: 4px;
-    white-space: nowrap;
+    background: var(--accent);
+    color: var(--white);
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.04em;
+    flex: none;
   }
-  .tipo-badge {
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif;
+  .delito-name {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    flex: 1;
+    min-width: 200px;
+  }
+  .tipo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
     font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex: none;
   }
-  .badge-clave   { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
-  .badge-info    { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
-  .badge-grave   { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
-  .badge-local   { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
+  .tipo.info { background: rgba(47, 107, 216, 0.14); color: #1e3f7a; }
+  .tipo.key { background: rgba(232, 154, 28, 0.18); color: #854d0e; }
+  .tipo.warn { background: rgba(229, 72, 77, 0.16); color: #991b1b; }
+  .tipo.ok { background: rgba(47, 182, 107, 0.16); color: #166534; }
+  .tipo.local { background: rgba(151, 71, 214, 0.14); color: #5b21b6; }
+  .delito-desc { margin: 0 0 8px; font-size: 13.5px; color: var(--text-2); }
+  .delito-desc b { color: var(--ink); }
 
-  .delito-desc {
+  .pena-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pena {
     font-size: 12.5px;
-    color: var(--text-secondary);
-    margin-top: 5px;
+    background: var(--paper-2);
+    color: var(--text);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    font-weight: 600;
+  }
+  .pena.danger { background: #FFEFEC; color: #991b1b; border-color: #f3b9b9; }
+  .pena.warn { background: #FFF6E0; color: #854d0e; border-color: #f5d699; }
+  .pena.ok { background: #DFF7E9; color: #166534; border-color: #a8e0bf; }
+  .pena.terra { background: var(--terracotta-soft); color: #6b3818; border-color: #f5c19a; }
+  .pena.info { background: #EAF1FE; color: #1e3f7a; border-color: #b9d0f6; }
+
+  .nota {
+    margin-top: 8px;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    border-left: 3px solid;
+  }
+  .nota.policial { background: #DFF7E9; color: #14532d; border-left-color: var(--c-recursos); }
+  .nota.policial b { color: #14532d; }
+  .nota.agrav { background: #FFEFEC; color: #991b1b; border-left-color: var(--c-red); }
+  .nota.agrav b { color: #991b1b; }
+  .nota.clave { background: #FFF6E8; color: #6b5a30; border-left-color: #E89A1C; }
+  .nota.clave b { color: #6b5a30; }
+  .nota.info { background: #EAF1FE; color: #1f3f7a; border-left-color: #2F6BD8; }
+  .nota.info b { color: #1f3f7a; }
+
+  .norm-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 13.5px;
+  }
+  .norm-table th {
+    text-align: left;
+    padding: 8px 10px;
+    background: var(--paper-2);
+    font-weight: 800;
+    color: var(--ink);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .norm-table td {
+    padding: 8px 10px;
+    border-top: 1px solid var(--line-2);
+    color: var(--text-2);
+    vertical-align: top;
+  }
+  .norm-table b { color: var(--ink); font-family: 'Plus Jakarta Sans'; }
+  .norm-table td.compart { background: #DFF7E9; color: #166534; }
+  .norm-table td.compart b { color: #14532d; }
+
+  .art-list {
+    margin: 6px 0 0;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13.5px;
+    color: var(--text-2);
+  }
+  .art-list b {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink);
+    margin-right: 8px;
+    font-weight: 700;
+  }
+
+  /* RECUERDA */
+  .recuerda {
+    background: linear-gradient(135deg, #1f2735 0%, #131923 100%);
+    color: var(--paper);
+    border-radius: 16px;
+    padding: 22px 26px;
+    margin-top: 28px;
+    border: 1px solid #E89A1C;
+  }
+  .recuerda .r-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .recuerda .r-head h2 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #E89A1C;
+    text-transform: uppercase;
+  }
+  .recuerda ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .recuerda li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: start;
+    font-size: 13.5px;
+    color: rgba(250, 246, 239, 0.92);
     line-height: 1.5;
   }
-  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
+  .recuerda li b { color: #E89A1C; font-weight: 700; }
+  .recuerda li::before { content: "▸"; color: #E89A1C; font-weight: 800; }
 
-  .pena-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 7px;
+  /* RECURSOS */
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
   }
-  .pena-chip {
-    font-size: 11px;
-    background: rgba(26,92,150,0.25);
-    border: 1px solid rgba(26,92,150,0.6);
-    color: var(--text-main);
-    padding: 3px 9px;
-    border-radius: 20px;
-    display: flex;
+  .res-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
     align-items: center;
-    gap: 4px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: inherit;
+    transition: background .12s, border-color .12s;
   }
-  .pena-chip.agravada {
-    background: rgba(200,40,30,0.2);
-    border-color: rgba(200,40,30,0.5);
-  }
-  .pena-chip.multa {
-    background: rgba(200,160,40,0.12);
-    border-color: rgba(200,160,40,0.4);
-    color: var(--gold);
-  }
-  .pena-chip.positivo {
-    background: rgba(26,122,60,0.2);
-    border-color: rgba(26,122,60,0.5);
-    color: #A8D4C0;
-  }
-
-  .nota-agrav {
-    margin-top: 6px;
-    font-size: 11.5px;
-    color: #E08888;
-    background: rgba(200,40,30,0.08);
-    border-left: 2px solid var(--red);
-    padding: 4px 8px;
-    border-radius: 0 4px 4px 0;
-  }
-  .nota-policial {
-    margin-top: 6px;
-    font-size: 11.5px;
-    color: #A8D4C0;
-    background: rgba(26,122,60,0.1);
-    border-left: 2px solid var(--green);
-    padding: 4px 8px;
-    border-radius: 0 4px 4px 0;
-  }
-  .nota-clave {
-    margin-top: 6px;
-    font-size: 11.5px;
-    color: #E8CC80;
-    background: rgba(200,160,40,0.08);
-    border-left: 2px solid var(--gold);
-    padding: 4px 8px;
-    border-radius: 0 4px 4px 0;
-  }
-
-  /* ── RECUERDA ── */
-  .recuerda {
-    background: var(--gold);
+  .res-card:hover { background: var(--paper-2); border-color: rgba(14, 14, 14, 0.16); }
+  .res-card .res-icon {
+    width: 36px;
+    height: 36px;
     border-radius: 10px;
-    padding: 20px 22px;
-    margin-top: 6px;
-    animation: fadeUp .6s ease .75s both;
-  }
-  .recuerda h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #0A1628;
-    margin-bottom: 12px;
-    letter-spacing: 2px;
-    display: flex;
+    background: var(--paper-2);
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    font-size: 18px;
+    flex: none;
   }
-  .recuerda ul { list-style: none; }
-  .recuerda ul li {
-    font-size: 13px;
-    color: #0A1628;
-    padding: 5px 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-    border-bottom: 1px solid rgba(10,22,40,0.15);
-    line-height: 1.4;
-  }
-  .recuerda ul li:last-child { border-bottom: none; }
-  .recuerda ul li::before { content: "▶"; font-size: 9px; margin-top: 4px; flex-shrink: 0; }
+  .res-card h4 { margin: 0; font-size: 14px; font-weight: 700; }
+  .res-card p { margin: 2px 0 0; font-size: 12.5px; color: var(--text-2); }
 
-  /* ── BOTÓN ── */
-  .btn-print {
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-    padding: 14px;
-    background: var(--blue-royal);
-    border: 2px solid var(--gold);
-    color: var(--text-main);
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all .2s;
-    animation: fadeUp .6s ease .8s both;
+  @media (max-width: 980px) {
+    .clasif-grid { grid-template-columns: repeat(2, 1fr); }
+    .res-grid { grid-template-columns: repeat(2, 1fr); }
+    .meta-strip { grid-template-columns: 1fr; }
+    .ce-hero { grid-template-columns: 1fr; text-align: center; }
+    .ce-shield { margin: 0 auto; }
+    .ce-title { font-size: 28px; }
   }
-  .btn-print:hover { background: var(--gold); color: #0A1628; }
-
-  /* ── DIVISOR ── */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin: 4px 14px 2px;
-    opacity: .35;
-  }
-
-  /* ── TABLA MINI ── */
-  .mini-tabla {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    margin-top: 7px;
-  }
-  .mini-tabla .celda {
-    background: rgba(26,92,150,0.15);
-    border: 1px solid rgba(26,92,150,0.4);
-    padding: 6px 10px;
-    border-radius: 5px;
-    font-size: 11.5px;
-    color: var(--text-main);
-  }
-  .mini-tabla .celda b { color: var(--gold); }
-
-  /* ── TABLA COMPARATIVA ── */
-  .tabla-discip {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2px;
-    margin-top: 8px;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  .tabla-discip .th {
-    background: var(--blue-royal);
-    padding: 7px 10px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: center;
-  }
-  .tabla-discip .td {
-    background: rgba(10,22,40,0.7);
-    padding: 7px 10px;
-    font-size: 11.5px;
-    color: var(--text-secondary);
-    line-height: 1.4;
-  }
-  .tabla-discip .td.centro { text-align: center; font-weight: 700; color: var(--gold); font-family: 'Oswald', sans-serif; }
-  .tabla-discip .td.propia { background: rgba(26,92,150,0.15); }
-  .tabla-discip .td.local  { background: rgba(200,160,40,0.1); }
-  .tabla-discip .td.compart { background: rgba(26,122,60,0.12); }
-
-  @media print {
-    body { background: white; color: black; }
-    .btn-print { display: none; }
-    .categoria { break-inside: avoid; }
-    .cat-body { display: block !important; }
-  }
-
-  @media (max-width: 480px) {
-    .clasificacion { grid-template-columns: repeat(2, 1fr); }
-    .mini-tabla { grid-template-columns: 1fr; }
-    .tabla-discip { grid-template-columns: 1fr; }
+  @media (max-width: 640px) {
+    .clasif-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
-<body>
+<body data-fitxa-style="rebrand-2026">
 <div class="wrapper">
 
-  <!-- CABECERA -->
-  <div class="header">
-    <div class="escudo">
-      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
-        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
-        <rect x="13" y="14" width="38" height="1.5" fill="#C8A028" opacity=".9"/>
-        <rect x="13" y="17" width="38" height="1.5" fill="#C8A028" opacity=".9"/>
-        <text x="32" y="28" text-anchor="middle" font-family="Oswald,sans-serif" font-size="8" font-weight="700" fill="#C8A028" letter-spacing="1">POLICIA</text>
-        <text x="32" y="37" text-anchor="middle" font-family="Oswald,sans-serif" font-size="8" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
-        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
-        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
-        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
-        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
-        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+  <!-- HERO -->
+  <header class="ce-hero">
+    <div class="ce-shield">
+      <svg width="80" height="92" viewBox="0 0 80 92" fill="none">
+        <path d="M40 4 L74 13 V42 C74 62 60 78 40 88 C20 78 6 62 6 42 V13 Z" fill="#1f2a44" stroke="#E89A1C" stroke-width="2"/>
+        <text x="40" y="32" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="9" fill="#E89A1C" letter-spacing="1">POLICIA</text>
+        <text x="40" y="48" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#fff">🏛️</text>
+        <text x="40" y="62" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#E89A1C" letter-spacing="1">SISTEMA</text>
+        <text x="40" y="76" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#E89A1C" letter-spacing="1">L 4/2003</text>
       </svg>
     </div>
-    <div class="header-text">
-      <div class="label">Esquema Operativo Policial · Catalunya</div>
-      <h1>Llei <span>4/2003</span></h1>
-      <div class="subtitle">Sistema de Seguretat Pública de Catalunya · Generalitat · 7 abril · DOGC 3865 · BOE 13/05/2003</div>
+    <div>
+      <div class="eyebrow" style="color:#9c7a1f;">ESQUEMA OPERATIU POLICIAL · CATALUNYA</div>
+      <h1 class="ce-title">LLEI 4/2003 · <span class="accent">SISTEMA SEGURETAT</span></h1>
+      <p class="ce-sub">Llei del Sistema de Seguretat Pública de Catalunya · Generalitat · 7 d'abril · DOGC 3865 · BOE 13/05/2003 · Integra: PG-ME, Policies Locals, Protecció Civil, Trànsit, Joc i Seguretat Privada.</p>
+      <div class="hero-tags">
+        <span class="tag">📘 Llei 4/2003</span>
+        <span class="tag">🏛️ DOGC 3865</span>
+        <span class="tag">📚 5 capítols · 36 articles</span>
+        <span class="tag">⭐ Junta Local obligatòria</span>
+        <span class="tag">📄 Última mod. 30/03/2017</span>
+      </div>
     </div>
-  </div>
+  </header>
 
-  <!-- CLASIFICACIÓN: 4 órganos clave del sistema -->
-  <div class="clasificacion">
-    <div class="clas-card clas-superior">
-      <div class="icon">🏛️</div>
-      <div class="tipo">Consell Seg.</div>
-      <div class="pena-max">Órgano consultivo<br>y participación<br>superior<br>Art. 6</div>
+  <!-- 4 TARGETES ÒRGANS -->
+  <section>
+    <div class="section-head" style="--accent: var(--terracotta);">
+      <span class="eyebrow">📋 ELS 4 ÒRGANS CLAU DEL SISTEMA</span>
+      <span class="rule"></span>
     </div>
-    <div class="clas-card clas-ejec">
-      <div class="icon">⚙️</div>
-      <div class="tipo">Com. Govern</div>
-      <div class="pena-max">Coordinación<br>interna del<br>Gobierno<br>Art. 7</div>
+    <div class="clasif-grid">
+      <div class="clasif" style="--accent: var(--c-leyes);">
+        <div class="cl-icon">🏛️</div>
+        <h4>Consell Seguretat</h4>
+        <p>Òrgan consultiu superior i de participació.</p>
+        <span class="ant">Art. 6</span>
+      </div>
+      <div class="clasif" style="--accent: var(--c-operativa);">
+        <div class="cl-icon">⚙️</div>
+        <h4>Comissió Govern</h4>
+        <p>Coordinació interna del Govern.</p>
+        <span class="ant">Art. 7</span>
+      </div>
+      <div class="clasif" style="--accent: var(--c-superbuscador);">
+        <div class="cl-icon">🤝</div>
+        <h4>Comissió Policia</h4>
+        <p>Coordinació PG-ME + Policies Locals.</p>
+        <span class="ant">Art. 8</span>
+      </div>
+      <div class="clasif" style="--accent: var(--terracotta);">
+        <div class="cl-icon">⭐</div>
+        <h4>Juntes Locals</h4>
+        <p>OBLIGATÒRIES si hi ha PL.</p>
+        <span class="ant">Art. 9</span>
+      </div>
     </div>
-    <div class="clas-card clas-inter">
-      <div class="icon">🤝</div>
-      <div class="tipo">Com. Policia</div>
-      <div class="pena-max">PG-ME +<br>Policías Locales<br>Art. 8</div>
-    </div>
-    <div class="clas-card clas-basica">
-      <div class="icon">⭐</div>
-      <div class="tipo">Juntes Locals</div>
-      <div class="pena-max">Obligatorias<br>si hay PL<br>Art. 9</div>
-    </div>
-  </div>
+  </section>
 
-  <!-- BANNER INFO -->
-  <div class="reforma-banner">
-    <div class="ref-icon">🏛️</div>
-    <div class="ref-text">
-      <div class="ref-ley">Integra el sistema de seguridad catalán</div>
-      <div class="ref-desc">PG-ME · Policías Locales · Protección Civil · Tráfico · Juego · Seguridad Privada · 5 Capítulos · 36 artículos</div>
+  <!-- META STRIP -->
+  <section class="meta-strip">
+    <div>
+      <div class="eyebrow" style="color:#2F6BD8;">📘 LLEI 4/2003 · DE 7 D'ABRIL · DOGC 3865 · BOE 13/05/2003</div>
+      <p>Generalitat de Catalunya · Sistema integral de seguretat: policia, protecció civil, trànsit, joc, espectacles i seguretat privada · 5 capítols · 36 articles · Última modificació 30/03/2017.</p>
     </div>
-    <div class="ref-fecha">Última modif.<br>30/03/2017</div>
-  </div>
-
-  <!-- 1. DISPOSICIONES GENERALES Y PRINCIPIOS -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">📖</span>
-      <h2>Objeto y Principios del Sistema</h2>
-      <span class="art-ref">Arts. 1–2 · Cap. I</span>
-      <span class="toggle">▼</span>
+    <div class="vigente">
+      <span class="when">07/04/2003</span>
+      <span class="state">Vigent</span>
     </div>
-    <div class="cat-body">
+  </section>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Objeto y Ámbito</div>
+  <!-- 1. OBJETO Y PRINCIPIOS -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-leyes);">
+      <span class="eyebrow">📖 1 · OBJECTE I PRINCIPIS · CAP. I · ARTS. 1–2</span>
+      <span class="rule"></span>
+    </div>
+    <div class="delito-grid">
+
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
           <span class="art-badge">Art. 1</span>
-          <span class="tipo-badge badge-clave">Objeto</span>
+          <span class="delito-name">Objecte i àmbit</span>
+          <span class="tipo info">Sistema</span>
         </div>
-        <div class="delito-desc">
-          Ordenación de las competencias de la Generalitat en seguridad pública (<b>policía, protección civil, tráfico, juego, espectáculos, seguridad privada</b>) en un <b>sistema general de seguridad</b> propio de Cataluña.
+        <p class="delito-desc">Ordenació de les competències de la Generalitat en seguretat pública (<b>policia, protecció civil, trànsit, joc, espectacles, seguretat privada</b>) en un <b>sistema general de seguretat</b> propi de Catalunya.</p>
+        <div class="pena-list">
+          <span class="pena ok">✓ Drets i llibertats dels ciutadans</span>
+          <span class="pena ok">✓ Convivència i cohesió social</span>
+          <span class="pena info">🔵 Prestació homogènia a tot Catalunya</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip positivo">✓ Derechos y libertades de los ciudadanos</span>
-          <span class="pena-chip positivo">✓ Convivencia y cohesión social</span>
-          <span class="pena-chip">🔵 Prestación <b>homogénea</b> en toda Cataluña</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Los 9 Principios Generales</div>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 2</span>
-          <span class="tipo-badge badge-local">Memorizar</span>
+          <span class="delito-name">Els 9 principis generals</span>
+          <span class="tipo key">⭐ Mnemotècnia</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Prevención de riesgos y amenazas</div>
-          <div class="celda"><b>b)</b> Adecuación a la demanda social</div>
-          <div class="celda"><b>c)</b> Proximidad y descentralización</div>
-          <div class="celda"><b>d)</b> Eficacia y eficiencia</div>
-          <div class="celda"><b>e)</b> Planificación y evaluación</div>
-          <div class="celda"><b>f)</b> Proporcionalidad</div>
-          <div class="celda"><b>g)</b> Corresponsabilidad y complementariedad</div>
-          <div class="celda"><b>h)</b> Coordinación y cooperación</div>
-          <div class="celda" style="grid-column: 1 / -1;"><b>i)</b> Transparencia e información a los ciudadanos</div>
-        </div>
-        <div class="nota-policial">🚔 Mnemotecnia: «<b>PAP · PEP · PCC · T</b>» (Prevención, Adecuación, Proximidad · Planificación, Eficacia, Proporcionalidad · Corresponsabilidad, Coordinación · Transparencia).</div>
-      </div>
+        <ul class="art-list">
+          <li><b>a)</b> Prevenció de riscos i amenaces.</li>
+          <li><b>b)</b> Adequació a la demanda social.</li>
+          <li><b>c)</b> Proximitat i descentralització.</li>
+          <li><b>d)</b> Eficàcia i eficiència.</li>
+          <li><b>e)</b> Planificació i avaluació.</li>
+          <li><b>f)</b> Proporcionalitat.</li>
+          <li><b>g)</b> Corresponsabilitat i complementarietat.</li>
+          <li><b>h)</b> Coordinació i cooperació.</li>
+          <li><b>i)</b> Transparència i informació als ciutadans.</li>
+        </ul>
+        <div class="nota policial"><b>🚔 Mnemotècnia:</b> «<b>PAP · PEP · PCC · T</b>» (Prevenció, Adequació, Proximitat · Planificació, Eficàcia, Proporcionalitat · Corresponsabilitat, Coordinació · Transparència).</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
   <!-- 2. ESTRUCTURA DEL SISTEMA -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🏗️</span>
-      <h2>Estructura del Sistema</h2>
-      <span class="art-ref">Arts. 3–5 · Cap. II</span>
-      <span class="toggle">▼</span>
+  <section>
+    <div class="section-head" style="--accent: var(--c-operativa);">
+      <span class="eyebrow">🏗️ 2 · ESTRUCTURA DEL SISTEMA · CAP. II · ARTS. 3–5</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">3 Elementos del Sistema de Seguridad</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Art. 3</span>
-          <span class="tipo-badge badge-clave">Clave</span>
+          <span class="delito-name">3 elements del sistema de seguretat</span>
+          <span class="tipo info">Components</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Autoridades de seguridad</div>
-          <div class="celda"><b>b)</b> Cuerpos policiales y servicios (públicos o privados)</div>
-          <div class="celda" style="grid-column: 1 / -1;"><b>c)</b> Órganos de coordinación y participación</div>
-        </div>
-        <div class="nota-clave">💡 La <b>Junta de Seguridad de Cataluña</b> (art. 13 Estatut) es el órgano superior de coordinación entre PG-ME y las FCSE.</div>
-      </div>
-      <div class="divider"></div>
+        <ul class="art-list">
+          <li><b>a)</b> Autoritats de seguretat.</li>
+          <li><b>b)</b> Cossos policials i serveis (públics o privats).</li>
+          <li><b>c)</b> Òrgans de coordinació i participació.</li>
+        </ul>
+        <div class="nota clave"><b>💡 La Junta de Seguretat de Catalunya</b> (art. 13 Estatut) és l'òrgan superior de coordinació entre PG-ME i les FCSE.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Cuerpos Policiales de Cataluña</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Art. 5</span>
-          <span class="tipo-badge badge-info">Cuerpos</span>
+          <span class="delito-name">Cossos policials de Catalunya</span>
+          <span class="tipo info">PG-ME + PL</span>
         </div>
-        <div class="delito-desc">
-          La <b>PG-ME</b> y las <b>policías de los ayuntamientos</b> (Policía Local, Policía Municipal, Guardia Urbana u otras denominaciones) constituyen la <b>policía de las instituciones propias de Cataluña</b>.
+        <p class="delito-desc">La <b>PG-ME</b> i les <b>policies dels ajuntaments</b> (Policia Local, Policia Municipal, Guàrdia Urbana o altres denominacions) constitueixen la <b>policia de les institucions pròpies de Catalunya</b>.</p>
+        <div class="pena-list">
+          <span class="pena info">🔵 PL · Cos únic per municipi</span>
+          <span class="pena warn">🟡 Àmbit · terme municipal</span>
+          <span class="pena danger">⚠️ Fora · només emergència + conveni/plan aprovat</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 PL: <b>Cuerpo único</b> por municipio</span>
-          <span class="pena-chip multa">🟡 Ámbito: <b>término municipal</b></span>
-          <span class="pena-chip agravada">⚠️ Fuera: solo emergencia + convenio/plan aprobado</span>
-        </div>
-        <div class="nota-policial">🚔 Principios de relación entre cuerpos: <b>complementariedad, coordinación, colaboración, cooperación y auxilio mutuo</b>.</div>
-      </div>
+        <div class="nota policial"><b>🚔 Principis</b> de relació entre cossos: <b>complementarietat, coordinació, col·laboració, cooperació i auxili mutu</b>.</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 3. AUTORIDADES -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">👔</span>
-      <h2>Autoridades de Seguridad</h2>
-      <span class="art-ref">Art. 4</span>
-      <span class="toggle">▼</span>
+  <!-- 3. AUTORIDADES DE SEGURIDAD -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-superbuscador);">
+      <span class="eyebrow">👔 3 · AUTORITATS DE SEGURETAT · ART. 4</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Jerarquía de Autoridades</div>
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
           <span class="art-badge">Art. 4.1-2</span>
-          <span class="tipo-badge badge-clave">Clave</span>
+          <span class="delito-name">Jerarquia d'autoritats</span>
+          <span class="tipo info">Estructura</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>Govern</b><br>Órgano colegiado superior</div>
-          <div class="celda"><b>Conseller</b><br>Dirige la política de seguridad</div>
-          <div class="celda"><b>Alcaldes</b><br>Autoridades superiores locales</div>
-          <div class="celda"><b>Delegados territoriales del Govern</b><br>Por atribución legal</div>
-        </div>
-      </div>
-      <div class="divider"></div>
+        <table class="norm-table">
+          <thead><tr><th>Autoritat</th><th>Rol</th></tr></thead>
+          <tbody>
+            <tr><td><b>Govern</b></td><td>Òrgan col·legiat superior</td></tr>
+            <tr><td><b>Conseller</b></td><td>Dirigeix la política de seguretat</td></tr>
+            <tr><td><b>Alcaldes</b></td><td>Autoritats superiors locals</td></tr>
+            <tr><td><b>Delegats territorials del Govern</b></td><td>Per atribució legal</td></tr>
+          </tbody>
+        </table>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Funciones del CONSELLER d'Interior</div>
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
           <span class="art-badge">Art. 4.3</span>
-          <span class="tipo-badge badge-info">11 funciones</span>
+          <span class="delito-name">Funcions del Conseller d'Interior</span>
+          <span class="tipo info">11 funcions</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Dirigir la política de seguridad</div>
-          <div class="celda"><b>b)</b> Ordenar actuaciones de seguridad ciudadana</div>
-          <div class="celda"><b>c)</b> Mando superior de la <b>PG-ME</b></div>
-          <div class="celda"><b>d)</b> Coordinar las policías locales</div>
-          <div class="celda"><b>e)</b> Presidir el <b>Consell de Seguretat</b></div>
-          <div class="celda"><b>f)</b> Elaborar y elevar el Plan General</div>
-          <div class="celda"><b>g)</b> Elaborar normas reglamentarias</div>
-          <div class="celda"><b>h)</b> Impulsar y coordinar acciones</div>
-          <div class="celda"><b>i)</b> Informe anual al Parlament</div>
-          <div class="celda"><b>j)</b> Potestad sancionadora</div>
-          <div class="celda" style="grid-column: 1 / -1;"><b>k)</b> Otras funciones que le asigne la legislación</div>
-        </div>
-      </div>
-      <div class="divider"></div>
+        <ul class="art-list">
+          <li><b>a)</b> Dirigir la política de seguretat.</li>
+          <li><b>b)</b> Ordenar actuacions de seguretat ciutadana.</li>
+          <li><b>c)</b> Comandament superior de la <b>PG-ME</b>.</li>
+          <li><b>d)</b> Coordinar les policies locals.</li>
+          <li><b>e)</b> Presidir el <b>Consell de Seguretat</b>.</li>
+          <li><b>f)</b> Elaborar i elevar el Pla General.</li>
+          <li><b>g)</b> Elaborar normes reglamentàries.</li>
+          <li><b>h)</b> Impulsar i coordinar accions.</li>
+          <li><b>i)</b> Informe anual al Parlament.</li>
+          <li><b>j)</b> Potestat sancionadora.</li>
+          <li><b>k)</b> Altres funcions de la legislació.</li>
+        </ul>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Funciones del ALCALDE</div>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 4.4</span>
-          <span class="tipo-badge badge-local">9 funciones</span>
+          <span class="delito-name">Funcions de l'Alcalde</span>
+          <span class="tipo key">⭐ 9 funcions</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Dirigir la política de seguridad municipal</div>
-          <div class="celda"><b>b)</b> Presidir la <b>Junta Local de Seguridad</b></div>
-          <div class="celda"><b>c)</b> Ordenar actuaciones municipales</div>
-          <div class="celda"><b>d)</b> Mando superior de la <b>Policía Local</b></div>
-          <div class="celda"><b>e)</b> Impulsar acciones en el ámbito municipal</div>
-          <div class="celda"><b>f)</b> Informar al Pleno del plan local</div>
-          <div class="celda"><b>g)</b> Informe anual al Pleno</div>
-          <div class="celda"><b>h)</b> Potestad sancionadora</div>
-          <div class="celda" style="grid-column: 1 / -1;"><b>i)</b> Resto de funciones de la legislación vigente</div>
-        </div>
-        <div class="nota-agrav">⚠️ El alcalde <b>SOLO puede delegar excepcionalmente</b> la presidencia de las sesiones de la Junta Local de Seguridad en el concejal de seguridad (art. 9.6).</div>
-      </div>
+        <ul class="art-list">
+          <li><b>a)</b> Dirigir la política de seguretat municipal.</li>
+          <li><b>b)</b> Presidir la <b>Junta Local de Seguretat</b>.</li>
+          <li><b>c)</b> Ordenar actuacions municipals.</li>
+          <li><b>d)</b> Comandament superior de la <b>Policia Local</b>.</li>
+          <li><b>e)</b> Impulsar accions a l'àmbit municipal.</li>
+          <li><b>f)</b> Informar al Ple del pla local.</li>
+          <li><b>g)</b> Informe anual al Ple.</li>
+          <li><b>h)</b> Potestat sancionadora.</li>
+          <li><b>i)</b> Resta de funcions de la legislació.</li>
+        </ul>
+        <div class="nota agrav"><b>⚠️ L'alcalde NOMÉS</b> pot delegar excepcionalment la presidència de les sessions de la Junta Local de Seguretat en el regidor de seguretat (art. 9.6).</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
   <!-- 4. ÓRGANOS DE COORDINACIÓN SUPERIORES -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🤝</span>
-      <h2>Órganos de Coordinación Superiores</h2>
-      <span class="art-ref">Arts. 6–8</span>
-      <span class="toggle">▼</span>
+  <section>
+    <div class="section-head" style="--accent: var(--c-recursos);">
+      <span class="eyebrow">🤝 4 · ÒRGANS DE COORDINACIÓ SUPERIORS · ARTS. 6–8</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Consell de Seguretat de Catalunya</div>
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
           <span class="art-badge">Art. 6</span>
-          <span class="tipo-badge badge-info">Consultivo</span>
+          <span class="delito-name">Consell de Seguretat de Catalunya</span>
+          <span class="tipo info">Òrgan superior</span>
         </div>
-        <div class="delito-desc">
-          Órgano <b>consultivo y de participación SUPERIOR</b> en Cataluña. Preside el <b>Conseller d'Interior</b>. Integra: entidades ciudadanas, admin. locales, Generalitat y (si acuerda) Estado, judicatura y fiscalía.
+        <p class="delito-desc">Òrgan <b>consultiu i de participació SUPERIOR</b> a Catalunya. Presideix el <b>Conseller d'Interior</b>. Integra entitats ciutadanes, admin. locals, Generalitat i (si acorda) Estat, judicatura i fiscalia.</p>
+        <div class="pena-list">
+          <span class="pena info">🔵 Analitza i avalua la seguretat anualment</span>
+          <span class="pena info">🔵 Proposa mesures de millora</span>
+          <span class="pena ok">✓ Constitueix comissions i grups de treball</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Analiza/evalúa la seguridad anualmente</span>
-          <span class="pena-chip">🔵 Propone medidas de mejora</span>
-          <span class="pena-chip positivo">✓ Constituye comisiones y grupos de trabajo</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Comissió del Govern per a la Seguretat</div>
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
           <span class="art-badge">Art. 7</span>
-          <span class="tipo-badge badge-info">Gobierno</span>
+          <span class="delito-name">Comissió del Govern per a la Seguretat</span>
+          <span class="tipo info">President</span>
         </div>
-        <div class="delito-desc">
-          Presidida por el <b>President de la Generalitat</b> (o Conseller en Cap). Integra consellers de seguridad, inmigración, justicia, menores, violencia de género, servicios sociales, sanidad, educación, industria, comercio, consumo, turismo, medio ambiente y economía.
+        <p class="delito-desc">Presidida pel <b>President de la Generalitat</b> (o Conseller en Cap). Integra consellers de seguretat, immigració, justícia, menors, violència de gènere, serveis socials, sanitat, educació, indústria, comerç, consum, turisme, medi ambient i economia.</p>
+        <div class="pena-list">
+          <span class="pena warn">🟡 Reunió mínima trimestral</span>
+          <span class="pena info">🔵 Segueix l'execució del Pla General</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip multa">🟡 Reunión mínima <b>trimestral</b></span>
-          <span class="pena-chip">🔵 Sigue la ejecución del Plan General de Seguridad</span>
-        </div>
-        <div class="nota-clave">💡 Se convoca también en <b>situaciones excepcionales</b> de grave riesgo o alteración de la convivencia.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota clave"><b>💡 Es convoca</b> també en <b>situacions excepcionals</b> de greu risc o alteració de la convivència.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">⭐ Comissió de Policia de Catalunya</div>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 8</span>
-          <span class="tipo-badge badge-local">Pregunta típica</span>
+          <span class="delito-name">Comissió de Policia de Catalunya</span>
+          <span class="tipo key">⭐ Substitueix CCPL</span>
         </div>
-        <div class="delito-desc">
-          Órgano consultivo superior en <b>coordinación PG-ME + Policías Locales</b>. <b>Sustituye</b> a la antigua Comisión de Coordinación de Policías Locales (Disp. Derogatoria de la 4/2003).
+        <p class="delito-desc">Òrgan consultiu superior en <b>coordinació PG-ME + Policies Locals</b>. <b>Substitueix</b> la Comissió de Coordinació de Policies Locals (Disp. Derogatòria).</p>
+        <table class="norm-table">
+          <thead><tr><th>Composició</th><th>Detall</th></tr></thead>
+          <tbody>
+            <tr><td><b>11 membres</b></td><td>1 Conseller (presideix) + 5 Govern + 5 Ajuntaments</td></tr>
+          </tbody>
+        </table>
+        <div class="pena-list">
+          <span class="pena info">🔵 Seguiment convenis PG-ME · Aj.</span>
+          <span class="pena info">🔵 Informe preceptiu NO vinculant en organització PL</span>
+          <span class="pena info">🔵 Informe sobre uniformitat PL</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>Composición:</b> 11 miembros</div>
-          <div class="celda">1 Conseller (preside) + 5 Govern + 5 Ayuntamientos</div>
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Seguimiento de convenios PG-ME · Ayto.</span>
-          <span class="pena-chip">🔵 Informe preceptivo NO vinculante en organización PL</span>
-          <span class="pena-chip">🔵 Informe sobre uniformidad PL</span>
-        </div>
-        <div class="nota-agrav">⚠️ La Comisión de Policía de Cataluña <b>adscrita al Departament d'Interior</b>. Puede crear subcomisiones y grupos de trabajo.</div>
-      </div>
+        <div class="nota agrav"><b>⚠️ Adscrita</b> al Departament d'Interior. Pot crear subcomissions i grups de treball.</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 5. JUNTAS LOCALES DE SEGURIDAD (destacado) -->
-  <div class="categoria">
-    <div class="cat-header open local" onclick="toggle(this)">
-      <span class="cat-icon">⭐</span>
-      <h2>Juntas Locales de Seguridad</h2>
-      <span class="art-ref">Arts. 9–11</span>
-      <span class="toggle">▼</span>
+  <!-- 5. JUNTAS LOCALES DE SEGURIDAD (CLAU) -->
+  <section>
+    <div class="section-head" style="--accent: var(--terracotta);">
+      <span class="eyebrow">⭐ 5 · JUNTES LOCALS DE SEGURETAT · ARTS. 9–11</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Naturaleza y Carácter Obligatorio</div>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 9.1</span>
-          <span class="tipo-badge badge-local">Clave</span>
+          <span class="delito-name">Naturalesa i caràcter obligatori</span>
+          <span class="tipo key">⭐ OBLIGATÒRIA</span>
         </div>
-        <div class="delito-desc">
-          En los municipios <b>que tengan Policía Local DEBE EXISTIR</b> una Junta Local de Seguridad, como órgano colegiado de colaboración y coordinación de los diversos cuerpos de policía y servicios de seguridad que operan en su territorio y de participación ciudadana.
-        </div>
-        <div class="nota-agrav">⚠️ El <b>carácter OBLIGATORIO</b> de la Junta Local en municipios con PL es una de las principales novedades de la Ley 4/2003 (antes era opcional según LO 2/1986).</div>
-      </div>
-      <div class="divider"></div>
+        <p class="delito-desc">En els municipis <b>que tinguin Policia Local DEU EXISTIR</b> una Junta Local de Seguretat, com a òrgan col·legiat de col·laboració i coordinació dels diversos cossos de policia i serveis de seguretat que operen en el seu territori i de participació ciutadana.</p>
+        <div class="nota agrav"><b>⚠️ El caràcter OBLIGATORI</b> de la Junta Local en municipis amb PL és una de les principals novetats de la Llei 4/2003 (abans era opcional segons LO 2/1986).</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Composición (vocales permanentes con voz y voto)</div>
+      <article class="delito" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 9.2</span>
-          <span class="tipo-badge badge-local">Composición</span>
+          <span class="delito-name">Composició · vocals permanents (vot)</span>
+          <span class="tipo info">Vot</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>Presidente:</b> Alcalde/sa</div>
-          <div class="celda"><b>a)</b> Delegado/a territorial del Govern</div>
-          <div class="celda"><b>b)</b> Concejal de seguridad ciudadana</div>
-          <div class="celda"><b>c)</b> Jefe comisaría PG-ME del municipio</div>
-          <div class="celda" style="grid-column: 1 / -1;"><b>d)</b> Jefe de la Policía Local</div>
-          <div class="celda" style="grid-column: 1 / -1;"><b>e)</b> Si acuerda el Estado: jefes de Guardia Civil y CNP con responsabilidades funcionales</div>
-        </div>
-      </div>
-      <div class="divider"></div>
+        <ul class="art-list">
+          <li><b>·</b> <b>President:</b> Alcalde/ssa.</li>
+          <li><b>a)</b> Delegat/ada territorial del Govern.</li>
+          <li><b>b)</b> Regidor de seguretat ciutadana.</li>
+          <li><b>c)</b> Cap comissaria PG-ME del municipi.</li>
+          <li><b>d)</b> Cap de la Policia Local.</li>
+          <li><b>e)</b> Si acorda l'Estat: caps de Guàrdia Civil i CNP amb responsabilitats funcionals.</li>
+        </ul>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Otros participantes (voz pero sin voto)</div>
+      <article class="delito" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 9.3-5</span>
-          <span class="tipo-badge badge-info">Invitados</span>
+          <span class="delito-name">Altres participants · veu sense vot</span>
+          <span class="tipo info">Suport</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Judicatura y fiscalía (si acuerda el Estado)</span>
-          <span class="pena-chip">🔵 Asociaciones vecinales si son afectadas</span>
-          <span class="pena-chip multa">🟡 Técnicos de emergencias, servicios sociales, tráfico, juego</span>
-          <span class="pena-chip multa">🟡 Responsables de seguridad privada (pueden ser llamados a comparecer)</span>
+        <div class="pena-list">
+          <span class="pena info">🔵 Judicatura i fiscalia (si acorda Estat)</span>
+          <span class="pena info">🔵 Associacions veïnals afectades</span>
+          <span class="pena warn">🟡 Tècnics emergències, serveis socials, trànsit, joc</span>
+          <span class="pena warn">🟡 Responsables seguretat privada</span>
         </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Régimen de Sesiones y Acuerdos</div>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 9.6-8</span>
-          <span class="tipo-badge badge-local">Funcionamiento</span>
+          <span class="delito-name">Règim de sessions i acords</span>
+          <span class="tipo key">⭐ Unanimitat</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Sesión ordinaria: <b>trimestral</b></span>
-          <span class="pena-chip multa">🟡 Una sesión anual: <b>plenaria</b> con no permanentes</span>
-          <span class="pena-chip agravada">⚠️ Acuerdos por <b>UNANIMIDAD</b></span>
-          <span class="pena-chip positivo">✓ Los acuerdos son <b>EJECUTIVOS</b></span>
+        <div class="pena-list">
+          <span class="pena info">🔵 Sessió ordinària · trimestral</span>
+          <span class="pena warn">🟡 Una sessió anual · plenària amb no permanents</span>
+          <span class="pena danger">⚠️ Acords per UNANIMITAT</span>
+          <span class="pena ok">✓ Els acords són EXECUTIUS</span>
         </div>
-        <div class="nota-policial">🚔 Pregunta muy repetida: los acuerdos de la Junta Local SIEMPRE son <b>por unanimidad</b> y son <b>ejecutivos</b>. El Alcalde puede delegar la presidencia excepcionalmente en el concejal de seguridad.</div>
-      </div>
-      <div class="divider"></div>
+        <div class="nota policial"><b>🚔 Pregunta molt repetida:</b> els acords de la Junta Local SEMPRE són <b>per unanimitat</b> i són <b>executius</b>. L'Alcalde pot delegar la presidència excepcionalment en el regidor de seguretat.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Funciones de las Juntas Locales</div>
+      <article class="delito" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 10</span>
-          <span class="tipo-badge badge-local">8 funciones</span>
+          <span class="delito-name">Funcions de les Juntes Locals</span>
+          <span class="tipo info">8 funcions</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Analizar situación de seguridad municipal</div>
-          <div class="celda"><b>b)</b> Elaborar y aprobar el <b>Plan Local de Seguridad</b></div>
-          <div class="celda"><b>c)</b> Conocer planes emergencias, vial, juego</div>
-          <div class="celda"><b>d)</b> Conocer servicios de seguridad privada</div>
-          <div class="celda"><b>e)</b> Concretar colaboración y coordinación</div>
-          <div class="celda"><b>f)</b> Promover iniciativas y propuestas</div>
-          <div class="celda"><b>g)</b> Ejecutar actuaciones del convenio suscrito</div>
-          <div class="celda"><b>h)</b> Otras funciones de la normativa</div>
-        </div>
-      </div>
-      <div class="divider"></div>
+        <ul class="art-list">
+          <li><b>a)</b> Analitzar situació de seguretat municipal.</li>
+          <li><b>b)</b> Elaborar i aprovar el <b>Pla Local de Seguretat</b>.</li>
+          <li><b>c)</b> Conèixer plans emergències, vial, joc.</li>
+          <li><b>d)</b> Conèixer serveis de seguretat privada.</li>
+          <li><b>e)</b> Concretar col·laboració i coordinació.</li>
+          <li><b>f)</b> Promoure iniciatives i propostes.</li>
+          <li><b>g)</b> Executar actuacions del conveni subscrit.</li>
+          <li><b>h)</b> Altres funcions de la normativa.</li>
+        </ul>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Mesa de Coordinación Operativa</div>
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
           <span class="art-badge">Art. 11</span>
-          <span class="tipo-badge badge-local">Órgano técnico</span>
+          <span class="delito-name">Mesa de Coordinació Operativa</span>
+          <span class="tipo info">Permanent</span>
         </div>
-        <div class="delito-desc">
-          Las Juntas Locales <b>DEBEN CREAR</b> una Mesa de Coordinación Operativa: órgano <b>permanente y estable</b> integrado por los <b>jefes de PG-ME y PL</b> miembros de la Junta.
+        <p class="delito-desc">Les Juntes Locals <b>HAN DE CREAR</b> una Mesa de Coordinació Operativa: òrgan <b>permanent i estable</b> integrat pels <b>caps de PG-ME i PL</b> membres de la Junta.</p>
+        <div class="pena-list">
+          <span class="pena info">🔵 Executa els acords de la Junta</span>
+          <span class="pena info">🔵 Intercanvi d'informació entre cossos</span>
+          <span class="pena info">🔵 Coordina operativament les actuacions</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Ejecuta los acuerdos de la Junta</span>
-          <span class="pena-chip">🔵 Intercambio de información entre cuerpos</span>
-          <span class="pena-chip">🔵 Coordina operativamente las actuaciones</span>
-        </div>
-        <div class="nota-agrav">⚠️ En todo caso, los cuerpos actúan bajo las <b>órdenes inmediatas de sus mandos orgánicos</b> respectivos (art. 11.4).</div>
-      </div>
+        <div class="nota agrav"><b>⚠️ En tot cas,</b> els cossos actuen sota les <b>ordres immediates dels seus comandaments orgànics</b> respectius (art. 11.4).</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
   <!-- 6. COMISIONES REGIONALES Y PLAN GENERAL -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🗺️</span>
-      <h2>Comisiones Regionales y Plan General</h2>
-      <span class="art-ref">Arts. 12–15</span>
-      <span class="toggle">▼</span>
+  <section>
+    <div class="section-head" style="--accent: var(--c-operativa);">
+      <span class="eyebrow">🗺️ 6 · COMISSIONS REGIONALS I PLA GENERAL · ARTS. 12–15</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Comisiones Regionales de Seguridad</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Art. 12</span>
-          <span class="tipo-badge badge-info">Regional</span>
+          <span class="delito-name">Comissions Regionals de Seguretat</span>
+          <span class="tipo info">Regió policial</span>
         </div>
-        <div class="delito-desc">
-          Los municipios de una misma <b>región policial</b> se integran en una Comisión Regional. Preside el <b>Conseller</b> (o persona en quien delegue).
+        <p class="delito-desc">Els municipis d'una mateixa <b>regió policial</b> s'integren en una Comissió Regional. Presideix el <b>Conseller</b> (o persona en qui delegui).</p>
+        <div class="pena-list">
+          <span class="pena info">🔵 Analitza la seguretat del seu àmbit</span>
+          <span class="pena info">🔵 Elabora el Pla de Seguretat Regional</span>
+          <span class="pena warn">🟡 Proposa plans al Conseller</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Analiza la seguridad de su ámbito</span>
-          <span class="pena-chip">🔵 Elabora el <b>Plan de Seguridad Regional</b></span>
-          <span class="pena-chip multa">🟡 Propone planes al Conseller</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Escola de Policia de Catalunya (ISPC)</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Art. 14</span>
-          <span class="tipo-badge badge-info">Formación</span>
+          <span class="delito-name">Escola de Policia de Catalunya · ISPC</span>
+          <span class="tipo info">Formació</span>
         </div>
-        <div class="delito-desc">
-          <b>Organismo autónomo de carácter administrativo</b> adscrito al Departament d'Interior. Forma a <b>PG-ME y Policías Locales</b>: formación básica, de mandos y de especialidades.
-        </div>
-        <div class="nota-clave">💡 La Escola también apoya a los ayuntamientos en los <b>procesos de selección</b> del personal (art. 14.2).</div>
-      </div>
-      <div class="divider"></div>
+        <p class="delito-desc"><b>Organisme autònom de caràcter administratiu</b> adscrit al Departament d'Interior. Forma a <b>PG-ME i Policies Locals:</b> formació bàsica, de comandaments i d'especialitats.</p>
+        <div class="nota clave"><b>💡 L'Escola</b> també dóna suport als ajuntaments en els <b>processos de selecció</b> del personal (art. 14.2).</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Plan General de Seguridad de Cataluña</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Art. 15</span>
-          <span class="tipo-badge badge-local">Planificación</span>
+          <span class="delito-name">Pla General de Seguretat de Catalunya</span>
+          <span class="tipo info">⏰ Quadriennal</span>
         </div>
-        <div class="delito-desc">
-          Aprobado por el <b>Govern</b>, a propuesta del Conseller, previo conocimiento de la Comissió del Govern i del Consell de Seguretat.
+        <p class="delito-desc">Aprovat pel <b>Govern</b>, a proposta del Conseller, previ coneixement de la Comissió del Govern i del Consell de Seguretat.</p>
+        <div class="pena-list">
+          <span class="pena warn">⏰ Periodicitat QUADRIENNAL</span>
+          <span class="pena info">🔵 Estableix directrius per a plans locals i regionals</span>
+          <span class="pena ok">✓ Es presenta al Parlament</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">⏰ Periodicidad <b>CUATRIENAL</b></span>
-          <span class="pena-chip">🔵 Establece directrices para planes locales y regionales</span>
-          <span class="pena-chip positivo">✓ Se presenta al <b>Parlament</b></span>
-        </div>
-      </div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 7. ADMINISTRACIÓN TERRITORIAL -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🗺️</span>
-      <h2>Organización Territorial de Seguridad</h2>
-      <span class="art-ref">Arts. 16–20 · Cap. III</span>
-      <span class="toggle">▼</span>
+  <!-- 7. ORGANIZACIÓN TERRITORIAL DE SEGURIDAD -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-superbuscador);">
+      <span class="eyebrow">🗺️ 7 · ORGANITZACIÓ TERRITORIAL · CAP. III · ARTS. 16–20</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Mapa Policial de Cataluña</div>
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
           <span class="art-badge">Art. 18</span>
-          <span class="tipo-badge badge-info">Territorio</span>
+          <span class="delito-name">Mapa Policial de Catalunya</span>
+          <span class="tipo info">Decret Govern</span>
         </div>
-        <div class="delito-desc">
-          Aprobado <b>por Decreto del Govern</b>, de acuerdo con el Pla Territorial General de Cataluña. Organiza el territorio en <b>áreas básicas policiales</b> y <b>regiones policiales</b>.
-        </div>
-      </div>
-      <div class="divider"></div>
+        <p class="delito-desc">Aprovat <b>per Decret del Govern</b>, d'acord amb el Pla Territorial General de Catalunya. Organitza el territori en <b>àrees bàsiques policials</b> i <b>regions policials</b>.</p>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Áreas Básicas Policiales (ABP)</div>
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
           <span class="art-badge">Art. 19</span>
-          <span class="tipo-badge badge-info">ABP</span>
+          <span class="delito-name">Àrees Bàsiques Policials · ABP</span>
+          <span class="tipo info">Unitat mínima</span>
         </div>
-        <div class="delito-desc">
-          <b>Unidad mínima</b> geográfica y poblacional, dotada de servicios básicos para atención primaria (prevención, seguridad ciudadana, control de tráfico, investigación de primer nivel).
+        <p class="delito-desc"><b>Unitat mínima</b> geogràfica i poblacional, dotada de serveis bàsics per a atenció primària (prevenció, seguretat ciutadana, control de trànsit, investigació de primer nivell).</p>
+        <div class="pena-list">
+          <span class="pena info">🔵 Comissaria principal de PG-ME + desconcentrades</span>
+          <span class="pena info">🔵 Policies Locals del territori</span>
+          <span class="pena ok">✓ Coordinació · Juntes Locals corresponents</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Comisaría principal de PG-ME + desconcentradas</span>
-          <span class="pena-chip">🔵 Policías Locales del territorio</span>
-          <span class="pena-chip positivo">✓ Coordinación: Juntas Locales correspondientes</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Regiones Policiales</div>
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
           <span class="art-badge">Art. 20</span>
-          <span class="tipo-badge badge-info">Región</span>
+          <span class="delito-name">Regions Policials</span>
+          <span class="tipo info">Agrupació ABP</span>
         </div>
-        <div class="delito-desc">
-          Agrupación de varias <b>ABP</b>. Cada región tiene una <b>comisaría regional</b> (con sede en la ABP que determine el Govern) donde se ubican los <b>servicios de apoyo logístico y especialidades</b> policiales que trascienden el ámbito de las ABP.
-        </div>
-      </div>
+        <p class="delito-desc">Agrupació de diverses <b>ABP</b>. Cada regió té una <b>comissaria regional</b> (amb seu a l'ABP que determini el Govern) on s'ubiquen els <b>serveis de suport logístic i especialitats</b> policials que transcendeixen l'àmbit de les ABP.</p>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 8. COORDINACIÓN PL, REGISTRO Y TIP -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">📇</span>
-      <h2>Coordinación PL · Registro · TIP</h2>
-      <span class="art-ref">Arts. 25, 25 bis, 25 ter</span>
-      <span class="toggle">▼</span>
+  <!-- 8. COORDINACIÓN PL · REGISTRO · TIP -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-leyes);">
+      <span class="eyebrow">📇 8 · COORDINACIÓ PL · REGISTRE · TIP · ARTS. 25, 25 BIS, 25 TER</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Funciones de Coordinación de PL</div>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
           <span class="art-badge">Art. 25</span>
-          <span class="tipo-badge badge-info">Coordinación</span>
+          <span class="delito-name">Funcions de coordinació de PL</span>
+          <span class="tipo info">Homogeneïtzació</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Homogeneización de medios técnicos</div>
-          <div class="celda"><b>b)</b> Normas de estructura y organización interna</div>
-          <div class="celda"><b>c)</b> Tipos de armas y depósitos</div>
-          <div class="celda"><b>d)</b> Características comunes uniformes e insignias</div>
-        </div>
-        <div class="nota-clave">💡 Las letras c) y d) requieren <b>informe previo de la Comissió de Policia de Catalunya</b>.</div>
-      </div>
-      <div class="divider"></div>
+        <ul class="art-list">
+          <li><b>a)</b> Homogeneïtzació de mitjans tècnics.</li>
+          <li><b>b)</b> Normes d'estructura i organització interna.</li>
+          <li><b>c)</b> Tipus d'armes i dipòsits.</li>
+          <li><b>d)</b> Característiques comunes uniformes i insígnies.</li>
+        </ul>
+        <div class="nota clave"><b>💡 Les lletres c) i d)</b> requereixen <b>informe previ de la Comissió de Policia de Catalunya</b>.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Registro de las Policías Locales de Cataluña</div>
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
           <span class="art-badge">Art. 25 bis</span>
-          <span class="tipo-badge badge-local">Registro</span>
+          <span class="delito-name">Registre de les Policies Locals de Catalunya</span>
+          <span class="tipo info">Departament Interior</span>
         </div>
-        <div class="delito-desc">
-          Adscrito al Departament d'Interior. Incluye a <b>todos los miembros</b> de los cuerpos de PL y a los <b>Vigilantes municipales</b>, cualquiera que sea su vinculación.
+        <p class="delito-desc">Adscrit al Departament d'Interior. Inclou <b>tots els membres</b> dels cossos de PL i als <b>Vigilants municipals</b>, qualsevol que sigui la seva vinculació.</p>
+        <div class="pena-list">
+          <span class="pena info">🔵 Ajuntaments han de mantenir les dades actualitzades</span>
+          <span class="pena ok">✓ Accés municipal per a l'exercici de competències</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip">🔵 Ayuntamientos deben mantener los datos actualizados</span>
-          <span class="pena-chip positivo">✓ Acceso municipal para el ejercicio de competencias</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Documento de Acreditación Profesional (TIP)</div>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 25 ter</span>
-          <span class="tipo-badge badge-local">TIP</span>
+          <span class="delito-name">Document acreditació professional · TIP</span>
+          <span class="tipo key">⭐ Visibilitat</span>
         </div>
-        <div class="delito-desc">
-          TODOS los miembros de la PL deben llevar un <b>documento de acreditación profesional</b>, expedido por el órgano municipal correspondiente.
+        <p class="delito-desc">TOTS els membres de la PL han de portar un <b>document d'acreditació professional</b>, expedit per l'òrgan municipal corresponent.</p>
+        <div class="pena-list">
+          <span class="pena warn">🟡 Municipi de pertinença</span>
+          <span class="pena warn">🟡 Categoria professional</span>
+          <span class="pena warn">🟡 Número de registre individual</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip multa">🟡 Municipio de pertenencia</span>
-          <span class="pena-chip multa">🟡 Categoría profesional</span>
-          <span class="pena-chip multa">🟡 Número de registro individual</span>
-        </div>
-        <div class="nota-agrav">⚠️ Debe garantizarse en cualquier caso la <b>VISIBILIDAD</b> de la identificación.</div>
-      </div>
+        <div class="nota agrav"><b>⚠️ S'ha de garantir</b> en qualsevol cas la <b>VISIBILITAT</b> de la identificació.</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 9. DELIMITACIÓN DE SERVICIOS -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🔀</span>
-      <h2>Delimitación de Servicios PG-ME / PL</h2>
-      <span class="art-ref">Art. 28</span>
-      <span class="toggle">▼</span>
+  <!-- 9. DELIMITACIÓN DE SERVICIOS PG-ME / PL -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-operativa);">
+      <span class="eyebrow">🔀 9 · DELIMITACIÓ SERVEIS PG-ME / PL · ART. 28</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Funciones PROPIAS de la PG-ME (Mossos)</div>
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
           <span class="art-badge">Art. 28.2</span>
-          <span class="tipo-badge badge-info">PG-ME</span>
+          <span class="delito-name">Funcions PRÒPIES de la PG-ME (Mossos)</span>
+          <span class="tipo info">Mossos</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Protección autoridades Generalitat</div>
-          <div class="celda"><b>b)</b> Seguridad ciudadana y orden público</div>
-          <div class="celda"><b>c)</b> Policía administrativa</div>
-          <div class="celda"><b>d)</b> Policía judicial</div>
-          <div class="celda" style="grid-column: 1 / -1;"><b>e)</b> Policía de tráfico INTERURBANO</div>
-        </div>
-      </div>
-      <div class="divider"></div>
+        <ul class="art-list">
+          <li><b>a)</b> Protecció autoritats Generalitat.</li>
+          <li><b>b)</b> Seguretat ciutadana i ordre públic.</li>
+          <li><b>c)</b> Policia administrativa.</li>
+          <li><b>d)</b> Policia judicial.</li>
+          <li><b>e)</b> Policia de trànsit <b>INTERURBÀ</b>.</li>
+        </ul>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Funciones PROPIAS de la Policía Local</div>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 28.3</span>
-          <span class="tipo-badge badge-local">PL</span>
+          <span class="delito-name">Funcions PRÒPIES de la Policia Local</span>
+          <span class="tipo key">⭐ PL</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>a)</b> Protección autoridades locales</div>
-          <div class="celda"><b>b)</b> Policía de tráfico URBANO</div>
-          <div class="celda"><b>c)</b> Policía administrativa (medio ambiente)</div>
-          <div class="celda"><b>d)</b> <b>Colaboración</b> seguridad ciudadana/OP</div>
-          <div class="celda"><b>e)</b> Policía comunitaria (convivencia vecinal)</div>
-          <div class="celda"><b>f)</b> Policía judicial (especialmente tráfico)</div>
-        </div>
-        <div class="nota-policial">🚔 Fíjate: la PL solo <b>COLABORA</b> en seguridad ciudadana y orden público; el <b>tráfico URBANO</b> es propio. La <b>Policía comunitaria</b> es un añadido de esta Ley.</div>
-      </div>
-      <div class="divider"></div>
+        <ul class="art-list">
+          <li><b>a)</b> Protecció autoritats locals.</li>
+          <li><b>b)</b> Policia de trànsit <b>URBÀ</b>.</li>
+          <li><b>c)</b> Policia administrativa (medi ambient).</li>
+          <li><b>d)</b> <b>Col·laboració</b> seguretat ciutadana / OP.</li>
+          <li><b>e)</b> Policia comunitària (convivència veïnal).</li>
+          <li><b>f)</b> Policia judicial (especialment trànsit).</li>
+        </ul>
+        <div class="nota policial"><b>🚔 Fixa't:</b> la PL només <b>COL·LABORA</b> en seguretat ciutadana i ordre públic; el <b>trànsit URBÀ</b> és propi. La <b>Policia comunitària</b> és un afegit d'aquesta Llei.</div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Funciones COMPARTIDAS</div>
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
           <span class="art-badge">Art. 28.4</span>
-          <span class="tipo-badge badge-clave">Comunes</span>
+          <span class="delito-name">Funcions COMPARTIDES</span>
+          <span class="tipo ok">PG-ME + PL</span>
         </div>
-        <div class="tabla-discip">
-          <div class="th">Tipo</div>
-          <div class="th">PG-ME</div>
-          <div class="th">PL</div>
-
-          <div class="td centro compart">Proximidad</div>
-          <div class="td compart">Auxilio y asistencia ciudadana</div>
-          <div class="td compart">Auxilio y asistencia ciudadana</div>
-
-          <div class="td centro compart">Conflictos privados</div>
-          <div class="td compart">Resolución amistosa (si requeridos)</div>
-          <div class="td compart">Resolución amistosa (si requeridos)</div>
-
-          <div class="td centro compart">Espacios públicos</div>
-          <div class="td compart">Vigilancia</div>
-          <div class="td compart">Vigilancia</div>
-        </div>
-      </div>
+        <table class="norm-table">
+          <thead><tr><th>Tipus</th><th>PG-ME</th><th>PL</th></tr></thead>
+          <tbody>
+            <tr><td><b>Proximitat</b></td><td class="compart">Auxili i assistència ciutadana</td><td class="compart">Auxili i assistència ciutadana</td></tr>
+            <tr><td><b>Conflictes privats</b></td><td class="compart">Resolució amistosa (si requerits)</td><td class="compart">Resolució amistosa (si requerits)</td></tr>
+            <tr><td><b>Espais públics</b></td><td class="compart">Vigilància</td><td class="compart">Vigilància</td></tr>
+          </tbody>
+        </table>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 10. SERVICIOS UNIFICADOS Y 112 -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">📞</span>
-      <h2>Servicios Unificados y Centro 112</h2>
-      <span class="art-ref">Arts. 29–30</span>
-      <span class="toggle">▼</span>
+  <!-- 10. SERVICIOS UNIFICADOS Y CENTRO 112 -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-recursos);">
+      <span class="eyebrow">📞 10 · SERVEIS UNIFICATS I CENTRE 112 · ARTS. 29–30</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Servicios Unificados o de Gestión Conjunta</div>
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
           <span class="art-badge">Art. 29</span>
-          <span class="tipo-badge badge-info">Unificación</span>
+          <span class="delito-name">Serveis unificats o gestió conjunta</span>
+          <span class="tipo info">Convenis</span>
         </div>
-        <div class="delito-desc">
-          Creados mediante <b>convenio</b> entre Departament y Ayuntamientos. Ejemplo: <b>recepción de denuncias</b> unificada y otros servicios de atención directa al ciudadano.
+        <p class="delito-desc">Creats mitjançant <b>conveni</b> entre Departament i Ajuntaments. Exemple: <b>recepció de denúncies</b> unificada i altres serveis d'atenció directa al ciutadà.</p>
+        <div class="pena-list">
+          <span class="pena warn">🟡 Iniciativa · Departament o Corporació</span>
+          <span class="pena info">🔵 Tractament a les Juntes Locals</span>
+          <span class="pena ok">✓ Direcció tècnica · cos amb competència pròpia</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip multa">🟡 Iniciativa: Departament o Corporación Local</span>
-          <span class="pena-chip">🔵 Tratamiento en las Juntas Locales</span>
-          <span class="pena-chip positivo">✓ Dirección técnica: cuerpo con competencia propia</span>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Centro 112 · Atención y Gestión de Emergencias</div>
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
           <span class="art-badge">Art. 30</span>
-          <span class="tipo-badge badge-local">112</span>
+          <span class="delito-name">Centre 112 · Atenció i emergències</span>
+          <span class="tipo key">📞 112</span>
         </div>
-        <div class="delito-desc">
-          La Generalitat tiene un <b>centro integrado y permanente</b> de atención a demandas en materia de <b>emergencias y protección civil, policía y urgencias sanitarias</b>.
+        <p class="delito-desc">La Generalitat té un <b>centre integrat i permanent</b> d'atenció a demandes en matèria d'<b>emergències i protecció civil, policia i urgències sanitàries</b>.</p>
+        <div class="pena-list">
+          <span class="pena ok">✓ Telèfon unificat 112 (normativa UE)</span>
+          <span class="pena ok">✓ Accés universal i gratuït a tot Catalunya</span>
         </div>
-        <div class="pena-row">
-          <span class="pena-chip positivo">✓ Teléfono unificado <b>112</b> (normativa UE)</span>
-          <span class="pena-chip positivo">✓ <b>Acceso universal y gratuito</b> en toda Cataluña</span>
-        </div>
-        <div class="nota-clave">💡 Los medios de comunicación deben atender las demandas del 112 y las autoridades competentes para difusión gratuita de mensajes de interés colectivo.</div>
-      </div>
+        <div class="nota clave"><b>💡 Els mitjans</b> de comunicació han d'atendre les demandes del 112 i les autoritats competents per a difusió gratuïta de missatges d'interès col·lectiu.</div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- 11. RELACIONES CON CIUDADANOS -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">👥</span>
-      <h2>Relaciones con los Ciudadanos</h2>
-      <span class="art-ref">Arts. 32–36 · Cap. V</span>
-      <span class="toggle">▼</span>
+  <!-- 11. RELACIONES CON LOS CIUDADANOS -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-pink);">
+      <span class="eyebrow">👥 11 · RELACIONS AMB ELS CIUTADANS · CAP. V · ARTS. 32–36</span>
+      <span class="rule"></span>
     </div>
-    <div class="cat-body" style="display:none">
+    <div class="delito-grid">
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Participación Ciudadana</div>
+      <article class="delito" style="--accent: var(--c-pink);">
+        <div class="delito-head">
           <span class="art-badge">Art. 32</span>
-          <span class="tipo-badge badge-info">Participación</span>
+          <span class="delito-name">Participació ciutadana</span>
+          <span class="tipo info">Dret</span>
         </div>
-        <div class="delito-desc">
-          Derecho a participar en tareas de seguridad pública a través de asociaciones y entidades con representación en:
+        <p class="delito-desc">Dret a participar en tasques de seguretat pública a través d'associacions i entitats amb representació en:</p>
+        <div class="pena-list">
+          <span class="pena info">🏛️ Consell de Seguretat de Catalunya</span>
+          <span class="pena terra">⭐ Juntes Locals de Seguretat</span>
+          <span class="pena info">🗺️ Comissions Regionals de Seguretat</span>
         </div>
-        <div class="mini-tabla">
-          <div class="celda">🏛️ Consell de Seguretat de Catalunya</div>
-          <div class="celda">⭐ Juntas Locales de Seguridad</div>
-          <div class="celda" style="grid-column: 1 / -1;">🗺️ Comissions Regionals de Seguretat</div>
-        </div>
-      </div>
-      <div class="divider"></div>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Derecho de Información</div>
+      <article class="delito" style="--accent: var(--c-pink);">
+        <div class="delito-head">
           <span class="art-badge">Art. 33</span>
-          <span class="tipo-badge badge-info">Información</span>
+          <span class="delito-name">Dret d'informació</span>
+          <span class="tipo info">Transparència</span>
         </div>
-        <div class="delito-desc">
-          Los ciudadanos tienen derecho a <b>ser informados</b> de: situaciones de especial riesgo para la seguridad pública y medidas preventivas + medidas de los planes de seguridad que les afecten.
-        </div>
-      </div>
-      <div class="divider"></div>
+        <p class="delito-desc">Els ciutadans tenen dret a <b>ser informats</b> de: situacions d'especial risc per a la seguretat pública i mesures preventives + mesures dels plans de seguretat que els afectin.</p>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Quejas y Peticiones</div>
+      <article class="delito" style="--accent: var(--c-pink);">
+        <div class="delito-head">
           <span class="art-badge">Art. 34</span>
-          <span class="tipo-badge badge-info">Quejas</span>
+          <span class="delito-name">Queixes i peticions</span>
+          <span class="tipo info">Decret Govern</span>
         </div>
-        <div class="delito-desc">
-          El Govern debe crear mediante <b>decreto</b> un servicio específico en el Departament d'Interior para la <b>recepción y respuesta</b> de quejas y peticiones ciudadanas sobre servicios de seguridad y actuación de agentes.
-        </div>
-      </div>
-      <div class="divider"></div>
+        <p class="delito-desc">El Govern ha de crear mitjançant <b>decret</b> un servei específic al Departament d'Interior per a la <b>recepció i resposta</b> de queixes i peticions ciutadanes sobre serveis de seguretat i actuació d'agents.</p>
+      </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Carta de Servicios Públicos de Seguridad</div>
+      <article class="delito" style="--accent: var(--c-pink);">
+        <div class="delito-head">
           <span class="art-badge">Art. 36</span>
-          <span class="tipo-badge badge-info">Carta</span>
+          <span class="delito-name">Carta de Serveis Públics de Seguretat</span>
+          <span class="tipo info">Drets i deures</span>
         </div>
-        <div class="delito-desc">
-          La Generalitat debe establecer, previo informe del Consell de Seguretat, la <b>Carta de Serveis Públics de Seguretat</b>, que debe reunir los <b>derechos y deberes</b> de los ciudadanos en esta materia.
-        </div>
-      </div>
+        <p class="delito-desc">La Generalitat ha d'establir, previ informe del Consell de Seguretat, la <b>Carta de Serveis Públics de Seguretat</b>, que ha d'aplegar els <b>drets i deures</b> dels ciutadans en aquesta matèria.</p>
+      </article>
 
     </div>
-  </div>
+  </section>
 
-  <!-- CUADRO RECUERDA -->
-  <div class="recuerda">
-    <h3>📋 Recuerda — Claves Llei 4/2003</h3>
+  <!-- RECUERDA -->
+  <section class="recuerda">
+    <div class="r-head">
+      <span style="font-size: 22px;">📋</span>
+      <h2>RECORDA · LLEI 4/2003 · SISTEMA SEGURETAT PÚBLICA DE CATALUNYA</h2>
+    </div>
     <ul>
-      <li>Ordena el <b>sistema integral de seguridad pública de Cataluña</b>: policía, protección civil, tráfico, juego, espectáculos y seguridad privada.</li>
-      <li>Sistema integrado por: <b>a) Autoridades de seguridad · b) Cuerpos policiales y servicios · c) Órganos de coordinación y participación</b> (art. 3).</li>
-      <li>Los <b>9 principios</b> (art. 2): Prevención, Adecuación, Proximidad, Eficacia/Eficiencia, Planificación, Proporcionalidad, Corresponsabilidad, Coordinación, Transparencia.</li>
-      <li>PG-ME y PL constituyen la <b>policía de las instituciones propias de Cataluña</b>. PL: cuerpo único, ámbito municipal.</li>
-      <li>Autoridades: Govern (colegiado) · <b>Conseller d'Interior</b> (dirige) · <b>Alcaldes</b> (ámbito local) · Delegados territoriales.</li>
-      <li><b>Consell de Seguretat de Catalunya</b> (art. 6): máximo órgano consultivo y de participación. Preside el Conseller.</li>
-      <li><b>Comissió del Govern per a la Seguretat</b> (art. 7): preside el President de la Generalitat. Reunión trimestral mínima.</li>
-      <li><b>Comissió de Policia de Catalunya</b> (art. 8): SUSTITUYE a la Comisión de Coordinación de PL. 11 miembros (1+5+5).</li>
-      <li><b>⭐ Junta Local de Seguridad</b> (art. 9): <b>OBLIGATORIA</b> en municipios con PL. Preside Alcalde. Acuerdos por <b>UNANIMIDAD</b> y <b>ejecutivos</b>. Sesión trimestral.</li>
-      <li>La Junta Local crea una <b>Mesa de Coordinación Operativa</b> (art. 11) con los jefes de PG-ME y PL.</li>
-      <li><b>Plan General de Seguridad de Cataluña</b>: aprueba el Govern, periodicidad <b>CUATRIENAL</b>, se presenta al Parlament.</li>
-      <li>Mapa policial: <b>Áreas Básicas Policiales (ABP)</b> → agrupadas en <b>Regiones Policiales</b>.</li>
-      <li>Funciones <b>PROPIAS PG-ME</b>: seguridad ciudadana, orden público, tráfico <b>interurbano</b>, policía judicial. <b>PROPIAS PL</b>: tráfico <b>urbano</b>, policía comunitaria, autoridades locales.</li>
-      <li>Funciones <b>COMPARTIDAS</b> (art. 28.4): proximidad/auxilio, conflictos privados, vigilancia de espacios públicos.</li>
-      <li><b>Registro de PL de Cataluña</b> (art. 25 bis): incluye todos los miembros de PL y Vigilantes municipales.</li>
-      <li><b>TIP / Documento de acreditación profesional</b> (art. 25 ter): obligatorio para todos, con <b>visibilidad</b> garantizada.</li>
-      <li>Teléfono <b>112</b>: acceso universal y gratuito. Centro integrado de emergencias, protección civil, policía y urgencias sanitarias.</li>
-      <li>La <b>Escola de Policia de Catalunya</b> (ISPC) es organismo autónomo; forma PG-ME y PL; apoya en procesos de selección.</li>
-      <li>La Ley <b>deroga</b> el art. 16 de la Ley 16/1991 (Comisión de Coordinación de Policías Locales), sustituida por la Comissió de Policia.</li>
+      <li><div>Ordena el <b>sistema integral de seguretat pública de Catalunya:</b> policia, protecció civil, trànsit, joc, espectacles i seguretat privada.</div></li>
+      <li><div>Sistema integrat per: <b>a) Autoritats de seguretat · b) Cossos policials i serveis · c) Òrgans de coordinació i participació</b> (art. 3).</div></li>
+      <li><div>Els <b>9 principis</b> (art. 2): Prevenció, Adequació, Proximitat, Eficàcia/Eficiència, Planificació, Proporcionalitat, Corresponsabilitat, Coordinació, Transparència.</div></li>
+      <li><div>PG-ME i PL constitueixen la <b>policia de les institucions pròpies de Catalunya</b>. PL: cos únic, àmbit municipal.</div></li>
+      <li><div>Autoritats: Govern (col·legiat) · <b>Conseller d'Interior</b> (dirigeix) · <b>Alcaldes</b> (àmbit local) · Delegats territorials.</div></li>
+      <li><div><b>Consell de Seguretat de Catalunya</b> (art. 6): màxim òrgan consultiu i de participació. Presideix el Conseller.</div></li>
+      <li><div><b>Comissió del Govern per a la Seguretat</b> (art. 7): presideix el President de la Generalitat. Reunió trimestral mínima.</div></li>
+      <li><div><b>Comissió de Policia de Catalunya</b> (art. 8): SUBSTITUEIX la Comissió de Coordinació de PL. 11 membres (1+5+5).</div></li>
+      <li><div><b>⭐ Junta Local de Seguretat</b> (art. 9): <b>OBLIGATÒRIA</b> en municipis amb PL. Presideix Alcalde. Acords per <b>UNANIMITAT</b> i <b>executius</b>. Sessió trimestral.</div></li>
+      <li><div>La Junta Local crea una <b>Mesa de Coordinació Operativa</b> (art. 11) amb els caps de PG-ME i PL.</div></li>
+      <li><div><b>Pla General de Seguretat de Catalunya:</b> aprova el Govern, periodicitat <b>QUADRIENNAL</b>, es presenta al Parlament.</div></li>
+      <li><div>Mapa policial: <b>Àrees Bàsiques Policials (ABP)</b> → agrupades en <b>Regions Policials</b>.</div></li>
+      <li><div>Funcions <b>PRÒPIES PG-ME:</b> seguretat ciutadana, ordre públic, trànsit <b>interurbà</b>, policia judicial. <b>PRÒPIES PL:</b> trànsit <b>urbà</b>, policia comunitària, autoritats locals.</div></li>
+      <li><div>Funcions <b>COMPARTIDES</b> (art. 28.4): proximitat/auxili, conflictes privats, vigilància d'espais públics.</div></li>
+      <li><div><b>Registre de PL de Catalunya</b> (art. 25 bis): inclou tots els membres de PL i Vigilants municipals.</div></li>
+      <li><div><b>TIP / Document d'acreditació professional</b> (art. 25 ter): obligatori per a tots, amb <b>visibilitat</b> garantida.</div></li>
+      <li><div>Telèfon <b>112:</b> accés universal i gratuït. Centre integrat d'emergències, protecció civil, policia i urgències sanitàries.</div></li>
+      <li><div>L'<b>Escola de Policia de Catalunya</b> (ISPC) és organisme autònom; forma PG-ME i PL; dóna suport en processos de selecció.</div></li>
+      <li><div>La Llei <b>deroga</b> l'art. 16 de la Llei 16/1991 (Comissió de Coordinació de Policies Locals), substituïda per la Comissió de Policia.</div></li>
     </ul>
-  </div>
+  </section>
 
-  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+  <!-- RECURSOS -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-recursos);">
+      <span class="eyebrow">📚 RECURSOS I MATERIAL D'ESTUDI</span>
+      <span class="rule"></span>
+    </div>
+    <div class="res-grid">
+      <a class="res-card" href="https://portaljuridic.gencat.cat/ca/document-del-pjur/?documentId=295833" target="_blank" rel="noopener"><span class="res-icon">📄</span><div><h4>Llei 4/2003 · DOGC</h4><p>Text consolidat · Generalitat</p></div></a>
+      <a class="res-card" href="https://www.boe.es/buscar/act.php?id=BOE-A-2003-9540" target="_blank" rel="noopener"><span class="res-icon">⚖️</span><div><h4>Llei 4/2003 · BOE</h4><p>Publicació estatal 13/05/2003</p></div></a>
+      <a class="res-card" href="https://interior.gencat.cat/" target="_blank" rel="noopener"><span class="res-icon">🏛️</span><div><h4>Departament Interior</h4><p>Generalitat de Catalunya</p></div></a>
+      <a class="res-card" href="/test/lossp-4-2003"><span class="res-icon">📝</span><div><h4>Test del tema</h4><p>Preguntes · Llei 4/2003</p></div></a>
+    </div>
+  </section>
 
 </div>
-
-<script>
-  function toggle(header) {
-    header.classList.toggle('open');
-    const body = header.nextElementSibling;
-    if (body.style.display === 'none' || body.style.display === '') {
-      body.style.display = 'block';
-      body.style.animation = 'fadeUp .3s ease';
-    } else {
-      body.style.display = 'none';
-    }
-  }
-</script>
 </body>
 </html>
