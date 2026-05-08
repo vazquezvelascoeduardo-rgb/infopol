@@ -3,719 +3,927 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LO 4/2015 — Seguridad Ciudadana</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>LO 4/2015 · Seguridad Ciudadana (LOPSC) — Esquema Operativo Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* LO 4/2015 LOPSC — fitxa rebranding 2026 */
   :root {
-    --bg-main: #0A1628;
-    --bg-section: #0E2244;
-    --accent-gold: #C8A028;
-    --accent-blue: #1A5C96;
-    --alert-red: #C8281E;
-    --positive-green: #1A7A3C;
-    --text-main: #F0F4FF;
-    --text-secondary: #A8BAD4;
-    --border: #C8A028;
+    --ink: #0E0E0E;
+    --ink-2: #1c1c1c;
+    --paper: #FAF6EF;
+    --paper-2: #F2EDE3;
+    --white: #FFFFFF;
+    --terracotta: #F26B1F;
+    --terracotta-2: #D9531A;
+    --terracotta-soft: #FFE9D8;
+    --text: #0E0E0E;
+    --text-2: #4a4744;
+    --text-3: #807c77;
+    --text-4: #b3afaa;
+    --c-leyes: #E89A1C;
+    --c-operativa: #2F6BD8;
+    --c-superbuscador: #9747D6;
+    --c-recursos: #2FB66B;
+    --c-red: #E5484D;
+    --c-pink: #E85D8C;
+    --c-slate: #2a3a52;
+    --line: rgba(14, 14, 14, 0.10);
+    --line-2: rgba(14, 14, 14, 0.06);
+    --shadow-md: 0 1px 2px rgba(14,14,14,0.04), 0 8px 24px -8px rgba(14,14,14,0.10);
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  @media print {
-    body { background: #0A1628 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .print-btn { display: none !important; }
-    .section { break-inside: avoid; }
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background-color: var(--bg-main);
-    background-image:
-      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%230A1628'/%3E%3Crect x='0' y='0' width='1' height='1' fill='%23ffffff05'/%3E%3C/svg%3E");
-    font-family: 'Source Sans 3', sans-serif;
-    color: var(--text-main);
-    min-height: 100vh;
-    padding: 20px 16px 40px;
+    background: var(--paper);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: 12px 8px 40px;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .wrapper { max-width: 1080px; margin: 0 auto; }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
-  .poster {
-    max-width: 700px;
-    margin: 0 auto;
+  .meta-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-3);
   }
 
-  /* ── HEADER ── */
-  .header {
+  .section-head {
     display: flex;
     align-items: center;
-    gap: 18px;
-    background: linear-gradient(135deg, #0E2244 0%, #0A1628 100%);
-    border: 2px solid var(--accent-gold);
-    border-radius: 6px;
-    padding: 20px 22px;
-    margin-bottom: 18px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.1s;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      -55deg,
-      transparent,
-      transparent 8px,
-      rgba(200,160,40,0.03) 8px,
-      rgba(200,160,40,0.03) 9px
-    );
-    pointer-events: none;
-  }
-
-  .shield { flex-shrink: 0; width: 72px; }
-
-  .header-text { flex: 1; }
-  .header-text .law-id {
-    font-family: 'Oswald', sans-serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--accent-gold);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 4px;
-  }
-  .header-text h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(18px, 4vw, 26px);
-    font-weight: 700;
-    text-transform: uppercase;
-    line-height: 1.15;
-    color: var(--text-main);
-  }
-  .header-text h1 span { color: var(--accent-gold); }
-  .header-text .subtitle {
-    margin-top: 6px;
-    font-size: 12px;
-    color: var(--text-secondary);
-    letter-spacing: 1px;
-  }
-
-  /* ── BADGE ROW ── */
-  .badge-row {
-    display: flex;
-    gap: 10px;
+    gap: 12px;
+    margin: 32px 0 14px;
     flex-wrap: wrap;
-    margin-bottom: 18px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.2s;
-  }
-  .badge {
-    background: var(--accent-blue);
-    color: #fff;
-    font-family: 'Oswald', sans-serif;
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 5px 12px;
-    border-radius: 3px;
-    border-left: 3px solid var(--accent-gold);
-  }
-  .badge.red { background: var(--alert-red); }
-  .badge.green { background: var(--positive-green); }
-
-  /* ── SECTIONS ── */
-  .section {
-    background: var(--bg-section);
-    border-left: 4px solid var(--accent-gold);
-    border-radius: 0 6px 6px 0;
-    margin-bottom: 14px;
-    overflow: hidden;
-    opacity: 0;
-  }
-
-  .section-title {
-    background: var(--accent-blue);
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #fff;
-    padding: 10px 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .section-title .icon { font-size: 15px; }
-
-  .section-body { padding: 14px 16px; }
-
-  /* ── SUBSECTIONS ── */
-  .subsection {
-    background: rgba(10,22,40,0.4);
-    border-left: 3px solid var(--accent-gold);
-    border-radius: 0 4px 4px 0;
-    padding: 10px 14px;
-    margin-bottom: 10px;
-  }
-  .subsection:last-child { margin-bottom: 0; }
-
-  .subsection-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--accent-gold);
-    margin-bottom: 8px;
-  }
-
-  /* ── LIST ITEMS ── */
-  ul.items { list-style: none; }
-  ul.items li {
-    color: var(--text-secondary);
-    font-size: 13px;
-    line-height: 1.55;
-    padding: 4px 0 4px 20px;
     position: relative;
-    border-bottom: 1px solid rgba(200,160,40,0.08);
   }
-  ul.items li:last-child { border-bottom: none; }
-  ul.items li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--accent-gold);
-    font-size: 11px;
-    top: 5px;
+  .section-head::before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 22px;
+    background: var(--accent, var(--terracotta));
+    border-radius: 2px;
+    flex: none;
   }
+  .section-head .eyebrow { color: var(--accent, var(--ink)); flex: none; }
+  .section-head .rule { flex: 1; height: 1px; background: var(--line); min-width: 30px; }
 
-  /* ── KEY ── */
-  .key {
-    font-weight: 700;
-    color: var(--accent-gold);
-  }
-  .key-red { font-weight: 700; color: #e05050; }
-  .key-green { font-weight: 700; color: #4bc878; }
-  .key-blue { font-weight: 700; color: #6ab0f0; }
-
-  /* ── INFRACTION TABLE ── */
-  .infraction-grid {
+  /* ── HERO ── */
+  .ce-hero {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 10px;
-    margin-top: 4px;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: center;
+    background: linear-gradient(180deg, #FBF1D6 0%, #FAEAC1 100%);
+    border: 1px solid #E8C97A;
+    border-radius: 18px;
+    padding: 26px 30px;
+    margin-top: 8px;
   }
-  .inf-card {
-    border-radius: 4px;
-    padding: 10px 12px;
-    text-align: center;
+  .ce-shield { flex: none; }
+  .ce-title {
+    margin: 4px 0 6px;
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
   }
-  .inf-card.muy-grave { background: rgba(200,40,30,0.15); border: 1px solid #C8281E; }
-  .inf-card.grave     { background: rgba(200,160,40,0.10); border: 1px solid #C8A028; }
-  .inf-card.leve      { background: rgba(26,92,150,0.15); border: 1px solid #1A5C96; }
+  .ce-title .accent { color: #9c7a1f; }
+  .ce-sub { margin: 0; color: #6b5a30; font-size: 15px; max-width: 760px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .hero-tags .tag {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #E8C97A;
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #6b5a30;
+  }
 
-  .inf-card .cat {
-    font-family: 'Oswald', sans-serif;
-    font-size: 11px;
-    letter-spacing: 1.5px;
+  /* ── 3 TARGETES INFRACCIONS ── */
+  .clasif-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .clasif {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+    border-top: 3px solid var(--accent);
+  }
+  .clasif .cl-icon { font-size: 22px; margin-bottom: 6px; }
+  .clasif h4 {
+    margin: 2px 0 6px;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.03em;
     text-transform: uppercase;
-    margin-bottom: 5px;
   }
-  .muy-grave .cat { color: #e05050; }
-  .grave .cat     { color: var(--accent-gold); }
-  .leve .cat      { color: #6ab0f0; }
-
-  .inf-card .amount {
-    font-family: 'Oswald', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .muy-grave .amount { color: #e05050; }
-  .grave .amount     { color: var(--accent-gold); }
-  .leve .amount      { color: #6ab0f0; }
-
-  .inf-card .range {
-    font-size: 11px;
-    color: var(--text-secondary);
+  .clasif p { margin: 0 0 4px; font-size: 13px; color: var(--text-2); }
+  .clasif .ant {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--text-3);
+    margin-top: 6px;
+    display: block;
   }
 
-  /* ── FLOW STEPS ── */
-  .flow {
+  /* ── META STRIP ── */
+  .meta-strip {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+    background: #EAF1FE;
+    border: 1px solid #b9d0f6;
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-top: 14px;
+  }
+  .meta-strip p { margin: 4px 0 0; color: #1f3f7a; font-size: 14px; }
+  .vigente {
     display: flex;
     flex-direction: column;
-    gap: 0;
-    margin-top: 4px;
+    align-items: center;
+    padding: 6px 14px;
+    background: white;
+    border: 1px solid #b9d0f6;
+    border-radius: 10px;
   }
-  .flow-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 8px 0;
-    position: relative;
+  .vigente .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); }
+  .vigente .state { font-weight: 800; color: #2F6BD8; }
+
+  /* ── BANNER REFORMA ── */
+  .reform-banner {
+    background: linear-gradient(135deg, #2a1410 0%, #1a0a08 100%);
+    color: var(--paper);
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+    align-items: center;
+    border: 1px solid var(--c-red);
   }
-  .flow-step:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 14px;
-    top: 30px;
-    bottom: -6px;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--accent-gold), transparent);
+  .reform-banner .rb-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--c-red);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex: none;
   }
-  .step-num {
-    flex-shrink: 0;
-    width: 28px; height: 28px;
-    background: var(--accent-gold);
-    color: #0A1628;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-    z-index: 1;
-  }
-  .step-content { flex: 1; }
-  .step-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-main);
+  .reform-banner .rb-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--c-red);
+    letter-spacing: 0.04em;
+    margin: 0 0 4px;
     text-transform: uppercase;
-    letter-spacing: 1px;
   }
-  .step-desc {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-top: 2px;
-    line-height: 1.45;
+  .reform-banner .rb-text {
+    font-size: 13.5px;
+    color: rgba(250, 246, 239, 0.85);
+    margin: 0;
+  }
+  .reform-banner .rb-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: rgba(229, 72, 77, 0.18);
+    color: #ffb0b0;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    flex: none;
   }
 
-  /* ── TWO COL ── */
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+  /* ── ARTICLE CARDS ── */
+  .delito-grid { display: grid; gap: 10px; }
+  .delito {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 18px;
+    border-left: 3px solid var(--accent);
   }
-  @media (max-width: 480px) {
-    .two-col { grid-template-columns: 1fr; }
-    .infraction-grid { grid-template-columns: 1fr; }
+  .delito.hl { background: var(--terracotta-soft); border-color: #f5c19a; border-left-color: var(--terracotta); }
+  .delito-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .art-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 700;
+    background: var(--accent);
+    color: var(--white);
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.04em;
+    flex: none;
+  }
+  .delito-name {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    flex: 1;
+    min-width: 200px;
+  }
+  .tipo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex: none;
+  }
+  .tipo.info { background: rgba(47, 107, 216, 0.14); color: #1e3f7a; }
+  .tipo.key { background: rgba(232, 154, 28, 0.18); color: #854d0e; }
+  .tipo.warn { background: rgba(229, 72, 77, 0.16); color: #991b1b; }
+  .tipo.ok { background: rgba(47, 182, 107, 0.16); color: #166534; }
+  .delito-desc { margin: 0 0 8px; font-size: 13.5px; color: var(--text-2); }
+  .delito-desc b { color: var(--ink); }
+
+  /* Pena chips */
+  .pena-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pena {
+    font-size: 12.5px;
+    background: var(--paper-2);
+    color: var(--text);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    font-weight: 600;
+  }
+  .pena.danger { background: #FFEFEC; color: #991b1b; border-color: #f3b9b9; }
+  .pena.warn { background: #FFF6E0; color: #854d0e; border-color: #f5d699; }
+  .pena.ok { background: #DFF7E9; color: #166534; border-color: #a8e0bf; }
+  .pena.terra { background: var(--terracotta-soft); color: #6b3818; border-color: #f5c19a; }
+  .pena.info { background: #EAF1FE; color: #1e3f7a; border-color: #b9d0f6; }
+
+  /* Notes */
+  .nota {
+    margin-top: 8px;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    border-left: 3px solid;
+  }
+  .nota.policial { background: #DFF7E9; color: #14532d; border-left-color: var(--c-recursos); }
+  .nota.policial b { color: #14532d; }
+  .nota.agrav { background: #FFEFEC; color: #991b1b; border-left-color: var(--c-red); }
+  .nota.agrav b { color: #991b1b; }
+  .nota.clave { background: #FFF6E8; color: #6b5a30; border-left-color: #E89A1C; }
+  .nota.clave b { color: #6b5a30; }
+
+  /* Norm tables */
+  .norm-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 13.5px;
+  }
+  .norm-table th {
+    text-align: left;
+    padding: 8px 10px;
+    background: var(--paper-2);
+    font-weight: 800;
+    color: var(--ink);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .norm-table td {
+    padding: 8px 10px;
+    border-top: 1px solid var(--line-2);
+    color: var(--text-2);
+    vertical-align: top;
+  }
+  .norm-table b { color: var(--ink); font-family: 'Plus Jakarta Sans'; }
+
+  /* Flow steps (procediment sancionador) */
+  .flow {
+    display: grid;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .flow-step {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    align-items: start;
+    border-left: 3px solid var(--c-operativa);
+  }
+  .flow-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: var(--c-operativa);
+    color: var(--white);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
+    flex: none;
+  }
+  .flow-step h4 {
+    margin: 2px 0 4px;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .flow-step p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--text-2);
+  }
+  .flow-step p b { color: var(--ink); }
+
+  /* art-list */
+  .art-list {
+    margin: 6px 0 0;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13.5px;
+    color: var(--text-2);
+  }
+  .art-list b {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink);
+    margin-right: 8px;
+    font-weight: 700;
   }
 
   /* ── RECUERDA ── */
   .recuerda {
-    background: var(--accent-gold);
-    border-radius: 6px;
-    padding: 18px 20px;
-    margin-bottom: 18px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 1.4s;
+    background: linear-gradient(135deg, #1f2735 0%, #131923 100%);
+    color: var(--paper);
+    border-radius: 16px;
+    padding: 22px 26px;
+    margin-top: 28px;
+    border: 1px solid #E89A1C;
   }
-  .recuerda h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: #0A1628;
-    margin-bottom: 12px;
+  .recuerda .r-head {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    margin-bottom: 12px;
   }
-  .recuerda ul { list-style: none; }
-  .recuerda ul li {
-    font-size: 13px;
-    color: #0A1628;
-    font-weight: 600;
-    padding: 4px 0 4px 18px;
-    position: relative;
-    border-bottom: 1px solid rgba(10,22,40,0.15);
+  .recuerda .r-head h2 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #E89A1C;
+    text-transform: uppercase;
+  }
+  .recuerda ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .recuerda li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: start;
+    font-size: 13.5px;
+    color: rgba(250, 246, 239, 0.92);
     line-height: 1.5;
   }
-  .recuerda ul li:last-child { border-bottom: none; }
-  .recuerda ul li::before {
-    content: '✦';
-    position: absolute;
-    left: 0;
-    font-size: 10px;
-    top: 6px;
-    color: #0A1628;
+  .recuerda li b { color: #E89A1C; font-weight: 700; }
+  .recuerda li::before { content: "▸"; color: #E89A1C; font-weight: 800; }
+
+  /* ── RECURSOS ── */
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
   }
-
-  /* ── PRINT BUTTON ── */
-  .print-btn {
-    display: block;
-    width: 100%;
-    padding: 14px;
-    background: transparent;
-    border: 2px solid var(--accent-gold);
-    border-radius: 6px;
-    color: var(--accent-gold);
-    font-family: 'Oswald', sans-serif;
-    font-size: 14px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.25s;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 1.5s;
+  .res-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: center;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: inherit;
+    transition: background .12s, border-color .12s;
   }
-  .print-btn:hover {
-    background: var(--accent-gold);
-    color: #0A1628;
+  .res-card:hover { background: var(--paper-2); border-color: rgba(14, 14, 14, 0.16); }
+  .res-card .res-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--paper-2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex: none;
   }
+  .res-card h4 { margin: 0; font-size: 14px; font-weight: 700; }
+  .res-card p { margin: 2px 0 0; font-size: 12.5px; color: var(--text-2); }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .section:nth-child(1) { animation: fadeUp 0.6s ease forwards 0.3s; }
-  .section:nth-child(2) { animation: fadeUp 0.6s ease forwards 0.45s; }
-  .section:nth-child(3) { animation: fadeUp 0.6s ease forwards 0.6s; }
-  .section:nth-child(4) { animation: fadeUp 0.6s ease forwards 0.75s; }
-  .section:nth-child(5) { animation: fadeUp 0.6s ease forwards 0.9s; }
-  .section:nth-child(6) { animation: fadeUp 0.6s ease forwards 1.05s; }
-  .section:nth-child(7) { animation: fadeUp 0.6s ease forwards 1.2s; }
-
-  /* thin scrollbar */
-  ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: var(--bg-main); }
-  ::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 3px; }
-
-  /* divider */
-  .divider {
-    height: 1px;
-    background: linear-gradient(to right, var(--accent-gold), transparent);
-    margin: 8px 0;
-    opacity: 0.3;
-  }
-
-  .art-ref {
-    display: inline-block;
-    background: rgba(26,92,150,0.3);
-    border: 1px solid rgba(106,176,240,0.4);
-    color: #6ab0f0;
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif;
-    letter-spacing: 1px;
-    padding: 1px 6px;
-    border-radius: 3px;
-    margin-left: 4px;
-    vertical-align: middle;
+  @media (max-width: 980px) {
+    .clasif-grid { grid-template-columns: 1fr; }
+    .res-grid { grid-template-columns: repeat(2, 1fr); }
+    .meta-strip { grid-template-columns: 1fr; }
+    .reform-banner { grid-template-columns: 1fr; }
+    .reform-banner .rb-date { justify-self: start; }
+    .ce-hero { grid-template-columns: 1fr; text-align: center; }
+    .ce-shield { margin: 0 auto; }
+    .ce-title { font-size: 28px; }
   }
 </style>
 </head>
-<body>
-<div class="poster">
+<body data-fitxa-style="rebrand-2026">
+<div class="wrapper">
 
-  <!-- HEADER -->
-  <div class="header">
-    <!-- Shield SVG -->
-    <svg class="shield" viewBox="0 0 72 88" xmlns="http://www.w3.org/2000/svg">
-      <path d="M36 2 L70 16 L70 46 C70 66 53 82 36 86 C19 82 2 66 2 46 L2 16 Z"
-            fill="#0E2244" stroke="#C8A028" stroke-width="2.5"/>
-      <path d="M36 8 L64 20 L64 46 C64 63 49 77 36 81 C23 77 8 63 8 46 L8 20 Z"
-            fill="#0A1628"/>
-      <!-- Crown -->
-      <path d="M22 34 L22 44 L50 44 L50 34 L44 38 L36 30 L28 38 Z"
-            fill="#C8A028"/>
-      <rect x="22" y="44" width="28" height="4" fill="#C8A028" rx="1"/>
-      <!-- Stars -->
-      <text x="36" y="62" text-anchor="middle" font-size="16" fill="#C8A028">★</text>
-      <text x="24" y="58" text-anchor="middle" font-size="9" fill="#C8A028">★</text>
-      <text x="48" y="58" text-anchor="middle" font-size="9" fill="#C8A028">★</text>
-    </svg>
-
-    <div class="header-text">
-      <span class="law-id">Ley Orgánica · BOE 31/03/2015 · Entrada en vigor 01/07/2015</span>
-      <h1>LO <span>4/2015</span><br>Seguridad Ciudadana</h1>
-      <p class="subtitle">POLICÍA LOCAL · ESQUEMA JURÍDICO COMPLETO</p>
+  <!-- ═══ HERO ═══ -->
+  <header class="ce-hero">
+    <div class="ce-shield">
+      <svg width="80" height="92" viewBox="0 0 80 92" fill="none">
+        <path d="M40 4 L74 13 V42 C74 62 60 78 40 88 C20 78 6 62 6 42 V13 Z" fill="#1f2a44" stroke="#E89A1C" stroke-width="2"/>
+        <text x="40" y="32" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="9" fill="#E89A1C" letter-spacing="1">POLICIA</text>
+        <text x="40" y="46" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="13" fill="#fff">🔒</text>
+        <text x="40" y="62" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#E89A1C" letter-spacing="1">SEGURIDAD</text>
+        <text x="40" y="76" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#E89A1C" letter-spacing="1">CIUDADANA</text>
+      </svg>
     </div>
-  </div>
-
-  <!-- BADGE ROW -->
-  <div class="badge-row">
-    <div class="badge">LO 4/2015</div>
-    <div class="badge">46 Artículos</div>
-    <div class="badge">5 Capítulos</div>
-    <div class="badge red">Deroga LO 1/1992</div>
-    <div class="badge green">Vigente</div>
-  </div>
-
-  <!-- SECCIÓN 1: OBJETO Y PRINCIPIOS -->
-  <div class="section">
-    <div class="section-title"><span class="icon">⚖️</span> Objeto y Principios Fundamentales</div>
-    <div class="section-body">
-      <div class="subsection">
-        <div class="subsection-title">Objeto de la Ley <span class="art-ref">Art. 1</span></div>
-        <ul class="items">
-          <li>Regular las <span class="key">actuaciones de las FFCCSS</span> en materia de seguridad ciudadana</li>
-          <li>Proteger el <span class="key">libre ejercicio de derechos y libertades</span> constitucionales</li>
-          <li>Garantizar la <span class="key">convivencia ciudadana</span>, la erradicación de la violencia y el uso pacífico del espacio público</li>
-          <li>Prevenir la comisión de delitos e infracciones administrativas</li>
-        </ul>
-      </div>
-      <div class="subsection">
-        <div class="subsection-title">Principios de Actuación <span class="art-ref">Art. 4</span></div>
-        <ul class="items">
-          <li><span class="key">Adecuación</span>: idoneidad, necesidad y proporcionalidad</li>
-          <li><span class="key">Congruencia</span> con la situación que ha de afrontarse</li>
-          <li><span class="key">Oportunidad</span> según las circunstancias concurrentes</li>
-          <li>Respeto a los <span class="key">derechos fundamentales</span> y a la dignidad de las personas</li>
-          <li>Actuación bajo el <span class="key">principio de legalidad</span></li>
-        </ul>
+    <div>
+      <div class="eyebrow" style="color:#9c7a1f;">ESQUEMA OPERATIVO POLICIAL · LOPSC</div>
+      <h1 class="ce-title">LO 4/2015 · <span class="accent">SEGURIDAD CIUDADANA</span></h1>
+      <p class="ce-sub">Ley Orgánica de Protección de la Seguridad Ciudadana · Identificaciones, registros, controles, infracciones y procedimiento sancionador · Norma de aplicación diaria para PL.</p>
+      <div class="hero-tags">
+        <span class="tag">📘 LO 4/2015</span>
+        <span class="tag">🏛️ BOE 31/03/2015</span>
+        <span class="tag">📚 46 articles · 5 capítulos</span>
+        <span class="tag">⚡ En vigor 01/07/2015</span>
+        <span class="tag">📄 Vigente</span>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- SECCIÓN 2: DOCUMENTACIÓN E IDENTIFICACIÓN -->
-  <div class="section">
-    <div class="section-title"><span class="icon">🪪</span> Documentación e Identificación</div>
-    <div class="section-body">
-      <div class="two-col">
-        <div class="subsection">
-          <div class="subsection-title">Obligación de Documentarse <span class="art-ref">Art. 8</span></div>
-          <ul class="items">
-            <li>Los <span class="key">españoles</span>: DNI según su normativa específica</li>
-            <li><span class="key">Extranjeros</span>: obligados a disponer de doc. que acredite su identidad y situación en España</li>
-            <li>Obligación de <span class="key">exhibirla</span> ante requerimiento policial</li>
-          </ul>
+  <!-- ═══ 3 TARGETES INFRACCIONS ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--terracotta);">
+      <span class="eyebrow">📋 CLASIFICACIÓN DE INFRACCIONES · RANGOS ECONÓMICOS</span>
+      <span class="rule"></span>
+    </div>
+    <div class="clasif-grid">
+      <div class="clasif" style="--accent: var(--c-red);">
+        <div class="cl-icon">🔴</div>
+        <h4>Muy Graves</h4>
+        <p>Multa <b>30.001 – 600.000 €</b>.</p>
+        <span class="ant">Art. 35 LOPSC · Prescripción 3 años</span>
+      </div>
+      <div class="clasif" style="--accent: var(--terracotta);">
+        <div class="cl-icon">🟠</div>
+        <h4>Graves</h4>
+        <p>Multa <b>601 – 30.000 €</b>.</p>
+        <span class="ant">Art. 36 LOPSC · Prescripción 2 años</span>
+      </div>
+      <div class="clasif" style="--accent: var(--c-recursos);">
+        <div class="cl-icon">🟢</div>
+        <h4>Leves</h4>
+        <p>Multa <b>100 – 600 €</b>.</p>
+        <span class="ant">Art. 37 LOPSC · Prescripción 6 meses</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ META STRIP ═══ -->
+  <section class="meta-strip">
+    <div>
+      <div class="eyebrow" style="color:#2F6BD8;">📘 LO 4/2015 · DE 30 DE MARZO · BOE 31/03/2015</div>
+      <p>Ley Orgánica de Protección de la Seguridad Ciudadana · 46 artículos en 5 capítulos · Entrada en vigor 01/07/2015 · Norma básica de actuación de PL en materia de seguridad ciudadana, identificaciones, registros y régimen sancionador.</p>
+    </div>
+    <div class="vigente">
+      <span class="when">31/03/2015</span>
+      <span class="state">Vigente</span>
+    </div>
+  </section>
+
+  <!-- ═══ BANNER DEROGACIÓN ═══ -->
+  <section class="reform-banner">
+    <span class="rb-icon">⚠️</span>
+    <div>
+      <h3 class="rb-title">DEROGA LA LO 1/1992 · «LEY CORCUERA»</h3>
+      <p class="rb-text">La LO 4/2015 sustituye íntegramente la antigua Ley de Protección de la Seguridad Ciudadana de 1992. Régimen sancionador y catálogo de infracciones renovados; refuerza garantías procesales y limita la entrada en domicilio.</p>
+    </div>
+    <span class="rb-date">DESDE 01/07/2015</span>
+  </section>
+
+  <!-- ═══ 1. OBJETO Y PRINCIPIOS ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-leyes);">
+      <span class="eyebrow">⚖️ 1 · OBJETO Y PRINCIPIOS FUNDAMENTALES</span>
+      <span class="rule"></span>
+      <span class="meta-mono">Arts. 1 + 4</span>
+    </div>
+    <div class="delito-grid">
+
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 1</span>
+          <span class="delito-name">Objeto de la Ley</span>
+          <span class="tipo info">Marco</span>
         </div>
-        <div class="subsection">
-          <div class="subsection-title">Identificación Policial <span class="art-ref">Art. 16</span></div>
-          <ul class="items">
-            <li>Para <span class="key">prevención o averiguación de delito</span></li>
-            <li>Puede realizarse <span class="key">en el lugar o sus inmediaciones</span></li>
-            <li>Si no es posible: <span class="key">dependencias policiales</span> por el tiempo imprescindible (<span class="key">máx. 6 horas</span>)</li>
-            <li>Derecho a <span class="key">saber las razones</span> de la identificación</li>
-            <li>Se extiende <span class="key">boletín de constancia</span></li>
-          </ul>
+        <ul class="art-list">
+          <li><b>·</b> Regular las <b>actuaciones de las FFCCSS</b> en materia de seguridad ciudadana.</li>
+          <li><b>·</b> Proteger el <b>libre ejercicio de derechos y libertades</b> constitucionales.</li>
+          <li><b>·</b> Garantizar la <b>convivencia ciudadana</b>, la erradicación de la violencia y el uso pacífico del espacio público.</li>
+          <li><b>·</b> Prevenir la comisión de delitos e infracciones administrativas.</li>
+        </ul>
+      </article>
+
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 4</span>
+          <span class="delito-name">Principios de actuación</span>
+          <span class="tipo key">⭐ 5 principios</span>
+        </div>
+        <div class="pena-list">
+          <span class="pena terra">Adecuación · idoneidad/necesidad/proporcionalidad</span>
+          <span class="pena terra">Congruencia con la situación</span>
+          <span class="pena terra">Oportunidad según circunstancias</span>
+          <span class="pena terra">Respeto DDFF y dignidad</span>
+          <span class="pena terra">Legalidad</span>
+        </div>
+        <div class="nota policial"><b>🚔 Estos cinco principios</b> (adecuación / congruencia / oportunidad / DDFF / legalidad) son la base del <b>juicio de proporcionalidad</b> de toda actuación policial. Se conectan directamente con los principios básicos del art. 5 LO 2/1986 FCSE.</div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══ 2. DOCUMENTACIÓN E IDENTIFICACIÓN ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-operativa);">
+      <span class="eyebrow">🪪 2 · DOCUMENTACIÓN E IDENTIFICACIÓN</span>
+      <span class="rule"></span>
+      <span class="meta-mono">Arts. 8 + 16</span>
+    </div>
+    <div class="delito-grid">
+
+      <article class="delito" style="--accent: var(--c-operativa);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 8</span>
+          <span class="delito-name">Obligación de documentarse</span>
+          <span class="tipo info">Documentación</span>
+        </div>
+        <ul class="art-list">
+          <li><b>·</b> Los <b>españoles</b>: DNI según su normativa específica.</li>
+          <li><b>·</b> <b>Extranjeros</b>: documentación que acredite identidad y situación en España.</li>
+          <li><b>·</b> Obligación de <b>exhibirla</b> ante requerimiento policial.</li>
+        </ul>
+      </article>
+
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 16</span>
+          <span class="delito-name">Identificación policial</span>
+          <span class="tipo key">⭐ CLAVE PL</span>
+        </div>
+        <ul class="art-list">
+          <li><b>·</b> Para <b>prevención o averiguación de delito</b>.</li>
+          <li><b>·</b> Puede realizarse <b>en el lugar o sus inmediaciones</b>.</li>
+          <li><b>·</b> Si no es posible: <b>dependencias policiales</b> por el tiempo imprescindible (<b>máx. 6 horas</b>).</li>
+          <li><b>·</b> Derecho a <b>saber las razones</b> de la identificación.</li>
+          <li><b>·</b> Se extiende <b>boletín de constancia</b>.</li>
+        </ul>
+        <div class="nota policial"><b>🚔 Diligencia de identificación ≠ detención.</b> La permanencia máxima en dependencias para identificar es <b>6 horas</b> (no las 72 h del art. 17.2 CE). Siempre boletín de constancia con motivo, hora de inicio, hora de finalización y firma.</div>
+        <div class="nota agrav"><b>⚠️ La identificación</b> debe estar <b>motivada en indicio o circunstancia objetiva</b>. Las identificaciones masivas o por perfil étnico están vetadas (jurisprudencia TC + STEDH Muñoz Díaz).</div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══ 3. ENTRADAS EN DOMICILIO Y REGISTROS ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-red);">
+      <span class="eyebrow">🏠 3 · ENTRADAS EN DOMICILIO Y REGISTROS</span>
+      <span class="rule"></span>
+      <span class="meta-mono">Arts. 18 + 20-21</span>
+    </div>
+    <div class="delito-grid">
+
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 18 LOPSC</span>
+          <span class="delito-name">Entrada en domicilio · arts. 15-16 CE</span>
+          <span class="tipo warn">⚠️ Inviolabilidad</span>
+        </div>
+        <p class="delito-desc"><b>REGLA GENERAL:</b> inviolabilidad del domicilio → precisa <b>autorización judicial</b>.</p>
+        <div class="pena-list">
+          <span class="pena danger">🔴 Regla general → autorización judicial</span>
+          <span class="pena ok">🟢 Excepción 1 · Consentimiento del titular</span>
+          <span class="pena ok">🟢 Excepción 2 · Flagrante delito (in fraganti)</span>
+        </div>
+        <p class="delito-desc" style="margin-top:8px;"><b>No se considera domicilio</b>: establecimientos abiertos al público, locales de negocios, vehículos en vía pública.</p>
+        <div class="nota policial"><b>🚔 El consentimiento</b> debe ser <b>expreso, libre, informado y reflejado por escrito</b> (acta o atestado). El delito flagrante exige conocimiento sensorial directo del delito en el momento (no sospecha ni indicio).</div>
+      </article>
+
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
+          <span class="art-badge">Arts. 20-21</span>
+          <span class="delito-name">Registro de personas y vehículos</span>
+          <span class="tipo info">Cacheo + vehículo</span>
+        </div>
+        <ul class="art-list">
+          <li><b>·</b> Registro corporal <b>externo</b>: cacheos superficiales, pueden realizarse policialmente.</li>
+          <li><b>·</b> Registro de <b>vehículos</b>: con causa justificada de seguridad ciudadana o prevención del delito.</li>
+          <li><b>·</b> Se debe <b>informar al interesado</b> de la causa.</li>
+          <li><b>·</b> Puede intervenir <b>testigo</b> si lo solicita.</li>
+        </ul>
+        <div class="nota clave"><b>💡 Cacheo externo (palpación)</b> = sin desnudez = competencia policial directa. <b>Registro interno o desnudez integral</b> = solo bajo circunstancias muy específicas, separación por sexo, espacio reservado, motivación reforzada (art. 20.2).</div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══ 4. POTESTADES ESPECIALES ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-superbuscador);">
+      <span class="eyebrow">👮 4 · POTESTADES ESPECIALES DE POLICÍA</span>
+      <span class="rule"></span>
+      <span class="meta-mono">Arts. 22-24</span>
+    </div>
+    <div class="delito-grid">
+
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 22</span>
+          <span class="delito-name">Controles en vías públicas</span>
+          <span class="tipo info">Limitación circulación</span>
+        </div>
+        <ul class="art-list">
+          <li><b>·</b> Puede limitarse <b>circulación o permanencia</b> en zonas concretas.</li>
+          <li><b>·</b> Para proteger la <b>seguridad ciudadana</b>.</li>
+          <li><b>·</b> Ante peligro para la seguridad de bienes y personas.</li>
+          <li><b>·</b> Máxima <b>proporcionalidad</b> exigida.</li>
+        </ul>
+      </article>
+
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 23</span>
+          <span class="delito-name">Disolución de reuniones</span>
+          <span class="tipo key">⭐ Advertencia previa</span>
+        </div>
+        <ul class="art-list">
+          <li><b>·</b> Reuniones <b>ilícitas</b> por ley penal.</li>
+          <li><b>·</b> Reuniones que <b>alteren la seguridad ciudadana</b>.</li>
+          <li><b>·</b> Se exige <b>previa advertencia</b> a los interesados.</li>
+          <li><b>·</b> Uso de <b>fuerza proporcional</b> si no se obedece.</li>
+        </ul>
+        <div class="nota policial"><b>🚔 La advertencia previa</b> es <b>requisito de validez</b> de la disolución. Debe constar en atestado (hora, megafonía, contenido del aviso, número de avisos, transcurso del tiempo). Sin advertencia → posible nulidad y responsabilidad del agente.</div>
+      </article>
+
+      <article class="delito" style="--accent: var(--c-superbuscador);">
+        <div class="delito-head">
+          <span class="art-badge">Arts. 22-24</span>
+          <span class="delito-name">Videocámaras y medios técnicos</span>
+          <span class="tipo info">RGPD aplicable</span>
+        </div>
+        <ul class="art-list">
+          <li><b>·</b> Uso de <b>cámaras y otros instrumentos técnicos</b> en lugares públicos para la seguridad.</li>
+          <li><b>·</b> Respeto estricto a la <b>normativa de protección de datos</b>.</li>
+          <li><b>·</b> Imágenes solo para <b>fines de seguridad ciudadana</b>.</li>
+        </ul>
+        <div class="nota clave"><b>💡 La videovigilancia policial</b> se rige por la <b>LO 4/1997</b> y el <b>RD 596/1999</b> (cámaras fijas). Las cámaras corporales (<i>bodycam</i>) por la <b>Instrucción 13/2018 SES</b>. RGPD aplicable.</div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══ 5. RÉGIMEN DE INFRACCIONES Y SANCIONES ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-red);">
+      <span class="eyebrow">⚠️ 5 · RÉGIMEN DE INFRACCIONES Y SANCIONES</span>
+      <span class="rule"></span>
+      <span class="meta-mono">Arts. 35-41</span>
+    </div>
+    <div class="delito-grid">
+
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 35</span>
+          <span class="delito-name">Infracciones MUY GRAVES</span>
+          <span class="tipo warn">🔴 30.001–600.000 €</span>
+        </div>
+        <ul class="art-list">
+          <li><b>·</b> Actos que <b>perturben gravemente la seguridad ciudadana</b> con instrumentos peligrosos.</li>
+          <li><b>·</b> Organización o participación en <b>reuniones no comunicadas</b> frente a infraestructuras críticas.</li>
+          <li><b>·</b> <b>Fabricación, tráfico o tenencia</b> de armas prohibidas (sin constituir delito).</li>
+          <li><b>·</b> Resistencia activa grave o <b>acometimiento a la autoridad</b> (si no es delito).</li>
+          <li><b>·</b> Perturbación grave del <b>orden en actos públicos</b>.</li>
+        </ul>
+      </article>
+
+      <article class="delito hl" style="--accent: var(--terracotta);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 36</span>
+          <span class="delito-name">Infracciones GRAVES (selección)</span>
+          <span class="tipo key">🟠 601–30.000 €</span>
+        </div>
+        <ul class="art-list">
+          <li><b>·</b> <b>Falta de respeto y consideración</b> a miembros de las <b>FFCCSS</b> en el ejercicio de sus funciones — <b>Art. 36.6</b>.</li>
+          <li><b>·</b> <b>Desobediencia</b> a órdenes de la autoridad o sus agentes (si no es delito).</li>
+          <li><b>·</b> Uso público y ostentoso de <b>objetos peligrosos</b>.</li>
+          <li><b>·</b> <b>Perturbación del orden</b> en actos culturales, deportivos o de ocio.</li>
+          <li><b>·</b> <b>Consumo de alcohol en vía pública</b> cuando perturbe la convivencia o tranquilidad.</li>
+          <li><b>·</b> Escalada no autorizada de <b>edificios o monumentos</b>.</li>
+          <li><b>·</b> Convocatoria o asistencia a reuniones en <b>lugares de tránsito</b> prohibidos.</li>
+        </ul>
+        <div class="nota policial"><b>🚔 Art. 36.6 · Falta de respeto a FFCCSS</b> es la infracción grave más aplicada por PL. Diferencia con delito de atentado/resistencia (art. 550 ss. CP): si hay violencia/intimidación grave activa → CP; si es solo verbal o pasiva → 36.6 LOPSC.</div>
+      </article>
+
+      <article class="delito" style="--accent: var(--c-recursos);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 37</span>
+          <span class="delito-name">Infracciones LEVES</span>
+          <span class="tipo ok">🟢 100–600 €</span>
+        </div>
+        <ul class="art-list">
+          <li><b>·</b> Incumplimiento de condiciones impuestas para <b>uso de espacios públicos</b>.</li>
+          <li><b>·</b> No comunicación previa de <b>reuniones en lugares de tránsito</b> público sin alterar el orden.</li>
+          <li><b>·</b> <b>Perturbación leve</b> de la seguridad o convivencia ciudadana.</li>
+          <li><b>·</b> Falta de <b>colaboración</b> con las FFCCSS.</li>
+        </ul>
+      </article>
+
+      <article class="delito" style="--accent: var(--c-leyes);">
+        <div class="delito-head">
+          <span class="art-badge">Arts. 39-41</span>
+          <span class="delito-name">Sanciones adicionales y medidas cautelares</span>
+          <span class="tipo info">Pronto pago 50%</span>
+        </div>
+        <div class="pena-list">
+          <span class="pena warn">Suspensión de licencias o permisos</span>
+          <span class="pena warn">Intervención y decomiso de efectos</span>
+          <span class="pena danger">Cierre temporal · MG hasta 2 años · G hasta 6 meses</span>
+          <span class="pena warn">Prohibición estancia o residencia</span>
+          <span class="pena ok">Reducción 50% pronto pago + no impugnación</span>
+        </div>
+        <div class="nota clave"><b>💡 La reducción del 50%</b> por pronto pago exige: (1) abono en plazo voluntario; (2) renuncia expresa a recurrir. Es muy similar al esquema del art. 94 LTSV en tráfico.</div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══ 6. PRESCRIPCIÓN ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-leyes);">
+      <span class="eyebrow">⏱️ 6 · PRESCRIPCIÓN DE INFRACCIONES Y SANCIONES · ART. 32</span>
+      <span class="rule"></span>
+    </div>
+
+    <article class="delito hl" style="--accent: var(--terracotta);">
+      <div class="delito-head">
+        <span class="art-badge">Art. 32</span>
+        <span class="delito-name">Plazos de prescripción</span>
+        <span class="tipo key">⭐ Tabla resumen</span>
+      </div>
+      <table class="norm-table">
+        <thead><tr><th>Tipo</th><th>Prescripción Infracción</th><th>Prescripción Sanción</th></tr></thead>
+        <tbody>
+          <tr><td>🔴 <b>Muy graves</b></td><td>3 años</td><td>3 años</td></tr>
+          <tr><td>🟠 <b>Graves</b></td><td>2 años</td><td>2 años</td></tr>
+          <tr><td>🟢 <b>Leves</b></td><td><b>6 meses</b></td><td>1 año</td></tr>
+        </tbody>
+      </table>
+      <div class="nota policial"><b>🚔 Importante:</b> la prescripción de infracciones leves es <b>6 meses</b> (no 1 año como en el régimen general LRJSP). La prescripción de la <b>sanción</b> leve sí es 1 año.</div>
+    </article>
+  </section>
+
+  <!-- ═══ 7. PROCEDIMIENTO SANCIONADOR ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-operativa);">
+      <span class="eyebrow">📋 7 · PROCEDIMIENTO SANCIONADOR</span>
+      <span class="rule"></span>
+      <span class="meta-mono">5 fases</span>
+    </div>
+
+    <div class="flow">
+      <div class="flow-step">
+        <span class="flow-num">1</span>
+        <div>
+          <h4>Iniciación</h4>
+          <p>De oficio (por agente o autoridad) o por denuncia. Se elabora el <b>boletín de denuncia</b> con los hechos y normativa infringida.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">2</span>
+        <div>
+          <h4>Instrucción</h4>
+          <p>Investigación de los hechos, práctica de pruebas. <b>Plazo: 3 meses</b> desde inicio. Trámite de <b>audiencia al interesado</b> (10 días hábiles).</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">3</span>
+        <div>
+          <h4>Propuesta de Resolución</h4>
+          <p>El instructor formula propuesta motivada. Nuevo trámite de audiencia si hay hechos o alegaciones nuevas.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">4</span>
+        <div>
+          <h4>Resolución</h4>
+          <p>Dictada por la <b>autoridad competente</b>. Debe ser motivada. <b>Plazo máximo: 1 año</b> desde inicio del procedimiento.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">5</span>
+        <div>
+          <h4>Recursos</h4>
+          <p><b>Recurso de alzada</b> ante órgano superior en vía administrativa. Posterior <b>recurso contencioso-administrativo</b>.</p>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- SECCIÓN 3: ENTRADAS Y REGISTROS -->
-  <div class="section">
-    <div class="section-title"><span class="icon">🏠</span> Entradas en Domicilio y Registros</div>
-    <div class="section-body">
-      <div class="subsection">
-        <div class="subsection-title">Entrada en Domicilio <span class="art-ref">Arts. 15-16 CE / Art. 18 LO 4/2015</span></div>
-        <ul class="items">
-          <li><span class="key-red">REGLA GENERAL</span>: inviolabilidad del domicilio → precisa <span class="key">autorización judicial</span></li>
-          <li><span class="key-green">EXCEPCIÓN 1</span>: <span class="key">Consentimiento del titular</span></li>
-          <li><span class="key-green">EXCEPCIÓN 2</span>: <span class="key">Flagrante delito</span> (in fraganti)</li>
-          <li>No se considera domicilio: establecimientos abiertos al público, locales de negocios, vehículos en vía pública</li>
-        </ul>
-      </div>
-      <div class="subsection">
-        <div class="subsection-title">Registro de Personas y Vehículos <span class="art-ref">Arts. 20-21</span></div>
-        <ul class="items">
-          <li>Registro corporal <span class="key">externo</span>: cacheos superficiales, pueden realizarse policialmente</li>
-          <li>Registro de <span class="key">vehículos</span>: con causa justificada de seguridad ciudadana o prevención del delito</li>
-          <li>Se debe <span class="key">informar al interesado</span> de la causa</li>
-          <li>Puede intervenir <span class="key">testigo</span> si lo solicita</li>
-        </ul>
-      </div>
+    <div class="nota policial" style="margin-top:14px;"><b>🚔 Para PL en Catalunya:</b> el órgano sancionador en LOPSC es la <b>autoridad administrativa competente</b> (delegación territorial del Govern, Subdelegación del Gobierno o Alcalde según materia). El boletín de denuncia se remite al órgano competente vía cap del cos.</div>
+  </section>
+
+  <!-- ═══ RECUERDA · CLAVES OPERATIVAS ═══ -->
+  <section class="recuerda">
+    <div class="r-head">
+      <span style="font-size: 22px;">📋</span>
+      <h2>RECUERDA · LOPSC · LO 4/2015</h2>
     </div>
-  </div>
-
-  <!-- SECCIÓN 4: POTESTADES POLICIALES -->
-  <div class="section">
-    <div class="section-title"><span class="icon">👮</span> Potestades Especiales de Policía</div>
-    <div class="section-body">
-      <div class="two-col">
-        <div class="subsection">
-          <div class="subsection-title">Controles en Vías Públicas <span class="art-ref">Art. 22</span></div>
-          <ul class="items">
-            <li>Puede limitarse <span class="key">circulación o permanencia</span> en zonas concretas</li>
-            <li>Para proteger la <span class="key">seguridad ciudadana</span></li>
-            <li>Ante peligro para la seguridad de bienes y personas</li>
-            <li>Máxima <span class="key">proporcionalidad</span> exigida</li>
-          </ul>
-        </div>
-        <div class="subsection">
-          <div class="subsection-title">Disolución de Reuniones <span class="art-ref">Art. 23</span></div>
-          <ul class="items">
-            <li>Reuniones <span class="key">ilícitas</span> por ley penal</li>
-            <li>Reuniones que <span class="key">alteren la seguridad ciudadana</span></li>
-            <li>Se exige <span class="key">previa advertencia</span> a los interesados</li>
-            <li>Uso de <span class="key">fuerza proporcional</span> si no se obedece</li>
-          </ul>
-        </div>
-      </div>
-      <div class="subsection" style="margin-top:10px">
-        <div class="subsection-title">Uso de Videocámaras y Medios Técnicos <span class="art-ref">Arts. 22-24</span></div>
-        <ul class="items">
-          <li>Uso de <span class="key">cámaras y otros instrumentos técnicos</span> en lugares públicos para la seguridad</li>
-          <li>Respeto estricto a la <span class="key">normativa de protección de datos</span></li>
-          <li>Imágenes: sólo para <span class="key">fines de seguridad ciudadana</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECCIÓN 5: RÉGIMEN SANCIONADOR -->
-  <div class="section">
-    <div class="section-title"><span class="icon">⚠️</span> Régimen de Infracciones y Sanciones</div>
-    <div class="section-body">
-
-      <div class="infraction-grid" style="margin-bottom:14px">
-        <div class="inf-card muy-grave">
-          <div class="cat">Muy Graves</div>
-          <div class="amount">30K–600K€</div>
-          <div class="range">Arts. 35-36</div>
-        </div>
-        <div class="inf-card grave">
-          <div class="cat">Graves</div>
-          <div class="amount">601–30K€</div>
-          <div class="range">Art. 37</div>
-        </div>
-        <div class="inf-card leve">
-          <div class="cat">Leves</div>
-          <div class="amount">100–600€</div>
-          <div class="range">Art. 38</div>
-        </div>
-      </div>
-
-      <div class="subsection">
-        <div class="subsection-title">Infracciones Muy Graves <span class="art-ref">Art. 35</span></div>
-        <ul class="items">
-          <li>Actos que <span class="key">perturben gravemente la seguridad ciudadana</span> con instrumentos peligrosos</li>
-          <li>Organización o participación en <span class="key">reuniones no comunicadas</span> frente a infraestructuras críticas</li>
-          <li><span class="key">Fabricación, tráfico o tenencia</span> de armas prohibidas (sin constituir delito)</li>
-          <li>Resistencia activa grave o <span class="key">acometimiento a la autoridad</span> (si no es delito)</li>
-          <li>Perturbación grave del <span class="key">orden en actos públicos</span></li>
-        </ul>
-      </div>
-      <div class="subsection">
-        <div class="subsection-title">Infracciones Graves <span class="art-ref">Art. 36 (selección)</span></div>
-        <ul class="items">
-          <li>Falta de respeto y consideración a miembros de las <span class="key">FFCCSS</span> en el ejercicio de sus funciones <span class="art-ref">Art. 36.6</span></li>
-          <li>Desobediencia a órdenes de la <span class="key">autoridad o sus agentes</span> (si no es delito)</li>
-          <li>Uso público y ostentoso de <span class="key">objetos peligrosos</span></li>
-          <li><span class="key">Perturbación del orden</span> en actos culturales, deportivos o de ocio</li>
-          <li>Consumo de <span class="key">alcohol en vía pública</span> cuando perturbe la convivencia o tranquilidad</li>
-          <li>Escalada no autorizada de <span class="key">edificios o monumentos</span></li>
-          <li>Convocatoria o asistencia a reuniones en <span class="key">lugares de tránsito</span> prohibidos</li>
-        </ul>
-      </div>
-      <div class="subsection">
-        <div class="subsection-title">Infracciones Leves <span class="art-ref">Art. 37</span></div>
-        <ul class="items">
-          <li>Incumplimiento de condiciones impuestas para <span class="key">uso de espacios públicos</span></li>
-          <li>No comunicación previa de <span class="key">reuniones en lugares de tránsito</span> público sin alterar el orden</li>
-          <li><span class="key">Perturbación leve</span> de la seguridad o convivencia ciudadana</li>
-          <li>Falta de <span class="key">colaboración</span> con las FFCCSS</li>
-        </ul>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="subsection">
-        <div class="subsection-title">Sanciones Adicionales y Medidas Cautelares <span class="art-ref">Arts. 39-41</span></div>
-        <ul class="items">
-          <li><span class="key">Suspensión de licencias</span> o permisos</li>
-          <li><span class="key">Intervención y decomiso</span> de efectos e instrumentos</li>
-          <li><span class="key">Cierre temporal</span> de establecimiento (MG: hasta 2 años; G: hasta 6 meses)</li>
-          <li><span class="key">Prohibición de estancia o residencia</span> en lugar determinado</li>
-          <li>Posible <span class="key">reducción del 50%</span> de la sanción por pronto pago y no impugnación</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECCIÓN 6: PRESCRIPCIÓN -->
-  <div class="section">
-    <div class="section-title"><span class="icon">⏱️</span> Prescripción de Infracciones y Sanciones</div>
-    <div class="section-body">
-      <div class="two-col">
-        <div class="subsection">
-          <div class="subsection-title">Prescripción de Infracciones <span class="art-ref">Art. 32</span></div>
-          <ul class="items">
-            <li><span class="key">Muy graves</span>: <span class="key">3 años</span></li>
-            <li><span class="key">Graves</span>: <span class="key">2 años</span></li>
-            <li><span class="key">Leves</span>: <span class="key">6 meses</span></li>
-          </ul>
-        </div>
-        <div class="subsection">
-          <div class="subsection-title">Prescripción de Sanciones <span class="art-ref">Art. 32</span></div>
-          <ul class="items">
-            <li><span class="key">Muy graves</span>: <span class="key">3 años</span></li>
-            <li><span class="key">Graves</span>: <span class="key">2 años</span></li>
-            <li><span class="key">Leves</span>: <span class="key">1 año</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECCIÓN 7: PROCEDIMIENTO SANCIONADOR -->
-  <div class="section">
-    <div class="section-title"><span class="icon">📋</span> Procedimiento Sancionador</div>
-    <div class="section-body">
-      <div class="flow">
-        <div class="flow-step">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <div class="step-title">Iniciación</div>
-            <div class="step-desc">De oficio (por agente o autoridad) o por denuncia. Se elabora el <span class="key">boletín de denuncia</span> con los hechos y normativa infringida.</div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <div class="step-title">Instrucción</div>
-            <div class="step-desc">Investigación de los hechos, práctica de pruebas. <span class="key">Plazo: 3 meses</span> desde inicio. Trámite de <span class="key">audiencia al interesado</span> (10 días hábiles).</div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <div class="step-title">Propuesta de Resolución</div>
-            <div class="step-desc">El instructor formula propuesta motivada. Nuevo trámite de audiencia si hay hechos o alegaciones nuevas.</div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="step-num">4</div>
-          <div class="step-content">
-            <div class="step-title">Resolución</div>
-            <div class="step-desc">Dictada por la <span class="key">autoridad competente</span>. Debe ser motivada. <span class="key">Plazo máximo: 1 año</span> desde inicio del procedimiento.</div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="step-num">5</div>
-          <div class="step-content">
-            <div class="step-title">Recursos</div>
-            <div class="step-desc"><span class="key">Recurso de alzada</span> ante órgano superior en vía administrativa. Posterior <span class="key">recurso contencioso-administrativo</span>.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- RECUERDA -->
-  <div class="recuerda">
-    <h3>⭐ RECUERDA — Puntos Clave</h3>
     <ul>
-      <li>Deroga la <strong>LO 1/1992</strong> de Protección de la Seguridad Ciudadana ("Ley Corcuera")</li>
-      <li>La identificación en dependencias nunca puede superar las <strong>6 horas</strong> y siempre se extiende boletín de constancia</li>
-      <li>Las infracciones MUY GRAVES prescriben a los <strong>3 años</strong>; las GRAVES a los <strong>2 años</strong>; las LEVES a los <strong>6 meses</strong></li>
-      <li>El pronto pago permite reducción del <strong>50%</strong> de la sanción económica</li>
-      <li>Resistencia o desobediencia LEVE es infracción administrativa; GRAVE puede ser delito (arts. 550 ss. CP)</li>
-      <li>La falta de respeto a agentes en ejercicio de funciones es siempre infracción <strong>GRAVE</strong> (art. 36.6)</li>
-      <li>El procedimiento sancionador tiene un plazo máximo de <strong>1 año</strong> de resolución</li>
-      <li>Las reuniones en lugares de tránsito no comunicadas: infracción <strong>LEVE</strong> si no hay alteración del orden; <strong>GRAVE o MUY GRAVE</strong> si la hay</li>
+      <li><div><b>📘 Deroga</b> la <b>LO 1/1992</b> de Protección de la Seguridad Ciudadana («Ley Corcuera»).</div></li>
+      <li><div><b>⏱️ Identificación en dependencias:</b> nunca puede superar las <b>6 horas</b> · Siempre boletín de constancia.</div></li>
+      <li><div><b>🔄 Prescripción:</b> Muy Graves <b>3 años</b> · Graves <b>2 años</b> · Leves <b>6 meses</b> (sanción leve = 1 año).</div></li>
+      <li><div><b>💰 Pronto pago:</b> reducción del <b>50%</b> de la sanción económica + renuncia a recurrir.</div></li>
+      <li><div><b>⚖️ Resistencia/desobediencia LEVE</b> = infracción administrativa LOPSC; <b>GRAVE</b> puede ser delito (arts. 550 ss. CP).</div></li>
+      <li><div><b>🚔 Falta de respeto a agentes</b> en ejercicio de funciones = infracción <b>GRAVE</b> (art. 36.6).</div></li>
+      <li><div><b>⏳ Procedimiento sancionador:</b> plazo máximo <b>1 año</b> de resolución · Audiencia 10 días hábiles.</div></li>
+      <li><div><b>🪧 Reuniones</b> en lugares de tránsito no comunicadas: <b>LEVE</b> si no hay alteración · <b>GRAVE/MG</b> si la hay.</div></li>
+      <li><div><b>🏠 Entrada en domicilio:</b> regla = autorización judicial · Excepciones = consentimiento del titular o flagrante delito.</div></li>
+      <li><div><b>👮 Principios LOPSC art. 4:</b> adecuación · congruencia · oportunidad · DDFF · legalidad.</div></li>
+      <li><div><b>🎯 Cacheo externo</b> = competencia policial directa · <b>Registro corporal con desnudez</b> = motivación reforzada + privacidad + sexo.</div></li>
+      <li><div><b>🪪 Identificación</b> debe estar motivada en indicio objetivo (vetadas las identificaciones masivas o por perfil étnico).</div></li>
+      <li><div><b>🛑 Disolución de reuniones:</b> requiere <b>advertencia previa</b> documentada como requisito de validez.</div></li>
+      <li><div><b>💡 Especialidad:</b> LOPSC prevalece sobre arts. 139–141 LRBRL en materia de seguridad ciudadana.</div></li>
     </ul>
-  </div>
+  </section>
 
-  <button class="print-btn" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+  <!-- ═══ RECURSOS ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-recursos);">
+      <span class="eyebrow">📚 RECURSOS Y MATERIAL DE ESTUDIO</span>
+      <span class="rule"></span>
+    </div>
+    <div class="res-grid">
+      <a class="res-card" href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442" target="_blank" rel="noopener"><span class="res-icon">📄</span><div><h4>LO 4/2015 · BOE</h4><p>Texto consolidado · LOPSC</p></div></a>
+      <a class="res-card" href="https://www.boe.es/buscar/doc.php?id=BOE-A-1992-4577" target="_blank" rel="noopener"><span class="res-icon">📜</span><div><h4>LO 1/1992 (derogada)</h4><p>«Ley Corcuera» · referencia histórica</p></div></a>
+      <a class="res-card" href="https://www.boe.es/buscar/act.php?id=BOE-A-1986-6859" target="_blank" rel="noopener"><span class="res-icon">⚖️</span><div><h4>LO 2/1986 · Art. 5</h4><p>Principios FCSE · base LOPSC</p></div></a>
+      <a class="res-card" href="/test/lopsc-4-2015"><span class="res-icon">📝</span><div><h4>Test del tema</h4><p>Preguntas · LOPSC</p></div></a>
+    </div>
+  </section>
 
 </div>
 </body>
