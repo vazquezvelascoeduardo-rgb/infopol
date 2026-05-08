@@ -9,6 +9,7 @@ import ScreenPerfil from './screens/ScreenPerfil';
 import ScreenOperativaHome from './screens/operativa/ScreenOperativaHome';
 import ScreenInfraccions from './screens/operativa/ScreenInfraccions';
 import ScreenFitxa from './screens/operativa/ScreenFitxa';
+import ScreenLlei from './screens/operativa/ScreenLlei';
 import ScreenProtocol from './screens/operativa/ScreenProtocol';
 import ScreenMapa from './screens/operativa/ScreenMapa';
 
@@ -74,6 +75,7 @@ export default function App() {
         <Route index element={<ScreenOperativaHome />} />
         <Route path="infraccions" element={<ScreenInfraccions />} />
         <Route path="infraccions/:id" element={<ScreenFitxa />} />
+        <Route path="llei/:id" element={<ScreenLlei />} />
         <Route path="protocol" element={<ScreenProtocol />} />
         <Route path="protocol/:id" element={<ScreenProtocol />} />
         <Route path="mapa" element={<ScreenMapa />} />
