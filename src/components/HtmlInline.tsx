@@ -48,6 +48,12 @@ const BASE_LAYOUT_CSS = `
   .${SCOPE_CLASS} .nota-clave,
   .${SCOPE_CLASS} .nota-agrav,
   .${SCOPE_CLASS} .nom-cell,
+  /* Rebrand 2026 — files de catàleg, files d'assegurança i descripcions
+     de delictes (van a 12.5–13px al disseny print, pugem a 14.5 mòbil). */
+  .${SCOPE_CLASS} .alc-row,
+  .${SCOPE_CLASS} .ass-row,
+  .${SCOPE_CLASS} .delicte-body .desc,
+  .${SCOPE_CLASS} .delicte-body .aside,
   /* Cataleg - tab Delictes CP: les files i descripcions eren molt petites
      (12.5px). Les pugem a 14.5 per llegibilitat. La nota inferior puja
      a 13. */
@@ -87,7 +93,13 @@ const BASE_LAYOUT_CSS = `
   .${SCOPE_CLASS} .alc-card-title,
   .${SCOPE_CLASS} .cp-card-title,
   .${SCOPE_CLASS} .section-title,
-  .${SCOPE_CLASS} .nom-header {
+  .${SCOPE_CLASS} .nom-header,
+  /* Rebrand 2026: catàleg de trànsit + altres fitxes nous fan servir
+     .sec-head per a títols de bloc i .alc-title per a títols dins
+     de cards d'alcoholèmia/velocitat. */
+  .${SCOPE_CLASS} .sec-head,
+  .${SCOPE_CLASS} .sec-sub,
+  .${SCOPE_CLASS} .alc-title {
     font-size: 14px !important;
   }
   .${SCOPE_CLASS} .subtitle {
@@ -148,7 +160,12 @@ const BASE_LAYOUT_CSS = `
   .${SCOPE_CLASS} .clas-grid,
   .${SCOPE_CLASS} .delito-top,
   .${SCOPE_CLASS} .seg-amounts,
-  .${SCOPE_CLASS} .alc-data {
+  .${SCOPE_CLASS} .alc-data,
+  /* Rebrand 2026 — files de chips noves a la fitxa cataleg/CP. */
+  .${SCOPE_CLASS} .alc-row,
+  .${SCOPE_CLASS} .ass-meta,
+  .${SCOPE_CLASS} .delicte-cells,
+  .${SCOPE_CLASS} .penas {
     flex-wrap: wrap !important;
   }
   /* Graelles que tenen 2-3 columnes a desktop → 1 columna a mòbil */
@@ -159,7 +176,11 @@ const BASE_LAYOUT_CSS = `
     .${SCOPE_CLASS} .alc-grid,
     .${SCOPE_CLASS} .cons-grid,
     .${SCOPE_CLASS} .infraction-grid,
-    .${SCOPE_CLASS} .class-grid {
+    .${SCOPE_CLASS} .class-grid,
+    /* Rebrand 2026 — .delicte-cells és un grid 1fr/auto al disseny
+       print; al mòbil va a 1 columna perquè les penes baixin sota el
+       text en lloc de comprimir-lo. */
+    .${SCOPE_CLASS} .delicte-cells {
       grid-template-columns: 1fr !important;
     }
     .${SCOPE_CLASS} .nomenclator {
