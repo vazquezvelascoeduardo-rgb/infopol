@@ -5,8 +5,8 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#0a1628" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0E0E0E" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#FAF6EF" media="(prefers-color-scheme: light)" />
     <meta name="description" content="InfoPol — Consulta ràpida de normativa, infografies i operativa per a agents de policia local (Catalunya)." />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="InfoPol" />
@@ -30,16 +30,16 @@
 
     <link rel="canonical" href="https://infopol.app/" />
     <title>InfoPol — Consulta operativa policia local</title>
-    <!-- Tipografia de les infografies (carregada de forma global perquè
-         ara es renderitzen inline al DOM, no dins d'iframes). -->
+    <!-- Tipografies del rebranding 2026 (Plus Jakarta Sans + JetBrains Mono)
+         + Oswald/Source Sans 3 que segueixen usant les infografies del temari. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap"
     />
   </head>
-  <body class="bg-white text-slate-900 dark:bg-[#0a1628] dark:text-slate-100">
+  <body class="bg-paper text-ink">
     <!-- SPA + GitHub Pages: si la URL ve d'un redirect des de 404.html
          amb la ruta encodada a la query (?/leyes/codi-penal/...), ho
          desencodifiquem aquí abans que React Router agafi el control. -->

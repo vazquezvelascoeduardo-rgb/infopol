@@ -1,6 +1,7 @@
-// Pantalla principal de l'app: dues seccions grans.
-//   1) Lleis      → tot el contingut de temari (CE78, Codi penal, FCS, etc.).
-//   2) Operativa  → procediments per situació (Trànsit, Seguretat ciutadana…).
+// Pantalla principal de l'app · rebranding 2026.
+// Hero + cards en mosaic (Leyes/Operativa/Superbuscador/atajos/Tests) i
+// secció d'actualitat. Conserva la funcionalitat existent (favorits,
+// novedades, repassos pendents, comptador de notícies no llegides).
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
@@ -10,84 +11,85 @@ import { NEWS, useNewCount, markNewsSeen } from '../lib/news';
 import { useFailuresCounts } from '../lib/failures';
 import { NOTICIES, useUnreadNoticiesCount } from '../lib/noticies';
 
-function NewsBlock() {
-  const { t } = useT();
-  const newCount = useNewCount();
-
-  // Quan l'usuari arriba a home, marquem com a vistes les novetats.
-  useEffect(() => {
-    if (newCount > 0) {
-      const t = setTimeout(() => markNewsSeen(), 1500);
-      return () => clearTimeout(t);
-    }
-  }, [newCount]);
-
-  // Sempre mostrem les ultimes 3, pero amb un badge 'NOU' si encara
-  // no s'havien vist.
-  const recent = NEWS.slice(0, 3);
-  if (recent.length === 0) return null;
-
+/* ── Icones inline (replica les del disseny) ─────────────────── */
+function IconLeyes() {
   return (
-    <section className="mb-5 rounded-2xl border p-4 sm:p-5
-      border-blue-200/70 bg-gradient-to-br from-blue-50/50 via-white to-white
-      dark:border-blue-400/20 dark:bg-gradient-to-br dark:from-[#0e2244] dark:to-[#0f1d34]">
-      <div className="flex items-center gap-3 mb-3">
-        <span className="h-5 w-1.5 rounded-full bg-gradient-to-b from-blue-500 to-blue-700" />
-        <h2 className="text-xs font-black uppercase tracking-[0.25em] text-blue-700 dark:text-blue-400">
-          ✨ {t('home.news.title')}
-        </h2>
-        {newCount > 0 && (
-          <span className="inline-flex items-center justify-center rounded-full bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5">
-            {newCount} {t('home.news.badge')}
-          </span>
-        )}
-        <span className="h-px flex-1 bg-gradient-to-r from-blue-200 to-transparent dark:from-blue-400/20" />
-      </div>
-      <ul className="space-y-1.5">
-        {recent.map((n) => {
-          const mod = MODULES.find((m) => m.slug === n.moduleSlug);
-          return (
-            <li key={`news-${n.moduleSlug}-${n.slug}`}>
-              <Link
-                to={`/leyes/s/${n.moduleSlug}/${n.slug}`}
-                className="flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition
-                  border-slate-200/80 bg-white hover:border-blue-300
-                  dark:border-white/10 dark:bg-white/5 dark:hover:border-blue-400/40"
-              >
-                {mod && (
-                  <span aria-hidden className={`inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br ${mod.accent}`} />
-                )}
-                <span className="truncate text-slate-700 dark:text-slate-200 flex-1">{n.title}</span>
-                <span className="text-[10px] font-mono text-slate-400 dark:text-slate-500 shrink-0">
-                  {n.addedAt.slice(5)}
-                </span>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3v18" />
+      <path d="M5 7h14" />
+      <path d="m5 7-2 6c0 2 1.5 3 3.5 3S10 15 10 13L8 7" />
+      <path d="m19 7-2 6c0 2 1.5 3 3.5 3S24 15 24 13l-2-6" transform="translate(-3 0)" />
+    </svg>
+  );
+}
+function IconOperativa() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 18h14" />
+      <path d="M7 18a5 5 0 0 1 10 0" />
+      <path d="M12 7V4" />
+      <path d="m9 5 1 2" />
+      <path d="m15 5-1 2" />
+    </svg>
+  );
+}
+function IconSuper() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="6" />
+      <path d="m20 20-4.5-4.5" />
+      <path d="M11 8v3l2 1" />
+    </svg>
+  );
+}
+function IconTrafico() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <rect x="5" y="3" width="14" height="18" rx="2" />
+      <path d="M9 7h6M9 11h6M9 15h4" />
+    </svg>
+  );
+}
+function IconAlcohol() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M8 3h8l-1 7a4 4 0 0 1-3 4 4 4 0 0 1-3-4z" />
+      <path d="M12 14v6" />
+      <path d="M9 21h6" />
+    </svg>
+  );
+}
+function IconRecursos() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="7" width="18" height="13" rx="2" />
+      <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+      <path d="M3 13h18" />
+    </svg>
+  );
+}
+function IconTests() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 3h9l4 4v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" />
+      <path d="M14 3v5h5" />
+      <path d="m9 14 2 2 4-4" />
+    </svg>
   );
 }
 
+/* ── Blocs auxiliars (favorits + novedades) ────────────────── */
 function FavoritesBlock() {
   const { t } = useT();
   const { items: favs, toggle: toggleFav } = useFavorites();
-
   if (favs.length === 0) return null;
-
   return (
-    <section className="mb-5 rounded-2xl border p-4 sm:p-5
-      border-slate-200/80 bg-white
-      dark:border-white/10 dark:bg-[#0f1d34]">
-      <div className="flex items-center gap-3 mb-3">
-        <span className="h-5 w-1.5 rounded-full bg-gradient-to-b from-amber-400 to-amber-600 dark:from-amber-300 dark:to-amber-500" />
-        <h2 className="text-xs font-black uppercase tracking-[0.25em] text-slate-700 dark:text-slate-300">
-          ★ {t('home.favorites.title')}
-        </h2>
-        <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
+    <section className="mb-6">
+      <div className="section-head">
+        <span className="eyebrow">★ {t('home.favorites.title')}</span>
+        <span className="rule" />
       </div>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {favs.map((b) => (
           <FavItem key={`fav-${b.moduleSlug}-${b.slug}`} b={b} onRemove={() => toggleFav(b)} />
         ))}
@@ -102,22 +104,18 @@ function FavItem({ b, onRemove }: { b: Bookmark; onRemove: () => void }) {
     <li className="group relative">
       <Link
         to={`/leyes/s/${b.moduleSlug}/${b.slug}`}
-        className="flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition pr-9
-          border-slate-200/80 bg-slate-50/40 hover:border-amber-300
-          dark:border-white/10 dark:bg-white/5 dark:hover:border-amber-400/40"
+        className="flex items-center gap-2 rounded-md border border-line bg-white px-3 py-2 text-sm transition hover:border-terracotta hover:bg-paper-2 pr-9"
       >
         {mod && (
-          <span aria-hidden className={`inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br ${mod.accent}`} />
+          <span aria-hidden className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-terracotta" />
         )}
-        <span className="truncate text-slate-700 dark:text-slate-200">{b.title}</span>
+        <span className="truncate text-text">{b.title}</span>
       </Link>
       <button
         type="button"
         onClick={onRemove}
         aria-label="✕"
-        className="absolute right-1 top-1/2 -translate-y-1/2 inline-flex h-7 w-7 items-center justify-center rounded-md
-          text-slate-400 hover:bg-slate-200 hover:text-slate-700
-          dark:hover:bg-white/10 dark:hover:text-slate-200 opacity-0 group-hover:opacity-100 transition"
+        className="absolute right-1 top-1/2 -translate-y-1/2 inline-flex h-7 w-7 items-center justify-center rounded-md text-text-3 hover:bg-paper-2 hover:text-ink opacity-0 group-hover:opacity-100 transition"
       >
         ✕
       </button>
@@ -125,327 +123,327 @@ function FavItem({ b, onRemove }: { b: Bookmark; onRemove: () => void }) {
   );
 }
 
+function NovedadesBlock() {
+  const { t } = useT();
+  const newCount = useNewCount();
+  useEffect(() => {
+    if (newCount > 0) {
+      const id = setTimeout(() => markNewsSeen(), 1500);
+      return () => clearTimeout(id);
+    }
+  }, [newCount]);
+  const recent = NEWS.slice(0, 3);
+  if (recent.length === 0) return null;
+  return (
+    <section className="mt-10">
+      <div className="section-head" style={{ ['--accent' as never]: 'var(--c-actualidad)' } as React.CSSProperties}>
+        <span className="eyebrow">✨ {t('home.news.title')}</span>
+        <span className="rule" />
+        {newCount > 0 && (
+          <span className="badge">{newCount} {t('home.news.badge')}</span>
+        )}
+      </div>
+      <ul className="grid gap-2">
+        {recent.map((n) => {
+          const mod = MODULES.find((m) => m.slug === n.moduleSlug);
+          return (
+            <li key={`news-${n.moduleSlug}-${n.slug}`}>
+              <Link
+                to={`/leyes/s/${n.moduleSlug}/${n.slug}`}
+                className="flex items-center gap-2 rounded-md border border-line bg-white px-3 py-2 text-sm transition hover:border-c-actualidad hover:bg-paper-2"
+              >
+                {mod && (
+                  <span aria-hidden className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-c-actualidad" />
+                )}
+                <span className="truncate text-text flex-1">{n.title}</span>
+                <span className="text-[11px] font-mono text-text-3 shrink-0">
+                  {n.addedAt.slice(5)}
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}
+
+/* ── Pàgina principal ────────────────────────────────────────── */
 export default function Home() {
   const { t } = useT();
   const { due: failuresDue } = useFailuresCounts();
   const unreadNoticies = useUnreadNoticiesCount();
-  const recentNoticies = NOTICIES.slice(0, 3);
+  const recentNoticies = NOTICIES.slice(0, 4);
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-6">
+    <div className="shell pt-6 pb-10">
       <FavoritesBlock />
 
-      {/* Targetes principals: Lleis · Operativa · Superbuscador */}
-      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* LLEIS */}
-        <li>
-          <Link
-            to="/leyes"
-            className="group relative block h-full overflow-hidden rounded-2xl border p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md
-              border-slate-200 bg-white hover:border-amber-400/60
-              dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-amber-400/40"
-          >
-            <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-amber-500 to-amber-700" />
-            <div className="flex items-start gap-4">
-              <span
-                aria-hidden
-                className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-amber-700 text-3xl text-white shadow-inner"
-              >
-                ⚖️
-              </span>
-              <div className="min-w-0">
-                <div className="text-[10px] uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400/90">
-                  {t('home.leyes.badge')}
-                </div>
-                <h2 className="mt-1 text-2xl font-black tracking-tight">
-                  {t('home.leyes.title')}
-                </h2>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                  {t('home.leyes.desc')}
-                </p>
-              </div>
-            </div>
-            <div className="mt-5 flex items-center justify-end text-amber-600 dark:text-amber-400">
-              <span className="text-sm font-semibold">
-                {t('home.leyes.cta')}
-              </span>
-              <span className="ml-1 transition group-hover:translate-x-1" aria-hidden>→</span>
-            </div>
-          </Link>
-        </li>
-
-        {/* OPERATIVA */}
-        <li>
-          <Link
-            to="/operativa"
-            className="group relative block h-full overflow-hidden rounded-2xl border p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md
-              border-slate-200 bg-white hover:border-blue-400/60
-              dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-blue-400/40"
-          >
-            <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 to-blue-800" />
-            <div className="flex items-start gap-4">
-              <span
-                aria-hidden
-                className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-800 text-3xl text-white shadow-inner"
-              >
-                🚨
-              </span>
-              <div className="min-w-0">
-                <div className="text-[10px] uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400/90">
-                  {t('home.operativa.badge')}
-                </div>
-                <h2 className="mt-1 text-2xl font-black tracking-tight">
-                  {t('home.operativa.title')}
-                </h2>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                  {t('home.operativa.desc')}
-                </p>
-              </div>
-            </div>
-            <div className="mt-5 flex items-center justify-end text-blue-600 dark:text-blue-400">
-              <span className="text-sm font-semibold">
-                {t('home.operativa.cta')}
-              </span>
-              <span className="ml-1 transition group-hover:translate-x-1" aria-hidden>→</span>
-            </div>
-          </Link>
-        </li>
-      </ul>
-
-      {/* SUPERBUSCADOR — accés directe destacat (full width) */}
-      <Link
-        to="/superbuscador"
-        className="group relative mt-4 block overflow-hidden rounded-2xl border p-5 sm:p-6 shadow-sm transition
-          hover:-translate-y-0.5 hover:shadow-md
-          border-purple-200/70 bg-gradient-to-r from-purple-50/70 via-white to-fuchsia-50/60
-          hover:border-purple-400/60
-          dark:border-white/10 dark:bg-gradient-to-r dark:from-[#1a0f2e] dark:to-[#0a1628] dark:hover:border-purple-400/40"
-      >
-        <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-purple-500 to-fuchsia-700" />
-        <div aria-hidden className="absolute -top-12 -right-12 h-44 w-44 rounded-full bg-fuchsia-200/30 blur-3xl dark:hidden" />
-        <div className="relative flex items-center gap-4">
-          <span
-            aria-hidden
-            className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-fuchsia-700 text-3xl text-white shadow-inner"
-          >
-            💸
-          </span>
-          <div className="min-w-0 flex-1">
-            <div className="text-[10px] uppercase tracking-[0.25em] text-purple-700 dark:text-purple-400/90 font-semibold">
-              {t('home.superbuscador.badge')}
-            </div>
-            <h2 className="mt-1 text-xl sm:text-2xl font-black tracking-tight">
-              {t('home.superbuscador.title')}
-            </h2>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
-              {t('home.superbuscador.desc')}
-            </p>
+      {/* HERO */}
+      <section className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-end gap-4 my-3 mb-6">
+        <div>
+          <div className="eyebrow text-terracotta mb-2">
+            {t('home.hero.eyebrow')}
           </div>
-          <span className="hidden sm:inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-purple-700 dark:text-purple-400">
-            {t('home.superbuscador.cta')}
-            <span className="ml-1 transition group-hover:translate-x-1" aria-hidden>→</span>
-          </span>
+          <h1 className="m-0 text-[34px] sm:text-[42px] font-extrabold leading-[1.05] tracking-[-0.03em]">
+            {t('home.hero.title')}{' '}
+            <span className="text-terracotta">{t('home.hero.titleAccent')}</span>
+          </h1>
+          <p className="mt-2.5 text-text-2 text-base max-w-[640px]">
+            {t('home.hero.subtitle')}
+          </p>
         </div>
-      </Link>
+        <div className="flex gap-2">
+          <Link to="/recursos" className="btn btn-ghost">
+            {t('home.hero.ctaRecursos')}
+          </Link>
+          <Link to="/test" className="btn btn-dark">
+            {t('home.hero.ctaTests')}
+          </Link>
+        </div>
+      </section>
 
-      {/* CATÀLEG · ALCOHOL · RECURSOS — fila d'atajos rapids */}
-      <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
+      {/* TOP CARDS — Leyes + Operativa */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-[18px]">
+        <Link
+          to="/leyes"
+          className="card card-accent"
+          style={{ ['--accent' as never]: 'var(--c-leyes)' } as React.CSSProperties}
+        >
+          <div className="card-grid">
+            <span
+              className="appicon lg"
+              style={{ ['--accent' as never]: 'var(--c-leyes)' } as React.CSSProperties}
+            >
+              <IconLeyes />
+            </span>
+            <div>
+              <div className="eyebrow" style={{ color: 'var(--c-leyes)' }}>
+                {t('home.leyes.badge')}
+              </div>
+              <h2 className="card-title lg mt-1">{t('home.leyes.title')}</h2>
+              <p className="card-desc">{t('home.leyes.desc')}</p>
+              <span className="card-cta" style={{ ['--accent' as never]: 'var(--c-leyes)' } as React.CSSProperties}>
+                {t('home.leyes.cta')} <span className="arrow">→</span>
+              </span>
+            </div>
+          </div>
+        </Link>
+
+        <Link
+          to="/operativa"
+          className="card card-accent"
+          style={{ ['--accent' as never]: 'var(--c-operativa)' } as React.CSSProperties}
+        >
+          <div className="card-grid">
+            <span
+              className="appicon lg"
+              style={{ ['--accent' as never]: 'var(--c-operativa)' } as React.CSSProperties}
+            >
+              <IconOperativa />
+            </span>
+            <div>
+              <div className="eyebrow" style={{ color: 'var(--c-operativa)' }}>
+                {t('home.operativa.badge')}
+              </div>
+              <h2 className="card-title lg mt-1">{t('home.operativa.title')}</h2>
+              <p className="card-desc">{t('home.operativa.desc')}</p>
+              <span className="card-cta" style={{ ['--accent' as never]: 'var(--c-operativa)' } as React.CSSProperties}>
+                {t('home.operativa.cta')} <span className="arrow">→</span>
+              </span>
+            </div>
+          </div>
+        </Link>
+      </section>
+
+      {/* SUPERBUSCADOR — wide tinted card */}
+      <section className="mt-4">
+        <Link
+          to="/superbuscador"
+          className="card card-accent tinted"
+          style={{
+            ['--accent' as never]: 'var(--c-superbuscador)',
+            ['--tint' as never]: 'var(--tint-superbuscador)',
+          } as React.CSSProperties}
+        >
+          <div className="card-grid" style={{ gridTemplateColumns: 'auto 1fr auto' }}>
+            <span
+              className="appicon lg"
+              style={{ ['--accent' as never]: 'var(--c-superbuscador)' } as React.CSSProperties}
+            >
+              <IconSuper />
+            </span>
+            <div>
+              <div className="eyebrow" style={{ color: 'var(--c-superbuscador)' }}>
+                {t('home.superbuscador.badge')}
+              </div>
+              <h2 className="card-title lg mt-1">{t('home.superbuscador.title')}</h2>
+              <p className="card-desc">{t('home.superbuscador.desc')}</p>
+            </div>
+            <span
+              className="card-cta self-center mt-0 hidden sm:inline-flex"
+              style={{ ['--accent' as never]: 'var(--c-superbuscador)' } as React.CSSProperties}
+            >
+              {t('home.superbuscador.cta')} <span className="arrow">→</span>
+            </span>
+          </div>
+        </Link>
+      </section>
+
+      {/* 3 MINICARDS — Catálogo · Alcoholemia · Recursos */}
+      <section className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3.5">
         <Link
           to="/leyes/s/transit/cataleg-d-infraccions-de-transit-sct-2026"
-          className="group relative block overflow-hidden rounded-xl border p-4 shadow-sm transition
-            hover:-translate-y-0.5 hover:shadow-md
-            border-amber-200/70 bg-gradient-to-r from-amber-50/70 via-white to-yellow-50/50
-            hover:border-amber-400/60
-            dark:border-white/10 dark:bg-gradient-to-r dark:from-[#2a210f] dark:to-[#0a1628] dark:hover:border-amber-400/40"
+          className="minicard"
+          style={{
+            ['--accent' as never]: 'var(--c-trafico)',
+            ['--tint' as never]: 'var(--tint-trafico)',
+          } as React.CSSProperties}
         >
-          <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-amber-500 to-yellow-600" />
-          <div className="relative flex items-center gap-3">
-            <span
-              aria-hidden
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-yellow-600 text-xl text-white shadow-inner"
-            >
-              📖
-            </span>
-            <div className="min-w-0 flex-1">
-              <div className="text-[10px] uppercase tracking-[0.2em] text-amber-700 dark:text-amber-400/90 font-semibold">
-                {t('home.cataleg.badge')}
-              </div>
-              <h2 className="mt-0.5 text-base font-bold tracking-tight">
-                {t('home.cataleg.title')}
-              </h2>
-              <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
-                {t('home.cataleg.desc')}
-              </p>
+          <span
+            className="appicon"
+            style={{ ['--accent' as never]: 'var(--c-trafico)' } as React.CSSProperties}
+          >
+            <IconTrafico />
+          </span>
+          <div>
+            <div className="eyebrow" style={{ color: 'var(--c-trafico)' }}>
+              {t('home.cataleg.badge')}
             </div>
-            <span className="inline-flex shrink-0 items-center text-amber-700 dark:text-amber-400 text-base font-semibold">
-              <span aria-hidden className="transition group-hover:translate-x-1">→</span>
-            </span>
+            <h3>{t('home.cataleg.title')}</h3>
+            <p>{t('home.cataleg.desc')}</p>
           </div>
+          <span className="arrow">→</span>
         </Link>
 
         <Link
           to="/calculadora-alcohol"
-          className="group relative block overflow-hidden rounded-xl border p-4 shadow-sm transition
-            hover:-translate-y-0.5 hover:shadow-md
-            border-rose-200/70 bg-gradient-to-r from-rose-50/70 via-white to-amber-50/50
-            hover:border-rose-400/60
-            dark:border-white/10 dark:bg-gradient-to-r dark:from-[#2a0f1a] dark:to-[#0a1628] dark:hover:border-rose-400/40"
+          className="minicard"
+          style={{
+            ['--accent' as never]: 'var(--c-alcoholemia)',
+            ['--tint' as never]: 'var(--tint-alcoholemia)',
+          } as React.CSSProperties}
         >
-          <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-rose-500 to-amber-600" />
-          <div className="relative flex items-center gap-3">
-            <span
-              aria-hidden
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-rose-500 to-amber-600 text-xl text-white shadow-inner"
-            >
-              🍷
-            </span>
-            <div className="min-w-0 flex-1">
-              <div className="text-[10px] uppercase tracking-[0.2em] text-rose-700 dark:text-rose-400/90 font-semibold">
-                {t('home.alcohol.badge')}
-              </div>
-              <h2 className="mt-0.5 text-base font-bold tracking-tight">
-                {t('home.alcohol.title')}
-              </h2>
-              <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
-                {t('home.alcohol.desc')}
-              </p>
+          <span
+            className="appicon"
+            style={{ ['--accent' as never]: 'var(--c-alcoholemia)' } as React.CSSProperties}
+          >
+            <IconAlcohol />
+          </span>
+          <div>
+            <div className="eyebrow" style={{ color: 'var(--c-alcoholemia)' }}>
+              {t('home.alcohol.badge')}
             </div>
-            <span className="inline-flex shrink-0 items-center text-rose-700 dark:text-rose-400 text-base font-semibold">
-              <span aria-hidden className="transition group-hover:translate-x-1">→</span>
-            </span>
+            <h3>{t('home.alcohol.title')}</h3>
+            <p>{t('home.alcohol.desc')}</p>
           </div>
+          <span className="arrow">→</span>
         </Link>
 
         <Link
           to="/recursos"
-          className="group relative block overflow-hidden rounded-xl border p-4 shadow-sm transition
-            hover:-translate-y-0.5 hover:shadow-md
-            border-emerald-200/70 bg-gradient-to-r from-emerald-50/70 via-white to-teal-50/50
-            hover:border-emerald-400/60
-            dark:border-white/10 dark:bg-gradient-to-r dark:from-[#0f2a1f] dark:to-[#0a1628] dark:hover:border-emerald-400/40"
+          className="minicard"
+          style={{
+            ['--accent' as never]: 'var(--c-recursos)',
+            ['--tint' as never]: 'var(--tint-recursos)',
+          } as React.CSSProperties}
         >
-          <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-700" />
-          <div className="relative flex items-center gap-3">
-            <span
-              aria-hidden
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 text-xl text-white shadow-inner"
-            >
-              🧰
-            </span>
-            <div className="min-w-0 flex-1">
-              <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400/90 font-semibold">
-                {t('home.recursos.badge')}
-              </div>
-              <h2 className="mt-0.5 text-base font-bold tracking-tight">
-                {t('home.recursos.title')}
-              </h2>
-              <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
-                {t('home.recursos.desc')}
-              </p>
+          <span
+            className="appicon"
+            style={{ ['--accent' as never]: 'var(--c-recursos)' } as React.CSSProperties}
+          >
+            <IconRecursos />
+          </span>
+          <div>
+            <div className="eyebrow" style={{ color: 'var(--c-recursos)' }}>
+              {t('home.recursos.badge')}
             </div>
-            <span className="inline-flex shrink-0 items-center text-emerald-700 dark:text-emerald-400 text-base font-semibold">
-              <span aria-hidden className="transition group-hover:translate-x-1">→</span>
-            </span>
+            <h3>{t('home.recursos.title')}</h3>
+            <p>{t('home.recursos.desc')}</p>
           </div>
+          <span className="arrow">→</span>
         </Link>
-      </div>
+      </section>
 
-      {/* TESTS — entrada destacada (full width, badge NOU) */}
-      <Link
-        to="/test"
-        className="group relative mt-4 block overflow-hidden rounded-2xl border p-5 sm:p-6 shadow-sm transition
-          hover:-translate-y-0.5 hover:shadow-md
-          border-blue-200/70 bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-cyan-50/50
-          hover:border-blue-400/60
-          dark:border-white/10 dark:bg-gradient-to-r dark:from-[#0e2244] dark:via-[#0f1d34] dark:to-[#0e2a3e] dark:hover:border-blue-400/40"
-      >
-        <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-600" />
-        <div aria-hidden className="absolute -top-12 -right-12 h-44 w-44 rounded-full bg-blue-200/30 blur-3xl dark:hidden" />
-        {failuresDue > 0 ? (
-          <span
-            title={t('home.tests.duePending')}
-            className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-rose-600 to-orange-600 px-2 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow inline-flex items-center gap-1"
+      {/* TESTS — wide tinted card with badge */}
+      <section className="mt-4">
+        <div className="relative">
+          {failuresDue > 0 ? (
+            <span
+              title={t('home.tests.duePending')}
+              className="badge absolute -top-3 right-6 z-10"
+            >
+              🔁 {failuresDue} {t('home.tests.duePendingShort')}
+            </span>
+          ) : (
+            <span className="badge absolute -top-3 right-6 z-10">
+              📚 {t('home.tests.badgeNew')}
+            </span>
+          )}
+          <Link
+            to="/test"
+            className="card card-accent tinted"
+            style={{
+              ['--accent' as never]: 'var(--c-tests)',
+              ['--tint' as never]: 'var(--tint-tests)',
+            } as React.CSSProperties}
           >
-            <span aria-hidden>🔁</span>
-            {failuresDue} {t('home.tests.duePendingShort')}
-          </span>
-        ) : (
-          <span className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-2 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow">
-            {t('home.tests.badgeNew')}
-          </span>
-        )}
-        <div className="relative flex items-center gap-4">
-          <span
-            aria-hidden
-            className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-600 to-cyan-700 text-3xl text-white shadow-inner"
-          >
-            📝
-          </span>
-          <div className="min-w-0 flex-1 pr-12 sm:pr-0">
-            <div className="text-[10px] uppercase tracking-[0.25em] text-blue-700 dark:text-blue-400/90 font-semibold">
-              {t('home.tests.badge')}
+            <div className="card-grid" style={{ gridTemplateColumns: 'auto 1fr auto' }}>
+              <span
+                className="appicon lg"
+                style={{ ['--accent' as never]: 'var(--c-tests)' } as React.CSSProperties}
+              >
+                <IconTests />
+              </span>
+              <div>
+                <div className="eyebrow" style={{ color: 'var(--c-tests)' }}>
+                  {t('home.tests.badge')}
+                </div>
+                <h2 className="card-title lg mt-1">{t('home.tests.title')}</h2>
+                <p className="card-desc">{t('home.tests.desc')}</p>
+              </div>
+              <span
+                className="card-cta self-center mt-0 hidden sm:inline-flex"
+                style={{ ['--accent' as never]: 'var(--c-tests)' } as React.CSSProperties}
+              >
+                {t('home.tests.cta')} <span className="arrow">→</span>
+              </span>
             </div>
-            <h2 className="mt-1 text-xl sm:text-2xl font-black tracking-tight">
-              {t('home.tests.title')}
-            </h2>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-1">
-              {t('home.tests.desc')}
-            </p>
-          </div>
-          <span className="hidden sm:inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-blue-700 dark:text-blue-400">
-            {t('home.tests.cta')}
-            <span className="ml-1 transition group-hover:translate-x-1" aria-hidden>→</span>
-          </span>
+          </Link>
         </div>
-      </Link>
+      </section>
 
-      {/* NOTÍCIES — secció pròpia: actualitat normativa, sentències, oposicions */}
+      {/* ACTUALIDAD — section-head + news rows */}
       {recentNoticies.length > 0 && (
-        <section className="mt-5 rounded-2xl border p-4 sm:p-5
-          border-blue-200/70 bg-gradient-to-br from-blue-50/50 via-white to-indigo-50/30
-          dark:border-blue-400/20 dark:bg-gradient-to-br dark:from-[#0e2244] dark:to-[#0f1d34]">
-          <div className="flex items-center gap-3 mb-3">
-            <span className="h-5 w-1.5 rounded-full bg-gradient-to-b from-blue-500 to-indigo-700" />
-            <h2 className="text-xs font-black uppercase tracking-[0.25em] text-blue-700 dark:text-blue-400 inline-flex items-center gap-2">
-              <span aria-hidden>📰</span>
-              {t('home.noticies.title')}
-            </h2>
+        <section className="mt-12">
+          <div
+            className="section-head"
+            style={{ ['--accent' as never]: 'var(--c-actualidad)' } as React.CSSProperties}
+          >
+            <span className="eyebrow">📰 {t('home.actualidad.eyebrow')}</span>
+            <span className="rule" />
             {unreadNoticies > 0 && (
-              <span className="rounded-full bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider">
+              <span className="badge dark">
                 {unreadNoticies} {t('home.noticies.newBadge')}
               </span>
             )}
-            <span className="h-px flex-1 bg-gradient-to-r from-blue-200 to-transparent dark:from-blue-400/20" />
-            <Link
-              to="/noticies"
-              className="text-xs font-semibold text-blue-700 dark:text-blue-400 hover:underline shrink-0"
-            >
-              {t('home.noticies.viewAll')} →
+            <Link to="/noticies" className="see-all">
+              {t('home.actualidad.viewAll')} →
             </Link>
           </div>
-          <ul className="space-y-1.5">
+          <ul className="grid gap-2.5">
             {recentNoticies.map((n) => (
               <li key={n.slug}>
                 <Link
                   to={`/noticies/${encodeURIComponent(n.slug)}`}
-                  className="flex items-start gap-2 rounded-lg border px-3 py-2 text-sm transition
-                    border-slate-200/80 bg-white hover:border-blue-300
-                    dark:border-white/10 dark:bg-white/5 dark:hover:border-blue-400/40"
+                  className="news-row"
                 >
-                  <span aria-hidden className="text-base shrink-0 mt-0.5">
-                    📰
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="font-semibold text-slate-800 dark:text-slate-100 leading-snug truncate">
-                      {n.title}
-                    </div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
-                      {n.summary}
-                    </div>
+                  <span className="news-icon">📄</span>
+                  <div className="min-w-0">
+                    <h4>{n.title}</h4>
+                    <p>{n.summary}</p>
                   </div>
-                  <time className="text-[10px] font-mono text-slate-400 dark:text-slate-500 shrink-0 mt-1">
-                    {n.publishedAt.slice(5)}
-                  </time>
+                  <span className="news-date">{n.publishedAt.slice(5)}</span>
                 </Link>
               </li>
             ))}
@@ -453,9 +451,7 @@ export default function Home() {
         </section>
       )}
 
-      <div className="mt-5">
-        <NewsBlock />
-      </div>
+      <NovedadesBlock />
     </div>
   );
 }
