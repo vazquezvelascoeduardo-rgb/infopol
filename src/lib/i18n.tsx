@@ -436,6 +436,7 @@ const DICT: Record<Locale, Dict> = {
     // Section
     'section.notFound': 'Sección no encontrada.',
     'section.empty': 'Todavía no hay fichas en esta sección.',
+    'section.back': 'Volver a Leyes',
 
     // Card
     'card.notFound': 'Ficha no encontrada.',
@@ -1073,6 +1074,7 @@ const DICT: Record<Locale, Dict> = {
     // Section
     'section.notFound': 'Secció no trobada.',
     'section.empty': 'Encara no hi ha fitxes en aquesta secció.',
+    'section.back': 'Torna a Lleis',
 
     // Card
     'card.notFound': 'Fitxa no trobada.',

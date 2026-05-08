@@ -1,7 +1,20 @@
-// Pàgina d'un mòdul: capçalera amb accent de color i llistat de fitxes.
+// Pàgina d'un mòdul · rebranding 2026.
+// Hero amb stripe del mòdul + llistat de fitxes (.tool-style row).
 import { Link, useParams } from 'react-router-dom';
 import { MODULES, getCardsByModule } from '../lib/content';
 import { plural, useT } from '../lib/i18n';
+
+const MODULE_ACCENT: Record<string, string> = {
+  'ce78': '#E5484D',
+  'codi-penal': '#C13030',
+  'eac': '#E89A1C',
+  'fcs': '#2F6BD8',
+  'lecrim': '#9747D6',
+  'menors': '#E85D8C',
+  'municipi': '#2FB66B',
+  'sc': '#2a3a52',
+  'transit': '#F26B1F',
+};
 
 export default function Section() {
   const { moduleSlug = '' } = useParams();
@@ -10,9 +23,9 @@ export default function Section() {
 
   if (!mod) {
     return (
-      <div className="mx-auto w-full max-w-5xl px-4 py-6">
-        <p className="text-slate-600 dark:text-slate-400">{t('section.notFound')}</p>
-        <Link to="/" className="text-amber-600 dark:text-amber-400 underline">
+      <div className="shell py-6">
+        <p className="text-text-2">{t('section.notFound')}</p>
+        <Link to="/" className="text-terracotta underline">
           {t('back.home')}
         </Link>
       </div>
@@ -22,100 +35,85 @@ export default function Section() {
   const cards = getCardsByModule(moduleSlug);
   const modTitle = t(`module.${mod.slug}.title`);
   const modDesc = t(`module.${mod.slug}.desc`);
+  const accent = MODULE_ACCENT[mod.slug] ?? 'var(--terracotta)';
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-6">
-      <nav className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1.5 flex-wrap">
-        <Link to="/" className="hover:text-slate-900 hover:underline transition dark:hover:text-slate-100">{t('nav.home')}</Link>
-        <span aria-hidden className="text-slate-300 dark:text-slate-600">/</span>
-        <Link to="/leyes" className="hover:text-slate-900 hover:underline transition dark:hover:text-slate-100">{t('leyes.title')}</Link>
-        <span aria-hidden className="text-slate-300 dark:text-slate-600">/</span>
-        <span className="font-medium text-slate-700 dark:text-slate-200">{modTitle}</span>
+    <div className="shell">
+      <nav className="crumbs">
+        <Link to="/">{t('nav.home')}</Link>
+        <span className="sep">/</span>
+        <Link to="/leyes">{t('leyes.title')}</Link>
+        <span className="sep">/</span>
+        <span className="here">{modTitle}</span>
       </nav>
 
-      <section className="relative mt-4 overflow-hidden rounded-2xl border p-5 sm:p-6
-        border-slate-200/80 bg-gradient-to-br from-white to-slate-50/60
-        shadow-[0_1px_2px_rgba(15,23,42,0.04)]
-        dark:border-white/10 dark:from-[#0f1d34] dark:to-[#0f1d34] dark:bg-[#0f1d34] dark:shadow-none">
-        <span
-          aria-hidden
-          className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${mod.accent}`}
-        />
-        {/* Glow del color del modul a l'angle superior dret */}
-        <span
-          aria-hidden
-          className={`pointer-events-none absolute -top-12 -right-12 h-40 w-40 rounded-full opacity-15 blur-3xl bg-gradient-to-br ${mod.accent} dark:hidden`}
-        />
-        <div className="relative flex items-center gap-4">
+      <header
+        className="card card-accent"
+        style={{ ['--accent' as never]: accent } as React.CSSProperties}
+      >
+        <div className="card-grid" style={{ gridTemplateColumns: 'auto 1fr auto' }}>
           <span
-            aria-hidden
-            className={`inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${mod.accent} text-2xl text-white
-              shadow-[0_4px_12px_-4px_rgba(15,23,42,0.2),inset_0_-2px_4px_rgba(0,0,0,0.1)]
-              ring-1 ring-inset ring-white/20`}
+            className="appicon lg"
+            style={{ ['--accent' as never]: accent } as React.CSSProperties}
           >
             {mod.icon}
           </span>
-          <div className="min-w-0 flex-1">
-            <h1 className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 dark:text-slate-100">{modTitle}</h1>
-            <p className="text-sm text-slate-600 dark:text-slate-300 mt-0.5">{modDesc}</p>
+          <div>
+            <div className="eyebrow" style={{ color: accent }}>
+              {t('home.leyes.badge')}
+            </div>
+            <h1 className="card-title xl mt-1">{modTitle}</h1>
+            <p className="card-desc">{modDesc}</p>
           </div>
-          <span className="hidden sm:inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold
-            bg-white/80 text-slate-700 ring-1 ring-slate-200/80 backdrop-blur
-            dark:bg-white/5 dark:text-slate-200 dark:ring-white/10">
-            <span className={`inline-block h-1.5 w-1.5 rounded-full bg-gradient-to-br ${mod.accent}`} />
+          <span className="chip self-center hidden sm:inline-flex"
+            style={{
+              background: 'var(--paper-2)',
+              border: '1px solid var(--line)',
+              borderRadius: 999,
+              padding: '6px 12px',
+              fontSize: 12,
+              color: 'var(--text-2)',
+              fontWeight: 600,
+            }}
+          >
+            <span
+              className="inline-block h-1.5 w-1.5 rounded-full mr-1.5"
+              style={{ background: accent }}
+            />
             {cards.length} {plural(t, cards.length, 'cards')}
           </span>
         </div>
-      </section>
+      </header>
 
       {cards.length === 0 ? (
-        <div className="mt-6 rounded-2xl border border-dashed p-8 text-center text-sm
-          border-slate-300 bg-slate-50/50 text-slate-500
-          dark:border-white/15 dark:bg-white/5 dark:text-slate-400">
+        <div className="mt-6 mb-8 rounded-md border border-dashed border-line p-8 text-center text-sm text-text-3 bg-paper-2">
           {t('section.empty')}
         </div>
       ) : (
-        <ul className="mt-5 grid grid-cols-1 gap-2">
+        <ul className="mt-5 mb-10 grid gap-2.5">
           {cards.map((c) => (
             <li key={c.slug}>
               <Link
                 to={`/leyes/s/${c.moduleSlug}/${c.slug}`}
-                className="group block rounded-xl border px-4 py-3.5 transition duration-150
-                  border-slate-200/80 bg-white
-                  hover:border-slate-300 hover:bg-slate-50/70 hover:shadow-[0_2px_8px_-2px_rgba(15,23,42,0.08)]
-                  dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-amber-400/40 dark:hover:bg-[#13243e]"
+                className="tool"
+                style={{ ['--accent' as never]: accent } as React.CSSProperties}
               >
-                <div className="flex items-center gap-3">
-                  <span
-                    aria-hidden
-                    className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-lg ring-1
-                      bg-gradient-to-br from-slate-50 to-slate-100/80 ring-slate-200/80
-                      dark:bg-white/5 dark:ring-white/10
-                      group-hover:ring-2 group-hover:ring-offset-1 group-hover:ring-offset-white
-                      transition-all duration-150`}
-                    style={
-                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      { '--tw-ring-color': 'rgba(0,0,0,0)' } as any
-                    }
-                  >
-                    {c.icon}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="font-semibold text-slate-900 dark:text-slate-100 truncate">
-                      {c.title}
-                    </div>
-                    <div className="mt-0.5 text-xs text-slate-500 dark:text-slate-400 line-clamp-1 leading-relaxed">
-                      {summary(c.searchText)}
-                    </div>
-                  </div>
-                  <span
-                    aria-hidden
-                    className="text-slate-300 group-hover:text-slate-700 group-hover:translate-x-0.5 transition-all duration-150
-                      dark:text-slate-600 dark:group-hover:text-amber-400"
-                  >
-                    →
-                  </span>
+                <span
+                  className="tool-icon"
+                  style={{ background: 'var(--paper-2)' }}
+                >
+                  {c.icon}
+                </span>
+                <div className="min-w-0">
+                  <h4>{c.title}</h4>
+                  <p className="line-clamp-1">{summary(c.searchText)}</p>
                 </div>
+                <span
+                  className="play"
+                  style={{ ['--accent' as never]: accent } as React.CSSProperties}
+                >
+                  →
+                </span>
               </Link>
             </li>
           ))}

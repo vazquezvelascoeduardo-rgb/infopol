@@ -1,12 +1,24 @@
-// Pàgina d'una fitxa concreta.
-// - Si la fitxa és HTML: ocupa tot l'ample de la pantalla ("edge-to-edge").
-// - Si és Markdown: columna còmoda de lectura.
+// Pàgina d'una fitxa concreta · rebranding 2026.
+// Chrome estilitzat (crumbs + page-actions amb ★/share + page-foot prev/next).
+// El cos de la fitxa (HTML/Markdown) es preserva tal com està.
 import { Link, useParams } from 'react-router-dom';
 import { MODULES, getCard, pickBody } from '../lib/content';
 import { Markdown } from '../lib/markdown';
 import HtmlInline from '../components/HtmlInline';
 import { useT } from '../lib/i18n';
 import { useFavorites } from '../lib/bookmarks';
+
+const MODULE_ACCENT: Record<string, string> = {
+  'ce78': '#E5484D',
+  'codi-penal': '#C13030',
+  'eac': '#E89A1C',
+  'fcs': '#2F6BD8',
+  'lecrim': '#9747D6',
+  'menors': '#E85D8C',
+  'municipi': '#2FB66B',
+  'sc': '#2a3a52',
+  'transit': '#F26B1F',
+};
 
 function FavButton({ moduleSlug, slug, title }: { moduleSlug: string; slug: string; title: string }) {
   const { t } = useT();
@@ -19,12 +31,10 @@ function FavButton({ moduleSlug, slug, title }: { moduleSlug: string; slug: stri
       aria-pressed={fav}
       aria-label={fav ? t('fav.remove') : t('fav.add')}
       title={fav ? t('fav.remove') : t('fav.add')}
-      className={`shrink-0 inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition
-        ${fav
-          ? 'border-amber-400 bg-amber-50 text-amber-800 hover:bg-amber-100 dark:border-amber-400/50 dark:bg-amber-400/15 dark:text-amber-200'
-          : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:text-slate-100'}`}
+      className={fav ? 'btn btn-primary' : 'btn btn-ghost'}
+      style={{ height: 36, padding: '0 14px', fontSize: 13.5 }}
     >
-      <span aria-hidden className="text-base leading-none">{fav ? '★' : '☆'}</span>
+      <span aria-hidden>{fav ? '★' : '☆'}</span>
       <span className="hidden sm:inline">{fav ? t('fav.saved') : t('fav.save')}</span>
     </button>
   );
@@ -38,9 +48,9 @@ export default function CardPage() {
 
   if (!mod || !card) {
     return (
-      <div className="mx-auto w-full max-w-5xl px-4 py-6">
-        <p className="text-slate-600 dark:text-slate-400">{t('card.notFound')}</p>
-        <Link to="/" className="text-amber-600 dark:text-amber-400 underline">
+      <div className="shell py-6">
+        <p className="text-text-2">{t('card.notFound')}</p>
+        <Link to="/" className="text-terracotta underline">
           {t('back.home')}
         </Link>
       </div>
@@ -48,38 +58,38 @@ export default function CardPage() {
   }
 
   const modTitle = t(`module.${mod.slug}.title`);
+  const accent = MODULE_ACCENT[mod.slug] ?? 'var(--terracotta)';
   const { body, lang: bodyLang } = pickBody(card, locale);
-  // Mostrem l'avís d'idioma només quan no hi ha versió en l'idioma
-  // actiu i estem ensenyant un fallback en l'altre idioma.
   const langMismatch = bodyLang !== locale;
 
-  const breadcrumb = (
-    <div className="flex items-center justify-between gap-3">
-      <nav className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1.5 flex-wrap min-w-0">
-        <Link to="/" className="hover:text-slate-900 hover:underline transition dark:hover:text-slate-100">{t('nav.home')}</Link>
-        <span aria-hidden className="text-slate-300 dark:text-slate-600">/</span>
-        <Link to="/leyes" className="hover:text-slate-900 hover:underline transition dark:hover:text-slate-100">{t('leyes.title')}</Link>
-        <span aria-hidden className="text-slate-300 dark:text-slate-600">/</span>
-        <Link to={`/leyes/s/${mod.slug}`} className="hover:text-slate-900 hover:underline transition dark:hover:text-slate-100">
-          <span className="inline-flex items-center gap-1.5">
-            <span
-              aria-hidden
-              className={`inline-block h-2 w-2 rounded-full bg-gradient-to-br ${mod.accent}`}
-            />
-            {modTitle}
-          </span>
-        </Link>
-        <span aria-hidden className="text-slate-300 dark:text-slate-600">/</span>
-        <span className="truncate font-medium text-slate-700 dark:text-slate-200">{card.title}</span>
-      </nav>
-      <FavButton moduleSlug={mod.slug} slug={card.slug} title={card.title} />
-    </div>
+  const crumbs = (
+    <nav className="crumbs" style={{ padding: 0 }}>
+      <Link to="/">{t('nav.home')}</Link>
+      <span className="sep">/</span>
+      <Link to="/leyes">{t('leyes.title')}</Link>
+      <span className="sep">/</span>
+      <Link to={`/leyes/s/${mod.slug}`} className="inline-flex items-center gap-1.5">
+        <span
+          aria-hidden
+          className="inline-block h-2 w-2 rounded-full"
+          style={{ background: accent }}
+        />
+        {modTitle}
+      </Link>
+      <span className="sep">/</span>
+      <span className="here truncate">{card.title}</span>
+    </nav>
   );
 
   const langNotice = langMismatch ? (
-    <div className="flex items-start gap-2 rounded-lg border px-3 py-2 text-xs
-      border-amber-300/70 bg-amber-50 text-amber-900
-      dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-200">
+    <div
+      className="flex items-start gap-2 rounded-md border-l-4 px-3 py-2 text-xs"
+      style={{
+        borderLeftColor: 'var(--warn, #b8651b)',
+        background: 'var(--warn-soft, #f7e3cf)',
+        color: 'var(--ink)',
+      }}
+    >
       <svg
         aria-hidden
         width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -103,28 +113,51 @@ export default function CardPage() {
   if (card.kind === 'html') {
     return (
       <article>
-        <div className="w-full border-b border-slate-200 dark:border-white/10 bg-white/85 dark:bg-[#0a1628]/60 backdrop-blur">
-          <div className="mx-auto max-w-5xl px-4 py-2 space-y-2">
-            {breadcrumb}
-            {langNotice}
+        <div className="topbar" style={{ position: 'static', borderBottom: '1px solid var(--line)' }}>
+          <div className="shell">
+            <div className="page-actions">
+              {crumbs}
+              <FavButton moduleSlug={mod.slug} slug={card.slug} title={card.title} />
+            </div>
+            {langNotice && <div className="pb-2">{langNotice}</div>}
           </div>
         </div>
-        {/* Wrapper centrat: a movil amb un padding minim, a desktop
-            amb max-w-5xl per no trencar el ritme amb la resta de la app.
-            La fitxa interna te el seu propi maxim (.wrapper a 720px). */}
-        <div className="mx-auto w-full max-w-5xl px-1 sm:px-4">
+        {/* Wrapper centrat per a la fitxa (max 5xl). La fitxa interna
+            té el seu propi max (.wrapper a 720px) i conserva l'estil. */}
+        <div className="shell" style={{ paddingTop: 16 }}>
           <HtmlInline html={body} title={card.title} key={bodyLang} />
+        </div>
+        <div className="shell">
+          <div className="page-foot">
+            <Link to={`/leyes/s/${mod.slug}`} className="btn btn-ghost">
+              ← {t('section.back')}
+            </Link>
+            <Link to="/test" className="btn btn-primary">
+              {t('home.tests.cta')} →
+            </Link>
+          </div>
         </div>
       </article>
     );
   }
 
   return (
-    <article className="mx-auto w-full max-w-3xl px-4 py-6">
-      {breadcrumb}
-      {langNotice ? <div className="mt-3">{langNotice}</div> : null}
-      <div className="fitxa mt-4">
+    <article className="shell" style={{ maxWidth: 760 }}>
+      <div className="page-actions">
+        {crumbs}
+        <FavButton moduleSlug={mod.slug} slug={card.slug} title={card.title} />
+      </div>
+      {langNotice && <div className="mt-2 mb-3">{langNotice}</div>}
+      <div className="fitxa mt-3">
         <Markdown source={body} />
+      </div>
+      <div className="page-foot">
+        <Link to={`/leyes/s/${mod.slug}`} className="btn btn-ghost">
+          ← {t('section.back')}
+        </Link>
+        <Link to="/test" className="btn btn-primary">
+          {t('home.tests.cta')} →
+        </Link>
       </div>
     </article>
   );

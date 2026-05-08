@@ -417,6 +417,219 @@ html[data-text-size="lg"] { font-size: 18px; }
     color: var(--text-2);
   }
 
+  /* External link card (recursos) */
+  .ext-card {
+    @apply grid items-start gap-3.5;
+    grid-template-columns: auto 1fr auto;
+    position: relative;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px 18px;
+    color: inherit;
+    transition: transform .12s, box-shadow .12s;
+    overflow: hidden;
+  }
+  .ext-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+    background: var(--accent, var(--terracotta));
+  }
+  .ext-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  .ext-card h3 {
+    margin: 4px 0;
+    font-size: 16.5px;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .ext-card p {
+    margin: 0 0 8px;
+    font-size: 13px;
+    color: var(--text-2);
+  }
+  .ext-card .link {
+    @apply inline-flex items-center gap-1.5;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--text-3);
+  }
+  .ext-card .ext-arr {
+    font-size: 18px;
+    color: var(--accent, var(--terracotta));
+    align-self: start;
+  }
+
+  /* Tool row (herramienta interactiva) */
+  .tool {
+    @apply grid items-center gap-3.5;
+    grid-template-columns: auto 1fr auto;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 18px;
+    color: inherit;
+    transition: background .12s, border-color .12s;
+  }
+  .tool:hover {
+    background: var(--paper-2);
+    border-color: rgba(14, 14, 14, 0.16);
+  }
+  html.dark .tool:hover { border-color: rgba(242, 237, 227, 0.18); }
+  .tool-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    @apply inline-flex items-center justify-center;
+    font-size: 20px;
+  }
+  .tool h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .tool p {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: var(--text-2);
+  }
+  .tool .play {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: var(--white);
+    @apply inline-flex items-center justify-center;
+    font-size: 11px;
+    padding-left: 2px;
+    background: var(--accent, var(--terracotta));
+  }
+
+  /* Ref details/summary (col·lapsable) */
+  .ref {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color .12s;
+  }
+  .ref summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 18px;
+    @apply grid items-center gap-3.5;
+    grid-template-columns: auto 1fr auto;
+  }
+  .ref summary::-webkit-details-marker { display: none; }
+  .ref summary h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .ref summary p {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: var(--text-2);
+  }
+  .ref summary .chev {
+    color: var(--text-3);
+    transition: transform .15s;
+  }
+  .ref[open] summary .chev { transform: rotate(180deg); }
+  .ref-body {
+    padding: 4px 18px 18px;
+    border-top: 1px dashed var(--line);
+    margin: 0 18px;
+  }
+  .nato-grid {
+    @apply grid gap-2 gap-x-4;
+    grid-template-columns: repeat(2, 1fr);
+    padding-top: 14px;
+    font-size: 13.5px;
+    color: var(--text-2);
+  }
+  @media (min-width: 640px) {
+    .nato-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .nato-grid b {
+    color: var(--ink);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    margin-right: 6px;
+  }
+
+  /* Page actions (entre crumbs i hero) — share/save i prev/next */
+  .page-actions {
+    @apply flex items-center justify-between gap-4 py-5 pb-3;
+  }
+  .page-foot {
+    @apply flex items-center justify-between gap-3 mt-8 mb-6 flex-wrap;
+  }
+
+  /* Ley card (mòdul de Lleis) */
+  .ley-card {
+    position: relative;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 18px 20px;
+    @apply grid items-start gap-3.5;
+    grid-template-columns: auto 1fr auto;
+    color: inherit;
+    overflow: hidden;
+    transition: transform .15s, box-shadow .15s, border-color .15s;
+  }
+  .ley-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent, var(--terracotta));
+    border-radius: 18px 18px 0 0;
+  }
+  .ley-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .ley-card h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .ley-card p {
+    margin: 4px 0 10px;
+    font-size: 13.5px;
+    color: var(--text-2);
+  }
+  .ley-card .chip {
+    @apply inline-flex items-center gap-1.5;
+    background: var(--paper-2);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--text-2);
+    border: 1px solid var(--line);
+  }
+  .ley-card .arr {
+    color: var(--text-3);
+    font-weight: 600;
+    align-self: center;
+    transition: transform .15s, color .15s;
+  }
+  .ley-card:hover .arr {
+    transform: translateX(2px);
+    color: var(--accent, var(--terracotta));
+  }
+
   /* News rows (Actualidad) */
   .news-row {
     @apply grid items-start gap-4;
