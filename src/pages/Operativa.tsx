@@ -1,31 +1,78 @@
-// Pàgina principal del bloc "Operativa": tarjetes per cada tema operatiu.
-// Per ara: Trànsit (interactiu) i Seguretat Ciutadana (placeholder).
-// Es poden afegir més temes ampliant l'array OPERATIVA_THEMES.
+// Pàgina principal del bloc "Operativa" · rebranding 2026.
+// Hero card + 2 grans cards (Trànsit + SC/Penal) + grid 6 procediments destacats.
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
 
-type OperativaTheme = {
-  slug: string;
-  icon: string;
-  accent: string; // gradient classes
-  ready: boolean; // si false → mostra "en construcció"
-  to?: string; // ruta destí si està llest
+/* ── Icones inline ───────────────────────────────────────────── */
+function IconShield() {
+  return (
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 18h14" />
+      <path d="M7 18a5 5 0 0 1 10 0" />
+      <path d="M12 7V4" />
+      <path d="m9 5 1 2" />
+      <path d="m15 5-1 2" />
+    </svg>
+  );
+}
+function IconSC() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2 4 5v7c0 5 3.5 8 8 10 4.5-2 8-5 8-10V5z" />
+    </svg>
+  );
+}
+
+type Proc = {
+  to: string;
+  accent: string;
+  eyebrowKey: string;
+  titleKey: string;
+  descKey: string;
 };
 
-const OPERATIVA_THEMES: OperativaTheme[] = [
+const PROCS: Proc[] = [
   {
-    slug: 'trafico',
-    icon: '🚦',
-    accent: 'from-amber-500 to-amber-700',
-    ready: true,
-    to: '/operativa/trafico',
+    to: '/operativa/trafico/alcoholemia',
+    accent: 'var(--c-trafico)',
+    eyebrowKey: 'operativa.proc.alcoholemia.eyebrow',
+    titleKey: 'operativa.proc.alcoholemia.title',
+    descKey: 'operativa.proc.alcoholemia.desc',
   },
   {
-    slug: 'seguretat-ciutadana',
-    icon: '🛡️',
-    accent: 'from-slate-500 to-slate-700',
-    ready: true,
-    to: '/operativa/penal',
+    to: '/operativa/penal/identificacio',
+    accent: '#2a3a52',
+    eyebrowKey: 'operativa.proc.identificacio.eyebrow',
+    titleKey: 'operativa.proc.identificacio.title',
+    descKey: 'operativa.proc.identificacio.desc',
+  },
+  {
+    to: '/operativa/penal/violencia-genere',
+    accent: 'var(--c-alcoholemia)',
+    eyebrowKey: 'operativa.proc.vg.eyebrow',
+    titleKey: 'operativa.proc.vg.title',
+    descKey: 'operativa.proc.vg.desc',
+  },
+  {
+    to: '/operativa/penal/detencio',
+    accent: 'var(--c-superbuscador)',
+    eyebrowKey: 'operativa.proc.detencio.eyebrow',
+    titleKey: 'operativa.proc.detencio.title',
+    descKey: 'operativa.proc.detencio.desc',
+  },
+  {
+    to: '/operativa/trafico/accident',
+    accent: 'var(--c-trafico)',
+    eyebrowKey: 'operativa.proc.accident.eyebrow',
+    titleKey: 'operativa.proc.accident.title',
+    descKey: 'operativa.proc.accident.desc',
+  },
+  {
+    to: '/operativa/trafico/doc-falsa',
+    accent: 'var(--c-recursos)',
+    eyebrowKey: 'operativa.proc.docs.eyebrow',
+    titleKey: 'operativa.proc.docs.title',
+    descKey: 'operativa.proc.docs.desc',
   },
 ];
 
@@ -33,93 +80,112 @@ export default function Operativa() {
   const { t } = useT();
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-6">
-      {/* Breadcrumb */}
-      <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3">
-        <Link to="/" className="hover:underline">{t('nav.home')}</Link>
-        <span className="mx-2" aria-hidden>/</span>
-        <span className="text-slate-700 dark:text-slate-200">{t('operativa.title')}</span>
+    <div className="shell">
+      {/* Crumbs */}
+      <nav className="crumbs">
+        <Link to="/">{t('nav.home')}</Link>
+        <span className="sep">/</span>
+        <span className="here">{t('operativa.title')}</span>
       </nav>
 
-      {/* Banda superior */}
-      <section className="rounded-2xl border p-5 sm:p-7 shadow-sm
-        border-slate-200 bg-white
-        dark:border-white/10 dark:bg-gradient-to-br dark:from-[#0f1d34] dark:to-[#0a1628] dark:shadow-none">
-        <div className="flex items-start gap-4">
+      {/* Hero card */}
+      <header
+        className="card card-accent"
+        style={{ ['--accent' as never]: 'var(--c-operativa)' } as React.CSSProperties}
+      >
+        <div className="card-grid">
           <span
-            aria-hidden
-            className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-800 text-3xl text-white shadow-inner"
+            className="appicon lg"
+            style={{ ['--accent' as never]: 'var(--c-operativa)' } as React.CSSProperties}
           >
-            🚨
+            <IconShield />
           </span>
-          <div className="min-w-0">
-            <div className="text-[11px] uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400/90">
+          <div>
+            <div className="eyebrow" style={{ color: 'var(--c-operativa)' }}>
               {t('operativa.badge')}
             </div>
-            <h1 className="mt-1 text-2xl sm:text-3xl font-black tracking-tight">
-              {t('operativa.title')}
-            </h1>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-              {t('operativa.subtitle')}
-            </p>
+            <h1 className="card-title xl mt-1">{t('operativa.title')}</h1>
+            <p className="card-desc">{t('operativa.subtitle')}</p>
           </div>
         </div>
+      </header>
+
+      {/* 2 cards principals — Trànsit + SC/Penal */}
+      <section className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-[18px]">
+        <Link
+          to="/operativa/trafico"
+          className="card card-accent"
+          style={{ ['--accent' as never]: 'var(--c-trafico)' } as React.CSSProperties}
+        >
+          <div className="card-grid">
+            <span
+              className="appicon lg"
+              style={{ ['--accent' as never]: 'var(--c-trafico)' } as React.CSSProperties}
+            >
+              🚦
+            </span>
+            <div>
+              <h2 className="card-title lg">{t('operativa.trafico.title')}</h2>
+              <p className="card-desc">
+                {t('operativa.trafico.desc')}. {t('home.cataleg.desc')}
+              </p>
+              <span className="card-cta" style={{ ['--accent' as never]: 'var(--c-trafico)' } as React.CSSProperties}>
+                {t('operativa.open')} <span className="arrow">→</span>
+              </span>
+            </div>
+          </div>
+        </Link>
+        <Link
+          to="/operativa/penal"
+          className="card card-accent"
+          style={{ ['--accent' as never]: '#2a3a52' } as React.CSSProperties}
+        >
+          <div className="card-grid">
+            <span
+              className="appicon lg"
+              style={{ ['--accent' as never]: '#2a3a52' } as React.CSSProperties}
+            >
+              <IconSC />
+            </span>
+            <div>
+              <h2 className="card-title lg">{t('operativa.seguretat-ciutadana.title')}</h2>
+              <p className="card-desc">{t('operativa.seguretat-ciutadana.desc')}</p>
+              <span className="card-cta" style={{ ['--accent' as never]: '#2a3a52' } as React.CSSProperties}>
+                {t('operativa.open')} <span className="arrow">→</span>
+              </span>
+            </div>
+          </div>
+        </Link>
       </section>
 
-      {/* Temes */}
-      <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {OPERATIVA_THEMES.map((th) => {
-          const title = t(`operativa.${th.slug}.title`);
-          const desc = t(`operativa.${th.slug}.desc`);
-          const Card = (
-            <div
-              className={`group relative block h-full overflow-hidden rounded-2xl border p-5 shadow-sm transition
-                ${th.ready
-                  ? 'hover:-translate-y-0.5 hover:shadow-md border-slate-200 bg-white hover:border-blue-400/60 dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-blue-400/40'
-                  : 'border-dashed border-slate-300 bg-slate-50 opacity-70 cursor-not-allowed dark:border-white/10 dark:bg-white/5'}`}
-            >
-              <span aria-hidden className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${th.accent}`} />
-              <div className="flex items-start gap-3">
-                <span
-                  aria-hidden
-                  className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${th.accent} text-2xl text-white shadow-inner`}
-                >
-                  {th.icon}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="font-bold">{title}</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    {desc}
-                  </div>
-                </div>
+      {/* Procediments destacats */}
+      <div className="section-head">
+        <span className="eyebrow">{t('operativa.destacats.eyebrow')}</span>
+        <span className="rule" />
+        <Link to="/operativa/penal" className="see-all" style={{ color: 'var(--terracotta)' }}>
+          {t('operativa.destacats.viewAll')} →
+        </Link>
+      </div>
+
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+        {PROCS.map((p) => (
+          <Link
+            key={p.to}
+            to={p.to}
+            className="proc"
+            style={{ ['--accent' as never]: p.accent } as React.CSSProperties}
+          >
+            <span className="dot" />
+            <div>
+              <div className="eyebrow" style={{ color: 'var(--text-3)' }}>
+                {t(p.eyebrowKey)}
               </div>
-              {!th.ready && (
-                <div className="mt-3 inline-flex rounded-full px-2.5 py-1 text-[10px] uppercase tracking-wider
-                  bg-slate-200 text-slate-600 dark:bg-white/10 dark:text-slate-300">
-                  {t('operativa.comingSoon')}
-                </div>
-              )}
-              {th.ready && (
-                <div className="mt-3 flex items-center justify-end text-blue-600 dark:text-blue-400 text-sm font-semibold">
-                  {t('operativa.open')}
-                  <span className="ml-1 transition group-hover:translate-x-1" aria-hidden>→</span>
-                </div>
-              )}
+              <h4>{t(p.titleKey)}</h4>
+              <p>{t(p.descKey)}</p>
             </div>
-          );
-          return (
-            <li key={th.slug}>
-              {th.ready && th.to ? (
-                <Link to={th.to} className="block h-full">
-                  {Card}
-                </Link>
-              ) : (
-                Card
-              )}
-            </li>
-          );
-        })}
-      </ul>
+          </Link>
+        ))}
+      </section>
     </div>
   );
 }
