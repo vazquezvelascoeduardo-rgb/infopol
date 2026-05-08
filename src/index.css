@@ -565,6 +565,291 @@ html[data-text-size="lg"] { font-size: 18px; }
     margin-right: 6px;
   }
 
+  /* ── Sidebar (menú lateral desplegable) ──────────────────────── */
+  .sb {
+    @apply flex flex-col h-full;
+  }
+  .sb-head {
+    @apply grid items-center gap-3;
+    grid-template-columns: auto 1fr auto;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  html.dark .sb-head { background: var(--paper); border-bottom-color: rgba(242, 237, 227, 0.08); }
+  .sb-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--white);
+    color: var(--ink);
+    @apply inline-flex items-center justify-center;
+    transition: background .12s;
+  }
+  .sb-close:hover { background: var(--paper-2); }
+
+  /* Sections */
+  .sb-section { padding: 6px 12px; }
+  .sb-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--text-3);
+    padding: 12px 12px 6px;
+    text-transform: uppercase;
+  }
+
+  /* Items */
+  .sb-item {
+    @apply grid items-center gap-3 cursor-pointer relative;
+    grid-template-columns: auto 1fr auto;
+    padding: 10px 12px;
+    border-radius: 12px;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 14.5px;
+    transition: background .12s, color .12s;
+  }
+  .sb-item:hover { background: var(--paper-2); }
+  .sb-item .sb-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    @apply inline-flex items-center justify-center shrink-0;
+    background: transparent;
+  }
+  .sb-item .sb-icon svg { width: 18px; height: 18px; }
+  .sb-item .arr {
+    color: var(--text-3);
+    transition: transform .12s, color .12s;
+  }
+  .sb-item:hover .arr {
+    transform: translateX(2px);
+    color: var(--ink);
+  }
+
+  .sb-item.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .sb-item.active .sb-icon {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--terracotta);
+  }
+  .sb-item.active .arr { color: rgba(255, 255, 255, 0.6); }
+  .sb-item.active::before {
+    content: "";
+    position: absolute;
+    left: -12px;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    background: var(--terracotta);
+    border-radius: 0 3px 3px 0;
+  }
+
+  html.dark .sb-item.active { background: var(--terracotta); color: #fff; }
+  html.dark .sb-item.active .sb-icon { background: rgba(255, 255, 255, 0.16); color: #fff; }
+  html.dark .sb-item.active::before { background: #fff; }
+
+  .sb-badge {
+    @apply inline-flex items-center gap-1;
+    background: var(--terracotta);
+    color: #fff;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+
+  .sb-divider {
+    height: 1px;
+    background: var(--line);
+    margin: 8px 18px;
+  }
+
+  /* Settings (idioma, tema, mida text) */
+  .sb-setting {
+    @apply grid items-center gap-3;
+    grid-template-columns: auto 1fr auto;
+    padding: 12px;
+    border-radius: 12px;
+  }
+  .sb-setting:hover { background: var(--paper-2); }
+  .sb-setting-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .sb-setting-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    @apply inline-flex items-center justify-center;
+    color: var(--text-2);
+  }
+
+  /* Segmented control (idioma) */
+  .seg {
+    @apply inline-flex items-center;
+    padding: 3px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    gap: 2px;
+  }
+  .seg button {
+    border: 0;
+    background: transparent;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all .12s;
+  }
+  .seg button:hover { color: var(--ink); }
+  .seg button.on { background: var(--ink); color: var(--paper); }
+  html.dark .seg button.on { background: var(--paper); color: var(--ink); }
+
+  /* Theme picker chips */
+  .theme-pick { @apply inline-flex; gap: 6px; }
+  .theme-chip {
+    @apply inline-flex items-center;
+    gap: 6px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    border: 1.5px solid var(--line);
+    background: var(--white);
+    font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--ink);
+    transition: all .12s;
+  }
+  .theme-chip:hover { border-color: var(--text-3); }
+  .theme-chip .swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex: none;
+  }
+  .theme-chip.on {
+    border-color: var(--terracotta);
+    background: var(--terracotta);
+    color: #fff;
+  }
+  .theme-chip.dark.on {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+
+  /* Text size segmented (S M L) */
+  .tsize {
+    @apply inline-flex items-center;
+    padding: 3px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    gap: 2px;
+  }
+  .tsize button {
+    border: 0;
+    background: transparent;
+    padding: 4px 10px;
+    border-radius: 7px;
+    font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all .12s;
+  }
+  .tsize button:hover { color: var(--ink); }
+  .tsize button.s { font-size: 11px; }
+  .tsize button.m { font-size: 14px; }
+  .tsize button.l { font-size: 17px; }
+  .tsize button.on { background: var(--terracotta); color: #fff; }
+
+  /* Sidebar CTA card (a baix de tot) */
+  .sb-cta {
+    margin: 12px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 14px;
+    padding: 16px;
+    @apply grid items-center gap-3;
+    grid-template-columns: auto 1fr;
+    text-decoration: none;
+    transition: transform .12s;
+  }
+  .sb-cta:hover { transform: translateY(-1px); }
+  .sb-cta .ic {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--terracotta);
+    @apply inline-flex items-center justify-center shrink-0;
+    font-size: 18px;
+  }
+  .sb-cta h5 { margin: 0; font-size: 13.5px; font-weight: 800; }
+  .sb-cta p {
+    margin: 2px 0 0;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  html.dark .sb-cta { background: var(--terracotta); }
+  html.dark .sb-cta .ic { background: rgba(0, 0, 0, 0.4); }
+
+  /* Sidebar footer (versió + links) */
+  .sb-foot {
+    padding: 12px 22px 18px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    text-align: center;
+    border-top: 1px solid var(--line);
+    margin-top: auto;
+  }
+  .sb-foot strong {
+    color: var(--ink);
+    font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+  }
+  .sb-foot-row {
+    @apply flex items-center justify-center gap-3 mt-2;
+  }
+  .sb-foot-row a {
+    color: var(--text-3);
+    transition: color .12s;
+  }
+  .sb-foot-row a:hover { color: var(--ink); }
+
+  /* Backgrounds suaus per a icons categoritzats (sidebar) */
+  .ic-bg-orange { background: #FFE9D8; color: #F26B1F; }
+  .ic-bg-blue   { background: #EAF1FE; color: #2F6BD8; }
+  .ic-bg-green  { background: #DFF7E9; color: #2FB66B; }
+  .ic-bg-red    { background: #FFEFEC; color: #E5484D; }
+  .ic-bg-purple { background: #F5E9FF; color: #9747D6; }
+  .ic-bg-pink   { background: #FFE9F0; color: #E85D8C; }
+  .ic-bg-yellow { background: #FFF6E0; color: #E89A1C; }
+
+  html.dark .ic-bg-orange { background: rgba(242, 107, 31, 0.18); color: #ffb085; }
+  html.dark .ic-bg-blue   { background: rgba(47, 107, 216, 0.18); color: #89b4f7; }
+  html.dark .ic-bg-green  { background: rgba(47, 182, 107, 0.18); color: #6fd8a0; }
+  html.dark .ic-bg-red    { background: rgba(229, 72, 77, 0.18); color: #f08a8d; }
+  html.dark .ic-bg-purple { background: rgba(151, 71, 214, 0.18); color: #c08cf0; }
+  html.dark .ic-bg-pink   { background: rgba(232, 93, 140, 0.18); color: #f0a5c1; }
+  html.dark .ic-bg-yellow { background: rgba(232, 154, 28, 0.18); color: #f0c878; }
+
   /* Page actions (entre crumbs i hero) — share/save i prev/next */
   .page-actions {
     @apply flex items-center justify-between gap-4 py-5 pb-3;

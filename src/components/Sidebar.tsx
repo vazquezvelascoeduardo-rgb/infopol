@@ -1,13 +1,11 @@
-// Menú lateral desplegable amb totes les categories de l'app.
-// S'obre des del botó hamburguesa de la capçalera. Slide-in des de
-// l'esquerra amb un backdrop semitransparent que tanca al clicar fora.
-//
-// Estructura:
-//   🏠 Inici
-//   🔍 Superbuscador trànsit
-//   ⚖️ Lleis (col·lapsable → 9 mòduls)
-//   🚨 Operativa (col·lapsable → Trànsit + Seguretat Ciutadana + 4
-//       referències ràpides)
+// Menú lateral desplegable · rebranding 2026.
+// Slide-in des de la dreta amb backdrop. Estructura del disseny:
+//   Header amb shield + wordmark + close
+//   Nav: Inicio · Tests (badge) · Superbuscador · Recursos · Actualidad · Cultura
+//   Lleis (col·lapsable) i Operativa (col·lapsable)
+//   Ajustes: Idioma · Tema · Mida text
+//   CTA: Sugerir mejora
+//   Foot: versió + enllaços
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MODULES } from '../lib/content';
@@ -24,17 +22,132 @@ type Props = {
   onThemeChange: (t: Theme) => void;
 };
 
+/* ── Icones (mateix style que el disseny) ────────────────────── */
+function IconHome() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m3 11 9-8 9 8" />
+      <path d="M5 10v10h14V10" />
+      <path d="M10 20v-6h4v6" />
+    </svg>
+  );
+}
+function IconTests() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 3h9l4 4v14H6z" />
+      <path d="M14 3v5h5" />
+      <path d="m9 14 2 2 4-4" />
+    </svg>
+  );
+}
+function IconSearch() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <circle cx="11" cy="11" r="6" />
+      <path d="m20 20-4.5-4.5" />
+    </svg>
+  );
+}
+function IconRecursos() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="7" width="18" height="13" rx="2" />
+      <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+      <path d="M3 13h18" />
+    </svg>
+  );
+}
+function IconActualidad() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M7 9h10M7 12h10M7 15h6" />
+    </svg>
+  );
+}
+function IconCultura() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M2 9 12 4l10 5-10 5z" />
+      <path d="M6 11v5c0 2 3 3 6 3s6-1 6-3v-5" />
+    </svg>
+  );
+}
+function IconLang() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3a14 14 0 0 1 0 18A14 14 0 0 1 12 3" />
+    </svg>
+  );
+}
+function IconSun() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+    </svg>
+  );
+}
+function IconMoon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />
+    </svg>
+  );
+}
+function IconText() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <path d="M4 7V4h16v3" />
+      <path d="M9 20h6M12 4v16" />
+    </svg>
+  );
+}
+function IconClose() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+      <path d="m6 6 12 12M18 6 6 18" />
+    </svg>
+  );
+}
+
+function BrandShield() {
+  return (
+    <svg width="28" height="32" viewBox="0 0 32 36" fill="none" aria-hidden>
+      <path
+        d="M16 1.5 L29.5 6 V18 C29.5 26 23.5 32 16 34.5 C8.5 32 2.5 26 2.5 18 V6 Z"
+        fill="var(--ink)"
+      />
+      <text
+        x="16"
+        y="22.5"
+        textAnchor="middle"
+        fontFamily="Plus Jakarta Sans, sans-serif"
+        fontWeight={800}
+        fontSize={15}
+        fill="var(--terracotta)"
+      >
+        i
+      </text>
+    </svg>
+  );
+}
+
 export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) {
   const { t, locale, setLocale } = useT();
   const location = useLocation();
   const [textSize, setTextSize] = useState<TextSize>(() => getInitialTextSize());
+  const failures = useFailuresCounts();
+  const unreadNoticies = useUnreadNoticiesCount();
 
   function changeTextSize(s: TextSize) {
     setTextSize(s);
     applyTextSize(s);
   }
 
-  // Tanca el menú quan canviem de ruta (l'usuari ha clicat un enllaç).
+  // Tanca el menú quan canviem de ruta.
   useEffect(() => {
     onClose();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,6 +173,10 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
     };
   }, [open]);
 
+  const path = location.pathname;
+  const isActive = (...prefixes: string[]) =>
+    prefixes.some((p) => (p === '/' ? path === '/' : path.startsWith(p)));
+
   return (
     <>
       {/* Backdrop */}
@@ -75,361 +192,295 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
         role="dialog"
         aria-label={t('sidebar.title')}
         aria-hidden={!open}
-        className={`fixed inset-y-0 right-0 z-50 w-[85%] max-w-sm overflow-y-auto
-          bg-white text-slate-900 shadow-2xl
-          dark:bg-[#0a1628] dark:text-slate-100
+        className={`fixed inset-y-0 right-0 z-50 w-[85%] max-w-sm overflow-y-auto bg-paper text-ink shadow-2xl
           transition-transform duration-300 ease-out
           ${open ? 'translate-x-0' : 'translate-x-full'}`}
       >
-        {/* Capçalera amb botó tancar */}
-        <header className="sticky top-0 flex items-center gap-3 border-b px-4 py-3
-          border-slate-200 bg-white/95 backdrop-blur
-          dark:border-white/10 dark:bg-[#0a1628]/95">
-          <span className="text-xl" aria-hidden>🚓</span>
-          <div className="font-black text-lg flex-1">
-            Info<span className="text-blue-700 dark:text-blue-400">Pol</span>
-          </div>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label={t('sidebar.close')}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg
-              text-slate-500 hover:bg-slate-100 hover:text-slate-900
-              dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-slate-100"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
-        </header>
+        <div className="sb">
+          <header className="sb-head">
+            <Link to="/" className="brand" onClick={onClose}>
+              <BrandShield />
+            </Link>
+            <span className="brand-wordmark" style={{ fontSize: 20 }}>
+              <span className="info">info</span>
+              <span className="pol">pol</span>
+            </span>
+            <button
+              type="button"
+              onClick={onClose}
+              className="sb-close"
+              aria-label={t('sidebar.close')}
+            >
+              <IconClose />
+            </button>
+          </header>
 
-        {/* Contingut */}
-        <nav className="px-3 py-3 space-y-1 text-sm">
-          {/* Inici */}
-          <SimpleLink to="/" icon="🏠" label={t('sidebar.home')} />
+          {/* Navegació principal */}
+          <nav className="sb-section pt-2.5">
+            <Link
+              to="/"
+              className={`sb-item ${isActive('/') && path === '/' ? 'active' : ''}`}
+            >
+              <span className="sb-icon ic-bg-orange"><IconHome /></span>
+              <span>{t('sidebar.home')}</span>
+              <span />
+            </Link>
 
-          {/* Tests — entrada destacada */}
-          <TestsFeatureLink t={t} />
+            <Link
+              to="/test"
+              className={`sb-item ${isActive('/test') ? 'active' : ''}`}
+            >
+              <span className="sb-icon ic-bg-blue"><IconTests /></span>
+              <span>{t('sidebar.tests')}</span>
+              {failures.due > 0 ? (
+                <span className="sb-badge" title={t('sidebar.tests.duePending')}>
+                  🔁 {failures.due}
+                </span>
+              ) : (
+                <span className="sb-badge">📚 {t('sidebar.tests.badge')}</span>
+              )}
+            </Link>
 
-          {/* Superbuscador */}
-          <SimpleLink
-            to="/superbuscador"
-            icon="💸"
-            label={t('sidebar.superbuscador')}
-            accent="purple"
-          />
+            <Link
+              to="/superbuscador"
+              className={`sb-item ${isActive('/superbuscador') ? 'active' : ''}`}
+            >
+              <span className="sb-icon ic-bg-purple"><IconSearch /></span>
+              <span>{t('sidebar.superbuscador')}</span>
+              <span />
+            </Link>
 
-          {/* Recursos rapids */}
-          <SimpleLink
-            to="/recursos"
-            icon="🧰"
-            label={t('sidebar.recursos')}
-          />
+            <Link
+              to="/recursos"
+              className={`sb-item ${isActive('/recursos') ? 'active' : ''}`}
+            >
+              <span className="sb-icon ic-bg-green"><IconRecursos /></span>
+              <span>{t('sidebar.recursos')}</span>
+              <span />
+            </Link>
 
-          {/* Noticies */}
-          <NoticiesLink t={t} />
-
-          {/* Cultura General */}
-          <SimpleLink
-            to="/cultura-general"
-            icon="🎓"
-            label={t('sidebar.cultura')}
-          />
-
-          {/* Lleis (col·lapsable) — el chevron desplega les categories;
-              el titol mateix es enllaç al llistat complet. */}
-          <details className="group rounded-lg border border-slate-200/70 dark:border-white/10 mt-2">
-            <summary className="flex items-center gap-3 px-3 py-2.5 cursor-pointer
-              hover:bg-amber-50 dark:hover:bg-white/5 rounded-lg select-none">
-              <span aria-hidden className="text-lg">⚖️</span>
-              <Link
-                to="/leyes"
-                onClick={(e) => e.stopPropagation()}
-                className="font-semibold flex-1 hover:text-amber-700 dark:hover:text-amber-400"
-              >
-                {t('sidebar.leyes')}
-              </Link>
-              <span aria-hidden className="text-slate-400 group-open:rotate-90 transition-transform">▶</span>
-            </summary>
-            <div className="border-t border-slate-200/70 dark:border-white/10">
-              {MODULES.map((m) => (
-                <SubLink
-                  key={m.slug}
-                  to={`/leyes/s/${m.slug}`}
-                  icon={m.icon}
-                  label={t(`module.${m.slug}.title`)}
+            <Link
+              to="/noticies"
+              className={`sb-item ${isActive('/noticies') ? 'active' : ''}`}
+            >
+              <span className="sb-icon ic-bg-blue"><IconActualidad /></span>
+              <span>{t('sidebar.noticies')}</span>
+              {unreadNoticies > 0 ? (
+                <span
+                  className="inline-block h-2 w-2 rounded-full"
+                  style={{ background: '#E5484D' }}
+                  aria-label={`${unreadNoticies} ${t('sidebar.noticies.unreadAria')}`}
                 />
-              ))}
-            </div>
-          </details>
+              ) : (
+                <span />
+              )}
+            </Link>
 
-          {/* Operativa (col·lapsable) — el titol enllaca al llistat
-              i el chevron desplega les sub-categories. */}
-          <details className="group rounded-lg border border-slate-200/70 dark:border-white/10 mt-2">
-            <summary className="flex items-center gap-3 px-3 py-2.5 cursor-pointer
-              hover:bg-blue-50 dark:hover:bg-white/5 rounded-lg select-none">
-              <span aria-hidden className="text-lg">🚨</span>
-              <Link
-                to="/operativa"
-                onClick={(e) => e.stopPropagation()}
-                className="font-semibold flex-1 hover:text-blue-700 dark:hover:text-blue-400"
+            <Link
+              to="/cultura-general"
+              className={`sb-item ${isActive('/cultura-general') ? 'active' : ''}`}
+            >
+              <span className="sb-icon ic-bg-yellow"><IconCultura /></span>
+              <span>{t('sidebar.cultura')}</span>
+              <span />
+            </Link>
+          </nav>
+
+          <div className="sb-divider" />
+
+          {/* Lleis i Operativa col·lapsables */}
+          <nav className="sb-section">
+            <details className="group">
+              <summary
+                className={`sb-item list-none ${isActive('/leyes') ? 'active' : ''}`}
+                style={{ cursor: 'pointer' }}
               >
-                {t('sidebar.operativa')}
-              </Link>
-              <span aria-hidden className="text-slate-400 group-open:rotate-90 transition-transform">▶</span>
-            </summary>
-            <div className="border-t border-slate-200/70 dark:border-white/10">
-              <SubLink to="/operativa/trafico" icon="🚦" label={t('operativa.trafico.title')} />
-              <SubLink
-                to="/operativa/penal"
-                icon="🛡️"
-                label={t('operativa.seguretat-ciutadana.title')}
-              />
-              <div className="my-1 px-3">
-                <div className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 py-1.5">
-                  {t('sidebar.references')}
-                </div>
+                <span className="sb-icon ic-bg-yellow">⚖️</span>
+                <Link
+                  to="/leyes"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-inherit no-underline flex-1"
+                >
+                  {t('sidebar.leyes')}
+                </Link>
+                <span className="arr">▸</span>
+              </summary>
+              <div className="pl-2 mt-1 space-y-0.5">
+                {MODULES.map((m) => (
+                  <SubLink
+                    key={m.slug}
+                    to={`/leyes/s/${m.slug}`}
+                    icon={m.icon}
+                    label={t(`module.${m.slug}.title`)}
+                    active={path.startsWith(`/leyes/s/${m.slug}`)}
+                  />
+                ))}
               </div>
-              <SubLink to="/operativa/penal/taula-actes" icon="📋" label={t('penal.taulaActes')} />
-              <SubLink to="/operativa/penal/taula-drogues" icon="💊" label={t('penal.taulaDrogues')} />
-              <SubLink to="/operativa/penal/recursos" icon="📞" label={t('penal.recursos')} />
-              <SubLink to="/operativa/penal/drets-detingut" icon="📜" label={t('penal.dretsDetingut')} />
-            </div>
-          </details>
+            </details>
 
-          {/* Ajustes — toggles de tema i idioma */}
-          <div className="mt-4 pt-3 border-t border-slate-200/70 dark:border-white/10">
-            <div className="px-3 mb-2 text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">
-              {t('sidebar.settings')}
-            </div>
+            <details className="group">
+              <summary
+                className={`sb-item list-none ${isActive('/operativa') ? 'active' : ''}`}
+                style={{ cursor: 'pointer' }}
+              >
+                <span className="sb-icon ic-bg-blue">🚨</span>
+                <Link
+                  to="/operativa"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-inherit no-underline flex-1"
+                >
+                  {t('sidebar.operativa')}
+                </Link>
+                <span className="arr">▸</span>
+              </summary>
+              <div className="pl-2 mt-1 space-y-0.5">
+                <SubLink
+                  to="/operativa/trafico"
+                  icon="🚦"
+                  label={t('operativa.trafico.title')}
+                  active={path.startsWith('/operativa/trafico')}
+                />
+                <SubLink
+                  to="/operativa/penal"
+                  icon="🛡️"
+                  label={t('operativa.seguretat-ciutadana.title')}
+                  active={path.startsWith('/operativa/penal') &&
+                    !path.startsWith('/operativa/penal/taula') &&
+                    !path.startsWith('/operativa/penal/recursos') &&
+                    !path.startsWith('/operativa/penal/drets-detingut')}
+                />
+                <div className="sb-label">{t('sidebar.references')}</div>
+                <SubLink to="/operativa/penal/taula-actes" icon="📋" label={t('penal.taulaActes')} active={path.startsWith('/operativa/penal/taula-actes')} />
+                <SubLink to="/operativa/penal/taula-drogues" icon="💊" label={t('penal.taulaDrogues')} active={path.startsWith('/operativa/penal/taula-drogues')} />
+                <SubLink to="/operativa/penal/recursos" icon="📞" label={t('penal.recursos')} active={path.startsWith('/operativa/penal/recursos')} />
+                <SubLink to="/operativa/penal/drets-detingut" icon="📜" label={t('penal.dretsDetingut')} active={path.startsWith('/operativa/penal/drets-detingut')} />
+              </div>
+            </details>
+          </nav>
 
-            {/* Idioma: ES / CA com a pills clares */}
-            <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg">
-              <span aria-hidden className="text-base">🌐</span>
-              <span className="text-sm font-medium flex-1">{t('sidebar.language')}</span>
-              <div className="inline-flex rounded-lg border overflow-hidden border-slate-200 dark:border-white/10" role="group">
+          <div className="sb-divider" />
+
+          {/* Ajustes */}
+          <div className="sb-label">{t('sidebar.settings')}</div>
+          <div className="sb-section">
+            {/* Idioma */}
+            <div className="sb-setting">
+              <span className="sb-setting-icon"><IconLang /></span>
+              <span className="sb-setting-label">{t('sidebar.language')}</span>
+              <div className="seg" role="group">
                 <button
                   type="button"
+                  className={locale === 'es' ? 'on' : ''}
                   onClick={() => setLocale('es')}
                   aria-pressed={locale === 'es'}
-                  className={`px-3 py-1 text-xs font-bold tracking-wide transition
-                    ${locale === 'es'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-white text-slate-500 hover:bg-slate-50 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10'}`}
-                >
-                  ES
-                </button>
+                >ES</button>
                 <button
                   type="button"
+                  className={locale === 'ca' ? 'on' : ''}
                   onClick={() => setLocale('ca')}
                   aria-pressed={locale === 'ca'}
-                  className={`px-3 py-1 text-xs font-bold tracking-wide transition border-l border-slate-200 dark:border-white/10
-                    ${locale === 'ca'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-white text-slate-500 hover:bg-slate-50 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10'}`}
-                >
-                  CA
-                </button>
+                >CA</button>
               </div>
             </div>
 
-            {/* Tema: clar / fosc com a pills */}
-            <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg">
-              <span aria-hidden className="text-base">{theme === 'dark' ? '🌙' : '☀️'}</span>
-              <span className="text-sm font-medium flex-1">{t('sidebar.theme')}</span>
-              <div className="inline-flex rounded-lg border overflow-hidden border-slate-200 dark:border-white/10" role="group">
+            {/* Tema */}
+            <div className="sb-setting">
+              <span className="sb-setting-icon">{theme === 'dark' ? <IconMoon /> : <IconSun />}</span>
+              <span className="sb-setting-label">{t('sidebar.theme')}</span>
+              <div className="theme-pick" role="group">
                 <button
                   type="button"
+                  className={`theme-chip ${theme === 'light' ? 'on' : ''}`}
                   onClick={() => onThemeChange('light')}
                   aria-pressed={theme === 'light'}
-                  className={`px-3 py-1 text-xs font-bold tracking-wide transition
-                    ${theme === 'light'
-                      ? 'bg-amber-500 text-white'
-                      : 'bg-white text-slate-500 hover:bg-slate-50 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10'}`}
                 >
-                  ☀ {t('theme.light')}
+                  <span className="swatch" style={{ background: 'var(--terracotta)' }} />
+                  {t('theme.light')}
                 </button>
                 <button
                   type="button"
+                  className={`theme-chip dark ${theme === 'dark' ? 'on' : ''}`}
                   onClick={() => onThemeChange('dark')}
                   aria-pressed={theme === 'dark'}
-                  className={`px-3 py-1 text-xs font-bold tracking-wide transition border-l border-slate-200 dark:border-white/10
-                    ${theme === 'dark'
-                      ? 'bg-slate-700 text-white'
-                      : 'bg-white text-slate-500 hover:bg-slate-50 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10'}`}
                 >
-                  🌙 {t('theme.dark')}
+                  <span
+                    className="swatch"
+                    style={{ background: theme === 'dark' ? '#fff' : 'var(--ink)' }}
+                  />
+                  {t('theme.dark')}
                 </button>
               </div>
             </div>
 
-            {/* Mida del text: petit / mitja / gran */}
-            <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg">
-              <span aria-hidden className="text-base">🔠</span>
-              <span className="text-sm font-medium flex-1">{t('sidebar.textSize')}</span>
-              <div className="inline-flex rounded-lg border overflow-hidden border-slate-200 dark:border-white/10" role="group">
-                {([
-                  { val: 'sm' as TextSize, fontSize: '11px' },
-                  { val: 'md' as TextSize, fontSize: '14px' },
-                  { val: 'lg' as TextSize, fontSize: '17px' },
-                ]).map(({ val, fontSize }, i) => (
+            {/* Mida del text */}
+            <div className="sb-setting">
+              <span className="sb-setting-icon"><IconText /></span>
+              <span className="sb-setting-label">{t('sidebar.textSize')}</span>
+              <div className="tsize" role="group">
+                {(['sm', 'md', 'lg'] as TextSize[]).map((val) => (
                   <button
                     key={val}
                     type="button"
+                    className={`${val === 'sm' ? 's' : val === 'md' ? 'm' : 'l'} ${textSize === val ? 'on' : ''}`}
                     onClick={() => changeTextSize(val)}
                     aria-pressed={textSize === val}
                     title={t(`sidebar.textSize.${val}`)}
-                    className={`px-3 py-1 font-bold transition leading-none w-10 text-center
-                      ${i > 0 ? 'border-l border-slate-200 dark:border-white/10' : ''}
-                      ${textSize === val
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-white text-slate-500 hover:bg-slate-50 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10'}`}
-                    style={{ fontSize }}
-                  >
-                    A
-                  </button>
+                  >A</button>
                 ))}
               </div>
             </div>
           </div>
-        </nav>
 
-        {/* Peu */}
-        <footer className="px-4 py-3 mt-2 border-t border-slate-200 dark:border-white/10
-          text-[11px] text-slate-500 dark:text-slate-400 text-center">
-          {t('footer')}
-        </footer>
+          {/* CTA: Sugerir mejora — enllaça a mailto suport */}
+          <a
+            href="mailto:suport@infopol.app?subject=InfoPol%20%E2%80%94%20Suggeriment"
+            className="sb-cta"
+          >
+            <span className="ic">📤</span>
+            <div>
+              <h5>{t('sidebar.cta.title')}</h5>
+              <p>{t('sidebar.cta.desc')}</p>
+            </div>
+          </a>
+
+          {/* Footer */}
+          <footer className="sb-foot">
+            <strong>infopol</strong> · {t('footer.unofficial')}
+            <div className="sb-foot-row">
+              <span>v3.0</span>
+              <span>·</span>
+              <Link to="/avis-legal" onClick={onClose}>{t('footer.legal')}</Link>
+              <span>·</span>
+              <Link to="/privacitat" onClick={onClose}>{t('footer.privacy')}</Link>
+            </div>
+          </footer>
+        </div>
       </aside>
     </>
   );
 }
 
-function SimpleLink({
-  to,
-  icon,
-  label,
-  accent,
+function SubLink({
+  to, icon, label, active,
 }: {
   to: string;
   icon: string;
   label: string;
-  accent?: 'purple' | 'amber' | 'blue';
+  active?: boolean;
 }) {
-  const accentCls = accent === 'purple'
-    ? 'hover:bg-purple-50 dark:hover:bg-purple-400/10'
-    : accent === 'amber'
-    ? 'hover:bg-amber-50 dark:hover:bg-amber-400/10'
-    : accent === 'blue'
-    ? 'hover:bg-blue-50 dark:hover:bg-blue-400/10'
-    : 'hover:bg-slate-50 dark:hover:bg-white/5';
   return (
     <Link
       to={to}
-      className={`flex items-center gap-3 rounded-lg px-3 py-2.5 transition ${accentCls}`}
+      className="sb-item"
+      style={{
+        padding: '7px 12px 7px 36px',
+        fontSize: 13,
+        ...(active ? { background: 'var(--paper-2)', color: 'var(--terracotta)' } : {}),
+      }}
     >
-      <span aria-hidden className="text-lg">{icon}</span>
-      <span className="font-medium">{label}</span>
-    </Link>
-  );
-}
-
-/**
- * Variant per a Tests: si hi ha repassos pendents, mostra un comptador
- * vermell. Si no, manté el badge 'Nou'.
- */
-function TestsFeatureLink({ t }: { t: (k: string) => string }) {
-  const { due } = useFailuresCounts();
-  if (due > 0) {
-    return (
-      <Link
-        to="/test"
-        className="relative flex items-center gap-3 rounded-lg px-3 py-2.5 transition
-          bg-gradient-to-r from-blue-50 via-indigo-50/60 to-purple-50/60
-          ring-1 ring-blue-200/70
-          hover:from-blue-100 hover:to-purple-100 hover:ring-blue-300
-          dark:from-blue-500/15 dark:via-indigo-500/10 dark:to-purple-500/15
-          dark:ring-blue-400/20 dark:hover:ring-blue-400/40"
-      >
-        <span aria-hidden className="text-lg">📝</span>
-        <span className="font-bold text-blue-800 dark:text-blue-200 flex-1">{t('sidebar.tests')}</span>
-        <span
-          title={t('sidebar.tests.duePending')}
-          className="rounded-full bg-gradient-to-r from-rose-600 to-orange-600 px-2 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow inline-flex items-center gap-1"
-        >
-          <span aria-hidden>🔁</span>
-          {due}
-        </span>
-      </Link>
-    );
-  }
-  return (
-    <FeatureLink
-      to="/test"
-      icon="📝"
-      label={t('sidebar.tests')}
-      badge={t('sidebar.tests.badge')}
-    />
-  );
-}
-
-/**
- * Entrada de Notícies amb badge numèric quan n'hi ha de no llegides.
- */
-function NoticiesLink({ t }: { t: (k: string) => string }) {
-  const unread = useUnreadNoticiesCount();
-  return (
-    <Link
-      to="/noticies"
-      className="flex items-center gap-3 rounded-lg px-3 py-2.5 transition hover:bg-slate-50 dark:hover:bg-white/5"
-    >
-      <span aria-hidden className="text-lg">📰</span>
-      <span className="font-medium flex-1">{t('sidebar.noticies')}</span>
-      {unread > 0 && (
-        <span className="rounded-full bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider">
-          {unread}
-        </span>
-      )}
-    </Link>
-  );
-}
-
-function FeatureLink({
-  to, icon, label, badge,
-}: { to: string; icon: string; label: string; badge?: string }) {
-  return (
-    <Link
-      to={to}
-      className="relative flex items-center gap-3 rounded-lg px-3 py-2.5 transition
-        bg-gradient-to-r from-blue-50 via-indigo-50/60 to-purple-50/60
-        ring-1 ring-blue-200/70
-        hover:from-blue-100 hover:to-purple-100 hover:ring-blue-300
-        dark:from-blue-500/15 dark:via-indigo-500/10 dark:to-purple-500/15
-        dark:ring-blue-400/20 dark:hover:ring-blue-400/40"
-    >
-      <span aria-hidden className="text-lg">{icon}</span>
-      <span className="font-bold text-blue-800 dark:text-blue-200 flex-1">{label}</span>
-      {badge && (
-        <span className="rounded-full bg-gradient-to-r from-blue-600 to-indigo-600
-          px-2 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase shadow">
-          {badge}
-        </span>
-      )}
-    </Link>
-  );
-}
-
-function SubLink({ to, icon, label }: { to: string; icon: string; label: string }) {
-  return (
-    <Link
-      to={to}
-      className="flex items-center gap-3 px-3 py-2 transition text-sm
-        hover:bg-slate-50 dark:hover:bg-white/5
-        text-slate-700 dark:text-slate-300"
-    >
-      <span aria-hidden className="text-base shrink-0">{icon}</span>
+      <span aria-hidden style={{ fontSize: 14, width: 18, textAlign: 'center' }}>{icon}</span>
       <span className="leading-tight">{label}</span>
+      <span />
     </Link>
   );
 }
