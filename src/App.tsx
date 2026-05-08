@@ -33,6 +33,7 @@ const Recursos = lazy(() => import('./pages/Recursos'));
 const CalculadoraAlcohol = lazy(() => import('./pages/CalculadoraAlcohol'));
 const AvisLegal = lazy(() => import('./pages/AvisLegal'));
 const Privacitat = lazy(() => import('./pages/Privacitat'));
+const Academia = lazy(() => import('./pages/Academia'));
 const TestList = lazy(() => import('./pages/test/TestList'));
 const TestSession = lazy(() => import('./pages/test/TestSession'));
 const Achievements = lazy(() => import('./pages/test/Achievements'));
@@ -72,6 +73,7 @@ export default function App() {
           <Route path="/avis-legal" element={<AvisLegal />} />
           <Route path="/privacitat" element={<Privacitat />} />
           {/* Tests — no enllaçats des del menu (acces per URL directa). */}
+          <Route path="/academia" element={<Academia />} />
           <Route path="/test" element={<TestList />} />
           <Route path="/test/logros" element={<Achievements />} />
           <Route path="/test/:slug" element={<TestSession />} />

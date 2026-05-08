@@ -112,7 +112,7 @@ export default function Home() {
           </span>
         </Link>
 
-        <Link to="/test" className="lane academia">
+        <Link to="/academia" className="lane academia">
           <span className="for-who">
             🎓 {t('home.v2.lane.academia.forWho')}
           </span>
