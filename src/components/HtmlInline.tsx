@@ -1485,6 +1485,12 @@ export default function HtmlInline({ html }: Props) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
 
+    // Marcador per a fitxes ja amb el disseny rebranding 2026 (paper +
+    // ink + terracotta): salta tota la conversió LIGHT_THEME_CSS, que
+    // estava pensada per a fitxes antigues amb paleta navy/or.
+    const isRebrand2026 =
+      doc.body?.getAttribute('data-fitxa-style') === 'rebrand-2026';
+
     // 2) Extreu i aïlla els <style> del <head>.
     const styleEls = Array.from(doc.head.querySelectorAll('style'));
     const cssRaw = styleEls.map((s) => s.textContent || '').join('\n');
@@ -1492,22 +1498,27 @@ export default function HtmlInline({ html }: Props) {
 
     // 3) Munta el contenidor: classe d'scope + estils + cos.
     container.className = SCOPE_CLASS;
+    if (isRebrand2026) container.setAttribute('data-fitxa-style', 'rebrand-2026');
+    else container.removeAttribute('data-fitxa-style');
     container.innerHTML = '';
 
     if (cssScoped.trim()) {
       const styleNode = document.createElement('style');
       styleNode.setAttribute('data-fitxa-style', '');
-      // Ordre: estils originals scopejats → tema clar → layout base
-      // (BASE_LAYOUT_CSS al final per a què els bumps de font-size i
-      // els fixes d'overflow guanyin als estils originals via cascada
-      // i els seus !important).
-      styleNode.textContent =
-        cssScoped + '\n' + LIGHT_THEME_CSS + '\n' + BASE_LAYOUT_CSS;
+      // Ordre: estils originals scopejats → tema clar (només si NO és
+      // rebrand-2026) → layout base. BASE_LAYOUT_CSS al final per a què
+      // els bumps de font-size i els fixes d'overflow guanyin als
+      // estils originals via cascada i els seus !important.
+      styleNode.textContent = isRebrand2026
+        ? cssScoped + '\n' + BASE_LAYOUT_CSS
+        : cssScoped + '\n' + LIGHT_THEME_CSS + '\n' + BASE_LAYOUT_CSS;
       container.appendChild(styleNode);
     } else {
       // Fitxa sense estils propis: només els blocs base de tema i layout.
       const styleNode = document.createElement('style');
-      styleNode.textContent = LIGHT_THEME_CSS + '\n' + BASE_LAYOUT_CSS;
+      styleNode.textContent = isRebrand2026
+        ? BASE_LAYOUT_CSS
+        : LIGHT_THEME_CSS + '\n' + BASE_LAYOUT_CSS;
       container.appendChild(styleNode);
     }
 
@@ -1520,9 +1531,11 @@ export default function HtmlInline({ html }: Props) {
     executeScripts(bodyHost);
 
     // 5) Sincronitza el tema (clar/fosc) amb la classe `dark` del <html>.
+    // Només per a fitxes antigues — les del rebranding 2026 ja són clares
+    // per defecte i no necessiten conversió.
     function applyTheme() {
       const isDark = document.documentElement.classList.contains('dark');
-      container!.classList.toggle('ipol-light', !isDark);
+      container!.classList.toggle('ipol-light', !isRebrand2026 && !isDark);
     }
     applyTheme();
 
