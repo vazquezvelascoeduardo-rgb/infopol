@@ -583,6 +583,7 @@ const DICT: Record<Locale, Dict> = {
     'profile.danger.note': 'Te abrirá tu correo con un mensaje preparado para enviar al soporte. Procesaremos la baja en 1-3 días laborables.',
 
     'sidebar.home': 'Inicio',
+    'sidebar.academia': 'Academia',
     'sidebar.tests': 'Tests',
     'sidebar.tests.badge': 'Nuevo',
     'sidebar.tests.duePending': 'Tienes repasos pendientes',
@@ -1463,6 +1464,7 @@ const DICT: Record<Locale, Dict> = {
     'profile.danger.note': "T'obrirà el teu correu amb un missatge preparat per enviar al suport. Processarem la baixa en 1-3 dies feiners.",
 
     'sidebar.home': 'Inici',
+    'sidebar.academia': 'Acadèmia',
     'sidebar.tests': 'Tests',
     'sidebar.tests.badge': 'Nou',
     'sidebar.tests.duePending': 'Tens repassos pendents',

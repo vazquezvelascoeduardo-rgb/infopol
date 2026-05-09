@@ -33,12 +33,13 @@ function IconHome() {
     </svg>
   );
 }
-function IconTests() {
+function IconAcademia() {
+  // Birret de graduació (mortarboard).
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M6 3h9l4 4v14H6z" />
-      <path d="M14 3v5h5" />
-      <path d="m9 14 2 2 4-4" />
+      <path d="M22 10 12 5 2 10l10 5 10-5z" />
+      <path d="M6 12v5c3 3 9 3 12 0v-5" />
+      <path d="M22 10v5" />
     </svg>
   );
 }
@@ -273,11 +274,11 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
             </Link>
 
             <Link
-              to="/test"
-              className={`sb-item ${isActive('/test') ? 'active' : ''}`}
+              to="/academia"
+              className={`sb-item ${isActive('/academia', '/policia-local') ? 'active' : ''}`}
             >
-              <span className="sb-icon ic-bg-blue"><IconTests /></span>
-              <span>{t('sidebar.tests')}</span>
+              <span className="sb-icon ic-bg-blue"><IconAcademia /></span>
+              <span>{t('sidebar.academia')}</span>
               {failures.due > 0 ? (
                 <span className="sb-badge" title={t('sidebar.tests.duePending')}>
                   🔁 {failures.due}
