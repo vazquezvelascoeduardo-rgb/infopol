@@ -2,7 +2,7 @@
 // sola pagina amb React state. URL parametritzada per :slug; si slug
 // es 'tot' fem mescla de tots els temes.
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import { TOPICS, getAllQuestions, getTopic } from '../../data/tests';
 import type { TestQuestion } from '../../data/tests/types';
 import {
@@ -54,10 +54,18 @@ const REPAS_SLUG = 'repas';
 export default function TestSession() {
   const { slug = '' } = useParams();
   const { t } = useT();
+  const location = useLocation();
 
   const isAll = slug === ALL_TOPICS_SLUG;
   const isRepas = slug === REPAS_SLUG;
   const topic = (isAll || isRepas) ? null : getTopic(slug);
+
+  // Detecta si venim del hub de Mossos (/mossos/:slug) o de Policia Local
+  // (/policia-local/:slug) per generar correctament les molles de pa i
+  // els enllaços "tornar al llistat".
+  const isMossosRoute = location.pathname.startsWith('/mossos');
+  const corpsRoot = isMossosRoute ? '/mossos' : '/policia-local';
+  const corpsLabel = isMossosRoute ? t('mossos.title') : t('test.list.title');
 
   // Pool de preguntes per a aquest tema (o tots, o repàs).
   const pool: TestQuestion[] = useMemo(() => {
@@ -89,7 +97,7 @@ export default function TestSession() {
     return (
       <div className="mx-auto w-full max-w-3xl px-4 py-6">
         <p className="text-slate-600 dark:text-slate-400">{t('test.notFound')}</p>
-        <Link to="/policia-local" className="text-blue-600 dark:text-blue-400 underline">
+        <Link to={corpsRoot} className="text-blue-600 dark:text-blue-400 underline">
           {t('test.backToList')}
         </Link>
       </div>
@@ -325,7 +333,7 @@ export default function TestSession() {
       <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3">
         <Link to="/" className="hover:underline">{t('nav.home')}</Link>
         <span className="mx-2" aria-hidden>/</span>
-        <Link to="/policia-local" className="hover:underline">{t('test.list.title')}</Link>
+        <Link to={corpsRoot} className="hover:underline">{corpsLabel}</Link>
         <span className="mx-2" aria-hidden>/</span>
         <span className="text-slate-700 dark:text-slate-200 truncate">{title}</span>
       </nav>
@@ -970,7 +978,7 @@ function ResultPhase({
           🔁 {t('test.result.another')}
         </button>
         <Link
-          to="/policia-local"
+          to={corpsRoot}
           className="rounded-xl border px-4 py-2.5 text-sm font-semibold
             border-slate-200 bg-white text-slate-700 hover:bg-slate-50
             dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"

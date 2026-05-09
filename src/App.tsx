@@ -53,6 +53,7 @@ const CulturaGeneral = lazy(() => import('./pages/CulturaGeneral'));
 const CulturaGeneralSection = lazy(() => import('./pages/CulturaGeneralSection'));
 const Login = lazy(() => import('./pages/Login'));
 const Profile = lazy(() => import('./pages/Profile'));
+const MossosList = lazy(() => import('./pages/mossos/MossosList'));
 
 // Slugs públics dins /leyes — l'única fitxa accessible sense sessió és
 // el catàleg SCT 2026. Si en un futur en cal afegir d'altres, ampliar
@@ -192,6 +193,22 @@ export default function App() {
             element={
               <RequireAuth>
                 <Profile />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/mossos"
+            element={
+              <RequireAuth>
+                <MossosList />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/mossos/:slug"
+            element={
+              <RequireAuth>
+                <TestSession />
               </RequireAuth>
             }
           />

@@ -79,7 +79,7 @@ export function getAllQuestions(): TaggedQuestion[] {
 
 /** Filtre per categoria. */
 export function getTopicsByCategory(
-  category: 'temari' | 'cultura' | 'municipi',
+  category: 'temari' | 'cultura' | 'municipi' | 'mossos',
 ): TestTopic[] {
   return TOPICS.filter((t) => (t.category ?? 'temari') === category);
 }
@@ -94,4 +94,22 @@ export function getMunicipiGroups(): { municipi: string; topics: TestTopic[] }[]
     groups.get(key)!.push(t);
   }
   return Array.from(groups, ([municipi, topics]) => ({ municipi, topics }));
+}
+
+/** Temes de Mossos d'Esquadra agrupats per àmbit (A, B, C, D, E). */
+export function getMossosByAmbit(): { ambit: string; topics: TestTopic[] }[] {
+  const groups = new Map<string, TestTopic[]>();
+  for (const t of TOPICS) {
+    if (t.category !== 'mossos') continue;
+    const key = t.ambit ?? '?';
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key)!.push(t);
+  }
+  // Ordena per subtema dins de cada àmbit
+  for (const topics of groups.values()) {
+    topics.sort((a, b) => (a.subtema ?? 0) - (b.subtema ?? 0));
+  }
+  return Array.from(groups, ([ambit, topics]) => ({ ambit, topics })).sort((a, b) =>
+    a.ambit.localeCompare(b.ambit),
+  );
 }

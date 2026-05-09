@@ -34,15 +34,23 @@ export type TestTopic = {
   /** Llista de preguntes. */
   questions: TestQuestion[];
   /**
-   * Categoria del tema. 'temari' (default): forma part del temari oficial.
-   * 'cultura': cultura general (es separa visualment i no entra al pool
-   * combinat 'Tots els temes'). 'municipi': test específic d'un municipi
-   * (es separa visualment i tampoc entra al pool combinat).
+   * Categoria del tema. 'temari' (default): forma part del temari oficial
+   * de Policia Local. 'cultura': cultura general (es separa visualment).
+   * 'municipi': test específic d'un municipi. 'mossos': temari específic
+   * de Mossos d'Esquadra (no entra al pool combinat de Policia Local).
    */
-  category?: 'temari' | 'cultura' | 'municipi';
+  category?: 'temari' | 'cultura' | 'municipi' | 'mossos';
   /**
    * Si category='municipi', nom del municipi al qual pertany (ex. 'Terrassa').
-   * Permet agrupar diversos tests sota un mateix municipi.
    */
   municipi?: string;
+  /**
+   * Si category='mossos', àmbit del temari oficial al qual pertany (A, B, C, D, E).
+   * Àmbit A = Coneixements de l'entorn; B = Institucional; C = Seguretat...
+   */
+  ambit?: 'A' | 'B' | 'C' | 'D' | 'E';
+  /**
+   * Si category='mossos', subtema dins l'àmbit (1, 2, 3...). Ex.: A.1, A.2.
+   */
+  subtema?: number;
 };

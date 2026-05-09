@@ -258,7 +258,7 @@ export default function Retos() {
                 const node = (
                   <Link
                     key={`n-${i}`}
-                    to={`/test/${n.slug}`}
+                    to={`/policia-local/${n.slug}`}
                     className="path-row"
                     title={`${n.title} · ${n.pct}%`}
                   >

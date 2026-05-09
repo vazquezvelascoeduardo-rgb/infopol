@@ -383,7 +383,7 @@ function TestCard({ topic }: { topic: typeof TOPICS[number] }) {
 
   return (
     <Link
-      to={`/test/${topic.slug}`}
+      to={`/policia-local/${topic.slug}`}
       className="tcard"
       style={{
         ['--accent' as never]: colors.c,
@@ -431,7 +431,7 @@ function RecentRow({
   const when = formatRelative(lastAt, t);
 
   return (
-    <Link to={`/test/${slug}`} className="rec-row">
+    <Link to={`/policia-local/${slug}`} className="rec-row">
       <span className={`score-circ ${tone}`}>{score10}</span>
       <div className="min-w-0">
         <div className="rttl truncate">{topic.title}</div>

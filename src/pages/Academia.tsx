@@ -146,7 +146,7 @@ export default function Academia() {
           </span>
         </Link>
 
-        <Link to="/policia-local" className="route mossos">
+        <Link to="/mossos" className="route mossos">
           <span className="ribbon">
             PSOE · {temariCount} {t('academia.topics')}
           </span>
@@ -230,7 +230,7 @@ export default function Academia() {
           </div>
           <div className="row-actions">
             {cont ? (
-              <Link to={`/test/${cont.topic.slug}`} className="btn btn-primary">
+              <Link to={`/policia-local/${cont.topic.slug}`} className="btn btn-primary">
                 ▶ {t('academia.continue.cta')}
               </Link>
             ) : (
