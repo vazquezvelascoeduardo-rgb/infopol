@@ -225,6 +225,13 @@
   .ct-modal-ctx { font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
     letter-spacing: 0.14em; text-transform: uppercase; color: var(--terracotta); font-weight: 700; }
   .ct-modal-title { font-size: 17px; font-weight: 700; line-height: 1.35; margin: 0; }
+  .ct-mod-official {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: #ECF6EE; color: #2A6E3A; border: 1px solid #C7E2C9;
+    padding: 4px 10px; border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+    font-weight: 700; letter-spacing: 0.04em; align-self: flex-start;
+  }
   .ct-modal-attrs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
   @media (min-width: 480px) { .ct-modal-attrs { grid-template-columns: repeat(3, 1fr); } }
   .ct-attr { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
@@ -1037,6 +1044,10 @@
     <div class="ct-modal-body">
       <div class="ct-modal-ctx" id="ct-mod-ctx"></div>
       <h2 class="ct-modal-title" id="ct-mod-title">—</h2>
+      <span id="ct-mod-official" class="ct-mod-official" style="display:none;">
+        <span aria-hidden>✓</span>
+        Concepte oficial · Nomenclàtor SCT 2026
+      </span>
       <div class="ct-modal-attrs" id="ct-mod-attrs"></div>
       <section class="ct-modal-boletin">
         <div class="head">
@@ -1094,12 +1105,60 @@
   function clean(s) { return (s || '').replace(/\s+/g, ' ').trim(); }
   function isNumericFine(s) { return /^\d/.test(String(s || '').replace(/\./g, '')); }
 
+  // Mapeig panel-id → law-id intern (mateix que el nomenclàtor del React).
+  const PANEL_TO_LAW = {
+    'p-lsv': 'lsv', 'p-rgc': 'rgc', 'p-cond': 'rgcond',
+    'p-rgv': 'rgv', 'p-seg': 'seg', 'p-cp': 'cp'
+  };
+  // Cerca al nomenclàtor exposat pel React (`window.__infopolNomenclator`)
+  // el concepte oficial per a un parell (lawId, article).
+  function findOfficial(panelId, article, rowText) {
+    if (!article) return null;
+    const law = PANEL_TO_LAW[panelId];
+    if (!law) return null;
+    const idx = (typeof window !== 'undefined') && window.__infopolNomenclator;
+    if (!idx) return null;
+    const norm = String(article).replace(/[^\w.]/g, '').toLowerCase();
+    const candidates = idx[law + ':' + norm];
+    if (!candidates || !candidates.length) return null;
+    if (candidates.length === 1) return candidates[0];
+    // Múltiples candidats: triem el de més paraules de ≥4 lletres en comú
+    // amb el text de la fila.
+    if (rowText) {
+      const target = rowText.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+      const words = new Set();
+      target.split(/\W+/).forEach(function(w) { if (w.length >= 4) words.add(w); });
+      var best = candidates[0], bestScore = -1;
+      for (var i = 0; i < candidates.length; i++) {
+        var c = candidates[i];
+        var t = c.concept.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+        var s = 0;
+        words.forEach(function(w) { if (t.indexOf(w) >= 0) s++; });
+        if (s > bestScore) { bestScore = s; best = c; }
+      }
+      return best;
+    }
+    return candidates[0];
+  }
+
   function openModal(detail) {
     const law = LAW_LABELS[detail.panelId] || { short: '—', full: '' };
     document.getElementById('ct-mod-law').textContent = law.short;
     document.getElementById('ct-mod-lawfull').textContent = law.full;
     document.getElementById('ct-mod-ctx').textContent = detail.ctx || '';
-    document.getElementById('ct-mod-title').textContent = detail.concepte;
+    // Mira el nomenclàtor per al concepte oficial; si no en troba, usa
+    // el text literal de la fila.
+    var officialEntry = findOfficial(detail.panelId, detail.article, detail.concepte);
+    var titleText = officialEntry ? officialEntry.concept : detail.concepte;
+    document.getElementById('ct-mod-title').textContent = titleText;
+    var officialBadge = document.getElementById('ct-mod-official');
+    if (officialBadge) {
+      if (officialEntry) {
+        officialBadge.style.display = 'inline-flex';
+      } else {
+        officialBadge.style.display = 'none';
+      }
+    }
 
     const attrs = document.getElementById('ct-mod-attrs');
     attrs.innerHTML = '';
@@ -1128,8 +1187,9 @@
     }
     if (detail.points) addAttr('Punts', '– ' + detail.points, 'red');
 
-    // Format del concepte per al butlletí.
-    const parts = [detail.concepte];
+    // Format del concepte per al butlletí. Si tenim concepte oficial
+    // del nomenclàtor SCT, l'usem com a base; si no, el de la fila.
+    const parts = [titleText];
     const lawRef = detail.article && detail.article !== '—'
       ? law.short + ' art. ' + detail.article : law.short;
     parts.push('(' + lawRef + ')');

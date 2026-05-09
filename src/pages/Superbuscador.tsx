@@ -18,6 +18,7 @@ import {
   type CatalegRow,
   type Severity,
 } from '../lib/cataleg-parser';
+import { findOfficialConcept } from '../lib/cataleg-nomenclator';
 import { useT } from '../lib/i18n';
 
 export default function Superbuscador() {
@@ -395,11 +396,21 @@ function escapeHtml(s: string): string {
 // S'obre quan l'usuari clica una fila. Mostra tota la informació
 // estructurada + un text pre-format per copiar al butlletí.
 
+// Cerca el concepte oficial del nomenclàtor (Operativa › Trànsit) per
+// a aquesta fila. Si en troba, retorna el text canònic del butlletí;
+// si no, retorna el concepte literal de la fila.
+function pickOfficialConcept(row: CatalegRow): { text: string; official: boolean } {
+  const found = findOfficialConcept(row.lawId, row.article, row.concepte);
+  if (found) return { text: found.concept, official: true };
+  return { text: row.concepte, official: false };
+}
+
 function buildBoletinText(row: CatalegRow): string {
-  // Format orientat a butlletí policial: concepte + article + llei +
-  // gravetat + multa (€) + DTE (50%) + punts. Línia única i clara.
+  // Format orientat a butlletí policial: concepte oficial (nomenclàtor
+  // SCT 2026) + article + llei + gravetat + multa (€) + DTE (50%) +
+  // punts. Línia única i clara.
   const parts: string[] = [];
-  parts.push(row.concepte);
+  parts.push(pickOfficialConcept(row).text);
   const lawRef =
     row.article && row.article !== '—'
       ? `${row.lawShort} art. ${row.article}`
@@ -445,6 +456,7 @@ function DetailDrawer({ row, onClose }: { row: CatalegRow | null; onClose: () =>
   if (!row) return null;
   const color = getLawColor(row.lawId);
   const ctx = [row.sectionTitle, row.subgroup].filter(Boolean).join(' · ');
+  const official = pickOfficialConcept(row);
   const boletinText = buildBoletinText(row);
 
   async function copyText() {
@@ -515,7 +527,15 @@ function DetailDrawer({ row, onClose }: { row: CatalegRow | null; onClose: () =>
               {ctx}
             </div>
           )}
-          <h2 className="text-lg sm:text-xl font-bold leading-snug">{row.concepte}</h2>
+          <h2 className="text-lg sm:text-xl font-bold leading-snug">{official.text}</h2>
+          {official.official && (
+            <p className="text-[11px] inline-flex items-center gap-1.5 rounded-md px-2 py-1
+              bg-emerald-50 text-emerald-800 border border-emerald-200
+              dark:bg-emerald-400/10 dark:text-emerald-200 dark:border-emerald-400/30">
+              <span aria-hidden>✓</span>
+              {t('superbuscador.detail.official') || 'Concepte oficial · Nomenclàtor SCT 2026'}
+            </p>
+          )}
 
           {/* Grid d'atributs: article / gravetat / multa / DTE / punts */}
           <dl className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-sm">
