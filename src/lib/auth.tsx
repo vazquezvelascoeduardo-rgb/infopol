@@ -57,6 +57,8 @@ export type AuthActions = {
   ) => Promise<{ needsEmailConfirmation: boolean }>;
   /** Envia un correu amb un enllaç per restablir la contrasenya. */
   requestPasswordReset: (email: string) => Promise<void>;
+  /** Canvia la contrasenya de l'usuari amb sessió activa. */
+  updatePassword: (newPassword: string) => Promise<void>;
   signOut: () => Promise<void>;
   /** Recarrega profile + progress des del servidor. */
   refresh: () => Promise<void>;
@@ -181,6 +183,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         });
         if (error) throw error;
       },
+      updatePassword: async (newPassword) => {
+        if (!supabase) {
+          throw new Error('Backend no configurat.');
+        }
+        const { error } = await supabase.auth.updateUser({
+          password: newPassword,
+        });
+        if (error) throw error;
+      },
       signOut: async () => {
         if (!supabase) return;
         await supabase.auth.signOut();
@@ -209,6 +220,7 @@ export function useAuth(): AuthContextValue {
       signInWithPassword: async () => {},
       signUpWithPassword: async () => ({ needsEmailConfirmation: false }),
       requestPasswordReset: async () => {},
+      updatePassword: async () => {},
       signOut: async () => {},
       refresh: async () => {},
     };
