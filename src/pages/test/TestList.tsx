@@ -151,6 +151,18 @@ export default function TestList() {
         </div>
       </header>
 
+      {/* JUMP BUTTONS — accés ràpid a Tests i Temari complet */}
+      <nav className="pl-jump" aria-label={t('policiaLocal.jump.aria')}>
+        <a href="#pl-tests" className="pl-jump-btn">
+          <span aria-hidden>📝</span>
+          <span>{t('policiaLocal.jump.tests')}</span>
+        </a>
+        <a href="#pl-temari" className="pl-jump-btn">
+          <span aria-hidden>📚</span>
+          <span>{t('policiaLocal.jump.temari')}</span>
+        </a>
+      </nav>
+
       {/* STATS PERSONALS */}
       <section className="my-stats">
         <div className="my-stat acc">
@@ -180,8 +192,9 @@ export default function TestList() {
 
       {/* CATEGORIES — al damunt, com demana l'usuari */}
       <div
+        id="pl-tests"
         className="section-head"
-        style={{ ['--accent' as never]: '#2F6BD8', marginTop: 24 } as React.CSSProperties}
+        style={{ ['--accent' as never]: '#2F6BD8', marginTop: 24, scrollMarginTop: 80 } as React.CSSProperties}
       >
         <span className="eyebrow">📚 {t('test.list.cat.eyebrow')}</span>
         <span className="rule" />
@@ -297,7 +310,7 @@ export default function TestList() {
       )}
 
       {/* TEMARI COMPLET — totes les lleis del temari de Policia Local. */}
-      <section className="pl-leyes">
+      <section id="pl-temari" className="pl-leyes" style={{ scrollMarginTop: 80 }}>
         <div
           className="section-head"
           style={{ ['--accent' as never]: '#9c7a1f', marginTop: 32 } as React.CSSProperties}

@@ -583,6 +583,9 @@ const DICT: Record<Locale, Dict> = {
     'profile.danger.note': 'Te abrirá tu correo con un mensaje preparado para enviar al soporte. Procesaremos la baja en 1-3 días laborables.',
     'policiaLocal.leyes.eyebrow': 'Temario completo',
     'policiaLocal.leyes.subtitle': 'Todas las leyes y normativas del temario de Policía Local. Pulsa cualquiera para ver las fichas y el contenido completo.',
+    'policiaLocal.jump.aria': 'Acceso rápido',
+    'policiaLocal.jump.tests': 'Tests',
+    'policiaLocal.jump.temari': 'Temario',
 
     'sidebar.home': 'Inicio',
     'sidebar.academia': 'Academia',
@@ -1466,6 +1469,9 @@ const DICT: Record<Locale, Dict> = {
     'profile.danger.note': "T'obrirà el teu correu amb un missatge preparat per enviar al suport. Processarem la baixa en 1-3 dies feiners.",
     'policiaLocal.leyes.eyebrow': 'Temari complet',
     'policiaLocal.leyes.subtitle': "Totes les lleis i normatives del temari de Policia Local. Clica en qualsevol per veure les fitxes i el contingut complet.",
+    'policiaLocal.jump.aria': 'Accés ràpid',
+    'policiaLocal.jump.tests': 'Tests',
+    'policiaLocal.jump.temari': 'Temari',
 
     'sidebar.home': 'Inici',
     'sidebar.academia': 'Acadèmia',

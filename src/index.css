@@ -71,6 +71,9 @@ html.dark {
   --line-2: rgba(242, 237, 227, 0.06);
 }
 
+html {
+  scroll-behavior: smooth;
+}
 html, body {
   margin: 0;
   padding: 0;
@@ -3342,6 +3345,37 @@ html[data-text-size="lg"] { font-size: 18px; }
   @media (max-width: 600px) {
     .test-grid { grid-template-columns: 1fr; }
     .my-stats { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ── Jump buttons (a dalt de /policia-local) ─────────────────── */
+  .pl-jump {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .pl-jump-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border: 1.5px solid var(--ink);
+    border-radius: 14px;
+    background: var(--paper);
+    color: var(--ink);
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    transition: background .12s, color .12s, transform .12s;
+  }
+  .pl-jump-btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+    transform: translateY(-1px);
+  }
+  @media (max-width: 480px) {
+    .pl-jump { grid-template-columns: 1fr; }
   }
 
   /* ── Temari complet (al final de /policia-local) ─────────────── */
