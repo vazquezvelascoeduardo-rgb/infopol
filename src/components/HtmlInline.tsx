@@ -139,9 +139,13 @@ const BASE_LAYOUT_CSS = `
     overflow-wrap: break-word !important;
     word-wrap: break-word !important;
   }
+  /* min-width: 0 evita que els grid items "exploten" l'amplada del
+     contenidor quan el seu contingut té min-content > track. És el
+     fix universal per al scroll horitzontal en CSS Grid + Flex. */
   .${SCOPE_CLASS} * {
-    max-width: 100%;
-    box-sizing: border-box;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
   }
   .${SCOPE_CLASS} .poster,
   .${SCOPE_CLASS} .wrapper {

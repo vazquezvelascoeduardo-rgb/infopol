@@ -80,6 +80,11 @@ html, body {
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* No permetem mai scroll horitzontal a la pàgina sencera. Si una
+     fitxa o un widget tenen contingut més ample que la viewport, han
+     de fer scroll horitzontal LOCALMENT (dins seu) — mai forçar la
+     pàgina a moure's lateralment. */
+  overflow-x: hidden;
 }
 
 ::selection { background: var(--terracotta); color: var(--white); }

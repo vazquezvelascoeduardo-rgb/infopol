@@ -182,6 +182,79 @@
     .barem-tbl th, .barem-tbl td { padding: 7px 4px; }
     .cat-search { grid-template-columns: 1fr; }
   }
+
+  /* Click-to-detail · les files es comporten com a botons. */
+  .tbl tbody tr, .alc-row, .ass-row { cursor: pointer; }
+  .tbl tbody tr:hover { background: #FFF8EC; }
+  .alc-row:hover, .ass-row:hover { background: #FFF8EC; }
+  .delicte-block .delicte-cells { cursor: pointer; border-radius: 8px; transition: background .12s; }
+  .delicte-block .delicte-cells:hover { background: rgba(242,107,31,0.05); }
+
+  /* Modal de detall */
+  .ct-modal-backdrop {
+    position: fixed; inset: 0; background: rgba(14,14,14,0.55);
+    backdrop-filter: blur(4px); z-index: 9999; display: none;
+    align-items: flex-end; justify-content: center;
+  }
+  @media (min-width: 640px) { .ct-modal-backdrop { align-items: center; } }
+  .ct-modal-backdrop.open { display: flex; }
+  .ct-modal {
+    background: var(--white); color: var(--ink);
+    width: 100%; max-width: 560px; max-height: 92vh;
+    overflow-y: auto; border-top: 4px solid var(--terracotta);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.25);
+  }
+  @media (min-width: 640px) { .ct-modal { border-radius: 16px; } }
+  .ct-modal-head {
+    position: sticky; top: 0; z-index: 1; background: var(--white);
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 16px; border-bottom: 1px solid var(--line);
+  }
+  .ct-modal-head .law {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700;
+    background: rgba(242,107,31,0.10); color: var(--terracotta);
+    padding: 3px 8px; border-radius: 6px;
+  }
+  .ct-modal-head .law-full { font-size: 12px; color: var(--text-3); flex: 1; min-width: 0;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ct-modal-head .close { background: none; border: none; cursor: pointer; padding: 4px;
+    color: var(--text-3); display: inline-flex; }
+  .ct-modal-head .close:hover { color: var(--ink); }
+  .ct-modal-body { padding: 16px; display: grid; gap: 14px; }
+  .ct-modal-ctx { font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--terracotta); font-weight: 700; }
+  .ct-modal-title { font-size: 17px; font-weight: 700; line-height: 1.35; margin: 0; }
+  .ct-modal-attrs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  @media (min-width: 480px) { .ct-modal-attrs { grid-template-columns: repeat(3, 1fr); } }
+  .ct-attr { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+  .ct-attr .lab { font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-3); font-weight: 700; }
+  .ct-attr .val { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; margin-top: 2px; }
+  .ct-attr.amber { background: #FFF6E5; border-color: #F0DDA0; color: #8A6512; }
+  .ct-attr.red { background: #FBEEEC; border-color: #F2C8C0; color: #B23A2A; }
+  .ct-attr.green { background: #ECF6EE; border-color: #C7E2C9; color: #2A6E3A; }
+  .ct-attr.blue { background: #EAF1FE; border-color: #C7D6F2; color: #1D3B8C; }
+  .ct-modal-boletin { background: rgba(242,107,31,0.06); border: 1px solid #F0CFA8;
+    border-radius: 12px; padding: 12px 14px; }
+  .ct-modal-boletin .head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+  .ct-modal-boletin .lab { font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--terracotta); font-weight: 800; }
+  .ct-modal-boletin .copy {
+    font-family: inherit; font-weight: 700; font-size: 12px;
+    background: var(--white); color: var(--terracotta);
+    border: 1px solid #F0CFA8; padding: 4px 10px; border-radius: 8px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .ct-modal-boletin .copy:hover { background: rgba(242,107,31,0.08); }
+  .ct-modal-boletin pre {
+    font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.5;
+    color: var(--ink); margin: 0; white-space: pre-wrap; word-wrap: break-word;
+  }
+  .ct-modal-foot {
+    font-size: 11px; color: var(--text-3);
+    padding: 0 16px 16px;
+  }
 </style>
 </head>
 <body data-fitxa-style="rebrand-2026">
@@ -951,6 +1024,35 @@
     </div>
   </section>
 
+<!-- Modal de detall (es popula via JS en clicar una fila/card). -->
+<div class="ct-modal-backdrop" id="ct-modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="ct-modal" role="document">
+    <div class="ct-modal-head">
+      <span class="law" id="ct-mod-law">—</span>
+      <span class="law-full" id="ct-mod-lawfull">—</span>
+      <button type="button" class="close" id="ct-mod-close" aria-label="Tancar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="ct-modal-body">
+      <div class="ct-modal-ctx" id="ct-mod-ctx"></div>
+      <h2 class="ct-modal-title" id="ct-mod-title">—</h2>
+      <div class="ct-modal-attrs" id="ct-mod-attrs"></div>
+      <section class="ct-modal-boletin">
+        <div class="head">
+          <span class="lab">Concepte per al butlletí</span>
+          <button type="button" class="copy" id="ct-mod-copy">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span id="ct-mod-copy-label">Copiar</span>
+          </button>
+        </div>
+        <pre id="ct-mod-boletin"></pre>
+      </section>
+    </div>
+    <div class="ct-modal-foot">Verifica sempre l'import i la classificació al BOE/DOGC abans d'emetre la denúncia.</div>
+  </div>
+</div>
+
 </div>
 
 <script>
@@ -976,6 +1078,237 @@
   }
   if (q) q.addEventListener('input', applyFilter);
   if (go) go.addEventListener('click', applyFilter);
+
+  // ── Click-to-detail ──────────────────────────────────────────
+  // Mapeig dels panels (id "p-XX") a etiquetes humanes per al modal.
+  const LAW_LABELS = {
+    'p-lsv':  { short: 'LSV',      full: 'Llei de Seguretat Vial (RDL 6/2015)' },
+    'p-rgc':  { short: 'RGC',      full: 'Reglament General de Circulació (RD 1428/2003)' },
+    'p-cond': { short: 'RG Cond.', full: 'Reglament General de Conductors (RD 818/2009)' },
+    'p-rgv':  { short: 'RGV',      full: 'Reglament General de Vehicles (RD 2822/1998)' },
+    'p-seg':  { short: 'Asseg.',   full: 'Assegurança obligatòria — RDL 8/2004' },
+    'p-bar':  { short: 'Barems',   full: 'Barems sancionadors (velocitat / alcoholèmia)' },
+    'p-cp':   { short: 'CP',       full: 'Codi Penal · delictes contra la seguretat viària' }
+  };
+
+  function clean(s) { return (s || '').replace(/\s+/g, ' ').trim(); }
+  function isNumericFine(s) { return /^\d/.test(String(s || '').replace(/\./g, '')); }
+
+  function openModal(detail) {
+    const law = LAW_LABELS[detail.panelId] || { short: '—', full: '' };
+    document.getElementById('ct-mod-law').textContent = law.short;
+    document.getElementById('ct-mod-lawfull').textContent = law.full;
+    document.getElementById('ct-mod-ctx').textContent = detail.ctx || '';
+    document.getElementById('ct-mod-title').textContent = detail.concepte;
+
+    const attrs = document.getElementById('ct-mod-attrs');
+    attrs.innerHTML = '';
+    function addAttr(label, value, tone) {
+      if (!value) return;
+      const div = document.createElement('div');
+      div.className = 'ct-attr ' + (tone || '');
+      div.innerHTML = '<div class="lab"></div><div class="val"></div>';
+      div.querySelector('.lab').textContent = label;
+      div.querySelector('.val').textContent = value;
+      attrs.appendChild(div);
+    }
+    if (detail.article) addAttr('Article', '§ ' + detail.article, 'amber');
+    if (detail.severity) {
+      const sevLab = detail.severity === 'MG' ? 'Molt greu'
+        : detail.severity === 'G' ? 'Greu' : 'Lleu';
+      const tone = detail.severity === 'MG' ? 'red' : detail.severity === 'G' ? 'amber' : 'blue';
+      addAttr('Gravetat', sevLab, tone);
+    }
+    if (detail.fine) {
+      const eur = isNumericFine(detail.fine) ? detail.fine + ' €' : detail.fine;
+      addAttr('Multa', eur, 'green');
+    }
+    if (detail.dte && detail.dte !== '—' && isNumericFine(detail.dte)) {
+      addAttr('DTE (50%)', detail.dte + ' €', 'green');
+    }
+    if (detail.points) addAttr('Punts', '– ' + detail.points, 'red');
+
+    // Format del concepte per al butlletí.
+    const parts = [detail.concepte];
+    const lawRef = detail.article && detail.article !== '—'
+      ? law.short + ' art. ' + detail.article : law.short;
+    parts.push('(' + lawRef + ')');
+    if (detail.severity) {
+      parts.push('— ' + (detail.severity === 'MG' ? 'Molt greu'
+        : detail.severity === 'G' ? 'Greu' : 'Lleu'));
+    }
+    if (detail.fine) {
+      const eur = isNumericFine(detail.fine) ? detail.fine + '€' : detail.fine;
+      parts.push('— Multa ' + eur);
+    }
+    if (detail.dte && isNumericFine(detail.dte)) parts.push('(DTE 50% ' + detail.dte + '€)');
+    if (detail.points) parts.push('— ' + detail.points + ' punts');
+    document.getElementById('ct-mod-boletin').textContent = parts.join(' ');
+
+    const back = document.getElementById('ct-modal');
+    back.classList.add('open');
+    back.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    const back = document.getElementById('ct-modal');
+    back.classList.remove('open');
+    back.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('ct-mod-close').addEventListener('click', closeModal);
+  document.getElementById('ct-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const back = document.getElementById('ct-modal');
+      if (back.classList.contains('open')) closeModal();
+    }
+  });
+
+  // Botó copiar al butlletí.
+  const copyBtn = document.getElementById('ct-mod-copy');
+  const copyLab = document.getElementById('ct-mod-copy-label');
+  copyBtn.addEventListener('click', function() {
+    const txt = document.getElementById('ct-mod-boletin').textContent;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(txt).then(function() {
+        copyLab.textContent = 'Copiat ✓';
+        setTimeout(function() { copyLab.textContent = 'Copiar'; }, 1800);
+      }).catch(function() {});
+    }
+  });
+
+  // Detector de gravetat per a una <tr>.
+  function sevFromRow(tr) {
+    const cls = tr.className || '';
+    if (/\brow-mg\b/.test(cls)) return 'MG';
+    if (/\brow-g\b/.test(cls)) return 'G';
+    if (/\brow-l\b/.test(cls)) return 'L';
+    if (tr.querySelector('.sev-mg')) return 'MG';
+    if (tr.querySelector('.sev-g')) return 'G';
+    if (tr.querySelector('.sev-l')) return 'L';
+    return null;
+  }
+
+  // Click sobre una fila de taula tbl: extreu concepte/article/multa/dte/punts.
+  document.querySelectorAll('.cat-panel .tbl tbody tr').forEach(function(tr) {
+    tr.addEventListener('click', function() {
+      const tds = tr.querySelectorAll('td');
+      if (tds.length < 2) return;
+      const panel = tr.closest('.cat-panel');
+      const sec = tr.closest('.sec');
+      const ctxBits = [];
+      if (sec) {
+        const head = sec.querySelector('.sec-head');
+        if (head) ctxBits.push(clean(head.textContent));
+      }
+      const fineCell = tds[3];
+      const finePill = fineCell && fineCell.querySelector('.eur-pill');
+      const ptsCell = tds[5];
+      const ptsBox = ptsCell && ptsCell.querySelector('.ptbox');
+      openModal({
+        panelId: panel ? panel.id : null,
+        ctx: ctxBits.join(' · '),
+        concepte: clean(tds[0].textContent),
+        article: clean(tds[1] && tds[1].textContent),
+        severity: sevFromRow(tr),
+        fine: clean(finePill ? finePill.textContent : (fineCell && fineCell.textContent)),
+        dte: clean(tds[4] && tds[4].textContent),
+        points: clean(ptsBox ? ptsBox.textContent : (ptsCell && ptsCell.textContent && ptsCell.textContent !== '—' ? ptsCell.textContent : ''))
+      });
+    });
+  });
+
+  // Click sobre una .alc-row (alcoholèmia).
+  document.querySelectorAll('.alc-row').forEach(function(row) {
+    row.addEventListener('click', function() {
+      const spans = row.querySelectorAll(':scope > span');
+      if (spans.length < 2) return;
+      const panel = row.closest('.cat-panel');
+      const card = row.closest('.alc-card');
+      const sec = row.closest('.sec');
+      const ctxBits = [];
+      if (sec) { const h = sec.querySelector('.sec-head'); if (h) ctxBits.push(clean(h.textContent)); }
+      if (card) { const t = card.querySelector('.alc-title'); if (t) ctxBits.push(clean(t.textContent)); }
+      const fineEl = spans[1];
+      const ptsText = spans[2] ? clean(spans[2].textContent) : '';
+      const heavy = fineEl && fineEl.classList.contains('heavy');
+      openModal({
+        panelId: panel ? panel.id : null,
+        ctx: ctxBits.join(' · '),
+        concepte: clean(spans[0].textContent),
+        severity: heavy ? 'MG' : 'G',
+        fine: clean(fineEl ? fineEl.textContent : ''),
+        points: ptsText && ptsText !== '—' ? ptsText : ''
+      });
+    });
+  });
+
+  // Click sobre una .ass-row (assegurança obligatòria).
+  document.querySelectorAll('.ass-row').forEach(function(row) {
+    row.addEventListener('click', function() {
+      const panel = row.closest('.cat-panel');
+      const sec = row.closest('.sec');
+      const ctxBits = [];
+      let article;
+      if (sec) {
+        const h = sec.querySelector('.sec-head');
+        if (h) {
+          ctxBits.push(clean(h.textContent));
+          const m = h.textContent.match(/art\.?\s*([\d.]+)/i);
+          if (m) article = m[1];
+        }
+      }
+      const strong = row.querySelector('strong');
+      const pills = row.querySelectorAll('.ass-meta .eur-pill');
+      const fineEl = pills[0], dteEl = pills[1];
+      const heavy = (fineEl && fineEl.classList.contains('heavy')) || row.classList.contains('heavy');
+      openModal({
+        panelId: panel ? panel.id : null,
+        ctx: ctxBits.join(' · '),
+        concepte: clean(strong ? strong.textContent : row.textContent),
+        article: article,
+        severity: heavy ? 'MG' : 'G',
+        fine: clean(fineEl ? fineEl.textContent : ''),
+        dte: clean(dteEl ? dteEl.textContent : '')
+      });
+    });
+  });
+
+  // Click sobre un sub-bloc .delicte-cells del Codi Penal.
+  document.querySelectorAll('.delicte-block .delicte-cells').forEach(function(cell) {
+    cell.addEventListener('click', function() {
+      const panel = cell.closest('.cat-panel');
+      const block = cell.closest('.delicte-block');
+      const ttl = block && block.querySelector('.delicte-head .ttl');
+      const ttlText = clean(ttl && ttl.textContent);
+      const m = ttlText.match(/art\.?\s*(\d+(?:\.\d+)?(?:\s*bis|\s*ter)?)/i);
+      const article = m ? m[1] : null;
+      // Severity del badge (sev-l/g/mg).
+      let severity = null;
+      const sevEl = block && block.querySelector('.delicte-head .sev');
+      if (sevEl) {
+        if (sevEl.classList.contains('sev-mg')) severity = 'MG';
+        else if (sevEl.classList.contains('sev-g')) severity = 'G';
+        else if (sevEl.classList.contains('sev-l')) severity = 'L';
+      }
+      const desc = cell.querySelector('.desc');
+      const penas = Array.prototype.map.call(cell.querySelectorAll('.penas .pena'),
+        function(p) { return clean(p.textContent); }).filter(Boolean);
+      const fine = penas.find(function(p) { return /multa/i.test(p); });
+      openModal({
+        panelId: panel ? panel.id : null,
+        ctx: ttlText,
+        concepte: clean(desc ? desc.textContent : cell.textContent),
+        article: article,
+        severity: severity,
+        fine: penas.length ? penas.join(' · ') : fine
+      });
+    });
+  });
 })();
 </script>
 </body>

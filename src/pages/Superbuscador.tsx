@@ -5,7 +5,10 @@
 // Estratègia: parseig de l'HTML del catàleg amb DOMParser (lazy, una
 // sola vegada, cache en memòria). Cerca multi-paraula amb normalització
 // d'accents.
-import { useDeferredValue, useMemo, useState } from 'react';
+//
+// En clicar una fila s'obre un drawer amb tota la informació + un text
+// pre-format que es pot copiar directament al butlletí.
+import { useDeferredValue, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   searchCataleg,
@@ -21,6 +24,7 @@ export default function Superbuscador() {
   const { t } = useT();
   const [q, setQ] = useState('');
   const dq = useDeferredValue(q);
+  const [selected, setSelected] = useState<CatalegRow | null>(null);
 
   const allRows = useMemo(() => getCatalegRows(), []);
   const results = useMemo(() => (dq.length >= 2 ? searchCataleg(dq) : []), [dq]);
@@ -155,11 +159,13 @@ export default function Superbuscador() {
 
           <div className="space-y-6">
             {grouped.map(([lawId, items]) => (
-              <LawSection key={lawId} lawId={lawId} items={items} q={dq} />
+              <LawSection key={lawId} lawId={lawId} items={items} q={dq} onSelect={setSelected} />
             ))}
           </div>
         </>
       )}
+
+      <DetailDrawer row={selected} onClose={() => setSelected(null)} />
     </div>
   );
 }
@@ -184,7 +190,17 @@ function EmptyState() {
   );
 }
 
-function LawSection({ lawId, items, q }: { lawId: string; items: CatalegRow[]; q: string }) {
+function LawSection({
+  lawId,
+  items,
+  q,
+  onSelect,
+}: {
+  lawId: string;
+  items: CatalegRow[];
+  q: string;
+  onSelect: (row: CatalegRow) => void;
+}) {
   const color = getLawColor(lawId);
   const lawShort = items[0].lawShort;
   const lawFull = items[0].lawFull;
@@ -207,22 +223,42 @@ function LawSection({ lawId, items, q }: { lawId: string; items: CatalegRow[]; q
       </div>
       <ul className="space-y-1.5">
         {items.map((r, i) => (
-          <ResultRow key={i} row={r} q={q} color={color} />
+          <ResultRow key={i} row={r} q={q} color={color} onSelect={onSelect} />
         ))}
       </ul>
     </section>
   );
 }
 
-function ResultRow({ row, q, color }: { row: CatalegRow; q: string; color: string }) {
+function ResultRow({
+  row,
+  q,
+  color,
+  onSelect,
+}: {
+  row: CatalegRow;
+  q: string;
+  color: string;
+  onSelect: (row: CatalegRow) => void;
+}) {
   // Compose context: section title + subgroup (when present)
   const ctx = [row.sectionTitle, row.subgroup].filter(Boolean).join(' · ');
   return (
     <li
+      role="button"
+      tabIndex={0}
+      onClick={() => onSelect(row)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onSelect(row);
+        }
+      }}
       className="grid grid-cols-1 sm:grid-cols-[1fr_auto_auto_auto_auto] gap-2 sm:gap-3 items-start
-        rounded-xl border p-3 transition
+        rounded-xl border p-3 cursor-pointer transition
         border-slate-200/80 bg-white
-        hover:border-slate-300 hover:shadow-[0_2px_8px_-2px_rgba(15,23,42,0.08)]
+        hover:border-purple-400 hover:shadow-[0_2px_8px_-2px_rgba(168,85,247,0.18)] active:scale-[0.998]
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/60
         dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-purple-400/40"
       style={{ borderLeftWidth: '4px', borderLeftColor: color }}
     >
@@ -353,4 +389,253 @@ function escapeHtml(s: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+// ── Drawer de detall ─────────────────────────────────────────────
+// S'obre quan l'usuari clica una fila. Mostra tota la informació
+// estructurada + un text pre-format per copiar al butlletí.
+
+function buildBoletinText(row: CatalegRow): string {
+  // Format orientat a butlletí policial: concepte + article + llei +
+  // gravetat + multa (€) + DTE (50%) + punts. Línia única i clara.
+  const parts: string[] = [];
+  parts.push(row.concepte);
+  const lawRef =
+    row.article && row.article !== '—'
+      ? `${row.lawShort} art. ${row.article}`
+      : row.lawShort;
+  parts.push(`(${lawRef})`);
+  if (row.severity) {
+    const sev = row.severity === 'MG' ? 'Molt greu' : row.severity === 'G' ? 'Greu' : 'Lleu';
+    parts.push(`— ${sev}`);
+  }
+  if (row.fine) {
+    const eur = isNumericFine(row.fine) ? `${row.fine}€` : row.fine;
+    parts.push(`— Multa ${eur}`);
+  }
+  if (row.dte && isNumericFine(row.dte)) parts.push(`(DTE 50% ${row.dte}€)`);
+  if (row.points) parts.push(`— ${row.points} punts`);
+  return parts.join(' ');
+}
+
+function DetailDrawer({ row, onClose }: { row: CatalegRow | null; onClose: () => void }) {
+  const { t } = useT();
+  const [copied, setCopied] = useState(false);
+
+  // Tanca amb Escape + bloqueja l'scroll del body mentre està oberta.
+  useEffect(() => {
+    if (!row) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [row, onClose]);
+
+  // Reinicia l'estat "copiat" quan canviem de fila.
+  useEffect(() => {
+    setCopied(false);
+  }, [row]);
+
+  if (!row) return null;
+  const color = getLawColor(row.lawId);
+  const ctx = [row.sectionTitle, row.subgroup].filter(Boolean).join(' · ');
+  const boletinText = buildBoletinText(row);
+
+  async function copyText() {
+    try {
+      await navigator.clipboard.writeText(boletinText);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // Clipboard API pot fallar a iframes/insecure: ignorem en silenci.
+    }
+  }
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={row.concepte}
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center"
+    >
+      {/* Backdrop */}
+      <button
+        aria-label="Tancar"
+        onClick={onClose}
+        className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+      />
+
+      {/* Sheet */}
+      <div
+        className="relative w-full sm:max-w-xl max-h-[92vh] overflow-y-auto
+          rounded-t-2xl sm:rounded-2xl shadow-2xl
+          bg-white text-slate-900
+          dark:bg-[#0f1d34] dark:text-slate-100"
+        style={{ borderTop: `4px solid ${color}` }}
+      >
+        {/* Header */}
+        <div className="sticky top-0 z-10 flex items-center gap-2 px-4 sm:px-5 py-3 border-b
+          bg-white/95 backdrop-blur
+          border-slate-200
+          dark:bg-[#0f1d34]/95 dark:border-white/10">
+          <span
+            className="font-mono font-bold text-sm rounded-md px-2 py-0.5"
+            style={{ backgroundColor: color + '18', color }}
+          >
+            {row.lawShort}
+          </span>
+          <span className="text-xs opacity-70 truncate">{row.lawFull}</span>
+          <button
+            onClick={onClose}
+            className="ml-auto rounded-md p-1.5 -mr-1
+              text-slate-500 hover:bg-slate-100 hover:text-slate-900
+              dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white"
+            aria-label="Tancar"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+              <path d="m6 6 12 12M18 6 6 18" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Cos */}
+        <div className="px-4 sm:px-5 py-4 space-y-4">
+          {ctx && (
+            <div
+              className="text-[11px] uppercase tracking-wider font-semibold"
+              style={{ color }}
+            >
+              {ctx}
+            </div>
+          )}
+          <h2 className="text-lg sm:text-xl font-bold leading-snug">{row.concepte}</h2>
+
+          {/* Grid d'atributs: article / gravetat / multa / DTE / punts */}
+          <dl className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-sm">
+            {row.article && (
+              <Attribute
+                label={t('superbuscador.detail.article') || 'Article'}
+                value={`§ ${row.article}`}
+                tone="amber"
+              />
+            )}
+            {row.severity && (
+              <Attribute
+                label={t('superbuscador.detail.severity') || 'Gravetat'}
+                value={
+                  row.severity === 'MG'
+                    ? t('superbuscador.veryGrave')
+                    : row.severity === 'G'
+                    ? t('superbuscador.grave')
+                    : t('superbuscador.minor')
+                }
+                tone={row.severity === 'MG' ? 'red' : row.severity === 'G' ? 'amber' : 'blue'}
+              />
+            )}
+            {row.fine && (
+              <Attribute
+                label={t('superbuscador.detail.fine') || 'Multa'}
+                value={isNumericFine(row.fine) ? `${row.fine} €` : row.fine}
+                tone="emerald"
+              />
+            )}
+            {row.dte && row.dte !== '—' && isNumericFine(row.dte) && (
+              <Attribute
+                label={t('superbuscador.detail.dte') || 'DTE (50%)'}
+                value={`${row.dte} €`}
+                tone="emerald"
+              />
+            )}
+            {row.points && (
+              <Attribute
+                label={t('superbuscador.detail.points') || 'Punts'}
+                value={`– ${row.points}`}
+                tone="red"
+              />
+            )}
+          </dl>
+
+          {/* Bloc del butlletí */}
+          <section
+            className="rounded-xl border p-4
+              border-purple-200 bg-purple-50/40
+              dark:border-purple-400/30 dark:bg-purple-400/10"
+          >
+            <div className="flex items-center justify-between mb-2 gap-2">
+              <h3 className="text-[11px] uppercase tracking-[0.2em] font-bold text-purple-700 dark:text-purple-300">
+                {t('superbuscador.detail.boletinTitle') || 'Concepte per al butlletí'}
+              </h3>
+              <button
+                onClick={copyText}
+                className="inline-flex items-center gap-1.5 rounded-md border px-2 py-1 text-xs font-semibold
+                  border-purple-300 bg-white text-purple-800 hover:bg-purple-100
+                  dark:border-purple-400/40 dark:bg-purple-400/10 dark:text-purple-100 dark:hover:bg-purple-400/20"
+              >
+                {copied ? (
+                  <>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                    {t('superbuscador.detail.copied') || 'Copiat'}
+                  </>
+                ) : (
+                  <>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="9" y="9" width="11" height="11" rx="2" />
+                      <path d="M5 15V5a2 2 0 0 1 2-2h10" />
+                    </svg>
+                    {t('superbuscador.detail.copy') || 'Copiar'}
+                  </>
+                )}
+              </button>
+            </div>
+            <p className="text-sm leading-relaxed font-mono text-slate-800 dark:text-slate-100">
+              {boletinText}
+            </p>
+          </section>
+
+          <p className="text-[11px] text-slate-500 dark:text-slate-400">
+            {t('superbuscador.detail.disclaimer') ||
+              'Verifica sempre l\'import i la classificació al BOE/DOGC abans d\'emetre la denúncia.'}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Attribute({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: string;
+  tone: 'amber' | 'red' | 'emerald' | 'blue';
+}) {
+  const cls = {
+    amber:
+      'bg-amber-50 text-amber-900 border-amber-200 dark:bg-amber-400/10 dark:text-amber-200 dark:border-amber-400/30',
+    red:
+      'bg-red-50 text-red-900 border-red-200 dark:bg-red-400/10 dark:text-red-200 dark:border-red-400/30',
+    emerald:
+      'bg-emerald-50 text-emerald-900 border-emerald-200 dark:bg-emerald-400/10 dark:text-emerald-200 dark:border-emerald-400/30',
+    blue:
+      'bg-blue-50 text-blue-900 border-blue-200 dark:bg-blue-400/10 dark:text-blue-200 dark:border-blue-400/30',
+  }[tone];
+  return (
+    <div className={`rounded-lg border px-3 py-2 ${cls}`}>
+      <dt className="text-[10px] uppercase tracking-wider font-semibold opacity-75">{label}</dt>
+      <dd className="mt-0.5 font-mono font-bold text-sm">{value}</dd>
+    </div>
+  );
 }
