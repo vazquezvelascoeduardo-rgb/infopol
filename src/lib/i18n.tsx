@@ -304,6 +304,16 @@ const DICT: Record<Locale, Dict> = {
     'superbuscador.veryGrave': 'Muy grave',
     'superbuscador.grave': 'Grave',
     'superbuscador.minor': 'Leve',
+    'superbuscador.detail.article': 'Artículo',
+    'superbuscador.detail.severity': 'Gravedad',
+    'superbuscador.detail.fine': 'Multa',
+    'superbuscador.detail.dte': 'DTE (50%)',
+    'superbuscador.detail.points': 'Puntos',
+    'superbuscador.detail.boletinTitle': 'Concepto para el boletín',
+    'superbuscador.detail.copy': 'Copiar',
+    'superbuscador.detail.copied': 'Copiado',
+    'superbuscador.detail.official': 'Concepto oficial · Nomenclátor SCT 2026',
+    'superbuscador.detail.disclaimer': 'Verifica siempre el importe y la clasificación en el BOE/DOGC antes de emitir la denuncia.',
 
     // Leyes
     'leyes.badge': 'Temario · Normativa',
@@ -1107,6 +1117,16 @@ const DICT: Record<Locale, Dict> = {
     'superbuscador.veryGrave': 'Molt greu',
     'superbuscador.grave': 'Greu',
     'superbuscador.minor': 'Lleu',
+    'superbuscador.detail.article': 'Article',
+    'superbuscador.detail.severity': 'Gravetat',
+    'superbuscador.detail.fine': 'Multa',
+    'superbuscador.detail.dte': 'DTE (50%)',
+    'superbuscador.detail.points': 'Punts',
+    'superbuscador.detail.boletinTitle': 'Concepte per al butlletí',
+    'superbuscador.detail.copy': 'Copiar',
+    'superbuscador.detail.copied': 'Copiat',
+    'superbuscador.detail.official': 'Concepte oficial · Nomenclàtor SCT 2026',
+    'superbuscador.detail.disclaimer': "Verifica sempre l'import i la classificació al BOE/DOGC abans d'emetre la denúncia.",
 
     // Lleis
     'leyes.badge': 'Temari · Normativa',

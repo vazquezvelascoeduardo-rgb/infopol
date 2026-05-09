@@ -533,7 +533,7 @@ function DetailDrawer({ row, onClose }: { row: CatalegRow | null; onClose: () =>
               bg-emerald-50 text-emerald-800 border border-emerald-200
               dark:bg-emerald-400/10 dark:text-emerald-200 dark:border-emerald-400/30">
               <span aria-hidden>✓</span>
-              {t('superbuscador.detail.official') || 'Concepte oficial · Nomenclàtor SCT 2026'}
+              {t('superbuscador.detail.official')}
             </p>
           )}
 
@@ -541,14 +541,14 @@ function DetailDrawer({ row, onClose }: { row: CatalegRow | null; onClose: () =>
           <dl className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-sm">
             {row.article && (
               <Attribute
-                label={t('superbuscador.detail.article') || 'Article'}
+                label={t('superbuscador.detail.article')}
                 value={`§ ${row.article}`}
                 tone="amber"
               />
             )}
             {row.severity && (
               <Attribute
-                label={t('superbuscador.detail.severity') || 'Gravetat'}
+                label={t('superbuscador.detail.severity')}
                 value={
                   row.severity === 'MG'
                     ? t('superbuscador.veryGrave')
@@ -561,21 +561,21 @@ function DetailDrawer({ row, onClose }: { row: CatalegRow | null; onClose: () =>
             )}
             {row.fine && (
               <Attribute
-                label={t('superbuscador.detail.fine') || 'Multa'}
+                label={t('superbuscador.detail.fine')}
                 value={isNumericFine(row.fine) ? `${row.fine} €` : row.fine}
                 tone="emerald"
               />
             )}
             {row.dte && row.dte !== '—' && isNumericFine(row.dte) && (
               <Attribute
-                label={t('superbuscador.detail.dte') || 'DTE (50%)'}
+                label={t('superbuscador.detail.dte')}
                 value={`${row.dte} €`}
                 tone="emerald"
               />
             )}
             {row.points && (
               <Attribute
-                label={t('superbuscador.detail.points') || 'Punts'}
+                label={t('superbuscador.detail.points')}
                 value={`– ${row.points}`}
                 tone="red"
               />
@@ -590,7 +590,7 @@ function DetailDrawer({ row, onClose }: { row: CatalegRow | null; onClose: () =>
           >
             <div className="flex items-center justify-between mb-2 gap-2">
               <h3 className="text-[11px] uppercase tracking-[0.2em] font-bold text-purple-700 dark:text-purple-300">
-                {t('superbuscador.detail.boletinTitle') || 'Concepte per al butlletí'}
+                {t('superbuscador.detail.boletinTitle')}
               </h3>
               <button
                 onClick={copyText}
@@ -604,7 +604,7 @@ function DetailDrawer({ row, onClose }: { row: CatalegRow | null; onClose: () =>
                       stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
-                    {t('superbuscador.detail.copied') || 'Copiat'}
+                    {t('superbuscador.detail.copied')}
                   </>
                 ) : (
                   <>
@@ -613,7 +613,7 @@ function DetailDrawer({ row, onClose }: { row: CatalegRow | null; onClose: () =>
                       <rect x="9" y="9" width="11" height="11" rx="2" />
                       <path d="M5 15V5a2 2 0 0 1 2-2h10" />
                     </svg>
-                    {t('superbuscador.detail.copy') || 'Copiar'}
+                    {t('superbuscador.detail.copy')}
                   </>
                 )}
               </button>
@@ -624,8 +624,7 @@ function DetailDrawer({ row, onClose }: { row: CatalegRow | null; onClose: () =>
           </section>
 
           <p className="text-[11px] text-slate-500 dark:text-slate-400">
-            {t('superbuscador.detail.disclaimer') ||
-              'Verifica sempre l\'import i la classificació al BOE/DOGC abans d\'emetre la denúncia.'}
+            {t('superbuscador.detail.disclaimer')}
           </p>
         </div>
       </div>
