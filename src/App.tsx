@@ -1,13 +1,21 @@
 // Component arrel amb les rutes i el marc comú (header amb cerca i tema).
 //
-// Estructura de rutes:
-//   /                          → pantalla principal (Lleis vs Operativa)
-//   /leyes                     → tauler de mòduls (CE78, Codi penal, …)
-//   /leyes/s/:moduleSlug       → secció (llistat de fitxes del mòdul)
-//   /leyes/s/:moduleSlug/:slug → fitxa concreta
-//   /operativa                 → temes operatius (Trànsit, Seguretat ciutadana…)
-//   /operativa/trafico/*       → arbre interactiu de Trànsit
+// **Rutes públiques** (accessibles sense iniciar sessió):
+//   /                          → Home
+//   /operativa/*               → Operativa (Trànsit, Penal i subseccions)
+//   /superbuscador             → cercador del catàleg SCT
 //   /cerca                     → resultats de cerca
+//   /leyes/s/transit/cataleg-d-infraccions-de-transit-sct-2026 → catàleg SCT
+//   /calculadora-alcohol       → eina ràpida de campament
+//   /avis-legal, /privacitat   → pàgines legals
+//   /noticies, /cultura-general → contingut tipus "esquer" per atraure registres
+//   /login                     → inici de sessió / registre
+//
+// **Rutes privades** (requereixen sessió):
+//   /leyes (excepte el catàleg SCT)
+//   /recursos
+//   /academia, /retos, /test/*
+//   /perfil
 //
 // Lazy loading: les pàgines es carreguen sota demanda per reduir el
 // bundle inicial. Home s'inclou directament (és la primera vista).
@@ -15,6 +23,7 @@ import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import RequireAuth from './components/RequireAuth';
 
 const Leyes = lazy(() => import('./pages/Leyes'));
 const Section = lazy(() => import('./pages/Section'));
@@ -43,6 +52,14 @@ const NoticiaDetall = lazy(() => import('./pages/NoticiaDetall'));
 const CulturaGeneral = lazy(() => import('./pages/CulturaGeneral'));
 const CulturaGeneralSection = lazy(() => import('./pages/CulturaGeneralSection'));
 const Login = lazy(() => import('./pages/Login'));
+const Profile = lazy(() => import('./pages/Profile'));
+
+// Slugs públics dins /leyes — l'única fitxa accessible sense sessió és
+// el catàleg SCT 2026. Si en un futur en cal afegir d'altres, ampliar
+// aquesta llista.
+const PUBLIC_LEYES_CARDS: Array<{ moduleSlug: string; slug: string }> = [
+  { moduleSlug: 'transit', slug: 'cataleg-d-infraccions-de-transit-sct-2026' },
+];
 
 function PageFallback() {
   return (
@@ -57,10 +74,8 @@ export default function App() {
     <Layout>
       <Suspense fallback={<PageFallback />}>
         <Routes>
+          {/* === Públiques === */}
           <Route path="/" element={<Home />} />
-          <Route path="/leyes" element={<Leyes />} />
-          <Route path="/leyes/s/:moduleSlug" element={<Section />} />
-          <Route path="/leyes/s/:moduleSlug/:slug" element={<CardPage />} />
           <Route path="/operativa" element={<Operativa />} />
           <Route path="/operativa/trafico/*" element={<Trafico />} />
           <Route path="/operativa/penal/taula-actes" element={<PenalTaulaActes />} />
@@ -70,21 +85,107 @@ export default function App() {
           <Route path="/operativa/penal/*" element={<Penal />} />
           <Route path="/cerca" element={<SearchResults />} />
           <Route path="/superbuscador" element={<Superbuscador />} />
-          <Route path="/recursos" element={<Recursos />} />
           <Route path="/calculadora-alcohol" element={<CalculadoraAlcohol />} />
           <Route path="/avis-legal" element={<AvisLegal />} />
           <Route path="/privacitat" element={<Privacitat />} />
-          {/* Tests — no enllaçats des del menu (acces per URL directa). */}
-          <Route path="/academia" element={<Academia />} />
-          <Route path="/retos" element={<Retos />} />
-          <Route path="/test" element={<TestList />} />
-          <Route path="/test/logros" element={<Achievements />} />
-          <Route path="/test/:slug" element={<TestSession />} />
           <Route path="/noticies" element={<Noticies />} />
           <Route path="/noticies/:slug" element={<NoticiaDetall />} />
           <Route path="/cultura-general" element={<CulturaGeneral />} />
           <Route path="/cultura-general/:id" element={<CulturaGeneralSection />} />
           <Route path="/login" element={<Login />} />
+
+          {/* Excepcions públiques de /leyes — més específiques primer.
+              El catàleg SCT és accessible sense sessió. */}
+          {PUBLIC_LEYES_CARDS.map((c) => (
+            <Route
+              key={`${c.moduleSlug}/${c.slug}`}
+              path={`/leyes/s/${c.moduleSlug}/${c.slug}`}
+              element={<CardPage />}
+            />
+          ))}
+
+          {/* === Privades === */}
+          <Route
+            path="/leyes"
+            element={
+              <RequireAuth>
+                <Leyes />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/leyes/s/:moduleSlug"
+            element={
+              <RequireAuth>
+                <Section />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/leyes/s/:moduleSlug/:slug"
+            element={
+              <RequireAuth>
+                <CardPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/recursos"
+            element={
+              <RequireAuth>
+                <Recursos />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/academia"
+            element={
+              <RequireAuth>
+                <Academia />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/retos"
+            element={
+              <RequireAuth>
+                <Retos />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/test"
+            element={
+              <RequireAuth>
+                <TestList />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/test/logros"
+            element={
+              <RequireAuth>
+                <Achievements />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/test/:slug"
+            element={
+              <RequireAuth>
+                <TestSession />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/perfil"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
