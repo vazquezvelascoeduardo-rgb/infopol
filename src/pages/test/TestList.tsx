@@ -1,348 +1,408 @@
-// Llistat dels temes de test disponibles + dashboard global de stats.
+// Pàgina de Tests · rebranding 2026.
+// Disseny: hero fosc + stats personals + grid de categories AMUNT
+// (filtres + tcards de tots els temes existents) + modes destacats
+// (Test ràpid + Repàs intel·ligent — sense duels ni lliga) + últims
+// tests realitzats per l'usuari.
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getTopicsByCategory, getMunicipiGroups } from '../../data/tests';
+import { TOPICS, getMunicipiGroups, getTopicsByCategory } from '../../data/tests';
 import {
-  getTopicStats, globalAverage, levelFromBest, useGlobalStats, type Level,
+  globalAverage, getTopicStats, levelFromBest, useGlobalStats, type Level,
 } from '../../lib/testStats';
-import { ACHIEVEMENTS } from '../../lib/achievements';
 import { useFailuresCounts } from '../../lib/failures';
 import { useT } from '../../lib/i18n';
 
-const LEVEL_META: Record<Level, { icon: string; label: string; cls: string }> = {
-  none:         { icon: '·',  label: 'Sense empezar', cls: 'text-slate-400 dark:text-slate-500' },
-  novice:       { icon: '🌱', label: 'Principiant',   cls: 'text-emerald-600 dark:text-emerald-400' },
-  intermediate: { icon: '📘', label: 'Intermedi',     cls: 'text-blue-600 dark:text-blue-400' },
-  advanced:     { icon: '🎯', label: 'Avançat',       cls: 'text-amber-600 dark:text-amber-400' },
-  expert:       { icon: '🏆', label: 'Expert',        cls: 'text-purple-600 dark:text-purple-400' },
+type FilterId = 'all' | 'temari' | 'cultura' | 'municipi';
+
+// Mapeja l'accent Tailwind del topic ('from-red-500 to-rose-700') a un
+// color sòlid + un fons translúcid coordinat, per usar a `--accent` /
+// `--accent-bg` de la tcard del rebrand.
+function accentToColors(accent: string): { c: string; bg: string } {
+  const m = accent.match(/from-([a-z]+)-/);
+  const color = m ? m[1] : 'slate';
+  const map: Record<string, { c: string; bg: string }> = {
+    amber:   { c: '#9c7a1f', bg: '#FFF1D2' },
+    yellow:  { c: '#9c7a1f', bg: '#FFF8E0' },
+    red:     { c: '#C13030', bg: '#FFE4E4' },
+    rose:    { c: '#C13030', bg: '#FFE4E4' },
+    pink:    { c: '#C13030', bg: '#FFE4EE' },
+    orange:  { c: '#D9531A', bg: '#FFE4D2' },
+    blue:    { c: '#2F6BD8', bg: '#EAF1FE' },
+    sky:     { c: '#2F6BD8', bg: '#E0F2FE' },
+    indigo:  { c: '#4338CA', bg: '#E8E8FB' },
+    cyan:    { c: '#0891b2', bg: '#E0F7FA' },
+    teal:    { c: '#0F766E', bg: '#D7F0EC' },
+    emerald: { c: '#1f8a4d', bg: '#DFF7E9' },
+    green:   { c: '#1f8a4d', bg: '#DFF7E9' },
+    lime:    { c: '#5C8D17', bg: '#EAF6D8' },
+    purple:  { c: '#9747D6', bg: '#F5E9FF' },
+    violet:  { c: '#7C3AED', bg: '#EDE3FF' },
+    fuchsia: { c: '#C026D3', bg: '#FBE4FF' },
+    slate:   { c: '#475569', bg: '#E7ECF5' },
+    stone:   { c: '#57534E', bg: '#EFEAE3' },
+  };
+  return map[color] || { c: '#0E0E0E', bg: '#EFEAE3' };
+}
+
+const LEVEL_LVL: Record<Level, { lvl: 'easy' | 'medium' | 'hard' | 'none'; label: string }> = {
+  none:         { lvl: 'none',   label: 'Sin empezar' },
+  novice:       { lvl: 'easy',   label: 'Principiante' },
+  intermediate: { lvl: 'medium', label: 'Intermedio' },
+  advanced:     { lvl: 'hard',   label: 'Avanzado' },
+  expert:       { lvl: 'hard',   label: 'Experto' },
 };
 
 export default function TestList() {
   const { t } = useT();
+  const [filter, setFilter] = useState<FilterId>('all');
+  const stats = useGlobalStats();
+  const { attempts, avgGrade } = globalAverage(stats);
+  const failures = useFailuresCounts();
+
+  // Recompte per filtre.
+  const counts = useMemo(() => ({
+    all: TOPICS.length,
+    temari: getTopicsByCategory('temari').length,
+    cultura: getTopicsByCategory('cultura').length,
+    municipi: getTopicsByCategory('municipi').length,
+  }), []);
+
+  // Topics filtrats.
+  const visibleTopics = useMemo(() => {
+    if (filter === 'all') return TOPICS;
+    return TOPICS.filter((tt) => (tt.category ?? 'temari') === filter);
+  }, [filter]);
+
+  // Total de preguntes (per al ts-pill del hero).
+  const totalQuestions = useMemo(
+    () => TOPICS.reduce((acc, tt) => acc + tt.questions.length, 0),
+    [],
+  );
+
+  // Pseudo-stats personals (sense backend/auth, però amb dades reals
+  // del progrés guardades a localStorage).
+  const accuracy = (() => {
+    let c = 0, q = 0;
+    for (const k in stats.topics) {
+      c += stats.topics[k].totalCorrect;
+      q += stats.topics[k].totalQuestions;
+    }
+    return q > 0 ? Math.round((c / q) * 100) : 0;
+  })();
+  const completedTests = attempts;
+  // "Streak" simple: dies des del primer al darrer test, capat a 99.
+  const streak = (() => {
+    const ts = Object.values(stats.topics).map((s) => s.lastAt).filter(Boolean);
+    if (ts.length === 0) return 0;
+    const days = Math.round((Math.max(...ts) - Math.min(...ts)) / (1000 * 60 * 60 * 24)) + 1;
+    return Math.min(99, Math.max(1, days));
+  })();
+  // Nivell qualitatiu del millor tema.
+  const bestLevel = (() => {
+    let best: Level = 'none';
+    const order: Level[] = ['none', 'novice', 'intermediate', 'advanced', 'expert'];
+    for (const k in stats.topics) {
+      const lvl = levelFromBest(stats.topics[k].best);
+      if (order.indexOf(lvl) > order.indexOf(best)) best = lvl;
+    }
+    return best;
+  })();
+  const bestLevelMeta = LEVEL_LVL[bestLevel];
+
+  // Últims 4 tests (per lastAt desc).
+  const recents = useMemo(() => {
+    return Object.entries(stats.topics)
+      .map(([slug, s]) => ({ slug, ...s }))
+      .filter((x) => x.lastAt > 0)
+      .sort((a, b) => b.lastAt - a.lastAt)
+      .slice(0, 4);
+  }, [stats]);
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-6">
-      <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3">
-        <Link to="/" className="hover:underline">{t('nav.home')}</Link>
-        <span className="mx-2" aria-hidden>/</span>
-        <span className="text-slate-700 dark:text-slate-200">{t('test.list.title')}</span>
+    <div className="shell pb-10">
+      <nav className="crumbs">
+        <Link to="/">{t('nav.home')}</Link>
+        <span className="sep">/</span>
+        <span className="here">{t('test.list.title')}</span>
       </nav>
 
-      <header className="rounded-2xl border p-5 sm:p-6 mb-5
-        border-blue-200/70 bg-gradient-to-br from-blue-50/60 via-white to-indigo-50/40
-        dark:border-white/10 dark:bg-gradient-to-br dark:from-[#0e2244] dark:to-[#0f1d34]">
-        <div className="flex items-start gap-4">
-          <span aria-hidden className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-700 text-3xl text-white shadow-inner">
-            📝
+      {/* HERO */}
+      <header className="ts-hero">
+        <div className="eyebrow">📝 {t('test.list.hero.eyebrow')}</div>
+        <h1>
+          {t('test.list.hero.titleA')}<br />
+          {t('test.list.hero.titlePrefix')}{' '}
+          <em>{t('test.list.hero.titleAccent')}</em>
+        </h1>
+        <p className="lead">{t('test.list.hero.lead')}</p>
+        <div className="ts-stats">
+          <span className="ts-pill">
+            <b>{totalQuestions.toLocaleString('es-ES')}</b>{' '}
+            {t('test.list.hero.questions')}
           </span>
-          <div className="min-w-0">
-            <div className="text-[11px] uppercase tracking-[0.25em] font-semibold text-blue-700 dark:text-blue-400/90">
-              {t('test.list.badge')}
-            </div>
-            <h1 className="mt-1 text-2xl sm:text-3xl font-black tracking-tight">
-              {t('test.list.title')}
-            </h1>
-            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              {t('test.list.subtitle')}
-            </p>
-          </div>
+          <span className="ts-pill">
+            <b>{TOPICS.length}</b> {t('test.list.hero.topics')}
+          </span>
+          <span className="ts-pill">
+            <b>{getMunicipiGroups().length}</b> {t('test.list.hero.municipios')}
+          </span>
+          <span className="ts-pill"><b>2026</b> · {t('test.list.hero.updated')}</span>
         </div>
       </header>
 
-      {/* Dashboard d'estats globals */}
-      <Dashboard />
-
-      {/* HERO: REPÀS de fallades (només si hi ha fallades guardades) */}
-      <RepasCard />
-
-      {/* HERO: 'tots els temes' barrejats — acció destacada */}
-      <Link
-        to="/test/tot"
-        className="group relative block overflow-hidden rounded-2xl border p-5 sm:p-6 mb-6 transition
-          border-purple-300/70 bg-gradient-to-br from-purple-50 via-white to-fuchsia-50
-          hover:border-purple-400 hover:shadow-lg
-          dark:border-purple-400/30 dark:bg-gradient-to-br dark:from-[#1a0f2e] dark:via-[#150a26] dark:to-[#0a1628]
-          dark:hover:border-purple-400/60"
-      >
-        <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-purple-500 to-fuchsia-600" />
-        <div className="flex items-center gap-4">
-          <span aria-hidden className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-fuchsia-700 text-3xl text-white shadow-inner">
-            🎲
-          </span>
-          <div className="min-w-0 flex-1">
-            <div className="text-[10px] uppercase tracking-[0.25em] font-bold text-purple-700 dark:text-purple-300">
-              {t('test.list.allMixedBadge')}
-            </div>
-            <div className="font-bold text-lg sm:text-xl mt-0.5">{t('test.list.allMixed')}</div>
-            <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5">
-              {t('test.list.allMixedDescShort')}
-            </div>
+      {/* STATS PERSONALS */}
+      <section className="my-stats">
+        <div className="my-stat acc">
+          <span className="lab">⭐ {t('test.list.stat.accuracy')}</span>
+          <div className="num">{accuracy}<span className="u">%</span></div>
+        </div>
+        <div className="my-stat streak">
+          <span className="lab">🔥 {t('test.list.stat.streak')}</span>
+          <div className="num">
+            {streak}<span className="u">{t('test.list.stat.days')}</span>
           </div>
-          <span className="shrink-0 text-purple-700 dark:text-purple-300 text-sm font-semibold inline-flex items-center gap-1">
-            <span className="hidden sm:inline">{t('test.start')}</span>
-            <span aria-hidden className="transition group-hover:translate-x-1">→</span>
-          </span>
         </div>
-      </Link>
+        <div className="my-stat done">
+          <span className="lab">✅ {t('test.list.stat.completed')}</span>
+          <div className="num">
+            {completedTests}<span className="u">{t('test.list.stat.tests')}</span>
+          </div>
+        </div>
+        <div className="my-stat lvl">
+          <span className="lab">🏆 {t('test.list.stat.level')}</span>
+          <div className="num">
+            {avgGrade > 0 ? avgGrade.toFixed(1) : '–'}
+            <span className="u">{bestLevelMeta.label}</span>
+          </div>
+        </div>
+      </section>
 
-      {/* TEMARI OFICIAL */}
-      <SectionTitle icon="📚" label={t('test.list.section.temari')} />
-      <ul className="space-y-3 mb-6">
-        {getTopicsByCategory('temari').map((topic) => (
-          <TopicCard key={topic.slug} slug={topic.slug} icon={topic.icon}
-            accent={topic.accent} title={topic.title}
-            description={topic.description} />
+      {/* CATEGORIES — al damunt, com demana l'usuari */}
+      <div
+        className="section-head"
+        style={{ ['--accent' as never]: '#2F6BD8', marginTop: 24 } as React.CSSProperties}
+      >
+        <span className="eyebrow">📚 {t('test.list.cat.eyebrow')}</span>
+        <span className="rule" />
+      </div>
+
+      <div className="cat-filters" role="tablist">
+        <FilterChip
+          active={filter === 'all'}
+          onClick={() => setFilter('all')}
+          label={t('test.list.cat.all')}
+          n={counts.all}
+        />
+        <FilterChip
+          active={filter === 'temari'}
+          onClick={() => setFilter('temari')}
+          label={t('test.list.section.temari')}
+          n={counts.temari}
+        />
+        {counts.cultura > 0 && (
+          <FilterChip
+            active={filter === 'cultura'}
+            onClick={() => setFilter('cultura')}
+            label={t('test.list.section.cultura')}
+            n={counts.cultura}
+          />
+        )}
+        {counts.municipi > 0 && (
+          <FilterChip
+            active={filter === 'municipi'}
+            onClick={() => setFilter('municipi')}
+            label={t('test.list.section.municipi')}
+            n={counts.municipi}
+          />
+        )}
+      </div>
+
+      <section className="test-grid">
+        {visibleTopics.map((topic) => (
+          <TestCard key={topic.slug} topic={topic} />
         ))}
-      </ul>
+      </section>
 
-      {/* CULTURA GENERAL — separat visualment */}
-      {getTopicsByCategory('cultura').length > 0 && (
-        <>
-          <SectionTitle icon="🌍" label={t('test.list.section.cultura')} variant="cultura" />
-          <ul className="space-y-3">
-            {getTopicsByCategory('cultura').map((topic) => (
-              <TopicCard key={topic.slug} slug={topic.slug} icon={topic.icon}
-                accent={topic.accent} title={topic.title}
-                description={topic.description} />
-            ))}
-          </ul>
-        </>
-      )}
+      {/* MODES — només Test ràpid + Repàs (sense duels, sense lliga) */}
+      <div
+        className="section-head"
+        style={{ ['--accent' as never]: 'var(--terracotta)', marginTop: 32 } as React.CSSProperties}
+      >
+        <span className="eyebrow">⚡ {t('test.list.modes.eyebrow')}</span>
+        <span className="rule" />
+      </div>
 
-      {/* MUNICIPI — agrupats per ciutat */}
-      {getMunicipiGroups().length > 0 && (
-        <div className="mt-6">
-          <SectionTitle icon="🏛️" label={t('test.list.section.municipi')} variant="municipi" />
-          {getMunicipiGroups().map(({ municipi, topics }) => (
-            <div key={municipi} className="mb-4">
-              <div className="px-1 mb-2 text-[11px] uppercase tracking-[0.2em] font-bold text-red-700 dark:text-red-300">
-                {municipi}
-              </div>
-              <ul className="space-y-3">
-                {topics.map((topic) => (
-                  <TopicCard key={topic.slug} slug={topic.slug} icon={topic.icon}
-                    accent={topic.accent} title={topic.title}
-                    description={topic.description} />
-                ))}
-              </ul>
+      <section className="ts-modes">
+        <Link to="/test/tot" className="ts-mode featured">
+          <span className="mtag">⚡ {t('test.list.modes.featured.tag')}</span>
+          <div>
+            <h3>{t('test.list.modes.featured.title')}</h3>
+            <p>{t('test.list.modes.featured.sub')}</p>
+          </div>
+          <div className="footer">
+            <div className="specs">
+              <span>{t('test.list.modes.featured.s1')}</span>
+              <span>·</span>
+              <span>{t('test.list.modes.featured.s2')}</span>
             </div>
-          ))}
-        </div>
+            <span className="cta">
+              ▶ {t('test.start')} <span className="arr">→</span>
+            </span>
+          </div>
+        </Link>
+
+        <Link to="/test/repas" className="ts-mode fail">
+          <span className="mtag">🔁 {t('test.list.modes.repas.tag')}</span>
+          <div>
+            <h3>{t('test.list.modes.repas.title')}</h3>
+            <p>
+              {failures.due > 0
+                ? t('test.list.modes.repas.subDue').replace('{n}', String(failures.due))
+                : failures.total > 0
+                  ? t('test.list.modes.repas.subTotal').replace('{n}', String(failures.total))
+                  : t('test.list.modes.repas.subEmpty')}
+            </p>
+          </div>
+          <div className="footer">
+            <div className="specs">
+              <span>{failures.due} {t('test.list.modes.repas.due')}</span>
+              <span>·</span>
+              <span>{failures.total} {t('test.list.modes.repas.total')}</span>
+            </div>
+            <span className="cta">
+              {t('test.list.modes.repas.cta')} <span className="arr">→</span>
+            </span>
+          </div>
+        </Link>
+      </section>
+
+      {/* RECENTS */}
+      {recents.length > 0 && (
+        <section className="ts-recent">
+          <div
+            className="section-head"
+            style={{ ['--accent' as never]: 'var(--ink)' } as React.CSSProperties}
+          >
+            <span className="eyebrow">🕘 {t('test.list.recent.eyebrow')}</span>
+            <span className="rule" />
+          </div>
+          <div className="recent-grid">
+            {recents.map((r) => (
+              <RecentRow key={r.slug} slug={r.slug} best={r.best} last={r.last}
+                attempts={r.attempts} lastAt={r.lastAt} />
+            ))}
+          </div>
+        </section>
       )}
     </div>
   );
 }
 
-function RepasCard() {
+function FilterChip({
+  active, onClick, label, n,
+}: {
+  active: boolean; onClick: () => void; label: string; n: number;
+}) {
+  return (
+    <button
+      type="button"
+      role="tab"
+      aria-selected={active}
+      onClick={onClick}
+      className={`cat-filter ${active ? 'active' : ''}`}
+    >
+      {label}
+      <span className="num">{n}</span>
+    </button>
+  );
+}
+
+function TestCard({ topic }: { topic: typeof TOPICS[number] }) {
   const { t } = useT();
-  const { total, due, learned, pending } = useFailuresCounts();
-
-  // Si no hi ha cap fallat guardat, no mostrem la card.
-  if (total === 0) return null;
-
-  const hasDue = due > 0;
+  const stats = getTopicStats(topic.slug);
+  const level = levelFromBest(stats?.best);
+  const lvlMeta = LEVEL_LVL[level];
+  const colors = accentToColors(topic.accent);
+  const total = topic.questions.length;
+  // Progrés segons la millor nota (0-10) — 100% si nota ≥ 9.
+  const pct = stats?.best
+    ? Math.min(100, Math.round((stats.best / 10) * 100))
+    : 0;
 
   return (
     <Link
-      to="/test/repas"
-      className={`group relative block overflow-hidden rounded-2xl border p-5 sm:p-6 mb-6 transition
-        ${hasDue
-          ? 'border-rose-300/70 bg-gradient-to-br from-rose-50 via-white to-orange-50 hover:border-rose-400 hover:shadow-lg dark:border-rose-400/30 dark:bg-gradient-to-br dark:from-[#2a0f1a] dark:via-[#170c14] dark:to-[#1a0f08] dark:hover:border-rose-400/60'
-          : 'border-slate-200/80 bg-white hover:border-slate-300 hover:shadow-md dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-white/20'}`}
+      to={`/test/${topic.slug}`}
+      className="tcard"
+      style={{
+        ['--accent' as never]: colors.c,
+        ['--accent-bg' as never]: colors.bg,
+      } as React.CSSProperties}
     >
-      <span aria-hidden className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${
-        hasDue ? 'from-rose-500 to-orange-600' : 'from-slate-400 to-slate-500'
-      }`} />
-      <div className="flex items-center gap-4">
-        <span aria-hidden className={`inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-3xl text-white shadow-inner bg-gradient-to-br ${
-          hasDue ? 'from-rose-500 to-orange-600' : 'from-slate-400 to-slate-600'
-        }`}>
-          🔁
-        </span>
-        <div className="min-w-0 flex-1">
-          <div className={`text-[10px] uppercase tracking-[0.25em] font-bold ${
-            hasDue
-              ? 'text-rose-700 dark:text-rose-300'
-              : 'text-slate-500 dark:text-slate-400'
-          }`}>
-            {hasDue ? t('test.list.repasBadgeDue') : t('test.list.repasBadge')}
-          </div>
-          <div className="font-bold text-lg sm:text-xl mt-0.5">{t('test.list.repasTitle')}</div>
-          <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5">
-            {hasDue
-              ? t('test.list.repasDescDue').replace('{n}', String(due))
-              : t('test.list.repasDescAll').replace('{n}', String(total))}
-          </div>
-          {/* Stats compactes: due / pending / learned */}
-          <div className="mt-2 flex items-center gap-3 text-[11px]">
-            {hasDue && (
-              <span className="inline-flex items-center gap-1 font-mono font-bold text-rose-700 dark:text-rose-300">
-                <span aria-hidden>⏰</span>
-                {due} {t('test.list.repasDueShort')}
-              </span>
-            )}
-            {pending > 0 && (
-              <>
-                {hasDue && <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>}
-                <span className="font-mono text-amber-700 dark:text-amber-300">
-                  📚 {pending} {t('test.list.repasPendingShort')}
-                </span>
-              </>
-            )}
-            {learned > 0 && (
-              <>
-                <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
-                <span className="font-mono text-emerald-700 dark:text-emerald-300">
-                  ✓ {learned} {t('test.list.repasLearnedShort')}
-                </span>
-              </>
-            )}
-          </div>
+      <div className="head">
+        <span className="ico" aria-hidden>{topic.icon}</span>
+        <span className={`lvl ${lvlMeta.lvl}`}>{lvlMeta.label}</span>
+      </div>
+      <h4>{topic.title}</h4>
+      {topic.description && <p>{topic.description}</p>}
+      <div className="specs">
+        <span className="spec">{total} {t('test.list.cat.questions')}</span>
+        {topic.municipi && <span className="spec">{topic.municipi}</span>}
+      </div>
+      <div className="footer-row">
+        <div className="progress-mini">
+          <div className="pmini-bar"><span style={{ width: `${pct}%` }} /></div>
+          <span className="pmini-pct">{pct}%</span>
         </div>
-        <span className={`shrink-0 text-sm font-semibold inline-flex items-center gap-1 ${
-          hasDue ? 'text-rose-700 dark:text-rose-300' : 'text-slate-500 dark:text-slate-400'
-        }`}>
-          <span className="hidden sm:inline">{t('test.start')}</span>
-          <span aria-hidden className="transition group-hover:translate-x-1">→</span>
+        <span className="start">
+          {pct > 0
+            ? t('test.list.cat.continue')
+            : t('test.list.cat.start')}{' '}
+          →
         </span>
       </div>
     </Link>
   );
 }
 
-function SectionTitle({
-  icon, label, variant = 'temari',
-}: { icon: string; label: string; variant?: 'temari' | 'cultura' | 'municipi' }) {
-  const cls = variant === 'cultura'
-    ? 'from-slate-400 to-slate-600 dark:from-slate-300 dark:to-slate-500'
-    : variant === 'municipi'
-    ? 'from-red-500 to-amber-600 dark:from-red-400 dark:to-amber-500'
-    : 'from-amber-400 to-amber-600 dark:from-amber-300 dark:to-amber-500';
-  return (
-    <div className="flex items-center gap-3 my-3">
-      <span className={`h-5 w-1.5 rounded-full bg-gradient-to-b ${cls}`} />
-      <h2 className="text-xs font-black uppercase tracking-[0.25em] text-slate-700 dark:text-slate-300 inline-flex items-center gap-2">
-        <span aria-hidden>{icon}</span>
-        {label}
-      </h2>
-      <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
-    </div>
-  );
-}
-
-function Dashboard() {
-  const { t } = useT();
-  const stats = useGlobalStats();
-  const { attempts, avgGrade } = globalAverage(stats);
-  const unlocked = stats.achievements.length;
-  const totalAch = ACHIEVEMENTS.length;
-
-  if (attempts === 0) {
-    return (
-      <div className="rounded-2xl border border-dashed p-4 mb-5 text-center text-sm
-        border-slate-300 bg-slate-50/60 text-slate-500
-        dark:border-white/15 dark:bg-white/5 dark:text-slate-400">
-        💡 {t('test.dashboard.empty')}
-      </div>
-    );
-  }
-
-  return (
-    <section className="grid grid-cols-3 gap-2 mb-5">
-      <div className="rounded-xl border p-3 text-center
-        border-slate-200/80 bg-white
-        dark:border-white/10 dark:bg-[#0f1d34]">
-        <div className="text-xl" aria-hidden>📝</div>
-        <div className="text-2xl font-black leading-none text-blue-700 dark:text-blue-400">
-          {attempts}
-        </div>
-        <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mt-0.5">
-          {t('test.dashboard.attempts')}
-        </div>
-      </div>
-
-      <div className="rounded-xl border p-3 text-center
-        border-slate-200/80 bg-white
-        dark:border-white/10 dark:bg-[#0f1d34]">
-        <div className="text-xl" aria-hidden>📊</div>
-        <div className="text-2xl font-black leading-none text-emerald-700 dark:text-emerald-400">
-          {avgGrade.toFixed(1)}
-        </div>
-        <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mt-0.5">
-          {t('test.dashboard.avg')}
-        </div>
-      </div>
-
-      <Link
-        to="/test/logros"
-        className="rounded-xl border p-3 transition text-center hover:shadow-md
-          border-amber-200/70 bg-gradient-to-br from-amber-50 to-yellow-50
-          dark:border-white/10 dark:from-[#2a210f] dark:to-[#0f1d34]"
-      >
-        <div className="text-xl" aria-hidden>🏅</div>
-        <div className="text-2xl font-black leading-none text-amber-700 dark:text-amber-400">
-          {unlocked}<span className="text-base font-bold opacity-50">/{totalAch}</span>
-        </div>
-        <div className="text-[10px] uppercase tracking-wider font-semibold text-amber-700/70 dark:text-amber-400/70 mt-0.5">
-          {t('test.dashboard.achievements')}
-        </div>
-      </Link>
-    </section>
-  );
-}
-
-function TopicCard({
-  slug, icon, accent, title, description,
+function RecentRow({
+  slug, best, last, attempts, lastAt,
 }: {
-  slug: string; icon: string; accent: string;
-  title: string; description?: string;
+  slug: string; best: number; last: number; attempts: number; lastAt: number;
 }) {
-  const stats = getTopicStats(slug);
-  const level = levelFromBest(stats?.best);
-  const meta = LEVEL_META[level];
+  const { t } = useT();
+  const topic = TOPICS.find((x) => x.slug === slug);
+  if (!topic) return null;
+
+  const grade = last || best;
+  const score10 = Math.round(grade * 10) / 10;
+  const tone = grade >= 7 ? 'high' : grade >= 5 ? 'mid' : 'low';
+  const when = formatRelative(lastAt, t);
 
   return (
-    <li>
-      <Link
-        to={`/test/${slug}`}
-        className="group relative block overflow-hidden rounded-2xl border p-5 transition
-          border-slate-200/80 bg-white hover:border-slate-300 hover:shadow-md
-          dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-amber-400/40"
-      >
-        <span aria-hidden className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${accent}`} />
-        <div className="flex items-center gap-4">
-          <span aria-hidden className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${accent} text-2xl text-white shadow-inner`}>
-            {icon}
-          </span>
-          <div className="min-w-0 flex-1">
-            <div className="font-bold text-base">{title}</div>
-            {description && (
-              <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-2">
-                {description}
-              </div>
-            )}
-            <div className="mt-2 flex items-center gap-3 text-[11px]">
-              {/* Nivell qualitatiu */}
-              <span className={`inline-flex items-center gap-1 font-semibold uppercase tracking-wide ${meta.cls}`}>
-                <span aria-hidden>{meta.icon}</span>
-                <span>{meta.label}</span>
-              </span>
-              {stats && stats.attempts > 0 && (
-                <>
-                  <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
-                  <span className="font-mono text-slate-600 dark:text-slate-300">
-                    ⭐ {stats.best.toFixed(1)}
-                  </span>
-                  <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
-                  <span className="font-mono text-slate-500 dark:text-slate-400">
-                    {stats.attempts} {stats.attempts === 1 ? 'test' : 'tests'}
-                  </span>
-                </>
-              )}
-            </div>
-          </div>
-          <span aria-hidden className="shrink-0 text-slate-400 group-hover:translate-x-1 transition">→</span>
+    <Link to={`/test/${slug}`} className="rec-row">
+      <span className={`score-circ ${tone}`}>{score10}</span>
+      <div className="min-w-0">
+        <div className="rttl truncate">{topic.title}</div>
+        <div className="rmeta">
+          {attempts} {attempts === 1 ? t('test.list.recent.attempt') : t('test.list.recent.attempts')}
+          {' · '}
+          {t('test.list.recent.bestShort')} {best.toFixed(1)}
         </div>
-      </Link>
-    </li>
+      </div>
+      <span className="when">{when}</span>
+      <span className="rcta">{t('test.list.recent.repeat')}</span>
+    </Link>
   );
+}
+
+function formatRelative(ts: number, t: (k: string) => string): string {
+  if (!ts) return '—';
+  const diff = Date.now() - ts;
+  const m = Math.floor(diff / 60000);
+  const h = Math.floor(diff / 3600000);
+  const d = Math.floor(diff / 86400000);
+  if (m < 60) return `${t('test.list.recent.justNow')}`;
+  if (h < 24) return `${t('test.list.recent.hoursAgo').replace('{n}', String(h))}`;
+  if (d < 7) return `${t('test.list.recent.daysAgo').replace('{n}', String(d))}`;
+  return new Date(ts).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
 }
