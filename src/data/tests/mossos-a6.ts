@@ -1,0 +1,346 @@
+// Mossos d'Esquadra · Àmbit A · Tema A.6
+// Entorn social a Catalunya — preguntes deduplicades.
+import type { TestTopic } from './types';
+
+const mossosA6: TestTopic = {
+  slug: 'mossos-a6',
+  title: 'A.6 · Entorn social',
+  description: 'Demografia, immigració, sanitat, igualtat i Estat del benestar',
+  icon: '👥',
+  accent: 'from-purple-500 to-purple-700',
+  category: 'mossos',
+  ambit: 'A',
+  subtema: 6,
+  questions: [
+    {
+      id: 'mossos-a6-1',
+      text: "Segons les dades més recents de l'IDESCAT, la població de Catalunya supera els:",
+      options: ["8 milions d'habitants", "6 milions d'habitants", "10 milions d'habitants", "5 milions d'habitants"],
+      correct: 0,
+    },
+    {
+      id: 'mossos-a6-2',
+      text: "L'organisme oficial d'estadística de Catalunya és:",
+      options: ['IDESCAT', 'INE', 'Eurostat', "Departament d'Estadística"],
+      correct: 0,
+    },
+    {
+      id: 'mossos-a6-3',
+      text: 'La principal religió declarada a Catalunya, encara que amb una creixent secularització, és:',
+      options: ['El catolicisme', "L'islam", 'El protestantisme', 'El judaisme'],
+      correct: 0,
+    },
+    {
+      id: 'mossos-a6-4',
+      text: 'El sistema sanitari públic de Catalunya es gestiona principalment a través de:',
+      options: [
+        'El CatSalut (Servei Català de la Salut)',
+        "L'INSS",
+        'La Seguretat Social estatal',
+        'Sanitas',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'mossos-a6-5',
+      text: "L'estructura territorial de l'organització sanitària catalana es divideix en:",
+      options: ['Regions sanitàries', 'Províncies sanitàries', 'Comarques sanitàries', 'Districtes hospitalaris'],
+      correct: 0,
+    },
+    {
+      id: 'mossos-a6-6',
+      text: 'El sistema educatiu obligatori a Catalunya inclou:',
+      options: [
+        'Educació primària i ESO (de 6 a 16 anys)',
+        "Només l'ESO",
+        'De P3 a Batxillerat',
+        'De primària fins a la universitat',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'mossos-a6-7',
+      text: "La principal causa de l'augment poblacional de Catalunya en les darreres dècades ha estat:",
+      options: [
+        'La immigració',
+        "L'augment de la natalitat",
+        'La disminució de la mortalitat',
+        "La repatriació de catalans de l'estranger",
+      ],
+      correct: 0,
+    },
+    {
+      id: 'mossos-a6-8',
+      text: "La llei catalana d'acollida de persones immigrades és:",
+      options: [
+        'La Llei 10/2010, de 7 de maig',
+        'La Llei 12/2007, de serveis socials',
+        'La Llei 17/2015, de 21 de juliol',
+        'La LO 8/2000',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'mossos-a6-9',
+      text: "L'Institut Català de les Dones (ICD) va ser creat l'any:",
+      options: ['1989', '1992', '2000', '2007'],
+      correct: 0,
+    },
+    {
+      id: 'mossos-a6-10',
+      text: 'La segona onada migratòria a Catalunya (postguerra–anys 70) procedia principalment de:',
+      options: [
+        'Aragó i Múrcia',
+        'Andalusia i altres regions espanyoles',
+        'Marroc i Llatinoamèrica',
+        "Europa de l'Est",
+      ],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-11',
+      text: 'La nacionalitat per residència a Espanya és, amb caràcter general, després de:',
+      options: ['5 anys', '10 anys', '2 anys', '15 anys'],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-12',
+      text: 'Els iberoamericans, filipins, equatoguineans, portuguesos i sefardís poden obtenir la nacionalitat per residència després de:',
+      options: ['1 any', '2 anys', '5 anys', '10 anys'],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-13',
+      text: 'El Pacte nacional per a la immigració a Catalunya és del:',
+      options: ['1993', '2008', '2010', '2017'],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-14',
+      text: "El model d'integració en què \"natius i immigrants creen una nova cultura comuna\" es coneix com:",
+      options: ['Assimilació', 'Melting pot (gresol cultural)', 'Pluralisme cultural', 'Multiculturalisme segregat'],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-15',
+      text: "El model d'integració criticat per \"imposar la pèrdua d'identitat\" és:",
+      options: ['Assimilació', 'Melting pot', 'Pluralisme cultural', 'Interculturalitat'],
+      correct: 0,
+    },
+    {
+      id: 'mossos-a6-16',
+      text: 'La Llei orgànica 3/2007, de 22 de març, regula:',
+      options: [
+        'La protecció de dades personals',
+        'La igualtat efectiva entre dones i homes',
+        'La conciliació familiar al sector públic',
+        'Els drets dels estrangers',
+      ],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-17',
+      text: "El permís de 16 setmanes per a l'altre progenitor s'estableix mitjançant:",
+      options: ["RDL 6/2019, d'1 de març", 'Llei 39/1999', 'LO 3/2007', 'Llei 17/2015'],
+      correct: 0,
+    },
+    {
+      id: 'mossos-a6-18',
+      text: 'La llei catalana de referència en matèria de serveis socials és la:',
+      options: ['Llei 12/2007', 'Llei 10/2010', 'Llei 17/2015', 'Llei 5/2008'],
+      correct: 0,
+    },
+    {
+      id: 'mossos-a6-19',
+      text: "L'Estat del benestar té quatre dimensions: transferències socials, serveis, intervencions normatives i:",
+      options: [
+        'Internacionalització',
+        "Estímul a la creació d'ocupació",
+        'Cohesió territorial',
+        'Política exterior',
+      ],
+      correct: 1,
+    },
+
+    // ─── Bloc 2 (oficials) — només noves ──────────────────────────
+    {
+      id: 'mossos-a6-20',
+      text: "El pas progressiu d'una immigració d'homes a una immigració familiar comporta una immigració de tipus:",
+      options: ['Temporal', 'Estacional', 'Permanent', 'Cíclica'],
+      correct: 2,
+    },
+    {
+      id: 'mossos-a6-21',
+      text: "La intervenció estatal en l'economia amb la finalitat de mantenir la plena ocupació és pròpia d'un Estat:",
+      options: ['Liberal', 'De Benestar', 'Mínim', 'Socialista'],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-22',
+      text: 'La immigració a Catalunya:',
+      options: [
+        'És un fenomen exclusiu del segle XXI',
+        'No és un fenomen nou, passa al llarg de la història',
+        "Va començar amb l'arribada dels romans",
+        'És deguda únicament a la globalització',
+      ],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-23',
+      text: 'La immigració a Catalunya prové majoritàriament de:',
+      options: ['Romania', 'Marroc', 'Itàlia', 'Xina'],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-24',
+      text: 'Quina és la segona comunitat estrangera més nombrosa a Catalunya després de la marroquina?',
+      options: ['Italiana', 'Romanesa', 'Xinesa', 'Pakistanesa'],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-25',
+      text: "Quins són els dos nivells de la xarxa bàsica de Serveis Socials de Catalunya?",
+      options: [
+        'Atenció primària i atenció especialitzada',
+        'Atenció general i atenció especialitzada',
+        'Atenció bàsica i atenció avançada',
+        'Atenció comunitària i atenció individual',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'mossos-a6-26',
+      text: 'Quin és el tret més identificador dels moviments migratoris de les darreres dècades?',
+      options: ['El seu caràcter local', 'El seu caràcter global', 'La seva temporalitat', 'La seva estacionalitat'],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-27',
+      text: 'Quin ha estat el resultat de l’incessant i enorme moviment migratori?',
+      options: [
+        'La uniformització cultural',
+        "La creació de minories ètniques als països d'arribada",
+        'La reducció de la diversitat',
+        "L'extinció de cultures autòctones",
+      ],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-28',
+      text: "Quan s'instaurà el Tractat d'Amsterdam?",
+      options: ["L'any 1992", "L'any 1997", "L'any 1999", "L'any 2004"],
+      correct: 2,
+    },
+    {
+      id: 'mossos-a6-29',
+      text: "A quina demarcació catalana s'han establert la majoria de residents estrangers?",
+      options: ['Tarragona', 'Lleida', 'Girona', 'Barcelona'],
+      correct: 3,
+    },
+    {
+      id: 'mossos-a6-30',
+      text: "Com es desenvolupen a Catalunya les polítiques a favor de la igualtat d'oportunitats entre homes i dones?",
+      options: [
+        'A través de plans plurianuals',
+        'Mitjançant decrets puntuals',
+        'Per acords ministerials',
+        'Amb lleis específiques anuals',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'mossos-a6-31',
+      text: "Quin és l'any d'aprovació del primer Pla interdepartamental d'immigració a Catalunya?",
+      options: ["L'any 1989", "L'any 1993", "L'any 1997", "L'any 2000"],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-32',
+      text: 'En quin any es comencen a prendre, de forma especial, decisions que configuren l’actual política migratòria espanyola?',
+      options: ["L'any 1980", "L'any 1985", "L'any 1990", "L'any 2000"],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-33',
+      text: "Quin és un dels principals problemes que s'enfronten els immigrants en el mercat laboral català?",
+      options: [
+        'Excés de qualificació',
+        'Manca de formació',
+        'Baixa qualificació',
+        'Sobreocupació en sectors qualificats',
+      ],
+      correct: 2,
+    },
+    {
+      id: 'mossos-a6-34',
+      text: "A qui afecta la Llei 8/2006 de mesures de conciliació de la vida personal, familiar i laboral al servei de les administracions públiques?",
+      options: [
+        'Únicament al personal funcionari',
+        "Personal funcionari i laboral que treballa a l'Administració, personal de les corporacions locals i personal de les universitats",
+        'Tota la població activa',
+        'Funcionaris i treballadors del sector privat',
+      ],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-35',
+      text: 'Quantes nacionalitats diferents conviuen a Catalunya?',
+      options: ['Més de 100', 'Més de 150', 'Més de 170', 'Més de 200'],
+      correct: 2,
+    },
+    {
+      id: 'mossos-a6-36',
+      text: "Quina llei a Espanya regula els drets dels estrangers i la seva integració social?",
+      options: ['Llei 8/2000', 'Llei 4/2000', 'Llei 12/2009', 'Llei 7/1985'],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-37',
+      text: "Quin és el principal risc que té el model d'integració del pluralisme cultural?",
+      options: [
+        "La pèrdua d'identitat cultural",
+        'El risc de fragmentació social',
+        'La uniformització cultural',
+        'La rivalitat entre comunitats',
+      ],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-38',
+      text: "Segons l'ACNUR, quantes persones s'han vist obligades a deixar la seva llar a causa de la guerra i la violència?",
+      options: ['50 milions', '89,3 milions', '120 milions', '200 milions'],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-39',
+      text: 'Què signifiquen les sigles ACNUR?',
+      options: [
+        'Agència Central de les Nacions Unides per als Refugiats',
+        'Alt Comissionat de les Nacions Unides per als Refugiats',
+        'Associació pels drets dels Refugiats',
+        'Acord de Cooperació de Nacions Unides per als Refugiats',
+      ],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-40',
+      text: 'Segons les Nacions Unides, quantes persones vivien l’any 2020 fora del seu territori d’origen?',
+      options: ['200 milions', '272 milions', '350 milions', '150 milions'],
+      correct: 1,
+    },
+    {
+      id: 'mossos-a6-41',
+      text: 'Per ordre d’importància, quins són els estrangers amb més presència a Espanya?',
+      options: [
+        'Marroc, Romania i Regne Unit',
+        'Romania, Marroc i Regne Unit',
+        'Equador, Marroc i Romania',
+        'Xina, Marroc i Itàlia',
+      ],
+      correct: 1,
+    },
+  ],
+};
+
+export default mossosA6;
