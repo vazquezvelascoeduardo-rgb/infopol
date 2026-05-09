@@ -370,6 +370,7 @@ export default function TestSession() {
           state={state}
           slug={slug}
           isAll={isAll}
+          corpsRoot={corpsRoot}
           onRestart={() => setState({ phase: 'select' })}
         />
       )}
@@ -785,11 +786,12 @@ function RunPhase({
 // ════════════════════════════════════════════════════════════════════
 
 function ResultPhase({
-  state, slug, isAll, onRestart,
+  state, slug, isAll, corpsRoot, onRestart,
 }: {
   state: Extract<SessionState, { phase: 'result' }>;
   slug: string;
   isAll: boolean;
+  corpsRoot: string;
   onRestart: () => void;
 }) {
   const { t } = useT();
