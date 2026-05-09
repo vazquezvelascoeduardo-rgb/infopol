@@ -216,32 +216,43 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
           {auth.backendEnabled && (
             <div className="sb-session">
               {auth.isAuthenticated && auth.user ? (
-                <div className="sb-user">
-                  <span className="sb-user-avatar">
-                    {(auth.user.user_metadata?.full_name ??
-                      auth.user.user_metadata?.name ??
-                      auth.user.email ?? '?')
-                      .charAt(0)
-                      .toUpperCase()}
-                  </span>
-                  <div className="sb-user-meta">
-                    <span className="sb-user-name">
-                      {auth.user.user_metadata?.full_name ??
-                        auth.user.user_metadata?.name ??
-                        auth.user.email}
-                    </span>
-                    <span className="sb-user-sub">{t('sidebar.session.synced')}</span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      void auth.signOut();
-                    }}
-                    className="sb-user-logout"
-                  >
-                    {t('sidebar.session.signOut')}
-                  </button>
-                </div>
+                (() => {
+                  const displayName =
+                    auth.profile?.name
+                    ?? auth.user.user_metadata?.full_name
+                    ?? auth.user.user_metadata?.name
+                    ?? auth.user.email
+                    ?? '?';
+                  // Sub-text: cuerpo + dept del profile si en tenim;
+                  // si no, "Progrés sincronitzat" + XP del user_progress.
+                  const subParts: string[] = [];
+                  if (auth.profile?.cuerpo) subParts.push(auth.profile.cuerpo);
+                  if (auth.profile?.department) subParts.push(auth.profile.department);
+                  if (subParts.length === 0 && auth.progress) {
+                    subParts.push(`${auth.progress.xp.toLocaleString('es-ES')} XP`);
+                  }
+                  if (subParts.length === 0) subParts.push(t('sidebar.session.synced'));
+                  return (
+                    <div className="sb-user">
+                      <span className="sb-user-avatar">
+                        {displayName.charAt(0).toUpperCase()}
+                      </span>
+                      <div className="sb-user-meta">
+                        <span className="sb-user-name">{displayName}</span>
+                        <span className="sb-user-sub">{subParts.join(' · ')}</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          void auth.signOut();
+                        }}
+                        className="sb-user-logout"
+                      >
+                        {t('sidebar.session.signOut')}
+                      </button>
+                    </div>
+                  );
+                })()
               ) : (
                 <button
                   type="button"
