@@ -27,6 +27,7 @@ import badalona from './badalona';
 import tarragona from './tarragona';
 import vendrell from './vendrell';
 import mataro from './mataro';
+import mossosA1 from './mossos-a1';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -54,6 +55,7 @@ export const TOPICS: TestTopic[] = [
   tarragona,
   vendrell,
   mataro,
+  mossosA1,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
