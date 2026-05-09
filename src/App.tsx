@@ -42,6 +42,7 @@ const Noticies = lazy(() => import('./pages/Noticies'));
 const NoticiaDetall = lazy(() => import('./pages/NoticiaDetall'));
 const CulturaGeneral = lazy(() => import('./pages/CulturaGeneral'));
 const CulturaGeneralSection = lazy(() => import('./pages/CulturaGeneralSection'));
+const Login = lazy(() => import('./pages/Login'));
 
 function PageFallback() {
   return (
@@ -83,6 +84,7 @@ export default function App() {
           <Route path="/noticies/:slug" element={<NoticiaDetall />} />
           <Route path="/cultura-general" element={<CulturaGeneral />} />
           <Route path="/cultura-general/:id" element={<CulturaGeneralSection />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

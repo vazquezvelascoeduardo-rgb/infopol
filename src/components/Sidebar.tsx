@@ -13,7 +13,6 @@ import { useT } from '../lib/i18n';
 import { useFailuresCounts } from '../lib/failures';
 import { useUnreadNoticiesCount } from '../lib/noticies';
 import { useAuth } from '../lib/auth';
-import LoginModal from './LoginModal';
 import type { Theme } from '../lib/theme';
 import { applyTextSize, getInitialTextSize, type TextSize } from '../lib/fontSize';
 
@@ -136,7 +135,6 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
   const failures = useFailuresCounts();
   const unreadNoticies = useUnreadNoticiesCount();
   const auth = useAuth();
-  const [loginOpen, setLoginOpen] = useState(false);
 
   function changeTextSize(s: TextSize) {
     setTextSize(s);
@@ -254,15 +252,11 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
                   );
                 })()
               ) : (
-                <button
-                  type="button"
-                  onClick={() => setLoginOpen(true)}
-                  className="sb-login"
-                >
+                <Link to="/login" className="sb-login">
                   <span aria-hidden>🔐</span>
                   <span>{t('sidebar.session.signIn')}</span>
                   <span aria-hidden className="sb-login-arr">→</span>
-                </button>
+                </Link>
               )}
             </div>
           )}
@@ -508,8 +502,6 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
           </footer>
         </div>
       </aside>
-
-      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
     </>
   );
 }

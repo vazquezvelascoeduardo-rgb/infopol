@@ -8,6 +8,11 @@
 //
 // Quan el backend no està configurat, useAuth() retorna sempre
 // {user: null, loading: false} i les funcions de login són no-ops.
+//
+// Mètodes d'inici de sessió:
+//   - Google OAuth (signInWithGoogle)
+//   - Email + contrasenya (signInWithPassword / signUpWithPassword)
+//   - Recuperació de contrasenya (requestPasswordReset)
 
 import {
   createContext,
@@ -38,7 +43,20 @@ export type AuthState = {
 
 export type AuthActions = {
   signInWithGoogle: () => Promise<void>;
-  signInWithApple: () => Promise<void>;
+  signInWithPassword: (email: string, password: string) => Promise<void>;
+  /**
+   * Crea un compte amb email + contrasenya. Si Supabase exigeix
+   * confirmació de correu, retorna `needsEmailConfirmation: true` i no
+   * deixa sessió oberta — l'usuari ha de clicar l'enllaç de l'email
+   * abans de poder entrar.
+   */
+  signUpWithPassword: (
+    email: string,
+    password: string,
+    name?: string,
+  ) => Promise<{ needsEmailConfirmation: boolean }>;
+  /** Envia un correu amb un enllaç per restablir la contrasenya. */
+  requestPasswordReset: (email: string) => Promise<void>;
   signOut: () => Promise<void>;
   /** Recarrega profile + progress des del servidor. */
   refresh: () => Promise<void>;
@@ -103,15 +121,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [refresh]);
 
   const value = useMemo<AuthContextValue>(() => {
-    async function signInWithProvider(provider: 'google' | 'apple') {
-      if (!supabase) return;
-      const redirectTo =
-        typeof window !== 'undefined' ? window.location.origin : undefined;
-      await supabase.auth.signInWithOAuth({
-        provider,
-        options: { redirectTo },
-      });
-    }
     return {
       user: session?.user ?? null,
       session,
@@ -120,8 +129,58 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       progress,
       isAuthenticated: !!session,
       backendEnabled: isBackendEnabled,
-      signInWithGoogle: () => signInWithProvider('google'),
-      signInWithApple: () => signInWithProvider('apple'),
+      signInWithGoogle: async () => {
+        if (!supabase) return;
+        const redirectTo =
+          typeof window !== 'undefined' ? window.location.origin : undefined;
+        const { error } = await supabase.auth.signInWithOAuth({
+          provider: 'google',
+          options: { redirectTo },
+        });
+        if (error) throw error;
+      },
+      signInWithPassword: async (email, password) => {
+        if (!supabase) {
+          throw new Error('Backend no configurat.');
+        }
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+        if (error) throw error;
+      },
+      signUpWithPassword: async (email, password, name) => {
+        if (!supabase) {
+          throw new Error('Backend no configurat.');
+        }
+        const emailRedirectTo =
+          typeof window !== 'undefined'
+            ? `${window.location.origin}/login`
+            : undefined;
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: name ? { name } : undefined,
+            emailRedirectTo,
+          },
+        });
+        if (error) throw error;
+        return { needsEmailConfirmation: !data.session };
+      },
+      requestPasswordReset: async (email) => {
+        if (!supabase) {
+          throw new Error('Backend no configurat.');
+        }
+        const redirectTo =
+          typeof window !== 'undefined'
+            ? `${window.location.origin}/login`
+            : undefined;
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo,
+        });
+        if (error) throw error;
+      },
       signOut: async () => {
         if (!supabase) return;
         await supabase.auth.signOut();
@@ -147,7 +206,9 @@ export function useAuth(): AuthContextValue {
       isAuthenticated: false,
       backendEnabled: false,
       signInWithGoogle: async () => {},
-      signInWithApple: async () => {},
+      signInWithPassword: async () => {},
+      signUpWithPassword: async () => ({ needsEmailConfirmation: false }),
+      requestPasswordReset: async () => {},
       signOut: async () => {},
       refresh: async () => {},
     };
