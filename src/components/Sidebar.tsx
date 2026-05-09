@@ -12,6 +12,8 @@ import { MODULES } from '../lib/content';
 import { useT } from '../lib/i18n';
 import { useFailuresCounts } from '../lib/failures';
 import { useUnreadNoticiesCount } from '../lib/noticies';
+import { useAuth } from '../lib/auth';
+import LoginModal from './LoginModal';
 import type { Theme } from '../lib/theme';
 import { applyTextSize, getInitialTextSize, type TextSize } from '../lib/fontSize';
 
@@ -133,6 +135,8 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
   const [textSize, setTextSize] = useState<TextSize>(() => getInitialTextSize());
   const failures = useFailuresCounts();
   const unreadNoticies = useUnreadNoticiesCount();
+  const auth = useAuth();
+  const [loginOpen, setLoginOpen] = useState(false);
 
   function changeTextSize(s: TextSize) {
     setTextSize(s);
@@ -206,6 +210,51 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
               <IconClose />
             </button>
           </header>
+
+          {/* Caixa de sessió — només visible si el backend està
+              configurat al build (variables VITE_SUPABASE_*). */}
+          {auth.backendEnabled && (
+            <div className="sb-session">
+              {auth.isAuthenticated && auth.user ? (
+                <div className="sb-user">
+                  <span className="sb-user-avatar">
+                    {(auth.user.user_metadata?.full_name ??
+                      auth.user.user_metadata?.name ??
+                      auth.user.email ?? '?')
+                      .charAt(0)
+                      .toUpperCase()}
+                  </span>
+                  <div className="sb-user-meta">
+                    <span className="sb-user-name">
+                      {auth.user.user_metadata?.full_name ??
+                        auth.user.user_metadata?.name ??
+                        auth.user.email}
+                    </span>
+                    <span className="sb-user-sub">{t('sidebar.session.synced')}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      void auth.signOut();
+                    }}
+                    className="sb-user-logout"
+                  >
+                    {t('sidebar.session.signOut')}
+                  </button>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setLoginOpen(true)}
+                  className="sb-login"
+                >
+                  <span aria-hidden>🔐</span>
+                  <span>{t('sidebar.session.signIn')}</span>
+                  <span aria-hidden className="sb-login-arr">→</span>
+                </button>
+              )}
+            </div>
+          )}
 
           {/* Navegació principal */}
           <nav className="sb-section pt-2.5">
@@ -448,6 +497,8 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
           </footer>
         </div>
       </aside>
+
+      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
     </>
   );
 }

@@ -8,6 +8,7 @@ import './index.css';
 import { applyInitialTheme } from './lib/theme';
 import { applyInitialTextSize } from './lib/fontSize';
 import { LocaleProvider } from './lib/i18n';
+import { AuthProvider } from './lib/auth';
 import { exposeNomenclatorToWindow } from './lib/cataleg-nomenclator';
 
 applyInitialTheme();
@@ -20,9 +21,11 @@ exposeNomenclatorToWindow();
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <LocaleProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </AuthProvider>
     </LocaleProvider>
   </React.StrictMode>,
 );

@@ -594,6 +594,47 @@ html[data-text-size="lg"] { font-size: 18px; }
   }
   .sb-close:hover { background: var(--paper-2); }
 
+  /* Caixa de sessió (login / perfil) */
+  .sb-session { padding: 8px 12px 0; }
+  .sb-login {
+    display: flex; align-items: center; gap: 10px;
+    width: 100%; padding: 10px 12px;
+    border-radius: 12px; border: 1px solid var(--terracotta);
+    background: rgba(242, 107, 31, 0.08);
+    color: var(--ink); font-weight: 700; font-size: 14px;
+    font-family: inherit; cursor: pointer; transition: background .12s;
+  }
+  .sb-login:hover { background: rgba(242, 107, 31, 0.14); }
+  .sb-login-arr { margin-left: auto; color: var(--terracotta); font-weight: 800; }
+  .sb-user {
+    display: grid; grid-template-columns: auto 1fr auto;
+    align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: 12px;
+    background: var(--paper-2);
+  }
+  .sb-user-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #F26B1F, #D9531A);
+    color: #fff; font-weight: 800; font-size: 14px;
+  }
+  .sb-user-meta { display: grid; gap: 1px; min-width: 0; }
+  .sb-user-name {
+    font-weight: 700; font-size: 13px; color: var(--ink);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .sb-user-sub {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px; color: var(--text-3); letter-spacing: 0.06em;
+    text-transform: uppercase; font-weight: 700;
+  }
+  .sb-user-logout {
+    background: none; border: none; cursor: pointer;
+    font-family: inherit; font-size: 12px; font-weight: 700;
+    color: var(--text-3);
+  }
+  .sb-user-logout:hover { color: var(--ink); text-decoration: underline; }
+
   /* Sections */
   .sb-section { padding: 6px 12px; }
   .sb-label {
