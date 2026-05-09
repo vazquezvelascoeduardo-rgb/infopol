@@ -11,6 +11,7 @@ import {
 } from '../../lib/testStats';
 import { useFailuresCounts } from '../../lib/failures';
 import { useT } from '../../lib/i18n';
+import { MODULES } from '../../lib/content';
 
 type FilterId = 'all' | 'temari' | 'cultura' | 'municipi';
 
@@ -294,6 +295,36 @@ export default function TestList() {
           </div>
         </section>
       )}
+
+      {/* TEMARI COMPLET — totes les lleis del temari de Policia Local. */}
+      <section className="pl-leyes">
+        <div
+          className="section-head"
+          style={{ ['--accent' as never]: '#9c7a1f', marginTop: 32 } as React.CSSProperties}
+        >
+          <span className="eyebrow">📚 {t('policiaLocal.leyes.eyebrow')}</span>
+          <span className="rule" />
+        </div>
+        <p className="text-sm text-text-2 mt-2 mb-4">
+          {t('policiaLocal.leyes.subtitle')}
+        </p>
+        <div className="pl-leyes-grid">
+          {MODULES.map((m) => (
+            <Link
+              key={m.slug}
+              to={`/leyes/s/${m.slug}`}
+              className="pl-ley-card"
+            >
+              <span className="pl-ley-icon" aria-hidden>{m.icon}</span>
+              <span className="pl-ley-text">
+                <span className="pl-ley-title">{m.title}</span>
+                <span className="pl-ley-desc">{m.description}</span>
+              </span>
+              <span className="pl-ley-arr" aria-hidden>→</span>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

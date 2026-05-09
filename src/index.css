@@ -3343,6 +3343,72 @@ html[data-text-size="lg"] { font-size: 18px; }
     .test-grid { grid-template-columns: 1fr; }
     .my-stats { grid-template-columns: 1fr 1fr; }
   }
+
+  /* ── Temari complet (al final de /policia-local) ─────────────── */
+  .pl-leyes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .pl-ley-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: background .12s, border-color .12s, transform .12s;
+  }
+  .pl-ley-card:hover {
+    background: var(--paper-2);
+    border-color: var(--ink);
+    transform: translateY(-1px);
+  }
+  .pl-ley-icon {
+    font-size: 28px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .pl-ley-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+  }
+  .pl-ley-title {
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .pl-ley-desc {
+    font-size: 12.5px;
+    color: var(--text-3);
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .pl-ley-arr {
+    color: var(--text-3);
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: transform .12s, color .12s;
+  }
+  .pl-ley-card:hover .pl-ley-arr {
+    color: var(--terracotta);
+    transform: translateX(2px);
+  }
+  @media (max-width: 980px) {
+    .pl-leyes-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .pl-leyes-grid { grid-template-columns: 1fr; }
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════════

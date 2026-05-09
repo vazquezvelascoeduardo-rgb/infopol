@@ -581,6 +581,8 @@ const DICT: Record<Locale, Dict> = {
     'profile.danger.warning': 'Eliminar tu cuenta borra todos tus datos: progreso, racha, XP, favoritos y respuestas. No se puede deshacer.',
     'profile.danger.requestDelete': 'Solicitar eliminación de cuenta',
     'profile.danger.note': 'Te abrirá tu correo con un mensaje preparado para enviar al soporte. Procesaremos la baja en 1-3 días laborables.',
+    'policiaLocal.leyes.eyebrow': 'Temario completo',
+    'policiaLocal.leyes.subtitle': 'Todas las leyes y normativas del temario de Policía Local. Pulsa cualquiera para ver las fichas y el contenido completo.',
 
     'sidebar.home': 'Inicio',
     'sidebar.academia': 'Academia',
@@ -1462,6 +1464,8 @@ const DICT: Record<Locale, Dict> = {
     'profile.danger.warning': 'Eliminar el teu compte esborra totes les teves dades: progrés, ratxa, XP, preferits i respostes. No es pot desfer.',
     'profile.danger.requestDelete': "Sol·licitar eliminació de compte",
     'profile.danger.note': "T'obrirà el teu correu amb un missatge preparat per enviar al suport. Processarem la baixa en 1-3 dies feiners.",
+    'policiaLocal.leyes.eyebrow': 'Temari complet',
+    'policiaLocal.leyes.subtitle': "Totes les lleis i normatives del temari de Policia Local. Clica en qualsevol per veure les fitxes i el contingut complet.",
 
     'sidebar.home': 'Inici',
     'sidebar.academia': 'Acadèmia',
