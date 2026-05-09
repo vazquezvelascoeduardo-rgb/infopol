@@ -187,6 +187,40 @@ html[data-text-size="lg"] { font-size: 18px; }
   }
   .icon-btn:hover { background: var(--paper-2); }
 
+  /* ── User button (header) ─────────────────────────────────────── */
+  /* Variant text: "Entrar" — només mostra etiqueta a desktop. */
+  .user-btn-signin {
+    width: auto;
+    padding: 0 14px;
+    gap: 8px;
+  }
+  .user-btn-signin .user-btn-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    display: none;
+  }
+  @media (min-width: 640px) {
+    .user-btn-signin .user-btn-label { display: inline; }
+  }
+  /* Variant avatar circular amb la inicial. */
+  .user-avatar-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    @apply inline-flex items-center justify-center shrink-0;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    transition: background .12s, transform .12s;
+  }
+  .user-avatar-btn:hover {
+    background: var(--terracotta);
+    transform: translateY(-1px);
+  }
+
   /* ── Eyebrow (label tècnic mono) ─────────────────────────────── */
   .eyebrow {
     font-family: 'JetBrains Mono', ui-monospace, monospace;

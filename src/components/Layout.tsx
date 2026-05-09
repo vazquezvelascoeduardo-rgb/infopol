@@ -6,6 +6,7 @@ import { applyTheme, getInitialTheme, type Theme } from '../lib/theme';
 import { useT } from '../lib/i18n';
 import Sidebar from './Sidebar';
 import GdprBanner from './GdprBanner';
+import UserButton from './UserButton';
 
 function BrandShield({ className = '' }: { className?: string }) {
   // Shield-i (rebranding 2026): escut en tinta amb la "i" d'info
@@ -116,6 +117,9 @@ export default function Layout({ children }: { children: ReactNode }) {
                 <path d="m20 20-3.5-3.5" />
               </svg>
             </button>
+
+            {/* Botó d'usuari: Entrar si no hi ha sessió, avatar si n'hi ha */}
+            <UserButton />
 
             {/* Hamburguesa */}
             <button
