@@ -297,7 +297,7 @@ export default function Retos() {
               </div>
               <div className="path-row">
                 <Link
-                  to="/test/tot"
+                  to="/policia-local/tot"
                   className="node boss"
                   style={{ width: 96, height: 96 }}
                   title="Test de tots els temes"
@@ -311,7 +311,7 @@ export default function Retos() {
 
           {/* Featured challenges */}
           <section className="challenges">
-            <Link to="/test" className="ch-card live">
+            <Link to="/policia-local" className="ch-card live">
               <span className="ch-tag live">EN DIRECTO · 312 jugando</span>
               <h3>🏆 Liga relámpago · 5 min</h3>
               <p>10 preguntas contra otros 5 oponentes. Llega al podio antes que ellos.</p>
@@ -322,7 +322,7 @@ export default function Retos() {
               </div>
               <span className="ch-cta">Entrar al duelo →</span>
             </Link>
-            <Link to="/test/ce78" className="ch-card pro">
+            <Link to="/policia-local/ce78" className="ch-card pro">
               <span className="ch-tag pro">⭐ RETO PRO</span>
               <h3>Maratón CE 1978 · 100 preguntas</h3>
               <p>Sin corazones. Una vez fallas, vuelves al principio. Solo para los más valientes.</p>
@@ -451,7 +451,7 @@ export default function Retos() {
                 DESBLOQUEJADES
               </span>
               <span className="rule" />
-              <Link to="/test/logros" className="see-all">Veure totes →</Link>
+              <Link to="/policia-local/logros" className="see-all">Veure totes →</Link>
             </div>
             <div className="ach-grid">
               {REAL_ACHIEVEMENTS.map((a) => {

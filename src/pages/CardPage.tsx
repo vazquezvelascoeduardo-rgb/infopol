@@ -132,7 +132,7 @@ export default function CardPage() {
             <Link to={`/leyes/s/${mod.slug}`} className="btn btn-ghost">
               ← {t('section.back')}
             </Link>
-            <Link to="/test" className="btn btn-primary">
+            <Link to="/policia-local" className="btn btn-primary">
               {t('home.tests.cta')} →
             </Link>
           </div>
@@ -155,7 +155,7 @@ export default function CardPage() {
         <Link to={`/leyes/s/${mod.slug}`} className="btn btn-ghost">
           ← {t('section.back')}
         </Link>
-        <Link to="/test" className="btn btn-primary">
+        <Link to="/policia-local" className="btn btn-primary">
           {t('home.tests.cta')} →
         </Link>
       </div>

@@ -38,7 +38,7 @@ const DICT: Record<Locale, Dict> = {
 
     // Tests (oculto, accesible por URL directa)
     'test.list.badge': 'Estudio · oposiciones',
-    'test.list.title': 'Tests',
+    'test.list.title': 'Policía Local',
     'test.list.subtitle': 'Pon a prueba tus conocimientos. Las preguntas no se repiten hasta agotar todas; al final obtienes una nota sobre 10.',
     'test.list.allMixed': 'Todos los temas (mezclado)',
     'test.list.allMixedDesc': 'Mezcla aleatoria de las {n} preguntas disponibles.',
@@ -919,7 +919,7 @@ const DICT: Record<Locale, Dict> = {
 
     // Tests (ocult, acces per URL directa)
     'test.list.badge': 'Estudi · oposicions',
-    'test.list.title': 'Tests',
+    'test.list.title': 'Policia Local',
     'test.list.subtitle': "Posa a prova els teus coneixements. Les preguntes no es repeteixen fins esgotar-les; al final obtens una nota sobre 10.",
     'test.list.allMixed': 'Tots els temes (mesclat)',
     'test.list.allMixedDesc': "Mescla aleatòria de les {n} preguntes disponibles.",

@@ -89,7 +89,7 @@ export default function TestSession() {
     return (
       <div className="mx-auto w-full max-w-3xl px-4 py-6">
         <p className="text-slate-600 dark:text-slate-400">{t('test.notFound')}</p>
-        <Link to="/test" className="text-blue-600 dark:text-blue-400 underline">
+        <Link to="/policia-local" className="text-blue-600 dark:text-blue-400 underline">
           {t('test.backToList')}
         </Link>
       </div>
@@ -325,7 +325,7 @@ export default function TestSession() {
       <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3">
         <Link to="/" className="hover:underline">{t('nav.home')}</Link>
         <span className="mx-2" aria-hidden>/</span>
-        <Link to="/test" className="hover:underline">{t('test.list.title')}</Link>
+        <Link to="/policia-local" className="hover:underline">{t('test.list.title')}</Link>
         <span className="mx-2" aria-hidden>/</span>
         <span className="text-slate-700 dark:text-slate-200 truncate">{title}</span>
       </nav>
@@ -970,7 +970,7 @@ function ResultPhase({
           🔁 {t('test.result.another')}
         </button>
         <Link
-          to="/test"
+          to="/policia-local"
           className="rounded-xl border px-4 py-2.5 text-sm font-semibold
             border-slate-200 bg-white text-slate-700 hover:bg-slate-50
             dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"

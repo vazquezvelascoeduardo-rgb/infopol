@@ -146,7 +146,7 @@ export default function Academia() {
           </span>
         </Link>
 
-        <Link to="/test" className="route mossos">
+        <Link to="/policia-local" className="route mossos">
           <span className="ribbon">
             PSOE · {temariCount} {t('academia.topics')}
           </span>
@@ -173,7 +173,7 @@ export default function Academia() {
           </span>
         </Link>
 
-        <Link to="/test" className="route local">
+        <Link to="/policia-local" className="route local">
           <span className="ribbon">
             PSOE LOCAL · {municipiCount} {t('academia.topics')}
           </span>
@@ -234,7 +234,7 @@ export default function Academia() {
                 ▶ {t('academia.continue.cta')}
               </Link>
             ) : (
-              <Link to="/test" className="btn btn-primary">
+              <Link to="/policia-local" className="btn btn-primary">
                 ▶ {t('academia.continue.start')}
               </Link>
             )}
@@ -287,7 +287,7 @@ export default function Academia() {
               <p>{t('academia.strip.leyes.desc')}</p>
             </div>
           </Link>
-          <Link to="/test">
+          <Link to="/policia-local">
             <span className="si" style={{ background: '#EAF1FE', color: '#2F6BD8' }}>📝</span>
             <div>
               <h5>{t('academia.strip.tests.title')}</h5>

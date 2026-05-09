@@ -20,7 +20,7 @@
 // Lazy loading: les pàgines es carreguen sota demanda per reduir el
 // bundle inicial. Home s'inclou directament (és la primera vista).
 import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import RequireAuth from './components/RequireAuth';
@@ -67,6 +67,13 @@ function PageFallback() {
       <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-slate-300 border-t-blue-600 dark:border-slate-700 dark:border-t-blue-400" />
     </div>
   );
+}
+
+// Redirigeix /test/<rest> → /policia-local/<rest> preservant subrutes.
+function RedirectTestToPoliciaLocal() {
+  const loc = useLocation();
+  const rest = loc.pathname.replace(/^\/test\/?/, '');
+  return <Navigate to={`/policia-local/${rest}${loc.search}`} replace />;
 }
 
 export default function App() {
@@ -154,7 +161,7 @@ export default function App() {
             }
           />
           <Route
-            path="/test"
+            path="/policia-local"
             element={
               <RequireAuth>
                 <TestList />
@@ -162,7 +169,7 @@ export default function App() {
             }
           />
           <Route
-            path="/test/logros"
+            path="/policia-local/logros"
             element={
               <RequireAuth>
                 <Achievements />
@@ -170,13 +177,16 @@ export default function App() {
             }
           />
           <Route
-            path="/test/:slug"
+            path="/policia-local/:slug"
             element={
               <RequireAuth>
                 <TestSession />
               </RequireAuth>
             }
           />
+          {/* Redirects: /test/* → /policia-local/* (compat amb bookmarks). */}
+          <Route path="/test" element={<Navigate to="/policia-local" replace />} />
+          <Route path="/test/*" element={<RedirectTestToPoliciaLocal />} />
           <Route
             path="/perfil"
             element={

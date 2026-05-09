@@ -233,7 +233,7 @@ export default function TestList() {
       </div>
 
       <section className="ts-modes">
-        <Link to="/test/tot" className="ts-mode featured">
+        <Link to="/policia-local/tot" className="ts-mode featured">
           <span className="mtag">⚡ {t('test.list.modes.featured.tag')}</span>
           <div>
             <h3>{t('test.list.modes.featured.title')}</h3>
@@ -251,7 +251,7 @@ export default function TestList() {
           </div>
         </Link>
 
-        <Link to="/test/repas" className="ts-mode fail">
+        <Link to="/policia-local/repas" className="ts-mode fail">
           <span className="mtag">🔁 {t('test.list.modes.repas.tag')}</span>
           <div>
             <h3>{t('test.list.modes.repas.title')}</h3>

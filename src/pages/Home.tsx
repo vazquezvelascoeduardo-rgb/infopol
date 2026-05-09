@@ -80,7 +80,7 @@ export default function Home() {
           <Link to="/recursos" className="btn btn-ghost">
             {t('home.v2.ctaSecondary')}
           </Link>
-          <Link to="/test" className="btn btn-dark">
+          <Link to="/policia-local" className="btn btn-dark">
             {t('home.v2.ctaPrimary')}
           </Link>
         </div>
