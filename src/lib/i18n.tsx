@@ -586,6 +586,8 @@ const DICT: Record<Locale, Dict> = {
     'policiaLocal.jump.aria': 'Acceso rápido',
     'policiaLocal.jump.tests': 'Tests',
     'policiaLocal.jump.temari': 'Temario',
+    'policiaLocal.jump.eyebrowTests': 'Pon a prueba',
+    'policiaLocal.jump.eyebrowTemari': 'Estudia',
 
     'sidebar.home': 'Inicio',
     'sidebar.academia': 'Academia',
@@ -1472,6 +1474,8 @@ const DICT: Record<Locale, Dict> = {
     'policiaLocal.jump.aria': 'Accés ràpid',
     'policiaLocal.jump.tests': 'Tests',
     'policiaLocal.jump.temari': 'Temari',
+    'policiaLocal.jump.eyebrowTests': 'Posa-te a prova',
+    'policiaLocal.jump.eyebrowTemari': 'Estudia',
 
     'sidebar.home': 'Inici',
     'sidebar.academia': 'Acadèmia',

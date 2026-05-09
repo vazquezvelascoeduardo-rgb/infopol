@@ -153,13 +153,21 @@ export default function TestList() {
 
       {/* JUMP BUTTONS — accés ràpid a Tests i Temari complet */}
       <nav className="pl-jump" aria-label={t('policiaLocal.jump.aria')}>
-        <a href="#pl-tests" className="pl-jump-btn">
-          <span aria-hidden>📝</span>
-          <span>{t('policiaLocal.jump.tests')}</span>
+        <a href="#pl-tests" className="pl-jump-btn jump-tests">
+          <span className="pl-jump-icon" aria-hidden>📝</span>
+          <span className="pl-jump-text">
+            <span className="pl-jump-eyebrow">{t('policiaLocal.jump.eyebrowTests')}</span>
+            <span className="pl-jump-title">{t('policiaLocal.jump.tests')}</span>
+          </span>
+          <span className="pl-jump-arr" aria-hidden>→</span>
         </a>
-        <a href="#pl-temari" className="pl-jump-btn">
-          <span aria-hidden>📚</span>
-          <span>{t('policiaLocal.jump.temari')}</span>
+        <a href="#pl-temari" className="pl-jump-btn jump-temari">
+          <span className="pl-jump-icon" aria-hidden>📚</span>
+          <span className="pl-jump-text">
+            <span className="pl-jump-eyebrow">{t('policiaLocal.jump.eyebrowTemari')}</span>
+            <span className="pl-jump-title">{t('policiaLocal.jump.temari')}</span>
+          </span>
+          <span className="pl-jump-arr" aria-hidden>→</span>
         </a>
       </nav>
 

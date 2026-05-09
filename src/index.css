@@ -3348,34 +3348,101 @@ html[data-text-size="lg"] { font-size: 18px; }
   }
 
   /* ── Jump buttons (a dalt de /policia-local) ─────────────────── */
+  /* Dos cards grans i destacats, un fosc (Tests, acció primària) i
+     un en terracotta (Temari). Estil consistent amb .ts-mode. */
   .pl-jump {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 18px;
+    gap: 14px;
+    margin-top: 22px;
   }
   .pl-jump-btn {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 22px;
+    border-radius: 18px;
+    overflow: hidden;
+    color: #fff;
+    text-decoration: none;
+    transition: transform .18s ease, box-shadow .18s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    isolation: isolate;
+  }
+  .pl-jump-btn::before {
+    content: "";
+    position: absolute;
+    right: -50px;
+    top: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255,255,255,0.16), transparent 65%);
+    z-index: -1;
+  }
+  .pl-jump-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+  }
+  .pl-jump-btn.jump-tests {
+    background: linear-gradient(135deg, #1a2332 0%, var(--ink) 60%, #0d1420 100%);
+  }
+  .pl-jump-btn.jump-temari {
+    background: linear-gradient(135deg, #F26B1F 0%, var(--terracotta) 50%, #9c3a08 100%);
+  }
+  .pl-jump-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.18);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 14px 18px;
-    border: 1.5px solid var(--ink);
-    border-radius: 14px;
-    background: var(--paper);
-    color: var(--ink);
+    font-size: 24px;
+    flex-shrink: 0;
+    backdrop-filter: blur(2px);
+  }
+  .pl-jump-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .pl-jump-eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.78);
+  }
+  .pl-jump-title {
+    font-size: 22px;
     font-weight: 800;
-    font-size: 15px;
-    letter-spacing: -0.005em;
-    transition: background .12s, color .12s, transform .12s;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
   }
-  .pl-jump-btn:hover {
-    background: var(--ink);
-    color: var(--paper);
-    transform: translateY(-1px);
+  .pl-jump-arr {
+    width: 36px; height: 36px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.16);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+    flex-shrink: 0;
+    transition: transform .2s ease, background .2s ease;
   }
-  @media (max-width: 480px) {
+  .pl-jump-btn:hover .pl-jump-arr {
+    background: #fff;
+    color: var(--ink);
+    transform: translateX(4px);
+  }
+  @media (max-width: 720px) {
     .pl-jump { grid-template-columns: 1fr; }
+    .pl-jump-btn { padding: 18px 20px; }
+    .pl-jump-title { font-size: 20px; }
   }
 
   /* ── Temari complet (al final de /policia-local) ─────────────── */
