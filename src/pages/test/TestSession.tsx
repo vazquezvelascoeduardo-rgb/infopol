@@ -3,7 +3,7 @@
 // es 'tot' fem mescla de tots els temes.
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
-import { TOPICS, getAllQuestions, getTopic } from '../../data/tests';
+import { TOPICS, getAllQuestions, getAllMossosQuestions, getTopic } from '../../data/tests';
 import type { TestQuestion } from '../../data/tests/types';
 import {
   getAnsweredIds, markAnswered, resetProgress,
@@ -68,25 +68,32 @@ export default function TestSession() {
   const corpsLabel = isMossosRoute ? t('mossos.title') : t('test.list.title');
 
   // Pool de preguntes per a aquest tema (o tots, o repàs).
+  // El pool de 'tot' depèn del cos: a /mossos només Mossos, a
+  // /policia-local només Policia Local (temari + cultura + municipi).
   const pool: TestQuestion[] = useMemo(() => {
     if (isRepas) return buildRepasPool({ onlyDue: true, max: 50 });
-    if (isAll) return getAllQuestions();
+    if (isAll) return isMossosRoute ? getAllMossosQuestions() : getAllQuestions();
     return topic?.questions ?? [];
-  }, [isAll, isRepas, topic]);
+  }, [isAll, isRepas, isMossosRoute, topic]);
 
-  // Per a 'tot', el progrés és la unió de tots els temes.
+  // Per a 'tot', el progrés és la unió dels temes del cos corresponent.
   // Per a 'repas', no usem progrés (les preguntes es repeteixen segons SRS).
   const answeredIds: Set<string> = useMemo(() => {
     if (isRepas) return new Set<string>();
     if (isAll) {
       const set = new Set<string>();
       for (const tp of TOPICS) {
+        // Si estem a /mossos/tot, només els temes de Mossos.
+        // Si estem a /policia-local/tot, només els de Policia Local.
+        const isMossosTopic = tp.category === 'mossos';
+        if (isMossosRoute && !isMossosTopic) continue;
+        if (!isMossosRoute && isMossosTopic) continue;
         for (const id of getAnsweredIds(tp.slug)) set.add(id);
       }
       return set;
     }
     return getAnsweredIds(slug);
-  }, [slug, isAll, isRepas]);
+  }, [slug, isAll, isRepas, isMossosRoute]);
 
   // Nomes per al hook reactiu (re-render quan canvia localStorage).
   useTopicProgress(slug);

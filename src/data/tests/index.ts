@@ -91,6 +91,19 @@ export function getAllQuestions(): TaggedQuestion[] {
   return out;
 }
 
+/** Pool de TOTES les preguntes de Mossos d'Esquadra (totes les
+ *  categoria 'mossos'), per al mode 'tot els temes' dins /mossos. */
+export function getAllMossosQuestions(): TaggedQuestion[] {
+  const out: TaggedQuestion[] = [];
+  for (const t of TOPICS) {
+    if (t.category !== 'mossos') continue;
+    for (const q of t.questions) {
+      out.push({ ...q, topicSlug: t.slug });
+    }
+  }
+  return out;
+}
+
 /** Filtre per categoria. */
 export function getTopicsByCategory(
   category: 'temari' | 'cultura' | 'municipi' | 'mossos',
