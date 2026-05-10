@@ -21,6 +21,8 @@ import { getAnsweredIds } from '../lib/testProgress';
 import { useFailuresCounts } from '../lib/failures';
 import { useGlobalStats } from '../lib/testStats';
 import { ACHIEVEMENTS as REAL_ACHIEVEMENTS } from '../lib/achievements';
+import { useAuth } from '../lib/auth';
+import { getLeaderboard, type LeaderboardEntry } from '../lib/db';
 
 /* ── Helpers de stats (calculades del progrés real) ─────── */
 function useGameStats() {
@@ -98,15 +100,40 @@ const SHOP_ITEMS = [
   { ico: '🚀', title: 'XP x2 (15 min)', desc: 'Doble experiencia', price: 150 },
 ];
 
-const LEAGUE = [
-  { rank: 1, name: '🦊 Lluís_M', xp: 3420, rankClass: 'gold' },
-  { rank: 2, name: '🦉 Andrea7', xp: 3180, rankClass: 'silver' },
-  { rank: 3, name: '🐺 Pol_22', xp: 2910, rankClass: 'bronze' },
-  { rank: 4, name: '🦉 Tu', xp: 2847, rankClass: '', me: true },
-  { rank: 5, name: '🐉 Jordi9', xp: 2612, rankClass: '' },
-];
-
 const DAYS = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+
+// Calcula el dia de la setmana com a índex 0..6 (L=0, M=1, ..., D=6).
+function dayOfWeekIdx(ts: number): number {
+  // getDay(): D=0, L=1, ..., S=6 → reordenem a L=0 ... D=6
+  const d = new Date(ts).getDay();
+  return d === 0 ? 6 : d - 1;
+}
+
+// Per a cada dia de la setmana actual (L..D), si l'usuari ha fet algun
+// test aquell dia (mateixa setmana del calendari), marca 'done'. El dia
+// d'avui sempre és 'today' (encara que sense activitat). Els dies futurs
+// són 'pending'. Els passats sense activitat són 'miss'.
+function buildWeekStatus(stats: ReturnType<typeof useGlobalStats>): Array<'done' | 'today' | 'miss' | 'pending'> {
+  const today = new Date();
+  const todayIdx = dayOfWeekIdx(today.getTime());
+  // Inici de la setmana actual (dilluns 00:00)
+  const monday = new Date(today);
+  monday.setHours(0, 0, 0, 0);
+  monday.setDate(monday.getDate() - todayIdx);
+
+  const out: Array<'done' | 'today' | 'miss' | 'pending'> = ['miss', 'miss', 'miss', 'miss', 'miss', 'miss', 'miss'];
+  for (const s of Object.values(stats.topics)) {
+    if (!s.lastAt) continue;
+    if (s.lastAt < monday.getTime()) continue;
+    const idx = dayOfWeekIdx(s.lastAt);
+    if (idx < todayIdx) out[idx] = 'done';
+  }
+  for (let i = 0; i < 7; i++) {
+    if (i === todayIdx) out[i] = 'today';
+    else if (i > todayIdx) out[i] = 'pending';
+  }
+  return out;
+}
 
 /* ── Customització persistent (color/mascota/insígnia/tema) ── */
 const CUST_KEY = 'infopol-retos-cust';
@@ -147,6 +174,42 @@ export default function Retos() {
   const stats = useGameStats();
   const { due: failuresDue } = useFailuresCounts();
   const globalStats = useGlobalStats();
+  const { user, profile, backendEnabled } = useAuth();
+
+  // Lliga setmanal real (Supabase) — només si hi ha backend.
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [leaderboardLoading, setLeaderboardLoading] = useState(false);
+  useEffect(() => {
+    if (!backendEnabled) return;
+    let cancelled = false;
+    setLeaderboardLoading(true);
+    getLeaderboard(20)
+      .then((data) => {
+        if (!cancelled) setLeaderboard(data);
+      })
+      .catch(() => {
+        // Sense lliga → array buit, mostrarem missatge.
+      })
+      .finally(() => {
+        if (!cancelled) setLeaderboardLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, [backendEnabled]);
+
+  // Nom mostrat: profile.name, user_metadata.name, primera part del correu, o 'Tu'.
+  const displayName =
+    profile?.name ??
+    (user?.user_metadata?.name as string | undefined) ??
+    (user?.user_metadata?.full_name as string | undefined) ??
+    user?.email?.split('@')[0] ??
+    'Tu';
+  const initial = displayName.slice(0, 1).toUpperCase();
+  const cuerpoLabel = profile?.cuerpo
+    ? `NIVELL ${stats.level} · ${profile.cuerpo.toUpperCase()}`
+    : `NIVELL ${stats.level}`;
+
+  // Estat dels 7 dies de la setmana actual a partir de l'activitat real.
+  const weekStatus = useMemo(() => buildWeekStatus(globalStats), [globalStats]);
 
   const [cust, setCust] = useCustomization();
   const { color: colorIdx, pet: petIdx, badge: badgeIdx, theme: themeIdx } = cust;
@@ -217,10 +280,9 @@ export default function Retos() {
             <span className="stat xp"><span className="ico">⚡</span>{stats.xp.toLocaleString('es-ES')} XP</span>
           </div>
           <div className="flex items-center gap-2">
-            <button type="button" className="icon-btn" title="Notificaciones">
-              <span style={{ fontSize: 18 }}>🔔</span>
-            </button>
-            <span className="avatar">M</span>
+            <Link to="/perfil" className="avatar" title={displayName}>
+              {initial}
+            </Link>
           </div>
         </div>
       </header>
@@ -309,38 +371,38 @@ export default function Retos() {
             </div>
           </section>
 
-          {/* Featured challenges */}
+          {/* Featured challenges — enllaços reals (no placeholders) */}
           <section className="challenges">
-            <Link to="/policia-local" className="ch-card live">
-              <span className="ch-tag live">EN DIRECTO · 312 jugando</span>
-              <h3>🏆 Liga relámpago · 5 min</h3>
-              <p>10 preguntas contra otros 5 oponentes. Llega al podio antes que ellos.</p>
+            <Link to="/policia-local/tot" className="ch-card live">
+              <span className="ch-tag live">⚡ TEST RÀPID · MIX</span>
+              <h3>🎯 Test mix · tots els temes</h3>
+              <p>Preguntes barrejades de tot el temari de Policia Local. Posa't a prova en una sola tirada.</p>
               <div className="ch-meta">
-                <span className="chip">⏱️ 5 min</span>
-                <span className="chip">⚡ +120 XP</span>
-                <span className="chip">💎 +50</span>
+                <span className="chip">⏱️ ~10 min</span>
+                <span className="chip">📚 Tots els temes</span>
+                <span className="chip">🎲 Aleatori</span>
               </div>
-              <span className="ch-cta">Entrar al duelo →</span>
+              <span className="ch-cta">Començar →</span>
             </Link>
-            <Link to="/policia-local/ce78" className="ch-card pro">
-              <span className="ch-tag pro">⭐ RETO PRO</span>
-              <h3>Maratón CE 1978 · 100 preguntas</h3>
-              <p>Sin corazones. Una vez fallas, vuelves al principio. Solo para los más valientes.</p>
+            <Link to="/policia-local/repas" className="ch-card pro">
+              <span className="ch-tag pro">🔁 REPÀS</span>
+              <h3>Repàs intel·ligent (Anki)</h3>
+              <p>Repassa les preguntes que has fallat segons la corba de l'oblit. Més efectiu que rellegir.</p>
               <div className="ch-meta">
-                <span className="chip">⏱️ ~45 min</span>
-                <span className="chip">⚡ +500 XP</span>
-                <span className="chip">🏅 Insignia</span>
+                <span className="chip">⏱️ ~5 min</span>
+                <span className="chip">🧠 SRS</span>
+                <span className="chip">{failuresDue} pendents</span>
               </div>
-              <span className="ch-cta">Aceptar reto →</span>
+              <span className="ch-cta">Repassar →</span>
             </Link>
           </section>
 
           {/* Customize / personalization */}
           <section className="custom">
             <div className="avatar-preview">
-              <div className="av-big">M</div>
-              <div className="av-name">Marc B.</div>
-              <div className="av-rank">NIVEL {stats.level} · CABO 1ª</div>
+              <div className="av-big">{initial}</div>
+              <div className="av-name">{displayName}</div>
+              <div className="av-rank">{cuerpoLabel}</div>
               <div className="lvl-bar">
                 <div className="pbar3"><span style={{ width: `${Math.round((stats.xpInLevel / stats.xpToNext) * 100)}%` }} /></div>
                 <span className="num">
@@ -470,8 +532,24 @@ export default function Retos() {
 
           {/* Shop */}
           <section className="shop">
-            <h3>💎 Tienda · gasta tus gemas</h3>
-            <p className="sub">Power-ups, vidas extra y boosts. Tu inventario te espera en la mochila.</p>
+            <h3>
+              💎 Botiga · gasta les teves gemmes{' '}
+              <span style={{
+                fontSize: 11,
+                fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                fontWeight: 700,
+                letterSpacing: '0.12em',
+                padding: '3px 8px',
+                borderRadius: 999,
+                background: '#FFF1D2',
+                color: '#9c7a1f',
+                marginLeft: 8,
+                verticalAlign: 'middle',
+              }}>
+                EN PREPARACIÓ
+              </span>
+            </h3>
+            <p className="sub">Power-ups, vides extra i boosts. Aviat podràs gastar les gemmes que has guanyat fent tests.</p>
             <div className="shop-grid">
               {SHOP_ITEMS.map((s, i) => (
                 <div key={`shop-${i}`} className="shop-item">
@@ -495,10 +573,12 @@ export default function Retos() {
             </div>
             <div className="streak-days">
               {DAYS.map((d, i) => {
-                const cls = i < 5 ? 'done' : i === 5 ? 'today' : 'miss';
+                const cls = weekStatus[i];
                 return (
                   <div key={`day-${i}`} className={`sd ${cls}`}>
-                    <span className="dot">{cls === 'done' ? '✓' : cls === 'today' ? '★' : '·'}</span>
+                    <span className="dot">
+                      {cls === 'done' ? '✓' : cls === 'today' ? '★' : cls === 'pending' ? '·' : '·'}
+                    </span>
                     <span>{d}</span>
                   </div>
                 );
@@ -569,30 +649,65 @@ export default function Retos() {
           </div>
 
           <div className="side-card league-card">
-            <h3>LIGA</h3>
-            <p className="sub">Termina en 3d 14h</p>
-            <div className="league-row">
-              <div>
-                <div className="league-name">Liga Zafiro</div>
-                <div className="league-tier">Posición 4 · Top 10 ascienden</div>
+            <h3>LLIGA</h3>
+            <p className="sub">Top 20 d'usuaris per XP</p>
+            {!backendEnabled ? (
+              <div className="lb-promo" style={{ background: 'var(--paper-2)', color: 'var(--text-2)' }}>
+                Inicia sessió per veure la lliga.
               </div>
-              <div className="league-icon">💎</div>
-            </div>
-            <ul className="lb">
-              {LEAGUE.map((l) => (
-                <li key={`lb-${l.rank}`}>
-                  <span className={`rank ${l.rankClass}`}>{l.rank}</span>
-                  <span className="name">
-                    {l.name}
-                    {l.me && <span className="me">TÚ</span>}
-                  </span>
-                  <span className="xp-num">{l.xp.toLocaleString('es-ES')}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="lb-promo">
-              ⬆️ Necesitas <b style={{ color: '#fff' }}>+63 XP</b> para alcanzar el podio.
-            </div>
+            ) : leaderboardLoading ? (
+              <div className="lb-promo" style={{ background: 'var(--paper-2)', color: 'var(--text-2)' }}>
+                Carregant…
+              </div>
+            ) : leaderboard.length === 0 ? (
+              <div className="lb-promo" style={{ background: 'var(--paper-2)', color: 'var(--text-2)' }}>
+                Encara no hi ha cap participant. Sigues el primer fent un test!
+              </div>
+            ) : (
+              <>
+                <ul className="lb">
+                  {leaderboard.slice(0, 5).map((l, i) => {
+                    const rank = i + 1;
+                    const rankClass = rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : '';
+                    const isMe = user?.id === l.id;
+                    return (
+                      <li key={`lb-${l.id}`}>
+                        <span className={`rank ${rankClass}`}>{rank}</span>
+                        <span className="name">
+                          {l.display_name || 'Anònim'}
+                          {isMe && <span className="me">TU</span>}
+                        </span>
+                        <span className="xp-num">{(l.total_xp ?? 0).toLocaleString('ca-ES')}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+                {(() => {
+                  const myIdx = leaderboard.findIndex((l) => l.id === user?.id);
+                  if (myIdx === -1) {
+                    return (
+                      <div className="lb-promo">
+                        Fes el primer test per entrar a la lliga →
+                      </div>
+                    );
+                  }
+                  if (myIdx === 0) {
+                    return (
+                      <div className="lb-promo">
+                        🥇 Estàs al primer lloc!
+                      </div>
+                    );
+                  }
+                  const above = leaderboard[myIdx - 1];
+                  const diff = (above.total_xp ?? 0) - (leaderboard[myIdx].total_xp ?? 0);
+                  return (
+                    <div className="lb-promo">
+                      ⬆️ Et falten <b style={{ color: '#fff' }}>+{diff} XP</b> per pujar al lloc {myIdx}.
+                    </div>
+                  );
+                })()}
+              </>
+            )}
           </div>
         </aside>
       </main>
