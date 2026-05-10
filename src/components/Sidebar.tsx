@@ -13,7 +13,6 @@ import { useT } from '../lib/i18n';
 import { useFailuresCounts } from '../lib/failures';
 import { useUnreadNoticiesCount } from '../lib/noticies';
 import { useAuth } from '../lib/auth';
-import type { Theme } from '../lib/theme';
 import { applyTextSize, getInitialTextSize, type TextSize } from '../lib/fontSize';
 
 type Props = {
@@ -71,29 +70,6 @@ function IconCultura() {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M2 9 12 4l10 5-10 5z" />
       <path d="M6 11v5c0 2 3 3 6 3s6-1 6-3v-5" />
-    </svg>
-  );
-}
-function IconLang() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-      <circle cx="12" cy="12" r="9" />
-      <path d="M3 12h18M12 3a14 14 0 0 1 0 18A14 14 0 0 1 12 3" />
-    </svg>
-  );
-}
-function IconSun() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-      <circle cx="12" cy="12" r="4" />
-      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-    </svg>
-  );
-}
-function IconMoon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />
     </svg>
   );
 }
