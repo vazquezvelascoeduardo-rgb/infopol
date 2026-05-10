@@ -54,6 +54,9 @@ const CulturaGeneralSection = lazy(() => import('./pages/CulturaGeneralSection')
 const Login = lazy(() => import('./pages/Login'));
 const Profile = lazy(() => import('./pages/Profile'));
 const MossosList = lazy(() => import('./pages/mossos/MossosList'));
+const MossosTemari = lazy(() => import('./pages/mossos/MossosTemari'));
+const MossosTemariAmbit = lazy(() => import('./pages/mossos/MossosTemariAmbit'));
+const MossosTemariTema = lazy(() => import('./pages/mossos/MossosTemariTema'));
 const Flashcards = lazy(() => import('./pages/flashcards/Flashcards'));
 
 // Slugs públics dins /leyes — l'única fitxa accessible sense sessió és
@@ -230,6 +233,30 @@ export default function App() {
           <Route
             path="/mossos/flashcards/:slug"
             element={<Navigate to="/mossos/flashcards" replace />}
+          />
+          <Route
+            path="/mossos/temari"
+            element={
+              <RequireAuth>
+                <MossosTemari />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/mossos/temari/:ambit"
+            element={
+              <RequireAuth>
+                <MossosTemariAmbit />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/mossos/temari/:ambit/:slug"
+            element={
+              <RequireAuth>
+                <MossosTemariTema />
+              </RequireAuth>
+            }
           />
           <Route
             path="/mossos/:slug"

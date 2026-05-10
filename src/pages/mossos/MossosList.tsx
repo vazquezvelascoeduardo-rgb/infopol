@@ -13,6 +13,9 @@ import { getTopicStats, levelFromBest, useGlobalStats, type Level } from '../../
 import { useFailuresCounts } from '../../lib/failures';
 import { useT } from '../../lib/i18n';
 import type { TestTopic } from '../../data/tests/types';
+import { AMBIT_META, getTemesByAmbit, type MossosAmbit } from '../../lib/mossosTemari';
+
+const TEMARI_AMBITS: MossosAmbit[] = ['A', 'B', 'C'];
 
 const LEVEL_LVL: Record<Level, { lvl: 'easy' | 'medium' | 'hard' | 'none'; label: string }> = {
   none:         { lvl: 'none',   label: 'Sense fer' },
@@ -346,7 +349,7 @@ export default function MossosList() {
         </section>
       )}
 
-      {/* TEMARI COMPLET — placeholder fins que es configuri */}
+      {/* TEMARI COMPLET — 3 àmbits oficials Mossos */}
       <section
         id="mossos-temari"
         className="pl-leyes"
@@ -359,9 +362,45 @@ export default function MossosList() {
           <span className="eyebrow">📚 {t('mossos.temari.eyebrow')}</span>
           <span className="rule" />
         </div>
-        <p className="text-sm text-text-2 mt-2 mb-4">{t('mossos.temari.subtitle')}</p>
-        <div className="rounded-2xl border border-dashed border-line bg-paper-2 p-6 text-center">
-          <p className="text-sm text-text-2">{t('mossos.temari.coming')}</p>
+        <p className="text-sm text-text-2 mt-2 mb-4">
+          {t('mossosTemari.subtitle')}
+        </p>
+        <div className="pl-leyes-grid">
+          {TEMARI_AMBITS.map((a) => {
+            const meta = AMBIT_META[a];
+            const count = getTemesByAmbit(a).length;
+            return (
+              <Link
+                key={a}
+                to={`/mossos/temari/${a.toLowerCase()}`}
+                className="pl-ley-card"
+              >
+                <span
+                  className="pl-ley-icon"
+                  aria-hidden
+                  style={{ background: meta.bg, color: meta.color }}
+                >
+                  {meta.icon}
+                </span>
+                <span className="pl-ley-text">
+                  <span className="pl-ley-title">{meta.short}</span>
+                  <span className="pl-ley-desc">
+                    {meta.desc} · {count} {count === 1 ? 'tema' : 'temes'}
+                  </span>
+                </span>
+                <span className="pl-ley-arr" aria-hidden>→</span>
+              </Link>
+            );
+          })}
+        </div>
+        <div className="mt-3 text-right">
+          <Link
+            to="/mossos/temari"
+            className="text-sm font-bold underline"
+            style={{ color: '#9c7a1f' }}
+          >
+            {t('mossosTemari.openAll')} →
+          </Link>
         </div>
       </section>
     </div>
