@@ -245,6 +245,15 @@ export default function TestSession() {
   function finishTest() {
     if (state.phase !== 'run') return;
 
+    // ── 0) Marquem que l'usuari ha acabat (com a mínim) un test ──
+    // El RegisterNudge escolta aquest event per oferir registre als visitants.
+    try {
+      if (!localStorage.getItem('infopol:firstTestDone')) {
+        localStorage.setItem('infopol:firstTestDone', '1');
+        window.dispatchEvent(new CustomEvent('infopol:test-finished'));
+      }
+    } catch { /* localStorage indisponible */ }
+
     // ── 1) Actualitzem el SRS de cada pregunta resposta ──
     // - Si correcta → recordSuccess (puja la caixa Leitner si era un fallat)
     // - Si errada   → recordFailure (l'afegeix com a fallat o reseteja a caixa 1)

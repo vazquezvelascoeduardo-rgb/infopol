@@ -641,6 +641,34 @@ const DICT: Dict = {
     'sidebar.cultura': 'Cultura general',
     'sidebar.alcohol': 'Calculadora alcoholèmia',
     'sidebar.session.viewProfile': 'Veure el meu perfil',
+
+    // Onboarding tour (primera visita)
+    'onboarding.continue': 'Continuar',
+    'onboarding.finish': 'Endavant!',
+    'onboarding.close': 'Tancar el tour',
+    'onboarding.skipRegister': 'Ara no, gràcies',
+    'onboarding.step1.title': 'Benvingut/da a InfoPol',
+    'onboarding.step1.desc':
+      "L'eina d'estudi i consulta per a policia local de Catalunya. Operativa al carrer, lleis, tests i actualitat — tot en un sol lloc.",
+    'onboarding.step2.title': 'Estudia amb tests',
+    'onboarding.step2.desc':
+      "Practica amb el temari oficial dels Mossos i amb cultura general. Apreta-li al primer test recomanat per veure on estàs.",
+    'onboarding.step2.cta': 'Anar a Acadèmia',
+    'onboarding.step3.title': 'Desa el teu progrés',
+    'onboarding.step3.desc':
+      "Crea un compte per sincronitzar XP, ratxes i repassos entre web i mòbil. És gratis i no demanem dades.",
+    'onboarding.step3.cta': 'Crear compte',
+    'onboarding.step3.titleAuth': 'Tot a punt',
+    'onboarding.step3.descAuth':
+      'Ja tens sessió oberta — el teu progrés es desa automàticament. Bon estudi!',
+
+    // Nudge a registre després del primer test
+    'nudge.register.title': "Bona feina! 🎉",
+    'nudge.register.desc':
+      "Has acabat el teu primer test. Crea un compte gratuït per desar el teu progrés, XP i ratxes — no perdràs cap intent.",
+    'nudge.register.cta': 'Crear compte ara',
+    'nudge.register.skip': 'Més tard',
+
     'sidebar.cta.title': 'Suggerir millora',
     'sidebar.cta.desc': 'Reporta errates o demana fitxes noves',
     'cultura.title': 'Cultura general',

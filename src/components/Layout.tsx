@@ -8,6 +8,8 @@ import { useT } from '../lib/i18n';
 import Sidebar from './Sidebar';
 import GdprBanner from './GdprBanner';
 import UserButton from './UserButton';
+import OnboardingTour from './OnboardingTour';
+import RegisterNudge from './RegisterNudge';
 
 function BrandShield({ className = '' }: { className?: string }) {
   // Shield-i (rebranding 2026): escut en tinta amb la "i" d'info
@@ -216,6 +218,12 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       {/* Banner RGPD a la primera visita */}
       <GdprBanner />
+
+      {/* Tour d'onboarding (només primera visita) */}
+      <OnboardingTour />
+
+      {/* Nudge a registre després del primer test (si no té sessió) */}
+      <RegisterNudge />
     </div>
   );
 }
