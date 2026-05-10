@@ -398,109 +398,163 @@ export default function Retos() {
           </section>
 
           {/* Customize / personalization */}
-          <section className="custom">
-            <div className="avatar-preview">
-              <div className="av-big">{initial}</div>
-              <div className="av-name">{displayName}</div>
-              <div className="av-rank">{cuerpoLabel}</div>
-              <div className="lvl-bar">
-                <div className="pbar3"><span style={{ width: `${Math.round((stats.xpInLevel / stats.xpToNext) * 100)}%` }} /></div>
-                <span className="num">
-                  {stats.xpInLevel.toLocaleString('es-ES')} / {stats.xpToNext.toLocaleString('es-ES')}
-                </span>
-              </div>
-            </div>
-            <div>
-              <h3>Personaliza tu agente</h3>
-              <p className="sub">Cambia colores, mascota e insignia. Algunos se desbloquean con XP o gemas.</p>
-              <div className="cu-grid">
-                <div className="cu-block">
-                  <span className="lab">Color de uniforme</span>
-                  <div className="cu-options">
-                    {[
-                      'linear-gradient(135deg, #F26B1F, #D9531A)',
-                      'linear-gradient(135deg, #2F6BD8, #1f4ea0)',
-                      'linear-gradient(135deg, #2FB66B, #1f8a4d)',
-                      'linear-gradient(135deg, #9747D6, #6c2bb4)',
-                    ].map((bg, i) => (
-                      <button
-                        key={`color-${i}`}
-                        type="button"
-                        className={`swatch ${colorIdx === i ? 'sel' : ''}`}
-                        style={{ background: bg }}
-                        onClick={() => setColorIdx(i)}
-                        aria-label={`Color ${i + 1}`}
-                      />
-                    ))}
-                    <span className="swatch lock" style={{ background: 'linear-gradient(135deg, #0E0E0E, #2a2a2a)' }} />
-                    <span className="swatch lock" style={{ background: 'linear-gradient(135deg, #E89A1C, #b87a14)' }} />
-                  </div>
-                </div>
-                <div className="cu-block">
-                  <span className="lab">Mascota guía</span>
-                  <div className="pet-row">
-                    {['🦉', '🐺', '🦊'].map((p, i) => (
-                      <button
-                        key={`pet-${i}`}
-                        type="button"
-                        className={`pet ${petIdx === i ? 'sel' : ''}`}
-                        onClick={() => setPetIdx(i)}
-                        aria-label={`Mascota ${p}`}
-                      >
-                        {p}
-                      </button>
-                    ))}
-                    <span className="pet lock">🦁</span>
-                    <span className="pet lock">🐉</span>
-                  </div>
-                </div>
-                <div className="cu-block">
-                  <span className="lab">Insignia de banda</span>
-                  <div className="cu-options">
-                    {[
-                      { bg: '#FFE9D8', icon: '🎓' },
-                      { bg: '#EAF1FE', icon: '⚖️' },
-                      { bg: '#DFF7E9', icon: '🛡️' },
-                    ].map((b, i) => (
-                      <button
-                        key={`badge-${i}`}
-                        type="button"
-                        className={`swatch ${badgeIdx === i ? 'sel' : ''}`}
-                        style={{ background: b.bg }}
-                        onClick={() => setBadgeIdx(i)}
-                        aria-label={`Insignia ${b.icon}`}
-                      >
-                        {b.icon}
-                      </button>
-                    ))}
-                    <span className="swatch lock" style={{ background: '#FBE5B5' }}>⭐</span>
-                  </div>
-                </div>
-                <div className="cu-block">
-                  <span className="lab">Tema de la app</span>
-                  <div className="cu-options">
-                    {[
-                      { bg: 'var(--paper)' },
-                      { bg: 'var(--ink)' },
-                    ].map((t, i) => (
-                      <button
-                        key={`theme-${i}`}
-                        type="button"
-                        className={`swatch ${themeIdx === i ? 'sel' : ''}`}
-                        style={{ background: t.bg }}
-                        onClick={() => setThemeIdx(i)}
-                        aria-label={`Tema ${i + 1}`}
-                      />
-                    ))}
+          {(() => {
+            const COLORS = [
+              { grad: 'linear-gradient(135deg, #F26B1F, #D9531A)', name: 'Terracotta' },
+              { grad: 'linear-gradient(135deg, #2F6BD8, #1f4ea0)', name: 'Blau' },
+              { grad: 'linear-gradient(135deg, #2FB66B, #1f8a4d)', name: 'Verd' },
+              { grad: 'linear-gradient(135deg, #9747D6, #6c2bb4)', name: 'Lila' },
+            ];
+            const PETS = ['🦉', '🐺', '🦊'];
+            const BADGES = [
+              { bg: '#FFE9D8', icon: '🎓', name: 'Acadèmica' },
+              { bg: '#EAF1FE', icon: '⚖️', name: 'Justícia' },
+              { bg: '#DFF7E9', icon: '🛡️', name: 'Escut' },
+            ];
+            const selColor = COLORS[colorIdx] ?? COLORS[0];
+            const selPet = PETS[petIdx] ?? PETS[0];
+            const selBadge = BADGES[badgeIdx] ?? BADGES[0];
+            return (
+              <section className="custom">
+                <div className="avatar-preview">
+                  <div
+                    className="av-big"
+                    style={{
+                      background: selColor.grad,
+                      color: '#fff',
+                      transition: 'background 0.25s',
+                      position: 'relative',
+                    }}
+                  >
+                    {initial}
                     <span
-                      className="swatch lock"
-                      style={{ background: 'linear-gradient(135deg, #1f2a44, #0e1530)' }}
-                    />
+                      style={{
+                        position: 'absolute',
+                        right: -8,
+                        bottom: -8,
+                        width: 36,
+                        height: 36,
+                        borderRadius: '50%',
+                        background: selBadge.bg,
+                        border: '3px solid var(--white)',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: 18,
+                        boxShadow: '0 2px 6px rgba(0,0,0,0.12)',
+                      }}
+                      aria-label={`Insígnia ${selBadge.name}`}
+                    >
+                      {selBadge.icon}
+                    </span>
+                  </div>
+                  <div className="av-name">
+                    <span style={{ marginRight: 6, fontSize: 18 }}>{selPet}</span>
+                    {displayName}
+                  </div>
+                  <div className="av-rank">{cuerpoLabel}</div>
+                  <div className="lvl-bar">
+                    <div className="pbar3">
+                      <span style={{ width: `${Math.round((stats.xpInLevel / stats.xpToNext) * 100)}%` }} />
+                    </div>
+                    <span className="num">
+                      {stats.xpInLevel.toLocaleString('es-ES')} / {stats.xpToNext.toLocaleString('es-ES')}
+                    </span>
                   </div>
                 </div>
-              </div>
-            </div>
-          </section>
+                <div>
+                  <h3>Personalitza el teu agent</h3>
+                  <p className="sub">
+                    Tria color, mascota i insígnia. Es desen automàticament i es reflecteixen al teu avatar.
+                  </p>
+                  <div className="cu-grid">
+                    <div className="cu-block">
+                      <span className="lab">Color d'uniforme</span>
+                      <div className="cu-options">
+                        {COLORS.map((c, i) => (
+                          <button
+                            key={`color-${i}`}
+                            type="button"
+                            className={`swatch ${colorIdx === i ? 'sel' : ''}`}
+                            style={{ background: c.grad }}
+                            onClick={() => setColorIdx(i)}
+                            aria-label={c.name}
+                            aria-pressed={colorIdx === i}
+                            title={c.name}
+                          />
+                        ))}
+                        <span className="swatch lock" style={{ background: 'linear-gradient(135deg, #0E0E0E, #2a2a2a)' }} />
+                        <span className="swatch lock" style={{ background: 'linear-gradient(135deg, #E89A1C, #b87a14)' }} />
+                      </div>
+                    </div>
+                    <div className="cu-block">
+                      <span className="lab">Mascota guia</span>
+                      <div className="pet-row">
+                        {PETS.map((p, i) => (
+                          <button
+                            key={`pet-${i}`}
+                            type="button"
+                            className={`pet ${petIdx === i ? 'sel' : ''}`}
+                            onClick={() => setPetIdx(i)}
+                            aria-label={`Mascota ${p}`}
+                            aria-pressed={petIdx === i}
+                          >
+                            {p}
+                          </button>
+                        ))}
+                        <span className="pet lock">🦁</span>
+                        <span className="pet lock">🐉</span>
+                      </div>
+                    </div>
+                    <div className="cu-block">
+                      <span className="lab">Insígnia de banda</span>
+                      <div className="cu-options">
+                        {BADGES.map((b, i) => (
+                          <button
+                            key={`badge-${i}`}
+                            type="button"
+                            className={`swatch ${badgeIdx === i ? 'sel' : ''}`}
+                            style={{ background: b.bg }}
+                            onClick={() => setBadgeIdx(i)}
+                            aria-label={b.name}
+                            aria-pressed={badgeIdx === i}
+                            title={b.name}
+                          >
+                            {b.icon}
+                          </button>
+                        ))}
+                        <span className="swatch lock" style={{ background: '#FBE5B5' }}>⭐</span>
+                      </div>
+                    </div>
+                    <div className="cu-block">
+                      <span className="lab">Tema de l'app</span>
+                      <div className="cu-options">
+                        {[
+                          { bg: 'var(--paper)', name: 'Clar' },
+                          { bg: 'var(--ink)', name: 'Sistema' },
+                        ].map((tt, i) => (
+                          <button
+                            key={`theme-${i}`}
+                            type="button"
+                            className={`swatch ${themeIdx === i ? 'sel' : ''}`}
+                            style={{ background: tt.bg }}
+                            onClick={() => setThemeIdx(i)}
+                            aria-label={`Tema ${tt.name}`}
+                            aria-pressed={themeIdx === i}
+                            title={tt.name}
+                          />
+                        ))}
+                        <span
+                          className="swatch lock"
+                          style={{ background: 'linear-gradient(135deg, #1f2a44, #0e1530)' }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            );
+          })()}
 
           {/* Achievements · llistat real de logros amb estat real */}
           <section className="ach-section">

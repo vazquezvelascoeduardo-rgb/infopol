@@ -185,8 +185,16 @@ export default function MossosList() {
         </div>
       </header>
 
-      {/* JUMP BUTTONS — Tests, Flashcards i Temari */}
-      <nav className="pl-jump pl-jump-3" aria-label={t('policiaLocal.jump.aria')}>
+      {/* JUMP BUTTONS — Test ràpid (tot), Tests, Flashcards i Temari */}
+      <nav className="pl-jump pl-jump-4" aria-label={t('policiaLocal.jump.aria')}>
+        <Link to="/mossos/tot" className="pl-jump-btn jump-tot">
+          <span className="pl-jump-icon" aria-hidden>⚡</span>
+          <span className="pl-jump-text">
+            <span className="pl-jump-eyebrow">{t('policiaLocal.jump.eyebrowTot')}</span>
+            <span className="pl-jump-title">{t('policiaLocal.jump.tot')}</span>
+          </span>
+          <span className="pl-jump-arr" aria-hidden>→</span>
+        </Link>
         <a href="#mossos-tests" className="pl-jump-btn jump-tests">
           <span className="pl-jump-icon" aria-hidden>📝</span>
           <span className="pl-jump-text">
@@ -203,14 +211,14 @@ export default function MossosList() {
           </span>
           <span className="pl-jump-arr" aria-hidden>→</span>
         </Link>
-        <a href="#mossos-temari" className="pl-jump-btn jump-temari">
+        <Link to="/mossos/temari" className="pl-jump-btn jump-temari">
           <span className="pl-jump-icon" aria-hidden>📚</span>
           <span className="pl-jump-text">
             <span className="pl-jump-eyebrow">{t('policiaLocal.jump.eyebrowTemari')}</span>
             <span className="pl-jump-title">{t('policiaLocal.jump.temari')}</span>
           </span>
           <span className="pl-jump-arr" aria-hidden>→</span>
-        </a>
+        </Link>
       </nav>
 
       {/* STATS PERSONALS */}

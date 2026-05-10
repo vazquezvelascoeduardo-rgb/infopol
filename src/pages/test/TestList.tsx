@@ -159,8 +159,16 @@ export default function TestList() {
         </div>
       </header>
 
-      {/* JUMP BUTTONS — Tests, Flashcards i Temari complet */}
-      <nav className="pl-jump pl-jump-3" aria-label={t('policiaLocal.jump.aria')}>
+      {/* JUMP BUTTONS — Test ràpid (tot), Tests, Flashcards i Temari complet */}
+      <nav className="pl-jump pl-jump-4" aria-label={t('policiaLocal.jump.aria')}>
+        <Link to="/policia-local/tot" className="pl-jump-btn jump-tot">
+          <span className="pl-jump-icon" aria-hidden>⚡</span>
+          <span className="pl-jump-text">
+            <span className="pl-jump-eyebrow">{t('policiaLocal.jump.eyebrowTot')}</span>
+            <span className="pl-jump-title">{t('policiaLocal.jump.tot')}</span>
+          </span>
+          <span className="pl-jump-arr" aria-hidden>→</span>
+        </Link>
         <a href="#pl-tests" className="pl-jump-btn jump-tests">
           <span className="pl-jump-icon" aria-hidden>📝</span>
           <span className="pl-jump-text">
