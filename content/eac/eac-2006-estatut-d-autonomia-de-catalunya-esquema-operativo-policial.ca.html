@@ -1,1568 +1,1054 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EAC 2006 · Estatut d'Autonomia de Catalunya — Esquema Operativo Policial</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>EAC 2006 · Estatut d'Autonomia de Catalunya — Esquema Operatiu Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* EAC 2006 — fitxa rebranding 2026 */
   :root {
-    --bg-main: #0A1628;
-    --bg-section: #0E2244;
-    --gold: #C8A028;
-    --blue-royal: #1A5C96;
-    --red: #C8281E;
-    --green: #1A7A3C;
-    --text-main: #F0F4FF;
-    --text-secondary: #A8BAD4;
-    --border: #C8A028;
+    --ink: #0E0E0E; --paper: #FAF6EF; --paper-2: #F2EDE3; --white: #FFFFFF;
+    --terracotta: #F26B1F; --terracotta-soft: #FFE9D8;
+    --text: #0E0E0E; --text-2: #4a4744; --text-3: #807c77;
+    --line: rgba(14, 14, 14, 0.10); --line-2: rgba(14, 14, 14, 0.06);
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
   body {
-    background-color: var(--bg-main);
-    background-image:
-      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
-    font-family: 'Source Sans 3', sans-serif;
-    color: var(--text-main);
-    padding: 20px 12px 40px;
+    background: var(--paper); color: var(--text);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    line-height: 1.5; -webkit-font-smoothing: antialiased;
+    padding: 12px 8px 40px;
   }
-
-  .wrapper { max-width: 720px; margin: 0 auto; }
-
-  /* ── CABECERA ── */
-  .header {
-    display: flex; align-items: center; gap: 18px;
-    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
-    border: 2px solid var(--gold);
-    border-radius: 10px;
-    padding: 22px 24px;
-    margin-bottom: 8px;
-    animation: fadeUp .5s ease both;
-    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+  a { color: inherit; text-decoration: none; }
+  .wrapper { max-width: 1080px; margin: 0 auto; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
   }
-  .escudo svg { flex-shrink: 0; }
-  .header-text { flex: 1; }
-  .header-text .label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 10px; letter-spacing: 3px;
-    color: var(--gold); text-transform: uppercase;
-  }
-  .header-text h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 28px; font-weight: 700;
-    text-transform: uppercase;
-    color: var(--text-main); line-height: 1.1;
-  }
-  .header-text h1 span { color: var(--gold); }
-  .header-text .subtitle {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-top: 4px;
-  }
-
-  /* ── CLASIFICACIÓN GENERAL ── */
-  .clasificacion {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px; margin-bottom: 14px;
-    animation: fadeUp .6s ease .1s both;
-  }
-  .clas-card {
-    border-radius: 8px;
-    padding: 12px 10px;
-    text-align: center;
-    border: 1px solid rgba(200,160,40,0.3);
-  }
-  .clas-card .icon { font-size: 22px; margin-bottom: 4px; }
-  .clas-card .tipo {
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1px;
-  }
-  .clas-card .pena-max {
-    font-size: 11px;
-    color: var(--text-secondary);
-    margin-top: 3px;
-  }
-  .clas-leve   { background: rgba(26,122,60,0.15); border-color: var(--green); }
-  .clas-menos  { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
-  .clas-grave  { background: rgba(200,40,30,0.15); border-color: var(--red); }
-  .clas-leve .tipo   { color: #4ACD7A; }
-  .clas-menos .tipo  { color: #6AADDC; }
-  .clas-grave .tipo  { color: #E86050; }
-
-  /* ── BANNER INFO ── */
-  .info-banner {
-    background: linear-gradient(135deg, #12345E 0%, #1A5C96 50%, #12345E 100%);
-    border: 2px solid #6AADDC;
-    border-radius: 8px;
-    padding: 10px 18px;
-    margin-bottom: 18px;
+  .section-head {
     display: flex; align-items: center; gap: 12px;
-    animation: fadeUp .55s ease .05s both;
-    box-shadow: 0 0 20px rgba(26,92,150,0.3);
+    margin: 32px 0 14px; flex-wrap: wrap;
   }
-  .info-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
-  .info-banner .ref-text { flex: 1; }
-  .info-banner .ref-ley {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1.5px;
-    color: #D8EBFF;
+  .section-head::before {
+    content: ""; display: block; width: 4px; height: 22px;
+    background: var(--accent, var(--terracotta)); border-radius: 2px; flex: none;
   }
-  .info-banner .ref-desc {
-    font-size: 12px;
-    color: rgba(216,235,255,0.85);
-    margin-top: 2px;
+  .section-head .eyebrow { color: var(--accent, var(--ink)); flex: none; }
+  .section-head .rule { flex: 1; height: 1px; background: var(--line); min-width: 30px; }
+
+  /* HERO daurat (color EAC) */
+  .ce-hero {
+    display: grid; grid-template-columns: auto 1fr; gap: 24px;
+    align-items: center;
+    background: linear-gradient(180deg, #FBF1D6 0%, #FAEAC1 100%);
+    border: 1px solid #E8C97A; border-radius: 18px;
+    padding: 26px 30px; margin-top: 8px;
   }
-  .info-banner .ref-fecha {
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px; font-weight: 700;
-    color: #D8EBFF;
-    background: rgba(0,0,0,0.25);
-    padding: 4px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    border: 1px solid rgba(216,235,255,0.3);
-    text-align: center;
+  .ce-shield { flex: none; }
+  .ce-title {
+    margin: 4px 0 6px; font-size: 38px; font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.05; color: #6b5004;
+  }
+  .ce-title .accent { color: #9c7a1f; }
+  .ce-sub { margin: 0; color: #6b5004; font-size: 15px; max-width: 760px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .hero-tags .tag {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #E8C97A;
+    padding: 4px 11px; border-radius: 999px;
+    font-size: 12.5px; font-weight: 600; color: #6b5004;
+  }
+  .hero-tags .tag.hot { background: #FFF1D2; border-color: #9c7a1f; color: #6b5004; font-weight: 800; }
+
+  .clasif-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-top: 16px;
+  }
+  .clasif {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 14px; padding: 16px 18px;
+    border-top: 3px solid var(--accent);
+  }
+  .clasif h4 {
+    margin: 2px 0 6px; font-size: 15px; font-weight: 800;
+    color: var(--accent); letter-spacing: 0.03em; text-transform: uppercase;
+  }
+  .clasif p { margin: 4px 0 0; font-size: 13px; color: var(--text-2); }
+  .clasif .ant {
+    font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+    color: var(--text-3); margin-top: 6px; display: block;
   }
 
-  /* ── BANNER STC ── */
-  .reforma-banner {
-    background: linear-gradient(135deg, #8B1A10 0%, #C8281E 50%, #8B1A10 100%);
-    border: 2px solid #FF6050;
-    border-radius: 8px;
-    padding: 10px 18px;
-    margin-bottom: 14px;
-    display: flex; align-items: center; gap: 12px;
-    animation: fadeUp .55s ease .08s both;
-    box-shadow: 0 0 20px rgba(200,40,30,0.3);
+  .meta-strip {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 16px; align-items: center;
+    background: #FFF1D2; border: 1px solid #E8C97A;
+    border-radius: 14px; padding: 14px 18px; margin-top: 14px;
   }
-  .reforma-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
-  .reforma-banner .ref-text { flex: 1; }
-  .reforma-banner .ref-ley {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1.5px;
-    color: #FFD0CC;
+  .meta-strip h3 { margin: 0; color: #6b5004; font-size: 16px; font-weight: 800; }
+  .meta-strip p { margin: 4px 0 0; color: #6b5004; font-size: 14px; }
+  .vigente {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 6px 14px; background: white;
+    border: 1px solid #E8C97A; border-radius: 10px;
   }
-  .reforma-banner .ref-desc {
-    font-size: 12px;
-    color: rgba(255,220,215,0.85);
-    margin-top: 2px;
-  }
-  .reforma-banner .ref-fecha {
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px; font-weight: 700;
-    color: #FFD0CC;
-    background: rgba(0,0,0,0.2);
-    padding: 4px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    border: 1px solid rgba(255,200,190,0.3);
-  }
+  .vigente .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); }
+  .vigente .state { font-weight: 800; color: #9c7a1f; }
 
-  /* ── CRONOLOGÍA ── */
-  .cronologia {
-    background: linear-gradient(135deg, #0E2244 0%, #12345E 100%);
-    border: 1px solid var(--gold);
-    border-radius: 10px;
-    padding: 18px 20px;
-    margin-bottom: 18px;
-    animation: fadeUp .6s ease .15s both;
+  .meta-strip.stc {
+    background: #FFEFEC; border-color: #f5c19a;
   }
-  .cronologia h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14px; font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-    display: flex; align-items: center; gap: 8px;
-  }
+  .meta-strip.stc h3 { color: #991b1b; }
+  .meta-strip.stc p { color: #7a1f1f; }
+  .meta-strip.stc .vigente { border-color: #f5c19a; }
+  .meta-strip.stc .vigente .state { color: #C13030; }
+
+  /* Timeline */
   .timeline {
-    position: relative;
-    padding-left: 24px;
+    position: relative; margin-top: 16px;
+    padding-left: 28px; border-left: 2px solid var(--line);
   }
-  .timeline::before {
-    content: "";
-    position: absolute;
-    left: 6px; top: 4px; bottom: 4px;
-    width: 2px;
-    background: linear-gradient(180deg, var(--gold) 0%, var(--blue-royal) 100%);
+  .tl-item {
+    position: relative; padding: 8px 0 12px;
   }
-  .timeline-item {
-    position: relative;
-    padding: 4px 0 10px;
-    font-size: 12.5px;
-    color: var(--text-main);
+  .tl-item::before {
+    content: ""; position: absolute; left: -34px; top: 12px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--paper-2); border: 2px solid var(--text-3);
   }
-  .timeline-item::before {
-    content: "";
-    position: absolute;
-    left: -24px; top: 7px;
-    width: 10px; height: 10px;
-    background: var(--gold);
-    border-radius: 50%;
-    box-shadow: 0 0 0 3px rgba(200,160,40,0.2);
+  .tl-item.active::before { background: #9c7a1f; border-color: #9c7a1f; }
+  .tl-item.stc::before { background: #C13030; border-color: #C13030; }
+  .tl-item .tl-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 800;
+    color: var(--text-3); letter-spacing: 0.04em;
   }
-  .timeline-item.stc::before {
-    background: var(--red);
-    box-shadow: 0 0 0 3px rgba(200,40,30,0.2);
+  .tl-item.active .tl-date { color: #9c7a1f; }
+  .tl-item.stc .tl-date { color: #C13030; }
+  .tl-item .tl-text {
+    font-size: 13.5px; color: var(--text-2); line-height: 1.5;
+    margin-top: 2px;
   }
-  .timeline-item .fecha {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    color: var(--gold);
-    font-size: 11.5px;
-    letter-spacing: 0.5px;
-    display: block;
-  }
-  .timeline-item.stc .fecha { color: #FF8070; }
-  .timeline-item .evento {
-    color: var(--text-main);
-    line-height: 1.4;
-  }
-  .timeline-item .evento b { color: #FFD060; }
+  .tl-item .tl-text b { color: var(--ink); }
 
-  /* ── BLOQUE CATEGORÍA ── */
-  .categoria {
-    background: var(--bg-section);
-    border-radius: 10px;
-    margin-bottom: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(200,160,40,0.2);
-    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  .art-card {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 14px; padding: 14px 18px;
+    border-left: 3px solid var(--accent, #9c7a1f);
+    margin-top: 10px;
   }
-  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
-  .categoria:nth-child(2)  { animation: fadeUp .6s ease .25s both; }
-  .categoria:nth-child(3)  { animation: fadeUp .6s ease .3s both; }
-  .categoria:nth-child(4)  { animation: fadeUp .6s ease .35s both; }
-  .categoria:nth-child(5)  { animation: fadeUp .6s ease .4s both; }
-  .categoria:nth-child(6)  { animation: fadeUp .6s ease .45s both; }
-  .categoria:nth-child(7)  { animation: fadeUp .6s ease .5s both; }
-  .categoria:nth-child(8)  { animation: fadeUp .6s ease .55s both; }
-  .categoria:nth-child(9)  { animation: fadeUp .6s ease .6s both; }
-  .categoria:nth-child(10) { animation: fadeUp .6s ease .65s both; }
-  .categoria:nth-child(11) { animation: fadeUp .6s ease .7s both; }
-
-  .cat-header {
-    background: var(--blue-royal);
-    padding: 12px 18px;
-    display: flex; align-items: center; gap: 12px;
-    cursor: pointer; user-select: none;
-    transition: background .2s;
-  }
-  .cat-header:hover { background: #1e6db0; }
-  .cat-header .cat-icon { font-size: 20px; }
-  .cat-header h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px; font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px; flex: 1;
-  }
-  .cat-header .art-ref {
-    font-size: 11px;
-    color: rgba(240,244,255,0.65);
-    white-space: nowrap;
-  }
-  .cat-header .toggle {
-    font-size: 14px;
-    transition: transform .3s;
-    color: var(--gold);
-  }
-  .cat-header.open .toggle { transform: rotate(180deg); }
-
-  .cat-body { padding: 6px 0; }
-
-  /* ── ARTÍCULO ── */
-  .delito {
-    border-left: 3px solid var(--gold);
-    margin: 8px 14px;
-    background: rgba(10,22,40,0.5);
-    border-radius: 0 7px 7px 0;
-    padding: 10px 14px;
-  }
-  .delito-top {
-    display: flex; align-items: flex-start;
-    gap: 8px; flex-wrap: wrap;
-  }
-  .delito-nombre {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14.5px; font-weight: 600;
-    color: var(--text-main);
-    flex: 1; min-width: 160px;
+  .art-card.warn { background: #FFF6E8; border-color: #f3d6a0; border-left-color: #E89A1C; }
+  .art-card.danger { background: #FFEFEC; border-color: #f5c19a; border-left-color: #E5484D; }
+  .art-card.gold { background: #FFF1D2; border-color: #E8C97A; border-left-color: #9c7a1f; }
+  .art-card.stc { background: #FFEFEC; border-color: #f5c19a; border-left-color: #C13030; }
+  .art-card header {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px;
   }
   .art-badge {
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif; font-weight: 700;
-    background: rgba(200,160,40,0.15);
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    padding: 2px 7px;
-    border-radius: 4px;
-    white-space: nowrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    background: var(--ink); color: var(--white);
+    padding: 4px 9px; border-radius: 6px; letter-spacing: 0.04em;
   }
-  .tipo-badge {
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif; font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
+  .tag-sm {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 8px; border-radius: 6px; letter-spacing: 0.04em;
+    background: #EAF1FE; color: #1f4ea0;
   }
-  .badge-clave    { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
-  .badge-info     { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
-  .badge-grave    { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
-  .badge-local    { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
+  .tag-sm.warn { background: #FFF6E8; color: #9c7a1f; }
+  .tag-sm.danger { background: #FFEFEC; color: #991b1b; }
+  .tag-sm.ok { background: #DFF7E9; color: #14532d; }
+  .tag-sm.purple { background: #F5E9FF; color: #5b21b6; }
+  .tag-sm.gold { background: #FFF1D2; color: #6b5004; }
+  .tag-sm.clave { background: #FFEFEC; color: #991b1b; }
+  .art-card h4 {
+    margin: 0; font-size: 16px; font-weight: 800; letter-spacing: -0.015em;
+  }
+  .art-card p { margin: 6px 0; font-size: 14px; color: var(--text-2); line-height: 1.55; }
+  .art-card p b { color: var(--ink); }
+  .art-card ul { margin: 6px 0 0 18px; }
+  .art-card li { font-size: 13.5px; color: var(--text-2); padding: 2px 0; }
+  .art-card li b { color: var(--ink); }
 
-  /* ── CHAPA RÁPIDA ── */
-  .multa-badge {
-    font-size: 11px;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    background: var(--gold);
-    color: #0A1628;
-    padding: 3px 10px;
-    border-radius: 4px;
-    border: 1px solid var(--gold);
-    letter-spacing: 0.4px;
-    white-space: nowrap;
-    box-shadow: 0 1px 3px rgba(200,160,40,0.25);
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-  }
-  .multa-badge.multa-alta {
-    background: var(--red);
-    color: #FFEBE8;
-    border-color: var(--red);
-    box-shadow: 0 1px 3px rgba(200,40,30,0.3);
-  }
-  .multa-badge.multa-organ {
-    background: var(--blue-royal);
-    color: #E0F0FF;
-    border-color: var(--blue-royal);
-  }
-  .multa-badge.multa-ok {
-    background: var(--green);
-    color: #E0FFF0;
-    border-color: var(--green);
-  }
+  .twocol { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 760px) { .twocol { grid-template-columns: 1fr; } }
 
-  .delito-desc {
-    font-size: 12.5px;
-    color: var(--text-secondary);
-    margin-top: 5px;
-    line-height: 1.5;
+  .info {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 12px; align-items: start;
+    padding: 12px 14px; border-radius: 10px;
+    margin-top: 10px; font-size: 13px; line-height: 1.5;
   }
-  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
+  .info b { color: var(--ink); }
+  .info.tip { background: var(--paper-2); border-left: 3px solid var(--text-2); color: var(--text-2); }
+  .info.cop { background: #EAF1FE; border-left: 3px solid #2F6BD8; color: #1f3f7a; }
+  .info.warn { background: #FFF6E8; border-left: 3px solid #E89A1C; color: #6b5a30; }
+  .info.danger { background: #FFEFEC; border-left: 3px solid #E5484D; color: #7a1f1f; }
+  .info.stc { background: #FFEFEC; border-left: 3px solid #C13030; color: #7a1f1f; }
+  .info.gold { background: #FFF1D2; border-left: 3px solid #9c7a1f; color: #6b5004; }
+  .info .ico { font-size: 18px; }
 
-  .pena-row {
-    display: flex; flex-wrap: wrap;
-    gap: 6px; margin-top: 7px;
+  /* Symbols grid */
+  .sym-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 8px; margin-top: 10px;
   }
-  .pena-chip {
-    font-size: 11px;
-    background: rgba(26,92,150,0.25);
-    border: 1px solid rgba(26,92,150,0.6);
-    color: var(--text-main);
-    padding: 3px 9px;
-    border-radius: 20px;
-    display: flex; align-items: center; gap: 4px;
-  }
-  .pena-chip.positivo {
-    background: rgba(26,122,60,0.25);
-    border-color: rgba(26,122,60,0.6);
-  }
-  .pena-chip.agravada {
-    background: rgba(200,40,30,0.2);
-    border-color: rgba(200,40,30,0.5);
-  }
-
-  /* ── MINI TABLA ── */
-  .mini-tabla {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    margin-top: 8px;
-  }
-  .mini-tabla .celda {
-    background: rgba(10,22,40,0.6);
-    border: 1px solid rgba(200,160,40,0.2);
-    border-radius: 5px;
-    padding: 6px 9px;
-    font-size: 11.5px;
-  }
-  .mini-tabla .celda b {
-    color: var(--gold);
-    font-family: 'Oswald', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  /* ── TABLA COMPARATIVA ── */
-  .tabla-discip {
-    display: grid;
-    grid-template-columns: 1.2fr 2fr;
-    gap: 0;
-    margin-top: 8px;
-    background: rgba(10,22,40,0.7);
-    border: 1px solid rgba(200,160,40,0.3);
-    border-radius: 5px;
-    overflow: hidden;
-    font-size: 11.5px;
-  }
-  .tabla-discip .td-header {
-    background: rgba(200,160,40,0.15);
-    color: var(--gold);
-    font-family: 'Oswald', sans-serif;
-    font-size: 9.5px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 4px 8px;
+  .sym {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 10px; padding: 12px;
     text-align: center;
-    border-right: 1px solid rgba(200,160,40,0.2);
-    border-bottom: 1px solid rgba(200,160,40,0.2);
+    border-top: 3px solid #9c7a1f;
   }
-  .tabla-discip .td-header:last-child { border-right: none; }
-  .tabla-discip .td-cell {
-    padding: 5px 8px;
-    color: var(--text-main);
-    border-right: 1px solid rgba(200,160,40,0.1);
-    border-bottom: 1px solid rgba(200,160,40,0.1);
+  .sym .ico { font-size: 24px; display: block; margin-bottom: 4px; }
+  .sym .nom { font-size: 12px; font-weight: 800; color: var(--ink); }
+  .sym .desc { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+  @media (max-width: 760px) { .sym-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .ntable {
+    width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13.5px;
   }
-  .tabla-discip .td-cell:last-child { border-right: none; }
-  .tabla-discip .td-pob {
-    color: var(--gold);
-    font-family: 'Oswald', sans-serif;
+  .ntable th {
+    text-align: left; padding: 8px 10px;
+    background: var(--paper-2); font-weight: 800; color: var(--ink);
+    font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .ntable td {
+    padding: 8px 10px; border-top: 1px solid var(--line-2);
+    color: var(--text-2); vertical-align: top;
+  }
+  .ntable b { color: var(--ink); }
+
+  /* Chips */
+  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chip {
+    font-size: 12px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    color: var(--text-2);
+    padding: 3px 9px; border-radius: 999px;
     font-weight: 600;
   }
+  .chip.gold { background: #FFF1D2; border-color: #E8C97A; color: #6b5004; }
+  .chip.danger { background: #FFEFEC; border-color: #f5c19a; color: #991b1b; }
+  .chip.ok { background: #DFF7E9; border-color: #6dc290; color: #14532d; }
+  .chip.clave { background: #FFEFEC; border-color: #f5c19a; color: #991b1b; font-weight: 800; }
 
-  /* ── NOTAS ── */
-  .nota-agrav {
-    margin-top: 6px; font-size: 11.5px;
-    color: #E08888;
-    background: rgba(200,40,30,0.08);
-    border-left: 2px solid var(--red);
-    padding: 5px 9px;
-    border-radius: 0 4px 4px 0;
-    line-height: 1.5;
+  .recorda {
+    background: linear-gradient(180deg, #FFF6E8 0%, #FBE5B5 100%);
+    border: 1px solid #f3d6a0; border-radius: 18px;
+    padding: 22px 26px; margin-top: 28px;
   }
-  .nota-agrav b { color: #FF8070; }
-  .nota-policial {
-    margin-top: 6px; font-size: 11.5px;
-    color: #A8D4C0;
-    background: rgba(26,122,60,0.1);
-    border-left: 2px solid var(--green);
-    padding: 5px 9px;
-    border-radius: 0 4px 4px 0;
-    line-height: 1.5;
+  .recorda header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
   }
-  .nota-policial b { color: #4ACD7A; }
-  .nota-clave {
-    margin-top: 6px; font-size: 11.5px;
-    color: #E8D890;
-    background: rgba(200,160,40,0.1);
-    border-left: 2px solid var(--gold);
-    padding: 5px 9px;
-    border-radius: 0 4px 4px 0;
-    line-height: 1.5;
+  .recorda .rule { flex: 1; height: 1px; background: #f3d6a0; }
+  .reclist {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px;
   }
-  .nota-clave b { color: #FFD060; }
-  .nota-stc {
-    margin-top: 6px; font-size: 11.5px;
-    color: #FFB8B0;
-    background: rgba(200,40,30,0.12);
-    border-left: 3px solid #C8281E;
-    padding: 5px 9px;
-    border-radius: 0 5px 5px 0;
-    line-height: 1.5;
+  .reclist li {
+    display: grid; grid-template-columns: auto 1fr; gap: 10px;
+    align-items: start; padding: 8px 0;
+    border-bottom: 1px solid rgba(156, 122, 31, 0.18);
+    font-size: 13.5px; color: #6b5a30; line-height: 1.5;
   }
-  .nota-stc b { color: #FF8070; }
+  .reclist li::before { content: "▸"; color: #9c7a1f; font-weight: 800; }
+  .reclist b { color: var(--ink); }
 
-  /* ── RECUERDA ── */
-  .recuerda {
-    background: var(--gold);
-    border-radius: 10px;
-    padding: 20px 22px;
-    margin-top: 6px;
-    animation: fadeUp .6s ease .8s both;
-  }
-  .recuerda h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px; font-weight: 700;
-    text-transform: uppercase;
-    color: #0A1628;
-    margin-bottom: 12px;
-    letter-spacing: 2px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .recuerda ul { list-style: none; }
-  .recuerda ul li {
-    font-size: 13px;
-    color: #0A1628;
-    padding: 5px 0;
-    display: flex; align-items: flex-start; gap: 6px;
-    border-bottom: 1px solid rgba(10,22,40,0.15);
-    line-height: 1.4;
-  }
-  .recuerda ul li:last-child { border-bottom: none; }
-  .recuerda ul li::before {
-    content: "▶";
-    font-size: 9px; margin-top: 4px;
-    flex-shrink: 0;
-  }
-
-  /* ── BOTÓN IMPRIMIR ── */
-  .btn-print {
-    display: block; width: 100%;
-    margin-top: 20px;
-    padding: 14px;
-    background: var(--blue-royal);
-    border: 2px solid var(--gold);
-    color: var(--text-main);
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 2px;
-    border-radius: 8px;
-    cursor: pointer; transition: all .2s;
-    animation: fadeUp .6s ease .9s both;
-  }
-  .btn-print:hover {
-    background: var(--gold);
-    color: #0A1628;
-  }
-
-  /* ── DIVISOR ── */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin: 4px 14px 2px;
-    opacity: .35;
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 500px) {
-    .clasificacion { grid-template-columns: 1fr; }
-    .header-text h1 { font-size: 22px; }
-    .cat-header h2 { font-size: 14px; }
-    .multa-badge { font-size: 10.5px; padding: 2px 7px; }
-    .tabla-discip { grid-template-columns: 1fr 1.5fr; }
-  }
-
-  @media print {
-    body { background: white; color: black; }
-    .btn-print { display: none; }
-    .categoria { break-inside: avoid; }
-    .cat-body { display: block !important; }
+  @media (max-width: 980px) {
+    .clasif-grid { grid-template-columns: 1fr; }
+    .meta-strip { grid-template-columns: 1fr; }
+    .reclist { grid-template-columns: 1fr; }
+    .ce-hero { grid-template-columns: 1fr; text-align: center; }
+    .ce-shield { margin: 0 auto; }
+    .ce-title { font-size: 28px; }
   }
 </style>
 </head>
-<body>
+<body data-fitxa-style="rebrand-2026">
 <div class="wrapper">
 
-  <!-- CABECERA -->
-  <div class="header">
-    <div class="escudo">
-      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
-        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
-        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICIA</text>
-        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
-        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
-        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
-        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
-        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
-        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+  <header class="ce-hero">
+    <div class="ce-shield">
+      <svg width="80" height="92" viewBox="0 0 80 92" fill="none">
+        <path d="M40 4 L74 13 V42 C74 62 60 78 40 88 C20 78 6 62 6 42 V13 Z" fill="#6b5004" stroke="#9c7a1f" stroke-width="2"/>
+        <text x="40" y="32" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="22" fill="#fff">🇪🇸</text>
+        <text x="40" y="54" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#fff" letter-spacing="1">EAC</text>
+        <text x="40" y="68" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="9" fill="#FBF1D6" letter-spacing="1">CATALUNYA</text>
+        <text x="40" y="80" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#FBF1D6" letter-spacing="1">2006</text>
       </svg>
     </div>
-    <div class="header-text">
-      <div class="label">Esquema Operatiu Policial</div>
-      <h1>EAC · Estatut <span>2006</span></h1>
-      <div class="subtitle">Llei Orgànica 6/2006 · Estatut d'Autonomia de Catalunya · Història, estructura, drets, competències i seguretat pública</div>
+    <div>
+      <div class="eyebrow" style="color:#6b5004;">ESQUEMA OPERATIU POLICIAL</div>
+      <h1 class="ce-title">EAC · <span class="accent">ESTATUT 2006</span></h1>
+      <p class="ce-sub">Llei Orgànica 6/2006, de 19 de juliol · Estatut d'Autonomia de Catalunya. Norma institucional bàsica de la Generalitat: història, estructura, drets, competències i seguretat pública.</p>
+      <div class="hero-tags">
+        <span class="tag hot">📅 LO 6/2006</span>
+        <span class="tag">📰 BOE 20/07/2006</span>
+        <span class="tag">📘 7 títols · 223 articles</span>
+        <span class="tag">⚖️ STC 31/2010</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="clasif-grid">
+    <div class="clasif" style="--accent:#9c7a1f;">
+      <h4>Preliminar</h4>
+      <p>Disposicions generals · Arts. 1–14</p>
+      <span class="ant">Catalunya, símbols, llengua</span>
+    </div>
+    <div class="clasif" style="--accent:#2F6BD8;">
+      <h4>Institucions</h4>
+      <p>Títols II i III · Arts. 55–109</p>
+      <span class="ant">Parlament, Govern, Judicial</span>
+    </div>
+    <div class="clasif" style="--accent:#C13030;">
+      <h4>Competències</h4>
+      <p>Títol IV · Arts. 110–173</p>
+      <span class="ant">⭐ Art. 164 Seguretat</span>
+    </div>
+  </section>
+
+  <div class="meta-strip">
+    <div>
+      <h3>📘 Llei Orgànica 6/2006, de 19 de juliol · 223 articles · 7 títols</h3>
+      <p>Referèndum 18 juny 2006 (73,9% SÍ) · BOE 20 juliol 2006 · Vigent amb modificacions per la <b>STC 31/2010</b> · Substitueix l'Estatut de Sau (LO 4/1979).</p>
+    </div>
+    <div class="vigente">
+      <span class="when">Vigor</span>
+      <span class="state">09/08/2006</span>
     </div>
   </div>
 
-  <!-- CLASIFICACIÓN -->
-  <div class="clasificacion">
-    <div class="clas-card clas-leve">
-      <div class="icon">📜</div>
-      <div class="tipo">Preliminar</div>
-      <div class="pena-max">Disposicions generals<br>Arts. 1–14<br>Catalunya, símbols, llengua</div>
+  <div class="meta-strip stc">
+    <div>
+      <h3>⚖️ STC 31/2010, de 28 de juny · Sentència clau del Tribunal Constitucional</h3>
+      <p>Va declarar <b>inconstitucionals 14 articles</b> i va <b>reinterpretar 27</b>. Modifica la lectura del Preàmbul, art. 6 (llengua), arts. 76-77 (Síndic), arts. 83-86 (vegueries), arts. 95-101 (CJC), arts. 110-112 (competències), art. 206 (finançament).</p>
     </div>
-    <div class="clas-card clas-menos">
-      <div class="icon">🏛️</div>
-      <div class="tipo">Institucions</div>
-      <div class="pena-max">Títols II i III<br>Arts. 55–109<br>Parlament, Govern, Judicial</div>
-    </div>
-    <div class="clas-card clas-grave">
-      <div class="icon">📋</div>
-      <div class="tipo">Competències</div>
-      <div class="pena-max">Títol IV<br>Arts. 110–173<br>⭐ Art. 164 Seguretat</div>
+    <div class="vigente">
+      <span class="when">STC</span>
+      <span class="state">31/2010</span>
     </div>
   </div>
 
-  <!-- BANNER INFO -->
-  <div class="info-banner">
-    <div class="ref-icon">📘</div>
-    <div class="ref-text">
-      <div class="ref-ley">📘 Llei Orgànica 6/2006, de 19 de juliol · 223 articles · 7 títols</div>
-      <div class="ref-desc">Referèndum 18 juny 2006 (73,9% SÍ) · BOE 20 juliol 2006 · Vigent amb modificacions STC 31/2010 · Substitueix l'Estatut de Sau (LO 4/1979)</div>
-    </div>
-    <div class="ref-fecha">LO 6/2006<br>Vigent</div>
+  <!-- ═══ CRONOLOGIA ═══ -->
+  <div class="section-head" style="--accent:#9c7a1f;">
+    <span class="eyebrow">🕰️ CRONOLOGIA · ELS ESTATUTS DE CATALUNYA</span>
+    <span class="rule"></span>
   </div>
 
-  <!-- BANNER STC -->
-  <div class="reforma-banner">
-    <div class="ref-icon">⚖️</div>
-    <div class="ref-text">
-      <div class="ref-ley">⚖️ STC 31/2010, de 28 de juny · Sentència clau del Tribunal Constitucional</div>
-      <div class="ref-desc">Va declarar <b>inconstitucionals 14 articles</b> i va <b>reinterpretar 27</b>. Modifica la lectura del Preàmbul (Catalunya "nació"), art. 6 (llengua), arts. 76-77 (Síndic), arts. 83-86 (vegueries), arts. 95-101 (CJC), arts. 110-112 (competències), art. 206 (finançament)</div>
-    </div>
-    <div class="ref-fecha">STC<br>31/2010</div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       CRONOLOGIA
-  ══════════════════════════════════════════ -->
-  <div class="cronologia">
-    <h3>🕰️ Cronologia · Els Estatuts de Catalunya</h3>
+  <article class="art-card gold">
     <div class="timeline">
-      <div class="timeline-item">
-        <span class="fecha">9 SET 1932</span>
-        <span class="evento"><b>Estatut de Núria</b> · Primer Estatut republicà · Aprovat per les Corts durant la II República</span>
-      </div>
-      <div class="timeline-item">
-        <span class="fecha">1939</span>
-        <span class="evento">Derogació de facto per la dictadura franquista (1939-1975)</span>
-      </div>
-      <div class="timeline-item">
-        <span class="fecha">29 SET 1977</span>
-        <span class="evento"><b>Restabliment provisional</b> de la Generalitat (RD-L 41/1977) · President Josep Tarradellas: "Ja sóc aquí"</span>
-      </div>
-      <div class="timeline-item">
-        <span class="fecha">25 OCT 1979</span>
-        <span class="evento"><b>Referèndum Estatut de Sau</b> (88,15% SÍ, participació 59,70%)</span>
-      </div>
-      <div class="timeline-item">
-        <span class="fecha">18 DES 1979</span>
-        <span class="evento"><b>LO 4/1979, Estatut de Sau</b> · Primer Estatut democràtic · Vigent 1979-2006</span>
-      </div>
-      <div class="timeline-item">
-        <span class="fecha">30 SET 2005</span>
-        <span class="evento">Proposta de nou Estatut aprovada pel <b>Parlament de Catalunya</b> (88% dels vots)</span>
-      </div>
-      <div class="timeline-item">
-        <span class="fecha">10 MAIG 2006</span>
-        <span class="evento">Aprovació definitiva del text per les <b>Corts Generals</b> (retallat respecte proposta inicial)</span>
-      </div>
-      <div class="timeline-item">
-        <span class="fecha">18 JUNY 2006</span>
-        <span class="evento"><b>Referèndum</b> a Catalunya: 73,9% SÍ · 20,8% NO · Participació 48,85%</span>
-      </div>
-      <div class="timeline-item">
-        <span class="fecha">19 JUL 2006</span>
-        <span class="evento"><b>Sanció reial · LO 6/2006</b> · Publicació BOE 20/07/2006 · Entrada en vigor 9/08/2006</span>
-      </div>
-      <div class="timeline-item">
-        <span class="fecha">JUL 2006</span>
-        <span class="evento"><b>Recurs d'inconstitucionalitat</b> del PP + Defensor del Pueblo + 5 CCAA contra 128 articles</span>
-      </div>
-      <div class="timeline-item stc">
-        <span class="fecha">⚖️ 28 JUNY 2010</span>
-        <span class="evento"><b>STC 31/2010</b> · 14 articles inconstitucionals + 27 reinterpretats · Gran manifestació a Barcelona 10/07/2010</span>
-      </div>
+      <div class="tl-item"><div class="tl-date">9 SET 1932</div><div class="tl-text"><b>Estatut de Núria</b> · Primer Estatut republicà · Aprovat per les Corts durant la II República.</div></div>
+      <div class="tl-item"><div class="tl-date">1939</div><div class="tl-text">Derogació de facto per la dictadura franquista (1939-1975).</div></div>
+      <div class="tl-item"><div class="tl-date">29 SET 1977</div><div class="tl-text"><b>Restabliment provisional</b> de la Generalitat (RD-L 41/1977) · President Josep Tarradellas: "Ja sóc aquí".</div></div>
+      <div class="tl-item"><div class="tl-date">25 OCT 1979</div><div class="tl-text"><b>Referèndum Estatut de Sau</b> (88,15% SÍ, participació 59,70%).</div></div>
+      <div class="tl-item"><div class="tl-date">18 DES 1979</div><div class="tl-text"><b>LO 4/1979 · Estatut de Sau</b> · Primer Estatut democràtic · Vigent 1979-2006.</div></div>
+      <div class="tl-item"><div class="tl-date">30 SET 2005</div><div class="tl-text">Proposta de nou Estatut aprovada pel <b>Parlament de Catalunya</b> (88% dels vots).</div></div>
+      <div class="tl-item"><div class="tl-date">10 MAIG 2006</div><div class="tl-text">Aprovació definitiva del text per les <b>Corts Generals</b> (retallat respecte de la proposta inicial).</div></div>
+      <div class="tl-item"><div class="tl-date">18 JUNY 2006</div><div class="tl-text"><b>Referèndum</b> a Catalunya: 73,9% SÍ · 20,8% NO · Participació 48,85%.</div></div>
+      <div class="tl-item active"><div class="tl-date">19 JUL 2006 · VIGOR</div><div class="tl-text"><b>Sanció reial · LO 6/2006</b> · Publicació BOE 20/07/2006 · Entrada en vigor 9/08/2006.</div></div>
+      <div class="tl-item"><div class="tl-date">JUL 2006</div><div class="tl-text"><b>Recurs d'inconstitucionalitat</b> del PP + Defensor del Pueblo + 5 CCAA contra 128 articles.</div></div>
+      <div class="tl-item stc"><div class="tl-date">⚖️ 28 JUNY 2010</div><div class="tl-text"><b>STC 31/2010</b> · 14 articles inconstitucionals + 27 reinterpretats · Gran manifestació a Barcelona 10/07/2010.</div></div>
     </div>
-    <div class="nota-clave" style="margin-top:12px">💡 Catalunya ha tingut <b>4 Estatuts</b>: (1) Núria 1932, (2) Sau 1979, (3) Estatut 2006 i les seves modificacions posteriors. L'Estatut és <b>Llei Orgànica</b> de l'Estat, integrada en el bloc de constitucionalitat.</div>
+    <div class="info gold">
+      <span class="ico">💡</span>
+      <div>Catalunya ha tingut <b>3 Estatuts</b>: (1) Núria 1932, (2) Sau 1979, (3) Estatut 2006. L'Estatut és <b>Llei Orgànica</b> de l'Estat, integrada en el bloc de constitucionalitat.</div>
+    </div>
+  </article>
+
+  <!-- ═══ ESTRUCTURA ═══ -->
+  <div class="section-head" style="--accent:#2F6BD8;">
+    <span class="eyebrow">📐 ESTRUCTURA DE L'ESTATUT 2006 · 7 TÍTOLS · 223 ARTICLES</span>
+    <span class="rule"></span>
   </div>
 
-  <!-- ══════════════════════════════════════════
-       1. ESTRUCTURA DEL EAC
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">📐</span>
-      <h2>Estructura de l'Estatut 2006</h2>
-      <span class="art-ref">7 Títols · 223 articles</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Estructura</span>
+      <span class="tag-sm">7 TÍTOLS</span>
+      <h4>Estructura completa del EAC</h4>
+    </header>
+    <p>L'Estatut es compon de: <b>Preàmbul</b> + <b>Títol Preliminar</b> + <b>7 Títols numerats</b> + <b>15 Disposicions Addicionals</b> + <b>6 Disposicions Transitòries</b> + <b>2 Disposicions Derogatòries</b> + <b>4 Disposicions Finals</b>.</p>
+    <table class="ntable">
+      <thead><tr><th>Títol</th><th>Contingut / Articles</th></tr></thead>
+      <tbody>
+        <tr><td><b>Preàmbul</b></td><td>Declaratiu · Catalunya com a "nació" (STC 31/2010: sense eficàcia jurídica)</td></tr>
+        <tr><td><b>Preliminar</b></td><td>Disposicions generals (Arts. 1-14)</td></tr>
+        <tr><td><b>Títol I</b></td><td>Drets, deures i principis rectors (Arts. 15-54)</td></tr>
+        <tr><td><b>Títol II</b></td><td>Institucions de la Generalitat (Arts. 55-94)</td></tr>
+        <tr><td><b>Títol III</b></td><td>Poder Judicial a Catalunya (Arts. 95-109)</td></tr>
+        <tr><td><b>Títol IV</b></td><td>Competències (Arts. 110-173)</td></tr>
+        <tr><td><b>Títol V</b></td><td>Relacions institucionals de la Generalitat (Arts. 174-200)</td></tr>
+        <tr><td><b>Títol VI</b></td><td>Finançament de la Generalitat (Arts. 201-221)</td></tr>
+        <tr><td><b>Títol VII</b></td><td>Reforma de l'Estatut (Arts. 222-223)</td></tr>
+      </tbody>
+    </table>
+  </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Estructura completa del EAC</div>
-          <span class="art-badge">Estructura</span>
-          <span class="tipo-badge badge-local">7 Títols</span>
-          <span class="multa-badge">📋 223 articles</span>
-        </div>
-        <div class="delito-desc">
-          L'Estatut es compon de: <b>Preàmbul</b> + <b>Títol Preliminar</b> + <b>7 Títols numerats</b> + <b>15 Disposicions Addicionals</b> + <b>6 Disposicions Transitòries</b> + <b>2 Disposicions Derogatòries</b> + <b>4 Disposicions Finals</b>.
-        </div>
-        <div class="tabla-discip">
-          <div class="td-header">Títol</div>
-          <div class="td-header">Contingut / Arts.</div>
-          <div class="td-cell td-pob">Preàmbul</div>
-          <div class="td-cell">Declaratiu · Catalunya com a "nació" (STC 31/2010: sense eficàcia jurídica)</div>
-          <div class="td-cell td-pob">Preliminar</div>
-          <div class="td-cell">Disposicions generals (Arts. 1-14)</div>
-          <div class="td-cell td-pob">Títol I</div>
-          <div class="td-cell">Drets, deures i principis rectors (Arts. 15-54)</div>
-          <div class="td-cell td-pob">Títol II</div>
-          <div class="td-cell">Institucions de la Generalitat (Arts. 55-94)</div>
-          <div class="td-cell td-pob">Títol III</div>
-          <div class="td-cell">Poder Judicial a Catalunya (Arts. 95-109)</div>
-          <div class="td-cell td-pob">Títol IV</div>
-          <div class="td-cell">Competències (Arts. 110-173)</div>
-          <div class="td-cell td-pob">Títol V</div>
-          <div class="td-cell">Relacions institucionals de la Generalitat (Arts. 174-200)</div>
-          <div class="td-cell td-pob">Títol VI</div>
-          <div class="td-cell">Finançament de la Generalitat (Arts. 201-221)</div>
-          <div class="td-cell td-pob">Títol VII</div>
-          <div class="td-cell">Reforma de l'Estatut (Arts. 222-223)</div>
-        </div>
-      </div>
-
-    </div>
+  <!-- ═══ TÍTOL PRELIMINAR ═══ -->
+  <div class="section-head" style="--accent:#9c7a1f;">
+    <span class="eyebrow">🇪🇸 TÍTOL PRELIMINAR · DISPOSICIONS GENERALS · ARTS. 1–14</span>
+    <span class="rule"></span>
   </div>
 
-  <!-- ══════════════════════════════════════════
-       2. TÍTOL PRELIMINAR · DISPOSICIONS GENERALS
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">🇪🇸</span>
-      <h2>Títol Preliminar · Disposicions Generals</h2>
-      <span class="art-ref">Arts. 1–14</span>
-      <span class="toggle">▼</span>
+  <article class="art-card gold">
+    <header>
+      <span class="art-badge">Art. 1 EAC</span>
+      <span class="tag-sm gold">⭐ FONAMENT</span>
+      <h4>Catalunya com a Nacionalitat</h4>
+    </header>
+    <p><b>Catalunya, com a nacionalitat</b>, exerceix el seu autogovern constituïda en <b>comunitat autònoma</b> d'acord amb la Constitució i amb aquest Estatut, que és la seva norma institucional bàsica.</p>
+    <div class="info stc">
+      <span class="ico">⚖️</span>
+      <div>El <b>Preàmbul</b> fa referència a Catalunya com a "nació", però la <b>STC 31/2010</b> va declarar que aquestes referències <b>no tenen eficàcia jurídica interpretativa</b>. En l'art. 1, el terme utilitzat és "nacionalitat", que sí té encaix constitucional (art. 2 CE).</div>
     </div>
-    <div class="cat-body">
+  </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Catalunya com a Nacionalitat</div>
-          <span class="art-badge">Art. 1 EAC</span>
-          <span class="tipo-badge badge-grave">⭐ Fonament</span>
-          <span class="multa-badge multa-alta">🇪🇸 Autogovern</span>
-        </div>
-        <div class="delito-desc">
-          <b>Catalunya, com a nacionalitat</b>, exerceix el seu autogovern constituïda en <b>comunitat autònoma d'acord amb la Constitució i amb aquest Estatut</b>, que és la seva norma institucional bàsica.
-        </div>
-        <div class="nota-stc">⚖️ El <b>Preàmbul</b> fa referència a Catalunya com a "nació", però la <b>STC 31/2010</b> va declarar que aquestes referències <b>no tenen eficàcia jurídica interpretativa</b>. En l'art. 1, el terme utilitzat és "nacionalitat", que sí té encaix constitucional (art. 2 CE).</div>
-      </div>
-      <div class="divider"></div>
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Art. 2 EAC</span>
+      <span class="tag-sm">INSTITUCIÓ</span>
+      <h4>La Generalitat</h4>
+    </header>
+    <p><b>(1)</b> La <b>Generalitat</b> és el sistema institucional en què s'organitza políticament l'autogovern de Catalunya.<br>
+    <b>(2)</b> La Generalitat és integrada pel <b>Parlament</b>, la <b>Presidència</b>, el <b>Govern</b> i les altres <b>institucions</b> que estableixi el Títol II.<br>
+    <b>(3)</b> Els municipis, les vegueries, les comarques i els altres ens locals formen <b>també part del sistema institucional</b> de la Generalitat.</p>
+  </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">La Generalitat</div>
-          <span class="art-badge">Art. 2 EAC</span>
-          <span class="tipo-badge badge-info">Institució</span>
-          <span class="multa-badge multa-organ">🏛️ Sistema institucional</span>
-        </div>
-        <div class="delito-desc">
-          (1) La <b>Generalitat</b> és el sistema institucional en què s'organitza políticament l'autogovern de Catalunya.<br>(2) La Generalitat és integrada pel <b>Parlament</b>, la <b>Presidència</b>, el <b>Govern</b> i les altres <b>institucions</b> que estableixi el Títol II.<br>(3) Els municipis, les vegueries, les comarques i els altres ens locals formen <b>també part del sistema institucional</b> de la Generalitat, com a ens en què aquesta s'organitza territorialment.
-        </div>
-      </div>
-      <div class="divider"></div>
+  <article class="art-card" style="--accent:#9c7a1f;">
+    <header>
+      <span class="art-badge">Art. 5 EAC</span>
+      <span class="tag-sm gold">FONAMENT</span>
+      <h4>Drets Històrics</h4>
+    </header>
+    <p>L'<b>autogovern de Catalunya</b> es fonamenta també en els <b>drets històrics del poble català</b>, en les seves institucions seculars i en la <b>tradició jurídica catalana</b>, a l'empara de l'<b>article 2, la disposició transitòria segona</b> i altres preceptes de la CE. Reconeixement d'una posició singular pel que fa al <b>dret civil</b>, la <b>llengua</b>, la <b>cultura</b>, la projecció en l'àmbit educatiu i el <b>sistema institucional</b>.</p>
+  </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Drets Històrics</div>
-          <span class="art-badge">Art. 5 EAC</span>
-          <span class="tipo-badge badge-info">Fonament</span>
-          <span class="multa-badge multa-ok">📜 DA 1ª CE</span>
-        </div>
-        <div class="delito-desc">
-          L'<b>autogovern de Catalunya</b> es fonamenta també en els <b>drets històrics del poble català</b>, en les seves institucions seculars i en la <b>tradició jurídica catalana</b>, que aquest Estatut incorpora i actualitza a l'empara de l'article 2, la disposició transitòria segona i altres preceptes de la Constitució, dels quals deriva el reconeixement d'una posició singular de la Generalitat pel que fa al <b>dret civil</b>, la <b>llengua</b>, la <b>cultura</b>, la projecció d'aquestes en l'àmbit educatiu, i el <b>sistema institucional</b> en què s'organitza la Generalitat.
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">La Llengua Pròpia i Oficial</div>
-          <span class="art-badge">Art. 6 EAC</span>
-          <span class="tipo-badge badge-grave">⭐ CLAU PL</span>
-          <span class="multa-badge multa-alta">🗣️ Català + Castellà</span>
-        </div>
-        <div class="delito-desc">
-          (1) La <b>llengua pròpia</b> de Catalunya és el <b>català</b>. Com a tal, és la llengua d'ús normal i preferent de les AAPP i dels mitjans de comunicació públics de Catalunya, i és també la llengua normalment utilitzada com a vehicular i d'aprenentatge en l'ensenyament.<br>(2) El <b>català és la llengua oficial</b> de Catalunya. També ho és el <b>castellà</b>, que és la llengua oficial de l'Estat espanyol. Totes les persones tenen el dret d'utilitzar les dues llengües oficials i els ciutadans de Catalunya tenen el dret i el <b>deure de conèixer-les</b>.<br>(5) La llengua <b>occitana</b>, denominada <b>aranès a l'Aran</b>, és la llengua pròpia d'aquest territori i és oficial a Catalunya.
-        </div>
-        <div class="nota-stc">⚖️ La <b>STC 31/2010</b> va matisar: l'ús "preferent" del català per les AAPP és inconstitucional si s'interpreta com a exclusió del castellà. El "deure de conèixer" el català no és equivalent al deure del castellà de l'art. 3.1 CE: només serà exigible als servidors públics i professionals regulats.</div>
-        <div class="nota-policial">🚔 La PL a Catalunya ha de <b>atendre i redactar</b> en les dues llengües oficials. Els ciutadans poden elegir llengua. Les actes i boletins es redacten preferentment en català però han d'estar disponibles en castellà si el ciutadà ho requereix. A l'Aran, obligació d'atendre en aranès.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Símbols Nacionals de Catalunya</div>
-          <span class="art-badge">Art. 8 EAC</span>
-          <span class="tipo-badge badge-info">Símbols</span>
-          <span class="multa-badge multa-ok">🎗️ Senyera + Diada</span>
-        </div>
-        <div class="delito-desc">
-          Catalunya té com a símbols nacionals:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip positivo">🏴 Bandera = Senyera (4 barres)</span>
-          <span class="pena-chip positivo">🛡️ Escut de Catalunya</span>
-          <span class="pena-chip positivo">🎵 Himne = Els Segadors</span>
-          <span class="pena-chip positivo">📅 Festa Nacional = 11 setembre (Diada)</span>
-          <span class="pena-chip positivo">🎗️ Sant Jordi = Patró (23 abril)</span>
-        </div>
-        <div class="nota-policial">🚔 La PL cobreix els actes institucionals de la Diada Nacional (11 setembre) i de la Festivitat de Sant Jordi (23 abril). Durant la Diada, normalment activats dispositius especials per ofrenes florals, manifestacions i concentracions.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Territori de Catalunya</div>
-          <span class="art-badge">Art. 9 EAC</span>
-          <span class="tipo-badge badge-info">Territori</span>
-          <span class="multa-badge multa-organ">🗺️ 4 províncies</span>
-        </div>
-        <div class="delito-desc">
-          El territori de Catalunya és el de les <b>comarques, els municipis i les vegueries</b> que el componen. El territori de Catalunya és l'àmbit espacial on la Generalitat exerceix la seva sobirania.
-        </div>
-        <div class="nota-clave">💡 Catalunya té 4 províncies (<b>Barcelona, Girona, Lleida, Tarragona</b>), 41 comarques + la <b>Val d'Aran</b> com a entitat territorial singular, i 947 municipis. L'art. 9 no esmenta les províncies perquè són organització estatal, no de la Generalitat.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">La Val d'Aran</div>
-          <span class="art-badge">Art. 11 EAC</span>
-          <span class="tipo-badge badge-local">Especial</span>
-          <span class="multa-badge multa-ok">⛰️ Règim singular</span>
-        </div>
-        <div class="delito-desc">
-          (1) El poble aranès exerceix l'autogovern mitjançant aquest Estatut, el <b>Consell General de l'Aran</b> i les altres institucions pròpies. Els ciutadans de Catalunya i les seves institucions polítiques reconeixen l'Aran com una realitat occitana dotada d'identitat cultural, històrica, geogràfica i lingüística, defensada pels aranesos al llarg dels segles.<br>(2) Aquest Estatut i les lleis <b>reconeixen, protegeixen i respecten</b> l'especificitat política, jurídica, lingüística i cultural.
-        </div>
-        <div class="nota-policial">🚔 La Val d'Aran té una <b>Policia pròpia (Policia Aranesa)</b> + Mossos d'Esquadra + Guàrdia Civil. L'aranès és oficial al seu territori. Regulat per la <b>Llei 1/2015 del règim especial d'Aran</b>.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Les Entitats Locals</div>
-          <span class="art-badge">Art. 13 EAC</span>
-          <span class="tipo-badge badge-grave">⭐ CLAU PL</span>
-          <span class="multa-badge multa-alta">🏛️ Municipis + Vegueries + Comarques</span>
-        </div>
-        <div class="delito-desc">
-          L'Estatut garanteix als <b>municipis, les vegueries, les comarques i la resta d'entitats locals</b> que les lleis determinin l'<b>autonomia</b> per a l'exercici de les competències que tenen atribuïdes com a pròpies, tot respectant els principis de descentralització, subsidiarietat i suficiència financera.
-        </div>
-        <div class="nota-clave">💡 Aquest article és la base estatutària del <b>govern local a Catalunya</b>, complementari del Tít. VIII CE (arts. 137-142) i la LRBRL 7/1985.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Condició Política de Català</div>
-          <span class="art-badge">Art. 14 EAC</span>
-          <span class="tipo-badge badge-info">Ciutadania</span>
-          <span class="multa-badge multa-ok">👤 Veïnatge</span>
-        </div>
-        <div class="delito-desc">
-          Tenen la condició política de <b>catalans o catalanes</b> els ciutadans espanyols que tenen <b>veïnatge administratiu a Catalunya</b>. Els seus <b>drets polítics</b> s'exerceixen d'acord amb aquest Estatut i les lleis. Els <b>ciutadans de Catalunya residents a l'estranger</b> gaudeixen, a més, dels drets polítics definits d'acord amb les lleis.
-        </div>
-      </div>
-
+  <article class="art-card" style="--accent:#C13030;">
+    <header>
+      <span class="art-badge">Art. 6 EAC</span>
+      <span class="tag-sm clave">⭐ CLAU PL</span>
+      <h4>La Llengua Pròpia i Oficial</h4>
+    </header>
+    <p><b>(1)</b> La <b>llengua pròpia</b> de Catalunya és el <b>català</b>. És la llengua d'ús normal i preferent de les AAPP i dels mitjans públics, i la vehicular i d'aprenentatge en l'ensenyament.</p>
+    <p><b>(2)</b> El <b>català és la llengua oficial</b> de Catalunya. També ho és el <b>castellà</b>. Totes les persones tenen el dret d'utilitzar les dues llengües oficials i els ciutadans de Catalunya tenen el dret i el <b>deure de conèixer-les</b>.</p>
+    <p><b>(5)</b> La llengua <b>occitana</b>, denominada <b>aranès a l'Aran</b>, és la llengua pròpia d'aquest territori i és oficial a Catalunya.</p>
+    <div class="info stc">
+      <span class="ico">⚖️</span>
+      <div>La <b>STC 31/2010</b> va matisar: l'ús "preferent" del català per les AAPP és inconstitucional si s'interpreta com a exclusió del castellà. El "deure de conèixer" el català no és equivalent al deure del castellà de l'art. 3.1 CE: només serà exigible als servidors públics i professionals regulats.</div>
     </div>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>La PL a Catalunya ha de <b>atendre i redactar</b> en les dues llengües oficials. Els ciutadans poden elegir llengua. Les actes i boletins es redacten preferentment en català però han d'estar disponibles en castellà si el ciutadà ho requereix. A l'Aran, obligació d'atendre en aranès.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9c7a1f;">
+    <header>
+      <span class="art-badge">Art. 8 EAC</span>
+      <span class="tag-sm gold">SÍMBOLS</span>
+      <h4>Símbols Nacionals de Catalunya</h4>
+    </header>
+    <p>Catalunya té com a símbols nacionals:</p>
+    <section class="sym-grid">
+      <div class="sym"><span class="ico">🏴</span><div class="nom">Senyera</div><div class="desc">Bandera (4 barres)</div></div>
+      <div class="sym"><span class="ico">🛡️</span><div class="nom">Escut</div><div class="desc">de Catalunya</div></div>
+      <div class="sym"><span class="ico">🎵</span><div class="nom">Els Segadors</div><div class="desc">Himne nacional</div></div>
+      <div class="sym"><span class="ico">📅</span><div class="nom">11 setembre</div><div class="desc">Festa Nacional · Diada</div></div>
+      <div class="sym"><span class="ico">🎗️</span><div class="nom">Sant Jordi</div><div class="desc">Patró · 23 abril</div></div>
+    </section>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>La PL cobreix els actes institucionals de la Diada Nacional (11 setembre) i de la Festivitat de Sant Jordi (23 abril). Durant la Diada, normalment activats dispositius especials per ofrenes florals, manifestacions i concentracions.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Art. 9 EAC</span>
+      <span class="tag-sm">TERRITORI</span>
+      <h4>Territori de Catalunya</h4>
+    </header>
+    <p>El territori de Catalunya és el de les <b>comarques, els municipis i les vegueries</b> que el componen. És l'àmbit espacial on la Generalitat exerceix la seva sobirania.</p>
+    <div class="info warn">
+      <span class="ico">💡</span>
+      <div>Catalunya té <b>4 províncies</b> (Barcelona, Girona, Lleida, Tarragona), <b>41 comarques + Val d'Aran</b> (entitat singular) i <b>947 municipis</b>. L'art. 9 no esmenta les províncies perquè són organització estatal, no de la Generalitat.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 11 EAC</span>
+      <span class="tag-sm ok">RÈGIM SINGULAR</span>
+      <h4>La Val d'Aran</h4>
+    </header>
+    <p>El poble aranès exerceix l'autogovern mitjançant aquest Estatut, el <b>Consell General de l'Aran</b> i les altres institucions pròpies. Es reconeix l'Aran com una <b>realitat occitana</b> dotada d'identitat cultural, històrica, geogràfica i lingüística.</p>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>La Val d'Aran té una <b>Policia pròpia (Policia Aranesa)</b> + Mossos d'Esquadra + Guàrdia Civil. L'aranès és oficial al seu territori. Regulat per la <b>Llei 1/2015 del règim especial d'Aran</b>.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#C13030;">
+    <header>
+      <span class="art-badge">Art. 13 EAC</span>
+      <span class="tag-sm clave">⭐ CLAU PL</span>
+      <h4>Les Entitats Locals</h4>
+    </header>
+    <p>L'Estatut garanteix als <b>municipis, les vegueries, les comarques i la resta d'entitats locals</b> que les lleis determinin l'<b>autonomia</b> per a l'exercici de les competències que tenen atribuïdes com a pròpies, tot respectant els principis de descentralització, subsidiarietat i suficiència financera.</p>
+    <div class="info warn">
+      <span class="ico">💡</span>
+      <div>Aquest article és la <b>base estatutària del govern local a Catalunya</b>, complementari del Tít. VIII CE (arts. 137-142) i la LRBRL 7/1985.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Art. 14 EAC</span>
+      <span class="tag-sm">CIUTADANIA</span>
+      <h4>Condició Política de Català</h4>
+    </header>
+    <p>Tenen la condició política de <b>catalans o catalanes</b> els ciutadans espanyols que tenen <b>veïnatge administratiu a Catalunya</b>. Els seus <b>drets polítics</b> s'exerceixen d'acord amb aquest Estatut i les lleis. Els <b>ciutadans de Catalunya residents a l'estranger</b> gaudeixen, a més, dels drets polítics definits d'acord amb les lleis.</p>
+  </article>
+
+  <!-- ═══ TÍTOL I · DRETS ═══ -->
+  <div class="section-head" style="--accent:#1f8a4d;">
+    <span class="eyebrow">🔒 TÍTOL I · DRETS, DEURES I PRINCIPIS RECTORS · ARTS. 15–54</span>
+    <span class="rule"></span>
   </div>
 
-  <!-- ══════════════════════════════════════════
-       3. TÍTOL I · DRETS, DEURES I PRINCIPIS RECTORS
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🔒</span>
-      <h2>Títol I · Drets, Deures i Principis Rectors</h2>
-      <span class="art-ref">Arts. 15–54</span>
-      <span class="toggle">▼</span>
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Arts. 15–28</span>
+      <span class="tag-sm ok">CAP. I</span>
+      <h4>Drets i deures de les persones</h4>
+    </header>
+    <p>Els drets d'aquest capítol els tenen <b>totes les persones</b>, amb independència de la seva nacionalitat. Destaquen:</p>
+    <div class="chip-row">
+      <span class="chip">15 · Drets persones</span>
+      <span class="chip">16 · Drets familiars</span>
+      <span class="chip">17 · Menors</span>
+      <span class="chip">18 · Gent gran</span>
+      <span class="chip">19 · Dones</span>
+      <span class="chip">20 · Procés mort</span>
+      <span class="chip">21 · Educació</span>
+      <span class="chip">22 · Cultura</span>
+      <span class="chip">23 · Salut</span>
+      <span class="chip">24 · Serveis socials</span>
+      <span class="chip">25 · Laboral</span>
+      <span class="chip">26 · Habitatge</span>
+      <span class="chip">27 · Medi ambient</span>
+      <span class="chip">28 · Consumidors</span>
     </div>
-    <div class="cat-body" style="display:none">
+  </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Drets i Deures de les Persones</div>
-          <span class="art-badge">Arts. 15–28 EAC</span>
-          <span class="tipo-badge badge-info">Cap. I</span>
-          <span class="multa-badge">📋 Titularitat: TOTS</span>
-        </div>
-        <div class="delito-desc">
-          Els drets d'aquest capítol els tenen <b>totes les persones</b>, amb independència de la seva nacionalitat. Destaquen:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">Art. 15 · Drets de les persones</span>
-          <span class="pena-chip">Art. 16 · Drets familiars</span>
-          <span class="pena-chip">Art. 17 · Drets dels menors</span>
-          <span class="pena-chip">Art. 18 · Drets de la gent gran</span>
-          <span class="pena-chip">Art. 19 · Drets de les dones</span>
-          <span class="pena-chip">Art. 20 · Viure amb dignitat en el procés de la mort</span>
-          <span class="pena-chip">Art. 21 · Drets i deures en l'educació</span>
-          <span class="pena-chip">Art. 22 · Drets i deures en l'àmbit cultural</span>
-          <span class="pena-chip">Art. 23 · Drets en l'àmbit de la salut</span>
-          <span class="pena-chip">Art. 24 · Drets en l'àmbit dels serveis socials</span>
-          <span class="pena-chip">Art. 25 · Drets en l'àmbit laboral</span>
-          <span class="pena-chip">Art. 26 · Dret a l'habitatge</span>
-          <span class="pena-chip">Art. 27 · Drets respecte al medi ambient</span>
-          <span class="pena-chip">Art. 28 · Drets dels consumidors</span>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Drets en l'Àmbit Polític i Administratiu</div>
-          <span class="art-badge">Arts. 29–31 EAC</span>
-          <span class="tipo-badge badge-info">Cap. II</span>
-          <span class="multa-badge">📋 Participació</span>
-        </div>
-        <div class="delito-desc">
-          <b>Art. 29:</b> Dret de participació política (sufragi, iniciativa legislativa popular, petició, consultes populars).<br><b>Art. 30:</b> Drets d'accés als serveis públics i a una <b>bona administració</b> (tracte imparcial, accés expedients, motivació resolucions).<br><b>Art. 31:</b> Dret a la <b>protecció de dades personals</b>.
-        </div>
-        <div class="nota-policial">🚔 <b>Art. 30.2 EAC</b>: dret a ser tractats amb <b>imparcialitat i objectivitat</b> per les AAPP. Principi rector del servei PL: cada intervenció ha de respectar aquesta imparcialitat.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Drets i Deures Lingüístics</div>
-          <span class="art-badge">Arts. 32–36 EAC</span>
-          <span class="tipo-badge badge-grave">⭐ CLAU PL</span>
-          <span class="multa-badge multa-alta">🗣️ Llengua en serveis públics</span>
-        </div>
-        <div class="delito-desc">
-          <b>Art. 32:</b> Dret de no ser discriminat per raons lingüístiques.<br><b>Art. 33:</b> <b>Drets lingüístics davant les AAPP i institucions estatals</b> (tothom té dret a adreçar-se en la llengua oficial que esculli).<br><b>Art. 34:</b> Drets lingüístics dels consumidors.<br><b>Art. 35:</b> Drets lingüístics en l'ensenyament.<br><b>Art. 36:</b> Drets respecte a l'<b>aranès</b> (a la Val d'Aran).
-        </div>
-        <div class="nota-policial">🚔 La PL té el <b>deure de poder atendre en català i en castellà</b> (i en aranès a la Vall d'Aran). El ciutadà <b>no pot ser obligat</b> a canviar de llengua oficial durant una actuació policial. Les actes i documents oficials s'han d'estendre en la llengua oficial que demani l'interessat.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Garanties dels Drets Estatutaris</div>
-          <span class="art-badge">Arts. 37–38 EAC</span>
-          <span class="tipo-badge badge-grave">Garantia</span>
-          <span class="multa-badge multa-alta">🛡️ Vinculació + control</span>
-        </div>
-        <div class="delito-desc">
-          <b>Art. 37:</b> Els drets del Títol I <b>vinculen tots els poders públics</b> de Catalunya i, d'acord amb la naturalesa de cada dret, els particulars. Les disposicions de caràcter general que els afectin han de respectar-ne el contingut essencial.<br><b>Art. 38:</b> La tutela davant el <b>Tribunal Superior de Justícia de Catalunya</b> garanteix els drets reconeguts per l'Estatut. El <b>Consell de Garanties Estatutàries</b> pot dictaminar sobre la conformitat amb l'Estatut.
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Principis Rectors</div>
-          <span class="art-badge">Arts. 39–54 EAC</span>
-          <span class="tipo-badge badge-info">Cap. V</span>
-          <span class="multa-badge">📋 16 principis</span>
-        </div>
-        <div class="delito-desc">
-          Els poders públics han de promoure:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">Art. 40 · Família</span>
-          <span class="pena-chip">Art. 41 · Perspectiva de gènere</span>
-          <span class="pena-chip">Art. 42 · Cohesió social</span>
-          <span class="pena-chip">Art. 43 · Participació política</span>
-          <span class="pena-chip">Art. 44 · Educació i recerca</span>
-          <span class="pena-chip">Art. 45 · Àmbit socioeconòmic</span>
-          <span class="pena-chip">Art. 46 · Medi ambient + sostenibilitat</span>
-          <span class="pena-chip">Art. 47 · Habitatge</span>
-          <span class="pena-chip">Art. 48 · Mobilitat sostenible</span>
-          <span class="pena-chip">Art. 49 · Cultura i patrimoni</span>
-          <span class="pena-chip">Art. 50 · Llengua catalana</span>
-          <span class="pena-chip">Art. 51 · Cooperació transfrontera</span>
-          <span class="pena-chip">Art. 52 · Mitjans de comunicació</span>
-          <span class="pena-chip">Art. 53 · Accés a les TIC</span>
-          <span class="pena-chip">Art. 54 · Memòria històrica</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       4. TÍTOL II · INSTITUCIONS DE LA GENERALITAT
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🏛️</span>
-      <h2>Títol II · Institucions de la Generalitat</h2>
-      <span class="art-ref">Arts. 55–94</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body" style="display:none">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">El Parlament de Catalunya</div>
-          <span class="art-badge">Arts. 55–67 EAC</span>
-          <span class="tipo-badge badge-info">Poder Legislatiu</span>
-          <span class="multa-badge multa-organ">🏛️ 135 diputats</span>
-        </div>
-        <div class="delito-desc">
-          El <b>Parlament</b> representa el poble de Catalunya, exerceix la potestat legislativa, aprova els pressupostos i controla el Govern. Es composa de <b>135 diputats</b> elegits per sufragi universal, lliure, igual, directe i secret, per <b>4 anys</b>. Circumscripcions: Barcelona, Girona, Lleida, Tarragona.
-        </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>Funcions</b>Legislativa · Control Govern · Pressupost · Elecció President</div>
-          <div class="celda"><b>Seu</b>Palau del Parlament · Parc de la Ciutadella (Barcelona)</div>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">El President de la Generalitat</div>
-          <span class="art-badge">Art. 67 EAC</span>
-          <span class="tipo-badge badge-grave">Màxima autoritat</span>
-          <span class="multa-badge multa-alta">👤 Més Honorable</span>
-        </div>
-        <div class="delito-desc">
-          El <b>President de la Generalitat</b> té la <b>més alta representació</b> de la Generalitat i la representació ordinària de l'Estat a Catalunya. Dirigeix i coordina l'acció del Govern. <b>Tractament de Molt Honorable</b>. És elegit pel Parlament entre els seus membres. Nomenat pel Rei. Mandat màxim: 2 legislatures consecutives.
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">El Govern de la Generalitat</div>
-          <span class="art-badge">Arts. 68–72 EAC</span>
-          <span class="tipo-badge badge-info">Poder Executiu</span>
-          <span class="multa-badge multa-organ">🏛️ Funcions executives</span>
-        </div>
-        <div class="delito-desc">
-          El <b>Govern</b> és l'òrgan superior col·legiat que dirigeix l'acció política i l'Administració de la Generalitat. Exerceix la funció <b>executiva i la potestat reglamentària</b>. Es composa del <b>President, el Vicepresident (si n'hi ha) i els Consellers</b>. La seva seu està al <b>Palau de la Generalitat</b> (Plaça Sant Jaume, Barcelona).
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">El Síndic de Greuges</div>
-          <span class="art-badge">Arts. 78–79 EAC</span>
-          <span class="tipo-badge badge-info">Institució</span>
-          <span class="multa-badge multa-ok">🛡️ Drets ciutadans</span>
-        </div>
-        <div class="delito-desc">
-          El <b>Síndic de Greuges</b> té la funció de <b>protegir i defensar els drets i les llibertats</b> reconeguts per la Constitució i aquest Estatut. Supervisa, amb aquesta finalitat, l'activitat de l'Administració de la Generalitat, dels <b>ens locals</b> i de totes les entitats que depenen d'elles o presten serveis públics. Elegit pel Parlament per majoria de 3/5.
-        </div>
-        <div class="nota-policial">🚔 El Síndic pot investigar actuacions de la <b>PL a Catalunya</b> en queixes de ciutadans. La Llei 24/2009 desenvolupa el seu funcionament. Equivalent al Defensor del Pueblo (Tít. I CE art. 54) en l'àmbit català.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Altres Institucions Estatutàries</div>
-          <span class="art-badge">Arts. 76–80 EAC</span>
-          <span class="tipo-badge badge-info">Òrgans</span>
-          <span class="multa-badge multa-organ">🏛️ 4 institucions</span>
-        </div>
-        <div class="delito-desc">
-          Altres institucions de la Generalitat:
-        </div>
-        <div class="tabla-discip">
-          <div class="td-header">Institució</div>
-          <div class="td-header">Funció</div>
-          <div class="td-cell td-pob">Consell de Garanties Estatutàries (76-77)</div>
-          <div class="td-cell">Dictamina sobre conformitat de lleis i projectes amb l'EAC i la CE</div>
-          <div class="td-cell td-pob">Síndic de Greuges (78-79)</div>
-          <div class="td-cell">Defensa drets i llibertats davant l'Administració</div>
-          <div class="td-cell td-pob">Sindicatura de Comptes (80)</div>
-          <div class="td-cell">Òrgan fiscalitzador dels comptes, gestió econòmica i control d'eficiència</div>
-          <div class="td-cell td-pob">Consell Audiovisual Catalunya</div>
-          <div class="td-cell">Autoritat independent del sector audiovisual</div>
-        </div>
-        <div class="nota-stc">⚖️ La <b>STC 31/2010</b> va reinterpretar l'art. 76.4: els dictàmens del Consell de Garanties <b>no són vinculants</b> per al Parlament (contra el redactat original de l'Estatut).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Govern Local · Organització Territorial</div>
-          <span class="art-badge">Arts. 83–94 EAC</span>
-          <span class="tipo-badge badge-grave">⭐ CLAU PL</span>
-          <span class="multa-badge multa-alta">🏛️ Municipi + Vegueria + Comarca</span>
-        </div>
-        <div class="delito-desc">
-          Catalunya estructura la seva organització territorial bàsica en <b>municipis i vegueries</b>. L'àmbit supramunicipal és constituït, en tot cas, per les <b>comarques</b>.
-        </div>
-        <div class="tabla-discip">
-          <div class="td-header">Ens local</div>
-          <div class="td-header">Base legal / Contingut</div>
-          <div class="td-cell td-pob">Art. 83-84 · Municipi</div>
-          <div class="td-cell">Entitat bàsica · Autonomia local · Competències pròpies</div>
-          <div class="td-cell td-pob">Art. 85 · Àmbits supramunicipals</div>
-          <div class="td-cell">Vegueries + comarques + altres agrupacions</div>
-          <div class="td-cell td-pob">Art. 87 · Principi autonomia local</div>
-          <div class="td-cell">Autonomia local constitucionalment garantida</div>
-          <div class="td-cell td-pob">Art. 91 · Comarca</div>
-          <div class="td-cell">Ens local format per agrupació de municipis</div>
-          <div class="td-cell td-pob">Art. 90-92 · Vegueria</div>
-          <div class="td-cell">Àmbit territorial específic de cooperació local</div>
-        </div>
-        <div class="nota-stc">⚖️ La <b>STC 31/2010</b> va declarar que les <b>vegueries NO poden substituir</b> les províncies: poden coexistir amb elles, però les províncies segueixen sent la divisió territorial per a l'exercici de competències estatals (art. 141 CE).</div>
-        <div class="nota-policial">🚔 La <b>PL és municipal</b> · La Generalitat té competència exclusiva de coordinació (art. 164 EAC) · Marc legal: Llei 16/1991 Policies Locals · Llei 4/2003 Sistema Seguretat.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       5. TÍTOL III · PODER JUDICIAL A CATALUNYA
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">⚖️</span>
-      <h2>Títol III · Poder Judicial a Catalunya</h2>
-      <span class="art-ref">Arts. 95–109</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body" style="display:none">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Tribunal Superior de Justícia de Catalunya</div>
-          <span class="art-badge">Arts. 95–96 EAC</span>
-          <span class="tipo-badge badge-grave">Òrgan judicial</span>
-          <span class="multa-badge multa-alta">⚖️ Màxima instància</span>
-        </div>
-        <div class="delito-desc">
-          El <b>Tribunal Superior de Justícia de Catalunya (TSJC)</b> és l'òrgan jurisdiccional en què culmina l'organització judicial a Catalunya i és competent, en els termes establerts per la LOPJ, per a conèixer dels recursos i dels procediments en els diversos ordres jurisdiccionals. El TSJC és la <b>darrera instància jurisdiccional</b> de tots els processos judicials iniciats a Catalunya.
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Consell de Justícia de Catalunya</div>
-          <span class="art-badge">Arts. 97–100 EAC</span>
-          <span class="tipo-badge badge-grave">Modificat STC</span>
-          <span class="multa-badge multa-alta">⚖️ STC 31/2010</span>
-        </div>
-        <div class="delito-desc">
-          El text original preveia un <b>Consell de Justícia de Catalunya</b> com a òrgan de govern del poder judicial a Catalunya, amb competències disciplinàries, d'inspecció i sobre nomenaments.
-        </div>
-        <div class="nota-stc">⚖️ La <b>STC 31/2010</b> va declarar <b>inconstitucionals</b> gran part dels arts. 95.2, 97, 98.2, 99.1 i 100.1 del EAC en la mesura que configuraven el Consell de Justícia com a <b>òrgan desconcentrat del CGPJ</b>. Només subsisteix com a òrgan de la Generalitat amb competències purament administratives, sense governar el Poder Judicial.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Competències Sobre Administració de Justícia</div>
-          <span class="art-badge">Art. 103–104 EAC</span>
-          <span class="tipo-badge badge-info">Competència</span>
-          <span class="multa-badge multa-organ">🏛️ Mitjans materials i personals</span>
-        </div>
-        <div class="delito-desc">
-          La Generalitat té competència en matèria de <b>mitjans materials i personals</b> de l'Administració de Justícia (oficines judicials, personal al servei, edificis, informàtica), però NO sobre els jutges i magistrats (que depenen del CGPJ) ni sobre fiscals (MF).
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       6. TÍTOL IV · COMPETÈNCIES
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">📋</span>
-      <h2>Títol IV · Competències</h2>
-      <span class="art-ref">Arts. 110–173</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body" style="display:none">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Tipus de Competències</div>
-          <span class="art-badge">Arts. 110–112 EAC</span>
-          <span class="tipo-badge badge-grave">⭐ CLAU</span>
-          <span class="multa-badge multa-alta">📋 3 tipus</span>
-        </div>
-        <div class="delito-desc">
-          L'Estatut distingeix tres tipus de competències de la Generalitat:
-        </div>
-        <div class="tabla-discip">
-          <div class="td-header">Competència</div>
-          <div class="td-header">Abast</div>
-          <div class="td-cell td-pob">Exclusives (art. 110)</div>
-          <div class="td-cell">Generalitat: <b>potestat legislativa + reglamentària + executiva</b> · Ex: urbanisme, llengua, policies locals</div>
-          <div class="td-cell td-pob">Compartides (art. 111)</div>
-          <div class="td-cell">Estat: <b>legislació bàsica</b> · Generalitat: <b>desenvolupament + execució</b> · Ex: educació, sanitat, règim local</div>
-          <div class="td-cell td-pob">Executives (art. 112)</div>
-          <div class="td-cell">Estat: legislació · Generalitat: <b>només execució</b> (potestat reglamentària organitzativa) · Ex: laboral, penitenciari</div>
-        </div>
-        <div class="nota-stc">⚖️ La <b>STC 31/2010</b> va reinterpretar els arts. 110, 111 i 112: les "competències exclusives" no exclouen la legislació estatal quan aquesta estigui emparada en títols competencials de l'art. 149.1 CE. Les "bases" estatals no es limiten a "principis o mínim comú normatiu" com pretenia l'EAC.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Matèries destacades · Competències Exclusives</div>
-          <span class="art-badge">Arts. 116–173 EAC</span>
-          <span class="tipo-badge badge-info">Àrees</span>
-          <span class="multa-badge">📋 60+ matèries</span>
-        </div>
-        <div class="delito-desc">
-          Entre les nombroses matèries del Títol IV, destaquen per interés operatiu:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">Art. 116 · Agricultura</span>
-          <span class="pena-chip">Art. 127 · Cultura</span>
-          <span class="pena-chip">Art. 131 · Educació</span>
-          <span class="pena-chip">Art. 134 · Esport i lleure</span>
-          <span class="pena-chip">Art. 138 · Immigració</span>
-          <span class="pena-chip">Art. 140 · Infraestructures i transports</span>
-          <span class="pena-chip">Art. 141 · Joc i espectacles</span>
-          <span class="pena-chip">Art. 144 · Medi ambient</span>
-          <span class="pena-chip">Art. 149 · Ordenació del territori i paisatge</span>
-          <span class="pena-chip">Art. 150 · Organització de l'Administració</span>
-          <span class="pena-chip">Art. 160 · Règim local</span>
-          <span class="pena-chip">Art. 162 · Salut</span>
-          <span class="pena-chip agravada">⭐ Art. 164 · SEGURETAT PÚBLICA</span>
-          <span class="pena-chip">Art. 166 · Serveis socials</span>
-          <span class="pena-chip">Art. 169 · Transports</span>
-          <span class="pena-chip">Art. 171 · Urbanisme</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       7. ⭐ ART. 164 · SEGURETAT PÚBLICA (CLAU PL)
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">🚔</span>
-      <h2>⭐ Art. 164 EAC · Seguretat Pública</h2>
-      <span class="art-ref">Clau Policia Local</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Competències en Seguretat Pública</div>
-          <span class="art-badge">Art. 164.1 EAC</span>
-          <span class="tipo-badge badge-grave">⭐⭐ CLAU PL</span>
-          <span class="multa-badge multa-alta">🚔 Exclusiva Generalitat</span>
-        </div>
-        <div class="delito-desc">
-          Correspon a la Generalitat, respectant el que disposa l'<b>art. 149.1.29 CE</b>, la <b>competència exclusiva</b> en matèria de seguretat pública:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">① Planificació i regulació del sistema de seguretat pública de Catalunya</span>
-          <span class="pena-chip agravada">② Ordenació de les policies locals</span>
-          <span class="pena-chip agravada">③ Regulació, planificació, coordinació i control dels serveis de seguretat privada</span>
-        </div>
-        <div class="nota-policial">🚔 <b>FONAMENT ESTATUTARI DE LA PL</b>. La Generalitat ordena, planifica i coordina les policies locals catalanes. Base de: <b>Llei 16/1991 Policies Locals</b>, <b>Llei 4/2003 Sistema Seguretat Catalunya</b>, <b>Llei 10/1994 Policia de la Generalitat-Mossos d'Esquadra</b>.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Competència en Extranjeria Art. 164.2</div>
-          <span class="art-badge">Art. 164.2 EAC</span>
-          <span class="tipo-badge badge-info">Executiva</span>
-          <span class="multa-badge multa-organ">🛂 Execució</span>
-        </div>
-        <div class="delito-desc">
-          Correspon a la Generalitat la <b>competència executiva</b> en matèria d'extranjeria en els termes de l'<b>article 138 EAC</b>: expedició d'autoritzacions de treball, recursos contra denegacions, iniciatives d'integració, participació en polítiques migratòries, etc.
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Mossos d'Esquadra · Policia Integral</div>
-          <span class="art-badge">Art. 164.3 EAC</span>
-          <span class="tipo-badge badge-grave">PG-ME</span>
-          <span class="multa-badge multa-alta">🚓 Policia integral</span>
-        </div>
-        <div class="delito-desc">
-          La Generalitat té competència per a la creació i organització del seu propi cos de policia (<b>Policia de la Generalitat-Mossos d'Esquadra</b>) com a <b>policia integral</b>: seguretat ciutadana + ordre públic + policia administrativa + <b>policia judicial</b> + trànsit interurbà + policia comunitària.
-        </div>
-        <div class="nota-policial">🚔 Els <b>Mossos d'Esquadra</b> assumeixen funcions de la Guàrdia Civil i el CNP a Catalunya (desplegament 1994-2008). Coexisteixen amb <b>FCSE</b> (CNP + Guàrdia Civil) en matèries reservades a l'Estat (art. 149.1.29 CE): terrorisme, armes, DNI, passaport, fronteres, extranjeria (excepció art. 164.2).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Coordinació · Junta de Seguretat</div>
-          <span class="art-badge">Art. 164.4 EAC</span>
-          <span class="tipo-badge badge-info">Coordinació</span>
-          <span class="multa-badge multa-organ">🤝 JSC</span>
-        </div>
-        <div class="delito-desc">
-          La <b>Junta de Seguretat de Catalunya</b>, de composició paritària entre Estat i Generalitat, és l'òrgan de coordinació entre les dues administracions en matèria de seguretat. Concreta les relacions entre cossos FCSE i PG-ME.
-        </div>
-        <div class="nota-clave">💡 A nivell <b>local</b> funcionen les <b>Juntes Locals de Seguretat</b> (Llei 4/2003 art. 9): Alcalde + Mossos d'Esquadra + PL + FCSE (si hi són) + Subdelegació. Coordinen operatius conjunts.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Sistema de Seguretat Pública de Catalunya</div>
-          <span class="art-badge">Llei 4/2003</span>
-          <span class="tipo-badge badge-local">Desenvolupament</span>
-          <span class="multa-badge multa-ok">🏛️ 4 elements</span>
-        </div>
-        <div class="delito-desc">
-          Desenvolupament legislatiu de l'art. 164 EAC. El sistema de seguretat pública de Catalunya s'integra per:
-        </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>① Cossos de policia</b>PG-ME + Policies Locals + Policia Aranesa</div>
-          <div class="celda"><b>② Serveis Protecció Civil</b>Llei 4/1997 · Generalitat + municipis</div>
-          <div class="celda"><b>③ Serveis Prevenció Incendis</b>Bombers de la Generalitat + Bombers municipals</div>
-          <div class="celda"><b>④ Serveis Trànsit</b>Servei Català de Trànsit (SCT)</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       8. TÍTOL V I VI · RELACIONS I FINANÇAMENT
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🤝</span>
-      <h2>Títols V i VI · Relacions i Finançament</h2>
-      <span class="art-ref">Arts. 174–221</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body" style="display:none">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Relacions amb l'Estat</div>
-          <span class="art-badge">Arts. 174–183 EAC</span>
-          <span class="tipo-badge badge-info">Bilaterals</span>
-          <span class="multa-badge multa-organ">🏛️ Comissió Bilateral</span>
-        </div>
-        <div class="delito-desc">
-          Els principis de col·laboració, cooperació i lleialtat institucional regeixen les relacions amb l'Estat. Òrgans: <b>Comissió Bilateral Generalitat-Estat</b>, <b>Comissió Mixta d'Afers Econòmics i Fiscals</b>, participació en òrgans i procediments estatals.
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Relacions amb la UE i Acció Exterior</div>
-          <span class="art-badge">Arts. 184–200 EAC</span>
-          <span class="tipo-badge badge-info">Internacional</span>
-          <span class="multa-badge multa-ok">🌍 Fase ascendent + descendent</span>
-        </div>
-        <div class="delito-desc">
-          La Generalitat participa en la formació de les posicions de l'Estat davant la <b>UE</b> (fase ascendent) i en l'execució i aplicació del Dret de la Unió (fase descendent). Pot obrir delegacions a l'estranger i cooperar transfronterament amb regions veïnes (Occitània, Euroregió Pirineus-Mediterrània, Andorra).
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Finançament de la Generalitat</div>
-          <span class="art-badge">Arts. 201–221 EAC</span>
-          <span class="tipo-badge badge-info">Economia</span>
-          <span class="multa-badge multa-organ">💰 Corresponsabilitat fiscal</span>
-        </div>
-        <div class="delito-desc">
-          Model basat en: <b>autonomia fiscal</b>, <b>corresponsabilitat fiscal</b>, <b>coordinació</b> i <b>solidaritat</b> interterritorial. Recursos: (a) cessió de tributs estatals, (b) tributs propis, (c) recàrrecs, (d) ingressos del patrimoni, (e) producte d'emissió de deute, (f) transferencies del Fons de Compensació Interterritorial, (g) participació en ingressos de l'Estat (LOFCA).
-        </div>
-        <div class="nota-stc">⚖️ La <b>STC 31/2010</b> va reinterpretar l'<b>art. 206.3</b> sobre <b>solidaritat</b>: l'Estat garantirà un nivell similar de serveis públics entre CCAA, però la seva aplicació és competència estatal (LOFCA) i no de la Generalitat.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       9. TÍTOL VII · REFORMA DE L'ESTATUT
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">✏️</span>
-      <h2>Títol VII · Reforma de l'Estatut</h2>
-      <span class="art-ref">Arts. 222–223</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body" style="display:none">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Reforma (general)</div>
-          <span class="art-badge">Art. 222 EAC</span>
-          <span class="tipo-badge badge-info">Procediment</span>
-          <span class="multa-badge multa-organ">⏱️ 2/3 Parlament + Corts + Referèndum</span>
-        </div>
-        <div class="delito-desc">
-          La reforma de títols que no afectin les relacions amb l'Estat requereix: (1) <b>2/3 del Parlament</b>; (2) aprovació per <b>Corts Generals com a LO</b>; (3) <b>referèndum</b> als ciutadans de Catalunya.
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Reforma Agreujada</div>
-          <span class="art-badge">Art. 223 EAC</span>
-          <span class="tipo-badge badge-grave">Excepcional</span>
-          <span class="multa-badge multa-alta">⚠️ Afecta relacions amb l'Estat</span>
-        </div>
-        <div class="delito-desc">
-          Per reformar títols sobre <b>relacions amb l'Estat</b> (Títol V, finançament), es requereix un procés agreujat amb participació més intensa de les Corts. Mateixa seqüència (majoria qualificada Parlament + Corts + referèndum).
-        </div>
-        <div class="nota-clave">💡 <b>L'Estatut 2006 no ha estat reformat</b> des de la seva aprovació. La STC 31/2010 va modificar la seva interpretació però no el text.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       10. STC 31/2010 · IMPACTE
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">⚖️</span>
-      <h2>STC 31/2010 · Impacte i Articles Afectats</h2>
-      <span class="art-ref">28 juny 2010</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">La Sentència Clau</div>
-          <span class="art-badge">STC 31/2010</span>
-          <span class="tipo-badge badge-grave">⭐ Fonamental</span>
-          <span class="multa-badge multa-alta">⚖️ 14 arts + 27 reinterpretats</span>
-        </div>
-        <div class="delito-desc">
-          El TC va resoldre el recurs d'inconstitucionalitat del PP contra 128 articles del EAC. Resultat: <b>14 articles inconstitucionals</b> (totalment o parcialment) i <b>27 articles reinterpretats</b>. Sentència votada 6 a 4 pels magistrats del TC.
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Articles Declarats Inconstitucionals</div>
-          <span class="art-badge">STC 31/2010 FJ</span>
-          <span class="tipo-badge badge-grave">Nuls</span>
-          <span class="multa-badge multa-alta">⚠️ Inconstitucionalitat</span>
-        </div>
-        <div class="delito-desc">
-          Principals articles o incisos <b>declarats inconstitucionals</b>:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">Art. 6.1 "preferent" (llengua)</span>
-          <span class="pena-chip agravada">Arts. 76, 77 (CGE vinculant)</span>
-          <span class="pena-chip agravada">Arts. 78.1 (Síndic actuació excloent)</span>
-          <span class="pena-chip agravada">Arts. 80.1 (Sindicatura inc.)</span>
-          <span class="pena-chip agravada">Arts. 83, 85, 86 (vegueries = província)</span>
-          <span class="pena-chip agravada">Arts. 95.2, 97-99 (CJC)</span>
-          <span class="pena-chip agravada">Art. 111 (bases estatals)</span>
-          <span class="pena-chip agravada">Art. 206.3 (principi solidaritat fiscal)</span>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Articles Reinterpretats (27 en total)</div>
-          <span class="art-badge">STC 31/2010 FJ</span>
-          <span class="tipo-badge badge-info">Interpretació conforme</span>
-          <span class="multa-badge multa-organ">🔄 Reinterpretació</span>
-        </div>
-        <div class="delito-desc">
-          Articles que mantenen la seva vigència però amb una <b>interpretació conforme</b> a la CE imposada pel TC:
-        </div>
-        <div class="tabla-discip">
-          <div class="td-header">Article</div>
-          <div class="td-header">Reinterpretació</div>
-          <div class="td-cell td-pob">Preàmbul</div>
-          <div class="td-cell">"Nació" sense eficàcia jurídica interpretativa</div>
-          <div class="td-cell td-pob">Art. 6.2</div>
-          <div class="td-cell">"Deure de conèixer" català ≠ deure del castellà (només exigible a servidors públics)</div>
-          <div class="td-cell td-pob">Arts. 33-36</div>
-          <div class="td-cell">Drets lingüístics: no pot generar desigualtat efectiva entre llengües oficials</div>
-          <div class="td-cell td-pob">Art. 110</div>
-          <div class="td-cell">Competències "exclusives" no exclouen legislació estatal basada en art. 149.1 CE</div>
-          <div class="td-cell td-pob">Art. 111</div>
-          <div class="td-cell">"Bases" estatals no es limiten a "principis o mínim comú normatiu"</div>
-          <div class="td-cell td-pob">Art. 127.1</div>
-          <div class="td-cell">Competència cultural: respectant art. 149.1.28 CE</div>
-        </div>
-        <div class="nota-clave">💡 Aquesta sentència va generar una <b>gran mobilització popular</b> (manifestació de Barcelona del 10/07/2010 "Som una nació. Nosaltres decidim") i va ser un punt d'inflexió en la relació Catalunya-Estat.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       CUADRO RECUERDA
-  ══════════════════════════════════════════ -->
-  <div class="recuerda">
-    <h3>📋 Recorda — Estatut d'Autonomia de Catalunya 2006</h3>
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Arts. 29–31</span>
+      <span class="tag-sm">CAP. II</span>
+      <h4>Drets en l'àmbit polític i administratiu</h4>
+    </header>
     <ul>
-      <li>📅 <b>Cronologia:</b> Referèndum 18 juny 2006 (73,9% SÍ) · LO 6/2006 de 19 juliol · BOE 20/07/2006 · Vigent des del 9/08/2006.</li>
-      <li>📜 <b>Estatuts de Catalunya:</b> Núria 1932 · Sau 1979 (LO 4/1979) · Vigent 2006 (LO 6/2006).</li>
-      <li>📐 <b>Estructura:</b> Preàmbul + Títol Preliminar + 7 Títols + 223 articles + 15 DA + 6 DT + 2 DDerog. + 4 DF.</li>
-      <li>⚖️ <b>STC 31/2010:</b> 14 articles inconstitucionals + 27 reinterpretats · Votació 6-4 · Punt d'inflexió polític.</li>
-      <li><b>Art. 1 EAC:</b> Catalunya, com a NACIONALITAT, exerceix el seu autogovern com a CA. El "nació" del Preàmbul no té eficàcia jurídica (STC).</li>
-      <li><b>Art. 2 EAC:</b> Generalitat = Parlament + Presidència + Govern + institucions + municipis/vegueries/comarques.</li>
-      <li>⭐ <b>Art. 6 EAC (CLAU PL):</b> Català = llengua pròpia · Català + Castellà = oficials · Dret i deure de conèixer-les (STC: deure matisat) · Aranès oficial a l'Aran.</li>
-      <li><b>Art. 8 EAC:</b> Símbols = Senyera + Escut + Els Segadors + 11 setembre (Diada) + Sant Jordi (23 abril).</li>
-      <li><b>Art. 11 EAC:</b> Val d'Aran = realitat occitana amb règim especial (Llei 1/2015) · Policia Aranesa pròpia.</li>
-      <li>⭐ <b>Art. 13 EAC (CLAU PL):</b> Garantia estatutària de l'autonomia local (municipis + vegueries + comarques).</li>
-      <li><b>Art. 14 EAC:</b> Condició política de català = veïnatge administratiu a Catalunya.</li>
-      <li><b>Títol I Arts. 15-54:</b> Drets, deures i principis rectors · Drets lingüístics (32-36) · Dret a una bona administració (30).</li>
-      <li><b>Parlament (Arts. 55-67):</b> 135 diputats per 4 anys · 4 circumscripcions (BCN, Girona, Lleida, Tarragona).</li>
-      <li><b>President (Art. 67):</b> Molt Honorable · Màxima representació de la Generalitat · Elegit pel Parlament · Mandat màx. 2 legislatures consecutives.</li>
-      <li><b>Síndic de Greuges (Arts. 78-79):</b> Pot investigar PL a Catalunya · Elegit pel Parlament per 3/5 · Llei 24/2009.</li>
-      <li>⭐ <b>Govern Local (Arts. 83-94 CLAU PL):</b> Municipi + vegueria + comarca · STC 31/2010: les vegueries NO substitueixen les províncies, només coexisteixen.</li>
-      <li><b>TSJC (Arts. 95-96):</b> Màxima instància judicial a Catalunya · Darrera instància de processos iniciats a Catalunya.</li>
-      <li><b>CJC (Arts. 97-100):</b> Gran part declarada inconstitucional per STC 31/2010 (no és òrgan desconcentrat del CGPJ).</li>
-      <li><b>Competències (Arts. 110-112):</b> Exclusives (Generalitat) · Compartides (Estat bases + Gen. desenv.) · Executives (només execució).</li>
-      <li>⭐⭐ <b>Art. 164 EAC (CLAU PL):</b> Competència EXCLUSIVA Generalitat · Planificació seguretat + ordenació PL + regulació seg. privada · Base de Llei 16/1991 i Llei 4/2003.</li>
-      <li><b>Art. 164.2:</b> Executiva en extranjeria · Art. 164.3: PG-ME com a policia integral · Art. 164.4: Junta de Seguretat de Catalunya.</li>
-      <li><b>Llei 4/2003 Sistema Seguretat:</b> PG-ME + PL + Aranesa + Protecció Civil + Bombers + SCT.</li>
-      <li><b>Finançament (Arts. 201-221):</b> Autonomia fiscal + corresponsabilitat + solidaritat · Art. 206.3 reinterpretat per STC.</li>
-      <li><b>Reforma (Arts. 222-223):</b> 2/3 Parlament + LO Corts Generals + Referèndum · Mai reformat des de 2006.</li>
-      <li>⚠️ L'Estatut és <b>Llei Orgànica</b> i integra el <b>bloc de constitucionalitat</b> amb la CE · Només pot modificar-se pel procediment estatutari previst als seus arts. 222-223.</li>
+      <li><b>Art. 29:</b> dret de participació política (sufragi, iniciativa legislativa popular, petició, consultes populars).</li>
+      <li><b>Art. 30:</b> drets d'accés als serveis públics i a una <b>bona administració</b> (tracte imparcial, accés expedients, motivació resolucions).</li>
+      <li><b>Art. 31:</b> dret a la <b>protecció de dades personals</b>.</li>
     </ul>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div><b>Art. 30.2 EAC:</b> dret a ser tractats amb <b>imparcialitat i objectivitat</b> per les AAPP. Principi rector del servei PL.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#C13030;">
+    <header>
+      <span class="art-badge">Arts. 32–36</span>
+      <span class="tag-sm clave">⭐ CLAU PL</span>
+      <h4>Drets i deures lingüístics</h4>
+    </header>
+    <ul>
+      <li><b>Art. 32:</b> dret de no ser discriminat per raons lingüístiques.</li>
+      <li><b>Art. 33:</b> drets lingüístics davant les AAPP i institucions estatals.</li>
+      <li><b>Art. 34:</b> drets lingüístics dels consumidors.</li>
+      <li><b>Art. 35:</b> drets lingüístics en l'ensenyament.</li>
+      <li><b>Art. 36:</b> drets respecte a l'<b>aranès</b> (a la Val d'Aran).</li>
+    </ul>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>La PL té el <b>deure de poder atendre en català i en castellà</b> (i en aranès a la Vall d'Aran). El ciutadà <b>no pot ser obligat</b> a canviar de llengua oficial durant una actuació policial. Les actes i documents oficials s'han d'estendre en la llengua oficial que demani l'interessat.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9c7a1f;">
+    <header>
+      <span class="art-badge">Arts. 37–38</span>
+      <span class="tag-sm gold">GARANTIA</span>
+      <h4>Garanties dels drets estatutaris</h4>
+    </header>
+    <p><b>Art. 37:</b> els drets del Títol I <b>vinculen tots els poders públics</b> de Catalunya i, d'acord amb la naturalesa de cada dret, els particulars.</p>
+    <p><b>Art. 38:</b> la tutela davant el <b>Tribunal Superior de Justícia de Catalunya</b> garanteix els drets reconeguts per l'Estatut. El <b>Consell de Garanties Estatutàries</b> pot dictaminar sobre la conformitat amb l'Estatut.</p>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Arts. 39–54</span>
+      <span class="tag-sm ok">CAP. V</span>
+      <h4>Principis rectors</h4>
+    </header>
+    <p>Els poders públics han de promoure:</p>
+    <div class="chip-row">
+      <span class="chip">40 · Família</span>
+      <span class="chip">41 · Gènere</span>
+      <span class="chip">42 · Cohesió social</span>
+      <span class="chip">43 · Participació</span>
+      <span class="chip">44 · Educació i recerca</span>
+      <span class="chip">45 · Socioeconòmic</span>
+      <span class="chip">46 · Medi ambient</span>
+      <span class="chip">47 · Habitatge</span>
+      <span class="chip">48 · Mobilitat sostenible</span>
+      <span class="chip">49 · Cultura/patrimoni</span>
+      <span class="chip">50 · Llengua catalana</span>
+      <span class="chip">51 · Cooperació transfront.</span>
+      <span class="chip">52 · Mitjans</span>
+      <span class="chip">53 · TIC</span>
+      <span class="chip">54 · Memòria històrica</span>
+    </div>
+  </article>
+
+  <!-- ═══ TÍTOL II · INSTITUCIONS ═══ -->
+  <div class="section-head" style="--accent:#2F6BD8;">
+    <span class="eyebrow">🏛️ TÍTOL II · INSTITUCIONS DE LA GENERALITAT · ARTS. 55–94</span>
+    <span class="rule"></span>
   </div>
 
-  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Arts. 55–67</span>
+      <span class="tag-sm">PODER LEGISLATIU</span>
+      <h4>El Parlament de Catalunya</h4>
+    </header>
+    <p>El <b>Parlament</b> representa el poble de Catalunya, exerceix la potestat legislativa, aprova els pressupostos i controla el Govern. Es composa de <b>135 diputats</b> elegits per sufragi universal, lliure, igual, directe i secret, per <b>4 anys</b>. Circumscripcions: Barcelona, Girona, Lleida, Tarragona.</p>
+    <ul>
+      <li><b>Funcions:</b> legislativa · control Govern · pressupost · elecció President.</li>
+      <li><b>Seu:</b> Palau del Parlament · Parc de la Ciutadella (Barcelona).</li>
+    </ul>
+  </article>
+
+  <article class="art-card" style="--accent:#C13030;">
+    <header>
+      <span class="art-badge">Art. 67 EAC</span>
+      <span class="tag-sm clave">MÀXIMA AUTORITAT</span>
+      <h4>El President de la Generalitat</h4>
+    </header>
+    <p>El President té la <b>més alta representació</b> de la Generalitat i la representació ordinària de l'Estat a Catalunya. Dirigeix i coordina l'acció del Govern. <b>Tractament de Molt Honorable</b>. És elegit pel Parlament entre els seus membres. Nomenat pel Rei. Mandat màxim: 2 legislatures consecutives.</p>
+  </article>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Arts. 68–72</span>
+      <span class="tag-sm">PODER EXECUTIU</span>
+      <h4>El Govern de la Generalitat</h4>
+    </header>
+    <p>El <b>Govern</b> és l'òrgan superior col·legiat que dirigeix l'acció política i l'Administració de la Generalitat. Exerceix la funció <b>executiva i la potestat reglamentària</b>. Es composa del <b>President, el Vicepresident</b> (si n'hi ha) i els <b>Consellers</b>. Seu: <b>Palau de la Generalitat</b> (Plaça Sant Jaume, Barcelona).</p>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Arts. 78–79</span>
+      <span class="tag-sm ok">DRETS CIUTADANS</span>
+      <h4>El Síndic de Greuges</h4>
+    </header>
+    <p>El <b>Síndic de Greuges</b> té la funció de <b>protegir i defensar els drets i les llibertats</b> reconeguts per la Constitució i l'Estatut. Supervisa l'activitat de l'Administració de la Generalitat, dels <b>ens locals</b> i de totes les entitats que en depenen o presten serveis públics. Elegit pel Parlament per majoria de <b>3/5</b>.</p>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>El Síndic pot investigar actuacions de la <b>PL a Catalunya</b> en queixes de ciutadans. La <b>Llei 24/2009</b> desenvolupa el seu funcionament. Equivalent al Defensor del Pueblo (Tít. I CE art. 54) en l'àmbit català.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9c7a1f;">
+    <header>
+      <span class="art-badge">Arts. 76–80</span>
+      <span class="tag-sm gold">ÒRGANS</span>
+      <h4>Altres institucions estatutàries</h4>
+    </header>
+    <table class="ntable">
+      <thead><tr><th>Institució</th><th>Funció</th></tr></thead>
+      <tbody>
+        <tr><td><b>Consell de Garanties Estatutàries (76-77)</b></td><td>Dictamina sobre conformitat de lleis i projectes amb l'EAC i la CE</td></tr>
+        <tr><td><b>Síndic de Greuges (78-79)</b></td><td>Defensa drets i llibertats davant l'Administració</td></tr>
+        <tr><td><b>Sindicatura de Comptes (80)</b></td><td>Òrgan fiscalitzador dels comptes, gestió econòmica i control d'eficiència</td></tr>
+        <tr><td><b>Consell Audiovisual Catalunya</b></td><td>Autoritat independent del sector audiovisual</td></tr>
+      </tbody>
+    </table>
+    <div class="info stc">
+      <span class="ico">⚖️</span>
+      <div>La <b>STC 31/2010</b> va reinterpretar l'art. 76.4: els dictàmens del Consell de Garanties <b>no són vinculants</b> per al Parlament (contra el redactat original).</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#C13030;">
+    <header>
+      <span class="art-badge">Arts. 83–94</span>
+      <span class="tag-sm clave">⭐ CLAU PL</span>
+      <h4>Govern Local · Organització Territorial</h4>
+    </header>
+    <p>Catalunya estructura la seva organització territorial bàsica en <b>municipis i vegueries</b>. L'àmbit supramunicipal és constituït, en tot cas, per les <b>comarques</b>.</p>
+    <table class="ntable">
+      <thead><tr><th>Ens local</th><th>Base legal / Contingut</th></tr></thead>
+      <tbody>
+        <tr><td><b>Art. 83-84 · Municipi</b></td><td>Entitat bàsica · Autonomia local · Competències pròpies</td></tr>
+        <tr><td><b>Art. 85 · Àmbits supramunicipals</b></td><td>Vegueries + comarques + altres agrupacions</td></tr>
+        <tr><td><b>Art. 87 · Autonomia local</b></td><td>Constitucionalment garantida</td></tr>
+        <tr><td><b>Art. 91 · Comarca</b></td><td>Ens local format per agrupació de municipis</td></tr>
+        <tr><td><b>Art. 90-92 · Vegueria</b></td><td>Àmbit territorial específic de cooperació local</td></tr>
+      </tbody>
+    </table>
+    <div class="info stc">
+      <span class="ico">⚖️</span>
+      <div>La <b>STC 31/2010</b> va declarar que les <b>vegueries NO poden substituir</b> les províncies: poden coexistir amb elles, però les províncies segueixen sent la divisió territorial per a l'exercici de competències estatals (art. 141 CE).</div>
+    </div>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>La <b>PL és municipal</b>. La Generalitat té competència exclusiva de coordinació (art. 164 EAC). Marc legal: <b>Llei 16/1991 Policies Locals</b> · <b>Llei 4/2003 Sistema Seguretat</b>.</div>
+    </div>
+  </article>
+
+  <!-- ═══ TÍTOL III · PODER JUDICIAL ═══ -->
+  <div class="section-head" style="--accent:#9747D6;">
+    <span class="eyebrow">⚖️ TÍTOL III · PODER JUDICIAL A CATALUNYA · ARTS. 95–109</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#9747D6;">
+    <header>
+      <span class="art-badge">Arts. 95–96</span>
+      <span class="tag-sm purple">ÒRGAN JUDICIAL</span>
+      <h4>Tribunal Superior de Justícia de Catalunya (TSJC)</h4>
+    </header>
+    <p>El <b>TSJC</b> és l'òrgan jurisdiccional en què culmina l'organització judicial a Catalunya i és competent, en els termes establerts per la LOPJ, per a conèixer dels recursos i procediments en els diversos ordres jurisdiccionals. És la <b>darrera instància jurisdiccional</b> de tots els processos judicials iniciats a Catalunya.</p>
+  </article>
+
+  <article class="art-card stc">
+    <header>
+      <span class="art-badge">Arts. 97–100</span>
+      <span class="tag-sm danger">MODIFICAT STC</span>
+      <h4>Consell de Justícia de Catalunya (CJC)</h4>
+    </header>
+    <p>El text original preveia un <b>Consell de Justícia de Catalunya</b> com a òrgan de govern del poder judicial a Catalunya, amb competències disciplinàries, d'inspecció i sobre nomenaments.</p>
+    <div class="info stc">
+      <span class="ico">⚖️</span>
+      <div>La <b>STC 31/2010</b> va declarar <b>inconstitucionals</b> gran part dels arts. 95.2, 97, 98.2, 99.1 i 100.1 EAC en la mesura que configuraven el CJC com a <b>òrgan desconcentrat del CGPJ</b>. Només subsisteix com a òrgan de la Generalitat amb competències purament administratives, sense governar el Poder Judicial.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9747D6;">
+    <header>
+      <span class="art-badge">Arts. 103–104</span>
+      <span class="tag-sm purple">COMPETÈNCIA</span>
+      <h4>Competències sobre Administració de Justícia</h4>
+    </header>
+    <p>La Generalitat té competència en matèria de <b>mitjans materials i personals</b> de l'Administració de Justícia (oficines judicials, personal al servei, edificis, informàtica), però <b>NO sobre els jutges i magistrats</b> (que depenen del CGPJ) ni sobre fiscals (MF).</p>
+  </article>
+
+  <!-- ═══ TÍTOL IV · COMPETÈNCIES ═══ -->
+  <div class="section-head" style="--accent:#9c3a08;">
+    <span class="eyebrow">📋 TÍTOL IV · COMPETÈNCIES · ARTS. 110–173</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Arts. 110–112</span>
+      <span class="tag-sm warn">⭐ CLAU</span>
+      <h4>Tipus de competències</h4>
+    </header>
+    <p>L'Estatut distingeix tres tipus de competències de la Generalitat:</p>
+    <table class="ntable">
+      <thead><tr><th>Competència</th><th>Abast</th></tr></thead>
+      <tbody>
+        <tr><td><b>Exclusives (art. 110)</b></td><td>Generalitat: <b>potestat legislativa + reglamentària + executiva</b> · Ex: urbanisme, llengua, policies locals</td></tr>
+        <tr><td><b>Compartides (art. 111)</b></td><td>Estat: <b>legislació bàsica</b> · Generalitat: <b>desenvolupament + execució</b> · Ex: educació, sanitat, règim local</td></tr>
+        <tr><td><b>Executives (art. 112)</b></td><td>Estat: legislació · Generalitat: <b>només execució</b> (potestat reglamentària organitzativa) · Ex: laboral, penitenciari</td></tr>
+      </tbody>
+    </table>
+    <div class="info stc">
+      <span class="ico">⚖️</span>
+      <div>La <b>STC 31/2010</b> va reinterpretar els arts. 110, 111 i 112: les "competències exclusives" no exclouen la legislació estatal quan aquesta estigui emparada en títols competencials de l'art. 149.1 CE. Les "bases" estatals no es limiten a "principis o mínim comú normatiu".</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Arts. 116–173</span>
+      <span class="tag-sm warn">ÀREES</span>
+      <h4>Matèries destacades · Competències Exclusives</h4>
+    </header>
+    <p>Entre les nombroses matèries del Títol IV, destaquen per interès operatiu:</p>
+    <div class="chip-row">
+      <span class="chip">116 · Agricultura</span>
+      <span class="chip">127 · Cultura</span>
+      <span class="chip">131 · Educació</span>
+      <span class="chip">134 · Esport i lleure</span>
+      <span class="chip">138 · Immigració</span>
+      <span class="chip">140 · Infraestructures</span>
+      <span class="chip">141 · Joc i espectacles</span>
+      <span class="chip">144 · Medi ambient</span>
+      <span class="chip">149 · Ordenació territori</span>
+      <span class="chip">150 · Adm. pública</span>
+      <span class="chip">160 · Règim local</span>
+      <span class="chip">162 · Salut</span>
+      <span class="chip clave">⭐ 164 · SEGURETAT PÚBLICA</span>
+      <span class="chip">166 · Serveis socials</span>
+      <span class="chip">169 · Transports</span>
+      <span class="chip">171 · Urbanisme</span>
+    </div>
+  </article>
+
+  <!-- ═══ ART. 164 SEGURETAT ═══ -->
+  <div class="section-head" style="--accent:#C13030;">
+    <span class="eyebrow">🚔 ⭐ ART. 164 EAC · SEGURETAT PÚBLICA · CLAU POLICIA LOCAL</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card danger">
+    <header>
+      <span class="art-badge">Art. 164.1 EAC</span>
+      <span class="tag-sm clave">⭐⭐ CLAU PL</span>
+      <h4>Competències en seguretat pública</h4>
+    </header>
+    <p>Correspon a la Generalitat, respectant el que disposa l'<b>art. 149.1.29 CE</b>, la <b>competència exclusiva</b> en matèria de seguretat pública:</p>
+    <ul>
+      <li>① <b>Planificació i regulació</b> del sistema de seguretat pública de Catalunya.</li>
+      <li>② <b>Ordenació de les policies locals</b>.</li>
+      <li>③ Regulació, planificació, coordinació i control dels serveis de <b>seguretat privada</b>.</li>
+    </ul>
+    <div class="info danger">
+      <span class="ico">🚔</span>
+      <div><b>FONAMENT ESTATUTARI DE LA PL.</b> La Generalitat ordena, planifica i coordina les policies locals catalanes. Base de: <b>Llei 16/1991 Policies Locals</b>, <b>Llei 4/2003 Sistema Seguretat Catalunya</b>, <b>Llei 10/1994 Policia de la Generalitat-Mossos d'Esquadra</b>.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9747D6;">
+    <header>
+      <span class="art-badge">Art. 164.2</span>
+      <span class="tag-sm purple">EXECUTIVA</span>
+      <h4>Competència en extranjeria</h4>
+    </header>
+    <p>Correspon a la Generalitat la <b>competència executiva</b> en matèria d'extranjeria en els termes de l'<b>art. 138 EAC</b>: expedició d'autoritzacions de treball, recursos contra denegacions, iniciatives d'integració, participació en polítiques migratòries.</p>
+  </article>
+
+  <article class="art-card danger">
+    <header>
+      <span class="art-badge">Art. 164.3</span>
+      <span class="tag-sm clave">PG-ME</span>
+      <h4>Mossos d'Esquadra · Policia Integral</h4>
+    </header>
+    <p>La Generalitat té competència per a la creació i organització del seu propi cos de policia (<b>Policia de la Generalitat-Mossos d'Esquadra</b>) com a <b>policia integral</b>: seguretat ciutadana + ordre públic + policia administrativa + <b>policia judicial</b> + trànsit interurbà + policia comunitària.</p>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>Els <b>Mossos d'Esquadra</b> assumeixen funcions de la Guàrdia Civil i el CNP a Catalunya (desplegament 1994-2008). Coexisteixen amb <b>FCSE</b> en matèries reservades a l'Estat (art. 149.1.29 CE): terrorisme, armes, DNI, passaport, fronteres, extranjeria (excepció art. 164.2).</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Art. 164.4</span>
+      <span class="tag-sm">COORDINACIÓ</span>
+      <h4>Junta de Seguretat</h4>
+    </header>
+    <p>La <b>Junta de Seguretat de Catalunya</b>, de composició paritària entre Estat i Generalitat, és l'òrgan de coordinació entre les dues administracions en matèria de seguretat. Concreta les relacions entre cossos FCSE i PG-ME.</p>
+    <div class="info warn">
+      <span class="ico">💡</span>
+      <div>A nivell <b>local</b> funcionen les <b>Juntes Locals de Seguretat</b> (Llei 4/2003 art. 9): Alcalde + Mossos d'Esquadra + PL + FCSE (si hi són) + Subdelegació. Coordinen operatius conjunts.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Llei 4/2003</span>
+      <span class="tag-sm ok">DESENVOLUPAMENT</span>
+      <h4>Sistema de Seguretat Pública de Catalunya</h4>
+    </header>
+    <p>Desenvolupament legislatiu de l'art. 164 EAC. El sistema s'integra per:</p>
+    <ul>
+      <li>① <b>Cossos de policia:</b> PG-ME + Policies Locals + Policia Aranesa.</li>
+      <li>② <b>Serveis Protecció Civil:</b> Llei 4/1997 · Generalitat + municipis.</li>
+      <li>③ <b>Serveis Prevenció Incendis:</b> Bombers de la Generalitat + Bombers municipals.</li>
+      <li>④ <b>Serveis Trànsit:</b> Servei Català de Trànsit (SCT).</li>
+    </ul>
+  </article>
+
+  <!-- ═══ TÍTOLS V i VI ═══ -->
+  <div class="section-head" style="--accent:#1f4ea0;">
+    <span class="eyebrow">🤝 TÍTOLS V I VI · RELACIONS I FINANÇAMENT · ARTS. 174–221</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Arts. 174–183</span>
+      <span class="tag-sm">BILATERALS</span>
+      <h4>Relacions amb l'Estat</h4>
+    </header>
+    <p>Els principis de <b>col·laboració, cooperació i lleialtat institucional</b> regeixen les relacions amb l'Estat. Òrgans: <b>Comissió Bilateral Generalitat-Estat</b>, <b>Comissió Mixta d'Afers Econòmics i Fiscals</b>, participació en òrgans i procediments estatals.</p>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Arts. 184–200</span>
+      <span class="tag-sm ok">INTERNACIONAL</span>
+      <h4>Relacions amb la UE i Acció Exterior</h4>
+    </header>
+    <p>La Generalitat participa en la formació de les posicions de l'Estat davant la <b>UE</b> (fase ascendent) i en l'execució i aplicació del Dret de la Unió (fase descendent). Pot obrir delegacions a l'estranger i cooperar transfronterament amb regions veïnes (Occitània, Euroregió Pirineus-Mediterrània, Andorra).</p>
+  </article>
+
+  <article class="art-card" style="--accent:#9c7a1f;">
+    <header>
+      <span class="art-badge">Arts. 201–221</span>
+      <span class="tag-sm gold">FINANÇAMENT</span>
+      <h4>Finançament de la Generalitat</h4>
+    </header>
+    <p>Model basat en: <b>autonomia fiscal, corresponsabilitat fiscal, coordinació i solidaritat interterritorial</b>. Recursos: cessió de tributs estatals, tributs propis, recàrrecs, ingressos del patrimoni, producte d'emissió de deute, transferències del Fons de Compensació Interterritorial, participació en ingressos de l'Estat (LOFCA).</p>
+    <div class="info stc">
+      <span class="ico">⚖️</span>
+      <div>La <b>STC 31/2010</b> va reinterpretar l'<b>art. 206.3</b> sobre <b>solidaritat</b>: l'Estat garantirà un nivell similar de serveis públics entre CCAA, però la seva aplicació és competència estatal (LOFCA) i no de la Generalitat.</div>
+    </div>
+  </article>
+
+  <!-- ═══ TÍTOL VII · REFORMA ═══ -->
+  <div class="section-head" style="--accent:#9c7a1f;">
+    <span class="eyebrow">✏️ TÍTOL VII · REFORMA DE L'ESTATUT · ARTS. 222–223</span>
+    <span class="rule"></span>
+  </div>
+
+  <div class="twocol">
+    <article class="art-card" style="--accent:#2F6BD8;">
+      <header>
+        <span class="art-badge">Art. 222 EAC</span>
+        <span class="tag-sm">PROCEDIMENT</span>
+        <h4>Reforma (general)</h4>
+      </header>
+      <p>La reforma de títols que no afectin les relacions amb l'Estat requereix:</p>
+      <ul>
+        <li>① <b>2/3 del Parlament</b>.</li>
+        <li>② Aprovació per <b>Corts Generals com a LO</b>.</li>
+        <li>③ <b>Referèndum</b> als ciutadans de Catalunya.</li>
+      </ul>
+    </article>
+    <article class="art-card warn" style="--accent:#9c3a08;">
+      <header>
+        <span class="art-badge">Art. 223 EAC</span>
+        <span class="tag-sm warn">EXCEPCIONAL</span>
+        <h4>Reforma agreujada</h4>
+      </header>
+      <p>Per reformar títols sobre <b>relacions amb l'Estat</b> (Títol V, finançament), es requereix un procés agreujat amb participació més intensa de les Corts. Mateixa seqüència (majoria qualificada Parlament + Corts + referèndum).</p>
+      <div class="info warn">
+        <span class="ico">💡</span>
+        <div><b>L'Estatut 2006 no ha estat reformat</b> des de la seva aprovació. La STC 31/2010 va modificar la seva interpretació però no el text.</div>
+      </div>
+    </article>
+  </div>
+
+  <!-- ═══ STC 31/2010 ═══ -->
+  <div class="section-head" style="--accent:#C13030;">
+    <span class="eyebrow">⚖️ STC 31/2010 · IMPACTE I ARTICLES AFECTATS · 28 JUNY 2010</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card stc">
+    <header>
+      <span class="art-badge">STC 31/2010</span>
+      <span class="tag-sm danger">⭐ FONAMENTAL</span>
+      <h4>La sentència clau</h4>
+    </header>
+    <p>El TC va resoldre el recurs d'inconstitucionalitat del PP contra <b>128 articles</b> del EAC. Resultat:</p>
+    <ul>
+      <li>🔴 <b>14 articles inconstitucionals</b> (totalment o parcialment).</li>
+      <li>🔄 <b>27 articles reinterpretats</b>.</li>
+      <li>👥 Sentència votada <b>6 a 4</b> pels magistrats del TC.</li>
+    </ul>
+  </article>
+
+  <article class="art-card stc">
+    <header>
+      <span class="art-badge">STC 31/2010 FJ</span>
+      <span class="tag-sm danger">NULS</span>
+      <h4>Articles declarats inconstitucionals</h4>
+    </header>
+    <p>Principals articles o incisos <b>declarats inconstitucionals</b>:</p>
+    <div class="chip-row">
+      <span class="chip danger">Art. 6.1 "preferent" (llengua)</span>
+      <span class="chip danger">Arts. 76, 77 (CGE vinculant)</span>
+      <span class="chip danger">Art. 78.1 (Síndic exclusiu)</span>
+      <span class="chip danger">Art. 80.1 (Sindicatura)</span>
+      <span class="chip danger">Arts. 83, 85, 86 (vegueries = província)</span>
+      <span class="chip danger">Arts. 95.2, 97-99 (CJC)</span>
+      <span class="chip danger">Art. 111 (bases estatals)</span>
+      <span class="chip danger">Art. 206.3 (solidaritat fiscal)</span>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">STC 31/2010 FJ</span>
+      <span class="tag-sm warn">REINTERPRETACIÓ</span>
+      <h4>Articles reinterpretats (27 en total)</h4>
+    </header>
+    <p>Articles que mantenen la seva vigència però amb una <b>interpretació conforme</b> a la CE imposada pel TC:</p>
+    <table class="ntable">
+      <thead><tr><th>Article</th><th>Reinterpretació</th></tr></thead>
+      <tbody>
+        <tr><td><b>Preàmbul</b></td><td>"Nació" sense eficàcia jurídica interpretativa</td></tr>
+        <tr><td><b>Art. 6.2</b></td><td>"Deure de conèixer" català ≠ deure del castellà (només exigible a servidors públics)</td></tr>
+        <tr><td><b>Arts. 33-36</b></td><td>Drets lingüístics: no pot generar desigualtat efectiva entre llengües oficials</td></tr>
+        <tr><td><b>Art. 110</b></td><td>Competències "exclusives" no exclouen legislació estatal basada en art. 149.1 CE</td></tr>
+        <tr><td><b>Art. 111</b></td><td>"Bases" estatals no es limiten a "principis o mínim comú normatiu"</td></tr>
+        <tr><td><b>Art. 127.1</b></td><td>Competència cultural: respectant art. 149.1.28 CE</td></tr>
+      </tbody>
+    </table>
+    <div class="info warn">
+      <span class="ico">💡</span>
+      <div>Aquesta sentència va generar una <b>gran mobilització popular</b> (manifestació de Barcelona del 10/07/2010 "Som una nació. Nosaltres decidim") i va ser un punt d'inflexió en la relació Catalunya-Estat.</div>
+    </div>
+  </article>
+
+  <!-- ═══ RECORDA ═══ -->
+  <section class="recorda">
+    <header>
+      <span class="eyebrow" style="color:#9c7a1f;">📋 RECORDA · ESTATUT D'AUTONOMIA DE CATALUNYA 2006</span>
+      <span class="rule"></span>
+    </header>
+    <ul class="reclist">
+      <li><div>📅 <b>Cronologia:</b> Referèndum 18 juny 2006 (73,9% SÍ) · LO 6/2006 de 19 juliol · BOE 20/07/2006 · Vigent des del 9/08/2006.</div></li>
+      <li><div>📜 <b>Estatuts de Catalunya:</b> Núria 1932 · Sau 1979 (LO 4/1979) · Vigent 2006 (LO 6/2006).</div></li>
+      <li><div>📐 <b>Estructura:</b> Preàmbul + Títol Preliminar + 7 Títols + 223 articles + 15 DA + 6 DT + 2 DDerog. + 4 DF.</div></li>
+      <li><div>⚖️ <b>STC 31/2010:</b> 14 articles inconstitucionals + 27 reinterpretats · Votació 6-4 · Punt d'inflexió polític.</div></li>
+      <li><div><b>Art. 1 EAC:</b> Catalunya, com a NACIONALITAT, exerceix el seu autogovern com a CA. El "nació" del Preàmbul no té eficàcia jurídica (STC).</div></li>
+      <li><div><b>Art. 2 EAC:</b> Generalitat = Parlament + Presidència + Govern + institucions + municipis/vegueries/comarques.</div></li>
+      <li><div>⭐ <b>Art. 6 EAC (CLAU PL):</b> Català = llengua pròpia · Català + Castellà = oficials · Dret i deure de conèixer-les · Aranès oficial a l'Aran.</div></li>
+      <li><div><b>Art. 8 EAC:</b> Símbols = Senyera + Escut + Els Segadors + 11 setembre (Diada) + Sant Jordi (23 abril).</div></li>
+      <li><div><b>Art. 11 EAC:</b> Val d'Aran = realitat occitana amb règim especial (Llei 1/2015) · Policia Aranesa pròpia.</div></li>
+      <li><div>⭐ <b>Art. 13 EAC (CLAU PL):</b> Garantia estatutària de l'autonomia local (municipis + vegueries + comarques).</div></li>
+      <li><div><b>Art. 14 EAC:</b> Condició política de català = veïnatge administratiu a Catalunya.</div></li>
+      <li><div><b>Títol I Arts. 15-54:</b> Drets, deures i principis rectors · Drets lingüístics (32-36) · Bona administració (30).</div></li>
+      <li><div><b>Parlament (Arts. 55-67):</b> 135 diputats per 4 anys · 4 circumscripcions (BCN, Girona, Lleida, Tarragona).</div></li>
+      <li><div><b>President (Art. 67):</b> Molt Honorable · Elegit pel Parlament · Mandat màx. 2 legislatures consecutives.</div></li>
+      <li><div><b>Síndic de Greuges (Arts. 78-79):</b> Pot investigar PL a Catalunya · Elegit pel Parlament per 3/5 · Llei 24/2009.</div></li>
+      <li><div>⭐ <b>Govern Local (Arts. 83-94):</b> Municipi + vegueria + comarca · STC 31/2010: vegueries NO substitueixen províncies.</div></li>
+      <li><div><b>TSJC (Arts. 95-96):</b> Màxima instància judicial a Catalunya · Darrera instància de processos iniciats a Catalunya.</div></li>
+      <li><div><b>CJC (Arts. 97-100):</b> Gran part declarada inconstitucional per STC 31/2010 (no és òrgan desconcentrat del CGPJ).</div></li>
+      <li><div><b>Competències (Arts. 110-112):</b> Exclusives (Generalitat) · Compartides (Estat bases + Gen. desenv.) · Executives (només execució).</div></li>
+      <li><div>⭐⭐ <b>Art. 164 EAC (CLAU PL):</b> Competència EXCLUSIVA · Planificació seguretat + ordenació PL + regulació seg. privada · Base de Llei 16/1991 i Llei 4/2003.</div></li>
+      <li><div><b>Art. 164.2:</b> Executiva en extranjeria · <b>164.3:</b> PG-ME com a policia integral · <b>164.4:</b> Junta de Seguretat de Catalunya.</div></li>
+      <li><div><b>Llei 4/2003 Sistema Seguretat:</b> PG-ME + PL + Aranesa + Protecció Civil + Bombers + SCT.</div></li>
+      <li><div><b>Finançament (Arts. 201-221):</b> Autonomia fiscal + corresponsabilitat + solidaritat · Art. 206.3 reinterpretat per STC.</div></li>
+      <li><div><b>Reforma (Arts. 222-223):</b> 2/3 Parlament + LO Corts + Referèndum · Mai reformat des de 2006.</div></li>
+      <li><div>⚠️ L'Estatut és <b>Llei Orgànica</b> i integra el <b>bloc de constitucionalitat</b> amb la CE.</div></li>
+    </ul>
+  </section>
 
 </div>
-
-<script>
-  function toggle(header) {
-    header.classList.toggle('open');
-    const body = header.nextElementSibling;
-    if (body.style.display === 'none' || body.style.display === '') {
-      body.style.display = 'block';
-      body.style.animation = 'fadeUp .3s ease';
-    } else {
-      body.style.display = 'none';
-    }
-  }
-</script>
 </body>
 </html>
