@@ -1,101 +1,179 @@
-// Pàgina d'índex de Cultura General — 7 cards, una per matèria.
-// Cada card porta a una pàgina independent /cultura-general/:id
-// (amb el seu propi sub-nav, cerca i contingut).
+// Pàgina d'índex de Cultura General · banc de preguntes per matèria.
+// Disseny: hero (lila) + zona de tests amb mode destacat "Tots els
+// temes" + cards de categoria. Mateix patró UX que /policia-local i
+// /mossos però simplificat (no hi ha flashcards ni temari aquí).
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
-import { CULTURA, CULTURA_UPDATED_AT } from '../lib/cultura-general';
+import { TOPICS } from '../data/tests';
+import { getTopicStats, levelFromBest, type Level } from '../lib/testStats';
+import type { TestTopic } from '../data/tests/types';
+
+const ACCENT = '#9747D6';
+
+const LEVEL_LVL: Record<Level, { lvl: 'easy' | 'medium' | 'hard' | 'none'; label: string }> = {
+  none:         { lvl: 'none',   label: 'Sense fer' },
+  novice:       { lvl: 'easy',   label: 'Iniciat' },
+  intermediate: { lvl: 'medium', label: 'Intermedi' },
+  advanced:     { lvl: 'hard',   label: 'Avançat' },
+  expert:       { lvl: 'hard',   label: 'Expert' },
+};
+
+function accentToColors(accent: string): { c: string; bg: string } {
+  const m = accent.match(/from-([a-z]+)-/);
+  const color = m ? m[1] : 'slate';
+  const map: Record<string, { c: string; bg: string }> = {
+    amber: { c: '#9c7a1f', bg: '#FFF1D2' },
+    yellow: { c: '#9c7a1f', bg: '#FFF8E0' },
+    red: { c: '#C13030', bg: '#FFE4E4' },
+    rose: { c: '#C13030', bg: '#FFE4E4' },
+    pink: { c: '#C13030', bg: '#FFE4EE' },
+    orange: { c: '#D9531A', bg: '#FFE4D2' },
+    blue: { c: '#2F6BD8', bg: '#EAF1FE' },
+    sky: { c: '#2F6BD8', bg: '#EAF6FE' },
+    indigo: { c: '#4338CA', bg: '#E7E5FE' },
+    violet: { c: '#7C3AED', bg: '#EFE5FE' },
+    purple: { c: '#9747D6', bg: '#F5E9FF' },
+    fuchsia: { c: '#A21CAF', bg: '#FCE7FA' },
+    emerald: { c: '#0E8A6F', bg: '#E1F4EE' },
+    green: { c: '#1f8a4d', bg: '#DFF7E9' },
+    teal: { c: '#0E8A8A', bg: '#E1F4F4' },
+    slate: { c: '#475569', bg: '#EEF2F6' },
+    gray: { c: '#475569', bg: '#EEF2F6' },
+    stone: { c: '#57534E', bg: '#F1EFEC' },
+  };
+  return map[color] ?? map.slate;
+}
 
 export default function CulturaGeneral() {
   const { t } = useT();
+  const culturaTopics = TOPICS.filter((tp) => tp.category === 'cultura');
+  const totalQuestions = culturaTopics.reduce((acc, tp) => acc + tp.questions.length, 0);
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-6">
-      <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3">
-        <Link to="/" className="hover:underline">{t('nav.home')}</Link>
-        <span className="mx-2" aria-hidden>/</span>
-        <span className="text-slate-700 dark:text-slate-200">{t('cultura.title')}</span>
+    <div className="shell pb-10">
+      <nav className="crumbs">
+        <Link to="/">{t('nav.home')}</Link>
+        <span className="sep">/</span>
+        <span className="here">{t('cultura.title')}</span>
       </nav>
 
-      {/* Capçalera */}
-      <header className="rounded-2xl border p-5 sm:p-6 mb-5
-        border-violet-200/70 bg-gradient-to-br from-violet-50/60 via-white to-purple-50/40
-        dark:border-white/10 dark:bg-gradient-to-br dark:from-[#1a0f2e] dark:to-[#0f1d34]">
-        <div className="flex items-start gap-4">
-          <span aria-hidden className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-purple-700 text-3xl text-white shadow-inner">
-            🎓
+      {/* HERO */}
+      <header
+        className="card card-accent"
+        style={{ ['--accent' as never]: ACCENT } as React.CSSProperties}
+      >
+        <div className="card-grid">
+          <span
+            className="appicon lg"
+            style={{ ['--accent' as never]: ACCENT } as React.CSSProperties}
+          >
+            <span style={{ fontSize: 30 }}>🎓</span>
           </span>
-          <div className="min-w-0">
-            <div className="text-[11px] uppercase tracking-[0.25em] font-semibold text-violet-700 dark:text-violet-400/90">
+          <div>
+            <div className="eyebrow" style={{ color: ACCENT }}>
               {t('cultura.badge')}
             </div>
-            <h1 className="mt-1 text-2xl sm:text-3xl font-black tracking-tight">
-              {t('cultura.title')}
-            </h1>
-            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              {t('cultura.indexSubtitle').replace('{date}', formatLongDate(CULTURA_UPDATED_AT))}
+            <h1 className="card-title xl mt-1">{t('cultura.title')}</h1>
+            <p className="card-desc">
+              {t('cultura.testsSubtitle')}
+              {' · '}
+              <span className="font-mono">
+                {culturaTopics.length} {t('cultura.subjects')} · {totalQuestions} preguntes
+              </span>
             </p>
           </div>
         </div>
       </header>
 
-      {/* Grid de cards — 1 col mòbil, 2 col tauleta */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {CULTURA.map((sec) => {
-          // Comptem entrades totals per a la card.
-          const totalEntries = sec.subsections.reduce(
-            (acc, sub) => acc + sub.entries.length,
-            0,
-          );
-          const subsectionCount = sec.subsections.length;
+      {/* ZONA DE TESTS */}
+      <section
+        className="tests-zone"
+        style={{
+          background: 'linear-gradient(180deg, #F5E9FF 0%, var(--white) 60%)',
+          borderColor: 'color-mix(in oklab, #9747D6 28%, transparent)',
+          boxShadow: '0 2px 14px -8px rgba(151, 71, 214, 0.22)',
+        }}
+      >
+        <header className="tests-zone-head">
+          <div className="eyebrow" style={{ color: ACCENT }}>
+            🎓 {t('cultura.zoneEyebrow')}
+          </div>
+          <h2>{t('cultura.zoneTitle')}</h2>
+          <p>{t('cultura.zoneSubtitle').replace('{n}', String(totalQuestions))}</p>
+        </header>
 
-          return (
-            <Link
-              key={sec.id}
-              to={`/cultura-general/${encodeURIComponent(sec.id)}`}
-              className={`group relative block overflow-hidden rounded-2xl border p-5 transition
-                hover:-translate-y-0.5 hover:shadow-md
-                border-slate-200 bg-white
-                dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-white/20`}
-            >
-              {/* Banda superior amb el gradient de la matèria */}
-              <span aria-hidden className={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${sec.accent}`} />
-
-              <div className="flex items-start gap-3">
-                <span
-                  aria-hidden
-                  className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${sec.accent} text-2xl text-white shadow-inner`}
-                >
-                  {sec.icon}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <h2 className="font-black text-base sm:text-lg leading-tight tracking-tight group-hover:text-violet-700 dark:group-hover:text-violet-300">
-                    {sec.title}
-                  </h2>
-                  <div className="mt-1 flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400 font-mono">
-                    <span>{subsectionCount} {t('cultura.subsectionsLabel')}</span>
-                    <span aria-hidden>·</span>
-                    <span>{totalEntries} {t('cultura.entriesLabel')}</span>
-                  </div>
-                </div>
-                <span aria-hidden className="shrink-0 text-slate-400 group-hover:translate-x-1 transition self-center text-lg">→</span>
+        {/* Mode destacat: Tots els temes */}
+        <div className="tests-zone-modes" style={{ gridTemplateColumns: '1fr' }}>
+          <Link to="/cultura-general/tot" className="ts-mode featured">
+            <span className="mtag">⚡ {t('cultura.allTag')}</span>
+            <div>
+              <h3>{t('cultura.allTitle')}</h3>
+              <p>{t('cultura.allSub')}</p>
+            </div>
+            <div className="footer">
+              <div className="specs">
+                <span>{totalQuestions} preguntes</span>
+                <span>·</span>
+                <span>{culturaTopics.length} matèries</span>
               </div>
-            </Link>
-          );
-        })}
-      </div>
+              <span className="cta">
+                ▶ {t('test.start')} <span className="arr">→</span>
+              </span>
+            </div>
+          </Link>
+        </div>
 
-      <p className="mt-5 text-xs text-slate-500 dark:text-slate-400 text-center">
-        {t('cultura.indexFooter')}
-      </p>
+        <div className="tests-zone-divider">
+          <span className="line" />
+          <span className="lbl">{t('cultura.orBySubject')}</span>
+          <span className="line" />
+        </div>
+
+        <div className="test-grid">
+          {culturaTopics.map((topic) => (
+            <CulturaCard key={topic.slug} topic={topic} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
 
-function formatLongDate(iso: string): string {
-  try {
-    const d = new Date(iso);
-    return d.toLocaleDateString('ca-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-  } catch {
-    return iso;
-  }
+function CulturaCard({ topic }: { topic: TestTopic }) {
+  const stats = getTopicStats(topic.slug);
+  const level = levelFromBest(stats?.best);
+  const lvlMeta = LEVEL_LVL[level];
+  const colors = accentToColors(topic.accent);
+  const total = topic.questions.length;
+  const pct = stats?.best
+    ? Math.min(100, Math.round((stats.best / 10) * 100))
+    : 0;
+
+  return (
+    <Link
+      to={`/cultura-general/${topic.slug}`}
+      className="tcard"
+      style={{
+        ['--accent' as never]: colors.c,
+        ['--accent-bg' as never]: colors.bg,
+      } as React.CSSProperties}
+    >
+      <div className="head">
+        <span className="ico" aria-hidden>{topic.icon}</span>
+        <span className={`lvl ${lvlMeta.lvl}`}>{lvlMeta.label}</span>
+      </div>
+      <h4>{topic.title}</h4>
+      {topic.description && <p>{topic.description}</p>}
+      <div className="specs">
+        <span className="spec">{total} preguntes</span>
+      </div>
+      <div className="footer-row">
+        <div className="progress-mini">
+          <div className="pmini-bar"><span style={{ width: `${pct}%` }} /></div>
+          <span className="pmini-pct">{pct}%</span>
+        </div>
+        <span className="start">{pct > 0 ? 'Continuar' : 'Començar'} →</span>
+      </div>
+    </Link>
+  );
 }

@@ -3,7 +3,7 @@
 // es 'tot' fem mescla de tots els temes.
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
-import { TOPICS, getAllQuestions, getAllMossosQuestions, getTopic } from '../../data/tests';
+import { TOPICS, getAllQuestions, getAllMossosQuestions, getAllCulturaQuestions, getTopic } from '../../data/tests';
 import type { TestQuestion } from '../../data/tests/types';
 import {
   getAnsweredIds, markAnswered, resetProgress,
@@ -60,21 +60,34 @@ export default function TestSession() {
   const isRepas = slug === REPAS_SLUG;
   const topic = (isAll || isRepas) ? null : getTopic(slug);
 
-  // Detecta si venim del hub de Mossos (/mossos/:slug) o de Policia Local
-  // (/policia-local/:slug) per generar correctament les molles de pa i
-  // els enllaços "tornar al llistat".
+  // Detecta el cos d'origen (/mossos, /policia-local o /cultura-general)
+  // per generar correctament les molles de pa, els enllaços "tornar al
+  // llistat" i el pool de preguntes en mode 'tot'.
   const isMossosRoute = location.pathname.startsWith('/mossos');
-  const corpsRoot = isMossosRoute ? '/mossos' : '/policia-local';
-  const corpsLabel = isMossosRoute ? t('mossos.title') : t('test.list.title');
+  const isCulturaRoute = location.pathname.startsWith('/cultura-general');
+  const corpsRoot = isMossosRoute
+    ? '/mossos'
+    : isCulturaRoute
+      ? '/cultura-general'
+      : '/policia-local';
+  const corpsLabel = isMossosRoute
+    ? t('mossos.title')
+    : isCulturaRoute
+      ? t('cultura.title')
+      : t('test.list.title');
 
   // Pool de preguntes per a aquest tema (o tots, o repàs).
-  // El pool de 'tot' depèn del cos: a /mossos només Mossos, a
-  // /policia-local només Policia Local (temari + cultura + municipi).
+  // El pool de 'tot' depèn del cos d'origen: a /mossos només Mossos, a
+  // /cultura-general només Cultura, a /policia-local només Policia Local.
   const pool: TestQuestion[] = useMemo(() => {
     if (isRepas) return buildRepasPool({ onlyDue: true, max: 50 });
-    if (isAll) return isMossosRoute ? getAllMossosQuestions() : getAllQuestions();
+    if (isAll) {
+      if (isMossosRoute) return getAllMossosQuestions();
+      if (isCulturaRoute) return getAllCulturaQuestions();
+      return getAllQuestions();
+    }
     return topic?.questions ?? [];
-  }, [isAll, isRepas, isMossosRoute, topic]);
+  }, [isAll, isRepas, isMossosRoute, isCulturaRoute, topic]);
 
   // Per a 'tot', el progrés és la unió dels temes del cos corresponent.
   // Per a 'repas', no usem progrés (les preguntes es repeteixen segons SRS).
@@ -83,17 +96,16 @@ export default function TestSession() {
     if (isAll) {
       const set = new Set<string>();
       for (const tp of TOPICS) {
-        // Si estem a /mossos/tot, només els temes de Mossos.
-        // Si estem a /policia-local/tot, només els de Policia Local.
-        const isMossosTopic = tp.category === 'mossos';
-        if (isMossosRoute && !isMossosTopic) continue;
-        if (!isMossosRoute && isMossosTopic) continue;
+        const cat = tp.category ?? 'temari';
+        if (isMossosRoute && cat !== 'mossos') continue;
+        if (isCulturaRoute && cat !== 'cultura') continue;
+        if (!isMossosRoute && !isCulturaRoute && cat === 'mossos') continue;
         for (const id of getAnsweredIds(tp.slug)) set.add(id);
       }
       return set;
     }
     return getAnsweredIds(slug);
-  }, [slug, isAll, isRepas, isMossosRoute]);
+  }, [slug, isAll, isRepas, isMossosRoute, isCulturaRoute]);
 
   // Nomes per al hook reactiu (re-render quan canvia localStorage).
   useTopicProgress(slug);

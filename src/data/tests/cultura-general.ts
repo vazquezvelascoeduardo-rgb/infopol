@@ -5,8 +5,8 @@ import type { TestTopic } from './types';
 
 const cultura: TestTopic = {
   slug: 'cultura-general',
-  title: 'Cultura General',
-  description: 'geografia, història, art, llengua, ciències, actualitat',
+  title: 'Mix general',
+  description: 'Mescla de totes les matèries (patrons examens Terrassa 2018-2023).',
   icon: '🌍',
   accent: 'from-slate-500 to-slate-700',
   category: 'cultura',

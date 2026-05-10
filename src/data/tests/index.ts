@@ -19,6 +19,8 @@ import lorpm from './lorpm-5-2000';
 import lepar from './lepar-11-2009';
 import lpac from './lpac-39-40-2015';
 import cultura from './cultura-general';
+import culturaHistoria from './cultura-historia';
+import culturaGeografia from './cultura-geografia';
 import terrassa from './terrassa';
 import manresa from './manresa';
 import elprat from './elprat';
@@ -66,6 +68,8 @@ export const TOPICS: TestTopic[] = [
   lepar,
   lpac,
   cultura,
+  culturaHistoria,
+  culturaGeografia,
   terrassa,
   manresa,
   elprat,
@@ -123,6 +127,19 @@ export function getAllMossosQuestions(): TaggedQuestion[] {
   const out: TaggedQuestion[] = [];
   for (const t of TOPICS) {
     if (t.category !== 'mossos') continue;
+    for (const q of t.questions) {
+      out.push({ ...q, topicSlug: t.slug });
+    }
+  }
+  return out;
+}
+
+/** Pool de TOTES les preguntes de Cultura General (categoria 'cultura'),
+ *  per al mode 'tot els temes' dins /cultura-general. */
+export function getAllCulturaQuestions(): TaggedQuestion[] {
+  const out: TaggedQuestion[] = [];
+  for (const t of TOPICS) {
+    if (t.category !== 'cultura') continue;
     for (const q of t.questions) {
       out.push({ ...q, topicSlug: t.slug });
     }

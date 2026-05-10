@@ -50,7 +50,6 @@ const Achievements = lazy(() => import('./pages/test/Achievements'));
 const Noticies = lazy(() => import('./pages/Noticies'));
 const NoticiaDetall = lazy(() => import('./pages/NoticiaDetall'));
 const CulturaGeneral = lazy(() => import('./pages/CulturaGeneral'));
-const CulturaGeneralSection = lazy(() => import('./pages/CulturaGeneralSection'));
 const Login = lazy(() => import('./pages/Login'));
 const Profile = lazy(() => import('./pages/Profile'));
 const MossosList = lazy(() => import('./pages/mossos/MossosList'));
@@ -103,7 +102,7 @@ export default function App() {
           <Route path="/noticies" element={<Noticies />} />
           <Route path="/noticies/:slug" element={<NoticiaDetall />} />
           <Route path="/cultura-general" element={<CulturaGeneral />} />
-          <Route path="/cultura-general/:id" element={<CulturaGeneralSection />} />
+          <Route path="/cultura-general/:slug" element={<TestSession />} />
           <Route path="/login" element={<Login />} />
 
           {/* Excepcions públiques de /leyes — més específiques primer.
