@@ -35,10 +35,39 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [googleBusy, setGoogleBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
+
+  // Tradueix els missatges d'error de Supabase a missatges humans en
+  // català. Així l'usuari sap si és la seva culpa o si Supabase l'ha
+  // bloquejat per massa intents (rate limit).
+  function humanizeAuthError(err: unknown): string {
+    const raw = (err instanceof Error ? err.message : String(err)).toLowerCase();
+    if (/rate.?limit|too many|429/.test(raw)) return t('auth.error.rateLimit');
+    if (/invalid.?(login|credentials|email|password)/.test(raw)) return t('auth.error.invalidCredentials');
+    if (/already.?registered|user already exists|already exists/.test(raw)) return t('auth.error.userExists');
+    if (/email.?not.?confirmed|confirm.*email/.test(raw)) return t('auth.error.emailNotConfirmed');
+    if (/network|fetch|failed to fetch/.test(raw)) return t('auth.error.network');
+    return err instanceof Error ? err.message : t('auth.error.generic');
+  }
+
+  // Indicador de força de contrasenya (només informatiu — la lògica
+  // real de validació la porta Supabase i el check de longitud).
+  function passwordStrength(pw: string): { level: 0 | 1 | 2 | 3; label: string } {
+    if (pw.length === 0) return { level: 0, label: '' };
+    let score = 0;
+    if (pw.length >= 8) score++;
+    if (pw.length >= 12) score++;
+    if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) score++;
+    if (/[0-9]/.test(pw)) score++;
+    if (/[^A-Za-z0-9]/.test(pw)) score++;
+    if (score <= 2) return { level: 1, label: t('auth.password.weak') };
+    if (score === 3) return { level: 2, label: t('auth.password.medium') };
+    return { level: 3, label: t('auth.password.strong') };
+  }
 
   // Si la sessió ja està iniciada, fora.
   useEffect(() => {
@@ -92,8 +121,7 @@ export default function Login() {
         }
       }
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : t('auth.error.generic');
-      setError(message);
+      setError(humanizeAuthError(err));
     } finally {
       setSubmitting(false);
     }
@@ -107,8 +135,7 @@ export default function Login() {
       await signInWithGoogle();
       // Supabase redirigeix la pàgina; no cal fer res més aquí.
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : t('auth.error.generic');
-      setError(message);
+      setError(humanizeAuthError(err));
       setGoogleBusy(false);
     }
   }
@@ -124,8 +151,7 @@ export default function Login() {
       await requestPasswordReset(email.trim());
       setInfo(t('auth.forgotSent'));
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : t('auth.error.generic');
-      setError(message);
+      setError(humanizeAuthError(err));
     }
   }
 
@@ -174,15 +200,42 @@ export default function Login() {
           autoComplete="email"
           required
         />
-        <Field
+        <PasswordField
           label={t('auth.password')}
-          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={disabled}
           autoComplete={isSignup ? 'new-password' : 'current-password'}
-          required
+          show={showPassword}
+          onToggleShow={() => setShowPassword((s) => !s)}
+          showLabel={t('auth.password.show')}
+          hideLabel={t('auth.password.hide')}
         />
+
+        {/* Indicador de força (només a signup i amb password no buit) */}
+        {isSignup && password.length > 0 && (() => {
+          const s = passwordStrength(password);
+          const colors = ['#e5e7eb', '#dc2626', '#d97706', '#15803d'];
+          return (
+            <div className="flex items-center gap-2 -mt-1">
+              <div className="flex flex-1 gap-1">
+                {[1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="h-1 flex-1 rounded-full transition-colors"
+                    style={{ background: i <= s.level ? colors[s.level] : colors[0] }}
+                  />
+                ))}
+              </div>
+              <span
+                className="text-[11px] font-semibold"
+                style={{ color: colors[s.level] || 'var(--text-3)' }}
+              >
+                {s.label}
+              </span>
+            </div>
+          );
+        })()}
 
         {error && <p className="text-sm text-red-700 dark:text-red-400">{error}</p>}
         {info && <p className="text-sm text-emerald-700 dark:text-emerald-400">{info}</p>}
@@ -261,6 +314,63 @@ function Field({
           disabled:opacity-50"
         style={{ borderColor: 'var(--line)' }}
       />
+    </label>
+  );
+}
+
+function PasswordField({
+  label,
+  show,
+  onToggleShow,
+  showLabel,
+  hideLabel,
+  ...props
+}: React.InputHTMLAttributes<HTMLInputElement> & {
+  label: string;
+  show: boolean;
+  onToggleShow: () => void;
+  showLabel: string;
+  hideLabel: string;
+}) {
+  return (
+    <label className="flex flex-col gap-1">
+      <span className="text-xs font-semibold uppercase tracking-wide text-text-2">
+        {label}
+      </span>
+      <div className="relative">
+        <input
+          {...props}
+          type={show ? 'text' : 'password'}
+          required
+          className="w-full rounded-xl border px-4 py-3 pr-11 text-base outline-none focus:ring-2
+            border-line bg-paper text-ink placeholder-text-3
+            disabled:opacity-50"
+          style={{ borderColor: 'var(--line)' }}
+        />
+        <button
+          type="button"
+          onClick={onToggleShow}
+          aria-label={show ? hideLabel : showLabel}
+          title={show ? hideLabel : showLabel}
+          className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex h-8 w-8
+            items-center justify-center rounded-md text-text-3 hover:text-ink
+            hover:bg-paper-2 transition"
+        >
+          {show ? (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M9.88 9.88a3 3 0 0 0 4.24 4.24" />
+              <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
+              <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
+              <path d="M2 2l20 20" />
+            </svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          )}
+        </button>
+      </div>
     </label>
   );
 }

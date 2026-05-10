@@ -13,6 +13,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import { useT } from '../lib/i18n';
 import { updateProfile } from '../lib/db';
+import MfaSection from '../components/MfaSection';
 
 // Email del suport per a peticions d'eliminació de compte. Si en un
 // futur es crea support@infopol.app, canviar aquesta constant.
@@ -333,6 +334,9 @@ export default function Profile() {
           </p>
         )}
       </section>
+
+      {/* Verificació en dos passos (2FA TOTP) */}
+      <MfaSection />
 
       {/* Tancar sessió */}
       <button
