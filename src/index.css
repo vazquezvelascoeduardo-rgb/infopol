@@ -3391,6 +3391,16 @@ html[data-text-size="lg"] { font-size: 18px; }
   .pl-jump-btn.jump-temari {
     background: linear-gradient(135deg, #F26B1F 0%, var(--terracotta) 50%, #9c3a08 100%);
   }
+  .pl-jump-btn.jump-flash {
+    background: linear-gradient(135deg, #6D5BD0 0%, #4338CA 60%, #312495 100%);
+  }
+  /* Variant amb 3 botons (Tests / Flashcards / Temari). */
+  .pl-jump.pl-jump-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media (max-width: 720px) {
+    .pl-jump.pl-jump-3 { grid-template-columns: 1fr; }
+  }
   .pl-jump-icon {
     width: 48px; height: 48px;
     border-radius: 14px;
@@ -3443,6 +3453,153 @@ html[data-text-size="lg"] { font-size: 18px; }
     .pl-jump { grid-template-columns: 1fr; }
     .pl-jump-btn { padding: 18px 20px; }
     .pl-jump-title { font-size: 20px; }
+  }
+
+  /* ── Flashcards ──────────────────────────────────────────────── */
+  .fc-card {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border: 2px solid var(--accent, var(--ink));
+    border-radius: 22px;
+    padding: 32px 28px;
+    background: var(--paper);
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease, border-color .12s;
+    min-height: 280px;
+    position: relative;
+    overflow: hidden;
+  }
+  .fc-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.10);
+  }
+  .fc-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--accent-bg, var(--paper-2));
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .fc-side {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .fc-tag {
+    align-self: flex-start;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--accent, var(--ink));
+    color: white;
+  }
+  .fc-tag.good {
+    background: #1f8a4d;
+  }
+  .fc-text {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .fc-hint {
+    margin-top: auto;
+    font-size: 12px;
+    color: var(--text-3);
+    font-style: italic;
+  }
+  .fc-answer {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--line);
+  }
+  .fc-options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .fc-options .opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--paper-2);
+    color: var(--text-2);
+    font-size: 14.5px;
+    line-height: 1.4;
+  }
+  .fc-options .opt.correct {
+    background: #DFF7E9;
+    color: #1f5c34;
+    font-weight: 700;
+    border-left: 3px solid #1f8a4d;
+  }
+  .fc-options .opt-letter {
+    font-weight: 800;
+    width: 18px;
+    flex-shrink: 0;
+    color: #1f8a4d;
+  }
+  .fc-options .opt-text {
+    flex: 1;
+  }
+  .fc-ref {
+    margin-top: 14px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--text-3);
+  }
+  .fc-controls {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 1fr;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .fc-btn {
+    border: 1.5px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background .12s, border-color .12s;
+  }
+  .fc-btn:hover:not(:disabled) {
+    background: var(--paper-2);
+    border-color: var(--ink);
+  }
+  .fc-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .fc-btn.primary {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .fc-btn.primary:hover {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+  }
+  @media (max-width: 600px) {
+    .fc-controls { grid-template-columns: 1fr; }
+    .fc-text { font-size: 18px; }
+    .fc-card { padding: 24px 20px; min-height: 240px; }
   }
 
   /* ── Capçaleres d'àmbit (a /mossos) ──────────────────────────── */

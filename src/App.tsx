@@ -54,6 +54,7 @@ const CulturaGeneralSection = lazy(() => import('./pages/CulturaGeneralSection')
 const Login = lazy(() => import('./pages/Login'));
 const Profile = lazy(() => import('./pages/Profile'));
 const MossosList = lazy(() => import('./pages/mossos/MossosList'));
+const Flashcards = lazy(() => import('./pages/flashcards/Flashcards'));
 
 // Slugs públics dins /leyes — l'única fitxa accessible sense sessió és
 // el catàleg SCT 2026. Si en un futur en cal afegir d'altres, ampliar
@@ -178,6 +179,22 @@ export default function App() {
             }
           />
           <Route
+            path="/policia-local/flashcards"
+            element={
+              <RequireAuth>
+                <Flashcards />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/policia-local/flashcards/:slug"
+            element={
+              <RequireAuth>
+                <Flashcards />
+              </RequireAuth>
+            }
+          />
+          <Route
             path="/policia-local/:slug"
             element={
               <RequireAuth>
@@ -201,6 +218,22 @@ export default function App() {
             element={
               <RequireAuth>
                 <MossosList />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/mossos/flashcards"
+            element={
+              <RequireAuth>
+                <Flashcards />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/mossos/flashcards/:slug"
+            element={
+              <RequireAuth>
+                <Flashcards />
               </RequireAuth>
             }
           />

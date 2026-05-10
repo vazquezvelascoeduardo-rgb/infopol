@@ -159,8 +159,8 @@ export default function TestList() {
         </div>
       </header>
 
-      {/* JUMP BUTTONS — accés ràpid a Tests i Temari complet */}
-      <nav className="pl-jump" aria-label={t('policiaLocal.jump.aria')}>
+      {/* JUMP BUTTONS — Tests, Flashcards i Temari complet */}
+      <nav className="pl-jump pl-jump-3" aria-label={t('policiaLocal.jump.aria')}>
         <a href="#pl-tests" className="pl-jump-btn jump-tests">
           <span className="pl-jump-icon" aria-hidden>📝</span>
           <span className="pl-jump-text">
@@ -169,6 +169,14 @@ export default function TestList() {
           </span>
           <span className="pl-jump-arr" aria-hidden>→</span>
         </a>
+        <Link to="/policia-local/flashcards" className="pl-jump-btn jump-flash">
+          <span className="pl-jump-icon" aria-hidden>🃏</span>
+          <span className="pl-jump-text">
+            <span className="pl-jump-eyebrow">{t('flashcards.eyebrow')}</span>
+            <span className="pl-jump-title">{t('flashcards.title')}</span>
+          </span>
+          <span className="pl-jump-arr" aria-hidden>→</span>
+        </Link>
         <a href="#pl-temari" className="pl-jump-btn jump-temari">
           <span className="pl-jump-icon" aria-hidden>📚</span>
           <span className="pl-jump-text">
