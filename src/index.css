@@ -3057,6 +3057,284 @@ html[data-text-size="lg"] { font-size: 18px; }
     opacity: 0.8;
   }
 
+  /* Llistes numerades al Penal (drets detingut, etc.) */
+  .drets-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .dret-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .dret-item.dret-warn {
+    border-color: #f0d491;
+    background: #fffbf2;
+    border-left: 4px solid #c99d2a;
+  }
+  .dret-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    color: white;
+    font-weight: 800;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .dret-text { min-width: 0; flex: 1; }
+  .dret-titol {
+    font-weight: 800;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .dret-desc {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.45;
+  }
+
+  /* Recursos / telèfons útils (PenalRecursos) */
+  .recursos-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .recurs-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    transition: background .12s, transform .12s;
+  }
+  .recurs-card:hover:not(.recurs-static) {
+    background: var(--paper-2);
+    transform: translateY(-1px);
+  }
+  .recurs-num {
+    background: var(--accent);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .recurs-num-text {
+    font-family: inherit;
+    font-size: 13px;
+  }
+  .recurs-text { min-width: 0; flex: 1; }
+  .recurs-nom {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .recurs-desc {
+    margin: 3px 0 0;
+    font-size: 12px;
+    color: var(--text-3);
+    line-height: 1.4;
+  }
+
+  /* Warning box (avís legal a taules de referència) */
+  .op-warning {
+    margin: 16px 0;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: #fffbf2;
+    border: 1px solid #f0d491;
+    border-left: 4px solid #c99d2a;
+    color: #6b4d17;
+  }
+  .op-warning-title {
+    font-weight: 800;
+    font-size: 13.5px;
+    margin-bottom: 4px;
+  }
+  .op-warning p {
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  /* Notes interpretatives (final de taules) */
+  .op-notes {
+    margin-top: 18px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--paper-2);
+  }
+  .op-notes-title {
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .op-notes ul {
+    list-style: disc;
+    padding-left: 22px;
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.5;
+  }
+  .op-notes li { margin: 3px 0; }
+
+  /* Taula de referència (drogues, etc.) */
+  .op-table-wrap {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 8px 0 0;
+  }
+  .op-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .op-table thead {
+    background: var(--paper-2);
+    text-align: left;
+  }
+  .op-table th {
+    padding: 10px 14px;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+  }
+  .op-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    color: var(--text-2);
+  }
+  .op-table tbody tr:last-child td { border-bottom: none; }
+  .op-table tbody tr:nth-child(even) { background: color-mix(in srgb, var(--paper-2) 50%, transparent); }
+  .op-table .strong { font-weight: 700; color: var(--ink); }
+  .op-table .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; }
+
+  /* Llista de strings simples dins penal-bloc */
+  .op-string-list {
+    list-style: disc;
+    padding-left: 24px;
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--text-2);
+    line-height: 1.5;
+  }
+  .op-string-list li { margin: 4px 0; }
+
+  /* ActaCard (taula d'actes policials) */
+  .acta-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .acta-card {
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    background: var(--paper);
+  }
+  .acta-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .acta-tag {
+    background: var(--accent);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 1.3;
+    flex-shrink: 0;
+  }
+  .acta-head-text { min-width: 0; flex: 1; }
+  .acta-nom {
+    font-weight: 800;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .acta-def {
+    font-size: 13px;
+    color: var(--text-2);
+    margin: 4px 0 0;
+    line-height: 1.45;
+  }
+  .acta-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .acta-field-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 2px;
+  }
+  .acta-field-list {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.45;
+  }
+  .acta-field-list li { margin: 2px 0; }
+  .acta-field-row {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: 12px;
+    align-items: baseline;
+  }
+  .acta-field-row .acta-field-label { margin: 0; }
+  .acta-field-value {
+    font-size: 13px;
+    color: var(--text-2);
+  }
+  @media (max-width: 600px) {
+    .acta-field-row { grid-template-columns: 1fr; }
+  }
+
   /* Principi clau al runner del penal */
   .op-runner-principi {
     font-size: 13.5px;

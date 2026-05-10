@@ -49,100 +49,76 @@ export default function PenalDretsDetingut() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-6">
-      <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3 flex flex-wrap items-center gap-1">
-        <Link to="/" className="hover:underline">{t('nav.home')}</Link>
-        <span aria-hidden>/</span>
-        <Link to="/operativa" className="hover:underline">{t('operativa.title')}</Link>
-        <span aria-hidden>/</span>
-        <Link to="/operativa/penal" className="hover:underline">
-          {t('operativa.seguretat-ciutadana.title')}
-        </Link>
-        <span aria-hidden>/</span>
-        <span className="text-slate-700 dark:text-slate-200 font-medium">
-          {t('penal.dretsDetingut')}
-        </span>
+    <div className="shell pb-10" style={{ maxWidth: 760 }}>
+      <nav className="crumbs">
+        <Link to="/">{t('nav.home')}</Link>
+        <span className="sep">/</span>
+        <Link to="/operativa">{t('operativa.title')}</Link>
+        <span className="sep">/</span>
+        <Link to="/operativa/penal">{t('operativa.seguretat-ciutadana.title')}</Link>
+        <span className="sep">/</span>
+        <span className="here">{t('penal.dretsDetingut')}</span>
       </nav>
 
-      <header className="rounded-2xl border p-5 mb-5
-        border-slate-200 bg-white
-        dark:border-white/10 dark:bg-[#0f1d34]">
-        <div className="flex items-start gap-3">
-          <span aria-hidden className="text-3xl shrink-0">📜</span>
-          <div className="min-w-0 flex-1">
-            <div className="text-[11px] uppercase tracking-[0.25em] text-red-600 dark:text-red-400">
-              {t('operativa.seguretat-ciutadana.title')}
-            </div>
-            <h1 className="mt-0.5 text-xl sm:text-2xl font-extrabold tracking-tight">
-              {t('penal.dretsDetingut.title')}
-            </h1>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-              {t('penal.dretsDetingut.desc')}
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={copyAll}
-                className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-semibold transition
-                  border-slate-200 bg-white hover:bg-slate-50 text-slate-700
-                  dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10 dark:text-slate-200"
-              >
-                <span aria-hidden>{copied ? '✓' : '📋'}</span>
-                {copied ? t('penal.dretsDetingut.copied') : t('penal.dretsDetingut.copyAll')}
-              </button>
-              <button
-                type="button"
-                onClick={() => window.print()}
-                className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-semibold transition
-                  border-slate-200 bg-white hover:bg-slate-50 text-slate-700
-                  dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10 dark:text-slate-200"
-              >
-                <span aria-hidden>🖨️</span> {t('penal.dretsDetingut.print')}
-              </button>
-            </div>
+      <header
+        className="op-runner-head"
+        style={{ ['--accent' as never]: '#ef4444' } as React.CSSProperties}
+      >
+        <span className="op-runner-icon" aria-hidden>📜</span>
+        <div className="op-runner-text">
+          <span className="eyebrow">SC / PENAL · ART. 520 LECRIM</span>
+          <h1>{t('penal.dretsDetingut.title')}</h1>
+          <p style={{ fontSize: 13.5, color: 'var(--text-2)', margin: '6px 0 10px' }}>
+            {t('penal.dretsDetingut.desc')}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={copyAll}
+              className="rounded-lg border border-line bg-paper hover:bg-paper-2 px-3 py-1.5 text-sm font-bold inline-flex items-center gap-1.5 text-ink"
+            >
+              <span aria-hidden>{copied ? '✓' : '📋'}</span>
+              {copied ? t('penal.dretsDetingut.copied') : t('penal.dretsDetingut.copyAll')}
+            </button>
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="rounded-lg border border-line bg-paper hover:bg-paper-2 px-3 py-1.5 text-sm font-bold inline-flex items-center gap-1.5 text-ink"
+            >
+              <span aria-hidden>🖨️</span> {t('penal.dretsDetingut.print')}
+            </button>
           </div>
         </div>
       </header>
 
       {/* Drets bàsics */}
-      <ol className="space-y-3 mb-6">
+      <ol className="drets-list">
         {DRETS_BASIC.map((d) => (
-          <li
-            key={d.num}
-            className="flex items-start gap-3 rounded-xl border p-4
-              border-slate-200 bg-white
-              dark:border-white/10 dark:bg-[#0f1d34]"
-          >
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-red-600 text-white font-bold text-sm shrink-0">
-              {d.num}
-            </span>
-            <div className="min-w-0">
-              <div className="font-semibold">{d.titol}</div>
-              <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-300">
-                {d.desc}
-              </p>
+          <li key={d.num} className="dret-item">
+            <span className="dret-num" style={{ background: '#ef4444' }}>{d.num}</span>
+            <div className="dret-text">
+              <div className="dret-titol">{d.titol}</div>
+              <p className="dret-desc">{d.desc}</p>
             </div>
           </li>
         ))}
       </ol>
 
-      <h2 className="text-sm font-bold uppercase tracking-[0.15em] mb-3 text-amber-700 dark:text-amber-300">
-        ⚠️ {t('penal.dretsDetingut.special')}
-      </h2>
-      <ol className="space-y-3">
+      <div
+        className="section-head"
+        style={{ ['--accent' as never]: '#9c7a1f', marginTop: 28 } as React.CSSProperties}
+      >
+        <span className="eyebrow">⚠️ {t('penal.dretsDetingut.special').toUpperCase()}</span>
+        <span className="rule" />
+      </div>
+
+      <ol className="drets-list">
         {DRETS_EXTRA.map((d) => (
-          <li
-            key={d.num}
-            className="flex items-start gap-3 rounded-xl border-l-4 p-4
-              border-l-amber-500 border-amber-200 bg-amber-50 text-amber-900
-              dark:border-l-amber-400/70 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-100"
-          >
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-amber-500 text-white font-bold text-sm shrink-0">
-              {d.num}
-            </span>
-            <div className="min-w-0">
-              <div className="font-semibold">{d.titol}</div>
-              <p className="mt-0.5 text-sm">{d.desc}</p>
+          <li key={d.num} className="dret-item dret-warn">
+            <span className="dret-num" style={{ background: '#c99d2a' }}>{d.num}</span>
+            <div className="dret-text">
+              <div className="dret-titol">{d.titol}</div>
+              <p className="dret-desc">{d.desc}</p>
             </div>
           </li>
         ))}

@@ -24,71 +24,53 @@ const TAULA_DROGUES: Array<{
 export default function PenalTaulaDrogues() {
   const { t } = useT();
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-6">
-      <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3 flex flex-wrap items-center gap-1">
-        <Link to="/" className="hover:underline">{t('nav.home')}</Link>
-        <span aria-hidden>/</span>
-        <Link to="/operativa" className="hover:underline">{t('operativa.title')}</Link>
-        <span aria-hidden>/</span>
-        <Link to="/operativa/penal" className="hover:underline">
-          {t('operativa.seguretat-ciutadana.title')}
-        </Link>
-        <span aria-hidden>/</span>
-        <span className="text-slate-700 dark:text-slate-200 font-medium">
-          {t('penal.taulaDrogues')}
-        </span>
+    <div className="shell pb-10" style={{ maxWidth: 760 }}>
+      <nav className="crumbs">
+        <Link to="/">{t('nav.home')}</Link>
+        <span className="sep">/</span>
+        <Link to="/operativa">{t('operativa.title')}</Link>
+        <span className="sep">/</span>
+        <Link to="/operativa/penal">{t('operativa.seguretat-ciutadana.title')}</Link>
+        <span className="sep">/</span>
+        <span className="here">{t('penal.taulaDrogues')}</span>
       </nav>
 
-      <header className="rounded-2xl border p-5 mb-5
-        border-slate-200 bg-white
-        dark:border-white/10 dark:bg-[#0f1d34]">
-        <div className="flex items-start gap-3">
-          <span aria-hidden className="text-3xl shrink-0">💊</span>
-          <div className="min-w-0">
-            <div className="text-[11px] uppercase tracking-[0.25em] text-purple-600 dark:text-purple-400">
-              {t('operativa.seguretat-ciutadana.title')}
-            </div>
-            <h1 className="mt-0.5 text-xl sm:text-2xl font-extrabold tracking-tight">
-              {t('penal.taulaDrogues.title')}
-            </h1>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-              {t('penal.taulaDrogues.desc')}
-            </p>
-          </div>
+      <header
+        className="op-runner-head"
+        style={{ ['--accent' as never]: '#8b5cf6' } as React.CSSProperties}
+      >
+        <span className="op-runner-icon" aria-hidden>💊</span>
+        <div className="op-runner-text">
+          <span className="eyebrow">SC / PENAL · QUANTITATS UF 3.3</span>
+          <h1>{t('penal.taulaDrogues.title')}</h1>
+          <p style={{ fontSize: 13.5, color: 'var(--text-2)', margin: '6px 0 0' }}>
+            {t('penal.taulaDrogues.desc')}
+          </p>
         </div>
       </header>
 
       {/* Avís legal */}
-      <div className="mb-4 rounded-xl border-l-4 border-l-amber-500 bg-amber-50 p-3 text-sm text-amber-900
-        dark:border-l-amber-400/70 dark:bg-amber-400/10 dark:text-amber-100">
-        <div className="font-bold mb-1">⚠️ {t('penal.taulaDrogues.warning')}</div>
+      <div className="op-warning">
+        <div className="op-warning-title">⚠️ {t('penal.taulaDrogues.warning')}</div>
         <p>{t('penal.taulaDrogues.warningText')}</p>
       </div>
 
       {/* Taula */}
-      <div className="rounded-xl border overflow-hidden
-        border-slate-200 dark:border-white/10">
-        <table className="w-full text-sm">
-          <thead className="bg-slate-100 dark:bg-white/5 text-left">
+      <div className="op-table-wrap">
+        <table className="op-table">
+          <thead>
             <tr>
-              <th className="px-3 py-2 font-bold">{t('penal.taulaDrogues.substance')}</th>
-              <th className="px-3 py-2 font-bold">{t('penal.taulaDrogues.usualDose')}</th>
-              <th className="px-3 py-2 font-bold">{t('penal.taulaDrogues.limit35')}</th>
+              <th>{t('penal.taulaDrogues.substance')}</th>
+              <th>{t('penal.taulaDrogues.usualDose')}</th>
+              <th>{t('penal.taulaDrogues.limit35')}</th>
             </tr>
           </thead>
           <tbody>
             {TAULA_DROGUES.map((row, i) => (
-              <tr
-                key={i}
-                className={
-                  i % 2 === 0
-                    ? 'bg-white dark:bg-[#0f1d34]'
-                    : 'bg-slate-50 dark:bg-white/5'
-                }
-              >
-                <td className="px-3 py-2 font-semibold">{row.substancia}</td>
-                <td className="px-3 py-2 font-mono">{row.dosi_habitual}</td>
-                <td className="px-3 py-2 font-mono">{row.consum_3_5_dies}</td>
+              <tr key={i}>
+                <td className="strong">{row.substancia}</td>
+                <td className="mono">{row.dosi_habitual}</td>
+                <td className="mono">{row.consum_3_5_dies}</td>
               </tr>
             ))}
           </tbody>
@@ -96,11 +78,9 @@ export default function PenalTaulaDrogues() {
       </div>
 
       {/* Notes interpretatives */}
-      <div className="mt-5 rounded-xl border p-4 text-sm
-        border-slate-200 bg-slate-50 text-slate-700
-        dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
-        <div className="font-bold mb-2">📌 {t('penal.taulaDrogues.howToInterpret')}</div>
-        <ul className="list-disc pl-5 space-y-1">
+      <div className="op-notes">
+        <div className="op-notes-title">📌 {t('penal.taulaDrogues.howToInterpret')}</div>
+        <ul>
           <li>{t('penal.taulaDrogues.note1')}</li>
           <li>{t('penal.taulaDrogues.note2')}</li>
           <li>{t('penal.taulaDrogues.note3')}</li>
