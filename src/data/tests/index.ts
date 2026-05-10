@@ -37,6 +37,7 @@ import mossosA7 from './mossos-a7';
 import mossosB1 from './mossos-b1';
 import mossosB2 from './mossos-b2';
 import mossosB3 from './mossos-b3';
+import mossosB4 from './mossos-b4';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -74,6 +75,7 @@ export const TOPICS: TestTopic[] = [
   mossosB1,
   mossosB2,
   mossosB3,
+  mossosB4,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
