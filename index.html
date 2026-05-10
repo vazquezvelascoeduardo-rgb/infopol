@@ -2,6 +2,19 @@
 <html lang="ca">
   <head>
     <meta charset="UTF-8" />
+    <!--
+      Content-Security-Policy: capa de defensa contra XSS i injecció
+      d'scripts. Permet només recursos del propi domini, Google Fonts
+      i la connexió HTTPS/WSS al projecte Supabase. 'unsafe-inline' a
+      style-src és necessari perquè Vite/Tailwind injecten CSS inline
+      i les fitxes legals porten <style>. Script-src només 'self'.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://fonts.googleapis.com https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; manifest-src 'self'"
+    />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />

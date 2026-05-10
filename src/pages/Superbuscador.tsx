@@ -270,13 +270,13 @@ function ResultRow({
             className="text-[10px] uppercase tracking-wider font-semibold mb-0.5 truncate"
             style={{ color }}
             title={ctx}
-            dangerouslySetInnerHTML={{ __html: highlight(ctx, q) }}
-          />
+          >
+            <HighlightText text={ctx} query={q} />
+          </div>
         )}
-        <div
-          className="text-sm leading-snug text-slate-900 dark:text-slate-100"
-          dangerouslySetInnerHTML={{ __html: highlight(row.concepte, q) }}
-        />
+        <div className="text-sm leading-snug text-slate-900 dark:text-slate-100">
+          <HighlightText text={row.concepte} query={q} />
+        </div>
       </div>
 
       {/* Article */}
@@ -361,35 +361,41 @@ function isNumericFine(s: string): boolean {
   return /^\d/.test(s.replace(/\./g, ''));
 }
 
-function highlight(text: string, q: string): string {
-  const tokens = q
-    .trim()
-    .split(/\s+/)
-    .filter((t) => t.length >= 2);
-  if (tokens.length === 0) return escapeHtml(text);
-  let out = escapeHtml(text);
-  for (const tk of tokens) {
-    const re = new RegExp(escapeRegExp(escapeHtml(tk)), 'ig');
-    out = out.replace(
-      re,
-      (m) =>
-        `<mark class="rounded px-0.5 bg-purple-200/80 text-purple-900 dark:bg-purple-400/30 dark:text-purple-100">${m}</mark>`,
-    );
-  }
-  return out;
+/**
+ * Component que ressalta les coincidencies del query dins el text.
+ * Retorna spans React purs (sense innerHTML) per blindar contra XSS:
+ * tot el text passa per React i s'escapa automaticament.
+ */
+function HighlightText({ text, query }: { text: string; query: string }) {
+  const tokens = query.trim().split(/\s+/).filter((t) => t.length >= 2);
+  if (tokens.length === 0) return <>{text}</>;
+  // Construeix un RegExp amb totes les tokens (cap escapada de HTML cal:
+  // React s'encarrega d'escapar el text final).
+  const re = new RegExp(`(${tokens.map(escapeRegExp).join('|')})`, 'ig');
+  const parts = text.split(re);
+  // Set en minúscules per identificar quines parts són matches (sense
+  // el problema d'estat de regex /g).
+  const lower = new Set(tokens.map((tk) => tk.toLowerCase()));
+  return (
+    <>
+      {parts.map((part, i) =>
+        lower.has(part.toLowerCase()) ? (
+          <mark
+            key={i}
+            className="rounded px-0.5 bg-purple-200/80 text-purple-900 dark:bg-purple-400/30 dark:text-purple-100"
+          >
+            {part}
+          </mark>
+        ) : (
+          <span key={i}>{part}</span>
+        ),
+      )}
+    </>
+  );
 }
 
 function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-function escapeHtml(s: string): string {
-  return s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
 }
 
 // ── Drawer de detall ─────────────────────────────────────────────
