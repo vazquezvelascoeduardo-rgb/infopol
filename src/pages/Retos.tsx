@@ -285,17 +285,17 @@ export default function Retos() {
 
           {/* Day banner */}
           <section className="day-banner">
-            <div className="eyebrow">RETO DIARIO · HOY</div>
-            <h1>¡Hola! Vas con racha de {stats.streakDays} días 🔥</h1>
+            <div className="eyebrow">REPTE DIARI · AVUI</div>
+            <h1>Hola! Portes una ratxa de {stats.streakDays} dies 🔥</h1>
             <p>
               {failuresDue > 0
-                ? <>Tienes <b style={{ color: '#fff' }}>{failuresDue} repasos pendientes</b> · termina hoy y desbloquea el cofre semanal.</>
-                : <>Te quedan <b style={{ color: '#fff' }}>{Math.max(1, Math.ceil((50 - dailyXp) / 12))} lecciones</b> para completar tu objetivo diario y desbloquear el cofre semanal.</>
+                ? <>Tens <b style={{ color: '#fff' }}>{failuresDue} repassos pendents</b> · acaba avui i desbloqueja el cofre setmanal.</>
+                : <>Et queden <b style={{ color: '#fff' }}>{Math.max(1, Math.ceil((50 - dailyXp) / 12))} lliçons</b> per completar el teu objectiu diari i desbloquejar el cofre setmanal.</>
               }
             </p>
             <div className="day-progress">
               <div className="pbar2"><span style={{ width: `${objectivePct}%` }} /></div>
-              <span className="day-meta"><b>{dailyXp}/50 XP</b> · Objetivo diario</span>
+              <span className="day-meta"><b>{dailyXp}/50 XP</b> · Objectiu diari</span>
             </div>
           </section>
 
@@ -318,7 +318,7 @@ export default function Retos() {
                     title={`${n.title} · ${n.pct}%`}
                   >
                     <div className={`node ${n.state}`} style={{ marginLeft: n.marginLeft }}>
-                      {n.state === 'current' && <span className="pop">¡EMPEZAR!</span>}
+                      {n.state === 'current' && <span className="pop">COMENÇAR!</span>}
                       <div className="ring" />
                       <span className="icon-emoji">{n.icon}</span>
                     </div>
@@ -600,10 +600,10 @@ export default function Retos() {
         {/* Sidebar */}
         <aside className="side-rail">
           <div className="side-card streak-card">
-            <h3>RACHA SEMANAL</h3>
+            <h3>RATXA SETMANAL</h3>
             <div className="streak-big">
               <span className="streak-num">{stats.streakDays}</span>
-              <span className="streak-label">días seguidos 🔥</span>
+              <span className="streak-label">dies seguits 🔥</span>
             </div>
             <div className="streak-days">
               {DAYS.map((d, i) => {
@@ -621,8 +621,8 @@ export default function Retos() {
           </div>
 
           <div className="side-card">
-            <h3>RETOS DIARIOS</h3>
-            <p className="sub">Se reinician en 8h 23m</p>
+            <h3>REPTES DIARIS</h3>
+            <p className="sub">Es reinicien en 8h 23m</p>
             <div className="mt-2">
               <div className={`quest ${lessonQuestPct >= 100 ? 'done' : ''}`}>
                 <span className="qico">{lessonQuestPct >= 100 ? '✅' : '📖'}</span>
