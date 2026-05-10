@@ -63,9 +63,9 @@ export default class RouteErrorBoundary extends Component<Props, State> {
             margin: '60px auto',
             padding: '32px 24px',
             textAlign: 'center',
-            background: 'var(--paper)',
-            color: 'var(--ink)',
-            border: '1px solid var(--line)',
+            background: 'var(--paper, #FAF6EF)',
+            color: 'var(--ink, #0E0E0E)',
+            border: '1px solid var(--line, rgba(14,14,14,0.10))',
             borderRadius: 16,
             fontFamily: 'Plus Jakarta Sans, system-ui, sans-serif',
           }}
@@ -74,7 +74,7 @@ export default class RouteErrorBoundary extends Component<Props, State> {
           <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 8 }}>
             {isChunk ? 'Versió nova disponible' : "S'ha produït un error"}
           </h2>
-          <p style={{ color: 'var(--text-2)', fontSize: 14, lineHeight: 1.5, marginBottom: 16 }}>
+          <p style={{ color: 'var(--text-2, #4a4744)', fontSize: 14, lineHeight: 1.5, marginBottom: 16 }}>
             {isChunk
               ? "Hi ha una versió nova d'InfoPol. Recarreguem la pàgina per actualitzar-la."
               : "Hem trobat un error inesperat. Prova de recarregar la pàgina."}
@@ -89,8 +89,8 @@ export default class RouteErrorBoundary extends Component<Props, State> {
               padding: '10px 18px',
               borderRadius: 12,
               border: 'none',
-              background: 'var(--ink)',
-              color: 'var(--paper)',
+              background: 'var(--ink, #0E0E0E)',
+              color: 'var(--paper, #FAF6EF)',
               fontWeight: 700,
               fontSize: 14,
               cursor: 'pointer',

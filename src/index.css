@@ -149,10 +149,10 @@ html[data-text-size="lg"] { font-size: 18px; }
   /* Compensació pel header fixe — el main comença per sota d'ell.
      Variable --topbar-h aproximada (alçada real + safe-area). */
   .layout-main {
-    padding-top: calc(64px + env(safe-area-inset-top));
+    padding-top: calc(72px + env(safe-area-inset-top));
   }
   @media (min-width: 640px) {
-    .layout-main { padding-top: calc(72px + env(safe-area-inset-top)); }
+    .layout-main { padding-top: calc(80px + env(safe-area-inset-top)); }
   }
 
   /* ── Botó tornar enrere ───────────────────────────────────────── */

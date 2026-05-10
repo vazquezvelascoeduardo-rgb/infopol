@@ -16,17 +16,17 @@ export default function OnboardingTour() {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    let alreadyDone = false;
     try {
-      if (typeof window === 'undefined') return;
-      const done = window.localStorage.getItem(STORAGE_KEY);
-      if (!done) {
-        // Petit retard perquè no aparegui alhora que el banner RGPD.
-        const id = window.setTimeout(() => setOpen(true), 600);
-        return () => window.clearTimeout(id);
-      }
+      alreadyDone = !!window.localStorage.getItem(STORAGE_KEY);
     } catch {
-      // localStorage pot fallar en mode privat → no mostrem tour.
+      // localStorage pot fallar en mode privat — assumim no fet i mostrem.
     }
+    if (alreadyDone) return;
+    // Petit retard perquè no aparegui alhora que el banner RGPD.
+    const id = window.setTimeout(() => setOpen(true), 600);
+    return () => window.clearTimeout(id);
   }, []);
 
   function close() {

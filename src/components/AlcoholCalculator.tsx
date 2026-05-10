@@ -208,10 +208,11 @@ export default function AlcoholCalculator() {
         </p>
       </div>
 
-      {/* Resultat */}
+      {/* Resultat — selecció permesa (l'agent ho copia a l'atestat). */}
       {result && (
         <div
           className="rounded-xl border-l-4 p-4 mt-2"
+          data-allow-select="true"
           style={{ borderLeftColor: result.color, backgroundColor: result.color + '14' }}
         >
           <div className="font-bold text-base mb-2" style={{ color: result.color }}>

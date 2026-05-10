@@ -237,9 +237,12 @@ export default function WidmarkCalculator() {
         </div>
       </fieldset>
 
-      {/* Resultat */}
+      {/* Resultat — selecció permesa (l'agent ho copia a l'atestat). */}
       {result && (
-        <div className="rounded-2xl border-2 border-line bg-paper-2 p-5 flex flex-col gap-4">
+        <div
+          className="rounded-2xl border-2 border-line bg-paper-2 p-5 flex flex-col gap-4"
+          data-allow-select="true"
+        >
           <h3 className="text-lg font-black tracking-tight text-ink">Resultat</h3>
 
           <ResRow
