@@ -466,7 +466,48 @@
   .res-card h4 { margin: 0; font-size: 14px; font-weight: 700; }
   .res-card p { margin: 2px 0 0; font-size: 12.5px; color: var(--text-2); }
 
+  /* ── Bloque Resumen del professor (ampliació 2026) ── */
+  .prof-block {
+    background: var(--white, #fff);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 2px rgba(14,14,14,0.04), 0 8px 24px -8px rgba(14,14,14,0.10);
+  }
+  .prof-block h4 {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 8px;
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .prof-block h4 .art-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; background: #2F6BD8; color: white;
+    padding: 3px 8px; border-radius: 5px; letter-spacing: 0.05em;
+  }
+  .prof-block p { font-size: 14px; color: var(--text-2); margin-bottom: 6px; }
+  .prof-block p:last-child { margin-bottom: 0; }
+  .prof-block ul { margin: 6px 0 0 18px; font-size: 14px; color: var(--text-2); }
+  .prof-block ul li { margin-bottom: 4px; }
+  .prof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .exam-tag {
+    background: linear-gradient(180deg, transparent 55%, #FFE56B 55%);
+    padding: 0 2px; border-radius: 2px;
+    font-weight: 600; color: var(--ink);
+  }
+  .exam-tag::after { content: " ❓"; font-size: 0.85em; color: #d9531a; }
+  .exam-banner {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #FFF8DA; border: 1px solid #F2D24A; color: #6b5a30;
+    font-size: 11px; font-weight: 700; padding: 2px 8px;
+    border-radius: 999px; margin-left: 8px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+
   @media (max-width: 980px) {
+    .prof-grid { grid-template-columns: 1fr; }
     .clasif-grid { grid-template-columns: 1fr; }
     .res-grid { grid-template-columns: repeat(2, 1fr); }
     .meta-strip { grid-template-columns: 1fr; }
@@ -594,6 +635,121 @@
         </div>
         <div class="nota policial"><b>🚔 Estos cinco principios</b> (adecuación / congruencia / oportunidad / DDFF / legalidad) son la base del <b>juicio de proporcionalidad</b> de toda actuación policial. Se conectan directamente con los principios básicos del art. 5 LO 2/1986 FCSE.</div>
       </article>
+
+    </div>
+  </section>
+
+  <!-- ═══ BLOC PROFESSOR · DRETS DE LA PERSONA DAVANT L'ACTUACIÓ POLICIAL ═══ -->
+  <section id="drets-persona">
+    <div class="section-head" style="--accent: var(--c-pink);">
+      <span class="eyebrow">🛡️ RESUM DEL PROFESSOR · DRETS DE LA PERSONA DAVANT L'ACTUACIÓ POLICIAL</span>
+      <span class="rule"></span>
+      <span class="exam-banner">❓ Cau a l'examen</span>
+    </div>
+
+    <p style="margin-bottom:14px;color:var(--text-2);font-size:14.5px;">
+      La LOPSC no té un únic «Capítol de drets», però distribueix al llarg del text un <b>catàleg de garanties</b> que tota persona afectada per una intervenció policial pot invocar. Conèixer-los és imprescindible per a actuar amb cobertura legal i evitar nul·litats. Aquests drets <b>caueun amb regularitat al test</b> (8 de 27 preguntes del banc).
+    </p>
+
+    <div class="prof-grid">
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 3</span> Principis rectors</h4>
+        <p>Tota actuació policial s'ha de regir per: <span class="exam-tag">legalitat, igualtat de tracte i no discriminació, oportunitat, proporcionalitat, eficàcia, eficiència, responsabilitat, universalitat, jerarquia i subordinació a l'autoritat civil</span>.</p>
+        <p>Especial referència a la <b>protecció de menors, persones amb discapacitat, gent gran i víctimes de violència de gènere o domèstica</b>.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 4</span> Garanties generals</h4>
+        <p>L'exercici de les potestats administratives previstes en aquesta llei s'ha d'adequar als <span class="exam-tag">principis de:</span></p>
+        <ul>
+          <li><span class="exam-tag">Bona fe</span></li>
+          <li><span class="exam-tag">Conducció orientada al ciutadà</span></li>
+          <li>Mínima intervenció possible</li>
+          <li>Proporcionalitat amb l'objectiu perseguit</li>
+        </ul>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">📌 La <b>proporcionalitat</b> opera en tres nivells: idoneïtat (la mesura serveix), necessitat (no n'hi ha cap menys lesiva) i proporcionalitat estricta (els beneficis superen els sacrificis).</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 16.2</span> Drets durant la identificació</h4>
+        <p>Tota persona identificada té dret a:</p>
+        <ul>
+          <li><span class="exam-tag">Conèixer immediatament i de manera comprensible les raons</span> de la identificació.</li>
+          <li>Que se li lliuri <span class="exam-tag">justificant escrit</span> (volant) amb causa, lloc, hora d'inici i de finalització.</li>
+          <li>Trasllat a dependències <b>només si és imprescindible</b> i pel <span class="exam-tag">temps mínim, mai superior a 6 hores</span>.</li>
+          <li>No ser identificat per <b>perfil ètnic ni de manera massiva indiscriminada</b> (jurisprudència TC + STEDH Muñoz Díaz).</li>
+        </ul>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">📌 Si es trasllada a comissaria, s'ha d'informar immediatament al <b>Ministeri Fiscal</b>.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 17</span> Restricció de trànsit a la via pública</h4>
+        <p>Els agents poden limitar o restringir, pel temps imprescindible, la circulació o permanència en vies o llocs públics si concorren <span class="exam-tag">esdeveniments amb perill imminent</span>. Drets de l'afectat:</p>
+        <ul>
+          <li>Que la mesura sigui <b>motivada</b> i <b>limitada en el temps</b>.</li>
+          <li>Ser informat de la <b>causa</b> i de la previsió de durada.</li>
+          <li>Disposar d'una <b>via alternativa</b> sempre que sigui possible.</li>
+        </ul>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 19</span> Comprovacions i mesures sobre objectes</h4>
+        <p>L'agent pot fer comprovacions sobre persones, béns i vehicles. La persona afectada té dret a:</p>
+        <ul>
+          <li>Conèixer la <span class="exam-tag">finalitat de la comprovació</span>.</li>
+          <li>Negar-se a la mesura si NO concorre causa legal (revisable a posteriori).</li>
+          <li>Dignitat i intimitat: la comprovació es fa <b>al lloc menys exposat possible</b>.</li>
+        </ul>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 20</span> Registres corporals externs</h4>
+        <p>El cacheig (palpació externa) s'ha de fer <span class="exam-tag">respectant els principis del 16.1: necessitat, proporcionalitat i menor lesivitat</span>. Drets:</p>
+        <ul>
+          <li>Cacheig <b>per agent del mateix sexe</b> (si és possible).</li>
+          <li>Si és <b>desnudament integral</b>: <span class="exam-tag">resolució motivada</span>, lloc reservat, no presència de tercers, registrar-ho per escrit.</li>
+          <li>Es pot sol·licitar la <b>presència d'un testimoni</b> (si pràcticament viable).</li>
+          <li>Informació prèvia de la <b>causa</b> del cacheig.</li>
+        </ul>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">📌 El registre amb <b>nuesa parcial o integral</b> NO és discrecional: requereix indici fundat que la persona porta amagat l'objecte buscat i no es pot obtenir per palpació superficial.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 36.23 + 37.5</span> Dret a gravar la PL en espai públic</h4>
+        <p>La gravació no autoritzada d'agents <b>NO és infracció</b> per si mateixa: només quan hi ha <span class="exam-tag">risc per a la seguretat de l'agent, l'operatiu o la víctima</span>. La persona té dret a:</p>
+        <ul>
+          <li><b>Filmar/fotografiar</b> en via pública mentre no obstaculitzi.</li>
+          <li>NO ser sancionada per <b>difusió posterior</b> tret que generi un risc concret demostrable (STC 172/2020).</li>
+          <li>Que la PL <b>no esborri ni confisqui</b> el dispositiu sense ordre judicial.</li>
+        </ul>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ARTS. 52-55</span> Garanties del procediment sancionador</h4>
+        <p>Tota persona acusada d'una infracció gaudeix de:</p>
+        <ul>
+          <li><span class="exam-tag">Presumpció d'innocència</span>.</li>
+          <li>Dret a <b>ser informada de l'acusació</b>, amb còpia del butlletí.</li>
+          <li>Dret a <b>al·legar i proposar prova</b> (audiència).</li>
+          <li>Dret a una <span class="exam-tag">resolució motivada en termini màxim d'1 any</span> (caducitat).</li>
+          <li>Possibilitat d'acollir-se al <b>pagament voluntari amb reducció del 50%</b> (DTE) abans de la resolució, renunciant al recurs.</li>
+        </ul>
+      </div>
+
+      <div class="prof-block" style="grid-column: 1 / -1; background:#FFEFEC; border-color:#E5484D;">
+        <h4 style="color:#a8323d;">🚔 Garanties especials davant la detenció (concordança CE + LECrim)</h4>
+        <p style="color:#a8323d;">Encara que la LO 4/2015 NO regula la detenció (ho fa la LECrim), la PL ha de saber que tota persona detinguda — fins i tot per infracció administrativa molt greu reconvertida — té els drets de l'art. <b>17.3 CE</b> i <b>520 LECrim</b>:</p>
+        <ul style="color:#a8323d;">
+          <li>Lectura de <b>drets immediata</b> en llengua comprensible.</li>
+          <li><span class="exam-tag">Assistència de lletrat</span> (designat o d'ofici).</li>
+          <li><span class="exam-tag">Assistència d'intèrpret</span> gratuïta.</li>
+          <li>Dret a <b>comunicar la detenció</b> a familiar.</li>
+          <li>Dret a <b>reconeixement mèdic</b>.</li>
+          <li>Dret a <b>guardar silenci</b> i a no declarar contra si mateix.</li>
+          <li><span class="exam-tag">Habeas corpus</span> si es considera detenció il·legal (LO 6/1984).</li>
+        </ul>
+      </div>
 
     </div>
   </section>
