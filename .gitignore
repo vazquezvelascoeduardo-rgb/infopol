@@ -14,3 +14,4 @@ dev-dist
 
 # Carpeta temporal per a la importació d'HTML (vegeu scripts/import-html.mjs).
 _import/
+_import*/
