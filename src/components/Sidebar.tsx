@@ -73,6 +73,26 @@ function IconCultura() {
     </svg>
   );
 }
+function IconCalc() {
+  // Calculadora — eines de càlcul (alcohol, conversions…).
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="5" y="3" width="14" height="18" rx="2" />
+      <path d="M9 7h6" />
+      <path d="M8 11h.01M12 11h.01M16 11h.01" />
+      <path d="M8 15h.01M12 15h.01M16 15h.01" />
+      <path d="M8 19h.01M12 19h.01M16 19h.01" />
+    </svg>
+  );
+}
+function IconUser() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
+    </svg>
+  );
+}
 function IconText() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -207,13 +227,18 @@ export default function Sidebar({ open, onClose }: Props) {
                   if (subParts.length === 0) subParts.push(t('sidebar.session.synced'));
                   return (
                     <div className="sb-user">
-                      <span className="sb-user-avatar">
+                      <Link to="/perfil" className="sb-user-avatar" aria-label={t('sidebar.session.viewProfile')}>
                         {displayName.charAt(0).toUpperCase()}
-                      </span>
-                      <div className="sb-user-meta">
-                        <span className="sb-user-name">{displayName}</span>
+                      </Link>
+                      <Link to="/perfil" className="sb-user-meta" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <span className="sb-user-name">
+                          {displayName}{' '}
+                          <span aria-hidden style={{ fontSize: 11, color: 'var(--text-3)' }}>
+                            <IconUser />
+                          </span>
+                        </span>
                         <span className="sb-user-sub">{subParts.join(' · ')}</span>
-                      </div>
+                      </Link>
                       <button
                         type="button"
                         onClick={() => {
@@ -303,6 +328,15 @@ export default function Sidebar({ open, onClose }: Props) {
             >
               <span className="sb-icon ic-bg-yellow"><IconCultura /></span>
               <span>{t('sidebar.cultura')}</span>
+              <span />
+            </Link>
+
+            <Link
+              to="/calculadora-alcohol"
+              className={`sb-item ${isActive('/calculadora-alcohol') ? 'active' : ''}`}
+            >
+              <span className="sb-icon ic-bg-orange"><IconCalc /></span>
+              <span>{t('sidebar.alcohol')}</span>
               <span />
             </Link>
           </nav>

@@ -93,13 +93,6 @@ function buildPathNodes(): PathNodeView[] {
   });
 }
 
-const SHOP_ITEMS = [
-  { ico: '❤️', title: 'Recarga total', desc: 'Llena tus 5 corazones', price: 350 },
-  { ico: '🛡️', title: 'Protector racha', desc: 'Salva 1 día perdido', price: 200 },
-  { ico: '⏰', title: 'Tiempo extra', desc: '+30s en duelos', price: 80 },
-  { ico: '🚀', title: 'XP x2 (15 min)', desc: 'Doble experiencia', price: 150 },
-];
-
 const DAYS = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
 
 // Calcula el dia de la setmana com a índex 0..6 (L=0, M=1, ..., D=6).
@@ -584,36 +577,23 @@ export default function Retos() {
             </div>
           </section>
 
-          {/* Shop */}
-          <section className="shop">
-            <h3>
-              💎 Botiga · gasta les teves gemmes{' '}
-              <span style={{
-                fontSize: 11,
-                fontFamily: "'JetBrains Mono', ui-monospace, monospace",
-                fontWeight: 700,
-                letterSpacing: '0.12em',
-                padding: '3px 8px',
-                borderRadius: 999,
-                background: '#FFF1D2',
-                color: '#9c7a1f',
-                marginLeft: 8,
-                verticalAlign: 'middle',
-              }}>
-                EN PREPARACIÓ
-              </span>
+          {/* Botiga · placeholder coming-soon (sense items per evitar
+              mostrar preus en gemmes que encara no es poden gastar). */}
+          <section className="shop shop-empty" style={{
+            background: 'var(--paper-2)',
+            color: 'var(--text-2)',
+            padding: '18px 22px',
+            borderRadius: 14,
+            border: '1px dashed var(--line)',
+            marginTop: 28,
+            textAlign: 'center',
+          }}>
+            <h3 style={{ color: 'var(--ink)', fontSize: 15, margin: 0 }}>
+              💎 Botiga · pròximament
             </h3>
-            <p className="sub">Power-ups, vides extra i boosts. Aviat podràs gastar les gemmes que has guanyat fent tests.</p>
-            <div className="shop-grid">
-              {SHOP_ITEMS.map((s, i) => (
-                <div key={`shop-${i}`} className="shop-item">
-                  <div className="si-ico">{s.ico}</div>
-                  <h4>{s.title}</h4>
-                  <p>{s.desc}</p>
-                  <span className="price">💎 {s.price}</span>
-                </div>
-              ))}
-            </div>
+            <p style={{ fontSize: 13, color: 'var(--text-3)', margin: '6px 0 0' }}>
+              Aviat podràs gastar les teves gemmes en power-ups, vides extra i boosts.
+            </p>
           </section>
         </div>
 

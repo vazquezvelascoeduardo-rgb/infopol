@@ -148,7 +148,7 @@ export default function Academia() {
 
         <Link to="/mossos" className="route mossos">
           <span className="ribbon">
-            PSOE · {temariCount} {t('academia.topics')}
+            MOSSOS · {temariCount} {t('academia.topics')}
           </span>
           <div className="icon-block"><span style={{ fontSize: 38 }}>🛡️</span></div>
           <h2>
@@ -175,7 +175,7 @@ export default function Academia() {
 
         <Link to="/policia-local" className="route local">
           <span className="ribbon">
-            PSOE LOCAL · {municipiCount} {t('academia.topics')}
+            POLICIA LOCAL · {municipiCount} {t('academia.topics')}
           </span>
           <div className="icon-block"><span style={{ fontSize: 38 }}>🚓</span></div>
           <h2>
