@@ -24,6 +24,7 @@ const DICT: Dict = {
     // Header / layout
     'app.tagline': 'Consulta operativa',
     'nav.home': 'Inici',
+    'nav.back': 'Tornar',
     'search.label': 'Cerca',
     'search.placeholder': 'Cerca per article, norma, paraula clau…',
     'search.clearQuery': 'Esborrar cerca',

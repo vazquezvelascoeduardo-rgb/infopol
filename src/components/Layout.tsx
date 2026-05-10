@@ -10,6 +10,7 @@ import GdprBanner from './GdprBanner';
 import UserButton from './UserButton';
 import OnboardingTour from './OnboardingTour';
 import RegisterNudge from './RegisterNudge';
+import BackButton from './BackButton';
 
 function BrandShield({ className = '' }: { className?: string }) {
   // Shield-i (rebranding 2026): escut en tinta amb la "i" d'info
@@ -191,7 +192,10 @@ export default function Layout({ children }: { children: ReactNode }) {
         )}
       </header>
 
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 layout-main">
+        <BackButton />
+        {children}
+      </main>
 
       <footer className="border-t border-line mt-16 sm:mt-20">
         <div className="shell flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-9 sm:py-10 text-[13.5px] text-text-3">

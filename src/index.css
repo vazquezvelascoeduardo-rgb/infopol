@@ -110,14 +110,55 @@ html[data-text-size="lg"] { font-size: 18px; }
 
   /* ── Top bar ─────────────────────────────────────────────────── */
   .topbar {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 50;
-    background: rgba(250, 246, 239, 0.85);
+    background: rgba(250, 246, 239, 0.92);
     backdrop-filter: saturate(140%) blur(14px);
     -webkit-backdrop-filter: saturate(140%) blur(14px);
     border-bottom: 1px solid var(--line);
   }
+  /* Compensació pel header fixe — el main comença per sota d'ell.
+     Variable --topbar-h aproximada (alçada real + safe-area). */
+  .layout-main {
+    padding-top: calc(64px + env(safe-area-inset-top));
+  }
+  @media (min-width: 640px) {
+    .layout-main { padding-top: calc(72px + env(safe-area-inset-top)); }
+  }
+
+  /* ── Botó tornar enrere ───────────────────────────────────────── */
+  .back-btn-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 16px 0;
+  }
+  @media (min-width: 640px) {
+    .back-btn-wrap { padding: 18px 24px 0; }
+  }
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px 7px 11px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--white, #fff);
+    color: var(--text-2);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s ease;
+    box-shadow: 0 1px 2px rgba(14,14,14,0.04);
+  }
+  .back-btn:hover {
+    background: var(--paper-2);
+    color: var(--ink);
+    border-color: var(--text-3);
+  }
+  .back-btn svg { flex: none; }
   html.dark .topbar { background: rgba(14, 14, 14, 0.85); }
 
   .topbar-inner {
