@@ -661,8 +661,76 @@
     color: var(--text-2);
   }
 
+  /* ── Bloque "Resumen del professor" (ampliación 2026) ── */
+  .prof-block {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-md);
+  }
+  .prof-block h4 {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .prof-block h4 .art-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: #2F6BD8;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 5px;
+    letter-spacing: 0.05em;
+  }
+  .prof-block p { font-size: 14px; color: var(--text-2); margin-bottom: 6px; }
+  .prof-block p:last-child { margin-bottom: 0; }
+  .prof-block ul { margin: 6px 0 0 18px; font-size: 14px; color: var(--text-2); }
+  .prof-block ul li { margin-bottom: 4px; }
+  .prof-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* ── Resaltado inline · cae en tests ── */
+  .exam-tag {
+    background: linear-gradient(180deg, transparent 55%, #FFE56B 55%);
+    padding: 0 2px;
+    border-radius: 2px;
+    font-weight: 600;
+    color: var(--ink);
+    position: relative;
+  }
+  .exam-tag::after {
+    content: " ❓";
+    font-size: 0.85em;
+    color: #d9531a;
+  }
+  .exam-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #FFF8DA;
+    border: 1px solid #F2D24A;
+    color: #6b5a30;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
   @media (max-width: 980px) {
     .titles-grid, .op-grid, .terr-grid, .res-grid { grid-template-columns: repeat(2, 1fr); }
+    .prof-grid { grid-template-columns: 1fr; }
     .art-grid { grid-template-columns: repeat(2, 1fr); }
     .pillars { grid-template-columns: 1fr; }
     .meta-strip { grid-template-columns: 1fr; }
@@ -760,6 +828,77 @@
       <li><div class="tl-dot"></div><div><div class="tl-date">27 DIC 1978</div><div class="tl-text">Sanción real por <b>S.M. el Rey</b> en sesión solemne de las Cortes.</div></div></li>
       <li><div class="tl-dot"></div><div><div class="tl-date">29 DIC 1978</div><div class="tl-text">Publicación en el BOE · Entrada en vigor.</div></div></li>
     </ol>
+  </section>
+
+  <!-- ═══ BLOC 1 · TÍTULO PRELIMINAR (estructura y principios) ═══ -->
+  <section id="titulo-pre-detalle">
+    <div class="section-head" style="--accent:#2FB66B;">
+      <span class="eyebrow">📜 BLOC 1 · TÍTOL PRELIMINAR · ESTRUCTURA I PRINCIPIS GENERALS</span>
+      <span class="rule"></span>
+      <span class="meta-mono">ARTS. 1–9</span>
+    </div>
+
+    <p style="margin-bottom:14px;color:var(--text-2);font-size:14.5px;">
+      El Títol Preliminar fixa la <b>identitat constitucional</b>: forma d'Estat, sobirania, valors superiors, símbols i el principi de jerarquia normativa. És el bloc més preguntat als tests de Mossos i Policia Local — qui domina aquests 9 articles té un 20% del test guanyat.
+      <span class="exam-banner">❓ Cau a l'examen</span>
+    </p>
+
+    <div class="prof-grid">
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 1</span> Estat social i democràtic</h4>
+        <p><b>1.1</b> — Espanya és un <span class="exam-tag">Estat social i democràtic de Dret</span>, que propugna com a valors superiors del seu ordenament jurídic la <span class="exam-tag">llibertat, la justícia, la igualtat i el pluralisme polític</span>.</p>
+        <p><b>1.2</b> — La <span class="exam-tag">sobirania nacional</span> resideix en el poble espanyol, del qual emanen els poders de l'Estat.</p>
+        <p><b>1.3</b> — La forma política de l'Estat és la <span class="exam-tag">monarquia parlamentària</span>.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 2</span> Unitat i autonomia</h4>
+        <p>La Constitució es fonamenta en la <span class="exam-tag">indissoluble unitat de la Nació espanyola</span>, pàtria comuna i indivisible de tots els espanyols, i reconeix i garanteix el <span class="exam-tag">dret a l'autonomia de les nacionalitats i regions</span> que la integren i la solidaritat entre totes elles.</p>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">📌 És la base constitucional de l'Estatut d'Autonomia de Catalunya (EAC).</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 3</span> Llengua oficial</h4>
+        <p><b>3.1</b> — El castellà és la llengua espanyola oficial de l'Estat. Tots els espanyols tenen el deure de conèixer-la i el dret a usar-la.</p>
+        <p><b>3.2</b> — Les altres llengües espanyoles seran també oficials a les respectives Comunitats Autònomes d'acord amb els seus Estatuts.</p>
+        <p><b>3.3</b> — La <span class="exam-tag">riquesa de les diferents modalitats lingüístiques</span> d'Espanya és un patrimoni cultural que serà objecte d'especial respecte i protecció.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 4</span> Bandera i símbols</h4>
+        <p><b>4.1</b> — La bandera d'Espanya està formada per <b>tres franges horitzontals</b>, vermella, groga i vermella, sent la groga de doble amplada que cadascuna de les vermelles.</p>
+        <p><b>4.2</b> — Els Estatuts podran reconèixer banderes i ensenyes pròpies de les CCAA, que s'utilitzaran <span class="exam-tag">junt amb la bandera d'Espanya en els seus edificis públics i actes oficials</span>.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 5</span> Capital de l'Estat</h4>
+        <p>La capital de l'Estat és la <span class="exam-tag">vila de Madrid</span>.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 6</span> Partits polítics</h4>
+        <p>Els partits polítics expressen el pluralisme polític, concorren a la formació i manifestació de la voluntat popular i són <b>instrument fonamental per a la participació política</b>. La seva creació i exercici són lliures dins el respecte a la Constitució i a la llei. La seva estructura interna i el seu funcionament hauran de ser <span class="exam-tag">democràtics</span>.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 7</span> Sindicats i empresariat</h4>
+        <p>Els sindicats de treballadors i les associacions empresarials contribueixen a la defensa i promoció dels interessos econòmics i socials que els són propis. La seva creació i exercici són lliures dins el respecte a la Constitució i a la llei. Estructura interna i funcionament <span class="exam-tag">democràtics</span>.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 8</span> Forces Armades</h4>
+        <p><b>8.1</b> — Les Forces Armades, constituïdes per l'<b>Exèrcit de Terra, l'Armada i l'Exèrcit de l'Aire</b>, tenen com a missió garantir la <span class="exam-tag">sobirania i independència d'Espanya, defensar la seva integritat territorial i l'ordenament constitucional</span>.</p>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">⚠️ <b>No confondre</b>: les FFAA NO són forces de seguretat. Les FCSE (art. 104) sí.</p>
+      </div>
+
+      <div class="prof-block" style="grid-column: 1 / -1;">
+        <h4><span class="art-num">ART. 9</span> Subjecció a l'ordenament — Principi de jerarquia normativa</h4>
+        <p><b>9.1</b> — Els ciutadans i els poders públics estan subjectes a la Constitució i a la resta de l'ordenament jurídic.</p>
+        <p><b>9.2</b> — Correspon als poders públics promoure les condicions perquè la llibertat i la igualtat de l'individu i dels grups en què s'integra siguin reals i efectives.</p>
+        <p><b>9.3</b> — La Constitució garanteix: <span class="exam-tag">el principi de legalitat, la jerarquia normativa, la publicitat de les normes, la irretroactivitat de les disposicions sancionadores no favorables o restrictives de drets individuals, la seguretat jurídica, la responsabilitat i la interdicció de l'arbitrarietat dels poders públics</span>.</p>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:8px;">📌 <b>Memoritza les 7 garanties de l'art. 9.3</b>: legalitat · jerarquia · publicitat · irretroactivitat · seguretat jurídica · responsabilitat · interdicció arbitrarietat.</p>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ ESTRUCTURA · 12 cards ═══ -->
@@ -919,39 +1058,217 @@
         </ul>
       </article>
     </div>
+
+    <!-- ═══ BLOC 2 · Articles clau del Títol I (resum del professor) ═══ -->
+    <div class="section-head" style="--accent:#2F6BD8;margin-top:28px;">
+      <span class="eyebrow">📘 BLOC 2 · ARTICLES CLAU DEL TÍTOL I — RESUM DEL PROFESSOR</span>
+      <span class="rule"></span>
+      <span class="exam-banner">❓ Cau a l'examen</span>
+    </div>
+
+    <div class="prof-grid">
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 14</span> Igualtat davant la llei</h4>
+        <p>Els espanyols són iguals davant la llei, sense que pugui prevaler cap discriminació per raó de <span class="exam-tag">naixement, raça, sexe, religió, opinió o qualsevol altra condició o circumstància personal o social</span>.</p>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">📌 No és Sec. 1ª (no té amparo plenament autònom), però sí és invocable en amparo conjuntament amb un dret de la Sec. 1ª.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 15</span> Vida i integritat</h4>
+        <p>Tothom té <b>dret a la vida i a la integritat física i moral</b>, sense que, en cap cas, puguin ser sotmesos a <span class="exam-tag">tortura ni a penes o tractes inhumans o degradants</span>.</p>
+        <p>Queda <span class="exam-tag">abolida la pena de mort</span>, llevat del que puguin disposar les lleis penals militars per a temps de guerra.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 16</span> Llibertat ideològica i religiosa</h4>
+        <p><b>16.1</b> Es garanteix la llibertat ideològica, religiosa i de culte. <b>Cap confessió tindrà caràcter estatal</b>.</p>
+        <p><b>16.2</b> <span class="exam-tag">Ningú podrà ser obligat a declarar sobre la seva ideologia, religió o creences</span>.</p>
+        <p><b>16.3</b> Els poders públics tindran en compte les creences religioses de la societat espanyola i mantindran les conseqüents relacions de cooperació amb l'Església Catòlica i les altres confessions.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 17</span> Llibertat i seguretat (DETENCIÓ)</h4>
+        <p><b>17.1</b> Tota persona té dret a la llibertat i a la seguretat. Ningú pot ser privat de llibertat, sinó amb l'observança del que estableix aquest article i en els casos i en la forma previstos en la llei.</p>
+        <p><b>17.2</b> La detenció preventiva no podrà durar més temps que l'estrictament necessari per a la realització de les indagacions tendents a l'esclariment dels fets, i, en tot cas, en el termini màxim de <span class="exam-tag">setanta-dues hores</span>, el detingut haurà de ser posat en llibertat o a disposició de l'autoritat judicial.</p>
+        <p><b>17.3</b> Tota persona detinguda ha de ser informada immediatament, i de manera que li sigui comprensible, dels seus <b>drets i de les raons de la seva detenció</b>, no podent ser obligada a declarar. Es garanteix l'<span class="exam-tag">assistència d'advocat al detingut</span> en les diligències policials i judicials.</p>
+        <p><b>17.4</b> La llei regularà un procediment d'<span class="exam-tag">habeas corpus</span> per a produir la immediata posada a disposició judicial de tota persona detinguda il·legalment.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 18</span> Honor, intimitat i domicili</h4>
+        <p><b>18.1</b> Es garanteix el dret a l'<span class="exam-tag">honor, a la intimitat personal i familiar i a la pròpia imatge</span>.</p>
+        <p><b>18.2</b> El <span class="exam-tag">domicili és inviolable</span>. Cap entrada ni registre podrà fer-se en ell sense consentiment del titular o resolució judicial, llevat del cas de <b>delicte flagrant</b>.</p>
+        <p><b>18.3</b> Es garanteix el <b>secret de les comunicacions</b> i, en especial, de les postals, telegràfiques i telefòniques, llevat de resolució judicial.</p>
+        <p><b>18.4</b> La llei limitarà l'ús de la informàtica per a garantir l'honor i la intimitat.</p>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">📌 <b>3 supòsits d'entrada</b>: consentiment · resolució judicial · delicte flagrant.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 19</span> Lliure circulació i residència</h4>
+        <p>Els espanyols tenen dret a <b>elegir lliurement la seva residència i a circular pel territori nacional</b>. També tenen dret a <span class="exam-tag">entrar i sortir lliurement d'Espanya</span> en els termes que la llei estableixi. Aquest dret no podrà ser limitat per motius polítics o ideològics.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 20</span> Llibertat d'expressió i informació</h4>
+        <p><b>20.1</b> Es reconeixen i protegeixen els drets a: (a) expressar pensaments, idees i opinions; (b) producció literària, artística, científica i tècnica; (c) llibertat de càtedra; (d) <span class="exam-tag">comunicar o rebre lliurement informació veraç</span>.</p>
+        <p><b>20.2</b> L'exercici d'aquests drets <span class="exam-tag">no pot restringir-se mitjançant cap tipus de censura prèvia</span>.</p>
+        <p><b>20.5</b> Només es pot acordar el <b>segrest de publicacions, gravacions i altres mitjans en virtut de resolució judicial</b>.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 21</span> Reunió i manifestació</h4>
+        <p><b>21.1</b> Es reconeix el dret de reunió pacífica i sense armes. L'exercici no necessita autorització prèvia.</p>
+        <p><b>21.2</b> En els casos de reunions en llocs de trànsit públic i manifestacions es donarà <span class="exam-tag">comunicació prèvia a l'autoritat</span>, que només podrà <span class="exam-tag">prohibir-les quan existeixin raons fundades d'alteració de l'ordre públic</span>, amb perill per a persones o béns.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 24</span> Tutela judicial efectiva</h4>
+        <p><b>24.1</b> Tothom té dret a obtenir la <b>tutela efectiva dels jutges i tribunals</b> en l'exercici dels seus drets i interessos legítims, sense que, en cap cas, pugui produir-se indefensió.</p>
+        <p><b>24.2</b> Així mateix, tothom té dret al <span class="exam-tag">jutge ordinari predeterminat per la llei, a la defensa i a l'assistència d'advocat, a ser informat de l'acusació formulada contra ell, a un procés públic sense dilacions indegudes i amb totes les garanties, a utilitzar els mitjans de prova pertinents, a no declarar contra si mateix, a no confessar-se culpable i a la presumpció d'innocència</span>.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 25</span> Legalitat penal i sancionadora</h4>
+        <p><b>25.1</b> <span class="exam-tag">Ningú pot ser condemnat o sancionat per accions o omissions que en el moment de produir-se no constitueixen delicte, falta o infracció administrativa</span>, segons la legislació vigent en aquell moment.</p>
+        <p><b>25.2</b> Les penes privatives de llibertat i les mesures de seguretat estaran orientades cap a la <b>reeducació i reinserció social</b>.</p>
+        <p><b>25.3</b> L'Administració civil <span class="exam-tag">no podrà imposar sancions que, directament o subsidiàriament, impliquin privació de llibertat</span>.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 28</span> Sindicació i vaga</h4>
+        <p><b>28.1</b> Tothom té dret a sindicar-se lliurement. La llei podrà <span class="exam-tag">limitar o exceptuar l'exercici d'aquest dret a les Forces o Instituts Armats o als altres Cossos sotmesos a disciplina militar</span> i regularà les peculiaritats del seu exercici per als funcionaris públics.</p>
+        <p><b>28.2</b> Es reconeix el dret a la <span class="exam-tag">vaga dels treballadors per a la defensa dels seus interessos</span>. La llei garantirà el manteniment dels serveis essencials.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 30</span> Defensa d'Espanya</h4>
+        <p><b>30.1</b> Els espanyols tenen el <b>dret i el deure de defensar Espanya</b>.</p>
+        <p><b>30.2</b> La llei fixarà les <span class="exam-tag">obligacions militars dels espanyols i regularà l'objecció de consciència</span>, així com les altres causes d'exempció del servei militar obligatori.</p>
+        <p><b>30.4</b> Mitjançant llei podran regular-se els <span class="exam-tag">deures dels ciutadans en els casos de greu risc, catàstrofe o calamitat pública</span> (base legal de Protecció Civil).</p>
+      </div>
+
+      <div class="prof-block" style="grid-column: 1 / -1;">
+        <h4><span class="art-num">ART. 53</span> Garanties dels drets — clau d'amparo</h4>
+        <p><b>53.1</b> Els drets i llibertats reconeguts al Capítol II vinculen tots els poders públics. Només per <span class="exam-tag">llei, que en tot cas haurà de respectar el seu contingut essencial</span>, podrà regular-se l'exercici d'aquests drets.</p>
+        <p><b>53.2</b> Qualsevol ciutadà podrà recaptar la tutela de les llibertats i drets reconeguts a l'<span class="exam-tag">art. 14 i la Secció 1ª del Capítol II</span> davant els Tribunals ordinaris (procediment preferent i sumari) i, si escau, a través del <span class="exam-tag">recurs d'amparo davant el Tribunal Constitucional</span>. Aquest recurs serà aplicable a l'objecció de consciència reconeguda a l'art. 30.</p>
+        <p><b>53.3</b> El reconeixement, el respecte i la protecció dels principis reconeguts al Capítol III (principis rectors) <b>informaran la legislació positiva, la pràctica judicial i l'actuació dels poders públics</b>. Només podran ser al·legats davant la jurisdicció ordinària d'acord amb el que disposin les lleis que els desenvolupen.</p>
+      </div>
+    </div>
   </section>
 
-  <!-- ═══ TÍTULO VIII · ORGANIZACIÓN TERRITORIAL ═══ -->
+  <!-- ═══ TÍTULO VIII · ORGANIZACIÓN TERRITORIAL · resumen visual ═══ -->
   <section id="titulo-8">
     <div class="section-head" style="--accent:#E5484D;">
-      <span class="eyebrow">🏛️ TÍTULO VIII · ORGANIZACIÓN TERRITORIAL DEL ESTADO</span>
+      <span class="eyebrow">🏛️ TÍTOL VIII · ORGANITZACIÓ TERRITORIAL DE L'ESTAT</span>
       <span class="rule"></span>
+      <span class="meta-mono">ARTS. 137–158</span>
     </div>
     <div class="terr-grid">
       <article class="terr">
         <span class="terr-icon" style="background:#FFEFEC; color:#E5484D;">🇪🇸</span>
-        <h4>ESTADO</h4>
-        <p>Soberanía única e indivisible. Competencias exclusivas (art. 149).</p>
-        <p class="terr-art">Art. 149.1.29 — <b>Seguridad pública</b></p>
+        <h4>ESTAT</h4>
+        <p>Sobirania única i indivisible. Competències exclusives (art. 149).</p>
+        <p class="terr-art">Art. 149.1.29 — <b>Seguretat pública</b></p>
       </article>
       <article class="terr">
         <span class="terr-icon" style="background:#FFE9D8; color:#F26B1F;">🏞️</span>
         <h4>CCAA</h4>
-        <p>17 CCAA + 2 ciudades autónomas. Estatutos de Autonomía. Competencias del art. 148.</p>
-        <p class="terr-art">Catalunya · Mossos d'Esquadra (art. 149.1.29)</p>
+        <p>17 CCAA + 2 ciutats autònomes. Estatuts d'Autonomia. Competències art. 148.</p>
+        <p class="terr-art">Catalunya · Mossos d'Esquadra</p>
       </article>
       <article class="terr">
         <span class="terr-icon" style="background:#FFF6E0; color:#E89A1C;">🏘️</span>
-        <h4>PROVINCIA</h4>
-        <p>Entidad local con personalidad jurídica propia. Diputaciones provinciales.</p>
-        <p class="terr-art">Arts. 141 · LBRL 7/1985</p>
+        <h4>PROVÍNCIA</h4>
+        <p>Entitat local amb personalitat jurídica pròpia. Diputacions provincials.</p>
+        <p class="terr-art">Art. 141 · LBRL 7/1985</p>
       </article>
       <article class="terr highlight">
         <span class="terr-icon" style="background:#DFF7E9; color:#2FB66B;">🏛️</span>
-        <h4>MUNICIPIO</h4>
-        <p>Garantía institucional. Ayuntamiento, alcalde, concejales. <b>Policía Local</b> bajo el alcalde.</p>
+        <h4>MUNICIPI</h4>
+        <p>Garantia institucional. Ajuntament, alcalde, regidors. <b>Policia Local</b> sota l'alcalde.</p>
         <p class="terr-art">Art. 140 · LO 2/1986 · LBRL</p>
       </article>
+    </div>
+
+    <!-- ═══ BLOC 3 · Cap. I Principis generals (arts. 137-139) ═══ -->
+    <div class="section-head" style="--accent:#E5484D;margin-top:28px;">
+      <span class="eyebrow">📍 BLOC 3 · CAPÍTOL I — PRINCIPIS GENERALS</span>
+      <span class="rule"></span>
+      <span class="meta-mono">ARTS. 137–139</span>
+    </div>
+
+    <p style="margin-bottom:14px;color:var(--text-2);font-size:14.5px;">
+      Tres articles que vertebren tot l'Estat de les autonomies. Pocs però <b>molt preguntats</b>: defineixen quines són les entitats territorials, sobre quins principis s'estructuren i quina és la <b>posició jurídica de tot ciutadà</b> davant l'Estat compost.
+    </p>
+
+    <div class="prof-grid">
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 137</span> Estructura territorial bàsica</h4>
+        <p>L'Estat s'organitza territorialment en <span class="exam-tag">municipis, províncies i Comunitats Autònomes que es constitueixin</span>. Totes aquestes entitats gaudeixen d'<span class="exam-tag">autonomia per a la gestió dels seus respectius interessos</span>.</p>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">📌 <b>Memoritza l'ordre</b>: municipi → província → CCAA. És l'ordre exacte que apareix a l'examen.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 138</span> Solidaritat i equilibri</h4>
+        <p><b>138.1</b> L'Estat garanteix la <span class="exam-tag">realització efectiva del principi de solidaritat consagrat a l'art. 2</span>, vetllant per l'establiment d'un equilibri econòmic, adequat i just entre les diverses parts del territori espanyol, atenent en particular a les circumstàncies del fet insular.</p>
+        <p><b>138.2</b> Les diferències entre els Estatuts de les CCAA <span class="exam-tag">no podran implicar, en cap cas, privilegis econòmics o socials</span>.</p>
+      </div>
+
+      <div class="prof-block" style="grid-column: 1 / -1;">
+        <h4><span class="art-num">ART. 139</span> Igualtat i unitat de mercat</h4>
+        <p><b>139.1</b> Tots els espanyols tenen els <span class="exam-tag">mateixos drets i obligacions a qualsevol part del territori de l'Estat</span>.</p>
+        <p><b>139.2</b> Cap autoritat podrà adoptar mesures que directament o indirectament <span class="exam-tag">obstaculitzin la llibertat de circulació i establiment de les persones i la lliure circulació de béns en tot el territori espanyol</span>.</p>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:8px;">📌 <b>Aplicació policial</b>: cap ordenança municipal pot crear barreres a la lliure circulació entre municipis (ex: prohibició selectiva per residents/no residents sense base legal).</p>
+      </div>
+    </div>
+
+    <!-- ═══ BLOC 4 · Cap. II Administració Local (arts. 140-142) ═══ -->
+    <div class="section-head" style="--accent:#2FB66B;margin-top:28px;">
+      <span class="eyebrow">🏛️ BLOC 4 · CAPÍTOL II — L'ADMINISTRACIÓ LOCAL</span>
+      <span class="rule"></span>
+      <span class="meta-mono">ARTS. 140–142</span>
+    </div>
+
+    <p style="margin-bottom:14px;color:var(--text-2);font-size:14.5px;">
+      És el <b>bloc més important per a un policia local</b>: defineix l'autonomia del municipi (font de la teva legitimitat operativa), el paper de la província i el principi de suficiència financera. Quasi totes les preguntes "de territorial" caueun aquí.
+      <span class="exam-banner">❓ Cau a l'examen</span>
+    </p>
+
+    <div class="prof-grid">
+      <div class="prof-block" style="grid-column: 1 / -1;">
+        <h4><span class="art-num">ART. 140</span> Autonomia municipal — base de la PL</h4>
+        <p>La Constitució garanteix l'<span class="exam-tag">autonomia dels municipis</span>. Aquests gaudiran de <b>personalitat jurídica plena</b>. El seu govern i administració correspon als respectius <span class="exam-tag">Ajuntaments, integrats per Alcaldes i Regidors</span>.</p>
+        <p>Els <b>regidors</b> seran elegits pels veïns del municipi mitjançant <span class="exam-tag">sufragi universal, igual, lliure, directe i secret</span>, en la forma establerta per la llei.</p>
+        <p>Els <b>Alcaldes</b> seran elegits pels regidors <span class="exam-tag">o pels veïns</span>. La llei regularà les condicions en què escau el règim del <b>Consell Obert</b>.</p>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:8px;">📌 <b>Implicació per a la PL</b>: la Policia Local depèn jeràrquicament de l'<b>Alcalde</b> (Cap superior, art. 124.4 LBRL i art. 51 LO 2/1986). Per això la PL només pot actuar dins el terme municipal (regla general).</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 141</span> La província</h4>
+        <p><b>141.1</b> La província és una <b>entitat local amb personalitat jurídica pròpia</b>, determinada per l'<span class="exam-tag">agrupació de municipis</span> i divisió territorial per al compliment de les activitats de l'Estat. Qualsevol alteració dels límits provincials haurà de ser aprovada per les Corts Generals mitjançant <span class="exam-tag">llei orgànica</span>.</p>
+        <p><b>141.2</b> El govern i l'administració autònoma de les províncies estaran encomanats a <span class="exam-tag">Diputacions o altres Corporacions de caràcter representatiu</span>.</p>
+        <p><b>141.3</b> Es podran crear <b>agrupacions de municipis diferents de la província</b> (ex: comarques a Catalunya).</p>
+        <p><b>141.4</b> Als arxipèlags, les illes tindran a més la seva administració pròpia en forma de <b>Cabildos o Consells</b>.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 142</span> Suficiència financera</h4>
+        <p>Les Hisendes locals hauran de disposar dels <span class="exam-tag">mitjans suficients per a l'exercici de les funcions que la llei atribueix a les Corporacions respectives</span> i es nodriran fonamentalment de:</p>
+        <ul>
+          <li><b>Tributs propis</b></li>
+          <li><b>Participació en els de l'Estat i de les CCAA</b></li>
+        </ul>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">📌 És el principi que garanteix que un Ajuntament tingui pressupost per finançar la PL i serveis bàsics.</p>
+      </div>
+
+      <div class="prof-block" style="grid-column: 1 / -1; background:#FFF8DA; border-color:#F2D24A;">
+        <h4 style="color:#6b5a30;">🎯 Resum de memorització ràpida — Cap. II</h4>
+        <ul style="color:#6b5a30;">
+          <li><b>Art. 140</b> · MUNICIPI: autonomia + personalitat jurídica + Alcalde i Regidors elegits per sufragi universal.</li>
+          <li><b>Art. 141</b> · PROVÍNCIA: entitat local + agrupació de municipis + alteració per llei orgànica + Diputacions.</li>
+          <li><b>Art. 142</b> · HISENDA LOCAL: suficiència + tributs propis + participació Estat/CCAA.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
