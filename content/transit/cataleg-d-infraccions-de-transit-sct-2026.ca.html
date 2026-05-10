@@ -1077,14 +1077,42 @@
       panels.forEach(p => p.classList.toggle('active', p.id === 'p-' + id));
     });
   });
-  // Cerca: filtra files de taula segons text
+  // Cerca: filtra files de taula segons text. IMPORTANT: quan hi ha
+  // text de cerca, mostrem TOTS els panels (no només l'actiu) perquè
+  // la cerca abasti totes les categories simultàniament. Quan la
+  // caixa s'esborra, restaurem el comportament normal de pestanyes.
   const q = document.getElementById('cat-q');
   const go = document.getElementById('cat-go');
   function applyFilter() {
     const term = (q && q.value || '').toLowerCase().trim();
-    document.querySelectorAll('.cat-panel .tbl tbody tr').forEach(tr => {
-      if (!term) { tr.style.display = ''; return; }
-      tr.style.display = tr.textContent.toLowerCase().includes(term) ? '' : 'none';
+    if (!term) {
+      // Sense terme: restaura visibilitat segons el tab actiu i fila a fila.
+      panels.forEach(p => { p.style.removeProperty('display'); });
+      document.querySelectorAll('.cat-panel .tbl tbody tr').forEach(tr => {
+        tr.style.display = '';
+      });
+      // També restaurem visibilitat de seccions internes (.cat-block)
+      document.querySelectorAll('.cat-panel .cat-block').forEach(b => {
+        b.style.removeProperty('display');
+      });
+      return;
+    }
+    // Amb terme: força tots els panels visibles, filtra files i amaga
+    // els blocs/panels que no tinguin cap match.
+    panels.forEach(p => { p.style.display = 'block'; });
+    document.querySelectorAll('.cat-panel').forEach(panel => {
+      let panelHasMatch = false;
+      panel.querySelectorAll('.cat-block').forEach(block => {
+        let blockHasMatch = false;
+        block.querySelectorAll('.tbl tbody tr').forEach(tr => {
+          const match = tr.textContent.toLowerCase().includes(term);
+          tr.style.display = match ? '' : 'none';
+          if (match) { blockHasMatch = true; panelHasMatch = true; }
+        });
+        block.style.display = blockHasMatch ? '' : 'none';
+      });
+      // Si el panel no té cap match, l'amaguem (no apareix la capçalera buida).
+      panel.style.display = panelHasMatch ? 'block' : 'none';
     });
   }
   if (q) q.addEventListener('input', applyFilter);
