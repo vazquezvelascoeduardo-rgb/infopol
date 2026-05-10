@@ -387,7 +387,55 @@
     .ce-hero { grid-template-columns: 1fr; text-align: center; }
     .ce-shield { margin: 0 auto; }
     .ce-title { font-size: 28px; }
+    .prof-grid { grid-template-columns: 1fr; }
   }
+
+  /* ── Bloque resumen del professor ── */
+  .prof-block {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 20px; margin-bottom: 12px;
+    box-shadow: 0 1px 2px rgba(14,14,14,0.04), 0 8px 24px -8px rgba(14,14,14,0.10);
+  }
+  .prof-block h4 {
+    font-size: 15px; font-weight: 800; color: var(--ink);
+    margin-bottom: 8px; display: flex; align-items: baseline; gap: 8px;
+  }
+  .prof-block h4 .art-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; background: #2F6BD8; color: white;
+    padding: 3px 8px; border-radius: 5px; letter-spacing: 0.05em;
+  }
+  .prof-block p { font-size: 14px; color: var(--text-2); margin-bottom: 6px; }
+  .prof-block p:last-child { margin-bottom: 0; }
+  .prof-block ul { margin: 6px 0 0 18px; font-size: 14px; color: var(--text-2); }
+  .prof-block ul li { margin-bottom: 4px; }
+  .prof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .exam-tag {
+    background: linear-gradient(180deg, transparent 55%, #FFE56B 55%);
+    padding: 0 2px; border-radius: 2px; font-weight: 600; color: var(--ink);
+  }
+  .exam-tag::after { content: " ❓"; font-size: 0.85em; color: #d9531a; }
+  .exam-banner {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #FFF8DA; border: 1px solid #F2D24A; color: #6b5a30;
+    font-size: 11px; font-weight: 700; padding: 2px 8px;
+    border-radius: 999px; margin-left: 8px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .compare-table {
+    width: 100%; border-collapse: collapse; margin-top: 8px;
+    font-size: 13.5px;
+  }
+  .compare-table th, .compare-table td {
+    padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .compare-table th {
+    background: var(--paper-2); color: var(--ink);
+    font-weight: 700; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
 </style>
 </head>
 <body data-fitxa-style="rebrand-2026">
@@ -944,6 +992,172 @@
     </header>
     <p>Dos o más municipios <b>limítrofes</b> de la misma CCAA sin recursos suficientes pueden <b>asociarse</b> para la prestación de servicios de Policía Local (con autorización del Mº Interior o CCAA).</p>
   </article>
+
+  <!-- ═══ RESUM DEL PROFESSOR · OPERATIVA PRÀCTICA LO 2/86 ═══ -->
+  <div class="section-head" style="--accent:var(--terracotta);">
+    <span class="eyebrow">📘 RESUM DEL PROFESSOR · OPERATIVA PRÀCTICA · COM ACTUO COM A PL</span>
+    <span class="rule"></span>
+    <span class="exam-banner">❓ Cau a l'examen</span>
+  </div>
+
+  <p style="margin:6px 0 14px;color:var(--text-2);font-size:14.5px;">
+    La LO 2/86 dóna el <b>marc estatutari</b> (qui som, què podem fer); la LOPSC i la LECrim donen el <b>com</b>. Aquest bloc tradueix els principis abstractes de l'art. 5 a 5 intervencions tipus que un PL fa cada dia. La primera columna t'ajuda a recordar quina llei aplicar a cada moment.
+  </p>
+
+  <div class="prof-grid">
+
+    <div class="prof-block">
+      <h4><span class="art-num">INTERVENCIÓ 1</span> Identificació al carrer</h4>
+      <p><b>Base legal:</b> art. 5.2 LO 2/86 (relacions amb la comunitat) + <span class="exam-tag">art. 16 LOPSC</span> (potestat).</p>
+      <ul>
+        <li><b>Causa:</b> indici objectiu o prevenció d'un delicte concret. <b>Mai per perfil ètnic.</b></li>
+        <li><b>Identificar-se</b> com a agent abans de demanar dades.</li>
+        <li>Si la persona <b>no porta DNI</b> i no es pot identificar in situ → trasllat a dependències, <span class="exam-tag">màxim 6 hores</span>.</li>
+        <li>Lliurar <b>volant de constància</b> (causa, hora inici/fi, signatura agent).</li>
+        <li><b>NO és detenció</b>: no aplica el termini de 72 h ni l'art. 520 LECrim.</li>
+      </ul>
+    </div>
+
+    <div class="prof-block">
+      <h4><span class="art-num">INTERVENCIÓ 2</span> Cacheig (registre extern)</h4>
+      <p><b>Base legal:</b> art. 5.3 LO 2/86 (dignitat) + <span class="exam-tag">art. 20 LOPSC</span>.</p>
+      <ul>
+        <li><b>Causa:</b> indici fundat de portar arma, droga o objecte del delicte.</li>
+        <li><b>Per agent del mateix sexe</b> sempre que sigui possible.</li>
+        <li><b>Palpació superficial</b> sobre la roba: competència policial directa, sense autorització.</li>
+        <li><b>Despullament integral o parcial</b>: lloc reservat, motivació per escrit, NO presència de tercers.</li>
+        <li>Informar de la causa <b>abans</b> del registre.</li>
+      </ul>
+    </div>
+
+    <div class="prof-block">
+      <h4><span class="art-num">INTERVENCIÓ 3</span> Detenció</h4>
+      <p><b>Base legal:</b> art. 5.3 LO 2/86 + <span class="exam-tag">art. 17 CE</span> + <b>arts. 489-501 LECrim</b>.</p>
+      <ul>
+        <li><b>Identificar-se</b> com a agent en el moment de la detenció.</li>
+        <li><b>Lectura de drets immediata</b> en llengua comprensible (art. 520 LECrim).</li>
+        <li>Drets: advocat, intèrpret, comunicar familiar, reconeixement mèdic, <b>guardar silenci</b>, no declarar contra si mateix.</li>
+        <li><b>Termini màxim 72 h</b> (CE 17.2). Posada a disposició judicial o llibertat.</li>
+        <li>Procediment d'<b>habeas corpus</b> (LO 6/1984) si la detenció és il·legal.</li>
+      </ul>
+    </div>
+
+    <div class="prof-block">
+      <h4><span class="art-num">INTERVENCIÓ 4</span> Entrada en domicili</h4>
+      <p><b>Base legal:</b> <span class="exam-tag">art. 18.2 CE</span> + art. 18 LOPSC + arts. 545-572 LECrim.</p>
+      <ul>
+        <li><b>Regla general:</b> precisa <b>autorització judicial motivada</b>.</li>
+        <li><b>Excepció 1 — consentiment</b> del titular: ha de ser <b>exprés, lliure, informat i registrat per escrit</b>.</li>
+        <li><b>Excepció 2 — delicte flagrant</b>: percepció sensorial directa del delicte (no sospita).</li>
+        <li><b>Excepció 3 — risc imminent</b> per a la vida o la seguretat (incendi, fuita gas, persona en perill).</li>
+        <li><b>Domicili NO inclou:</b> establiments oberts al públic, locals de negoci, vehicles a la via pública.</li>
+      </ul>
+    </div>
+
+    <div class="prof-block">
+      <h4><span class="art-num">INTERVENCIÓ 5</span> Ús de la força</h4>
+      <p><b>Base legal:</b> art. 5.2.c i 5.2.d LO 2/86 + <span class="exam-tag">criteri C-O-P</span>.</p>
+      <ul>
+        <li><b>Congruència:</b> el mitjà (presència → verbalització → defensa → arma) s'ajusta a la situació.</li>
+        <li><b>Oportunitat:</b> realment cal intervenir; alternatives esgotades.</li>
+        <li><b>Proporcionalitat:</b> mínima força imprescindible per assolir el fi legítim.</li>
+        <li><b>Arma de foc</b>: <span class="exam-tag">només davant risc greu, immediat i racionalment per a la vida</span> (pròpia o d'altri). Mai com a mesura coercitiva ordinària.</li>
+        <li><b>Avís previ</b> sempre que sigui possible (declarar-se agent, advertir).</li>
+      </ul>
+    </div>
+
+    <div class="prof-block" style="background:#FFF8DA; border-color:#F2D24A;">
+      <h4 style="color:#6b5a30;">⚠️ Obediència deguda</h4>
+      <p style="color:#6b5a30;">L'obediència jeràrquica <b>NO empara</b> ordres que constitueixin <b>delicte</b> o siguin <span class="exam-tag">manifestament contràries a la Constitució o a les lleis</span> (art. 410 CP). L'agent ha de:</p>
+      <ul style="color:#6b5a30;">
+        <li><b>Negar-se</b> a complir l'ordre il·legal.</li>
+        <li><b>Manifestar-ho</b> per escrit al superior.</li>
+        <li><b>Comunicar-ho</b> a l'autoritat competent (Fiscalia, Inspecció, Defensor).</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ═══ COMPARATIVA LO 2/86 vs LO 4/2015 ═══ -->
+  <div class="section-head" style="--accent:#9747D6;margin-top:24px;">
+    <span class="eyebrow">📊 COMPARATIVA · LO 2/86 vs LO 4/2015 — qui regula què</span>
+    <span class="rule"></span>
+  </div>
+
+  <p style="margin:6px 0 14px;color:var(--text-2);font-size:14.5px;">
+    Pregunta clàssica d'examen: «Quina llei regula la potestat d'identificació?». La <b>LO 2/86 regula al subjecte</b> (qui són les FCS, com s'organitzen, drets/deures); la <b>LO 4/2015 regula l'acció</b> (què poden fer i amb quins límits).
+  </p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Matèria</th>
+        <th>LO 2/86 FCS</th>
+        <th>LO 4/2015 LOPSC</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Naturalesa i missió</b></td>
+        <td>Arts. 1-4 (qui són i missió genèrica)</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><b>Principis bàsics d'actuació</b></td>
+        <td><span class="exam-tag">Art. 5</span> (6 principis)</td>
+        <td>Arts. 3-4 (principis rectors LOPSC)</td>
+      </tr>
+      <tr>
+        <td><b>Estatut professional</b></td>
+        <td>Arts. 6-8 (drets/deures, agent autoritat)</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><b>Identificació de persones</b></td>
+        <td>—</td>
+        <td><span class="exam-tag">Art. 16</span></td>
+      </tr>
+      <tr>
+        <td><b>Cacheig / registre</b></td>
+        <td>—</td>
+        <td><span class="exam-tag">Arts. 20-21</span></td>
+      </tr>
+      <tr>
+        <td><b>Entrada al domicili</b></td>
+        <td>—</td>
+        <td>Art. 18 (concorda amb 18 CE i LECrim)</td>
+      </tr>
+      <tr>
+        <td><b>Detenció</b></td>
+        <td>Art. 5.3 (tractament del detingut)</td>
+        <td>— (regulada per CE 17 + LECrim 489-501)</td>
+      </tr>
+      <tr>
+        <td><b>Reunions/manifestacions</b></td>
+        <td>—</td>
+        <td>Art. 23</td>
+      </tr>
+      <tr>
+        <td><b>Règim sancionador (faltes ciutadans)</b></td>
+        <td>—</td>
+        <td><span class="exam-tag">Arts. 35-37</span> (molt greus, greus, lleus)</td>
+      </tr>
+      <tr>
+        <td><b>Òrgans de coordinació entre cossos</b></td>
+        <td><span class="exam-tag">Arts. 45-54</span> (Consell, Junta Seguretat, Junta Local)</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><b>Règim disciplinari intern del cos</b></td>
+        <td>Arts. 27-28 (CNP) i remissions per a PL</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:14px;font-size:13px;color:var(--text-3);font-style:italic;">
+    📌 <b>Regla mnemotècnica:</b> «<b>QUI som</b> → LO 2/86 · <b>QUÈ fem</b> al ciutadà → LO 4/2015 · <b>COM</b> processem un detingut → LECrim · <b>QUINS DRETS</b> té el ciutadà → CE».
+  </p>
 
   <!-- ═══ ÓRGANOS DE COORDINACIÓN ═══ -->
   <div class="section-head" style="--accent:#2F6BD8;">
