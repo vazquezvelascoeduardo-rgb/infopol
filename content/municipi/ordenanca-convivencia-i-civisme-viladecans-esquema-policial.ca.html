@@ -3,1349 +3,1093 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ordenança Convivència i Civisme — Viladecans · Esquema Policial</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Ordenança Convivència i Civisme Viladecans 2025 — Esquema Operatiu Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* Convivència Viladecans 2025 — fitxa rebranding 2026 */
   :root {
-    --bg-main: #0A1628;
-    --bg-section: #0E2244;
-    --gold: #C8A028;
-    --blue-royal: #1A5C96;
-    --red: #C8281E;
-    --green: #1A7A3C;
-    --text-main: #F0F4FF;
-    --text-secondary: #A8BAD4;
-    --border: #C8A028;
+    --ink: #0E0E0E; --paper: #FAF6EF; --paper-2: #F2EDE3; --white: #FFFFFF;
+    --terracotta: #F26B1F; --terracotta-soft: #FFE9D8;
+    --text: #0E0E0E; --text-2: #4a4744; --text-3: #807c77;
+    --line: rgba(14, 14, 14, 0.10); --line-2: rgba(14, 14, 14, 0.06);
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
   body {
-    background-color: var(--bg-main);
-    background-image:
-      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
-    font-family: 'Source Sans 3', sans-serif;
-    color: var(--text-main);
-    padding: 20px 12px 40px;
+    background: var(--paper); color: var(--text);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    line-height: 1.5; -webkit-font-smoothing: antialiased;
+    padding: 12px 8px 40px;
   }
-
-  .wrapper {
-    max-width: 720px;
-    margin: 0 auto;
+  a { color: inherit; text-decoration: none; }
+  .wrapper { max-width: 1080px; margin: 0 auto; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
   }
+  .section-head {
+    display: flex; align-items: center; gap: 12px;
+    margin: 32px 0 14px; flex-wrap: wrap;
+  }
+  .section-head::before {
+    content: ""; display: block; width: 4px; height: 22px;
+    background: var(--accent, var(--terracotta)); border-radius: 2px; flex: none;
+  }
+  .section-head .eyebrow { color: var(--accent, var(--ink)); flex: none; }
+  .section-head .rule { flex: 1; height: 1px; background: var(--line); min-width: 30px; }
 
-  /* ── CABECERA ── */
-  .header {
-    display: flex;
+  .ce-hero {
+    display: grid; grid-template-columns: auto 1fr; gap: 24px;
     align-items: center;
-    gap: 18px;
-    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
-    border: 2px solid var(--gold);
-    border-radius: 10px;
-    padding: 22px 24px;
-    margin-bottom: 8px;
-    animation: fadeUp .5s ease both;
-    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+    background: linear-gradient(180deg, #DFF7E9 0%, #b3e8c9 100%);
+    border: 1px solid #6dc290; border-radius: 18px;
+    padding: 26px 30px; margin-top: 8px;
   }
-  .escudo svg { flex-shrink: 0; }
-  .header-text { flex: 1; }
-  .header-text .label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
+  .ce-shield { flex: none; }
+  .ce-title {
+    margin: 4px 0 6px; font-size: 38px; font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.05; color: #14532d;
   }
-  .header-text h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 26px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--text-main);
-    line-height: 1.1;
+  .ce-title .accent { color: #1f8a4d; }
+  .ce-sub { margin: 0; color: #14532d; font-size: 15px; max-width: 760px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .hero-tags .tag {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #6dc290;
+    padding: 4px 11px; border-radius: 999px;
+    font-size: 12.5px; font-weight: 600; color: #14532d;
   }
-  .header-text h1 span { color: var(--gold); }
-  .header-text .subtitle {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-top: 4px;
+  .hero-tags .tag.hot { background: #DFF7E9; border-color: #1f8a4d; color: #14532d; font-weight: 800; }
+
+  /* 3 NIVELLS */
+  .clasif-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-top: 16px;
+  }
+  .clasif {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 14px; padding: 16px 18px;
+    border-top: 3px solid var(--accent);
+  }
+  .clasif h4 {
+    margin: 2px 0 6px; font-size: 15px; font-weight: 800;
+    color: var(--accent); letter-spacing: 0.03em; text-transform: uppercase;
+  }
+  .clasif p { margin: 4px 0 0; font-size: 13px; color: var(--text-2); }
+  .clasif .ant {
+    font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+    color: var(--text-3); margin-top: 6px; display: block;
   }
 
-  /* ── CLASIFICACIÓN GENERAL ── */
-  .clasificacion {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 14px;
-    animation: fadeUp .6s ease .1s both;
+  .meta-strip {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 16px; align-items: center;
+    background: #DFF7E9; border: 1px solid #6dc290;
+    border-radius: 14px; padding: 14px 18px; margin-top: 14px;
   }
-  .clas-card {
-    border-radius: 8px;
-    padding: 12px 10px;
-    text-align: center;
-    border: 1px solid rgba(200,160,40,0.3);
+  .meta-strip h3 { margin: 0; color: #14532d; font-size: 16px; font-weight: 800; }
+  .meta-strip p { margin: 4px 0 0; color: #14532d; font-size: 14px; }
+  .vigente {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 6px 14px; background: white;
+    border: 1px solid #6dc290; border-radius: 10px;
   }
-  .clas-card .icon { font-size: 22px; margin-bottom: 4px; }
-  .clas-card .tipo {
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .clas-card .pena-max {
-    font-size: 11px;
-    color: var(--text-secondary);
-    margin-top: 3px;
-    line-height: 1.35;
-  }
-  .clas-card .pena-max b { color: var(--text-main); font-size: 13px; }
-  .clas-leve   { background: rgba(26,122,60,0.15); border-color: var(--green); }
-  .clas-menos  { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
-  .clas-grave  { background: rgba(200,40,30,0.15); border-color: var(--red); }
-  .clas-leve .tipo   { color: #4ACD7A; }
-  .clas-menos .tipo  { color: #6AADDC; }
-  .clas-grave .tipo  { color: #E86050; }
+  .vigente .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); }
+  .vigente .state { font-weight: 800; color: #1f8a4d; }
 
-  /* ── BANNER INFO ── */
-  .info-banner {
-    background: linear-gradient(135deg, #0E3566 0%, #1A5C96 50%, #0E3566 100%);
-    border: 2px solid #6AADDC;
-    border-radius: 8px;
-    padding: 10px 18px;
-    margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    animation: fadeUp .55s ease .15s both;
-    box-shadow: 0 0 20px rgba(26,92,150,0.3);
+  .art-card {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 14px; padding: 14px 18px;
+    border-left: 3px solid var(--accent, #1f8a4d);
+    margin-top: 10px;
   }
-  .info-banner .inf-icon { font-size: 22px; flex-shrink: 0; }
-  .info-banner .inf-text { flex: 1; }
-  .info-banner .inf-ley {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #DCE8FF;
-  }
-  .info-banner .inf-desc {
-    font-size: 12px;
-    color: rgba(220,232,255,0.85);
-    margin-top: 2px;
-  }
-  .info-banner .inf-fecha {
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    color: #DCE8FF;
-    background: rgba(0,0,0,0.25);
-    padding: 4px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    border: 1px solid rgba(200,220,255,0.3);
-    text-align: center;
-  }
-
-  /* ── BLOQUE CATEGORÍA ── */
-  .categoria {
-    background: var(--bg-section);
-    border-radius: 10px;
-    margin-bottom: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(200,160,40,0.2);
-    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
-  }
-  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
-  .categoria:nth-child(2)  { animation: fadeUp .6s ease .25s both; }
-  .categoria:nth-child(3)  { animation: fadeUp .6s ease .3s both; }
-  .categoria:nth-child(4)  { animation: fadeUp .6s ease .35s both; }
-  .categoria:nth-child(5)  { animation: fadeUp .6s ease .4s both; }
-  .categoria:nth-child(6)  { animation: fadeUp .6s ease .45s both; }
-  .categoria:nth-child(7)  { animation: fadeUp .6s ease .5s both; }
-  .categoria:nth-child(8)  { animation: fadeUp .6s ease .55s both; }
-  .categoria:nth-child(9)  { animation: fadeUp .6s ease .6s both; }
-  .categoria:nth-child(10) { animation: fadeUp .6s ease .65s both; }
-
-  .cat-header {
-    background: var(--blue-royal);
-    padding: 12px 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    user-select: none;
-    transition: background .2s;
-  }
-  .cat-header:hover { background: #1e6db0; }
-  .cat-header .cat-icon { font-size: 20px; }
-  .cat-header h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    flex: 1;
-  }
-  .cat-header .art-ref {
-    font-size: 11px;
-    color: rgba(240,244,255,0.65);
-    white-space: nowrap;
-  }
-  .cat-header .toggle {
-    font-size: 14px;
-    transition: transform .3s;
-    color: var(--gold);
-  }
-  .cat-header.open .toggle { transform: rotate(180deg); }
-
-  .cat-body {
-    padding: 6px 0;
-    display: none;
-  }
-  .cat-header.open + .cat-body { display: block; }
-
-  /* ── INFRACCIÓ ── */
-  .delito {
-    border-left: 3px solid var(--gold);
-    margin: 8px 14px;
-    background: rgba(10,22,40,0.5);
-    border-radius: 0 7px 7px 0;
-    padding: 10px 14px;
-  }
-  .delito-top {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .delito-nombre {
-    font-family: 'Oswald', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text-main);
-    flex: 1;
-    min-width: 160px;
+  .art-card.warn { background: #FFF6E8; border-color: #f3d6a0; border-left-color: #E89A1C; }
+  .art-card.danger { background: #FFEFEC; border-color: #f5c19a; border-left-color: #E5484D; }
+  .art-card.muygrave { border-left-color: #E5484D; background: #FFEFEC; border-color: #f5c19a; }
+  .art-card header {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px;
   }
   .art-badge {
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    background: rgba(200,160,40,0.15);
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    padding: 2px 7px;
-    border-radius: 4px;
-    white-space: nowrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    background: var(--ink); color: var(--white);
+    padding: 4px 9px; border-radius: 6px; letter-spacing: 0.04em;
   }
-  .tipo-badge {
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
+  .tag-sm {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 8px; border-radius: 6px; letter-spacing: 0.04em;
+    background: #EAF1FE; color: #1f4ea0;
   }
-  .badge-leve   { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
-  .badge-menos  { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
-  .badge-grave  { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
-  .badge-mixto  { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
+  .tag-sm.warn { background: #FFF6E8; color: #9c7a1f; }
+  .tag-sm.danger { background: #FFEFEC; color: #991b1b; }
+  .tag-sm.ok { background: #DFF7E9; color: #14532d; }
+  .tag-sm.purple { background: #F5E9FF; color: #5b21b6; }
+  .tag-sm.lleu { background: #DFF7E9; color: #14532d; }
+  .tag-sm.greu { background: #FFE9D8; color: #9c3a08; }
+  .tag-sm.muygreu { background: #FFEFEC; color: #991b1b; }
+  .art-card h4 {
+    margin: 0; font-size: 16px; font-weight: 800; letter-spacing: -0.015em;
+  }
+  .art-card p { margin: 6px 0; font-size: 14px; color: var(--text-2); line-height: 1.55; }
+  .art-card p b { color: var(--ink); }
+  .art-card ul { margin: 6px 0 0 18px; }
+  .art-card li { font-size: 13.5px; color: var(--text-2); padding: 2px 0; }
+  .art-card li b { color: var(--ink); }
 
-  .delito-desc {
-    font-size: 12.5px;
-    color: var(--text-secondary);
-    margin-top: 5px;
-    line-height: 1.5;
+  .multa {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 700;
+    padding: 4px 10px; border-radius: 999px;
+    background: #FFF1D2; color: #9c7a1f;
   }
-  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
+  .multa.lleu { background: #DFF7E9; color: #14532d; }
+  .multa.greu { background: #FFE9D8; color: #9c3a08; }
+  .multa.muygreu { background: #FFEFEC; color: #991b1b; }
 
-  .pena-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 7px;
-  }
-  .pena-chip {
-    font-size: 11px;
-    background: rgba(26,92,150,0.25);
-    border: 1px solid rgba(26,92,150,0.6);
-    color: var(--text-main);
-    padding: 3px 9px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .pena-chip.agravada {
-    background: rgba(200,40,30,0.2);
-    border-color: rgba(200,40,30,0.5);
-  }
-  .pena-chip.multa {
-    background: rgba(200,160,40,0.12);
-    border-color: rgba(200,160,40,0.4);
-    color: var(--gold);
-  }
-  .pena-chip.positivo {
-    background: rgba(26,122,60,0.2);
-    border-color: rgba(26,122,60,0.5);
-    color: #A8D4C0;
-  }
+  .twocol { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 760px) { .twocol { grid-template-columns: 1fr; } }
 
-  .nota-agrav {
-    margin-top: 6px;
-    font-size: 11.5px;
-    color: #E08888;
-    background: rgba(200,40,30,0.08);
-    border-left: 2px solid var(--red);
-    padding: 4px 8px;
-    border-radius: 0 4px 4px 0;
-    line-height: 1.5;
+  .info {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 12px; align-items: start;
+    padding: 12px 14px; border-radius: 10px;
+    margin-top: 10px; font-size: 13px; line-height: 1.5;
   }
-  .nota-policial {
-    margin-top: 6px;
-    font-size: 11.5px;
-    color: #A8D4C0;
-    background: rgba(26,122,60,0.1);
-    border-left: 2px solid var(--green);
-    padding: 4px 8px;
-    border-radius: 0 4px 4px 0;
-    line-height: 1.5;
-  }
-  .nota-policial b { color: #5AE090; }
-  .nota-clave {
-    margin-top: 6px;
-    font-size: 11.5px;
-    color: #E8C870;
-    background: rgba(200,160,40,0.08);
-    border-left: 2px solid var(--gold);
-    padding: 4px 8px;
-    border-radius: 0 4px 4px 0;
-    line-height: 1.5;
-  }
-  .nota-clave b { color: var(--gold); }
+  .info b { color: var(--ink); }
+  .info.tip { background: var(--paper-2); border-left: 3px solid var(--text-2); color: var(--text-2); }
+  .info.cop { background: #EAF1FE; border-left: 3px solid #2F6BD8; color: #1f3f7a; }
+  .info.warn { background: #FFF6E8; border-left: 3px solid #E89A1C; color: #6b5a30; }
+  .info.danger { background: #FFEFEC; border-left: 3px solid #E5484D; color: #7a1f1f; }
+  .info.green { background: #DFF7E9; border-left: 3px solid #1f8a4d; color: #14532d; }
+  .info .ico { font-size: 18px; }
 
-  /* ── MINI TABLA SANCIONES ── */
-  .mini-tabla {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    margin-top: 8px;
+  .ntable {
+    width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13.5px;
   }
-  .mini-tabla .mt-cell {
-    background: rgba(26,92,150,0.15);
-    border: 1px solid rgba(200,160,40,0.25);
-    border-radius: 5px;
-    padding: 5px 8px;
-    font-size: 11.5px;
+  .ntable th {
+    text-align: left; padding: 8px 10px;
+    background: var(--paper-2); font-weight: 800; color: var(--ink);
+    font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
   }
-  .mini-tabla .mt-cell .mt-lbl {
-    font-family: 'Oswald', sans-serif;
-    font-size: 10px;
-    color: var(--gold);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    display: block;
+  .ntable td {
+    padding: 8px 10px; border-top: 1px solid var(--line-2);
+    color: var(--text-2); vertical-align: top;
   }
-  .mini-tabla .mt-cell .mt-val {
-    color: var(--text-main);
-    font-weight: 600;
-  }
+  .ntable b { color: var(--ink); }
 
-  /* ── RECUERDA ── */
-  .recuerda {
-    background: var(--gold);
-    border-radius: 10px;
-    padding: 20px 22px;
-    margin-top: 6px;
-    animation: fadeUp .6s ease .7s both;
+  /* Multinivel article — compacta */
+  .multilevel {
+    background: var(--paper-2); border: 1px solid var(--line-2);
+    border-radius: 8px; padding: 8px 10px; margin-top: 6px;
+    font-size: 12.5px; color: var(--text-2);
   }
-  .recuerda h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #0A1628;
-    margin-bottom: 12px;
-    letter-spacing: 2px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .recuerda ul { list-style: none; }
-  .recuerda ul li {
-    font-size: 13px;
-    color: #0A1628;
-    padding: 5px 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-    border-bottom: 1px solid rgba(10,22,40,0.15);
-    line-height: 1.45;
-  }
-  .recuerda ul li:last-child { border-bottom: none; }
-  .recuerda ul li::before { content: "▶"; font-size: 9px; margin-top: 5px; flex-shrink: 0; }
-  .recuerda ul li b { font-weight: 700; }
+  .multilevel b { color: var(--ink); }
 
-  /* ── BOTÓN IMPRIMIR ── */
-  .btn-print {
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-    padding: 14px;
-    background: var(--blue-royal);
-    border: 2px solid var(--gold);
-    color: var(--text-main);
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all .2s;
-    animation: fadeUp .6s ease .8s both;
+  .recorda {
+    background: linear-gradient(180deg, #FFF6E8 0%, #FBE5B5 100%);
+    border: 1px solid #f3d6a0; border-radius: 18px;
+    padding: 22px 26px; margin-top: 28px;
   }
-  .btn-print:hover {
-    background: var(--gold);
-    color: #0A1628;
+  .recorda header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
   }
+  .recorda .rule { flex: 1; height: 1px; background: #f3d6a0; }
+  .reclist {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px;
+  }
+  .reclist li {
+    display: grid; grid-template-columns: auto 1fr; gap: 10px;
+    align-items: start; padding: 8px 0;
+    border-bottom: 1px solid rgba(156, 122, 31, 0.18);
+    font-size: 13.5px; color: #6b5a30; line-height: 1.5;
+  }
+  .reclist li::before { content: "▸"; color: #9c7a1f; font-weight: 800; }
+  .reclist b { color: var(--ink); }
 
-  /* ── DIVISOR ── */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin: 4px 14px 2px;
-    opacity: .35;
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 500px) {
-    .header { padding: 16px; gap: 12px; }
-    .header-text h1 { font-size: 22px; }
-    .clasificacion { grid-template-columns: 1fr; }
-    .info-banner { flex-wrap: wrap; }
-    .mini-tabla { grid-template-columns: 1fr; }
-    .cat-header h2 { font-size: 14px; }
-  }
-
-  @media print {
-    body { background: white; color: black; }
-    .btn-print { display: none; }
-    .categoria { break-inside: avoid; }
-    .cat-body { display: block !important; }
-    .cat-header { background: #1A5C96 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @media (max-width: 980px) {
+    .clasif-grid { grid-template-columns: 1fr; }
+    .meta-strip { grid-template-columns: 1fr; }
+    .reclist { grid-template-columns: 1fr; }
+    .ce-hero { grid-template-columns: 1fr; text-align: center; }
+    .ce-shield { margin: 0 auto; }
+    .ce-title { font-size: 28px; }
   }
 </style>
 </head>
-<body>
+<body data-fitxa-style="rebrand-2026">
 <div class="wrapper">
 
-  <!-- CABECERA -->
-  <div class="header">
-    <div class="escudo">
-      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
-        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
-        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICIA</text>
-        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
-        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
-        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
-        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
-        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
-        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+  <header class="ce-hero">
+    <div class="ce-shield">
+      <svg width="80" height="92" viewBox="0 0 80 92" fill="none">
+        <path d="M40 4 L74 13 V42 C74 62 60 78 40 88 C20 78 6 62 6 42 V13 Z" fill="#14532d" stroke="#1f8a4d" stroke-width="2"/>
+        <text x="40" y="32" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="20" fill="#fff">🤝</text>
+        <text x="40" y="54" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="9" fill="#fff" letter-spacing="1">CIVISME</text>
+        <text x="40" y="66" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#b3e8c9" letter-spacing="1">VILADECANS</text>
+        <text x="40" y="78" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#b3e8c9" letter-spacing="1">2025</text>
       </svg>
     </div>
-    <div class="header-text">
-      <div class="label">Esquema Operatiu Policial · Viladecans</div>
-      <h1>Ordenança <span>Convivència i Civisme</span></h1>
-      <div class="subtitle">134 arts. · Deroga Ordenança 2002 · Referència pràctica de camp per a Policia Local</div>
+    <div>
+      <div class="eyebrow" style="color:#14532d;">ESQUEMA OPERATIU · POLICIA LOCAL</div>
+      <h1 class="ce-title">CONVIVÈNCIA · <span class="accent">CIVISME</span></h1>
+      <p class="ce-sub">Ordenança Municipal Viladecans 2025 · 134 articles · Quadre infraccions i sancions · Referència de camp. Deroga l'anterior de 2002 i prioritza <b>mediació i mesures socioeducatives</b> sobre la sanció econòmica en infraccions lleus.</p>
+      <div class="hero-tags">
+        <span class="tag hot">📅 Vigor 12/02/2025</span>
+        <span class="tag">📰 BOP 22/01/2025</span>
+        <span class="tag">📘 134 articles</span>
+        <span class="tag">🤝 Mediació prioritzada</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3 NIVELLS -->
+  <section class="clasif-grid">
+    <div class="clasif" style="--accent:#1f8a4d;">
+      <h4>Infracció Lleu</h4>
+      <p>Multa <b>100 € – 750 €</b></p>
+      <span class="ant">Prescr. 6 mesos · Sanció 1 any</span>
+    </div>
+    <div class="clasif" style="--accent:#9c3a08;">
+      <h4>Infracció Greu</h4>
+      <p>Multa <b>751 € – 1.500 €</b></p>
+      <span class="ant">Prescr. 2 anys · Sanció 2 anys</span>
+    </div>
+    <div class="clasif" style="--accent:#991b1b;">
+      <h4>Molt Greu</h4>
+      <p>Multa <b>1.501 € – 3.000 €</b></p>
+      <span class="ant">Prescr. 3 anys · Sanció 3 anys</span>
+    </div>
+  </section>
+
+  <div class="meta-strip">
+    <div>
+      <h3>📘 Ordenança vigent · Viladecans 2025</h3>
+      <p>Deroga l'anterior de 2002 · Prioritza la <b>mediació i mesures socioeducatives</b> sobre la sanció econòmica en infraccions lleus.</p>
+    </div>
+    <div class="vigente">
+      <span class="when">Vigor</span>
+      <span class="state">12/02/2025</span>
     </div>
   </div>
 
-  <!-- CLASIFICACIÓN -->
-  <div class="clasificacion">
-    <div class="clas-card clas-leve">
-      <div class="icon">🟢</div>
-      <div class="tipo">Infracció Lleu</div>
-      <div class="pena-max"><b>100 € – 750 €</b><br>Prescriu: 6 mesos<br>Mediació prioritària</div>
-    </div>
-    <div class="clas-card clas-menos">
-      <div class="icon">🔵</div>
-      <div class="tipo">Infracció Greu</div>
-      <div class="pena-max"><b>751 € – 1.500 €</b><br>Prescriu: 2 anys<br>Procediment ordinari</div>
-    </div>
-    <div class="clas-card clas-grave">
-      <div class="icon">🔴</div>
-      <div class="tipo">Molt Greu</div>
-      <div class="pena-max"><b>1.501 € – 3.000 €</b><br>Prescriu: 3 anys<br>Sanció directa</div>
-    </div>
+  <!-- ═══ CONDUCTES INCÍVIQUES ═══ -->
+  <div class="section-head" style="--accent:var(--terracotta);">
+    <span class="eyebrow">⚠️ CONDUCTES INCÍVIQUES · ARTS. 28, 30–46</span>
+    <span class="rule"></span>
   </div>
 
-  <!-- BANNER INFO -->
-  <div class="info-banner">
-    <div class="inf-icon">📜</div>
-    <div class="inf-text">
-      <div class="inf-ley">Ordenança Convivència · Ajuntament Viladecans</div>
-      <div class="inf-desc">Aprovació definitiva BOP 22/01/2025 · Deroga l'Ordenança de 2002 · Pagament voluntari 15 dies = <b>reducció 50%</b></div>
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 28.1</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <h4>Conductes contra la dignitat d'altri</h4>
+    </header>
+    <p>Insults, burles, molèsties intencionades, coacció moral o psicològica, agressions verbals. <b>Lesió de la dignitat</b> d'una altra persona.</p>
+    <p><span class="multa lleu">100 € – 750 €</span></p>
+    <div class="info tip">
+      <span class="ico">💡</span>
+      <div>Si hi ha discriminació per raça, origen, sexe, gènere o diversitat funcional → <b>MOLT GREU</b> (1.501 € – 3.000 €).</div>
     </div>
-    <div class="inf-fecha">En vigor<br>12/02/2025</div>
-  </div>
+  </article>
 
-  <!-- ══════════════════════════════════════════
-       1. DIGNITAT · AGENTS · CONDUCTES BÀSIQUES
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">👥</span>
-      <h2>Dignitat, Agents i Convivència Bàsica</h2>
-      <span class="art-ref">Arts. 28–39</span>
-      <span class="toggle">▼</span>
+  <article class="art-card muygrave">
+    <header>
+      <span class="art-badge">Art. 28.1</span>
+      <span class="tag-sm muygreu">MOLT GREU</span>
+      <h4>Conductes discriminatòries</h4>
+    </header>
+    <p>Conductes basades en <b>discriminació per raça, origen, sexe, gènere o diversitat funcional</b>. També contingut xenòfob o racista.</p>
+    <p><span class="multa muygreu">1.501 € – 3.000 €</span></p>
+    <div class="info danger">
+      <span class="ico">🚔</span>
+      <div>Si hi ha delicte penal (<b>art. 510 CP</b>) → actes + passar al jutjat. L'Ajuntament pot personar-se com a acusació.</div>
     </div>
-    <div class="cat-body">
+  </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Lesionar la dignitat d'altri</div>
-          <span class="art-badge">Art. 28.1</span>
-          <span class="tipo-badge badge-leve">Lleu</span>
-        </div>
-        <div class="delito-desc">
-          Conductes (per acció o omissió) que <b>lesionin la dignitat</b> d'una altra persona: insults, burles, molèsties intencionades, coacció moral o psicològica.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Multa 100–750 €</span>
-        </div>
-        <div class="nota-policial">🚔 <b>Actuació:</b> identificar, prendre declaració i denunciar. Si hi ha insult/amenaça/coacció amb contingut penal → <b>delicte</b> (art. 208 CP injúries / 173 CP tractes degradants). Ajuntament pot personar-se com a acusació (art. 28.5).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Discriminació (raça, origen, sexe, gènere, diversitat funcional)</div>
-          <span class="art-badge">Art. 28.1</span>
-          <span class="tipo-badge badge-grave">Molt Greu</span>
-        </div>
-        <div class="delito-desc">
-          Conductes que comportin <b>discriminació per raons de raça, origen, sexe, gènere o diversitat funcional</b>. Contingut xenòfob o racista.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">🔴 Multa 1.501–3.000 €</span>
-        </div>
-        <div class="nota-agrav">⚠️ Atenció: si la conducta inclou amenaces, agressió o provocació a l'odi → <b>delicte d'odi art. 510 CP</b>. En aquest cas prevalença penal i no es sanciona per ordenança (art. 130.4).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Barallar-se o discutir estentòriament</div>
-          <span class="art-badge">Art. 30.2</span>
-          <span class="tipo-badge badge-mixto">Lleu / Greu</span>
-        </div>
-        <div class="delito-desc">
-          Baralles, renyines o discussions <b>sorolloses o violentes</b> que alterin la convivència ciutadana.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Alteració normal → 100–750 €</span>
-          <span class="pena-chip agravada">🔵 Alteració greu/molt greu → 751–1.500 €</span>
-        </div>
-        <div class="nota-policial">🚔 <b>Valoració in situ:</b> el grau depèn de l'impacte a la convivència (testimonis, hora, lloc, agressivitat). Si hi ha lesions o amenaça → atestat penal (arts. 147/169 CP).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Desobediència a agents i obstrucció</div>
-          <span class="art-badge">Art. 31.1 / 31.4</span>
-          <span class="tipo-badge badge-leve">Lleu</span>
-        </div>
-        <div class="delito-desc">
-          Ignorar indicacions d'agents o serveis municipals. <b>Obstruir</b> per acció o omissió l'actuació dels agents municipals.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Multa 100–750 €</span>
-        </div>
-        <div class="nota-clave">💡 <b>Clau:</b> aquesta és la sanció <b>administrativa municipal</b>. Si la desobediència és greu o persistent → LO 4/2015 (LOPSC) art. 36.6 (<b>601–30.000 €</b>) o delicte art. 556 CP. Prevalença: supramunicipal abans que ordenança.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Esdeveniments esportius/lúdics sense autorització</div>
-          <span class="art-badge">Art. 38</span>
-          <span class="tipo-badge badge-menos">Greu</span>
-        </div>
-        <div class="delito-desc">
-          Celebrar esdeveniment a l'espai públic <b>sense autorització prèvia</b> de l'Ajuntament, o no respectar indicacions/horaris dels organitzadors (art. 39 → lleu).
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">🔵 Multa 751–1.500 €</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       2. DANYS · FOC · NUDISME · FONTS
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">🔥</span>
-      <h2>Danys, Foc, Nudisme i Conductes Incíviques</h2>
-      <span class="art-ref">Arts. 40–46</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Danyar el mobiliari urbà / elements públics</div>
-          <span class="art-badge">Art. 40</span>
-          <span class="tipo-badge badge-mixto">Lleu / Greu</span>
-        </div>
-        <div class="delito-desc">
-          Danyar, malmetre, deslluir o deteriorar <b>elements urbans</b>: urbanització, seguretat, comunicació, il·luminació, arbrat, mobiliari urbà, serveis, edificis públics o privats.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Elements generals → 100–750 €</span>
-          <span class="pena-chip agravada">🔵 Urbanització/seguretat/edificis → 751–1.500 €</span>
-        </div>
-        <div class="nota-agrav">⚠️ Si el dany supera 400 € o hi ha <b>fúria/dol específic</b> → <b>delicte danys art. 263 CP</b>. Si són béns públics → art. 263.2 CP agreujat.</div>
-        <div class="nota-policial">🚔 <b>Actuació:</b> valoració tècnica del dany, recollir proves (foto/vídeo), identificar autor, atestat. Sanció municipal + reparació (art. 122.5).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Encendre foc a l'espai públic</div>
-          <span class="art-badge">Arts. 41–43</span>
-          <span class="tipo-badge badge-mixto">Greu / Molt Greu</span>
-        </div>
-        <div class="delito-desc">
-          Encendre foc <b>sense autorització</b>. Règim específic segons el lloc.
-        </div>
-        <div class="mini-tabla">
-          <div class="mt-cell"><span class="mt-lbl">Espai públic</span><span class="mt-val">🔵 Greu · 751–1.500 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Espai natural/vegetació</span><span class="mt-val">🔴 Molt Greu · 1.501–3.000 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">&lt; 500 m zona forestal</span><span class="mt-val">🔵 Greu · 751–1.500 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Espai privat amb molèsties</span><span class="mt-val">🔵 Greu · 751–1.500 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Barbacoa fora d'àrea autoritzada</span><span class="mt-val">🔵 Greu · 751–1.500 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Barbacoa contravenint ban</span><span class="mt-val">🔴 Molt Greu · 1.501–3.000 €</span></div>
-        </div>
-        <div class="nota-agrav">⚠️ <b>Risc d'incendi forestal:</b> si hi ha risc real o propagació → delicte art. 352 CP (incendi forestal) o art. 358 CP (imprudent). Atestat urgent.</div>
-        <div class="nota-policial">🚔 <b>Viladecans:</b> terme amb zona forestal (Garraf) i agrícola. Verificar bans d'alcaldia per restriccions estacionals (estiu/risc).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Abocar cendres incandescents a contenidors</div>
-          <span class="art-badge">Art. 44</span>
-          <span class="tipo-badge badge-grave">Molt Greu</span>
-        </div>
-        <div class="delito-desc">
-          Llençar cendres o material encès que pugui provocar <b>incendi del contenidor</b>.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">🔴 Multa 1.501–3.000 €</span>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Nudisme fora de platges habilitades</div>
-          <span class="art-badge">Art. 45</span>
-          <span class="tipo-badge badge-leve">Lleu</span>
-        </div>
-        <div class="delito-desc">
-          Practicar nudisme fora de <b>Cal Francès i el Remolar</b> (úniques platges habilitades).
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Multa 100–750 €</span>
-        </div>
-        <div class="nota-clave">💡 <b>Ull:</b> si la conducta és <b>exhibicionista davant menors</b> → delicte art. 185 CP. Valorar context i intencionalitat.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Utilitzar fonts públiques per acumular aigua</div>
-          <span class="art-badge">Art. 46</span>
-          <span class="tipo-badge badge-menos">Greu</span>
-        </div>
-        <div class="delito-desc">
-          Fer servir <b>garrafes, ampolles o estris</b> a fonts públiques per emmagatzemar aigua.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">🔵 Multa 751–1.500 €</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       3. OCUPACIÓ ESPAI PÚBLIC · ASSENTAMENTS
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🏕️</span>
-      <h2>Ocupació Espai Públic i Assentaments</h2>
-      <span class="art-ref">Arts. 47–51</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Establir barraques al terme municipal</div>
-          <span class="art-badge">Art. 47.1</span>
-          <span class="tipo-badge badge-leve">Lleu</span>
-        </div>
-        <div class="delito-desc">
-          Muntar <b>barraques</b> a qualsevol punt del municipi. Prohibició genèrica.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Multa 100–750 €</span>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Campaments/càmpings en terrenys perillosos</div>
-          <span class="art-badge">Art. 47.2</span>
-          <span class="tipo-badge badge-mixto">Lleu / Greu</span>
-        </div>
-        <div class="mini-tabla">
-          <div class="mt-cell"><span class="mt-lbl">Rambles, lleres, inundables (a)</span><span class="mt-val">🔵 Greu · 751–1.500 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Llocs prohibits sense permís (b)</span><span class="mt-val">🔵 Greu · 751–1.500 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Nucli urbà sense autorització (c)</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-        </div>
-        <div class="nota-policial">🚔 <b>Coordinació:</b> assentaments irregulars persistents → derivar a Serveis Socials + Convivència i Civisme (art. 33/34). Prioritzar mediació abans que sanció.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Ocupació temporal / privativa espai públic</div>
-          <span class="art-badge">Art. 48</span>
-          <span class="tipo-badge badge-mixto">Lleu / Greu</span>
-        </div>
-        <div class="mini-tabla">
-          <div class="mt-cell"><span class="mt-lbl">Ocupació temporal sense autorització</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Reunió/manifestació sense comunicació</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Ús privatiu permanent sense concessió</span><span class="mt-val">🔵 Greu · 751–1.500 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Taules/cadires/paradetes sense permís</span><span class="mt-val">🔵 Greu · 751–1.500 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Quioscos/punts venda fixos</span><span class="mt-val">🔵 Greu · 751–1.500 €</span></div>
-        </div>
-        <div class="nota-clave">💡 Manifestació: aplicar LO 9/1983 i LO 4/2015. Comunicació a Govern Civil, no a l'Ajuntament. La competència municipal és de <b>convivència</b>, no d'ordre públic.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Oficis/treballs a l'espai públic sense permís</div>
-          <span class="art-badge">Art. 49.1</span>
-          <span class="tipo-badge badge-menos">Greu</span>
-        </div>
-        <div class="delito-desc">
-          Exercir oficis o treballs que <b>limitin o excloguin</b> l'ús de l'espai públic per la resta.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">🔵 Multa 751–1.500 €</span>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Sol·licitud de serveis sexuals prop de menors</div>
-          <span class="art-badge">Art. 49.2</span>
-          <span class="tipo-badge badge-grave">Molt Greu</span>
-        </div>
-        <div class="delito-desc">
-          <b>Sol·licitud o acceptació</b> de serveis sexuals retribuïts en zones de trànsit públic <b>prop de centres educatius, parcs infantils o espais d'oci</b> accessibles a menors, o quan pugui generar risc per a la seguretat viària.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">🔴 Multa 1.501–3.000 €</span>
-        </div>
-        <div class="nota-policial">🚔 <b>Operativa:</b> es sanciona al <b>demandant</b> (client), no a la persona prostituïda. Identificar, fotografiar distància a centre/parc, acta. Valorar derivació a Serveis Socials si detecció de víctima tràfic (LO 10/2022).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Elements abandonats a l'espai públic</div>
-          <span class="art-badge">Art. 50</span>
-          <span class="tipo-badge badge-leve">Lleu</span>
-        </div>
-        <div class="mini-tabla">
-          <div class="mt-cell"><span class="mt-lbl">Abandonar mobles/estris (50.1)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Reserva de plaça d'aparcament (50.4)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Limitar ús espai públic (50.5)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">No mantenir arbres/plantes (50.6)</span><span class="mt-val">🟢 100–750 €</span></div>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Pancartes i cartells</div>
-          <span class="art-badge">Art. 51</span>
-          <span class="tipo-badge badge-leve">Lleu</span>
-        </div>
-        <div class="delito-desc">
-          Col·locar cartells/pancartes fora de llocs habilitats, en edificis o mobiliari sense autorització, ocultant senyals o elements arquitectònics, o sobre bé privat volant l'espai públic.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Multa 100–750 € · tots els supòsits</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       4. NETEJA · RESIDUS · GRAFFITIS
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🗑️</span>
-      <h2>Neteja, Residus i Graffitis</h2>
-      <span class="art-ref">Arts. 55–85</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Graffitis i pintades sense autorització</div>
-          <span class="art-badge">Art. 59</span>
-          <span class="tipo-badge badge-mixto">Lleu / Greu</span>
-        </div>
-        <div class="mini-tabla">
-          <div class="mt-cell"><span class="mt-lbl">Mobiliari urbà general</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Monuments/edificis públics</span><span class="mt-val">🔵 Greu · 751–1.500 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Béns privats</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-        </div>
-        <div class="nota-agrav">⚠️ Si el dany supera 400 € o afecta patrimoni catalogat → <b>delicte art. 263 / 323 CP</b>. Sobre béns culturals d'interès nacional: legislació patrimonial específica.</div>
-        <div class="nota-policial">🚔 <b>Actuació:</b> fotografiar abans de neteja, intervenir material (art. 61), identificar autor. Art. 62 preveu <b>mediació/restauració</b> en béns privats residencials.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Residus domèstics · Contenidors</div>
-          <span class="art-badge">Arts. 66 / 80 / 81</span>
-          <span class="tipo-badge badge-leve">Lleu</span>
-        </div>
-        <div class="mini-tabla">
-          <div class="mt-cell"><span class="mt-lbl">Residus fora paperera (art. 66)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Fora d'horari (art. 80)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Fora del contenidor (art. 80)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Contenidor incorrecte (art. 80)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Caixes cartró sense plegar (81)</span><span class="mt-val">🟢 100–750 €</span></div>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Abocaments a clavegueram / aigües</div>
-          <span class="art-badge">Arts. 67–68</span>
-          <span class="tipo-badge badge-menos">Greu</span>
-        </div>
-        <div class="delito-desc">
-          Abocar a <b>clavegueram, llera pública, canals, rius, litoral</b> o xarxa metropolitana: pintures, vernissos, dissolvents, olis minerals/cuina cremats, residus químics.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">🔵 Multa 751–1.500 €</span>
-        </div>
-        <div class="nota-agrav">⚠️ Si l'abocament causa <b>dany ecològic greu</b> → delicte contra el medi ambient art. 325 CP. Coordinar amb Agents Rurals / Mossos (grup medi ambient).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Dipositar cigars encesos a paperera</div>
-          <span class="art-badge">Art. 69</span>
-          <span class="tipo-badge badge-menos">Greu</span>
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">🔵 Multa 751–1.500 €</span>
-        </div>
-        <div class="nota-clave">💡 Desproporcionat respecte altres residus perquè pot provocar incendi. En cas real d'incendi → delicte (arts. 351–358 CP).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Llençar deixalles des de vehicles / balcons</div>
-          <span class="art-badge">Arts. 70 / 71</span>
-          <span class="tipo-badge badge-leve">Lleu</span>
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Multa 100–750 €</span>
-        </div>
-        <div class="nota-policial">🚔 Si es llença des de vehicle en circulació i afecta la seguretat → <b>LSV art. 76.l</b> també aplicable (200 €).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Actes específics prohibits a la via pública</div>
-          <span class="art-badge">Art. 76</span>
-          <span class="tipo-badge badge-mixto">Lleu / Molt Greu</span>
-        </div>
-        <div class="mini-tabla">
-          <div class="mt-cell"><span class="mt-lbl">(a) Abocar aigües brutes</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">(b) Deixalla industrial</span><span class="mt-val">🔴 Molt Greu · 1.501–3.000 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">(c) Abandonar mobles</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">(d) Abandonar animals morts</span><span class="mt-val">🔴 Molt Greu · 1.501–3.000 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">(e) Rentar/reparar vehicles</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">(f) Escopir / orinar / etc.</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-        </div>
-        <div class="nota-agrav">⚠️ <b>Abandonar animals morts</b> és molt greu per risc sanitari. Coordinar amb Salut Pública per recollida i depuració responsabilitats.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">No conservar finques / solars</div>
-          <span class="art-badge">Arts. 57 / 78</span>
-          <span class="tipo-badge badge-menos">Greu</span>
-        </div>
-        <div class="delito-desc">
-          No mantenir <b>solars, edificis, habitatges o establiments</b> en condicions d'higiene, salubritat, seguretat i ornamentació.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">🔵 Multa 751–1.500 €</span>
-        </div>
-        <div class="nota-policial">🚔 Iniciar <b>expedient d'inspecció</b> amb serveis tècnics. L'Ajuntament pot executar subsidiàriament (art. 75) amb càrrec al propietari.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Publicitat i cartellera no autoritzada</div>
-          <span class="art-badge">Arts. 82–85</span>
-          <span class="tipo-badge badge-leve">Lleu</span>
-        </div>
-        <div class="delito-desc">
-          Publicitat al mobiliari urbà (82), fulls volants a vehicles aparcats (83), tanques publicitàries (84), esquinçar cartells (85).
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Multa 100–750 € · tots els supòsits</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       5. ANIMALS
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🐕</span>
-      <h2>Animals i Tinença Responsable</h2>
-      <span class="art-ref">Arts. 87–89</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Infraccions amb animals domèstics</div>
-          <span class="art-badge">Arts. 87–88</span>
-          <span class="tipo-badge badge-leve">Lleu</span>
-        </div>
-        <div class="mini-tabla">
-          <div class="mt-cell"><span class="mt-lbl">Zones d'esbarjo no autoritzades (87.1)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">No recollir deposicions (87.2)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Orinar fora de llocs autoritzats (87.3)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Orins afectant immoble / via (87.4)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Sorolls/molèsties 22–8h (art. 88)</span><span class="mt-val">🟢 100–750 €</span></div>
-        </div>
-        <div class="nota-clave">💡 <b>Excepció gossos pigall</b>: no aplica recollida de deposicions (art. 87.2). Llocs permesos per orinar: embornals, vorada inferior i escocells no apadrinats.</div>
-        <div class="nota-policial">🚔 <b>Prevalença:</b> Ordenança específica de tinença d'animals i <b>Llei 7/2023</b> (protecció animal estatal) i <b>Llei 17/2020</b> catalana. Per tinença PPP → RD 287/2002. Maltractament → delicte art. 337 CP.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       6. PERSPECTIVA DE GÈNERE
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">⚖️</span>
-      <h2>Perspectiva de Gènere</h2>
-      <span class="art-ref">Arts. 90–93</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Conductes sexistes / masclistes a l'espai públic</div>
-          <span class="art-badge">Art. 91</span>
-          <span class="tipo-badge badge-grave">Molt Greu</span>
-        </div>
-        <div class="delito-desc">
-          Conductes que lesionin la dignitat d'altri basades en <b>sexisme, discriminació de gènere, orientació o identitat sexual</b>, o que siguin de contingut masclista o generin violència contra les dones.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">🔴 Multa 1.501–3.000 €</span>
-        </div>
-        <div class="nota-agrav">⚠️ <b>Prevalença penal imprescindible:</b> si hi ha amenaça, coacció, agressió física/sexual, assetjament sexual o delictes d'odi (art. 510 CP) → atestat penal. La sanció per ordenança queda subsidiària (art. 130.4 i DA 3a).</div>
-        <div class="nota-policial">🚔 <b>Circuit víctima:</b> detecció → activació protocol VIDO (Viladecans), derivació SIAD / 016 / Mossos UCI. Conservar tot indici. L'Ajuntament pot personar-se com a acusació (art. 28.5).</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       7. CONFORT ACÚSTIC
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🔊</span>
-      <h2>Confort Acústic i Sorolls</h2>
-      <span class="art-ref">Arts. 98–102</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Sorolls que alteren la convivència</div>
-          <span class="art-badge">Art. 100</span>
-          <span class="tipo-badge badge-leve">Lleu</span>
-        </div>
-        <div class="delito-desc">
-          Generar sons/sorolls que pertorbin el descans. Equips de so a l'espai públic sense permís.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Multa 100–750 €</span>
-        </div>
-        <div class="nota-clave">💡 <b>Prevalença:</b> Ordenança municipal de sorolls i vibracions i Llei 16/2002 de protecció contra contaminació acústica. La present ordenança és <b>subsidiària</b> (art. 98).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Manteniment persianes/portes</div>
-          <span class="art-badge">Art. 101</span>
-          <span class="tipo-badge badge-leve">Lleu</span>
-        </div>
-        <div class="delito-desc">
-          No mantenir persianes metàl·liques i portes d'accés en bon estat, generant sorolls nocturns.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Multa 100–750 €</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       8. ALCOHOL A LA VIA PÚBLICA
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🍺</span>
-      <h2>Consum d'Alcohol a la Via Pública</h2>
-      <span class="art-ref">Arts. 104–109</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Promoure/incitar consum alcohol</div>
-          <span class="art-badge">Art. 104</span>
-          <span class="tipo-badge badge-menos">Greu</span>
-        </div>
-        <div class="delito-desc">
-          Venda, distribució o subministrament fora dels casos autoritzats (festes, fires, terrasses, establiments).
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">🔵 Multa 751–1.500 €</span>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Consumir alcohol a l'espai públic</div>
-          <span class="art-badge">Art. 106</span>
-          <span class="tipo-badge badge-leve">Lleu</span>
-        </div>
-        <div class="delito-desc">
-          Consum fora dels casos autoritzats, <b>alterant la convivència o molestant</b> altres usuaris.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🟢 Multa 100–750 €</span>
-        </div>
-        <div class="nota-clave">💡 <b>Element clau:</b> cal que hi hagi <b>alteració de la convivència o molèstia</b>. El consum sol no sanciona si és discret. Prevalença Llei 20/1985 (drogodependències Catalunya).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Responsabilitat titular establiment</div>
-          <span class="art-badge">Art. 107 / 109</span>
-          <span class="tipo-badge badge-mixto">Lleu / Greu</span>
-        </div>
-        <div class="mini-tabla">
-          <div class="mt-cell"><span class="mt-lbl">Provocar alteració convivència (107)</span><span class="mt-val">🔵 Greu · 751–1.500 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">No cartell prohibició a menors (107)</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Introduir vidre a celebracions (107)</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">No evitar consum fora (art. 109)</span><span class="mt-val">🔵 Greu · 751–1.500 €</span></div>
-        </div>
-        <div class="nota-policial">🚔 <b>Inspecció establiments:</b> verificar cartell de prohibició de venda a menors, hora de tancament, terrassa amb permís, no vidre en esdeveniments esportius.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       9. PETARDS I PIROTÈCNIA
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🎆</span>
-      <h2>Petards i Pirotècnia</h2>
-      <span class="art-ref">Art. 110</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Ús indegut de petards i pirotècnia</div>
-          <span class="art-badge">Art. 110.1</span>
-          <span class="tipo-badge badge-mixto">Lleu / Greu / Molt Greu</span>
-        </div>
-        <div class="mini-tabla">
-          <div class="mt-cell"><span class="mt-lbl">(a) Contra persones / aglomeracions</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">(b) Interior recintes</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">(c) Des de finestres/vehicles</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">(d) Malmetre béns</span><span class="mt-val">🟢 Lleu · 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">(e) Amb ampolles/totxanes</span><span class="mt-val">🔵 Greu · 751–1.500 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">(f) Zona boscosa/inflamable</span><span class="mt-val">🔴 Molt Greu · 1.501–3.000 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">(g) Prop hospitals/edificis sensibles</span><span class="mt-val">🔵 Greu · 751–1.500 €</span></div>
-        </div>
-        <div class="nota-agrav">⚠️ Els agents <b>intervindran els petards i pirotècnia</b> en tot cas (comís cautelar art. 129).</div>
-        <div class="nota-policial">🚔 <b>Campanya estiu / Sant Joan:</b> prioritzar control zones forestals (Garraf) i esplanades. Coordinar amb Bombers per risc d'incendi.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       10. PARCS, JARDINS I ZONES NATURALS
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🌳</span>
-      <h2>Parcs, Jardins, Platges i Zones Naturals</h2>
-      <span class="art-ref">Arts. 112–116</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Infraccions en parcs, jardins i platges</div>
-          <span class="art-badge">Arts. 112–115</span>
-          <span class="tipo-badge badge-leve">Lleu</span>
-        </div>
-        <div class="mini-tabla">
-          <div class="mt-cell"><span class="mt-lbl">Malmetre/embrutar elements (112)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">No atendre indicacions rètols (112)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Podar sense permís (113)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Recollir fruits/llavors (114)</span><span class="mt-val">🟢 100–750 €</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Sorolls/jocs molestant (115)</span><span class="mt-val">🟢 100–750 €</span></div>
-        </div>
-        <div class="nota-policial">🚔 <b>Viladecans:</b> especial atenció al Parc Natural del Delta del Llobregat (coordinació amb Agents Rurals / DARP) i a les platges (Cal Francès, el Remolar). En espais naturals, normativa específica.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">No mantenir jardins / terrenys privats</div>
-          <span class="art-badge">Art. 116</span>
-          <span class="tipo-badge badge-menos">Greu</span>
-        </div>
-        <div class="delito-desc">
-          No conservar adequadament jardins, plantacions o terrenys no urbanitzats, perjudicant la seguretat o salubritat.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip agravada">🔵 Multa 751–1.500 €</span>
-        </div>
-        <div class="nota-clave">💡 Especial atenció a <b>punts d'acumulació d'aigua</b> (mosquit tigre, cria). Execució subsidiària amb càrrec al propietari (art. 117).</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       11. PROCEDIMENT SANCIONADOR · CLAU
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">📋</span>
-      <h2>Procediment Sancionador i Mesures</h2>
-      <span class="art-ref">Arts. 118–129</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Responsables de la infracció</div>
-          <span class="art-badge">Art. 118</span>
-          <span class="tipo-badge badge-mixto">Tots</span>
-        </div>
-        <div class="delito-desc">
-          Autors materials (acció/omissió), <b>propietaris/posseïdors d'animals</b>, qui té obligació d'evitar-la, titulars de llicències/establiments/vehicles/edificis. <b>Coautoria</b> sense grau determinable → responsabilitat solidària.
-        </div>
-        <div class="nota-clave">💡 <b>Menors d'edat (des de 14 anys):</b> prioritzar mesures socioeducatives. Denúncia comunicada sempre a pares/tutors. Responsabilitat civil subsidiària dels tutors si dol/culpa/negligència.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Valor probatori de la denúncia</div>
-          <span class="art-badge">Arts. 119–121</span>
-          <span class="tipo-badge badge-menos">Clau</span>
-        </div>
-        <div class="mini-tabla">
-          <div class="mt-cell"><span class="mt-lbl">Denúncia ciutadà (art. 119)</span><span class="mt-val">Necessita mitjà de prova</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Denúncia agent (art. 120)</span><span class="mt-val">🟢 Valor probatori</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Proves il·lícites (art. 121)</span><span class="mt-val">🔴 Desestimades</span></div>
-        </div>
-        <div class="nota-policial">🚔 <b>Atenció agent:</b> la teva acta té <b>presumpció de veracitat</b>. Redactar de forma clara, detallada, amb fets objectius. Evitar valoracions subjectives. Art. 77.5 Llei 39/2015 (valor probatori).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Pagament voluntari — REDUCCIÓ 50%</div>
-          <span class="art-badge">Art. 123.3</span>
-          <span class="tipo-badge badge-leve">Clau</span>
-        </div>
-        <div class="delito-desc">
-          Pagament dins els <b>15 dies</b> següents a la notificació → <b>reducció 50% de la multa</b>. Implica reconeixement dels fets i renúncia a recurs.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip positivo">🟢 Lleu 100 € → 50 € · 750 € → 375 €</span>
-          <span class="pena-chip positivo">🟢 Greu 751 € → 375,50 € · 1.500 € → 750 €</span>
-          <span class="pena-chip agravada">⚠️ No reducció en reincidència</span>
-        </div>
-        <div class="nota-agrav">⚠️ No s'aplica la reducció si reincidència en: <b>3 mesos (lleu) · 6 mesos (greu) · 12 mesos (molt greu)</b>.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Substitució de multa — Mesures alternatives</div>
-          <span class="art-badge">Art. 125</span>
-          <span class="tipo-badge badge-leve">Mediació</span>
-        </div>
-        <div class="delito-desc">
-          <b>Prioritat a mesures alternatives</b> en infraccions lleus. Equivalència: <b>1 hora d'activitat = 10 €</b>. Requereix reconeixement i compromís d'execució.
-        </div>
-        <div class="nota-policial">🚔 <b>Esperit de la norma:</b> la sanció econòmica és última ràtio (art. 22). Per a joves i col·lectius vulnerables, sempre oferir servei de Convivència i Civisme.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Comís / Intervenció cautelar</div>
-          <span class="art-badge">Art. 129</span>
-          <span class="tipo-badge badge-grave">Operatiu</span>
-        </div>
-        <div class="delito-desc">
-          La <b>Policia Local pot comissar</b> estris i gènere objecte de la infracció (pirotècnia, alcohol, material pintada, etc.). Despeses a càrrec del causant.
-        </div>
-        <div class="mini-tabla">
-          <div class="mt-cell"><span class="mt-lbl">Béns fungibles</span><span class="mt-val">Termini 48 h</span></div>
-          <div class="mt-cell"><span class="mt-lbl">No reclamats després resolució</span><span class="mt-val">2 mesos → destrucció o donació</span></div>
-        </div>
-        <div class="nota-policial">🚔 <b>Acta de comís:</b> indicar article, motiu, descripció del material, lloc de dipòsit. Entregar còpia a l'infractor. Cadena de custòdia.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Prescripció infraccions / sancions</div>
-          <span class="art-badge">Arts. 126–127</span>
-          <span class="tipo-badge badge-leve">Clau</span>
-        </div>
-        <div class="mini-tabla">
-          <div class="mt-cell"><span class="mt-lbl">Lleu — Infracció</span><span class="mt-val">6 mesos des dels fets</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Lleu — Sanció</span><span class="mt-val">1 any des resolució</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Greu — Infracció</span><span class="mt-val">2 anys</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Greu — Sanció</span><span class="mt-val">2 anys</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Molt Greu — Infracció</span><span class="mt-val">3 anys</span></div>
-          <div class="mt-cell"><span class="mt-lbl">Molt Greu — Sanció</span><span class="mt-val">3 anys</span></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       RECUERDA — PUNTS CLAU
-  ══════════════════════════════════════════ -->
-  <div class="recuerda">
-    <h3>💡 Recorda · Claus Operatives</h3>
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 30.2</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <span class="tag-sm greu">GREU</span>
+      <h4>Baralles i discussions estentòries</h4>
+    </header>
+    <p>Barallar-se, renyir o discutir <b>estentòriament o violentament</b>, alterant la convivència ciutadana.</p>
     <ul>
-      <li><b>Entrada en vigor 12/02/2025.</b> Deroga l'antiga ordenança de convivència de 2002 (BOP 15/11/2002).</li>
-      <li><b>3 nivells de sanció:</b> Lleu 100–750 € · Greu 751–1.500 € · Molt Greu 1.501–3.000 €.</li>
-      <li><b>Pagament voluntari 15 dies = reducció 50%</b> de la multa (art. 123.3). Informar sempre l'infractor a peu de denúncia.</li>
-      <li><b>Esperit persuasiu, no dissuasiu.</b> En lleus es prioritzen mediació i mesures alternatives (1 h = 10 €).</li>
-      <li><b>Prevalença de normativa supramunicipal:</b> LOPSC (LO 4/2015), CP, Llei 20/1985 alcohol, protecció animal, sorolls… Art. 130.4 evita doble sanció.</li>
-      <li><b>Valor probatori de l'acta</b> de l'agent (art. 120 + art. 77.5 Llei 39/2015). Redactar amb claredat, precisió i objectivitat.</li>
-      <li><b>Menors d'edat:</b> sempre mesures socioeducatives i comunicació als pares/tutors. Interès superior del menor.</li>
-      <li><b>Comís cautelar</b> en pirotècnia, alcohol, estris de graffiti… sempre amb acta i cadena de custòdia (art. 129).</li>
-      <li><b>Zones d'especial intervenció:</b> instituts (agents de proximitat, art. 36) i oci nocturn (agents cívics, art. 37).</li>
-      <li><b>Prostitució prop de menors</b> (art. 49.2) → <b>MOLT GREU</b> (1.501–3.000 €). Es sanciona el <b>client</b>, no la persona prostituïda.</li>
-      <li><b>Discriminació (art. 28.1) i conductes masclistes (art. 91)</b> → MOLT GREU. Si hi ha amenaça/agressió → atestat penal (510 CP).</li>
-      <li><b>Foc a espais naturals/vegetació</b> → MOLT GREU directament (art. 41). Risc real d'incendi forestal → <b>delicte 352 CP</b>.</li>
-      <li><b>Animals morts abandonats i abocaments industrials</b> (art. 76) → MOLT GREU 1.501–3.000 €.</li>
-      <li><b>Desobediència a agents:</b> valorar si per la gravetat correspon LOPSC 36.6 (601–30.000 €) o delicte 556 CP en lloc de l'ordenança.</li>
-      <li><b>Nudisme permès només</b> a platges <b>Cal Francès i el Remolar</b>. Fora d'aquí → lleu (art. 45).</li>
-      <li><b>Prescripció sanció lleu = 1 any</b> des de la resolució. Lleu-infracció = 6 mesos des dels fets.</li>
-      <li><b>En cas de dubte competencial:</b> Ordenança específica > Ordenança general de convivència. Prioritza la més específica (DA 1).</li>
-      <li><b>Coordinació interna:</b> derivar conflictes convivencials al Servei de Convivència i Civisme (arts. 33–34). La sanció és l'últim recurs.</li>
+      <li><b>Lleu</b> · alteració normal · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>Greu</b> · alteració greu/molt greu · <span class="multa greu">751 € – 1.500 €</span></li>
     </ul>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>La gravetat es <b>gradua en acta</b>: entorn, hora, nº persones afectades, agressivitat, danys.</div>
+    </div>
+  </article>
+
+  <article class="art-card warn" style="--accent:#E89A1C;">
+    <header>
+      <span class="art-badge">Art. 31.1</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <h4>Desobediència / manca de respecte als agents</h4>
+    </header>
+    <p>Ignorar o ometre fer cas a les <b>indicacions dels agents</b> de l'autoritat o serveis municipals. Inclou incompliment de <b>bans i ordenances</b>.</p>
+    <p><span class="multa lleu">100 € – 750 €</span></p>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div>Si hi ha desobediència greu o atemptat → <b>art. 550-556 CP</b>. L'ordenança no aplica si el fet ja es sanciona per via penal o LOPSC (art. 130.4).</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 31.4</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <h4>Obstrucció notòria a l'actuació municipal</h4>
+    </header>
+    <p>Per <b>acció o omissió</b>, obstruir de manera notòria l'actuació dels agents municipals per aplicar l'ordenança.</p>
+    <p><span class="multa lleu">100 € – 750 €</span></p>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 38</span>
+      <span class="tag-sm greu">GREU</span>
+      <h4>Esdeveniments esportius/lúdics sense autorització</h4>
+    </header>
+    <p>Celebrar <b>esdeveniments esportius o lúdics a l'espai públic sense autorització prèvia</b> municipal.</p>
+    <p><span class="multa greu">751 € – 1.500 €</span></p>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>La pràctica esportiva individual està permesa si respecta la convivència. Els <b>esdeveniments organitzats</b> (carreres, festes) requereixen autorització.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 39</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <h4>No respectar indicacions a esdeveniments</h4>
+    </header>
+    <p>No respectar les <b>indicacions de persones organitzadores</b> o els <b>horaris</b> establerts en esdeveniments públics. <span class="multa lleu">100 € – 750 €</span></p>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 40</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <span class="tag-sm greu">GREU</span>
+      <h4>Danys a mobiliari urbà i béns públics</h4>
+    </header>
+    <p>Danyar, malmetre, deslluir, deteriorar o menyscabar <b>elements urbans</b>: urbanització, seguretat, comunicació, il·luminació, arbrat, mobiliari urbà, edificis públics i privats.</p>
+    <ul>
+      <li><b>Lleu</b> · espai públic general · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>Greu</b> · elements específics · <span class="multa greu">751 € – 1.500 €</span></li>
+    </ul>
+    <div class="info danger">
+      <span class="ico">🚔</span>
+      <div>Si el dany supera <b>400 € i és dolós</b> → delicte danys (<b>art. 263 CP</b>). Compte amb menors → mesura socioeducativa + responsabilitat civil pares.</div>
+    </div>
+  </article>
+
+  <article class="art-card warn" style="--accent:#E5484D;">
+    <header>
+      <span class="art-badge">Art. 41</span>
+      <span class="tag-sm greu">GREU</span>
+      <span class="tag-sm muygreu">MOLT GREU</span>
+      <h4>Encendre foc a l'espai públic</h4>
+    </header>
+    <p>Prohibit encendre foc sense autorització, <b>especialment a menys de 500 m de zona forestal</b> i espais amb vegetació.</p>
+    <ul>
+      <li><b>Greu</b> · espai públic general · <span class="multa greu">751 € – 1.500 €</span></li>
+      <li><b>Greu</b> · &lt;500 m zona forestal · <span class="multa greu">751 € – 1.500 €</span></li>
+      <li><b>Molt Greu</b> · espai natural/vegetació · <span class="multa muygreu">1.501 € – 3.000 €</span></li>
+      <li><b>Greu</b> · foc en privat alterant · <span class="multa greu">751 € – 1.500 €</span></li>
+    </ul>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div>Durant la <b>temporada alta de risc d'incendis (15/03 – 15/10)</b> → possible delicte incendi (<b>art. 351-358 CP</b>).</div>
+    </div>
+  </article>
+
+  <div class="twocol">
+    <article class="art-card" style="--accent:#9c3a08;">
+      <header>
+        <span class="art-badge">Art. 43</span>
+        <span class="tag-sm greu">GREU/MG</span>
+        <h4>Barbacoes fora de zones autoritzades</h4>
+      </header>
+      <p>Només permeses a <b>àrees recreatives i parcel·les d'urbanitzacions</b>.</p>
+      <ul>
+        <li>Fora àrea autoritzada · <span class="multa greu">751 € – 1.500 €</span></li>
+        <li>Contravenint ban · <span class="multa muygreu">1.501 € – 3.000 €</span></li>
+      </ul>
+    </article>
+    <article class="art-card muygrave">
+      <header>
+        <span class="art-badge">Art. 44</span>
+        <span class="tag-sm muygreu">MOLT GREU</span>
+        <h4>Abocar cendres incandescents</h4>
+      </header>
+      <p>Abocar <b>cendres incandescents als contenidors</b> de recollida de residus. <span class="multa muygreu">1.501 € – 3.000 €</span></p>
+      <div class="info danger">
+        <span class="ico">⚠️</span>
+        <div>Risc d'incendi en contenidor → potencial delicte d'incendi si provoca danys.</div>
+      </div>
+    </article>
+    <article class="art-card" style="--accent:#1f8a4d;">
+      <header>
+        <span class="art-badge">Art. 45</span>
+        <span class="tag-sm lleu">LLEU</span>
+        <h4>Nudisme fora d'espais habilitats</h4>
+      </header>
+      <p>Nudisme <b>només permès a les platges de Cal Francès i el Remolar</b>. <span class="multa lleu">100 € – 750 €</span></p>
+    </article>
+    <article class="art-card" style="--accent:#9c3a08;">
+      <header>
+        <span class="art-badge">Art. 46</span>
+        <span class="tag-sm greu">GREU</span>
+        <h4>Acumular aigua en fonts públiques</h4>
+      </header>
+      <p>Utilitzar <b>fonts públiques amb garrafes, ampolles</b> per emmagatzemar aigua. <span class="multa greu">751 € – 1.500 €</span></p>
+    </article>
   </div>
 
-  <!-- BOTÓN IMPRIMIR -->
-  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+  <!-- ═══ OCUPACIÓ ESPAI PÚBLIC ═══ -->
+  <div class="section-head" style="--accent:#E89A1C;">
+    <span class="eyebrow">🏕️ OCUPACIÓ ESPAI PÚBLIC · ARTS. 47–51</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 47.1</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <h4>Establir barraques</h4>
+    </header>
+    <p>Prohibit <b>establir barraques</b> en tot el terme municipal. <span class="multa lleu">100 € – 750 €</span></p>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 47.2</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <span class="tag-sm greu">GREU</span>
+      <h4>Campaments, colònies, càmpings</h4>
+    </header>
+    <p>Regulació segons <b>on s'estableixi</b> el campament:</p>
+    <ul>
+      <li><b>47.2.a Greu</b> · rambles/lleres/terrenys inundables · <span class="multa greu">751 € – 1.500 €</span></li>
+      <li><b>47.2.b Greu</b> · llocs amb prohibició · <span class="multa greu">751 € – 1.500 €</span></li>
+      <li><b>47.2.c Lleu</b> · nucli urbà sense autoritz. · <span class="multa lleu">100 € – 750 €</span></li>
+    </ul>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 48</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <span class="tag-sm greu">GREU</span>
+      <h4>Ocupació de l'espai públic sense autorització</h4>
+    </header>
+    <p>Tota <b>ocupació temporal requereix autorització prèvia</b>. L'ús privatiu permanent requereix concessió administrativa.</p>
+    <ul>
+      <li><b>48.1 Lleu</b> · ocupació temporal · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>48.1 Lleu</b> · manifestació sense comunicació · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>48.2 Greu</b> · ús privatiu permanent · <span class="multa greu">751 € – 1.500 €</span></li>
+      <li><b>48.3 Greu</b> · taules, cadires, paradetes · <span class="multa greu">751 € – 1.500 €</span></li>
+      <li><b>48.4 Greu</b> · quioscos i punts venda fixos · <span class="multa greu">751 € – 1.500 €</span></li>
+    </ul>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div><b>Manifestació pacífica:</b> es regeix per LO 9/1983. Comunicació prèvia a Subdelegació, no autorització. <b>NO sancionar</b> per ordenança si compleix LO 9/83.</div>
+    </div>
+  </article>
+
+  <div class="twocol">
+    <article class="art-card" style="--accent:#9c3a08;">
+      <header>
+        <span class="art-badge">Art. 49.1</span>
+        <span class="tag-sm greu">GREU</span>
+        <h4>Oficis i treballs a l'espai públic</h4>
+      </header>
+      <p>Utilitzar l'espai públic per <b>exercir oficis o activitats</b> que limitin l'ús ciutadà sense autorització. <span class="multa greu">751 € – 1.500 €</span></p>
+    </article>
+    <article class="art-card muygrave">
+      <header>
+        <span class="art-badge">Art. 49.2</span>
+        <span class="tag-sm muygreu">MOLT GREU</span>
+        <h4>Demanda serveis sexuals prop de menors</h4>
+      </header>
+      <p>Sol·licitud o <b>acceptació per part del demandant</b> de serveis sexuals retribuïts a prop de <b>centres educatius, parcs infantils o espais d'oci per a menors</b>. <span class="multa muygreu">1.501 € – 3.000 €</span></p>
+      <div class="info cop">
+        <span class="ico">🚔</span>
+        <div>Se sanciona <b>al demandant</b>, no a la persona que exerceix la prostitució. Acta amb ubicació exacta i distància a centre de menors.</div>
+      </div>
+    </article>
+  </div>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 50</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <h4>Abandonar objectes a l'espai públic</h4>
+    </header>
+    <p>Situar o abandonar mobles, estris, objectes particulars fora dels llocs permesos. Inclou <b>reserva de facto de places d'aparcament</b>.</p>
+    <ul>
+      <li><b>50.1</b> · objectes abandonats · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>50.4</b> · reserva plaça de facto · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>50.5</b> · actes que limiten ús · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>50.6</b> · no mantenir arbres/plantes · <span class="multa lleu">100 € – 750 €</span></li>
+    </ul>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 51</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <h4>Cartells i pancartes sense autorització</h4>
+    </header>
+    <p>Totes les variants són infracció <b>LLEU</b> (<span class="multa lleu">100 € – 750 €</span>):</p>
+    <ul>
+      <li><b>51.1</b> · cartells fora de llocs habilitats</li>
+      <li><b>51.2</b> · edificis/mobiliari/arbres sense autoritz.</li>
+      <li><b>51.3</b> · ocultant arquitectura o senyals</li>
+      <li><b>51.4</b> · bé privat volant sobre espai públic</li>
+    </ul>
+  </article>
+
+  <!-- ═══ NETEJA I RESIDUS ═══ -->
+  <div class="section-head" style="--accent:#1f8a4d;">
+    <span class="eyebrow">🗑️ NETEJA I RESIDUS · ARTS. 52–85</span>
+    <span class="rule"></span>
+  </div>
+
+  <div class="twocol">
+    <article class="art-card" style="--accent:#1f8a4d;">
+      <header>
+        <span class="art-badge">Art. 55</span>
+        <span class="tag-sm lleu">LLEU</span>
+        <h4>No mantenir neta la vorera</h4>
+      </header>
+      <p>Comunitats i titulars d'habitatges han de <b>mantenir neta la vorera davant de l'immoble</b>. <span class="multa lleu">100 € – 750 €</span></p>
+    </article>
+    <article class="art-card" style="--accent:#9c3a08;">
+      <header>
+        <span class="art-badge">Art. 57</span>
+        <span class="tag-sm greu">GREU</span>
+        <h4>Solars i terrenys bruts</h4>
+      </header>
+      <p>Propietaris obligats a mantenir solars <b>lliures de deixalles</b> i en condicions d'higiene. <span class="multa greu">751 € – 1.500 €</span></p>
+    </article>
+  </div>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 59</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <span class="tag-sm greu">GREU</span>
+      <h4>Graffitis i pintades sense autorització</h4>
+    </header>
+    <p>Prohibit qualsevol tipus de pintada o graffiti, <b>encara que sigui artístic</b>, sense autorització.</p>
+    <ul>
+      <li><b>Lleu</b> · elements urbans generals · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>Greu</b> · monuments i edificis públics · <span class="multa greu">751 € – 1.500 €</span></li>
+      <li><b>Lleu</b> · béns privats · <span class="multa lleu">100 € – 750 €</span></li>
+    </ul>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>Els agents poden <b>intervenir sprays/materials</b> (mesura cautelar). Béns privats → circuit mediació/restauració.</div>
+    </div>
+  </article>
+
+  <div class="twocol">
+    <article class="art-card" style="--accent:#1f8a4d;">
+      <header>
+        <span class="art-badge">Art. 66</span>
+        <span class="tag-sm lleu">LLEU</span>
+        <h4>Llençar residus fora de papereres</h4>
+      </header>
+      <p>Llençar o abandonar residus de petit format (papers, closques, xiclets, burilles) fora de papereres. <span class="multa lleu">100 € – 750 €</span></p>
+    </article>
+    <article class="art-card" style="--accent:#9c3a08;">
+      <header>
+        <span class="art-badge">Art. 67-68</span>
+        <span class="tag-sm greu">GREU</span>
+        <h4>Abocaments al clavegueram</h4>
+      </header>
+      <p>Abocar <b>al clavegueram, llera, canals, riu, litoral</b>: pintures, dissolvents, olis, residus tòxics. <span class="multa greu">751 € – 1.500 €</span></p>
+      <div class="info danger">
+        <span class="ico">⚠️</span>
+        <div>Risc greu pel medi ambient → possible delicte (<b>art. 325 CP</b>).</div>
+      </div>
+    </article>
+    <article class="art-card" style="--accent:#9c3a08;">
+      <header>
+        <span class="art-badge">Art. 69</span>
+        <span class="tag-sm greu">GREU</span>
+        <h4>Material encès a papereres</h4>
+      </header>
+      <p>Dipositar <b>cigarretes sense apagar</b> o materials encesos a papereres. <span class="multa greu">751 € – 1.500 €</span></p>
+    </article>
+    <article class="art-card" style="--accent:#1f8a4d;">
+      <header>
+        <span class="art-badge">Art. 70</span>
+        <span class="tag-sm lleu">LLEU</span>
+        <h4>Llençar deixalles des de vehicles</h4>
+      </header>
+      <p>Prohibit llençar deixalles des d'<b>un vehicle aturat o en marxa</b>. <span class="multa lleu">100 € – 750 €</span></p>
+      <div class="info cop">
+        <span class="ico">🚔</span>
+        <div>També sanció al RGC art. 17-18 + LSV art. 76.d.</div>
+      </div>
+    </article>
+  </div>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 71</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <h4>Llençar/espolsar des de balcons</h4>
+    </header>
+    <p>Llençar deixalles o <b>espolsar catifes des de balcons, terrasses</b> cap a l'exterior. <span class="multa lleu">100 € – 750 €</span></p>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 76</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <span class="tag-sm muygreu">MOLT GREU</span>
+      <h4>Actes prohibits a l'espai públic</h4>
+    </header>
+    <p>Conductes diverses prohibides a la via pública:</p>
+    <ul>
+      <li><b>76.a Lleu</b> · aigües brutes a la via · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>76.b Molt Greu</b> · residus industrials · <span class="multa muygreu">1.501 € – 3.000 €</span></li>
+      <li><b>76.c Lleu</b> · mobles i objectes voluminosos · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>76.d Molt Greu</b> · abandonar animals morts · <span class="multa muygreu">1.501 € – 3.000 €</span></li>
+      <li><b>76.e Lleu</b> · reparar vehicles a via pública · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>76.f Lleu</b> · escopir o activitats fisiològiques · <span class="multa lleu">100 € – 750 €</span></li>
+    </ul>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 79</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <h4>Regar plantes a l'exterior</h4>
+    </header>
+    <p>Regar plantes exteriors <b>només permès de 23h a 6h</b>, sense abocaments ni molèsties. <span class="multa lleu">100 € – 750 €</span></p>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 80–85</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <h4>Contenidors i publicitat (totes lleus)</h4>
+    </header>
+    <p>Totes són lleus (<span class="multa lleu">100 € – 750 €</span>):</p>
+    <ul>
+      <li><b>80</b> · fora d'horari, fora del contenidor, contenidor erroni</li>
+      <li><b>81</b> · cartró sense plegar / al costat</li>
+      <li><b>82</b> · publicitat mobiliari urbà</li>
+      <li><b>83</b> · fulls volants a vehicles</li>
+      <li><b>84</b> · tanques publicitàries</li>
+      <li><b>85</b> · esquinçar cartells</li>
+    </ul>
+  </article>
+
+  <!-- ═══ ANIMALS ═══ -->
+  <div class="section-head" style="--accent:#9c7a1f;">
+    <span class="eyebrow">🐕 ANIMALS · ARTS. 86–89</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#9c7a1f;">
+    <header>
+      <span class="art-badge">Art. 87</span>
+      <span class="tag-sm lleu">TOT LLEU</span>
+      <h4>Obligacions amb animals (87.1–87.4)</h4>
+    </header>
+    <ul>
+      <li><b>87.1</b> · Zones d'esbarjo fora d'horari · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>87.2</b> · No recollir <b>deposicions fecals</b> (excepció gossos pigall) · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>87.3</b> · Orins en parcs infantils, façanes, escocells apadrinats · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>87.4</b> · Animals en balcons que afecten pisos inferiors · <span class="multa lleu">100 € – 750 €</span></li>
+    </ul>
+    <div class="info tip">
+      <span class="ico">💡</span>
+      <div><b>Llocs permesos per orinar:</b> embornals, part inferior de la vorada, escocells d'arbres generals (no apadrinats).</div>
+    </div>
+  </article>
+
+  <article class="art-card warn" style="--accent:#9c7a1f;">
+    <header>
+      <span class="art-badge">Art. 88</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <h4>Pertorbació convivència per animals</h4>
+    </header>
+    <p>Pertorbar voluntàriament o per <b>negligència reiterada</b> la convivència o descans mitjançant animals. Especialment de <b>22h a 8h</b>. <span class="multa lleu">100 € – 750 €</span></p>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>Cal acreditar la <b>reiteració</b> → denúncies prèvies, actes, testimonis de veïns. Prioritzar mediació abans de sanció.</div>
+    </div>
+  </article>
+
+  <!-- ═══ PERSPECTIVA DE GÈNERE ═══ -->
+  <div class="section-head" style="--accent:#E5484D;">
+    <span class="eyebrow">⚖️ PERSPECTIVA DE GÈNERE · ARTS. 90–93</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card muygrave">
+    <header>
+      <span class="art-badge">Art. 91</span>
+      <span class="tag-sm muygreu">MOLT GREU</span>
+      <h4>Conductes sexistes/masclistes a l'espai públic</h4>
+    </header>
+    <p>Lesionar la dignitat d'altri basat en <b>sexisme, discriminació per gènere, orientació o identitat sexual</b>; contingut masclista o <b>violència contra les dones</b>. <span class="multa muygreu">1.501 € – 3.000 €</span></p>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div>Si és <b>delicte d'odi</b> (art. 510 CP) o violència de gènere → via penal. L'ordenança no aplica si el mateix fet es sanciona penalment (art. 130.4).</div>
+    </div>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>Derivar sempre a recursos d'atenció (<b>SIAD, PIAD, 900 900 120</b>). Coordinar amb Mossos (policia judicial) si hi ha indicis de delicte.</div>
+    </div>
+  </article>
+
+  <!-- ═══ CONFORT ACÚSTIC ═══ -->
+  <div class="section-head" style="--accent:#2F6BD8;">
+    <span class="eyebrow">🔊 CONFORT ACÚSTIC · ARTS. 98–102</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Art. 100</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <h4>Generar sorolls que alterin la convivència</h4>
+    </header>
+    <p>Prohibit generar sons o sorolls que <b>alterin la convivència o el descans</b>. Equips de so en espai públic requereixen autorització. <span class="multa lleu">100 € – 750 €</span></p>
+    <div class="info tip">
+      <span class="ico">💡</span>
+      <div><b>Prevalença:</b> l'ordenança específica de sorolls i vibracions (37/2010) preval sobre aquesta en els seus aspectes tècnics (art. 98).</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Art. 101</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <h4>Manteniment persianes i portes</h4>
+    </header>
+    <p>Persianes metàl·liques i portes d'accés <b>en perfecte estat de manteniment</b> per evitar sorolls. <span class="multa lleu">100 € – 750 €</span></p>
+  </article>
+
+  <!-- ═══ ALCOHOL ═══ -->
+  <div class="section-head" style="--accent:#9c3a08;">
+    <span class="eyebrow">🍺 CONSUM D'ALCOHOL VIA PÚBLICA · ARTS. 103–109</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 104</span>
+      <span class="tag-sm greu">GREU</span>
+      <h4>Promoure o incitar al consum d'alcohol</h4>
+    </header>
+    <p>Qualsevol acte que <b>promogui o inciti al consum</b> fora de casos autoritzats. <span class="multa greu">751 € – 1.500 €</span></p>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 106</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <h4>Consumir alcohol a l'espai públic</h4>
+    </header>
+    <p>Consumir alcohol a la via pública <b>alterant la convivència o causant molèsties</b> (no hi ha prohibició absoluta, cal l'element d'alteració). <span class="multa lleu">100 € – 750 €</span></p>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>L'ordenança requereix <b>alteració efectiva</b>, no simple consum. Reforçar acta amb testimonis o estat (embriaguesa).</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 107</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <span class="tag-sm greu">GREU</span>
+      <h4>Establiments amb venda d'alcohol</h4>
+    </header>
+    <ul>
+      <li><b>Greu</b> · alteració per falta de mesures · <span class="multa greu">751 € – 1.500 €</span></li>
+      <li><b>Lleu</b> · no informar prohibició a menors · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>Lleu</b> · gots/ampolles vidre en esdeveniments · <span class="multa lleu">100 € – 750 €</span></li>
+    </ul>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 109</span>
+      <span class="tag-sm greu">GREU</span>
+      <h4>No evitar consum fora d'espais habilitats</h4>
+    </header>
+    <p>Titulars i organitzadors no adopten mesures per <b>evitar el consum fora dels espais habilitats</b>. <span class="multa greu">751 € – 1.500 €</span></p>
+  </article>
+
+  <!-- ═══ PIROTÈCNIA ═══ -->
+  <div class="section-head" style="--accent:#E5484D;">
+    <span class="eyebrow">🎆 PETARDS I PIROTÈCNIA · ART. 110</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#E5484D;">
+    <header>
+      <span class="art-badge">Art. 110.1</span>
+      <span class="tag-sm lleu">LLEU</span>
+      <span class="tag-sm greu">GREU</span>
+      <span class="tag-sm muygreu">MG</span>
+      <h4>Usos prohibits de pirotècnia</h4>
+    </header>
+    <p>Gradació segons <b>on o com s'empra</b> la pirotècnia:</p>
+    <ul>
+      <li><b>110.1.a Lleu</b> · a prop de persones · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>110.1.b Lleu</b> · interior de recintes · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>110.1.c Lleu</b> · des de finestres/balcons/vehicles · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>110.1.d Lleu</b> · malmeten elements urbans · <span class="multa lleu">100 € – 750 €</span></li>
+      <li><b>110.1.e Greu</b> · ampolles, totxanes · <span class="multa greu">751 € – 1.500 €</span></li>
+      <li><b>110.1.f Molt Greu</b> · zona boscosa/inflamables · <span class="multa muygreu">1.501 € – 3.000 €</span></li>
+      <li><b>110.1.g Greu</b> · hospitals/espais protegits · <span class="multa greu">751 € – 1.500 €</span></li>
+    </ul>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>Els agents <b>intervindran sempre</b> petards i pirotècnia (mesura cautelar art. 129). Comissament a custòdia municipal.</div>
+    </div>
+  </article>
+
+  <!-- ═══ PARCS, JARDINS, PLATGES ═══ -->
+  <div class="section-head" style="--accent:#1f8a4d;">
+    <span class="eyebrow">🌳 PARCS, JARDINS, PLATGES · ARTS. 111–117</span>
+    <span class="rule"></span>
+  </div>
+
+  <div class="twocol">
+    <article class="art-card" style="--accent:#1f8a4d;">
+      <header>
+        <span class="art-badge">Art. 112</span>
+        <span class="tag-sm lleu">LLEU</span>
+        <h4>Malmetre elements naturals</h4>
+      </header>
+      <p>Malmetre <b>vegetació, fauna urbana, instal·lacions</b> de parcs, jardins, platges. <span class="multa lleu">100 € – 750 €</span></p>
+    </article>
+    <article class="art-card" style="--accent:#1f8a4d;">
+      <header>
+        <span class="art-badge">Art. 113</span>
+        <span class="tag-sm lleu">LLEU</span>
+        <h4>Podar o tractar vegetació</h4>
+      </header>
+      <p>Podar arbres/arbustos <b>només per serveis municipals</b>. <span class="multa lleu">100 € – 750 €</span></p>
+    </article>
+    <article class="art-card" style="--accent:#1f8a4d;">
+      <header>
+        <span class="art-badge">Art. 114</span>
+        <span class="tag-sm lleu">LLEU</span>
+        <h4>Recollir fruits/llavors</h4>
+      </header>
+      <p>Prohibit per <b>protecció de la salut pública</b> (tractament fitosanitari). <span class="multa lleu">100 € – 750 €</span></p>
+    </article>
+    <article class="art-card" style="--accent:#1f8a4d;">
+      <header>
+        <span class="art-badge">Art. 115</span>
+        <span class="tag-sm lleu">LLEU</span>
+        <h4>Sorolls que destorben descans</h4>
+      </header>
+      <p>Ús d'<b>aparells sonors o de joc</b> a parcs, jardins, platges. <span class="multa lleu">100 € – 750 €</span></p>
+    </article>
+  </div>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 116</span>
+      <span class="tag-sm greu">GREU</span>
+      <h4>Jardins i terrenys privats sense conservar</h4>
+    </header>
+    <p>No realitzar conservació, neteja o higiene adequades dels <b>jardins i terrenys privats</b> perjudicant la seguretat/salubritat. <span class="multa greu">751 € – 1.500 €</span></p>
+    <div class="info tip">
+      <span class="ico">💡</span>
+      <div>Especialment important: punts d'acumulació d'aigua (cria de <b>mosquit tigre</b>) → risc sanitari.</div>
+    </div>
+  </article>
+
+  <!-- ═══ PROCEDIMENT ═══ -->
+  <div class="section-head" style="--accent:#9747D6;">
+    <span class="eyebrow">📋 PROCEDIMENT I POTESTAT SANCIONADORA · ARTS. 118–134</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#9747D6;">
+    <header>
+      <span class="art-badge">Art. 118</span>
+      <span class="tag-sm purple">CLAU</span>
+      <h4>Responsables de les infraccions</h4>
+    </header>
+    <p>Són responsables: <b>autors materials</b> (per acció o omissió), propietaris/posseïdors d'animals, <b>titulars de llicències</b> i d'establiments, propietaris de vehicles/edificis/comerços.</p>
+    <div class="info warn">
+      <span class="ico">💡</span>
+      <div><b>MENORS D'EDAT:</b> mesures socioeducatives prioritàries + superior interès del menor. Pares/tutors → responsabilitat civil subsidiària. Sempre comunicar la denúncia a pares/tutors.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9747D6;">
+    <header>
+      <span class="art-badge">Art. 119–121</span>
+      <span class="tag-sm purple">CLAU</span>
+      <h4>Valor probatori de les denúncies</h4>
+    </header>
+    <ul>
+      <li><b>Agents de l'autoritat</b> (art. 120): denúncies amb <b>valor probatori</b> — acta = document públic.</li>
+      <li><b>Ciutadans</b> (art. 119): només inicien expedient si aporten <b>algun mitjà de prova</b>.</li>
+      <li>Proves <b>il·lícites o no proporcionals</b> són desestimades (art. 121).</li>
+    </ul>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div><b>Acta detallada = expedient sòlid.</b> Inclou testimonis, fotos, croquis, context horari, alteració efectiva.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9747D6;">
+    <header>
+      <span class="art-badge">Art. 122</span>
+      <span class="tag-sm purple">CLAU</span>
+      <h4>Procediment sancionador</h4>
+    </header>
+    <p>Es regeix per la <b>Llei 39/2015 PAC</b> i el <b>Decret 278/1993</b> de Catalunya.</p>
+    <ul>
+      <li><b>Ordinari</b> · procediment general</li>
+      <li><b>Abreujat</b> · infraccions lleus flagrants + acta</li>
+      <li><b>Instrucció</b> · proposta resolució directa</li>
+      <li><b>Al·legacions</b> · 10 dies hàbils</li>
+    </ul>
+    <div class="info tip">
+      <span class="ico">💡</span>
+      <div>L'<b>Alcalde/ssa</b> sanciona (pot delegar). Audiència mínima 10 dies prèvia a la liquidació. La sanció <b>NO eximeix de restaurar danys</b>.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 123</span>
+      <span class="tag-sm ok">CLAU</span>
+      <h4>Pagament voluntari i reducció</h4>
+    </header>
+    <p>Pagament voluntari dins els <b>15 dies</b> de la notificació:</p>
+    <ul>
+      <li>✅ <b>Reducció 50%</b></li>
+      <li>✅ Finalitza procediment</li>
+      <li>✅ Reconeixement fets</li>
+    </ul>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div><b>SENSE REDUCCIÓ</b> en cas de reincidència: 3 mesos (lleus), 6 mesos (greus), 12 mesos (molt greus).</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 125</span>
+      <span class="tag-sm ok">CLAU</span>
+      <h4>Substitució de multes per mesures</h4>
+    </header>
+    <p>Prioritzar <b>mesures alternatives a la sanció pecuniària</b> en infraccions lleus. Contingut social/pedagògic/conscienciador.</p>
+    <ul>
+      <li>📐 <b>1 hora d'activitat = 10 €</b></li>
+      <li>💶 Fins cobrir la quantia sanció</li>
+    </ul>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>Cal <b>reconeixement previ de responsabilitat</b> i voluntat contrastada. Si no hi ha compromís → sanció pecuniària.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9747D6;">
+    <header>
+      <span class="art-badge">Art. 126–127</span>
+      <span class="tag-sm purple">CLAU</span>
+      <h4>Prescripció infraccions i sancions</h4>
+    </header>
+    <table class="ntable">
+      <thead><tr><th>Tipus</th><th>Prescr. infracció</th><th>Prescr. sanció</th></tr></thead>
+      <tbody>
+        <tr><td><b>LLEU</b></td><td>6 mesos</td><td>1 any</td></tr>
+        <tr><td><b>GREU</b></td><td>2 anys</td><td>2 anys</td></tr>
+        <tr><td><b>MOLT GREU</b></td><td>3 anys</td><td>3 anys</td></tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article class="art-card" style="--accent:#9747D6;">
+    <header>
+      <span class="art-badge">Art. 129</span>
+      <span class="tag-sm purple">CLAU</span>
+      <h4>Mesures cautelars i comís</h4>
+    </header>
+    <p>La <b>Policia Local pot comissar</b> estris, gènere, diners, fruits o productes obtinguts amb la infracció, o que hagin servit directament/indirectament.</p>
+    <ul>
+      <li><b>Béns fungibles</b> · termini 48h · després destrucció/destí</li>
+      <li><b>Resta béns</b> · 2 mesos des de resolució ferma</li>
+      <li><b>Despeses</b> · a càrrec del causant</li>
+      <li><b>Destí final</b> · destrucció o entitats sense ànim lucre</li>
+    </ul>
+  </article>
+
+  <article class="art-card" style="--accent:#9747D6;">
+    <header>
+      <span class="art-badge">Art. 134</span>
+      <span class="tag-sm purple">CLAU</span>
+      <h4>Competències · Quins cossos?</h4>
+    </header>
+    <ul>
+      <li><b>Alcaldia</b> · sancionar (delegable)</li>
+      <li><b>Policia Local</b> · denunciar, mesures cautelars, comissar</li>
+      <li><b>Agents Cívics</b> · vigilància, requerir agents autoritat</li>
+      <li><b>Servei Conv./Civisme</b> · mediació, socioeducatives</li>
+      <li><b>Serveis jurídics</b> · tramitació expedient</li>
+      <li><b>Inspectors d'obres</b> · àmbit obres i serveis</li>
+    </ul>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>Policia Local és el cos amb <b>competència sancionadora principal sobre el terreny</b>. Els agents cívics <b>NO tenen condició d'agent de l'autoritat</b>, requereixen suport policial.</div>
+    </div>
+  </article>
+
+  <!-- ═══ RECORDA ═══ -->
+  <section class="recorda">
+    <header>
+      <span class="eyebrow" style="color:#9c7a1f;">📋 RECORDA · CLAUS OPERATIVES</span>
+      <span class="rule"></span>
+    </header>
+    <ul class="reclist">
+      <li><div><b>Entrada en vigor:</b> 12/02/2025 · Deroga l'ordenança de 2002.</div></li>
+      <li><div><b>Multes:</b> Lleu 100–750 € · Greu 751–1.500 € · Molt greu 1.501–3.000 €.</div></li>
+      <li><div><b>Pagament voluntari 15 dies → reducció 50%</b> (excepte reincidència).</div></li>
+      <li><div><b>Mediació abans que sanció</b> en infraccions lleus (esperit de l'ordenança).</div></li>
+      <li><div><b>Menors 14+ anys:</b> mesures socioeducatives prioritàries · comunicar sempre a pares/tutors.</div></li>
+      <li><div><b>Acta Policia Local = valor probatori</b> (art. 120) · detallada i amb elements objectius.</div></li>
+      <li><div><b>Denúncies ciutadans</b> només si aporten prova (art. 119).</div></li>
+      <li><div><b>Prevalença:</b> si hi ha ordenança específica (sorolls, animals, neteja, circulació) → preval l'específica.</div></li>
+      <li><div><b>No bis in idem:</b> no sancionar si el fet es persegueix per via penal o altra administrativa.</div></li>
+      <li><div><b>Manifestació pacífica:</b> regeix LO 9/1983, no autorització prèvia.</div></li>
+      <li><div><b>Prostitució (49.2):</b> sanció al <b>demandant</b>, no a qui exerceix.</div></li>
+      <li><div><b>Petards i pirotècnia:</b> sempre comissament cautelar per la PL.</div></li>
+      <li><div><b>Discriminació (28.1) i violència gènere (91):</b> molt greu · però compte amb via penal.</div></li>
+      <li><div><b>Zones permeses nudisme:</b> només platges Cal Francès i Remolar.</div></li>
+      <li><div><b>Prescripció ràpida:</b> infraccions lleus 6 mesos (tramitar àgil!).</div></li>
+      <li><div><b>Danys &gt; 400 €:</b> valorar via penal (art. 263 CP).</div></li>
+      <li><div><b>Foc forestal:</b> risc delicte (art. 351-358 CP), coordinar amb Mossos/Bombers.</div></li>
+      <li><div><b>Abocaments industrials i animals morts:</b> MOLT GREU (1.501–3.000 €).</div></li>
+    </ul>
+  </section>
 
 </div>
-
-<script>
-  function toggle(el) {
-    el.classList.toggle('open');
-  }
-</script>
-
 </body>
 </html>
