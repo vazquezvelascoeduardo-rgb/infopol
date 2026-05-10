@@ -1,8 +1,12 @@
-// Pàgina de detall d'una notícia. Renderitza el cos amb format simple
-// (paràgrafs, sub-títols ##, llistes -, citacions >).
+// Pàgina de detall d'una notícia · rebranding 2026.
+// Crumbs + article amb stripe blau + hero image + cos format simple
+// (## sub-títols, - llistes, > cites, **negreta**) + tags + relacionades.
 import { Link, useParams } from 'react-router-dom';
 import { useT } from '../lib/i18n';
 import { getNoticia, NOTICIES } from '../lib/noticies';
+
+const ACCENT = '#2F6BD8';
+const ACCENT_BG = '#EAF1FE';
 
 export default function NoticiaDetall() {
   const { slug = '' } = useParams();
@@ -11,10 +15,10 @@ export default function NoticiaDetall() {
 
   if (!noticia) {
     return (
-      <div className="mx-auto w-full max-w-3xl px-4 py-6">
-        <p className="text-slate-600 dark:text-slate-400">{t('noticies.notFound')}</p>
-        <Link to="/noticies" className="text-blue-600 dark:text-blue-400 underline">
-          {t('noticies.backToList')}
+      <div className="shell py-6">
+        <p className="text-text-2">{t('noticies.notFound')}</p>
+        <Link to="/noticies" className="text-terracotta underline">
+          ← {t('noticies.backToList')}
         </Link>
       </div>
     );
@@ -27,144 +31,116 @@ export default function NoticiaDetall() {
     .slice(0, 3);
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-6">
-      <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3 flex flex-wrap items-center gap-1">
-        <Link to="/" className="hover:underline">{t('nav.home')}</Link>
-        <span aria-hidden>/</span>
-        <Link to="/noticies" className="hover:underline">{t('noticies.title')}</Link>
-        <span aria-hidden>/</span>
-        <span className="text-slate-700 dark:text-slate-200 truncate">{noticia.title}</span>
+    <div
+      className="shell pb-10"
+      style={{
+        ['--accent' as never]: ACCENT,
+        ['--accent-bg' as never]: ACCENT_BG,
+        maxWidth: 820,
+      } as React.CSSProperties}
+    >
+      <nav className="crumbs">
+        <Link to="/">{t('nav.home')}</Link>
+        <span className="sep">/</span>
+        <Link to="/noticies">{t('noticies.title')}</Link>
+        <span className="sep">/</span>
+        <span className="here truncate">{noticia.title}</span>
       </nav>
 
-      <article className="rounded-2xl border overflow-hidden
-        border-slate-200 bg-white
-        dark:border-white/10 dark:bg-[#0f1d34]">
-        {/* Hero image (si la notícia en porta) */}
+      <article className="noticia-detall">
+        <span className="nd-stripe" aria-hidden />
+
         {noticia.image && (
-          <div className="relative w-full aspect-[16/9] bg-slate-100 dark:bg-white/5 overflow-hidden">
+          <div className="nd-hero">
             <img
               src={noticia.image}
               alt={noticia.imageAlt ?? noticia.title}
               loading="eager"
-              className="w-full h-full object-cover"
               onError={(e) => {
                 (e.currentTarget.parentElement as HTMLElement).style.display = 'none';
               }}
             />
-            <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-700" />
           </div>
         )}
 
-        <div className="p-5 sm:p-7">
-        {/* Cabecera amb metadades */}
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] uppercase tracking-wider mb-3">
-          <time className="font-mono text-slate-500 dark:text-slate-400">
-            {formatDate(noticia.publishedAt)}
-          </time>
-          {noticia.source && (
-            <>
-              <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
-              <span className="font-mono text-slate-500 dark:text-slate-400">
-                {noticia.source}
-              </span>
-            </>
+        <div className="nd-body">
+          <div className="nd-meta">
+            <time className="nd-date">{formatDate(noticia.publishedAt)}</time>
+            {noticia.source && (
+              <>
+                <span aria-hidden className="sep">·</span>
+                <span className="nd-source">{noticia.source}</span>
+              </>
+            )}
+          </div>
+
+          <h1 className="nd-title">{noticia.title}</h1>
+          <p className="nd-summary">{noticia.summary}</p>
+
+          {noticia.sourceUrl && (
+            <a
+              href={noticia.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nd-source-cta"
+            >
+              <span className="nd-source-icon" aria-hidden>🔗</span>
+              <div className="nd-source-text">
+                <span className="nd-source-label">{t('noticies.externalSource')}</span>
+                <span className="nd-source-url">{prettyUrl(noticia.sourceUrl)}</span>
+              </div>
+              <span className="nd-source-arr" aria-hidden>↗</span>
+            </a>
           )}
-        </div>
 
-        <h1 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight mb-3">
-          {noticia.title}
-        </h1>
-
-        <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-snug font-medium border-l-4 border-blue-400 dark:border-blue-500/60 pl-4 py-1 mb-5">
-          {noticia.summary}
-        </p>
-
-        {/* CTA — font original destacada (al cim, sota el resum) */}
-        {noticia.sourceUrl && (
-          <a
-            href={noticia.sourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-3 rounded-xl border-2 p-3 mb-5 transition
-              border-blue-200 bg-blue-50 hover:border-blue-400 hover:shadow-md
-              dark:border-blue-400/30 dark:bg-blue-500/10 dark:hover:border-blue-400/60"
-          >
-            <span aria-hidden className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-700 text-base text-white shadow-inner">
-              🔗
-            </span>
-            <div className="min-w-0 flex-1">
-              <div className="font-bold text-sm text-blue-800 dark:text-blue-200">
-                {t('noticies.externalSource')}
-              </div>
-              <div className="text-[11px] font-mono text-slate-500 dark:text-slate-400 truncate">
-                {prettyUrl(noticia.sourceUrl)}
-              </div>
-            </div>
-            <span aria-hidden className="shrink-0 text-blue-700 dark:text-blue-300 group-hover:translate-x-1 transition">↗</span>
-          </a>
-        )}
-
-        {/* Cos amb format lleuger */}
-        <div className="prose-content text-slate-800 dark:text-slate-200 leading-relaxed">
-          {renderBody(noticia.body)}
-        </div>
-
-        {/* Tags */}
-        {noticia.tags && noticia.tags.length > 0 && (
-          <div className="mt-6 pt-4 border-t border-slate-200/70 dark:border-white/10 flex flex-wrap gap-1.5">
-            {noticia.tags.map((tg) => (
-              <span key={tg}
-                className="rounded-md border px-2 py-0.5 text-[11px] font-mono
-                  border-slate-200 bg-slate-50 text-slate-600
-                  dark:border-white/10 dark:bg-white/5 dark:text-slate-400">
-                #{tg}
-              </span>
-            ))}
+          {/* Cos amb format lleuger */}
+          <div className="nd-content">
+            {renderBody(noticia.body)}
           </div>
-        )}
 
-        {/* Enllaç a fitxa interna */}
-        {noticia.linkedTo && (
-          <Link
-            to={`/leyes/s/${noticia.linkedTo.moduleSlug}/${noticia.linkedTo.slug}`}
-            className="mt-3 block rounded-xl border-2 p-3 text-sm transition
-              border-amber-200 bg-amber-50 hover:border-amber-300 hover:bg-amber-100/60
-              dark:border-amber-400/30 dark:bg-amber-500/10 dark:hover:bg-amber-500/15"
-          >
-            <span className="font-bold text-amber-800 dark:text-amber-200">
-              📖 {t('noticies.linkedTo')}
-            </span>
-            <span aria-hidden className="ml-2">→</span>
-          </Link>
-        )}
+          {/* Tags */}
+          {noticia.tags && noticia.tags.length > 0 && (
+            <div className="nd-tags">
+              {noticia.tags.map((tg) => (
+                <span key={tg} className="nd-tag">#{tg}</span>
+              ))}
+            </div>
+          )}
+
+          {/* Enllaç a fitxa interna */}
+          {noticia.linkedTo && (
+            <Link
+              to={`/leyes/s/${noticia.linkedTo.moduleSlug}/${noticia.linkedTo.slug}`}
+              className="nd-linked"
+            >
+              <span aria-hidden>📖</span>
+              <span>{t('noticies.linkedTo')}</span>
+              <span className="arr" aria-hidden>→</span>
+            </Link>
+          )}
         </div>
       </article>
 
-      {/* Notícies relacionades */}
+      {/* Relacionades */}
       {related.length > 0 && (
-        <section className="mt-6">
-          <div className="flex items-center gap-3 mb-3">
-            <span className="h-5 w-1.5 rounded-full bg-gradient-to-b from-blue-400 to-blue-600" />
-            <h2 className="text-xs font-black uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300">
-              {t('noticies.related')}
-            </h2>
-            <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
+        <section className="nd-related">
+          <div
+            className="section-head"
+            style={{ ['--accent' as never]: ACCENT } as React.CSSProperties}
+          >
+            <span className="eyebrow">📰 {t('noticies.related')}</span>
+            <span className="rule" />
           </div>
-          <ul className="space-y-2">
+          <ul className="nd-related-list">
             {related.map((r) => (
               <li key={r.slug}>
                 <Link
                   to={`/noticies/${encodeURIComponent(r.slug)}`}
-                  className="block rounded-xl border p-3 transition
-                    border-slate-200 bg-white hover:border-blue-300
-                    dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-blue-400/40"
+                  className="nd-related-card"
                 >
-                  <div className="text-[10px] uppercase tracking-wider font-mono text-slate-500 dark:text-slate-400 mb-0.5">
-                    {formatDate(r.publishedAt)}
-                  </div>
-                  <div className="font-bold text-sm leading-snug">
-                    {r.title}
-                  </div>
+                  <span className="rc-date">{formatDate(r.publishedAt)}</span>
+                  <span className="rc-title">{r.title}</span>
+                  <span className="rc-arr" aria-hidden>→</span>
                 </Link>
               </li>
             ))}
@@ -172,11 +148,8 @@ export default function NoticiaDetall() {
         </section>
       )}
 
-      <div className="mt-6">
-        <Link
-          to="/noticies"
-          className="inline-flex items-center gap-1 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300"
-        >
+      <div className="page-foot">
+        <Link to="/noticies" className="btn btn-ghost">
           ← {t('noticies.backToList')}
         </Link>
       </div>
@@ -201,7 +174,7 @@ function renderBody(body: string): JSX.Element[] {
   function flushList() {
     if (listBuffer.length > 0) {
       out.push(
-        <ul key={`list-${out.length}`} className="my-3 space-y-1.5 list-disc pl-5">
+        <ul key={`list-${out.length}`}>
           {listBuffer.map((it, i) => (
             <li key={i}>{renderInline(it)}</li>
           ))}
@@ -213,7 +186,6 @@ function renderBody(body: string): JSX.Element[] {
 
   blocks.forEach((block, idx) => {
     const lines = block.split(/\n/);
-    // Llista: TOTES les línies comencen amb "- ".
     if (lines.every((l) => l.trim().startsWith('- '))) {
       lines.forEach((l) => listBuffer.push(l.trim().slice(2)));
       flushList();
@@ -221,44 +193,24 @@ function renderBody(body: string): JSX.Element[] {
     }
     flushList();
 
-    // Sub-títol: comença amb "## ".
     if (lines[0].startsWith('## ')) {
-      out.push(
-        <h2 key={idx} className="mt-5 mb-2 text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">
-          {lines[0].slice(3)}
-        </h2>
-      );
-      // Resta del bloc com a paràgraf normal.
+      out.push(<h2 key={idx}>{lines[0].slice(3)}</h2>);
       const rest = lines.slice(1).join(' ').trim();
       if (rest) {
-        out.push(
-          <p key={`${idx}-p`} className="my-2.5 leading-relaxed">
-            {renderInline(rest)}
-          </p>
-        );
+        out.push(<p key={`${idx}-p`}>{renderInline(rest)}</p>);
       }
       return;
     }
 
-    // Citació: TOTES les línies comencen amb "> ".
     if (lines.every((l) => l.trim().startsWith('> '))) {
       const text = lines.map((l) => l.trim().slice(2)).join(' ');
-      out.push(
-        <blockquote key={idx} className="my-4 border-l-4 border-blue-400 dark:border-blue-500/70 bg-blue-50/40 dark:bg-blue-500/10 pl-4 pr-3 py-2 italic text-slate-700 dark:text-slate-300 rounded-r-lg">
-          {renderInline(text)}
-        </blockquote>
-      );
+      out.push(<blockquote key={idx}>{renderInline(text)}</blockquote>);
       return;
     }
 
-    // Paràgraf normal (joining lines with espai).
     const text = lines.join(' ').trim();
     if (text) {
-      out.push(
-        <p key={idx} className="my-2.5 leading-relaxed">
-          {renderInline(text)}
-        </p>
-      );
+      out.push(<p key={idx}>{renderInline(text)}</p>);
     }
   });
 
@@ -266,7 +218,6 @@ function renderBody(body: string): JSX.Element[] {
   return out;
 }
 
-/** Render inline: només **negreta** per simplicitat. */
 function renderInline(text: string): (string | JSX.Element)[] {
   const parts: (string | JSX.Element)[] = [];
   const re = /\*\*(.+?)\*\*/g;
@@ -275,7 +226,7 @@ function renderInline(text: string): (string | JSX.Element)[] {
   let i = 0;
   while ((m = re.exec(text)) !== null) {
     if (m.index > last) parts.push(text.slice(last, m.index));
-    parts.push(<strong key={i++} className="font-bold text-slate-900 dark:text-slate-100">{m[1]}</strong>);
+    parts.push(<strong key={i++}>{m[1]}</strong>);
     last = m.index + m[0].length;
   }
   if (last < text.length) parts.push(text.slice(last));
@@ -291,7 +242,6 @@ function formatDate(iso: string): string {
   }
 }
 
-/** Mostra un URL net per al CTA de font (ex: "boe.es/buscar/..."). */
 function prettyUrl(url: string): string {
   try {
     const u = new URL(url);

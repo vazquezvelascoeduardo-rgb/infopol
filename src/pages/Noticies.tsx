@@ -1,6 +1,8 @@
-// Llistat de notícies: selector de mes al cim + cerca textual + cards
-// agrupades per any-mes. Marca totes com a llegides quan s'arriba a
-// la pàgina (per netejar el badge de no-llegides).
+// Pàgina d'Actualitat · rebranding 2026.
+// Hero card amb stripe blau + 4 tabs de categoria + (per a 'noticies')
+// pills de mes + cerca + cards de notícia agrupats per mes. Per a les
+// altres categories (personalitats, premis, esports) renderitzem el
+// directori correponent en seccions amb capçalera coloreada.
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
@@ -18,11 +20,18 @@ import {
   PREMIS, PREMIS_UPDATED_AT,
 } from '../lib/premis';
 
-const CATEGORIES: { id: NoticiaCategoria; icon: string; tone: string }[] = [
-  { id: 'noticies',      icon: '📰', tone: 'from-blue-500 to-indigo-700' },
-  { id: 'personalitats', icon: '👤', tone: 'from-purple-500 to-violet-700' },
-  { id: 'premis',        icon: '🏆', tone: 'from-amber-500 to-orange-600' },
-  { id: 'esports',       icon: '⚽', tone: 'from-emerald-500 to-teal-700' },
+// Metadades visuals de cada categoria — color sòlid (rebranding 2026)
+// + emoji + soft background per a estats no-actius.
+const CATEGORIES: {
+  id: NoticiaCategoria;
+  icon: string;
+  color: string;
+  bg: string;
+}[] = [
+  { id: 'noticies',      icon: '📰', color: '#2F6BD8', bg: '#EAF1FE' },
+  { id: 'personalitats', icon: '👤', color: '#9747D6', bg: '#F5E9FF' },
+  { id: 'premis',        icon: '🏆', color: '#E89A1C', bg: '#FFF1D2' },
+  { id: 'esports',       icon: '⚽', color: '#1f8a4d', bg: '#DFF7E9' },
 ];
 
 export default function Noticies() {
@@ -37,8 +46,7 @@ export default function Noticies() {
     return () => clearTimeout(id);
   }, []);
 
-  // Quan canvia la categoria, descartem el filtre de mes (els mesos
-  // poden no coincidir entre categories).
+  // Quan canvia la categoria, descartem el filtre de mes (no apliquen).
   useEffect(() => {
     setActiveMonth(null);
   }, [activeCat]);
@@ -72,75 +80,74 @@ export default function Noticies() {
   const activeCatMeta = CATEGORIES.find((c) => c.id === activeCat) ?? CATEGORIES[0];
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-6">
-      <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3">
-        <Link to="/" className="hover:underline">{t('nav.home')}</Link>
-        <span className="mx-2" aria-hidden>/</span>
-        <span className="text-slate-700 dark:text-slate-200">{t('noticies.title')}</span>
+    <div className="shell pb-10">
+      <nav className="crumbs">
+        <Link to="/">{t('nav.home')}</Link>
+        <span className="sep">/</span>
+        <span className="here">{t('noticies.title')}</span>
       </nav>
 
-      <header className="rounded-2xl border p-5 sm:p-6 mb-5
-        border-blue-200/70 bg-gradient-to-br from-blue-50/60 via-white to-indigo-50/40
-        dark:border-white/10 dark:bg-gradient-to-br dark:from-[#0e2244] dark:to-[#0f1d34]">
-        <div className="flex items-start gap-4">
-          <span aria-hidden className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-700 text-3xl text-white shadow-inner">
-            📰
+      {/* Hero card */}
+      <header
+        className="card card-accent"
+        style={{ ['--accent' as never]: activeCatMeta.color } as React.CSSProperties}
+      >
+        <div className="card-grid">
+          <span
+            className="appicon lg"
+            style={{ ['--accent' as never]: activeCatMeta.color } as React.CSSProperties}
+          >
+            <span style={{ fontSize: 30 }}>📰</span>
           </span>
-          <div className="min-w-0">
-            <div className="text-[11px] uppercase tracking-[0.25em] font-semibold text-blue-700 dark:text-blue-400/90">
+          <div>
+            <div className="eyebrow" style={{ color: activeCatMeta.color }}>
               {t('noticies.badge')}
             </div>
-            <h1 className="mt-1 text-2xl sm:text-3xl font-black tracking-tight">
-              {t('noticies.title')}
-            </h1>
-            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              {t('noticies.subtitle')}
-            </p>
+            <h1 className="card-title xl mt-1">{t('noticies.title')}</h1>
+            <p className="card-desc">{t('noticies.subtitle')}</p>
           </div>
         </div>
       </header>
 
-      {/* TABS DE CATEGORIA — primer nivell de divisió */}
-      <section className="mb-4 rounded-2xl border p-3
-        border-slate-200 bg-white
-        dark:border-white/10 dark:bg-[#0f1d34]">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
-          {CATEGORIES.map((c) => {
-            const isActive = activeCat === c.id;
-            return (
-              <button
-                key={c.id}
-                type="button"
-                onClick={() => setActiveCat(c.id)}
-                aria-pressed={isActive}
-                className={`relative rounded-xl px-3 py-3 text-left transition border-2
-                  ${isActive
-                    ? `bg-gradient-to-r ${c.tone} text-white border-transparent shadow-md`
-                    : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10'}`}
-              >
-                <div className="flex items-center gap-2">
-                  <span aria-hidden className="text-xl">{c.icon}</span>
-                  <span className="font-bold text-sm leading-tight">
-                    {t(`noticies.cat.${c.id}`)}
-                  </span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      </section>
+      {/* TABS DE CATEGORIA — pills amb color de categoria */}
+      <nav
+        className="noticies-tabs"
+        role="tablist"
+        aria-label={t('noticies.title')}
+      >
+        {CATEGORIES.map((c) => {
+          const isActive = activeCat === c.id;
+          return (
+            <button
+              key={c.id}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              onClick={() => setActiveCat(c.id)}
+              className={'noticies-tab' + (isActive ? ' active' : '')}
+              style={{
+                ['--accent' as never]: c.color,
+                ['--accent-bg' as never]: c.bg,
+              } as React.CSSProperties}
+            >
+              <span className="nt-ico" aria-hidden>{c.icon}</span>
+              <span className="nt-label">{t(`noticies.cat.${c.id}`)}</span>
+            </button>
+          );
+        })}
+      </nav>
 
       {/* DIRECTORI DE PERSONALITATS — vista pròpia (no cards) */}
       {activeCat === 'personalitats' && (
         <PersonalitatsDirectory query={query} setQuery={setQuery} />
       )}
 
-      {/* DIRECTORI D'ESPORTS — vista pròpia (mateix patró que Personalitats) */}
+      {/* DIRECTORI D'ESPORTS — vista pròpia */}
       {activeCat === 'esports' && (
         <EsportsDirectory query={query} setQuery={setQuery} />
       )}
 
-      {/* DIRECTORI DE PREMIS — vista pròpia (mateix patró) */}
+      {/* DIRECTORI DE PREMIS — vista pròpia */}
       {activeCat === 'premis' && (
         <PremisDirectory query={query} setQuery={setQuery} />
       )}
@@ -148,85 +155,79 @@ export default function Noticies() {
       {/* La resta de categories utilitzen el sistema d'articles + mes + cerca */}
       {activeCat !== 'personalitats' && activeCat !== 'esports' && activeCat !== 'premis' && (
         <>
-
-      {/* SELECTOR DE MES — segon nivell, dins de la categoria activa */}
-      {monthBuckets.length > 0 && (
-        <section className="mb-5 rounded-2xl border p-4 sm:p-5
-          border-slate-200 bg-white
-          dark:border-white/10 dark:bg-[#0f1d34]">
-          <div className="flex items-center gap-2 mb-3">
-            <span aria-hidden className="text-base">📅</span>
-            <h2 className="text-xs font-black uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300">
-              {t('noticies.byMonth')}
-            </h2>
-            <span className={`h-1.5 w-1.5 rounded-full bg-gradient-to-r ${activeCatMeta.tone}`} aria-hidden />
-            <span className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">
-              {t(`noticies.cat.${activeCat}`)}
-            </span>
-            <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
-          </div>
-          <div className="flex flex-wrap gap-1.5">
-            <MonthPill
-              label={t('noticies.allMonths')}
-              active={activeMonth === null}
-              onClick={() => setActiveMonth(null)}
-            />
-            {monthBuckets.map((m) => (
-              <MonthPill
-                key={m.key}
-                label={getMonthLabel(m.key, locale)}
-                active={activeMonth === m.key}
-                onClick={() => setActiveMonth(m.key)}
-              />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Cerca */}
-      <div className="mb-5">
-        <input
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder={t('noticies.searchPlaceholder')}
-          className="w-full rounded-xl border-2 px-4 py-2.5 text-sm
-            border-slate-200 bg-white text-slate-800 placeholder-slate-400
-            focus:border-blue-400 focus:outline-none
-            dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:placeholder-slate-500 dark:focus:border-blue-400/40"
-        />
-      </div>
-
-      {/* Resultats agrupats per mes */}
-      {grouped.length === 0 ? (
-        <div className="rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/60 dark:bg-white/5 p-6 text-center">
-          <div className="text-4xl mb-2" aria-hidden>🔍</div>
-          <p className="text-sm text-slate-600 dark:text-slate-400">
-            {t('noticies.empty')}
-          </p>
-        </div>
-      ) : (
-        <div className="space-y-7">
-          {grouped.map(({ key, items }) => (
-            <section key={key}>
-              <div className="flex items-baseline gap-3 mb-3">
-                <h2 className="text-lg sm:text-xl font-black tracking-tight text-slate-800 dark:text-slate-100 inline-flex items-baseline gap-2">
-                  <span aria-hidden className="text-base">📅</span>
-                  {getMonthLabel(key, locale)}
-                </h2>
-                <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
+          {/* SELECTOR DE MES — segon nivell */}
+          {monthBuckets.length > 0 && (
+            <section
+              className="noticies-months"
+              style={{ ['--accent' as never]: activeCatMeta.color } as React.CSSProperties}
+            >
+              <div className="section-head" style={{ ['--accent' as never]: activeCatMeta.color } as React.CSSProperties}>
+                <span className="eyebrow">📅 {t('noticies.byMonth')}</span>
+                <span className="rule" />
               </div>
-              <ul className="space-y-3">
-                {items.map((n) => (
-                  <li key={n.slug}>
-                    <NoticiaCard noticia={n} />
-                  </li>
+              <div className="month-pills">
+                <MonthPill
+                  label={t('noticies.allMonths')}
+                  active={activeMonth === null}
+                  onClick={() => setActiveMonth(null)}
+                />
+                {monthBuckets.map((m) => (
+                  <MonthPill
+                    key={m.key}
+                    label={getMonthLabel(m.key, locale)}
+                    active={activeMonth === m.key}
+                    onClick={() => setActiveMonth(m.key)}
+                  />
                 ))}
-              </ul>
+              </div>
             </section>
-          ))}
-        </div>
-      )}
+          )}
+
+          {/* CERCA */}
+          <div className="noticies-search">
+            <span className="ns-icon" aria-hidden>🔎</span>
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={t('noticies.searchPlaceholder')}
+            />
+          </div>
+
+          {/* RESULTATS — agrupats per mes */}
+          {grouped.length === 0 ? (
+            <div className="noticies-empty">
+              <div className="ne-icon" aria-hidden>🔍</div>
+              <p>{t('noticies.empty')}</p>
+            </div>
+          ) : (
+            <div className="noticies-feed">
+              {grouped.map(({ key, items }) => (
+                <section key={key} className="noticies-month-group">
+                  <div
+                    className="section-head"
+                    style={{ ['--accent' as never]: activeCatMeta.color } as React.CSSProperties}
+                  >
+                    <span className="eyebrow">
+                      📅 {getMonthLabel(key, locale)}
+                    </span>
+                    <span className="rule" />
+                  </div>
+                  <ul className="noticies-list">
+                    {items.map((n) => (
+                      <li key={n.slug}>
+                        <NoticiaCard
+                          noticia={n}
+                          accent={activeCatMeta.color}
+                          accentBg={activeCatMeta.bg}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+            </div>
+          )}
         </>
       )}
     </div>
@@ -243,86 +244,63 @@ function MonthPill({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`inline-flex items-center rounded-full border-2 px-3 py-1 text-xs font-semibold transition
-        ${active
-          ? 'bg-gradient-to-r from-blue-600 to-indigo-700 text-white border-transparent shadow-md'
-          : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10'}`}
+      className={'month-pill' + (active ? ' active' : '')}
     >
       {label}
     </button>
   );
 }
 
-function NoticiaCard({ noticia }: { noticia: Noticia }) {
+function NoticiaCard({
+  noticia, accent, accentBg,
+}: {
+  noticia: Noticia; accent: string; accentBg: string;
+}) {
   const { t } = useT();
   return (
     <Link
       to={`/noticies/${encodeURIComponent(noticia.slug)}`}
-      className="group relative block overflow-hidden rounded-2xl border transition
-        border-slate-200 bg-white hover:border-blue-300 hover:shadow-md
-        dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-blue-400/40"
+      className="noticia-card"
+      style={{
+        ['--accent' as never]: accent,
+        ['--accent-bg' as never]: accentBg,
+      } as React.CSSProperties}
     >
-      <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-700" />
-
-      <div className="flex items-stretch gap-3 p-4 sm:p-5">
-        {/* Thumbnail (si hi ha imatge) */}
+      <span className="nc-stripe" aria-hidden />
+      <div className="nc-body">
         {noticia.image && (
-          <div className="hidden sm:block w-32 shrink-0 self-start">
+          <div className="nc-thumb">
             <img
               src={noticia.image}
               alt={noticia.imageAlt ?? ''}
               loading="lazy"
-              className="w-full aspect-[4/3] object-cover rounded-lg border border-slate-200 dark:border-white/10"
               onError={(e) => {
-                // Si la imatge no carrega, oculta-la sense trencar el card.
                 (e.currentTarget.parentElement as HTMLElement).style.display = 'none';
               }}
             />
           </div>
         )}
-
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-x-2 text-[10px] uppercase tracking-wider mb-1">
-            <time className="font-mono text-slate-500 dark:text-slate-400">
-              {formatDate(noticia.publishedAt)}
-            </time>
+        <div className="nc-text">
+          <div className="nc-meta">
+            <time className="nc-date">{formatDate(noticia.publishedAt)}</time>
             {noticia.featured && (
-              <>
-                <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
-                <span className="rounded-full bg-amber-200 dark:bg-amber-400/20 text-amber-900 dark:text-amber-300 px-2 py-0.5 text-[9px] font-bold">
-                  ⭐ {t('noticies.featured')}
-                </span>
-              </>
+              <span className="nc-badge featured">⭐ {t('noticies.featured')}</span>
             )}
             {noticia.sourceUrl && (
-              <>
-                <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
-                <span className="font-mono text-blue-600 dark:text-blue-400 inline-flex items-center gap-0.5">
-                  🔗 {t('noticies.hasSource')}
-                </span>
-              </>
+              <span className="nc-badge source">🔗 {t('noticies.hasSource')}</span>
             )}
           </div>
-          <h2 className="font-bold text-base sm:text-lg leading-snug mb-1 group-hover:text-blue-700 dark:group-hover:text-blue-300">
-            {noticia.title}
-          </h2>
-          <p className="text-sm text-slate-600 dark:text-slate-300 leading-snug line-clamp-3">
-            {noticia.summary}
-          </p>
+          <h2 className="nc-title">{noticia.title}</h2>
+          <p className="nc-summary">{noticia.summary}</p>
           {noticia.tags && noticia.tags.length > 0 && (
-            <div className="mt-2 flex flex-wrap gap-1">
+            <div className="nc-tags">
               {noticia.tags.slice(0, 5).map((tg) => (
-                <span key={tg}
-                  className="rounded-md border px-1.5 py-0.5 text-[10px] font-mono
-                    border-slate-200 bg-slate-50 text-slate-600
-                    dark:border-white/10 dark:bg-white/5 dark:text-slate-400">
-                  {tg}
-                </span>
+                <span key={tg} className="nc-tag">{tg}</span>
               ))}
             </div>
           )}
         </div>
-        <span aria-hidden className="shrink-0 text-slate-400 group-hover:translate-x-1 transition self-center">→</span>
+        <span className="nc-arr" aria-hidden>→</span>
       </div>
     </Link>
   );
@@ -338,7 +316,7 @@ function formatDate(iso: string): string {
 }
 
 // ════════════════════════════════════════════════════════════════════
-// DIRECTORI DE PERSONALITATS — vista pròpia
+// DIRECTORI DE PERSONALITATS
 // ════════════════════════════════════════════════════════════════════
 
 function PersonalitatsDirectory({
@@ -348,9 +326,9 @@ function PersonalitatsDirectory({
   setQuery: (q: string) => void;
 }) {
   const { t } = useT();
+  const ACCENT = '#9747D6';
+  const ACCENT_BG = '#F5E9FF';
 
-  // Filtre per cerca: si hi ha query, filtrem entries que coincideixin
-  // (nom o càrrec). Si no, mostrem totes.
   const q = query.trim().toLowerCase();
   const sections = q
     ? PERSONALITATS.map((sec) => ({
@@ -374,87 +352,26 @@ function PersonalitatsDirectory({
   }
 
   return (
-    <>
-      {/* Capçalera explicativa */}
-      <div className="rounded-2xl border-2 border-dashed p-4 mb-4
-        border-purple-200 bg-purple-50/40
-        dark:border-purple-400/30 dark:bg-purple-500/10">
-        <div className="flex items-start gap-3">
-          <span aria-hidden className="text-2xl shrink-0">👤</span>
-          <div className="min-w-0">
-            <h2 className="font-bold text-base mb-0.5">
-              {t('personalitats.title')}
-            </h2>
-            <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
-              {t('personalitats.subtitle').replace('{date}', formatLongDate(PERSONALITATS_UPDATED_AT))}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* NAVEGACIÓ RÀPIDA — pills per saltar a cada secció */}
-      <nav className="sticky top-2 z-20 mb-4 rounded-2xl border p-3 backdrop-blur
-        border-slate-200 bg-white/95
-        dark:border-white/10 dark:bg-[#0f1d34]/95">
-        <div className="flex items-center gap-2 mb-2">
-          <span aria-hidden className="text-base">🧭</span>
-          <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300">
-            {t('personalitats.quickNav')}
-          </h2>
-          <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
-        </div>
-        <div className="flex flex-wrap gap-1.5">
-          {PERSONALITATS.map((sec) => (
-            <button
-              key={sec.id}
-              type="button"
-              onClick={() => scrollToSection(sec.id)}
-              className={`inline-flex items-center gap-1.5 rounded-full border-2 px-3 py-1 text-xs font-semibold transition
-                border-transparent bg-gradient-to-r ${sec.accent} text-white shadow-sm
-                hover:shadow-md hover:-translate-y-0.5`}
-            >
-              <span aria-hidden>{sec.icon}</span>
-              <span>{sec.shortLabel}</span>
-            </button>
-          ))}
-        </div>
-      </nav>
-
-      {/* Cerca */}
-      <div className="mb-5">
-        <input
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder={t('personalitats.searchPlaceholder')}
-          className="w-full rounded-xl border-2 px-4 py-2.5 text-sm
-            border-slate-200 bg-white text-slate-800 placeholder-slate-400
-            focus:border-purple-400 focus:outline-none
-            dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:placeholder-slate-500 dark:focus:border-purple-400/40"
-        />
-      </div>
-
-      {/* Sections */}
-      {sections.length === 0 ? (
-        <div className="rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/60 dark:bg-white/5 p-6 text-center">
-          <div className="text-4xl mb-2" aria-hidden>🔍</div>
-          <p className="text-sm text-slate-600 dark:text-slate-400">
-            {t('personalitats.empty')}
-          </p>
-        </div>
-      ) : (
-        <div className="space-y-5">
-          {sections.map((sec) => (
-            <SectionView key={sec.id} sec={sec} />
-          ))}
-        </div>
-      )}
-    </>
+    <DirectoryLayout
+      accent={ACCENT}
+      accentBg={ACCENT_BG}
+      icon="👤"
+      title={t('personalitats.title')}
+      subtitle={t('personalitats.subtitle').replace('{date}', formatLongDate(PERSONALITATS_UPDATED_AT))}
+      quickNavLabel={t('personalitats.quickNav')}
+      sections={PERSONALITATS}
+      onScrollTo={scrollToSection}
+      query={query}
+      setQuery={setQuery}
+      searchPlaceholder={t('personalitats.searchPlaceholder')}
+      filteredSections={sections}
+      emptyMessage={t('personalitats.empty')}
+    />
   );
 }
 
 // ════════════════════════════════════════════════════════════════════
-// DIRECTORI D'ESPORTS — mateix patró que PersonalitatsDirectory
+// DIRECTORI D'ESPORTS
 // ════════════════════════════════════════════════════════════════════
 
 function EsportsDirectory({
@@ -464,6 +381,8 @@ function EsportsDirectory({
   setQuery: (q: string) => void;
 }) {
   const { t } = useT();
+  const ACCENT = '#1f8a4d';
+  const ACCENT_BG = '#DFF7E9';
 
   const q = query.trim().toLowerCase();
   const sections = q
@@ -488,89 +407,26 @@ function EsportsDirectory({
   }
 
   return (
-    <>
-      {/* Capçalera explicativa */}
-      <div className="rounded-2xl border-2 border-dashed p-4 mb-4
-        border-emerald-200 bg-emerald-50/40
-        dark:border-emerald-400/30 dark:bg-emerald-500/10">
-        <div className="flex items-start gap-3">
-          <span aria-hidden className="text-2xl shrink-0">⚽</span>
-          <div className="min-w-0">
-            <h2 className="font-bold text-base mb-0.5">
-              {t('esports.title')}
-            </h2>
-            <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
-              {t('esports.subtitle').replace('{date}', formatLongDate(ESPORTS_UPDATED_AT))}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* NAVEGACIÓ RÀPIDA — pills per saltar a cada mes */}
-      <nav className="sticky top-2 z-20 mb-4 rounded-2xl border p-3 backdrop-blur
-        border-slate-200 bg-white/95
-        dark:border-white/10 dark:bg-[#0f1d34]/95">
-        <div className="flex items-center gap-2 mb-2">
-          <span aria-hidden className="text-base">🧭</span>
-          <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300">
-            {t('esports.quickNav')}
-          </h2>
-          <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
-        </div>
-        <div className="flex flex-wrap gap-1.5">
-          {ESPORTS.map((sec) => (
-            <button
-              key={sec.id}
-              type="button"
-              onClick={() => scrollToSection(sec.id)}
-              className={`inline-flex items-center gap-1.5 rounded-full border-2 px-3 py-1 text-xs font-semibold transition
-                border-transparent bg-gradient-to-r ${sec.accent} text-white shadow-sm
-                hover:shadow-md hover:-translate-y-0.5`}
-            >
-              <span aria-hidden>{sec.icon}</span>
-              <span>{sec.shortLabel}</span>
-            </button>
-          ))}
-        </div>
-      </nav>
-
-      {/* Cerca */}
-      <div className="mb-5">
-        <input
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder={t('esports.searchPlaceholder')}
-          className="w-full rounded-xl border-2 px-4 py-2.5 text-sm
-            border-slate-200 bg-white text-slate-800 placeholder-slate-400
-            focus:border-emerald-400 focus:outline-none
-            dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:placeholder-slate-500 dark:focus:border-emerald-400/40"
-        />
-      </div>
-
-      {/* Sections */}
-      {sections.length === 0 ? (
-        <div className="rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/60 dark:bg-white/5 p-6 text-center">
-          <div className="text-4xl mb-2" aria-hidden>🔍</div>
-          <p className="text-sm text-slate-600 dark:text-slate-400">
-            {t('esports.empty')}
-          </p>
-        </div>
-      ) : (
-        <div className="space-y-5">
-          {sections.map((sec) => (
-            // SectionView accepta el shape { id, title, icon, accent, subsections }
-            // que tant LeaderSection com SportSection compleixen.
-            <SectionView key={sec.id} sec={sec as unknown as LeaderSection} />
-          ))}
-        </div>
-      )}
-    </>
+    <DirectoryLayout
+      accent={ACCENT}
+      accentBg={ACCENT_BG}
+      icon="⚽"
+      title={t('esports.title')}
+      subtitle={t('esports.subtitle').replace('{date}', formatLongDate(ESPORTS_UPDATED_AT))}
+      quickNavLabel={t('esports.quickNav')}
+      sections={ESPORTS as unknown as LeaderSection[]}
+      onScrollTo={scrollToSection}
+      query={query}
+      setQuery={setQuery}
+      searchPlaceholder={t('esports.searchPlaceholder')}
+      filteredSections={sections as unknown as LeaderSection[]}
+      emptyMessage={t('esports.empty')}
+    />
   );
 }
 
 // ════════════════════════════════════════════════════════════════════
-// DIRECTORI DE PREMIS — mateix patró que Esports/Personalitats
+// DIRECTORI DE PREMIS
 // ════════════════════════════════════════════════════════════════════
 
 function PremisDirectory({
@@ -580,6 +436,8 @@ function PremisDirectory({
   setQuery: (q: string) => void;
 }) {
   const { t } = useT();
+  const ACCENT = '#E89A1C';
+  const ACCENT_BG = '#FFF1D2';
 
   const q = query.trim().toLowerCase();
   const sections = q
@@ -604,44 +462,74 @@ function PremisDirectory({
   }
 
   return (
-    <>
-      {/* Capçalera explicativa */}
-      <div className="rounded-2xl border-2 border-dashed p-4 mb-4
-        border-amber-200 bg-amber-50/40
-        dark:border-amber-400/30 dark:bg-amber-500/10">
-        <div className="flex items-start gap-3">
-          <span aria-hidden className="text-2xl shrink-0">🏆</span>
-          <div className="min-w-0">
-            <h2 className="font-bold text-base mb-0.5">
-              {t('premis.title')}
-            </h2>
-            <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
-              {t('premis.subtitle').replace('{date}', formatLongDate(PREMIS_UPDATED_AT))}
-            </p>
-          </div>
+    <DirectoryLayout
+      accent={ACCENT}
+      accentBg={ACCENT_BG}
+      icon="🏆"
+      title={t('premis.title')}
+      subtitle={t('premis.subtitle').replace('{date}', formatLongDate(PREMIS_UPDATED_AT))}
+      quickNavLabel={t('premis.quickNav')}
+      sections={PREMIS as unknown as LeaderSection[]}
+      onScrollTo={scrollToSection}
+      query={query}
+      setQuery={setQuery}
+      searchPlaceholder={t('premis.searchPlaceholder')}
+      filteredSections={sections as unknown as LeaderSection[]}
+      emptyMessage={t('premis.empty')}
+    />
+  );
+}
+
+// Layout reutilitzable per als 3 directoris (Personalitats / Esports /
+// Premis). Capçalera amb accent + nav ràpida (pills) + cerca + seccions.
+function DirectoryLayout({
+  accent, accentBg, icon, title, subtitle, quickNavLabel,
+  sections, onScrollTo, query, setQuery, searchPlaceholder,
+  filteredSections, emptyMessage,
+}: {
+  accent: string;
+  accentBg: string;
+  icon: string;
+  title: string;
+  subtitle: string;
+  quickNavLabel: string;
+  sections: LeaderSection[];
+  onScrollTo: (id: string) => void;
+  query: string;
+  setQuery: (q: string) => void;
+  searchPlaceholder: string;
+  filteredSections: LeaderSection[];
+  emptyMessage: string;
+}) {
+  return (
+    <div
+      style={{
+        ['--accent' as never]: accent,
+        ['--accent-bg' as never]: accentBg,
+      } as React.CSSProperties}
+    >
+      {/* Capçalera explicativa de la categoria */}
+      <div className="dir-intro">
+        <span className="dir-intro-ico" aria-hidden>{icon}</span>
+        <div>
+          <h2 className="dir-intro-title">{title}</h2>
+          <p className="dir-intro-sub">{subtitle}</p>
         </div>
       </div>
 
-      {/* NAVEGACIÓ RÀPIDA — pills per saltar a cada mes */}
-      <nav className="sticky top-2 z-20 mb-4 rounded-2xl border p-3 backdrop-blur
-        border-slate-200 bg-white/95
-        dark:border-white/10 dark:bg-[#0f1d34]/95">
-        <div className="flex items-center gap-2 mb-2">
-          <span aria-hidden className="text-base">🧭</span>
-          <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300">
-            {t('premis.quickNav')}
-          </h2>
-          <span className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-white/10" />
+      {/* Nav ràpida — pills per saltar a cada secció */}
+      <nav className="dir-quicknav" aria-label={quickNavLabel}>
+        <div className="section-head" style={{ ['--accent' as never]: accent } as React.CSSProperties}>
+          <span className="eyebrow">🧭 {quickNavLabel}</span>
+          <span className="rule" />
         </div>
-        <div className="flex flex-wrap gap-1.5">
-          {PREMIS.map((sec) => (
+        <div className="dir-pills">
+          {sections.map((sec) => (
             <button
               key={sec.id}
               type="button"
-              onClick={() => scrollToSection(sec.id)}
-              className={`inline-flex items-center gap-1.5 rounded-full border-2 px-3 py-1 text-xs font-semibold transition
-                border-transparent bg-gradient-to-r ${sec.accent} text-white shadow-sm
-                hover:shadow-md hover:-translate-y-0.5`}
+              onClick={() => onScrollTo(sec.id)}
+              className="dir-pill"
             >
               <span aria-hidden>{sec.icon}</span>
               <span>{sec.shortLabel}</span>
@@ -651,105 +539,65 @@ function PremisDirectory({
       </nav>
 
       {/* Cerca */}
-      <div className="mb-5">
+      <div className="noticies-search">
+        <span className="ns-icon" aria-hidden>🔎</span>
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder={t('premis.searchPlaceholder')}
-          className="w-full rounded-xl border-2 px-4 py-2.5 text-sm
-            border-slate-200 bg-white text-slate-800 placeholder-slate-400
-            focus:border-amber-400 focus:outline-none
-            dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:placeholder-slate-500 dark:focus:border-amber-400/40"
+          placeholder={searchPlaceholder}
         />
       </div>
 
-      {/* Sections */}
-      {sections.length === 0 ? (
-        <div className="rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50/60 dark:bg-white/5 p-6 text-center">
-          <div className="text-4xl mb-2" aria-hidden>🔍</div>
-          <p className="text-sm text-slate-600 dark:text-slate-400">
-            {t('premis.empty')}
-          </p>
+      {/* Seccions */}
+      {filteredSections.length === 0 ? (
+        <div className="noticies-empty">
+          <div className="ne-icon" aria-hidden>🔍</div>
+          <p>{emptyMessage}</p>
         </div>
       ) : (
-        <div className="space-y-5">
-          {sections.map((sec) => (
-            <SectionView key={sec.id} sec={sec as unknown as LeaderSection} />
+        <div className="dir-sections">
+          {filteredSections.map((sec) => (
+            <SectionView key={sec.id} sec={sec} />
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 }
 
 function SectionView({ sec }: { sec: LeaderSection }) {
   return (
-    <section
-      id={sec.id}
-      className="rounded-2xl border overflow-hidden scroll-mt-24
-        border-slate-200 bg-white
-        dark:border-white/10 dark:bg-[#0f1d34]"
-    >
-      <header className={`flex items-center gap-3 px-4 py-3 bg-gradient-to-r ${sec.accent} text-white`}>
-        <span aria-hidden className="text-2xl">{sec.icon}</span>
-        <h2 className="font-black text-base sm:text-lg leading-tight">
-          {sec.title}
-        </h2>
+    <section id={sec.id} className="dir-section">
+      <header className="dir-section-head">
+        <span className="dir-section-icon" aria-hidden>{sec.icon}</span>
+        <h2>{sec.title}</h2>
       </header>
-      <div className="divide-y divide-slate-200/70 dark:divide-white/10">
+      <div className="dir-section-body">
         {sec.subsections.map((sub, i) => (
-          <div key={i} className="px-4 py-3">
+          <div key={i} className="dir-sub">
             {(sub.title || sub.icon) && (
-              <div className="flex items-center gap-2 mb-2">
-                {sub.icon && (
-                  <span aria-hidden className="text-base">{sub.icon}</span>
-                )}
-                {sub.title && (
-                  <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500 dark:text-slate-400">
-                    {sub.title}
-                  </div>
-                )}
+              <div className="dir-sub-head">
+                {sub.icon && <span aria-hidden>{sub.icon}</span>}
+                {sub.title && <span className="dir-sub-title">{sub.title}</span>}
               </div>
             )}
-            <ul className={sub.compact
-              ? 'grid grid-cols-1 sm:grid-cols-2 gap-1.5'
-              : 'space-y-1.5'}>
+            <ul className={'dir-entries' + (sub.compact ? ' compact' : '')}>
               {sub.entries.map((e, j) => (
-                <li key={j} className="rounded-lg border px-3 py-2 transition
-                  border-slate-200/70 bg-slate-50/40 hover:border-slate-300
-                  dark:border-white/5 dark:bg-white/5 dark:hover:border-white/10">
-                  <div className="flex items-start gap-3">
-                    {e.flag && (
-                      <span
-                        aria-hidden
-                        className="shrink-0 inline-flex h-9 w-11 items-center justify-center rounded-md text-2xl select-none
-                          bg-white border border-slate-200/70
-                          dark:bg-white/10 dark:border-white/10"
-                      >
-                        {e.flag}
-                      </span>
-                    )}
-                    <div className="min-w-0 flex-1">
-                      <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 leading-tight">
-                        {e.position}
-                      </div>
-                      <div className="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 leading-snug mt-0.5">
-                        {e.name}
-                      </div>
-                      {e.detail && (
-                        <div className="text-xs text-slate-500 dark:text-slate-400 leading-snug mt-0.5">
-                          {e.detail}
-                        </div>
-                      )}
-                    </div>
-                    {e.recent && (
-                      <span className="shrink-0 self-start rounded-full bg-rose-500 text-white text-[9px] font-bold px-1.5 py-0.5 uppercase tracking-wider inline-flex items-center gap-1">
-                        <span aria-hidden>🔴</span>
-                        Nou
-                      </span>
+                <li key={j} className="dir-entry">
+                  {e.flag && (
+                    <span className="dir-entry-flag" aria-hidden>{e.flag}</span>
+                  )}
+                  <div className="dir-entry-text">
+                    <div className="dir-entry-pos">{e.position}</div>
+                    <div className="dir-entry-name">{e.name}</div>
+                    {e.detail && (
+                      <div className="dir-entry-detail">{e.detail}</div>
                     )}
                   </div>
+                  {e.recent && (
+                    <span className="dir-entry-new">🔴 Nou</span>
+                  )}
                 </li>
               ))}
             </ul>
