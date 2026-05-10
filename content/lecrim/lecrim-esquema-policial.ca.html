@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LECrim — Esquema Operatiu Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* LECrim — fitxa rebranding 2026 */
+  :root {
+    --ink: #0E0E0E; --paper: #FAF6EF; --paper-2: #F2EDE3; --white: #FFFFFF;
+    --terracotta: #F26B1F; --terracotta-soft: #FFE9D8;
+    --text: #0E0E0E; --text-2: #4a4744; --text-3: #807c77;
+    --line: rgba(14, 14, 14, 0.10); --line-2: rgba(14, 14, 14, 0.06);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper); color: var(--text);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    line-height: 1.5; -webkit-font-smoothing: antialiased;
+    padding: 12px 8px 40px;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrapper { max-width: 1080px; margin: 0 auto; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .section-head {
+    display: flex; align-items: center; gap: 12px;
+    margin: 32px 0 14px; flex-wrap: wrap;
+  }
+  .section-head::before {
+    content: ""; display: block; width: 4px; height: 22px;
+    background: var(--accent, var(--terracotta)); border-radius: 2px; flex: none;
+  }
+  .section-head .eyebrow { color: var(--accent, var(--ink)); flex: none; }
+  .section-head .rule { flex: 1; height: 1px; background: var(--line); min-width: 30px; }
+
+  /* HERO lila (color LECrim) */
+  .ce-hero {
+    display: grid; grid-template-columns: auto 1fr; gap: 24px;
+    align-items: center;
+    background: linear-gradient(180deg, #F5E9FF 0%, #d9bff0 100%);
+    border: 1px solid #b289dd; border-radius: 18px;
+    padding: 26px 30px; margin-top: 8px;
+  }
+  .ce-shield { flex: none; }
+  .ce-title {
+    margin: 4px 0 6px; font-size: 38px; font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.05; color: #4a1d72;
+  }
+  .ce-title .accent { color: #9747D6; }
+  .ce-sub { margin: 0; color: #4a1d72; font-size: 15px; max-width: 760px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .hero-tags .tag {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #b289dd;
+    padding: 4px 11px; border-radius: 999px;
+    font-size: 12.5px; font-weight: 600; color: #4a1d72;
+  }
+  .hero-tags .tag.hot { background: #F5E9FF; border-color: #9747D6; color: #4a1d72; font-weight: 800; }
+
+  .clasif-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-top: 16px;
+  }
+  .clasif {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 14px; padding: 16px 18px;
+    border-top: 3px solid var(--accent);
+  }
+  .clasif h4 {
+    margin: 2px 0 6px; font-size: 15px; font-weight: 800;
+    color: var(--accent); letter-spacing: 0.03em; text-transform: uppercase;
+  }
+  .clasif p { margin: 4px 0 0; font-size: 13px; color: var(--text-2); }
+  .clasif .ant {
+    font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+    color: var(--text-3); margin-top: 6px; display: block;
+  }
+
+  .meta-strip {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 16px; align-items: center;
+    background: #F5E9FF; border: 1px solid #b289dd;
+    border-radius: 14px; padding: 14px 18px; margin-top: 14px;
+  }
+  .meta-strip h3 { margin: 0; color: #4a1d72; font-size: 16px; font-weight: 800; }
+  .meta-strip p { margin: 4px 0 0; color: #4a1d72; font-size: 14px; }
+  .vigente {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 6px 14px; background: white;
+    border: 1px solid #b289dd; border-radius: 10px;
+  }
+  .vigente .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); }
+  .vigente .state { font-weight: 800; color: #9747D6; }
+
+  .art-card {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 14px; padding: 14px 18px;
+    border-left: 3px solid var(--accent, #9747D6);
+    margin-top: 10px;
+  }
+  .art-card.warn { background: #FFF6E8; border-color: #f3d6a0; border-left-color: #E89A1C; }
+  .art-card.danger { background: #FFEFEC; border-color: #f5c19a; border-left-color: #E5484D; }
+  .art-card header {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px;
+  }
+  .art-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    background: var(--ink); color: var(--white);
+    padding: 4px 9px; border-radius: 6px; letter-spacing: 0.04em;
+  }
+  .tag-sm {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 8px; border-radius: 6px; letter-spacing: 0.04em;
+    background: #EAF1FE; color: #1f4ea0;
+  }
+  .tag-sm.warn { background: #FFF6E8; color: #9c7a1f; }
+  .tag-sm.danger { background: #FFEFEC; color: #991b1b; }
+  .tag-sm.ok { background: #DFF7E9; color: #14532d; }
+  .tag-sm.purple { background: #F5E9FF; color: #5b21b6; }
+  .tag-sm.clave { background: #FFEFEC; color: #991b1b; }
+  .tag-sm.nuevo { background: linear-gradient(135deg, #FFD93D, #ffb800); color: #4a3700; }
+  .art-card h4 {
+    margin: 0; font-size: 16px; font-weight: 800; letter-spacing: -0.015em;
+  }
+  .art-card p { margin: 6px 0; font-size: 14px; color: var(--text-2); line-height: 1.55; }
+  .art-card p b { color: var(--ink); }
+  .art-card ul { margin: 6px 0 0 18px; }
+  .art-card li { font-size: 13.5px; color: var(--text-2); padding: 2px 0; }
+  .art-card li b { color: var(--ink); }
+
+  .twocol { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 760px) { .twocol { grid-template-columns: 1fr; } }
+
+  .info {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 12px; align-items: start;
+    padding: 12px 14px; border-radius: 10px;
+    margin-top: 10px; font-size: 13px; line-height: 1.5;
+  }
+  .info b { color: var(--ink); }
+  .info.tip { background: var(--paper-2); border-left: 3px solid var(--text-2); color: var(--text-2); }
+  .info.cop { background: #EAF1FE; border-left: 3px solid #2F6BD8; color: #1f3f7a; }
+  .info.warn { background: #FFF6E8; border-left: 3px solid #E89A1C; color: #6b5a30; }
+  .info.danger { background: #FFEFEC; border-left: 3px solid #E5484D; color: #7a1f1f; }
+  .info.purple { background: #F5E9FF; border-left: 3px solid #9747D6; color: #4a1d72; }
+  .info .ico { font-size: 18px; }
+
+  /* Drets · grid de drets del detingut */
+  .drets-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 8px; margin-top: 10px;
+  }
+  .dret {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 10px; align-items: start;
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 10px; padding: 10px 12px;
+  }
+  .dret-num {
+    width: 28px; height: 28px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: #9747D6; color: #fff;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .dret p { margin: 0; font-size: 12.5px; color: var(--text-2); line-height: 1.4; }
+  .dret p b { color: var(--ink); }
+  @media (max-width: 760px) { .drets-grid { grid-template-columns: 1fr; } }
+
+  /* Stepper */
+  .steps-list {
+    list-style: none; padding: 0; margin: 8px 0 0;
+  }
+  .steps-list li {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 12px; align-items: start;
+    padding: 8px 0; border-bottom: 1px solid var(--line-2);
+    font-size: 13.5px; color: var(--text-2); line-height: 1.5;
+  }
+  .steps-list li b { color: var(--ink); }
+  .steps-list .stnum {
+    width: 24px; height: 24px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--accent, #9747D6); color: #fff;
+    border-radius: 50%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .steps-list .stbull {
+    color: var(--accent, #9747D6); font-weight: 800;
+    width: 24px; text-align: center; flex-shrink: 0;
+  }
+
+  .ntable {
+    width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13.5px;
+  }
+  .ntable th {
+    text-align: left; padding: 8px 10px;
+    background: var(--paper-2); font-weight: 800; color: var(--ink);
+    font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .ntable td {
+    padding: 8px 10px; border-top: 1px solid var(--line-2);
+    color: var(--text-2); vertical-align: top;
+  }
+  .ntable b { color: var(--ink); }
+
+  .recorda {
+    background: linear-gradient(180deg, #FFF6E8 0%, #FBE5B5 100%);
+    border: 1px solid #f3d6a0; border-radius: 18px;
+    padding: 22px 26px; margin-top: 28px;
+  }
+  .recorda header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+  }
+  .recorda .rule { flex: 1; height: 1px; background: #f3d6a0; }
+  .reclist {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px;
+  }
+  .reclist li {
+    display: grid; grid-template-columns: auto 1fr; gap: 10px;
+    align-items: start; padding: 8px 0;
+    border-bottom: 1px solid rgba(156, 122, 31, 0.18);
+    font-size: 13.5px; color: #6b5a30; line-height: 1.5;
+  }
+  .reclist li::before { content: "▸"; color: #9c7a1f; font-weight: 800; }
+  .reclist b { color: var(--ink); }
+
+  @media (max-width: 980px) {
+    .clasif-grid { grid-template-columns: 1fr; }
+    .meta-strip { grid-template-columns: 1fr; }
+    .reclist { grid-template-columns: 1fr; }
+    .ce-hero { grid-template-columns: 1fr; text-align: center; }
+    .ce-shield { margin: 0 auto; }
+    .ce-title { font-size: 28px; }
+  }
+</style>
+</head>
+<body data-fitxa-style="rebrand-2026">
+<div class="wrapper">
+
+  <header class="ce-hero">
+    <div class="ce-shield">
+      <svg width="80" height="92" viewBox="0 0 80 92" fill="none">
+        <path d="M40 4 L74 13 V42 C74 62 60 78 40 88 C20 78 6 62 6 42 V13 Z" fill="#4a1d72" stroke="#9747D6" stroke-width="2"/>
+        <text x="40" y="34" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="22" fill="#fff">⚖️</text>
+        <text x="40" y="56" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#fff" letter-spacing="1">LECRIM</text>
+        <text x="40" y="68" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#d9bff0" letter-spacing="1">PROCÉS</text>
+        <text x="40" y="80" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#d9bff0" letter-spacing="1">PENAL</text>
+      </svg>
+    </div>
+    <div>
+      <div class="eyebrow" style="color:#4a1d72;">ESQUEMA OPERATIU POLICIAL</div>
+      <h1 class="ce-title">LECRIM · <span class="accent">PROCÉS PENAL</span></h1>
+      <p class="ce-sub">Llei d'Enjudiciament Criminal · RD de 14 de setembre de 1882. Marc del procediment penal a Espanya: detenció, drets, atestat, mesures cautelars, prova i procediments. Última reforma: <b>LO 1/2026</b>.</p>
+      <div class="hero-tags">
+        <span class="tag hot">📅 14/09/1882 · vigent</span>
+        <span class="tag">🔄 Última reforma LO 1/2026</span>
+        <span class="tag">⚖️ Procés penal</span>
+        <span class="tag">🚔 Clau per a PL i Mossos</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="clasif-grid">
+    <div class="clasif" style="--accent:#9747D6;">
+      <h4>Norma</h4>
+      <p>RD 14/09/1882</p>
+      <span class="ant">Text consolidat</span>
+    </div>
+    <div class="clasif" style="--accent:#9c3a08;">
+      <h4>Última reforma</h4>
+      <p>LO 1/2026</p>
+      <span class="ant">Multireincidència · arts. 13, 105, 544 bis</span>
+    </div>
+    <div class="clasif" style="--accent:#2F6BD8;">
+      <h4>Àmbit</h4>
+      <p>Procediment penal</p>
+      <span class="ant">Espanya · totes les jurisdiccions ordinàries</span>
+    </div>
+  </section>
+
+  <div class="meta-strip">
+    <div>
+      <h3>⚖️ Llei d'Enjudiciament Criminal</h3>
+      <p>Norma processal penal de referència. Regula <b>l'atestat policial, la detenció i els seus drets, l'habeas corpus, l'entrada i registre, les diligències d'investigació, les mesures cautelars i els procediments penals</b>.</p>
+    </div>
+    <div class="vigente">
+      <span class="when">Vigent</span>
+      <span class="state">1882 →</span>
+    </div>
+  </div>
+
+  <!-- ═══ POLICIA JUDICIAL ═══ -->
+  <div class="section-head" style="--accent:#2F6BD8;">
+    <span class="eyebrow">📋 POLICIA JUDICIAL I L'ATESTAT · ARTS. 282–298</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Art. 282</span>
+      <span class="tag-sm">FUNCIÓ</span>
+      <h4>Funció de la Policia Judicial</h4>
+    </header>
+    <p>La Policia Judicial té com a missió <b>esbrinar els delictes públics, practicar les primeres diligències</b> de prevenció i assegurar el delinqüent. Actua sota les ordres de jutges i fiscals.</p>
+    <ul>
+      <li>✔ Esbrinament del delicte.</li>
+      <li>✔ Assegurament del culpable.</li>
+      <li>✔ Recollida d'efectes i instruments.</li>
+      <li>✔ Protecció de la víctima.</li>
+    </ul>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>Tota Policia Local exerceix funcions de <b>Policia Judicial en el seu àmbit territorial</b> (art. 30 LO 2/1986 FCS).</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9747D6;">
+    <header>
+      <span class="art-badge">Arts. 292–298</span>
+      <span class="tag-sm purple">DOCUMENT CLAU</span>
+      <h4>L'atestat policial</h4>
+    </header>
+    <p>Document oficial que recull les <b>diligències practicades per la Policia Judicial</b> davant la comissió d'un fet delictiu. Té valor de <b>denúncia</b> (no de prova per si mateix).</p>
+    <ol class="steps-list">
+      <li><span class="stnum">1</span><div><b>Encapçalament:</b> unitat actuant, lloc, data, hora, funcionaris intervinents.</div></li>
+      <li><span class="stnum">2</span><div><b>Exposició dels fets:</b> relat cronològic i objectiu. Sense valoracions jurídiques.</div></li>
+      <li><span class="stnum">3</span><div><b>Diligències practicades:</b> inspecció ocular, declaracions, detenció, registres…</div></li>
+      <li><span class="stnum">4</span><div><b>Efectes intervinguts:</b> descripció, número, estat. Cadena de custòdia.</div></li>
+      <li><span class="stnum">5</span><div><b>Tancament:</b> data, signatura de l'instructor i del secretari (agent fedatari).</div></li>
+    </ol>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div>L'atestat té valor de <b>denúncia</b>, no de prova plena. Les declaracions hi recollides hauran de ratificar-se en seu judicial per tenir valor probatori.</div>
+    </div>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div><b>Cadena de custòdia:</b> cada trasllat d'evidències ha de quedar documentat (qui, quan, com). Una ruptura pot invalidar la prova.</div>
+    </div>
+  </article>
+
+  <!-- ═══ DETENCIÓ ═══ -->
+  <div class="section-head" style="--accent:#E5484D;">
+    <span class="eyebrow">🔒 LA DETENCIÓ · ARTS. 489–501 · 17 CE</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#E5484D;">
+    <header>
+      <span class="art-badge">Arts. 490–492</span>
+      <span class="tag-sm danger">CAUSES</span>
+      <h4>Causes per detenir (obligació i facultat)</h4>
+    </header>
+    <p>La Policia <b>té l'obligació</b> de detenir (art. 492) i <b>qualsevol persona pot detenir</b> (art. 490) en determinats supòsits.</p>
+    <ul>
+      <li>▸ <b>In fraganti:</b> sorprès en el moment d'executar el delicte.</li>
+      <li>▸ <b>Fugat</b> d'establiment penitenciari o de conducció.</li>
+      <li>▸ <b>Processat o condemnat</b> en rebel·lia per delicte greu.</li>
+      <li>▸ Quan hi ha <b>motius racionalment suficients</b> per creure que ha participat en un delicte i existeixi risc de fuga o d'actuació.</li>
+      <li>▸ Per <b>identificació</b> quan no es pugui acreditar la identitat (risc d'alterar l'ordre o per indicis d'haver participat en infracció).</li>
+    </ul>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div>La detenció ha de ser l'<b>última mesura</b>. Valorar sempre si n'hi ha prou amb citació per declarar o ressenya.</div>
+    </div>
+  </article>
+
+  <article class="art-card warn" style="--accent:#E89A1C;">
+    <header>
+      <span class="art-badge">Art. 496 · 17.2 CE</span>
+      <span class="tag-sm warn">⏱ TERMINIS CRÍTICS</span>
+      <h4>Terminis de la detenció</h4>
+    </header>
+    <table class="ntable">
+      <thead><tr><th>Termini</th><th>Qui</th><th>Què fer</th></tr></thead>
+      <tbody>
+        <tr><td><b>6 hores</b></td><td>Policia Judicial</td><td>Posar en llibertat o <b>lliurar al jutge</b> si la detenció està justificada.</td></tr>
+        <tr><td><b>24 hores</b></td><td>Policia / Jutjat</td><td>Termini ordinari màxim de Policia. Excepcionalment pot prorrogar-se fins a <b>72 h</b> amb autorització judicial.</td></tr>
+        <tr><td><b>72 hores</b></td><td>Autoritat judicial</td><td>Màxim constitucional (art. 17.2 CE). <b>Mai pot superar-se</b> sense passar a presó provisional o llibertat.</td></tr>
+        <tr><td><b>5 dies</b></td><td>Jutge — Terrorisme</td><td>Excepcionalment en delictes de terrorisme (pròrroga judicial de 48 h sobre les 72 h).</td></tr>
+      </tbody>
+    </table>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div>El còmput comença des del <b>moment efectiu de la detenció</b>, no des de l'ingrés en dependències policials. Anota sempre l'hora exacta a l'atestat.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9747D6;">
+    <header>
+      <span class="art-badge">Art. 520</span>
+      <span class="tag-sm purple">⏱ IMMEDIAT</span>
+      <h4>Drets del detingut · Lectura de drets</h4>
+    </header>
+    <p>S'han de comunicar <b>de forma immediata, en llenguatge comprensible</b> i per escrit (formulari de drets). El detingut signa el rebut.</p>
+    <div class="drets-grid">
+      <div class="dret"><span class="dret-num">1</span><p><b>Guardar silenci</b> i no declarar. No està obligat a respondre preguntes.</p></div>
+      <div class="dret"><span class="dret-num">2</span><p><b>No declarar contra si mateix</b> ni confessar-se culpable.</p></div>
+      <div class="dret"><span class="dret-num">3</span><p>Designar <b>advocat</b> i sol·licitar la seva presència en declaracions i reconeixements.</p></div>
+      <div class="dret"><span class="dret-num">4</span><p>Ser <b>assistit gratuïtament</b> per intèrpret si no entén el castellà o el català.</p></div>
+      <div class="dret"><span class="dret-num">5</span><p>Que es posi en coneixement del <b>familiar o persona</b> que designi la seva situació i lloc de custòdia.</p></div>
+      <div class="dret"><span class="dret-num">6</span><p>Ser reconegut pel <b>metge forense</b> o metge del cos de guàrdia.</p></div>
+      <div class="dret"><span class="dret-num">7</span><p>Accedir als <b>elements essencials</b> de les actuacions per impugnar la detenció.</p></div>
+      <div class="dret"><span class="dret-num">8</span><p>Si és estranger: comunicar-ho a l'<b>oficina consular</b> del seu país.</p></div>
+    </div>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div><b>Incomunicació:</b> només la pot decretar el jutge (màx. 5 dies en terrorisme). La Policia <b>MAI</b> pot incomunicar pel seu compte.</div>
+    </div>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>El formulari de lectura de drets signat pel detingut s'ha d'incorporar a l'atestat. Si no sap llegir o escriure: testimonis o gravació.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9c7a1f;">
+    <header>
+      <span class="art-badge">Art. 16 LOPSC</span>
+      <span class="tag-sm warn">IDENTIFICACIÓ</span>
+      <h4>Detenció per identificació</h4>
+    </header>
+    <p>Quan no sigui possible identificar una persona a la via pública i existeixin indicis de participació en infracció o risc per a l'ordre. <b>No és detenció a efectes de l'art. 17 CE</b>, però sí s'ha de respectar la proporcionalitat.</p>
+    <ul>
+      <li>⏱ Màx. <b>6 hores</b> (LOPSC).</li>
+      <li>📍 Només en dependències policials.</li>
+      <li>✔ Drets informatius igualment aplicables.</li>
+    </ul>
+    <div class="info warn">
+      <span class="ico">ℹ️</span>
+      <div>Finalitat exclusiva: identificació. <b>No pot</b> usar-se per investigar o interrogar sobre fets delictius sense convertir-se en detenció.</div>
+    </div>
+  </article>
+
+  <!-- ═══ HABEAS CORPUS ═══ -->
+  <div class="section-head" style="--accent:#9c3a08;">
+    <span class="eyebrow">⚖️ HABEAS CORPUS · LO 6/1984 · ART. 17.4 CE</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card warn" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">LO 6/1984</span>
+      <span class="tag-sm warn">⏱ URGENT</span>
+      <h4>Procediment d'Habeas Corpus</h4>
+    </header>
+    <p>Procediment especial per al control judicial <b>immediat</b> de tota detenció il·legal. Qualsevol persona pot iniciar-lo.</p>
+    <ul>
+      <li>▸ <b>Qui pot sol·licitar-lo:</b> el detingut, cònjuge, descendents, ascendents, germans, representant legal, Ministeri Fiscal, o d'ofici.</li>
+      <li>▸ <b>Davant qui:</b> Jutge d'Instrucció del lloc de detenció.</li>
+      <li>▸ <b>Obligació policial:</b> posar el detingut a disposició judicial <b>immediatament</b> un cop rebuda l'ordre. No pot demorar-se.</li>
+      <li>▸ <b>El jutge:</b> en 24 h decideix si la detenció és legal o la declara il·legal i ordena la llibertat immediata.</li>
+    </ul>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div><b>Causes de detenció il·legal:</b> sense causa legal, fora dels casos previstos, amb garanties infringides, o termini <b>superat</b>. Qualsevol activa l'habeas corpus.</div>
+    </div>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>Si reps una sol·licitud d'habeas corpus dirigida al jutge, l'has de traslladar <b>immediatament</b> sense filtres ni demores. Ignorar-la pot ser delicte (<b>art. 530 CP</b>).</div>
+    </div>
+  </article>
+
+  <!-- ═══ ENTRADA I REGISTRE ═══ -->
+  <div class="section-head" style="--accent:#1f8a4d;">
+    <span class="eyebrow">🏠 ENTRADA I REGISTRE EN DOMICILI · ARTS. 545–572 · 18 CE</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 18.2 CE</span>
+      <span class="tag-sm ok">REGLA GENERAL</span>
+      <h4>Inviolabilitat del domicili</h4>
+    </header>
+    <p>El domicili és <b>inviolable</b>. Ningú pot entrar sense consentiment del titular o resolució judicial, llevat de delicte flagrant.</p>
+    <ul>
+      <li>✔ Amb autorització judicial (interlocutòria motivada).</li>
+      <li>✔ Amb consentiment del titular.</li>
+      <li>✔ Delicte flagrant — urgència (art. 553).</li>
+    </ul>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Arts. 546–556</span>
+      <span class="tag-sm ok">PROCEDIMENT</span>
+      <h4>Amb autorització judicial</h4>
+    </header>
+    <ol class="steps-list" style="--accent:#1f8a4d;">
+      <li><span class="stnum">1</span><div>Sol·licitar <b>interlocutòria d'entrada i registre</b> al Jutjat de Guàrdia (per escrit o telefònicament amb confirmació posterior).</div></li>
+      <li><span class="stnum">2</span><div>La interlocutòria ha d'especificar: <b>domicili concret, finalitat, funcionaris autoritzats i termini</b> (habitualment 3 dies).</div></li>
+      <li><span class="stnum">3</span><div>El registre es fa <b>de dia</b> (llevat d'urgència o autorització nocturna expressa). Sempre amb el <b>secretari judicial</b> o fedatari.</div></li>
+      <li><span class="stnum">4</span><div>Presència de l'<b>interessat o familiar</b>. Si no hi és, dos testimonis del lloc.</div></li>
+      <li><span class="stnum">5</span><div>Aixecar <b>acta detallada</b> de tot el trobat i intervingut. Signatura de tots els presents.</div></li>
+    </ol>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>L'acta del registre és <b>prova documental clau</b>. Fotografiar i referenciar cada efecte intervingut abans de moure'l. Numerar cada objecte.</div>
+    </div>
+  </article>
+
+  <article class="art-card danger" style="--accent:#E5484D;">
+    <header>
+      <span class="art-badge">Art. 553</span>
+      <span class="tag-sm danger">⚡ URGÈNCIA</span>
+      <h4>Entrada en delicte flagrant (sense ordre judicial)</h4>
+    </header>
+    <p>Excepció constitucional. La Policia pot entrar <b>sense ordre judicial</b> quan sigui necessari per <b>impedir o interrompre un delicte flagrant</b>.</p>
+    <ul>
+      <li>▸ <b>Delicte flagrant:</b> el delicte s'està cometent o s'acaba de cometre (fum, crits, víctima visible…).</li>
+      <li>▸ També si hi ha <b>persecució ininterrompuda</b> del sospitós que es refugia en un domicili.</li>
+      <li>▸ L'entrada ha de ser <b>proporcional i mínima</b>: només el necessari per cessar el delicte.</li>
+      <li>▸ Comunicació <b>immediata</b> al jutge de guàrdia després de l'entrada (mai més tard del torn).</li>
+    </ul>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div>Si després d'entrar no es confirma el delicte flagrant, l'entrada pot declarar-se <b>il·lícita</b> i el confiscat pot ser prova nul·la (<b>art. 11.1 LOPJ</b>).</div>
+    </div>
+    <div class="info warn">
+      <span class="ico">ℹ️</span>
+      <div><b>Consentiment del titular:</b> ha de ser lliure, informat i exprés. Si hi ha dubtes, esperar l'ordre judicial. Un consentiment viciat invalida l'entrada.</div>
+    </div>
+  </article>
+
+  <!-- ═══ DILIGÈNCIES ═══ -->
+  <div class="section-head" style="--accent:#9747D6;">
+    <span class="eyebrow">🔍 DILIGÈNCIES D'INVESTIGACIÓ · ARTS. 326–367 · 574–588</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#9747D6;">
+    <header>
+      <span class="art-badge">Arts. 326–333</span>
+      <span class="tag-sm purple">PRIMERA DILIGÈNCIA</span>
+      <h4>Inspecció ocular</h4>
+    </header>
+    <p>Examen directe i documentat del <b>lloc dels fets</b>. És la primera diligència a practicar. L'escena del crim ha de preservar-se abans de res.</p>
+    <ul>
+      <li>▸ <b>Acordonar</b> la zona. Establir perímetres de seguretat (intern i extern).</li>
+      <li>▸ <b>Fotografia i vídeo:</b> documentar l'escena abans de tocar res (pla general → pla mig → detall).</li>
+      <li>▸ <b>Croquis</b> acotat de l'escena amb indicació de cada evidència.</li>
+      <li>▸ Recollida de vestigis amb <b>guants i embalatges individuals</b> etiquetats (cadena de custòdia).</li>
+      <li>▸ Identificar i separar testimonis presencials abans que intercanviïn informació.</li>
+    </ul>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>Com menys es contamini l'escena, més valor tindran les proves. Limitar l'accés al mínim imprescindible.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9747D6;">
+    <header>
+      <span class="art-badge">Arts. 385–409 · 520</span>
+      <span class="tag-sm purple">DECLARACIÓ</span>
+      <h4>Declaració del detingut / testimoni</h4>
+    </header>
+    <p>Tota declaració en seu policial <b>té valor de denúncia</b>. Per tenir valor probatori s'ha de ratificar davant el jutge.</p>
+    <ul>
+      <li>▸ <b>Detingut:</b> sempre amb advocat present (llevat de renúncia expressa i lliure). Informar drets abans.</li>
+      <li>▸ <b>Testimoni:</b> no té dret a lletrat però sí a no declarar contra familiars (<b>art. 416</b>).</li>
+      <li>▸ Transcriure literalment. <b>No resumir</b> ni interpretar les manifestacions.</li>
+      <li>▸ Signar cada pàgina. Si es nega, fer-ho constar expressament.</li>
+    </ul>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div><b>Art. 416 LECrim:</b> els parents de l'investigat en línia directa, col·laterals fins al 2n grau i cònjuge estan <b>dispensats de declarar</b>. Han de ser informats d'aquesta dispensa.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9747D6;">
+    <header>
+      <span class="art-badge">Arts. 369–374</span>
+      <span class="tag-sm purple">RECONEIXEMENT</span>
+      <h4>Reconeixement en roda</h4>
+    </header>
+    <p>Diligència per identificar el sospitós quan la víctima o testimoni diu conèixer-lo. S'ha de fer amb <b>garanties d'imparcialitat</b>.</p>
+    <ul>
+      <li>▸ Mínim <b>4–5 persones</b> amb característiques similars (estatura, complexió, edat, raça).</li>
+      <li>▸ El sospitós tria la seva posició. No pot ser destacat visualment.</li>
+      <li>▸ La víctima/testimoni: <b>sol, sense pressió</b>. Declarar si reconeix i amb quin grau de seguretat.</li>
+      <li>▸ Presència de l'<b>advocat defensor</b> (si el sospitós està detingut).</li>
+      <li>▸ Fotografiar la roda completa. Documentar tot a l'acta.</li>
+    </ul>
+    <div class="info warn">
+      <span class="ico">ℹ️</span>
+      <div>Alternativa: <b>àlbum fotogràfic</b> quan no hi ha detingut. Ha de contenir prou fotos neutrals i no induir el testimoni.</div>
+    </div>
+  </article>
+
+  <article class="art-card danger" style="--accent:#E5484D;">
+    <header>
+      <span class="art-badge">Arts. 588 bis – octies</span>
+      <span class="tag-sm danger">SEMPRE INTERLOCUTÒRIA</span>
+      <h4>Intercepció de comunicacions / dispositius</h4>
+    </header>
+    <p>Escoltes telefòniques, accés a dispositius electrònics, captació d'imatges. <b>SEMPRE requereixen autorització judicial prèvia</b> (<b>art. 18.3 CE</b>).</p>
+    <ul>
+      <li>🔴 Sempre amb <b>interlocutòria judicial motivada</b>.</li>
+      <li>⏱ Termini inicial: <b>3 mesos</b> (prorrogable).</li>
+      <li>⚖️ Proporcionalitat, necessitat, excepcionalitat.</li>
+    </ul>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div>Accedir a un mòbil sense autorització judicial és <b>inconstitucional</b> (art. 18.3 CE). Les proves obtingudes seran <b>nul·les</b> (<b>art. 11.1 LOPJ</b>). Excepció: el mateix titular consent.</div>
+    </div>
+  </article>
+
+  <!-- ═══ MESURES CAUTELARS ═══ -->
+  <div class="section-head" style="--accent:#9c3a08;">
+    <span class="eyebrow">🔗 MESURES CAUTELARS · ARTS. 502–544</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Arts. 502–519</span>
+      <span class="tag-sm warn">SOLO EL JUTGE</span>
+      <h4>Presó provisional</h4>
+    </header>
+    <p>Privació de llibertat acordada pel jutge abans de condemna. Mesura excepcional, subsidiària i revisable.</p>
+    <ul>
+      <li>▸ <b>Requisits:</b> delicte amb pena &gt; 2 anys, indicis de criminalitat, risc de fuga / destrucció de proves / reiteració delictiva.</li>
+      <li>▸ <b>Termini ordinari:</b> 1 any (prorrogable fins a 2 anys). Greus o molt complexos fins a 4 anys.</li>
+    </ul>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>La Policia <b>no acorda</b> presó provisional. Només la sol·licita al Fiscal perquè la demani al jutge en la compareixença.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#E5484D;">
+    <header>
+      <span class="art-badge">Arts. 544 bis – 544 ter</span>
+      <span class="tag-sm nuevo">⚡ Reforma LO 1/2026</span>
+      <h4>Ordre d'allunyament / protecció</h4>
+    </header>
+    <p>Mesura cautelar que <b>prohibeix l'investigat</b> aproximar-se o comunicar-se amb la víctima.</p>
+    <ul>
+      <li>▸ <b>Ordre d'allunyament (544 bis):</b> en qualsevol delicte. La dicta el jutge.</li>
+      <li>▸ <b>Ordre de protecció (544 ter):</b> específica per a VG/VD. Acumulable amb mesures civils (ús habitatge, custòdia).</li>
+      <li>▸ <b>LO 1/2026:</b> es reforcen les mesures cautelars de prohibició de residència o aproximació, ampliant l'abast en casos de reincidència i multireincidència patrimonial.</li>
+    </ul>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div>El trencament de l'OAP és <b>delicte autònom</b> (<b>art. 468 CP</b>), fins i tot si la víctima consent. <b>Actuar d'ofici sempre.</b></div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Arts. 528–544</span>
+      <span class="tag-sm ok">LLIBERTAT</span>
+      <h4>Llibertat provisional amb / sense càrrecs</h4>
+    </header>
+    <p>El jutge pot acordar llibertat amb <b>fiança, obligació de comparèixer, retirada de passaport</b> o prohibició d'absentar-se del territori.</p>
+    <ul>
+      <li>✔ Fiança (econòmica o personal).</li>
+      <li>✔ Presentació periòdica en dependències.</li>
+      <li>✔ Retirada de passaport.</li>
+      <li>❌ Incompliment → <b>presó provisional</b>.</li>
+    </ul>
+  </article>
+
+  <!-- ═══ DENÚNCIA I QUERELLA ═══ -->
+  <div class="section-head" style="--accent:#2F6BD8;">
+    <span class="eyebrow">📝 DENÚNCIA, QUERELLA I FORMES D'INICI · ARTS. 259–278 · 102–127</span>
+    <span class="rule"></span>
+  </div>
+
+  <div class="twocol">
+    <article class="art-card" style="--accent:#2F6BD8;">
+      <header>
+        <span class="art-badge">Arts. 259–269</span>
+        <span class="tag-sm">DENÚNCIA</span>
+        <h4>Denúncia</h4>
+      </header>
+      <p>Comunicació d'un fet presumptament delictiu a l'autoritat. <b>No requereix advocat ni procurador.</b></p>
+      <ul>
+        <li>▸ <b>Obligació de denunciar</b> (art. 259): tot ciutadà que presenciï un delicte públic. Excepcions: advocats, metges (secret professional), familiars.</li>
+        <li>▸ Pot presentar-se davant Policia, Guàrdia Civil, Jutjat o Fiscalia.</li>
+        <li>▸ <b>Verbal o escrita.</b> Sempre amb signatura i identificació del denunciant.</li>
+        <li>▸ El denunciant <b>no és part</b> en el procés (llevat que exerceixi l'acció penal mitjançant querella).</li>
+      </ul>
+      <div class="info warn">
+        <span class="ico">ℹ️</span>
+        <div><b>Denúncia anònima:</b> la Policia pot iniciar investigació, però no pot ser l'única base per detenir o registrar. Requereix verificació.</div>
+      </div>
+    </article>
+    <article class="art-card" style="--accent:#9747D6;">
+      <header>
+        <span class="art-badge">Arts. 270–281</span>
+        <span class="tag-sm purple">QUERELLA</span>
+        <h4>Querella</h4>
+      </header>
+      <p>El querellant <b>es converteix en part acusadora</b> en el procés. Requereix advocat i procurador. Ha d'anar davant del jutge competent.</p>
+      <ul>
+        <li>🔴 Només amb advocat + procurador.</li>
+        <li>📍 Davant el jutjat competent.</li>
+        <li>✔ Querellant = acusació particular.</li>
+      </ul>
+    </article>
+  </div>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Arts. 104–107</span>
+      <span class="tag-sm">TIPUS DE DELICTES</span>
+      <h4>Delictes públics / semipúblics / privats</h4>
+    </header>
+    <table class="ntable">
+      <thead><tr><th>Tipus</th><th>Qui pot perseguir</th><th>Exemples</th></tr></thead>
+      <tbody>
+        <tr><td><b>Públic</b></td><td>Policia d'ofici, Fiscal i qualsevol ciutadà</td><td>Robatori, homicidi, atemptat, tràfic drogues</td></tr>
+        <tr><td><b>Semipúblic</b></td><td>Només amb denúncia de l'ofès (o representant)</td><td>Agressió sexual (llevat menors), lesions lleus, maltractes</td></tr>
+        <tr><td><b>Privat</b></td><td>Només per querella de l'ofès. Mai Fiscal ni Policia.</td><td>Injúries i calúmnies entre particulars</td></tr>
+      </tbody>
+    </table>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div>En delictes semipúblics amb <b>menors o persones amb discapacitat</b>, el Fiscal pot actuar encara que no hi hagi denúncia.</div>
+    </div>
+  </article>
+
+  <!-- ═══ PROCEDIMENTS ═══ -->
+  <div class="section-head" style="--accent:#9c7a1f;">
+    <span class="eyebrow">🏛️ TIPUS DE PROCEDIMENT PENAL · ARTS. 757–803 BIS · JUDICIS RÀPIDS</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#9c7a1f;">
+    <header>
+      <span class="art-badge">Comparativa</span>
+      <span class="tag-sm warn">VISTA GENERAL</span>
+      <h4>Tipus de procediment</h4>
+    </header>
+    <table class="ntable">
+      <thead><tr><th>Procediment</th><th>Quan s'aplica</th><th>Òrgan competent</th></tr></thead>
+      <tbody>
+        <tr><td><b>Judici de delictes lleus</b></td><td>Delicte lleu (pena ≤ 3 mesos presó o multa)</td><td>Jutjat d'Instrucció / Pau</td></tr>
+        <tr><td><b>Proc. abreujat</b></td><td>Delictes amb pena ≤ 9 anys</td><td>Jutjat Penal / Audiència Prov.</td></tr>
+        <tr><td><b>Proc. ordinari</b></td><td>Delictes greus (pena &gt; 9 anys)</td><td>Audiència Provincial (Jurat si correspon)</td></tr>
+        <tr><td><b>Judici ràpid</b></td><td>Delicte flagrant, pena ≤ 5 anys, autor detingut</td><td>Jutjat Guàrdia → Jutjat Penal</td></tr>
+        <tr><td><b>Tribunal del Jurat</b></td><td>Delictes taxats (homicidi, allanamiento…)</td><td>Audiència Provincial amb jurat</td></tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article class="art-card warn" style="--accent:#E89A1C;">
+    <header>
+      <span class="art-badge">Arts. 795–803</span>
+      <span class="tag-sm warn">⏱ TERMINIS ESTRICTES</span>
+      <h4>Judici ràpid · rol policial clau</h4>
+    </header>
+    <p>El judici ràpid s'inicia quan hi ha detingut o imputat citat, el delicte és flagrant i la instrucció és senzilla. La Policia té un paper <b>central i urgent</b>.</p>
+    <ol class="steps-list" style="--accent:#E89A1C;">
+      <li><span class="stnum">1</span><div>La Policia deté / cita l'imputat + recull atestat.</div></li>
+      <li><span class="stnum">2</span><div>Traslladar el detingut al <b>Jutjat de Guàrdia en el termini més breu possible</b>. Límit: dia hàbil següent.</div></li>
+      <li><span class="stnum">3</span><div>L'atestat del judici ràpid inclou: oferiment d'accions a la víctima, sol·licitud d'ordre de protecció si correspon.</div></li>
+      <li><span class="stnum">4</span><div>El jutge de guàrdia celebra la compareixença i pot <b>dictar sentència de conformitat</b> en el mateix acte.</div></li>
+    </ol>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>En el judici ràpid, l'atestat ha d'incloure l'<b>oferiment d'accions</b> a la víctima (<b>art. 771.1</b>) i la informació sobre les <b>OAP</b> si aplica. Sense això, l'expedient pot tornar.</div>
+    </div>
+  </article>
+
+  <!-- ═══ PROVA I NUL·LITAT ═══ -->
+  <div class="section-head" style="--accent:#E5484D;">
+    <span class="eyebrow">🧪 PROVA, NUL·LITAT I TUTELA JUDICIAL · ARTS. 656–731 · ART. 11.1 LOPJ</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Principis</span>
+      <span class="tag-sm ok">PROVA</span>
+      <h4>Principis de la prova penal</h4>
+    </header>
+    <ul>
+      <li>✔ <b>Contradicció</b></li>
+      <li>✔ <b>Publicitat</b></li>
+      <li>✔ <b>Immediació</b> (davant el jutge)</li>
+      <li>✔ <b>Oralitat</b></li>
+      <li>⚖️ <b>Presumpció d'innocència</b> (art. 24 CE)</li>
+    </ul>
+    <p>Només té valor de <b>prova plena</b> la practicada en judici oral amb totes les garanties. Les diligències policials són <b>preprocessuals</b> (valor de denúncia).</p>
+  </article>
+
+  <article class="art-card danger">
+    <header>
+      <span class="art-badge">Art. 11.1 LOPJ</span>
+      <span class="tag-sm danger">NUL·LITAT</span>
+      <h4>Nul·litat de la prova · arbre del fruit enverinat</h4>
+    </header>
+    <p>Les proves obtingudes <b>vulnerant drets fonamentals</b> són nul·les de ple dret. I les proves derivades també (<i>"fruit de l'arbre enverinat"</i>).</p>
+    <ul>
+      <li>▸ <b>Entrada sense ordre</b> ni flagrància → l'incautat: nul.</li>
+      <li>▸ <b>Mòbil accedit sense autorització</b> → missatges i contactes: nuls.</li>
+      <li>▸ <b>Declaració sense lletrat</b> (quan era obligatòria) → declaració: nul·la.</li>
+      <li>▸ <b>Escolta sense interlocutòria</b> → gravació i tot derivat: nul.</li>
+    </ul>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div>Una sola actuació policial irregular pot arruïnar tot el treball d'investigació. La <b>legalitat en l'obtenció de la prova</b> és tan important com trobar-la.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Art. 771.1</span>
+      <span class="tag-sm">VÍCTIMA</span>
+      <h4>Oferiment d'accions a la víctima</h4>
+    </header>
+    <p>La Policia Judicial té l'obligació d'<b>informar la víctima</b> del seu dret a mostrar-se part en el procés i exercir l'acció penal i civil.</p>
+    <ul>
+      <li>▸ Informar del dret a exercir l'<b>acció penal</b> (querellar-se o mantenir-se com a denunciant).</li>
+      <li>▸ Informar del dret a <b>indemnització</b> (responsabilitat civil derivada del delicte).</li>
+      <li>▸ Informar dels <b>serveis d'assistència a víctimes</b> disponibles.</li>
+      <li>▸ Recollir la seva voluntat en diligència separada signada per la víctima.</li>
+    </ul>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div><b>Obligatori en tot atestat amb víctima identificada.</b> Ometre-ho és defecte processal que pot retardar el judici ràpid.</div>
+    </div>
+  </article>
+
+  <!-- ═══ RECORDA ═══ -->
+  <section class="recorda">
+    <header>
+      <span class="eyebrow" style="color:#9c7a1f;">📋 RECORDA · CLAUS LECRIM</span>
+      <span class="rule"></span>
+    </header>
+    <ul class="reclist">
+      <li><div>L'<b>atestat</b> és denúncia, no prova. Les declaracions hi recollides s'han de ratificar en seu judicial per tenir valor probatori ple.</div></li>
+      <li><div><b>Termini detenció:</b> 6 h per lliurar al jutge o alliberar · 72 h màxim constitucional. El còmput comença al moment efectiu de la detenció.</div></li>
+      <li><div>Els <b>drets del detingut</b> (art. 520) es llegeixen <b>immediatament</b>, abans de qualsevol diligència. El formulari signat va a l'atestat.</div></li>
+      <li><div>El <b>domicili és inviolable</b>. Només s'hi entra amb interlocutòria judicial, consentiment del titular o delicte flagrant. En aquest darrer cas, comunicar al jutge immediatament.</div></li>
+      <li><div>Una prova obtinguda vulnerant drets fonamentals és <b>nul·la</b> i arrossega en la nul·litat tot el derivat (<b>art. 11.1 LOPJ</b>).</div></li>
+      <li><div>L'<b>habeas corpus</b> s'ha de tramitar immediatament. Retardar el seu trasllat al jutge pot ser delicte (<b>art. 530 CP</b>).</div></li>
+      <li><div>En el <b>judici ràpid</b>: portar l'atestat complet amb oferiment d'accions i, si correspon, sol·licitud d'OAP. Sense això, l'expedient torna.</div></li>
+      <li><div>L'<b>art. 416</b> dispensa parents directes i cònjuge de declarar. Han de ser informats d'aquesta dispensa abans de la seva declaració.</div></li>
+      <li><div>Accedir a un <b>telèfon mòbil</b> sense ordre judicial és inconstitucional. Sense importar la urgència aparent: <b>demanar autorització primer</b>.</div></li>
+      <li><div>⚡ <b>LO 1/2026:</b> es reforcen les mesures cautelars de prohibició de residència/aproximació. Coordinació activa amb el Jutjat de Guàrdia en casos de reincidència patrimonial.</div></li>
+      <li><div><b>Cadena de custòdia:</b> documentar cada trasllat d'evidències (qui, quan, com). Una ruptura pot invalidar la prova.</div></li>
+      <li><div><b>Llei orgànica vs ordinària:</b> la LECrim és una llei ordinària, però és modificada habitualment per lleis orgàniques (com la LO 1/2026).</div></li>
+      <li><div><b>Detenció per identificació</b> (LOPSC): màx. 6 h en dependències · només per identificar, no per interrogar.</div></li>
+      <li><div><b>Trencament de l'OAP</b> (art. 468 CP): delicte autònom · actuar d'ofici fins i tot amb consentiment de la víctima.</div></li>
+      <li><div><b>Inspecció ocular:</b> primera diligència · acordonar · fotografiar abans de tocar · cadena de custòdia rigorosa.</div></li>
+      <li><div><b>Reconeixement en roda:</b> 4-5 persones similars · sospitós tria posició · advocat present si està detingut.</div></li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>

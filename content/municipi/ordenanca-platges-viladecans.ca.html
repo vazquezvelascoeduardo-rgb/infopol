@@ -3,1230 +3,855 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ordenança d'ús de les Platges de Viladecans 2013 — Esquema Operatiu Policial</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Ordenança Platges Viladecans — Esquema Operatiu Policial</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* Ordenança Platges Viladecans — fitxa rebranding 2026 */
   :root {
-    --bg-main: #0A1628;
-    --bg-section: #0E2244;
-    --gold: #C8A028;
-    --blue-royal: #1A5C96;
-    --red: #C8281E;
-    --green: #1A7A3C;
-    --text-main: #F0F4FF;
-    --text-secondary: #A8BAD4;
-    --border: #C8A028;
+    --ink: #0E0E0E; --paper: #FAF6EF; --paper-2: #F2EDE3; --white: #FFFFFF;
+    --terracotta: #F26B1F; --terracotta-soft: #FFE9D8;
+    --text: #0E0E0E; --text-2: #4a4744; --text-3: #807c77;
+    --line: rgba(14, 14, 14, 0.10); --line-2: rgba(14, 14, 14, 0.06);
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
   body {
-    background-color: var(--bg-main);
-    background-image:
-      radial-gradient(ellipse at 20% 10%, rgba(26,92,150,0.18) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 90%, rgba(200,160,40,0.08) 0%, transparent 50%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
-    font-family: 'Source Sans 3', sans-serif;
-    color: var(--text-main);
-    padding: 20px 12px 40px;
+    background: var(--paper); color: var(--text);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    line-height: 1.5; -webkit-font-smoothing: antialiased;
+    padding: 12px 8px 40px;
   }
-
-  .wrapper { max-width: 720px; margin: 0 auto; }
-
-  /* ── CABECERA ── */
-  .header {
-    display: flex; align-items: center; gap: 18px;
-    background: linear-gradient(135deg, #0E1E3A 0%, #0A1628 100%);
-    border: 2px solid var(--gold);
-    border-radius: 10px;
-    padding: 22px 24px;
-    margin-bottom: 8px;
-    animation: fadeUp .5s ease both;
-    box-shadow: 0 4px 32px rgba(200,160,40,0.12);
+  a { color: inherit; text-decoration: none; }
+  .wrapper { max-width: 1080px; margin: 0 auto; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
   }
-  .escudo svg { flex-shrink: 0; }
-  .header-text { flex: 1; }
-  .header-text .label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 10px; letter-spacing: 3px;
-    color: var(--gold); text-transform: uppercase;
-  }
-  .header-text h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 26px; font-weight: 700;
-    text-transform: uppercase;
-    color: var(--text-main); line-height: 1.1;
-  }
-  .header-text h1 span { color: var(--gold); }
-  .header-text .subtitle {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-top: 4px;
-  }
-
-  /* ── CLASIFICACIÓN GENERAL (3 tipos infraccions) ── */
-  .clasificacion {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px; margin-bottom: 14px;
-    animation: fadeUp .6s ease .1s both;
-  }
-  .clas-card {
-    border-radius: 8px;
-    padding: 12px 10px;
-    text-align: center;
-    border: 1px solid rgba(200,160,40,0.3);
-  }
-  .clas-card .icon { font-size: 22px; margin-bottom: 4px; }
-  .clas-card .tipo {
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1px;
-  }
-  .clas-card .pena-max {
-    font-size: 11px;
-    color: var(--text-secondary);
-    margin-top: 3px;
-  }
-  .clas-leve   { background: rgba(26,122,60,0.15); border-color: var(--green); }
-  .clas-menos  { background: rgba(26,92,150,0.2);  border-color: var(--blue-royal); }
-  .clas-grave  { background: rgba(200,40,30,0.15); border-color: var(--red); }
-  .clas-leve .tipo   { color: #4ACD7A; }
-  .clas-menos .tipo  { color: #6AADDC; }
-  .clas-grave .tipo  { color: #E86050; }
-
-  /* ── BANNER INFO ── */
-  .info-banner {
-    background: linear-gradient(135deg, #12345E 0%, #1A5C96 50%, #12345E 100%);
-    border: 2px solid #6AADDC;
-    border-radius: 8px;
-    padding: 10px 18px;
-    margin-bottom: 18px;
+  .section-head {
     display: flex; align-items: center; gap: 12px;
-    animation: fadeUp .55s ease .05s both;
-    box-shadow: 0 0 20px rgba(26,92,150,0.3);
+    margin: 32px 0 14px; flex-wrap: wrap;
   }
-  .info-banner .ref-icon { font-size: 22px; flex-shrink: 0; }
-  .info-banner .ref-text { flex: 1; }
-  .info-banner .ref-ley {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1.5px;
-    color: #D8EBFF;
+  .section-head::before {
+    content: ""; display: block; width: 4px; height: 22px;
+    background: var(--accent, var(--terracotta)); border-radius: 2px; flex: none;
   }
-  .info-banner .ref-desc {
-    font-size: 12px;
-    color: rgba(216,235,255,0.85);
-    margin-top: 2px;
+  .section-head .eyebrow { color: var(--accent, var(--ink)); flex: none; }
+  .section-head .rule { flex: 1; height: 1px; background: var(--line); min-width: 30px; }
+
+  /* HERO turquesa (color platja) */
+  .ce-hero {
+    display: grid; grid-template-columns: auto 1fr; gap: 24px;
+    align-items: center;
+    background: linear-gradient(180deg, #DDF4F4 0%, #87d6d6 100%);
+    border: 1px solid #57b8b8; border-radius: 18px;
+    padding: 26px 30px; margin-top: 8px;
   }
-  .info-banner .ref-fecha {
-    font-family: 'Oswald', sans-serif;
-    font-size: 12px; font-weight: 700;
-    color: #D8EBFF;
-    background: rgba(0,0,0,0.25);
-    padding: 4px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    border: 1px solid rgba(216,235,255,0.3);
-    text-align: center;
+  .ce-shield { flex: none; }
+  .ce-title {
+    margin: 4px 0 6px; font-size: 38px; font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.05; color: #0a4d4d;
+  }
+  .ce-title .accent { color: #0E8A8A; }
+  .ce-sub { margin: 0; color: #0a4d4d; font-size: 15px; max-width: 760px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .hero-tags .tag {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #57b8b8;
+    padding: 4px 11px; border-radius: 999px;
+    font-size: 12.5px; font-weight: 600; color: #0a4d4d;
+  }
+  .hero-tags .tag.hot { background: #DDF4F4; border-color: #0E8A8A; color: #0a4d4d; font-weight: 800; }
+
+  .clasif-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-top: 16px;
+  }
+  .clasif {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 14px; padding: 16px 18px;
+    border-top: 3px solid var(--accent);
+  }
+  .clasif h4 {
+    margin: 2px 0 6px; font-size: 15px; font-weight: 800;
+    color: var(--accent); letter-spacing: 0.03em; text-transform: uppercase;
+  }
+  .clasif p { margin: 4px 0 0; font-size: 13px; color: var(--text-2); }
+  .clasif .ant {
+    font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+    color: var(--text-3); margin-top: 6px; display: block;
   }
 
-  /* ── BLOC PLATGES ── */
-  .platges-bloc {
-    background: linear-gradient(135deg, #0E2244 0%, #12345E 100%);
-    border: 1px solid var(--gold);
-    border-radius: 10px;
-    padding: 18px 20px;
-    margin-bottom: 18px;
-    animation: fadeUp .6s ease .15s both;
+  .meta-strip {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 16px; align-items: center;
+    background: #DDF4F4; border: 1px solid #57b8b8;
+    border-radius: 14px; padding: 14px 18px; margin-top: 14px;
   }
-  .platges-bloc h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14px; font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-    display: flex; align-items: center; gap: 8px;
+  .meta-strip h3 { margin: 0; color: #0a4d4d; font-size: 16px; font-weight: 800; }
+  .meta-strip p { margin: 4px 0 0; color: #0a4d4d; font-size: 14px; }
+  .vigente {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 6px 14px; background: white;
+    border: 1px solid #57b8b8; border-radius: 10px;
   }
+  .vigente .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); }
+  .vigente .state { font-weight: 800; color: #0E8A8A; }
+
+  /* 4 platges */
   .platges-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 10px; margin-top: 12px;
   }
   .platja {
-    background: rgba(10,22,40,0.6);
-    border-left: 3px solid var(--gold);
-    border-radius: 0 6px 6px 0;
-    padding: 8px 10px;
-    font-size: 12px;
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px 16px;
+    border-left: 3px solid #0E8A8A;
   }
+  .platja.protegida { border-left-color: #1f8a4d; background: #DFF7E9; border-color: #6dc290; }
   .platja .nom {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    color: var(--gold);
-    font-size: 12.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    display: block;
-    margin-bottom: 3px;
+    font-size: 14.5px; font-weight: 800; color: var(--ink);
+    display: block; margin-bottom: 4px;
   }
   .platja .desc {
-    color: var(--text-secondary);
-    line-height: 1.4;
-    font-size: 11.5px;
+    font-size: 12.5px; color: var(--text-2); line-height: 1.5;
   }
-  .platja.protegida { border-left-color: var(--green); }
-  .platja.protegida .nom { color: #4ACD7A; }
+  .platja .desc b { color: var(--ink); }
+  @media (max-width: 760px) { .platges-grid { grid-template-columns: 1fr; } }
 
-  /* ── BLOQUE CATEGORÍA ── */
-  .categoria {
-    background: var(--bg-section);
-    border-radius: 10px;
-    margin-bottom: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(200,160,40,0.2);
-    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  .art-card {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 14px; padding: 14px 18px;
+    border-left: 3px solid var(--accent, #0E8A8A);
+    margin-top: 10px;
   }
-  .categoria:nth-child(1)  { animation: fadeUp .6s ease .2s both; }
-  .categoria:nth-child(2)  { animation: fadeUp .6s ease .25s both; }
-  .categoria:nth-child(3)  { animation: fadeUp .6s ease .3s both; }
-  .categoria:nth-child(4)  { animation: fadeUp .6s ease .35s both; }
-  .categoria:nth-child(5)  { animation: fadeUp .6s ease .4s both; }
-  .categoria:nth-child(6)  { animation: fadeUp .6s ease .45s both; }
-  .categoria:nth-child(7)  { animation: fadeUp .6s ease .5s both; }
-  .categoria:nth-child(8)  { animation: fadeUp .6s ease .55s both; }
-
-  .cat-header {
-    background: var(--blue-royal);
-    padding: 12px 18px;
-    display: flex; align-items: center; gap: 12px;
-    cursor: pointer; user-select: none;
-    transition: background .2s;
-  }
-  .cat-header:hover { background: #1e6db0; }
-  .cat-header .cat-icon { font-size: 20px; }
-  .cat-header h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px; font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px; flex: 1;
-  }
-  .cat-header .art-ref {
-    font-size: 11px;
-    color: rgba(240,244,255,0.65);
-    white-space: nowrap;
-  }
-  .cat-header .toggle {
-    font-size: 14px;
-    transition: transform .3s;
-    color: var(--gold);
-  }
-  .cat-header.open .toggle { transform: rotate(180deg); }
-
-  .cat-body { padding: 6px 0; }
-
-  /* ── ARTÍCULO / DELITO ── */
-  .delito {
-    border-left: 3px solid var(--gold);
-    margin: 8px 14px;
-    background: rgba(10,22,40,0.5);
-    border-radius: 0 7px 7px 0;
-    padding: 10px 14px;
-  }
-  .delito-top {
-    display: flex; align-items: flex-start;
-    gap: 8px; flex-wrap: wrap;
-  }
-  .delito-nombre {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14.5px; font-weight: 600;
-    color: var(--text-main);
-    flex: 1; min-width: 160px;
+  .art-card.warn { background: #FFF6E8; border-color: #f3d6a0; border-left-color: #E89A1C; }
+  .art-card.danger { background: #FFEFEC; border-color: #f5c19a; border-left-color: #E5484D; }
+  .art-card header {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px;
   }
   .art-badge {
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif; font-weight: 700;
-    background: rgba(200,160,40,0.15);
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    padding: 2px 7px;
-    border-radius: 4px;
-    white-space: nowrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    background: var(--ink); color: var(--white);
+    padding: 4px 9px; border-radius: 6px; letter-spacing: 0.04em;
   }
-  .tipo-badge {
-    font-size: 10px;
-    font-family: 'Oswald', sans-serif; font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
+  .tag-sm {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 8px; border-radius: 6px; letter-spacing: 0.04em;
+    background: #EAF1FE; color: #1f4ea0;
   }
-  .badge-clave    { background: rgba(26,122,60,0.3);  color: #4ACD7A;  border: 1px solid var(--green); }
-  .badge-info     { background: rgba(26,92,150,0.35); color: #6AADDC;  border: 1px solid var(--blue-royal); }
-  .badge-grave    { background: rgba(200,40,30,0.3);  color: #E86050;  border: 1px solid var(--red); }
-  .badge-local    { background: rgba(200,140,0,0.2);  color: var(--gold); border: 1px solid rgba(200,160,40,0.5); }
+  .tag-sm.warn { background: #FFF6E8; color: #9c7a1f; }
+  .tag-sm.danger { background: #FFEFEC; color: #991b1b; }
+  .tag-sm.ok { background: #DFF7E9; color: #14532d; }
+  .tag-sm.purple { background: #F5E9FF; color: #5b21b6; }
+  .tag-sm.lleu { background: #DFF7E9; color: #14532d; }
+  .tag-sm.greu { background: #FFE9D8; color: #9c3a08; }
+  .tag-sm.muygreu { background: #FFEFEC; color: #991b1b; }
+  .tag-sm.teal { background: #DDF4F4; color: #0a4d4d; }
+  .art-card h4 {
+    margin: 0; font-size: 16px; font-weight: 800; letter-spacing: -0.015em;
+  }
+  .art-card p { margin: 6px 0; font-size: 14px; color: var(--text-2); line-height: 1.55; }
+  .art-card p b { color: var(--ink); }
+  .art-card ul { margin: 6px 0 0 18px; }
+  .art-card li { font-size: 13.5px; color: var(--text-2); padding: 2px 0; }
+  .art-card li b { color: var(--ink); }
 
-  /* ── CHAPA RÁPIDA ── */
-  .multa-badge {
-    font-size: 11px;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    background: var(--gold);
-    color: #0A1628;
-    padding: 3px 10px;
-    border-radius: 4px;
-    border: 1px solid var(--gold);
-    letter-spacing: 0.4px;
-    white-space: nowrap;
-    box-shadow: 0 1px 3px rgba(200,160,40,0.25);
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
+  .multa {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 700;
+    padding: 4px 10px; border-radius: 999px;
+    background: #FFF1D2; color: #9c7a1f;
   }
-  .multa-badge.multa-alta {
-    background: var(--red);
-    color: #FFEBE8;
-    border-color: var(--red);
-    box-shadow: 0 1px 3px rgba(200,40,30,0.3);
-  }
-  .multa-badge.multa-organ {
-    background: var(--blue-royal);
-    color: #E0F0FF;
-    border-color: var(--blue-royal);
-  }
-  .multa-badge.multa-ok {
-    background: var(--green);
-    color: #E0FFF0;
-    border-color: var(--green);
-  }
+  .multa.lleu { background: #DFF7E9; color: #14532d; }
+  .multa.greu { background: #FFE9D8; color: #9c3a08; }
+  .multa.muygreu { background: #FFEFEC; color: #991b1b; }
 
-  .delito-desc {
-    font-size: 12.5px;
-    color: var(--text-secondary);
-    margin-top: 5px;
-    line-height: 1.5;
-  }
-  .delito-desc b, .key { color: var(--gold); font-weight: 700; }
+  .twocol { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 760px) { .twocol { grid-template-columns: 1fr; } }
 
-  .pena-row {
-    display: flex; flex-wrap: wrap;
-    gap: 6px; margin-top: 7px;
+  .info {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 12px; align-items: start;
+    padding: 12px 14px; border-radius: 10px;
+    margin-top: 10px; font-size: 13px; line-height: 1.5;
   }
-  .pena-chip {
-    font-size: 11px;
-    background: rgba(26,92,150,0.25);
-    border: 1px solid rgba(26,92,150,0.6);
-    color: var(--text-main);
-    padding: 3px 9px;
-    border-radius: 20px;
-    display: flex; align-items: center; gap: 4px;
-  }
-  .pena-chip.positivo {
-    background: rgba(26,122,60,0.25);
-    border-color: rgba(26,122,60,0.6);
-  }
-  .pena-chip.agravada {
-    background: rgba(200,40,30,0.2);
-    border-color: rgba(200,40,30,0.5);
-  }
+  .info b { color: var(--ink); }
+  .info.tip { background: var(--paper-2); border-left: 3px solid var(--text-2); color: var(--text-2); }
+  .info.cop { background: #EAF1FE; border-left: 3px solid #2F6BD8; color: #1f3f7a; }
+  .info.warn { background: #FFF6E8; border-left: 3px solid #E89A1C; color: #6b5a30; }
+  .info.danger { background: #FFEFEC; border-left: 3px solid #E5484D; color: #7a1f1f; }
+  .info.green { background: #DFF7E9; border-left: 3px solid #1f8a4d; color: #14532d; }
+  .info .ico { font-size: 18px; }
 
-  /* ── MINI TABLA ── */
-  .mini-tabla {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    margin-top: 8px;
+  .ntable {
+    width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13.5px;
   }
-  .mini-tabla .celda {
-    background: rgba(10,22,40,0.6);
-    border: 1px solid rgba(200,160,40,0.2);
-    border-radius: 5px;
-    padding: 6px 9px;
-    font-size: 11.5px;
+  .ntable th {
+    text-align: left; padding: 8px 10px;
+    background: var(--paper-2); font-weight: 800; color: var(--ink);
+    font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
   }
-  .mini-tabla .celda b {
-    color: var(--gold);
-    font-family: 'Oswald', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 2px;
+  .ntable td {
+    padding: 8px 10px; border-top: 1px solid var(--line-2);
+    color: var(--text-2); vertical-align: top;
   }
+  .ntable b { color: var(--ink); }
 
-  /* ── TABLA COMPARATIVA ── */
-  .tabla-discip {
-    display: grid;
-    grid-template-columns: 1.2fr 2fr;
-    gap: 0;
-    margin-top: 8px;
-    background: rgba(10,22,40,0.7);
-    border: 1px solid rgba(200,160,40,0.3);
-    border-radius: 5px;
-    overflow: hidden;
-    font-size: 11.5px;
-  }
-  .tabla-discip.col3 { grid-template-columns: 0.8fr 0.8fr 1.4fr; }
-  .tabla-discip .td-header {
-    background: rgba(200,160,40,0.15);
-    color: var(--gold);
-    font-family: 'Oswald', sans-serif;
-    font-size: 9.5px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 4px 8px;
-    text-align: center;
-    border-right: 1px solid rgba(200,160,40,0.2);
-    border-bottom: 1px solid rgba(200,160,40,0.2);
-  }
-  .tabla-discip .td-header:last-child { border-right: none; }
-  .tabla-discip .td-cell {
-    padding: 5px 8px;
-    color: var(--text-main);
-    border-right: 1px solid rgba(200,160,40,0.1);
-    border-bottom: 1px solid rgba(200,160,40,0.1);
-  }
-  .tabla-discip .td-cell:last-child { border-right: none; }
-  .tabla-discip .td-pob {
-    color: var(--gold);
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-  }
-
-  /* ── BANDERES ── */
+  /* Banderes grid */
   .banderes-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-top: 8px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin-top: 12px;
   }
   .bandera {
-    border-radius: 6px;
-    padding: 8px 10px;
+    background: var(--white); border: 2px solid;
+    border-radius: 12px; padding: 14px;
     text-align: center;
-    font-size: 11px;
-    border: 2px solid;
   }
-  .bandera .ico {
-    font-size: 26px;
-    display: block;
-    margin-bottom: 3px;
-  }
+  .bandera .ico { font-size: 32px; display: block; margin-bottom: 6px; }
   .bandera .nom {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 12px;
-    margin-bottom: 2px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 800; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 4px;
   }
-  .bandera .desc {
-    font-size: 10.5px;
-    line-height: 1.3;
-  }
-  .bandera.verda  { background: rgba(26,122,60,0.18); border-color: var(--green); }
-  .bandera.verda .nom { color: #4ACD7A; }
-  .bandera.groga  { background: rgba(200,160,40,0.15); border-color: var(--gold); }
-  .bandera.groga .nom { color: var(--gold); }
-  .bandera.vermella { background: rgba(200,40,30,0.18); border-color: var(--red); }
-  .bandera.vermella .nom { color: #E86050; }
+  .bandera .desc { font-size: 12px; color: var(--text-2); line-height: 1.4; }
+  .bandera.verda { border-color: #1f8a4d; background: #DFF7E9; }
+  .bandera.verda .nom { color: #14532d; }
+  .bandera.groga { border-color: #c98a00; background: #FFF4D6; }
+  .bandera.groga .nom { color: #6b5004; }
+  .bandera.vermella { border-color: #C13030; background: #FFEFEC; }
+  .bandera.vermella .nom { color: #991b1b; }
 
-  /* ── NOTAS ── */
-  .nota-agrav {
-    margin-top: 6px; font-size: 11.5px;
-    color: #E08888;
-    background: rgba(200,40,30,0.08);
-    border-left: 2px solid var(--red);
-    padding: 5px 9px;
-    border-radius: 0 4px 4px 0;
-    line-height: 1.5;
+  /* Chips */
+  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chip {
+    font-size: 11.5px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    color: var(--text-2);
+    padding: 3px 9px; border-radius: 999px;
+    font-weight: 600;
   }
-  .nota-agrav b { color: #FF8070; }
-  .nota-policial {
-    margin-top: 6px; font-size: 11.5px;
-    color: #A8D4C0;
-    background: rgba(26,122,60,0.1);
-    border-left: 2px solid var(--green);
-    padding: 5px 9px;
-    border-radius: 0 4px 4px 0;
-    line-height: 1.5;
-  }
-  .nota-policial b { color: #4ACD7A; }
-  .nota-clave {
-    margin-top: 6px; font-size: 11.5px;
-    color: #E8D890;
-    background: rgba(200,160,40,0.1);
-    border-left: 2px solid var(--gold);
-    padding: 5px 9px;
-    border-radius: 0 4px 4px 0;
-    line-height: 1.5;
-  }
-  .nota-clave b { color: #FFD060; }
+  .chip.danger { background: #FFEFEC; border-color: #f5c19a; color: #991b1b; }
+  .chip.ok { background: #DFF7E9; border-color: #6dc290; color: #14532d; }
 
-  /* ── RECUERDA ── */
-  .recuerda {
-    background: var(--gold);
-    border-radius: 10px;
-    padding: 20px 22px;
-    margin-top: 6px;
-    animation: fadeUp .6s ease .8s both;
+  .recorda {
+    background: linear-gradient(180deg, #FFF6E8 0%, #FBE5B5 100%);
+    border: 1px solid #f3d6a0; border-radius: 18px;
+    padding: 22px 26px; margin-top: 28px;
   }
-  .recuerda h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px; font-weight: 700;
-    text-transform: uppercase;
-    color: #0A1628;
-    margin-bottom: 12px;
-    letter-spacing: 2px;
-    display: flex; align-items: center; gap: 8px;
+  .recorda header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
   }
-  .recuerda ul { list-style: none; }
-  .recuerda ul li {
-    font-size: 13px;
-    color: #0A1628;
-    padding: 5px 0;
-    display: flex; align-items: flex-start; gap: 6px;
-    border-bottom: 1px solid rgba(10,22,40,0.15);
-    line-height: 1.4;
+  .recorda .rule { flex: 1; height: 1px; background: #f3d6a0; }
+  .reclist {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px;
   }
-  .recuerda ul li:last-child { border-bottom: none; }
-  .recuerda ul li::before {
-    content: "▶";
-    font-size: 9px; margin-top: 4px;
-    flex-shrink: 0;
+  .reclist li {
+    display: grid; grid-template-columns: auto 1fr; gap: 10px;
+    align-items: start; padding: 8px 0;
+    border-bottom: 1px solid rgba(156, 122, 31, 0.18);
+    font-size: 13.5px; color: #6b5a30; line-height: 1.5;
   }
+  .reclist li::before { content: "▸"; color: #9c7a1f; font-weight: 800; }
+  .reclist b { color: var(--ink); }
 
-  /* ── BOTÓN IMPRIMIR ── */
-  .btn-print {
-    display: block; width: 100%;
-    margin-top: 20px;
-    padding: 14px;
-    background: var(--blue-royal);
-    border: 2px solid var(--gold);
-    color: var(--text-main);
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 2px;
-    border-radius: 8px;
-    cursor: pointer; transition: all .2s;
-    animation: fadeUp .6s ease .9s both;
-  }
-  .btn-print:hover {
-    background: var(--gold);
-    color: #0A1628;
-  }
-
-  /* ── DIVISOR ── */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin: 4px 14px 2px;
-    opacity: .35;
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 500px) {
-    .clasificacion { grid-template-columns: 1fr; }
-    .header-text h1 { font-size: 20px; }
-    .cat-header h2 { font-size: 14px; }
-    .multa-badge { font-size: 10.5px; padding: 2px 7px; }
-    .tabla-discip { grid-template-columns: 1fr 1.5fr; }
-    .platges-grid { grid-template-columns: 1fr; }
+  @media (max-width: 980px) {
+    .clasif-grid { grid-template-columns: 1fr; }
+    .meta-strip { grid-template-columns: 1fr; }
+    .reclist { grid-template-columns: 1fr; }
+    .ce-hero { grid-template-columns: 1fr; text-align: center; }
+    .ce-shield { margin: 0 auto; }
+    .ce-title { font-size: 28px; }
     .banderes-grid { grid-template-columns: 1fr; }
-  }
-
-  @media print {
-    body { background: white; color: black; }
-    .btn-print { display: none; }
-    .categoria { break-inside: avoid; }
-    .cat-body { display: block !important; }
   }
 </style>
 </head>
-<body>
+<body data-fitxa-style="rebrand-2026">
 <div class="wrapper">
 
-  <!-- CABECERA -->
-  <div class="header">
-    <div class="escudo">
-      <svg width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M32 2L4 14V36C4 52 16 65 32 70C48 65 60 52 60 36V14L32 2Z" fill="#0E2244" stroke="#C8A028" stroke-width="2"/>
-        <path d="M32 8L10 18V36C10 49 20 60 32 65C44 60 54 49 54 36V18L32 8Z" fill="#1A5C96" opacity=".4"/>
-        <text x="32" y="26" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">POLICIA</text>
-        <text x="32" y="36" text-anchor="middle" font-family="Oswald,sans-serif" font-size="9" font-weight="700" fill="#C8A028" letter-spacing="1">LOCAL</text>
-        <path d="M14 44 Q18 38 22 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
-        <path d="M50 44 Q46 38 42 44" stroke="#C8A028" stroke-width="1.2" fill="none"/>
-        <path d="M14 48 Q18 42 22 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
-        <path d="M50 48 Q46 42 42 48" stroke="#C8A028" stroke-width="1" fill="none" opacity=".7"/>
-        <polygon points="32,42 33.5,47 38,47 34.5,50 36,55 32,52 28,55 29.5,50 26,47 30.5,47" fill="#C8A028" opacity=".9"/>
+  <header class="ce-hero">
+    <div class="ce-shield">
+      <svg width="80" height="92" viewBox="0 0 80 92" fill="none">
+        <path d="M40 4 L74 13 V42 C74 62 60 78 40 88 C20 78 6 62 6 42 V13 Z" fill="#0a4d4d" stroke="#0E8A8A" stroke-width="2"/>
+        <text x="40" y="34" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="22" fill="#fff">🏖️</text>
+        <text x="40" y="56" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="9" fill="#fff" letter-spacing="1">PLATGES</text>
+        <text x="40" y="68" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#87d6d6" letter-spacing="1">VILADECANS</text>
+        <text x="40" y="80" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="8" fill="#87d6d6" letter-spacing="1">2013</text>
       </svg>
     </div>
-    <div class="header-text">
-      <div class="label">Esquema Operatiu Policial</div>
-      <h1>Ordenança Platges <span>Viladecans</span></h1>
-      <div class="subtitle">Ús, normes higienicosanitàries, vigilància, infraccions i sancions · Aplicació operativa PL</div>
+    <div>
+      <div class="eyebrow" style="color:#0a4d4d;">ESQUEMA OPERATIU · POLICIA LOCAL</div>
+      <h1 class="ce-title">PLATGES · <span class="accent">VILADECANS</span></h1>
+      <p class="ce-sub">Ordenança d'ús de les platges de Viladecans · 39 articles · 5 títols. Regula ús, normes higienicosanitàries, vigilància, infraccions i sancions. Aplicació operativa per a la Policia Local.</p>
+      <div class="hero-tags">
+        <span class="tag hot">📅 Vigor 07/05/2013</span>
+        <span class="tag">📰 BOPB 7 maig 2013</span>
+        <span class="tag">📘 39 articles · 5 títols</span>
+        <span class="tag">🌊 2.650 m de litoral</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="clasif-grid">
+    <div class="clasif" style="--accent:#1f8a4d;">
+      <h4>Lleus</h4>
+      <p>Multa <b>fins 750 €</b></p>
+      <span class="ant">Art. 38.5 + 39</span>
+    </div>
+    <div class="clasif" style="--accent:#9c3a08;">
+      <h4>Greus</h4>
+      <p>Multa <b>750,01 – 1.500 €</b></p>
+      <span class="ant">Art. 38.4 + 39</span>
+    </div>
+    <div class="clasif" style="--accent:#991b1b;">
+      <h4>Molt Greus</h4>
+      <p>Multa <b>1.500,01 – 3.000 €</b></p>
+      <span class="ant">Art. 38.3 + 39</span>
+    </div>
+  </section>
+
+  <div class="meta-strip">
+    <div>
+      <h3>🏖️ Ordenança d'ús de les Platges de Viladecans</h3>
+      <p>Aprovació definitiva 31 gener 2013 · BOPB 7 maig 2013 · 39 articles · 5 títols · Potestat sancionadora: <b>Alcalde</b> · 2.650 m de litoral.</p>
+    </div>
+    <div class="vigente">
+      <span class="when">Vigor</span>
+      <span class="state">07/05/2013</span>
     </div>
   </div>
 
-  <!-- CLASIFICACIÓN INFRACCIONS -->
-  <div class="clasificacion">
-    <div class="clas-card clas-leve">
-      <div class="icon">🟢</div>
-      <div class="tipo">Lleus</div>
-      <div class="pena-max">Art. 38.5 + 39<br>Fins a <b style="color:#4ACD7A">750 €</b></div>
-    </div>
-    <div class="clas-card clas-menos">
-      <div class="icon">🟡</div>
-      <div class="tipo">Greus</div>
-      <div class="pena-max">Art. 38.4 + 39<br><b style="color:#6AADDC">750,01 a 1.500 €</b></div>
-    </div>
-    <div class="clas-card clas-grave">
-      <div class="icon">🔴</div>
-      <div class="tipo">Molt Greus</div>
-      <div class="pena-max">Art. 38.3 + 39<br><b style="color:#E86050">1.500,01 a 3.000 €</b></div>
-    </div>
+  <!-- ═══ LES 4 PLATGES ═══ -->
+  <div class="section-head" style="--accent:#0E8A8A;">
+    <span class="eyebrow">🌊 LES 4 PLATGES DE VILADECANS · ZONIFICACIÓ I PARTICULARITATS</span>
+    <span class="rule"></span>
   </div>
 
-  <!-- BANNER INFO -->
-  <div class="info-banner">
-    <div class="ref-icon">🏖️</div>
-    <div class="ref-text">
-      <div class="ref-ley">🏖️ Ordenança d'ús de les Platges de Viladecans</div>
-      <div class="ref-desc">Aprovació definitiva 31 gener 2013 · BOPB 7 maig 2013 · 39 articles · 5 títols · Potestat sancionadora: Alcalde · 2.650 m de litoral</div>
+  <section class="platges-grid">
+    <div class="platja">
+      <span class="nom">🏖️ Platja de la Murtra</span>
+      <span class="desc">Entre desembocadura de l'estany Murtra i l'espigó. Gossos permesos fora de temporada. <b>Nudisme prohibit (lleu)</b>.</span>
     </div>
-    <div class="ref-fecha">07/05/2013<br>Vigent</div>
+    <div class="platja">
+      <span class="nom">🏖️ Platja de la Pineda</span>
+      <span class="desc">La més extensa, concentra serveis i banyistes. Gossos permesos fora de temporada. <b>Nudisme prohibit (lleu)</b>.</span>
+    </div>
+    <div class="platja protegida">
+      <span class="nom">🌿 Pineda de Cal Francès</span>
+      <span class="desc"><b>Xarxa Natura 2000</b> · Sense serveis · Nudisme permès · Animals i pesca prohibits TOT L'ANY.</span>
+    </div>
+    <div class="platja protegida">
+      <span class="nom">🌿 Platja del Remolar</span>
+      <span class="desc"><b>Xarxa Natura 2000</b> · Conservació prioritària · Nudisme permès · Navegació i kitesurf prohibits TOT L'ANY.</span>
+    </div>
+  </section>
+  <div class="info cop">
+    <span class="ico">🚔</span>
+    <div><b>Aplicació operativa:</b> en vigilància de Cal Francès i Remolar, qualsevol presència d'animals, pesca recreativa o navegació esportiva constitueix infracció (greu o lleu segons supòsit). Verifica sempre la ubicació exacta abans de denunciar.</div>
   </div>
 
-  <!-- BLOC LES 4 PLATGES -->
-  <div class="platges-bloc">
-    <h3>🌊 Les 4 platges de Viladecans · Zonificació i particularitats</h3>
-    <div class="platges-grid">
-      <div class="platja">
-        <span class="nom">🏖️ Platja de la Murtra</span>
-        <span class="desc">Entre desembocadura estany Murtra i l'espigó. Gossos permesos fora de temporada. <b style="color:#C8A028">Nudisme prohibit (lleu)</b></span>
-      </div>
-      <div class="platja">
-        <span class="nom">🏖️ Platja de la Pineda</span>
-        <span class="desc">La més extensa, concentra serveis i banyistes. Gossos permesos fora de temporada. <b style="color:#C8A028">Nudisme prohibit (lleu)</b></span>
-      </div>
-      <div class="platja protegida">
-        <span class="nom">🌿 Pineda de Cal Francès</span>
-        <span class="desc"><b style="color:#4ACD7A">Xarxa Natura 2000</b> · Sense serveis · Nudisme permès · Animals i pesca prohibits TOT L'ANY</span>
-      </div>
-      <div class="platja protegida">
-        <span class="nom">🌿 Platja del Remolar</span>
-        <span class="desc"><b style="color:#4ACD7A">Xarxa Natura 2000</b> · Conservació prioritària · Nudisme permès · Navegació i kitesurf prohibits TOT L'ANY</span>
-      </div>
-    </div>
-    <div class="nota-policial">🚔 <b>Aplicació operativa:</b> En vigilància de platges de Cal Francès i Remolar, qualsevol presència d'animals, pesca recreativa o navegació esportiva constitueix infracció (greu o lleu segons supòsit). Verifica sempre la ubicació exacta abans de denunciar.</div>
+  <!-- ═══ DISPOSICIONS GENERALS ═══ -->
+  <div class="section-head" style="--accent:#2F6BD8;">
+    <span class="eyebrow">📐 DISPOSICIONS GENERALS I DEFINICIONS · ARTS. 1–6</span>
+    <span class="rule"></span>
   </div>
 
-  <!-- ══════════════════════════════════════════
-       1. DISPOSICIONS GENERALS (TÍT. PRELIMINAR)
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">📐</span>
-      <h2>Disposicions Generals i Definicions</h2>
-      <span class="art-ref">Tít. Preliminar · Arts. 1–6</span>
-      <span class="toggle">▼</span>
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Arts. 1–2</span>
+      <span class="tag-sm">BÀSIC</span>
+      <h4>Objecte i àmbit d'aplicació</h4>
+    </header>
+    <p>Regula l'ús de les platges del terme municipal de Viladecans per garantir el dret dels ciutadans al gaudi de l'ús públic del mar i la seva ribera. S'aplica al <b>domini públic marítimoterrestre</b>, les seves <b>zones de protecció i servitud</b> i la ribera del mar dins del terme municipal. Base competencial: <b>art. 115 Llei 22/1988 de Costes</b>.</p>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>La PL és l'autoritat municipal directa per fer complir l'ordenança (art. 21 lletra g i k, i 36 de la mateixa). Coordina amb Capitanía Marítima, ACA i agents rurals en zona protegida.</div>
     </div>
-    <div class="cat-body">
+  </article>
 
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Objecte i àmbit d'aplicació</div>
-          <span class="art-badge">Arts. 1–2</span>
-          <span class="tipo-badge badge-info">Bàsic</span>
-          <span class="multa-badge multa-organ">📍 Domini públic marítimoterrestre</span>
-        </div>
-        <div class="delito-desc">
-          Regula l'ús de les platges del terme municipal de Viladecans per garantir el dret dels ciutadans al gaudi de l'ús públic del mar i la seva ribera. S'aplica al <b>domini públic marítimoterrestre</b>, les seves <b>zones de protecció i servitud</b> i la ribera del mar dins del terme municipal. Base competencial: <b>art. 115 Llei 22/1988 de Costes</b>.
-        </div>
-        <div class="nota-policial">🚔 La PL és l'autoritat municipal directa per fer complir l'ordenança (art. 21 lletra g) i k) i 36 de la mateixa). Coordina amb Capitanía Marítima, ACA i agents rurals en zona protegida.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Definicions clau</div>
-          <span class="art-badge">Art. 3</span>
-          <span class="tipo-badge badge-local">📖 Conceptes</span>
-        </div>
-        <div class="delito-desc">
-          Les definicions oficials que has de conèixer per qualificar correctament una infracció:
-        </div>
-        <div class="mini-tabla">
-          <div class="celda"><b>🌊 Zona de bany</b>Aigües senyalitzades. Si NO abalisada: <b style="color:#FFD060">200 m</b> de mar des de la costa</div>
-          <div class="celda"><b>⛵ Zona de varada</b>Espai per embarcar/desembarcar embarcacions professionals i de lleure</div>
-          <div class="celda"><b>📅 Temporada platja</b>Període d'afluència segons Pla d'usos Generalitat (15 maig–15 set)</div>
-          <div class="celda"><b>🌿 Zona dunar protegida</b>Espai delimitat amb senyals de prohibició de pas. Hàbitat europeu prioritari</div>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Servituds: protecció, trànsit i accés al mar</div>
-          <span class="art-badge">Arts. 4–6</span>
-          <span class="tipo-badge badge-info">Limitació</span>
-          <span class="multa-badge">📏 Trànsit lliure 6 m (fins 20 m)</span>
-        </div>
-        <div class="delito-desc">
-          (4) <b>Servitud de protecció</b>: art. 23 Llei de Costes · activitats limitades.<br>
-          (5) <b>Servitud de trànsit</b>: ha de quedar <b>permanentment lliure</b> per al pas públic de vianants i vehicles de vigilància/salvament. Amplada normal 6 m, ampliable fins a <b>20 m</b> en llocs perillosos.<br>
-          (6) <b>Servitud d'accés al mar</b>: accés <b>públic i gratuït</b> en la longitud i amplada que la naturalesa demani.
-        </div>
-        <div class="nota-clave">💡 Interrompre l'accés públic al mar o la servitud de trànsit és <b>infracció GREU</b> (art. 38.4.a) · 750-1.500 €.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       2. NORMES D'ÚS (TÍT. PRIMER)
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">🏖️</span>
-      <h2>Normes d'Ús de les Platges</h2>
-      <span class="art-ref">Títol Primer · Arts. 7–23</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Drets i deures dels usuaris</div>
-          <span class="art-badge">Art. 7</span>
-          <span class="tipo-badge badge-info">Marc</span>
-        </div>
-        <div class="delito-desc">
-          Els usuaris tenen <b>dret a gaudir</b> de la platja i a la informació, però també l'<b>obligació</b> d'utilitzar correctament l'espai públic, mobiliari urbà i instal·lacions, respectant la resta d'usuaris i evitant l'embrutiment.
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Nudisme</div>
-          <span class="art-badge">Art. 8.4</span>
-          <span class="tipo-badge badge-grave">⭐ CLAU PL</span>
-          <span class="multa-badge multa-organ">🏝️ Restringit a Cal Francès i Remolar</span>
-        </div>
-        <div class="delito-desc">
-          La pràctica del <b>nudisme queda restringida</b> exclusivament a les platges de <b>Cal Francès</b> i <b>El Remolar</b>. A la Murtra i la Pineda està prohibit.
-        </div>
-        <div class="nota-agrav">⚠️ <b>Infracció LLEU</b> (art. 38.5.v): nudisme a Murtra o Pineda · multa fins a 750 €.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Instal·lacions i guinguetes</div>
-          <span class="art-badge">Arts. 10–12</span>
-          <span class="tipo-badge badge-info">Autorització</span>
-          <span class="multa-badge">⏰ 8.00 a 22.00 h</span>
-        </div>
-        <div class="delito-desc">
-          Necessiten <b>títol habilitant</b> o estar al Pla d'usos. Horari per defecte <b>8.00–22.00 h</b>. Han de tenir llista de preus visible i fulls de reclamació. Les ombrel·les amb suports metàl·lics o fusta no punxants.
-        </div>
-        <div class="nota-agrav">⚠️ Ocupació SENSE títol = infracció <b>MOLT GREU</b> (art. 38.3.a) · 1.500-3.000 €.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Navegació esportiva i kitesurf</div>
-          <span class="art-badge">Arts. 13–14</span>
-          <span class="tipo-badge badge-grave">Limitació</span>
-          <span class="multa-badge multa-alta">🚫 Remolar prohibit tot l'any</span>
-        </div>
-        <div class="delito-desc">
-          A la <b>platja del Remolar</b> i a les zones de bany abalisades resta <b>prohibida tota navegació esportiva</b>. Velocitat màxima a zones de bany no abalisades: <b>3 nusos</b>. Kitesurf permès només si està al Pla d'usos (1 juny–30 set), <b>mai a Cal Francès ni Remolar</b>. Cal complir instruccions de Capitanía Marítima.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">🛥️ Navegació prohibida zona bany</span>
-          <span class="pena-chip">🪁 Kitesurf restringit</span>
-          <span class="pena-chip agravada">🚫 Cal Francès / Remolar</span>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Vehicles a la platja</div>
-          <span class="art-badge">Art. 15</span>
-          <span class="tipo-badge badge-grave">⭐ CLAU PL</span>
-          <span class="multa-badge multa-alta">🚗 Greu (750-1.500 €)</span>
-        </div>
-        <div class="delito-desc">
-          Resta <b>prohibit</b> l'estacionament i circulació de vehicles motoritzats a la platja, llevat dels destinats a <b>neteja, manteniment, vigilància, urgències o seguretat</b>. <b>Cadires per a discapacitats permeses</b> sempre.
-        </div>
-        <div class="nota-policial">🚔 Excepció clau: <b>vehicles policials</b> (PL, GUB, Mossos), serveis sanitaris, salvament i neteja municipal estan autoritzats. Verifica sempre la motivació d'urgència.</div>
-        <div class="nota-agrav">⚠️ Estacionar/circular sense autorització = <b>infracció GREU</b> (art. 38.4.c) · 750-1.500 €.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Acampada i campaments</div>
-          <span class="art-badge">Art. 16</span>
-          <span class="tipo-badge badge-info">Lleu</span>
-          <span class="multa-badge">⛺ Prohibida (incloent dormir)</span>
-        </div>
-        <div class="delito-desc">
-          Prohibides <b>totes les acampades</b> a la platja i a l'aparcament: tendes, ombrel·les no diàfanes, vehicles habitables, remolcs. <b>Pernoctar = acampar</b>.
-        </div>
-        <div class="nota-agrav">⚠️ Infracció <b>LLEU</b> (art. 38.5.i) · multa fins a 750 €.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Pesca recreativa</div>
-          <span class="art-badge">Art. 17</span>
-          <span class="tipo-badge badge-grave">Greu</span>
-          <span class="multa-badge multa-alta">🎣 Regulada per zona i hora</span>
-        </div>
-        <div class="delito-desc">
-          <b>Cal Francès i Remolar</b>: prohibida tot l'any.<br>
-          <b>Resta de platges</b>: amb canya. <b>16 set – 14 maig</b>: lliure. <b>15 maig – 15 set</b> (temporada): pot pescar-se <b>només de 20.00 a 8.00 h</b> als espigons i línia no abalisada.<br>
-          <b>Pesca subaquàtica amb arpó</b>: prohibida sempre. Concursos: només amb autorització Direcció General Pesca Marítima.
-        </div>
-        <div class="nota-agrav">⚠️ Pesca incomplint l'art. 17 + abandonar hams = <b>infracció GREU</b> (art. 38.4.r i s) · 750-1.500 €.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Activitats, sorolls i emissions</div>
-          <span class="art-badge">Arts. 18–20</span>
-          <span class="tipo-badge badge-info">Convivència</span>
-        </div>
-        <div class="delito-desc">
-          (18) Activitats que molestin la resta d'usuaris: prohibides en temporada. (19) <b>Aparells reproductors</b> de música i instruments musicals: <b>prohibits</b>. (20) <b>Punters làser</b> i senyals lumíniques que afectin trànsit aeri: prohibits.
-        </div>
-        <div class="nota-policial">🚔 La PL és la primera resposta davant queixes per soroll. Cal advertir abans de denunciar (art. 38.5.b → infracció lleu si persisteix).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Venda ambulant i activitats no autoritzades</div>
-          <span class="art-badge">Art. 21</span>
-          <span class="tipo-badge badge-grave">⭐ CLAU PL</span>
-          <span class="multa-badge multa-organ">📦 Comís de productes</span>
-        </div>
-        <div class="delito-desc">
-          Prohibida la <b>venda ambulant</b> (entrepans, fruita, gelats, begudes...) i la <b>compra</b>. Prohibits també <b>massatges, tatuatges</b> i similars sense autorització. <b>Pràctiques sexuals públiques</b>: també prohibides.
-        </div>
-        <div class="nota-policial">🚔 <b>Art. 21.4</b> faculta expressament els <b>agents de l'autoritat municipal</b> a <b>comissar productes</b>. Es retornen un cop pagada la multa i acreditada la propietat. Acta de comís + acta de denúncia.</div>
-        <div class="nota-agrav">⚠️ Venda + col·laborar (vigilar, alertar de la PL) = <b>infraccions LLEUS</b> (art. 38.5.g i q) fins a 750 €.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Publicitat i grafits</div>
-          <span class="art-badge">Arts. 22–23</span>
-          <span class="tipo-badge badge-grave">Greu</span>
-          <span class="multa-badge multa-alta">🎨 Greu (750-1.500 €)</span>
-        </div>
-        <div class="delito-desc">
-          Prohibida tota publicitat sense autorització. <b>Pintades i grafits</b>: prohibits. Els agents poden <b>retirar materials</b> i <b>obligar el responsable a netejar</b> immediatament si és possible, sense perjudici de la sanció.
-        </div>
-        <div class="nota-policial">🚔 Pintades/grafits/cartells = <b>infracció GREU</b> (art. 38.4.d i f) · 750-1.500 €. Es pot ordenar neteja immediata.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       3. NORMES HIGIENICOSANITÀRIES (TÍT. SEGON)
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header open" onclick="toggle(this)">
-      <span class="cat-icon">🧼</span>
-      <h2>Normes Higienicosanitàries</h2>
-      <span class="art-ref">Títol Segon · Arts. 24–31</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Animals domèstics</div>
-          <span class="art-badge">Art. 25</span>
-          <span class="tipo-badge badge-grave">⭐ CLAU PL</span>
-          <span class="multa-badge multa-alta">🐕 Régim per platja</span>
-        </div>
-        <div class="delito-desc">
-          Régim diferent segons platja:
-        </div>
-        <div class="tabla-discip col3">
-          <div class="td-header">Platja</div>
-          <div class="td-header">Temporada</div>
-          <div class="td-header">Fora temporada</div>
-          <div class="td-cell td-pob">Murtra · Pineda</div>
-          <div class="td-cell">🚫 Prohibit</div>
-          <div class="td-cell">✅ Lligats + collar + xip</div>
-          <div class="td-cell td-pob">Cal Francès · Remolar</div>
-          <div class="td-cell">🚫 PROHIBIT TOT L'ANY</div>
-          <div class="td-cell">🚫 PROHIBIT TOT L'ANY</div>
-          <div class="td-cell td-pob">Cavalls</div>
-          <div class="td-cell">🚫 Tot l'any</div>
-          <div class="td-cell">🚫 Tot l'any</div>
-          <div class="td-cell td-pob">Gossos pigall</div>
-          <div class="td-cell">✅ Sempre permesos</div>
-          <div class="td-cell">✅ Sempre permesos</div>
-        </div>
-        <div class="nota-policial">🚔 <b>Excepció gossos pigall</b> sempre permesos. Morrió obligatori en races perilloses (Llei 10/1999 i RD 287/2002). Deposicions: prohibit deixar-les (art. 25.3).</div>
-        <div class="nota-agrav">⚠️ Bany d'animals al mar/dutxes + permanència en temporada = <b>infraccions LLEUS</b> (art. 38.5.m, n, o) fins a 750 €.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Necessitats fisiològiques i cabines sanitàries</div>
-          <span class="art-badge">Art. 26</span>
-          <span class="tipo-badge badge-grave">Lleu / Greu</span>
-        </div>
-        <div class="delito-desc">
-          Resta <b>prohibida l'evacuació fisiològica</b> al mar o a la sorra. Obligatòria utilització de les <b>cabines sanitàries</b>. Si hi ha altres usuaris a la vora → <b>infracció GREU</b>; si no → lleu.
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">Sense altres usuaris: lleu (art. 38.5.e)</span>
-          <span class="pena-chip agravada">⚠️ Amb usuaris a la vora: GREU (art. 38.4.g)</span>
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Mobiliari urbà i ús de l'aigua</div>
-          <span class="art-badge">Art. 27</span>
-          <span class="tipo-badge badge-info">Conservació</span>
-        </div>
-        <div class="delito-desc">
-          Prohibit utilitzar <b>sabó, gel, xampú o detergents</b> a les dutxes, rentapeus o dins el mar. Prohibit <b>rentar roba</b> al mobiliari urbà. Cal mantenir aixetes només el temps just. <b>Prohibit jugar amb l'aigua</b>.
-        </div>
-        <div class="nota-clave">💡 Espatllar mobiliari urbà = <b>infracció GREU</b> (art. 38.4.e). Conductes vandàliques amb risc per persones = <b>MOLT GREU</b> (art. 38.3.d).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Foc, barbacoes i bombones</div>
-          <span class="art-badge">Art. 28</span>
-          <span class="tipo-badge badge-grave">Greu / Lleu</span>
-          <span class="multa-badge multa-alta">🔥 Bombones gas = greu</span>
-        </div>
-        <div class="delito-desc">
-          Prohibit <b>encendre o mantenir foc</b> sense autorització. Especialment prohibit l'ús de <b>bombones de gas, barbacoes i líquids inflamables</b>.
-        </div>
-        <div class="nota-agrav">⚠️ Foc amb bombones de gas/líquids inflamables = <b>infracció GREU</b> (art. 38.4.h) · 750-1.500 €. Foc simple = lleu (art. 38.5.l).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Residus i abocaments</div>
-          <span class="art-badge">Art. 29</span>
-          <span class="tipo-badge badge-info">Higiene</span>
-        </div>
-        <div class="delito-desc">
-          Residus a papereres. Prohibit <b>deixar puntes de cigarretes, vidres, llaunes, restes de menjar</b> o objectes punxants. Prohibit <b>rentar recipients</b> amb matèria orgànica al mar/sorra. Prohibit abocar <b>olis, greixos o aigües brutes</b> i <b>rentar/reparar vehicles</b>.
-        </div>
-        <div class="nota-policial">🚔 Conductes vandàliques en mobiliari amb risc per la salut → infracció <b>MOLT GREU</b> (art. 38.3.d) · 1.500-3.000 €.</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Zona dunar protegida</div>
-          <span class="art-badge">Art. 31</span>
-          <span class="tipo-badge badge-grave">⭐ Greu</span>
-          <span class="multa-badge multa-alta">🌿 Hàbitat europeu</span>
-        </div>
-        <div class="delito-desc">
-          Prohibit <b>arrencar, trepitjar o danyar</b> la vegetació natural; <b>agafar flors, fruits o plantes</b>; <b>caçar o matar animals</b>. Prohibida la <b>circulació de persones i animals</b> dins els espais dunars delimitats.
-        </div>
-        <div class="nota-agrav">⚠️ <b>Trepitjar zona protegida + arrencar vegetació + caçar/matar fauna</b> = <b>infraccions GREUS</b> (art. 38.4.o, p, q) · 750-1.500 €.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       4. VIGILÀNCIA I SEGURETAT (TÍT. TERCER)
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">🚩</span>
-      <h2>Vigilància, Salvament i Banderes</h2>
-      <span class="art-ref">Títol Tercer · Arts. 32–35</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Vigilància de les zones de bany</div>
-          <span class="art-badge">Art. 32</span>
-          <span class="tipo-badge badge-info">Servei municipal</span>
-        </div>
-        <div class="delito-desc">
-          L'Ajuntament ha de mantenir un <b>servei de vigilància</b> en temporada de platja amb les funcions: conservació, control del compliment de l'ordenança, senyalització i prevenció d'activitats perilloses.
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Salvament i socorrisme</div>
-          <span class="art-badge">Art. 33</span>
-          <span class="tipo-badge badge-info">Salvament</span>
-          <span class="multa-badge multa-organ">🚑 Accés ambulància lliure</span>
-        </div>
-        <div class="delito-desc">
-          Personal especialitzat ALS LLOCS DE SALVAMENT. Cal mantenir un <b>accés permanentment lliure d'obstacles</b> per a ambulàncies. Si no hi ha lloc de salvament: cartell "Platja no vigilada · 112".
-        </div>
-        <div class="nota-policial">🚔 <b>Coordinació clau:</b> PL + Socorrisme + 112. La PL ha de garantir l'accés lliure d'ambulàncies (sancionar vehicles que l'obstrueixen).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Banderes de bany</div>
-          <span class="art-badge">Art. 34</span>
-          <span class="tipo-badge badge-grave">⭐ CLAU PL</span>
-          <span class="multa-badge multa-alta">🚩 Vermella = bany prohibit</span>
-        </div>
-        <div class="delito-desc">
-          Tres classificacions oficials: <b>verda, groga i vermella</b>. Banderes rectangulars d'<b>1,5 m x 1 m</b> en pals de mínim 3 m d'alçada, visibles des de tots els accessos.
-        </div>
-        <div class="banderes-grid">
-          <div class="bandera verda">
-            <span class="ico">🟢</span>
-            <div class="nom">Verda</div>
-            <div class="desc">Mar tranquil · Aigua i platja en bones condicions · Bany lliure</div>
-          </div>
-          <div class="bandera groga">
-            <span class="ico">🟡</span>
-            <div class="nom">Groga</div>
-            <div class="desc">Onades fins a 1,5 m · Corrents mitjans · Meduses · Risc moderat</div>
-          </div>
-          <div class="bandera vermella">
-            <span class="ico">🔴</span>
-            <div class="nom">Vermella</div>
-            <div class="desc">Onades >2 m · Corrents forts · Bany PROHIBIT</div>
-          </div>
-        </div>
-        <div class="nota-agrav">⚠️ <b>No respectar bandera vermella</b> + llançar-se en zona prohibida (espigons, embarcadors) = <b>infracció GREU</b> (art. 38.4.i, j) · 750-1.500 €. La PL pot <b>obligar a sortir de l'aigua</b> per seguretat.</div>
-        <div class="nota-clave">💡 <b>Bandera groga + menor de 12 anys sense adult</b> = infracció LLEU (art. 38.5.s). <b>Bandera vermella</b> també tipificada com a lleu (art. 38.5.t) — coexistència amb la greu segons gravetat.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       5. INFRACCIONS (TÍT. QUART)
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">⚠️</span>
-      <h2>Infraccions Administratives</h2>
-      <span class="art-ref">Títol Quart · Arts. 36–38</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Marc legal i responsables</div>
-          <span class="art-badge">Arts. 36–37</span>
-          <span class="tipo-badge badge-info">Base</span>
-        </div>
-        <div class="delito-desc">
-          Marc: <b>arts. 139-141 Llei 7/1985 LRBRL</b>. Constitueix infracció tota acció o omissió que incompleixi els deures, prohibicions o limitacions de l'ordenança. Responsables: <b>persones físiques o jurídiques</b> que han participat per qualsevol títol.
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Infraccions MOLT GREUS</div>
-          <span class="art-badge">Art. 38.3</span>
-          <span class="tipo-badge badge-grave">🔴 1.500-3.000 €</span>
-        </div>
-        <div class="delito-desc">
-          (a) <b>Ocupació domini públic</b> sense títol/autorització.<br>
-          (b) <b>Instal·lacions no autoritzades</b> o augmentar superfície/volum/alçada autoritzats.<br>
-          (c) Conductes greus que provoquin <b>pertorbació rellevant</b> de la convivència, impediment d'ús d'un servei públic o <b>deteriorament greu</b> d'equipaments.<br>
-          (d) <b>Conductes vandàliques, agressives o negligents</b> al mobiliari urbà que generin risc/perill per la salut o integritat física.
-        </div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Infraccions GREUS (selecció operativa)</div>
-          <span class="art-badge">Art. 38.4</span>
-          <span class="tipo-badge badge-grave">🟡 750-1.500 €</span>
-        </div>
-        <div class="delito-desc">
-          Les més habituals en servei:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip">a) Interrompre accés mar/trànsit</span>
-          <span class="pena-chip">c) Vehicles motoritzats no autoritzats</span>
-          <span class="pena-chip">d) Pintades, grafits</span>
-          <span class="pena-chip">e) Espatllar mobiliari urbà</span>
-          <span class="pena-chip">f) Cartells, pancartes, adhesius</span>
-          <span class="pena-chip">g) Necessitats fisiològiques (vora usuaris)</span>
-          <span class="pena-chip">h) Foc amb bombona/líquids inflamables</span>
-          <span class="pena-chip agravada">i) Bany amb bandera vermella</span>
-          <span class="pena-chip agravada">j) Llançar-se a espigons/zones prohibides</span>
-          <span class="pena-chip">k) Jocs/esports amb risc rellevant</span>
-          <span class="pena-chip agravada">l) Alcohol amb alteració greu convivència</span>
-          <span class="pena-chip agravada">m) Conductes discriminatòries (xenofòbia, racisme, homofòbia, sexisme...)</span>
-          <span class="pena-chip">n) Material pirotècnic prohibit</span>
-          <span class="pena-chip">o-q) Trepitjar zona protegida · arrencar vegetació · caçar fauna</span>
-          <span class="pena-chip">r) Pesca incomplint art. 17</span>
-          <span class="pena-chip">s) Abandonar hams</span>
-        </div>
-        <div class="nota-policial">🚔 La <b>conducta discriminatòria</b> de l'art. 38.4.m (insults xenòfobs, racistes, sexistes, homòfobs amb agressions/coaccions) és infracció administrativa autònoma · sempre cal valorar si arriba també a delicte d'odi (art. 510 CP).</div>
-      </div>
-      <div class="divider"></div>
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Infraccions LLEUS (selecció operativa)</div>
-          <span class="art-badge">Art. 38.5</span>
-          <span class="tipo-badge badge-clave">🟢 fins 750 €</span>
-        </div>
-        <div class="delito-desc">
-          Les més habituals en servei:
-        </div>
-        <div class="pena-row">
-          <span class="pena-chip positivo">a) Activitats que pertorbin (després d'advertir)</span>
-          <span class="pena-chip positivo">b) Soroll amb advertiment previ</span>
-          <span class="pena-chip positivo">f) Alcohol sense alteració greu</span>
-          <span class="pena-chip positivo">g) Venda ambulant sense autorització</span>
-          <span class="pena-chip positivo">h) Massatges/tatuatges no autoritzats</span>
-          <span class="pena-chip positivo">i) Acampada / pernoctar</span>
-          <span class="pena-chip positivo">j) Sabó/gel/xampú al mar o dutxes</span>
-          <span class="pena-chip positivo">l) Foc simple sense bombona</span>
-          <span class="pena-chip positivo">m–n) Bany d'animals · Animals en temporada</span>
-          <span class="pena-chip positivo">o) Cavalls tot l'any</span>
-          <span class="pena-chip positivo">q) Col·laborar amb venedors</span>
-          <span class="pena-chip positivo">r) Pràctiques sexuals públiques</span>
-          <span class="pena-chip positivo">s) Bandera groga + menor 12 sol</span>
-          <span class="pena-chip positivo">u) Senyals lumíniques (làser)</span>
-          <span class="pena-chip positivo">v) Nudisme a Murtra/Pineda</span>
-          <span class="pena-chip positivo">x) Kitesurf incomplint art. 14</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       6. SANCIONS (TÍT. CINQUÈ)
-  ══════════════════════════════════════════ -->
-  <div class="categoria">
-    <div class="cat-header" onclick="toggle(this)">
-      <span class="cat-icon">💰</span>
-      <h2>Règim de Sancions</h2>
-      <span class="art-ref">Títol Cinquè · Art. 39</span>
-      <span class="toggle">▼</span>
-    </div>
-    <div class="cat-body">
-
-      <div class="delito">
-        <div class="delito-top">
-          <div class="delito-nombre">Quanties i procediment</div>
-          <span class="art-badge">Art. 39</span>
-          <span class="tipo-badge badge-grave">⭐ CLAU PL</span>
-          <span class="multa-badge multa-alta">🏛️ Potestat: Alcalde</span>
-        </div>
-        <div class="delito-desc">
-          (1) Quanties per gravetat de la infracció:
-        </div>
-        <div class="tabla-discip col3">
-          <div class="td-header">Gravetat</div>
-          <div class="td-header">Multa</div>
-          <div class="td-header">Tipus exemple</div>
-          <div class="td-cell td-pob">Lleu</div>
-          <div class="td-cell">Fins a <b style="color:#4ACD7A">750 €</b></div>
-          <div class="td-cell">Acampada · venda ambulant · nudisme zona no permesa</div>
-          <div class="td-cell td-pob">Greu</div>
-          <div class="td-cell"><b style="color:#6AADDC">750,01–1.500 €</b></div>
-          <div class="td-cell">Vehicle motor · grafit · bandera vermella · pesca prohibida</div>
-          <div class="td-cell td-pob">Molt greu</div>
-          <div class="td-cell"><b style="color:#E86050">1.500,01–3.000 €</b></div>
-          <div class="td-cell">Ocupació sense títol · vandalisme amb risc</div>
-        </div>
-        <div class="delito-desc" style="margin-top:8px">
-          (2) <b>Potestat sancionadora</b>: l'Alcalde (delegable). (3) <b>Procediment</b>: Ordenança de Procediment Sancionador de Viladecans + subsidiàriament Decret 278/1993 i Llei 30/1992 (avui Llei 39/2015 i 40/2015).
-        </div>
-        <div class="nota-policial">🚔 <b>Workflow operatiu PL:</b> 1) Identificar infractor (DNI/NIE) · 2) Acta de denúncia amb article infringit · 3) Si escau, acta de comís (art. 21) · 4) Tramesa al Departament Sancions · 5) Si flagrant, advertiment previ obligatori en certes lleus (art. 38.5.a i b).</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       CUADRO RECUERDA
-  ══════════════════════════════════════════ -->
-  <div class="recuerda">
-    <h3>📋 Recorda — Ordenança Platges Viladecans</h3>
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Art. 3</span>
+      <span class="tag-sm teal">📖 CONCEPTES</span>
+      <h4>Definicions clau</h4>
+    </header>
+    <p>Les definicions oficials que has de conèixer per qualificar correctament una infracció:</p>
     <ul>
-      <li>📅 <b>Cronologia:</b> Aprovació definitiva 31 gen 2013 · BOPB 7 maig 2013 · Vigent (15 dies hàbils després publicació).</li>
-      <li>🏖️ <b>4 platges:</b> Murtra, Pineda (serveis), Cal Francès i Remolar (Xarxa Natura 2000).</li>
-      <li>💰 <b>3 graus de multa:</b> Lleu fins 750 € · Greu 750-1.500 € · Molt greu 1.500-3.000 €. Sanciona l'Alcalde (art. 39).</li>
-      <li>📏 <b>Servitud de trànsit:</b> 6 m permanentment lliures (ampliable fins 20 m). Interrompre-la = greu.</li>
-      <li>🐕 <b>Animals:</b> Murtra i Pineda → prohibits en temporada · Cal Francès i Remolar → tot l'any · Pigall sempre permès · Cavalls prohibits tot l'any.</li>
-      <li>🏝️ <b>Nudisme:</b> només a Cal Francès i Remolar. A Murtra/Pineda = lleu (art. 38.5.v).</li>
-      <li>🚗 <b>Vehicles motor a la platja:</b> infracció GREU. Excepcions: PL/PG-ME, neteja, urgències, salvament i cadires de discapacitats.</li>
-      <li>⛺ <b>Acampada/pernoctar:</b> sempre lleu (art. 38.5.i). Inclou tendes, ombrel·les tancades i vehicles habitables.</li>
-      <li>🎣 <b>Pesca recreativa amb canya:</b> 16 set–14 maig lliure · 15 maig–15 set només 20.00–8.00 h · Cal Francès/Remolar prohibida tot l'any · Arpó sempre prohibit.</li>
-      <li>🪁 <b>Kitesurf:</b> permès si està al Pla d'usos (1 jun–30 set) · MAI a Cal Francès ni Remolar.</li>
-      <li>🚩 <b>Banderes:</b> Verda lliure · Groga risc moderat · Vermella PROHIBIT BANY. La PL pot obligar a sortir de l'aigua per seguretat.</li>
-      <li>🔥 <b>Foc:</b> simple = lleu · amb bombona de gas o líquids inflamables = GREU (art. 38.4.h).</li>
-      <li>📦 <b>Venda ambulant:</b> art. 21.4 permet als agents <b>comissar productes</b> (es retornen pagada la multa).</li>
-      <li>🌿 <b>Zona dunar protegida:</b> trepitjar, arrencar vegetació, caçar = infraccions GREUS.</li>
-      <li>🚽 <b>Necessitats fisiològiques:</b> sense usuaris a la vora = lleu · amb usuaris a la vora = GREU.</li>
-      <li>🍷 <b>Alcohol via pública:</b> lleu en general · GREU si altera greument la convivència.</li>
-      <li>⚠️ <b>Conductes discriminatòries</b> (xenofòbia, racisme, sexisme, homofòbia): infracció GREU + valorar art. 510 CP.</li>
-      <li>🚑 <b>Salvament i 112:</b> mantenir lliure l'accés d'ambulàncies. Platja no vigilada → cartell "112".</li>
-      <li>🏛️ <b>Procediment:</b> Ordenança Sancionadora Viladecans + supletòriament Llei 39/2015 i 40/2015 (anteriorment 30/1992).</li>
-      <li>📝 <b>Acta de denúncia PL:</b> identificar autor, fets, article infringit, gravetat, testimonis, foto si escau, acta de comís quan procedeixi.</li>
+      <li>🌊 <b>Zona de bany:</b> aigües senyalitzades. Si NO abalisada: <b>200 m</b> de mar des de la costa.</li>
+      <li>⛵ <b>Zona de varada:</b> espai per embarcar/desembarcar embarcacions professionals i de lleure.</li>
+      <li>📅 <b>Temporada platja:</b> període d'afluència segons Pla d'usos Generalitat (15 maig – 15 set).</li>
+      <li>🌿 <b>Zona dunar protegida:</b> espai delimitat amb senyals de prohibició de pas. Hàbitat europeu prioritari.</li>
     </ul>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Arts. 4–6</span>
+      <span class="tag-sm warn">SERVITUDS</span>
+      <h4>Servituds: protecció, trànsit i accés al mar</h4>
+    </header>
+    <ul>
+      <li><b>Art. 4 · Servitud de protecció:</b> art. 23 Llei de Costes · activitats limitades.</li>
+      <li><b>Art. 5 · Servitud de trànsit:</b> ha de quedar <b>permanentment lliure</b> per al pas públic de vianants i vehicles de vigilància/salvament. Amplada normal <b>6 m</b>, ampliable fins a <b>20 m</b> en llocs perillosos.</li>
+      <li><b>Art. 6 · Servitud d'accés al mar:</b> accés <b>públic i gratuït</b> en la longitud i amplada que la naturalesa demani.</li>
+    </ul>
+    <div class="info warn">
+      <span class="ico">💡</span>
+      <div>Interrompre l'accés públic al mar o la servitud de trànsit és <b>infracció GREU</b> (art. 38.4.a) · <span class="multa greu">750 – 1.500 €</span>.</div>
+    </div>
+  </article>
+
+  <!-- ═══ NORMES D'ÚS ═══ -->
+  <div class="section-head" style="--accent:#0E8A8A;">
+    <span class="eyebrow">🏖️ NORMES D'ÚS DE LES PLATGES · TÍTOL PRIMER · ARTS. 7–23</span>
+    <span class="rule"></span>
   </div>
 
-  <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+  <article class="art-card" style="--accent:#0E8A8A;">
+    <header>
+      <span class="art-badge">Art. 7</span>
+      <span class="tag-sm teal">MARC</span>
+      <h4>Drets i deures dels usuaris</h4>
+    </header>
+    <p>Els usuaris tenen <b>dret a gaudir</b> de la platja i a la informació, però també l'<b>obligació</b> d'utilitzar correctament l'espai públic, mobiliari urbà i instal·lacions, respectant la resta d'usuaris i evitant l'embrutiment.</p>
+  </article>
+
+  <article class="art-card" style="--accent:#9c7a1f;">
+    <header>
+      <span class="art-badge">Art. 8.4</span>
+      <span class="tag-sm warn">⭐ CLAU PL</span>
+      <h4>Nudisme</h4>
+    </header>
+    <p>La pràctica del <b>nudisme queda restringida</b> exclusivament a les platges de <b>Cal Francès</b> i <b>El Remolar</b>. A la Murtra i la Pineda està prohibit.</p>
+    <div class="info warn">
+      <span class="ico">⚠️</span>
+      <div><b>Infracció LLEU</b> (art. 38.5.v): nudisme a Murtra o Pineda · <span class="multa lleu">fins a 750 €</span>.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Arts. 10–12</span>
+      <span class="tag-sm">AUTORITZACIÓ</span>
+      <h4>Instal·lacions i guinguetes</h4>
+    </header>
+    <p>Necessiten <b>títol habilitant</b> o estar al Pla d'usos. Horari per defecte <b>8.00–22.00 h</b>. Han de tenir llista de preus visible i fulls de reclamació. Les ombrel·les amb suports metàl·lics o fusta no punxants.</p>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div>Ocupació <b>SENSE títol</b> = infracció <b>MOLT GREU</b> (art. 38.3.a) · <span class="multa muygreu">1.500 – 3.000 €</span>.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Arts. 13–14</span>
+      <span class="tag-sm warn">LIMITACIÓ</span>
+      <h4>Navegació esportiva i kitesurf</h4>
+    </header>
+    <p>A la <b>platja del Remolar</b> i a les zones de bany abalisades resta <b>prohibida tota navegació esportiva</b>. Velocitat màxima a zones de bany no abalisades: <b>3 nusos</b>. Kitesurf permès només si està al Pla d'usos (1 juny–30 set), <b>mai a Cal Francès ni Remolar</b>. Cal complir instruccions de Capitanía Marítima.</p>
+    <div class="chip-row">
+      <span class="chip">🛥️ Navegació prohibida zona bany</span>
+      <span class="chip">🪁 Kitesurf restringit</span>
+      <span class="chip danger">🚫 Cal Francès / Remolar</span>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 15</span>
+      <span class="tag-sm warn">⭐ CLAU PL</span>
+      <h4>Vehicles a la platja</h4>
+    </header>
+    <p>Resta <b>prohibit</b> l'estacionament i circulació de vehicles motoritzats a la platja, llevat dels destinats a <b>neteja, manteniment, vigilància, urgències o seguretat</b>. <b>Cadires per a discapacitats permeses sempre.</b></p>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div><b>Excepció clau:</b> vehicles policials (PL, GUB, Mossos), serveis sanitaris, salvament i neteja municipal estan autoritzats. Verifica sempre la motivació d'urgència.</div>
+    </div>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div>Estacionar/circular sense autorització = <b>infracció GREU</b> (art. 38.4.c) · <span class="multa greu">750 – 1.500 €</span>.</div>
+    </div>
+  </article>
+
+  <div class="twocol">
+    <article class="art-card" style="--accent:#1f8a4d;">
+      <header>
+        <span class="art-badge">Art. 16</span>
+        <span class="tag-sm lleu">LLEU</span>
+        <h4>Acampada i campaments</h4>
+      </header>
+      <p>Prohibides <b>totes les acampades</b> a la platja i a l'aparcament: tendes, ombrel·les no diàfanes, vehicles habitables, remolcs. <b>Pernoctar = acampar.</b></p>
+      <p><b>Infracció LLEU</b> (art. 38.5.i) · <span class="multa lleu">fins a 750 €</span>.</p>
+    </article>
+    <article class="art-card" style="--accent:#9c3a08;">
+      <header>
+        <span class="art-badge">Art. 17</span>
+        <span class="tag-sm greu">GREU</span>
+        <h4>Pesca recreativa</h4>
+      </header>
+      <p><b>Cal Francès i Remolar:</b> prohibida tot l'any.</p>
+      <p><b>Resta de platges:</b> amb canya. <b>16 set – 14 maig</b>: lliure. <b>15 maig – 15 set</b>: només de <b>20.00 a 8.00 h</b> als espigons i línia no abalisada.</p>
+      <p><b>Pesca subaquàtica amb arpó:</b> prohibida sempre.</p>
+      <div class="info danger">
+        <span class="ico">⚠️</span>
+        <div>Pesca incomplint l'art. 17 + abandonar hams = <b>infracció GREU</b> (art. 38.4.r i s) · <span class="multa greu">750 – 1.500 €</span>.</div>
+      </div>
+    </article>
+  </div>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Arts. 18–20</span>
+      <span class="tag-sm">CONVIVÈNCIA</span>
+      <h4>Activitats, sorolls i emissions</h4>
+    </header>
+    <ul>
+      <li><b>Art. 18:</b> activitats que molestin la resta d'usuaris: prohibides en temporada.</li>
+      <li><b>Art. 19:</b> aparells reproductors de música i instruments musicals: <b>prohibits</b>.</li>
+      <li><b>Art. 20:</b> punters làser i senyals lumíniques que afectin trànsit aeri: prohibits.</li>
+    </ul>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>La PL és la primera resposta davant queixes per soroll. Cal advertir abans de denunciar (art. 38.5.b → infracció lleu si persisteix).</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 21</span>
+      <span class="tag-sm warn">⭐ CLAU PL</span>
+      <h4>Venda ambulant i activitats no autoritzades</h4>
+    </header>
+    <p>Prohibida la <b>venda ambulant</b> (entrepans, fruita, gelats, begudes...) i la <b>compra</b>. Prohibits també <b>massatges, tatuatges</b> i similars sense autorització. <b>Pràctiques sexuals públiques:</b> també prohibides.</p>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div><b>Art. 21.4</b> faculta expressament els <b>agents de l'autoritat municipal</b> a <b>comissar productes</b>. Es retornen un cop pagada la multa i acreditada la propietat. Acta de comís + acta de denúncia.</div>
+    </div>
+    <div class="info warn">
+      <span class="ico">⚠️</span>
+      <div>Venda + col·laborar (vigilar, alertar de la PL) = <b>infraccions LLEUS</b> (art. 38.5.g i q) <span class="multa lleu">fins a 750 €</span>.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Arts. 22–23</span>
+      <span class="tag-sm greu">GREU</span>
+      <h4>Publicitat i grafits</h4>
+    </header>
+    <p>Prohibida tota publicitat sense autorització. <b>Pintades i grafits:</b> prohibits. Els agents poden <b>retirar materials</b> i <b>obligar el responsable a netejar</b> immediatament si és possible, sense perjudici de la sanció.</p>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>Pintades/grafits/cartells = <b>infracció GREU</b> (art. 38.4.d i f) · <span class="multa greu">750 – 1.500 €</span>. Es pot ordenar neteja immediata.</div>
+    </div>
+  </article>
+
+  <!-- ═══ NORMES HIGIENICOSANITÀRIES ═══ -->
+  <div class="section-head" style="--accent:#1f8a4d;">
+    <span class="eyebrow">🧼 NORMES HIGIENICOSANITÀRIES · TÍTOL SEGON · ARTS. 24–31</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#9c7a1f;">
+    <header>
+      <span class="art-badge">Art. 25</span>
+      <span class="tag-sm warn">⭐ CLAU PL</span>
+      <h4>Animals domèstics</h4>
+    </header>
+    <p>Règim diferent segons platja:</p>
+    <table class="ntable">
+      <thead><tr><th>Platja</th><th>Temporada</th><th>Fora temporada</th></tr></thead>
+      <tbody>
+        <tr><td><b>Murtra · Pineda</b></td><td>🚫 Prohibit</td><td>✅ Lligats + collar + xip</td></tr>
+        <tr><td><b>Cal Francès · Remolar</b></td><td>🚫 PROHIBIT TOT L'ANY</td><td>🚫 PROHIBIT TOT L'ANY</td></tr>
+        <tr><td><b>Cavalls</b></td><td>🚫 Tot l'any</td><td>🚫 Tot l'any</td></tr>
+        <tr><td><b>Gossos pigall</b></td><td>✅ Sempre permesos</td><td>✅ Sempre permesos</td></tr>
+      </tbody>
+    </table>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div><b>Excepció gossos pigall</b> sempre permesos. <b>Morrió obligatori</b> en races perilloses (Llei 10/1999 i RD 287/2002). Deposicions: prohibit deixar-les (art. 25.3).</div>
+    </div>
+    <div class="info warn">
+      <span class="ico">⚠️</span>
+      <div>Bany d'animals al mar/dutxes + permanència en temporada = <b>infraccions LLEUS</b> (art. 38.5.m, n, o) <span class="multa lleu">fins a 750 €</span>.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 26</span>
+      <span class="tag-sm warn">LLEU/GREU</span>
+      <h4>Necessitats fisiològiques i cabines sanitàries</h4>
+    </header>
+    <p>Resta <b>prohibida l'evacuació fisiològica</b> al mar o a la sorra. Obligatòria la utilització de les <b>cabines sanitàries</b>. Si hi ha altres usuaris a la vora → <b>infracció GREU</b>; si no → lleu.</p>
+    <ul>
+      <li><span class="multa lleu">Sense altres usuaris</span> → lleu (art. 38.5.e)</li>
+      <li><span class="multa greu">Amb usuaris a la vora</span> → GREU (art. 38.4.g)</li>
+    </ul>
+  </article>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Art. 27</span>
+      <span class="tag-sm">CONSERVACIÓ</span>
+      <h4>Mobiliari urbà i ús de l'aigua</h4>
+    </header>
+    <p>Prohibit utilitzar <b>sabó, gel, xampú o detergents</b> a les dutxes, rentapeus o dins el mar. Prohibit <b>rentar roba</b> al mobiliari urbà. Cal mantenir aixetes només el temps just. <b>Prohibit jugar amb l'aigua</b>.</p>
+    <div class="info danger">
+      <span class="ico">💡</span>
+      <div>Espatllar mobiliari urbà = <b>infracció GREU</b> (art. 38.4.e). Conductes vandàliques amb risc per persones = <b>MOLT GREU</b> (art. 38.3.d).</div>
+    </div>
+  </article>
+
+  <article class="art-card warn" style="--accent:#E5484D;">
+    <header>
+      <span class="art-badge">Art. 28</span>
+      <span class="tag-sm danger">GREU/LLEU</span>
+      <h4>Foc, barbacoes i bombones</h4>
+    </header>
+    <p>Prohibit <b>encendre o mantenir foc</b> sense autorització. Especialment prohibit l'ús de <b>bombones de gas, barbacoes i líquids inflamables</b>.</p>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div>Foc amb bombones de gas/líquids inflamables = <b>infracció GREU</b> (art. 38.4.h) · <span class="multa greu">750 – 1.500 €</span>. Foc simple = lleu (art. 38.5.l).</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 29</span>
+      <span class="tag-sm ok">HIGIENE</span>
+      <h4>Residus i abocaments</h4>
+    </header>
+    <p>Residus a papereres. Prohibit <b>deixar puntes de cigarretes, vidres, llaunes, restes de menjar</b> o objectes punxants. Prohibit <b>rentar recipients</b> amb matèria orgànica al mar/sorra. Prohibit abocar <b>olis, greixos o aigües brutes</b> i <b>rentar/reparar vehicles</b>.</p>
+    <div class="info danger">
+      <span class="ico">🚔</span>
+      <div>Conductes vandàliques en mobiliari amb risc per la salut → infracció <b>MOLT GREU</b> (art. 38.3.d) · <span class="multa muygreu">1.500 – 3.000 €</span>.</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 31</span>
+      <span class="tag-sm ok">⭐ GREU</span>
+      <h4>Zona dunar protegida</h4>
+    </header>
+    <p>Prohibit <b>arrencar, trepitjar o danyar</b> la vegetació natural; <b>agafar flors, fruits o plantes</b>; <b>caçar o matar animals</b>. Prohibida la <b>circulació de persones i animals</b> dins els espais dunars delimitats.</p>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div><b>Trepitjar zona protegida + arrencar vegetació + caçar/matar fauna</b> = <b>infraccions GREUS</b> (art. 38.4.o, p, q) · <span class="multa greu">750 – 1.500 €</span>.</div>
+    </div>
+  </article>
+
+  <!-- ═══ VIGILÀNCIA I SEGURETAT ═══ -->
+  <div class="section-head" style="--accent:#E5484D;">
+    <span class="eyebrow">🚩 VIGILÀNCIA, SALVAMENT I BANDERES · TÍTOL TERCER · ARTS. 32–35</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Art. 32</span>
+      <span class="tag-sm">SERVEI</span>
+      <h4>Vigilància de les zones de bany</h4>
+    </header>
+    <p>L'Ajuntament ha de mantenir un <b>servei de vigilància</b> en temporada de platja amb les funcions: conservació, control del compliment de l'ordenança, senyalització i prevenció d'activitats perilloses.</p>
+  </article>
+
+  <article class="art-card" style="--accent:#E5484D;">
+    <header>
+      <span class="art-badge">Art. 33</span>
+      <span class="tag-sm danger">SALVAMENT</span>
+      <h4>Salvament i socorrisme</h4>
+    </header>
+    <p>Personal especialitzat als llocs de salvament. Cal mantenir un <b>accés permanentment lliure d'obstacles</b> per a ambulàncies. Si no hi ha lloc de salvament: cartell "Platja no vigilada · 112".</p>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div><b>Coordinació clau:</b> PL + Socorrisme + 112. La PL ha de garantir l'accés lliure d'ambulàncies (sancionar vehicles que l'obstrueixen).</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#E5484D;">
+    <header>
+      <span class="art-badge">Art. 34</span>
+      <span class="tag-sm danger">⭐ CLAU PL</span>
+      <h4>Banderes de bany</h4>
+    </header>
+    <p>Tres classificacions oficials: <b>verda, groga i vermella</b>. Banderes rectangulars d'<b>1,5 m × 1 m</b> en pals de mínim 3 m d'alçada, visibles des de tots els accessos.</p>
+    <section class="banderes-grid">
+      <div class="bandera verda">
+        <span class="ico">🟢</span>
+        <div class="nom">Verda</div>
+        <div class="desc">Mar tranquil · Aigua i platja en bones condicions · Bany lliure</div>
+      </div>
+      <div class="bandera groga">
+        <span class="ico">🟡</span>
+        <div class="nom">Groga</div>
+        <div class="desc">Onades fins a 1,5 m · Corrents mitjans · Meduses · Risc moderat</div>
+      </div>
+      <div class="bandera vermella">
+        <span class="ico">🔴</span>
+        <div class="nom">Vermella</div>
+        <div class="desc">Onades &gt; 2 m · Corrents forts · Bany PROHIBIT</div>
+      </div>
+    </section>
+    <div class="info danger">
+      <span class="ico">⚠️</span>
+      <div><b>No respectar bandera vermella</b> + llançar-se en zona prohibida (espigons, embarcadors) = <b>infracció GREU</b> (art. 38.4.i, j) · <span class="multa greu">750 – 1.500 €</span>. La PL pot <b>obligar a sortir de l'aigua</b> per seguretat.</div>
+    </div>
+    <div class="info warn">
+      <span class="ico">💡</span>
+      <div><b>Bandera groga + menor de 12 anys sense adult</b> = infracció LLEU (art. 38.5.s). <b>Bandera vermella</b> també tipificada com a lleu (art. 38.5.t) — coexistència amb la greu segons gravetat.</div>
+    </div>
+  </article>
+
+  <!-- ═══ INFRACCIONS ═══ -->
+  <div class="section-head" style="--accent:#9c3a08;">
+    <span class="eyebrow">⚠️ INFRACCIONS ADMINISTRATIVES · TÍTOL QUART · ARTS. 36–38</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card" style="--accent:#2F6BD8;">
+    <header>
+      <span class="art-badge">Arts. 36–37</span>
+      <span class="tag-sm">BASE</span>
+      <h4>Marc legal i responsables</h4>
+    </header>
+    <p>Marc: <b>arts. 139-141 Llei 7/1985 LRBRL</b>. Constitueix infracció tota acció o omissió que incompleixi els deures, prohibicions o limitacions de l'ordenança. Responsables: <b>persones físiques o jurídiques</b> que han participat per qualsevol títol.</p>
+  </article>
+
+  <article class="art-card danger">
+    <header>
+      <span class="art-badge">Art. 38.3</span>
+      <span class="tag-sm muygreu">🔴 MOLT GREUS</span>
+      <h4>Infraccions Molt Greus · 1.500 – 3.000 €</h4>
+    </header>
+    <ul>
+      <li><b>(a)</b> Ocupació domini públic sense títol/autorització.</li>
+      <li><b>(b)</b> Instal·lacions no autoritzades o augmentar superfície/volum/alçada autoritzats.</li>
+      <li><b>(c)</b> Conductes greus que provoquin <b>pertorbació rellevant</b> de la convivència, impediment d'ús d'un servei públic o <b>deteriorament greu</b> d'equipaments.</li>
+      <li><b>(d)</b> Conductes vandàliques, agressives o negligents al mobiliari urbà que generin risc/perill per la salut o integritat física.</li>
+    </ul>
+  </article>
+
+  <article class="art-card" style="--accent:#9c3a08;">
+    <header>
+      <span class="art-badge">Art. 38.4</span>
+      <span class="tag-sm greu">🟡 GREUS</span>
+      <h4>Infraccions Greus · 750 – 1.500 € · selecció operativa</h4>
+    </header>
+    <p>Les més habituals en servei:</p>
+    <div class="chip-row">
+      <span class="chip">a) Interrompre accés mar/trànsit</span>
+      <span class="chip">c) Vehicles motoritzats no autoritzats</span>
+      <span class="chip">d) Pintades, grafits</span>
+      <span class="chip">e) Espatllar mobiliari urbà</span>
+      <span class="chip">f) Cartells, pancartes, adhesius</span>
+      <span class="chip">g) Necessitats fisiològiques (vora usuaris)</span>
+      <span class="chip">h) Foc amb bombona/líquids inflamables</span>
+      <span class="chip danger">i) Bany amb bandera vermella</span>
+      <span class="chip danger">j) Llançar-se a espigons/zones prohibides</span>
+      <span class="chip">k) Jocs/esports amb risc rellevant</span>
+      <span class="chip danger">l) Alcohol amb alteració greu convivència</span>
+      <span class="chip danger">m) Conductes discriminatòries</span>
+      <span class="chip">n) Material pirotècnic prohibit</span>
+      <span class="chip">o-q) Trepitjar zona protegida · vegetació · fauna</span>
+      <span class="chip">r) Pesca incomplint art. 17</span>
+      <span class="chip">s) Abandonar hams</span>
+    </div>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div>La <b>conducta discriminatòria</b> de l'art. 38.4.m (insults xenòfobs, racistes, sexistes, homòfobs amb agressions/coaccions) és infracció administrativa autònoma. Cal valorar si arriba també a delicte d'odi (<b>art. 510 CP</b>).</div>
+    </div>
+  </article>
+
+  <article class="art-card" style="--accent:#1f8a4d;">
+    <header>
+      <span class="art-badge">Art. 38.5</span>
+      <span class="tag-sm lleu">🟢 LLEUS</span>
+      <h4>Infraccions Lleus · fins 750 € · selecció operativa</h4>
+    </header>
+    <p>Les més habituals en servei:</p>
+    <div class="chip-row">
+      <span class="chip ok">a) Activitats que pertorbin (després d'advertir)</span>
+      <span class="chip ok">b) Soroll amb advertiment previ</span>
+      <span class="chip ok">f) Alcohol sense alteració greu</span>
+      <span class="chip ok">g) Venda ambulant sense autorització</span>
+      <span class="chip ok">h) Massatges/tatuatges no autoritzats</span>
+      <span class="chip ok">i) Acampada / pernoctar</span>
+      <span class="chip ok">j) Sabó/gel/xampú al mar o dutxes</span>
+      <span class="chip ok">l) Foc simple sense bombona</span>
+      <span class="chip ok">m–n) Bany d'animals · Animals temporada</span>
+      <span class="chip ok">o) Cavalls tot l'any</span>
+      <span class="chip ok">q) Col·laborar amb venedors</span>
+      <span class="chip ok">r) Pràctiques sexuals públiques</span>
+      <span class="chip ok">s) Bandera groga + menor 12 sol</span>
+      <span class="chip ok">u) Senyals lumíniques (làser)</span>
+      <span class="chip ok">v) Nudisme a Murtra/Pineda</span>
+      <span class="chip ok">x) Kitesurf incomplint art. 14</span>
+    </div>
+  </article>
+
+  <!-- ═══ SANCIONS ═══ -->
+  <div class="section-head" style="--accent:#9c7a1f;">
+    <span class="eyebrow">💰 RÈGIM DE SANCIONS · TÍTOL CINQUÈ · ART. 39</span>
+    <span class="rule"></span>
+  </div>
+
+  <article class="art-card warn" style="--accent:#9c7a1f;">
+    <header>
+      <span class="art-badge">Art. 39</span>
+      <span class="tag-sm warn">⭐ CLAU PL</span>
+      <h4>Quanties i procediment</h4>
+    </header>
+    <table class="ntable">
+      <thead><tr><th>Gravetat</th><th>Multa</th><th>Tipus exemple</th></tr></thead>
+      <tbody>
+        <tr><td><b>Lleu</b></td><td><span class="multa lleu">Fins a 750 €</span></td><td>Acampada · venda ambulant · nudisme zona no permesa</td></tr>
+        <tr><td><b>Greu</b></td><td><span class="multa greu">750,01 – 1.500 €</span></td><td>Vehicle motor · grafit · bandera vermella · pesca prohibida</td></tr>
+        <tr><td><b>Molt greu</b></td><td><span class="multa muygreu">1.500,01 – 3.000 €</span></td><td>Ocupació sense títol · vandalisme amb risc</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px;"><b>Potestat sancionadora:</b> l'Alcalde (delegable). <b>Procediment:</b> Ordenança de Procediment Sancionador de Viladecans + supletòriament Decret 278/1993 i Lleis 39/2015 i 40/2015.</p>
+    <div class="info cop">
+      <span class="ico">🚔</span>
+      <div><b>Workflow operatiu PL:</b> ① identificar infractor (DNI/NIE) · ② acta de denúncia amb article infringit · ③ si escau, acta de comís (art. 21) · ④ tramesa al Departament Sancions · ⑤ si flagrant, advertiment previ obligatori en certes lleus (art. 38.5.a i b).</div>
+    </div>
+  </article>
+
+  <!-- ═══ RECORDA ═══ -->
+  <section class="recorda">
+    <header>
+      <span class="eyebrow" style="color:#9c7a1f;">📋 RECORDA · ORDENANÇA PLATGES VILADECANS</span>
+      <span class="rule"></span>
+    </header>
+    <ul class="reclist">
+      <li><div>📅 <b>Cronologia:</b> aprovació def. 31 gen 2013 · BOPB 7 maig 2013 · Vigent.</div></li>
+      <li><div>🏖️ <b>4 platges:</b> Murtra, Pineda (serveis), Cal Francès i Remolar (Xarxa Natura 2000).</div></li>
+      <li><div>💰 <b>3 graus de multa:</b> Lleu fins 750 € · Greu 750-1.500 € · Molt greu 1.500-3.000 €. Sanciona l'Alcalde (art. 39).</div></li>
+      <li><div>📏 <b>Servitud de trànsit:</b> 6 m permanentment lliures (ampliable fins 20 m). Interrompre-la = greu.</div></li>
+      <li><div>🐕 <b>Animals:</b> Murtra/Pineda → prohibits en temporada · Cal Francès/Remolar → tot l'any · Pigall sempre permès · Cavalls prohibits tot l'any.</div></li>
+      <li><div>🏝️ <b>Nudisme:</b> només a Cal Francès i Remolar. A Murtra/Pineda = lleu (art. 38.5.v).</div></li>
+      <li><div>🚗 <b>Vehicles motor a la platja:</b> infracció GREU. Excepcions: PL/Mossos, neteja, urgències, salvament i cadires de discapacitats.</div></li>
+      <li><div>⛺ <b>Acampada/pernoctar:</b> sempre lleu (art. 38.5.i). Inclou tendes, ombrel·les tancades i vehicles habitables.</div></li>
+      <li><div>🎣 <b>Pesca recreativa amb canya:</b> 16 set–14 maig lliure · 15 maig–15 set només 20.00–8.00 h · Cal Francès/Remolar prohibida tot l'any · Arpó sempre prohibit.</div></li>
+      <li><div>🪁 <b>Kitesurf:</b> permès si està al Pla d'usos (1 jun–30 set) · MAI a Cal Francès ni Remolar.</div></li>
+      <li><div>🚩 <b>Banderes:</b> Verda lliure · Groga risc moderat · Vermella PROHIBIT BANY. La PL pot obligar a sortir de l'aigua per seguretat.</div></li>
+      <li><div>🔥 <b>Foc:</b> simple = lleu · amb bombona de gas o líquids inflamables = GREU (art. 38.4.h).</div></li>
+      <li><div>📦 <b>Venda ambulant:</b> art. 21.4 permet als agents <b>comissar productes</b> (es retornen pagada la multa).</div></li>
+      <li><div>🌿 <b>Zona dunar protegida:</b> trepitjar, arrencar vegetació, caçar = infraccions GREUS.</div></li>
+      <li><div>🚽 <b>Necessitats fisiològiques:</b> sense usuaris a la vora = lleu · amb usuaris a la vora = GREU.</div></li>
+      <li><div>🍷 <b>Alcohol via pública:</b> lleu en general · GREU si altera greument la convivència.</div></li>
+      <li><div>⚠️ <b>Conductes discriminatòries</b> (xenofòbia, racisme, sexisme, homofòbia): infracció GREU + valorar art. 510 CP.</div></li>
+      <li><div>🚑 <b>Salvament i 112:</b> mantenir lliure l'accés d'ambulàncies. Platja no vigilada → cartell "112".</div></li>
+      <li><div>🏛️ <b>Procediment:</b> Ordenança Sancionadora Viladecans + supletòriament Lleis 39/2015 i 40/2015.</div></li>
+      <li><div>📝 <b>Acta de denúncia PL:</b> identificar autor, fets, article infringit, gravetat, testimonis, foto si escau, acta de comís quan procedeixi.</div></li>
+    </ul>
+  </section>
 
 </div>
-
-<script>
-  function toggle(header) {
-    header.classList.toggle('open');
-    const body = header.nextElementSibling;
-    if (body.style.display === 'none' || body.style.display === '') {
-      body.style.display = 'block';
-      body.style.animation = 'fadeUp .3s ease';
-    } else {
-      body.style.display = 'none';
-    }
-  }
-</script>
 </body>
 </html>
