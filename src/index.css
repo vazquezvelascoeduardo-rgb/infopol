@@ -3602,6 +3602,22 @@ html[data-text-size="lg"] { font-size: 18px; }
     .fc-card { padding: 24px 20px; min-height: 240px; }
   }
 
+  /* ── Calculadora Widmark inputs ──────────────────────────────── */
+  .wid-input {
+    width: 100%;
+    border: 1.5px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 14.5px;
+    outline: none;
+    transition: border-color .12s;
+  }
+  .wid-input:focus {
+    border-color: var(--ink);
+  }
+
   /* ── Capçaleres d'àmbit (a /mossos) ──────────────────────────── */
   .ambit-head {
     margin-top: 18px;

@@ -3,6 +3,7 @@
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
 import AlcoholCalculator from '../components/AlcoholCalculator';
+import WidmarkCalculator from '../components/WidmarkCalculator';
 
 export default function CalculadoraAlcohol() {
   const { t } = useT();
@@ -41,6 +42,17 @@ export default function CalculadoraAlcohol() {
         border-slate-200/80 bg-white
         dark:border-white/10 dark:bg-[#0f1d34]">
         <AlcoholCalculator />
+      </div>
+
+      {/* Calculadora Widmark — retroprojecció amb 2 proves */}
+      <div className="mt-6">
+        <div className="section-head" style={{ ['--accent' as never]: '#9c7a1f' } as React.CSSProperties}>
+          <span className="eyebrow">📐 Càlcul Widmark · 2 proves</span>
+          <span className="rule" />
+        </div>
+        <div className="mt-3 rounded-2xl border border-line bg-paper p-4 sm:p-5">
+          <WidmarkCalculator />
+        </div>
       </div>
     </div>
   );
