@@ -4532,6 +4532,21 @@ html[data-text-size="lg"] { font-size: 18px; }
     font-weight: 800;
     box-shadow: 0 4px 12px -4px color-mix(in oklab, var(--accent) 60%, transparent);
   }
+  .temari-section.is-extra .temari-section-num {
+    background: var(--paper-2);
+    color: var(--accent);
+    border: 1px solid var(--tonal-edge);
+    font-size: 18px;
+    box-shadow: none;
+  }
+  .temari-toc-link.is-extra .n {
+    background: var(--paper-2);
+    color: var(--accent);
+    width: auto; min-width: 18px;
+    padding: 0 4px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
   .temari-section-title {
     margin: 0;
     font-size: 22px;

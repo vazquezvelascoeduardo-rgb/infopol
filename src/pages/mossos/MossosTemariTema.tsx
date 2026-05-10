@@ -18,10 +18,11 @@ type TemaParts = {
 };
 
 type TemaSection = {
-  num: number;
+  num: number | null;   // null per a seccions especials (Glossari, Examen…)
   title: string;
   id: string;
   body: string;
+  emoji?: string;       // emoji al davant del títol, si n'hi ha
 };
 
 function slugify(s: string): string {
@@ -51,37 +52,50 @@ function parseTema(body: string): TemaParts {
 
   while (i < lines.length) {
     const line = lines[i];
-    const hSyn = line.match(/^##\s+S[ií]ntesi(?:\s+del\s+tema)?\s*$/i);
-    const hNum = line.match(/^##\s+(\d+)\.\s+(.+)$/);
-    if (hSyn) {
+    const hH2 = line.match(/^##\s+(.+?)\s*$/);
+
+    if (hH2) {
+      const headingFull = hH2[1].trim();
+      const hSyn = /^S[ií]ntesi(?:\s+del\s+tema)?$/i.test(headingFull);
+      const hNum = headingFull.match(/^(\d+)\.\s+(.+)$/);
+      // Recollim el cos fins a la propera capçalera ##.
       i++;
       const buf: string[] = [];
       while (i < lines.length && !/^##\s+/.test(lines[i])) {
         buf.push(lines[i]);
         i++;
       }
-      syntesi = buf.join('\n').trim();
-      continue;
-    }
-    if (hNum) {
-      const num = parseInt(hNum[1], 10);
-      const title = hNum[2].trim();
-      i++;
-      const buf: string[] = [];
-      while (i < lines.length && !/^##\s+/.test(lines[i])) {
-        buf.push(lines[i]);
-        i++;
+      const body = buf.join('\n').trim();
+
+      if (hSyn) {
+        syntesi = body;
+      } else if (hNum) {
+        const num = parseInt(hNum[1], 10);
+        const title = hNum[2].trim();
+        sections.push({
+          num,
+          title,
+          id: `s-${num}-${slugify(title)}`,
+          body,
+        });
+      } else {
+        // Secció especial sense número (Glossari, ⚠️ Per a l'examen, etc.)
+        // Extraiem un emoji opcional al davant.
+        const emojiMatch = headingFull.match(/^([\p{Emoji_Presentation}\p{Extended_Pictographic}⚠️📖🔑🧭✅]+)\s*(.+)$/u);
+        const emoji = emojiMatch?.[1];
+        const title = (emojiMatch?.[2] ?? headingFull).trim();
+        sections.push({
+          num: null,
+          title,
+          id: `s-extra-${slugify(title)}`,
+          body,
+          emoji,
+        });
       }
-      sections.push({
-        num,
-        title,
-        id: `s-${num}-${slugify(title)}`,
-        body: buf.join('\n').trim(),
-      });
       continue;
     }
-    // Línia que no encaixa: la posem com a "intro" abans de la primera secció.
-    // Si ja hi ha seccions, la concatenem a la darrera. Altrament, a syntesi.
+
+    // Contingut "stray" abans de qualsevol ## (rar però possible).
     const stray: string[] = [];
     while (i < lines.length && !/^##\s+/.test(lines[i])) {
       stray.push(lines[i]);
@@ -89,13 +103,8 @@ function parseTema(body: string): TemaParts {
     }
     const text = stray.join('\n').trim();
     if (text) {
-      if (sections.length > 0) {
-        sections[sections.length - 1].body += '\n\n' + text;
-      } else if (syntesi) {
-        syntesi += '\n\n' + text;
-      } else {
-        syntesi = text;
-      }
+      if (syntesi) syntesi += '\n\n' + text;
+      else syntesi = text;
     }
   }
   return { syntesi, sections };
@@ -220,7 +229,7 @@ export default function MossosTemariTema() {
         <nav className="temari-toc-mobile" aria-label="Índex del tema">
           {parts.sections.map((s) => (
             <a key={s.id} href={`#${s.id}`} className="temari-toc-chip">
-              <span className="n">{s.num}</span>
+              <span className="n">{s.num ?? (s.emoji ?? '★')}</span>
               <span className="t">{s.title}</span>
             </a>
           ))}
@@ -236,9 +245,17 @@ export default function MossosTemariTema() {
             </div>
           ) : (
             parts.sections.map((s) => (
-              <section key={s.id} id={s.id} className="temari-section">
+              <section
+                key={s.id}
+                id={s.id}
+                className={
+                  's temari-section' + (s.num === null ? ' is-extra' : '')
+                }
+              >
                 <header className="temari-section-head">
-                  <span className="temari-section-num">{s.num}</span>
+                  <span className="temari-section-num">
+                    {s.num !== null ? s.num : (s.emoji ?? '★')}
+                  </span>
                   <h2 className="temari-section-title">{s.title}</h2>
                 </header>
                 <div className="temari-section-body">
@@ -261,10 +278,11 @@ export default function MossosTemariTema() {
                   <a
                     href={`#${s.id}`}
                     className={
-                      'temari-toc-link' + (active === s.id ? ' active' : '')
+                      'temari-toc-link' + (active === s.id ? ' active' : '') +
+                      (s.num === null ? ' is-extra' : '')
                     }
                   >
-                    <span className="n">{s.num}</span>
+                    <span className="n">{s.num ?? (s.emoji ?? '★')}</span>
                     <span className="t">{s.title}</span>
                   </a>
                 </li>
