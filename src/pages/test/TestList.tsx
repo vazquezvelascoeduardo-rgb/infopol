@@ -177,14 +177,14 @@ export default function TestList() {
           </span>
           <span className="pl-jump-arr" aria-hidden>→</span>
         </Link>
-        <a href="#pl-temari" className="pl-jump-btn jump-temari">
+        <Link to="/leyes" className="pl-jump-btn jump-temari">
           <span className="pl-jump-icon" aria-hidden>📚</span>
           <span className="pl-jump-text">
             <span className="pl-jump-eyebrow">{t('policiaLocal.jump.eyebrowTemari')}</span>
             <span className="pl-jump-title">{t('policiaLocal.jump.temari')}</span>
           </span>
           <span className="pl-jump-arr" aria-hidden>→</span>
-        </a>
+        </Link>
       </nav>
 
       {/* STATS PERSONALS */}

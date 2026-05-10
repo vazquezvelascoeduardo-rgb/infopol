@@ -4506,6 +4506,77 @@ html[data-text-size="lg"] { font-size: 18px; }
   }
   .op-area.drets h3 { color: var(--accent); }
 
+  /* ── Acadèmia · botons secundaris (Actualitat + Cultura general) ─ */
+  .ac-extra {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .ac-extra-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    color: var(--ink);
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .ac-extra-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -6px rgba(14, 14, 14, 0.14);
+    border-color: var(--accent, var(--terracotta));
+  }
+  .ac-extra-card.noticies { --accent: #2F6BD8; --accent-bg: #EAF1FE; }
+  .ac-extra-card.cultura { --accent: #9747D6; --accent-bg: #F5E9FF; }
+  .ac-extra-card .ico {
+    width: 48px; height: 48px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 12px;
+    background: var(--accent-bg);
+    color: var(--accent);
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .ac-extra-card .text {
+    display: flex; flex-direction: column; gap: 2px; min-width: 0;
+  }
+  .ac-extra-card .eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+  }
+  .ac-extra-card h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .ac-extra-card p {
+    margin: 2px 0 0;
+    font-size: 12.5px;
+    color: var(--text-3);
+    line-height: 1.35;
+  }
+  .ac-extra-card .arr {
+    color: var(--accent);
+    font-size: 18px;
+    font-weight: 800;
+    transition: transform 0.2s ease;
+  }
+  .ac-extra-card:hover .arr { transform: translateX(4px); }
+  @media (max-width: 720px) {
+    .ac-extra { grid-template-columns: 1fr; }
+  }
+
   /* ════════════════════════════════════════════════════════════════
      ZONA DE TESTS — wrapper visual perquè la secció destaqui clarament
      ════════════════════════════════════════════════════════════════ */

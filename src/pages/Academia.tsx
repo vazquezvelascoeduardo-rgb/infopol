@@ -201,6 +201,28 @@ export default function Academia() {
         </Link>
       </section>
 
+      {/* 2 BOTONS SECUNDARIS — Actualitat + Cultura general */}
+      <section className="ac-extra">
+        <Link to="/noticies" className="ac-extra-card noticies">
+          <span className="ico" aria-hidden>📰</span>
+          <div className="text">
+            <span className="eyebrow">{t('academia.extra.actualitatEyebrow')}</span>
+            <h3>{t('academia.extra.actualitat')}</h3>
+            <p>{t('academia.extra.actualitatDesc')}</p>
+          </div>
+          <span className="arr" aria-hidden>→</span>
+        </Link>
+        <Link to="/cultura-general" className="ac-extra-card cultura">
+          <span className="ico" aria-hidden>🎭</span>
+          <div className="text">
+            <span className="eyebrow">{t('academia.extra.culturaEyebrow')}</span>
+            <h3>{t('academia.extra.cultura')}</h3>
+            <p>{t('academia.extra.culturaDesc')}</p>
+          </div>
+          <span className="arr" aria-hidden>→</span>
+        </Link>
+      </section>
+
       {/* CONTINUE + NEXT */}
       <section className="cont-row">
         <article className="cont-card">
