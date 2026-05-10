@@ -2976,6 +2976,99 @@ html[data-text-size="lg"] { font-size: 18px; }
     border: 1px solid var(--line);
   }
 
+  /* Referències ràpides al Penal (taula actes, drogues, recursos, drets) */
+  .penal-refs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 12px 0 24px;
+  }
+  .penal-ref {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1.5px solid var(--line);
+    background: var(--paper);
+    border-left: 4px solid var(--accent);
+    color: var(--ink);
+    transition: background .12s, transform .12s;
+  }
+  .penal-ref:hover {
+    background: var(--paper-2);
+    transform: translateY(-2px);
+  }
+  .penal-ref-icon {
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .penal-ref-label {
+    flex: 1;
+    font-size: 13.5px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .penal-ref-arr {
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 16px;
+    transition: transform .12s;
+  }
+  .penal-ref:hover .penal-ref-arr { transform: translateX(2px); }
+  @media (max-width: 980px) {
+    .penal-refs { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .penal-refs { grid-template-columns: 1fr; }
+  }
+
+  /* Blocs del Penal (Operatiu, Persones, Patrimoni, Ordre, Emergències) */
+  .penal-bloc {
+    margin-top: 28px;
+  }
+  .penal-bloc-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--accent) 8%, var(--paper));
+    border-left: 4px solid var(--accent);
+  }
+  .penal-bloc-icon { font-size: 22px; line-height: 1; }
+  .penal-bloc-title {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+    flex: 1;
+  }
+  .penal-bloc-count {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.8;
+  }
+
+  /* Principi clau al runner del penal */
+  .op-runner-principi {
+    font-size: 13.5px;
+    color: var(--text-2);
+    font-style: italic;
+    margin: 0 0 8px;
+    padding: 8px 12px;
+    background: var(--paper-2);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+  }
+
   /* Filtres chips */
   .op-chips {
     @apply inline-flex flex-wrap gap-1.5;
