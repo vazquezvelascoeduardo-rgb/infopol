@@ -2820,6 +2820,161 @@ html[data-text-size="lg"] { font-size: 18px; }
     @apply inline-flex items-center gap-1;
   }
   .op-proc:hover .open { gap: 8px; }
+  /* Variant compacta del grid de procediments (per llistats interns
+     com /operativa/trafico o /operativa/penal). */
+  .op-procs.op-procs-compact {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .op-procs.op-procs-compact .op-proc {
+    padding: 16px 18px;
+    min-height: auto;
+  }
+  .op-procs.op-procs-compact .op-proc h4 {
+    font-size: 16px;
+  }
+  .op-procs.op-procs-compact .op-proc .top {
+    margin-bottom: 8px;
+  }
+  .op-proc-emoji {
+    font-size: 28px;
+    line-height: 1;
+  }
+  @media (max-width: 980px) {
+    .op-procs.op-procs-compact { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .op-procs.op-procs-compact { grid-template-columns: 1fr; }
+  }
+
+  /* Sub-hero compacte per a pàgines internes d'operativa */
+  .op-subhero {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 18px;
+    padding: 22px 24px;
+    border-radius: 18px;
+    border: 1.5px solid var(--line);
+    background: linear-gradient(135deg, var(--paper) 0%, var(--paper-2) 100%);
+    border-left: 5px solid var(--accent, var(--terracotta));
+    margin-top: 4px;
+  }
+  .op-subhero-icon {
+    font-size: 44px;
+    line-height: 1;
+    padding: 14px;
+    border-radius: 16px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+  }
+  .op-subhero-text { min-width: 0; }
+  .op-subhero-text .eyebrow {
+    color: var(--accent, var(--terracotta));
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    font-weight: 700;
+  }
+  .op-subhero-text h1 {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 4px 0 6px;
+  }
+  .op-subhero-text p {
+    font-size: 14px;
+    color: var(--text-2);
+    margin: 0;
+    line-height: 1.45;
+  }
+  .op-subhero-count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 12px 18px;
+    border-radius: 14px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    text-align: center;
+  }
+  .op-subhero-count b {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--accent, var(--terracotta));
+    line-height: 1;
+  }
+  .op-subhero-count span {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    font-weight: 700;
+  }
+  @media (max-width: 720px) {
+    .op-subhero { grid-template-columns: auto 1fr; }
+    .op-subhero-count { display: none; }
+    .op-subhero-text h1 { font-size: 22px; }
+  }
+
+  /* Header del runner (quan obres un escenari concret) */
+  .op-runner-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 20px 22px;
+    border-radius: 16px;
+    border: 1.5px solid var(--line);
+    background: var(--paper);
+    border-left: 4px solid var(--accent, var(--terracotta));
+    margin: 16px 0 18px;
+  }
+  .op-runner-icon {
+    font-size: 36px;
+    line-height: 1;
+    padding: 10px;
+    border-radius: 12px;
+    background: var(--paper-2);
+  }
+  .op-runner-text { min-width: 0; }
+  .op-runner-text .eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--accent, var(--terracotta));
+    font-weight: 700;
+  }
+  .op-runner-text h1 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin: 4px 0 8px;
+    color: var(--ink);
+  }
+  .op-runner-refs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .op-runner-refs li {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--paper-2);
+    color: var(--text-2);
+    border: 1px solid var(--line);
+  }
 
   /* Filtres chips */
   .op-chips {

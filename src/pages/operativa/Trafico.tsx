@@ -1,9 +1,9 @@
-// Pàgina de Trànsit (Operativa).
+// Pàgina de Trànsit (Operativa) · rebranding 2026.
 // Dos modes:
-//   - Llistat: /operativa/trafico → mostra els 12 escenaris (alcoholèmia,
+//   - Llistat: /operativa/trafico → mostra els escenaris (alcoholèmia,
 //     drogues, velocitat, etc.) com a targetes seleccionables.
 //   - Runner: /operativa/trafico/:id → executa un escenari concret amb
-//     ChecklistRunner (estat propi: pila de nodes visitats).
+//     el component ChecklistRunner.
 import { Link, useParams } from 'react-router-dom';
 import {
   TRAFICO_INDEX,
@@ -24,70 +24,59 @@ export default function Trafico() {
 function ChecklistList() {
   const { t } = useT();
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-6">
-      <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3">
-        <Link to="/" className="hover:underline">{t('nav.home')}</Link>
-        <span className="mx-2" aria-hidden>/</span>
-        <Link to="/operativa" className="hover:underline">{t('operativa.title')}</Link>
-        <span className="mx-2" aria-hidden>/</span>
-        <span className="text-slate-700 dark:text-slate-200">
-          {t('operativa.trafico.title')}
-        </span>
+    <div className="shell pb-10">
+      <nav className="crumbs">
+        <Link to="/">{t('nav.home')}</Link>
+        <span className="sep">/</span>
+        <Link to="/operativa">{t('operativa.title')}</Link>
+        <span className="sep">/</span>
+        <span className="here">{t('operativa.trafico.title')}</span>
       </nav>
 
-      <header className="rounded-2xl border p-5 sm:p-7 shadow-sm
-        border-slate-200 bg-white
-        dark:border-white/10 dark:bg-gradient-to-br dark:from-[#0f1d34] dark:to-[#0a1628] dark:shadow-none">
-        <div className="flex items-start gap-4">
-          <span
-            aria-hidden
-            className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-amber-700 text-3xl text-white shadow-inner"
-          >
-            🚦
-          </span>
-          <div className="min-w-0">
-            <div className="text-[11px] uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400/90">
-              {t('operativa.title')}
-            </div>
-            <h1 className="mt-1 text-2xl sm:text-3xl font-black tracking-tight">
-              {TRAFICO_INDEX.titol}
-            </h1>
-            {TRAFICO_INDEX.descripcio && (
-              <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                {TRAFICO_INDEX.descripcio}
-              </p>
-            )}
-          </div>
+      {/* Header compacte amb escut + títol + descripció + comptador */}
+      <header className="op-subhero" style={{ ['--accent' as never]: '#F26B1F' } as React.CSSProperties}>
+        <span className="op-subhero-icon" aria-hidden>🚦</span>
+        <div className="op-subhero-text">
+          <span className="eyebrow">{t('operativa.title').toUpperCase()}</span>
+          <h1>{TRAFICO_INDEX.titol}</h1>
+          {TRAFICO_INDEX.descripcio && <p>{TRAFICO_INDEX.descripcio}</p>}
         </div>
+        <span className="op-subhero-count">
+          <b>{TRAFICO_INDEX.escenaris.length}</b>
+          <span>escenaris</span>
+        </span>
       </header>
 
-      <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div
+        className="section-head"
+        style={{ ['--accent' as never]: '#F26B1F', marginTop: 24 } as React.CSSProperties}
+      >
+        <span className="eyebrow">📋 ESCENARIS DISPONIBLES</span>
+        <span className="rule" />
+      </div>
+
+      <section className="op-procs op-procs-compact">
         {TRAFICO_INDEX.escenaris.map((e) => (
-          <li key={e.id}>
-            <Link
-              to={`/operativa/trafico/${encodeURIComponent(e.id)}`}
-              className="group relative block h-full overflow-hidden rounded-2xl border p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md
-                border-slate-200 bg-white hover:border-amber-400/60
-                dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-amber-400/40"
-            >
-              <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-amber-500 to-amber-700" />
-              <div className="flex items-start gap-3">
-                <span aria-hidden className="text-3xl shrink-0">
-                  {extractEmoji(e.titol) ?? '🚦'}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="font-bold leading-tight">
-                    {stripEmoji(e.titol)}
-                  </div>
-                  <div className="text-[10px] uppercase tracking-wider mt-1 text-amber-600 dark:text-amber-400">
-                    {t('checklist.start')} →
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </li>
+          <Link
+            key={e.id}
+            to={`/operativa/trafico/${encodeURIComponent(e.id)}`}
+            className="op-proc"
+            style={{
+              ['--accent' as never]: '#F26B1F',
+              ['--accent-bg' as never]: '#FFEFE4',
+            } as React.CSSProperties}
+          >
+            <div className="top">
+              <span className="op-proc-emoji" aria-hidden>{extractEmoji(e.titol) ?? '🚦'}</span>
+              <span className="lvl">TRÀNSIT</span>
+            </div>
+            <h4>{stripEmoji(e.titol)}</h4>
+            <div className="footer-row">
+              <span className="open">Obrir checklist →</span>
+            </div>
+          </Link>
         ))}
-      </ul>
+      </section>
     </div>
   );
 }
@@ -99,63 +88,44 @@ function ChecklistRunnerScreen({ id }: { id: string }) {
 
   if (!entry || !checklist) {
     return (
-      <div className="mx-auto w-full max-w-3xl px-4 py-6">
-        <p className="text-slate-600 dark:text-slate-400">
-          {t('checklist.notFound')}
-        </p>
-        <Link to="/operativa/trafico" className="text-amber-600 dark:text-amber-400 underline">
-          {t('checklist.backToList')}
+      <div className="shell py-10">
+        <p className="text-text-2">{t('checklist.notFound')}</p>
+        <Link to="/operativa/trafico" className="text-sm font-bold text-ink underline mt-3 inline-block">
+          ← {t('checklist.backToList')}
         </Link>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-6">
-      <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3 flex flex-wrap items-center gap-1">
-        <Link to="/" className="hover:underline">{t('nav.home')}</Link>
-        <span aria-hidden>/</span>
-        <Link to="/operativa" className="hover:underline">{t('operativa.title')}</Link>
-        <span aria-hidden>/</span>
-        <Link to="/operativa/trafico" className="hover:underline">
-          {t('operativa.trafico.title')}
-        </Link>
-        <span aria-hidden>/</span>
-        <span className="text-slate-700 dark:text-slate-200 font-medium">
-          {stripEmoji(entry.titol)}
-        </span>
+    <div className="shell pb-10" style={{ maxWidth: 760 }}>
+      <nav className="crumbs">
+        <Link to="/">{t('nav.home')}</Link>
+        <span className="sep">/</span>
+        <Link to="/operativa">{t('operativa.title')}</Link>
+        <span className="sep">/</span>
+        <Link to="/operativa/trafico">{t('operativa.trafico.title')}</Link>
+        <span className="sep">/</span>
+        <span className="here truncate">{stripEmoji(entry.titol)}</span>
       </nav>
 
-      {/* Capçalera amb títol del checklist */}
-      <header className="rounded-2xl border p-4 sm:p-5 mb-4
-        border-slate-200 bg-white
-        dark:border-white/10 dark:bg-[#0f1d34]">
-        <div className="flex items-start gap-3">
-          <span aria-hidden className="text-3xl shrink-0">
-            {extractEmoji(entry.titol) ?? checklist.icono ?? '🚦'}
-          </span>
-          <div className="min-w-0">
-            <div className="text-[11px] uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400/90">
-              {t('operativa.trafico.title')}
-            </div>
-            <h1 className="mt-0.5 text-xl sm:text-2xl font-extrabold tracking-tight">
-              {stripEmoji(entry.titol)}
-            </h1>
-            {checklist.base_legal && checklist.base_legal.length > 0 && (
-              <ul className="mt-2 flex flex-wrap gap-1.5">
-                {checklist.base_legal.map((b, i) => (
-                  <li
-                    key={i}
-                    className="rounded-md border px-2 py-0.5 text-xs font-mono
-                      border-slate-300 bg-slate-100 text-slate-700
-                      dark:border-white/15 dark:bg-white/5 dark:text-slate-300"
-                  >
-                    {b}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+      <header
+        className="op-runner-head"
+        style={{ ['--accent' as never]: '#F26B1F' } as React.CSSProperties}
+      >
+        <span className="op-runner-icon" aria-hidden>
+          {extractEmoji(entry.titol) ?? checklist.icono ?? '🚦'}
+        </span>
+        <div className="op-runner-text">
+          <span className="eyebrow">{t('operativa.trafico.title').toUpperCase()}</span>
+          <h1>{stripEmoji(entry.titol)}</h1>
+          {checklist.base_legal && checklist.base_legal.length > 0 && (
+            <ul className="op-runner-refs">
+              {checklist.base_legal.map((b, i) => (
+                <li key={i}>{b}</li>
+              ))}
+            </ul>
+          )}
         </div>
       </header>
 
@@ -164,9 +134,7 @@ function ChecklistRunnerScreen({ id }: { id: string }) {
   );
 }
 
-// El títol al fitxer index pot començar per un emoji ("🍺 Alcoholèmia").
-// Aquestes utilitats el separen perquè el puguem mostrar de forma
-// independent (icona gran + text al costat).
+// Utilitats per separar l'emoji inicial del títol (per posar-lo gran al costat).
 const EMOJI_RE = /^([\p{Extended_Pictographic}\u{200D}️]+)\s*/u;
 
 function extractEmoji(s: string): string | undefined {
