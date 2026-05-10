@@ -514,7 +514,59 @@
     .ce-hero { grid-template-columns: 1fr; text-align: center; }
     .ce-shield { margin: 0 auto; }
     .ce-title { font-size: 28px; }
+    .prof-grid { grid-template-columns: 1fr; }
   }
+
+  /* ── Bloque resumen del professor (ampliació 2026) ── */
+  .prof-block {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 2px rgba(14,14,14,0.04), 0 8px 24px -8px rgba(14,14,14,0.10);
+  }
+  .prof-block h4 {
+    font-size: 15px; font-weight: 800; color: var(--ink);
+    margin-bottom: 8px; display: flex; align-items: baseline; gap: 8px;
+  }
+  .prof-block h4 .art-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; background: #2F6BD8; color: white;
+    padding: 3px 8px; border-radius: 5px; letter-spacing: 0.05em;
+  }
+  .prof-block p { font-size: 14px; color: var(--text-2); margin-bottom: 6px; }
+  .prof-block p:last-child { margin-bottom: 0; }
+  .prof-block ul { margin: 6px 0 0 18px; font-size: 14px; color: var(--text-2); }
+  .prof-block ul li { margin-bottom: 4px; }
+  .prof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .exam-tag {
+    background: linear-gradient(180deg, transparent 55%, #FFE56B 55%);
+    padding: 0 2px; border-radius: 2px;
+    font-weight: 600; color: var(--ink);
+  }
+  .exam-tag::after { content: " ❓"; font-size: 0.85em; color: #d9531a; }
+  .exam-banner {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #FFF8DA; border: 1px solid #F2D24A; color: #6b5a30;
+    font-size: 11px; font-weight: 700; padding: 2px 8px;
+    border-radius: 999px; margin-left: 8px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .compare-table {
+    width: 100%; border-collapse: collapse; margin-top: 8px;
+    font-size: 13.5px;
+  }
+  .compare-table th, .compare-table td {
+    padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .compare-table th {
+    background: var(--paper-2); color: var(--ink);
+    font-weight: 700; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
 </style>
 </head>
 <body data-fitxa-style="rebrand-2026">
@@ -1172,6 +1224,108 @@
       </article>
 
     </div>
+
+    <!-- ═══ RESUM DEL PROFESSOR · ATEMPTAT vs RESISTÈNCIA vs DESOBEDIÈNCIA ═══ -->
+    <div class="section-head" style="--accent: var(--c-operativa);margin-top:28px;">
+      <span class="eyebrow">📘 RESUM DEL PROFESSOR · ATEMPTAT, RESISTÈNCIA I DESOBEDIÈNCIA</span>
+      <span class="rule"></span>
+      <span class="exam-banner">❓ Cau a l'examen</span>
+    </div>
+
+    <p style="margin-bottom:14px;color:var(--text-2);font-size:14.5px;">
+      Saber distingir <b>atemptat (550-551), resistència no greu (556) i desobediència (556 / 634)</b> és la pregunta més recurrent sobre delictes contra l'ordre públic. La diferència recau en <b>la intensitat de la violència, la naturalesa de la conducta (activa o passiva) i el subjecte passiu</b>.
+    </p>
+
+    <div class="prof-grid">
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 550</span> Atemptat (tipus bàsic)</h4>
+        <p>Comet atemptat qui <span class="exam-tag">agredeix o, amb intimidació greu o violència, ofereix resistència greu</span> a l'autoritat, als seus agents o funcionaris públics, o els acomet, mentre estan exercint les funcions del seu càrrec o amb ocasió d'aquestes.</p>
+        <p><b>Pena:</b> 1-4 anys de presó (acomesa contra agent) · <span class="exam-tag">2-4 anys (contra autoritat)</span> · multa 6-18 mesos en altres casos.</p>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">📌 <b>Subjectes protegits</b>: agents (PL, GC, CNP, Mossos), bombers, sanitaris d'emergència, personal de seguretat privada quan col·laboren amb la PL, professors i personal sanitari (LO 1/2025).</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 551</span> Atemptat agreujat</h4>
+        <p>S'imposen les penes superiors en grau quan concorre alguna circumstància:</p>
+        <ul>
+          <li><span class="exam-tag">Ús d'armes o instruments perillosos</span>.</li>
+          <li>Acció des d'un vehicle a motor.</li>
+          <li>Llançament d'objectes contundents, líquids inflamables o cremants.</li>
+          <li>Quan es causa <b>lesió o mort</b> de l'agent.</li>
+        </ul>
+        <p><b>Pena qualificada:</b> 3-6 anys + concurs ideal amb el delicte de lesions/homicidi resultant.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 556</span> Resistència no greu i desobediència greu</h4>
+        <p><b>556.1</b> Els que <span class="exam-tag">resisteixin sense violència ni intimidació greu</span> l'autoritat o els seus agents, o desobeeixin greument: <b>3 mesos a 1 any de presó o multa 6-18 mesos</b>.</p>
+        <p><b>556.2</b> Els que faltin al respecte i a la consideració deguda a l'autoritat (in fragranti dirigir-se de manera vexatòria): multa 1-3 mesos.</p>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">📌 <b>Diferència clau amb art. 550</b>: la resistència del 556 és <b>passiva</b> (forcejar, agafar-se a un fanal, deixar-se caure) o activa lleu. Si hi ha cops, empentes amb intenció de lesionar o ús de força significativa → 550.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">ART. 544</span> Desobediència — concepte general</h4>
+        <p>L'art. 544 CP defineix com a "<b>autoritat</b>" tot aquell que, per si sol o com a membre d'una corporació, exerceixi mando o jurisdicció pròpia. Tenen consideració d'autoritat: <span class="exam-tag">membres del Congrés, Senat, Parlaments autonòmics, alcaldes, regidors, jutges i fiscals</span>.</p>
+        <p>La <b>desobediència</b> es castiga al CP en dos nivells:</p>
+        <ul>
+          <li><b>Greu</b> → art. 556 (3 mesos-1 any presó o multa 6-18 m).</li>
+          <li><b>Lleu</b> → infracció administrativa LOPSC art. 36.6 (multa 601-30.000 €).</li>
+        </ul>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">📌 La desobediència <b>NO requereix violència</b>. N'hi ha prou amb la negativa expressa, contundent i conscient a complir una ordre legítima i legal.</p>
+      </div>
+
+      <div class="prof-block" style="grid-column: 1 / -1; background:#FFF8DA; border-color:#F2D24A;">
+        <h4 style="color:#6b5a30;">📊 Quadre comparatiu — distingir en intervenció</h4>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Conducta</th>
+              <th>Article CP</th>
+              <th>Qualificació</th>
+              <th>Pena base</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cops, empentes fortes, mossegades a l'agent</td>
+              <td><b>550</b></td>
+              <td>Atemptat (tipus bàsic)</td>
+              <td>1-4 anys presó</td>
+            </tr>
+            <tr>
+              <td>Llançar pedres, gots, ampolles · usar arma</td>
+              <td><b>551</b></td>
+              <td>Atemptat agreujat</td>
+              <td>3-6 anys presó</td>
+            </tr>
+            <tr>
+              <td>Forcejeo, agafar-se a un objecte, deixar-se caure</td>
+              <td><b>556.1</b></td>
+              <td>Resistència no greu</td>
+              <td>3m-1 any presó / multa 6-18m</td>
+            </tr>
+            <tr>
+              <td>Negativa expressa a obeir ordre legítima</td>
+              <td><b>556.1</b></td>
+              <td>Desobediència greu</td>
+              <td>3m-1 any presó / multa 6-18m</td>
+            </tr>
+            <tr>
+              <td>Insults, falta de respecte verbal</td>
+              <td><b>556.2</b></td>
+              <td>Falta de respecte</td>
+              <td>Multa 1-3 mesos</td>
+            </tr>
+            <tr>
+              <td>No ensenyar el DNI sense més</td>
+              <td><b>—</b></td>
+              <td>Infracció admin. (LOPSC 36.6)</td>
+              <td>Multa 601-30.000 €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ 8. DROGAS Y TENENCIA ILÍCITA DE ARMAS ═══ -->
@@ -1329,6 +1483,22 @@
           <span class="pena warn">🟡 Particular doc. privado → multa 6–24 m</span>
         </div>
         <div class="nota policial"><b>🚔 Clave:</b> muy frecuente — DNI, permisos de conducción, partes de accidente, contratos. Conservar el documento original para pericial.</div>
+      </article>
+
+      <article class="delito" style="--accent: var(--c-red);">
+        <div class="delito-head">
+          <span class="art-badge">Art. 456</span>
+          <span class="delito-name">Acusación y denuncia falsas</span>
+          <span class="tipo grave">Grave</span>
+        </div>
+        <p class="delito-desc">Imputar a una persona, davant funcionari judicial o administratiu amb obligació de procedir, fets que <b>si fossin certs constituirien delicte</b>, sabent que són falsos o amb temerari menyspreu de la veritat.</p>
+        <div class="pena-list">
+          <span class="pena danger">🔴 Imputació delicte greu → 6 m–2 anys + multa 12-24 m</span>
+          <span class="pena">🔵 Delicte menys greu → multa 12-24 m</span>
+          <span class="pena warn">🟡 Delicte lleu → multa 3-6 m</span>
+        </div>
+        <div class="nota policial"><b>🚔 Procediment:</b> NO es persegueix d'ofici. Cal <b>sentència ferma o auto de sobreseïment</b> que acrediti la falsedat (art. 456.2 CP). El jutge pot deduir testimoni un cop sobresegui.</div>
+        <div class="nota agrav"><b>⚠️ Diferenciar de la simulació de delicte (art. 457 CP):</b> el 457 castiga simular ser víctima o autor d'un delicte que no s'ha comès, sense imputar a ningú concret. Pena: multa 6-12 m.</div>
       </article>
 
       <article class="delito" style="--accent: var(--c-leyes);">
