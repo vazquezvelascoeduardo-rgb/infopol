@@ -24,6 +24,7 @@ import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import RequireAuth from './components/RequireAuth';
+import RouteErrorBoundary from './components/RouteErrorBoundary';
 
 const Leyes = lazy(() => import('./pages/Leyes'));
 const Section = lazy(() => import('./pages/Section'));
@@ -83,6 +84,7 @@ function RedirectTestToPoliciaLocal() {
 export default function App() {
   return (
     <Layout>
+      <RouteErrorBoundary>
       <Suspense fallback={<PageFallback />}>
         <Routes>
           {/* === Públiques === */}
@@ -269,6 +271,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+      </RouteErrorBoundary>
     </Layout>
   );
 }
