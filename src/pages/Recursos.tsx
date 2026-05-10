@@ -83,13 +83,13 @@ export default function Recursos() {
           host="farmaguia.net"
         />
         <ExternalLink
-          href="https://aiac.veterinaris.cat/"
+          href="https://www.veterinaris.cat/aiac/aiac-particulars/aiac-principal-tramits-i-gestions/"
           icon="🐾"
           accent="var(--c-superbuscador)"
           badge={t('recursos.aiac.badge')}
           title={t('recursos.aiac.title')}
           desc={t('recursos.aiac.desc')}
-          host="aiac.veterinaris.cat"
+          host="veterinaris.cat"
         />
       </section>
 
