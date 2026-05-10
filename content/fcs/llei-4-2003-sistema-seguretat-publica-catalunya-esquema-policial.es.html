@@ -385,6 +385,40 @@
   }
   @media (max-width: 640px) {
     .clasif-grid { grid-template-columns: 1fr; }
+    .prof-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Bloque resumen del professor ── */
+  .prof-block {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 20px; margin-bottom: 12px;
+    box-shadow: 0 1px 2px rgba(14,14,14,0.04), 0 8px 24px -8px rgba(14,14,14,0.10);
+  }
+  .prof-block h4 {
+    font-size: 15px; font-weight: 800; color: var(--ink);
+    margin-bottom: 8px; display: flex; align-items: baseline; gap: 8px;
+  }
+  .prof-block h4 .art-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; background: #2F6BD8; color: white;
+    padding: 3px 8px; border-radius: 5px; letter-spacing: 0.05em;
+  }
+  .prof-block p { font-size: 14px; color: var(--text-2); margin-bottom: 6px; }
+  .prof-block p:last-child { margin-bottom: 0; }
+  .prof-block ul { margin: 6px 0 0 18px; font-size: 14px; color: var(--text-2); }
+  .prof-block ul li { margin-bottom: 4px; }
+  .prof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .exam-tag {
+    background: linear-gradient(180deg, transparent 55%, #FFE56B 55%);
+    padding: 0 2px; border-radius: 2px; font-weight: 600; color: var(--ink);
+  }
+  .exam-tag::after { content: " ❓"; font-size: 0.85em; color: #d9531a; }
+  .exam-banner {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #FFF8DA; border: 1px solid #F2D24A; color: #6b5a30;
+    font-size: 11px; font-weight: 700; padding: 2px 8px;
+    border-radius: 999px; margin-left: 8px;
+    text-transform: uppercase; letter-spacing: 0.06em;
   }
 </style>
 </head>
@@ -977,6 +1011,123 @@
         </table>
       </article>
 
+    </div>
+  </section>
+
+  <!-- ═══ RESUM DEL PROFESSOR · COORDINACIÓ REAL EN PATRULLA MIXTA ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-pink);">
+      <span class="eyebrow">📘 RESUM DEL PROFESSOR · COORDINACIÓ REAL EN INTERVENCIÓ MIXTA PL ↔ MOSSOS</span>
+      <span class="rule"></span>
+      <span class="exam-banner">❓ Cau a l'examen</span>
+    </div>
+
+    <p style="margin:6px 0 14px;color:var(--text-2);font-size:14.5px;">
+      Saber l'art. 28 sobre el paper («funcions pròpies / col·laboració / compartides») no resol l'examen — pregunten per <b>casos concrets</b>: «Qui assumeix l'atestat?», «Qui està al comandament del dispositiu?», «Quan ha de retirar-se la PL?». Aquest bloc dóna 5 escenaris reals amb la regla aplicable i la base legal.
+    </p>
+
+    <div class="prof-grid">
+
+      <div class="prof-block">
+        <h4><span class="art-num">CAS 1</span> Accident de trànsit a la via urbana amb ferits</h4>
+        <p><b>Qui actua de primer:</b> la <span class="exam-tag">Policia Local</span> per ser <b>trànsit urbà funció pròpia</b> (art. 28.3.b).</p>
+        <p><b>Atestat:</b> el formula i tramita la PL si el succés queda en àmbit administratiu o de delicte lleu.</p>
+        <p><b>Quan crida als Mossos:</b> si hi ha indicis de delicte penal greu (homicidi imprudent, conducció temerària amb resultat de mort) → <span class="exam-tag">Mossos Policia Judicial</span> (art. 28.2.d) assumeixen.</p>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">📌 La PL <b>preserva l'escena</b> fins que arriba l'autoritat judicial o Mossos.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">CAS 2</span> Accident interurbà però dins el terme municipal</h4>
+        <p><b>Qui actua de primer:</b> arriba qui té unitat més propera. Si és la PL, <b>protegeix l'accident</b> i avisa Mossos.</p>
+        <p><b>Atestat:</b> <span class="exam-tag">Mossos d'Esquadra</span> (trànsit interurbà, art. 28.2.e).</p>
+        <p><b>PL:</b> auxiliar (regulació trànsit, atenció ferits, assegurar perímetre).</p>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">📌 La línia "urbà/interurbà" la fixa la <b>numeració del PK i la classificació de la via</b>, no el terme municipal.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">CAS 3</span> Manifestació no comunicada al casc urbà</h4>
+        <p><b>Funció pròpia:</b> <span class="exam-tag">Mossos</span> — seguretat ciutadana i ordre públic (art. 28.2.b).</p>
+        <p><b>Comandament del dispositiu:</b> oficial dels Mossos (responsable d'OP).</p>
+        <p><b>PL:</b> <span class="exam-tag">col·labora</span> (art. 28.3.d): tall de carrers, regulació trànsit, suport a la zona perimètrica. <b>NO entra a la càrrega o dispersió</b> tret d'ordre expressa del cap del dispositiu.</p>
+        <p><b>Coordinació:</b> es canalitza per la <span class="exam-tag">Junta Local de Seguretat</span> (arts. 9-11) i, en operatiu, pels comandaments de torn.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">CAS 4</span> Robatori amb violència flagrant</h4>
+        <p><b>Qui detén:</b> <b>qui hi arriba primer</b>. Tota PL pot detenir en flagrancia (art. 5.3 LO 2/86 + art. 490 LECrim).</p>
+        <p><b>Atestat i instrucció:</b> el continua <span class="exam-tag">Mossos Policia Judicial</span> (art. 28.2.d).</p>
+        <p><b>PL:</b> entrega del detingut, declaració dels agents actuants, custodia inicial fins al trasllat.</p>
+        <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">📌 Si la PL ha cust​odiat el detingut > 2-3 h o ha pres declaració, ho ha de fer constar. Lectura de drets (art. 520 LECrim) la fa l'agent que detingui.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">CAS 5</span> Violència de gènere — incident en domicili</h4>
+        <p><b>Qui actua:</b> <b>els primers que arribin</b>; intervenció <span class="exam-tag">conjunta i coordinada</span>.</p>
+        <p><b>Atestat:</b> Mossos (PJ) per regla general; però la <b>PL pot iniciar-lo</b> i traslladar-lo. Ho marca la <b>Instrucció 5/2008 SCS</b>.</p>
+        <p><b>Auxili a la víctima:</b> aplica <span class="exam-tag">protocol VioGén compartit</span> (sistema VPR/VPER).</p>
+        <p><b>Mesures urgents:</b> sortida agressor, telèfon ATENPRO, comunicació immediata Fiscalia/Jutjat de Guàrdia.</p>
+      </div>
+
+      <div class="prof-block" style="background:#FFF8DA; border-color:#F2D24A;">
+        <h4 style="color:#6b5a30;">📍 Regles d'or de la coordinació</h4>
+        <ul style="color:#6b5a30;">
+          <li><b>Principi de proximitat:</b> qui arriba primer actua i es manté fins al relleu.</li>
+          <li><b>Principi de competència:</b> assumeix l'atestat el cos amb funció pròpia segons art. 28.</li>
+          <li><b>Principi d'auxili:</b> mai abandonar l'escena fins a relleu efectiu (art. 5.4 LO 2/86 — dedicació professional).</li>
+          <li><span class="exam-tag">Ordre de comandament:</span> en intervencions complexes, el dirigeix el comandament de més rang del cos competent per matèria.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ RESUM DEL PROFESSOR · ISPC i FORMACIÓ COMPARTIDA ═══ -->
+  <section>
+    <div class="section-head" style="--accent: var(--c-superbuscador);">
+      <span class="eyebrow">🎓 RESUM DEL PROFESSOR · L'ISPC — INSTITUT DE SEGURETAT PÚBLICA DE CATALUNYA</span>
+      <span class="rule"></span>
+    </div>
+
+    <p style="margin:6px 0 14px;color:var(--text-2);font-size:14.5px;">
+      L'ISPC és el <b>nucli formatiu i científic del sistema</b>. Va substituir l'antiga Escola de Policia (1985) i ara és organisme autònom adscrit al Departament d'Interior. Regulat per la <b>Llei 10/2007</b> (que desenvolupa la Llei 4/2003).
+    </p>
+
+    <div class="prof-grid">
+      <div class="prof-block">
+        <h4><span class="art-num">NATURA</span> Organisme autònom</h4>
+        <p>L'ISPC té <span class="exam-tag">personalitat jurídica pròpia</span>, patrimoni propi i autonomia funcional. <b>Adscrit</b> al departament competent en matèria de seguretat pública (Interior).</p>
+        <p>Seu: <b>Mollet del Vallès</b>.</p>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">FUNCIONS</span> 4 grans àmbits</h4>
+        <ul>
+          <li><span class="exam-tag">Selecció</span>: dóna suport en oposicions de Mossos i PL.</li>
+          <li><span class="exam-tag">Formació bàsica i contínua</span>: cursos d'accés, comandament, especialització, reciclatge.</li>
+          <li><b>Recerca</b>: estudis criminològics, anàlisi de seguretat.</li>
+          <li><b>Documentació</b>: biblioteca i fons sobre seguretat pública.</li>
+        </ul>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">DESTINATARIS</span> Qui s'hi forma</h4>
+        <ul>
+          <li>Mossos d'Esquadra (CME)</li>
+          <li>Policies Locals de Catalunya (totes les escales)</li>
+          <li>Bombers de la Generalitat</li>
+          <li>Agents Rurals</li>
+          <li>Personal de protecció civil i emergències</li>
+        </ul>
+      </div>
+
+      <div class="prof-block">
+        <h4><span class="art-num">RELLEVÀNCIA</span> per a la PL</h4>
+        <p>Tot agent de PL <b>obligatòriament passa per l'ISPC</b> abans d'incorporar-se al cos (curs bàsic). També per a:</p>
+        <ul>
+          <li>Promoció a categories superiors (caporal, sergent, sotsinspector...).</li>
+          <li>Especialitzacions: trànsit, seguretat ciutadana, atestats...</li>
+          <li><span class="exam-tag">Habilitació per a portar arma</span> (Decret 219/1996).</li>
+        </ul>
+      </div>
     </div>
   </section>
 
