@@ -60,24 +60,32 @@ export default function TestList() {
   const { attempts, avgGrade } = globalAverage(stats);
   const failures = useFailuresCounts();
 
+  // Pool de Policia Local: temari + cultura + municipi (NO mossos).
+  // Mossos d'Esquadra té la seva pròpia pàgina (/mossos) i no s'ha de
+  // barrejar amb el temari de Policia Local.
+  const PL_TOPICS = useMemo(
+    () => TOPICS.filter((tt) => (tt.category ?? 'temari') !== 'mossos'),
+    [],
+  );
+
   // Recompte per filtre.
   const counts = useMemo(() => ({
-    all: TOPICS.length,
+    all: PL_TOPICS.length,
     temari: getTopicsByCategory('temari').length,
     cultura: getTopicsByCategory('cultura').length,
     municipi: getTopicsByCategory('municipi').length,
-  }), []);
+  }), [PL_TOPICS]);
 
   // Topics filtrats.
   const visibleTopics = useMemo(() => {
-    if (filter === 'all') return TOPICS;
-    return TOPICS.filter((tt) => (tt.category ?? 'temari') === filter);
-  }, [filter]);
+    if (filter === 'all') return PL_TOPICS;
+    return PL_TOPICS.filter((tt) => (tt.category ?? 'temari') === filter);
+  }, [filter, PL_TOPICS]);
 
-  // Total de preguntes (per al ts-pill del hero).
+  // Total de preguntes (per al ts-pill del hero) — només Policia Local.
   const totalQuestions = useMemo(
-    () => TOPICS.reduce((acc, tt) => acc + tt.questions.length, 0),
-    [],
+    () => PL_TOPICS.reduce((acc, tt) => acc + tt.questions.length, 0),
+    [PL_TOPICS],
   );
 
   // Pseudo-stats personals (sense backend/auth, però amb dades reals
@@ -142,7 +150,7 @@ export default function TestList() {
             {t('test.list.hero.questions')}
           </span>
           <span className="ts-pill">
-            <b>{TOPICS.length}</b> {t('test.list.hero.topics')}
+            <b>{PL_TOPICS.length}</b> {t('test.list.hero.topics')}
           </span>
           <span className="ts-pill">
             <b>{getMunicipiGroups().length}</b> {t('test.list.hero.municipios')}
