@@ -642,6 +642,13 @@ const DICT: Dict = {
     'sidebar.cultura': 'Cultura general',
     'sidebar.alcohol': 'Calculadora alcoholèmia',
     'sidebar.session.viewProfile': 'Veure el meu perfil',
+    'sidebar.reptes': 'Reptes',
+    'sidebar.reptes.daily': 'Repte diari',
+    'sidebar.tools': 'Eines',
+    'sidebar.section.daily': 'Diari',
+    'sidebar.section.study': 'Estudi',
+    'sidebar.section.tools': 'Eines i recursos',
+    'sidebar.section.extra': 'Extra',
 
     // Onboarding tour (primera visita)
     'onboarding.continue': 'Continuar',

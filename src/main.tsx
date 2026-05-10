@@ -26,6 +26,29 @@ function isChunkErrorMsg(msg: string): boolean {
     /ChunkLoadError/i.test(msg)
   );
 }
+// ── Anti-còpia: bloqueja copy, context-menu i drag a tot el document.
+// Excepció per a inputs/textareas perquè l'usuari pugui escriure i
+// gestionar formularis (login, cerca, etc.). Recordatori: això NO impedeix
+// a un usuari determinat copiar via DevTools — és una dissuassió
+// contra el "selecciona-i-Ctrl+C" casual.
+function isFormElement(target: EventTarget | null): boolean {
+  if (!(target instanceof HTMLElement)) return false;
+  if (target.closest('input, textarea, select, [contenteditable="true"], [data-allow-select="true"]')) return true;
+  return false;
+}
+document.addEventListener('copy', (e) => {
+  if (!isFormElement(e.target)) e.preventDefault();
+});
+document.addEventListener('cut', (e) => {
+  if (!isFormElement(e.target)) e.preventDefault();
+});
+document.addEventListener('contextmenu', (e) => {
+  if (!isFormElement(e.target)) e.preventDefault();
+});
+document.addEventListener('dragstart', (e) => {
+  if (!isFormElement(e.target)) e.preventDefault();
+});
+
 window.addEventListener('unhandledrejection', (ev) => {
   const reason = ev.reason as { message?: string; name?: string } | undefined;
   const msg = String(reason?.message || reason?.name || ev.reason || '');

@@ -40,48 +40,11 @@ function IconAcademia() {
     </svg>
   );
 }
-function IconSearch() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-      <circle cx="11" cy="11" r="6" />
-      <path d="m20 20-4.5-4.5" />
-    </svg>
-  );
-}
-function IconRecursos() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="7" width="18" height="13" rx="2" />
-      <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
-      <path d="M3 13h18" />
-    </svg>
-  );
-}
 function IconActualidad() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <rect x="3" y="5" width="18" height="14" rx="2" />
       <path d="M7 9h10M7 12h10M7 15h6" />
-    </svg>
-  );
-}
-function IconCultura() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M2 9 12 4l10 5-10 5z" />
-      <path d="M6 11v5c0 2 3 3 6 3s6-1 6-3v-5" />
-    </svg>
-  );
-}
-function IconCalc() {
-  // Calculadora — eines de càlcul (alcohol, conversions…).
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="5" y="3" width="14" height="18" rx="2" />
-      <path d="M9 7h6" />
-      <path d="M8 11h.01M12 11h.01M16 11h.01" />
-      <path d="M8 15h.01M12 15h.01M16 15h.01" />
-      <path d="M8 19h.01M12 19h.01M16 19h.01" />
     </svg>
   );
 }
@@ -261,11 +224,12 @@ export default function Sidebar({ open, onClose }: Props) {
             </div>
           )}
 
-          {/* Navegació principal */}
-          <nav className="sb-section pt-2.5">
+          {/* ── Bloc DIARI · accés ràpid del dia a dia ─────────────── */}
+          <div className="sb-label">{t('sidebar.section.daily')}</div>
+          <nav className="sb-section">
             <Link
               to="/"
-              className={`sb-item ${isActive('/') && path === '/' ? 'active' : ''}`}
+              className={`sb-item ${path === '/' ? 'active' : ''}`}
             >
               <span className="sb-icon ic-bg-orange"><IconHome /></span>
               <span>{t('sidebar.home')}</span>
@@ -274,7 +238,7 @@ export default function Sidebar({ open, onClose }: Props) {
 
             <Link
               to="/academia"
-              className={`sb-item ${isActive('/academia', '/policia-local') ? 'active' : ''}`}
+              className={`sb-item ${isActive('/academia', '/policia-local', '/cultura-general') ? 'active' : ''}`}
             >
               <span className="sb-icon ic-bg-blue"><IconAcademia /></span>
               <span>{t('sidebar.academia')}</span>
@@ -288,62 +252,19 @@ export default function Sidebar({ open, onClose }: Props) {
             </Link>
 
             <Link
-              to="/superbuscador"
-              className={`sb-item ${isActive('/superbuscador') ? 'active' : ''}`}
+              to="/retos"
+              className={`sb-item ${isActive('/retos') ? 'active' : ''}`}
             >
-              <span className="sb-icon ic-bg-purple"><IconSearch /></span>
-              <span>{t('sidebar.superbuscador')}</span>
-              <span />
-            </Link>
-
-            <Link
-              to="/recursos"
-              className={`sb-item ${isActive('/recursos') ? 'active' : ''}`}
-            >
-              <span className="sb-icon ic-bg-green"><IconRecursos /></span>
-              <span>{t('sidebar.recursos')}</span>
-              <span />
-            </Link>
-
-            <Link
-              to="/noticies"
-              className={`sb-item ${isActive('/noticies') ? 'active' : ''}`}
-            >
-              <span className="sb-icon ic-bg-blue"><IconActualidad /></span>
-              <span>{t('sidebar.noticies')}</span>
-              {unreadNoticies > 0 ? (
-                <span
-                  className="inline-block h-2 w-2 rounded-full"
-                  style={{ background: '#E5484D' }}
-                  aria-label={`${unreadNoticies} ${t('sidebar.noticies.unreadAria')}`}
-                />
-              ) : (
-                <span />
-              )}
-            </Link>
-
-            <Link
-              to="/cultura-general"
-              className={`sb-item ${isActive('/cultura-general') ? 'active' : ''}`}
-            >
-              <span className="sb-icon ic-bg-yellow"><IconCultura /></span>
-              <span>{t('sidebar.cultura')}</span>
-              <span />
-            </Link>
-
-            <Link
-              to="/calculadora-alcohol"
-              className={`sb-item ${isActive('/calculadora-alcohol') ? 'active' : ''}`}
-            >
-              <span className="sb-icon ic-bg-orange"><IconCalc /></span>
-              <span>{t('sidebar.alcohol')}</span>
-              <span />
+              <span className="sb-icon ic-bg-pink">🔥</span>
+              <span>{t('sidebar.reptes')}</span>
+              <span className="sb-badge">⚡ {t('sidebar.reptes.daily')}</span>
             </Link>
           </nav>
 
           <div className="sb-divider" />
 
-          {/* Lleis i Operativa col·lapsables */}
+          {/* ── Bloc ESTUDI · Lleis i Operativa ─────────────── */}
+          <div className="sb-label">{t('sidebar.section.study')}</div>
           <nav className="sb-section">
             <details className="group">
               <summary
@@ -411,6 +332,63 @@ export default function Sidebar({ open, onClose }: Props) {
                 <SubLink to="/operativa/penal/drets-detingut" icon="📜" label={t('penal.dretsDetingut')} active={path.startsWith('/operativa/penal/drets-detingut')} />
               </div>
             </details>
+          </nav>
+
+          <div className="sb-divider" />
+
+          {/* ── Bloc EINES · auxiliars i recursos ─────────────── */}
+          <div className="sb-label">{t('sidebar.section.tools')}</div>
+          <nav className="sb-section">
+            <details
+              className="group"
+              open={isActive('/superbuscador', '/calculadora-alcohol', '/recursos')}
+            >
+              <summary
+                className={`sb-item list-none ${isActive('/superbuscador', '/calculadora-alcohol', '/recursos') ? 'active' : ''}`}
+                style={{ cursor: 'pointer' }}
+              >
+                <span className="sb-icon ic-bg-purple">🧰</span>
+                <span className="flex-1">{t('sidebar.tools')}</span>
+                <span className="arr">▸</span>
+              </summary>
+              <div className="pl-2 mt-1 space-y-0.5">
+                <SubLink
+                  to="/superbuscador"
+                  icon="🔎"
+                  label={t('sidebar.superbuscador')}
+                  active={path.startsWith('/superbuscador')}
+                />
+                <SubLink
+                  to="/calculadora-alcohol"
+                  icon="🍷"
+                  label={t('sidebar.alcohol')}
+                  active={path.startsWith('/calculadora-alcohol')}
+                />
+                <SubLink
+                  to="/recursos"
+                  icon="📚"
+                  label={t('sidebar.recursos')}
+                  active={path.startsWith('/recursos')}
+                />
+              </div>
+            </details>
+
+            <Link
+              to="/noticies"
+              className={`sb-item ${isActive('/noticies') ? 'active' : ''}`}
+            >
+              <span className="sb-icon ic-bg-blue"><IconActualidad /></span>
+              <span>{t('sidebar.noticies')}</span>
+              {unreadNoticies > 0 ? (
+                <span
+                  className="inline-block h-2 w-2 rounded-full"
+                  style={{ background: '#E5484D' }}
+                  aria-label={`${unreadNoticies} ${t('sidebar.noticies.unreadAria')}`}
+                />
+              ) : (
+                <span />
+              )}
+            </Link>
           </nav>
 
           <div className="sb-divider" />

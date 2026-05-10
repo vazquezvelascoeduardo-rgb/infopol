@@ -108,6 +108,32 @@ html[data-text-size="lg"] { font-size: 18px; }
     max-width: 1180px;
   }
 
+  /* ── Anti-còpia de contingut ──────────────────────────────────
+     L'usuari demana protegir el contingut. Apliquem user-select: none
+     globalment, i el rehabilitem només a llocs on l'usuari realment
+     ha de poder seleccionar (formularis i camps editables).
+     Nota: això NO és una mesura de seguretat efectiva contra usuaris
+     determinats (només cal inspeccionar el DOM). És una barrera
+     dissuasòria contra còpia casual. */
+  html, body {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  input,
+  textarea,
+  select,
+  [contenteditable="true"],
+  [data-allow-select="true"],
+  [data-allow-select="true"] * {
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+  /* Desactiva el menú contextual quan es fa clic dret a imatges. */
+  img { -webkit-user-drag: none; user-drag: none; pointer-events: auto; }
+
   /* ── Top bar ─────────────────────────────────────────────────── */
   .topbar {
     position: fixed;
