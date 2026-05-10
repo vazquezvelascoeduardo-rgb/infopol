@@ -1,8 +1,9 @@
 // Marc general de l'app: capçalera (topbar) i peu segons rebranding 2026.
-// Tema (light/dark) i idioma viuen al menú lateral · Sidebar > Ajustes.
+// La web és sempre en català i en tema clar (s'han eliminat els selectors
+// d'idioma i tema). Al sidebar només queda l'ajust de mida de text.
 import { type ReactNode, useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { applyTheme, getInitialTheme, type Theme } from '../lib/theme';
+import { applyInitialTheme } from '../lib/theme';
 import { useT } from '../lib/i18n';
 import Sidebar from './Sidebar';
 import GdprBanner from './GdprBanner';
@@ -25,7 +26,6 @@ function BrandShield({ className = '' }: { className?: string }) {
 }
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => getInitialTheme());
   const [query, setQuery] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   // A mòbil la barra de cerca està col·lapsada en una icona; en clicar
@@ -36,8 +36,9 @@ export default function Layout({ children }: { children: ReactNode }) {
   const { t } = useT();
 
   useEffect(() => {
-    applyTheme(theme);
-  }, [theme]);
+    // Tema clar fixat (sense toggle).
+    applyInitialTheme();
+  }, []);
 
   useEffect(() => {
     if (!location.pathname.startsWith('/cerca')) setQuery('');
@@ -211,8 +212,6 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Sidebar
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
-        theme={theme}
-        onThemeChange={setTheme}
       />
 
       {/* Banner RGPD a la primera visita */}

@@ -1,28 +1,22 @@
-// Gestió del tema clar/fosc.
-// Fem servir `localStorage` per desar la preferència de l'usuari.
-// Si no hi ha preferència guardada, fem servir la del sistema.
-
+// La web fa servir SEMPRE el tema clar. El toggle clar/fosc s'ha
+// eliminat — l'usuari va decidir mantenir un únic tema. El tipus
+// 'Theme' i les funcions exportades es mantenen per compatibilitat
+// amb components existents (Layout, Sidebar) però sempre operen amb 'light'.
 const STORAGE_KEY = 'infopol-theme';
 
 export type Theme = 'light' | 'dark';
 
-// Llegeix la preferència desada; per defecte (sense preferència), mode clar.
 export function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') return 'light';
-  const saved = window.localStorage.getItem(STORAGE_KEY) as Theme | null;
-  if (saved === 'light' || saved === 'dark') return saved;
   return 'light';
 }
 
-// Aplica el tema afegint/traient la classe `dark` al <html>.
-export function applyTheme(theme: Theme) {
-  const root = document.documentElement;
-  if (theme === 'dark') root.classList.add('dark');
-  else root.classList.remove('dark');
-  window.localStorage.setItem(STORAGE_KEY, theme);
+export function applyTheme(_theme: Theme) {
+  if (typeof document === 'undefined') return;
+  document.documentElement.classList.remove('dark');
+  // Esborrem qualsevol preferència vella de tema guardada.
+  try { window.localStorage.removeItem(STORAGE_KEY); } catch {}
 }
 
-// S'invoca al començament, abans de muntar React.
 export function applyInitialTheme() {
-  applyTheme(getInitialTheme());
+  applyTheme('light');
 }

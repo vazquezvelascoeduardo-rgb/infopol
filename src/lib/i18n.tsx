@@ -1857,26 +1857,29 @@ type Ctx = {
 
 const LocaleContext = createContext<Ctx | null>(null);
 
+// La web és en CATALÀ. El selector ES/CA s'ha eliminat — l'usuari va
+// decidir que el producte és monolingüe. Mantenim el dict 'es' per
+// compatibilitat però mai s'usa.
 function getInitialLocale(): Locale {
-  if (typeof window === 'undefined') return 'es';
-  const saved = window.localStorage.getItem(STORAGE_KEY);
-  return saved === 'ca' ? 'ca' : 'es';
+  return 'ca';
 }
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(() => getInitialLocale());
 
   useEffect(() => {
-    document.documentElement.lang = locale;
-    window.localStorage.setItem(STORAGE_KEY, locale);
+    document.documentElement.lang = 'ca';
+    // Esborrem qualsevol preferència vella d'ES guardada al localStorage.
+    try { window.localStorage.removeItem(STORAGE_KEY); } catch {}
   }, [locale]);
 
-  function setLocale(l: Locale) {
-    setLocaleState(l);
+  function setLocale(_l: Locale) {
+    // No-op: la web és sempre en català.
+    setLocaleState('ca');
   }
 
   function t(key: string): string {
-    const d = DICT[locale];
+    const d = DICT.ca;
     return d[key] ?? key;
   }
 

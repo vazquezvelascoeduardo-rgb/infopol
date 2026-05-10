@@ -19,8 +19,6 @@ import { applyTextSize, getInitialTextSize, type TextSize } from '../lib/fontSiz
 type Props = {
   open: boolean;
   onClose: () => void;
-  theme: Theme;
-  onThemeChange: (t: Theme) => void;
 };
 
 /* ── Icones (mateix style que el disseny) ────────────────────── */
@@ -129,8 +127,8 @@ function BrandShield() {
   );
 }
 
-export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) {
-  const { t, locale, setLocale } = useT();
+export default function Sidebar({ open, onClose }: Props) {
+  const { t } = useT();
   const location = useLocation();
   const [textSize, setTextSize] = useState<TextSize>(() => getInitialTextSize());
   const failures = useFailuresCounts();
@@ -407,59 +405,10 @@ export default function Sidebar({ open, onClose, theme, onThemeChange }: Props) 
 
           <div className="sb-divider" />
 
-          {/* Ajustes */}
+          {/* Ajustes — només mida de text. La selecció d'idioma i tema
+              s'ha eliminat: la web és sempre en català i en tema clar. */}
           <div className="sb-label">{t('sidebar.settings')}</div>
           <div className="sb-section">
-            {/* Idioma */}
-            <div className="sb-setting">
-              <span className="sb-setting-icon"><IconLang /></span>
-              <span className="sb-setting-label">{t('sidebar.language')}</span>
-              <div className="seg" role="group">
-                <button
-                  type="button"
-                  className={locale === 'es' ? 'on' : ''}
-                  onClick={() => setLocale('es')}
-                  aria-pressed={locale === 'es'}
-                >ES</button>
-                <button
-                  type="button"
-                  className={locale === 'ca' ? 'on' : ''}
-                  onClick={() => setLocale('ca')}
-                  aria-pressed={locale === 'ca'}
-                >CA</button>
-              </div>
-            </div>
-
-            {/* Tema */}
-            <div className="sb-setting">
-              <span className="sb-setting-icon">{theme === 'dark' ? <IconMoon /> : <IconSun />}</span>
-              <span className="sb-setting-label">{t('sidebar.theme')}</span>
-              <div className="theme-pick" role="group">
-                <button
-                  type="button"
-                  className={`theme-chip ${theme === 'light' ? 'on' : ''}`}
-                  onClick={() => onThemeChange('light')}
-                  aria-pressed={theme === 'light'}
-                >
-                  <span className="swatch" style={{ background: 'var(--terracotta)' }} />
-                  {t('theme.light')}
-                </button>
-                <button
-                  type="button"
-                  className={`theme-chip dark ${theme === 'dark' ? 'on' : ''}`}
-                  onClick={() => onThemeChange('dark')}
-                  aria-pressed={theme === 'dark'}
-                >
-                  <span
-                    className="swatch"
-                    style={{ background: theme === 'dark' ? '#fff' : 'var(--ink)' }}
-                  />
-                  {t('theme.dark')}
-                </button>
-              </div>
-            </div>
-
-            {/* Mida del text */}
             <div className="sb-setting">
               <span className="sb-setting-icon"><IconText /></span>
               <span className="sb-setting-label">{t('sidebar.textSize')}</span>
