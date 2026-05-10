@@ -1,7 +1,8 @@
 // Pàgina d'una fitxa concreta · rebranding 2026.
 // Chrome estilitzat (crumbs + page-actions amb ★/share + page-foot prev/next).
 // El cos de la fitxa (HTML/Markdown) es preserva tal com està.
-import { Link, useParams } from 'react-router-dom';
+import { useMemo } from 'react';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { MODULES, getCard, pickBody } from '../lib/content';
 import { Markdown } from '../lib/markdown';
 import HtmlInline from '../components/HtmlInline';
@@ -41,10 +42,24 @@ function FavButton({ moduleSlug, slug, title }: { moduleSlug: string; slug: stri
 }
 
 export default function CardPage() {
-  const { moduleSlug = '', slug = '' } = useParams();
+  const params = useParams<{ moduleSlug?: string; slug?: string }>();
+  const location = useLocation();
+  const { t, locale } = useT();
+
+  // Les rutes públiques de PUBLIC_LEYES_CARDS a App.tsx usen paths
+  // hardcodejats (sense ':moduleSlug/:slug'), de manera que useParams
+  // retorna undefined. Extraiem els slugs del pathname com a fallback.
+  const { moduleSlug, slug } = useMemo(() => {
+    if (params.moduleSlug && params.slug) {
+      return { moduleSlug: params.moduleSlug, slug: params.slug };
+    }
+    const m = location.pathname.match(/^\/leyes\/s\/([^/]+)\/(.+?)\/?$/);
+    if (m) return { moduleSlug: m[1], slug: m[2] };
+    return { moduleSlug: '', slug: '' };
+  }, [params.moduleSlug, params.slug, location.pathname]);
+
   const mod = MODULES.find((m) => m.slug === moduleSlug);
   const card = getCard(moduleSlug, slug);
-  const { t, locale } = useT();
 
   if (!mod || !card) {
     return (
