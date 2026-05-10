@@ -159,16 +159,8 @@ export default function TestList() {
         </div>
       </header>
 
-      {/* JUMP BUTTONS — Test ràpid (tot), Tests, Flashcards i Temari complet */}
-      <nav className="pl-jump pl-jump-4" aria-label={t('policiaLocal.jump.aria')}>
-        <Link to="/policia-local/tot" className="pl-jump-btn jump-tot">
-          <span className="pl-jump-icon" aria-hidden>⚡</span>
-          <span className="pl-jump-text">
-            <span className="pl-jump-eyebrow">{t('policiaLocal.jump.eyebrowTot')}</span>
-            <span className="pl-jump-title">{t('policiaLocal.jump.tot')}</span>
-          </span>
-          <span className="pl-jump-arr" aria-hidden>→</span>
-        </Link>
+      {/* JUMP BUTTONS — Tests, Flashcards i Temari complet */}
+      <nav className="pl-jump pl-jump-3" aria-label={t('policiaLocal.jump.aria')}>
         <a href="#pl-tests" className="pl-jump-btn jump-tests">
           <span className="pl-jump-icon" aria-hidden>📝</span>
           <span className="pl-jump-text">
@@ -222,104 +214,108 @@ export default function TestList() {
         </div>
       </section>
 
-      {/* CATEGORIES — al damunt, com demana l'usuari */}
-      <div
+      {/* ZONA TESTS — wrapper visual perquè la secció no es confongui
+          amb stats o lleis. Estructura UX: (1) modes ràpids destacats
+          al cim (Tot el temari · Repàs); (2) selecció per tema. */}
+      <section
         id="pl-tests"
-        className="section-head"
-        style={{ ['--accent' as never]: '#2F6BD8', marginTop: 24, scrollMarginTop: 80 } as React.CSSProperties}
+        className="tests-zone"
+        style={{ scrollMarginTop: 80 }}
       >
-        <span className="eyebrow">📚 {t('test.list.cat.eyebrow')}</span>
-        <span className="rule" />
-      </div>
+        <header className="tests-zone-head">
+          <div className="eyebrow">📝 {t('test.list.zone.eyebrow')}</div>
+          <h2>{t('test.list.zone.title')}</h2>
+          <p>{t('test.list.zone.subtitle').replace('{n}', String(totalQuestions))}</p>
+        </header>
 
-      <div className="cat-filters" role="tablist">
-        <FilterChip
-          active={filter === 'all'}
-          onClick={() => setFilter('all')}
-          label={t('test.list.cat.all')}
-          n={counts.all}
-        />
-        <FilterChip
-          active={filter === 'temari'}
-          onClick={() => setFilter('temari')}
-          label={t('test.list.section.temari')}
-          n={counts.temari}
-        />
-        {counts.cultura > 0 && (
-          <FilterChip
-            active={filter === 'cultura'}
-            onClick={() => setFilter('cultura')}
-            label={t('test.list.section.cultura')}
-            n={counts.cultura}
-          />
-        )}
-        {counts.municipi > 0 && (
-          <FilterChip
-            active={filter === 'municipi'}
-            onClick={() => setFilter('municipi')}
-            label={t('test.list.section.municipi')}
-            n={counts.municipi}
-          />
-        )}
-      </div>
-
-      <section className="test-grid">
-        {visibleTopics.map((topic) => (
-          <TestCard key={topic.slug} topic={topic} />
-        ))}
-      </section>
-
-      {/* MODES — només Test ràpid + Repàs (sense duels, sense lliga) */}
-      <div
-        className="section-head"
-        style={{ ['--accent' as never]: 'var(--terracotta)', marginTop: 32 } as React.CSSProperties}
-      >
-        <span className="eyebrow">⚡ {t('test.list.modes.eyebrow')}</span>
-        <span className="rule" />
-      </div>
-
-      <section className="ts-modes">
-        <Link to="/policia-local/tot" className="ts-mode featured">
-          <span className="mtag">⚡ {t('test.list.modes.featured.tag')}</span>
-          <div>
-            <h3>{t('test.list.modes.featured.title')}</h3>
-            <p>{t('test.list.modes.featured.sub')}</p>
-          </div>
-          <div className="footer">
-            <div className="specs">
-              <span>{t('test.list.modes.featured.s1')}</span>
-              <span>·</span>
-              <span>{t('test.list.modes.featured.s2')}</span>
+        {/* MODES destacats: Tot el temari (esquerra, gran) + Repàs (dreta) */}
+        <div className="tests-zone-modes">
+          <Link to="/policia-local/tot" className="ts-mode featured">
+            <span className="mtag">⚡ {t('test.list.modes.featured.tag')}</span>
+            <div>
+              <h3>{t('test.list.modes.featured.title')}</h3>
+              <p>{t('test.list.modes.featured.sub')}</p>
             </div>
-            <span className="cta">
-              ▶ {t('test.start')} <span className="arr">→</span>
-            </span>
-          </div>
-        </Link>
-
-        <Link to="/policia-local/repas" className="ts-mode fail">
-          <span className="mtag">🔁 {t('test.list.modes.repas.tag')}</span>
-          <div>
-            <h3>{t('test.list.modes.repas.title')}</h3>
-            <p>
-              {failures.due > 0
-                ? t('test.list.modes.repas.subDue').replace('{n}', String(failures.due))
-                : failures.total > 0
-                  ? t('test.list.modes.repas.subTotal').replace('{n}', String(failures.total))
-                  : t('test.list.modes.repas.subEmpty')}
-            </p>
-          </div>
-          <div className="footer">
-            <div className="specs">
-              <span>{failures.due} {t('test.list.modes.repas.due')}</span>
-              <span>·</span>
-              <span>{failures.total} {t('test.list.modes.repas.total')}</span>
+            <div className="footer">
+              <div className="specs">
+                <span>{totalQuestions} preguntes</span>
+                <span>·</span>
+                <span>{counts.all} temes</span>
+              </div>
+              <span className="cta">
+                ▶ {t('test.start')} <span className="arr">→</span>
+              </span>
             </div>
-            <span className="cta">
-              {t('test.list.modes.repas.cta')} <span className="arr">→</span>
-            </span>
-          </div>
-        </Link>
+          </Link>
+
+          <Link to="/policia-local/repas" className="ts-mode fail">
+            <span className="mtag">🔁 {t('test.list.modes.repas.tag')}</span>
+            <div>
+              <h3>{t('test.list.modes.repas.title')}</h3>
+              <p>
+                {failures.due > 0
+                  ? t('test.list.modes.repas.subDue').replace('{n}', String(failures.due))
+                  : failures.total > 0
+                    ? t('test.list.modes.repas.subTotal').replace('{n}', String(failures.total))
+                    : t('test.list.modes.repas.subEmpty')}
+              </p>
+            </div>
+            <div className="footer">
+              <div className="specs">
+                <span>{failures.due} {t('test.list.modes.repas.due')}</span>
+                <span>·</span>
+                <span>{failures.total} {t('test.list.modes.repas.total')}</span>
+              </div>
+              <span className="cta">
+                {t('test.list.modes.repas.cta')} <span className="arr">→</span>
+              </span>
+            </div>
+          </Link>
+        </div>
+
+        {/* Separador "...o tria un tema concret" */}
+        <div className="tests-zone-divider">
+          <span className="line" />
+          <span className="lbl">{t('test.list.zone.orByTopic')}</span>
+          <span className="line" />
+        </div>
+
+        <div className="cat-filters" role="tablist">
+          <FilterChip
+            active={filter === 'all'}
+            onClick={() => setFilter('all')}
+            label={t('test.list.cat.all')}
+            n={counts.all}
+          />
+          <FilterChip
+            active={filter === 'temari'}
+            onClick={() => setFilter('temari')}
+            label={t('test.list.section.temari')}
+            n={counts.temari}
+          />
+          {counts.cultura > 0 && (
+            <FilterChip
+              active={filter === 'cultura'}
+              onClick={() => setFilter('cultura')}
+              label={t('test.list.section.cultura')}
+              n={counts.cultura}
+            />
+          )}
+          {counts.municipi > 0 && (
+            <FilterChip
+              active={filter === 'municipi'}
+              onClick={() => setFilter('municipi')}
+              label={t('test.list.section.municipi')}
+              n={counts.municipi}
+            />
+          )}
+        </div>
+
+        <div className="test-grid">
+          {visibleTopics.map((topic) => (
+            <TestCard key={topic.slug} topic={topic} />
+          ))}
+        </div>
       </section>
 
       {/* RECENTS */}

@@ -185,16 +185,8 @@ export default function MossosList() {
         </div>
       </header>
 
-      {/* JUMP BUTTONS — Test ràpid (tot), Tests, Flashcards i Temari */}
-      <nav className="pl-jump pl-jump-4" aria-label={t('policiaLocal.jump.aria')}>
-        <Link to="/mossos/tot" className="pl-jump-btn jump-tot">
-          <span className="pl-jump-icon" aria-hidden>⚡</span>
-          <span className="pl-jump-text">
-            <span className="pl-jump-eyebrow">{t('policiaLocal.jump.eyebrowTot')}</span>
-            <span className="pl-jump-title">{t('policiaLocal.jump.tot')}</span>
-          </span>
-          <span className="pl-jump-arr" aria-hidden>→</span>
-        </Link>
+      {/* JUMP BUTTONS — Tests, Flashcards i Temari */}
+      <nav className="pl-jump pl-jump-3" aria-label={t('policiaLocal.jump.aria')}>
         <a href="#mossos-tests" className="pl-jump-btn jump-tests">
           <span className="pl-jump-icon" aria-hidden>📝</span>
           <span className="pl-jump-text">
@@ -248,88 +240,91 @@ export default function MossosList() {
         </div>
       </section>
 
-      {/* SECCIÓ DE TESTS — agrupats per àmbit */}
-      <div
+      {/* ZONA TESTS — wrapper visual: modes destacats al cim + tests
+          per àmbit a sota. Mateixa estructura UX que /policia-local. */}
+      <section
         id="mossos-tests"
-        className="section-head"
-        style={{ ['--accent' as never]: '#2F6BD8', marginTop: 32, scrollMarginTop: 80 } as React.CSSProperties}
+        className="tests-zone"
+        style={{ scrollMarginTop: 80 }}
       >
-        <span className="eyebrow">📝 {t('mossos.tests.eyebrow')}</span>
-        <span className="rule" />
-      </div>
+        <header className="tests-zone-head">
+          <div className="eyebrow">📝 {t('test.list.zone.eyebrow')}</div>
+          <h2>{t('test.list.zone.title')}</h2>
+          <p>{t('test.list.zone.subtitle').replace('{n}', String(totalQuestions))}</p>
+        </header>
 
-      {ambits.length === 0 ? (
-        <p className="text-sm text-text-2 mt-4">{t('mossos.tests.empty')}</p>
-      ) : (
-        ambits.map((group) => {
-          const meta = AMBIT_LABELS[group.ambit] ?? { title: group.ambit, sub: '' };
-          return (
-            <section key={group.ambit} className="mt-6">
-              <div className="ambit-head">
-                <h2 className="ambit-title">{meta.title}</h2>
-                {meta.sub && <p className="ambit-sub">{meta.sub}</p>}
-              </div>
-              <div className="test-grid">
-                {group.topics.map((topic) => (
-                  <MossosCard key={topic.slug} topic={topic} />
-                ))}
-              </div>
-            </section>
-          );
-        })
-      )}
-
-      {/* MODES — Test ràpid (tots els temes Mossos) + Repàs (universal) */}
-      <div
-        className="section-head"
-        style={{ ['--accent' as never]: 'var(--terracotta)', marginTop: 32 } as React.CSSProperties}
-      >
-        <span className="eyebrow">⚡ {t('test.list.modes.eyebrow')}</span>
-        <span className="rule" />
-      </div>
-
-      <section className="ts-modes">
-        <Link to="/mossos/tot" className="ts-mode featured">
-          <span className="mtag">⚡ {t('test.list.modes.featured.tag')}</span>
-          <div>
-            <h3>{t('test.list.modes.featured.title')}</h3>
-            <p>{t('test.list.modes.featured.sub')}</p>
-          </div>
-          <div className="footer">
-            <div className="specs">
-              <span>{totalQuestions} preguntes</span>
-              <span>·</span>
-              <span>{totalTopics} subtemes</span>
+        {/* MODES destacats: Tot el temari Mossos + Repàs */}
+        <div className="tests-zone-modes">
+          <Link to="/mossos/tot" className="ts-mode featured">
+            <span className="mtag">⚡ {t('test.list.modes.featured.tag')}</span>
+            <div>
+              <h3>{t('test.list.modes.featured.title')}</h3>
+              <p>{t('test.list.modes.featured.sub')}</p>
             </div>
-            <span className="cta">
-              ▶ {t('test.start')} <span className="arr">→</span>
-            </span>
-          </div>
-        </Link>
-
-        <Link to="/mossos/repas" className="ts-mode fail">
-          <span className="mtag">🔁 {t('test.list.modes.repas.tag')}</span>
-          <div>
-            <h3>{t('test.list.modes.repas.title')}</h3>
-            <p>
-              {failures.due > 0
-                ? t('test.list.modes.repas.subDue').replace('{n}', String(failures.due))
-                : failures.total > 0
-                  ? t('test.list.modes.repas.subTotal').replace('{n}', String(failures.total))
-                  : t('test.list.modes.repas.subEmpty')}
-            </p>
-          </div>
-          <div className="footer">
-            <div className="specs">
-              <span>{failures.due} {t('test.list.modes.repas.due')}</span>
-              <span>·</span>
-              <span>{failures.total} {t('test.list.modes.repas.total')}</span>
+            <div className="footer">
+              <div className="specs">
+                <span>{totalQuestions} preguntes</span>
+                <span>·</span>
+                <span>{totalTopics} subtemes</span>
+              </div>
+              <span className="cta">
+                ▶ {t('test.start')} <span className="arr">→</span>
+              </span>
             </div>
-            <span className="cta">
-              {t('test.list.modes.repas.cta')} <span className="arr">→</span>
-            </span>
-          </div>
-        </Link>
+          </Link>
+
+          <Link to="/mossos/repas" className="ts-mode fail">
+            <span className="mtag">🔁 {t('test.list.modes.repas.tag')}</span>
+            <div>
+              <h3>{t('test.list.modes.repas.title')}</h3>
+              <p>
+                {failures.due > 0
+                  ? t('test.list.modes.repas.subDue').replace('{n}', String(failures.due))
+                  : failures.total > 0
+                    ? t('test.list.modes.repas.subTotal').replace('{n}', String(failures.total))
+                    : t('test.list.modes.repas.subEmpty')}
+              </p>
+            </div>
+            <div className="footer">
+              <div className="specs">
+                <span>{failures.due} {t('test.list.modes.repas.due')}</span>
+                <span>·</span>
+                <span>{failures.total} {t('test.list.modes.repas.total')}</span>
+              </div>
+              <span className="cta">
+                {t('test.list.modes.repas.cta')} <span className="arr">→</span>
+              </span>
+            </div>
+          </Link>
+        </div>
+
+        {/* Separador "...o tria un àmbit concret" */}
+        <div className="tests-zone-divider">
+          <span className="line" />
+          <span className="lbl">{t('test.list.zone.orByAmbit')}</span>
+          <span className="line" />
+        </div>
+
+        {ambits.length === 0 ? (
+          <p className="text-sm text-text-2 mt-4">{t('mossos.tests.empty')}</p>
+        ) : (
+          ambits.map((group) => {
+            const meta = AMBIT_LABELS[group.ambit] ?? { title: group.ambit, sub: '' };
+            return (
+              <div key={group.ambit} className="mt-5">
+                <div className="ambit-head">
+                  <h3 className="ambit-title">{meta.title}</h3>
+                  {meta.sub && <p className="ambit-sub">{meta.sub}</p>}
+                </div>
+                <div className="test-grid">
+                  {group.topics.map((topic) => (
+                    <MossosCard key={topic.slug} topic={topic} />
+                  ))}
+                </div>
+              </div>
+            );
+          })
+        )}
       </section>
 
       {/* RECENTS — només tests de Mossos */}

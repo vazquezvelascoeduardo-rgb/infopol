@@ -111,37 +111,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SWITCH Operativa / Academia */}
+      {/* SWITCH Operativa / Acadèmia · pill deslizable */}
       <div
         className="home-switch"
+        data-active={tab}
         role="tablist"
         aria-label={t('home.switch.aria')}
       >
+        <span className="hsw-thumb" aria-hidden />
         <button
           type="button"
           role="tab"
           aria-selected={tab === 'operativa'}
-          className={`home-switch-btn op ${tab === 'operativa' ? 'active' : ''}`}
+          className="hsw-btn"
           onClick={() => setTab('operativa')}
         >
-          <span className="hs-icon" aria-hidden>🚓</span>
-          <span className="hs-text">
-            <span className="hs-eyebrow">{t('home.switch.opEyebrow')}</span>
-            <span className="hs-title">{t('home.switch.opTitle')}</span>
-          </span>
+          <span aria-hidden>🚓</span>
+          <span>{t('home.switch.opTitle')}</span>
         </button>
         <button
           type="button"
           role="tab"
           aria-selected={tab === 'academia'}
-          className={`home-switch-btn ac ${tab === 'academia' ? 'active' : ''}`}
+          className="hsw-btn"
           onClick={() => setTab('academia')}
         >
-          <span className="hs-icon" aria-hidden>🎓</span>
-          <span className="hs-text">
-            <span className="hs-eyebrow">{t('home.switch.acEyebrow')}</span>
-            <span className="hs-title">{t('home.switch.acTitle')}</span>
-          </span>
+          <span aria-hidden>🎓</span>
+          <span>{t('home.switch.acTitle')}</span>
         </button>
       </div>
 
@@ -195,8 +191,8 @@ function OperativaView({ failuresDue: _ }: { failuresDue: number }) {
   const { t } = useT();
   return (
     <>
-      {/* Tools featured grid (existent — superbuscador, lleis, alc, sct, recursos) */}
-      <section className="home-section">
+      {/* HERO TOOLS · Superbuscador + Catàleg SCT (els 2 més usats) */}
+      <section className="home-section" style={{ marginTop: 14 }}>
         <div className="hs-head">
           <span className="tag">{t('home.v2.tools.eyebrow')}</span>
           <span className="rule" />
@@ -204,7 +200,7 @@ function OperativaView({ failuresDue: _ }: { failuresDue: number }) {
             {t('home.v2.tools.viewAll')} →
           </Link>
         </div>
-        <div className="tools-feature">
+        <div className="tools-hero-pair">
           <Link to="/superbuscador" className="feat-tool hero-tool">
             <span className="ft-arrow" style={{ color: '#5b1fa8' }}>→</span>
             <span className="ft-tag">{t('home.v2.tools.super.tag')}</span>
@@ -231,14 +227,32 @@ function OperativaView({ failuresDue: _ }: { failuresDue: number }) {
 
           <Link
             to="/leyes/s/transit/cataleg-d-infraccions-de-transit-sct-2026"
-            className="feat-tool s-trafico"
+            className="feat-tool hero-tool sct-hero"
           >
-            <span className="ft-arrow" style={{ color: 'var(--terracotta-2)' }}>→</span>
+            <span className="ft-pin" aria-hidden>🔥 MÉS USAT</span>
+            <span className="ft-arrow" style={{ color: '#fff' }}>→</span>
             <span className="ft-tag">{t('home.v2.tools.trafico.tag')}</span>
             <h3>{t('home.v2.tools.trafico.title')}</h3>
             <p>{t('home.v2.tools.trafico.desc')}</p>
+            <div className="ft-mockup sct-mockup">
+              <span style={{ fontSize: 18 }}>🚦</span>
+              <span className="mq">{t('home.sct.mockup')}</span>
+              <span className="ft-tickets">2026</span>
+            </div>
+            <div className="ft-chips">
+              <span className="ft-chip">SCT 2026</span>
+              <span className="ft-chip">Punts</span>
+              <span className="ft-chip">Quanties</span>
+              <span className="ft-chip">L1/L2/L3</span>
+            </div>
+            <span className="ft-cta">
+              {t('home.sct.cta')} →
+            </span>
           </Link>
+        </div>
 
+        {/* Eines secundàries · Alcoholèmia, Lleis, Recursos */}
+        <div className="tools-feature tools-feature-3">
           <Link to="/calculadora-alcohol" className="feat-tool s-alc">
             <span className="ft-arrow" style={{ color: '#B73663' }}>→</span>
             <span className="ft-tag">{t('home.v2.tools.alc.tag')}</span>
@@ -262,51 +276,74 @@ function OperativaView({ failuresDue: _ }: { failuresDue: number }) {
         </div>
       </section>
 
-      {/* Dreceres ràpides — Operativa runners (Trànsit / Penal) */}
+      {/* ÀREES OPERATIVES · bento (com a /operativa) */}
       <section className="home-section">
         <div className="hs-head">
-          <span className="tag">⚡ {t('home.op.shortcuts')}</span>
+          <span className="tag">🗺️ {t('home.op.areasEyebrow')}</span>
           <span className="rule" />
           <Link to="/operativa" className="more">
             {t('home.v2.tools.viewAll')} →
           </Link>
         </div>
-        <div className="op-shortcuts">
-          <Link to="/operativa/trafico" className="op-short trafico">
-            <span className="op-short-icon">🚗</span>
-            <div className="op-short-text">
-              <span className="op-short-eyebrow">OPERATIVA</span>
-              <span className="op-short-title">{t('home.op.trafico')}</span>
-              <span className="op-short-desc">{t('home.op.traficoDesc')}</span>
+        <div className="op-areas op-areas-home">
+          <Link to="/operativa/trafico" className="op-area trafico">
+            <span className="ai" style={{ fontSize: 30 }}>🚦</span>
+            <h3>{t('home.op.areaTrafico')}</h3>
+            <p>{t('home.op.areaTraficoDesc')}</p>
+            <div className="meta">
+              <span>14 PROC. · LSV · RGC</span>
+              <span className="arr">→</span>
             </div>
-            <span className="op-short-arr">→</span>
           </Link>
-          <Link to="/operativa/penal" className="op-short penal">
-            <span className="op-short-icon">⚖️</span>
-            <div className="op-short-text">
-              <span className="op-short-eyebrow">OPERATIVA</span>
-              <span className="op-short-title">{t('home.op.penal')}</span>
-              <span className="op-short-desc">{t('home.op.penalDesc')}</span>
+
+          <Link to="/operativa/penal" className="op-area sc">
+            <span className="ai">🛡️</span>
+            <h3>{t('home.op.areaPenal')}</h3>
+            <p>{t('home.op.areaPenalDesc')}</p>
+            <div className="meta">
+              <span>20 PROC.</span>
+              <span className="arr">→</span>
             </div>
-            <span className="op-short-arr">→</span>
           </Link>
-          <Link to="/operativa/penal/drets-detingut" className="op-short detingut">
-            <span className="op-short-icon">📜</span>
-            <div className="op-short-text">
-              <span className="op-short-eyebrow">REFERÈNCIA</span>
-              <span className="op-short-title">{t('home.op.drets')}</span>
-              <span className="op-short-desc">{t('home.op.dretsDesc')}</span>
+
+          <Link to="/operativa/penal/detencio" className="op-area det">
+            <span className="ai">⚖️</span>
+            <h3>{t('home.op.areaDet')}</h3>
+            <p>{t('home.op.areaDetDesc')}</p>
+            <div className="meta">
+              <span>5 PROC.</span>
+              <span className="arr">→</span>
             </div>
-            <span className="op-short-arr">→</span>
           </Link>
-          <Link to="/operativa/penal/recursos" className="op-short recursos">
-            <span className="op-short-icon">📞</span>
-            <div className="op-short-text">
-              <span className="op-short-eyebrow">REFERÈNCIA</span>
-              <span className="op-short-title">{t('home.op.tels')}</span>
-              <span className="op-short-desc">{t('home.op.telsDesc')}</span>
+
+          <Link to="/operativa/penal/violencia-genere" className="op-area vg">
+            <span className="ai">💜</span>
+            <h3>{t('home.op.areaVG')}</h3>
+            <p>{t('home.op.areaVGDesc')}</p>
+            <div className="meta">
+              <span>4 PROC.</span>
+              <span className="arr">→</span>
             </div>
-            <span className="op-short-arr">→</span>
+          </Link>
+
+          <Link to="/operativa/penal/recursos" className="op-area ext">
+            <span className="ai">📞</span>
+            <h3>{t('home.op.areaTels')}</h3>
+            <p>{t('home.op.areaTelsDesc')}</p>
+            <div className="meta">
+              <span>112 · 016 · 024 · ANAR</span>
+              <span className="arr">→</span>
+            </div>
+          </Link>
+
+          <Link to="/operativa/penal/drets-detingut" className="op-area drets">
+            <span className="ai">📜</span>
+            <h3>{t('home.op.areaDrets')}</h3>
+            <p>{t('home.op.areaDretsDesc')}</p>
+            <div className="meta">
+              <span>ART. 520 LECRIM</span>
+              <span className="arr">→</span>
+            </div>
           </Link>
         </div>
       </section>
