@@ -3596,10 +3596,65 @@ html[data-text-size="lg"] { font-size: 18px; }
     background: var(--terracotta);
     border-color: var(--terracotta);
   }
+  .fc-controls.fc-controls-1 {
+    grid-template-columns: 1fr;
+    margin-top: 18px;
+  }
+  /* Botons de valoració SRS (Anki-like): Encara no / Bona / Fàcil */
+  .fc-rate {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .fc-rate-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 14px 12px;
+    border-radius: 14px;
+    border: 2px solid var(--line);
+    background: var(--paper);
+    cursor: pointer;
+    transition: transform .12s, border-color .12s, box-shadow .12s;
+  }
+  .fc-rate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+  }
+  .fc-rate-btn .key {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-3);
+    background: var(--paper-2);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+  .fc-rate-btn .lbl {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .fc-rate-btn .when {
+    font-size: 11px;
+    color: var(--text-3);
+  }
+  .fc-rate-btn.again { border-color: #C13030; }
+  .fc-rate-btn.again .lbl { color: #C13030; }
+  .fc-rate-btn.again:hover { background: #FFE4E4; }
+  .fc-rate-btn.good { border-color: #1f8a4d; }
+  .fc-rate-btn.good .lbl { color: #1f8a4d; }
+  .fc-rate-btn.good:hover { background: #DFF7E9; }
+  .fc-rate-btn.easy { border-color: #2F6BD8; }
+  .fc-rate-btn.easy .lbl { color: #2F6BD8; }
+  .fc-rate-btn.easy:hover { background: #EAF1FE; }
   @media (max-width: 600px) {
     .fc-controls { grid-template-columns: 1fr; }
     .fc-text { font-size: 18px; }
     .fc-card { padding: 24px 20px; min-height: 240px; }
+    .fc-rate { grid-template-columns: 1fr; }
   }
 
   /* ── Calculadora Widmark inputs ──────────────────────────────── */

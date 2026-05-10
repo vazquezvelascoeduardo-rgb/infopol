@@ -186,13 +186,11 @@ export default function App() {
               </RequireAuth>
             }
           />
+          {/* /flashcards és sempre el mode SRS (sense :slug). Si l'usuari
+              entra a /flashcards/:slug per un enllaç antic, el redirigim. */}
           <Route
             path="/policia-local/flashcards/:slug"
-            element={
-              <RequireAuth>
-                <Flashcards />
-              </RequireAuth>
-            }
+            element={<Navigate to="/policia-local/flashcards" replace />}
           />
           <Route
             path="/policia-local/:slug"
@@ -231,11 +229,7 @@ export default function App() {
           />
           <Route
             path="/mossos/flashcards/:slug"
-            element={
-              <RequireAuth>
-                <Flashcards />
-              </RequireAuth>
-            }
+            element={<Navigate to="/mossos/flashcards" replace />}
           />
           <Route
             path="/mossos/:slug"
