@@ -811,31 +811,11 @@ function ResultPhase({
     : score.grade >= 5 ? 'pass'
     : 'fail';
 
-  const tierStyle: Record<string, { grade: string; ring: string; bg: string; emoji: string }> = {
-    excellent: {
-      grade: 'text-purple-600 dark:text-purple-400',
-      ring: 'ring-purple-200 dark:ring-purple-400/30',
-      bg: 'bg-gradient-to-br from-purple-50 to-fuchsia-50 dark:from-[#1a0f2e] dark:to-[#0f1d34]',
-      emoji: '🏆',
-    },
-    notable: {
-      grade: 'text-emerald-600 dark:text-emerald-400',
-      ring: 'ring-emerald-200 dark:ring-emerald-400/30',
-      bg: 'bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-[#0f2a1f] dark:to-[#0f1d34]',
-      emoji: '🌟',
-    },
-    pass: {
-      grade: 'text-amber-600 dark:text-amber-400',
-      ring: 'ring-amber-200 dark:ring-amber-400/30',
-      bg: 'bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-[#2a210f] dark:to-[#0f1d34]',
-      emoji: '✅',
-    },
-    fail: {
-      grade: 'text-red-600 dark:text-red-400',
-      ring: 'ring-red-200 dark:ring-red-400/30',
-      bg: 'bg-gradient-to-br from-red-50 to-rose-50 dark:from-[#2a0f1a] dark:to-[#0f1d34]',
-      emoji: '💪',
-    },
+  const tierStyle: Record<string, { c: string; glow: string; emoji: string }> = {
+    excellent: { c: '#9747D6', glow: 'radial-gradient(circle at top, rgba(151,71,214,0.18), transparent 60%)', emoji: '🏆' },
+    notable:   { c: '#15803d', glow: 'radial-gradient(circle at top, rgba(21,128,61,0.16), transparent 60%)', emoji: '🌟' },
+    pass:      { c: '#D9531A', glow: 'radial-gradient(circle at top, rgba(242,107,31,0.16), transparent 60%)', emoji: '✅' },
+    fail:      { c: '#b91c1c', glow: 'radial-gradient(circle at top, rgba(185,28,28,0.16), transparent 60%)', emoji: '💪' },
   };
   const ts = tierStyle[tier];
 
@@ -845,157 +825,127 @@ function ResultPhase({
   const wasNewBest = prev && score.grade > prev.best;
 
   return (
-    <>
-      <div className={`rounded-2xl border p-6 mb-5 text-center ring-2 ${ts.ring} ${ts.bg} dark:border-white/10`}>
-        <div className="text-3xl mb-1" aria-hidden>{ts.emoji}</div>
-        <div className="text-xs uppercase tracking-[0.25em] font-semibold text-slate-500 dark:text-slate-400 mb-1">
-          {t(`test.result.tier.${tier}`)}
-        </div>
-        <div className={`text-6xl sm:text-7xl font-black tracking-tight ${ts.grade}`}>
-          {score.grade.toFixed(2)}
-        </div>
-        <div className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-          {t('test.result.outOf10')}
-        </div>
+    <div className="ts-shell">
+      {/* Hero amb la nota */}
+      <div
+        className="tr-hero"
+        style={{ ['--tier-c' as never]: ts.c, ['--tier-glow' as never]: ts.glow } as React.CSSProperties}
+      >
+        <div className="tr-hero-emoji" aria-hidden>{ts.emoji}</div>
+        <div className="tr-hero-tier">{t(`test.result.tier.${tier}`)}</div>
+        <div className="tr-hero-grade">{score.grade.toFixed(2)}</div>
+        <div className="tr-hero-outof">{t('test.result.outOf10')}</div>
 
-        {/* Bandera nou rècord */}
         {wasNewBest && (
-          <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-amber-500 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 shadow-md">
-            🏅 {t('test.result.newBest')}
-          </div>
+          <div className="tr-newbest">🏅 {t('test.result.newBest')}</div>
         )}
-
-        {/* Comparativa amb l'ultim test */}
         {diff !== null && !wasNewBest && (
-          <div className="mt-3 text-xs text-slate-500 dark:text-slate-400">
+          <div className={`tr-diff ${diff > 0 ? 'up' : diff < 0 ? 'down' : ''}`}>
             {diff > 0
               ? `📈 +${diff.toFixed(2)} ${t('test.result.vsLast')}`
               : diff < 0
                 ? `📉 ${diff.toFixed(2)} ${t('test.result.vsLast')}`
-                : `${t('test.result.sameAsLast')}`}
+                : t('test.result.sameAsLast')}
           </div>
         )}
 
-        <div className="mt-5 grid grid-cols-3 gap-2 text-sm">
-          <div className="rounded-lg bg-emerald-50 dark:bg-emerald-400/10 p-3">
-            <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400">{score.correct}</div>
-            <div className="text-[10px] uppercase tracking-wider font-semibold text-emerald-700/70 dark:text-emerald-300/70">{t('test.result.correct')}</div>
+        <div className="tr-stats">
+          <div className="tr-stat ok">
+            <div className="tr-stat-num">{score.correct}</div>
+            <div className="tr-stat-label">{t('test.result.correct')}</div>
           </div>
-          <div className="rounded-lg bg-red-50 dark:bg-red-400/10 p-3">
-            <div className="text-2xl font-black text-red-600 dark:text-red-400">{score.wrong}</div>
-            <div className="text-[10px] uppercase tracking-wider font-semibold text-red-700/70 dark:text-red-300/70">{t('test.result.wrong')}</div>
+          <div className="tr-stat err">
+            <div className="tr-stat-num">{score.wrong}</div>
+            <div className="tr-stat-label">{t('test.result.wrong')}</div>
           </div>
-          <div className="rounded-lg bg-slate-100 dark:bg-white/5 p-3">
-            <div className="text-2xl font-black text-slate-600 dark:text-slate-300">{score.blank}</div>
-            <div className="text-[10px] uppercase tracking-wider font-semibold text-slate-600/70 dark:text-slate-400/70">{t('test.result.blank')}</div>
+          <div className="tr-stat">
+            <div className="tr-stat-num">{score.blank}</div>
+            <div className="tr-stat-label">{t('test.result.blank')}</div>
           </div>
         </div>
 
-        {/* Cronometre + velocitat */}
-        <div className="mt-4 flex items-center justify-center gap-4 text-xs text-slate-500 dark:text-slate-400">
-          <span className="inline-flex items-center gap-1">
-            <span aria-hidden>⏱</span>
-            <span className="font-mono">{formatMMSS(durationSec)}</span>
-          </span>
+        <div className="tr-meta">
+          <span><span aria-hidden>⏱</span> {formatMMSS(durationSec)}</span>
           {avgPerQuestion > 0 && (
             <>
               <span aria-hidden>·</span>
-              <span className="font-mono">
-                {avgPerQuestion.toFixed(1)}s {t('test.result.perQuestion')}
-              </span>
+              <span>{avgPerQuestion.toFixed(1)}s {t('test.result.perQuestion')}</span>
             </>
           )}
         </div>
-
-        <div className="mt-3 text-xs text-slate-500 dark:text-slate-400 font-mono">
+        <div className="tr-formula">
           {t('test.result.formula').replace('{raw}', score.raw.toFixed(2))}
         </div>
       </div>
 
       {/* Logros nous desbloquejats */}
       {state.newAchievements.length > 0 && (
-        <div className="rounded-2xl border-2 border-amber-300 bg-gradient-to-r from-amber-50 to-yellow-50
-          dark:border-amber-400/40 dark:from-[#2a210f] dark:to-[#0f1d34] p-4 mb-5">
-          <div className="text-xs uppercase tracking-wider font-bold text-amber-700 dark:text-amber-300 mb-2">
-            🎉 {t('test.result.unlockedTitle')}
-          </div>
-          <ul className="space-y-1.5">
-            {state.newAchievements.map((a) => (
-              <li key={a.id} className="flex items-start gap-2">
-                <span className="text-xl" aria-hidden>{a.icon}</span>
-                <div className="min-w-0">
-                  <div className="font-bold text-sm">{a.title}</div>
-                  <div className="text-xs text-slate-600 dark:text-slate-300">{a.description}</div>
-                </div>
-              </li>
-            ))}
-          </ul>
+        <div className="tr-achievements">
+          <div className="tr-achievements-head">🎉 {t('test.result.unlockedTitle')}</div>
+          {state.newAchievements.map((a) => (
+            <div key={a.id} className="tr-achievement-item">
+              <span className="tr-achievement-icon" aria-hidden>{a.icon}</span>
+              <div style={{ minWidth: 0 }}>
+                <div className="tr-achievement-title">{a.title}</div>
+                <div className="tr-achievement-desc">{a.description}</div>
+              </div>
+            </div>
+          ))}
         </div>
       )}
 
       {/* Llistat de correcció */}
-      <div className="space-y-2 mb-5">
+      <div className="tr-review">
+        <div className="tr-review-head">📋 Correcció</div>
         {state.questions.map((q, i) => {
           const ans = state.answers[i];
           const isCorrect = ans === q.correctIndex;
           const isBlank = ans === null;
-          const cls = isBlank
-            ? 'border-l-slate-400 bg-slate-50 dark:bg-white/5'
-            : isCorrect
-              ? 'border-l-emerald-500 bg-emerald-50 dark:bg-emerald-400/10'
-              : 'border-l-red-500 bg-red-50 dark:bg-red-400/10';
+          const cls = isBlank ? 'blank' : isCorrect ? 'ok' : 'err';
           return (
-            <div key={q.question.id}
-              className={`rounded-xl border-l-4 p-3 text-sm border border-slate-200/60 dark:border-white/10 ${cls}`}>
-              <div className="flex items-start gap-2">
-                <span className="shrink-0 text-base" aria-hidden>
-                  {isBlank ? '⚪' : isCorrect ? '✅' : '❌'}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <TopicBadge question={q.question} compact />
-                  <div className="font-semibold leading-snug mb-1">
-                    {i + 1}. {q.question.text}
+            <div key={q.question.id} className={`tr-review-item ${cls}`}>
+              <span className="tr-review-icon" aria-hidden>
+                {isBlank ? '⚪' : isCorrect ? '✅' : '❌'}
+              </span>
+              <div style={{ minWidth: 0, flex: 1 }}>
+                <TopicBadge question={q.question} compact />
+                <div className="tr-review-q">{i + 1}. {q.question.text}</div>
+                {!isCorrect && !isBlank && (
+                  <div className="tr-review-line wrong">
+                    {t('test.result.yourAnswer')}:{' '}
+                    <span className="badge">{String.fromCharCode(65 + (ans ?? 0))}</span>
+                    {q.options[ans ?? 0]}
                   </div>
-                  {!isCorrect && !isBlank && (
-                    <div className="text-xs text-red-700 dark:text-red-300/90">
-                      {t('test.result.yourAnswer')}: <span className="font-mono">{String.fromCharCode(65 + (ans ?? 0))}</span> · {q.options[ans ?? 0]}
-                    </div>
-                  )}
-                  <div className="text-xs text-emerald-700 dark:text-emerald-300/90">
-                    {t('test.result.correctAnswer')}: <span className="font-mono">{String.fromCharCode(65 + q.correctIndex)}</span> · {q.options[q.correctIndex]}
-                  </div>
-                  {q.question.reference && (
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-mono">
-                      📖 {q.question.reference}
-                    </div>
-                  )}
+                )}
+                <div className="tr-review-line right">
+                  {t('test.result.correctAnswer')}:{' '}
+                  <span className="badge">{String.fromCharCode(65 + q.correctIndex)}</span>
+                  {q.options[q.correctIndex]}
                 </div>
+                {q.question.reference && (
+                  <div className="tr-review-ref">📖 {q.question.reference}</div>
+                )}
               </div>
             </div>
           );
         })}
       </div>
 
-      <div className="flex flex-wrap items-center gap-2">
+      {/* Accions */}
+      <div className="tr-actions">
         <button
           type="button"
           onClick={onRestart}
-          className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold px-5 py-2.5 shadow-md"
+          className="ts-btn ts-btn-primary"
         >
           🔁 {t('test.result.another')}
         </button>
-        <Link
-          to={corpsRoot}
-          className="rounded-xl border px-4 py-2.5 text-sm font-semibold
-            border-slate-200 bg-white text-slate-700 hover:bg-slate-50
-            dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
-        >
+        <Link to={corpsRoot} className="ts-btn">
           {t('test.result.backToList')}
         </Link>
-        {/* Slug i isAll només per silenciar warnings de unused */}
         <span className="hidden">{slug}{isAll ? 'all' : ''}</span>
       </div>
-    </>
+    </div>
   );
 }
 
