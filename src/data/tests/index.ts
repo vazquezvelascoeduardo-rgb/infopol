@@ -21,6 +21,12 @@ import lpac from './lpac-39-40-2015';
 import cultura from './cultura-general';
 import culturaHistoria from './cultura-historia';
 import culturaGeografia from './cultura-geografia';
+import culturaSistemaSolar from './cultura-sistema-solar';
+import culturaMusica from './cultura-musica';
+import culturaTrigonometria from './cultura-trigonometria';
+import culturaPintura from './cultura-pintura';
+import culturaLiteratura from './cultura-literatura';
+import culturaCosHuma from './cultura-cos-huma';
 import terrassa from './terrassa';
 import manresa from './manresa';
 import elprat from './elprat';
@@ -70,6 +76,12 @@ export const TOPICS: TestTopic[] = [
   cultura,
   culturaHistoria,
   culturaGeografia,
+  culturaSistemaSolar,
+  culturaMusica,
+  culturaTrigonometria,
+  culturaPintura,
+  culturaLiteratura,
+  culturaCosHuma,
   terrassa,
   manresa,
   elprat,

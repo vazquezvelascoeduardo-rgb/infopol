@@ -1,48 +1,13 @@
-// Pàgina d'índex de Cultura General · banc de preguntes per matèria.
-// Disseny: hero (lila) + zona de tests amb mode destacat "Tots els
-// temes" + cards de categoria. Mateix patró UX que /policia-local i
-// /mossos però simplificat (no hi ha flashcards ni temari aquí).
+// Pàgina d'índex de Cultura General · pool mesclat.
+// L'usuari va decidir treure els tests per matèria — totes les preguntes
+// sortejen barrejades del mode "Tots els temes" (/cultura-general/tot).
+// Aquí només mostrem hero + CTA gros + petita llegenda de matèries
+// incloses (informativa, sense links a tests per matèria).
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
 import { TOPICS } from '../data/tests';
-import { getTopicStats, levelFromBest, type Level } from '../lib/testStats';
-import type { TestTopic } from '../data/tests/types';
 
 const ACCENT = '#9747D6';
-
-const LEVEL_LVL: Record<Level, { lvl: 'easy' | 'medium' | 'hard' | 'none'; label: string }> = {
-  none:         { lvl: 'none',   label: 'Sense fer' },
-  novice:       { lvl: 'easy',   label: 'Iniciat' },
-  intermediate: { lvl: 'medium', label: 'Intermedi' },
-  advanced:     { lvl: 'hard',   label: 'Avançat' },
-  expert:       { lvl: 'hard',   label: 'Expert' },
-};
-
-function accentToColors(accent: string): { c: string; bg: string } {
-  const m = accent.match(/from-([a-z]+)-/);
-  const color = m ? m[1] : 'slate';
-  const map: Record<string, { c: string; bg: string }> = {
-    amber: { c: '#9c7a1f', bg: '#FFF1D2' },
-    yellow: { c: '#9c7a1f', bg: '#FFF8E0' },
-    red: { c: '#C13030', bg: '#FFE4E4' },
-    rose: { c: '#C13030', bg: '#FFE4E4' },
-    pink: { c: '#C13030', bg: '#FFE4EE' },
-    orange: { c: '#D9531A', bg: '#FFE4D2' },
-    blue: { c: '#2F6BD8', bg: '#EAF1FE' },
-    sky: { c: '#2F6BD8', bg: '#EAF6FE' },
-    indigo: { c: '#4338CA', bg: '#E7E5FE' },
-    violet: { c: '#7C3AED', bg: '#EFE5FE' },
-    purple: { c: '#9747D6', bg: '#F5E9FF' },
-    fuchsia: { c: '#A21CAF', bg: '#FCE7FA' },
-    emerald: { c: '#0E8A6F', bg: '#E1F4EE' },
-    green: { c: '#1f8a4d', bg: '#DFF7E9' },
-    teal: { c: '#0E8A8A', bg: '#E1F4F4' },
-    slate: { c: '#475569', bg: '#EEF2F6' },
-    gray: { c: '#475569', bg: '#EEF2F6' },
-    stone: { c: '#57534E', bg: '#F1EFEC' },
-  };
-  return map[color] ?? map.slate;
-}
 
 export default function CulturaGeneral() {
   const { t } = useT();
@@ -85,7 +50,7 @@ export default function CulturaGeneral() {
         </div>
       </header>
 
-      {/* ZONA DE TESTS */}
+      {/* ZONA DE TESTS · només el mode mesclat */}
       <section
         className="tests-zone"
         style={{
@@ -102,7 +67,7 @@ export default function CulturaGeneral() {
           <p>{t('cultura.zoneSubtitle').replace('{n}', String(totalQuestions))}</p>
         </header>
 
-        {/* Mode destacat: Tots els temes */}
+        {/* CTA gros: test mesclat de totes les matèries */}
         <div className="tests-zone-modes" style={{ gridTemplateColumns: '1fr' }}>
           <Link to="/cultura-general/tot" className="ts-mode featured">
             <span className="mtag">⚡ {t('cultura.allTag')}</span>
@@ -114,7 +79,7 @@ export default function CulturaGeneral() {
               <div className="specs">
                 <span>{totalQuestions} preguntes</span>
                 <span>·</span>
-                <span>{culturaTopics.length} matèries</span>
+                <span>{culturaTopics.length} matèries mesclades</span>
               </div>
               <span className="cta">
                 ▶ {t('test.start')} <span className="arr">→</span>
@@ -123,57 +88,61 @@ export default function CulturaGeneral() {
           </Link>
         </div>
 
-        <div className="tests-zone-divider">
-          <span className="line" />
-          <span className="lbl">{t('cultura.orBySubject')}</span>
-          <span className="line" />
-        </div>
-
-        <div className="test-grid">
-          {culturaTopics.map((topic) => (
-            <CulturaCard key={topic.slug} topic={topic} />
-          ))}
+        {/* Llegenda informativa de matèries incloses (sense links) */}
+        <div
+          style={{
+            marginTop: 24,
+            padding: '16px 18px',
+            background: 'rgba(255, 255, 255, 0.6)',
+            border: '1px solid var(--line)',
+            borderRadius: 14,
+          }}
+        >
+          <div
+            className="eyebrow"
+            style={{ color: 'var(--text-3)', marginBottom: 10 }}
+          >
+            📚 Matèries incloses al pool
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 8,
+            }}
+          >
+            {culturaTopics.map((topic) => (
+              <span
+                key={topic.slug}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  padding: '6px 12px',
+                  background: 'var(--paper-2)',
+                  border: '1px solid var(--line)',
+                  borderRadius: 999,
+                  fontSize: 12.5,
+                  fontWeight: 600,
+                  color: 'var(--text-2)',
+                }}
+              >
+                <span aria-hidden>{topic.icon}</span>
+                {topic.title}
+                <span
+                  style={{
+                    fontFamily: 'JetBrains Mono, monospace',
+                    fontSize: 11,
+                    color: 'var(--text-3)',
+                  }}
+                >
+                  {topic.questions.length}
+                </span>
+              </span>
+            ))}
+          </div>
         </div>
       </section>
     </div>
-  );
-}
-
-function CulturaCard({ topic }: { topic: TestTopic }) {
-  const stats = getTopicStats(topic.slug);
-  const level = levelFromBest(stats?.best);
-  const lvlMeta = LEVEL_LVL[level];
-  const colors = accentToColors(topic.accent);
-  const total = topic.questions.length;
-  const pct = stats?.best
-    ? Math.min(100, Math.round((stats.best / 10) * 100))
-    : 0;
-
-  return (
-    <Link
-      to={`/cultura-general/${topic.slug}`}
-      className="tcard"
-      style={{
-        ['--accent' as never]: colors.c,
-        ['--accent-bg' as never]: colors.bg,
-      } as React.CSSProperties}
-    >
-      <div className="head">
-        <span className="ico" aria-hidden>{topic.icon}</span>
-        <span className={`lvl ${lvlMeta.lvl}`}>{lvlMeta.label}</span>
-      </div>
-      <h4>{topic.title}</h4>
-      {topic.description && <p>{topic.description}</p>}
-      <div className="specs">
-        <span className="spec">{total} preguntes</span>
-      </div>
-      <div className="footer-row">
-        <div className="progress-mini">
-          <div className="pmini-bar"><span style={{ width: `${pct}%` }} /></div>
-          <span className="pmini-pct">{pct}%</span>
-        </div>
-        <span className="start">{pct > 0 ? 'Continuar' : 'Començar'} →</span>
-      </div>
-    </Link>
   );
 }

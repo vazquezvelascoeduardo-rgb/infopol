@@ -1,0 +1,60 @@
+// Test Cultura General · Sistema Solar. 15 preguntes.
+import type { TestTopic } from './types';
+
+const culturaSistemaSolar: TestTopic = {
+  slug: 'cultura-sistema-solar',
+  title: 'Sistema solar',
+  description: 'Planetes, satèl·lits, moviments i astronomia bàsica.',
+  icon: '🪐',
+  accent: 'from-indigo-500 to-violet-700',
+  category: 'cultura',
+  questions: [
+    { id: 'cult-ss-1', text: 'Quants satèl·lits naturals té el planeta Mart?',
+      options: ['1 satèl·lit', '2 satèl·lits', '3 satèl·lits', '4 satèl·lits'], correct: 1 },
+    { id: 'cult-ss-2', text: "En quin mes de l'any la Terra es troba més a prop del Sol?",
+      options: ['Al mes de juny', 'Al mes de juliol', 'Al mes de gener', 'Al mes de desembre'], correct: 2 },
+    { id: 'cult-ss-3', text: 'Quina afirmació sobre la classificació dels planetes és correcta?',
+      options: [
+        'Els rocosos són Mercuri, Venus, Terra i Júpiter',
+        'Els rocosos són Mercuri, Venus, Terra i Mart',
+        'Els gegants gasosos són Mart, Júpiter, Saturn i Urà',
+        'Els gegants gasosos són Júpiter, Saturn, Urà i Plutó',
+      ], correct: 1 },
+    { id: 'cult-ss-4', text: 'Quin és el planeta més gran del sistema solar?',
+      options: ['Saturn', 'Neptú', 'Júpiter', 'Urà'], correct: 2 },
+    { id: 'cult-ss-5', text: 'Què provoca el moviment de translació de la Terra?',
+      options: ['El dia i la nit', "Les estacions de l'any", 'Les marees oceàniques', 'Els eclipsis solars'], correct: 1 },
+    { id: 'cult-ss-6', text: 'Quin és el quart planeta del sistema solar tenint com a referència el Sol?',
+      options: ['Venus', 'Terra', 'Mart', 'Júpiter'], correct: 2 },
+    { id: 'cult-ss-7', text: 'Quin planeta del sistema solar es troba més proper al Sol?',
+      options: ['Venus', 'Terra', 'Mart', 'Mercuri'], correct: 3 },
+    { id: 'cult-ss-8', text: 'Dins del Sistema Solar, quin és el planeta més allunyat de la Terra?',
+      options: ['Júpiter', 'Saturn', 'Urà', 'Neptú'], correct: 3 },
+    { id: 'cult-ss-9', text: "Quin és l'únic planeta amb un sistema d'anells visible des de la Terra?",
+      options: ['Júpiter', 'Saturn', 'Urà', 'Neptú'], correct: 1 },
+    { id: 'cult-ss-10', text: "Quin és el nom del primer satèl·lit artificial llançat a l'espai?",
+      options: ['Vostok 1', 'Apollo 11', 'Sputnik 1', 'Voyager 1'], correct: 2 },
+    { id: 'cult-ss-11', text: "Quins planetes tenen la seva òrbita més propera a la Terra?",
+      options: ['Mercuri i Venus', 'Venus i Mart', 'Mercuri i Mart', 'Mart i Júpiter'], correct: 1 },
+    { id: 'cult-ss-12', text: 'Quin dels següents planetes del Sistema Solar és el més càlid?',
+      options: ['Mercuri', 'Venus', 'Mart', 'Júpiter'], correct: 1 },
+    { id: 'cult-ss-13', text: "Quina d'aquestes afirmacions NO és correcta?",
+      options: [
+        'Mart té dos satèl·lits naturals',
+        "Saturn té un sistema d'anells visible des de la Terra",
+        'Mercuri és el planeta més proper al Sol',
+        'Mercuri és el planeta més càlid del sistema solar',
+      ], correct: 3 },
+    { id: 'cult-ss-14', text: 'Quin dels planetes següents és un gegant gasós?',
+      options: ['Mercuri', 'Venus', 'Mart', 'Urà'], correct: 3 },
+    { id: 'cult-ss-15', text: "Quina d'aquestes afirmacions és correcta?",
+      options: [
+        'Júpiter és el planeta més proper al Sol',
+        'Neptú és el planeta més allunyat de la Terra',
+        'Venus té dos satèl·lits naturals',
+        'Mart és el planeta més càlid del sistema solar',
+      ], correct: 1 },
+  ],
+};
+
+export default culturaSistemaSolar;
