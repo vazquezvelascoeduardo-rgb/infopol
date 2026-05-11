@@ -4367,6 +4367,346 @@ html[data-text-size="lg"] { font-size: 18px; }
 }
 
 /* ════════════════════════════════════════════════════════════════════
+   TEST SESSION · redisseny modern (rebrand 2026)
+   ════════════════════════════════════════════════════════════════════ */
+@layer components {
+  /* Contenidor de la pregunta — centrat, ample limitat */
+  .ts-shell { max-width: 720px; margin: 0 auto; }
+
+  /* Barra de progrés segmentada estil Duolingo */
+  .ts-progress {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+  .ts-progress-seg {
+    flex: 1;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--paper-2);
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .ts-progress-seg.answered {
+    background: linear-gradient(90deg, var(--terracotta), var(--terracotta-2, #D9531A));
+  }
+  .ts-progress-seg.current {
+    background: linear-gradient(90deg, color-mix(in oklab, var(--terracotta) 50%, var(--paper-2)), var(--terracotta));
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--terracotta) 35%, transparent);
+  }
+
+  /* Top bar amb stats: nº pregunta, cronòmetre, finalitzar */
+  .ts-statbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-3);
+    flex-wrap: wrap;
+  }
+  .ts-statbar-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ts-stat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 9px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--text-2);
+    font-weight: 600;
+  }
+  .ts-finishnow-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 11px;
+    background: color-mix(in oklab, var(--c-recursos, #2FB66B) 14%, var(--paper));
+    border: 1px solid color-mix(in oklab, var(--c-recursos, #2FB66B) 40%, transparent);
+    color: #166534;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .ts-finishnow-btn:hover {
+    background: color-mix(in oklab, var(--c-recursos, #2FB66B) 22%, var(--paper));
+  }
+
+  /* Card de pregunta */
+  .ts-question {
+    background: var(--white, #fff);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 28px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(14,14,14,0.03), 0 8px 30px -12px rgba(14,14,14,0.10);
+  }
+  @media (min-width: 640px) {
+    .ts-question { padding: 32px 36px; }
+  }
+  .ts-topic-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
+    padding: 4px 11px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--text-2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .ts-question-text {
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 22px;
+  }
+  @media (min-width: 640px) {
+    .ts-question-text { font-size: 22px; }
+  }
+
+  /* Opcions tipus pill amb badge A/B/C/D */
+  .ts-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .ts-option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    text-align: left;
+    padding: 14px 16px;
+    background: var(--paper-2);
+    border: 2px solid transparent;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform 0.12s ease, border-color 0.15s, background 0.15s;
+    color: var(--ink);
+    font-family: inherit;
+  }
+  .ts-option:not(:disabled):hover {
+    border-color: color-mix(in oklab, var(--terracotta) 28%, transparent);
+    background: color-mix(in oklab, var(--terracotta) 6%, var(--paper-2));
+  }
+  .ts-option:not(:disabled):active { transform: scale(0.99); }
+  .ts-option-badge {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--white, #fff);
+    border: 2px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-2);
+    transition: all 0.15s;
+  }
+  .ts-option-text {
+    flex: 1;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  @media (min-width: 640px) {
+    .ts-option-text { font-size: 16px; }
+  }
+
+  /* Estats: seleccionada (sense revelar), correcta, incorrecta-triada, dim */
+  .ts-option.selected {
+    border-color: var(--terracotta);
+    background: color-mix(in oklab, var(--terracotta) 10%, var(--paper-2));
+  }
+  .ts-option.selected .ts-option-badge {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+    color: #fff;
+  }
+  .ts-option.correct {
+    border-color: #15803d;
+    background: color-mix(in oklab, #15803d 12%, var(--paper-2));
+    animation: ts-pulse-ok 0.4s ease;
+  }
+  .ts-option.correct .ts-option-badge {
+    background: #15803d;
+    border-color: #15803d;
+    color: #fff;
+  }
+  .ts-option.wrong {
+    border-color: #b91c1c;
+    background: color-mix(in oklab, #b91c1c 12%, var(--paper-2));
+    animation: ts-shake 0.4s ease;
+  }
+  .ts-option.wrong .ts-option-badge {
+    background: #b91c1c;
+    border-color: #b91c1c;
+    color: #fff;
+  }
+  .ts-option.dim { opacity: 0.5; }
+  .ts-option:disabled { cursor: default; }
+
+  @keyframes ts-pulse-ok {
+    0%, 100% { transform: scale(1); }
+    40% { transform: scale(1.02); }
+  }
+  @keyframes ts-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
+
+  /* Feedback box (mode study) */
+  .ts-feedback {
+    margin-top: 18px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .ts-feedback.ok {
+    background: color-mix(in oklab, #15803d 8%, var(--paper));
+    border-left: 4px solid #15803d;
+    color: #14532d;
+  }
+  .ts-feedback.bad {
+    background: color-mix(in oklab, #b91c1c 8%, var(--paper));
+    border-left: 4px solid #b91c1c;
+    color: #7f1d1d;
+  }
+  .ts-feedback-title { font-weight: 800; margin-bottom: 4px; }
+  .ts-feedback-detail { font-size: 13px; opacity: 0.9; }
+  .ts-feedback-ref {
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  /* Bottom controls */
+  .ts-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .ts-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 11px 18px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--text-2);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    font-family: inherit;
+  }
+  .ts-btn:not(:disabled):hover { background: var(--paper-2); color: var(--ink); }
+  .ts-btn:not(:disabled):active { transform: scale(0.98); }
+  .ts-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .ts-btn-skip {
+    background: transparent;
+    color: var(--text-3);
+    border-color: transparent;
+  }
+  .ts-btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+    padding: 13px 22px;
+    font-weight: 800;
+    font-size: 15px;
+    box-shadow: 0 2px 0 0 color-mix(in oklab, var(--ink) 80%, transparent),
+                0 6px 16px -6px rgba(14, 14, 14, 0.35);
+  }
+  .ts-btn-primary:not(:disabled):hover {
+    background: color-mix(in oklab, var(--ink) 88%, var(--terracotta));
+    color: var(--paper);
+  }
+  .ts-btn-primary.finish {
+    background: linear-gradient(180deg, var(--terracotta), var(--terracotta-2, #D9531A));
+    border-color: var(--terracotta-2, #D9531A);
+    box-shadow: 0 2px 0 0 var(--terracotta-2, #D9531A),
+                0 6px 16px -6px rgba(217, 83, 26, 0.4);
+  }
+  .ts-btn-primary.finish:not(:disabled):hover {
+    filter: brightness(1.05);
+  }
+
+  /* Modal de confirmació */
+  .ts-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    animation: ts-fade-in 0.18s ease;
+  }
+  .ts-modal {
+    width: 100%;
+    max-width: 420px;
+    background: var(--paper);
+    border-radius: 20px;
+    padding: 24px 22px;
+    border: 1px solid var(--line);
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+  }
+  .ts-modal h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .ts-modal p {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+  .ts-modal-actions {
+    display: flex;
+    gap: 8px;
+    flex-direction: column-reverse;
+  }
+  @media (min-width: 480px) {
+    .ts-modal-actions { flex-direction: row; justify-content: flex-end; }
+  }
+  @keyframes ts-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════
    ESTILS DE LES FITXES DEL TEMARI (preserved)
    ════════════════════════════════════════════════════════════════════ */
 @layer components {

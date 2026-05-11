@@ -575,7 +575,6 @@ function RunPhase({
   const cur = state.questions[state.index];
   const selected = state.answers[state.index];
   const isLast = state.index === total - 1;
-  const progress = ((state.index + 1) / total) * 100;
   const answeredCount = state.answers.filter((a) => a !== null).length;
   const blanks = total - answeredCount;
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -599,56 +598,60 @@ function RunPhase({
     setConfirmOpen(true);
   }
 
+  // 'accent' (gradient Tailwind) ja no s'usa amb el nou disseny: tots els
+  // colors venen dels tokens del rebrand. Mantenim el param per
+  // compatibilitat del signature.
+  void accent;
+
   return (
-    <>
-      {/* Barra de progrés + cronometre + boto acabar */}
-      <div className="mb-4">
-        <div className="flex items-center justify-between gap-2 text-xs mb-1.5 flex-wrap">
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-slate-500 dark:text-slate-400">
-              {t('test.session.questionN')
-                .replace('{n}', String(state.index + 1))
-                .replace('{total}', String(total))}
-            </span>
-            <span aria-hidden className="text-slate-300 dark:text-slate-600">·</span>
-            <span
-              className="font-mono text-slate-500 dark:text-slate-400 inline-flex items-center gap-1"
-              title={t('test.session.elapsed')}
-            >
-              <span aria-hidden>⏱</span>
-              {elapsedDisplay}
-            </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-slate-500 dark:text-slate-400">
-              {answeredCount} / {total} {t('test.session.answered')}
-            </span>
-            <button
-              type="button"
-              onClick={requestFinish}
-              title={t('test.session.finishNow')}
-              className="rounded-md border px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide transition
-                border-emerald-300 bg-emerald-50 text-emerald-700 hover:bg-emerald-100
-                dark:border-emerald-400/40 dark:bg-emerald-400/10 dark:text-emerald-300 dark:hover:bg-emerald-400/20"
-            >
-              ✓ {t('test.session.finishNow')}
-            </button>
-          </div>
+    <div className="ts-shell">
+      {/* Stat bar: pregunta N · cronòmetre · respostes · finalitzar */}
+      <div className="ts-statbar">
+        <div className="ts-statbar-group">
+          <span className="ts-stat-pill">
+            {t('test.session.questionN')
+              .replace('{n}', String(state.index + 1))
+              .replace('{total}', String(total))}
+          </span>
+          <span className="ts-stat-pill" title={t('test.session.elapsed')}>
+            <span aria-hidden>⏱</span> {elapsedDisplay}
+          </span>
         </div>
-        <div className="h-2 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
-          <div className={`h-full bg-gradient-to-r ${accent} transition-all duration-300`} style={{ width: `${progress}%` }} />
+        <div className="ts-statbar-group">
+          <span className="ts-stat-pill">
+            {answeredCount}/{total}
+          </span>
+          <button
+            type="button"
+            onClick={requestFinish}
+            title={t('test.session.finishNow')}
+            className="ts-finishnow-btn"
+          >
+            ✓ {t('test.session.finishNow')}
+          </button>
         </div>
       </div>
 
-      {/* Pregunta */}
-      <div className="rounded-2xl border-2 p-5 sm:p-6 mb-4
-        border-slate-200 bg-white
-        dark:border-white/10 dark:bg-[#0f1d34]">
+      {/* Barra de progrés segmentada (un segment per pregunta) */}
+      <div className="ts-progress" role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={answeredCount}>
+        {Array.from({ length: total }).map((_, i) => {
+          const isCurrent = i === state.index;
+          const isAnswered = state.answers[i] !== null && state.answers[i] !== undefined;
+          return (
+            <div
+              key={i}
+              className={`ts-progress-seg${isAnswered ? ' answered' : ''}${isCurrent ? ' current' : ''}`}
+            />
+          );
+        })}
+      </div>
+
+      {/* Card de la pregunta */}
+      <div className="ts-question">
         <TopicBadge question={cur.question} />
-        <div className="text-base sm:text-lg font-semibold leading-snug mb-4">
-          {cur.question.text}
-        </div>
-        <div className="space-y-2">
+        <div className="ts-question-text">{cur.question.text}</div>
+
+        <div className="ts-options">
           {cur.options.map((opt, i) => {
             const isSelected = selected === i;
             const revealed = state.mode === 'study' && state.revealedIdx.has(state.index);
@@ -656,23 +659,13 @@ function RunPhase({
             const isWrongPicked = revealed && isSelected && !isCorrect;
             const isCorrectShown = revealed && isCorrect;
 
-            // Estil base
-            let cls = 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-white/20 dark:hover:bg-white/10';
-            let badgeCls = 'border-slate-300 text-slate-500 dark:border-white/20 dark:text-slate-400';
+            let cls = 'ts-option';
             if (revealed) {
-              if (isCorrectShown) {
-                cls = 'border-emerald-500 bg-emerald-50 text-emerald-900 dark:border-emerald-400 dark:bg-emerald-400/15 dark:text-emerald-100';
-                badgeCls = 'border-emerald-500 bg-emerald-500 text-white';
-              } else if (isWrongPicked) {
-                cls = 'border-red-500 bg-red-50 text-red-900 dark:border-red-400 dark:bg-red-400/15 dark:text-red-100';
-                badgeCls = 'border-red-500 bg-red-500 text-white';
-              } else {
-                cls = 'border-slate-200 bg-white text-slate-400 opacity-60 dark:border-white/10 dark:bg-white/5 dark:text-slate-500';
-                badgeCls = 'border-slate-300 text-slate-400 dark:border-white/15 dark:text-slate-500';
-              }
+              if (isCorrectShown) cls += ' correct';
+              else if (isWrongPicked) cls += ' wrong';
+              else cls += ' dim';
             } else if (isSelected) {
-              cls = 'border-blue-500 bg-blue-50 text-blue-900 dark:border-blue-400 dark:bg-blue-400/15 dark:text-blue-100';
-              badgeCls = 'border-blue-500 bg-blue-500 text-white';
+              cls += ' selected';
             }
 
             return (
@@ -681,69 +674,65 @@ function RunPhase({
                 type="button"
                 onClick={() => onAnswer(isSelected ? null : i)}
                 disabled={revealed}
-                className={`w-full text-left rounded-xl border-2 px-4 py-3 transition flex items-start gap-3
-                  ${cls}
-                  ${revealed ? 'cursor-default' : ''}`}
+                className={cls}
               >
-                <span className={`shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 font-bold text-xs ${badgeCls}`}>
+                <span className="ts-option-badge">
                   {isCorrectShown ? '✓' : isWrongPicked ? '✗' : String.fromCharCode(65 + i)}
                 </span>
-                <span className="text-sm sm:text-base leading-snug flex-1">{opt}</span>
+                <span className="ts-option-text">{opt}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Feedback de la correccio en mode interactiu */}
+        {/* Feedback en mode estudi */}
         {state.mode === 'study' && state.revealedIdx.has(state.index) && (
-          <div className="mt-4 rounded-lg border-l-4 p-3 text-sm
-            border-l-emerald-500 bg-emerald-50/60 text-emerald-900
-            dark:border-l-emerald-400/70 dark:bg-emerald-400/10 dark:text-emerald-100">
+          <div className={`ts-feedback ${selected === cur.correctIndex ? 'ok' : 'bad'}`}>
             {selected === cur.correctIndex ? (
-              <div className="font-bold">✅ {t('test.session.correctFeedback')}</div>
+              <div className="ts-feedback-title">✅ {t('test.session.correctFeedback')}</div>
             ) : (
-              <div>
-                <div className="font-bold">❌ {t('test.session.wrongFeedback')}</div>
-                <div className="text-xs mt-1">
-                  {t('test.result.correctAnswer')}: <span className="font-mono font-bold">{String.fromCharCode(65 + cur.correctIndex)}</span> · {cur.options[cur.correctIndex]}
+              <>
+                <div className="ts-feedback-title">❌ {t('test.session.wrongFeedback')}</div>
+                <div className="ts-feedback-detail">
+                  {t('test.result.correctAnswer')}:{' '}
+                  <span style={{ fontFamily: 'JetBrains Mono, monospace', fontWeight: 700 }}>
+                    {String.fromCharCode(65 + cur.correctIndex)}
+                  </span>{' '}
+                  · {cur.options[cur.correctIndex]}
                 </div>
-              </div>
+              </>
             )}
             {cur.question.reference && (
-              <div className="text-[11px] mt-1 font-mono opacity-80">📖 {cur.question.reference}</div>
+              <div className="ts-feedback-ref">📖 {cur.question.reference}</div>
             )}
           </div>
         )}
       </div>
 
-      {/* Controls */}
-      <div className="flex items-center gap-2">
+      {/* Controls bottom */}
+      <div className="ts-controls">
         <button
           type="button"
           onClick={onBack}
           disabled={state.index === 0}
-          className="rounded-xl border px-4 py-2.5 text-sm font-semibold transition
-            border-slate-200 bg-white text-slate-700 hover:bg-slate-50
-            dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10
-            disabled:opacity-40 disabled:cursor-not-allowed"
+          className="ts-btn"
+          aria-label={t('test.session.previous')}
         >
-          ← {t('test.session.previous')}
+          ←
         </button>
         <button
           type="button"
           onClick={() => onAnswer(null)}
-          className="rounded-xl border px-4 py-2.5 text-sm font-medium transition
-            border-slate-200 bg-white text-slate-500 hover:bg-slate-50
-            dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10"
+          className="ts-btn ts-btn-skip"
         >
           {t('test.session.skip')}
         </button>
-        <div className="flex-1" />
+        <div style={{ flex: 1 }} />
         {isLast ? (
           <button
             type="button"
             onClick={requestFinish}
-            className="rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 shadow-md"
+            className="ts-btn ts-btn-primary finish"
           >
             {t('test.session.finish')} ✓
           </button>
@@ -751,53 +740,41 @@ function RunPhase({
           <button
             type="button"
             onClick={onNext}
-            className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold px-5 py-2.5 shadow-md"
+            className="ts-btn ts-btn-primary"
           >
             {t('test.session.next')} →
           </button>
         )}
       </div>
 
-      {/* Modal propi de confirmacio (window.confirm() no funciona a iOS PWA) */}
+      {/* Modal de confirmació */}
       {confirmOpen && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          className="ts-modal-backdrop"
+          onClick={() => setConfirmOpen(false)}
         >
-          <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            onClick={() => setConfirmOpen(false)}
-            aria-hidden
-          />
-          <div className="relative w-full max-w-sm rounded-2xl border-2 p-5 shadow-2xl
-            border-amber-300 bg-white
-            dark:border-amber-400/40 dark:bg-[#0f1d34]">
-            <div className="flex items-start gap-3 mb-4">
-              <span className="text-2xl shrink-0" aria-hidden>⚠️</span>
+          <div className="ts-modal" onClick={(e) => e.stopPropagation()}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 4 }}>
+              <span style={{ fontSize: 28, flex: 'none' }} aria-hidden>⚠️</span>
               <div>
-                <h3 className="font-bold text-base mb-1">
-                  {t('test.session.confirmTitle')}
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-snug">
-                  {t('test.session.confirmFinish').replace('{n}', String(blanks))}
-                </p>
+                <h3>{t('test.session.confirmTitle')}</h3>
+                <p>{t('test.session.confirmFinish').replace('{n}', String(blanks))}</p>
               </div>
             </div>
-            <div className="flex flex-col-reverse sm:flex-row gap-2 justify-end">
+            <div className="ts-modal-actions">
               <button
                 type="button"
                 onClick={() => setConfirmOpen(false)}
-                className="rounded-xl border-2 px-4 py-2.5 text-sm font-semibold transition
-                  border-slate-200 bg-white text-slate-700 hover:bg-slate-50
-                  dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
+                className="ts-btn"
               >
                 {t('test.session.confirmCancel')}
               </button>
               <button
                 type="button"
                 onClick={() => { setConfirmOpen(false); onFinish(); }}
-                className="rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 shadow-md"
+                className="ts-btn ts-btn-primary finish"
               >
                 {t('test.session.confirmYes')}
               </button>
@@ -805,7 +782,7 @@ function RunPhase({
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
