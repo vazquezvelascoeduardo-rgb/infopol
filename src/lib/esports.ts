@@ -39,7 +39,7 @@ export type SportSection = {
   subsections: SportSubsection[];
 };
 
-export const ESPORTS_UPDATED_AT = '2026-05-03';
+export const ESPORTS_UPDATED_AT = '2026-05-15';
 
 export const ESPORTS: SportSection[] = [
   {
@@ -54,23 +54,24 @@ export const ESPORTS: SportSection[] = [
         icon: '⚽',
         entries: [
           {
-            flag: '🏆',
-            position: 'UEFA CHAMPIONS LEAGUE · FINAL 30 MAIG',
-            name: 'Final al Puskás Aréna de Budapest (Hongria)',
-            detail: 'Semifinals: PSG-Bayern de Múnich · Atlético de Madrid-Arsenal (anada 28-29 abril, tornada 5-6 maig).',
+            flag: '🇫🇷',
+            position: 'UEFA CHAMPIONS LEAGUE · SEMIFINALS DISPUTADES 5-6 MAIG',
+            name: 'PSG i Arsenal a la final del 30 maig (Puskás Aréna, Budapest)',
+            detail: "Arsenal 1-0 Atlético de Madrid (2-1 global) el 5/5 — primera final europea de l'Arsenal des de 2006. Bayern 1-1 PSG el 6/5 (5-6 global) — PSG, campió defensor, repeteix final.",
+            recent: true,
+          },
+          {
+            flag: '🇪🇸',
+            position: 'CHAMPIONS LEAGUE FEMENINA · SEMIFINAL TORNADA 3 MAIG · CAMP NOU',
+            name: 'FC Barcelona 4-2 Bayern Munich (5-3 global) — 6a final consecutiva (rècord absolut)',
+            detail: 'Gols: Paralluelo (13′), Putellas (21′ i 58′) i Pajor (54′). El Barça disputarà la final del 23 maig a Ullevaal Stadion (Oslo) contra OL Lyonnes. Trenca el rècord de 5 finals consecutives que compartia amb Lyon.',
+            recent: true,
           },
           {
             flag: '🇪🇸',
             position: 'LALIGA EA SPORTS · FINAL DE TEMPORADA 24 MAIG',
             name: 'Lluita Barça vs Madrid pel títol fins l\'última jornada',
             detail: 'F.C. Barcelona líder i vigent campió; Real Madrid persegueix.',
-          },
-          {
-            flag: '🇪🇸',
-            position: 'CHAMPIONS LEAGUE FEMENINA · FINAL 23 MAIG',
-            name: 'Final a Ullevaal Stadion d\'Oslo (Noruega)',
-            detail: 'OL Lyonnes ja classificat (eliminà l\'Arsenal). FC Barcelona-Bayern es decideix el 3/5 al Camp Nou (1-1 a l\'anada). Barça busca la 6a final consecutiva (rècord històric).',
-            recent: true,
           },
         ],
       },
@@ -79,16 +80,17 @@ export const ESPORTS: SportSection[] = [
         icon: '🎾',
         entries: [
           {
-            flag: '🇫🇷',
-            position: 'ROLAND GARROS · 24 MAIG - 7 JUNY',
-            name: '2n Grand Slam de la temporada',
-            detail: 'Carlos Alcaraz defensa el títol.',
+            flag: '🇮🇹',
+            position: 'MUTUA MADRID OPEN · FINAL 3 MAIG',
+            name: 'Jannik Sinner derrota Zverev 6-1, 6-2 — RÈCORD HISTÒRIC',
+            detail: '1r tenista a guanyar 5 Masters 1000 consecutius. Sinner no afronta cap pilota de break en tot el torneig i guanya el 93% dels punts amb el primer servei. 9a victòria consecutiva sobre Zverev.',
+            recent: true,
           },
           {
-            flag: '🇪🇸',
-            position: 'MUTUA MADRID OPEN · FINAL 3 MAIG',
-            name: 'Final masculina: Jannik Sinner vs Alexander Zverev',
-            detail: "Sinner busca el rècord històric de 5 ATP 1000 consecutius. Final femenina (2 maig): Mirra Andreeva vs Marta Kostyuk.",
+            flag: '🇫🇷',
+            position: 'ROLAND GARROS · 18 MAIG - 7 JUNY',
+            name: '2n Grand Slam de la temporada · Alcaraz fora per lesió al canell',
+            detail: 'Carlos Alcaraz (bicampió defensor) renuncia per lesió al canell dret — també es perd Roma. Sinner gran favorit absolut. Ben Shelton ocupa el 2n cap de sèrie. Lorenzo Musetti també causa baixa.',
             recent: true,
           },
         ],
@@ -99,9 +101,10 @@ export const ESPORTS: SportSection[] = [
         entries: [
           {
             flag: '🇬🇷',
-            position: 'EUROLLIGA · FINAL FOUR 22-24 MAIG',
-            name: 'Final Four al Telekom Center d\'Atenes (Grècia)',
-            detail: 'Primera Final Four sense partit pel tercer lloc.',
+            position: 'EUROLLIGA · FINAL FOUR 22-24 MAIG · ATENES',
+            name: 'Semifinals: Olympiacos-Fenerbahçe i Real Madrid-Valencia Basket',
+            detail: 'Telekom Center Athens. 22 maig 18:00: Olympiacos (local) vs Fenerbahçe Beko. 22 maig 21:00: Real Madrid vs Valencia Basket (final 100% espanyola possible). Primera edició sense partit pel 3r lloc.',
+            recent: true,
           },
         ],
       },
@@ -110,10 +113,11 @@ export const ESPORTS: SportSection[] = [
         icon: '🚴',
         entries: [
           {
-            flag: '🇮🇹',
-            position: 'GIRO D\'ITÀLIA · 109a EDICIÓ · 8-31 MAIG',
-            name: 'Sortida des de Nessebar (Bulgària), arribada a Roma',
-            detail: 'Vingegaard parteix com a clar favorit.',
+            flag: '🇩🇰',
+            position: "GIRO D'ITÀLIA · 109a EDICIÓ · 8-31 MAIG · 7 ETAPES DISPUTADES",
+            name: 'Jonas Vingegaard (Visma | Lease a Bike) líder amb maglia rosa',
+            detail: "Vingegaard guanya l'etapa 7 (arribada Blockhaus) i pren el lideratge. Etapes prèvies: Paul Magnier (1ª i 3ª), Guillermo Thomas Silva (2ª, fotofinish a Veliko Tarnovo), Jhonatan Narváez (4ª a Cosenza), Igor Arrieta (5ª a Potenza), Davide Ballerini (6ª). Arribada final a Roma el 31 maig.",
+            recent: true,
           },
         ],
       },

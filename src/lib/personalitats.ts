@@ -43,7 +43,7 @@ export type LeaderSection = {
   subsections: LeaderSubsection[];
 };
 
-export const PERSONALITATS_UPDATED_AT = '2026-05-02';
+export const PERSONALITATS_UPDATED_AT = '2026-05-15';
 
 export const PERSONALITATS: LeaderSection[] = [
   {
@@ -84,7 +84,7 @@ export const PERSONALITATS: LeaderSection[] = [
           { flag: '🩺', position: 'Director General de l\'OMS', name: 'Tedros Adhanom Ghebreyesus', detail: 'Ginebra' },
           { flag: '🩺', position: 'Responsable de l\'OMS a Europa', name: 'Hans Henri P. Kluge' },
           { flag: '🎓', position: 'Directora general UNESCO', name: 'Audrey Azoulay', detail: 'París' },
-          { flag: '👮', position: 'Directora Executiva d\'Europol', name: 'Catherine De Bolle', detail: 'Mandat finalitzat 1 maig 2026 · successor en selecció' },
+          { flag: '👮', position: "Director Executiu d'Europol (interí)", name: 'Jürgen Ebner', detail: "Acting Executive Director des de l'1 maig 2026 · Catherine De Bolle finalitza mandat · selecció final del successor en curs", recent: true },
           { flag: '🚓', position: 'Secretari General d\'Interpol', name: 'Valdecy Urquiza', detail: 'Brasil · des de novembre 2024 (substitueix Stock)', recent: true },
           { flag: '🚓', position: 'President d\'Interpol', name: 'Lucas Philippe', detail: 'Des de novembre 2025 (substitueix Al-Raisi)', recent: true },
         ],

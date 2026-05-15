@@ -33,9 +33,45 @@ export type AwardSection = {
   subsections: AwardSubsection[];
 };
 
-export const PREMIS_UPDATED_AT = '2026-05-03';
+export const PREMIS_UPDATED_AT = '2026-05-15';
 
 export const PREMIS: AwardSection[] = [
+  {
+    id: 'maig-2026-premis',
+    title: 'Maig 2026',
+    shortLabel: "Mai '26",
+    icon: '📅',
+    accent: 'from-emerald-500 to-teal-700',
+    subsections: [
+      {
+        title: "Premis Princesa d'Astúries 2026 — categories anunciades",
+        icon: '🏆',
+        entries: [
+          {
+            flag: '🇺🇸',
+            position: "PREMI PRINCESA D'ASTÚRIES DE LES ARTS 2026",
+            name: 'Patti Smith',
+            detail: "Cantant, compositora, artista visual i escriptora nord-americana, icona del rock i la poesia. La Fundació en destaca la trajectòria llarga i poliforme com a referent de l'art contemporani.",
+            recent: true,
+          },
+          {
+            flag: '🇯🇵',
+            position: "PREMI PRINCESA D'ASTÚRIES DE COMUNICACIÓ I HUMANITATS 2026",
+            name: 'Studio Ghibli',
+            detail: "Estudi d'animació japonès fundat el 1985 per Hayao Miyazaki, Isao Takahata i Toshio Suzuki. +20 llargmetratges com 'El viatge de Chihiro' (Oscar 2003) o 'El noi i la garsa' (2024). Reconegut per la qualitat artística i la influència cultural global.",
+            recent: true,
+          },
+          {
+            flag: '🏛️',
+            position: "PREMIS PRINCESA D'ASTÚRIES · ALTRES CATEGORIES",
+            name: 'Pendents d\'anunciar fins juny 2026',
+            detail: 'Resten per anunciar: Lletres, Ciències Socials, Investigació Científica i Tècnica, Cooperació Internacional, Concòrdia i Esports. Gala oficial el 24 octubre 2026 a Oviedo.',
+          },
+        ],
+      },
+    ],
+  },
+
   {
     id: 'marc-2026-premis',
     title: 'Març 2026',
