@@ -12,14 +12,9 @@ import {
 } from '../lib/noticies';
 import { useNoticiesAll } from '../lib/noticiesRemote';
 import {
-  PERSONALITATS, PERSONALITATS_UPDATED_AT, type LeaderSection,
+  type LeaderSection,
 } from '../lib/personalitats';
-import {
-  ESPORTS, ESPORTS_UPDATED_AT,
-} from '../lib/esports';
-import {
-  PREMIS, PREMIS_UPDATED_AT,
-} from '../lib/premis';
+import { useDirectory } from '../lib/directoriesRemote';
 
 // Metadades visuals de cada categoria — color sòlid (rebranding 2026)
 // + emoji + soft background per a estats no-actius.
@@ -330,10 +325,12 @@ function PersonalitatsDirectory({
   const { t } = useT();
   const ACCENT = '#9747D6';
   const ACCENT_BG = '#F5E9FF';
+  const { sections: PERSONALITATS_DATA, updatedAt: PERSONALITATS_UPDATED_AT } =
+    useDirectory<LeaderSection>('personalitats');
 
   const q = query.trim().toLowerCase();
   const sections = q
-    ? PERSONALITATS.map((sec) => ({
+    ? PERSONALITATS_DATA.map((sec) => ({
         ...sec,
         subsections: sec.subsections.map((sub) => ({
           ...sub,
@@ -345,7 +342,7 @@ function PersonalitatsDirectory({
           ),
         })).filter((sub) => sub.entries.length > 0),
       })).filter((sec) => sec.subsections.length > 0)
-    : PERSONALITATS;
+    : PERSONALITATS_DATA;
 
   function scrollToSection(id: string) {
     const el = document.getElementById(id);
@@ -361,7 +358,7 @@ function PersonalitatsDirectory({
       title={t('personalitats.title')}
       subtitle={t('personalitats.subtitle').replace('{date}', formatLongDate(PERSONALITATS_UPDATED_AT))}
       quickNavLabel={t('personalitats.quickNav')}
-      sections={PERSONALITATS}
+      sections={PERSONALITATS_DATA}
       onScrollTo={scrollToSection}
       query={query}
       setQuery={setQuery}
@@ -385,10 +382,12 @@ function EsportsDirectory({
   const { t } = useT();
   const ACCENT = '#1f8a4d';
   const ACCENT_BG = '#DFF7E9';
+  const { sections: ESPORTS_DATA, updatedAt: ESPORTS_UPDATED_AT } =
+    useDirectory<LeaderSection>('esports');
 
   const q = query.trim().toLowerCase();
   const sections = q
-    ? ESPORTS.map((sec) => ({
+    ? ESPORTS_DATA.map((sec) => ({
         ...sec,
         subsections: sec.subsections.map((sub) => ({
           ...sub,
@@ -400,7 +399,7 @@ function EsportsDirectory({
           ),
         })).filter((sub) => sub.entries.length > 0),
       })).filter((sec) => sec.subsections.length > 0)
-    : ESPORTS;
+    : ESPORTS_DATA;
 
   function scrollToSection(id: string) {
     const el = document.getElementById(id);
@@ -416,7 +415,7 @@ function EsportsDirectory({
       title={t('esports.title')}
       subtitle={t('esports.subtitle').replace('{date}', formatLongDate(ESPORTS_UPDATED_AT))}
       quickNavLabel={t('esports.quickNav')}
-      sections={ESPORTS as unknown as LeaderSection[]}
+      sections={ESPORTS_DATA as unknown as LeaderSection[]}
       onScrollTo={scrollToSection}
       query={query}
       setQuery={setQuery}
@@ -440,10 +439,12 @@ function PremisDirectory({
   const { t } = useT();
   const ACCENT = '#E89A1C';
   const ACCENT_BG = '#FFF1D2';
+  const { sections: PREMIS_DATA, updatedAt: PREMIS_UPDATED_AT } =
+    useDirectory<LeaderSection>('premis');
 
   const q = query.trim().toLowerCase();
   const sections = q
-    ? PREMIS.map((sec) => ({
+    ? PREMIS_DATA.map((sec) => ({
         ...sec,
         subsections: sec.subsections.map((sub) => ({
           ...sub,
@@ -455,7 +456,7 @@ function PremisDirectory({
           ),
         })).filter((sub) => sub.entries.length > 0),
       })).filter((sec) => sec.subsections.length > 0)
-    : PREMIS;
+    : PREMIS_DATA;
 
   function scrollToSection(id: string) {
     const el = document.getElementById(id);
@@ -471,7 +472,7 @@ function PremisDirectory({
       title={t('premis.title')}
       subtitle={t('premis.subtitle').replace('{date}', formatLongDate(PREMIS_UPDATED_AT))}
       quickNavLabel={t('premis.quickNav')}
-      sections={PREMIS as unknown as LeaderSection[]}
+      sections={PREMIS_DATA as unknown as LeaderSection[]}
       onScrollTo={scrollToSection}
       query={query}
       setQuery={setQuery}
