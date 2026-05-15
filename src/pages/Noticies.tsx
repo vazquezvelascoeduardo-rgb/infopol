@@ -7,9 +7,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
 import {
-  NOTICIES, type Noticia, type NoticiaCategoria, groupByMonth, getMonthLabel,
+  type Noticia, type NoticiaCategoria, groupByMonth, getMonthLabel,
   getMonthBuckets, getMonthKey, getCategory, markNoticiesSeen,
 } from '../lib/noticies';
+import { useNoticiesAll } from '../lib/noticiesRemote';
 import {
   PERSONALITATS, PERSONALITATS_UPDATED_AT, type LeaderSection,
 } from '../lib/personalitats';
@@ -36,6 +37,7 @@ const CATEGORIES: {
 
 export default function Noticies() {
   const { t, locale } = useT();
+  const noticiesAll = useNoticiesAll();
   const [activeCat, setActiveCat] = useState<NoticiaCategoria>('noticies');
   const [activeMonth, setActiveMonth] = useState<string | null>(null);
   const [query, setQuery] = useState('');
@@ -53,8 +55,8 @@ export default function Noticies() {
 
   // Articles de la categoria activa (base per a mes/cerca).
   const inCategory = useMemo(
-    () => NOTICIES.filter((n) => getCategory(n) === activeCat),
-    [activeCat],
+    () => noticiesAll.filter((n) => getCategory(n) === activeCat),
+    [activeCat, noticiesAll],
   );
 
   const monthBuckets = useMemo(() => getMonthBuckets(inCategory), [inCategory]);

@@ -3,7 +3,7 @@
 // (## sub-títols, - llistes, > cites, **negreta**) + tags + relacionades.
 import { Link, useParams } from 'react-router-dom';
 import { useT } from '../lib/i18n';
-import { getNoticia, NOTICIES } from '../lib/noticies';
+import { useNoticia } from '../lib/noticiesRemote';
 
 const ACCENT = '#2F6BD8';
 const ACCENT_BG = '#EAF1FE';
@@ -11,7 +11,7 @@ const ACCENT_BG = '#EAF1FE';
 export default function NoticiaDetall() {
   const { slug = '' } = useParams();
   const { t } = useT();
-  const noticia = getNoticia(slug);
+  const { noticia, all } = useNoticia(slug);
 
   if (!noticia) {
     return (
@@ -26,7 +26,7 @@ export default function NoticiaDetall() {
 
   // Notícies relacionades: mateix mes (any-mes), excloent l'actual, max 3.
   const monthKey = noticia.publishedAt.slice(0, 7);
-  const related = NOTICIES
+  const related = all
     .filter((n) => n.publishedAt.slice(0, 7) === monthKey && n.slug !== noticia.slug)
     .slice(0, 3);
 

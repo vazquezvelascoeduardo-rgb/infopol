@@ -9,7 +9,8 @@ import { useT } from '../lib/i18n';
 import { useFavorites, type Bookmark } from '../lib/bookmarks';
 import { MODULES } from '../lib/content';
 import { useFailuresCounts } from '../lib/failures';
-import { NOTICIES, useUnreadNoticiesCount } from '../lib/noticies';
+import { useUnreadNoticiesCount } from '../lib/noticies';
+import { useNoticiesAll } from '../lib/noticiesRemote';
 import { TOPICS, getTopicsByCategory } from '../data/tests';
 import { getAnsweredIds } from '../lib/testProgress';
 
@@ -72,7 +73,7 @@ export default function Home() {
   const { t } = useT();
   const { due: failuresDue } = useFailuresCounts();
   const unreadNoticies = useUnreadNoticiesCount();
-  const recentNoticies = NOTICIES.slice(0, 3);
+  const recentNoticies = useNoticiesAll().slice(0, 3);
   const [tab, setTab] = useState<HomeTab>(readInitialTab);
 
   useEffect(() => {
