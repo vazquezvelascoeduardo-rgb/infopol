@@ -54,6 +54,8 @@ export type AuthActions = {
     email: string,
     password: string,
     name?: string,
+    /** Opt-in del resum diari de notícies (Comunicacions a /perfil). */
+    wantsNewsletter?: boolean,
   ) => Promise<{ needsEmailConfirmation: boolean }>;
   /** Envia un correu amb un enllaç per restablir la contrasenya. */
   requestPasswordReset: (email: string) => Promise<void>;
@@ -151,7 +153,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         });
         if (error) throw error;
       },
-      signUpWithPassword: async (email, password, name) => {
+      signUpWithPassword: async (email, password, name, wantsNewsletter) => {
         if (!supabase) {
           throw new Error('Backend no configurat.');
         }
@@ -159,11 +161,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           typeof window !== 'undefined'
             ? `${window.location.origin}/login`
             : undefined;
+        // Passem `newsletter_optin` als metadades del registre perquè el
+        // trigger SQL d'auth.users el llegeixi i actualitzi el profile
+        // si l'usuari va marcar el checkbox a /login.
+        const metadata: Record<string, unknown> = {};
+        if (name) metadata.name = name;
+        if (wantsNewsletter) metadata.newsletter_optin = true;
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
-            data: name ? { name } : undefined,
+            data: Object.keys(metadata).length > 0 ? metadata : undefined,
             emailRedirectTo,
           },
         });
@@ -219,6 +227,7 @@ export function useAuth(): AuthContextValue {
       signInWithGoogle: async () => {},
       signInWithPassword: async () => {},
       signUpWithPassword: async () => ({ needsEmailConfirmation: false }),
+      // Allow optional 4th argument in no-op signature
       requestPasswordReset: async () => {},
       updatePassword: async () => {},
       signOut: async () => {},

@@ -35,6 +35,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [wantsNewsletter, setWantsNewsletter] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [googleBusy, setGoogleBusy] = useState(false);
@@ -113,6 +114,7 @@ export default function Login() {
           trimmed,
           password,
           name.trim().slice(0, 80) || undefined,
+          wantsNewsletter,
         );
         if (needsEmailConfirmation) {
           setInfo(t('auth.confirmEmail'));
@@ -236,6 +238,27 @@ export default function Login() {
             </div>
           );
         })()}
+
+        {/* Opt-in del resum diari de notícies (només a signup, no-premarcat per RGPD) */}
+        {isSignup && (
+          <label className="flex items-start gap-2 cursor-pointer select-none mt-1 rounded-xl border border-line bg-paper-2 p-3">
+            <input
+              type="checkbox"
+              checked={wantsNewsletter}
+              onChange={(e) => setWantsNewsletter(e.target.checked)}
+              disabled={disabled}
+              className="mt-0.5 h-4 w-4 cursor-pointer"
+              style={{ accentColor: 'var(--terracotta)' }}
+            />
+            <span className="text-xs text-text-2 leading-relaxed">
+              <strong className="text-ink">Vull rebre el resum diari de notícies</strong>{' '}
+              <span className="text-text-3">(recomanat)</span>
+              <br />
+              Cada matí, les 5 notícies més rellevants per a policia local al teu correu.
+              Pots donar-te de baixa quan vulguis des de <em>/perfil</em>.
+            </span>
+          </label>
+        )}
 
         {error && <p className="text-sm text-red-700 dark:text-red-400">{error}</p>}
         {info && <p className="text-sm text-emerald-700 dark:text-emerald-400">{info}</p>}

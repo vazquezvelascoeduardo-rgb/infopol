@@ -11,6 +11,7 @@ import { MODULES } from '../lib/content';
 import { useFailuresCounts } from '../lib/failures';
 import { useUnreadNoticiesCount } from '../lib/noticies';
 import { useNoticiesAll } from '../lib/noticiesRemote';
+import NewsletterBanner from '../components/NewsletterBanner';
 import { TOPICS, getTopicsByCategory } from '../data/tests';
 import { getAnsweredIds } from '../lib/testProgress';
 
@@ -84,6 +85,7 @@ export default function Home() {
   return (
     <div className="shell pb-10">
       <FavoritesBlock />
+      <NewsletterBanner />
 
       {/* HERO compact */}
       <section className="home-hero">
