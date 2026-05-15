@@ -34,6 +34,8 @@ export type Profile = {
   avatar_pet: number;
   avatar_badge: number;
   theme: number;
+  newsletter_subscribed: boolean;
+  newsletter_subscribed_at: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -136,7 +138,8 @@ export async function updateProfile(
   userId: string,
   patch: Partial<
     Pick<Profile, 'name' | 'cuerpo' | 'tip_number' | 'department'
-      | 'avatar_color' | 'avatar_pet' | 'avatar_badge' | 'theme'>
+      | 'avatar_color' | 'avatar_pet' | 'avatar_badge' | 'theme'
+      | 'newsletter_subscribed'>
   >,
 ): Promise<void> {
   const sb = requireSupabase();

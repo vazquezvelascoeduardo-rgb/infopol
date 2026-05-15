@@ -284,6 +284,9 @@ export default function Profile() {
         </dl>
       </section>
 
+      {/* Comunicacions — opt-in del resum diari de notícies */}
+      <NewsletterSection />
+
       {/* Seguretat */}
       <section className="rounded-2xl border border-line bg-paper p-5">
         <h2 className="eyebrow mb-4">{t('profile.security.title')}</h2>
@@ -370,6 +373,79 @@ export default function Profile() {
         <p className="text-xs text-text-3 mt-2">{t('profile.danger.note')}</p>
       </section>
     </div>
+  );
+}
+
+// Secció de comunicacions. Conté el checkbox d'opt-in del resum diari
+// que envia l'Edge Function `send-daily-news`. El consentiment queda
+// segellat amb `newsletter_subscribed_at` (gestionat pel trigger).
+function NewsletterSection() {
+  const { user, profile, refresh } = useAuth();
+  const [saving, setSaving] = useState(false);
+  const [msg, setMsg] = useState<{ type: 'ok' | 'err'; text: string } | null>(null);
+  const subscribed = !!profile?.newsletter_subscribed;
+  const email = user?.email ?? '';
+
+  async function onToggle() {
+    if (!user) return;
+    setSaving(true);
+    setMsg(null);
+    try {
+      await updateProfile(user.id, { newsletter_subscribed: !subscribed });
+      await refresh();
+      setMsg({
+        type: 'ok',
+        text: !subscribed
+          ? `T'has subscrit. Rebràs el resum a ${email}.`
+          : 'T\'has donat de baixa del resum diari.',
+      });
+    } catch (err: unknown) {
+      const text = err instanceof Error ? err.message : 'Error en desar la preferència.';
+      setMsg({ type: 'err', text });
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <section className="rounded-2xl border border-line bg-paper p-5">
+      <h2 className="eyebrow mb-4">Comunicacions</h2>
+      <label className="flex items-start gap-3 cursor-pointer select-none">
+        <input
+          type="checkbox"
+          checked={subscribed}
+          onChange={onToggle}
+          disabled={saving}
+          className="mt-1 h-5 w-5 cursor-pointer accent-current"
+          style={{ accentColor: 'var(--ink)' }}
+        />
+        <div className="flex flex-col gap-1">
+          <span className="text-sm font-bold text-ink">
+            Resum diari de notícies per correu
+          </span>
+          <span className="text-sm text-text-2">
+            Rep cada matí a {email || 'el teu correu'} les 5 notícies més
+            rellevants del dia (legislació, successos, tràfic i actualitat
+            d'interès per a policia local).
+          </span>
+          <span className="text-xs text-text-3">
+            Pots donar-te de baixa en qualsevol moment des d'aquesta pantalla
+            o amb l'enllaç al peu de cada correu.
+          </span>
+        </div>
+      </label>
+      {msg && (
+        <p
+          className={`mt-3 text-sm ${
+            msg.type === 'ok'
+              ? 'text-emerald-700 dark:text-emerald-400'
+              : 'text-red-700 dark:text-red-400'
+          }`}
+        >
+          {msg.text}
+        </p>
+      )}
+    </section>
   );
 }
 
