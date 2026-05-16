@@ -1,0 +1,38 @@
+name: Daily News Update
+
+on:
+  schedule:
+    # 22:00 CEST (UTC+2, abril–octubre) → 20:00 UTC
+    - cron: '0 20 * * *'
+  workflow_dispatch:  # permet executar-lo manualment des de GitHub
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Anthropic SDK
+        run: npm install @anthropic-ai/sdk
+
+      - name: Fetch & summarise news
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/fetch-news.js
+
+      - name: Commit updated news
+        run: |
+          git config user.name  "InfoPol NewsBot"
+          git config user.email "newsbot@infopol.app"
+          git add data/news.json
+          git diff --staged --quiet || git commit -m "chore: actualització notícies $(date -u '+%Y-%m-%d')"
+          git push
