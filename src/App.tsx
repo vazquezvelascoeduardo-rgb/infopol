@@ -57,6 +57,7 @@ const MossosList = lazy(() => import('./pages/mossos/MossosList'));
 const MossosTemari = lazy(() => import('./pages/mossos/MossosTemari'));
 const MossosTemariAmbit = lazy(() => import('./pages/mossos/MossosTemariAmbit'));
 const MossosTemariTema = lazy(() => import('./pages/mossos/MossosTemariTema'));
+const MossosEsquemaRapid = lazy(() => import('./pages/mossos/MossosEsquemaRapid'));
 const Flashcards = lazy(() => import('./pages/flashcards/Flashcards'));
 
 // Slugs públics dins /leyes — l'única fitxa accessible sense sessió és
@@ -256,6 +257,14 @@ export default function App() {
             element={
               <RequireAuth>
                 <MossosTemariTema />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/mossos/esquema-rapid/:slug"
+            element={
+              <RequireAuth>
+                <MossosEsquemaRapid />
               </RequireAuth>
             }
           />

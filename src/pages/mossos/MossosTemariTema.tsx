@@ -8,6 +8,7 @@ import { Link, useParams } from 'react-router-dom';
 import { AMBIT_META, getTemesByAmbit, getTema, type MossosAmbit } from '../../lib/mossosTemari';
 import { Markdown } from '../../lib/markdown';
 import { useT } from '../../lib/i18n';
+import { getEsquemaForTemaSlug } from '../../data/esquemas';
 
 const VALID: MossosAmbit[] = ['A', 'B', 'C'];
 
@@ -223,6 +224,75 @@ export default function MossosTemariTema() {
           </div>
         )}
       </header>
+
+      {/* CTA · Esquema ràpid (només si està disponible per al tema) */}
+      {getEsquemaForTemaSlug(tema.slug) && (
+        <Link
+          to={`/mossos/esquema-rapid/${tema.slug}`}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 14,
+            padding: '14px 18px',
+            margin: '18px 0 0',
+            background: '#FF7A1A',
+            color: '#fff',
+            borderRadius: 14,
+            textDecoration: 'none',
+            boxShadow: '0 -3px 0 rgba(0,0,0,0.14) inset',
+          }}
+        >
+          <span
+            aria-hidden
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 12,
+              background: 'rgba(255,255,255,0.2)',
+              display: 'grid',
+              placeItems: 'center',
+              fontSize: 20,
+              flexShrink: 0,
+            }}
+          >
+            ✨
+          </span>
+          <div style={{ flex: 1 }}>
+            <div
+              style={{
+                fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+                fontSize: 11,
+                fontWeight: 800,
+                letterSpacing: 1.6,
+                color: 'rgba(255,255,255,0.92)',
+                textTransform: 'uppercase',
+              }}
+            >
+              Format nou · Esquema ràpid
+            </div>
+            <div
+              style={{
+                fontSize: 18,
+                fontWeight: 900,
+                letterSpacing: -0.3,
+                marginTop: 2,
+              }}
+            >
+              Repàs visual en 5 min
+            </div>
+            <div
+              style={{
+                fontSize: 13,
+                opacity: 0.92,
+                marginTop: 2,
+              }}
+            >
+              Línia temporal, personatges i 8 fets clau d'examen.
+            </div>
+          </div>
+          <span style={{ fontSize: 24, fontWeight: 800 }}>→</span>
+        </Link>
+      )}
 
       {/* TOC chips (mobile) */}
       {parts.sections.length > 0 && (
