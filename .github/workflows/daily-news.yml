@@ -1,0 +1,49 @@
+name: Notícies diàries
+
+on:
+  schedule:
+    # 20:00 UTC = 22:00 CEST (hora d'estiu) / 21:00 CET (hora d'hivern)
+    - cron: '0 20 * * *'
+  workflow_dispatch:
+    inputs:
+      date_override:
+        description: 'Data manual (YYYY-MM-DD), deixar buit per avui'
+        required: false
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch news via Claude
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/fetch-news.mjs
+
+      - name: Commit i push notícies
+        run: |
+          git config user.name  "InfoPol Bot"
+          git config user.email "infopol-bot@users.noreply.github.com"
+          git add server/data/news-daily.json
+          if git diff --staged --quiet; then
+            echo "Sense canvis nous."
+          else
+            git commit -m "notícies: actualització $(date +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi

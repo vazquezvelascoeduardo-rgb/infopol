@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
@@ -48,8 +49,33 @@ const NEWS = [
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
 
+const CATEGORY_COLORS = {
+  politica:      { solid: T.cat.leyes.solid,     soft: T.cat.leyes.soft,     ink: T.cat.leyes.ink },
+  internacional: { solid: T.cat.transito.solid,  soft: T.cat.transito.soft,  ink: T.cat.transito.ink },
+  economia:      { solid: T.cat.atajos.solid,    soft: T.cat.atajos.soft,    ink: T.cat.atajos.ink },
+  esports:       { solid: T.cat.operativa.solid, soft: T.cat.operativa.soft, ink: T.cat.operativa.ink },
+  successos:     { solid: T.cat.alcohol.solid,   soft: T.cat.alcohol.soft,   ink: T.cat.alcohol.ink },
+  cultura:       { solid: T.cat.psico.solid,     soft: T.cat.psico.soft,     ink: T.cat.psico.ink },
+  ciencia:       { solid: T.cat.physical.solid,  soft: T.cat.physical.soft,  ink: T.cat.physical.ink },
+  premis:        { solid: T.cat.academia.solid,  soft: T.cat.academia.soft,  ink: T.cat.academia.ink },
+  general:       { solid: T.cat.operativa.solid, soft: T.cat.operativa.soft, ink: T.cat.operativa.ink },
+};
+
+function catColor(category) {
+  return CATEGORY_COLORS[category] || CATEGORY_COLORS.general;
+}
+
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
+  const [dailyNews, setDailyNews] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/news/daily')
+      .then(r => r.json())
+      .then(data => setDailyNews(data.slice(0, 10)))
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="screen">
       <StatusBar />
@@ -136,6 +162,37 @@ export default function ScreenOperativaHome() {
           ))}
         </div>
       </div>
+
+      {/* Notícies del dia */}
+      {dailyNews.length > 0 && (
+        <div style={{ padding: '18px 0 24px' }}>
+          <SectionHead kicker="Noticias" kickerColor={T.cat.leyes.solid} title="Notícies del dia" action="Tot →" />
+          <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {dailyNews.map((n) => {
+              const c = catColor(n.category);
+              return (
+                <div
+                  key={n.id}
+                  onClick={() => n.url && window.open(n.url, '_blank', 'noreferrer')}
+                  style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${c.solid}`, boxShadow: T.shadow.card, cursor: n.url ? 'pointer' : 'default' }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                    <span style={{ fontSize: 9.5, fontWeight: 800, color: c.ink, letterSpacing: 0.6, textTransform: 'uppercase', background: c.soft, padding: '2px 7px', borderRadius: 999 }}>{n.tag}</span>
+                    <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.dateLabel}</span>
+                  </div>
+                  <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                  <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+                  {n.url && (
+                    <div style={{ marginTop: 6, fontSize: 11, fontWeight: 700, color: c.solid }}>
+                      Llegir notícia →
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
