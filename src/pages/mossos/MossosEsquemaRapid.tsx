@@ -80,13 +80,9 @@ export default function MossosEsquemaRapid() {
         <span className="sep">/</span>
         <Link to="/mossos">Mossos</Link>
         <span className="sep">/</span>
-        <Link to="/mossos/temari">Temari</Link>
+        <Link to="/mossos/esquemes">Esquemes ràpids</Link>
         <span className="sep">/</span>
-        <Link to={`/mossos/temari/${esquema.ambit.toLowerCase()}/${esquema.temaSlug}`}>
-          Tema {esquema.kicker.replace(/^.*TEMA\s+/, '').toLowerCase().toUpperCase()}
-        </Link>
-        <span className="sep">/</span>
-        <span className="here">Esquema ràpid</span>
+        <span className="here">{esquema.kicker.replace(/^.*TEMA\s+/, 'TEMA ')}</span>
       </nav>
 
       {/* HERO */}
@@ -385,13 +381,20 @@ export default function MossosEsquemaRapid() {
         )}
       </section>
 
-      {/* Tornar al tema */}
-      <div className="page-foot" style={{ marginTop: 24, justifyContent: 'flex-end' }}>
+      {/* Tornar al llistat */}
+      <div
+        className="page-foot"
+        style={{ marginTop: 24, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}
+      >
+        <Link to="/mossos/esquemes" className="btn btn-ghost">
+          ← Tots els esquemes
+        </Link>
         <Link
           to={`/mossos/temari/${esquema.ambit.toLowerCase()}/${esquema.temaSlug}`}
           className="btn btn-ghost"
+          style={{ color: 'var(--text-2)' }}
         >
-          ← Tornar al tema
+          Veure tema complet al temari →
         </Link>
       </div>
 

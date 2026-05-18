@@ -14,6 +14,7 @@ import { useFailuresCounts } from '../../lib/failures';
 import { useT } from '../../lib/i18n';
 import type { TestTopic } from '../../data/tests/types';
 import { AMBIT_META, getTemesByAmbit, type MossosAmbit } from '../../lib/mossosTemari';
+import { listEsquemas } from '../../data/esquemas';
 
 const TEMARI_AMBITS: MossosAmbit[] = ['A', 'B', 'C'];
 
@@ -185,7 +186,7 @@ export default function MossosList() {
         </div>
       </header>
 
-      {/* JUMP BUTTONS — Tests, Flashcards i Temari */}
+      {/* JUMP BUTTONS — Tests, Flashcards, Temari i Esquemes */}
       <nav className="pl-jump pl-jump-3" aria-label={t('policiaLocal.jump.aria')}>
         <a href="#mossos-tests" className="pl-jump-btn jump-tests">
           <span className="pl-jump-icon" aria-hidden>📝</span>
@@ -208,6 +209,21 @@ export default function MossosList() {
           <span className="pl-jump-text">
             <span className="pl-jump-eyebrow">{t('policiaLocal.jump.eyebrowTemari')}</span>
             <span className="pl-jump-title">{t('policiaLocal.jump.temari')}</span>
+          </span>
+          <span className="pl-jump-arr" aria-hidden>→</span>
+        </Link>
+        <Link
+          to="/mossos/esquemes"
+          className="pl-jump-btn jump-esquemes"
+          style={{
+            ['--pl-jump-bg' as never]: '#FFE0CB',
+            ['--pl-jump-fg' as never]: '#7A2E04',
+          } as React.CSSProperties}
+        >
+          <span className="pl-jump-icon" aria-hidden>✨</span>
+          <span className="pl-jump-text">
+            <span className="pl-jump-eyebrow">Format nou</span>
+            <span className="pl-jump-title">Esquemes</span>
           </span>
           <span className="pl-jump-arr" aria-hidden>→</span>
         </Link>
@@ -403,6 +419,68 @@ export default function MossosList() {
             style={{ color: '#9c7a1f' }}
           >
             {t('mossosTemari.openAll')} →
+          </Link>
+        </div>
+      </section>
+
+      {/* ESQUEMES RÀPIDS — categoria pròpia, paral·lela a Temari */}
+      <section
+        id="mossos-esquemes"
+        className="pl-leyes"
+        style={{ scrollMarginTop: 80 }}
+      >
+        <div
+          className="section-head"
+          style={{ ['--accent' as never]: '#FF7A1A', marginTop: 32 } as React.CSSProperties}
+        >
+          <span className="eyebrow">✨ Esquemes ràpids · Format nou</span>
+          <span className="rule" />
+        </div>
+        <p className="text-sm text-text-2 mt-2 mb-4">
+          Repàs visual del tema sencer en 5 minuts. Línia temporal, personatges
+          i fets d'examen organitzats per època.
+        </p>
+        <div className="pl-leyes-grid">
+          {listEsquemas().map((e) => {
+            const meta = AMBIT_META[e.ambit];
+            return (
+              <Link
+                key={e.id}
+                to={`/mossos/esquemes/${e.temaSlug}`}
+                className="pl-ley-card"
+              >
+                <span
+                  className="pl-ley-icon"
+                  aria-hidden
+                  style={{ background: '#FFE0CB', color: '#7A2E04' }}
+                >
+                  ✨
+                </span>
+                <span className="pl-ley-text">
+                  <span className="pl-ley-title">
+                    {e.kicker.replace(/^.*TEMA\s+/, 'Tema ')} · {e.title}
+                  </span>
+                  <span className="pl-ley-desc">
+                    {meta.short} · {e.kpis[1]?.value} etapes · {e.kpis[2]?.value} dates · {e.kpis[3]?.value} personatges
+                  </span>
+                </span>
+                <span className="pl-ley-arr" aria-hidden>→</span>
+              </Link>
+            );
+          })}
+          {listEsquemas().length === 0 && (
+            <p className="text-sm text-text-3" style={{ padding: 16 }}>
+              Encara no hi ha esquemes disponibles. Aviat afegirem els primers temes.
+            </p>
+          )}
+        </div>
+        <div className="mt-3 text-right">
+          <Link
+            to="/mossos/esquemes"
+            className="text-sm font-bold underline"
+            style={{ color: '#FF7A1A' }}
+          >
+            Veure tots els esquemes →
           </Link>
         </div>
       </section>

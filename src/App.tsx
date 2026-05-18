@@ -57,6 +57,7 @@ const MossosList = lazy(() => import('./pages/mossos/MossosList'));
 const MossosTemari = lazy(() => import('./pages/mossos/MossosTemari'));
 const MossosTemariAmbit = lazy(() => import('./pages/mossos/MossosTemariAmbit'));
 const MossosTemariTema = lazy(() => import('./pages/mossos/MossosTemariTema'));
+const MossosEsquemes = lazy(() => import('./pages/mossos/MossosEsquemes'));
 const MossosEsquemaRapid = lazy(() => import('./pages/mossos/MossosEsquemaRapid'));
 const Flashcards = lazy(() => import('./pages/flashcards/Flashcards'));
 
@@ -261,7 +262,15 @@ export default function App() {
             }
           />
           <Route
-            path="/mossos/esquema-rapid/:slug"
+            path="/mossos/esquemes"
+            element={
+              <RequireAuth>
+                <MossosEsquemes />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/mossos/esquemes/:slug"
             element={
               <RequireAuth>
                 <MossosEsquemaRapid />
