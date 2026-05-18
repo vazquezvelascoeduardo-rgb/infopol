@@ -3990,6 +3990,9 @@ html[data-text-size="lg"] { font-size: 18px; }
   .pl-jump-btn.jump-tot {
     background: linear-gradient(135deg, #1f8a4d 0%, #167a3f 55%, #0d5e2e 100%);
   }
+  .pl-jump-btn.jump-esquemes {
+    background: linear-gradient(135deg, #F472B6 0%, #DB2777 50%, #9D174D 100%);
+  }
   /* Variant amb 3 botons (Tests / Flashcards / Temari). */
   .pl-jump.pl-jump-3 {
     grid-template-columns: 1fr 1fr 1fr;

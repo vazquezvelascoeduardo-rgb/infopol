@@ -212,14 +212,7 @@ export default function MossosList() {
           </span>
           <span className="pl-jump-arr" aria-hidden>→</span>
         </Link>
-        <Link
-          to="/mossos/esquemes"
-          className="pl-jump-btn jump-esquemes"
-          style={{
-            ['--pl-jump-bg' as never]: '#FFE0CB',
-            ['--pl-jump-fg' as never]: '#7A2E04',
-          } as React.CSSProperties}
-        >
+        <Link to="/mossos/esquemes" className="pl-jump-btn jump-esquemes">
           <span className="pl-jump-icon" aria-hidden>✨</span>
           <span className="pl-jump-text">
             <span className="pl-jump-eyebrow">Format nou</span>
