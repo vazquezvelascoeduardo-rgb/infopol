@@ -1,5 +1,5 @@
 import express from 'express';
-import { createRequire } from 'module';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -13,6 +13,21 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
+
+// ── News persistence ───────────────────────────────────────────
+
+const NEWS_PATH = join(__dirname, 'data', 'news.json');
+
+function loadNews() {
+  if (!existsSync(NEWS_PATH)) return [];
+  try { return JSON.parse(readFileSync(NEWS_PATH, 'utf8')); }
+  catch { return []; }
+}
+
+function saveNews(items) {
+  mkdirSync(dirname(NEWS_PATH), { recursive: true });
+  writeFileSync(NEWS_PATH, JSON.stringify(items, null, 2));
+}
 
 // ── Mock data ──────────────────────────────────────────────────
 
@@ -43,35 +58,6 @@ const USER = {
   mode: 'operativa',
 };
 
-const NEWS = [
-  {
-    id: 'n001',
-    date: '2026-04-18',
-    dateLabel: '04·18',
-    tag: 'LO 1/2026',
-    title: 'Multireincidència — enduriment de furts i estafes lleus',
-    desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026. Afecta l\'art. 22.8 CP i els arts. 468-470 LECrim.',
-    url: null,
-  },
-  {
-    id: 'n002',
-    date: '2026-04-14',
-    dateLabel: '04·14',
-    tag: 'RD 316/2026',
-    title: 'Reforma del Reglament d\'Estrangeria',
-    desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny de 2026.',
-    url: null,
-  },
-  {
-    id: 'n003',
-    date: '2026-03-28',
-    dateLabel: '03·28',
-    tag: 'Circ. 2/2026',
-    title: 'Instrucció sobre identificació i registre de persones',
-    desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.',
-    url: null,
-  },
-];
 
 const STATS = {
   streak: 23,
@@ -111,7 +97,18 @@ app.put('/api/user', (req, res) => {
 });
 
 app.get('/api/news', (req, res) => {
-  res.json(NEWS);
+  res.json(loadNews());
+});
+
+app.post('/api/news/batch', (req, res) => {
+  const { items } = req.body;
+  if (!Array.isArray(items)) return res.status(400).json({ error: 'items must be an array' });
+  const existing = loadNews();
+  const today = items[0]?.date;
+  const filtered = existing.filter(n => n.date !== today);
+  const updated = [...items, ...filtered].slice(0, 200);
+  saveNews(updated);
+  res.json({ added: items.length, total: updated.length });
 });
 
 app.get('/api/stats', (req, res) => {

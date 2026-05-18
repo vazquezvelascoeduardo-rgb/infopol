@@ -1,0 +1,53 @@
+name: Noticias Diàries
+
+on:
+  schedule:
+    # 21:00 UTC = 22:00 CET (hivern) / 23:00 CEST (estiu)
+    - cron: '0 21 * * *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Forçar execució encara que ja hi hagi notícies d'avui'
+        required: false
+        default: 'false'
+
+jobs:
+  fetch-news:
+    name: Cerca i publica notícies
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repositori
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instal·la dependències
+        run: npm install
+
+      - name: Executa fetch de notícies
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/fetch-news.js
+
+      - name: Commit i push de les notícies
+        run: |
+          git config user.name "InfoPol News Bot"
+          git config user.email "newsbot@infopol.cat"
+          git add server/data/news.json
+          if git diff --staged --quiet; then
+            echo "Sense canvis a news.json, res a publicar."
+          else
+            DATE=$(date +%Y-%m-%d)
+            git commit -m "🗞️ Notícies del ${DATE}"
+            git push origin HEAD
+            echo "✓ Notícies publicades per al ${DATE}"
+          fi
