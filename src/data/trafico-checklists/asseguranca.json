@@ -53,7 +53,8 @@
       "titol": "Tipus de vehicle (determina l'import)",
       "text": "Categoria del vehicle?",
       "opcions": [
-        { "etiqueta": "VMP > 25 kg i > 14 km/h",                                       "va_a": "fi_vmp" },
+        { "etiqueta": "VMP considerat vehicle a motor (per MOM)",                       "va_a": "fi_vmp_motor" },
+        { "etiqueta": "VPL — Vehicle Personal Lleuger (certificat i inscrit RNV)",       "va_a": "fi_vmp" },
         { "etiqueta": "Vehicle agrícola / cotxe minusvàlid (llicència LCC, LVA)",      "va_a": "fi_lleuger" },
         { "etiqueta": "Ciclomotor (permís AM)",                                        "va_a": "fi_am" },
         { "etiqueta": "Motocicleta (permís A1, A2, A)",                                "va_a": "fi_moto" },
@@ -74,16 +75,34 @@
     "fi_vmp": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ Sense SOA — VMP",
-      "concepte_butlleta": "Circular el vehicle personal lleuger sense que consti que el propietari tingui subscrit i mantingui en vigor un contracte d'assegurança que cobreixi la responsabilitat civil derivada de la seva circulació",
-      "article_butlleta": "Art. 2.1 RDL 8/2004",
-      "import": "350 € (DTE 175 €)",
+      "titol": "⚠️ Sense SOA — VPL (Vehicle Personal Lleuger)",
+      "concepte_butlleta": "Circular el vehicle personal lleuger (VPL certificat i inscrit al RNV) sense que consti que el propietari tingui subscrit i mantingui en vigor un contracte d'assegurança que cobreixi la responsabilitat civil derivada de la seva circulació",
+      "article_butlleta": "Art. 2.1 RDL 8/2004 · DA 1a Llei 5/2025",
+      "import": "300 € (DTE 150 €) · MODIFICAT Com. 6/2026 SCT — abans 350 €",
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí denúncia (VPL certificat i inscrit al RNV)",
+        "Acta d'immobilització (Art. 3 LRCSCVM)",
+        "Notificació al Consorci de Compensació d'Assegurances",
+        "Dipòsit fins a justificar pòlissa o titular abonar la franquícia",
+        "Si propietari distint del conductor: butlletí al titular",
+        "⚠️ Si és VMP \"considerat vehicle a motor\" (per MOM): l'import és 800 € (no 300 €)"
+      ]
+    },
+
+    "fi_vmp_motor": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🚨 Sense SOA — VMP considerat vehicle a motor",
+      "concepte_butlleta": "Circular amb un VMP considerat vehicle a motor (per MOM superior als llindars) sense que consti subscrit i en vigor un contracte d'assegurança obligatòria",
+      "article_butlleta": "Art. 2.1 Llei sobre RC i assegurança en la circulació de vehicles a motor",
+      "import": "800 €",
       "punts": "0",
       "accions_operatives": [
         "Butlletí denúncia",
         "Acta d'immobilització (Art. 3 LRCSCVM)",
         "Notificació al Consorci de Compensació d'Assegurances",
-        "Dipòsit fins a justificar pòlissa o titular abonar la franquícia",
+        "Si el VMP no està inscrit al RNV: consignar OBLIGATÒRIAMENT el pes (MOM) a la butlleta",
         "Si propietari distint del conductor: butlletí al titular"
       ]
     },

@@ -1,0 +1,272 @@
+{
+  "id": "vmp-vpl-identificacio",
+  "titol": "VMP / VPL — Identificació i denúncia (Com. 6/2026)",
+  "categoria": "transit",
+  "icono": "🛴",
+  "base_legal": [
+    "RD 970/2020 (10 nov.) — Marc jurídic VMP",
+    "Llei 5/2025, DA 1a (24 jul.) — Obligació AOV per a VPL",
+    "RD 52/2026 (28 gen.) — Registre Nacional de Vehicles Personals Lleugers · vigor 30/01/2026",
+    "Comunicat 6/2026 SCT — 5 noves infraccions · vigor 18/05/2026",
+    "Art. 22 RGV — base de les 5 noves infraccions",
+    "Annex XXI RGV — requisits tècnics",
+    "Art. 82 LSV — responsabilitat solidària menors"
+  ],
+  "barem_oficial_sct": "Catàleg SCT — Comunicat 6/2026. Totes les infraccions amb 50% descompte per pagament anticipat.",
+  "comprovacions_previes": [
+    "Identificar tipus de vehicle: VMP \"a motor\" (per MOM) o VPL (certificat i inscrit)",
+    "Demanar identificació al conductor (DNI, NIE, passaport)",
+    "Si és menor: demanar dades dels pares/tutors (art. 82 LSV — responsabilitat solidària)",
+    "Buscar l'etiqueta identificativa al vehicle (format M0000BBB o Z0000BBB)",
+    "Si no té etiqueta: buscar la placa de marcatge (dades del fabricant)",
+    "Si no té cap número: anotar pes, velocitat màxima, marca, model i fer fotografia",
+    "Consultar inscripció al Registre Nacional de Vehicles (RNV)",
+    "Consultar AOV al FIVA (només per a VMP a motor o VPL certificat i inscrit)"
+  ],
+  "inici": "tipus_vehicle",
+  "nodes": {
+
+    "tipus_vehicle": {
+      "titol": "Tipus de vehicle (clau per determinar la sanció)",
+      "text": "Quin tipus de VMP tenim davant?",
+      "info": "La distinció VMP a motor / VPL es fa per la MOM (Massa en Ordre de Marxa) que consta al RNV. Si no està inscrit, l'agent ha d'indicar el pes a la butlleta.",
+      "opcions": [
+        { "etiqueta": "VMP comercialitzat a partir del 22/01/2024 (etiqueta M)",      "va_a": "comprovar_etiqueta_m" },
+        { "etiqueta": "VMP no certificat (anterior 22/01/2024, etiqueta Z)",         "va_a": "comprovar_etiqueta_z" },
+        { "etiqueta": "VMP considerat vehicle a motor (MOM elevada)",                "va_a": "comprovar_aov_vmp_motor" },
+        { "etiqueta": "VPL — Vehicle Personal Lleuger (certificat i inscrit)",        "va_a": "comprovar_aov_vpl" },
+        { "etiqueta": "VMP sense cap identificació",                                  "va_a": "sense_identificacio" }
+      ]
+    },
+
+    "comprovar_etiqueta_m": {
+      "titol": "VMP amb etiqueta M (comercialitzat des del 22/01/2024)",
+      "text": "Comprovacions a fer:",
+      "info": "Els VMP comercialitzats a partir del 22/01/2024 han de portar etiqueta M, placa de marcatge i estar inscrits al RNV. NO denunciar alhora 'sense certificat' i 'no inscrit'.",
+      "checklist_previ": [
+        "Etiqueta identificativa visible amb format M0000BBB",
+        "Placa de marcatge del fabricant amb dades tècniques",
+        "Inscripció al Registre Nacional de Vehicles (RNV)",
+        "Compliment Annex XXI RGV (il·luminació, dispositius, etc.)"
+      ],
+      "opcions": [
+        { "etiqueta": "TOT correcte — circular",                            "va_a": "fi_ok" },
+        { "etiqueta": "No té etiqueta NI placa de marcatge",                "va_a": "fi_inf_1" },
+        { "etiqueta": "Té placa però NO està inscrit al RNV",               "va_a": "fi_inf_2" },
+        { "etiqueta": "Manipulació velocitat / modificació estructural",    "va_a": "fi_inf_3" },
+        { "etiqueta": "Sistema il·luminació o rodes defectuoses",           "va_a": "fi_inf_4" },
+        { "etiqueta": "Dispositiu sonor o cavallet defectuós",              "va_a": "fi_inf_5" },
+        { "etiqueta": "Circula sense AOV (i és inscrit + obligat)",          "va_a": "fi_aov" }
+      ]
+    },
+
+    "comprovar_etiqueta_z": {
+      "titol": "VMP amb etiqueta Z (règim transitori fins 22/01/2027)",
+      "text": "Comprovacions a fer:",
+      "info": "Els VMP no certificats comercialitzats abans del 22/01/2024 estan en règim transitori. NO necessiten placa de marcatge (no tenen certificat). SÍ s'han d'inscriure al RNV amb marca, model i núm. sèrie.",
+      "checklist_previ": [
+        "Etiqueta identificativa Z visible (Z0000BBB)",
+        "Inscripció al RNV amb marca, model i núm. sèrie",
+        "Data de fabricació anterior al 22/01/2024",
+        "⚠️ Caducitat: 22/01/2027 — després NO podrà circular"
+      ],
+      "opcions": [
+        { "etiqueta": "TOT correcte — circular",                                "va_a": "fi_ok_z" },
+        { "etiqueta": "No té etiqueta Z",                                       "va_a": "fi_inf_1" },
+        { "etiqueta": "No està inscrit al RNV",                                 "va_a": "fi_inf_2" },
+        { "etiqueta": "Manipulació velocitat / modificació estructural",        "va_a": "fi_inf_3" },
+        { "etiqueta": "Requisits Annex XXI no complerts (greus)",                "va_a": "fi_inf_4" }
+      ]
+    },
+
+    "comprovar_aov_vmp_motor": {
+      "titol": "VMP considerat vehicle a motor — AOV obligatòria",
+      "text": "Té assegurança obligatòria?",
+      "info": "El VMP considerat vehicle a motor (per la seva MOM al RNV) SEMPRE necessita AOV (art. 2.1 Llei RC i assegurança). Sanció: 800 €.",
+      "opcions": [
+        { "etiqueta": "SÍ té AOV vigent (FIVA o pòlissa)",     "va_a": "fi_ok" },
+        { "etiqueta": "NO té AOV",                              "va_a": "fi_aov_motor" }
+      ]
+    },
+
+    "comprovar_aov_vpl": {
+      "titol": "VPL certificat i inscrit — AOV obligatòria",
+      "text": "Té assegurança obligatòria?",
+      "info": "El VPL certificat I inscrit al RNV ha de tenir AOV (DA 1a Llei 5/2025). Si està certificat però NO inscrit, o NO certificat: no és obligat (però sí denúncia per manca d'inscripció).",
+      "opcions": [
+        { "etiqueta": "SÍ té AOV vigent",                                      "va_a": "fi_ok" },
+        { "etiqueta": "NO té AOV (és certificat i inscrit)",                    "va_a": "fi_aov" },
+        { "etiqueta": "Certificat però NO inscrit (no obligat AOV)",            "va_a": "fi_inf_2" },
+        { "etiqueta": "No certificat (no obligat AOV però sí denúncia)",        "va_a": "fi_inf_2" }
+      ]
+    },
+
+    "sense_identificacio": {
+      "titol": "VMP sense cap número d'identificació",
+      "text": "Què consignar a la butlleta:",
+      "info": "Si el VMP no té etiqueta ni placa de marcatge, l'agent ha de consignar els requisits tècnics i fer fotografia. Indicar pes obligatòriament.",
+      "checklist_previ": [
+        "Pes del vehicle (per determinar VMP a motor vs VPL)",
+        "Velocitat màxima (per disseny)",
+        "Marca i model si visible",
+        "Fotografia del vehicle",
+        "Identificació del conductor"
+      ],
+      "opcions": [
+        { "etiqueta": "Documentar i denunciar per (1) + (2)",   "va_a": "fi_doble" }
+      ]
+    },
+
+    "fi_ok": {
+      "final": true,
+      "tipus": "ok",
+      "titol": "✅ Tot correcte",
+      "accio": "Es deixa circular. No procedeix denúncia.",
+      "accions_operatives": [
+        "Verificar que la documentació del conductor estigui en regla",
+        "Recordatori del compliment normatiu (alcoholèmia, mòbil, casc, voreres)"
+      ]
+    },
+
+    "fi_ok_z": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "✅ VMP Z correcte — règim transitori",
+      "accio": "Es deixa circular. Recordar al conductor que la caducitat és el 22/01/2027.",
+      "accions_operatives": [
+        "Informar verbalment de la caducitat 22/01/2027",
+        "A partir d'aquesta data el vehicle NO podrà circular"
+      ]
+    },
+
+    "fi_inf_1": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🟢 LLEU — Sense etiqueta o placa de marcatge",
+      "concepte_butlleta": "No disposar i exhibir en un VMP l'etiqueta identificativa o la placa de marcatge del fabricant",
+      "article_butlleta": "Art. 22 RGV · Comunicat 6/2026 SCT",
+      "import": "80 € (DTE 40 €)",
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí de denúncia",
+        "Si VMP no inscrit: indicar pes (MOM) a la butlleta",
+        "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
+      ]
+    },
+
+    "fi_inf_2": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🟢 LLEU — No inscrit al RNV",
+      "concepte_butlleta": "No inscriure un VMP al Registre Nacional de Vehicles",
+      "article_butlleta": "Art. 22 RGV · RD 52/2026 · Comunicat 6/2026 SCT",
+      "import": "100 € (DTE 50 €)",
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí de denúncia",
+        "Indicar OBLIGATÒRIAMENT el pes (MOM) a la butlleta — permet determinar VMP a motor vs VPL",
+        "Adreçat al CONDUCTOR (el VMP no consta inscrit, no hi ha titular al RNV)",
+        "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)",
+        "⚠️ NO denunciar alhora per 'sense certificat' si és > 22/01/2024 (concurrència)"
+      ]
+    },
+
+    "fi_inf_3": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🔴 MOLT GREU — Annex XXI · afecta greument seguretat viària",
+      "concepte_butlleta": "No complir els requisits tècnics de l'Annex XXI del RGV en aspectes que afecten greument la seguretat viària (manipulació del control de velocitat, modificació estructural, etc.)",
+      "article_butlleta": "Art. 22 RGV · Annex XXI · Comunicat 6/2026 SCT",
+      "import": "500 € (DTE 250 €)",
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí de denúncia",
+        "Documentar (fotografia) la manipulació/modificació",
+        "Plantejar IMMOBILITZACIÓ del vehicle (per perill objectiu)",
+        "⚠️ L'única MOLT GREU de les 5 noves del Com. 6/2026",
+        "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
+      ]
+    },
+
+    "fi_inf_4": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🟠 GREU — Annex XXI · il·luminació, rodes",
+      "concepte_butlleta": "No complir els requisits tècnics de l'Annex XXI del RGV (sistema d'il·luminació, rodes, etc.)",
+      "article_butlleta": "Art. 22 RGV · Annex XXI · Comunicat 6/2026 SCT",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí de denúncia",
+        "Documentar (fotografia) el defecte tècnic",
+        "Recordar al conductor que cal reparar abans de tornar a circular",
+        "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
+      ]
+    },
+
+    "fi_inf_5": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🟢 LLEU — Annex XXI · dispositiu sonor, cavallet",
+      "concepte_butlleta": "No complir els requisits tècnics de l'Annex XXI del RGV (dispositiu sonor, cavallet, etc.)",
+      "article_butlleta": "Art. 22 RGV · Annex XXI · Comunicat 6/2026 SCT",
+      "import": "80 € (DTE 40 €)",
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí de denúncia",
+        "Documentar (fotografia) el defecte",
+        "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
+      ]
+    },
+
+    "fi_aov": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🔴 MOLT GREU — VPL sense AOV",
+      "concepte_butlleta": "Circular el vehicle personal lleuger (VPL certificat i inscrit al RNV) sense que consti subscrit i en vigor un contracte d'assegurança obligatòria",
+      "article_butlleta": "Art. 2.1 RDL 8/2004 · DA 1a Llei 5/2025 · Com. 6/2026 SCT",
+      "import": "300 € (DTE 150 €) — MODIFICAT 2026 (abans 350 €)",
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí de denúncia",
+        "Acta d'IMMOBILITZACIÓ (Art. 3 LRCSCVM)",
+        "Notificació al Consorci de Compensació d'Assegurances",
+        "Dipòsit fins a justificar pòlissa o titular abonar franquícia"
+      ]
+    },
+
+    "fi_aov_motor": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🚨 MOLT GREU — VMP a motor sense AOV",
+      "concepte_butlleta": "Circular amb un VMP considerat vehicle a motor (per MOM) sense AOV vigent",
+      "article_butlleta": "Art. 2.1 Llei sobre RC i assegurança en circulació de vehicles a motor",
+      "import": "800 €",
+      "punts": "0",
+      "accions_operatives": [
+        "Butlletí de denúncia",
+        "Acta d'IMMOBILITZACIÓ (Art. 3 LRCSCVM)",
+        "Notificació al Consorci de Compensació d'Assegurances",
+        "Si VMP no inscrit: indicar PES (MOM) a la butlleta",
+        "Dipòsit fins a justificar pòlissa o titular abonar franquícia"
+      ]
+    },
+
+    "fi_doble": {
+      "final": true,
+      "tipus": "mixta",
+      "titol": "⚠️ Denúncia per manca d'identificació i registre",
+      "concepte_butlleta": "VMP sense etiqueta identificativa, placa de marcatge ni inscripció al Registre Nacional de Vehicles",
+      "article_butlleta": "Art. 22 RGV · Com. 6/2026 SCT (infraccions 1 i 2)",
+      "import": "80 € (sense etiqueta/placa) + 100 € (sense RNV) = 180 €",
+      "punts": "0",
+      "accions_operatives": [
+        "Consignar a la butlleta: pes, velocitat màxima, marca, model",
+        "Fotografia del vehicle",
+        "⚠️ Concurrència: NO acumular 'sense certificat' + 'no inscrit' (art. 22 RGV ja les contempla)",
+        "Adreçat al CONDUCTOR (no hi ha titular inscrit)",
+        "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
+      ]
+    }
+  }
+}

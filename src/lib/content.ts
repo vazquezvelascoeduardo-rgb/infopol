@@ -227,7 +227,10 @@ function detectLang(text: string): CardLang {
 // PRIMERA coincidència guanya. Posem primer les paraules més específiques.
 const ICON_HINTS: { kws: string[]; icon: string }[] = [
   // Trànsit / mobilitat — específiques primer
+  { kws: ['comunicat 6/2026', 'comunicat 6-2026', 'comunicado 6-2026', 'rd 52/2026', 'rd 52-2026', 'registre nacional vehicles', 'registro nacional vehiculos'], icon: '🛴' },
+  { kws: ['vpl', 'vehicle personal lleuger', 'vehiculo personal ligero'], icon: '🛴' },
   { kws: ['vmp', 'patinet'], icon: '🛴' },
+  { kws: ['balises v16', 'baliza v16', 'v16'], icon: '🚨' },
   { kws: ['alcoholemia', 'alcoholèmia'], icon: '🍷' },
   { kws: ['cataleg infraccions', 'catàleg infraccions', 'catalogo infracciones'], icon: '🚦' },
   { kws: ['permis de conduir', 'permiso de conducir', 'carnet'], icon: '🪪' },

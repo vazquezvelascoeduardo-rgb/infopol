@@ -967,54 +967,81 @@ const BALISES_V16: EsquemaLlei = {
 
 // ═══════════════════════════════════════════════════════════════
 // VMP — Vehicles de Mobilitat Personal
-// Focus: REGULACIÓ trànsit VMP
+// Focus: REGULACIÓ trànsit VMP + Comunicat 6/2026 SCT
+// (Inclou les 5 noves infraccions i la distinció VMP/VPL)
 // ═══════════════════════════════════════════════════════════════
 const VMP_ERAS: LleiEra[] = [
   { id: 'vmp-norma', name: 'Marc legal', range: 'DGT 2020+', color: '#FF7A1A', soft: '#FFE0CB' },
   { id: 'vmp-def', name: 'Definició i tipus', range: 'patinets · monocicles', color: '#3B6BF5', soft: '#D8E2FE' },
   { id: 'vmp-circul', name: 'Circulació · vies', range: 'on poden anar', color: '#1B7A5C', soft: '#C6EBDD' },
   { id: 'vmp-infraccions', name: 'Infraccions trànsit', range: 'sancions', color: '#C0392B', soft: '#F4D2CE' },
+  { id: 'vmp-registre', name: 'Registre VPL · RD 52/2026', range: 'NOU 2026', color: '#9747D6', soft: '#F5E9FF' },
+  { id: 'vmp-noves', name: '5 noves infraccions', range: 'Com. 6/2026', color: '#C0392B', soft: '#F4D2CE' },
 ];
 const VMP_TIMELINE: LleiMilestone[] = [
-  { eraId: 'vmp-norma', date: '2020', title: 'Reforma RGC (RD 970/2020)', note: 'Inclou VMP per primera vegada.', star: true },
-  { eraId: 'vmp-norma', date: '2 GEN 2024', title: 'Manual característiques VMP', note: 'DGT actualitza criteris.' },
-  { eraId: 'vmp-norma', date: '2026', title: 'Assegurança VMP obligatòria', note: 'Aplicació directiva UE.', star: true },
+  { eraId: 'vmp-norma', date: '10 NOV 2020', title: 'RD 970/2020 · marc VMP', note: 'Inclou els VMP al RGC per primera vegada. Requereix certificat de circulació i identificació.', star: true },
+  { eraId: 'vmp-norma', date: '22 GEN 2024', title: 'Final del període transitori VMP', note: 'A partir d\'aquesta data tots els VMP comercialitzats necessiten certificat.' },
+  { eraId: 'vmp-norma', date: '24 JUL 2025', title: 'Llei 5/2025 DA 1a', note: 'Modifica la Llei RC i assegurança. Introdueix l\'obligació d\'assegurar els VPL.', star: true },
+  { eraId: 'vmp-registre', date: '28 GEN 2026', title: 'RD 52/2026 · Registre VPL', note: 'Modifica el RGV i el RD 2822/1998 per regular el Registre Nacional de VPL.', star: true },
+  { eraId: 'vmp-registre', date: '30 GEN 2026', title: 'Entrada en vigor RD 52/2026', star: true },
+  { eraId: 'vmp-infraccions', date: '2026', title: 'Comunicats 3/2026 i 4/2026', note: 'Donen d\'alta al catàleg la infracció per circular sense AOV.' },
+  { eraId: 'vmp-noves', date: '15 MAI 2026', title: 'Signatura Comunicat 6/2026', note: 'Director Ramon Lamiel · Servei Català de Trànsit.' },
+  { eraId: 'vmp-noves', date: '18 MAI 2026', title: 'Vigor Comunicat 6/2026 · 5 noves infraccions', note: 'Afegides al catàleg del SCT.', star: true, itemId: 'vmp-c6-resum' },
+  { eraId: 'vmp-registre', date: '22 GEN 2027', title: 'Final règim transitori VMP no certificats', note: 'A partir d\'aquí els VMP amb etiqueta Z ja no podran circular.', star: true },
 ];
 const VMP_ITEMS: LleiItem[] = [
-  { id: 'vmp-def', name: 'Definició VMP', eraId: 'vmp-def', initials: 'DF', period: 'RD 970/2020', role: 'Definició', fact: 'Vehicles de 1 o més rodes, dotats d\'una sola plaça i propulsats EXCLUSIVAMENT per motors elèctrics. Velocitat màxima per disseny: 6 — 25 km/h.' },
-  { id: 'vmp-no-veh', name: 'NO són VMP', eraId: 'vmp-def', initials: 'NO', period: 'Exclusions', role: 'CRÍTIC PL', fact: '⭐ NO són VMP: vehicles per persones amb mobilitat reduïda, ciclomotors, motocicletes, bicicletes (assistides o no), juguetes (< 6 km/h).' },
-  { id: 'vmp-edat', name: 'Edat mínima', eraId: 'vmp-circul', initials: '15', period: '15 anys (recomenada 16)', role: 'CRÍTIC PL', fact: '⭐ No hi ha edat establerta a estatal. Moltes ordenances municipals fixen 15-16 anys. Catalunya: ⭐ 16 ANYS mínim per circular.' },
-  { id: 'vmp-vies', name: 'On poden circular', eraId: 'vmp-circul', initials: 'VI', period: 'Carrils bici · zones 30', role: 'CRÍTIC PL', fact: '⭐ Carrils bici (preferent) · zones 30 · vies amb límit ≤ 30 km/h · NO autopistes ni autovies · NO travesseres en general · NO voreres ni espais peatonals (excepte ordenances específiques).' },
-  { id: 'vmp-casc', name: 'Casc', eraId: 'vmp-circul', initials: 'CA', period: 'Recomenat', role: 'Equipament', fact: 'No obligatori a estatal. ⚠️ Sí obligatori per ordenança a moltes ciutats (Barcelona, etc.). Comprovar normativa local.' },
-  { id: 'vmp-alcohol', name: 'Alcoholèmia', eraId: 'vmp-infraccions', initials: 'AL', period: 'Sí s\'aplica', role: 'CRÍTIC PL', fact: '⭐⭐ Sí s\'aplica la normativa d\'alcoholèmia! Conductor VMP = conductor a efectes de trànsit. Taxa: 0,5 g/L sang (general) o 0,15 mg/L aire. Drogues: tolerància zero.' },
-  { id: 'vmp-mobil', name: 'Telèfon · auriculars', eraId: 'vmp-infraccions', initials: 'MO', period: 'PROHIBIT', role: 'Infraccions', fact: '⭐ Prohibit conduir VMP amb auriculars o utilitzant el mòbil sense sistema mans lliures. Infracció greu: 200€ + 3 punts (si tenen carnet).' },
+  { id: 'vmp-def', name: 'Definició VMP', eraId: 'vmp-def', initials: 'DF', period: 'RD 970/2020', role: 'Definició', fact: 'Vehicles d\'1 o més rodes, dotats d\'una sola plaça i propulsats EXCLUSIVAMENT per motors elèctrics. Velocitat màxima per disseny: 6 — 25 km/h.' },
+  { id: 'vmp-no-veh', name: 'NO són VMP', eraId: 'vmp-def', initials: 'NO', period: 'Exclusions', role: 'CRÍTIC PL', fact: '⭐ NO són VMP: vehicles per persones amb mobilitat reduïda, ciclomotors, motocicletes, bicicletes (assistides o no), joguets (< 6 km/h).' },
+  { id: 'vmp-vs-vpl', name: 'VMP ≠ VPL', eraId: 'vmp-registre', initials: 'V/V', period: 'Distinció crítica', role: '⭐⭐⭐ NOU 2026', fact: '⭐⭐⭐ VMP "vehicle a motor" (segons MOM al RNV) → SEMPRE necessita AOV · sanció 800 € sense. VPL = Vehicle Personal Lleuger certificat I inscrit → necessita AOV · sanció 300 € (150 € reducció). NO confondre.' },
+  { id: 'vmp-rnv', name: 'Registre Nacional', eraId: 'vmp-registre', initials: 'RNV', period: 'RD 52/2026', role: '⭐ NOU 2026', fact: '⭐ Registre Nacional de Vehicles Personals Lleugers · OBLIGATORI inscriure-hi tots els VMP. Sense inscripció no es pot exigir l\'AOV. NO inscriure = infracció lleu de 100 €.' },
+  { id: 'vmp-m-z', name: 'Etiqueta M vs Z', eraId: 'vmp-registre', initials: 'M/Z', period: 'Identificació', role: '⭐ NOU 2026', fact: '⭐ M = certificat (comercialitzat des del 22/01/2024, sense caducitat) · Z = no certificat (anterior 22/01/2024, RÈGIM TRANSITORI fins al 22/01/2027). Mnemotècnia: M de Modern · Z de Zona transitòria.' },
+  { id: 'vmp-edat', name: 'Edat mínima', eraId: 'vmp-circul', initials: '16', period: '16 anys a CAT', role: 'CRÍTIC PL', fact: '⭐ No hi ha edat estatal. Catalunya: 16 anys mínim per circular. Moltes ordenances municipals també 15-16.' },
+  { id: 'vmp-vies', name: 'On poden circular', eraId: 'vmp-circul', initials: 'VI', period: 'Carrils bici · zones 30', role: 'CRÍTIC PL', fact: '⭐ Carrils bici (preferent) · zones 30 · vies amb límit ≤ 30 km/h · NO autopistes/autovies · NO voreres ni espais peatonals (excepte ordenances específiques).' },
+  { id: 'vmp-casc', name: 'Casc', eraId: 'vmp-circul', initials: 'CA', period: 'Variable', role: 'Equipament', fact: 'No obligatori a estatal. ⚠️ Sí obligatori per ordenança a Barcelona i moltes ciutats. Comprovar normativa local.' },
+  { id: 'vmp-alcohol', name: 'Alcoholèmia', eraId: 'vmp-infraccions', initials: 'AL', period: 'Sí s\'aplica', role: 'CRÍTIC PL', fact: '⭐⭐ Sí s\'aplica la normativa d\'alcoholèmia. Conductor VMP = conductor a efectes de trànsit. Taxa: 0,5 g/L sang o 0,15 mg/L aire. Drogues: tolerància zero.' },
+  { id: 'vmp-mobil', name: 'Telèfon · auriculars', eraId: 'vmp-infraccions', initials: 'MO', period: 'PROHIBIT', role: 'Infraccions', fact: '⭐ Prohibit conduir VMP amb auriculars o utilitzant el mòbil sense sistema mans lliures. Infracció greu: 200 € + 3 punts (si tenen carnet).' },
   { id: 'vmp-passatgers', name: 'Passatgers', eraId: 'vmp-infraccions', initials: 'PS', period: 'PROHIBIT', role: 'Infraccions', fact: 'NO es pot portar passatgers ni càrrega no autoritzada. Una plaça → un conductor.' },
-  { id: 'vmp-segurança', name: 'Assegurança', eraId: 'vmp-norma', initials: 'AS', period: 'Obligatòria 2026', role: 'CRÍTIC PL', fact: '⭐ A partir de 2026 (transposició UE): assegurança obligatòria de responsabilitat civil per a VMP que superin 14 km/h o pesin > 25 kg.' },
+  { id: 'vmp-c6-resum', name: 'Com. 6/2026 · 5 infraccions', eraId: 'vmp-noves', initials: '5', period: '18/05/2026', role: '⭐ NOU CATÀLEG SCT', fact: '⭐⭐ Comunicat 6/2026 afegeix 5 noves opcions normatives al catàleg SCT (totes amb base art. 22 RGV). Vigor 18/05/2026.' },
+  { id: 'vmp-c6-i1', name: 'Sense etiqueta o placa', eraId: 'vmp-noves', initials: '1', period: '🟢 LLEU', role: 'Sanció 80 €', fact: 'No disposar i exhibir en un VMP l\'etiqueta identificativa o la placa de marcatge del fabricant. 80 € (40 € amb 50% descompte).' },
+  { id: 'vmp-c6-i2', name: 'No inscrit al RNV', eraId: 'vmp-noves', initials: '2', period: '🟢 LLEU', role: 'Sanció 100 €', fact: 'No inscriure el VMP al Registre Nacional de Vehicles. 100 € (50 € descompte). Imprescindible per donar compliment a la DA 1a Llei 5/2025.' },
+  { id: 'vmp-c6-i3', name: 'Annex XXI greu seg.', eraId: 'vmp-noves', initials: '3', period: '🔴 MOLT GREU', role: '⭐ Sanció 500 €', fact: '⭐ L\'única MOLT GREU de les noves. Manipulació del control de velocitat, modificació estructural… afectació greu seguretat viària. 500 € (250 € descompte).' },
+  { id: 'vmp-c6-i4', name: 'Annex XXI il·luminació', eraId: 'vmp-noves', initials: '4', period: '🟠 GREU', role: 'Sanció 200 €', fact: 'No funciona el sistema d\'il·luminació, rodes, etc. 200 € (100 € descompte).' },
+  { id: 'vmp-c6-i5', name: 'Annex XXI menors', eraId: 'vmp-noves', initials: '5', period: '🟢 LLEU', role: 'Sanció 80 €', fact: 'Dispositiu sonor, cavallet, etc. 80 € (40 € descompte).' },
+  { id: 'vmp-aov-800', name: 'AOV · VMP a motor', eraId: 'vmp-infraccions', initials: '800', period: 'MOLT GREU', role: '⭐ CRÍTIC PL', fact: '⭐ Sanció 800 € · circular amb VMP "considerat vehicle a motor" sense AOV. Sempre obligat (art. 2.1 Llei RC i assegurança).' },
+  { id: 'vmp-aov-300', name: 'AOV · VPL', eraId: 'vmp-infraccions', initials: '300', period: 'MOLT GREU', role: '⭐ Modificat 2026', fact: '⭐ Sanció 300 € (150 € reducció) · circular amb VPL certificat i inscrit sense AOV. ⚠️ La sanció era 350 € — modificada el 2026 per alinear-se amb la DGT.' },
+  { id: 'vmp-menors', name: 'Menors (art. 82 LSV)', eraId: 'vmp-noves', initials: 'MN', period: 'Solidaritat', role: 'CRÍTIC PL', fact: '⭐ Si el responsable és menor d\'edat, els pares, tutors, acollidors i guardadors legals o de fet responen SOLIDÀRIAMENT de la multa. Fer constar les seves dades a la butlleta.' },
+  { id: 'vmp-pes', name: 'Pes a butlleta', eraId: 'vmp-noves', initials: 'P', period: 'VMP no inscrit', role: 'Operatiu', fact: '⭐ Si el VMP NO està inscrit al RNV, l\'agent ha d\'indicar OBLIGATÒRIAMENT el pes (MOM) a la butlleta. El pes permet determinar si és VMP a motor (800 €) o VPL (300 €).' },
+  { id: 'vmp-concurrencia', name: 'Concurrència infraccions', eraId: 'vmp-noves', initials: 'CO', period: 'NO alhora', role: 'Operatiu', fact: '⚠️ NO s\'han de tramitar denúncies alhora per: (a) "no tenir certificat" + "no estar inscrit" als VMP des 22/01/2024 · (b) "sense placa" si no té certificat, o "sense etiqueta" si no està inscrit.' },
 ];
 const VMP_EXAM: LleiExamItem[] = [
   { date: 'RD 970/2020', text: 'Reforma del RGC que regula els VMP per primera vegada.' },
+  { date: '⭐ RD 52/2026', text: 'NOU 2026. Regula el Registre Nacional de Vehicles Personals Lleugers (VPL). Vigor 30/01/2026.' },
+  { date: '⭐ Com. 6/2026 SCT', text: 'NOU 2026. 5 noves infraccions al catàleg + modificació imp. AOV VPL. Vigor 18/05/2026.' },
+  { date: 'VMP a motor vs VPL', text: '⭐⭐ Distinció CRÍTICA. Sense AOV: VMP a motor = 800 € · VPL = 300 € (150 € reducció).' },
+  { date: 'Etiqueta M vs Z', text: '⭐ M = certificat (des 22/01/2024, sense caducitat) · Z = règim transitori (fins 22/01/2027).' },
+  { date: 'Art. 22 RGV', text: '⭐ Base normativa de TOTES les 5 noves infraccions del Com. 6/2026.' },
+  { date: 'Infracció #3', text: '⭐ L\'única MOLT GREU de les noves (500 €) · manipulació velocitat/modificació estructural.' },
+  { date: 'No inscrit RNV', text: 'Cal indicar el PES (MOM) a la butlleta · permet diferenciar VMP a motor de VPL.' },
+  { date: 'Menors art. 82 LSV', text: 'Pares/tutors responen SOLIDÀRIAMENT de la multa. Fer constar les seves dades.' },
+  { date: 'Concurrència', text: 'NO denunciar alhora "sense certificat + no inscrit" ni "sense placa + no certificat".' },
   { date: '6 — 25 km/h', text: 'Velocitat màxima per disseny dels VMP.' },
   { date: '16 anys', text: 'Edat mínima a Catalunya per conduir VMP.' },
-  { date: 'Alcoholèmia', text: 'S\'aplica al conductor VMP igual que a un altre vehicle. PREGUNTA.' },
-  { date: 'Auriculars · mòbil', text: 'PROHIBITS conduint VMP.' },
-  { date: 'Voreres', text: 'NO es pot circular per voreres ni espais peatonals.' },
-  { date: 'Assegurança 2026', text: 'Obligatòria per a VMP > 14 km/h o > 25 kg.' },
-  { date: 'NO és VMP', text: 'Bicicletes (inclús elèctriques), ciclomotors, joguets < 6 km/h.' },
+  { date: 'Alcoholèmia', text: 'S\'aplica al conductor VMP igual que un altre vehicle. Taxa: 0,5 g/L o 0,15 mg/L.' },
 ];
 const VMP: EsquemaLlei = {
   id: 'esq-pl-vmp', slug: 'vmp', categoria: 'transit',
-  kicker: 'POLICIA LOCAL · VMP', title: 'Vehicles de', titleHighlight: 'Mobilitat Personal',
-  introOneLiner: 'Patinets elèctrics i similars. Regulats des del 2020 (RD 970/2020). 6-25 km/h, només carrils bici i zones 30. Alcoholèmia, mòbil i auriculars → s\'apliquen. Assegurança obligatòria des de 2026.',
+  kicker: 'POLICIA LOCAL · VMP / VPL', title: 'VMP', titleHighlight: 'i VPL',
+  introOneLiner: 'Vehicles de Mobilitat Personal (patinets elèctrics) i Vehicles Personals Lleugers. Marc legal complet: RD 970/2020, Llei 5/2025 DA 1a, RD 52/2026 (Registre Nacional) i Comunicat 6/2026 SCT amb 5 noves infraccions.',
   kpis: [
-    { value: 'RD 970/2020', label: 'norma', mono: true },
-    { value: '6 — 25', label: 'km/h' },
-    { value: '16 anys', label: 'mínim a CAT' },
-    { value: '9', label: 'aspectes clau' },
-    { value: '2026', label: 'assegurança', mono: true },
+    { value: 'RD 52/2026', label: 'Registre VPL', mono: true },
+    { value: 'Com. 6/2026', label: 'SCT vigent', mono: true },
+    { value: '5 noves', label: 'infraccions' },
+    { value: '800 € / 300 €', label: 'AOV VMP / VPL', mono: true },
+    { value: 'M / Z', label: 'etiqueta cert.', mono: true },
   ],
   eras: VMP_ERAS, timeline: VMP_TIMELINE, items: VMP_ITEMS, exam: VMP_EXAM,
   testSlug: 'vmp-esquema-operativo-policial',
-  labels: { items: 'Aspectes operatius', itemsTab: 'Aspectes' },
+  labels: { items: 'Conceptes i infraccions', itemsTab: 'Conceptes' },
 };
 
 // ─── Registre d'esquemes de PL disponibles ─────────────────────

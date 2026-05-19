@@ -69,6 +69,70 @@ export type Noticia = {
 // ════════════════════════════════════════════════════════════════════
 
 export const NOTICIES: Noticia[] = [
+  // ─── MAIG 2026 — TRÀNSIT · VMP / VPL ───────────────────────────────
+
+  {
+    slug: 'mai2026-comunicat-6-2026-vmp-vpl',
+    title: 'Comunicat 6/2026 SCT — 5 noves infraccions per a VMP i registre de VPL',
+    summary: "El Servei Català de Trànsit afegeix 5 noves opcions normatives al catàleg de trànsit. Distingeix VMP a motor (800 €) i VPL (300 €) sense AOV. Registre Nacional obligatori. Vigor des del 18/05/2026.",
+    body: `**Director:** Ramon Lamiel i Villaró · **Signat:** 15/05/2026 · **Entrada en vigor:** 18/05/2026
+
+El nou comunicat del Servei Català de Trànsit incorpora **5 noves infraccions** al catàleg vinculades a la regulació dels **Vehicles de Mobilitat Personal (VMP)** i dels **Vehicles Personals Lleugers (VPL)**, després de l'entrada en vigor del **Reial decret 52/2026**, de 28 de gener, que regula el **Registre Nacional de Vehicles Personals Lleugers**.
+
+## ⭐ Les 5 noves infraccions
+
+| Nº | Infracció | Qualif. | Sanció |
+|:--:|----------|:------:|:------:|
+| 1 | Sense **etiqueta identificativa** o **placa de marcatge** | 🟢 LLEU | **80 €** |
+| 2 | **No inscrit** al RNV | 🟢 LLEU | **100 €** |
+| 3 | Annex XXI: afecta **greument la seguretat** *(manipulació velocitat, modificació estructural)* | 🔴 MOLT GREU | **500 €** |
+| 4 | Annex XXI: il·luminació, rodes… | 🟠 GREU | **200 €** |
+| 5 | Annex XXI: dispositiu sonor, cavallet… | 🟢 LLEU | **80 €** |
+
+Totes amb base normativa l'**article 22 del Reglament General de Vehicles (RGV)** i amb el **descompte del 50%** per pagament anticipat.
+
+## 🚨 Distinció VMP a motor ≠ VPL
+
+És essencial perquè determina l'obligació d'assegurança i l'import de la sanció.
+
+- **VMP considerat vehicle a motor** → **sempre** obligat a AOV. Sanció sense assegurança: **800 €**.
+- **VPL certificat i inscrit** → obligat a AOV. Sanció: **300 €** (150 € reducció — abans 350 €).
+- **VPL no certificat o no inscrit** → no obligat a AOV (però sí denunciable per manca d'inscripció).
+
+La diferenciació es fa per la **Massa en Ordre de Marxa (MOM)** que consta al Registre Nacional de Vehicles.
+
+## ⚠️ Identificació M vs Z
+
+- **Etiqueta M** = VMP **certificat** (comercialitzat des del 22/01/2024). Porta placa + etiqueta M.
+- **Etiqueta Z** = VMP **no certificat** (anteriors al 22/01/2024). Règim transitori fins al **22/01/2027**.
+
+## 📝 Operativa per l'agent
+
+- Si el VMP **no està inscrit al RNV**, l'agent ha d'indicar **obligatòriament el pes** del vehicle a la butlleta (la MOM permet determinar si és VMP a motor o VPL).
+- **No tramitar denúncies alhora** per "no certificat + no inscrit" ni "no placa + no certificat".
+- **Menors d'edat (art. 82 LSV)**: pares/tutors responen **solidàriament** de la multa — fer constar les seves dades.
+
+## 📜 Marc normatiu de referència
+
+- RD 970/2020 — marc jurídic VMP
+- Llei 5/2025, DA 1a — obligació d'assegurar VPL
+- **RD 52/2026 (28 gen.)** — Registre Nacional de VPL · vigor 30/01/2026
+- Comunicats 3/2026 i 4/2026 — sancions sense AOV
+- **Comunicat 6/2026** — 5 noves infraccions · vigor 18/05/2026
+
+> 💡 **Llegeix el comunicat complet:** detall de l'Annex XXI, formulació de denúncies i taula M/Z amb mnemotècnia.`,
+    publishedAt: '2026-05-18',
+    source: 'Servei Català de Trànsit · Comunicat informatiu 6/2026',
+    tags: ['trànsit', 'VMP', 'VPL', 'SCT', 'sancions', 'registre vehicles'],
+    featured: true,
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/E-scooter_in_Helsinki.jpg/1200px-E-scooter_in_Helsinki.jpg',
+    imageAlt: 'Patinet elèctric (VMP) circulant per ciutat',
+    linkedTo: {
+      moduleSlug: 'transit',
+      slug: 'comunicat-6-2026-vmp-vpl',
+    },
+  },
+
   // ─── ABRIL 2026 — LEGISLACIÓ ESTATAL ───────────────────────────────
 
   {
