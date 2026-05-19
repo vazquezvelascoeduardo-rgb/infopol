@@ -1,0 +1,52 @@
+name: Cerca diària de notícies
+
+on:
+  # Hivern (oct-mar): 21:00 UTC = 22:00 CET
+  # Estiu  (abr-set): 20:00 UTC = 22:00 CEST
+  schedule:
+    - cron: '0 21 * 10,11,12,1,2,3 *'
+    - cron: '0 20 * 4,5,6,7,8,9 *'
+  workflow_dispatch:
+    inputs:
+      date_override:
+        description: 'Data manual (YYYY-MM-DD, opcional)'
+        required: false
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repositori
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Configura Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instal·la dependències del script
+        run: |
+          npm install --no-save @anthropic-ai/sdk
+
+      - name: Executa la cerca de notícies
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/fetch-news.mjs
+
+      - name: Commit i puja les notícies
+        run: |
+          git config user.name "InfoPol Bot"
+          git config user.email "infopol-bot@users.noreply.github.com"
+          git add server/data/news.json
+          if git diff --staged --quiet; then
+            echo "No hi ha canvis nous a les notícies."
+          else
+            DATE=$(date -u +%Y-%m-%d)
+            git commit -m "news: actualització automàtica ${DATE}"
+            git push origin main
+          fi

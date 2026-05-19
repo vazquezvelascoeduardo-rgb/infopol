@@ -1,7 +1,61 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
+
+// Mapeja cada categoria de notícia a un token de color existent
+const CAT_TOKEN = {
+  politica:      T.cat.operativa,
+  economia:      T.cat.leyes,
+  esports:       T.cat.atajos,
+  cultura:       T.cat.psico,
+  policial:      T.cat.alcohol,
+  internacional: T.cat.physical,
+  descobriments: T.cat.transito,
+  premis:        T.cat.academia,
+};
+
+function newsToken(item) {
+  return CAT_TOKEN[item.category] ?? T.cat.operativa;
+}
+
+function NewsCard({ item }) {
+  const k = newsToken(item);
+  return (
+    <div style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `3px solid ${k.solid}`, boxShadow: T.shadow.card }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 5 }}>
+        <span style={{ fontSize: 9.5, fontWeight: 800, color: k.ink, letterSpacing: 0.6, textTransform: 'uppercase', background: k.soft, padding: '2px 7px', borderRadius: 4 }}>
+          {item.tag}
+        </span>
+        <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>
+          {item.dateLabel}
+        </span>
+      </div>
+      <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>
+        {item.title}
+      </div>
+      <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>
+        {item.desc}
+      </div>
+      {(item.source || item.url) && (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 9, paddingTop: 8, borderTop: `1px solid ${T.hairline}` }}>
+          {item.source && (
+            <span style={{ fontSize: 10, color: T.inkFaint, fontWeight: 600 }}>{item.source}</span>
+          )}
+          {item.url && (
+            <button
+              onClick={() => window.open(item.url, '_blank', 'noopener,noreferrer')}
+              style={{ fontSize: 10.5, color: k.solid, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 3, padding: 0, marginLeft: 'auto' }}
+            >
+              Llegir <Icon name="arrow-right" size={11} color={k.solid} />
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function BigCatCard({ cat, icon, kicker, title, desc, cta, onClick }) {
   const k = T.cat[cat];
@@ -42,14 +96,17 @@ function Chip({ icon, label }) {
   );
 }
 
-const NEWS = [
-  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
-  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
-  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
-];
-
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/news')
+      .then(r => r.json())
+      .then(data => setNews(Array.isArray(data) ? data.slice(0, 10) : []))
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="screen">
       <StatusBar />
@@ -120,19 +177,17 @@ export default function ScreenOperativaHome() {
         </div>
       </div>
 
-      {/* Actualitat normativa */}
-      <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
+      {/* Última hora */}
+      <div style={{ padding: '14px 0 16px' }}>
+        <SectionHead kicker="InfoPol" kickerColor={T.cat.operativa.solid} title="Última hora" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {NEWS.map((n, i) => (
-            <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
-                <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
-              </div>
-              <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
-              <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+          {news.length === 0 && (
+            <div style={{ textAlign: 'center', padding: '20px 0', color: T.inkFaint, fontSize: 13 }}>
+              Carregant notícies…
             </div>
+          )}
+          {news.map(item => (
+            <NewsCard key={item.id} item={item} />
           ))}
         </div>
       </div>
