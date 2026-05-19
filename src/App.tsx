@@ -59,6 +59,8 @@ const MossosTemariAmbit = lazy(() => import('./pages/mossos/MossosTemariAmbit'))
 const MossosTemariTema = lazy(() => import('./pages/mossos/MossosTemariTema'));
 const MossosEsquemes = lazy(() => import('./pages/mossos/MossosEsquemes'));
 const MossosEsquemaRapid = lazy(() => import('./pages/mossos/MossosEsquemaRapid'));
+const PoliciaLocalEsquemes = lazy(() => import('./pages/policia-local/PoliciaLocalEsquemes'));
+const PoliciaLocalEsquemaLlei = lazy(() => import('./pages/policia-local/PoliciaLocalEsquemaLlei'));
 const Flashcards = lazy(() => import('./pages/flashcards/Flashcards'));
 
 // Slugs públics dins /leyes — l'única fitxa accessible sense sessió és
@@ -165,6 +167,22 @@ export default function App() {
             element={
               <RequireAuth>
                 <Retos />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/policia-local/esquemes"
+            element={
+              <RequireAuth>
+                <PoliciaLocalEsquemes />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/policia-local/esquemes/:slug"
+            element={
+              <RequireAuth>
+                <PoliciaLocalEsquemaLlei />
               </RequireAuth>
             }
           />

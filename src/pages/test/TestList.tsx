@@ -185,6 +185,14 @@ export default function TestList() {
           </span>
           <span className="pl-jump-arr" aria-hidden>→</span>
         </Link>
+        <Link to="/policia-local/esquemes" className="pl-jump-btn jump-esquemes">
+          <span className="pl-jump-icon" aria-hidden>✨</span>
+          <span className="pl-jump-text">
+            <span className="pl-jump-eyebrow">Format nou</span>
+            <span className="pl-jump-title">Esquemes</span>
+          </span>
+          <span className="pl-jump-arr" aria-hidden>→</span>
+        </Link>
       </nav>
 
       {/* STATS PERSONALS */}
