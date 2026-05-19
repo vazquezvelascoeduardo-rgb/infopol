@@ -9,16 +9,10 @@ import {
   CATEGORIA_META,
   type LleiEra,
   type LleiMilestone,
-  type LleiPerson,
+  type LleiItem,
 } from '../../data/esquemas-pl';
 
-const SECTIONS = [
-  { id: 'resum', label: 'Resum', icon: '🚩' },
-  { id: 'timeline', label: 'Cronologia', icon: '⏱' },
-  { id: 'personatges', label: 'Personatges', icon: '👤' },
-  { id: 'examen', label: "Per a l'examen", icon: '✅' },
-] as const;
-type SectionId = (typeof SECTIONS)[number]['id'];
+type SectionId = 'resum' | 'timeline' | 'items' | 'examen';
 
 const BLUE = '#3B6BF5';
 const BLUE_SOFT = '#D8E2FE';
@@ -50,7 +44,18 @@ function useActive(ids: SectionId[]): SectionId {
 export default function PoliciaLocalEsquemaLlei() {
   const { slug = '' } = useParams();
   const esquema = useMemo(() => getEsquemaLlei(slug), [slug]);
-  const sectionIds = useMemo(() => SECTIONS.map((s) => s.id), []);
+
+  // Etiquetes adaptades per llei
+  const itemsLabel = esquema?.labels?.items ?? 'Articles clau';
+  const itemsTabLabel = esquema?.labels?.itemsTab ?? itemsLabel;
+
+  const SECTIONS = useMemo<{ id: SectionId; label: string; icon: string }[]>(() => [
+    { id: 'resum', label: 'Resum', icon: '🚩' },
+    { id: 'timeline', label: 'Cronologia', icon: '⏱' },
+    { id: 'items', label: itemsTabLabel, icon: '📑' },
+    { id: 'examen', label: "Per a l'examen", icon: '✅' },
+  ], [itemsTabLabel]);
+  const sectionIds = useMemo(() => SECTIONS.map((s) => s.id), [SECTIONS]);
   const active = useActive(sectionIds);
 
   if (!esquema) {
@@ -68,7 +73,7 @@ export default function PoliciaLocalEsquemaLlei() {
 
   const cat = CATEGORIA_META[esquema.categoria];
   const erasById: Record<string, LleiEra> = Object.fromEntries(esquema.eras.map((e) => [e.id, e]));
-  const peopleById: Record<string, LleiPerson> = Object.fromEntries(esquema.people.map((p) => [p.id, p]));
+  const itemsById: Record<string, LleiItem> = Object.fromEntries(esquema.items.map((p) => [p.id, p]));
 
   return (
     <article className="shell" style={{ maxWidth: 1100, paddingBottom: 80 }}>
@@ -263,24 +268,24 @@ export default function PoliciaLocalEsquemaLlei() {
               key={i}
               milestone={m}
               era={erasById[m.eraId]}
-              person={m.personId ? peopleById[m.personId] : undefined}
+              item={m.itemId ? itemsById[m.itemId] : undefined}
             />
           ))}
         </div>
       </section>
 
-      {/* SECCIÓ 3 · PERSONATGES */}
-      <section id="esq-personatges" style={{ padding: '32px 0 12px', scrollMarginTop: 80 }}>
+      {/* SECCIÓ 3 · ITEMS (articles / tipus / categories…) */}
+      <section id="esq-items" style={{ padding: '32px 0 12px', scrollMarginTop: 80 }}>
         <SectionHeader
           n="03"
-          label="Personatges"
-          title={`${esquema.people.length} noms que has de saber col·locar`}
-          sub="Qui van ser, en quina època i per quin fet són importants."
+          label={itemsLabel}
+          title={`${esquema.items.length} ${itemsLabel.toLowerCase()} que has de saber`}
+          sub="El que realment cau a l'examen — agrupat per blocs."
           tone="navy"
         />
         <div className="esq-people-grid" style={{ marginTop: 20 }}>
-          {esquema.people.map((p) => (
-            <PersonCard key={p.id} person={p} era={erasById[p.eraId]} />
+          {esquema.items.map((p) => (
+            <ItemCard key={p.id} item={p} era={erasById[p.eraId]} />
           ))}
         </div>
       </section>
@@ -438,11 +443,11 @@ function SectionHeader({
 }
 
 function TimelineRow({
-  milestone, era, person,
+  milestone, era, item,
 }: {
   milestone: LleiMilestone;
   era: LleiEra;
-  person?: LleiPerson;
+  item?: LleiItem;
 }) {
   return (
     <div style={{
@@ -490,7 +495,7 @@ function TimelineRow({
             }}>{milestone.note}</div>
           )}
         </div>
-        {person && (
+        {item && (
           <div style={{
             display: 'flex', alignItems: 'center', gap: 8,
             padding: '5px 10px', borderRadius: 999,
@@ -500,8 +505,8 @@ function TimelineRow({
             border: `1px solid ${era.color}33`,
             whiteSpace: 'nowrap',
           }}>
-            <PersonAvatar person={person} era={era} size={22} />
-            {person.name.split(' ').slice(0, 2).join(' ')}
+            <ItemBadge item={item} era={era} size={22} />
+            {item.name}
           </div>
         )}
       </div>
@@ -509,7 +514,7 @@ function TimelineRow({
   );
 }
 
-function PersonCard({ person, era }: { person: LleiPerson; era: LleiEra }) {
+function ItemCard({ item, era }: { item: LleiItem; era: LleiEra }) {
   return (
     <div style={{
       background: '#fff', borderRadius: 18,
@@ -522,7 +527,7 @@ function PersonCard({ person, era }: { person: LleiPerson; era: LleiEra }) {
         position: 'absolute', top: 0, left: 0, right: 0, height: 6, background: era.color,
       }} />
       <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', marginTop: 4 }}>
-        <PersonAvatar person={person} era={era} size={72} />
+        <ItemBadge item={item} era={era} size={72} />
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{
             fontFamily: 'JetBrains Mono, ui-monospace, monospace',
@@ -534,12 +539,12 @@ function PersonCard({ person, era }: { person: LleiPerson; era: LleiEra }) {
           <div style={{
             fontSize: 19, fontWeight: 900, letterSpacing: -0.4, lineHeight: 1.1,
             color: 'var(--ink)',
-          }}>{person.name}</div>
+          }}>{item.name}</div>
           <div style={{
             fontFamily: 'JetBrains Mono, ui-monospace, monospace',
             fontSize: 11.5, fontWeight: 700, color: 'var(--text-3)',
             marginTop: 4, letterSpacing: 0.6,
-          }}>{person.period}</div>
+          }}>{item.period}</div>
         </div>
       </div>
 
@@ -551,52 +556,39 @@ function PersonCard({ person, era }: { person: LleiPerson; era: LleiEra }) {
         <span style={{
           width: 8, height: 8, borderRadius: 4, background: era.color, flexShrink: 0,
         }} />
-        <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--ink)' }}>{person.role}</span>
+        <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--ink)' }}>{item.role}</span>
       </div>
 
       <p style={{
         margin: 0, fontSize: 14, lineHeight: 1.5, color: 'var(--text-2)',
-      }}>{person.fact}</p>
+      }}>{item.fact}</p>
     </div>
   );
 }
 
-function PersonAvatar({
-  person, era, size,
+function ItemBadge({
+  item, era, size,
 }: {
-  person: LleiPerson; era: LleiEra; size: number;
+  item: LleiItem; era: LleiEra; size: number;
 }) {
-  const isLarge = size >= 40;
+  // Badge gros amb el número/codi de l'item (article, escala, etc.)
+  // Tipografia mono i fons sòlid de l'era. Visual de "etiqueta-codi".
+  const initialsLen = item.initials.length;
+  // Mida tipo adaptativa: més caràcters = font més petita
+  const fontSize = size * (initialsLen >= 4 ? 0.28 : initialsLen >= 3 ? 0.34 : 0.42);
   return (
     <div style={{
       width: size, height: size, borderRadius: size / 4,
-      background: era.soft, border: `1px solid ${era.color}33`,
-      display: 'grid', placeItems: 'center', flexShrink: 0, overflow: 'hidden',
-      position: 'relative',
+      background: era.color,
+      display: 'grid', placeItems: 'center', flexShrink: 0,
+      border: `2px solid ${era.color}`,
+      boxShadow: `0 0 0 3px ${era.soft}`,
     }}>
-      <svg width={size * 0.85} height={size * 0.85} viewBox="0 0 64 64">
-        <path d="M6 60 C 8 50 18 44 32 44 C 46 44 56 50 58 60 L 58 64 L 6 64 Z"
-          fill={era.color} opacity="0.78" />
-        <circle cx="32" cy="30" r="14" fill={era.color} opacity="0.78" />
-      </svg>
-      {isLarge && (
-        <span style={{
-          position: 'absolute', bottom: 3, right: 4,
-          fontFamily: 'JetBrains Mono, ui-monospace, monospace',
-          fontSize: size * 0.18, fontWeight: 800, color: era.color,
-          background: 'rgba(255,255,255,0.9)',
-          padding: '1px 4px', borderRadius: 4, letterSpacing: 0.4,
-        }}>{person.initials}</span>
-      )}
-      {!isLarge && (
-        <span style={{
-          position: 'absolute',
-          fontFamily: 'JetBrains Mono, ui-monospace, monospace',
-          fontSize: size * 0.42, fontWeight: 800, color: era.color,
-          background: 'rgba(255,255,255,0.92)',
-          padding: '1px 3px', borderRadius: 3, letterSpacing: 0.2,
-        }}>{person.initials}</span>
-      )}
+      <span style={{
+        fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+        fontSize, fontWeight: 800, color: '#fff',
+        letterSpacing: -0.4, lineHeight: 1,
+      }}>{item.initials}</span>
     </div>
   );
 }
