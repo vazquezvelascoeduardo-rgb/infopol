@@ -295,6 +295,7 @@
     <button class="tab-pill" role="tab" aria-selected="false" data-tab="cond"><span class="ico">🪪</span> RG Conductors <span class="ref">818/2009</span></button>
     <button class="tab-pill" role="tab" aria-selected="false" data-tab="rgv"><span class="ico">🔧</span> RGV <span class="ref">2822/1998</span></button>
     <button class="tab-pill" role="tab" aria-selected="false" data-tab="seg"><span class="ico">🛡️</span> Assegurança <span class="ref">RDL 8/2004</span></button>
+    <button class="tab-pill" role="tab" aria-selected="false" data-tab="vmp"><span class="ico">🛴</span> VMP / VPL <span class="ref">Com. 6/2026</span></button>
     <button class="tab-pill" role="tab" aria-selected="false" data-tab="bar"><span class="ico">💧</span> Barems <span class="ref">VEL+ALC</span></button>
     <button class="tab-pill" role="tab" aria-selected="false" data-tab="cp"><span class="ico">⚖️</span> Delictes CP <span class="ref">379–395</span></button>
     <button class="tab-pill" role="tab" aria-selected="false" data-tab="res"><span class="ico">⭐</span> Resum</button>
@@ -613,6 +614,117 @@
       </div>
       <div class="note"><span class="pin">📌</span><span><strong>Comunicat 6/2026 SCT (vigor 18/05/2026):</strong> la sanció per VPL sense AOV s'ha modificat de <s>350€</s> a <strong>300€</strong> (150€ DTE) per alinear-se amb la DGT. VMP "considerat vehicle a motor" (per MOM al RNV): <strong>800€</strong>.</span></div>
       <div class="note tip"><span class="pin">💡</span><span>Consulta base de dades <strong>FIVA</strong> en temps real per verificar assegurança. Si el VMP no està inscrit al RNV: <strong>indicar pes (MOM) a la butlleta</strong>.</span></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- ============ VMP / VPL — VISTA UNIFICADA ===================  -->
+  <!-- Curat de TOTES les infraccions de VMP / VPL recollides des de  -->
+  <!-- LSV, RGC, RGV, Assegurança i CP. NO indexat pel parser per     -->
+  <!-- evitar duplicats al SuperBuscador (les files originals viuen   -->
+  <!-- a la seva pestanya canònica).                                  -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="cat-panel" id="p-vmp" role="tabpanel">
+    <div class="sec">
+      <div class="sec-head"><span class="ico">🛴</span> Vista unificada VMP / VPL · totes les infraccions <span class="sev sev-l" style="margin-left:8px; font-size:11px;">CURAT</span></div>
+      <p style="font-size:13.5px; color:var(--text-2); margin: 4px 0 14px; line-height:1.55;">
+        Resum de <strong>totes les infraccions aplicables a VMP i VPL</strong>, recollides de les pestanyes
+        LSV, RGC, RGV, Assegurança i CP. Ordenades per àmbit operatiu.
+        <strong>Marc normatiu actualitzat:</strong> RD 970/2020 · Llei 5/2025 DA 1a · RD 52/2026 (Registre VPL) ·
+        Comunicat 6/2026 SCT (vigor 18/05/2026).
+      </p>
+
+      <!-- ▸ Bloc 1 · ALCOHOL · DROGUES · ARMES · USOS ─────────── -->
+      <div class="sec-head" style="margin-top:8px;"><span class="ico">🍷</span> Alcohol, drogues i conducció (RGC art. 14)</div>
+      <table class="tbl">
+        <thead><tr><th>Concepte</th><th class="col-art">Art.</th><th class="col-n">N</th><th class="col-eur">€</th><th class="col-dte">DTE</th><th class="col-pts">PTS</th></tr></thead>
+        <tbody>
+          <tr class="row-mg"><td>Conduir bicicleta/VMP amb presència de <strong class="k">drogues</strong> a l'organisme (sense pèrdua de punts)</td><td class="col-art">14.1 RGC</td><td><span class="sev sev-mg">MG</span></td><td class="col-eur"><span class="eur-pill heavy">1.000</span></td><td class="col-dte">500</td><td class="col-pts">—</td></tr>
+          <tr class="row-mg"><td>Conduir VMP amb taxa d'<strong class="k">alcohol</strong> superior a la permesa (general 0,25 mg/L)</td><td class="col-art">20 RGC</td><td><span class="sev sev-mg">MG</span></td><td class="col-eur"><span class="eur-pill veur">Veure barem</span></td><td class="col-dte">—</td><td class="col-pts">—</td></tr>
+          <tr class="row-mg"><td><strong class="k">Negativa</strong> a sotmetre's a les proves d'alcohol/drogues conduint VMP</td><td class="col-art">21 RGC</td><td><span class="sev sev-mg">MG</span></td><td class="col-eur"><span class="eur-pill heavy">1.000</span></td><td class="col-dte">500</td><td class="col-pts">—</td></tr>
+        </tbody>
+      </table>
+      <div class="note tip"><span class="pin">💡</span><span>Per bicicletes i VMP <strong>no s'aplica pèrdua de punts</strong> (no necessiten permís). Si el conductor té permís de conduir, la sanció administrativa s'aplica però sense punts.</span></div>
+
+      <!-- ▸ Bloc 2 · CONDUCCIÓ AL CARRER · RGC ───────────────── -->
+      <div class="sec-head" style="margin-top:18px;"><span class="ico">🚦</span> Conducció al carrer (RGC)</div>
+      <table class="tbl">
+        <thead><tr><th>Concepte</th><th class="col-art">Art.</th><th class="col-n">N</th><th class="col-eur">€</th><th class="col-dte">DTE</th><th class="col-pts">PTS</th></tr></thead>
+        <tbody>
+          <tr class="row-g"><td>Conduir VMP utilitzant <strong class="k">cascos o auriculars</strong> connectats a aparells receptors/reproductors</td><td class="col-art">18.2 RGC</td><td><span class="sev sev-g">G</span></td><td class="col-eur"><span class="eur-pill">200</span></td><td class="col-dte">100</td><td class="col-pts">—</td></tr>
+          <tr class="row-g"><td>Conduir VMP utilitzant manualment <strong class="k">dispositius mòbils</strong> sense mans lliures</td><td class="col-art">18.1 RGC</td><td><span class="sev sev-g">G</span></td><td class="col-eur"><span class="eur-pill">200</span></td><td class="col-dte">100</td><td class="col-pts">—</td></tr>
+          <tr class="row-g"><td>Circular un VMP per <strong class="k">vorera</strong>, zona de vianants o espais peatonals (excepte ordenança municipal)</td><td class="col-art">121 RGC</td><td><span class="sev sev-g">G</span></td><td class="col-eur"><span class="eur-pill">200</span></td><td class="col-dte">100</td><td class="col-pts">—</td></tr>
+          <tr class="row-g"><td>Circular un VMP per <strong class="k">autopista o autovia</strong> (prohibit)</td><td class="col-art">35 LSV</td><td><span class="sev sev-g">G</span></td><td class="col-eur"><span class="eur-pill">200</span></td><td class="col-dte">100</td><td class="col-pts">—</td></tr>
+          <tr class="row-g"><td>Transportar <strong class="k">passatgers</strong> en un VMP no dissenyat per a això (1 sola plaça)</td><td class="col-art">9 RGC</td><td><span class="sev sev-g">G</span></td><td class="col-eur"><span class="eur-pill">200</span></td><td class="col-dte">100</td><td class="col-pts">—</td></tr>
+          <tr class="row-g"><td>No utilitzar <strong class="k">casc</strong> de protecció (segons ordenança municipal · ex.: BCN obligatori)</td><td class="col-art">118 RGC</td><td><span class="sev sev-g">G</span></td><td class="col-eur"><span class="eur-pill">200</span></td><td class="col-dte">100</td><td class="col-pts">—</td></tr>
+          <tr class="row-l"><td>Circular un VMP <strong class="k">sense enllumenat</strong> en condicions de baixa visibilitat (de nit, fums, etc.)</td><td class="col-art">98 RGC</td><td><span class="sev sev-l">L</span></td><td class="col-eur"><span class="eur-pill">80</span></td><td class="col-dte">40</td><td class="col-pts">—</td></tr>
+          <tr class="row-g"><td>Circular un VMP <strong class="k">a més de la velocitat per disseny</strong> (manipulació) — passa a ciclomotor</td><td class="col-art">4 LSV</td><td><span class="sev sev-mg">MG</span></td><td class="col-eur"><span class="eur-pill heavy">500</span></td><td class="col-dte">250</td><td class="col-pts">—</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ▸ Bloc 3 · REGISTRE I REQUISITS TÈCNICS · RGV · NOU ── -->
+      <div class="sec-head" style="margin-top:18px;"><span class="ico">🆕</span> Registre Nacional i Annex XXI · <strong>NOU · Com. 6/2026 SCT</strong></div>
+      <table class="tbl">
+        <thead><tr><th>Concepte</th><th class="col-art">Art.</th><th class="col-n">N</th><th class="col-eur">€</th><th class="col-dte">DTE</th><th class="col-pts">PTS</th></tr></thead>
+        <tbody>
+          <tr class="row-l"><td>No disposar i exhibir en un VMP l'<strong class="k">etiqueta identificativa</strong> (M0000BBB o Z0000BBB) o la <strong class="k">placa de marcatge</strong></td><td class="col-art">22 RGV</td><td><span class="sev sev-l">L</span></td><td class="col-eur"><span class="eur-pill">80</span></td><td class="col-dte">40</td><td class="col-pts">—</td></tr>
+          <tr class="row-l"><td>No <strong class="k">inscriure</strong> un VMP al <strong class="k">Registre Nacional de Vehicles</strong> (DGT)</td><td class="col-art">22 RGV</td><td><span class="sev sev-l">L</span></td><td class="col-eur"><span class="eur-pill">100</span></td><td class="col-dte">50</td><td class="col-pts">—</td></tr>
+          <tr class="row-mg"><td>No complir <strong class="k">Annex XXI RGV</strong> en aspectes que afecten <strong class="k">greument la seguretat viària</strong> <em>(manipulació velocitat, modificació estructural)</em></td><td class="col-art">22 RGV</td><td><span class="sev sev-mg">MG</span></td><td class="col-eur"><span class="eur-pill heavy">500</span></td><td class="col-dte">250</td><td class="col-pts">—</td></tr>
+          <tr class="row-g"><td>No complir <strong class="k">Annex XXI RGV</strong> <em>(sistema d'il·luminació, rodes, etc.)</em></td><td class="col-art">22 RGV</td><td><span class="sev sev-g">G</span></td><td class="col-eur"><span class="eur-pill">200</span></td><td class="col-dte">100</td><td class="col-pts">—</td></tr>
+          <tr class="row-l"><td>No complir <strong class="k">Annex XXI RGV</strong> <em>(dispositiu sonor, cavallet, etc.)</em></td><td class="col-art">22 RGV</td><td><span class="sev sev-l">L</span></td><td class="col-eur"><span class="eur-pill">80</span></td><td class="col-dte">40</td><td class="col-pts">—</td></tr>
+          <tr class="row-g"><td>Circular un VMP <strong class="k">sense certificat de circulació</strong> (només VMP comercialitzats des 22/01/2024)</td><td class="col-art">Manual DGT</td><td><span class="sev sev-g">G</span></td><td class="col-eur"><span class="eur-pill">200</span></td><td class="col-dte">100</td><td class="col-pts">—</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><span class="pin">📌</span><span>Totes amb base normativa <strong>art. 22 RGV</strong> i <strong>50% descompte</strong> per pagament anticipat. Vigor: <strong>18/05/2026</strong>.</span></div>
+
+      <!-- ▸ Bloc 4 · ASSEGURANÇA · NOU 2026 ─────────────────── -->
+      <div class="sec-head" style="margin-top:18px;"><span class="ico">🛡️</span> Assegurança obligatòria (AOV / SOA) · <strong>actualitzat 2026</strong></div>
+      <table class="tbl">
+        <thead><tr><th>Concepte</th><th class="col-art">Art.</th><th class="col-n">N</th><th class="col-eur">€</th><th class="col-dte">DTE</th><th class="col-pts">PTS</th></tr></thead>
+        <tbody>
+          <tr class="row-mg"><td>Circular amb un <strong class="k">VPL certificat i inscrit</strong> sense AOV vigent <span class="sev sev-l" style="margin-left:6px; font-size:10px;">NOU 2026</span></td><td class="col-art">2.1 RDL 8/2004 · DA 1a Llei 5/2025</td><td><span class="sev sev-mg">MG</span></td><td class="col-eur"><span class="eur-pill heavy">300</span></td><td class="col-dte">150</td><td class="col-pts">—</td></tr>
+          <tr class="row-mg"><td>Circular amb un <strong class="k">VMP considerat vehicle a motor</strong> (per MOM al RNV) sense AOV <span class="sev sev-mg" style="margin-left:6px; font-size:10px;">CRÍTIC</span></td><td class="col-art">2.1 Llei RC i Asseg.</td><td><span class="sev sev-mg">MG</span></td><td class="col-eur"><span class="eur-pill heavy">800</span></td><td class="col-dte">400</td><td class="col-pts">—</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><span class="pin">📌</span><span><strong>Modificació Com. 6/2026:</strong> la sanció per VPL sense AOV passa de <s>350 €</s> a <strong>300 €</strong> (150 € DTE) per alinear-se amb la DGT.</span></div>
+      <div class="note tip"><span class="pin">💡</span><span>Si el VMP <strong>no està inscrit al RNV</strong>: l'agent ha d'indicar <strong>obligatòriament el pes (MOM)</strong> a la butlleta — permet determinar si és VMP a motor (800 €) o VPL (300 €).</span></div>
+
+      <!-- ▸ Bloc 5 · CONCEPTES CLAU ─────────────────────────── -->
+      <div class="sec-head" style="margin-top:18px;"><span class="ico">🧠</span> Conceptes clau · per identificar correctament</div>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 8px;">
+        <div style="background:var(--white); border:1px solid var(--line); border-radius:12px; padding:14px; border-left:3px solid #C0392B;">
+          <div style="font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:700; letter-spacing:1px; color:#C0392B; text-transform:uppercase;">VMP "vehicle a motor"</div>
+          <p style="font-size:13.5px; color:var(--text); margin:6px 0 0;">Per la <strong>MOM</strong> elevada al Registre. <strong>Sempre obligat a AOV</strong>. Sanció sense: <strong>800 €</strong>.</p>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--line); border-radius:12px; padding:14px; border-left:3px solid #E89A1C;">
+          <div style="font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:700; letter-spacing:1px; color:#E89A1C; text-transform:uppercase;">VPL · Vehicle Personal Lleuger</div>
+          <p style="font-size:13.5px; color:var(--text); margin:6px 0 0;">Obligat a AOV <strong>només si</strong> certificat <em>I</em> inscrit al RNV. Sanció sense: <strong>300 €</strong> (150 € DTE).</p>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--line); border-radius:12px; padding:14px; border-left:3px solid #2F6BD8;">
+          <div style="font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:700; letter-spacing:1px; color:#2F6BD8; text-transform:uppercase;">Etiqueta M · CERTIFICAT</div>
+          <p style="font-size:13.5px; color:var(--text); margin:6px 0 0;">VMP comercialitzat <strong>des del 22/01/2024</strong>. Placa de marcatge obligatòria. Sense caducitat.</p>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--line); border-radius:12px; padding:14px; border-left:3px solid #9747D6;">
+          <div style="font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:700; letter-spacing:1px; color:#9747D6; text-transform:uppercase;">Etiqueta Z · TRANSITORI</div>
+          <p style="font-size:13.5px; color:var(--text); margin:6px 0 0;">VMP <strong>no certificat</strong> (anterior 22/01/2024). NO placa de marcatge. <strong>Caducitat 22/01/2027</strong>.</p>
+        </div>
+      </div>
+
+      <!-- ▸ Bloc 6 · OPERATIVA · BUTLLETÍ ───────────────────── -->
+      <div class="sec-head" style="margin-top:18px;"><span class="ico">📝</span> Operativa · què consignar a la butlleta</div>
+      <table class="tbl">
+        <thead><tr><th style="width:60px;">Cas</th><th>Què consignar</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1</strong></td><td>VMP <strong>amb etiqueta</strong> (M0000BBB o Z0000BBB) → consignar el <strong>número d'identificació</strong></td></tr>
+          <tr><td><strong>2</strong></td><td>VMP <strong>sense etiqueta però amb placa</strong> de marcatge → <strong>núm. sèrie</strong> + <strong>núm. certificat</strong></td></tr>
+          <tr><td><strong>3</strong></td><td>VMP <strong>sense cap número</strong> d'identificació → <strong>pes, velocitat màx., marca, model</strong> + <strong>fotografia</strong></td></tr>
+          <tr style="background:rgba(232,154,28,0.10);"><td><strong>⚠️</strong></td><td>Si el VMP <strong>NO està inscrit al RNV</strong> → indicar <strong>OBLIGATÒRIAMENT el pes (MOM)</strong> a la butlleta</td></tr>
+          <tr style="background:rgba(232,154,28,0.10);"><td><strong>⚠️</strong></td><td>Si el conductor és <strong>menor d'edat</strong> → fer constar dades del pare/mare, tutor o guardador (art. 82 LSV — responen solidàriament)</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><span class="pin">🚫</span><span><strong>Concurrència — NO tramitar denúncies alhora:</strong><br>
+        • VMP comercialitzats des 22/01/2024: NO denunciar a la vegada per "no tenir certificat" + "no estar inscrit" al RNV.<br>
+        • NO denunciar alhora per "sense placa de marcatge" si no té certificat, ni per "sense etiqueta" si no està inscrit.</span></div>
     </div>
   </section>
 
