@@ -20,6 +20,7 @@ import mobil from '../data/trafico-checklists/mobil-cinturo-casc.json';
 import tintats from '../data/trafico-checklists/tintats-llums.json';
 import velocitat from '../data/trafico-checklists/velocitat.json';
 import vehicleAbandonat from '../data/trafico-checklists/vehicle-abandonat.json';
+import vmpVpl from '../data/trafico-checklists/vmp-vpl-identificacio.json';
 
 export type NomEntry = {
   /** Codi intern de la llei (lsv, rgc, rgcond, rgv, seg, cp). */
@@ -46,6 +47,7 @@ const SOURCES: { id: string; data: unknown }[] = [
   { id: 'tintats', data: tintats },
   { id: 'velocitat', data: velocitat },
   { id: 'vehicle-abandonat', data: vehicleAbandonat },
+  { id: 'vmp-vpl', data: vmpVpl },
 ];
 
 // "Art. 76.G TRLSV" → [{law: 'lsv', article: '76.g'}]
