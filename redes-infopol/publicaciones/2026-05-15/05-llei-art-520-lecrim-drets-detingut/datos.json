@@ -1,0 +1,27 @@
+{
+  "tipo_plantilla": "1 - Llei en 60 segons",
+  "archivo_plantilla": "Plantilla Resum de Llei.html",
+  "rama_juridica": "Procesal",
+  "color_rama_hex": "#556B2F",
+  "id": "lecrim-520",
+  "icon": "shield",
+  "lawShort": "LECrim · Art. 520",
+  "lawName": "Llei d'Enjudiciament Criminal — drets del detingut",
+  "bandLabel": "LECRIM · ART. 520 · PROCESAL",
+  "article": "520",
+  "articleNice": "Article 520 LECrim",
+  "headline": "Drets del detingut: la lectura obligatòria",
+  "quote": "Tota persona detinguda o presa serà informada, de manera que li sigui comprensible, dels fets que se li atribueixen i de les raons motivadores de la seva privació de llibertat, així com dels drets que li assisteixen.",
+  "quoteRef": "Art. 520.2 LECrim",
+  "exampleTitle": "Detenció per delicte de furt: cal informar al detingut de tots els seus drets abans de qualsevol declaració.",
+  "bullets": [
+    "Dret a guardar silenci i no declarar contra si.",
+    "Dret a designar advocat (d'ofici si no en té).",
+    "Dret a ser reconegut pel metge forense."
+  ],
+  "remember": {
+    "pre": "Lectura de drets ",
+    "hi": "ABANS de qualsevol declaració",
+    "post": ", sense excepcions."
+  }
+}

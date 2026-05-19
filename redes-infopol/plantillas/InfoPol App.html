@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>InfoPol — App Mobile Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #f0eee9; font-family: 'Manrope', system-ui, sans-serif; }
+  body { -webkit-font-smoothing: antialiased; }
+  .no-scroll::-webkit-scrollbar { display: none; }
+  .no-scroll { scrollbar-width: none; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="tokens.jsx"></script>
+<script type="text/babel" src="shared.jsx"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="screens-landing.jsx"></script>
+<script type="text/babel" src="screens-operativa.jsx"></script>
+<script type="text/babel" src="screens-academia.jsx"></script>
+
+<script type="text/babel">
+  const PHONE_W = 320, PHONE_H = 660;
+
+  function Frame({ tabActive, tabMode, children }) {
+    return (
+      <window.Phone w={PHONE_W} h={PHONE_H}>
+        {children}
+        {tabMode === 'op' ? (
+          <window.TabBar
+            mode="operativa"
+            active={tabActive}
+            tabs={[
+              { id: 'home', label: 'Inici', icon: 'home' },
+              { id: 'leyes', label: 'Lleis', icon: 'scale' },
+              { id: 'protocol', label: 'Protocols', icon: 'route' },
+              { id: 'mapa', label: 'Mapa', icon: 'map' },
+              { id: 'me', label: 'Tu', icon: 'user' },
+            ]}
+          />
+        ) : tabMode === 'ac' ? (
+          <window.TabBar
+            mode="academia"
+            active={tabActive}
+            tabs={[
+              { id: 'home', label: 'Pla', icon: 'home' },
+              { id: 'temari', label: 'Temari', icon: 'book' },
+              { id: 'tests', label: 'Tests', icon: 'check' },
+              { id: 'stats', label: 'Stats', icon: 'chart' },
+              { id: 'me', label: 'Tu', icon: 'user' },
+            ]}
+          />
+        ) : null}
+        <window.HomeIndicator />
+      </window.Phone>
+    );
+  }
+
+  function App() {
+    const T = window.TOKENS;
+    return (
+      <window.DesignCanvas>
+        <window.DCSection id="intro" title="InfoPol · App mobile" subtitle="Mode operativa (per al policia en actiu) + mode acadèmia (oposició a Mossos). Concepte original inspirat en l'estructura informativa de infopol.app.">
+          <window.DCArtboard id="landing" label="Landing pública" width={PHONE_W} height={PHONE_H}>
+            <Frame><window.ScreenLanding /></Frame>
+          </window.DCArtboard>
+          <window.DCArtboard id="onb" label="Onboarding · selector de mode" width={PHONE_W} height={PHONE_H}>
+            <Frame><window.ScreenOnboarding /></Frame>
+          </window.DCArtboard>
+        </window.DCSection>
+
+        <window.DCSection id="op" title="Mode Operativa" subtitle="Per al policia en actiu. Cercador d'infraccions, articles, protocols pas a pas, mapa.">
+          <window.DCArtboard id="op-home" label="Inici · Operativa" width={PHONE_W} height={PHONE_H}>
+            <Frame tabMode="op" tabActive="home"><window.ScreenOperativaHome /></Frame>
+          </window.DCArtboard>
+          <window.DCArtboard id="op-infraccions" label="Cercador d'infraccions" width={PHONE_W} height={PHONE_H}>
+            <Frame tabMode="op" tabActive="leyes"><window.ScreenInfraccions /></Frame>
+          </window.DCArtboard>
+          <window.DCArtboard id="op-fitxa" label="Fitxa d'infracció" width={PHONE_W} height={PHONE_H}>
+            <Frame tabMode="op" tabActive="leyes"><window.ScreenFitxa /></Frame>
+          </window.DCArtboard>
+          <window.DCArtboard id="op-protocol" label="Protocol pas a pas ★" width={PHONE_W} height={PHONE_H}>
+            <Frame tabMode="op" tabActive="protocol"><window.ScreenProtocol /></Frame>
+          </window.DCArtboard>
+          <window.DCArtboard id="op-mapa" label="Mapa d'incidències" width={PHONE_W} height={PHONE_H}>
+            <Frame tabMode="op" tabActive="mapa"><window.ScreenMapa /></Frame>
+          </window.DCArtboard>
+        </window.DCSection>
+
+        <window.DCSection id="ac" title="Mode Acadèmia" subtitle="Oposicions a Mossos d'Esquadra. Gamificat (estil Duolingo) — pla diari, tests, flashcards, físiques, rànquing.">
+          <window.DCArtboard id="ac-home" label="Pla diari · Dashboard" width={PHONE_W} height={PHONE_H}>
+            <Frame tabMode="ac" tabActive="home"><window.ScreenAcademiaHome /></Frame>
+          </window.DCArtboard>
+          <window.DCArtboard id="ac-temari" label="Temari · Camí d'aprenentatge" width={PHONE_W} height={PHONE_H}>
+            <Frame tabMode="ac" tabActive="temari"><window.ScreenTemari /></Frame>
+          </window.DCArtboard>
+          <window.DCArtboard id="ac-test" label="Test cronometrat" width={PHONE_W} height={PHONE_H}>
+            <Frame tabMode="ac" tabActive="tests"><window.ScreenTest /></Frame>
+          </window.DCArtboard>
+          <window.DCArtboard id="ac-flash" label="Flashcards (repàs espaiat)" width={PHONE_W} height={PHONE_H}>
+            <Frame tabMode="ac" tabActive="tests"><window.ScreenFlashcards /></Frame>
+          </window.DCArtboard>
+          <window.DCArtboard id="ac-stats" label="Estadístiques" width={PHONE_W} height={PHONE_H}>
+            <Frame tabMode="ac" tabActive="stats"><window.ScreenStats /></Frame>
+          </window.DCArtboard>
+          <window.DCArtboard id="ac-fisic" label="Físiques · Calculadora" width={PHONE_W} height={PHONE_H}>
+            <Frame tabMode="ac" tabActive="stats"><window.ScreenFisiques /></Frame>
+          </window.DCArtboard>
+        </window.DCSection>
+
+        <window.DCSection id="me" title="Compartit" subtitle="Perfil únic per als dos modes — agent en actiu o opositor.">
+          <window.DCArtboard id="profile" label="Perfil" width={PHONE_W} height={PHONE_H}>
+            <Frame tabMode="op" tabActive="me"><window.ScreenPerfil /></Frame>
+          </window.DCArtboard>
+        </window.DCSection>
+      </window.DesignCanvas>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

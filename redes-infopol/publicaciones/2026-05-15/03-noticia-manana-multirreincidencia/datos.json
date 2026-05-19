@@ -1,0 +1,18 @@
+{
+  "tipo_plantilla": "2 - Actualitat policial",
+  "archivo_plantilla": "Plantilla Actualitat Policial.html",
+  "tipologia": "Judicial",
+  "color_banda": "#6A4C93",
+  "icon_banda": "⚖️",
+  "fecha": "2026-05-15",
+  "fecha_visual": "15 MAIG · JUDICIAL",
+  "titular_corto": "LO 1/2026 Multireincidència",
+  "titular_largo": "MULTIREINCIDÈNCIA · 1 MES EN VIGOR",
+  "bullets": [
+    "Agravat per furt de mòbils i electrònics",
+    "Entitats locals: legitimació per acció penal",
+    "Cautelars més fortes per a reincidents"
+  ],
+  "font": "BOE · Iberley · Confilegal",
+  "url_font": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-7966"
+}

@@ -1,0 +1,218 @@
+#!/usr/bin/env python3
+"""
+render_pillow.py - Renderizador 100% Python (sin navegador)
+
+Genera imagenes PNG 1080x1080 para Instagram/TikTok directamente con Pillow.
+
+Tipos soportados:
+  - actualitat  : single post (1 PNG)
+  - llei        : carrusel 4 slides (4 PNGs: slide-1.png ... slide-4.png)
+
+Uso:
+    python3 render_pillow.py --tipo actualitat --datos paquete/datos.json --output paquete/imagen.png
+    python3 render_pillow.py --tipo llei --datos paquete/datos.json --output paquete/slide.png
+"""
+
+import argparse
+import json
+from pathlib import Path
+
+from PIL import Image, ImageDraw, ImageFont
+
+
+# === Tokens ===
+INK = (19, 19, 26)
+INK_SOFT = (58, 58, 69)
+WHITE = (255, 255, 255)
+YELLOW = (240, 180, 0)
+YELLOW_SOFT = (255, 233, 121)
+AZUL_MARINO = (19, 49, 92)
+AZUL_MEDIO = (40, 80, 140)
+PAPER = (246, 244, 239)
+
+# Fuentes Linux
+FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+FONT_REG = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+FONT_OBLIQUE = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Oblique.ttf"
+
+SIZE = 1080
+
+
+def font(path, sz):
+    return ImageFont.truetype(path, sz)
+
+
+def text_wh(draw, text, fnt):
+    bbox = draw.textbbox((0, 0), text, font=fnt)
+    return bbox[2] - bbox[0], bbox[3] - bbox[1]
+
+
+def wrap_text(text, font_obj, max_width, draw):
+    words = text.split()
+    lines = []
+    current = ""
+    for w in words:
+        test = (current + " " + w).strip()
+        bw, _ = text_wh(draw, test, font_obj)
+        if bw <= max_width:
+            current = test
+        else:
+            if current:
+                lines.append(current)
+            current = w
+    if current:
+        lines.append(current)
+    return lines
+
+
+def hex_to_rgb(hex_str):
+    h = hex_str.lstrip("#")
+    return tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
+
+
+def draw_banda_lateral(img, color, ancho=56):
+    """Banda lateral izquierda con color de rama."""
+    draw = ImageDraw.Draw(img)
+    draw.rectangle([0, 0, ancho, SIZE], fill=color)
+    return draw
+
+
+def draw_footer_marca(draw, slide_num, total_slides, eyebrow="EN 60 SEGONS"):
+    """Footer 72px con iP + paginador."""
+    footer_top = SIZE - 72
+    # Logo iP a la izquierda
+    f_logo = font(FONT_BOLD, 28)
+    draw.text((80, footer_top + 22), "iP InfoPol", fill=WHITE, font=f_logo)
+    # Eyebrow en el centro
+    f_eye = font(FONT_BOLD, 18)
+    bw, _ = text_wh(draw, eyebrow, f_eye)
+    draw.text(((SIZE - bw) // 2, footer_top + 27), eyebrow,
+              fill=(200, 200, 210), font=f_eye)
+    # Paginador
+    pag = f"{slide_num}/{total_slides}"
+    f_pag = font(FONT_BOLD, 22)
+    bw, _ = text_wh(draw, pag, f_pag)
+    draw.text((SIZE - 60 - bw, footer_top + 25), pag, fill=WHITE, font=f_pag)
+
+
+# ============================================
+# RENDER: ACTUALITAT (single post)
+# ============================================
+def render_actualitat(datos, output):
+    img = Image.new("RGB", (SIZE, SIZE), AZUL_MARINO)
+    draw = ImageDraw.Draw(img)
+
+    color_banda = datos.get("color_banda", "#13315C")
+    cb = hex_to_rgb(color_banda)
+    icon = datos.get("icon_banda", "info")
+    fecha_visual = datos.get("fecha_visual", "ACTUALITAT").upper()
+    titular = datos.get("titular_largo") or datos.get("titular_corto", "")
+    bullets = datos.get("bullets", [])
+    font_credit = datos.get("font", "")
+
+    BANDA_H = 90
+    draw.rectangle([0, 0, SIZE, BANDA_H], fill=cb)
+    f_banda = font(FONT_BOLD, 28)
+    draw.text((40, 30), f"●  {fecha_visual}", fill=WHITE, font=f_banda)
+    f_logo = font(FONT_BOLD, 36)
+    draw.text((SIZE - 70, 26), "i", fill=WHITE, font=f_logo)
+    draw.ellipse([SIZE - 80, 22, SIZE - 22, 80], outline=WHITE, width=3)
+
+    BLOQUE_TOP = BANDA_H
+    TERCIO_INF_TOP = 660
+    BLOQUE_H = TERCIO_INF_TOP - BLOQUE_TOP
+    for y in range(BLOQUE_TOP, TERCIO_INF_TOP):
+        t = (y - BLOQUE_TOP) / max(1, BLOQUE_H)
+        r = int(40 + (15 - 40) * t)
+        g = int(80 + (35 - 80) * t)
+        b = int(140 + (70 - 140) * t)
+        draw.line([(0, y), (SIZE, y)], fill=(r, g, b))
+
+    cx, cy = SIZE // 2, BLOQUE_TOP + BLOQUE_H // 2
+    for radio, alpha in [(280, 30), (220, 60), (160, 110), (100, 180)]:
+        overlay = Image.new("RGBA", (SIZE, SIZE), (0, 0, 0, 0))
+        od = ImageDraw.Draw(overlay)
+        od.ellipse([cx - radio, cy - radio, cx + radio, cy + radio],
+                   fill=cb + (alpha,))
+        img = Image.alpha_composite(img.convert("RGBA"), overlay).convert("RGB")
+        draw = ImageDraw.Draw(img)
+
+    icon_map = {"!": "!", "i": "i", "$": "$"}
+    # Forzar caracteres ASCII en lugar de emoji
+    icon_chars = {
+        "Urgent": "!",
+        "Informatiu": "i",
+        "Judicial": "§",
+        "Internacional": "@",
+        "Sindical": "★",
+    }
+    tipologia = datos.get("tipologia", "Informatiu")
+    icon_char = icon_chars.get(tipologia, "i")
+    f_big = font(FONT_BOLD, 200)
+    bw, bh = text_wh(draw, icon_char, f_big)
+    draw.text((cx - bw // 2, cy - bh // 2 - 30), icon_char, fill=WHITE, font=f_big)
+
+    f_tipo = font(FONT_BOLD, 32)
+    bw, bh = text_wh(draw, tipologia.upper(), f_tipo)
+    pad = 18
+    rx, ry = cx - bw // 2 - pad, cy + 120
+    draw.rounded_rectangle(
+        [rx, ry, rx + bw + pad * 2, ry + bh + pad],
+        fill=cb, radius=8
+    )
+    draw.text((rx + pad, ry + pad // 2), tipologia.upper(), fill=WHITE, font=f_tipo)
+
+    draw.rectangle([0, TERCIO_INF_TOP, SIZE, SIZE], fill=AZUL_MARINO)
+
+    titular_upper = titular.upper()
+    titular_size = 56
+    while titular_size >= 36:
+        f_titular = font(FONT_BOLD, titular_size)
+        lines = wrap_text(titular_upper, f_titular, SIZE - 100, draw)
+        if len(lines) <= 3:
+            break
+        titular_size -= 4
+    y = TERCIO_INF_TOP + 30
+    line_h = int(titular_size * 1.1)
+    for line in lines[:3]:
+        draw.text((50, y), line, fill=WHITE, font=f_titular)
+        y += line_h
+
+    y += 10
+    draw.rectangle([50, y, 200, y + 6], fill=YELLOW)
+    y += 30
+
+    f_bullet = font(FONT_REG, 26)
+    for b in bullets[:3]:
+        bullet_lines = wrap_text(b, f_bullet, SIZE - 130, draw)
+        for i, bline in enumerate(bullet_lines):
+            prefix = "• " if i == 0 else "  "
+            draw.text((60, y), prefix + bline, fill=WHITE, font=f_bullet)
+            y += 36
+
+    f_footer = font(FONT_REG, 22)
+    footer_y = SIZE - 50
+    if font_credit:
+        draw.text((50, footer_y), f"Font: {font_credit}",
+                  fill=(200, 200, 220), font=f_footer)
+    handle = "@infopol.app"
+    bw, _ = text_wh(draw, handle, f_footer)
+    draw.text((SIZE - 50 - bw, footer_y), handle,
+              fill=(200, 200, 220), font=f_footer)
+
+    img.save(output, "PNG", optimize=True)
+    print(f"OK: {output}")
+
+
+# ============================================
+# RENDER: LLEI EN 60 SEGONS (carrusel 4 slides)
+# ============================================
+def render_llei_slide_1(datos, color_rama, output):
+    """Slide 1 - Portada. Fondo azul marino, num articulo gigante."""
+    img = Image.new("RGB", (SIZE, SIZE), AZUL_MARINO)
+    draw = ImageDraw.Draw(img)
+    draw_banda_lateral(img, color_rama, ancho=56)
+    draw = ImageDraw.Draw(img)
+
+    article = datos.get("article", "X")
+    band_l

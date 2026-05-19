@@ -1,0 +1,18 @@
+{
+  "tipo_plantilla": "2 - Actualitat policial",
+  "archivo_plantilla": "Plantilla Actualitat Policial.html",
+  "tipologia": "Urgent",
+  "color_banda": "#D62828",
+  "icon_banda": "⚠️",
+  "fecha": "2026-05-15",
+  "fecha_visual": "15 MAIG · ACTUALITAT",
+  "titular_corto": "Macrooperatiu Pla Kanpai a L'Hospitalet",
+  "titular_largo": "Macrooperatiu Pla Kanpai · 4 detinguts",
+  "bullets": [
+    "Mossos + Policia Nacional + Guàrdia Urbana coordinats",
+    "Operatiu a Santa Eulàlia, La Florida i Collblanc",
+    "Marc: LO 1/2026 multireincidència"
+  ],
+  "font": "Metrópoli Abierta · El Español",
+  "url_font": "https://metropoliabierta.elespanol.com/gran-barcelona/20260515/golpe-multirreincidencia-lhospitalet-detenidos-macrooperativo-policial-metro/1003742761649_0.html"
+}

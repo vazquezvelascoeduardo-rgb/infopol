@@ -73,11 +73,13 @@ export const NOTICIES: Noticia[] = [
 
   {
     slug: 'mai2026-comunicat-6-2026-vmp-vpl',
-    title: 'Comunicat 6/2026 SCT — 5 noves infraccions per a VMP i registre de VPL',
-    summary: "El Servei Català de Trànsit afegeix 5 noves opcions normatives al catàleg de trànsit. Distingeix VMP a motor (800 €) i VPL (300 €) sense AOV. Registre Nacional obligatori. Vigor des del 18/05/2026.",
+    title: 'Actualització VMP — Comunicat 6/2026 SCT amb 5 noves infraccions',
+    summary: "La fitxa de VMP s'ha actualitzat amb el Comunicat 6/2026 del Servei Català de Trànsit: 5 noves infraccions al catàleg, distinció VMP a motor (800 €) vs VPL (300 €) sense AOV, i règim transitori M/Z. Vigor des del 18/05/2026.",
     body: `**Director:** Ramon Lamiel i Villaró · **Signat:** 15/05/2026 · **Entrada en vigor:** 18/05/2026
 
-El nou comunicat del Servei Català de Trànsit incorpora **5 noves infraccions** al catàleg vinculades a la regulació dels **Vehicles de Mobilitat Personal (VMP)** i dels **Vehicles Personals Lleugers (VPL)**, després de l'entrada en vigor del **Reial decret 52/2026**, de 28 de gener, que regula el **Registre Nacional de Vehicles Personals Lleugers**.
+Hem actualitzat la **fitxa operativa del VMP** amb el contingut del **Comunicat 6/2026** del Servei Català de Trànsit, que incorpora **5 noves infraccions** al catàleg vinculades a la regulació dels **Vehicles de Mobilitat Personal (VMP)** i dels **Vehicles Personals Lleugers (VPL)**, després de l'entrada en vigor del **Reial decret 52/2026**, de 28 de gener, que regula el **Registre Nacional de Vehicles Personals Lleugers**.
+
+> 📄 **Tot el contingut nou està ja integrat a la fitxa VMP existent** (no és una llei separada). Pots accedir-hi des de l'enllaç de baix per veure-ho amb la resta del marc legal del VMP.
 
 ## ⭐ Les 5 noves infraccions
 
@@ -129,7 +131,7 @@ La diferenciació es fa per la **Massa en Ordre de Marxa (MOM)** que consta al R
     imageAlt: 'Patinet elèctric (VMP) circulant per ciutat',
     linkedTo: {
       moduleSlug: 'transit',
-      slug: 'comunicat-6-2026-vmp-vpl',
+      slug: 'vmp-esquema-operativo-policial',
     },
   },
 

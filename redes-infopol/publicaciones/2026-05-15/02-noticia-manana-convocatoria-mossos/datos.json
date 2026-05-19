@@ -1,0 +1,18 @@
+{
+  "tipo_plantilla": "2 - Actualitat policial",
+  "archivo_plantilla": "Plantilla Actualitat Policial.html",
+  "tipologia": "Informatiu",
+  "color_banda": "#13315C",
+  "icon_banda": "📰",
+  "fecha": "2026-05-15",
+  "fecha_visual": "15 MAIG · INFORMATIU",
+  "titular_corto": "Mossos 2026: 1.604 places",
+  "titular_largo": "CONVOCATÒRIA MOSSOS 2026 · 1.604 PLACES NOVES",
+  "bullets": [
+    "+17 places sobre 2025 (1.587)",
+    "Ràtio 9:1 — la millor del sector",
+    "Inscripció: 10 dies al DOGC (2T 2026)"
+  ],
+  "font": "Govern de Catalunya",
+  "url_font": "https://www.adams.es/noticias/oposiciones/convocatorias/convocatoria-mossos-2026/"
+}

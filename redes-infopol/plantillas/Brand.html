@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>InfoPol — Marca final</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { font-family: 'Manrope', system-ui, sans-serif; background: #f0eee9; color: #13131A; }
+  * { box-sizing: border-box; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="tokens.jsx" type="text/babel"></script>
+<script src="design-canvas.jsx" type="text/babel"></script>
+
+<script type="text/babel">
+// ────────────────────────────────────────────────────────────────────
+// InfoPol — Marca final (Shield-i + iP icon)
+// Versiones, tamaños y aplicaciones del par elegido.
+// ────────────────────────────────────────────────────────────────────
+
+const T = window.TOKENS;
+const TERRACOTA = T.cat.academia.solid;
+const BLUE      = T.cat.operativa.solid;
+const INK       = T.ink;
+const PAPER     = T.bg;
+
+// ─── MARK · Shield-i ────────────────────────────────────────────────
+function MarkShieldI({ size = 64, c1 = INK, c2 = TERRACOTA }) {
+  const s = size;
+  return (
+    <svg width={s} height={s} viewBox="0 0 64 64" fill="none">
+      <path d="M32 4 L56 12 V32 C56 46 45 56 32 60 C19 56 8 46 8 32 V12 Z" fill={c1} />
+      <circle cx="32" cy="22" r="4.2" fill={c2} />
+      <rect x="28.4" y="30" width="7.2" height="20" rx="3.6" fill={c2} />
+    </svg>
+  );
+}
+
+// ─── WORDMARK ───────────────────────────────────────────────────────
+function Wordmark({ size = 36, color = INK, accent = TERRACOTA }) {
+  return (
+    <span style={{
+      fontFamily: 'Manrope, system-ui, sans-serif',
+      fontWeight: 800, fontSize: size,
+      letterSpacing: -size * 0.025,
+      color, lineHeight: 1, whiteSpace: 'nowrap',
+      display: 'inline-flex', alignItems: 'baseline',
+    }}>
+      info<span style={{ color: accent }}>pol</span>
+    </span>
+  );
+}
+
+// ─── LOCKUP ─────────────────────────────────────────────────────────
+function Lockup({ size = 64, type = 36, gap = 14, color = INK, accent = TERRACOTA, markProps = {} }) {
+  return (
+    <div style={{ display: 'inline-flex', alignItems: 'center', gap }}>
+      <MarkShieldI size={size} {...markProps} />
+      <Wordmark size={type} color={color} accent={accent} />
+    </div>
+  );
+}
+
+// ─── APP ICON · iP ──────────────────────────────────────────────────
+function IconIP({ size = 180, bg = '#fff', ink = INK, accent = TERRACOTA }) {
+  const r = size * 0.22;
+  return (
+    <div style={{
+      width: size, height: size, borderRadius: r,
+      background: bg, position: 'relative', overflow: 'hidden',
+      display: 'grid', placeItems: 'center',
+      boxShadow: '0 1px 0 rgba(255,255,255,0.4) inset, 0 14px 30px rgba(19,19,26,0.18), 0 2px 6px rgba(19,19,26,0.10)',
+    }}>
+      <span style={{
+        fontFamily: 'Manrope', fontWeight: 900,
+        fontSize: size * 0.62, letterSpacing: -size * 0.02,
+        color: ink, lineHeight: 1,
+      }}>i<span style={{ color: accent }}>P</span></span>
+    </div>
+  );
+}
+
+function Caption({ tag, title, note }) {
+  return (
+    <div style={{ marginBottom: 14 }}>
+      <div className="mono" style={{
+        fontSize: 10, letterSpacing: 1.4, textTransform: 'uppercase',
+        color: 'rgba(60,50,40,0.55)', fontWeight: 600, marginBottom: 6,
+      }}>{tag}</div>
+      <div style={{ fontWeight: 800, fontSize: 16, color: INK, letterSpacing: -0.2 }}>{title}</div>
+      {note && <div style={{ fontSize: 12, color: 'rgba(60,50,40,0.65)', marginTop: 3 }}>{note}</div>}
+    </div>
+  );
+}
+
+const { DesignCanvas, DCSection, DCArtboard } = window;
+
+function App() {
+  return (
+    <DesignCanvas>
+
+      {/* SECCIÓN 1 — LOGO PRINCIPAL */}
+      <DCSection id="logo" title="Logo · Shield-i"
+                 subtitle="Marca principal de InfoPol. Escudo + 'i' de información en terracota.">
+
+        <DCArtboard id="primary" label="Lockup principal" width={520} height={320}>
+          <div style={{ background: '#fff', padding: 36, height: '100%', boxSizing: 'border-box',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Lockup size={84} type={52} gap={18} />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="dark" label="Sobre ink" width={520} height={320}>
+          <div style={{ background: INK, padding: 36, height: '100%', boxSizing: 'border-box',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Lockup size={84} type={52} gap={18}
+                    color="#fff" accent={TERRACOTA}
+                    markProps={{ c1: '#fff', c2: TERRACOTA }} />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="terracota" label="Sobre terracota" width={520} height={320}>
+          <div style={{ background: TERRACOTA, padding: 36, height: '100%', boxSizing: 'border-box',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Lockup size={84} type={52} gap={18}
+                    color="#fff" accent="#fff"
+                    markProps={{ c1: '#fff', c2: TERRACOTA }} />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="mark-only" label="Solo marca · escala" width={520} height={320}>
+          <div style={{ background: '#fff', padding: 28, height: '100%', boxSizing: 'border-box' }}>
+            <Caption tag="MARCA AISLADA" title="Funciona desde 16 px hasta cualquier tamaño" />
+            <div style={{ display: 'flex', alignItems: 'flex-end', gap: 28, marginTop: 18 }}>
+              {[96, 64, 40, 24, 16].map(n => (
+                <div key={n} style={{ textAlign: 'center' }}>
+                  <MarkShieldI size={n}/>
+                  <div className="mono" style={{ fontSize: 9, color:'rgba(60,50,40,0.55)', marginTop: 8 }}>{n}px</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="wordmark-scale" label="Wordmark · escala" width={520} height={320}>
+          <div style={{ background: '#fff', padding: 28, height: '100%', boxSizing: 'border-box',
+                        display: 'flex', flexDirection: 'column', gap: 18, justifyContent: 'center' }}>
+            <Wordmark size={56} />
+            <Wordmark size={36} />
+            <Wordmark size={22} />
+          </div>
+        </DCArtboard>
+      </DCSection>
+
+      {/* SECCIÓN 2 — APP ICON */}
+      <DCSection id="icon" title="App icon · iP"
+                 subtitle="Icono de aplicación. Wordmark cropped: 'i' en negro, 'P' en terracota.">
+
+        <DCArtboard id="hero" label="iP · paper" width={420} height={420}>
+          <div style={{ background: '#e8e5dd', height: '100%',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <IconIP size={240} />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="ramp" label="Rampa de tamaños" width={520} height={420}>
+          <div style={{ background: '#fff', padding: 28, height: '100%', boxSizing: 'border-box',
+                        display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 22 }}>
+            <Caption tag="ESCALA REAL"
+                     title="180 · 120 · 80 · 60 · 40 · 24 · 16 px"
+                     note="Legible en notch (24) y favicon (16). 'P' aguanta el peso." />
+            <div style={{ display: 'flex', alignItems: 'flex-end', gap: 18 }}>
+              {[180, 120, 80, 60, 40, 24, 16].map(n => (
+                <div key={n} style={{ textAlign: 'center' }}>
+                  <IconIP size={n}/>
+                  <div className="mono" style={{ fontSize: 9, color:'rgba(60,50,40,0.55)', marginTop: 8 }}>{n}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="alts" label="Variantes de fondo" width={520} height={420}>
+          <div style={{ background: '#fff', padding: 28, height: '100%', boxSizing: 'border-box' }}>
+            <Caption tag="VARIANTES" title="Mismo wordmark, distintos fondos" />
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, marginTop: 12 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                <IconIP size={120} bg="#fff" ink={INK} accent={TERRACOTA} />
+                <div className="mono" style={{ fontSize: 9, color:'rgba(60,50,40,0.55)' }}>paper · default</div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                <IconIP size={120} bg={INK} ink="#fff" accent={TERRACOTA} />
+                <div className="mono" style={{ fontSize: 9, color:'rgba(60,50,40,0.55)' }}>noche</div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                <IconIP size={120} bg={TERRACOTA} ink="#fff" accent="#fff" />
+                <div className="mono" style={{ fontSize: 9, color:'rgba(60,50,40,0.55)' }}>terracota</div>
+              </div>
+            </div>
+          </div>
+        </DCArtboard>
+      </DCSection>
+
+      {/* SECCIÓN 3 — APLICACIONES */}
+      <DCSection id="apps" title="Aplicaciones"
+                 subtitle="Cabecera, splash y springboard usando el sistema final.">
+
+        <DCArtboard id="header" label="Cabecera de app" width={520} height={260}>
+          <div style={{ height: '100%', background: '#fff', padding: 28, boxSizing: 'border-box',
+                        display: 'flex', flexDirection: 'column', gap: 18 }}>
+            <Caption tag="01 · TOPBAR" title="Cabecera clara" note="Lockup horizontal, 28 px de altura tipográfica." />
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                          padding: '14px 18px', borderRadius: 14,
+                          border: '1px solid rgba(19,19,26,0.08)' }}>
+              <Lockup size={32} type={20} gap={10} />
+              <span className="mono" style={{ fontSize: 11, color: 'rgba(60,50,40,0.6)' }}>cercar · perfil</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                          padding: '14px 18px', borderRadius: 14, background: INK, color: '#fff' }}>
+              <Lockup size={32} type={20} gap={10}
+                      color="#fff" accent={TERRACOTA}
+                      markProps={{ c1: '#fff', c2: TERRACOTA }} />
+              <span className="mono" style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>operativa</span>
+            </div>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="splash" label="Splash · arranque" width={300} height={580}>
+          <div style={{ height: '100%', background: TERRACOTA, position: 'relative',
+                        display: 'flex', flexDirection: 'column', alignItems: 'center',
+                        justifyContent: 'center', gap: 18, color: '#fff' }}>
+            <svg width="92" height="92" viewBox="0 0 64 64" fill="none">
+              <path d="M32 4 L56 12 V32 C56 46 45 56 32 60 C19 56 8 46 8 32 V12 Z" fill="#fff"/>
+              <circle cx="32" cy="22" r="4.2" fill={TERRACOTA}/>
+              <rect x="28.4" y="30" width="7.2" height="20" rx="3.6" fill={TERRACOTA}/>
+            </svg>
+            <Wordmark size={42} color="#fff" accent="#fff" />
+            <div className="mono" style={{ position: 'absolute', bottom: 28, fontSize: 10,
+                  letterSpacing: 1.4, textTransform: 'uppercase', opacity: 0.85 }}>
+              Mossos · Policia local · GC
+            </div>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="springboard" label="Springboard · iOS" width={340} height={580}>
+          <div style={{ height: '100%', padding: 22, boxSizing: 'border-box',
+                        background: 'linear-gradient(180deg, #eadfd1 0%, #d6c4ad 100%)',
+                        display: 'flex', flexDirection: 'column', gap: 20 }}>
+            <div className="mono" style={{ fontSize: 10, letterSpacing: 1.4, textTransform: 'uppercase',
+                  color: 'rgba(40,30,20,0.55)', fontWeight: 600 }}>iPhone · springboard</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+              {['#34c759','#007aff','#ff3b30','#ffcc00'].map((c,i)=>(
+                <div key={'n'+i} style={{ aspectRatio: '1', borderRadius: 14, background: c, opacity: 0.92 }}/>
+              ))}
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <IconIP size={62} />
+              </div>
+              {['#5856d6','#ff9500','#af52de'].map((c,i)=>(
+                <div key={'m'+i} style={{ aspectRatio: '1', borderRadius: 14, background: c, opacity: 0.92 }}/>
+              ))}
+              {['#5ac8fa','#ff2d55','#a2845e','#8e8e93'].map((c,i)=>(
+                <div key={'b'+i} style={{ aspectRatio: '1', borderRadius: 14, background: c, opacity: 0.92 }}/>
+              ))}
+            </div>
+            <div style={{ marginTop: 'auto', textAlign: 'center', fontSize: 11,
+                          fontWeight: 700, color: 'rgba(40,30,20,0.85)' }}>
+              InfoPol
+            </div>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="favicon" label="Pestaña navegador" width={420} height={180}>
+          <div style={{ background: '#fff', padding: 20, height: '100%', boxSizing: 'border-box' }}>
+            <Caption tag="04 · FAVICON" title="Pestaña Safari/Chrome a 16 px" />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8,
+                          background: '#f0eee9', borderRadius: 8, padding: '8px 12px',
+                          border: '1px solid rgba(19,19,26,0.08)' }}>
+              <IconIP size={16} />
+              <span style={{ fontSize: 13, color: INK, fontWeight: 600 }}>InfoPol — Acadèmia</span>
+              <span style={{ marginLeft: 'auto', color: 'rgba(60,50,40,0.4)', fontSize: 14 }}>×</span>
+            </div>
+          </div>
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

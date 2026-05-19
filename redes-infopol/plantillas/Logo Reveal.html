@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>InfoPol — Logo Reveal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #0a0a0a; }
+  body { font-family: 'Manrope', system-ui, sans-serif; }
+  * { box-sizing: border-box; }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <rect width="64" height="64" rx="14" fill="#FF7A1A"/>
+    <path d="M32 12 L50 18 V32 C50 42 42 50 32 53 C22 50 14 42 14 32 V18 Z" fill="#fff"/>
+    <circle cx="32" cy="26" r="3" fill="#FF7A1A"/>
+    <rect x="29.5" y="32" width="5" height="14" rx="2.5" fill="#FF7A1A"/>
+  </svg>
+</template>
+<div id="root" style="width:100%;height:100%;position:relative;"></div>
+
+<script src="animations.jsx" type="text/babel"></script>
+
+<script type="text/babel">
+// ────────────────────────────────────────────────────────────────────
+// InfoPol — Logo Reveal
+// 6 s · loop · solo marca
+//
+//   0.00–0.45  Sweep + escudo entra (escala con overshoot, desde abajo)
+//   0.45–0.85  Punto de la "i" cae con bounce
+//   0.65–1.05  Tronco de la "i" se "dibuja" (clip vertical)
+//   1.05–1.40  Pulso de aliento (subtle scale)
+//   1.40–2.30  Escudo se desplaza a la izquierda, wordmark se escribe
+//              "info" (negro) → "pol" (terracota) con cursor
+//   2.30–4.80  Hold con respiración + glow radial
+//   4.80–5.70  Fade out a paper
+//   5.70–6.00  Hold blanco antes de loop
+// ────────────────────────────────────────────────────────────────────
+
+const TERRACOTA = '#FF7A1A';
+const INK       = '#13131A';
+const PAPER     = '#F6F4EF';
+const FONT      = '"Manrope", system-ui, sans-serif';
+
+const W = 1920, H = 1080;
+
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp01 = (x) => Math.max(0, Math.min(1, x));
+
+// ── Mark — built piece by piece ────────────────────────────────────
+function ShieldI({ size = 520, shieldDraw = 1, dotScale = 1, stemDraw = 1, c1 = INK, c2 = TERRACOTA }) {
+  // shieldDraw: 0..1   scale-from-bottom + opacity
+  // dotScale:   0..1   pop-in
+  // stemDraw:   0..1   vertical clip reveal (top→bottom)
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" style={{ overflow: 'visible' }}>
+      <defs>
+        {/* clip-path that reveals stem vertically */}
+        <clipPath id="stemClip">
+          <rect x="28" y="30" width="8" height={20 * stemDraw}/>
+        </clipPath>
+      </defs>
+      {/* Shield body — scale-from-center for entry */}
+      <g style={{
+        transform: `scale(${shieldDraw})`,
+        transformOrigin: '32px 36px',
+        opacity: clamp01(shieldDraw / 0.4),
+      }}>
+        <path d="M32 4 L56 12 V32 C56 46 45 56 32 60 C19 56 8 46 8 32 V12 Z" fill={c1}/>
+      </g>
+      {/* Dot of the i */}
+      <g style={{
+        transform: `scale(${dotScale})`,
+        transformOrigin: '32px 22px',
+        opacity: clamp01(dotScale * 1.4),
+      }}>
+        <circle cx="32" cy="22" r="4.2" fill={c2}/>
+      </g>
+      {/* Stem of the i — clipped reveal */}
+      <g clipPath="url(#stemClip)">
+        <rect x="28.4" y="30" width="7.2" height="20" rx="3.6" fill={c2}/>
+      </g>
+    </svg>
+  );
+}
+
+// ── Sweep beam (light pass over shield) ───────────────────────────
+function Sweep({ progress }) {
+  // progress 0..1 — diagonal beam sweeps from left to right across stage center
+  if (progress <= 0 || progress >= 1) return null;
+  const x = lerp(-300, W + 300, progress);
+  const op = Math.sin(progress * Math.PI) * 0.85;
+  return (
+    <div style={{
+      position: 'absolute', top: 0, left: x, width: 260, height: H,
+      background: 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%)',
+      transform: 'skewX(-18deg)',
+      mixBlendMode: 'overlay',
+      opacity: op,
+      pointerEvents: 'none',
+    }}/>
+  );
+}
+
+// ── Background with radial accent that pulses with the build ──────
+function Background({ time }) {
+  // Glow grows once shield arrives, fades during exit
+  const reveal = clamp01((time - 0.2) / 0.8);
+  const fade   = clamp01((time - 4.8) / 0.9);
+  const glow   = 0.32 * reveal * (1 - fade);
+  return (
+    <>
+      <div style={{ position: 'absolute', inset: 0, background: PAPER }}/>
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: `radial-gradient(circle at 50% 52%, rgba(255,122,26,${glow}) 0%, rgba(255,122,26,0) 55%)`,
+        pointerEvents: 'none',
+      }}/>
+    </>
+  );
+}
+
+// ── Main scene ────────────────────────────────────────────────────
+function Scene() {
+  const time = window.useTime();
+  const E = window.Easing;
+
+  // Phase progress
+  const shieldT = clamp01(time / 0.45);
+  const shieldDraw = E.easeOutBack(shieldT);
+
+  const dotT = clamp01((time - 0.45) / 0.4);
+  const dotScale = E.easeOutBack(dotT);
+
+  const stemT = clamp01((time - 0.65) / 0.4);
+  const stemDraw = E.easeOutCubic(stemT);
+
+  // Subtle entry lift: mark rises from below
+  const entryT = clamp01(time / 0.5);
+  const entryLift = lerp(80, 0, E.easeOutCubic(entryT));
+
+  // Phase: lockup. Shield slides left, wordmark fades in.
+  const lockupT = clamp01((time - 1.4) / 0.6);
+  const lockupE = E.easeInOutCubic(lockupT);
+  const shieldX = lerp(0, -340, lockupE);
+  const shieldSc = lerp(1, 0.62, lockupE);
+
+  // Wordmark
+  const infoOp = clamp01((time - 1.65) / 0.3);
+  const infoY  = lerp(18, 0, E.easeOutCubic(infoOp));
+  const polOp  = clamp01((time - 1.95) / 0.32);
+  const polY   = lerp(18, 0, E.easeOutBack(polOp));
+  const polColorT = clamp01((time - 2.10) / 0.28);
+  const polColor = polColorT < 0.55 ? INK : TERRACOTA;
+
+  // Cursor blink while pol arrives
+  const showCursor = time > 1.95 && time < 2.45;
+  const cursorOn = Math.floor((time - 1.95) / 0.13) % 2 === 0;
+
+  // Tagline appears slightly later
+  const tagOp = clamp01((time - 2.6) / 0.5);
+  const tagY  = lerp(14, 0, E.easeOutCubic(tagOp));
+
+  // Breathing during hold (after lockup formed, before fade)
+  const breathPhase = clamp01((time - 2.4) / 0.5);
+  const breath = 1 + 0.012 * Math.sin((time - 2.4) * 2.2) * breathPhase;
+
+  // Final fade to paper
+  const fadeOut = clamp01((time - 4.85) / 0.9);
+  const veilOp = fadeOut;
+
+  // Sweep at start
+  const sweepT = clamp01((time - 0.05) / 0.55);
+
+  return (
+    <>
+      <Background time={time}/>
+
+      {/* Stage container — everything centered, breathes as a unit */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        transform: `scale(${breath})`, transformOrigin: 'center',
+      }}>
+        {/* Shield — translates left as wordmark joins */}
+        <div style={{
+          position: 'absolute',
+          left: '50%', top: '50%',
+          transform: `translate(calc(-50% + ${shieldX}px), calc(-50% + ${entryLift}px)) scale(${shieldSc})`,
+          willChange: 'transform',
+        }}>
+          <ShieldI size={520}
+                   shieldDraw={shieldDraw}
+                   dotScale={dotScale}
+                   stemDraw={stemDraw} />
+        </div>
+
+        {/* Wordmark — appears after lockup move starts */}
+        <div style={{
+          position: 'absolute',
+          left: '50%', top: '50%',
+          transform: 'translate(calc(-50% + 80px), -50%)',
+          fontFamily: FONT, fontWeight: 800, fontSize: 220,
+          letterSpacing: -6, lineHeight: 1, color: INK,
+          display: 'flex', alignItems: 'baseline',
+          whiteSpace: 'nowrap',
+        }}>
+          <span style={{ display: 'inline-block', opacity: infoOp,
+                         transform: `translateY(${infoY}px)` }}>info</span>
+          <span style={{
+            display: 'inline-block', opacity: polOp,
+            transform: `translateY(${polY}px)`,
+            color: polColor,
+          }}>pol</span>
+          {showCursor && (
+            <span style={{
+              display: 'inline-block', width: 10, height: 160,
+              background: TERRACOTA, marginLeft: 8,
+              opacity: cursorOn ? 1 : 0,
+            }}/>
+          )}
+        </div>
+
+        {/* Tagline */}
+        <div style={{
+          position: 'absolute',
+          left: '50%', bottom: 220,
+          transform: `translate(-50%, ${tagY}px)`,
+          opacity: tagOp,
+          fontFamily: FONT, fontWeight: 600, fontSize: 30,
+          color: 'rgba(19,19,26,0.55)',
+          letterSpacing: 8, textTransform: 'uppercase',
+        }}>
+          Acadèmia · Operativa · Tests
+        </div>
+      </div>
+
+      {/* Sweep light flash during entry */}
+      <Sweep progress={sweepT}/>
+
+      {/* End fade veil */}
+      {veilOp > 0 && (
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: PAPER, opacity: veilOp,
+          pointerEvents: 'none',
+        }}/>
+      )}
+    </>
+  );
+}
+
+const { Stage } = window;
+
+function App() {
+  return (
+    <Stage width={W} height={H} duration={6} background={PAPER} loop={true} autoplay={true}
+           persistKey="infopol-logo-reveal">
+      <Scene/>
+    </Stage>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

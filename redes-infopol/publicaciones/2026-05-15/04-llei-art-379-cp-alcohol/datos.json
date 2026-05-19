@@ -1,0 +1,27 @@
+{
+  "tipo_plantilla": "1 - Llei en 60 segons",
+  "archivo_plantilla": "Plantilla Resum de Llei.html",
+  "rama_juridica": "Penal / Trànsit",
+  "color_rama_hex": "#E76F51",
+  "id": "cp-379-2",
+  "icon": "beaker",
+  "lawShort": "CP · Art. 379.2",
+  "lawName": "Codi Penal — delictes contra la seguretat viària",
+  "bandLabel": "CODI PENAL · ART. 379.2",
+  "article": "379",
+  "articleNice": "Article 379.2",
+  "headline": "Conducció sota influència de l'alcohol",
+  "quote": "Serà castigat amb la pena de presó de tres a sis mesos o multa de sis a dotze mesos qui condueixi un vehicle amb taxa d'alcohol superior a 0,60 mg/l en aire espirat o 1,2 g/l en sang.",
+  "quoteRef": "Art. 379.2 CP",
+  "exampleTitle": "Conductor que dona 0,72 mg/l a l'etilòmetre evidencial després d'un control preventiu.",
+  "bullets": [
+    "Delicte contra la seguretat viària.",
+    "Presó 3-6 mesos o multa 6-12 mesos.",
+    "Privació del permís d'1 a 4 anys."
+  ],
+  "remember": {
+    "pre": "Per sobre de 0,60 mg/l ja és ",
+    "hi": "delicte penal",
+    "post": ", no només infracció."
+  }
+}

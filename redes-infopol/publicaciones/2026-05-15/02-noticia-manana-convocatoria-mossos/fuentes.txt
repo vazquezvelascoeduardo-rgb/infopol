@@ -1,0 +1,27 @@
+FUENTES — Convocatoria Mossos 2026
+
+Fuentes principales:
+- Adams (info convocatoria):
+  https://www.adams.es/noticias/oposiciones/convocatorias/convocatoria-mossos-2026/
+
+- OpoCME (detalles plazas):
+  https://opocme.com/convocatoria-mossos-2026/
+
+- PreparaOposiciones (pruebas físicas y sueldo):
+  https://www.preparaoposiciones.com/blog/oposiciones/mossos-esquadra/
+
+Fuente oficial a verificar antes de publicar:
+- Departament d'Interior · Govern de Catalunya:
+  https://interior.gencat.cat
+- DOGC (cuando se publique la convocatoria):
+  https://dogc.gencat.cat
+
+Marco normativo:
+- Llei 10/1994, d'11 de juliol, de la Policia de la Generalitat-Mossos d'Esquadra
+- Decret 401/2006, sobre Reglament del provisió de llocs de treball
+
+NOTAS PARA EDU:
+- ANTES de publicar, comprueba en el DOGC si la convocatoria ya está publicada (fecha exacta).
+- Si todavía está pendiente, modifica el caption a "pendent de publicació al DOGC".
+- Si la cifra final cambia (1.604 → otra), actualízala.
+- ¡Este tipo de noticias dan MUCHO engagement entre opositores!

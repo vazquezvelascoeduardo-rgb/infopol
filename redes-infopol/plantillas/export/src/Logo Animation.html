@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>InfoPol — Logo Animation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #0a0a0a; }
+  body { font-family: 'Manrope', system-ui, sans-serif; }
+  * { box-sizing: border-box; }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <rect width="64" height="64" rx="14" fill="#FF7A1A"/>
+    <path d="M32 12 L50 18 V32 C50 42 42 50 32 53 C22 50 14 42 14 32 V18 Z" fill="#fff"/>
+    <circle cx="32" cy="26" r="3" fill="#FF7A1A"/>
+    <rect x="29.5" y="32" width="5" height="14" rx="2.5" fill="#FF7A1A"/>
+  </svg>
+</template>
+<div id="root" style="width:100%;height:100%;position:relative;"></div>
+
+<script src="animations.jsx" type="text/babel"></script>
+
+<script type="text/babel">
+// ────────────────────────────────────────────────────────────────────
+// InfoPol — Brand video
+//   0.0–0.8s   App entra (mockup iPhone)
+//   0.8–3.4s   Tap a "Tests" → flip a pantalla de test
+//   3.4–6.0s   Pregunta + opción correcta + check
+//   6.0–7.0s   Pantalla zoom-out, app sale
+//   7.0–8.4s   Marca aparece (escudo se construye)
+//   8.4–10.0s  Wordmark se escribe + tagline
+//   10.0–12.0s Hold + fade
+// ────────────────────────────────────────────────────────────────────
+
+const TERRACOTA = '#FF7A1A';
+const BLUE      = '#3B6BF5';
+const GREEN     = '#1FB286';
+const RED       = '#E04F5F';
+const INK       = '#13131A';
+const PAPER     = '#F6F4EF';
+const FONT      = '"Manrope", system-ui, sans-serif';
+
+// W = 1920, H = 1080 → 16:9 video
+const W = 1920, H = 1080;
+
+// ── Helpers ────────────────────────────────────────────────────────
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp01 = (x) => Math.max(0, Math.min(1, x));
+
+// Phone frame ───────────────────────────────────────────────────────
+function PhoneFrame({ x, y, scale = 1, rotate = 0, children, opacity = 1 }) {
+  const PW = 380, PH = 800;
+  return (
+    <div style={{
+      position: 'absolute',
+      left: x - (PW * scale) / 2,
+      top: y - (PH * scale) / 2,
+      width: PW, height: PH,
+      transform: `scale(${scale}) rotate(${rotate}deg)`,
+      transformOrigin: 'center',
+      opacity,
+      willChange: 'transform, opacity',
+    }}>
+      <div style={{
+        width: '100%', height: '100%',
+        borderRadius: 52, padding: 6,
+        background: '#0a0a10',
+        boxShadow: '0 40px 80px rgba(19,19,26,0.35), 0 0 0 1px rgba(0,0,0,0.4)',
+      }}>
+        <div style={{
+          width: '100%', height: '100%', borderRadius: 46, overflow: 'hidden',
+          background: PAPER, position: 'relative',
+        }}>
+          {/* Dynamic island */}
+          <div style={{
+            position: 'absolute', top: 14, left: '50%',
+            transform: 'translateX(-50%)',
+            width: 110, height: 32, borderRadius: 18,
+            background: '#0a0a10', zIndex: 50,
+          }}/>
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Status bar ────────────────────────────────────────────────────────
+function StatusBar() {
+  return (
+    <div style={{
+      position: 'absolute', top: 18, left: 28, right: 28,
+      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+      fontFamily: FONT, fontWeight: 700, fontSize: 16, color: INK,
+      zIndex: 40,
+    }}>
+      <span>9:41</span>
+      <div style={{ display: 'flex', gap: 5 }}>
+        <span style={{ width: 18, height: 11, background: INK, borderRadius: 1 }}/>
+        <span style={{ width: 26, height: 11, border: `1.5px solid ${INK}`, borderRadius: 3 }}/>
+      </div>
+    </div>
+  );
+}
+
+// ── Mark + Wordmark ────────────────────────────────────────────────
+function ShieldMark({ size = 64, c1 = INK, c2 = TERRACOTA, dotScale = 1, stemLen = 1, shieldDraw = 1 }) {
+  // shieldDraw 0..1 controls scale-from-center reveal
+  const stemH = 20 * stemLen;
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none"
+         style={{ overflow: 'visible' }}>
+      <g style={{ transform: `scale(${shieldDraw})`, transformOrigin: '32px 32px', transition: 'none' }}>
+        <path d="M32 4 L56 12 V32 C56 46 45 56 32 60 C19 56 8 46 8 32 V12 Z" fill={c1} />
+      </g>
+      <g style={{ opacity: clamp01((shieldDraw - 0.6) / 0.4) }}>
+        <circle cx="32" cy="22" r={4.2 * dotScale} fill={c2} />
+        <rect x={32 - 3.6} y={30}
+              width={7.2} height={stemH} rx="3.6" fill={c2} />
+      </g>
+    </svg>
+  );
+}
+
+// ── Scene 1: App opens ─────────────────────────────────────────────
+// Phone slides up from below + slight tilt → settles centered.
+function S1_AppEnters() {
+  const { localTime, duration } = window.useSprite();
+  const t = clamp01(localTime / 0.8);
+  const eased = window.Easing.easeOutCubic(t);
+  const y = lerp(H + 200, H / 2, eased);
+  const sc = lerp(0.85, 0.95, eased);
+  const opacity = clamp01(t * 1.4);
+  return (
+    <PhoneFrame x={W / 2} y={y} scale={sc} opacity={opacity}>
+      <StatusBar/>
+      <HomeScreen/>
+    </PhoneFrame>
+  );
+}
+
+// ── Home screen content ────────────────────────────────────────────
+function HomeScreen({ tapCat = null, tapPulse = 0 }) {
+  const cats = [
+    { name: 'Lleis',     color: '#E89421', icon: 'scale' },
+    { name: 'Operativa', color: BLUE,      icon: 'siren' },
+    { name: 'Trànsit',   color: '#9C4FE0', icon: 'car' },
+    { name: 'Tests',     color: BLUE,      icon: 'check' },
+    { name: 'Atalls',    color: GREEN,     icon: 'bolt' },
+    { name: 'Físiques',  color: '#0BB4C2', icon: 'flame' },
+  ];
+  return (
+    <div style={{ padding: '70px 24px 0', height: '100%', position: 'relative' }}>
+      <div style={{ fontFamily: FONT, fontWeight: 800, fontSize: 28, color: INK, letterSpacing: -0.6 }}>
+        Bon dia, Marc
+      </div>
+      <div style={{ fontFamily: FONT, fontSize: 14, color: 'rgba(19,19,26,0.55)', marginTop: 4 }}>
+        Continua amb la teva preparació
+      </div>
+
+      {/* search */}
+      <div style={{
+        marginTop: 18, padding: '12px 16px', borderRadius: 999,
+        background: '#fff', boxShadow: '0 1px 0 rgba(19,19,26,0.04), 0 6px 18px rgba(19,19,26,0.05)',
+        fontFamily: FONT, fontSize: 13, color: 'rgba(19,19,26,0.45)',
+        display: 'flex', alignItems: 'center', gap: 10,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5" strokeLinecap="round"/>
+        </svg>
+        Cercar pregunta, llei, tema…
+      </div>
+
+      {/* category grid */}
+      <div style={{ marginTop: 22, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+        {cats.map((c, i) => {
+          const tapped = tapCat === i;
+          const sc = tapped ? lerp(1, 0.93, tapPulse) : 1;
+          return (
+            <div key={c.name} style={{
+              background: '#fff', borderRadius: 18,
+              padding: 14, height: 92,
+              borderTop: `3px solid ${c.color}`,
+              boxShadow: '0 1px 0 rgba(19,19,26,0.04), 0 6px 18px rgba(19,19,26,0.05)',
+              display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+              transform: `scale(${sc})`, transition: 'none',
+            }}>
+              <div style={{
+                width: 36, height: 36, borderRadius: 10,
+                background: c.color,
+                boxShadow: 'inset 0 -3px 0 rgba(0,0,0,0.18)',
+              }}/>
+              <div style={{ fontFamily: FONT, fontWeight: 800, fontSize: 14, color: INK }}>
+                {c.name}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* streak chip */}
+      <div style={{
+        position: 'absolute', bottom: 110, left: 24, right: 24,
+        background: INK, color: '#fff', borderRadius: 18,
+        padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 12,
+      }}>
+        <div style={{
+          width: 32, height: 32, borderRadius: 10,
+          background: TERRACOTA, display: 'grid', placeItems: 'center',
+          fontSize: 18,
+        }}>🔥</div>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontFamily: FONT, fontWeight: 800, fontSize: 13 }}>12 dies seguits</div>
+          <div style={{ fontFamily: FONT, fontSize: 11, opacity: 0.7 }}>15 min avui · 8 preguntes</div>
+        </div>
+        <div style={{
+          padding: '6px 12px', borderRadius: 999, background: TERRACOTA,
+          fontFamily: FONT, fontWeight: 800, fontSize: 11,
+          letterSpacing: 0.4, textTransform: 'uppercase',
+        }}>Continua</div>
+      </div>
+
+      {/* tab bar */}
+      <div style={{
+        position: 'absolute', left: 0, right: 0, bottom: 0,
+        height: 88, background: 'rgba(255,255,255,0.95)',
+        backdropFilter: 'blur(20px)',
+        borderTop: '1px solid rgba(19,19,26,0.08)',
+        display: 'flex', justifyContent: 'space-around', alignItems: 'flex-start',
+        paddingTop: 10,
+      }}>
+        {['home','book','flag','user'].map((k, i) => (
+          <div key={k} style={{
+            width: 36, height: 36, borderRadius: 10,
+            background: i === 0 ? 'rgba(255,122,26,0.12)' : 'transparent',
+            display: 'grid', placeItems: 'center',
+            color: i === 0 ? TERRACOTA : 'rgba(19,19,26,0.4)',
+          }}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"
+                 strokeLinecap="round" strokeLinejoin="round">
+              {k === 'home'  && <><path d="M3 11l9-8 9 8"/><path d="M5 9v12h14V9"/></>}
+              {k === 'book'  && <path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 0-2 2V5z"/>}
+              {k === 'flag'  && <><path d="M5 3v18"/><path d="M5 4h12l-2 4 2 4H5"/></>}
+              {k === 'user'  && <><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 5-6 8-6s7 2 8 6"/></>}
+            </svg>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Touch ripple ───────────────────────────────────────────────────
+function TouchRipple({ x, y, t }) {
+  // t: 0..1 over the ripple lifetime
+  if (t <= 0 || t >= 1) return null;
+  const r = lerp(8, 60, t);
+  const op = lerp(0.5, 0, t);
+  return (
+    <div style={{
+      position: 'absolute', left: x - r, top: y - r,
+      width: r * 2, height: r * 2, borderRadius: '50%',
+      background: TERRACOTA, opacity: op,
+      pointerEvents: 'none',
+    }}/>
+  );
+}
+
+// ── Scene 2: Tap on Tests, transition ─────────────────────────────
+function S2_TapTests() {
+  const { localTime } = window.useSprite();
+  // 0.0–0.4 hover/zoom approach ; 0.4–0.6 tap pulse ; 0.6–1.0 flip-out
+  const t = localTime;
+  const tapPulse = t < 0.4 ? 0 :
+                   t < 0.55 ? clamp01((t - 0.4) / 0.15) :
+                   1 - clamp01((t - 0.55) / 0.15);
+
+  // Phone subtle zoom in
+  const ph = clamp01(t / 0.6);
+  const sc = lerp(0.95, 1.02, window.Easing.easeOutCubic(ph));
+
+  // After tap, screen "flips" away (rotate-Y illusion via scaleX)
+  const flipT = clamp01((t - 0.7) / 0.6);
+  const flipSc = lerp(1, 0, window.Easing.easeInCubic(flipT));
+  const phoneOpacity = lerp(1, 0, clamp01((t - 1.0) / 0.6));
+
+  // Tap position: index 3 in 2-col grid (Tests). Phone PW=380, PH=800.
+  // Grid starts at padding left 24, width = 380 - 48 = 332, gap 12 → col w = 160.
+  // 'Tests' is at row 1 (index 3): right column, second row.
+  // y inside phone ≈ 70 (header) + ~30 (greet) + 14 (sub) + 18 + 38 (search) + 22 + 92 + 12 = ~296 (start of row1) +46 center
+  const tapX_phone = 24 + 160 + 12 + 80;       // 276
+  const tapY_phone = 22 + 60 + 18 + 44 + 22 + 92 + 12 + 46 + 70; // approx
+
+  return (
+    <PhoneFrame x={W / 2} y={H / 2} scale={sc} opacity={phoneOpacity}>
+      <StatusBar/>
+      <div style={{ width: '100%', height: '100%',
+                    transform: `scaleX(${flipSc})`, transformOrigin: 'center',
+                    position: 'relative' }}>
+        <HomeScreen tapCat={3} tapPulse={tapPulse} />
+        <TouchRipple x={tapX_phone} y={tapY_phone} t={tapPulse} />
+      </div>
+    </PhoneFrame>
+  );
+}
+
+// ── Scene 3: Test screen flips in + answers ────────────────────────
+function S3_TestScreen() {
+  const { localTime, duration } = window.useSprite();
+  // Flip-in 0.0–0.5
+  const flipIn = clamp01(localTime / 0.5);
+  const sc = lerp(0, 1, window.Easing.easeOutCubic(flipIn));
+
+  // Answer reveal timeline (after flip): progressive
+  const t = localTime - 0.5;
+  return (
+    <PhoneFrame x={W / 2} y={H / 2} scale={1.02}>
+      <StatusBar/>
+      <div style={{ width: '100%', height: '100%',
+                    transform: `scaleX(${sc})`, transformOrigin: 'center' }}>
+        <TestScreen t={Math.max(0, t)} />
+      </div>
+    </PhoneFrame>
+  );
+}
+
+function TestScreen({ t }) {
+  // t ≥ 0 once flipped in. We control: question fade, options, correct selection, check.
+  // 0.0-0.3 question fades in
+  // 0.3-0.7 options fade in stagger
+  // 1.2 user picks B (correct)
+  // 1.4 correct flash
+  // 1.7 check + xp pop
+  const qOp = clamp01(t / 0.3);
+  const opts = [0,1,2,3].map(i => clamp01((t - 0.4 - i*0.1) / 0.25));
+
+  const picked = t > 1.0 ? 1 : null;       // option B
+  const flash = t > 1.0 ? clamp01((t - 1.0) / 0.25) : 0;
+  const checkOp = clamp01((t - 1.3) / 0.3);
+  const xpScale = t > 1.4 ? lerp(0.4, 1, window.Easing.easeOutBack(clamp01((t - 1.4) / 0.4))) : 0;
+
+  const options = [
+    { L: 'A', text: 'Detenció preventiva' },
+    { L: 'B', text: 'Identificació al lloc' },
+    { L: 'C', text: 'Trasllat a comissaria' },
+    { L: 'D', text: 'Cap de les anteriors' },
+  ];
+
+  return (
+    <div style={{ padding: '70px 24px 0', height: '100%', position: 'relative', background: PAPER }}>
+      {/* topbar */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 6 }}>
+        <div style={{
+          width: 32, height: 32, borderRadius: 10, background: '#fff',
+          border: '1px solid rgba(19,19,26,0.08)',
+          display: 'grid', placeItems: 'center',
+        }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={INK} strokeWidth="2.4"
+               strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </div>
+        <div style={{ flex: 1, margin: '0 14px' }}>
+          <div style={{ height: 8, background: 'rgba(19,19,26,0.08)', borderRadius: 8, overflow: 'hidden' }}>
+            <div style={{
+              width: `${30 + clamp01(t/2)*15}%`, height: '100%',
+              background: TERRACOTA, boxShadow: 'inset 0 -2px 0 rgba(0,0,0,0.18)',
+              transition: 'none',
+            }}/>
+          </div>
+        </div>
+        <div style={{
+          padding: '4px 10px', borderRadius: 999, background: '#fff',
+          fontFamily: FONT, fontWeight: 800, fontSize: 11, color: INK,
+          border: '1px solid rgba(19,19,26,0.08)',
+        }}>3/10</div>
+      </div>
+
+      {/* category pill */}
+      <div style={{ marginTop: 22, opacity: qOp, transform: `translateY(${(1-qOp)*8}px)` }}>
+        <div style={{
+          display: 'inline-block',
+          padding: '4px 10px', borderRadius: 999,
+          background: 'rgba(59,107,245,0.12)', color: '#0E2B7A',
+          fontFamily: FONT, fontWeight: 800, fontSize: 10,
+          letterSpacing: 0.6, textTransform: 'uppercase',
+        }}>Operativa · Procediment</div>
+      </div>
+
+      {/* question */}
+      <div style={{
+        marginTop: 14,
+        opacity: qOp,
+        transform: `translateY(${(1-qOp)*8}px)`,
+        fontFamily: FONT, fontWeight: 800, fontSize: 19, color: INK,
+        letterSpacing: -0.4, lineHeight: 1.25,
+      }}>
+        Davant d'una persona sense documentació en un control,
+        quina és l'actuació correcta?
+      </div>
+
+      {/* options */}
+      <div style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {options.map((o, i) => {
+          const op = opts[i];
+          const isPicked = picked === i;
+          const bg = isPicked ? lerpHex(GREEN, GREEN, 1) : '#fff';
+          const flashOp = isPicked ? flash : 0;
+          return (
+            <div key={o.L} style={{
+              opacity: op,
+              transform: `translateY(${(1-op)*8}px)`,
+              padding: '12px 14px', borderRadius: 14,
+              background: '#fff',
+              border: `1.5px solid ${isPicked ? GREEN : 'rgba(19,19,26,0.08)'}`,
+              boxShadow: '0 1px 0 rgba(19,19,26,0.04), 0 6px 18px rgba(19,19,26,0.04)',
+              display: 'flex', alignItems: 'center', gap: 12,
+              position: 'relative', overflow: 'hidden',
+            }}>
+              {/* green flash */}
+              <div style={{
+                position: 'absolute', inset: 0,
+                background: GREEN, opacity: flashOp * 0.18,
+              }}/>
+              <div style={{
+                width: 28, height: 28, borderRadius: 8,
+                background: isPicked ? GREEN : 'rgba(19,19,26,0.05)',
+                color: isPicked ? '#fff' : INK,
+                fontFamily: FONT, fontWeight: 800, fontSize: 13,
+                display: 'grid', placeItems: 'center',
+                position: 'relative', zIndex: 1,
+              }}>{o.L}</div>
+              <div style={{
+                fontFamily: FONT, fontWeight: 700, fontSize: 14, color: INK,
+                position: 'relative', zIndex: 1,
+              }}>{o.text}</div>
+              {isPicked && checkOp > 0 && (
+                <div style={{
+                  marginLeft: 'auto', position: 'relative', zIndex: 1,
+                  width: 24, height: 24, borderRadius: 999, background: GREEN,
+                  display: 'grid', placeItems: 'center',
+                  opacity: checkOp, transform: `scale(${0.5 + checkOp*0.5})`,
+                }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff"
+                       strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12l4 4 10-10"/>
+                  </svg>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* xp popup */}
+      {xpScale > 0 && (
+        <div style={{
+          position: 'absolute', bottom: 130, left: '50%',
+          transform: `translateX(-50%) scale(${xpScale})`,
+          background: INK, color: '#fff', padding: '10px 18px',
+          borderRadius: 999,
+          display: 'flex', alignItems: 'center', gap: 8,
+          boxShadow: '0 14px 30px rgba(19,19,26,0.25)',
+        }}>
+          <span style={{
+            width: 22, height: 22, borderRadius: 999, background: TERRACOTA,
+            display: 'grid', placeItems: 'center',
+            fontFamily: FONT, fontWeight: 900, fontSize: 11,
+          }}>+</span>
+          <span style={{ fontFamily: FONT, fontWeight: 800, fontSize: 14 }}>10 XP · Correcte!</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+const lerpHex = (a, b, t) => a; // placeholder used only to satisfy reference
+
+// ── Scene 4: Phone exits, brand reveal ─────────────────────────────
+function S4_PhoneExit() {
+  const { localTime } = window.useSprite();
+  const t = clamp01(localTime / 1.0);
+  const eased = window.Easing.easeInCubic(t);
+  const sc = lerp(1.02, 0.6, eased);
+  const opacity = lerp(1, 0, t);
+  const yOff = lerp(0, -120, eased);
+  return (
+    <PhoneFrame x={W/2} y={H/2 + yOff} scale={sc} opacity={opacity}>
+      <StatusBar/>
+      <TestScreen t={2.0} />
+    </PhoneFrame>
+  );
+}
+
+// ── Scene 5: Logo build ────────────────────────────────────────────
+function S5_LogoBuild() {
+  const { localTime } = window.useSprite();
+  // 0.0–0.5: shield scales from 0 → 1 with overshoot
+  // 0.4–0.7: dot drops in (scale)
+  // 0.55–0.9: stem grows
+  const shieldT = clamp01(localTime / 0.55);
+  const shieldDraw = window.Easing.easeOutBack(shieldT);
+
+  const dotT = clamp01((localTime - 0.45) / 0.35);
+  const dotScale = window.Easing.easeOutBack(dotT);
+
+  const stemT = clamp01((localTime - 0.6) / 0.4);
+  const stemLen = window.Easing.easeOutCubic(stemT);
+
+  const overall = clamp01(localTime / 0.3);
+  const lift = lerp(40, 0, window.Easing.easeOutCubic(overall));
+
+  // Slight breathing scale during hold (after build)
+  const breath = 1 + 0.01 * Math.sin((localTime - 1.0) * 2.4);
+
+  return (
+    <div style={{
+      position: 'absolute', left: W/2, top: H/2,
+      transform: `translate(-50%, calc(-50% + ${lift}px)) scale(${breath})`,
+    }}>
+      <ShieldMark size={420}
+                  c1={INK} c2={TERRACOTA}
+                  shieldDraw={shieldDraw}
+                  dotScale={dotScale}
+                  stemLen={stemLen} />
+    </div>
+  );
+}
+
+// ── Scene 6: Wordmark + tagline ────────────────────────────────────
+function S6_Wordmark() {
+  const { localTime } = window.useSprite();
+
+  // Shield slides up + shrinks to make room
+  const slideT = clamp01(localTime / 0.55);
+  const slideE = window.Easing.easeInOutCubic(slideT);
+  const shieldY = lerp(0, -180, slideE);
+  const shieldSc = lerp(1, 0.55, slideE);
+
+  // Wordmark: "info" appears 0.4–0.7, "pol" appears 0.7–1.05
+  const infoOp = clamp01((localTime - 0.4) / 0.3);
+  const infoY = lerp(20, 0, window.Easing.easeOutCubic(infoOp));
+  const polOp = clamp01((localTime - 0.7) / 0.35);
+  const polY  = lerp(20, 0, window.Easing.easeOutBack(polOp));
+  const polColorT = clamp01((localTime - 0.85) / 0.3); // ink → terracota
+  const polColor = polColorT < 0.5 ? INK : TERRACOTA;
+
+  // Tagline at the bottom
+  const tagOp = clamp01((localTime - 1.2) / 0.4);
+  const tagY  = lerp(14, 0, window.Easing.easeOutCubic(tagOp));
+
+  // Cursor blink for "pol" before color flips
+  const showCursor = localTime > 0.7 && localTime < 1.1;
+  const cursorOn = Math.floor((localTime - 0.7) / 0.12) % 2 === 0;
+
+  return (
+    <div style={{
+      position: 'absolute', left: 0, top: 0, width: W, height: H,
+      display: 'flex', flexDirection: 'column',
+      alignItems: 'center', justifyContent: 'center',
+      gap: 36,
+    }}>
+      {/* shield */}
+      <div style={{
+        transform: `translateY(${shieldY}px) scale(${shieldSc})`,
+        transformOrigin: 'center',
+      }}>
+        <ShieldMark size={420} c1={INK} c2={TERRACOTA}
+                    shieldDraw={1} dotScale={1} stemLen={1} />
+      </div>
+
+      {/* Wordmark */}
+      <div style={{
+        position: 'absolute',
+        left: '50%', top: '50%',
+        transform: `translate(-50%, 60px)`,
+        fontFamily: FONT, fontWeight: 800, fontSize: 200,
+        letterSpacing: -5, lineHeight: 1, color: INK,
+        display: 'flex', alignItems: 'baseline',
+        whiteSpace: 'nowrap',
+      }}>
+        <span style={{ display: 'inline-block', opacity: infoOp,
+                       transform: `translateY(${infoY}px)` }}>info</span>
+        <span style={{
+          display: 'inline-block', opacity: polOp,
+          transform: `translateY(${polY}px)`,
+          color: polColor,
+          transition: 'none',
+        }}>pol</span>
+        {showCursor && (
+          <span style={{
+            display: 'inline-block', width: 8, height: 140,
+            background: TERRACOTA, marginLeft: 6,
+            opacity: cursorOn ? 1 : 0,
+          }}/>
+        )}
+      </div>
+
+      {/* Tagline */}
+      <div style={{
+        position: 'absolute',
+        bottom: 200,
+        left: '50%',
+        transform: `translate(-50%, ${tagY}px)`,
+        opacity: tagOp,
+        fontFamily: FONT, fontWeight: 600, fontSize: 28,
+        color: 'rgba(19,19,26,0.55)',
+        letterSpacing: 6, textTransform: 'uppercase',
+      }}>
+        Acadèmia · Operativa · Tests
+      </div>
+    </div>
+  );
+}
+
+// ── Background tint shifts by phase for cinematic feel ─────────────
+function BgPulse() {
+  const time = window.useTime();
+  // Phase 1 (0–6.5): warm paper.
+  // Phase 2 (6.5–7.0): paper.
+  // Phase 3 (7.0+): subtle radial glow growing from center as logo appears.
+  const reveal = clamp01((time - 6.8) / 1.2);
+  const glow = 0.4 * reveal;
+  return (
+    <>
+      <div style={{ position: 'absolute', inset: 0, background: PAPER }}/>
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: `radial-gradient(circle at 50% 50%, rgba(255,122,26,${glow}) 0%, rgba(255,122,26,0) 55%)`,
+        pointerEvents: 'none',
+      }}/>
+    </>
+  );
+}
+
+// Final fade veil for end of video
+function EndFade() {
+  const time = window.useTime();
+  const fadeOut = clamp01((time - 11.6) / 0.4);
+  if (fadeOut <= 0) return null;
+  return (
+    <div style={{
+      position: 'absolute', inset: 0,
+      background: PAPER, opacity: fadeOut,
+      pointerEvents: 'none',
+    }}/>
+  );
+}
+
+// Expose hooks under window for sprite components
+window.useSprite = window.useSprite || (() => React.useContext(window.__SpriteContext));
+
+// ── Main scene ─────────────────────────────────────────────────────
+const { Stage, Sprite, Easing, useTime, useSprite } = window;
+
+// Patch missing references on window so children can use them
+Object.assign(window, { useSprite });
+
+function Scene() {
+  return (
+    <>
+      <BgPulse/>
+
+      <Sprite start={0.0} end={1.0}><S1_AppEnters/></Sprite>
+      <Sprite start={1.0} end={3.0}><S2_TapTests/></Sprite>
+      <Sprite start={3.0} end={6.5}><S3_TestScreen/></Sprite>
+      <Sprite start={6.5} end={7.6}><S4_PhoneExit/></Sprite>
+      <Sprite start={7.4} end={9.0}><S5_LogoBuild/></Sprite>
+      <Sprite start={9.0} end={12.0}><S6_Wordmark/></Sprite>
+
+      <EndFade/>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Stage width={W} height={H} duration={12} background={PAPER} loop={true} autoplay={true}>
+      <Scene/>
+    </Stage>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

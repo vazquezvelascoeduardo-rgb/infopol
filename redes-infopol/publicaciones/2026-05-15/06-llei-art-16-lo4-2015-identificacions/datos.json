@@ -1,0 +1,27 @@
+{
+  "tipo_plantilla": "1 - Llei en 60 segons",
+  "archivo_plantilla": "Plantilla Resum de Llei.html",
+  "rama_juridica": "Seguretat Ciutadana",
+  "color_rama_hex": "#1E5CE6",
+  "id": "lo4-2015-art16",
+  "icon": "badge",
+  "lawShort": "LO 4/2015 · Art. 16",
+  "lawName": "Protecció de la seguretat ciutadana",
+  "bandLabel": "LO 4/2015 · ART. 16 · SEGURETAT",
+  "article": "16",
+  "articleNice": "Article 16",
+  "headline": "Identificació de persones",
+  "quote": "Els agents podran requerir la identificació de les persones quan existeixin indicis que han pogut participar en la comissió d'una infracció o quan, en relació amb un fet, sigui necessari per prevenir un delicte.",
+  "quoteRef": "Art. 16.1 LO 4/2015",
+  "exampleTitle": "Patrulla a peu detecta una persona en actitud sospitosa rondant un comerç tancat. Identificació amb constància motivada.",
+  "bullets": [
+    "Indicis raonables o prevenció de delicte.",
+    "Sempre amb motivació expressa al llibre.",
+    "Trasllat a dependències només si és imprescindible."
+  ],
+  "remember": {
+    "pre": "Sense indicis no hi ha ",
+    "hi": "identificació legítima",
+    "post": ". Sempre motivada."
+  }
+}
