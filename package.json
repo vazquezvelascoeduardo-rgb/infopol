@@ -14,9 +14,11 @@
     "cap:open:ios": "npx cap open ios",
     "cap:open:android": "npx cap open android",
     "deploy:ios": "npm run build && npx cap sync ios && npx cap open ios",
-    "deploy:android": "npm run build && npx cap sync android && npx cap open android"
+    "deploy:android": "npm run build && npx cap sync android && npx cap open android",
+    "news:fetch": "node scripts/fetch-news.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.36.3",
     "@capacitor/android": "^8.3.1",
     "@capacitor/cli": "^8.3.1",
     "@capacitor/core": "^8.3.1",
