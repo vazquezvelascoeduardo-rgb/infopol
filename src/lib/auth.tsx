@@ -26,6 +26,7 @@ import {
 import type { Session, User } from '@supabase/supabase-js';
 import { supabase, isBackendEnabled } from './supabase';
 import { getProfile, getUserProgress, type Profile, type UserProgress } from './db';
+import { setUser as setSentryUser } from './sentry';
 
 export type AuthState = {
   user: User | null;
@@ -123,6 +124,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     void refresh();
   }, [refresh]);
+
+  // Sincronitza l'ID d'usuari amb Sentry (sense email/PII).
+  // Si no hi ha DSN configurat, és no-op.
+  useEffect(() => {
+    setSentryUser(userId ?? null);
+  }, [userId]);
 
   const value = useMemo<AuthContextValue>(() => {
     return {

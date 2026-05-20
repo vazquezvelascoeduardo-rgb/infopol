@@ -42,6 +42,9 @@ jobs:
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          # Sentry: opcional. Si el secret no existeix, la app continua
+          # funcionant però sense capturar errors a producció.
+          VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

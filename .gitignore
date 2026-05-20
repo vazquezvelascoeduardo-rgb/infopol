@@ -15,3 +15,6 @@ dev-dist
 # Carpeta temporal per a la importació d'HTML (vegeu scripts/import-html.mjs).
 _import/
 _import*/
+
+# Carpeta temporal per a fitxes generades en PDF (no es publiquen al web).
+_tmp_pdf/

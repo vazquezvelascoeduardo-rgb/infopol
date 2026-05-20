@@ -10,6 +10,12 @@ import { applyInitialTextSize } from './lib/fontSize';
 import { LocaleProvider } from './lib/i18n';
 import { AuthProvider } from './lib/auth';
 import { exposeNomenclatorToWindow } from './lib/cataleg-nomenclator';
+import { initSentry, SentryErrorBoundary, captureException } from './lib/sentry';
+
+// Sentry s'inicialitza el primer de tot per capturar errors de qualsevol
+// codi posterior, incloent els del bootstrap (theme, polyfills, etc.).
+// Si no hi ha DSN configurat, és no-op.
+initSentry();
 
 applyInitialTheme();
 applyInitialTextSize();
@@ -61,7 +67,10 @@ window.addEventListener('unhandledrejection', (ev) => {
     } catch {
       window.location.reload();
     }
+    return;
   }
+  // Si no és un chunk error, ho enviem a Sentry per visibilitat.
+  captureException(ev.reason, { source: 'unhandledrejection' });
 });
 // Reset del flag si arribem a la home sense errors → permet futures recàrregues.
 window.addEventListener('load', () => {
@@ -74,14 +83,74 @@ window.addEventListener('load', () => {
 // dins HtmlInline) puguin reutilitzar la mateixa font de veritat.
 exposeNomenclatorToWindow();
 
+// ErrorBoundary arrel: si peta qualsevol component, en lloc d'una pàgina
+// en blanc l'usuari veu un missatge digne + es notifica a Sentry.
+function ErrorFallback({ resetError }: { error: unknown; resetError: () => void }) {
+  return (
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '24px',
+        background: 'var(--paper, #FAF6EF)',
+        color: 'var(--ink, #0E0E0E)',
+        fontFamily: 'system-ui, sans-serif',
+        textAlign: 'center',
+      }}
+    >
+      <div style={{ fontSize: 48, marginBottom: 12 }}>🚧</div>
+      <h1 style={{ fontSize: 22, fontWeight: 800, margin: '0 0 8px' }}>
+        Alguna cosa ha fallat
+      </h1>
+      <p style={{ fontSize: 14, color: '#666', maxWidth: 420, margin: '0 0 20px' }}>
+        Hem rebut l'error i ho estem mirant. Pots tornar enrere o recarregar la pàgina.
+      </p>
+      <div style={{ display: 'flex', gap: 8 }}>
+        <button
+          onClick={() => resetError()}
+          style={{
+            padding: '10px 18px',
+            borderRadius: 999,
+            border: '1px solid var(--line, rgba(0,0,0,0.1))',
+            background: 'white',
+            cursor: 'pointer',
+            fontWeight: 600,
+          }}
+        >
+          Tornar a provar
+        </button>
+        <button
+          onClick={() => window.location.reload()}
+          style={{
+            padding: '10px 18px',
+            borderRadius: 999,
+            border: 'none',
+            background: 'var(--terracotta, #F26B1F)',
+            color: 'white',
+            cursor: 'pointer',
+            fontWeight: 700,
+          }}
+        >
+          Recarregar
+        </button>
+      </div>
+    </div>
+  );
+}
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <LocaleProvider>
-      <AuthProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </AuthProvider>
-    </LocaleProvider>
+    <SentryErrorBoundary fallback={ErrorFallback} showDialog={false}>
+      <LocaleProvider>
+        <AuthProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </AuthProvider>
+      </LocaleProvider>
+    </SentryErrorBoundary>
   </React.StrictMode>,
 );
