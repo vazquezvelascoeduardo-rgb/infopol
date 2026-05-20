@@ -1226,8 +1226,35 @@
   const LEAF_SELECTOR = '.tbl tbody tr, .alc-row, .ass-row, .delicte-block';
   const GROUP_SELECTOR = '.sec, .alc-card, .ass-card, .delicte-block';
 
+  // Normalitza el text per a la cerca: minúscules + treu accents (NFD)
+  // + apòstrofs/punts mitjans. Així "alcoholèmia" troba "alcoholemia"
+  // i "d'assegurança" troba "assegurança". Mateixa lògica que el
+  // SuperBuscador (src/lib/cataleg-parser.ts).
+  function normSearch(s) {
+    return (s || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .replace(/['’‘`·]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  // Caché del text normalitzat de cada leaf — calcular-lo a cada keystroke
+  // és inviable amb 200 files. Es calcula una vegada per leaf i s'usa
+  // a totes les cerques posteriors.
+  const leafTextCache = new WeakMap();
+  function leafText(el) {
+    let t = leafTextCache.get(el);
+    if (t === undefined) {
+      t = normSearch(el.textContent || '');
+      leafTextCache.set(el, t);
+    }
+    return t;
+  }
+
   function applyFilter() {
-    const term = (q && q.value || '').toLowerCase().trim();
+    const term = normSearch(q && q.value);
     if (!term) {
       // Sense terme: restaura visibilitat segons el tab actiu.
       panels.forEach(p => { p.style.removeProperty('display'); });
@@ -1248,7 +1275,7 @@
       const matchSet = new WeakSet();
       let panelHasMatch = false;
       leafs.forEach(leaf => {
-        const match = leaf.textContent.toLowerCase().includes(term);
+        const match = leafText(leaf).includes(term);
         leaf.style.display = match ? '' : 'none';
         if (match) {
           matchSet.add(leaf);

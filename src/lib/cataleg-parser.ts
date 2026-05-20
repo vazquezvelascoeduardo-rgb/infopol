@@ -96,12 +96,17 @@ function normalize(s: string): string {
 // codis interns que conserva l'app (per a getLawColor, agrupació al
 // SuperBuscador, etc.). p-cond → rgcond i p-bar → vel mantenen els
 // noms històrics; p-res és només resum visual i no s'indexa.
+//
+// p-vmp (Comunicat 6/2026) s'indexa però les seves filades sovint
+// dupliquen continguts d'altres panels (LSV/RGC/RGV/Asseg.). Per
+// això al final fem una deduplicació per (lawId, article, concepte).
 const PANEL_TO_LAW_ID: Record<string, string> = {
   'p-lsv': 'lsv',
   'p-rgc': 'rgc',
   'p-cond': 'rgcond',
   'p-rgv': 'rgv',
   'p-seg': 'seg',
+  'p-vmp': 'rgv', // les infraccions VMP són majoritàriament del RGV (art. 22)
   'p-bar': 'vel',
   'p-cp': 'cp',
 };
@@ -368,8 +373,22 @@ export function getCatalegRows(): CatalegRow[] {
     }
   }
 
-  cachedRows = rows;
-  return rows;
+  // Deduplicació final: una mateixa infracció pot aparèixer a la pestanya
+  // origen (LSV/RGC/RGV/Asseg.) i també al panel resum p-vmp/p-res. Si la
+  // clau (lawId, article normalitzat, concepte normalitzat) és la mateixa,
+  // ens quedem amb la primera ocurrència — la dels panels canònics. Així
+  // el SuperBuscador no mostra duplicats però sí guanya cobertura.
+  const seen = new Set<string>();
+  const deduped: CatalegRow[] = [];
+  for (const r of rows) {
+    const key = `${r.lawId}|${normalize(r.article ?? '')}|${normalize(r.concepte).slice(0, 80)}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    deduped.push(r);
+  }
+
+  cachedRows = deduped;
+  return deduped;
 }
 
 // Cerca al catàleg. Match per concepte, article, llei o multa.
