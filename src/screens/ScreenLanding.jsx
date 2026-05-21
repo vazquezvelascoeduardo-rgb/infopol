@@ -111,6 +111,28 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '16px 18px 0' }}>
+        <div onClick={() => navigate('/noticias')} style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, borderTop: `3px solid ${T.cat.alcohol.solid}`, boxShadow: T.shadow.card, cursor: 'pointer' }}>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+            <div style={{ width: 44, height: 44, borderRadius: 11, background: T.cat.alcohol.solid, display: 'grid', placeItems: 'center', boxShadow: 'inset 0 -3px 0 rgba(0,0,0,0.18)', flexShrink: 0 }}>
+              <Icon name="newspaper" size={24} color="#fff" strokeWidth={2.2} />
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10.5, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.alcohol.ink }}>Actualitat · Cada dia</div>
+              <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 17, letterSpacing: -0.3, marginTop: 2 }}>Notícies del dia</div>
+              <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>Política, economia, esports, cultura, successos i molt més. Catalunya, Espanya i internacional.</div>
+            </div>
+            <Icon name="chevron-right" size={18} color={T.inkMuted} style={{ marginTop: 4 }} />
+          </div>
+          <div style={{ display: 'flex', gap: 6, marginTop: 12, flexWrap: 'wrap' }}>
+            {['Política', 'Economia', 'Esports', 'Succés', 'Cultura'].map(t => (
+              <span key={t} style={{ fontSize: 11, padding: '5px 10px', background: T.cat.alcohol.soft, color: T.cat.alcohol.ink, borderRadius: 999, fontWeight: 700 }}>{t}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* pricing */}
       <div style={{ padding: '20px 18px 0' }}>
         <div style={{ background: T.ink, borderRadius: T.r.xl, padding: 20, color: '#fff', position: 'relative', overflow: 'hidden' }}>

@@ -1,0 +1,45 @@
+name: Actualització diària de notícies
+
+# Cada dia a les 22:00 CEST (UTC+2) = 20:00 UTC
+# En horari hivern CET (UTC+1) s'executa a les 21:00 local
+on:
+  schedule:
+    - cron: '0 20 * * *'
+  workflow_dispatch:  # Permet llançar manualment des de GitHub
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instal·lar Anthropic SDK
+        run: npm install --no-save @anthropic-ai/sdk
+
+      - name: Buscar notícies del dia
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/fetch-news.mjs
+
+      - name: Commit i push
+        run: |
+          git config user.name  "InfoPol News Bot"
+          git config user.email "news-bot@infopol.app"
+          git add src/data/news.json
+          if git diff --staged --quiet; then
+            echo "Cap canvi a les notícies."
+          else
+            git commit -m "news: actualització diària $(date +%Y-%m-%d)"
+            git push
+          fi
