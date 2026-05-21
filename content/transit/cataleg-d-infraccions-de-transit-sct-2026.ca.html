@@ -1889,6 +1889,39 @@
     return groups;
   }
 
+  // Per ampliar el "text cercable" d'una fila amb el context del seu
+  // contenidor (el `.sec-head` ancestre i la pestanya/llei del panel),
+  // construïm un cache de "context normalitzat" per panel i per secció.
+  // Així buscar "assegurança" troba TOTES les files del panel asseg
+  // (encara que la paraula no surti a cada fila individualment), i
+  // buscar "RGC" troba totes les del panel RGC.
+  const panelCtxCache = new WeakMap();
+  function panelCtx(panel) {
+    let c = panelCtxCache.get(panel);
+    if (c !== undefined) return c;
+    const bits = [];
+    // Tab-pill amb el nom amigable de la llei (ex: "RGC", "Assegurança")
+    const tabId = (panel.id || '').replace(/^p-/, '');
+    const tab = document.querySelector('.tab-pill[data-tab="' + tabId + '"]');
+    if (tab) bits.push(tab.textContent || '');
+    c = normSearch(bits.join(' '));
+    panelCtxCache.set(panel, c);
+    return c;
+  }
+  const secCtxCache = new WeakMap();
+  function secCtx(sec) {
+    if (!sec) return '';
+    let c = secCtxCache.get(sec);
+    if (c !== undefined) return c;
+    // Tots els .sec-head dins de la secció (sovint hi ha sub-headers).
+    const heads = sec.querySelectorAll(':scope > .sec-head, :scope .sec-head');
+    const bits = [];
+    heads.forEach((h) => bits.push(h.textContent || ''));
+    c = normSearch(bits.join(' '));
+    secCtxCache.set(sec, c);
+    return c;
+  }
+
   // Caché del text normalitzat de cada leaf — calcular-lo a cada keystroke
   // és inviable amb 200 files. Es calcula una vegada per leaf i s'usa
   // a totes les cerques posteriors.
@@ -1896,7 +1929,17 @@
   function leafText(el) {
     let t = leafTextCache.get(el);
     if (t === undefined) {
-      t = normSearch(el.textContent || '');
+      // Text de la fila + context de la seva secció ancestre + context
+      // del panel/pestanya. Així buscar "assegurança" troba totes les
+      // files del panel Asseg encara que la paraula no surti a cada
+      // <div class="ass-row"> individual (només al sec-head).
+      const own = normSearch(el.textContent || '');
+      const sec = el.closest ? el.closest('.sec') : null;
+      const panel = el.closest ? el.closest('.cat-panel') : null;
+      const parts = [own];
+      if (sec) parts.push(secCtx(sec));
+      if (panel) parts.push(panelCtx(panel));
+      t = parts.filter(Boolean).join(' ');
       leafTextCache.set(el, t);
     }
     return t;
@@ -1983,6 +2026,13 @@
   // el concepte oficial per a un parell (lawId, article).
   function findOfficial(panelId, article, rowText) {
     if (!article) return null;
+    // Per a Assegurança (p-seg) el nomenclàtor té múltiples entrades amb
+    // article 2.1 (una per classe de permís: AM, A, B, C, D, VPL, VMP-motor)
+    // i el text rowText de la fila clicada (només "Permís B+E") sovint
+    // no té prou solapament amb el text oficial per encertar el correcte.
+    // Per evitar mostrar "classe AM" quan l'usuari ha clicat el permís B,
+    // saltem el nomenclàtor i deixem el concepte literal de la fila.
+    if (panelId === 'p-seg') return null;
     const law = PANEL_TO_LAW[panelId];
     if (!law) return null;
     const idx = (typeof window !== 'undefined') && window.__infopolNomenclator;
@@ -1992,7 +2042,8 @@
     if (!candidates || !candidates.length) return null;
     if (candidates.length === 1) return candidates[0];
     // Múltiples candidats: triem el de més paraules de ≥4 lletres en comú
-    // amb el text de la fila.
+    // amb el text de la fila. Si el millor score és 0 (cap paraula en comú),
+    // és poc fiable → no en retornem cap (deixem el text de la fila).
     if (rowText) {
       const target = rowText.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
       const words = new Set();
@@ -2005,6 +2056,8 @@
         words.forEach(function(w) { if (t.indexOf(w) >= 0) s++; });
         if (s > bestScore) { bestScore = s; best = c; }
       }
+      // Si cap paraula coincideix, l'identificació no és fiable.
+      if (bestScore <= 0) return null;
       return best;
     }
     return candidates[0];
