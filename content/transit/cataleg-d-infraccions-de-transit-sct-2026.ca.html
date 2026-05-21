@@ -2041,15 +2041,15 @@
   };
   // Cerca al nomenclàtor exposat pel React (`window.__infopolNomenclator`)
   // el concepte oficial per a un parell (lawId, article).
-  function findOfficial(panelId, article, rowText) {
+  // Extreu un número d'una multa, robust a "1.500€", "1500", "1.500", etc.
+  function fineToNum(s) {
+    if (s == null) return null;
+    var m = String(s).replace(/[^\d]/g, '');
+    return m ? parseInt(m, 10) : null;
+  }
+
+  function findOfficial(panelId, article, rowText, rowFine) {
     if (!article) return null;
-    // Per a Assegurança (p-seg) el nomenclàtor té múltiples entrades amb
-    // article 2.1 (una per classe de permís: AM, A, B, C, D, VPL, VMP-motor)
-    // i el text rowText de la fila clicada (només "Permís B+E") sovint
-    // no té prou solapament amb el text oficial per encertar el correcte.
-    // Per evitar mostrar "classe AM" quan l'usuari ha clicat el permís B,
-    // saltem el nomenclàtor i deixem el concepte literal de la fila.
-    if (panelId === 'p-seg') return null;
     const law = PANEL_TO_LAW[panelId];
     if (!law) return null;
     const idx = (typeof window !== 'undefined') && window.__infopolNomenclator;
@@ -2058,9 +2058,23 @@
     const candidates = idx[law + ':' + norm];
     if (!candidates || !candidates.length) return null;
     if (candidates.length === 1) return candidates[0];
-    // Múltiples candidats: triem el de més paraules de ≥4 lletres en comú
-    // amb el text de la fila. Si el millor score és 0 (cap paraula en comú),
-    // és poc fiable → no en retornem cap (deixem el text de la fila).
+
+    // ── 1) Match per IMPORT (multa) ─────────────────────────────────
+    // Quan hi ha múltiples candidats amb el mateix article (cas típic
+    // d'Assegurança RDL 8/2004 art. 2.1 amb 8 classes de permís diferents),
+    // l'import és el discriminador més fiable. Si trobem un candidat
+    // amb la mateixa multa que la fila clicada, és el guanyador.
+    var rowFineNum = fineToNum(rowFine);
+    if (rowFineNum != null) {
+      for (var i = 0; i < candidates.length; i++) {
+        var cFine = fineToNum(candidates[i].fine);
+        if (cFine === rowFineNum) return candidates[i];
+      }
+    }
+
+    // ── 2) Match per paraules en comú amb el rowText ───────────────
+    // Si no hi ha hagut match per import (o no tenim rowFine), apliquem
+    // scoring per paraules ≥4 lletres compartides amb el text de la fila.
     if (rowText) {
       const target = rowText.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
       const words = new Set();
@@ -2086,8 +2100,9 @@
     document.getElementById('ct-mod-lawfull').textContent = law.full;
     document.getElementById('ct-mod-ctx').textContent = detail.ctx || '';
     // Mira el nomenclàtor per al concepte oficial; si no en troba, usa
-    // el text literal de la fila.
-    var officialEntry = findOfficial(detail.panelId, detail.article, detail.concepte);
+    // el text literal de la fila. Passem la multa com a discriminador
+    // quan hi ha múltiples candidats amb el mateix article.
+    var officialEntry = findOfficial(detail.panelId, detail.article, detail.concepte, detail.fine);
     var titleText = officialEntry ? officialEntry.concept : detail.concepte;
     document.getElementById('ct-mod-title').textContent = titleText;
     var officialBadge = document.getElementById('ct-mod-official');

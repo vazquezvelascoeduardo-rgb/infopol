@@ -31,6 +31,8 @@ export type NomEntry = {
   concept: string;
   /** Article tal i com surt al checklist ("Art. 76.G TRLSV"). */
   rawArticle: string;
+  /** Multa associada (text del JSON, ex. "650 € (DTE 325 €)"). Pot ser undefined. */
+  fine?: string;
 };
 
 const SOURCES: { id: string; data: unknown }[] = [
@@ -80,12 +82,14 @@ function collectFromNode(node: unknown, entries: NomEntry[]): void {
   const concept = obj.concepte_butlleta;
   const articleRef = obj.article_butlleta;
   if (typeof concept === 'string' && typeof articleRef === 'string') {
+    const fineRaw = typeof obj.import === 'string' ? (obj.import as string) : undefined;
     for (const ref of parseArticleRef(articleRef)) {
       entries.push({
         law: ref.law,
         article: ref.article,
         concept: concept.trim(),
         rawArticle: articleRef.trim(),
+        fine: fineRaw,
       });
     }
   }
@@ -107,12 +111,14 @@ function ensureCache(): void {
   for (const src of SOURCES) {
     collectFromNode(src.data, entries);
   }
-  // Dedupliquem per (law, article, concept) — un mateix concepte pot
-  // aparèixer a diversos checklists.
+  // Dedupliquem per (law, article, concept, fine) — un mateix concepte
+  // pot aparèixer a diversos checklists. Incloem fine perquè per Asseg
+  // (RDL 8/2004 art. 2.1) hi ha múltiples entrades amb el mateix concepte
+  // base i article però diferent multa segons classe de permís.
   const seen = new Set<string>();
   const dedup: NomEntry[] = [];
   for (const e of entries) {
-    const k = `${e.law}|${e.article}|${e.concept}`;
+    const k = `${e.law}|${e.article}|${e.concept}|${e.fine ?? ''}`;
     if (seen.has(k)) continue;
     seen.add(k);
     dedup.push(e);
