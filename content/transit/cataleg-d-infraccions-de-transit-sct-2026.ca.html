@@ -2041,11 +2041,20 @@
   };
   // Cerca al nomenclàtor exposat pel React (`window.__infopolNomenclator`)
   // el concepte oficial per a un parell (lawId, article).
-  // Extreu un número d'una multa, robust a "1.500€", "1500", "1.500", etc.
+  // Extreu el PRIMER número d'una multa. Robust a tots aquests formats:
+  //   "1.500€"                         → 1500
+  //   "1500"                           → 1500
+  //   "1.500 € (DTE 750 €)"            → 1500  (NO 1500750!)
+  //   "300 € (DTE 150 €) · MODIFICAT…" → 300
+  // IMPORTANT: el camp 'import' del nomenclàtor té format "Multa € (DTE €)"
+  // — si concatenem tots els dígits trobaríem 1500750 i el match per
+  // import fallaria sempre. Per això agafem només el PRIMER nombre.
   function fineToNum(s) {
     if (s == null) return null;
-    var m = String(s).replace(/[^\d]/g, '');
-    return m ? parseInt(m, 10) : null;
+    var m = String(s).match(/[\d.]+/);
+    if (!m) return null;
+    var n = parseInt(m[0].replace(/\./g, ''), 10);
+    return Number.isFinite(n) ? n : null;
   }
 
   function findOfficial(panelId, article, rowText, rowFine) {
