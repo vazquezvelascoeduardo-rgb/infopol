@@ -1833,11 +1833,11 @@
   }
 
   // Sinònims per a paraules quotidianes que apareixen escrites diferent
-  // al catàleg. Si el query inclou una clau, també busquem tots els seus
-  // sinònims al text de cada fila (mateixa lògica que el SuperBuscador).
-  const SYNONYMS = [
-    ['assegurança','asseguranca','seguro','soa','aov','responsabilitat civil','rc'],
-    ['mobil','movil','telefon','telefono','smartphone','auricular','mans lliures','manos libres','dispositiu'],
+  // al catàleg. Tots els sinònims es pre-normalitzen un sol cop a sota
+  // perquè el match contra el leafText (també normalitzat) sigui directe.
+  const SYNONYM_GROUPS_RAW = [
+    ['assegurança','seguro','soa','aov','responsabilitat civil','rc'],
+    ['mobil','movil','telefon','telefono','smartphone','auricular','mans lliures','manos libres'],
     ['alcohol','alcoholemia','etilometre','etilometria','beguda','bebida'],
     ['drogues','drogas','droga','estupefaents','estupefacientes','narcotics','cocaina','marihuana','haixix','hachis'],
     ['cinturo','cinturon','retencio'],
@@ -1859,30 +1859,35 @@
     ['fals','falso','falsificacio','falsificacion','manipulat','manipulado'],
     ['llum','llums','luz','luces','far','fars','faro','faros'],
     ['tintat','tintats','tintado','tintados','vidres','cristalls'],
-    // Prefixos d'article: si l'usuari escriu "art X" o "article X",
-    // tractem-ho com a buscar "X" directament.
-    ['art','article','articulo'],
   ];
+  // Pre-normalitzem tots els sinònims un sol cop — el match contra
+  // leafText (també normalitzat) és directe sense més transformació.
+  var SYNONYMS = SYNONYM_GROUPS_RAW.map(function(g){
+    var set = new Set();
+    g.forEach(function(s){ set.add(normSearch(s)); });
+    return [...set];
+  });
 
-  // Expandeix la consulta en una llista de termes alternatius.
-  // Cada token de la consulta s'amplia amb els seus sinònims (si en té).
-  // El filtre exigeix que CADA token (o algun dels seus sinònims) sigui
-  // present al text de la fila — així "alcohol stop" troba files que
-  // continguin tant "alcohol" (o equivalent) com "stop" (o equivalent).
+  // Expandeix la consulta en una llista de grups de termes alternatius.
+  // Cada token s'amplia amb els sinònims del seu grup (si en té).
+  // Si el token és el prefix d'article ("art", "article"), s'ignora.
   function expandQuery(term) {
     if (!term) return [];
-    const tokens = term.split(/\s+/).filter((t) => t.length >= 1);
-    const groups = [];
-    for (const tok of tokens) {
-      // Si el token és un prefix d'article ("art", "article", "articulo"),
-      // ignora'l — la cerca real és el següent token.
-      if (/^(art|article|articulo|n)$/.test(tok)) continue;
-      // Cerca grup de sinònims
-      const matched = new Set([tok]);
-      for (const group of SYNONYMS) {
-        if (group.some((s) => s === tok || s.includes(tok) || tok.includes(s))) {
-          for (const s of group) matched.add(s);
+    var tokens = term.split(/\s+/).filter(function(t){ return t.length >= 1; });
+    var groups = [];
+    for (var i = 0; i < tokens.length; i++) {
+      var tok = tokens[i];
+      if (tok === 'art' || tok === 'article' || tok === 'articulo' || tok === 'articulos') continue;
+      var matched = new Set([tok]);
+      for (var j = 0; j < SYNONYMS.length; j++) {
+        var group = SYNONYMS[j];
+        // Match exacte o un dels sinònims del grup conté/és contingut al token.
+        var hit = false;
+        for (var k = 0; k < group.length; k++) {
+          var s = group[k];
+          if (s === tok || s.indexOf(tok) >= 0 || tok.indexOf(s) >= 0) { hit = true; break; }
         }
+        if (hit) for (var k2 = 0; k2 < group.length; k2++) matched.add(group[k2]);
       }
       groups.push([...matched]);
     }
@@ -1965,12 +1970,16 @@
     // Així "art 76" troba "76.G", "stop" troba "STOP", etc.
     const groups = expandQuery(term);
     if (groups.length === 0) return; // només prefixos d'article sense valor
+    // Estadístiques per debug: el dev pot obrir DevTools i veure quants matches
+    // troba la cerca i a quins panels. Imprès una sola vegada per query.
+    var dbgMatches = 0;
     panels.forEach(p => { p.style.display = 'block'; });
     panels.forEach(panel => {
       // 1) Marca cada leaf segons coincideix amb TOTS els grups (AND).
       const leafs = panel.querySelectorAll(LEAF_SELECTOR);
       const matchSet = new WeakSet();
       let panelHasMatch = false;
+      var panelMatches = 0;
       leafs.forEach(leaf => {
         const t = leafText(leaf);
         const match = groups.every((g) => g.some((syn) => t.includes(syn)));
@@ -1978,8 +1987,10 @@
         if (match) {
           matchSet.add(leaf);
           panelHasMatch = true;
+          panelMatches++;
         }
       });
+      dbgMatches += panelMatches;
       // 2) Per a cada grup, mostra'l si conté algun leaf marcat.
       panel.querySelectorAll(GROUP_SELECTOR).forEach(group => {
         // Si el grup mateix és un leaf (cas .delicte-block) i ha estat
@@ -1994,6 +2005,8 @@
       // 3) El panel és visible només si té algun match.
       panel.style.display = panelHasMatch ? 'block' : 'none';
     });
+    // Log per debug (obre DevTools → Console per veure'l).
+    try { console.info('[catàleg/cerca]', { term: term, groups: groups, matches: dbgMatches }); } catch (e) {}
   }
   if (q) q.addEventListener('input', applyFilter);
   if (go) go.addEventListener('click', applyFilter);
