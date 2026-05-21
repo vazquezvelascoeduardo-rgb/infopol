@@ -47,10 +47,37 @@ export default function Layout({ children }: { children: ReactNode }) {
     if (!location.pathname.startsWith('/cerca')) setQuery('');
   }, [location.pathname]);
 
+  // Quan l'usuari està dins del Catàleg SCT, el topbar no ha de
+  // redirigir a /cerca (cerca global) — ha de cercar només dins del
+  // catàleg, propagant el query al camp #cat-q del HTML inline.
+  const isCatalegSct = location.pathname.includes(
+    '/transit/cataleg-d-infraccions-de-transit-sct-2026',
+  );
+
+  // Aplica el query al cercador intern del catàleg HTML.
+  // Retorna true si l'aplicació ha tingut èxit (camp trobat).
+  function applyToCatalegInternal(value: string): boolean {
+    if (typeof document === 'undefined') return false;
+    const input = document.getElementById('cat-q') as HTMLInputElement | null;
+    if (!input) return false;
+    input.value = value;
+    // Disparem 'input' perquè el filtre del catàleg s'activi.
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    return true;
+  }
+
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const q = query.trim();
     if (!q) return;
+    if (isCatalegSct) {
+      // Cerca interna: scroll al cercador del catàleg + aplica el filtre.
+      applyToCatalegInternal(q);
+      const input = document.getElementById('cat-q');
+      if (input) input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setMobileSearchOpen(false);
+      return;
+    }
     navigate(`/cerca?q=${encodeURIComponent(q)}`);
     setMobileSearchOpen(false);
   }
@@ -58,6 +85,11 @@ export default function Layout({ children }: { children: ReactNode }) {
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     const v = e.target.value;
     setQuery(v);
+    if (isCatalegSct) {
+      // Propaga el text al cercador intern del catàleg — no navega fora.
+      applyToCatalegInternal(v);
+      return;
+    }
     if (v.trim().length > 0) {
       navigate(`/cerca?q=${encodeURIComponent(v)}`, { replace: true });
     }
@@ -94,9 +126,10 @@ export default function Layout({ children }: { children: ReactNode }) {
                 type="search"
                 inputMode="search"
                 autoComplete="off"
-                placeholder={t('search.placeholder')}
+                placeholder={isCatalegSct ? 'Cerca dins del catàleg SCT…' : t('search.placeholder')}
                 value={query}
                 onChange={onChange}
+                aria-label={isCatalegSct ? 'Cerca dins del catàleg SCT' : t('search.label')}
               />
               <kbd>⌘K</kbd>
             </div>
@@ -163,9 +196,10 @@ export default function Layout({ children }: { children: ReactNode }) {
                   inputMode="search"
                   autoComplete="off"
                   autoFocus
-                  placeholder={t('search.placeholder')}
+                  placeholder={isCatalegSct ? 'Cerca dins del catàleg SCT…' : t('search.placeholder')}
                   value={query}
                   onChange={onChange}
+                  aria-label={isCatalegSct ? 'Cerca dins del catàleg SCT' : t('search.label')}
                 />
                 {query && (
                   <button
