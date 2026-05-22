@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
@@ -48,8 +49,28 @@ const NEWS = [
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
 
+const CATEGORY_COLORS = {
+  'Política':    T.cat.operativa,
+  'Economia':    T.cat.leyes,
+  'Cultura':     T.cat.psico,
+  'Ciència':     T.cat.physical,
+  'Premis':      T.cat.psico,
+  'Esports':     T.cat.atajos,
+  'Successos':   T.cat.alcohol,
+  'Judicial':    T.cat.transito,
+};
+
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
+  const [generalNews, setGeneralNews] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/news/general')
+      .then(r => r.json())
+      .then(data => setGeneralNews(Array.isArray(data) ? data.slice(0, 10) : []))
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="screen">
       <StatusBar />
@@ -136,6 +157,48 @@ export default function ScreenOperativaHome() {
           ))}
         </div>
       </div>
+
+      {/* Notícies del dia — actualitzades automàticament cada nit a les 22h */}
+      {generalNews.length > 0 && (
+        <div style={{ padding: '14px 0 0' }}>
+          <SectionHead kicker="Avui" kickerColor={T.cat.atajos.solid} title="Notícies del dia" action="Tot →" />
+          <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {generalNews.map((n, i) => {
+              const colors = CATEGORY_COLORS[n.category] || T.cat.atajos;
+              return (
+                <div
+                  key={n.id || i}
+                  onClick={() => n.url && window.open(n.url, '_blank', 'noopener')}
+                  style={{
+                    background: '#fff',
+                    borderRadius: T.r.md,
+                    padding: 14,
+                    borderLeft: `2px solid ${colors.solid}`,
+                    boxShadow: T.shadow.card,
+                    cursor: n.url ? 'pointer' : 'default',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                    <span style={{ fontSize: 10, fontWeight: 800, color: colors.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>
+                      {n.category}{n.region ? ` · ${n.region}` : ''}
+                    </span>
+                    <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.dateLabel}</span>
+                  </div>
+                  <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                  <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+                  {n.url && (
+                    <div style={{ fontSize: 10.5, color: colors.solid, marginTop: 6, fontWeight: 700 }}>
+                      {n.source} · Llegir notícia →
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      <div style={{ height: 32 }} />
     </div>
   );
 }

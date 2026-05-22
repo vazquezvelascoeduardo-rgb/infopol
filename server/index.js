@@ -2,6 +2,7 @@ import express from 'express';
 import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { readFileSync, existsSync } from 'fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -112,6 +113,17 @@ app.put('/api/user', (req, res) => {
 
 app.get('/api/news', (req, res) => {
   res.json(NEWS);
+});
+
+app.get('/api/news/general', (req, res) => {
+  try {
+    const filePath = join(__dirname, 'data/news-general.json');
+    if (!existsSync(filePath)) return res.json([]);
+    const news = JSON.parse(readFileSync(filePath, 'utf8'));
+    res.json(news.slice(0, 20));
+  } catch {
+    res.json([]);
+  }
 });
 
 app.get('/api/stats', (req, res) => {
