@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
+import { NOTICIAS } from '../../data/noticias';
 
 function BigCatCard({ cat, icon, kicker, title, desc, cta, onClick }) {
   const k = T.cat[cat];
@@ -134,6 +135,34 @@ export default function ScreenOperativaHome() {
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Notícies del dia */}
+      <div style={{ padding: '14px 0 16px' }}>
+        <SectionHead kicker="Catalunya · Espanya · Món" kickerColor={T.cat.leyes.solid} title="Notícies del dia" action="Veure-les totes →" onAction={() => navigate('/operativa/noticias')} />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {NOTICIAS.slice(0, 3).map((n) => {
+            const catColors = {
+              política: T.cat.operativa, economia: T.cat.leyes, cultura: T.cat.academia,
+              esports: T.cat.transito, policial: T.cat.alcohol, descobriments: T.cat.physical,
+              premis: T.cat.psico, internacional: T.cat.atajos,
+            };
+            const c = catColors[n.categoria] || T.cat.operativa;
+            return (
+              <div key={n.id} onClick={() => navigate('/operativa/noticias')} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${c.solid}`, boxShadow: T.shadow.card, cursor: 'pointer' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                  <span style={{ fontSize: 10, fontWeight: 800, color: c.solid, letterSpacing: 0.6, textTransform: 'uppercase', background: c.soft, padding: '2px 7px', borderRadius: 999 }}>{n.categoria}</span>
+                  <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.dateLabel}</span>
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              </div>
+            );
+          })}
+          <div onClick={() => navigate('/operativa/noticias')} style={{ textAlign: 'center', padding: '10px 0', color: T.cat.leyes.solid, fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
+            Veure totes les notícies →
+          </div>
         </div>
       </div>
     </div>

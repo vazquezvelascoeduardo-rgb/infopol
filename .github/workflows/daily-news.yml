@@ -1,0 +1,53 @@
+name: Notícies diàries InfoPol
+
+on:
+  schedule:
+    # 21:00 UTC = 22:00 CET (hivern) / 23:00 CEST (estiu)
+    # Per tenir 22:00 CEST (estiu) canvia a: '0 20 * * *'
+    - cron: '0 21 * * *'
+  workflow_dispatch:
+    inputs:
+      date_override:
+        description: 'Data (YYYY-MM-DD). Deixa buit per a avui.'
+        required: false
+
+jobs:
+  generate-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instal·lar Anthropic SDK
+        run: npm install --no-save @anthropic-ai/sdk
+
+      - name: Generar notícies
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          DATE_OVERRIDE: ${{ inputs.date_override }}
+        run: node scripts/generate-news.mjs
+
+      - name: Commit i push si hi ha canvis
+        run: |
+          git config --local user.email "infopol-bot@infopol.cat"
+          git config --local user.name "InfoPol Bot"
+          git add src/data/noticias.js
+          if git diff --staged --quiet; then
+            echo "No hi ha canvis a publicar."
+          else
+            DATE=$(date +%Y-%m-%d)
+            git commit -m "notícies: actualització diària ${DATE}"
+            git push origin ${{ github.ref_name }}
+            echo "✅ Notícies publicades per al ${DATE}"
+          fi
