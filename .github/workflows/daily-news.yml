@@ -1,0 +1,48 @@
+name: Cerca diària de notícies
+
+on:
+  schedule:
+    # 21:00 UTC = 22:00 CET (hivern) / 23:00 CEST (estiu)
+    # Ajusta a 20:00 UTC si prefereixes exactament les 22:00 CEST d'estiu
+    - cron: '0 21 * * *'
+  workflow_dispatch:  # Permet execució manual des de GitHub
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repositori
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instal·lar dependències
+        run: npm ci
+
+      - name: Executar cerca de notícies
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/fetch-news.js
+
+      - name: Comprovar si hi ha canvis
+        id: changes
+        run: |
+          git diff --quiet server/data/news.json && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit i push de les notícies
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "InfoPol News Bot"
+          git config user.email "noreply@infopol.app"
+          git add server/data/news.json
+          git commit -m "notícies: actualització automàtica $(date -u +%Y-%m-%d)"
+          git push origin ${{ github.ref_name }}
