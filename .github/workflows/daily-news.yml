@@ -1,0 +1,49 @@
+name: Daily News Fetch
+
+on:
+  schedule:
+    # 22:00 CET (UTC+1) = 21:00 UTC — runs in winter; in summer (CEST/UTC+2) it runs at 23:00 local
+    - cron: '0 21 * * *'
+  workflow_dispatch:  # Allow manual run from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch today's news via Claude
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/fetch-news.js
+
+      - name: Commit and push updated news
+        run: |
+          git config user.name "InfoPol News Bot"
+          git config user.email "newsbot@infopol.cat"
+          git add src/data/news.js
+          if git diff --staged --quiet; then
+            echo "ℹ️  No changes to news.js — nothing to commit"
+          else
+            DATE=$(date '+%d/%m/%Y')
+            git commit -m "🗞️ Notícies del ${DATE} actualitzades automàticament"
+            git push origin main
+            echo "✅ News pushed to main"
+          fi
