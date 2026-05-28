@@ -123,12 +123,12 @@ const actualitat: TestTopic = {
     },
     {
       id: 'actualitat-11',
-      text: 'Qui és l\'actual Fiscal General de l\'Estat?',
+      text: 'Qui és l\'actual Fiscal General de l\'Estat (des de desembre de 2025)?',
       options: [
+        'Teresa Peramato Martín',
         'Álvaro García Ortiz',
         'Dolores Delgado García',
         'Consuelo Madrigal Martínez-Pereda',
-        'María Teresa Vega Fernández',
       ],
       correct: 0,
     },
@@ -156,12 +156,12 @@ const actualitat: TestTopic = {
     },
     {
       id: 'actualitat-14',
-      text: 'Qui és l\'actual Primera Vicepresidenta del Govern d\'Espanya?',
+      text: 'Qui és l\'actual Primera Vicepresidenta del Govern d\'Espanya (des de setembre de 2024, després de la marxa de Calviño al BEI)?',
       options: [
+        'María Jesús Montero Cuadrado',
         'Yolanda Díaz Pérez',
         'Nadia Calviño Santamaría',
         'Teresa Ribera Rodríguez',
-        'Carmen Calvo Poyato',
       ],
       correct: 0,
     },
@@ -835,6 +835,39 @@ const actualitat: TestTopic = {
         'Més de 70.000',
       ],
       correct: 2,
+    },
+    {
+      id: 'actualitat-76',
+      text: 'Qui va ser l\'anterior Fiscal General de l\'Estat, predecessor de Teresa Peramato Martín?',
+      options: [
+        'Álvaro García Ortiz',
+        'Dolores Delgado García',
+        'Eduardo Torres-Dulce Lifante',
+        'Consuelo Madrigal Martínez-Pereda',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-77',
+      text: 'Per quin motiu va dimitir Álvaro García Ortiz com a Fiscal General de l\'Estat el novembre de 2025?',
+      options: [
+        'Va ser condemnat pel Tribunal Suprem per revelació de secrets (cas del nuvi de la presidenta de Madrid)',
+        'Per motius personals i de salut',
+        'Per discrepàncies amb el Govern d\'Espanya sobre la Llei d\'Amnistia',
+        'Per haver assolit l\'edat de jubilació obligatòria',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-78',
+      text: 'En quin mes va prendre possessió Teresa Peramato Martín com a Fiscal General de l\'Estat?',
+      options: [
+        'Desembre de 2025',
+        'Octubre de 2025',
+        'Gener de 2026',
+        'Setembre de 2025',
+      ],
+      correct: 0,
     },
   ],
 };
