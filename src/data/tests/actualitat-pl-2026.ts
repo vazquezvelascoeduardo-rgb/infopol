@@ -529,50 +529,6 @@ const actualitat: TestTopic = {
       correct: 1,
     },
     {
-      id: 'actualitat-48',
-      text: 'Quin film va guanyar l\'Oscar a la Millor Pel·lícula a la 98a edició, celebrada el 15 de març de 2026?',
-      options: [
-        'Sinners',
-        'One Battle After Another (Una batalla tras otra)',
-        'Frankenstein',
-        'Hamnet',
-      ],
-      correct: 1,
-    },
-    {
-      id: 'actualitat-49',
-      text: 'Qui va dirigir "One Battle After Another", Oscar a la Millor Pel·lícula 2026?',
-      options: [
-        'Paul Thomas Anderson',
-        'Christopher Nolan',
-        'Martin Scorsese',
-        'Quentin Tarantino',
-      ],
-      correct: 0,
-    },
-    {
-      id: 'actualitat-50',
-      text: 'Qui va guanyar l\'Oscar al Millor Actor 2026 per la pel·lícula "Sinners"?',
-      options: [
-        'Leonardo DiCaprio',
-        'Adrien Brody',
-        'Michael B. Jordan',
-        'Timothée Chalamet',
-      ],
-      correct: 2,
-    },
-    {
-      id: 'actualitat-51',
-      text: 'Qui va guanyar l\'Oscar a la Millor Actriu 2026 per la pel·lícula "Hamnet"?',
-      options: [
-        'Mikey Madison',
-        'Demi Moore',
-        'Jessie Buckley',
-        'Cynthia Erivo',
-      ],
-      correct: 2,
-    },
-    {
       id: 'actualitat-52',
       text: 'Quin va ser el Grammy a l\'Àlbum de l\'Any 2026, en una nit històrica?',
       options: [
@@ -681,50 +637,6 @@ const actualitat: TestTopic = {
         'Inter de Milà',
       ],
       correct: 2,
-    },
-    {
-      id: 'actualitat-62',
-      text: 'On es disputarà la final de la Champions League 2025-2026, el 30 de maig de 2026?',
-      options: [
-        'Wembley (Londres)',
-        'San Siro (Milà)',
-        'Puskás Aréna (Budapest)',
-        'Estadi Olímpic (Munic)',
-      ],
-      correct: 2,
-    },
-    {
-      id: 'actualitat-63',
-      text: 'Quins dos equips disputaran la final de la Champions League 2025-2026?',
-      options: [
-        'Reial Madrid - Manchester City',
-        'FC Barcelona - Bayern de Munic',
-        'Arsenal - Paris Saint-Germain (PSG)',
-        'Inter de Milà - Liverpool',
-      ],
-      correct: 2,
-    },
-    {
-      id: 'actualitat-64',
-      text: 'Quin país va guanyar el Festival d\'Eurovisió 2026, celebrat a Viena el 16 de maig?',
-      options: [
-        'Israel',
-        'Suècia',
-        'Finlàndia',
-        'Bulgària',
-      ],
-      correct: 3,
-    },
-    {
-      id: 'actualitat-65',
-      text: 'Quina cantant va representar Bulgària a Eurovisió 2026, guanyant amb la cançó "Bangaranga"?',
-      options: [
-        'Dara (Darina Yotova)',
-        'Helena Paparizou',
-        'Loreen',
-        'Conchita Wurst',
-      ],
-      correct: 0,
     },
     {
       id: 'actualitat-66',
