@@ -13,7 +13,7 @@ import { useFailuresCounts } from '../../lib/failures';
 import { useT } from '../../lib/i18n';
 import { MODULES } from '../../lib/content';
 
-type FilterId = 'all' | 'temari' | 'cultura' | 'municipi';
+type FilterId = 'all' | 'temari' | 'cultura' | 'municipi' | 'actualitat';
 
 // Mapeja l'accent Tailwind del topic ('from-red-500 to-rose-700') a un
 // color sòlid + un fons translúcid coordinat, per usar a `--accent` /
@@ -74,6 +74,7 @@ export default function TestList() {
     temari: getTopicsByCategory('temari').length,
     cultura: getTopicsByCategory('cultura').length,
     municipi: getTopicsByCategory('municipi').length,
+    actualitat: getTopicsByCategory('actualitat').length,
   }), [PL_TOPICS]);
 
   // Topics filtrats.
@@ -309,6 +310,14 @@ export default function TestList() {
               n={counts.cultura}
             />
           )}
+          {counts.actualitat > 0 && (
+            <FilterChip
+              active={filter === 'actualitat'}
+              onClick={() => setFilter('actualitat')}
+              label="Actualitat"
+              n={counts.actualitat}
+            />
+          )}
           {counts.municipi > 0 && (
             <FilterChip
               active={filter === 'municipi'}
@@ -403,7 +412,33 @@ function TestCard({ topic }: { topic: typeof TOPICS[number] }) {
   const level = levelFromBest(stats?.best);
   const lvlMeta = LEVEL_LVL[level];
   const colors = accentToColors(topic.accent);
-  const total = topic.questions.length;
+
+  // Destí especial per a Cultura general i Actualitat: enllaçar al pool
+  // sencer (/cultura-general/tot, /actualitat/tot) en lloc del topic
+  // individual, per fer-ho equivalent al comportament de la home dels
+  // dos blocs (totes les preguntes mesclades, no només les del mix).
+  const isCulturaMix = topic.slug === 'cultura-general';
+  const isActualitat = topic.category === 'actualitat';
+  const linkTo = isCulturaMix
+    ? '/cultura-general/tot'
+    : isActualitat
+      ? '/actualitat/tot'
+      : `/policia-local/${topic.slug}`;
+  // Total real: per cultura-general (mix general), comptem totes les
+  // preguntes de la categoria cultura, no només les del topic principal.
+  // Per actualitat, comptem totes les preguntes de la categoria actualitat.
+  const total = useMemo(() => {
+    if (isCulturaMix) {
+      return TOPICS.filter((tp) => tp.category === 'cultura')
+        .reduce((acc, tp) => acc + tp.questions.length, 0);
+    }
+    if (isActualitat) {
+      return TOPICS.filter((tp) => tp.category === 'actualitat')
+        .reduce((acc, tp) => acc + tp.questions.length, 0);
+    }
+    return topic.questions.length;
+  }, [isCulturaMix, isActualitat, topic]);
+
   // Progrés segons la millor nota (0-10) — 100% si nota ≥ 9.
   const pct = stats?.best
     ? Math.min(100, Math.round((stats.best / 10) * 100))
@@ -411,7 +446,7 @@ function TestCard({ topic }: { topic: typeof TOPICS[number] }) {
 
   return (
     <Link
-      to={`/policia-local/${topic.slug}`}
+      to={linkTo}
       className="tcard"
       style={{
         ['--accent' as never]: colors.c,
