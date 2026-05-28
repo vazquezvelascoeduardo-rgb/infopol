@@ -218,18 +218,37 @@ export default function TestSession() {
     }
     setState({ ...state, answers: next, revealedIdx: nextRevealed });
 
-    // Auto-avanca nomes en mode simulacre. En interactiu deixem que
-    // l'usuari llegeixi la correccio i premi 'Seguent' quan vulgui
-    // (aixi s'interioritza la resposta correcta).
+    // Auto-avanç:
+    //  · mode 'exam' (simulacre): sempre auto-avança ràpid (450 ms) per
+    //    mantenir el ritme de simulacre real.
+    //  · mode 'study' (interactiu): només auto-avança si l'usuari ha
+    //    encertat (1 s per veure el ✓ verd). Si ha fallat, es queda
+    //    perquè llegeixi la correcció i pugui passar manualment quan
+    //    vulgui — així s'interioritza l'error.
     const isLast = state.index >= state.questions.length - 1;
-    if (!isLast && state.mode === 'exam') {
+    if (isLast) return;
+    const currentQIdx = state.index;
+    const isCorrect = idx === state.questions[state.index].correctIndex;
+    if (state.mode === 'exam') {
       setTimeout(() => {
         setState((curr) => {
           if (curr.phase !== 'run') return curr;
+          // Només avancem si l'usuari encara és a la mateixa pregunta
+          // (per no saltar si ha tornat enrere mentrestant).
+          if (curr.index !== currentQIdx) return curr;
           if (curr.index >= curr.questions.length - 1) return curr;
           return { ...curr, index: curr.index + 1 };
         });
       }, 450);
+    } else if (state.mode === 'study' && isCorrect) {
+      setTimeout(() => {
+        setState((curr) => {
+          if (curr.phase !== 'run') return curr;
+          if (curr.index !== currentQIdx) return curr;
+          if (curr.index >= curr.questions.length - 1) return curr;
+          return { ...curr, index: curr.index + 1 };
+        });
+      }, 1000);
     }
   }
 
@@ -427,9 +446,10 @@ function SelectPhase({
   isRepas?: boolean;
 }) {
   const { t } = useT();
-  // Per defecte interactiu (study) al mode repàs — té sentit estudiar
-  // amb feedback immediat. A la resta de modes, manté simulacre.
-  const [mode, setMode] = useState<Mode>(isRepas ? 'study' : 'exam');
+  // Mode 'study' (interactiu) per defecte sempre — l'usuari va
+  // demanar tenir el feedback immediat com a opció principal. Si vol
+  // simular un examen real ha de canviar a 'exam' manualment.
+  const [mode, setMode] = useState<Mode>('study');
   // Maxim 50 preguntes per test (encara que el pool tingui mes).
   const MAX_PER_TEST = 50;
   const cappedRemaining = Math.min(remaining, MAX_PER_TEST);

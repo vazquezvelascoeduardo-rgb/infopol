@@ -4453,9 +4453,16 @@ html[data-text-size="lg"] { font-size: 18px; }
     padding: 28px 24px;
     margin-bottom: 20px;
     box-shadow: 0 1px 2px rgba(14,14,14,0.03), 0 8px 30px -12px rgba(14,14,14,0.10);
+    /* Altura mínima per evitar que el bloc canviï molt entre preguntes
+       curtes i llargues — així els botons del peu queden a la mateixa
+       posició visual. Si la pregunta + opcions + feedback superen aquest
+       espai, la card creix amb naturalitat. */
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
   }
   @media (min-width: 640px) {
-    .ts-question { padding: 32px 36px; }
+    .ts-question { padding: 32px 36px; min-height: 520px; }
   }
   .ts-topic-badge {
     display: inline-flex;
@@ -4607,12 +4614,24 @@ html[data-text-size="lg"] { font-size: 18px; }
     opacity: 0.7;
   }
 
-  /* Bottom controls */
+  /* Bottom controls — sticky al peu per quedar sempre visibles
+     encara que la card creixi (feedback, pregunta llarga, etc.).
+     Així el botó "Següent" no es mou amunt i avall entre preguntes. */
   .ts-controls {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-top: 8px;
+    position: sticky;
+    bottom: 12px;
+    z-index: 5;
+    background: linear-gradient(180deg,
+      color-mix(in oklab, var(--paper) 70%, transparent) 0%,
+      var(--paper) 30%);
+    padding: 12px 4px 12px;
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
   .ts-btn {
     display: inline-flex;
