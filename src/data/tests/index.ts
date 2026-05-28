@@ -57,6 +57,7 @@ import mossosC4 from './mossos-c4';
 import mossosC5 from './mossos-c5';
 import actualitatPl2026 from './actualitat-pl-2026';
 import calafell from './calafell';
+import sabadell from './sabadell';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -114,6 +115,7 @@ export const TOPICS: TestTopic[] = [
   mossosC5,
   actualitatPl2026,
   calafell,
+  sabadell,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
