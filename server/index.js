@@ -2,6 +2,7 @@ import express from 'express';
 import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { readFileSync, existsSync } from 'fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -43,12 +44,13 @@ const USER = {
   mode: 'operativa',
 };
 
-const NEWS = [
+const NEWS_FALLBACK = [
   {
     id: 'n001',
     date: '2026-04-18',
     dateLabel: '04·18',
     tag: 'LO 1/2026',
+    geo: 'Espanya',
     title: 'Multireincidència — enduriment de furts i estafes lleus',
     desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026. Afecta l\'art. 22.8 CP i els arts. 468-470 LECrim.',
     url: null,
@@ -58,6 +60,7 @@ const NEWS = [
     date: '2026-04-14',
     dateLabel: '04·14',
     tag: 'RD 316/2026',
+    geo: 'Espanya',
     title: 'Reforma del Reglament d\'Estrangeria',
     desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny de 2026.',
     url: null,
@@ -67,11 +70,22 @@ const NEWS = [
     date: '2026-03-28',
     dateLabel: '03·28',
     tag: 'Circ. 2/2026',
+    geo: 'Espanya',
     title: 'Instrucció sobre identificació i registre de persones',
     desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.',
     url: null,
   },
 ];
+
+function readNews() {
+  const newsPath = join(__dirname, 'data', 'news.json');
+  if (!existsSync(newsPath)) return NEWS_FALLBACK;
+  try {
+    return JSON.parse(readFileSync(newsPath, 'utf8'));
+  } catch {
+    return NEWS_FALLBACK;
+  }
+}
 
 const STATS = {
   streak: 23,
@@ -111,7 +125,9 @@ app.put('/api/user', (req, res) => {
 });
 
 app.get('/api/news', (req, res) => {
-  res.json(NEWS);
+  const all = readNews();
+  const { limit } = req.query;
+  res.json(limit ? all.slice(0, parseInt(limit, 10)) : all);
 });
 
 app.get('/api/stats', (req, res) => {

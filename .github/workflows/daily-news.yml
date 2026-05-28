@@ -1,0 +1,52 @@
+name: Actualització diària de notícies
+
+# Execució diària a les 22:00 hora d'Espanya (CEST, UTC+2)
+# En horari d'hivern (CET, UTC+1) s'executarà a les 21:00 locals.
+# Per canviar-ho a 22:00 tot l'any, ajusta el cron a '0 21 * * *' a l'octubre.
+on:
+  schedule:
+    - cron: '0 20 * * *'
+  workflow_dispatch:
+    inputs:
+      date_override:
+        description: 'Data manual (YYYY-MM-DD), opcional'
+        required: false
+
+jobs:
+  genera-noticias:
+    name: Genera i publica notícies
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repositori
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Configura Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instal·la dependències
+        run: npm ci
+
+      - name: Genera notícies del dia
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/generate-news.js
+
+      - name: Commit i push de les notícies
+        run: |
+          git config user.name "InfoPol Bot"
+          git config user.email "infopol-bot@noreply.github.com"
+          git add server/data/news.json
+          if git diff --staged --quiet; then
+            echo "No hi ha canvis nous."
+          else
+            git commit -m "feat: notícies $(date +%Y-%m-%d)"
+            git push origin ${{ github.ref_name }}
+          fi
