@@ -38,8 +38,10 @@ export type TestTopic = {
    * de Policia Local. 'cultura': cultura general (es separa visualment).
    * 'municipi': test específic d'un municipi. 'mossos': temari específic
    * de Mossos d'Esquadra (no entra al pool combinat de Policia Local).
+   * 'actualitat': preguntes d'actualitat (càrrecs vigents, premis, esports,
+   * fets recents) — no entra al pool combinat del temari oficial.
    */
-  category?: 'temari' | 'cultura' | 'municipi' | 'mossos';
+  category?: 'temari' | 'cultura' | 'municipi' | 'mossos' | 'actualitat';
   /**
    * Si category='municipi', nom del municipi al qual pertany (ex. 'Terrassa').
    */

@@ -3,7 +3,7 @@
 // es 'tot' fem mescla de tots els temes.
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
-import { TOPICS, getAllQuestions, getAllMossosQuestions, getAllCulturaQuestions, getTopic } from '../../data/tests';
+import { TOPICS, getAllQuestions, getAllMossosQuestions, getAllCulturaQuestions, getAllActualitatQuestions, getTopic } from '../../data/tests';
 import type { TestQuestion } from '../../data/tests/types';
 import {
   getAnsweredIds, markAnswered, resetProgress,
@@ -65,16 +65,21 @@ export default function TestSession() {
   // llistat" i el pool de preguntes en mode 'tot'.
   const isMossosRoute = location.pathname.startsWith('/mossos');
   const isCulturaRoute = location.pathname.startsWith('/cultura-general');
+  const isActualitatRoute = location.pathname.startsWith('/actualitat');
   const corpsRoot = isMossosRoute
     ? '/mossos'
     : isCulturaRoute
       ? '/cultura-general'
-      : '/policia-local';
+      : isActualitatRoute
+        ? '/actualitat'
+        : '/policia-local';
   const corpsLabel = isMossosRoute
     ? t('mossos.title')
     : isCulturaRoute
       ? t('cultura.title')
-      : t('test.list.title');
+      : isActualitatRoute
+        ? 'Actualitat'
+        : t('test.list.title');
 
   // Pool de preguntes per a aquest tema (o tots, o repàs).
   // El pool de 'tot' depèn del cos d'origen: a /mossos només Mossos, a
@@ -84,10 +89,11 @@ export default function TestSession() {
     if (isAll) {
       if (isMossosRoute) return getAllMossosQuestions();
       if (isCulturaRoute) return getAllCulturaQuestions();
+      if (isActualitatRoute) return getAllActualitatQuestions();
       return getAllQuestions();
     }
     return topic?.questions ?? [];
-  }, [isAll, isRepas, isMossosRoute, isCulturaRoute, topic]);
+  }, [isAll, isRepas, isMossosRoute, isCulturaRoute, isActualitatRoute, topic]);
 
   // Per a 'tot', el progrés és la unió dels temes del cos corresponent.
   // Per a 'repas', no usem progrés (les preguntes es repeteixen segons SRS).
@@ -99,7 +105,8 @@ export default function TestSession() {
         const cat = tp.category ?? 'temari';
         if (isMossosRoute && cat !== 'mossos') continue;
         if (isCulturaRoute && cat !== 'cultura') continue;
-        if (!isMossosRoute && !isCulturaRoute && cat === 'mossos') continue;
+        if (isActualitatRoute && cat !== 'actualitat') continue;
+        if (!isMossosRoute && !isCulturaRoute && !isActualitatRoute && cat === 'mossos') continue;
         for (const id of getAnsweredIds(tp.slug)) set.add(id);
       }
       return set;

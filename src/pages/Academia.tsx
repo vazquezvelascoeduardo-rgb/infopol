@@ -201,7 +201,7 @@ export default function Academia() {
         </Link>
       </section>
 
-      {/* 2 BOTONS SECUNDARIS — Actualitat + Cultura general */}
+      {/* 3 BOTONS SECUNDARIS — Notícies + Test d'actualitat + Cultura general */}
       <section className="ac-extra">
         <Link to="/noticies" className="ac-extra-card noticies">
           <span className="ico" aria-hidden>📰</span>
@@ -209,6 +209,15 @@ export default function Academia() {
             <span className="eyebrow">{t('academia.extra.actualitatEyebrow')}</span>
             <h3>{t('academia.extra.actualitat')}</h3>
             <p>{t('academia.extra.actualitatDesc')}</p>
+          </div>
+          <span className="arr" aria-hidden>→</span>
+        </Link>
+        <Link to="/actualitat" className="ac-extra-card cultura">
+          <span className="ico" aria-hidden>🗞️</span>
+          <div className="text">
+            <span className="eyebrow">Test · Actualitat 2025–2026</span>
+            <h3>Test d'actualitat</h3>
+            <p>Càrrecs vigents, premis i fets clau · 75 preguntes mesclades.</p>
           </div>
           <span className="arr" aria-hidden>→</span>
         </Link>
