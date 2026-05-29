@@ -60,6 +60,8 @@ import calafell from './calafell';
 import sabadell from './sabadell';
 import rgc1428 from './rgc-1428-2003';
 import estrangeria from './lo4-2000-estrangeria';
+import proteccioCivil from './proteccio-civil';
+import igualtatGenere from './igualtat-genere';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -120,6 +122,8 @@ export const TOPICS: TestTopic[] = [
   sabadell,
   rgc1428,
   estrangeria,
+  proteccioCivil,
+  igualtatGenere,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {

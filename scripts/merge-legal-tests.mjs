@@ -28,6 +28,10 @@ const JOBS = [
     meta: { title: 'Reglament General de Circulació (RD 1428/2003)', description: 'normes de circulació, velocitat, senyals, maniobres', icon: '🚸', accent: 'from-amber-500 to-orange-700' } },
   { md: 'test_LO4-2000_Estrangeria_50.md', target: 'lo4-2000-estrangeria', prefix: 'estrangeria', isNew: true,
     meta: { title: 'Estrangeria (LO 4/2000)', description: 'drets dels estrangers, situacions, CIE, expulsió', icon: '🌍', accent: 'from-teal-500 to-teal-700' } },
+  { md: 'test_ProteccioCivil_50.md', target: 'proteccio-civil', prefix: 'proteccio-civil', isNew: true,
+    meta: { title: 'Protecció Civil (Llei 4/1997)', description: 'plans PROCICAT, INUNCAT, NEUCAT, INFOCAT, autoritats i fases', icon: '🚨', accent: 'from-orange-500 to-red-700' } },
+  { md: 'test_Igualtat_Genere_50.md', target: 'igualtat-genere', prefix: 'igualtat', isNew: true,
+    meta: { title: 'Igualtat i violència de gènere (LO 3/2007 · LO 1/2004)', description: 'igualtat efectiva, violència de gènere, actuació policial', icon: '⚖️', accent: 'from-pink-500 to-rose-700' } },
 ];
 
 // ── Parser de markdown ─────────────────────────────────────────────
