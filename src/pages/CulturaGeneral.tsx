@@ -75,21 +75,23 @@ export default function CulturaGeneral() {
             className="ts-mode featured"
             style={{
               ['--accent' as never]: '#FF7A1A',
-              background: 'linear-gradient(165deg, #FFE0CB 0%, var(--white) 70%)',
+              background: 'linear-gradient(135deg, #FF7A1A 0%, #E85D04 100%)',
+              borderColor: '#E85D04',
+              color: '#fff',
             } as React.CSSProperties}
           >
-            <span className="mtag">📖 Fitxa de repàs</span>
+            <span className="mtag" style={{ background: 'rgba(255,255,255,0.22)', color: '#fff' }}>📖 Fitxa de repàs</span>
             <div>
-              <h3>Temari de cultura general</h3>
-              <p>16 àrees i +400 fets clau per repassar de pressa abans del test.</p>
+              <h3 style={{ color: '#fff' }}>Temari de cultura general</h3>
+              <p style={{ color: 'rgba(255,255,255,0.9)' }}>16 àrees i +400 fets clau per repassar de pressa abans del test.</p>
             </div>
             <div className="footer">
-              <div className="specs">
+              <div className="specs" style={{ color: 'rgba(255,255,255,0.85)' }}>
                 <span>16 àrees</span>
                 <span>·</span>
                 <span>repàs ràpid</span>
               </div>
-              <span className="cta">
+              <span className="cta" style={{ color: '#fff' }}>
                 📚 Estudiar <span className="arr">→</span>
               </span>
             </div>

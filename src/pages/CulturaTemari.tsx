@@ -310,7 +310,7 @@ export default function CulturaTemari() {
   );
 
   return (
-    <div className="shell pb-10" style={{ background: PAPER }}>
+    <div className="shell pb-10">
       <nav className="crumbs">
         <Link to="/">{t('nav.home')}</Link>
         <span className="sep">/</span>
