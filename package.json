@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently \"vite\" \"node server/index.js\"",
+    "news:fetch": "node scripts/fetch-news.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "server": "node server/index.js",
