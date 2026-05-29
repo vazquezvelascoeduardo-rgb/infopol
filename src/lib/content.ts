@@ -80,6 +80,13 @@ export const MODULES: Module[] = [
     accent: 'from-amber-500 to-amber-700',
     icon: '🚦',
   },
+  {
+    slug: 'novetats',
+    title: 'Novetats normatives',
+    description: 'Lleis noves, reformes i actualitzacions normatives recents.',
+    accent: 'from-fuchsia-500 to-pink-700',
+    icon: '🆕',
+  },
 ];
 
 export type CardKind = 'html' | 'md';

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VMP i VPL — Novetats normatives 2025-2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E0E0E;
+    --paper: #FAF6EF;
+    --paper-2: #F2EDE3;
+    --white: #FFFFFF;
+    --novetat: #C026D3;
+    --novetat-2: #9D1AB5;
+    --novetat-soft: #FBE4FF;
+    --text: #0E0E0E;
+    --text-2: #4a4744;
+    --text-3: #807c77;
+    --line: rgba(14, 14, 14, 0.10);
+    --line-2: rgba(14, 14, 14, 0.06);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper); color: var(--text);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    line-height: 1.5; -webkit-font-smoothing: antialiased;
+    padding: 12px 8px 40px;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrapper { max-width: 1080px; margin: 0 auto; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .section-head {
+    display: flex; align-items: center; gap: 12px;
+    margin: 32px 0 14px; flex-wrap: wrap;
+  }
+  .section-head::before {
+    content: ""; display: block; width: 4px; height: 22px;
+    background: var(--accent, var(--novetat)); border-radius: 2px; flex: none;
+  }
+  .section-head .eyebrow { color: var(--accent, var(--ink)); flex: none; }
+  .section-head .rule { flex: 1; height: 1px; background: var(--line); min-width: 30px; }
+
+  .ce-hero {
+    display: grid; grid-template-columns: auto 1fr; gap: 24px;
+    align-items: center;
+    background: linear-gradient(180deg, #FBE4FF 0%, #F5BCFF 100%);
+    border: 1px solid #e5a3f0; border-radius: 18px;
+    padding: 26px 30px; margin-top: 8px;
+  }
+  .ce-title {
+    margin: 4px 0 6px; font-size: 38px; font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.05; color: #6b1278;
+  }
+  .ce-title .accent { color: var(--novetat); }
+  .ce-sub { margin: 0; color: #5a1064; font-size: 15px; max-width: 760px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .hero-tags .tag {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #e5a3f0;
+    padding: 4px 11px; border-radius: 999px;
+    font-size: 12.5px; font-weight: 600; color: #5a1064;
+  }
+  .hero-tags .tag.hot { background: var(--novetat-soft); border-color: var(--novetat); color: #6b1278; font-weight: 800; }
+
+  .meta-strip {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 16px; align-items: center;
+    background: #EAF1FE; border: 1px solid #b9d0f6;
+    border-radius: 14px; padding: 14px 18px; margin-top: 14px;
+  }
+  .meta-strip h3 { margin: 0; color: #1f3f7a; font-size: 16px; font-weight: 800; }
+  .meta-strip p { margin: 4px 0 0; color: #1f3f7a; font-size: 14px; }
+  .vigente {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 6px 14px; background: white;
+    border: 1px solid #b9d0f6; border-radius: 10px;
+  }
+  .vigente .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); }
+  .vigente .state { font-weight: 800; color: #2F6BD8; }
+
+  .art-card {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 14px; padding: 14px 18px;
+    border-left: 3px solid var(--accent, var(--novetat));
+    margin-top: 10px;
+  }
+  .art-card.warn { background: #FFF6E8; border-color: #f3d6a0; border-left-color: #E89A1C; }
+  .art-card.danger { background: #FFEFEC; border-color: #f5c19a; border-left-color: #E5484D; }
+  .art-card.ok { background: #E8F7EF; border-color: #b7e0c4; border-left-color: #1f8a4d; }
+  .art-card header {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px;
+  }
+  .art-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    background: var(--ink); color: var(--white);
+    padding: 4px 9px; border-radius: 6px; letter-spacing: 0.04em;
+  }
+  .tag-sm {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 8px; border-radius: 6px; letter-spacing: 0.04em;
+    background: #EAF1FE; color: #1f4ea0;
+  }
+  .tag-sm.warn { background: #FFF6E8; color: #9c7a1f; }
+  .tag-sm.danger { background: #FFEFEC; color: #991b1b; }
+  .tag-sm.ok { background: #DFF7E9; color: #14532d; }
+  .tag-sm.novetat { background: var(--novetat-soft); color: #6b1278; }
+  .tag-sm.nuevo { background: linear-gradient(135deg, #FFD93D, #ffb800); color: #4a3700; }
+  .art-card h4 {
+    margin: 0; font-size: 16px; font-weight: 800; letter-spacing: -0.015em;
+  }
+  .art-card p { margin: 6px 0; font-size: 14px; color: var(--text-2); line-height: 1.55; }
+  .art-card p b { color: var(--ink); }
+  .art-card ul { margin: 6px 0 0 18px; }
+  .art-card li { font-size: 13.5px; color: var(--text-2); padding: 2px 0; }
+  .art-card li b { color: var(--ink); }
+
+  .multa {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 700;
+    padding: 4px 10px; border-radius: 999px;
+    background: #FFF1D2; color: #9c7a1f;
+  }
+  .multa.lleu { background: #DFF7E9; color: #14532d; }
+  .multa.greu { background: #FFE9D8; color: #9c3a08; }
+  .multa.muygreu { background: #FFEFEC; color: #991b1b; }
+
+  .twocol { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 760px) { .twocol { grid-template-columns: 1fr; } }
+
+  .info {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 12px; align-items: start;
+    padding: 12px 14px; border-radius: 10px;
+    margin-top: 10px; font-size: 13px; line-height: 1.5;
+  }
+  .info b { color: var(--ink); }
+  .info.tip { background: var(--paper-2); border-left: 3px solid var(--text-2); color: var(--text-2); }
+  .info.cop { background: #EAF1FE; border-left: 3px solid #2F6BD8; color: #1f3f7a; }
+  .info.warn { background: #FFF6E8; border-left: 3px solid #E89A1C; color: #6b5a30; }
+  .info.danger { background: #FFEFEC; border-left: 3px solid #E5484D; color: #7a1f1f; }
+  .info.novetat { background: var(--novetat-soft); border-left: 3px solid var(--novetat); color: #6b1278; }
+  .info .ico { font-size: 18px; }
+
+  .ntable {
+    width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13.5px;
+  }
+  .ntable th {
+    text-align: left; padding: 8px 10px;
+    background: var(--paper-2); font-weight: 800; color: var(--ink);
+    font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .ntable td {
+    padding: 8px 10px; border-top: 1px solid var(--line-2);
+    color: var(--text-2); vertical-align: top;
+  }
+  .ntable b { color: var(--ink); }
+
+  .timeline {
+    display: grid; gap: 8px; margin-top: 12px;
+  }
+  .timeline-item {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 14px; align-items: start;
+    padding: 12px 16px; background: var(--white);
+    border: 1px solid var(--line); border-radius: 12px;
+    border-left: 3px solid var(--novetat);
+  }
+  .timeline-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; color: var(--novetat);
+    padding: 4px 8px; background: var(--novetat-soft);
+    border-radius: 6px; white-space: nowrap;
+  }
+  .timeline-body h5 { font-size: 14px; margin: 0 0 4px; color: var(--ink); font-weight: 800; }
+  .timeline-body p { font-size: 13px; margin: 0; color: var(--text-2); line-height: 1.45; }
+
+  .recorda {
+    background: linear-gradient(180deg, #FBE4FF 0%, #F5BCFF 100%);
+    border: 1px solid #e5a3f0; border-radius: 18px;
+    padding: 22px 26px; margin-top: 28px;
+  }
+  .recorda header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+  }
+  .recorda .rule { flex: 1; height: 1px; background: #e5a3f0; }
+  .reclist {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px;
+  }
+  .reclist li {
+    display: grid; grid-template-columns: auto 1fr; gap: 10px;
+    align-items: start; padding: 8px 0;
+    border-bottom: 1px solid rgba(107, 18, 120, 0.18);
+    font-size: 13.5px; color: #5a1064; line-height: 1.5;
+  }
+  .reclist li::before { content: "▸"; color: var(--novetat); font-weight: 800; }
+  .reclist b { color: var(--ink); }
+
+  @media (max-width: 980px) {
+    .meta-strip { grid-template-columns: 1fr; }
+    .reclist { grid-template-columns: 1fr; }
+    .ce-hero { grid-template-columns: 1fr; text-align: center; }
+    .ce-title { font-size: 28px; }
+  }
+</style>
+</head>
+<body data-fitxa-style="rebrand-2026">
+<div class="wrapper">
+
+  <header class="ce-hero">
+    <div>
+      <svg width="80" height="92" viewBox="0 0 80 92" fill="none">
+        <path d="M40 4 L74 13 V42 C74 62 60 78 40 88 C20 78 6 62 6 42 V13 Z" fill="#6b1278" stroke="#C026D3" stroke-width="2"/>
+        <text x="40" y="38" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="20" fill="#fff">VMP</text>
+        <text x="40" y="58" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="14" fill="#FBE4FF">/</text>
+        <text x="40" y="74" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="20" fill="#fff">VPL</text>
+      </svg>
+    </div>
+    <div>
+      <div class="eyebrow" style="color:#6b1278;">🆕 NOVETATS NORMATIVES · TRÀNSIT</div>
+      <h1 class="ce-title">VMP i <span class="accent">VPL</span></h1>
+      <p class="ce-sub">Resum executiu de les noves lleis i reglaments aplicables a Vehicles de Mobilitat Personal i Vehicles Personals Lleugers (vigent maig 2026).</p>
+      <div class="hero-tags">
+        <span class="tag hot">⚡ Llei 5/2025</span>
+        <span class="tag hot">📜 RD 52/2026</span>
+        <span class="tag hot">🚦 Com. 6/2026 SCT</span>
+        <span class="tag">📅 Vigor 18/05/2026</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="meta-strip">
+    <div>
+      <h3>📌 Aquesta fitxa és un resum normatiu</h3>
+      <p>Per a l'operativa policial al carrer (butlletes, opcions, immobilitzacions), consulta la fitxa "VMP — Esquema operativo policial" al mòdul de Trànsit.</p>
+    </div>
+    <div class="vigente">
+      <span class="when">Vigor</span>
+      <span class="state">18/05/2026</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- CRONOLOGIA NORMATIVA                          -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="section-head">
+    <span class="eyebrow">📅 Cronologia normativa</span>
+    <span class="rule"></span>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <span class="timeline-date">22/01/2024</span>
+      <div class="timeline-body">
+        <h5>Comunicat 1/2024 SCT — Certificat de circulació</h5>
+        <p>Els VMP comercialitzats des d'aquesta data necessiten <b>certificat de circulació</b> emès pel fabricant. Període transitori per a VMP anteriors fins al 22/01/2027.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-date">24/07/2025</span>
+      <div class="timeline-body">
+        <h5>Llei 5/2025 — Assegurança obligatòria</h5>
+        <p><b>Vigor: 26/01/2026</b>. Estableix l'<b>assegurança RC obligatòria (AOV)</b> per a VPL certificats i inscrits. DA 1a: la sanció per circular sense AOV.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-date">28/01/2026</span>
+      <div class="timeline-body">
+        <h5>RD 52/2026 — Registre Nacional de VPL</h5>
+        <p><b>Vigor: 30/01/2026</b>. Crea el <b>Registre Nacional de Vehicles per als VPL</b> i estableix la distinció <b>VPL (MOM &lt; 25 kg) vs VMP "vehicle a motor" (MOM &gt; 25 kg)</b> segons la massa en ordre de marxa al RNV. Anàlisi de placa M (certificat) i etiqueta Z (transitori).</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-date">15/05/2026</span>
+      <div class="timeline-body">
+        <h5>Comunicat 6/2026 SCT — 5 noves infraccions</h5>
+        <p><b>Vigor: 18/05/2026</b>. Tipifica <b>5 noves infraccions específiques</b> per a VMP (art. 22 RGV) i <b>modifica</b> la sanció per VPL sense AOV: <s>350 €</s> → <b>300 €</b> (150 € DTE).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- KEY CHANGES                                   -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="section-head">
+    <span class="eyebrow">🎯 Què canvia per al policia local?</span>
+    <span class="rule"></span>
+  </div>
+
+  <div class="twocol">
+    <div class="art-card">
+      <header>
+        <span class="art-badge">NOU</span>
+        <h4>Distinció VPL vs VMP "vehicle a motor"</h4>
+        <span class="tag-sm novetat">RD 52/2026</span>
+      </header>
+      <ul>
+        <li><b>VPL</b>: MOM &lt; 25 kg → AOV obligatòria nomes si certificat I inscrit (300 € sense)</li>
+        <li><b>VMP a motor</b>: MOM &gt; 25 kg → AOV <b>sempre</b> obligatòria (800 € sense)</li>
+        <li>Si el VMP no està al RNV: l'agent ha d'indicar el <b>pes</b> a la butlleta</li>
+      </ul>
+    </div>
+    <div class="art-card warn">
+      <header>
+        <span class="art-badge">NOU</span>
+        <h4>5 noves infraccions Com. 6/2026</h4>
+        <span class="tag-sm novetat">SCT 18/05/2026</span>
+      </header>
+      <ul>
+        <li>No exhibir etiqueta o placa de marcatge — <b>80 €</b> (L)</li>
+        <li>No inscriure VMP al RNV — <b>100 €</b> (L)</li>
+        <li>Manipulació velocitat / Annex XXI greu — <b>500 €</b> (MG)</li>
+        <li>Annex XXI il·luminació/rodes — <b>200 €</b> (G)</li>
+        <li>Annex XXI timbre/cavallet — <b>80 €</b> (L)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info novetat">
+    <span class="ico">🆕</span>
+    <div><b>Canvi clau a recordar:</b> la sanció per VPL sense AOV s'ha rebaixat de <s>350 €</s> a <b>300 €</b> (150 € amb DTE). VMP a motor sense AOV: <b>800 €</b> (400 € DTE).</div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- TAULA RESUM                                   -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="section-head">
+    <span class="eyebrow">📋 Taula resum dels nous imports</span>
+    <span class="rule"></span>
+  </div>
+
+  <table class="ntable">
+    <thead>
+      <tr>
+        <th>Cas</th>
+        <th>Conducta</th>
+        <th>Multa</th>
+        <th>50% DTE</th>
+        <th>Base</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>VPL</b></td>
+        <td>Circular sense AOV (certificat i inscrit)</td>
+        <td><span class="multa greu">300 €</span></td>
+        <td>150 €</td>
+        <td>DA 1a Llei 5/2025</td>
+      </tr>
+      <tr>
+        <td><b>VMP a motor</b></td>
+        <td>Circular sense AOV (MOM &gt; 25 kg)</td>
+        <td><span class="multa muygreu">800 €</span></td>
+        <td>400 €</td>
+        <td>Art. 2.1 Llei RC</td>
+      </tr>
+      <tr>
+        <td><b>RNV</b></td>
+        <td>No inscriure VMP al Registre</td>
+        <td><span class="multa lleu">100 €</span></td>
+        <td>50 €</td>
+        <td>Art. 22 RGV</td>
+      </tr>
+      <tr>
+        <td><b>Etiqueta</b></td>
+        <td>No exhibir etiqueta o placa de marcatge</td>
+        <td><span class="multa lleu">80 €</span></td>
+        <td>40 €</td>
+        <td>Art. 22 RGV</td>
+      </tr>
+      <tr>
+        <td><b>Annex XXI</b></td>
+        <td>Manipulació velocitat / modificació estructural</td>
+        <td><span class="multa muygreu">500 €</span></td>
+        <td>250 €</td>
+        <td>Art. 22 RGV</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info cop">
+    <span class="ico">💡</span>
+    <div><b>Per a l'operativa completa</b> (procediment, immobilitzacions, casos especials, arbre de decisió), consulta la fitxa <b>"VMP · PATINETE — Esquema Operativo Policial"</b> al mòdul de <b>Trànsit</b>.</div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- RECORDA                                       -->
+  <!-- ════════════════════════════════════════════ -->
+  <section class="recorda">
+    <header>
+      <span class="eyebrow" style="color:#6b1278;">📌 Recorda · Les 5 claus</span>
+      <span class="rule"></span>
+    </header>
+    <ul class="reclist">
+      <li><span><b>&gt;25 km/h = NO és VMP</b> → règim ciclomotor (Instrucció DGT 2019/S-149)</span></li>
+      <li><span><b>&gt;25 kg = VMP a motor</b> (AOV sempre, 800 €) · <b>&lt;25 kg = VPL</b> (AOV només si certificat+inscrit, 300 €)</span></li>
+      <li><span><b>Tots els VMP s'han d'inscriure al RNV</b> (Reg. Nacional de Vehicles)</span></li>
+      <li><span><b>Etiqueta M</b> = certificat (post 22/01/2024) · <b>Etiqueta Z</b> = transitori (caduca 22/01/2027)</span></li>
+      <li><span><b>Menor d'edat = pares responen solidàriament</b> (art. 82 LSV)</span></li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>

@@ -258,6 +258,23 @@ export default function Operativa() {
             <span className="arr">→</span>
           </div>
         </Link>
+
+        <Link
+          to="/leyes/s/novetats"
+          className="op-area"
+          style={{
+            ['--accent' as never]: '#C026D3',
+            ['--accent-bg' as never]: '#FBE4FF',
+          } as React.CSSProperties}
+        >
+          <span className="ai">🆕</span>
+          <h3>Novetats normatives</h3>
+          <p>Lleis noves, reformes constitucionals i actualitzacions recents — VMP/VPL, 4a reforma CE, multireincidència…</p>
+          <div className="meta">
+            <span>Actualitzat 2026</span>
+            <span className="arr">→</span>
+          </div>
+        </Link>
       </section>
 
       {/* Procediments destacats amb filtre */}

@@ -69,6 +69,62 @@ export type Noticia = {
 // ════════════════════════════════════════════════════════════════════
 
 export const NOTICIES: Noticia[] = [
+  // ─── MAIG 2026 — CONSTITUCIONAL · 4a REFORMA CE ────────────────────
+
+  {
+    slug: 'mai2026-quarta-reforma-ce-formentera',
+    title: '4a reforma de la Constitució Espanyola — Formentera ja té senador propi',
+    summary: "El Rei Felip VI ha sancionat el 19 de maig de 2026 la quarta reforma de la Constitució Espanyola, que modifica l'article 69.3 perquè Formentera tingui un senador propi al Senat, independent d'Eivissa. És la quarta reforma en 48 anys.",
+    body: `**Sancionada per Felip VI:** 19/05/2026 · **Publicació BOE:** 19/05/2026 · **Article reformat:** 69.3 CE · **Procediment:** art. 167 CE (ordinari)
+
+S'ha aprovat la **4a reforma de la Constitució Espanyola** des de la seva entrada en vigor el 1978. La reforma modifica l'**article 69.3 CE** per atorgar a **Formentera un senador propi** al Senat, separant la seva representació de la d'Eivissa.
+
+## ⭐ Les 4 reformes de la CE 1978 — actualitzat
+
+| Reforma | Data | Article | Motiu |
+|---------|------|---------|-------|
+| **1a** | 27/08/1992 | art. 13.2 | Tractat de Maastricht (sufragi UE municipals) |
+| **2a** | 27/09/2011 | art. 135 | Estabilitat pressupostària (crisi euro) |
+| **3a** | 15/02/2024 | art. 49 | "Persones amb discapacitat" (terminologia inclusiva) |
+| **4a** 🆕 | 19/05/2026 | art. 69.3 | **Senador propi a Formentera** |
+
+## ⚖️ Què canvia exactament a l'art. 69.3 CE
+
+L'article 69.3 enumera les illes que tenen circumscripció pròpia per a l'elecció de senadors. **Abans**: Eivissa-Formentera compartien senador. **Ara**: cada illa té el seu propi senador.
+
+> El Senat passa de **208 senadors** elegits per circumscripció a **209**. Es manté el sistema de senadors autonòmics (1 per CA + 1 per cada milió d'habitants).
+
+## 🏝️ Per què la reforma
+
+Formentera (≈12.000 habitants) és la primera illa amb **Consell Insular propi des de 2007** que continuava compartint senador amb Eivissa. La reforma corregeix una incongruència institucional: si té Cabildo/Consell propi, també ha de tenir senador propi (segons el mateix art. 69.3 CE).
+
+## 📝 Procediment seguit
+
+- **Art. 167 CE** (procediment ordinari): no afecta el Títol Preliminar, ni la Secció 1a del Capítol II del Títol I, ni el Títol II.
+- **Sense referèndum obligatori** (només si ho demanen 1/10 dels diputats o senadors en els 15 dies següents — no es va sol·licitar).
+- Aprovat per **majoria de 3/5 al Congrés i al Senat** (text final el 13/05/2026).
+
+## 📚 Per al temari de Policia Local
+
+- **Hi ha 4 reformes** a la CE 1978 (no 3 — error típic en temaris desactualitzats).
+- **Data exacta**: 19/05/2026.
+- **Article reformat**: art. 69.3 CE.
+- **Procediment**: art. 167 CE (no calia art. 168 perquè no afecta el Títol II ni la Secció 1a Capítol II Títol I).
+- Atenció als enunciats: si pregunten "Quantes reformes té la CE?", la resposta correcta des del 19/05/2026 és **4**.
+
+> 💡 També tens una fitxa específica sobre aquesta reforma a la categoria **Novetats Normatives** del menú de Lleis.`,
+    publishedAt: '2026-05-19',
+    source: 'BOE · Reial Decret Legislatiu de sanció · RTVE',
+    tags: ['constitucional', 'CE 1978', 'reforma', 'Senat', 'Formentera', 'temari'],
+    featured: true,
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Spanish_Constitution_1978.jpg/1200px-Spanish_Constitution_1978.jpg',
+    imageAlt: 'Portada de la Constitució Espanyola de 1978',
+    linkedTo: {
+      moduleSlug: 'novetats',
+      slug: 'quarta-reforma-constitucio-2026',
+    },
+  },
+
   // ─── MAIG 2026 — TRÀNSIT · VMP / VPL ───────────────────────────────
 
   {

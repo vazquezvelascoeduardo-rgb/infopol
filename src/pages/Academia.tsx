@@ -230,6 +230,22 @@ export default function Academia() {
           </div>
           <span className="arr" aria-hidden>→</span>
         </Link>
+        <Link
+          to="/leyes/s/novetats"
+          className="ac-extra-card cultura"
+          style={{
+            background: 'linear-gradient(180deg, #FBE4FF 0%, #FFFFFF 100%)',
+            borderColor: 'color-mix(in oklab, #C026D3 28%, transparent)',
+          }}
+        >
+          <span className="ico" aria-hidden>🆕</span>
+          <div className="text">
+            <span className="eyebrow" style={{ color: '#9D1AB5' }}>Lleis noves · Reformes</span>
+            <h3>Novetats normatives</h3>
+            <p>VMP/VPL, 4a reforma CE, multireincidència · resums per a l'examen.</p>
+          </div>
+          <span className="arr" aria-hidden>→</span>
+        </Link>
       </section>
 
       {/* CONTINUE + NEXT */}

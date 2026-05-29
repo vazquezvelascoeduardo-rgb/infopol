@@ -69,6 +69,9 @@ const Flashcards = lazy(() => import('./pages/flashcards/Flashcards'));
 // aquesta llista.
 const PUBLIC_LEYES_CARDS: Array<{ moduleSlug: string; slug: string }> = [
   { moduleSlug: 'transit', slug: 'cataleg-d-infraccions-de-transit-sct-2026' },
+  // Novetats normatives — visibles des d'Operativa (que és pública)
+  { moduleSlug: 'novetats', slug: 'vmp-vpl-novetats-2026' },
+  { moduleSlug: 'novetats', slug: 'quarta-reforma-constitucio-2026' },
 ];
 
 function PageFallback() {

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4a Reforma de la Constitució Espanyola (2026)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E0E0E;
+    --paper: #FAF6EF;
+    --paper-2: #F2EDE3;
+    --white: #FFFFFF;
+    --novetat: #C026D3;
+    --novetat-soft: #FBE4FF;
+    --constitucio: #BF0F0F;
+    --constitucio-soft: #FFE4E4;
+    --text: #0E0E0E;
+    --text-2: #4a4744;
+    --text-3: #807c77;
+    --line: rgba(14, 14, 14, 0.10);
+    --line-2: rgba(14, 14, 14, 0.06);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper); color: var(--text);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    line-height: 1.5; -webkit-font-smoothing: antialiased;
+    padding: 12px 8px 40px;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrapper { max-width: 1080px; margin: 0 auto; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .section-head {
+    display: flex; align-items: center; gap: 12px;
+    margin: 32px 0 14px; flex-wrap: wrap;
+  }
+  .section-head::before {
+    content: ""; display: block; width: 4px; height: 22px;
+    background: var(--accent, var(--constitucio)); border-radius: 2px; flex: none;
+  }
+  .section-head .eyebrow { color: var(--accent, var(--ink)); flex: none; }
+  .section-head .rule { flex: 1; height: 1px; background: var(--line); min-width: 30px; }
+
+  .ce-hero {
+    display: grid; grid-template-columns: auto 1fr; gap: 24px;
+    align-items: center;
+    background: linear-gradient(180deg, #FFE4E4 0%, #FFA8A8 100%);
+    border: 1px solid #f5a3a3; border-radius: 18px;
+    padding: 26px 30px; margin-top: 8px;
+  }
+  .ce-title {
+    margin: 4px 0 6px; font-size: 38px; font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.05; color: #7a1212;
+  }
+  .ce-title .accent { color: var(--constitucio); }
+  .ce-sub { margin: 0; color: #5a0d0d; font-size: 15px; max-width: 760px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .hero-tags .tag {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #f5a3a3;
+    padding: 4px 11px; border-radius: 999px;
+    font-size: 12.5px; font-weight: 600; color: #5a0d0d;
+  }
+  .hero-tags .tag.hot { background: var(--constitucio-soft); border-color: var(--constitucio); color: #7a1212; font-weight: 800; }
+
+  .meta-strip {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 16px; align-items: center;
+    background: #EAF1FE; border: 1px solid #b9d0f6;
+    border-radius: 14px; padding: 14px 18px; margin-top: 14px;
+  }
+  .meta-strip h3 { margin: 0; color: #1f3f7a; font-size: 16px; font-weight: 800; }
+  .meta-strip p { margin: 4px 0 0; color: #1f3f7a; font-size: 14px; }
+  .vigente {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 6px 14px; background: white;
+    border: 1px solid #b9d0f6; border-radius: 10px;
+  }
+  .vigente .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); }
+  .vigente .state { font-weight: 800; color: #2F6BD8; }
+
+  .art-card {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 14px; padding: 14px 18px;
+    border-left: 3px solid var(--accent, var(--constitucio));
+    margin-top: 10px;
+  }
+  .art-card.warn { background: #FFF6E8; border-color: #f3d6a0; border-left-color: #E89A1C; }
+  .art-card.danger { background: #FFEFEC; border-color: #f5c19a; border-left-color: #E5484D; }
+  .art-card.ok { background: #E8F7EF; border-color: #b7e0c4; border-left-color: #1f8a4d; }
+  .art-card.cop { background: #EAF1FE; border-color: #b9d0f6; border-left-color: #2F6BD8; }
+  .art-card header {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px;
+  }
+  .art-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    background: var(--ink); color: var(--white);
+    padding: 4px 9px; border-radius: 6px; letter-spacing: 0.04em;
+  }
+  .tag-sm {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 8px; border-radius: 6px; letter-spacing: 0.04em;
+    background: #EAF1FE; color: #1f4ea0;
+  }
+  .tag-sm.warn { background: #FFF6E8; color: #9c7a1f; }
+  .tag-sm.danger { background: #FFEFEC; color: #991b1b; }
+  .tag-sm.ok { background: #DFF7E9; color: #14532d; }
+  .tag-sm.constitucio { background: var(--constitucio-soft); color: #7a1212; }
+  .art-card h4 {
+    margin: 0; font-size: 16px; font-weight: 800; letter-spacing: -0.015em;
+  }
+  .art-card p { margin: 6px 0; font-size: 14px; color: var(--text-2); line-height: 1.55; }
+  .art-card p b { color: var(--ink); }
+  .art-card ul { margin: 6px 0 0 18px; }
+  .art-card li { font-size: 13.5px; color: var(--text-2); padding: 2px 0; }
+  .art-card li b { color: var(--ink); }
+
+  .info {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 12px; align-items: start;
+    padding: 12px 14px; border-radius: 10px;
+    margin-top: 10px; font-size: 13px; line-height: 1.5;
+  }
+  .info b { color: var(--ink); }
+  .info.tip { background: var(--paper-2); border-left: 3px solid var(--text-2); color: var(--text-2); }
+  .info.cop { background: #EAF1FE; border-left: 3px solid #2F6BD8; color: #1f3f7a; }
+  .info.warn { background: #FFF6E8; border-left: 3px solid #E89A1C; color: #6b5a30; }
+  .info.danger { background: #FFEFEC; border-left: 3px solid #E5484D; color: #7a1f1f; }
+  .info.novetat { background: var(--constitucio-soft); border-left: 3px solid var(--constitucio); color: #7a1212; }
+  .info .ico { font-size: 18px; }
+
+  .ntable {
+    width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13.5px;
+  }
+  .ntable th {
+    text-align: left; padding: 8px 10px;
+    background: var(--paper-2); font-weight: 800; color: var(--ink);
+    font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .ntable td {
+    padding: 8px 10px; border-top: 1px solid var(--line-2);
+    color: var(--text-2); vertical-align: top;
+  }
+  .ntable b { color: var(--ink); }
+
+  .article-card {
+    background: var(--white); border: 2px solid var(--constitucio);
+    border-radius: 14px; padding: 18px 20px; margin-top: 12px;
+    box-shadow: 0 4px 14px -8px rgba(191, 15, 15, 0.25);
+  }
+  .article-card .art-num {
+    display: inline-block; font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 800; color: var(--constitucio);
+    background: var(--constitucio-soft); padding: 4px 10px;
+    border-radius: 6px; letter-spacing: 0.06em; margin-bottom: 8px;
+  }
+  .article-card .quote {
+    margin: 10px 0; padding: 12px 16px;
+    background: var(--paper-2); border-left: 3px solid var(--constitucio);
+    border-radius: 8px; font-size: 14px; color: var(--text-2);
+    line-height: 1.6; font-style: italic;
+  }
+  .article-card .quote b { color: var(--ink); font-style: normal; }
+  .article-card .quote .added { background: #DFF7E9; padding: 2px 4px; border-radius: 4px; color: #14532d; font-weight: 700; font-style: normal; }
+  .article-card .quote .removed { background: #FFEFEC; padding: 2px 4px; border-radius: 4px; color: #7a1f1f; text-decoration: line-through; }
+
+  .recorda {
+    background: linear-gradient(180deg, #FFE4E4 0%, #FFA8A8 100%);
+    border: 1px solid #f5a3a3; border-radius: 18px;
+    padding: 22px 26px; margin-top: 28px;
+  }
+  .recorda header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+  }
+  .recorda .rule { flex: 1; height: 1px; background: #f5a3a3; }
+  .reclist {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px;
+  }
+  .reclist li {
+    display: grid; grid-template-columns: auto 1fr; gap: 10px;
+    align-items: start; padding: 8px 0;
+    border-bottom: 1px solid rgba(122, 18, 18, 0.18);
+    font-size: 13.5px; color: #5a0d0d; line-height: 1.5;
+  }
+  .reclist li::before { content: "▸"; color: var(--constitucio); font-weight: 800; }
+  .reclist b { color: var(--ink); }
+
+  @media (max-width: 980px) {
+    .meta-strip { grid-template-columns: 1fr; }
+    .reclist { grid-template-columns: 1fr; }
+    .ce-hero { grid-template-columns: 1fr; text-align: center; }
+    .ce-title { font-size: 28px; }
+  }
+</style>
+</head>
+<body data-fitxa-style="rebrand-2026">
+<div class="wrapper">
+
+  <header class="ce-hero">
+    <div>
+      <svg width="80" height="92" viewBox="0 0 80 92" fill="none">
+        <path d="M40 4 L74 13 V42 C74 62 60 78 40 88 C20 78 6 62 6 42 V13 Z" fill="#7a1212" stroke="#BF0F0F" stroke-width="2"/>
+        <text x="40" y="38" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="20" fill="#fff">CE</text>
+        <text x="40" y="58" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="14" fill="#FFE4E4">78</text>
+        <text x="40" y="78" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="10" fill="#FFE4E4">4a REF</text>
+      </svg>
+    </div>
+    <div>
+      <div class="eyebrow" style="color:#7a1212;">🆕 NOVETATS NORMATIVES · CONSTITUCIONAL</div>
+      <h1 class="ce-title">4a Reforma <span class="accent">CE 1978</span></h1>
+      <p class="ce-sub">El Rei Felip VI sanciona el 19 de maig de 2026 la quarta reforma de la Constitució Espanyola, que atorga a Formentera un senador propi al Senat.</p>
+      <div class="hero-tags">
+        <span class="tag hot">⚡ 4a reforma històrica</span>
+        <span class="tag">🇪🇸 BOE 19/05/2026</span>
+        <span class="tag">⚖️ Art. 69.3 CE</span>
+        <span class="tag">🏝️ Formentera</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="meta-strip">
+    <div>
+      <h3>📜 Quarta reforma de la CE 1978</h3>
+      <p>Reformes prèvies: 1a (1992) · 2a (2011) · 3a (2024). Aquesta és la <b>4a reforma</b> en 48 anys de Constitució.</p>
+    </div>
+    <div class="vigente">
+      <span class="when">Sancionada</span>
+      <span class="state">19/05/2026</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- QUÈ CANVIA                                   -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="section-head">
+    <span class="eyebrow">⚖️ Què canvia exactament</span>
+    <span class="rule"></span>
+  </div>
+
+  <div class="article-card">
+    <span class="art-num">ART. 69.3 CE</span>
+    <h4 style="font-size:17px; font-weight:800; margin:0 0 6px;">Composició del Senat — illes</h4>
+    <div class="quote">
+      <b>Text reformat (2026):</b><br>
+      "En les províncies insulars, cada illa o agrupació d'elles, amb Cabildo o Consell Insular, constituirà una circumscripció a efectes d'elecció de senadors, corresponent tres a cada una de les illes majors —Gran Canària, Mallorca i Tenerife— i un a cadascuna de les següents illes o agrupacions: Eivissa-<span class="added">Formentera</span>, Menorca, Fuerteventura, Gomera, Hierro, Lanzarote i La Palma."
+    </div>
+    <p style="font-size:13px; color:var(--text-2); margin-top:8px;">
+      <b>Què canvia respecte el text original:</b> Formentera ja no comparteix senador amb Eivissa — passa a tenir <b>el seu propi senador</b> al Senat. L'agrupació històrica "Eivissa-Formentera" queda dissolta i se substitueix per dues circumscripcions independents.
+    </p>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- IMPACTE                                       -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="section-head">
+    <span class="eyebrow">🎯 Impacte de la reforma</span>
+    <span class="rule"></span>
+  </div>
+
+  <div class="art-card">
+    <header>
+      <span class="art-badge">SENAT</span>
+      <h4>Augmenta el nombre total de senadors</h4>
+      <span class="tag-sm constitucio">Cambra alta</span>
+    </header>
+    <ul>
+      <li>El Senat passa de <b>208 senadors</b> elegits per circumscripció a <b>209</b> (Formentera n'aporta 1 nou).</li>
+      <li>Es manté el sistema d'elecció directe per a aquests senadors (no autonòmics).</li>
+      <li>Continuen existint també els <b>senadors autonòmics</b> elegits pels parlaments autonòmics (1 per CA + 1 per cada milió d'habitants).</li>
+    </ul>
+  </div>
+
+  <div class="art-card cop">
+    <header>
+      <span class="art-badge">FORMENTERA</span>
+      <h4>Representació pròpia històrica</h4>
+    </header>
+    <p>Formentera (≈12.000 habitants) és <b>la primera illa amb Consell Insular propi des de 2007</b> que tenia agrupació senatorial compartida amb Eivissa. Aquesta reforma corregeix la incongruència institucional: ja que té Cabildo/Consell propi, també ha de tenir senador propi (art. 69.3 CE).</p>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- LES 4 REFORMES DE LA CE                       -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="section-head">
+    <span class="eyebrow">📚 Les 4 reformes de la CE 1978 — comparativa</span>
+    <span class="rule"></span>
+  </div>
+
+  <table class="ntable">
+    <thead>
+      <tr>
+        <th>Reforma</th>
+        <th>Data</th>
+        <th>Article modificat</th>
+        <th>Motiu</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>1a reforma</b></td>
+        <td>27/08/1992</td>
+        <td>Art. 13.2 CE</td>
+        <td>Sufragi passiu d'estrangers a eleccions municipals (Tractat de Maastricht / UE)</td>
+      </tr>
+      <tr>
+        <td><b>2a reforma</b></td>
+        <td>27/09/2011</td>
+        <td>Art. 135 CE</td>
+        <td>Estabilitat pressupostària i sostenibilitat financera (crisi euro)</td>
+      </tr>
+      <tr>
+        <td><b>3a reforma</b></td>
+        <td>15/02/2024</td>
+        <td>Art. 49 CE</td>
+        <td>Substituir "disminuïts físics, sensorials i psíquics" per "<b>persones amb discapacitat</b>" — terminologia inclusiva</td>
+      </tr>
+      <tr style="background:rgba(192,38,211,0.08);">
+        <td><b>4a reforma</b> 🆕</td>
+        <td>19/05/2026</td>
+        <td>Art. 69.3 CE</td>
+        <td><b>Formentera amb senador propi</b> (independent d'Eivissa)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info novetat">
+    <span class="ico">⚖️</span>
+    <div><b>Procediment de la reforma:</b> via <b>art. 167 CE</b> (procediment ordinari). No afecta el Títol Preliminar, ni la Secció 1a del Capítol II del Títol I, ni el Títol II → no requereix referèndum obligatori. Aprovació per <b>majoria de 3/5</b> a Congrés i Senat (text final el 13/05/2026), publicació al BOE i sanció reial.</div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- IMPACTE EXAMEN                                -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="section-head">
+    <span class="eyebrow">📝 Què cau a examen</span>
+    <span class="rule"></span>
+  </div>
+
+  <div class="twocol" style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+    <div class="art-card ok">
+      <header>
+        <h4>✅ Has de saber</h4>
+      </header>
+      <ul>
+        <li><b>Hi ha 4 reformes</b> a la CE 1978 (no 3)</li>
+        <li><b>Data exacta</b>: 19/05/2026</li>
+        <li><b>Article reformat</b>: art. 69.3 CE (composició del Senat)</li>
+        <li><b>Què fa</b>: dona senador propi a Formentera</li>
+        <li><b>Procediment</b>: art. 167 CE (ordinari, no referèndum obligatori)</li>
+      </ul>
+    </div>
+    <div class="art-card warn">
+      <header>
+        <h4>⚠️ Errors típics</h4>
+      </header>
+      <ul>
+        <li>NO afecta el Títol Preliminar (no calia art. 168)</li>
+        <li>NO és necessari referèndum obligatori</li>
+        <li>NO modifica el nombre de senadors autonòmics</li>
+        <li>NO afecta l'agrupació canària (Gran Canària, Tenerife, etc.)</li>
+        <li>Compte: <b>Menorca</b> ja tenia senador propi des de l'origen</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- RECORDA                                       -->
+  <!-- ════════════════════════════════════════════ -->
+  <section class="recorda">
+    <header>
+      <span class="eyebrow" style="color:#7a1212;">📌 Resum de butxaca</span>
+      <span class="rule"></span>
+    </header>
+    <ul class="reclist">
+      <li><span><b>4a reforma de la CE</b> (1992 · 2011 · 2024 · <b>2026</b>)</span></li>
+      <li><span>Sancionada per <b>Felip VI el 19/05/2026</b></span></li>
+      <li><span>Modifica l'<b>art. 69.3 CE</b> (composició del Senat)</span></li>
+      <li><span>Dona <b>senador propi a Formentera</b> (independent d'Eivissa)</span></li>
+      <li><span>Procediment: <b>art. 167 CE</b> (ordinari, sense referèndum obligatori)</span></li>
+      <li><span>Resultat: el Senat passa de <b>208 a 209 senadors</b> per circumscripció</span></li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>
