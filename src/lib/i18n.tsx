@@ -1038,6 +1038,8 @@ const DICT: Dict = {
     'module.sc.desc': 'Seguretat Ciutadana (LOPSC).',
     'module.transit.title': 'Trànsit',
     'module.transit.desc': 'Trànsit, circulació i seguretat viària.',
+    'module.novetats.title': 'Novetats normatives',
+    'module.novetats.desc': 'Lleis noves, reformes i actualitzacions normatives recents.',
 
     // ───── Pàgina /operativa (català) ─────
     'operativa.crumbs.home': 'Inici',
