@@ -67,8 +67,35 @@ export default function CulturaGeneral() {
           <p>{t('cultura.zoneSubtitle').replace('{n}', String(totalQuestions))}</p>
         </header>
 
-        {/* CTA gros: test mesclat de totes les matèries */}
-        <div className="tests-zone-modes" style={{ gridTemplateColumns: '1fr' }}>
+        {/* 2 modes: Temari de repàs (estudi) + Test mesclat */}
+        <div className="tests-zone-modes" style={{ gridTemplateColumns: '1fr 1fr' }}>
+          {/* Temari de repàs (fitxa d'estudi nova) */}
+          <Link
+            to="/cultura-general/temari"
+            className="ts-mode featured"
+            style={{
+              ['--accent' as never]: '#FF7A1A',
+              background: 'linear-gradient(165deg, #FFE0CB 0%, var(--white) 70%)',
+            } as React.CSSProperties}
+          >
+            <span className="mtag">📖 Fitxa de repàs</span>
+            <div>
+              <h3>Temari de cultura general</h3>
+              <p>16 àrees i +400 fets clau per repassar de pressa abans del test.</p>
+            </div>
+            <div className="footer">
+              <div className="specs">
+                <span>16 àrees</span>
+                <span>·</span>
+                <span>repàs ràpid</span>
+              </div>
+              <span className="cta">
+                📚 Estudiar <span className="arr">→</span>
+              </span>
+            </div>
+          </Link>
+
+          {/* Test mesclat de totes les matèries */}
           <Link to="/cultura-general/tot" className="ts-mode featured">
             <span className="mtag">⚡ {t('cultura.allTag')}</span>
             <div>
@@ -79,7 +106,7 @@ export default function CulturaGeneral() {
               <div className="specs">
                 <span>{totalQuestions} preguntes</span>
                 <span>·</span>
-                <span>{culturaTopics.length} matèries mesclades</span>
+                <span>{culturaTopics.length} matèries</span>
               </div>
               <span className="cta">
                 ▶ {t('test.start')} <span className="arr">→</span>

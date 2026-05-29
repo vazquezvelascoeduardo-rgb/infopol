@@ -52,6 +52,7 @@ const Noticies = lazy(() => import('./pages/Noticies'));
 const NoticiaDetall = lazy(() => import('./pages/NoticiaDetall'));
 const CulturaGeneral = lazy(() => import('./pages/CulturaGeneral'));
 const Actualitat = lazy(() => import('./pages/Actualitat'));
+const CulturaTemari = lazy(() => import('./pages/CulturaTemari'));
 const Login = lazy(() => import('./pages/Login'));
 const Profile = lazy(() => import('./pages/Profile'));
 const MossosList = lazy(() => import('./pages/mossos/MossosList'));
@@ -112,6 +113,9 @@ export default function App() {
           <Route path="/noticies" element={<Noticies />} />
           <Route path="/noticies/:slug" element={<NoticiaDetall />} />
           <Route path="/cultura-general" element={<CulturaGeneral />} />
+          {/* Temari de repàs (fitxa d'estudi) — abans del :slug perquè
+              tingui prioritat sobre la ruta de test. */}
+          <Route path="/cultura-general/temari" element={<CulturaTemari />} />
           <Route path="/cultura-general/:slug" element={<TestSession />} />
           <Route path="/actualitat" element={<Actualitat />} />
           <Route path="/actualitat/:slug" element={<TestSession />} />
