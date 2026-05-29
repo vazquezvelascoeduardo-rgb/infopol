@@ -13,7 +13,15 @@ import { useFailuresCounts } from '../../lib/failures';
 import { useT } from '../../lib/i18n';
 import { MODULES } from '../../lib/content';
 
-type FilterId = 'all' | 'temari' | 'cultura' | 'municipi' | 'actualitat';
+type CatId = 'temari' | 'cultura' | 'municipi' | 'actualitat';
+
+// Metadades de cada categoria per al selector visual (cat-picker).
+const CATEGORIES: { id: CatId; icon: string; title: string; desc: string; c: string; bg: string }[] = [
+  { id: 'temari',     icon: '📚', title: 'Lleis i normativa', desc: 'Constitució, EAC, codi penal, trànsit, seguretat ciutadana…', c: '#2F6BD8', bg: '#EAF1FE' },
+  { id: 'cultura',    icon: '🧠', title: 'Cultura general',   desc: 'Història, geografia, art, ciència, literatura, música…',     c: '#9747D6', bg: '#F5E9FF' },
+  { id: 'actualitat', icon: '📰', title: 'Actualitat',        desc: 'Política, societat i fets rellevants de 2026.',              c: '#D9531A', bg: '#FFE4D2' },
+  { id: 'municipi',   icon: '🏛️', title: 'Municipis',          desc: 'Temaris específics per ajuntament.',                         c: '#0F766E', bg: '#D7F0EC' },
+];
 
 // Mapeja l'accent Tailwind del topic ('from-red-500 to-rose-700') a un
 // color sòlid + un fons translúcid coordinat, per usar a `--accent` /
@@ -55,7 +63,9 @@ const LEVEL_LVL: Record<Level, { lvl: 'easy' | 'medium' | 'hard' | 'none'; label
 
 export default function TestList() {
   const { t } = useT();
-  const [filter, setFilter] = useState<FilterId>('all');
+  // Categoria seleccionada al selector. `null` = encara no s'ha triat
+  // cap → mostrem les targetes de categories (no temes mesclats).
+  const [cat, setCat] = useState<CatId | null>(null);
   const stats = useGlobalStats();
   const { attempts, avgGrade } = globalAverage(stats);
   const failures = useFailuresCounts();
@@ -77,11 +87,33 @@ export default function TestList() {
     actualitat: getTopicsByCategory('actualitat').length,
   }), [PL_TOPICS]);
 
-  // Topics filtrats.
+  // Metadades per categoria: nombre de temes i de preguntes (per les
+  // targetes del selector). Calculat un sol cop.
+  const catMeta = useMemo(() => {
+    const m: Record<CatId, { topics: number; questions: number }> = {
+      temari: { topics: 0, questions: 0 },
+      cultura: { topics: 0, questions: 0 },
+      municipi: { topics: 0, questions: 0 },
+      actualitat: { topics: 0, questions: 0 },
+    };
+    for (const id of ['temari', 'cultura', 'municipi', 'actualitat'] as CatId[]) {
+      const ts = getTopicsByCategory(id);
+      m[id] = { topics: ts.length, questions: ts.reduce((a, tp) => a + tp.questions.length, 0) };
+    }
+    return m;
+  }, []);
+
+  // Categories que tenen almenys un tema (per no mostrar targetes buides).
+  const availableCats = useMemo(
+    () => CATEGORIES.filter((c) => catMeta[c.id].topics > 0),
+    [catMeta],
+  );
+
+  // Topics filtrats per la categoria activa.
   const visibleTopics = useMemo(() => {
-    if (filter === 'all') return PL_TOPICS;
-    return PL_TOPICS.filter((tt) => (tt.category ?? 'temari') === filter);
-  }, [filter, PL_TOPICS]);
+    if (!cat) return [];
+    return PL_TOPICS.filter((tt) => (tt.category ?? 'temari') === cat);
+  }, [cat, PL_TOPICS]);
 
   // Total de preguntes (per al ts-pill del hero) — només Policia Local.
   const totalQuestions = useMemo(
@@ -282,57 +314,68 @@ export default function TestList() {
           </Link>
         </div>
 
-        {/* Separador "...o tria un tema concret" */}
+        {/* Separador: tria una categoria */}
         <div className="tests-zone-divider">
           <span className="line" />
-          <span className="lbl">{t('test.list.zone.orByTopic')}</span>
+          <span className="lbl">{cat ? t('test.list.zone.orByTopic') : 'Tria una categoria'}</span>
           <span className="line" />
         </div>
 
-        <div className="cat-filters" role="tablist">
-          <FilterChip
-            active={filter === 'all'}
-            onClick={() => setFilter('all')}
-            label={t('test.list.cat.all')}
-            n={counts.all}
-          />
-          <FilterChip
-            active={filter === 'temari'}
-            onClick={() => setFilter('temari')}
-            label={t('test.list.section.temari')}
-            n={counts.temari}
-          />
-          {counts.cultura > 0 && (
-            <FilterChip
-              active={filter === 'cultura'}
-              onClick={() => setFilter('cultura')}
-              label={t('test.list.section.cultura')}
-              n={counts.cultura}
-            />
-          )}
-          {counts.actualitat > 0 && (
-            <FilterChip
-              active={filter === 'actualitat'}
-              onClick={() => setFilter('actualitat')}
-              label="Actualitat"
-              n={counts.actualitat}
-            />
-          )}
-          {counts.municipi > 0 && (
-            <FilterChip
-              active={filter === 'municipi'}
-              onClick={() => setFilter('municipi')}
-              label={t('test.list.section.municipi')}
-              n={counts.municipi}
-            />
-          )}
-        </div>
+        {!cat ? (
+          /* ── NIVELL 1: selector de categories ── */
+          <div className="cat-picker">
+            {availableCats.map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                className="cat-pick-card"
+                onClick={() => setCat(c.id)}
+                style={{
+                  ['--accent' as never]: c.c,
+                  ['--accent-bg' as never]: c.bg,
+                } as React.CSSProperties}
+              >
+                <span className="cp-ico" aria-hidden>{c.icon}</span>
+                <span className="cp-body">
+                  <span className="cp-title">{c.title}</span>
+                  <span className="cp-desc">{c.desc}</span>
+                  <span className="cp-meta">
+                    {catMeta[c.id].topics} {catMeta[c.id].topics === 1 ? 'tema' : 'temes'}
+                    {' · '}
+                    {catMeta[c.id].questions.toLocaleString('es-ES')} preguntes
+                  </span>
+                </span>
+                <span className="cp-arr" aria-hidden>→</span>
+              </button>
+            ))}
+          </div>
+        ) : (
+          /* ── NIVELL 2: temes de la categoria triada ── */
+          <>
+            <div className="cat-active-head">
+              <button type="button" className="cat-back" onClick={() => setCat(null)}>
+                ← Categories
+              </button>
+              <div className="cat-active-chips" role="tablist">
+                {availableCats.map((c) => (
+                  <FilterChip
+                    key={c.id}
+                    active={cat === c.id}
+                    onClick={() => setCat(c.id)}
+                    label={c.title}
+                    n={catMeta[c.id].topics}
+                  />
+                ))}
+              </div>
+            </div>
 
-        <div className="test-grid">
-          {visibleTopics.map((topic) => (
-            <TestCard key={topic.slug} topic={topic} />
-          ))}
-        </div>
+            <div className="test-grid">
+              {visibleTopics.map((topic) => (
+                <TestCard key={topic.slug} topic={topic} />
+              ))}
+            </div>
+          </>
+        )}
       </section>
 
       {/* RECENTS */}

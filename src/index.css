@@ -3748,6 +3748,64 @@ html[data-text-size="lg"] { font-size: 18px; }
   }
   .cat-filter.active .num { background: rgba(255,255,255,0.18); }
 
+  /* ── Selector de categories (nivell 1) ── */
+  .cat-picker {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 14px; margin-top: 6px;
+  }
+  .cat-pick-card {
+    display: flex; align-items: center; gap: 16px; text-align: left;
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 18px; padding: 18px 20px; cursor: pointer;
+    font-family: inherit; color: inherit; position: relative; overflow: hidden;
+    transition: transform .15s, box-shadow .15s, border-color .15s;
+  }
+  .cat-pick-card::before {
+    content: ""; position: absolute; top: 0; left: 0; bottom: 0;
+    width: 4px; background: var(--accent, var(--ink));
+  }
+  .cat-pick-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+    border-color: rgba(14,14,14,0.18);
+  }
+  .cat-pick-card .cp-ico {
+    flex-shrink: 0; width: 52px; height: 52px; border-radius: 14px;
+    background: var(--accent-bg, rgba(14,14,14,0.06));
+    color: var(--accent, var(--ink));
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 26px;
+  }
+  .cat-pick-card .cp-body { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+  .cat-pick-card .cp-title {
+    font-size: 17px; font-weight: 800; letter-spacing: -0.015em; color: var(--ink);
+  }
+  .cat-pick-card .cp-desc { font-size: 13px; color: var(--text-2); line-height: 1.4; }
+  .cat-pick-card .cp-meta {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px; font-weight: 700; color: var(--accent, var(--text-3));
+    margin-top: 4px;
+  }
+  .cat-pick-card .cp-arr {
+    flex-shrink: 0; font-size: 20px; color: var(--text-3);
+    transition: transform .15s, color .15s;
+  }
+  .cat-pick-card:hover .cp-arr { transform: translateX(3px); color: var(--accent, var(--ink)); }
+
+  /* ── Capçalera de categoria activa (nivell 2) ── */
+  .cat-active-head {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    margin: 4px 0 14px;
+  }
+  .cat-back {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 700;
+    color: var(--ink); cursor: pointer; font-family: inherit;
+    transition: all .12s; white-space: nowrap;
+  }
+  .cat-back:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .cat-active-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+
   /* Grid de tests */
   .test-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
@@ -3938,6 +3996,7 @@ html[data-text-size="lg"] { font-size: 18px; }
   @media (max-width: 600px) {
     .test-grid { grid-template-columns: 1fr; }
     .my-stats { grid-template-columns: 1fr 1fr; }
+    .cat-picker { grid-template-columns: 1fr; }
   }
 
   /* ── Jump buttons (a dalt de /policia-local) ─────────────────── */
