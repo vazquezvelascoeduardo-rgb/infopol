@@ -62,6 +62,7 @@ import rgc1428 from './rgc-1428-2003';
 import estrangeria from './lo4-2000-estrangeria';
 import proteccioCivil from './proteccio-civil';
 import igualtatGenere from './igualtat-genere';
+import reus from './reus';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -124,6 +125,7 @@ export const TOPICS: TestTopic[] = [
   estrangeria,
   proteccioCivil,
   igualtatGenere,
+  reus,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
