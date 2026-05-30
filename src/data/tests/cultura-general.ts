@@ -1,12 +1,11 @@
 // Test Cultura General — 120 preguntes nivell alt.
 // Geografia, historia, art, llengua, matematiques, ciencies, actualitat.
-// Patrons d'examens oficials Terrassa (2018-2023).
 import type { TestTopic } from './types';
 
 const cultura: TestTopic = {
   slug: 'cultura-general',
   title: 'Mix general',
-  description: 'Mescla de totes les matèries (patrons examens Terrassa 2018-2023).',
+  description: 'Mescla de totes les matèries: geografia, història, art, ciència i llengua.',
   icon: '🌍',
   accent: 'from-slate-500 to-slate-700',
   category: 'cultura',
