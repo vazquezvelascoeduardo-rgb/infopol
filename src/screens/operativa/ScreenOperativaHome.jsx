@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
@@ -42,14 +43,33 @@ function Chip({ icon, label }) {
   );
 }
 
-const NEWS = [
+const NORMATIVA = [
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
 
+const TAG_COLOR = {
+  'Política':      T.cat.operativa.solid,
+  'Economia':      T.cat.leyes.solid,
+  'Internacional': T.cat.atajos.solid,
+  'Esports':       T.cat.transito.solid,
+  'Successos':     T.cat.alcohol.solid,
+  'Cultura':       T.cat.academia.solid,
+  'Ciència':       T.cat.physical.solid,
+  'Premi':         T.cat.psico.solid,
+};
+
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
+  const [generalNews, setGeneralNews] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/news/general')
+      .then(r => r.json())
+      .then(data => setGeneralNews(data.slice(0, 12)))
+      .catch(() => {});
+  }, []);
   return (
     <div className="screen">
       <StatusBar />
@@ -124,7 +144,7 @@ export default function ScreenOperativaHome() {
       <div style={{ padding: '14px 0 0' }}>
         <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {NEWS.map((n, i) => (
+          {NORMATIVA.map((n, i) => (
             <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                 <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
@@ -136,6 +156,45 @@ export default function ScreenOperativaHome() {
           ))}
         </div>
       </div>
+
+      {/* Notícies generals (actualitzades cada nit) */}
+      {generalNews.length > 0 && (
+        <div style={{ padding: '16px 0 24px' }}>
+          <SectionHead kicker="Avui" kickerColor={T.cat.academia.solid} title="Notícies del dia" />
+          <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {generalNews.map(n => {
+              const color = TAG_COLOR[n.tag] || T.inkMuted;
+              return (
+                <div
+                  key={n.id}
+                  onClick={() => n.url && window.open(n.url, '_blank', 'noopener')}
+                  style={{
+                    background: '#fff',
+                    borderRadius: T.r.md,
+                    padding: 14,
+                    borderLeft: `2px solid ${color}`,
+                    boxShadow: T.shadow.card,
+                    cursor: n.url ? 'pointer' : 'default',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                    <span style={{ fontSize: 10, fontWeight: 800, color, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                    <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.dateLabel}</span>
+                  </div>
+                  <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                  <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+                  {n.url && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 6 }}>
+                      <span style={{ fontSize: 10.5, fontWeight: 700, color }}>{n.source}</span>
+                      <Icon name="arrow-right" size={11} color={color} />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

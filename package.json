@@ -17,6 +17,7 @@
     "deploy:android": "npm run build && npx cap sync android && npx cap open android"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.100.1",
     "@capacitor/android": "^8.3.1",
     "@capacitor/cli": "^8.3.1",
     "@capacitor/core": "^8.3.1",

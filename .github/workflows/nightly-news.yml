@@ -1,0 +1,44 @@
+name: Noticias nocturnes (22h)
+
+on:
+  schedule:
+    # 21:00 UTC = 22:00 CET (hivern) / 23:00 CEST (estiu)
+    - cron: '0 21 * * *'
+  # Permet llançar manualment des de GitHub → Actions → "Run workflow"
+  workflow_dispatch:
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write          # necessari per fer el commit/push
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch i processa notícies
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/fetch-news.mjs
+
+      - name: Commit i push
+        run: |
+          git config user.name  "InfoPol Bot"
+          git config user.email "bot@infopol.cat"
+          git add server/data/general-news.json
+          if git diff --staged --quiet; then
+            echo "Sense canvis, res a comitejar."
+          else
+            git commit -m "chore: actualització notícies $(date +'%Y-%m-%d')"
+            git push
+          fi
