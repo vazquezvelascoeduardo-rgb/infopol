@@ -19,6 +19,7 @@ import {
 import { recordFailure, recordSuccess, buildRepasPool, useAllFailures, removeFailure, resetAllFailures, LEARNED_THRESHOLD, type FailureRecord } from '../../lib/failures';
 import { checkAchievements, type Achievement } from '../../lib/achievements';
 import { useT } from '../../lib/i18n';
+import ReportQuestionButton from '../../components/ReportQuestionButton';
 
 type Mode = 'exam' | 'study'; // exam = simulacre, study = interactiu
 
@@ -952,6 +953,12 @@ function ResultPhase({
                 {q.question.reference && (
                   <div className="tr-review-ref">📖 {q.question.reference}</div>
                 )}
+                <ReportQuestionButton
+                  topicSlug={(q.question as TestQuestion & { topicSlug?: string }).topicSlug || slug}
+                  questionId={q.question.id}
+                  questionText={q.question.text}
+                  markedCorrect={q.options[q.correctIndex]}
+                />
               </div>
             </div>
           );

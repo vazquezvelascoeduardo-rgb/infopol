@@ -5090,6 +5090,44 @@ html[data-text-size="lg"] { font-size: 18px; }
     color: var(--text-3);
   }
 
+  /* ── Informar d'un error en una pregunta ─────────────────────────── */
+  .rep-btn {
+    margin-top: 8px;
+    background: transparent; border: none; padding: 2px 0;
+    font-family: inherit; font-size: 12px; font-weight: 700;
+    color: var(--text-3); cursor: pointer; transition: color .12s;
+  }
+  .rep-btn:hover { color: var(--terracotta); }
+  .rep-btn.primary {
+    background: var(--ink); color: #fff; border-radius: 8px;
+    padding: 7px 14px; margin-top: 0;
+  }
+  .rep-btn.primary:hover { color: #fff; opacity: .9; }
+  .rep-btn.primary:disabled { opacity: .5; cursor: default; }
+  .rep-btn.ghost {
+    border: 1px solid var(--line); border-radius: 8px;
+    padding: 7px 14px; margin-top: 0; color: var(--text-2);
+  }
+  .rep-box {
+    margin-top: 10px; padding: 12px;
+    border: 1px solid var(--line); border-radius: 12px;
+    background: var(--paper-2);
+  }
+  .rep-label {
+    display: block; font-size: 12px; font-weight: 700;
+    color: var(--text-2); margin-bottom: 6px;
+  }
+  .rep-area {
+    width: 100%; border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px 10px; font: inherit; font-size: 13px; resize: vertical;
+    background: var(--white); color: var(--text);
+  }
+  .rep-actions { display: flex; gap: 8px; margin-top: 10px; }
+  .rep-msg { margin-top: 8px; font-size: 12.5px; font-weight: 600; }
+  .rep-msg.ok { color: #15803d; margin-top: 8px; }
+  .rep-msg.err { color: #b91c1c; }
+  .rep-msg.err a { color: var(--terracotta); text-decoration: underline; }
+
   .tr-actions {
     display: flex;
     flex-wrap: wrap;
