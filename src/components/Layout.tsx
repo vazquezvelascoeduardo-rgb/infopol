@@ -1,7 +1,7 @@
 // Marc general de l'app: capçalera (topbar) i peu segons rebranding 2026.
 // La web és sempre en català i en tema clar (s'han eliminat els selectors
 // d'idioma i tema). Al sidebar només queda l'ajust de mida de text.
-import { type ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { applyInitialTheme } from '../lib/theme';
 import { useT } from '../lib/i18n';
@@ -11,6 +11,7 @@ import UserButton from './UserButton';
 import OnboardingTour from './OnboardingTour';
 import RegisterNudge from './RegisterNudge';
 import BackButton from './BackButton';
+import BottomNav from './BottomNav';
 
 function BrandShield({ className = '' }: { className?: string }) {
   // Shield-i (rebranding 2026): escut en tinta amb la "i" d'info
@@ -37,6 +38,11 @@ export default function Layout({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useT();
+  // Temporitzador per fer debounce de la cerca mentre s'escriu.
+  const searchTimer = useRef<number | null>(null);
+  useEffect(() => () => {
+    if (searchTimer.current) window.clearTimeout(searchTimer.current);
+  }, []);
 
   useEffect(() => {
     // Tema clar fixat (sense toggle).
@@ -90,8 +96,14 @@ export default function Layout({ children }: { children: ReactNode }) {
       applyToCatalegInternal(v);
       return;
     }
-    if (v.trim().length > 0) {
-      navigate(`/cerca?q=${encodeURIComponent(v)}`, { replace: true });
+    // Debounce: esperem ~250 ms d'inactivitat abans de navegar a /cerca,
+    // per no generar renders ni historial sorollós a cada tecla.
+    if (searchTimer.current) window.clearTimeout(searchTimer.current);
+    const trimmed = v.trim();
+    if (trimmed.length > 0) {
+      searchTimer.current = window.setTimeout(() => {
+        navigate(`/cerca?q=${encodeURIComponent(trimmed)}`, { replace: true });
+      }, 250);
     }
   }
 
@@ -262,6 +274,9 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       {/* Nudge a registre després del primer test (si no té sessió) */}
       <RegisterNudge />
+
+      {/* Barra de navegació inferior (només mòbil) */}
+      <BottomNav />
     </div>
   );
 }

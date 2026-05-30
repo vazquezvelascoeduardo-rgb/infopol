@@ -644,6 +644,8 @@ const DICT: Dict = {
 
     'sidebar.home': 'Inici',
     'sidebar.academia': 'Acadèmia',
+    'bottomnav.profile': 'Perfil',
+    'bottomnav.aria': 'Navegació principal',
     'sidebar.tests': 'Tests',
     'sidebar.tests.badge': 'Nou',
     'sidebar.tests.duePending': 'Tens repassos pendents',

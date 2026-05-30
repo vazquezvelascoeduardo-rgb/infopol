@@ -60,7 +60,8 @@ function FavItem({ b, onRemove }: { b: Bookmark; onRemove: () => void }) {
       <button
         type="button"
         onClick={onRemove}
-        aria-label="✕"
+        aria-label={`Treu ${b.title} dels favorits`}
+        title={`Treu ${b.title} dels favorits`}
         className="absolute right-1 top-1/2 -translate-y-1/2 inline-flex h-7 w-7 items-center justify-center rounded-md text-text-3 hover:bg-paper-2 hover:text-ink opacity-0 group-hover:opacity-100 transition"
       >
         ✕
@@ -368,6 +369,13 @@ function AcademiaView({ failuresDue }: { failuresDue: number }) {
   const temariCount = getTopicsByCategory('temari').length;
   const municipiCount = getTopicsByCategory('municipi').length;
 
+  // Temes començats (dada real, no estimada): temes amb almenys una
+  // pregunta resposta.
+  const topicsStarted = TOPICS.reduce(
+    (acc, top) => acc + (getAnsweredIds(top.slug).size > 0 ? 1 : 0),
+    0,
+  );
+
   // Continuar tema en curs.
   const cont = (() => {
     const temari = getTopicsByCategory('temari');
@@ -408,7 +416,7 @@ function AcademiaView({ failuresDue }: { failuresDue: number }) {
           <div className="num">{gems.toLocaleString('es-ES')}</div>
         </div>
         <div className="ac-stat rank">
-          <span className="lab">🏆 {t('academia.stat.league')}</span>
+          <span className="lab">{failuresDue > 0 ? '🔁 ' : '🎯 '}{failuresDue > 0 ? t('academia.stat.league') : 'Temes'}</span>
           <div className="num">
             {failuresDue > 0 ? (
               <>
@@ -417,13 +425,16 @@ function AcademiaView({ failuresDue }: { failuresDue: number }) {
               </>
             ) : (
               <>
-                Zafiro
-                <span className="u">{t('academia.stat.position')} 4</span>
+                {topicsStarted}
+                <span className="u">començats</span>
               </>
             )}
           </div>
         </div>
       </section>
+      <p className="text-[11px] text-text-3 mt-1.5 text-right">
+        Progrés calculat al teu dispositiu · es sincronitza si inicies sessió
+      </p>
 
       {/* 3 ROUTES — Reptes / Mossos / Policia Local */}
       <section className="routes" style={{ marginTop: 22 }}>

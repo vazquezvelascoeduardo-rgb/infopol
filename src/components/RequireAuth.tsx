@@ -20,8 +20,9 @@ export default function RequireAuth({ children }: { children: ReactNode }) {
 
   if (loading) {
     return (
-      <div className="shell py-12 text-center text-text-3">
+      <div className="shell py-12 text-center text-text-3" role="status" aria-live="polite">
         <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-line border-t-ink" />
+        <span className="sr-only">Carregant…</span>
       </div>
     );
   }

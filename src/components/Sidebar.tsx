@@ -457,7 +457,7 @@ function SubLink({
       to={to}
       className="sb-item"
       style={{
-        padding: '7px 12px 7px 36px',
+        padding: '10px 12px 10px 36px',
         fontSize: 13,
         ...(active ? { background: 'var(--paper-2)', color: 'var(--terracotta)' } : {}),
       }}

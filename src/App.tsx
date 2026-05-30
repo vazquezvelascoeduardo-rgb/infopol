@@ -77,8 +77,9 @@ const PUBLIC_LEYES_CARDS: Array<{ moduleSlug: string; slug: string }> = [
 
 function PageFallback() {
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 text-center text-slate-500 dark:text-slate-400">
-      <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-slate-300 border-t-blue-600 dark:border-slate-700 dark:border-t-blue-400" />
+    <div className="mx-auto max-w-5xl px-4 py-12 text-center text-text-3" role="status" aria-live="polite">
+      <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-line border-t-ink" />
+      <span className="sr-only">Carregant…</span>
     </div>
   );
 }

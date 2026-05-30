@@ -378,6 +378,26 @@ export default function TestList() {
         )}
       </section>
 
+      {/* RECENTS — buit per a usuaris nous */}
+      {recents.length === 0 && (
+        <section className="ts-recent">
+          <div
+            className="section-head"
+            style={{ ['--accent' as never]: 'var(--ink)' } as React.CSSProperties}
+          >
+            <span className="eyebrow">🕘 {t('test.list.recent.eyebrow')}</span>
+            <span className="rule" />
+          </div>
+          <div className="ts-empty">
+            <span className="ts-empty-ico" aria-hidden>🎯</span>
+            <p>
+              Encara no has fet cap test. Tria una categoria a dalt i comença —
+              el teu progrés es desa automàticament.
+            </p>
+          </div>
+        </section>
+      )}
+
       {/* RECENTS */}
       {recents.length > 0 && (
         <section className="ts-recent">

@@ -154,6 +154,59 @@ html[data-text-size="lg"] { font-size: 18px; }
   @media (min-width: 640px) {
     .layout-main { padding-top: calc(80px + env(safe-area-inset-top)); }
   }
+  /* A mòbil deixem espai inferior per a la barra de navegació fixa. */
+  @media (max-width: 639px) {
+    .layout-main { padding-bottom: calc(60px + env(safe-area-inset-bottom)); }
+  }
+
+  /* ── Foco de teclat visible (accessibilitat) ──────────────────────
+     Anell de focus global per a tots els elements interactius quan es
+     navega amb teclat. No apareix amb el ratolí (:focus-visible). */
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible,
+  [role="tab"]:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  /* ── Barra de navegació inferior (mòbil) ─────────────────────────── */
+  .bottom-nav {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
+    display: none;
+    grid-template-columns: repeat(5, 1fr);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    border-top: 1px solid var(--line);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  @media (max-width: 639px) { .bottom-nav { display: grid; } }
+  .bn-item {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 3px; padding: 8px 2px 7px; min-height: 56px;
+    color: var(--text-3); text-decoration: none;
+    font-size: 10.5px; font-weight: 700; letter-spacing: -0.01em;
+    transition: color .12s;
+  }
+  .bn-item .bn-ico { position: relative; display: inline-flex; }
+  .bn-item .bn-ico svg { width: 23px; height: 23px; }
+  .bn-item.active { color: var(--terracotta); }
+  .bn-item.active .bn-label { color: var(--terracotta); }
+  .bn-label {
+    max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .bn-badge {
+    position: absolute; top: -5px; right: -8px;
+    min-width: 15px; height: 15px; padding: 0 3px;
+    border-radius: 999px; background: #E5484D; color: #fff;
+    font-size: 9px; font-weight: 800; line-height: 15px; text-align: center;
+  }
 
   /* ── Botó tornar enrere ───────────────────────────────────────── */
   .back-btn-wrap {
@@ -3805,6 +3858,20 @@ html[data-text-size="lg"] { font-size: 18px; }
   }
   .cat-back:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
   .cat-active-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  /* Estat buit (sense tests fets encara) */
+  .ts-empty {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--white); border: 1px dashed var(--line);
+    border-radius: 16px; padding: 18px 20px;
+  }
+  .ts-empty .ts-empty-ico {
+    font-size: 26px; flex-shrink: 0;
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--paper-2);
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .ts-empty p { margin: 0; font-size: 14px; color: var(--text-2); line-height: 1.5; }
 
   /* Grid de tests */
   .test-grid {

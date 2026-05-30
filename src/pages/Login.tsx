@@ -182,6 +182,18 @@ export default function Login() {
         </p>
       </div>
 
+      {/* Avís quan s'arriba aquí per intentar accedir a una zona privada */}
+      {next !== '/' && (
+        <div
+          className="mb-5 rounded-xl border px-4 py-3 text-sm text-text-2 flex items-start gap-2.5"
+          style={{ borderColor: 'var(--line)', background: 'var(--paper-2)' }}
+          role="status"
+        >
+          <span aria-hidden className="text-base leading-none mt-0.5">🔒</span>
+          <span>Inicia sessió per accedir a aquesta secció i desar el teu progrés.</span>
+        </div>
+      )}
+
       <form onSubmit={onSubmit} className="flex flex-col gap-3">
         {isSignup && (
           <Field
