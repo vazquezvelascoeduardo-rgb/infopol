@@ -78,6 +78,52 @@ const UPDATES = {
   'reus-47':  { setOption: [0, 'José Luis Martínez-Almeida'], correct: 0 }, // Alcalde Madrid
   'reus-159': { setOption: [0, 'Luis de la Fuente'], correct: 0 },     // Seleccionador Espanya
   'reus-280': { setOption: [0, 'Luis de la Fuente'], correct: 0 },     // Seleccionador Espanya
+
+  // ── Premis anuals → adaptats a l'última edició (verificat per web) ──
+  // Oscars 98a edició (2026): One Battle After Another · Paul Thomas Anderson · Michael B. Jordan
+  'reus-2': {
+    text: "Quina pel·lícula ha guanyat l'Oscar a la millor pel·lícula a la 98a edició (2026)?",
+    options: ['One Battle After Another', 'Anora', 'The Brutalist', 'Sinners'], correct: 0,
+  },
+  'reus-137': {
+    text: "Qui ha guanyat l'Oscar al millor director a la 98a edició dels Oscars (2026)?",
+    options: ['Paul Thomas Anderson', 'Sean Baker', 'Christopher Nolan', 'Jonathan Glazer'], correct: 0,
+  },
+  'reus-414': { // treu el "últims" enganyós → ancorat a la seva edició
+    text: "Qui va guanyar l'Oscar al millor director als Premis Òscar 2022 (94a edició)?", correct: 0,
+  },
+  'reus-478': {
+    text: "Qui ha guanyat l'Oscar al millor actor protagonista a la 98a edició dels Oscars (2026)?",
+    options: ['Michael B. Jordan', 'Timothée Chalamet', 'Colman Domingo', 'Ralph Fiennes'], correct: 0,
+  },
+  // Goya 40a edició (2026): Los domingos · Patricia López Arnáiz
+  'reus-115': {
+    text: 'Quina pel·lícula ha guanyat el Goya 2026 a la millor pel·lícula?',
+    options: ['Los domingos', 'Sirat', 'Sorda', 'Maspalomas'], correct: 0,
+  },
+  'reus-828': {
+    text: 'Qui va guanyar el premi Goya 2026 a la millor actriu protagonista?', correct: 1,
+  },
+  // Cervantes 2025: Gonzalo Celorio
+  'reus-164': {
+    text: 'Qui ha guanyat el Premi Cervantes 2025?',
+    options: ['Gonzalo Celorio', 'Ida Vitale', 'Luis Mateo Díez', 'Álvaro Pombo'], correct: 0,
+  },
+  // Planeta 2025: Juan del Val
+  'reus-182': {
+    text: 'Qui ha guanyat el Premi Planeta 2025 amb la novel·la «Vera, una historia de amor»?',
+    options: ['Juan del Val', 'Ángela Banzas', 'Sonsoles Ónega', 'Paloma Sánchez-Garnica'], correct: 0,
+  },
+  // Nobel de la Pau 2025: María Corina Machado
+  'reus-117': {
+    text: 'Qui va rebre el Premi Nobel de la Pau 2025?',
+    options: ['María Corina Machado', 'Nihon Hidankyo', 'Narges Mohammadi', 'Volodímir Zelenski'], correct: 0,
+  },
+  // Cannes 78a edició (2025): millor actor Wagner Moura
+  'reus-199': {
+    text: 'Qui va guanyar el premi al millor actor al Festival de Cannes 2025?',
+    options: ['Wagner Moura', 'Jafar Panahi', 'Joaquin Phoenix', 'Pedro Pascal'], correct: 0,
+  },
 };
 
 // LEAVE: efímeres "de mentida" — fets permanents o càrrecs encara vigents
@@ -95,8 +141,10 @@ items.forEach((q, i) => {
   const years = [...q.years].sort((a, b) => a - b);
   if (UPDATES[id]) {
     const u = UPDATES[id];
+    if (u.text) q.text = u.text;
+    if (u.options) q.options = u.options.slice();
     if (u.setOption) q.options[u.setOption[0]] = u.setOption[1];
-    q.correct = u.correct;
+    if (typeof u.correct === 'number') q.correct = u.correct;
     q._refSuffix = ' · act. 2026';
     nUpdated++;
   } else if (!LEAVE.has(id) && isEphemeral(q.text)) {
