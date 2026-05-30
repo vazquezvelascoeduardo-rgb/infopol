@@ -112,7 +112,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-9',
-      text: 'Quina entitat bancària es va adjudicar recentment l\'entitat Banco Popular, pel valor simbòlic d\'un €?',
+      text: 'Quina entitat bancària es va adjudicar recentment l\'entitat Banco Popular, pel valor simbòlic d\'un €? (a l\'examen de 2017)',
       options: [
         'Banc Santander',
         'Caixabanc',
@@ -136,7 +136,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-11',
-      text: 'Quina és actualment la capital d\'Indonesia?',
+      text: 'Quina és actualment la capital d\'Indonesia? (a l\'examen de 2017)',
       options: [
         'Surabaya',
         'Bandung',
@@ -232,7 +232,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-19',
-      text: 'Quina és la capital de l\'estat que ha amenaçat recentment amb atacar les bases d\'Estats Units en la illa de Guam?',
+      text: 'Quina és la capital de l\'estat que ha amenaçat recentment amb atacar les bases d\'Estats Units en la illa de Guam? (a l\'examen de 2017)',
       options: [
         'Tianjín',
         'Seúl',
@@ -316,7 +316,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-26',
-      text: 'Qui és l\'actual Conseller de Territori i sostenibilitat del govern de la Generalitat de Catalunya?:',
+      text: 'Qui és l\'actual Conseller de Territori i sostenibilitat del govern de la Generalitat de Catalunya?: (a l\'examen de 2017)',
       options: [
         'Josep Rull',
         'Jordi Turull',
@@ -376,7 +376,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-31',
-      text: 'Quin és el nom de la filla de l\'actual President dels Estats Units d\'Amèrica?',
+      text: 'Quin és el nom de la filla de l\'actual President dels Estats Units d\'Amèrica? (a l\'examen de 2017)',
       options: [
         'Ivanca',
         'Malia',
@@ -412,7 +412,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-34',
-      text: 'Nom de l\'actual Ministre de Justícia espanyol:',
+      text: 'Nom de l\'actual Ministre de Justícia espanyol: (a l\'examen de 2017)',
       options: [
         'Rafael Català Polo',
         'José Fernández Díaz',
@@ -436,7 +436,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-36',
-      text: 'Quí d\'aquestes persones no és actualment regidor de l\'ajuntament de Reus?',
+      text: 'Quí d\'aquestes persones no és actualment regidor de l\'ajuntament de Reus? (a l\'examen de 2017)',
       options: [
         'Montserrat Caelles',
         'David Vidal',
@@ -496,7 +496,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-41',
-      text: 'Actualment, quina edat mínima es requereix per a l\'obtenció del permís de conducció de la classe D i D+E:',
+      text: 'Actualment, quina edat mínima es requereix per a l\'obtenció del permís de conducció de la classe D i D+E: (a l\'examen de 2017)',
       options: [
         '15 anys',
         '21 anys',
@@ -570,13 +570,13 @@ const topic: TestTopic = {
       id: 'reus-47',
       text: 'L\'alcaldia de Madrid està actualment encapçalada per:',
       options: [
-        'Alberto Ruiz Gallardón',
+        'José Luis Martínez-Almeida',
         'Esperanza Aguirre',
         'Manuela Carmena',
         'Ana M. Botella Serrano',
       ],
-      correct: 2,
-      reference: 'Reus 2017',
+      correct: 0,
+      reference: 'Reus 2017 · act. 2026',
     },
     {
       id: 'reus-48',
@@ -640,7 +640,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-53',
-      text: 'Qui és l\'actual Regidor de Medi Ambient i Ocupació de l\'Ajuntament de Reus?',
+      text: 'Qui és l\'actual Regidor de Medi Ambient i Ocupació de l\'Ajuntament de Reus? (a l\'examen de 2017)',
       options: [
         'Marc Arza',
         'Hipòlit Monseny',
@@ -664,7 +664,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-55',
-      text: 'Nom de l\'actual ministre/a de defensa del Govern d\'Espanya:',
+      text: 'Nom de l\'actual ministre/a de defensa del Govern d\'Espanya: (a l\'examen de 2017)',
       options: [
         'Jose Ignacio Wert',
         'Julian Garcia Vargas',
@@ -820,7 +820,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-68',
-      text: 'Qui és l\'actual director del FBI?',
+      text: 'Qui és l\'actual director del FBI? (a l\'examen de 2017)',
       options: [
         'James Comey',
         'Robert Mueller',
@@ -880,7 +880,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-73',
-      text: 'Quin és el nom de l\'actual Lehendakari basc?',
+      text: 'Quin és el nom de l\'actual Lehendakari basc? (a l\'examen de 2017)',
       options: [
         'Juan José',
         'Iñigo',
@@ -976,7 +976,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-81',
-      text: 'A quin país pertany la ciutat de Mosul, alliberada recentment de l\'estat islàmic?',
+      text: 'A quin país pertany la ciutat de Mosul, alliberada recentment de l\'estat islàmic? (a l\'examen de 2017)',
       options: [
         'Iran',
         'Siria',
@@ -1122,13 +1122,13 @@ const topic: TestTopic = {
       id: 'reus-93',
       text: 'Qui és l\'actual President de la Comissió Europea?',
       options: [
-        'Jean-Claud Juncker',
+        'Ursula von der Leyen',
         'Martin Schulz',
         'Donald Tusk',
         'Romano Prodi',
       ],
       correct: 0,
-      reference: 'Reus 2017',
+      reference: 'Reus 2017 · act. 2026',
     },
     {
       id: 'reus-94',
@@ -1144,7 +1144,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-95',
-      text: 'Qui és l\'actual Conseller d\'Interior de la Generalitat de Catalunya?',
+      text: 'Qui és l\'actual Conseller d\'Interior de la Generalitat de Catalunya? (a l\'examen de 2017)',
       options: [
         'Ramón Espadaler Parcerisas',
         'Joaquim Forn i Chiariello',
@@ -1180,7 +1180,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-98',
-      text: 'Qui és l\'actual Síndic/a Municipal de Greuges de Reus?',
+      text: 'Qui és l\'actual Síndic/a Municipal de Greuges de Reus? (a l\'examen de 2017)',
       options: [
         'Francesc Palacin',
         'Pere Pagès',
@@ -1295,8 +1295,8 @@ const topic: TestTopic = {
         'Paulo Coelho',
         'Jair Bolsonaro',
       ],
-      correct: 3,
-      reference: 'Reus 2019',
+      correct: 0,
+      reference: 'Reus 2019 · act. 2026',
     },
     {
       id: 'reus-108',
@@ -1312,7 +1312,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-109',
-      text: 'Qui és actualment l\'alcalde de Nova York?',
+      text: 'Qui és actualment l\'alcalde de Nova York? (a l\'examen de 2019)',
       options: [
         'Bill de Blasio',
         'Muriel Browser',
@@ -1336,7 +1336,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-111',
-      text: 'Quin és l\'actual país que ha guanyat Eurovisió?',
+      text: 'Quin és l\'actual país que ha guanyat Eurovisió? (a l\'examen de 2019)',
       options: [
         'Xipre',
         'Israel',
@@ -1480,7 +1480,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-123',
-      text: 'El número 1 actual del rànking de mundial de l\'ATP és:',
+      text: 'El número 1 actual del rànking de mundial de l\'ATP és: (a l\'examen de 2019)',
       options: [
         'Rafa Nadal',
         'Roger Federer',
@@ -1660,7 +1660,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-138',
-      text: 'Actualment quina és la velocitat màxima permesa en via convencional, que tingui separació física dels dos sentits de circulació?',
+      text: 'Actualment quina és la velocitat màxima permesa en via convencional, que tingui separació física dels dos sentits de circulació? (a l\'examen de 2019)',
       options: [
         '120 km/h',
         '110 km/h',
@@ -1696,7 +1696,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-141',
-      text: 'Quin aniversari s\'ha commemorat aquest any arran del desembarcament de les tropes aliades a la Normandia francesa?',
+      text: 'Quin aniversari s\'ha commemorat aquest any arran del desembarcament de les tropes aliades a la Normandia francesa? (a l\'examen de 2019)',
       options: [
         '50',
         '60',
@@ -1852,7 +1852,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-154',
-      text: 'Qui és actualment el president de l\'Autoritat Portuària de Tarragona?',
+      text: 'Qui és actualment el president de l\'Autoritat Portuària de Tarragona? (a l\'examen de 2019)',
       options: [
         'Josep Maria Cruset',
         'Damià Calvet',
@@ -1900,7 +1900,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-158',
-      text: 'Aquest any, el Ple de l\'Ajuntament de Reus va investir Alcalde:',
+      text: 'Aquest any, el Ple de l\'Ajuntament de Reus va investir Alcalde: (a l\'examen de 2019)',
       options: [
         'El dia de la seva constitució',
         'El dia 26 de maig, amb el resultat de les eleccions electorals',
@@ -1914,13 +1914,13 @@ const topic: TestTopic = {
       id: 'reus-159',
       text: 'Qui és l\'actual entrenador de la selecció espanyola absoluta de futbol masculí?',
       options: [
-        'Luis Enrique Martinez',
+        'Luis de la Fuente',
         'Robert Moreno',
         'Fernando Hierro',
         'Julen Lopetegui',
       ],
-      correct: 1,
-      reference: 'Reus 2019',
+      correct: 0,
+      reference: 'Reus 2019 · act. 2026',
     },
     {
       id: 'reus-160',
@@ -1960,7 +1960,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-163',
-      text: 'L\'actual conseller/a de presidència de la Generalitat de Catalunya és:',
+      text: 'L\'actual conseller/a de presidència de la Generalitat de Catalunya és: (a l\'examen de 2019)',
       options: [
         'Damià Calvet',
         'Elsa Artadi',
@@ -1984,7 +1984,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-165',
-      text: 'L\'actual guerra comercial és un conflicte entre:',
+      text: 'L\'actual guerra comercial és un conflicte entre: (a l\'examen de 2019)',
       options: [
         'Estats Units i Japó',
         'Estats Units i Rússia',
@@ -2044,7 +2044,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-170',
-      text: 'Actualment, qui ocupa el càrrec de "Conseller en cap" de la Generalitat de Catalunya:',
+      text: 'Actualment, qui ocupa el càrrec de "Conseller en cap" de la Generalitat de Catalunya: (a l\'examen de 2019)',
       options: [
         'Quim Torra, com a cap de l\'executiu',
         'Meritxell Budó, com a portaveu del govern',
@@ -2080,7 +2080,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-173',
-      text: 'Qui és actualment el primer ministre de França?:',
+      text: 'Qui és actualment el primer ministre de França?: (a l\'examen de 2019)',
       options: [
         'Emmanuel Macron',
         'Édouard Philippe',
@@ -2140,7 +2140,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-178',
-      text: 'Quin es l\'actual cap de Cos dels Mossos d\'Esquadra.',
+      text: 'Quin es l\'actual cap de Cos dels Mossos d\'Esquadra. (a l\'examen de 2019)',
       options: [
         'Ferran Lopez',
         'Josep Lluis Trapero',
@@ -2152,7 +2152,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-179',
-      text: 'Quantes parelles tradicionals composen actualment la Colla Gegantera de Reus?.',
+      text: 'Quantes parelles tradicionals composen actualment la Colla Gegantera de Reus?. (a l\'examen de 2019)',
       options: [
         '2',
         '5',
@@ -2176,7 +2176,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-181',
-      text: 'Qui entrena actualment la selecció femenina de futbol?',
+      text: 'Qui entrena actualment la selecció femenina de futbol? (a l\'examen de 2019)',
       options: [
         'Albert "Chapi" Ferrer',
         'Jorge Vilda',
@@ -2224,7 +2224,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-185',
-      text: 'La presidència actual del Senat l\'ostenta...',
+      text: 'La presidència actual del Senat l\'ostenta... (a l\'examen de 2019)',
       options: [
         'Manuel Cruz',
         'Meritxell Batet',
@@ -2512,7 +2512,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-209',
-      text: 'Segons AENA els destins de l\'areoport de Reus, actualment son...',
+      text: 'Segons AENA els destins de l\'areoport de Reus, actualment son... (a l\'examen de 2019)',
       options: [
         '35',
         '28',
@@ -2524,7 +2524,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-210',
-      text: 'Qui ha guanyat recentment les eleccions per ser alcalde a Istambul?',
+      text: 'Qui ha guanyat recentment les eleccions per ser alcalde a Istambul? (a l\'examen de 2019)',
       options: [
         'Ekrem Imamoglu',
         'Recp Tayyip Erdogan',
@@ -2548,7 +2548,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-212',
-      text: 'A l\'ajuntament de Reus, l\'actual regidora delegada l\'Àrea d\'Hisenda, és?',
+      text: 'A l\'ajuntament de Reus, l\'actual regidora delegada l\'Àrea d\'Hisenda, és? (a l\'examen de 2020)',
       options: [
         'Montserrat Vilella',
         'Marina Berasategui',
@@ -2752,7 +2752,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-229',
-      text: 'Qui és l\'actual Director general de la policia de la conselleria d\'Interior de la Generalitat?',
+      text: 'Qui és l\'actual Director general de la policia de la conselleria d\'Interior de la Generalitat? (a l\'examen de 2020)',
       options: [
         'Pere Ferrer',
         'Joan Carles Molinero',
@@ -2764,7 +2764,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-230',
-      text: 'Quins partits formen actualment part del pacte de govern local de la ciutat de Reus?',
+      text: 'Quins partits formen actualment part del pacte de govern local de la ciutat de Reus? (a l\'examen de 2020)',
       options: [
         'A (Ara Reus), ERC-AM i JxCat-JUNTS',
         'JxCat-JUNTS, CUP-AMUNT i A (Ara Reus)',
@@ -2920,7 +2920,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-243',
-      text: 'Com es diu el Conseller d\'Interior actual?',
+      text: 'Com es diu el Conseller d\'Interior actual? (a l\'examen de 2020)',
       options: [
         'Bernat Solé i Barril',
         'Pere Aragonès i Garcia',
@@ -3040,7 +3040,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-253',
-      text: 'Qui és l\'actual president de Perú?',
+      text: 'Qui és l\'actual president de Perú? (a l\'examen de 2020)',
       options: [
         'Manuel Arturo Merino',
         'Francisco Sagasti',
@@ -3112,7 +3112,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-259',
-      text: 'Qui presideix actualment el Consell Nacional de Protecció Civil.',
+      text: 'Qui presideix actualment el Consell Nacional de Protecció Civil. (a l\'examen de 2020)',
       options: [
         'El Ministre de l\'Interior',
         'El Govern',
@@ -3244,7 +3244,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-270',
-      text: 'Com es diu l\'actual primer ministre d\'Hongria?',
+      text: 'Com es diu l\'actual primer ministre d\'Hongria? (a l\'examen de 2020)',
       options: [
         'János Áder',
         'Frank Filho',
@@ -3256,7 +3256,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-271',
-      text: 'Actualment quants Grand Slam ha guanyat Rafa Nadal?',
+      text: 'Actualment quants Grand Slam ha guanyat Rafa Nadal? (a l\'examen de 2020)',
       options: [
         '20',
         '15',
@@ -3280,7 +3280,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-273',
-      text: 'Qui és l\'actual entrenador del Real Madrid de bàsquet?',
+      text: 'Qui és l\'actual entrenador del Real Madrid de bàsquet? (a l\'examen de 2020)',
       options: [
         'Felipe Reyes',
         'Joan Plaza',
@@ -3366,13 +3366,13 @@ const topic: TestTopic = {
       id: 'reus-280',
       text: 'Qui és l\'actual entrenador de la selecció espanyola absoluta de futbol masculí?',
       options: [
-        'Luis Enrique Martinez',
+        'Luis de la Fuente',
         'Robert Moreno',
         'Fernando Hierro',
         'Julen Lopetegui',
       ],
       correct: 0,
-      reference: 'Reus 2020',
+      reference: 'Reus 2020 · act. 2026',
     },
     {
       id: 'reus-281',
@@ -3424,7 +3424,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-285',
-      text: 'Qui és l\'actual president del govern del Marroc?',
+      text: 'Qui és l\'actual president del govern del Marroc? (a l\'examen de 2020)',
       options: [
         'Abdelilah Benkirane',
         'Rafia El Jebari',
@@ -3448,7 +3448,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-287',
-      text: 'Quants partits formen l\'actual govern d\'Espanya?',
+      text: 'Quants partits formen l\'actual govern d\'Espanya? (a l\'examen de 2020)',
       options: [
         '1',
         '3',
@@ -3472,7 +3472,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-289',
-      text: 'Qui és l\'actual consellera de Salut de la Generalitat de Catalunya?',
+      text: 'Qui és l\'actual consellera de Salut de la Generalitat de Catalunya? (a l\'examen de 2020)',
       options: [
         'Dolors Borràs',
         'Meritxell Budó',
@@ -3496,7 +3496,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-291',
-      text: 'Quin es l\'actual cap de Cos dels Mossos d\'Esquadra.',
+      text: 'Quin es l\'actual cap de Cos dels Mossos d\'Esquadra. (a l\'examen de 2020)',
       options: [
         'Ferran Lopez.',
         'Josep Lluis Trapero.',
@@ -3772,7 +3772,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-314',
-      text: 'L\'actual secretari de Salut pública del govern de la Generalitat, amb rang orgànic de secretari general, és?',
+      text: 'L\'actual secretari de Salut pública del govern de la Generalitat, amb rang orgànic de secretari general, és? (a l\'examen de 2020)',
       options: [
         'Joan Guix',
         'Jacobo Mendioroz',
@@ -4468,7 +4468,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-372',
-      text: 'Quin equip femení es el vigent campió de la Copa de la Reina:',
+      text: 'Quin equip femení es el vigent campió de la Copa de la Reina: (a l\'examen de 2021)',
       options: [
         'Reial Madrid',
         'Futbol club Barcelona',
@@ -4576,7 +4576,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-381',
-      text: 'Qui és l\'actual primer ministre de Portugal:',
+      text: 'Qui és l\'actual primer ministre de Portugal: (a l\'examen de 2021)',
       options: [
         'Antonio Acosta',
         'Rui Rio',
@@ -5584,7 +5584,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-465',
-      text: 'Segons l\'anuari estadístic de Catalunya de 2021, Barcelona, l\'Hospitalet de Llobregat i Terrassa ocupen els 3 primers llocs del llistat de les ciutats amb major nombre d\'habitants de Catalunya. Quina posició ocupa actualment Reus en aquest llistat poblacional?',
+      text: 'Segons l\'anuari estadístic de Catalunya de 2021, Barcelona, l\'Hospitalet de Llobregat i Terrassa ocupen els 3 primers llocs del llistat de les ciutats amb major nombre d\'habitants de Catalunya. Quina posició ocupa actualment Reus en aquest llistat poblacional? (a l\'examen de 2022)',
       options: [
         'Vuitè',
         'Tretzè',
@@ -5608,7 +5608,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-467',
-      text: 'Qui és actualment el/la president/a de la Corporació Catalana de Mitjans Audiovisuals?',
+      text: 'Qui és actualment el/la president/a de la Corporació Catalana de Mitjans Audiovisuals? (a l\'examen de 2022)',
       options: [
         'Josep Vicent Sanchís i Llacer',
         'Rosa Romàs i Monfà',
@@ -5632,7 +5632,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-469',
-      text: 'Quin equip femení és el vigent campió de la Copa de la Reina de futbol?',
+      text: 'Quin equip femení és el vigent campió de la Copa de la Reina de futbol? (a l\'examen de 2022)',
       options: [
         'Reial Madrid.',
         'Futbol Club Barcelona.',
@@ -5651,8 +5651,8 @@ const topic: TestTopic = {
         'Donald Trump.',
         'George W. Bush.',
       ],
-      correct: 0,
-      reference: 'Reus 2022',
+      correct: 2,
+      reference: 'Reus 2022 · act. 2026',
     },
     {
       id: 'reus-471',
@@ -5682,17 +5682,17 @@ const topic: TestTopic = {
       id: 'reus-473',
       text: 'Quin és l\'actual president de la Generalitat de Catalunya?',
       options: [
-        'Laura Borràs i Castanyer.',
+        'Salvador Illa i Roca',
         'Joaquim Torra i Pla.',
         'Jordi Cuixart i Navarro.',
         'Pere Aragonès i Garcia.',
       ],
-      correct: 3,
-      reference: 'Reus 2022',
+      correct: 0,
+      reference: 'Reus 2022 · act. 2026',
     },
     {
       id: 'reus-474',
-      text: 'Qui és actualment el conseller d\'interior de la Generalitat de Catalunya?',
+      text: 'Qui és actualment el conseller d\'interior de la Generalitat de Catalunya? (a l\'examen de 2022)',
       options: [
         'Miquel Sàmper i Rodríguez',
         'Joan Ignasi Elena i Garcia',
@@ -5728,7 +5728,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-477',
-      text: 'L\'actual president de Colòmbia que, a més, és el primer candidat progressista a fer-ho en la història d\'aquell país és:',
+      text: 'L\'actual president de Colòmbia que, a més, és el primer candidat progressista a fer-ho en la història d\'aquell país és: (a l\'examen de 2022)',
       options: [
         'Gustavo Petro',
         'Iván Duque',
@@ -5764,7 +5764,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-480',
-      text: 'Qui és l\'actual regidora de Participació, Bon Govern i Serveis Generals de l\'Ajuntament de Reus?',
+      text: 'Qui és l\'actual regidora de Participació, Bon Govern i Serveis Generals de l\'Ajuntament de Reus? (a l\'examen de 2022)',
       options: [
         'Mònica Pàmies',
         'Montserrat Caelles',
@@ -5843,8 +5843,8 @@ const topic: TestTopic = {
         'Danilo Medeiros',
         'Marcelo Rebelo de Sousa',
       ],
-      correct: 0,
-      reference: 'Reus 2022',
+      correct: 1,
+      reference: 'Reus 2022 · act. 2026',
     },
     {
       id: 'reus-487',
@@ -5884,7 +5884,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-490',
-      text: 'Qui ocupa actualment el càrrec de regidor/a delegat/da de l\'Àrea de Benestar Social de l\'Ajuntament de Reus?',
+      text: 'Qui ocupa actualment el càrrec de regidor/a delegat/da de l\'Àrea de Benestar Social de l\'Ajuntament de Reus? (a l\'examen de 2022)',
       options: [
         'Òscar Subirats',
         'Montserrat Caelles',
@@ -6448,7 +6448,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-537',
-      text: 'La central nuclear ucraïnesa ocupada recentment per l\'exèrcit rus és la de:',
+      text: 'La central nuclear ucraïnesa ocupada recentment per l\'exèrcit rus és la de: (a l\'examen de 2022)',
       options: [
         'Zaporíjia',
         'Txernòbil',
@@ -6832,7 +6832,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-569',
-      text: 'Qui ocupa actualment la presidència del Parlament de Catalunya?',
+      text: 'Qui ocupa actualment la presidència del Parlament de Catalunya? (a l\'examen de 2023)',
       options: [
         'Carme Forcadell',
         'Roger Torrent',
@@ -7072,7 +7072,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-589',
-      text: 'Qui va guanyar el Tour de França aquest any 2023?',
+      text: 'Qui va guanyar el Tour de França aquest any 2023? (a l\'examen de 2023)',
       options: [
         'Alberto Contador',
         'Jonas Vingegaard',
@@ -7096,7 +7096,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-591',
-      text: 'Qui és l\'Alcalde/ssa actual del municipi de Reus?',
+      text: 'Qui és l\'Alcalde/ssa actual del municipi de Reus? (a l\'examen de 2023)',
       options: [
         'Josep Baiges Gispert',
         'Carles Pellicer Punyed',
@@ -7132,7 +7132,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-594',
-      text: 'L\'actual president de la Real Federació Espanyola de Futbol és:',
+      text: 'L\'actual president de la Real Federació Espanyola de Futbol és: (a l\'examen de 2023)',
       options: [
         'Luis Rubiales',
         'Luis de la Fuente',
@@ -7180,7 +7180,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-598',
-      text: 'Qui és l\'actual regidora de Seguretat ciutadana i convivència?',
+      text: 'Qui és l\'actual regidora de Seguretat ciutadana i convivència? (a l\'examen de 2023)',
       options: [
         'Montserrat Flores Juanpere',
         'Anabel Martínez Serrano',
@@ -7192,7 +7192,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-599',
-      text: 'Quin país assumeix actualment la presidència del Consell de la Unió Europea?',
+      text: 'Quin país assumeix actualment la presidència del Consell de la Unió Europea? (a l\'examen de 2023)',
       options: [
         'La República Txeca',
         'França',
@@ -7216,7 +7216,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-601',
-      text: 'Qui és actualment el conseller de sanitat al Parlament de Catalunya?',
+      text: 'Qui és actualment el conseller de sanitat al Parlament de Catalunya? (a l\'examen de 2023)',
       options: [
         'Manel Balcells i Díaz',
         'Josep Maria Argimon i Pallás',
@@ -7228,7 +7228,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-602',
-      text: 'Qui és actualment el president de la Corporació Catalana de Mitjans Audiovisuals?',
+      text: 'Qui és actualment el president de la Corporació Catalana de Mitjans Audiovisuals? (a l\'examen de 2023)',
       options: [
         'Josep Vicent Sanchís i Llacer',
         'Rosa Romà i Monfà',
@@ -8416,7 +8416,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-701',
-      text: 'Qui és actualment el/la regidor/a de Promoció econòmica, innovació i coneixement?',
+      text: 'Qui és actualment el/la regidor/a de Promoció econòmica, innovació i coneixement? (a l\'examen de 2024)',
       options: [
         'Josep Baiges Gispert',
         'Noemí Llauradó Sans',
@@ -8492,11 +8492,11 @@ const topic: TestTopic = {
       options: [
         'Mario Draghi',
         'Nancy Pelosi',
-        'Kamala Harris',
+        'JD Vance',
         'Dick Cheney',
       ],
       correct: 2,
-      reference: 'Reus 2024',
+      reference: 'Reus 2024 · act. 2026',
     },
     {
       id: 'reus-708',
@@ -9892,7 +9892,7 @@ const topic: TestTopic = {
     },
     {
       id: 'reus-824',
-      text: 'Quina és l\'actual regidora de Seguretat i Convivència de l\'Ajuntament de Reus?',
+      text: 'Quina és l\'actual regidora de Seguretat i Convivència de l\'Ajuntament de Reus? (a l\'examen de 2025)',
       options: [
         'Anabel Martínez Serrano',
         'Marina Berasategui Canals',

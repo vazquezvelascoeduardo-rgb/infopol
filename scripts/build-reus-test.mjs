@@ -58,10 +58,57 @@ for (const f of files) {
 
 const items = [...map.values()];
 
+// ── Actualització a 2026 de preguntes efímeres ─────────────────────
+// Detecció d'efímeres (marcadors de temps present).
+const EPH_KW = ['actual', 'actualment', 'aquest any', 'recentment', 'vigent', 'a dia', 'darrerament'];
+const isEphemeral = (text) => {
+  const h = norm(text);
+  return EPH_KW.some((k) => h.includes(norm(k)));
+};
+
+// UPDATE: càrrecs nacionals/internacionals estables i verificables → 2026.
+// setOption: [índex, nou text] · correct: índex de la resposta correcta.
+const UPDATES = {
+  'reus-107': { correct: 0 },                                          // Brasil → Lula
+  'reus-486': { correct: 1 },                                          // Brasil → Lula
+  'reus-470': { correct: 2 },                                          // EUA → Trump
+  'reus-707': { setOption: [2, 'JD Vance'], correct: 2 },              // VP EUA → Vance
+  'reus-473': { setOption: [0, 'Salvador Illa i Roca'], correct: 0 },  // Pres. Generalitat → Illa
+  'reus-93':  { setOption: [0, 'Ursula von der Leyen'], correct: 0 },  // Pres. Comissió Europea
+  'reus-47':  { setOption: [0, 'José Luis Martínez-Almeida'], correct: 0 }, // Alcalde Madrid
+  'reus-159': { setOption: [0, 'Luis de la Fuente'], correct: 0 },     // Seleccionador Espanya
+  'reus-280': { setOption: [0, 'Luis de la Fuente'], correct: 0 },     // Seleccionador Espanya
+};
+
+// LEAVE: efímeres "de mentida" — fets permanents o càrrecs encara vigents
+// el 2026. No es toquen.
+const LEAVE = new Set([
+  'reus-15', 'reus-25', 'reus-37', 'reus-69', 'reus-104', 'reus-148', 'reus-162',
+  'reus-200', 'reus-228', 'reus-260', 'reus-269', 'reus-275', 'reus-276', 'reus-283',
+  'reus-290', 'reus-293', 'reus-301', 'reus-305', 'reus-358', 'reus-363', 'reus-365',
+  'reus-430', 'reus-476', 'reus-597', 'reus-708', 'reus-728', 'reus-745', 'reus-835',
+]);
+
+let nUpdated = 0, nAnchored = 0;
+items.forEach((q, i) => {
+  const id = `reus-${i + 1}`;
+  const years = [...q.years].sort((a, b) => a - b);
+  if (UPDATES[id]) {
+    const u = UPDATES[id];
+    if (u.setOption) q.options[u.setOption[0]] = u.setOption[1];
+    q.correct = u.correct;
+    q._refSuffix = ' · act. 2026';
+    nUpdated++;
+  } else if (!LEAVE.has(id) && isEphemeral(q.text)) {
+    q.text = `${q.text} (a l'examen de ${years[0]})`;
+    nAnchored++;
+  }
+});
+
 // Genera el cos del fitxer .ts
 const blocks = items.map((q, i) => {
   const years = [...q.years].sort((a, b) => a - b);
-  const ref = 'Reus ' + years.join(' · ');
+  const ref = 'Reus ' + years.join(' · ') + (q._refSuffix || '');
   const lines = [];
   lines.push('    {');
   lines.push(`      id: 'reus-${i + 1}',`);
@@ -107,3 +154,4 @@ for (const q of items) for (const y of q.years) byYear[y] = (byYear[y] || 0) + 1
 console.log('Per any (preguntes úniques que hi apareixen):', byYear);
 const multi = items.filter((q) => q.years.size > 1).length;
 console.log(`Preguntes que han sortit en més d'un any: ${multi}`);
+console.log(`Efímeres actualitzades a 2026: ${nUpdated} · ancorades a l'any: ${nAnchored}`);
