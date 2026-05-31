@@ -369,6 +369,18 @@ export default function TestList() {
               </div>
             </div>
 
+            {/* Accés ràpid al temari de repàs de Cultura general */}
+            {cat === 'cultura' && (
+              <Link to="/cultura-general/temari" className="cultura-temari-btn">
+                <span className="ct-ico" aria-hidden>📖</span>
+                <span className="ct-body">
+                  <span className="ct-title">Temari de cultura general</span>
+                  <span className="ct-desc">16 àrees i +400 fets clau per repassar de pressa abans del test.</span>
+                </span>
+                <span className="ct-cta">Estudiar <span aria-hidden>→</span></span>
+              </Link>
+            )}
+
             <div className="test-grid">
               {visibleTopics.map((topic) => (
                 <TestCard key={topic.slug} topic={topic} />

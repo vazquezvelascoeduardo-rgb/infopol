@@ -91,7 +91,7 @@ export default function CulturaGeneral() {
                 <span>·</span>
                 <span>repàs ràpid</span>
               </div>
-              <span className="cta" style={{ color: '#fff' }}>
+              <span className="cta" style={{ color: '#E85D04' }}>
                 📚 Estudiar <span className="arr">→</span>
               </span>
             </div>

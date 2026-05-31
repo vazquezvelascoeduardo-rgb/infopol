@@ -3859,6 +3859,37 @@ html[data-text-size="lg"] { font-size: 18px; }
   .cat-back:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
   .cat-active-chips { display: flex; gap: 8px; flex-wrap: wrap; }
 
+  /* Botó d'accés al temari de repàs de Cultura general (dins /policia-local) */
+  .cultura-temari-btn {
+    display: flex; align-items: center; gap: 16px;
+    background: linear-gradient(135deg, #FF7A1A 0%, #E85D04 100%);
+    border-radius: 16px; padding: 16px 20px; margin-bottom: 14px;
+    color: #fff; text-decoration: none;
+    box-shadow: 0 6px 20px -8px rgba(232, 93, 4, 0.5);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .cultura-temari-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px -8px rgba(232, 93, 4, 0.55);
+  }
+  .cultura-temari-btn .ct-ico {
+    flex-shrink: 0; width: 46px; height: 46px; border-radius: 12px;
+    background: rgba(255, 255, 255, 0.22);
+    display: inline-flex; align-items: center; justify-content: center; font-size: 24px;
+  }
+  .cultura-temari-btn .ct-body { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+  .cultura-temari-btn .ct-title { font-size: 16px; font-weight: 800; letter-spacing: -0.015em; }
+  .cultura-temari-btn .ct-desc { font-size: 12.5px; color: rgba(255, 255, 255, 0.9); line-height: 1.4; }
+  .cultura-temari-btn .ct-cta {
+    flex-shrink: 0; background: #fff; color: #E85D04;
+    padding: 9px 16px; border-radius: 999px; font-size: 13.5px; font-weight: 800;
+    display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  }
+  @media (max-width: 600px) {
+    .cultura-temari-btn { flex-wrap: wrap; }
+    .cultura-temari-btn .ct-cta { width: 100%; justify-content: center; }
+  }
+
   /* Estat buit (sense tests fets encara) */
   .ts-empty {
     display: flex; align-items: center; gap: 14px;
