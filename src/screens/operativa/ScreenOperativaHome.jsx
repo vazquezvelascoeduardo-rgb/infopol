@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
@@ -42,14 +43,56 @@ function Chip({ icon, label }) {
   );
 }
 
-const NEWS = [
-  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
-  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
-  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
-];
+const TAG_COLORS = {
+  Política: '#3B6BF5',
+  Economia: '#1FB286',
+  Esport: '#FF7A1A',
+  Policial: T.cat.operativa.solid,
+  Judicial: '#9C4FE0',
+  Cultura: '#E0884F',
+  Ciència: '#1FB286',
+  Internacional: '#3B6BF5',
+  Catalunya: T.cat.operativa.solid,
+  Espanya: '#E03B3B',
+  General: T.cat.operativa.solid,
+};
+
+function NewsCard({ n }) {
+  const color = TAG_COLORS[n.tag] || T.cat.operativa.solid;
+  const handleClick = () => n.url && window.open(n.url, '_blank', 'noopener,noreferrer');
+  return (
+    <div
+      onClick={handleClick}
+      style={{
+        background: '#fff',
+        borderRadius: T.r.md,
+        padding: 14,
+        borderLeft: `3px solid ${color}`,
+        boxShadow: T.shadow.card,
+        cursor: n.url ? 'pointer' : 'default',
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+        <span style={{ fontSize: 10, fontWeight: 800, color, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+        <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.dateLabel}</span>
+        {n.url && <Icon name="arrow-right" size={12} color={T.inkMuted} />}
+      </div>
+      <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+      <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+    </div>
+  );
+}
 
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/news')
+      .then(r => r.json())
+      .then(setNews)
+      .catch(() => setNews([]));
+  }, []);
   return (
     <div className="screen">
       <StatusBar />
@@ -120,20 +163,15 @@ export default function ScreenOperativaHome() {
         </div>
       </div>
 
-      {/* Actualitat normativa */}
-      <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
+      {/* Actualitat — notícies diàries */}
+      <div style={{ padding: '14px 0 8px' }}>
+        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {NEWS.map((n, i) => (
-            <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
-                <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
-              </div>
-              <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
-              <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
-            </div>
-          ))}
+          {news.length === 0 ? (
+            <div style={{ fontSize: 13, color: T.inkMuted, padding: '12px 0' }}>Carregant notícies...</div>
+          ) : (
+            news.map(n => <NewsCard key={n.id} n={n} />)
+          )}
         </div>
       </div>
     </div>
