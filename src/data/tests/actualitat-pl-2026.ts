@@ -1,5 +1,6 @@
 // Test d'Actualitat 2025-2026 — Policia Local de Catalunya.
-// 75 preguntes (càrrecs CAT, ESP, INT, Vaticà, premis, esports, política, social).
+// 84 preguntes (càrrecs CAT, ESP, INT, Vaticà, premis, esports, política, social).
+// Inclou preguntes d'actualitat 2025/2026 vistes als exàmens reials de Reus.
 // Format igual que la resta de TestTopics (slug, title, icon, accent, questions[]).
 import type { TestTopic } from './types';
 
@@ -778,6 +779,160 @@ const actualitat: TestTopic = {
         'Octubre de 2025',
         'Gener de 2026',
         'Setembre de 2025',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-79',
+      text: 'Qui és l\'actual President de la República Federativa del Brasil?',
+      options: [
+        'Luiz Inácio Lula da Silva',
+        'Jair Bolsonaro',
+        'Dilma Rousseff',
+        'Michel Temer',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-80',
+      text: 'Qui és l\'actual Alcalde de Madrid?',
+      options: [
+        'José Luis Martínez-Almeida',
+        'Manuela Carmena',
+        'Reyes Maroto',
+        'Ada Colau',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-81',
+      text: 'Qui és l\'actual seleccionador de la selecció espanyola absoluta de futbol masculí?',
+      options: [
+        'Luis de la Fuente',
+        'Luis Enrique Martínez',
+        'Vicente del Bosque',
+        'Julen Lopetegui',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-82',
+      text: 'Quina pel·lícula va guanyar l\'Oscar a la Millor Pel·lícula a la 98a edició (2026)?',
+      options: [
+        'One Battle After Another',
+        'Anora',
+        'The Brutalist',
+        'Sinners',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-83',
+      text: 'Qui va guanyar l\'Oscar al Millor Director a la 98a edició (2026)?',
+      options: [
+        'Paul Thomas Anderson',
+        'Sean Baker',
+        'Christopher Nolan',
+        'Jonathan Glazer',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-84',
+      text: 'Qui va guanyar l\'Oscar al Millor Actor protagonista a la 98a edició (2026)?',
+      options: [
+        'Michael B. Jordan',
+        'Timothée Chalamet',
+        'Adrien Brody',
+        'Colman Domingo',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-85',
+      text: 'Qui va guanyar el Goya a la Millor Actriu Protagonista 2026 (40a edició)?',
+      options: [
+        'Patricia López Arnáiz',
+        'Carolina Yuste',
+        'Karla Sofía Gascón',
+        'Marisa Paredes',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-86',
+      text: 'Qui va guanyar el premi al Millor Actor al Festival de Cannes 2025?',
+      options: [
+        'Wagner Moura',
+        'Jafar Panahi',
+        'Joaquin Phoenix',
+        'Pedro Pascal',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-87',
+      text: 'Qui va rebre el Premi Princesa d\'Astúries dels Esports 2025?',
+      options: [
+        'Serena Williams',
+        'Rafa Nadal',
+        'Carolina Marín',
+        'Teresa Perales',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-88',
+      text: 'Quina pel·lícula va guanyar l\'Oscar a la Millor Pel·lícula 2025 (97a edició)?',
+      options: [
+        'Anora',
+        'The Brutalist',
+        'Emilia Pérez',
+        'Conclave',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-89',
+      text: 'Qui va guanyar el Benidorm Fest 2025 i va representar Espanya a Eurovisió 2025?',
+      options: [
+        'Melody',
+        'Nebulossa',
+        'Chanel',
+        'Blanca Paloma',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-90',
+      text: 'Quina entitat bancària catalana ha estat objecte d\'una OPA hostil per part del BBVA?',
+      options: [
+        'Banc Sabadell',
+        'CaixaBank',
+        'Bankinter',
+        'Banc Mediolanum',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-91',
+      text: 'Qui va guanyar el premi Goya 2025 a la Millor Actriu Protagonista?',
+      options: [
+        'Carolina Yuste',
+        'Patricia López Arnáiz',
+        'Najwa Nimri',
+        'Aitana Sánchez-Gijón',
+      ],
+      correct: 0,
+    },
+    {
+      id: 'actualitat-92',
+      text: 'De quin expresident dels EUA és familiar Robert F. Kennedy Jr., membre del govern de Donald Trump?',
+      options: [
+        'John F. Kennedy',
+        'Ronald Reagan',
+        'Richard Nixon',
+        'Bill Clinton',
       ],
       correct: 0,
     },
