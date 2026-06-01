@@ -331,7 +331,7 @@ const culturaHistoria: TestTopic = {
     },
     {
       id: 'cult-h-30',
-      text: 'En quina data va tenir lloc l\'abdicació del rei Joan Carles I?',
+      text: 'En quina data va signar el rei Joan Carles I la llei de la seva abdicació (LO 3/2014)? Nota: Felip VI va ser proclamat rei l\'endemà, el 19 de juny.',
       options: [
         'El 18 de juny de 2014',
         'El 19 de juny de 2014',
@@ -487,8 +487,8 @@ const culturaHistoria: TestTopic = {
       id: 'cult-h-44',
       text: 'En quin període va tenir lloc la Guerra de Vietnam?',
       options: [
-        'Entre l\'any 1964 i el 1975',
-        'Entre l\'any 1955 i el 1972',
+        'Entre l\'any 1955 i el 1975',
+        'Entre l\'any 1964 i el 1972',
         'Entre l\'any 1960 i el 1970',
         'Entre l\'any 1959 i el 1973',
       ],
