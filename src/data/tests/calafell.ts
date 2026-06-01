@@ -341,7 +341,7 @@ const calafell: TestTopic = {
         'Escala executiva',
         'Escala superior',
       ],
-      correct: 0,
+      correct: 1,
     },
     {
       id: 'calafell-31',
