@@ -227,9 +227,9 @@ const cultura: TestTopic = {
     },
     {
       id: 'cultura-31',
-      text: 'El Decret de Nova Planta va ser imposat el:',
+      text: 'En quin any es va promulgar el Decret de Nova Planta de Catalunya?',
       options: ['1714.', '1716.', '1701.', '1808.'],
-      correct: 0,
+      correct: 1,
     },
     {
       id: 'cultura-32',

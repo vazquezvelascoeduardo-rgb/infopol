@@ -767,7 +767,7 @@ const culturaHistoria: TestTopic = {
         'Els Decrets de Nova Planta',
         'La Pau d\'Utrecht',
       ],
-      correct: 1,
+      correct: 0,
     },
     {
       id: 'cult-h-70',
