@@ -155,8 +155,12 @@ export default function TestSession() {
         : topic!.accent;
   const remaining = isRepas ? pool.length : pool.length - answeredIds.size;
 
-  function startTest(count: number, mode: Mode) {
-    const { questions, exhausted } = pickQuestions(pool, answeredIds, count);
+  function startTest(count: number, mode: Mode, all = false) {
+    // 'all' = totes les preguntes del tema (ignora les ja respostes i el
+    // límit de 50). La resta de comptes filtren les ja respostes.
+    const { questions, exhausted } = all
+      ? pickQuestions(pool, new Set<string>(), pool.length)
+      : pickQuestions(pool, answeredIds, count);
     if (exhausted || questions.length === 0) return;
     const shuffled = questions.map((q) => shuffleQuestion(q));
     setState({
@@ -454,7 +458,7 @@ function SelectPhase({
 }: {
   title: string; accent: string;
   total: number; remaining: number;
-  onStart: (count: number, mode: Mode) => void;
+  onStart: (count: number, mode: Mode, all?: boolean) => void;
   onReset: () => void;
   isRepas?: boolean;
 }) {
@@ -582,6 +586,18 @@ function SelectPhase({
                 {n === cappedRemaining && cappedRemaining < 50 ? `${n} (${t('test.session.allRemaining')})` : n}
               </button>
             ))}
+            {/* Totes: el tema sencer, ignorant el límit de 50 i les ja respostes */}
+            {!isRepas && total > 0 && (
+              <button
+                type="button"
+                onClick={() => onStart(total, mode, true)}
+                className={`col-span-2 sm:col-span-4 rounded-xl border-2 px-4 py-3 text-base font-bold transition
+                  border-purple-300 bg-purple-50 text-purple-700 hover:border-purple-500 hover:bg-purple-100
+                  dark:border-purple-400/40 dark:bg-purple-400/10 dark:text-purple-200 dark:hover:border-purple-400`}
+              >
+                🎯 Totes ({total})
+              </button>
+            )}
           </div>
           {total > remaining && (
             <button
