@@ -51,6 +51,27 @@ export default function Academia() {
   const temariCount = getTopicsByCategory('temari').length;
   const municipiCount = getTopicsByCategory('municipi').length;
 
+  // Progrés real de cada ruta = preguntes respostes / total (en %), que
+  // és el que genera l'XP. Així les barres s'actualitzen amb el progrés.
+  const routePct = (filter: (cat: string) => boolean): number => {
+    let total = 0;
+    let answered = 0;
+    for (const tp of TOPICS) {
+      if (!filter(tp.category ?? 'temari')) continue;
+      total += tp.questions.length;
+      answered += getAnsweredIds(tp.slug).size;
+    }
+    return total > 0 ? Math.round((answered / total) * 100) : 0;
+  };
+  const mossosPct = routePct((c) => c === 'mossos');
+  const localPct = routePct((c) => c !== 'mossos'); // tot el material de PL
+
+  // Temes començats (dada real) per al recuadre de la dreta.
+  const topicsStarted = TOPICS.reduce(
+    (acc, tp) => acc + (getAnsweredIds(tp.slug).size > 0 ? 1 : 0),
+    0,
+  );
+
   return (
     <div className="shell pb-10">
       <nav className="crumbs">
@@ -95,7 +116,7 @@ export default function Academia() {
           <div className="num">{gems.toLocaleString('es-ES')}</div>
         </div>
         <div className="ac-stat rank">
-          <span className="lab">🏆 {t('academia.stat.league')}</span>
+          <span className="lab">{failuresDue > 0 ? '🔁' : '🎯'} {failuresDue > 0 ? t('academia.stat.league') : 'Temes'}</span>
           <div className="num">
             {failuresDue > 0 ? (
               <>
@@ -104,8 +125,8 @@ export default function Academia() {
               </>
             ) : (
               <>
-                Zafiro
-                <span className="u">{t('academia.stat.position')} 4</span>
+                {topicsStarted}
+                <span className="u">començats</span>
               </>
             )}
           </div>
@@ -164,9 +185,9 @@ export default function Academia() {
           <div className="progress">
             <div className="pmeta">
               <span>{t('academia.topics').toUpperCase()} · {temariCount}</span>
-              <span>—</span>
+              <span>{mossosPct}%</span>
             </div>
-            <div className="pbar"><span style={{ width: '34%' }} /></div>
+            <div className="pbar"><span style={{ width: `${mossosPct}%` }} /></div>
           </div>
           <span className="cta">
             {t('academia.route.mossos.cta')} <span className="arr">→</span>
@@ -191,9 +212,9 @@ export default function Academia() {
           <div className="progress">
             <div className="pmeta">
               <span>{municipiCount} {t('academia.cities').toUpperCase()}</span>
-              <span>—</span>
+              <span>{localPct}%</span>
             </div>
-            <div className="pbar"><span style={{ width: '22%' }} /></div>
+            <div className="pbar"><span style={{ width: `${localPct}%` }} /></div>
           </div>
           <span className="cta">
             {t('academia.route.local.cta')} <span className="arr">→</span>
