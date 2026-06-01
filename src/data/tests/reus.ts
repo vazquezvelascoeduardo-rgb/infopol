@@ -4939,8 +4939,8 @@ const topic: TestTopic = {
       text: 'Les escales dels Cossos de la Policia Locals són:',
       options: [
         'superior, executiva i bàsica',
-        'bàsica, superior, executiva i intermitja',
-        'bàsica, intermitja i superior',
+        'bàsica, superior, executiva i intermèdia',
+        'bàsica, intermèdia i superior',
         'General i especial',
       ],
       correct: 1,
