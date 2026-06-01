@@ -1,0 +1,38 @@
+[
+  {
+    "id": "n001",
+    "date": "2026-04-18",
+    "dateLabel": "04·18",
+    "tag": "Normativa",
+    "category": "judicial",
+    "scope": "Espanya",
+    "title": "Multireincidència — enduriment de furts i estafes lleus",
+    "desc": "Reforma del CP i la LECrim. LO 1/2026 vigent des del 10 d'abril. Afecta l'art. 22.8 CP i els arts. 468-470 LECrim.",
+    "source": "BOE",
+    "url": null
+  },
+  {
+    "id": "n002",
+    "date": "2026-04-14",
+    "dateLabel": "04·14",
+    "tag": "Normativa",
+    "category": "judicial",
+    "scope": "Espanya",
+    "title": "Reforma del Reglament d'Estrangeria",
+    "desc": "RD 316/2026. Dues figures noves d'arrelament social. Termini de regularització fins al 30 de juny de 2026.",
+    "source": "BOE",
+    "url": null
+  },
+  {
+    "id": "n003",
+    "date": "2026-03-28",
+    "dateLabel": "03·28",
+    "tag": "Normativa",
+    "category": "judicial",
+    "scope": "Espanya",
+    "title": "Instrucció sobre identificació i registre de persones",
+    "desc": "Nova circular de la Fiscalia General sobre aplicació de l'art. 20 LO 4/2015. Circ. 2/2026.",
+    "source": "Fiscalia General",
+    "url": null
+  }
+]

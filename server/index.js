@@ -1,11 +1,14 @@
 import express from 'express';
-import { createRequire } from 'module';
+import cron from 'node-cron';
+import { spawn } from 'child_process';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import fs from 'fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = 3001;
+const NEWS_FILE = join(__dirname, 'news.json');
 
 app.use(express.json());
 app.use((req, res, next) => {
@@ -13,6 +16,17 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
+
+// ── News helpers ───────────────────────────────────────────────
+
+function loadNews() {
+  if (!fs.existsSync(NEWS_FILE)) return [];
+  try {
+    return JSON.parse(fs.readFileSync(NEWS_FILE, 'utf8'));
+  } catch {
+    return [];
+  }
+}
 
 // ── Mock data ──────────────────────────────────────────────────
 
@@ -42,36 +56,6 @@ const USER = {
   ],
   mode: 'operativa',
 };
-
-const NEWS = [
-  {
-    id: 'n001',
-    date: '2026-04-18',
-    dateLabel: '04·18',
-    tag: 'LO 1/2026',
-    title: 'Multireincidència — enduriment de furts i estafes lleus',
-    desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026. Afecta l\'art. 22.8 CP i els arts. 468-470 LECrim.',
-    url: null,
-  },
-  {
-    id: 'n002',
-    date: '2026-04-14',
-    dateLabel: '04·14',
-    tag: 'RD 316/2026',
-    title: 'Reforma del Reglament d\'Estrangeria',
-    desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny de 2026.',
-    url: null,
-  },
-  {
-    id: 'n003',
-    date: '2026-03-28',
-    dateLabel: '03·28',
-    tag: 'Circ. 2/2026',
-    title: 'Instrucció sobre identificació i registre de persones',
-    desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.',
-    url: null,
-  },
-];
 
 const STATS = {
   streak: 23,
@@ -111,7 +95,7 @@ app.put('/api/user', (req, res) => {
 });
 
 app.get('/api/news', (req, res) => {
-  res.json(NEWS);
+  res.json(loadNews());
 });
 
 app.get('/api/stats', (req, res) => {
@@ -128,8 +112,6 @@ app.get('/api/incidents', (req, res) => {
 });
 
 // ── Academia ──────────────────────────────────────────────────
-
-const PROGRESS = {};
 
 app.get('/api/academia/progress', (req, res) => {
   res.json({
@@ -173,6 +155,26 @@ app.get('*', (req, res) => {
   }
   res.sendFile(join(__dirname, '../dist/index.html'));
 });
+
+// ── Scheduler de notícies ─────────────────────────────────────
+
+function runNewsFetcher() {
+  console.log('[cron] Iniciant cerca de notícies...');
+  const fetcher = spawn('node', [join(__dirname, '../scripts/fetch-news.js')], {
+    env: { ...process.env },
+    stdio: 'inherit',
+  });
+  fetcher.on('exit', code => {
+    console.log(`[cron] fetch-news finalitzat amb codi ${code}.`);
+  });
+}
+
+// Cada dia a les 22:00 (hora de Madrid / Europa/Madrid)
+cron.schedule('0 22 * * *', runNewsFetcher, { timezone: 'Europe/Madrid' });
+
+console.log('[cron] Scheduler actiu — cerca de notícies programada a les 22:00 (Europe/Madrid).');
+
+// ── Start ──────────────────────────────────────────────────────
 
 app.listen(PORT, () => {
   console.log(`\n🚓 InfoPol API server running at http://localhost:${PORT}`);

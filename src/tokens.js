@@ -20,6 +20,20 @@ export const T = {
     psico:    { solid: '#F0B400', soft: '#FCEFB8', ink: '#5C4400' },
   },
 
+  // Categories de notícies
+  news: {
+    politica:      { solid: '#3B6BF5', soft: '#D8E2FE', ink: '#0E2B7A' },
+    economia:      { solid: '#FF7A1A', soft: '#FFE0CB', ink: '#7A2E04' },
+    cultura:       { solid: '#1FB286', soft: '#CDF0E1', ink: '#0B5A3D' },
+    esports:       { solid: '#0BB4C2', soft: '#CCEEF1', ink: '#0A4F56' },
+    policial:      { solid: '#E89421', soft: '#FBE7C2', ink: '#6B3F08' },
+    judicial:      { solid: '#E04F5F', soft: '#FBDADC', ink: '#7A1B22' },
+    ciencia:       { solid: '#F0B400', soft: '#FCEFB8', ink: '#5C4400' },
+    internacional: { solid: '#9C4FE0', soft: '#EBDAFB', ink: '#4A1B7A' },
+    normativa:     { solid: '#E89421', soft: '#FBE7C2', ink: '#6B3F08' },
+    default:       { solid: '#3B6BF5', soft: '#D8E2FE', ink: '#0E2B7A' },
+  },
+
   font: '"Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
   fontDisplay: '"Manrope", -apple-system, system-ui, sans-serif',
   fontMono: '"JetBrains Mono", ui-monospace, Menlo, monospace',
