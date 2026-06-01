@@ -149,6 +149,19 @@ export function getAllQuestions(): TaggedQuestion[] {
   return out;
 }
 
+/** Pool ABSOLUT: TOTES les preguntes de TOTS els temes (qualsevol
+ *  categoria: temari, cultura, municipi, mossos i actualitat). Per al
+ *  mode "totes les preguntes de cop". */
+export function getEverythingQuestions(): TaggedQuestion[] {
+  const out: TaggedQuestion[] = [];
+  for (const t of TOPICS) {
+    for (const q of t.questions) {
+      out.push({ ...q, topicSlug: t.slug });
+    }
+  }
+  return out;
+}
+
 /** Pool de TOTES les preguntes de Mossos d'Esquadra (totes les
  *  categoria 'mossos'), per al mode 'tot els temes' dins /mossos. */
 export function getAllMossosQuestions(): TaggedQuestion[] {

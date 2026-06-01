@@ -121,6 +121,13 @@ export default function TestList() {
     [PL_TOPICS],
   );
 
+  // Total ABSOLUT: totes les preguntes de tots els temes (qualsevol
+  // categoria, inclòs Mossos) per al mode "totes les preguntes".
+  const totalEverything = useMemo(
+    () => TOPICS.reduce((acc, tt) => acc + tt.questions.length, 0),
+    [],
+  );
+
   // Pseudo-stats personals (sense backend/auth, però amb dades reals
   // del progrés guardades a localStorage).
   const accuracy = (() => {
@@ -313,6 +320,19 @@ export default function TestList() {
             </div>
           </Link>
         </div>
+
+        {/* Mode ABSOLUT: totes les preguntes de cop (qualsevol categoria) */}
+        <Link to="/policia-local/totes" className="ts-all-btn">
+          <span className="tab-ico" aria-hidden>🎲</span>
+          <span className="tab-body">
+            <span className="tab-title">Totes les preguntes de cop</span>
+            <span className="tab-desc">
+              Un sol test amb les {totalEverything.toLocaleString('es-ES')} preguntes de tots
+              els temes barrejades (temari, cultura, municipis, Mossos i actualitat).
+            </span>
+          </span>
+          <span className="tab-cta">▶ Començar <span aria-hidden>→</span></span>
+        </Link>
 
         {/* Separador: tria una categoria */}
         <div className="tests-zone-divider">
