@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "server": "node server/index.js",
+    "news:fetch": "node scripts/fetch-news.js",
     "cap:add:ios": "npx cap add ios",
     "cap:add:android": "npx cap add android",
     "cap:sync": "npx cap sync",
@@ -17,6 +18,7 @@
     "deploy:android": "npm run build && npx cap sync android && npx cap open android"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.51.0",
     "@capacitor/android": "^8.3.1",
     "@capacitor/cli": "^8.3.1",
     "@capacitor/core": "^8.3.1",
