@@ -535,6 +535,7 @@ function TestCard({ topic }: { topic: typeof TOPICS[number] }) {
       <h4>{topic.title}</h4>
       {topic.description && <p>{topic.description}</p>}
       <div className="specs">
+        {topic.badge && <span className="spec spec-new">{topic.badge}</span>}
         <span className="spec">{total} {t('test.list.cat.questions')}</span>
         {topic.municipi && <span className="spec">{topic.municipi}</span>}
       </div>

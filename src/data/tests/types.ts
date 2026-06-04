@@ -47,6 +47,11 @@ export type TestTopic = {
    */
   municipi?: string;
   /**
+   * Etiqueta opcional que es mostra com a xip a la targeta del test
+   * (ex. '🆕 2026' per a un examen oficial recent).
+   */
+  badge?: string;
+  /**
    * Si category='mossos', àmbit del temari oficial al qual pertany (A, B, C, D, E).
    * Àmbit A = Coneixements de l'entorn; B = Institucional; C = Seguretat...
    */
