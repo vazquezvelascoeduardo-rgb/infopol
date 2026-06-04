@@ -1,7 +1,7 @@
 // Sessio de test: gestiona els 3 estats (select → run → result) en una
 // sola pagina amb React state. URL parametritzada per :slug; si slug
 // es 'tot' fem mescla de tots els temes.
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
 import { TOPICS, getAllQuestions, getAllMossosQuestions, getAllCulturaQuestions, getAllActualitatQuestions, getEverythingQuestions, getTopic } from '../../data/tests';
 import type { TestQuestion } from '../../data/tests/types';
@@ -428,7 +428,7 @@ export default function TestSession() {
       {state.phase === 'run' && (
         <RunPhase
           state={state}
-          accent={accent}
+          title={title}
           onAnswer={answerCurrent}
           onNext={goNext}
           onBack={goBack}
@@ -618,11 +618,41 @@ function SelectPhase({
 // FASE 2 — RUN
 // ════════════════════════════════════════════════════════════════════
 
+// ── Paleta i icones del Mode Focus (disseny "Test Focus") ───────────
+const FP = {
+  bg: '#F4F1EA', bgDeep: '#ECE7DC', card: '#FFFFFF',
+  ink: '#13131A', inkSoft: '#44444F', inkMuted: '#8A8A95', inkFaint: '#B6B6BE',
+  hairline: 'rgba(19,19,26,0.08)', line2: 'rgba(19,19,26,0.12)',
+  terracota: '#FF7A1A', terraSoft: '#FFE7D2', terraInk: '#7A2E04',
+  green: '#1FB286', greenSoft: '#D2F0E2', greenInk: '#0B5A3D',
+  red: '#E0455A', redSoft: '#FBDCE0', redInk: '#7A1B22',
+  display: '"Poppins", "Manrope", system-ui, sans-serif',
+  mono: '"JetBrains Mono", ui-monospace, monospace',
+  sans: '"Manrope", system-ui, sans-serif',
+};
+
+function FIc({ name, size = 20, color = 'currentColor', sw = 2 }:
+  { name: string; size?: number; color?: string; sw?: number }) {
+  const c = {
+    width: size, height: size, viewBox: '0 0 24 24', fill: 'none',
+    stroke: color, strokeWidth: sw, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const,
+  };
+  switch (name) {
+    case 'x': return <svg {...c}><path d="M6 6l12 12M18 6L6 18" /></svg>;
+    case 'check': return <svg {...c}><path d="M5 12l4 4 10-10" /></svg>;
+    case 'clock': return <svg {...c}><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>;
+    case 'arrow': return <svg {...c}><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
+    case 'arrowL': return <svg {...c}><path d="M19 12H5M11 6l-6 6 6 6" /></svg>;
+    case 'keyboard': return <svg {...c}><rect x="3" y="6" width="18" height="12" rx="2" /><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10" /></svg>;
+    default: return <svg {...c}><circle cx="12" cy="12" r="9" /></svg>;
+  }
+}
+
 function RunPhase({
-  state, accent, onAnswer, onNext, onBack, onFinish,
+  state, title, onAnswer, onNext, onBack, onFinish,
 }: {
   state: Extract<SessionState, { phase: 'run' }>;
-  accent: string;
+  title: string;
   onAnswer: (idx: number | null) => void;
   onNext: () => void; onBack: () => void; onFinish: () => void;
 }) {
@@ -632,185 +662,201 @@ function RunPhase({
   const selected = state.answers[state.index];
   const isLast = state.index === total - 1;
   const answeredCount = state.answers.filter((a) => a !== null).length;
+  const correctCount = state.questions.reduce(
+    (acc, q, i) => acc + (state.answers[i] === q.correctIndex ? 1 : 0), 0,
+  );
   const blanks = total - answeredCount;
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  // Cronometre reactiu — re-render cada segon per actualitzar el display.
+  // Cronòmetre reactiu.
   const [, setNow] = useState(() => Date.now());
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);
   }, []);
   const elapsedSec = Math.max(0, Math.floor((Date.now() - state.startedAt) / 1000));
-  const elapsedDisplay = formatMMSS(elapsedSec);
 
-  function requestFinish() {
-    if (blanks === 0) {
-      onFinish();
-      return;
-    }
-    // window.confirm() es ignorat en PWA standalone iOS; fem servir
-    // un modal propi sempre per consistencia.
+  const revealed = state.mode === 'study' && state.revealedIdx.has(state.index);
+  const isCorrectAns = revealed && selected === cur.correctIndex;
+  const letters = ['A', 'B', 'C', 'D', 'E'];
+
+  const requestFinish = useCallback(() => {
+    if (blanks === 0) { onFinish(); return; }
     setConfirmOpen(true);
-  }
+  }, [blanks, onFinish]);
 
-  // 'accent' (gradient Tailwind) ja no s'usa amb el nou disseny: tots els
-  // colors venen dels tokens del rebrand. Mantenim el param per
-  // compatibilitat del signature.
-  void accent;
+  // Teclat: A/B/C/D o 1-4 trien · Enter/→ avancen · ← retrocedeix.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const k = e.key.toLowerCase();
+      const map: Record<string, number> = { a: 0, b: 1, c: 2, d: 3, '1': 0, '2': 1, '3': 2, '4': 3 };
+      if (k in map && map[k] < cur.options.length) {
+        if (revealed) return;
+        e.preventDefault(); onAnswer(map[k]);
+      } else if (e.key === 'Enter' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        if (isLast) requestFinish(); else onNext();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault(); onBack();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [cur.options.length, revealed, isLast, onAnswer, onNext, onBack, requestFinish]);
+
+  // Chip de categoria: tema d'origen (pool combinat) o títol del test.
+  const qSlug = (cur.question as TestQuestion & { topicSlug?: string }).topicSlug;
+  const qTopic = qSlug ? TOPICS.find((tp) => tp.slug === qSlug) : null;
+  const chipIcon = qTopic ? qTopic.icon : '📝';
+  const chipLabel = qTopic ? qTopic.title : title;
+
+  const pill = {
+    fontFamily: FP.mono, fontWeight: 600, fontSize: 13, background: FP.card,
+    padding: '9px 14px', borderRadius: 999,
+    boxShadow: '0 1px 0 rgba(19,19,26,0.04), 0 4px 12px rgba(19,19,26,0.05)',
+  } as const;
 
   return (
-    <div className="ts-shell">
-      {/* Stat bar: pregunta N · cronòmetre · respostes · finalitzar */}
-      <div className="ts-statbar">
-        <div className="ts-statbar-group">
-          <span className="ts-stat-pill">
-            {t('test.session.questionN')
-              .replace('{n}', String(state.index + 1))
-              .replace('{total}', String(total))}
-          </span>
-          <span className="ts-stat-pill" title={t('test.session.elapsed')}>
-            <span aria-hidden>⏱</span> {elapsedDisplay}
+    <div style={{
+      position: 'fixed', inset: 0, zIndex: 120, background: FP.bg,
+      display: 'flex', flexDirection: 'column',
+      padding: '20px clamp(16px,5vw,64px)', gap: 16, overflow: 'hidden', fontFamily: FP.sans,
+    }}>
+      {/* Top bar */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexShrink: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
+          <button onClick={requestFinish} aria-label={t('test.session.finishNow')} style={{
+            width: 40, height: 40, borderRadius: 12, border: 'none', cursor: 'pointer', background: FP.card,
+            boxShadow: '0 1px 0 rgba(19,19,26,0.04), 0 4px 12px rgba(19,19,26,0.06)',
+            display: 'grid', placeItems: 'center', color: FP.inkSoft, flexShrink: 0,
+          }}><FIc name="x" size={18} /></button>
+          <span style={{ ...pill, color: FP.inkSoft }}>Pregunta <span style={{ color: FP.ink }}>{state.index + 1}</span> / {total}</span>
+          <span style={{ ...pill, color: FP.inkMuted, display: 'flex', alignItems: 'center', gap: 7 }}>
+            <FIc name="clock" size={14} color={FP.inkMuted} />{formatMMSS(elapsedSec)}
           </span>
         </div>
-        <div className="ts-statbar-group">
-          <span className="ts-stat-pill">
-            {answeredCount}/{total}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+          <span style={{ fontFamily: FP.mono, fontWeight: 700, fontSize: 13, color: FP.greenInk, background: FP.greenSoft, padding: '9px 14px', borderRadius: 999, display: 'flex', alignItems: 'center', gap: 7 }}>
+            <FIc name="check" size={14} color={FP.green} sw={3} />{correctCount}/{total}
           </span>
-          <button
-            type="button"
-            onClick={requestFinish}
-            title={t('test.session.finishNow')}
-            className="ts-finishnow-btn"
-          >
-            ✓ {t('test.session.finishNow')}
-          </button>
+          <button onClick={requestFinish} style={{
+            fontFamily: FP.mono, fontWeight: 700, fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase',
+            color: FP.greenInk, background: FP.greenSoft, border: `1px solid ${FP.green}`,
+            padding: '9px 16px', borderRadius: 999, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 7,
+          }}><FIc name="check" size={14} color={FP.green} sw={3} />{t('test.session.finishNow')}</button>
         </div>
       </div>
 
-      {/* Barra de progrés segmentada (un segment per pregunta) */}
-      <div className="ts-progress" role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={answeredCount}>
+      {/* Segments de progrés */}
+      <div style={{ display: 'flex', gap: 4, flexShrink: 0, height: 6 }}
+        role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={answeredCount}>
         {Array.from({ length: total }).map((_, i) => {
-          const isCurrent = i === state.index;
-          const isAnswered = state.answers[i] !== null && state.answers[i] !== undefined;
-          return (
-            <div
-              key={i}
-              className={`ts-progress-seg${isAnswered ? ' answered' : ''}${isCurrent ? ' current' : ''}`}
-            />
-          );
+          let bg: string = FP.line2;
+          if (state.answers[i] != null) bg = state.answers[i] === state.questions[i].correctIndex ? FP.green : FP.red;
+          if (i === state.index) bg = FP.terracota;
+          return <div key={i} style={{ flex: 1, height: '100%', borderRadius: 999, background: bg, transition: 'background .25s' }} />;
         })}
       </div>
 
-      {/* Card de la pregunta */}
-      <div className="ts-question">
-        <TopicBadge question={cur.question} />
-        <div className="ts-question-text">{cur.question.text}</div>
+      {/* Contingut */}
+      <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', maxWidth: 1040, width: '100%', margin: '0 auto' }}>
+        {/* Pregunta */}
+        <div style={{ flexShrink: 0, paddingTop: 'clamp(6px,2.5vh,28px)', paddingBottom: 'clamp(12px,2.5vh,26px)' }}>
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: 8, background: FP.terraSoft, color: FP.terraInk,
+            fontFamily: FP.mono, fontWeight: 600, fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase',
+            padding: '7px 14px', borderRadius: 999, marginBottom: 16, maxWidth: '100%',
+          }}>
+            <span aria-hidden>{chipIcon}</span>
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{chipLabel}</span>
+          </div>
+          <div style={{ fontFamily: FP.display, fontWeight: 700, fontSize: 'clamp(22px,3.2vw,38px)', lineHeight: 1.2, color: FP.ink, letterSpacing: -0.6 }}>
+            {cur.question.text}
+          </div>
+        </div>
 
-        <div className="ts-options">
+        {/* Opcions 2×2 */}
+        <div style={{
+          flex: 1, minHeight: 0, display: 'grid',
+          gridTemplateColumns: cur.options.length > 1 ? '1fr 1fr' : '1fr',
+          gridAutoRows: '1fr', gap: 12, alignContent: 'stretch',
+        }}>
           {cur.options.map((opt, i) => {
-            const isSelected = selected === i;
-            const revealed = state.mode === 'study' && state.revealedIdx.has(state.index);
-            const isCorrect = i === cur.correctIndex;
-            const isWrongPicked = revealed && isSelected && !isCorrect;
-            const isCorrectShown = revealed && isCorrect;
-
-            let cls = 'ts-option';
-            if (revealed) {
-              if (isCorrectShown) cls += ' correct';
-              else if (isWrongPicked) cls += ' wrong';
-              else cls += ' dim';
-            } else if (isSelected) {
-              cls += ' selected';
-            }
-
+            const isSel = selected === i;
+            let s: 'idle' | 'selected' | 'correct' | 'wrong' | 'dimmed' = 'idle';
+            if (revealed) s = i === cur.correctIndex ? 'correct' : (isSel ? 'wrong' : 'dimmed');
+            else if (isSel) s = 'selected';
+            let bg = FP.card, border: string = FP.hairline, fg: string = FP.ink,
+              badgeBg: string = FP.bgDeep, badgeFg: string = FP.inkSoft;
+            let icon: string | null = null;
+            if (s === 'selected') { border = FP.terracota; badgeBg = FP.terracota; badgeFg = '#fff'; bg = '#FFFAF5'; }
+            if (s === 'correct') { border = FP.green; bg = FP.greenSoft; fg = FP.greenInk; badgeBg = FP.green; badgeFg = '#fff'; icon = 'check'; }
+            if (s === 'wrong') { border = FP.red; bg = FP.redSoft; fg = FP.redInk; badgeBg = FP.red; badgeFg = '#fff'; icon = 'x'; }
+            if (s === 'dimmed') { fg = FP.inkMuted; badgeFg = FP.inkFaint; }
             return (
-              <button
-                key={i}
-                type="button"
-                onClick={() => onAnswer(isSelected ? null : i)}
+              <button key={i} className="opt" type="button"
+                onClick={() => { if (!revealed) onAnswer(isSel ? null : i); }}
                 disabled={revealed}
-                className={cls}
-              >
-                <span className="ts-option-badge">
-                  {isCorrectShown ? '✓' : isWrongPicked ? '✗' : String.fromCharCode(65 + i)}
-                </span>
-                <span className="ts-option-text">{opt}</span>
+                style={{
+                  textAlign: 'left', cursor: revealed ? 'default' : 'pointer', background: bg,
+                  border: `2px solid ${border}`, borderRadius: 16, padding: '0 18px', minHeight: 60, height: '100%',
+                  boxShadow: (s === 'idle' || s === 'selected') ? '0 1px 0 rgba(19,19,26,0.04), 0 6px 16px rgba(19,19,26,0.05)' : 'none',
+                  display: 'flex', alignItems: 'center', gap: 14,
+                  transition: 'transform .12s, box-shadow .12s, border-color .15s, background .15s',
+                  opacity: s === 'dimmed' ? 0.65 : 1, width: '100%',
+                }}>
+                <span style={{ flexShrink: 0, width: 36, height: 36, borderRadius: 10, background: badgeBg, color: badgeFg, fontFamily: FP.mono, fontWeight: 700, fontSize: 15, display: 'grid', placeItems: 'center' }}>{letters[i]}</span>
+                <span style={{ flex: 1, fontFamily: FP.display, fontWeight: 500, fontSize: 'clamp(14px,1.45vw,18px)', color: fg, letterSpacing: -0.2, lineHeight: 1.25 }}>{opt}</span>
+                {icon && <span style={{ flexShrink: 0, width: 26, height: 26, borderRadius: 999, background: badgeBg, display: 'grid', placeItems: 'center' }}><FIc name={icon} size={15} color="#fff" sw={3} /></span>}
               </button>
             );
           })}
         </div>
 
-        {/* Feedback en mode estudi */}
-        {state.mode === 'study' && state.revealedIdx.has(state.index) && (
-          <div className={`ts-feedback ${selected === cur.correctIndex ? 'ok' : 'bad'}`}>
-            {selected === cur.correctIndex ? (
-              <div className="ts-feedback-title">✅ {t('test.session.correctFeedback')}</div>
-            ) : (
-              <>
-                <div className="ts-feedback-title">❌ {t('test.session.wrongFeedback')}</div>
-                <div className="ts-feedback-detail">
-                  {t('test.result.correctAnswer')}:{' '}
-                  <span style={{ fontFamily: 'JetBrains Mono, monospace', fontWeight: 700 }}>
-                    {String.fromCharCode(65 + cur.correctIndex)}
-                  </span>{' '}
-                  · {cur.options[cur.correctIndex]}
+        {/* Peu: explicació (estudi) + navegació */}
+        <div style={{ flexShrink: 0, paddingTop: 14, display: 'flex', alignItems: 'center', gap: 16, minHeight: 60 }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            {revealed ? (
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, background: isCorrectAns ? FP.greenSoft : FP.redSoft, border: `1px solid ${isCorrectAns ? FP.green : FP.red}`, borderRadius: 14, padding: '11px 15px' }}>
+                <span style={{ flexShrink: 0, width: 24, height: 24, borderRadius: 999, background: isCorrectAns ? FP.green : FP.red, display: 'grid', placeItems: 'center', marginTop: 1 }}><FIc name={isCorrectAns ? 'check' : 'x'} size={14} color="#fff" sw={3} /></span>
+                <div style={{ minWidth: 0 }}>
+                  <span style={{ fontFamily: FP.display, fontWeight: 700, fontSize: 14, color: isCorrectAns ? FP.greenInk : FP.redInk, marginRight: 8 }}>
+                    {isCorrectAns ? t('test.session.correctFeedback') : t('test.session.wrongFeedback')}
+                  </span>
+                  <span style={{ fontFamily: FP.sans, fontSize: 13.5, lineHeight: 1.4, color: isCorrectAns ? FP.greenInk : FP.redInk, opacity: 0.94 }}>
+                    {!isCorrectAns && <><b>{letters[cur.correctIndex]}) {cur.options[cur.correctIndex]}</b>. </>}
+                    {cur.question.explanation || (cur.question.reference ? `📖 ${cur.question.reference}` : '')}
+                  </span>
                 </div>
-              </>
-            )}
-            {cur.question.reference && (
-              <div className="ts-feedback-ref">📖 {cur.question.reference}</div>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: FP.inkMuted, fontFamily: FP.mono, fontSize: 12, letterSpacing: 0.3 }}>
+                <FIc name="keyboard" size={16} color={FP.inkFaint} /> Tria amb <b style={{ color: FP.inkSoft }}>A·B·C·D</b> · avança amb <b style={{ color: FP.inkSoft }}>↵</b>
+              </div>
             )}
           </div>
-        )}
-      </div>
-
-      {/* Controls bottom */}
-      <div className="ts-controls">
-        <button
-          type="button"
-          onClick={onBack}
-          disabled={state.index === 0}
-          className="ts-btn"
-          aria-label={t('test.session.previous')}
-        >
-          ←
-        </button>
-        <button
-          type="button"
-          onClick={() => onAnswer(null)}
-          className="ts-btn ts-btn-skip"
-        >
-          {t('test.session.skip')}
-        </button>
-        <div style={{ flex: 1 }} />
-        {isLast ? (
-          <button
-            type="button"
-            onClick={requestFinish}
-            className="ts-btn ts-btn-primary finish"
-          >
-            {t('test.session.finish')} ✓
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={onNext}
-            className="ts-btn ts-btn-primary"
-          >
-            {t('test.session.next')} →
-          </button>
-        )}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+            <button onClick={onBack} disabled={state.index === 0} aria-label={t('test.session.previous')} style={{
+              width: 48, height: 50, borderRadius: 14, cursor: state.index === 0 ? 'default' : 'pointer',
+              background: FP.card, border: `1px solid ${FP.line2}`, color: state.index === 0 ? FP.inkFaint : FP.inkSoft,
+              display: 'grid', placeItems: 'center', opacity: state.index === 0 ? 0.5 : 1,
+              boxShadow: '0 1px 0 rgba(19,19,26,0.04), 0 4px 12px rgba(19,19,26,0.05)',
+            }}><FIc name="arrowL" size={20} /></button>
+            <button onClick={() => (isLast ? requestFinish() : onNext())} style={{
+              height: 50, padding: '0 24px', borderRadius: 14, border: 'none', cursor: 'pointer',
+              background: FP.terracota, color: '#fff', fontFamily: FP.display, fontWeight: 700, fontSize: 16,
+              display: 'flex', alignItems: 'center', gap: 10, boxShadow: 'inset 0 -4px 0 rgba(0,0,0,0.18)',
+            }}>
+              {isLast ? t('test.session.finish') : t('test.session.next')}
+              <FIc name="arrow" size={19} color="#fff" sw={2.4} />
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Modal de confirmació */}
       {confirmOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="ts-modal-backdrop"
-          onClick={() => setConfirmOpen(false)}
-        >
+        <div role="dialog" aria-modal="true" className="ts-modal-backdrop" onClick={() => setConfirmOpen(false)}>
           <div className="ts-modal" onClick={(e) => e.stopPropagation()}>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 4 }}>
               <span style={{ fontSize: 28, flex: 'none' }} aria-hidden>⚠️</span>
@@ -820,18 +866,10 @@ function RunPhase({
               </div>
             </div>
             <div className="ts-modal-actions">
-              <button
-                type="button"
-                onClick={() => setConfirmOpen(false)}
-                className="ts-btn"
-              >
+              <button type="button" onClick={() => setConfirmOpen(false)} className="ts-btn">
                 {t('test.session.confirmCancel')}
               </button>
-              <button
-                type="button"
-                onClick={() => { setConfirmOpen(false); onFinish(); }}
-                className="ts-btn ts-btn-primary finish"
-              >
+              <button type="button" onClick={() => { setConfirmOpen(false); onFinish(); }} className="ts-btn ts-btn-primary finish">
                 {t('test.session.confirmYes')}
               </button>
             </div>

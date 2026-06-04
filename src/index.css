@@ -3801,6 +3801,10 @@ html[data-text-size="lg"] { font-size: 18px; }
   }
   .cat-filter.active .num { background: rgba(255,255,255,0.18); }
 
+  /* ── Mode Focus (pantalla del test): hover de les opcions ── */
+  .opt:not([disabled]):hover { transform: translateY(-2px); }
+  .opt:not([disabled]):active { transform: translateY(0); }
+
   /* ── Selector de categories (nivell 1) ── */
   .cat-picker {
     display: grid; grid-template-columns: repeat(2, 1fr);
