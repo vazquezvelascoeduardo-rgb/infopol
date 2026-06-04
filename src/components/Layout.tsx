@@ -107,6 +107,19 @@ export default function Layout({ children }: { children: ReactNode }) {
     }
   }
 
+  // L'Acadèmia té el seu propi shell complet (sidebar + topbar + nav);
+  // amaguem el chrome global de l'app en aquesta ruta per no duplicar-lo.
+  const isAcademia = location.pathname === '/academia';
+  if (isAcademia) {
+    return (
+      <div className="min-h-dvh bg-paper text-ink">
+        {children}
+        <GdprBanner />
+        <RegisterNudge />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-dvh flex flex-col bg-paper text-ink transition-colors">
       <header className="topbar" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
