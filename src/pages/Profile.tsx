@@ -16,9 +16,8 @@ import { updateProfile } from '../lib/db';
 import MfaSection from '../components/MfaSection';
 import { A } from '../lib/design';
 
-// Email del suport per a peticions d'eliminació de compte. Si en un
-// futur es crea support@infopol.app, canviar aquesta constant.
-const SUPPORT_EMAIL = 'vazquezvelascoeduardo@gmail.com';
+// Email de suport principal (peticions d'eliminació de compte, etc.).
+const SUPPORT_EMAIL = 'info@infopol.app';
 
 export default function Profile() {
   const { user, profile, progress, signOut, refresh, updatePassword } = useAuth();

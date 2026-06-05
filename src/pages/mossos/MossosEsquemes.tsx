@@ -192,8 +192,8 @@ export default function MossosEsquemes() {
         Els esquemes són un format nou. Anirem afegint més temes —
         prioritzant els que cauen sempre a l'examen. Vols un tema concret?
         <br />
-        Escriu-nos a <a href="mailto:hola@infopol.app" style={{ color: TERRACOTA, textDecoration: 'underline' }}>
-          hola@infopol.app
+        Escriu-nos a <a href="mailto:info@infopol.app" style={{ color: TERRACOTA, textDecoration: 'underline' }}>
+          info@infopol.app
         </a>
       </p>
     </div>

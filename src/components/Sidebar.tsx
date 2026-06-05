@@ -417,7 +417,7 @@ export default function Sidebar({ open, onClose }: Props) {
 
           {/* CTA: Sugerir mejora — enllaça a mailto suport */}
           <a
-            href="mailto:suport@infopol.app?subject=InfoPol%20%E2%80%94%20Suggeriment"
+            href="mailto:info@infopol.app?subject=InfoPol%20%E2%80%94%20Suggeriment"
             className="sb-cta"
           >
             <span className="ic">📤</span>

@@ -21,7 +21,7 @@ export default function AvisLegal() {
         <ul>
           <li><strong>{t('legal.s1.url')}:</strong> infopol.app</li>
           <li><strong>{t('legal.s1.purpose')}:</strong> {t('legal.s1.purposeDesc')}</li>
-          <li><strong>{t('legal.s1.contact')}:</strong> infopol.app@proton.me</li>
+          <li><strong>{t('legal.s1.contact')}:</strong> info@infopol.app</li>
         </ul>
       </Section>
 

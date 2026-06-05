@@ -324,7 +324,7 @@ function OpLleis({ ctx }: { ctx: OCtx }) {
 /* ── PROCEDIMENTS (SC/Penal i Trànsit, separats) ── */
 function OpProcediments({ ctx }: { ctx: OCtx }) {
   const groups = [
-    { tone: 'night', icon: 'shield', title: 'Seguretat Ciutadana / Penal', desc: 'Identificació, escorcoll i cacheig, registres, detencions, drets del detingut i violència de gènere.', route: '/operativa/penal', items: ['Identificació', 'Escorcoll i cacheig', 'Detencions · drets', 'VioGén'] },
+    { tone: 'blue', icon: 'shield', title: 'Seguretat Ciutadana / Penal', desc: 'Identificació, escorcoll i cacheig, registres, detencions, drets del detingut i violència de gènere.', route: '/operativa/penal', items: ['Identificació', 'Escorcoll i cacheig', 'Detencions · drets', 'VioGén'] },
     { tone: 'terracota', icon: 'car', title: 'Trànsit', desc: "Control d'alcoholèmia i drogues, accidents amb víctimes, retirada de vehicles i atestats.", route: '/operativa/trafico', items: ['Alcoholèmia', 'Drogues', 'Accidents', 'Retirades'] },
   ];
   const refs = [

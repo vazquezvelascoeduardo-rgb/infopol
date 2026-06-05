@@ -168,8 +168,8 @@ export default function PoliciaLocalEsquemes() {
       >
         Anirem afegint més lleis · prioritzem les que cauen sempre a l'examen.
         Vols una llei concreta? Escriu-nos a{' '}
-        <a href="mailto:hola@infopol.app" style={{ color: BLUE, textDecoration: 'underline' }}>
-          hola@infopol.app
+        <a href="mailto:info@infopol.app" style={{ color: BLUE, textDecoration: 'underline' }}>
+          info@infopol.app
         </a>
       </p>
     </div>

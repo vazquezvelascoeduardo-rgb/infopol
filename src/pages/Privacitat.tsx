@@ -49,7 +49,7 @@ export default function Privacitat() {
 
       <Section title={t('privacy.s5.title')}>
         <p>{t('privacy.s5.p1')}</p>
-        <p>{t('privacy.s5.contact')}: infopol.app@proton.me</p>
+        <p>{t('privacy.s5.contact')}: info@infopol.app</p>
       </Section>
 
       <p className="mt-8 text-xs text-text-3">

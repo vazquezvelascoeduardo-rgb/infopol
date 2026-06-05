@@ -3,7 +3,7 @@
 // Dos camins (no excloents):
 //   1. Si el backend (Supabase) està actiu → insereix a `question_reports`.
 //      Així es poden revisar directament des del dashboard / MCP.
-//   2. Sempre construïm un `mailto:` de reserva cap a suport@infopol.app
+//   2. Sempre construïm un `mailto:` de reserva cap a info@infopol.app
 //      amb totes les dades, per si l'usuari prefereix enviar-ho per correu
 //      (o si el backend falla).
 import { supabase, isBackendEnabled } from './supabase';
@@ -18,7 +18,7 @@ export type QuestionReportInput = {
   reason?: string;
 };
 
-const SUPPORT_EMAIL = 'suport@infopol.app';
+const SUPPORT_EMAIL = 'info@infopol.app';
 
 /** Construeix l'enllaç mailto de reserva amb tot el context. */
 export function buildReportMailto(input: QuestionReportInput): string {
