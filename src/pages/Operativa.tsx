@@ -3,10 +3,11 @@
 // (Inici, Cercador, Trànsit, Lleis, Protocols, Telèfons), accent blau.
 // Consulta ràpida per a agents en servei, cablejat a les rutes reals.
 // El chrome global de l'app s'amaga a /operativa (vegeu Layout.tsx).
-import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MODULES } from '../lib/content';
 import { useNoticiesAll } from '../lib/noticiesRemote';
+import { searchCataleg, getLawColor, type CatalegRow } from '../lib/cataleg-parser';
 
 /* ── Tokens (compartits amb el disseny Acadèmia) ── */
 const A = {
@@ -81,14 +82,29 @@ function Card({ children, pad = 20, style = {}, onClick, hover = false }: { chil
 
 /* ── Dades (referència operativa) ── */
 const SCT = '/leyes/s/transit/cataleg-d-infraccions-de-transit-sct-2026';
-const INFRACCIONS = [
-  { concept: 'Conduir sense permís', norma: 'Art. 384 CP', tone: 'red', imp: 'Via penal', punts: '—', grau: 'Delicte' },
-  { concept: 'Excés de velocitat (+50%)', norma: 'LSV 77', tone: 'terracota', imp: '600 €', punts: '6', grau: 'MG' },
-  { concept: 'Alcoholèmia 0,26–0,50 mg/l', norma: 'LSV 77.c', tone: 'pink', imp: '500 €', punts: '4', grau: 'G' },
-  { concept: 'Ús del mòbil conduint', norma: 'RGC 18', tone: 'purple', imp: '200 €', punts: '6', grau: 'G' },
-  { concept: 'No usar el cinturó', norma: 'RGC 117', tone: 'blue', imp: '200 €', punts: '3', grau: 'G' },
-  { concept: 'Saltar-se un semàfor', norma: 'RGC 146', tone: 'amber', imp: '200 €', punts: '4', grau: 'G' },
+
+// Infraccions destacades: NO són dades inventades — es treuen del catàleg
+// SCT 2026 real (mateix nomenclàtor que el superbuscador). Per a cada
+// concepte conegut agafem la primera fila que el parser troba al catàleg.
+const FEATURED_QUERIES = [
+  'sense permís', 'velocitat', 'alcohol', 'mòbil', 'cinturó',
+  'semàfor', 'assegurança', 'drogues', 'casc', 'estacionar',
 ];
+let featuredCache: CatalegRow[] | null = null;
+function getFeaturedInfraccions(): CatalegRow[] {
+  if (featuredCache) return featuredCache;
+  const out: CatalegRow[] = [];
+  const seen = new Set<string>();
+  for (const query of FEATURED_QUERIES) {
+    const hit = searchCataleg(query)[0];
+    if (hit && !seen.has(hit.concepte)) { seen.add(hit.concepte); out.push(hit); }
+  }
+  featuredCache = out;
+  return out;
+}
+const sevLabel = (s?: string) => s === 'MG' ? 'Molt greu' : s === 'G' ? 'Greu' : s === 'L' ? 'Lleu' : '';
+const isNumericFine = (s: string) => /^\d/.test(s.replace(/\./g, ''));
+const fineLabel = (f?: string) => !f ? '—' : isNumericFine(f) ? `${f} €` : f;
 const PHONES = [
   { num: '112', label: 'Emergències', tone: 'red' },
   { num: '016', label: 'Violència masclista', tone: 'pink' },
@@ -135,6 +151,7 @@ export default function Operativa() {
   const nav = useNavigate();
   const [section, setSection] = useState<Sec>(() => { try { const v = localStorage.getItem(LS); return (OP_NAV.some((n) => n.id === v) ? v : 'inici') as Sec; } catch { return 'inici'; } });
   const [drawer, setDrawer] = useState(false);
+  const [topQ, setTopQ] = useState('');
   useEffect(() => { try { localStorage.setItem(LS, section); } catch { /* */ } document.getElementById('a-scroll')?.scrollTo(0, 0); }, [section]);
   const go = (s: Sec) => setSection(s);
   const ctx: OCtx = { nav, go };
@@ -169,10 +186,10 @@ export default function Operativa() {
       <div id="a-scroll" style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', maxHeight: '100vh', overflowY: 'auto' }}>
         <header style={{ position: 'sticky', top: 0, zIndex: 30, background: 'rgba(244,241,234,0.82)', backdropFilter: 'blur(18px) saturate(160%)', WebkitBackdropFilter: 'blur(18px) saturate(160%)', borderBottom: `1px solid ${A.line}`, padding: '12px clamp(16px,3vw,34px)', display: 'flex', alignItems: 'center', gap: 14 }}>
           <button onClick={() => setDrawer(true)} className="a-only-mobile" style={{ border: 'none', background: A.card, width: 42, height: 42, borderRadius: 12, boxShadow: A.shadow, cursor: 'pointer', placeItems: 'center', flexShrink: 0 }}><Ic name="menu" size={20} color={A.inkSoft} /></button>
-          <div style={{ flex: 1, maxWidth: 620, position: 'relative' }}>
+          <form onSubmit={(e) => { e.preventDefault(); const v = topQ.trim(); nav(v ? `/superbuscador?q=${encodeURIComponent(v)}` : '/superbuscador'); }} style={{ flex: 1, maxWidth: 620, position: 'relative' }}>
             <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)' }}><Ic name="search" size={17} color={A.inkMuted} /></span>
-            <input placeholder="Cerca infracció, article, multa, punts…" onKeyDown={(e) => { if (e.key === 'Enter') nav('/superbuscador'); }} style={{ width: '100%', border: `1px solid ${A.line2}`, background: A.card, borderRadius: 999, padding: '11px 16px 11px 40px', fontFamily: A.sans, fontSize: 14, color: A.ink, outline: 'none', boxShadow: A.shadow, boxSizing: 'border-box' }} />
-          </div>
+            <input value={topQ} onChange={(e) => setTopQ(e.target.value)} placeholder="Cerca infracció, article, multa, punts…" style={{ width: '100%', border: `1px solid ${A.line2}`, background: A.card, borderRadius: 999, padding: '11px 16px 11px 40px', fontFamily: A.sans, fontSize: 14, color: A.ink, outline: 'none', boxShadow: A.shadow, boxSizing: 'border-box' }} />
+          </form>
           <button onClick={() => nav('/perfil')} style={{ width: 42, height: 42, borderRadius: 999, border: 'none', cursor: 'pointer', background: A.ink, color: '#fff', fontFamily: A.display, fontWeight: 700, fontSize: 16, flexShrink: 0 }}>E</button>
         </header>
 
@@ -300,16 +317,16 @@ function OpInici({ ctx }: { ctx: OCtx }) {
   );
 }
 
-function InfraccioRow({ inf, onClick }: { inf: typeof INFRACCIONS[number]; onClick: () => void }) {
-  const k = toneOf(inf.tone);
-  return <Card pad={16} hover onClick={onClick} style={{ display: 'flex', alignItems: 'center', gap: 16, borderLeft: `3px solid ${k.solid}` }}>
+function InfraccioRow({ row, onClick }: { row: CatalegRow; onClick: () => void }) {
+  const color = getLawColor(row.lawId);
+  return <Card pad={16} hover onClick={onClick} style={{ display: 'flex', alignItems: 'center', gap: 16, borderLeft: `3px solid ${color}` }}>
     <div style={{ flex: 1, minWidth: 0 }}>
-      <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 16, color: A.ink, letterSpacing: -0.3 }}>{inf.concept}</div>
-      <Mono size={10} color={k.solid} style={{ marginTop: 2 }}>{inf.norma} · Grau {inf.grau}</Mono>
+      <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 15.5, color: A.ink, letterSpacing: -0.3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{row.concepte}</div>
+      <Mono size={10} color={color} style={{ marginTop: 2 }}>{row.lawShort}{row.article ? ` · art. ${row.article}` : ''}{row.severity ? ` · ${sevLabel(row.severity)}` : ''}</Mono>
     </div>
     <div style={{ display: 'flex', alignItems: 'center', gap: 18, flexShrink: 0 }}>
-      <div style={{ textAlign: 'right' }}><div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 17, color: A.ink }}>{inf.imp}</div><Mono size={9}>Quantia</Mono></div>
-      <div style={{ textAlign: 'right' }}><div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 17, color: inf.punts === '—' ? A.inkFaint : A.red }}>{inf.punts}</div><Mono size={9}>Punts</Mono></div>
+      {row.fine && <div style={{ textAlign: 'right' }}><div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 16, color: A.ink }}>{fineLabel(row.fine)}</div><Mono size={9}>Quantia</Mono></div>}
+      {row.points && <div style={{ textAlign: 'right' }}><div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 16, color: A.red }}>{row.points}</div><Mono size={9}>Punts</Mono></div>}
       <Ic name="chevR" size={18} color={A.inkFaint} />
     </div>
   </Card>;
@@ -318,24 +335,47 @@ function InfraccioRow({ inf, onClick }: { inf: typeof INFRACCIONS[number]; onCli
 /* ── CERCADOR ── */
 function OpCercador({ ctx }: { ctx: OCtx }) {
   const [q, setQ] = useState('');
+  const trimmed = q.trim();
+  // Cerca en viu sobre el catàleg SCT real (mateix índex que el
+  // superbuscador). Clicar una fila obre el superbuscador amb tota la
+  // informació; "Veure tots" hi porta amb la cerca completa.
+  const results = useMemo(() => (trimmed.length >= 2 ? searchCataleg(trimmed) : []), [trimmed]);
+  const featured = useMemo(getFeaturedInfraccions, []);
+  const openSuper = (query: string) => ctx.nav(query ? `/superbuscador?q=${encodeURIComponent(query)}` : '/superbuscador');
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-      <Head kicker="Superbuscador · SCT" title="Troba qualsevol infracció" desc="Cerca per concepte, article, multa o punts. Obre el superbuscador per resultats complets." />
-      <form onSubmit={(e) => { e.preventDefault(); ctx.nav(q.trim() ? `/superbuscador?q=${encodeURIComponent(q.trim())}` : '/superbuscador'); }} style={{ position: 'relative' }}>
+      <Head kicker="Superbuscador · SCT" title="Troba qualsevol infracció" desc="Cerca per concepte, article, multa o punts a tot el catàleg SCT 2026 (LSV, RGC, RGCond, RGV, Assegurança i CP)." />
+      <form onSubmit={(e) => { e.preventDefault(); openSuper(trimmed); }} style={{ position: 'relative' }}>
         <span style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)' }}><Ic name="search" size={20} color={A.purple} /></span>
         <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="Ex.: conduir sense permís, mòbil, 0,30 mg/l…" style={{ width: '100%', border: `2px solid ${A.purple}`, background: A.card, borderRadius: 16, padding: '16px 18px 16px 50px', fontFamily: A.display, fontWeight: 600, fontSize: 17, color: A.ink, outline: 'none', boxShadow: A.shadowMd, boxSizing: 'border-box' }} />
       </form>
-      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>{['LSV', 'RGC', 'RGCond', 'RGV', 'CP', 'Assegurança'].map((c) => <span key={c} style={{ background: A.purpleSoft, color: A.purpleInk, fontFamily: A.mono, fontWeight: 600, fontSize: 12, padding: '7px 13px', borderRadius: 999 }}>{c}</span>)}</div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-        <RowLabel icon="list">Infraccions destacades</RowLabel>
-        {INFRACCIONS.map((inf, i) => <InfraccioRow key={i} inf={inf} onClick={() => ctx.nav(SCT)} />)}
-      </div>
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>{['LSV', 'RGC', 'RGCond', 'RGV', 'CP', 'Assegurança'].map((c) => <button key={c} onClick={() => setQ(c)} style={{ cursor: 'pointer', border: 'none', background: A.purpleSoft, color: A.purpleInk, fontFamily: A.mono, fontWeight: 600, fontSize: 12, padding: '7px 13px', borderRadius: 999 }}>{c}</button>)}</div>
+
+      {trimmed.length >= 2 ? (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+            <RowLabel icon="list">{results.length} {results.length === 1 ? 'resultat' : 'resultats'}</RowLabel>
+            {results.length > 0 && <button onClick={() => openSuper(trimmed)} style={{ cursor: 'pointer', border: 'none', background: 'transparent', display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: A.display, fontWeight: 700, fontSize: 13, color: A.purple }}>Veure al superbuscador <Ic name="arrow" size={15} color={A.purple} /></button>}
+          </div>
+          {results.length === 0 ? (
+            <Card pad={26} style={{ textAlign: 'center' }}><Mono color={A.inkMuted}>Cap infracció per «{trimmed}»</Mono></Card>
+          ) : (
+            results.slice(0, 40).map((row, i) => <InfraccioRow key={i} row={row} onClick={() => openSuper(row.concepte)} />)
+          )}
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <RowLabel icon="list">Infraccions destacades</RowLabel>
+          {featured.map((row, i) => <InfraccioRow key={i} row={row} onClick={() => openSuper(row.concepte)} />)}
+        </div>
+      )}
     </div>
   );
 }
 
 /* ── TRÀNSIT ── */
 function OpTransit({ ctx }: { ctx: OCtx }) {
+  const featured = useMemo(getFeaturedInfraccions, []);
   const tiles = [
     { l: 'Catàleg SCT', icon: 'car', tone: 'terracota', to: SCT },
     { l: 'Alcoholèmia', icon: 'flask', tone: 'pink', to: '/calculadora-alcohol' },
@@ -356,7 +396,7 @@ function OpTransit({ ctx }: { ctx: OCtx }) {
       </div>
       <div>
         <RowLabel icon="list">Infraccions destacades</RowLabel>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>{INFRACCIONS.map((inf, i) => <InfraccioRow key={i} inf={inf} onClick={() => ctx.nav(SCT)} />)}</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>{featured.map((row, i) => <InfraccioRow key={i} row={row} onClick={() => ctx.nav(`/superbuscador?q=${encodeURIComponent(row.concepte)}`)} />)}</div>
       </div>
     </div>
   );

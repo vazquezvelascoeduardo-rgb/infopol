@@ -9,7 +9,7 @@
 // En clicar una fila s'obre un drawer amb tota la informació + un text
 // pre-format que es pot copiar directament al butlletí.
 import { useDeferredValue, useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import {
   searchCataleg,
   getCatalegRows,
@@ -23,9 +23,24 @@ import { useT } from '../lib/i18n';
 
 export default function Superbuscador() {
   const { t } = useT();
-  const [q, setQ] = useState('');
+  // La cerca pot arribar pre-omplida des d'altres pàgines (Operativa,
+  // topbar global) via ?q=… — la llegim un cop per inicialitzar el camp.
+  const [params, setParams] = useSearchParams();
+  const [q, setQ] = useState(() => params.get('q') ?? '');
   const dq = useDeferredValue(q);
   const [selected, setSelected] = useState<CatalegRow | null>(null);
+
+  // Mantenim l'URL sincronitzat amb la cerca (sense afegir entrades a
+  // l'historial) perquè es pugui compartir/recarregar amb el mateix estat.
+  useEffect(() => {
+    const cur = params.get('q') ?? '';
+    if (q === cur) return;
+    const next = new URLSearchParams(params);
+    if (q) next.set('q', q);
+    else next.delete('q');
+    setParams(next, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [q]);
 
   const allRows = useMemo(() => getCatalegRows(), []);
   const results = useMemo(() => (dq.length >= 2 ? searchCataleg(dq) : []), [dq]);
