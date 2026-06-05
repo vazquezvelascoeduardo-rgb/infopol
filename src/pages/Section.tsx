@@ -3,6 +3,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { MODULES, getCardsByModule } from '../lib/content';
 import { plural, useT } from '../lib/i18n';
+import { A, Mono } from '../lib/design';
 
 const MODULE_ACCENT: Record<string, string> = {
   'ce78': '#E5484D',
@@ -47,39 +48,16 @@ export default function Section() {
         <span className="here">{modTitle}</span>
       </nav>
 
-      <header
-        className="card card-accent"
-        style={{ ['--accent' as never]: accent } as React.CSSProperties}
-      >
-        <div className="card-grid" style={{ gridTemplateColumns: 'auto 1fr auto' }}>
-          <span
-            className="appicon lg"
-            style={{ ['--accent' as never]: accent } as React.CSSProperties}
-          >
-            {mod.icon}
-          </span>
-          <div>
-            <div className="eyebrow" style={{ color: accent }}>
-              {t('home.leyes.badge')}
-            </div>
-            <h1 className="card-title xl mt-1">{modTitle}</h1>
-            <p className="card-desc">{modDesc}</p>
+      <header style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadowMd, background: `linear-gradient(150deg, ${accent}, color-mix(in srgb, ${accent} 78%, #000))` }}>
+        <div style={{ position: 'absolute', top: -50, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
+        <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+          <span style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0, fontSize: 28, boxShadow: A.inset }}>{mod.icon}</span>
+          <div style={{ minWidth: 0, flex: 1 }}>
+            <Mono size={11} color="rgba(255,255,255,0.85)">{t('home.leyes.badge')}</Mono>
+            <h1 style={{ margin: '6px 0 0', fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: -1, lineHeight: 1.05 }}>{modTitle}</h1>
+            <p style={{ margin: '8px 0 0', fontFamily: A.sans, fontSize: 14.5, lineHeight: 1.5, opacity: 0.92, maxWidth: 520 }}>{modDesc}</p>
           </div>
-          <span className="chip self-center hidden sm:inline-flex"
-            style={{
-              background: 'var(--paper-2)',
-              border: '1px solid var(--line)',
-              borderRadius: 999,
-              padding: '6px 12px',
-              fontSize: 12,
-              color: 'var(--text-2)',
-              fontWeight: 600,
-            }}
-          >
-            <span
-              className="inline-block h-1.5 w-1.5 rounded-full mr-1.5"
-              style={{ background: accent }}
-            />
+          <span style={{ alignSelf: 'center', flexShrink: 0, display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(255,255,255,0.16)', borderRadius: 999, padding: '7px 13px', fontFamily: A.mono, fontWeight: 600, fontSize: 12, color: '#fff' }} className="hidden sm:inline-flex">
             {cards.length} {plural(t, cards.length, 'cards')}
           </span>
         </div>

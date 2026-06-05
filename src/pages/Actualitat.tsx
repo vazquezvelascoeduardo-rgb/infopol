@@ -5,6 +5,7 @@
 import { Link } from 'react-router-dom';
 import { useT } from '../lib/i18n';
 import { TOPICS } from '../data/tests';
+import { A, Mono } from '../lib/design';
 
 const ACCENT = '#F26B1F'; // terracotta — encaixa amb el rebranding 2026
 
@@ -33,30 +34,15 @@ export default function Actualitat() {
         <span className="here">Actualitat</span>
       </nav>
 
-      {/* HERO */}
-      <header
-        className="card card-accent"
-        style={{ ['--accent' as never]: ACCENT } as React.CSSProperties}
-      >
-        <div className="card-grid">
-          <span
-            className="appicon lg"
-            style={{ ['--accent' as never]: ACCENT } as React.CSSProperties}
-          >
-            <span style={{ fontSize: 30 }}>📰</span>
-          </span>
-          <div>
-            <div className="eyebrow" style={{ color: ACCENT }}>
-              📰 Actualitat 2025–2026
-            </div>
-            <h1 className="card-title xl mt-1">Actualitat — Policia Local</h1>
-            <p className="card-desc">
-              Càrrecs vigents, premis, esports i fets clau (actualitzat maig 2026).
-              {' · '}
-              <span className="font-mono">
-                {totalQuestions} preguntes · {BLOCS.length} blocs temàtics
-              </span>
-            </p>
+      {/* HERO amb degradat */}
+      <header style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadowMd, background: `linear-gradient(150deg, ${A.terracota}, #C64A13)`, marginBottom: 8 }}>
+        <div style={{ position: 'absolute', top: -50, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
+        <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+          <span style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0, fontSize: 28, boxShadow: A.inset }}>📰</span>
+          <div style={{ minWidth: 0 }}>
+            <Mono size={11} color="rgba(255,255,255,0.85)">Actualitat 2025–2026</Mono>
+            <h1 style={{ margin: '6px 0 0', fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: -1, lineHeight: 1.05 }}>Actualitat — Policia Local</h1>
+            <p style={{ margin: '8px 0 0', fontFamily: A.sans, fontSize: 14.5, lineHeight: 1.5, opacity: 0.92, maxWidth: 520 }}>Càrrecs vigents, premis, esports i fets clau (actualitzat maig 2026). · {totalQuestions} preguntes · {BLOCS.length} blocs temàtics</p>
           </div>
         </div>
       </header>

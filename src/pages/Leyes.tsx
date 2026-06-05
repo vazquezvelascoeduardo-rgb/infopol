@@ -3,6 +3,7 @@
 import { Link } from 'react-router-dom';
 import { MODULES, getCardsByModule } from '../lib/content';
 import { plural, useT } from '../lib/i18n';
+import { A, Ic, Mono } from '../lib/design';
 
 // Accent de color per mòdul (rebranding 2026).
 const MODULE_ACCENT: Record<string, string> = {
@@ -17,17 +18,6 @@ const MODULE_ACCENT: Record<string, string> = {
   'transit': '#F26B1F',
 };
 
-function IconLeyes() {
-  return (
-    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 3v18" />
-      <path d="M5 7h14" />
-      <path d="m4 13 2-6 2 6c0 1.5-1 2.5-2 2.5s-2-1-2-2.5Z" />
-      <path d="m16 13 2-6 2 6c0 1.5-1 2.5-2 2.5s-2-1-2-2.5Z" />
-    </svg>
-  );
-}
-
 export default function Leyes() {
   const { t } = useT();
   const totalCards = MODULES.reduce((acc, m) => acc + getCardsByModule(m.slug).length, 0);
@@ -40,30 +30,16 @@ export default function Leyes() {
         <span className="here">{t('leyes.title')}</span>
       </nav>
 
-      {/* Hero card */}
-      <header
-        className="card card-accent"
-        style={{ ['--accent' as never]: 'var(--c-leyes)' } as React.CSSProperties}
-      >
-        <div className="card-grid">
-          <span
-            className="appicon lg"
-            style={{ ['--accent' as never]: 'var(--c-leyes)' } as React.CSSProperties}
-          >
-            <IconLeyes />
-          </span>
-          <div>
-            <div className="eyebrow" style={{ color: 'var(--c-leyes)' }}>
-              {t('home.leyes.badge')}
-            </div>
-            <h1 className="card-title xl mt-1">{t('leyes.title')}</h1>
-            <p className="card-desc">
-              {t('leyes.subtitle')}
-              {' · '}
-              <span className="font-mono">
-                {MODULES.length} {t('home.sections').toLowerCase()} · {totalCards}{' '}
-                {plural(t, totalCards, 'cards')}
-              </span>
+      {/* Hero amb degradat (estil Claude Design) */}
+      <header style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `linear-gradient(150deg, ${A.amber}, #B8770E)`, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadowMd, marginBottom: 8 }}>
+        <div style={{ position: 'absolute', top: -50, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
+        <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+          <span style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0, boxShadow: A.inset }}><Ic name="scale" size={28} color="#fff" sw={2.2} /></span>
+          <div style={{ minWidth: 0 }}>
+            <Mono size={11} color="rgba(255,255,255,0.85)">{t('home.leyes.badge')}</Mono>
+            <h1 style={{ margin: '6px 0 0', fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: -1, lineHeight: 1.05 }}>{t('leyes.title')}</h1>
+            <p style={{ margin: '8px 0 0', fontFamily: A.sans, fontSize: 14.5, lineHeight: 1.5, opacity: 0.92, maxWidth: 520 }}>
+              {t('leyes.subtitle')} · {MODULES.length} {t('home.sections').toLowerCase()} · {totalCards} {plural(t, totalCards, 'cards')}
             </p>
           </div>
         </div>
