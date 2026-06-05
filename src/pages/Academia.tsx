@@ -276,7 +276,7 @@ export default function Academia() {
         <nav style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
           {NAV.map((n) => <NavItem key={n.id} n={n} on={section === n.id} accent={accent} onClick={() => go(n.id)} />)}
         </nav>
-        <div style={{ marginTop: 'auto' }}>
+        <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 10 }}>
           <div style={{ background: A.terraSoft, borderRadius: 16, padding: 14, display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{ width: 40, height: 40, borderRadius: 12, background: A.terracota, display: 'grid', placeItems: 'center', boxShadow: A.inset, flexShrink: 0 }}><Ic name="flame" size={22} color="#fff" fill sw={0} /></div>
             <div style={{ minWidth: 0 }}>
@@ -284,6 +284,10 @@ export default function Academia() {
               <div style={{ fontFamily: A.sans, fontSize: 11.5, color: A.terraInk, opacity: 0.8 }}>No la perdis avui!</div>
             </div>
           </div>
+          <button onClick={() => nav('/operativa')} className="a-navitem" style={{ border: 'none', cursor: 'pointer', background: A.blueSoft, borderRadius: 14, padding: '12px 14px', display: 'flex', alignItems: 'center', gap: 11, textAlign: 'left' }}>
+            <span style={{ width: 32, height: 32, borderRadius: 10, background: A.blue, display: 'grid', placeItems: 'center', boxShadow: A.inset, flexShrink: 0 }}><Ic name="shield" size={17} color="#fff" sw={2.2} /></span>
+            <div style={{ flex: 1 }}><div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 13, color: A.blueInk }}>Anar a Operativa</div><Mono size={9} color={A.blue}>Consulta al carrer</Mono></div>
+          </button>
         </div>
       </aside>
 

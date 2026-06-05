@@ -7,7 +7,8 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import { MODULES, searchCards } from '../lib/content';
 import { searchOperativa, type OpSearchResult } from '../lib/operativa-search';
-import { plural, useT } from '../lib/i18n';
+import { useT } from '../lib/i18n';
+import { A, Ic, Mono, Card, Shell } from '../lib/design';
 
 export default function SearchResults() {
   const [params] = useSearchParams();
@@ -18,83 +19,69 @@ export default function SearchResults() {
   const { t } = useT();
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-6">
-      <div className="flex items-center gap-3">
-        <span className="h-6 w-1 rounded-full bg-amber-500 dark:bg-amber-400" />
-        <h1 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-600 dark:text-slate-300">
-          {t('search.resultsLabel')}
+    <Shell max={920}>
+      <div style={{ marginBottom: 22 }}>
+        <Mono color={A.terracota} style={{ letterSpacing: 1.4 }}>Resultats de cerca</Mono>
+        <h1 style={{ margin: '8px 0 0', fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(24px,3.2vw,34px)', letterSpacing: -1, color: A.ink, lineHeight: 1.1 }}>
+          «{q}»
         </h1>
+        <p style={{ margin: '8px 0 0', fontFamily: A.sans, fontSize: 14.5, color: A.inkSoft }}>
+          {totalResults === 0 ? 'Cap resultat' : `${totalResults} ${totalResults === 1 ? 'resultat' : 'resultats'}`}
+        </p>
       </div>
-      <p className="mt-2 text-lg">
-        <span className="text-slate-500 dark:text-slate-400">{t('search.query')}</span>{' '}
-        <span className="font-semibold text-amber-600 dark:text-amber-400">“{q}”</span>
-        <span className="ml-2 text-sm text-slate-500 dark:text-slate-400">
-          {totalResults === 0
-            ? `· ${t('search.none')}`
-            : `· ${totalResults} ${plural(t, totalResults, 'results')}`}
-        </span>
-      </p>
+
+      {totalResults === 0 && q && (
+        <Card pad={28} style={{ textAlign: 'center', borderStyle: 'dashed', background: A.bgSoft }}>
+          <div style={{ width: 50, height: 50, borderRadius: 14, background: A.bgDeep, display: 'grid', placeItems: 'center', margin: '0 auto 12px' }}><Ic name="search" size={24} color={A.inkMuted} /></div>
+          <Mono color={A.inkMuted}>Prova amb altres paraules clau</Mono>
+        </Card>
+      )}
 
       {/* OPERATIVA — checklists interactius (Tràfic + Penal) */}
       {opResults.length > 0 && (
-        <section className="mt-5">
-          <h2 className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
-            <span aria-hidden>🚨</span> {t('search.operativaSection')}
-            <span className="font-mono text-[10px] opacity-70">({opResults.length})</span>
-          </h2>
-          <ul className="grid grid-cols-1 gap-2">
+        <section style={{ marginTop: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '4px 0 12px' }}>
+            <Ic name="siren" size={15} color={A.blue} sw={2.2} />
+            <Mono color={A.blue}>Operativa</Mono>
+            <Mono size={10} color={A.inkFaint}>({opResults.length})</Mono>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {opResults.map((r) => (
               <OperativaResultCard key={`${r.module}/${r.scenarioId}`} result={r} q={q} />
             ))}
-          </ul>
+          </div>
         </section>
       )}
 
       {/* LLEIS — fitxes del temari */}
       {leyesResults.length > 0 && (
-        <section className="mt-6">
-          <h2 className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400">
-            <span aria-hidden>⚖️</span> {t('search.leyesSection')}
-            <span className="font-mono text-[10px] opacity-70">({leyesResults.length})</span>
-          </h2>
-          <ul className="grid grid-cols-1 gap-2">
+        <section style={{ marginTop: 22 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '4px 0 12px' }}>
+            <Ic name="scale" size={15} color={A.amber} sw={2.2} />
+            <Mono color={A.amber}>Lleis i temari</Mono>
+            <Mono size={10} color={A.inkFaint}>({leyesResults.length})</Mono>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {leyesResults.map((c) => {
               const mod = MODULES.find((m) => m.slug === c.moduleSlug);
               const modTitle = mod ? t(`module.${mod.slug}.title`) : c.moduleSlug;
               return (
-                <li key={`${c.moduleSlug}/${c.slug}`}>
-                  <Link
-                    to={`/leyes/s/${c.moduleSlug}/${c.slug}`}
-                    className="group flex items-start gap-3 rounded-xl border px-4 py-3 transition
-                      border-slate-200 bg-white hover:border-amber-400/60 hover:bg-slate-50
-                      dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-amber-400/40 dark:hover:bg-[#13243e]"
-                  >
-                    <span
-                      aria-hidden
-                      className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-lg ring-1
-                        bg-slate-50 ring-slate-200
-                        dark:bg-white/5 dark:ring-white/10"
-                    >
-                      {c.icon}
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <div className="text-[10px] uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400/80">
-                        {modTitle}
-                      </div>
-                      <div className="font-semibold">{c.title}</div>
-                      <div
-                        className="mt-1 text-sm text-slate-500 dark:text-slate-400"
-                        dangerouslySetInnerHTML={{ __html: snippet(c.searchText, q) }}
-                      />
+                <Link key={`${c.moduleSlug}/${c.slug}`} to={`/leyes/s/${c.moduleSlug}/${c.slug}`} style={{ textDecoration: 'none' }}>
+                  <Card pad={16} hover style={{ display: 'flex', alignItems: 'flex-start', gap: 14, borderLeft: `4px solid ${A.amber}` }}>
+                    <span style={{ width: 40, height: 40, borderRadius: 11, background: A.amberSoft, display: 'grid', placeItems: 'center', flexShrink: 0, fontSize: 20 }}>{c.icon}</span>
+                    <div style={{ minWidth: 0, flex: 1 }}>
+                      <Mono size={10} color={A.amber}>{modTitle}</Mono>
+                      <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 15.5, color: A.ink, margin: '2px 0 4px', letterSpacing: -0.2 }}>{c.title}</div>
+                      <div style={{ fontFamily: A.sans, fontSize: 13, color: A.inkMuted, lineHeight: 1.5 }} dangerouslySetInnerHTML={{ __html: snippet(c.searchText, q) }} />
                     </div>
-                  </Link>
-                </li>
+                  </Card>
+                </Link>
               );
             })}
-          </ul>
+          </div>
         </section>
       )}
-    </div>
+    </Shell>
   );
 }
 
@@ -107,56 +94,27 @@ function OperativaResultCard({ result, q }: { result: OpSearchResult; q: string 
       ? t('operativa.trafico.title')
       : t('operativa.seguretat-ciutadana.title');
   const moduleColor =
-    result.module === 'trafico' ? '#f59e0b' : (result.blocColor ?? '#3b82f6');
+    result.module === 'trafico' ? A.terracota : (result.blocColor ?? A.blue);
 
   return (
-    <li>
-      <Link
-        to={result.url}
-        className="group block rounded-xl border p-4 transition
-          border-slate-200 bg-white hover:border-blue-400/60
-          dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-blue-400/40"
-        style={{ borderLeft: `4px solid ${moduleColor}` }}
-      >
-        <div className="flex items-baseline gap-2 mb-1 flex-wrap">
-          <span
-            className="rounded-md px-1.5 py-0.5 text-[10px] uppercase tracking-wider font-bold text-white"
-            style={{ backgroundColor: moduleColor }}
-          >
-            {moduleLabel}
-          </span>
-          {result.blocLabel && (
-            <span className="text-[10px] uppercase tracking-wider font-semibold opacity-70">
-              {result.blocLabel}
-            </span>
-          )}
+    <Link to={result.url} style={{ textDecoration: 'none' }}>
+      <Card pad={16} hover style={{ borderLeft: `4px solid ${moduleColor}` }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>
+          <span style={{ background: moduleColor, color: '#fff', borderRadius: 7, padding: '3px 9px', fontFamily: A.mono, fontWeight: 700, fontSize: 10, letterSpacing: 0.6, textTransform: 'uppercase' }}>{moduleLabel}</span>
+          {result.blocLabel && <Mono size={10} color={A.inkMuted}>{result.blocLabel}</Mono>}
         </div>
-        <div className="font-bold">{stripEmoji(result.scenarioTitle)}</div>
-
-        {/* Hits — fragments coincidents */}
-        <ul className="mt-2 space-y-1.5 text-sm">
+        <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 16, color: A.ink, letterSpacing: -0.2 }}>{stripEmoji(result.scenarioTitle)}</div>
+        <ul style={{ margin: '10px 0 0', padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 6 }}>
           {result.hits.map((h, i) => (
-            <li key={i} className="flex items-start gap-2">
-              <span
-                aria-hidden
-                className="mt-0.5 inline-block shrink-0 rounded text-[9px] uppercase tracking-wider font-mono px-1 py-0.5
-                  bg-slate-100 text-slate-500 dark:bg-white/5 dark:text-slate-400"
-              >
-                {prettifyField(h.field)}
-              </span>
-              <span
-                className="text-slate-600 dark:text-slate-300 flex-1"
-                dangerouslySetInnerHTML={{ __html: highlight(h.snippet, q) }}
-              />
+            <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+              <span style={{ marginTop: 1, flexShrink: 0, background: A.bgDeep, color: A.inkMuted, borderRadius: 5, padding: '2px 6px', fontFamily: A.mono, fontWeight: 600, fontSize: 9, letterSpacing: 0.4, textTransform: 'uppercase' }}>{prettifyField(h.field)}</span>
+              <span style={{ flex: 1, fontFamily: A.sans, fontSize: 13, color: A.inkSoft, lineHeight: 1.5 }} dangerouslySetInnerHTML={{ __html: highlight(h.snippet, q) }} />
             </li>
           ))}
         </ul>
-
-        <div className="mt-2 text-xs text-blue-600 dark:text-blue-400 opacity-70 group-hover:opacity-100">
-          {t('search.openChecklist')} →
-        </div>
-      </Link>
-    </li>
+        <div style={{ marginTop: 10, fontFamily: A.display, fontWeight: 700, fontSize: 12.5, color: moduleColor, display: 'inline-flex', alignItems: 'center', gap: 6 }}>{t('search.openChecklist')} <Ic name="arrow" size={14} color={moduleColor} /></div>
+      </Card>
+    </Link>
   );
 }
 
@@ -207,7 +165,7 @@ function snippet(text: string, q: string): string {
   const highlighted = escapeHtml(slice).replace(
     new RegExp(escapeRegExp(escapeHtml(q)), 'ig'),
     (m) =>
-      `<mark class="rounded px-0.5 bg-amber-200/80 text-amber-900 dark:bg-amber-300/30 dark:text-amber-100">${m}</mark>`,
+      `<mark style="border-radius:3px;padding:0 2px;background:#FFE7D2;color:#7A2E04">${m}</mark>`,
   );
   return before + highlighted + after;
 }
@@ -217,7 +175,7 @@ function highlight(text: string, q: string): string {
   return escapeHtml(text).replace(
     new RegExp(escapeRegExp(escapeHtml(q)), 'ig'),
     (m) =>
-      `<mark class="rounded px-0.5 bg-amber-200/80 text-amber-900 dark:bg-amber-300/30 dark:text-amber-100">${m}</mark>`,
+      `<mark style="border-radius:3px;padding:0 2px;background:#FFE7D2;color:#7A2E04">${m}</mark>`,
   );
 }
 
