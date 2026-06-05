@@ -114,12 +114,19 @@ export default function Layout({ children }: { children: ReactNode }) {
   // no se surti mai del disseny nou.
   const p = location.pathname;
   const isFullShell =
+    // Operativa i les seves subpàgines
     p === '/operativa' || p.startsWith('/operativa/') ||
     p === '/superbuscador' ||
     p === '/calculadora-alcohol' ||
     p === '/recursos' ||
     p === '/leyes' || p.startsWith('/leyes/') ||
-    p === '/academia' || p.startsWith('/academia/');
+    // Acadèmia i les seves subpàgines
+    p === '/academia' || p.startsWith('/academia/') ||
+    p === '/policia-local' || p.startsWith('/policia-local/') ||
+    p === '/mossos' || p.startsWith('/mossos/') ||
+    p === '/cultura-general' || p.startsWith('/cultura-general/') ||
+    p === '/actualitat' || p.startsWith('/actualitat/') ||
+    p === '/retos';
   if (isFullShell) {
     return (
       <div className="min-h-dvh bg-paper text-ink">

@@ -26,6 +26,7 @@ import Home from './pages/Home';
 import RequireAuth from './components/RequireAuth';
 import RouteErrorBoundary from './components/RouteErrorBoundary';
 import OperativaShellLayout from './components/OperativaShellLayout';
+import AcademiaShellLayout from './components/AcademiaShellLayout';
 
 const Leyes = lazy(() => import('./pages/Leyes'));
 const Section = lazy(() => import('./pages/Section'));
@@ -105,13 +106,6 @@ export default function App() {
           <Route path="/privacitat" element={<Privacitat />} />
           <Route path="/noticies" element={<Noticies />} />
           <Route path="/noticies/:slug" element={<NoticiaDetall />} />
-          <Route path="/cultura-general" element={<CulturaGeneral />} />
-          {/* Temari de repàs (fitxa d'estudi) — abans del :slug perquè
-              tingui prioritat sobre la ruta de test. */}
-          <Route path="/cultura-general/temari" element={<CulturaTemari />} />
-          <Route path="/cultura-general/:slug" element={<TestSession />} />
-          <Route path="/actualitat" element={<Actualitat />} />
-          <Route path="/actualitat/:slug" element={<TestSession />} />
           <Route path="/login" element={<Login />} />
 
           {/* === Operativa — totes amb el marc persistent (sidebar) ===
@@ -142,7 +136,7 @@ export default function App() {
             <Route path="/recursos" element={<RequireAuth><Recursos /></RequireAuth>} />
           </Route>
 
-          {/* === Privades === */}
+          {/* === Acadèmia (dashboard amb shell propi) === */}
           <Route
             path="/academia"
             element={
@@ -151,68 +145,40 @@ export default function App() {
               </RequireAuth>
             }
           />
-          <Route
-            path="/retos"
-            element={
-              <RequireAuth>
-                <Retos />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/policia-local/esquemes"
-            element={
-              <RequireAuth>
-                <PoliciaLocalEsquemes />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/policia-local/esquemes/:slug"
-            element={
-              <RequireAuth>
-                <PoliciaLocalEsquemaLlei />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/policia-local"
-            element={
-              <RequireAuth>
-                <TestList />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/policia-local/logros"
-            element={
-              <RequireAuth>
-                <Achievements />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/policia-local/flashcards"
-            element={
-              <RequireAuth>
-                <Flashcards />
-              </RequireAuth>
-            }
-          />
-          {/* /flashcards és sempre el mode SRS (sense :slug). Si l'usuari
-              entra a /flashcards/:slug per un enllaç antic, el redirigim. */}
-          <Route
-            path="/policia-local/flashcards/:slug"
-            element={<Navigate to="/policia-local/flashcards" replace />}
-          />
-          <Route
-            path="/policia-local/:slug"
-            element={
-              <RequireAuth>
-                <TestSession />
-              </RequireAuth>
-            }
-          />
+
+          {/* === Acadèmia — subpàgines amb el marc persistent (sidebar) ===
+              Tests, temari, flashcards, esquemes, mossos, reptes i els
+              esquers de cultura/actualitat viuen dins del mateix marc, així
+              en obrir una categoria no se surt mai del disseny nou. */}
+          <Route element={<AcademiaShellLayout />}>
+            {/* Esquers públics (sense sessió) */}
+            <Route path="/cultura-general" element={<CulturaGeneral />} />
+            <Route path="/cultura-general/temari" element={<CulturaTemari />} />
+            <Route path="/cultura-general/:slug" element={<TestSession />} />
+            <Route path="/actualitat" element={<Actualitat />} />
+            <Route path="/actualitat/:slug" element={<TestSession />} />
+
+            <Route path="/retos" element={<RequireAuth><Retos /></RequireAuth>} />
+            {/* Policia Local */}
+            <Route path="/policia-local/esquemes" element={<RequireAuth><PoliciaLocalEsquemes /></RequireAuth>} />
+            <Route path="/policia-local/esquemes/:slug" element={<RequireAuth><PoliciaLocalEsquemaLlei /></RequireAuth>} />
+            <Route path="/policia-local" element={<RequireAuth><TestList /></RequireAuth>} />
+            <Route path="/policia-local/logros" element={<RequireAuth><Achievements /></RequireAuth>} />
+            <Route path="/policia-local/flashcards" element={<RequireAuth><Flashcards /></RequireAuth>} />
+            <Route path="/policia-local/flashcards/:slug" element={<Navigate to="/policia-local/flashcards" replace />} />
+            <Route path="/policia-local/:slug" element={<RequireAuth><TestSession /></RequireAuth>} />
+            {/* Mossos */}
+            <Route path="/mossos" element={<RequireAuth><MossosList /></RequireAuth>} />
+            <Route path="/mossos/flashcards" element={<RequireAuth><Flashcards /></RequireAuth>} />
+            <Route path="/mossos/flashcards/:slug" element={<Navigate to="/mossos/flashcards" replace />} />
+            <Route path="/mossos/temari" element={<RequireAuth><MossosTemari /></RequireAuth>} />
+            <Route path="/mossos/temari/:ambit" element={<RequireAuth><MossosTemariAmbit /></RequireAuth>} />
+            <Route path="/mossos/temari/:ambit/:slug" element={<RequireAuth><MossosTemariTema /></RequireAuth>} />
+            <Route path="/mossos/esquemes" element={<RequireAuth><MossosEsquemes /></RequireAuth>} />
+            <Route path="/mossos/esquemes/:slug" element={<RequireAuth><MossosEsquemaRapid /></RequireAuth>} />
+            <Route path="/mossos/:slug" element={<RequireAuth><TestSession /></RequireAuth>} />
+          </Route>
+
           {/* Redirects: /test/* → /policia-local/* (compat amb bookmarks). */}
           <Route path="/test" element={<Navigate to="/policia-local" replace />} />
           <Route path="/test/*" element={<RedirectTestToPoliciaLocal />} />
@@ -221,74 +187,6 @@ export default function App() {
             element={
               <RequireAuth>
                 <Profile />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/mossos"
-            element={
-              <RequireAuth>
-                <MossosList />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/mossos/flashcards"
-            element={
-              <RequireAuth>
-                <Flashcards />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/mossos/flashcards/:slug"
-            element={<Navigate to="/mossos/flashcards" replace />}
-          />
-          <Route
-            path="/mossos/temari"
-            element={
-              <RequireAuth>
-                <MossosTemari />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/mossos/temari/:ambit"
-            element={
-              <RequireAuth>
-                <MossosTemariAmbit />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/mossos/temari/:ambit/:slug"
-            element={
-              <RequireAuth>
-                <MossosTemariTema />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/mossos/esquemes"
-            element={
-              <RequireAuth>
-                <MossosEsquemes />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/mossos/esquemes/:slug"
-            element={
-              <RequireAuth>
-                <MossosEsquemaRapid />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/mossos/:slug"
-            element={
-              <RequireAuth>
-                <TestSession />
               </RequireAuth>
             }
           />
