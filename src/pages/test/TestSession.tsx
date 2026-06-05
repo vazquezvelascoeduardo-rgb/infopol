@@ -651,6 +651,17 @@ function RunPhase({
   const blanks = total - answeredCount;
   const [confirmOpen, setConfirmOpen] = useState(false);
 
+  // Amplada de finestra → adaptem el layout a mòbil: les opcions passen
+  // a 1 columna (per no partir el text paraula a paraula) i la barra
+  // superior s'aclareix (s'amaguen rellotge i botó "Acabar ara").
+  const [vw, setVw] = useState(() => (typeof window !== 'undefined' ? window.innerWidth : 1024));
+  useEffect(() => {
+    const onR = () => setVw(window.innerWidth);
+    window.addEventListener('resize', onR);
+    return () => window.removeEventListener('resize', onR);
+  }, []);
+  const isMobile = vw < 640;
+
   // Cronòmetre reactiu.
   const [, setNow] = useState(() => Date.now());
   useEffect(() => {
@@ -703,66 +714,82 @@ function RunPhase({
     <div style={{
       position: 'fixed', inset: 0, zIndex: 120, background: FP.bg,
       display: 'flex', flexDirection: 'column',
-      padding: '20px clamp(16px,5vw,64px)', gap: 16, overflow: 'hidden', fontFamily: FP.sans,
+      padding: isMobile ? '12px 14px calc(12px + env(safe-area-inset-bottom))' : '20px clamp(16px,5vw,64px)',
+      gap: isMobile ? 11 : 16, overflowY: isMobile ? 'auto' : 'hidden', overflowX: 'hidden',
+      WebkitOverflowScrolling: 'touch', fontFamily: FP.sans,
     }}>
       {/* Top bar */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexShrink: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, flexShrink: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 8 : 10, minWidth: 0 }}>
           <button onClick={requestFinish} aria-label={t('test.session.finishNow')} style={{
             width: 40, height: 40, borderRadius: 12, border: 'none', cursor: 'pointer', background: FP.card,
             boxShadow: '0 1px 0 rgba(19,19,26,0.04), 0 4px 12px rgba(19,19,26,0.06)',
             display: 'grid', placeItems: 'center', color: FP.inkSoft, flexShrink: 0,
           }}><FIc name="x" size={18} /></button>
-          <span style={{ ...pill, color: FP.inkSoft }}>Pregunta <span style={{ color: FP.ink }}>{state.index + 1}</span> / {total}</span>
-          <span style={{ ...pill, color: FP.inkMuted, display: 'flex', alignItems: 'center', gap: 7 }}>
-            <FIc name="clock" size={14} color={FP.inkMuted} />{formatMMSS(elapsedSec)}
-          </span>
+          <span style={{ ...pill, fontSize: isMobile ? 12 : 13, padding: isMobile ? '8px 12px' : '9px 14px', color: FP.inkSoft, whiteSpace: 'nowrap' }}>{isMobile ? '' : 'Pregunta '}<span style={{ color: FP.ink }}>{state.index + 1}</span>/{total}</span>
+          {!isMobile && (
+            <span style={{ ...pill, color: FP.inkMuted, display: 'flex', alignItems: 'center', gap: 7 }}>
+              <FIc name="clock" size={14} color={FP.inkMuted} />{formatMMSS(elapsedSec)}
+            </span>
+          )}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
-          <span style={{ fontFamily: FP.mono, fontWeight: 700, fontSize: 13, color: FP.greenInk, background: FP.greenSoft, padding: '9px 14px', borderRadius: 999, display: 'flex', alignItems: 'center', gap: 7 }}>
+          <span style={{ fontFamily: FP.mono, fontWeight: 700, fontSize: 13, color: FP.greenInk, background: FP.greenSoft, padding: isMobile ? '8px 12px' : '9px 14px', borderRadius: 999, display: 'flex', alignItems: 'center', gap: 7, whiteSpace: 'nowrap' }}>
             <FIc name="check" size={14} color={FP.green} sw={3} />{correctCount}/{total}
           </span>
-          <button onClick={requestFinish} style={{
-            fontFamily: FP.mono, fontWeight: 700, fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase',
-            color: FP.greenInk, background: FP.greenSoft, border: `1px solid ${FP.green}`,
-            padding: '9px 16px', borderRadius: 999, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 7,
-          }}><FIc name="check" size={14} color={FP.green} sw={3} />{t('test.session.finishNow')}</button>
+          {!isMobile && (
+            <button onClick={requestFinish} style={{
+              fontFamily: FP.mono, fontWeight: 700, fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase',
+              color: FP.greenInk, background: FP.greenSoft, border: `1px solid ${FP.green}`,
+              padding: '9px 16px', borderRadius: 999, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 7,
+            }}><FIc name="check" size={14} color={FP.green} sw={3} />{t('test.session.finishNow')}</button>
+          )}
         </div>
       </div>
 
-      {/* Segments de progrés */}
-      <div style={{ display: 'flex', gap: 4, flexShrink: 0, height: 6 }}
-        role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={answeredCount}>
-        {Array.from({ length: total }).map((_, i) => {
-          let bg: string = FP.line2;
-          if (state.answers[i] != null) bg = state.answers[i] === state.questions[i].correctIndex ? FP.green : FP.red;
-          if (i === state.index) bg = FP.terracota;
-          return <div key={i} style={{ flex: 1, height: '100%', borderRadius: 999, background: bg, transition: 'background .25s' }} />;
-        })}
-      </div>
+      {/* Progrés: segments per a tests curts; barra contínua per a llargs
+          (p.ex. "tot el temari" amb >60 preguntes — evitem renderitzar
+          centenars de divs i que es vegin com una ratlla borrosa). */}
+      {total <= 60 ? (
+        <div style={{ display: 'flex', gap: 4, flexShrink: 0, height: 6 }}
+          role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={answeredCount}>
+          {Array.from({ length: total }).map((_, i) => {
+            let bg: string = FP.line2;
+            if (state.answers[i] != null) bg = state.answers[i] === state.questions[i].correctIndex ? FP.green : FP.red;
+            if (i === state.index) bg = FP.terracota;
+            return <div key={i} style={{ flex: 1, height: '100%', borderRadius: 999, background: bg, transition: 'background .25s' }} />;
+          })}
+        </div>
+      ) : (
+        <div style={{ flexShrink: 0, height: 6, borderRadius: 999, background: FP.line2, overflow: 'hidden' }}
+          role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={state.index + 1}>
+          <div style={{ width: `${Math.round(((state.index + 1) / total) * 100)}%`, height: '100%', borderRadius: 999, background: FP.terracota, transition: 'width .25s' }} />
+        </div>
+      )}
 
       {/* Contingut */}
-      <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', maxWidth: 1040, width: '100%', margin: '0 auto' }}>
+      <div style={{ flex: isMobile ? '0 0 auto' : 1, minHeight: 0, display: 'flex', flexDirection: 'column', maxWidth: 1040, width: '100%', margin: '0 auto' }}>
         {/* Pregunta */}
-        <div style={{ flexShrink: 0, paddingTop: 'clamp(6px,2.5vh,28px)', paddingBottom: 'clamp(12px,2.5vh,26px)' }}>
+        <div style={{ flexShrink: 0, paddingTop: isMobile ? 4 : 'clamp(6px,2.5vh,28px)', paddingBottom: isMobile ? 12 : 'clamp(12px,2.5vh,26px)' }}>
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 8, background: FP.terraSoft, color: FP.terraInk,
-            fontFamily: FP.mono, fontWeight: 600, fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase',
-            padding: '7px 14px', borderRadius: 999, marginBottom: 16, maxWidth: '100%',
+            fontFamily: FP.mono, fontWeight: 600, fontSize: isMobile ? 11 : 12, letterSpacing: 0.6, textTransform: 'uppercase',
+            padding: '7px 14px', borderRadius: 999, marginBottom: isMobile ? 12 : 16, maxWidth: '100%',
           }}>
             <span aria-hidden>{chipIcon}</span>
             <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{chipLabel}</span>
           </div>
-          <div style={{ fontFamily: FP.display, fontWeight: 700, fontSize: 'clamp(22px,3.2vw,38px)', lineHeight: 1.2, color: FP.ink, letterSpacing: -0.6 }}>
+          <div style={{ fontFamily: FP.display, fontWeight: 700, fontSize: isMobile ? 'clamp(21px,6vw,27px)' : 'clamp(22px,3.2vw,38px)', lineHeight: 1.18, color: FP.ink, letterSpacing: -0.6 }}>
             {cur.question.text}
           </div>
         </div>
 
-        {/* Opcions 2×2 */}
+        {/* Opcions: 2×2 a desktop, 1 columna a mòbil (perquè el text no es
+            parteixi paraula a paraula i no se surti de la pantalla). */}
         <div style={{
-          flex: 1, minHeight: 0, display: 'grid',
-          gridTemplateColumns: cur.options.length > 1 ? '1fr 1fr' : '1fr',
-          gridAutoRows: '1fr', gap: 12, alignContent: 'stretch',
+          flex: isMobile ? '0 0 auto' : 1, minHeight: 0, display: 'grid',
+          gridTemplateColumns: (cur.options.length > 1 && !isMobile) ? '1fr 1fr' : '1fr',
+          gridAutoRows: isMobile ? 'auto' : '1fr', gap: isMobile ? 10 : 12, alignContent: 'stretch',
         }}>
           {cur.options.map((opt, i) => {
             const isSel = selected === i;
@@ -782,53 +809,56 @@ function RunPhase({
                 disabled={revealed}
                 style={{
                   textAlign: 'left', cursor: revealed ? 'default' : 'pointer', background: bg,
-                  border: `2px solid ${border}`, borderRadius: 16, padding: '0 18px', minHeight: 60, height: '100%',
+                  border: `2px solid ${border}`, borderRadius: 16, padding: isMobile ? '13px 14px' : '0 18px', minHeight: isMobile ? 56 : 60, height: isMobile ? 'auto' : '100%',
                   boxShadow: (s === 'idle' || s === 'selected') ? '0 1px 0 rgba(19,19,26,0.04), 0 6px 16px rgba(19,19,26,0.05)' : 'none',
-                  display: 'flex', alignItems: 'center', gap: 14,
+                  display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 14,
                   transition: 'transform .12s, box-shadow .12s, border-color .15s, background .15s',
                   opacity: s === 'dimmed' ? 0.65 : 1, width: '100%',
                 }}>
-                <span style={{ flexShrink: 0, width: 36, height: 36, borderRadius: 10, background: badgeBg, color: badgeFg, fontFamily: FP.mono, fontWeight: 700, fontSize: 15, display: 'grid', placeItems: 'center' }}>{letters[i]}</span>
-                <span style={{ flex: 1, fontFamily: FP.display, fontWeight: 500, fontSize: 'clamp(14px,1.45vw,18px)', color: fg, letterSpacing: -0.2, lineHeight: 1.25 }}>{opt}</span>
+                <span style={{ flexShrink: 0, width: isMobile ? 32 : 36, height: isMobile ? 32 : 36, borderRadius: 10, background: badgeBg, color: badgeFg, fontFamily: FP.mono, fontWeight: 700, fontSize: 15, display: 'grid', placeItems: 'center' }}>{letters[i]}</span>
+                <span style={{ flex: 1, fontFamily: FP.display, fontWeight: 500, fontSize: isMobile ? 15 : 'clamp(14px,1.45vw,18px)', color: fg, letterSpacing: -0.2, lineHeight: 1.3 }}>{opt}</span>
                 {icon && <span style={{ flexShrink: 0, width: 26, height: 26, borderRadius: 999, background: badgeBg, display: 'grid', placeItems: 'center' }}><FIc name={icon} size={15} color="#fff" sw={3} /></span>}
               </button>
             );
           })}
         </div>
 
-        {/* Peu: explicació (estudi) + navegació */}
-        <div style={{ flexShrink: 0, paddingTop: 14, display: 'flex', alignItems: 'center', gap: 16, minHeight: 60 }}>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            {revealed ? (
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, background: isCorrectAns ? FP.greenSoft : FP.redSoft, border: `1px solid ${isCorrectAns ? FP.green : FP.red}`, borderRadius: 14, padding: '11px 15px' }}>
-                <span style={{ flexShrink: 0, width: 24, height: 24, borderRadius: 999, background: isCorrectAns ? FP.green : FP.red, display: 'grid', placeItems: 'center', marginTop: 1 }}><FIc name={isCorrectAns ? 'check' : 'x'} size={14} color="#fff" sw={3} /></span>
-                <div style={{ minWidth: 0 }}>
-                  <span style={{ fontFamily: FP.display, fontWeight: 700, fontSize: 14, color: isCorrectAns ? FP.greenInk : FP.redInk, marginRight: 8 }}>
-                    {isCorrectAns ? t('test.session.correctFeedback') : t('test.session.wrongFeedback')}
-                  </span>
-                  <span style={{ fontFamily: FP.sans, fontSize: 13.5, lineHeight: 1.4, color: isCorrectAns ? FP.greenInk : FP.redInk, opacity: 0.94 }}>
-                    {!isCorrectAns && <><b>{letters[cur.correctIndex]}) {cur.options[cur.correctIndex]}</b>. </>}
-                    {cur.question.explanation || (cur.question.reference ? `📖 ${cur.question.reference}` : '')}
-                  </span>
+        {/* Peu: explicació (estudi) + navegació. A mòbil queda enganxat a
+            baix (sticky) perquè "Següent" sempre sigui accessible. */}
+        <div style={{ flexShrink: 0, paddingTop: 14, marginTop: isMobile ? 12 : 0, display: 'flex', alignItems: isMobile && revealed ? 'stretch' : 'center', flexDirection: isMobile && revealed ? 'column' : 'row', gap: isMobile ? 12 : 16, minHeight: isMobile ? 0 : 60, position: isMobile ? 'sticky' : 'static', bottom: isMobile ? 0 : undefined, background: isMobile ? FP.bg : undefined, paddingBottom: isMobile ? 4 : 0 }}>
+          {(revealed || !isMobile) && (
+            <div style={{ flex: 1, minWidth: 0 }}>
+              {revealed ? (
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, background: isCorrectAns ? FP.greenSoft : FP.redSoft, border: `1px solid ${isCorrectAns ? FP.green : FP.red}`, borderRadius: 14, padding: '11px 15px' }}>
+                  <span style={{ flexShrink: 0, width: 24, height: 24, borderRadius: 999, background: isCorrectAns ? FP.green : FP.red, display: 'grid', placeItems: 'center', marginTop: 1 }}><FIc name={isCorrectAns ? 'check' : 'x'} size={14} color="#fff" sw={3} /></span>
+                  <div style={{ minWidth: 0 }}>
+                    <span style={{ fontFamily: FP.display, fontWeight: 700, fontSize: 14, color: isCorrectAns ? FP.greenInk : FP.redInk, marginRight: 8 }}>
+                      {isCorrectAns ? t('test.session.correctFeedback') : t('test.session.wrongFeedback')}
+                    </span>
+                    <span style={{ fontFamily: FP.sans, fontSize: 13.5, lineHeight: 1.4, color: isCorrectAns ? FP.greenInk : FP.redInk, opacity: 0.94 }}>
+                      {!isCorrectAns && <><b>{letters[cur.correctIndex]}) {cur.options[cur.correctIndex]}</b>. </>}
+                      {cur.question.explanation || (cur.question.reference ? `📖 ${cur.question.reference}` : '')}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: FP.inkMuted, fontFamily: FP.mono, fontSize: 12, letterSpacing: 0.3 }}>
-                <FIc name="keyboard" size={16} color={FP.inkFaint} /> Tria amb <b style={{ color: FP.inkSoft }}>A·B·C·D</b> · avança amb <b style={{ color: FP.inkSoft }}>↵</b>
-              </div>
-            )}
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+              ) : (
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: FP.inkMuted, fontFamily: FP.mono, fontSize: 12, letterSpacing: 0.3 }}>
+                  <FIc name="keyboard" size={16} color={FP.inkFaint} /> Tria amb <b style={{ color: FP.inkSoft }}>A·B·C·D</b> · avança amb <b style={{ color: FP.inkSoft }}>↵</b>
+                </div>
+              )}
+            </div>
+          )}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0, width: isMobile ? '100%' : 'auto' }}>
             <button onClick={onBack} disabled={state.index === 0} aria-label={t('test.session.previous')} style={{
-              width: 48, height: 50, borderRadius: 14, cursor: state.index === 0 ? 'default' : 'pointer',
+              width: 48, height: 50, borderRadius: 14, cursor: state.index === 0 ? 'default' : 'pointer', flexShrink: 0,
               background: FP.card, border: `1px solid ${FP.line2}`, color: state.index === 0 ? FP.inkFaint : FP.inkSoft,
               display: 'grid', placeItems: 'center', opacity: state.index === 0 ? 0.5 : 1,
               boxShadow: '0 1px 0 rgba(19,19,26,0.04), 0 4px 12px rgba(19,19,26,0.05)',
             }}><FIc name="arrowL" size={20} /></button>
             <button onClick={() => (isLast ? requestFinish() : onNext())} style={{
-              height: 50, padding: '0 24px', borderRadius: 14, border: 'none', cursor: 'pointer',
+              height: 50, flex: isMobile ? 1 : undefined, padding: '0 24px', borderRadius: 14, border: 'none', cursor: 'pointer',
               background: FP.terracota, color: '#fff', fontFamily: FP.display, fontWeight: 700, fontSize: 16,
-              display: 'flex', alignItems: 'center', gap: 10, boxShadow: 'inset 0 -4px 0 rgba(0,0,0,0.18)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, boxShadow: 'inset 0 -4px 0 rgba(0,0,0,0.18)',
             }}>
               {isLast ? t('test.session.finish') : t('test.session.next')}
               <FIc name="arrow" size={19} color="#fff" sw={2.4} />
