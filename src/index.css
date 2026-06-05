@@ -6609,3 +6609,9 @@ html[data-text-size="lg"] { font-size: 18px; }
     .temari-section-body { font-size: 14.5px; }
   }
 }
+
+/* Superbuscador · drawer de detall — centrat i radi complet a desktop */
+@media (min-width: 640px) {
+  .sb-dialog { align-items: center !important; }
+  .sb-sheet { border-radius: 24px !important; }
+}

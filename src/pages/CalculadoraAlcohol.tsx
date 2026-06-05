@@ -1,59 +1,43 @@
-// Pàgina dedicada a la calculadora d'alcoholèmia.
-// Accés directe des de home: /calculadora-alcohol
+// Pàgina dedicada a la calculadora d'alcoholèmia (rediseny Claude Design).
+// Accés directe des d'Operativa: /calculadora-alcohol
 import { Link } from 'react-router-dom';
-import { useT } from '../lib/i18n';
 import AlcoholCalculator from '../components/AlcoholCalculator';
 import WidmarkCalculator from '../components/WidmarkCalculator';
+import { A, Ic, Mono, Card, Shell } from '../lib/design';
 
 export default function CalculadoraAlcohol() {
-  const { t } = useT();
-
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-6">
-      <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3">
-        <Link to="/" className="hover:underline">{t('nav.home')}</Link>
-        <span className="mx-2" aria-hidden>/</span>
-        <span className="text-slate-700 dark:text-slate-200">{t('recursos.alcohol.title')}</span>
+    <Shell max={780}>
+      <nav style={{ fontFamily: A.sans, fontSize: 13, color: A.inkMuted, marginBottom: 14 }}>
+        <Link to="/operativa" style={{ color: A.inkMuted, textDecoration: 'none' }}>Operativa</Link>
+        <span style={{ margin: '0 8px' }} aria-hidden>/</span>
+        <span style={{ color: A.inkSoft }}>Alcoholèmia</span>
       </nav>
 
-      <header className="rounded-2xl border p-5 sm:p-6 mb-5
-        border-rose-200/70 bg-gradient-to-br from-rose-50/70 via-white to-amber-50/40
-        shadow-[0_1px_2px_rgba(15,23,42,0.04)]
-        dark:border-white/10 dark:bg-gradient-to-br dark:from-[#2a0f1a] dark:to-[#0a1628]">
-        <div className="flex items-start gap-4">
-          <span aria-hidden className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-500 to-amber-600 text-3xl text-white shadow-inner">
-            🍷
-          </span>
-          <div className="min-w-0">
-            <div className="text-[11px] uppercase tracking-[0.25em] font-semibold text-rose-700 dark:text-rose-400/90">
-              {t('recursos.alcohol.badge')}
-            </div>
-            <h1 className="mt-1 text-2xl sm:text-3xl font-black tracking-tight">
-              {t('recursos.alcohol.title')}
-            </h1>
-            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              {t('recursos.alcohol.desc')}
-            </p>
+      <div style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `linear-gradient(150deg, ${A.pink}, #C2185B)`, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadowMd, marginBottom: 18 }}>
+        <div style={{ position: 'absolute', top: -50, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
+        <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+          <span style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0, boxShadow: A.inset }}><Ic name="flask" size={28} color="#fff" sw={2.2} /></span>
+          <div style={{ minWidth: 0 }}>
+            <Mono size={11} color="rgba(255,255,255,0.85)">Eina ràpida · trànsit</Mono>
+            <h1 style={{ margin: '6px 0 0', fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: -1, lineHeight: 1.05 }}>Calculadora d'alcoholèmia</h1>
+            <p style={{ margin: '8px 0 0', fontFamily: A.sans, fontSize: 14.5, lineHeight: 1.5, opacity: 0.92, maxWidth: 480 }}>Determina la sanció segons la taxa (mg/l), el tipus de conductor i si hi ha via penal.</p>
           </div>
         </div>
-      </header>
+      </div>
 
-      <div className="rounded-2xl border p-4 sm:p-5
-        border-slate-200/80 bg-white
-        dark:border-white/10 dark:bg-[#0f1d34]">
+      <Card pad={20} style={{ marginBottom: 22 }}>
         <AlcoholCalculator />
-      </div>
+      </Card>
 
-      {/* Calculadora Widmark — retroprojecció amb 2 proves */}
-      <div className="mt-6">
-        <div className="section-head" style={{ ['--accent' as never]: '#9c7a1f' } as React.CSSProperties}>
-          <span className="eyebrow">📐 Càlcul Widmark · 2 proves</span>
-          <span className="rule" />
-        </div>
-        <div className="mt-3 rounded-2xl border border-line bg-paper p-4 sm:p-5">
-          <WidmarkCalculator />
-        </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '4px 0 12px' }}>
+        <Ic name="flask" size={15} color={A.inkMuted} sw={2.2} />
+        <Mono color={A.inkSoft}>Càlcul Widmark · 2 proves</Mono>
+        <span style={{ flex: 1, height: 1, background: A.line }} />
       </div>
-    </div>
+      <Card pad={20}>
+        <WidmarkCalculator />
+      </Card>
+    </Shell>
   );
 }
