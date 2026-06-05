@@ -108,8 +108,18 @@ export default function Layout({ children }: { children: ReactNode }) {
   }
 
   // L'Acadèmia i l'Operativa tenen el seu propi shell complet (sidebar +
-  // topbar + nav); amaguem el chrome global de l'app en aquestes rutes.
-  const isFullShell = location.pathname === '/academia' || location.pathname === '/operativa';
+  // topbar + nav) proporcionat per OperativaShellLayout / AcademiaShellLayout.
+  // Amaguem el chrome global de l'app en aquestes rutes i en totes les
+  // seves subpàgines (Catàleg SCT, Lleis, protocols, calculadora…) perquè
+  // no se surti mai del disseny nou.
+  const p = location.pathname;
+  const isFullShell =
+    p === '/operativa' || p.startsWith('/operativa/') ||
+    p === '/superbuscador' ||
+    p === '/calculadora-alcohol' ||
+    p === '/recursos' ||
+    p === '/leyes' || p.startsWith('/leyes/') ||
+    p === '/academia' || p.startsWith('/academia/');
   if (isFullShell) {
     return (
       <div className="min-h-dvh bg-paper text-ink">

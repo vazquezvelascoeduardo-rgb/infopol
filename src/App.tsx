@@ -25,6 +25,7 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import RequireAuth from './components/RequireAuth';
 import RouteErrorBoundary from './components/RouteErrorBoundary';
+import OperativaShellLayout from './components/OperativaShellLayout';
 
 const Leyes = lazy(() => import('./pages/Leyes'));
 const Section = lazy(() => import('./pages/Section'));
@@ -97,18 +98,9 @@ export default function App() {
       <RouteErrorBoundary>
       <Suspense fallback={<PageFallback />}>
         <Routes>
-          {/* === Públiques === */}
+          {/* === Públiques (chrome global) === */}
           <Route path="/" element={<Home />} />
-          <Route path="/operativa" element={<Operativa />} />
-          <Route path="/operativa/trafico/*" element={<Trafico />} />
-          <Route path="/operativa/penal/taula-actes" element={<PenalTaulaActes />} />
-          <Route path="/operativa/penal/taula-drogues" element={<PenalTaulaDrogues />} />
-          <Route path="/operativa/penal/recursos" element={<PenalRecursos />} />
-          <Route path="/operativa/penal/drets-detingut" element={<PenalDretsDetingut />} />
-          <Route path="/operativa/penal/*" element={<Penal />} />
           <Route path="/cerca" element={<SearchResults />} />
-          <Route path="/superbuscador" element={<Superbuscador />} />
-          <Route path="/calculadora-alcohol" element={<CalculadoraAlcohol />} />
           <Route path="/avis-legal" element={<AvisLegal />} />
           <Route path="/privacitat" element={<Privacitat />} />
           <Route path="/noticies" element={<Noticies />} />
@@ -122,49 +114,35 @@ export default function App() {
           <Route path="/actualitat/:slug" element={<TestSession />} />
           <Route path="/login" element={<Login />} />
 
-          {/* Excepcions públiques de /leyes — més específiques primer.
-              El catàleg SCT és accessible sense sessió. */}
-          {PUBLIC_LEYES_CARDS.map((c) => (
-            <Route
-              key={`${c.moduleSlug}/${c.slug}`}
-              path={`/leyes/s/${c.moduleSlug}/${c.slug}`}
-              element={<CardPage />}
-            />
-          ))}
+          {/* === Operativa — totes amb el marc persistent (sidebar) ===
+              En entrar a qualsevol categoria (Catàleg SCT, Lleis,
+              protocols, calculadora…) no se surt mai del disseny nou:
+              només canvia el contingut central via <Outlet/>. */}
+          <Route element={<OperativaShellLayout />}>
+            <Route path="/operativa" element={<Operativa />} />
+            <Route path="/operativa/trafico/*" element={<Trafico />} />
+            <Route path="/operativa/penal/taula-actes" element={<PenalTaulaActes />} />
+            <Route path="/operativa/penal/taula-drogues" element={<PenalTaulaDrogues />} />
+            <Route path="/operativa/penal/recursos" element={<PenalRecursos />} />
+            <Route path="/operativa/penal/drets-detingut" element={<PenalDretsDetingut />} />
+            <Route path="/operativa/penal/*" element={<Penal />} />
+            <Route path="/superbuscador" element={<Superbuscador />} />
+            <Route path="/calculadora-alcohol" element={<CalculadoraAlcohol />} />
+            {/* Excepcions públiques de /leyes (catàleg SCT i novetats) */}
+            {PUBLIC_LEYES_CARDS.map((c) => (
+              <Route
+                key={`${c.moduleSlug}/${c.slug}`}
+                path={`/leyes/s/${c.moduleSlug}/${c.slug}`}
+                element={<CardPage />}
+              />
+            ))}
+            <Route path="/leyes" element={<RequireAuth><Leyes /></RequireAuth>} />
+            <Route path="/leyes/s/:moduleSlug" element={<RequireAuth><Section /></RequireAuth>} />
+            <Route path="/leyes/s/:moduleSlug/:slug" element={<RequireAuth><CardPage /></RequireAuth>} />
+            <Route path="/recursos" element={<RequireAuth><Recursos /></RequireAuth>} />
+          </Route>
 
           {/* === Privades === */}
-          <Route
-            path="/leyes"
-            element={
-              <RequireAuth>
-                <Leyes />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/leyes/s/:moduleSlug"
-            element={
-              <RequireAuth>
-                <Section />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/leyes/s/:moduleSlug/:slug"
-            element={
-              <RequireAuth>
-                <CardPage />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/recursos"
-            element={
-              <RequireAuth>
-                <Recursos />
-              </RequireAuth>
-            }
-          />
           <Route
             path="/academia"
             element={
