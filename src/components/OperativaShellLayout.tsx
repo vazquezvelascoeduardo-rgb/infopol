@@ -3,9 +3,17 @@
 // footer) i renderitza la pàgina activa amb <Outlet/>. Així, en entrar a
 // qualsevol categoria (Catàleg SCT, Lleis, protocols, calculadora…) no
 // se surt mai del disseny nou: només canvia el contingut central.
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { A, Ic, Mono } from '../lib/design';
+
+// Fallback que es mostra NOMÉS a l'àrea de contingut mentre carrega una
+// subpàgina lazy, perquè el marc (sidebar/topbar) no desaparegui mai.
+function ContentFallback() {
+  return <div style={{ display: 'grid', placeItems: 'center', padding: '80px 0' }}>
+    <div style={{ width: 26, height: 26, border: `2px solid ${A.line2}`, borderTopColor: A.ink, borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+  </div>;
+}
 
 const OP = A.blue;
 
@@ -87,7 +95,7 @@ export default function OperativaShellLayout() {
           <button onClick={() => nav('/perfil')} style={{ width: 42, height: 42, borderRadius: 999, border: 'none', cursor: 'pointer', background: A.ink, color: '#fff', fontFamily: A.display, fontWeight: 700, fontSize: 16, flexShrink: 0 }}>E</button>
         </header>
 
-        <main className="a-main-pad" style={{ flex: 1, padding: 'clamp(20px,3vw,38px)', maxWidth: 1240, width: '100%', margin: '0 auto' }}><Outlet /></main>
+        <main className="a-main-pad" style={{ flex: 1, padding: 'clamp(20px,3vw,38px)', maxWidth: 1240, width: '100%', margin: '0 auto' }}><Suspense fallback={<ContentFallback />}><Outlet /></Suspense></main>
         <footer style={{ padding: '24px clamp(20px,3vw,38px)', borderTop: `1px solid ${A.line}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
           <span style={{ fontFamily: A.mono, fontSize: 11, color: A.inkMuted }}>© 2026 Infopol · Informació no oficial</span>
         </footer>
