@@ -6,7 +6,7 @@
 // catàleg amb DOMParser, cache en memòria + sinònims). Aquí només hi ha
 // la presentació amb la paleta compartida (lib/design).
 import { useDeferredValue, useEffect, useMemo, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import {
   searchCataleg,
   getCatalegRows,
@@ -54,13 +54,6 @@ export default function Superbuscador() {
 
   return (
     <Shell max={960}>
-      {/* Breadcrumb */}
-      <nav style={{ fontFamily: A.sans, fontSize: 13, color: A.inkMuted, marginBottom: 14 }}>
-        <Link to="/operativa" style={{ color: A.inkMuted, textDecoration: 'none' }}>Operativa</Link>
-        <span style={{ margin: '0 8px' }} aria-hidden>/</span>
-        <span style={{ color: A.inkSoft }}>Superbuscador SCT</span>
-      </nav>
-
       {/* Capçalera */}
       <div style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `linear-gradient(150deg, ${A.purple}, #7C3AED)`, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadowMd, marginBottom: 18 }}>
         <div style={{ position: 'absolute', top: -50, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />

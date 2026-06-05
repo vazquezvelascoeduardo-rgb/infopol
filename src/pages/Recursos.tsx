@@ -1,11 +1,18 @@
 // Pàgina de recursos ràpids · rebranding 2026.
 // Hero card tintat verd + seccions: enllaços externs, eines col·lapsables,
 // referència ràpida (NATO + telèfons), informació local (Maps).
-import { Link } from 'react-router-dom';
 import { useEffect, useState, type ReactNode } from 'react';
 import { useT } from '../lib/i18n';
 import AlcoholCalculator from '../components/AlcoholCalculator';
 import { A, Ic, Mono } from '../lib/design';
+
+// Telèfons d'emergència i atenció (abans a la secció "Telèfons" d'Operativa).
+const PHONES = [
+  { num: '112', show: '112', label: 'Emergències', color: A.red },
+  { num: '016', show: '016', label: 'Violència masclista', color: A.pink },
+  { num: '024', show: '024', label: 'Conducta suïcida', color: A.blue },
+  { num: '900202010', show: '900…', label: 'ANAR · Menors', color: A.green },
+];
 
 // Codi alfanumèric (alfabet fonètic NATO/ICAO + Ç + Ñ).
 const CODI_ALFANUMERIC: Array<{ letra: string; paraula: string; special?: boolean }> = [
@@ -30,12 +37,6 @@ export default function Recursos() {
   const { t } = useT();
   return (
     <div className="shell">
-      <nav style={{ fontFamily: A.sans, fontSize: 13, color: A.inkMuted, margin: '14px 0' }}>
-        <Link to="/operativa" style={{ color: A.inkMuted, textDecoration: 'none' }}>Operativa</Link>
-        <span style={{ margin: '0 8px' }} aria-hidden>/</span>
-        <span style={{ color: A.inkSoft }}>{t('recursos.title')}</span>
-      </nav>
-
       {/* Hero amb degradat (estil Claude Design) */}
       <header style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `linear-gradient(150deg, ${A.green}, #0B7A55)`, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadowMd, marginBottom: 8 }}>
         <div style={{ position: 'absolute', top: -50, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
@@ -48,6 +49,18 @@ export default function Recursos() {
           </div>
         </div>
       </header>
+
+      {/* Telèfons útils */}
+      <SectionHead accent="var(--c-recursos)">📞 Telèfons útils</SectionHead>
+      <section className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {PHONES.map((p) => (
+          <a key={p.num} href={`tel:${p.num}`} className="a-hover" style={{ textDecoration: 'none', background: A.card, border: `1px solid ${A.line}`, borderRadius: 18, boxShadow: A.shadow, padding: 18, textAlign: 'center', display: 'block' }}>
+            <span style={{ width: 46, height: 46, borderRadius: 13, background: p.color, display: 'grid', placeItems: 'center', margin: '0 auto 10px', boxShadow: A.inset }}><Ic name="phone" size={22} color="#fff" sw={2.1} /></span>
+            <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 24, color: A.ink, letterSpacing: -0.5 }}>{p.show}</div>
+            <div style={{ fontFamily: A.sans, fontWeight: 600, fontSize: 12.5, color: A.inkSoft, marginTop: 2 }}>{p.label}</div>
+          </a>
+        ))}
+      </section>
 
       {/* Enllaços externs */}
       <SectionHead accent="var(--c-recursos)">🌐 {t('recursos.section.external')}</SectionHead>

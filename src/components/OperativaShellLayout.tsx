@@ -20,12 +20,12 @@ const OP = A.blue;
 const NAV = [
   { id: 'inici', label: 'Inici', icon: 'home', to: '/operativa' },
   { id: 'cercador', label: 'Cercador', icon: 'search', kicker: 'Infraccions', to: '/superbuscador' },
-  { id: 'transit', label: 'Trànsit', icon: 'car', kicker: 'Catàleg SCT', to: '/operativa?sec=transit' },
+  { id: 'cataleg', label: 'Catàleg SCT', icon: 'car', kicker: 'Trànsit 2026', to: '/operativa?sec=cataleg' },
   { id: 'lleis', label: 'Lleis', icon: 'scale', kicker: 'Biblioteca', to: '/leyes' },
-  { id: 'protocols', label: 'Protocols', icon: 'list', kicker: 'Procediments', to: '/operativa/penal' },
-  { id: 'telefons', label: 'Telèfons', icon: 'phone', to: '/operativa?sec=telefons' },
+  { id: 'procediments', label: 'Procediments', icon: 'list', kicker: 'SC i Trànsit', to: '/operativa?sec=procediments' },
+  { id: 'recursos', label: 'Recursos', icon: 'star', kicker: 'Eines i telèfons', to: '/recursos' },
 ] as const;
-const MOBILE = ['inici', 'cercador', 'transit', 'lleis', 'protocols'];
+const MOBILE = ['inici', 'cercador', 'cataleg', 'procediments', 'recursos'];
 
 // Determina quin element del menú s'ha de marcar com a actiu segons la
 // ruta i el paràmetre ?sec= de /operativa.
@@ -33,10 +33,10 @@ function activeId(pathname: string, sec: string | null): string {
   if (pathname === '/operativa') return sec && NAV.some((n) => n.id === sec) ? sec : 'inici';
   if (pathname.startsWith('/superbuscador')) return 'cercador';
   if (pathname.startsWith('/leyes')) return 'lleis';
-  if (pathname.startsWith('/operativa/penal')) return 'protocols';
-  if (pathname.startsWith('/operativa/trafico')) return 'transit';
-  if (pathname.startsWith('/calculadora-alcohol')) return 'transit';
-  if (pathname.startsWith('/recursos')) return 'inici';
+  if (pathname.startsWith('/operativa/penal')) return 'procediments';
+  if (pathname.startsWith('/operativa/trafico')) return 'procediments';
+  if (pathname.startsWith('/recursos')) return 'recursos';
+  if (pathname.startsWith('/calculadora-alcohol')) return 'recursos';
   return 'inici';
 }
 

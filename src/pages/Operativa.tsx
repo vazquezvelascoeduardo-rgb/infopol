@@ -8,6 +8,10 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { MODULES } from '../lib/content';
 import { useNoticiesAll } from '../lib/noticiesRemote';
 import { searchCataleg, getLawColor, type CatalegRow } from '../lib/cataleg-parser';
+import HtmlInline from '../components/HtmlInline';
+// El catàleg SCT 2026 (nomenclàtor) es mostra incrustat dins de la secció
+// "Catàleg SCT", sense redirigir a la fitxa de la llei.
+import catalegRaw from '../../content/transit/cataleg-d-infraccions-de-transit-sct-2026.ca.html?raw';
 
 /* ── Tokens (compartits amb el disseny Acadèmia) ── */
 const A = {
@@ -81,8 +85,6 @@ function Card({ children, pad = 20, style = {}, onClick, hover = false }: { chil
 }
 
 /* ── Dades (referència operativa) ── */
-const SCT = '/leyes/s/transit/cataleg-d-infraccions-de-transit-sct-2026';
-
 // Infraccions destacades: NO són dades inventades — es treuen del catàleg
 // SCT 2026 real (mateix nomenclàtor que el superbuscador). Per a cada
 // concepte conegut agafem la primera fila que el parser troba al catàleg.
@@ -105,24 +107,12 @@ function getFeaturedInfraccions(): CatalegRow[] {
 const sevLabel = (s?: string) => s === 'MG' ? 'Molt greu' : s === 'G' ? 'Greu' : s === 'L' ? 'Lleu' : '';
 const isNumericFine = (s: string) => /^\d/.test(s.replace(/\./g, ''));
 const fineLabel = (f?: string) => !f ? '—' : isNumericFine(f) ? `${f} €` : f;
-const PHONES = [
-  { num: '112', label: 'Emergències', tone: 'red' },
-  { num: '016', label: 'Violència masclista', tone: 'pink' },
-  { num: '024', label: 'Conducta suïcida', tone: 'blue' },
-  { num: '900202010', label: 'ANAR · Menors', tone: 'green', alt: '900 20 20 10' },
-];
-const PROTOCOLS = [
-  { area: 'SC / Penal', tone: 'blue', route: '/operativa/penal', items: ['Identificació de persones', 'Escorcoll i cacheig', 'Registre de vehicle', "Comís d'efectes"] },
-  { area: 'Detencions', tone: 'purple', route: '/operativa/penal/drets-detingut', items: ['Lectura de drets (520 LECrim)', 'Terminis de detenció', 'Assistència lletrada', 'Trasllat i custòdia', "Redacció d'atestat"] },
-  { area: 'Trànsit', tone: 'terracota', route: '/operativa/trafico', items: ["Control d'alcoholèmia", 'Test de drogues', 'Accident amb víctimes', 'Retirada de vehicle'] },
-  { area: 'Violència de gènere', tone: 'pink', route: '/operativa/penal/violencia-genere', items: ['Valoració del risc', 'Mesures de protecció', 'Activació VioGén', 'Acompanyament a la víctima'] },
-];
 
 /* ════════════════════════════ PÀGINA ════════════════════════════ */
 // Seccions del dashboard d'Operativa. El marc (sidebar/topbar/bottomnav)
 // el proporciona OperativaShellLayout; aquí només es renderitza el
 // contingut de la secció activa (segons ?sec=).
-const SECTIONS = ['inici', 'cercador', 'transit', 'lleis', 'protocols', 'telefons'] as const;
+const SECTIONS = ['inici', 'cercador', 'cataleg', 'lleis', 'procediments'] as const;
 type Sec = typeof SECTIONS[number];
 
 export default function Operativa() {
@@ -139,10 +129,9 @@ export default function Operativa() {
   const screens: Record<Sec, ReactNode> = {
     inici: <OpInici ctx={ctx} />,
     cercador: <OpCercador ctx={ctx} />,
-    transit: <OpTransit ctx={ctx} />,
+    cataleg: <OpCataleg />,
     lleis: <OpLleis ctx={ctx} />,
-    protocols: <OpProtocols ctx={ctx} />,
-    telefons: <OpTelefons />,
+    procediments: <OpProcediments ctx={ctx} />,
   };
 
   return <>{screens[section]}</>;
@@ -164,21 +153,21 @@ const RowLabel = ({ icon, children }: { icon: string; children: ReactNode }) => 
 function OpInici({ ctx }: { ctx: OCtx }) {
   const news = useNoticiesAll().slice(0, 3);
   const bigs = [
-    { grad: `linear-gradient(150deg, ${A.purple}, #7C3AED)`, accent: A.purple, kicker: 'Superbuscador · SCT', title: 'Troba qualsevol infracció en 2 segons', desc: 'Busca per concepte, article, multa o punts en LSV, RGC, RGCond, RGV i CP.', chips: ['LSV', 'RGC', 'RGCond', 'CP'], cta: 'Obrir buscador', onClick: () => ctx.go('cercador') },
-    { grad: `linear-gradient(150deg, ${A.terracota}, #E8590C)`, accent: A.terracota, badge: 'Més usat', kicker: 'Trànsit', title: 'Catàleg SCT 2026', desc: 'Fitxa completa per infracció amb quantia, punts i DTE.', chips: ['SCT 2026', 'Punts', 'Quanties', 'L1/L2/L3'], cta: 'Obrir catàleg', onClick: () => ctx.nav(SCT) },
+    { grad: `linear-gradient(150deg, ${A.purple}, #7C3AED)`, accent: A.purple, kicker: 'Superbuscador · SCT', title: 'Troba qualsevol infracció en 2 segons', desc: 'Busca per concepte, article, multa o punts en LSV, RGC, RGCond, RGV i CP.', chips: ['LSV', 'RGC', 'RGCond', 'CP'], cta: 'Obrir buscador', onClick: () => ctx.nav('/superbuscador') },
+    { grad: `linear-gradient(150deg, ${A.terracota}, #E8590C)`, accent: A.terracota, badge: 'Més usat', kicker: 'Trànsit', title: 'Catàleg SCT 2026', desc: 'Nomenclàtor complet per infracció amb quantia, punts i DTE.', chips: ['SCT 2026', 'Punts', 'Quanties', 'L1/L2/L3'], cta: 'Obrir catàleg', onClick: () => ctx.go('cataleg') },
   ];
   const smalls = [
-    { tone: 'pink', kicker: 'Calculadora', title: 'Alcoholèmia', icon: 'flask', desc: 'Sanció per mg/l, factor professional/novell i via penal.', onClick: () => ctx.nav('/calculadora-alcohol') },
-    { tone: 'amber', kicker: 'Biblioteca', title: 'Lleis', icon: 'scale', desc: 'CE, CP, LECrim, EAC i +40 normes amb esquemes.', onClick: () => ctx.go('lleis') },
-    { tone: 'green', kicker: 'Recursos', title: 'Dreceres ràpides', icon: 'star', desc: 'AIAC, validadors i recursos útils en servei.', onClick: () => ctx.nav('/recursos') },
+    { tone: 'pink', kicker: 'Recursos', title: 'Alcoholèmia', icon: 'flask', desc: 'Sanció per mg/l, factor professional/novell i via penal.', onClick: () => ctx.nav('/calculadora-alcohol') },
+    { tone: 'amber', kicker: 'Biblioteca', title: 'Lleis', icon: 'scale', desc: 'CE, CP, LECrim, EAC i +40 normes amb esquemes.', onClick: () => ctx.nav('/leyes') },
+    { tone: 'green', kicker: 'Recursos', title: 'Eines i telèfons', icon: 'star', desc: 'Farmàcia de guàrdia, AIAC, validador DNI, alfabet i telèfons.', onClick: () => ctx.nav('/recursos') },
   ];
   const arees = [
-    { tone: 'terracota', icon: 'car', title: 'Trànsit', desc: 'Catàleg SCT, alcoholèmia, drogues, accidents, atestats.', meta: '14 proc · LSV · RGC', onClick: () => ctx.go('transit') },
+    { tone: 'terracota', icon: 'car', title: 'Catàleg SCT', desc: 'Nomenclàtor oficial 2026: article, gravetat, quantia i punts.', meta: 'LSV · RGC · RGV', onClick: () => ctx.go('cataleg') },
     { tone: 'night', icon: 'shield', title: 'SC / Penal', desc: 'Identificació, registres, escorcoll i cacheig.', meta: '20 proc.', onClick: () => ctx.nav('/operativa/penal') },
     { tone: 'purple', icon: 'scale', title: 'Detencions', desc: 'Terminis, drets, assistència lletrada i atestat.', meta: '5 proc.', onClick: () => ctx.nav('/operativa/penal/drets-detingut') },
     { tone: 'pink', icon: 'heart', title: 'Violència de gènere', desc: 'Valoració risc, mesures urgents i VioGén.', meta: '4 proc.', onClick: () => ctx.nav('/operativa/penal/violencia-genere') },
-    { tone: 'green', icon: 'phone', title: 'Telèfons útils', desc: 'Emergències, víctimes, menors i serveis socials.', meta: '112 · 016 · 024', onClick: () => ctx.go('telefons') },
-    { tone: 'purpleSoft', icon: 'doc', title: 'Drets del detingut', desc: "Lectura completa per imprimir o adjuntar a l'atestat.", meta: 'Art. 520 LECrim', onClick: () => ctx.nav('/operativa/penal/drets-detingut') },
+    { tone: 'blue', icon: 'car', title: 'Procediments de trànsit', desc: "Alcoholèmia, drogues, accidents i retirades.", meta: 'Checklists', onClick: () => ctx.nav('/operativa/trafico') },
+    { tone: 'green', icon: 'star', title: 'Recursos i telèfons', desc: 'Farmàcia, AIAC, DNI, alcoholèmia i telèfons útils.', meta: '112 · 016 · 024', onClick: () => ctx.nav('/recursos') },
   ];
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 26 }}>
@@ -301,31 +290,12 @@ function OpCercador({ ctx }: { ctx: OCtx }) {
   );
 }
 
-/* ── TRÀNSIT ── */
-function OpTransit({ ctx }: { ctx: OCtx }) {
-  const featured = useMemo(getFeaturedInfraccions, []);
-  const tiles = [
-    { l: 'Catàleg SCT', icon: 'car', tone: 'terracota', to: SCT },
-    { l: 'Alcoholèmia', icon: 'flask', tone: 'pink', to: '/calculadora-alcohol' },
-    { l: 'Drogues', icon: 'flask', tone: 'purple', to: '/operativa/penal/taula-drogues' },
-    { l: 'Accidents', icon: 'siren', tone: 'red', to: '/operativa/trafico' },
-    { l: 'Retirades', icon: 'car', tone: 'blue', to: '/operativa/trafico' },
-    { l: 'Atestats', icon: 'doc', tone: 'amber', to: '/operativa/penal/taula-actes' },
-  ];
+/* ── CATÀLEG SCT (nomenclàtor incrustat) ── */
+function OpCataleg() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-      <Head kicker="Catàleg SCT 2026" title="Trànsit" desc="Catàleg oficial d'infraccions amb quantia, punts i detracció. Alcoholèmia, drogues, accidents i atestats." />
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 12 }}>
-        {tiles.map((x) => { const k = toneOf(x.tone);
-          return <div key={x.l} className="a-hover" onClick={() => ctx.nav(x.to)} style={{ cursor: 'pointer', background: A.card, border: `1px solid ${A.line}`, borderRadius: A.rlg, boxShadow: A.shadow, padding: 16, display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <span style={{ width: 42, height: 42, borderRadius: 12, background: k.soft, display: 'grid', placeItems: 'center' }}><Ic name={x.icon} size={21} color={k.solid} sw={2.1} /></span>
-            <span style={{ fontFamily: A.display, fontWeight: 700, fontSize: 15, color: A.ink }}>{x.l}</span>
-          </div>; })}
-      </div>
-      <div>
-        <RowLabel icon="list">Infraccions destacades</RowLabel>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>{featured.map((row, i) => <InfraccioRow key={i} row={row} onClick={() => ctx.nav(`/superbuscador?q=${encodeURIComponent(row.concepte)}`)} />)}</div>
-      </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+      <Head kicker="Catàleg SCT 2026" title="Catàleg d'infraccions de trànsit" desc="Nomenclàtor oficial complet (LSV, RGC, RGCond, RGV, Assegurança i CP) amb article, gravetat, quantia, DTE i punts. Usa el cercador intern per filtrar." />
+      <HtmlInline html={catalegRaw} title="Catàleg SCT 2026" />
     </div>
   );
 }
@@ -351,45 +321,41 @@ function OpLleis({ ctx }: { ctx: OCtx }) {
   );
 }
 
-/* ── PROTOCOLS ── */
-function OpProtocols({ ctx }: { ctx: OCtx }) {
-  const [open, setOpen] = useState<string | null>('SC / Penal');
+/* ── PROCEDIMENTS (SC/Penal i Trànsit, separats) ── */
+function OpProcediments({ ctx }: { ctx: OCtx }) {
+  const groups = [
+    { tone: 'night', icon: 'shield', title: 'Seguretat Ciutadana / Penal', desc: 'Identificació, escorcoll i cacheig, registres, detencions, drets del detingut i violència de gènere.', route: '/operativa/penal', items: ['Identificació', 'Escorcoll i cacheig', 'Detencions · drets', 'VioGén'] },
+    { tone: 'terracota', icon: 'car', title: 'Trànsit', desc: "Control d'alcoholèmia i drogues, accidents amb víctimes, retirada de vehicles i atestats.", route: '/operativa/trafico', items: ['Alcoholèmia', 'Drogues', 'Accidents', 'Retirades'] },
+  ];
+  const refs = [
+    { l: 'Drets del detingut', to: '/operativa/penal/drets-detingut' },
+    { l: "Taula d'actes", to: '/operativa/penal/taula-actes' },
+    { l: 'Taula de drogues', to: '/operativa/penal/taula-drogues' },
+    { l: 'Recursos penals', to: '/operativa/penal/recursos' },
+  ];
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-      <Head kicker="Procediments pas a pas" title="Protocols d'actuació" desc="Guies operatives clares per actuar amb seguretat jurídica. Toca un àmbit per desplegar." />
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        {PROTOCOLS.map((p) => { const k = toneOf(p.tone); const isOpen = open === p.area;
-          return <div key={p.area} style={{ background: A.card, borderRadius: A.rlg, border: `1px solid ${isOpen ? k.solid : A.line}`, boxShadow: A.shadow, overflow: 'hidden' }}>
-            <button onClick={() => setOpen(isOpen ? null : p.area)} style={{ width: '100%', border: 'none', cursor: 'pointer', background: 'transparent', padding: '16px 18px', display: 'flex', alignItems: 'center', gap: 14, textAlign: 'left' }}>
-              <span style={{ width: 44, height: 44, borderRadius: 13, background: k.solid, display: 'grid', placeItems: 'center', boxShadow: A.inset, flexShrink: 0 }}><Ic name="shield" size={22} color="#fff" sw={2.1} /></span>
-              <div style={{ flex: 1 }}><div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 16.5, color: A.ink }}>{p.area}</div><Mono size={10}>{p.items.length} procediments</Mono></div>
-              <span style={{ width: 34, height: 34, borderRadius: 10, background: isOpen ? k.soft : A.bgSoft, display: 'grid', placeItems: 'center', transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform .2s' }}><Ic name="chevD" size={18} color={isOpen ? k.solid : A.inkMuted} /></span>
-            </button>
-            {isOpen && <div style={{ padding: '4px 12px 12px', display: 'flex', flexDirection: 'column', gap: 4 }}>
-              {p.items.map((it, i) => <div key={it} className="a-hover" onClick={() => ctx.nav(p.route)} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 13, padding: '12px 14px', borderRadius: 12, background: A.bgSoft }}>
-                <span style={{ width: 28, height: 28, borderRadius: 8, background: k.soft, color: k.ink, display: 'grid', placeItems: 'center', fontFamily: A.mono, fontWeight: 700, fontSize: 12, flexShrink: 0 }}>{i + 1}</span>
-                <span style={{ flex: 1, fontFamily: A.display, fontWeight: 600, fontSize: 14.5, color: A.ink }}>{it}</span>
-                <Ic name="arrow" size={16} color={k.solid} /></div>)}
-            </div>}
+      <Head kicker="Procediments pas a pas" title="Procediments d'actuació" desc="Guies operatives per actuar amb seguretat jurídica, separades per àmbit: Seguretat Ciutadana / Penal i Trànsit." />
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }} className="a-grid-fork">
+        {groups.map((g) => { const k = toneOf(g.tone); const dark = g.tone === 'night';
+          const bg = dark ? `linear-gradient(150deg, #2A2D40, ${A.night})` : k.solid;
+          return <div key={g.title} className="a-hover" onClick={() => ctx.nav(g.route)} style={{ cursor: 'pointer', position: 'relative', overflow: 'hidden', borderRadius: A.rxl, backgroundImage: dark ? bg : undefined, background: dark ? undefined : bg, color: '#fff', padding: 24, boxShadow: A.shadowMd, minHeight: 210, display: 'flex', flexDirection: 'column' }}>
+            <span style={{ width: 50, height: 50, borderRadius: 14, background: 'rgba(255,255,255,0.2)', display: 'grid', placeItems: 'center', marginBottom: 14 }}><Ic name={g.icon} size={26} color="#fff" sw={2.1} /></span>
+            <h3 style={{ margin: '0 0 6px', fontFamily: A.display, fontWeight: 700, fontSize: 21, letterSpacing: -0.5, lineHeight: 1.15 }}>{g.title}</h3>
+            <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.45, opacity: 0.92 }}>{g.desc}</p>
+            <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', margin: '16px 0 0' }}>{g.items.map((it) => <span key={it} style={{ background: 'rgba(255,255,255,0.16)', borderRadius: 8, padding: '4px 10px', fontFamily: A.mono, fontWeight: 600, fontSize: 11 }}>{it}</span>)}</div>
+            <div style={{ marginTop: 'auto', paddingTop: 18 }}><span className="a-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff', color: dark ? A.night : k.solid, borderRadius: 12, padding: '10px 18px', fontFamily: A.display, fontWeight: 700, fontSize: 14, boxShadow: '0 6px 16px rgba(0,0,0,0.18)' }}>Obrir procediments <Ic name="arrow" size={15} color={dark ? A.night : k.solid} /></span></div>
           </div>; })}
       </div>
-    </div>
-  );
-}
-
-/* ── TELÈFONS ── */
-function OpTelefons() {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-      <Head kicker="Contactes d'emergència" title="Telèfons útils" desc="Accés ràpid als números clau en servei. Toca per trucar." />
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14 }}>
-        {PHONES.map((p, i) => { const k = toneOf(p.tone);
-          return <a key={i} href={`tel:${p.num}`} className="a-hover" style={{ textDecoration: 'none', background: A.card, border: `1px solid ${A.line}`, borderRadius: A.rxl, boxShadow: A.shadow, padding: 22, textAlign: 'center', display: 'block' }}>
-            <span style={{ width: 54, height: 54, borderRadius: 16, background: k.solid, display: 'grid', placeItems: 'center', margin: '0 auto 14px', boxShadow: A.inset }}><Ic name="phone" size={26} color="#fff" sw={2.1} /></span>
-            <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 30, color: A.ink, letterSpacing: -0.5 }}>{p.alt ? p.alt.split(' ')[0] : p.num}</div>
-            <div style={{ fontFamily: A.display, fontWeight: 600, fontSize: 14, color: A.inkSoft, marginTop: 2 }}>{p.label}</div>
-            {p.alt && <Mono size={10} style={{ marginTop: 4 }}>{p.alt}</Mono>}
-          </a>; })}
+      <div>
+        <RowLabel icon="doc">Referència ràpida</RowLabel>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 10 }}>
+          {refs.map((r) => <Card key={r.l} pad={14} hover onClick={() => ctx.nav(r.to)} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <span style={{ width: 36, height: 36, borderRadius: 10, background: A.blueSoft, display: 'grid', placeItems: 'center', flexShrink: 0 }}><Ic name="doc" size={18} color={A.blue} sw={2.1} /></span>
+            <span style={{ flex: 1, fontFamily: A.display, fontWeight: 700, fontSize: 14, color: A.ink }}>{r.l}</span>
+            <Ic name="chevR" size={16} color={A.inkFaint} />
+          </Card>)}
+        </div>
       </div>
     </div>
   );

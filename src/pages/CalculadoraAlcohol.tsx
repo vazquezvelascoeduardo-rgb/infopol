@@ -1,6 +1,5 @@
 // Pàgina dedicada a la calculadora d'alcoholèmia (rediseny Claude Design).
 // Accés directe des d'Operativa: /calculadora-alcohol
-import { Link } from 'react-router-dom';
 import AlcoholCalculator from '../components/AlcoholCalculator';
 import WidmarkCalculator from '../components/WidmarkCalculator';
 import { A, Ic, Mono, Card, Shell } from '../lib/design';
@@ -8,12 +7,6 @@ import { A, Ic, Mono, Card, Shell } from '../lib/design';
 export default function CalculadoraAlcohol() {
   return (
     <Shell max={780}>
-      <nav style={{ fontFamily: A.sans, fontSize: 13, color: A.inkMuted, marginBottom: 14 }}>
-        <Link to="/operativa" style={{ color: A.inkMuted, textDecoration: 'none' }}>Operativa</Link>
-        <span style={{ margin: '0 8px' }} aria-hidden>/</span>
-        <span style={{ color: A.inkSoft }}>Alcoholèmia</span>
-      </nav>
-
       <div style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `linear-gradient(150deg, ${A.pink}, #C2185B)`, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadowMd, marginBottom: 18 }}>
         <div style={{ position: 'absolute', top: -50, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
         <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', gap: 16 }}>

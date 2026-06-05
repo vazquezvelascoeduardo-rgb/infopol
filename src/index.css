@@ -6639,3 +6639,7 @@ html[data-text-size="lg"] { font-size: 18px; }
   .sb-dialog { align-items: center !important; }
   .sb-sheet { border-radius: 24px !important; }
 }
+
+/* Migues de pa (breadcrumbs) eliminades de tota la web per petició:
+   eren poc estètiques (Home › Lleis › CE78 …). */
+.crumbs { display: none !important; }
