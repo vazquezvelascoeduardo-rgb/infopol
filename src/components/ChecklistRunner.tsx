@@ -79,7 +79,7 @@ export default function ChecklistRunner({ checklist }: Props) {
           onClick={goBack}
           disabled={trail.length <= 1}
           className="inline-flex items-center gap-1 rounded-lg border px-3 py-1.5 text-sm transition
-            border-slate-200 hover:bg-slate-50 text-slate-700
+            border-line hover:bg-paper-2 text-text-2
             dark:border-white/10 dark:hover:bg-white/5 dark:text-slate-200
             disabled:opacity-40 disabled:cursor-not-allowed"
         >
@@ -90,14 +90,14 @@ export default function ChecklistRunner({ checklist }: Props) {
           onClick={restart}
           disabled={trail.length === 1}
           className="inline-flex items-center gap-1 rounded-lg border px-3 py-1.5 text-sm transition
-            border-slate-200 hover:bg-slate-50 text-slate-700
+            border-line hover:bg-paper-2 text-text-2
             dark:border-white/10 dark:hover:bg-white/5 dark:text-slate-200
             disabled:opacity-40 disabled:cursor-not-allowed"
         >
           ↻ {t('checklist.restart')}
         </button>
         {trail.length > 1 && (
-          <span className="ml-auto text-xs text-slate-500 dark:text-slate-400">
+          <span className="ml-auto text-xs text-text-3 dark:text-text-3">
             {t('checklist.step').replace('{n}', String(trail.length))}
           </span>
         )}
@@ -112,7 +112,7 @@ export default function ChecklistRunner({ checklist }: Props) {
       {/* Notes finals globals del checklist (recordatoris generals) */}
       {checklist.notes_finals && checklist.notes_finals.length > 0 && (
         <div className="rounded-xl border p-4 text-sm
-          border-slate-200 bg-slate-50 text-slate-700
+          border-line bg-paper-2 text-text-2
           dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
           <div className="text-[10px] uppercase tracking-wider font-bold mb-2 flex items-center gap-1.5">
             📌 {t('checklist.tech.finalNotes')}
@@ -140,7 +140,7 @@ function QuestionPanel({
     <>
       {/* Pregunta */}
       <header className="rounded-2xl border p-5
-        border-slate-200 bg-white
+        border-line bg-white
         dark:border-white/10 dark:bg-[#0f1d34]">
         {node.titol && (
           <div className="text-[11px] uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400/90">
@@ -153,7 +153,7 @@ function QuestionPanel({
           </h2>
         )}
         {node.info && (
-          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+          <p className="mt-2 text-sm text-text-2 dark:text-slate-300">
             ℹ️ {node.info}
           </p>
         )}
@@ -188,7 +188,7 @@ function QuestionPanel({
               onClick={() => onSelect(op.va_a)}
               className="w-full text-left flex items-center gap-3 rounded-xl border min-h-[56px] px-4 py-3 transition shadow-sm
                 hover:-translate-y-0.5 hover:shadow-md
-                border-slate-200 bg-white hover:border-blue-400/60
+                border-line bg-white hover:border-blue-400/60
                 dark:border-white/10 dark:bg-[#0f1d34] dark:hover:border-blue-400/40"
             >
               <span className="font-semibold flex-1">{op.etiqueta}</span>
@@ -708,8 +708,8 @@ function ChecklistTechnicalNotes({ checklist: c }: { checklist: Checklist }) {
     !!c.barem_oficial_sct;
   if (!hasAny) return null;
   return (
-    <details className="rounded-xl border bg-slate-50 dark:bg-white/5 dark:border-white/10
-      border-slate-200 group">
+    <details className="rounded-xl border bg-paper-2 dark:bg-white/5 dark:border-white/10
+      border-line group">
       <summary className="cursor-pointer select-none px-4 py-2.5 text-sm font-semibold flex items-center gap-2">
         <span aria-hidden>📚</span>
         {t('checklist.tech.title')}
@@ -717,7 +717,7 @@ function ChecklistTechnicalNotes({ checklist: c }: { checklist: Checklist }) {
       </summary>
       <div className="px-4 pb-4 space-y-3 text-sm">
         {c.barem_oficial_sct && (
-          <p className="italic text-slate-600 dark:text-slate-400">{c.barem_oficial_sct}</p>
+          <p className="italic text-text-2 dark:text-text-3">{c.barem_oficial_sct}</p>
         )}
         {c.comprovacions_previes && c.comprovacions_previes.length > 0 && (
           <div>
@@ -1117,7 +1117,7 @@ function PreCheckBox({
 }) {
   return (
     <div className="rounded-xl border p-4
-      border-slate-200 bg-slate-50 text-slate-700
+      border-line bg-paper-2 text-text-2
       dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
       <div className="text-[11px] uppercase tracking-wider font-bold mb-2 flex items-center gap-1.5">
         {icon && <span aria-hidden>{icon}</span>}

@@ -138,7 +138,7 @@ export default function AlcoholCalculator() {
     <div className="space-y-3">
       {/* Tipus de conductor */}
       <div>
-        <label className="block text-xs uppercase tracking-wider font-semibold text-slate-600 dark:text-slate-300 mb-1.5">
+        <label className="block text-xs uppercase tracking-wider font-semibold text-text-2 dark:text-slate-300 mb-1.5">
           {t('recursos.alcohol.driverType')}
         </label>
         <div className="grid grid-cols-2 gap-2">
@@ -155,7 +155,7 @@ export default function AlcoholCalculator() {
               className={`rounded-lg border px-3 py-2 text-sm font-medium transition
                 ${tipus === val
                   ? 'border-blue-500 bg-blue-50 text-blue-900 dark:border-blue-400 dark:bg-blue-400/15 dark:text-blue-100'
-                  : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-white/20'}`}
+                  : 'border-line bg-white text-text-2 hover:border-line dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-white/20'}`}
             >
               {lab}
             </button>
@@ -174,7 +174,7 @@ export default function AlcoholCalculator() {
           />
           <span>
             <span className="font-medium">{t('recursos.alcohol.reincident')}</span>
-            <span className="block text-[11px] text-slate-500 dark:text-slate-400">
+            <span className="block text-[11px] text-text-3 dark:text-text-3">
               {t('recursos.alcohol.reincidentHint')}
             </span>
           </span>
@@ -183,7 +183,7 @@ export default function AlcoholCalculator() {
 
       {/* Lectura mg/l */}
       <div>
-        <label htmlFor="alc-input" className="block text-xs uppercase tracking-wider font-semibold text-slate-600 dark:text-slate-300 mb-1">
+        <label htmlFor="alc-input" className="block text-xs uppercase tracking-wider font-semibold text-text-2 dark:text-slate-300 mb-1">
           {t('recursos.alcohol.reading')}
         </label>
         <div className="relative">
@@ -195,15 +195,15 @@ export default function AlcoholCalculator() {
             onChange={(e) => setLectura(e.target.value.replace(/[^0-9.,]/g, ''))}
             placeholder="0,28"
             className="w-full rounded-xl border-2 px-4 py-3 pr-16 text-base font-mono outline-none
-              border-slate-200 bg-white text-slate-900
+              border-line bg-white text-ink
               focus:border-blue-500/60 focus:ring-2 focus:ring-blue-500/20
               dark:border-white/10 dark:bg-white/5 dark:text-slate-100"
           />
-          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-slate-400 font-mono pointer-events-none">
+          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-text-3 font-mono pointer-events-none">
             mg/l
           </span>
         </div>
-        <p className="mt-1 text-[11px] text-slate-500 dark:text-slate-400">
+        <p className="mt-1 text-[11px] text-text-3 dark:text-text-3">
           {t('recursos.alcohol.readingHint')}
         </p>
       </div>
@@ -240,7 +240,7 @@ export default function AlcoholCalculator() {
         </div>
       )}
 
-      <p className="text-[11px] text-slate-500 dark:text-slate-400 italic">
+      <p className="text-[11px] text-text-3 dark:text-text-3 italic">
         {t('recursos.alcohol.disclaimer')}
       </p>
     </div>
