@@ -15,14 +15,6 @@ export default function Achievements() {
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-6">
-      <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3">
-        <Link to="/" className="hover:underline">{t('nav.home')}</Link>
-        <span className="mx-2" aria-hidden>/</span>
-        <Link to="/policia-local" className="hover:underline">{t('test.list.title')}</Link>
-        <span className="mx-2" aria-hidden>/</span>
-        <span className="text-slate-700 dark:text-slate-200">{t('test.achievements.title')}</span>
-      </nav>
-
       <header className="rounded-2xl border p-5 sm:p-6 mb-5
         border-amber-200/70 bg-gradient-to-br from-amber-50/70 via-white to-yellow-50/40
         dark:border-amber-400/30 dark:bg-gradient-to-br dark:from-[#2a210f] dark:to-[#0f1d34]">
