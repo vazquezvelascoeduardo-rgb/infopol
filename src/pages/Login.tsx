@@ -10,6 +10,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import { useT } from '../lib/i18n';
+import { A } from '../lib/design';
 
 type Mode = 'signin' | 'signup';
 
@@ -174,7 +175,7 @@ export default function Login() {
             <rect x="28.4" y="30" width="7.2" height="20" rx="3.6" fill="var(--terracotta)" />
           </svg>
         </Link>
-        <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-ink text-center">
+        <h1 className="text-2xl sm:text-3xl tracking-tight text-ink text-center" style={{ fontFamily: A.display, fontWeight: 700, letterSpacing: '-0.03em' }}>
           {isSignup ? t('auth.title.signup') : t('auth.title.signin')}
         </h1>
         <p className="text-sm text-text-2 text-center">
@@ -194,6 +195,7 @@ export default function Login() {
         </div>
       )}
 
+      <div style={{ background: A.card, border: `1px solid ${A.line}`, borderRadius: A.rxl, boxShadow: A.shadowMd, padding: 'clamp(18px,4vw,26px)' }}>
       <form onSubmit={onSubmit} className="flex flex-col gap-3">
         {isSignup && (
           <Field
@@ -328,6 +330,7 @@ export default function Login() {
             {t('auth.forgot')}
           </button>
         )}
+      </div>
       </div>
     </div>
   );

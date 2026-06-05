@@ -14,6 +14,7 @@ import { useAuth } from '../lib/auth';
 import { useT } from '../lib/i18n';
 import { updateProfile } from '../lib/db';
 import MfaSection from '../components/MfaSection';
+import { A } from '../lib/design';
 
 // Email del suport per a peticions d'eliminació de compte. Si en un
 // futur es crea support@infopol.app, canviar aquesta constant.
@@ -168,7 +169,7 @@ export default function Profile() {
           {initial}
         </div>
         <div className="flex flex-col min-w-0">
-          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-ink truncate">
+          <h1 className="text-2xl sm:text-3xl tracking-tight text-ink truncate" style={{ fontFamily: A.display, fontWeight: 700, letterSpacing: '-0.03em' }}>
             {displayName || email}
           </h1>
           {profile?.cuerpo && (
@@ -462,7 +463,7 @@ function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-xl border border-line bg-paper-2 p-4 flex flex-col gap-1">
       <span className="text-[11px] uppercase tracking-wide text-text-3">{label}</span>
-      <span className="text-2xl font-black tracking-tight text-ink">{value}</span>
+      <span className="text-2xl tracking-tight text-ink" style={{ fontFamily: A.display, fontWeight: 700, letterSpacing: '-0.02em' }}>{value}</span>
     </div>
   );
 }

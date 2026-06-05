@@ -1,14 +1,15 @@
 // Política de privacitat — explicació de què es desa i per què.
 import { useT } from '../lib/i18n';
+import { A } from '../lib/design';
 
 export default function Privacitat() {
   const { t, locale } = useT();
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-8 prose-sm">
+    <article className="mx-auto max-w-3xl px-4 py-8">
       <header className="mb-6">
-        <h1 className="text-2xl font-black tracking-tight">{t('privacy.title')}</h1>
-        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+        <h1 style={{ fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(26px,3.4vw,34px)', letterSpacing: -1, color: A.ink, margin: 0 }}>{t('privacy.title')}</h1>
+        <p style={{ marginTop: 6, fontFamily: A.mono, fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase', color: A.inkMuted }}>
           {t('privacy.updated')}: 27/04/2026
         </p>
       </header>
@@ -63,8 +64,8 @@ export default function Privacitat() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mt-6">
-      <h2 className="text-lg font-bold text-blue-800 dark:text-blue-400 mb-2">{title}</h2>
-      <div className="space-y-2 text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
+      <h2 style={{ fontFamily: A.display, fontWeight: 700, fontSize: 18, letterSpacing: -0.4, color: A.terracota, marginBottom: 8 }}>{title}</h2>
+      <div className="space-y-2 leading-relaxed" style={{ fontSize: 15, color: A.inkSoft }}>
         {children}
       </div>
     </section>
