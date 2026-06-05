@@ -52,7 +52,7 @@ export default function Privacitat() {
         <p>{t('privacy.s5.contact')}: infopol.app@proton.me</p>
       </Section>
 
-      <p className="mt-8 text-xs text-slate-500 dark:text-slate-400">
+      <p className="mt-8 text-xs text-text-3">
         {locale === 'ca'
           ? 'Aquesta política pot modificar-se. La versió vigent és la publicada en aquesta pàgina.'
           : 'Esta política puede modificarse. La versión vigente es la publicada en esta página.'}

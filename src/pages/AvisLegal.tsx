@@ -46,7 +46,7 @@ export default function AvisLegal() {
         <p>{t('legal.s6.p1')}</p>
       </Section>
 
-      <p className="mt-8 text-xs text-slate-500 dark:text-slate-400">
+      <p className="mt-8 text-xs text-text-3">
         {locale === 'ca'
           ? 'Aquest avís legal pot modificar-se en qualsevol moment. La versió vigent és la publicada en aquesta pàgina.'
           : 'Este aviso legal puede modificarse en cualquier momento. La versión vigente es la publicada en esta página.'}

@@ -79,7 +79,7 @@ export default function Achievements() {
         <Link
           to="/policia-local"
           className="inline-flex items-center gap-1 rounded-xl border px-4 py-2.5 text-sm font-semibold
-            border-slate-200 bg-white text-slate-700 hover:bg-slate-50
+            border-line bg-white text-text-2 hover:bg-paper-2
             dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
         >
           ← {t('test.backToList')}

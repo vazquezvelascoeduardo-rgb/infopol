@@ -79,14 +79,6 @@ export default function TestSession() {
       : isActualitatRoute
         ? '/actualitat'
         : '/policia-local';
-  const corpsLabel = isMossosRoute
-    ? t('mossos.title')
-    : isCulturaRoute
-      ? t('cultura.title')
-      : isActualitatRoute
-        ? 'Actualitat'
-        : t('test.list.title');
-
   // Pool de preguntes per a aquest tema (o tots, o repàs).
   // El pool de 'tot' depèn del cos d'origen: a /mossos només Mossos, a
   // /cultura-general només Cultura, a /policia-local només Policia Local.
@@ -401,14 +393,6 @@ export default function TestSession() {
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-6">
-      <nav className="text-sm text-slate-500 dark:text-slate-400 mb-3">
-        <Link to="/" className="hover:underline">{t('nav.home')}</Link>
-        <span className="mx-2" aria-hidden>/</span>
-        <Link to={corpsRoot} className="hover:underline">{corpsLabel}</Link>
-        <span className="mx-2" aria-hidden>/</span>
-        <span className="text-slate-700 dark:text-slate-200 truncate">{title}</span>
-      </nav>
-
       {state.phase === 'select' && (
         isRepas ? (
           <RepasListPhase onStart={startRepas} />
@@ -479,15 +463,14 @@ function SelectPhase({
 
   return (
     <>
-      <header className={`rounded-2xl border p-5 sm:p-6 mb-5 bg-gradient-to-br from-white to-slate-50/40
-        dark:bg-gradient-to-br dark:from-[#0f1d34] dark:to-[#0a1628] border-slate-200/70 dark:border-white/10`}>
+      <header className="rounded-2xl border border-line bg-paper-2 p-5 sm:p-6 mb-5">
         <div className="flex items-start gap-4">
           <span aria-hidden className={`inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${accent} text-3xl text-white shadow-inner`}>
             {isRepas ? '🔁' : '📝'}
           </span>
           <div className="min-w-0">
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight">{title}</h1>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+            <h1 className="text-2xl sm:text-3xl tracking-tight text-ink" style={{ fontFamily: '"Poppins","Manrope",system-ui,sans-serif', fontWeight: 700, letterSpacing: '-0.03em' }}>{title}</h1>
+            <p className="mt-1 text-sm text-text-2">
               {isRepas
                 ? t('test.repas.poolStatus').replace('{n}', String(remaining))
                 : t('test.session.poolStatus')
@@ -528,9 +511,9 @@ function SelectPhase({
           </div>
         )
       ) : (
-        <div className="rounded-2xl border p-5 border-slate-200/80 bg-white dark:bg-[#0f1d34] dark:border-white/10">
+        <div className="rounded-2xl border p-5 border-line bg-white dark:bg-[#0f1d34] dark:border-white/10">
           {/* Selector de mode */}
-          <div className="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-2">
+          <div className="text-xs uppercase tracking-wider font-semibold text-text-3 dark:text-slate-400 mb-2">
             {t('test.session.modeLabel')}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-5">
@@ -541,13 +524,13 @@ function SelectPhase({
               className={`text-left rounded-xl border-2 p-4 transition
                 ${mode === 'exam'
                   ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-400/10'
-                  : 'border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20'}`}
+                  : 'border-line bg-white hover:border-line dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20'}`}
             >
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-lg" aria-hidden>🧪</span>
                 <span className="font-bold">{t('test.session.modeExam')}</span>
               </div>
-              <div className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
+              <div className="text-xs text-text-2 dark:text-slate-300 leading-snug">
                 {t('test.session.modeExamDesc')}
               </div>
             </button>
@@ -558,19 +541,19 @@ function SelectPhase({
               className={`text-left rounded-xl border-2 p-4 transition
                 ${mode === 'study'
                   ? 'border-emerald-500 bg-emerald-50 dark:border-emerald-400 dark:bg-emerald-400/10'
-                  : 'border-slate-200 bg-white hover:border-slate-300 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20'}`}
+                  : 'border-line bg-white hover:border-line dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20'}`}
             >
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-lg" aria-hidden>🎯</span>
                 <span className="font-bold">{t('test.session.modeStudy')}</span>
               </div>
-              <div className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
+              <div className="text-xs text-text-2 dark:text-slate-300 leading-snug">
                 {t('test.session.modeStudyDesc')}
               </div>
             </button>
           </div>
 
-          <div className="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-3">
+          <div className="text-xs uppercase tracking-wider font-semibold text-text-3 dark:text-slate-400 mb-3">
             {t('test.session.howMany')}
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -580,7 +563,7 @@ function SelectPhase({
                 type="button"
                 onClick={() => onStart(n, mode)}
                 className={`rounded-xl border-2 px-4 py-3 text-base font-bold transition
-                  border-slate-200 bg-white text-slate-700 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700
+                  border-line bg-white text-text-2 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700
                   dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-blue-400 dark:hover:bg-blue-400/10`}
               >
                 {n === cappedRemaining && cappedRemaining < 50 ? `${n} (${t('test.session.allRemaining')})` : n}
@@ -603,7 +586,7 @@ function SelectPhase({
             <button
               type="button"
               onClick={onReset}
-              className="mt-4 text-xs uppercase tracking-wider font-semibold text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+              className="mt-4 text-xs uppercase tracking-wider font-semibold text-text-3 hover:text-ink dark:hover:text-slate-200"
             >
               🔄 {t('test.session.resetProgress')}
             </button>
@@ -1155,7 +1138,7 @@ function RepasListPhase({
               type="button"
               onClick={() => onStart(true)}
               className="flex-1 rounded-xl border-2 px-5 py-3 text-sm font-bold transition
-                border-slate-200 bg-white text-slate-700 hover:bg-slate-50
+                border-line bg-white text-text-2 hover:bg-paper-2
                 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
             >
               ↻ {t('test.repas.startAll').replace('{n}', String(Math.min(total, 50)))}
@@ -1319,7 +1302,7 @@ function FailureItem({ record }: { record: FailureRecord }) {
 
   return (
     <li className="rounded-xl border p-3 text-sm
-      border-slate-200 bg-white
+      border-line bg-white
       dark:border-white/10 dark:bg-[#0f1d34]">
       <div className="flex items-start gap-3">
         {topic && (
@@ -1427,7 +1410,7 @@ function TopicBadge({
     <div className={compact ? 'mb-1' : 'mb-2'}>
       <span
         className={`inline-flex items-center gap-1.5 rounded-full border font-semibold uppercase tracking-wide
-          border-slate-200 bg-slate-50 text-slate-700
+          border-line bg-paper-2 text-text-2
           dark:border-white/10 dark:bg-white/5 dark:text-slate-300
           ${compact ? 'px-2 py-0.5 text-[9px]' : 'px-2.5 py-1 text-[10px]'}`}
       >
