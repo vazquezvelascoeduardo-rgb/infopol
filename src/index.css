@@ -3805,6 +3805,16 @@ html[data-text-size="lg"] { font-size: 18px; }
   .opt:not([disabled]):hover { transform: translateY(-2px); }
   .opt:not([disabled]):active { transform: translateY(0); }
 
+  /* ── Home (disseny "tria el teu mode") ── */
+  .h-mode { transition: transform .18s cubic-bezier(.2,.7,.3,1), box-shadow .18s; }
+  .h-mode:hover { transform: translateY(-5px); box-shadow: 0 30px 70px rgba(21,21,28,0.22); }
+  .h-btn { transition: transform .12s, filter .12s; }
+  .h-mode:hover .h-btn { filter: brightness(1.05); }
+  @media (max-width: 900px) {
+    .h-grid { grid-template-columns: 1fr !important; }
+    .h-hero { font-size: 38px !important; }
+  }
+
   /* ── Acadèmia (disseny dashboard) ── */
   .a-hover { transition: transform .14s cubic-bezier(.2,.7,.3,1), box-shadow .14s; }
   .a-hover:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(21,21,28,0.05), 0 18px 40px rgba(21,21,28,0.12); }

@@ -107,10 +107,10 @@ export default function Layout({ children }: { children: ReactNode }) {
     }
   }
 
-  // L'Acadèmia té el seu propi shell complet (sidebar + topbar + nav);
-  // amaguem el chrome global de l'app en aquesta ruta per no duplicar-lo.
-  const isAcademia = location.pathname === '/academia';
-  if (isAcademia) {
+  // L'Acadèmia i l'Operativa tenen el seu propi shell complet (sidebar +
+  // topbar + nav); amaguem el chrome global de l'app en aquestes rutes.
+  const isFullShell = location.pathname === '/academia' || location.pathname === '/operativa';
+  if (isFullShell) {
     return (
       <div className="min-h-dvh bg-paper text-ink">
         {children}
