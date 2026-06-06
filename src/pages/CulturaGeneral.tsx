@@ -53,8 +53,10 @@ export default function CulturaGeneral() {
           <p>{t('cultura.zoneSubtitle').replace('{n}', String(totalQuestions))}</p>
         </header>
 
-        {/* 2 modes: Temari de repàs (estudi) + Test mesclat */}
-        <div className="tests-zone-modes" style={{ gridTemplateColumns: '1fr 1fr' }}>
+        {/* 2 modes: Temari de repàs (estudi) + Test mesclat.
+            (Sense gridTemplateColumns inline: la classe ja fa 2 columnes a
+            desktop i 1 a mòbil; l'inline trencava el responsive.) */}
+        <div className="tests-zone-modes">
           {/* Temari de repàs (fitxa d'estudi nova) */}
           <Link
             to="/cultura-general/temari"
