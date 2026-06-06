@@ -1052,6 +1052,136 @@ const VMP: EsquemaLlei = {
   labels: { items: 'Conceptes i infraccions', itemsTab: 'Conceptes' },
 };
 
+// ═══════════════════════════════════════════════════════════════
+// ORDENANÇA PLATGES VILADECANS (2013)
+// Focus: aplicació operativa PL — qualificació d'infraccions per platja
+// i gravetat. Tot basat en el text real de l'ordenança (39 art · 5 títols).
+// ═══════════════════════════════════════════════════════════════
+const PLATGES_ERAS: LleiEra[] = [
+  { id: 'platges', name: 'Les 4 platges', range: 'zonificació', color: '#0E8A8A', soft: '#CDEDED' },
+  { id: 'disposicions', name: 'Disposicions', range: 'art. 1 — 6', color: '#6E5D38', soft: '#EFE7CF' },
+  { id: 'normes', name: "Normes d'ús · Títol I", range: 'art. 7 — 23', color: '#3B6BF5', soft: '#D8E2FE' },
+  { id: 'higiene', name: 'Higienicosanitàries · II', range: 'art. 24 — 31', color: '#1FB286', soft: '#CDF0E1' },
+  { id: 'vigilancia', name: 'Vigilància i banderes · III', range: 'art. 32 — 35', color: '#E89A1C', soft: '#FBE7C2' },
+  { id: 'infraccions', name: 'Infraccions · Títol IV', range: 'art. 36 — 38', color: '#C0392B', soft: '#F4D2CE' },
+  { id: 'sancions', name: 'Sancions · Títol V', range: 'art. 39', color: '#9C7A2A', soft: '#F4E6BC' },
+];
+const PLATGES_TIMELINE: LleiMilestone[] = [
+  { eraId: 'disposicions', date: '31 GEN 2013', title: 'Aprovació definitiva', note: "Ple de l'Ajuntament de Viladecans.", star: true },
+  { eraId: 'disposicions', date: '7 MAI 2013', title: 'Publicació al BOPB', note: 'Butlletí Oficial de la Província de Barcelona.', star: true },
+  { eraId: 'disposicions', date: '7 MAI 2013', title: 'Entrada en vigor', note: '39 articles · 5 títols · 2.650 m de litoral. Vigent.', star: true },
+  { eraId: 'normes', date: '15 MAI – 15 SET', title: 'Temporada de platja', note: "Període d'afluència segons el Pla d'usos de la Generalitat.", star: true, itemId: 'art-3' },
+  { eraId: 'normes', date: '1 JUN – 30 SET', title: 'Finestra de kitesurf', note: "Permès només si està al Pla d'usos. Mai a Cal Francès ni Remolar.", itemId: 'art-13' },
+  { eraId: 'normes', date: '15 MAI – 15 SET', title: 'Pesca amb canya restringida', note: 'Només de 20.00 a 8.00 h, als espigons i línia no abalisada.', itemId: 'art-17' },
+  { eraId: 'normes', date: '16 SET – 14 MAI', title: 'Pesca amb canya lliure', note: 'Fora de Cal Francès i Remolar (prohibida tot l\'any).', itemId: 'art-17' },
+];
+const PLATGES_ITEMS: LleiItem[] = [
+  // ── Les 4 platges ──
+  { id: 'platja-murtra', name: 'La Murtra', eraId: 'platges', initials: 'MU', icon: 'flag',
+    period: "Entre l'estany i l'espigó", role: 'Platja urbana',
+    fact: 'Gossos permesos FORA de temporada (lligats + collar + xip). Nudisme PROHIBIT → infracció lleu.' },
+  { id: 'platja-pineda', name: 'La Pineda', eraId: 'platges', initials: 'PI', icon: 'flag',
+    period: 'La més extensa', role: 'Platja de serveis',
+    fact: 'Concentra serveis i banyistes. Gossos permesos fora de temporada. Nudisme PROHIBIT → infracció lleu.' },
+  { id: 'platja-calfrances', name: 'Cal Francès', eraId: 'platges', initials: 'CF', icon: 'flag',
+    period: 'Xarxa Natura 2000', role: 'Espai protegit',
+    fact: 'Sense serveis. Nudisme PERMÈS. Animals i pesca PROHIBITS TOT L\'ANY.' },
+  { id: 'platja-remolar', name: 'El Remolar', eraId: 'platges', initials: 'RE', icon: 'flag',
+    period: 'Xarxa Natura 2000', role: 'Conservació prioritària',
+    fact: 'Nudisme PERMÈS. Navegació esportiva i kitesurf PROHIBITS TOT L\'ANY.' },
+  // ── Disposicions generals ──
+  { id: 'art-3', name: 'Art. 3', eraId: 'disposicions', initials: '3', icon: 'scroll',
+    period: 'Definicions clau', role: 'Conceptes',
+    fact: 'Zona de bany: aigües senyalitzades; si NO abalisada, 200 m de mar des de la costa. Zona de varada: embarcar/desembarcar. Temporada: 15 maig – 15 set. Zona dunar protegida: hàbitat europeu prioritari, pas prohibit.' },
+  { id: 'art-5', name: 'Art. 5', eraId: 'disposicions', initials: '5', icon: 'scroll',
+    period: 'Servitud de trànsit', role: 'Servituds (Llei de Costes)',
+    fact: 'Ha de quedar PERMANENTMENT LLIURE per al pas públic i els vehicles de vigilància/salvament. Amplada normal 6 m, ampliable fins a 20 m en llocs perillosos. Interrompre-la = infracció GREU (38.4.a).' },
+  // ── Normes d'ús · Títol I ──
+  { id: 'art-8', name: 'Art. 8.4', eraId: 'normes', initials: '8', icon: 'flag',
+    period: 'Nudisme', role: '⭐ Clau PL',
+    fact: 'El nudisme queda restringit EXCLUSIVAMENT a Cal Francès i El Remolar. A la Murtra i la Pineda està prohibit → infracció LLEU (38.5.v), fins a 750 €.' },
+  { id: 'art-13', name: 'Arts. 13–14', eraId: 'normes', initials: '14', icon: 'sword',
+    period: 'Navegació i kitesurf', role: 'Limitacions',
+    fact: 'Navegació esportiva prohibida a zones de bany abalisades i al Remolar. Velocitat màx. 3 nusos a zones no abalisades. Kitesurf només si és al Pla d\'usos (1 jun – 30 set), MAI a Cal Francès ni Remolar.' },
+  { id: 'art-15', name: 'Art. 15', eraId: 'normes', initials: '15', icon: 'sword',
+    period: 'Vehicles a la platja', role: '⭐ Clau PL',
+    fact: 'Prohibit estacionar/circular vehicles motoritzats. EXCEPCIONS: neteja, manteniment, vigilància, urgències, salvament i cadires de discapacitats. Vehicles policials (PL/Mossos), sanitaris i salvament autoritzats. Sense autorització = GREU (38.4.c).' },
+  { id: 'art-16', name: 'Art. 16', eraId: 'normes', initials: '16', icon: 'scroll',
+    period: 'Acampada i pernoctar', role: 'Infracció lleu',
+    fact: 'Prohibides totes les acampades a la platja i a l\'aparcament: tendes, ombrel·les no diàfanes, vehicles habitables, remolcs. Pernoctar = acampar. Infracció LLEU (38.5.i).' },
+  { id: 'art-17', name: 'Art. 17', eraId: 'normes', initials: '17', icon: 'sword',
+    period: 'Pesca recreativa', role: 'Infracció greu',
+    fact: 'Cal Francès i Remolar: prohibida TOT L\'ANY. Resta: amb canya, 16 set – 14 maig lliure; 15 maig – 15 set només 20.00–8.00 h als espigons. Pesca amb ARPÓ: prohibida SEMPRE. Incomplir + abandonar hams = GREU (38.4.r,s).' },
+  { id: 'art-21', name: 'Art. 21', eraId: 'normes', initials: '21', icon: 'crown',
+    period: 'Venda ambulant i comís', role: '⭐ Clau PL',
+    fact: 'Prohibida la venda ambulant i la compra; també massatges/tatuatges sense autorització. ⭐ Art. 21.4: els agents poden COMISSAR productes (es retornen un cop pagada la multa, amb acta de comís + acta de denúncia). Venda = LLEU (38.5.g).' },
+  // ── Higienicosanitàries · Títol II ──
+  { id: 'art-25', name: 'Art. 25', eraId: 'higiene', initials: '25', icon: 'crown',
+    period: 'Animals domèstics', role: '⭐ Clau PL',
+    fact: 'Murtra/Pineda: prohibits en temporada; fora temporada lligats + collar + xip. Cal Francès/Remolar: prohibits TOT L\'ANY. Cavalls: prohibits tot l\'any. ⭐ Gossos pigall SEMPRE permesos. Morrió obligatori en races perilloses.' },
+  { id: 'art-26', name: 'Art. 26', eraId: 'higiene', initials: '26', icon: 'scroll',
+    period: 'Necessitats fisiològiques', role: 'Lleu o greu',
+    fact: 'Prohibida l\'evacuació fisiològica al mar o a la sorra; obligatori usar les cabines sanitàries. SENSE usuaris a la vora = LLEU (38.5.e); AMB usuaris a la vora = GREU (38.4.g).' },
+  { id: 'art-28', name: 'Art. 28', eraId: 'higiene', initials: '28', icon: 'sword',
+    period: 'Foc, barbacoes i bombones', role: 'Lleu o greu',
+    fact: 'Prohibit encendre/mantenir foc sense autorització. Foc simple = LLEU (38.5.l). Amb BOMBONES de gas o líquids inflamables = GREU (38.4.h), 750 – 1.500 €.' },
+  { id: 'art-31', name: 'Art. 31', eraId: 'higiene', initials: '31', icon: 'scroll',
+    period: 'Zona dunar protegida', role: '⭐ Infracció greu',
+    fact: 'Prohibit trepitjar/arrencar/danyar la vegetació, agafar flors/fruits, caçar o matar fauna i circular dins els espais dunars delimitats. Infraccions GREUS (38.4.o,p,q).' },
+  // ── Vigilància i banderes · Títol III ──
+  { id: 'art-34', name: 'Art. 34', eraId: 'vigilancia', initials: '34', icon: 'flag',
+    period: 'Banderes de bany', role: '⭐ Clau PL',
+    fact: '🟢 Verda: bany lliure. 🟡 Groga: risc moderat (onades ≤1,5 m, corrents mitjans, meduses). 🔴 Vermella: bany PROHIBIT (onades >2 m, corrents forts). Banderes 1,5×1 m en pals ≥3 m. La PL pot OBLIGAR a sortir de l\'aigua. No respectar la vermella = GREU (38.4.i).' },
+  // ── Infraccions · Títol IV ──
+  { id: 'art-38', name: 'Art. 38', eraId: 'infraccions', initials: '38', icon: 'sword',
+    period: 'Les 3 categories', role: 'Tipificació',
+    fact: 'MOLT GREUS (38.3): ocupació sense títol · vandalisme amb risc. GREUS (38.4): vehicle motor, grafits, bandera vermella, pesca prohibida, foc amb bombona, conductes DISCRIMINATÒRIES (+ valorar art. 510 CP). LLEUS (38.5): acampada, venda ambulant, nudisme en zona no permesa, soroll (previ advertiment).' },
+  // ── Sancions · Títol V ──
+  { id: 'art-39', name: 'Art. 39', eraId: 'sancions', initials: '39', icon: 'crown',
+    period: 'Quanties i procediment', role: '⭐ Clau PL',
+    fact: 'Lleu fins 750 € · Greu 750,01 – 1.500 € · Molt greu 1.500,01 – 3.000 €. Potestat sancionadora: l\'ALCALDE (delegable). Procediment: Ordenança Sancionadora de Viladecans + supletòriament Decret 278/1993 i Lleis 39/2015 i 40/2015.' },
+];
+const PLATGES_EXAM: LleiExamItem[] = [
+  { date: '31 gen 2013 · BOPB 7 maig', text: 'Aprovació definitiva i publicació. En vigor 07/05/2013. Vigent.' },
+  { date: '39 art. · 5 títols', text: '2.650 m de litoral. Base: art. 115 Llei 22/1988 de Costes + arts. 139-141 LRBRL.' },
+  { date: '3 graus de multa', text: 'Lleu ≤ 750 € · Greu 750–1.500 € · Molt greu 1.500–3.000 €. Sanciona l\'ALCALDE (art. 39).' },
+  { date: '4 platges', text: 'Murtra i Pineda (urbanes) · Cal Francès i Remolar (Xarxa Natura 2000, protegides).' },
+  { date: 'Nudisme', text: 'Només a Cal Francès i Remolar. A Murtra/Pineda = lleu (38.5.v).' },
+  { date: 'Animals', text: 'Murtra/Pineda temporada prohibits · Cal Francès/Remolar tot l\'any · pigall SEMPRE permès.' },
+  { date: 'Vehicles motor', text: 'Infracció GREU (38.4.c). Excepcions: PL/Mossos, neteja, urgències, salvament i discapacitats.' },
+  { date: 'Servitud de trànsit', text: '6 m permanentment lliures (fins 20 m). Interrompre-la = greu (38.4.a).' },
+  { date: 'Banderes', text: 'Verda lliure · Groga risc moderat · Vermella bany PROHIBIT. La PL pot fer sortir de l\'aigua.' },
+  { date: 'Art. 21.4', text: 'Els agents poden COMISSAR productes de venda ambulant (es retornen pagada la multa).' },
+  { date: 'Foc', text: 'Simple = lleu (38.5.l) · amb bombona/líquids inflamables = GREU (38.4.h).' },
+  { date: 'Pesca', text: 'Arpó SEMPRE prohibit · Cal Francès/Remolar prohibida tot l\'any · canya amb horaris segons temporada.' },
+];
+const ORDENANCA_PLATGES: EsquemaLlei = {
+  id: 'esq-pl-platges-viladecans',
+  slug: 'ordenanca-platges-viladecans',
+  categoria: 'municipi',
+  kicker: 'POLICIA LOCAL · PLATGES VILADECANS',
+  title: 'Platges',
+  titleHighlight: 'Viladecans',
+  introOneLiner: "Ordenança d'ús de les platges de Viladecans (2013). 39 articles, 5 títols. Regula ús, normes higienicosanitàries, vigilància, banderes, infraccions i sancions. Aplicació operativa per a la Policia Local: qualificació per platja i gravetat.",
+  kpis: [
+    { value: '07/05/2013', label: 'en vigor', mono: true },
+    { value: '39', label: 'articles' },
+    { value: '5', label: 'títols' },
+    { value: '4', label: 'platges' },
+    { value: '3.000 €', label: 'multa màx.', mono: true },
+  ],
+  eras: PLATGES_ERAS,
+  timeline: PLATGES_TIMELINE,
+  items: PLATGES_ITEMS,
+  exam: PLATGES_EXAM,
+  labels: {
+    eras: 'Títols i zones',
+    timeline: 'Calendari i tràmits',
+    items: 'Articles clau',
+    itemsTab: 'Articles',
+  },
+};
+
 // ─── Registre d'esquemes de PL disponibles ─────────────────────
 const ESQUEMAS_PL: Record<string, EsquemaLlei> = {
   [CE_1978.slug]: CE_1978,
@@ -1068,6 +1198,7 @@ const ESQUEMAS_PL: Record<string, EsquemaLlei> = {
   [REG_ARMES.slug]: REG_ARMES,
   [DECRET_219_1996.slug]: DECRET_219_1996,
   [LRBRL.slug]: LRBRL,
+  [ORDENANCA_PLATGES.slug]: ORDENANCA_PLATGES,
   [BALISES_V16.slug]: BALISES_V16,
   [VMP.slug]: VMP,
 };
