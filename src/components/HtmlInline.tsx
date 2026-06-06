@@ -154,34 +154,42 @@ const BASE_LAYOUT_CSS = `
 
   /* El min-width:0 global (anti-overflow) feia que els TÍTOLS dins de
      capçaleres flex s'encongissin fins partir-se lletra a lletra
-     ("D / a / n / y / s"). Restaurem una amplada mínima sensata: que el
-     títol no baixi de l'amplada del seu mot més llarg i faci wrap per
-     paraules (o salti a una línia nova en lloc d'esprémer-se). */
-  .${SCOPE_CLASS} .ttl,
-  .${SCOPE_CLASS} .s-title,
-  .${SCOPE_CLASS} .cp-card-title,
-  .${SCOPE_CLASS} .alc-card-title,
-  .${SCOPE_CLASS} .cat-header h2,
+     ("F / u / r / t"). Restaurem min-content per a QUALSEVOL títol, sigui
+     quin sigui el nom de classe que faci servir cada fitxa (n'hi ha de
+     molts: .ttl, .delito-name, .delicte-title, .bloque-nombre, .s-title…). */
+  .${SCOPE_CLASS} h1, .${SCOPE_CLASS} h2, .${SCOPE_CLASS} h3,
+  .${SCOPE_CLASS} h4, .${SCOPE_CLASS} h5, .${SCOPE_CLASS} h6,
+  .${SCOPE_CLASS} [class*="title"],
+  .${SCOPE_CLASS} [class*="name"],
+  .${SCOPE_CLASS} [class*="nombre"],
+  .${SCOPE_CLASS} [class*="ttl"],
   .${SCOPE_CLASS} .nom-header,
   .${SCOPE_CLASS} .sec-head {
     min-width: min-content !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
   }
 
-  /* A mòbil, les capçaleres de bloc (títol + metadades/etiquetes)
-     s'apilen en vertical perquè el títol tingui tota l'amplada. */
+  /* A mòbil, les capçaleres de bloc (badge/etiqueta + títol + gravetat)
+     s'apilen en vertical perquè el títol tingui tota l'amplada i res
+     quedi esprémut. Cobreix els patrons de totes les fitxes. */
   @media (max-width: 600px) {
     .${SCOPE_CLASS} .delicte-head,
-    .${SCOPE_CLASS} .cat-header {
+    .${SCOPE_CLASS} .delito-head,
+    .${SCOPE_CLASS} .delito-top,
+    .${SCOPE_CLASS} .cat-header,
+    .${SCOPE_CLASS} .bloque-head,
+    .${SCOPE_CLASS} .header-top,
+    .${SCOPE_CLASS} .ficha-head {
       flex-direction: column !important;
       align-items: flex-start !important;
       gap: 8px !important;
     }
-    .${SCOPE_CLASS} .delicte-head .ttl,
-    .${SCOPE_CLASS} .delicte-head .meta {
-      width: 100% !important;
-      min-width: 0 !important;
+    .${SCOPE_CLASS} .delicte-head > *,
+    .${SCOPE_CLASS} .delito-head > *,
+    .${SCOPE_CLASS} .cat-header > * {
+      max-width: 100% !important;
     }
-    .${SCOPE_CLASS} .delicte-head .meta { flex-wrap: wrap; }
   }
 
   /* Files de chips / badges / classes que han de poder fer wrap */
