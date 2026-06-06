@@ -936,6 +936,17 @@ const actualitat: TestTopic = {
       ],
       correct: 0,
     },
+    {
+      id: 'actualitat-93',
+      text: 'Qui va guanyar l\'Oscar a la Millor Actriu Protagonista a la 97a edició (2025), per "Anora"?',
+      options: [
+        'Mikey Madison',
+        'Emma Stone',
+        'Demi Moore',
+        'Fernanda Torres',
+      ],
+      correct: 0,
+    },
   ],
 };
 
