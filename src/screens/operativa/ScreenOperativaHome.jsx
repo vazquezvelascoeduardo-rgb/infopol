@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
@@ -42,6 +43,55 @@ function Chip({ icon, label }) {
   );
 }
 
+const CAT_COLORS = {
+  politica:      { solid: T.cat.operativa.solid, soft: T.cat.operativa.soft, ink: T.cat.operativa.ink },
+  economia:      { solid: T.cat.leyes.solid,     soft: T.cat.leyes.soft,     ink: T.cat.leyes.ink },
+  cultura:       { solid: T.cat.academia.solid,  soft: T.cat.academia.soft,  ink: T.cat.academia.ink },
+  descobriments: { solid: T.cat.atajos.solid,    soft: T.cat.atajos.soft,    ink: T.cat.atajos.ink },
+  premis:        { solid: T.cat.psico.solid,     soft: T.cat.psico.soft,     ink: T.cat.psico.ink },
+  esports:       { solid: T.cat.transito.solid,  soft: T.cat.transito.soft,  ink: T.cat.transito.ink },
+  policial:      { solid: T.cat.alcohol.solid,   soft: T.cat.alcohol.soft,   ink: T.cat.alcohol.ink },
+};
+
+const GEO_COLORS = {
+  Catalunya:     T.cat.operativa.solid,
+  Espanya:       T.cat.alcohol.solid,
+  Internacional: T.cat.atajos.solid,
+};
+
+function NoticiaCard({ article }) {
+  const cat = CAT_COLORS[article.category] || CAT_COLORS.cultura;
+  const geoColor = GEO_COLORS[article.geo] || T.inkMuted;
+
+  function handleOpen() {
+    if (article.url) window.open(article.url, '_blank', 'noopener');
+  }
+
+  return (
+    <div
+      style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${cat.solid}`, boxShadow: T.shadow.card, cursor: article.url ? 'pointer' : 'default' }}
+      onClick={handleOpen}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 5, flexWrap: 'wrap' }}>
+        <span style={{ fontSize: 9.5, fontWeight: 800, color: cat.ink, background: cat.soft, padding: '2px 7px', borderRadius: T.r.pill, letterSpacing: 0.4, textTransform: 'uppercase' }}>
+          {article.tag}
+        </span>
+        <span style={{ fontSize: 9.5, fontWeight: 700, color: geoColor, letterSpacing: 0.3 }}>
+          {article.geo}
+        </span>
+        <span style={{ fontFamily: T.fontMono, fontSize: 9.5, color: T.inkFaint, marginLeft: 'auto' }}>
+          {article.dateLabel}
+        </span>
+        {article.url && (
+          <Icon name="arrow-up-right" size={12} color={T.inkMuted} />
+        )}
+      </div>
+      <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{article.title}</div>
+      <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{article.desc}</div>
+    </div>
+  );
+}
+
 const NEWS = [
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
@@ -50,6 +100,18 @@ const NEWS = [
 
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
+  const [noticias, setNoticias] = useState([]);
+  const [noticiesVistes, setNoticiesVistes] = useState(false);
+
+  useEffect(() => {
+    fetch('/data/noticias.json')
+      .then(r => r.json())
+      .then(d => setNoticias(d.articles || []))
+      .catch(() => {});
+  }, []);
+
+  const noticiesVisibles = noticiesVistes ? noticias : noticias.slice(0, 6);
+
   return (
     <div className="screen">
       <StatusBar />
@@ -136,6 +198,28 @@ export default function ScreenOperativaHome() {
           ))}
         </div>
       </div>
+
+      {/* Notícies generals */}
+      {noticias.length > 0 && (
+        <div style={{ padding: '18px 0 24px' }}>
+          <SectionHead kicker="Diari" kickerColor={T.cat.leyes.solid} title="Notícies del dia" />
+          <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {noticiesVisibles.map(a => (
+              <NoticiaCard key={a.id} article={a} />
+            ))}
+          </div>
+          {noticias.length > 6 && (
+            <div style={{ padding: '10px 16px 0', textAlign: 'center' }}>
+              <button
+                onClick={() => setNoticiesVistes(v => !v)}
+                style={{ background: 'none', border: `1px solid ${T.hairlineStrong}`, borderRadius: T.r.pill, padding: '7px 18px', fontSize: 12, fontWeight: 700, color: T.inkSoft, cursor: 'pointer' }}
+              >
+                {noticiesVistes ? 'Veure menys ↑' : `Veure totes (${noticias.length}) →`}
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

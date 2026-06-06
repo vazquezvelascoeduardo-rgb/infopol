@@ -1,0 +1,93 @@
+{
+  "lastUpdated": "2026-06-06",
+  "articles": [
+    {
+      "id": "20260606-001",
+      "date": "2026-06-06",
+      "dateLabel": "06·06",
+      "tag": "Política",
+      "category": "politica",
+      "geo": "Catalunya",
+      "title": "Salvador Illa anuncia un pla d'inversió de 800 M€ en infraestructures",
+      "desc": "La Generalitat destinarà el pressupost a xarxa ferroviària, hospitals i habitatge social fins al 2028.",
+      "url": "https://www.ara.cat"
+    },
+    {
+      "id": "20260606-002",
+      "date": "2026-06-06",
+      "dateLabel": "06·06",
+      "tag": "Economia",
+      "category": "economia",
+      "geo": "Espanya",
+      "title": "L'atur baixa per desè mes consecutiu i se situa al 10,2 %",
+      "desc": "El mercat laboral crea 85.000 llocs de treball nous al mes de maig, el millor registre des del 2019.",
+      "url": "https://elpais.com"
+    },
+    {
+      "id": "20260606-003",
+      "date": "2026-06-06",
+      "dateLabel": "06·06",
+      "tag": "Esports",
+      "category": "esports",
+      "geo": "Internacional",
+      "title": "El Barça guanya la Champions League davant el Manchester City (2-1)",
+      "desc": "Lamine Yamal i Raphinha firmen els dos gols de la remontada a Munic en la final europea.",
+      "url": "https://www.sport.es"
+    },
+    {
+      "id": "20260606-004",
+      "date": "2026-06-06",
+      "dateLabel": "06·06",
+      "tag": "Policial",
+      "category": "policial",
+      "geo": "Catalunya",
+      "title": "Detinguda una xarxa de frau de vehicles d'alta gamma a Barcelona",
+      "desc": "Els Mossos d'Esquadra i la Policia Nacional desmantellen l'organització amb 14 detinguts i 30 cotxes recuperats.",
+      "url": "https://www.lavanguardia.com"
+    },
+    {
+      "id": "20260606-005",
+      "date": "2026-06-06",
+      "dateLabel": "06·06",
+      "tag": "Descobriments",
+      "category": "descobriments",
+      "geo": "Internacional",
+      "title": "Científics troben indicis de vida microbiana a Mart en mostres de la missió Perseverance",
+      "desc": "L'anàlisi de roques sedimentàries revela compostos orgànics complexos incompatibles amb processos purament geològics.",
+      "url": "https://www.bbc.com"
+    },
+    {
+      "id": "20260606-006",
+      "date": "2026-06-06",
+      "dateLabel": "06·06",
+      "tag": "Cultura",
+      "category": "cultura",
+      "geo": "Catalunya",
+      "title": "El TNC estrena 'El llac de les ànimes', una obra de Carles Batlle sobre la memòria",
+      "desc": "La producció compta amb 20 actors i una posada en escena immersiva que combina teatre i videoinstal·lació.",
+      "url": "https://www.elperiodico.com"
+    },
+    {
+      "id": "20260606-007",
+      "date": "2026-06-06",
+      "dateLabel": "06·06",
+      "tag": "Premis",
+      "category": "premis",
+      "geo": "Internacional",
+      "title": "L'escriptor Jaume Cabré guanya el Premi Europeu de Literatura 2026",
+      "desc": "L'autor de 'Les veus del Pamano' és reconegut per la seva contribució a la narrativa europea contemporània.",
+      "url": "https://www.ara.cat"
+    },
+    {
+      "id": "20260606-008",
+      "date": "2026-06-06",
+      "dateLabel": "06·06",
+      "tag": "Política",
+      "category": "politica",
+      "geo": "Espanya",
+      "title": "El Congrés aprova per majoria la reforma de la llei d'habitatge",
+      "desc": "La nova regulació limita els lloguers en zones tensionades i preveu sancions de fins a 600.000 € per als grans tenidors.",
+      "url": "https://elpais.com"
+    }
+  ]
+}
