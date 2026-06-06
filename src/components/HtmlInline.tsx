@@ -152,6 +152,38 @@ const BASE_LAYOUT_CSS = `
     max-width: 100% !important;
   }
 
+  /* El min-width:0 global (anti-overflow) feia que els TÍTOLS dins de
+     capçaleres flex s'encongissin fins partir-se lletra a lletra
+     ("D / a / n / y / s"). Restaurem una amplada mínima sensata: que el
+     títol no baixi de l'amplada del seu mot més llarg i faci wrap per
+     paraules (o salti a una línia nova en lloc d'esprémer-se). */
+  .${SCOPE_CLASS} .ttl,
+  .${SCOPE_CLASS} .s-title,
+  .${SCOPE_CLASS} .cp-card-title,
+  .${SCOPE_CLASS} .alc-card-title,
+  .${SCOPE_CLASS} .cat-header h2,
+  .${SCOPE_CLASS} .nom-header,
+  .${SCOPE_CLASS} .sec-head {
+    min-width: min-content !important;
+  }
+
+  /* A mòbil, les capçaleres de bloc (títol + metadades/etiquetes)
+     s'apilen en vertical perquè el títol tingui tota l'amplada. */
+  @media (max-width: 600px) {
+    .${SCOPE_CLASS} .delicte-head,
+    .${SCOPE_CLASS} .cat-header {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 8px !important;
+    }
+    .${SCOPE_CLASS} .delicte-head .ttl,
+    .${SCOPE_CLASS} .delicte-head .meta {
+      width: 100% !important;
+      min-width: 0 !important;
+    }
+    .${SCOPE_CLASS} .delicte-head .meta { flex-wrap: wrap; }
+  }
+
   /* Files de chips / badges / classes que han de poder fer wrap */
   .${SCOPE_CLASS} .pena-row,
   .${SCOPE_CLASS} .badge-row,
