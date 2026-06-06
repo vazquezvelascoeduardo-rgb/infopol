@@ -152,6 +152,25 @@ const BASE_LAYOUT_CSS = `
     max-width: 100% !important;
   }
 
+  /* A mòbil, el contenidor exterior de la fitxa treu el padding lateral
+     perquè el contingut aprofiti tota l'amplada (només queden els ~12px
+     de marge del shell; les targetes interiors ja tenen el seu propi
+     padding per al text). Evita l'efecte "calaix". */
+  @media (max-width: 560px) {
+    .${SCOPE_CLASS} {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    .${SCOPE_CLASS} .poster,
+    .${SCOPE_CLASS} .wrapper,
+    .${SCOPE_CLASS} .container,
+    .${SCOPE_CLASS} .content,
+    .${SCOPE_CLASS} .cat-content {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+
   /* El min-width:0 global (anti-overflow) feia que els TÍTOLS dins de
      capçaleres flex s'encongissin fins partir-se lletra a lletra
      ("F / u / r / t"). Restaurem min-content per a QUALSEVOL títol, sigui
@@ -212,19 +231,18 @@ const BASE_LAYOUT_CSS = `
   .${SCOPE_CLASS} .penas {
     flex-wrap: wrap !important;
   }
-  /* Graelles que tenen 2-3 columnes a desktop → 1 columna a mòbil */
+  /* Graelles a 1 columna a mòbil — REGLA AMPLA: qualsevol contenidor amb
+     "grid" al nom de classe (.delito-grid, .delicte-cells, .alc-grid,
+     .clas-grid, .two-col…) passa a una sola columna perquè el text no es
+     comprimeixi en columnes estretes (efecte "calaix"). S'exclou el
+     nomenclàtor, que manté la seva graella de 3 columnes pròpia. */
   @media (max-width: 600px) {
+    .${SCOPE_CLASS} [class*="grid"]:not(.nomenclator),
     .${SCOPE_CLASS} .two-col,
-    .${SCOPE_CLASS} .clas-grid,
     .${SCOPE_CLASS} .clasificacion,
-    .${SCOPE_CLASS} .alc-grid,
-    .${SCOPE_CLASS} .cons-grid,
-    .${SCOPE_CLASS} .infraction-grid,
-    .${SCOPE_CLASS} .class-grid,
-    /* Rebrand 2026 — .delicte-cells és un grid 1fr/auto al disseny
-       print; al mòbil va a 1 columna perquè les penes baixin sota el
-       text en lloc de comprimir-lo. */
-    .${SCOPE_CLASS} .delicte-cells {
+    .${SCOPE_CLASS} .delicte-cells,
+    .${SCOPE_CLASS} .delito-grid,
+    .${SCOPE_CLASS} .delito-top {
       grid-template-columns: 1fr !important;
     }
     .${SCOPE_CLASS} .nomenclator {
