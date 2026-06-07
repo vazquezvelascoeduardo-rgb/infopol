@@ -157,7 +157,6 @@ const ROADS: { id: Road; label: string }[] = [
 const BOARD = { w: 1680, h: 1120 };
 
 let counter = 0;
-const uid = () => `el-${++counter}`;
 
 // Persistència: carrega l'escena desada i sincronitza el comptador d'ids.
 function loadScene(): Scene | null {
@@ -735,8 +734,17 @@ export default function Croquis() {
 
   const selEl = useMemo(() => els.find((e) => e.id === sel) || null, [els, sel]);
 
+  // Genera un id únic garantit (per damunt de qualsevol existent),
+  // robust davant de recàrregues, imports o desincronitzacions del comptador.
+  function nextId() {
+    let max = counter;
+    for (const e of els) { const n = parseInt(String(e.id).replace('el-', '')); if (n > max) max = n; }
+    counter = max + 1;
+    return `el-${counter}`;
+  }
+
   function add(kind: string) {
-    const id = uid();
+    const id = nextId();
     const p = NEEDS_PROMPT[kind];
     const cx = (size.w / 2 - view.x) / (view.scale || 1);
     const cy = (size.h / 2 - view.y) / (view.scale || 1);
@@ -754,7 +762,7 @@ export default function Croquis() {
     setMenu({ id, x: clientX - (r?.left || 0), y: clientY - (r?.top || 0) });
   }
   function remove() { if (!sel) return; pushUndo(); setEls((p) => p.filter((e) => e.id !== sel)); setSel(null); }
-  function duplicate() { if (!selEl) return; pushUndo(); const id = uid(); setEls((p) => [...p, { ...selEl, id, x: selEl.x + 28, y: selEl.y + 28 }]); setSel(id); }
+  function duplicate() { if (!selEl) return; pushUndo(); const id = nextId(); setEls((p) => [...p, { ...selEl, id, x: selEl.x + 28, y: selEl.y + 28 }]); setSel(id); }
   function rotate(d: number) { if (selEl) update(selEl.id, { rotation: Math.round((selEl.rotation + d) % 360) }); }
   function scaleBy(f: number) { if (selEl) update(selEl.id, { scaleX: Math.max(0.25, Math.min(6, Math.abs(selEl.scaleX) * f)) * Math.sign(selEl.scaleX || 1), scaleY: Math.max(0.25, Math.min(6, selEl.scaleY * f)) }); }
   function flipH() { if (selEl) update(selEl.id, { scaleX: -selEl.scaleX }); }
@@ -766,19 +774,19 @@ export default function Croquis() {
   // Posició inicial (fantasma del vehicle, darrere segons el seu rumb).
   function markInitial(srcId: string) {
     const src = els.find((e) => e.id === srcId); if (!src) return;
-    pushUndo(); const id = uid(); const th = (src.rotation || 0) * Math.PI / 180;
+    pushUndo(); const id = nextId(); const th = (src.rotation || 0) * Math.PI / 180;
     setEls((p) => [{ ...src, id, ghost: true, phase: 'inicial', x: src.x - Math.sin(th) * 150, y: src.y + Math.cos(th) * 150 }, ...p]); setSel(id);
   }
   // Posició final (fantasma del vehicle, davant segons el seu rumb).
   function markFinal(srcId: string) {
     const src = els.find((e) => e.id === srcId); if (!src) return;
-    pushUndo(); const id = uid(); const th = (src.rotation || 0) * Math.PI / 180;
+    pushUndo(); const id = nextId(); const th = (src.rotation || 0) * Math.PI / 180;
     setEls((p) => [{ ...src, id, ghost: true, phase: 'final', x: src.x + Math.sin(th) * 150, y: src.y - Math.cos(th) * 150 }, ...p]); setSel(id);
   }
   // Punt de col·lisió (davant del vehicle si n'hi ha origen).
   function markCollision(srcId?: string) {
     const src = srcId ? els.find((e) => e.id === srcId) : null;
-    pushUndo(); const id = uid();
+    pushUndo(); const id = nextId();
     let x = (size.w / 2 - view.x) / (view.scale || 1), y = (size.h / 2 - view.y) / (view.scale || 1);
     if (src) { const th = (src.rotation || 0) * Math.PI / 180; x = src.x + Math.sin(th) * 70; y = src.y - Math.cos(th) * 70; }
     setEls((p) => [...p, { id, kind: 'collisio', x, y, rotation: 0, scaleX: 1, scaleY: 1 }]); setSel(id);
@@ -967,10 +975,13 @@ export default function Croquis() {
             const el = els.find((e) => e.id === menu.id); if (!el) return null;
             const isVeh = VEHICLES.includes(el.kind);
             const sep = <div style={{ height: 1, background: A.line, margin: '5px 4px' }} />;
+            const estH = Math.min(size.h - 16, isVeh ? 500 : 230);
+            const left = Math.max(8, Math.min(menu.x, size.w - 222));
+            const top = Math.max(8, Math.min(menu.y, size.h - estH - 8));
             return (
               <>
                 <div onMouseDown={() => setMenu(null)} onContextMenu={(e) => { e.preventDefault(); setMenu(null); }} style={{ position: 'absolute', inset: 0, zIndex: 20 }} />
-                <div style={{ position: 'absolute', left: Math.min(menu.x, size.w - 220), top: Math.min(menu.y, size.h - 260), zIndex: 21, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 13, boxShadow: A.shadowLg, padding: 6, minWidth: 206 }}>
+                <div style={{ position: 'absolute', left, top, zIndex: 21, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 13, boxShadow: A.shadowLg, padding: 6, minWidth: 206, maxHeight: size.h - 16, overflowY: 'auto' }}>
                   {isVeh && (<>
                     <MenuItem onClick={() => { setEditVeh(el.id); setMenu(null); }}>🚗 Dades del vehicle…</MenuItem>
                     {sep}
