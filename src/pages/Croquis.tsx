@@ -22,7 +22,7 @@ type VehData = {
 type El = {
   id: string; kind: string; x: number; y: number;
   rotation: number; scaleX: number; scaleY: number;
-  color?: string; text?: string; data?: VehData; ghost?: boolean;
+  color?: string; text?: string; data?: VehData; ghost?: boolean; phase?: 'inicial' | 'final';
 };
 type Road = 'recta' | 'doble' | 'autovia' | 'cruilla' | 'te' | 'rotonda' | 'corba' | 'cap';
 // Capçalera de l'atestat (s'imprimeix al croquis exportat).
@@ -525,7 +525,7 @@ function VehBadge({ el, letter }: { el: El; letter?: string }) {
   const estat = !el.ghost ? d?.estat : undefined;
   const id = d?.plate || [d?.marca, d?.model].filter(Boolean).join(' ') || '';
   let label = [letter, id].filter(Boolean).join(' · ').toUpperCase();
-  if (el.ghost) label = (letter ? letter + ' · ' : '') + 'INICIAL';
+  if (el.ghost) label = (letter ? letter + ' · ' : '') + (el.phase === 'final' ? 'FINAL' : 'INICIAL');
   if (!label) return null;
   const w = Math.max(44, label.length * 8.2 + (estat ? 26 : 16));
   return (
@@ -767,7 +767,13 @@ export default function Croquis() {
   function markInitial(srcId: string) {
     const src = els.find((e) => e.id === srcId); if (!src) return;
     pushUndo(); const id = uid(); const th = (src.rotation || 0) * Math.PI / 180;
-    setEls((p) => [{ ...src, id, ghost: true, x: src.x - Math.sin(th) * 150, y: src.y + Math.cos(th) * 150 }, ...p]); setSel(id);
+    setEls((p) => [{ ...src, id, ghost: true, phase: 'inicial', x: src.x - Math.sin(th) * 150, y: src.y + Math.cos(th) * 150 }, ...p]); setSel(id);
+  }
+  // Posició final (fantasma del vehicle, davant segons el seu rumb).
+  function markFinal(srcId: string) {
+    const src = els.find((e) => e.id === srcId); if (!src) return;
+    pushUndo(); const id = uid(); const th = (src.rotation || 0) * Math.PI / 180;
+    setEls((p) => [{ ...src, id, ghost: true, phase: 'final', x: src.x + Math.sin(th) * 150, y: src.y - Math.cos(th) * 150 }, ...p]); setSel(id);
   }
   // Punt de col·lisió (davant del vehicle si n'hi ha origen).
   function markCollision(srcId?: string) {
@@ -976,6 +982,7 @@ export default function Croquis() {
                     ))}
                     {sep}
                     <MenuItem onClick={() => { markInitial(el.id); setMenu(null); }}>📍 Marca posició inicial</MenuItem>
+                    <MenuItem onClick={() => { markFinal(el.id); setMenu(null); }}>🏁 Marca posició final</MenuItem>
                     <MenuItem onClick={() => { markCollision(el.id); setMenu(null); }}>❌ Marca punt de col·lisió</MenuItem>
                     {sep}
                   </>)}
