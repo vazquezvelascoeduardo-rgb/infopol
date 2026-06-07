@@ -24,6 +24,7 @@ type El = {
   rotation: number; scaleX: number; scaleY: number;
   color?: string; text?: string; data?: VehData; ghost?: boolean; phase?: 'inicial' | 'final';
   src?: string; locked?: boolean; opacity?: number; // fons (mapa/foto)
+  parent?: string; // vehicle d'origen (per a fantasmes inicial/final)
 };
 type Road = 'recta' | 'doble' | 'autovia' | 'cruilla' | 'te' | 'rotonda' | 'corba' | 'cap';
 // Capçalera de l'atestat (s'imprimeix al croquis exportat).
@@ -491,15 +492,32 @@ function fileToScaledDataUrl(file: Blob, max = 1700): Promise<string> {
   });
 }
 
+/* ── Animació (recreació en vídeo) ── */
+type Pt = { x: number; y: number };
+type Track = { id: string; p0: Pt; wp: Pt | null; p1: Pt; rot0: number };
+const lerp = (a: Pt, b: Pt, u: number): Pt => ({ x: a.x + (b.x - a.x) * u, y: a.y + (b.y - a.y) * u });
+const headingDeg = (dx: number, dy: number, fb: number) => (Math.abs(dx) + Math.abs(dy) > 0.4 ? Math.atan2(dx, -dy) * 180 / Math.PI : fb);
+function posAt(tr: Track, t: number): { x: number; y: number; rotation: number } {
+  let p: Pt, dx: number, dy: number;
+  if (tr.wp) {
+    if (t < 0.5) { p = lerp(tr.p0, tr.wp, t / 0.5); dx = tr.wp.x - tr.p0.x; dy = tr.wp.y - tr.p0.y; }
+    else { p = lerp(tr.wp, tr.p1, (t - 0.5) / 0.5); dx = tr.p1.x - tr.wp.x; dy = tr.p1.y - tr.wp.y; }
+  } else { p = lerp(tr.p0, tr.p1, t); dx = tr.p1.x - tr.p0.x; dy = tr.p1.y - tr.p0.y; }
+  return { x: p.x, y: p.y, rotation: headingDeg(dx, dy, tr.rot0) };
+}
+
 /* ════════════════════════ Node editable ════════════════════════ */
-function Node({ el, onSelect, onChange, onContext }: {
+function Node({ el, onSelect, onChange, onContext, override, animating }: {
   el: El; onSelect: () => void; onChange: (e: Partial<El>) => void; onContext: (x: number, y: number) => void;
+  override?: { x: number; y: number; rotation: number }; animating?: boolean;
 }) {
   const ref = useRef<Konva.Group>(null);
   const img = useHtmlImage(el.kind === 'fons' ? el.src : undefined);
   const common = {
-    id: el.id, x: el.x, y: el.y, rotation: el.rotation, scaleX: el.scaleX, scaleY: el.scaleY,
-    draggable: true, onClick: onSelect, onTap: onSelect,
+    id: el.id,
+    x: override ? override.x : el.x, y: override ? override.y : el.y,
+    rotation: override ? override.rotation : el.rotation, scaleX: el.scaleX, scaleY: el.scaleY,
+    draggable: !animating, onClick: onSelect, onTap: onSelect,
     onContextMenu: (e: Konva.KonvaEventObject<PointerEvent>) => { e.evt.preventDefault(); onSelect(); onContext(e.evt.clientX, e.evt.clientY); },
     onDragEnd: (e: Konva.KonvaEventObject<DragEvent>) => onChange({ x: e.target.x(), y: e.target.y() }),
     onTransformEnd: () => {
@@ -696,6 +714,18 @@ export default function Croquis() {
   const [editVeh, setEditVeh] = useState<string | null>(null);
   const [editAtestat, setEditAtestat] = useState(false);
   const [, setHistTick] = useState(0);
+  // Reproducció / vídeo
+  const [showPlayer, setShowPlayer] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const [recording, setRecording] = useState(false);
+  const [speed, setSpeed] = useState(1);
+  const [prog, setProg] = useState(0);
+  const [anim, setAnim] = useState<Record<string, { x: number; y: number; rotation: number }> | null>(null);
+  const tracksRef = useRef<Track[]>([]);
+  const rafRef = useRef<number | undefined>(undefined);
+  const lastTsRef = useRef<number | null>(null);
+  const progRef = useRef(0);
+  const speedRef = useRef(1);
   const wrapRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<Konva.Stage>(null);
   const trRef = useRef<Konva.Transformer>(null);
@@ -841,13 +871,13 @@ export default function Croquis() {
   function markInitial(srcId: string) {
     const src = els.find((e) => e.id === srcId); if (!src) return;
     pushUndo(); const id = nextId(); const th = (src.rotation || 0) * Math.PI / 180;
-    setEls((p) => [{ ...src, id, ghost: true, phase: 'inicial', x: src.x - Math.sin(th) * 150, y: src.y + Math.cos(th) * 150 }, ...p]); setSel(id);
+    setEls((p) => [{ ...src, id, ghost: true, phase: 'inicial', parent: srcId, x: src.x - Math.sin(th) * 150, y: src.y + Math.cos(th) * 150 }, ...p]); setSel(id);
   }
   // Posició final (fantasma del vehicle, davant segons el seu rumb).
   function markFinal(srcId: string) {
     const src = els.find((e) => e.id === srcId); if (!src) return;
     pushUndo(); const id = nextId(); const th = (src.rotation || 0) * Math.PI / 180;
-    setEls((p) => [{ ...src, id, ghost: true, phase: 'final', x: src.x + Math.sin(th) * 150, y: src.y - Math.cos(th) * 150 }, ...p]); setSel(id);
+    setEls((p) => [{ ...src, id, ghost: true, phase: 'final', parent: srcId, x: src.x + Math.sin(th) * 150, y: src.y - Math.cos(th) * 150 }, ...p]); setSel(id);
   }
   // Punt de col·lisió (davant del vehicle si n'hi ha origen).
   function markCollision(srcId?: string) {
@@ -914,8 +944,96 @@ export default function Croquis() {
     }, 80);
   }
 
+  // ── Recreació / vídeo ──
+  // Construeix les trajectòries: cada vehicle amb posició inicial (📍) es mou
+  // del seu inici → (punt de col·lisió proper) → la seva posició actual (final).
+  function buildTracks(): Track[] {
+    const inits = els.filter((e) => e.ghost && e.phase === 'inicial');
+    const cols = els.filter((e) => e.kind === 'collisio');
+    const out: Track[] = [];
+    for (const v of els) {
+      if (!VEHICLES.includes(v.kind) || v.ghost) continue;
+      if (v.data?.estat === 'parat' || v.data?.estat === 'estacionat') continue;
+      const g = inits.find((i) => i.parent === v.id); if (!g) continue;
+      const p0 = { x: g.x, y: g.y }, p1 = { x: v.x, y: v.y };
+      const mid = { x: (p0.x + p1.x) / 2, y: (p0.y + p1.y) / 2 };
+      let wp: Pt | null = null, best = 1e9;
+      for (const c of cols) { const d = Math.hypot(c.x - mid.x, c.y - mid.y); if (d < best) { best = d; wp = { x: c.x, y: c.y }; } }
+      if (best > 340) wp = null;
+      out.push({ id: v.id, p0, wp, p1, rot0: v.rotation });
+    }
+    return out;
+  }
+  function ensureTracks() { if (!tracksRef.current.length) tracksRef.current = buildTracks(); return tracksRef.current; }
+  function applyAt(t: number) {
+    const m: Record<string, { x: number; y: number; rotation: number }> = {};
+    for (const k of tracksRef.current) m[k.id] = posAt(k, t);
+    setAnim(m); setProg(t); progRef.current = t;
+  }
+  function frame(ts: number) {
+    if (lastTsRef.current == null) lastTsRef.current = ts;
+    const dt = ts - lastTsRef.current; lastTsRef.current = ts;
+    let t = progRef.current + dt / (5200 / speedRef.current);
+    if (t >= 1) { applyAt(1); setPlaying(false); lastTsRef.current = null; return; }
+    applyAt(t); rafRef.current = requestAnimationFrame(frame);
+  }
+  function play() {
+    if (playing) return;
+    const tr = ensureTracks();
+    if (!tr.length) { alert('Marca la posició inicial (📍) d\'algun vehicle (clic dret) per poder reproduir el moviment.'); return; }
+    setSel(null); setMenu(null);
+    if (progRef.current >= 1) progRef.current = 0;
+    speedRef.current = speed; lastTsRef.current = null; setPlaying(true);
+    rafRef.current = requestAnimationFrame(frame);
+  }
+  function pausePlay() { if (rafRef.current) cancelAnimationFrame(rafRef.current); lastTsRef.current = null; setPlaying(false); }
+  function restartPlay() { if (rafRef.current) cancelAnimationFrame(rafRef.current); lastTsRef.current = null; progRef.current = 0; setProg(0); setPlaying(false); setAnim(null); tracksRef.current = []; }
+  function scrub(v: number) { if (playing) pausePlay(); ensureTracks(); applyAt(v); }
+  function setSpeedVal(s: number) { setSpeed(s); speedRef.current = s; }
+
+  // Grava la recreació a WebM (gravant el llenç fotograma a fotograma).
+  async function recordWebM() {
+    const stage = stageRef.current; if (!stage) return;
+    const tr = buildTracks();
+    if (!tr.length) { alert('Marca la posició inicial (📍) d\'algun vehicle abans de gravar.'); return; }
+    if (typeof MediaRecorder === 'undefined') { alert('Aquest navegador no permet gravar vídeo (prova Chrome o Edge).'); return; }
+    tracksRef.current = tr; setRecording(true); setSel(null); setMenu(null);
+    const prev = { ...view }; const f = fitView(size.w, size.h, 8); setView(f);
+    await new Promise((r) => setTimeout(r, 160));
+    const RW = 1280, RH = Math.round(RW * BOARD.h / BOARD.w);
+    const rc = document.createElement('canvas'); rc.width = RW; rc.height = RH;
+    const rctx = rc.getContext('2d');
+    const stream = rc.captureStream(30);
+    const mime = MediaRecorder.isTypeSupported('video/webm;codecs=vp9') ? 'video/webm;codecs=vp9'
+      : MediaRecorder.isTypeSupported('video/webm;codecs=vp8') ? 'video/webm;codecs=vp8' : 'video/webm';
+    let rec: MediaRecorder;
+    try { rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 8_000_000 }); } catch { rec = new MediaRecorder(stream); }
+    const chunks: BlobPart[] = []; rec.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data); };
+    const stopped = new Promise<void>((res) => { rec.onstop = () => res(); });
+    rec.start();
+    const fps = 30, frames = Math.max(2, Math.round(fps * (5.2 / speedRef.current)));
+    for (let i = 0; i <= frames; i++) {
+      const t = i / frames;
+      const m: Record<string, { x: number; y: number; rotation: number }> = {};
+      for (const k of tr) m[k.id] = posAt(k, t);
+      setAnim(m); setProg(t);
+      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(() => r(null))));
+      if (rctx) { const sc = stage.toCanvas({ x: f.x, y: f.y, width: BOARD.w * f.scale, height: BOARD.h * f.scale, pixelRatio: 1 }); rctx.drawImage(sc as CanvasImageSource, 0, 0, RW, RH); }
+    }
+    await new Promise((r) => setTimeout(r, 400));
+    rec.stop(); await stopped;
+    setAnim(null); setProg(0); progRef.current = 0; setView(prev); setRecording(false);
+    const blob = new Blob(chunks, { type: 'video/webm' });
+    const a = document.createElement('a'); a.download = 'croquis-accident.webm'; a.href = URL.createObjectURL(blob); a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 3000);
+  }
+
+  // Neteja del rAF en desmuntar.
+  useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
+
   const btn: CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: 7, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 11, padding: '9px 13px', fontFamily: A.display, fontWeight: 700, fontSize: 13.5, color: A.ink };
   const pct = Math.round((view.scale || 1) * 100);
+  const animating = !!anim;
   const bgEl = els.find((e) => e.kind === 'fons') || null;
   const headerFilled = Object.values(header).some((v) => v && String(v).trim());
   const legendRows = els.filter((e) => VEHICLES.includes(e.kind) && !e.ghost).map((e) => {
@@ -952,6 +1070,7 @@ export default function Croquis() {
         <button onClick={() => fileRef.current?.click()} style={btn} title="Obrir un croquis (.json)">📂 Obrir</button>
         <input ref={fileRef} type="file" accept="application/json,.json" style={{ display: 'none' }}
           onChange={(e) => { const f = e.target.files?.[0]; if (f) importJson(f); e.target.value = ''; }} />
+        <button onClick={() => setShowPlayer((v) => !v)} style={{ ...btn, ...(showPlayer ? { background: A.terracota, color: '#fff', border: 'none' } : {}) }} title="Recreació en vídeo">▶ Vídeo</button>
         <button onClick={clearAll} style={btn}><Ic name="x" size={15} color={A.inkSoft} /> Buidar</button>
         <button onClick={exportPng} style={{ ...btn, background: A.ink, color: '#fff', border: 'none' }}><Ic name="doc" size={16} color="#fff" /> Exportar PNG</button>
       </header>
@@ -990,8 +1109,8 @@ export default function Croquis() {
               {els.map((el) => (
                 <Fragment key={el.id}>
                   <Node el={el} onSelect={() => setSel(el.id)} onChange={(patch) => update(el.id, patch)}
-                    onContext={(cx, cy) => openMenu(el.id, cx, cy)} />
-                  {VEHICLES.includes(el.kind) && <VehBadge el={el} letter={vehLetters[el.id]} />}
+                    onContext={(cx, cy) => openMenu(el.id, cx, cy)} override={anim?.[el.id]} animating={animating} />
+                  {VEHICLES.includes(el.kind) && !animating && <VehBadge el={el} letter={vehLetters[el.id]} />}
                 </Fragment>
               ))}
               <Transformer ref={trRef} rotationSnaps={[0, 45, 90, 135, 180, 225, 270, 315]}
@@ -1025,9 +1144,22 @@ export default function Croquis() {
             </div>
           )}
 
+          {/* Barra de reproducció / vídeo */}
+          {showPlayer && (
+            <div style={{ position: 'absolute', left: '50%', bottom: 14, transform: 'translateX(-50%)', zIndex: 9, display: 'flex', alignItems: 'center', gap: 9, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 14, padding: '8px 12px', boxShadow: A.shadowLg, flexWrap: 'wrap', maxWidth: '95%' }}>
+              <button onClick={playing ? pausePlay : play} disabled={recording} style={{ ...btn, background: A.ink, color: '#fff', border: 'none' }}>{playing ? '⏸ Pausa' : '▶ Reproduir'}</button>
+              <button onClick={restartPlay} disabled={recording} style={btn} title="Reiniciar">⟲</button>
+              <input type="range" min={0} max={1000} value={Math.round(prog * 1000)} onChange={(e) => scrub(Number(e.target.value) / 1000)} disabled={recording} style={{ width: 150, accentColor: A.terracota }} />
+              <div style={{ display: 'flex', gap: 4, alignItems: 'center', paddingLeft: 6, borderLeft: `1px solid ${A.line}` }}>
+                {[0.5, 1, 2].map((s) => <button key={s} onClick={() => setSpeedVal(s)} style={{ ...btn, padding: '7px 9px', ...(speed === s ? { background: A.terraSoft, borderColor: A.terracota } : {}) }}>×{s}</button>)}
+              </div>
+              <button onClick={recordWebM} disabled={recording} style={{ ...btn, color: recording ? A.inkMuted : A.red, borderColor: A.redSoft }}>{recording ? '● Gravant…' : '⬇ Gravar WebM'}</button>
+            </div>
+          )}
+
           {/* Mini-barra de l'element seleccionat */}
-          {selEl && (
-            <div style={{ position: 'absolute', left: '50%', bottom: 14, transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: 7, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 14, padding: '8px 11px', boxShadow: A.shadowLg, flexWrap: 'wrap', maxWidth: '94%' }}>
+          {selEl && !animating && (
+            <div style={{ position: 'absolute', left: '50%', bottom: showPlayer ? 70 : 14, transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: 7, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 14, padding: '8px 11px', boxShadow: A.shadowLg, flexWrap: 'wrap', maxWidth: '94%' }}>
               {COLORABLE.includes(selEl.kind) && (
                 <div style={{ display: 'flex', gap: 5, alignItems: 'center', paddingRight: 7, borderRight: `1px solid ${A.line}` }}>
                   {VEH_COLORS.map((c) => (
