@@ -4,7 +4,7 @@
 // al terra, mobiliari urbà i anotacions. Zoom + paneo, capes, escalat, gir i
 // volteig. Exporta a PNG en alta resolució per adjuntar a l'atestat.
 // Tot al navegador (sense servidor): Konva per arrossegar/rotar/redimensionar.
-import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Stage, Layer, Rect, Group, Line, Circle, Ellipse, Text, RegularPolygon, Arrow, Star, Transformer,
@@ -13,10 +13,16 @@ import type Konva from 'konva';
 import { A, Ic, Mono } from '../lib/design';
 
 /* ════════════════════════ Model ════════════════════════ */
+// Estat de marxa d'un vehicle (servirà també per a la recreació en vídeo).
+type Estat = 'mov' | 'parat' | 'estacionat';
+type VehData = {
+  marca?: string; model?: string; color?: string; plate?: string;
+  estat?: Estat; kmh?: string; note?: string;
+};
 type El = {
   id: string; kind: string; x: number; y: number;
   rotation: number; scaleX: number; scaleY: number;
-  color?: string; text?: string;
+  color?: string; text?: string; data?: VehData;
 };
 type Road = 'recta' | 'doble' | 'autovia' | 'cruilla' | 'te' | 'rotonda' | 'corba' | 'cap';
 
@@ -24,6 +30,12 @@ const RED = '#D62B2B', BLUE = '#0B57A4', DARK = '#15151C', YEL = '#F2B600';
 const PAINT = 'rgba(248,247,242,0.92)';            // pintura vial blanca
 const VEH_COLORS = ['#3B6BF5', '#E0455A', '#9AA0AA', '#15151C', '#FFFFFF', '#F0B400', '#1FB286', '#FF7A1A'];
 const COLORABLE = ['cotxe', 'furgo', 'camio', 'trailer', 'bus', 'moto', 'bici', 'patinet', 'tractor', 'etiqueta', 'text', 'fletxa'];
+const VEHICLES = ['cotxe', 'furgo', 'camio', 'trailer', 'bus', 'moto', 'bici', 'patinet', 'vianant', 'tractor', 'ambulancia', 'policia'];
+const ESTATS: Record<Estat, { label: string; color: string }> = {
+  mov: { label: 'En moviment', color: '#1FB286' },
+  parat: { label: 'Aturat', color: '#E89421' },
+  estacionat: { label: 'Estacionat', color: '#3B6BF5' },
+};
 
 /* ── Llibreria d'elements (paleta) ── */
 const PALETTE: { group: string; items: { kind: string; label: string; emoji: string }[] }[] = [
@@ -411,11 +423,14 @@ function Shape({ kind, color, text }: { kind: string; color: string; text?: stri
 }
 
 /* ════════════════════════ Node editable ════════════════════════ */
-function Node({ el, onSelect, onChange }: { el: El; onSelect: () => void; onChange: (e: Partial<El>) => void }) {
+function Node({ el, onSelect, onChange, onContext }: {
+  el: El; onSelect: () => void; onChange: (e: Partial<El>) => void; onContext: (x: number, y: number) => void;
+}) {
   const ref = useRef<Konva.Group>(null);
   const common = {
     id: el.id, x: el.x, y: el.y, rotation: el.rotation, scaleX: el.scaleX, scaleY: el.scaleY,
     draggable: true, onClick: onSelect, onTap: onSelect,
+    onContextMenu: (e: Konva.KonvaEventObject<PointerEvent>) => { e.evt.preventDefault(); onSelect(); onContext(e.evt.clientX, e.evt.clientY); },
     onDragEnd: (e: Konva.KonvaEventObject<DragEvent>) => onChange({ x: e.target.x(), y: e.target.y() }),
     onTransformEnd: () => {
       const n = ref.current; if (!n) return;
@@ -437,10 +452,109 @@ function Node({ el, onSelect, onChange }: { el: El; onSelect: () => void; onChan
         <Text text={el.text || '0,0 m'} fontSize={14} fontStyle="bold" fill={A.terraInk} width={120} align="center" x={-60} y={-22} />
       </Group>
     );
+  const veh = VEHICLES.includes(el.kind);
+  const estat = el.data?.estat;
+  const kmh = parseInt(el.data?.kmh || '') || 0;
   return (
     <Group ref={ref} {...common}>
       <Shape kind={el.kind} color={el.color || DEFAULT_COLOR(el.kind)} text={el.text} />
+      {veh && estat === 'mov' && (
+        <Arrow points={[0, -48, 0, -48 - Math.min(80, 26 + kmh * 0.7)]} pointerLength={13} pointerWidth={13}
+          stroke="#1FB286" fill="#1FB286" strokeWidth={5} listening={false} />
+      )}
+      {veh && estat === 'estacionat' && (<>
+        <Rect x={11} y={-52} width={20} height={20} cornerRadius={5} fill="#3B6BF5" listening={false} />
+        <Text text="P" fontSize={15} fontStyle="bold" fill="#fff" width={20} align="center" x={11} y={-50} listening={false} />
+      </>)}
     </Group>
+  );
+}
+
+/* Etiqueta flotant amb matrícula / dades (no gira amb el vehicle). */
+function VehBadge({ el }: { el: El }) {
+  const d = el.data; if (!d) return null;
+  const estat = d.estat;
+  let label = (d.plate || [d.marca, d.model].filter(Boolean).join(' ') || '').toUpperCase();
+  if (!label && estat) label = ESTATS[estat].label.toUpperCase();
+  if (!label) return null;
+  const w = Math.max(44, label.length * 8.4 + (estat ? 26 : 16));
+  return (
+    <Group x={el.x} y={el.y + 58} listening={false}>
+      <Rect x={-w / 2} y={-12} width={w} height={24} cornerRadius={7} fill="#fff" stroke="rgba(21,21,28,0.18)" strokeWidth={1} shadowColor="#0006" shadowBlur={5} shadowOffsetY={1} />
+      {estat && <Circle x={-w / 2 + 11} y={0} radius={5} fill={ESTATS[estat].color} />}
+      <Text text={label} fontSize={12.5} fontStyle="bold" fontFamily="Manrope, sans-serif" fill="#15151C"
+        x={-w / 2 + (estat ? 18 : 8)} y={-7} width={w - (estat ? 24 : 14)} align="center" />
+    </Group>
+  );
+}
+
+/* Element del menú contextual. */
+function MenuItem({ children, onClick, danger, active }: { children: ReactNode; onClick: () => void; danger?: boolean; active?: boolean }) {
+  return (
+    <button onClick={onClick} className="cq-mi" style={{
+      display: 'flex', alignItems: 'center', gap: 9, width: '100%', textAlign: 'left', border: 'none',
+      background: active ? A.terraSoft : 'transparent', cursor: 'pointer', borderRadius: 8, padding: '8px 10px',
+      fontFamily: A.sans, fontWeight: 600, fontSize: 13.5, color: danger ? A.red : A.ink,
+    }}>{children}</button>
+  );
+}
+
+/* Modal de dades del vehicle. */
+function VehModal({ el, onClose, onSave }: { el: El; onClose: () => void; onSave: (d: VehData) => void }) {
+  const [d, setD] = useState<VehData>({ estat: 'mov', ...el.data });
+  const set = (p: Partial<VehData>) => setD((s) => ({ ...s, ...p }));
+  const inp: CSSProperties = { width: '100%', border: `1px solid ${A.line2}`, borderRadius: 10, padding: '10px 12px', fontFamily: A.sans, fontSize: 14, color: A.ink, background: A.bgSoft, outline: 'none' };
+  const lbl: CSSProperties = { display: 'block', fontFamily: A.display, fontWeight: 700, fontSize: 12, color: A.inkSoft, marginBottom: 5 };
+  return (
+    <div onMouseDown={onClose} style={{ position: 'fixed', inset: 0, zIndex: 130, background: 'rgba(21,21,28,0.45)', display: 'grid', placeItems: 'center', padding: 16 }}>
+      <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 'min(440px, 96vw)', maxHeight: '92vh', overflowY: 'auto', background: A.card, borderRadius: 20, boxShadow: A.shadowLg, padding: 22 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+          <span style={{ width: 36, height: 36, borderRadius: 10, background: A.terracota, display: 'grid', placeItems: 'center', boxShadow: A.inset }}><Ic name="car" size={20} color="#fff" sw={2.2} /></span>
+          <div style={{ marginRight: 'auto' }}>
+            <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 17, color: A.ink }}>Dades del vehicle</div>
+            <Mono size={9} color={A.inkMuted}>Marca · model · matrícula · estat</Mono>
+          </div>
+          <button onClick={onClose} style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}><Ic name="x" size={20} color={A.inkSoft} /></button>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div><label style={lbl}>Marca</label><input style={inp} value={d.marca || ''} onChange={(e) => set({ marca: e.target.value })} placeholder="Seat" /></div>
+          <div><label style={lbl}>Model</label><input style={inp} value={d.model || ''} onChange={(e) => set({ model: e.target.value })} placeholder="León" /></div>
+          <div><label style={lbl}>Color</label><input style={inp} value={d.color || ''} onChange={(e) => set({ color: e.target.value })} placeholder="Gris plata" /></div>
+          <div><label style={lbl}>Matrícula</label><input style={{ ...inp, textTransform: 'uppercase', fontFamily: A.mono, letterSpacing: 1 }} value={d.plate || ''} onChange={(e) => set({ plate: e.target.value })} placeholder="1234 ABC" /></div>
+        </div>
+
+        <div style={{ marginTop: 14 }}>
+          <label style={lbl}>Estat de marxa</label>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
+            {(Object.keys(ESTATS) as Estat[]).map((s) => (
+              <button key={s} onClick={() => set({ estat: s })} style={{
+                border: `1.5px solid ${d.estat === s ? ESTATS[s].color : A.line2}`, background: d.estat === s ? ESTATS[s].color : A.card,
+                color: d.estat === s ? '#fff' : A.inkSoft, cursor: 'pointer', borderRadius: 11, padding: '10px 6px',
+                fontFamily: A.display, fontWeight: 700, fontSize: 12.5,
+              }}>{ESTATS[s].label}</button>
+            ))}
+          </div>
+        </div>
+
+        {d.estat === 'mov' && (
+          <div style={{ marginTop: 14 }}>
+            <label style={lbl}>Velocitat aproximada (km/h)</label>
+            <input style={inp} inputMode="numeric" value={d.kmh || ''} onChange={(e) => set({ kmh: e.target.value.replace(/[^0-9]/g, '') })} placeholder="50" />
+          </div>
+        )}
+
+        <div style={{ marginTop: 14 }}>
+          <label style={lbl}>Notes</label>
+          <textarea style={{ ...inp, minHeight: 64, resize: 'vertical' }} value={d.note || ''} onChange={(e) => set({ note: e.target.value })} placeholder="Conductor, danys, observacions…" />
+        </div>
+
+        <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
+          <button onClick={onClose} style={{ flex: 1, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 12, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14, color: A.ink }}>Cancel·lar</button>
+          <button onClick={() => onSave(d)} style={{ flex: 1.4, border: 'none', background: A.ink, color: '#fff', cursor: 'pointer', borderRadius: 12, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14, boxShadow: A.shadowMd }}>Desar dades</button>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -452,6 +566,8 @@ export default function Croquis() {
   const [sel, setSel] = useState<string | null>(null);
   const [size, setSize] = useState({ w: 1000, h: 700 });
   const [view, setView] = useState({ scale: 0, x: 0, y: 0 });
+  const [menu, setMenu] = useState<{ id: string; x: number; y: number } | null>(null);
+  const [editVeh, setEditVeh] = useState<string | null>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<Konva.Stage>(null);
   const trRef = useRef<Konva.Transformer>(null);
@@ -486,6 +602,7 @@ export default function Croquis() {
   // Tecles: Supr esborra, fletxes mouen, Ctrl+D duplica.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { setMenu(null); setEditVeh(null); return; }
       if (document.activeElement && document.activeElement !== document.body) return;
       if ((e.key === 'Delete' || e.key === 'Backspace') && sel) { e.preventDefault(); remove(); }
       else if (e.key === 'd' && (e.ctrlKey || e.metaKey) && sel) { e.preventDefault(); duplicate(); }
@@ -516,6 +633,11 @@ export default function Croquis() {
     setEls((prev) => [...prev, e]); setSel(id);
   }
   function update(id: string, patch: Partial<El>) { setEls((p) => p.map((e) => (e.id === id ? { ...e, ...patch } : e))); }
+  function setVehData(id: string, patch: Partial<VehData>) { setEls((p) => p.map((e) => (e.id === id ? { ...e, data: { ...e.data, ...patch } } : e))); }
+  function openMenu(id: string, clientX: number, clientY: number) {
+    const r = wrapRef.current?.getBoundingClientRect();
+    setMenu({ id, x: clientX - (r?.left || 0), y: clientY - (r?.top || 0) });
+  }
   function remove() { if (!sel) return; setEls((p) => p.filter((e) => e.id !== sel)); setSel(null); }
   function duplicate() { if (!selEl) return; const id = uid(); setEls((p) => [...p, { ...selEl, id, x: selEl.x + 28, y: selEl.y + 28 }]); setSel(id); }
   function rotate(d: number) { if (selEl) update(selEl.id, { rotation: Math.round((selEl.rotation + d) % 360) }); }
@@ -606,14 +728,19 @@ export default function Croquis() {
           <Stage ref={stageRef} width={size.w} height={size.h}
             scaleX={view.scale || 1} scaleY={view.scale || 1} x={view.x} y={view.y}
             draggable
-            onWheel={onWheel}
+            onWheel={(e) => { setMenu(null); onWheel(e); }}
+            onContextMenu={(e) => e.evt.preventDefault()}
             onDragEnd={(e) => { if (e.target === e.target.getStage()) setView((v) => ({ ...v, x: e.target.x(), y: e.target.y() })); }}
-            onMouseDown={(e) => { if (e.target === e.target.getStage()) setSel(null); }}
-            onTouchStart={(e) => { if (e.target === e.target.getStage()) setSel(null); }}>
+            onMouseDown={(e) => { setMenu(null); if (e.target === e.target.getStage()) setSel(null); }}
+            onTouchStart={(e) => { setMenu(null); if (e.target === e.target.getStage()) setSel(null); }}>
             <Layer listening={false}><RoadBg road={road} /></Layer>
             <Layer>
               {els.map((el) => (
-                <Node key={el.id} el={el} onSelect={() => setSel(el.id)} onChange={(patch) => update(el.id, patch)} />
+                <Fragment key={el.id}>
+                  <Node el={el} onSelect={() => setSel(el.id)} onChange={(patch) => update(el.id, patch)}
+                    onContext={(cx, cy) => openMenu(el.id, cx, cy)} />
+                  {VEHICLES.includes(el.kind) && <VehBadge el={el} />}
+                </Fragment>
               ))}
               <Transformer ref={trRef} rotationSnaps={[0, 45, 90, 135, 180, 225, 270, 315]}
                 anchorSize={11} borderStroke={A.terracota} anchorStroke={A.terracota} anchorCornerRadius={3}
@@ -654,11 +781,47 @@ export default function Croquis() {
           {/* Pista quan està buit */}
           {els.length === 0 && (
             <div style={{ position: 'absolute', top: 16, left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.9)', border: `1px solid ${A.line2}`, borderRadius: 999, padding: '8px 16px', fontFamily: A.sans, fontWeight: 600, fontSize: 13, color: A.inkSoft, pointerEvents: 'none', textAlign: 'center' }}>
-              👈 Tria la via i arrossega elements · roda del ratolí per fer zoom · arrossega el fons per moure't
+              👈 Tria la via i arrossega elements · clic dret sobre un vehicle per a les dades · roda per fer zoom
             </div>
           )}
+
+          {/* Menú contextual (clic dret) */}
+          {menu && (() => {
+            const el = els.find((e) => e.id === menu.id); if (!el) return null;
+            const isVeh = VEHICLES.includes(el.kind);
+            const sep = <div style={{ height: 1, background: A.line, margin: '5px 4px' }} />;
+            return (
+              <>
+                <div onMouseDown={() => setMenu(null)} onContextMenu={(e) => { e.preventDefault(); setMenu(null); }} style={{ position: 'absolute', inset: 0, zIndex: 20 }} />
+                <div style={{ position: 'absolute', left: Math.min(menu.x, size.w - 220), top: Math.min(menu.y, size.h - 260), zIndex: 21, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 13, boxShadow: A.shadowLg, padding: 6, minWidth: 206 }}>
+                  {isVeh && (<>
+                    <MenuItem onClick={() => { setEditVeh(el.id); setMenu(null); }}>🚗 Dades del vehicle…</MenuItem>
+                    {sep}
+                    <Mono size={9} color={A.inkMuted} style={{ display: 'block', padding: '2px 10px 4px' }}>Estat de marxa</Mono>
+                    {(Object.keys(ESTATS) as Estat[]).map((s) => (
+                      <MenuItem key={s} active={el.data?.estat === s} onClick={() => { setVehData(el.id, { estat: s }); setMenu(null); }}>
+                        <span style={{ width: 9, height: 9, borderRadius: '50%', background: ESTATS[s].color, flexShrink: 0 }} />{ESTATS[s].label}
+                      </MenuItem>
+                    ))}
+                    {sep}
+                  </>)}
+                  <MenuItem onClick={() => { duplicate(); setMenu(null); }}>Duplicar</MenuItem>
+                  <MenuItem onClick={() => { toFront(); setMenu(null); }}>Portar al davant</MenuItem>
+                  <MenuItem onClick={() => { toBack(); setMenu(null); }}>Enviar al darrere</MenuItem>
+                  {sep}
+                  <MenuItem danger onClick={() => { remove(); setMenu(null); }}>Esborrar</MenuItem>
+                </div>
+              </>
+            );
+          })()}
         </main>
       </div>
+
+      {/* Modal de dades del vehicle */}
+      {editVeh && (() => {
+        const el = els.find((e) => e.id === editVeh); if (!el) return null;
+        return <VehModal el={el} onClose={() => setEditVeh(null)} onSave={(d) => { setVehData(el.id, d); setEditVeh(null); }} />;
+      })()}
     </div>
   );
 }
