@@ -7,7 +7,7 @@
 import { Fragment, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Stage, Layer, Rect, Group, Line, Circle, Ellipse, Text, RegularPolygon, Arrow, Star, Transformer,
+  Stage, Layer, Rect, Group, Line, Circle, Ellipse, Text, RegularPolygon, Arrow, Star, Transformer, Image as KImage,
 } from 'react-konva';
 import type Konva from 'konva';
 import { A, Ic, Mono } from '../lib/design';
@@ -23,6 +23,7 @@ type El = {
   id: string; kind: string; x: number; y: number;
   rotation: number; scaleX: number; scaleY: number;
   color?: string; text?: string; data?: VehData; ghost?: boolean; phase?: 'inicial' | 'final';
+  src?: string; locked?: boolean; opacity?: number; // fons (mapa/foto)
 };
 type Road = 'recta' | 'doble' | 'autovia' | 'cruilla' | 'te' | 'rotonda' | 'corba' | 'cap';
 // Capçalera de l'atestat (s'imprimeix al croquis exportat).
@@ -459,11 +460,43 @@ function Shape({ kind, color, text }: { kind: string; color: string; text?: stri
   }
 }
 
+/* ── Imatge de fons (mapa/foto) ── */
+function useHtmlImage(src?: string) {
+  const [img, setImg] = useState<HTMLImageElement | undefined>(undefined);
+  useEffect(() => {
+    if (!src) { setImg(undefined); return; }
+    const im = new window.Image();
+    im.onload = () => setImg(im);
+    im.src = src;
+    return () => { im.onload = null; };
+  }, [src]);
+  return img;
+}
+// Reescala una imatge a un màxim raonable perquè ocupi poc (export + desat).
+function fileToScaledDataUrl(file: Blob, max = 1700): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const im = new window.Image();
+    im.onload = () => {
+      const sc = Math.min(1, max / Math.max(im.width, im.height));
+      const w = Math.max(1, Math.round(im.width * sc)), h = Math.max(1, Math.round(im.height * sc));
+      const c = document.createElement('canvas'); c.width = w; c.height = h;
+      const ctx = c.getContext('2d'); if (!ctx) { reject(new Error('ctx')); return; }
+      ctx.drawImage(im, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      resolve(c.toDataURL('image/jpeg', 0.82));
+    };
+    im.onerror = (e) => { URL.revokeObjectURL(url); reject(e); };
+    im.src = url;
+  });
+}
+
 /* ════════════════════════ Node editable ════════════════════════ */
 function Node({ el, onSelect, onChange, onContext }: {
   el: El; onSelect: () => void; onChange: (e: Partial<El>) => void; onContext: (x: number, y: number) => void;
 }) {
   const ref = useRef<Konva.Group>(null);
+  const img = useHtmlImage(el.kind === 'fons' ? el.src : undefined);
   const common = {
     id: el.id, x: el.x, y: el.y, rotation: el.rotation, scaleX: el.scaleX, scaleY: el.scaleY,
     draggable: true, onClick: onSelect, onTap: onSelect,
@@ -474,6 +507,11 @@ function Node({ el, onSelect, onChange, onContext }: {
       onChange({ x: n.x(), y: n.y(), rotation: n.rotation(), scaleX: n.scaleX(), scaleY: n.scaleY() });
     },
   };
+  if (el.kind === 'fons') {
+    if (!img) return null;
+    return <KImage ref={ref as never} {...common} image={img} offsetX={img.width / 2} offsetY={img.height / 2}
+      opacity={el.opacity ?? 1} draggable={!el.locked} listening={!el.locked} />;
+  }
   if (el.kind === 'fletxa')
     return <Arrow ref={ref as never} {...common} points={[-60, 0, 60, 0]} pointerLength={17} pointerWidth={17}
       stroke={el.color || '#15151C'} fill={el.color || '#15151C'} strokeWidth={6} hitStrokeWidth={22} />;
@@ -662,6 +700,7 @@ export default function Croquis() {
   const stageRef = useRef<Konva.Stage>(null);
   const trRef = useRef<Konva.Transformer>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const bgFileRef = useRef<HTMLInputElement>(null);
   const hist = useRef<{ past: Scene[]; future: Scene[] }>({ past: [], future: [] });
 
   // Lletres automàtiques (A, B, C…) per a cada vehicle, en ordre.
@@ -702,6 +741,19 @@ export default function Croquis() {
   useEffect(() => {
     try { localStorage.setItem(STORE_KEY, JSON.stringify({ road, els, header, legend: showLegend } as Scene)); } catch { /* quota */ }
   }, [road, els, header, showLegend]);
+
+  // Enganxar (Ctrl+V) una captura de mapa/foto com a fons.
+  useEffect(() => {
+    const onPaste = (e: ClipboardEvent) => {
+      const items = e.clipboardData?.items; if (!items) return;
+      for (const it of Array.from(items)) {
+        if (it.type.startsWith('image/')) { const f = it.getAsFile(); if (f) { e.preventDefault(); fileToScaledDataUrl(f).then(addBackground).catch(() => {}); } break; }
+      }
+    };
+    window.addEventListener('paste', onPaste);
+    return () => window.removeEventListener('paste', onPaste);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [size.w, size.h, view.scale, view.x, view.y, els]);
 
   // Transformer sobre el seleccionat.
   useEffect(() => {
@@ -770,6 +822,20 @@ export default function Croquis() {
   function toBack() { if (!selEl) return; pushUndo(); setEls((p) => [selEl, ...p.filter((e) => e.id !== selEl.id)]); }
   function clearAll() { if (els.length && !confirm('Esborrar tot el croquis?')) return; pushUndo(); setEls([]); setSel(null); }
   function changeRoad(r: Road) { pushUndo(); setRoad(r); }
+
+  // Fons de mapa/foto: l'afegim darrere de tot i amaguem la via dibuixada.
+  function addBackground(src: string) {
+    const id = nextId(); pushUndo();
+    setEls((p) => [{ id, kind: 'fons', src, x: BOARD.w / 2, y: BOARD.h / 2, rotation: 0, scaleX: 1, scaleY: 1, opacity: 1, locked: false }, ...p.filter((e) => e.kind !== 'fons')]);
+    setRoad('cap'); setSel(id);
+  }
+  function setBgOpacity(v: number) { setEls((p) => p.map((e) => (e.kind === 'fons' ? { ...e, opacity: v } : e))); }
+  function removeBg() { pushUndo(); setEls((p) => p.filter((e) => e.kind !== 'fons')); setSel(null); }
+  function openMaps() {
+    const q = window.prompt('Adreça o coordenades del lloc (s\'obre Google Maps):', '');
+    if (q && q.trim()) window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q.trim())}`, '_blank', 'noopener');
+  }
+  function openIcgc() { window.open('https://www.instamaps.cat/', '_blank', 'noopener'); }
 
   // Posició inicial (fantasma del vehicle, darrere segons el seu rumb).
   function markInitial(srcId: string) {
@@ -850,6 +916,7 @@ export default function Croquis() {
 
   const btn: CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: 7, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 11, padding: '9px 13px', fontFamily: A.display, fontWeight: 700, fontSize: 13.5, color: A.ink };
   const pct = Math.round((view.scale || 1) * 100);
+  const bgEl = els.find((e) => e.kind === 'fons') || null;
   const headerFilled = Object.values(header).some((v) => v && String(v).trim());
   const legendRows = els.filter((e) => VEHICLES.includes(e.kind) && !e.ghost).map((e) => {
     const d = e.data || {};
@@ -870,6 +937,11 @@ export default function Croquis() {
         <button onClick={undo} disabled={!hist.current.past.length} style={{ ...btn, padding: '9px 11px', fontSize: 16, opacity: hist.current.past.length ? 1 : 0.4 }} title="Desfer (Ctrl+Z)">↶</button>
         <button onClick={redo} disabled={!hist.current.future.length} style={{ ...btn, padding: '9px 11px', fontSize: 16, opacity: hist.current.future.length ? 1 : 0.4 }} title="Refer (Ctrl+Maj+Z)">↷</button>
         <button onClick={() => setEditAtestat(true)} style={btn}><Ic name="doc" size={15} color={A.inkSoft} /> Atestat</button>
+        <button onClick={() => bgFileRef.current?.click()} style={btn} title="Posar una captura de mapa/foto de fons (o enganxa amb Ctrl+V)">📷 Fons</button>
+        <button onClick={openMaps} style={{ ...btn, padding: '9px 11px' }} title="Obrir Google Maps al lloc exacte">🗺️</button>
+        <button onClick={openIcgc} style={{ ...btn, padding: '9px 11px' }} title="Obrir ICGC · ortofoto de Catalunya">🛰️</button>
+        <input ref={bgFileRef} type="file" accept="image/*" style={{ display: 'none' }}
+          onChange={(e) => { const f = e.target.files?.[0]; if (f) fileToScaledDataUrl(f).then(addBackground).catch(() => {}); e.target.value = ''; }} />
         <label style={{ ...btn, gap: 8 }}>
           <Mono size={9} color={A.inkMuted}>Via</Mono>
           <select value={road} onChange={(e) => changeRoad(e.target.value as Road)} style={{ border: 'none', background: 'transparent', fontFamily: A.display, fontWeight: 700, fontSize: 13.5, color: A.ink, cursor: 'pointer', outline: 'none' }}>
@@ -940,6 +1012,19 @@ export default function Croquis() {
             <button onClick={() => zoom(1.2)} style={{ ...btn, padding: '7px 12px', fontSize: 18, border: 'none' }} aria-label="Apropar">+</button>
           </div>
 
+          {/* Panell del fons de mapa */}
+          {bgEl && (
+            <div style={{ position: 'absolute', left: 14, top: 14, zIndex: 8, display: 'flex', alignItems: 'center', gap: 10, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 13, padding: '8px 12px', boxShadow: A.shadowLg }}>
+              <span style={{ fontSize: 16 }}>🗺️</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <Mono size={8.5} color={A.inkMuted}>Fons · opacitat</Mono>
+                <input type="range" min={20} max={100} value={Math.round((bgEl.opacity ?? 1) * 100)} onChange={(e) => setBgOpacity(Number(e.target.value) / 100)} style={{ width: 116, accentColor: A.terracota }} />
+              </div>
+              <button onClick={() => { update(bgEl.id, { locked: !bgEl.locked }); setSel(null); }} style={{ ...btn, padding: '7px 10px' }} title={bgEl.locked ? 'Desbloquejar per moure\'l' : 'Bloquejar (dibuixa per sobre)'}>{bgEl.locked ? '🔒' : '🔓'}</button>
+              <button onClick={removeBg} style={{ ...btn, padding: '7px 10px', color: A.red, borderColor: A.redSoft }} title="Treure el fons"><Ic name="x" size={14} color={A.red} /></button>
+            </div>
+          )}
+
           {/* Mini-barra de l'element seleccionat */}
           {selEl && (
             <div style={{ position: 'absolute', left: '50%', bottom: 14, transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: 7, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 14, padding: '8px 11px', boxShadow: A.shadowLg, flexWrap: 'wrap', maxWidth: '94%' }}>
@@ -966,7 +1051,7 @@ export default function Croquis() {
           {/* Pista quan està buit */}
           {els.length === 0 && (
             <div style={{ position: 'absolute', top: 16, left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.9)', border: `1px solid ${A.line2}`, borderRadius: 999, padding: '8px 16px', fontFamily: A.sans, fontWeight: 600, fontSize: 13, color: A.inkSoft, pointerEvents: 'none', textAlign: 'center' }}>
-              👈 Tria la via i arrossega elements · clic dret sobre un vehicle per a les dades · roda per fer zoom
+              👈 Tria la via i arrossega elements · 📷 Fons per posar un mapa (o enganxa amb Ctrl+V) · clic dret per a les dades
             </div>
           )}
 
