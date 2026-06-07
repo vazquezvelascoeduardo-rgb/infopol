@@ -1,0 +1,54 @@
+name: Actualització diària de notícies
+
+on:
+  schedule:
+    # 21:00 UTC = 22:00 CET (hivern) / 23:00 CEST (estiu)
+    # Si vols que sempre sigui exactament les 22:00 hora local, consulta el CLAUDE.md
+    - cron: '0 21 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Execució de prova (no fa commit)'
+        required: false
+        default: 'false'
+
+jobs:
+  update-news:
+    name: Cerca i afegeix notícies del dia
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configurar git
+        run: |
+          git config user.name  "InfoPol News Bot"
+          git config user.email "noreply@infopol.app"
+
+      - name: Executar tasca de notícies amb Claude
+        uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          allowed_tools: "WebSearch,WebFetch,Read,Edit,Bash"
+          prompt: |
+            Executa la tasca diària de notícies tal com s'especifica al fitxer CLAUDE.md d'aquest repositori.
+
+            Passos:
+            1. Llegeix CLAUDE.md per entendre el format i les instruccions completes.
+            2. Fes cerques exhaustives de notícies d'avui ($(date +%Y-%m-%d)) en totes les categories:
+               política, economia, cultura, descobriment, premi, esport, policial
+               i àmbits: catalunya, espanya, internacional.
+            3. Selecciona 10-15 notícies rellevants i redacta cada entrada en català seguint
+               exactament el format definit al CLAUDE.md.
+            4. Actualitza server/index.js: insereix les noves entrades al principi del array NEWS,
+               elimina entrades de fa més de 30 dies, mantén màxim 60 entrades.
+            5. Fes commit i push amb el missatge: "noticias: actualització diaria $(date +%Y-%m-%d)"
+
+            Nota: Si dry_run és 'true', fes tots els passos menys el commit/push.
+            dry_run: ${{ github.event.inputs.dry_run || 'false' }}

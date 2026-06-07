@@ -43,6 +43,8 @@ const USER = {
   mode: 'operativa',
 };
 
+// cat: 'política'|'economia'|'cultura'|'descobriment'|'premi'|'esport'|'policial'
+// geo: 'catalunya'|'espanya'|'internacional'
 const NEWS = [
   {
     id: 'n001',
@@ -52,6 +54,8 @@ const NEWS = [
     title: 'Multireincidència — enduriment de furts i estafes lleus',
     desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026. Afecta l\'art. 22.8 CP i els arts. 468-470 LECrim.',
     url: null,
+    cat: 'policial',
+    geo: 'espanya',
   },
   {
     id: 'n002',
@@ -61,6 +65,8 @@ const NEWS = [
     title: 'Reforma del Reglament d\'Estrangeria',
     desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny de 2026.',
     url: null,
+    cat: 'policial',
+    geo: 'espanya',
   },
   {
     id: 'n003',
@@ -70,6 +76,8 @@ const NEWS = [
     title: 'Instrucció sobre identificació i registre de persones',
     desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.',
     url: null,
+    cat: 'policial',
+    geo: 'espanya',
   },
 ];
 
