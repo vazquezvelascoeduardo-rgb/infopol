@@ -10,6 +10,14 @@ import { VitePWA } from 'vite-plugin-pwa';
 // que `base` és sempre '/'.
 export default defineConfig({
   base: '/',
+  // react-konva pot acabar amb una segona còpia de React (Vite optimizeDeps)
+  // i provocar "Invalid hook call". Forcem una única instància de React.
+  resolve: {
+    dedupe: ['react', 'react-dom'],
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'konva', 'react-konva'],
+  },
   build: {
     // Code-splitting: separem dependències grans (React, Router) en chunks
     // propis perquè es cachegin entre desplegaments i el bundle inicial

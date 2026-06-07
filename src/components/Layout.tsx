@@ -118,6 +118,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     p === '/operativa' || p.startsWith('/operativa/') ||
     p === '/superbuscador' ||
     p === '/calculadora-alcohol' ||
+    p === '/croquis' ||
     p === '/recursos' ||
     p === '/leyes' || p.startsWith('/leyes/') ||
     // Acadèmia i les seves subpàgines

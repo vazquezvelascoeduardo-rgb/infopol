@@ -43,6 +43,7 @@ const PenalDretsDetingut = lazy(() => import('./pages/operativa/PenalDretsDeting
 const Superbuscador = lazy(() => import('./pages/Superbuscador'));
 const Recursos = lazy(() => import('./pages/Recursos'));
 const CalculadoraAlcohol = lazy(() => import('./pages/CalculadoraAlcohol'));
+const Croquis = lazy(() => import('./pages/Croquis'));
 const AvisLegal = lazy(() => import('./pages/AvisLegal'));
 const Privacitat = lazy(() => import('./pages/Privacitat'));
 const Academia = lazy(() => import('./pages/Academia'));
@@ -102,6 +103,7 @@ export default function App() {
           {/* === Públiques (chrome global) === */}
           <Route path="/" element={<Home />} />
           <Route path="/cerca" element={<SearchResults />} />
+          <Route path="/croquis" element={<Croquis />} />
           <Route path="/avis-legal" element={<AvisLegal />} />
           <Route path="/privacitat" element={<Privacitat />} />
           <Route path="/noticies" element={<Noticies />} />

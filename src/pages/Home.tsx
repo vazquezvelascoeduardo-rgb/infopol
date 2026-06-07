@@ -98,6 +98,26 @@ export default function Home() {
           cta="Entrar a l'Acadèmia" />
       </div>
 
+      {/* Eina destacada: Croquis d'accident */}
+      <Link to="/croquis" className="h-mode" style={{
+        display: 'flex', alignItems: 'center', gap: 18, marginTop: 'clamp(16px,2vw,22px)', textDecoration: 'none',
+        borderRadius: 24, padding: 'clamp(18px,2.4vw,26px)', color: '#fff', boxShadow: H.shadowMd,
+        backgroundImage: `linear-gradient(150deg, ${H.terracota}, #C2410C)`, position: 'relative', overflow: 'hidden',
+      }}>
+        <div style={{ position: 'absolute', top: -40, right: -30, width: 160, height: 160, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
+        <span style={{ position: 'relative', width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0, boxShadow: H.inset }}>
+          <HIc name="siren" size={28} color="#fff" sw={2.1} />
+        </span>
+        <div style={{ position: 'relative', flex: 1, minWidth: 0 }}>
+          <span style={{ fontFamily: H.mono, fontWeight: 600, fontSize: 10.5, letterSpacing: 1.4, textTransform: 'uppercase', color: 'rgba(255,255,255,0.85)' }}>Nova eina</span>
+          <h2 style={{ margin: '4px 0 2px', fontFamily: H.display, fontWeight: 700, fontSize: 'clamp(20px,2.6vw,26px)', letterSpacing: -0.8, lineHeight: 1.1 }}>Croquis d'accident</h2>
+          <p style={{ margin: 0, fontFamily: H.sans, fontSize: 14, color: 'rgba(255,255,255,0.9)', lineHeight: 1.45 }}>Recrea l'accident: via, vehicles, senyals, semàfors i trajectòries. Exporta a PNG per a l'atestat.</p>
+        </div>
+        <span className="h-btn" style={{ position: 'relative', flexShrink: 0, display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff', color: H.terracota, borderRadius: 14, padding: '12px 20px', fontFamily: H.display, fontWeight: 700, fontSize: 15 }}>
+          Obrir <HIc name="arrow" size={17} color={H.terracota} sw={2.4} />
+        </span>
+      </Link>
+
       {/* Actualitat (es manté) */}
       {recentNoticies.length > 0 && (
         <section className="home-section" style={{ marginTop: 28 }}>
