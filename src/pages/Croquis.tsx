@@ -22,14 +22,21 @@ type VehData = {
 type El = {
   id: string; kind: string; x: number; y: number;
   rotation: number; scaleX: number; scaleY: number;
-  color?: string; text?: string; data?: VehData;
+  color?: string; text?: string; data?: VehData; ghost?: boolean;
 };
 type Road = 'recta' | 'doble' | 'autovia' | 'cruilla' | 'te' | 'rotonda' | 'corba' | 'cap';
+// Capçalera de l'atestat (s'imprimeix al croquis exportat).
+type Header = {
+  num?: string; data?: string; hora?: string; municipi?: string; lloc?: string;
+  meteo?: string; llum?: string; calcada?: string; visibilitat?: string; instructor?: string;
+};
+type Scene = { road: Road; els: El[]; header: Header; legend: boolean };
+const STORE_KEY = 'infopol:croquis:v1';
 
 const RED = '#D62B2B', BLUE = '#0B57A4', DARK = '#15151C', YEL = '#F2B600';
 const PAINT = 'rgba(248,247,242,0.92)';            // pintura vial blanca
 const VEH_COLORS = ['#3B6BF5', '#E0455A', '#9AA0AA', '#15151C', '#FFFFFF', '#F0B400', '#1FB286', '#FF7A1A'];
-const COLORABLE = ['cotxe', 'furgo', 'camio', 'trailer', 'bus', 'moto', 'bici', 'patinet', 'tractor', 'etiqueta', 'text', 'fletxa'];
+const COLORABLE = ['cotxe', 'furgo', 'camio', 'trailer', 'bus', 'moto', 'bici', 'patinet', 'tractor', 'etiqueta', 'text', 'fletxa', 'carrer'];
 const VEHICLES = ['cotxe', 'furgo', 'camio', 'trailer', 'bus', 'moto', 'bici', 'patinet', 'vianant', 'tractor', 'ambulancia', 'policia'];
 const ESTATS: Record<Estat, { label: string; color: string }> = {
   mov: { label: 'En moviment', color: '#1FB286' },
@@ -124,9 +131,14 @@ const PALETTE: { group: string; items: { kind: string; label: string; emoji: str
     { kind: 'impacte', label: "Punt d'impacte", emoji: '💥' },
     { kind: 'taca', label: 'Vessament', emoji: '🛢️' },
     { kind: 'ferit', label: 'Ferit', emoji: '🩹' },
+    { kind: 'collisio', label: 'Punt col·lisió', emoji: '❌' },
     { kind: 'mesura', label: 'Cota / mida', emoji: '📐' },
     { kind: 'etiqueta', label: 'Etiqueta A·B', emoji: '🅰️' },
     { kind: 'text', label: 'Text lliure', emoji: '🔤' },
+  ] },
+  { group: 'Orientació i carrers', items: [
+    { kind: 'nord', label: 'Nord (brúixola)', emoji: '🧭' },
+    { kind: 'carrer', label: 'Nom de carrer', emoji: '🪧' },
   ] },
 ];
 
@@ -146,6 +158,20 @@ const BOARD = { w: 1680, h: 1120 };
 
 let counter = 0;
 const uid = () => `el-${++counter}`;
+
+// Persistència: carrega l'escena desada i sincronitza el comptador d'ids.
+function loadScene(): Scene | null {
+  try {
+    const raw = typeof localStorage !== 'undefined' && localStorage.getItem(STORE_KEY);
+    if (!raw) return null;
+    const s = JSON.parse(raw) as Scene;
+    if (!s || !Array.isArray(s.els)) return null;
+    return { road: s.road || 'cruilla', els: s.els, header: s.header || {}, legend: s.legend !== false };
+  } catch { return null; }
+}
+function syncCounter(els: El[]) {
+  for (const e of els) { const n = parseInt(String(e.id).replace('el-', '')); if (n > counter) counter = n; }
+}
 const DEFAULT_COLOR = (k: string) =>
   k === 'cotxe' ? '#3B6BF5'
   : k === 'camio' || k === 'trailer' || k === 'bus' || k === 'furgo' ? '#9AA0AA'
@@ -159,7 +185,12 @@ const NEEDS_PROMPT: Record<string, { msg: string; def: string }> = {
   mesura: { msg: 'Mida (p. ex. 4,5 m):', def: '0,0 m' },
   'pes-max': { msg: 'Pes màxim (t):', def: '5,5' },
   'altura-max': { msg: 'Alçada màx. (m):', def: '3,5' },
+  carrer: { msg: 'Nom del carrer / via:', def: 'Carrer Major' },
 };
+const METEO = ['Assolellat', 'Ennuvolat', 'Pluja', 'Boira', 'Neu', 'Vent'];
+const LLUM = ['Dia', 'Nit', 'Crepuscle', 'Il·luminació artificial'];
+const CALCADA = ['Seca', 'Mullada', 'Gel', 'Neu', 'Greixosa'];
+const VISIB = ['Bona', 'Reduïda', 'Dolenta'];
 
 /* ════════════════════════ Fons de via ════════════════════════ */
 const ASPHALT = '#D7DAE0', ASPHALT_DK = '#C6C9D1', TERRAIN = '#E8E4D8';
@@ -418,6 +449,13 @@ function Shape({ kind, color, text }: { kind: string; color: string; text?: stri
     case 'ferit': return (<><Ellipse radiusX={24} radiusY={9} fill={color} stroke={DARK} strokeWidth={1.2} /><Circle x={-20} y={0} radius={8} fill={color} stroke={DARK} strokeWidth={1.2} /></>);
     case 'derrapatge': return (<><Line points={[-55, -7, 55, -7]} stroke="#2A2A2E" strokeWidth={6} dash={[16, 10]} lineCap="round" /><Line points={[-55, 7, 55, 7]} stroke="#2A2A2E" strokeWidth={6} dash={[16, 10]} lineCap="round" /></>);
     case 'etiqueta': return (<><Circle radius={17} fill={color} stroke="#fff" strokeWidth={2.5} shadowColor="#0007" shadowBlur={5} />{txt(text || 'A', 18, '#fff', 34)}</>);
+    case 'collisio': return (<><Circle radius={20} fill="#fff" stroke={RED} strokeWidth={3} /><Line points={[-12, -12, 12, 12]} stroke={RED} strokeWidth={5} /><Line points={[12, -12, -12, 12]} stroke={RED} strokeWidth={5} /></>);
+    case 'nord': return (<>
+      <Circle radius={22} fill="#fff" stroke={DARK} strokeWidth={2} shadowColor="#0005" shadowBlur={5} />
+      <Line closed points={[0, -18, 7, 4, 0, -2, -7, 4]} fill={RED} />
+      <Line closed points={[0, 18, 7, -4, 0, 2, -7, -4]} fill="#9AA0AA" />
+      <Text text="N" fontSize={11} fontStyle="bold" fill={DARK} width={20} align="center" x={-10} y={-33} listening={false} />
+    </>);
     default: return null;
   }
 }
@@ -452,17 +490,28 @@ function Node({ el, onSelect, onChange, onContext }: {
         <Text text={el.text || '0,0 m'} fontSize={14} fontStyle="bold" fill={A.terraInk} width={120} align="center" x={-60} y={-22} />
       </Group>
     );
+  if (el.kind === 'carrer') {
+    const label = el.text || 'Carrer';
+    const w = Math.max(72, label.length * 10.5 + 26);
+    return (
+      <Group ref={ref} {...common}>
+        <Rect x={-w / 2} y={-16} width={w} height={32} cornerRadius={8} fill={el.color || '#1565C0'} stroke="#fff" strokeWidth={2} shadowColor="#0006" shadowBlur={5} />
+        <Text text={label} fontSize={15} fontStyle="bold" fontFamily="Manrope, sans-serif" fill="#fff" width={w} align="center" x={-w / 2} y={-9} listening={false} />
+      </Group>
+    );
+  }
   const veh = VEHICLES.includes(el.kind);
   const estat = el.data?.estat;
   const kmh = parseInt(el.data?.kmh || '') || 0;
   return (
-    <Group ref={ref} {...common}>
+    <Group ref={ref} {...common} opacity={el.ghost ? 0.42 : 1}>
+      {el.ghost && <Rect x={-30} y={-52} width={60} height={104} cornerRadius={12} stroke={DARK} strokeWidth={1.5} dash={[8, 6]} listening={false} />}
       <Shape kind={el.kind} color={el.color || DEFAULT_COLOR(el.kind)} text={el.text} />
-      {veh && estat === 'mov' && (
+      {veh && !el.ghost && estat === 'mov' && (
         <Arrow points={[0, -48, 0, -48 - Math.min(80, 26 + kmh * 0.7)]} pointerLength={13} pointerWidth={13}
           stroke="#1FB286" fill="#1FB286" strokeWidth={5} listening={false} />
       )}
-      {veh && estat === 'estacionat' && (<>
+      {veh && !el.ghost && estat === 'estacionat' && (<>
         <Rect x={11} y={-52} width={20} height={20} cornerRadius={5} fill="#3B6BF5" listening={false} />
         <Text text="P" fontSize={15} fontStyle="bold" fill="#fff" width={20} align="center" x={11} y={-50} listening={false} />
       </>)}
@@ -470,20 +519,58 @@ function Node({ el, onSelect, onChange, onContext }: {
   );
 }
 
-/* Etiqueta flotant amb matrícula / dades (no gira amb el vehicle). */
-function VehBadge({ el }: { el: El }) {
-  const d = el.data; if (!d) return null;
-  const estat = d.estat;
-  let label = (d.plate || [d.marca, d.model].filter(Boolean).join(' ') || '').toUpperCase();
-  if (!label && estat) label = ESTATS[estat].label.toUpperCase();
+/* Etiqueta flotant amb lletra (A·B) + matrícula / dades (no gira amb el vehicle). */
+function VehBadge({ el, letter }: { el: El; letter?: string }) {
+  const d = el.data;
+  const estat = !el.ghost ? d?.estat : undefined;
+  const id = d?.plate || [d?.marca, d?.model].filter(Boolean).join(' ') || '';
+  let label = [letter, id].filter(Boolean).join(' · ').toUpperCase();
+  if (el.ghost) label = (letter ? letter + ' · ' : '') + 'INICIAL';
   if (!label) return null;
-  const w = Math.max(44, label.length * 8.4 + (estat ? 26 : 16));
+  const w = Math.max(44, label.length * 8.2 + (estat ? 26 : 16));
   return (
-    <Group x={el.x} y={el.y + 58} listening={false}>
-      <Rect x={-w / 2} y={-12} width={w} height={24} cornerRadius={7} fill="#fff" stroke="rgba(21,21,28,0.18)" strokeWidth={1} shadowColor="#0006" shadowBlur={5} shadowOffsetY={1} />
+    <Group x={el.x} y={el.y + 58} listening={false} opacity={el.ghost ? 0.8 : 1}>
+      <Rect x={-w / 2} y={-12} width={w} height={24} cornerRadius={7} fill={el.ghost ? '#F1EEE6' : '#fff'} stroke="rgba(21,21,28,0.18)" strokeWidth={1} shadowColor="#0006" shadowBlur={5} shadowOffsetY={1} />
       {estat && <Circle x={-w / 2 + 11} y={0} radius={5} fill={ESTATS[estat].color} />}
       <Text text={label} fontSize={12.5} fontStyle="bold" fontFamily="Manrope, sans-serif" fill="#15151C"
         x={-w / 2 + (estat ? 18 : 8)} y={-7} width={w - (estat ? 24 : 14)} align="center" />
+    </Group>
+  );
+}
+
+/* Capçalera de l'atestat dibuixada al llenç (s'exporta amb el PNG). */
+function TitleBlock({ h }: { h: Header }) {
+  const kv = (k: string, v?: string) => (v && v.trim() ? `${k}: ${v}` : null);
+  const l2 = [kv('Data', h.data), kv('Hora', h.hora), kv('Municipi', h.municipi), kv('Via/lloc', h.lloc)].filter(Boolean).join('     ');
+  const l3 = [kv('Meteo', h.meteo), kv('Llum', h.llum), kv('Calçada', h.calcada), kv('Visibilitat', h.visibilitat), kv('Instructor', h.instructor)].filter(Boolean).join('     ');
+  const W = BOARD.w - 52;
+  return (
+    <Group x={26} y={22} listening={false}>
+      <Rect width={W} height={132} cornerRadius={14} fill="#fff" stroke="rgba(21,21,28,0.18)" strokeWidth={1.5} shadowColor="#0006" shadowBlur={10} shadowOffsetY={3} />
+      <Rect width={8} height={132} cornerRadius={14} fill={A.terracota} />
+      <Text text="CROQUIS D'ACCIDENT" x={28} y={26} fontSize={26} fontStyle="bold" fontFamily="Poppins, sans-serif" fill="#15151C" />
+      <Text text={h.num ? `Atestat núm. ${h.num}` : ''} x={W - 420} y={30} width={400} align="right" fontSize={18} fontStyle="bold" fontFamily="Poppins, sans-serif" fill={A.terraInk} />
+      <Text text={l2} x={28} y={70} fontSize={16} fontFamily="Manrope, sans-serif" fill="#44444F" />
+      <Text text={l3} x={28} y={100} fontSize={16} fontFamily="Manrope, sans-serif" fill="#44444F" />
+    </Group>
+  );
+}
+
+/* Llegenda automàtica de vehicles (A, B, C…). */
+function Legend({ rows }: { rows: { letter: string; text: string; color: string }[] }) {
+  const W = 420, head = 38, rh = 30, H = head + rows.length * rh + 14;
+  return (
+    <Group x={26} y={BOARD.h - H - 24} listening={false}>
+      <Rect width={W} height={H} cornerRadius={14} fill="#fff" stroke="rgba(21,21,28,0.18)" strokeWidth={1.5} shadowColor="#0006" shadowBlur={10} shadowOffsetY={3} />
+      <Text text="LLEGENDA" x={18} y={14} fontSize={15} fontStyle="bold" fontFamily="Poppins, sans-serif" fill="#15151C" />
+      <Line points={[14, 34, W - 14, 34]} stroke="rgba(21,21,28,0.12)" strokeWidth={1} />
+      {rows.map((r, i) => (
+        <Group key={r.letter} y={head + i * rh}>
+          <Circle x={26} y={8} radius={11} fill={r.color} stroke="#fff" strokeWidth={2} />
+          <Text text={r.letter} x={15} y={1} width={22} align="center" fontSize={14} fontStyle="bold" fontFamily="Poppins, sans-serif" fill="#fff" />
+          <Text text={r.text} x={48} y={0} width={W - 62} fontSize={15} fontFamily="Manrope, sans-serif" fill="#15151C" />
+        </Group>
+      ))}
     </Group>
   );
 }
@@ -561,16 +648,37 @@ function VehModal({ el, onClose, onSave }: { el: El; onClose: () => void; onSave
 /* ════════════════════════════ EDITOR ════════════════════════════ */
 export default function Croquis() {
   const nav = useNavigate();
-  const [road, setRoad] = useState<Road>('cruilla');
-  const [els, setEls] = useState<El[]>([]);
+  const [road, setRoad] = useState<Road>(() => loadScene()?.road ?? 'cruilla');
+  const [els, setEls] = useState<El[]>(() => { const s = loadScene(); if (s) syncCounter(s.els); return s?.els ?? []; });
+  const [header, setHeader] = useState<Header>(() => loadScene()?.header ?? {});
+  const [showLegend, setShowLegend] = useState<boolean>(() => loadScene()?.legend ?? true);
   const [sel, setSel] = useState<string | null>(null);
   const [size, setSize] = useState({ w: 1000, h: 700 });
   const [view, setView] = useState({ scale: 0, x: 0, y: 0 });
   const [menu, setMenu] = useState<{ id: string; x: number; y: number } | null>(null);
   const [editVeh, setEditVeh] = useState<string | null>(null);
+  const [editAtestat, setEditAtestat] = useState(false);
+  const [, setHistTick] = useState(0);
   const wrapRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<Konva.Stage>(null);
   const trRef = useRef<Konva.Transformer>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const hist = useRef<{ past: Scene[]; future: Scene[] }>({ past: [], future: [] });
+
+  // Lletres automàtiques (A, B, C…) per a cada vehicle, en ordre.
+  const vehLetters = useMemo(() => {
+    const m: Record<string, string> = {}; let i = 0;
+    for (const e of els) if (VEHICLES.includes(e.kind) && !e.ghost) { m[e.id] = String.fromCharCode(65 + i); i++; }
+    // els fantasmes hereten la lletra del seu original si en tenen
+    return m;
+  }, [els]);
+
+  // ── Historial (desfer / refer) ──
+  function snapshot(): Scene { return { road, els, header, legend: showLegend }; }
+  function pushUndo() { hist.current.past.push(snapshot()); if (hist.current.past.length > 80) hist.current.past.shift(); hist.current.future = []; setHistTick((t) => t + 1); }
+  function applyScene(s: Scene) { setRoad(s.road); setEls(s.els); setHeader(s.header); setShowLegend(s.legend); setSel(null); }
+  function undo() { const h = hist.current; if (!h.past.length) return; h.future.push(snapshot()); applyScene(h.past.pop()!); setHistTick((t) => t + 1); }
+  function redo() { const h = hist.current; if (!h.future.length) return; h.past.push(snapshot()); applyScene(h.future.pop()!); setHistTick((t) => t + 1); }
 
   const fitView = useCallback((w = size.w, h = size.h, pad = 36) => {
     const s = Math.min((w - pad * 2) / BOARD.w, (h - pad * 2) / BOARD.h);
@@ -591,6 +699,11 @@ export default function Croquis() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Autodesat al navegador.
+  useEffect(() => {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify({ road, els, header, legend: showLegend } as Scene)); } catch { /* quota */ }
+  }, [road, els, header, showLegend]);
+
   // Transformer sobre el seleccionat.
   useEffect(() => {
     const tr = trRef.current, stage = stageRef.current; if (!tr || !stage) return;
@@ -602,15 +715,17 @@ export default function Croquis() {
   // Tecles: Supr esborra, fletxes mouen, Ctrl+D duplica.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') { setMenu(null); setEditVeh(null); return; }
+      if (e.key === 'Escape') { setMenu(null); setEditVeh(null); setEditAtestat(false); return; }
       if (document.activeElement && document.activeElement !== document.body) return;
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); e.shiftKey ? redo() : undo(); return; }
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y') { e.preventDefault(); redo(); return; }
       if ((e.key === 'Delete' || e.key === 'Backspace') && sel) { e.preventDefault(); remove(); }
       else if (e.key === 'd' && (e.ctrlKey || e.metaKey) && sel) { e.preventDefault(); duplicate(); }
       else if (sel && e.key.startsWith('Arrow')) {
         e.preventDefault(); const d = e.shiftKey ? 20 : 4;
         const dx = e.key === 'ArrowLeft' ? -d : e.key === 'ArrowRight' ? d : 0;
         const dy = e.key === 'ArrowUp' ? -d : e.key === 'ArrowDown' ? d : 0;
-        setEls((p) => p.map((el) => (el.id === sel ? { ...el, x: el.x + dx, y: el.y + dy } : el)));
+        pushUndo(); setEls((p) => p.map((el) => (el.id === sel ? { ...el, x: el.x + dx, y: el.y + dy } : el)));
       }
     };
     window.addEventListener('keydown', onKey);
@@ -627,25 +742,62 @@ export default function Croquis() {
     const cy = (size.h / 2 - view.y) / (view.scale || 1);
     const e: El = {
       id, kind, x: cx + (Math.random() * 50 - 25), y: cy + (Math.random() * 50 - 25),
-      rotation: 0, scaleX: 1, scaleY: 1, color: DEFAULT_COLOR(kind),
+      rotation: 0, scaleX: 1, scaleY: 1, color: kind === 'carrer' ? '#1565C0' : DEFAULT_COLOR(kind),
       ...(p ? { text: (typeof window !== 'undefined' ? window.prompt(p.msg, p.def) : p.def) || p.def } : {}),
     };
-    setEls((prev) => [...prev, e]); setSel(id);
+    pushUndo(); setEls((prev) => [...prev, e]); setSel(id);
   }
-  function update(id: string, patch: Partial<El>) { setEls((p) => p.map((e) => (e.id === id ? { ...e, ...patch } : e))); }
-  function setVehData(id: string, patch: Partial<VehData>) { setEls((p) => p.map((e) => (e.id === id ? { ...e, data: { ...e.data, ...patch } } : e))); }
+  function update(id: string, patch: Partial<El>) { pushUndo(); setEls((p) => p.map((e) => (e.id === id ? { ...e, ...patch } : e))); }
+  function setVehData(id: string, patch: Partial<VehData>) { pushUndo(); setEls((p) => p.map((e) => (e.id === id ? { ...e, data: { ...e.data, ...patch } } : e))); }
   function openMenu(id: string, clientX: number, clientY: number) {
     const r = wrapRef.current?.getBoundingClientRect();
     setMenu({ id, x: clientX - (r?.left || 0), y: clientY - (r?.top || 0) });
   }
-  function remove() { if (!sel) return; setEls((p) => p.filter((e) => e.id !== sel)); setSel(null); }
-  function duplicate() { if (!selEl) return; const id = uid(); setEls((p) => [...p, { ...selEl, id, x: selEl.x + 28, y: selEl.y + 28 }]); setSel(id); }
+  function remove() { if (!sel) return; pushUndo(); setEls((p) => p.filter((e) => e.id !== sel)); setSel(null); }
+  function duplicate() { if (!selEl) return; pushUndo(); const id = uid(); setEls((p) => [...p, { ...selEl, id, x: selEl.x + 28, y: selEl.y + 28 }]); setSel(id); }
   function rotate(d: number) { if (selEl) update(selEl.id, { rotation: Math.round((selEl.rotation + d) % 360) }); }
   function scaleBy(f: number) { if (selEl) update(selEl.id, { scaleX: Math.max(0.25, Math.min(6, Math.abs(selEl.scaleX) * f)) * Math.sign(selEl.scaleX || 1), scaleY: Math.max(0.25, Math.min(6, selEl.scaleY * f)) }); }
   function flipH() { if (selEl) update(selEl.id, { scaleX: -selEl.scaleX }); }
-  function toFront() { if (!selEl) return; setEls((p) => [...p.filter((e) => e.id !== selEl.id), selEl]); }
-  function toBack() { if (!selEl) return; setEls((p) => [selEl, ...p.filter((e) => e.id !== selEl.id)]); }
-  function clearAll() { if (els.length && !confirm('Esborrar tot el croquis?')) return; setEls([]); setSel(null); }
+  function toFront() { if (!selEl) return; pushUndo(); setEls((p) => [...p.filter((e) => e.id !== selEl.id), selEl]); }
+  function toBack() { if (!selEl) return; pushUndo(); setEls((p) => [selEl, ...p.filter((e) => e.id !== selEl.id)]); }
+  function clearAll() { if (els.length && !confirm('Esborrar tot el croquis?')) return; pushUndo(); setEls([]); setSel(null); }
+  function changeRoad(r: Road) { pushUndo(); setRoad(r); }
+
+  // Posició inicial (fantasma del vehicle, darrere segons el seu rumb).
+  function markInitial(srcId: string) {
+    const src = els.find((e) => e.id === srcId); if (!src) return;
+    pushUndo(); const id = uid(); const th = (src.rotation || 0) * Math.PI / 180;
+    setEls((p) => [{ ...src, id, ghost: true, x: src.x - Math.sin(th) * 150, y: src.y + Math.cos(th) * 150 }, ...p]); setSel(id);
+  }
+  // Punt de col·lisió (davant del vehicle si n'hi ha origen).
+  function markCollision(srcId?: string) {
+    const src = srcId ? els.find((e) => e.id === srcId) : null;
+    pushUndo(); const id = uid();
+    let x = (size.w / 2 - view.x) / (view.scale || 1), y = (size.h / 2 - view.y) / (view.scale || 1);
+    if (src) { const th = (src.rotation || 0) * Math.PI / 180; x = src.x + Math.sin(th) * 70; y = src.y - Math.cos(th) * 70; }
+    setEls((p) => [...p, { id, kind: 'collisio', x, y, rotation: 0, scaleX: 1, scaleY: 1 }]); setSel(id);
+  }
+
+  // Desar / obrir fitxer .json.
+  function exportJson() {
+    const data = JSON.stringify({ road, els, header, legend: showLegend } as Scene, null, 2);
+    const a = document.createElement('a');
+    a.download = 'croquis-accident.json';
+    a.href = URL.createObjectURL(new Blob([data], { type: 'application/json' }));
+    a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1500);
+  }
+  function importJson(file: File) {
+    const r = new FileReader();
+    r.onload = () => {
+      try {
+        const s = JSON.parse(String(r.result)) as Scene;
+        if (!Array.isArray(s.els)) throw new Error('bad');
+        pushUndo(); syncCounter(s.els);
+        setRoad(s.road || 'cruilla'); setEls(s.els); setHeader(s.header || {}); setShowLegend(s.legend !== false); setSel(null);
+      } catch { alert('El fitxer no és un croquis vàlid.'); }
+    };
+    r.readAsText(file);
+  }
 
   // Zoom amb la roda (centrat al cursor).
   function onWheel(e: Konva.KonvaEventObject<WheelEvent>) {
@@ -684,6 +836,13 @@ export default function Croquis() {
 
   const btn: CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: 7, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 11, padding: '9px 13px', fontFamily: A.display, fontWeight: 700, fontSize: 13.5, color: A.ink };
   const pct = Math.round((view.scale || 1) * 100);
+  const headerFilled = Object.values(header).some((v) => v && String(v).trim());
+  const legendRows = els.filter((e) => VEHICLES.includes(e.kind) && !e.ghost).map((e) => {
+    const d = e.data || {};
+    const text = [[d.marca, d.model].filter(Boolean).join(' '), d.plate, d.color, d.estat ? ESTATS[d.estat].label : ''].filter(Boolean).join(' · ') || 'Vehicle';
+    const color = d.estat ? ESTATS[d.estat].color : (e.color && e.color !== '#FFFFFF' ? e.color! : A.ink);
+    return { letter: vehLetters[e.id] || '?', text, color };
+  });
 
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 110, background: A.bg, display: 'flex', flexDirection: 'column', fontFamily: A.sans }}>
@@ -694,13 +853,20 @@ export default function Croquis() {
           <span style={{ width: 34, height: 34, borderRadius: 10, background: A.terracota, display: 'grid', placeItems: 'center', boxShadow: A.inset }}><Ic name="car" size={19} color="#fff" sw={2.2} /></span>
           <div><div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 15.5, color: A.ink, letterSpacing: -0.3 }}>Croquis d'accident</div><Mono size={9} color={A.inkMuted}>Editor professional · exporta PNG</Mono></div>
         </div>
+        <button onClick={undo} disabled={!hist.current.past.length} style={{ ...btn, padding: '9px 11px', fontSize: 16, opacity: hist.current.past.length ? 1 : 0.4 }} title="Desfer (Ctrl+Z)">↶</button>
+        <button onClick={redo} disabled={!hist.current.future.length} style={{ ...btn, padding: '9px 11px', fontSize: 16, opacity: hist.current.future.length ? 1 : 0.4 }} title="Refer (Ctrl+Maj+Z)">↷</button>
+        <button onClick={() => setEditAtestat(true)} style={btn}><Ic name="doc" size={15} color={A.inkSoft} /> Atestat</button>
         <label style={{ ...btn, gap: 8 }}>
           <Mono size={9} color={A.inkMuted}>Via</Mono>
-          <select value={road} onChange={(e) => setRoad(e.target.value as Road)} style={{ border: 'none', background: 'transparent', fontFamily: A.display, fontWeight: 700, fontSize: 13.5, color: A.ink, cursor: 'pointer', outline: 'none' }}>
+          <select value={road} onChange={(e) => changeRoad(e.target.value as Road)} style={{ border: 'none', background: 'transparent', fontFamily: A.display, fontWeight: 700, fontSize: 13.5, color: A.ink, cursor: 'pointer', outline: 'none' }}>
             {ROADS.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}
           </select>
         </label>
-        <button onClick={clearAll} style={btn}><Ic name="x" size={15} color={A.inkSoft} /> Esborrar tot</button>
+        <button onClick={exportJson} style={btn} title="Desar còpia (.json)">💾 Desar</button>
+        <button onClick={() => fileRef.current?.click()} style={btn} title="Obrir un croquis (.json)">📂 Obrir</button>
+        <input ref={fileRef} type="file" accept="application/json,.json" style={{ display: 'none' }}
+          onChange={(e) => { const f = e.target.files?.[0]; if (f) importJson(f); e.target.value = ''; }} />
+        <button onClick={clearAll} style={btn}><Ic name="x" size={15} color={A.inkSoft} /> Buidar</button>
         <button onClick={exportPng} style={{ ...btn, background: A.ink, color: '#fff', border: 'none' }}><Ic name="doc" size={16} color="#fff" /> Exportar PNG</button>
       </header>
 
@@ -739,12 +905,17 @@ export default function Croquis() {
                 <Fragment key={el.id}>
                   <Node el={el} onSelect={() => setSel(el.id)} onChange={(patch) => update(el.id, patch)}
                     onContext={(cx, cy) => openMenu(el.id, cx, cy)} />
-                  {VEHICLES.includes(el.kind) && <VehBadge el={el} />}
+                  {VEHICLES.includes(el.kind) && <VehBadge el={el} letter={vehLetters[el.id]} />}
                 </Fragment>
               ))}
               <Transformer ref={trRef} rotationSnaps={[0, 45, 90, 135, 180, 225, 270, 315]}
                 anchorSize={11} borderStroke={A.terracota} anchorStroke={A.terracota} anchorCornerRadius={3}
                 boundBoxFunc={(oldB, newB) => (newB.width < 14 || newB.height < 14 ? oldB : newB)} />
+            </Layer>
+            {/* Capçalera + llegenda (informatiu, s'exporta) */}
+            <Layer listening={false}>
+              {headerFilled && <TitleBlock h={header} />}
+              {showLegend && legendRows.length > 0 && <Legend rows={legendRows} />}
             </Layer>
           </Stage>
 
@@ -804,6 +975,9 @@ export default function Croquis() {
                       </MenuItem>
                     ))}
                     {sep}
+                    <MenuItem onClick={() => { markInitial(el.id); setMenu(null); }}>📍 Marca posició inicial</MenuItem>
+                    <MenuItem onClick={() => { markCollision(el.id); setMenu(null); }}>❌ Marca punt de col·lisió</MenuItem>
+                    {sep}
                   </>)}
                   <MenuItem onClick={() => { duplicate(); setMenu(null); }}>Duplicar</MenuItem>
                   <MenuItem onClick={() => { toFront(); setMenu(null); }}>Portar al davant</MenuItem>
@@ -822,6 +996,64 @@ export default function Croquis() {
         const el = els.find((e) => e.id === editVeh); if (!el) return null;
         return <VehModal el={el} onClose={() => setEditVeh(null)} onSave={(d) => { setVehData(el.id, d); setEditVeh(null); }} />;
       })()}
+
+      {/* Modal de dades de l'atestat */}
+      {editAtestat && (
+        <AtestatModal h={header} legend={showLegend} onClose={() => setEditAtestat(false)}
+          onSave={(nh, lg) => { pushUndo(); setHeader(nh); setShowLegend(lg); setEditAtestat(false); }} />
+      )}
+    </div>
+  );
+}
+
+/* Modal de dades de l'atestat (capçalera + llegenda). */
+function AtestatModal({ h, legend, onClose, onSave }: { h: Header; legend: boolean; onClose: () => void; onSave: (h: Header, legend: boolean) => void }) {
+  const [d, setD] = useState<Header>({ ...h });
+  const [lg, setLg] = useState(legend);
+  const set = (p: Partial<Header>) => setD((s) => ({ ...s, ...p }));
+  const inp: CSSProperties = { width: '100%', border: `1px solid ${A.line2}`, borderRadius: 10, padding: '10px 12px', fontFamily: A.sans, fontSize: 14, color: A.ink, background: A.bgSoft, outline: 'none' };
+  const lbl: CSSProperties = { display: 'block', fontFamily: A.display, fontWeight: 700, fontSize: 12, color: A.inkSoft, marginBottom: 5 };
+  const Sel = ({ k, opts }: { k: keyof Header; opts: string[] }) => (
+    <select style={{ ...inp, cursor: 'pointer' }} value={(d[k] as string) || ''} onChange={(e) => set({ [k]: e.target.value } as Partial<Header>)}>
+      <option value="">—</option>
+      {opts.map((o) => <option key={o} value={o}>{o}</option>)}
+    </select>
+  );
+  return (
+    <div onMouseDown={onClose} style={{ position: 'fixed', inset: 0, zIndex: 130, background: 'rgba(21,21,28,0.45)', display: 'grid', placeItems: 'center', padding: 16 }}>
+      <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 'min(560px, 96vw)', maxHeight: '92vh', overflowY: 'auto', background: A.card, borderRadius: 20, boxShadow: A.shadowLg, padding: 22 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+          <span style={{ width: 36, height: 36, borderRadius: 10, background: A.terracota, display: 'grid', placeItems: 'center', boxShadow: A.inset }}><Ic name="doc" size={19} color="#fff" sw={2.2} /></span>
+          <div style={{ marginRight: 'auto' }}>
+            <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 17, color: A.ink }}>Dades de l'atestat</div>
+            <Mono size={9} color={A.inkMuted}>S'imprimeix a la capçalera del croquis</Mono>
+          </div>
+          <button onClick={onClose} style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}><Ic name="x" size={20} color={A.inkSoft} /></button>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12 }}>
+          <div><label style={lbl}>Atestat núm.</label><input style={inp} value={d.num || ''} onChange={(e) => set({ num: e.target.value })} placeholder="123/2026" /></div>
+          <div><label style={lbl}>Data</label><input style={inp} value={d.data || ''} onChange={(e) => set({ data: e.target.value })} placeholder="06/06/2026" /></div>
+          <div><label style={lbl}>Hora</label><input style={inp} value={d.hora || ''} onChange={(e) => set({ hora: e.target.value })} placeholder="18:30" /></div>
+          <div><label style={lbl}>Municipi</label><input style={inp} value={d.municipi || ''} onChange={(e) => set({ municipi: e.target.value })} placeholder="Viladecans" /></div>
+          <div style={{ gridColumn: 'span 2' }}><label style={lbl}>Via / lloc</label><input style={inp} value={d.lloc || ''} onChange={(e) => set({ lloc: e.target.value })} placeholder="Av. de Roureda, 12" /></div>
+          <div><label style={lbl}>Meteo</label><Sel k="meteo" opts={METEO} /></div>
+          <div><label style={lbl}>Llum</label><Sel k="llum" opts={LLUM} /></div>
+          <div><label style={lbl}>Calçada</label><Sel k="calcada" opts={CALCADA} /></div>
+          <div><label style={lbl}>Visibilitat</label><Sel k="visibilitat" opts={VISIB} /></div>
+          <div style={{ gridColumn: 'span 2' }}><label style={lbl}>Instructor (TIP)</label><input style={inp} value={d.instructor || ''} onChange={(e) => set({ instructor: e.target.value })} placeholder="TIP 12345" /></div>
+        </div>
+
+        <label style={{ display: 'flex', alignItems: 'center', gap: 9, marginTop: 16, cursor: 'pointer', fontFamily: A.sans, fontWeight: 600, fontSize: 14, color: A.ink }}>
+          <input type="checkbox" checked={lg} onChange={(e) => setLg(e.target.checked)} style={{ width: 18, height: 18 }} />
+          Mostrar la llegenda de vehicles (A · B · C…) al croquis
+        </label>
+
+        <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
+          <button onClick={onClose} style={{ flex: 1, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 12, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14, color: A.ink }}>Cancel·lar</button>
+          <button onClick={() => onSave(d, lg)} style={{ flex: 1.4, border: 'none', background: A.ink, color: '#fff', cursor: 'pointer', borderRadius: 12, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14, boxShadow: A.shadowMd }}>Desar atestat</button>
+        </div>
+      </div>
     </div>
   );
 }
