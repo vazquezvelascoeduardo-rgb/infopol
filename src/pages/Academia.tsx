@@ -581,7 +581,7 @@ function SecTemari({ ctx }: { ctx: Ctx }) {
       <PageHead kicker="Estudiar · Temari" title="Lleis i temari" accent={A.terracota} desc="Fitxes per matèria amb el contingut per estudiar. Toca per obrir." />
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12 }}>
         {MODULES.map((m) => (
-          <Card key={m.slug} pad={16} hover onClick={() => ctx.nav(`/leyes/s/${m.slug}`)} style={{ display: 'flex', alignItems: 'center', gap: 13, borderLeft: `3px solid ${A.terracota}` }}>
+          <Card key={m.slug} pad={16} hover onClick={() => ctx.nav(`/academia/temari/${m.slug}`)} style={{ display: 'flex', alignItems: 'center', gap: 13, borderLeft: `3px solid ${A.terracota}` }}>
             <span style={{ width: 44, height: 44, borderRadius: 12, background: A.terraSoft, display: 'grid', placeItems: 'center', flexShrink: 0, fontSize: 22 }}>{m.icon}</span>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 14.5, color: A.ink }}>{m.title}</div>

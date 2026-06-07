@@ -159,6 +159,10 @@ export default function App() {
             <Route path="/actualitat/:slug" element={<TestSession />} />
 
             <Route path="/retos" element={<RequireAuth><Retos /></RequireAuth>} />
+            {/* Temari (lleis) dins del marc de l'Acadèmia: mateix contingut
+                que /leyes però sense saltar al shell d'Operativa. */}
+            <Route path="/academia/temari/:moduleSlug" element={<RequireAuth><Section /></RequireAuth>} />
+            <Route path="/academia/temari/:moduleSlug/:slug" element={<RequireAuth><CardPage /></RequireAuth>} />
             {/* Policia Local */}
             <Route path="/policia-local/esquemes" element={<RequireAuth><PoliciaLocalEsquemes /></RequireAuth>} />
             <Route path="/policia-local/esquemes/:slug" element={<RequireAuth><PoliciaLocalEsquemaLlei /></RequireAuth>} />

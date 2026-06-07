@@ -74,6 +74,10 @@ export default function CardPage() {
 
   const modTitle = t(`module.${mod.slug}.title`);
   const accent = MODULE_ACCENT[mod.slug] ?? 'var(--terracotta)';
+  // Context: si la fitxa s'obre des del temari de l'Acadèmia, els enllaços
+  // de tornada es queden al marc de l'Acadèmia (no salten a Operativa).
+  const inAcademia = location.pathname.startsWith('/academia/temari');
+  const sectionBack = inAcademia ? `/academia/temari/${mod.slug}` : `/leyes/s/${mod.slug}`;
   const { body, lang: bodyLang } = pickBody(card, locale);
   const langMismatch = bodyLang !== locale;
 
@@ -144,7 +148,7 @@ export default function CardPage() {
         </div>
         <div className="shell">
           <div className="page-foot">
-            <Link to={`/leyes/s/${mod.slug}`} className="btn btn-ghost">
+            <Link to={sectionBack} className="btn btn-ghost">
               ← {t('section.back')}
             </Link>
             <Link to="/policia-local" className="btn btn-primary">
@@ -167,7 +171,7 @@ export default function CardPage() {
         <Markdown source={body} />
       </div>
       <div className="page-foot">
-        <Link to={`/leyes/s/${mod.slug}`} className="btn btn-ghost">
+        <Link to={sectionBack} className="btn btn-ghost">
           ← {t('section.back')}
         </Link>
         <Link to="/policia-local" className="btn btn-primary">
