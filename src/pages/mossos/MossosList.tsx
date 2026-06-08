@@ -1,7 +1,9 @@
-// Pàgina principal de Mossos d'Esquadra · paral·lel a TestList de
-// Policia Local. Mateixa estructura: hero + jump buttons + stats
-// personals + tests agrupats per àmbit + modes (Test ràpid + Repàs)
-// + recents + temari (placeholder mentre no es configuri).
+// Pàgina principal de Mossos d'Esquadra. La "zona de tests" (hero +
+// stats personals + modes ràpids + cards d'àmbit + recents) fa servir
+// els mateixos àtoms que /policia-local (src/pages/test/atoms.tsx),
+// canviant només el color d'accent (granate Mossos) i basePath.
+// Les seccions específiques de Mossos (jump buttons, Temari complet
+// per àmbits, Esquemes ràpids) es mantenen amb el seu estil propi.
 //
 // Totes les estadístiques i recents es filtren ALS TEMES DE MOSSOS
 // (category 'mossos'); els altres temes (Policia Local) viuen a la
@@ -9,48 +11,24 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { TOPICS, getMossosByAmbit } from '../../data/tests';
-import { getTopicStats, levelFromBest, useGlobalStats, type Level } from '../../lib/testStats';
+import { levelFromBest, useGlobalStats, type Level } from '../../lib/testStats';
 import { useFailuresCounts } from '../../lib/failures';
 import { useT } from '../../lib/i18n';
-import type { TestTopic } from '../../data/tests/types';
+import { A, Mono } from '../../lib/design';
+import { PStat, SecHead, BigMode, TopicCard, RecentRow } from '../test/atoms';
 import { AMBIT_META, getTemesByAmbit, type MossosAmbit } from '../../lib/mossosTemari';
 import { listEsquemas } from '../../data/esquemas';
 
+const MOSSOS = '#991B1B'; // granate institucional Mossos
 const TEMARI_AMBITS: MossosAmbit[] = ['A', 'B', 'C'];
 
-const LEVEL_LVL: Record<Level, { lvl: 'easy' | 'medium' | 'hard' | 'none'; label: string }> = {
-  none:         { lvl: 'none',   label: 'Sense fer' },
-  novice:       { lvl: 'easy',   label: 'Iniciat' },
-  intermediate: { lvl: 'medium', label: 'Intermedi' },
-  advanced:     { lvl: 'hard',   label: 'Avançat' },
-  expert:       { lvl: 'hard',   label: 'Expert' },
+const LEVEL_LBL: Record<Level, string> = {
+  none: 'Sense fer',
+  novice: 'Iniciat',
+  intermediate: 'Intermedi',
+  advanced: 'Avançat',
+  expert: 'Expert',
 };
-
-function accentToColors(accent: string): { c: string; bg: string } {
-  const m = accent.match(/from-([a-z]+)-/);
-  const color = m ? m[1] : 'slate';
-  const map: Record<string, { c: string; bg: string }> = {
-    amber: { c: '#9c7a1f', bg: '#FFF1D2' },
-    yellow: { c: '#9c7a1f', bg: '#FFF8E0' },
-    red: { c: '#C13030', bg: '#FFE4E4' },
-    rose: { c: '#C13030', bg: '#FFE4E4' },
-    pink: { c: '#C13030', bg: '#FFE4EE' },
-    orange: { c: '#D9531A', bg: '#FFE4D2' },
-    blue: { c: '#2F6BD8', bg: '#EAF1FE' },
-    sky: { c: '#2F6BD8', bg: '#EAF6FE' },
-    indigo: { c: '#4338CA', bg: '#E7E5FE' },
-    violet: { c: '#7C3AED', bg: '#EFE5FE' },
-    purple: { c: '#9747D6', bg: '#F5E9FF' },
-    fuchsia: { c: '#A21CAF', bg: '#FCE7FA' },
-    emerald: { c: '#0E8A6F', bg: '#E1F4EE' },
-    green: { c: '#1f8a4d', bg: '#DFF7E9' },
-    teal: { c: '#0E8A8A', bg: '#E1F4F4' },
-    slate: { c: '#475569', bg: '#EEF2F6' },
-    gray: { c: '#475569', bg: '#EEF2F6' },
-    stone: { c: '#57534E', bg: '#F1EFEC' },
-  };
-  return map[color] ?? map.slate;
-}
 
 const AMBIT_LABELS: Record<string, { title: string; sub: string }> = {
   A: {
@@ -141,7 +119,6 @@ export default function MossosList() {
     }
     return best;
   })();
-  const bestLevelMeta = LEVEL_LVL[bestLevel];
 
   // Últims 4 tests de Mossos (per lastAt desc).
   const recents = useMemo(() => {
@@ -154,7 +131,7 @@ export default function MossosList() {
   }, [stats, mossosSlugs]);
 
   return (
-    <div className="shell pb-10">
+    <div className="shell pb-10" style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
       <nav className="crumbs">
         <Link to="/">{t('nav.home')}</Link>
         <span className="sep">/</span>
@@ -163,26 +140,29 @@ export default function MossosList() {
         <span className="here">{t('mossos.title')}</span>
       </nav>
 
-      {/* HERO */}
-      <header className="ts-hero">
-        <div className="eyebrow">🛡️ {t('mossos.hero.eyebrow')}</div>
-        <h1>
-          {t('mossos.hero.titleA')}<br />
-          {t('mossos.hero.titlePrefix')} <em>{t('mossos.hero.titleAccent')}</em>
-        </h1>
-        <p className="lead">{t('mossos.hero.lead')}</p>
-        <div className="ts-stats">
-          <span className="ts-pill">
-            <b>{totalQuestions.toLocaleString('ca-ES')}</b>{' '}
-            {t('test.list.hero.questions')}
-          </span>
-          <span className="ts-pill">
-            <b>{totalTopics}</b> {t('mossos.hero.subtemes')}
-          </span>
-          <span className="ts-pill">
-            <b>{ambits.length}</b> {t('mossos.hero.ambits')}
-          </span>
-          <span className="ts-pill"><b>2026</b> · {t('test.list.hero.updated')}</span>
+      {/* HERO — mateix estil que TestList però en granate Mossos */}
+      <header style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `linear-gradient(150deg, ${MOSSOS}, #4C0519)`, color: '#fff', padding: 'clamp(24px,3.2vw,34px)', boxShadow: A.shadowMd }}>
+        <div style={{ position: 'absolute', top: -60, right: -50, width: 240, height: 240, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
+        <div style={{ position: 'relative' }}>
+          <Mono size={11} color="rgba(255,255,255,0.85)">Acadèmia · Mossos d'Esquadra</Mono>
+          <h1 style={{ margin: '8px 0 0', fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(28px,4vw,42px)', letterSpacing: -1.5, lineHeight: 1.05 }}>
+            Zona de test
+          </h1>
+          <p style={{ margin: '8px 0 0', fontFamily: A.sans, fontSize: 15, lineHeight: 1.5, opacity: 0.92, maxWidth: 560 }}>
+            {t('mossos.hero.lead')}
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 16 }}>
+            {[
+              [totalQuestions.toLocaleString('ca-ES'), t('test.list.hero.questions')],
+              [String(totalTopics), t('mossos.hero.subtemes')],
+              [String(ambits.length), t('mossos.hero.ambits')],
+              ['2026', t('test.list.hero.updated')],
+            ].map(([n, l]) => (
+              <span key={l} style={{ background: 'rgba(255,255,255,0.14)', borderRadius: 999, padding: '6px 13px', fontFamily: A.mono, fontWeight: 600, fontSize: 11.5 }}>
+                <b style={{ color: '#fff' }}>{n}</b> <span style={{ opacity: 0.82 }}>{l}</span>
+              </span>
+            ))}
+          </div>
         </div>
       </header>
 
@@ -222,131 +202,71 @@ export default function MossosList() {
         </Link>
       </nav>
 
-      {/* STATS PERSONALS */}
-      <section className="my-stats">
-        <div className="my-stat acc">
-          <span className="lab">⭐ {t('test.list.stat.accuracy')}</span>
-          <div className="num">{accuracy}<span className="u">%</span></div>
-        </div>
-        <div className="my-stat streak">
-          <span className="lab">🔥 {t('test.list.stat.streak')}</span>
-          <div className="num">
-            {streakDays}<span className="u">{t('test.list.stat.days')}</span>
-          </div>
-        </div>
-        <div className="my-stat done">
-          <span className="lab">✅ {t('test.list.stat.completed')}</span>
-          <div className="num">
-            {completedTests}<span className="u">{t('test.list.stat.tests')}</span>
-          </div>
-        </div>
-        <div className="my-stat lvl">
-          <span className="lab">🏆 {t('test.list.stat.level')}</span>
-          <div className="num">
-            {avgGrade > 0 ? avgGrade.toFixed(1) : '–'}
-            <span className="u">{bestLevelMeta.label}</span>
-          </div>
-        </div>
-      </section>
+      {/* STATS PERSONALS — PStat compartit */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }} className="a-grid-stats">
+        <PStat icon="star" color={A.amber} label={t('test.list.stat.accuracy')} value={`${accuracy}%`} />
+        <PStat icon="fire" color={A.terracota} label={t('test.list.stat.streak')} value={`${streakDays}`} sub={t('test.list.stat.days')} />
+        <PStat icon="check" color={A.green} label={t('test.list.stat.completed')} value={`${completedTests}`} />
+        <PStat icon="trophy" color={MOSSOS} label={t('test.list.stat.level')} value={avgGrade > 0 ? avgGrade.toFixed(1) : '–'} sub={LEVEL_LBL[bestLevel]} />
+      </div>
 
-      {/* ZONA TESTS — wrapper visual: modes destacats al cim + tests
-          per àmbit a sota. Mateixa estructura UX que /policia-local. */}
-      <section
-        id="mossos-tests"
-        className="tests-zone"
-        style={{ scrollMarginTop: 80 }}
-      >
-        <header className="tests-zone-head">
-          <div className="eyebrow">📝 {t('test.list.zone.eyebrow')}</div>
-          <h2>{t('test.list.zone.title')}</h2>
-          <p>{t('test.list.zone.subtitle').replace('{n}', String(totalQuestions))}</p>
-        </header>
+      {/* MODES RÀPIDS: Tot temari Mossos + Repàs */}
+      <div id="mossos-tests" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, scrollMarginTop: 80 }} className="a-grid-fork">
+        <BigMode
+          to="/mossos/tot"
+          grad={`linear-gradient(150deg, ${MOSSOS}, #4C0519)`}
+          tag={t('test.list.modes.featured.tag')}
+          title={t('test.list.modes.featured.title')}
+          desc={t('test.list.modes.featured.sub')}
+          meta={`${totalQuestions} preguntes · ${totalTopics} subtemes`}
+          cta={t('test.start')}
+        />
+        <BigMode
+          to="/mossos/repas"
+          grad={`linear-gradient(150deg, ${A.terracota}, #C2410C)`}
+          tag={t('test.list.modes.repas.tag')}
+          title={t('test.list.modes.repas.title')}
+          desc={
+            failures.due > 0
+              ? t('test.list.modes.repas.subDue').replace('{n}', String(failures.due))
+              : failures.total > 0
+                ? t('test.list.modes.repas.subTotal').replace('{n}', String(failures.total))
+                : t('test.list.modes.repas.subEmpty')
+          }
+          meta={`${failures.due} ${t('test.list.modes.repas.due')} · ${failures.total} ${t('test.list.modes.repas.total')}`}
+          cta={t('test.list.modes.repas.cta')}
+        />
+      </div>
 
-        {/* MODES destacats: Tot el temari Mossos + Repàs */}
-        <div className="tests-zone-modes">
-          <Link to="/mossos/tot" className="ts-mode featured">
-            <span className="mtag">⚡ {t('test.list.modes.featured.tag')}</span>
-            <div>
-              <h3>{t('test.list.modes.featured.title')}</h3>
-              <p>{t('test.list.modes.featured.sub')}</p>
-            </div>
-            <div className="footer">
-              <div className="specs">
-                <span>{totalQuestions} preguntes</span>
-                <span>·</span>
-                <span>{totalTopics} subtemes</span>
+      {/* CARDS DE TEMES — agrupats per àmbit, amb SecHead + TopicCard */}
+      {ambits.length === 0 ? (
+        <p className="text-sm text-text-2 mt-4">{t('mossos.tests.empty')}</p>
+      ) : (
+        ambits.map((group) => {
+          const meta = AMBIT_LABELS[group.ambit] ?? { title: group.ambit, sub: '' };
+          return (
+            <section key={group.ambit}>
+              <SecHead icon="book" color={MOSSOS} title={meta.title} sub={meta.sub || undefined} />
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))', gap: 12 }}>
+                {group.topics.map((topic) => (
+                  <TopicCard
+                    key={topic.slug}
+                    topic={topic}
+                    to={`/mossos/${topic.slug}`}
+                    accent={MOSSOS}
+                  />
+                ))}
               </div>
-              <span className="cta">
-                ▶ {t('test.start')} <span className="arr">→</span>
-              </span>
-            </div>
-          </Link>
-
-          <Link to="/mossos/repas" className="ts-mode fail">
-            <span className="mtag">🔁 {t('test.list.modes.repas.tag')}</span>
-            <div>
-              <h3>{t('test.list.modes.repas.title')}</h3>
-              <p>
-                {failures.due > 0
-                  ? t('test.list.modes.repas.subDue').replace('{n}', String(failures.due))
-                  : failures.total > 0
-                    ? t('test.list.modes.repas.subTotal').replace('{n}', String(failures.total))
-                    : t('test.list.modes.repas.subEmpty')}
-              </p>
-            </div>
-            <div className="footer">
-              <div className="specs">
-                <span>{failures.due} {t('test.list.modes.repas.due')}</span>
-                <span>·</span>
-                <span>{failures.total} {t('test.list.modes.repas.total')}</span>
-              </div>
-              <span className="cta">
-                {t('test.list.modes.repas.cta')} <span className="arr">→</span>
-              </span>
-            </div>
-          </Link>
-        </div>
-
-        {/* Separador "...o tria un àmbit concret" */}
-        <div className="tests-zone-divider">
-          <span className="line" />
-          <span className="lbl">{t('test.list.zone.orByAmbit')}</span>
-          <span className="line" />
-        </div>
-
-        {ambits.length === 0 ? (
-          <p className="text-sm text-text-2 mt-4">{t('mossos.tests.empty')}</p>
-        ) : (
-          ambits.map((group) => {
-            const meta = AMBIT_LABELS[group.ambit] ?? { title: group.ambit, sub: '' };
-            return (
-              <div key={group.ambit} className="mt-5">
-                <div className="ambit-head">
-                  <h3 className="ambit-title">{meta.title}</h3>
-                  {meta.sub && <p className="ambit-sub">{meta.sub}</p>}
-                </div>
-                <div className="test-grid">
-                  {group.topics.map((topic) => (
-                    <MossosCard key={topic.slug} topic={topic} />
-                  ))}
-                </div>
-              </div>
-            );
-          })
-        )}
-      </section>
+            </section>
+          );
+        })
+      )}
 
       {/* RECENTS — només tests de Mossos */}
       {recents.length > 0 && (
-        <section className="ts-recent">
-          <div
-            className="section-head"
-            style={{ ['--accent' as never]: 'var(--ink)' } as React.CSSProperties}
-          >
-            <span className="eyebrow">🕘 {t('test.list.recent.eyebrow')}</span>
-            <span className="rule" />
-          </div>
-          <div className="recent-grid">
+        <section>
+          <SecHead icon="clock" color={A.ink} title={t('test.list.recent.eyebrow')} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {recents.map((r) => (
               <RecentRow
                 key={r.slug}
@@ -355,6 +275,7 @@ export default function MossosList() {
                 last={r.last}
                 attempts={r.attempts}
                 lastAt={r.lastAt}
+                basePath="/mossos"
               />
             ))}
           </div>
@@ -481,86 +402,3 @@ export default function MossosList() {
   );
 }
 
-function MossosCard({ topic }: { topic: TestTopic }) {
-  const stats = getTopicStats(topic.slug);
-  const level = levelFromBest(stats?.best);
-  const lvlMeta = LEVEL_LVL[level];
-  const colors = accentToColors(topic.accent);
-  const total = topic.questions.length;
-  const pct = stats?.best
-    ? Math.min(100, Math.round((stats.best / 10) * 100))
-    : 0;
-
-  return (
-    <Link
-      to={`/mossos/${topic.slug}`}
-      className="tcard"
-      style={{
-        ['--accent' as never]: colors.c,
-        ['--accent-bg' as never]: colors.bg,
-      } as React.CSSProperties}
-    >
-      <div className="head">
-        <span className="ico" aria-hidden>{topic.icon}</span>
-        <span className={`lvl ${lvlMeta.lvl}`}>{lvlMeta.label}</span>
-      </div>
-      <h4>{topic.title}</h4>
-      {topic.description && <p>{topic.description}</p>}
-      <div className="specs">
-        <span className="spec">{total} preguntes</span>
-      </div>
-      <div className="footer-row">
-        <div className="progress-mini">
-          <div className="pmini-bar"><span style={{ width: `${pct}%` }} /></div>
-          <span className="pmini-pct">{pct}%</span>
-        </div>
-        <span className="start">{pct > 0 ? 'Continuar' : 'Començar'} →</span>
-      </div>
-    </Link>
-  );
-}
-
-function RecentRow({
-  slug, best, last, attempts, lastAt,
-}: {
-  slug: string; best: number; last: number; attempts: number; lastAt: number;
-}) {
-  const { t } = useT();
-  const topic = TOPICS.find((x) => x.slug === slug);
-  if (!topic) return null;
-
-  const grade = last || best;
-  const score10 = Math.round(grade * 10) / 10;
-  const tone = grade >= 7 ? 'high' : grade >= 5 ? 'mid' : 'low';
-  const when = formatRelative(lastAt, t);
-
-  return (
-    <Link to={`/mossos/${slug}`} className="rec-row">
-      <span className={`score-circ ${tone}`}>{score10}</span>
-      <div className="min-w-0">
-        <div className="rttl truncate">{topic.title}</div>
-        <div className="rmeta">
-          {attempts} {attempts === 1 ? t('test.list.recent.attempt') : t('test.list.recent.attempts')}
-          {' · '}
-          {t('test.list.recent.bestShort')} {best.toFixed(1)}
-        </div>
-      </div>
-      <span className="when">{when}</span>
-      <span className="rcta">{t('test.list.recent.repeat')}</span>
-    </Link>
-  );
-}
-
-function formatRelative(ts: number, t: (k: string) => string): string {
-  if (!ts) return '—';
-  const diff = Date.now() - ts;
-  const min = Math.round(diff / 60000);
-  if (min < 1) return t('test.list.recent.justNow');
-  if (min < 60) return `${min} min`;
-  const h = Math.round(min / 60);
-  if (h < 24) return `${h} h`;
-  const d = Math.round(h / 24);
-  if (d < 30) return `${d} d`;
-  const mo = Math.round(d / 30);
-  return `${mo} mes`;
-}
