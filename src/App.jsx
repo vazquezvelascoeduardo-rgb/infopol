@@ -11,6 +11,7 @@ import ScreenInfraccions from './screens/operativa/ScreenInfraccions';
 import ScreenFitxa from './screens/operativa/ScreenFitxa';
 import ScreenProtocol from './screens/operativa/ScreenProtocol';
 import ScreenMapa from './screens/operativa/ScreenMapa';
+import ScreenNoticias from './screens/operativa/ScreenNoticias';
 
 import ScreenAcademiaHome from './screens/academia/ScreenAcademiaHome';
 import ScreenTemari from './screens/academia/ScreenTemari';
@@ -77,6 +78,7 @@ export default function App() {
         <Route path="protocol" element={<ScreenProtocol />} />
         <Route path="protocol/:id" element={<ScreenProtocol />} />
         <Route path="mapa" element={<ScreenMapa />} />
+        <Route path="noticias" element={<ScreenNoticias />} />
       </Route>
       <Route path="/academia" element={<AcademiaShell />}>
         <Route index element={<ScreenAcademiaHome />} />

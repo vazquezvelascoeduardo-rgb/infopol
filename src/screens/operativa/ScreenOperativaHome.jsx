@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
+import { NOTICIAS } from '../../data/news';
 
 function BigCatCard({ cat, icon, kicker, title, desc, cta, onClick }) {
   const k = T.cat[cat];
@@ -134,6 +135,42 @@ export default function ScreenOperativaHome() {
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Notícies generals */}
+      <div style={{ padding: '18px 0 0' }}>
+        <SectionHead
+          kicker="Diari"
+          kickerColor={T.cat.leyes.solid}
+          title="Notícies"
+          action="Tot →"
+          onAction={() => navigate('/operativa/noticias')}
+        />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {NOTICIAS.slice(0, 4).map((n) => {
+            const scopeColor = {
+              Catalunya:     T.cat.operativa,
+              Espanya:       T.cat.leyes,
+              Internacional: T.cat.transito,
+            }[n.scope] || T.cat.operativa;
+            return (
+              <div key={n.id} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `3px solid ${scopeColor.solid}`, boxShadow: T.shadow.card }}
+                onClick={() => navigate('/operativa/noticias')}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                  <span style={{
+                    fontSize: 9.5, fontWeight: 800, color: scopeColor.ink,
+                    letterSpacing: 0.6, textTransform: 'uppercase', fontFamily: T.font,
+                    background: scopeColor.soft, padding: '2px 7px', borderRadius: T.r.pill,
+                  }}>{n.scope}</span>
+                  <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.dateLabel}</span>
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
