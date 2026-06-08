@@ -492,18 +492,50 @@ function fileToScaledDataUrl(file: Blob, max = 1700): Promise<string> {
   });
 }
 
-/* ── Animació (recreació en vídeo) ── */
+/* ── Animació (recreació realista de l'accident) ── */
 type Pt = { x: number; y: number };
-type Track = { id: string; p0: Pt; wp: Pt | null; p1: Pt; rot0: number };
+type Track = { id: string; p0: Pt; wp: Pt | null; p1: Pt; rotFinal: number };
 const lerp = (a: Pt, b: Pt, u: number): Pt => ({ x: a.x + (b.x - a.x) * u, y: a.y + (b.y - a.y) * u });
+const sub = (a: Pt, b: Pt): Pt => ({ x: a.x - b.x, y: a.y - b.y });
+const easeOutCubic = (u: number) => 1 - Math.pow(1 - u, 3);
 const headingDeg = (dx: number, dy: number, fb: number) => (Math.abs(dx) + Math.abs(dy) > 0.4 ? Math.atan2(dx, -dy) * 180 / Math.PI : fb);
-function posAt(tr: Track, t: number): { x: number; y: number; rotation: number } {
-  let p: Pt, dx: number, dy: number;
-  if (tr.wp) {
-    if (t < 0.5) { p = lerp(tr.p0, tr.wp, t / 0.5); dx = tr.wp.x - tr.p0.x; dy = tr.wp.y - tr.p0.y; }
-    else { p = lerp(tr.wp, tr.p1, (t - 0.5) / 0.5); dx = tr.p1.x - tr.wp.x; dy = tr.p1.y - tr.wp.y; }
-  } else { p = lerp(tr.p0, tr.p1, t); dx = tr.p1.x - tr.p0.x; dy = tr.p1.y - tr.p0.y; }
-  return { x: p.x, y: p.y, rotation: headingDeg(dx, dy, tr.rot0) };
+// Interpola angles pel camí més curt.
+function lerpAngle(a: number, b: number, u: number) { const d = ((b - a + 540) % 360) - 180; return a + d * u; }
+// Sacsejada de l'impacte (decau ràpidament després del xoc, g≈0.5).
+function shakeAt(g: number) {
+  if (g < 0.5 || g > 0.64) return { dx: 0, dy: 0, dr: 0 };
+  const k = (g - 0.5) / 0.14, decay = (1 - k) * (1 - k), ph = g * 150;
+  return { dx: Math.sin(ph) * 8 * decay, dy: Math.cos(ph * 1.27) * 5 * decay, dr: Math.sin(ph * 0.9) * 6 * decay };
+}
+// Estat (posició + gir) d'un vehicle en el moment g∈[0,1]:
+// aproximació a velocitat → impacte → frenada amb deceleració fins al final.
+function vehStateAt(tr: Track, g: number) {
+  let x: number, y: number, rotation: number;
+  if (!tr.wp) {
+    const e = easeOutCubic(g), p = lerp(tr.p0, tr.p1, e), d = sub(tr.p1, tr.p0);
+    return { x: p.x, y: p.y, rotation: lerpAngle(headingDeg(d.x, d.y, tr.rotFinal), tr.rotFinal, g) };
+  }
+  if (g <= 0.5) {
+    const u = g / 0.5, p = lerp(tr.p0, tr.wp, u), d = sub(tr.wp, tr.p0);
+    x = p.x; y = p.y; rotation = headingDeg(d.x, d.y, tr.rotFinal);
+  } else {
+    const u = (g - 0.5) / 0.5, e = easeOutCubic(u), p = lerp(tr.wp, tr.p1, e), d = sub(tr.p1, tr.wp);
+    x = p.x; y = p.y; rotation = lerpAngle(headingDeg(d.x, d.y, tr.rotFinal), tr.rotFinal, e);
+  }
+  const s = shakeAt(g); return { x: x + s.dx, y: y + s.dy, rotation: rotation + s.dr };
+}
+// Efecte visual de l'impacte (destell + ona expansiva), g∈[0.5, 0.72].
+function CrashFx({ x, y, g }: { x: number; y: number; g: number }) {
+  if (g < 0.5 || g > 0.72) return null;
+  const k = (g - 0.5) / 0.22, fade = 1 - k;
+  return (
+    <Group x={x} y={y} listening={false}>
+      <Circle radius={12 + k * 80} stroke="#FF7A1A" strokeWidth={7 * fade} opacity={0.85 * fade} />
+      <Circle radius={6 + k * 36} fill="#FFB23C" opacity={0.35 * fade} />
+      <Star numPoints={12} innerRadius={9 + k * 14} outerRadius={22 + k * 38} rotation={k * 50} fill="#FF7A1A" opacity={fade} />
+      <Star numPoints={12} innerRadius={5 + k * 8} outerRadius={13 + k * 18} rotation={-k * 40} fill="#FFE08A" opacity={fade} />
+    </Group>
+  );
 }
 
 /* ════════════════════════ Node editable ════════════════════════ */
@@ -960,20 +992,20 @@ export default function Croquis() {
       let wp: Pt | null = null, best = 1e9;
       for (const c of cols) { const d = Math.hypot(c.x - mid.x, c.y - mid.y); if (d < best) { best = d; wp = { x: c.x, y: c.y }; } }
       if (best > 340) wp = null;
-      out.push({ id: v.id, p0, wp, p1, rot0: v.rotation });
+      out.push({ id: v.id, p0, wp, p1, rotFinal: v.rotation });
     }
     return out;
   }
   function ensureTracks() { if (!tracksRef.current.length) tracksRef.current = buildTracks(); return tracksRef.current; }
   function applyAt(t: number) {
     const m: Record<string, { x: number; y: number; rotation: number }> = {};
-    for (const k of tracksRef.current) m[k.id] = posAt(k, t);
+    for (const k of tracksRef.current) m[k.id] = vehStateAt(k, t);
     setAnim(m); setProg(t); progRef.current = t;
   }
   function frame(ts: number) {
     if (lastTsRef.current == null) lastTsRef.current = ts;
     const dt = ts - lastTsRef.current; lastTsRef.current = ts;
-    let t = progRef.current + dt / (5200 / speedRef.current);
+    let t = progRef.current + dt / (6200 / speedRef.current);
     if (t >= 1) { applyAt(1); setPlaying(false); lastTsRef.current = null; return; }
     applyAt(t); rafRef.current = requestAnimationFrame(frame);
   }
@@ -1011,11 +1043,11 @@ export default function Croquis() {
     const chunks: BlobPart[] = []; rec.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data); };
     const stopped = new Promise<void>((res) => { rec.onstop = () => res(); });
     rec.start();
-    const fps = 30, frames = Math.max(2, Math.round(fps * (5.2 / speedRef.current)));
+    const fps = 30, frames = Math.max(2, Math.round(fps * (6.2 / speedRef.current)));
     for (let i = 0; i <= frames; i++) {
       const t = i / frames;
       const m: Record<string, { x: number; y: number; rotation: number }> = {};
-      for (const k of tr) m[k.id] = posAt(k, t);
+      for (const k of tr) m[k.id] = vehStateAt(k, t);
       setAnim(m); setProg(t);
       await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(() => r(null))));
       if (rctx) { const sc = stage.toCanvas({ x: f.x, y: f.y, width: BOARD.w * f.scale, height: BOARD.h * f.scale, pixelRatio: 1 }); rctx.drawImage(sc as CanvasImageSource, 0, 0, RW, RH); }
@@ -1112,6 +1144,9 @@ export default function Croquis() {
                     onContext={(cx, cy) => openMenu(el.id, cx, cy)} override={anim?.[el.id]} animating={animating} />
                   {VEHICLES.includes(el.kind) && !animating && <VehBadge el={el} letter={vehLetters[el.id]} />}
                 </Fragment>
+              ))}
+              {animating && prog >= 0.5 && els.filter((e) => e.kind === 'collisio').map((c) => (
+                <CrashFx key={'fx-' + c.id} x={c.x} y={c.y} g={prog} />
               ))}
               <Transformer ref={trRef} rotationSnaps={[0, 45, 90, 135, 180, 225, 270, 315]}
                 anchorSize={11} borderStroke={A.terracota} anchorStroke={A.terracota} anchorCornerRadius={3}
