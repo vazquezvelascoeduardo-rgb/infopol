@@ -981,18 +981,26 @@ export default function Croquis() {
   // del seu inici → (punt de col·lisió proper) → la seva posició actual (final).
   function buildTracks(): Track[] {
     const inits = els.filter((e) => e.ghost && e.phase === 'inicial');
+    const finals = els.filter((e) => e.ghost && e.phase === 'final');
     const cols = els.filter((e) => e.kind === 'collisio');
     const out: Track[] = [];
     for (const v of els) {
       if (!VEHICLES.includes(v.kind) || v.ghost) continue;
       if (v.data?.estat === 'parat' || v.data?.estat === 'estacionat') continue;
-      const g = inits.find((i) => i.parent === v.id); if (!g) continue;
-      const p0 = { x: g.x, y: g.y }, p1 = { x: v.x, y: v.y };
-      const mid = { x: (p0.x + p1.x) / 2, y: (p0.y + p1.y) / 2 };
-      let wp: Pt | null = null, best = 1e9;
-      for (const c of cols) { const d = Math.hypot(c.x - mid.x, c.y - mid.y); if (d < best) { best = d; wp = { x: c.x, y: c.y }; } }
-      if (best > 340) wp = null;
-      out.push({ id: v.id, p0, wp, p1, rotFinal: v.rotation });
+      const g0 = inits.find((i) => i.parent === v.id); if (!g0) continue;
+      const gf = finals.find((i) => i.parent === v.id);
+      const p0 = { x: g0.x, y: g0.y };
+      if (gf) {
+        // Seqüència de 3 posicions: inicial → cotxe (impacte) → final.
+        out.push({ id: v.id, p0, wp: { x: v.x, y: v.y }, p1: { x: gf.x, y: gf.y }, rotFinal: gf.rotation });
+      } else {
+        // Compatibilitat: inicial → (marca de col·lisió propera) → cotxe (final).
+        const p1 = { x: v.x, y: v.y }, mid = { x: (p0.x + p1.x) / 2, y: (p0.y + p1.y) / 2 };
+        let wp: Pt | null = null, best = 1e9;
+        for (const c of cols) { const d = Math.hypot(c.x - mid.x, c.y - mid.y); if (d < best) { best = d; wp = { x: c.x, y: c.y }; } }
+        if (best > 340) wp = null;
+        out.push({ id: v.id, p0, wp, p1, rotFinal: v.rotation });
+      }
     }
     return out;
   }
@@ -1012,7 +1020,7 @@ export default function Croquis() {
   function play() {
     if (playing) return;
     const tr = ensureTracks();
-    if (!tr.length) { alert('Marca la posició inicial (📍) d\'algun vehicle (clic dret) per poder reproduir el moviment.'); return; }
+    if (!tr.length) { alert('Per recrear l\'accident: deixa el cotxe al punt del xoc i, amb clic dret, marca la posició inicial (📍) i la final (🏁). Llavors es mourà inicial → xoc → final.'); return; }
     setSel(null); setMenu(null);
     if (progRef.current >= 1) progRef.current = 0;
     speedRef.current = speed; lastTsRef.current = null; setPlaying(true);
@@ -1027,7 +1035,7 @@ export default function Croquis() {
   async function recordWebM() {
     const stage = stageRef.current; if (!stage) return;
     const tr = buildTracks();
-    if (!tr.length) { alert('Marca la posició inicial (📍) d\'algun vehicle abans de gravar.'); return; }
+    if (!tr.length) { alert('Abans de gravar: deixa el cotxe al punt del xoc i marca la posició inicial (📍) i la final (🏁) amb clic dret.'); return; }
     if (typeof MediaRecorder === 'undefined') { alert('Aquest navegador no permet gravar vídeo (prova Chrome o Edge).'); return; }
     tracksRef.current = tr; setRecording(true); setSel(null); setMenu(null);
     const prev = { ...view }; const f = fitView(size.w, size.h, 8); setView(f);
@@ -1067,6 +1075,16 @@ export default function Croquis() {
   const pct = Math.round((view.scale || 1) * 100);
   const animating = !!anim;
   const bgEl = els.find((e) => e.kind === 'fons') || null;
+  // Punts on dibuixar el destell de l'impacte: marques de col·lisió + cotxes
+  // amb seqüència completa (fantasma inicial i final), on el cotxe és el xoc.
+  const impactPts = useMemo(() => {
+    const pts: Pt[] = [];
+    for (const e of els) if (e.kind === 'collisio') pts.push({ x: e.x, y: e.y });
+    const ini = new Set(els.filter((e) => e.ghost && e.phase === 'inicial').map((e) => e.parent));
+    const fin = new Set(els.filter((e) => e.ghost && e.phase === 'final').map((e) => e.parent));
+    for (const v of els) if (VEHICLES.includes(v.kind) && !v.ghost && ini.has(v.id) && fin.has(v.id)) pts.push({ x: v.x, y: v.y });
+    return pts;
+  }, [els]);
   const headerFilled = Object.values(header).some((v) => v && String(v).trim());
   const legendRows = els.filter((e) => VEHICLES.includes(e.kind) && !e.ghost).map((e) => {
     const d = e.data || {};
@@ -1145,8 +1163,8 @@ export default function Croquis() {
                   {VEHICLES.includes(el.kind) && !animating && <VehBadge el={el} letter={vehLetters[el.id]} />}
                 </Fragment>
               ))}
-              {animating && prog >= 0.5 && els.filter((e) => e.kind === 'collisio').map((c) => (
-                <CrashFx key={'fx-' + c.id} x={c.x} y={c.y} g={prog} />
+              {animating && prog >= 0.5 && impactPts.map((c, i) => (
+                <CrashFx key={'fx-' + i} x={c.x} y={c.y} g={prog} />
               ))}
               <Transformer ref={trRef} rotationSnaps={[0, 45, 90, 135, 180, 225, 270, 315]}
                 anchorSize={11} borderStroke={A.terracota} anchorStroke={A.terracota} anchorCornerRadius={3}
