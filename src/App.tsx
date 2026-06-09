@@ -27,6 +27,7 @@ import RequireAuth from './components/RequireAuth';
 import RouteErrorBoundary from './components/RouteErrorBoundary';
 import OperativaShellLayout from './components/OperativaShellLayout';
 import AcademiaShellLayout from './components/AcademiaShellLayout';
+import RouteMeta from './components/RouteMeta';
 
 const Leyes = lazy(() => import('./pages/Leyes'));
 const Section = lazy(() => import('./pages/Section'));
@@ -98,6 +99,7 @@ function RedirectTestToPoliciaLocal() {
 export default function App() {
   return (
     <Layout>
+      <RouteMeta />
       <RouteErrorBoundary>
       <Suspense fallback={<PageFallback />}>
         <Routes>

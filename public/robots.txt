@@ -1,0 +1,8 @@
+# InfoPol — robots.txt
+User-agent: *
+Allow: /
+# Zones privades / sense valor per a cerca
+Disallow: /login
+Disallow: /perfil
+
+Sitemap: https://infopol.app/sitemap.xml

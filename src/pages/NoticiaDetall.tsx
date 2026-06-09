@@ -4,6 +4,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { useT } from '../lib/i18n';
 import { useNoticia } from '../lib/noticiesRemote';
+import { useSeo, SITE } from '../lib/seo';
 
 const ACCENT = '#2F6BD8';
 const ACCENT_BG = '#EAF1FE';
@@ -12,6 +13,24 @@ export default function NoticiaDetall() {
   const { slug = '' } = useParams();
   const { t } = useT();
   const { noticia, all } = useNoticia(slug);
+
+  // SEO a mida de la notícia (títol, descripció, imatge i JSON-LD).
+  useSeo(noticia ? {
+    title: `${noticia.title} · InfoPol`,
+    description: noticia.summary,
+    image: noticia.image,
+    type: 'article',
+    jsonLd: {
+      '@context': 'https://schema.org', '@type': 'NewsArticle',
+      headline: noticia.title,
+      datePublished: noticia.publishedAt,
+      ...(noticia.image ? { image: [noticia.image] } : {}),
+      description: noticia.summary,
+      ...(noticia.source ? { author: { '@type': 'Organization', name: noticia.source } } : {}),
+      publisher: { '@type': 'Organization', name: 'InfoPol', logo: { '@type': 'ImageObject', url: `${SITE}/pwa-512x512.png` } },
+      mainEntityOfPage: `${SITE}/noticies/${noticia.slug}`,
+    },
+  } : { title: '' });
 
   if (!noticia) {
     return (

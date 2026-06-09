@@ -8,6 +8,7 @@ import { Markdown } from '../lib/markdown';
 import HtmlInline from '../components/HtmlInline';
 import { useT } from '../lib/i18n';
 import { useFavorites } from '../lib/bookmarks';
+import { useSeo } from '../lib/seo';
 
 const MODULE_ACCENT: Record<string, string> = {
   'ce78': '#E5484D',
@@ -60,6 +61,11 @@ export default function CardPage() {
 
   const mod = MODULES.find((m) => m.slug === moduleSlug);
   const card = getCard(moduleSlug, slug);
+
+  // SEO a mida de la fitxa (títol = nom de la fitxa + mòdul).
+  useSeo(mod && card
+    ? { title: `${card.title} · InfoPol`, description: `${card.title} — ${t(`module.${mod.slug}.title`)}. Consulta la normativa per a policia local de Catalunya a InfoPol.` }
+    : { title: '' });
 
   if (!mod || !card) {
     return (

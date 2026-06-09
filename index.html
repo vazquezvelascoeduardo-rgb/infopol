@@ -53,6 +53,36 @@
 
     <link rel="canonical" href="https://infopol.app/" />
     <title>InfoPol — Consulta operativa policia local</title>
+
+    <!-- Dades estructurades (schema.org): organització + lloc web amb cerca -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://infopol.app/#org",
+            "name": "InfoPol",
+            "url": "https://infopol.app/",
+            "logo": "https://infopol.app/pwa-512x512.png",
+            "description": "Normativa, infografies i operativa per a agents i aspirants de policia local de Catalunya."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://infopol.app/#website",
+            "url": "https://infopol.app/",
+            "name": "InfoPol",
+            "inLanguage": "ca",
+            "publisher": { "@id": "https://infopol.app/#org" },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://infopol.app/cerca?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          }
+        ]
+      }
+    </script>
     <!-- Tipografies del rebranding 2026 (Plus Jakarta Sans + JetBrains Mono)
          + Oswald/Source Sans 3 que segueixen usant les infografies del temari. -->
     <!--
