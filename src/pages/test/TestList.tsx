@@ -10,7 +10,7 @@ import {
   globalAverage, levelFromBest, useGlobalStats, type Level,
 } from '../../lib/testStats';
 import { useFailuresCounts } from '../../lib/failures';
-import { A, Ic, Mono, Card } from '../../lib/design';
+import { A, Ic, Mono, Card, Chip } from '../../lib/design';
 import { PStat, SecHead, BigMode, TopicCard, RecentRow, LEVEL_LABEL } from './atoms';
 
 const PL = '#2563EB';
