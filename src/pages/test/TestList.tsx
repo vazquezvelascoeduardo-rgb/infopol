@@ -93,6 +93,21 @@ export default function TestList() {
           meta={`${failures.due} per repassar · ${failures.total} acumulades`} cta="Repassar" />
       </div>
 
+      {/* PANELL DE DEBILITATS */}
+      {failures.total > 0 && (
+        <Link to="/policia-local/debilitats" style={{ textDecoration: 'none', marginTop: -14 }}>
+          <Card pad={14} hover style={{ display: 'flex', alignItems: 'center', gap: 13 }}>
+            <span style={{ width: 40, height: 40, borderRadius: 12, background: A.terraSoft, display: 'grid', placeItems: 'center', flexShrink: 0 }}><Ic name="grid" size={20} color={A.terracota} sw={2.1} /></span>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 15.5, color: A.ink }}>Les teves debilitats</div>
+              <Mono size={10} color={A.inkMuted}>On falles més i el teu pla de repàs personalitzat</Mono>
+            </div>
+            {failures.due > 0 && <Chip tone="red" solid>{failures.due} avui</Chip>}
+            <Ic name="chevR" size={18} color={A.inkFaint} />
+          </Card>
+        </Link>
+      )}
+
       {/* TEORIA */}
       {teoria.length > 0 && (
         <section>

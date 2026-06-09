@@ -49,6 +49,7 @@ const Privacitat = lazy(() => import('./pages/Privacitat'));
 const Academia = lazy(() => import('./pages/Academia'));
 const Retos = lazy(() => import('./pages/Retos'));
 const TestList = lazy(() => import('./pages/test/TestList'));
+const Debilitats = lazy(() => import('./pages/test/Debilitats'));
 const TestSession = lazy(() => import('./pages/test/TestSession'));
 const Achievements = lazy(() => import('./pages/test/Achievements'));
 const Noticies = lazy(() => import('./pages/Noticies'));
@@ -169,6 +170,7 @@ export default function App() {
             <Route path="/policia-local/esquemes" element={<RequireAuth><PoliciaLocalEsquemes /></RequireAuth>} />
             <Route path="/policia-local/esquemes/:slug" element={<RequireAuth><PoliciaLocalEsquemaLlei /></RequireAuth>} />
             <Route path="/policia-local" element={<RequireAuth><TestList /></RequireAuth>} />
+            <Route path="/policia-local/debilitats" element={<RequireAuth><Debilitats /></RequireAuth>} />
             <Route path="/policia-local/logros" element={<RequireAuth><Achievements /></RequireAuth>} />
             <Route path="/policia-local/flashcards" element={<RequireAuth><Flashcards /></RequireAuth>} />
             <Route path="/policia-local/flashcards/:slug" element={<Navigate to="/policia-local/flashcards" replace />} />
