@@ -293,6 +293,7 @@ export async function getLeaderboard(limit = 50): Promise<LeaderboardEntry[]> {
   const { data, error } = await sb
     .from('leaderboard')
     .select('*')
+    .order('total_xp', { ascending: false })
     .limit(limit);
   if (error) throw error;
   return (data ?? []) as LeaderboardEntry[];
