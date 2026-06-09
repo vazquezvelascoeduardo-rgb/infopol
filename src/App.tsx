@@ -28,6 +28,7 @@ import RouteErrorBoundary from './components/RouteErrorBoundary';
 import OperativaShellLayout from './components/OperativaShellLayout';
 import AcademiaShellLayout from './components/AcademiaShellLayout';
 import RouteMeta from './components/RouteMeta';
+import ProgressSync from './components/ProgressSync';
 
 const Leyes = lazy(() => import('./pages/Leyes'));
 const Section = lazy(() => import('./pages/Section'));
@@ -100,6 +101,7 @@ export default function App() {
   return (
     <Layout>
       <RouteMeta />
+      <ProgressSync />
       <RouteErrorBoundary>
       <Suspense fallback={<PageFallback />}>
         <Routes>
