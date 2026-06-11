@@ -1155,7 +1155,7 @@ export default function Croquis() {
   function play() {
     if (playing) return;
     tlRef.current = buildTimeline(els); setDur(tlRef.current.tTotal);
-    if (!tlRef.current.vehs.length) { alert('Per recrear l\'accident: deixa el cotxe al punt del xoc i, amb clic dret, marca la posició inicial (📍) i la final (🏁). Indica els km/h a "Dades del vehicle" per a velocitats reals.'); return; }
+    if (!tlRef.current.vehs.length) { alert('Per recrear l\'accident: deixa el cotxe al punt del xoc i, amb clic dret, marca la posició inicial (📍) i la final (🏁). Indica els km/h a "Dades del vehicle" per a velocitats reals.\n\nEls vehicles aturats o estacionats només necessiten la posició final (🏁): sortiran empesos pel xoc.'); return; }
     setSel(null); setMenu(null);
     if (tSimRef.current >= tlRef.current.tTotal - 0.05) tSimRef.current = 0;
     speedRef.current = speed; cineRef.current = cine; lastTsRef.current = null; setPlaying(true);
@@ -1390,8 +1390,20 @@ export default function Croquis() {
             onWheel={(e) => { setMenu(null); onWheel(e); }}
             onContextMenu={(e) => e.evt.preventDefault()}
             onDragEnd={(e) => { if (e.target === e.target.getStage()) setView((v) => ({ ...v, x: e.target.x(), y: e.target.y() })); }}
-            onMouseDown={(e) => { setMenu(null); if (e.target === e.target.getStage()) setSel(null); }}
-            onTouchStart={(e) => { setMenu(null); if (e.target === e.target.getStage()) setSel(null); }}>
+            onMouseDown={(e) => {
+              setMenu(null);
+              // En acabar una reproducció, l'estat d'animació quedava actiu i
+              // bloquejava l'arrossegament de TOTS els elements (el "cartell
+              // de carrer que no es mou"). Qualsevol clic fora de reproducció
+              // torna al mode edició.
+              if (anim && !playing && !recording) { setAnim(null); setProg(0); tSimRef.current = 0; }
+              if (e.target === e.target.getStage()) setSel(null);
+            }}
+            onTouchStart={(e) => {
+              setMenu(null);
+              if (anim && !playing && !recording) { setAnim(null); setProg(0); tSimRef.current = 0; }
+              if (e.target === e.target.getStage()) setSel(null);
+            }}>
             <Layer listening={false}><RoadBg road={road} /></Layer>
             <Layer>
               {/* Marques de frenada (es van pintant durant la fase post-impacte) */}

@@ -12,7 +12,7 @@ import {
   type CSSProperties, type MutableRefObject, type ReactNode,
 } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, RoundedBox } from '@react-three/drei';
 import * as THREE from 'three';
 import { A, Ic, Mono } from '../lib/design';
 import {
@@ -186,106 +186,273 @@ const DIMS: Record<string, { l: number; w: number; h: number }> = {
   vianant: { l: 0.5, w: 0.5, h: 1.75 }, tractor: { l: 4.2, w: 2.2, h: 2.8 },
   ambulancia: { l: 5.6, w: 2.05, h: 2.5 }, policia: { l: 4.7, w: 1.85, h: 1.5 },
 };
-const GLASS = '#9FC6E8';
-function Wheel({ x, z, r = 0.34, w = 0.24 }: { x: number; z: number; r?: number; w?: number }) {
+const GLASS = '#7FA8C9';
+/* Materials: pintura amb clearcoat (brillantor de carrosseria), vidre i plàstic. */
+const Paint = ({ color }: { color: string }) => (
+  <meshPhysicalMaterial color={color} metalness={0.5} roughness={0.32} clearcoat={0.7} clearcoatRoughness={0.22} />
+);
+const GlassMat = () => (
+  <meshPhysicalMaterial color={GLASS} metalness={0.25} roughness={0.06} transparent opacity={0.92} />
+);
+const Trim = () => <meshStandardMaterial color="#222429" roughness={0.65} />;
+
+function Wheel({ x, z, r = 0.33, w = 0.24 }: { x: number; z: number; r?: number; w?: number }) {
   return (
-    <mesh position={[x, r, z]} rotation-z={Math.PI / 2} castShadow>
-      <cylinderGeometry args={[r, r, w, 14]} />
-      <meshStandardMaterial color="#1A1A1E" roughness={0.9} />
-    </mesh>
-  );
-}
-function Lightbar({ z, w }: { z: number; w: number }) {
-  return (
-    <group position={[0, 0, z]}>
-      <mesh position={[-w / 4, 0, 0]}><boxGeometry args={[w / 2.4, 0.14, 0.3]} /><meshStandardMaterial color="#2E6BE6" emissive="#2E6BE6" emissiveIntensity={1.4} /></mesh>
-      <mesh position={[w / 4, 0, 0]}><boxGeometry args={[w / 2.4, 0.14, 0.3]} /><meshStandardMaterial color="#E0455A" emissive="#E0455A" emissiveIntensity={1.4} /></mesh>
+    <group position={[x, r, z]} rotation-z={Math.PI / 2}>
+      <mesh castShadow><cylinderGeometry args={[r, r, w, 18]} /><meshStandardMaterial color="#17171B" roughness={0.92} /></mesh>
+      {/* tapaboixes a banda i banda */}
+      {[-1, 1].map((s) => (
+        <mesh key={s} position={[0, s * (w / 2 + 0.005), 0]}>
+          <cylinderGeometry args={[r * 0.55, r * 0.55, 0.02, 14]} />
+          <meshStandardMaterial color="#C8CBD2" metalness={0.7} roughness={0.3} />
+        </mesh>
+      ))}
     </group>
   );
 }
-// Model 3D del vehicle (vista del tipus + color del croquis). Mira cap a −z.
+function Lightbar({ z, w, y = 0 }: { z: number; w: number; y?: number }) {
+  return (
+    <group position={[0, y, z]}>
+      <mesh position={[-w / 4, 0, 0]}><boxGeometry args={[w / 2.4, 0.13, 0.28]} /><meshStandardMaterial color="#2E6BE6" emissive="#2E6BE6" emissiveIntensity={1.6} /></mesh>
+      <mesh position={[w / 4, 0, 0]}><boxGeometry args={[w / 2.4, 0.13, 0.28]} /><meshStandardMaterial color="#E0455A" emissive="#E0455A" emissiveIntensity={1.6} /></mesh>
+    </group>
+  );
+}
+/* Fars (davant) i pilots (darrere). */
+function Lights({ l, w, y = 0.56 }: { l: number; w: number; y?: number }) {
+  return (
+    <>
+      {[-1, 1].map((s) => (
+        <Fragment key={s}>
+          <mesh position={[s * w * 0.32, y, -l / 2 - 0.008]}>
+            <boxGeometry args={[0.3, 0.13, 0.04]} />
+            <meshStandardMaterial color="#FFF3C4" emissive="#FFE9A8" emissiveIntensity={1} />
+          </mesh>
+          <mesh position={[s * w * 0.32, y, l / 2 + 0.008]}>
+            <boxGeometry args={[0.28, 0.12, 0.04]} />
+            <meshStandardMaterial color="#B82626" emissive="#E0455A" emissiveIntensity={0.8} />
+          </mesh>
+        </Fragment>
+      ))}
+    </>
+  );
+}
+/* Para-xocs + matrícules + graella. */
+function BumpersPlates({ l, w }: { l: number; w: number }) {
+  return (
+    <>
+      <RoundedBox args={[w * 0.99, 0.2, 0.24]} radius={0.07} smoothness={2} position={[0, 0.38, -l / 2 + 0.04]} castShadow><Trim /></RoundedBox>
+      <RoundedBox args={[w * 0.99, 0.2, 0.24]} radius={0.07} smoothness={2} position={[0, 0.38, l / 2 - 0.04]} castShadow><Trim /></RoundedBox>
+      <mesh position={[0, 0.52, -l / 2 - 0.012]}><boxGeometry args={[w * 0.42, 0.1, 0.02]} /><Trim /></mesh>
+      <mesh position={[0, 0.36, -l / 2 - 0.02]}><boxGeometry args={[0.48, 0.11, 0.015]} /><meshStandardMaterial color="#F4F4F4" /></mesh>
+      <mesh position={[0, 0.36, l / 2 + 0.02]}><boxGeometry args={[0.48, 0.11, 0.015]} /><meshStandardMaterial color="#F4F4F4" /></mesh>
+    </>
+  );
+}
+/* Retrovisors laterals. */
+function Mirrors({ l, w, y, color }: { l: number; w: number; y: number; color: string }) {
+  return (
+    <>
+      {[-1, 1].map((s) => (
+        <group key={s} position={[s * (w / 2 + 0.08), y, -l * 0.16]}>
+          <mesh castShadow><boxGeometry args={[0.15, 0.1, 0.06]} /><Paint color={color} /></mesh>
+        </group>
+      ))}
+    </>
+  );
+}
+
+/* Turisme: xassís arrodonit + cabina de vidre + sostre pintat + detalls. */
+function SedanBody({ l, w, h, color }: { l: number; w: number; h: number; color: string }) {
+  const bodyH = h * 0.4, cabH = h * 0.46;
+  const bodyTop = 0.34 + bodyH;
+  return (
+    <group>
+      <RoundedBox args={[w, bodyH, l]} radius={0.11} smoothness={3} position={[0, 0.34 + bodyH / 2, 0]} castShadow><Paint color={color} /></RoundedBox>
+      {/* capó lleugerament més baix al davant */}
+      <RoundedBox args={[w * 0.94, bodyH * 0.4, l * 0.22]} radius={0.07} smoothness={2} position={[0, bodyTop - bodyH * 0.16, -l * 0.36]} castShadow><Paint color={color} /></RoundedBox>
+      <RoundedBox args={[w * 0.86, cabH, l * 0.48]} radius={0.17} smoothness={3} position={[0, bodyTop + cabH / 2 - 0.1, l * 0.06]} castShadow><GlassMat /></RoundedBox>
+      <RoundedBox args={[w * 0.76, 0.07, l * 0.4]} radius={0.03} smoothness={2} position={[0, bodyTop + cabH - 0.1, l * 0.06]} castShadow><Paint color={color} /></RoundedBox>
+      <BumpersPlates l={l} w={w} />
+      <Lights l={l} w={w} />
+      <Mirrors l={l} w={w} y={bodyTop + 0.04} color={color} />
+      <Wheel x={-w / 2 + 0.1} z={-l / 2 + 0.82} /><Wheel x={w / 2 - 0.1} z={-l / 2 + 0.82} />
+      <Wheel x={-w / 2 + 0.1} z={l / 2 - 0.82} /><Wheel x={w / 2 - 0.1} z={l / 2 - 0.82} />
+    </group>
+  );
+}
+/* Furgoneta / ambulància: volum alt amb parabrisa inclinat i finestres. */
+function VanBody({ l, w, h, color, windows = true }: { l: number; w: number; h: number; color: string; windows?: boolean }) {
+  const bodyH = h * 0.84;
+  return (
+    <group>
+      <RoundedBox args={[w, bodyH, l]} radius={0.13} smoothness={3} position={[0, 0.32 + bodyH / 2, 0]} castShadow><Paint color={color} /></RoundedBox>
+      {/* parabrisa inclinat */}
+      <mesh position={[0, 0.32 + bodyH * 0.72, -l / 2 + 0.1]} rotation-x={-0.32}>
+        <boxGeometry args={[w * 0.84, bodyH * 0.34, 0.05]} /><GlassMat />
+      </mesh>
+      {/* finestres laterals davanteres */}
+      {windows && [-1, 1].map((s) => (
+        <mesh key={s} position={[s * (w / 2 + 0.005), 0.32 + bodyH * 0.7, -l * 0.3]}>
+          <boxGeometry args={[0.02, bodyH * 0.26, l * 0.22]} /><GlassMat />
+        </mesh>
+      ))}
+      <BumpersPlates l={l} w={w} />
+      <Lights l={l} w={w} y={0.6} />
+      <Mirrors l={l} w={w} y={0.32 + bodyH * 0.66} color={color} />
+      <Wheel x={-w / 2 + 0.1} z={-l / 2 + 0.9} /><Wheel x={w / 2 - 0.1} z={-l / 2 + 0.9} />
+      <Wheel x={-w / 2 + 0.1} z={l / 2 - 1.0} /><Wheel x={w / 2 - 0.1} z={l / 2 - 1.0} />
+    </group>
+  );
+}
+
+// Model 3D del vehicle (tipus + color del croquis). Mira cap a −z.
 function VehModel({ kind, color }: { kind: string; color: string }) {
   const d = DIMS[kind] ?? DIMS.cotxe;
   const { l, w, h } = d;
+  const shadow = (
+    <mesh rotation-x={-Math.PI / 2} position-y={0.02} scale={[w * 0.66, l * 0.56, 1]}>
+      <circleGeometry args={[1, 24]} />
+      <meshBasicMaterial color="#000" transparent opacity={0.22} depthWrite={false} />
+    </mesh>
+  );
   if (kind === 'vianant') return (
     <group>
-      <mesh position={[0, 0.65, 0]} castShadow><capsuleGeometry args={[0.21, 0.75, 6, 12]} /><meshStandardMaterial color={color === '#15151C' ? '#F0B400' : color} /></mesh>
-      <mesh position={[0, 1.45, 0]} castShadow><sphereGeometry args={[0.16, 14, 12]} /><meshStandardMaterial color="#E8C39E" /></mesh>
+      {shadow}
+      {/* cames */}
+      {[-1, 1].map((s) => <mesh key={s} position={[s * 0.09, 0.4, 0]} castShadow><capsuleGeometry args={[0.07, 0.55, 4, 8]} /><meshStandardMaterial color="#3D4350" /></mesh>)}
+      {/* tors */}
+      <mesh position={[0, 1.02, 0]} castShadow><capsuleGeometry args={[0.19, 0.5, 6, 12]} /><meshStandardMaterial color={color === '#15151C' ? '#E8A33D' : color} /></mesh>
+      {/* braços */}
+      {[-1, 1].map((s) => <mesh key={'a' + s} position={[s * 0.27, 1.0, 0]} rotation-z={s * 0.18} castShadow><capsuleGeometry args={[0.055, 0.5, 4, 8]} /><meshStandardMaterial color={color === '#15151C' ? '#E8A33D' : color} /></mesh>)}
+      {/* cap */}
+      <mesh position={[0, 1.52, 0]} castShadow><sphereGeometry args={[0.155, 16, 12]} /><meshStandardMaterial color="#E8C39E" /></mesh>
     </group>
   );
   if (kind === 'moto' || kind === 'bici' || kind === 'patinet') {
-    const r = kind === 'moto' ? 0.32 : 0.3;
+    const r = kind === 'moto' ? 0.32 : kind === 'bici' ? 0.34 : 0.16;
     return (
       <group>
-        <Wheel x={0} z={-l / 2 + r} r={r} w={0.12} />
-        <Wheel x={0} z={l / 2 - r} r={r} w={0.12} />
-        <mesh position={[0, r + 0.22, 0]} castShadow><boxGeometry args={[0.26, 0.3, l * 0.62]} /><meshStandardMaterial color={color} /></mesh>
+        {shadow}
+        <Wheel x={0} z={-l / 2 + r} r={r} w={kind === 'moto' ? 0.16 : 0.08} />
+        <Wheel x={0} z={l / 2 - r} r={r} w={kind === 'moto' ? 0.16 : 0.08} />
+        {kind === 'moto' && (<>
+          <RoundedBox args={[0.34, 0.34, l * 0.6]} radius={0.1} smoothness={2} position={[0, r + 0.28, 0.05]} castShadow><Paint color={color} /></RoundedBox>
+          <mesh position={[0, r + 0.5, -l / 2 + r + 0.1]} castShadow><boxGeometry args={[0.46, 0.05, 0.05]} /><Trim /></mesh>
+        </>)}
+        {kind === 'bici' && (<>
+          <mesh position={[0, r + 0.2, 0]} rotation-x={0.5} castShadow><boxGeometry args={[0.05, 0.05, l * 0.6]} /><Paint color={color} /></mesh>
+          <mesh position={[0, r + 0.45, -l / 2 + r]} castShadow><boxGeometry args={[0.44, 0.04, 0.04]} /><Trim /></mesh>
+        </>)}
+        {kind === 'patinet' && (<>
+          <mesh position={[0, r + 0.06, 0.1]} castShadow><boxGeometry args={[0.16, 0.05, 0.85]} /><Paint color={color} /></mesh>
+          <mesh position={[0, r + 0.62, -0.35]} castShadow><cylinderGeometry args={[0.025, 0.025, 1.1, 8]} /><Trim /></mesh>
+          <mesh position={[0, r + 1.16, -0.35]} castShadow><boxGeometry args={[0.4, 0.04, 0.04]} /><Trim /></mesh>
+        </>)}
         {/* conductor */}
-        <mesh position={[0, r + 0.78, 0.1]} castShadow><capsuleGeometry args={[0.17, 0.45, 6, 10]} /><meshStandardMaterial color="#3D4350" /></mesh>
-        <mesh position={[0, r + 1.32, 0.1]} castShadow><sphereGeometry args={[0.15, 12, 10]} /><meshStandardMaterial color={kind === 'bici' ? '#E8C39E' : '#15151C'} /></mesh>
+        <mesh position={[0, r + (kind === 'patinet' ? 0.95 : 0.78), kind === 'patinet' ? 0 : 0.12]} castShadow>
+          <capsuleGeometry args={[0.17, 0.45, 6, 10]} /><meshStandardMaterial color="#3D4350" />
+        </mesh>
+        <mesh position={[0, r + (kind === 'patinet' ? 1.52 : 1.34), kind === 'patinet' ? 0 : 0.12]} castShadow>
+          <sphereGeometry args={[0.15, 14, 10]} />
+          <meshStandardMaterial color={kind === 'bici' ? '#E8C39E' : '#15151C'} roughness={kind === 'bici' ? 0.8 : 0.3} />
+        </mesh>
       </group>
     );
   }
-  const cab = kind === 'camio' || kind === 'trailer' || kind === 'tractor';
-  const bodyH = cab ? h * 0.4 : h * 0.52;
-  const wheels = (
-    <>
-      <Wheel x={-w / 2 + 0.12} z={-l / 2 + 0.85} /><Wheel x={w / 2 - 0.12} z={-l / 2 + 0.85} />
-      <Wheel x={-w / 2 + 0.12} z={l / 2 - 0.85} /><Wheel x={w / 2 - 0.12} z={l / 2 - 0.85} />
-      {l > 7 && (<><Wheel x={-w / 2 + 0.12} z={0} /><Wheel x={w / 2 - 0.12} z={0} /></>)}
-    </>
-  );
-  if (cab) {
-    const cabL = kind === 'tractor' ? l * 0.5 : l * 0.28;
-    const boxL = l - cabL - 0.2;
+  if (kind === 'camio' || kind === 'trailer') {
+    const cabL = l * 0.26, boxL = l - cabL - 0.25;
     return (
       <group>
-        <mesh position={[0, 0.45 + h * 0.27, -l / 2 + cabL / 2]} castShadow>
-          <boxGeometry args={[w * 0.96, h * 0.54, cabL]} /><meshStandardMaterial color={color} metalness={0.3} roughness={0.5} />
+        {shadow}
+        <RoundedBox args={[w * 0.96, h * 0.56, cabL]} radius={0.12} smoothness={3} position={[0, 0.42 + h * 0.28, -l / 2 + cabL / 2]} castShadow><Paint color={color} /></RoundedBox>
+        <mesh position={[0, 0.42 + h * 0.44, -l / 2 + 0.08]} rotation-x={-0.18}>
+          <boxGeometry args={[w * 0.84, h * 0.22, 0.05]} /><GlassMat />
         </mesh>
-        <mesh position={[0, 0.45 + h * 0.42, -l / 2 + cabL * 0.32]} castShadow>
-          <boxGeometry args={[w * 0.86, h * 0.22, cabL * 0.5]} /><meshStandardMaterial color={GLASS} metalness={0.55} roughness={0.18} />
-        </mesh>
-        {kind === 'tractor'
-          ? (<>
-            <Wheel x={-w / 2 + 0.15} z={l / 2 - 0.9} r={0.85} w={0.4} /><Wheel x={w / 2 - 0.15} z={l / 2 - 0.9} r={0.85} w={0.4} />
-            <Wheel x={-w / 2 + 0.18} z={-l / 2 + 0.6} r={0.45} w={0.3} /><Wheel x={w / 2 - 0.18} z={-l / 2 + 0.6} r={0.45} w={0.3} />
-          </>)
-          : (<>
-            <mesh position={[0, 0.45 + h * 0.32, cabL / 2 + 0.1]} castShadow>
-              <boxGeometry args={[w, h * 0.64, boxL]} /><meshStandardMaterial color="#E9EAEE" roughness={0.7} />
-            </mesh>
-            {wheels}
-          </>)}
+        <RoundedBox args={[w, h * 0.7, boxL]} radius={0.06} smoothness={2} position={[0, 0.5 + h * 0.35, cabL / 2 + 0.12]} castShadow><meshStandardMaterial color="#EDEEF1" roughness={0.6} /></RoundedBox>
+        {/* faldons i para-xocs */}
+        <BumpersPlates l={l} w={w} />
+        <Lights l={l} w={w} y={0.62} />
+        <Mirrors l={l} w={w} y={0.42 + h * 0.42} color={color} />
+        <Wheel x={-w / 2 + 0.12} z={-l / 2 + 0.95} r={0.45} w={0.3} /><Wheel x={w / 2 - 0.12} z={-l / 2 + 0.95} r={0.45} w={0.3} />
+        <Wheel x={-w / 2 + 0.12} z={l / 2 - 1.1} r={0.45} w={0.3} /><Wheel x={w / 2 - 0.12} z={l / 2 - 1.1} r={0.45} w={0.3} />
+        <Wheel x={-w / 2 + 0.12} z={l / 2 - 2.1} r={0.45} w={0.3} /><Wheel x={w / 2 - 0.12} z={l / 2 - 2.1} r={0.45} w={0.3} />
+        {kind === 'trailer' && (<><Wheel x={-w / 2 + 0.12} z={0.4} r={0.45} w={0.3} /><Wheel x={w / 2 - 0.12} z={0.4} r={0.45} w={0.3} /></>)}
       </group>
     );
   }
-  const isBus = kind === 'bus';
-  const cabL2 = isBus ? l * 0.9 : l * 0.52;
-  const baseCol = kind === 'ambulancia' ? '#F7F7F7' : kind === 'policia' ? '#15151C' : color;
-  return (
-    <group>
-      <mesh position={[0, 0.4 + bodyH / 2, 0]} castShadow>
-        <boxGeometry args={[w, bodyH, l]} /><meshStandardMaterial color={baseCol} metalness={0.35} roughness={0.45} />
-      </mesh>
-      <mesh position={[0, 0.4 + bodyH + (h - bodyH) * 0.5 - 0.05, isBus ? 0 : l * 0.05]} castShadow>
-        <boxGeometry args={[w * 0.88, h - bodyH, cabL2]} /><meshStandardMaterial color={isBus ? baseCol : GLASS} metalness={isBus ? 0.3 : 0.55} roughness={isBus ? 0.5 : 0.18} />
-      </mesh>
-      {isBus && <mesh position={[0, 0.4 + bodyH + (h - bodyH) * 0.55, 0]}><boxGeometry args={[w * 0.9, (h - bodyH) * 0.4, l * 0.86]} /><meshStandardMaterial color={GLASS} metalness={0.5} roughness={0.2} /></mesh>}
-      {/* fars */}
-      <mesh position={[-w / 4, 0.55, -l / 2 - 0.01]}><boxGeometry args={[0.28, 0.12, 0.05]} /><meshStandardMaterial color="#FFE9A8" emissive="#FFE9A8" emissiveIntensity={0.8} /></mesh>
-      <mesh position={[w / 4, 0.55, -l / 2 - 0.01]}><boxGeometry args={[0.28, 0.12, 0.05]} /><meshStandardMaterial color="#FFE9A8" emissive="#FFE9A8" emissiveIntensity={0.8} /></mesh>
-      {kind === 'ambulancia' && (<>
-        <mesh position={[0, 0.4 + bodyH * 0.6, 0]}><boxGeometry args={[w + 0.02, 0.26, l * 0.7]} /><meshStandardMaterial color="#E0455A" /></mesh>
-        <Lightbar z={-l * 0.18} w={w} />
-      </>)}
-      {kind === 'policia' && (<>
-        <mesh position={[0, 0.4 + bodyH * 0.45, 0]}><boxGeometry args={[w + 0.02, 0.3, l * 0.5]} /><meshStandardMaterial color="#fff" /></mesh>
-        <Lightbar z={-l * 0.1} w={w} />
-      </>)}
-      {wheels}
-    </group>
-  );
+  if (kind === 'tractor') {
+    return (
+      <group>
+        {shadow}
+        <RoundedBox args={[w * 0.7, h * 0.42, l * 0.85]} radius={0.1} smoothness={2} position={[0, 0.6 + h * 0.21, 0]} castShadow><Paint color={color} /></RoundedBox>
+        {/* cabina envidrada */}
+        <RoundedBox args={[w * 0.62, h * 0.4, l * 0.35]} radius={0.08} smoothness={2} position={[0, 0.6 + h * 0.6, l * 0.12]} castShadow><GlassMat /></RoundedBox>
+        <mesh position={[0, 0.6 + h * 0.82, l * 0.12]} castShadow><boxGeometry args={[w * 0.66, 0.06, l * 0.38]} /><Paint color={color} /></mesh>
+        {/* xemeneia */}
+        <mesh position={[w * 0.2, 0.6 + h * 0.55, -l * 0.32]} castShadow><cylinderGeometry args={[0.05, 0.05, h * 0.5, 8]} /><Trim /></mesh>
+        <Wheel x={-w / 2 + 0.2} z={l / 2 - 0.95} r={0.88} w={0.42} /><Wheel x={w / 2 - 0.2} z={l / 2 - 0.95} r={0.88} w={0.42} />
+        <Wheel x={-w / 2 + 0.22} z={-l / 2 + 0.6} r={0.46} w={0.3} /><Wheel x={w / 2 - 0.22} z={-l / 2 + 0.6} r={0.46} w={0.3} />
+      </group>
+    );
+  }
+  if (kind === 'bus') {
+    const bodyH = h * 0.88;
+    return (
+      <group>
+        {shadow}
+        <RoundedBox args={[w, bodyH, l]} radius={0.16} smoothness={3} position={[0, 0.34 + bodyH / 2, 0]} castShadow><Paint color={color} /></RoundedBox>
+        {/* banda de finestres contínua */}
+        {[-1, 1].map((s) => (
+          <mesh key={s} position={[s * (w / 2 + 0.006), 0.34 + bodyH * 0.68, 0]}>
+            <boxGeometry args={[0.02, bodyH * 0.3, l * 0.88]} /><GlassMat />
+          </mesh>
+        ))}
+        <mesh position={[0, 0.34 + bodyH * 0.68, -l / 2 + 0.06]} rotation-x={-0.12}>
+          <boxGeometry args={[w * 0.86, bodyH * 0.32, 0.05]} /><GlassMat />
+        </mesh>
+        {/* porta */}
+        <mesh position={[w / 2 + 0.006, 0.34 + bodyH * 0.4, -l * 0.32]}>
+          <boxGeometry args={[0.015, bodyH * 0.74, 1.1]} /><GlassMat />
+        </mesh>
+        <BumpersPlates l={l} w={w} />
+        <Lights l={l} w={w} y={0.6} />
+        <Wheel x={-w / 2 + 0.12} z={-l / 2 + 1.25} r={0.46} w={0.3} /><Wheel x={w / 2 - 0.12} z={-l / 2 + 1.25} r={0.46} w={0.3} />
+        <Wheel x={-w / 2 + 0.12} z={l / 2 - 1.6} r={0.46} w={0.3} /><Wheel x={w / 2 - 0.12} z={l / 2 - 1.6} r={0.46} w={0.3} />
+      </group>
+    );
+  }
+  if (kind === 'furgo') return <group>{shadow}<VanBody l={l} w={w} h={h} color={color} /></group>;
+  if (kind === 'ambulancia') {
+    return (
+      <group>
+        {shadow}
+        <VanBody l={l} w={w} h={h} color="#F7F7F7" />
+        {/* franja i creu */}
+        <mesh position={[0, 0.32 + h * 0.4, 0]}><boxGeometry args={[w + 0.015, 0.24, l * 0.72]} /><meshStandardMaterial color="#E0455A" /></mesh>
+        {[-1, 1].map((s) => (
+          <Fragment key={s}>
+            <mesh position={[s * (w / 2 + 0.012), 0.32 + h * 0.62, l * 0.12]}><boxGeometry args={[0.015, 0.34, 0.1]} /><meshStandardMaterial color="#E0455A" /></mesh>
+            <mesh position={[s * (w / 2 + 0.012), 0.32 + h * 0.62, l * 0.12]}><boxGeometry args={[0.015, 0.1, 0.34]} /><meshStandardMaterial color="#E0455A" /></mesh>
+          </Fragment>
+        ))}
+        <Lightbar z={-l * 0.3} w={w} y={0.34 + h * 0.86} />
+      </group>
+    );
+  }
+  if (kind === 'policia') {
+    return (
+      <group>
+        {shadow}
+        <SedanBody l={l} w={w} h={h} color="#15151C" />
+        {/* banda blanca de portes */}
+        <mesh position={[0, 0.62, 0]}><boxGeometry args={[w + 0.015, 0.26, l * 0.46]} /><meshStandardMaterial color="#F4F4F4" /></mesh>
+        <Lightbar z={-l * 0.06} w={w * 0.8} y={0.34 + h * 0.86 + 0.05} />
+      </group>
+    );
+  }
+  // Turisme estàndard.
+  return <group>{shadow}<SedanBody l={l} w={w} h={h} color={color} /></group>;
 }
 // Aplica transparència de "fantasma" a tot un grup.
 function GhostWrap({ children }: { children: ReactNode }) {
@@ -780,10 +947,11 @@ export default function Croquis3D({ els, road, onClose }: { els: El[]; road: Roa
         >
           <color attach="background" args={['#BFD4E6']} />
           <fog attach="fog" args={['#BFD4E6', 75, 190]} />
-          <ambientLight intensity={0.7} />
+          <hemisphereLight args={['#D8E6F2', '#7A8468', 0.85]} />
+          <ambientLight intensity={0.25} />
           <directionalLight
-            position={[28, 44, 18]} intensity={1.35} castShadow
-            shadow-mapSize={[2048, 2048]}
+            position={[28, 44, 18]} intensity={1.5} castShadow
+            shadow-mapSize={[2048, 2048]} shadow-bias={-0.0004}
             shadow-camera-left={-50} shadow-camera-right={50}
             shadow-camera-top={50} shadow-camera-bottom={-50}
           />
