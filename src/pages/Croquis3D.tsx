@@ -454,6 +454,56 @@ function VehModel({ kind, color }: { kind: string; color: string }) {
   // Turisme estàndard.
   return <group>{shadow}<SedanBody l={l} w={w} h={h} color={color} /></group>;
 }
+/* ── Danys del vehicle (les zones marcades al modal 2D, en 3D) ──
+   Abolladures low-poly (icosaedres aplastats amb flat shading) en la
+   posició de cada zona. Durant la recreació NO es veuen fins a
+   l'instant de l'impacte: el cotxe arriba intacte i surt abonyegat. */
+function DamagePatches({ kind, color, danys }: { kind: string; color: string; danys: string[] }) {
+  const d = DIMS[kind] ?? DIMS.cotxe;
+  const { l, w } = d;
+  const dark = useMemo(() => '#' + new THREE.Color(color).multiplyScalar(0.4).getHexString(), [color]);
+  const y = 0.6;
+  const at: Record<string, [number, number, number]> = {
+    front: [0, y, -l / 2 + 0.08], 'front-e': [-w * 0.34, y, -l / 2 + 0.16], 'front-d': [w * 0.34, y, -l / 2 + 0.16],
+    'lat-e': [-w / 2 + 0.04, y + 0.08, -l * 0.04], 'lat-d': [w / 2 - 0.04, y + 0.08, -l * 0.04],
+    rear: [0, y, l / 2 - 0.08], 'rear-e': [-w * 0.34, y, l / 2 - 0.16], 'rear-d': [w * 0.34, y, l / 2 - 0.16],
+  };
+  const s = Math.min(w, 1.9) * 0.3;
+  return (
+    <group>
+      {danys.map((z, i) => at[z] && (
+        <group key={z} position={at[z]}>
+          {/* xapa enfonsada (pintura fosca i mat) */}
+          <mesh rotation={[0.4 + i * 0.5, 0.8 + i * 1.1, 0.3]} scale={[1.25, 0.7, 0.9]} castShadow>
+            <icosahedronGeometry args={[s, 0]} />
+            <meshStandardMaterial color={dark} roughness={0.95} flatShading />
+          </mesh>
+          {/* frec negre (plàstic / transferència de pintura) */}
+          <mesh rotation={[1.2, 0.4 + i * 0.9, 0.9]} scale={[0.95, 0.5, 0.7]}>
+            <icosahedronGeometry args={[s * 0.8, 0]} />
+            <meshStandardMaterial color="#222227" roughness={1} flatShading />
+          </mesh>
+        </group>
+      ))}
+    </group>
+  );
+}
+/* Mostra els danys només a partir de l'impacte (si hi ha recreació). */
+function VehDamage({ el, tl, clock }: { el: El; tl: Timeline; clock: MutableRefObject<Clock> }) {
+  const ref = useRef<THREE.Group>(null);
+  const inTl = useMemo(() => tl.vehs.some((v) => v.id === el.id), [tl, el.id]);
+  useFrame(() => {
+    if (ref.current) ref.current.visible = !inTl || clock.current.t >= tl.tImpact;
+  });
+  const danys = el.data?.danys ?? [];
+  if (!danys.length) return null;
+  return (
+    <group ref={ref} visible={!inTl}>
+      <DamagePatches kind={el.kind} color={el.color || '#3B6BF5'} danys={danys} />
+    </group>
+  );
+}
+
 // Aplica transparència de "fantasma" a tot un grup.
 function GhostWrap({ children }: { children: ReactNode }) {
   const ref = useRef<THREE.Group>(null);
@@ -780,8 +830,22 @@ function SkidTrail3D({ v, live }: { v: TimelineVeh; live: MutableRefObject<Live>
     </group>
   );
 }
+// Trossos de plàstic/vidre que surten disparats a l'impacte.
+const DEBRIS = Array.from({ length: 14 }, (_, i) => {
+  const a = (i / 14) * Math.PI * 2 + (i % 3) * 0.41;
+  return {
+    dx: Math.cos(a) * (1.2 + (i % 4) * 0.7),
+    dz: Math.sin(a) * (1.2 + ((i + 2) % 4) * 0.7),
+    vy: 1.6 + (i % 5) * 0.55,
+    spin: 4 + (i % 3) * 3,
+    s: 0.05 + (i % 3) * 0.035,
+    glass: i % 3 === 0,
+  };
+});
 function CrashFx3D({ tl, clock }: { tl: Timeline; clock: MutableRefObject<Clock> }) {
-  const refs = useRef<{ ring: THREE.Mesh | null; flash: THREE.Sprite | null }[]>(tl.impacts.map(() => ({ ring: null, flash: null })));
+  const refs = useRef<{ ring: THREE.Mesh | null; flash: THREE.Sprite | null; debris: (THREE.Mesh | null)[] }[]>(
+    tl.impacts.map(() => ({ ring: null, flash: null, debris: [] })),
+  );
   const tex = useMemo(() => emojiTex('💥', null), []);
   useFrame(() => {
     const k = (clock.current.t - tl.tImpact) / 0.8;
@@ -792,9 +856,20 @@ function CrashFx3D({ tl, clock }: { tl: Timeline; clock: MutableRefObject<Clock>
         if (vis) { const s = 0.6 + k * 7; r.ring.scale.set(s, s, 1); (r.ring.material as THREE.MeshBasicMaterial).opacity = 0.8 * (1 - k); }
       }
       if (r.flash) {
-        r.flash.visible = vis;
-        if (vis) { const s = 1.2 + k * 3.2; r.flash.scale.set(s, s, 1); (r.flash.material as THREE.SpriteMaterial).opacity = 1 - k; }
+        r.flash.visible = vis && k < 0.5;
+        if (vis) { const s = 1.2 + k * 3.2; r.flash.scale.set(s, s, 1); (r.flash.material as THREE.SpriteMaterial).opacity = Math.max(0, 1 - k * 2); }
       }
+      r.debris.forEach((m, i) => {
+        if (!m) return;
+        const dRef = DEBRIS[i];
+        m.visible = vis;
+        if (vis) {
+          // Paràbola balística simple: surt disparat, cau i queda al terra.
+          const y = Math.max(0.04, 0.6 + dRef.vy * k - 5.2 * k * k);
+          m.position.set(dRef.dx * Math.min(1, k * 1.6), y, dRef.dz * Math.min(1, k * 1.6));
+          m.rotation.set(dRef.spin * k, dRef.spin * k * 0.7, dRef.spin * k * 1.3);
+        }
+      });
     }
   });
   return (
@@ -807,6 +882,14 @@ function CrashFx3D({ tl, clock }: { tl: Timeline; clock: MutableRefObject<Clock>
           <sprite ref={(s) => { refs.current[i].flash = s; }} position={[0, 1, 0]} visible={false}>
             <spriteMaterial map={tex} transparent />
           </sprite>
+          {DEBRIS.map((d, j) => (
+            <mesh key={j} ref={(m) => { refs.current[i].debris[j] = m; }} visible={false} castShadow>
+              <boxGeometry args={[d.s, d.s * 0.6, d.s]} />
+              {d.glass
+                ? <meshStandardMaterial color="#BFD9EC" metalness={0.4} roughness={0.1} />
+                : <meshStandardMaterial color="#26262B" roughness={0.9} />}
+            </mesh>
+          ))}
         </group>
       ))}
     </>
@@ -982,6 +1065,7 @@ export default function Croquis3D({ els, road, onClose }: { els: El[]; road: Roa
                 ref={(g) => { if (g) vehRefs.current.set(v.id, g); else vehRefs.current.delete(v.id); }}
                 position={[toX(v.x), 0, toZ(v.y)]} rotation-y={yawOf(v.rotation)}>
                 {model}
+                <VehDamage el={v} tl={tl} clock={clock} />
                 {letters[v.id] && <Billboard text={letters[v.id]} bg="#15151C" y={(DIMS[v.kind]?.h ?? 1.5) + 1.1} s={0.85} />}
               </group>
             );

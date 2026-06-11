@@ -122,6 +122,11 @@ function pointAt(p: Pt[], d: number, fbRot: number): { x: number; y: number; rot
 // Velocitat per defecte quan l'agent no n'ha declarat cap (km/h).
 const DEF_KMH: Record<string, number> = { vianant: 5, bici: 16, patinet: 20, tractor: 25 };
 const defKmh = (k: string) => DEF_KMH[k] ?? 45;
+// Massa aproximada (kg) per a la transferència de quantitat de moviment.
+const MASS: Record<string, number> = {
+  vianant: 80, bici: 95, patinet: 95, moto: 230, cotxe: 1350, policia: 1500,
+  furgo: 2300, ambulancia: 2600, camio: 10000, trailer: 19000, bus: 12500, tractor: 4800,
+};
 
 export type SkidSample = { x: number; y: number; rot: number; d: number };
 export type TimelineVeh = {
@@ -164,12 +169,12 @@ export function buildTimeline(els: El[]): Timeline {
   for (const v of els) {
     if (!VEHICLES.includes(v.kind) || v.ghost) continue;
     const gf = finals.find((i) => i.parent === v.id);
+    const g0 = inits.find((i) => i.parent === v.id);
     const parked = v.data?.estat === 'parat' || v.data?.estat === 'estacionat';
-    // Vehicle aturat/estacionat AMB posició final: el xoc l'empeny.
-    // Es queda quiet on està dibuixat fins a T impacte i llavors surt
-    // desplaçat fins a la posició final.
-    if (parked) {
-      if (!gf) continue;
+    // Vehicle quiet que rep el xoc: estava aturat/estacionat (o simplement
+    // no té posició inicial) i té posició final → s'espera QUIET fins que
+    // el col·lisionen i llavors surt empès fins a la posició final.
+    if (gf && (parked || !g0)) {
       raws.push({
         veh: v, pre: [{ x: v.x, y: v.y }], post: smoothPath([{ x: v.x, y: v.y }, { x: gf.x, y: gf.y }]),
         preLen: 0, postLen: Math.hypot(gf.x - v.x, gf.y - v.y),
@@ -178,7 +183,7 @@ export function buildTimeline(els: El[]): Timeline {
       });
       continue;
     }
-    const g0 = inits.find((i) => i.parent === v.id); if (!g0) continue;
+    if (!g0 || parked) continue;
     const mids = viaOf(v.id);
     let pre: Pt[], post: Pt[], impactPt: Pt | null, rotFinal: number;
     if (gf) {
@@ -216,33 +221,57 @@ export function buildTimeline(els: El[]): Timeline {
   // Si algun vehicle no hi arriba pel límit de 14 s, li apugem la velocitat.
   for (const r of raws) if (r.vPre > 0 && r.preLen / r.vPre > tImpact) r.vPre = r.preLen / tImpact;
 
-  const vehs: TimelineVeh[] = raws.map((r) => {
-    const tPre = r.vPre > 0 ? r.preLen / r.vPre : 0;
-    // Velocitat post-impacte: el 55% de la pròpia; si era un vehicle
-    // aturat (empès), hereta ~45% de la velocitat del que el colpeja.
-    let vPost: number;
-    if (r.pushed) {
-      let strikerV = 0, best = 1e9;
-      for (const o of raws) {
-        if (o === r || !o.impactPt || o.vPre <= 0) continue;
-        const d = Math.hypot(o.impactPt.x - r.veh.x, o.impactPt.y - r.veh.y);
-        if (d < best) { best = d; strikerV = o.vPre; }
-      }
-      vPost = best < 320 && strikerV > 0
-        ? Math.max(strikerV * 0.45, kmh2pxs(6))
-        : Math.max((2 * r.postLen) / 1.4, kmh2pxs(6)); // fallback: empenta d'1,4 s
-    } else {
-      vPost = Math.max(r.vPre * 0.55, kmh2pxs(8));
-    }
-    const tPost = r.postLen > 0 ? (2 * r.postLen) / vPost : 0;
-    // Orientació a l'impacte: rumb del final del tram previ, o la
-    // pròpia orientació dibuixada si estava aturat.
+  // ── Física de l'impacte: transferència de quantitat de moviment ──
+  // Cada vehicle amb impacte busca la seva "parella" de xoc (l'impacte
+  // més proper d'un altre vehicle) i la velocitat de sortida es calcula
+  // amb un xoc inelàstic projectat sobre la seva direcció de sortida:
+  //   v' = (m·v·cosθ_propi + m_altre·v_altre·cosθ_altre) / (m + m_altre)
+  // Així un camió a 50 arrossega un cotxe aturat amb força, un xoc
+  // frontal entre iguals gairebé els atura, i un cotxe que colpeja un
+  // mur de massa... no n'hi ha: sense parella, perd un 45% i frena.
+  type Work = Raw & { mass: number; rotImpact: number; outDir: number; vPost: number };
+  const works: Work[] = raws.map((r) => {
     const rotImpact = r.pushed
       ? r.veh.rotation
       : pointAt(r.pre, Math.max(0, r.preLen - 0.1), r.rotFinal).rot;
-    // Trompo extra si el gir post-impacte és gran (xoc lateral).
-    const dAng = ((r.rotFinal - rotImpact + 540) % 360) - 180;
-    const spinExtra = Math.abs(dAng) > 70 ? Math.sign(dAng || 1) * 16 : 0;
+    const outDir = r.postLen > 0
+      ? pointAt(r.post, Math.min(3, r.postLen), r.rotFinal).rot
+      : rotImpact;
+    return { ...r, mass: MASS[r.veh.kind] ?? 1300, rotImpact, outDir, vPost: 0 };
+  });
+  for (const r of works) {
+    if (r.postLen <= 0) continue;
+    let partner: Work | null = null, bd = 240;
+    if (r.impactPt) {
+      for (const o of works) {
+        if (o === r || !o.impactPt) continue;
+        const d = Math.hypot(o.impactPt.x - r.impactPt.x, o.impactPt.y - r.impactPt.y);
+        if (d < bd) { bd = d; partner = o; }
+      }
+    }
+    if (partner) {
+      const cosSelf = Math.cos(((r.rotImpact - r.outDir) * Math.PI) / 180);
+      const cosP = Math.cos(((partner.rotImpact - r.outDir) * Math.PI) / 180);
+      const v2 = (r.mass * r.vPre * cosSelf + partner.mass * partner.vPre * cosP) / (r.mass + partner.mass);
+      r.vPost = Math.max(Math.abs(v2), kmh2pxs(5));
+    } else {
+      r.vPost = r.pushed
+        ? Math.max((2 * r.postLen) / 1.4, kmh2pxs(6))
+        : Math.max(r.vPre * 0.55, kmh2pxs(8));
+    }
+    // Garantia: arribar a la posició final en menys de 4 s.
+    r.vPost = Math.max(r.vPost, (2 * r.postLen) / 4);
+  }
+
+  const vehs: TimelineVeh[] = works.map((r) => {
+    const tPre = r.vPre > 0 ? r.preLen / r.vPre : 0;
+    const crushDelay = r.pushed ? 0.07 : 0; // fase de deformació abans de sortir empès
+    const tPost = r.postLen > 0 ? crushDelay + (2 * r.postLen) / r.vPost : 0;
+    // Trompo: més gir com més angle de sortida i més velocitat d'impacte.
+    const dAng = ((r.rotFinal - r.rotImpact + 540) % 360) - 180;
+    const spinExtra = Math.abs(dAng) > 45
+      ? Math.sign(dAng || 1) * Math.min(26, Math.abs(dAng) * 0.16 + pxs2kmh(r.vPost) * 0.08)
+      : 0;
     // Mostres del rastre de frenada (cada ~7 px del tram post-impacte).
     const skid: SkidSample[] = [];
     for (let d = 0; d <= r.postLen; d += 7) {
@@ -251,11 +280,11 @@ export function buildTimeline(els: El[]): Timeline {
     }
     return {
       id: r.veh.id, kind: r.veh.kind, declaredKmh: r.declared,
-      vPre: r.vPre, vPost,
+      vPre: r.vPre, vPost: r.vPost,
       pre: r.pre, post: r.post, preLen: r.preLen, postLen: r.postLen,
       tStart: Math.max(0, tImpact - tPre), tImpact, tEnd: tImpact + tPost,
       hasImpact: r.hasImpact, impactPt: r.impactPt,
-      rotImpact, rotFinal: r.rotFinal, spinExtra, pushed: r.pushed, skid,
+      rotImpact: r.rotImpact, rotFinal: r.rotFinal, spinExtra, pushed: r.pushed, skid,
     };
   });
 
@@ -269,12 +298,16 @@ export function buildTimeline(els: El[]): Timeline {
   return { vehs, tImpact, tTotal, impacts };
 }
 
-// Sacsejada de l'impacte (decau en ~0,45 s).
-function shake(t: number, tImp: number) {
+// Sacsejada de l'impacte (decau en ~0,45 s); amplitud segons la violència.
+function shake(t: number, tImp: number, amp = 1) {
   const dt = t - tImp;
   if (dt < 0 || dt > 0.45) return { dx: 0, dy: 0, dr: 0 };
   const k = dt / 0.45, decay = (1 - k) * (1 - k), ph = dt * 90;
-  return { dx: Math.sin(ph) * 8 * decay, dy: Math.cos(ph * 1.27) * 5 * decay, dr: Math.sin(ph * 0.9) * 6 * decay };
+  return {
+    dx: Math.sin(ph) * 8 * decay * amp,
+    dy: Math.cos(ph * 1.27) * 5 * decay * amp,
+    dr: Math.sin(ph * 0.9) * 6 * decay * amp,
+  };
 }
 
 // Estat (posició, gir, velocitat, frenada) d'un vehicle a l'instant t (s).
@@ -300,16 +333,20 @@ export function stateAt(v: TimelineVeh, t: number): VehState {
     return { x, y, rotation: done ? v.rotFinal : p.rot, kmh: done ? 0 : pxs2kmh(v.vPre), skidD: 0, moving: !done };
   }
   // Fase post-impacte: deceleració uniforme fins a aturar-se al final.
+  // Els vehicles empesos tenen una breu fase de deformació (70 ms) abans
+  // de començar a desplaçar-se.
+  const crushDelay = v.pushed ? 0.07 : 0;
   const a = (v.vPost * v.vPost) / (2 * Math.max(1, v.postLen)); // px/s²
-  const tau = Math.min(t - v.tImpact, v.vPost / a);
+  const tau = Math.min(Math.max(0, t - v.tImpact - crushDelay), v.vPost / a);
   const d2 = Math.min(v.postLen, v.vPost * tau - (a * tau * tau) / 2);
   const p = pointAt(v.post, d2, fbRot);
   const k = v.postLen > 0 ? d2 / v.postLen : 1;
-  const h0 = v.rotImpact;
-  let rot = lerpAngle(h0, v.rotFinal, easeOutCubic(k));
-  rot += v.spinExtra * Math.sin(Math.min(1, k * 1.15) * Math.PI) * (1 - k);
-  const sh = shake(t, v.tImpact);
-  const speed = Math.max(0, v.vPost - a * tau);
+  let rot = lerpAngle(v.rotImpact, v.rotFinal, easeOutCubic(k));
+  // Trompo amb sobrepassada i retorn amortit (xoc lateral violent).
+  rot += v.spinExtra * Math.sin(Math.min(1, k * 1.5) * Math.PI) * Math.pow(1 - k, 1.15);
+  const amp = Math.min(1.8, Math.max(0.5, pxs2kmh(v.vPost) / 45));
+  const sh = shake(t, v.tImpact, amp);
+  const speed = tau > 0 ? Math.max(0, v.vPost - a * tau) : 0;
   return {
     x: p.x + sh.dx, y: p.y + sh.dy, rotation: rot + sh.dr,
     kmh: pxs2kmh(speed), skidD: d2, moving: speed > 1,
