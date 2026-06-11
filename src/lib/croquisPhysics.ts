@@ -17,6 +17,11 @@ export type Estat = 'mov' | 'parat' | 'estacionat';
 export type VehData = {
   marca?: string; model?: string; color?: string; plate?: string;
   estat?: Estat; kmh?: string; note?: string;
+  // Fase 3 — dades completes per a l'informe.
+  maniobra?: string;   // què feia el vehicle (gir, avançament, marxa enrere…)
+  ocupants?: string;   // nombre d'ocupants
+  conductor?: string;  // nom / TIP del conductor
+  danys?: string[];    // zones colpejades (front, lat-e, rear-d…)
 };
 export type El = {
   id: string; kind: string; x: number; y: number;

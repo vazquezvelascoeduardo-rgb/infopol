@@ -405,6 +405,98 @@ function StaticEl({ el }: { el: El }) {
       case 'illa': return (
         <mesh position={[0, 0.11, 0]} castShadow receiveShadow><boxGeometry args={[0.7, 0.22, 2.6]} /><meshStandardMaterial color={GREEN} /></mesh>
       );
+
+      /* Via personalitzada (les mateixes peces que al 2D, a escala real) */
+      case 'c-recta': return (
+        <group>
+          <Strip w={7} l={8.9} color={ROAD_COL} y={0.024} />
+          <Strip x={-3.5} w={0.15} l={8.9} color={LINE} y={0.028} />
+          <Strip x={3.5} w={0.15} l={8.9} color={LINE} y={0.028} />
+          {[-3.3, -1.1, 1.1, 3.3].map((z) => <Strip key={z} z={z} w={0.14} l={1.2} color={LINE} y={0.028} />)}
+        </group>
+      );
+      case 'c-corba': {
+        // Quart d'anella; l'angle coincideix amb la peça 2D (quadrant esq-sup).
+        const ri = 80 / M, ro = 410 / M;
+        return (
+          <group>
+            <mesh rotation-x={-Math.PI / 2} position-y={0.024} receiveShadow>
+              <ringGeometry args={[ri, ro, 28, 1, Math.PI / 2, Math.PI / 2]} />
+              <meshStandardMaterial color={ROAD_COL} />
+            </mesh>
+            <mesh rotation-x={-Math.PI / 2} position-y={0.028}>
+              <ringGeometry args={[ri, ri + 0.14, 28, 1, Math.PI / 2, Math.PI / 2]} />
+              <meshBasicMaterial color={LINE} />
+            </mesh>
+            <mesh rotation-x={-Math.PI / 2} position-y={0.028}>
+              <ringGeometry args={[ro - 0.14, ro, 28, 1, Math.PI / 2, Math.PI / 2]} />
+              <meshBasicMaterial color={LINE} />
+            </mesh>
+          </group>
+        );
+      }
+      case 'c-cruilla': return (
+        <group>
+          <Strip w={7} l={14} color={ROAD_COL} y={0.024} />
+          <Strip w={14} l={7} color={ROAD_COL} y={0.024} rotY={Math.PI / 2} />
+          <Strip w={7} l={7} color={ROAD_DK} y={0.027} />
+        </group>
+      );
+      case 'vorera': return (
+        <mesh position={[0, 0.07, 0]} castShadow receiveShadow><boxGeometry args={[4.66, 0.14, 2.97]} /><meshStandardMaterial color="#CFCBC2" roughness={0.95} /></mesh>
+      );
+      case 'gespa': return <Strip w={4.66} l={2.97} color="#86A86B" y={0.02} />;
+      case 'parking': return (
+        <group>
+          {[-3.6, -1.2, 1.2, 3.6].map((x) => <Strip key={x} x={x} w={0.14} l={5} color={LINE} y={0.024} />)}
+          <Strip z={-2.5} w={7.2} l={0.14} color={LINE} y={0.024} />
+        </group>
+      );
+
+      /* Mobiliari urbà */
+      case 'pilona': return (
+        <group>
+          <mesh position={[0, 0.42, 0]} castShadow><cylinderGeometry args={[0.09, 0.1, 0.85, 10]} /><meshStandardMaterial color="#3A3D44" /></mesh>
+          <mesh position={[0, 0.72, 0]}><cylinderGeometry args={[0.095, 0.095, 0.08, 10]} /><meshStandardMaterial color="#E0455A" emissive="#E0455A" emissiveIntensity={0.4} /></mesh>
+        </group>
+      );
+      case 'contenidor': return (
+        <group>
+          <mesh position={[0, 0.62, 0]} castShadow><boxGeometry args={[1.4, 1.15, 1.1]} /><meshStandardMaterial color="#2F7D4F" roughness={0.7} /></mesh>
+          <mesh position={[0, 1.24, 0]} castShadow><boxGeometry args={[1.44, 0.12, 1.14]} /><meshStandardMaterial color="#256741" /></mesh>
+          {[-0.55, 0.55].map((x) => <mesh key={x} position={[x, 0.08, 0]}><cylinderGeometry args={[0.08, 0.08, 0.16, 8]} /><meshStandardMaterial color="#1A1A1E" /></mesh>)}
+        </group>
+      );
+      case 'paperera': return (
+        <group>
+          <mesh position={[0, 0.45, 0]} castShadow><cylinderGeometry args={[0.22, 0.18, 0.8, 12]} /><meshStandardMaterial color="#5F636B" /></mesh>
+          <mesh position={[0, 0.87, 0]}><cylinderGeometry args={[0.24, 0.24, 0.06, 12]} /><meshStandardMaterial color="#3A3D44" /></mesh>
+        </group>
+      );
+      case 'banc': return (
+        <group>
+          <mesh position={[0, 0.45, 0]} castShadow><boxGeometry args={[1.7, 0.07, 0.5]} /><meshStandardMaterial color="#8A6A3F" /></mesh>
+          <mesh position={[0, 0.78, -0.22]} rotation-x={-0.22} castShadow><boxGeometry args={[1.7, 0.5, 0.06]} /><meshStandardMaterial color="#8A6A3F" /></mesh>
+          {[-0.7, 0.7].map((x) => <mesh key={x} position={[x, 0.22, 0]} castShadow><boxGeometry args={[0.08, 0.45, 0.45]} /><meshStandardMaterial color="#3A3D44" /></mesh>)}
+        </group>
+      );
+      case 'marquesina': return (
+        <group>
+          {[-1.3, 1.3].map((x) => <mesh key={x} position={[x, 1.2, 0.5]} castShadow><cylinderGeometry args={[0.05, 0.05, 2.4, 8]} /><meshStandardMaterial color="#3A6B92" /></mesh>)}
+          <mesh position={[0, 2.45, 0]} castShadow><boxGeometry args={[3.1, 0.1, 1.4]} /><meshStandardMaterial color="#3A6B92" /></mesh>
+          <mesh position={[0, 1.25, -0.55]}><boxGeometry args={[3, 1.8, 0.05]} /><meshStandardMaterial color="#B8D6EC" transparent opacity={0.45} /></mesh>
+          <mesh position={[0, 0.5, 0.1]} castShadow><boxGeometry args={[1.8, 0.07, 0.4]} /><meshStandardMaterial color="#5F636B" /></mesh>
+        </group>
+      );
+      case 'biona': return (
+        <group>
+          <mesh position={[0, 0.62, 0]} castShadow><boxGeometry args={[3, 0.32, 0.06]} /><meshStandardMaterial color="#ADB3BC" metalness={0.5} roughness={0.4} /></mesh>
+          {[-1.15, -0.4, 0.4, 1.15].map((x) => <mesh key={x} position={[x, 0.3, 0.04]} castShadow><boxGeometry args={[0.1, 0.62, 0.08]} /><meshStandardMaterial color="#7C828C" /></mesh>)}
+        </group>
+      );
+      case 'mur': return (
+        <mesh position={[0, 0.7, 0]} castShadow receiveShadow><boxGeometry args={[2.5, 1.4, 0.28]} /><meshStandardMaterial color="#B98A66" roughness={0.9} /></mesh>
+      );
       case 'impacte': return <Decal emoji="💥" size={2.2} />;
       case 'collisio': return <Decal emoji="❌" size={1.4} />;
       case 'taca': return (

@@ -9,12 +9,12 @@
 import { Fragment, Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Stage, Layer, Rect, Group, Line, Circle, Ellipse, Text, RegularPolygon, Arrow, Star, Transformer, Image as KImage,
+  Stage, Layer, Rect, Group, Line, Circle, Ellipse, Text, RegularPolygon, Arrow, Star, Transformer, Image as KImage, Arc,
 } from 'react-konva';
 import type Konva from 'konva';
 import { A, Ic, Mono } from '../lib/design';
 import {
-  BOARD, VEHICLES, buildTimeline, stateAt, simRateAt, cineViewAt, fmtRel,
+  BOARD, PX_PER_M, VEHICLES, buildTimeline, stateAt, simRateAt, cineViewAt, fmtRel,
   type El, type Estat, type Road, type VehData, type Timeline,
 } from '../lib/croquisPhysics';
 
@@ -110,6 +110,14 @@ const PALETTE: { group: string; items: { kind: string; label: string; emoji: str
     { kind: 'm-minusvalid', label: 'Reservat PMR', emoji: '♿' },
     { kind: 'm-linia', label: 'Línia pintada', emoji: '➖' },
   ] },
+  { group: 'Via personalitzada', items: [
+    { kind: 'c-recta', label: 'Tram recte', emoji: '🛣️' },
+    { kind: 'c-corba', label: 'Corba 90°', emoji: '↪️' },
+    { kind: 'c-cruilla', label: 'Encreuament', emoji: '➕' },
+    { kind: 'vorera', label: 'Vorera', emoji: '⬜' },
+    { kind: 'gespa', label: 'Zona verda', emoji: '🟩' },
+    { kind: 'parking', label: 'Places pàrquing', emoji: '🅿️' },
+  ] },
   { group: 'Entorn i mobiliari', items: [
     { kind: 'semafor', label: 'Semàfor', emoji: '🚦' },
     { kind: 'semafor-v', label: 'Semàfor vianants', emoji: '🚥' },
@@ -119,6 +127,13 @@ const PALETTE: { group: string; items: { kind: string; label: string; emoji: str
     { kind: 'tanca', label: 'Tanca / barrera', emoji: '🚧' },
     { kind: 'edifici', label: 'Edifici', emoji: '🏢' },
     { kind: 'illa', label: 'Illeta / mitjana', emoji: '🟩' },
+    { kind: 'pilona', label: 'Pilona', emoji: '🔘' },
+    { kind: 'contenidor', label: 'Contenidor', emoji: '🗑️' },
+    { kind: 'paperera', label: 'Paperera', emoji: '🚮' },
+    { kind: 'banc', label: 'Banc', emoji: '🪑' },
+    { kind: 'marquesina', label: 'Marquesina bus', emoji: '🚏' },
+    { kind: 'biona', label: 'Biona / guardarail', emoji: '🛤️' },
+    { kind: 'mur', label: 'Mur', emoji: '🧱' },
   ] },
   { group: 'Anotacions', items: [
     { kind: 'fletxa', label: 'Trajectòria', emoji: '↗️' },
@@ -453,6 +468,76 @@ function Shape({ kind, color, text }: { kind: string; color: string; text?: stri
       <Circle radius={12} fill={YEL} opacity={0.92} stroke="#fff" strokeWidth={2.5} shadowColor="#0006" shadowBlur={4} />
       <Circle radius={3.5} fill="#7A5A00" />
     </>);
+
+    /* Via personalitzada — peces escalables per compondre el traçat real */
+    case 'c-recta': return (<>
+      <Rect x={-165} y={-210} width={330} height={420} fill={ASPHALT} />
+      <Line points={[-165, -210, -165, 210]} stroke="#fff" strokeWidth={5} />
+      <Line points={[165, -210, 165, 210]} stroke="#fff" strokeWidth={5} />
+      <Line points={[0, -210, 0, 210]} stroke="#fff" strokeWidth={5} dash={[26, 20]} />
+    </>);
+    case 'c-corba': return (<>
+      <Arc innerRadius={80} outerRadius={410} angle={90} rotation={180} fill={ASPHALT} />
+      <Arc innerRadius={78} outerRadius={84} angle={90} rotation={180} fill="#fff" />
+      <Arc innerRadius={406} outerRadius={412} angle={90} rotation={180} fill="#fff" />
+      {Array.from({ length: 7 }, (_, i) => {
+        const a0 = Math.PI + ((i + 0.25) * (Math.PI / 2)) / 7, a1 = a0 + (Math.PI / 2) / 7 * 0.5, r = 245;
+        return <Line key={i} points={[Math.cos(a0) * r, Math.sin(a0) * r, Math.cos(a1) * r, Math.sin(a1) * r]} stroke="#fff" strokeWidth={5} />;
+      })}
+    </>);
+    case 'c-cruilla': return (<>
+      <Rect x={-165} y={-330} width={330} height={660} fill={ASPHALT} />
+      <Rect x={-330} y={-165} width={660} height={330} fill={ASPHALT} />
+      <Rect x={-165} y={-165} width={330} height={330} fill={ASPHALT_DK} />
+      {[[-165, -330, -165, -165], [165, -330, 165, -165], [-165, 165, -165, 330], [165, 165, 165, 330]].map((p, i) => (
+        <Line key={'v' + i} points={p} stroke="#fff" strokeWidth={5} />
+      ))}
+      {[[-330, -165, -165, -165], [-330, 165, -165, 165], [165, -165, 330, -165], [165, 165, 330, 165]].map((p, i) => (
+        <Line key={'h' + i} points={p} stroke="#fff" strokeWidth={5} />
+      ))}
+    </>);
+    case 'vorera': return (<>
+      <Rect x={-110} y={-70} width={220} height={140} fill="#D4D0C6" stroke="#B5B0A4" strokeWidth={3} />
+      {[-55, 0, 55].map((x) => <Line key={x} points={[x, -70, x, 70]} stroke="#B5B0A4" strokeWidth={1.5} />)}
+    </>);
+    case 'gespa': return <Rect x={-110} y={-70} width={220} height={140} cornerRadius={8} fill="#BFDCA8" stroke="#9CC8AC" strokeWidth={3} />;
+    case 'parking': return (<>
+      {[-170, -57, 57, 170].map((x) => <Line key={x} points={[x, -118, x, 118]} stroke={PAINT} strokeWidth={6} />)}
+      <Line points={[-170, -118, 170, -118]} stroke={PAINT} strokeWidth={6} />
+    </>);
+
+    /* Mobiliari urbà */
+    case 'pilona': return (<>
+      <Circle radius={9} fill="#3A3D44" stroke="#15151C" strokeWidth={1.5} />
+      <Circle radius={3.5} fill="#E0455A" />
+    </>);
+    case 'contenidor': return (<>
+      <Rect x={-26} y={-18} width={52} height={36} cornerRadius={6} fill="#2F7D4F" stroke={DARK} strokeWidth={1.5} />
+      <Rect x={-26} y={-18} width={52} height={11} cornerRadius={5} fill="#256741" />
+    </>);
+    case 'paperera': return (<>
+      <Circle radius={10} fill="#5F636B" stroke={DARK} strokeWidth={1.5} />
+      <Circle radius={4} fill="#3A3D44" />
+    </>);
+    case 'banc': return (<>
+      <Rect x={-30} y={-9} width={60} height={18} cornerRadius={4} fill="#8A6A3F" stroke="#6B4B2A" strokeWidth={1.5} />
+      {[-18, -6, 6, 18].map((x) => <Line key={x} points={[x, -9, x, 9]} stroke="#6B4B2A" strokeWidth={1.5} />)}
+    </>);
+    case 'marquesina': return (<>
+      <Rect x={-44} y={-14} width={88} height={30} cornerRadius={5} fill="#D7E8F5" stroke="#5F8FB5" strokeWidth={2} />
+      <Rect x={-46} y={-20} width={92} height={8} cornerRadius={3} fill="#3A6B92" />
+      <Em ch="🚌" s={14} y={4} />
+    </>);
+    case 'biona': return (<>
+      <Rect x={-70} y={-5} width={140} height={10} cornerRadius={5} fill="#ADB3BC" stroke="#7C828C" strokeWidth={1.5} />
+      {[-55, -18, 18, 55].map((x) => <Rect key={x} x={x - 3} y={3} width={6} height={9} fill="#7C828C" />)}
+    </>);
+    case 'mur': return (<>
+      <Rect x={-60} y={-10} width={120} height={20} fill="#B98A66" stroke="#8F6A4C" strokeWidth={1.5} />
+      <Line points={[-60, 0, 60, 0]} stroke="#8F6A4C" strokeWidth={1} />
+      {[-40, -10, 20, 50].map((x) => <Line key={x} points={[x, -10, x, 0]} stroke="#8F6A4C" strokeWidth={1} />)}
+      {[-25, 5, 35].map((x) => <Line key={x} points={[x, 0, x, 10]} stroke="#8F6A4C" strokeWidth={1} />)}
+    </>);
     default: return null;
   }
 }
@@ -637,6 +722,50 @@ function MenuItem({ children, onClick, danger, active }: { children: ReactNode; 
   );
 }
 
+const VEH_LABEL: Record<string, string> = Object.fromEntries(PALETTE[0].items.map((i) => [i.kind, i.label]));
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/* Maniobres tipus (per a l'informe i la llegenda). */
+const MANIOBRES = ['Seguia recte', "Girava a l'esquerra", 'Girava a la dreta', 'Marxa enrere', 'Avançament', 'Canvi de carril', 'Incorporació', "Sortida d'estacionament", 'Aturat en senyal', 'Encalç / distracció'];
+/* Zones de danys sobre el vehicle (frontal a dalt). */
+export const DANYS_ZONES: { id: string; label: string; x: number; y: number; w: number; h: number }[] = [
+  { id: 'front-e', label: 'Frontal esq.', x: 0, y: 0, w: 40, h: 70 },
+  { id: 'front', label: 'Frontal', x: 40, y: 0, w: 40, h: 70 },
+  { id: 'front-d', label: 'Frontal dre.', x: 80, y: 0, w: 40, h: 70 },
+  { id: 'lat-e', label: 'Lateral esq.', x: 0, y: 70, w: 40, h: 80 },
+  { id: 'lat-d', label: 'Lateral dre.', x: 80, y: 70, w: 40, h: 80 },
+  { id: 'rear-e', label: 'Posterior esq.', x: 0, y: 150, w: 40, h: 70 },
+  { id: 'rear', label: 'Posterior', x: 40, y: 150, w: 40, h: 70 },
+  { id: 'rear-d', label: 'Posterior dre.', x: 80, y: 150, w: 40, h: 70 },
+];
+export const danysLabels = (ids?: string[]) =>
+  (ids ?? []).map((id) => DANYS_ZONES.find((z) => z.id === id)?.label).filter(Boolean).join(' · ');
+
+/* Selector de zones de danys: silueta del vehicle amb 8 zones clicables. */
+function DanysPicker({ value, onChange }: { value: string[]; onChange: (v: string[]) => void }) {
+  const toggle = (id: string) => onChange(value.includes(id) ? value.filter((z) => z !== id) : [...value, id]);
+  return (
+    <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
+      <svg width={108} height={198} viewBox="0 0 120 220" style={{ flexShrink: 0 }}>
+        <rect x={12} y={6} width={96} height={208} rx={26} fill="#E9EAEE" stroke="#9AA0AA" strokeWidth={2} />
+        <rect x={26} y={42} width={68} height={34} rx={8} fill="#BFE0FF" />
+        <rect x={26} y={150} width={68} height={28} rx={8} fill="#BFE0FF" />
+        {DANYS_ZONES.map((z) => (
+          <rect key={z.id} x={z.x + 2} y={z.y + 2} width={z.w - 4} height={z.h - 4} rx={9}
+            fill={value.includes(z.id) ? 'rgba(214,43,43,0.5)' : 'rgba(21,21,28,0.02)'}
+            stroke={value.includes(z.id) ? '#D62B2B' : 'rgba(21,21,28,0.14)'} strokeWidth={1.5}
+            style={{ cursor: 'pointer' }} onClick={() => toggle(z.id)}>
+            <title>{z.label}</title>
+          </rect>
+        ))}
+      </svg>
+      <div style={{ fontFamily: A.sans, fontSize: 12.5, color: value.length ? A.ink : A.inkMuted, lineHeight: 1.55 }}>
+        {value.length ? danysLabels(value) : 'Toca les zones colpejades del vehicle (frontal a dalt). Pots marcar-ne diverses.'}
+      </div>
+    </div>
+  );
+}
+
 /* Modal de dades del vehicle. */
 function VehModal({ el, onClose, onSave }: { el: El; onClose: () => void; onSave: (d: VehData) => void }) {
   const [d, setD] = useState<VehData>({ estat: 'mov', ...el.data });
@@ -682,9 +811,33 @@ function VehModal({ el, onClose, onSave }: { el: El; onClose: () => void; onSave
           </div>
         )}
 
+        <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: 12, marginTop: 14 }}>
+          <div>
+            <label style={lbl}>Maniobra que realitzava</label>
+            <select style={{ ...inp, cursor: 'pointer' }} value={d.maniobra || ''} onChange={(e) => set({ maniobra: e.target.value })}>
+              <option value="">—</option>
+              {MANIOBRES.map((m) => <option key={m} value={m}>{m}</option>)}
+            </select>
+          </div>
+          <div>
+            <label style={lbl}>Ocupants</label>
+            <input style={inp} inputMode="numeric" value={d.ocupants || ''} onChange={(e) => set({ ocupants: e.target.value.replace(/[^0-9]/g, '') })} placeholder="1" />
+          </div>
+        </div>
+
+        <div style={{ marginTop: 14 }}>
+          <label style={lbl}>Conductor (nom / DNI)</label>
+          <input style={inp} value={d.conductor || ''} onChange={(e) => set({ conductor: e.target.value })} placeholder="J. García — 12345678X" />
+        </div>
+
+        <div style={{ marginTop: 14 }}>
+          <label style={lbl}>Zones de danys</label>
+          <DanysPicker value={d.danys ?? []} onChange={(danys) => set({ danys })} />
+        </div>
+
         <div style={{ marginTop: 14 }}>
           <label style={lbl}>Notes</label>
-          <textarea style={{ ...inp, minHeight: 64, resize: 'vertical' }} value={d.note || ''} onChange={(e) => set({ note: e.target.value })} placeholder="Conductor, danys, observacions…" />
+          <textarea style={{ ...inp, minHeight: 64, resize: 'vertical' }} value={d.note || ''} onChange={(e) => set({ note: e.target.value })} placeholder="Observacions, testimonis, estat del conductor…" />
         </div>
 
         <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
@@ -829,6 +982,8 @@ export default function Croquis() {
     return `el-${counter}`;
   }
 
+  // Peces que han de quedar SOTA la resta (asfalt, voreres, gespa…).
+  const GROUND_KINDS = ['c-recta', 'c-corba', 'c-cruilla', 'vorera', 'gespa', 'parking'];
   function add(kind: string) {
     const id = nextId();
     const p = NEEDS_PROMPT[kind];
@@ -839,7 +994,11 @@ export default function Croquis() {
       rotation: 0, scaleX: 1, scaleY: 1, color: kind === 'carrer' ? '#1565C0' : DEFAULT_COLOR(kind),
       ...(p ? { text: (typeof window !== 'undefined' ? window.prompt(p.msg, p.def) : p.def) || p.def } : {}),
     };
-    pushUndo(); setEls((prev) => [...prev, e]); setSel(id);
+    pushUndo();
+    setEls((prev) => GROUND_KINDS.includes(kind)
+      ? [...prev.filter((x) => x.kind === 'fons'), e, ...prev.filter((x) => x.kind !== 'fons')]
+      : [...prev, e]);
+    setSel(id);
   }
   function update(id: string, patch: Partial<El>) { pushUndo(); setEls((p) => p.map((e) => (e.id === id ? { ...e, ...patch } : e))); }
   function setVehData(id: string, patch: Partial<VehData>) { pushUndo(); setEls((p) => p.map((e) => (e.id === id ? { ...e, data: { ...e.data, ...patch } } : e))); }
@@ -1047,6 +1206,112 @@ export default function Croquis() {
     setTimeout(() => URL.revokeObjectURL(a.href), 3000);
   }
 
+  // ── Informe imprimible (croquis + seqüència + taula de dades) ──
+  function captureFrame(f: { scale: number; x: number; y: number }, pr: number): Promise<string> {
+    return new Promise((res) => {
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const stage = stageRef.current!;
+        res(stage.toDataURL({
+          x: f.x, y: f.y, width: BOARD.w * f.scale, height: BOARD.h * f.scale,
+          pixelRatio: pr / f.scale, mimeType: 'image/jpeg', quality: 0.86,
+        }));
+      }));
+    });
+  }
+  async function exportInforme() {
+    const stage = stageRef.current; if (!stage) return;
+    // Obrim la finestra DINS del gest de clic (si no, el navegador la bloqueja).
+    const w = window.open('', '_blank');
+    if (!w) { alert("El navegador ha bloquejat la finestra de l'informe. Permet finestres emergents per a infopol.app."); return; }
+    w.document.write('<p style="font-family:sans-serif;padding:24px;color:#555">Generant l\'informe…</p>');
+    setSel(null); setMenu(null);
+    const prev = { ...view };
+    const f = fitView(size.w, size.h, 8); setView(f);
+    const tl = buildTimeline(els); tlRef.current = tl; setDur(tl.tTotal);
+    setAnim(null);
+    await new Promise((r) => setTimeout(r, 120));
+    const croquisPng = await captureFrame(f, 1.6);
+    const frames: { label: string; png: string }[] = [];
+    if (tl.vehs.length) {
+      const seq: [string, number][] = [
+        [`Posicions inicials · T −${tl.tImpact.toFixed(1)} s`, 0.001],
+        ['Aproximació · T −1,0 s', Math.max(0.01, tl.tImpact - 1)],
+        ["Moment de l'impacte · T 0", tl.tImpact + 0.12],
+        [`Posicions finals · T +${(tl.tTotal - tl.tImpact - 1).toFixed(1)} s`, tl.tTotal],
+      ];
+      for (const [label, t] of seq) {
+        applyAt(t);
+        frames.push({ label, png: await captureFrame(f, 1.05) });
+      }
+    }
+    setAnim(null); setProg(0); tSimRef.current = 0; setView(prev);
+
+    // Taula de vehicles: dades declarades + física derivada de la timeline.
+    const rows = els.filter((e) => VEHICLES.includes(e.kind) && !e.ghost).map((e) => {
+      const d = e.data || {};
+      const tv = tl.vehs.find((v) => v.id === e.id);
+      return `<tr>
+        <td class="lt">${vehLetters[e.id] || '—'}</td>
+        <td>${esc(VEH_LABEL[e.kind] || e.kind)}</td>
+        <td>${esc([d.marca, d.model].filter(Boolean).join(' ') || '—')}</td>
+        <td class="mono">${esc((d.plate || '—').toUpperCase())}</td>
+        <td>${esc(d.color || '—')}</td>
+        <td>${d.estat ? ESTATS[d.estat].label : '—'}</td>
+        <td>${d.kmh ? d.kmh + ' km/h' : '—'}</td>
+        <td>${esc(d.maniobra || '—')}</td>
+        <td>${esc(d.ocupants || '—')}</td>
+        <td>${esc(d.conductor || '—')}</td>
+        <td>${esc(danysLabels(d.danys) || '—')}</td>
+        <td>${tv && tv.postLen > 0 ? (tv.postLen / PX_PER_M).toFixed(1) + ' m' : '—'}</td>
+      </tr>`;
+    }).join('');
+    const kv = (k: string, v?: string) => (v && v.trim() ? `<span><b>${k}:</b> ${esc(v)}</span>` : '');
+    const hd = [
+      kv('Atestat', header.num), kv('Data', header.data), kv('Hora', header.hora),
+      kv('Municipi', header.municipi), kv('Via/lloc', header.lloc), kv('Meteo', header.meteo),
+      kv('Llum', header.llum), kv('Calçada', header.calcada), kv('Visibilitat', header.visibilitat),
+      kv('Instructor', header.instructor),
+    ].filter(Boolean).join('');
+    const framesHtml = frames.length
+      ? `<h2>Seqüència de la recreació</h2>
+         <p class="note">Motor físic: velocitats declarades pels implicats · 1 carril = 3,5 m · T 0 = instant de l'impacte.</p>
+         <div class="grid">${frames.map((fr) => `<figure><img src="${fr.png}" /><figcaption>${esc(fr.label)}</figcaption></figure>`).join('')}</div>`
+      : '';
+    const html = `<!doctype html><html lang="ca"><head><meta charset="utf-8" />
+<title>Informe del croquis — InfoPol</title>
+<style>
+  * { box-sizing: border-box; } body { font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #15151C; margin: 0; padding: 28px; }
+  h1 { font-size: 22px; margin: 0 0 4px; } h2 { font-size: 15px; margin: 26px 0 8px; border-bottom: 2px solid #B6531F; padding-bottom: 4px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12px; color: #44444F; margin: 8px 0 4px; }
+  .meta b { color: #15151C; }
+  img { width: 100%; border: 1px solid #ddd; border-radius: 8px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  figure { margin: 0; } figcaption { font-size: 11px; color: #44444F; margin-top: 3px; font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; font-size: 10.5px; margin-top: 6px; }
+  th, td { border: 1px solid #D8D5CC; padding: 5px 7px; text-align: left; vertical-align: top; }
+  th { background: #F4F1EA; font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .lt { font-weight: 800; text-align: center; } .mono { font-family: ui-monospace, monospace; }
+  .note { font-size: 10.5px; color: #6B6B72; margin: 2px 0 8px; }
+  .foot { margin-top: 26px; font-size: 10px; color: #9A9AA2; border-top: 1px solid #E5E2D9; padding-top: 8px; }
+  @media print { body { padding: 10mm; } .grid { page-break-inside: avoid; } table { page-break-inside: avoid; } }
+</style></head><body>
+  <h1>Informe del croquis d'accident</h1>
+  <div class="meta">${hd || '<span style="color:#9A9AA2">Sense dades d\'atestat (omple-les al botó «Atestat» de l\'editor).</span>'}</div>
+  <h2>Croquis</h2>
+  <img src="${croquisPng}" />
+  ${framesHtml}
+  <h2>Vehicles implicats</h2>
+  <table><thead><tr>
+    <th></th><th>Tipus</th><th>Marca i model</th><th>Matrícula</th><th>Color</th><th>Estat</th>
+    <th>Velocitat</th><th>Maniobra</th><th>Ocup.</th><th>Conductor</th><th>Danys</th><th>Frenada</th>
+  </tr></thead><tbody>${rows || '<tr><td colspan="12" style="color:#9A9AA2">Cap vehicle al croquis.</td></tr>'}</tbody></table>
+  <p class="note">«Frenada» = distància recorreguda des de l'impacte fins a la posició final (derivada del croquis a escala 1 carril = 3,5 m).</p>
+  <div class="foot">Generat amb InfoPol · infopol.app/croquis · ${new Date().toLocaleString('ca-ES')}</div>
+</body></html>`;
+    w.document.open(); w.document.write(html); w.document.close();
+    setTimeout(() => { try { w.focus(); w.print(); } catch { /* impressió manual */ } }, 700);
+  }
+
   // Neteja del rAF en desmuntar.
   useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
 
@@ -1093,6 +1358,7 @@ export default function Croquis() {
           onChange={(e) => { const f = e.target.files?.[0]; if (f) importJson(f); e.target.value = ''; }} />
         <button onClick={() => setShowPlayer((v) => !v)} style={{ ...btn, ...(showPlayer ? { background: A.terracota, color: '#fff', border: 'none' } : {}) }} title="Recreació en vídeo">▶ Vídeo</button>
         <button onClick={() => setShow3D(true)} style={btn} title="Recreació 3D de l'accident">🧊 3D</button>
+        <button onClick={() => { void exportInforme(); }} style={btn} title="Informe imprimible: croquis + seqüència + taula de dades (desa'l com a PDF)">📄 Informe</button>
         <button onClick={clearAll} style={btn}><Ic name="x" size={15} color={A.inkSoft} /> Buidar</button>
         <button onClick={exportPng} style={{ ...btn, background: A.ink, color: '#fff', border: 'none' }}><Ic name="doc" size={16} color="#fff" /> Exportar PNG</button>
       </header>
