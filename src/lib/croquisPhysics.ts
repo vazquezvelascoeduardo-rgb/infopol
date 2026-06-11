@@ -127,6 +127,13 @@ const MASS: Record<string, number> = {
   vianant: 80, bici: 95, patinet: 95, moto: 230, cotxe: 1350, policia: 1500,
   furgo: 2300, ambulancia: 2600, camio: 10000, trailer: 19000, bus: 12500, tractor: 4800,
 };
+// Mitja llargada del vehicle en px (per detectar el CONTACTE físic real
+// entre carrosseries, no entre centres).
+const HALF_LEN: Record<string, number> = {
+  cotxe: 44, furgo: 46, camio: 90, trailer: 121, bus: 66, moto: 22,
+  bici: 19, patinet: 20, vianant: 13, tractor: 50, ambulancia: 48, policia: 46,
+};
+const halfLen = (k: string) => HALF_LEN[k] ?? 44;
 
 export type SkidSample = { x: number; y: number; rot: number; d: number };
 export type TimelineVeh = {
@@ -239,8 +246,9 @@ export function buildTimeline(els: El[]): Timeline {
       : rotImpact;
     return { ...r, mass: MASS[r.veh.kind] ?? 1300, rotImpact, outDir, vPost: 0 };
   });
+  // Quantitat de moviment entre vehicles EN MOVIMENT (parelles de xoc).
   for (const r of works) {
-    if (r.postLen <= 0) continue;
+    if (r.pushed || r.postLen <= 0) continue;
     let partner: Work | null = null, bd = 240;
     if (r.impactPt) {
       for (const o of works) {
@@ -255,15 +263,13 @@ export function buildTimeline(els: El[]): Timeline {
       const v2 = (r.mass * r.vPre * cosSelf + partner.mass * partner.vPre * cosP) / (r.mass + partner.mass);
       r.vPost = Math.max(Math.abs(v2), kmh2pxs(5));
     } else {
-      r.vPost = r.pushed
-        ? Math.max((2 * r.postLen) / 1.4, kmh2pxs(6))
-        : Math.max(r.vPre * 0.55, kmh2pxs(8));
+      r.vPost = Math.max(r.vPre * 0.55, kmh2pxs(8));
     }
     // Garantia: arribar a la posició final en menys de 4 s.
     r.vPost = Math.max(r.vPost, (2 * r.postLen) / 4);
   }
 
-  const vehs: TimelineVeh[] = works.map((r) => {
+  const mkVeh = (r: Work, tHit: number): TimelineVeh => {
     const tPre = r.vPre > 0 ? r.preLen / r.vPre : 0;
     const crushDelay = r.pushed ? 0.07 : 0; // fase de deformació abans de sortir empès
     const tPost = r.postLen > 0 ? crushDelay + (2 * r.postLen) / r.vPost : 0;
@@ -282,17 +288,62 @@ export function buildTimeline(els: El[]): Timeline {
       id: r.veh.id, kind: r.veh.kind, declaredKmh: r.declared,
       vPre: r.vPre, vPost: r.vPost,
       pre: r.pre, post: r.post, preLen: r.preLen, postLen: r.postLen,
-      tStart: Math.max(0, tImpact - tPre), tImpact, tEnd: tImpact + tPost,
+      tStart: r.pushed ? tHit : Math.max(0, tImpact - tPre),
+      tImpact: tHit, tEnd: tHit + tPost,
       hasImpact: r.hasImpact, impactPt: r.impactPt,
       rotImpact: r.rotImpact, rotFinal: r.rotFinal, spinExtra, pushed: r.pushed, skid,
     };
+  };
+
+  // 1) Vehicles en moviment: impacten tots a T impacte global.
+  const movingVehs = works.filter((w) => !w.pushed).map((w) => mkVeh(w, tImpact));
+
+  // 2) Vehicles empesos: el seu instant d'arrencada és el moment del
+  //    CONTACTE FÍSIC real — quan la carrosseria del vehicle que ve els
+  //    toca (es recorre la trajectòria sencera del que colpeja, fase
+  //    prèvia I posterior, buscant el primer frec entre cossos).
+  const pushedVehs = works.filter((w) => w.pushed).map((w) => {
+    let tHit = tImpact, found = false;
+    let bestMin = 1e9, bestMinT = tImpact;
+    let striker: TimelineVeh | null = null, strikerAtMin: TimelineVeh | null = null;
+    for (const s of movingVehs) {
+      if (s.vPre <= 0) continue;
+      const contact = halfLen(s.kind) + halfLen(w.veh.kind) * 0.85;
+      const tMax = Math.max(s.tEnd, s.tImpact) + 0.3;
+      for (let t = s.tStart; t <= tMax; t += 0.04) {
+        const st = stateAt(s, t);
+        const dist = Math.hypot(st.x - w.veh.x, st.y - w.veh.y);
+        if (dist < bestMin) { bestMin = dist; bestMinT = t; strikerAtMin = s; }
+        if (dist <= contact) {
+          if (!found || t < tHit) { tHit = t; striker = s; }
+          found = true;
+          break;
+        }
+      }
+    }
+    if (!found && bestMin < 280) { tHit = bestMinT; striker = strikerAtMin; }
+    // Velocitat d'empenta: moment que transfereix el vehicle que colpeja
+    // A L'INSTANT DEL CONTACTE (pot venir frenant), projectat sobre la
+    // direcció de sortida de l'empès.
+    if (striker) {
+      const st = stateAt(striker, tHit);
+      const vS = kmh2pxs(st.kmh);
+      const cosP = Math.max(0.2, Math.cos(((st.rotation - w.outDir) * Math.PI) / 180));
+      w.vPost = Math.max((striker ? (MASS[striker.kind] ?? 1300) : 1300) * vS * cosP / ((MASS[striker.kind] ?? 1300) + w.mass), kmh2pxs(5));
+    } else {
+      w.vPost = Math.max((2 * w.postLen) / 1.4, kmh2pxs(6));
+    }
+    w.vPost = Math.max(w.vPost, (2 * w.postLen) / 4);
+    return mkVeh(w, tHit);
   });
+
+  const vehs = [...movingVehs, ...pushedVehs];
 
   // Punts d'impacte únics (per al destell).
   const impacts: Pt[] = [];
   for (const v of vehs) {
     if (!v.impactPt) continue;
-    if (!impacts.some((p) => Math.hypot(p.x - v.impactPt!.x, p.y - v.impactPt!.y) < 30)) impacts.push(v.impactPt);
+    if (!impacts.some((p) => Math.hypot(p.x - v.impactPt!.x, p.y - v.impactPt!.y) < 80)) impacts.push(v.impactPt);
   }
   const tTotal = Math.max(tImpact, ...vehs.map((v) => v.tEnd)) + 1.0;
   return { vehs, tImpact, tTotal, impacts };

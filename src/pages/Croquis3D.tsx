@@ -488,17 +488,18 @@ function DamagePatches({ kind, color, danys }: { kind: string; color: string; da
     </group>
   );
 }
-/* Mostra els danys només a partir de l'impacte (si hi ha recreació). */
+/* Mostra els danys només a partir de l'impacte PROPI del vehicle
+   (l'empès s'abonyega quan el toquen, no quan xoquen els altres). */
 function VehDamage({ el, tl, clock }: { el: El; tl: Timeline; clock: MutableRefObject<Clock> }) {
   const ref = useRef<THREE.Group>(null);
-  const inTl = useMemo(() => tl.vehs.some((v) => v.id === el.id), [tl, el.id]);
+  const myVeh = useMemo(() => tl.vehs.find((v) => v.id === el.id) ?? null, [tl, el.id]);
   useFrame(() => {
-    if (ref.current) ref.current.visible = !inTl || clock.current.t >= tl.tImpact;
+    if (ref.current) ref.current.visible = !myVeh || clock.current.t >= myVeh.tImpact;
   });
   const danys = el.data?.danys ?? [];
   if (!danys.length) return null;
   return (
-    <group ref={ref} visible={!inTl}>
+    <group ref={ref} visible={!myVeh}>
       <DamagePatches kind={el.kind} color={el.color || '#3B6BF5'} danys={danys} />
     </group>
   );

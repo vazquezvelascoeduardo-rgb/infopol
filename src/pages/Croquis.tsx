@@ -869,7 +869,9 @@ export default function Croquis() {
   const [playing, setPlaying] = useState(false);
   const [recording, setRecording] = useState(false);
   const [speed, setSpeed] = useState(1);
-  const [cine, setCine] = useState(true);
+  // Càmera cinematogràfica (zoom + slow-motion a l'impacte) — OFF per
+  // defecte: la reproducció normal es veu sencera des de dalt.
+  const [cine, setCine] = useState(false);
   const [prog, setProg] = useState(0); // segons de simulació
   const [dur, setDur] = useState(0);   // durada total (s)
   const [anim, setAnim] = useState<{
@@ -882,7 +884,7 @@ export default function Croquis() {
   const lastTsRef = useRef<number | null>(null);
   const tSimRef = useRef(0);
   const speedRef = useRef(1);
-  const cineRef = useRef(true);
+  const cineRef = useRef(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<Konva.Stage>(null);
   const trRef = useRef<Konva.Transformer>(null);
@@ -1158,6 +1160,8 @@ export default function Croquis() {
     if (!tlRef.current.vehs.length) { alert('Per recrear l\'accident: deixa el cotxe al punt del xoc i, amb clic dret, marca la posició inicial (📍) i la final (🏁). Indica els km/h a "Dades del vehicle" per a velocitats reals.\n\nEls vehicles aturats o estacionats només necessiten la posició final (🏁): sortiran empesos pel xoc.'); return; }
     setSel(null); setMenu(null);
     if (tSimRef.current >= tlRef.current.tTotal - 0.05) tSimRef.current = 0;
+    // Enquadra tot el croquis (vista zenital completa) abans de reproduir.
+    setView(fitView());
     speedRef.current = speed; cineRef.current = cine; lastTsRef.current = null; setPlaying(true);
     rafRef.current = requestAnimationFrame(frame);
   }
