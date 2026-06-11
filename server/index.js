@@ -44,6 +44,73 @@ const USER = {
 };
 
 const NEWS = [
+  // ── 11 juny 2026 ──────────────────────────────────────────────
+  {
+    id: 'n010',
+    date: '2026-06-11',
+    dateLabel: '06·11',
+    tag: 'MUNDIAL 2026',
+    title: 'Copa del Món: Mèxic inaugura el torneig contra Sud-àfrica a l\'Estadi Azteca',
+    desc: 'Julián Quiñones marcà el primer gol del torneig de 48 seleccions. Shakira i Salma Hayek encapçalaren la cerimònia d\'apertura a la Ciutat de Mèxic.',
+    url: 'https://www.mediotiempo.com/futbol/copa-mundial/inauguracion-mundial-2026-en-vivo-a-que-hora-donde-ver-ceremonia-hoy-mexico',
+  },
+  {
+    id: 'n009',
+    date: '2026-06-11',
+    dateLabel: '06·11',
+    tag: 'INT · CONFLICTE',
+    title: 'EUA bombardeja l\'Iran per segon dia consecutiu — Trump avisa de represàlies',
+    desc: 'Trump va declarar que l\'Iran "ha trigat massa" per arribar a un acord i "haurà de pagar el preu". La crisi nuclear s\'intensifica sense resolució a la vista.',
+    url: 'https://www.riotimesonline.com/global-economy-briefing-june-11-2026/',
+  },
+  {
+    id: 'n008',
+    date: '2026-06-11',
+    dateLabel: '06·11',
+    tag: 'ECO · INT',
+    title: 'Inflació als EUA al 4,2% anual al maig, màxim des del 2023; el Dow cau 953 punts',
+    desc: 'L\'energia puja un 3,9% en un mes i explica el 60% de l\'increment. La inflació subjacent es manté moderada però els mercats reaccionen clarament a la baixa.',
+    url: 'https://www.riotimesonline.com/global-economy-briefing-june-11-2026/',
+  },
+  {
+    id: 'n007',
+    date: '2026-06-11',
+    dateLabel: '06·11',
+    tag: 'ECO · ESP',
+    title: 'El Govern presentarà el marc macroeconòmic dels PGE 2027 el 23 de juny',
+    desc: 'El ministre Cuerpo ho va anunciar al Congrés. Espanya apunta a un dèficit del 2,1% del PIB amb un creixement previst del 2,2% per al 2026.',
+    url: 'https://www.lamoncloa.gob.es/',
+  },
+  {
+    id: 'n006',
+    date: '2026-06-11',
+    dateLabel: '06·11',
+    tag: 'SUCCÉS',
+    title: 'Mossos i Guàrdia Urbana desmantellen cinc xarxes criminals al primer trimestre',
+    desc: '136 persones investigades per furts especialitzats a Barcelona en operacions conjuntes entre Mossos d\'Esquadra i la Guàrdia Urbana.',
+    url: 'https://www.totbarcelona.cat/es/sucesos/',
+  },
+  // ── 5 juny 2026 ───────────────────────────────────────────────
+  {
+    id: 'n005',
+    date: '2026-06-05',
+    dateLabel: '06·05',
+    tag: 'CIÈNCIA',
+    title: 'El X-59 de la NASA trenca per primer cop la barrera del so en vol experimental',
+    desc: 'El vol del 5 de juny obre la porta a l\'aviació supersònica civil silenciosa. El X-59 és dissenyat per eliminar el "boom" sònic tradicional.',
+    url: 'https://noticiasdelaciencia.com/',
+  },
+  // ── 30 maig 2026 ──────────────────────────────────────────────
+  {
+    id: 'n004',
+    date: '2026-05-30',
+    dateLabel: '05·30',
+    tag: 'UCL 2025-26',
+    title: 'PSG campió de la Champions per segon any consecutiu al Puskás Aréna de Budapest',
+    desc: 'El Paris Saint-Germain iguala el Real Madrid com a únic club a repetir títol en el nou format de lliga de la Champions League.',
+    url: 'https://es.wikipedia.org/wiki/Liga_de_Campeones_de_la_UEFA_2025-26',
+  },
+  // ── Notícies anteriors ─────────────────────────────────────────
   {
     id: 'n001',
     date: '2026-04-18',

@@ -43,9 +43,16 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
-  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
-  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
-  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
+  { date: '06·11', tag: 'MUNDIAL 2026', title: 'Copa del Món: Mèxic inaugura el torneig contra Sud-àfrica a l\'Estadi Azteca', desc: 'Julián Quiñones marcà el primer gol del torneig de 48 seleccions. Shakira i Salma Hayek encapçalaren la cerimònia d\'apertura.', url: 'https://www.mediotiempo.com/futbol/copa-mundial/inauguracion-mundial-2026-en-vivo-a-que-hora-donde-ver-ceremonia-hoy-mexico' },
+  { date: '06·11', tag: 'INT · CONFLICTE', title: 'EUA bombardeja l\'Iran per segon dia consecutiu — Trump avisa de represàlies', desc: 'Trump va declarar que l\'Iran "ha trigat massa" per arribar a un acord. La crisi nuclear s\'intensifica sense resolució a la vista.', url: 'https://www.riotimesonline.com/global-economy-briefing-june-11-2026/' },
+  { date: '06·11', tag: 'ECO · INT', title: 'Inflació als EUA al 4,2% anual al maig; el Dow cau 953 punts', desc: 'L\'energia explica el 60% de l\'increment. La inflació subjacent es manté moderada però els mercats reaccionen a la baixa.', url: 'https://www.riotimesonline.com/global-economy-briefing-june-11-2026/' },
+  { date: '06·11', tag: 'ECO · ESP', title: 'El Govern presentarà el marc macroeconòmic dels PGE 2027 el 23 de juny', desc: 'El ministre Cuerpo ho va anunciar al Congrés. Espanya apunta a un dèficit del 2,1% del PIB amb un creixement del 2,2% el 2026.', url: 'https://www.lamoncloa.gob.es/' },
+  { date: '06·11', tag: 'SUCCÉS', title: 'Mossos i Guàrdia Urbana desmantellen cinc xarxes criminals al primer trimestre', desc: '136 persones investigades per furts especialitzats a Barcelona en operacions conjuntes del primer trimestre de 2026.', url: 'https://www.totbarcelona.cat/es/sucesos/' },
+  { date: '06·05', tag: 'CIÈNCIA', title: 'El X-59 de la NASA trenca per primer cop la barrera del so en vol experimental', desc: 'El vol del 5 de juny obre la porta a l\'aviació supersònica civil silenciosa, dissenyada per eliminar el "boom" sònic tradicional.', url: 'https://noticiasdelaciencia.com/' },
+  { date: '05·30', tag: 'UCL 2025-26', title: 'PSG campió de la Champions per segon any consecutiu al Puskás Aréna de Budapest', desc: 'El Paris Saint-Germain iguala el Real Madrid com a únic club a repetir títol en el nou format de la Lliga de Campions.', url: 'https://es.wikipedia.org/wiki/Liga_de_Campeones_de_la_UEFA_2025-26' },
+  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.', url: null },
+  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.', url: null },
+  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.', url: null },
 ];
 
 export default function ScreenOperativaHome() {
@@ -125,10 +132,15 @@ export default function ScreenOperativaHome() {
         <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
-            <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
+            <div
+              key={i}
+              onClick={() => n.url && window.open(n.url, '_blank', 'noopener,noreferrer')}
+              style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card, cursor: n.url ? 'pointer' : 'default' }}
+            >
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                 <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
                 <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+                {n.url && <Icon name="external-link" size={11} color={T.inkMuted} />}
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
