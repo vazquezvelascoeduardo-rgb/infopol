@@ -3,30 +3,24 @@
 // vehicles, una llibreria àmplia de senyals verticals, marques vials pintades
 // al terra, mobiliari urbà i anotacions. Zoom + paneo, capes, escalat, gir i
 // volteig. Exporta a PNG en alta resolució per adjuntar a l'atestat.
+// La recreació (reproducció + vídeo + 3D) fa servir el motor físic compartit
+// de lib/croquisPhysics: velocitats reals, frenades i càmera cinematogràfica.
 // Tot al navegador (sense servidor): Konva per arrossegar/rotar/redimensionar.
-import { Fragment, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { Fragment, Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Stage, Layer, Rect, Group, Line, Circle, Ellipse, Text, RegularPolygon, Arrow, Star, Transformer, Image as KImage,
 } from 'react-konva';
 import type Konva from 'konva';
 import { A, Ic, Mono } from '../lib/design';
+import {
+  BOARD, VEHICLES, buildTimeline, stateAt, simRateAt, cineViewAt, fmtRel,
+  type El, type Estat, type Road, type VehData, type Timeline,
+} from '../lib/croquisPhysics';
+
+const Croquis3D = lazy(() => import('./Croquis3D'));
 
 /* ════════════════════════ Model ════════════════════════ */
-// Estat de marxa d'un vehicle (servirà també per a la recreació en vídeo).
-type Estat = 'mov' | 'parat' | 'estacionat';
-type VehData = {
-  marca?: string; model?: string; color?: string; plate?: string;
-  estat?: Estat; kmh?: string; note?: string;
-};
-type El = {
-  id: string; kind: string; x: number; y: number;
-  rotation: number; scaleX: number; scaleY: number;
-  color?: string; text?: string; data?: VehData; ghost?: boolean; phase?: 'inicial' | 'final';
-  src?: string; locked?: boolean; opacity?: number; // fons (mapa/foto)
-  parent?: string; // vehicle d'origen (per a fantasmes inicial/final)
-};
-type Road = 'recta' | 'doble' | 'autovia' | 'cruilla' | 'te' | 'rotonda' | 'corba' | 'cap';
 // Capçalera de l'atestat (s'imprimeix al croquis exportat).
 type Header = {
   num?: string; data?: string; hora?: string; municipi?: string; lloc?: string;
@@ -39,7 +33,6 @@ const RED = '#D62B2B', BLUE = '#0B57A4', DARK = '#15151C', YEL = '#F2B600';
 const PAINT = 'rgba(248,247,242,0.92)';            // pintura vial blanca
 const VEH_COLORS = ['#3B6BF5', '#E0455A', '#9AA0AA', '#15151C', '#FFFFFF', '#F0B400', '#1FB286', '#FF7A1A'];
 const COLORABLE = ['cotxe', 'furgo', 'camio', 'trailer', 'bus', 'moto', 'bici', 'patinet', 'tractor', 'etiqueta', 'text', 'fletxa', 'carrer'];
-const VEHICLES = ['cotxe', 'furgo', 'camio', 'trailer', 'bus', 'moto', 'bici', 'patinet', 'vianant', 'tractor', 'ambulancia', 'policia'];
 const ESTATS: Record<Estat, { label: string; color: string }> = {
   mov: { label: 'En moviment', color: '#1FB286' },
   parat: { label: 'Aturat', color: '#E89421' },
@@ -155,9 +148,7 @@ const ROADS: { id: Road; label: string }[] = [
   { id: 'cap', label: 'Sense via' },
 ];
 
-// Llenç fix (món): tot es dibuixa aquí i la vista fa zoom/paneo per sobre.
-const BOARD = { w: 1680, h: 1120 };
-
+// Llenç fix (món): BOARD viu a lib/croquisPhysics (compartit amb el 3D).
 let counter = 0;
 
 // Persistència: carrega l'escena desada i sincronitza el comptador d'ids.
@@ -457,6 +448,11 @@ function Shape({ kind, color, text }: { kind: string; color: string; text?: stri
       <Line closed points={[0, 18, 7, -4, 0, 2, -7, -4]} fill="#9AA0AA" />
       <Text text="N" fontSize={11} fontStyle="bold" fill={DARK} width={20} align="center" x={-10} y={-33} listening={false} />
     </>);
+    /* Punt de pas (corba de trajectòria d'un vehicle) */
+    case 'via': return (<>
+      <Circle radius={12} fill={YEL} opacity={0.92} stroke="#fff" strokeWidth={2.5} shadowColor="#0006" shadowBlur={4} />
+      <Circle radius={3.5} fill="#7A5A00" />
+    </>);
     default: return null;
   }
 }
@@ -492,42 +488,10 @@ function fileToScaledDataUrl(file: Blob, max = 1700): Promise<string> {
   });
 }
 
-/* ── Animació (recreació realista de l'accident) ── */
-type Pt = { x: number; y: number };
-type Track = { id: string; p0: Pt; wp: Pt | null; p1: Pt; rotFinal: number };
-const lerp = (a: Pt, b: Pt, u: number): Pt => ({ x: a.x + (b.x - a.x) * u, y: a.y + (b.y - a.y) * u });
-const sub = (a: Pt, b: Pt): Pt => ({ x: a.x - b.x, y: a.y - b.y });
-const easeOutCubic = (u: number) => 1 - Math.pow(1 - u, 3);
-const headingDeg = (dx: number, dy: number, fb: number) => (Math.abs(dx) + Math.abs(dy) > 0.4 ? Math.atan2(dx, -dy) * 180 / Math.PI : fb);
-// Interpola angles pel camí més curt.
-function lerpAngle(a: number, b: number, u: number) { const d = ((b - a + 540) % 360) - 180; return a + d * u; }
-// Sacsejada de l'impacte (decau ràpidament després del xoc, g≈0.5).
-function shakeAt(g: number) {
-  if (g < 0.5 || g > 0.64) return { dx: 0, dy: 0, dr: 0 };
-  const k = (g - 0.5) / 0.14, decay = (1 - k) * (1 - k), ph = g * 150;
-  return { dx: Math.sin(ph) * 8 * decay, dy: Math.cos(ph * 1.27) * 5 * decay, dr: Math.sin(ph * 0.9) * 6 * decay };
-}
-// Estat (posició + gir) d'un vehicle en el moment g∈[0,1]:
-// aproximació a velocitat → impacte → frenada amb deceleració fins al final.
-function vehStateAt(tr: Track, g: number) {
-  let x: number, y: number, rotation: number;
-  if (!tr.wp) {
-    const e = easeOutCubic(g), p = lerp(tr.p0, tr.p1, e), d = sub(tr.p1, tr.p0);
-    return { x: p.x, y: p.y, rotation: lerpAngle(headingDeg(d.x, d.y, tr.rotFinal), tr.rotFinal, g) };
-  }
-  if (g <= 0.5) {
-    const u = g / 0.5, p = lerp(tr.p0, tr.wp, u), d = sub(tr.wp, tr.p0);
-    x = p.x; y = p.y; rotation = headingDeg(d.x, d.y, tr.rotFinal);
-  } else {
-    const u = (g - 0.5) / 0.5, e = easeOutCubic(u), p = lerp(tr.wp, tr.p1, e), d = sub(tr.p1, tr.wp);
-    x = p.x; y = p.y; rotation = lerpAngle(headingDeg(d.x, d.y, tr.rotFinal), tr.rotFinal, e);
-  }
-  const s = shakeAt(g); return { x: x + s.dx, y: y + s.dy, rotation: rotation + s.dr };
-}
-// Efecte visual de l'impacte (destell + ona expansiva), g∈[0.5, 0.72].
-function CrashFx({ x, y, g }: { x: number; y: number; g: number }) {
-  if (g < 0.5 || g > 0.72) return null;
-  const k = (g - 0.5) / 0.22, fade = 1 - k;
+/* ── Efecte visual de l'impacte (destell + ona expansiva), k∈[0,1] ── */
+function CrashFx({ x, y, k }: { x: number; y: number; k: number }) {
+  if (k < 0 || k > 1) return null;
+  const fade = 1 - k;
   return (
     <Group x={x} y={y} listening={false}>
       <Circle radius={12 + k * 80} stroke="#FF7A1A" strokeWidth={7 * fade} opacity={0.85 * fade} />
@@ -746,18 +710,26 @@ export default function Croquis() {
   const [editVeh, setEditVeh] = useState<string | null>(null);
   const [editAtestat, setEditAtestat] = useState(false);
   const [, setHistTick] = useState(0);
-  // Reproducció / vídeo
+  // Reproducció / vídeo / 3D
   const [showPlayer, setShowPlayer] = useState(false);
+  const [show3D, setShow3D] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [recording, setRecording] = useState(false);
   const [speed, setSpeed] = useState(1);
-  const [prog, setProg] = useState(0);
-  const [anim, setAnim] = useState<Record<string, { x: number; y: number; rotation: number }> | null>(null);
-  const tracksRef = useRef<Track[]>([]);
+  const [cine, setCine] = useState(true);
+  const [prog, setProg] = useState(0); // segons de simulació
+  const [dur, setDur] = useState(0);   // durada total (s)
+  const [anim, setAnim] = useState<{
+    ov: Record<string, { x: number; y: number; rotation: number }>;
+    kmh: Record<string, number>;
+    skidD: Record<string, number>;
+  } | null>(null);
+  const tlRef = useRef<Timeline | null>(null);
   const rafRef = useRef<number | undefined>(undefined);
   const lastTsRef = useRef<number | null>(null);
-  const progRef = useRef(0);
+  const tSimRef = useRef(0);
   const speedRef = useRef(1);
+  const cineRef = useRef(true);
   const wrapRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<Konva.Stage>(null);
   const trRef = useRef<Konva.Transformer>(null);
@@ -919,6 +891,24 @@ export default function Croquis() {
     if (src) { const th = (src.rotation || 0) * Math.PI / 180; x = src.x + Math.sin(th) * 70; y = src.y - Math.cos(th) * 70; }
     setEls((p) => [...p, { id, kind: 'collisio', x, y, rotation: 0, scaleX: 1, scaleY: 1 }]); setSel(id);
   }
+  // Punt de pas: corba la trajectòria prèvia del vehicle (inicial → impacte).
+  // Es col·loca a mig camí entre la posició inicial i el vehicle, desplaçat
+  // lateralment perquè es vegi que corba; després s'arrossega on calgui.
+  function markVia(srcId: string) {
+    const src = els.find((e) => e.id === srcId); if (!src) return;
+    const g0 = els.find((e) => e.ghost && e.phase === 'inicial' && e.parent === srcId);
+    pushUndo(); const id = nextId();
+    let x: number, y: number;
+    if (g0) {
+      const mx = (g0.x + src.x) / 2, my = (g0.y + src.y) / 2;
+      const dx = src.x - g0.x, dy = src.y - g0.y, L = Math.hypot(dx, dy) || 1;
+      x = mx - (dy / L) * 80; y = my + (dx / L) * 80; // perpendicular
+    } else {
+      const th = (src.rotation || 0) * Math.PI / 180;
+      x = src.x - Math.sin(th) * 110; y = src.y + Math.cos(th) * 110;
+    }
+    setEls((p) => [...p, { id, kind: 'via', x, y, rotation: 0, scaleX: 1, scaleY: 1, parent: srcId }]); setSel(id);
+  }
 
   // Desar / obrir fitxer .json.
   function exportJson() {
@@ -976,68 +966,55 @@ export default function Croquis() {
     }, 80);
   }
 
-  // ── Recreació / vídeo ──
-  // Construeix les trajectòries: cada vehicle amb posició inicial (📍) es mou
-  // del seu inici → (punt de col·lisió proper) → la seva posició actual (final).
-  function buildTracks(): Track[] {
-    const inits = els.filter((e) => e.ghost && e.phase === 'inicial');
-    const finals = els.filter((e) => e.ghost && e.phase === 'final');
-    const cols = els.filter((e) => e.kind === 'collisio');
-    const out: Track[] = [];
-    for (const v of els) {
-      if (!VEHICLES.includes(v.kind) || v.ghost) continue;
-      if (v.data?.estat === 'parat' || v.data?.estat === 'estacionat') continue;
-      const g0 = inits.find((i) => i.parent === v.id); if (!g0) continue;
-      const gf = finals.find((i) => i.parent === v.id);
-      const p0 = { x: g0.x, y: g0.y };
-      if (gf) {
-        // Seqüència de 3 posicions: inicial → cotxe (impacte) → final.
-        out.push({ id: v.id, p0, wp: { x: v.x, y: v.y }, p1: { x: gf.x, y: gf.y }, rotFinal: gf.rotation });
-      } else {
-        // Compatibilitat: inicial → (marca de col·lisió propera) → cotxe (final).
-        const p1 = { x: v.x, y: v.y }, mid = { x: (p0.x + p1.x) / 2, y: (p0.y + p1.y) / 2 };
-        let wp: Pt | null = null, best = 1e9;
-        for (const c of cols) { const d = Math.hypot(c.x - mid.x, c.y - mid.y); if (d < best) { best = d; wp = { x: c.x, y: c.y }; } }
-        if (best > 340) wp = null;
-        out.push({ id: v.id, p0, wp, p1, rotFinal: v.rotation });
-      }
-    }
-    return out;
+  // ── Recreació / vídeo (motor físic de lib/croquisPhysics) ──
+  function ensureTimeline(): Timeline {
+    if (!tlRef.current) { tlRef.current = buildTimeline(els); setDur(tlRef.current.tTotal); }
+    return tlRef.current;
   }
-  function ensureTracks() { if (!tracksRef.current.length) tracksRef.current = buildTracks(); return tracksRef.current; }
   function applyAt(t: number) {
-    const m: Record<string, { x: number; y: number; rotation: number }> = {};
-    for (const k of tracksRef.current) m[k.id] = vehStateAt(k, t);
-    setAnim(m); setProg(t); progRef.current = t;
+    const tl = ensureTimeline();
+    const ov: Record<string, { x: number; y: number; rotation: number }> = {};
+    const kmh: Record<string, number> = {};
+    const skidD: Record<string, number> = {};
+    for (const v of tl.vehs) {
+      const st = stateAt(v, t);
+      ov[v.id] = { x: st.x, y: st.y, rotation: st.rotation };
+      kmh[v.id] = st.kmh; skidD[v.id] = st.skidD;
+    }
+    setAnim({ ov, kmh, skidD }); setProg(t); tSimRef.current = t;
   }
   function frame(ts: number) {
+    const tl = tlRef.current; if (!tl) return;
     if (lastTsRef.current == null) lastTsRef.current = ts;
-    const dt = ts - lastTsRef.current; lastTsRef.current = ts;
-    let t = progRef.current + dt / (6200 / speedRef.current);
-    if (t >= 1) { applyAt(1); setPlaying(false); lastTsRef.current = null; return; }
+    const dt = (ts - lastTsRef.current) / 1000; lastTsRef.current = ts;
+    const rate = simRateAt(tl, tSimRef.current, cineRef.current);
+    const t = tSimRef.current + dt * speedRef.current * rate;
+    if (cineRef.current) setView(cineViewAt(tl, t, fitView()));
+    if (t >= tl.tTotal) { applyAt(tl.tTotal); setPlaying(false); lastTsRef.current = null; return; }
     applyAt(t); rafRef.current = requestAnimationFrame(frame);
   }
   function play() {
     if (playing) return;
-    const tr = ensureTracks();
-    if (!tr.length) { alert('Per recrear l\'accident: deixa el cotxe al punt del xoc i, amb clic dret, marca la posició inicial (📍) i la final (🏁). Llavors es mourà inicial → xoc → final.'); return; }
+    tlRef.current = buildTimeline(els); setDur(tlRef.current.tTotal);
+    if (!tlRef.current.vehs.length) { alert('Per recrear l\'accident: deixa el cotxe al punt del xoc i, amb clic dret, marca la posició inicial (📍) i la final (🏁). Indica els km/h a "Dades del vehicle" per a velocitats reals.'); return; }
     setSel(null); setMenu(null);
-    if (progRef.current >= 1) progRef.current = 0;
-    speedRef.current = speed; lastTsRef.current = null; setPlaying(true);
+    if (tSimRef.current >= tlRef.current.tTotal - 0.05) tSimRef.current = 0;
+    speedRef.current = speed; cineRef.current = cine; lastTsRef.current = null; setPlaying(true);
     rafRef.current = requestAnimationFrame(frame);
   }
   function pausePlay() { if (rafRef.current) cancelAnimationFrame(rafRef.current); lastTsRef.current = null; setPlaying(false); }
-  function restartPlay() { if (rafRef.current) cancelAnimationFrame(rafRef.current); lastTsRef.current = null; progRef.current = 0; setProg(0); setPlaying(false); setAnim(null); tracksRef.current = []; }
-  function scrub(v: number) { if (playing) pausePlay(); ensureTracks(); applyAt(v); }
+  function restartPlay() { if (rafRef.current) cancelAnimationFrame(rafRef.current); lastTsRef.current = null; tSimRef.current = 0; setProg(0); setPlaying(false); setAnim(null); tlRef.current = null; setView(fitView()); }
+  function scrub(v: number) { if (playing) pausePlay(); ensureTimeline(); applyAt(v); }
   function setSpeedVal(s: number) { setSpeed(s); speedRef.current = s; }
+  function toggleCine() { setCine((c) => { cineRef.current = !c; return !c; }); }
 
   // Grava la recreació a WebM (gravant el llenç fotograma a fotograma).
   async function recordWebM() {
     const stage = stageRef.current; if (!stage) return;
-    const tr = buildTracks();
-    if (!tr.length) { alert('Abans de gravar: deixa el cotxe al punt del xoc i marca la posició inicial (📍) i la final (🏁) amb clic dret.'); return; }
+    const tl = buildTimeline(els);
+    if (!tl.vehs.length) { alert('Abans de gravar: deixa el cotxe al punt del xoc i marca la posició inicial (📍) i la final (🏁) amb clic dret.'); return; }
     if (typeof MediaRecorder === 'undefined') { alert('Aquest navegador no permet gravar vídeo (prova Chrome o Edge).'); return; }
-    tracksRef.current = tr; setRecording(true); setSel(null); setMenu(null);
+    tlRef.current = tl; setDur(tl.tTotal); setRecording(true); setSel(null); setMenu(null);
     const prev = { ...view }; const f = fitView(size.w, size.h, 8); setView(f);
     await new Promise((r) => setTimeout(r, 160));
     const RW = 1280, RH = Math.round(RW * BOARD.h / BOARD.w);
@@ -1051,18 +1028,20 @@ export default function Croquis() {
     const chunks: BlobPart[] = []; rec.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data); };
     const stopped = new Promise<void>((res) => { rec.onstop = () => res(); });
     rec.start();
-    const fps = 30, frames = Math.max(2, Math.round(fps * (6.2 / speedRef.current)));
-    for (let i = 0; i <= frames; i++) {
-      const t = i / frames;
-      const m: Record<string, { x: number; y: number; rotation: number }> = {};
-      for (const k of tr) m[k.id] = vehStateAt(k, t);
-      setAnim(m); setProg(t);
+    // Pas de temps real constant; el slow-motion del cine s'aplica al simulat.
+    const dtR = 1 / 30; let t = 0; let guard = 0;
+    while (t < tl.tTotal && guard < 3600) {
+      guard++;
+      const rate = simRateAt(tl, t, cineRef.current);
+      t = Math.min(tl.tTotal, t + dtR * speedRef.current * rate);
+      if (cineRef.current) setView(cineViewAt(tl, t, f));
+      applyAt(t);
       await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(() => r(null))));
       if (rctx) { const sc = stage.toCanvas({ x: f.x, y: f.y, width: BOARD.w * f.scale, height: BOARD.h * f.scale, pixelRatio: 1 }); rctx.drawImage(sc as CanvasImageSource, 0, 0, RW, RH); }
     }
     await new Promise((r) => setTimeout(r, 400));
     rec.stop(); await stopped;
-    setAnim(null); setProg(0); progRef.current = 0; setView(prev); setRecording(false);
+    setAnim(null); setProg(0); tSimRef.current = 0; setView(prev); setRecording(false);
     const blob = new Blob(chunks, { type: 'video/webm' });
     const a = document.createElement('a'); a.download = 'croquis-accident.webm'; a.href = URL.createObjectURL(blob); a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 3000);
@@ -1075,16 +1054,8 @@ export default function Croquis() {
   const pct = Math.round((view.scale || 1) * 100);
   const animating = !!anim;
   const bgEl = els.find((e) => e.kind === 'fons') || null;
-  // Punts on dibuixar el destell de l'impacte: marques de col·lisió + cotxes
-  // amb seqüència completa (fantasma inicial i final), on el cotxe és el xoc.
-  const impactPts = useMemo(() => {
-    const pts: Pt[] = [];
-    for (const e of els) if (e.kind === 'collisio') pts.push({ x: e.x, y: e.y });
-    const ini = new Set(els.filter((e) => e.ghost && e.phase === 'inicial').map((e) => e.parent));
-    const fin = new Set(els.filter((e) => e.ghost && e.phase === 'final').map((e) => e.parent));
-    for (const v of els) if (VEHICLES.includes(v.kind) && !v.ghost && ini.has(v.id) && fin.has(v.id)) pts.push({ x: v.x, y: v.y });
-    return pts;
-  }, [els]);
+  // Si l'escena canvia mentre no es reprodueix, la línia de temps caduca.
+  useEffect(() => { if (!playing && !recording) tlRef.current = null; /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [els]);
   const headerFilled = Object.values(header).some((v) => v && String(v).trim());
   const legendRows = els.filter((e) => VEHICLES.includes(e.kind) && !e.ghost).map((e) => {
     const d = e.data || {};
@@ -1121,6 +1092,7 @@ export default function Croquis() {
         <input ref={fileRef} type="file" accept="application/json,.json" style={{ display: 'none' }}
           onChange={(e) => { const f = e.target.files?.[0]; if (f) importJson(f); e.target.value = ''; }} />
         <button onClick={() => setShowPlayer((v) => !v)} style={{ ...btn, ...(showPlayer ? { background: A.terracota, color: '#fff', border: 'none' } : {}) }} title="Recreació en vídeo">▶ Vídeo</button>
+        <button onClick={() => setShow3D(true)} style={btn} title="Recreació 3D de l'accident">🧊 3D</button>
         <button onClick={clearAll} style={btn}><Ic name="x" size={15} color={A.inkSoft} /> Buidar</button>
         <button onClick={exportPng} style={{ ...btn, background: A.ink, color: '#fff', border: 'none' }}><Ic name="doc" size={16} color="#fff" /> Exportar PNG</button>
       </header>
@@ -1156,15 +1128,46 @@ export default function Croquis() {
             onTouchStart={(e) => { setMenu(null); if (e.target === e.target.getStage()) setSel(null); }}>
             <Layer listening={false}><RoadBg road={road} /></Layer>
             <Layer>
+              {/* Marques de frenada (es van pintant durant la fase post-impacte) */}
+              {anim && tlRef.current?.vehs.map((v) => {
+                const dVis = anim.skidD[v.id] ?? 0;
+                if (dVis <= 4 || !v.skid.length) return null;
+                const ptsL: number[] = [], ptsR: number[] = [];
+                for (const s of v.skid) {
+                  if (s.d > dVis) break;
+                  const th = (s.rot * Math.PI) / 180, ox = Math.cos(th) * 10, oy = Math.sin(th) * 10;
+                  ptsL.push(s.x - ox, s.y - oy); ptsR.push(s.x + ox, s.y + oy);
+                }
+                if (ptsL.length < 4) return null;
+                return (
+                  <Group key={'skid-' + v.id} listening={false}>
+                    <Line points={ptsL} stroke="#2A2A2E" strokeWidth={5} opacity={0.5} lineCap="round" />
+                    <Line points={ptsR} stroke="#2A2A2E" strokeWidth={5} opacity={0.5} lineCap="round" />
+                  </Group>
+                );
+              })}
               {els.map((el) => (
                 <Fragment key={el.id}>
                   <Node el={el} onSelect={() => setSel(el.id)} onChange={(patch) => update(el.id, patch)}
-                    onContext={(cx, cy) => openMenu(el.id, cx, cy)} override={anim?.[el.id]} animating={animating} />
+                    onContext={(cx, cy) => openMenu(el.id, cx, cy)} override={anim?.ov[el.id]} animating={animating} />
                   {VEHICLES.includes(el.kind) && !animating && <VehBadge el={el} letter={vehLetters[el.id]} />}
                 </Fragment>
               ))}
-              {animating && prog >= 0.5 && impactPts.map((c, i) => (
-                <CrashFx key={'fx-' + i} x={c.x} y={c.y} g={prog} />
+              {/* Etiqueta de velocitat en directe sobre cada vehicle */}
+              {anim && tlRef.current?.vehs.map((v) => {
+                const o = anim.ov[v.id]; if (!o) return null;
+                const sp = Math.round(anim.kmh[v.id] ?? 0);
+                const label = `${vehLetters[v.id] ? vehLetters[v.id] + ' · ' : ''}${sp} km/h`;
+                const w = label.length * 7.6 + 18;
+                return (
+                  <Group key={'spd-' + v.id} x={o.x} y={o.y - 80} listening={false}>
+                    <Rect x={-w / 2} y={-13} width={w} height={26} cornerRadius={8} fill="rgba(21,21,28,0.82)" />
+                    <Text text={label} fontSize={13} fontStyle="bold" fontFamily="Manrope, sans-serif" fill="#fff" width={w} align="center" x={-w / 2} y={-7} />
+                  </Group>
+                );
+              })}
+              {anim && tlRef.current && tlRef.current.impacts.map((c, i) => (
+                <CrashFx key={'fx-' + i} x={c.x} y={c.y} k={(prog - tlRef.current!.tImpact) / 0.7} />
               ))}
               <Transformer ref={trRef} rotationSnaps={[0, 45, 90, 135, 180, 225, 270, 315]}
                 anchorSize={11} borderStroke={A.terracota} anchorStroke={A.terracota} anchorCornerRadius={3}
@@ -1197,15 +1200,25 @@ export default function Croquis() {
             </div>
           )}
 
+          {/* Cronòmetre forense (T ± respecte de l'impacte) */}
+          {animating && tlRef.current && tlRef.current.impacts.length > 0 && (
+            <div style={{ position: 'absolute', top: 14, left: '50%', transform: 'translateX(-50%)', zIndex: 9, background: 'rgba(21,21,28,0.85)', color: '#fff', borderRadius: 999, padding: '7px 18px', fontFamily: A.mono, fontWeight: 700, fontSize: 15, letterSpacing: 1, pointerEvents: 'none' }}>
+              {fmtRel(prog, tlRef.current.tImpact)}
+            </div>
+          )}
+
           {/* Barra de reproducció / vídeo */}
           {showPlayer && (
             <div style={{ position: 'absolute', left: '50%', bottom: 14, transform: 'translateX(-50%)', zIndex: 9, display: 'flex', alignItems: 'center', gap: 9, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 14, padding: '8px 12px', boxShadow: A.shadowLg, flexWrap: 'wrap', maxWidth: '95%' }}>
               <button onClick={playing ? pausePlay : play} disabled={recording} style={{ ...btn, background: A.ink, color: '#fff', border: 'none' }}>{playing ? '⏸ Pausa' : '▶ Reproduir'}</button>
               <button onClick={restartPlay} disabled={recording} style={btn} title="Reiniciar">⟲</button>
-              <input type="range" min={0} max={1000} value={Math.round(prog * 1000)} onChange={(e) => scrub(Number(e.target.value) / 1000)} disabled={recording} style={{ width: 150, accentColor: A.terracota }} />
+              <input type="range" min={0} max={Math.max(100, Math.round(dur * 100))} value={Math.round(prog * 100)} onChange={(e) => scrub(Number(e.target.value) / 100)} disabled={recording} style={{ width: 150, accentColor: A.terracota }} />
+              <Mono size={10} color={A.inkSoft}>{prog.toFixed(1)} / {dur > 0 ? dur.toFixed(1) : '–'} s</Mono>
               <div style={{ display: 'flex', gap: 4, alignItems: 'center', paddingLeft: 6, borderLeft: `1px solid ${A.line}` }}>
                 {[0.5, 1, 2].map((s) => <button key={s} onClick={() => setSpeedVal(s)} style={{ ...btn, padding: '7px 9px', ...(speed === s ? { background: A.terraSoft, borderColor: A.terracota } : {}) }}>×{s}</button>)}
               </div>
+              <button onClick={toggleCine} style={{ ...btn, padding: '7px 10px', ...(cine ? { background: A.terraSoft, borderColor: A.terracota } : {}) }} title="Càmera cinematogràfica: zoom + slow-motion a l'impacte">🎥</button>
+              <button onClick={() => { pausePlay(); setShow3D(true); }} disabled={recording} style={{ ...btn, padding: '7px 10px' }} title="Recreació 3D">🧊 3D</button>
               <button onClick={recordWebM} disabled={recording} style={{ ...btn, color: recording ? A.inkMuted : A.red, borderColor: A.redSoft }}>{recording ? '● Gravant…' : '⬇ Gravar WebM'}</button>
             </div>
           )}
@@ -1265,6 +1278,7 @@ export default function Croquis() {
                     <MenuItem onClick={() => { markInitial(el.id); setMenu(null); }}>📍 Marca posició inicial</MenuItem>
                     <MenuItem onClick={() => { markFinal(el.id); setMenu(null); }}>🏁 Marca posició final</MenuItem>
                     <MenuItem onClick={() => { markCollision(el.id); setMenu(null); }}>❌ Marca punt de col·lisió</MenuItem>
+                    <MenuItem onClick={() => { markVia(el.id); setMenu(null); }}>🟡 Afegir punt de pas (corba)</MenuItem>
                     {sep}
                   </>)}
                   <MenuItem onClick={() => { duplicate(); setMenu(null); }}>Duplicar</MenuItem>
@@ -1289,6 +1303,17 @@ export default function Croquis() {
       {editAtestat && (
         <AtestatModal h={header} legend={showLegend} onClose={() => setEditAtestat(false)}
           onSave={(nh, lg) => { pushUndo(); setHeader(nh); setShowLegend(lg); setEditAtestat(false); }} />
+      )}
+
+      {/* Recreació 3D (chunk separat, només es carrega en obrir-lo) */}
+      {show3D && (
+        <Suspense fallback={
+          <div style={{ position: 'fixed', inset: 0, zIndex: 150, background: 'rgba(21,21,28,0.8)', display: 'grid', placeItems: 'center', color: '#fff', fontFamily: A.display, fontWeight: 700, fontSize: 17 }}>
+            Carregant l'escenari 3D…
+          </div>
+        }>
+          <Croquis3D els={els} road={road} onClose={() => setShow3D(false)} />
+        </Suspense>
       )}
     </div>
   );

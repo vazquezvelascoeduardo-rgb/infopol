@@ -71,7 +71,7 @@ export function Markdown({ source }: { source: string }) {
     if (h) {
       const level = h[1].length;
       const text = h[2];
-      const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+      const Tag = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
       blocks.push(<Tag key={key++}>{renderInline(text)}</Tag>);
       i++;
       continue;
