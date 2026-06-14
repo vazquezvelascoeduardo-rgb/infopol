@@ -1,0 +1,50 @@
+name: Actualització diària de notícies
+
+on:
+  schedule:
+    # 21:00 UTC = 22:00 CET (hivern) / 23:00 CEST (estiu)
+    # Per canviar a 22:00 exactes en estiu, usar: 0 20 * * *
+    - cron: '0 21 * * *'
+  workflow_dispatch:  # Permet execució manual des de GitHub Actions
+
+jobs:
+  fetch-news:
+    name: Cercar i publicar notícies
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Necessari per fer commit i push
+
+    steps:
+      - name: Checkout repositori
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configurar Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instal·lar dependències del projecte
+        run: npm ci
+
+      - name: Instal·lar Anthropic SDK
+        run: npm install @anthropic-ai/sdk --no-save
+
+      - name: Cercar notícies amb Claude
+        run: node scripts/fetch-news.mjs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Commit i push si hi ha canvis
+        run: |
+          git config user.name "InfoPol Bot"
+          git config user.email "bot@infopol.cat"
+          git add src/data/news.js
+          if git diff --staged --quiet; then
+            echo "Sense canvis, no cal commit"
+          else
+            git commit -m "chore: notícies del dia $(date +%Y-%m-%d)"
+            git push origin HEAD
+          fi

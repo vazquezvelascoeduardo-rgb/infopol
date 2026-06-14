@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
+import { GENERAL_NEWS } from '../../data/news';
 
 function BigCatCard({ cat, icon, kicker, title, desc, cta, onClick }) {
   const k = T.cat[cat];
@@ -136,6 +137,35 @@ export default function ScreenOperativaHome() {
           ))}
         </div>
       </div>
+
+      {/* Notícies del dia */}
+      {GENERAL_NEWS.length > 0 && (
+        <div style={{ padding: '14px 0 80px' }}>
+          <SectionHead kicker="Notícies" kickerColor={T.cat.noticias.solid} title="Notícies del dia" action="Tot →" />
+          <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {GENERAL_NEWS.map((n) => {
+              const catKey = T.newsTagCat[n.tag] ?? 'operativa';
+              const k = T.cat[catKey];
+              return (
+                <div key={n.id} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${k.solid}`, boxShadow: T.shadow.card }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                    <span style={{ fontSize: 9.5, fontWeight: 800, color: k.solid, letterSpacing: 0.6, textTransform: 'uppercase', background: k.soft, padding: '2px 7px', borderRadius: 999 }}>{n.tag}</span>
+                    <span style={{ fontSize: 9.5, fontWeight: 600, color: T.inkMuted }}>{n.area}</span>
+                    <span style={{ fontFamily: T.fontMono, fontSize: 9.5, color: T.inkFaint, marginLeft: 'auto' }}>{n.dateLabel}</span>
+                  </div>
+                  <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                  <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+                  {n.url && (
+                    <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginTop: 8, fontSize: 11.5, fontWeight: 700, color: k.solid, textDecoration: 'none' }}>
+                      Llegir notícia <Icon name="arrow-right" size={12} color={k.solid} />
+                    </a>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

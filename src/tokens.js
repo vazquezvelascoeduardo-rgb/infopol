@@ -18,6 +18,19 @@ export const T = {
     academia: { solid: '#FF7A1A', soft: '#FFE0CB', ink: '#7A2E04' },
     physical: { solid: '#0BB4C2', soft: '#CCEEF1', ink: '#0A4F56' },
     psico:    { solid: '#F0B400', soft: '#FCEFB8', ink: '#5C4400' },
+    noticias: { solid: '#E84042', soft: '#FBDADB', ink: '#7A1010' },
+  },
+
+  // Mapa de tag de notícia → categoria de token per als colors
+  newsTagCat: {
+    'Política':     'operativa',
+    'Economia':     'leyes',
+    'Cultura':      'academia',
+    'Descobriments':'physical',
+    'Premis':       'psico',
+    'Esports':      'atajos',
+    'Policial':     'alcohol',
+    'Internacional':'transito',
   },
 
   font: '"Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
