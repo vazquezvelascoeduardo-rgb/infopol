@@ -73,6 +73,72 @@ const NEWS = [
   },
 ];
 
+const DAILY_NEWS = [
+  {
+    id: 'd001',
+    date: '2026-06-15',
+    dateLabel: '06·15',
+    tag: 'Esports · F1',
+    title: 'Hamilton guanya el GP de Barcelona i fa la victòria 106 amb Ferrari',
+    desc: 'Lewis Hamilton s\'imposa a Montmeló en el primer triomf per Ferrari. Kimi Antonelli, líder del Mundial, abandona per avaria mecànica.',
+    url: 'https://www.formula1.com/en/latest/article/hamilton-claims-stellar-maiden-grand-prix-victory-for-ferrari-in-barcelona-as-antonelli-suffers-shock-retirement.4yCXiPLHUdcnl2BwNpqUIa',
+  },
+  {
+    id: 'd002',
+    date: '2026-06-15',
+    dateLabel: '06·15',
+    tag: 'Esports · Mundial',
+    title: 'Espanya empata 0-0 amb Cap Verd en el debut al Mundial 2026',
+    desc: 'La Roja domina amb el 74% de la possessió però no troba el gol. El porter Vozinho, de 40 anys, para 23 xuts en una exhibició memorable.',
+    url: 'https://www.telemundo.com/noticias/noticias-telemundo/internacional/live-blog/mundial-2026-hoy-espana-vs-cabo-verde-resultados-goles-rcna350131',
+  },
+  {
+    id: 'd003',
+    date: '2026-06-15',
+    dateLabel: '06·15',
+    tag: 'Internacional',
+    title: 'EUA i Iran arriben a un acord per reobrir l\'estret d\'Ormuz',
+    desc: 'Alto el foc prolongat 60 dies i reobertura del pas marítim vital per al 20% del petroli mundial. Signatura prevista per divendres.',
+    url: 'https://www.aporrea.org/actualidad/n419906.html',
+  },
+  {
+    id: 'd004',
+    date: '2026-06-15',
+    dateLabel: '06·15',
+    tag: 'Política · Cat.',
+    title: 'El Govern activa el pla forestal d\'emergència i anuncia ajudes al sector agrari',
+    desc: 'La Generalitat reforça Bombers i Agents Rurals per a l\'estiu i activa 14 eixos de confinament per frenar els grans incendis forestals.',
+    url: 'https://cronicaglobal.elespanol.com/politica/20260615/dalmau-aprecia-demasiado-campana-prevencion-incendios-cataluna/1003742771267_0.html',
+  },
+  {
+    id: 'd005',
+    date: '2026-06-15',
+    dateLabel: '06·15',
+    tag: 'Economia · Cat.',
+    title: 'Govern, patronals i sindicats signen el Pacte Nacional de la Indústria — 5.000 M€',
+    desc: 'Acord tripartit per mobilitzar 5.000 milions, augmentar la productivitat industrial i ampliar el sòl industrial fins al 2030.',
+    url: 'https://cronicaglobal.elespanol.com/politica/20260615/govern-patronales-sindicatos-pacto-nacional-industria-millones/1003742771387_0.html',
+  },
+  {
+    id: 'd006',
+    date: '2026-06-15',
+    dateLabel: '06·15',
+    tag: 'Policial · Int.',
+    title: 'Trump anuncia la mort del cap del Tren de Aragua en operació del SOUTHCOM',
+    desc: 'Forces del Comandament Sud dels EUA eliminen Héctor Guerrero Flores, àlies Niño Guerrero, màxim responsable de la banda criminal veneçolana.',
+    url: 'https://ksdy50.com/resumen-de-noticias-nacionales-e-internacionales-junio-15-2026/',
+  },
+  {
+    id: 'd007',
+    date: '2026-06-15',
+    dateLabel: '06·15',
+    tag: 'Cultura · BCN',
+    title: 'Festival de Literatura Llatinoamericana de Barcelona — del 16 al 22 de juny',
+    desc: 'La cinquena edició aplega escriptors de tot Amèrica Llatina amb debats, lectures i tallers oberts al públic en diverses seus de la ciutat.',
+    url: 'https://www.barcelona.cat/barcelonacultura/es',
+  },
+];
+
 const STATS = {
   streak: 23,
   streakRecord: 41,
@@ -112,6 +178,10 @@ app.put('/api/user', (req, res) => {
 
 app.get('/api/news', (req, res) => {
   res.json(NEWS);
+});
+
+app.get('/api/daily-news', (req, res) => {
+  res.json(DAILY_NEWS);
 });
 
 app.get('/api/stats', (req, res) => {

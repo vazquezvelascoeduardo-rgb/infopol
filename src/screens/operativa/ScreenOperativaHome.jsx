@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
@@ -50,6 +51,15 @@ const NEWS = [
 
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
+  const [dailyNews, setDailyNews] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/daily-news')
+      .then(r => r.json())
+      .then(setDailyNews)
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="screen">
       <StatusBar />
@@ -119,6 +129,37 @@ export default function ScreenOperativaHome() {
           </div>
         </div>
       </div>
+
+      {/* Notícies del dia */}
+      {dailyNews.length > 0 && (
+        <div style={{ padding: '14px 0 0' }}>
+          <SectionHead kicker="Avui" kickerColor={T.cat.atajos.solid} title="Notícies del dia" action="Tot →" />
+          <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {dailyNews.map((n, i) => (
+              <div
+                key={i}
+                onClick={() => n.url && window.open(n.url, '_blank')}
+                style={{
+                  background: '#fff',
+                  borderRadius: T.r.md,
+                  padding: 14,
+                  borderLeft: `2px solid ${T.cat.atajos.solid}`,
+                  boxShadow: T.shadow.card,
+                  cursor: n.url ? 'pointer' : 'default',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                  <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.atajos.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                  <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.dateLabel}</span>
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+                {n.url && <div style={{ fontSize: 10, color: T.cat.atajos.solid, marginTop: 5, fontWeight: 700 }}>Llegir més →</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Actualitat normativa */}
       <div style={{ padding: '14px 0 0' }}>
