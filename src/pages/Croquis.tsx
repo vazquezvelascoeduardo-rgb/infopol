@@ -15,7 +15,7 @@ import type Konva from 'konva';
 import { A, Ic, Mono } from '../lib/design';
 import {
   BOARD, PX_PER_M, VEHICLES, buildTimeline, stateAt, simRateAt, cineViewAt, fmtRel,
-  type El, type Estat, type Road, type VehData, type Timeline,
+  type El, type Estat, type Road, type Sentit, type VehData, type Timeline,
 } from '../lib/croquisPhysics';
 
 const Croquis3D = lazy(() => import('./Croquis3D'));
@@ -25,6 +25,9 @@ const Croquis3D = lazy(() => import('./Croquis3D'));
 type Header = {
   num?: string; data?: string; hora?: string; municipi?: string; lloc?: string;
   meteo?: string; llum?: string; calcada?: string; visibilitat?: string; instructor?: string;
+  // Text d'informe lliure: s'imprimeix al croquis dins el quadre de
+  // llegenda i també a l'informe PDF.
+  informe?: string;
 };
 type Scene = { road: Road; els: El[]; header: Header; legend: boolean };
 const STORE_KEY = 'infopol:croquis:v1';
@@ -113,7 +116,12 @@ const PALETTE: { group: string; items: { kind: string; label: string; emoji: str
   { group: 'Via personalitzada', items: [
     { kind: 'c-recta', label: 'Tram recte', emoji: '🛣️' },
     { kind: 'c-corba', label: 'Corba 90°', emoji: '↪️' },
+    { kind: 'c-corba-suau', label: 'Corba suau 45°', emoji: '↗️' },
+    { kind: 'c-y', label: 'Junció en Y', emoji: '🔀' },
+    { kind: 'c-ramal', label: 'Ramal incorp.', emoji: '➡️' },
     { kind: 'c-cruilla', label: 'Encreuament', emoji: '➕' },
+    { kind: 'pas-zebra', label: 'Pas de zebra', emoji: '🦓' },
+    { kind: 'badenes', label: 'Banda reductora', emoji: '🔶' },
     { kind: 'vorera', label: 'Vorera', emoji: '⬜' },
     { kind: 'gespa', label: 'Zona verda', emoji: '🟩' },
     { kind: 'parking', label: 'Places pàrquing', emoji: '🅿️' },
@@ -155,11 +163,16 @@ const PALETTE: { group: string; items: { kind: string; label: string; emoji: str
 const ROADS: { id: Road; label: string }[] = [
   { id: 'recta', label: 'Recta (1+1)' },
   { id: 'doble', label: 'Doble línia contínua' },
+  { id: 'urbana', label: 'Urbana (1+1 + voreres)' },
+  { id: 'carrer-1d', label: 'Carrer un sentit (2 carrils)' },
   { id: 'autovia', label: 'Autovia (mitjana)' },
+  { id: 'incorporacio', label: 'Incorporació (3a via)' },
   { id: 'cruilla', label: 'Cruïlla (X)' },
   { id: 'te', label: 'Cruïlla en T' },
   { id: 'rotonda', label: 'Rotonda' },
+  { id: 'glorieta-partida', label: 'Glorieta partida' },
   { id: 'corba', label: 'Corba' },
+  { id: 'xicana', label: 'Xicana (S)' },
   { id: 'cap', label: 'Sense via' },
 ];
 
@@ -279,6 +292,84 @@ function RoadBg({ road }: { road: Road }) {
       <Circle x={cx} y={cy} radius={Rr} fill={ASPHALT_DK} />
       <Circle x={cx} y={cy} radius={Rr} stroke="#fff" strokeWidth={5} dash={dash} />
       <Circle x={cx} y={cy} radius={Rr - lane * 0.7} fill="#CDE8D6" stroke="#9CC8AC" strokeWidth={3} />
+    </Group>;
+  }
+
+  if (road === 'xicana') {
+    // S llarga vertical: el trànsit va recte i fa dues corbes invertides.
+    const pts = [cx, 0, cx, cy - 300, cx - 120, cy - 60, cx + 120, cy + 60, cx, cy + 300, cx, H];
+    return <Group listening={false}>{board}
+      <Line points={pts} stroke={ASPHALT} strokeWidth={lane * 2} lineCap="round" lineJoin="round" tension={0.45} />
+      <Line points={pts} stroke="#fff" strokeWidth={5} tension={0.45} dash={dash} />
+    </Group>;
+  }
+
+  if (road === 'incorporacio') {
+    // Autovia recta amb un ramal d'incorporació pel marge dret.
+    return <Group listening={false}>{board}{vert}
+      <Line points={[cx, 0, cx, H]} stroke="#fff" strokeWidth={5} dash={dash} />
+      {/* ramal */}
+      <Line points={[W, cy + 320, cx + lane * 0.55, cy - 80]}
+        stroke={ASPHALT} strokeWidth={lane * 1.4} lineCap="round" />
+      <Line points={[W, cy + 320, cx + lane * 0.55, cy - 80]}
+        stroke="#fff" strokeWidth={5} dash={[18, 14]} />
+      {/* triangle de cediu el pas pintat al terra */}
+      {[0, 1, 2].map((i) => (
+        <Line key={i}
+          points={[cx + lane * 0.6 + i * 30, cy - 80, cx + lane * 0.6 + i * 30 + 22, cy - 80, cx + lane * 0.6 + i * 30 + 11, cy - 60]}
+          closed fill={PAINT} />
+      ))}
+    </Group>;
+  }
+
+  if (road === 'glorieta-partida') {
+    // Glorieta amb dues entrades en V i un illot central allargat.
+    const Rr = 215;
+    return <Group listening={false}>{board}
+      <Rect x={cx - lane} y={0} width={lane * 2} height={H} fill={ASPHALT} />
+      <Rect x={0} y={cy - lane} width={W} height={lane * 2} fill={ASPHALT} />
+      <Ellipse x={cx} y={cy} radiusX={Rr + lane * 1.1} radiusY={Rr} fill={ASPHALT} />
+      <Ellipse x={cx} y={cy} radiusX={Rr + lane * 1.1} radiusY={Rr} stroke="#fff" strokeWidth={5} />
+      <Ellipse x={cx} y={cy} radiusX={Rr - lane * 0.6} radiusY={Rr - lane * 1.2} fill={ASPHALT_DK} />
+      <Ellipse x={cx} y={cy} radiusX={Rr - lane * 0.6} radiusY={Rr - lane * 1.2} stroke="#fff" strokeWidth={5} dash={dash} />
+      <Ellipse x={cx} y={cy} radiusX={Rr - lane * 1.5} radiusY={Rr - lane * 2.1} fill="#CDE8D6" stroke="#9CC8AC" strokeWidth={3} />
+    </Group>;
+  }
+
+  if (road === 'urbana') {
+    // Calçada (1+1) amb voreres a banda i banda i carrils més estrets.
+    const sidewalkW = lane * 0.8;
+    return <Group listening={false}>{board}
+      <Rect x={0} y={0} width={cx - lane - sidewalkW} height={H} fill="#D7DBE2" />
+      <Rect x={cx + lane + sidewalkW} y={0} width={W - (cx + lane + sidewalkW)} height={H} fill="#D7DBE2" />
+      <Rect x={cx - lane - sidewalkW} y={0} width={sidewalkW} height={H} fill="#CFC8B4" />
+      <Rect x={cx + lane} y={0} width={sidewalkW} height={H} fill="#CFC8B4" />
+      <Rect x={cx - lane} y={0} width={lane * 2} height={H} fill={ASPHALT} />
+      <Line points={[cx - lane, 0, cx - lane, H]} stroke="#fff" strokeWidth={5} />
+      <Line points={[cx + lane, 0, cx + lane, H]} stroke="#fff" strokeWidth={5} />
+      <Line points={[cx, 0, cx, H]} stroke="#fff" strokeWidth={5} dash={dash} />
+      {/* línia del bordó */}
+      <Line points={[cx - lane - 2, 0, cx - lane - 2, H]} stroke="#9AA0AA" strokeWidth={2} />
+      <Line points={[cx + lane + 2, 0, cx + lane + 2, H]} stroke="#9AA0AA" strokeWidth={2} />
+    </Group>;
+  }
+
+  if (road === 'carrer-1d') {
+    // Un únic sentit amb dos carrils + sentit fletxat al terra.
+    return <Group listening={false}>{board}{vert}
+      <Line points={[cx, 0, cx, H]} stroke="#fff" strokeWidth={5} dash={dash} />
+      {[180, 480, 780, 1060].map((y) => (
+        <Group key={y} x={cx - lane / 2} y={y} listening={false}>
+          <Rect x={-8} y={-22} width={16} height={50} fill={PAINT} />
+          <Line closed points={[-20, -18, 0, -42, 20, -18]} fill={PAINT} />
+        </Group>
+      ))}
+      {[180, 480, 780, 1060].map((y) => (
+        <Group key={'r' + y} x={cx + lane / 2} y={y} listening={false}>
+          <Rect x={-8} y={-22} width={16} height={50} fill={PAINT} />
+          <Line closed points={[-20, -18, 0, -42, 20, -18]} fill={PAINT} />
+        </Group>
+      ))}
     </Group>;
   }
 
@@ -485,6 +576,38 @@ function Shape({ kind, color, text }: { kind: string; color: string; text?: stri
         return <Line key={i} points={[Math.cos(a0) * r, Math.sin(a0) * r, Math.cos(a1) * r, Math.sin(a1) * r]} stroke="#fff" strokeWidth={5} />;
       })}
     </>);
+    case 'c-corba-suau': return (<>
+      <Arc innerRadius={120} outerRadius={400} angle={45} rotation={200} fill={ASPHALT} />
+      <Arc innerRadius={118} outerRadius={124} angle={45} rotation={200} fill="#fff" />
+      <Arc innerRadius={396} outerRadius={402} angle={45} rotation={200} fill="#fff" />
+    </>);
+    case 'c-y': return (<>
+      <Rect x={-165} y={-30} width={330} height={420} fill={ASPHALT} />
+      <Line points={[0, -350, -240, 250]} stroke={ASPHALT} strokeWidth={330} lineCap="round" lineJoin="round" />
+      <Line points={[0, -350, 240, 250]} stroke={ASPHALT} strokeWidth={330} lineCap="round" lineJoin="round" />
+      <Line points={[-165, -30, -165, 390]} stroke="#fff" strokeWidth={5} />
+      <Line points={[165, -30, 165, 390]} stroke="#fff" strokeWidth={5} />
+      <Line points={[0, 0, 0, 390]} stroke="#fff" strokeWidth={5} dash={[26, 20]} />
+    </>);
+    case 'c-ramal': return (<>
+      <Rect x={-165} y={-260} width={330} height={520} fill={ASPHALT} />
+      <Line points={[400, 260, 50, -260]} stroke={ASPHALT} strokeWidth={220} lineCap="round" />
+      <Line points={[400, 260, 50, -260]} stroke="#fff" strokeWidth={5} dash={[26, 20]} />
+      <Line points={[-165, -260, -165, 260]} stroke="#fff" strokeWidth={5} />
+      <Line points={[165, -260, 165, 260]} stroke="#fff" strokeWidth={5} />
+      <Line points={[0, -260, 0, 260]} stroke="#fff" strokeWidth={5} dash={[26, 20]} />
+    </>);
+    case 'pas-zebra': return (<>
+      <Rect x={-180} y={-30} width={360} height={60} fill="#1d1f25" />
+      {[-160, -120, -80, -40, 0, 40, 80, 120, 160].map((x) => (
+        <Rect key={x} x={x - 18} y={-30} width={36} height={60} fill={PAINT} />
+      ))}
+    </>);
+    case 'badenes': return (<>
+      {[-60, 0, 60].map((x) => (
+        <Rect key={x} x={x - 14} y={-50} width={28} height={100} fill="#F2B600" stroke="#9c7a1f" strokeWidth={1.5} cornerRadius={3} />
+      ))}
+    </>);
     case 'c-cruilla': return (<>
       <Rect x={-165} y={-330} width={330} height={660} fill={ASPHALT} />
       <Rect x={-330} y={-165} width={660} height={330} fill={ASPHALT} />
@@ -643,10 +766,17 @@ function Node({ el, onSelect, onChange, onContext, override, animating }: {
     <Group ref={ref} {...common} opacity={el.ghost ? 0.42 : 1}>
       {el.ghost && <Rect x={-30} y={-52} width={60} height={104} cornerRadius={12} stroke={DARK} strokeWidth={1.5} dash={[8, 6]} listening={false} />}
       <Shape kind={el.kind} color={el.color || DEFAULT_COLOR(el.kind)} text={el.text} />
-      {veh && !el.ghost && estat === 'mov' && (
-        <Arrow points={[0, -48, 0, -48 - Math.min(80, 26 + kmh * 0.7)]} pointerLength={13} pointerWidth={13}
-          stroke="#1FB286" fill="#1FB286" strokeWidth={5} listening={false} />
-      )}
+      {veh && !el.ghost && estat === 'mov' && (() => {
+        const enrere = el.data?.sentit === 'enrere';
+        const len = Math.min(80, 26 + kmh * 0.7);
+        const y0 = enrere ? 48 : -48;
+        const y1 = enrere ? 48 + len : -48 - len;
+        return (
+          <Arrow points={[0, y0, 0, y1]} pointerLength={13} pointerWidth={13}
+            stroke={enrere ? '#E89421' : '#1FB286'} fill={enrere ? '#E89421' : '#1FB286'}
+            strokeWidth={5} dash={enrere ? [10, 6] : undefined} listening={false} />
+        );
+      })()}
       {veh && !el.ghost && estat === 'estacionat' && (<>
         <Rect x={11} y={-52} width={20} height={20} cornerRadius={5} fill="#3B6BF5" listening={false} />
         <Text text="P" fontSize={15} fontStyle="bold" fill="#fff" width={20} align="center" x={11} y={-50} listening={false} />
@@ -692,9 +822,34 @@ function TitleBlock({ h }: { h: Header }) {
   );
 }
 
-/* Llegenda automàtica de vehicles (A, B, C…). */
-function Legend({ rows }: { rows: { letter: string; text: string; color: string }[] }) {
-  const W = 420, head = 38, rh = 30, H = head + rows.length * rh + 14;
+/* Llegenda automàtica de vehicles + relat de l'informe (opcional). */
+function Legend({ rows, informe }: { rows: { letter: string; text: string; color: string }[]; informe?: string }) {
+  const W = 460, head = 38, rh = 30;
+  // Tipografia monoespaiada: ~8 px d'amplada per caràcter a fontSize 13,
+  // marges interns 18 px → caràcters per línia.
+  const charsPerLine = Math.max(28, Math.floor((W - 36) / 7.4));
+  const wrapped: string[] = [];
+  if (informe) {
+    for (const block of informe.split(/\n+/)) {
+      let line = '';
+      for (const word of block.split(/\s+/)) {
+        if (!word) continue;
+        if ((line + (line ? ' ' : '') + word).length > charsPerLine) {
+          if (line) wrapped.push(line);
+          line = word;
+        } else {
+          line += (line ? ' ' : '') + word;
+        }
+      }
+      if (line) wrapped.push(line);
+      wrapped.push(''); // separador entre paràgrafs
+    }
+    while (wrapped.length && !wrapped[wrapped.length - 1]) wrapped.pop();
+    // Cap a 18 línies per a no menjar-se mitja escena.
+    if (wrapped.length > 18) { wrapped.length = 18; wrapped[17] = wrapped[17] + ' …'; }
+  }
+  const informeH = wrapped.length ? 30 + wrapped.length * 16 + 14 : 0;
+  const H = head + rows.length * rh + 14 + informeH;
   return (
     <Group x={26} y={BOARD.h - H - 24} listening={false}>
       <Rect width={W} height={H} cornerRadius={14} fill="#fff" stroke="rgba(21,21,28,0.18)" strokeWidth={1.5} shadowColor="#0006" shadowBlur={10} shadowOffsetY={3} />
@@ -707,6 +862,15 @@ function Legend({ rows }: { rows: { letter: string; text: string; color: string 
           <Text text={r.text} x={48} y={0} width={W - 62} fontSize={15} fontFamily="Manrope, sans-serif" fill="#15151C" />
         </Group>
       ))}
+      {wrapped.length > 0 && (
+        <Group y={head + rows.length * rh + 10}>
+          <Line points={[14, 6, W - 14, 6]} stroke="rgba(21,21,28,0.12)" strokeWidth={1} />
+          <Text text="RELAT DELS FETS" x={18} y={12} fontSize={11} fontStyle="bold" fontFamily="Poppins, sans-serif" fill="#B6531F" letterSpacing={1.4} />
+          {wrapped.map((ln, i) => (
+            <Text key={i} text={ln} x={18} y={30 + i * 16} width={W - 36} fontSize={13} fontFamily="Manrope, sans-serif" fill="#15151C" />
+          ))}
+        </Group>
+      )}
     </Group>
   );
 }
@@ -805,9 +969,31 @@ function VehModal({ el, onClose, onSave }: { el: El; onClose: () => void; onSave
         </div>
 
         {d.estat === 'mov' && (
-          <div style={{ marginTop: 14 }}>
-            <label style={lbl}>Velocitat aproximada (km/h)</label>
-            <input style={inp} inputMode="numeric" value={d.kmh || ''} onChange={(e) => set({ kmh: e.target.value.replace(/[^0-9]/g, '') })} placeholder="50" />
+          <div style={{ marginTop: 14, display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 12 }}>
+            <div>
+              <label style={lbl}>Velocitat (km/h)</label>
+              <input style={inp} inputMode="numeric" value={d.kmh || ''} onChange={(e) => set({ kmh: e.target.value.replace(/[^0-9]/g, '') })} placeholder="50" />
+            </div>
+            <div>
+              <label style={lbl}>Sentit de la marxa</label>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                {([
+                  ['endavant', '⬆️ Marxa endavant'],
+                  ['enrere', '⬇️ Marxa enrere'],
+                ] as [Sentit, string][]).map(([s, label]) => {
+                  const sel = (d.sentit ?? 'endavant') === s;
+                  return (
+                    <button key={s} onClick={() => set({ sentit: s })} style={{
+                      border: `1.5px solid ${sel ? A.terracota : A.line2}`,
+                      background: sel ? A.terraSoft : A.card,
+                      color: sel ? A.ink : A.inkSoft,
+                      cursor: 'pointer', borderRadius: 11, padding: '10px 6px',
+                      fontFamily: A.display, fontWeight: 700, fontSize: 12.5,
+                    }}>{label}</button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         )}
 
@@ -985,7 +1171,7 @@ export default function Croquis() {
   }
 
   // Peces que han de quedar SOTA la resta (asfalt, voreres, gespa…).
-  const GROUND_KINDS = ['c-recta', 'c-corba', 'c-cruilla', 'vorera', 'gespa', 'parking'];
+  const GROUND_KINDS = ['c-recta', 'c-corba', 'c-corba-suau', 'c-y', 'c-ramal', 'c-cruilla', 'pas-zebra', 'badenes', 'vorera', 'gespa', 'parking'];
   function add(kind: string) {
     const id = nextId();
     const p = NEEDS_PROMPT[kind];
@@ -1260,7 +1446,7 @@ export default function Croquis() {
         <td>${esc([d.marca, d.model].filter(Boolean).join(' ') || '—')}</td>
         <td class="mono">${esc((d.plate || '—').toUpperCase())}</td>
         <td>${esc(d.color || '—')}</td>
-        <td>${d.estat ? ESTATS[d.estat].label : '—'}</td>
+        <td>${d.estat ? ESTATS[d.estat].label + (d.sentit === 'enrere' ? ' (enrere)' : '') : '—'}</td>
         <td>${d.kmh ? d.kmh + ' km/h' : '—'}</td>
         <td>${esc(d.maniobra || '—')}</td>
         <td>${esc(d.ocupants || '—')}</td>
@@ -1301,6 +1487,7 @@ export default function Croquis() {
 </style></head><body>
   <h1>Informe del croquis d'accident</h1>
   <div class="meta">${hd || '<span style="color:#9A9AA2">Sense dades d\'atestat (omple-les al botó «Atestat» de l\'editor).</span>'}</div>
+  ${header.informe ? `<h2>Relat dels fets</h2><p style="white-space:pre-wrap; font-size:13px; line-height:1.55; color:#15151C; margin:6px 0 4px;">${esc(header.informe)}</p>` : ''}
   <h2>Croquis</h2>
   <img src="${croquisPng}" />
   ${framesHtml}
@@ -1328,7 +1515,10 @@ export default function Croquis() {
   const headerFilled = Object.values(header).some((v) => v && String(v).trim());
   const legendRows = els.filter((e) => VEHICLES.includes(e.kind) && !e.ghost).map((e) => {
     const d = e.data || {};
-    const text = [[d.marca, d.model].filter(Boolean).join(' '), d.plate, d.color, d.estat ? ESTATS[d.estat].label : ''].filter(Boolean).join(' · ') || 'Vehicle';
+    const estatTxt = d.estat
+      ? ESTATS[d.estat].label + (d.estat === 'mov' && d.sentit === 'enrere' ? ' (marxa enrere)' : '')
+      : '';
+    const text = [[d.marca, d.model].filter(Boolean).join(' '), d.plate, d.color, estatTxt].filter(Boolean).join(' · ') || 'Vehicle';
     const color = d.estat ? ESTATS[d.estat].color : (e.color && e.color !== '#FFFFFF' ? e.color! : A.ink);
     return { letter: vehLetters[e.id] || '?', text, color };
   });
@@ -1458,7 +1648,7 @@ export default function Croquis() {
             {/* Capçalera + llegenda (informatiu, s'exporta) */}
             <Layer listening={false}>
               {headerFilled && <TitleBlock h={header} />}
-              {showLegend && legendRows.length > 0 && <Legend rows={legendRows} />}
+              {showLegend && (legendRows.length > 0 || header.informe) && <Legend rows={legendRows} informe={header.informe} />}
             </Layer>
           </Stage>
 
@@ -1637,6 +1827,17 @@ function AtestatModal({ h, legend, onClose, onSave }: { h: Header; legend: boole
           <div><label style={lbl}>Calçada</label><Sel k="calcada" opts={CALCADA} /></div>
           <div><label style={lbl}>Visibilitat</label><Sel k="visibilitat" opts={VISIB} /></div>
           <div style={{ gridColumn: 'span 2' }}><label style={lbl}>Instructor (TIP)</label><input style={inp} value={d.instructor || ''} onChange={(e) => set({ instructor: e.target.value })} placeholder="TIP 12345" /></div>
+        </div>
+
+        <div style={{ marginTop: 14 }}>
+          <label style={lbl}>Relat dels fets (informe)</label>
+          <textarea
+            style={{ ...inp, minHeight: 110, resize: 'vertical', fontFamily: A.sans, lineHeight: 1.45 }}
+            value={d.informe || ''}
+            onChange={(e) => set({ informe: e.target.value })}
+            placeholder={"S'imprimeix dins el quadre de llegenda i a l'informe PDF.\n\nExemple:\nEl vehicle A circulava per l'av. de Roureda en sentit muntanya quan, en arribar al pas de vianants, no respecta la prioritat del vianant que el creuava. El vehicle frena tard i el colpeja amb la part frontal dreta. El vianant cau a la calçada sense pèrdua de coneixement…"}
+          />
+          <Mono size={9} color={A.inkMuted} style={{ display: 'block', marginTop: 4 }}>El text es mostra automàticament a la llegenda del croquis i a l'informe imprimible. ~18 línies màx.</Mono>
         </div>
 
         <label style={{ display: 'flex', alignItems: 'center', gap: 9, marginTop: 16, cursor: 'pointer', fontFamily: A.sans, fontWeight: 600, fontSize: 14, color: A.ink }}>

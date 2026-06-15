@@ -14,6 +14,7 @@
 
 /* ════════════════ Model compartit ════════════════ */
 export type Estat = 'mov' | 'parat' | 'estacionat';
+export type Sentit = 'endavant' | 'enrere';
 export type VehData = {
   marca?: string; model?: string; color?: string; plate?: string;
   estat?: Estat; kmh?: string; note?: string;
@@ -22,6 +23,7 @@ export type VehData = {
   ocupants?: string;   // nombre d'ocupants
   conductor?: string;  // nom / TIP del conductor
   danys?: string[];    // zones colpejades (front, lat-e, rear-d…)
+  sentit?: Sentit;     // marxa endavant (per defecte) o marxa enrere
 };
 export type El = {
   id: string; kind: string; x: number; y: number;
@@ -30,7 +32,8 @@ export type El = {
   src?: string; locked?: boolean; opacity?: number; // fons (mapa/foto)
   parent?: string; // vehicle d'origen (fantasmes inicial/final i punts de pas)
 };
-export type Road = 'recta' | 'doble' | 'autovia' | 'cruilla' | 'te' | 'rotonda' | 'corba' | 'cap';
+export type Road = 'recta' | 'doble' | 'autovia' | 'cruilla' | 'te' | 'rotonda' | 'corba' | 'cap'
+  | 'xicana' | 'incorporacio' | 'glorieta-partida' | 'urbana' | 'carrer-1d';
 
 export const BOARD = { w: 1680, h: 1120 };
 export const PX_PER_M = 165 / 3.5; // 1 carril (165 px) = 3,5 m
@@ -152,6 +155,7 @@ export type TimelineVeh = {
   rotFinal: number;
   spinExtra: number; // graus de trompo extra post-impacte
   pushed: boolean;   // estava aturat/estacionat i el xoc l'ha desplaçat
+  reverse: boolean;  // anava marxa enrere (el morro mira en sentit contrari al moviment)
   skid: SkidSample[];
 };
 export type VehState = { x: number; y: number; rotation: number; kmh: number; skidD: number; moving: boolean };
@@ -170,7 +174,7 @@ export function buildTimeline(els: El[]): Timeline {
   type Raw = {
     veh: El; pre: Pt[]; post: Pt[]; preLen: number; postLen: number;
     hasImpact: boolean; impactPt: Pt | null; rotFinal: number; vPre: number;
-    declared: number | null; pushed: boolean;
+    declared: number | null; pushed: boolean; reverse?: boolean;
   };
   const raws: Raw[] = [];
   for (const v of els) {
@@ -213,10 +217,14 @@ export function buildTimeline(els: El[]): Timeline {
       rotFinal = v.rotation;
     }
     const declared = parseInt(v.data?.kmh || '') || null;
+    // Marxa enrere: velocitat per defecte molt més baixa (15 km/h màx.
+    // a la pràctica) i el motor recordarà que va en sentit invers.
+    const enrere = v.data?.sentit === 'enrere';
+    const baseKmh = declared ?? (enrere ? Math.min(12, defKmh(v.kind)) : defKmh(v.kind));
     raws.push({
       veh: v, pre, post, preLen: polyLen(pre), postLen: polyLen(post),
       hasImpact: !!impactPt, impactPt, rotFinal,
-      vPre: kmh2pxs(declared ?? defKmh(v.kind)), declared, pushed: false,
+      vPre: kmh2pxs(baseKmh), declared, pushed: false, reverse: enrere,
     });
   }
 
@@ -238,12 +246,14 @@ export function buildTimeline(els: El[]): Timeline {
   // mur de massa... no n'hi ha: sense parella, perd un 45% i frena.
   type Work = Raw & { mass: number; rotImpact: number; outDir: number; vPost: number };
   const works: Work[] = raws.map((r) => {
-    const rotImpact = r.pushed
+    const dirAtImpact = r.pushed
       ? r.veh.rotation
       : pointAt(r.pre, Math.max(0, r.preLen - 0.1), r.rotFinal).rot;
+    // En marxa enrere el morro mira en sentit contrari a la direcció del moviment.
+    const rotImpact = r.reverse ? (dirAtImpact + 180) % 360 : dirAtImpact;
     const outDir = r.postLen > 0
       ? pointAt(r.post, Math.min(3, r.postLen), r.rotFinal).rot
-      : rotImpact;
+      : dirAtImpact;
     return { ...r, mass: MASS[r.veh.kind] ?? 1300, rotImpact, outDir, vPost: 0 };
   });
   // Quantitat de moviment entre vehicles EN MOVIMENT (parelles de xoc).
@@ -291,7 +301,8 @@ export function buildTimeline(els: El[]): Timeline {
       tStart: r.pushed ? tHit : Math.max(0, tImpact - tPre),
       tImpact: tHit, tEnd: tHit + tPost,
       hasImpact: r.hasImpact, impactPt: r.impactPt,
-      rotImpact: r.rotImpact, rotFinal: r.rotFinal, spinExtra, pushed: r.pushed, skid,
+      rotImpact: r.rotImpact, rotFinal: r.rotFinal, spinExtra, pushed: r.pushed,
+      reverse: !!r.reverse, skid,
     };
   };
 
@@ -381,7 +392,9 @@ export function stateAt(v: TimelineVeh, t: number): VehState {
       x += Math.cos(th) * sway; y += Math.sin(th) * sway;
     }
     const done = d >= v.preLen - 0.5 && v.post.length === 0;
-    return { x, y, rotation: done ? v.rotFinal : p.rot, kmh: done ? 0 : pxs2kmh(v.vPre), skidD: 0, moving: !done };
+    // En marxa enrere el morro mira en sentit contrari al desplaçament.
+    const heading = v.reverse ? (p.rot + 180) % 360 : p.rot;
+    return { x, y, rotation: done ? v.rotFinal : heading, kmh: done ? 0 : pxs2kmh(v.vPre), skidD: 0, moving: !done };
   }
   // Fase post-impacte: deceleració uniforme fins a aturar-se al final.
   // Els vehicles empesos tenen una breu fase de deformació (70 ms) abans
