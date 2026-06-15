@@ -202,7 +202,7 @@ const NEEDS_PROMPT: Record<string, { msg: string; def: string }> = {
   velocitat: { msg: 'Velocitat (km/h):', def: '50' },
   text: { msg: "Text de l'etiqueta:", def: 'Vehicle A' },
   etiqueta: { msg: 'Lletra / número:', def: 'A' },
-  mesura: { msg: 'Mida (p. ex. 4,5 m):', def: '0,0 m' },
+  mesura: { msg: 'Mida personalitzada (deixa-ho buit per a auto-càlcul):', def: '' },
   'pes-max': { msg: 'Pes màxim (t):', def: '5,5' },
   'altura-max': { msg: 'Alçada màx. (m):', def: '3,5' },
   carrer: { msg: 'Nom del carrer / via:', def: 'Carrer Major' },
@@ -770,15 +770,22 @@ function Node({ el, onSelect, onChange, onContext, override, animating }: {
   if (el.kind === 'text')
     return <Text ref={ref as never} {...common} text={el.text || 'Text'} fontSize={22} fontStyle="bold"
       fontFamily="Manrope, sans-serif" fill={el.color || '#15151C'} stroke="#fff" strokeWidth={0.7} />;
-  if (el.kind === 'mesura')
+  if (el.kind === 'mesura') {
+    // Mesurador: longitud real = 120 px (la barra) × escala horitzontal
+    // del propi element, convertida a metres amb l'escala canònica
+    // 1 carril (165 px) = 3,5 m → PX_PER_M.
+    const lenPx = 120 * Math.abs(el.scaleX || 1);
+    const lenM = lenPx / PX_PER_M;
+    const auto = `${lenM.toFixed(lenM < 10 ? 2 : 1)} m`.replace('.', ',');
     return (
       <Group ref={ref} {...common}>
         <Line points={[-60, 0, 60, 0]} stroke={A.terracota} strokeWidth={2.5} hitStrokeWidth={20} />
         <Line points={[-60, -7, -60, 7]} stroke={A.terracota} strokeWidth={2.5} />
         <Line points={[60, -7, 60, 7]} stroke={A.terracota} strokeWidth={2.5} />
-        <Text text={el.text || '0,0 m'} fontSize={14} fontStyle="bold" fill={A.terraInk} width={120} align="center" x={-60} y={-22} />
+        <Text text={el.text && el.text !== '0,0 m' ? el.text : auto} fontSize={14} fontStyle="bold" fill={A.terraInk} width={140} align="center" x={-70} y={-22} />
       </Group>
     );
+  }
   if (el.kind === 'carrer') {
     const label = el.text || 'Carrer';
     const w = Math.max(72, label.length * 10.5 + 26);
@@ -1078,6 +1085,7 @@ export default function Croquis() {
   const [menu, setMenu] = useState<{ id: string; x: number; y: number } | null>(null);
   const [editVeh, setEditVeh] = useState<string | null>(null);
   const [editAtestat, setEditAtestat] = useState(false);
+  const [showSkidCalc, setShowSkidCalc] = useState(false);
   // Mode "dibuixar via lliure": cada clic al llenç afegeix un punt al
   // traçat actual. Doble clic o tecla Enter conclou la via.
   const [drawingPath, setDrawingPath] = useState<{ points: number[]; width: number } | null>(null);
@@ -1177,7 +1185,7 @@ export default function Croquis() {
   // Tecles: Supr esborra, fletxes mouen, Ctrl+D duplica.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') { setMenu(null); setEditVeh(null); setEditAtestat(false); setDrawingPath(null); setEditPathNodes(null); return; }
+      if (e.key === 'Escape') { setMenu(null); setEditVeh(null); setEditAtestat(false); setDrawingPath(null); setEditPathNodes(null); setShowSkidCalc(false); return; }
       if (e.key === 'Enter' && drawingPath && drawingPath.points.length >= 4) {
         e.preventDefault();
         const id = nextId(); pushUndo();
@@ -1605,6 +1613,7 @@ export default function Croquis() {
           onChange={(e) => { const f = e.target.files?.[0]; if (f) importJson(f); e.target.value = ''; }} />
         <button onClick={() => setShowPlayer((v) => !v)} style={{ ...btn, ...(showPlayer ? { background: A.terracota, color: '#fff', border: 'none' } : {}) }} title="Recreació en vídeo">▶ Vídeo</button>
         <button onClick={() => setShow3D(true)} style={btn} title="Recreació 3D de l'accident">🧊 3D</button>
+        <button onClick={() => setShowSkidCalc(true)} style={btn} title="Calcula la velocitat inicial des de la longitud de la frenada al lloc">🧮 Velocitat per frenada</button>
         <button onClick={() => { void exportInforme(); }} style={btn} title="Informe imprimible: croquis + seqüència + taula de dades (desa'l com a PDF)">📄 Informe</button>
         <button onClick={clearAll} style={btn}><Ic name="x" size={15} color={A.inkSoft} /> Buidar</button>
         <button onClick={exportPng} style={{ ...btn, background: A.ink, color: '#fff', border: 'none' }}><Ic name="doc" size={16} color="#fff" /> Exportar PNG</button>
@@ -1942,6 +1951,9 @@ export default function Croquis() {
         return <VehModal el={el} onClose={() => setEditVeh(null)} onSave={(d) => { setVehData(el.id, d); setEditVeh(null); }} />;
       })()}
 
+      {/* Calculadora forense de velocitat per longitud de frenada */}
+      {showSkidCalc && <SkidCalcModal onClose={() => setShowSkidCalc(false)} />}
+
       {/* Modal de dades de l'atestat */}
       {editAtestat && (
         <AtestatModal h={header} legend={showLegend} onClose={() => setEditAtestat(false)}
@@ -2019,6 +2031,116 @@ function AtestatModal({ h, legend, onClose, onSave }: { h: Header; legend: boole
         <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
           <button onClick={onClose} style={{ flex: 1, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 12, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14, color: A.ink }}>Cancel·lar</button>
           <button onClick={() => onSave(d, lg)} style={{ flex: 1.4, border: 'none', background: A.ink, color: '#fff', cursor: 'pointer', borderRadius: 12, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14, boxShadow: A.shadowMd }}>Desar atestat</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════ Calculadora forense de velocitat ════════════════
+   Estima la velocitat mínima a l'inici de la frenada a partir de la
+   longitud del rastre de pneumàtic, el coeficient d'adherència de la
+   calçada i (opcionalment) el pendent.
+   Fórmula bàsica: v = √(2·μ·g·d), expressada en km/h.
+   Si hi ha pendent (p, en %): a_efectiva = g·(μ·cos α − sin α) baixant. */
+function SkidCalcModal({ onClose }: { onClose: () => void }) {
+  const [d, setD] = useState('15');
+  const [mu, setMu] = useState(0.75);
+  const [pend, setPend] = useState('0');
+  const [react, setReact] = useState('1');
+  const G = 9.81;
+  const dN = parseFloat(d.replace(',', '.')) || 0;
+  const pN = parseFloat(pend.replace(',', '.')) || 0;
+  const rN = parseFloat(react.replace(',', '.')) || 0;
+  const alpha = Math.atan(pN / 100);
+  const aEff = G * (mu * Math.cos(alpha) - Math.sin(alpha));
+  const vMs = aEff > 0 ? Math.sqrt(2 * aEff * dN) : 0;
+  const vKmh = vMs * 3.6;
+  const dReact = vMs * rN;
+  const dTotal = dN + dReact;
+  const inp: CSSProperties = { width: '100%', border: `1px solid ${A.line2}`, borderRadius: 10, padding: '10px 12px', fontFamily: A.sans, fontSize: 14, color: A.ink, background: A.bgSoft, outline: 'none' };
+  const lbl: CSSProperties = { display: 'block', fontFamily: A.display, fontWeight: 700, fontSize: 12, color: A.inkSoft, marginBottom: 5 };
+  const SURFACES: { id: number; label: string; mu: number; emoji: string }[] = [
+    { id: 0, label: 'Sec asfalt', mu: 0.75, emoji: '☀️' },
+    { id: 1, label: 'Mullat', mu: 0.55, emoji: '🌧️' },
+    { id: 2, label: 'Sec llamborda', mu: 0.65, emoji: '🧱' },
+    { id: 3, label: 'Mullat llamborda', mu: 0.45, emoji: '💧' },
+    { id: 4, label: 'Neu compactada', mu: 0.3, emoji: '❄️' },
+    { id: 5, label: 'Gel / glaç', mu: 0.15, emoji: '🧊' },
+    { id: 6, label: 'Greixós / oli', mu: 0.25, emoji: '🛢️' },
+  ];
+  return (
+    <div onMouseDown={onClose} style={{ position: 'fixed', inset: 0, zIndex: 130, background: 'rgba(21,21,28,0.45)', display: 'grid', placeItems: 'center', padding: 16 }}>
+      <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 'min(540px, 96vw)', maxHeight: '92vh', overflowY: 'auto', background: A.card, borderRadius: 20, boxShadow: A.shadowLg, padding: 22 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+          <span style={{ width: 36, height: 36, borderRadius: 10, background: A.terracota, display: 'grid', placeItems: 'center', boxShadow: A.inset, fontSize: 18 }}>🧮</span>
+          <div style={{ marginRight: 'auto' }}>
+            <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 17, color: A.ink }}>Velocitat a partir de la frenada</div>
+            <Mono size={9} color={A.inkMuted}>Càlcul forense · v = √(2·μ·g·d)</Mono>
+          </div>
+          <button onClick={onClose} style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}><Ic name="x" size={20} color={A.inkSoft} /></button>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div>
+            <label style={lbl}>Longitud de la frenada (m)</label>
+            <input style={inp} inputMode="decimal" value={d} onChange={(e) => setD(e.target.value.replace(/[^0-9,.]/g, ''))} placeholder="15" />
+            <Mono size={9} color={A.inkMuted} style={{ display: 'block', marginTop: 4 }}>Mesura de la marca de pneumàtic al lloc.</Mono>
+          </div>
+          <div>
+            <label style={lbl}>Pendent (%) · positiu = baixant</label>
+            <input style={inp} inputMode="decimal" value={pend} onChange={(e) => setPend(e.target.value.replace(/[^0-9,.\-]/g, ''))} placeholder="0" />
+          </div>
+        </div>
+
+        <div style={{ marginTop: 14 }}>
+          <label style={lbl}>Estat de la calçada (coeficient d'adherència μ)</label>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
+            {SURFACES.map((s) => (
+              <button key={s.id} onClick={() => setMu(s.mu)} style={{
+                border: `1.5px solid ${mu === s.mu ? A.terracota : A.line2}`,
+                background: mu === s.mu ? A.terraSoft : A.card,
+                color: A.ink, cursor: 'pointer', borderRadius: 11, padding: '10px 6px',
+                fontFamily: A.display, fontWeight: 700, fontSize: 11.5, lineHeight: 1.2,
+              }}>
+                <div style={{ fontSize: 17, marginBottom: 4 }}>{s.emoji}</div>
+                {s.label}
+                <div style={{ fontFamily: A.mono, fontWeight: 500, fontSize: 10, color: A.inkMuted, marginTop: 3 }}>μ {s.mu.toFixed(2)}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ marginTop: 14 }}>
+          <label style={lbl}>Temps de reacció del conductor (s)</label>
+          <input style={inp} inputMode="decimal" value={react} onChange={(e) => setReact(e.target.value.replace(/[^0-9,.]/g, ''))} placeholder="1,0" />
+          <Mono size={9} color={A.inkMuted} style={{ display: 'block', marginTop: 4 }}>Valor pericial habitual: 0,8 – 1,2 s. Posa 0 si vols només la velocitat a l'inici de la frenada.</Mono>
+        </div>
+
+        <div style={{ marginTop: 18, background: A.bgSoft, border: `1px solid ${A.line2}`, borderRadius: 14, padding: '14px 16px' }}>
+          <Mono size={9} color={A.inkMuted}>Resultat</Mono>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 8 }}>
+            <div>
+              <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 34, color: A.terracota, lineHeight: 1 }}>
+                {vKmh > 0 ? vKmh.toFixed(1) : '—'} <span style={{ fontSize: 14, color: A.inkSoft }}>km/h</span>
+              </div>
+              <Mono size={9} color={A.inkMuted} style={{ marginTop: 4 }}>Velocitat MÍNIMA a l'inici de la frenada</Mono>
+            </div>
+            <div>
+              <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 20, color: A.ink, lineHeight: 1 }}>
+                {dTotal > 0 ? dTotal.toFixed(1) : '—'} <span style={{ fontSize: 13, color: A.inkSoft }}>m</span>
+              </div>
+              <Mono size={9} color={A.inkMuted} style={{ marginTop: 4 }}>Distància total: reacció ({dReact.toFixed(1)} m) + frenada</Mono>
+            </div>
+          </div>
+          <Mono size={9} color={A.inkMuted} style={{ display: 'block', marginTop: 10 }}>
+            ℹ️ Estimació pericial inicial. No substitueix l'informe d'un expert forense ni el càlcul amb dades específiques del vehicle (ABS, distribució de massa, etc.).
+            {pN > 0 && ' Pendent baixant: la velocitat real pot ser superior.'}
+          </Mono>
+        </div>
+
+        <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
+          <button onClick={onClose} style={{ flex: 1, border: 'none', background: A.ink, color: '#fff', cursor: 'pointer', borderRadius: 12, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14 }}>Tancar</button>
         </div>
       </div>
     </div>
