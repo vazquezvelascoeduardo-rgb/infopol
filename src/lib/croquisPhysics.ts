@@ -31,6 +31,11 @@ export type El = {
   color?: string; text?: string; data?: VehData; ghost?: boolean; phase?: 'inicial' | 'final';
   src?: string; locked?: boolean; opacity?: number; // fons (mapa/foto)
   parent?: string; // vehicle d'origen (fantasmes inicial/final i punts de pas)
+  // Via lliure (kind === 'via-lliure'): polilínia editable.
+  // `points` són en COORDENADES DEL TAULELL (no relatives a x/y).
+  points?: number[];
+  width?: number;    // amplada en px (per defecte 240 px ≈ un carril i mig)
+  tension?: number;  // 0 = polilínia recta, 0.4–0.6 = corba suau (default 0.5)
 };
 export type Road = 'recta' | 'doble' | 'autovia' | 'cruilla' | 'te' | 'rotonda' | 'corba' | 'cap'
   | 'xicana' | 'incorporacio' | 'glorieta-partida' | 'urbana' | 'carrer-1d';

@@ -729,6 +729,36 @@ function Node({ el, onSelect, onChange, onContext, override, animating }: {
       onChange({ x: n.x(), y: n.y(), rotation: n.rotation(), scaleX: n.scaleX(), scaleY: n.scaleY() });
     },
   };
+  if (el.kind === 'via-lliure') {
+    // Via lliure: dues línies superposades (asfalt + pintura central
+    // discontínua). Els `points` són absoluts; x/y/rotation/scale es
+    // mantenen a zero perquè el grup no els transformi.
+    const pts = el.points ?? [];
+    if (pts.length < 4) return null;
+    const w = el.width ?? 240;
+    const t = el.tension ?? 0.5;
+    return (
+      <Group ref={ref} id={el.id} draggable={!animating} onClick={onSelect} onTap={onSelect}
+        onContextMenu={(e: Konva.KonvaEventObject<PointerEvent>) => { e.evt.preventDefault(); onSelect(); onContext(e.evt.clientX, e.evt.clientY); }}
+        onDragEnd={(ev: Konva.KonvaEventObject<DragEvent>) => {
+          const dx = ev.target.x(), dy = ev.target.y();
+          if (Math.abs(dx) + Math.abs(dy) > 0.5) {
+            const moved = pts.map((v, i) => v + (i % 2 === 0 ? dx : dy));
+            ev.target.position({ x: 0, y: 0 });
+            onChange({ points: moved });
+          }
+        }}>
+        {/* contorn (vorada) */}
+        <Line points={pts} stroke="#CFC9B8" strokeWidth={w + 8} lineCap="round" lineJoin="round" tension={t} listening={false} />
+        {/* asfalt */}
+        <Line points={pts} stroke={ASPHALT} strokeWidth={w} lineCap="round" lineJoin="round" tension={t} listening={false} />
+        {/* pintura central discontínua */}
+        <Line points={pts} stroke="#fff" strokeWidth={5} lineCap="round" lineJoin="round" tension={t} dash={[26, 20]} listening={false} />
+        {/* zona clicable (invisible) per seleccionar */}
+        <Line points={pts} stroke="rgba(0,0,0,0)" strokeWidth={w} lineCap="round" lineJoin="round" tension={t} hitStrokeWidth={w} />
+      </Group>
+    );
+  }
   if (el.kind === 'fons') {
     if (!img) return null;
     return <KImage ref={ref as never} {...common} image={img} offsetX={img.width / 2} offsetY={img.height / 2}
@@ -1048,6 +1078,12 @@ export default function Croquis() {
   const [menu, setMenu] = useState<{ id: string; x: number; y: number } | null>(null);
   const [editVeh, setEditVeh] = useState<string | null>(null);
   const [editAtestat, setEditAtestat] = useState(false);
+  // Mode "dibuixar via lliure": cada clic al llenç afegeix un punt al
+  // traçat actual. Doble clic o tecla Enter conclou la via.
+  const [drawingPath, setDrawingPath] = useState<{ points: number[]; width: number } | null>(null);
+  // Edició de nodes d'una via lliure existent: l'usuari pot arrossegar
+  // cadascun dels punts de control per modelar la corba.
+  const [editPathNodes, setEditPathNodes] = useState<string | null>(null);
   const [, setHistTick] = useState(0);
   // Reproducció / vídeo / 3D
   const [showPlayer, setShowPlayer] = useState(false);
@@ -1141,7 +1177,19 @@ export default function Croquis() {
   // Tecles: Supr esborra, fletxes mouen, Ctrl+D duplica.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') { setMenu(null); setEditVeh(null); setEditAtestat(false); return; }
+      if (e.key === 'Escape') { setMenu(null); setEditVeh(null); setEditAtestat(false); setDrawingPath(null); setEditPathNodes(null); return; }
+      if (e.key === 'Enter' && drawingPath && drawingPath.points.length >= 4) {
+        e.preventDefault();
+        const id = nextId(); pushUndo();
+        setEls((prev) => [
+          ...prev.filter((x) => x.kind === 'fons'),
+          { id, kind: 'via-lliure', x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1,
+            points: drawingPath.points, width: drawingPath.width, tension: 0.5 },
+          ...prev.filter((x) => x.kind !== 'fons'),
+        ]);
+        setDrawingPath(null); setSel(id);
+        return;
+      }
       if (document.activeElement && document.activeElement !== document.body) return;
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); e.shiftKey ? redo() : undo(); return; }
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y') { e.preventDefault(); redo(); return; }
@@ -1157,7 +1205,7 @@ export default function Croquis() {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sel, els]);
+  }, [sel, els, drawingPath]);
 
   const selEl = useMemo(() => els.find((e) => e.id === sel) || null, [els, sel]);
 
@@ -1546,6 +1594,11 @@ export default function Croquis() {
             {ROADS.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}
           </select>
         </label>
+        <button onClick={() => setDrawingPath((dp) => dp ? null : { points: [], width: 240 })}
+          style={{ ...btn, ...(drawingPath ? { background: A.terracota, color: '#fff', border: 'none' } : {}) }}
+          title="Dibuixar via lliure: clica al llenç per posar punts (mín. 2). Doble clic o Enter per acabar. Esc per cancel·lar.">
+          {drawingPath ? `✏️ Dibuixant (${drawingPath.points.length / 2} pts)` : '✏️ Via lliure'}
+        </button>
         <button onClick={exportJson} style={btn} title="Desar còpia (.json)">💾 Desar</button>
         <button onClick={() => fileRef.current?.click()} style={btn} title="Obrir un croquis (.json)">📂 Obrir</button>
         <input ref={fileRef} type="file" accept="application/json,.json" style={{ display: 'none' }}
@@ -1580,22 +1633,50 @@ export default function Croquis() {
         <main ref={wrapRef} style={{ flex: 1, minWidth: 0, position: 'relative', overflow: 'hidden', background: '#EDEBE5' }}>
           <Stage ref={stageRef} width={size.w} height={size.h}
             scaleX={view.scale || 1} scaleY={view.scale || 1} x={view.x} y={view.y}
-            draggable
+            draggable={!drawingPath}
             onWheel={(e) => { setMenu(null); onWheel(e); }}
             onContextMenu={(e) => e.evt.preventDefault()}
             onDragEnd={(e) => { if (e.target === e.target.getStage()) setView((v) => ({ ...v, x: e.target.x(), y: e.target.y() })); }}
             onMouseDown={(e) => {
               setMenu(null);
-              // En acabar una reproducció, l'estat d'animació quedava actiu i
-              // bloquejava l'arrossegament de TOTS els elements (el "cartell
-              // de carrer que no es mou"). Qualsevol clic fora de reproducció
-              // torna al mode edició.
               if (anim && !playing && !recording) { setAnim(null); setProg(0); tSimRef.current = 0; }
+              // Mode dibuix de via lliure: cada clic afegeix un punt
+              // a la polilínia, en coordenades del taulell.
+              if (drawingPath) {
+                const stage = e.target.getStage();
+                const ptr = stage?.getPointerPosition(); if (!ptr) return;
+                const s = view.scale || 1;
+                const x = (ptr.x - view.x) / s, y = (ptr.y - view.y) / s;
+                setDrawingPath({ ...drawingPath, points: [...drawingPath.points, x, y] });
+                return;
+              }
               if (e.target === e.target.getStage()) setSel(null);
+            }}
+            onDblClick={() => {
+              // Doble clic: finalitza el traçat de la via lliure (mín. 2 punts).
+              if (drawingPath && drawingPath.points.length >= 4) {
+                const id = nextId();
+                pushUndo();
+                setEls((prev) => [
+                  ...prev.filter((x) => x.kind === 'fons'),
+                  { id, kind: 'via-lliure', x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1,
+                    points: drawingPath.points, width: drawingPath.width, tension: 0.5 },
+                  ...prev.filter((x) => x.kind !== 'fons'),
+                ]);
+                setDrawingPath(null); setSel(id);
+              }
             }}
             onTouchStart={(e) => {
               setMenu(null);
               if (anim && !playing && !recording) { setAnim(null); setProg(0); tSimRef.current = 0; }
+              if (drawingPath) {
+                const stage = e.target.getStage();
+                const ptr = stage?.getPointerPosition(); if (!ptr) return;
+                const s = view.scale || 1;
+                const x = (ptr.x - view.x) / s, y = (ptr.y - view.y) / s;
+                setDrawingPath({ ...drawingPath, points: [...drawingPath.points, x, y] });
+                return;
+              }
               if (e.target === e.target.getStage()) setSel(null);
             }}>
             <Layer listening={false}><RoadBg road={road} /></Layer>
@@ -1644,6 +1725,44 @@ export default function Croquis() {
               <Transformer ref={trRef} rotationSnaps={[0, 45, 90, 135, 180, 225, 270, 315]}
                 anchorSize={11} borderStroke={A.terracota} anchorStroke={A.terracota} anchorCornerRadius={3}
                 boundBoxFunc={(oldB, newB) => (newB.width < 14 || newB.height < 14 ? oldB : newB)} />
+              {/* Previsualització mentre es dibuixa la via lliure */}
+              {drawingPath && drawingPath.points.length >= 2 && (
+                <Group listening={false}>
+                  <Line points={drawingPath.points} stroke={ASPHALT} strokeWidth={drawingPath.width} lineCap="round" lineJoin="round" tension={0.5} opacity={0.55} />
+                  <Line points={drawingPath.points} stroke="#fff" strokeWidth={5} dash={[18, 14]} tension={0.5} opacity={0.85} />
+                  {Array.from({ length: Math.floor(drawingPath.points.length / 2) }, (_, i) => (
+                    <Circle key={i} x={drawingPath.points[i * 2]} y={drawingPath.points[i * 2 + 1]} radius={9} fill="#fff" stroke={A.terracota} strokeWidth={3} />
+                  ))}
+                </Group>
+              )}
+              {/* Manijes d'edició dels nodes d'una via lliure existent */}
+              {editPathNodes && (() => {
+                const el = els.find((e) => e.id === editPathNodes);
+                if (!el || el.kind !== 'via-lliure' || !el.points) return null;
+                const pts = el.points;
+                return (
+                  <Group>
+                    {Array.from({ length: pts.length / 2 }, (_, i) => (
+                      <Circle key={i} x={pts[i * 2]} y={pts[i * 2 + 1]} radius={12}
+                        fill="#fff" stroke={A.terracota} strokeWidth={3} draggable
+                        onDragMove={(ev) => {
+                          const next = [...pts];
+                          next[i * 2] = ev.target.x();
+                          next[i * 2 + 1] = ev.target.y();
+                          setEls((p) => p.map((x) => (x.id === el.id ? { ...x, points: next } : x)));
+                        }}
+                        onContextMenu={(ev) => {
+                          ev.evt.preventDefault();
+                          // Clic dret damunt un node: l'esborra (si en queden ≥2).
+                          if (pts.length <= 4) return;
+                          const next = pts.filter((_, j) => j !== i * 2 && j !== i * 2 + 1);
+                          pushUndo();
+                          setEls((p) => p.map((x) => (x.id === el.id ? { ...x, points: next } : x)));
+                        }} />
+                    ))}
+                  </Group>
+                );
+              })()}
             </Layer>
             {/* Capçalera + llegenda (informatiu, s'exporta) */}
             <Layer listening={false}>
@@ -1695,9 +1814,45 @@ export default function Croquis() {
             </div>
           )}
 
+          {/* Pista mentre dibuixa la via lliure */}
+          {drawingPath && (
+            <div style={{ position: 'absolute', left: '50%', bottom: 14, transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: 10, background: A.card, border: `1px solid ${A.terracota}`, borderRadius: 14, padding: '8px 14px', boxShadow: A.shadowLg, flexWrap: 'wrap' }}>
+              <Mono size={10} color={A.terracota}>Dibuixant via · {drawingPath.points.length / 2} pts</Mono>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, paddingLeft: 8, borderLeft: `1px solid ${A.line}` }}>
+                <Mono size={9} color={A.inkMuted}>Amplada</Mono>
+                <input type="range" min={80} max={500} value={drawingPath.width} onChange={(e) => setDrawingPath({ ...drawingPath, width: Number(e.target.value) })} style={{ width: 130, accentColor: A.terracota }} />
+                <Mono size={9} color={A.inkSoft}>{drawingPath.width}px</Mono>
+              </div>
+              <button onClick={() => {
+                if (drawingPath.points.length >= 4) {
+                  const id = nextId(); pushUndo();
+                  setEls((prev) => [
+                    ...prev.filter((x) => x.kind === 'fons'),
+                    { id, kind: 'via-lliure', x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1,
+                      points: drawingPath.points, width: drawingPath.width, tension: 0.5 },
+                    ...prev.filter((x) => x.kind !== 'fons'),
+                  ]);
+                  setDrawingPath(null); setSel(id);
+                } else setDrawingPath(null);
+              }} style={{ ...btn, background: A.ink, color: '#fff', border: 'none' }}>
+                ✅ Acabar
+              </button>
+              <button onClick={() => setDrawingPath(null)} style={{ ...btn, color: A.red, borderColor: A.redSoft }}>Cancel·lar</button>
+            </div>
+          )}
+
           {/* Mini-barra de l'element seleccionat */}
-          {selEl && !animating && (
+          {selEl && !animating && !drawingPath && (
             <div style={{ position: 'absolute', left: '50%', bottom: showPlayer ? 70 : 14, transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: 7, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 14, padding: '8px 11px', boxShadow: A.shadowLg, flexWrap: 'wrap', maxWidth: '94%' }}>
+              {selEl.kind === 'via-lliure' && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, paddingRight: 7, borderRight: `1px solid ${A.line}` }}>
+                  <Mono size={9} color={A.inkMuted}>Amplada</Mono>
+                  <input type="range" min={80} max={500} value={selEl.width ?? 240} onChange={(e) => update(selEl.id, { width: Number(e.target.value) })} style={{ width: 110, accentColor: A.terracota }} />
+                  <button onClick={() => setEditPathNodes(editPathNodes === selEl.id ? null : selEl.id)} style={{ ...btn, padding: '6px 10px', ...(editPathNodes === selEl.id ? { background: A.terraSoft, borderColor: A.terracota } : {}) }} title="Mostrar / amagar manijes per arrossegar els punts">
+                    {editPathNodes === selEl.id ? '✅ Punts' : '✏️ Punts'}
+                  </button>
+                </div>
+              )}
               {COLORABLE.includes(selEl.kind) && (
                 <div style={{ display: 'flex', gap: 5, alignItems: 'center', paddingRight: 7, borderRight: `1px solid ${A.line}` }}>
                   {VEH_COLORS.map((c) => (
@@ -1751,6 +1906,22 @@ export default function Croquis() {
                     <MenuItem onClick={() => { markFinal(el.id); setMenu(null); }}>🏁 Marca posició final</MenuItem>
                     <MenuItem onClick={() => { markCollision(el.id); setMenu(null); }}>❌ Marca punt de col·lisió</MenuItem>
                     <MenuItem onClick={() => { markVia(el.id); setMenu(null); }}>🟡 Afegir punt de pas (corba)</MenuItem>
+                    {sep}
+                  </>)}
+                  {el.kind === 'via-lliure' && (<>
+                    <MenuItem onClick={() => { setEditPathNodes(editPathNodes === el.id ? null : el.id); setMenu(null); }}>
+                      {editPathNodes === el.id ? '✅ Acabar edició de punts' : '✏️ Editar punts de la via'}
+                    </MenuItem>
+                    <MenuItem onClick={() => {
+                      // Afegeix un punt al mig del darrer segment.
+                      const pts = el.points ?? [];
+                      if (pts.length < 4) { setMenu(null); return; }
+                      const n = pts.length;
+                      const mx = (pts[n - 4] + pts[n - 2]) / 2, my = (pts[n - 3] + pts[n - 1]) / 2;
+                      pushUndo();
+                      setEls((p) => p.map((x) => (x.id === el.id ? { ...x, points: [...pts.slice(0, n - 2), mx, my, pts[n - 2], pts[n - 1]] } : x)));
+                      setMenu(null); setEditPathNodes(el.id);
+                    }}>➕ Afegir punt al final</MenuItem>
                     {sep}
                   </>)}
                   <MenuItem onClick={() => { duplicate(); setMenu(null); }}>Duplicar</MenuItem>
