@@ -5,8 +5,10 @@
   "icono": "🪪",
   "base_legal": [
     "Reglament General de Conductors (RD 818/2009)",
-    "Art. 76.G TRLSV",
-    "Art. 384 CP"
+    "Art. 21 i 22 RGCond — Permís UE/EEE",
+    "Art. 15 i Annex VII RGCond — Permís de tercers països",
+    "Art. 384 CP",
+    "Convenis bilaterals de bescanvi DGT (BOE)"
   ],
   "terminis_caducitat_permis": {
     "AM_A1_A2_A_B_BE": "10 anys (fins 65 anys) / 5 anys (a partir 65)",
@@ -19,6 +21,13 @@
     "retirat_judicialment": "PENAL (Art. 384 CP)",
     "mai_obtingut": "PENAL (Art. 384 CP) si vehicle requereix permís"
   },
+  "paisos_conveni_bilateral_dgt": {
+    "europa_no_ue": "Suïssa, Andorra, Sèrbia, Mònaco, Macedònia del Nord, Regne Unit (post-Brexit)",
+    "america_llatina": "Argentina, Bolívia, Brasil, Colòmbia, Equador, El Salvador, Guatemala, Hondures, Mèxic, Nicaragua, Panamà, Paraguai, Perú, R. Dominicana, Uruguai, Veneçuela, Xile",
+    "altres": "Algèria, Marroc, Tunísia, Filipines, Japó, Corea del Sud, Qatar, Ucraïna, Turquia",
+    "nota": "Llista no exhaustiva. Sempre cal CONSULTAR DGT/BOE per l'estat actual del conveni."
+  },
+  "permis_internacional": "El Permís Internacional de Conducció (1949/1968) NO substitueix el permís nacional: és una traducció oficial. Cal portar SEMPRE tots dos a sobre i només val 1 any des de l'entrada a Espanya. No serveix per a residents (han de fer canje).",
   "inici": "situacio",
   "nodes": {
 
@@ -29,8 +38,7 @@
         { "etiqueta": "Vigent i adequat al vehicle",                                "va_a": "fi_ok_permis" },
         { "etiqueta": "Permís caducat (administrativa)",                            "va_a": "fi_caducat" },
         { "etiqueta": "Permís que no habilita pel vehicle (classe inadequada)",     "va_a": "fi_classe_inadequada" },
-        { "etiqueta": "Permís estranger sense canviar (>6 mesos)",                  "va_a": "fi_estranger" },
-        { "etiqueta": "Permís UE/EEE (sempre vàlid)",                              "va_a": "fi_ok_permis" },
+        { "etiqueta": "Permís estranger (necessita comprovació pas a pas)",         "va_a": "estranger_origen" },
         { "etiqueta": "MAI no ha obtingut permís",                                  "va_a": "fi_penal_384_mai" },
         { "etiqueta": "Pèrdua TOTAL de punts (notificada i ferma)",                "va_a": "fi_penal_384_punts" },
         { "etiqueta": "Permís suspès cautelarment (no ferm)",                      "va_a": "fi_suspes_cautelar" },
@@ -100,19 +108,191 @@
       ]
     },
 
-    "fi_estranger": {
+    "estranger_origen": {
+      "titol": "Permís estranger · Pas 1 — Origen",
+      "text": "Quin és l'origen del permís que presenta?",
+      "checklist_previ": [
+        "Demanar el permís FÍSIC original (no fotocòpies).",
+        "Anotar tipus, número, classe, autoritat expedidora i data d'expedició / caducitat.",
+        "Si presenta Permís Internacional (PIC 1949/1968): NO substitueix el nacional, és una traducció. Cal el nacional a sobre."
+      ],
+      "opcions": [
+        { "etiqueta": "UE / EEE / Suïssa", "va_a": "estranger_ue" },
+        { "etiqueta": "Tercer país AMB conveni bilateral (Llatinoamèrica, Marroc, Suïssa…)", "va_a": "estranger_conveni" },
+        { "etiqueta": "Tercer país SENSE conveni bilateral", "va_a": "estranger_sense_conveni" },
+        { "etiqueta": "No presenta cap permís físic acreditatiu", "va_a": "fi_estranger_no_acredita" }
+      ]
+    },
+
+    "estranger_ue": {
+      "titol": "Permís UE/EEE · Pas 2 — Validesa",
+      "text": "Quina és la situació del permís UE/EEE?",
+      "info_clau": "Un permís UE/EEE és vàlid a Espanya sempre que sigui vigent al país d'origen. Si el titular és RESIDENT a Espanya: ha de RENOVAR a la DGT espanyola en arribar a la caducitat (Art. 21 RGCond). NO cal canjear.",
+      "opcions": [
+        { "etiqueta": "Vigent al país d'origen", "va_a": "fi_ok_permis" },
+        { "etiqueta": "CADUCAT al país d'origen", "va_a": "fi_caducat" },
+        { "etiqueta": "Resident a Espanya >2 anys i permís UE caducat (cal renovar a DGT)", "va_a": "fi_ue_no_renova" }
+      ]
+    },
+
+    "estranger_conveni": {
+      "titol": "Tercer país AMB conveni · Pas 2 — Termini de residència",
+      "text": "Quants mesos fa que va establir la residència a Espanya?",
+      "info_clau": "Amb conveni bilateral pot CANJEAR el permís per l'espanyol equivalent SENSE EXAMEN (només prova mèdica). Té 6 mesos des de l'empadronament per fer el canvi.",
+      "checklist_previ": [
+        "Comprovar empadronament (volant) o TIE per saber des de quan és resident.",
+        "Comprovar la classe del permís: la majoria de convenis només permeten B i A (no professional).",
+        "Si encara és turista (no resident): vàlid fins a 6 mesos sense canje."
+      ],
+      "opcions": [
+        { "etiqueta": "Encara NO és resident (turista, <6 mesos a Espanya)", "va_a": "fi_estranger_turista" },
+        { "etiqueta": "Resident i DINS els 6 mesos de gràcia", "va_a": "fi_estranger_gracia" },
+        { "etiqueta": "Resident i FORA del termini (>6 mesos sense canje)", "va_a": "fi_estranger_no_canje" },
+        { "etiqueta": "Ha tramitat el canje (té resguard de la DGT)", "va_a": "fi_estranger_resguard" }
+      ]
+    },
+
+    "estranger_sense_conveni": {
+      "titol": "Tercer país SENSE conveni · Pas 2 — Termini",
+      "text": "Quants mesos fa que va establir la residència a Espanya?",
+      "info_clau": "Sense conveni bilateral NO es pot canjear: el conductor ha d'obtenir el permís espanyol passant l'EXAMEN complet (teòric i pràctic) a la DGT, com un alumne nou. Té 6 mesos de gràcia des de la residència per circular amb el seu permís.",
+      "checklist_previ": [
+        "Comprovar empadronament/TIE.",
+        "Si turista: el seu permís és vàlid SEMPRE QUE sigui vigent al país d'origen i s'acrediti.",
+        "Si resident >6 mesos: el permís estranger JA NO és vàlid per circular. Cal permís espanyol obtingut per examen."
+      ],
+      "opcions": [
+        { "etiqueta": "Turista (<6 mesos a Espanya)", "va_a": "fi_estranger_turista" },
+        { "etiqueta": "Resident i DINS els 6 mesos de gràcia", "va_a": "fi_estranger_gracia_no_conveni" },
+        { "etiqueta": "Resident i FORA del termini (>6 mesos) sense examen DGT", "va_a": "fi_estranger_no_examen" }
+      ]
+    },
+
+    "fi_estranger_turista": {
+      "final": true,
+      "tipus": "ok",
+      "titol": "✅ Vàlid — Turista amb permís estranger",
+      "info": "Mentre la persona no sigui resident, el seu permís nacional vigent és vàlid a Espanya per a turismes i motocicletes (no professional). Pot circular fins a 6 mesos des de la primera entrada al país.",
+      "requisits_clau": [
+        "Permís vigent al país d'origen.",
+        "Còpia del passaport o document d'identitat estranger a sobre.",
+        "Si és en idioma no llatí o no oficial UE: convé portar PIC o traducció jurada.",
+        "<6 mesos des de l'entrada a Espanya."
+      ],
+      "accions_operatives": [
+        "Comprovar segells d'entrada / TIE-NIE / empadronament.",
+        "Si tot OK: deixar circular. SENSE butlletí.",
+        "Si dubtes raonables d'autenticitat: contacta amb Sala / Estrangeria."
+      ]
+    },
+
+    "fi_estranger_gracia": {
+      "final": true,
+      "tipus": "ok",
+      "titol": "✅ Vàlid — Resident dins els 6 mesos (conveni)",
+      "info": "Els residents amb permís de país amb conveni bilateral disposen de 6 mesos des de l'empadronament per fer el bescanvi a la DGT. Mentrestant poden conduir.",
+      "accions_ordenades": [
+        "1. Anotar a la base de dades l'inici de la residència (per a futures comprovacions).",
+        "2. RECORDAR al conductor: ha d'iniciar el tràmit de bescanvi a la seu electrònica de la DGT abans dels 6 mesos.",
+        "3. Documentació necessària per al canje: imprès oficial, permís original, NIE/TIE, fotografia, taxa, prova mèdica (CRC autoritzat).",
+        "4. SENSE butlletí — només advertència informativa."
+      ]
+    },
+
+    "fi_estranger_gracia_no_conveni": {
+      "final": true,
+      "tipus": "avis",
+      "titol": "⚠️ Vàlid — Resident dins els 6 mesos (sense conveni)",
+      "info": "Els 6 primers mesos pot circular amb el seu permís estranger encara que NO hi hagi conveni. Però per continuar conduint passats els 6 mesos haurà d'obtenir el permís espanyol PER EXAMEN (no hi ha canje).",
+      "accions_ordenades": [
+        "1. Avisar el conductor: sense conveni → no es pot canjear, cal examen complet a la DGT.",
+        "2. Recordar que ha d'inscriure's a una autoescola i superar teòric i pràctic ABANS dels 6 mesos.",
+        "3. SENSE butlletí — només advertència."
+      ]
+    },
+
+    "fi_estranger_resguard": {
+      "final": true,
+      "tipus": "ok",
+      "titol": "✅ Vàlid — Canje en tràmit (resguard DGT)",
+      "info": "Si el conductor presenta el resguard del tràmit de canje (volant de la DGT), pot circular fins que se li expedeixi el permís espanyol. La validesa és la que figuri al resguard.",
+      "accions_operatives": [
+        "Comprovar la data de validesa del resguard.",
+        "Verificar a la base de dades de la DGT que el tràmit existeix.",
+        "Si tot OK: deixar circular."
+      ]
+    },
+
+    "fi_estranger_no_canje": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ GREU — Permís estranger no canviat",
+      "titol": "⚠️ GREU — Resident >6 mesos sense fer el canje (conveni)",
       "concepte_butlleta": "Conduir el vehicle ressenyat amb una autorització que no té validesa a Espanya per no haver sol·licitat la seva renovació a la Prefectura Provincial de Trànsit",
       "article_butlleta": "Art. 15.4 RG Conductors",
       "import": "200 € (DTE 100 €)",
       "punts": "0",
-      "info": "Permisos UE/EEE sempre vàlids. Permisos extracomunitaris: 6 mesos de gràcia des de l'establiment de la residència. Convenis bilaterals (Suïssa, Andorra, Argentina, etc.): canvi possible sense examen.",
+      "info_clau": "Aquesta és la infracció clàssica del 'permís estranger sense bescanvi'. Encara que el conveni li permetia canjear sense examen, ha deixat passar els 6 mesos.",
+      "accions_ordenades": [
+        "1. Comprovar a la DGT que NO té sol·licitud de canje en curs (si la tingués: fi_estranger_resguard).",
+        "2. BUTLLETÍ Art. 15.4 RGCond.",
+        "3. Immobilització possible si no hi ha conductor sustitut amb permís vàlid.",
+        "4. Indicar al conductor que ha d'iniciar el canje immediatament a la seu electrònica de la DGT.",
+        "5. Comprovar la classe del permís: si conduïa un vehicle no inclòs al conveni (ex: camió quan el conveni només permet B), passa a fi_classe_inadequada."
+      ]
+    },
+
+    "fi_estranger_no_examen": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "🔴 MOLT GREU — Resident >6 mesos sense permís espanyol (sense conveni)",
+      "concepte_butlleta": "Conduir un vehicle de motor o un ciclomotor sense estar legalment habilitat per fer-ho, en haver caducat la validesa del permís estranger als 6 mesos de residència sense haver obtingut el permís espanyol per via d'examen",
+      "article_butlleta": "Art. 1.1 RG Conductors",
+      "import": "500 € (DTE 250 €)",
+      "punts": "0",
+      "info_clau": "Sense conveni bilateral, passats els 6 mesos el permís estranger PERD VALIDESA i la persona es considera, a efectes pràctics, sense permís a Espanya. Aquí entra el debat si encaixa a Art. 384 CP (mai obtingut). Criteri general dels jutjats: NO és penal mentre tingui un permís estranger vigent (és sanció administrativa); SÍ podria ser penal si el seu permís estranger també està caducat o anul·lat al país d'origen.",
+      "accions_ordenades": [
+        "1. BUTLLETÍ Art. 1.1 RGCond (500€, sense punts).",
+        "2. IMMOBILITZACIÓ del vehicle: no pot continuar conduint-lo.",
+        "3. Buscar conductor sustitut amb permís vàlid o grua.",
+        "4. Comprovar permís estranger: si està caducat o és fals → atestat per Art. 384 CP.",
+        "5. Informar Estrangeria si hi ha indicis d'irregularitat administrativa."
+      ],
+      "concepte_butlleta_paral·lel": "Si el permís estranger també està caducat o anul·lat → tractar com a 'mai no ha obtingut' (Art. 384 CP)."
+    },
+
+    "fi_estranger_no_acredita": {
+      "final": true,
+      "tipus": "penal",
+      "titol": "🚔 DELICTE — No pot acreditar cap permís",
+      "concepte_butlleta_paral·lel": "Conduir un vehicle a motor sense haver obtingut mai permís o llicència",
+      "article_paralel_admin": "Art. 1.1 RG Conductors (paral·lela MG 500€)",
+      "pena": "Art. 384 CP — Presó 3-6 mesos O multa 12-24 mesos O TBC 31-90 dies",
+      "info_clau": "Si el conductor no porta el permís físic A SOBRE però pot acreditar a la DGT que SÍ en té: és Art. 3.2 RGCond (lleu, 80€). Si NO consta a cap base de dades cap permís a nom seu, és Art. 384 CP. La diferència és si es POT acreditar o NO l'existència del permís.",
+      "accions_ordenades": [
+        "1. Identificació completa (DNI/NIE/passaport, foto, empremta si cal).",
+        "2. Consulta exhaustiva a DGT i a INTERPOL/SIRENE per si té permís a tercer país.",
+        "3. Si confirma que TÉ permís al seu país però no el porta: Art. 3.2 RGCond (lleu) i citació.",
+        "4. Si confirma que NO consta cap permís: Art. 384 CP (detenció o citació segons cas).",
+        "5. Lectura de drets (Art. 520 LECrim) si detenció.",
+        "6. INTERVENCIÓ i immobilització del vehicle.",
+        "7. Atestat penal + posada a disposició Jutjat de Guàrdia."
+      ],
+      "competencia": "Jutjat Instrucció Guàrdia"
+    },
+
+    "fi_ue_no_renova": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "⚠️ GREU — Resident amb UE caducat sense renovar a la DGT",
+      "concepte_butlleta": "Conduir un vehicle amb l'autorització administrativa caducada",
+      "article_butlleta": "Art. 12.4 RG Conductors",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
+      "info_clau": "Els residents amb permís UE caducat han de RENOVAR a la DGT (no canjear). El procediment és com el d'un permís espanyol caducat.",
       "accions_operatives": [
-        "Butlletí",
-        "Immobilització possible si no pot acreditar permís vàlid",
-        "Indicar tràmit a Prefectura DGT"
+        "Butlletí Art. 12.4 RGCond.",
+        "Immobilització possible si no hi ha conductor sustitut.",
+        "Indicar que ha de renovar a la seu electrònica de la DGT."
       ]
     },
 
