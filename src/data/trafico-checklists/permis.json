@@ -138,7 +138,7 @@
     "estranger_conveni": {
       "titol": "Tercer país AMB conveni · Pas 2 — Termini de residència",
       "text": "Quants mesos fa que va establir la residència a Espanya?",
-      "info_clau": "Amb conveni bilateral pot CANJEAR el permís per l'espanyol equivalent SENSE EXAMEN (només prova mèdica). Té 6 mesos des de l'empadronament per fer el canvi.",
+      "info_clau": "Amb conveni bilateral pot CANJEAR el permís per l'espanyol equivalent SENSE EXAMEN (només prova mèdica). Té 6 mesos des de l'empadronament per fer el canvi. Passats els 6 mesos sense canje, el permís perd validesa per circular a Espanya → Art. 1.1 RGCond (500€, no és l'Art. 15.4 que és per a comunitaris).",
       "checklist_previ": [
         "Comprovar empadronament (volant) o TIE per saber des de quan és resident.",
         "Comprovar la classe del permís: la majoria de convenis només permeten B i A (no professional).",
@@ -226,41 +226,42 @@
     "fi_estranger_no_canje": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ GREU — Resident >6 mesos sense fer el canje (conveni)",
-      "concepte_butlleta": "Conduir el vehicle ressenyat amb una autorització que no té validesa a Espanya per no haver sol·licitat la seva renovació a la Prefectura Provincial de Trànsit",
-      "article_butlleta": "Art. 15.4 RG Conductors",
-      "import": "200 € (DTE 100 €)",
+      "titol": "🔴 MOLT GREU — Resident extracomunitari >6 mesos sense fer el canje (conveni)",
+      "concepte_butlleta": "Conduir un vehicle de motor o un ciclomotor amb un permís o llicència que no l'habilita per fer-ho, en haver deixat de tenir validesa a Espanya el permís estranger després dels 6 mesos de residència sense haver tramitat el canje a la DGT",
+      "article_butlleta": "Art. 1.1 RG Conductors",
+      "import": "500 € (DTE 250 €)",
       "punts": "0",
-      "info_clau": "Aquesta és la infracció clàssica del 'permís estranger sense bescanvi'. Encara que el conveni li permetia canjear sense examen, ha deixat passar els 6 mesos.",
+      "info_clau": "El permís estranger d'un tercer país (encara que hi hagi conveni de bescanvi) PERD VALIDESA per circular a Espanya passats els 6 mesos des de l'empadronament si no s'ha sol·licitat el canje. Es considera que condueix amb un permís que no l'habilita. NOTA: el bloc del catàleg SCT 'PERMISOS DE CONDUIR COMUNITARIS' (Art. 15.4, 200€) es refereix a permisos UE/EEE, no als extracomunitaris.",
       "accions_ordenades": [
-        "1. Comprovar a la DGT que NO té sol·licitud de canje en curs (si la tingués: fi_estranger_resguard).",
-        "2. BUTLLETÍ Art. 15.4 RGCond.",
-        "3. Immobilització possible si no hi ha conductor sustitut amb permís vàlid.",
-        "4. Indicar al conductor que ha d'iniciar el canje immediatament a la seu electrònica de la DGT.",
-        "5. Comprovar la classe del permís: si conduïa un vehicle no inclòs al conveni (ex: camió quan el conveni només permet B), passa a fi_classe_inadequada."
+        "1. Comprovar a la DGT que NO té sol·licitud de canje en curs (si la tingués → resguard, vàlid per circular).",
+        "2. BUTLLETÍ Art. 1.1 RG Conductors (MG, 500€).",
+        "3. IMMOBILITZACIÓ del vehicle: no pot continuar conduint-lo.",
+        "4. Buscar conductor sustitut amb permís vàlid o grua.",
+        "5. Comprovar VIGÈNCIA del permís estranger al país d'origen: si està caducat o anul·lat → escalar a Art. 384 CP (delicte penal).",
+        "6. Indicar al conductor que ha d'iniciar el canje immediatament a la seu electrònica de la DGT."
       ]
     },
 
     "fi_estranger_no_examen": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ GREU — Resident >6 mesos sense permís espanyol (sense conveni)",
-      "concepte_butlleta": "Conduir el vehicle ressenyat amb una autorització que no té validesa a Espanya per no haver sol·licitat la seva renovació a la Prefectura Provincial de Trànsit",
-      "article_butlleta": "Art. 15.4 RG Conductors",
-      "import": "200 € (DTE 100 €)",
+      "titol": "🔴 MOLT GREU — Resident extracomunitari >6 mesos sense permís espanyol (sense conveni)",
+      "concepte_butlleta": "Conduir un vehicle de motor o un ciclomotor amb un permís o llicència que no l'habilita per fer-ho, en haver caducat la validesa del permís estranger als 6 mesos de residència sense haver obtingut el permís espanyol per via d'examen",
+      "article_butlleta": "Art. 1.1 RG Conductors",
+      "import": "500 € (DTE 250 €)",
       "punts": "0",
-      "info_clau": "Tot i que sense conveni el canje no és possible (caldria examen), MENTRE EL PERMÍS ESTRANGER SIGUI VIGENT al país d'origen la denúncia administrativa correcta és Art. 15.4 RGCond (200€), igual que al cas amb conveni. La doctrina majoritària de la DGT no aplica aquí l'Art. 1.1 RGCond (500€), perquè aquest darrer és per a permisos que NO HABILITEN per a aquell tipus de vehicle.",
+      "info_clau": "Sense conveni bilateral el conductor només pot obtenir el permís espanyol PER EXAMEN complet (no hi ha canje). Passats els 6 mesos de residència sense haver-lo obtingut, el seu permís estranger deixa de ser vàlid per circular a Espanya i s'aplica Art. 1.1 RGCond (MG 500€). Si el permís estranger també està caducat o anul·lat → s'escala a Art. 384 CP (delicte).",
       "qual_es_qual": [
-        "✅ 15.4 RGCond (200€ greu): permís estranger VIGENT al seu país però sense canje/convalidació espanyola.",
-        "🔴 1.1 RGCond (500€ molt greu): permís de classe INSUFICIENT per al vehicle (B per camió, A1 per moto gran…).",
-        "🔴 25.1 RGCond (500€ molt greu): permís UE/EEE caducat sense renovar a la DGT espanyola.",
-        "🚔 Art. 384 CP (penal): permís estranger CADUCAT o ANUL·LAT al país d'origen, o que mai no n'ha tret cap."
+        "🇪🇺 15.4 RGCond (200€ greu) — NOMÉS per a permisos COMUNITARIS (UE/EEE): residents que no han sol·licitat la renovació/registre a la Prefectura. NO s'aplica a permisos extracomunitaris.",
+        "🌍 1.1 RGCond (500€ molt greu) — Permís EXTRACOMUNITARI passats els 6 mesos sense canje/examen, o permís de classe insuficient per al vehicle (B per camió, A1 per moto gran…).",
+        "🇪🇺 25.1 RGCond (500€ molt greu) — Permís UE/EEE caducat sense renovar a la DGT espanyola.",
+        "🚔 Art. 384 CP (delicte penal) — Permís estranger CADUCAT o ANUL·LAT al país d'origen, o que mai no n'ha tret cap."
       ],
       "accions_ordenades": [
-        "1. BUTLLETÍ Art. 15.4 RGCond (200€, sense punts).",
-        "2. Comprovar la VIGÈNCIA del permís estranger al país d'origen (data caducitat al document; consulta SIRENE/Interpol si dubte). Si està CADUCAT o anul·lat → escalar a Art. 384 CP.",
-        "3. Comprovar la classe del permís: si conduïa un vehicle no inclòs (ex: camió amb B estranger) → escalar a Art. 1.1 RGCond (500€).",
-        "4. IMMOBILITZACIÓ del vehicle: el permís estranger ha perdut validesa per circular aquí; cal un conductor sustitut amb permís vàlid o grua.",
+        "1. BUTLLETÍ Art. 1.1 RG Conductors (MG, 500€).",
+        "2. IMMOBILITZACIÓ del vehicle: no pot continuar conduint-lo.",
+        "3. Buscar conductor sustitut amb permís vàlid o grua.",
+        "4. Comprovar la VIGÈNCIA del permís estranger al país d'origen (data caducitat al document; consulta SIRENE/Interpol si dubte). Si està CADUCAT o anul·lat → escalar a Art. 384 CP.",
         "5. Advertir el conductor: sense conveni, només pot obtenir permís espanyol per EXAMEN complet a la DGT.",
         "6. Informar Estrangeria si hi ha indicis d'irregularitat administrativa."
       ]
