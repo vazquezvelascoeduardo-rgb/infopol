@@ -54,6 +54,8 @@ export default function Icon({ name, size = 22, color = 'currentColor', strokeWi
     case 'wifi': return <svg {...common}><path d="M2 8.5a13 13 0 0 1 20 0"/><path d="M6 12.5a7 7 0 0 1 12 0"/><path d="M10 16.5a3 3 0 0 1 4 0"/><circle cx="12" cy="20" r="1" fill={color}/></svg>;
     case 'battery': return <svg {...common}><rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 11v2"/><rect x="4" y="9" width="12" height="6" rx="1" fill={color} stroke="none"/></svg>;
     case 'signal': return <svg {...common}><rect x="2" y="16" width="3" height="6" rx="1" fill={color} stroke="none"/><rect x="7" y="12" width="3" height="10" rx="1" fill={color} stroke="none"/><rect x="12" y="8" width="3" height="14" rx="1" fill={color} stroke="none"/><rect x="17" y="4" width="3" height="18" rx="1" fill={color} stroke="none"/></svg>;
+    case 'newspaper': return <svg {...common}><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h7"/></svg>;
+    case 'globe': return <svg {...common}><circle cx="12" cy="12" r="9"/><path d="M12 3c-2 3-2 18 0 18M12 3c2 3 2 18 0 18M3 9h18M3 15h18"/></svg>;
     default: return <svg {...common}><circle cx="12" cy="12" r="9"/></svg>;
   }
 }

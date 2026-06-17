@@ -1,0 +1,43 @@
+name: Actualització diària de notícies
+
+# Executa cada dia a les 21:00 UTC = 22:00 CET (hivern) / 23:00 CEST (estiu)
+# Per activar manualment: GitHub → Actions → "Actualització diària de notícies" → Run workflow
+on:
+  schedule:
+    - cron: '0 21 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch and update news
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/fetch-news.js
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name 'InfoPol News Bot'
+          git config user.email 'infopol-bot@users.noreply.github.com'
+          git add src/data/noticias.js
+          if ! git diff --staged --quiet; then
+            git commit -m "news: actualització $(date -u +%Y-%m-%d)"
+            git push
+            echo "✓ Notícies publicades"
+          else
+            echo "Sense canvis, res a publicar"
+          fi

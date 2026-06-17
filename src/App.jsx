@@ -12,6 +12,8 @@ import ScreenFitxa from './screens/operativa/ScreenFitxa';
 import ScreenProtocol from './screens/operativa/ScreenProtocol';
 import ScreenMapa from './screens/operativa/ScreenMapa';
 
+import ScreenNoticias from './screens/ScreenNoticias';
+
 import ScreenAcademiaHome from './screens/academia/ScreenAcademiaHome';
 import ScreenTemari from './screens/academia/ScreenTemari';
 import ScreenTest from './screens/academia/ScreenTest';
@@ -87,6 +89,7 @@ export default function App() {
         <Route path="fisiques" element={<ScreenFisiques />} />
       </Route>
       <Route path="/perfil" element={<ScreenPerfil />} />
+      <Route path="/noticias" element={<ScreenNoticias />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
