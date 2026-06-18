@@ -11,6 +11,7 @@ import ScreenInfraccions from './screens/operativa/ScreenInfraccions';
 import ScreenFitxa from './screens/operativa/ScreenFitxa';
 import ScreenProtocol from './screens/operativa/ScreenProtocol';
 import ScreenMapa from './screens/operativa/ScreenMapa';
+import ScreenNoticies from './screens/operativa/ScreenNoticies';
 
 import ScreenAcademiaHome from './screens/academia/ScreenAcademiaHome';
 import ScreenTemari from './screens/academia/ScreenTemari';
@@ -20,11 +21,11 @@ import ScreenStats from './screens/academia/ScreenStats';
 import ScreenFisiques from './screens/academia/ScreenFisiques';
 
 const OP_TABS = [
-  { id: 'home', label: 'Inici', icon: 'home', path: '/operativa' },
-  { id: 'leyes', label: 'Lleis', icon: 'scale', path: '/operativa/infraccions' },
-  { id: 'protocol', label: 'Protocols', icon: 'route', path: '/operativa/protocol' },
-  { id: 'mapa', label: 'Mapa', icon: 'map', path: '/operativa/mapa' },
-  { id: 'me', label: 'Tu', icon: 'user', path: '/perfil?from=op' },
+  { id: 'home',     label: 'Inici',     icon: 'home',      path: '/operativa' },
+  { id: 'leyes',    label: 'Lleis',     icon: 'scale',     path: '/operativa/infraccions' },
+  { id: 'protocol', label: 'Protocols', icon: 'route',     path: '/operativa/protocol' },
+  { id: 'noticies', label: 'Notícies',  icon: 'newspaper', path: '/operativa/noticies' },
+  { id: 'me',       label: 'Tu',        icon: 'user',      path: '/perfil?from=op' },
 ];
 
 const AC_TABS = [
@@ -41,7 +42,7 @@ function OperativaShell() {
   let active = 'home';
   if (p.includes('/infraccions')) active = 'leyes';
   else if (p.includes('/protocol')) active = 'protocol';
-  else if (p.includes('/mapa')) active = 'mapa';
+  else if (p.includes('/noticies')) active = 'noticies';
   return (
     <>
       <Outlet />
@@ -77,6 +78,7 @@ export default function App() {
         <Route path="protocol" element={<ScreenProtocol />} />
         <Route path="protocol/:id" element={<ScreenProtocol />} />
         <Route path="mapa" element={<ScreenMapa />} />
+        <Route path="noticies" element={<ScreenNoticies />} />
       </Route>
       <Route path="/academia" element={<AcademiaShell />}>
         <Route index element={<ScreenAcademiaHome />} />

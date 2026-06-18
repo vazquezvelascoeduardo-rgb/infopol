@@ -1,0 +1,106 @@
+name: Actualització Diària de Notícies
+
+on:
+  schedule:
+    - cron: '0 20 * * *'   # 22:00 CEST (UTC+2) / 21:00 CET (UTC+1)
+  workflow_dispatch:         # Permet execució manual des de GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repositori
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
+
+      - name: Actualitzar notícies amb Claude Code
+        uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          allowed_tools: "WebSearch,WebFetch,Read,Edit,Write,Bash"
+          prompt: |
+            Your task is to update the daily news in the InfoPol app.
+            Today's date is: $(date +%Y-%m-%d)
+
+            ## What to do
+
+            1. Search for today's top news in Catalan, Spanish and international media.
+            2. Read the current file: src/data/news.js
+            3. Add the new news items AT THE BEGINNING of the NEWS array.
+            4. Remove any items with a date older than 30 days from today.
+            5. Write the updated file.
+            6. Commit and push.
+
+            ## News categories (use exactly these keys)
+            - `normatiu`      → Legislative/regulatory changes (BOE, DOGC, circulars)
+            - `politica`      → Politics (Catalonia, Spain, international)
+            - `economia`      → Economy, finance, business
+            - `cultura`       → Culture, arts, society, gastronomy, heritage
+            - `descobriments` → Science, technology, discoveries, prizes, awards
+            - `esports`       → Sports (football, tennis, athletics, etc.)
+            - `successos`     → Crime, police operations, court rulings, legal news
+            - `internacional` → International news not covered above
+
+            ## Scope (use exactly these keys)
+            - `cat` → Catalonia
+            - `esp` → Spain (excluding Catalonia)
+            - `int` → International
+
+            ## Required format for each news item
+            ```js
+            {
+              id: 'n-YYYYMMDD-NNN',   // NNN = 001, 002, 003...
+              date: 'YYYY-MM-DD',
+              dateLabel: 'DD·MM',      // e.g. '18·06'
+              cat: 'politica',         // one of the categories above
+              scope: 'cat',            // one of: cat, esp, int
+              tag: 'Source / Label',   // short source or topic tag (e.g. 'El País', 'Barça', 'BOE')
+              title: 'Headline in Catalan',
+              desc: 'Brief summary in Catalan. 2-3 sentences maximum. Objective, no opinion.',
+              url: 'https://...',      // link to the original article, or null if unavailable
+            }
+            ```
+
+            ## Minimum coverage required
+            Search for and include at least:
+            - 3 items from Catalonia (cat): 1 politics/normatiu, 1 successos or cultura, 1 any
+            - 3 items from Spain (esp): 1 politics/economia, 1 any, 1 any
+            - 2 items international (int): 1 any, 1 any
+            - 1 sports item (esports) from any scope
+            - 1 science/discovery item (descobriments) from any scope
+            Total: aim for 10–20 items maximum.
+
+            ## Web search queries to use
+            Run these searches to find news (use today's date):
+            1. "notícies Catalunya avui" OR "noticias Cataluña hoy"
+            2. "noticias España política hoy"
+            3. "noticias España economia hoy"
+            4. "noticias policiales España hoy"
+            5. "Barça" OR "esports Catalunya avui"
+            6. "news today international"
+            7. "ciència descobriments premis avui" OR "science discovery today"
+            8. "BOE DOGC avui" (for normatiu category)
+
+            ## Git commit
+            After updating the file, run:
+            ```
+            git config user.name "InfoPol Bot"
+            git config user.email "bot@infopol.cat"
+            git add src/data/news.js
+            git commit -m "feat: notícies $(date +%Y-%m-%d)"
+            git push origin main
+            ```
+
+            ## Important rules
+            - Write all titles and descriptions in Catalan (ca).
+            - Keep descriptions neutral and factual, no opinion or commentary.
+            - Do NOT include duplicate news (check existing IDs).
+            - The NEWS_CATS and NEWS_CATS imports/exports in the file must remain unchanged.
+            - Keep only the last 30 days of news to avoid file bloat.
+            - Use real URLs when available; set url to null if uncertain.
