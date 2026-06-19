@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
@@ -48,8 +49,54 @@ const NEWS = [
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
 
+const TAG_COLORS = {
+  'Internacional':       { bg: '#E8F0FE', fg: '#1A3B8C' },
+  'Esports · Mundial 2026': { bg: '#E6F9F0', fg: '#0B5A3D' },
+  'Política · Catalunya':{ bg: '#FBE7C2', fg: '#6B3F08' },
+  'Política · Espanya':  { bg: '#FBE7C2', fg: '#6B3F08' },
+  'Economia':            { bg: '#CCEEF1', fg: '#0A4F56' },
+  'Premis · Ciència':    { bg: '#EBDAFB', fg: '#4A1B7A' },
+  'Policial · Catalunya':{ bg: '#FBDADC', fg: '#7A1B22' },
+  'Cultura · Ciència':   { bg: '#FCF0B8', fg: '#5C4400' },
+};
+
+function NoticiaCard({ n }) {
+  const colors = TAG_COLORS[n.tag] || { bg: T.cat.operativa.soft, fg: T.cat.operativa.ink };
+  return (
+    <a
+      href={n.url || '#'}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ textDecoration: 'none', display: 'block', background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `3px solid ${colors.fg}`, boxShadow: T.shadow.card }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 5 }}>
+        <span style={{ fontSize: 9.5, fontWeight: 800, color: colors.fg, background: colors.bg, padding: '2px 7px', borderRadius: 999, letterSpacing: 0.4, textTransform: 'uppercase' }}>
+          {n.tag}
+        </span>
+        <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.dateLabel}</span>
+      </div>
+      <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+      <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+      {n.url && (
+        <div style={{ marginTop: 6, fontSize: 11, color: T.cat.operativa.solid, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 4 }}>
+          Llegir més <Icon name="arrow-right" size={12} color={T.cat.operativa.solid} />
+        </div>
+      )}
+    </a>
+  );
+}
+
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
+  const [noticias, setNoticias] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/noticias')
+      .then(r => r.json())
+      .then(setNoticias)
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="screen">
       <StatusBar />
@@ -136,6 +183,16 @@ export default function ScreenOperativaHome() {
           ))}
         </div>
       </div>
+
+      {/* Noticias generals */}
+      {noticias.length > 0 && (
+        <div style={{ padding: '18px 0 24px' }}>
+          <SectionHead kicker="Noticias" kickerColor={T.cat.leyes.solid} title="Actualitat general" action="Tot →" />
+          <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {noticias.map(n => <NoticiaCard key={n.id} n={n} />)}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
