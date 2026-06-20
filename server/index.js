@@ -2,6 +2,7 @@ import express from 'express';
 import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { readFileSync } from 'fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -111,7 +112,12 @@ app.put('/api/user', (req, res) => {
 });
 
 app.get('/api/news', (req, res) => {
-  res.json(NEWS);
+  try {
+    const raw = readFileSync(join(__dirname, 'data/news.json'), 'utf-8');
+    res.json(JSON.parse(raw));
+  } catch {
+    res.json(NEWS);
+  }
 });
 
 app.get('/api/stats', (req, res) => {

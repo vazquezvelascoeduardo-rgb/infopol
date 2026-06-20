@@ -1,0 +1,112 @@
+[
+  {
+    "id": "n009",
+    "date": "2026-06-20",
+    "dateLabel": "06·20",
+    "cat": "internacional",
+    "tag": "Internacional",
+    "scope": "internacional",
+    "title": "Iran tanca l'estret d'Ormuz en resposta als atacs d'Israel al Líban",
+    "desc": "Les forces armades iranianes han bloquejat el pas als vaixells comercials al·legant violacions del pacte de pau per part d'EUA i Israel. El tancament afecta el trànsit de petroli a escala mundial.",
+    "url": "https://es.wikipedia.org/wiki/Crisis_del_estrecho_de_Ormuz_de_2026"
+  },
+  {
+    "id": "n010",
+    "date": "2026-06-20",
+    "dateLabel": "06·20",
+    "cat": "esports",
+    "tag": "Mundial 2026",
+    "scope": "espanya",
+    "title": "Espanya s'enfronta a l'Aràbia Saudita amb necessitat de victòria al Grup H",
+    "desc": "Après empatar 0-0 contra Cap Verd en el debut, la selecció espanyola busca els tres punts el 21 de juny a Atlanta. La derrota deixaria Espanya en situació compromesa.",
+    "url": "https://www.eldebate.com/deportes/mundial-futbol-2026/20260619/hora-juega-espana-contra-arabia-saudi-mundial-2026-donde-ver-partido-cns_430365.html"
+  },
+  {
+    "id": "n008",
+    "date": "2026-06-18",
+    "dateLabel": "06·18",
+    "cat": "cultura",
+    "tag": "Premis",
+    "scope": "espanya",
+    "title": "Els Premis Fronteres del Coneixement celebren la XVIII edició a Madrid",
+    "desc": "La Fundació BBVA ha reconegut 10 personalitats i dues institucions per aportacions en l'angle màgic del grafen, immunoteràpia CAR-T, criptografia i economia del comportament.",
+    "url": "https://www.elespanol.com/ciencia/investigacion/20260618/premios-fronteras-ensalzan-poder-unificador-ciencia-cultura-frente-mundo-marcado-incertidumbre/1003744288962_0.html"
+  },
+  {
+    "id": "n007",
+    "date": "2026-06-18",
+    "dateLabel": "06·18",
+    "cat": "economia",
+    "tag": "Economia",
+    "scope": "espanya",
+    "title": "El Banc d'Espanya revisa la inflació al 3,6% però manté el PIB en el 2,3%",
+    "desc": "La revisió a l'alça s'atribueix a l'xoc energètic derivat del conflicte a l'Orient Mitjà i el tancament d'Ormuz. Per al 2027 es preveu una moderació fins al 2,6%.",
+    "url": "https://www.france24.com/es/minuto-a-minuto/20260618-el-banco-de-espana-revisa-al-alza-su-prevision-de-inflacion-en-2026-hasta-el-3-6"
+  },
+  {
+    "id": "n006",
+    "date": "2026-06-16",
+    "dateLabel": "06·16",
+    "cat": "internacional",
+    "tag": "Salut global",
+    "scope": "internacional",
+    "title": "L'OMS alerta: el brot d'Ébola al Congo podria ser el pitjor de la història",
+    "desc": "La variant Bundibugyo ha registrat 336 casos sospitosos i almenys 87 morts. L'OMS ha elevat el risc a «molt alt» i ha declarat emergència de salut pública internacional.",
+    "url": "http://cnnespanol.cnn.com/2026/06/16/salud/brote-ebola-republica-congo-peor-africa-reux"
+  },
+  {
+    "id": "n005",
+    "date": "2026-06-15",
+    "dateLabel": "06·15",
+    "cat": "politica",
+    "tag": "Generalitat",
+    "scope": "catalunya",
+    "title": "Illa reforça la seva posició política amb l'aval del Papa i els pressupostos en marxa",
+    "desc": "El president de la Generalitat viu el seu millor moment polític des del procés, amb la visita de Joan Pau XIV i els comptes del 2026 superant les esmenes al ple del Parlament.",
+    "url": "https://www.moncloa.com/2026/06/15/gestion-salvador-illa-generalitat-3385082"
+  },
+  {
+    "id": "n004",
+    "date": "2026-06-04",
+    "dateLabel": "06·04",
+    "cat": "politica",
+    "tag": "Parlament",
+    "scope": "catalunya",
+    "title": "El Parlament tramita els pressupostos de la Generalitat per al 2026",
+    "desc": "El ple va rebutjar les cinc esmenes a la totalitat amb 68 vots —PSC, ERC i Comuns. La votació definitiva s'espera per al juliol.",
+    "url": "https://www.moncloa.com/2026/06/04/parlament-tramita-presupuestos-illa-2026-3382211/"
+  },
+  {
+    "id": "n003",
+    "date": "2026-03-28",
+    "dateLabel": "03·28",
+    "cat": "policial",
+    "tag": "Circ. 2/2026",
+    "scope": "espanya",
+    "title": "Instrucció sobre identificació i registre de persones",
+    "desc": "Nova circular de la Fiscalia General sobre aplicació de l'art. 20 LO 4/2015.",
+    "url": null
+  },
+  {
+    "id": "n002",
+    "date": "2026-04-14",
+    "dateLabel": "04·14",
+    "cat": "policial",
+    "tag": "RD 316/2026",
+    "scope": "espanya",
+    "title": "Reforma del Reglament d'Estrangeria",
+    "desc": "Dues figures noves d'arrelament social. Termini de regularització fins al 30 de juny de 2026.",
+    "url": null
+  },
+  {
+    "id": "n001",
+    "date": "2026-04-18",
+    "dateLabel": "04·18",
+    "cat": "policial",
+    "tag": "LO 1/2026",
+    "scope": "espanya",
+    "title": "Multireincidència — enduriment de furts i estafes lleus",
+    "desc": "Reforma del CP i la LECrim. Vigent des del 10 d'abril de 2026. Afecta l'art. 22.8 CP i els arts. 468-470 LECrim.",
+    "url": null
+  }
+]
