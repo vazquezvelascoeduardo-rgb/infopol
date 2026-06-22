@@ -44,6 +44,71 @@ const USER = {
 };
 
 const NEWS = [
+  // ── 22 juny 2026 ───────────────────────────────────────────────
+  {
+    id: 'n010',
+    date: '2026-06-22',
+    dateLabel: '06·22',
+    tag: 'Esports · Mundial 2026',
+    title: 'Messi, màxim golejador de la història dels Mundials amb 18 dianes',
+    desc: 'Doblet davant Àustria (2-0) classifica l\'Argentina per als setzens. Supera els 17 gols de Klose. França-Iraq i Jordània-Algèria, altres partits del dia.',
+    url: 'https://www.eltiempo.com/deportes/futbol-internacional/mundial-2026-hoy-lunes-22-de-junio-siga-la-jornada-de-este-lunes-con-argentina-francia-senegal-irak-austria-y-argelia-3566031',
+  },
+  {
+    id: 'n009',
+    date: '2026-06-22',
+    dateLabel: '06·22',
+    tag: 'Internacional · Economia',
+    title: 'Mor Alan Greenspan, expresident de la Fed, als 100 anys',
+    desc: 'Va presidir la Reserva Federal dels EUA durant 18,5 anys. Va morir per complicacions del Parkinson. La seva esposa, la periodista Andrea Mitchell, ha confirmat la notícia.',
+    url: 'https://www.lanacion.com.ar/estados-unidos/murio-alan-greenspan-el-historico-jefe-de-la-fed-que-marco-una-era-en-wall-street-nid22062026/',
+  },
+  {
+    id: 'n008',
+    date: '2026-06-22',
+    dateLabel: '06·22',
+    tag: 'Internacional · Política',
+    title: 'De la Espriella, nou president de Colòmbia amb resultat molt ajustat',
+    desc: 'El candidat conservador obté el 49,66% davant el 48,70% d\'Iván Cepeda. Rellevarà Gustavo Petro l\'agost. Victòria decidida a la segona volta del diumenge 21.',
+    url: 'https://www.eltiempo.com/politica/elecciones-colombia-2026/resultados-segunda-vuelta-presidencial-2026-siga-el-minuto-a-minuto-del-preconteo-de-la-registraduria-nacional-3565893',
+  },
+  {
+    id: 'n007',
+    date: '2026-06-22',
+    dateLabel: '06·22',
+    tag: 'Internacional · Pau',
+    title: 'EEUU i l\'Iran signen acord provisional de 14 punts per aturar el conflicte',
+    desc: 'Cessament immediat de les operacions militars, congelament del programa nuclear iranià durant 20 anys i reobertura de l\'estret d\'Ormuz. Negociacions definitives a Suïssa en 60 dies.',
+    url: 'https://www.lanacion.com.ar/el-mundo/el-acuerdo-completo-de-14-puntos-que-firmaran-eeuu-e-iran-para-poner-fin-a-la-guerra-en-medio-nid17062026/',
+  },
+  {
+    id: 'n006',
+    date: '2026-06-22',
+    dateLabel: '06·22',
+    tag: 'Catalunya · Política',
+    title: 'Illa negocia contra rellotge el finançament singular i els pressupostos',
+    desc: 'El PSC necessita tancar acord amb ERC i els Comuns abans de l\'estiu per evitar eleccions anticipades. ERC reconeix que el traspàs de l\'IRPF requerirà tres anys.',
+    url: 'https://www.moncloa.com/2026/05/31/erc-irpf-traspaso-cataluna-dificultades-3381065/',
+  },
+  {
+    id: 'n005',
+    date: '2026-06-22',
+    dateLabel: '06·22',
+    tag: 'Espanya · Economia',
+    title: 'L\'OCDE eleva el PIB d\'Espanya al 2,2% però revisa la inflació al 3,3%',
+    desc: 'Espanya, l\'economia avançada amb millor rendiment de 2026. L\'organisme atribueix la pujada de preus a la tensió energètica derivada del conflicte a l\'Orient Mitjà.',
+    url: 'https://www.merca2.es/2026/06/03/previsiones-ocde-espana-2026-2388975/',
+  },
+  {
+    id: 'n004',
+    date: '2026-06-22',
+    dateLabel: '06·22',
+    tag: 'Policial · Mossos',
+    title: 'Presó provisional per a 6 dels 16 detinguts en xarxa de narcotràfic a Girona',
+    desc: 'Guàrdia Civil i Mossos d\'Esquadra van desmantellar la trama de narcotràfic i blanqueig. Quatre resten sense fiança; dos amb fiança de 150.000 €.',
+    url: 'https://www.infobae.com/espana/agencias/2026/05/29/prision-provisional-para-seis-de-los-16-detenidos-en-una-trama-de-narcotrafico-y-blanqueo/',
+  },
+  // ── Normativa anterior ─────────────────────────────────────────
   {
     id: 'n001',
     date: '2026-04-18',

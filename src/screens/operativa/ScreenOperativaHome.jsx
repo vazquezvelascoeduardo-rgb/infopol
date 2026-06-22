@@ -43,6 +43,15 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  // 22 juny 2026
+  { date: '06·22', tag: 'Esports · Mundial 2026', title: 'Messi, màxim golejador de la història dels Mundials amb 18 dianes', desc: 'Doblet davant Àustria (2-0). Argentina classifica per als setzens. Supera els 17 gols de Klose.', url: 'https://www.eltiempo.com/deportes/futbol-internacional/mundial-2026-hoy-lunes-22-de-junio-siga-la-jornada-de-este-lunes-con-argentina-francia-senegal-irak-austria-y-argelia-3566031' },
+  { date: '06·22', tag: 'Internacional · Economia', title: 'Mor Alan Greenspan, expresident de la Fed, als 100 anys', desc: 'Va presidir la Reserva Federal dels EUA durant 18,5 anys. Complicacions de la malaltia de Parkinson.', url: 'https://www.lanacion.com.ar/estados-unidos/murio-alan-greenspan-el-historico-jefe-de-la-fed-que-marco-una-era-en-wall-street-nid22062026/' },
+  { date: '06·22', tag: 'Internacional · Política', title: 'De la Espriella, nou president de Colòmbia amb resultat molt ajustat', desc: '49,66% davant el 48,70% d\'Iván Cepeda. Rellevarà Gustavo Petro l\'agost.', url: 'https://www.eltiempo.com/politica/elecciones-colombia-2026/resultados-segunda-vuelta-presidencial-2026-siga-el-minuto-a-minuto-del-preconteo-de-la-registraduria-nacional-3565893' },
+  { date: '06·22', tag: 'Internacional · Pau', title: 'EEUU i l\'Iran signen acord provisional de 14 punts per aturar el conflicte', desc: 'Cessament militar, congelament nuclear 20 anys i reobertura de l\'estret d\'Ormuz. Negociacions definitives a Suïssa.', url: 'https://www.lanacion.com.ar/el-mundo/el-acuerdo-completo-de-14-puntos-que-firmaran-eeuu-e-iran-para-poner-fin-a-la-guerra-en-medio-nid17062026/' },
+  { date: '06·22', tag: 'Catalunya · Política', title: 'Illa negocia contra rellotge el finançament singular i els pressupostos', desc: 'ERC reconeix que el traspàs de l\'IRPF requerirà tres anys. PSC necessita acord amb ERC i Comuns abans de l\'estiu.', url: 'https://www.moncloa.com/2026/05/31/erc-irpf-traspaso-cataluna-dificultades-3381065/' },
+  { date: '06·22', tag: 'Espanya · Economia', title: 'L\'OCDE eleva el PIB d\'Espanya al 2,2% però revisa la inflació al 3,3%', desc: 'Espanya, l\'economia avançada amb millor rendiment el 2026. Pressió energètica per la guerra a l\'Orient Mitjà.', url: 'https://www.merca2.es/2026/06/03/previsiones-ocde-espana-2026-2388975/' },
+  { date: '06·22', tag: 'Policial · Mossos', title: 'Presó provisional per a 6 dels 16 detinguts en xarxa de narcotràfic a Girona', desc: 'Guàrdia Civil i Mossos desfan trama de narcotràfic i blanqueig. Quatre sense fiança, dos amb 150.000 €.', url: 'https://www.infobae.com/espana/agencias/2026/05/29/prision-provisional-para-seis-de-los-16-detenidos-en-una-trama-de-narcotrafico-y-blanqueo/' },
+  // Normativa anterior
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -132,6 +141,11 @@ export default function ScreenOperativaHome() {
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 6, fontSize: 11, fontWeight: 700, color: T.cat.operativa.solid, textDecoration: 'none' }}>
+                  Llegir més →
+                </a>
+              )}
             </div>
           ))}
         </div>
