@@ -1,0 +1,53 @@
+name: Notícies Diàries — InfoPol
+
+on:
+  schedule:
+    # 20:00 UTC = 22:00 CEST (estiu) / 21:00 CET (hivern) — aprox. 22h hora Espanya
+    - cron: '0 20 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Prova sense commitejar (true/false)'
+        default: 'false'
+
+jobs:
+  fetch-news:
+    name: Busca i publica notícies
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repositori
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configura Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instal·la dependències
+        run: npm ci
+
+      - name: Busca notícies del dia
+        run: node scripts/fetch-news.js
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Commit i push si hi ha canvis
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name  "InfoPol News Bot"
+          git config user.email "bot@infopol.app"
+          git add src/data/news.json
+          if git diff --staged --quiet; then
+            echo "ℹ️  Cap canvi a news.json, res a commitejar."
+          else
+            FECHA=$(date -u +'%Y-%m-%d')
+            git commit -m "📰 Notícies ${FECHA}"
+            git push
+            echo "✅  news.json actualitzat i pujat."
+          fi

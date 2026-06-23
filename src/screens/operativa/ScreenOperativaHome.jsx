@@ -1,7 +1,24 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
+
+const CAT_STYLE = {
+  esports:    T.cat.transito,
+  judicial:   T.cat.alcohol,
+  política:   T.cat.operativa,
+  economia:   T.cat.atajos,
+  cultura:    T.cat.psico,
+  'ciència':  T.cat.physical,
+  seguretat:  T.cat.academia,
+  societat:   T.cat.leyes,
+  normativa:  T.cat.leyes,
+};
+
+function catStyle(categoria) {
+  return CAT_STYLE[categoria] || T.cat.operativa;
+}
 
 function BigCatCard({ cat, icon, kicker, title, desc, cta, onClick }) {
   const k = T.cat[cat];
@@ -42,14 +59,16 @@ function Chip({ icon, label }) {
   );
 }
 
-const NEWS = [
-  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
-  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
-  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
-];
-
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/news')
+      .then(r => r.json())
+      .then(setNews)
+      .catch(() => {});
+  }, []);
   return (
     <div className="screen">
       <StatusBar />
@@ -120,20 +139,46 @@ export default function ScreenOperativaHome() {
         </div>
       </div>
 
-      {/* Actualitat normativa */}
+      {/* Actualitat */}
       <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
+        <SectionHead
+          kicker="Actualitat"
+          kickerColor={T.cat.operativa.solid}
+          title="Última hora"
+          action="Tot →"
+          onAction={() => navigate('/operativa/noticies')}
+        />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {NEWS.map((n, i) => (
-            <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
-                <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+          {news.slice(0, 5).map((n, i) => {
+            const cs = catStyle(n.categoria);
+            return (
+              <div
+                key={n.id || i}
+                onClick={n.url ? () => window.open(n.url, '_blank') : undefined}
+                style={{
+                  background: '#fff', borderRadius: T.r.md, padding: 14,
+                  borderLeft: `3px solid ${cs.solid}`, boxShadow: T.shadow.card,
+                  cursor: n.url ? 'pointer' : 'default',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                  <span style={{
+                    fontSize: 9.5, fontWeight: 800, color: cs.ink,
+                    background: cs.soft, padding: '2px 7px', borderRadius: 999,
+                    letterSpacing: 0.4, textTransform: 'uppercase',
+                  }}>
+                    {n.tag}
+                  </span>
+                  <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkFaint, marginLeft: 'auto' }}>
+                    {n.dateLabel}
+                  </span>
+                  {n.url && <Icon name="arrow-right" size={11} color={T.inkFaint} />}
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
               </div>
-              <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
-              <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
