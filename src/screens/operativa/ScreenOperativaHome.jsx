@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
+import { NOTICIAS } from '../../data/noticias';
 
 function BigCatCard({ cat, icon, kicker, title, desc, cta, onClick }) {
   const k = T.cat[cat];
@@ -136,6 +137,32 @@ export default function ScreenOperativaHome() {
           ))}
         </div>
       </div>
+
+      {/* Noticias del dia */}
+      {NOTICIAS.length > 0 && (
+        <div style={{ padding: '14px 0 16px' }}>
+          <SectionHead kicker="Noticias" kickerColor={T.cat.leyes.solid} title="Noticias del dia" action="Tot →" />
+          <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {NOTICIAS.slice(0, 8).map((n, i) => (
+              <div
+                key={n.id || i}
+                onClick={() => n.url && window.open(n.url, '_blank')}
+                style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.leyes.solid}`, boxShadow: T.shadow.card, cursor: n.url ? 'pointer' : 'default' }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                  <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.leyes.ink, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                  <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.dateLabel}</span>
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+                {n.url && (
+                  <div style={{ fontSize: 10.5, color: T.cat.leyes.solid, marginTop: 5, fontWeight: 700 }}>Llegir més →</div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
