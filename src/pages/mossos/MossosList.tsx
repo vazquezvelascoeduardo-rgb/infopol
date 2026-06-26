@@ -17,7 +17,7 @@ import { useT } from '../../lib/i18n';
 import { A, Mono } from '../../lib/design';
 import { PStat, SecHead, BigMode, TopicCard, RecentRow } from '../test/atoms';
 import { AMBIT_META, getTemesByAmbit, type MossosAmbit } from '../../lib/mossosTemari';
-import { listEsquemas } from '../../data/esquemas';
+import { listEsquemesDetall } from '../../data/esquemes-mossos-detall';
 
 const MOSSOS = '#991B1B'; // granate institucional Mossos
 const TEMARI_AMBITS: MossosAmbit[] = ['A', 'B', 'C'];
@@ -347,20 +347,20 @@ export default function MossosList() {
           className="section-head"
           style={{ ['--accent' as never]: '#FF7A1A', marginTop: 32 } as React.CSSProperties}
         >
-          <span className="eyebrow">✨ Esquemes ràpids · Format nou</span>
+          <span className="eyebrow">📝 Esquemes detallats</span>
           <span className="rule" />
         </div>
         <p className="text-sm text-text-2 mt-2 mb-4">
-          Repàs visual del tema sencer en 5 minuts. Línia temporal, personatges
-          i fets d'examen organitzats per època.
+          Resum estructurat de cada tema amb totes les dades clau (lleis, dates i
+          xifres) per repassar de pressa abans del test.
         </p>
         <div className="pl-leyes-grid">
-          {listEsquemas().map((e) => {
+          {listEsquemesDetall().map((e) => {
             const meta = AMBIT_META[e.ambit];
             return (
               <Link
-                key={e.id}
-                to={`/mossos/esquemes/${e.temaSlug}`}
+                key={e.slug}
+                to={`/mossos/esquemes/${e.slug}`}
                 className="pl-ley-card"
               >
                 <span
@@ -368,23 +368,21 @@ export default function MossosList() {
                   aria-hidden
                   style={{ background: '#FFE0CB', color: '#7A2E04' }}
                 >
-                  ✨
+                  📝
                 </span>
                 <span className="pl-ley-text">
-                  <span className="pl-ley-title">
-                    {e.kicker.replace(/^.*TEMA\s+/, 'Tema ')} · {e.title}
-                  </span>
+                  <span className="pl-ley-title">Tema {e.codi} · {e.title}</span>
                   <span className="pl-ley-desc">
-                    {meta.short} · {e.kpis[1]?.value} etapes · {e.kpis[2]?.value} dates · {e.kpis[3]?.value} personatges
+                    {meta.short}{e.subtitle ? ` · ${e.subtitle.length > 80 ? e.subtitle.slice(0, 77) + '…' : e.subtitle}` : ''}
                   </span>
                 </span>
                 <span className="pl-ley-arr" aria-hidden>→</span>
               </Link>
             );
           })}
-          {listEsquemas().length === 0 && (
+          {listEsquemesDetall().length === 0 && (
             <p className="text-sm text-text-3" style={{ padding: 16 }}>
-              Encara no hi ha esquemes disponibles. Aviat afegirem els primers temes.
+              Encara no hi ha esquemes disponibles.
             </p>
           )}
         </div>

@@ -77,13 +77,34 @@ export default function MossosEsquemaRapid() {
         )}
       </div>
 
-      {/* Ajustos d'estil per al cos detallat */}
+      {/* Decoració del cos detallat (estil fitxa d'estudi) */}
       <style>{`
-        .esquema-detall h2 { margin-top: 30px; font-size: clamp(20px,3vw,26px); letter-spacing:-0.5px; }
-        .esquema-detall h3 { margin-top: 18px; font-size: 17px; color: var(--text-2); }
-        .esquema-detall ul, .esquema-detall ol { padding-left: 22px; }
-        .esquema-detall li { margin: 4px 0; line-height: 1.5; }
-        .esquema-detall p { line-height: 1.6; }
+        .esquema-detall {
+          background: #fff; border: 1px solid var(--line); border-radius: 18px;
+          padding: clamp(18px, 3vw, 30px); box-shadow: 0 1px 0 rgba(21,21,28,0.03), 0 6px 18px rgba(21,21,28,0.05);
+        }
+        .esquema-detall > :first-child { margin-top: 0; }
+        .esquema-detall h2 {
+          margin: 30px 0 12px; font-size: clamp(18px,2.6vw,23px); font-weight: 800; letter-spacing: -0.4px;
+          color: var(--ink); padding: 10px 14px; border-radius: 12px;
+          background: linear-gradient(90deg, #FFE0CB, rgba(255,224,203,0.16));
+          border-left: 4px solid #FF7A1A;
+        }
+        .esquema-detall h3 {
+          margin: 20px 0 8px; font-size: 16px; font-weight: 800; color: #7A2E04;
+          display: flex; align-items: center; gap: 8px;
+        }
+        .esquema-detall h3::before { content: ''; width: 7px; height: 7px; border-radius: 2px; background: #FF7A1A; flex-shrink: 0; }
+        .esquema-detall p { line-height: 1.62; margin: 10px 0; color: var(--ink); }
+        .esquema-detall strong { color: #7A2E04; font-weight: 800; }
+        .esquema-detall ul, .esquema-detall ol { padding-left: 24px; margin: 8px 0; }
+        .esquema-detall li { margin: 5px 0; line-height: 1.55; }
+        .esquema-detall li::marker { color: #FF7A1A; font-weight: 700; }
+        .esquema-detall blockquote {
+          margin: 12px 0; padding: 12px 16px; border-left: 3px solid #F0B400;
+          background: #FFF7E8; border-radius: 0 10px 10px 0; color: #3C2A08;
+        }
+        @media (max-width: 560px) { .esquema-detall h2 { font-size: 17px; } }
       `}</style>
     </article>
   );
