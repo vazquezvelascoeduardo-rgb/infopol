@@ -1,0 +1,92 @@
+name: Actualització Diari de Notícies — InfoPol
+
+on:
+  schedule:
+    - cron: '0 20 * * *'   # 22:00 CEST (hora Espanya, estiu) / 21:00 CET (hivern)
+  workflow_dispatch:         # permet llançar-lo manualment des de GitHub
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout branca
+        uses: actions/checkout@v4
+        with:
+          ref: claude/great-dijkstra-u7u1jz
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configura git
+        run: |
+          git config user.name "InfoPol News Bot"
+          git config user.email "infopol-news@users.noreply.github.com"
+
+      - name: Actualitza notícies amb Claude
+        uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          allowed_tools: "WebSearch,Read,Edit"
+          prompt: |
+            Ets l'agent de notícies diari de InfoPol. Actualitza les notícies de l'app.
+            Fitxer a actualitzar: src/screens/operativa/ScreenOperativaHome.jsx
+
+            PAS 1 — Data d'avui
+            Utilitza la funció d'entorn per obtenir la data d'avui en format YYYY-MM-DD i MM·DD (amb el caràcter punt mig ·, U+00B7).
+
+            PAS 2 — Cerca de notícies (7 categories)
+            Usa WebSearch per buscar notícies REALS d'avui en totes les categories:
+            1. "notícies Catalunya política avui" — política catalana
+            2. "noticias España politica economia hoy" — política/economia espanyola
+            3. "noticias internacionales destacadas hoy" — internacional
+            4. "esport futbol notícies avui España" — esports
+            5. "policia detencions crims tribunals noticias hoy España" — policial/judicial
+            6. "cultura premios descubrimientos ciencia noticias hoy" — cultura/ciència
+            7. "economia finances borsa noticias España hoy" — economia
+
+            Selecciona 1-2 notícies per categoria (8-12 en total). Anota títol, resum i URL.
+
+            PAS 3 — Llegeix el fitxer actual
+            Read src/screens/operativa/ScreenOperativaHome.jsx
+
+            PAS 4 — Prepara els articles
+            Per cada notícia, crea un objecte amb FORMAT EXACTE:
+              { date: 'MM·DD', tag: 'Categoria', title: 'Títol en català', desc: 'Resum 1-2 frases en català.', url: 'https://...' },
+
+            Tags disponibles (usa EXACTAMENT aquests):
+            'Política' | 'Internacional' | 'Economia' | 'Esports' | 'Cultura' | 'Ciència' | 'Policial' | 'Judicial' | 'Societat' | 'Premi'
+
+            REGLES:
+            - title: màxim 90 caràcters, en català
+            - desc: màxim 160 caràcters, en català, 1-2 frases
+            - url: URL real de l'article (mai null)
+            - date: format MM·DD amb el caràcter · (punt mig, U+00B7), NO guió
+
+            PAS 5 — Actualitza el fitxer
+            En el fitxer src/screens/operativa/ScreenOperativaHome.jsx:
+            - Troba la línia: `const NEWS = [`
+            - Insereix els nous articles IMMEDIATAMENT DESPRÉS d'aquesta línia, ABANS dels existents
+            - Mantén tots els articles anteriors a sota
+            - Si el total supera 40 articles, elimina els més antics (últims del array)
+            - Escriu el fitxer amb Edit
+
+      - name: Comprova si hi ha canvis
+        id: check_changes
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No s'han trobat notícies noves per avui."
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            LINES=$(git diff --stat src/screens/operativa/ScreenOperativaHome.jsx | tail -1)
+            echo "Canvis detectats: $LINES"
+          fi
+
+      - name: Commit i push
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git add src/screens/operativa/ScreenOperativaHome.jsx
+          git commit -m "news: actualització diari $(date +%Y-%m-%d)"
+          git push -u origin claude/great-dijkstra-u7u1jz
