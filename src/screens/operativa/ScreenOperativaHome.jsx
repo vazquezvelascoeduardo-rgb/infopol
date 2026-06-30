@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
@@ -47,6 +48,56 @@ const NEWS = [
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
+
+const CAT_COLOR = {
+  politica:  '#3B6BF5',
+  economia:  '#1FB286',
+  cultura:   '#FF7A1A',
+  ciencia:   '#0BB4C2',
+  premis:    '#F0B400',
+  esports:   '#E89421',
+  successos: '#E04F5F',
+  judicial:  '#9C4FE0',
+};
+
+function NoticiasSection() {
+  const [noticias, setNoticias] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/noticias')
+      .then(r => r.json())
+      .then(data => setNoticias(data.slice(0, 8)))
+      .catch(() => {});
+  }, []);
+
+  if (!noticias.length) return null;
+
+  return (
+    <div style={{ padding: '14px 0 0' }}>
+      <SectionHead kicker="Avui" kickerColor={T.cat.noticias.solid} title="Notícies del dia" />
+      <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {noticias.map((n) => {
+          const accent = CAT_COLOR[n.cat] || T.cat.noticias.solid;
+          return (
+            <div key={n.id} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${accent}`, boxShadow: T.shadow.card }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                <span style={{ fontSize: 10, fontWeight: 800, color: accent, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.dateLabel}</span>
+              </div>
+              <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+              <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 8, fontSize: 11, fontWeight: 700, color: accent, textDecoration: 'none' }}>
+                  Llegir notícia →
+                </a>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
@@ -136,6 +187,8 @@ export default function ScreenOperativaHome() {
           ))}
         </div>
       </div>
+
+      <NoticiasSection />
     </div>
   );
 }

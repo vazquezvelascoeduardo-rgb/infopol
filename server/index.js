@@ -2,6 +2,7 @@ import express from 'express';
 import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { readFileSync, writeFileSync } from 'fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -112,6 +113,37 @@ app.put('/api/user', (req, res) => {
 
 app.get('/api/news', (req, res) => {
   res.json(NEWS);
+});
+
+const NOTICIAS_PATH = join(__dirname, 'noticias.json');
+
+function loadNoticias() {
+  try {
+    return JSON.parse(readFileSync(NOTICIAS_PATH, 'utf8'));
+  } catch {
+    return [];
+  }
+}
+
+function saveNoticias(data) {
+  writeFileSync(NOTICIAS_PATH, JSON.stringify(data, null, 2), 'utf8');
+}
+
+app.get('/api/noticias', (req, res) => {
+  res.json(loadNoticias());
+});
+
+app.post('/api/noticias', (req, res) => {
+  const current = loadNoticias();
+  const incoming = Array.isArray(req.body) ? req.body : [req.body];
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 30);
+  const existing = current.filter(n => new Date(n.date) >= cutoff);
+  const existingIds = new Set(existing.map(n => n.id));
+  const newEntries = incoming.filter(n => !existingIds.has(n.id));
+  const updated = [...newEntries, ...existing].slice(0, 100);
+  saveNoticias(updated);
+  res.json({ added: newEntries.length, total: updated.length });
 });
 
 app.get('/api/stats', (req, res) => {

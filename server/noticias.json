@@ -1,0 +1,52 @@
+[
+  {
+    "id": "news_20260630_001",
+    "date": "2026-06-30",
+    "dateLabel": "06·30",
+    "cat": "politica",
+    "tag": "Política · CAT",
+    "title": "El Govern anuncia el nou pla de seguretat metropolitana 2026-2030",
+    "desc": "El Departament d'Interior presenta un pla de reforç policial a les principals àrees urbanes amb inversió de 120 M€.",
+    "url": null
+  },
+  {
+    "id": "news_20260630_002",
+    "date": "2026-06-30",
+    "dateLabel": "06·30",
+    "cat": "successos",
+    "tag": "Successos · CAT",
+    "title": "Operació contra el tràfic de drogues al Maresme: 12 detinguts",
+    "desc": "Els Mossos d'Esquadra i l'Àrea Central de Narcotràfic desmantellen una xarxa que distribuïa droga des de Mataró.",
+    "url": null
+  },
+  {
+    "id": "news_20260630_003",
+    "date": "2026-06-30",
+    "dateLabel": "06·30",
+    "cat": "judicial",
+    "tag": "Judicial · ESP",
+    "title": "El Tribunal Suprem confirma la pena de 9 anys per al líder d'una xarxa d'estafes",
+    "desc": "La sentència ratifica la condemna per delictes de frau massiu que van afectar més de 3.000 víctimes a tot l'Estat.",
+    "url": null
+  },
+  {
+    "id": "news_20260630_004",
+    "date": "2026-06-30",
+    "dateLabel": "06·30",
+    "cat": "esports",
+    "tag": "Esports",
+    "title": "El FC Barcelona guanya la Lliga amb dos partits d'antelació",
+    "desc": "El Barça es proclama campió de LaLiga EA Sports 2025-2026 gràcies a la victòria per 3-1 contra el Sevilla al Camp Nou.",
+    "url": null
+  },
+  {
+    "id": "news_20260630_005",
+    "date": "2026-06-30",
+    "dateLabel": "06·30",
+    "cat": "economia",
+    "tag": "Economia",
+    "title": "L'atur baixa a Catalunya fins al 8,2%, el nivell més baix en 18 anys",
+    "desc": "L'Institut d'Estadística de Catalunya publica les dades del segon trimestre que mostren la millora del mercat laboral.",
+    "url": null
+  }
+]
