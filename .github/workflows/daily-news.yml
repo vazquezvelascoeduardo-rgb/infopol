@@ -1,0 +1,41 @@
+name: Actualització diària de notícies
+
+on:
+  schedule:
+    # 20:00 UTC = 22:00 CEST (estiu) / 21:00 CET (hivern)
+    - cron: '0 20 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: claude/great-dijkstra-r1wvo1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Buscar i actualitzar notícies
+        run: python scripts/fetch-noticias.py
+
+      - name: Commit i push (si hi ha canvis)
+        run: |
+          git config user.name  "InfoPol Bot"
+          git config user.email "bot@infopol.cat"
+          git add server/data/noticias.json
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: notícies diàries $(date -u +%Y-%m-%d)"
+            git push origin claude/great-dijkstra-r1wvo1
+            echo "✓ Notícies publicades"
+          else
+            echo "Cap canvi detectat"
+          fi
