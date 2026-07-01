@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
@@ -48,8 +49,33 @@ const NEWS = [
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
 
+const TAG_COLORS = {
+  'Política': '#3B6BF5',
+  'Economia': '#E89421',
+  'Cultura': '#9C4FE0',
+  'Ciència': '#1FB286',
+  'Premis': '#E89421',
+  'Esports': '#E04F5F',
+  'Policial': '#3B6BF5',
+  'Judicial': '#3B6BF5',
+};
+
+function tagColor(tag) {
+  const cat = tag ? tag.split('·')[0].trim() : '';
+  return TAG_COLORS[cat] || '#7A7A85';
+}
+
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
+  const [noticias, setNoticias] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/noticias')
+      .then(r => r.json())
+      .then(data => setNoticias(data.slice(0, 12)))
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="screen">
       <StatusBar />
@@ -136,6 +162,34 @@ export default function ScreenOperativaHome() {
           ))}
         </div>
       </div>
+
+      {/* Noticias del dia */}
+      {noticias.length > 0 && (
+        <div style={{ padding: '14px 0 24px' }}>
+          <SectionHead kicker="Noticias" kickerColor={T.cat.leyes.solid} title="Actualitat informativa" action="Tot →" />
+          <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {noticias.map((n) => {
+              const color = tagColor(n.tag);
+              const card = (
+                <div key={n.id} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${color}`, boxShadow: T.shadow.card }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                    <span style={{ fontSize: 10, fontWeight: 800, color, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                    <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.dateLabel}</span>
+                  </div>
+                  <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                  <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+                  {n.url && (
+                    <div style={{ marginTop: 6, fontSize: 11, color, fontWeight: 700 }}>Llegir complet →</div>
+                  )}
+                </div>
+              );
+              return n.url
+                ? <a key={n.id} href={n.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>{card}</a>
+                : card;
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
