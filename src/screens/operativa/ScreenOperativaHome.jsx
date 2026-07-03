@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
@@ -50,6 +51,14 @@ const NEWS = [
 
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
+  const [generalNews, setGeneralNews] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/general-news')
+      .then(r => r.json())
+      .then(setGeneralNews)
+      .catch(() => {});
+  }, []);
   return (
     <div className="screen">
       <StatusBar />
@@ -136,6 +145,30 @@ export default function ScreenOperativaHome() {
           ))}
         </div>
       </div>
+
+      {/* Noticias generals del dia */}
+      {generalNews.length > 0 && (
+        <div style={{ padding: '14px 0 8px' }}>
+          <SectionHead kicker="Noticias" kickerColor={T.cat.atajos.solid} title="Actualitat del dia" action="Tot →" />
+          <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {generalNews.map((n, i) => (
+              <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.atajos.solid}`, boxShadow: T.shadow.card }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                  <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.atajos.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                  <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.dateLabel}</span>
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+                {n.url && (
+                  <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 6, fontSize: 11, color: T.cat.atajos.solid, fontWeight: 700, textDecoration: 'none' }}>
+                    Llegir més →
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

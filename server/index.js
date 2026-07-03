@@ -73,6 +73,11 @@ const NEWS = [
   },
 ];
 
+// ── Noticias generals (actualitzades diàriament a les 22:00) ───
+const GENERAL_NEWS = [
+  // Les noticias s'afegeixen automàticament aquí cada dia a les 22:00
+];
+
 const STATS = {
   streak: 23,
   streakRecord: 41,
@@ -112,6 +117,10 @@ app.put('/api/user', (req, res) => {
 
 app.get('/api/news', (req, res) => {
   res.json(NEWS);
+});
+
+app.get('/api/general-news', (req, res) => {
+  res.json(GENERAL_NEWS);
 });
 
 app.get('/api/stats', (req, res) => {
