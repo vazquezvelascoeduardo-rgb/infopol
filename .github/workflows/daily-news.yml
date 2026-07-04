@@ -1,0 +1,44 @@
+name: Notícies diàries InfoPol
+
+on:
+  schedule:
+    # 22:00 hora Espanya CEST (UTC+2) = 20:00 UTC (estiu)
+    # A l'hivern (CET, UTC+1) dispara a les 21:00 local — acceptable
+    - cron: '0 20 * * *'
+  workflow_dispatch:   # permet llançament manual des de GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-news:
+    name: Actualitzar notícies
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repositori
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configurar Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Obtenir i resumir notícies
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/fetch-news.mjs
+
+      - name: Commit i push si hi ha canvis
+        run: |
+          git config user.name  "InfoPol News Bot"
+          git config user.email "bot@infopol.cat"
+          git add src/data/newsGeneral.js
+          if git diff --staged --quiet; then
+            echo "Sense canvis — no es fa commit"
+          else
+            git commit -m "noticias: actualització automàtica $(date -u +%Y-%m-%d)"
+            git push
+          fi
