@@ -77,6 +77,7 @@ export default function ScreenOperativaHome() {
       <div style={{ padding: '16px 16px 8px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
         <BigCatCard cat="leyes" icon="scale" kicker="Consulta jurídica" title="Lleis" desc="CP, LECrim, FCS, LSV, Seg. Ciutadana, Estrangeria." cta="Obrir" onClick={() => navigate('/operativa/infraccions')} />
         <BigCatCard cat="operativa" icon="siren" kicker="A peu de carrer" title="Operativa" desc="Procediments per situació pas a pas." cta="Entrar" onClick={() => navigate('/operativa/protocol')} />
+        <BigCatCard cat="noticias" icon="newspaper" kicker="Catalunya · Espanya · Món" title="Notícies" desc="Política, esports, cultura, ciència i successos." cta="Llegir" onClick={() => navigate('/noticias')} />
       </div>
 
       {/* Superbuscador */}
