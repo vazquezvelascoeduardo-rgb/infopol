@@ -1,0 +1,47 @@
+name: 📰 Actualització Noticias Diàries
+
+on:
+  schedule:
+    # 21:00 UTC = 22:00 CET (hora d'hivern) / 23:00 CEST (hora d'estiu)
+    # Per tenir les notícies exactament a les 22h CET afegeix ANTHROPIC_API_KEY a GitHub Secrets
+    - cron: '0 21 * * *'
+  workflow_dispatch:  # Permet disparar manualment des de GitHub Actions
+
+permissions:
+  contents: write
+
+jobs:
+  update-news:
+    name: Fetch & update noticias.json
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instal·lar dependències del script
+        run: npm install @anthropic-ai/sdk
+
+      - name: Executar fetch-news.mjs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/fetch-news.mjs
+
+      - name: Commit i push si hi ha canvis
+        run: |
+          git config user.name  "InfoPol NewsBot"
+          git config user.email "newsbot@infopol.cat"
+          git add src/data/noticias.json
+          if git diff --staged --quiet; then
+            echo "Sense canvis, res a pujar."
+          else
+            git commit -m "📰 Noticias $(date -u +%Y-%m-%d)"
+            git push -u origin HEAD
+          fi

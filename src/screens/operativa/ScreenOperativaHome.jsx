@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
@@ -48,8 +49,31 @@ const NEWS = [
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
 
+// Color de la vora esquerra per categoria
+function noticiaColor(tag) {
+  const t = (tag || '').toLowerCase();
+  if (t.includes('política') || t.includes('politic')) return T.cat.operativa.solid;
+  if (t.includes('economia') || t.includes('econom'))  return T.cat.leyes.solid;
+  if (t.includes('esport')   || t.includes('deport'))  return T.cat.transito.solid;
+  if (t.includes('cultura')  || t.includes('premi'))   return T.cat.atajos.solid;
+  if (t.includes('internac') || t.includes('mundial')) return T.cat.physical.solid;
+  if (t.includes('policial') || t.includes('judicial') || t.includes('legal')) return T.cat.alcohol.solid;
+  if (t.includes('descobr')  || t.includes('tecnol')   || t.includes('cienc')) return T.cat.psico.solid;
+  if (t.includes('seguretat'))                          return T.cat.alcohol.solid;
+  return T.cat.academia.solid;
+}
+
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
+  const [noticias, setNoticias] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/noticias')
+      .then(r => r.json())
+      .then(data => setNoticias(data.slice(0, 15)))
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="screen">
       <StatusBar />
@@ -134,6 +158,42 @@ export default function ScreenOperativaHome() {
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Noticias d'avui */}
+      <div style={{ padding: '18px 0 24px' }}>
+        <SectionHead kicker="Noticias" kickerColor={T.cat.academia.solid} title="Noticias d'avui" action="Tot →" />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {noticias.length === 0 ? (
+            <div style={{ background: '#fff', borderRadius: T.r.md, padding: 16, boxShadow: T.shadow.card, textAlign: 'center' }}>
+              <div style={{ fontSize: 11.5, color: T.inkMuted, lineHeight: 1.5 }}>
+                Les noticias s'actualitzen cada dia a les 22h.<br />Torna demà per veure les d'avui.
+              </div>
+            </div>
+          ) : (
+            noticias.map((n) => {
+              const color = noticiaColor(n.tag);
+              const card = (
+                <div style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${color}`, boxShadow: T.shadow.card }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                    <span style={{ fontSize: 10, fontWeight: 800, color, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                    <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.dateLabel}</span>
+                  </div>
+                  <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                  <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+                  {n.url && (
+                    <div style={{ marginTop: 6, fontSize: 10.5, fontWeight: 700, color, display: 'flex', alignItems: 'center', gap: 4 }}>
+                      Llegir notícia completa <Icon name="arrow-right" size={12} color={color} />
+                    </div>
+                  )}
+                </div>
+              );
+              return n.url
+                ? <a key={n.id} href={n.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>{card}</a>
+                : <div key={n.id}>{card}</div>;
+            })
+          )}
         </div>
       </div>
     </div>
