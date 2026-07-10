@@ -1,0 +1,41 @@
+name: Actualització diaria de notícies
+
+on:
+  schedule:
+    # 20:00 UTC = 22:00 CEST (estiu) / 21:00 CET (hivern)
+    - cron: '0 20 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Installa dependències
+        run: pip install anthropic
+
+      - name: Genera notícies del dia
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/generate_news.py
+
+      - name: Commit i push si hi ha canvis
+        run: |
+          git config user.name "InfoPol Bot"
+          git config user.email "bot@infopol.app"
+          git add src/data/news.js
+          if git diff --staged --quiet; then
+            echo "No hi ha canvis nous"
+          else
+            DATE=$(date '+%Y-%m-%d')
+            git commit -m "chore(news): actualització diaria ${DATE}"
+            git push origin main
+          fi
