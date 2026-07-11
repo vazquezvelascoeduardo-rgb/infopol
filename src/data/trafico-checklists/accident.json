@@ -100,7 +100,14 @@
         "6. BUTLLETÍ al causant per la infracció que ha originat l'accident",
         "7. Diligència d'accident"
       ],
-      "documentacio": "Acta accident + butlletí al responsable + croquis + fotos"
+      "documentacio": "Acta accident + butlletí al responsable + croquis + fotos",
+      "actes_viladecans": [
+        "T 06 — Fulls d'accident per omplir a mà (croquis i dades al lloc)",
+        "T 39 — Informació persones implicades en accidents",
+        "A 28 — Manifestació per danys a vehicle (declaració del perjudicat)",
+        "A 33 — Comprovació danys vehicles",
+        "T 16 — Full de denúncia administrativa (butlletí al causant de la infracció)"
+      ]
     },
 
     "fi_atestat_lleus": {
@@ -114,6 +121,16 @@
         "Fotografies + croquis",
         "Alcohol/drogues a tots els conductors",
         "Butlletí al responsable de la infracció causant"
+      ],
+      "actes_viladecans": [
+        "T 06 — Fulls d'accident per omplir a mà (croquis i dades al lloc)",
+        "T 31 — Inspecció ocular accident de trànsit",
+        "T 39 — Informació persones implicades en accidents",
+        "N 05t — Drets a perjudicats en accidents de trànsit",
+        "A 28 — Manifestació per danys a vehicle (declaració del perjudicat)",
+        "A 33 — Comprovació danys vehicles",
+        "T 16 — Full de denúncia administrativa (butlletí al causant)",
+        "T 05 — Pèrdua de facultats per conduir (si s'aprecien en algun implicat)"
       ]
     },
 
@@ -121,7 +138,7 @@
       "final": true,
       "tipus": "penal",
       "titol": "🚔 Atestat PENAL — lesions amb tractament (Art. 152 CP)",
-      "pena_referencial": "Imprudència greu: presó 3 mesos-3 anys + privació permís 1-4 anys",
+      "pena_referencial": "Imprudència greu (Art. 152.1 CP): presó 3-6 mesos (lesions 147.1) · 1-3 anys (lesions 149) · 6 mesos-2 anys (lesions 150) + privació permís 1-4 anys",
       "accions_ordenades": [
         "1. AUXILI prioritari + SEM",
         "2. Alcohol/drogues OBLIGATORI tots conductors",
@@ -133,7 +150,17 @@
         "8. ATESTAT PENAL complet",
         "9. Comunicació Jutjat"
       ],
-      "documentacio": "Atestat penal + acta inspecció ocular + parte mèdic + declaracions + fotos + croquis amb mesures"
+      "documentacio": "Atestat penal + acta inspecció ocular + parte mèdic + declaracions + fotos + croquis amb mesures",
+      "actes_viladecans": [
+        "T 06 — Fulls d'accident per omplir a mà (croquis i dades al lloc)",
+        "T 31 — Inspecció ocular accident de trànsit",
+        "T 39 — Informació persones implicades en accidents",
+        "N 05t — Drets a perjudicats en accidents de trànsit",
+        "A 33 — Comprovació danys vehicles",
+        "T 05 — Pèrdua de facultats per conduir (si s'aprecien en un implicat)",
+        "T 12 — Mostra per analítica de sang (si evacuació hospitalària d'algun conductor)",
+        "A 10 — Preservació proves de sang (si escau)"
+      ]
     },
 
     "fi_atestat_mort": {
@@ -141,7 +168,7 @@
       "tipus": "penal",
       "titol": "🚔 Atestat PENAL — Homicidi imprudent (Art. 142 CP)",
       "pena_imprudencia_greu": "Presó 1-4 anys + privació permís 1-6 anys",
-      "pena_imprudencia_menys_greu": "Multa 3-18 mesos + privació fins 18 mesos",
+      "pena_imprudencia_menys_greu": "Multa 3-18 mesos + privació permís 3-18 mesos (Art. 142.2 CP)",
       "accions_ordenades_critiques": [
         "1. PRESERVACIÓ ESCENA com escena de crim — NO moure res",
         "2. Comunicació IMMEDIATA Jutjat Guàrdia",
@@ -153,7 +180,17 @@
         "8. ESPERAR aixecament cadàver judicial",
         "9. ATESTAT COMPLET amb totes les diligències"
       ],
-      "documentacio_clau": "Atestat penal + inspecció ocular + croquis amb mesures + fotos + alcohol/drogues + parte mèdic forense"
+      "documentacio_clau": "Atestat penal + inspecció ocular + croquis amb mesures + fotos + alcohol/drogues + parte mèdic forense",
+      "actes_viladecans": [
+        "T 06 — Fulls d'accident per omplir a mà (croquis i dades al lloc)",
+        "T 31 — Inspecció ocular accident de trànsit",
+        "T 39 — Informació persones implicades en accidents",
+        "N 05t — Drets a perjudicats en accidents de trànsit (familiars de la víctima)",
+        "A 33 — Comprovació danys vehicles",
+        "T 05 — Pèrdua de facultats per conduir (si s'aprecien en el conductor supervivent)",
+        "T 12 — Mostra per analítica de sang (conductor evacuat: sang en centre sanitari)",
+        "A 10 — Preservació proves de sang (si escau)"
+      ]
     },
 
     "fi_atestat_victimes_admin": {
@@ -165,6 +202,15 @@
         "Tramitar sanció alcohol (500€/1000€ + 4/6 punts)",
         "Atestat accident",
         "Si lesions greus/mort: derivar a via penal igualment"
+      ],
+      "actes_viladecans": [
+        "T 06 — Fulls d'accident per omplir a mà (croquis i dades al lloc)",
+        "T 31 — Inspecció ocular accident de trànsit",
+        "T 39 — Informació persones implicades en accidents",
+        "N 05t — Drets a perjudicats en accidents de trànsit",
+        "T 16 — Full de denúncia administrativa (sanció alcohol/drogues)",
+        "T 12 — Mostra per analítica de sang (si evacuació hospitalària)",
+        "T 05 — Pèrdua de facultats per conduir (si s'aprecien)"
       ]
     },
 
@@ -172,12 +218,23 @@
       "final": true,
       "tipus": "penal",
       "titol": "🚔 Accident + alcohol/drogues PENAL",
-      "text": "Concurs ideal: Art. 379.2 CP + Art. 152/142 CP",
+      "text": "Concurs (Art. 382 CP): Art. 379.2 CP + Art. 152/142 CP — s'aplica la infracció més greument penada en la meitat superior",
       "accions_ordenades": [
         "Detenció conductor",
         "Alcohol evidencial amb totes les garanties",
         "Atestat penal amb concurs",
         "Posada a disposició Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "T 06 — Fulls d'accident per omplir a mà (croquis i dades al lloc)",
+        "T 31 — Inspecció ocular accident de trànsit",
+        "T 39 — Informació persones implicades en accidents",
+        "N 05t — Drets a perjudicats en accidents de trànsit",
+        "T 05 — Pèrdua de facultats per conduir",
+        "T 12 — Mostra per analítica de sang (si evacuació hospitalària: sang)",
+        "A 10 — Preservació proves de sang (si escau)",
+        "N 01 — Informació drets persona detinguda (si detenció)",
+        "N 11 — Citació per a judici ràpid + N 08 — Drets investigat no detingut (si es tramita per citació)"
       ]
     },
 
@@ -190,6 +247,15 @@
         "Detenció",
         "Atestat penal amb diligència negativa",
         "Posada a disposició Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "T 06 — Fulls d'accident per omplir a mà (croquis i dades al lloc)",
+        "T 31 — Inspecció ocular accident de trànsit",
+        "T 39 — Informació persones implicades en accidents",
+        "N 05t — Drets a perjudicats en accidents de trànsit",
+        "T 05 — Pèrdua de facultats per conduir (documenta l'estat del conductor que es nega)",
+        "N 01 — Informació drets persona detinguda (si detenció)",
+        "N 11 — Citació per a judici ràpid + N 08 — Drets investigat no detingut (si es tramita per citació)"
       ]
     },
 
@@ -205,6 +271,13 @@
         "Recopilar dades/matrícula via testimonis o càmeres",
         "Localitzar titular del vehicle fugat",
         "Butlletí per fugir i Art. 129.2.f (no facilitar identitat)"
+      ],
+      "actes_viladecans": [
+        "T 06 — Fulls d'accident per omplir a mà (croquis i dades al lloc)",
+        "T 31 — Inspecció ocular accident de trànsit (restes al lloc per identificar el vehicle fugat)",
+        "A 28 — Manifestació per danys a vehicle (declaració del perjudicat)",
+        "A 33 — Comprovació danys vehicles",
+        "T 16 — Full de denúncia administrativa (Art. 129 RGC)"
       ]
     },
 
@@ -212,21 +285,28 @@
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Art. 382 bis CP (fuga amb víctimes)",
-      "text": "Conductor causant que abandona víctimes greus o mortes sense justificació",
-      "pena_apartat_1": "Si víctimes mortes/greus: presó 6 mesos - 4 anys + privació 2-6 anys",
-      "pena_apartat_2": "Forma bàsica: presó 3 mesos - 1 any + privació 1-4 anys",
-      "concurs_195_cp": "Possible concurs amb Art. 195 CP (omissió socors): presó 6 mesos - 1 any si causant",
+      "text": "Conductor que abandona el lloc dels fets després de causar un accident amb una o diverses víctimes mortes o amb lesions dels arts. 147.1, 149 o 150 CP — fora dels casos de l'Art. 195 CP",
+      "pena_apartat_1": "Origen imprudent o fet de l'Art. 379 CP (Art. 382 bis.2): presó 6 mesos - 4 anys + privació permís 1-4 anys",
+      "pena_apartat_2": "Origen fortuït (Art. 382 bis.3): presó 3-6 mesos + privació permís 6 mesos - 2 anys",
+      "concurs_195_cp": "ATENCIÓ: el 382 bis s'aplica 'fora dels casos de l'Art. 195 CP' — són tipus EXCLOENTS, no acumulables. Si la víctima queda desatesa i en perill manifest i greu → Art. 195.3 CP (omissió del deure de socors pel causant: presó 6-18 mesos si accident fortuït; 6 mesos - 4 anys si per imprudència). Si la víctima ja és morta o està atesa → Art. 382 bis CP",
       "accions_ordenades": [
         "Auxili a víctimes — PRIORITAT ABSOLUTA",
         "Recerca activa del fugat",
         "Atestat penal complet",
-        "Possible concurs Art. 195 CP",
+        "Qualificar correctament: Art. 195.3 CP (víctima desatesa en perill) O Art. 382 bis CP (víctima morta o atesa) — són excloents",
         "Posada a disposició Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "T 06 — Fulls d'accident per omplir a mà (croquis i dades al lloc)",
+        "T 31 — Inspecció ocular accident de trànsit",
+        "T 39 — Informació persones implicades en accidents",
+        "N 05t — Drets a perjudicats en accidents de trànsit",
+        "A 33 — Comprovació danys vehicles (identificació del vehicle fugat per restes/danys)"
       ]
     }
   },
   "notes_finals": [
-    "L'art. 195 CP (omissió socors) és COMPATIBLE amb 382 bis. Si causant + omissió: pot ser presó 6 mesos - 4 anys.",
+    "L'art. 382 bis CP s'aplica expressament 'fora dels casos de l'art. 195 CP': són EXCLOENTS. Víctima desatesa en perill → 195.3 CP (causant per imprudència: presó 6 mesos - 4 anys); víctima morta o ja atesa → 382 bis CP.",
     "El parte mèdic és la PROVA que decideix Art. 147 CP (lesions). Insistir en obtenir-lo.",
     "Tots els implicats: alcohol/drogues OBLIGATORI (Art. 14.2 TRLSV).",
     "Croquis: ha d'incloure mesures, posicions, sentit marxa, senyalització, semàfors, hora, condicions.",

@@ -5,18 +5,23 @@
   "icono": "🏘️",
   "base_legal": [
     "Art. 18.2 CE (inviolabilitat domicili)",
-    "Art. 202 CP (allanament de morada)",
-    "Art. 203 CP (allanament establiment)",
-    "Art. 245.2 CP (usurpació immobles)",
+    "Art. 202 CP (violació de domicili / allanament de morada)",
+    "Art. 203 CP (allanament d'establiment)",
+    "Art. 245.1 CP (usurpació amb violència o intimidació)",
+    "Art. 245.2 CP (usurpació pacífica d'immoble que no és domicili)",
     "Art. 255 CP (defraudació fluid)",
-    "Llei 5/2018 (procediment civil sumari recuperació)",
-    "Art. 8 LECiv (acció possessòria)"
+    "Llei 5/2018 (procediment civil sumari de recuperació)",
+    "Art. 250.1.4t LEC (judici verbal possessori)",
+    "Art. 441.1 bis LEC (desnonament exprés — lliurament immediat de la possessió si els ocupants no aporten títol)",
+    "Instrucció 1/2020 Fiscalia General de l'Estat (ocupació d'immobles)",
+    "Art. 13 LECrim (mesures cautelars — desallotjament en procés penal)"
   ],
 
   "diferencia_clau_pautes": {
-    "habitatge_202_CP": "Habitatge habitual o segona residència = ALLANAMENT — pena 6m-2anys (sense violència) o 1-4 anys (amb)",
-    "usurpacio_245_2": "Immoble que NO és habitatge = USURPACIÓ — multa 3-6 mesos",
-    "diferencia_temporal": "Recent (24-72h primeres): FLAGRÀNCIA permet actuació policial directa. Consolidada: cal via judicial."
+    "habitatge_202_CP": "Habitatge habitual o segona residència (morada) = VIOLACIÓ DE DOMICILI (allanament) — pena 6m-2anys (sense violència) o 1-4 anys + multa (amb violència/intimidació)",
+    "usurpacio_245_2": "Immoble que NO constitueix domicili = USURPACIÓ pacífica — multa 3-6 mesos",
+    "usurpacio_245_1": "Ocupació AMB violència o intimidació sobre les persones = art. 245.1 CP — presó 1-2 anys, a més de les penes pels actes violents",
+    "diferencia_temporal": "Recent (primeres 24-72h): FLAGRÀNCIA permet actuació policial directa (criteri operatiu; Instrucció FGE 1/2020). Consolidada: cal via judicial. Si és MORADA (202 CP), el delicte és permanent i la flagrància persisteix mentre duri l'ocupació."
   },
 
   "concepte_domicili": [
@@ -56,12 +61,12 @@
     "fi_202_allanament": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE — Allanament de morada (Art. 202 CP)",
+      "titol": "🚔 DELICTE — Violació de domicili / allanament de morada (Art. 202 CP)",
       "concepte": "Entrar o mantenir-se en domicili aliè CONTRA la voluntat del seu morador",
       "article": "Art. 202 CP",
       "pena_sense_violencia": "Presó 6 mesos - 2 anys",
       "pena_amb_violencia": "Presó 1-4 anys + multa 6-12 mesos",
-      "info_clau": "Protegeix INVIOLABILITAT DOMICILI (CE 18.2). Habitatge habitual / segona residència = SEMPRE allanament, no usurpació.",
+      "info_clau": "Protegeix INVIOLABILITAT DOMICILI (CE 18.2). Habitatge habitual / segona residència = SEMPRE violació de domicili (202 CP), no usurpació. Delicte PERMANENT: la flagrància persisteix mentre duri l'ocupació — desallotjament immediat possible.",
       "accions_ordenades": [
         "1. INTERVENCIÓ IMMEDIATA — la flagrància permet entrada (Art. 553 LECrim)",
         "2. Identificar tots els ocupants",
@@ -74,21 +79,31 @@
         "9. Atestat penal complet",
         "10. Posada a disposició Jutjat Guàrdia"
       ],
-      "documentacio": "Atestat + acta intervenció + declaracions + inspecció ocular + fotografies"
+      "documentacio": "Atestat + acta intervenció + declaracions + inspecció ocular + fotografies",
+      "actes_viladecans": [
+        "A 18PL — Declaració del propietari/perjudicat",
+        "N 02 — Drets víctima",
+        "G 70 — Informe d'ocupació d'un immoble"
+      ]
     },
 
     "fi_203_establiment": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE — Allanament establiment obert al públic (Art. 203 CP)",
-      "info": "Mantenir-se contra la voluntat del titular en establiment obert al públic fora hores",
-      "pena": "Multa 6-10 mesos (203.1)",
-      "pena_amb_violencia": "Presó 6 mesos - 3 anys (203.2)",
+      "titol": "🚔 DELICTE — Allanament d'establiment obert al públic (Art. 203 CP)",
+      "info": "Entrar contra la voluntat del titular (203.1) o mantenir-s'hi fora d'horari d'obertura (203.2) en domicili de persona jurídica, despatx, oficina o establiment obert al públic",
+      "pena": "Entrar fora d'horari: presó 6 mesos - 1 any + multa 6-10 mesos (203.1)",
+      "pena_mantenirse": "Mantenir-se fora d'horari contra la voluntat del titular: multa 1-3 mesos (203.2)",
+      "pena_amb_violencia": "Amb violència o intimidació: presó 6 mesos - 3 anys (203.3)",
       "accions": [
         "Identificació",
         "Desallotjament",
         "Detenció si flagrant + violència",
         "Atestat + Jutjat"
+      ],
+      "actes_viladecans": [
+        "A 18PL — Declaració del propietari/perjudicat",
+        "N 02 — Drets víctima"
       ]
     },
 
@@ -98,9 +113,9 @@
       "titol": "🚔 OCUPACIÓ FLAGRANT — Usurpació recent (Art. 245.2 CP)",
       "concepte": "Ocupació recent (24-48h) d'habitatge buit o immoble — flagrància permet actuació",
       "pena": "Multa 3-6 mesos",
-      "info_operativa_pautes": "TC + jurisprudència: actuació policial directa permesa en les primeres 24-48h amb DENÚNCIA del propietari. Passat aquest temps: via judicial.",
+      "info_operativa_pautes": "Instrucció FGE 1/2020 + jurisprudència: en flagrància (criteri operatiu: primeres 24-48h) la policia pot actuar directament i recuperar la possessió, amb denúncia/manifestació del titular. Passat aquest temps: via judicial.",
       "accions_ordenades": [
-        "1. DENÚNCIA del propietari (imprescindible — sense ella no es pot actuar)",
+        "1. DENÚNCIA/manifestació del titular acreditant la manca de consentiment (el 245.2 és perseguible d'ofici, però cal constatar la voluntat contrària del titular)",
         "2. Verificar titularitat (escriptura, contracte, registre)",
         "3. Identificar ocupants",
         "4. Desallotjar (en flagrància)",
@@ -109,7 +124,13 @@
         "7. Si defraudació elèctrica: Art. 255 CP concurs",
         "8. Atestat + Jutjat Guàrdia"
       ],
-      "info_dubte_jutjat": "Si dubtes sobre flagrància, consulta Jutjat de Guàrdia abans d'entrar."
+      "info_dubte_jutjat": "Si dubtes sobre flagrància, consulta Jutjat de Guàrdia abans d'entrar.",
+      "actes_viladecans": [
+        "A 10uv — Acta comprovació d'ocupació de béns immobles sense violència/intimidació",
+        "G 70 — Informe d'ocupació d'un immoble",
+        "A 18PL — Declaració del propietari/perjudicat",
+        "N 02 — Drets víctima"
+      ]
     },
 
     "fi_flagrant_consultar": {
@@ -123,6 +144,10 @@
         "Consultar Jutjat de Guàrdia (telèfon de guàrdia)",
         "Si JG autoritza: actuació immediata",
         "Si JG diu via civil: derivar al propietari"
+      ],
+      "actes_viladecans": [
+        "A 10uv — Acta comprovació d'ocupació de béns immobles sense violència/intimidació",
+        "A 18PL — Declaració del propietari/perjudicat"
       ]
     },
 
@@ -130,9 +155,10 @@
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Usurpació (Art. 245.2 CP)",
-      "concepte": "Ocupació d'immoble, vivenda o edifici aliè que NO constitueix domicili",
+      "concepte": "Ocupació pacífica (sense violència ni intimidació) d'immoble, habitatge o edifici aliè que NO constitueix domicili, o mantenir-s'hi contra la voluntat del titular",
       "article": "Art. 245.2 CP",
       "pena": "Multa 3-6 mesos",
+      "pena_245_1": "Si amb VIOLÈNCIA o INTIMIDACIÓ sobre les persones: art. 245.1 CP — presó 1-2 anys, a més de les penes pels actes violents",
       "perseguibilitat": "D'ofici (no requereix denúncia perjudicat — encara que ajuda)",
       "accions": [
         "Denúncia propietari (recomanable)",
@@ -140,6 +166,14 @@
         "Fotografies, comprovació titularitat (Registre Propietat)",
         "Atestat + Jutjat (procediment lent)",
         "Si fets concrets concurrents: actuar (drogues, danys, defraudació)"
+      ],
+      "actes_viladecans": [
+        "A 10uv — Acta comprovació d'ocupació de béns immobles sense violència/intimidació",
+        "G 70 — Informe d'ocupació d'un immoble",
+        "A 10h — Control ocupació d'habitatges padró (2 idiomes)",
+        "A 10h.MOD — Inspecció habitatges ocupats",
+        "A 18PL — Declaració del propietari/perjudicat",
+        "N 02 — Drets víctima"
       ]
     },
 
@@ -149,9 +183,9 @@
       "titol": "⚖️ Ocupació consolidada — via judicial",
       "info": "Un cop transcorreguts dies de flagrància, el desallotjament requereix RESOLUCIÓ JUDICIAL.",
       "vies_per_propietari": [
-        "ACCIÓ CIVIL DESNONAMENT (Llei 5/2018) — procediment ràpid per particulars i entitats sense ànim lucre",
+        "ACCIÓ CIVIL DESNONAMENT EXPRÉS (Llei 5/2018 — arts. 250.1.4t i 441.1 bis LEC): el jutjat pot acordar el lliurament immediat de la possessió si els ocupants no aporten títol en 5 dies. Per a persones físiques, entitats sense ànim de lucre i entitats públiques d'habitatge social — NO bancs ni grans tenidors",
         "DENÚNCIA PENAL Art. 245.2 CP (procediment més lent)",
-        "ACCIÓ POSSESSÒRIA (Art. 250.1.4 LEC) — recuperació possessió"
+        "MESURA CAUTELAR de desallotjament dins el procés penal (art. 13 LECrim; Instrucció FGE 1/2020)"
       ],
       "accions_policia": [
         "Atendre denúncia del propietari",
@@ -160,20 +194,28 @@
         "NO desallotjar sense resolució",
         "Si fets concrets paral·lels (robatori electricitat, danys, amenaces, drogues): actuar independentment"
       ],
-      "informacio_propietari": "Recomanar consulta amb advocat / via civil ràpida (Llei 5/2018) si vol recuperar abans"
+      "informacio_propietari": "Recomanar consulta amb advocat / via civil ràpida (Llei 5/2018) si vol recuperar abans",
+      "actes_viladecans": [
+        "G 70 — Informe d'ocupació d'un immoble",
+        "A 10h — Control ocupació d'habitatges padró (2 idiomes)",
+        "A 10h.MOD — Inspecció habitatges ocupats",
+        "A10j — Acta notificació llançaments",
+        "A 18PL — Declaració del propietari/perjudicat"
+      ]
     }
   },
   "notes_finals": [
-    "DISTINCIÓ CLAU: habitatge habitual o segona residència = ALLANAMENT (delicte greu 202). Immoble buit / no habitatge = USURPACIÓ (multa).",
+    "DISTINCIÓ CLAU: habitatge habitual o segona residència (morada) = VIOLACIÓ DE DOMICILI (202 CP, delicte greu). Immoble buit / no domicili = USURPACIÓ (245.2 CP, multa). Amb violència/intimidació sobre les persones = 245.1 CP.",
     "DEFRAUDACIÓ FLUID ELÈCTRIC (Art. 255 CP) és delicte INDEPENDENT i pot perseguir-se tot i que ocupació estigui consolidada — acta i atestat.",
     "MENORS al pis ocupat: comunicació DGAIA SEMPRE.",
     "PERSONES VULNERABLES (gent gran, malalts mentals): coordinar amb Serveis Socials abans desallotjament.",
     "DANYS al pis (estructura): valorar concurs 263 CP.",
     "PROFESSIONALS DE L'OCUPACIÓ (organitzacions): coordinació Mossos DIC — pot ser tracta de persones / explotació.",
-    "Llei 5/2018: procediment civil ràpid (15 dies) per recuperació immobles particulars i entitats sense ànim lucre. NO bancs ni grans tenidors.",
+    "Llei 5/2018 (desnonament exprés): procediment civil ràpid per a persones físiques, entitats sense ànim de lucre i entitats públiques d'habitatge social. Els ocupants tenen 5 dies per aportar títol (art. 441.1 bis LEC); si no, lliurament immediat de la possessió. NO aplicable a bancs ni grans tenidors.",
     "OCUPACIÓ + TRÀFIC DROGUES: concurs 245 + 368 CP. Sovint pisos del 'narcopisos'.",
     "NARCOPISOS: avisar Mossos UDYCO / DIC. Investigació coordinada.",
     "Si propietari menor / incapaç: tutor legal pot denunciar.",
-    "ESCALAMENT, FRACTURA per accedir → afegir Art. 240 CP (robatori amb força) si va a buscar coses, no si només per ocupar."
+    "ESCALAMENT, FRACTURA per accedir → robatori amb força (240 CP) NOMÉS si hi ha ànim d'apoderar-se de coses; si només és per ocupar, valorar danys (263 CP) en concurs.",
+    "INSTRUCCIÓ FGE 1/2020: criteris d'actuació davant l'ocupació — flagrància, mesures cautelars de desallotjament (art. 13 LECrim) i distinció 202/245 CP."
   ]
 }

@@ -8,7 +8,7 @@
     "Annex IV TRLSV (barem)",
     "Arts. 76.A i 77.A TRLSV",
     "Art. 379.1 CP",
-    "Ordre IET/3667/2014 (cinemòmetres)"
+    "Ordre ICT/155/2020, annex XII (control metrològic — cinemòmetres)"
   ],
 
   "marges_error_cinemometres": {
@@ -25,7 +25,7 @@
     "fix": "Cabines fixes (Pegasus, Velolaser fix), pòrtics. Marge ±5%/5 km/h.",
     "mobil": "Radar dins vehicle policial (parat o en moviment). Marge ±7%/7 km/h.",
     "tram": "Mesura mitjana entre 2 punts. Marge ±3%.",
-    "laser": "Pistola làser portàtil. Marge ±3 km/h habitualment.",
+    "laser": "Pistola làser portàtil (funcionament estàtic). Marge ±5 km/h (<100 km/h) o ±5% (>100 km/h), com els fixos/estàtics.",
     "homologacio": "Anual obligatòria (CEM — Centre Espanyol de Metrologia)",
     "dret_conductor": "Sol·licitar certificat homologació i última verificació (si recurs)"
   },
@@ -225,7 +225,10 @@
       "article_butlleta": "Art. 48 RGC",
       "import": "100 € (DTE 50 €)",
       "punts": "0 punts",
-      "info_butlleta": "INDICAR a la butlleta: velocitat detectada, velocitat imputable (descomptat marge), límit de la via, model i serial del cinemòmetre, data última verificació, fotografia o tiquet adjunt"
+      "info_butlleta": "INDICAR a la butlleta: velocitat detectada, velocitat imputable (descomptat marge), límit de la via, model i serial del cinemòmetre, data última verificació, fotografia o tiquet adjunt",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
     "fi_greu_300": {
       "final": true,
@@ -234,7 +237,10 @@
       "concepte_butlleta": "Circular a velocitat superior a la limitació genèrica (indicar velocitat mesurada i cinemòmetre utilitzat)",
       "article_butlleta": "Art. 48 RGC",
       "import": "300 € (DTE 150 €)",
-      "punts": "–2 punts"
+      "punts": "–2 punts",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
     "fi_greu_400": {
       "final": true,
@@ -242,7 +248,10 @@
       "titol": "⚠️ Tram 3 — GREU",
       "article_butlleta": "Art. 48 RGC",
       "import": "400 € (DTE 200 €)",
-      "punts": "–4 punts"
+      "punts": "–4 punts",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
     "fi_greu_500": {
       "final": true,
@@ -250,16 +259,22 @@
       "titol": "⚠️ Tram 4 — GREU",
       "article_butlleta": "Art. 48 RGC",
       "import": "500 € (DTE 250 €)",
-      "punts": "–6 punts"
+      "punts": "–6 punts",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
     "fi_mg_600": {
       "final": true,
       "tipus": "administrativa",
       "titol": "🔴 MOLT GREU",
-      "article_butlleta": "Art. 77.A TRLSV",
-      "import": "600 € (sense reducció general — alguns casos sí)",
+      "article_butlleta": "Art. 77.a TRLSV",
+      "import": "600 € (DTE 300 € — la reducció del 50% de l'Art. 94 TRLSV també s'aplica a les molt greus de velocitat)",
       "punts": "–6 punts",
-      "info": "Per via penal: si excés > 60 (urbà) o 80 (inter) → 379.1 CP, no MG administrativa"
+      "info": "Per via penal: si excés > 60 (urbà) o 80 (inter) → 379.1 CP, no MG administrativa",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa (velocitat detectada, imputable, límit, cinemòmetre i verificació)"
+      ]
     },
 
     "fi_penal_velocitat": {
@@ -295,7 +310,13 @@
         "Identificació plena del vehicle (matrícula, marca, model)",
         "Identificació del conductor"
       ],
-      "competencia": "Jutjat d'Instrucció de Guàrdia"
+      "competencia": "Jutjat d'Instrucció de Guàrdia",
+      "actes_viladecans": [
+        "N 11 — Citació per a judici ràpid (Art. 379.1 CP)",
+        "N 08 — Drets persona investigada no detinguda JR (si es tramita per citació)",
+        "N 01 — Informació drets persona detinguda (si detenció)",
+        "A 13 — Immobilització de vehicle (el conductor no pot continuar conduint)"
+      ]
     }
   },
   "notes_finals": [

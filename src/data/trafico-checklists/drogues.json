@@ -120,7 +120,11 @@
       "tipus": "ok",
       "titol": "✅ Negativa a drogues",
       "accio": "Es deixa marxar el conductor",
-      "documentacio": "Anotació al servei"
+      "documentacio": "Anotació al servei",
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la prova)",
+        "Butlleta estadística substàncies estupefaents (una per cada prova practicada, també si és negativa)"
+      ]
     },
 
     "fi_recepta_ok": {
@@ -133,6 +137,12 @@
         "Anotar al servei",
         "Aconsellar conduir amb prudència",
         "Si dubtes greus: enviar mostra a laboratori igualment per confirmar"
+      ],
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la prova)",
+        "T 15 — Tiquets drogues (resultat indiciari de saliva, per a constància)",
+        "T 12 — Cadena de custòdia + mostra per analítica (només si es decideix enviar la mostra al laboratori per dubtes)",
+        "Butlleta estadística substàncies estupefaents (una per cada prova practicada)"
       ]
     },
 
@@ -155,7 +165,17 @@
         "7. Informar del dret a contrastació (anàlisi de sang)"
       ],
       "documentacio": "Butlletí + acta intervenció mostra + cadena custòdia + tiquet drogotest",
-      "info_extra": "Si en confirmar-se al laboratori NO surt positiu: anul·lació de la sanció (raons, anar a l'instructor)"
+      "info_extra": "Si en confirmar-se al laboratori NO surt positiu: anul·lació de la sanció (raons, anar a l'instructor)",
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la prova)",
+        "T 15 — Tiquets drogues (resultat indiciari de saliva, adjuntar al butlletí)",
+        "T 12 — Cadena de custòdia de drogues ampliatòria + mostra per analítica",
+        "A 66 — Lliurament de bossa amb mostres per a estudi toxicològic (enviament al laboratori)",
+        "I 55 — Cadena de custòdia",
+        "T 16 — Full de denúncia administrativa (Art. 14.1 TRLSV)",
+        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
+        "Butlleta estadística substàncies estupefaents"
+      ]
     },
 
     "fi_penal_379_2_drogues": {
@@ -191,7 +211,19 @@
         "Possibles testimonis",
         "Substància intervinguda al vehicle si n'hi ha"
       ],
-      "competencia": "Jutjat d'Instrucció de Guàrdia"
+      "competencia": "Jutjat d'Instrucció de Guàrdia",
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la prova)",
+        "A 76 — Acta simptomatologia drogues PENAL (IMPRESCINDIBLE per acreditar la influència — Art. 379.2 CP)",
+        "T 15 — Tiquets drogues (resultat indiciari de saliva, adjuntar a l'atestat)",
+        "T 12 — Cadena de custòdia de drogues ampliatòria + mostra per analítica",
+        "A 66 — Lliurament de bossa amb mostres per a estudi toxicològic (enviament al laboratori)",
+        "I 55 — Cadena de custòdia",
+        "N 11 — Citació per a judici ràpid (Art. 379.2 CP)",
+        "N 08 — Drets persona investigada no detinguda JR (si es tramita per citació)",
+        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
+        "Butlleta estadística substàncies estupefaents"
+      ]
     },
 
     "fi_383_drogues": {
@@ -212,7 +244,15 @@
         "Atestat penal amb diligència específica de la negativa",
         "Posada a disposició Jutjat de Guàrdia"
       ],
-      "compatible_amb": "Art. 379.2 CP si hi ha indicis d'influència (símptomes) — concurs"
+      "compatible_amb": "Art. 379.2 CP si hi ha indicis d'influència (símptomes) — concurs",
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de requerir la prova: acredita l'advertiment de l'Art. 383 CP)",
+        "A 76 — Acta simptomatologia drogues PENAL (documenta l'estat del conductor davant la negativa)",
+        "N 01 — Informació drets persona detinguda (si detenció)",
+        "N 08 — Drets persona investigada no detinguda JR (si finalment es tramita per citació)",
+        "N 11 — Citació per a judici ràpid (Art. 383 CP)",
+        "A 13 — Immobilització de vehicle"
+      ]
     }
   },
   "notes_finals": [

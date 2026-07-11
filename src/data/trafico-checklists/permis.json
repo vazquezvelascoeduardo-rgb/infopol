@@ -67,6 +67,9 @@
         "Comprovar a base de dades que efectivament té permís vigent",
         "Si confirmat: butlletí lleu i deixar continuar",
         "Si no es pot confirmar: retenció fins aclarir"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa (Art. 3.2 RGCond, lleu)"
       ]
     },
 
@@ -83,6 +86,10 @@
         "Butlletí",
         "Immobilització POSSIBLE si no hi ha conductor sustitut (recomanable)",
         "Indicar que ha de renovar a la prefectura DGT"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa (Art. 12.4 RGCond)",
+        "A 13 — Immobilització de vehicle (si no hi ha conductor substitut)"
       ]
     },
 
@@ -105,6 +112,10 @@
         "IMMOBILITZACIÓ del vehicle (no pot continuar conduint-lo)",
         "Buscar conductor habilitat o grua",
         "Comunicar a empresa si transport professional"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa (Art. 1.1 RGCond, MG)",
+        "A 13 — Immobilització de vehicle"
       ]
     },
 
@@ -239,6 +250,11 @@
         "4. Buscar conductor sustitut amb permís vàlid o grua.",
         "5. Comprovar VIGÈNCIA del permís estranger al país d'origen: si està caducat o anul·lat → escalar a Art. 384 CP (delicte penal).",
         "6. Indicar al conductor que ha d'iniciar el canje immediatament a la seu electrònica de la DGT."
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa (Art. 1.1 RGCond, MG)",
+        "A 13 — Immobilització de vehicle",
+        "A 58 — Presentació d'estranger a efectes d'identificació (si el permís estranger no queda plenament acreditat)"
       ]
     },
 
@@ -264,6 +280,11 @@
         "4. Comprovar la VIGÈNCIA del permís estranger al país d'origen (data caducitat al document; consulta SIRENE/Interpol si dubte). Si està CADUCAT o anul·lat → escalar a Art. 384 CP.",
         "5. Advertir el conductor: sense conveni, només pot obtenir permís espanyol per EXAMEN complet a la DGT.",
         "6. Informar Estrangeria si hi ha indicis d'irregularitat administrativa."
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa (Art. 1.1 RGCond, MG)",
+        "A 13 — Immobilització de vehicle",
+        "A 58 — Presentació d'estranger a efectes d'identificació (si el permís estranger no queda plenament acreditat)"
       ]
     },
 
@@ -284,7 +305,15 @@
         "6. INTERVENCIÓ i immobilització del vehicle.",
         "7. Atestat penal + posada a disposició Jutjat de Guàrdia."
       ],
-      "competencia": "Jutjat Instrucció Guàrdia"
+      "competencia": "Jutjat Instrucció Guàrdia",
+      "actes_viladecans": [
+        "A 58 — Presentació d'estranger a efectes d'identificació (permís estranger no acreditat)",
+        "N 11 — Citació per a judici ràpid (Art. 384 CP)",
+        "N 08 — Drets persona investigada no detinguda JR (si citació)",
+        "N 01 — Informació drets persona detinguda (si detenció)",
+        "A 13 — Immobilització de vehicle",
+        "T 16 — Full de denúncia administrativa (només si finalment s'acredita que TÉ permís i queda en Art. 3.2 RGCond, via administrativa)"
+      ]
     },
 
     "fi_ue_no_renova": {
@@ -300,6 +329,10 @@
         "Butlletí Art. 12.4 RGCond.",
         "Immobilització possible si no hi ha conductor sustitut.",
         "Indicar que ha de renovar a la seu electrònica de la DGT."
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa (Art. 12.4 RGCond)",
+        "A 13 — Immobilització de vehicle (si no hi ha conductor substitut)"
       ]
     },
 
@@ -311,7 +344,12 @@
       "article_butlleta": "Art. 39.3 RG Conductors",
       "import": "200 € (DTE 100 €)",
       "punts": "–4 punts",
-      "info": "La mesura cautelar (suspensió no ferma, recurs pendent) és VIA ADMINISTRATIVA. Si la suspensió és FERMA → Art. 384 CP (delicte)."
+      "info": "La mesura cautelar (suspensió no ferma, recurs pendent) és VIA ADMINISTRATIVA. Si la suspensió és FERMA → Art. 384 CP (delicte).",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa (Art. 39.3 RGCond)",
+        "I 10 — Intervenció permís de conducció (si el porta físicament i escau la retirada)",
+        "A 13 — Immobilització de vehicle (si no hi ha conductor substitut)"
+      ]
     },
 
     "fi_condicions_restrictives": {
@@ -329,7 +367,10 @@
         "Codi 70 — Vehicle adaptat",
         "Codi 105 — Condicions específiques de l'autoritat sanitària"
       ],
-      "accions_operatives": "Butlletí + indicació de la condició incomplerta"
+      "accions_operatives": "Butlletí + indicació de la condició incomplerta",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa (Art. 3.1 RGCond, indicant la condició incomplerta)"
+      ]
     },
 
     "fi_penal_384_mai": {
@@ -349,7 +390,13 @@
         "7. Posada a disposició Jutjat Guàrdia"
       ],
       "info": "Aplicable quan el vehicle requereix permís (no si bici/VMP). Pels que no requereixen permís: simple infracció administrativa o cap.",
-      "competencia": "Jutjat Instrucció Guàrdia"
+      "competencia": "Jutjat Instrucció Guàrdia",
+      "actes_viladecans": [
+        "N 11 — Citació per a judici ràpid (Art. 384 CP)",
+        "N 08 — Drets persona investigada no detinguda JR (si citació)",
+        "N 01 — Informació drets persona detinguda (si detenció)",
+        "A 13 — Immobilització de vehicle"
+      ]
     },
 
     "fi_penal_384_punts": {
@@ -372,6 +419,14 @@
         "Immobilització vehicle",
         "Atestat amb consulta DGT",
         "Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "I 10 — Intervenció permís de conducció (retirada física del permís)",
+        "A 67 — Comunicació pèrdua de vigència del carnet per edictal (si la notificació de la pèrdua consta feta per edictes: acreditar-ho a l'atestat)",
+        "N 11 — Citació per a judici ràpid (Art. 384 CP)",
+        "N 08 — Drets persona investigada no detinguda JR (si citació)",
+        "N 01 — Informació drets persona detinguda (si detenció)",
+        "A 13 — Immobilització de vehicle"
       ]
     },
 
@@ -390,6 +445,12 @@
         "Atestat amb antecedents",
         "Comunicació al Jutjat que va dictar la privació",
         "Posada a disposició Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "I 10 — Intervenció permís de conducció (si encara el porta físicament)",
+        "N 01 — Informació drets persona detinguda (si detenció)",
+        "N 11 — Citació per a judici ràpid (Art. 384 CP) + N 08 — Drets investigat no detingut (si es tramita per citació)",
+        "A 13 — Immobilització de vehicle"
       ]
     }
   },

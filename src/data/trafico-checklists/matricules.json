@@ -8,8 +8,8 @@
     "Ordre INT/3215/2008 (format placa)",
     "Llei 38/1992 (IEDMT) art. 65 — vehicle estranger >6 mesos a Espanya",
     "Art. 76.h TRLSV (RDL 6/2015) — placa no visible / coberta",
-    "Art. 392 CP — falsedat documental",
-    "Art. 399 CP — ús de placa o document oficial fals"
+    "Art. 392 CP — falsedat documental (la placa de matrícula té la consideració de document oficial segons jurisprudència del TS)",
+    "Art. 399 CP — falsedat de certificats"
   ],
   "comprovacions_previes": [
     "Anota la matrícula EXACTAMENT com es llegeix (espais, guions, banda blava).",
@@ -65,7 +65,7 @@
       "punts": "0",
       "accions_operatives": [
         "Butlletí d'infracció LSV.",
-        "IMMOBILITZACIÓ del vehicle (Art. 84 TRLSV).",
+        "IMMOBILITZACIÓ del vehicle (Art. 104 TRLSV).",
         "Fer constar bastidor (VIN) a l'acta.",
         "Si no s'acredita propietat → diligència policial. Posar a disposició de l'autoritat judicial.",
         "Si l'usuari porta documentació de compravenda recent: es valora bona fe i termini per matricular."
@@ -74,7 +74,11 @@
       "base_legal": [
         "Art. 25-30 RGV",
         "Art. 76.G TRLSV",
-        "Art. 84 TRLSV (immobilització)"
+        "Art. 104 TRLSV (immobilització)"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització"
       ]
     },
 
@@ -91,7 +95,11 @@
         "Si la placa s'ha desprès accidentalment i la porta el conductor: atestat de pèrdua + termini per duplicat (5 dies hàbils).",
         "Si la placa està a casa o desapareguda: valora immobilització fins a posar la placa correcta."
       ],
-      "info_clau": "Reglament: placa davantera + posterior obligatòries en turismes. Motos només posterior."
+      "info_clau": "Reglament: placa davantera + posterior obligatòries en turismes. Motos només posterior.",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització (si no es pot restituir la placa)"
+      ]
     },
 
     "fi_sense_matricula_robat": {
@@ -111,6 +119,9 @@
         "Art. 237 CP (robatori amb força)",
         "Art. 520 LECrim (drets del detingut)",
         "Art. 282 LECrim (atestat)"
+      ],
+      "actes_viladecans": [
+        "N 01 — Drets detingut (si falsedat documental 392 CP o sostracció)"
       ]
     },
 
@@ -143,7 +154,10 @@
         "Es pot demanar al conductor que la netegi in situ (no exigible per llei, però recomanable).",
         "Si la placa torna a ser llegible després de neteja: valora advertiment sense butlletí en cas lleu."
       ],
-      "info_clau": "La sanció és per la lectura, no pel motiu. Si està bruta però es llegeix: NO hi ha infracció."
+      "info_clau": "La sanció és per la lectura, no pel motiu. Si està bruta però es llegeix: NO hi ha infracció.",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
 
     "fi_no_llegible_suport": {
@@ -159,16 +173,19 @@
         "Si porta portabicicletes amb placa addicional homologada (placa duplicada al portabicicletes): NO hi ha infracció.",
         "Recordar al conductor que el suport ha de tenir matrícula visible."
       ],
-      "info_clau": "RGV permet portar una placa addicional (duplicat) al portabicicletes / remolc. Sense placa addicional → infracció."
+      "info_clau": "RGV permet portar una placa addicional (duplicat) al portabicicletes / remolc. Sense placa addicional → infracció.",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
 
     "fi_no_llegible_intencional": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "🔴 Placa coberta intencionalment",
+      "titol": "⚠️ GREU — Placa coberta intencionalment",
       "concepte_butlleta": "Portar elements als vehicles que dificultin o impedeixin la identificació o la lectura de la matrícula",
       "article_butlleta": "Art. 76.h TRLSV (en relació art. 18.4 RGV)",
-      "import": "500 €",
+      "import": "200 € (DTE 100 €)",
       "punts": "0",
       "accions_operatives": [
         "Butlletí d'infracció LSV (sanció greu).",
@@ -176,7 +193,11 @@
         "Si el conductor es nega a retirar-lo: immobilització fins a posar la placa visible.",
         "Foto abans/després de la retirada com a evidència."
       ],
-      "info_clau": "Quan l'ocultació és evident i intencional (foradat, escotxat, paper adhesiu...) → estem davant d'una conducta dolosa, no negligent."
+      "info_clau": "Quan l'ocultació és evident i intencional (foradat, escotxat, paper adhesiu...) → estem davant d'una conducta dolosa, no negligent. Si l'ocultació busca eludir radars/càmeres, valorar també la via dels dispositius per eludir la vigilància del trànsit.",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització (si es nega a retirar l'element ocultador)"
+      ]
     },
 
     "fi_no_llegible_manipulada": {
@@ -190,15 +211,20 @@
       "accions_ordenades_critiques": [
         "Diligència de constatació amb fotografies abans/després.",
         "Inspecció del vehicle: comprovar que la matrícula original (registrada) coincideixi amb la del bastidor (VIN).",
-        "Atestat per FALSEDAT DOCUMENTAL (Art. 392 CP) o ús de placa falsa (Art. 399 CP, segons grau de manipulació).",
+        "Atestat per FALSEDAT DOCUMENTAL (Art. 392 CP en relació amb l'art. 390.1 CP — la placa és document oficial segons jurisprudència TS).",
         "Detenció del conductor si es confirma manipulació deliberada → drets art. 520 LECrim.",
         "Posada a disposició judicial."
       ],
       "diferencia_amb_admin": "Manipulació = canviar caràcters per fer que es llegeixi una altra matrícula. Coberta = ocultar tota la placa. La primera és penal, la segona administrativa.",
       "base_legal": [
         "Art. 392 CP (falsedat documental)",
-        "Art. 399 CP (ús de placa oficial falsa)",
+        "Art. 390.1 CP (modalitats de falsedat)",
         "Art. 520 LECrim (drets del detingut)"
+      ],
+      "actes_viladecans": [
+        "N 01 — Drets detingut (si falsedat documental 392 CP)",
+        "T 16 — Full de denúncia administrativa (denúncia paral·lela per placa no llegible)",
+        "A 13 — Immobilització"
       ]
     },
 
@@ -224,13 +250,13 @@
       "tipus": "penal",
       "titol": "🚨 Placa FALSA — combinació inexistent",
       "text": "La matrícula no consta a la DGT. Estem davant de placa fabricada de zero o adaptada.",
-      "pena": "6 mesos a 3 anys de presó + multa 6-12 mesos (Art. 399 CP)",
+      "pena": "6 mesos a 3 anys de presó + multa 6-12 mesos (Art. 392 CP — la placa és document oficial, jurisprudència TS)",
       "accions_ordenades_critiques": [
         "PRECAUCIÓ: el vehicle pot tenir origen il·lícit. Demanar suport.",
         "Comprovació del bastidor (VIN) — gravat al xassís + a documentació + a etiqueta de fabricant.",
         "Si VIN també és inexistent o manipulat: vehicle d'origen desconegut → presumpció de receptació (Art. 298 CP).",
         "Detenció del conductor (drets art. 520 LECrim).",
-        "Atestat per Art. 399 CP (ús de placa oficial falsa) + receptació si correspon.",
+        "Atestat per Art. 392 CP (falsedat en document oficial — ús de placa falsa) + receptació si correspon.",
         "Vehicle a dependències / dipòsit judicial.",
         "Si hi ha indicis de banda organitzada (vehicle preparat per a delictes): comunicació a UCSI / Mossos GIE."
       ],
@@ -240,10 +266,14 @@
         "Declaració del conductor (si vol)."
       ],
       "base_legal": [
-        "Art. 399 CP (ús de placa o document oficial fals)",
+        "Art. 392 CP (falsedat en document oficial — placa de matrícula)",
         "Art. 298 CP (receptació)",
         "Art. 520 LECrim (drets del detingut)",
         "Art. 282 LECrim (atestat)"
+      ],
+      "actes_viladecans": [
+        "N 01 — Drets detingut (si falsedat documental 392 CP)",
+        "A 13 — Immobilització"
       ]
     },
 
@@ -252,13 +282,17 @@
       "tipus": "penal",
       "titol": "🚨 Placa amb format IRREGULAR",
       "text": "Aspecte físic clarament no reglamentari (font, material, mida, banda blava). Falsedat documental.",
-      "pena": "6 mesos a 3 anys de presó + multa 6-12 mesos (Art. 399 CP)",
+      "pena": "6 mesos a 3 anys de presó + multa 6-12 mesos (Art. 392 CP — la placa és document oficial, jurisprudència TS)",
       "accions_ordenades_critiques": [
         "Documentació fotogràfica detallada (font, espaiat, banda blava, material, sistema de fixació).",
         "Comparativa amb placa reglamentària (Ordre INT/3215/2008).",
         "Comprovació VIN i documentació.",
-        "Detenció + atestat per Art. 399 CP.",
+        "Detenció + atestat per Art. 392 CP (falsedat en document oficial).",
         "Posada a disposició judicial."
+      ],
+      "actes_viladecans": [
+        "N 01 — Drets detingut (si falsedat documental 392 CP)",
+        "A 13 — Immobilització"
       ],
       "elements_a_acreditar": [
         "Material no reflector (placa de plàstic en lloc de metàl·lic).",
@@ -288,7 +322,7 @@
       "tipus": "penal",
       "titol": "🚨 DUPLICAT confirmat — vehicle clonat",
       "text": "El vehicle real porta una placa que correspon a un altre vehicle. Falsedat + presumpta receptació o robatori d'origen.",
-      "pena": "6 mesos a 3 anys de presó (Art. 399 CP) — concurrent amb 392 CP",
+      "pena": "6 mesos a 3 anys de presó + multa 6-12 mesos (Art. 392 CP en relació amb l'art. 390.1 CP)",
       "accions_ordenades_critiques": [
         "Demanar suport: pot ser vehicle robat o utilitzat per a delictes.",
         "Detenció del conductor (drets art. 520 LECrim).",
@@ -304,12 +338,16 @@
         "Acta amb tots els elements concurrents."
       ],
       "base_legal": [
-        "Art. 399 CP (ús de placa oficial falsa)",
+        "Art. 392 CP (falsedat en document oficial — placa de matrícula)",
         "Art. 392 CP (falsedat documental — VIN manipulat)",
         "Art. 298 CP (receptació)",
         "Art. 244 / 237 CP (robatori si vehicle d'origen)",
         "Art. 520 LECrim",
         "Art. 282 LECrim"
+      ],
+      "actes_viladecans": [
+        "N 01 — Drets detingut (si falsedat documental 392 CP)",
+        "A 13 — Immobilització"
       ]
     },
 
@@ -319,7 +357,7 @@
       "checklist_previ": [
         "Banda blava esquerra amb 12 estrelles + codi país → vehicle UE/EEE.",
         "Sense banda blava + adhesiu oval blanc (CH, NO, AND, MA, RUS...) → fora UE.",
-        "UK post-Brexit: codi 'UK' (no 'GB') + bandera anglesa.",
+        "UK post-Brexit: codi 'UK' (no 'GB') + bandera del Regne Unit (Union Jack).",
         "Comprova permís de conduir, assegurança internacional (Carta Verda) i IDV / Carnet UE."
       ],
       "opcions": [
@@ -363,6 +401,10 @@
       "base_legal": [
         "Llei 38/1992 (IEDMT) art. 65",
         "RD 2822/1998 (RGV) art. 25"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 38-92 — Impostos Especials vehicles (matrícula estrangera, residents)"
       ]
     },
 
@@ -379,7 +421,11 @@
         "Adhesiu oval blanc al darrere (CH = Suïssa, MA = Marroc, AND = Andorra, RUS = Rússia, NO = Noruega...)."
       ],
       "info_clau": "Vehicle d'Andorra: NO és UE. La placa és NNNN-LL (2 lletres) + adhesiu AND. Fiscal: si el resident té domicili a Andorra però treballa a Espanya → controvers, valora coordinació amb Duana.",
-      "accio": "Si compleix requisits: deixar circular. Si no: butlletí (LSV) + comunicació Duana / Hisenda (IEDMT)."
+      "accio": "Si compleix requisits: deixar circular. Si no: butlletí (LSV) + comunicació Duana / Hisenda (IEDMT).",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa (si incompleix requisits)",
+        "A LITA — Infracció Impostos Especials vehicles extracomunitaris (si incompleix règim duaner)"
+      ]
     },
 
     "fi_estranger_uk": {
@@ -391,19 +437,23 @@
         "Codi 'UK' (no 'GB' — l'antic codi GB es va deixar d'usar el 2021).",
         "Carnet de conduir britànic vàlid fins a 6 mesos a Espanya (després cal IDP o canvi).",
         "Carta Verda obligatòria (no es pressuposa la cobertura UE).",
-        "Adhesiu UK ovalat o nova placa amb codi UK i bandera anglesa.",
+        "Adhesiu UK ovalat o nova placa amb codi UK i bandera del Regne Unit (Union Jack).",
         "Importació temporal màxim 6 mesos."
       ],
-      "info_clau": "Vehicles UK matriculats abans del 28 set 2021 poden encara portar 'GB'. Vàlid per a circulació però recomanable canviar adhesiu."
+      "info_clau": "Vehicles UK matriculats abans del 28 set 2021 poden encara portar 'GB'. Vàlid per a circulació però recomanable canviar adhesiu.",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa (si incompleix requisits)",
+        "A LITA — Infracció Impostos Especials vehicles extracomunitaris (si incompleix règim duaner)"
+      ]
     },
 
     "temporal": {
       "titol": "Matrícula provisional / temporal",
       "text": "Quina sèrie? Cada una té vigència i ús diferent.",
       "checklist_previ": [
-        "P (vermella + blanc) → permet circular abans de matriculació definitiva.",
-        "S (vermella + blanc) → vehicles de prova / fabricants / concessionaris.",
-        "TR (vermella + blanc) → vehicles estrangers en règim turístic temporal.",
+        "P (fons VERD + caràcters blancs) → permet circular abans de matriculació definitiva (particulars).",
+        "S (fons VERMELL + caràcters blancs) → vehicles de prova / fabricants / concessionaris.",
+        "TR (turística: fons blanc, caràcters negres + banda vertical vermella amb la caducitat) → vehicles en règim duaner turístic temporal.",
         "Totes tenen DATA DE CADUCITAT impresa o documentada — comprova vigència."
       ],
       "opcions": [
@@ -422,10 +472,14 @@
         "Vigent màxim 60 dies (ampliable a 90 amb sol·licitud DGT).",
         "Document de matriculació provisional (DGT) que acompanya el vehicle.",
         "Concebuda per: trasllat de fàbrica/concessionari fins a domicili o ITV / matriculació posterior.",
-        "Color: fons vermell amb caràcters blancs."
+        "Color: fons verd amb caràcters blancs."
       ],
       "info_clau": "Si data CADUCADA → infracció (Art. 76.G TRLSV) + immobilització fins a regularitzar.",
-      "info_extra": "Si circula amb 'P' però NO porta el document de matriculació provisional: butlletí per documentació deficient."
+      "info_extra": "Si circula amb 'P' però NO porta el document de matriculació provisional: butlletí per documentació deficient.",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa (si caducada o sense document)",
+        "A 13 — Immobilització (si caducada, fins a regularitzar)"
+      ]
     },
 
     "fi_temporal_s": {
@@ -440,7 +494,10 @@
         "Color: fons vermell amb caràcters blancs."
       ],
       "info_clau": "Si circula sense el permís de proves o sense que consti al llibre: butlletí (Art. 76.G TRLSV) + comunicació a la DGT que va expedir l'autorització.",
-      "info_extra": "Una persona física no pot tenir matrícula 'S' permanent al seu vehicle particular: és de l'empresa autoritzada."
+      "info_extra": "Una persona física no pot tenir matrícula 'S' permanent al seu vehicle particular: és de l'empresa autoritzada.",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa (si ús irregular de la placa S)"
+      ]
     },
 
     "fi_temporal_tr": {
@@ -455,7 +512,11 @@
         "El conductor ha de ser no-resident a Espanya."
       ],
       "info_clau": "Caducada → Hisenda + Duana. Comunicar via UCSI Trànsit.",
-      "info_extra": "Una persona resident a Espanya NO pot circular amb matrícula TR (els privilegis duaners no apliquen)."
+      "info_extra": "Una persona resident a Espanya NO pot circular amb matrícula TR (els privilegis duaners no apliquen).",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa (si caducada o conductor resident)",
+        "A LITA — Infracció Impostos Especials vehicles extracomunitaris (si escau)"
+      ]
     },
 
     "identificacio": {
@@ -566,7 +627,7 @@
       "titol": "🛡️ Vehicles oficials i Forces Armades / FCS",
       "text": "Sèries reservades per identificar coordinacions ràpides.",
       "exemples": [
-        "PGC = Guàrdia Civil (placa amb fons vermell + lletres blanques)",
+        "PGC = Guàrdia Civil",
         "CNP = Cos Nacional de Policia",
         "CME = Mossos d'Esquadra",
         "ET-NNNNNN = Exèrcit de Terra (FAS)",
@@ -612,10 +673,11 @@
       "text": "El color de la placa indica el règim del vehicle.",
       "exemples": [
         "Blanc + lletres negres = vehicles ordinaris (turismes, motos, camions, autobusos privats)",
-        "Groc + lletres negres = servei públic (taxi, autobús urbà, ambulància, lloguer sense conductor antic)",
-        "Vermell + lletres blanques = provisional (P), proves (S), turística (TR) — vigència limitada",
-        "Verd + lletres blanques = vehicles oficials (Estat, CCAA, ens locals) i agents de l'autoritat",
+        "Groc + lletres negres = ciclomotors (placa reduïda de fons groc)",
+        "Vermell + lletres blanques = temporal d'empresa / proves (S) — vigència limitada",
+        "Verd + lletres blanques = temporal provisional de particular (P) — vigència limitada",
         "Blau + lletres blanques = cos diplomàtic / consular / OI",
+        "Blanc + banda vertical vermella amb data = matrícula turística (TR)",
         "Negre + lletres grogues = format antic pre-1971 (encara legítim si no s'ha rematriculat)"
       ],
       "info_clau": "El color confirma el règim però NO el legitima per si sol. Sempre acreditar amb documentació (permís circulació, autoritzacions especials)."
@@ -623,7 +685,7 @@
   },
   "notes_finals": [
     "Davant de qualsevol sospita de manipulació, comprova SEMPRE el VIN gravat al bastidor (no només a la documentació) — UNE 26-019.",
-    "Una placa coberta intencionalment és infracció administrativa (500 €). Una placa MANIPULADA (caràcters canviats) és delicte (Art. 392/399 CP).",
+    "Una placa coberta intencionalment és infracció administrativa (greu, 200 €). Una placa MANIPULADA (caràcters canviats) és delicte de falsedat (Art. 392 CP).",
     "El cloning (placa que existeix però no correspon al vehicle) és la forma més sofisticada: només es detecta amb VIN.",
     "Les matrícules diplomàtiques NO impedeixen aixecar acta — només impedeixen sancionar directament. El Ministeri Afers Exteriors fa de canal.",
     "Vehicle estranger >6 mesos a Espanya per resident: obligació de matriculació espanyola + IEDMT (Llei 38/1992).",

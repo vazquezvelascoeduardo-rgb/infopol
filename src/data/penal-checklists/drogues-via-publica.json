@@ -9,7 +9,7 @@
     "Art. 36.18 LOPSC (cultiu visible)",
     "Art. 36.19 LOPSC (tolerància en establiments)",
     "Art. 47.b Llei 11/2009 (tolerància locals)",
-    "Art. 80.2 LOPSC (suspensió sanció amb tractament)",
+    "DA 5a LOPSC (suspensió de sancions a MENORS amb tractament/reeducació)",
     "Art. 368 CP (tràfic drogues)",
     "Art. 368 paràgraf 2 CP (cas menor entitat)",
     "Art. 369 CP (tràfic agreujat)",
@@ -30,7 +30,7 @@
     "Haixix": "25 g màxim (0,3-0,5 g/dosi)",
     "LSD": "3 mg màxim",
     "Sulfat amfetamina": "900 mg màxim",
-    "MDA/MDMA/MDEA": "2,4 mg màxim",
+    "MDA/MDMA/MDEA": "2,4 g màxim",
     "Trankimazin": "75 mg màxim",
     "Rohipnol": "50 mg màxim",
     "Tranxilium": "750 mg màxim",
@@ -128,12 +128,20 @@
         "4. ACTA D-10 (denúncia LOPSC) — número OAC",
         "5. Identificació plena infractor (DNI/NIE/passaport)",
         "6. Descripció DETALLADA del que s'ha intervingut",
-        "7. Comunicar dret a sol·licitar SUSPENSIÓ sanció pel tractament (Art. 80.2 LOPSC) — per consumidors",
+        "7. Si l'infractor és MENOR: comunicar dret a sol·licitar SUSPENSIÓ de la sanció amb tractament/reeducació (DA 5a LOPSC)",
         "8. Tramesa al laboratori si dubtes substància",
         "9. Si menor: comunicació tutors + Servei Menors"
       ],
       "documentacio": "Acta D-10 + acta intervenció substància + cadena custòdia",
-      "info_suspensio_80_2": "Si l'infractor és consumidor i sol·licita tractament/rehabilitació, la sanció pot ser suspesa. Si abandona el tractament, s'executa la sanció."
+      "info_suspensio_80_2": "DA 5a LOPSC: si l'infractor és MENOR d'edat i, a sol·licitud seva i dels seus representants legals, se sotmet a tractament, rehabilitació o activitats de reeducació, la multa pot ser suspesa. Si abandona el tractament, s'executa la sanció. Per a majors d'edat, la LO 4/2015 NO preveu aquesta suspensió.",
+      "actes_viladecans": [
+        "D 10 — Denúncia infracció Llei 4/2015 (art. 36.16)",
+        "D 10.b — Intervenció temporal (substància intervinguda)",
+        "A 20 — Pesada de substàncies estupefaents (amb testimoni; pes brut)",
+        "I 55 — Cadena de custòdia",
+        "A 66 — Lliurament bossa amb mostres per estudi toxicològic (si tramesa al laboratori)",
+        "M 06 — Oferiment mesura educativa al menor (si l'infractor és menor — suspensió sanció DA 5a)"
+      ]
     },
 
     "fi_tinenca_36_16": {
@@ -147,8 +155,14 @@
       "accions": [
         "Intervenció substància + acta D-10",
         "Cadena custòdia",
-        "Informar dret suspensió Art. 80.2",
+        "Si menor: informar del dret de suspensió de la sanció (DA 5a LOPSC)",
         "Si dubte quantitat → laboratori"
+      ],
+      "actes_viladecans": [
+        "D 10 — Denúncia infracció Llei 4/2015 (art. 36.16)",
+        "D 10.b — Intervenció temporal (substància intervinguda)",
+        "A 20 — Pesada de substàncies estupefaents (amb testimoni; pes brut)",
+        "I 55 — Cadena de custòdia"
       ]
     },
 

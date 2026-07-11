@@ -4,14 +4,14 @@
   "categoria": "persones",
   "icono": "🔎",
   "base_legal": [
-    "Instrucció 1/2009 Secretaria Estat Seguretat (Protocol)",
-    "Llei 6/1996 Sistema CNDES",
-    "Art. 225 bis CP (sostracció menors per progenitor)",
-    "Art. 162-163 CP (segrest il·legal)",
-    "RD 1796/2010 Centre Nacional Desapareguts"
+    "Instrucció 1/2019 Secretaria d'Estat de Seguretat (Protocol d'actuació per a persones desaparegudes)",
+    "CNDES — Centre Nacional de Desapareguts (SES, creat el 2018)",
+    "Base de dades PDyRH (Persones Desaparegudes i Restes Humanes)",
+    "Art. 225 bis CP (sostracció de menors per progenitor)",
+    "Arts. 163-168 CP (detencions il·legals i segrestos)"
   ],
 
-  "principi_clau": "NO HI HA TEMPS MÍNIM d'espera per denunciar. El mite de les 24/48h és FALS. Cal denunciar i tramitar IMMEDIATAMENT.",
+  "principi_clau": "NO HI HA TEMPS MÍNIM d'espera per denunciar. El mite de les 24/48h és FALS (Instrucció SES 1/2019). Cal denunciar i tramitar IMMEDIATAMENT. Menors i persones vulnerables = activació immediata SEMPRE, sense cap espera.",
 
   "nivells_risc_oficial": {
     "alt": "Indicadors greus de perill (suïcidi, malaltia, edat extrema, indicis violència)",
@@ -68,11 +68,17 @@
         "5️⃣ Recollida exhaustiva: roba, objectes, rutines, punts habituals, medicació",
         "6️⃣ Entrevista familiars/conviventes (cronologia última hora)",
         "7️⃣ RASTREIG zona: hospitals, residències, transport públic, càmeres",
-        "8️⃣ Coordinació amb Cossos especialitzats (Mossos GRUME)",
+        "8️⃣ Coordinació amb unitats especialitzades (Mossos DIC — persones desaparegudes)",
         "9️⃣ Si malaltia mental greu: contacte Salut Mental",
         "🔟 Atestat + actualització contínua CNDES"
       ],
-      "documentacio": "Denúncia + fitxa CNDES + atestat"
+      "documentacio": "Denúncia + fitxa CNDES + atestat",
+      "actes_viladecans": [
+        "A 10 — Genèrica (ressenya inicial)",
+        "A 18PL — Acta de declaració (denunciant)",
+        "N 02 — Drets víctima (família)",
+        "A 59 — Esbrinament de domicili per a notificacions"
+      ]
     },
 
     "fi_alt_risc_suïcida": {
@@ -87,6 +93,11 @@
         "Família + entorn proper",
         "Trucada al telèfon (geolocalització si possible)",
         "Telèfon 024 (atenció conducta suïcida)"
+      ],
+      "actes_viladecans": [
+        "A 10 — Genèrica (ressenya inicial)",
+        "A 18PL — Acta de declaració (denunciant)",
+        "N 02 — Drets víctima (família)"
       ]
     },
 
@@ -102,6 +113,11 @@
         "Recerca telefonia (Jutjat) — geolocalització",
         "Càmeres de la zona",
         "Si tracta éssers humans sospita: protocol especialitzat"
+      ],
+      "actes_viladecans": [
+        "A 10 — Genèrica (ressenya inicial)",
+        "A 18PL — Acta de declaració (denunciant)",
+        "N 02 — Drets víctima (família)"
       ]
     },
 
@@ -111,15 +127,20 @@
       "titol": "🆘 MENOR DESAPAREGUT — alt risc",
       "accions_ordenades": [
         "1️⃣ ACTIVACIÓ IMMEDIATA (zero espera)",
-        "2️⃣ Sala + GRUME (Mossos) + CNDES",
+        "2️⃣ Sala + Mossos DIC (persones desaparegudes) + CNDES",
         "3️⃣ Fotografia recent + descripció EXACTA roba",
         "4️⃣ DISPOSITIUS: patrulles + càmeres + punts pas",
         "5️⃣ Entrevista entorn: amistats, escola, xarxes socials",
         "6️⃣ Telefonia / xarxes socials (procediment judicial)",
         "7️⃣ Informar Fiscalia Menors",
-        "8️⃣ Activar ALERTA INFANCIA / Alert Espai si pertinent",
+        "8️⃣ Activar ALERTA MENOR DESAPARECIDO (CNDES) si pertinent",
         "9️⃣ Reunir pares/tutors (coordinació informació)",
         "🔟 Si possible, coordinació Interpol si sortida fronteres"
+      ],
+      "actes_viladecans": [
+        "A 10 — Genèrica (ressenya inicial)",
+        "A 18PL — Acta de declaració (denunciant)",
+        "N 02 — Drets víctima (família)"
       ]
     },
 
@@ -130,14 +151,19 @@
       "info": "Risc EXTREM. Coordinació total i immediata.",
       "accions_ordenades_critiques": [
         "1️⃣ ALERTA MÀXIMA — activació total Mossos + recursos",
-        "2️⃣ GRUME + DIC + Sala regional + UFAM",
+        "2️⃣ Mossos DIC + UFAM + Sala regional",
         "3️⃣ Cercle de cerca per PROXIMITAT (radi inicial 500m, ampliar)",
         "4️⃣ Examen DOMICILI — possible ocultació involuntària (armari, nevera, neveres horitzontals…)",
         "5️⃣ Hospitals + serveis sanitaris propers",
         "6️⃣ Interlocució amb família — possible sostracció (separació, conflicte)",
-        "7️⃣ ALERT INFANCIA / crida massiva mitjans",
+        "7️⃣ ALERTA MENOR DESAPARECIDO (CNDES) / crida massiva mitjans",
         "8️⃣ Coordinació amb gènere si VG en context",
         "9️⃣ Vigilància aeroports, estacions, ports si fugida"
+      ],
+      "actes_viladecans": [
+        "A 10 — Genèrica (ressenya inicial)",
+        "A 18PL — Acta de declaració (denunciant)",
+        "N 02 — Drets víctima (família)"
       ]
     },
 
@@ -157,6 +183,12 @@
         "6. Atestat + Jutjat",
         "7. Si VG en context: coordinar amb JVM",
         "8. Comunicació DGAIA"
+      ],
+      "actes_viladecans": [
+        "A 10 — Genèrica (ressenya inicial)",
+        "A 18PL — Acta de declaració (denunciant)",
+        "N 02 — Drets víctima (família)",
+        "A 59 — Esbrinament de domicili per a notificacions"
       ]
     },
 
@@ -174,6 +206,11 @@
         "Telefonia + càmeres",
         "Cooperació internacional si pertinent",
         "Atestat + Jutjat / Audiència Nacional"
+      ],
+      "actes_viladecans": [
+        "A 10 — Genèrica (ressenya inicial)",
+        "A 18PL — Acta de declaració (denunciant)",
+        "N 02 — Drets víctima (família)"
       ]
     },
 
@@ -188,6 +225,11 @@
         "Entrevista entorn",
         "Seguiment 24-48h",
         "Si no apareix: ESCALAR a alt risc"
+      ],
+      "actes_viladecans": [
+        "A 10 — Genèrica (ressenya inicial)",
+        "A 18PL — Acta de declaració (denunciant)",
+        "A 59 — Esbrinament de domicili per a notificacions"
       ]
     },
 
@@ -200,6 +242,10 @@
         "Si conegut: comprovar antecedents",
         "Càmeres zona",
         "Si indicis delictius: escalar a alt risc"
+      ],
+      "actes_viladecans": [
+        "A 10 — Genèrica (ressenya inicial)",
+        "A 18PL — Acta de declaració (denunciant)"
       ]
     },
 
@@ -214,6 +260,11 @@
         "Comprovacions rutinàries",
         "Arxiu si es localitza",
         "Reobertura si s'allarga el temps"
+      ],
+      "actes_viladecans": [
+        "A 10 — Genèrica (ressenya inicial)",
+        "A 18PL — Acta de declaració (denunciant)",
+        "A 59 — Esbrinament de domicili per a notificacions"
       ]
     },
 
@@ -228,13 +279,17 @@
         "Coordinació DGAIA",
         "Localització → retorn al centre + acta",
         "Si reiteració: informe DGAIA"
+      ],
+      "actes_viladecans": [
+        "A 10 — Genèrica (ressenya inicial)",
+        "A 18PL — Acta de declaració (denunciant)"
       ]
     }
   },
   "notes_finals": [
     "CNDES (Centre Nacional Desapareguts): registre OBLIGATORI. Connectat amb Schengen, Interpol, ICMEC.",
-    "NO ESPERAR temps mínim. Cap mite de 24/48h.",
-    "ALERT INFANCIA / Alert Espai: activació per casos d'alt risc menors. Difusió massiva.",
+    "NO ESPERAR temps mínim. El mite de les 24/48h és FALS (Instrucció SES 1/2019). Menors i vulnerables: activació immediata sempre.",
+    "ALERTA MENOR DESAPARECIDO (CNDES): sistema d'alerta pública per a casos d'alt risc de menors. Difusió massiva.",
     "INTERPOL: per desaparicions amb sortida fronteres. SIRENE per Schengen.",
     "Coordinació amb FUNDACIÓ ANAR (menors): 900 20 20 10 + suport especialitzat.",
     "FUNDACIÓ QSDGLOBAL: localització persones desaparegudes — col·laboració.",

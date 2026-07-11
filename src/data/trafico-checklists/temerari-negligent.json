@@ -30,10 +30,10 @@
 
     "circumstancies_concurrents": {
       "titol": "Circumstàncies concurrents (Art. 380.2 CP)",
-      "text": "Concorre alcohol/drogues penal + velocitat penal?",
-      "info": "Si concorre 379.1 (velocitat penal) + 379.2 (alcohol/drogues penal) = PRESUMPCIÓ legal de temeritat",
+      "text": "Concorre velocitat penal (379.1) + taxa d'alcohol penal (379.2 incís segon)?",
+      "info": "Si concorre 379.1 (velocitat penal) + la taxa d'alcohol de l'art. 379.2 incís segon (>0,60 mg/l aire / 1,2 g/l sang) = PRESUMPCIÓ legal de temeritat. ATENCIÓ: la presència de drogues NO activa la presumpció (el 380.2 només remet a la taxa objectiva d'alcohol)",
       "opcions": [
-        { "etiqueta": "Sí, concorren velocitat penal + alcohol/drogues penal", "va_a": "fi_penal_380_presumpcio" },
+        { "etiqueta": "Sí, concorren velocitat penal + taxa d'alcohol penal (>0,60 mg/l)", "va_a": "fi_penal_380_presumpcio" },
         { "etiqueta": "Només temeritat manifesta amb perill concret",          "va_a": "fi_penal_380" }
       ]
     },
@@ -46,7 +46,10 @@
       "article_butlleta": "Art. 3.1 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "0 (GREU)",
-      "info": "S'INDICA la conducta concreta (parar bruscament sense motiu, fer ziga-zagues lentes, no respectar distàncies sense risc)"
+      "info": "S'INDICA la conducta concreta (parar bruscament sense motiu, fer ziga-zagues lentes, no respectar distàncies sense risc)",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
 
     "fi_mg_temerari": {
@@ -61,6 +64,10 @@
         "Adelantaments perillosos repetits",
         "Conducció a alta velocitat amb maniobres brusques",
         "Saltar-se semàfors repetidament"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització (si escau, art. 104 TRLSV)"
       ]
     },
 
@@ -89,6 +96,12 @@
         "TESTIMONIS imprescindibles (altres conductors, vianants)",
         "Fotografies/vídeos si possible",
         "Posada a disposició Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "N 11 — Citació judici ràpid (380 CP)",
+        "N 08 — Drets investigat no detingut JR (si no es deté)",
+        "A 13 — Immobilització",
+        "N 01 — Drets persona detinguda (si es practica detenció)"
       ]
     },
 
@@ -96,9 +109,15 @@
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Art. 380.2 CP (presumpció legal)",
-      "text": "Es presumeix la temeritat per concurrència de velocitat penal + alcohol/drogues penal",
+      "text": "Es presumeix la temeritat per concurrència de velocitat penal (379.1) + taxa d'alcohol penal (>0,60 mg/l aire / 1,2 g/l sang, art. 379.2 incís segon)",
       "pena": "Presó 6 mesos - 2 anys + privació permís 1-6 anys",
-      "accions": "Mateixes que 380.1, acreditant ambdós elements (velocitat + alcohol/drogues)"
+      "accions": "Mateixes que 380.1, acreditant ambdós elements (velocitat + taxa d'alcohol)",
+      "actes_viladecans": [
+        "N 11 — Citació judici ràpid (380 CP)",
+        "N 08 — Drets investigat no detingut JR (si no es deté)",
+        "A 13 — Immobilització",
+        "N 01 — Drets persona detinguda (si es practica detenció)"
+      ]
     },
 
     "fi_penal_381": {
@@ -116,6 +135,12 @@
         "Temeritat 380",
         "MENYSPREU MANIFEST per la vida d'altres (DOL EVENTUAL)",
         "Consciència del risc greu i continuada"
+      ],
+      "actes_viladecans": [
+        "N 11 — Citació judici ràpid (si tramitació com a diligències urgents)",
+        "N 08 — Drets investigat no detingut JR (si no es deté)",
+        "A 13 — Immobilització",
+        "N 01 — Drets persona detinguda (si es practica detenció)"
       ]
     }
   },

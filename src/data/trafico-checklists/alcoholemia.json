@@ -163,18 +163,28 @@
       "titol": "✅ PROVA NEGATIVA",
       "accio": "Es deixa marxar el conductor",
       "documentacio": "No cal butlletí. Si era control preventiu: anotar al full de control",
-      "tiquet": "Conservar tiquet per arxiu del servei"
+      "tiquet": "Conservar tiquet per arxiu del servei",
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
+        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada, també si és negativa)"
+      ]
     },
 
     "fi_negativa_bufar_bici": {
       "final": true,
       "tipus": "administrativa",
       "titol": "⚠️ Negativa a la prova — bicicleta/VMP",
-      "concepte_butlleta": "Incomplir l'obligació de tot conductor de sotmetre's a les proves per a la detecció de la presència de drogues a l'organisme (bicicleta/VMP)",
+      "concepte_butlleta": "Incomplir l'obligació de tot conductor de sotmetre's a les proves per a la detecció d'alcohol (bicicleta/VMP)",
       "article_butlleta": "Art. 14.2 TRLSV",
       "import": "1.000 € (DTE 500 €)",
       "punts": "0 punts (no requereix permís)",
-      "info": "Per bicicletes/VMP la negativa NO és delicte (no permís implicat) però sí infracció MOLT GREU administrativa."
+      "info": "Per bicicletes/VMP la negativa NO és delicte (no permís implicat) però sí infracció MOLT GREU administrativa.",
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de requerir la prova: acredita l'advertiment)",
+        "A 21 — Simptomatologia d'alcohol (imprescindible en cas de negativa)",
+        "T 16 — Full de denúncia administrativa (Art. 14.2 TRLSV)",
+        "A 13 — Immobilització de vehicle (si l'estat del conductor no permet continuar)"
+      ]
     },
 
     "fi_admin_500_4p": {
@@ -202,6 +212,14 @@
         "Dret a contrastació per anàlisi de sang en centre sanitari (cost del conductor si confirma)",
         "Dret a presentar al·legacions en 20 dies",
         "Reducció 50% per pagament voluntari sense impugnar"
+      ],
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova; versió catalana i castellana)",
+        "T 15 — Tiquets alcoholèmia (adjuntar els 2 tiquets de l'etilòmetre evidencial al butlletí)",
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
+        "T 12 — Mostra per analítica de sang (només si demana prova de contrast en sang)",
+        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
       ]
     },
 
@@ -215,7 +233,15 @@
       "import": "500 € (DTE 250 €)",
       "punts": "–4 punts",
       "accions_operatives": "Veure tram 1 general — mateix procediment",
-      "info_extra": "Si és transport escolar/menors o MMPP: comunicar a l'empresa i a inspecció de transport"
+      "info_extra": "Si és transport escolar/menors o MMPP: comunicar a l'empresa i a inspecció de transport",
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
+        "T 15 — Tiquets alcoholèmia (adjuntar els 2 tiquets de l'etilòmetre evidencial al butlletí)",
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
+        "T 12 — Mostra per analítica de sang (només si demana prova de contrast en sang)",
+        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
+      ]
     },
 
     "fi_admin_1000_4p_reincident": {
@@ -231,6 +257,14 @@
         "Mateix procediment que tram 1 + acreditar reincidència (consulta DGT/Sala)",
         "Indicar a la butlleta la data de la sanció anterior i número expedient si es coneix",
         "Immobilització + grua o sustitut"
+      ],
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
+        "T 15 — Tiquets alcoholèmia (adjuntar els 2 tiquets de l'etilòmetre evidencial al butlletí)",
+        "T 16 — Full de denúncia administrativa (fer constar la sanció anterior)",
+        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
+        "T 12 — Mostra per analítica de sang (només si demana prova de contrast en sang)",
+        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
       ]
     },
 
@@ -248,6 +282,15 @@
         "Mateixes que tram 1",
         "ATENCIÓ: si pèrdua total de punts, comunicació especial DGT",
         "Vigilància addicional a símptomes — si > 0,65 confirmat, derivar a via penal"
+      ],
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
+        "T 15 — Tiquets alcoholèmia (adjuntar els 2 tiquets de l'etilòmetre evidencial al butlletí)",
+        "A 21 — Simptomatologia d'alcohol (recomanable en tram alt: reforça la denúncia i cobreix una eventual derivació penal)",
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
+        "T 12 — Mostra per analítica de sang (només si demana prova de contrast en sang)",
+        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
       ]
     },
 
@@ -259,7 +302,15 @@
       "article_butlleta": "Art. 20 RGC",
       "barem": "0,31 a 0,65 mg/l (criteri prudent amb marge d'error)",
       "import": "1.000 € (DTE 500 €)",
-      "punts": "–6 punts"
+      "punts": "–6 punts",
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
+        "T 15 — Tiquets alcoholèmia (adjuntar els 2 tiquets de l'etilòmetre evidencial al butlletí)",
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
+        "T 12 — Mostra per analítica de sang (només si demana prova de contrast en sang)",
+        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
+      ]
     },
 
     "fi_admin_menor_500": {
@@ -270,12 +321,19 @@
       "article_butlleta": "Art. 14.1 TRLSV",
       "barem": "0,01 a 0,15 mg/l (menor)",
       "import": "500 € (DTE 250 €)",
-      "punts": "0 punts (si no requereix permís — bici, VMP) / 4 punts si té permís",
+      "punts": "0 punts en aquest tram (la detracció de punts de l'Annex II TRLSV només opera si se supera 0,15 mg/l — barem novell — o 0,25 mg/l — general)",
       "accions_operatives": [
         "Tots els passos generals",
         "AVÍS A PARES/TUTORS — comparèixer per recollir el menor",
         "Comunicació Serveis Socials si reincidència",
         "Si en festes/oci nocturn: investigar venda d'alcohol a menors"
+      ],
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
+        "T 15 — Tiquets alcoholèmia (adjuntar tiquets al butlletí)",
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (fins a compareixença de pares/tutors o conductor alternatiu)",
+        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
       ]
     },
 
@@ -285,7 +343,14 @@
       "titol": "⚠️ MOLT GREU — Menor amb permís (tram baix)",
       "import": "500 € (DTE 250 €)",
       "punts": "–4 punts",
-      "article_butlleta": "Art. 20 RGC"
+      "article_butlleta": "Art. 20 RGC",
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
+        "T 15 — Tiquets alcoholèmia (adjuntar tiquets al butlletí)",
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (fins a compareixença de pares/tutors o conductor alternatiu)",
+        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
+      ]
     },
 
     "fi_admin_menor_1000_6p": {
@@ -293,7 +358,15 @@
       "tipus": "administrativa",
       "titol": "🔴 MOLT GREU — Menor amb permís (tram alt)",
       "import": "1.000 € (DTE 500 €)",
-      "punts": "–6 punts"
+      "punts": "–6 punts",
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
+        "T 15 — Tiquets alcoholèmia (adjuntar tiquets al butlletí)",
+        "A 21 — Simptomatologia d'alcohol (recomanable en tram alt)",
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (fins a compareixença de pares/tutors o conductor alternatiu)",
+        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
+      ]
     },
 
     "fi_admin_500_bici": {
@@ -303,7 +376,13 @@
       "concepte_butlleta": "Conduir bicicleta/VMP amb taxa superior a 0,25 mg/l",
       "article_butlleta": "Art. 20 RGC",
       "import": "500 € (DTE 250 €)",
-      "punts": "0 punts (no permís)"
+      "punts": "0 punts (no permís)",
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
+        "T 15 — Tiquets alcoholèmia (adjuntar tiquets al butlletí)",
+        "T 16 — Full de denúncia administrativa",
+        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
+      ]
     },
 
     "fi_admin_1000_bici": {
@@ -311,7 +390,14 @@
       "tipus": "administrativa",
       "titol": "🔴 MOLT GREU — Bicicleta/VMP tram alt",
       "import": "1.000 € (DTE 500 €)",
-      "punts": "0 punts"
+      "punts": "0 punts",
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
+        "T 15 — Tiquets alcoholèmia (adjuntar tiquets al butlletí)",
+        "A 21 — Simptomatologia d'alcohol (recomanable en tram alt)",
+        "T 16 — Full de denúncia administrativa",
+        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
+      ]
     },
 
     "fi_penal_379_2_alcohol": {
@@ -419,6 +505,17 @@
         "Si n'hi ha: vídeo de càmera corporal o testimonis"
       ],
       "competencia": "Jutjat d'Instrucció de Guàrdia (en zona Gavà segons partit judicial). Còpia al Ministeri Fiscal. Termini de compareixença en judici ràpid: 72 hores des de la citació",
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova; versió catalana i castellana)",
+        "T 15 — Tiquets alcoholèmia (adjuntar els 2 tiquets de l'etilòmetre evidencial a l'atestat)",
+        "A 21 — Simptomatologia d'alcohol (SEMPRE en via penal: clau si la taxa cau a zona gris al judici)",
+        "T 12 — Mostra per analítica de sang (si demana prova de contrast en sang o hi ha evacuació hospitalària)",
+        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
+        "N 11 — Citació per a judici ràpid (Art. 379.2 CP)",
+        "N 08 — Drets persona investigada no detinguda JR (si es tramita per citació sense detenció)",
+        "N 01 — Informació drets persona detinguda (només si detenció excepcional)",
+        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
+      ],
       "base_legal": [
         "Art. 379.2 CP",
         "Art. 795 i ss. LECrim (judici ràpid)",
@@ -461,7 +558,15 @@
         "Identificació de testimonis (altres agents)",
         "Si gravació disponible: acta de cadena de custòdia"
       ],
-      "info": "Compatible amb Art. 379.2 CP si hi ha indicis d'alcoholèmia delictiva (per ex. símptomes evidents) — però cal acreditar els indicis perquè concursin"
+      "info": "Compatible amb Art. 379.2 CP si hi ha indicis d'alcoholèmia delictiva (per ex. símptomes evidents) — però cal acreditar els indicis perquè concursin",
+      "actes_viladecans": [
+        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de requerir la prova: acredita l'advertiment de l'Art. 383 CP)",
+        "A 21 — Simptomatologia d'alcohol (IMPRESCINDIBLE en cas de negativa: única prova d'estat)",
+        "N 01 — Informació drets persona detinguda (si detenció)",
+        "N 08 — Drets persona investigada no detinguda JR (si finalment es tramita per citació)",
+        "N 11 — Citació per a judici ràpid (Art. 383 CP)",
+        "A 13 — Immobilització de vehicle"
+      ]
     }
   },
   "notes_finals": [

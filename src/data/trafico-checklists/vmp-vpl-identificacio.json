@@ -151,6 +151,11 @@
         "Butlletí de denúncia",
         "Si VMP no inscrit: indicar pes (MOM) a la butlleta",
         "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "I 104 — Drets persona desplaçada per identificació (menor/sense ID)",
+        "G 58 — Volant d'estada en dependències (si trasllat per identificació)"
       ]
     },
 
@@ -168,6 +173,11 @@
         "Adreçat al CONDUCTOR (el VMP no consta inscrit, no hi ha titular al RNV)",
         "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)",
         "⚠️ NO denunciar alhora per 'sense certificat' si és > 22/01/2024 (concurrència)"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "I 104 — Drets persona desplaçada per identificació (menor/sense ID)",
+        "G 58 — Volant d'estada en dependències (si trasllat per identificació)"
       ]
     },
 
@@ -185,6 +195,10 @@
         "Plantejar IMMOBILITZACIÓ del vehicle (per perill objectiu)",
         "⚠️ L'única MOLT GREU de les 5 noves del Com. 6/2026",
         "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització del VMP (per perill objectiu)"
       ]
     },
 
@@ -201,6 +215,9 @@
         "Documentar (fotografia) el defecte tècnic",
         "Recordar al conductor que cal reparar abans de tornar a circular",
         "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
       ]
     },
 
@@ -216,6 +233,9 @@
         "Butlletí de denúncia",
         "Documentar (fotografia) el defecte",
         "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
       ]
     },
 

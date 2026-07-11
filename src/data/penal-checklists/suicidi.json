@@ -6,10 +6,11 @@
   "base_legal": [
     "Art. 17 CE (llibertat personal)",
     "Art. 763 LEC (internament involuntari urgent)",
-    "Art. 26 LO 4/2015 (mesures provisionals)",
-    "Art. 143 CP (induir/cooperar suïcidi)",
+    "Art. 15.2 LO 4/2015 (entrada en domicili per evitar danys imminents i greus a les persones)",
+    "Art. 143 CP (inducció i cooperació al suïcidi)",
+    "LO 3/2021 (eutanàsia — la prestació d'ajuda a morir dins el marc legal exclou la responsabilitat penal, art. 143.5 CP)",
     "Art. 195 CP (omissió de socors)",
-    "Llei 12/2009 educació (situació risc menors)"
+    "Llei 14/2010 (LDOIA — situacions de risc de menors)"
   ],
 
   "principi_clau": "L'objectiu PRIORITARI és preservar la vida. La crisi suïcida és emergència sanitària, no policial-disciplinària. Coordinació amb Salut Mental imprescindible.",
@@ -82,9 +83,13 @@
         "9. Comunicació Salut Mental hospital",
         "10. Avís Jutjat si calgui internament involuntari (763 LEC)",
         "11. Família avisada amb sensibilitat",
-        "12. Atestat: DILIGÈNCIA d'auxili — NO és atestat penal contra la víctima"
+        "12. Atestat: DILIGÈNCIA d'auxili — NO és atestat penal contra la víctima (el suïcidi i la temptativa NO són delicte; només ho és induir-hi o cooperar-hi, art. 143 CP)"
       ],
       "documentacio": "Diligència auxili + parte mèdic + identificació + comunicació Salut Mental",
+      "actes_viladecans": [
+        "AV 01 — Trasllat voluntari (a centre sanitari)",
+        "Acta Serveis Socials (persones vulnerables/sense llar)"
+      ],
       "internament_involuntari_763_LEC": "Si la persona, un cop estabilitzada, NO accepta tractament i continua en risc imminent: el metge pot sol·licitar internament urgent (763 LEC). Comunicació Jutjat en 24h."
     },
 
@@ -104,7 +109,11 @@
         "9. NO PROMETRE el que no es pot complir",
         "10. NO confrontar / NO desafiar / NO minimitzar",
         "11. Buscar PERSONA SIGNIFICATIVA (família, amic) si la persona ho accepta",
-        "12. Trasllat voluntari hospital o, si rebuig + risc imminent: trasllat 17 LOPSC + 763 LEC"
+        "12. Trasllat voluntari hospital o, si rebuig + risc imminent: trasllat involuntari per indicació facultativa amb auxili policial (art. 763 LEC — internament urgent, comunicació al Jutjat en 24h)"
+      ],
+      "actes_viladecans": [
+        "AV 01 — Trasllat voluntari (a centre sanitari)",
+        "Acta Serveis Socials (persones vulnerables/sense llar)"
       ],
       "frases_utils": [
         "'Veig que estàs passant un moment molt dur'",
@@ -128,13 +137,16 @@
         "1. SEM + sala + Bombers (per accés si calgui)",
         "2. Negociació a través de porta/finestra inicialment",
         "3. Mateixos principis comunicació crisi carrer",
-        "4. Si es nega obrir + risc imminent: ENTRADA per ESTAT DE NECESSITAT (Art. 20.5 CP)",
+        "4. Si es nega obrir + risc imminent: ENTRADA per necessitat d'evitar danys imminents i greus a les persones (art. 15.2 LO 4/2015; estat de necessitat art. 20.5 CP)",
         "5. Bombers: obertura sense danys greus si possible",
         "6. Un cop dins: prioritat reduir + auxili",
         "7. Família: NO entrar al lloc fins assegurat",
         "8. Si arma al lloc: precaució extrema, sol·licitar suport",
         "9. Si finalment desisteix voluntàriament: no detenció — SÍ trasllat Salut Mental",
         "10. Si menor: DGAIA + tutors"
+      ],
+      "actes_viladecans": [
+        "AV 01 — Trasllat voluntari (a centre sanitari)"
       ]
     },
 
@@ -218,6 +230,10 @@
         "7. Família/amic de confiança presència",
         "8. Si refusa tot: anotació al servei + comunicació Salut Mental + seguiment",
         "9. Recursos: 024, 061, telèfon esperança"
+      ],
+      "actes_viladecans": [
+        "AV 01 — Trasllat voluntari (a centre sanitari)",
+        "Acta Serveis Socials (persones vulnerables/sense llar)"
       ]
     },
 
@@ -248,6 +264,9 @@
         "5. Si autolesions sense intent: no minimitzar, derivació especialitzada",
         "6. Comunicació Fiscalia Menors si menor desemparat / sense adequada cura",
         "7. Recursos: ANAR (900 20 20 10), CSMIJ"
+      ],
+      "actes_viladecans": [
+        "AV 01 — Trasllat voluntari (a centre sanitari)"
       ]
     },
 
@@ -255,7 +274,11 @@
       "final": true,
       "tipus": "procediment",
       "titol": "🔀 Anar a checklist 'Cadàver'",
-      "accio": "Si suïcidi consumat: protocol Cadàver — preservació, Mossos DIC, aixecament judicial."
+      "accio": "Si suïcidi consumat: protocol Cadàver — preservació, Mossos DIC, aixecament judicial.",
+      "actes_viladecans": [
+        "A 60 — Aixecament de cadàver",
+        "A 18PL — Declaracions"
+      ]
     },
 
     "fi_remetre_desaparicio": {
@@ -274,7 +297,8 @@
     "Si suïcidi en context VG: investigar possible homicidi simulat. Atestat al JVM.",
     "MENORS: SEMPRE comunicació tutors + DGAIA + Fiscalia Menors + serveis especialitzats.",
     "BULLYING que indueix suïcidi: pot ser delicte (173 CP tracte degradant + induir 143.1 CP).",
-    "INSTIGADOR del suïcidi: Art. 143 CP (induir, cooperar, consumar).",
+    "Art. 143 CP: inducció al suïcidi (143.1), cooperació necessària (143.2) i cooperació executiva fins a la mort (143.3). El suïcidi i la temptativa propis NO són delicte.",
+    "EUTANÀSIA LEGAL (LO 3/2021): la prestació d'ajuda a morir feta dins del marc legal NO genera responsabilitat penal (art. 143.5 CP). No confondre amb la cooperació al suïcidi fora d'aquest marc.",
     "NO INFORMAR mitjans: respectar dol i evitar 'efecte Werther' (imitació).",
     "POLICIES en risc: programa específic recursos psicològics policial. Trucada confidencial.",
     "Resum: ESCOLTA, EMPATIA, NO PROMETRE, CONNECTAR AMB RECURSOS, PRESERVAR VIDA."

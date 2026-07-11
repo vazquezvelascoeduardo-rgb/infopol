@@ -44,10 +44,10 @@
       "text": "Quina causa la justifica? (Art. 492 LECrim)",
       "info": "L'Art. 492 LECrim diu QUI pot detenir: l'agent SEMPRE quan: (1) sorprèn delinqüent en flagrant; (2) intent flagrant; (3) reu fugat; (4) processat / condemnat amb ordre detenció; (5) indicis racionals + risc fuga.",
       "opcions": [
-        { "etiqueta": "FLAGRANT delicte o intent (492.1, 492.2 LECrim)",            "va_a": "fi_procediment_detencio" },
-        { "etiqueta": "ORDRE judicial / busca i captura (492.3, 492.4 LECrim)",     "va_a": "fi_procediment_detencio" },
+        { "etiqueta": "FLAGRANT delicte o intent (492.1 en relació amb 490.1 i 490.2 LECrim)", "va_a": "fi_procediment_detencio" },
+        { "etiqueta": "ORDRE judicial / busca i captura — processat o requisitòria (492.2 i 492.3 LECrim)", "va_a": "fi_procediment_detencio" },
         { "etiqueta": "Indicis racionals d'autoria + risc fuga (492.4)",            "va_a": "fi_procediment_detencio" },
-        { "etiqueta": "Reu fugat (492.2)",                                          "va_a": "fi_procediment_detencio" },
+        { "etiqueta": "Reu fugat o en rebel·lia (492.1 en relació amb 490.3 a 490.7 LECrim)", "va_a": "fi_procediment_detencio" },
         { "etiqueta": "Delicte LLEU amb risc d'incompareixença",                    "va_a": "delicte_lleu" },
         { "etiqueta": "Només per identificar (no delicte)",                         "va_a": "fi_no_detencio_17" }
       ]
@@ -55,7 +55,7 @@
 
     "delicte_lleu": {
       "titol": "Detenció per delicte lleu",
-      "text": "Per delicte lleu només procedeix detenció si NO té domicili conegut o NO ofereix garanties de comparèixer.",
+      "text": "Per delicte lleu només procedeix detenció si NO té domicili conegut NI dona fiança bastant per garantir la compareixença (Art. 495 LECrim).",
       "opcions": [
         { "etiqueta": "Té domicili i ofereix garanties → CITACIÓ",               "va_a": "fi_citacio_lleu" },
         { "etiqueta": "Sense domicili / sense garanties → DETENCIÓ",            "va_a": "fi_procediment_detencio" }
@@ -65,8 +65,12 @@
     "fi_no_detencio_17": {
       "final": true,
       "tipus": "avis",
-      "titol": "⚠️ No procedeix detenció — anar a Identificació Art. 17 LOPSC",
-      "accio": "Sense delicte no es detén. Si cal identificar i no és possible al lloc → trasllat 17 LOPSC."
+      "titol": "⚠️ No procedeix detenció — anar a Identificació Art. 16 LOPSC",
+      "accio": "Sense delicte no es detén. Si cal identificar i no és possible al lloc → trasllat a dependències de l'art. 16.2 LOPSC (temps estrictament necessari, màxim 6 hores).",
+      "actes_viladecans": [
+        "I 104 — Drets persona desplaçada per identificació (si es practica el trasllat a dependències de l'art. 16.2 LOPSC)",
+        "G 58 — Volant d'estada en dependències per identificació (en sortir de dependències)"
+      ]
     },
 
     "fi_citacio_lleu": {
@@ -126,7 +130,19 @@
         "[Estrangers] Dret a notificació consular",
         "[Menors] Dret a presència de pares/tutors"
       ],
-      "competencia": "Jutjat d'Instrucció de Guàrdia (excepte VG → JVM)"
+      "competencia": "Jutjat d'Instrucció de Guàrdia (excepte VG → JVM)",
+      "actes_viladecans": [
+        "N 01 — Informació drets persona detinguda (sempre, en el moment de la detenció; disponible CAT/CAST + idiomes ALB/ALE/ANG/AR/BUL/FR/IT)",
+        "N 01b — Drets menor detingut (si el detingut és menor d'edat)",
+        "PD 06 — Objectes persona detinguda (escorcoll incident: inventari i dipòsit d'efectes)",
+        "PD 01 — Sol·licitud d'Habeas Corpus (si el detingut l'exercita)",
+        "AD 01 — Acta declaració detingut (si declara a dependències)",
+        "A 29 — Deixar sense efecte una detenció (si s'allibera sense posada a disposició judicial)",
+        "A 54 — Sol·licitud custòdia detingut per PG-ME (si es traspassa la custòdia a Mossos)",
+        "A 55 — Detenció per reclamació judicial (si la detenció és per ordre judicial / busca i captura)",
+        "G 58 — Volant d'estada en dependències (en sortir de dependències)",
+        "M 06 — Oferiment al menor d'acolliment a mesura educativa (menors)"
+      ]
     }
   },
   "notes_finals": [

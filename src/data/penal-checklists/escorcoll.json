@@ -10,7 +10,7 @@
     "Art. 282 LECrim (escorcoll incident a detenció)"
   ],
   "tipus_escorcoll": {
-    "superficial": "Palpació externa, butxaques, bossa, cartera. Any tipus de registre que no implica despullament. Cobert per Art. 20 LOPSC amb causa objectiva.",
+    "superficial": "Palpació externa, butxaques, bossa, cartera. Qualsevol tipus de registre que no implica despullament. Cobert per Art. 20 LOPSC amb causa objectiva.",
     "amb_despullament": "Implica retirada parcial o total de la roba. Requisits estrictes (Art. 20.2 LOPSC): lloc reservat, mateix sexe, indicis sòlids, proporcionalitat, motivació específica.",
     "intim_cavitats": "Exploració de cavitats corporals. NOMÉS amb autorització judicial + personal sanitari + centre sanitari."
   },
@@ -84,7 +84,12 @@
         "Cinturó, peces externes (jaqueta, abric)",
         "Palpació externa de la roba"
       ],
-      "documentacio_si_intervencio": "Acta D-10.b (intervenció temporal) o A-20 si drogues/diners — segons cas"
+      "documentacio_si_intervencio": "Acta D-10.b (intervenció temporal) o A-20 si drogues/diners — segons cas",
+      "actes_viladecans": [
+        "D 10.b — Acta d'intervenció temporal LO 4/2015 (si s'intervenen objectes)",
+        "D 10 — Denúncia infracció Llei 4/2015 (si es constata infracció LOPSC)",
+        "A 20 — Pesada de substàncies estupefaents (si s'intervenen drogues)"
+      ]
     },
 
     "fi_despullament_ok": {
@@ -100,7 +105,11 @@
         "6. Acta intervenció si troba alguna cosa",
         "7. Si no troba res: diligència igualment per constància"
       ],
-      "documentacio": "Diligència motivada de l'escorcoll + acta intervenció efectes (D-10.b o A-20 segons cas)"
+      "documentacio": "Diligència motivada de l'escorcoll + acta intervenció efectes (D-10.b o A-20 segons cas)",
+      "actes_viladecans": [
+        "D 10.b — Acta d'intervenció temporal LO 4/2015 (si s'intervenen objectes)",
+        "I 55 — Cadena de custòdia (si els efectes estan relacionats amb un delicte)"
+      ]
     },
 
     "fi_cavitats": {
@@ -132,7 +141,11 @@
         "6. Custòdia separada dels efectes personals (es retornen al final)",
         "7. Inventari signat pel detingut (si s'hi nega: fer constar 'es nega a signar')"
       ],
-      "documentacio": "Acta intervenció d'efectes + cadena de custòdia + inventari amb signatura"
+      "documentacio": "Acta intervenció d'efectes + cadena de custòdia + inventari amb signatura",
+      "actes_viladecans": [
+        "PD 06 — Objectes persona detinguda (inventari i dipòsit dels efectes del detingut)",
+        "I 55 — Cadena de custòdia (efectes relacionats amb el delicte)"
+      ]
     },
 
     "fi_vehicle": {
@@ -147,7 +160,12 @@
         "4. Acta d'intervenció si troba alguna cosa",
         "5. Ull als 'amagatalls': revestiments, sostre, paragolps, dipòsits"
       ],
-      "documentacio": "Diligència d'escorcoll vehicle + acta intervenció (D-10.b, A-20 o atestat segons cas)"
+      "documentacio": "Diligència d'escorcoll vehicle + acta intervenció (D-10.b, A-20 o atestat segons cas)",
+      "actes_viladecans": [
+        "D 10.b — Acta d'intervenció temporal LO 4/2015 (objectes intervinguts)",
+        "A 20 — Pesada de substàncies estupefaents (si s'intervenen drogues)",
+        "I 55 — Cadena de custòdia (si efectes relacionats amb delicte)"
+      ]
     },
 
     "fi_local_obert": {

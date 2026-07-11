@@ -82,7 +82,10 @@
         "6. EXCEPCIÓ: si entretant apareix flagrant delicte, es pot continuar (canvi de via legal)",
         "7. Diligència d'actuació amb tot el procés"
       ],
-      "documentacio": "Diligència d'entrada + acta de consentiment signada + acta d'intervenció si troba alguna cosa"
+      "documentacio": "Diligència d'entrada + acta de consentiment signada + acta d'intervenció si troba alguna cosa",
+      "actes_viladecans": [
+        "A 10 — Genèrica (per documentar el consentiment informat del titular i les circumstàncies de l'entrada)"
+      ]
     },
 
     "fi_flagrant_ok": {
@@ -100,7 +103,10 @@
         "8. Si menors al lloc: comunicació DGAIA"
       ],
       "documentacio_clau": "Atestat + diligència de la urgència i flagrància (descrivint els 3 requisits) + acta d'intervenció",
-      "info": "L'entrada per flagrant és per a actuació immediata, NO per a un registre exhaustiu. Per registrar exhaustivament, sol·licitar mandat al Jutjat."
+      "info": "L'entrada per flagrant és per a actuació immediata, NO per a un registre exhaustiu. Per registrar exhaustivament, sol·licitar mandat al Jutjat.",
+      "actes_viladecans": [
+        "A 01 — Entrada urgent a un domicili (SEMPRE que s'entri sense consentiment del titular ni ordre judicial: flagrància)"
+      ]
     },
 
     "fi_judicial": {
@@ -110,8 +116,8 @@
       "accions_ordenades": [
         "1. COMPROVAR la resolució (data, destinatari concret, abast del registre, vigència)",
         "2. NOTIFICAR al titular abans d'entrar",
-        "3. Presència del LLETRAT DE L'ADMINISTRACIÓ DE JUSTÍCIA si la resolució ho disposa",
-        "4. DOS TESTIMONIS si possible (Art. 569 LECrim)",
+        "3. Presència del LLETRAT DE L'ADMINISTRACIÓ DE JUSTÍCIA — regla general, dona fe del registre (Art. 569 LECrim)",
+        "4. Presència de l'interessat o de qui el representi; si no n'hi ha, un familiar major d'edat i, en el seu defecte, DOS TESTIMONIS (Art. 569 LECrim)",
         "5. Registre LIMITAT a l'abast autoritzat (no es pot ampliar 'si fa la sensació')",
         "6. ACTA detallada amb inventari complet de tot el que s'intervé",
         "7. Cadena de custòdia rigorosa",
@@ -141,7 +147,10 @@
         "6. Comunicar Jutjat de Guàrdia"
       ],
       "documentacio": "Diligència d'urgència justificant l'estat de necessitat + informe complet",
-      "base_legal_extra": "Art. 20.5 CP (justificació) — exempció responsabilitat per estat de necessitat"
+      "base_legal_extra": "Art. 15.2 LOPSC (causa legítima: evitar danys imminents i greus a persones i coses en supòsits de catàstrofe, calamitat, ruïna imminent o extrema i urgent necessitat) + Art. 20.5 CP (exempció responsabilitat per estat de necessitat)",
+      "actes_viladecans": [
+        "A 01 — Entrada urgent a un domicili (SEMPRE que s'entri sense consentiment del titular ni ordre judicial: auxili / estat de necessitat)"
+      ]
     },
 
     "fi_no_entrar": {

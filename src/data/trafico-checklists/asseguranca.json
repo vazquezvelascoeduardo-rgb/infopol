@@ -8,7 +8,7 @@
     "Art. 3 LRCSCVM (immobilització)",
     "Art. 76.G TRLSV"
   ],
-  "barem_oficial_sct": "Barem específic per tipus de permís/vehicle. Sense punts. Sanció administrativa tramitada pel Consorci de Compensació d'Assegurances.",
+  "barem_oficial_sct": "Barem específic per tipus de permís/vehicle. Sense punts. Forquilla legal: 601–3.005 € (art. 3 LRCSCVM), graduada segons categoria del vehicle. La competència sancionadora és de l'autoritat de trànsit (a Catalunya, el SCT); l'import recaptat s'ingressa al Consorci de Compensació d'Assegurances.",
   "comprovacions_previes": [
     "Consulta al FIVA (Fitxer Informatiu de Vehicles Assegurats) — base de dades en temps real",
     "Si FIVA marca 'sense assegurança': demanar al conductor justificant",
@@ -87,6 +87,11 @@
         "Dipòsit fins a justificar pòlissa o titular abonar la franquícia",
         "Si propietari distint del conductor: butlletí al titular",
         "⚠️ Si és VMP \"considerat vehicle a motor\" (per MOM): l'import és 800 € (no 300 €)"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
+        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
       ]
     },
 
@@ -104,6 +109,11 @@
         "Notificació al Consorci de Compensació d'Assegurances",
         "Si el VMP no està inscrit al RNV: consignar OBLIGATÒRIAMENT el pes (MOM) a la butlleta",
         "Si propietari distint del conductor: butlletí al titular"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
+        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
       ]
     },
 
@@ -118,6 +128,11 @@
       "accions_operatives": [
         "Butlletí + immobilització + Consorci",
         "Avís al titular si distint"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
+        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
       ]
     },
 
@@ -129,7 +144,12 @@
       "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "1.000 € (DTE 500 €)",
       "punts": "0",
-      "accions_operatives": "Butlletí + immobilització + Consorci"
+      "accions_operatives": "Butlletí + immobilització + Consorci",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
+        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
+      ]
     },
 
     "fi_moto": {
@@ -139,7 +159,12 @@
       "concepte_butlleta": "No tenir concertada l'assegurança obligatòria de responsabilitat civil, el vehicle ressenyat, la conducció del qual s'autoritza mitjançant permís de conducció de la classe A2, A1 o A",
       "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "1.250 € (DTE 625 €)",
-      "punts": "0"
+      "punts": "0",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
+        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
+      ]
     },
 
     "fi_turisme": {
@@ -149,7 +174,12 @@
       "concepte_butlleta": "No tenir concertada l'assegurança obligatòria de responsabilitat civil, el vehicle ressenyat, la conducció del qual s'autoritza mitjançant permís de conducció de la classe B i B+E",
       "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "1.500 € (DTE 750 €)",
-      "punts": "0"
+      "punts": "0",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
+        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
+      ]
     },
 
     "fi_camio": {
@@ -165,6 +195,11 @@
         "Comunicació Consorci",
         "Avís a Inspecció de Transports si transport professional",
         "Avís a empresa titular"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
+        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
       ]
     },
 
@@ -180,6 +215,11 @@
         "Butlletí + immobilització immediata",
         "Si transport viatgers: traslladar passatgers amb seguretat (vehicle alternatiu)",
         "Comunicació Consorci + Inspecció de Transports + empresa titular"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
+        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
       ]
     },
 
@@ -190,7 +230,12 @@
       "concepte_butlleta": "Circular el vehicle ressenyat sense que consti que el propietari tingui subscrit i mantingui en vigor un contracte d'assegurança que cobreixi la responsabilitat civil derivada de la seva circulació",
       "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "800 € (DTE 400 €)",
-      "punts": "0"
+      "punts": "0",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
+        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
+      ]
     }
   },
   "notes_finals": [
@@ -198,7 +243,7 @@
     "Si conductor distint del titular: identificar tots dos i indicar-ho a la butlleta.",
     "Immobilització: cost grua + dipòsit a càrrec del titular.",
     "Per recuperar el vehicle: presentar pòlissa vigent (o nova) + abonar despeses.",
-    "El Consorci tramita la sanció — no l'ajuntament. Però la denúncia inicial sí la fa policia local.",
+    "La sanció la tramita l'autoritat de trànsit competent (a Catalunya, el SCT) i l'import recaptat s'ingressa al Consorci de Compensació d'Assegurances (art. 3 LRCSCVM). La denúncia inicial sí que la fa la policia local.",
     "Reincidència: no hi ha agreujament directe a l'import, però sí valora el procediment sancionador.",
     "VMP < 25 kg: NO obligats a assegurança per ara (segons normativa). Les ordenances locals poden exigir-la.",
     "Si vehicle implicat en accident sense SOA: el Consorci respon a tercers i després repeteix contra el titular."

@@ -10,29 +10,72 @@
   ],
   "inici": "tipus_infraccio",
   "nodes": {
-
     "tipus_infraccio": {
       "titol": "Quina infracció has detectat?",
       "text": "Tria la conducta:",
       "opcions": [
-        { "etiqueta": "Mòbil — agafat amb la mà",                            "va_a": "fi_mobil_ma" },
-        { "etiqueta": "Mòbil — ajustat entre casc i cap",                    "va_a": "fi_mobil_casc" },
-        { "etiqueta": "Mòbil — manipulant en suport (toques pantalla)",      "va_a": "fi_mobil_manipulant" },
-        { "etiqueta": "Auriculars / cascos connectats",                       "va_a": "fi_auriculars" },
-        { "etiqueta": "Pantalla incompatible amb atenció (TV, GPS amb intervenció)", "va_a": "fi_pantalla" },
-        { "etiqueta": "Sense cinturó — conductor adult",                     "va_a": "fi_cinturo_adult" },
-        { "etiqueta": "Sense cinturó — passatger adult",                     "va_a": "fi_cinturo_passatger" },
-        { "etiqueta": "Menor ≤135 cm sense SRI al darrere",                  "va_a": "fi_menor_srif_darrere" },
-        { "etiqueta": "Menor ≤135 cm al davant (prohibit en general)",       "va_a": "fi_menor_davant" },
-        { "etiqueta": "Vehicle sense cinturons instal·lats (havent-ho de tenir)", "va_a": "fi_no_instal_lats" },
-        { "etiqueta": "No informar passatgers (transport >9 places)",        "va_a": "fi_no_informar" },
-        { "etiqueta": "Conductor moto/ciclomotor sense casc",                "va_a": "fi_casc_conductor" },
-        { "etiqueta": "Passatger moto/ciclomotor sense casc",                "va_a": "fi_casc_passatger" },
-        { "etiqueta": "Ciclista sense casc (interurbà o menor)",             "va_a": "fi_casc_bici" },
-        { "etiqueta": "Sense armilla reflectant fora del vehicle",           "va_a": "fi_armilla" }
+        {
+          "etiqueta": "Mòbil — agafat amb la mà",
+          "va_a": "fi_mobil_ma"
+        },
+        {
+          "etiqueta": "Mòbil — ajustat entre casc i cap",
+          "va_a": "fi_mobil_casc"
+        },
+        {
+          "etiqueta": "Mòbil — manipulant en suport (toques pantalla)",
+          "va_a": "fi_mobil_manipulant"
+        },
+        {
+          "etiqueta": "Auriculars / cascos connectats",
+          "va_a": "fi_auriculars"
+        },
+        {
+          "etiqueta": "Pantalla incompatible amb atenció (TV, GPS amb intervenció)",
+          "va_a": "fi_pantalla"
+        },
+        {
+          "etiqueta": "Sense cinturó — conductor adult",
+          "va_a": "fi_cinturo_adult"
+        },
+        {
+          "etiqueta": "Sense cinturó — passatger adult",
+          "va_a": "fi_cinturo_passatger"
+        },
+        {
+          "etiqueta": "Menor ≤135 cm sense SRI al darrere",
+          "va_a": "fi_menor_srif_darrere"
+        },
+        {
+          "etiqueta": "Menor ≤135 cm al davant (prohibit en general)",
+          "va_a": "fi_menor_davant"
+        },
+        {
+          "etiqueta": "Vehicle sense cinturons instal·lats (havent-ho de tenir)",
+          "va_a": "fi_no_instal_lats"
+        },
+        {
+          "etiqueta": "No informar passatgers (transport >9 places)",
+          "va_a": "fi_no_informar"
+        },
+        {
+          "etiqueta": "Conductor moto/ciclomotor sense casc",
+          "va_a": "fi_casc_conductor"
+        },
+        {
+          "etiqueta": "Passatger moto/ciclomotor sense casc",
+          "va_a": "fi_casc_passatger"
+        },
+        {
+          "etiqueta": "Ciclista sense casc (interurbà o menor)",
+          "va_a": "fi_casc_bici"
+        },
+        {
+          "etiqueta": "Sense armilla reflectant fora del vehicle",
+          "va_a": "fi_armilla"
+        }
       ]
     },
-
     "fi_mobil_ma": {
       "final": true,
       "tipus": "administrativa",
@@ -41,9 +84,11 @@
       "article_butlleta": "Art. 76.G TRLSV",
       "import": "200 € (DTE 100 €)",
       "punts": "–6 punts",
-      "info": "Inclou consultar pantalla, escriure, parlar, fotografiar, etc., qualsevol manipulació amb el dispositiu a la mà"
+      "info": "Inclou consultar pantalla, escriure, parlar, fotografiar, etc., qualsevol manipulació amb el dispositiu a la mà",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
-
     "fi_mobil_casc": {
       "final": true,
       "tipus": "administrativa",
@@ -51,9 +96,11 @@
       "concepte_butlleta": "Utilitzar, mantenint-lo ajustat entre el casc i el cap, un dispositiu de telefonia mòbil mentre es condueix",
       "article_butlleta": "Art. 76.G TRLSV",
       "import": "200 € (DTE 100 €)",
-      "punts": "–3 punts"
+      "punts": "–3 punts",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
-
     "fi_mobil_manipulant": {
       "final": true,
       "tipus": "administrativa",
@@ -62,9 +109,11 @@
       "article_butlleta": "Art. 18.2 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "–3 punts",
-      "info": "Permet mans lliures (Bluetooth, micròfons) si NO requereix manipulació manual"
+      "info": "Permet mans lliures (Bluetooth, micròfons) si NO requereix manipulació manual",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
-
     "fi_auriculars": {
       "final": true,
       "tipus": "administrativa",
@@ -73,9 +122,11 @@
       "article_butlleta": "Art. 18.2 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "–3 punts",
-      "excepcions": "Ensenyament conducció + proves examen moto"
+      "excepcions": "Ensenyament conducció + proves examen moto",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
-
     "fi_pantalla": {
       "final": true,
       "tipus": "administrativa",
@@ -84,9 +135,11 @@
       "article_butlleta": "Art. 18.1 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "–3 punts",
-      "exemples": "TV, vídeo/DVD, pantalles amb internet (Netflix, etc.). Permès: GPS, càmera maniobres, accés/baixada vianants"
+      "exemples": "TV, vídeo/DVD, pantalles amb internet (Netflix, etc.). Permès: GPS, càmera maniobres, accés/baixada vianants",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
-
     "fi_cinturo_adult": {
       "final": true,
       "tipus": "administrativa",
@@ -94,9 +147,11 @@
       "concepte_butlleta": "No utilitzar, o utilitzar inadequadament, la persona denunciada, el cinturó de seguretat",
       "article_butlleta": "Art. 117.1 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "–4 punts (només al conductor)"
+      "punts": "–4 punts (només al conductor)",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
-
     "fi_cinturo_passatger": {
       "final": true,
       "tipus": "administrativa",
@@ -105,9 +160,11 @@
       "article_butlleta": "Art. 117.1 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "0 al passatger / 4 al conductor si passatger és menor",
-      "info": "Si passatger és adult: sanció al passatger. Si menor: sanció al conductor (responsabilitat). Si vehicle transport >9 places: sanció al passatger directament."
+      "info": "Si passatger és adult: sanció al passatger. Si menor: sanció al conductor (responsabilitat). Si vehicle transport >9 places: sanció al passatger directament.",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
-
     "fi_menor_srif_darrere": {
       "final": true,
       "tipus": "administrativa",
@@ -116,9 +173,11 @@
       "article_butlleta": "Art. 117.3 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "–4 punts al CONDUCTOR",
-      "responsabilitat": "Sempre del CONDUCTOR del vehicle (vehicles <9 places)"
+      "responsabilitat": "Sempre del CONDUCTOR del vehicle (vehicles <9 places)",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
-
     "fi_menor_davant": {
       "final": true,
       "tipus": "administrativa",
@@ -132,9 +191,11 @@
         "Tots els seients posteriors estan ocupats per altres menors",
         "No es pot instal·lar tots els SRI als seients posteriors"
       ],
-      "info": "Si l'excepció es compleix, el menor pot anar al davant però SEMPRE amb SRI homologat"
+      "info": "Si l'excepció es compleix, el menor pot anar al davant però SEMPRE amb SRI homologat",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
-
     "fi_no_instal_lats": {
       "final": true,
       "tipus": "administrativa",
@@ -143,9 +204,11 @@
       "article_butlleta": "Art. 117.5 RGC",
       "import": "500 € (DTE 250 €)",
       "punts": "0",
-      "info_aplicabilitat": "Obligatoris en vehicles matriculats des del 15-06-1992. Vehicles transport > 8 places i mercaderies > 3.500 kg: matriculats des del 20-10-2007."
+      "info_aplicabilitat": "Obligatoris en vehicles matriculats des del 15-06-1992. Vehicles transport > 8 places i mercaderies > 3.500 kg: matriculats des del 20-10-2007.",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
-
     "fi_no_informar": {
       "final": true,
       "tipus": "administrativa",
@@ -154,9 +217,11 @@
       "article_butlleta": "Art. 117.2 RGC",
       "import": "80 € (DTE 40 €)",
       "punts": "0",
-      "info": "Conductors d'autobusos: obligació d'informar abans de l'inici del trajecte"
+      "info": "Conductors d'autobusos: obligació d'informar abans de l'inici del trajecte",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
-
     "fi_casc_conductor": {
       "final": true,
       "tipus": "administrativa",
@@ -165,9 +230,11 @@
       "article_butlleta": "Art. 118.1 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "–4 punts",
-      "excepcions": "Motos/quads/ciclomotors amb estructura d'autoprotecció + cinturons (si consta a fitxa tècnica)"
+      "excepcions": "Motos/quads/ciclomotors amb estructura d'autoprotecció + cinturons (si consta a fitxa tècnica)",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
-
     "fi_casc_passatger": {
       "final": true,
       "tipus": "administrativa",
@@ -175,9 +242,11 @@
       "concepte_butlleta": "No utilitzar, o utilitzar inadequadament, la persona denunciada, el casc de protecció homologat",
       "article_butlleta": "Art. 118.1 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "0 passatger / 4 al conductor si passatger menor"
+      "punts": "0 passatger / 4 al conductor si passatger menor",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
-
     "fi_casc_bici": {
       "final": true,
       "tipus": "administrativa",
@@ -186,9 +255,11 @@
       "article_butlleta": "Art. 118.1 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "0",
-      "obligatorietat": "Vies interurbanes SEMPRE (excepte rampes ascendents llargues, raons mèdiques, calor extrema). Vies urbanes: només menors de 16 anys."
+      "obligatorietat": "Vies interurbanes SEMPRE (excepte rampes ascendents llargues, raons mèdiques, calor extrema). Vies urbanes: només menors de 16 anys.",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
-
     "fi_armilla": {
       "final": true,
       "tipus": "administrativa",
@@ -197,7 +268,10 @@
       "article_butlleta": "Art. 118.3 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "–4 punts",
-      "obligatorietat": "Vies INTERURBANES quan el conductor surt del vehicle i ocupa la calçada/voral"
+      "obligatorietat": "Vies INTERURBANES quan el conductor surt del vehicle i ocupa la calçada/voral",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     }
   },
   "notes_finals": [
@@ -206,6 +280,6 @@
     "Cinturons no instal·lats: vehicles antics (matriculats abans de 1992): NO obligatoris, però si en porten cal usar-los.",
     "SRI menors: la responsabilitat és SEMPRE del conductor del vehicle (vehicles <9 places).",
     "Casc de bici: legalment menors de 16 anys SEMPRE (urbà i interurbà). Adults: només interurbà.",
-    "L'armilla reflectant és obligatòria al vehicle (V-16 o similar) i s'ha de portar abans de baixar."
+    "L'armilla reflectant s'ha de dur dins del vehicle i posar-se-la ABANS de baixar-ne. No confondre-la amb la balisa V-16 (dispositiu lluminós de presenyalització que des de l'1/1/2026 substitueix els triangles, connectada a DGT 3.0)."
   ]
 }

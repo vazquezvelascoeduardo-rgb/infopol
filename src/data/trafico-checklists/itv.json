@@ -76,7 +76,10 @@
         "NO immobilitzar (excepte risc evident)",
         "Si el vehicle no s'utilitza: aconsellar baixa temporal"
       ],
-      "info": "La sanció es considera infracció continuada — pot arribar més d'una sanció si no es passa ITV"
+      "info": "La sanció es considera infracció continuada — pot arribar més d'una sanció si no es passa ITV",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa"
+      ]
     },
 
     "fi_desfavorable_circulant": {
@@ -91,6 +94,11 @@
         "Butlletí al titular",
         "Possible immobilització si risc per la seguretat",
         "Indicar que cal anar al taller / nova ITV"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització (ITV desfavorable/negativa circulant)",
+        "T 04 — Proposta extraordinària ITV (defectes que exigeixen inspecció)"
       ]
     },
 
@@ -100,7 +108,11 @@
       "titol": "⚠️ GREU — ITV desfavorable fora dels 2 mesos",
       "article_butlleta": "Art. 10.1 RGV",
       "import": "200 € (DTE 100 €)",
-      "punts": "0"
+      "punts": "0",
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització (ITV desfavorable/negativa circulant)"
+      ]
     },
 
     "fi_negativa": {
@@ -116,21 +128,30 @@
         "Grua a taller (no a domicili)",
         "Butlletí al titular",
         "No pot circular fins reparació + nova ITV favorable"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització (ITV desfavorable/negativa circulant)"
       ]
     },
 
     "fi_mai_itv": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "🔴 MOLT GREU — Vehicle mai inspeccionat",
-      "concepte_butlleta": "Circular amb el vehicle ressenyat sense tenir l'autorització administrativa per circular a causa d'una inspecció tècnica negativa per incompliment de condicions tècniques",
+      "titol": "⚠️ GREU — Vehicle mai presentat a ITV (exigible)",
+      "concepte_butlleta": "No haver presentat a la inspecció tècnica periòdica, en el termini establert, el vehicle ressenyat",
       "article_butlleta": "Art. 10.1 RGV",
-      "import": "500 € (DTE 250 €)",
+      "import": "200 € (DTE 100 €)",
+      "punts": "0",
       "accions_operatives": [
-        "Immobilització",
+        "Valorar immobilització només si presenta deficiències evidents que comprometin la seguretat (art. 104 TRLSV)",
         "Comprovar que efectivament està matriculat",
         "Si no matriculat: Art. 1.1 RGV (MG 500€)",
         "Comprovar assegurança"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "A 13 — Immobilització (només si deficiències que comprometin la seguretat)"
       ]
     },
 
@@ -150,6 +171,10 @@
         "Tracció afegida / modificada",
         "Sistema d'escapament modificat (sense homologació)",
         "Sistema d'enllumenat (LEDs no homologats, cèrcols, etc.)"
+      ],
+      "actes_viladecans": [
+        "T 16 — Full de denúncia administrativa",
+        "T 04 — Proposta extraordinària ITV (reforma que exigeix inspecció)"
       ]
     }
   },

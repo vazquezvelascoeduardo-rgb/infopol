@@ -5,8 +5,8 @@
   "icono": "⚰️",
   "base_legal": [
     "Art. 326 LECrim (inspecció ocular)",
-    "Art. 340 LECrim (aixecament cadàver)",
-    "Art. 778 LECrim (procediment abreujat)",
+    "Arts. 340-343 LECrim (aixecament de cadàver, identificació i autòpsia)",
+    "Art. 778.6 LECrim (el jutge pot delegar l'aixecament en el metge forense — pràctica habitual a Catalunya)",
     "Llei 49/1978 (enterraments)",
     "Decret 297/1997 (Reglament Policia Sanitària Mortuòria)",
     "Art. 142 CP (homicidi imprudent)",
@@ -14,7 +14,7 @@
     "Art. 195 CP (omissió socors)"
   ],
 
-  "principi_clau": "TOTA mort ha de ser tractada com a POSSIBLE escena de crim fins que es demostri el contrari. La preservació de l'escena és INNEGOCIABLE. L'aixecament del cadàver el realitza l'autoritat judicial (Art. 340 LECrim) — la policia preserva i col·labora.",
+  "principi_clau": "TOTA mort ha de ser tractada com a POSSIBLE escena de crim fins que es demostri el contrari. La preservació de l'escena és INNEGOCIABLE. L'aixecament del cadàver l'ordena l'autoritat judicial (arts. 340-343 LECrim); a Catalunya el jutjat de guàrdia habitualment DELEGA la comissió judicial en el metge forense (art. 778.6 LECrim) — la policia preserva i col·labora. La mort natural amb metge que certifica la defunció NO requereix comissió judicial.",
 
   "tipus_morts": {
     "natural_hospital": "Mort en centre sanitari amb assistència — certificat metge fàcil",
@@ -85,7 +85,7 @@
       "titol": "🚔 MORT VIOLENTA / DUBTOSA — atestat penal complet",
       "accions_ordenades": [
         "1️⃣ AVISAR sala + Mossos DIC (Investigació Criminal) IMMEDIATAMENT",
-        "2️⃣ AVISAR Jutjat de Guàrdia (Art. 340 LECrim — aixecament judicial)",
+        "2️⃣ AVISAR Jutjat de Guàrdia (arts. 340-343 LECrim — aixecament judicial)",
         "3️⃣ Avisar METGE FORENSE (a través del Jutjat)",
         "4️⃣ PRESERVAR ESCENA — perímetre amb cinta policial",
         "5️⃣ NO MOURE res — ni el cadàver ni objectes propers",
@@ -95,7 +95,7 @@
         "9️⃣ Identificar i SEPARAR testimonis — declaracions per separat",
         "🔟 Si família present: oferir suport (psicòleg si possible) però mantenir distància escena",
         "1️⃣1️⃣ Cuidar PROVES BIOLÒGIQUES (sang, cabells, fluids)",
-        "1️⃣2️⃣ Esperar arribada COMITIVA JUDICIAL (jutge + secretari + forense)",
+        "1️⃣2️⃣ Esperar arribada COMISSIÓ JUDICIAL (jutge + lletrat AJ + forense; a Catalunya és habitual la delegació en el metge forense — art. 778.6 LECrim)",
         "1️⃣3️⃣ Després aixecament: ATESTAT POLICIAL exhaustiu"
       ],
       "que_NO_fer": [
@@ -115,7 +115,12 @@
         "Diligència aixecament cadàver judicial",
         "Cronologia detallada"
       ],
-      "informacio_familia": "Trasllat al Forense (Anatòmic Forense Barcelona o IMLCFC) per autòpsia. Informar família que NO podran veure el cos fins acabat el procediment."
+      "informacio_familia": "Trasllat a l'IMLCFC (Institut de Medicina Legal i Ciències Forenses de Catalunya) per autòpsia. Informar família que NO podran veure el cos fins acabat el procediment.",
+      "actes_viladecans": [
+        "A 60 — Aixecament de cadàver en cas de mort biològica",
+        "A 10 — Genèrica (constatació circumstàncies del lloc)",
+        "A 18PL — Acta de declaració (testimonis/família)"
+      ]
     },
 
     "fi_suicidi_consumat": {
@@ -143,6 +148,11 @@
         "Antecedents de violència de la parella",
         "Robatori d'objectes",
         "Indicis lluita"
+      ],
+      "actes_viladecans": [
+        "A 60 — Aixecament de cadàver en cas de mort biològica",
+        "A 10 — Genèrica (constatació circumstàncies del lloc)",
+        "A 18PL — Acta de declaració (testimonis/família)"
       ]
     },
 
@@ -165,6 +175,11 @@
         "5. Inspecció ocular",
         "6. Testimonis",
         "7. Atestat amb investigació imprudència possible"
+      ],
+      "actes_viladecans": [
+        "A 60 — Aixecament de cadàver en cas de mort biològica",
+        "A 10 — Genèrica (constatació circumstàncies del lloc)",
+        "A 18PL — Acta de declaració (testimonis/família)"
       ]
     },
 
@@ -187,6 +202,10 @@
         "Indicis sospitosos al lloc",
         "Mort sobtada en persona aparentment sana",
         "Manifestacions familiars contradictòries"
+      ],
+      "actes_viladecans": [
+        "A 10 — Genèrica (constatació circumstàncies del lloc)",
+        "A 18PL — Acta de declaració (testimonis/família)"
       ]
     },
 
@@ -195,7 +214,12 @@
       "tipus": "procediment",
       "titol": "📋 MORT SOBTADA — investigació",
       "info": "Persona jove sense antecedents mèdics: SEMPRE aixecament judicial + autòpsia per descartar causes",
-      "accions": "Procedir com a mort dubtosa (preservació + Mossos DIC + Jutjat + Forense)"
+      "accions": "Procedir com a mort dubtosa (preservació + Mossos DIC + Jutjat + Forense)",
+      "actes_viladecans": [
+        "A 60 — Aixecament de cadàver en cas de mort biològica",
+        "A 10 — Genèrica (constatació circumstàncies del lloc)",
+        "A 18PL — Acta de declaració (testimonis/família)"
+      ]
     },
 
     "fi_descomposicio": {
@@ -203,7 +227,7 @@
       "tipus": "procediment",
       "titol": "📋 CADÀVER DESCOMPOSAT / RESTES — protocol especial",
       "accions_ordenades": [
-        "1. PRESERVACIÓ extrema (cuc del temps fa avançar la descomposició)",
+        "1. PRESERVACIÓ extrema (el pas del temps fa avançar la descomposició)",
         "2. Avís IMMEDIAT Mossos DIC + Policia Científica",
         "3. Forense + antropòleg si restes òssies",
         "4. Aixecament judicial",
@@ -213,7 +237,12 @@
         "8. Atestat exhaustiu",
         "9. Comunicació Fiscalia"
       ],
-      "informacio": "Cadàvers en avançat estat: investigació pot durar mesos. Identificació via ADN, dental, etc."
+      "informacio": "Cadàvers en avançat estat: investigació pot durar mesos. Identificació via ADN, dental, etc.",
+      "actes_viladecans": [
+        "A 60 — Aixecament de cadàver en cas de mort biològica",
+        "A 10 — Genèrica (constatació circumstàncies del lloc)",
+        "A 18PL — Acta de declaració (testimonis/família)"
+      ]
     },
 
     "fi_custodia": {
@@ -234,16 +263,21 @@
         "10. INVESTIGACIÓ INTERNA paral·lela (Afers Interns)",
         "11. Comunicació família amb sensibilitat extrema"
       ],
-      "transparencia_clau": "Tota mort en custòdia es presumeix sospitosa fins demostració. Total transparència és la millor defensa institucional."
+      "transparencia_clau": "Tota mort en custòdia es presumeix sospitosa fins demostració. Total transparència és la millor defensa institucional.",
+      "actes_viladecans": [
+        "A 60 — Aixecament de cadàver en cas de mort biològica",
+        "A 10 — Genèrica (constatació circumstàncies del lloc)",
+        "A 18PL — Acta de declaració (testimonis/família)"
+      ]
     }
   },
   "notes_finals": [
-    "L'AIXECAMENT del cadàver és COMPETÈNCIA JUDICIAL (Art. 340 LECrim). La policia preserva i col·labora.",
+    "L'AIXECAMENT del cadàver és COMPETÈNCIA JUDICIAL (arts. 340-343 LECrim). A Catalunya el jutjat de guàrdia habitualment DELEGA en el metge forense (art. 778.6 LECrim). La policia preserva i col·labora.",
     "MEMÒRIA TÈCNICA: registrar TOT (hora arribada, hora avisos, persones presents, accions). Pot ser clau a judici anys després.",
     "FAMÍLIA: tracte sensible però mai permetre accés escena. Trasllat psicològic si possible.",
     "MITJANS DE COMUNICACIÓ: NO informar res. Coordinació via gabinet.",
     "MENORS víctimes: comunicació DGAIA + Fiscalia Menors + tractament prova preconstituïda si germà testimoni.",
-    "AUTÒPSIA: obligatòria en violenta/dubtosa/sobtada. Family NO pot veure cos fins després.",
+    "AUTÒPSIA: obligatòria en mort violenta/dubtosa/sobtada (art. 343 LECrim). La família NO pot veure el cos fins després.",
     "ANTROPOLOGIA FORENSE: per restes òssies — IMLCFC (Institut Medicina Legal Catalunya).",
     "ENTOMOLOGIA FORENSE: cucs i insectes ajuden a determinar data mort.",
     "MOSTRES BIOLÒGIQUES: cura extrema. ADN clau per identificació.",
