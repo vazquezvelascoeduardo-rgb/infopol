@@ -18,7 +18,8 @@
   "criteri_clau_pautes": "El 'tractament mèdic o quirúrgic' és la frontera entre delicte LLEU (147.2) i delicte BÀSIC (147.1). Tractament = més enllà d'una primera assistència facultativa. Inclou: punts de sutura, immobilització, medicació pautada, fisioteràpia.",
 
   "perseguibilitat": {
-    "147_2_lleu": "Denúncia perjudicat (excepte víctima vulnerable)",
+    "147_2_lleu": "Denúncia de la persona agreujada o representant legal (art. 147.4 CP). Si context VG/VD el fet és art. 153 CP: D'OFICI",
+    "147_3_maltractament": "Denúncia de la persona agreujada (art. 147.4 CP) — multa 1-2 mesos. Si VG/VD: art. 153 CP, d'ofici",
     "147_1_basic": "D'ofici",
     "148_agreujat": "D'ofici",
     "149_150_greus": "D'ofici",
@@ -48,7 +49,7 @@
         { "etiqueta": "Lesions BÀSIQUES (cap agreujant)",                              "va_a": "fi_147_basic" },
         { "etiqueta": "Amb ARMES o mitjans perillosos (Art. 148.1)",                  "va_a": "fi_148_armes" },
         { "etiqueta": "Amb ENSANYAMENT o premeditació (Art. 148.2)",                  "va_a": "fi_148_ensanyament" },
-        { "etiqueta": "Víctima MENOR de 14 anys / vulnerable (Art. 148.3)",           "va_a": "fi_148_menor" },
+        { "etiqueta": "Víctima MENOR de 12 anys / discapacitat necessitat d'especial protecció (Art. 148.3)", "va_a": "fi_148_menor" },
         { "etiqueta": "Víctima parella/ex-parella DONA (VG → 148.4 CP)",              "va_a": "fi_vg_lesions_148_4" },
         { "etiqueta": "Víctima VULNERABLE convivent (Art. 148.5)",                    "va_a": "fi_148_vulnerable" },
         { "etiqueta": "Víctima familiar convivent (no parella) → VD",                  "va_a": "fi_vd_lesions" },
@@ -72,7 +73,7 @@
       "opcions": [
         { "etiqueta": "Parella DONA (VG)",                                             "va_a": "fi_vg_153_1" },
         { "etiqueta": "Familiar convivent (VD)",                                       "va_a": "fi_vd_153_2" },
-        { "etiqueta": "Sense relació especial — no constitutiu de delicte",            "va_a": "fi_no_delicte" }
+        { "etiqueta": "Sense relació especial — delicte LLEU de maltractament d'obra (147.3 CP)", "va_a": "fi_no_delicte" }
       ]
     },
 
@@ -83,7 +84,7 @@
       "concepte": "Lesió sense tractament mèdic o quirúrgic més enllà d'una primera assistència",
       "article": "Art. 147.2 CP",
       "pena": "Multa 1-3 mesos",
-      "perseguibilitat": "Denúncia del perjudicat (excepte víctima vulnerable)",
+      "perseguibilitat": "Denúncia de la persona agreujada o representant legal (art. 147.4 CP); el Fiscal pot denunciar si la víctima és menor, persona amb discapacitat o desvalguda. Si VG/VD: art. 153 CP, d'ofici",
       "accions_ordenades": [
         "1. Auxili a la víctima + SEM si cal",
         "2. PARTE MÈDIC obligatori (urgències del CAP/hospital)",
@@ -95,7 +96,13 @@
         "8. Si autor present: identificació i citació (no detenció normalment)"
       ],
       "documentacio": "Atestat simplificat + parte mèdic + declaració víctima + identificació autor",
-      "info_clau": "Sense denúncia del perjudicat NO es persegueix (excepte víctima vulnerable: menor, persona amb discapacitat o necessitat especial protecció)"
+      "info_clau": "Sense denúncia de la persona agreujada NO es persegueix (si és menor/discapacitada/desvalguda pot denunciar el representant legal o el Ministeri Fiscal). En context VG/VD el fet és art. 153 CP i es persegueix D'OFICI",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 03 — Drets denunciat no detingut",
+        "N 06 — Citació policial"
+      ]
     },
 
     "fi_147_basic": {
@@ -125,6 +132,12 @@
         "Fotografies lesions (amb consentiment)",
         "Acta intervenció arma si n'hi ha",
         "Diligència detenció + lectura drets"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 01 — Drets detingut",
+        "N 11 — Citació judici ràpid"
       ]
     },
 
@@ -148,7 +161,12 @@
         "Atestat penal",
         "Jutjat Guàrdia"
       ],
-      "documentacio": "Atestat + acta intervenció arma + parte mèdic + cadena custòdia"
+      "documentacio": "Atestat + acta intervenció arma + parte mèdic + cadena custòdia",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 01 — Drets detingut"
+      ]
     },
 
     "fi_148_ensanyament": {
@@ -167,13 +185,18 @@
         "Detenció",
         "Atestat detallat amb cronologia",
         "Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 01 — Drets detingut"
       ]
     },
 
     "fi_148_menor": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE AGREUJAT — Lesions a menor 14 anys o vulnerable (Art. 148.3 CP)",
+      "titol": "🚔 DELICTE AGREUJAT — Lesions a menor de 12 anys o persona amb discapacitat (Art. 148.3 CP)",
       "pena": "Presó 2-5 anys",
       "accions_ordenades": [
         "Auxili + SEM",
@@ -184,7 +207,12 @@
         "NO repetir interrogatoris al menor (prova preconstituïda)",
         "Atestat penal + Jutjat"
       ],
-      "documentacio_clau": "Atestat + parte mèdic pediàtric + comunicació DGAIA + Fiscalia"
+      "documentacio_clau": "Atestat + parte mèdic pediàtric + comunicació DGAIA + Fiscalia",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 01 — Drets detingut"
+      ]
     },
 
     "fi_148_vulnerable": {
@@ -199,6 +227,11 @@
         "Comunicació Serveis Socials",
         "Detenció + atestat penal",
         "Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 01 — Drets detingut"
       ]
     },
 
@@ -214,7 +247,7 @@
         "GREU malaltia somàtica o psíquica"
       ],
       "pena": "Presó 6-12 anys",
-      "pena_agreujada_149_2": "Si víctima menor o discapacitat amb mutilació genital: presó 8-12 anys + inhabilitació pàtria potestat 4-10 anys",
+      "pena_agreujada_149_2": "Mutilació genital (149.2): presó 6-12 anys; si víctima menor o persona amb discapacitat, a més inhabilitació per a pàtria potestat/tutela/guarda 4-10 anys",
       "accions_ordenades": [
         "1. Auxili VITAL urgent + SEM prioritari + Bombers si cal",
         "2. PRESERVAR escena com escena de crim",
@@ -227,7 +260,12 @@
         "9. ATESTAT PENAL complet",
         "10. Jutjat de Guàrdia immediat"
       ],
-      "documentacio": "Atestat + parte mèdic + inspecció ocular + fotos + croquis"
+      "documentacio": "Atestat + parte mèdic + inspecció ocular + fotos + croquis",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "A 18PL — Declaració"
+      ]
     },
 
     "fi_150": {
@@ -239,17 +277,28 @@
         "DEFORMITAT (no greu)"
       ],
       "pena": "Presó 3-6 anys",
-      "accions": "Mateixes que 149 — auxili prioritari + preservació escena + detenció + atestat complet"
+      "accions": "Mateixes que 149 — auxili prioritari + preservació escena + detenció + atestat complet",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "A 18PL — Declaració"
+      ]
     },
 
     "fi_152_imprudent": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Lesions per imprudència (Art. 152 CP)",
-      "info": "Imprudència greu (sempre delicte si lesió 147.1 o més greu) o menys greu (només 149/150)",
-      "pena_imprudencia_greu": "Presó 3 mesos - 3 anys (segons gravetat lesió)",
-      "pena_imprudencia_menys_greu": "Multa 3 mesos - 12 mesos",
-      "accions": "Auxili + SEM + parte mèdic + atestat amb descripció imprudència"
+      "info": "Imprudència GREU: lesions del 147.1, 149 o 150 (art. 152.1). Imprudència MENYS GREU: també 147.1, 149 i 150 des de la LO 2/2019 (art. 152.2)",
+      "pena_imprudencia_greu": "Presó 3-6 mesos o multa 6-18 mesos (lesions 147.1) / presó 1-3 anys (149) / presó 6 mesos-2 anys (150)",
+      "pena_imprudencia_menys_greu": "Multa 3-12 mesos (segons lesió); NOMÉS perseguible amb denúncia de la persona agreujada (art. 152.2 CP)",
+      "accions": "Auxili + SEM + parte mèdic + atestat amb descripció imprudència",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 03 — Drets denunciat no detingut",
+        "N 06 — Citació policial"
+      ]
     },
 
     "fi_vg_lesions_148_4": {
@@ -264,6 +313,11 @@
         "VPR (Valoració Policial del Risc)",
         "Informar drets víctima",
         "Atestat al JVM (NO Jutjat ordinari)"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "A 18PL — Declaració"
       ]
     },
 
@@ -278,6 +332,11 @@
         "Protecció víctima",
         "VPR",
         "Atestat al JVM"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "A 18PL — Declaració"
       ]
     },
 
@@ -285,8 +344,13 @@
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Lesions VD amb tractament",
-      "info": "Lesions a familiar convivent (no parella dona) — concurs Art. 147.1/148 + agreujant 153 si correspon",
-      "accions": "Veure checklist 'Violència domèstica'"
+      "info": "Lesions amb tractament a familiar convivent (no parella dona): art. 147.1 o 148 CP; si habitualitat, a més 173.2 CP",
+      "accions": "Veure checklist 'Violència domèstica'",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "A 18PL — Declaració"
+      ]
     },
 
     "fi_vd_153_2": {
@@ -294,7 +358,12 @@
       "tipus": "penal",
       "titol": "🚔 DELICTE — Maltractament VD sense tractament (Art. 153.2 CP)",
       "info": "Veure checklist 'Violència domèstica'",
-      "pena": "Presó 3 mesos - 1 any O TBC 31-80 dies + privació armes 1-3 anys"
+      "pena": "Presó 3 mesos - 1 any O TBC 31-80 dies + privació armes 1-3 anys",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "A 18PL — Declaració"
+      ]
     },
 
     "fi_173_vexacions": {
@@ -302,14 +371,33 @@
       "tipus": "penal",
       "titol": "🚔 DELICTE — Tracte degradant (Art. 173.1 CP)",
       "pena": "Presó 6 mesos - 2 anys",
-      "info": "Tracte degradant que menyscaba greument la integritat moral. Si habitual + familiar: 173.2"
+      "info": "Tracte degradant que menyscaba greument la integritat moral. Si habitual + familiar: 173.2",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 03 — Drets denunciat no detingut"
+      ]
     },
 
     "fi_no_delicte": {
       "final": true,
-      "tipus": "ok",
-      "titol": "ℹ️ Sense delicte aparent",
-      "accio": "Si no hi ha lesió, ni context VG/VD, ni habitualitat: pot no ser delicte. Possible via civil o lleu via administrativa."
+      "tipus": "penal",
+      "titol": "⚖️ DELICTE LLEU — Maltractament d'obra sense lesió (Art. 147.3 CP)",
+      "concepte": "Colpejar o maltractar d'obra una altra persona sense causar-li lesió (empenta, bufetada sense marca…)",
+      "pena": "Multa 1-2 mesos",
+      "perseguibilitat": "NOMÉS perseguible amb denúncia de la persona agreujada o representant legal (art. 147.4 CP)",
+      "accions": [
+        "Identificar autor i testimonis",
+        "Informar la víctima del dret a denunciar",
+        "Si no vol denunciar: fer constar en minuta",
+        "Atestat simplificat / citació JIDL si denúncia"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 03 — Drets denunciat no detingut",
+        "N 06 — Citació policial"
+      ]
     }
   },
   "notes_finals": [

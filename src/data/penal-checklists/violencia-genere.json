@@ -25,8 +25,8 @@
     "148_4_lesions": "Lesions amb tractament: 2-5 anys presó",
     "171_4_amenaces": "Amenaces lleus: 6 mesos-1 any presó O TBC + privació armes",
     "172_2_coaccions": "Coaccions lleus: 6 mesos-1 any presó O TBC + privació armes",
-    "173_4_vexacions": "Injúries/vexacions lleus: multa 1-3 mesos",
-    "468_trencament": "Trencament allunyament: 6 mesos-1 any presó"
+    "173_4_vexacions": "Injúries/vexacions lleus: localització permanent 5-30 dies (en domicili diferent i allunyat de la víctima) O TBC 5-30 dies O multa 1-4 mesos (multa només si no hi ha relacions econòmiques — art. 84.2 CP)",
+    "468_2_trencament": "Trencament allunyament (pena de l'art. 48 o mesura cautelar amb víctima de l'art. 173.2): presó 6 mesos-1 any EN TOT CAS (art. 468.2 CP)"
   },
 
   "VPR_nivells": {
@@ -103,7 +103,7 @@
         "6️⃣ PARTE MÈDIC actual (insistir anar urgències)",
         "7️⃣ Documentar lesions ANTIGES si encara visibles (fotografies amb consentiment)",
         "8️⃣ RECOLLIR PROVES: missatges WhatsApp, xarxes, gravacions, testimonis",
-        "9️⃣ VPR (Valoració Policial del Risc) — qüestionari oficial VioGén",
+        "9️⃣ VALORACIÓ POLICIAL DEL RISC — a Catalunya: qüestionari propi dels Mossos/policies locals (RVD-BCN a Barcelona); VioGén és el sistema del Ministeri de l'Interior (CNP/GC)",
         "🔟 Informar de DRET A ORDRE DE PROTECCIÓ (Art. 544 ter LECrim)",
         "1️⃣1️⃣ Posar en contacte amb SIAD / SARA si la víctima ho vol",
         "1️⃣2️⃣ ATESTAT al JVM (Jutjat Violència sobre Dona)",
@@ -119,6 +119,11 @@
         "Dret a teleassistència ATENPRO",
         "Dret a punts de trobada",
         "Dret a no comparèixer al judici en presència de l'agressor"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració testimonis",
+        "N 07 — Citació judicial (compareixença OP 544 ter)"
       ]
     },
 
@@ -137,6 +142,12 @@
         "8️⃣ Casa d'acollida si necessari (coordinar amb Serveis Socials)",
         "9️⃣ ATESTAT URGENT al JVM",
         "🔟 VPR immediata"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut"
       ]
     },
 
@@ -153,6 +164,10 @@
         "Informar víctima dels seus drets (encara que no denunciï)",
         "Comunicació SIAD/SARA per acompanyament",
         "VPR amb dades disponibles"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració testimonis"
       ]
     },
 
@@ -173,8 +188,8 @@
       "titol": "🚔 DELICTE — Maltractament ocasional VG (Art. 153.1 CP)",
       "concepte": "Lesió lleu o maltractament d'obra a parella/ex-parella DONA, sense necessitat de tractament mèdic",
       "article": "Art. 153.1 CP",
-      "pena": "Presó 6 mesos - 1 any O TBC 31-80 dies + inhabilitació especial pàtria potestat 1-5 anys + privació tinença/port d'armes 1-3 anys",
-      "pena_agreujada_153_3": "Si es comet en presència de menors, al domicili comú, amb armes: pena meitat superior",
+      "pena": "Presó 6 mesos - 1 any O TBC 31-80 dies + privació tinença/port d'armes d'1 any i 1 dia a 3 anys (+ inhabilitació pàtria potestat fins a 5 anys si el jutge ho estima adequat)",
+      "pena_agreujada_153_3": "Si es comet en presència de menors, amb armes, al domicili comú o de la víctima, o trencant una pena de l'art. 48 o mesura cautelar: pena meitat superior (153.3)",
       "accions_ordenades": [
         "1. Detenció agressor",
         "2. Lectura drets",
@@ -196,6 +211,14 @@
         "Declaració víctima",
         "Diligència detenció + lectura drets",
         "Comunicació DGAIA si menors"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració testimonis",
+        "N 07 — Citació judicial (compareixença OP 544 ter)"
       ]
     },
 
@@ -213,6 +236,14 @@
         "6. VPR",
         "7. Atestat penal exhaustiu al JVM",
         "8. Posada a disposició JVM"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració testimonis",
+        "N 07 — Citació judicial (compareixença OP 544 ter)"
       ]
     },
 
@@ -220,8 +251,8 @@
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE MOLT GREU — Lesions VG permanents (Art. 149/150 CP)",
-      "pena_149": "Presó 8-12 anys (agreujada per gènere) + inhabilitació pàtria potestat 4-10 anys",
-      "pena_150": "Presó 4-8 anys (agreujada)",
+      "pena_149": "Presó 6-12 anys (art. 149 CP) — l'agreujant genèric de discriminació per raó de gènere (art. 22.4a CP) comporta pena en meitat superior",
+      "pena_150": "Presó 3-6 anys (art. 150 CP) — meitat superior amb l'agreujant de gènere",
       "accions_ordenades": [
         "Auxili VITAL urgent",
         "Detenció",
@@ -229,6 +260,13 @@
         "Avisar Mossos DIC / UFAM",
         "Atestat urgent al JVM o Guàrdia segons cas",
         "VPR EXTREMA"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració testimonis"
       ]
     },
 
@@ -243,6 +281,13 @@
         "Recollida proves (missatges)",
         "VPR",
         "Atestat al JVM"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "A 18PL — Declaració testimonis",
+        "N 07 — Citació judicial (compareixença OP 544 ter)"
       ]
     },
 
@@ -251,32 +296,49 @@
       "tipus": "penal",
       "titol": "🚔 DELICTE — Coaccions lleus VG (Art. 172.2 CP)",
       "pena": "Presó 6 mesos - 1 any O TBC 31-80 dies + inhabilitació + privació armes",
-      "accions": ["Detenció", "VPR", "Atestat JVM"]
+      "accions": ["Detenció", "VPR", "Atestat JVM"],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "N 07 — Citació judicial (compareixença OP 544 ter)"
+      ]
     },
 
     "fi_173_4_VG": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE LLEU — Vexacions/injúries lleus VG (Art. 173.4 CP)",
-      "pena": "Multa 1-3 mesos",
-      "perseguibilitat": "Denúncia perjudicada (excepció a la regla general d'ofici de VG)",
-      "accions": ["Declaració víctima", "VPR", "Atestat simplificat"]
+      "pena": "Localització permanent 5-30 dies (domicili diferent i allunyat de la víctima) O TBC 5-30 dies O multa 1-4 mesos (només si concorren les circumstàncies de l'art. 84.2 CP)",
+      "perseguibilitat": "Les INJÚRIES només són perseguibles amb denúncia de la persona agreujada (art. 173.4 in fine); les vexacions injustes es consideren perseguibles d'ofici",
+      "accions": ["Declaració víctima", "VPR", "Atestat simplificat"],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració testimonis",
+        "N 07 — Citació judicial"
+      ]
     },
 
     "fi_amenaces_greus_VG": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Amenaces greus en context VG",
-      "info": "Concurs entre 169 CP (amenaces greus) + circumstàncies VG. Pena meitat superior.",
-      "accions": "Mateixes que amenaces 169 + VPR + JVM"
+      "info": "Amenaces greus del 169 CP en context VG: aplicar l'agreujant genèric de gènere (22.4a CP) i competència del JVM.",
+      "accions": "Mateixes que amenaces 169 + VPR + JVM",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "A 18PL — Declaració testimonis"
+      ]
     },
 
     "fi_468_trencament": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE — Trencament allunyament (Art. 468 CP)",
-      "info_clau": "El trencament és delicte FINS I TOT amb consentiment de la víctima (TS jurisprudència consolidada)",
-      "pena": "Presó 6 mesos - 1 any",
+      "titol": "🚔 DELICTE — Trencament allunyament (Art. 468.2 CP)",
+      "info_clau": "El trencament és delicte FINS I TOT amb consentiment de la víctima (Acord Ple no jurisdiccional TS 25-11-2008, jurisprudència consolidada)",
+      "pena": "Presó 6 mesos - 1 any EN TOT CAS (art. 468.2 CP)",
       "accions_ordenades": [
         "1. DETENCIÓ IMMEDIATA agressor (sense excepcions)",
         "2. Comprovar resolució vigent (Sala/JVM emissor)",
@@ -287,14 +349,22 @@
         "7. REVISAR VPR (el trencament eleva el risc)",
         "8. Posada a disposició Jutjat Guàrdia (excepcionalment, si urgent) o JVM"
       ],
-      "info_VPR": "El trencament és INDICADOR fort de risc — sempre cal revaluar VPR cap amunt"
+      "info_VPR": "El trencament és INDICADOR fort de risc — sempre cal revaluar VPR cap amunt",
+      "actes_viladecans": [
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "N 02 — Drets víctima",
+        "N 07 — Citació judicial"
+      ]
     }
   },
   "notes_finals": [
-    "VPR (Valoració Policial del Risc) OBLIGATÒRIA en TOTS els casos VG. Formulari oficial VioGén.",
+    "VALORACIÓ DEL RISC OBLIGATÒRIA en TOTS els casos VG. A Catalunya: eines pròpies de Mossos/policies locals (RVD-BCN a Barcelona); VioGén és el sistema estatal (CNP/GC) — coordinar el traspàs d'informació quan hi hagi canvi de demarcació.",
     "Nivells VPR: No apreciat / Baix / Mig / Alt / Extrem. Alt/Extrem: protecció intensiva.",
     "MENORS presents = víctimes indirectes (Llei VG 2004 modificada). Comunicació DGAIA SEMPRE.",
-    "ORDRE DE PROTECCIÓ (Art. 544 ter LECrim): pot sol·licitar-se a comissaria, JVM, Fiscalia. Resolució en 72h.",
+    "ORDRE DE PROTECCIÓ (Art. 544 ter LECrim): pot sol·licitar-se a comissaria, JVM, Fiscalia. El jutge convoca AUDIÈNCIA URGENT que s'ha de celebrar en un MÀXIM de 72 HORES des de la sol·licitud (544 ter.4).",
+    "DISPENSA DE DECLARAR (art. 416 LECrim, reforma LO 8/2021): la dispensa SEGUEIX EXISTINT per a parella/parents, però NO s'hi pot acollir qui està personat com a ACUSACIÓ PARTICULAR ni qui té la representació legal o guarda del menor o persona amb discapacitat víctima.",
     "RECURSOS víctimes: 016 (24h gratuït no deixa rastre factura), SIAD municipals, SARA, ATENPRO, cases d'acollida, RAI (Renda Activa Inserció).",
     "ESTATUT VÍCTIMA (Llei 4/2015): drets a informació, traducció, assistència, no comparèixer amb agressor, etc.",
     "JUTJAT VIOLÈNCIA SOBRE DONA (JVM): competència exclusiva. NO al Jutjat Instrucció ordinari.",

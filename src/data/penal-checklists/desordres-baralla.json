@@ -5,23 +5,23 @@
   "icono": "👊",
   "base_legal": [
     "Art. 154 CP (baralla tumultuària)",
-    "Art. 557 CP (desordres públics bàsics)",
-    "Art. 557 bis CP (desordres greus)",
-    "Art. 557 ter CP (entrada/permanència local pertorbant)",
+    "Art. 557 CP (desordres públics — redacció LO 14/2022)",
+    "Art. 557.2-557.3 CP (agreujats: multitud, instruments perillosos, armes de foc)",
+    "Art. 557 bis CP (invasió/ocupació d'establiment o local — l'antic 557 ter està DEROGAT per LO 14/2022)",
     "Art. 36.1 LOPSC (alteració seguretat ciutadana)",
     "Art. 36.2 LOPSC (manifestacions)",
     "Art. 36.3 LOPSC (reunions/manifestacions sense comunicar)",
     "Art. 36.4 LOPSC (alteració actes públics)",
     "Art. 37.4 LOPSC (manca respecte agents)",
-    "Art. 37.14 LOPSC (obstrucció via)",
+    "Art. 37.7 LOPSC (ocupació de la via pública)",
     "Art. 147-150 CP (lesions)",
     "Art. 550-556 CP (atemptat/resistència)"
   ],
 
   "diferencia_clau": {
     "admin_36_1_LOPSC": "Pertorbacions seguretat ciutadana sense violència greu — multa 601-30.000 €",
-    "penal_557_CP": "GRUP + violència contra persones/coses + alteració pau pública — presó 6m-3 anys",
-    "penal_557_bis_agreujat": "Amb armes / col·lectiu nombrós / etc. — presó 1-6 anys",
+    "penal_557_CP": "GRUP + fi d'atemptar contra la pau pública + violència o INTIMIDACIÓ (persones/coses, obstaculitzar vies amb perill, envair instal·lacions de serveis essencials) — presó 6m-3 anys (LO 14/2022)",
+    "penal_557_2_3_agreujat": "MULTITUD idònia per afectar greument l'ordre públic — presó 3-5 anys + inhabilitació (557.2); instruments perillosos o pillatge: meitat superior; ARMES DE FOC: pena superior en grau (557.3)",
     "penal_154_CP": "BARALLA tumultuària amb mitjans perillosos i autors indeterminats — presó 3m-1 any",
     "penal_atemptat_550": "Si la baralla involucra agressió a agents → atemptat"
   },
@@ -38,7 +38,7 @@
         { "etiqueta": "Insults/crits SENSE arribar a violència",                         "va_a": "respecte_destinatari" },
         { "etiqueta": "DESOBEDIÈNCIA / RESISTÈNCIA a agents",                             "va_a": "fi_remetre_atemptat" },
         { "etiqueta": "MANIFESTACIÓ amb alteració greu",                                 "va_a": "manifestacio_tipus" },
-        { "etiqueta": "Espectacle esportiu / lúdic — desordres",                          "va_a": "fi_557_557_ter_esport" },
+        { "etiqueta": "Invasió/ocupació de local o establiment (recinte esportiu, espectacle…)", "va_a": "fi_557_557_ter_esport" },
         { "etiqueta": "Obstrucció via pública (no manif)",                                "va_a": "fi_37_14_obstruccio" }
       ]
     },
@@ -57,7 +57,7 @@
       "opcions": [
         { "etiqueta": "Obstrucció via / pertorbació LLEU sense violència",               "va_a": "fi_37_14_obstruccio" },
         { "etiqueta": "GRUP amb violència contra persones/coses (557 CP)",                "va_a": "fi_557_basic" },
-        { "etiqueta": "Amb ARMES o COL·LECTIVITAT NOMBROSA (557 bis)",                   "va_a": "fi_557_bis_agreujat" },
+        { "etiqueta": "MULTITUD nombrosa / instruments perillosos / armes de foc (557.2-557.3)", "va_a": "fi_557_bis_agreujat" },
         { "etiqueta": "Manifestacions / espais públics amb alteració",                    "va_a": "fi_36_2_lopsc" }
       ]
     },
@@ -93,13 +93,19 @@
         "ACTA D-10 als implicats",
         "Si denúncia creuada lesions: atestat 147.2",
         "Valorar detenció si reiteració / alteració greu"
+      ],
+      "actes_viladecans": [
+        "D 10 — Denúncia LOPSC (36.1)",
+        "D 10.b — Intervenció temporal d'objectes perillosos (si n'hi ha)",
+        "A 18PL — Declaracions"
       ]
     },
 
     "fi_36_2_lopsc": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ GREU LOPSC — Manifestació amb pertorbació (Art. 36.2)",
+      "titol": "⚠️ GREU LOPSC — Pertorbació davant seus parlamentàries (Art. 36.2)",
+      "info": "El 36.2 és ESPECÍFIC per a reunions/manifestacions davant el Congrés, el Senat o les assemblees legislatives autonòmiques. Si la pertorbació és en altres actes públics: art. 36.1; si són desordres a les vies: art. 36.3.",
       "concepte_butlleta": "La pertorbació greu de la seguretat ciutadana que es produeixi amb motiu de reunions o manifestacions davant les seus del Congrés dels Diputats, el Senat i les assemblees legislatives de les comunitats autònomes, encara que no estiguin reunits, quan alterin el seu normal funcionament",
       "article_butlleta": "Art. 36.2 LOPSC",
       "import": "601 € - 30.000 €",
@@ -108,16 +114,25 @@
         "Identificació coordinada",
         "Acta D-10 individuals",
         "Si escalada violència: passar a 557 CP"
+      ],
+      "actes_viladecans": [
+        "D 10 — Denúncia LOPSC (36.2)",
+        "A 18PL — Declaracions"
       ]
     },
 
     "fi_36_3_lopsc": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "⚠️ GREU LOPSC — Reunió/manifestació no comunicada (Art. 36.3)",
+      "titol": "⚠️ GREU LOPSC — Desordres a vies/espais públics (Art. 36.3)",
       "concepte_butlleta": "Causar desordres en les vies, espais o establiments públics, o obstaculitzar les vies públiques amb mobiliari urbà, vehicles, contenidors, neumàtics o altres objectes, quan en ambdós casos s'ocasionin alteracions greus de la seguretat ciutadana",
       "article_butlleta": "Art. 36.3 LOPSC",
-      "import": "601 € - 30.000 €"
+      "import": "601 € - 30.000 €",
+      "info": "La celebració de reunions o manifestacions INCOMPLINT LA COMUNICACIÓ PRÈVIA és infracció LLEU de l'art. 37.1 LOPSC (responsables: organitzadors o promotors). La negativa a dissoldre-les quan ho ordena l'autoritat: art. 36.7 LOPSC (greu).",
+      "actes_viladecans": [
+        "D 10 — Denúncia LOPSC (36.3)",
+        "A 18PL — Declaracions"
+      ]
     },
 
     "fi_37_4_manca_respecte": {
@@ -127,17 +142,24 @@
       "concepte_butlleta": "Les faltes de respecte i consideració al exercici de les seves funcions, a un membre de les Forces i Cossos de Seguretat, quan aquestes conductes no constitueixin infracció penal",
       "article_butlleta": "Art. 37.4 LOPSC",
       "import": "100 € - 600 €",
-      "accions": ["Advertir", "Acta D-10 si persisteix", "Si insults greus + violència: valorar atemptat"]
+      "accions": ["Advertir", "Acta D-10 si persisteix", "Si insults greus + violència: valorar atemptat"],
+      "actes_viladecans": [
+        "D 10 — Denúncia LOPSC (37.4)"
+      ]
     },
 
     "fi_37_14_obstruccio": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "ℹ️ LLEU LOPSC — Obstrucció via pública (Art. 37.14)",
-      "concepte_butlleta": "L'ocupació de qualsevol immoble, vivenda o edifici aliens, o la permanència en ells, contra la voluntat del seu propietari [...] o l'obstrucció de la via pública mitjançant la instal·lació o ubicació no autoritzada de qualsevol tipus de mobiliari, atraccions, taules, cadires o altres mobles fora dels espais habilitats",
-      "article_butlleta": "Art. 37.14 LOPSC",
+      "titol": "ℹ️ LLEU LOPSC — Ocupació de la via pública (Art. 37.7)",
+      "concepte_butlleta": "L'ocupació de la via pública amb infracció del que disposa la llei o contra la decisió adoptada per l'autoritat competent, inclosa l'ocupació de la via pública per a la venda ambulant no autoritzada",
+      "article_butlleta": "Art. 37.7 LOPSC",
       "import": "100 € - 600 €",
-      "accions": ["Advertiment", "Butlletí si persisteix"]
+      "info": "Si l'obstrucció de la via causa una alteració GREU de la seguretat ciutadana: art. 36.3 LOPSC. Si incompleix restriccions de circulació amb ocasió d'un acte públic amb alteracions menors: art. 37.3 LOPSC.",
+      "accions": ["Advertiment", "Butlletí si persisteix"],
+      "actes_viladecans": [
+        "D 10 — Denúncia LOPSC (37.7)"
+      ]
     },
 
     "fi_154_baralla_tumult": {
@@ -155,6 +177,12 @@
         "5. Fotografies + testimonis + càmeres",
         "6. Detenció dels més implicats / violents",
         "7. Atestat penal + Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "N 01 — Drets detingut",
+        "N 03 — Drets denunciat no detingut",
+        "A 18PL — Declaracions",
+        "D 10.b — Intervenció temporal d'objectes perillosos"
       ]
     },
 
@@ -163,20 +191,26 @@
       "tipus": "penal",
       "titol": "🚔 DELICTE — Baralla amb autor indeterminat (Art. 154 CP)",
       "info": "Hi ha lesionat però no es pot identificar l'autor del cop concret entre el grup",
-      "accions": "Mateixes 154 baralla tumult + recollida proves exhaustiva"
+      "accions": "Mateixes 154 baralla tumult + recollida proves exhaustiva",
+      "actes_viladecans": [
+        "A 18PL — Declaracions",
+        "N 03 — Drets denunciat no detingut",
+        "D 10.b — Intervenció temporal d'objectes perillosos"
+      ]
     },
 
     "fi_557_basic": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Desordres públics bàsics (Art. 557 CP)",
-      "concepte": "Actuar en GRUP amb la finalitat d'atemptar contra la pau pública executant actes de violència sobre persones o coses, o amenaçant a tercers",
+      "concepte": "Actuar en GRUP amb la finalitat d'atemptar contra la pau pública executant actes de VIOLÈNCIA o INTIMIDACIÓ: (a) sobre persones o coses; (b) obstaculitzant vies públiques ocasionant perill per a la vida o salut de les persones; o (c) envaint instal·lacions o edificis alterant greument serveis essencials (redacció LO 14/2022)",
       "article": "Art. 557.1 CP",
       "pena": "Presó 6 mesos - 3 anys",
       "elements_essencials": [
-        "GRUP (com a mínim 4 persones segons jurisprudència)",
-        "Finalitat alterar pau pública",
-        "VIOLÈNCIA sobre persones/coses, amenaces, o INVASIÓ instal·lacions"
+        "Actuació en GRUP",
+        "Finalitat d'atemptar contra la pau pública",
+        "VIOLÈNCIA o INTIMIDACIÓ (persones/coses, obstaculització perillosa de vies, invasió d'instal·lacions de serveis essencials)",
+        "Concurs: sense perjudici de les penes per lesions, amenaces, coaccions o danys concrets (557.6 CP)"
       ],
       "accions_ordenades": [
         "1. SUPORT (ARRO, Mossos antidisturbis si calgui)",
@@ -186,40 +220,53 @@
         "5. GRAVACIÓ si possible (vídeo, càmeres)",
         "6. Atestat amb identificació individualitzada de cada conducta",
         "7. Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "N 01 — Drets detingut",
+        "A 18PL — Declaracions",
+        "D 10.b — Intervenció temporal d'objectes perillosos"
       ]
     },
 
     "fi_557_bis_agreujat": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE GREU — Desordres agreujats (Art. 557 bis CP)",
+      "titol": "🚔 DELICTE GREU — Desordres agreujats (Art. 557.2 i 557.3 CP)",
       "supòsits_agreujats": [
-        "Concorre violència que pugui causar perill vida/integritat",
-        "Actes pirotècnics, materials inflamables, armes",
-        "Multitud nombrosa",
-        "Membres organitzats",
-        "Encobertament del rostre",
-        "Servei públic essencial afectat"
+        "MULTITUD el nombre, organització i propòsit de la qual siguin idonis per afectar GREUMENT l'ordre públic (557.2): presó 3-5 anys + inhabilitació especial",
+        "Portar INSTRUMENTS PERILLOSOS o realitzar actes de PILLATGE (557.3): pena en la MEITAT SUPERIOR",
+        "Portar ARMES DE FOC (557.3): pena SUPERIOR EN GRAU",
+        "Provocar AVALANANXA o estampida amb perill per a les persones en lloc concorregut (557.5): presó 6 mesos-2 anys"
       ],
-      "pena": "Presó 1-6 anys",
+      "pena": "Presó 3-5 anys + inhabilitació (multitud, 557.2); agreujaments del 557.3 sobre la pena base",
       "accions": [
         "Coordinació total Mossos / FCS",
         "Documentació exhaustiva",
         "Detenció + atestat",
         "Possible competència Audiència Nacional si terrorisme"
+      ],
+      "actes_viladecans": [
+        "N 01 — Drets detingut",
+        "A 18PL — Declaracions",
+        "D 10.b — Intervenció temporal d'objectes perillosos"
       ]
     },
 
     "fi_557_557_ter_esport": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE — Desordres en espectacle esportiu (Art. 557 ter CP)",
-      "concepte": "Entrada / permanència contra voluntat o pertorbant gravement esdeveniment esportiu/cultural",
-      "pena": "Presó 3 mesos - 1 any",
+      "titol": "🚔 DELICTE — Invasió/ocupació d'establiment o local (Art. 557 bis CP, LO 14/2022)",
+      "concepte": "Actuant en grup, envair o ocupar contra la voluntat del seu titular un establiment o local, causant una pertorbació RELLEVANT de la pau pública (l'antic 557 ter està derogat)",
+      "pena": "Presó 3-6 mesos O multa 6-12 mesos",
       "accions": [
-        "Identificar organització esdeveniment",
-        "Detenció",
+        "Identificar organització esdeveniment / titular del local",
+        "Detenció o citació segons circumstàncies",
         "Atestat amb suport gravacions/càmeres recinte"
+      ],
+      "actes_viladecans": [
+        "N 03 — Drets denunciat no detingut",
+        "N 01 — Drets detingut (si detenció)",
+        "A 18PL — Declaracions"
       ]
     },
 
@@ -227,7 +274,7 @@
       "final": true,
       "tipus": "ok",
       "titol": "ℹ️ Sense delicte aparent (insults entre particulars)",
-      "info": "Insults entre particulars: NO és delicte públic. Vies civils (injúries privades 208 CP — denúncia perjudicat) o privades.",
+      "info": "Insults entre particulars: NO és delicte públic. Les injúries (art. 208 CP) són delicte PRIVAT, perseguible només per QUERELLA de la persona ofesa (art. 215 CP).",
       "accio": "Mediar, separar, advertir. Si reiterat o greus: registrar i informar dels drets civils."
     },
 
@@ -252,8 +299,8 @@
     "MANIFESTACIONS: tractament especial. Coordinació amb comandament. Identificacions selectives.",
     "DESORDRES + ATEMPTAT: concurs. Si en el desordre s'agredeix a agent: 557 + 550 CP.",
     "GRAVACIÓ: clau per atestat. Càmeres ciutat, ARRO, mòbils, dashcams.",
-    "FUTBOL / CONCERTS: Llei 19/2007 contra violència esportiva — sancions específiques + 557 ter CP.",
-    "ENCAPUTXATS / ENMASCARATS: Art. 557 bis afegeix agreujant.",
+    "FUTBOL / CONCERTS: Llei 19/2007 contra violència esportiva — sancions específiques + 557 bis CP si invasió de recinte.",
+    "ARMES DE FOC en desordres: pena superior en grau; instruments perillosos o pillatge: meitat superior (557.3 CP, LO 14/2022).",
     "PERSONES VULNERABLES (gent gran, menors) implicades: extremar prudència.",
     "PRINCIPI PROPORCIONALITAT: la força usada ha de ser proporcionada. Mai 'mínima força imprescindible' (frase prohibida Pautes 3.3) — concretar."
   ]

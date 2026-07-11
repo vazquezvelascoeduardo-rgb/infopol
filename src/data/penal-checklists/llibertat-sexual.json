@@ -15,7 +15,7 @@
     "Art. 197.7 CP (sexting / difusió íntima)"
   ],
 
-  "canvi_clau_LO_10_2022": "Desapareix la distinció ABÚS / AGRESSIÓ. Tot és AGRESSIÓ SEXUAL (Art. 178). El consentiment ha de ser EXPRÉS, lliure, no viciat. Silenci o passivitat NO és consentiment. Inversió de la càrrega: el sospitós ha d'acreditar el consentiment exprés.",
+  "canvi_clau_LO_10_2022": "Desapareix la distinció ABÚS / AGRESSIÓ. Tot és AGRESSIÓ SEXUAL (Art. 178). Consentiment AFIRMATIU: només hi ha consentiment quan s'ha manifestat lliurement mitjançant actes que expressin de manera clara la voluntat de la persona. Silenci o passivitat NO és consentiment. ATENCIÓ: NO hi ha inversió de la càrrega de la prova — la presumpció d'innocència es manté; acreditar els fets correspon a l'acusació. La LO 4/2023 va reintroduir penes agreujades quan hi ha violència o intimidació.",
 
   "consentiment_definicio": "Manifestació LLIURE de la voluntat (verbal, expressa, gestos clars). NO consentiment: silenci, passivitat, intimidació, abús d'autoritat, intoxicació, son, menor 16 anys.",
 
@@ -92,6 +92,12 @@
         "Dret a recursos especialitzats (CIMASCAM, SARA)",
         "Dret a no repetir declaració (prova preconstituïda)",
         "Dret a privacitat absoluta"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima (+N 02e)",
+        "N 01 — Drets detingut",
+        "A 10 — Preservació de proves (mostres biològiques)",
+        "I 55 — Cadena de custòdia"
       ]
     },
 
@@ -99,31 +105,44 @@
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE GREU — Agressió sexual agreujada (Art. 178.3 i 180 CP)",
-      "pena_178_3": "Presó 4-6 anys (si especial vulnerabilitat o ús violència/intimidació)",
-      "agreujants_180": [
-        "Caràcter especialment degradant o vexatori",
-        "Per dues o més persones (en grup)",
-        "Especial vulnerabilitat víctima",
-        "Sotmetiment per parentiu, dependència, autoritat",
-        "Ús d'armes o instruments perillosos",
-        "Submissió química (drogues facilitadores)"
+      "pena_178_3": "Si concorre violència, intimidació, abús de situació o víctima privada de sentit/voluntat anul·lada (178.2): pena en la MEITAT SUPERIOR — presó 2 anys i 6 mesos a 4 anys (art. 178.3, LO 4/2023)",
+      "agreujants_180_1": [
+        "1a. Actuació conjunta de dues o més persones",
+        "2a. Violència d'extrema gravetat o caràcter particularment degradant o vexatori",
+        "3a. Víctima especialment vulnerable (edat, malaltia, discapacitat…); en tot cas menor de 4 anys",
+        "4a. Víctima esposa o dona lligada per anàloga relació d'afectivitat, fins i tot sense convivència (VG)",
+        "5a. Prevaliment de relació de convivència, parentiu o superioritat",
+        "6a. Ús d'armes o mitjans igualment perillosos",
+        "7a. SUBMISSIÓ QUÍMICA: anul·lar la voluntat de la víctima subministrant-li fàrmacs, drogues o altres substàncies"
       ],
-      "pena_180": "Presó 7-15 anys (si concorren agreujants en violació)",
-      "accions": "Mateixes que 178 bàsica + UFAM + DIC + GAV Mossos"
+      "pena_180": "Presó 2-8 anys per a les agressions del 178 (sense penetració); 7-15 anys per a les del 179 (amb penetració). Si concorren DUES o més circumstàncies: meitat superior (180.2)",
+      "accions": "Mateixes que 178 bàsica + UFAM + DIC + GAV Mossos",
+      "actes_viladecans": [
+        "N 02 — Drets víctima (+N 02e)",
+        "N 01 — Drets detingut",
+        "A 10 — Preservació de proves (mostres biològiques)",
+        "I 55 — Cadena de custòdia"
+      ]
     },
 
     "fi_178_180_5": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE GREU — Submissió química (Art. 180.5 CP)",
-      "info": "Acte sexual amb persona privada de sentit (alcohol, drogues, son), o anul·lant la seva voluntat amb fàrmacs/drogues/substàncies",
-      "pena": "Aplicar agreujant Art. 180.5 sobre la pena base — meitat superior",
+      "titol": "🚔 DELICTE GREU — Submissió química (Art. 180.1.7a CP)",
+      "info": "Dues situacions: (1) si l'AUTOR ha anul·lat la voluntat de la víctima subministrant-li fàrmacs/drogues/substàncies → agreujant de l'art. 180.1.7a CP; (2) si la víctima ja estava privada de sentit o amb la voluntat anul·lada (alcohol, son…) sense intervenció de l'autor → agressió sexual del 178.2 amb pena en meitat superior (178.3)",
+      "pena": "Amb l'agreujant 180.1.7a: presó 2-8 anys (agressió sense penetració) / 7-15 anys (amb penetració, 179)",
       "accions_clau": [
         "Trasllat URGENT centre hospitalari amb capacitat anàlisi tòxica",
         "Mostres SANG i ORINA en les primeres hores",
         "Investigació consum involuntari (begudes amb GHB, escopolamina, etc.)",
         "Càmeres lloc del consum",
         "Informe toxicològic urgent"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima (+N 02e)",
+        "N 01 — Drets detingut",
+        "A 10 — Preservació de proves (mostres biològiques)",
+        "I 55 — Cadena de custòdia"
       ]
     },
 
@@ -131,14 +150,20 @@
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE GREU — Violació (Art. 179 CP)",
-      "concepte": "Agressió sexual amb penetració vaginal, anal o bucal, o introducció de membres corporals/objectes",
-      "pena": "Presó 4-12 anys",
+      "concepte": "Agressió sexual amb penetració vaginal, anal o bucal, o introducció de membres corporals/objectes per les dues primeres vies",
+      "pena": "Presó 4-12 anys (179.1); si concorre violència, intimidació o víctima amb voluntat anul·lada: presó 6-12 anys (179.2, LO 4/2023)",
       "accions": [
         "Mateixes que 178",
         "Hospital obligatori per recollida mostres + protocols",
         "GAV Mossos / UFAM",
         "Píndola anticonceptiva oferida si pertinent",
         "Informe forense"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima (+N 02e)",
+        "N 01 — Drets detingut",
+        "A 10 — Preservació de proves (mostres biològiques)",
+        "I 55 — Cadena de custòdia"
       ]
     },
 
@@ -147,18 +172,24 @@
       "tipus": "penal",
       "titol": "🚔 DELICTE MOLT GREU — Violació agreujada (Art. 180 CP)",
       "pena": "Presó 7-15 anys (amb agreujants 180)",
-      "agreujants": "Veure 178 agreujada",
-      "info": "Pena pot arribar a 15 anys si concorren múltiples agreujants"
+      "agreujants": "Veure 178 agreujada (art. 180.1, circumstàncies 1a-7a)",
+      "info": "Si concorren dues o més circumstàncies del 180.1: pena en meitat superior (180.2)",
+      "actes_viladecans": [
+        "N 02 — Drets víctima (+N 02e)",
+        "N 01 — Drets detingut",
+        "A 10 — Preservació de proves (mostres biològiques)",
+        "I 55 — Cadena de custòdia"
+      ]
     },
 
     "fi_181_menor_16": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE MOLT GREU — Acte sexual amb menor 16 anys (Art. 181 CP)",
-      "info_clau": "QUALSEVOL acte sexual amb menor de 16 anys és delicte (sense importar consentiment). Excepció ÚNICA: 'consentiment lliure de menor proper a 16 anys per persona pròxima en edat i grau de maduresa' (181.2 CP).",
-      "pena_basica": "Presó 2-6 anys (sense penetració)",
-      "pena_amb_penetracio": "Presó 6-12 anys (amb penetració)",
-      "pena_agreujada": "Pena meitat superior si víctima < 4 anys o concorren agreujants 180",
+      "info_clau": "QUALSEVOL acte sexual amb menor de 16 anys és delicte (sense importar consentiment). Excepció ÚNICA: consentiment lliure del menor quan l'autor és persona PRÒXIMA EN EDAT i grau de desenvolupament o maduresa (Art. 183 bis CP, 'clàusula Romeo i Julieta') i no concorren les circumstàncies del 178.2.",
+      "pena_basica": "Presó 2-6 anys (sense penetració, 181.1); si violència, intimidació o voluntat anul·lada: presó 5-10 anys (181.2)",
+      "pena_amb_penetracio": "Presó 6-12 anys (amb penetració, 181.3); si a més hi ha violència/intimidació: 10-15 anys",
+      "pena_agreujada": "Pena en meitat superior si concorren circumstàncies de l'art. 180.1 (víctima menor de 4 anys inclosa a la 3a) — art. 181.4",
       "accions_ordenades": [
         "1️⃣ ATENCIÓ MÀXIMA al menor",
         "2️⃣ NO repetir interrogatoris — UFAM Mossos especialista",
@@ -170,6 +201,12 @@
         "8️⃣ Recollida mostres + lesions + roba",
         "9️⃣ Informe pediatra forense",
         "🔟 Atestat al Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima (+N 02e)",
+        "N 01 — Drets detingut",
+        "A 10 — Preservació de proves (mostres biològiques)",
+        "I 55 — Cadena de custòdia"
       ]
     },
 
@@ -177,26 +214,38 @@
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE MOLT GREU — Violació menor 16 anys",
-      "pena": "Presó 6-12 anys",
-      "accions": "Veure 181 menor 16 — UFAM, DGAIA, prova preconstituïda"
+      "pena": "Presó 6-12 anys (181.3); amb violència/intimidació: 10-15 anys",
+      "accions": "Veure 181 menor 16 — UFAM, DGAIA, prova preconstituïda",
+      "actes_viladecans": [
+        "N 02 — Drets víctima (+N 02e)",
+        "N 01 — Drets detingut",
+        "A 10 — Preservació de proves (mostres biològiques)",
+        "I 55 — Cadena de custòdia"
+      ]
     },
 
     "fi_181_violacio_menor_12": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE EXTREMADAMENT GREU — Violació menor 12 anys",
-      "pena": "Presó pot arribar a 12-15 anys (meitat superior 181)",
-      "info": "Aplicar SEMPRE meitat superior. Investigació exhaustiva possible context familiar / autoritat.",
-      "accions": "Mateixes 181 + valorar context familiar (incest possible)"
+      "pena": "Presó 6-12 anys (181.3) en meitat superior si concorre el 180.1 (víctima menor de 4 anys: en tot cas); amb violència/intimidació: 10-15 anys",
+      "info": "Investigació exhaustiva possible context familiar / autoritat. Si ascendent o germà: a més inhabilitació pàtria potestat.",
+      "accions": "Mateixes 181 + valorar context familiar (incest possible)",
+      "actes_viladecans": [
+        "N 02 — Drets víctima (+N 02e)",
+        "N 01 — Drets detingut",
+        "A 10 — Preservació de proves (mostres biològiques)",
+        "I 55 — Cadena de custòdia"
+      ]
     },
 
     "fi_183_grooming": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Grooming online (Art. 183 CP)",
-      "concepte": "Contactar a través TIC amb menor de 16 anys per propòsit sexual",
-      "pena": "Presó 1-3 anys + multa 12-24 mesos",
-      "pena_agreujada": "Si embaucament + entrevista física: presó meitat superior",
+      "concepte": "Contactar a través TIC amb menor de 16 anys i proposar-li una trobada amb finalitat sexual, amb actes materials d'apropament (art. 183 CP, numeració LO 10/2022)",
+      "pena": "Presó 1-3 anys O multa 12-24 mesos",
+      "pena_agreujada": "Meitat superior si l'apropament s'obté mitjançant coacció, intimidació o engany. Embaucament per obtenir material pornogràfic del menor (183.2): presó 6 mesos-2 anys",
       "accions_ordenades": [
         "1. Preservar EVIDÈNCIES DIGITALS — pantallades amb metadades, NO modificar dispositiu",
         "2. UFAM Mossos especialista",
@@ -206,6 +255,11 @@
         "6. Si possible, identificació autor (IP, perfil)",
         "7. Comunicació DGAIA",
         "8. Atestat amb prova digital"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima (+N 02e)",
+        "N 01 — Drets detingut (si detenció)",
+        "I 55 — Cadena de custòdia (evidència digital)"
       ]
     },
 
@@ -223,6 +277,11 @@
         "Coordinar amb DGTC",
         "Atestat amb prova digital",
         "Si menor: DGAIA + Fiscalia"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima (+N 02e)",
+        "N 03/N 01 — Drets denunciat o detingut",
+        "I 55 — Cadena de custòdia (evidència digital)"
       ]
     },
 
@@ -231,13 +290,13 @@
       "tipus": "penal",
       "titol": "🚔 DELICTE GREU — Prostitució i explotació sexual (Art. 187-188 CP)",
       "delictes_aplicables": [
-        "Art. 187 CP — Determinar a prostitució amb violència/intimidació/abús",
-        "Art. 187.1 CP — Lucrar-se de la prostitució aliena",
-        "Art. 188 CP — Tracta éssers humans per explotació sexual",
-        "Art. 189 CP — Pornografia infantil"
+        "Art. 187.1 CP — Determinar un major d'edat a la prostitució amb violència/intimidació/engany o abús de superioritat/necessitat/vulnerabilitat; també lucrar-se explotant la prostitució aliena",
+        "Art. 188 CP — PROSTITUCIÓ DE MENORS: induir, promoure, afavorir o facilitar-la, o lucrar-se'n",
+        "Art. 189 CP — Pornografia infantil",
+        "Art. 177 bis CP — TRACTA d'éssers humans amb finalitat d'explotació sexual (presó 5-8 anys)"
       ],
-      "pena_187": "Presó 2-5 anys + multa",
-      "pena_188_agreujada": "Presó 5-8 anys (víctima vulnerable)",
+      "pena_187": "Presó 2-5 anys + multa 12-24 mesos",
+      "pena_188": "Prostitució de menors: presó 2-5 anys + multa; si víctima menor de 16 anys: presó 4-8 anys",
       "pena_189": "Presó 1-5 anys (pornografia infantil bàsica)",
       "accions": [
         "Coordinació Mossos UCRAI / DIC",
@@ -245,6 +304,11 @@
         "Documentació exhaustiva",
         "Possible tracta: Article 177 bis CP",
         "Si menor: prioritat absoluta DGAIA"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima (+N 02e)",
+        "N 01 — Drets detingut",
+        "I 55 — Cadena de custòdia"
       ]
     },
 
@@ -259,6 +323,12 @@
         "Identificar víctimes (poden ser múltiples si lloc públic)",
         "Comunicació DGAIA",
         "Atestat penal"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima (+N 02e)",
+        "N 01 — Drets detingut",
+        "D 33 — Infraccions administratives llibertat sexual (si conducta no penal)",
+        "D 33.b — Denúncia administrativa (víctima/testimoni)"
       ]
     }
   },

@@ -6,8 +6,9 @@
   "base_legal": [
     "Art. 153.2 CP (maltractament VD)",
     "Art. 173.2 CP (violència habitual)",
-    "Art. 171.5 CP (amenaces lleus VD)",
-    "Art. 172.3 CP (coaccions lleus VD)",
+    "Art. 171.5 CP (amenaces lleus AMB ARMES a persones del 173.2)",
+    "Art. 171.7 II CP (amenaces lleus sense armes a persones del 173.2)",
+    "Art. 172.3 II CP (coaccions lleus a persones del 173.2)",
     "Art. 153.3 CP (agreujants menors/armes/domicili)"
   ],
 
@@ -16,10 +17,10 @@
     "Ex-cònjuge home",
     "Descendents (fills, néts)",
     "Ascendents (pares, avis)",
-    "Germans per consanguinitat",
-    "Menors o incapaços convivents",
-    "Persones amb discapacitat especialment vulnerables al nucli familiar",
-    "Persones integrades al nucli familiar (parella propi pare/mare, etc.)"
+    "Germans per naturalesa, adopció o afinitat (propis o del cònjuge/convivent)",
+    "Menors o persones amb discapacitat necessitades d'especial protecció convivents o sota potestat/tutela/guarda",
+    "Persones integrades al nucli familiar (parella propi pare/mare, etc.)",
+    "Persones especialment vulnerables sotmeses a custòdia o guarda en centres públics o privats"
   ],
 
   "diferencia_VG_VD": "VG = dona víctima de parella/ex-parella HOME → JVM. VD = altres àmbits familiars → Jutjat Instrucció ordinari.",
@@ -59,8 +60,8 @@
         { "etiqueta": "Maltractament/lesió SENSE tractament (153.2)",                "va_a": "fi_153_2" },
         { "etiqueta": "Lesions amb tractament (concurs 147/148)",                   "va_a": "fi_lesions_VD_ref" },
         { "etiqueta": "Lesions GREUS (149/150)",                                     "va_a": "fi_lesions_greus_VD" },
-        { "etiqueta": "Amenaces lleus (171.5)",                                      "va_a": "fi_171_5" },
-        { "etiqueta": "Coaccions lleus (172.3)",                                     "va_a": "fi_172_3" },
+        { "etiqueta": "Amenaces lleus AMB armes o instruments perillosos (171.5)",   "va_a": "fi_171_5" },
+        { "etiqueta": "Coaccions lleus / amenaces lleus sense armes (172.3 II / 171.7 II)", "va_a": "fi_172_3" },
         { "etiqueta": "VIOLÈNCIA HABITUAL — múltiples episodis (173.2)",            "va_a": "fi_173_2_habitual" }
       ]
     },
@@ -89,23 +90,45 @@
         "6. Si menors: DGAIA",
         "7. Atestat al Jutjat de GUÀRDIA (NO JVM — és VD, no VG)",
         "8. Valorar risc i mesures protecció"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració testimonis",
+        "M 06 — Oferiment mesura educativa (si l'agressor és menor)"
       ]
     },
 
     "fi_171_5": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE — Amenaces lleus VD (Art. 171.5 CP)",
-      "pena": "Presó 3 mesos - 1 any O TBC + privació armes 1-3 anys",
-      "accions": ["Detenció", "Atestat Jutjat Guàrdia", "Recollir proves"]
+      "titol": "🚔 DELICTE — Amenaces lleus AMB ARMES a persones del 173.2 (Art. 171.5 CP)",
+      "concepte": "Amenaçar de manera lleu AMB ARMES o altres instruments perillosos alguna de les persones de l'art. 173.2 (excepte la dona parella/ex, que és 171.4 VG)",
+      "pena": "Presó 3 mesos - 1 any O TBC 31-80 dies + privació armes d'1 a 3 anys",
+      "info": "Si l'amenaça lleu és SENSE armes: delicte lleu de l'art. 171.7 II CP — localització permanent 5-30 dies (domicili diferent i allunyat) o TBC 5-30 dies o multa 1-4 mesos; en àmbit 173.2 NO cal denúncia",
+      "accions": ["Detenció", "Intervenció de l'arma", "Atestat Jutjat Guàrdia", "Recollir proves"],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "A 18PL — Declaració testimonis"
+      ]
     },
 
     "fi_172_3": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE — Coaccions lleus VD (Art. 172.3 CP)",
-      "pena": "Presó 3 mesos - 1 any O TBC + privació armes",
-      "accions": ["Detenció", "Atestat Jutjat Guàrdia"]
+      "titol": "⚖️ DELICTE LLEU — Coaccions lleus a persones del 173.2 (Art. 172.3 II CP)",
+      "pena": "Localització permanent 5-30 dies (domicili diferent i allunyat de la víctima) O TBC 5-30 dies O multa 1-4 mesos (multa només si concorren les circumstàncies de l'art. 84.2 CP)",
+      "perseguibilitat": "En àmbit de l'art. 173.2 NO és exigible la denúncia de la víctima (perseguible d'ofici)",
+      "info": "Si la víctima és persona ESPECIALMENT VULNERABLE convivent: art. 172.2 CP (presó 6 mesos-1 any o TBC). Si la víctima és dona parella/ex: SEMPRE 172.2 (VG).",
+      "accions": ["Declaracions", "Atestat Jutjat Guàrdia"],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració testimonis"
+      ]
     },
 
     "fi_173_2_habitual": {
@@ -135,7 +158,15 @@
         "6. Atestat EXHAUSTIU al Jutjat de Guàrdia",
         "7. Sol·licitar mesura protecció"
       ],
-      "documentacio_clau": "Atestat amb cronologia + recopilació antecedents + parte mèdic + declaracions múltiples"
+      "documentacio_clau": "Atestat amb cronologia + recopilació antecedents + parte mèdic + declaracions múltiples",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració testimonis",
+        "N 07 — Citació judicial (compareixença OP 544 ter)"
+      ]
     },
 
     "fi_VD_menor_153": {
@@ -152,6 +183,13 @@
         "6. Atestat + Jutjat Guàrdia + comunicació Fiscalia Menors",
         "7. UFAM Mossos si possible",
         "8. NO repetir interrogatoris al menor"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "A 35 — Entrega menor o discapacitat (protecció de menors)",
+        "A 18PL — Declaració testimonis"
       ]
     },
 
@@ -161,17 +199,22 @@
       "titol": "📋 Negligència / abandonament — valorar gravetat",
       "info": "Pot ser via administrativa (Serveis Socials) o penal (Art. 229-230 CP).",
       "criteris_penal_229": [
-        "Abandonament de menor de 16 anys",
-        "Si compromet la vida/salut: pena meitat superior",
-        "Si abandó més greu (delegant a tercer): 230 CP"
+        "Abandonament de MENOR D'EDAT o persona amb discapacitat necessitada d'especial protecció per l'encarregat de la seva guarda: presó 1-2 anys (229.1)",
+        "Si l'abandó el fan els pares, tutors o guardadors legals: presó 18 mesos-3 anys (229.2)",
+        "Si posa en perill concret la vida, salut, integritat física o llibertat sexual: presó 2-4 anys (229.3)",
+        "Abandó TEMPORAL: art. 230 CP — penes inferiors en grau"
       ],
-      "pena_229": "Presó 1-2 anys",
+      "pena_229": "Presó 1-2 anys (bàsic) / 18 mesos-3 anys (pares o tutors) / 2-4 anys (perill concret)",
       "accions_ordenades": [
         "Avaluar grau de desamparament",
         "Comunicació URGENT DGAIA (sempre)",
         "Si perill imminent: retirada cautelar",
         "Atestat si indicis penals (229 CP)",
         "Si només negligència sense perill greu: comunicar SS i fer informe"
+      ],
+      "actes_viladecans": [
+        "A 35 — Entrega menor o discapacitat (protecció de menors)",
+        "A 18PL — Declaració testimonis"
       ]
     },
 
@@ -179,7 +222,7 @@
       "final": true,
       "tipus": "procediment",
       "titol": "🔀 Anar a checklist 'Llibertat sexual'",
-      "info": "Abús sexual a menor: LO 10/2022 ('només sí és sí') + LO 8/2021 (protecció menors). Articles 178-189 CP.",
+      "info": "AGRESSIÓ SEXUAL a menor (l'\"abús sexual\" ja no existeix com a tipus des de la LO 10/2022): arts. 178-183 bis CP + LO 8/2021 (protecció menors).",
       "accio": "Procediment específic UFAM, prova preconstituïda, evitar repetir interrogatoris."
     },
 
@@ -187,15 +230,22 @@
       "final": true,
       "tipus": "procediment",
       "titol": "🔀 Anar a checklist 'Lesions'",
-      "accio": "Lesions amb tractament: aplicar Art. 147.1 + agreujant 153.3 si presència menors/domicili/armes."
+      "accio": "Lesions amb tractament: aplicar Art. 147.1 o 148 CP + circumstància mixta de parentiu (art. 23 CP). Si la víctima és persona especialment vulnerable que conviu amb l'autor: art. 148.5 CP (presó 2-5 anys)."
     },
 
     "fi_lesions_greus_VD": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE MOLT GREU — Lesions greus VD (149/150 CP)",
-      "info": "Concurs amb 153.3 si circumstàncies agreujants",
-      "accions": "Auxili vital + detenció + atestat exhaustiu Jutjat Guàrdia"
+      "info": "Presó 6-12 anys (149) o 3-6 anys (150) + circumstància mixta de parentiu (art. 23 CP) com a agreujant",
+      "accions": "Auxili vital + detenció + atestat exhaustiu Jutjat Guàrdia",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració testimonis"
+      ]
     }
   },
   "notes_finals": [

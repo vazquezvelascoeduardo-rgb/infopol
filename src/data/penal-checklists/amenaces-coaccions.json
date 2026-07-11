@@ -70,7 +70,8 @@
       "concepte": "Amenaça d'un mal NO constitutiu de delicte ('et donaré una pallissa', 't'escalfaré'…)",
       "article": "Art. 171.7 CP",
       "pena": "Multa 1-3 mesos",
-      "perseguibilitat": "Denúncia del perjudicat",
+      "perseguibilitat": "NOMÉS denúncia de la persona agreujada — EXCEPTE àmbit VG/VD: si la víctima és dona parella/exparella és SEMPRE delicte de l'art. 171.4 CP (d'ofici); si és persona de l'art. 173.2, art. 171.5 CP",
+      "compte_171_1": "Si l'amenaça de mal NO delictiu és CONDICIONAL (exigint quelcom no degut): NO és delicte lleu sinó art. 171.1 CP — presó 3 mesos-1 any o multa 6-24 mesos (meitat superior si aconsegueix el propòsit)",
       "accions_ordenades": [
         "1. Declaració víctima detallada",
         "2. Recollir PROVES: missatges WhatsApp, xarxes socials, gravacions, testimonis",
@@ -79,7 +80,13 @@
         "5. Atestat simplificat",
         "6. Lliurar còpia denúncia a víctima"
       ],
-      "documentacio": "Atestat + còpia missatges/proves + declaració víctima"
+      "documentacio": "Atestat + còpia missatges/proves + declaració víctima",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 03 — Drets denunciat",
+        "N 09/N 10 — JIDL (delicte lleu)"
+      ]
     },
 
     "fi_169_2_no_condicional": {
@@ -100,19 +107,33 @@
         "7. Jutjat Guàrdia"
       ],
       "documentacio": "Atestat + còpia proves + declaracions + valoració risc",
-      "info_clau": "Anotar LITERAL l'amenaça, paraula per paraula. Important per acreditar la naturalesa delictiva del mal anunciat."
+      "info_clau": "Anotar LITERAL l'amenaça, paraula per paraula. Important per acreditar la naturalesa delictiva del mal anunciat.",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 03 — Drets denunciat",
+        "N 06 — Citació policial",
+        "N 07 — Citació judicial"
+      ]
     },
 
     "fi_169_1_no_aconseguit": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Amenaces condicionades sense aconseguir propòsit (Art. 169.1 CP)",
-      "pena": "Presó 1-5 anys",
+      "pena": "Presó 6 mesos - 3 anys (art. 169.1 CP, incís final)",
       "exemple": "'Si no em dones X, et mato' — sense aconseguir res",
+      "info": "Si l'amenaça es fa per escrit, telèfon o qualsevol mitjà de comunicació o reproducció, o en nom d'entitats o grups reals o suposats: pena en la meitat superior",
       "accions": [
         "Detenció si flagrant o risc",
         "Preservar evidències (missatges, gravacions)",
         "Atestat penal + Jutjat"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 03 — Drets denunciat",
+        "N 07 — Citació judicial"
       ]
     },
 
@@ -120,7 +141,7 @@
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE GREU — Amenaces condicionades amb propòsit aconseguit (Art. 169.1 CP)",
-      "pena": "Presó 2-5 anys (meitat superior)",
+      "pena": "Presó 1-5 anys (art. 169.1 CP)",
       "exemple": "Extorsió consumada amb amenaça delictiva",
       "concurs_possible": "Pot concorre amb extorsió (243 CP) o robatori amb intimidació",
       "accions": [
@@ -129,6 +150,11 @@
         "Acreditar el propòsit aconseguit",
         "Atestat penal complet",
         "Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 07 — Citació judicial"
       ]
     },
 
@@ -151,6 +177,12 @@
         "Detenció si flagrant",
         "Atestat penal",
         "Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 03 — Drets denunciat",
+        "N 07 — Citació judicial"
       ]
     },
 
@@ -159,19 +191,31 @@
       "tipus": "penal",
       "titol": "⚖️ DELICTE LLEU — Coaccions lleus (Art. 172.3 CP)",
       "pena": "Multa 1-3 mesos",
-      "perseguibilitat": "Denúncia perjudicat",
-      "exemples": "Empenta breu, retenció momentània sense violència greu"
+      "perseguibilitat": "NOMÉS denúncia de la persona agreujada — EXCEPTE àmbit VG/VD: si la víctima és dona parella/exparella és SEMPRE delicte de l'art. 172.2 CP (d'ofici)",
+      "exemples": "Empenta breu, retenció momentània sense violència greu",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 03 — Drets denunciat",
+        "N 09/N 10 — JIDL (delicte lleu)"
+      ]
     },
 
     "fi_172_agreujat": {
       "final": true,
       "tipus": "penal",
-      "titol": "🚔 DELICTE AGREUJAT — Coaccions amb afectació drets fonamentals",
-      "pena": "Presó meitat superior (1.5 - 3 anys)",
+      "titol": "🚔 DELICTE AGREUJAT — Coaccions per impedir l'exercici d'un dret fonamental (Art. 172.1 II CP)",
+      "pena": "Pena en la MEITAT SUPERIOR (presó 1 any i 9 mesos - 3 anys o multa en meitat superior); també si la coacció impedeix el legítim gaudi de l'habitatge",
       "exemples": [
-        "Impedir exercici dret de manifestació",
-        "Coaccionar professional sanitari per actuació",
+        "Impedir exercici dret de manifestació, vot o culte",
+        "Impedir el legítim gaudi de l'habitatge",
         "Coaccionar pels drets de gènere/orientació"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 03 — Drets denunciat",
+        "N 07 — Citació judicial"
       ]
     },
 
@@ -182,7 +226,8 @@
       "concepte": "Persecució persistent que altera greument la vida quotidiana",
       "pena_basica": "Presó 3 mesos - 2 anys O multa 6-24 mesos",
       "pena_persona_vulnerable": "Presó 6 mesos - 2 anys",
-      "pena_VG_VD": "Presó 1-2 anys (si víctima parella/ex o convivent)",
+      "pena_VG_VD": "Presó 1-2 anys o TBC 60-120 dies (si víctima de l'art. 173.2: parella/ex o convivent) — art. 172 ter.2",
+      "perseguibilitat": "Denúncia de la persona agreujada o representant legal (art. 172 ter.4) — NO cal denúncia si la víctima és persona de l'art. 173.2 (VG/VD)",
       "conductes_típiques": [
         "Vigilar, perseguir, buscar proximitat física reiterada",
         "Establir contacte per telèfon, missatges, xarxes",
@@ -197,16 +242,23 @@
         "VPR si VG",
         "Atestat penal + Jutjat"
       ],
-      "documentacio_clau": "Atestat + cronologia fets + còpies missatges/gravacions + testimonis"
+      "documentacio_clau": "Atestat + cronologia fets + còpies missatges/gravacions + testimonis",
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 03 — Drets denunciat",
+        "N 07 — Citació judicial"
+      ]
     },
 
     "fi_172_bis": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE GREU — Matrimoni forçat (Art. 172 bis CP)",
-      "pena": "Presó 6 mesos - 3 anys + multa 12-24 mesos",
-      "pena_agreujada_estranger": "Pena meitat superior si surt o resta a l'estranger",
-      "info": "Forçar a contraure matrimoni sense consentiment lliure (víctima pot ser nacional o estrangera). Coordinació amb consolat si víctima estrangera.",
+      "pena": "Presó 6 mesos - 3 anys i 6 mesos O multa 12-24 mesos (art. 172 bis.1 CP)",
+      "modalitat_172_bis_2": "Mateixa pena per a qui usi violència/intimidació greu o engany per forçar una altra persona a abandonar el territori espanyol o a no tornar-hi, amb la finalitat de matrimoni forçat",
+      "pena_agreujada_menor": "Si la víctima és MENOR d'edat: pena en la meitat superior (art. 172 bis.3 CP)",
+      "info": "Forçar a contraure matrimoni amb intimidació greu o violència (víctima pot ser nacional o estrangera). Coordinació amb consolat si víctima estrangera.",
       "accions": [
         "Protecció IMMEDIATA víctima",
         "Trasllat a casa d'acollida si necessari",
@@ -214,6 +266,11 @@
         "Detenció autors",
         "Atestat penal",
         "Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 07 — Citació judicial"
       ]
     },
 
@@ -229,6 +286,11 @@
         "Declaracions víctima i testimonis",
         "Atestat amb cronologia",
         "Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "N 02 — Drets víctima",
+        "A 18PL — Declaració",
+        "N 03 — Drets denunciat"
       ]
     },
 
@@ -236,14 +298,18 @@
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE GREU — Amenaces a col·lectivitat (Art. 170 CP)",
-      "pena_170_1": "Presó 6 mesos - 2 anys (amenaça mal constitutiu delicte a grup)",
-      "pena_170_2": "Presó 6 mesos - 1 any (reclamacions justícia)",
+      "pena_170_1": "Penes SUPERIORS EN GRAU a les de l'art. 169 (amenaces de mal constitutiu de delicte dirigides a atemorir els habitants d'una població, grup ètnic, cultural o religiós, o col·lectiu social o professional)",
+      "pena_170_2": "Presó 6 mesos - 2 anys (reclamar públicament la comissió d'accions violentes per bandes armades o grups terroristes — art. 170.2)",
       "exemples": "Amenaça atemptat a manifestació, amenaça a centre educatiu/empresarial, etc.",
       "accions": [
         "AVÍS Mossos / FCS coordinació",
         "Valorar risc poblacional",
         "Atestat amb totes les proves",
         "Possible competència Audiència Nacional si terrorisme"
+      ],
+      "actes_viladecans": [
+        "A 18PL — Declaració",
+        "N 03 — Drets denunciat"
       ]
     },
 
@@ -251,7 +317,7 @@
       "final": true,
       "tipus": "penal",
       "titol": "🚔 Amenaces VG — anar a checklist específic",
-      "accio": "Veure 'Violència de gènere'. Aplica Art. 171.4 CP (amenaces lleus VG) o concurs amb 169 CP."
+      "accio": "Veure 'Violència de gènere'. Aplica Art. 171.4 CP (amenaces lleus VG) o 172.2 CP (coaccions lleus VG) — SEMPRE delicte i d'ofici, mai delicte lleu del 171.7/172.3. Si amenaça de mal delictiu: concurs amb 169 CP."
     },
 
     "fi_vd_amenaces_ref": {
@@ -267,6 +333,6 @@
     "STALKING: cal continuïtat (no un fet aïllat) + alteració vida quotidiana.",
     "Si arma involucrada: intervenció + cadena custòdia.",
     "Si l'amenaça és per xarxes socials: requeriment a la plataforma per preservar dades (Jutjat).",
-    "Recordar: amenaces 169-170 perseguibles d'OFICI. Amenaces lleus 171.7 i coaccions lleus 172.3 requereixen denúncia."
+    "Recordar: amenaces 169-170 perseguibles d'OFICI. Amenaces lleus 171.7 i coaccions lleus 172.3 requereixen denúncia — EXCEPTE àmbit VG/VD (víctima dona parella/ex o persona de l'art. 173.2): SEMPRE delicte dels arts. 171.4/171.5/172.2 CP, perseguible d'ofici."
   ]
 }

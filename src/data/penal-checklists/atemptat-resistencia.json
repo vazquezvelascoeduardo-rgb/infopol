@@ -76,8 +76,8 @@
       "titol": "🚔 DELICTE — Atemptat sense lesions (Art. 550 CP)",
       "concepte_butlleta_atestat": "Acometer a, intimidar gravement o emprear violencia o resistencia grave contra agente de l'autoritat en l'exercici de les seves funcions",
       "article": "Art. 550 CP",
-      "pena_basica": "Presó 1-4 anys + multa 3-6 mesos",
-      "pena_agreujada_551": "Si concorren circumstàncies (arma, vehicle, MMPP…): pena meitat superior",
+      "pena_basica": "Presó 6 mesos-3 anys si és contra AGENT de l'autoritat o funcionari / presó 1-4 anys + multa 3-6 mesos si és contra AUTORITAT (art. 550.2 CP)",
+      "pena_agreujada_551": "Si concorren circumstàncies (arma o objecte perillós, vehicle de motor, llançament d'objectes contundents o líquids inflamables, incendi, explosius…): pena SUPERIOR EN GRAU (art. 551 CP)",
       "accions_ordenades": [
         "1️⃣ Reduir el subjecte amb força proporcional (sense excessos)",
         "2️⃣ DETENCIÓ pel delicte d'atemptat",
@@ -93,7 +93,13 @@
         "7️⃣ Posada a disposició Jutjat de Guàrdia"
       ],
       "frases_prohibides_pautes_3_3": "NO usar 'utilitzant la mínima força imprescindible'. CAL concretar exactament com es va utilitzar la força i com es van produir les lesions",
-      "documentacio": "Atestat penal + diligències + parte mèdic amb TIP"
+      "documentacio": "Atestat penal + diligències + parte mèdic amb TIP",
+      "actes_viladecans": [
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració (testimonis)"
+      ]
     },
 
     "fi_atemptat_550_escomesa": {
@@ -101,9 +107,15 @@
       "tipus": "penal",
       "titol": "🚔 DELICTE — Atemptat per escomesa (Art. 550 CP)",
       "text": "Intent d'agressió que no es consuma o no produeix resultat lesiu (llançament d'objectes, intent puntada que no arriba…).",
-      "pena": "Presó 1-4 anys + multa 3-6 mesos",
+      "pena": "Presó 6 mesos-3 anys (contra agent/funcionari) / 1-4 anys + multa 3-6 mesos (contra autoritat) — art. 550.2 CP",
       "exemples_pautes": "Llançament de pedres o objectes, intent de cop que no arriba",
-      "accions": "Mateixes que atemptat consumat"
+      "accions": "Mateixes que atemptat consumat",
+      "actes_viladecans": [
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració (testimonis)"
+      ]
     },
 
     "fi_atemptat_550_resistencia_greu": {
@@ -112,8 +124,14 @@
       "titol": "🚔 DELICTE — Atemptat per resistència activa greu (Art. 550 CP)",
       "text": "Resistència ACTIVA + GREU (intimidació greu o violència).",
       "exemples_pautes": "Donar puntades de peu i cops de puny per evitar la detenció",
-      "pena": "Presó 1-4 anys + multa 3-6 mesos",
-      "diferenciacio": "Si fos resistència PASSIVA greu: 556 CP (resistència). Si activa NO greu: 556 CP (resistència). Aquí: ACTIVA + GREU = atemptat."
+      "pena": "Presó 6 mesos-3 anys (contra agent/funcionari) / 1-4 anys + multa 3-6 mesos (contra autoritat) — art. 550.2 CP",
+      "diferenciacio": "Si fos resistència PASSIVA greu: 556 CP (resistència). Si activa NO greu: 556 CP (resistència). Aquí: ACTIVA + GREU = atemptat.",
+      "actes_viladecans": [
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració (testimonis)"
+      ]
     },
 
     "fi_atemptat_lesions_lleu": {
@@ -122,7 +140,13 @@
       "titol": "🚔 DELICTE — Atemptat + delicte lleu de lesions",
       "regla_concurs_pautes": "Si l'agent pateix lesions, s'instrueix per atemptat MÉS el delicte/delicte lleu de lesions corresponent (concurs)",
       "articles": "Art. 550 CP + Art. 147.2 CP (lesions sense tractament — delicte lleu)",
-      "pena_combinada": "Presó 1-4 anys + multa atemptat + multa 1-3 mesos lesions lleus"
+      "pena_combinada": "Pena de l'atemptat (presó 6 mesos-3 anys si contra agent) + multa 1-3 mesos (delicte lleu de lesions 147.2 CP)",
+      "actes_viladecans": [
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració (testimonis)"
+      ]
     },
 
     "fi_atemptat_lesions_147": {
@@ -130,9 +154,15 @@
       "tipus": "penal",
       "titol": "🚔 DELICTE — Atemptat + lesions amb tractament (Art. 147 CP)",
       "articles": "Art. 550 CP + Art. 147.1 CP",
-      "pena_combinada": "Presó 1-4 anys (atemptat) + presó 3 mesos-3 anys o multa 6-12 mesos (lesions)",
+      "pena_combinada": "Presó 6 mesos-3 anys (atemptat contra agent) + presó 3 mesos-3 anys o multa 6-12 mesos (lesions 147.1 CP)",
       "regla_concurs_pautes": "Si una persona agredeix DIVERSOS agents en un sol acte: s'imputa UN sol delicte d'atemptat, però se SUMEN les lesions individuals de cada agent",
-      "documentacio_clau": "Parte mèdic exhaustiu de l'agent. Important: dades professionals (TIP) — no personals"
+      "documentacio_clau": "Parte mèdic exhaustiu de l'agent. Important: dades professionals (TIP) — no personals",
+      "actes_viladecans": [
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració (testimonis)"
+      ]
     },
 
     "fi_atemptat_lesions_greus": {
@@ -141,7 +171,13 @@
       "titol": "🚔 DELICTE GREU — Atemptat + lesions greus (Art. 149/150 CP)",
       "pena_lesions_149": "Presó 6-12 anys (pèrdua òrgan principal/sentit)",
       "pena_lesions_150": "Presó 3-6 anys (membre no principal, deformitat)",
-      "pena_combinada": "Concurs amb atemptat — pena en meitat superior"
+      "pena_combinada": "Concurs ideal amb atemptat (art. 77 CP) — pena del delicte més greu en la meitat superior",
+      "actes_viladecans": [
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració (testimonis)"
+      ]
     },
 
     "fi_556_resistencia_activa_no_greu": {
@@ -152,7 +188,13 @@
       "exemples_pautes": "Forçament per intentar ser neutralitzat o escorcollat",
       "pena": "Presó 3 mesos - 1 any O multa 6-18 mesos",
       "subjectes": "NOMÉS contra autoritats i agents (no funcionaris públics — al revés que 550)",
-      "accions": "Detenció + atestat penal + lectura drets + Jutjat Guàrdia"
+      "accions": "Detenció + atestat penal + lectura drets + Jutjat Guàrdia",
+      "actes_viladecans": [
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració (testimonis)"
+      ]
     },
 
     "fi_556_resistencia_passiva_greu": {
@@ -162,7 +204,13 @@
       "text": "Resistència PASSIVA però GREU.",
       "exemples_pautes": "Encadenar-se a un bidó de ciment per intentar evitar el treball de la maquinària (desnonament, manifestació, etc.)",
       "pena": "Presó 3 mesos - 1 any O multa 6-18 mesos",
-      "diferencia_admin": "La passiva NO greu (seure al terra) és 36.6 LOPSC administrativa"
+      "diferencia_admin": "La passiva NO greu (seure al terra) és 36.6 LOPSC administrativa",
+      "actes_viladecans": [
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració (testimonis)"
+      ]
     },
 
     "fi_556_desobediencia_greu": {
@@ -177,7 +225,13 @@
       ],
       "exemples_pautes": "Negativa formal i clara a identificar-se amb actitud de rebel·lia (no simple inactivitat)",
       "pena": "Presó 3 mesos - 1 any O multa 6-18 mesos",
-      "diferencia_lleu": "Desobediència LLEU = 36.6 LOPSC. Per exemple, donar dades falses verbals."
+      "diferencia_lleu": "Desobediència LLEU = 36.6 LOPSC. Per exemple, donar dades falses verbals.",
+      "actes_viladecans": [
+        "N 01 — Drets detingut",
+        "AD 01 — Declaració detingut",
+        "PD 06 — Objectes detingut",
+        "A 18PL — Declaració (testimonis)"
+      ]
     },
 
     "fi_36_6_passiva_no_greu": {
@@ -191,7 +245,10 @@
         "Col·locar-se davant la porta d'un edifici per intentar evitar un desnonament",
         "Seure al terra per evitar una actuació policial i que els agents hagin d'\"arrencar cebes\""
       ],
-      "documentacio": "Acta D-10 (denúncia LOPSC)"
+      "documentacio": "Acta D-10 (denúncia LOPSC)",
+      "actes_viladecans": [
+        "D 10 — Denúncia LOPSC 36.6 (desobediència/resistència no delictiva)"
+      ]
     },
 
     "fi_36_6_desobediencia_lleu": {
@@ -206,17 +263,24 @@
         "Dificultar una identificació",
         "Donar dades falses o inexactes verbalment en la identificació"
       ],
-      "documentacio": "Acta D-10"
+      "documentacio": "Acta D-10",
+      "actes_viladecans": [
+        "D 10 — Denúncia LOPSC 36.6 (desobediència no delictiva)"
+      ]
     },
 
     "fi_delicte_lleu_respecte_autoritat": {
       "final": true,
       "tipus": "penal",
       "titol": "⚖️ DELICTE LLEU — Manca de respecte a AUTORITAT",
-      "info": "Insults, faltes de respecte greus contra autoritat (jutge, alcalde, regidor…) en exercici funcions = delicte lleu (CP art. 556 simplificat o 631).",
-      "pena": "Multa 1-3 mesos",
-      "perseguibilitat": "Denúncia perjudicat (autoritat)",
-      "accions": "Atestat simplificat + identificació autor + posada en coneixement Jutjat"
+      "info": "Faltar al respecte i consideració deguda a l'AUTORITAT (jutge, alcalde, regidor…) en l'exercici de les seves funcions = delicte lleu de l'art. 556.2 CP.",
+      "pena": "Multa 1-3 mesos (art. 556.2 CP)",
+      "perseguibilitat": "D'ofici (no requereix denúncia de l'autoritat)",
+      "accions": "Atestat simplificat + identificació autor + posada en coneixement Jutjat",
+      "actes_viladecans": [
+        "A 18PL — Declaració (testimonis)",
+        "N 10 — Citació JIDL (delicte lleu)"
+      ]
     },
 
     "fi_37_4_respecte_agent": {
@@ -227,7 +291,10 @@
       "article_butlleta": "Art. 37.4 LOPSC",
       "import": "100 € - 600 €",
       "exemples": "Insults verbals, gestos despectius, frases ofensives sense violència",
-      "documentacio": "Acta D-10"
+      "documentacio": "Acta D-10",
+      "actes_viladecans": [
+        "D 10 — Denúncia LOPSC 37.4 (manca de respecte a agent)"
+      ]
     },
 
     "fi_amenaces_169": {
@@ -238,7 +305,12 @@
       "pena_169_2": "Presó 6 mesos - 2 anys (amenaces de mal constitutiu de delicte)",
       "pena_169_1": "Presó 1-5 anys (amenaces condicionades)",
       "accions": "Veure checklist 'Amenaces i coaccions' per detalls",
-      "info_concurs": "L'atemptat ABSORBEIX conductes més lleus (desobediència, resistència) que tinguin lloc en la mateixa actuació. Però les amenaces greus van per separat."
+      "info_concurs": "L'atemptat ABSORBEIX conductes més lleus (desobediència, resistència) que tinguin lloc en la mateixa actuació. Però les amenaces greus van per separat.",
+      "actes_viladecans": [
+        "N 01 — Drets detingut (si detenció)",
+        "AD 01 — Declaració detingut",
+        "A 18PL — Declaració (testimonis)"
+      ]
     }
   },
   "notes_finals": [
