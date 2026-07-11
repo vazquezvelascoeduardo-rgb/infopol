@@ -11,7 +11,11 @@
     "Art. 172.3 II CP (coaccions lleus a persones del 173.2)",
     "Art. 153.3 CP (agreujants menors/armes/domicili)"
   ],
-
+  "instruccio_viladecans": {
+    "qui_instrueix": "A Viladecans la instrucció dels atestats de VG/VD correspon a PG-ME (GAV — Grup d'Atenció a la Víctima). La PL fa la PRIMERA INTERVENCIÓ: protecció de la víctima, aturada de l'agressió, detenció si escau i lliurament a Mossos (A 54).",
+    "que_fa_la_PL": "Assegurar víctima i menors · atenció sanitària · N 01 al detingut · PD 06 · A 54 lliurament · N 02 drets víctima si es recull la primera manifestació · minuta detallada dels fets presenciats (element probatori clau).",
+    "que_NO_fa_la_PL": "Declaració del detingut (AD 01), valoració policial del risc definitiva (VioGén/RVD la gestiona el cos instructor) ni la tramitació de l'ordre de protecció (544 ter) — tot això és de PG-ME."
+  },
   "ambit_VD_173_2": [
     "Cònjuge (HOME víctima de la seva parella dona)",
     "Ex-cònjuge home",
@@ -22,57 +26,103 @@
     "Persones integrades al nucli familiar (parella propi pare/mare, etc.)",
     "Persones especialment vulnerables sotmeses a custòdia o guarda en centres públics o privats"
   ],
-
   "diferencia_VG_VD": "VG = dona víctima de parella/ex-parella HOME → JVM. VD = altres àmbits familiars → Jutjat Instrucció ordinari.",
-
   "competencia_judicial": "Jutjat d'Instrucció de Guàrdia (NO JVM, llevat que també hi hagi VG simultània)",
-
   "inici": "victima",
   "nodes": {
-
     "victima": {
       "titol": "Qui és la víctima?",
       "opcions": [
-        { "etiqueta": "Dona parella/ex-parella → és VG (anar checklist VG)",         "va_a": "fi_remetre_VG" },
-        { "etiqueta": "Fill/filla MENOR d'edat",                                     "va_a": "menor_tipus" },
-        { "etiqueta": "Pare/mare (ascendent)",                                       "va_a": "tipus_violencia" },
-        { "etiqueta": "Germà/germana convivent",                                     "va_a": "tipus_violencia" },
-        { "etiqueta": "Persona vulnerable / discapacitat al nucli",                  "va_a": "tipus_violencia" },
-        { "etiqueta": "HOME víctima de la seva parella DONA",                         "va_a": "tipus_violencia" },
-        { "etiqueta": "Parella del MATEIX SEXE",                                      "va_a": "tipus_violencia" },
-        { "etiqueta": "Persona integrada al nucli (parella del pare/mare…)",          "va_a": "tipus_violencia" }
+        {
+          "etiqueta": "Dona parella/ex-parella → és VG (anar checklist VG)",
+          "va_a": "fi_remetre_VG"
+        },
+        {
+          "etiqueta": "Fill/filla MENOR d'edat",
+          "va_a": "menor_tipus"
+        },
+        {
+          "etiqueta": "Pare/mare (ascendent)",
+          "va_a": "tipus_violencia"
+        },
+        {
+          "etiqueta": "Germà/germana convivent",
+          "va_a": "tipus_violencia"
+        },
+        {
+          "etiqueta": "Persona vulnerable / discapacitat al nucli",
+          "va_a": "tipus_violencia"
+        },
+        {
+          "etiqueta": "HOME víctima de la seva parella DONA",
+          "va_a": "tipus_violencia"
+        },
+        {
+          "etiqueta": "Parella del MATEIX SEXE",
+          "va_a": "tipus_violencia"
+        },
+        {
+          "etiqueta": "Persona integrada al nucli (parella del pare/mare…)",
+          "va_a": "tipus_violencia"
+        }
       ]
     },
-
     "menor_tipus": {
       "titol": "Violència contra menor — tipus",
       "opcions": [
-        { "etiqueta": "Maltractament físic / lesions",                              "va_a": "fi_VD_menor_153" },
-        { "etiqueta": "Negligència / abandonament greu",                            "va_a": "fi_negligencia_229" },
-        { "etiqueta": "ABÚS SEXUAL (anar a checklist específic)",                    "va_a": "fi_abus_sexual_ref" },
-        { "etiqueta": "Maltractament habitual al nucli familiar",                   "va_a": "fi_173_2_habitual" }
+        {
+          "etiqueta": "Maltractament físic / lesions",
+          "va_a": "fi_VD_menor_153"
+        },
+        {
+          "etiqueta": "Negligència / abandonament greu",
+          "va_a": "fi_negligencia_229"
+        },
+        {
+          "etiqueta": "ABÚS SEXUAL (anar a checklist específic)",
+          "va_a": "fi_abus_sexual_ref"
+        },
+        {
+          "etiqueta": "Maltractament habitual al nucli familiar",
+          "va_a": "fi_173_2_habitual"
+        }
       ]
     },
-
     "tipus_violencia": {
       "titol": "Tipus de violència detectada",
       "opcions": [
-        { "etiqueta": "Maltractament/lesió SENSE tractament (153.2)",                "va_a": "fi_153_2" },
-        { "etiqueta": "Lesions amb tractament (concurs 147/148)",                   "va_a": "fi_lesions_VD_ref" },
-        { "etiqueta": "Lesions GREUS (149/150)",                                     "va_a": "fi_lesions_greus_VD" },
-        { "etiqueta": "Amenaces lleus AMB armes o instruments perillosos (171.5)",   "va_a": "fi_171_5" },
-        { "etiqueta": "Coaccions lleus / amenaces lleus sense armes (172.3 II / 171.7 II)", "va_a": "fi_172_3" },
-        { "etiqueta": "VIOLÈNCIA HABITUAL — múltiples episodis (173.2)",            "va_a": "fi_173_2_habitual" }
+        {
+          "etiqueta": "Maltractament/lesió SENSE tractament (153.2)",
+          "va_a": "fi_153_2"
+        },
+        {
+          "etiqueta": "Lesions amb tractament (concurs 147/148)",
+          "va_a": "fi_lesions_VD_ref"
+        },
+        {
+          "etiqueta": "Lesions GREUS (149/150)",
+          "va_a": "fi_lesions_greus_VD"
+        },
+        {
+          "etiqueta": "Amenaces lleus AMB armes o instruments perillosos (171.5)",
+          "va_a": "fi_171_5"
+        },
+        {
+          "etiqueta": "Coaccions lleus / amenaces lleus sense armes (172.3 II / 171.7 II)",
+          "va_a": "fi_172_3"
+        },
+        {
+          "etiqueta": "VIOLÈNCIA HABITUAL — múltiples episodis (173.2)",
+          "va_a": "fi_173_2_habitual"
+        }
       ]
     },
-
     "fi_remetre_VG": {
       "final": true,
       "tipus": "procediment",
       "titol": "🔀 Anar a checklist 'Violència de gènere'",
       "accio": "Si víctima és dona parella/ex-parella d'home: és VG (LO 1/2004), JVM."
     },
-
     "fi_153_2": {
       "final": true,
       "tipus": "penal",
@@ -94,13 +144,12 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
-        "AD 01 — Declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes detingut",
         "A 18PL — Declaració testimonis",
         "M 06 — Oferiment mesura educativa (si l'agressor és menor)"
       ]
     },
-
     "fi_171_5": {
       "final": true,
       "tipus": "penal",
@@ -108,15 +157,19 @@
       "concepte": "Amenaçar de manera lleu AMB ARMES o altres instruments perillosos alguna de les persones de l'art. 173.2 (excepte la dona parella/ex, que és 171.4 VG)",
       "pena": "Presó 3 mesos - 1 any O TBC 31-80 dies + privació armes d'1 a 3 anys",
       "info": "Si l'amenaça lleu és SENSE armes: delicte lleu de l'art. 171.7 II CP — localització permanent 5-30 dies (domicili diferent i allunyat) o TBC 5-30 dies o multa 1-4 mesos; en àmbit 173.2 NO cal denúncia",
-      "accions": ["Detenció", "Intervenció de l'arma", "Atestat Jutjat Guàrdia", "Recollir proves"],
+      "accions": [
+        "Detenció",
+        "Intervenció de l'arma",
+        "Atestat Jutjat Guàrdia",
+        "Recollir proves"
+      ],
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
-        "AD 01 — Declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 18PL — Declaració testimonis"
       ]
     },
-
     "fi_172_3": {
       "final": true,
       "tipus": "penal",
@@ -124,13 +177,15 @@
       "pena": "Localització permanent 5-30 dies (domicili diferent i allunyat de la víctima) O TBC 5-30 dies O multa 1-4 mesos (multa només si concorren les circumstàncies de l'art. 84.2 CP)",
       "perseguibilitat": "En àmbit de l'art. 173.2 NO és exigible la denúncia de la víctima (perseguible d'ofici)",
       "info": "Si la víctima és persona ESPECIALMENT VULNERABLE convivent: art. 172.2 CP (presó 6 mesos-1 any o TBC). Si la víctima és dona parella/ex: SEMPRE 172.2 (VG).",
-      "accions": ["Declaracions", "Atestat Jutjat Guàrdia"],
+      "accions": [
+        "Declaracions",
+        "Atestat Jutjat Guàrdia"
+      ],
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "A 18PL — Declaració testimonis"
       ]
     },
-
     "fi_173_2_habitual": {
       "final": true,
       "tipus": "penal",
@@ -162,13 +217,12 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
-        "AD 01 — Declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes detingut",
         "A 18PL — Declaració testimonis",
-        "N 07 — Citació judicial (compareixença OP 544 ter)"
+        "N 07 — Notificació de citació judicial (NOMÉS si el jutjat n'encarrega el lliurament a la PL; la instrucció VG/OP correspon a PG-ME)"
       ]
     },
-
     "fi_VD_menor_153": {
       "final": true,
       "tipus": "penal",
@@ -187,12 +241,11 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
-        "AD 01 — Declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 35 — Entrega menor o discapacitat (protecció de menors)",
         "A 18PL — Declaració testimonis"
       ]
     },
-
     "fi_negligencia_229": {
       "final": true,
       "tipus": "mixta",
@@ -217,7 +270,6 @@
         "A 18PL — Declaració testimonis"
       ]
     },
-
     "fi_abus_sexual_ref": {
       "final": true,
       "tipus": "procediment",
@@ -225,14 +277,12 @@
       "info": "AGRESSIÓ SEXUAL a menor (l'\"abús sexual\" ja no existeix com a tipus des de la LO 10/2022): arts. 178-183 bis CP + LO 8/2021 (protecció menors).",
       "accio": "Procediment específic UFAM, prova preconstituïda, evitar repetir interrogatoris."
     },
-
     "fi_lesions_VD_ref": {
       "final": true,
       "tipus": "procediment",
       "titol": "🔀 Anar a checklist 'Lesions'",
       "accio": "Lesions amb tractament: aplicar Art. 147.1 o 148 CP + circumstància mixta de parentiu (art. 23 CP). Si la víctima és persona especialment vulnerable que conviu amb l'autor: art. 148.5 CP (presó 2-5 anys)."
     },
-
     "fi_lesions_greus_VD": {
       "final": true,
       "tipus": "penal",
@@ -242,7 +292,7 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
-        "AD 01 — Declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes detingut",
         "A 18PL — Declaració testimonis"
       ]

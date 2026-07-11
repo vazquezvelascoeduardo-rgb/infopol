@@ -14,9 +14,7 @@
     "Art. 156 CP (consentiment)",
     "Art. 173 CP (tracte degradant)"
   ],
-
   "criteri_clau_pautes": "El 'tractament mèdic o quirúrgic' és la frontera entre delicte LLEU (147.2) i delicte BÀSIC (147.1). Tractament = més enllà d'una primera assistència facultativa. Inclou: punts de sutura, immobilització, medicació pautada, fisioteràpia.",
-
   "perseguibilitat": {
     "147_2_lleu": "Denúncia de la persona agreujada o representant legal (art. 147.4 CP). Si context VG/VD el fet és art. 153 CP: D'OFICI",
     "147_3_maltractament": "Denúncia de la persona agreujada (art. 147.4 CP) — multa 1-2 mesos. Si VG/VD: art. 153 CP, d'ofici",
@@ -25,58 +23,112 @@
     "149_150_greus": "D'ofici",
     "153_VG_VD": "D'ofici (perseguible encara que la víctima retiri)"
   },
-
   "inici": "tractament_medic",
   "nodes": {
-
     "tractament_medic": {
       "titol": "Valoració mèdica — frontera clau",
       "text": "Les lesions requereixen tractament mèdic o quirúrgic més enllà d'una primera assistència?",
       "info": "TRACTAMENT MÈDIC: punts de sutura, immobilització (escaiola, fèrules), medicació pautada més de 5 dies, fisioteràpia, intervenció quirúrgica. PRIMERA ASSISTÈNCIA SOLA: cura simple, antiinflamatori puntual, antisèptic.",
       "opcions": [
-        { "etiqueta": "Sí, requereix tractament (sutura, escaiola, cirurgia, etc.)",  "va_a": "context_lesions" },
-        { "etiqueta": "Només primera assistència (cura, analgèsic puntual)",          "va_a": "context_lleu" },
-        { "etiqueta": "Lesions MOLT GREUS (pèrdua òrgan, sentit, esterilitat)",       "va_a": "fi_149" },
-        { "etiqueta": "Lesions GREUS (deformitat, pèrdua membre no principal)",       "va_a": "fi_150" },
-        { "etiqueta": "Maltractament d'obra SENSE causar lesió",                       "va_a": "context_lleu_vg_vd" }
+        {
+          "etiqueta": "Sí, requereix tractament (sutura, escaiola, cirurgia, etc.)",
+          "va_a": "context_lesions"
+        },
+        {
+          "etiqueta": "Només primera assistència (cura, analgèsic puntual)",
+          "va_a": "context_lleu"
+        },
+        {
+          "etiqueta": "Lesions MOLT GREUS (pèrdua òrgan, sentit, esterilitat)",
+          "va_a": "fi_149"
+        },
+        {
+          "etiqueta": "Lesions GREUS (deformitat, pèrdua membre no principal)",
+          "va_a": "fi_150"
+        },
+        {
+          "etiqueta": "Maltractament d'obra SENSE causar lesió",
+          "va_a": "context_lleu_vg_vd"
+        }
       ]
     },
-
     "context_lesions": {
       "titol": "Context — agreujants Art. 148",
       "text": "Concorre alguna circumstància agreujant?",
       "opcions": [
-        { "etiqueta": "Lesions BÀSIQUES (cap agreujant)",                              "va_a": "fi_147_basic" },
-        { "etiqueta": "Amb ARMES o mitjans perillosos (Art. 148.1)",                  "va_a": "fi_148_armes" },
-        { "etiqueta": "Amb ENSANYAMENT o premeditació (Art. 148.2)",                  "va_a": "fi_148_ensanyament" },
-        { "etiqueta": "Víctima MENOR de 12 anys / discapacitat necessitat d'especial protecció (Art. 148.3)", "va_a": "fi_148_menor" },
-        { "etiqueta": "Víctima parella/ex-parella DONA (VG → 148.4 CP)",              "va_a": "fi_vg_lesions_148_4" },
-        { "etiqueta": "Víctima VULNERABLE convivent (Art. 148.5)",                    "va_a": "fi_148_vulnerable" },
-        { "etiqueta": "Víctima familiar convivent (no parella) → VD",                  "va_a": "fi_vd_lesions" },
-        { "etiqueta": "Imprudència greu/menys greu",                                  "va_a": "fi_152_imprudent" }
+        {
+          "etiqueta": "Lesions BÀSIQUES (cap agreujant)",
+          "va_a": "fi_147_basic"
+        },
+        {
+          "etiqueta": "Amb ARMES o mitjans perillosos (Art. 148.1)",
+          "va_a": "fi_148_armes"
+        },
+        {
+          "etiqueta": "Amb ENSANYAMENT o premeditació (Art. 148.2)",
+          "va_a": "fi_148_ensanyament"
+        },
+        {
+          "etiqueta": "Víctima MENOR de 12 anys / discapacitat necessitat d'especial protecció (Art. 148.3)",
+          "va_a": "fi_148_menor"
+        },
+        {
+          "etiqueta": "Víctima parella/ex-parella DONA (VG → 148.4 CP)",
+          "va_a": "fi_vg_lesions_148_4"
+        },
+        {
+          "etiqueta": "Víctima VULNERABLE convivent (Art. 148.5)",
+          "va_a": "fi_148_vulnerable"
+        },
+        {
+          "etiqueta": "Víctima familiar convivent (no parella) → VD",
+          "va_a": "fi_vd_lesions"
+        },
+        {
+          "etiqueta": "Imprudència greu/menys greu",
+          "va_a": "fi_152_imprudent"
+        }
       ]
     },
-
     "context_lleu": {
       "titol": "Context — lesions sense tractament",
       "opcions": [
-        { "etiqueta": "Lesions lleus 'normals' (entre adults sense relació especial)", "va_a": "fi_147_2_lleu" },
-        { "etiqueta": "Víctima parella DONA (VG)",                                     "va_a": "fi_vg_153_1" },
-        { "etiqueta": "Víctima familiar convivent (VD)",                               "va_a": "fi_vd_153_2" },
-        { "etiqueta": "Tracte vexatori reiterat",                                       "va_a": "fi_173_vexacions" }
+        {
+          "etiqueta": "Lesions lleus 'normals' (entre adults sense relació especial)",
+          "va_a": "fi_147_2_lleu"
+        },
+        {
+          "etiqueta": "Víctima parella DONA (VG)",
+          "va_a": "fi_vg_153_1"
+        },
+        {
+          "etiqueta": "Víctima familiar convivent (VD)",
+          "va_a": "fi_vd_153_2"
+        },
+        {
+          "etiqueta": "Tracte vexatori reiterat",
+          "va_a": "fi_173_vexacions"
+        }
       ]
     },
-
     "context_lleu_vg_vd": {
       "titol": "Maltractament sense lesió",
       "info": "Empenta, bufetada sense marca, immobilització violenta sense lesió: pot ser delicte si context VG/VD.",
       "opcions": [
-        { "etiqueta": "Parella DONA (VG)",                                             "va_a": "fi_vg_153_1" },
-        { "etiqueta": "Familiar convivent (VD)",                                       "va_a": "fi_vd_153_2" },
-        { "etiqueta": "Sense relació especial — delicte LLEU de maltractament d'obra (147.3 CP)", "va_a": "fi_no_delicte" }
+        {
+          "etiqueta": "Parella DONA (VG)",
+          "va_a": "fi_vg_153_1"
+        },
+        {
+          "etiqueta": "Familiar convivent (VD)",
+          "va_a": "fi_vd_153_2"
+        },
+        {
+          "etiqueta": "Sense relació especial — delicte LLEU de maltractament d'obra (147.3 CP)",
+          "va_a": "fi_no_delicte"
+        }
       ]
     },
-
     "fi_147_2_lleu": {
       "final": true,
       "tipus": "penal",
@@ -104,7 +156,6 @@
         "N 06 — Citació policial"
       ]
     },
-
     "fi_147_basic": {
       "final": true,
       "tipus": "penal",
@@ -137,10 +188,9 @@
         "N 02 — Drets víctima",
         "A 18PL — Declaració",
         "N 01 — Drets detingut",
-        "N 11 — Citació judici ràpid"
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)"
       ]
     },
-
     "fi_148_armes": {
       "final": true,
       "tipus": "penal",
@@ -165,10 +215,10 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "A 18PL — Declaració",
-        "N 01 — Drets detingut"
+        "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)"
       ]
     },
-
     "fi_148_ensanyament": {
       "final": true,
       "tipus": "penal",
@@ -189,10 +239,10 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "A 18PL — Declaració",
-        "N 01 — Drets detingut"
+        "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)"
       ]
     },
-
     "fi_148_menor": {
       "final": true,
       "tipus": "penal",
@@ -211,10 +261,10 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "A 18PL — Declaració",
-        "N 01 — Drets detingut"
+        "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)"
       ]
     },
-
     "fi_148_vulnerable": {
       "final": true,
       "tipus": "penal",
@@ -231,10 +281,10 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "A 18PL — Declaració",
-        "N 01 — Drets detingut"
+        "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)"
       ]
     },
-
     "fi_149": {
       "final": true,
       "tipus": "penal",
@@ -264,10 +314,10 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 18PL — Declaració"
       ]
     },
-
     "fi_150": {
       "final": true,
       "tipus": "penal",
@@ -281,10 +331,10 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 18PL — Declaració"
       ]
     },
-
     "fi_152_imprudent": {
       "final": true,
       "tipus": "penal",
@@ -300,7 +350,6 @@
         "N 06 — Citació policial"
       ]
     },
-
     "fi_vg_lesions_148_4": {
       "final": true,
       "tipus": "penal",
@@ -317,10 +366,10 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 18PL — Declaració"
       ]
     },
-
     "fi_vg_153_1": {
       "final": true,
       "tipus": "penal",
@@ -336,10 +385,10 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 18PL — Declaració"
       ]
     },
-
     "fi_vd_lesions": {
       "final": true,
       "tipus": "penal",
@@ -349,10 +398,10 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 18PL — Declaració"
       ]
     },
-
     "fi_vd_153_2": {
       "final": true,
       "tipus": "penal",
@@ -362,10 +411,10 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 18PL — Declaració"
       ]
     },
-
     "fi_173_vexacions": {
       "final": true,
       "tipus": "penal",
@@ -378,7 +427,6 @@
         "N 03 — Drets denunciat no detingut"
       ]
     },
-
     "fi_no_delicte": {
       "final": true,
       "tipus": "penal",

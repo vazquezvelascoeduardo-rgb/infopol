@@ -100,7 +100,7 @@ export const ACTES_VILADECANS: ActaVilad[] = [
   { serie: 'A', codi: 'A 51', nom: 'Infracció en matèria de joc', ambit: 'admin',
     quan: "Infraccions de la normativa del joc: menors en salons de joc, màquines sense autorització, apostes il·legals." },
   { serie: 'A', codi: 'A 54', nom: 'Sol·licitud de custòdia de detingut per PG-ME', ambit: 'penal',
-    quan: "Trasllat de la custòdia d'un detingut a Mossos d'Esquadra (delictes de la seva competència o manca de dipòsit propi)." },
+    quan: "⭐ SEMPRE que hi ha un detingut: la PL de Viladecans no disposa de dipòsit ni fa custòdia — el detingut es lliura a la comissaria de PG-ME amb aquesta acta i la minuta dels fets (conveni de coordinació Interior-Ajuntament). La declaració del detingut i la instrucció les practica Mossos." },
   { serie: 'A', codi: 'A 55', nom: 'Detenció per reclamació', ambit: 'penal',
     quan: "Detenció d'una persona amb ordre de crida i cerca / reclamació judicial vigent detectada en la identificació." },
   { serie: 'A', codi: 'A 56', nom: "Reconeixement i entrega d'efectes", ambit: 'penal',
@@ -194,7 +194,7 @@ export const ACTES_VILADECANS: ActaVilad[] = [
   { serie: 'N', codi: 'N 10', nom: 'Citació per a judici ràpid per delicte lleu (JIDL)', variants: 'CAT / CAST', ambit: 'penal',
     quan: "Citació de denunciat, denunciant i testimonis al judici immediat de delicte lleu (dia i hora assignats pel jutjat de guàrdia)." },
   { serie: 'N', codi: 'N 11', nom: 'Citació per a judici ràpid', ambit: 'penal',
-    quan: "Citació al jutjat de guàrdia per a judici ràpid (795 LECrim): alcoholèmies penals, conducció sense permís, violència de gènere…" },
+    quan: "Citació al jutjat de guàrdia per a judici ràpid (795 LECrim) en atestats PROPIS de la PL — a la pràctica: trànsit (alcoholèmies penals, 384 CP…). En la resta de delictes, qui cita és el cos instructor (PG-ME)." },
 
   /* ══════════════ SÈRIE T — Trànsit ══════════════ */
   { serie: 'T', codi: 'T 04', nom: 'Proposta extraordinària d\'ITV', ambit: 'transit',
@@ -224,7 +224,7 @@ export const ACTES_VILADECANS: ActaVilad[] = [
   { serie: 'ALTRES', codi: 'I 104', nom: 'Drets de la persona desplaçada per a identificació', ambit: 'penal',
     quan: "Lectura de drets a qui es trasllada a dependències per identificar (Art. 16.2 LOPSC): motiu, durada màxima (6 h) i drets." },
   { serie: 'ALTRES', codi: 'AD 01', nom: 'Acta de declaració de DETINGUT', ambit: 'penal',
-    quan: "Declaració del detingut en seu policial: sempre amb advocat present i drets prèviament llegits (520 LECrim)." },
+    quan: "⚠️ A la pràctica, la PL de Viladecans NO la utilitza: el detingut es lliura sempre a PG-ME amb l'A 54 i és el cos instructor qui practica la declaració amb advocat (520 LECrim). El model existeix a la carpeta per als supòsits residuals en què la PL instrueixi diligències pròpies amb detingut." },
   { serie: 'ALTRES', codi: 'PD 01', nom: "Sol·licitud d'Habeas Corpus", ambit: 'penal',
     quan: "Quan el detingut sol·licita el procediment d'Habeas Corpus (LO 6/1984): remissió IMMEDIATA al jutjat de guàrdia." },
   { serie: 'ALTRES', codi: 'PD 06', nom: 'Objectes de la persona detinguda', ambit: 'penal',

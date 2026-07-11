@@ -36,32 +36,60 @@
     "menors": "Màxim 24 hores (LO 5/2000) — abans de la posada a disposició Fiscal Menors",
     "terrorisme": "+48 hores prorrogables amb autorització judicial (520 bis LECrim)"
   },
+  "model_custodia_viladecans": {
+    "regla_dor": "La PL de Viladecans NO disposa de dipòsit de detinguts ni fa custòdia: TOTA detenció acaba amb el lliurament del detingut a la comissaria de PG-ME amb l'acta A 54 (sol·licitud de custòdia). És el model del conveni de coordinació Interior-Ajuntament (com el 77% de les PL catalanes).",
+    "que_fa_la_PL": "1) Deté i llegeix els drets AL MOMENT (N 01, en llengua que comprengui). 2) Escorcoll superficial i relació de pertinences (PD 06). 3) Trasllat i LLIURAMENT a PG-ME amb A 54 + minuta/compareixença dels fets. 4) Si cessa la causa abans del lliurament: A 29 (deixar sense efecte).",
+    "que_fa_PGME": "Custòdia, declaració del detingut amb advocat (per això la PL NO fa mai l'AD 01), instrucció de l'atestat i posada a disposició judicial.",
+    "excepcio_transit": "En atestats PROPIS de trànsit (alcoholèmies penals, 384 CP…) la PL instrueix i cita a judici ràpid (N 11/N 08); si hi ha detenció, el detingut es lliura igualment a PG-ME amb A 54.",
+    "habeas_corpus": "El PD 01 aplica mentre el detingut estigui sota custòdia de la PL (fins al lliurament): remissió immediata al jutjat de guàrdia."
+  },
   "inici": "justificacio",
   "nodes": {
-
     "justificacio": {
       "titol": "Causa de la detenció",
       "text": "Quina causa la justifica? (Art. 492 LECrim)",
       "info": "L'Art. 492 LECrim diu QUI pot detenir: l'agent SEMPRE quan: (1) sorprèn delinqüent en flagrant; (2) intent flagrant; (3) reu fugat; (4) processat / condemnat amb ordre detenció; (5) indicis racionals + risc fuga.",
       "opcions": [
-        { "etiqueta": "FLAGRANT delicte o intent (492.1 en relació amb 490.1 i 490.2 LECrim)", "va_a": "fi_procediment_detencio" },
-        { "etiqueta": "ORDRE judicial / busca i captura — processat o requisitòria (492.2 i 492.3 LECrim)", "va_a": "fi_procediment_detencio" },
-        { "etiqueta": "Indicis racionals d'autoria + risc fuga (492.4)",            "va_a": "fi_procediment_detencio" },
-        { "etiqueta": "Reu fugat o en rebel·lia (492.1 en relació amb 490.3 a 490.7 LECrim)", "va_a": "fi_procediment_detencio" },
-        { "etiqueta": "Delicte LLEU amb risc d'incompareixença",                    "va_a": "delicte_lleu" },
-        { "etiqueta": "Només per identificar (no delicte)",                         "va_a": "fi_no_detencio_17" }
+        {
+          "etiqueta": "FLAGRANT delicte o intent (492.1 en relació amb 490.1 i 490.2 LECrim)",
+          "va_a": "fi_procediment_detencio"
+        },
+        {
+          "etiqueta": "ORDRE judicial / busca i captura — processat o requisitòria (492.2 i 492.3 LECrim)",
+          "va_a": "fi_procediment_detencio"
+        },
+        {
+          "etiqueta": "Indicis racionals d'autoria + risc fuga (492.4)",
+          "va_a": "fi_procediment_detencio"
+        },
+        {
+          "etiqueta": "Reu fugat o en rebel·lia (492.1 en relació amb 490.3 a 490.7 LECrim)",
+          "va_a": "fi_procediment_detencio"
+        },
+        {
+          "etiqueta": "Delicte LLEU amb risc d'incompareixença",
+          "va_a": "delicte_lleu"
+        },
+        {
+          "etiqueta": "Només per identificar (no delicte)",
+          "va_a": "fi_no_detencio_17"
+        }
       ]
     },
-
     "delicte_lleu": {
       "titol": "Detenció per delicte lleu",
       "text": "Per delicte lleu només procedeix detenció si NO té domicili conegut NI dona fiança bastant per garantir la compareixença (Art. 495 LECrim).",
       "opcions": [
-        { "etiqueta": "Té domicili i ofereix garanties → CITACIÓ",               "va_a": "fi_citacio_lleu" },
-        { "etiqueta": "Sense domicili / sense garanties → DETENCIÓ",            "va_a": "fi_procediment_detencio" }
+        {
+          "etiqueta": "Té domicili i ofereix garanties → CITACIÓ",
+          "va_a": "fi_citacio_lleu"
+        },
+        {
+          "etiqueta": "Sense domicili / sense garanties → DETENCIÓ",
+          "va_a": "fi_procediment_detencio"
+        }
       ]
     },
-
     "fi_no_detencio_17": {
       "final": true,
       "tipus": "avis",
@@ -72,7 +100,6 @@
         "G 58 — Volant d'estada en dependències per identificació (en sortir de dependències)"
       ]
     },
-
     "fi_citacio_lleu": {
       "final": true,
       "tipus": "procediment",
@@ -84,7 +111,6 @@
         "Lliurar còpia de la citació"
       ]
     },
-
     "fi_procediment_detencio": {
       "final": true,
       "tipus": "procediment",
@@ -136,7 +162,6 @@
         "N 01b — Drets menor detingut (si el detingut és menor d'edat)",
         "PD 06 — Objectes persona detinguda (escorcoll incident: inventari i dipòsit d'efectes)",
         "PD 01 — Sol·licitud d'Habeas Corpus (si el detingut l'exercita)",
-        "AD 01 — Acta declaració detingut (si declara a dependències)",
         "A 29 — Deixar sense efecte una detenció (si s'allibera sense posada a disposició judicial)",
         "A 54 — Sol·licitud custòdia detingut per PG-ME (si es traspassa la custòdia a Mossos)",
         "A 55 — Detenció per reclamació judicial (si la detenció és per ordre judicial / busca i captura)",

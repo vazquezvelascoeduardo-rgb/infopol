@@ -15,14 +15,12 @@
     "Art. 246-247 CP (alteració de fites, defraudació de fluid)",
     "LO 1/2026, de 8 d'abril (multireincidència en furts i estafes lleus)"
   ],
-
   "diferencia_clau": {
     "furt_234": "Apoderament SENSE força ni violència",
     "robatori_force_237": "Apoderament AMB FORÇA en les coses (escalament, fractura, claus falses…)",
     "robatori_violencia_242": "Apoderament AMB VIOLÈNCIA o intimidació en persones",
     "sostraccio_244": "Ús temporal vehicle motor SENSE ànim apropiació definitiva"
   },
-
   "modalitats_forca_238": [
     "Escalament (entrar per lloc no destinat a accés)",
     "Trencament de paret, sostre o terra",
@@ -32,7 +30,6 @@
     "Inutilització de sistemes d'alarma o protecció específica",
     "Desconnexió/inutilització dispositius antifurt"
   ],
-
   "agreujants_235": [
     "1. Coses de valor artístic/històric/cultural/científic",
     "2. Coses de primera necessitat amb greu situació desproveïment",
@@ -44,55 +41,112 @@
     "8. Utilitzant menors de 16 anys",
     "10. NOU (LO 1/2026): telèfons mòbils o dispositius mòbils de comunicació susceptibles de contenir dades personals (235.1.10a)"
   ],
-
   "inici": "modalitat",
   "nodes": {
-
     "modalitat": {
       "titol": "Modalitat d'apoderament",
       "opcions": [
-        { "etiqueta": "Apoderament SENSE força ni violència (FURT)",                    "va_a": "furt_valor" },
-        { "etiqueta": "Amb FORÇA en les coses (ROBATORI)",                              "va_a": "robatori_force_lloc" },
-        { "etiqueta": "Amb VIOLÈNCIA o INTIMIDACIÓ a persones",                          "va_a": "robatori_violencia" },
-        { "etiqueta": "Vehicle a motor — ús temporal",                                  "va_a": "fi_244_sostraccio" },
-        { "etiqueta": "EXTORSIÓ (forçar amb violència acte jurídic perjudicial)",       "va_a": "fi_243_extorsio" },
-        { "etiqueta": "Defraudació fluid elèctric / aigua / gas",                       "va_a": "fi_255_defraudacio" },
-        { "etiqueta": "Apoderament intentat — frustrat",                                "va_a": "fi_temptativa" }
+        {
+          "etiqueta": "Apoderament SENSE força ni violència (FURT)",
+          "va_a": "furt_valor"
+        },
+        {
+          "etiqueta": "Amb FORÇA en les coses (ROBATORI)",
+          "va_a": "robatori_force_lloc"
+        },
+        {
+          "etiqueta": "Amb VIOLÈNCIA o INTIMIDACIÓ a persones",
+          "va_a": "robatori_violencia"
+        },
+        {
+          "etiqueta": "Vehicle a motor — ús temporal",
+          "va_a": "fi_244_sostraccio"
+        },
+        {
+          "etiqueta": "EXTORSIÓ (forçar amb violència acte jurídic perjudicial)",
+          "va_a": "fi_243_extorsio"
+        },
+        {
+          "etiqueta": "Defraudació fluid elèctric / aigua / gas",
+          "va_a": "fi_255_defraudacio"
+        },
+        {
+          "etiqueta": "Apoderament intentat — frustrat",
+          "va_a": "fi_temptativa"
+        }
       ]
     },
-
     "furt_valor": {
       "titol": "Furt — valor del sostret + circumstàncies",
       "opcions": [
-        { "etiqueta": "Valor ≤ 400 € (delicte LLEU)",                                  "va_a": "fi_furt_lleu" },
-        { "etiqueta": "Valor > 400 € (delicte bàsic)",                                  "va_a": "fi_furt_basic" },
-        { "etiqueta": "Multireincidència (3+ condemnes executòries — LO 1/2026)",       "va_a": "fi_furt_habitual_235" },
-        { "etiqueta": "Furt amb agreujants 235 (valor especial, ART/HISTÒRIC, infraestructures…)", "va_a": "fi_furt_agreujat_235" },
-        { "etiqueta": "Furt en establiment + multireincidència",                        "va_a": "fi_furt_habitual_235" }
+        {
+          "etiqueta": "Valor ≤ 400 € (delicte LLEU)",
+          "va_a": "fi_furt_lleu"
+        },
+        {
+          "etiqueta": "Valor > 400 € (delicte bàsic)",
+          "va_a": "fi_furt_basic"
+        },
+        {
+          "etiqueta": "Multireincidència (3+ condemnes executòries — LO 1/2026)",
+          "va_a": "fi_furt_habitual_235"
+        },
+        {
+          "etiqueta": "Furt amb agreujants 235 (valor especial, ART/HISTÒRIC, infraestructures…)",
+          "va_a": "fi_furt_agreujat_235"
+        },
+        {
+          "etiqueta": "Furt en establiment + multireincidència",
+          "va_a": "fi_furt_habitual_235"
+        }
       ]
     },
-
     "robatori_force_lloc": {
       "titol": "On s'ha comès el robatori amb força?",
       "opcions": [
-        { "etiqueta": "HABITATGE habitual / segona residència",                         "va_a": "fi_241_habitatge" },
-        { "etiqueta": "Establiment / local OBERT al públic",                            "va_a": "fi_240_basic" },
-        { "etiqueta": "Vehicle aparcat (sostraccions de l'interior)",                   "va_a": "fi_240_basic" },
-        { "etiqueta": "Edifici/local en construcció",                                   "va_a": "fi_240_basic" },
-        { "etiqueta": "Element infraestructura crítica (estació, hospital, etc.)",     "va_a": "fi_240_agreujat_235" }
+        {
+          "etiqueta": "HABITATGE habitual / segona residència",
+          "va_a": "fi_241_habitatge"
+        },
+        {
+          "etiqueta": "Establiment / local OBERT al públic",
+          "va_a": "fi_240_basic"
+        },
+        {
+          "etiqueta": "Vehicle aparcat (sostraccions de l'interior)",
+          "va_a": "fi_240_basic"
+        },
+        {
+          "etiqueta": "Edifici/local en construcció",
+          "va_a": "fi_240_basic"
+        },
+        {
+          "etiqueta": "Element infraestructura crítica (estació, hospital, etc.)",
+          "va_a": "fi_240_agreujat_235"
+        }
       ]
     },
-
     "robatori_violencia": {
       "titol": "Robatori amb violència — circumstàncies",
       "opcions": [
-        { "etiqueta": "Bàsic (estrebada, empenta, amenaça verbal)",                    "va_a": "fi_242_1_basic" },
-        { "etiqueta": "A casa habitada (entrant)",                                      "va_a": "fi_242_2_habitat" },
-        { "etiqueta": "Amb ARMES o mitjans perillosos",                                 "va_a": "fi_242_3_armes" },
-        { "etiqueta": "Amb arma + casa habitada (concurs greu)",                       "va_a": "fi_242_concurs" }
+        {
+          "etiqueta": "Bàsic (estrebada, empenta, amenaça verbal)",
+          "va_a": "fi_242_1_basic"
+        },
+        {
+          "etiqueta": "A casa habitada (entrant)",
+          "va_a": "fi_242_2_habitat"
+        },
+        {
+          "etiqueta": "Amb ARMES o mitjans perillosos",
+          "va_a": "fi_242_3_armes"
+        },
+        {
+          "etiqueta": "Amb arma + casa habitada (concurs greu)",
+          "va_a": "fi_242_concurs"
+        }
       ]
     },
-
     "fi_furt_lleu": {
       "final": true,
       "tipus": "penal",
@@ -125,7 +179,6 @@
         "A 16 — Recollida-lliurament objectes (si es restitueixen efectes)"
       ]
     },
-
     "fi_furt_basic": {
       "final": true,
       "tipus": "penal",
@@ -148,6 +201,7 @@
       "documentacio": "Atestat penal + acta intervenció + cadena custòdia + tasació + gravacions càmeres si n'hi ha",
       "actes_viladecans": [
         "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "N 02 — Drets víctima/persona perjudicada (sempre)",
         "D24 — Furt establiment comercial (si furt en establiment)",
         "G31 — Minuta furt establiment (si furt en establiment)",
@@ -157,7 +211,6 @@
         "A 56 — Reconeixement i entrega d'efectes (si el perjudicat reconeix efectes recuperats)"
       ]
     },
-
     "fi_furt_habitual_235": {
       "final": true,
       "tipus": "penal",
@@ -174,13 +227,13 @@
       "documentacio": "Atestat + antecedents + acta intervenció efectes",
       "actes_viladecans": [
         "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "N 02 — Drets víctima/persona perjudicada (sempre)",
         "D24 — Furt establiment comercial (si furt en establiment)",
         "G31 — Minuta furt establiment (si furt en establiment)",
         "D 06 — Llista d'objectes sostrets-perduts-intervinguts (si efectes)"
       ]
     },
-
     "fi_furt_agreujat_235": {
       "final": true,
       "tipus": "penal",
@@ -203,11 +256,11 @@
       ],
       "actes_viladecans": [
         "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "N 02 — Drets víctima/persona perjudicada (sempre)",
         "D 06 — Llista d'objectes sostrets-perduts-intervinguts (si efectes)"
       ]
     },
-
     "fi_240_basic": {
       "final": true,
       "tipus": "penal",
@@ -232,11 +285,11 @@
         "D 05 — Robatori interior vehicle, versió ANG (si sostracció d'interior de vehicle amb víctima estrangera)",
         "D 06 — Llista d'objectes sostrets-perduts-intervinguts (sempre)",
         "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 16 — Recollida-lliurament objectes (si restitució)",
         "A 56 — Reconeixement i entrega d'efectes (si el perjudicat reconeix efectes recuperats)"
       ]
     },
-
     "fi_240_agreujat_235": {
       "final": true,
       "tipus": "penal",
@@ -245,11 +298,11 @@
       "accions": "Mateixes que 240 bàsic + comunicació especialitzada (si infraestructura crítica)",
       "actes_viladecans": [
         "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "N 02 — Drets víctima/persona perjudicada (sempre)",
         "D 06 — Llista d'objectes sostrets-perduts-intervinguts (si efectes)"
       ]
     },
-
     "fi_241_habitatge": {
       "final": true,
       "tipus": "penal",
@@ -277,12 +330,12 @@
       "documentacio": "Atestat + inspecció ocular + acta intervenció efectes + cadena custòdia + tasació + gravacions càmeres + testimonis",
       "actes_viladecans": [
         "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "N 02 — Drets víctima/persona perjudicada (sempre)",
         "D 06 — Llista d'objectes sostrets-perduts-intervinguts (sempre)",
         "A 56 — Reconeixement i entrega d'efectes (si es recuperen efectes)"
       ]
     },
-
     "fi_242_1_basic": {
       "final": true,
       "tipus": "penal",
@@ -302,11 +355,11 @@
       "documentacio": "Atestat + parte mèdic + descripció autor + identificació posada a disposició",
       "actes_viladecans": [
         "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "N 02 — Drets víctima/persona perjudicada (sempre)",
         "D 06 — Llista d'objectes sostrets-perduts-intervinguts (sempre)"
       ]
     },
-
     "fi_242_2_habitat": {
       "final": true,
       "tipus": "penal",
@@ -321,11 +374,11 @@
       ],
       "actes_viladecans": [
         "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "N 02 — Drets víctima/persona perjudicada (sempre)",
         "D 06 — Llista d'objectes sostrets-perduts-intervinguts (sempre)"
       ]
     },
-
     "fi_242_3_armes": {
       "final": true,
       "tipus": "penal",
@@ -344,11 +397,11 @@
       ],
       "actes_viladecans": [
         "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "N 02 — Drets víctima/persona perjudicada (sempre)",
         "D 06 — Llista d'objectes sostrets-perduts-intervinguts (sempre)"
       ]
     },
-
     "fi_242_concurs": {
       "final": true,
       "tipus": "penal",
@@ -357,11 +410,11 @@
       "accions": "Mateixes 242.3 + actuació coordinada Mossos DIC",
       "actes_viladecans": [
         "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "N 02 — Drets víctima/persona perjudicada (sempre)",
         "D 06 — Llista d'objectes sostrets-perduts-intervinguts (sempre)"
       ]
     },
-
     "fi_244_sostraccio": {
       "final": true,
       "tipus": "penal",
@@ -381,11 +434,11 @@
       "actes_viladecans": [
         "N 02 — Drets víctima/persona perjudicada (sempre)",
         "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 16 — Recollida-lliurament objectes (si restitució del vehicle/efectes)",
         "D 06 — Llista d'objectes sostrets-perduts-intervinguts (si efectes a l'interior)"
       ]
     },
-
     "fi_243_extorsio": {
       "final": true,
       "tipus": "penal",
@@ -406,10 +459,10 @@
       ],
       "actes_viladecans": [
         "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "N 01 — Drets detingut (si detenció)"
+        "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)"
       ]
     },
-
     "fi_255_defraudacio": {
       "final": true,
       "tipus": "penal",
@@ -429,7 +482,6 @@
         "N 10 — Citació judici ràpid per delicte lleu (JIDL, si ≤ 400 €)"
       ]
     },
-
     "fi_temptativa": {
       "final": true,
       "tipus": "penal",
@@ -442,6 +494,7 @@
       ],
       "actes_viladecans": [
         "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "N 02 — Drets víctima/persona perjudicada (sempre)",
         "N 09 — Drets i fets persona denunciada per delicte lleu (JIDL, si temptativa de furt lleu)",
         "N 10 — Citació judici ràpid per delicte lleu (JIDL, si temptativa de furt lleu)"

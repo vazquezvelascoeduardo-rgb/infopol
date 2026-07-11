@@ -21,67 +21,127 @@
   ],
   "inici": "causa_objectiva",
   "nodes": {
-
     "causa_objectiva": {
       "titol": "Causa objectiva per identificar (Art. 16 LOPSC)",
       "text": "Per què demanes la identificació? Cal causa objectiva sempre.",
       "info": "Causes legítimes: (1) indicis de participació en infracció administrativa o penal; (2) prevenció raonable d'un delicte; (3) investigació d'un fet il·lícit; (4) exercici de funcions de protecció de la seguretat. Sense causa: la identificació és nul·la i pot generar responsabilitat de l'agent.",
       "opcions": [
-        { "etiqueta": "Indicis de participació en infracció (admin o penal)",  "va_a": "peticio_document" },
-        { "etiqueta": "Prevenció raonable de delicte",                         "va_a": "peticio_document" },
-        { "etiqueta": "Investigació d'un fet il·lícit",                        "va_a": "peticio_document" },
-        { "etiqueta": "Control preventiu en zona/horari de risc",              "va_a": "peticio_document" },
-        { "etiqueta": "Sense causa objectiva",                                  "va_a": "fi_no_procedeix" }
+        {
+          "etiqueta": "Indicis de participació en infracció (admin o penal)",
+          "va_a": "peticio_document"
+        },
+        {
+          "etiqueta": "Prevenció raonable de delicte",
+          "va_a": "peticio_document"
+        },
+        {
+          "etiqueta": "Investigació d'un fet il·lícit",
+          "va_a": "peticio_document"
+        },
+        {
+          "etiqueta": "Control preventiu en zona/horari de risc",
+          "va_a": "peticio_document"
+        },
+        {
+          "etiqueta": "Sense causa objectiva",
+          "va_a": "fi_no_procedeix"
+        }
       ]
     },
-
     "peticio_document": {
       "titol": "Petició formal del document",
       "text": "Demanes el document identificatiu. Resposta?",
       "info": "Llenguatge respectuós però ferm: 'Bon dia, soc agent [nom/TIP], necessito identificar-lo per [motiu]. Si us plau, faci'm a mans el seu document d'identitat.'",
       "opcions": [
-        { "etiqueta": "Presenta DNI/NIE/passaport vàlid",                     "va_a": "comprovar_validesa" },
-        { "etiqueta": "No el porta físicament però col·labora amb dades",     "va_a": "verificacio_telematica" },
-        { "etiqueta": "Es nega d'entrada",                                     "va_a": "advertiment_formal" },
-        { "etiqueta": "Presenta document SOSPITÓS de ser fals",               "va_a": "fi_doc_sospitos" },
-        { "etiqueta": "Dona dades falses verbalment",                          "va_a": "fi_dades_falses" }
+        {
+          "etiqueta": "Presenta DNI/NIE/passaport vàlid",
+          "va_a": "comprovar_validesa"
+        },
+        {
+          "etiqueta": "No el porta físicament però col·labora amb dades",
+          "va_a": "verificacio_telematica"
+        },
+        {
+          "etiqueta": "Es nega d'entrada",
+          "va_a": "advertiment_formal"
+        },
+        {
+          "etiqueta": "Presenta document SOSPITÓS de ser fals",
+          "va_a": "fi_doc_sospitos"
+        },
+        {
+          "etiqueta": "Dona dades falses verbalment",
+          "va_a": "fi_dades_falses"
+        }
       ]
     },
-
     "comprovar_validesa": {
       "titol": "Verificació del document",
       "text": "Comprovar al SIPCAT/SIP/DGT. Resultat?",
       "opcions": [
-        { "etiqueta": "Identitat confirmada — sense antecedents/requeriments", "va_a": "fi_ok_identificat" },
-        { "etiqueta": "Identitat confirmada — té REQUERIMENT pendent",         "va_a": "fi_requeriment" },
-        { "etiqueta": "Identitat confirmada — té antecedents (no requeriment)","va_a": "fi_ok_identificat_antec" },
-        { "etiqueta": "Sistema sense resposta",                                "va_a": "fi_ok_provisional" }
+        {
+          "etiqueta": "Identitat confirmada — sense antecedents/requeriments",
+          "va_a": "fi_ok_identificat"
+        },
+        {
+          "etiqueta": "Identitat confirmada — té REQUERIMENT pendent",
+          "va_a": "fi_requeriment"
+        },
+        {
+          "etiqueta": "Identitat confirmada — té antecedents (no requeriment)",
+          "va_a": "fi_ok_identificat_antec"
+        },
+        {
+          "etiqueta": "Sistema sense resposta",
+          "va_a": "fi_ok_provisional"
+        }
       ]
     },
-
     "verificacio_telematica": {
       "titol": "Verificació telemàtica (sense document físic)",
       "text": "Mètodes alternatius (Pautes UF 3.3): consulta SIP per dades verbals, comparativa amb foto del sistema, contacte amb familiar que porti el document, comprovació amb carnet amb foto (transport, esports).",
       "opcions": [
-        { "etiqueta": "Verificat telemàticament (foto + dades coincideixen)",  "va_a": "fi_ok_identificat" },
-        { "etiqueta": "Té document a casa proper — pot anar a buscar-lo",       "va_a": "fi_ok_provisional" },
-        { "etiqueta": "Familiar porta document a la zona",                      "va_a": "fi_ok_provisional" },
-        { "etiqueta": "No es pot verificar de cap manera",                     "va_a": "fi_trasllat_17" }
+        {
+          "etiqueta": "Verificat telemàticament (foto + dades coincideixen)",
+          "va_a": "fi_ok_identificat"
+        },
+        {
+          "etiqueta": "Té document a casa proper — pot anar a buscar-lo",
+          "va_a": "fi_ok_provisional"
+        },
+        {
+          "etiqueta": "Familiar porta document a la zona",
+          "va_a": "fi_ok_provisional"
+        },
+        {
+          "etiqueta": "No es pot verificar de cap manera",
+          "va_a": "fi_trasllat_17"
+        }
       ]
     },
-
     "advertiment_formal": {
       "titol": "Advertiment formal de conseqüències",
       "text": "Adverteix verbalment i de forma clara: la negativa pot ser infracció (36.6 LOPSC) o delicte (556 CP). Cal donar oportunitat real de complir.",
       "info_frase_advertiment": "'L'adverteixo formalment que té obligació legal d'identificar-se. La negativa constitueix infracció administrativa de l'art. 36.6 de la LOPSC, sancionable amb 601 a 30.000 €. Si la negativa és reiterada i greu, podrà constituir un delicte de desobediència de l'art. 556 del Codi Penal. Insisteixo, vol identificar-se?'",
       "opcions": [
-        { "etiqueta": "Accedeix després de l'advertiment",                     "va_a": "peticio_document" },
-        { "etiqueta": "Continua negant-se PASSIVAMENT (sense força)",          "va_a": "fi_36_6_lopsc" },
-        { "etiqueta": "Negativa amb actitud RESISTENT (força física)",         "va_a": "fi_resistencia_556" },
-        { "etiqueta": "Agressió o intent agressió a l'agent",                  "va_a": "fi_atemptat_550" }
+        {
+          "etiqueta": "Accedeix després de l'advertiment",
+          "va_a": "peticio_document"
+        },
+        {
+          "etiqueta": "Continua negant-se PASSIVAMENT (sense força)",
+          "va_a": "fi_36_6_lopsc"
+        },
+        {
+          "etiqueta": "Negativa amb actitud RESISTENT (força física)",
+          "va_a": "fi_resistencia_556"
+        },
+        {
+          "etiqueta": "Agressió o intent agressió a l'agent",
+          "va_a": "fi_atemptat_550"
+        }
       ]
     },
-
     "fi_no_procedeix": {
       "final": true,
       "tipus": "avis",
@@ -89,7 +149,6 @@
       "text": "Sense causa objectiva la identificació seria il·lícita. Pot generar responsabilitat de l'agent.",
       "accio": "Desistir educadament. Si hi ha indicis posteriors, podràs identificar després."
     },
-
     "fi_ok_identificat": {
       "final": true,
       "tipus": "ok",
@@ -101,7 +160,6 @@
       ],
       "documentacio": "Anotació al servei. No cal acta específica si la identificació és la sola actuació."
     },
-
     "fi_ok_identificat_antec": {
       "final": true,
       "tipus": "ok",
@@ -109,14 +167,12 @@
       "info": "Antecedents NO són motiu per detenir. Cal nou fet delictiu.",
       "accio": "Anotar al servei. Vigilància si pertinent. Si flagrant: actuar."
     },
-
     "fi_ok_provisional": {
       "final": true,
       "tipus": "ok",
       "titol": "✅ Identificació provisional",
       "accio": "Verificada amb mitjans alternatius. Anotar al servei."
     },
-
     "fi_requeriment": {
       "final": true,
       "tipus": "procediment",
@@ -131,10 +187,10 @@
       "documentacio": "Diligència de localització + atestat si detenció",
       "actes_viladecans": [
         "A 55 — Detenció per reclamació judicial (si ordre de detenció / busca i captura)",
-        "N 01 — Informació drets persona detinguda (si es practica detenció)"
+        "N 01 — Informació drets persona detinguda (si es practica detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)"
       ]
     },
-
     "fi_trasllat_17": {
       "final": true,
       "tipus": "procediment",
@@ -160,7 +216,6 @@
         "A 58 — Presentació d'estranger a efectes d'identificació (si es tracta d'un estranger indocumentat)"
       ]
     },
-
     "fi_36_6_lopsc": {
       "final": true,
       "tipus": "administrativa",
@@ -192,7 +247,6 @@
         "G 58 — Volant d'estada en dependències per identificació (si hi ha hagut trasllat)"
       ]
     },
-
     "fi_dades_falses": {
       "final": true,
       "tipus": "administrativa",
@@ -204,14 +258,12 @@
         "D 10 — Denúncia infracció Llei 4/2015 (al·legació de dades falses o inexactes en la identificació, art. 36.6 LOPSC)"
       ]
     },
-
     "fi_doc_sospitos": {
       "final": true,
       "tipus": "procediment",
       "titol": "🔍 Document sospitós — anar a checklist 'Documentació falsa'",
       "accio": "Retenir el document. Comprovar SIP/DGT. Si confirmat fals → Art. 392/393 CP (atestat penal)."
     },
-
     "fi_resistencia_556": {
       "final": true,
       "tipus": "penal",
@@ -241,12 +293,11 @@
       "documentacio_clau": "Atestat penal + diligència drets + parte mèdic si lesions",
       "actes_viladecans": [
         "N 01 — Informació drets persona detinguda (en el moment de la detenció)",
-        "AD 01 — Acta declaració detingut (si declara a dependències)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes persona detinguda (escorcoll incident a la detenció)",
         "G 58 — Volant d'estada en dependències (en sortir de dependències)"
       ]
     },
-
     "fi_atemptat_550": {
       "final": true,
       "tipus": "penal",
@@ -255,7 +306,7 @@
       "accio": "Detenció + atestat penal Art. 550 CP",
       "actes_viladecans": [
         "N 01 — Informació drets persona detinguda (en el moment de la detenció)",
-        "AD 01 — Acta declaració detingut (si declara a dependències)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes persona detinguda (escorcoll incident a la detenció)"
       ]
     }

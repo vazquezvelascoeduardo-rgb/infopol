@@ -11,39 +11,77 @@
   ],
   "inici": "tipus_document",
   "nodes": {
-
     "tipus_document": {
       "titol": "Quin element és sospitós?",
       "opcions": [
-        { "etiqueta": "Permís de conduir",                        "va_a": "doc_sospita" },
-        { "etiqueta": "DNI / NIE / passaport",                    "va_a": "doc_sospita" },
-        { "etiqueta": "Permís circulació / fitxa tècnica",         "va_a": "doc_sospita" },
-        { "etiqueta": "Matrícula (placa) manipulada/canviada",     "va_a": "matricula_tipus" },
-        { "etiqueta": "Matrícula tapada/il·legible (no canviada)","va_a": "fi_matricula_tapada" },
-        { "etiqueta": "Adhesiu ITV fals",                         "va_a": "doc_sospita" },
-        { "etiqueta": "Pòlissa assegurança falsificada",          "va_a": "doc_sospita" },
-        { "etiqueta": "Permís internacional fals",                "va_a": "doc_sospita" }
+        {
+          "etiqueta": "Permís de conduir",
+          "va_a": "doc_sospita"
+        },
+        {
+          "etiqueta": "DNI / NIE / passaport",
+          "va_a": "doc_sospita"
+        },
+        {
+          "etiqueta": "Permís circulació / fitxa tècnica",
+          "va_a": "doc_sospita"
+        },
+        {
+          "etiqueta": "Matrícula (placa) manipulada/canviada",
+          "va_a": "matricula_tipus"
+        },
+        {
+          "etiqueta": "Matrícula tapada/il·legible (no canviada)",
+          "va_a": "fi_matricula_tapada"
+        },
+        {
+          "etiqueta": "Adhesiu ITV fals",
+          "va_a": "doc_sospita"
+        },
+        {
+          "etiqueta": "Pòlissa assegurança falsificada",
+          "va_a": "doc_sospita"
+        },
+        {
+          "etiqueta": "Permís internacional fals",
+          "va_a": "doc_sospita"
+        }
       ]
     },
-
     "doc_sospita": {
       "titol": "Nivell de certesa",
       "opcions": [
-        { "etiqueta": "Sospita per indicis (lletra, mida, hologrames, etc.)", "va_a": "fi_retencio_investigar" },
-        { "etiqueta": "Evidència clara (comparativa SIP, DGT)",              "va_a": "fi_penal_392" },
-        { "etiqueta": "Reconeix que és fals",                                 "va_a": "fi_penal_392" }
+        {
+          "etiqueta": "Sospita per indicis (lletra, mida, hologrames, etc.)",
+          "va_a": "fi_retencio_investigar"
+        },
+        {
+          "etiqueta": "Evidència clara (comparativa SIP, DGT)",
+          "va_a": "fi_penal_392"
+        },
+        {
+          "etiqueta": "Reconeix que és fals",
+          "va_a": "fi_penal_392"
+        }
       ]
     },
-
     "matricula_tipus": {
       "titol": "Tipus de manipulació",
       "opcions": [
-        { "etiqueta": "Matrícula d'un altre vehicle",                "va_a": "fi_penal_392_matricula" },
-        { "etiqueta": "Matrícula artesanal / no oficial",            "va_a": "fi_penal_392_matricula" },
-        { "etiqueta": "Bastidor (VIN) esborrat o manipulat",         "va_a": "fi_penal_392_bastidor" }
+        {
+          "etiqueta": "Matrícula d'un altre vehicle",
+          "va_a": "fi_penal_392_matricula"
+        },
+        {
+          "etiqueta": "Matrícula artesanal / no oficial",
+          "va_a": "fi_penal_392_matricula"
+        },
+        {
+          "etiqueta": "Bastidor (VIN) esborrat o manipulat",
+          "va_a": "fi_penal_392_bastidor"
+        }
       ]
     },
-
     "fi_retencio_investigar": {
       "final": true,
       "tipus": "mixta",
@@ -61,7 +99,6 @@
         "G 58 — Volant d'estada en dependències per identificació (si escau)"
       ]
     },
-
     "fi_penal_392": {
       "final": true,
       "tipus": "penal",
@@ -80,14 +117,13 @@
       "documentacio": "Atestat + acta intervenció + cadena custòdia + fotografies",
       "actes_viladecans": [
         "N 01 — Drets persona detinguda (+ versions idiomes si estranger)",
-        "AD 01 — Acta declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes persona detinguda",
         "I 55 — Cadena de custòdia (document intervingut)",
         "A 58 — Presentació d'estranger a efectes d'identificació (si escau)",
         "G 58 — Volant d'estada en dependències per identificació (si escau)"
       ]
     },
-
     "fi_penal_392_matricula": {
       "final": true,
       "tipus": "penal",
@@ -105,14 +141,13 @@
       ],
       "actes_viladecans": [
         "N 01 — Drets persona detinguda (+ versions idiomes si estranger)",
-        "AD 01 — Acta declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes persona detinguda",
         "I 55 — Cadena de custòdia (matrícules/documents intervinguts)",
         "A 58 — Presentació d'estranger a efectes d'identificació (si escau)",
         "G 58 — Volant d'estada en dependències per identificació (si escau)"
       ]
     },
-
     "fi_penal_392_bastidor": {
       "final": true,
       "tipus": "penal",
@@ -128,14 +163,13 @@
       ],
       "actes_viladecans": [
         "N 01 — Drets persona detinguda (+ versions idiomes si estranger)",
-        "AD 01 — Acta declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes persona detinguda",
         "I 55 — Cadena de custòdia (vehicle/elements intervinguts)",
         "A 58 — Presentació d'estranger a efectes d'identificació (si escau)",
         "G 58 — Volant d'estada en dependències per identificació (si escau)"
       ]
     },
-
     "fi_matricula_tapada": {
       "final": true,
       "tipus": "administrativa",

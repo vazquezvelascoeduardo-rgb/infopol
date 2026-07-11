@@ -236,7 +236,7 @@
       "info_acta_A20": "L'acta A-20 ha de contenir: origen, embolcall, característiques externes, aparença, mètode obtenció, bàscula utilitzada (ABP/farmàcia amb segell), descripció detallada (paperina, pols blanca, bossa, paquet tabac…), circumstàncies localització (mans, butxaques, indumentària, cavitats naturals, llençat a terra), nombre unitats, pes en brut",
       "actes_viladecans": [
         "N 01 — Informació drets persona detinguda (delicte 368 CP)",
-        "AD 01 — Acta declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes persona detinguda",
         "A 20 — Pesada de substàncies estupefaents (pes brut, davant l'interessat)",
         "A 66 — Lliurament bossa amb mostres per a estudi toxicològic",
@@ -259,7 +259,7 @@
       ],
       "actes_viladecans": [
         "N 01 — Informació drets persona detinguda (delicte 368.1 CP)",
-        "AD 01 — Acta declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes persona detinguda",
         "A 20 — Pesada de substàncies estupefaents",
         "A 66 — Lliurament bossa amb mostres per a estudi toxicològic",
@@ -274,7 +274,7 @@
       "accions": "Mateixes que 368.1 greu",
       "actes_viladecans": [
         "N 01 — Informació drets persona detinguda (delicte 368.1 CP)",
-        "AD 01 — Acta declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes persona detinguda",
         "A 20 — Pesada de substàncies estupefaents",
         "A 66 — Lliurament bossa amb mostres per a estudi toxicològic",
@@ -303,7 +303,6 @@
       ],
       "actes_viladecans": [
         "N 01 — Informació drets persona detinguda (delicte 369 CP)",
-        "AD 01 — Acta declaració detingut",
         "PD 06 — Objectes persona detinguda",
         "A 20 — Pesada de substàncies estupefaents",
         "A 66 — Lliurament bossa amb mostres per a estudi toxicològic",

@@ -17,7 +17,6 @@
     "Art. 147-150 CP (lesions)",
     "Art. 550-556 CP (atemptat/resistència)"
   ],
-
   "diferencia_clau": {
     "admin_36_1_LOPSC": "Pertorbacions seguretat ciutadana sense violència greu — multa 601-30.000 €",
     "penal_557_CP": "GRUP + fi d'atemptar contra la pau pública + violència o INTIMIDACIÓ (persones/coses, obstaculitzar vies amb perill, envair instal·lacions de serveis essencials) — presó 6m-3 anys (LO 14/2022)",
@@ -25,61 +24,117 @@
     "penal_154_CP": "BARALLA tumultuària amb mitjans perillosos i autors indeterminats — presó 3m-1 any",
     "penal_atemptat_550": "Si la baralla involucra agressió a agents → atemptat"
   },
-
   "inici": "situacio",
   "nodes": {
-
     "situacio": {
       "titol": "Situació detectada",
       "opcions": [
-        { "etiqueta": "BARALLA entre PARTICULARS (no col·lectiva)",                       "va_a": "baralla_lesions" },
-        { "etiqueta": "BARALLA TUMULTUÀRIA en grup amb armes/mitjans perillosos",       "va_a": "fi_154_baralla_tumult" },
-        { "etiqueta": "DESORDRES públics — grup pertorba pau pública",                   "va_a": "desordres_gravetat" },
-        { "etiqueta": "Insults/crits SENSE arribar a violència",                         "va_a": "respecte_destinatari" },
-        { "etiqueta": "DESOBEDIÈNCIA / RESISTÈNCIA a agents",                             "va_a": "fi_remetre_atemptat" },
-        { "etiqueta": "MANIFESTACIÓ amb alteració greu",                                 "va_a": "manifestacio_tipus" },
-        { "etiqueta": "Invasió/ocupació de local o establiment (recinte esportiu, espectacle…)", "va_a": "fi_557_557_ter_esport" },
-        { "etiqueta": "Obstrucció via pública (no manif)",                                "va_a": "fi_37_14_obstruccio" }
+        {
+          "etiqueta": "BARALLA entre PARTICULARS (no col·lectiva)",
+          "va_a": "baralla_lesions"
+        },
+        {
+          "etiqueta": "BARALLA TUMULTUÀRIA en grup amb armes/mitjans perillosos",
+          "va_a": "fi_154_baralla_tumult"
+        },
+        {
+          "etiqueta": "DESORDRES públics — grup pertorba pau pública",
+          "va_a": "desordres_gravetat"
+        },
+        {
+          "etiqueta": "Insults/crits SENSE arribar a violència",
+          "va_a": "respecte_destinatari"
+        },
+        {
+          "etiqueta": "DESOBEDIÈNCIA / RESISTÈNCIA a agents",
+          "va_a": "fi_remetre_atemptat"
+        },
+        {
+          "etiqueta": "MANIFESTACIÓ amb alteració greu",
+          "va_a": "manifestacio_tipus"
+        },
+        {
+          "etiqueta": "Invasió/ocupació de local o establiment (recinte esportiu, espectacle…)",
+          "va_a": "fi_557_557_ter_esport"
+        },
+        {
+          "etiqueta": "Obstrucció via pública (no manif)",
+          "va_a": "fi_37_14_obstruccio"
+        }
       ]
     },
-
     "baralla_lesions": {
       "titol": "Resultat de la baralla particulars",
       "opcions": [
-        { "etiqueta": "Sí, hi ha LESIONS (anar checklist Lesions)",                       "va_a": "fi_remetre_lesions" },
-        { "etiqueta": "Només empentes / amenaces mútues sense lesió",                    "va_a": "fi_36_1_lopsc" },
-        { "etiqueta": "Lesions a UN sense saber autor concret (autors indeterminats)",   "va_a": "fi_154_indeterminats" }
+        {
+          "etiqueta": "Sí, hi ha LESIONS (anar checklist Lesions)",
+          "va_a": "fi_remetre_lesions"
+        },
+        {
+          "etiqueta": "Només empentes / amenaces mútues sense lesió",
+          "va_a": "fi_36_1_lopsc"
+        },
+        {
+          "etiqueta": "Lesions a UN sense saber autor concret (autors indeterminats)",
+          "va_a": "fi_154_indeterminats"
+        }
       ]
     },
-
     "desordres_gravetat": {
       "titol": "Gravetat dels desordres",
       "opcions": [
-        { "etiqueta": "Obstrucció via / pertorbació LLEU sense violència",               "va_a": "fi_37_14_obstruccio" },
-        { "etiqueta": "GRUP amb violència contra persones/coses (557 CP)",                "va_a": "fi_557_basic" },
-        { "etiqueta": "MULTITUD nombrosa / instruments perillosos / armes de foc (557.2-557.3)", "va_a": "fi_557_bis_agreujat" },
-        { "etiqueta": "Manifestacions / espais públics amb alteració",                    "va_a": "fi_36_2_lopsc" }
+        {
+          "etiqueta": "Obstrucció via / pertorbació LLEU sense violència",
+          "va_a": "fi_37_14_obstruccio"
+        },
+        {
+          "etiqueta": "GRUP amb violència contra persones/coses (557 CP)",
+          "va_a": "fi_557_basic"
+        },
+        {
+          "etiqueta": "MULTITUD nombrosa / instruments perillosos / armes de foc (557.2-557.3)",
+          "va_a": "fi_557_bis_agreujat"
+        },
+        {
+          "etiqueta": "Manifestacions / espais públics amb alteració",
+          "va_a": "fi_36_2_lopsc"
+        }
       ]
     },
-
     "respecte_destinatari": {
       "titol": "Destinatari dels insults / crits",
       "opcions": [
-        { "etiqueta": "Particulars (no autoritats)",                                      "va_a": "fi_no_delicte_admin" },
-        { "etiqueta": "Manca respecte AGENTS DE L'AUTORITAT",                              "va_a": "fi_37_4_manca_respecte" },
-        { "etiqueta": "AUTORITAT (jutge, alcalde…) — delicte lleu",                      "va_a": "fi_remetre_atemptat" }
+        {
+          "etiqueta": "Particulars (no autoritats)",
+          "va_a": "fi_no_delicte_admin"
+        },
+        {
+          "etiqueta": "Manca respecte AGENTS DE L'AUTORITAT",
+          "va_a": "fi_37_4_manca_respecte"
+        },
+        {
+          "etiqueta": "AUTORITAT (jutge, alcalde…) — delicte lleu",
+          "va_a": "fi_remetre_atemptat"
+        }
       ]
     },
-
     "manifestacio_tipus": {
       "titol": "Tipus manifestació",
       "opcions": [
-        { "etiqueta": "Manifestació autoritzada amb alteracions",                         "va_a": "fi_36_2_lopsc" },
-        { "etiqueta": "Manifestació SENSE comunicar amb risc",                           "va_a": "fi_36_3_lopsc" },
-        { "etiqueta": "Escalada amb violència → desordres greus",                        "va_a": "fi_557_basic" }
+        {
+          "etiqueta": "Manifestació autoritzada amb alteracions",
+          "va_a": "fi_36_2_lopsc"
+        },
+        {
+          "etiqueta": "Manifestació SENSE comunicar amb risc",
+          "va_a": "fi_36_3_lopsc"
+        },
+        {
+          "etiqueta": "Escalada amb violència → desordres greus",
+          "va_a": "fi_557_basic"
+        }
       ]
     },
-
     "fi_36_1_lopsc": {
       "final": true,
       "tipus": "administrativa",
@@ -100,7 +155,6 @@
         "A 18PL — Declaracions"
       ]
     },
-
     "fi_36_2_lopsc": {
       "final": true,
       "tipus": "administrativa",
@@ -120,7 +174,6 @@
         "A 18PL — Declaracions"
       ]
     },
-
     "fi_36_3_lopsc": {
       "final": true,
       "tipus": "administrativa",
@@ -134,7 +187,6 @@
         "A 18PL — Declaracions"
       ]
     },
-
     "fi_37_4_manca_respecte": {
       "final": true,
       "tipus": "administrativa",
@@ -142,12 +194,15 @@
       "concepte_butlleta": "Les faltes de respecte i consideració al exercici de les seves funcions, a un membre de les Forces i Cossos de Seguretat, quan aquestes conductes no constitueixin infracció penal",
       "article_butlleta": "Art. 37.4 LOPSC",
       "import": "100 € - 600 €",
-      "accions": ["Advertir", "Acta D-10 si persisteix", "Si insults greus + violència: valorar atemptat"],
+      "accions": [
+        "Advertir",
+        "Acta D-10 si persisteix",
+        "Si insults greus + violència: valorar atemptat"
+      ],
       "actes_viladecans": [
         "D 10 — Denúncia LOPSC (37.4)"
       ]
     },
-
     "fi_37_14_obstruccio": {
       "final": true,
       "tipus": "administrativa",
@@ -156,12 +211,14 @@
       "article_butlleta": "Art. 37.7 LOPSC",
       "import": "100 € - 600 €",
       "info": "Si l'obstrucció de la via causa una alteració GREU de la seguretat ciutadana: art. 36.3 LOPSC. Si incompleix restriccions de circulació amb ocasió d'un acte públic amb alteracions menors: art. 37.3 LOPSC.",
-      "accions": ["Advertiment", "Butlletí si persisteix"],
+      "accions": [
+        "Advertiment",
+        "Butlletí si persisteix"
+      ],
       "actes_viladecans": [
         "D 10 — Denúncia LOPSC (37.7)"
       ]
     },
-
     "fi_154_baralla_tumult": {
       "final": true,
       "tipus": "penal",
@@ -180,12 +237,12 @@
       ],
       "actes_viladecans": [
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "N 03 — Drets denunciat no detingut",
         "A 18PL — Declaracions",
         "D 10.b — Intervenció temporal d'objectes perillosos"
       ]
     },
-
     "fi_154_indeterminats": {
       "final": true,
       "tipus": "penal",
@@ -198,7 +255,6 @@
         "D 10.b — Intervenció temporal d'objectes perillosos"
       ]
     },
-
     "fi_557_basic": {
       "final": true,
       "tipus": "penal",
@@ -223,11 +279,11 @@
       ],
       "actes_viladecans": [
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 18PL — Declaracions",
         "D 10.b — Intervenció temporal d'objectes perillosos"
       ]
     },
-
     "fi_557_bis_agreujat": {
       "final": true,
       "tipus": "penal",
@@ -247,11 +303,11 @@
       ],
       "actes_viladecans": [
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 18PL — Declaracions",
         "D 10.b — Intervenció temporal d'objectes perillosos"
       ]
     },
-
     "fi_557_557_ter_esport": {
       "final": true,
       "tipus": "penal",
@@ -266,10 +322,10 @@
       "actes_viladecans": [
         "N 03 — Drets denunciat no detingut",
         "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 18PL — Declaracions"
       ]
     },
-
     "fi_no_delicte_admin": {
       "final": true,
       "tipus": "ok",
@@ -277,14 +333,12 @@
       "info": "Insults entre particulars: NO és delicte públic. Les injúries (art. 208 CP) són delicte PRIVAT, perseguible només per QUERELLA de la persona ofesa (art. 215 CP).",
       "accio": "Mediar, separar, advertir. Si reiterat o greus: registrar i informar dels drets civils."
     },
-
     "fi_remetre_lesions": {
       "final": true,
       "tipus": "procediment",
       "titol": "🔀 Anar a checklist 'Lesions'",
       "accio": "Si hi ha lesions: aplicar Arts. 147-150 CP segons gravetat."
     },
-
     "fi_remetre_atemptat": {
       "final": true,
       "tipus": "procediment",

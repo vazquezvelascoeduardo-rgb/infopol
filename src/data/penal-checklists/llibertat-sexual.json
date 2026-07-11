@@ -14,50 +14,87 @@
     "Art. 187-189 CP (prostitució i explotació sexual)",
     "Art. 197.7 CP (sexting / difusió íntima)"
   ],
-
   "canvi_clau_LO_10_2022": "Desapareix la distinció ABÚS / AGRESSIÓ. Tot és AGRESSIÓ SEXUAL (Art. 178). Consentiment AFIRMATIU: només hi ha consentiment quan s'ha manifestat lliurement mitjançant actes que expressin de manera clara la voluntat de la persona. Silenci o passivitat NO és consentiment. ATENCIÓ: NO hi ha inversió de la càrrega de la prova — la presumpció d'innocència es manté; acreditar els fets correspon a l'acusació. La LO 4/2023 va reintroduir penes agreujades quan hi ha violència o intimidació.",
-
   "consentiment_definicio": "Manifestació LLIURE de la voluntat (verbal, expressa, gestos clars). NO consentiment: silenci, passivitat, intimidació, abús d'autoritat, intoxicació, son, menor 16 anys.",
-
   "competencia": "Jutjat d'Instrucció de Guàrdia (excepte si víctima en context VG: JVM)",
-
   "inici": "tipus_acte",
   "nodes": {
-
     "tipus_acte": {
       "titol": "Tipus d'acte denunciat",
       "info": "Tot s'analitza pel paràmetre del CONSENTIMENT exprés (LO 10/2022)",
       "opcions": [
-        { "etiqueta": "Penetració vaginal/anal/bucal o introducció objectes (VIOLACIÓ)",  "va_a": "victima_edat_violacio" },
-        { "etiqueta": "Atac sexual sense penetració (tocaments, manipulacions)",         "va_a": "victima_edat_agressio" },
-        { "etiqueta": "Acte sexual realitzat amb intoxicació, drogues submissió química", "va_a": "fi_178_180_5" },
-        { "etiqueta": "Contacte sexual amb MENOR de 16 anys (qualsevol acte)",            "va_a": "fi_181_menor_16" },
-        { "etiqueta": "Online: contactar MENOR per propòsit sexual (grooming)",            "va_a": "fi_183_grooming" },
-        { "etiqueta": "DIFUSIÓ d'imatges íntimes sense consentiment",                     "va_a": "fi_197_7_sexting" },
-        { "etiqueta": "Prostitució amb menor o forçada / explotació sexual",              "va_a": "fi_187_explotacio" },
-        { "etiqueta": "Exhibicionisme / provocació sexual a menors",                      "va_a": "fi_185_exhibicionisme" }
+        {
+          "etiqueta": "Penetració vaginal/anal/bucal o introducció objectes (VIOLACIÓ)",
+          "va_a": "victima_edat_violacio"
+        },
+        {
+          "etiqueta": "Atac sexual sense penetració (tocaments, manipulacions)",
+          "va_a": "victima_edat_agressio"
+        },
+        {
+          "etiqueta": "Acte sexual realitzat amb intoxicació, drogues submissió química",
+          "va_a": "fi_178_180_5"
+        },
+        {
+          "etiqueta": "Contacte sexual amb MENOR de 16 anys (qualsevol acte)",
+          "va_a": "fi_181_menor_16"
+        },
+        {
+          "etiqueta": "Online: contactar MENOR per propòsit sexual (grooming)",
+          "va_a": "fi_183_grooming"
+        },
+        {
+          "etiqueta": "DIFUSIÓ d'imatges íntimes sense consentiment",
+          "va_a": "fi_197_7_sexting"
+        },
+        {
+          "etiqueta": "Prostitució amb menor o forçada / explotació sexual",
+          "va_a": "fi_187_explotacio"
+        },
+        {
+          "etiqueta": "Exhibicionisme / provocació sexual a menors",
+          "va_a": "fi_185_exhibicionisme"
+        }
       ]
     },
-
     "victima_edat_violacio": {
       "titol": "Edat víctima i circumstàncies (violació)",
       "opcions": [
-        { "etiqueta": "Adult — agressió bàsica (sense agreujants)",                       "va_a": "fi_179_basica" },
-        { "etiqueta": "Adult — amb agreujants (180 CP)",                                  "va_a": "fi_179_agreujada" },
-        { "etiqueta": "Menor 16 anys",                                                    "va_a": "fi_181_violacio_menor" },
-        { "etiqueta": "Menor 12 anys",                                                    "va_a": "fi_181_violacio_menor_12" }
+        {
+          "etiqueta": "Adult — agressió bàsica (sense agreujants)",
+          "va_a": "fi_179_basica"
+        },
+        {
+          "etiqueta": "Adult — amb agreujants (180 CP)",
+          "va_a": "fi_179_agreujada"
+        },
+        {
+          "etiqueta": "Menor 16 anys",
+          "va_a": "fi_181_violacio_menor"
+        },
+        {
+          "etiqueta": "Menor 12 anys",
+          "va_a": "fi_181_violacio_menor_12"
+        }
       ]
     },
-
     "victima_edat_agressio": {
       "titol": "Agressió sexual sense penetració",
       "opcions": [
-        { "etiqueta": "Adult — bàsica",                                                   "va_a": "fi_178_basica" },
-        { "etiqueta": "Adult — amb agreujants",                                            "va_a": "fi_178_agreujada" },
-        { "etiqueta": "Menor 16 anys",                                                    "va_a": "fi_181_menor_16" }
+        {
+          "etiqueta": "Adult — bàsica",
+          "va_a": "fi_178_basica"
+        },
+        {
+          "etiqueta": "Adult — amb agreujants",
+          "va_a": "fi_178_agreujada"
+        },
+        {
+          "etiqueta": "Menor 16 anys",
+          "va_a": "fi_181_menor_16"
+        }
       ]
     },
-
     "fi_178_basica": {
       "final": true,
       "tipus": "penal",
@@ -96,11 +133,11 @@
       "actes_viladecans": [
         "N 02 — Drets víctima (+N 02e)",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 10 — Preservació de proves (mostres biològiques)",
         "I 55 — Cadena de custòdia"
       ]
     },
-
     "fi_178_agreujada": {
       "final": true,
       "tipus": "penal",
@@ -120,11 +157,11 @@
       "actes_viladecans": [
         "N 02 — Drets víctima (+N 02e)",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 10 — Preservació de proves (mostres biològiques)",
         "I 55 — Cadena de custòdia"
       ]
     },
-
     "fi_178_180_5": {
       "final": true,
       "tipus": "penal",
@@ -141,11 +178,11 @@
       "actes_viladecans": [
         "N 02 — Drets víctima (+N 02e)",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 10 — Preservació de proves (mostres biològiques)",
         "I 55 — Cadena de custòdia"
       ]
     },
-
     "fi_179_basica": {
       "final": true,
       "tipus": "penal",
@@ -162,11 +199,11 @@
       "actes_viladecans": [
         "N 02 — Drets víctima (+N 02e)",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 10 — Preservació de proves (mostres biològiques)",
         "I 55 — Cadena de custòdia"
       ]
     },
-
     "fi_179_agreujada": {
       "final": true,
       "tipus": "penal",
@@ -177,11 +214,11 @@
       "actes_viladecans": [
         "N 02 — Drets víctima (+N 02e)",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 10 — Preservació de proves (mostres biològiques)",
         "I 55 — Cadena de custòdia"
       ]
     },
-
     "fi_181_menor_16": {
       "final": true,
       "tipus": "penal",
@@ -205,11 +242,11 @@
       "actes_viladecans": [
         "N 02 — Drets víctima (+N 02e)",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 10 — Preservació de proves (mostres biològiques)",
         "I 55 — Cadena de custòdia"
       ]
     },
-
     "fi_181_violacio_menor": {
       "final": true,
       "tipus": "penal",
@@ -219,11 +256,11 @@
       "actes_viladecans": [
         "N 02 — Drets víctima (+N 02e)",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 10 — Preservació de proves (mostres biològiques)",
         "I 55 — Cadena de custòdia"
       ]
     },
-
     "fi_181_violacio_menor_12": {
       "final": true,
       "tipus": "penal",
@@ -234,11 +271,11 @@
       "actes_viladecans": [
         "N 02 — Drets víctima (+N 02e)",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 10 — Preservació de proves (mostres biològiques)",
         "I 55 — Cadena de custòdia"
       ]
     },
-
     "fi_183_grooming": {
       "final": true,
       "tipus": "penal",
@@ -259,10 +296,10 @@
       "actes_viladecans": [
         "N 02 — Drets víctima (+N 02e)",
         "N 01 — Drets detingut (si detenció)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "I 55 — Cadena de custòdia (evidència digital)"
       ]
     },
-
     "fi_197_7_sexting": {
       "final": true,
       "tipus": "penal",
@@ -284,7 +321,6 @@
         "I 55 — Cadena de custòdia (evidència digital)"
       ]
     },
-
     "fi_187_explotacio": {
       "final": true,
       "tipus": "penal",
@@ -308,10 +344,10 @@
       "actes_viladecans": [
         "N 02 — Drets víctima (+N 02e)",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "I 55 — Cadena de custòdia"
       ]
     },
-
     "fi_185_exhibicionisme": {
       "final": true,
       "tipus": "penal",
@@ -327,6 +363,7 @@
       "actes_viladecans": [
         "N 02 — Drets víctima (+N 02e)",
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "D 33 — Infraccions administratives llibertat sexual (si conducta no penal)",
         "D 33.b — Denúncia administrativa (víctima/testimoni)"
       ]

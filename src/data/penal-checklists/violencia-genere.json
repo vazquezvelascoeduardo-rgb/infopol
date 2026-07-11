@@ -15,11 +15,13 @@
     "Art. 468 CP (trencament d'allunyament)",
     "Art. 544 ter LECrim (ordre protecció)"
   ],
-
+  "instruccio_viladecans": {
+    "qui_instrueix": "A Viladecans la instrucció dels atestats de VG/VD correspon a PG-ME (GAV — Grup d'Atenció a la Víctima). La PL fa la PRIMERA INTERVENCIÓ: protecció de la víctima, aturada de l'agressió, detenció si escau i lliurament a Mossos (A 54).",
+    "que_fa_la_PL": "Assegurar víctima i menors · atenció sanitària · N 01 al detingut · PD 06 · A 54 lliurament · N 02 drets víctima si es recull la primera manifestació · minuta detallada dels fets presenciats (element probatori clau).",
+    "que_NO_fa_la_PL": "Declaració del detingut (AD 01), valoració policial del risc definitiva (VioGén/RVD la gestiona el cos instructor) ni la tramitació de l'ordre de protecció (544 ter) — tot això és de PG-ME."
+  },
   "ambit_VG_LO_1_2004": "Violència exercida sobre la DONA per part de qui sigui o hagi estat la seva PARELLA (cònjuge, ex-cònjuge, parella anàloga afectivitat). Article 1.1 LO 1/2004. Inclou parelles sense convivència.",
-
   "competencia_judicial": "JUTJAT DE VIOLÈNCIA SOBRE LA DONA (JVM) — NO Jutjat Instrucció ordinari",
-
   "delictes_VG_basics": {
     "153_1_maltractament": "Lesió/maltractament SENSE tractament: 6 mesos-1 any presó O TBC 31-80 dies + privació armes 1-3 anys",
     "148_4_lesions": "Lesions amb tractament: 2-5 anys presó",
@@ -28,7 +30,6 @@
     "173_4_vexacions": "Injúries/vexacions lleus: localització permanent 5-30 dies (en domicili diferent i allunyat de la víctima) O TBC 5-30 dies O multa 1-4 mesos (multa només si no hi ha relacions econòmiques — art. 84.2 CP)",
     "468_2_trencament": "Trencament allunyament (pena de l'art. 48 o mesura cautelar amb víctima de l'art. 173.2): presó 6 mesos-1 any EN TOT CAS (art. 468.2 CP)"
   },
-
   "VPR_nivells": {
     "no_apreciat": "Sense indicadors de risc",
     "baix": "Indicadors lleus, sense urgència especial",
@@ -36,60 +37,107 @@
     "alt": "Risc elevat, mesures intensives + seguiment",
     "extrem": "Risc imminent vida, mesures màximes"
   },
-
   "inici": "situacio",
   "nodes": {
-
     "situacio": {
       "titol": "Situació inicial",
       "opcions": [
-        { "etiqueta": "Intervenció en CALENT (acabat de passar/ara mateix)",       "va_a": "calent_prioritats" },
-        { "etiqueta": "Denúncia POSTERIOR a comissaria (fa hores/dies)",            "va_a": "denuncia_posterior" },
-        { "etiqueta": "TRENCAMENT d'ordre d'allunyament detectat",                  "va_a": "fi_468_trencament" },
-        { "etiqueta": "Auxili a víctima en PERILL IMMINENT",                        "va_a": "fi_perill_imminent" },
-        { "etiqueta": "Comunicació de tercer (veí, familiar) — víctima no parla",   "va_a": "tercer_avis" }
+        {
+          "etiqueta": "Intervenció en CALENT (acabat de passar/ara mateix)",
+          "va_a": "calent_prioritats"
+        },
+        {
+          "etiqueta": "Denúncia POSTERIOR a comissaria (fa hores/dies)",
+          "va_a": "denuncia_posterior"
+        },
+        {
+          "etiqueta": "TRENCAMENT d'ordre d'allunyament detectat",
+          "va_a": "fi_468_trencament"
+        },
+        {
+          "etiqueta": "Auxili a víctima en PERILL IMMINENT",
+          "va_a": "fi_perill_imminent"
+        },
+        {
+          "etiqueta": "Comunicació de tercer (veí, familiar) — víctima no parla",
+          "va_a": "tercer_avis"
+        }
       ]
     },
-
     "calent_prioritats": {
       "titol": "Intervenció en calent — actuació prioritària",
       "info": "Ordre: 1) Separar agressor-víctima, 2) Auxili sanitari, 3) Recollida proves, 4) VPR",
       "opcions": [
-        { "etiqueta": "Hi ha LESIONS físiques",                                     "va_a": "lesions_gravetat" },
-        { "etiqueta": "Sense lesions — només amenaces/coaccions/vexacions",         "va_a": "sense_lesions_tipus" },
-        { "etiqueta": "Hi ha menors al lloc",                                        "va_a": "lesions_gravetat" }
+        {
+          "etiqueta": "Hi ha LESIONS físiques",
+          "va_a": "lesions_gravetat"
+        },
+        {
+          "etiqueta": "Sense lesions — només amenaces/coaccions/vexacions",
+          "va_a": "sense_lesions_tipus"
+        },
+        {
+          "etiqueta": "Hi ha menors al lloc",
+          "va_a": "lesions_gravetat"
+        }
       ]
     },
-
     "lesions_gravetat": {
       "titol": "Gravetat lesions",
       "opcions": [
-        { "etiqueta": "Maltractament SENSE tractament (153.1)",                    "va_a": "fi_153_1_VG" },
-        { "etiqueta": "Lesions amb tractament (148.4)",                             "va_a": "fi_148_4_VG" },
-        { "etiqueta": "Lesions GREUS / permanents (149/150)",                      "va_a": "fi_lesions_greus_VG" }
+        {
+          "etiqueta": "Maltractament SENSE tractament (153.1)",
+          "va_a": "fi_153_1_VG"
+        },
+        {
+          "etiqueta": "Lesions amb tractament (148.4)",
+          "va_a": "fi_148_4_VG"
+        },
+        {
+          "etiqueta": "Lesions GREUS / permanents (149/150)",
+          "va_a": "fi_lesions_greus_VG"
+        }
       ]
     },
-
     "sense_lesions_tipus": {
       "titol": "Tipus de conducta",
       "opcions": [
-        { "etiqueta": "Amenaces lleus (171.4)",                                    "va_a": "fi_171_4_VG" },
-        { "etiqueta": "Coaccions lleus (172.2)",                                   "va_a": "fi_172_2_VG" },
-        { "etiqueta": "Injúries / vexacions lleus (173.4)",                         "va_a": "fi_173_4_VG" },
-        { "etiqueta": "Amenaces GREUS (concurs 169 CP)",                            "va_a": "fi_amenaces_greus_VG" }
+        {
+          "etiqueta": "Amenaces lleus (171.4)",
+          "va_a": "fi_171_4_VG"
+        },
+        {
+          "etiqueta": "Coaccions lleus (172.2)",
+          "va_a": "fi_172_2_VG"
+        },
+        {
+          "etiqueta": "Injúries / vexacions lleus (173.4)",
+          "va_a": "fi_173_4_VG"
+        },
+        {
+          "etiqueta": "Amenaces GREUS (concurs 169 CP)",
+          "va_a": "fi_amenaces_greus_VG"
+        }
       ]
     },
-
     "tercer_avis": {
       "titol": "Avís de tercer — víctima reticent",
       "info": "Cas habitual: veí truca per crits, víctima nega o està espantada. Cal actuar amb tacte però amb fermesa: la VG és perseguible D'OFICI, no requereix denúncia de la víctima.",
       "opcions": [
-        { "etiqueta": "Víctima accepta col·laborar",                                "va_a": "calent_prioritats" },
-        { "etiqueta": "Víctima nega però hi ha indicis (lesions, escena…)",        "va_a": "fi_oficials_indicis" },
-        { "etiqueta": "Sense indicis i víctima nega",                                "va_a": "fi_anotacio_seguiment" }
+        {
+          "etiqueta": "Víctima accepta col·laborar",
+          "va_a": "calent_prioritats"
+        },
+        {
+          "etiqueta": "Víctima nega però hi ha indicis (lesions, escena…)",
+          "va_a": "fi_oficials_indicis"
+        },
+        {
+          "etiqueta": "Sense indicis i víctima nega",
+          "va_a": "fi_anotacio_seguiment"
+        }
       ]
     },
-
     "denuncia_posterior": {
       "final": true,
       "tipus": "procediment",
@@ -123,10 +171,9 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "A 18PL — Declaració testimonis",
-        "N 07 — Citació judicial (compareixença OP 544 ter)"
+        "N 07 — Notificació de citació judicial (NOMÉS si el jutjat n'encarrega el lliurament a la PL; la instrucció VG/OP correspon a PG-ME)"
       ]
     },
-
     "fi_perill_imminent": {
       "final": true,
       "tipus": "procediment",
@@ -146,11 +193,10 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
-        "AD 01 — Declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes detingut"
       ]
     },
-
     "fi_oficials_indicis": {
       "final": true,
       "tipus": "procediment",
@@ -170,7 +216,6 @@
         "A 18PL — Declaració testimonis"
       ]
     },
-
     "fi_anotacio_seguiment": {
       "final": true,
       "tipus": "procediment",
@@ -181,7 +226,6 @@
         "Si reincidència de trucades: actuació més contundent"
       ]
     },
-
     "fi_153_1_VG": {
       "final": true,
       "tipus": "penal",
@@ -215,13 +259,12 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
-        "AD 01 — Declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes detingut",
         "A 18PL — Declaració testimonis",
-        "N 07 — Citació judicial (compareixença OP 544 ter)"
+        "N 07 — Notificació de citació judicial (NOMÉS si el jutjat n'encarrega el lliurament a la PL; la instrucció VG/OP correspon a PG-ME)"
       ]
     },
-
     "fi_148_4_VG": {
       "final": true,
       "tipus": "penal",
@@ -240,13 +283,12 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
-        "AD 01 — Declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes detingut",
         "A 18PL — Declaració testimonis",
-        "N 07 — Citació judicial (compareixença OP 544 ter)"
+        "N 07 — Notificació de citació judicial (NOMÉS si el jutjat n'encarrega el lliurament a la PL; la instrucció VG/OP correspon a PG-ME)"
       ]
     },
-
     "fi_lesions_greus_VG": {
       "final": true,
       "tipus": "penal",
@@ -264,12 +306,11 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
-        "AD 01 — Declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes detingut",
         "A 18PL — Declaració testimonis"
       ]
     },
-
     "fi_171_4_VG": {
       "final": true,
       "tipus": "penal",
@@ -285,40 +326,45 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
-        "AD 01 — Declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 18PL — Declaració testimonis",
-        "N 07 — Citació judicial (compareixença OP 544 ter)"
+        "N 07 — Notificació de citació judicial (NOMÉS si el jutjat n'encarrega el lliurament a la PL; la instrucció VG/OP correspon a PG-ME)"
       ]
     },
-
     "fi_172_2_VG": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Coaccions lleus VG (Art. 172.2 CP)",
       "pena": "Presó 6 mesos - 1 any O TBC 31-80 dies + inhabilitació + privació armes",
-      "accions": ["Detenció", "VPR", "Atestat JVM"],
+      "accions": [
+        "Detenció",
+        "VPR",
+        "Atestat JVM"
+      ],
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
-        "AD 01 — Declaració detingut",
-        "N 07 — Citació judicial (compareixença OP 544 ter)"
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
+        "N 07 — Notificació de citació judicial (NOMÉS si el jutjat n'encarrega el lliurament a la PL; la instrucció VG/OP correspon a PG-ME)"
       ]
     },
-
     "fi_173_4_VG": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE LLEU — Vexacions/injúries lleus VG (Art. 173.4 CP)",
       "pena": "Localització permanent 5-30 dies (domicili diferent i allunyat de la víctima) O TBC 5-30 dies O multa 1-4 mesos (només si concorren les circumstàncies de l'art. 84.2 CP)",
       "perseguibilitat": "Les INJÚRIES només són perseguibles amb denúncia de la persona agreujada (art. 173.4 in fine); les vexacions injustes es consideren perseguibles d'ofici",
-      "accions": ["Declaració víctima", "VPR", "Atestat simplificat"],
+      "accions": [
+        "Declaració víctima",
+        "VPR",
+        "Atestat simplificat"
+      ],
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "A 18PL — Declaració testimonis",
         "N 07 — Citació judicial"
       ]
     },
-
     "fi_amenaces_greus_VG": {
       "final": true,
       "tipus": "penal",
@@ -328,11 +374,10 @@
       "actes_viladecans": [
         "N 02 — Drets víctima",
         "N 01 — Drets detingut",
-        "AD 01 — Declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "A 18PL — Declaració testimonis"
       ]
     },
-
     "fi_468_trencament": {
       "final": true,
       "tipus": "penal",
@@ -352,7 +397,7 @@
       "info_VPR": "El trencament és INDICADOR fort de risc — sempre cal revaluar VPR cap amunt",
       "actes_viladecans": [
         "N 01 — Drets detingut",
-        "AD 01 — Declaració detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "PD 06 — Objectes detingut",
         "N 02 — Drets víctima",
         "N 07 — Citació judicial"

@@ -12,7 +12,6 @@
     "Art. 564 CP (tinença armes reglamentades sense llicència)",
     "Art. 566-568 CP (armes guerra, explosius)"
   ],
-
   "classificacio_armes_pautes_3_3": {
     "reglamentades_art_3": [
       "1a categoria: armes curtes (pistoles, revòlvers)",
@@ -34,7 +33,6 @@
       "Nunchaku, manyoples ferro, papallones..."
     ]
   },
-
   "llicencies": {
     "A": "FCS — armes 1a, 2a, 3a categoria",
     "B": "Particulars — armes de foc curtes",
@@ -43,49 +41,97 @@
     "E": "Armes 3a i 7a.2/7a.3 categoria",
     "F": "Tir esportiu — concursos"
   },
-
   "armes_de_guerra": "Particulars NO les poden adquirir, tenir ni usar. Inclou: foc >20mm, calibres NATO (5,56, 7,62...), automàtiques, granades, mines, míssils, bombes. Reservades a FCS i casos especials autoritzats pel Govern de l'Estat.",
-
   "inici": "tipus_arma",
   "nodes": {
-
     "tipus_arma": {
       "titol": "Tipus d'arma o objecte intervingut",
       "opcions": [
-        { "etiqueta": "Arma de foc reglamentada SENSE guia/permís",                    "va_a": "arma_foc_situacio" },
-        { "etiqueta": "Arma de foc reglamentada AMB documentació però mal portada",   "va_a": "fi_36_12_doc" },
-        { "etiqueta": "Arma de GUERRA (calibre >20mm, NATO, automàtica, granades…)",   "va_a": "fi_penal_566" },
-        { "etiqueta": "Arma blanca prohibida (papallona, nunchaku, defensa…)",         "va_a": "fi_36_10_blanca" },
-        { "etiqueta": "Navalla / ganivet legal però portat indegudament a la via",     "va_a": "fi_36_10_navalla" },
-        { "etiqueta": "Arma simulada / pneumàtica / airsoft",                          "va_a": "arma_simulada_us" },
-        { "etiqueta": "Esprai pebre / defensa elèctrica / porra (particular)",         "va_a": "fi_36_10_defensa" },
-        { "etiqueta": "Reproducció realista (sense usar)",                              "va_a": "fi_37_armes" },
-        { "etiqueta": "Objectes que poden servir d'agressió (cúter, tornavís, bastó…)", "va_a": "fi_18_2_intervencio" },
-        { "etiqueta": "Arma manipulada o modificada (números esborrats…)",             "va_a": "fi_penal_564_modificada" },
-        { "etiqueta": "Explosius / matèries inflamables / pirotècnia il·legal",        "va_a": "fi_penal_568" }
+        {
+          "etiqueta": "Arma de foc reglamentada SENSE guia/permís",
+          "va_a": "arma_foc_situacio"
+        },
+        {
+          "etiqueta": "Arma de foc reglamentada AMB documentació però mal portada",
+          "va_a": "fi_36_12_doc"
+        },
+        {
+          "etiqueta": "Arma de GUERRA (calibre >20mm, NATO, automàtica, granades…)",
+          "va_a": "fi_penal_566"
+        },
+        {
+          "etiqueta": "Arma blanca prohibida (papallona, nunchaku, defensa…)",
+          "va_a": "fi_36_10_blanca"
+        },
+        {
+          "etiqueta": "Navalla / ganivet legal però portat indegudament a la via",
+          "va_a": "fi_36_10_navalla"
+        },
+        {
+          "etiqueta": "Arma simulada / pneumàtica / airsoft",
+          "va_a": "arma_simulada_us"
+        },
+        {
+          "etiqueta": "Esprai pebre / defensa elèctrica / porra (particular)",
+          "va_a": "fi_36_10_defensa"
+        },
+        {
+          "etiqueta": "Reproducció realista (sense usar)",
+          "va_a": "fi_37_armes"
+        },
+        {
+          "etiqueta": "Objectes que poden servir d'agressió (cúter, tornavís, bastó…)",
+          "va_a": "fi_18_2_intervencio"
+        },
+        {
+          "etiqueta": "Arma manipulada o modificada (números esborrats…)",
+          "va_a": "fi_penal_564_modificada"
+        },
+        {
+          "etiqueta": "Explosius / matèries inflamables / pirotècnia il·legal",
+          "va_a": "fi_penal_568"
+        }
       ]
     },
-
     "arma_foc_situacio": {
       "titol": "Situació concreta de l'arma de foc",
       "opcions": [
-        { "etiqueta": "Pistola/revòlver/escopeta sense guia ni permís",            "va_a": "fi_penal_564" },
-        { "etiqueta": "L'usuari té llicència però no la porta físicament",         "va_a": "fi_36_11_no_porta" },
-        { "etiqueta": "Permís caducat o no renovat",                                "va_a": "fi_36_12_doc" },
-        { "etiqueta": "Manipulada (número esborrat, calibre canviat…)",            "va_a": "fi_penal_564_modificada" }
+        {
+          "etiqueta": "Pistola/revòlver/escopeta sense guia ni permís",
+          "va_a": "fi_penal_564"
+        },
+        {
+          "etiqueta": "L'usuari té llicència però no la porta físicament",
+          "va_a": "fi_36_11_no_porta"
+        },
+        {
+          "etiqueta": "Permís caducat o no renovat",
+          "va_a": "fi_36_12_doc"
+        },
+        {
+          "etiqueta": "Manipulada (número esborrat, calibre canviat…)",
+          "va_a": "fi_penal_564_modificada"
+        }
       ]
     },
-
     "arma_simulada_us": {
       "titol": "Arma simulada — ús",
       "text": "S'ha usat per intimidar/cometre un delicte?",
       "opcions": [
-        { "etiqueta": "Sí, usada en amenaces, robatori o delicte",                 "va_a": "fi_arma_intimidacio" },
-        { "etiqueta": "No, només la porta sense ús delictiu",                       "va_a": "fi_37_armes" },
-        { "etiqueta": "La porta de manera que causa alarma social",                 "va_a": "fi_37_armes_alarma" }
+        {
+          "etiqueta": "Sí, usada en amenaces, robatori o delicte",
+          "va_a": "fi_arma_intimidacio"
+        },
+        {
+          "etiqueta": "No, només la porta sense ús delictiu",
+          "va_a": "fi_37_armes"
+        },
+        {
+          "etiqueta": "La porta de manera que causa alarma social",
+          "va_a": "fi_37_armes_alarma"
+        }
       ]
     },
-
     "fi_36_10_blanca": {
       "final": true,
       "tipus": "administrativa",
@@ -109,7 +155,6 @@
         "A 16 — Recollida-lliurament objectes"
       ]
     },
-
     "fi_36_10_navalla": {
       "final": true,
       "tipus": "administrativa",
@@ -125,7 +170,6 @@
         "I 55 — Cadena de custòdia"
       ]
     },
-
     "fi_36_11_no_porta": {
       "final": true,
       "tipus": "administrativa",
@@ -146,7 +190,6 @@
         "I 55 — Cadena de custòdia"
       ]
     },
-
     "fi_36_12_doc": {
       "final": true,
       "tipus": "administrativa",
@@ -161,7 +204,6 @@
         "D 10.b — Intervenció temporal de l'arma (si escau)"
       ]
     },
-
     "fi_36_10_defensa": {
       "final": true,
       "tipus": "administrativa",
@@ -182,7 +224,6 @@
         "A 16 — Recollida-lliurament objectes"
       ]
     },
-
     "fi_37_armes": {
       "final": true,
       "tipus": "administrativa",
@@ -197,7 +238,6 @@
         "I 55 — Cadena de custòdia"
       ]
     },
-
     "fi_37_armes_alarma": {
       "final": true,
       "tipus": "administrativa",
@@ -212,7 +252,6 @@
         "D 10.b — Intervenció temporal de l'objecte"
       ]
     },
-
     "fi_18_2_intervencio": {
       "final": true,
       "tipus": "administrativa",
@@ -230,7 +269,6 @@
         "A 16 — Recollida-lliurament objectes"
       ]
     },
-
     "fi_arma_intimidacio": {
       "final": true,
       "tipus": "penal",
@@ -250,11 +288,11 @@
       ],
       "actes_viladecans": [
         "N 01 — Drets detingut",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "I 55 — Cadena de custòdia",
         "A 16 — Recollida-lliurament objectes"
       ]
     },
-
     "fi_penal_564": {
       "final": true,
       "tipus": "penal",
@@ -274,11 +312,11 @@
       "documentacio": "Atestat + acta intervenció + cadena custòdia + fotos arma + sol·licitud informe balístic",
       "actes_viladecans": [
         "N 01 — Drets detingut (delicte 564 CP)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "I 55 — Cadena de custòdia",
         "A 16 — Recollida-lliurament objectes"
       ]
     },
-
     "fi_penal_564_modificada": {
       "final": true,
       "tipus": "penal",
@@ -295,11 +333,11 @@
       ],
       "actes_viladecans": [
         "N 01 — Drets detingut (delicte 564.2 CP)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "I 55 — Cadena de custòdia",
         "A 16 — Recollida-lliurament objectes"
       ]
     },
-
     "fi_penal_566": {
       "final": true,
       "tipus": "penal",
@@ -316,11 +354,11 @@
       ],
       "actes_viladecans": [
         "N 01 — Drets detingut (delicte 566 CP)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "I 55 — Cadena de custòdia",
         "A 16 — Recollida-lliurament objectes"
       ]
     },
-
     "fi_penal_568": {
       "final": true,
       "tipus": "penal",
@@ -337,6 +375,7 @@
       ],
       "actes_viladecans": [
         "N 01 — Drets detingut (delicte 568 CP)",
+        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
         "I 55 — Cadena de custòdia"
       ]
     }
