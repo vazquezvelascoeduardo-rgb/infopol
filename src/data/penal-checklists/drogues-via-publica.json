@@ -15,14 +15,12 @@
     "Art. 369 CP (tràfic agreujat)",
     "Art. 370 CP (tràfic extrema gravetat)"
   ],
-
   "definicions_pautes_3_3": {
     "lloc_public": "Seus administratives, judicials, centres docents, hospitals, CAP",
     "via_publica": "Carrers, carreteres, boscos, platges",
     "establiments_publics": "Bars, restaurants, discoteques, comerços",
     "transports_publics": "Taxis, autobusos, ferrocarrils"
   },
-
   "taula_dosis_consum_propi_pautes_3_3": {
     "Heroïna": "3 g màxim (50-150 mg/dosi)",
     "Cocaïna": "7,5 g màxim (100-260 mg/dosi)",
@@ -39,7 +37,6 @@
     "GHB/GBL": "15 g màxim",
     "2CB (tusi/cocaïna rosa)": "3 g màxim"
   },
-
   "indicis_trafic_pautes_3_3": [
     "Quantitat preordenada al tràfic (taula INTCF)",
     "Substància en DOSIS individuals o a l'engròs",
@@ -51,69 +48,121 @@
     "Observació directa dotació policial",
     "Llistats de persones (suposats clients)"
   ],
-
   "actes_aplicables": {
     "via_admin_consum": "ACTA D-10 (denúncia LOPSC)",
     "via_admin_cultiu": "ACTA A-10 (denúncia oberta)",
     "via_admin_troballa": "ACTA A-10 (sense propietari)",
     "via_penal_trafic": "ACTA A-20 (pesada/aprehensió) + ATESTAT"
   },
-
   "inici": "conducta",
   "nodes": {
-
     "conducta": {
       "titol": "Conducta detectada",
       "opcions": [
-        { "etiqueta": "Consum directe en via pública / lloc públic",                     "va_a": "fi_consum_36_16" },
-        { "etiqueta": "Tinença per autoconsum en via pública",                           "va_a": "comprovacio_quantitat_admin" },
-        { "etiqueta": "Indicis de TRÀFIC / venda observada",                              "va_a": "tipus_substancia_penal" },
-        { "etiqueta": "Cultiu visible al públic (balcó, jardí…)",                         "va_a": "fi_cultiu_36_18" },
-        { "etiqueta": "MENOR consumint o amb drogues",                                   "va_a": "fi_menor_drogues" },
-        { "etiqueta": "Tolerància consum en establiment (bar, discoteca)",                "va_a": "fi_tolerancia_36_19" },
-        { "etiqueta": "Trasllat persones en vehicle per facilitar consum",               "va_a": "fi_36_17_trasllat" },
-        { "etiqueta": "Substància TROBADA sense propietari",                              "va_a": "fi_troballa_a10" },
-        { "etiqueta": "Abandonament d'instruments de consum (xeringues, paperines…)",   "va_a": "fi_abandon_instruments" }
+        {
+          "etiqueta": "Consum directe en via pública / lloc públic",
+          "va_a": "fi_consum_36_16"
+        },
+        {
+          "etiqueta": "Tinença per autoconsum en via pública",
+          "va_a": "comprovacio_quantitat_admin"
+        },
+        {
+          "etiqueta": "Indicis de TRÀFIC / venda observada",
+          "va_a": "tipus_substancia_penal"
+        },
+        {
+          "etiqueta": "Cultiu visible al públic (balcó, jardí…)",
+          "va_a": "fi_cultiu_36_18"
+        },
+        {
+          "etiqueta": "MENOR consumint o amb drogues",
+          "va_a": "fi_menor_drogues"
+        },
+        {
+          "etiqueta": "Tolerància consum en establiment (bar, discoteca)",
+          "va_a": "fi_tolerancia_36_19"
+        },
+        {
+          "etiqueta": "Trasllat persones en vehicle per facilitar consum",
+          "va_a": "fi_36_17_trasllat"
+        },
+        {
+          "etiqueta": "Substància TROBADA sense propietari",
+          "va_a": "fi_troballa_a10"
+        },
+        {
+          "etiqueta": "Abandonament d'instruments de consum (xeringues, paperines…)",
+          "va_a": "fi_abandon_instruments"
+        }
       ]
     },
-
     "comprovacio_quantitat_admin": {
       "titol": "Quantitat — comprovar taula consum propi",
       "text": "La quantitat està DINS la taula de consum propi (Pautes UF 3.3)?",
       "opcions": [
-        { "etiqueta": "Sí, quantitat dins consum propi i sense indicis tràfic",         "va_a": "fi_tinenca_36_16" },
-        { "etiqueta": "Quantitat superior a consum propi",                              "va_a": "tipus_substancia_penal" },
-        { "etiqueta": "Dins quantitat consum PERÒ amb indicis tràfic (dosis, diners…)", "va_a": "tipus_substancia_penal" }
+        {
+          "etiqueta": "Sí, quantitat dins consum propi i sense indicis tràfic",
+          "va_a": "fi_tinenca_36_16"
+        },
+        {
+          "etiqueta": "Quantitat superior a consum propi",
+          "va_a": "tipus_substancia_penal"
+        },
+        {
+          "etiqueta": "Dins quantitat consum PERÒ amb indicis tràfic (dosis, diners…)",
+          "va_a": "tipus_substancia_penal"
+        }
       ]
     },
-
     "tipus_substancia_penal": {
       "titol": "Tipus de substància (Art. 368 CP)",
       "info": "Greu dany salut: heroïna, cocaïna, amfetamines, MDMA, crack, LSD, GHB, ketamina. NO greu dany: hachís, marihuana, derivats cànnabics.",
       "opcions": [
-        { "etiqueta": "Substància GREU dany (heroïna, cocaïna…)",                       "va_a": "quantitat_greu" },
-        { "etiqueta": "Substància NO greu (cànnabis, hachís…)",                         "va_a": "quantitat_no_greu" }
+        {
+          "etiqueta": "Substància GREU dany (heroïna, cocaïna…)",
+          "va_a": "quantitat_greu"
+        },
+        {
+          "etiqueta": "Substància NO greu (cànnabis, hachís…)",
+          "va_a": "quantitat_no_greu"
+        }
       ]
     },
-
     "quantitat_greu": {
       "titol": "Quantitat substància greu dany",
       "opcions": [
-        { "etiqueta": "Quantitat petita + indicis tràfic (menudeig)",                   "va_a": "fi_368_2_menor" },
-        { "etiqueta": "Quantitat significativa (heroïna >3g, cocaïna >7,5g…)",          "va_a": "fi_368_1_greu" },
-        { "etiqueta": "Quantitat MOLT GRAN — gros tràfic",                              "va_a": "fi_369_agreujat" }
+        {
+          "etiqueta": "Quantitat petita + indicis tràfic (menudeig)",
+          "va_a": "fi_368_2_menor"
+        },
+        {
+          "etiqueta": "Quantitat significativa (heroïna >3g, cocaïna >7,5g…)",
+          "va_a": "fi_368_1_greu"
+        },
+        {
+          "etiqueta": "Quantitat MOLT GRAN — gros tràfic",
+          "va_a": "fi_369_agreujat"
+        }
       ]
     },
-
     "quantitat_no_greu": {
       "titol": "Quantitat substància no greu dany",
       "opcions": [
-        { "etiqueta": "Petita + indicis tràfic (menudeig)",                              "va_a": "fi_368_2_menor" },
-        { "etiqueta": "Important amb tràfic (marihuana >100g, haixix >25g…)",           "va_a": "fi_368_1_no_greu" },
-        { "etiqueta": "Plantació/cultiu d'envergadura",                                  "va_a": "fi_369_agreujat" }
+        {
+          "etiqueta": "Petita + indicis tràfic (menudeig)",
+          "va_a": "fi_368_2_menor"
+        },
+        {
+          "etiqueta": "Important amb tràfic (marihuana >100g, haixix >25g…)",
+          "va_a": "fi_368_1_no_greu"
+        },
+        {
+          "etiqueta": "Plantació/cultiu d'envergadura",
+          "va_a": "fi_369_agreujat"
+        }
       ]
     },
-
     "fi_consum_36_16": {
       "final": true,
       "tipus": "administrativa",
@@ -143,7 +192,6 @@
         "M 06 — Oferiment mesura educativa al menor (si l'infractor és menor — suspensió sanció DA 5a)"
       ]
     },
-
     "fi_tinenca_36_16": {
       "final": true,
       "tipus": "administrativa",
@@ -165,7 +213,6 @@
         "I 55 — Cadena de custòdia"
       ]
     },
-
     "fi_368_2_menor": {
       "final": true,
       "tipus": "penal",
@@ -186,9 +233,16 @@
         "🔟 Atestat penal + Jutjat Guàrdia"
       ],
       "documentacio_clau": "Atestat + acta A-20 (pesada) + cadena custòdia + identificacions + diligència manifestacions",
-      "info_acta_A20": "L'acta A-20 ha de contenir: origen, embolcall, característiques externes, aparença, mètode obtenció, bàscula utilitzada (ABP/farmàcia amb segell), descripció detallada (paperina, pols blanca, bossa, paquet tabac…), circumstàncies localització (mans, butxaques, indumentària, cavitats naturals, llençat a terra), nombre unitats, pes en brut"
+      "info_acta_A20": "L'acta A-20 ha de contenir: origen, embolcall, característiques externes, aparença, mètode obtenció, bàscula utilitzada (ABP/farmàcia amb segell), descripció detallada (paperina, pols blanca, bossa, paquet tabac…), circumstàncies localització (mans, butxaques, indumentària, cavitats naturals, llençat a terra), nombre unitats, pes en brut",
+      "actes_viladecans": [
+        "N 01 — Informació drets persona detinguda (delicte 368 CP)",
+        "AD 01 — Acta declaració detingut",
+        "PD 06 — Objectes persona detinguda",
+        "A 20 — Pesada de substàncies estupefaents (pes brut, davant l'interessat)",
+        "A 66 — Lliurament bossa amb mostres per a estudi toxicològic",
+        "I 55 — Cadena de custòdia"
+      ]
     },
-
     "fi_368_1_greu": {
       "final": true,
       "tipus": "penal",
@@ -202,17 +256,31 @@
         "Cadena custòdia",
         "Atestat penal exhaustiu",
         "Jutjat Guàrdia"
+      ],
+      "actes_viladecans": [
+        "N 01 — Informació drets persona detinguda (delicte 368.1 CP)",
+        "AD 01 — Acta declaració detingut",
+        "PD 06 — Objectes persona detinguda",
+        "A 20 — Pesada de substàncies estupefaents",
+        "A 66 — Lliurament bossa amb mostres per a estudi toxicològic",
+        "I 55 — Cadena de custòdia"
       ]
     },
-
     "fi_368_1_no_greu": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Tràfic no greu dany (Art. 368.1 CP)",
       "pena": "Presó 1-3 anys + multa del tant al doble",
-      "accions": "Mateixes que 368.1 greu"
+      "accions": "Mateixes que 368.1 greu",
+      "actes_viladecans": [
+        "N 01 — Informació drets persona detinguda (delicte 368.1 CP)",
+        "AD 01 — Acta declaració detingut",
+        "PD 06 — Objectes persona detinguda",
+        "A 20 — Pesada de substàncies estupefaents",
+        "A 66 — Lliurament bossa amb mostres per a estudi toxicològic",
+        "I 55 — Cadena de custòdia"
+      ]
     },
-
     "fi_369_agreujat": {
       "final": true,
       "tipus": "penal",
@@ -232,9 +300,17 @@
         "Investigació coordinada (intervencions telefòniques si cal)",
         "Atestat exhaustiu",
         "Possible competència Audiència Nacional"
+      ],
+      "actes_viladecans": [
+        "N 01 — Informació drets persona detinguda (delicte 369 CP)",
+        "AD 01 — Acta declaració detingut",
+        "PD 06 — Objectes persona detinguda",
+        "A 20 — Pesada de substàncies estupefaents",
+        "A 66 — Lliurament bossa amb mostres per a estudi toxicològic",
+        "I 55 — Cadena de custòdia",
+        "A 54 — Sol·licitud custòdia detingut per PG-ME (delicte de la seva competència)"
       ]
     },
-
     "fi_cultiu_36_18": {
       "final": true,
       "tipus": "administrativa",
@@ -252,9 +328,14 @@
         "7. Foto plantació in situ",
         "8. Identificar titular del lloc"
       ],
-      "diferencia_penal": "Si no és visible al públic / quantitat industrial / context tràfic → 368 CP penal"
+      "diferencia_penal": "Si no és visible al públic / quantitat industrial / context tràfic → 368 CP penal",
+      "actes_viladecans": [
+        "D 10 — Denúncia infracció Llei 4/2015 (Art. 36.18)",
+        "A 10 — Acta genèrica (descripció de la plantació i visibilitat des de via pública)",
+        "A 20 — Pesada de substàncies estupefaents (si s'intervé)",
+        "I 55 — Cadena de custòdia"
+      ]
     },
-
     "fi_tolerancia_36_19": {
       "final": true,
       "tipus": "administrativa",
@@ -269,9 +350,12 @@
         "Documentar fets (testimonis, observació, càmeres)",
         "Comunicació Departament responsable establiment",
         "Si TITULAR PROMOU activament: passa a delicte 368 CP — atestat"
+      ],
+      "actes_viladecans": [
+        "D 10 — Denúncia infracció Llei 4/2015 (Art. 36.19 — preferent Llei 11/2009 Art. 47.b)",
+        "A 47 — Inspecció d'establiments (constatació de la tolerància al local)"
       ]
     },
-
     "fi_36_17_trasllat": {
       "final": true,
       "tipus": "administrativa",
@@ -279,9 +363,12 @@
       "concepte_butlleta": "El trasllat de persones, amb qualsevol tipus de vehicle, a llocs on es faciliti l'accés a drogues",
       "article_butlleta": "Art. 36.17 LOPSC",
       "import": "601 € - 30.000 €",
-      "info": "Sovint anomenat 'narcotaxi'. Cal acreditar el trasllat conscient amb finalitat de facilitar accés."
+      "info": "Sovint anomenat 'narcotaxi'. Cal acreditar el trasllat conscient amb finalitat de facilitar accés.",
+      "actes_viladecans": [
+        "D 10 — Denúncia infracció Llei 4/2015 (Art. 36.17)",
+        "A 18PL — Acta de declaració (testimonis del trasllat)"
+      ]
     },
-
     "fi_menor_drogues": {
       "final": true,
       "tipus": "administrativa",
@@ -297,9 +384,14 @@
         "7. Si menor en RISC: trasllat dependències + comunicació tutors",
         "8. Si DESEMPARAMENT: trasllat + comunicació Fiscalia Menors + DGAIA",
         "9. Investigar origen substància (possible 368 CP per qui l'hagi proveït a menor)"
+      ],
+      "actes_viladecans": [
+        "D 10 — Denúncia infracció Llei 4/2015 (Art. 36.16; notificació als tutors)",
+        "M 06 — Oferiment al menor de mesura educativa (suspensió de la sanció)",
+        "A 20 — Pesada de substàncies estupefaents",
+        "A 35 — Entrega de menor als pares/tutors si escau"
       ]
     },
-
     "fi_troballa_a10": {
       "final": true,
       "tipus": "procediment",
@@ -315,9 +407,14 @@
         "4. Tipificar com 'Faltes administratives Llei 4/15 — No es detecta cap infracció'",
         "5. UTPC s'encarrega tràmits DESTRUCCIÓ posterior"
       ],
-      "documentacio": "Acta A-10 oberta + cadena custòdia"
+      "documentacio": "Acta A-10 oberta + cadena custòdia",
+      "actes_viladecans": [
+        "A 10 — Acta genèrica (troballa de substància sense propietari)",
+        "A 20 — Pesada de substàncies estupefaents",
+        "A 16 — Recollida-lliurament objectes",
+        "I 55 — Cadena de custòdia (fins a destrucció per UTPC)"
+      ]
     },
-
     "fi_abandon_instruments": {
       "final": true,
       "tipus": "administrativa",
@@ -329,6 +426,11 @@
         "Si autor identificat: butlletí + acta D-10",
         "Si no: recollida + servei neteja",
         "ATENCIÓ: xeringues — risc punxada accidental — usar pinces"
+      ],
+      "actes_viladecans": [
+        "D 10 — Denúncia infracció Llei 4/2015 (Art. 36.16 in fine)",
+        "D 10.b — Acta d'intervenció temporal (instruments abandonats)",
+        "I 55 — Cadena de custòdia"
       ]
     }
   },
