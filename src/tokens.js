@@ -18,6 +18,7 @@ export const T = {
     academia: { solid: '#FF7A1A', soft: '#FFE0CB', ink: '#7A2E04' },
     physical: { solid: '#0BB4C2', soft: '#CCEEF1', ink: '#0A4F56' },
     psico:    { solid: '#F0B400', soft: '#FCEFB8', ink: '#5C4400' },
+    noticias: { solid: '#E84040', soft: '#FAD6D6', ink: '#7A1010' },
   },
 
   font: '"Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',

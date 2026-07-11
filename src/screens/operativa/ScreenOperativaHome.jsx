@@ -120,6 +120,40 @@ export default function ScreenOperativaHome() {
         </div>
       </div>
 
+      {/* Notícies generals */}
+      <div style={{ padding: '14px 16px 4px' }}>
+        <div
+          onClick={() => navigate('/noticias')}
+          style={{
+            background: '#fff',
+            borderRadius: T.r.lg,
+            padding: 16,
+            borderTop: `3px solid #E84040`,
+            boxShadow: T.shadow.card,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 14,
+          }}
+        >
+          <div style={{
+            width: 44, height: 44, borderRadius: 12,
+            background: '#E84040',
+            display: 'grid', placeItems: 'center',
+            boxShadow: 'inset 0 -3px 0 rgba(0,0,0,0.18)',
+            flexShrink: 0,
+          }}>
+            <Icon name="newspaper" size={24} color="#fff" strokeWidth={2.2} />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', color: '#7A1010' }}>Catalunya · Espanya · Món</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 17, letterSpacing: -0.3, marginTop: 2 }}>Notícies del dia</div>
+            <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>Política, economia, esports, cultura i successos. Actualitzat cada nit.</div>
+          </div>
+          <Icon name="chevron-right" size={18} color={T.inkMuted} />
+        </div>
+      </div>
+
       {/* Actualitat normativa */}
       <div style={{ padding: '14px 0 0' }}>
         <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
