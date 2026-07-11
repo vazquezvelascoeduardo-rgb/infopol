@@ -77,6 +77,27 @@ function ChecklistList() {
           </Link>
         ))}
       </section>
+
+      {/* Referència transversal: catàleg d'actes del cos */}
+      <Link
+        to="/operativa/actes-viladecans"
+        style={{
+          display: 'flex', alignItems: 'center', gap: 12, marginTop: 22,
+          border: '1px solid var(--line)', borderRadius: 14, padding: '13px 16px',
+          background: 'var(--paper)', textDecoration: 'none',
+        }}
+      >
+        <span style={{ fontSize: 22 }} aria-hidden>🗂️</span>
+        <span style={{ flex: 1 }}>
+          <strong style={{ display: 'block', fontSize: 14, color: 'var(--ink)' }}>
+            Actes i documents — PL Viladecans
+          </strong>
+          <span style={{ fontSize: 12, color: 'var(--text-3)' }}>
+            Catàleg complet de plantilles del cos i quan procedeix cadascuna.
+          </span>
+        </span>
+        <span style={{ color: 'var(--terracotta)', fontWeight: 700 }}>→</span>
+      </Link>
     </div>
   );
 }

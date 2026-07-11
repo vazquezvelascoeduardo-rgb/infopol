@@ -966,6 +966,8 @@ const FIELD_LABELS: Record<string, { label: string; icon?: string; tone?: 'warn'
   transparencia_clau: { label: 'Transparència (clau)', icon: '🔍' },
   vies_aplicables: { label: 'Vies aplicables', icon: '🛣️' },
   vies_per_propietari: { label: 'Vies per al propietari', icon: '🛣️' },
+  // Actes de la Policia Local de Viladecans que pertoquen a aquest resultat
+  actes_viladecans: { label: 'Actes a emplenar (PL Viladecans)', icon: '🗂️', tone: 'info' },
   base_legal_extra: { label: 'Base legal addicional', icon: '📕' },
   delictes_aplicables: { label: 'Delictes aplicables', icon: '⚖️' },
   elements_essencials: { label: 'Elements essencials', icon: '🧷' },

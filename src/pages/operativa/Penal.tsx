@@ -64,6 +64,7 @@ function PenalList() {
         <ReferenceQuickLink to="/operativa/penal/taula-drogues" icon="💊" label={t('penal.taulaDrogues')} color="#8b5cf6" />
         <ReferenceQuickLink to="/operativa/penal/recursos" icon="📞" label={t('penal.recursos')} color="#dc2626" />
         <ReferenceQuickLink to="/operativa/penal/drets-detingut" icon="📜" label={t('penal.dretsDetingut')} color="#ef4444" />
+        <ReferenceQuickLink to="/operativa/actes-viladecans" icon="🗂️" label="Actes PL Viladecans" color="#B6531F" />
       </div>
 
       {/* Blocs amb escenaris */}
