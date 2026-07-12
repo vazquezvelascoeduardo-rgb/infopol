@@ -24,6 +24,10 @@ const json = (body: unknown, status = 200) =>
 const GEMINI_KEY = Deno.env.get("GEMINI_API_KEY") ?? "";
 const ADMINS = (Deno.env.get("ADMIN_EMAILS") ?? "vazquezvelascoeduardo@gmail.com,eduguapo98@gmail.com")
   .split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
+// Token de bootstrap OPCIONAL per a la ingesta inicial automatitzada
+// (només actiu si el secret BOOTSTRAP_TOKEN està definit; es pot
+// esborrar el secret un cop feta la càrrega per tancar la porta).
+const BOOTSTRAP_TOKEN = Deno.env.get("BOOTSTRAP_TOKEN") ?? "";
 const EMBED_MODEL = "text-embedding-004";           // 768 dims
 const GEN_MODELS = ["gemini-2.5-flash", "gemini-2.0-flash"]; // fallback en cadena
 const DAILY_LIMIT = 40;                              // preguntes/usuari/dia
@@ -117,14 +121,18 @@ Deno.serve(async (req) => {
     const { data: userData } = await admin.auth.getUser(auth.replace(/^Bearer\s+/i, ""));
     const user = userData?.user ?? null;
     const email = (user?.email ?? "").toLowerCase();
-    const isAdmin = ADMINS.includes(email);
+    // Bootstrap: permet la ingesta automatitzada inicial sense sessió
+    // d'usuari, amb un token d'un sol ús guardat com a secret.
+    const bootstrapOk = !!BOOTSTRAP_TOKEN && req.headers.get("x-bootstrap-token") === BOOTSTRAP_TOKEN;
+    const isAdmin = ADMINS.includes(email) || bootstrapOk;
 
     if (action === "stats") {
       const { count } = await admin.from("chat_docs").select("id", { count: "exact", head: true });
       return json({ count: count ?? 0 });
     }
 
-    if (!user) return json({ error: "Cal iniciar sessió." }, 401);
+    if (!user && !bootstrapOk) return json({ error: "Cal iniciar sessió." }, 401);
+    if (!user && bootstrapOk && action === "ask") return json({ error: "El bootstrap només permet ingest/purge/stats." }, 403);
 
     if (action === "ingest") {
       if (!isAdmin) return json({ error: "Només administradors." }, 403);
