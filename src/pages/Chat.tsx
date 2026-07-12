@@ -66,9 +66,16 @@ export default function Chat() {
       {/* Conversa */}
       <div ref={scroller} style={{ minHeight: 280, maxHeight: '52vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 12, padding: 4 }}>
         {msgs.length === 0 && (
-          <div style={{ textAlign: 'center', color: A.inkMuted, fontFamily: A.sans, fontSize: 14, padding: '24px 0' }}>
-            <div style={{ fontSize: 34, marginBottom: 8 }}>💬</div>
-            Prova: <i>"Quina multa té circular amb VMP per la vorera?"</i> · <i>"Redacta'm un esborrany d'acta D-10 per consum d'alcohol a la via pública"</i>
+          <div style={{ textAlign: 'center', color: A.inkMuted, fontFamily: A.sans, fontSize: 14, padding: '18px 0' }}>
+            <div style={{ fontSize: 34, marginBottom: 10 }}>💬</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center', maxWidth: 640, margin: '0 auto' }}>
+              {SUGGESTED.map((s) => (
+                <button key={s} onClick={() => { setQ(s); }}
+                  style={{ border: `1px solid ${A.line2}`, background: A.card, color: A.inkSoft, cursor: 'pointer', borderRadius: 999, padding: '8px 14px', fontFamily: A.sans, fontSize: 12.5, textAlign: 'left' }}>
+                  {s}
+                </button>
+              ))}
+            </div>
           </div>
         )}
         {msgs.map((m, i) => (
@@ -76,8 +83,8 @@ export default function Chat() {
             <div style={{
               background: m.role === 'user' ? A.ink : A.card, color: m.role === 'user' ? '#fff' : A.ink,
               border: m.role === 'user' ? 'none' : `1px solid ${A.line}`, borderRadius: 16, padding: '11px 14px',
-              fontFamily: A.sans, fontSize: 14.5, lineHeight: 1.5, whiteSpace: 'pre-wrap', boxShadow: A.shadow,
-            }}>{m.text}</div>
+              fontFamily: A.sans, fontSize: 14.5, lineHeight: 1.55, whiteSpace: 'pre-wrap', boxShadow: A.shadow,
+            }}>{m.role === 'bot' ? renderLite(m.text) : m.text}</div>
             {m.sources && m.sources.length > 0 && (
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 6 }}>
                 {dedupeSources(m.sources).slice(0, 5).map((s, j) => <Chip key={j} tone="blue">{s.source || s.title || 'font'}</Chip>)}
@@ -113,11 +120,38 @@ export default function Chat() {
   );
 }
 
+const SUGGESTED = [
+  '🛴 Quina multa té circular amb un patinet per la vorera?',
+  '🍺 Alcoholèmia de 0,68 mg/l: quins passos i quines actes?',
+  '🚗 Permís colombià sense canjear després d\'1 any de residència: què faig?',
+  '🚔 Detenim per un robatori: quines actes fem a Viladecans?',
+  '📄 Redacta\'m el concepte de butlleta per un VMP saltant-se un semàfor',
+  '🏠 Ocupació d\'un pis sense violència: delicte o via civil?',
+];
+
+// Render lleuger de markdown: **negreta**, línies "- " com a llista i
+// títols "### ". Sense dependències; suficient per a respostes del bot.
+function renderLite(text: string) {
+  const lines = text.split('\n');
+  return lines.map((ln, i) => {
+    const parts = ln.split(/(\*\*[^*]+\*\*)/g).map((seg, j) =>
+      seg.startsWith('**') && seg.endsWith('**')
+        ? <b key={j}>{seg.slice(2, -2)}</b>
+        : seg,
+    );
+    if (/^#{2,4}\s/.test(ln)) return <div key={i} style={{ fontWeight: 800, marginTop: i ? 8 : 0 }}>{ln.replace(/^#{2,4}\s/, '')}</div>;
+    if (/^\s*[-•]\s/.test(ln)) return <div key={i} style={{ paddingLeft: 14 }}>• {ln.replace(/^\s*[-•]\s/, '').split(/(\*\*[^*]+\*\*)/g).map((seg, j) => seg.startsWith('**') && seg.endsWith('**') ? <b key={j}>{seg.slice(2, -2)}</b> : seg)}</div>;
+    return <div key={i} style={{ minHeight: ln.trim() ? undefined : 8 }}>{parts}</div>;
+  });
+}
+
 function dedupeSources(s: Src[]): Src[] {
   const seen = new Set<string>(); const out: Src[] = [];
   for (const x of s) { const k = x.source || x.title || ''; if (k && !seen.has(k)) { seen.add(k); out.push(x); } }
   return out;
 }
+
+type CorpusDoc = { title: string; source: string; kind: string; content: string };
 
 function AdminIngest({ onDone }: { onDone: (total: number) => void }) {
   const [title, setTitle] = useState('');
@@ -125,19 +159,84 @@ function AdminIngest({ onDone }: { onDone: (total: number) => void }) {
   const [content, setContent] = useState('');
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState('');
+  // Ingesta massiva del corpus generat del repo (public/chat-corpus.json).
+  const [corpus, setCorpus] = useState<CorpusDoc[] | null>(null);
+  const [bulkBusy, setBulkBusy] = useState(false);
+  const [bulkMsg, setBulkMsg] = useState('');
+  const [bulkPct, setBulkPct] = useState(0);
   const inp: CSSProperties = { width: '100%', border: `1px solid ${A.line2}`, borderRadius: 10, padding: '9px 12px', fontFamily: A.sans, fontSize: 14, color: A.ink, background: A.bgSoft, outline: 'none' };
+
+  useEffect(() => {
+    fetch(import.meta.env.BASE_URL + 'chat-corpus.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (Array.isArray(d)) setCorpus(d as CorpusDoc[]); })
+      .catch(() => {});
+  }, []);
 
   async function load() {
     if (!content.trim() || busy) return;
     setBusy(true); setMsg('Carregant i indexant…');
-    const d = await callChat({ action: 'ingest', documents: [{ title, source: title, kind, content }] });
+    const d = await callChat({ action: 'ingest', documents: [{ title, source: title, kind, content }], replace: true });
     setBusy(false);
     if (d.error) setMsg('⚠️ ' + d.error);
     else { setMsg(`✅ ${d.inserted} fragments afegits (total ${d.total}).`); setContent(''); if (typeof d.total === 'number') onDone(d.total); }
   }
 
+  // Envia el corpus sencer en lots petits (evita timeouts de la funció).
+  // `replace: true` fa que cada `source` substitueixi la versió anterior
+  // (idempotent: es pot re-executar després de cada actualització web).
+  async function bulkIngest() {
+    if (!corpus || bulkBusy) return;
+    if (!confirm(`S'indexaran ${corpus.length} documents del corpus InfoPol (fitxes d'operativa, nomenclàtor SCT, actes de Viladecans i fitxes de lleis). Cada font substitueix la versió anterior. Pot trigar uns minuts. Continuar?`)) return;
+    setBulkBusy(true); setBulkPct(0); setBulkMsg('Indexant…');
+    const BATCH = 6;
+    let done = 0, errors = 0, lastTotal: number | null = null;
+    for (let i = 0; i < corpus.length; i += BATCH) {
+      const batch = corpus.slice(i, i + BATCH);
+      const d = await callChat({ action: 'ingest', documents: batch, replace: true });
+      if (d.error) {
+        errors++;
+        // Un error puntual no atura la ingesta; dos de seguits, sí.
+        if (errors >= 2) { setBulkMsg(`⚠️ Aturat per errors: ${d.error} (${done}/${corpus.length} fets)`); setBulkBusy(false); return; }
+      } else {
+        errors = 0;
+        if (typeof d.total === 'number') lastTotal = d.total;
+      }
+      done += batch.length;
+      setBulkPct(Math.round((done / corpus.length) * 100));
+      setBulkMsg(`Indexant… ${done}/${corpus.length} documents`);
+    }
+    setBulkBusy(false);
+    setBulkMsg(`✅ Corpus indexat: ${corpus.length} documents.`);
+    if (lastTotal != null) onDone(lastTotal);
+  }
+
   return (
     <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 10 }}>
+      {/* Ingesta massiva del corpus del repo */}
+      <Card pad={14} style={{ border: `1.5px solid ${A.terracota}` }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+          <span style={{ fontSize: 20 }}>📥</span>
+          <div style={{ flex: 1, minWidth: 200 }}>
+            <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 14.5, color: A.ink }}>Corpus InfoPol complet</div>
+            <Mono size={9} color={A.inkMuted}>
+              {corpus ? `${corpus.length} documents: fitxes operativa + nomenclàtor SCT + actes Viladecans + fitxes de lleis` : 'Carregant corpus…'}
+            </Mono>
+          </div>
+          <button onClick={bulkIngest} disabled={!corpus || bulkBusy}
+            style={{ border: 'none', background: A.terracota, color: '#fff', borderRadius: 11, padding: '10px 16px', fontFamily: A.display, fontWeight: 700, fontSize: 13.5, cursor: 'pointer', opacity: !corpus || bulkBusy ? 0.5 : 1 }}>
+            {bulkBusy ? `${bulkPct}%…` : 'Indexar-ho tot'}
+          </button>
+        </div>
+        {bulkBusy && (
+          <div style={{ marginTop: 10, height: 8, borderRadius: 999, background: A.bgDeep, overflow: 'hidden' }}>
+            <div style={{ width: `${bulkPct}%`, height: '100%', background: A.terracota, transition: 'width .3s' }} />
+          </div>
+        )}
+        {bulkMsg && <div style={{ marginTop: 8, fontFamily: A.sans, fontSize: 13, color: A.inkSoft }}>{bulkMsg}</div>}
+      </Card>
+
+      <Mono size={9} color={A.inkMuted}>O carrega un document solt (ordenances noves, pautes internes…):</Mono>
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 10 }}>
         <input style={inp} value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Títol / font (p. ex. Ordenança soroll Viladecans)" />
         <select style={{ ...inp, cursor: 'pointer' }} value={kind} onChange={(e) => setKind(e.target.value)}>
