@@ -1,0 +1,42 @@
+name: Actualització diària de notícies
+
+on:
+  schedule:
+    # 20:00 UTC = 22:00 CEST (estiu) / 21:00 CET (hivern)
+    # Ajustar a 21:00 UTC a l'octubre per al canvi d'hora
+    - cron: '3 20 * * *'
+  workflow_dispatch:  # Permet execució manual
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch and categorize news
+        run: python scripts/fetch-news.py
+
+      - name: Commit updated news
+        run: |
+          git config user.name "InfoPol NewsBot"
+          git config user.email "newsbot@infopol.cat"
+          git add server/data/news.json
+          if git diff --cached --quiet; then
+            echo "No hi ha notícies noves. Res a fer."
+          else
+            DATE=$(date +"%Y-%m-%d")
+            git commit -m "news: actualització automàtica ${DATE} [skip ci]"
+            git push origin ${{ github.ref_name }}
+          fi
