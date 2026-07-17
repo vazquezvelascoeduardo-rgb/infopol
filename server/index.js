@@ -2,6 +2,7 @@ import express from 'express';
 import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { readFileSync, writeFileSync } from 'fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -95,6 +96,20 @@ const STATS = {
   ],
 };
 
+const NOTICIAS_PATH = join(__dirname, 'data/noticias.json');
+
+function readNoticias() {
+  try {
+    return JSON.parse(readFileSync(NOTICIAS_PATH, 'utf8'));
+  } catch {
+    return [];
+  }
+}
+
+function writeNoticias(items) {
+  writeFileSync(NOTICIAS_PATH, JSON.stringify(items, null, 2), 'utf8');
+}
+
 // ── Routes ─────────────────────────────────────────────────────
 
 app.get('/api/health', (req, res) => {
@@ -112,6 +127,21 @@ app.put('/api/user', (req, res) => {
 
 app.get('/api/news', (req, res) => {
   res.json(NEWS);
+});
+
+app.get('/api/noticias', (req, res) => {
+  const items = readNoticias();
+  res.json(items.slice().reverse());
+});
+
+app.post('/api/noticias', (req, res) => {
+  const items = readNoticias();
+  const nova = req.body;
+  if (!nova.id || !nova.title) return res.status(400).json({ error: 'id i title requerits' });
+  if (items.find(n => n.id === nova.id)) return res.status(409).json({ error: 'ja existeix' });
+  items.push(nova);
+  writeNoticias(items);
+  res.status(201).json(nova);
 });
 
 app.get('/api/stats', (req, res) => {
