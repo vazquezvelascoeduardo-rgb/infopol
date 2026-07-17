@@ -1,1 +1,101 @@
-[]
+[
+  {
+    "id": "20260717_001",
+    "date": "2026-07-17",
+    "dateLabel": "07·17",
+    "tag": "Policial",
+    "title": "Mossos desarticulen xarxa d'estafes financeres massives al Vallès",
+    "desc": "Cinc detinguts a Cerdanyola, Mollet, Ripollet i Montcada. El grup va obtenir 131.000 € en 12 dies suplantant identitats amb 1.600 documents robats.",
+    "url": "https://www.3cat.cat/3catinfo/desarticulat-un-grup-criminal-per-estafes-financeres-massives-mitjancant-la-suplantacio-didentitat/noticia/3420501/"
+  },
+  {
+    "id": "20260717_002",
+    "date": "2026-07-17",
+    "dateLabel": "07·17",
+    "tag": "Judicial",
+    "title": "El TJUE avala la llei que obre la porta al retorn de Puigdemont a Espanya",
+    "desc": "El Tribunal de Justícia de la UE recolza la normativa espanyola i allana el camí perquè l'expresident català pugui tornar sense ser arrestat.",
+    "url": "https://www.periodistadigital.com/periodismo/20260717/10-claves-marcan-17-julio-2026-bronca-politica-periodistica-espana-noticia-689405230110/"
+  },
+  {
+    "id": "20260717_003",
+    "date": "2026-07-17",
+    "dateLabel": "07·17",
+    "tag": "Judicial",
+    "title": "L'Audiència de Madrid ratifica el judici amb jurat a Begoña Gómez",
+    "desc": "El tribunal confirma el procés per tràfic d'influències i malversació, però retira les mesures cautelars que li havien retirat el passaport.",
+    "url": "https://www.pressdigital.es/articulo/economia/2026-07-17/5956459-principales-titulares-periodicos-viernes-17-julio"
+  },
+  {
+    "id": "20260717_004",
+    "date": "2026-07-17",
+    "dateLabel": "07·17",
+    "tag": "Policial",
+    "title": "Doble crim a Mijas: detingut el company sentimental de la víctima",
+    "desc": "La Guàrdia Civil va arrestar un home el 9 de juliol com a presumpte autor del doble assassinat d'una dona de 61 anys i la seva filla a Mijas (Màlaga).",
+    "url": "https://feminicidio.net/listado-de-feminicidios-y-otros-asesinatos-de-mujeres-cometidos-por-hombres-en-espana-en-2026/"
+  },
+  {
+    "id": "20260717_005",
+    "date": "2026-07-17",
+    "dateLabel": "07·17",
+    "tag": "Internacional",
+    "title": "El Líban proclama la fi de la presència militar d'Hezbollah al país",
+    "desc": "El ministre d'Exteriors libanès qualifica la decisió d'\"històrica\" i obre una nova etapa per a l'estabilitat del país.",
+    "url": "https://es.euronews.com/video/2026/07/17/ultimas-noticias-17-julio-2026-manana"
+  },
+  {
+    "id": "20260717_006",
+    "date": "2026-07-17",
+    "dateLabel": "07·17",
+    "tag": "Internacional",
+    "title": "L'Índia inaugura el primer tren de passatgers propulsat per hidrogen",
+    "desc": "El nou servei ferroviari marca un hito en la mobilitat neta i forma part del pla nacional de descarbonització del transport.",
+    "url": "https://es.euronews.com/video/2026/07/17/ultimas-noticias-17-julio-2026-manana"
+  },
+  {
+    "id": "20260717_007",
+    "date": "2026-07-17",
+    "dateLabel": "07·17",
+    "tag": "Internacional",
+    "title": "Incendis a França cremen més de 30.000 hectàrees al macís de Fontainebleau",
+    "desc": "Les flames han devastat àrees forestals properes a París en el que s'apunta com un dels estius més secs dels darrers anys a Europa.",
+    "url": "https://lapatilla.com/2026/07/16/portadas-de-la-prensa-internacional-de-este-viernes-17-de-julio-de-2026/"
+  },
+  {
+    "id": "20260717_008",
+    "date": "2026-07-17",
+    "dateLabel": "07·17",
+    "tag": "Economia",
+    "title": "L'IPC espanyol s'estabilitza al 3,2% al juny per tercer mes consecutiu",
+    "desc": "La inflació subjacent baixa una dècima fins al 2,9%. El Banc d'Espanya preveu un IPC mitjà del 3,6% per al 2026.",
+    "url": "https://es.finance.yahoo.com/noticias/tasa-inflaci%C3%B3n-anual-espa%C3%B1ola-confirm%C3%B3-072239873.html"
+  },
+  {
+    "id": "20260717_009",
+    "date": "2026-07-17",
+    "dateLabel": "07·17",
+    "tag": "Economia",
+    "title": "CCOO i Airbus assoleixen preacord amb revisió salarial i teletreball",
+    "desc": "El sindicat anuncia l'acord amb la direcció d'Airbus que inclou millores salarials i compromisos en matèria de treball a distància.",
+    "url": "https://www.pressdigital.es/articulo/economia/2026-07-17/5956459-principales-titulares-periodicos-viernes-17-julio"
+  },
+  {
+    "id": "20260717_010",
+    "date": "2026-07-17",
+    "dateLabel": "07·17",
+    "tag": "Premis",
+    "title": "Almirall guanya el Premi Nacional d'Innovació 2026 en la categoria Gran Empresa",
+    "desc": "El Ministeri de Ciència atorga el guardó a la companyia de dermatologia mèdica barcelonina en el marc dels Premis Nacionals d'Innovació i Disseny.",
+    "url": "https://www.ciencia.gob.es/Noticias/2026/julio/Morant-llamada-premios-nacionales-innovacion-diseno-2026.html"
+  },
+  {
+    "id": "20260717_011",
+    "date": "2026-07-17",
+    "dateLabel": "07·17",
+    "tag": "Esports",
+    "title": "El Barça prepara pretemporada sota les ordres de Flick amb amistós el 31 de juliol",
+    "desc": "L'equip blaugrana s'entrena sota la batuta de Hansi Flick i ha programat un amistós contra el Birmingham City per inaugurar la pretemporada 2026/27.",
+    "url": "https://www.fcbarcelona.es/es/futbol/primer-equip/resultats"
+  }
+]
