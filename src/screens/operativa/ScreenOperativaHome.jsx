@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
+import { NEWS_GENERAL } from '../../data/generalNews';
 
 function BigCatCard({ cat, icon, kicker, title, desc, cta, onClick }) {
   const k = T.cat[cat];
@@ -47,6 +48,37 @@ const NEWS = [
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
+
+const TAG_COLOR = {
+  'Política':      '#3B6BF5',
+  'Economia':      '#E89421',
+  'Esports':       '#1FB286',
+  'Cultura':       '#FF7A1A',
+  'Internacional': '#9C4FE0',
+  'Judicial':      '#E04F5F',
+  'Policial':      '#E04F5F',
+  'Ciència':       '#0BB4C2',
+  'Premis':        '#F0B400',
+  'Societat':      '#3B6BF5',
+};
+
+function GeneralNewsCard({ date, tag, title, desc, url }) {
+  const color = TAG_COLOR[tag] || '#3B6BF5';
+  return (
+    <div
+      onClick={() => url && window.open(url, '_blank', 'noopener')}
+      style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${color}`, boxShadow: T.shadow.card, cursor: url ? 'pointer' : 'default' }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+        <span style={{ fontSize: 10, fontWeight: 800, color, letterSpacing: 0.6, textTransform: 'uppercase' }}>{tag}</span>
+        <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{date}</span>
+      </div>
+      <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{title}</div>
+      <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{desc}</div>
+      {url && <div style={{ marginTop: 6, fontSize: 11, color, fontWeight: 700 }}>Llegir més →</div>}
+    </div>
+  );
+}
 
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
@@ -136,6 +168,18 @@ export default function ScreenOperativaHome() {
           ))}
         </div>
       </div>
+
+      {/* Notícies generals diàries */}
+      {NEWS_GENERAL.length > 0 && (
+        <div style={{ padding: '14px 0 16px' }}>
+          <SectionHead kicker="Noticias" kickerColor={T.cat.atajos.solid} title="Notícies d'avui" action="Tot →" />
+          <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {NEWS_GENERAL.map((n, i) => (
+              <GeneralNewsCard key={i} {...n} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
