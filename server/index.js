@@ -2,6 +2,7 @@ import express from 'express';
 import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { readFileSync, writeFileSync } from 'fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -13,6 +14,22 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
+
+// ── News data (persistent JSON) ────────────────────────────────
+
+const NEWS_PATH = join(__dirname, '../src/data/news.json');
+
+function readNews() {
+  try {
+    return JSON.parse(readFileSync(NEWS_PATH, 'utf-8')).items || [];
+  } catch {
+    return [];
+  }
+}
+
+function writeNews(items) {
+  writeFileSync(NEWS_PATH, JSON.stringify({ items }, null, 2), 'utf-8');
+}
 
 // ── Mock data ──────────────────────────────────────────────────
 
@@ -43,35 +60,6 @@ const USER = {
   mode: 'operativa',
 };
 
-const NEWS = [
-  {
-    id: 'n001',
-    date: '2026-04-18',
-    dateLabel: '04·18',
-    tag: 'LO 1/2026',
-    title: 'Multireincidència — enduriment de furts i estafes lleus',
-    desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026. Afecta l\'art. 22.8 CP i els arts. 468-470 LECrim.',
-    url: null,
-  },
-  {
-    id: 'n002',
-    date: '2026-04-14',
-    dateLabel: '04·14',
-    tag: 'RD 316/2026',
-    title: 'Reforma del Reglament d\'Estrangeria',
-    desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny de 2026.',
-    url: null,
-  },
-  {
-    id: 'n003',
-    date: '2026-03-28',
-    dateLabel: '03·28',
-    tag: 'Circ. 2/2026',
-    title: 'Instrucció sobre identificació i registre de persones',
-    desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.',
-    url: null,
-  },
-];
 
 const STATS = {
   streak: 23,
@@ -111,7 +99,15 @@ app.put('/api/user', (req, res) => {
 });
 
 app.get('/api/news', (req, res) => {
-  res.json(NEWS);
+  res.json(readNews());
+});
+
+app.post('/api/news', (req, res) => {
+  const incoming = Array.isArray(req.body) ? req.body : [req.body];
+  const existing = readNews();
+  const merged = [...incoming, ...existing].slice(0, 100);
+  writeNews(merged);
+  res.json({ added: incoming.length, total: merged.length });
 });
 
 app.get('/api/stats', (req, res) => {
