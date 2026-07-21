@@ -43,6 +43,20 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  // 21 juliol 2026
+  { date: '07·21', tag: 'Esports', title: 'Espanya, campiona del Món 2026', desc: 'La Roja s\'imposa a Argentina (1-0) a la final del 19 de juliol. Quart títol mundial per a la selecció espanyola.' },
+  { date: '07·21', tag: 'Catalunya · Economia', title: 'La fuga d\'empreses a Catalunya supera la xifra de tot el 2025', desc: 'Saldo net negatiu de 257 societats en el primer semestre, molt per sobre de les 158 de tot l\'any passat.' },
+  { date: '07·21', tag: 'Catalunya · Política', title: 'El Parlament aprova els primers Pressupostos del Govern Illa per al 2026', desc: 'Les primeres comptes que aconsegueix tirar endavant el Govern de Salvador Illa superen el ple del Parlament.' },
+  { date: '07·19', tag: 'Successos · Mossos', title: 'Operatiu per capturar un home acusat d\'incendiar el domicili de l\'exparella', desc: 'Els Mossos d\'Esquadra busquen el sospitós de calar foc a l\'habitatge on vivien la seva exparella i el fill menor.' },
+  { date: '07·16', tag: 'Successos · Mossos', title: 'Mossos obren foc contra un cotxe que embistia agents a l\'Hospitalet', desc: 'Un home amb ordre d\'allunyament va envestir vehicles policials en intentar fugir. Va ser detingut.' },
+  { date: '07·21', tag: 'Espanya · Política', title: 'El Consell de Ministres torna a aprovar la senda de dèficit 2027-2029', desc: 'Segon intent del Govern Sánchez després que el Congrés rebutgés la primera proposta de senda de dèficit.' },
+  { date: '07·21', tag: 'Espanya · Economia', title: 'Amazon obre un centre de distribució a Saragossa amb 100 M€ d\'inversió', desc: 'Més de 30.000 m² i centenars de nous llocs de treball a la capital aragonesa.' },
+  { date: '07·19', tag: 'Ciència', title: 'Espanya bat el rècord de projectes científics d\'alt nivell finançats per la UE', desc: 'El Consell Europeu d\'Investigació (ERC) finança un nombre rècord de projectes espanyols d\'excel·lència.' },
+  { date: '07·21', tag: 'Premis', title: 'Almirall, Premi Nacional d\'Innovació 2026 com a Gran Empresa Innovadora', desc: 'El Ministeri de Ciència distingeix la farmacèutica catalana, referent mundial en dermatologia amb presència en 100+ països.' },
+  { date: '07·21', tag: 'Internacional', title: 'Andy Burnham completa el seu primer govern com a primer ministre britànic', desc: 'El nou inquilí de Downing Street tanca el seu executiu per encarar les expectatives generades per la seva victòria.' },
+  { date: '07·21', tag: 'Internacional · ONU', title: 'L\'ONU publica el SOFI 2026: la gana global segueix sent un repte crític', desc: 'La FAO i quatre agències de l\'ONU presenten a Roma l\'informe anual sobre seguretat alimentària i nutrició.' },
+  { date: '07·21', tag: 'Internacional', title: 'EUA envia 100 milions de dòlars d\'ajuda humanitària a Cuba', desc: 'Aliments i productes d\'higiene per pal·liar l\'escassetat creixent d\'aliments, medicines i combustible a l\'illa.' },
+  // Actualitat normativa
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -122,7 +136,7 @@ export default function ScreenOperativaHome() {
 
       {/* Actualitat normativa */}
       <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
+        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
             <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
