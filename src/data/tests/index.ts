@@ -64,6 +64,9 @@ import proteccioCivil from './proteccio-civil';
 import igualtatGenere from './igualtat-genere';
 import reus from './reus';
 import terrassa2026 from './terrassa-2026';
+import gava from './gava';
+import gavaCultura from './gava-cultura';
+import gavaOrdenances from './gava-ordenances';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -128,6 +131,9 @@ export const TOPICS: TestTopic[] = [
   igualtatGenere,
   reus,
   terrassa2026,
+  gava,
+  gavaCultura,
+  gavaOrdenances,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
