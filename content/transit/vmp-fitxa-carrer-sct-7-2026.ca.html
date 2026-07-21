@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="infopol-icon" content="🛴">
+<title>VMP · Fitxa de carrer — Comunicat SCT 7/2026</title>
+<style>
+  :root{
+    --ink:#0E1621;
+    --ink-soft:#3A4757;
+    --line:#C9D2DC;
+    --paper:#FFFFFF;
+    --wash:#EEF2F6;
+    --sct:#0B4F8A;
+    --stop:#B3261E;
+    --go:#186B47;
+    --warn:#9A5B00;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--wash);
+    line-height:1.45;
+    -webkit-text-size-adjust:100%;
+  }
+  .card{max-width:760px;margin:0 auto;background:var(--paper)}
+
+  /* ---------- capçalera ---------- */
+  header{background:var(--ink);color:#fff;padding:18px 16px 16px}
+  .kicker{
+    font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;color:#8FB4D6
+  }
+  h1{font-size:26px;line-height:1.1;font-weight:800;letter-spacing:-.02em;margin:6px 0 8px}
+  h1 span{color:#8FB4D6;font-weight:400}
+  .meta{font-family:var(--mono);font-size:11px;color:#B9C6D4}
+
+  /* ---------- seccions ---------- */
+  section{border-top:3px solid var(--ink);padding:16px}
+  .stepnum{
+    font-family:var(--mono);font-size:11px;font-weight:700;
+    background:var(--ink);color:#fff;padding:2px 7px;border-radius:2px;margin-right:8px
+  }
+  h2{font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;
+     display:flex;align-items:center;margin-bottom:12px}
+  h3{font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;
+     color:var(--ink-soft);margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--line)}
+
+  /* ---------- porta de decisió ---------- */
+  .gate{border:2px solid var(--ink);border-radius:3px;overflow:hidden;margin-bottom:12px}
+  .gate-q{background:var(--wash);padding:10px 12px;font-weight:700;font-size:14px}
+  .gate-a{display:flex;border-top:1px solid var(--line)}
+  .gate-a > div{flex:1;padding:10px 12px;font-size:13px}
+  .gate-a > div + div{border-left:1px solid var(--line)}
+  .tag{font-family:var(--mono);font-size:11px;font-weight:700;display:block;margin-bottom:3px}
+  .t-motor{color:var(--stop)}
+  .t-vpl{color:var(--sct)}
+
+  /* ---------- taules ---------- */
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:6px}
+  th{
+    text-align:left;font-family:var(--mono);font-size:10px;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--ink-soft);border-bottom:2px solid var(--ink);
+    padding:5px 6px;font-weight:700
+  }
+  td{border-bottom:1px solid var(--line);padding:7px 6px;vertical-align:top}
+  td.num{font-family:var(--mono);font-weight:700;text-align:right;white-space:nowrap}
+  td.art{font-family:var(--mono);font-size:11px;color:var(--ink-soft);white-space:nowrap}
+  tr.hi td{background:#FDF3F2}
+
+  /* ---------- avisos ---------- */
+  .flag{border-left:4px solid;padding:9px 12px;margin:10px 0;font-size:13px;background:var(--wash)}
+  .f-stop{border-color:var(--stop)}
+  .f-warn{border-color:var(--warn)}
+  .f-go{border-color:var(--go)}
+  .flag b{display:block;font-family:var(--mono);font-size:10px;text-transform:uppercase;
+          letter-spacing:.08em;margin-bottom:3px}
+  .f-stop b{color:var(--stop)} .f-warn b{color:var(--warn)} .f-go b{color:var(--go)}
+
+  ul{list-style:none;font-size:13px}
+  ul li{padding:5px 0 5px 18px;position:relative;border-bottom:1px solid var(--line)}
+  ul li:before{content:"▸";position:absolute;left:2px;color:var(--sct);font-weight:700}
+  ul li:last-child{border-bottom:none}
+
+  .absorb{font-family:var(--mono);font-size:12px;background:var(--wash);
+          padding:8px 10px;border-radius:2px;margin-bottom:6px}
+  .absorb strong{color:var(--stop)}
+
+  footer{background:var(--ink);color:#B9C6D4;padding:14px 16px;font-size:11px;font-family:var(--mono)}
+
+  @media print{
+    body{background:#fff}
+    section{page-break-inside:avoid}
+    header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+<div class="card">
+
+<header>
+  <div class="kicker">InfoPol · Fitxa de carrer</div>
+  <h1>VMP <span>i vehicles similars</span></h1>
+  <div class="meta">Comunicat Informatiu SCT 7/2026 · en vigor 20.07.2026<br>Refon 3/2026 · 4/2026 · 6/2026</div>
+</header>
+
+<!-- 1 -->
+<section>
+  <h2><span class="stepnum">1</span>Identifica el vehicle</h2>
+
+  <div class="gate">
+    <div class="gate-q">Té placa de marcatge?</div>
+    <div class="gate-a">
+      <div><span class="tag t-vpl">SÍ</span>És <b>VMP sempre</b>. Anota núm. de sèrie i núm. de certificat de la placa.</div>
+      <div><span class="tag">NO</span>Busca l'etiqueta <b>M0000BBB</b>. Si tampoc n'hi ha: anota <b>pes</b> i <b>velocitat màxima</b>.</div>
+    </div>
+  </div>
+
+  <div class="flag f-warn">
+    <b>Dada crítica</b>
+    La <b>MOM</b> (massa en ordre de marxa) decideix l'import de l'AOV. Consta al REVEMP; a ATEX és «Massa servei (kg) (G)». Si no està inscrit, l'has d'anotar tu.
+  </div>
+</section>
+
+<!-- 2 -->
+<section>
+  <h2><span class="stepnum">2</span>Classifica</h2>
+
+  <div class="gate">
+    <div class="gate-q">MOM &gt; 25 kg <u>i</u> velocitat &gt; 14 km/h?</div>
+    <div class="gate-a">
+      <div><span class="tag t-motor">SÍ → VEHICLE DE MOTOR</span>Art. 1 bis RDL 8/2004. AOV obligatori sempre.</div>
+      <div><span class="tag t-vpl">NO → VPL</span>MOM ≤ 25 kg, o &gt; 25 kg amb 6–14 km/h.</div>
+    </div>
+  </div>
+
+  <div class="flag f-stop">
+    <b>No confondre</b>
+    Vehicle amb <b>seient</b> i sense autoequilibratge <u>no és VMP</u>. Tampoc si supera 100 VCC / 240 VAC, ni si entra al Reglament UE 168/2013. → Vés al bloc 5.
+  </div>
+</section>
+
+<!-- 3 -->
+<section>
+  <h2><span class="stepnum">3</span>Denúncies · VMP</h2>
+
+  <table>
+    <thead><tr><th>Fet</th><th>Article</th><th>Import</th><th>50%</th></tr></thead>
+    <tbody>
+      <tr class="hi"><td>Sense AOV — vehicle de motor</td><td class="art">1 bis RDL 8/2004</td><td class="num">800 €</td><td class="num">400 €</td></tr>
+      <tr class="hi"><td>Sense AOV — VPL</td><td class="art">DA 1a Llei 5/2025</td><td class="num">300 €</td><td class="num">150 €</td></tr>
+      <tr><td>Sense certificat de circulació</td><td class="art">22 bis.2 RGV</td><td class="num">200 €</td><td class="num">100 €</td></tr>
+      <tr><td>No inscrit al RNV</td><td class="art">22 bis.2 RGV</td><td class="num">100 €</td><td class="num">50 €</td></tr>
+      <tr><td>Sense etiqueta o placa de marcatge</td><td class="art">22 bis.2 RGV</td><td class="num">80 €</td><td class="num">40 €</td></tr>
+      <tr><td>Requisits tècnics annex XXI — molt greu<br><small>manipulació de velocitat, modificació estructural</small></td><td class="art">22 bis.2 RGV</td><td class="num">500 €</td><td class="num">250 €</td></tr>
+      <tr><td>Requisits tècnics — greu<br><small>enllumenat, rodes</small></td><td class="art">22 bis.2 RGV</td><td class="num">200 €</td><td class="num">100 €</td></tr>
+      <tr><td>Requisits tècnics — lleu<br><small>timbre, cavallet</small></td><td class="art">22 bis.2 RGV</td><td class="num">80 €</td><td class="num">40 €</td></tr>
+    </tbody>
+  </table>
+
+  <div class="flag f-stop">
+    <b>Filtre AOV en VPL</b>
+    Només es pot denunciar el VPL per manca d'assegurança si té <b>els tres</b>: certificat de circulació + inscripció al RNV + etiqueta identificativa. Si en falta un → <b>no denunciïs l'AOV</b>.
+  </div>
+
+  <div class="flag f-warn">
+    <b>Certificat · dates</b>
+    Comercialitzat <b>abans del 22.01.2024</b> → exempt fins al <b>22.01.2027</b>. Comercialitzat després → denunciable ara.
+  </div>
+
+  <div class="flag f-go">
+    <b>Mai en VMP</b>
+    No es denuncia per manca de permís de conduir. No cal.
+  </div>
+
+  <h3>Incompatibilitats — què absorbeix què</h3>
+  <div class="absorb">Sense certificat <strong>absorbeix</strong> no inscrit al RNV</div>
+  <div class="absorb">Sense certificat <strong>absorbeix</strong> sense placa de marcatge</div>
+  <div class="absorb">No inscrit al RNV <strong>absorbeix</strong> sense etiqueta</div>
+</section>
+
+<!-- 4 -->
+<section>
+  <h2><span class="stepnum">4</span>Qui respon</h2>
+  <ul>
+    <li><b>1r —</b> Titular inscrit al RNV.</li>
+    <li><b>2n —</b> Si no consta inscrit: el conductor.</li>
+    <li><b>Menor —</b> Pares, tutors, acollidors o guardadors responen <b>solidàriament</b> (art. 82 LSV). Consigna les seves dades a la butlleta.</li>
+  </ul>
+</section>
+
+<!-- 5 -->
+<section>
+  <h2><span class="stepnum">5</span>No és VMP · fora del Regl. UE 168/2013</h2>
+  <p style="font-size:13px;margin-bottom:10px">Prestacions superiors a un VMP i no homologable. <b>No pot circular.</b></p>
+  <table>
+    <thead><tr><th>Fet</th><th>Article</th><th>Import</th><th>50%</th></tr></thead>
+    <tbody>
+      <tr><td>Sense AOV — si és vehicle de motor</td><td class="art">1 bis RDL 8/2004</td><td class="num">800 €</td><td class="num">400 €</td></tr>
+      <tr class="hi"><td>Sense autorització administrativa per circular<br><small>+ susceptible d'immobilització</small></td><td class="art">1.1 RGV</td><td class="num">500 €</td><td class="num">250 €</td></tr>
+    </tbody>
+  </table>
+  <div class="flag f-go">
+    <b>No denunciïs</b>
+    Requisits tècnics · permís de conduir. Si no és vehicle de motor (art. 1 bis), tampoc l'AOV.
+  </div>
+</section>
+
+<!-- 6 -->
+<section>
+  <h2><span class="stepnum">6</span>Sí compleix Regl. UE 168/2013</h2>
+
+  <div class="gate">
+    <div class="gate-q">Alçada del seient del conductor</div>
+    <div class="gate-a">
+      <div><span class="tag">&gt; 540 mm</span>Categories L1e · L3e · L4e</div>
+      <div><span class="tag">&gt; 400 mm</span>Categories L2e · L5e · L6e · L7e</div>
+    </div>
+  </div>
+  <p style="font-size:13px;margin-bottom:12px">Entra al Reglament → cal <b>autorització per circular</b> i <b>per conduir</b>. Règim ordinari de vehicle matriculat.</p>
+
+  <h3>Quin permís</h3>
+  <ul>
+    <li><b>L1e-B</b> ciclomotor — ≤ 4000 W i ≤ 45 km/h → <b>AM</b></li>
+    <li><b>L3e-A1</b> — ≤ 11 kW i ≤ 0,1 kW/kg → <b>A1</b> o <b>B</b> amb +3 anys</li>
+    <li><b>L3e-A2</b> — ≤ 35 kW i ≤ 0,2 kW/kg → <b>A2</b></li>
+    <li><b>L3e-A3</b> — la resta → <b>A</b></li>
+  </ul>
+
+  <table style="margin-top:12px">
+    <thead><tr><th>Fet</th><th>Article</th><th>Import</th><th>50%</th></tr></thead>
+    <tbody>
+      <tr><td>Sense matrícula<br><small>+ susceptible d'immobilització</small></td><td class="art">1.2 RGV</td><td class="num">500 €</td><td class="num">250 €</td></tr>
+      <tr><td>Sense permís de conduir</td><td class="art">1.1 RGCon</td><td class="num" colspan="2">segons categoria</td></tr>
+      <tr><td>Sense AOV</td><td class="art">segons categoria</td><td class="num" colspan="2">segons categoria</td></tr>
+      <tr><td>Condicions tècniques</td><td class="art">RGV</td><td class="num" colspan="2">segons infracció</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 7 -->
+<section>
+  <h2><span class="stepnum">7</span>Abans de tancar la butlleta</h2>
+  <ul>
+    <li>Núm. identificació <b>M0000BBB</b> · o núm. de sèrie + núm. de certificat de la placa</li>
+    <li>Si no en té: <b>pes</b> i <b>velocitat màxima</b> descrits</li>
+    <li>MOM anotada si el vehicle no està inscrit</li>
+    <li>Data de comercialització verificada (certificat)</li>
+    <li>Cap denúncia incompatible acumulada</li>
+    <li>Dades del pare/tutor si l'infractor és menor</li>
+    <li>En requisits tècnics: especificat <b>quin</b> incompliment es denuncia</li>
+  </ul>
+</section>
+
+<footer>
+  Font única: Comunicat Informatiu SCT 7/2026 — Ramon Lamiel i Villaró, director SCT.<br>
+  Eina de suport. La qualificació definitiva correspon a l'agent actuant.
+</footer>
+
+</div>
+</body>
+</html>

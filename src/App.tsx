@@ -81,6 +81,8 @@ const PUBLIC_LEYES_CARDS: Array<{ moduleSlug: string; slug: string }> = [
   // Novetats normatives — visibles des d'Operativa (que és pública)
   { moduleSlug: 'novetats', slug: 'vmp-vpl-novetats-2026' },
   { moduleSlug: 'novetats', slug: 'quarta-reforma-constitucio-2026' },
+  // Fitxa de carrer VMP — Comunicat SCT 7/2026 (refon 3/4/6-2026)
+  { moduleSlug: 'transit', slug: 'vmp-fitxa-carrer-sct-7-2026' },
 ];
 
 function PageFallback() {
