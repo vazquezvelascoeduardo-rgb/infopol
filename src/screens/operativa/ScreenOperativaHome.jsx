@@ -43,6 +43,13 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '07·22', tag: 'Internacional', title: 'EEUU i Israel intensifiquen els atacs a l\'Iran: Trump homenatja els 4 militars morts', desc: 'Les forces armades dels EUA van atacar "objectius militars" iranians. L\'Iran va contratacar al Bahrain i a l\'estret d\'Ormuz.' },
+  { date: '07·22', tag: 'Política CAT', title: 'Illa reivindica la "política útil" davant l\'auge d\'Aliança Catalana', desc: 'El CEO dona fins a 23-25 diputats a Aliança Catalana. Illa apel·la a l\'esperança contra el "discurs de la por".' },
+  { date: '07·22', tag: 'Esports', title: 'El Barça tanca el fitxatge definitiu de Rashford per 35,2 M€', desc: 'Lewandowski no renovarà i marxa en acabar el contracte. Casadó, amb possibles sortides cap a clubs de LaLiga o el Pèrsia Golf.' },
+  { date: '07·22', tag: 'Premis', title: 'Almirall guanya el Premi Nacional d\'Innovació 2026', desc: 'La farmacèutica catalana, referent mondial en dermatologia mèdica, ha invertit més de 2.000 M€ en R+D els últims 20 anys.' },
+  { date: '07·22', tag: 'Cultura', title: 'La 30a Fira del Llibre de Lima obre amb l\'Equador com a convidat d\'honor', desc: 'Una de les fires literàries més importants d\'Amèrica Llatina celebra tres dècades amb una àmplia delegació d\'autors equatorians.' },
+  { date: '07·22', tag: 'Esports INT', title: 'Hong Kong acull el Mundial d\'Esgrima per primera vegada (22–30 jul.)', desc: 'Més de 1.000 tiradors de tot el món competiran a AsiaWorld-Expo en la primera edició celebrada a Hong Kong.' },
+  { date: '07·22', tag: 'Economia', title: 'L\'indicador de conjuntura espanyol puja lleugerament al juliol fins a 1,52', desc: 'L\'activitat segueix en expansió però s\'alenteix: la producció industrial va frenar del 4,4 % (abril) a l\'0,8 % (maig).' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
