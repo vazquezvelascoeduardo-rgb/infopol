@@ -69,6 +69,421 @@ export type Noticia = {
 // ════════════════════════════════════════════════════════════════════
 
 export const NOTICIES: Noticia[] = [
+  // ─── JULIOL 2026 — ESPORTS · TOUR DE FRANÇA ────────────────────────
+
+  {
+    slug: 'jul2026-tour-franca-pogacar-lider',
+    title: 'Tour de França 2026 — Pogačar defensa el groc a la darrera setmana',
+    summary: "Tadej Pogačar lidera la general del Tour 2026 amb uns 4 minuts i mig sobre Remco Evenepoel després de l'etapa 17. Evenepoel va guanyar la contrarellotge de l'etapa 16. La cursa acaba el 26 de juliol.",
+    body: `El **Tour de França 2026** (4–26 de juliol) encara la seva darrera setmana amb **Tadej Pogačar** com a líder de la classificació general.
+
+## Situació a 23 de juliol
+
+- **Mallot groc**: Tadej Pogačar (UAE).
+- **Segon**: Remco Evenepoel, a uns **4 minuts i 32 segons** després de l'etapa 17.
+- Evenepoel va guanyar la **contrarellotge individual de l'etapa 16**, però Pogačar va mantenir el liderat.
+
+## ⚠️ Atenció per a tests d'actualitat
+
+> La cursa **no acaba fins al 26 de juliol** a París. Aquesta entrada reflecteix l'estat provisional a 23/07/2026 — comprova el guanyador final abans de donar-lo per fet en un test.
+
+## Context
+
+Pogačar busca revalidar el títol aconseguit el 2025. El duel Pogačar–Evenepoel ha marcat tota l'edició, amb la lluita pel mallot verd entre Pedersen i Philipsen com a segon focus d'atenció.`,
+    publishedAt: '2026-07-22',
+    source: 'ProCyclingUK · Cyclinguptodate',
+    sourceUrl: 'https://procyclinguk.com/gc-and-jerseys-after-tour-de-france-2026-stage-16-pogacar-holds-yellow-as-evenepoel-wins-time-trial/',
+    tags: ['esports', 'ciclisme', 'Tour de França', 'Pogačar', 'Evenepoel'],
+    category: 'esports',
+  },
+
+  // ─── JULIOL 2026 — TRÀNSIT · COMUNICAT SCT 7/2026 (VMP) ────────────
+
+  {
+    slug: 'jul2026-comunicat-7-2026-vmp',
+    title: 'VMP — Comunicat 7/2026 del SCT: text refós en vigor des del 20 de juliol',
+    summary: "El Servei Català de Trànsit publica el Comunicat informatiu 7/2026, que refon els comunicats 3/2026, 4/2026 i 6/2026 sobre VMP i vehicles similars. En vigor des del 20/07/2026. La fitxa de carrer d'InfoPol ja està actualitzada.",
+    body: `**Director:** Ramon Lamiel i Villaró · **Entrada en vigor:** 20/07/2026 · **Refon:** Comunicats 3/2026, 4/2026 i 6/2026
+
+El **Comunicat informatiu SCT 7/2026** unifica en un sol text tota la doctrina operativa sobre **Vehicles de Mobilitat Personal (VMP)** i vehicles similars. La **fitxa de carrer d'InfoPol** ja incorpora tot el contingut.
+
+## ⭐ Classificació — la dada crítica és la MOM
+
+> **MOM > 25 kg i velocitat > 14 km/h → VEHICLE DE MOTOR** (art. 1 bis RDL 8/2004): AOV obligatori sempre.
+> **La resta → VPL** (MOM ≤ 25 kg, o > 25 kg amb 6–14 km/h).
+
+La MOM consta al REVEMP; si el vehicle no està inscrit, l'agent l'ha d'anotar a la butlleta.
+
+## 💶 Quadre de denúncies principal
+
+| Fet | Article | Import |
+|-----|---------|--------|
+| Sense AOV — vehicle de motor | 1 bis RDL 8/2004 | **800 €** |
+| Sense AOV — VPL | DA 1a Llei 5/2025 | **300 €** |
+| Sense certificat de circulació | 22 bis.2 RGV | 200 € |
+| No inscrit al RNV | 22 bis.2 RGV | 100 € |
+| Sense etiqueta o placa de marcatge | 22 bis.2 RGV | 80 € |
+| Annex XXI — molt greu (manipulació velocitat) | 22 bis.2 RGV | 500 € |
+| Annex XXI — greu (enllumenat, rodes) | 22 bis.2 RGV | 200 € |
+| Annex XXI — lleu (timbre, cavallet) | 22 bis.2 RGV | 80 € |
+
+Totes amb **reducció del 50%** per pagament anticipat.
+
+## 🚨 Filtre AOV en VPL
+
+Només es pot denunciar un VPL per manca d'assegurança si té **els tres requisits**: certificat de circulació + inscripció al RNV + etiqueta identificativa. **Si en falta un, no es denuncia l'AOV.**
+
+## 📅 Dates clau del certificat
+
+- Comercialitzat **abans del 22/01/2024** → exempt de certificat fins al **22/01/2027**.
+- Comercialitzat després → denunciable ara.
+
+## 📝 Altres regles operatives
+
+- **Incompatibilitats**: sense certificat *absorbeix* no inscrit al RNV i sense placa; no inscrit *absorbeix* sense etiqueta.
+- **Responsable**: 1r el titular inscrit al RNV; si no consta, el conductor. **Menors**: pares/tutors responen solidàriament (art. 82 LSV).
+- **Mai** es denuncia un VMP per manca de permís de conduir.
+
+> 💡 Consulta la fitxa de carrer completa (identificació, blocs de decisió i vehicles fora del Reglament UE 168/2013) a l'enllaç de baix.`,
+    publishedAt: '2026-07-20',
+    source: 'Servei Català de Trànsit · Comunicat informatiu 7/2026',
+    tags: ['trànsit', 'VMP', 'VPL', 'SCT', 'sancions', 'temari'],
+    category: 'noticies',
+    featured: true,
+    linkedTo: {
+      moduleSlug: 'transit',
+      slug: 'vmp-fitxa-carrer-sct-7-2026',
+    },
+  },
+
+  // ─── JULIOL 2026 — PERSONALITATS · DEFUNCIONS ──────────────────────
+
+  {
+    slug: 'jul2026-mor-kevin-keegan',
+    title: 'Mor Kevin Keegan, llegenda del futbol anglès i doble Pilota d\'Or',
+    summary: "L'exfutbolista i exentrenador anglès Kevin Keegan va morir el 20 de juliol de 2026 als 75 anys, a causa d'un càncer d'estómac. Va ser el primer futbolista britànic a guanyar dues Pilotes d'Or consecutives (1978 i 1979).",
+    body: `**Kevin Keegan** (1951–2026) va morir el **20 de juliol de 2026** als **75 anys**, després d'un càncer d'estómac en fase quatre diagnosticat a principis del 2026.
+
+## Palmarès i fites
+
+- Primer futbolista britànic amb **dues Pilotes d'Or consecutives** (1978 i 1979, a l'Hamburg).
+- Amb el **Liverpool**: 3 lligues, 1 Copa d'Europa, 1 FA Cup i 2 Copes de la UEFA.
+- Internacional amb **Anglaterra**, selecció que després també va entrenar.
+- Ídol del **Newcastle United** com a jugador i com a tècnic.
+
+## Per què pot sortir en un test
+
+> Les defuncions de grans figures de l'esport són pregunta recurrent d'actualitat. Dada clau: **20 de juliol de 2026, 75 anys, doble Pilota d'Or (1978-1979)**.`,
+    publishedAt: '2026-07-20',
+    source: 'El Español',
+    sourceUrl: 'https://www.elespanol.com/deportes/futbol/20260720/muere-kevin-keegan-leyenda-futbol-ingles-ganador-balones-oro-anos/1003744327982_0.html',
+    tags: ['personalitats', 'defuncions', 'futbol', 'Kevin Keegan'],
+    category: 'personalitats',
+  },
+
+  // ─── JULIOL 2026 — ESPORTS · MUNDIAL DE FUTBOL ─────────────────────
+
+  {
+    slug: 'jul2026-espanya-campiona-mundial',
+    title: 'Espanya guanya el Mundial 2026 — 1-0 a l\'Argentina a la pròrroga',
+    summary: "Espanya es proclama campiona del món de futbol el 19 de juliol de 2026 al MetLife Stadium (Nova Jersey), en vèncer l'Argentina 1-0 a la pròrroga amb gol de Ferran Torres. És el segon títol mundial després del de 2010.",
+    body: `**Final:** Espanya 1 - 0 Argentina (pròrroga) · **Data:** 19/07/2026 · **Estadi:** MetLife Stadium (Nova Jersey, EUA) · **Gol:** Ferran Torres (min. 106)
+
+**Espanya és campiona del món de futbol per segona vegada.** La selecció va derrotar l'**Argentina** per **1-0 a la pròrroga** a la final del **Mundial 2026**, amb un gol de **Ferran Torres al minut 106**.
+
+## ⭐ Dades per a tests
+
+- **Data de la final**: 19 de juliol de 2026.
+- **Seu**: MetLife Stadium, Nova Jersey (Estats Units).
+- **Resultat**: Espanya 1 - 0 Argentina (després de la pròrroga).
+- **Golejador**: Ferran Torres.
+- **Segon Mundial** d'Espanya (l'anterior: Sud-àfrica 2010).
+- Primer país que té **alhora el Mundial masculí i el femení** (el femení es va guanyar el 2023).
+
+## Un Mundial històric
+
+El **Mundial 2026** ha estat el primer amb **48 seleccions** i el primer organitzat per **tres països**: Estats Units, Mèxic i Canadà.`,
+    publishedAt: '2026-07-19',
+    source: 'NPR · FIFA',
+    sourceUrl: 'https://www.npr.org/2026/07/19/nx-s1-5899071/2026-world-cup-fifa-argentina-spain-final-championship',
+    tags: ['esports', 'futbol', 'Mundial 2026', 'Espanya', 'seleccions'],
+    category: 'esports',
+    featured: true,
+  },
+
+  // ─── JULIOL 2026 — ESPORTS · SANFERMINES ───────────────────────────
+
+  {
+    slug: 'jul2026-sanfermines-balanc',
+    title: 'Sanfermines 2026 — balanç final: 57 atesos, 5 ferits per banya i cap mort',
+    summary: "Els vuit encierros de San Fermín 2026 (7-14 de juliol) es tanquen amb 57 persones ateses a l'Hospital Universitari de Navarra, 5 ferides per banya i 3 casos greus. Cap víctima mortal. La xifra d'atesos puja respecte del 2025 (45) i el 2024 (43).",
+    body: `Les festes de **San Fermín 2026** de Pamplona s'han tancat amb un balanç sanitari dels **vuit encierros** superior al d'anys anteriors, però **sense víctimes mortals**.
+
+## Balanç dels 8 encierros
+
+- **57 persones ateses** a l'Hospital Universitari de Navarra (45 el 2025, 43 el 2024).
+- **5 ferits per asta de toro** (mateixa xifra que el 2025).
+- **3 casos greus**.
+- Augment de fractures, luxacions i traumatismes cranials i toràcics.
+
+## El darrer encierro (14 de juliol)
+
+Els toros de la ramaderia **Jandilla** van tancar les festes amb una cursa de **2 minuts i 25 segons** i **dos ferits per banya**: un jove de 18 anys de Pamplona (cuixa) i un home de 46 anys de Guadalajara (tòrax).
+
+## Per què és rellevant
+
+> Grans esdeveniments festius com els Sanfermines són un exemple clàssic de **dispositius policials de seguretat massiva** (controls d'accés, coordinació sanitària, gestió de multituds) i pregunta recurrent d'actualitat de juliol.`,
+    publishedAt: '2026-07-14',
+    source: 'Noticias de Navarra',
+    sourceUrl: 'https://www.noticiasdenavarra.com/san-fermin/2026/07/14/parte-medico-octavo-encierro-san-fermin-2026-11324205.html',
+    tags: ['esports', 'Sanfermines', 'Pamplona', 'seguretat esdeveniments'],
+    category: 'esports',
+  },
+
+  // ─── JULIOL 2026 — ESPORTS · WIMBLEDON ─────────────────────────────
+
+  {
+    slug: 'jul2026-wimbledon-sinner-noskova',
+    title: 'Wimbledon 2026 — Sinner revalida el títol i Nosková guanya el seu primer Grand Slam',
+    summary: "Jannik Sinner venç Alexander Zverev a la final masculina de Wimbledon 2026 i encadena dos títols consecutius. En dones, la txeca Linda Nosková supera Karolína Muchová i es converteix en la campiona més jove des de Kvitová (2011).",
+    body: `El torneig de **Wimbledon 2026** es va tancar el cap de setmana de l'11 i 12 de juliol amb aquests campions:
+
+## 🏆 Final masculina
+
+- **Jannik Sinner** (Itàlia) venç **Alexander Zverev** (Alemanya): 6-7(7), 7-6(2), 6-3, 6-4.
+- És el seu **segon Wimbledon consecutiu** i el **cinquè Grand Slam** de la seva carrera.
+
+## 🏆 Final femenina
+
+- **Linda Nosková** (Txèquia) venç **Karolína Muchová** (Txèquia): 6-2, 5-7, 6-3 — final 100% txeca.
+- **Primer Grand Slam** de Nosková, amb **21 anys i 236 dies**: la campiona més jove de Wimbledon des de **Petra Kvitová el 2011**.
+
+## Per a tests
+
+> Wimbledon és l'únic Grand Slam sobre gespa. Campions 2026: **Sinner** (masculí) i **Nosková** (femení).`,
+    publishedAt: '2026-07-12',
+    source: 'ESPN · Wimbledon',
+    sourceUrl: 'https://www.espn.com/tennis/story/_/id/49342484/wimbledon-2026-men-final-live-tennis-latest-updates-jannik-sinner-alexander-zverev-news-results-schedule-weather',
+    tags: ['esports', 'tennis', 'Wimbledon', 'Sinner', 'Nosková'],
+    category: 'esports',
+  },
+
+  // ─── JULIOL 2026 — PERSONALITATS · NOMENAMENTS ─────────────────────
+
+  {
+    slug: 'jul2026-anson-director-aeat',
+    title: 'Antonio Ansón, nou director general de l\'Agència Tributària',
+    summary: "El Consell de Ministres nomena Antonio Ansón Latorre director general de l'AEAT el 7 de juliol de 2026, en substitució de Soledad Fernández. Inspector d'Hisenda amb 27 anys de trajectòria, dirigia el gabinet del secretari d'Estat d'Hisenda.",
+    body: `El **Consell de Ministres** ha aprovat el nomenament d'**Antonio Ansón Latorre** com a nou **director general de l'Agència Estatal d'Administració Tributària (AEAT)**.
+
+## Dades del nomenament
+
+- **Data**: 7 de juliol de 2026.
+- **Substitueix**: Soledad Fernández, que havia demanat el relleu; es va esperar al final de la campanya de la Renda (final de juny).
+- **Perfil**: nascut a Saragossa (1962), inspector d'Hisenda amb **27 anys de trajectòria**. Des de l'abril de 2025 dirigia el gabinet del secretari d'Estat d'Hisenda, Jesús Gascón.
+
+## Per a tests
+
+> Els relleus al capdavant de grans organismes estatals (AEAT, DGT, CIS, RTVE...) són pregunta típica d'actualitat institucional. Dada clau: **Antonio Ansón, director general de l'AEAT des del juliol de 2026**.`,
+    publishedAt: '2026-07-07',
+    source: 'The Objective · elDiario.es',
+    sourceUrl: 'https://theobjective.com/economia/2026-07-07/gobierno-antonio-anson-director-agencia-tributaria/',
+    tags: ['personalitats', 'nomenaments', 'AEAT', 'Hisenda'],
+    category: 'personalitats',
+  },
+
+  // ─── JUNY 2026 — TRÀNSIT · OPERACIÓ ESTIU DGT ──────────────────────
+
+  {
+    slug: 'jun2026-dgt-operacio-estiu',
+    title: 'La DGT activa l\'Operació Estiu 2026: 104 milions de desplaçaments previstos',
+    summary: "Trànsit preveu més de 104 milions de desplaçaments de llarg recorregut entre l'1 de juliol i el 31 d'agost (+3,7%). El primer dispositiu especial va del 3 al 5 de juliol. És el primer estiu amb la balisa V-16 connectada obligatòria.",
+    body: `La **Direcció General de Trànsit (DGT)** ha activat l'**Operació Estiu 2026**, el dispositiu especial per als desplaçaments de les vacances.
+
+## Xifres clau
+
+- Més de **104 milions de desplaçaments** de llarg recorregut previstos entre l'1 de juliol i el 31 d'agost: 49,7 milions al juliol i 54,5 milions a l'agost.
+- Un **3,7% més** que l'estiu passat.
+- **Primera operació sortida**: del divendres 3 de juliol (15 h) al diumenge 5 de juliol (24 h), amb 4,83 milions de desplaçaments.
+
+## Les 4 operacions especials
+
+1. **Primera operació sortida**: 3–5 de juliol.
+2. **Operació 1 d'agost**: 31 de juliol – 2 d'agost.
+3. **Operació 15 d'agost**: 14–16 d'agost.
+4. **Operació retorn**: 28–31 d'agost.
+
+## ⭐ Novetat 2026
+
+> És el **primer estiu amb la balisa V-16 connectada obligatòria** (des de l'1 de gener de 2026 substitueix els triangles de preavís). Dada molt preguntable en tests de trànsit.`,
+    publishedAt: '2026-06-30',
+    source: 'DGT — Nota de premsa 30/06/2026',
+    sourceUrl: 'https://www.dgt.es/comunicacion/notas-de-prensa/20260630-trafico-activa-operacion-verano-2026/',
+    tags: ['trànsit', 'DGT', 'operació estiu', 'V-16', 'seguretat viària'],
+    category: 'noticies',
+  },
+
+  // ─── JUNY 2026 — PERSONALITATS · DEFUNCIONS ────────────────────────
+
+  {
+    slug: 'jun2026-mor-david-hockney',
+    title: 'Mor David Hockney, un dels grans pintors contemporanis, als 88 anys',
+    summary: "El pintor britànic David Hockney, figura clau del pop art i cèlebre per les seves piscines californianes, va morir l'11 de juny de 2026 a casa seva als 88 anys, un mes abans de fer-ne 89.",
+    body: `El pintor britànic **David Hockney** (Bradford, Yorkshire, 1937) va morir **l'11 de juny de 2026** a casa seva, **als 88 anys**, segons va comunicar la seva representant.
+
+## Qui era
+
+- Pilar del **pop art** britànic des dels anys 60.
+- Cèlebre per les seves **piscines i paisatges californians** (va viure molts anys a Los Angeles) i, més tard, pels paisatges de Yorkshire i l'experimentació amb l'iPad.
+- Considerat un dels artistes més estimats i cotitzats de l'art contemporani dels segles XX i XXI.
+
+## Per a tests
+
+> Dada clau: **David Hockney, pintor britànic, mor l'11 de juny de 2026 als 88 anys**.`,
+    publishedAt: '2026-06-12',
+    source: 'CNN en Español',
+    sourceUrl: 'https://cnnespanol.cnn.com/2026/06/12/mundo/muere-artista-britanico-david-hockney-trax',
+    tags: ['personalitats', 'defuncions', 'art', 'David Hockney'],
+    category: 'personalitats',
+  },
+
+  // ─── JUNY 2026 — PREMIS · PRINCESA D'ASTÚRIES ──────────────────────
+
+  {
+    slug: 'jun2026-julian-barnes-princesa-asturies-lletres',
+    title: 'Julian Barnes, Premi Princesa d\'Astúries de les Lletres 2026',
+    summary: "L'escriptor britànic Julian Barnes, premi Booker 2011 per 'El sentit d'un final', guanya el Princesa d'Astúries de les Lletres 2026, anunciat el 10 de juny. El jurat el presidia Santiago Muñoz Machado.",
+    body: `L'escriptor britànic **Julian Barnes** ha estat guardonat amb el **Premi Princesa d'Astúries de les Lletres 2026**, anunciat el **10 de juny de 2026** a Oviedo.
+
+## Qui és
+
+- Una de les grans veus de la **narrativa anglesa** contemporània: novel·la, relat, assaig i memòries.
+- **Premi Booker 2011** per *The Sense of an Ending* (*El sentit d'un final*).
+- El jurat, presidit per **Santiago Muñoz Machado** (director de la RAE), en va destacar la creació literària "en tots els seus gèneres".
+
+## ⭐ Princesa d'Astúries 2026 — guardons fallats fins al juliol
+
+| Categoria | Guardonat |
+|-----------|-----------|
+| **Lletres** | Julian Barnes |
+| **Esports** | Leo Messi |
+| **Arts** | Patti Smith |
+| **Comunicació i Humanitats** | Studio Ghibli |
+| **Investigació Científica i Tècnica** | D. Klenerman, S. Balasubramanian i P. Mayer |
+| **Cooperació Internacional** | Banc Mundial de Llavors de Svalbard |
+
+> Les categories restants (Ciències Socials i Concòrdia) es fallen a les setmanes següents. **Cerimònia de lliurament: 23 d'octubre de 2026 a Oviedo**, presidida pels Reis.`,
+    publishedAt: '2026-06-10',
+    source: 'Fundación Princesa de Asturias',
+    sourceUrl: 'https://www.fpa.es/es/area-de-comunicacion-y-prensa/notas-de-prensa/julian-barnes-premio-princesa-de-asturias-de-las-letras-2026/',
+    tags: ['premis', 'Princesa d\'Astúries', 'literatura', 'Julian Barnes'],
+    category: 'premis',
+  },
+
+  // ─── JUNY 2026 — PREMIS · LLETRES CATALANES ────────────────────────
+
+  {
+    slug: 'jun2026-biel-mesquida-premi-honor-lletres',
+    title: 'Biel Mesquida rep el 58è Premi d\'Honor de les Lletres Catalanes',
+    summary: "L'escriptor mallorquí Biel Mesquida va rebre el 8 de juny de 2026, al Palau de la Música Catalana, el 58è Premi d'Honor de les Lletres Catalanes, que atorga Òmnium Cultural i està dotat amb 20.000 euros.",
+    body: `L'escriptor, biòleg i comunicador mallorquí **Biel Mesquida** va rebre el **8 de juny de 2026**, al **Palau de la Música Catalana**, el **58è Premi d'Honor de les Lletres Catalanes**.
+
+## El premi
+
+- L'atorga **Òmnium Cultural** des del 1969.
+- Dotació: **20.000 euros**.
+- Reconeix una persona que, per la seva obra literària o científica en llengua catalana, ha contribuït de manera notable i continuada a la vida cultural dels territoris de parla catalana.
+
+## El guardonat
+
+El jurat va distingir Mesquida com a **"creador verbal"** que ha cultivat tots els gèneres: poesia, conte, novel·la, periodisme i crítica literària.
+
+> Per a tests d'àmbit català: **58a edició · Biel Mesquida · Òmnium Cultural · lliurament el 8 de juny de 2026 al Palau de la Música**.`,
+    publishedAt: '2026-06-08',
+    source: 'Òmnium Cultural · Palau de la Música Catalana',
+    sourceUrl: 'https://www.palaumusica.cat/ca/58e-premi-d-honor-de-les-lletres-catalanes-2026_1636408',
+    tags: ['premis', 'lletres catalanes', 'Òmnium Cultural', 'Biel Mesquida'],
+    category: 'premis',
+  },
+
+  // ─── JUNY 2026 — ESPORTS · ROLAND GARROS ───────────────────────────
+
+  {
+    slug: 'jun2026-roland-garros-zverev-andreeva',
+    title: 'Roland Garros 2026 — primer Grand Slam per a Zverev i Andreeva',
+    summary: "Alexander Zverev guanya el seu primer Grand Slam en vèncer Flavio Cobolli en cinc sets a la final de Roland Garros (7 de juny). En dones, Mirra Andreeva, de 19 anys, derrota Maja Chwalińska i es converteix en la campiona més jove a París des de Seles (1992).",
+    body: `El **Roland Garros 2026** va coronar dos campions inèdits en Grand Slam:
+
+## 🏆 Final masculina (7 de juny)
+
+- **Alexander Zverev** (Alemanya) venç **Flavio Cobolli** (Itàlia): 6-1, 4-6, 6-4, 6-7(5), 6-1.
+- **Primer Grand Slam** de Zverev, després d'haver perdut tres finals prèvies de 'major'.
+
+## 🏆 Final femenina (6 de juny)
+
+- **Mirra Andreeva** venç la qualificada **Maja Chwalińska** (Polònia): 6-3, 6-2.
+- **Primer Grand Slam** d'Andreeva amb només **19 anys**: la campiona femenina més jove de Roland Garros des de **Monica Seles el 1992**.
+
+## Per a tests
+
+> Roland Garros és el Grand Slam sobre **terra batuda** (París, maig-juny). Campions 2026: **Zverev** i **Andreeva**.`,
+    publishedAt: '2026-06-07',
+    source: 'NPR · Roland-Garros',
+    sourceUrl: 'https://www.npr.org/2026/06/07/g-s1-126803/french-open-2026-alexander-zverev-grand-slam-title',
+    tags: ['esports', 'tennis', 'Roland Garros', 'Zverev', 'Andreeva'],
+    category: 'esports',
+  },
+
+  // ─── JUNY 2026 — PREMIS · PRINCESA D'ASTÚRIES ESPORTS ──────────────
+
+  {
+    slug: 'jun2026-messi-princesa-asturies-esports',
+    title: 'Leo Messi, Premi Princesa d\'Astúries dels Esports 2026',
+    summary: "El futbolista argentí Leo Messi guanya el Premi Princesa d'Astúries dels Esports 2026, anunciat el 3 de juny. El jurat en destaca els 47 títols (4 Champions, 10 Lligues i el Mundial 2022) i la seva dimensió social i solidària.",
+    body: `El futbolista argentí **Leo Messi** ha estat guardonat amb el **Premi Princesa d'Astúries dels Esports 2026**, anunciat el **3 de juny de 2026**.
+
+## Motius del jurat
+
+- Trajectòria amb un **impacte esportiu excepcional i molt regular en el temps**.
+- **47 títols**, entre els quals **4 Champions League, 10 Lligues** i la **Copa del Món de la FIFA 2022**.
+- Dimensió social: referent de constància, humilitat i compromís; **ambaixador d'UNICEF** i impulsor de la Fundació Leo Messi (educació i salut).
+
+## Per a tests
+
+> Guanyadors recents del Princesa d'Astúries dels Esports: **Leo Messi (2026)**. La cerimònia de lliurament és el **23 d'octubre de 2026 a Oviedo**.`,
+    publishedAt: '2026-06-03',
+    source: 'Fundación Princesa de Asturias',
+    sourceUrl: 'https://www.fpa.es/es/area-de-comunicacion-y-prensa/notas-de-prensa/leo-messi-premio-princesa-de-asturias-de-los-deportes-2026/',
+    tags: ['premis', 'Princesa d\'Astúries', 'esports', 'Messi'],
+    category: 'premis',
+  },
+
+  // ─── MAIG 2026 — ESPORTS · FINAL DE LA CHAMPIONS ───────────────────
+
+  {
+    slug: 'mai2026-final-champions-psg-arsenal',
+    title: 'El PSG revalida la Champions als penals contra l\'Arsenal a Budapest',
+    summary: "El París Saint-Germain guanya la Champions League 2025-26 en vèncer l'Arsenal als penals (4-3, després d'un 1-1) a la final del 30 de maig al Puskás Aréna de Budapest. És el segon club de l'era Champions que revalida el títol.",
+    body: `**Final:** PSG 1 (4) - 1 (3) Arsenal · **Data:** 30/05/2026 · **Estadi:** Puskás Aréna (Budapest) · **Assistència:** 61.035
+
+El **París Saint-Germain** va conquerir la **Champions League 2025-26** en superar l'**Arsenal** als **penals (4-3)** després d'empatar 1-1 al final de la pròrroga.
+
+## El partit
+
+- **Kai Havertz** va avançar l'Arsenal al minut 6.
+- **Ousmane Dembélé** va empatar de penal per al PSG.
+- **Vitinha** (PSG) va ser escollit millor jugador de la final.
+
+## ⭐ Dada per a tests
+
+> El PSG es converteix en el **segon club de l'era Champions (des de 1992) que revalida el títol**, després d'haver guanyat també l'edició 2024-25.`,
+    publishedAt: '2026-05-30',
+    source: 'Olympics.com · UEFA',
+    sourceUrl: 'https://www.olympics.com/en/news/uefa-mens-champions-league-final-2026-arsenal-paris-saint-germain-live-ticker',
+    tags: ['esports', 'futbol', 'Champions League', 'PSG', 'Arsenal'],
+    category: 'esports',
+  },
+
   // ─── MAIG 2026 — CONSTITUCIONAL · 4a REFORMA CE ────────────────────
 
   {
