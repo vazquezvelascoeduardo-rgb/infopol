@@ -43,6 +43,14 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '07·23', tag: 'Emergències', title: 'Tres incendis forestals — ola de calor a Madrid i Toledo', desc: 'Més de 600 ha calcinades al suroest de Madrid. Evacuació de 700 veïns a Villa del Prado.' },
+  { date: '07·23', tag: 'Economia', title: 'BCE — manté els tipus d\'interès al 2,25%', desc: 'El Consell de Govern no modifica els tipus en la reunió de juliol. Propera revisió al setembre.' },
+  { date: '07·23', tag: 'Política', title: 'Condonació del deute autonòmic — 83.000 M€ al Congrés', desc: 'El Govern porta la condonació del deute de les CCAA de règim comú. PP mostra rebuig al pla.' },
+  { date: '07·23', tag: 'Catalunya', title: 'ATC — 333 M€ de frau fiscal aflorats el 2025', desc: 'L\'ATC detectà 333 milions de frau fiscal el 2025, un 13% més que l\'exercici anterior.' },
+  { date: '07·23', tag: 'Economia', title: 'BOE — ajudes directes a la compra de vehicle elèctric', desc: 'Publicat el reial decret del Programa Auto+ per a subvencions a vehicles elèctrics i electrificats.' },
+  { date: '07·23', tag: 'Internacional', title: 'Filipines i Xina — enfrontament al Mar de la Xina Meridional', desc: 'La Guàrdia Costanera de Filipines difon vídeos de l\'incident amb naus xineses al Baixos de Masinloc.' },
+  { date: '07·19', tag: 'Esports', title: 'Espanya, campiona del Mundial de futbol 2026', desc: 'La selecció espanyola derrota l\'Argentina (1-0) en la final a Nova York. Segon títol mundial.' },
+  { date: '07·01', tag: 'Premis', title: 'Premis Nacionals Innovació 2026 — Almirall, gran empresa innovadora', desc: 'El Ministeri de Ciència atorga el Premi Nacional d\'Innovació 2026 a Almirall en dermatologia mèdica.' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
