@@ -43,9 +43,17 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
-  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
-  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
-  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
+  { date: '07·24', tag: 'Emergència', title: 'Emergència nacional per incendis a la Serra Oest de Madrid — +10.000 evacuats', desc: 'Tres incendis actius a la Comunitat de Madrid es fusionen en un sol front (#IFSierraOeste). L\'executiu declara emergència d\'interès nacional.', url: 'https://www.comunidad.madrid/noticias/2026/07/23/comunidad-madrid-vive-situacion-critica-incendios-forestales-multiples-extrema-gravedad' },
+  { date: '07·24', tag: 'Internacional', title: 'Trump amenaça d\'usar actius iranians congelats per indemnitzar danys al Golf Pèrsic', desc: 'Els EUA consideren mobilitzar reserves iranianes bloquejades com a represàlia pels atacs a vaixells. L\'Iran ho qualifica de \'precedent incendiari\'.', url: 'https://www.infobae.com/america/agencias/2026/07/24/viernes-24-de-julio-de-2026-0700-gmt/' },
+  { date: '07·24', tag: 'Justícia Int.', title: 'La CPI vota a Nova York la possible destitució del fiscal Karim Khan', desc: 'Els estats membres del Tribunal Penal Internacional decideixen sobre la dimissió forçada del fiscal en cap, acusat de conducta sexual indeguda.', url: 'https://es.euronews.com/2026/07/24/euronews-hoy-las-noticias-del-jueves-24-de-julio-los-peores-incendios-de-la-comunidad-de-m' },
+  { date: '07·23', tag: 'Successos', title: 'Desarticulat a Catalunya un clan familiar per tràfic d\'armes de guerra', desc: 'Operació conjunta Mossos-Policia Nacional. Comissats un llançagranades, 45 pistoles i diverses granades. La xarxa proveïa el crim organitzat arreu d\'Europa.', url: 'https://www.moncloa.com/2026/07/23/desarticulado-clan-familiar-trafico-armas-cataluna-3404132/' },
+  { date: '07·21', tag: 'Successos', title: 'Home punxalat al Somorrostro de Barcelona tot trencant una ordre d\'allunyament', desc: 'La víctima va ser agredida amb arma blanca per una persona que hauria vulnerat una ordre judicial de distanciament. Els Mossos investiguen el cas.', url: 'https://www.catalunyapress.es/articulo/sucesos-cataluna/2026-07-21/5960037-apunalado-hombre-sorromostro-despues-quebrantar-supuestamente-orden-alejamiento' },
+  { date: '07·19', tag: 'Esports', title: 'Espanya, campiona del món 2026 — Yamal fa història als 19 anys', desc: 'La Roja s\'imposa a l\'Argentina en la final del Mundial amb un gol de Ferran Torres a la pròrroga. Lamine Yamal, el quart campió del món més jove de la història.', url: 'https://www.elfinanciero.com.mx/deportes/mundial-2026/2026/07/19/espana-vs-argentina-en-vivo-quien-es-el-campeon-de-la-copa-del-mundo/' },
+  { date: '07·14', tag: 'Ciència', title: 'Almirall (Barcelona) rep el Premi Nacional d\'Innovació 2026 a Gran Empresa', desc: 'El Ministeri de Ciència distingeix el laboratori farmacèutic barceloní per la seva trajectòria en dermatologia mèdica i inversió en R+D de més de 2.000 M€.', url: 'https://www.ciencia.gob.es/Noticias/2026/julio/Morant-llamada-premios-nacionales-innovacion-diseno-2026.html' },
+  { date: '07·09', tag: 'Política Cat.', title: 'Baròmetre CEO juliol: PSC perd escons i Aliança Catalana desbanca Junts', desc: 'Primer baròmetre del CEO del 2026: el PSC d\'Illa cedeix terreny, ERC remunta i Aliança Catalana es consolida com a tercera força al Parlament.', url: 'https://www.cope.es/emisoras/catalunya/noticias/ceo-dibuja-nuevo-escenario-politico-psc-pierde-fuelle-alianca-catalana-dispara-hunde-junts-20260709_3401900.html' },
+  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.', url: null },
+  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.', url: null },
+  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.', url: null },
 ];
 
 export default function ScreenOperativaHome() {
@@ -120,18 +128,19 @@ export default function ScreenOperativaHome() {
         </div>
       </div>
 
-      {/* Actualitat normativa */}
+      {/* Actualitat */}
       <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
+        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
-            <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
+            <div key={i} onClick={n.url ? () => window.open(n.url, '_blank', 'noopener,noreferrer') : undefined} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card, cursor: n.url ? 'pointer' : 'default' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                 <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
                 <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && <div style={{ marginTop: 6, fontSize: 11, fontWeight: 700, color: T.cat.operativa.solid }}>Llegir notícia →</div>}
             </div>
           ))}
         </div>
