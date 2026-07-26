@@ -43,9 +43,21 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
-  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
-  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
-  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
+  // 26 juliol 2026
+  { date: '07·26', tag: 'Successos', title: 'Incendi Los Gallardos — dotze morts a Almeria', desc: 'Incendi forestal amb almenys 12 víctimes mortals. S\'investiga la caiguda d\'un cable elèctric com a causa.', url: 'https://www.periodistadigital.com/periodismo/20260726/10-claves-politicas-periodisticas-marcan-domingo-26-julio-2026-espana-noticia-689405232788/' },
+  { date: '07·26', tag: 'Policia', title: 'Fugitiu reclamat per França — detingut en hotel de Barcelona', desc: 'El Grup de Fugitius de la Brigada Provincial deté el presumpte autor d\'un assassinat a trets a Toló. Extradició accelerada en curs.', url: 'https://www.moncloa.com/2026/07/25/detenido-fugitivo-asesinato-barcelona-3405245/' },
+  { date: '07·26', tag: 'Judicial', title: 'Cas Begoña Gómez — Fiscalia reitera la petició d\'absolució', desc: 'El Ministeri Públic descarta corrupció o tràfic d\'influències. La sol·licitud afecta la cònjuge del president, la seva assessora i l\'empresari Barrabés.', url: 'https://www.periodistadigital.com/periodismo/20260726/10-claves-politicas-periodisticas-marcan-domingo-26-julio-2026-espana-noticia-689405232788/' },
+  { date: '07·26', tag: 'Clima', title: 'Nova onada de calor — temperatures superiors a 40°C', desc: 'Juny 2026, el mes més calurós a l\'Europa Occidental, segons Copernicus. Temperatures que superen els 40°C amenacen àmplies zones d\'Espanya.', url: 'https://www.periodistadigital.com/periodismo/20260726/10-claves-politicas-periodisticas-marcan-domingo-26-julio-2026-espana-noticia-689405232788/' },
+  { date: '07·26', tag: 'Premis', title: 'Premis Nacionals d\'Innovació 2026 — Almirall, gran empresa guanyadora', desc: 'El Ministeri de Ciència atorga el Premi Nacional d\'Innovació a Almirall, farmacèutica barcelonina referent mundial en dermatologia.', url: 'https://www.ciencia.gob.es/Noticias/2026/julio/Morant-llamada-premios-nacionales-innovacion-diseno-2026.html' },
+  { date: '07·26', tag: 'Internacional', title: 'Trump i l\'OTAN — Espanya "redimida" pel compromís en defensa', desc: 'Donald Trump afirma que Espanya s\'ha "redimit per complet" del seu compromís en defensa de l\'OTAN. El Govern nega qualsevol pagament addicional.', url: 'https://www.periodistadigital.com/periodismo/20260726/10-claves-politicas-periodisticas-marcan-domingo-26-julio-2026-espana-noticia-689405232788/' },
+  { date: '07·26', tag: 'Economia', title: 'Decret llei de lloguers — pròrrogues i regulació del lloguer de temporada', desc: 'El Govern prepara mesures per contenir l\'escalada de rendes: pròrrogues fins al juny de 2028, regulació del lloguer de temporada i habitacions.', url: 'https://www.periodistadigital.com/periodismo/20260726/10-claves-politicas-periodisticas-marcan-domingo-26-julio-2026-espana-noticia-689405232788/' },
+  { date: '07·26', tag: 'Internacional', title: 'Illa a Vietnam — gira asiàtica per internacionalitzar Catalunya', desc: 'El president de la Generalitat visita Da Nang per reforçar les relacions comercials de Catalunya amb el sud-est asiàtic.', url: 'https://es.euronews.com/video/2026/07/26/ultimas-noticias-26-julio-2026-manana' },
+  { date: '07·26', tag: 'Internacional', title: 'Tifó Noul — s\'apropa a la costa sud-oriental de la Xina', desc: 'El tifó avança entre Cantó i Fujian. Les autoritats xineses activen protocols d\'emergència a les zones costaneres afectades.', url: 'https://www.infobae.com/america/agencias/2026/07/26/domingo-26-de-julio-de-2026-0200-gmt/' },
+  { date: '07·26', tag: 'Política', title: 'PP paralitza el Tractat d\'Amistat amb França', desc: 'El Senat, a instàncies del PP, remet el Tractat d\'Amistat amb França al Tribunal Constitucional, obrint un nou front en política exterior.', url: 'https://www.periodistadigital.com/periodismo/20260726/10-claves-politicas-periodisticas-marcan-domingo-26-julio-2026-espana-noticia-689405232788/' },
+  // Normativa anterior
+  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.', url: null },
+  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.', url: null },
+  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.', url: null },
 ];
 
 export default function ScreenOperativaHome() {
@@ -132,6 +144,11 @@ export default function ScreenOperativaHome() {
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 6, fontSize: 11, fontWeight: 700, color: T.cat.operativa.solid, textDecoration: 'none' }}>
+                  Llegir + →
+                </a>
+              )}
             </div>
           ))}
         </div>
