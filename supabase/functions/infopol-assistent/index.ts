@@ -80,7 +80,12 @@ REGLES INNEGOCIABLES:
 5. Model operatiu de Viladecans: la PL NO fa custòdia ni declaració de detinguts — deté, llegeix drets i LLIURA el detingut a PG-ME amb l'acta A 54. Tingues-ho present en detencions.
 6. Si l'agent adjunta fotos (senyal, vehicle, document, lloc), descriu objectivament el que s'hi veu i relaciona-ho amb la consulta. No identifiquis persones ni dedueixis dades personals.
 7. Sigues concret i operatiu: l'agent està al carrer. Res de teoria innecessària.
-8. Acaba SEMPRE amb aquesta línia exacta: "${CLOENDA}"`;
+8. CERCA A INTERNET: tens una eina de cerca limitada a FONTS OFICIALS (BOE, DOGC i Portal Jurídic de la Generalitat, Servei Català de Trànsit, DGT, Ministeri de l'Interior, Poder Judicial). Fes-la servir NOMÉS quan el CONTEXT no tingui la dada o quan la norma pugui haver canviat recentment. Si la fas servir:
+   - Digues explícitament quina part ve d'internet i de quin organisme.
+   - Indica la data de la norma o de la publicació si la coneixes.
+   - Si el que trobes contradiu el CONTEXT, avisa-ho i recomana verificar-ho.
+   - Si no trobes res fiable, digues que no ho has pogut confirmar. MAI omplis el buit inventant.
+9. Acaba SEMPRE amb aquesta línia exacta: "${CLOENDA}"`;
 
 const P_DILIGENCIA = `Ets un assistent expert en REDACCIÓ DE DOCUMENTS POLICIALS de l'àmbit català (Policies Locals de Catalunya i Mossos d'Esquadra). Transformes dades i una descripció col·loquial dels fets en una MINUTA, DILIGÈNCIA, ACTA, DENÚNCIA o ATESTAT amb la redacció juridicopolicial estàndard.
 
@@ -156,8 +161,22 @@ Retorna NOMÉS el text del servei ja redactat, llest per copiar i enganxar.`;
 
 type Mode = 'operativa' | 'diligencia' | 'servei';
 
-const MODES: Record<Mode, { system: string; model: string; rag: boolean; maxTokens: number }> = {
-  operativa: { system: P_OPERATIVA, model: 'claude-sonnet-5', rag: true, maxTokens: 2000 },
+// Cerca a internet LIMITADA A FONTS OFICIALS. Res de blogs ni despatxos:
+// només diaris oficials i administracions competents.
+const OFFICIAL_DOMAINS = [
+  'boe.es',
+  'gencat.cat',            // inclou dogc.gencat.cat, portaljuridic, transit, mossos
+  'dgt.es',
+  'interior.gob.es',
+  'poderjudicial.es',
+  'seguridadciudadana.mir.es',
+];
+
+const MODES: Record<
+  Mode,
+  { system: string; model: string; rag: boolean; maxTokens: number; web?: boolean }
+> = {
+  operativa: { system: P_OPERATIVA, model: 'claude-sonnet-5', rag: true, maxTokens: 4096, web: true },
   diligencia: { system: P_DILIGENCIA, model: 'claude-sonnet-5', rag: true, maxTokens: 4096 },
   servei: { system: P_SERVEI, model: 'claude-haiku-4-5-20251001', rag: false, maxTokens: 1600 },
 };
@@ -197,12 +216,14 @@ function chunk(text: string, size = 1600, overlap = 200): string[] {
 type Att = { type: 'image' | 'document'; media_type: string; data: string };
 type Msg = { role: 'user' | 'assistant'; content: string };
 
+type WebSrc = { title: string; url: string };
+
 async function callClaude(
-  cfg: { system: string; model: string; maxTokens: number },
+  cfg: { system: string; model: string; maxTokens: number; web?: boolean },
   history: Msg[],
   context: string,
   attachments: Att[],
-): Promise<string> {
+): Promise<{ text: string; webSources: WebSrc[] }> {
   // El context RAG va com a primer bloc del darrer missatge de l'usuari.
   const messages: unknown[] = history.slice(0, -1).map((m) => ({
     role: m.role,
@@ -223,28 +244,71 @@ async function callClaude(
   blocks.push({ type: 'text', text: userText });
   messages.push({ role: 'user', content: blocks });
 
-  const res = await fetch(ANTHROPIC_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': ANTHROPIC_API_KEY,
-      'anthropic-version': '2023-06-01',
-    },
-    body: JSON.stringify({
+  // Cerca a internet només al mode operativa i només a fonts oficials.
+  const tools = cfg.web
+    ? [{
+        type: 'web_search_20260209',
+        name: 'web_search',
+        max_uses: 4,
+        allowed_domains: OFFICIAL_DOMAINS,
+      }]
+    : undefined;
+
+  const webSources: WebSrc[] = [];
+  let text = '';
+
+  // El servidor pot pausar el torn (pause_turn) si la cerca fa moltes voltes:
+  // cal reenviar la conversa perquè continuï. Limitem les represes.
+  for (let volta = 0; volta < 3; volta++) {
+    const body: Record<string, unknown> = {
       model: cfg.model,
       max_tokens: cfg.maxTokens,
       system: cfg.system,
       messages,
-    }),
-  });
-  if (!res.ok) throw new Error(`Anthropic ${res.status}: ${(await res.text()).slice(0, 300)}`);
-  const data = await res.json();
-  const text = (data?.content ?? [])
-    .filter((b: { type: string }) => b.type === 'text')
-    .map((b: { text: string }) => b.text)
-    .join('\n');
+    };
+    if (tools) body.tools = tools;
+
+    const res = await fetch(ANTHROPIC_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) throw new Error(`Anthropic ${res.status}: ${(await res.text()).slice(0, 300)}`);
+    const data = await res.json();
+
+    for (const b of data?.content ?? []) {
+      if (b.type === 'text') text += (text ? '\n' : '') + b.text;
+      // En error, .content és un objecte amb error_code (no una llista).
+      if (b.type === 'web_search_tool_result' && Array.isArray(b.content)) {
+        for (const r of b.content) {
+          if (r?.type === 'web_search_result' && r.url) {
+            webSources.push({ title: String(r.title ?? r.url), url: String(r.url) });
+          }
+        }
+      }
+    }
+
+    // Els classificadors poden declinar: ho expliquem sense fingir una resposta.
+    if (data?.stop_reason === 'refusal') {
+      return {
+        text:
+          "No puc respondre aquesta consulta concreta. Reformula-la centrant-te en l'actuació policial, o consulta-ho amb el comandament.",
+        webSources,
+      };
+    }
+    if (data?.stop_reason === 'pause_turn') {
+      messages.push({ role: 'assistant', content: data.content });
+      continue;
+    }
+    break;
+  }
+
   if (!text.trim()) throw new Error('Resposta buida del model');
-  return text;
+  return { text, webSources };
 }
 
 /* ── Usuari + pla ──────────────────────────────────────────────────── */
@@ -396,7 +460,13 @@ Deno.serve(async (req: Request) => {
       }
     }
 
-    const text = await callClaude(cfg, history, context, attachments);
+    const { text, webSources } = await callClaude(cfg, history, context, attachments);
+    // Les fonts d'internet es marquen com a tals perquè l'agent les distingeixi.
+    for (const w of webSources) {
+      if (!sources.some((s) => s.source === w.url)) {
+        sources.push({ title: w.title, source: w.url, kind: 'web' });
+      }
+    }
 
     // Comptabilitza l'ús (els admins no gasten quota).
     let count = 0;
