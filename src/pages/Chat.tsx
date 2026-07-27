@@ -252,10 +252,11 @@ export default function Chat() {
     </div>
   );
 
+  // Pantalla completa: el chat ocupa tot el viewport, sense el chrome del web.
   const shellStyle: CSSProperties = {
-    background: D.bg, color: D.ink, fontFamily: D.sans, borderRadius: 22,
-    overflow: 'hidden', position: 'relative', minHeight: '78vh', display: 'flex',
-    margin: '0 auto', maxWidth: 1180, WebkitFontSmoothing: 'antialiased',
+    background: D.bg, color: D.ink, fontFamily: D.sans,
+    overflow: 'hidden', position: 'relative', height: '100dvh', display: 'flex',
+    width: '100%', WebkitFontSmoothing: 'antialiased',
   };
   const ambient = (
     <>
@@ -268,7 +269,7 @@ export default function Chat() {
   /* ── HOME ───────────────────────────────────────────────────── */
   if (screen === 'home') {
     return (
-      <div className="shell" style={{ maxWidth: 1220, paddingBottom: 40 }}>
+      <div style={{ background: D.bg, minHeight: '100dvh' }}>
         <div style={shellStyle}>
           {ambient}
           <div style={{ position: 'relative', flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
@@ -295,7 +296,7 @@ export default function Chat() {
               </div>
             </header>
 
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '10px 30px 34px' }}>
+            <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '10px 30px 34px' }}>
               <div style={{ width: '100%', maxWidth: 1030 }}>
                 <div style={{ textAlign: 'center', marginBottom: 34 }}>
                   <div style={{ display: 'inline-flex', alignItems: 'center', gap: 9, fontFamily: D.mono, fontSize: 9.5, letterSpacing: 3, color: '#FFA05C', border: '1px solid rgba(255,122,26,.28)', background: 'rgba(255,122,26,.07)', borderRadius: 99, padding: '7px 15px', marginBottom: 20 }}>
@@ -379,7 +380,7 @@ export default function Chat() {
   /* ── FORM (Diligenciador, pas 1) ────────────────────────────── */
   if (screen === 'form') {
     return (
-      <div className="shell" style={{ maxWidth: 1220, paddingBottom: 40 }}>
+      <div style={{ background: D.bg, minHeight: '100dvh' }}>
         <div style={{ ...shellStyle, flexDirection: 'column' }}>
           {ambient}
           <header style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 13, padding: '18px 26px', borderBottom: `1px solid ${D.line}`, background: 'rgba(10,10,16,.5)' }}>
@@ -672,10 +673,15 @@ function AdminIngest({ onDone }: { onDone: (total: number) => void }) {
     fontFamily: D.sans, fontSize: 14, color: D.ink, background: 'rgba(255,255,255,.04)', outline: 'none',
   };
 
+  // Dos corpus: el generat de la web + els documents legals (PDF convertits).
   useEffect(() => {
-    fetch(import.meta.env.BASE_URL + 'chat-corpus.json')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => { if (Array.isArray(d)) setCorpus(d as CorpusDoc[]); })
+    const load = (f: string) =>
+      fetch(import.meta.env.BASE_URL + f)
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d) => (Array.isArray(d) ? (d as CorpusDoc[]) : []))
+        .catch(() => [] as CorpusDoc[]);
+    Promise.all([load('chat-corpus.json'), load('chat-corpus-legal.json')])
+      .then(([web, legal]) => setCorpus([...web, ...legal]))
       .catch(() => {});
   }, []);
 

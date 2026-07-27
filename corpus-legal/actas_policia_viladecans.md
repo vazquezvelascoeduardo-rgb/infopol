@@ -1,0 +1,171 @@
+# Listado de Actas y Documentos - Policia Local de Viladecans
+
+Este documento contiene la recopilación de los nombres de los archivos y actas visualizados en las capturas de pantalla.
+
+## Serie A (Actuaciones e Inspecciones)
+- A 01 Entrada urgent a un domicili_03_2024
+- A 03 Acta d'inspecció
+- A 10 Genèrica (1 full)
+- A 10 Genèrica (2 fulls)
+- A 10 Mercat Setmanal_2024
+- A 10 pm Comunicació Protocol Mossegades_03_2024
+- A 10 Preservació proves de sang
+- A 101 Absentisme Escolar_2024
+- A 105PL Acta inspecció per transport d'aliments
+- A 10c Infraccions ús col.legis
+- A 10ca Comís animal, gossos perillosos o altres
+- A 10cc Convivència ciutadana
+- A 10cc Infracció Convivència Ciutadana
+- A 10h. Control ocupació d'habitatges padró 2 idiomes_03_2024
+- A 10h. Control ocupació d'habitatges padró_03_2024
+- A 10h.MOD_Inspecció habitatges ocupats
+- A 10ie Infracció Instal.lacions Esportives_03_2024
+- A 10p Infraccions Platja_2024
+- A 10s Infraccions sorolls_03_2024
+- A 10ta Infracció tinença animal, gossos i altres_03_2024
+- A 10uv Acta de comprovació d'ocupació bens immobles sense violència_intimidació_03_2024
+- A 10v Venda ambulant, mercat setmanal i altres_03_2024
+- A 12_2 Full de continuació
+- A 13_Immobilització de vehicle
+- A 14 Precintament vehicle_03_2024
+- A 14e Precintament establiment-activitat_03_2024
+- A 152 PL Inspecció i infraccions de treball
+- A 15d Desprecintament vehicle_03_2024
+- A 15e Desprecintament d'establiment-activitat_03_2024
+- A 16 Recollida-lliurament objectes
+- A 17 Manifestació_03_2024
+- A 18PL Acta de declaración_03_2024
+- A 19 Inspecció activitats rellevants LOPSC 4_2015_03_2024
+- A 20 _Pesada de substàncies estupefaents_03_2024
+- A 21 Simptomatologia d'alcohol_2024
+- A 27 Drets alcoholèmia i drogues_03_2024 (Castellà)
+- A 27 Drets alcoholèmia i drogues_Català
+- A 28 Manifestació per danys a vehicle_03_2024
+- A 28_Daños vehículos_2024
+- A 29 Deixar sense efecte una detenció_03_2024
+- A 31 Comprovació danys immobles_03_2024
+- A 32 Acampada ilegal_03_2024
+- A 33 Comprovació danys vehicles_03_2024
+- A 34 Lliurament objetes_03_2024
+- A 35 Entrega menor o discapacitat_03_2024
+- A 38-92 Impostos Especials vehicles_03_2024
+- A 46 Infracció d'horari d'activitat de restauració_03_2024
+- A 47 Acta vetlladors i terrasses NOVA
+- A 47 inspecció d'establiments_03_2024
+- A 47 Inspecció establiments de restauració_03_2024
+- A 47 Inspecció establecimientos públicos y actividades recreativas_03_2024
+- A 47 v Acta vetlladors i terrasses
+- A 47a Inspecció d'associació
+- A 47d Inspecció discoteques
+- A 51 Infracció materia de joc_03_2024
+- A 54 Solicitud de custodia detenido por PG-ME_03_2024
+- A 55 Detenció per reclamació_03_2024
+- A 56 Reconocimiento y entrega de efectos_2025
+- A 57 Declaració del perjudicat por sostracció a establiment comercial_03_2024
+- A 58 Presentació d'estranger a l'efecte d'identificació_03_2024
+- A 59 Esbrinament de domicili per a notificacions_03_2024
+- A 60 Aixecament de cadàver en cas de mort biològica_03_2024
+- A 62 Inspección detector inhibidor_03_2024
+- A 66 Lliurament de bossa amb mostres pel seu estudi toxicològic_03_2024
+- A 67 Comunicació pèrdua de vigencia carnet per edictal_03_2024
+- A 76 Acta simptomatologia drogues (PENAL)_03_2024
+- A LITA Infracció d'Impostos Especials_2024 vehicles extracomunitaris
+- A_28_Daños vehículos_2024
+- A_47 català 2024
+- A_89_PPA Infracción resolución peste porcina africana
+- A10j Acta notificación lanzamientos
+
+## Serie D (Denuncias y Delitos)
+- D 06 Llista d'objectes sostrets-perduts-intevinguts_03_2024
+- D 10 Denuncia infracció Llei 4/2015_03_2024.doc
+- D 10.b Acta d'intervenció temporal Llei orgànica 4_2015_2022
+- D 12 Denúncia infracció de caça_03_2024
+- D 15 Denúncia infracció de pesca continental_03_2024
+- D 20 Denúncia infraccions tinença gossos perillosos_03_2024
+- D 21 Denúncia matèria d'accés motoritzat al medi natural_03_2024
+- D 29 Denúncia de delicte lleu estafa furt a una benzinera_03_2024
+- D 33 infraccions administratives contra la llibertat sexual
+- D 33.b Denuncia administrativa libertad sexual_2024
+- D 35 Annex Catàleg infraccions
+- D 35 Delictes Odi
+- D 35 denuncias infracción LGTBI_03_2024
+- D 35.b Delictes LGTBI
+- D 35.b denuncia víctima o testigo infracción LGTBI_03_2024
+- D_04_ANG_furt_03_2024
+- D_04_FRA_furt_sostracció_03_2024
+- D_05_ANG_robatori interior vehicle_03_2024
+- D_06_ANG_llista objectes robats_03_2024
+- D24 Furt establiment comercial
+
+## Serie G (Gestión e Informes)
+- G 44 Registre de persones allotjades_03_2024
+- G 58 Volant d estada en dependències policials a identificació_2024
+- G 64 Dispositius Personals d'enregistrament d'imatges
+- G 70 Informe d'ocupació d'un immoble
+- G31 minuta furt establiment
+
+## Serie N (Notificación de Derechos y Citaciones)
+- N 01 Informació drets persona detinguda_03_2024
+- N 01 Informacion derecho detenido CASTELLANO_03_2024
+- N 01b CAST Información de derechos menor detenido castellano_03_2024
+- N 02 Derechos victima_persona perjudicada CASTELLANO_03_2024
+- N 02 Drets victima_persona perjudicada_03_2024
+- N 02d Drets a perjudicado per delicte de menor_03_2024
+- N 02e_03_2024
+- N 02e_C_03_2024
+- N 03 Drets persona denunciada no detinguda_03_2024
+- N 03b drets menor denunciat no detingut_03_2024
+- N 03_ANG_03_2024
+- N 05t Drets a perjudicats en accidents de trànsit_03_2024
+- N 06 Notificació citació policial_03_2024
+- N 07 Notificació de citació judicial_03_2024
+- N 08 Drets persona investigada no detinguda JR
+- N 09 Informació drets i fets persona denunciada per delicte lleu_JIDL
+- N 10 Citació per a judicis ràpids per delicte lleu_03_2024
+- N 11 Citació per a judici ràpid_03_2024
+- N_01_ALB_03_2024
+- N_01_ALE_03_2024
+- N_01_ANG_03_2024
+- N_01_AR_03_2024
+- N_01_BULGARO_03_2024
+- N_01_FR_03_2024
+- N_01_IT_03_2024
+- N_10_CAS_JIDL_03_2024
+- N_10_JIDL_03_2024
+
+## Serie T (Tránsito y Tráfico)
+- T 04 Proposta extraordinària ITV_03_2024
+- T 05 Perdua de facultats per conduir_03_2024
+- T 06 Fulls d'accident per omplir a mà_03_2024
+- T 12 Analítica sangre contraste_03_2024
+- T 12 cadena custòdia de drogues ampliatòria_03_2024
+- T 12 Mostra per analítica d'alcohol, substàncies estupefaents o altres_03_2024
+- T 15 Tikets alcoholemia_03_2024
+- T 15 Tikets drogas_03_2024
+- T 16 Full de denuncia administrativa_03_2024
+- T 17 transporte de escolares
+- T 31 inspección ocular accidente tráfico_03_2024
+- T 39 Informació persones implicades en accidents
+
+## Otros Documentos y Actas
+- Acta consulta El Pertus_03_2024
+- Acta Serveis Socials sense llar.
+- AD_01_Acta declaración DETENIDO_2024
+- AV 01_Trasllat voluntari
+- Butlleta estadístic d'alcoholèmia
+- Butlleta estadística substàncies estupefaents
+- CONVENIO VILADECANS
+- DAI 01
+- DAI 01 LLIURAMENT MATERIAL
+- DIRECTRIUS QUADRANT 2026
+- I 10 Intervenció permís de conducció_03_2024
+- I 104 Drets persona desplaçada per identificació_03_2024
+- I 55 cadena de custodia_2024
+- LIE Infracció d'Impostos Especials_03_2024
+- M 06 Oferiment al menor de l'acolliment a una mesura educativa_03_2024
+- PD 01 Solicitud de HABEAS CORPUS_03_2024
+- PD 06 Objectes persona detinguda_03_2024
+- PL 12 Denuncia infració tarjeta mobilitat reduïda_03_2024
+- S 02 Notificación RECUPERACIÓN DE VEHICULO_03_2024
+- Sol.licitud mediació_03_2024
+- VFU01

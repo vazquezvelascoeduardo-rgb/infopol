@@ -102,6 +102,25 @@ function RedirectTestToPoliciaLocal() {
 }
 
 export default function App() {
+  const { pathname } = useLocation();
+
+  // El chat va a PANTALLA COMPLETA: fora del chrome global (topbar, sidebar, peu).
+  if (pathname === '/chat' || pathname.startsWith('/chat/')) {
+    return (
+      <>
+        <RouteMeta />
+        <ProgressSync />
+        <RouteErrorBoundary>
+          <Suspense fallback={<PageFallback />}>
+            <Routes>
+              <Route path="/chat" element={<RequireAuth><Chat /></RequireAuth>} />
+            </Routes>
+          </Suspense>
+        </RouteErrorBoundary>
+      </>
+    );
+  }
+
   return (
     <Layout>
       <RouteMeta />
@@ -113,7 +132,6 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/cerca" element={<SearchResults />} />
           <Route path="/croquis" element={<Croquis />} />
-          <Route path="/chat" element={<RequireAuth><Chat /></RequireAuth>} />
           <Route path="/avis-legal" element={<AvisLegal />} />
           <Route path="/privacitat" element={<Privacitat />} />
           <Route path="/noticies" element={<Noticies />} />
