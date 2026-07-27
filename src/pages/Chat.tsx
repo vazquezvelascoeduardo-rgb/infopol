@@ -70,6 +70,26 @@ const ROLES = ['Víctima', 'Perjudicat', 'Assistit', 'Agressor', 'Denunciant', '
 const MAX_ATT = 3;
 const MAX_BYTES = 4 * 1024 * 1024;
 
+/** Converteix errors tècnics del proveïdor en missatges útils per a l'agent.
+ *  Els usuaris no han de veure mai JSON ni codis d'error en cru. */
+function missatgeAmable(raw: string): string {
+  const m = raw.toLowerCase();
+  if (m.includes('credit balance') || m.includes('billing'))
+    return 'L\'assistent està temporalment fora de servei. Ho estem solucionant; torna-ho a provar més tard.';
+  if (m.includes('rate limit') || m.includes('429'))
+    return 'Hi ha molta demanda ara mateix. Espera uns segons i torna-ho a provar.';
+  if (m.includes('overloaded') || m.includes('529'))
+    return 'El servei està saturat en aquest moment. Torna-ho a provar d\'aquí a un minut.';
+  // Missatges ja pensats per a l'usuari, o d'administració: es mostren tal qual.
+  if (m.includes('límit diari') || m.includes('cal iniciar sessió') || m.includes('només administradors')
+    || m.includes('falta') || m.includes('no configurada') || m.includes('sense documents')) return raw;
+  if (m.includes('anthropic') || m.includes('gemini') || m.includes('api key'))
+    return 'L\'assistent no ha pogut respondre ara mateix. Torna-ho a provar en un moment.';
+  if (m.includes('network') || m.includes('fetch'))
+    return 'Sense connexió. Revisa la xarxa i torna-ho a provar.';
+  return raw;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function callAssistent(body: Record<string, unknown>): Promise<Record<string, any>> {
   if (!supabase) return { error: 'Backend no disponible.' };
@@ -77,9 +97,11 @@ async function callAssistent(body: Record<string, unknown>): Promise<Record<stri
   if (error) {
     let msg = error.message;
     try { const ctx = await (error as { context?: Response }).context?.json?.(); if (ctx?.error) msg = ctx.error; } catch { /* */ }
-    return { error: msg };
+    return { error: missatgeAmable(msg) };
   }
-  return (data as Record<string, unknown>) ?? {};
+  const d = (data as Record<string, unknown>) ?? {};
+  if (d.error) return { ...d, error: missatgeAmable(String(d.error)) };
+  return d;
 }
 
 function toBase64(file: File): Promise<string> {
