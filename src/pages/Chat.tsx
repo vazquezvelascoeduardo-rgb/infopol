@@ -269,7 +269,7 @@ export default function Chat() {
   /* ── HOME ───────────────────────────────────────────────────── */
   if (screen === 'home') {
     return (
-      <div style={{ background: D.bg, minHeight: '100dvh' }}>
+      <div style={{ background: D.bg, height: '100dvh', overflow: 'hidden' }}>
         <div style={shellStyle}>
           {ambient}
           <div style={{ position: 'relative', flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
@@ -296,8 +296,9 @@ export default function Chat() {
               </div>
             </header>
 
-            <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '10px 30px 34px' }}>
-              <div style={{ width: '100%', maxWidth: 1030 }}>
+            <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', padding: '10px 30px 34px' }}>
+              {/* margin:auto centra verticalment PERÒ sense retallar quan no hi cap. */}
+              <div style={{ width: '100%', maxWidth: 1030, margin: 'auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: 34 }}>
                   <div style={{ display: 'inline-flex', alignItems: 'center', gap: 9, fontFamily: D.mono, fontSize: 9.5, letterSpacing: 3, color: '#FFA05C', border: '1px solid rgba(255,122,26,.28)', background: 'rgba(255,122,26,.07)', borderRadius: 99, padding: '7px 15px', marginBottom: 20 }}>
                     <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#FF7A1A', boxShadow: '0 0 8px #FF7A1A' }} />
@@ -359,20 +360,20 @@ export default function Chat() {
                     CAL INICIAR SESSIÓ PER FER SERVIR L&apos;ASSISTENT
                   </div>
                 )}
+
+                {isAdmin && (
+                  <div style={{ marginTop: 22 }}>
+                    <button onClick={() => setShowAdmin((v) => !v)}
+                      style={{ border: `1px solid ${D.line2}`, background: 'rgba(255,255,255,.04)', color: D.ink, cursor: 'pointer', borderRadius: 11, padding: '9px 13px', fontFamily: D.sans, fontWeight: 700, fontSize: 13.5 }}>
+                      📚 {showAdmin ? 'Amagar' : 'Carregar coneixement'} (admin)
+                    </button>
+                    {showAdmin && <AdminIngest onDone={(t) => setCount(t)} />}
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
-
-        {isAdmin && (
-          <div style={{ marginTop: 18 }}>
-            <button onClick={() => setShowAdmin((v) => !v)}
-              style={{ border: `1px solid ${D.line2}`, background: D.bg, color: D.ink, cursor: 'pointer', borderRadius: 11, padding: '9px 13px', fontFamily: D.sans, fontWeight: 700, fontSize: 13.5 }}>
-              📚 {showAdmin ? 'Amagar' : 'Carregar coneixement'} (admin)
-            </button>
-            {showAdmin && <AdminIngest onDone={(t) => setCount(t)} />}
-          </div>
-        )}
       </div>
     );
   }
@@ -380,7 +381,7 @@ export default function Chat() {
   /* ── FORM (Diligenciador, pas 1) ────────────────────────────── */
   if (screen === 'form') {
     return (
-      <div style={{ background: D.bg, minHeight: '100dvh' }}>
+      <div style={{ background: D.bg, height: '100dvh', overflow: 'hidden' }}>
         <div style={{ ...shellStyle, flexDirection: 'column' }}>
           {ambient}
           <header style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 13, padding: '18px 26px', borderBottom: `1px solid ${D.line}`, background: 'rgba(10,10,16,.5)' }}>
@@ -549,7 +550,15 @@ export default function Chat() {
           <div ref={threadRef} style={{ flex: 1, overflowY: 'auto', padding: '26px 24px 14px' }}>
             <div style={{ maxWidth: 760, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 20 }}>
               {msgs.length === 0 && (
-                <div style={{ color: D.mut, fontSize: 14, lineHeight: 1.6 }}>{c.desc}</div>
+                <div style={{ textAlign: 'center', padding: '40px 0 10px' }}>
+                  <div style={{ width: 64, height: 64, margin: '0 auto 18px', borderRadius: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 30, background: c.tint, border: `1px solid ${c.border}` }}>
+                    {c.icon}
+                  </div>
+                  <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: -0.6, color: D.ink }}>{c.title}</div>
+                  <div style={{ color: D.mut, fontSize: 14.5, lineHeight: 1.55, marginTop: 10, maxWidth: 460, marginLeft: 'auto', marginRight: 'auto' }}>
+                    {c.desc}
+                  </div>
+                </div>
               )}
               {msgs.map((m, i) => {
                 const meu = m.role === 'user';
