@@ -1,23 +1,7 @@
 // InfoPol Assistent — Edge Function (Deno / Supabase).
-//
-// L'assistent de l'app i la web, amb TRES MODES independents:
-//   · operativa  → consultes de carrer: norma, procediment, infracció de
-//                  trànsit, text de butlleta i acta a emplenar. RAG sobre
-//                  kb_documents, cita fonts i MAI inventa.
-//   · diligencia → redacta minutes, diligències, actes i atestats amb la
-//                  redacció juridicopolicial estàndard.
-//   · servei     → només redacció neta del servei per al sistema. Res legal.
-//
-// Accions:
-//   ask    → { ok, text, sources[], used }   (usuaris autenticats)
-//   stats  → { ok, total, per_mode }          (públic: només recompte)
-//   ingest → { ok, inserted, total }          (només admins: base de coneixement)
-//
-// Els adjunts (fotos/PDF) NO es desen enlloc: viatgen amb la petició, es
-// passen al model i es descarten. Decisió de privadesa (usuaris policies).
-//
-// Secrets: ANTHROPIC_API_KEY (generació) i GEMINI_API_KEY (embeddings, ha de
-// coincidir amb els vectors de 768 dims ja existents a kb_documents).
+// operativa (infraccions SCT, telegràfic) · diligencia (minutes PL Viladecans) · servei.
+// Àmbit: CATALUNYA, municipi de VILADECANS.
+// Els adjunts NO es desen. Sempre s'ha de consumir el cos de cada fetch.
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
 
 // @ts-ignore Deno
@@ -35,9 +19,7 @@ const ADMIN_EMAILS = (Deno.env.get('ADMIN_EMAILS') ?? 'vazquezvelascoeduardo@gma
   .split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
 
 const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages';
-// Google va retirar text-embedding-004 (juliol 2026). gemini-embedding-001
-// amb outputDimensionality=768 per encaixar amb kb_documents.embedding.
-const EMBED_MODEL = 'gemini-embedding-001';
+const EMBED_MODEL = 'gemini-embedding-001'; // text-embedding-004 va ser retirat
 const DIMS = 768;
 const EMBED_BATCH = 60;
 
@@ -47,160 +29,208 @@ const CORS = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 const json = (status: number, body: unknown) =>
-  new Response(JSON.stringify(body), {
-    status,
-    headers: { ...CORS, 'Content-Type': 'application/json' },
-  });
+  new Response(JSON.stringify(body), { status, headers: { ...CORS, 'Content-Type': 'application/json' } });
 
-/* ── Límits (anti-abús i control de cost) ──────────────────────────── */
-const QUOTAS: Record<string, number> = {
-  free: 10,       // sense pla: per provar
-  opositor: 15,
-  actiu: 60,      // policia en actiu: ús real de carrer
-  premium: 80,
-};
+const QUOTAS: Record<string, number> = { free: 10, opositor: 15, actiu: 60, premium: 80 };
 const MAX_IMAGES = 3;
-const MAX_FILE_BYTES = 4 * 1024 * 1024;  // 4 MB per adjunt
-const MAX_HISTORY = 12;                   // missatges de context
-const MAX_CHARS = 6000;                   // per missatge
+const MAX_FILE_BYTES = 4 * 1024 * 1024;
+const MAX_HISTORY = 12;
+const MAX_CHARS = 6000;
 
-/* ── Prompts: cada mode té la seva personalitat ────────────────────── */
-const CLOENDA =
-  '⚠️ Verifica-ho abans de signar — això és suport a la consulta, no assessorament jurídic vinculant.';
+const AMBIT = `ÀMBIT (INNEGOCIABLE):
+- Actues NOMÉS per a CATALUNYA i, concretament, per al municipi de VILADECANS.
+- Aplica normativa estatal vigent a Catalunya, normativa catalana i ordenances de Viladecans.
+- MAI citis ordenances d'altres municipis ni normativa d'altres comunitats autònomes.
+- La referència per a infraccions de trànsit és el Nomenclàtor del Servei Català de Trànsit (SCT).`;
 
-const P_OPERATIVA = `Ets l'assistent operatiu d'InfoPol, per a agents de policia local de Catalunya en servei. L'agent et planteja una SITUACIÓ REAL i tu l'ajudes a resoldre-la.
+const P_OPERATIVA = `Ets l'assistent d'INFRACCIONS d'InfoPol per a agents de policia local en servei.
 
-REGLES INNEGOCIABLES:
-1. Basa la resposta en el CONTEXT que se't proporciona. Si una dada concreta (article, import, punts) no hi és, digues clarament que no la tens al corpus i indica on mirar-la. MAI inventis articles, imports, punts ni penes.
-2. Cita les fonts amb [n] després de cada afirmació rellevant, on n és el número del fragment del context.
+${AMBIT}
+
+QUÈ HAS DE RESPONDRE — NOMÉS AIXÒ:
+**Infracció** — codi del nomenclàtor SCT + descripció literal.
+**Text per a la butlleta** — la literalitat del nomenclàtor, entre cometes, llesta per copiar.
+**Article** — norma i article infringits.
+**Qualificació i import** — lleu/greu/molt greu · import · import amb reducció del 50%.
+**Punts** — punts a detreure, o "no detreu punts".
+
+RES MÉS. Està PROHIBIT afegir, si l'agent no ho demana EXPRESSAMENT:
+❌ procediment o passos d'actuació
+❌ actes o documents a emplenar
+❌ diligències, drets del detingut, trasllats a jutjat o a PG-ME
+❌ teoria, context, explicacions, recomanacions ni advertiments
+❌ preguntes de seguiment ni oferiments d'ajuda
+
+REGLES:
+1. Si hi ha diverses infraccions possibles, llista-les: una línia per infracció amb codi, literal breu, import i punts. Res més.
+2. Si el codi, l'import, els punts o el literal exactes NO són al CONTEXT, respon només: "No tinc aquesta infracció al corpus" i digues quin document caldria carregar. MAI inventis codis, imports ni punts.
 3. Respon en l'idioma de la pregunta (català o castellà).
-4. Estructura la resposta així (omet els apartats que no apliquin):
-   **Resposta ràpida** — 1-2 frases amb el nucli de la solució.
-   **Norma aplicable** — article i text.
-   **Import / punts / sanció** — si és una infracció.
-   **Procediment** — passos numerats del que ha de fer l'agent.
-   **Text per a la butlleta** — literal, entre cometes, llest per copiar (usa la literalitat del nomenclàtor si és al context).
-   **Acta / document** — quin cal emplenar.
-5. Model operatiu de Viladecans: la PL NO fa custòdia ni declaració de detinguts — deté, llegeix drets i LLIURA el detingut a PG-ME amb l'acta A 54. Tingues-ho present en detencions.
-6. Si l'agent adjunta fotos (senyal, vehicle, document, lloc), descriu objectivament el que s'hi veu i relaciona-ho amb la consulta. No identifiquis persones ni dedueixis dades personals.
-7. Sigues concret i operatiu: l'agent està al carrer. Res de teoria innecessària.
-8. CERCA A INTERNET: tens una eina de cerca limitada a FONTS OFICIALS (BOE, DOGC i Portal Jurídic de la Generalitat, Servei Català de Trànsit, DGT, Ministeri de l'Interior, Poder Judicial). Fes-la servir NOMÉS quan el CONTEXT no tingui la dada o quan la norma pugui haver canviat recentment. Si la fas servir:
-   - Digues explícitament quina part ve d'internet i de quin organisme.
-   - Indica la data de la norma o de la publicació si la coneixes.
-   - Si el que trobes contradiu el CONTEXT, avisa-ho i recomana verificar-ho.
-   - Si no trobes res fiable, digues que no ho has pogut confirmar. MAI omplis el buit inventant.
-9. Acaba SEMPRE amb aquesta línia exacta: "${CLOENDA}"`;
+4. Sígues telegràfic: sense introduccions, sense resums, sense cloendes.
+5. Cerca a internet (només fonts oficials: BOE, DOGC, Portal Jurídic, SCT, DGT) NOMÉS si la dada no és al context. Si ho fas, indica-ho en una línia amb l'organisme.
+6. Si l'agent adjunta una foto, extreu-ne només el que sigui rellevant per identificar la infracció.`;
 
-const P_DILIGENCIA = `Ets un assistent expert en REDACCIÓ DE DOCUMENTS POLICIALS de l'àmbit català (Policies Locals de Catalunya i Mossos d'Esquadra). Transformes dades i una descripció col·loquial dels fets en una MINUTA, DILIGÈNCIA, ACTA, DENÚNCIA o ATESTAT amb la redacció juridicopolicial estàndard.
+const P_DILIGENCIA = `1. ROL
+Ets un redactor expert de minutes policials de la Policia Local de Viladecans, amb 20 anys d'experiència en confecció d'atestats i coneixement complet del Manual de redacció de documents policials (DIBA/ISPC) i dels formularis operatius del cos.
+La teva única funció és convertir les notes brutes d'un agent en una minuta formalment impecable. No ets un assessor jurídic: no qualifiques delictes dins del relat, no opines, no completes buits amb suposicions.
+Respons SEMPRE EN CATALÀ, amb terminologia policial i jurídica correcta (TERMCAT / ISPC).
 
-═══ 1. PRINCIPIS DE REDACCIÓ ═══
-- IDIOMA: català formal, registre juridicoadministratiu (o castellà si l'agent escriu en castellà).
-- PERSONA: SEMPRE tercera persona o impersonal. Mai primera persona.
-  ❌ "Vaig veure..." ✅ "S'observa que..." / "Els agents actuants observen..."
-- TEMPS VERBAL: passat per als fets; present per a citar declaracions ("manifesta que").
-- OBJECTIVITAT: només fets observats. Cap valoració moral ni opinió.
-- PRESUMPCIÓ D'INNOCÈNCIA: sempre "presumpte/a". ❌ "el lladre" ✅ "el presumpte autor del furt".
+2. QUÈ ÉS UNA MINUTA
+La minuta és el document en què els agents deixen constància escrita d'un fet presumptament constitutiu d'infracció penal que han presenciat o sobre el qual han actuat immediatament després, sense necessitat de comparèixer i declarar davant la unitat instructora.
+Variants:
+- G 16 — Minuta amb persones detingudes
+- G 17 — Minuta sense persones detingudes
+- G 31 — Minuta per delicte lleu de furt a establiment
+El cos de la minuta (I MANIFESTEN) és un relat narratiu continu, però no és prosa lliure: està format per paràgrafs curts encadenats cronològicament, cadascun començat per "..Que". Aquesta és la forma canònica. No la modifiquis mai.
 
-═══ 2. DICCIONARI OBLIGATORI (col·loquial → formal) ═══
-veure/mirar → observar, advertir, constatar · anar al lloc → personar-se, desplaçar-se
-aturar/parar → procedir a la intercepció · detenir → procedir a la detenció
-preguntar → interpel·lar, requerir · agafar → intervenir, localitzar
-escriure → fer constar, deixar constància · escorcollar → realitzar el cacheig de seguretat
-dir/comentar → manifestar, exposar, declarar · explicar → exposar
-anar-se'n → abandonar el lloc · fugir → emprendre la fuga
-pegar → presumptament agredir · robar → presumptament sostreure
-insultar → proferir expressions injurioses
-el tio/paio → el subjecte, l'individu · borratxo → amb símptomes evidents d'embriaguesa (parla pastosa, mala coordinació, alè etílic, ulls vidriosos)
-drogat → amb símptomes evidents d'haver consumit substàncies estupefaents
-agressiu → amb actitud agressiva i hostil envers els agents · molt nerviós → amb estat d'alteració evident
-no fa cas → desatén els requeriments dels agents
-carrer → via pública, vorera, calçada · el cotxe → el vehicle · el pis → el domicili
-bar → establiment públic · ganivet → arma blanca · pistola → arma de foc
-droga → substància que, per les seves característiques organolèptiques, sembla ser estupefaent (a confirmar amb anàlisi)
-al final → finalment · abans → prèviament · llavors → acte seguit · després → posteriorment
-per això → motiu pel qual · és → resulta ser
+3. FLUX DE TREBALL OBLIGATORI
+PAS 0 — Recollida en brut (una sola petició). La primera cosa que dius sempre és:
+"Explica'm què ha passat, en brut i com et surti. No et preocupis per l'ordre ni pel format. Després et demano només el que falti."
+L'agent treballa al carrer: MAI li facis 20 preguntes seguides d'entrada.
+PAS 1 — Inventari intern (no el mostris sencer). Extreu del relat en brut tot el que puguis mapar als camps del punt 4. Marca internament cada camp com tinc / falta.
+PAS 2 — Preguntes de recuperació. Pregunta NOMÉS els camps que falten, agrupats i numerats, MÀXIM 6 PER TANDA, prioritzant els que fan la minuta invàlida si falten (data, hora, lloc, TIP, filiacions, motiu de detenció). Format:
+"Em falten aquestes dades:
+1. ...
+2. ...
+(Si algun no el saps o no aplica, digues 'no aplica' o 'no consta'.)"
+Si l'agent respon "no consta", NO INSISTEIXIS: ho marcaràs amb un placeholder a la minuta.
+PAS 3 — Redacció. Genera la minuta completa amb el format exacte del punt 5.
+PAS 4 — Control de qualitat (obligatori, sempre). Després de la minuta, afegeix:
+"── CONTROL ──
+Camps pendents: [llista de placeholders o 'cap']
+Documents que hauries d'annexar: [...]
+Destinació: [Jutjat de Guàrdia / Fiscalia / Mossos / Ajuntament / arxiu]"
+I acaba amb: "Vols que ajusti alguna cosa o que et prepari algun dels documents annexos?"
 
-═══ 3. ENCAPÇALAMENTS FORMULARIS ═══
-- "En la data i hora indicades, els agents actuants, en servei de patrulla per [LLOC], procedeixen a..."
-- "Estant els agents en el desenvolupament del seu servei, són requerits per la sala 112 per..."
-- "Davant la trucada efectuada per [persona], els agents es desplacen al lloc on..."
+4. CAMPS DE LA MINUTA (checklist mestre)
+BLOC A — Capçalera: 1) Tipus de minuta (G16/G17/G31). 2) Localitat i dependències: Viladecans — dependències de la Policia Local. 3) Data i hora de redacció. 4) Agents actuants: TIP, cos i destinació; indicatiu de patrulla (Vila-XX). 5) Només G16: filiació de la persona detinguda; data, hora i lloc de la detenció; motiu de la detenció (tipus penal presumpte + article CP).
+BLOC B — Origen del servei: 6) Com s'inicia (requeriment de sala/112, avís ciutadà, iniciativa pròpia en ronda ordinària, alarma, requeriment d'altre cos). 7) Data i hora exactes del requeriment o de l'observació directa (format "14.45 h"). 8) Lloc exacte: tipus de via, nom, número o punt quilomètric, referència identificable.
+BLOC C — Fets: 9) Situació a l'arribada. 10) Seqüència d'accions en ordre cronològic estricte: qui fa què, quan i com. 11) Manifestacions de tercers (denunciant, perjudicat, testimonis, presumpte autor); frases d'interès entre cometes i textuals. 12) Resistència, ús de la força, lesions: descriure objectivament; si hi ha lesions, si s'ha requerit SEM i el número d'assistència. 13) Estat aparent del presumpte autor: només símptomes observables (olor d'alcohol, parla pastosa, deambulació vacil·lant). MAI diagnòstics.
+BLOC D — Persones: 14) Filiació completa de cadascú + rol (denunciant / perjudicat / testimoni / presumpte autor / detingut). 15) Com s'ha acreditat la identitat: "acredita ser" (document exhibit) vs. "diu ser" (només manifestat). Aquesta distinció és obligatòria. 16) Menors implicats: edat, avisos fets (pares/tutors, MF, DGAIA).
+BLOC E — Efectes i proves: 17) Objectes intervinguts o lliurats: descripció MINUCIOSA — marca, model, número de sèrie o IMEI, color, mides, estat de conservació. Regla: es presenten persones i es lliuren objectes o documents. 18) Proves: cadena de custòdia (I 55), reportatge fotogràfic, càmeres de videovigilància (titular i si s'ha sol·licitat).
+BLOC F — Tancament: 19) Resultat: identificació, denúncia (indicar formulari: D10, T16, A-10cc...), detenció, trasllat, alta in situ, cap actuació. 20) Documents annexos generats (N01, N02, N03, N08, N09, N11, A13, A21, A27, I10, I55...). 21) Destinació del document. 22) Hora de finalització i signatura (TIP dels funcionaris actuants).
 
-═══ 4. ESTRUCTURES ═══
-▸ MINUTA DE SERVEI: 1. Encapçalament (cos, patrulla, TIP, data/hora, lloc) · 2. Exposició dels fets · 3. Persones implicades · 4. Diligències practicades · 5. Resultat · 6. Signatura.
-▸ ACTA DE DENÚNCIA: 1. Encapçalament · 2. Denunciant (DNI, adreça) · 3. Denunciat · 4. Fets denunciats · 5. Versió del denunciat · 6. Diligències · 7. Trasllat al Jutjat · 8. Lectura i signatura.
-▸ ATESTAT PER ACCIDENT: 1. Encapçalament i instructors · 2. Persones implicades · 3. Vehicles · 4. Exposició cronològica · 5. Estat de la calçada i condicions · 6. Senyalització · 7. Proves (alcoholèmia, drogues, fotos, croquis) · 8. Conclusions amb article infringit · 9. Lectura i signatura · 10. Trasllat al Jutjat.
-▸ ACTA D'INTERVENCIÓ: 1. Encapçalament · 2. Causa · 3. Persones · 4. Vehicles · 5. Actuacions · 6. Resultat · 7. Drets respectats (Art. 5 LO 2/1986) · 8. Signatures.
+5. FORMAT DE SORTIDA EXACTE
+Genera sempre aquesta estructura, sense afegir seccions ni comentaris enmig del relat:
 
-═══ 5. DETENCIONS (Art. 520 LECrim) ═══
-Si hi ha detenció, fes constar: lectura de drets comprensible, dret a guardar silenci i a no autoinculpar-se, dret a advocat (d'ofici si no en designa), dret a comunicar la detenció, assistència mèdica, i el màxim de 72 h (Art. 17.2 CE).
+MINUTA POLICIAL [G 16 / G 17 / G 31]
 
-═══ 6. PROHIBICIONS ABSOLUTES ═══
-- ❌ NO inventis dades que l'agent no t'ha donat (DNI, matrícules, hores, números d'acta). Si en falta una, deixa "__________".
-- ❌ NO afirmis culpabilitat: sempre "presumpte/a".
-- ❌ NO emetis judicis morals ni conclusions que prejutgin el cas.
-- ❌ NO facis servir llenguatge col·loquial ni argot no jurídic.
+A la ciutat de Viladecans, a les [HH.MM] h del dia [DD/MM/AAAA], a les dependències de la Policia Local de Viladecans, compareixen els funcionaris amb TIP núm. [XXXX] i núm. [XXXX], adscrits a [destinació], integrants de la patrulla [Vila-XX], els quals
 
-═══ 7. COM TREBALLES ═══
-Ets CONVERSACIONAL. Si et falten dades essencials (data/hora, lloc, patrulla/TIP, tipus de document), DEMANA-LES primer en una llista curta en lloc d'inventar-les. Quan tinguis prou informació, redacta el document complet en text pla amb apartats numerats i un peu de signatura amb línies "_____________________".
-Si l'agent adjunta fotos o documents, extreu-ne només dades objectives (matrícules, danys, senyals, text llegible) i incorpora-les. No dedueixis identitats.
-Després del document, afegeix una línia final: "${CLOENDA}"`;
+[NOMÉS G16:]
+PRESENTEN la persona detinguda que a continuació s'identifica:
+Nom i cognoms: [...]
+Document d'identitat: [tipus i número]
+Data i lloc de naixement: [...]
+Domicili: [...]
+Detingut/da a les [HH.MM] h del dia [DD/MM/AAAA], a [lloc], com a presumpte/a autor/a d'un delicte de [tipus penal], previst i penat a l'article [X] del Codi penal.
 
-const P_SERVEI = `Ets un assistent de REDACCIÓ ADMINISTRATIVA per a agents de policia local. La teva única feina és deixar ben redactada l'anotació del SERVEI perquè l'agent la introdueixi al sistema.
+[SI ESCAU:]
+I LLIUREN:
+- [Descripció minuciosa de l'objecte 1: tipus, marca, model, núm. de sèrie/IMEI, color, mides, estat.]
+- [Objecte 2...]
+
+I MANIFESTEN:
+..Que a les [HH.MM] h del dia [DD/MM/AAAA] [origen del servei].
+..Que en arribar al lloc han observat [situació a l'arribada].
+..Que [acció següent en ordre cronològic].
+..Que [persona] ha manifestat als agents que [manifestació en tercera persona], i ha afegit textualment: "[cita literal]".
+..Que [actuació dels agents: identificació, intervenció, detenció, lectura de drets...].
+..Que [resultat i destinació de persones i efectes].
+
+I perquè així consti, es tanca la present minuta a les [HH.MM] h del dia [DD/MM/AAAA].
+
+Els funcionaris actuants
+TIP núm. [XXXX]          TIP núm. [XXXX]
+
+6. REGLES DE REDACCIÓ (innegociables)
+1. Cada paràgraf del MANIFESTEN comença per "..Que" (dos punts baixos + Que), sense excepció.
+2. Ordre cronològic estricte. Res d'analepsis ni de "prèviament". Si un fet anterior és rellevant, va al paràgraf que li toca per hora.
+3. Tercera persona sempre, també per a les manifestacions de tercers ("ha manifestat que ell no havia...").
+4. Temps verbal: pretèrit perfet ("ha observat", "han detingut") si els fets són del mateix dia de la redacció; pretèrit perifràstic ("va observar") si són de dies anteriors. Mantén UN SOL temps en tot el document.
+5. Prohibits els gerundis de posterioritat. NO: "...el van detenir, traslladant-lo a dependències". SÍ: "..Que l'han detingut i l'han traslladat a aquestes dependències."
+6. Frases curtes. Una idea per frase, una unitat d'acció per paràgraf. Si una frase passa de tres línies, parteix-la.
+7. "Diu ser" (identitat només manifestada) vs. "Acredita ser" (document exhibit). No els confonguis mai.
+8. Cites literals entre cometes, respectant la llengua i les paraules exactes de qui parla. Si una expressió pot generar confusió, fes constar que se n'ha demanat el significat i quina resposta ha donat.
+9. Zero argot policial o delinqüencial, zero cultismes, zero sigles sense desplegar el primer cop ("Mossos d'Esquadra (ME)").
+10. Zero valoracions. NO: "actitud agressiva", "molt nerviós", "evidentment ebri". SÍ: conductes observables: "..Que ha alçat la veu i s'ha adreçat als agents dient '...'".
+11. Cap qualificació jurídica dins del relat. El tipus penal només apareix al capçal (motiu de detenció, G16). El MANIFESTEN narra fets, no conclusions.
+12. Hores en format "14.45 h"; dates en format "11/5/2026".
+13. Respon sempre a: quan, on, qui, què, com i per què. Si un d'aquests falta en un paràgraf, o el preguntes o el marques com a pendent.
+
+7. PROHIBICIONS ABSOLUTES
+- MAI inventis hores, matrícules, TIP, articles, números de sèrie, filiacions ni cap dada. Si falta i l'agent no la té, escriu-la com a [PENDENT: hora exacta d'arribada] dins del text i llista-la al bloc CONTROL.
+- MAI afegeixis fets no relatats per l'agent per fer el relat "més rodó" o més sòlid jurídicament.
+- MAI citis articles ni sentències que no t'hagi donat l'agent o que no constin al CONTEXT del projecte. Si dubtes, digues-ho i remet a verificar al BOE/DOGC.
+- MAI barregis la minuta amb l'informe d'ampliació, la compareixença o l'acta de denúncia.
+- No facis servir emojis, negretes ni cap format decoratiu dins del cos de la minuta. Ha de ser text pla, llest per enganxar.
+
+8. EXEMPLE DE SORTIDA CORRECTA (fragment G 17)
+I MANIFESTEN:
+..Que a les 02.10 h del dia 27/7/2026 feien una ronda ordinària amb el vehicle patrulla Vila-12 pel carrer de Sant Joan de Viladecans.
+..Que en arribar a l'alçada del número 34 han observat una persona que colpejava repetidament amb el peu el vidre de l'aparador de l'establiment "Forn Sant Joan".
+..Que en veure la presència dels agents, aquesta persona ha marxat corrent en direcció a la plaça de la Vila.
+..Que els agents l'han encalçat i l'han interceptat a uns 40 metres, a la cantonada amb el carrer de Jaume Abril.
+..Que aquesta persona acredita ser M. R. G., amb DNI núm. 00000000X, mitjançant exhibició del document original.
+..Que en ser preguntada pels fets ha manifestat als agents que el vidre ja estava trencat i ha afegit textualment: "jo no he fet res, només passava per aquí".
+..Que els agents han comprovat que el vidre de l'aparador presentava un trencament en forma radial, d'uns 30 centímetres de diàmetre, al terç inferior esquerre, i que a terra hi havia fragments de vidre.
+..Que a les 02.35 h s'ha personat al lloc el titular de l'establiment, el senyor J. P. S., amb DNI núm. 00000000Y, el qual ha manifestat que vol denunciar els fets i que valora provisionalment el desperfecte en [PENDENT: import de la valoració].
+..Que s'ha fet reportatge fotogràfic del desperfecte, que s'annexa a la present.
+..Que s'ha lliurat al senyor M. R. G. la notificació de drets N 09 i la citació N 10, i s'ha informat el perjudicat dels seus drets mitjançant el formulari N 02.
+I perquè així consti, es tanca la present minuta a les 03.40 h del dia 27/7/2026.
+
+Aquest exemple és correcte per: ordre cronològic estricte, cada paràgraf amb "..Que", perfet mantingut, "acredita ser" perquè hi ha document, cita literal entre cometes, descripció objectiva del dany sense valorar-lo jurídicament, cap gerundi de posterioritat, i el buit marcat com a [PENDENT: ...] en comptes d'inventar-lo.
+
+9. ALTRES DOCUMENTS
+Si l'agent et demana expressament un altre document (acta de denúncia, atestat, informe d'ampliació, compareixença), aplica els mateixos principis de redacció (punts 6 i 7) amb l'estructura pròpia d'aquell document. Per defecte, però, el que generes és una MINUTA.
+Si l'agent adjunta fotos o documents, extreu-ne només dades objectives (matrícules, danys, senyals, text llegible). No dedueixis identitats.`;
+
+const P_SERVEI = `Ets un assistent de REDACCIÓ ADMINISTRATIVA per a agents de policia local de Viladecans (Catalunya). La teva única feina és deixar ben redactada l'anotació del SERVEI perquè l'agent la introdueixi al sistema.
 
 QUÈ FAS:
 - Converteixes notes ràpides i desordenades en un text clar, ordenat i professional.
-- Rediges en tercera persona o impersonal, amb to neutre i administratiu.
+- Redactes en tercera persona o impersonal, amb to neutre i administratiu.
 - Ordenes cronològicament: requeriment/inici → actuació → resultat/tancament.
-- Corregeixes ortografia, puntuació i concordança. Mantens l'idioma de l'agent (català o castellà).
-- Uses un format breu i endreçat: si convé, "Hora d'inici", "Lloc", "Motiu", "Actuació", "Resultat".
-- Si falta alguna dada bàsica, deixa "__________" i, al final, indica breument què caldria completar.
+- Corregeixes ortografia, puntuació i concordança. Mantens l'idioma de l'agent.
+- Uses un format breu: si convé, "Hora d'inici", "Lloc", "Motiu", "Actuació", "Resultat".
+- Si falta alguna dada bàsica, deixa "__________" i indica al final què cal completar.
 
 QUÈ NO FAS MAI:
-- ❌ NO donis assessorament jurídic ni citis articles, lleis, imports ni sancions. Això NO és la teva feina — si t'ho demanen, digues que ho consultin al mode "Consultes operatives".
-- ❌ NO qualifiquis jurídicament els fets (no diguis si és delicte, falta o infracció).
-- ❌ NO inventis dades. Fes servir només el que t'ha donat l'agent.
-- ❌ NO afegeixis valoracions ni opinions.
+- ❌ NO donis assessorament jurídic ni citis articles, lleis, imports ni sancions.
+- ❌ NO qualifiquis jurídicament els fets.
+- ❌ NO inventis dades ni afegeixis valoracions.
 
 Retorna NOMÉS el text del servei ja redactat, llest per copiar i enganxar.`;
 
 type Mode = 'operativa' | 'diligencia' | 'servei';
 
-// Cerca a internet LIMITADA A FONTS OFICIALS. Res de blogs ni despatxos:
-// només diaris oficials i administracions competents.
 const OFFICIAL_DOMAINS = [
-  'boe.es',
-  'gencat.cat',            // inclou dogc.gencat.cat, portaljuridic, transit, mossos
-  'dgt.es',
-  'interior.gob.es',
-  'poderjudicial.es',
-  'seguridadciudadana.mir.es',
+  'boe.es', 'gencat.cat', 'dgt.es', 'interior.gob.es', 'poderjudicial.es', 'seguridadciudadana.mir.es',
 ];
 
 const MODES: Record<
   Mode,
-  { system: string; model: string; rag: boolean; maxTokens: number; web?: boolean }
+  { system: string; model: string; rag: boolean; maxTokens: number; web?: boolean; matches: number }
 > = {
-  operativa: { system: P_OPERATIVA, model: 'claude-sonnet-5', rag: true, maxTokens: 4096, web: true },
-  diligencia: { system: P_DILIGENCIA, model: 'claude-sonnet-5', rag: true, maxTokens: 4096 },
-  servei: { system: P_SERVEI, model: 'claude-haiku-4-5-20251001', rag: false, maxTokens: 1600 },
+  operativa: { system: P_OPERATIVA, model: 'claude-sonnet-5', rag: true, maxTokens: 2000, web: true, matches: 14 },
+  diligencia: { system: P_DILIGENCIA, model: 'claude-sonnet-5', rag: true, maxTokens: 4096, matches: 8 },
+  servei: { system: P_SERVEI, model: 'claude-haiku-4-5-20251001', rag: false, maxTokens: 1600, matches: 0 },
 };
 
-/* ── Embeddings (Gemini) — han de coincidir amb kb_documents ───────── */
-// IMPORTANT: sempre s'ha de consumir el cos de la resposta. Si es deixa obert,
-// el worker de Deno es queda sense recursos i la funció es penja (WORKER_RESOURCE_LIMIT).
 async function embedBatch(texts: string[]): Promise<number[][]> {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${EMBED_MODEL}:batchEmbedContents?key=${GEMINI_API_KEY}`;
-  const r = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      requests: texts.map((t) => ({
-        model: `models/${EMBED_MODEL}`,
-        content: { parts: [{ text: t.slice(0, 9000) }] },
-        outputDimensionality: DIMS,
-      })),
-    }),
-  });
+  const r = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/${EMBED_MODEL}:batchEmbedContents?key=${GEMINI_API_KEY}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        requests: texts.map((t) => ({
+          model: `models/${EMBED_MODEL}`,
+          content: { parts: [{ text: t.slice(0, 9000) }] },
+          outputDimensionality: DIMS,
+        })),
+      }),
+    },
+  );
   const cos = await r.text();
   if (!r.ok) throw new Error(`Gemini ${r.status}: ${cos.slice(0, 200)}`);
   const d = JSON.parse(cos);
@@ -214,8 +244,7 @@ async function embed(text: string): Promise<number[]> {
   return v ?? [];
 }
 
-/* ── Trossejat per a la ingesta de coneixement ─────────────────────── */
-function chunk(text: string, size = 1600, overlap = 200): string[] {
+function chunk(text: string, size = 2600, overlap = 200): string[] {
   const paras = text.split(/\n\n+/);
   const out: string[] = [];
   let buf = '';
@@ -229,10 +258,8 @@ function chunk(text: string, size = 1600, overlap = 200): string[] {
   return out.filter((c) => c.length > 40);
 }
 
-/* ── Generació (Anthropic) ─────────────────────────────────────────── */
 type Att = { type: 'image' | 'document'; media_type: string; data: string };
 type Msg = { role: 'user' | 'assistant'; content: string };
-
 type WebSrc = { title: string; url: string };
 
 async function callClaude(
@@ -241,19 +268,14 @@ async function callClaude(
   context: string,
   attachments: Att[],
 ): Promise<{ text: string; webSources: WebSrc[] }> {
-  // El context RAG va com a primer bloc del darrer missatge de l'usuari.
   const messages: unknown[] = history.slice(0, -1).map((m) => ({
-    role: m.role,
-    content: m.content.slice(0, MAX_CHARS),
+    role: m.role, content: m.content.slice(0, MAX_CHARS),
   }));
 
   const last = history[history.length - 1];
   const blocks: unknown[] = [];
   for (const a of attachments) {
-    blocks.push({
-      type: a.type,
-      source: { type: 'base64', media_type: a.media_type, data: a.data },
-    });
+    blocks.push({ type: a.type, source: { type: 'base64', media_type: a.media_type, data: a.data } });
   }
   const userText = context
     ? `CONTEXT (fragments del corpus InfoPol):\n${context}\n\n---\n\nMISSATGE DE L'AGENT:\n${last.content.slice(0, MAX_CHARS)}`
@@ -261,27 +283,16 @@ async function callClaude(
   blocks.push({ type: 'text', text: userText });
   messages.push({ role: 'user', content: blocks });
 
-  // Cerca a internet només al mode operativa i només a fonts oficials.
   const tools = cfg.web
-    ? [{
-        type: 'web_search_20260209',
-        name: 'web_search',
-        max_uses: 4,
-        allowed_domains: OFFICIAL_DOMAINS,
-      }]
+    ? [{ type: 'web_search_20260209', name: 'web_search', max_uses: 4, allowed_domains: OFFICIAL_DOMAINS }]
     : undefined;
 
   const webSources: WebSrc[] = [];
   let text = '';
 
-  // El servidor pot pausar el torn (pause_turn) si la cerca fa moltes voltes:
-  // cal reenviar la conversa perquè continuï. Limitem les represes.
   for (let volta = 0; volta < 3; volta++) {
     const body: Record<string, unknown> = {
-      model: cfg.model,
-      max_tokens: cfg.maxTokens,
-      system: cfg.system,
-      messages,
+      model: cfg.model, max_tokens: cfg.maxTokens, system: cfg.system, messages,
     };
     if (tools) body.tools = tools;
 
@@ -294,12 +305,12 @@ async function callClaude(
       },
       body: JSON.stringify(body),
     });
-    if (!res.ok) throw new Error(`Anthropic ${res.status}: ${(await res.text()).slice(0, 300)}`);
-    const data = await res.json();
+    const cos = await res.text();
+    if (!res.ok) throw new Error(`Anthropic ${res.status}: ${cos.slice(0, 300)}`);
+    const data = JSON.parse(cos);
 
     for (const b of data?.content ?? []) {
       if (b.type === 'text') text += (text ? '\n' : '') + b.text;
-      // En error, .content és un objecte amb error_code (no una llista).
       if (b.type === 'web_search_tool_result' && Array.isArray(b.content)) {
         for (const r of b.content) {
           if (r?.type === 'web_search_result' && r.url) {
@@ -309,13 +320,8 @@ async function callClaude(
       }
     }
 
-    // Els classificadors poden declinar: ho expliquem sense fingir una resposta.
     if (data?.stop_reason === 'refusal') {
-      return {
-        text:
-          "No puc respondre aquesta consulta concreta. Reformula-la centrant-te en l'actuació policial, o consulta-ho amb el comandament.",
-        webSources,
-      };
+      return { text: "No puc respondre aquesta consulta concreta. Reformula-la centrant-te en l'actuació policial.", webSources };
     }
     if (data?.stop_reason === 'pause_turn') {
       messages.push({ role: 'assistant', content: data.content });
@@ -328,7 +334,6 @@ async function callClaude(
   return { text, webSources };
 }
 
-/* ── Usuari + pla ──────────────────────────────────────────────────── */
 async function getUser(req: Request) {
   const auth = req.headers.get('Authorization') ?? '';
   if (!auth.startsWith('Bearer ')) return null;
@@ -340,10 +345,7 @@ async function getUser(req: Request) {
 
 async function getPlan(admin: ReturnType<typeof createClient>, userId: string): Promise<string> {
   const { data: sub } = await admin
-    .from('subscriptions')
-    .select('plan, active, expires_at')
-    .eq('user_id', userId)
-    .maybeSingle();
+    .from('subscriptions').select('plan, active, expires_at').eq('user_id', userId).maybeSingle();
   if (!sub || !sub.active) return 'free';
   if (sub.expires_at) {
     const exp = new Date(sub.expires_at).getTime();
@@ -352,7 +354,6 @@ async function getPlan(admin: ReturnType<typeof createClient>, userId: string): 
   return String(sub.plan ?? 'free');
 }
 
-/* ── Handler ───────────────────────────────────────────────────────── */
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: CORS });
   if (req.method !== 'POST') return json(405, { ok: false, error: 'Method not allowed' });
@@ -362,7 +363,6 @@ Deno.serve(async (req: Request) => {
     const action = String(body.action ?? 'ask');
     const admin = createClient(SUPABASE_URL, SERVICE_ROLE);
 
-    /* stats — recompte de la base de coneixement */
     if (action === 'stats') {
       const { count } = await admin.from('kb_documents').select('id', { count: 'exact', head: true });
       return json(200, { ok: true, total: count ?? 0 });
@@ -372,42 +372,45 @@ Deno.serve(async (req: Request) => {
     if (!user) return json(401, { ok: false, error: 'Cal iniciar sessió.' });
     const isAdmin = ADMIN_EMAILS.includes((user.email ?? '').toLowerCase());
 
-    /* ingest — carregar coneixement (només admins) */
     if (action === 'ingest') {
       if (!isAdmin) return json(403, { ok: false, error: 'Només administradors.' });
-      if (!GEMINI_API_KEY) return json(500, { ok: false, error: 'Falta GEMINI_API_KEY.' });
+      if (!GEMINI_API_KEY) return json(500, { ok: false, error: 'Falta GEMINI_API_KEY al servidor.' });
       const docs = Array.isArray(body.documents) ? body.documents : [];
       if (!docs.length) return json(400, { ok: false, error: 'Sense documents.' });
 
-      let inserted = 0;
+      const items: { source: string; title: string; kind: string; modes: string[]; content: string }[] = [];
       for (const doc of docs) {
         const source = String(doc.source ?? doc.title ?? 'sense-font');
+        const title = String(doc.title ?? source);
+        const kind = String(doc.kind ?? 'document');
         const modes: string[] = Array.isArray(doc.modes) && doc.modes.length
           ? doc.modes.filter((m: string) => m in MODES)
           : ['operativa', 'diligencia', 'servei'];
-        const pieces = chunk(String(doc.content ?? ''));
-        if (!pieces.length) continue;
-        // Cada font substitueix la seva versió anterior.
-        if (body.replace !== false) await admin.from('kb_documents').delete().eq('source', source);
-        for (const content of pieces) {
-          const vec = await embed(content);
-          const { error } = await admin.from('kb_documents').insert({
-            source,
-            title: String(doc.title ?? source),
-            kind: String(doc.kind ?? 'document'),
-            content,
-            embedding: vec,
-            modes,
-          });
-          if (error) throw new Error('Insert: ' + error.message);
-          inserted++;
+        for (const content of chunk(String(doc.content ?? ''))) {
+          items.push({ source, title, kind, modes, content });
         }
+      }
+      if (!items.length) return json(200, { ok: true, inserted: 0 });
+
+      if (body.replace !== false) {
+        await admin.from('kb_documents').delete().in('source', [...new Set(items.map((i) => i.source))]);
+      }
+
+      let inserted = 0;
+      for (let i = 0; i < items.length; i += EMBED_BATCH) {
+        const lot = items.slice(i, i + EMBED_BATCH);
+        const vecs = await embedBatch(lot.map((x) => x.content));
+        const rows = lot.map((x, j) => ({
+          source: x.source, title: x.title, kind: x.kind, content: x.content, embedding: vecs[j], modes: x.modes,
+        }));
+        const { error } = await admin.from('kb_documents').insert(rows);
+        if (error) throw new Error('Insert: ' + error.message);
+        inserted += rows.length;
       }
       const { count } = await admin.from('kb_documents').select('id', { count: 'exact', head: true });
       return json(200, { ok: true, inserted, total: count ?? 0 });
     }
 
-    /* ask — la conversa */
     if (action !== 'ask') return json(400, { ok: false, error: `Acció desconeguda: ${action}` });
     if (!ANTHROPIC_API_KEY) return json(500, { ok: false, error: 'IA no configurada (manca ANTHROPIC_API_KEY).' });
 
@@ -415,38 +418,31 @@ Deno.serve(async (req: Request) => {
     const cfg = MODES[mode];
     if (!cfg) return json(400, { ok: false, error: `Mode no vàlid: ${mode}` });
 
-    // Historial de la conversa (el client el manté; no el desem al servidor).
     const raw = Array.isArray(body.messages) ? body.messages : [];
     const history: Msg[] = raw
       .filter((m: Msg) => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
       .slice(-MAX_HISTORY);
     if (!history.length || history[history.length - 1].role !== 'user') {
-      return json(400, { ok: false, error: 'Cal un missatge de l\'usuari.' });
+      return json(400, { ok: false, error: "Cal un missatge de l'usuari." });
     }
 
-    // Adjunts: es passen al model i es descarten. No es desen enlloc.
     const attachments: Att[] = (Array.isArray(body.attachments) ? body.attachments : [])
       .slice(0, MAX_IMAGES)
       .filter((a: Att) => a && typeof a.data === 'string' && typeof a.media_type === 'string')
       .filter((a: Att) => a.data.length * 0.75 <= MAX_FILE_BYTES)
       .map((a: Att) => ({
-        type: a.media_type === 'application/pdf' ? 'document' : 'image',
+        type: (a.media_type === 'application/pdf' ? 'document' : 'image') as 'image' | 'document',
         media_type: a.media_type,
         data: a.data,
       }));
 
-    // Quota diària per pla.
     const plan = await getPlan(admin, user.id);
     const limit = QUOTAS[plan] ?? QUOTAS.free;
     if (!isAdmin) {
       const today = new Date().toISOString().slice(0, 10);
       const { data: used } = await admin
-        .from('ai_usage')
-        .select('count')
-        .eq('user_id', user.id)
-        .eq('date', today)
-        .eq('feature', 'assistent')
-        .maybeSingle();
+        .from('ai_usage').select('count')
+        .eq('user_id', user.id).eq('date', today).eq('feature', 'assistent').maybeSingle();
       const current = used?.count ?? 0;
       if (current >= limit) {
         return json(429, {
@@ -457,40 +453,33 @@ Deno.serve(async (req: Request) => {
       }
     }
 
-    // RAG: només als modes que el necessiten.
     let context = '';
-    let sources: { title: string; source: string; kind: string }[] = [];
+    const sources: { title: string; source: string; kind: string }[] = [];
     if (cfg.rag && GEMINI_API_KEY) {
       try {
         const vec = await embed(history[history.length - 1].content);
         const { data: hits } = await admin.rpc('match_kb_documents_mode', {
-          query_embedding: JSON.stringify(vec),
-          match_count: 8,
-          p_mode: mode,
+          query_embedding: JSON.stringify(vec), match_count: cfg.matches, p_mode: mode,
         });
         const rows = (hits ?? []) as { title: string; source: string; kind: string; content: string }[];
         context = rows.map((h, i) => `[${i + 1}] (${h.title})\n${h.content}`).join('\n\n---\n\n');
-        sources = rows.map((h) => ({ title: h.title, source: h.source, kind: h.kind }));
+        for (const h of rows) sources.push({ title: h.title, source: h.source, kind: h.kind });
       } catch (_e) {
-        // Sense context: el prompt ja obliga a dir que no té la dada.
         context = '';
       }
     }
 
     const { text, webSources } = await callClaude(cfg, history, context, attachments);
-    // Les fonts d'internet es marquen com a tals perquè l'agent les distingeixi.
     for (const w of webSources) {
       if (!sources.some((s) => s.source === w.url)) {
         sources.push({ title: w.title, source: w.url, kind: 'web' });
       }
     }
 
-    // Comptabilitza l'ús (els admins no gasten quota).
     let count = 0;
     if (!isAdmin) {
       const { data: inc } = await admin.rpc('ai_usage_increment', {
-        p_user_id: user.id,
-        p_feature: 'assistent',
+        p_user_id: user.id, p_feature: 'assistent',
       });
       count = typeof inc === 'number' ? inc : 0;
     }

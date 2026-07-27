@@ -665,6 +665,13 @@ function dedupe(s: Src[]): Src[] {
 /* ── Admin: carregar coneixement ──────────────────────────────── */
 type CorpusDoc = { title: string; source: string; kind: string; content: string };
 
+/** Paquets de coneixement. Cadascun s'indexa per separat per no refer-ho tot. */
+const PACKS: { file: string; label: string; desc: string }[] = [
+  { file: 'chat-corpus.json', label: 'Contingut InfoPol', desc: 'Fitxes, operativa i temari de la web' },
+  { file: 'chat-corpus-legal.json', label: 'Documents legals', desc: 'Codi penal, LECrim, LO 4/2015, nomenclàtor SCT…' },
+  { file: 'chat-corpus-normativa.json', label: 'Normativa de trànsit i Viladecans', desc: 'LSV, RGC, RGV, RGCond i ordenances municipals' },
+];
+
 function AdminIngest({ onDone }: { onDone: (total: number) => void }) {
   const [title, setTitle] = useState('');
   const [kind, setKind] = useState('ordenança');
@@ -672,8 +679,8 @@ function AdminIngest({ onDone }: { onDone: (total: number) => void }) {
   const [content, setContent] = useState('');
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState('');
-  const [corpus, setCorpus] = useState<CorpusDoc[] | null>(null);
-  const [bulkBusy, setBulkBusy] = useState(false);
+  const [packs, setPacks] = useState<Record<string, CorpusDoc[]>>({});
+  const [bulkBusy, setBulkBusy] = useState<string | null>(null);
   const [bulkMsg, setBulkMsg] = useState('');
   const [bulkPct, setBulkPct] = useState(0);
 
@@ -682,16 +689,13 @@ function AdminIngest({ onDone }: { onDone: (total: number) => void }) {
     fontFamily: D.sans, fontSize: 14, color: D.ink, background: 'rgba(255,255,255,.04)', outline: 'none',
   };
 
-  // Dos corpus: el generat de la web + els documents legals (PDF convertits).
   useEffect(() => {
-    const load = (f: string) =>
-      fetch(import.meta.env.BASE_URL + f)
+    PACKS.forEach(({ file }) => {
+      fetch(import.meta.env.BASE_URL + file)
         .then((r) => (r.ok ? r.json() : null))
-        .then((d) => (Array.isArray(d) ? (d as CorpusDoc[]) : []))
-        .catch(() => [] as CorpusDoc[]);
-    Promise.all([load('chat-corpus.json'), load('chat-corpus-legal.json')])
-      .then(([web, legal]) => setCorpus([...web, ...legal]))
-      .catch(() => {});
+        .then((d) => { if (Array.isArray(d)) setPacks((p) => ({ ...p, [file]: d as CorpusDoc[] })); })
+        .catch(() => {});
+    });
   }, []);
 
   async function load() {
@@ -704,10 +708,11 @@ function AdminIngest({ onDone }: { onDone: (total: number) => void }) {
     else { setMsg(`✅ ${d.inserted} fragments afegits (total ${d.total}).`); setContent(''); if (typeof d.total === 'number') onDone(d.total); }
   }
 
-  async function bulkIngest() {
+  async function bulkIngest(file: string, label: string) {
+    const corpus = packs[file];
     if (!corpus || bulkBusy) return;
-    if (!confirm(`S'indexaran ${corpus.length} documents del corpus InfoPol. Cada font substitueix la versió anterior. Pot trigar uns minuts. Continuar?`)) return;
-    setBulkBusy(true); setBulkPct(0); setBulkMsg('Indexant…');
+    if (!confirm(`S'indexaran ${corpus.length} documents de «${label}». Cada font substitueix la versió anterior. Pot trigar uns minuts. Continuar?`)) return;
+    setBulkBusy(file); setBulkPct(0); setBulkMsg(`Indexant «${label}»…`);
     const BATCH = 6;
     let done = 0, errors = 0, lastTotal: number | null = null;
     for (let i = 0; i < corpus.length; i += BATCH) {
@@ -715,34 +720,40 @@ function AdminIngest({ onDone }: { onDone: (total: number) => void }) {
       const d = await callAssistent({ action: 'ingest', documents: batch, replace: true });
       if (d.error) {
         errors++;
-        if (errors >= 2) { setBulkMsg(`⚠️ Aturat per errors: ${d.error} (${done}/${corpus.length} fets)`); setBulkBusy(false); return; }
+        if (errors >= 2) { setBulkMsg(`⚠️ Aturat per errors: ${d.error} (${done}/${corpus.length} fets)`); setBulkBusy(null); return; }
       } else { errors = 0; if (typeof d.total === 'number') lastTotal = d.total; }
       done += batch.length;
       setBulkPct(Math.round((done / corpus.length) * 100));
-      setBulkMsg(`Indexant… ${done}/${corpus.length} documents`);
+      setBulkMsg(`Indexant «${label}»… ${done}/${corpus.length} documents`);
     }
-    setBulkBusy(false);
-    setBulkMsg(`✅ Corpus indexat: ${corpus.length} documents.`);
+    setBulkBusy(null);
+    setBulkMsg(`✅ «${label}» indexat: ${corpus.length} documents.`);
     if (lastTotal != null) onDone(lastTotal);
   }
 
   return (
     <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 10, background: D.bg, color: D.ink, borderRadius: 18, padding: 18, fontFamily: D.sans }}>
-      <div style={{ border: '1.5px solid #FF7A1A', borderRadius: 16, padding: 14 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-          <span style={{ fontSize: 20 }}>📥</span>
-          <div style={{ flex: 1, minWidth: 200 }}>
-            <div style={{ fontWeight: 700, fontSize: 14.5 }}>Corpus InfoPol complet</div>
-            <div style={{ fontFamily: D.mono, fontSize: 9, color: D.mut2 }}>
-              {corpus ? `${corpus.length} documents (visibles a tots els mòduls)` : 'Carregant corpus…'}
+      <div style={{ border: '1.5px solid #FF7A1A', borderRadius: 16, padding: 14, display: 'flex', flexDirection: 'column', gap: 12 }}>
+        {PACKS.map(({ file, label, desc }) => {
+          const corpus = packs[file];
+          const actiu = bulkBusy === file;
+          return (
+            <div key={file} style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <span style={{ fontSize: 20 }}>📥</span>
+              <div style={{ flex: 1, minWidth: 200 }}>
+                <div style={{ fontWeight: 700, fontSize: 14.5 }}>{label}</div>
+                <div style={{ fontFamily: D.mono, fontSize: 9, color: D.mut2 }}>
+                  {corpus ? `${corpus.length} documents · ${desc}` : 'Carregant…'}
+                </div>
+              </div>
+              <button onClick={() => bulkIngest(file, label)} disabled={!corpus || bulkBusy !== null}
+                style={{ border: 'none', background: '#EC5F06', color: '#fff', borderRadius: 11, padding: '10px 16px', fontWeight: 700, fontSize: 13.5, cursor: 'pointer', opacity: !corpus || bulkBusy !== null ? 0.5 : 1 }}>
+                {actiu ? `${bulkPct}%…` : 'Indexar'}
+              </button>
             </div>
-          </div>
-          <button onClick={bulkIngest} disabled={!corpus || bulkBusy}
-            style={{ border: 'none', background: '#EC5F06', color: '#fff', borderRadius: 11, padding: '10px 16px', fontWeight: 700, fontSize: 13.5, cursor: 'pointer', opacity: !corpus || bulkBusy ? 0.5 : 1 }}>
-            {bulkBusy ? `${bulkPct}%…` : 'Indexar-ho tot'}
-          </button>
-        </div>
-        {bulkMsg && <div style={{ marginTop: 8, fontSize: 13, color: D.mut }}>{bulkMsg}</div>}
+          );
+        })}
+        {bulkMsg && <div style={{ fontSize: 13, color: D.mut }}>{bulkMsg}</div>}
       </div>
 
       <div style={{ fontFamily: D.mono, fontSize: 9, color: D.mut2 }}>O carrega un document solt (plantilles de minutes, pautes internes, ordenances noves…):</div>
