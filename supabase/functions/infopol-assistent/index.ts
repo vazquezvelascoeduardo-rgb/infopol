@@ -35,7 +35,11 @@ const ADMIN_EMAILS = (Deno.env.get('ADMIN_EMAILS') ?? 'vazquezvelascoeduardo@gma
   .split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
 
 const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages';
-const EMBED_MODEL = 'text-embedding-004'; // 768 dims — no canviar (kb_documents)
+// Google va retirar text-embedding-004 (juliol 2026). gemini-embedding-001
+// amb outputDimensionality=768 per encaixar amb kb_documents.embedding.
+const EMBED_MODEL = 'gemini-embedding-001';
+const DIMS = 768;
+const EMBED_BATCH = 60;
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -182,19 +186,32 @@ const MODES: Record<
 };
 
 /* ── Embeddings (Gemini) — han de coincidir amb kb_documents ───────── */
-async function embed(text: string): Promise<number[]> {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${EMBED_MODEL}:embedContent?key=${GEMINI_API_KEY}`;
+// IMPORTANT: sempre s'ha de consumir el cos de la resposta. Si es deixa obert,
+// el worker de Deno es queda sense recursos i la funció es penja (WORKER_RESOURCE_LIMIT).
+async function embedBatch(texts: string[]): Promise<number[][]> {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${EMBED_MODEL}:batchEmbedContents?key=${GEMINI_API_KEY}`;
   const r = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      model: `models/${EMBED_MODEL}`,
-      content: { parts: [{ text: text.slice(0, 9000) }] },
+      requests: texts.map((t) => ({
+        model: `models/${EMBED_MODEL}`,
+        content: { parts: [{ text: t.slice(0, 9000) }] },
+        outputDimensionality: DIMS,
+      })),
     }),
   });
-  if (!r.ok) throw new Error(`Embeddings ${r.status}: ${(await r.text()).slice(0, 200)}`);
-  const d = await r.json();
-  return d.embedding?.values ?? [];
+  const cos = await r.text();
+  if (!r.ok) throw new Error(`Gemini ${r.status}: ${cos.slice(0, 200)}`);
+  const d = JSON.parse(cos);
+  const vecs = (d.embeddings ?? []).map((e: { values: number[] }) => e.values);
+  if (vecs.length !== texts.length) throw new Error('Embeddings incomplets.');
+  return vecs;
+}
+
+async function embed(text: string): Promise<number[]> {
+  const [v] = await embedBatch([text]);
+  return v ?? [];
 }
 
 /* ── Trossejat per a la ingesta de coneixement ─────────────────────── */
