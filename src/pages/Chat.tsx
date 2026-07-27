@@ -481,7 +481,7 @@ export default function Chat() {
     .slice(-6).reverse();
 
   return (
-    <div className="shell" style={{ maxWidth: 1220, paddingBottom: 40 }}>
+    <div style={{ background: D.bg, height: '100dvh', overflow: 'hidden' }}>
       <div style={shellStyle}>
         {ambient}
 
