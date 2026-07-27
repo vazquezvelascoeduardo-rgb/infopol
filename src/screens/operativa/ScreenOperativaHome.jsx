@@ -43,6 +43,13 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '07·27', tag: 'POLÍTICA', title: 'Enquesta: PSC guanyaria a la baixa i Aliança Catalana seria la 2a força a Catalunya', desc: 'Sondeig del 16-22 juliol: PSC al 25% (34-37 escons). Erosió del Govern d\'Illa per Rodalies i vagues en educació i sanitat.' },
+  { date: '07·27', tag: 'ECONOMIA', title: 'L\'Euríbor escala fins al 2,827% al juliol, màxim des del 2023', desc: 'Pujada que encareix les hipoteques variables. Una hipoteca de 150.000€ a 30 anys paga 482,46€/mes.' },
+  { date: '07·27', tag: 'ECONOMIA', title: 'Apple supera Nvidia com l\'empresa amb major capitalització borsatil del món', desc: 'El gegant de Cupertino desplaça Nvidia del primer lloc en capitalització borsatil global.' },
+  { date: '07·27', tag: 'SUCCESSOS', title: 'Màlaga: cinc dones mortes de manera violenta en un mes; repunt de criminalitat estival', desc: 'Vuit morts violentes en poques setmanes, cinc al juliol. Les FFCS alerten del patró estacional de violència.' },
+  { date: '07·27', tag: 'CULTURA', title: 'Carlos Folgoso guanya el Premi Descobriments de PHotoEspaña 2026 amb \'Alén do Lago\'', desc: 'El fotògraf gallec s\'imposa en una edició centrada en narratives de territori, memòria i gènere.' },
+  { date: '07·27', tag: 'INTERNACIONAL', title: 'Incendis forestals: 300.000 evacuats a França i Espanya; la Gironda arriba a 42.000 ha', desc: 'L\'incendi de la Gironda es manté imprevisible. S\'esperen temperatures de fins a 40°C a partir de dimarts.' },
+  { date: '07·27', tag: 'INTERNACIONAL', title: 'AIDS 2026: la 26a Conferència Internacional sobre la Sida obre a Rio en crisi de finançament', desc: 'La conferència (27-31 juliol) afronta retallades sense precedents en programes globals de lluita contra el VIH.' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
