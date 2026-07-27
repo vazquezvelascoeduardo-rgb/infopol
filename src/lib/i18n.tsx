@@ -216,8 +216,8 @@ const DICT: Dict = {
     'privacy.title': 'Política de privacitat',
     'privacy.updated': 'Última actualització',
     'privacy.s1.title': '1. Dades personals',
-    'privacy.s1.p1': 'InfoPol és una aplicació web estàtica. No requereix registre, no demana dades personals i no envia informació a cap servidor del titular. Tota la funcionalitat passa al teu navegador.',
-    'privacy.s1.highlight': 'No tractem cap dada personal identificable.',
+    'privacy.s1.p1': 'Bona part d\'InfoPol funciona sense registre i al teu navegador. Ara bé, algunes funcions (acadèmia, progrés, assistent) requereixen compte: en aquest cas tractem el teu correu electrònic, el nom que hi facis constar i el teu progrés d\'estudi. Aquestes dades es desen a Supabase, el nostre proveïdor de base de dades i autenticació, amb servidors a la Unió Europea, i s\'utilitzen únicament per prestar el servei i sincronitzar el teu progrés entre dispositius.',
+    'privacy.s1.highlight': 'No venem les teves dades, no fem servir publicitat ni rastreig de tercers, i pots eliminar el compte quan vulguis.',
     'privacy.s2.title': '2. Emmagatzematge local al teu dispositiu',
     'privacy.s2.intro': 'L\'aplicació guarda algunes preferències a l\'emmagatzematge local (localStorage) del teu navegador. Aquestes dades no surten del teu dispositiu:',
     'privacy.s2.theme': 'tema visual triat (clar/fosc).',
@@ -236,7 +236,7 @@ const DICT: Dict = {
     'privacy.s4.title': '4. Galetes (cookies)',
     'privacy.s4.p1': 'No fem servir cookies. Només localStorage tècnic (necessari per recordar el tema i l\'idioma). Per la naturalesa estrictament funcional d\'aquest emmagatzematge, no cal consentiment previ segons el considerant 32 del RGPD i l\'article 22.2 de la LSSICE.',
     'privacy.s5.title': '5. Els teus drets',
-    'privacy.s5.p1': 'Com que no tractem dades personals, no s\'apliquen els drets del RGPD davant d\'InfoPol. Si tens dubtes o vols reportar alguna cosa:',
+    'privacy.s5.p1': 'Si tens compte a InfoPol pots exercir els drets d\'accés, rectificació, supressió, oposició, limitació i portabilitat. Pots eliminar el compte i les seves dades des del teu perfil, o escriure\'ns. També pots reclamar davant l\'Agència Espanyola de Protecció de Dades (aepd.es). Per a qualsevol dubte:',
     'privacy.s5.contact': 'Contacte',
 
     // Banner RGPD
