@@ -141,6 +141,25 @@ function ErrorFallback({ resetError }: { error: unknown; resetError: () => void 
   );
 }
 
+// El service worker es genera amb `autoUpdate`, pero aixo nomes instal·la la
+// versio nova en segon pla: la pestanya oberta continua amb el JS antic en
+// memoria i calen dues recarregues per veure els canvis. Quan el service
+// worker nou pren el control, recarreguem una sola vegada.
+if ('serviceWorker' in navigator) {
+  let recarregant = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (recarregant) return;
+    recarregant = true;
+    window.location.reload();
+  });
+  // Comprova si hi ha versio nova en tornar a la pestanya.
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      navigator.serviceWorker.getRegistration().then((r) => r?.update()).catch(() => {});
+    }
+  });
+}
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <SentryErrorBoundary fallback={ErrorFallback} showDialog={false}>
