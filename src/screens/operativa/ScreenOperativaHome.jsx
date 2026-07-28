@@ -43,6 +43,14 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '07·28', tag: 'Succés Cat.', title: 'Socavó del Putxet: Junts exigeix la dimissió de Paneque i Nadal', desc: 'Junts reclama responsabilitats polítiques pel socavó de 8 metres a l\'L9 que va forçar el desallotjament de 93 habitatges al Putxet.' },
+  { date: '07·28', tag: 'Política Cat.', title: 'Aliança Catalana puja als sondejos i Junts cau al primer baròmetre del CEO del 2026', desc: 'El CEO mostra un ascens meteòric d\'Aliança Catalana i una caiguda significativa de Junts al Parlament.' },
+  { date: '07·28', tag: 'Política Esp.', title: 'Sánchez anuncia els pressupostos del 2027 i defensa la continuïtat de la legislatura', desc: 'El president del Govern fa balanç del curs polític i reitera la seva intenció d\'aprovar els pressupostos generals del 2027 abans de final d\'any.' },
+  { date: '07·28', tag: 'Economia', title: 'L\'euríbor baixa al 2,943% i BlackRock escull Espanya com a país preferit per invertir', desc: 'L\'euríbor a 12 mesos baixa al 2,943% el 28 de juliol. El Govern aprova un sostre de despesa rècord de 226.032 M€ per als Pressupostos del 2027.' },
+  { date: '07·28', tag: 'Emergències Esp.', title: 'Incendis forestals: 130.000 ha cremades i emergència nacional a Madrid i Àvila', desc: 'Primera activació de l\'emergència d\'interès nacional per incendi forestal. Zones afectades a Madrid, Castella i Lleó, Castella-La Manxa i la Comunitat Valenciana.' },
+  { date: '07·28', tag: 'Internacional', title: 'Keiko Fujimori jura com a presidenta del Perú pel període 2026–2031', desc: 'La filla d\'Alberto Fujimori assumeix la presidència del Perú, posant fi a 10 anys d\'inestabilitat política. Hi assisteix el rei d\'Espanya.' },
+  { date: '07·28', tag: 'Internacional', title: 'Zelenski es reuneix amb Trump a la Casa Blanca per reforçar el suport a Ucraïna', desc: 'El president ucraïnès busca suport i aconsegueix llicències per fabricar sistemes de defensa aèria Patriot, coincidint amb el funeral del senador Lindsey Graham.' },
+  { date: '07·28', tag: 'Emergències Int.', title: 'Incendis al sud-oest de França: 98.000 ha cremades i 220.000 evacuats a la Gironda', desc: 'Un gegantesc incendi avança a 30 km de Bordeus i ha devastat 40.000 ha. França viu una de les pitjors temporades d\'incendis de la seva història.' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
