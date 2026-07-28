@@ -228,7 +228,7 @@ const MODES: Record<
   { system: string; model: string; rag: boolean; maxTokens: number; web?: boolean; matches: number }
 > = {
   operativa: { system: P_OPERATIVA, model: 'claude-opus-5', rag: true, maxTokens: 8000, web: true, matches: 14 },
-  diligencia: { system: P_DILIGENCIA, model: 'claude-opus-5', rag: true, maxTokens: 10000, matches: 8 },
+  diligencia: { system: P_DILIGENCIA, model: 'claude-sonnet-5', rag: true, maxTokens: 6000, matches: 8 },
   servei: { system: P_SERVEI, model: 'claude-sonnet-5', rag: false, maxTokens: 4000, matches: 0 },
 };
 
@@ -289,27 +289,37 @@ function avuiText(): string {
 
 /** Prompts editables des de la BD. Si la taula es buida o falla la consulta,
  *  es fan servir els del codi. Cache curt perque no consulti a cada peticio. */
-let cachePrompts: { t: number; map: Record<string, string> } = { t: 0, map: {} };
+type Row = { mode: string; system: string | null; model: string | null;
+  max_tokens: number | null; matches: number | null };
+let cacheCfg: { t: number; map: Record<string, Partial<Cfg>> } = { t: 0, map: {} };
 
-async function systemPerMode(
-  admin: ReturnType<typeof createClient>, mode: Mode, defecte: string,
-): Promise<string> {
+type Cfg = { system: string; model: string; maxTokens: number; web?: boolean; matches: number };
+
+async function configPerMode(
+  admin: ReturnType<typeof createClient>, mode: Mode, defecte: Cfg,
+): Promise<Cfg> {
   const ara = Date.now();
-  if (ara - cachePrompts.t > 60_000) {
+  if (ara - cacheCfg.t > 60_000) {
     try {
-      const { data } = await admin.from('assistant_prompts').select('mode, system');
-      const map: Record<string, string> = {};
-      for (const r of (data ?? []) as { mode: string; system: string }[]) {
-        if (r?.system && r.system.trim()) map[r.mode] = r.system;
+      const { data } = await admin.from('assistant_prompts')
+        .select('mode, system, model, max_tokens, matches');
+      const map: Record<string, Partial<Cfg>> = {};
+      for (const r of (data ?? []) as Row[]) {
+        if (!r?.mode) continue;
+        const o: Partial<Cfg> = {};
+        if (r.system && r.system.trim()) o.system = r.system;
+        if (r.model && r.model.trim()) o.model = r.model;
+        if (r.max_tokens && r.max_tokens > 0) o.maxTokens = r.max_tokens;
+        if (r.matches && r.matches > 0) o.matches = r.matches;
+        map[r.mode] = o;
       }
-      cachePrompts = { t: ara, map };
+      cacheCfg = { t: ara, map };
     } catch (_e) {
-      cachePrompts = { t: ara, map: {} };
+      cacheCfg = { t: ara, map: {} };
     }
   }
-  return cachePrompts.map[mode] ?? defecte;
+  return { ...defecte, ...(cacheCfg.map[mode] ?? {}) };
 }
-
 async function callClaude(
   cfg: { system: string; model: string; maxTokens: number; web?: boolean },
   history: Msg[],
@@ -502,13 +512,16 @@ Deno.serve(async (req: Request) => {
       }
     }
 
+    // La configuracio de la BD (si n'hi ha) mana sobre la del codi.
+    const actiu = await configPerMode(admin, mode, cfg);
+
     let context = '';
     const sources: { title: string; source: string; kind: string }[] = [];
     if (cfg.rag && GEMINI_API_KEY) {
       try {
         const vec = await embed(history[history.length - 1].content);
         const { data: hits } = await admin.rpc('match_kb_documents_mode', {
-          query_embedding: JSON.stringify(vec), match_count: cfg.matches, p_mode: mode,
+          query_embedding: JSON.stringify(vec), match_count: actiu.matches, p_mode: mode,
         });
         const rows = (hits ?? []) as { title: string; source: string; kind: string; content: string }[];
         context = rows.map((h, i) => `[${i + 1}] (${h.title})\n${h.content}`).join('\n\n---\n\n');
@@ -518,10 +531,7 @@ Deno.serve(async (req: Request) => {
       }
     }
 
-    const system = await systemPerMode(admin, mode, cfg.system);
-    const { text, webSources } = await callClaude(
-          { ...cfg, system }, history, context, attachments,
-        );
+    const { text, webSources } = await callClaude(actiu, history, context, attachments);
     for (const w of webSources) {
       if (!sources.some((s) => s.source === w.url)) {
         sources.push({ title: w.title, source: w.url, kind: 'web' });
