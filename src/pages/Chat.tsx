@@ -260,6 +260,34 @@ export default function Chat() {
   };
   const ambient = (
     <>
+      <style>{`
+        .ipc-scroll{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.16) transparent}
+        .ipc-scroll::-webkit-scrollbar{width:10px;height:10px}
+        .ipc-scroll::-webkit-scrollbar-track{background:transparent}
+        .ipc-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:99px;
+          border:2px solid transparent;background-clip:padding-box}
+        .ipc-scroll::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.26);
+          border:2px solid transparent;background-clip:padding-box}
+        .ipc-scroll::-webkit-scrollbar-corner{background:transparent}
+        .ipc-md>:first-child{margin-top:0}
+        .ipc-md>:last-child{margin-bottom:0}
+        .ipc-md p{margin:0 0 10px}
+        .ipc-md h3,.ipc-md h4,.ipc-md h5,.ipc-md h6{margin:15px 0 7px;font-size:14.5px;font-weight:800;
+          letter-spacing:-.2px;color:#fff}
+        .ipc-md ul,.ipc-md ol{margin:0 0 10px;padding-left:19px}
+        .ipc-md li{margin:3px 0}
+        .ipc-md strong{font-weight:700;color:#fff}
+        .ipc-md em{font-style:italic}
+        .ipc-md a{color:#FFB27A}
+        .ipc-md hr{border:0;border-top:1px solid rgba(255,255,255,.1);margin:13px 0}
+        .ipc-md code{font-family:${D.mono};font-size:12.5px;background:rgba(255,255,255,.08);
+          padding:1px 5px;border-radius:5px}
+        .ipc-md table{border-collapse:collapse;margin:0 0 10px;font-size:13.5px;display:block;
+          overflow-x:auto;max-width:100%}
+        .ipc-md th,.ipc-md td{border:1px solid rgba(255,255,255,.13);padding:7px 10px;text-align:left;
+          vertical-align:top}
+        .ipc-md th{background:rgba(255,255,255,.06);font-weight:700;white-space:nowrap}
+      `}</style>
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', backgroundImage: 'linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px)', backgroundSize: '52px 52px' }} />
       <div style={{ position: 'absolute', left: '20%', top: 0, width: 620, height: 620, borderRadius: '50%', pointerEvents: 'none', background: 'radial-gradient(circle,rgba(255,122,26,.16),transparent 62%)', filter: 'blur(10px)' }} />
       <div style={{ position: 'absolute', right: '-8%', bottom: '-16%', width: 560, height: 560, borderRadius: '50%', pointerEvents: 'none', background: 'radial-gradient(circle,rgba(46,139,212,.14),transparent 64%)', filter: 'blur(10px)' }} />
@@ -296,7 +324,7 @@ export default function Chat() {
               </div>
             </header>
 
-            <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', padding: '10px 30px 34px' }}>
+            <div className="ipc-scroll" style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', padding: '10px 30px 34px' }}>
               {/* margin:auto centra verticalment PERÒ sense retallar quan no hi cap. */}
               <div style={{ width: '100%', maxWidth: 1030, margin: 'auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: 34 }}>
@@ -394,7 +422,7 @@ export default function Chat() {
             <div style={{ fontFamily: D.mono, fontSize: 9, letterSpacing: 1.5, color: D.mut2, border: `1px solid ${D.line}`, borderRadius: 99, padding: '6px 12px' }}>PAS 1 DE 2</div>
           </header>
 
-          <div style={{ position: 'relative', flex: 1, overflowY: 'auto', padding: '26px 26px 30px' }}>
+          <div className="ipc-scroll" style={{ position: 'relative', flex: 1, overflowY: 'auto', padding: '26px 26px 30px' }}>
             <div style={{ maxWidth: 820, margin: '0 auto' }}>
               <p style={{ color: D.mut, fontSize: 14, lineHeight: 1.55, margin: '0 0 22px' }}>
                 Omple les dades bàsiques i explica què ha passat. Amb això generaré la minuta estructurada.
@@ -517,7 +545,7 @@ export default function Chat() {
           {recents.length > 0 && (
             <>
               <div style={{ fontFamily: D.mono, fontSize: 8.5, letterSpacing: 2.2, color: D.faint, padding: '0 5px 9px' }}>D&apos;AQUESTA SESSIÓ</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 3, overflowY: 'auto' }}>
+              <div className="ipc-scroll" style={{ display: 'flex', flexDirection: 'column', gap: 3, overflowY: 'auto' }}>
                 {recents.map((h, i) => (
                   <div key={i} onClick={() => pick(h.mode)}
                     style={{ padding: '9px 11px', borderRadius: 10, cursor: 'pointer', borderLeft: `2px solid ${catOf(h.mode).accent}` }}>
@@ -547,7 +575,7 @@ export default function Chat() {
             </div>
           </header>
 
-          <div ref={threadRef} style={{ flex: 1, overflowY: 'auto', padding: '26px 24px 14px' }}>
+          <div ref={threadRef} className="ipc-scroll" style={{ flex: 1, overflowY: 'auto', padding: '26px 24px 14px' }}>
             <div style={{ maxWidth: 760, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 20 }}>
               {msgs.length === 0 && (
                 <div style={{ textAlign: 'center', padding: '40px 0 10px' }}>
@@ -568,7 +596,12 @@ export default function Chat() {
                       {meu ? inicial : c.icon}
                     </div>
                     <div style={{ maxWidth: '78%', border: `1px solid ${meu ? 'transparent' : D.line2}`, background: meu ? 'rgba(255,122,26,.16)' : 'rgba(255,255,255,.045)', borderRadius: meu ? '16px 4px 16px 16px' : '4px 16px 16px 16px', padding: '15px 17px', boxShadow: '0 10px 28px rgba(0,0,0,.28)' }}>
-                      <div style={{ fontSize: 14.5, lineHeight: 1.62, color: D.ink, whiteSpace: 'pre-wrap' }}>{m.text}</div>
+                      {meu ? (
+                        <div style={{ fontSize: 14.5, lineHeight: 1.62, color: D.ink, whiteSpace: 'pre-wrap' }}>{m.text}</div>
+                      ) : (
+                        <div className="ipc-md" style={{ fontSize: 14.5, lineHeight: 1.62, color: D.ink }}
+                          dangerouslySetInnerHTML={{ __html: mdToHtml(m.text) }} />
+                      )}
                       {!meu && (m.sources?.length ?? 0) > 0 && (
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 13, paddingTop: 12, borderTop: '1px solid rgba(255,255,255,.08)' }}>
                           {dedupe(m.sources ?? []).slice(0, 4).map((r, j) => (
@@ -660,6 +693,66 @@ function dedupe(s: Src[]): Src[] {
   const seen = new Set<string>(); const out: Src[] = [];
   for (const x of s) { const k = x.source || x.title || ''; if (k && !seen.has(k)) { seen.add(k); out.push(x); } }
   return out;
+}
+
+/* ── Markdown mínim → HTML ─────────────────────────────────────
+   Escapem el text abans de res, així la resposta del model no pot
+   injectar HTML. Només interpretem negreta, cursiva, codi, títols,
+   llistes i taules, que és tot el que fa servir l'assistent. */
+function mdToHtml(src: string): string {
+  const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const inline = (s: string) => esc(s)
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[\s(])\*([^*\n]+)\*/g, '$1<em>$2</em>');
+
+  const esItem = (l: string) => /^\s*([-*+]|\d+[.)])\s+/.test(l);
+  const esTitol = (l: string) => /^\s{0,3}#{1,4}\s/.test(l);
+  const out: string[] = [];
+  const ls = src.replace(/\r/g, '').split('\n');
+  let i = 0;
+
+  while (i < ls.length) {
+    const l = ls[i];
+
+    if (/^\s*\|/.test(l) && /^\s*\|[\s:|-]+\|\s*$/.test(ls[i + 1] ?? '')) {
+      const cel = (r: string) => r.trim().replace(/^\||\|$/g, '').split('|').map((c) => c.trim());
+      const head = cel(l);
+      i += 2;
+      const files: string[][] = [];
+      while (i < ls.length && /^\s*\|/.test(ls[i])) { files.push(cel(ls[i])); i++; }
+      out.push(
+        `<table><thead><tr>${head.map((c) => `<th>${inline(c)}</th>`).join('')}</tr></thead><tbody>${
+          files.map((f) => `<tr>${f.map((c) => `<td>${inline(c)}</td>`).join('')}</tr>`).join('')
+        }</tbody></table>`,
+      );
+      continue;
+    }
+
+    const t = l.match(/^\s{0,3}(#{1,4})\s+(.*)$/);
+    if (t) { out.push(`<h${Math.min(t[1].length + 2, 6)}>${inline(t[2])}</h${Math.min(t[1].length + 2, 6)}>`); i++; continue; }
+
+    if (esItem(l)) {
+      const ord = /^\s*\d+[.)]\s+/.test(l);
+      const items: string[] = [];
+      while (i < ls.length && esItem(ls[i])) {
+        items.push(`<li>${inline(ls[i].replace(/^\s*([-*+]|\d+[.)])\s+/, ''))}</li>`);
+        i++;
+      }
+      out.push(`<${ord ? 'ol' : 'ul'}>${items.join('')}</${ord ? 'ol' : 'ul'}>`);
+      continue;
+    }
+
+    if (/^\s*(---+|___+)\s*$/.test(l)) { out.push('<hr/>'); i++; continue; }
+    if (!l.trim()) { i++; continue; }
+
+    const buf: string[] = [];
+    while (i < ls.length && ls[i].trim() && !esItem(ls[i]) && !esTitol(ls[i]) && !/^\s*\|/.test(ls[i])) {
+      buf.push(ls[i]); i++;
+    }
+    out.push(`<p>${inline(buf.join('\n')).replace(/\n/g, '<br/>')}</p>`);
+  }
+  return out.join('');
 }
 
 /* ── Admin: carregar coneixement ──────────────────────────────── */
