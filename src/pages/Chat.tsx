@@ -6,6 +6,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../lib/auth';
 import { useSeo } from '../lib/seo';
+import { anonimitzaLlista, desanonimitza } from '../lib/anonimitza';
 
 const ADMINS = ['vazquezvelascoeduardo@gmail.com', 'eduguapo98@gmail.com'];
 
@@ -213,10 +214,14 @@ export default function Chat() {
     setAtts([]);
     setTyping(true);
 
+    // Les dades personals no surten del navegador: viatgen com a [DNI_1] i es
+    // tornen a posar en rebre la resposta. El diccionari no s'envia enlloc.
+    const { textos, mapa } = anonimitzaLlista(historial.map((m) => m.text));
+
     const d = await callAssistent({
       action: 'ask',
       mode: cat,
-      messages: historial.map((m) => ({ role: m.role, content: m.text })),
+      messages: historial.map((m, i) => ({ role: m.role, content: textos[i] })),
       attachments: enviats.map((a) => ({ media_type: a.media_type, data: a.data })),
     });
     setTyping(false);
@@ -224,7 +229,11 @@ export default function Chat() {
       const prev = t[cat] ?? [];
       const nou: Msg = d.error
         ? { role: 'assistant', text: '⚠️ ' + d.error }
-        : { role: 'assistant', text: String(d.text ?? ''), sources: (d.sources as Src[]) ?? [] };
+        : {
+            role: 'assistant',
+            text: desanonimitza(String(d.text ?? ''), mapa),
+            sources: (d.sources as Src[]) ?? [],
+          };
       return { ...t, [cat]: [...prev, nou] };
     });
     if (d.used) setQuota({ count: d.used.count, limit: d.used.limit });
@@ -669,6 +678,9 @@ export default function Chat() {
               </div>
               <div style={{ textAlign: 'center', fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.4, color: D.faint, marginTop: 11 }}>
                 ⚠️ ORIENTATIU · VERIFICA SEMPRE LA NORMA VIGENT ABANS DE TRAMITAR
+              </div>
+              <div style={{ textAlign: 'center', fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.4, color: D.faint, marginTop: 5 }}>
+                🔒 DNI, MATRÍCULES I TELÈFONS ES SUBSTITUEIXEN ABANS D&apos;ENVIAR · LES FOTOS NO
               </div>
             </div>
           </div>
