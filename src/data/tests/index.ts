@@ -70,6 +70,8 @@ import gavaOrdenances from './gava-ordenances';
 import premiaDeMar from './premia-de-mar';
 import premiaDeMarCultura from './premia-de-mar-cultura';
 import premiaDeMarOrdenances from './premia-de-mar-ordenances';
+import molletDelVallesCultura from './mollet-del-valles-cultura';
+import molletDelVallesOrdenances from './mollet-del-valles-ordenances';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -140,6 +142,8 @@ export const TOPICS: TestTopic[] = [
   premiaDeMar,
   premiaDeMarCultura,
   premiaDeMarOrdenances,
+  molletDelVallesCultura,
+  molletDelVallesOrdenances,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
