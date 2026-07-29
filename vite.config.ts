@@ -74,8 +74,9 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,svg,png,ico,webmanifest}'],
         // SPA fallback per a qualsevol ruta no cachejada.
         navigateFallback: 'index.html',
-        // Augmentem el límit perquè algunes fitxes HTML són grans.
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+        // Augmentem el límit perquè algunes fitxes HTML són grans i el
+        // temari (Mossos + Policia Local) va empaquetat per funcionar offline.
+        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
       },
     }),
   ],

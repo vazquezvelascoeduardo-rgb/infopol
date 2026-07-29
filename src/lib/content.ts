@@ -81,6 +81,13 @@ export const MODULES: Module[] = [
     icon: '🚦',
   },
   {
+    slug: 'pl-temari',
+    title: 'Temari Policia Local',
+    description: "Els temes que es repeteixen a les convocatòries de PL de Catalunya, amb l'articulat vigent.",
+    accent: 'from-orange-500 to-orange-700',
+    icon: '🚔',
+  },
+  {
     slug: 'novetats',
     title: 'Novetats normatives',
     description: 'Lleis noves, reformes i actualitzacions normatives recents.',

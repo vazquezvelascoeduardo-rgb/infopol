@@ -1,0 +1,1135 @@
+# Tema B.1 — El municipi i el règim local
+
+> Competències municipals, òrgans de govern i el paper de l'alcalde.
+>
+> Els articles reproduïts són text legal vigent, pres dels textos consolidats
+> del BOE. Les normes estan excloses de propietat intel·lectual (art. 13 del
+> text refós de la Llei de propietat intel·lectual). Verifica sempre la
+> redacció vigent el dia de l'examen.
+
+## El municipi
+
+### Article 1
+
+**1.** Los Municipios son entidades básicas de la organización territorial del Estado y
+cauces inmediatos de participación ciudadana en los asuntos públicos, que institucionalizan
+y gestionan con autonomía los intereses propios de las correspondientes colectividades.
+
+**2.** La Provincia y, en su caso, la Isla gozan, asimismo, de idéntica autonomía para la
+gestión de los intereses respectivos.
+
+### Article 2
+
+**1.** Para la efectividad de la autonomía garantizada constitucionalmente a las entidades
+locales, la legislación del Estado y la de las Comunidades Autónomas, reguladora de los
+distintos sectores de acción pública, según la distribución constitucional de competencias,
+deberá asegurar a los Municipios, las Provincias y las Islas su derecho a intervenir en
+cuantos asuntos afecten directamente al círculo de sus intereses, atribuyéndoles las
+competencias que proceda en atención a las características de la actividad pública de que se
+trate y a la capacidad de gestión de la Entidad Local, de conformidad con los principios de
+descentralización, proximidad, eficacia y eficiencia, y con estricta sujeción a la normativa de
+estabilidad presupuestaria y sostenibilidad financiera.
+
+**2.** Las Leyes básicas del Estado previstas constitucionalmente deberán determinar las
+competencias que ellas mismas atribuyan o que, en todo caso, deban corresponder a los
+entes locales en las materias que regulen.
+
+### Article 3
+
+**1.** Son Entidades Locales territoriales:
+
+a) El Municipio.
+b) La Provincia.
+c) La Isla en los archipiélagos balear y canario.
+
+**2.** Gozan, asimismo, de la condición de Entidades Locales:
+
+a) Las Comarcas u otras entidades que agrupen varios Municipios, instituidas por las
+Comunidades Autónomas de conformidad con esta Ley y los correspondientes Estatutos de
+Autonomía.
+
+b) Las Áreas Metropolitanas.
+c) Las Mancomunidades de Municipios.
+
+### Article 4
+
+**1.** En su calidad de Administraciones públicas de carácter territorial, y dentro de la esfera
+de sus competencias, corresponden en todo caso a los municipios, las provincias y las islas:
+
+a) Las potestades reglamentaria y de autoorganización.
+b) Las potestades tributaria y financiera.
+c) La potestad de programación o planificación.
+d) Las potestades expropiatoria y de investigación, deslinde y recuperación de oficio de
+sus bienes.
+e) La presunción de legitimidad y la ejecutividad de sus actos.
+f) Las potestades de ejecución forzosa y sancionadora.
+g) La potestad de revisión de oficio de sus actos y acuerdos.
+h) Las prelaciones y preferencias y demás prerrogativas reconocidas a la Hacienda
+Pública para los créditos de la misma, sin perjuicio de las que correspondan a las Haciendas
+del Estado y de las comunidades autónomas; así como la inembargabilidad de sus bienes y
+derechos en los términos previstos en las leyes.
+
+**2.** Lo dispuesto en el número precedente podrá ser de aplicación a las entidades
+territoriales de ámbito inferior al municipal y, asimismo, a las comarcas, áreas metropolitanas
+y demás entidades locales, debiendo las leyes de las comunidades autónomas concretar
+cuáles de aquellas potestades serán de aplicación, excepto en el supuesto de las
+mancomunidades, que se rigen por lo dispuesto en el apartado siguiente.
+
+**3.** Corresponden a las mancomunidades de municipios, para la prestación de los
+servicios o la ejecución de las obras de su competencia, las potestades señaladas en el
+apartado 1 de este artículo que determinen sus Estatutos. En defecto de previsión
+estatutaria, les corresponderán todas las potestades enumeradas en dicho apartado,
+siempre que sean precisas para el cumplimiento de su finalidad, y de acuerdo con la
+legislación aplicable a cada una de dichas potestades, en ambos casos.
+
+### Article 5
+
+Para el cumplimiento de sus fines y en el ámbito de sus respectivas competencias, las
+Entidades locales, de acuerdo con la Constitución y las leyes, tendrán plena capacidad
+jurídica para adquirir, poseer, reivindicar, permutar, gravar o enajenar toda clase de bienes,
+celebrar contratos, establecer y explotar obras o servicios públicos, obligarse, interponer los
+recursos establecidos y ejercitar las acciones previstas en las leyes.
+
+### Article 6
+
+**1.** Las entidades locales sirven con objetividad los intereses públicos que les están
+encomendados y actúan de acuerdo con los principios de eficacia, descentralización,
+desconcentración y coordinación, con sometimiento pleno a la ley y al Derecho.
+
+**2.** Los Tribunales ejercen el control de legalidad de los acuerdos y actos de las entidades
+locales.
+
+### Article 7
+
+**1.** Las competencias de las Entidades Locales son propias o atribuidas por delegación.
+**2.** Las competencias propias de los Municipios, las Provincias, las Islas y demás
+Entidades Locales territoriales solo podrán ser determinadas por Ley y se ejercen en
+régimen de autonomía y bajo la propia responsabilidad, atendiendo siempre a la debida
+coordinación en su programación y ejecución con las demás Administraciones Públicas.
+
+**3.** El Estado y las Comunidades Autónomas, en el ejercicio de sus respectivas
+competencias, podrán delegar en las Entidades Locales el ejercicio de sus competencias.
+
+Las competencias delegadas se ejercen en los términos establecidos en la disposición o
+en el acuerdo de delegación, según corresponda, con sujeción a las reglas establecidas en
+el artículo 27, y preverán técnicas de dirección y control de oportunidad y eficiencia.
+
+**4.** Las Entidades Locales solo podrán ejercer competencias distintas de las propias y de
+las atribuidas por delegación cuando no se ponga en riesgo la sostenibilidad financiera del
+conjunto de la Hacienda municipal, de acuerdo con los requerimientos de la legislación de
+estabilidad presupuestaria y sostenibilidad financiera y no se incurra en un supuesto de
+ejecución simultánea del mismo servicio público con otra Administración Pública. A estos
+efectos, serán necesarios y vinculantes los informes previos de la Administración
+competente por razón de materia, en el que se señale la inexistencia de duplicidades, y de la
+Administración que tenga atribuida la tutela financiera sobre la sostenibilidad financiera de
+las nuevas competencias.
+
+En todo caso, el ejercicio de estas competencias deberá realizarse en los términos
+previstos en la legislación del Estado y de las Comunidades Autónomas.
+
+### Article 8
+
+Sin perjuicio de lo dispuesto en el artículo anterior, las Provincias y las islas podrán
+realizar la gestión ordinaria de servicios propios de la Administración autonómica, de
+conformidad con los Estatutos de Autonomía y la legislación de las Comunidades
+Autónomas.
+
+### Article 9
+
+Las normas de desarrollo de esta Ley que afecten a los Municipios, Provincias, islas u
+otras entidades locales territoriales no podrán limitar su ámbito de aplicación a una o varias
+de dichas entidades con carácter singular, sin perjuicio de lo dispuesto en esta Ley para los
+regímenes municipales o provinciales especiales.
+
+### Article 10
+
+**1.** La Administración Local y las demás Administraciones públicas ajustarán sus
+relaciones recíprocas a los deberes de información mutua, colaboración, coordinación y
+respeto a los ámbitos competenciales respectivos.
+
+**2.** Procederá la coordinación de las competencias de las Entidades Locales entre sí y,
+especialmente, con las de las restantes Administraciones públicas, cuando las actividades o
+los servicios locales trasciendan el interés propio de las correspondientes Entidades, incidan
+o condicionen relevantemente los de dichas Administraciones o sean concurrentes o
+complementarios de los de éstas.
+
+**3.** En especial, la coordinación de las Entidades Locales tendrá por objeto asegurar el
+cumplimiento de la legislación de estabilidad presupuestaria y sostenibilidad financiera.
+
+**4.** Las funciones de coordinación serán compatibles con la autonomía de las Entidades
+Locales.
+
+### Article 11
+
+**1.** El Municipio es la entidad local básica de la organización territorial del Estado. Tiene
+personalidad jurídica y plena capacidad para el cumplimiento de sus fines.
+
+**2.** Son elementos del Municipio el territorio, la población y la organización.
+
+### Article 12
+
+**1.** El término municipal es el territorio en que el ayuntamiento ejerce sus competencias.
+**2.** Cada municipio pertenecerá a una sola provincia.
+
+### Article 13
+
+**1.** La creación o supresión de municipios, así como la alteración de términos
+municipales, se regularán por la legislación de las Comunidades Autónomas sobre régimen
+local, sin que la alteración de términos municipales pueda suponer, en ningún caso,
+modificación de los límites provinciales. Requerirán en todo caso audiencia de los municipios
+interesados y dictamen del Consejo de Estado o del órgano consultivo superior de los
+Consejos de Gobierno de las Comunidades Autónomas, si existiere, así como informe de la
+Administración que ejerza la tutela financiera. Simultáneamente a la petición de este
+dictamen se dará conocimiento a la Administración General del Estado.
+
+**2.** La creación de nuevos municipios solo podrá realizarse sobre la base de núcleos de
+población territorialmente diferenciados, de al menos 4.000 habitantes y siempre que los
+municipios resultantes sean financieramente sostenibles, cuenten con recursos suficientes
+para el cumplimiento de las competencias municipales y no suponga disminución en la
+calidad de los servicios que venían siendo prestados.
+
+**3.** Sin perjuicio de las competencias de las Comunidades Autónomas, el Estado,
+atendiendo a criterios geográficos, sociales, económicos y culturales, podrá establecer
+medidas que tiendan a fomentar la fusión de municipios con el fin de mejorar la capacidad de
+gestión de los asuntos públicos locales.
+
+**4.** Los municipios, con independencia de su población, colindantes dentro de la misma
+provincia podrán acordar su fusión mediante un convenio de fusión, sin perjuicio del
+procedimiento previsto en la normativa autonómica. El nuevo municipio resultante de la
+fusión no podrá segregarse hasta transcurridos diez años desde la adopción del convenio de
+fusión.
+
+Al municipio resultante de esta fusión le será de aplicación lo siguiente:
+
+a) El coeficiente de ponderación que resulte de aplicación de acuerdo con el artículo
+124.1 del texto refundido de la Ley Reguladora de las Haciendas Locales, aprobado
+mediante Real Decreto Legislativo 2/2004, de 5 de marzo se incrementará en 0,10.
+
+b) El esfuerzo fiscal y el inverso de la capacidad tributaria que le corresponda en ningún
+caso podrá ser inferior al más elevado de los valores previos que tuvieran cada municipio por
+separado antes de la fusión de acuerdo con el artículo 124.1 del texto refundido de la Ley
+Reguladora de las Haciendas Locales, aprobado mediante Real Decreto Legislativo 2/2004,
+de 5 de marzo.
+
+c) Su financiación mínima será la suma de las financiaciones mínimas que tuviera cada
+municipio por separado antes de la fusión de acuerdo con el artículo 124.2 del texto
+refundido de la Ley Reguladora de las Haciendas Locales, aprobado mediante Real Decreto
+Legislativo 2/2004, de 5 de marzo.
+
+d) De la aplicación de las reglas contenidas en las letras anteriores no podrá derivarse,
+para cada ejercicio, un importe total superior al que resulte de lo dispuesto en el artículo 123
+del citado texto refundido de la Ley Reguladora de las Haciendas Locales.
+
+e) Se sumarán los importes de las compensaciones que, por separado, corresponden a
+los municipios que se fusionen y que se derivan de la reforma del Impuesto sobre
+Actividades Económicas de la disposición adicional décima de la Ley 51/2002, de 27 de
+diciembre, de Reforma de la Ley 39/1988, de 28 de diciembre, Reguladora de las Haciendas
+Locales, actualizadas en los mismos términos que los ingresos tributarios del Estado en
+cada ejercicio respecto a 2004, así como la compensación adicional, regulada en la
+disposición adicional segunda de la Ley 22/2005, de 18 de noviembre, actualizada en los
+mismos términos que los ingresos tributarios del Estado en cada ejercicio respecto a 2006.
+
+f) Queda dispensado de prestar nuevos servicios mínimos de los previstos en el artículo
+26 que le corresponda por razón de su aumento poblacional.
+
+g) Durante, al menos, los cinco primeros años desde la adopción del convenio de fusión,
+tendrá preferencia en la asignación de planes de cooperación local, subvenciones,
+convenios u otros instrumentos basados en la concurrencia. Este plazo podrá prorrogarse
+por la Ley de Presupuestos Generales del Estado.
+
+La fusión conllevará:
+
+a) La integración de los territorios, poblaciones y organizaciones de los municipios,
+incluyendo los medios personales, materiales y económicos, del municipio fusionado. A
+estos efectos, el Pleno de cada Corporación aprobará las medidas de redimensionamiento
+para la adecuación de las estructuras organizativas, inmobiliarias, de personal y de recursos
+resultantes de su nueva situación. De la ejecución de las citadas medidas no podrá derivarse
+incremento alguno de la masa salarial en los municipios afectados.
+
+b) El órgano del gobierno del nuevo municipio resultante estará constituido
+transitoriamente por la suma de los concejales de los municipios fusionados en los términos
+previstos en la Ley Orgánica 5/1985, de 19 de junio, del Régimen Electoral General.
+
+c) Si se acordara en el Convenio de fusión, cada uno de los municipios fusionados, o
+alguno de ellos podrá funcionar como forma de organización desconcentrada de
+conformidad con lo previsto en el artículo 24 bis.
+
+d) El nuevo municipio se subrogará en todos los derechos y obligaciones de los
+anteriores municipios, sin perjuicio de lo previsto en la letra e).
+
+e) Si uno de los municipios fusionados estuviera en situación de déficit se podrán
+integrar, por acuerdo de los municipios fusionados, las obligaciones, bienes y derechos
+patrimoniales que se consideren liquidables en un fondo, sin personalidad jurídica y con
+contabilidad separada, adscrito al nuevo municipio, que designará un liquidador al que le
+corresponderá la liquidación de este fondo. Esta liquidación deberá llevarse a cabo durante
+los cinco años siguientes desde la adopción del convenio de fusión, sin perjuicio de los
+posibles derechos que puedan corresponder a los acreedores. La aprobación de las normas
+a las que tendrá que ajustarse la contabilidad del fondo corresponderá al Ministro de
+Hacienda y Administraciones Públicas, a propuesta de la Intervención General de la
+Administración del Estado.
+
+f) El nuevo municipio aprobará un nuevo presupuesto para el ejercicio presupuestario
+siguiente a la adopción del convenio de fusión.
+
+**5.** Las Diputaciones provinciales o entidades equivalentes, en colaboración con la
+Comunidad Autónoma, coordinarán y supervisarán la integración de los servicios resultantes
+del proceso de fusión.
+
+**6.** El convenio de fusión deberá ser aprobado por mayoría simple de cada uno de los
+plenos de los municipios fusionados. La adopción de los acuerdos previstos en el artículo
+47.2, siempre que traigan causa de una fusión, será por mayoría simple de los miembros de
+la corporación.
+
+### Article 14
+
+**1.** Los cambios de denominación de los Municipios solo tendrán carácter oficial cuando,
+tras haber sido anotados en un Registro creado por la Administración del Estado para la
+inscripción de todas las entidades a que se refiere la presente Ley, se publiquen en el
+
+**2.** La denominación de los Municipios podrá ser, a todos los efectos, en castellano, en
+cualquier otra lengua española oficial en la respectiva Comunidad Autónoma, o en ambas.
+
+### Article 15
+
+Toda persona que viva en España está obligada a inscribirse en el Padrón del municipio
+en el que resida habitualmente. Quien viva en varios municipios deberá inscribirse
+únicamente en el que habite durante más tiempo al año.
+
+El conjunto de personas inscritas en el Padrón municipal constituye la población del
+municipio.
+
+Los inscritos en el Padrón municipal son los vecinos del municipio.
+La condición de vecino se adquiere en el mismo momento de su inscripción en el
+Padrón.
+
+### Article 16
+
+**1.** El Padrón municipal es el registro administrativo donde constan los vecinos de un
+municipio. Sus datos constituyen prueba de la residencia en el municipio y del domicilio
+habitual en el mismo. Las certificaciones que de dichos datos se expidan tendrán carácter de
+documento público y fehaciente para todos los efectos administrativos.
+
+La inscripción en el Padrón Municipal sólo surtirá efecto de conformidad con lo dispuesto
+en el artículo 15 por el tiempo que subsista el hecho que la motivó y, en todo caso, deberá
+ser objeto de renovación periódica cada dos años cuando se trate de la inscripción de
+extranjeros sin autorización de residencia de larga duración, no pertenecientes a un Estado
+miembro de la Unión Europea, a Estados parte en el Acuerdo sobre el Espacio Económico
+Europeo o a otros Estados a los que, en virtud de un convenio internacional se extienda el
+régimen jurídico previsto para los ciudadanos de los Estados mencionados anteriormente.
+
+El transcurso del plazo señalado en el párrafo anterior será causa para acordar la
+caducidad de las inscripciones que deban ser objeto de renovación periódica, siempre que el
+interesado no hubiese procedido a tal renovación. En este caso, la caducidad podrá
+declararse sin necesidad de audiencia previa del interesado.
+
+**2.** La inscripción en el Padrón municipal contendrá como obligatorios sólo los siguientes
+datos:
+
+a) Nombre y apellidos.
+b) Sexo.
+c) Domicilio habitual, con especificación de la referencia catastral, en el territorio fiscal
+común o el código equivalente en los territorios forales, siempre que el domicilio cuente con
+referencia catastral o código equivalente.
+d) Nacionalidad.
+e) Lugar y fecha de nacimiento.
+f) Número de documento nacional de identidad o, tratándose de extranjeros:
+
+1.º Número de identidad de extranjero que conste en el certificado de inscripción en el
+Registro Central de Extranjeros expedido por las autoridades españolas, o en su defecto,
+número del documento acreditativo de la identidad o del pasaporte en vigor expedido por las
+autoridades del país de procedencia, tratándose de ciudadanos nacionales de Estados
+miembros de la Unión Europea, de otros Estados parte en el Acuerdo sobre el Espacio
+Económico Europeo o de Estados a los que, en virtud de un convenio internacional se
+extienda el régimen jurídico previsto para los ciudadanos de los Estados mencionados.
+
+2.º Número de identidad de extranjero que conste en documento, en vigor, expedido por
+las autoridades españolas o, en su defecto, por no ser titulares de estos, el número del
+pasaporte en vigor expedido por las autoridades del país de procedencia, tratándose de
+ciudadanos nacionales de Estados no comprendidos en el párrafo anterior, salvo que, por
+virtud de Tratado o Acuerdo Internacional, disfruten de un régimen específico de exención de
+visado en materia de pequeño tráfico fronterizo con el municipio en el que se pretenda el
+empadronamiento, en cuyo caso, se exigirá el correspondiente visado.
+
+g) Certificado o título escolar o académico que se posea.
+h) Cuantos otros datos puedan ser necesarios para la elaboración del Censo Electoral,
+siempre que se garantice el respeto a los derechos fundamentales reconocidos en la
+Constitución Española.
+Asimismo, de conformidad con la Ley 39/2015, de 1 de octubre, del Procedimiento
+Administrativo Común de las Administraciones Públicas, la inscripción en el Padrón
+municipal podrá recoger la aportación voluntaria de los datos relativos a la designación de
+las personas que pueden representar a cada vecino ante la administración municipal a
+efectos padronales, el número de teléfono de contacto y la dirección de correo electrónico.
+**3.** Los datos obligatorios del Padrón Municipal se cederán a otras Administraciones
+públicas que lo soliciten sin consentimiento previo del afectado solamente cuando les sean
+necesarios para el ejercicio de sus respectivas competencias, y exclusivamente para
+asuntos en los que la residencia o el domicilio sean datos relevantes. También pueden servir
+para elaborar estadísticas oficiales sometidas al secreto estadístico, en los términos
+previstos en la Ley 12/1989, de 9 de mayo, de la Función Estadística Pública y en las leyes de estadística de las Comunidades Autónomas con competencia en la materia. Los datos de
+aportación voluntaria no serán susceptibles de cesión en ningún caso.
+
+### Article 17
+
+**1.** La formación, mantenimiento, revisión y custodia del Padrón municipal corresponde al
+Ayuntamiento, de acuerdo con lo que establezca la legislación del Estado.
+
+Con este fin, los distintos organismos de la Administración General del Estado,
+competentes por razón de la materia, remitirán periódicamente a cada Ayuntamiento
+información sobre las variaciones de los datos de sus vecinos que con carácter obligatorio
+deben figurar en el Padrón municipal, en la forma que se establezca reglamentariamente.
+
+La gestión del Padrón municipal se llevará por los Ayuntamientos con medios
+informáticos. Las Diputaciones Provinciales o entidades equivalentes, Cabildos y Consejos
+insulares asumirán la gestión informatizada de los Padrones de los municipios que, por su
+insuficiente capacidad económica y de gestión, no puedan mantener los datos de forma
+automatizada.
+
+**2.** Los Ayuntamientos realizarán las actuaciones y operaciones necesarias para
+mantener actualizados sus Padrones de modo que los datos contenidos en éstos
+concuerden con la realidad.
+
+Si un ayuntamiento no llevara a cabo dichas actuaciones, el Instituto Nacional de
+Estadística, previo informe del Consejo de Empadronamiento, podrá requerirle previamente
+concretando la inactividad, y si fuere rechazado, sin perjuicio de los recursos jurisdiccionales
+que procedan, podrá acudir a la ejecución sustitutoria prevista en el artículo 60 de la
+presente ley.
+
+**3.** Los Ayuntamientos remitirán al Instituto Nacional de Estadística los datos de sus
+respectivos Padrones, en la forma que reglamentariamente se determine por la
+Administración General del Estado, a fin de que pueda llevarse a cabo la coordinación entre
+los Padrones de todos los municipios.
+
+El Instituto Nacional de Estadística, en aras a subsanar posibles errores y evitar
+duplicidades, realizará las comprobaciones oportunas, y comunicará a los Ayuntamientos las
+actuaciones y operaciones necesarias para que los datos padronales puedan servir de base
+para la elaboración de estadísticas de población a nivel nacional, para que las cifras
+resultantes de las revisiones anuales puedan ser declaradas oficiales, y para que los
+Ayuntamientos puedan remitir, debidamente actualizados, los datos del Censo Electoral.
+
+Corresponderá a la persona que ejerza la Presidencia del Instituto Nacional de
+Estadística la resolución de las discrepancias que, en materia de empadronamiento, surjan
+entre los Ayuntamientos, Diputaciones Provinciales o entidades equivalentes, Cabildos y
+Consejos insulares o entre estos entes y el Instituto Nacional de Estadística, así como elevar
+al Gobierno de la Nación la propuesta de cifras oficiales de población de los municipios
+españoles, comunicándolo en los términos que reglamentariamente se determinan al
+Ayuntamiento interesado.
+
+El Instituto Nacional de Estadística podrá ceder los datos de su base padronal a otras
+Administraciones Públicas en las mismas condiciones señaladas en el artículo 16.3.
+Asimismo, el Instituto Nacional de Estadística facilitará a los Institutos estadísticos de las
+Comunidades Autónomas, u órganos competentes en la materia, los datos relativos a los
+padrones de los municipios de su ámbito territorial en las condiciones previstas en el artículo
+16.3, y con la periodicidad que se acuerde entre las partes.
+
+**4.** Adscrito al Ministerio de Economía y Hacienda se crea el Consejo de
+Empadronamiento como órgano colegiado de colaboración entre la Administración General
+del Estado y los Entes Locales en materia padronal, de acuerdo con lo que
+reglamentariamente se establezca.
+
+El Consejo será presidido por el Presidente del Instituto Nacional de Estadística y estará
+formado por representantes de la Administración General del Estado y de los Entes Locales.
+
+El Consejo funcionará en Pleno y en Comisión, existiendo en cada provincia una Sección
+Provincial bajo la presidencia del Delegado del Instituto Nacional de Estadística y con
+representación de los Entes Locales.
+
+El Consejo de Empadronamiento desempeñará las siguientes funciones:
+
+A) Elevar a la decisión de la persona que ejerza la Presidencia del Instituto Nacional de
+Estadística propuesta vinculante de resolución de las discrepancias que surjan en materia de
+empadronamiento entre Ayuntamientos, Diputaciones Provinciales o entidades equivalentes,
+Cabildos, Consejos insulares o entre estos entes y el Instituto Nacional de Estadística.
+
+B) Informar, con carácter vinculante, las propuestas que eleve al Gobierno el Presidente
+del Instituto Nacional de Estadística sobre cifras oficiales de población de los municipios
+españoles.
+
+C) Proponer la aprobación de las instrucciones técnicas precisas para la gestión de los
+padrones municipales.
+
+D) Cualquier otra función que se le atribuya por disposición legal o reglamentaria.
+
+**5.** La Administración General del Estado, en colaboración con los Ayuntamientos y
+Administraciones de las Comunidades Autónomas confeccionará un Padrón de españoles
+residentes en el extranjero, al que será de aplicación las normas de esta Ley que regulan el
+Padrón municipal.
+
+Las personas inscritas en este Padrón se considerarán vecinos del municipio español
+que figura en los datos de su inscripción únicamente a efectos del ejercicio del derecho de
+sufragio, no constituyendo, en ningún caso, población del municipio.
+
+### Article 18
+
+**1.** Son derechos y deberes de los vecinos:
+
+a) Ser elector y elegible de acuerdo con lo dispuesto en la legislación electoral.
+b) Participar en la gestión municipal de acuerdo con lo dispuesto en las leyes y, en su
+caso, cuando la colaboración con carácter voluntario de los vecinos sea interesada por los
+órganos de gobierno y administración municipal.
+c) Utilizar, de acuerdo con su naturaleza, los servicios públicos municipales, y acceder a
+los aprovechamientos comunales, conforme a las normas aplicables.
+d) Contribuir mediante las prestaciones económicas y personales legalmente previstas a
+la realización de las competencias municipales.
+e) Ser informado, previa petición razonada, y dirigir solicitudes a la Administración
+municipal en relación a todos los expedientes y documentación municipal, de acuerdo con lo
+previsto en el artículo 105 de la Constitución.
+f) Pedir la consulta popular en los términos previstos en la ley.
+g) Exigir la prestación y, en su caso, el establecimiento del correspondiente servicio
+público, en el supuesto de constituir una competencia municipal propia de carácter
+obligatorio.
+h) Ejercer la iniciativa popular en los términos previstos en el artículo 70 bis.
+i) Aquellos otros derechos y deberes establecidos en las leyes.
+
+**2.** La inscripción de los extranjeros en el padrón municipal no constituirá prueba de su
+residencia legal en España ni les atribuirá ningún derecho que no les confiera la legislación
+vigente, especialmente en materia de derechos y libertades de los extranjeros en España.
+
+### Article 19
+
+**1.** El Gobierno y la administración municipal, salvo en aquellos municipios que
+legalmente funcionen en régimen de Concejo Abierto, corresponde al ayuntamiento,
+integrado por el Alcalde y los Concejales.
+
+**2.** Los Concejales son elegidos mediante sufragio universal, igual, libre, directo y secreto,
+y el Alcalde es elegido por los Concejales o por los vecinos; todo ello en los términos que
+establezca la legislación electoral general.
+
+**3.** El régimen de organización de los municipios señalados en el título X de esta ley se
+ajustará a lo dispuesto en el mismo. En lo no previsto por dicho título, será de aplicación el
+régimen común regulado en los artículos siguientes.
+
+### Article 20
+
+**1.** La organización municipal responde a las siguientes reglas:
+
+a) El Alcalde, los Tenientes de Alcalde y el Pleno existen en todos los ayuntamientos.
+b) La Junta de Gobierno Local existe en todos los municipios con población superior a
+5.000 habitantes y en los de menos, cuando así lo disponga su reglamento orgánico o así lo
+acuerde el Pleno de su ayuntamiento.
+c) En los municipios de más de 5.000 habitantes, y en los de menos en que así lo
+disponga su reglamento orgánico o lo acuerde el Pleno, existirán, si su legislación
+autonómica no prevé en este ámbito otra forma organizativa, órganos que tengan por objeto
+el estudio, informe o consulta de los asuntos que han de ser sometidos a la decisión del
+Pleno, así como el seguimiento de la gestión del Alcalde, la Junta de Gobierno Local y los
+concejales que ostenten delegaciones, sin perjuicio de las competencias de control que
+corresponden al Pleno. Todos los grupos políticos integrantes de la corporación tendrán
+derecho a participar en dichos órganos, mediante la presencia de concejales pertenecientes
+a los mismos en proporción al número de Concejales que tengan en el Pleno.
+d) La Comisión Especial de Sugerencias y Reclamaciones existe en los municipios
+señalados en el título X, y en aquellos otros en que el Pleno así lo acuerde, por el voto
+favorable de la mayoría absoluta del número legal de sus miembros, o así lo disponga su
+Reglamento orgánico.
+e) La Comisión Especial de Cuentas existe en todos los municipios, de acuerdo con la
+estructura prevista en el artículo 116.
+
+**2.** Las leyes de las comunidades autónomas sobre el régimen local podrán establecer
+una organización municipal complementaria a la prevista en el número anterior.
+
+**3.** Los propios municipios, en los reglamentos orgánicos, podrán establecer y regular
+otros órganos complementarios, de conformidad con lo previsto en este artículo y en las
+leyes de las comunidades autónomas a las que se refiere el número anterior.
+
+### Article 21
+
+**1.** El Alcalde es el Presidente de la Corporación y ostenta las siguientes atribuciones:
+
+a) Dirigir el gobierno y la administración municipal.
+b) Representar al ayuntamiento.
+c) Convocar y presidir las sesiones del Pleno, salvo los supuestos previstos en esta ley y
+en la legislación electoral general, de la Junta de Gobierno Local, y de cualesquiera otros
+órganos municipales cuando así se establezca en disposición legal o reglamentaria, y decidir
+los empates con voto de calidad.
+d) Dirigir, inspeccionar e impulsar los servicios y obras municipales.
+e) Dictar bandos.
+f) El desarrollo de la gestión económica de acuerdo con el Presupuesto aprobado,
+disponer gastos dentro de los límites de su competencia, concertar operaciones de crédito,
+con exclusión de las contempladas en el artículo 158.5 de la Ley 39/1988, de 28 de
+diciembre, Reguladora de las Haciendas Locales, siempre que aquéllas estén previstas en el
+Presupuesto y su importe acumulado dentro de cada ejercicio económico no supere el 10
+por ciento de sus recursos ordinarios, salvo las de tesorería que le corresponderán cuando el
+importe acumulado de las operaciones vivas en cada momento no supere el 15 por ciento de
+los ingresos corrientes liquidados en el ejercicio anterior, ordenar pagos y rendir cuentas ;
+todo ello de conformidad con lo dispuesto en la Ley Reguladora de las Haciendas Locales.
+g) Aprobar la oferta de empleo público de acuerdo con el Presupuesto y la plantilla
+aprobados por el Pleno, aprobar las bases de las pruebas para la selección del personal y
+para los concursos de provisión de puestos de trabajo y distribuir las retribuciones
+complementarias que no sean fijas y periódicas.
+h) Desempeñar la jefatura superior de todo el personal, y acordar su nombramiento y
+sanciones, incluida la separación del servicio de los funcionarios de la Corporación y el
+despido del personal laboral, dando cuenta al Pleno, en estos dos últimos casos, en la
+primera sesión que celebre. Esta atribución se entenderá sin perjuicio de lo dispuesto en los
+artículos 99.1 y 3 de esta ley.
+
+i) Ejercer la jefatura de la Policía Municipal.
+j) Las aprobaciones de los instrumentos de planeamiento de desarrollo del planeamiento
+general no expresamente atribuidas al Pleno, así como la de los instrumentos de gestión
+urbanística y de los proyectos de urbanización.
+k) El ejercicio de las acciones judiciales y administrativas y la defensa del ayuntamiento
+en las materias de su competencia, incluso cuando las hubiere delegado en otro órgano, y,
+en caso de urgencia, en materias de la competencia del Pleno, en este supuesto dando
+cuenta al mismo en la primera sesión que celebre para su ratificación.
+l) La iniciativa para proponer al Pleno la declaración de lesividad en materias de la
+competencia de la Alcaldía.
+m) Adoptar personalmente, y bajo su responsabilidad, en caso de catástrofe o de
+infortunios públicos o grave riesgo de los mismos, las medidas necesarias y adecuadas
+dando cuenta inmediata al Pleno.
+n) Sancionar las faltas de desobediencia a su autoridad o por infracción de las
+ordenanzas municipales, salvo en los casos en que tal facultad esté atribuida a otros
+órganos.
+ñ) (Derogada)
+o) La aprobación de los proyectos de obras y de servicios cuando sea competente para
+su contratación o concesión y estén previstos en el presupuesto.
+p) (Derogada)
+q) El otorgamiento de las licencias, salvo que las leyes sectoriales lo atribuyan
+expresamente al Pleno o a la Junta de Gobierno Local.
+r) Ordenar la publicación, ejecución y hacer cumplir los acuerdos del Ayuntamiento.
+s) Las demás que expresamente le atribuyan las leyes y aquellas que la legislación del
+Estado o de las comunidades autónomas asignen al municipio y no atribuyan a otros
+órganos municipales.
+
+**2.** Corresponde asimismo al Alcalde el nombramiento de los Tenientes de Alcalde.
+**3.** El Alcalde puede delegar el ejercicio de sus atribuciones, salvo las de convocar y
+presidir las sesiones del Pleno y de la Junta de Gobierno Local, decidir los empates con el
+voto de calidad, la concertación de operaciones de crédito, la jefatura superior de todo el
+personal, la separación del servicio de los funcionarios y el despido del personal laboral, y
+las enunciadas en los párrafos a), e), j), k), l) y m) del apartado 1 de este artículo. No
+obstante, podrá delegar en la Junta de Gobierno Local el ejercicio de las atribuciones
+contempladas en el párrafo j).
+
+### Article 22
+
+**1.** El Pleno, integrado por todos los Concejales, es presidido por el Alcalde.
+**2.** Corresponden, en todo caso, al Pleno municipal en los Ayuntamientos, y a la
+Asamblea vecinal en el régimen de Concejo Abierto, las siguientes atribuciones:
+
+a) El control y la fiscalización de los órganos de gobierno.
+b) Los acuerdos relativos a la participación en organizaciones supramunicipales;
+alteración del término municipal; creación o supresión de municipios y de las entidades a que
+se refiere el artículo 45; creación de órganos desconcentrados; alteración de la capitalidad
+del municipio y el cambio de nombre de éste o de aquellas entidades y la adopción o
+modificación de su bandera, enseña o escudo.
+c) La aprobación inicial del planeamiento general y la aprobación que ponga fin a la
+tramitación municipal de los planes y demás instrumentos de ordenación previstos en la
+legislación urbanística, así como los convenios que tengan por objeto la alteración de
+cualesquiera de dichos instrumentos.
+d) La aprobación del reglamento orgánico y de las ordenanzas.
+e) La determinación de los recursos propios de carácter tributario; la aprobación y
+modificación de los presupuestos, y la disposición de gastos en materia de su competencia y
+la aprobación de las cuentas; todo ello de acuerdo con lo dispuesto en la Ley Reguladora de
+las Haciendas Locales.
+f) La aprobación de las formas de gestión de los servicios y de los expedientes de
+municipalización.
+
+g) La aceptación de la delegación de competencias hecha por otras Administraciones
+públicas.
+
+h) El planteamiento de conflictos de competencias a otras entidades locales y demás
+Administraciones públicas.
+
+i) La aprobación de la plantilla de personal y de la relación de puestos de trabajo, la
+fijación de la cuantía de las retribuciones complementarias fijas y periódicas de los
+funcionarios y el número y régimen del personal eventual.
+
+j) El ejercicio de acciones judiciales y administrativas y la defensa de la corporación en
+materias de competencia plenaria.
+
+k) La declaración de lesividad de los actos del Ayuntamiento.
+l) La alteración de la calificación jurídica de los bienes de dominio público.
+m) La concertación de las operaciones de crédito cuya cuantía acumulada, dentro de
+cada ejercicio económico, exceda del 10 por ciento de los recursos ordinarios del
+Presupuesto -salvo las de tesorería, que le corresponderán cuando el importe acumulado de
+las operaciones vivas en cada momento supere el 15 por ciento de los ingresos corrientes
+liquidados en el ejercicio anterior- todo ello de conformidad con lo dispuesto en la Ley
+Reguladora de las Haciendas Locales.
+n) (Derogada)
+ñ) La aprobación de los proyectos de obras y servicios cuando sea competente para su
+contratación o concesión, y cuando aún no estén previstos en los presupuestos.
+o) (Derogada)
+p) Aquellas otras que deban corresponder al Pleno por exigir su aprobación una mayoría
+especial.
+q) Las demás que expresamente le confieran las leyes.
+
+**3.** Corresponde, igualmente, al Pleno la votación sobre la moción de censura al Alcalde y
+sobre la cuestión de confianza planteada por el mismo, que serán públicas y se realizarán
+mediante llamamiento nominal en todo caso, y se rigen por lo dispuesto en la legislación
+electoral general.
+
+**4.** El Pleno puede delegar el ejercicio de sus atribuciones en el Alcalde y en la Junta de
+Gobierno Local, salvo las enunciadas en el apartado 2, párrafos a), b), c), d), e), f), g), h), i),
+l) y p), y en el apartado 3 de este artículo.
+
+### Article 23
+
+**1.** La Junta de Gobierno Local se integra por el Alcalde y un número de Concejales no
+superior al tercio del número legal de los mismos, nombrados y separados libremente por
+aquél, dando cuenta al Pleno.
+
+**2.** Corresponde a la Junta de Gobierno Local:
+
+a) La asistencia al Alcalde en el ejercicio de sus atribuciones.
+b) Las atribuciones que el Alcalde u otro órgano municipal le delegue o le atribuyan las
+leyes.
+
+**3.** Los Tenientes de Alcalde sustituyen, por el orden de su nombramiento y en los casos
+de vacante, ausencia o enfermedad, al Alcalde, siendo libremente designados y removidos
+por éste de entre los miembros de la Junta de Gobierno Local y, donde ésta no exista, de
+entre los Concejales.
+
+**4.** El Alcalde puede delegar el ejercicio de determinadas atribuciones en los miembros de
+la Junta de Gobierno Local y, donde ésta no exista, en los Tenientes de Alcalde, sin perjuicio
+de las delegaciones especiales que, para cometidos específicos, pueda realizar en favor de
+cualesquiera Concejales, aunque no pertenecieran a aquélla.
+
+### Article 24
+
+**1.** Para facilitar la participación ciudadana en la gestión de los asuntos locales y mejorar
+ésta, los municipios podrán establecer órganos territoriales de gestión desconcentrada, con
+la organización, funciones y competencias que cada ayuntamiento les confiera, atendiendo a
+las características del asentamiento de la población en el término municipal, sin perjuicio de
+la unidad de gobierno y gestión del municipio.
+
+**2.** En los municipios señalados en el artículo 121 será de aplicación el régimen de
+gestión desconcentrada establecido en el artículo 128.
+
+### Article 25
+
+**1.** El Municipio, para la gestión de sus intereses y en el ámbito de sus competencias,
+puede promover actividades y prestar los servicios públicos que contribuyan a satisfacer las
+necesidades y aspiraciones de la comunidad vecinal en los términos previstos en este
+artículo.
+
+**2.** El Municipio ejercerá en todo caso como competencias propias, en los términos de la
+legislación del Estado y de las Comunidades Autónomas, en las siguientes materias:
+
+a) Urbanismo: planeamiento, gestión, ejecución y disciplina urbanística. Protección y
+gestión del Patrimonio histórico. Promoción y gestión de la vivienda de protección pública
+con criterios de sostenibilidad financiera. Conservación y rehabilitación de la edificación.
+
+b) Medio ambiente urbano: en particular, parques y jardines públicos, gestión de los
+residuos sólidos urbanos y protección contra la contaminación acústica, lumínica y
+atmosférica en las zonas urbanas.
+
+c) Abastecimiento de agua potable a domicilio y evacuación y tratamiento de aguas
+residuales.
+
+d) Infraestructura viaria y otros equipamientos de su titularidad.
+e) Evaluación e información de situaciones de necesidad social y la atención inmediata a
+personas en situación o riesgo de exclusión social.
+f) Policía local, protección civil, prevención y extinción de incendios.
+g) Tráfico, estacionamiento de vehículos y movilidad. Transporte colectivo urbano.
+h) Información y promoción de la actividad turística de interés y ámbito local.
+i) Ferias, abastos, mercados, lonjas y comercio ambulante.
+j) Protección de la salubridad pública.
+k) Cementerios y actividades funerarias.
+l) Promoción del deporte e instalaciones deportivas y de ocupación del tiempo libre.
+m) Promoción de la cultura y equipamientos culturales.
+n) Participar en la vigilancia del cumplimiento de la escolaridad obligatoria y cooperar con
+las Administraciones educativas correspondientes en la obtención de los solares necesarios
+para la construcción de nuevos centros docentes. La conservación, mantenimiento y
+vigilancia de los edificios de titularidad local destinados a centros públicos de educación
+infantil, de educación primaria o de educación especial.
+ñ) Promoción en su término municipal de la participación de los ciudadanos en el uso
+eficiente y sostenible de las tecnologías de la información y las comunicaciones.
+o) Actuaciones en la promoción de la igualdad entre hombres y mujeres así como contra
+la violencia de género.
+
+p) Promoción y participación en comunidades ciudadanas de energía y comunidades de
+energías renovables que permitan contribuir a la obtención de beneficios medioambientales,
+económicos o sociales en los municipios donde operan, así como el impulso de actuaciones
+de transición energética tales como la eficiencia energética, la electrificación y el fomento del
+autoconsumo.
+
+**3.** Las competencias municipales en las materias enunciadas en este artículo se
+determinarán por Ley debiendo evaluar la conveniencia de la implantación de servicios
+locales conforme a los principios de descentralización, eficiencia, estabilidad y sostenibilidad
+financiera.
+
+**4.** La Ley a que se refiere el apartado anterior deberá ir acompañada de una memoria
+económica que refleje el impacto sobre los recursos financieros de las Administraciones
+Públicas afectadas y el cumplimiento de los principios de estabilidad, sostenibilidad
+financiera y eficiencia del servicio o la actividad. La Ley debe prever la dotación de los
+recursos necesarios para asegurar la suficiencia financiera de las Entidades Locales sin que
+ello pueda conllevar, en ningún caso, un mayor gasto de las Administraciones Públicas.
+
+Los proyectos de leyes estatales se acompañarán de un informe del Ministerio de
+Hacienda y Administraciones Públicas en el que se acrediten los criterios antes señalados.
+
+**5.** La Ley determinará la competencia municipal propia de que se trate, garantizando que
+no se produce una atribución simultánea de la misma competencia a otra Administración
+Pública.
+
+**6.** Con carácter previo a la atribución de competencias a los municipios, de acuerdo con
+el principio de diferenciación, deberá realizarse una ponderación específica de la capacidad
+de gestión de la entidad local, dejando constancia de tal ponderación en la motivación del
+instrumento jurídico que realice la atribución competencial, ya sea en su parte expositiva o
+en la memoria justificativa correspondiente.
+
+### Article 26
+
+**1.** Los Municipios deberán prestar, en todo caso, los servicios siguientes:
+
+a) En todos los Municipios: alumbrado público, cementerio, recogida de residuos,
+limpieza viaria, abastecimiento domiciliario de agua potable, alcantarillado, acceso a los
+núcleos de población y pavimentación de las vías públicas.
+
+b) En los Municipios con población superior a 5.000 habitantes, además: parque público,
+biblioteca pública y tratamiento de residuos.
+
+c) En los Municipios con población superior a 20.000 habitantes, además: protección
+civil, evaluación e información de situaciones de necesidad social y la atención inmediata a
+personas en situación o riesgo de exclusión social, prevención y extinción de incendios e
+instalaciones deportivas de uso público.
+
+d) En los Municipios con población superior a 50.000 habitantes, además: transporte
+colectivo urbano de viajeros y medio ambiente urbano.
+
+**2.** En los municipios con población inferior a 20.000 habitantes será la Diputación
+provincial o entidad equivalente la que coordinará la prestación de los siguientes servicios:
+
+a) Recogida y tratamiento de residuos.
+b) Abastecimiento de agua potable a domicilio y evacuación y tratamiento de aguas
+residuales.
+c) Limpieza viaria.
+d) Acceso a los núcleos de población.
+e) Pavimentación de vías urbanas.
+f) Alumbrado público.
+
+Para coordinar la citada prestación de servicios la Diputación propondrá, con la
+conformidad de los municipios afectados, al Ministerio de Hacienda y Administraciones
+Públicas la forma de prestación, consistente en la prestación directa por la Diputación o la
+implantación de fórmulas de gestión compartida a través de consorcios, mancomunidades u
+otras fórmulas. Para reducir los costes efectivos de los servicios el mencionado
+Ministerio decidirá sobre la propuesta formulada que deberá contar con el informe preceptivo de la Comunidad Autónoma si es la Administración que ejerce la tutela
+financiera.
+
+Téngase en cuenta que se declaran inconstitucionales y nulos los incisos destacados, en la
+redacción dada por el art. 1.9 de la Ley 27/2013, de 27 de diciembre. Ref. BOE-A-2013-13756.,
+por Sentencia del TC 111/2016, de 9 de junio. Ref. BOE-A-2016-6839.
+
+Cuando el municipio justifique ante la Diputación que puede prestar estos servicios con
+un coste efectivo menor que el derivado de la forma de gestión propuesta por la Diputación
+provincial o entidad equivalente, el municipio podrá asumir la prestación y coordinación de
+estos servicios si la Diputación lo considera acreditado.
+
+Cuando la Diputación o entidad equivalente asuma la prestación de estos servicios
+repercutirá a los municipios el coste efectivo del servicio en función de su uso. Si estos
+servicios estuvieran financiados por tasas y asume su prestación la Diputación o entidad
+equivalente, será a ésta a quien vaya destinada la tasa para la financiación de los servicios.
+
+**3.** La asistencia de las Diputaciones o entidades equivalentes a los Municipios, prevista
+en el artículo 36, se dirigirá preferentemente al establecimiento y adecuada prestación de los
+servicios mínimos.
+
+### Article 27
+
+**1.** El Estado y las Comunidades Autónomas, en el ejercicio de sus respectivas
+competencias, podrán delegar en los Municipios el ejercicio de sus competencias.
+
+La delegación habrá de mejorar la eficiencia de la gestión pública, contribuir a eliminar
+duplicidades administrativas y ser acorde con la legislación de estabilidad presupuestaria y
+sostenibilidad financiera.
+
+La delegación deberá determinar el alcance, contenido, condiciones y duración de ésta,
+que no podrá ser inferior a cinco años, así como el control de eficiencia que se reserve la
+Administración delegante y los medios personales, materiales y económicos, que ésta
+asigne sin que pueda suponer un mayor gasto de las Administraciones Públicas.
+
+La delegación deberá acompañarse de una memoria económica donde se justifiquen los
+principios a que se refiere el párrafo segundo de este apartado y se valore el impacto en el
+gasto de las Administraciones Públicas afectadas sin que, en ningún caso, pueda conllevar
+un mayor gasto de las mismas.
+
+**2.** Cuando el Estado o las Comunidades Autónomas deleguen en dos o más municipios
+de la misma provincia una o varias competencias comunes, dicha delegación deberá
+realizarse siguiendo criterios homogéneos.
+
+La Administración delegante podrá solicitar la asistencia de las Diputaciones provinciales
+o entidades equivalentes para la coordinación y seguimiento de las delegaciones previstas
+en este apartado.
+
+**3.** Con el objeto de evitar duplicidades administrativas, mejorar la transparencia de los
+servicios públicos y el servicio a la ciudadanía y, en general, contribuir a los procesos de
+racionalización administrativa, generando un ahorro neto de recursos, la Administración del
+Estado y las de las Comunidades Autónomas podrán delegar, siguiendo criterios
+homogéneos, entre otras, las siguientes competencias:
+
+a) Vigilancia y control de la contaminación ambiental.
+b) Protección del medio natural.
+c) Prestación de los servicios sociales, promoción de la igualdad de oportunidades y la
+prevención de la violencia contra la mujer.
+d) Conservación o mantenimiento de centros sanitarios asistenciales de titularidad de la
+Comunidad Autónoma.
+e) Creación, mantenimiento y gestión de las escuelas infantiles de educación de
+titularidad pública de primer ciclo de educación infantil.
+f) Realización de actividades complementarias en los centros docentes.
+
+g) Gestión de instalaciones culturales de titularidad de la Comunidad Autónoma o del
+Estado, con estricta sujeción al alcance y condiciones que derivan del artículo 149.1.28.ª de
+la Constitución Española.
+
+h) Gestión de las instalaciones deportivas de titularidad de la Comunidad Autónoma o del
+Estado, incluyendo las situadas en los centros docentes cuando se usen fuera del horario
+lectivo.
+
+i) Inspección y sanción de establecimientos y actividades comerciales.
+j) Promoción y gestión turística.
+k) Comunicación, autorización, inspección y sanción de los espectáculos públicos.
+l) Liquidación y recaudación de tributos propios de la Comunidad Autónoma o del
+Estado.
+m) Inscripción de asociaciones, empresas o entidades en los registros administrativos de
+la Comunidad Autónoma o de la Administración del Estado.
+n) Gestión de oficinas unificadas de información y tramitación administrativa.
+o) Cooperación con la Administración educativa a través de los centros asociados de la
+Universidad Nacional de Educación a Distancia.
+
+**4.** La Administración delegante podrá, para dirigir y controlar el ejercicio de los servicios
+delegados, dictar instrucciones técnicas de carácter general y recabar, en cualquier
+momento, información sobre la gestión municipal, así como enviar comisionados y formular
+los requerimientos pertinentes para la subsanación de las deficiencias observadas. En caso
+de incumplimiento de las directrices, denegación de las informaciones solicitadas, o
+inobservancia de los requerimientos formulados, la Administración delegante podrá revocar
+la delegación o ejecutar por sí misma la competencia delegada en sustitución del Municipio.
+Los actos del Municipio podrán ser recurridos ante los órganos competentes de la
+Administración delegante.
+
+**5.** La efectividad de la delegación requerirá su aceptación por el Municipio interesado.
+**6.** La delegación habrá de ir acompañada en todo caso de la correspondiente
+financiación, para lo cual será necesaria la existencia de dotación presupuestaria adecuada
+y suficiente en los presupuestos de la Administración delegante para cada ejercicio
+económico, siendo nula sin dicha dotación.
+El incumplimiento de las obligaciones financieras por parte de la Administración
+autonómica delegante facultará a la Entidad Local delegada para compensarlas
+automáticamente con otras obligaciones financieras que ésta tenga con aquélla.
+**7.** La disposición o acuerdo de delegación establecerá las causas de revocación o
+renuncia de la delegación. Entre las causas de renuncia estará el incumplimiento de las
+obligaciones financieras por parte de la Administración delegante o cuando, por
+circunstancias sobrevenidas, se justifique suficientemente la imposibilidad de su desempeño
+por la Administración en la que han sido delegadas sin menoscabo del ejercicio de sus
+competencias propias. El acuerdo de renuncia se adoptará por el Pleno de la respectiva
+Entidad Local.
+**8.** Las competencias delegadas se ejercen con arreglo a la legislación del Estado o de
+las Comunidades Autónomas.
+
+### Article 28
+
+Podrán establecerse, en municipios determinados de menos de 20.000 habitantes,
+sistemas de gestión colaborativa dirigidos a garantizar los recursos suficientes para el
+cumplimiento de las competencias municipales y, en particular, para una prestación de
+calidad, financieramente sostenible, de los servicios públicos mínimos obligatorios, mediante
+medidas de racionalización organizativa y de funcionamiento; de garantía de la prestación de
+dichos servicios mediante fórmulas de gestión comunes o asociativas; de sostenimiento del
+personal en común con otro u otros municipios; y, en general, de fomento del desarrollo
+económico y social de los municipios.
+
+La aplicación efectiva a un municipio de la gestión colaborativa requerirá decisión en tal
+sentido de la Comunidad Autónoma respectiva, adoptada conforme a su legislación de
+régimen local propia, y en todo caso, con la conformidad previa del municipio afectado y el
+informe de las entidades locales afectadas.
+
+## Organització municipal
+
+### Article 19
+
+**1.** El Gobierno y la administración municipal, salvo en aquellos municipios que
+legalmente funcionen en régimen de Concejo Abierto, corresponde al ayuntamiento,
+integrado por el Alcalde y los Concejales.
+
+**2.** Los Concejales son elegidos mediante sufragio universal, igual, libre, directo y secreto,
+y el Alcalde es elegido por los Concejales o por los vecinos; todo ello en los términos que
+establezca la legislación electoral general.
+
+**3.** El régimen de organización de los municipios señalados en el título X de esta ley se
+ajustará a lo dispuesto en el mismo. En lo no previsto por dicho título, será de aplicación el
+régimen común regulado en los artículos siguientes.
+
+### Article 20
+
+**1.** La organización municipal responde a las siguientes reglas:
+
+a) El Alcalde, los Tenientes de Alcalde y el Pleno existen en todos los ayuntamientos.
+b) La Junta de Gobierno Local existe en todos los municipios con población superior a
+5.000 habitantes y en los de menos, cuando así lo disponga su reglamento orgánico o así lo
+acuerde el Pleno de su ayuntamiento.
+c) En los municipios de más de 5.000 habitantes, y en los de menos en que así lo
+disponga su reglamento orgánico o lo acuerde el Pleno, existirán, si su legislación
+autonómica no prevé en este ámbito otra forma organizativa, órganos que tengan por objeto
+el estudio, informe o consulta de los asuntos que han de ser sometidos a la decisión del
+Pleno, así como el seguimiento de la gestión del Alcalde, la Junta de Gobierno Local y los
+concejales que ostenten delegaciones, sin perjuicio de las competencias de control que
+corresponden al Pleno. Todos los grupos políticos integrantes de la corporación tendrán
+derecho a participar en dichos órganos, mediante la presencia de concejales pertenecientes
+a los mismos en proporción al número de Concejales que tengan en el Pleno.
+d) La Comisión Especial de Sugerencias y Reclamaciones existe en los municipios
+señalados en el título X, y en aquellos otros en que el Pleno así lo acuerde, por el voto
+favorable de la mayoría absoluta del número legal de sus miembros, o así lo disponga su
+Reglamento orgánico.
+e) La Comisión Especial de Cuentas existe en todos los municipios, de acuerdo con la
+estructura prevista en el artículo 116.
+
+**2.** Las leyes de las comunidades autónomas sobre el régimen local podrán establecer
+una organización municipal complementaria a la prevista en el número anterior.
+
+**3.** Los propios municipios, en los reglamentos orgánicos, podrán establecer y regular
+otros órganos complementarios, de conformidad con lo previsto en este artículo y en las
+leyes de las comunidades autónomas a las que se refiere el número anterior.
+
+### Article 21
+
+**1.** El Alcalde es el Presidente de la Corporación y ostenta las siguientes atribuciones:
+
+a) Dirigir el gobierno y la administración municipal.
+b) Representar al ayuntamiento.
+c) Convocar y presidir las sesiones del Pleno, salvo los supuestos previstos en esta ley y
+en la legislación electoral general, de la Junta de Gobierno Local, y de cualesquiera otros
+órganos municipales cuando así se establezca en disposición legal o reglamentaria, y decidir
+los empates con voto de calidad.
+d) Dirigir, inspeccionar e impulsar los servicios y obras municipales.
+e) Dictar bandos.
+f) El desarrollo de la gestión económica de acuerdo con el Presupuesto aprobado,
+disponer gastos dentro de los límites de su competencia, concertar operaciones de crédito,
+con exclusión de las contempladas en el artículo 158.5 de la Ley 39/1988, de 28 de
+diciembre, Reguladora de las Haciendas Locales, siempre que aquéllas estén previstas en el
+Presupuesto y su importe acumulado dentro de cada ejercicio económico no supere el 10
+por ciento de sus recursos ordinarios, salvo las de tesorería que le corresponderán cuando el
+importe acumulado de las operaciones vivas en cada momento no supere el 15 por ciento de
+los ingresos corrientes liquidados en el ejercicio anterior, ordenar pagos y rendir cuentas ;
+todo ello de conformidad con lo dispuesto en la Ley Reguladora de las Haciendas Locales.
+g) Aprobar la oferta de empleo público de acuerdo con el Presupuesto y la plantilla
+aprobados por el Pleno, aprobar las bases de las pruebas para la selección del personal y
+para los concursos de provisión de puestos de trabajo y distribuir las retribuciones
+complementarias que no sean fijas y periódicas.
+h) Desempeñar la jefatura superior de todo el personal, y acordar su nombramiento y
+sanciones, incluida la separación del servicio de los funcionarios de la Corporación y el
+despido del personal laboral, dando cuenta al Pleno, en estos dos últimos casos, en la
+primera sesión que celebre. Esta atribución se entenderá sin perjuicio de lo dispuesto en los
+artículos 99.1 y 3 de esta ley.
+
+i) Ejercer la jefatura de la Policía Municipal.
+j) Las aprobaciones de los instrumentos de planeamiento de desarrollo del planeamiento
+general no expresamente atribuidas al Pleno, así como la de los instrumentos de gestión
+urbanística y de los proyectos de urbanización.
+k) El ejercicio de las acciones judiciales y administrativas y la defensa del ayuntamiento
+en las materias de su competencia, incluso cuando las hubiere delegado en otro órgano, y,
+en caso de urgencia, en materias de la competencia del Pleno, en este supuesto dando
+cuenta al mismo en la primera sesión que celebre para su ratificación.
+l) La iniciativa para proponer al Pleno la declaración de lesividad en materias de la
+competencia de la Alcaldía.
+m) Adoptar personalmente, y bajo su responsabilidad, en caso de catástrofe o de
+infortunios públicos o grave riesgo de los mismos, las medidas necesarias y adecuadas
+dando cuenta inmediata al Pleno.
+n) Sancionar las faltas de desobediencia a su autoridad o por infracción de las
+ordenanzas municipales, salvo en los casos en que tal facultad esté atribuida a otros
+órganos.
+ñ) (Derogada)
+o) La aprobación de los proyectos de obras y de servicios cuando sea competente para
+su contratación o concesión y estén previstos en el presupuesto.
+p) (Derogada)
+q) El otorgamiento de las licencias, salvo que las leyes sectoriales lo atribuyan
+expresamente al Pleno o a la Junta de Gobierno Local.
+r) Ordenar la publicación, ejecución y hacer cumplir los acuerdos del Ayuntamiento.
+s) Las demás que expresamente le atribuyan las leyes y aquellas que la legislación del
+Estado o de las comunidades autónomas asignen al municipio y no atribuyan a otros
+órganos municipales.
+
+**2.** Corresponde asimismo al Alcalde el nombramiento de los Tenientes de Alcalde.
+**3.** El Alcalde puede delegar el ejercicio de sus atribuciones, salvo las de convocar y
+presidir las sesiones del Pleno y de la Junta de Gobierno Local, decidir los empates con el
+voto de calidad, la concertación de operaciones de crédito, la jefatura superior de todo el
+personal, la separación del servicio de los funcionarios y el despido del personal laboral, y
+las enunciadas en los párrafos a), e), j), k), l) y m) del apartado 1 de este artículo. No
+obstante, podrá delegar en la Junta de Gobierno Local el ejercicio de las atribuciones
+contempladas en el párrafo j).
+
+### Article 22
+
+**1.** El Pleno, integrado por todos los Concejales, es presidido por el Alcalde.
+**2.** Corresponden, en todo caso, al Pleno municipal en los Ayuntamientos, y a la
+Asamblea vecinal en el régimen de Concejo Abierto, las siguientes atribuciones:
+
+a) El control y la fiscalización de los órganos de gobierno.
+b) Los acuerdos relativos a la participación en organizaciones supramunicipales;
+alteración del término municipal; creación o supresión de municipios y de las entidades a que
+se refiere el artículo 45; creación de órganos desconcentrados; alteración de la capitalidad
+del municipio y el cambio de nombre de éste o de aquellas entidades y la adopción o
+modificación de su bandera, enseña o escudo.
+c) La aprobación inicial del planeamiento general y la aprobación que ponga fin a la
+tramitación municipal de los planes y demás instrumentos de ordenación previstos en la
+legislación urbanística, así como los convenios que tengan por objeto la alteración de
+cualesquiera de dichos instrumentos.
+d) La aprobación del reglamento orgánico y de las ordenanzas.
+e) La determinación de los recursos propios de carácter tributario; la aprobación y
+modificación de los presupuestos, y la disposición de gastos en materia de su competencia y
+la aprobación de las cuentas; todo ello de acuerdo con lo dispuesto en la Ley Reguladora de
+las Haciendas Locales.
+f) La aprobación de las formas de gestión de los servicios y de los expedientes de
+municipalización.
+
+g) La aceptación de la delegación de competencias hecha por otras Administraciones
+públicas.
+
+h) El planteamiento de conflictos de competencias a otras entidades locales y demás
+Administraciones públicas.
+
+i) La aprobación de la plantilla de personal y de la relación de puestos de trabajo, la
+fijación de la cuantía de las retribuciones complementarias fijas y periódicas de los
+funcionarios y el número y régimen del personal eventual.
+
+j) El ejercicio de acciones judiciales y administrativas y la defensa de la corporación en
+materias de competencia plenaria.
+
+k) La declaración de lesividad de los actos del Ayuntamiento.
+l) La alteración de la calificación jurídica de los bienes de dominio público.
+m) La concertación de las operaciones de crédito cuya cuantía acumulada, dentro de
+cada ejercicio económico, exceda del 10 por ciento de los recursos ordinarios del
+Presupuesto -salvo las de tesorería, que le corresponderán cuando el importe acumulado de
+las operaciones vivas en cada momento supere el 15 por ciento de los ingresos corrientes
+liquidados en el ejercicio anterior- todo ello de conformidad con lo dispuesto en la Ley
+Reguladora de las Haciendas Locales.
+n) (Derogada)
+ñ) La aprobación de los proyectos de obras y servicios cuando sea competente para su
+contratación o concesión, y cuando aún no estén previstos en los presupuestos.
+o) (Derogada)
+p) Aquellas otras que deban corresponder al Pleno por exigir su aprobación una mayoría
+especial.
+q) Las demás que expresamente le confieran las leyes.
+
+**3.** Corresponde, igualmente, al Pleno la votación sobre la moción de censura al Alcalde y
+sobre la cuestión de confianza planteada por el mismo, que serán públicas y se realizarán
+mediante llamamiento nominal en todo caso, y se rigen por lo dispuesto en la legislación
+electoral general.
+
+**4.** El Pleno puede delegar el ejercicio de sus atribuciones en el Alcalde y en la Junta de
+Gobierno Local, salvo las enunciadas en el apartado 2, párrafos a), b), c), d), e), f), g), h), i),
+l) y p), y en el apartado 3 de este artículo.
+
+### Article 23
+
+**1.** La Junta de Gobierno Local se integra por el Alcalde y un número de Concejales no
+superior al tercio del número legal de los mismos, nombrados y separados libremente por
+aquél, dando cuenta al Pleno.
+
+**2.** Corresponde a la Junta de Gobierno Local:
+
+a) La asistencia al Alcalde en el ejercicio de sus atribuciones.
+b) Las atribuciones que el Alcalde u otro órgano municipal le delegue o le atribuyan las
+leyes.
+
+**3.** Los Tenientes de Alcalde sustituyen, por el orden de su nombramiento y en los casos
+de vacante, ausencia o enfermedad, al Alcalde, siendo libremente designados y removidos
+por éste de entre los miembros de la Junta de Gobierno Local y, donde ésta no exista, de
+entre los Concejales.
+
+**4.** El Alcalde puede delegar el ejercicio de determinadas atribuciones en los miembros de
+la Junta de Gobierno Local y, donde ésta no exista, en los Tenientes de Alcalde, sin perjuicio
+de las delegaciones especiales que, para cometidos específicos, pueda realizar en favor de
+cualesquiera Concejales, aunque no pertenecieran a aquélla.
+
+### Article 24
+
+**1.** Para facilitar la participación ciudadana en la gestión de los asuntos locales y mejorar
+ésta, los municipios podrán establecer órganos territoriales de gestión desconcentrada, con
+la organización, funciones y competencias que cada ayuntamiento les confiera, atendiendo a
+las características del asentamiento de la población en el término municipal, sin perjuicio de
+la unidad de gobierno y gestión del municipio.
+
+**2.** En los municipios señalados en el artículo 121 será de aplicación el régimen de
+gestión desconcentrada establecido en el artículo 128.
