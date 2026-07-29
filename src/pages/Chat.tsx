@@ -842,6 +842,7 @@ const PACKS: { file: string; label: string; desc: string }[] = [
   { file: 'chat-corpus.json', label: 'Contingut InfoPol', desc: 'Fitxes, operativa i temari de la web' },
   { file: 'chat-corpus-legal.json', label: 'Documents legals', desc: 'Codi penal, LECrim, LO 4/2015, nomenclàtor SCT…' },
   { file: 'chat-corpus-normativa.json', label: 'Normativa de trànsit i Viladecans', desc: 'LSV, RGC, RGV, RGCond i ordenances municipals' },
+  { file: 'chat-corpus-normativa-2.json', label: 'Normativa · 2a tanda', desc: 'CE, EAC, LRBRL, EBEP, violència de gènere, víctima, llibertat sexual, estrangeria, espectacles i animals' },
 ];
 
 function AdminIngest({ onDone }: { onDone: (total: number) => void }) {
