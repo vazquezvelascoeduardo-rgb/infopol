@@ -111,6 +111,30 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 10 }}>Actualitat</div>
+        <div onClick={() => navigate('/noticias')} style={{
+          background: '#fff', borderRadius: T.r.lg, padding: 16,
+          borderLeft: `4px solid ${T.cat.alcohol.solid}`,
+          boxShadow: T.shadow.card, cursor: 'pointer',
+          display: 'flex', alignItems: 'center', gap: 14,
+        }}>
+          <div style={{
+            width: 44, height: 44, borderRadius: 12, background: T.cat.alcohol.soft,
+            display: 'grid', placeItems: 'center', flexShrink: 0,
+          }}>
+            <Icon name="newspaper" size={22} color={T.cat.alcohol.solid} strokeWidth={2.2} />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.alcohol.ink }}>Noticias · Avui</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 16, letterSpacing: -0.3, marginTop: 1 }}>Actualitat del dia</div>
+            <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 2 }}>Catalunya · Espanya · Internacional</div>
+          </div>
+          <Icon name="chevron-right" size={18} color={T.inkMuted} />
+        </div>
+      </div>
+
       {/* pricing */}
       <div style={{ padding: '20px 18px 0' }}>
         <div style={{ background: T.ink, borderRadius: T.r.xl, padding: 20, color: '#fff', position: 'relative', overflow: 'hidden' }}>
