@@ -1,4 +1,4 @@
-# Les competències de la Generalitat en matèria de seguretat
+# Tema C.1 — Les competències de la Generalitat en matèria de seguretat
 
 > **Font:** *Guia d'estudi per accedir a la categoria de mosso/a del Cos de
 > Mossos d'Esquadra*, 1a edició, juny de 2026.

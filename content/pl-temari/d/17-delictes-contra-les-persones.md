@@ -1,4 +1,4 @@
-# Tema D.2 — Delictes contra les persones
+# Tema 17 — Delictes contra les persones
 
 > Homicidi, lesions, llibertat, integritat moral i llibertat sexual.
 >

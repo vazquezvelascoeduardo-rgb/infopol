@@ -1,4 +1,4 @@
-# Tema E.3 — El Reglament d'armes
+# Tema 26 — El Reglament d'armes
 
 > Classificació, llicències i intervenció d'armes.
 >

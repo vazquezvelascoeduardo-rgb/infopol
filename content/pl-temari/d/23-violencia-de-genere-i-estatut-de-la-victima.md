@@ -1,4 +1,4 @@
-# Tema D.8 — Violència de gènere i estatut de la víctima
+# Tema 23 — Violència de gènere i estatut de la víctima
 
 > Protecció integral, ordres de protecció i drets de la víctima.
 >

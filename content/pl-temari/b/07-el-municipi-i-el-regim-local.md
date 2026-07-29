@@ -1,4 +1,4 @@
-# Tema B.1 — El municipi i el règim local
+# Tema 07 — El municipi i el règim local
 
 > Competències municipals, òrgans de govern i el paper de l'alcalde.
 >

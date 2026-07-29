@@ -1,4 +1,4 @@
-# El Departament d’Interior i Seguretat Pública
+# Tema C.2 — El Departament d’Interior i Seguretat Pública
 
 > **Font:** *Guia d'estudi per accedir a la categoria de mosso/a del Cos de
 > Mossos d'Esquadra*, 1a edició, juny de 2026.

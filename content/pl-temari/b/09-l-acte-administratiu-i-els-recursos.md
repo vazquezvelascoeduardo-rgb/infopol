@@ -1,4 +1,4 @@
-# Tema B.3 — L'acte administratiu i els recursos
+# Tema 09 — L'acte administratiu i els recursos
 
 > Validesa, eficàcia, nul·litat i vies de recurs.
 >

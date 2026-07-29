@@ -1,4 +1,4 @@
-# Tema A.5 — L'organització territorial de l'Estat
+# Tema 05 — L'organització territorial de l'Estat
 
 > Municipis, províncies i comunitats autònomes.
 >

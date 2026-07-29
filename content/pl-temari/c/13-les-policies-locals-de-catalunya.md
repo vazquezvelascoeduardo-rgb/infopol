@@ -1,4 +1,4 @@
-# Tema C.2 — Les policies locals de Catalunya
+# Tema 13 — Les policies locals de Catalunya
 
 > La vostra llei: funcions, estructura, escales i règim estatutari.
 >

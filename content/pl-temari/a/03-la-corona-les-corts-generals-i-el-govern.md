@@ -1,4 +1,4 @@
-# Tema A.3 — La Corona, les Corts Generals i el Govern
+# Tema 03 — La Corona, les Corts Generals i el Govern
 
 > Organització dels poders de l'Estat.
 >

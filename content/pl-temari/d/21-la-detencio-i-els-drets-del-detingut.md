@@ -1,4 +1,4 @@
-# Tema D.6 — La detenció i els drets del detingut
+# Tema 21 — La detenció i els drets del detingut
 
 > Quan es pot detenir, terminis i garanties. Article 520 inclòs.
 >

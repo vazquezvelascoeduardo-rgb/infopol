@@ -1,4 +1,4 @@
-# La Unió Europea
+# Tema B.8 — La Unió Europea
 
 > **Font:** *Guia d'estudi per accedir a la categoria de mosso/a del Cos de
 > Mossos d'Esquadra*, 1a edició, juny de 2026.

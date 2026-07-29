@@ -1,4 +1,4 @@
-# Tema A.4 — El Poder Judicial i el Tribunal Constitucional
+# Tema 04 — El Poder Judicial i el Tribunal Constitucional
 
 > Justícia, Ministeri Fiscal i control de constitucionalitat.
 >

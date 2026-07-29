@@ -1,4 +1,4 @@
-# Tema A.6 — L'Estatut d'autonomia de Catalunya
+# Tema 06 — L'Estatut d'autonomia de Catalunya
 
 > Competències, institucions i drets estatutaris.
 >

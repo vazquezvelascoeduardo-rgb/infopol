@@ -1,4 +1,4 @@
-# Tema B.4 — La potestat sancionadora de l'Administració
+# Tema 10 — La potestat sancionadora de l'Administració
 
 > Principis que ha de respectar tota denúncia i tot expedient.
 >

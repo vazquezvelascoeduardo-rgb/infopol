@@ -1,4 +1,4 @@
-# Història de la policia a Catalunya
+# Tema A.3 — Història de la policia a Catalunya
 
 > **Font:** *Guia d'estudi per accedir a la categoria de mosso/a del Cos de
 > Mossos d'Esquadra*, 1a edició, juny de 2026.

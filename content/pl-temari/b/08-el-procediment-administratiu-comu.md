@@ -1,4 +1,4 @@
-# Tema B.2 — El procediment administratiu comú
+# Tema 08 — El procediment administratiu comú
 
 > Drets de la ciutadania, terminis, notificacions i fases del procediment.
 >

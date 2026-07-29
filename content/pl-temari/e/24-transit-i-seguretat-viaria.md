@@ -1,4 +1,4 @@
-# Tema E.1 — Trànsit i seguretat viària
+# Tema 24 — Trànsit i seguretat viària
 
 > Competències municipals, infraccions, sancions i procediment.
 >

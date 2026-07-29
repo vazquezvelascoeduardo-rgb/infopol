@@ -1,4 +1,4 @@
-# Tema C.4 — La protecció de la seguretat ciutadana
+# Tema 15 — La protecció de la seguretat ciutadana
 
 > Identificacions, escorcolls, infraccions i sancions.
 >

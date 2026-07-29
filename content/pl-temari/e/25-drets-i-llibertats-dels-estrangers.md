@@ -1,4 +1,4 @@
-# Tema E.2 — Drets i llibertats dels estrangers
+# Tema 25 — Drets i llibertats dels estrangers
 
 > Documentació, identificació i règim sancionador.
 >

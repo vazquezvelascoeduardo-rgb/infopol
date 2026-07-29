@@ -1,4 +1,4 @@
-# Tema A.2 — Els drets i deures fonamentals
+# Tema 02 — Els drets i deures fonamentals
 
 > Drets, llibertats i les seves garanties. És el bloc que més cau i el que més s'aplica al carrer.
 >

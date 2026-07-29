@@ -1,4 +1,4 @@
-# Tema C.1 — Les Forces i Cossos de Seguretat
+# Tema 12 — Les Forces i Cossos de Seguretat
 
 > Principis bàsics d'actuació, funcions i coordinació.
 >

@@ -1,4 +1,4 @@
-# Tema D.7 — La responsabilitat penal dels menors
+# Tema 22 — La responsabilitat penal dels menors
 
 > LO 5/2000: edats, mesures i actuació policial amb menors.
 >

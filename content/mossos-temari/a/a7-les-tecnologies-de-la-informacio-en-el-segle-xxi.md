@@ -1,4 +1,4 @@
-# Les tecnologies de la informació en el segle xxi
+# Tema A.7 — Les tecnologies de la informació en el segle xxi
 
 > **Font:** *Guia d'estudi per accedir a la categoria de mosso/a del Cos de
 > Mossos d'Esquadra*, 1a edició, juny de 2026.

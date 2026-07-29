@@ -1,4 +1,4 @@
-# Àmbit sociolingüístic
+# Tema A.4 — Àmbit sociolingüístic
 
 > **Font:** *Guia d'estudi per accedir a la categoria de mosso/a del Cos de
 > Mossos d'Esquadra*, 1a edició, juny de 2026.

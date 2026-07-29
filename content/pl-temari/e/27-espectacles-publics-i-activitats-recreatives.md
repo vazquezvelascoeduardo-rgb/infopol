@@ -1,4 +1,4 @@
-# Tema E.4 — Espectacles públics i activitats recreatives
+# Tema 27 — Espectacles públics i activitats recreatives
 
 > Llei 11/2009: llicències, horaris, aforaments i inspecció.
 >

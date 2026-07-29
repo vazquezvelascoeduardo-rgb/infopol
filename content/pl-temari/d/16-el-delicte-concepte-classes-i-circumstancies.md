@@ -1,4 +1,4 @@
-# Tema D.1 — El delicte: concepte, classes i circumstàncies
+# Tema 16 — El delicte: concepte, classes i circumstàncies
 
 > Fonaments de la part general del Codi penal.
 >

@@ -1,4 +1,4 @@
-# Els drets humans i els drets constitucionals
+# Tema B.4 — Els drets humans i els drets constitucionals
 
 > **Font:** *Guia d'estudi per accedir a la categoria de mosso/a del Cos de
 > Mossos d'Esquadra*, 1a edició, juny de 2026.

@@ -1,4 +1,4 @@
-# Tema C.3 — El sistema de seguretat pública de Catalunya
+# Tema 14 — El sistema de seguretat pública de Catalunya
 
 > Junta Local de Seguretat, coordinació i competències de la Generalitat.
 >

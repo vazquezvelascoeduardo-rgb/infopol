@@ -1,4 +1,4 @@
-# Tema E.5 — Protecció dels animals
+# Tema 28 — Protecció dels animals
 
 > Normativa catalana i gossos potencialment perillosos.
 >

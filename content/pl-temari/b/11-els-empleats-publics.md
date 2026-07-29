@@ -1,4 +1,4 @@
-# Tema B.5 — Els empleats públics
+# Tema 11 — Els empleats públics
 
 > Drets, deures, règim disciplinari i incompatibilitats.
 >

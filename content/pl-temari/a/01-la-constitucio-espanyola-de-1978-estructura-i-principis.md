@@ -1,4 +1,4 @@
-# Tema A.1 — La Constitució espanyola de 1978: estructura i principis
+# Tema 01 — La Constitució espanyola de 1978: estructura i principis
 
 > Estructura, valors superiors, principis rectors i reforma constitucional.
 >
