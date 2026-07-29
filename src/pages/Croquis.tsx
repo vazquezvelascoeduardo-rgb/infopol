@@ -1672,7 +1672,7 @@ export default function Croquis() {
         {/* Paleta: rail de categories + graella de la categoria activa */}
         <aside className="cq-palette" style={{ display: 'flex', flexShrink: 0, borderRight: `1px solid ${A.line}`, background: A.bgSoft }}>
           {/* Rail */}
-          <div style={{ width: 62, flexShrink: 0, borderRight: `1px solid ${A.line}`, padding: '10px 7px', display: 'flex', flexDirection: 'column', gap: 3, overflowY: 'auto' }}>
+          <div style={{ width: 74, flexShrink: 0, borderRight: `1px solid ${A.line}`, padding: '10px 8px', display: 'flex', flexDirection: 'column', gap: 3, overflowY: 'auto' }}>
             {PALETTE.map((g, i) => {
               const on = !resultats && cat === i;
               // El nom curt: "Senyals · Perill" al rail només hi cap "Perill".

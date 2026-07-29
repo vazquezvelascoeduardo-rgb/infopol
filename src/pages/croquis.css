@@ -1,7 +1,7 @@
 /* Comportament responsiu de l'editor de croquis.
    La resta d'estils van en línia al component, amb els tokens de `lib/design`. */
 
-.cq-palette { width: 248px; }
+.cq-palette { width: 296px; }
 
 /* Botons de la capçalera que es poden amagar quan no hi ha amplada: passen
    al menú "Més", que sempre els conté. El que no s'amaga mai: tornar,
@@ -13,7 +13,7 @@
 /* La paleta no es pot amagar mai: sense ella no es pot afegir res al
    croquis. En pantalles estretes s'estreny, però hi és. */
 @media (max-width: 760px) {
-  .cq-palette { width: 168px; }
+  .cq-palette { width: 178px; }
   .cq-palette .cq-graella { grid-template-columns: 1fr !important; }
 }
 

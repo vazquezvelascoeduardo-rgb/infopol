@@ -67,6 +67,18 @@ const CATS: Cat[] = [
 ];
 const catOf = (m: Mode) => CATS.find((c) => c.key === m)!;
 
+/**
+ * Mòduls oberts al públic. La resta es veuen però no s'hi pot entrar: així
+ * s'entén que existeixen i que arriben, sense fer-los servir encara.
+ *
+ * De moment només el Diligenciador, que és el que gasta menys i el que
+ * anunciem com a gratuït a la portada.
+ */
+const MODES_OBERTS: Mode[] = ['diligencia'];
+const esObert = (m: Mode) => MODES_OBERTS.includes(m);
+/** Mode on cau qui escriu sense triar mòdul. */
+const MODE_PER_DEFECTE: Mode = MODES_OBERTS[0];
+
 const ROLES = ['Víctima', 'Perjudicat', 'Assistit', 'Agressor', 'Denunciant', 'Denunciat', 'Implicat', 'Testimoni'];
 const MAX_ATT = 3;
 const MAX_BYTES = 4 * 1024 * 1024;
@@ -157,6 +169,7 @@ export default function Chat() {
   }, [msgs.length, typing, screen]);
 
   function pick(m: Mode) {
+    if (!esObert(m)) return;
     // El Diligenciador comença amb el full de dades si encara no hi ha conversa.
     if (m === 'diligencia' && !(threads[m] ?? []).length) {
       setCat(m); setScreen('form'); setDraft('');
@@ -339,7 +352,7 @@ export default function Chat() {
                 <div style={{ textAlign: 'center', marginBottom: 34 }}>
                   <div style={{ display: 'inline-flex', alignItems: 'center', gap: 9, fontFamily: D.mono, fontSize: 9.5, letterSpacing: 3, color: '#FFA05C', border: '1px solid rgba(255,122,26,.28)', background: 'rgba(255,122,26,.07)', borderRadius: 99, padding: '7px 15px', marginBottom: 20 }}>
                     <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#FF7A1A', boxShadow: '0 0 8px #FF7A1A' }} />
-                    TRIA UN MÒDUL PER COMENÇAR
+                    DILIGENCIADOR OBERT · GRATUÏT
                   </div>
                   <h1 style={{ fontSize: 46, fontWeight: 800, letterSpacing: -2.2, lineHeight: 1.04, margin: 0 }}>
                     Bon torn, agent.<br />
@@ -348,18 +361,27 @@ export default function Chat() {
                     </span>
                   </h1>
                   <p style={{ color: D.mut, fontSize: 15, lineHeight: 1.5, margin: '16px auto 0', maxWidth: 540 }}>
-                    Tres especialistes que treballen sobre el corpus normatiu d&apos;InfoPol. Redacten, comproven i et donen sempre la referència.
+                    El Diligenciador et redacta la minuta a partir dels fets que li dictis, sobre
+                    el corpus normatiu d&apos;InfoPol i amb la referència sempre a la vista. Els
+                    altres dos mòduls arriben aviat.
                   </p>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 18 }}>
-                  {CATS.map((k) => (
-                    <button key={k.key} onClick={() => pick(k.key)}
+                  {CATS.map((k) => {
+                    const obert = esObert(k.key);
+                    return (
+                    <button key={k.key} onClick={() => pick(k.key)} disabled={!obert}
+                      title={obert ? undefined : 'Encara no està obert'}
                       style={{
-                        position: 'relative', overflow: 'hidden', textAlign: 'left', cursor: 'pointer',
+                        position: 'relative', overflow: 'hidden', textAlign: 'left',
+                        cursor: obert ? 'pointer' : 'default', opacity: obert ? 1 : 0.5,
                         border: `1px solid ${D.line}`, borderRadius: 22, padding: '24px 22px 22px',
                         background: D.glass, backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
-                        color: D.ink, boxShadow: '0 20px 50px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.07)',
+                        color: D.ink,
+                        boxShadow: obert
+                          ? '0 20px 50px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.07)'
+                          : 'inset 0 1px 0 rgba(255,255,255,.05)',
                       }}>
                       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 2, background: `linear-gradient(90deg,transparent,${k.accent},transparent)` }} />
                       <div style={{ position: 'absolute', right: -46, top: -46, width: 170, height: 170, borderRadius: '50%', background: `radial-gradient(circle,${k.glow},transparent 68%)` }} />
@@ -375,20 +397,23 @@ export default function Chat() {
                           <span key={t} style={{ fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.2, color: '#B4AFBC', border: `1px solid ${D.line}`, background: 'rgba(255,255,255,.04)', borderRadius: 7, padding: '5px 8px' }}>{t}</span>
                         ))}
                       </div>
-                      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 8, marginTop: 20, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,.07)', fontFamily: D.mono, fontSize: 9.5, letterSpacing: 1.6, color: k.accent }}>
-                        OBRE EL MÒDUL <span style={{ fontSize: 14 }}>→</span>
+                      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 8, marginTop: 20, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,.07)', fontFamily: D.mono, fontSize: 9.5, letterSpacing: 1.6, color: obert ? k.accent : '#7C7788' }}>
+                        {obert
+                          ? <>OBRE EL MÒDUL <span style={{ fontSize: 14 }}>→</span></>
+                          : <>ARRIBA AVIAT</>}
                       </div>
                     </button>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 <div style={{ marginTop: 26, display: 'flex', alignItems: 'center', gap: 13, border: `1px solid ${D.line}`, borderRadius: 18, padding: '7px 8px 7px 20px', background: 'rgba(255,255,255,.035)' }}>
-                  <span style={{ fontFamily: D.mono, fontSize: 9, letterSpacing: 1.8, color: '#6E6A78', flexShrink: 0 }}>O PREGUNTA DIRECTE</span>
+                  <span style={{ fontFamily: D.mono, fontSize: 9, letterSpacing: 1.8, color: '#6E6A78', flexShrink: 0 }}>O DICTA DIRECTE</span>
                   <input value={draft} onChange={(e) => setDraft(e.target.value)}
-                    onKeyDown={(e) => { if (e.key === 'Enter' && draft.trim()) { setCat('operativa'); setScreen('chat'); void send(draft); } }}
-                    placeholder="Ex.: patinet circulant per la vorera amb un menor…"
+                    onKeyDown={(e) => { if (e.key === 'Enter' && draft.trim()) { setCat(MODE_PER_DEFECTE); setScreen('chat'); void send(draft); } }}
+                    placeholder="Ex.: a les 18.30 h, av. de Roureda, col·lisió per abast…"
                     style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: D.ink, fontFamily: D.sans, fontSize: 15, padding: '12px 0' }} />
-                  <button onClick={() => { if (draft.trim()) { setCat('operativa'); setScreen('chat'); void send(draft); } }}
+                  <button onClick={() => { if (draft.trim()) { setCat(MODE_PER_DEFECTE); setScreen('chat'); void send(draft); } }}
                     style={{ flexShrink: 0, border: 'none', cursor: 'pointer', borderRadius: 13, width: 46, height: 46, background: 'linear-gradient(150deg,#FF9A47,#EC5F06)', color: '#fff', fontSize: 18, fontWeight: 800, boxShadow: '0 10px 24px rgba(236,95,6,.42)' }}>↑</button>
                 </div>
 
@@ -537,13 +562,17 @@ export default function Chat() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 5, marginBottom: 22 }}>
             {CATS.map((k) => {
               const on = k.key === cat;
+              const obert = esObert(k.key);
               return (
-                <button key={k.key} onClick={() => pick(k.key)}
-                  style={{ width: '100%', textAlign: 'left', cursor: 'pointer', border: `1px solid ${on ? k.border : 'transparent'}`, background: on ? k.tint : 'transparent', borderRadius: 12, padding: '10px 11px', display: 'flex', alignItems: 'center', gap: 10, color: D.ink }}>
+                <button key={k.key} onClick={() => pick(k.key)} disabled={!obert}
+                  title={obert ? undefined : 'Encara no està obert'}
+                  style={{ width: '100%', textAlign: 'left', cursor: obert ? 'pointer' : 'default', opacity: obert ? 1 : 0.45, border: `1px solid ${on ? k.border : 'transparent'}`, background: on ? k.tint : 'transparent', borderRadius: 12, padding: '10px 11px', display: 'flex', alignItems: 'center', gap: 10, color: D.ink }}>
                   <span style={{ width: 30, height: 30, flexShrink: 0, borderRadius: 9, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, background: k.tint, border: `1px solid ${k.border}` }}>{k.icon}</span>
                   <span style={{ flex: 1, minWidth: 0 }}>
                     <span style={{ display: 'block', fontWeight: 700, fontSize: 12.5, lineHeight: 1.2 }}>{k.title}</span>
-                    <span style={{ display: 'block', fontFamily: D.mono, fontSize: 8, letterSpacing: 1.2, color: '#7C7788', marginTop: 2 }}>{k.kicker}</span>
+                    <span style={{ display: 'block', fontFamily: D.mono, fontSize: 8, letterSpacing: 1.2, color: '#7C7788', marginTop: 2 }}>
+                      {obert ? k.kicker : 'ARRIBA AVIAT'}
+                    </span>
                   </span>
                   <span style={{ width: 5, height: 5, borderRadius: '50%', background: on ? k.accent : 'transparent' }} />
                 </button>
