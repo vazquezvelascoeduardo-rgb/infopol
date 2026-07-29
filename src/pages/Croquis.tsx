@@ -13,6 +13,7 @@ import {
 } from 'react-konva';
 import type Konva from 'konva';
 import { A, Ic, Mono } from '../lib/design';
+import './croquis.css';
 import {
   BOARD, PX_PER_M, VEHICLES, buildTimeline, stateAt, simRateAt, cineViewAt, fmtRel,
   type El, type Estat, type Road, type Sentit, type VehData, type Timeline,
@@ -1093,6 +1094,14 @@ export default function Croquis() {
   // cadascun dels punts de control per modelar la corba.
   const [editPathNodes, setEditPathNodes] = useState<string | null>(null);
   const [, setHistTick] = useState(0);
+  // Paleta: en comptes d'una llista llarga de nou grups, un rail de
+  // categories a l'esquerra i un cercador. Amb text al cercador es busca
+  // per TOTES les categories, que és com la gent troba les coses.
+  const [cat, setCat] = useState(0);
+  const [cerca, setCerca] = useState('');
+  // Accions secundàries de la capçalera: a la barra només hi ha d'haver
+  // el que es fa sovint; la resta viu darrere d'un botó.
+  const [mesObert, setMesObert] = useState(false);
   // Reproducció / vídeo / 3D
   const [showPlayer, setShowPlayer] = useState(false);
   const [show3D, setShow3D] = useState(false);
@@ -1563,6 +1572,16 @@ export default function Croquis() {
   useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
 
   const btn: CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: 7, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 11, padding: '9px 13px', fontFamily: A.display, fontWeight: 700, fontSize: 13.5, color: A.ink };
+  /** Botó fantasma: sense marc fins que hi passes per sobre. */
+  const btnG: CSSProperties = { ...btn, border: '1px solid transparent', background: 'transparent' };
+  const separador = <span style={{ width: 1, height: 26, background: A.line2, margin: '0 2px', flexShrink: 0 }} />;
+
+  // Icona de cada categoria de la paleta, per al rail.
+  const CAT_ICONA = ['🚗', '⚠️', '⛔', '🔵', '🛣️', '✏️', '🌳', '💬', '🧭'];
+  const resultats = cerca.trim()
+    ? PALETTE.flatMap((g) => g.items.map((it) => ({ ...it, group: g.group })))
+      .filter((it) => it.label.toLowerCase().includes(cerca.trim().toLowerCase()))
+    : null;
   const pct = Math.round((view.scale || 1) * 100);
   const animating = !!anim;
   const bgEl = els.find((e) => e.kind === 'fons') || null;
@@ -1582,60 +1601,124 @@ export default function Croquis() {
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 110, background: A.bg, display: 'flex', flexDirection: 'column', fontFamily: A.sans }}>
       {/* Top bar */}
-      <header style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 12, padding: '10px clamp(12px,2vw,20px)', borderBottom: `1px solid ${A.line}`, background: A.bgSoft, flexWrap: 'wrap' }}>
-        <button onClick={() => nav('/')} style={{ ...btn, padding: 9 }} aria-label="Tornar a l'inici"><Ic name="arrowL" size={18} color={A.inkSoft} /></button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginRight: 'auto' }}>
-          <span style={{ width: 34, height: 34, borderRadius: 10, background: A.terracota, display: 'grid', placeItems: 'center', boxShadow: A.inset }}><Ic name="car" size={19} color="#fff" sw={2.2} /></span>
-          <div><div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 15.5, color: A.ink, letterSpacing: -0.3 }}>Croquis d'accident</div><Mono size={9} color={A.inkMuted}>Editor professional · exporta PNG</Mono></div>
+      <header style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 8, padding: '9px clamp(12px,2vw,18px)', borderBottom: `1px solid ${A.line}`, background: A.bgSoft }}>
+        <button onClick={() => nav('/')} style={{ ...btnG, padding: 9 }} aria-label="Tornar a l'inici"><Ic name="arrowL" size={18} color={A.inkSoft} /></button>
+        <div className="cq-title" style={{ display: 'flex', alignItems: 'center', gap: 9, marginRight: 'auto', minWidth: 0 }}>
+          <span style={{ width: 34, height: 34, borderRadius: 10, background: A.terracota, display: 'grid', placeItems: 'center', boxShadow: A.inset, flexShrink: 0 }}><Ic name="car" size={19} color="#fff" sw={2.2} /></span>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 15.5, color: A.ink, letterSpacing: -0.3, whiteSpace: 'nowrap' }}>Croquis d'accident</div>
+            <Mono size={9} color={A.inkMuted}>Editor professional · exporta PNG</Mono>
+          </div>
         </div>
-        <button onClick={undo} disabled={!hist.current.past.length} style={{ ...btn, padding: '9px 11px', fontSize: 16, opacity: hist.current.past.length ? 1 : 0.4 }} title="Desfer (Ctrl+Z)">↶</button>
-        <button onClick={redo} disabled={!hist.current.future.length} style={{ ...btn, padding: '9px 11px', fontSize: 16, opacity: hist.current.future.length ? 1 : 0.4 }} title="Refer (Ctrl+Maj+Z)">↷</button>
-        <button onClick={() => setEditAtestat(true)} style={btn}><Ic name="doc" size={15} color={A.inkSoft} /> Atestat</button>
-        <button onClick={() => bgFileRef.current?.click()} style={btn} title="Posar una captura de mapa/foto de fons (o enganxa amb Ctrl+V)">📷 Fons</button>
-        <button onClick={openMaps} style={{ ...btn, padding: '9px 11px' }} title="Obrir Google Maps al lloc exacte">🗺️</button>
-        <button onClick={openIcgc} style={{ ...btn, padding: '9px 11px' }} title="Obrir ICGC · ortofoto de Catalunya">🛰️</button>
-        <input ref={bgFileRef} type="file" accept="image/*" style={{ display: 'none' }}
-          onChange={(e) => { const f = e.target.files?.[0]; if (f) fileToScaledDataUrl(f).then(addBackground).catch(() => {}); e.target.value = ''; }} />
-        <label style={{ ...btn, gap: 8 }}>
+
+        {/* Desfer / refer */}
+        <button onClick={undo} disabled={!hist.current.past.length} style={{ ...btnG, padding: '9px 11px', fontSize: 16, opacity: hist.current.past.length ? 1 : 0.35 }} title="Desfer (Ctrl+Z)">↶</button>
+        <button onClick={redo} disabled={!hist.current.future.length} style={{ ...btnG, padding: '9px 11px', fontSize: 16, opacity: hist.current.future.length ? 1 : 0.35 }} title="Refer (Ctrl+Maj+Z)">↷</button>
+        {separador}
+
+        {/* Escenari: quina via i si es dibuixa a mà */}
+        <label className="cq-sec" style={{ ...btn, gap: 8 }}>
           <Mono size={9} color={A.inkMuted}>Via</Mono>
           <select value={road} onChange={(e) => changeRoad(e.target.value as Road)} style={{ border: 'none', background: 'transparent', fontFamily: A.display, fontWeight: 700, fontSize: 13.5, color: A.ink, cursor: 'pointer', outline: 'none' }}>
             {ROADS.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}
           </select>
         </label>
-        <button onClick={() => setDrawingPath((dp) => dp ? null : { points: [], width: 240 })}
+        <button className="cq-sec" onClick={() => setDrawingPath((dp) => dp ? null : { points: [], width: 240 })}
           style={{ ...btn, ...(drawingPath ? { background: A.terracota, color: '#fff', border: 'none' } : {}) }}
           title="Dibuixar via lliure: clica al llenç per posar punts (mín. 2). Doble clic o Enter per acabar. Esc per cancel·lar.">
           {drawingPath ? `✏️ Dibuixant (${drawingPath.points.length / 2} pts)` : '✏️ Via lliure'}
         </button>
-        <button onClick={exportJson} style={btn} title="Desar còpia (.json)">💾 Desar</button>
-        <button onClick={() => fileRef.current?.click()} style={btn} title="Obrir un croquis (.json)">📂 Obrir</button>
+        <button className="cq-sec" onClick={() => setEditAtestat(true)} style={btn}><Ic name="doc" size={15} color={A.inkSoft} /> Atestat</button>
+        <span className="cq-sec" style={{ display: 'contents' }}>{separador}</span>
+
+        {/* Tot el que no es fa a cada croquis, darrere d'un sol botó */}
+        <div style={{ position: 'relative' }}>
+          <button onClick={() => setMesObert((v) => !v)} style={{ ...btn, ...(mesObert ? { background: A.card, border: `1px solid ${A.ink}` } : {}) }} title="Més eines">
+            ⋯ Més
+          </button>
+          {mesObert && (
+            <>
+              <div onClick={() => setMesObert(false)} style={{ position: 'fixed', inset: 0, zIndex: 40 }} />
+              <div style={{ position: 'absolute', top: 'calc(100% + 8px)', right: 0, zIndex: 41, width: 268, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 16, boxShadow: A.shadowLg, padding: 7, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <Mono size={8.5} color={A.inkMuted} style={{ display: 'block', padding: '7px 10px 4px' }}>FONS DEL CROQUIS</Mono>
+                <MenuItem onClick={() => { setMesObert(false); bgFileRef.current?.click(); }}>📷 Posar una imatge de fons</MenuItem>
+                <MenuItem onClick={() => { setMesObert(false); openMaps(); }}>🗺️ Obrir a Google Maps</MenuItem>
+                <MenuItem onClick={() => { setMesObert(false); openIcgc(); }}>🛰️ Ortofoto de l'ICGC</MenuItem>
+                <Mono size={8.5} color={A.inkMuted} style={{ display: 'block', padding: '11px 10px 4px' }}>RECONSTRUCCIÓ</Mono>
+                <MenuItem active={showPlayer} onClick={() => { setMesObert(false); setShowPlayer((v) => !v); }}>▶ Recreació en vídeo</MenuItem>
+                <MenuItem onClick={() => { setMesObert(false); setShow3D(true); }}>🧊 Recreació en 3D</MenuItem>
+                <MenuItem onClick={() => { setMesObert(false); setShowSkidCalc(true); }}>🧮 Velocitat per frenada</MenuItem>
+                <Mono size={8.5} color={A.inkMuted} style={{ display: 'block', padding: '11px 10px 4px' }}>FITXER</Mono>
+                <MenuItem onClick={() => { setMesObert(false); exportJson(); }}>💾 Desar còpia (.json)</MenuItem>
+                <MenuItem onClick={() => { setMesObert(false); fileRef.current?.click(); }}>📂 Obrir un croquis</MenuItem>
+                <MenuItem onClick={() => { setMesObert(false); void exportInforme(); }}>📄 Informe imprimible</MenuItem>
+                <MenuItem danger onClick={() => { setMesObert(false); clearAll(); }}>🗑️ Buidar el croquis</MenuItem>
+              </div>
+            </>
+          )}
+        </div>
+
+        <input ref={bgFileRef} type="file" accept="image/*" style={{ display: 'none' }}
+          onChange={(e) => { const f = e.target.files?.[0]; if (f) fileToScaledDataUrl(f).then(addBackground).catch(() => {}); e.target.value = ''; }} />
         <input ref={fileRef} type="file" accept="application/json,.json" style={{ display: 'none' }}
           onChange={(e) => { const f = e.target.files?.[0]; if (f) importJson(f); e.target.value = ''; }} />
-        <button onClick={() => setShowPlayer((v) => !v)} style={{ ...btn, ...(showPlayer ? { background: A.terracota, color: '#fff', border: 'none' } : {}) }} title="Recreació en vídeo">▶ Vídeo</button>
-        <button onClick={() => setShow3D(true)} style={btn} title="Recreació 3D de l'accident">🧊 3D</button>
-        <button onClick={() => setShowSkidCalc(true)} style={btn} title="Calcula la velocitat inicial des de la longitud de la frenada al lloc">🧮 Velocitat per frenada</button>
-        <button onClick={() => { void exportInforme(); }} style={btn} title="Informe imprimible: croquis + seqüència + taula de dades (desa'l com a PDF)">📄 Informe</button>
-        <button onClick={clearAll} style={btn}><Ic name="x" size={15} color={A.inkSoft} /> Buidar</button>
-        <button onClick={exportPng} style={{ ...btn, background: A.ink, color: '#fff', border: 'none' }}><Ic name="doc" size={16} color="#fff" /> Exportar PNG</button>
+
+        <button onClick={exportPng} style={{ ...btn, background: A.ink, color: '#fff', border: 'none', boxShadow: A.inset }}>
+          <Ic name="doc" size={16} color="#fff" /> <span className="cq-sec">Exportar</span> PNG
+        </button>
       </header>
 
       <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
-        {/* Paleta */}
-        <aside className="cq-palette" style={{ width: 210, flexShrink: 0, overflowY: 'auto', borderRight: `1px solid ${A.line}`, background: A.bgSoft, padding: 14, display: 'flex', flexDirection: 'column', gap: 16 }}>
-          {PALETTE.map((g) => (
-            <div key={g.group}>
-              <Mono size={9} color={A.inkMuted} style={{ display: 'block', marginBottom: 8 }}>{g.group}</Mono>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 7 }}>
-                {g.items.map((it) => (
-                  <button key={it.kind} onClick={() => add(it.kind)} title={it.label}
+        {/* Paleta: rail de categories + graella de la categoria activa */}
+        <aside className="cq-palette" style={{ display: 'flex', flexShrink: 0, borderRight: `1px solid ${A.line}`, background: A.bgSoft }}>
+          {/* Rail */}
+          <div style={{ width: 62, flexShrink: 0, borderRight: `1px solid ${A.line}`, padding: '10px 7px', display: 'flex', flexDirection: 'column', gap: 3, overflowY: 'auto' }}>
+            {PALETTE.map((g, i) => {
+              const on = !resultats && cat === i;
+              // El nom curt: "Senyals · Perill" al rail només hi cap "Perill".
+              const curt = g.group.includes('·') ? g.group.split('·')[1].trim() : g.group;
+              return (
+                <button key={g.group} onClick={() => { setCerca(''); setCat(i); }} title={g.group}
+                  style={{
+                    position: 'relative', border: 'none', cursor: 'pointer', borderRadius: 12,
+                    padding: '9px 0 7px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+                    background: on ? A.card : 'transparent',
+                    boxShadow: on ? A.shadow : 'none',
+                  }}>
+                  {on && <span style={{ position: 'absolute', left: -4, top: '50%', transform: 'translateY(-50%)', width: 3, height: 20, borderRadius: 99, background: A.terracota }} />}
+                  <span style={{ fontSize: 18, lineHeight: 1 }}>{CAT_ICONA[i] ?? '▫️'}</span>
+                  <span style={{ fontFamily: A.sans, fontWeight: 700, fontSize: 8.5, lineHeight: 1.15, textAlign: 'center', color: on ? A.ink : A.inkMuted }}>{curt}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Contingut */}
+          <div style={{ flex: 1, minWidth: 0, overflowY: 'auto', padding: 12, display: 'flex', flexDirection: 'column', gap: 11 }}>
+            <input
+              value={cerca}
+              onChange={(e) => setCerca(e.target.value)}
+              placeholder="Cercar…"
+              style={{ width: '100%', border: `1px solid ${A.line2}`, background: A.card, borderRadius: 10, padding: '8px 10px', fontFamily: A.sans, fontWeight: 600, fontSize: 12.5, color: A.ink, outline: 'none' }} />
+
+            <div>
+              <Mono size={9} color={A.inkMuted} style={{ display: 'block', marginBottom: 8 }}>
+                {resultats ? `${resultats.length} RESULTATS` : PALETTE[cat].group}
+              </Mono>
+              <div className="cq-graella" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 7 }}>
+                {(resultats ?? PALETTE[cat].items).map((it) => (
+                  <button key={`${it.kind}-${it.label}`} onClick={() => add(it.kind)} title={it.label}
                     style={{ border: `1px solid ${A.line}`, background: A.card, cursor: 'pointer', borderRadius: 12, padding: '9px 5px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, boxShadow: A.shadow }}>
                     <span style={{ fontSize: 21, lineHeight: 1 }}>{it.emoji}</span>
                     <span style={{ fontFamily: A.sans, fontWeight: 600, fontSize: 10, color: A.inkSoft, textAlign: 'center', lineHeight: 1.1 }}>{it.label}</span>
                   </button>
                 ))}
               </div>
+              {resultats?.length === 0 && (
+                <Mono size={9.5} color={A.inkMuted} style={{ display: 'block', marginTop: 10 }}>Cap element amb aquest nom.</Mono>
+              )}
             </div>
-          ))}
+          </div>
         </aside>
 
         {/* Llenç */}
@@ -1780,11 +1863,15 @@ export default function Croquis() {
             </Layer>
           </Stage>
 
-          {/* Controls de zoom */}
-          <div style={{ position: 'absolute', right: 14, bottom: 14, display: 'flex', alignItems: 'center', gap: 6, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 13, padding: 5, boxShadow: A.shadowLg }}>
-            <button onClick={() => zoom(0.83)} style={{ ...btn, padding: '7px 12px', fontSize: 18, border: 'none' }} aria-label="Allunyar">−</button>
-            <button onClick={() => setView(fitView())} style={{ ...btn, padding: '7px 10px', border: 'none', fontSize: 12 }}>{pct}%</button>
-            <button onClick={() => zoom(1.2)} style={{ ...btn, padding: '7px 12px', fontSize: 18, border: 'none' }} aria-label="Apropar">+</button>
+          {/* Controls de zoom: pastilla flotant sobre el llenç */}
+          <div style={{
+            position: 'absolute', right: 14, bottom: 14, display: 'flex', alignItems: 'center', gap: 2,
+            background: 'rgba(255,255,255,.9)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)',
+            border: `1px solid ${A.line2}`, borderRadius: 13, padding: 4, boxShadow: A.shadowLg,
+          }}>
+            <button onClick={() => zoom(0.83)} style={{ ...btn, padding: '5px 11px', fontSize: 18, border: 'none', background: 'transparent' }} aria-label="Allunyar">−</button>
+            <button onClick={() => setView(fitView())} style={{ ...btn, padding: '6px 8px', border: 'none', background: 'transparent', fontFamily: A.mono, fontSize: 12, minWidth: 46, justifyContent: 'center' }} title="Ajustar a la pantalla">{pct}%</button>
+            <button onClick={() => zoom(1.2)} style={{ ...btn, padding: '5px 11px', fontSize: 18, border: 'none', background: 'transparent' }} aria-label="Apropar">+</button>
           </div>
 
           {/* Panell del fons de mapa */}
