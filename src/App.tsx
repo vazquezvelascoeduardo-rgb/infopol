@@ -121,6 +121,25 @@ export default function App() {
     );
   }
 
+  // La portada tampoc: és la pàgina de presentació i porta la seva pròpia
+  // barra de navegació i el seu peu. El topbar amb cercador i sidebar només
+  // té sentit un cop ja ets dins de l'app.
+  if (pathname === '/') {
+    return (
+      <>
+        <RouteMeta />
+        <ProgressSync />
+        <RouteErrorBoundary>
+          <Suspense fallback={<PageFallback />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </Suspense>
+        </RouteErrorBoundary>
+      </>
+    );
+  }
+
   return (
     <Layout>
       <RouteMeta />
