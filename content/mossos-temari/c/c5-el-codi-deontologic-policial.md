@@ -1,111 +1,128 @@
----
-title: "Tema C.5 — El Codi deontològic policial"
-tema: "C.5"
-ambit: "C"
-lang: ca
----
+# El Codi deontològic policial
 
-# Tema C.5 — El Codi deontològic policial
-
-> **Àmbit**: Seguretat i policia
-
-## Síntesi del tema
-
-La deontologia policial és el conjunt de principis ètics que regulen la funció policial. El **Consell d'Europa** va aprovar la **Recomanació REC(2001)10**, de 19 setembre 2001, amb el **Codi europeu d'ètica de la policia**. A Catalunya: **Acord GOV/25/2015, de 24 de febrer**, del **Codi d'ètica de la Policia de Catalunya**, proposat pel **Comitè d'Ètica** (creat el 2007).
+> **Font:** *Guia d'estudi per accedir a la categoria de mosso/a del Cos de
+> Mossos d'Esquadra*, 1a edició, juny de 2026.
+> © Generalitat de Catalunya, Departament d'Interior i Seguretat Pública.
+> Contingut reutilitzat sense alteracions a l'empara de la Llicència Oberta
+> d'Ús d'Informació – Catalunya (art. 17.1 de la Llei 19/2014, de transparència).
+> Darrera actualització de la font: juny de 2026.
 
 ## 1. La deontologia policial
 
-*Conjunt de principis i regles ètiques que regulen i guien una activitat professional.*
+La deontologia professional és el conjunt de principis i regles ètiques que regulen i guien
+una activitat professional. Aquestes normes determinen els deures mínimament exigibles als
+professionals en l’acompliment de la seva activitat. Per aquest motiu, solen sorgir del mateix
+col·lectiu professional, el qual s’encarrega de recollir-los per escrit en els codis deontològics.
 
-### ▸ Característiques
+Un codi de deontologia policial és un enunciat de principis i ideals als quals els agents d’un servei
+de policia es comprometen. El Codi de deontologia policial és una garantia per al ciutadà, però
+també per al mateix agent de policia, que entén i accepta les regles amb les quals ha de treballar i
+les assimila com a pròpies.
 
-- Determina els **deures mínims exigibles** als professionals.
-- Sorgeix del propi col·lectiu professional.
-- Es plasma en **codis deontològics** escrits.
-- **Doble garantia**: per al ciutadà i per al mateix policia.
+La policia té una deontologia particular. En un estat democràtic, la policia ha de vetllar per la
+protecció dels drets humans de totes les persones. I perquè això sigui així, la policia no solament ha
+de complir i fer complir la llei, sinó que, a més, ha de mostrar respecte cap als drets de les persones.
 
-### ▸ Deontologia policial específica
+Els principals organismes internacionals coincideixen a considerar la deontologia policial d’acord
+amb les declaracions internacionals dels drets humans i amb la convicció que, en un sistema
+democràtic, l’Estat i la policia no només han de respectar els drets humans, sinó que n’han de ser
+els garants i protectors.
 
-- En un Estat democràtic, la policia ha de **vetllar per la protecció dels drets humans**.
-- No només **complir i fer complir la llei**, sinó **mostrar respecte cap als drets de les persones**.
-- L'Estat i la policia han de ser **garants i protectors** dels drets humans, no només respectar-los.
+## 2. El Codi europeu d’ètica de la policia
 
-## 2. El Codi europeu d'ètica de la policia
+El Comitè de Ministres del Consell d’Europa, en la Recomanació REC(2001)10, sobre el Codi
+europeu d’ètica de la policia, adoptada el 19 de setembre de 2001, recomana que els governs dels
+estats membres basin la seva legislació, les pràctiques internes i els seus codis de conducta en
+matèria de policia en els principis recollits en el Codi europeu d’ètica de la policia, amb vista a la
+seva implantació progressiva i a donar la màxima difusió possible a aquest text.
 
-***Recomanació REC(2001)10 del Comitè de Ministres del Consell d'Europa**, de 19 setembre 2001.*
+Aquest Codi promou la cooperació internacional sobre les qüestions referides a l’ètica policial i els
+aspectes relacionats amb els drets humans, atès que l’objectiu de la policia és la defensa dels drets
+i les llibertats fonamentals dels ciutadans, com recull la Convenció europea dels drets humans. Així
+mateix, el Codi es basa en el principi de la protecció de l’Estat de dret com a base de qualsevol
+democràcia veritable, i en la consideració que la policia, juntament amb el sistema penal, tenen un
+paper determinant en aquesta protecció.
 
-### ▸ Contingut
+Aquest Codi s’aplica a les forces públiques de seguretat tradicionals o serveis de policia, o a altres
+òrgans autoritzats i/o controlats pels poders públics el primer objectiu dels quals consisteix a
+garantir el manteniment de l’ordre en la societat civil, i que estan autoritzats per l’Estat a utilitzar la
+força i/o poders especials per assolir aquest objectiu.
 
-- Recomana als estats membres basar la seva legislació, pràctica i codis en aquest Codi.
-- Promou la **cooperació internacional** sobre ètica policial i drets humans.
-- Es fonamenta en la **Convenció Europea dels Drets Humans**.
-- Principi base: **protecció de l'Estat de dret** com a base de qualsevol democràcia.
-- La policia, juntament amb el sistema penal, té un paper determinant en aquesta protecció.
+Mitjançant la Resolució INT/1828/2004, de 14 de juny, es va aprovar la Instrucció per a la
+incorporació i l’aplicació del Codi europeu d’ètica de la policia en relació amb l’actuació i la
+intervenció de la Policia de la Generalitat - Mossos d’Esquadra, per tal que els membres del Cos
+de Mossos d’Esquadra procurin adequar-se en la seva actuació i en el compliment de les seves
+funcions als principis, les bases i els criteris establerts en el Codi ètic esmentat, d’acord amb les
+funcions que els atribueix l’ordenament jurídic.
 
-### ▸ Aplicació a Catalunya
+## 3. Acord GOV/25/2015, de 24 de febrer, pel qual s’aprova el Codi d’ètica
 
-- **Resolució INT/1828/2004, de 14 de juny**: Instrucció per a la incorporació i aplicació del Codi europeu d'ètica de la policia a la PG-ME.
-- Els membres del cos de Mossos d'Esquadra han d'adequar-se als principis del Codi en l'exercici de les seves funcions.
+de la Policia de Catalunya
 
-## 3. Codi d'ètica de la Policia de Catalunya
+Les institucions catalanes competents en matèria de seguretat pública han de vetllar per la
+promoció de les bones pràctiques en l’àmbit policial, i que aquestes encaixin en els marcs
+deontològics internacionals, especialment el Codi europeu d’ètica de la policia. Amb aquesta
+voluntat es va crear al 2007 el Comitè d’Ètica de la Policia de Catalunya, que va esdevenir una eina
+de recerca en matèria de deontologia policial i consulta.
+Aquest Comitè va proposar el Codi d’ètica de la Policia de Catalunya, que va ser aprovat pel Govern
+a través de l’Acord GOV/25/2015, de 24 de febrer, pel qual s’aprova el Codi d’ètica de la Policia de
+Catalunya. Amb l’acceptació d’aquest Codi, Catalunya segueix la línia de la majoria de països de
+llarga tradició democràtica. El mateix Codi preveu la necessitat de ser modificat per adaptar-se als
+canvis que comporta l’evolució de la societat i de la funció policial, com a mecanisme de garantia de
+vigència efectiva i real.
+Aquest Codi no entra a reglamentar pràctiques policials concretes, sinó que és una eina pedagògica
+i inspiradora dirigida als cossos de policia de les institucions pròpies de Catalunya, que identifica
+els seus mínims ètics comuns, el conjunt de principis, valors i competències que inspiren la funció
+policial. Al seu preàmbul, fa extensiva la seva funció com a marc de referència per als vigilants
+municipals.
+No és possible encabir en un text normatiu la complexitat i la diversitat de les situacions reals. La
+pròpia naturalesa de les actuacions policials comporta que la presa de decisions in extremis sigui
+habitual. Per això, el Codi exposa drets, i també deures i compromisos que ha d’assumir la policia
+davant la ciutadania, però recordant sempre la seva autonomia d’actuació.
+El seu contingut presenta un escenari on es descriu allò que és exigible a la policia, amb la voluntat
+de garantir-ne la credibilitat i fomentar la confiança de la ciutadania vers el cos policial. Per això,
+descriu la necessitat d’actuació a través de bones pràctiques, un exercici competent de les
+seves funcions en pro del bé comú, actuant de forma no discriminatòria i respectant la dignitat i
+l’autonomia de les persones.
+Finalment, el Codi destaca la importància de la cooperació policial, la col·laboració amb
+l’Administració de justícia i els poders públics, així com de la gestió responsable de la informació
+que deriva de les seves actuacions. Atribueix a la funció policial el caràcter de proximitat i atenció a
+les persones, el foment de la convivència i la pràctica pedagògica.
 
-***Acord GOV/25/2015, de 24 de febrer**, pel qual s'aprova el Codi d'ètica de la Policia de Catalunya.*
+## Idees força
 
-### ▸ Origen
+## 1. En un sistema democràtic, l’Estat i la policia no només han de respectar els drets humans, sinó
 
-- **2007**: creació del **Comitè d'Ètica de la Policia de Catalunya** com a eina de recerca i consulta.
-- El Comitè proposa el Codi.
-- **Aprovat el 24 febrer 2015** per Acord GOV/25/2015.
+que n’han de ser els garants i protectors.
 
-### ▸ Naturalesa del Codi
+## 2. El Consell d’Europa, a la Recomanació REC(2001)10, aconsella als seus estats membres seguir
 
-- **No reglamenta pràctiques policials concretes**.
-- És una **eina pedagògica i inspiradora**.
-- Dirigida als cossos de policia de les institucions pròpies de Catalunya.
-- Identifica **mínims ètics comuns**, principis, valors i competències que inspiren la funció policial.
-- **Marc de referència també per als vigilants municipals** (preàmbul).
-- **Modificable**: s'adapta a l'evolució de la societat i la funció policial.
+el Codi europeu d’ètica de la policia. Aquest Codi promou la cooperació internacional sobre les
+qüestions referides a l’ètica policial i els aspectes relacionats amb els drets humans.
 
-### ▸ Continguts
+## 3. El Codi europeu d’ètica de la policia es basa en el principi de la protecció de l’Estat de dret com
 
-- Reconeix l'**autonomia d'actuació** del policia (decisions in extremis).
-- Exposa drets, deures i compromisos davant la ciutadania.
-- Promou les **bones pràctiques**, l'**exercici competent**, l'**actuació no discriminatòria** i el **respecte a la dignitat i autonomia de les persones**.
-- Destaca: **cooperació policial**, **col·laboració amb l'Administració de justícia**, **gestió responsable de la informació**.
-- Caràcter de **proximitat**, atenció a les persones, foment de la convivència, pràctica pedagògica.
-- Vol garantir la **credibilitat** del cos i fomentar la **confiança** ciutadana.
+a base de qualsevol democràcia veritable, i en la consideració que la policia, juntament amb el
+sistema penal, tenen un paper determinant en aquesta protecció.
 
-## ⚠️ Per a l'examen
+## 4. El Codi d’ètica de la Policia de Catalunya no entra a reglamentar pràctiques policials concretes,
 
-- **3 normes deontològiques clau**: Recomanació **REC(2001)10** (Consell d'Europa) / Resolució **INT/1828/2004** (incorporació a Catalunya) / Acord **GOV/25/2015, de 24 de febrer** (Codi d'ètica de la Policia de Catalunya).
-- **Comitè d'Ètica de la Policia de Catalunya: creat el 2007**.
-- El Codi català **NO reglamenta pràctiques concretes**: és una eina **pedagògica i inspiradora**.
-- **Recomanació REC(2001)10**: 19 setembre 2001. Saber l'any.
-- **Consell d'Europa ≠ Consell de la UE ≠ Consell Europeu**. El Codi europeu d'ètica el va aprovar el **Consell d'Europa** (organisme de drets humans amb seu a Estrasburg, no UE).
-- **Convenció Europea dels Drets Humans**: fonament del Codi europeu.
-- El Codi català és **marc per a vigilants municipals també** (preàmbul).
+sinó que és una eina pedagògica i inspiradora dirigida als cossos de policia de les institucions
+pròpies de Catalunya, que identifica els seus mínims ètics comuns, el conjunt de principis,
+valors i competències que inspiren la funció policial.
 
-## 📖 Glossari
+## Glossari
 
-- Acord GOV/25/2015
-- Bones pràctiques
-- Codi d'ètica de la Policia de Catalunya
-- Codi europeu d'ètica de la policia
-- Comitè d'Ètica
-- Consell d'Europa
-- Convenció Europea dels Drets Humans
-- Cooperació policial
-- Deontologia professional
-- Dignitat de les persones
-- Drets humans
-- Estat de dret
-- Funció policial
-- Garants dels drets humans
-- Mínims ètics comuns
-- Pràctica pedagògica
-- Proximitat
-- Recomanació REC(2001)10
-- Resolució INT/1828/2004
-- Vigilants municipals
+Codi
+Convivència
+Deontologia
+Discriminació
+Drets humans
+Estat de dret
+Garant
+Norma ètica
+Proximitat
+Pedagogia
 
----
+ISBN 979-13-87889-34-0
+9 791387 889340
