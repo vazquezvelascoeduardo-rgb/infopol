@@ -8,7 +8,7 @@
 //
 // Conseqüència visible: en recuperar una conversa antiga hi veuràs [DNI_1]
 // on hi havia un DNI. És el preu de no guardar-lo, i és intencionat.
-import { supabase, isBackendEnabled } from './supabase';
+import { isBackendEnabled, requireSupabase } from './supabase';
 
 export type ConversaMeta = {
   id: string;
@@ -39,7 +39,8 @@ export async function desaConversa(
   missatges: MissatgeDesat[],
 ): Promise<string | null> {
   if (!isBackendEnabled || !missatges.length) return id;
-  const { data: sessio } = await supabase.auth.getUser();
+  const sb = requireSupabase();
+  const { data: sessio } = await sb.auth.getUser();
   const uid = sessio.user?.id;
   if (!uid) return null;
 
@@ -47,7 +48,7 @@ export async function desaConversa(
   const titol = titolDe(missatges.find((m) => m.role === 'user')?.text ?? '');
 
   if (!conversaId) {
-    const { data, error } = await supabase
+    const { data, error } = await sb
       .from('chat_converses')
       .insert({ user_id: uid, mode, titol })
       .select('id')
@@ -55,25 +56,24 @@ export async function desaConversa(
     if (error || !data) return null;
     conversaId = data.id as string;
   } else {
-    await supabase
+    await sb
       .from('chat_converses')
       .update({ titol, updated_at: new Date().toISOString() })
       .eq('id', conversaId);
-    await supabase.from('chat_missatges').delete().eq('conversa_id', conversaId);
+    await sb.from('chat_missatges').delete().eq('conversa_id', conversaId);
   }
 
   const files = missatges.map((m, i) => ({
     conversa_id: conversaId, role: m.role, text: m.text, ordre: i,
   }));
-  const { error } = await supabase.from('chat_missatges').insert(files);
-  if (error) return conversaId;
+  await sb.from('chat_missatges').insert(files);
   return conversaId;
 }
 
 /** Les converses de l'usuari, de la més recent a la més antiga. */
 export async function llistaConverses(limit = 40): Promise<ConversaMeta[]> {
   if (!isBackendEnabled) return [];
-  const { data } = await supabase
+  const { data } = await requireSupabase()
     .from('chat_converses')
     .select('id, mode, titol, updated_at')
     .order('updated_at', { ascending: false })
@@ -89,7 +89,7 @@ export async function llistaConverses(limit = 40): Promise<ConversaMeta[]> {
 /** Els missatges d'una conversa, en ordre. */
 export async function carregaConversa(id: string): Promise<MissatgeDesat[]> {
   if (!isBackendEnabled) return [];
-  const { data } = await supabase
+  const { data } = await requireSupabase()
     .from('chat_missatges')
     .select('role, text, ordre')
     .eq('conversa_id', id)
@@ -99,14 +99,15 @@ export async function carregaConversa(id: string): Promise<MissatgeDesat[]> {
 
 export async function esborraConversa(id: string): Promise<void> {
   if (!isBackendEnabled) return;
-  await supabase.from('chat_converses').delete().eq('id', id);
+  await requireSupabase().from('chat_converses').delete().eq('id', id);
 }
 
 /** Esborra-ho tot: l'usuari ha de poder marxar sense deixar rastre. */
 export async function esborraTotesLesConverses(): Promise<void> {
   if (!isBackendEnabled) return;
-  const { data: sessio } = await supabase.auth.getUser();
+  const sb = requireSupabase();
+  const { data: sessio } = await sb.auth.getUser();
   const uid = sessio.user?.id;
   if (!uid) return;
-  await supabase.from('chat_converses').delete().eq('user_id', uid);
+  await sb.from('chat_converses').delete().eq('user_id', uid);
 }
