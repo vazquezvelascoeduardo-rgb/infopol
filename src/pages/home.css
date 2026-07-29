@@ -49,11 +49,18 @@
   transition: transform 0.12s, filter 0.12s, background 0.15s;
 }
 .lp-btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
-.lp-btn-p { background: var(--lpTerra); color: #fff; box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.16); }
-.lp-btn-p:hover { color: #fff; }
-.lp-btn-g { background: transparent; color: var(--lpInk); border: 1.5px solid var(--lpLine2); }
-.lp-btn-g:hover { background: #fff; color: var(--lpInk); }
-.lp-btn-w { background: #fff; color: var(--lpTerra); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16); }
+
+/* Els botons sovint son <a>, i `.lp a` (classe + tipus) guanya a una classe
+   sola: sense qualificar, el text sortiria del color d'enllac — taronja
+   sobre taronja, invisible fins que hi passaves per sobre. */
+.lp .lp-btn-p, .lp a.lp-btn-p, .lp .lp-btn-p:hover, .lp a.lp-btn-p:hover {
+  background: var(--lpTerra); color: #fff; box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.16);
+}
+.lp .lp-btn-g, .lp a.lp-btn-g { background: transparent; color: var(--lpInk); border: 1.5px solid var(--lpLine2); }
+.lp .lp-btn-g:hover, .lp a.lp-btn-g:hover { background: #fff; color: var(--lpInk); }
+.lp .lp-btn-w, .lp a.lp-btn-w, .lp .lp-btn-w:hover, .lp a.lp-btn-w:hover {
+  background: #fff; color: var(--lpTerra); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+}
 .lp-btn-sm { font-size: 14px; padding: 11px 18px; border-radius: 12px; }
 
 /* navegació */
