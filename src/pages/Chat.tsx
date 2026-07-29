@@ -7,6 +7,7 @@ import { supabase } from '../lib/supabase';
 import { useAuth } from '../lib/auth';
 import { useSeo } from '../lib/seo';
 import { anonimitzaLlista, desanonimitza } from '../lib/anonimitza';
+import { useDictat } from '../lib/dictat';
 import {
   carregaConversa, desaConversa, esborraConversa, esborraTotesLesConverses,
   llistaConverses, type ConversaMeta,
@@ -153,6 +154,11 @@ export default function Chat() {
   const [count, setCount] = useState<number | null>(null);
   const [quota, setQuota] = useState<{ count: number; limit: number } | null>(null);
   const [showAdmin, setShowAdmin] = useState(false);
+  // Dictat per veu: el text tancat s'afegeix al que ja hi ha escrit, de
+  // manera que pots alternar teclat i veu sense perdre res.
+  const dictat = useDictat((t) => setDraft((d) => (d ? `${d} ${t}` : t)));
+  // El del full de fets del Diligenciador: és on de debò es dicta.
+  const dictatFets = useDictat((t) => setForm((f) => ({ ...f, facts: f.facts ? `${f.facts} ${t}` : t })));
   const threadRef = useRef<HTMLDivElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -586,11 +592,31 @@ export default function Chat() {
 
               <div style={card}>
                 {secTitle('03 · QUÈ HA PASSAT *')}
-                <textarea value={form.facts} onChange={(e) => setForm({ ...form, facts: e.target.value })}
-                  placeholder="Explica-ho en brut, tal com ho recordes: com hi arribeu, què observeu, què manifesten les persones, indicis recollits, actuacions fetes…"
+                <textarea
+                  value={dictatFets.escoltant && dictatFets.parcial
+                    ? `${form.facts}${form.facts ? ' ' : ''}${dictatFets.parcial}`
+                    : form.facts}
+                  onChange={(e) => setForm({ ...form, facts: e.target.value })}
+                  placeholder={dictatFets.escoltant
+                    ? 'Escoltant… parla amb normalitat.'
+                    : "Explica-ho en brut, tal com ho recordes: com hi arribeu, què observeu, què manifesten les persones, indicis recollits, actuacions fetes…"}
                   style={{ ...field, minHeight: 150, resize: 'vertical', lineHeight: 1.6, borderRadius: 14 }} />
-                <div style={{ fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.2, color: D.faint, marginTop: 10 }}>
-                  NO CAL LLENGUATGE JURÍDIC · JA ME N&apos;ENCARREGO JO
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 10 }}>
+                  <div style={{ fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.2, color: D.faint, flex: 1 }}>
+                    NO CAL LLENGUATGE JURÍDIC · JA ME N&apos;ENCARREGO JO
+                  </div>
+                  {dictatFets.disponible && (
+                    <button onClick={dictatFets.alterna}
+                      style={{
+                        flexShrink: 0, cursor: 'pointer', borderRadius: 11, padding: '8px 13px',
+                        border: dictatFets.escoltant ? 'none' : `1px solid ${D.line2}`,
+                        background: dictatFets.escoltant ? '#E0455A' : 'rgba(255,255,255,.05)',
+                        color: '#fff', fontFamily: D.sans, fontWeight: 700, fontSize: 12.5,
+                        boxShadow: dictatFets.escoltant ? '0 0 0 4px rgba(224,69,90,.22)' : 'none',
+                      }}>
+                      {dictatFets.escoltant ? '■ Parar' : '🎙 Dictar'}
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -799,9 +825,23 @@ export default function Chat() {
                 <input ref={fileRef} type="file" accept="image/*,application/pdf" multiple hidden onChange={(e) => void onFiles(e.target.files)} />
                 <button onClick={() => fileRef.current?.click()} disabled={atts.length >= MAX_ATT} title="Adjuntar foto o PDF"
                   style={{ flexShrink: 0, border: 'none', background: 'none', cursor: 'pointer', fontSize: 18, opacity: atts.length >= MAX_ATT ? 0.4 : 1 }}>📎</button>
-                <input value={draft} onChange={(e) => setDraft(e.target.value)} placeholder={c.placeholder}
+                <input value={dictat.escoltant && dictat.parcial ? `${draft}${draft ? ' ' : ''}${dictat.parcial}` : draft}
+                  onChange={(e) => setDraft(e.target.value)} placeholder={dictat.escoltant ? 'Escoltant…' : c.placeholder}
                   onKeyDown={(e) => { if (e.key === 'Enter') void send(); }} disabled={typing}
                   style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: D.ink, fontFamily: D.sans, fontSize: 15, padding: '13px 0' }} />
+                {dictat.disponible && (
+                  <button onClick={dictat.alterna} disabled={typing}
+                    title={dictat.escoltant ? 'Parar de dictar' : 'Dictar per veu'}
+                    style={{
+                      flexShrink: 0, cursor: 'pointer', borderRadius: 14, width: 42, height: 42,
+                      border: dictat.escoltant ? 'none' : `1px solid ${D.line2}`,
+                      background: dictat.escoltant ? '#E0455A' : 'rgba(255,255,255,.05)',
+                      color: '#fff', fontSize: 17, opacity: typing ? 0.4 : 1,
+                      boxShadow: dictat.escoltant ? '0 0 0 4px rgba(224,69,90,.22)' : 'none',
+                    }}>
+                    {dictat.escoltant ? '■' : '🎙'}
+                  </button>
+                )}
                 <button onClick={() => void send()} disabled={typing || (!draft.trim() && !atts.length)}
                   style={{ flexShrink: 0, border: 'none', cursor: 'pointer', borderRadius: 14, width: 48, height: 48, background: `linear-gradient(150deg,${c.accent},${c.accent})`, color: '#fff', fontSize: 19, fontWeight: 800, opacity: typing || (!draft.trim() && !atts.length) ? 0.45 : 1, boxShadow: `0 10px 26px ${c.glow}` }}>↑</button>
               </div>
@@ -811,6 +851,18 @@ export default function Chat() {
               <div style={{ textAlign: 'center', fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.4, color: D.faint, marginTop: 5 }}>
                 🔒 DNI, MATRÍCULES I TELÈFONS ES SUBSTITUEIXEN ABANS D&apos;ENVIAR · LES FOTOS NO
               </div>
+              {/* El dictat no el fem nosaltres: el fa el navegador, i l'àudio
+                  hi va. Val més dir-ho que amagar-ho. */}
+              {dictat.escoltant && (
+                <div style={{ textAlign: 'center', fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.4, color: '#FFA05C', marginTop: 5 }}>
+                  🎙 EL DICTAT EL TRANSCRIU EL NAVEGADOR · L&apos;ÀUDIO PASSA PELS SEUS SERVIDORS
+                </div>
+              )}
+              {dictat.error && (
+                <div style={{ textAlign: 'center', fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.4, color: '#E0455A', marginTop: 5 }}>
+                  {dictat.error.toUpperCase()}
+                </div>
+              )}
             </div>
           </div>
         </div>
