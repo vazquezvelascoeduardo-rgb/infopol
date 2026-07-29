@@ -7,6 +7,10 @@ import { supabase } from '../lib/supabase';
 import { useAuth } from '../lib/auth';
 import { useSeo } from '../lib/seo';
 import { anonimitzaLlista, desanonimitza } from '../lib/anonimitza';
+import {
+  carregaConversa, desaConversa, esborraConversa, esborraTotesLesConverses,
+  llistaConverses, type ConversaMeta,
+} from '../lib/converses';
 
 const ADMINS = ['vazquezvelascoeduardo@gmail.com', 'eduguapo98@gmail.com'];
 
@@ -139,6 +143,10 @@ export default function Chat() {
   const [screen, setScreen] = useState<'home' | 'form' | 'chat'>('home');
   const [cat, setCat] = useState<Mode>('diligencia');
   const [threads, setThreads] = useState<Record<string, Msg[]>>({});
+  // Historial desat. `conversaId` és la conversa oberta ara mateix: null vol
+  // dir que encara no s'ha desat cap missatge d'aquesta.
+  const [conversaId, setConversaId] = useState<string | null>(null);
+  const [desades, setDesades] = useState<ConversaMeta[]>([]);
   const [draft, setDraft] = useState('');
   const [atts, setAtts] = useState<Att[]>([]);
   const [typing, setTyping] = useState(false);
@@ -163,6 +171,10 @@ export default function Chat() {
   useEffect(() => {
     callAssistent({ action: 'stats' }).then((d) => setCount(typeof d.total === 'number' ? d.total : null));
   }, []);
+  useEffect(() => {
+    if (!user) { setDesades([]); return; }
+    void llistaConverses().then(setDesades);
+  }, [user]);
   useEffect(() => {
     const el = threadRef.current;
     if (el) el.scrollTop = el.scrollHeight;
@@ -250,6 +262,38 @@ export default function Chat() {
       return { ...t, [cat]: [...prev, nou] };
     });
     if (d.used) setQuota({ count: d.used.count, limit: d.used.limit });
+
+    // Desem la conversa, però la versió ANONIMITZADA: `textos` són els
+    // missatges tal com han sortit del navegador i `d.text` la resposta tal
+    // com ha arribat, tots dos amb els marcadors al lloc de les dades
+    // personals. El diccionari per desfer-ho es queda aquí i es perd.
+    if (!d.error && user) {
+      const aDesar = [
+        ...textos.map((text, i) => ({ role: historial[i].role, text })),
+        { role: 'assistant' as const, text: String(d.text ?? '') },
+      ];
+      void desaConversa(conversaId, cat, aDesar).then((id) => {
+        if (id) setConversaId(id);
+        void llistaConverses().then(setDesades);
+      });
+    }
+  }
+
+  /** Obre una conversa desada. Els marcadors hi queden a la vista. */
+  async function obreDesada(c: ConversaMeta) {
+    const msgs = await carregaConversa(c.id);
+    if (!msgs.length) return;
+    setThreads((t) => ({ ...t, [c.mode]: msgs.map((m) => ({ role: m.role, text: m.text })) }));
+    setConversaId(c.id);
+    setCat(c.mode as Mode);
+    setScreen('chat');
+  }
+
+  /** Conversa nova: es desa a part, no s'afegeix a la que hi havia oberta. */
+  function novaConversa() {
+    setThreads((t) => ({ ...t, [cat]: [] }));
+    setConversaId(null);
+    setScreen('home');
   }
 
   const inicial = (user?.email ?? 'A').charAt(0).toUpperCase();
@@ -434,8 +478,8 @@ export default function Chat() {
                     },
                     {
                       ic: '🔒',
-                      t: 'Les teves dades no es desen enlloc',
-                      d: "Les converses no s'emmagatzemen: viuen a la pantalla i desapareixen quan la tanques. Els DNI, NIE, matrícules i telèfons s'anonimitzen al teu dispositiu abans d'enviar res. Del teu compte només se'n desa quantes consultes fas al dia, per controlar el límit — mai el que hi escrius.",
+                      t: 'Es desa la conversa, no les dades personals',
+                      d: "Els DNI, NIE, matrícules i telèfons se substitueixen per marcadors al teu dispositiu abans d'enviar res, i el diccionari per desfer-ho no surt d'aquí. L'historial que et queda desat és aquesta versió anonimitzada: ni nosaltres podem recuperar-ne les dades. Pots esborrar qualsevol conversa, o totes, quan vulguis.",
                     },
                     {
                       ic: '⚖️',
@@ -570,9 +614,6 @@ export default function Chat() {
   }
 
   /* ── CHAT ───────────────────────────────────────────────────── */
-  const recents = Object.entries(threads)
-    .flatMap(([k, arr]) => arr.filter((m) => m.role === 'user').map((m) => ({ mode: k as Mode, text: m.text })))
-    .slice(-6).reverse();
 
   return (
     <div style={{ background: D.bg, height: '100dvh', overflow: 'hidden' }}>
@@ -585,7 +626,7 @@ export default function Chat() {
             <div style={{ fontWeight: 800, fontSize: 15, letterSpacing: -0.4 }}>infopol<span style={{ color: '#FF7A1A' }}>·chat</span></div>
           </div>
 
-          <button onClick={() => { setThreads((t) => ({ ...t, [cat]: [] })); setScreen('home'); }}
+          <button onClick={novaConversa}
             style={{ width: '100%', cursor: 'pointer', border: '1px solid rgba(255,122,26,.3)', background: 'rgba(255,122,26,.1)', color: '#FFB27A', borderRadius: 13, padding: 12, fontWeight: 700, fontSize: 13.5, marginBottom: 22 }}>
             ＋ Nova conversa
           </button>
@@ -612,17 +653,44 @@ export default function Chat() {
             })}
           </div>
 
-          {recents.length > 0 && (
+          {desades.length > 0 && (
             <>
-              <div style={{ fontFamily: D.mono, fontSize: 8.5, letterSpacing: 2.2, color: D.faint, padding: '0 5px 9px' }}>D&apos;AQUESTA SESSIÓ</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '0 5px 9px' }}>
+                <span style={{ fontFamily: D.mono, fontSize: 8.5, letterSpacing: 2.2, color: D.faint }}>HISTORIAL</span>
+                <button
+                  onClick={() => {
+                    if (!confirm('Vols esborrar totes les converses desades? No es pot desfer.')) return;
+                    void esborraTotesLesConverses().then(() => { setDesades([]); setConversaId(null); });
+                  }}
+                  style={{ marginLeft: 'auto', border: 'none', background: 'transparent', cursor: 'pointer', fontFamily: D.mono, fontSize: 8, letterSpacing: 1, color: '#615D6C' }}
+                  title="Esborrar-ho tot">
+                  ESBORRA-HO TOT
+                </button>
+              </div>
               <div className="ipc-scroll" style={{ display: 'flex', flexDirection: 'column', gap: 3, overflowY: 'auto' }}>
-                {recents.map((h, i) => (
-                  <div key={i} onClick={() => pick(h.mode)}
-                    style={{ padding: '9px 11px', borderRadius: 10, cursor: 'pointer', borderLeft: `2px solid ${catOf(h.mode).accent}` }}>
-                    <div style={{ fontSize: 12.5, fontWeight: 600, color: '#C9C4D0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{h.text}</div>
-                    <div style={{ fontFamily: D.mono, fontSize: 8, letterSpacing: 1, color: '#615D6C', marginTop: 3 }}>{catOf(h.mode).kicker}</div>
+                {desades.map((c) => (
+                  <div key={c.id}
+                    style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '9px 6px 9px 11px', borderRadius: 10, borderLeft: `2px solid ${catOf(c.mode as Mode).accent}`, background: c.id === conversaId ? 'rgba(255,255,255,.05)' : 'transparent' }}>
+                    <div onClick={() => void obreDesada(c)} style={{ flex: 1, minWidth: 0, cursor: 'pointer' }}>
+                      <div style={{ fontSize: 12.5, fontWeight: 600, color: '#C9C4D0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.titol}</div>
+                      <div style={{ fontFamily: D.mono, fontSize: 8, letterSpacing: 1, color: '#615D6C', marginTop: 3 }}>
+                        {catOf(c.mode as Mode).kicker} · {new Date(c.updatedAt).toLocaleDateString('ca-ES', { day: '2-digit', month: '2-digit' })}
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => void esborraConversa(c.id).then(() => {
+                        setDesades((p) => p.filter((x) => x.id !== c.id));
+                        if (c.id === conversaId) setConversaId(null);
+                      })}
+                      style={{ flexShrink: 0, border: 'none', background: 'transparent', cursor: 'pointer', color: '#615D6C', fontSize: 13, padding: 4 }}
+                      title="Esborrar aquesta conversa">
+                      ×
+                    </button>
                   </div>
                 ))}
+              </div>
+              <div style={{ fontFamily: D.mono, fontSize: 7.5, letterSpacing: 0.8, color: '#4E4A57', lineHeight: 1.6, padding: '10px 5px 0' }}>
+                DESAT SENSE DADES PERSONALS: ELS DNI I MATRÍCULES HI SURTEN COM A MARCADORS
               </div>
             </>
           )}

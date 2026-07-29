@@ -54,6 +54,57 @@ function Logo({ size = 27 }: { size?: number }) {
   );
 }
 
+/**
+ * El mòbil del bàner de l'app.
+ *
+ * Ensenya la captura real (`public/app-captura.png`, la mateixa que hi ha a
+ * la fitxa de l'App Store). Si el fitxer encara no hi és, cau a una maqueta
+ * dibuixada, per no deixar-hi un forat.
+ */
+function MobilAmbCaptura() {
+  const [senseCaptura, setSenseCaptura] = useState(false);
+  const files = [
+    { i: 'book', c: C.terra, bg: C.terraSoft, t: 'Acadèmia', s: '48 temes' },
+    { i: 'siren', c: C.navy, bg: C.navySoft, t: 'Operativa', s: '701 infraccions' },
+    { i: 'car', c: C.terraDark, bg: C.terraTint, t: 'Croquis', s: 'Exporta PNG' },
+  ];
+  return (
+    <div className="lp-phone" aria-hidden>
+      {senseCaptura ? (
+        <div style={{ borderRadius: 29, background: '#F4F1EA', padding: '26px 14px 14px', position: 'relative', height: 410, overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: 9, left: '50%', transform: 'translateX(-50%)', width: 66, height: 19, borderRadius: 11, background: '#0A0A10' }} />
+          {files.map((f) => (
+            <div key={f.t} style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#fff', border: '1px solid rgba(21,21,28,.08)', borderRadius: 12, padding: '9px 10px', marginBottom: 7 }}>
+              <span style={{ width: 26, height: 26, borderRadius: 8, display: 'grid', placeItems: 'center', flexShrink: 0, background: f.bg }}>
+                <Ic n={f.i} s={14} c={f.c} w={2.2} />
+              </span>
+              <div>
+                <div style={{ fontFamily: 'Poppins, Manrope, sans-serif', fontWeight: 700, fontSize: 10.5, color: C.ink, lineHeight: 1.25 }}>{f.t}</div>
+                <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 7.5, letterSpacing: '.06em', textTransform: 'uppercase', color: '#82828D', marginTop: 1 }}>{f.s}</div>
+              </div>
+            </div>
+          ))}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#15161E', borderRadius: 12, padding: '9px 10px' }}>
+            <span style={{ width: 26, height: 26, borderRadius: 8, display: 'grid', placeItems: 'center', flexShrink: 0, background: 'rgba(255,255,255,.12)' }}>
+              <Ic n="chat" s={14} c="#fff" w={2.2} />
+            </span>
+            <div>
+              <div style={{ fontFamily: 'Poppins, Manrope, sans-serif', fontWeight: 700, fontSize: 10.5, color: '#fff', lineHeight: 1.25 }}>Chat</div>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 7.5, letterSpacing: '.06em', textTransform: 'uppercase', color: 'rgba(255,255,255,.5)', marginTop: 1 }}>Diligenciador</div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <img
+          src={`${import.meta.env.BASE_URL}app-captura.png`}
+          alt="L'app d'InfoPol a l'iPhone"
+          onError={() => setSenseCaptura(true)}
+        />
+      )}
+    </div>
+  );
+}
+
 /** Punt d'una llista de característiques. */
 function Pt({ tint, color, children }: { tint: string; color: string; children: ReactNode }) {
   return (
@@ -63,6 +114,17 @@ function Pt({ tint, color, children }: { tint: string; color: string; children: 
       </span>
       {children}
     </li>
+  );
+}
+
+/** Fitxa de l'app a l'App Store (id 6793429324). */
+const APP_STORE = 'https://apps.apple.com/es/app/infopol-app/id6793429324';
+
+function IconaApple({ s = 22, c = '#fff' }: { s?: number; c?: string }) {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" fill={c} aria-hidden>
+      <path d="M16.6 12.7c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.6-1.4-.1-2.5.8-3.2.8-.7 0-1.7-.8-2.8-.8-1.5 0-2.8.9-3.6 2.2-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.8-.7s1.6.7 2.7.7 1.9-1 2.6-2.1c.8-1.2 1.1-2.3 1.2-2.4-.1 0-2.3-.9-2.3-3.6zM14.7 5.9c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.5-1.2z" />
+    </svg>
   );
 }
 
@@ -164,8 +226,17 @@ export default function Home() {
               Consulta la norma en segons quan estàs de servei, prepara't l'oposició amb el
               temari sencer i redacta les minutes amb ajuda de la intel·ligència artificial.
             </p>
+            <div className="lp-iostag">
+              <IconaApple s={19} c="#15151C" />
+              <b>Ja disponible per a iPhone</b>
+              <span className="pip" />
+            </div>
             <div className="lp-herobtns">
               <Link className="lp-btn lp-btn-p" to={ctaPrincipal.to}>{ctaPrincipal.label}</Link>
+              <a className="lp-btn lp-btn-ios" href={APP_STORE} target="_blank" rel="noopener noreferrer">
+                <IconaApple />
+                <span className="lp-ioslines"><i>Descarrega-la a l&apos;</i><s>App Store</s></span>
+              </a>
               <a className="lp-btn lp-btn-g" href="#apartats">Veure què inclou</a>
             </div>
             <p className="lp-note">Sense targeta. El Diligenciador és gratuït.</p>
@@ -401,7 +472,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6 · Notícies */}
+      {/* 6 · App mòbil */}
+      <section className="lp-sec" id="app" style={{ paddingTop: 0 }}>
+        <div className="lp-wrap">
+          <div className="lp-appb">
+            <div className="lp-aglow" />
+            <div className="lp-alines" />
+            <div className="lp-appb-txt">
+              <div className="lp-mono" style={{ color: C.terra }}>Ja disponible</div>
+              <h2>Porta l&apos;InfoPol a la butxaca.</h2>
+              <p>
+                L&apos;app per a iPhone ja és a l&apos;App Store. Mateix contingut, pensat per
+                consultar-lo amb una mà mentre estàs de servei. La versió d&apos;Android arriba aviat.
+              </p>
+              <div className="lp-appb-feat">
+                {['Funciona sense cobertura', 'Temari i tests sincronitzats', 'Croquis i operativa'].map((f) => (
+                  <span key={f}><Ic n="check" s={13} c={C.green} w={2.6} />{f}</span>
+                ))}
+              </div>
+              <div className="lp-appb-btns">
+                <a
+                  className="lp-btn lp-btn-ios"
+                  href={APP_STORE}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ background: '#fff', color: C.ink }}>
+                  <IconaApple c={C.ink} />
+                  <span className="lp-ioslines">
+                    <i style={{ color: '#82828D' }}>Descarrega-la a l&apos;</i>
+                    <s>App Store</s>
+                  </span>
+                </a>
+                <span
+                  className="lp-btn"
+                  style={{ background: 'rgba(255,255,255,.08)', color: 'rgba(255,255,255,.55)', border: '1px solid rgba(255,255,255,.12)', cursor: 'default' }}>
+                  <span className="lp-ioslines"><i>Android</i><s style={{ fontSize: 14 }}>Aviat</s></span>
+                </span>
+              </div>
+            </div>
+            <MobilAmbCaptura />
+          </div>
+        </div>
+      </section>
+
+      {/* 7 · Notícies */}
       {noticies.length > 0 && (
         <section className="lp-sec" id="noticies" style={{ paddingTop: 0 }}>
           <div className="lp-wrap">
