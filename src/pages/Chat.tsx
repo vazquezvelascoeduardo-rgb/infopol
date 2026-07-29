@@ -423,6 +423,38 @@ export default function Chat() {
                   </div>
                 )}
 
+                {/* Què fa i com tracta les dades. Va aquí, a la portada del
+                    xat, perquè és on algú decideix si s'hi fia o no. */}
+                <div style={{ marginTop: 34, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(250px,1fr))', gap: 14 }}>
+                  {[
+                    {
+                      ic: '📝',
+                      t: 'Redacta com un policia, no com un robot',
+                      d: "El Diligenciador fa servir intel·ligència artificial entrenada amb el llenguatge de les minutes: li dictes els fets tal com et surten i te'ls torna ordenats cronològicament, amb la terminologia jurídica que toca i l'estructura d'una compareixença. Està pensat per a agents en actiu, no per a redacció genèrica.",
+                    },
+                    {
+                      ic: '🔒',
+                      t: 'Les teves dades no es desen enlloc',
+                      d: "Les converses no s'emmagatzemen: viuen a la pantalla i desapareixen quan la tanques. Els DNI, NIE, matrícules i telèfons s'anonimitzen al teu dispositiu abans d'enviar res. Del teu compte només se'n desa quantes consultes fas al dia, per controlar el límit — mai el que hi escrius.",
+                    },
+                    {
+                      ic: '⚖️',
+                      t: 'Respon des de la norma, no d\'internet',
+                      d: 'Treballa sobre el corpus normatiu d\'InfoPol: lleis estatals i catalanes consolidades, reglaments de trànsit i les ordenances municipals. Cada resposta porta la referència a la vista, i si no ho troba amb seguretat t\'ho diu en comptes d\'inventar-s\'ho.',
+                    },
+                  ].map((b) => (
+                    <div key={b.t} style={{ border: `1px solid ${D.line}`, borderRadius: 18, padding: '18px 18px 20px', background: 'rgba(255,255,255,.03)' }}>
+                      <div style={{ fontSize: 20, lineHeight: 1, marginBottom: 11 }}>{b.ic}</div>
+                      <div style={{ fontWeight: 700, fontSize: 14, letterSpacing: -0.2, lineHeight: 1.25, marginBottom: 8 }}>{b.t}</div>
+                      <div style={{ color: '#9994A2', fontSize: 12.5, lineHeight: 1.55 }}>{b.d}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ marginTop: 16, fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.3, color: '#615D6C', lineHeight: 1.7 }}>
+                  INFOPOL NO ÉS UNA FONT OFICIAL · CONTRASTA SEMPRE AMB EL TEXT VIGENT ABANS DE SIGNAR
+                </div>
+
                 {isAdmin && (
                   <div style={{ marginTop: 22 }}>
                     <button onClick={() => setShowAdmin((v) => !v)}
@@ -720,13 +752,19 @@ export default function Chat() {
 }
 
 /* ── Escut de marca ───────────────────────────────────────────── */
+/**
+ * El mateix escut que la resta del web (l'escut amb la "i" feta de cercle
+ * + barra). Aquí el cos va en clar perquè el xat té el fons fosc; el mark
+ * és exactament el mateix, no una versió diferent.
+ */
 function Escut({ small }: { small?: boolean }) {
-  const w = small ? 28 : 34, h = small ? 32 : 39;
+  const s = small ? 30 : 36;
   return (
-    <div style={{ width: w, height: h, background: '#F2EFEA', borderRadius: small ? '9px 9px 10px 10px' : '10px 10px 12px 12px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 6px 20px rgba(255,122,26,.2)' }}>
-      <div style={{ width: small ? 14 : 17, height: small ? 14 : 17, borderRadius: '50%', background: '#FF7A1A', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: small ? 9 : 11 }}>i</div>
-      <div style={{ position: 'absolute', bottom: small ? 5 : 6, width: small ? 12 : 14, height: small ? 2.5 : 3, borderRadius: 2, background: '#FF7A1A' }} />
-    </div>
+    <svg width={s} height={s} viewBox="0 0 64 64" fill="none" aria-hidden style={{ flexShrink: 0, filter: 'drop-shadow(0 6px 18px rgba(255,122,26,.22))' }}>
+      <path d="M32 4 L56 12 V32 C56 46 45 56 32 60 C19 56 8 46 8 32 V12 Z" fill="#F2EFEA" />
+      <circle cx="32" cy="22" r="4.2" fill="#FF7A1A" />
+      <rect x="28.4" y="30" width="7.2" height="20" rx="3.6" fill="#FF7A1A" />
+    </svg>
   );
 }
 

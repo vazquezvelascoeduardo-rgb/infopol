@@ -224,7 +224,12 @@
 }
 .lp-fcol a { display: block; font-family: var(--lpDisplay); font-weight: 600; font-size: 14.5px; color: var(--lpInkSoft); padding: 5px 0; }
 .lp-fcol a:hover { color: var(--lpTerra); }
-.lp-fbot { margin-top: clamp(28px, 4vw, 44px); padding-top: 20px; border-top: 1px solid var(--lpLine); font-family: var(--lpMono); font-size: 11px; color: var(--lpInkMuted); }
+.lp-fbot {
+  margin-top: clamp(28px, 4vw, 44px); padding-top: 20px; border-top: 1px solid var(--lpLine);
+  font-family: var(--lpSans); font-size: 12.5px; line-height: 1.6; color: var(--lpInkMuted); max-width: 760px;
+}
+.lp-fbot b { color: var(--lpInkSoft); }
+.lp-fbot p:last-child { font-family: var(--lpMono); font-size: 11px; }
 
 @media (max-width: 1060px) {
   .lp-links { display: none; }

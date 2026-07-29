@@ -477,7 +477,19 @@ export default function Home() {
               <Link to="/privacitat">Privacitat</Link>
             </div>
           </div>
-          <div className="lp-fbot">InfoPol · Eina no oficial per a la policia local de Catalunya.</div>
+          <div className="lp-fbot">
+            <p>
+              Eina d'estudi i consulta per a opositors i per a policies de Catalunya en actiu.
+              Basada en normativa vigent i actualitzada: textos consolidats del BOE i del DOGC
+              i ordenances municipals.
+            </p>
+            <p style={{ marginTop: 8 }}>
+              <b>InfoPol no és una font oficial.</b> El contingut té finalitat informativa i de
+              suport a l'estudi; davant de qualsevol actuació, contrasta sempre amb el text
+              vigent publicat als butlletins oficials.
+            </p>
+            <p style={{ marginTop: 12 }}>© {new Date().getFullYear()} InfoPol · Tots els drets reservats</p>
+          </div>
         </div>
       </footer>
     </div>
