@@ -48,6 +48,65 @@ const NEWS = [
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
 
+const NEWS_TODAY = [
+  {
+    date: '07·30',
+    tag: 'Política · CAT',
+    title: 'El Parlament aprova els primers pressupostos de la Generalitat del Govern Illa',
+    desc: 'Les primeres comptes de Salvador Illa superen el tràmit parlamentari amb el suport de PSC-Units.',
+    url: 'https://www.vilaweb.cat/noticies/les-portades-del-dijous-30-de-juliol-de-2026/'
+  },
+  {
+    date: '07·30',
+    tag: 'Successos · CAT',
+    title: 'Tres homicidis en 48 hores taquen el mig estiu a Catalunya',
+    desc: 'Víctimes apunyalades a L\'Hospitalet, Barcelona i Sant Adrià de Besòs. Els Mossos investiguen els tres casos.',
+    url: 'https://cronicaglobal.elespanol.com/vida/20260730/crimenes-horas-empanan-ecuador-verano-cataluna/1003742783550_0.html'
+  },
+  {
+    date: '07·30',
+    tag: 'Política · ESP',
+    title: 'Sánchez reclama un pacte d\'Estat davant l\'emergència climàtica',
+    desc: 'Els incendis de Madrid, Àvila i Toledo (77.000 ha, 90.000 evacuats) centren el debat polític de l\'estiu.',
+    url: 'https://www.publico.es/politica/gobierno/sanchez-anuncia-incendios-avila-madrid-salen-emergencia-nacional.html'
+  },
+  {
+    date: '07·30',
+    tag: 'Internacional',
+    title: 'Trump amenaça amb tallar el comerç amb Espanya',
+    desc: 'La crisi aranzalària posa en alerta sectors clau com l\'agroalimentari i l\'automoció. Patronals demanen resposta del Govern.',
+    url: 'https://www.periodistadigital.com/periodismo/20260730/ley-nietos-ola-calor-crisis-comercial-ee-uu-agitan-debate-politico-mediatico-espana-30-julio-noticia-689405234182/'
+  },
+  {
+    date: '07·30',
+    tag: 'Economia',
+    title: 'L\'INE publica l\'IPC de juliol i el PIB del 2T 2026',
+    desc: 'Inflació al 3,2% interanual al juny. L\'economia dels EUA creix un 1,5%, per sota del que s\'esperava.',
+    url: 'https://www.infobae.com/espana/agencias/2026/07/29/temas-del-dia-de-efe-espana-del-jueves-30-de-julio-de-2026/'
+  },
+  {
+    date: '07·30',
+    tag: 'Premis · Ciència',
+    title: 'Premis Nacionals d\'Investigació 2026: 20 modalitats guardonades',
+    desc: 'Ángel Carracedo premiat en Medicina i Genòmica Forense. Almirall, distingida com a millor Gran Empresa Innovadora.',
+    url: 'https://www.infosalus.com/salud-investigacion/noticia-ciencia-concede-premios-nacionales-investigacion-2026-reconocen-excelencia-investigadores-20260730172439.html'
+  },
+  {
+    date: '07·30',
+    tag: 'Internacional · Tech',
+    title: 'Samsung registra benefici rècord de 49.000 M$ impulsat pels xips d\'IA',
+    desc: 'La demanda global de semiconductors per a intel·ligència artificial marca el millor trimestre de la companyia coreana.',
+    url: 'https://www.infobae.com/america/agencias/2026/07/30/temas-del-dia-de-efe-internacional-del-jueves-30-de-julio-de-2026-1200-gmt/'
+  },
+  {
+    date: '07·30',
+    tag: 'Economia · CAT',
+    title: 'Illa culmina a Singapur una gira asiàtica de sis jornades',
+    desc: 'El president de la Generalitat tanca una visita a Vietnam i Singapur per reforçar els llaços comercials de Catalunya a Àsia.',
+    url: 'https://www.infobae.com/espana/agencias/2026/07/29/temas-del-dia-de-efe-espana-del-jueves-30-de-julio-de-2026/'
+  },
+];
+
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
   return (
@@ -132,6 +191,30 @@ export default function ScreenOperativaHome() {
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Notícies del dia */}
+      <div style={{ padding: '14px 0 24px' }}>
+        <SectionHead kicker="Avui · 30 jul" kickerColor={T.cat.leyes.solid} title="Notícies del dia" action="Més →" />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {NEWS_TODAY.map((n, i) => (
+            <div
+              key={i}
+              onClick={() => n.url && window.open(n.url, '_blank')}
+              style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.leyes.solid}`, boxShadow: T.shadow.card, cursor: n.url ? 'pointer' : 'default' }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.leyes.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+              </div>
+              <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+              <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <div style={{ fontSize: 11, color: T.cat.leyes.solid, fontWeight: 700, marginTop: 6 }}>Llegir notícia →</div>
+              )}
             </div>
           ))}
         </div>
