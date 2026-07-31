@@ -21,6 +21,15 @@ import { requireSupabase } from './supabase';
 
 /* ── Tipus tipats segons l'esquema de Supabase ────────────────── */
 
+/**
+ * Per a què fa servir InfoPol cada usuari.
+ *
+ * NO dona ni treu accés a res — només decideix què se li ensenya
+ * primer. Qui es prepara l'oposició entra per Acadèmia; qui està en
+ * servei, per Operativa. Es canvia des de Perfil quan vulgui.
+ */
+export type PerfilUs = 'opositor' | 'actiu' | 'ambdos';
+
 export type Profile = {
   id: string;
   email: string | null;
@@ -36,6 +45,8 @@ export type Profile = {
   theme: number;
   newsletter_subscribed: boolean;
   newsletter_subscribed_at: string | null;
+  /** Per a què fa servir InfoPol. Nul = encara no ho ha dit. */
+  perfil_us: PerfilUs | null;
   created_at: string;
   updated_at: string;
 };
@@ -139,7 +150,7 @@ export async function updateProfile(
   patch: Partial<
     Pick<Profile, 'name' | 'cuerpo' | 'tip_number' | 'department'
       | 'avatar_color' | 'avatar_pet' | 'avatar_badge' | 'theme'
-      | 'newsletter_subscribed'>
+      | 'newsletter_subscribed' | 'perfil_us'>
   >,
 ): Promise<void> {
   const sb = requireSupabase();

@@ -10,8 +10,9 @@
 import { Suspense, useEffect, useMemo, useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
+import TriaPerfilUs from './TriaPerfilUs';
 import { useAuth } from '../lib/auth';
-import { getUserProgress, type UserProgress } from '../lib/db';
+import { getUserProgress, type PerfilUs, type UserProgress } from '../lib/db';
 import { applyInitialTheme, applyTheme, getInitialTheme, type Theme } from '../lib/theme';
 import { I, Mono, RV, V, type NomIc } from '../lib/v3';
 
@@ -245,11 +246,14 @@ function ContentFallback() {
 export default function AppShell() {
   const nav = useNavigate();
   const { pathname } = useLocation();
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const [calaix, setCalaix] = useState(false);
   const [q, setQ] = useState('');
   const [progres, setProgres] = useState<UserProgress | null>(null);
   const [tema, setTema] = useState<Theme>(() => getInitialTheme());
+  // Si ja ha triat en aquesta sessió no li tornem a preguntar encara que
+  // el perfil del servidor trigui a refrescar-se.
+  const [triaFeta, setTriaFeta] = useState<PerfilUs | null>(null);
 
   const activa = seccioActiva(pathname);
 
@@ -296,6 +300,13 @@ export default function AppShell() {
       onTema={canviaTema}
     />
   );
+
+  // La pregunta d'entrada: només a qui té sessió i encara no l'ha
+  // contestada. Si no hi ha backend (mode local) no es pregunta res.
+  const perfilUs = triaFeta ?? profile?.perfil_us ?? null;
+  if (user && profile && !perfilUs) {
+    return <TriaPerfilUs onFet={setTriaFeta} />;
+  }
 
   return (
     <div className="v3-shell" style={{ display: 'flex', minHeight: '100dvh', background: V.paper, color: V.ink }}>

@@ -12,7 +12,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import { useT } from '../lib/i18n';
-import { updateProfile } from '../lib/db';
+import { updateProfile, type PerfilUs } from '../lib/db';
 import MfaSection from '../components/MfaSection';
 import { applyTheme, getInitialTheme, type Theme } from '../lib/theme';
 import { I, RV, TitolV, V } from '../lib/v3';
@@ -26,11 +26,25 @@ export default function Profile() {
   const navigate = useNavigate();
   const [signingOut, setSigningOut] = useState(false);
   const [tema, setTema] = useState<Theme>(() => getInitialTheme());
+  const [desantUs, setDesantUs] = useState(false);
 
   function canviaTema() {
     const seguent: Theme = tema === 'dark' ? 'light' : 'dark';
     setTema(seguent);
     applyTheme(seguent);
+  }
+
+  async function canviaPerfilUs(id: PerfilUs) {
+    if (!user || desantUs) return;
+    setDesantUs(true);
+    try {
+      await updateProfile(user.id, { perfil_us: id });
+      await refresh();
+    } catch {
+      /* si falla, es queda com estava */
+    } finally {
+      setDesantUs(false);
+    }
   }
 
   // ── Estat del formulari d'editar perfil ──────────────────────
@@ -231,6 +245,41 @@ export default function Profile() {
             </Link>
           </div>
         )}
+      </section>
+
+      {/* Com fa servir InfoPol — ordena la interfície, no dona accés */}
+      <section className="v3-card">
+        <h2 className="eyebrow mb-4">Com fas servir InfoPol</h2>
+        <p style={{ fontSize: 13, color: V.muted, margin: '0 0 14px', lineHeight: 1.5 }}>
+          Només canvia què veus primer. Ho tens tot igualment.
+        </p>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          {([
+            { id: 'opositor', label: 'Em preparo una oposició' },
+            { id: 'actiu', label: 'Estic en actiu' },
+            { id: 'ambdos', label: 'Les dues coses' },
+          ] as { id: PerfilUs; label: string }[]).map((o) => {
+            const on = (profile?.perfil_us ?? null) === o.id;
+            return (
+              <button
+                key={o.id}
+                type="button"
+                disabled={desantUs}
+                onClick={() => void canviaPerfilUs(o.id)}
+                aria-pressed={on}
+                style={{
+                  border: `1.5px solid ${on ? V.terra : V.border}`,
+                  background: on ? V.terraSoft : V.surface,
+                  color: on ? V.terraInk : V.ink,
+                  borderRadius: RV.pill, padding: '10px 16px',
+                  fontSize: 13, fontWeight: on ? 800 : 600,
+                  cursor: desantUs ? 'wait' : 'pointer',
+                }}>
+                {o.label}
+              </button>
+            );
+          })}
+        </div>
       </section>
 
       {/* Aparença */}

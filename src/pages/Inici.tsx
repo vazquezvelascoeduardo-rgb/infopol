@@ -8,6 +8,8 @@ import { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { TOPICS } from '../data/tests';
+import { useAuth } from '../lib/auth';
+import type { PerfilUs } from '../lib/db';
 import { useFailuresCounts } from '../lib/failures';
 import { NOTICIES } from '../lib/noticies';
 import { globalAverage, useGlobalStats } from '../lib/testStats';
@@ -95,11 +97,55 @@ function Tasca({ icona, titol, sub, tint, accent, to }: {
   );
 }
 
+/**
+ * Les dreceres del costat dret, segons per a què fa servir l'app.
+ *
+ * Qui està en actiu no vol flashcards com a primera opció: vol el
+ * catàleg i les checklists. Qui s'ho prepara, al revés. Qui fa les dues
+ * coses veu una barreja. Res queda amagat — tot segueix a la barra
+ * lateral.
+ */
+function dreceresPer(perfil: PerfilUs | null, pendents: number): Parameters<typeof Tasca>[0][] {
+  const repas = {
+    icona: 'brain' as NomIc, titol: 'Repàs intel·ligent',
+    sub: pendents > 0 ? `${pendents} preguntes pendents` : 'Cap pregunta pendent',
+    tint: V.terraSoft, accent: V.terraInk, to: '/policia-local/debilitats',
+  };
+  const flash = {
+    icona: 'cards' as NomIc, titol: 'Flashcards', sub: 'Memoritza articles i xifres',
+    tint: V.blueSoft, accent: V.blue, to: '/policia-local/flashcards',
+  };
+  const reptes = {
+    icona: 'medal' as NomIc, titol: 'Reptes', sub: 'Missions i objectius',
+    tint: V.warnSoft, accent: V.warn, to: '/retos',
+  };
+  const cataleg = {
+    icona: 'car' as NomIc, titol: 'Catàleg SCT', sub: 'Infracció, quantia i punts',
+    tint: V.terraSoft, accent: V.terraInk, to: '/operativa?sec=cataleg',
+  };
+  const checklists = {
+    icona: 'tree' as NomIc, titol: 'Checklists penals', sub: 'Arbre de decisió',
+    tint: V.granateSoft, accent: V.granate, to: '/operativa/penal',
+  };
+  const croquis = {
+    icona: 'crash' as NomIc, titol: 'Croquis', sub: "Esquema d'accident",
+    tint: V.okSoft, accent: V.ok, to: '/croquis',
+  };
+
+  if (perfil === 'actiu') return [cataleg, checklists, croquis];
+  if (perfil === 'ambdos') return [repas, cataleg, checklists];
+  return [repas, flash, reptes];
+}
+
 export default function Inici() {
   const nav = useNavigate();
+  const { profile } = useAuth();
   const stats = useGlobalStats();
   const failures = useFailuresCounts();
   const { attempts, avgGrade } = globalAverage(stats);
+
+  const perfil = profile?.perfil_us ?? null;
+  const dreceres = useMemo(() => dreceresPer(perfil, failures.due), [perfil, failures.due]);
 
   const barres = useMemo(() => setmana(stats.topics), [stats.topics]);
 
@@ -269,21 +315,11 @@ export default function Inici() {
           </button>
 
           <CardV>
-            <div style={{ fontSize: 16.5, fontWeight: 800, letterSpacing: -0.45, marginBottom: 14 }}>Avui et toca</div>
+            <div style={{ fontSize: 16.5, fontWeight: 800, letterSpacing: -0.45, marginBottom: 14 }}>
+              {perfil === 'actiu' ? 'Per al servei' : 'Avui et toca'}
+            </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
-              <Tasca
-                icona="brain" titol="Repàs intel·ligent"
-                sub={failures.due > 0 ? `${failures.due} preguntes pendents` : 'Cap pregunta pendent'}
-                tint={V.terraSoft} accent={V.terraInk} to="/policia-local/debilitats"
-              />
-              <Tasca
-                icona="cards" titol="Flashcards" sub="Memoritza articles i xifres"
-                tint={V.blueSoft} accent={V.blue} to="/policia-local/flashcards"
-              />
-              <Tasca
-                icona="medal" titol="Reptes" sub="Missions i objectius"
-                tint={V.warnSoft} accent={V.warn} to="/retos"
-              />
+              {dreceres.map((d) => <Tasca key={d.titol} {...d} />)}
             </div>
           </CardV>
 
