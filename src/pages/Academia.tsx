@@ -13,7 +13,9 @@ import { useNavigate } from 'react-router-dom';
 import { TOPICS, getTopicsByCategory } from '../data/tests';
 import { useFailuresCounts } from '../lib/failures';
 import { globalAverage, useGlobalStats } from '../lib/testStats';
-import { I, Mono, RV, TitolV, V, type NomIc } from '../lib/v3';
+import { useAuth } from '../lib/auth';
+import { esBloquejat, plaDelPerfil, type ModulPro } from '../lib/pla';
+import { CadenatPro, I, Mono, RV, TitolV, V, type NomIc } from '../lib/v3';
 
 type Cos = 'pl' | 'mossos';
 
@@ -29,6 +31,8 @@ type Mode = {
   to: string;
   insignia?: string;
   destacat?: boolean;
+  /** Mòdul de pagament al qual pertany, si un dia n'hi ha (lib/pla.ts). */
+  modul?: ModulPro;
 };
 
 function modes(cos: Cos, pendents: number): Mode[] {
@@ -40,6 +44,7 @@ function modes(cos: Cos, pendents: number): Mode[] {
       icona: 'book',
       to: cos === 'mossos' ? '/mossos/temari' : '/leyes',
       destacat: true,
+      modul: 'temari-complet',
     },
     { titol: 'Test', sub: "Posa't a prova per temes", icona: 'check', to: base },
     {
@@ -49,8 +54,8 @@ function modes(cos: Cos, pendents: number): Mode[] {
       to: '/policia-local/debilitats',
       insignia: pendents > 0 ? String(pendents) : undefined,
     },
-    { titol: 'Resums i esquemes', sub: 'Les lleis en una pàgina', icona: 'layers', to: `${base}/esquemes` },
-    { titol: 'Flashcards', sub: 'Memoritza articles i xifres', icona: 'cards', to: `${base}/flashcards` },
+    { titol: 'Resums i esquemes', sub: 'Les lleis en una pàgina', icona: 'layers', to: `${base}/esquemes`, modul: 'esquemes' },
+    { titol: 'Flashcards', sub: 'Memoritza articles i xifres', icona: 'cards', to: `${base}/flashcards`, modul: 'flashcards' },
   ];
 }
 
@@ -82,7 +87,7 @@ function SelectorCos({ cos, onCanvia }: { cos: Cos; onCanvia: (c: Cos) => void }
   );
 }
 
-function TargetaMode({ m, onClick }: { m: Mode; onClick: () => void }) {
+function TargetaMode({ m, bloquejat, onClick }: { m: Mode; bloquejat: boolean; onClick: () => void }) {
   const fons = m.destacat ? V.terra : V.surface;
   const text = m.destacat ? '#fff' : V.ink;
   const sub = m.destacat ? 'rgba(255,255,255,.9)' : V.muted;
@@ -90,8 +95,10 @@ function TargetaMode({ m, onClick }: { m: Mode; onClick: () => void }) {
     <button
       type="button"
       onClick={onClick}
+      aria-disabled={bloquejat}
       style={{
-        textAlign: 'left', cursor: 'pointer', border: 'none', borderRadius: 22, padding: 20,
+        position: 'relative',
+        textAlign: 'left', cursor: bloquejat ? 'not-allowed' : 'pointer', border: 'none', borderRadius: 22, padding: 20,
         background: fons, color: text,
         boxShadow: m.destacat ? '0 14px 30px rgba(255,122,26,.3)' : V.shadow,
         display: 'flex', flexDirection: 'column', minHeight: 150,
@@ -121,6 +128,7 @@ function TargetaMode({ m, onClick }: { m: Mode; onClick: () => void }) {
       <span style={{ display: 'block', fontSize: 12.5, lineHeight: 1.45, color: sub, marginTop: 5 }}>
         {m.sub}
       </span>
+      {bloquejat && <CadenatPro />}
     </button>
   );
 }
@@ -160,6 +168,8 @@ function AccesRapid({ icona, titol, sub, valor, to }: {
 export default function Academia() {
   const nav = useNavigate();
   const [cos, setCos] = useState<Cos>('pl');
+  const { profile } = useAuth();
+  const pla = plaDelPerfil(profile);
   const stats = useGlobalStats();
   const failures = useFailuresCounts();
   const { attempts, avgGrade } = globalAverage(stats);
@@ -248,9 +258,17 @@ export default function Academia() {
 
           <div style={{ fontSize: 17, fontWeight: 800, letterSpacing: -0.5 }}>Com vols estudiar</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 14 }}>
-            {modes(cos, failures.due).map((m) => (
-              <TargetaMode key={m.titol} m={m} onClick={() => nav(m.to)} />
-            ))}
+            {modes(cos, failures.due).map((m) => {
+              const tancat = !!m.modul && esBloquejat(m.modul, pla);
+              return (
+                <TargetaMode
+                  key={m.titol}
+                  m={m}
+                  bloquejat={tancat}
+                  onClick={() => nav(tancat ? '/perfil' : m.to)}
+                />
+              );
+            })}
           </div>
         </div>
 

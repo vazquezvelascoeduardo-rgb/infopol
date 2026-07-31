@@ -515,15 +515,6 @@ function Row({ label, value }: { label: string; value: string }) {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-xl border border-line bg-paper-2 p-4 flex flex-col gap-1">
-      <span className="text-[11px] uppercase tracking-wide text-text-3">{label}</span>
-      <span className="text-2xl tracking-tight text-ink" style={{ fontFamily: A.display, fontWeight: 700, letterSpacing: '-0.02em' }}>{value}</span>
-    </div>
-  );
-}
-
 function Field({
   label,
   ...props

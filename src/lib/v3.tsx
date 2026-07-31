@@ -165,6 +165,33 @@ export function TitolV({ pre, fort, post }: { pre?: string; fort: string; post?:
   );
 }
 
+/**
+ * Vel de "només amb subscripció" per posar sobre una targeta.
+ *
+ * La targeta es continua veient — la idea és que sàpigues què t'estàs
+ * perdent — però es difumina i hi apareix el cadenat. Que un mòdul
+ * surti bloquejat ho decideix lib/pla.ts, no aquest component.
+ */
+export function CadenatPro({ titol = 'Amb subscripció' }: { titol?: string }) {
+  return (
+    <span style={{
+      position: 'absolute', inset: 0, borderRadius: 'inherit',
+      background: 'color-mix(in srgb, var(--v-surface) 62%, transparent)',
+      backdropFilter: 'blur(1.5px)', WebkitBackdropFilter: 'blur(1.5px)',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      gap: 8, textAlign: 'center', padding: 12,
+    }}>
+      <span style={{
+        width: 38, height: 38, borderRadius: 12, background: V.ink,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}>
+        <I n="lock" size={18} sw={1.9} color="var(--v-fill-fg)" />
+      </span>
+      <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: -0.2, color: V.ink }}>{titol}</span>
+    </span>
+  );
+}
+
 /** Píndola petita d'estat. */
 export function XipV({
   children, bg = V.surface2, fg = V.ink,
