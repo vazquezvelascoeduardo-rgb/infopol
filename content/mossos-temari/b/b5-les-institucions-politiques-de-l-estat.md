@@ -250,20 +250,20 @@ Comptes i el Consell d’Estat.
 
 4.1.  El Tribunal de Comptes
 
-El Tribunal de Comptes és l’òrgan encarregat de fiscalitzar els comptes i la gestió econòmica de
-l’Estat i del sector públic en general. Examina el compte general de l’Estat i, com a òrgan auxiliar
+==El **Tribunal de Comptes** és l’òrgan encarregat de **fiscalitzar els comptes i la gestió econòmica de
+l’Estat** i del sector públic en general.== Examina el compte general de l’Estat i, com a òrgan auxiliar
 del Parlament, remet un informe anual a les Corts Generals. Així mateix, fa una funció jurisdiccional
 consistent a determinar la responsabilitat comptable en què incorren aquells que tenen al seu càrrec
 la utilització de fons i cabals públics.
 
 4.2.  El Consell d’Estat
 
-És l’òrgan consultiu suprem del Govern (article 107 de la CE). Gaudeix d’autonomia orgànica i
+==El **Consell d’Estat** és l’**òrgan consultiu suprem del Govern** (**article 107 de la CE**).== Gaudeix d’autonomia orgànica i
 funcional i emet dictàmens sobre qualsevol assumpte que li sol·licitin el Govern, els seus membres
 o els presidents de les comunitats autònomes. La seva actuació és preceptiva sobre els projectes
 de decrets legislatius i els avantprojectes de llei que hagin de dictar-se en execució de tractats
-internacionals així com altres supòsits recollits a la llei (Llei orgànica 3/1980, de 22 d’abril, del
-Consell d’Estat). En l’exercici de la seva funció consultiva, el Consell d’Estat vetlla pel respecte
+internacionals així com altres supòsits recollits a la llei (==**Llei orgànica 3/1980, de 22 d’abril**, del
+Consell d’Estat==). En l’exercici de la seva funció consultiva, el Consell d’Estat vetlla pel respecte
 degut a la CE i la resta de l’ordenament jurídic.
 
 ## Idees força

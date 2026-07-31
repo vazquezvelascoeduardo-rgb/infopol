@@ -12,8 +12,18 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { temaPerNum } from '../content/temari-pl';
 import { contingutDe } from '../content/temari-pl/carrega';
+import { temaMossosPerNum } from '../content/temari-mossos';
+import { contingutDeMossos } from '../content/temari-mossos/carrega';
 import type { BlocContingut } from '../lib/temari-format';
 import { I, Mono, RV, V } from '../lib/v3';
+
+/** Els dos temaris comparteixen lector: només canvia d'on surt el tema. */
+export type CosTemari = 'pl' | 'mossos';
+
+const RUTES: Record<CosTemari, { index: string; test: string; tornar: string }> = {
+  pl: { index: '/estudi', test: '/policia-local', tornar: 'Estudia per tema' },
+  mossos: { index: '/mossos/temari', test: '/mossos', tornar: 'Temari Mossos' },
+};
 
 const CLAU_LLEGITS = 'ip.temari.llegits.v1';
 
@@ -105,38 +115,50 @@ function Bloc({ b }: { b: BlocContingut }) {
   );
 }
 
-export default function EstudiTema() {
+export default function EstudiTema({ cos = 'pl' }: { cos?: CosTemari }) {
   const { num = '' } = useParams();
   const nav = useNavigate();
   const [i, setI] = useState(0);
   const [fets, setFets] = useState<number[]>([]);
 
-  const tema = temaPerNum(Number(num));
-  const contingut = tema ? contingutDe(tema) : null;
+  const rutes = RUTES[cos];
+  // Els dos temaris numeren des de l'1: si compartissin clau, el tema 3
+  // de Mossos marcaria com a llegit el 3 de Policia Local.
+  const clau = cos === 'pl' ? num : `m${num}`;
 
-  useEffect(() => { setFets(llegits()[num] ?? []); }, [num]);
-  useEffect(() => { setI(0); }, [num]);
+  const temaPl = cos === 'pl' ? temaPerNum(Number(num)) : undefined;
+  const temaMossos = cos === 'mossos' ? temaMossosPerNum(Number(num)) : undefined;
+  const tema = temaPl ?? temaMossos;
+  const contingut = temaPl
+    ? contingutDe(temaPl)
+    : temaMossos
+      ? contingutDeMossos(temaMossos)
+      : null;
+
+  useEffect(() => { setFets(llegits()[clau] ?? []); }, [clau]);
+  useEffect(() => { setI(0); }, [clau]);
 
   // Llegir un apartat el marca. No cal fer res més.
   useEffect(() => {
     if (!contingut?.apartats.length) return;
-    marcaLlegit(num, i);
+    marcaLlegit(clau, i);
     setFets((p) => (p.includes(i) ? p : [...p, i]));
-  }, [num, i, contingut]);
+  }, [clau, i, contingut]);
 
   const apartat = contingut?.apartats[i];
   const total = contingut?.apartats.length ?? 0;
 
-  const kicker = useMemo(
-    () => (tema ? `TEMA ${tema.num} · ${tema.titol.split(/[,—]/)[0].toUpperCase()}` : ''),
-    [tema],
-  );
+  const kicker = useMemo(() => {
+    if (!tema) return '';
+    const etiqueta = temaMossos ? `TEMA ${temaMossos.codi}` : `TEMA ${tema.num}`;
+    return `${etiqueta} · ${tema.titol.split(/[,—]/)[0].toUpperCase()}`;
+  }, [tema, temaMossos]);
 
   if (!tema) {
     return (
       <div className="v3-page v3-anim">
         <h1 style={{ fontSize: 26, fontWeight: 800 }}>Tema no trobat</h1>
-        <Link to="/estudi" style={{ fontSize: 14, fontWeight: 700 }}>Torna al temari</Link>
+        <Link to={rutes.index} style={{ fontSize: 14, fontWeight: 700 }}>Torna al temari</Link>
       </div>
     );
   }
@@ -146,13 +168,13 @@ export default function EstudiTema() {
       <div className="v3-page v3-anim">
         <button
           type="button"
-          onClick={() => nav('/estudi')}
+          onClick={() => nav(rutes.index)}
           style={{
             border: 'none', background: 'transparent', color: V.muted, cursor: 'pointer',
             display: 'flex', alignItems: 'center', gap: 7, padding: 0, marginBottom: 14,
             fontSize: 13, fontWeight: 600,
           }}>
-          <I n="back" size={15} sw={2.2} /> Estudia per tema
+          <I n="back" size={15} sw={2.2} /> {rutes.tornar}
         </button>
         <h1 style={{ fontSize: 26, fontWeight: 800, letterSpacing: -1, margin: '0 0 10px' }}>{tema.titol}</h1>
         <p style={{ fontSize: 14, color: V.muted, maxWidth: 560, lineHeight: 1.55 }}>
@@ -172,7 +194,7 @@ export default function EstudiTema() {
       }}>
         <button
           type="button"
-          onClick={() => nav('/estudi')}
+          onClick={() => nav(rutes.index)}
           style={{
             border: 'none', background: 'transparent', color: V.muted, cursor: 'pointer',
             display: 'flex', alignItems: 'center', gap: 7, padding: 0, marginBottom: 16,
@@ -255,7 +277,7 @@ export default function EstudiTema() {
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <button
               type="button"
-              onClick={() => nav('/policia-local')}
+              onClick={() => nav(rutes.test)}
               style={{
                 flex: 1, minWidth: 200, cursor: 'pointer', border: 'none', borderRadius: RV.md,
                 padding: 16, background: V.fill, color: V.fillFg, fontSize: 14.5, fontWeight: 800,

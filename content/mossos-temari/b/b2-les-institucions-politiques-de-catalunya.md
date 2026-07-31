@@ -96,11 +96,11 @@ que la llei electoral de Catalunya ha d’establir criteris de paritat entre hom
 l’elaboració de les llistes electorals.
 
 Per assegurar la independència i la llibertat del Parlament davant la resta de poders públics, els
-diputats no estan sotmesos a mandat imperatiu i gaudeixen de tres prerrogatives (garanties per al
-bon exercici de la seva funció): la inviolabilitat, la immunitat i el fur.
+==diputats **no estan sotmesos a mandat imperatiu** i gaudeixen de **tres prerrogatives**== (garanties per al
+bon exercici de la seva funció): ==**la inviolabilitat, la immunitat i el fur**==.
 
-La inviolabilitat té com a objectiu garantir la lliure formació de la voluntat del Parlament ja que
-permet que el diputat o la diputada pugui expressar-se en la seva funció amb absoluta llibertat i
+==La **inviolabilitat** té com a objectiu garantir la lliure formació de la voluntat del Parlament ja que
+permet que el diputat o la diputada pugui **expressar-se en la seva funció amb absoluta llibertat**== i
 impedeix que s’iniciï cap procediment jurisdiccional, penal o de qualsevol altra mena, que pugui
 comportar l’exigència de responsabilitat contra ell a causa de les seves opinions, manifestacions o
 vots expressats en l’exercici de la seva funció parlamentària (entenent per aquestes només les que
@@ -361,7 +361,7 @@ absoluta del Parlament i una votació final del conjunt).
 
 5.1.  El Consell de Garanties Estatutàries
 
-Institució regulada en els articles 76 i 77 de l’EAC, és un organisme consultiu que dictamina, sense
+==Institució regulada en els **articles 76 i 77 de l’EAC**, és un **organisme consultiu** que dictamina==, sense
 perjudici del control del Tribunal Constitucional, sobre l’adequació a l’EAC i a la Constitució de les
 disposicions de la Generalitat en els casos següents:
 
@@ -399,12 +399,12 @@ o indirecta i la d’altres persones amb un vincle contractual amb l’Administr
 amb les entitats públiques que en depenen. També supervisa l’activitat de l’Administració local de
 Catalunya i la dels organismes públics o privats vinculats o que en depenen.
 
-L’article 79 de l’EAC estableix que el Síndic o Síndica de Greuges és elegit pel Parlament. per
-majoria de tres cinquenes parts dels seus membres. En el cas que, en el ple d’elecció que s’ha de
+==L’**article 79 de l’EAC** estableix que el **Síndic o Síndica de Greuges és elegit pel Parlament** per
+majoria de **tres cinquenes parts** dels seus membres.== En el cas que, en el ple d’elecció que s’ha de
 convocar amb aquesta única finalitat, el candidat o candidata proposat no obtingui en la primera
 votació la majoria necessària, s’obre un termini d’un mes per a presentar noves candidatures i es
-reinicia el procediment d’elecció. El mandat del síndic o síndica de greuges és de sis anys des de
-la data en què és elegit pel Parlament, i no pot ser reelegit. El síndic o síndica de greuges pot ser
+reinicia el procediment d’elecció. ==El mandat del síndic o síndica de greuges és de **sis anys** des de
+la data en què és elegit pel Parlament, i **no pot ser reelegit**.== El síndic o síndica de greuges pot ser
 separat del càrrec anticipadament per majoria de tres cinquenes parts del Parlament, en cas de
 negligència notòria en el compliment de les obligacions del càrrec
 

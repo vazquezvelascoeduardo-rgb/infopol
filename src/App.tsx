@@ -68,7 +68,9 @@ const Actualitat = lazy(() => import('./pages/Actualitat'));
 const CulturaTemari = lazy(() => import('./pages/CulturaTemari'));
 const Login = lazy(() => import('./pages/Login'));
 const Profile = lazy(() => import('./pages/Profile'));
-const MossosTemari = lazy(() => import('./pages/mossos/MossosTemari'));
+// El temari de Mossos ja es llegeix amb el mateix lector que el de
+// Policia Local (EstudiTema). Aquestes dues pàgines només queden per als
+// enllaços vells, que hi arribin i no es trobin un 404.
 const MossosTemariAmbit = lazy(() => import('./pages/mossos/MossosTemariAmbit'));
 const MossosTemariTema = lazy(() => import('./pages/mossos/MossosTemariTema'));
 const MossosEsquemes = lazy(() => import('./pages/mossos/MossosEsquemes'));
@@ -176,7 +178,8 @@ export default function App() {
               <Route path="/mossos/cat/:clau" element={<CategoriaTemes cos="mossos" />} />
               <Route path="/mossos/flashcards" element={<Flashcards />} />
               <Route path="/mossos/flashcards/:slug" element={<Navigate to="/mossos/flashcards" replace />} />
-              <Route path="/mossos/temari" element={<MossosTemari />} />
+              <Route path="/mossos/temari" element={<Navigate to="/estudi" replace />} />
+              <Route path="/mossos/estudi/:num" element={<EstudiTema cos="mossos" />} />
               <Route path="/mossos/temari/:ambit" element={<MossosTemariAmbit />} />
               <Route path="/mossos/temari/:ambit/:slug" element={<MossosTemariTema />} />
               <Route path="/mossos/esquemes" element={<MossosEsquemes />} />

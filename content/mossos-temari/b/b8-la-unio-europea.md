@@ -42,7 +42,7 @@ El Tractat introdueix modificacions en els tractats constitutius, que passaran a
 Amb la signatura del Tractat de la Unió Europea a Maastricht, el 7 de febrer de 1992, es culmina tot
 un procés d’integració política i econòmica que es va iniciar el 1951 amb la signatura del Tractat
 de la Comunitat Europea del Carbó i l’Acer (CECA), al qual van seguir els tractats de la Comunitat
-Econòmica Europea (CEE) i de l’Energia Atòmica (EURATOM), signats a Roma el 25 de març de 1957
+==Econòmica Europea (**CEE**) i de l’Energia Atòmica (**EURATOM**), signats a **Roma el 25 de març de 1957**==
 per Bèlgica, els Països Baixos, Luxemburg, França, Itàlia i la República Federal d’Alemanya.
 
 Espanya s’incorpora a la Unió Europea mitjançant la signatura del Tractat d’adhesió, autoritzat per la
@@ -77,7 +77,7 @@ signada a Luxemburg el 17 de febrer de 1986, mitjançant la qual es creà un mer
 els béns, els serveis i els capitals. Aquest objectiu ja figurava entre les finalitats bàsiques de les
 comunitats europees des de la seva creació.
 
-El Tractat de la Unió Europea (TUE), signat a Maastricht el 7 de febrer de 1992, mereix un comentari
+==El **Tractat de la Unió Europea (TUE)**, signat a **Maastricht el 7 de febrer de 1992**==, mereix un comentari
 més detallat, en la mesura que estableix un nou sistema de cooperació política i econòmica i recull
 els mecanismes per a la integració econòmica i monetària per fer compatibles dues orientacions
 polítiques contraposades sobre el model que havia d’adoptar la Comunitat: la d’aquells estats
@@ -101,7 +101,7 @@ especialment en l’àmbit institucional, però no va ser capaç de resoldre les
 problemàtiques que comporta la futura ampliació de la Unió Europea, com ara la composició de la
 Comissió o la ponderació del vot entre els estats en el Consell.
 
-Finalment, el Tractat de Niça, de 2001, torna a modificar els tractats fundacionals i de la Unió per
+Finalment, el ==**Tractat de Niça, de 2001**==, torna a modificar els tractats fundacionals i de la Unió per
 poder adaptar les institucions comunitàries en la perspectiva de l’ampliació de la Unió Europea als
 països de l’est d’Europa.
 

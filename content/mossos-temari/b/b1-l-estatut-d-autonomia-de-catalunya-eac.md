@@ -36,12 +36,12 @@ del Parlament de Catalunya, en què es va formalitzar l’acord sobre el text (D
 de 2006), en bona part tributari de les negociacions multilaterals i bilaterals extraparlamentàries
 entre les forces polítiques catalanes que avalaven la reforma i membres del Govern espanyol i del
 partit governamental; aprovació pel Ple del Congrés (30 de març de 2006), i tramitació del text pel
-Senat, que l’aprovà el 10 de maig de 2006, sense introduir-hi modificacions. El procés va finalitzar
-amb el referèndum del dia 18 de juny de 2006, en què s’obtingué un resultat positiu. Després de
+Senat, que ==**l’aprovà el 10 de maig de 2006**==, sense introduir-hi modificacions. El procés va finalitzar
+amb el ==**referèndum del dia 18 de juny de 2006**==, en què s’obtingué un resultat positiu. Després de
 la seva promulgació i publicació oficial, la reforma de l’Estatut d’autonomia de Catalunya (EAC),
 aprovada per la Llei orgànica 6/2006, de 19 de juliol, va entrar en vigor el dia 9 d’agost de 2006.
 
-El Tribunal Constitucional, en la Sentència 31/2010, de 28 de juny, va declarar inconstitucionals alguns
+==El Tribunal Constitucional, en la **Sentència 31/2010, de 28 de juny**, va declarar inconstitucionals alguns==
 articles de l’EAC, entre els quals destaquen els referits a la llengua catalana, el Consell de Garanties
 Estatutàries, el Síndic de Greuges, el Consell de Justícia de Catalunya, les competències sobre
 l’Administració de justícia, la participació en els tributs estatals i les finances dels governs locals.
@@ -108,8 +108,7 @@ constitucionalitat de totes les normes estatals i autonòmiques.
 
 2.1. Contingut
 
-La naturalesa jurídica de l’Estatut condiciona el contingut d’aquesta norma. L’article 147.2 CE
-estableix un contingut mínim o obligatori de tots els estatuts. Aquest precepte estableix una reserva
+La naturalesa jurídica de l’Estatut condiciona el contingut d’aquesta norma. ==L’**article 147.2 CE** estableix un **contingut mínim o obligatori** de tots els estatuts.== Aquest precepte estableix una reserva
 estatutària, de manera que les matèries que esmenta han de ser necessàriament regulades pels
 estatuts, concretament:
 
@@ -250,11 +249,11 @@ Títol cinquè: “De les relacions institucionals de la Generalitat” (article
 
 Títol sisè: “Del finançament de la Generalitat” (articles del 201 al 221)
 
-Títol setè: “De la reforma de l’Estatut” (articles 222 i 223)
+Títol setè: ==“De la reforma de l’Estatut” (**articles 222 i 223**)==
 
-## 3. Disposicions: quinze disposicions addicionals, dues disposicions transitòries, una
+## 3. Disposicions: ==**quinze disposicions addicionals, dues disposicions transitòries, una**==
 
-disposició derogatòria i quatre disposicions finals.
+==**disposició derogatòria i quatre disposicions finals**.==
 
 ## 3. Els drets, els deures i els principis rectors
 
@@ -453,7 +452,7 @@ de Catalunya.
 
 ## 2. La Generalitat és el sistema institucional en què s’organitza l’autogovern de Catalunya. Els
 
-poders de la Generalitat emanen del poble de Catalunya i s’exerceixen d’acord amb el que
+==poders de la Generalitat **emanen del poble de Catalunya**== i s’exerceixen d’acord amb el que
 estableixen l’EAC i la Constitució.
 
 ## 3. El català és la llengua d’ús normal i preferent de les administracions públiques.

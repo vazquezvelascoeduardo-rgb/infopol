@@ -206,11 +206,11 @@ un alcalde elegit directament pels regidors. L’alcalde pot ser elegit directam
 d’acord amb les condicions que estableix la LOREG (articles 196 i següents), que atendrà
 criteris de població.
 
-b)  Els municipis tenen potestat d’autoorganització, tot i que com a mínim han de comptar
-amb un alcalde, regidors, tinents d’alcalde, el ple i la comissió especial de comptes. A
+b)  ==Els municipis tenen potestat d’autoorganització, tot i que **com a mínim han de comptar
+amb un alcalde, regidors, tinents d’alcalde, el ple i la comissió especial de comptes**.== A
 
-més, els municipis de més de cinc mil habitants han de tenir necessàriament una comissió
-de govern.
+més, ==els municipis de **més de cinc mil habitants** han de tenir necessàriament una **comissió
+de govern**==.
 
 c)  La legislació de l’Estat, a través de la Llei 7/1985, de bases de règim local (LBRL), ha
 reservat una esfera pròpia de competències als ens locals i ha encomanat als municipis un
@@ -227,8 +227,8 @@ de la participació en els ingressos de l’Estat i de la comunitat autònoma de
 
 ## 5. Les províncies
 
-L’article 141 estableix que la província és una entitat local amb personalitat jurídica pròpia,
-determinada per l’agrupació de municipis limítrofes, que constitueix una divisió territorial per al
+==L’**article 141** estableix que la **província** és una **entitat local amb personalitat jurídica pròpia,
+determinada per l’agrupació de municipis limítrofes**==, que constitueix una divisió territorial per al
 compliment de les activitats de l’Estat.
 
 El govern i l’administració de la província s’encomanen a les diputacions o altres corporacions
@@ -245,8 +245,8 @@ representants de cadascuna de les cambres de les Corts Generals (Congrés i Sena
 
 ## 6. Les comarques
 
-La CE no crea la institució comarcal, però a l’article 141.3 preveu la possibilitat que es creïn
-agrupacions de municipis diferents de la província. A més, habilita els estatuts d’autonomia per establir
+==La CE **no crea la institució comarcal**, però a l’**article 141.3** preveu la possibilitat que es creïn
+agrupacions de municipis diferents de la província.== A més, habilita els estatuts d’autonomia per establir
 circumscripcions territorials pròpies a través de l’agrupació de municipis limítrofes que gaudiran de
 personalitat jurídica. A Catalunya, la regulació general del seu règim jurídic es troba en el Decret legislatiu
 2/2003, de 28 d’abril, pel qual s’aprova el text refós de la Llei municipal i de règim local de Catalunya.

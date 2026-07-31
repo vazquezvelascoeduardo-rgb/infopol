@@ -123,19 +123,19 @@ L’Estat es divideix, a l’efecte de l’organització del poder judicial, en 
 províncies, comunitats autònomes i tot l’Estat. D’acord amb aquest criteri, es pot fer la següent
 divisió dels òrgans judicials:
 
-a)  Tribunal Suprem (seu a Madrid i jurisdicció a tot l’Estat).
-b)  Audiència Nacional (seu a Madrid i jurisdicció a tot l’Estat).
-c)  Tribunals superiors de justícia (un a cada comunitat autònoma).
-d)  Audiències provincials (una a cada província).
-e)  Jutjats penals, socials, contenciosos administratius, de vigilància penitenciària i de menors
-(un o més a cada província).
+a)  ==**Tribunal Suprem** (seu a Madrid i **jurisdicció a tot l’Estat**).==
+b)  ==**Audiència Nacional** (seu a Madrid i jurisdicció a tot l’Estat).==
+c)  ==**Tribunals superiors de justícia** (un a cada comunitat autònoma).==
+d)  ==**Audiències provincials** (una a cada província).==
+e)  ==**Jutjats penals, socials, contenciosos administratius, de vigilància penitenciària i de menors**
+(**un o més a cada província**).==
 f)  Jutjats de primera instància i instrucció (un o més a cada partit judicial).
 g)  Jutjats de pau (en els municipis en què no hi hagi jutjats de primera instància i instrucció).
 
 1.4.  El Tribunal Superior de Justícia de Catalunya
 
-L’article 152 de la CE estableix que un tribunal superior de justícia culmina l’organització judicial
-dins l’àmbit territorial de la comunitat autònoma i que, sens perjudici del que disposa l’article
+==L’**article 152 de la CE** estableix que un **tribunal superior de justícia culmina l’organització judicial
+dins l’àmbit territorial de la comunitat autònoma**== i que, sens perjudici del que disposa l’article
 123 en relació amb el Tribunal Suprem, les successives instàncies processals s’exhaureixen
 davant d’òrgans judicials radicats en el mateix territori de la comunitat autònoma. El Tribunal
 Superior de Justícia de Catalunya és l’última instància jurisdiccional de tots els processos
