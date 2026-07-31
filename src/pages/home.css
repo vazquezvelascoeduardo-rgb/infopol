@@ -3,24 +3,24 @@
    té la seva propia barra de navegació i el seu peu. */
 
 .lp {
-  --lpBg: #f4f1ea;
-  --lpBgSoft: #fbf9f4;
+  --lpBg: #f4f1ec;
+  --lpBgSoft: #fdfbf7;
   --lpCream: #f7f3ea;
   --lpCard: #fff;
   --lpInk: #15151c;
-  --lpInkSoft: #44444f;
-  --lpInkMuted: #82828d;
+  --lpInkSoft: #4a463f;
+  --lpInkMuted: #6e6a63;
   --lpLine: rgba(21, 21, 28, 0.08);
   --lpLine2: rgba(21, 21, 28, 0.14);
   --lpTerra: #ff7a1a;
-  --lpTerraSoft: #ffe7d2;
-  --lpTerraInk: #7a2e04;
-  --lpNavy: #222c4a;
-  --lpNavySoft: #e3e7f2;
-  --lpGreenSoft: #d2f0e2;
+  --lpTerraSoft: #ffeddd;
+  --lpTerraInk: #c4530a;
+  --lpNavy: #0b4f8a;
+  --lpNavySoft: #e2edf7;
+  --lpGreenSoft: #e1f0e8;
   --lpNight: #15161e;
-  --lpDisplay: 'Poppins', 'Manrope', system-ui, sans-serif;
-  --lpSans: 'Manrope', system-ui, sans-serif;
+  --lpDisplay: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --lpSans: 'Plus Jakarta Sans', system-ui, sans-serif;
   --lpMono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
 
   background: var(--lpBg);
@@ -31,7 +31,7 @@
 }
 
 .lp * { box-sizing: border-box; }
-.lp a { color: var(--lpTerra); text-decoration: none; }
+.lp a { color: var(--lpTerraInk); text-decoration: none; }
 .lp a:hover { color: var(--lpTerraInk); }
 .lp h1, .lp h2, .lp h3 { margin: 0; font-family: var(--lpDisplay); letter-spacing: -0.03em; line-height: 1.05; }
 .lp p { margin: 0; }
@@ -113,7 +113,7 @@
 }
 .lp-heroin { position: relative; max-width: 720px; }
 .lp-hero h1 { font-size: clamp(38px, 5.6vw, 66px); font-weight: 700; letter-spacing: -0.045em; margin: 16px 0 0; }
-.lp-hero h1 .t { color: var(--lpTerra); }
+.lp-hero h1 .t { color: var(--lpTerraInk); }
 .lp-lede { margin-top: 20px; font-size: clamp(16px, 1.7vw, 18.5px); line-height: 1.6; color: var(--lpInkSoft); max-width: 620px; }
 .lp-herobtns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 .lp-note { margin-top: 14px; font-size: 13px; color: var(--lpInkMuted); }

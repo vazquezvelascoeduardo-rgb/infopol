@@ -77,7 +77,7 @@ export const INFO_MODUL: Record<ModulPro, { titol: string; per_que: string }> = 
  * el camp arriba com a `undefined` i tothom és 'gratuit' — que és
  * exactament el que volem fins que s'activi el cobrament.
  */
-export function plaDelPerfil(perfil: { pla?: string | null } | null | undefined): Pla {
+export function plaDelPerfil(perfil: Record<string, unknown> | null | undefined): Pla {
   return perfil?.pla === 'pro' ? 'pro' : 'gratuit';
 }
 

@@ -16,9 +16,11 @@ import { useNoticiesAll } from '../lib/noticiesRemote';
 import './home.css';
 
 const C = {
-  terra: '#FF7A1A', terraSoft: '#FFE7D2', terraDark: '#E8590C', terraTint: '#FFEEDC',
-  navy: '#222C4A', navySoft: '#E3E7F2', ink: '#15151C', inkSoft: '#44444F',
-  green: '#1FB286',
+  // terraDark és el taronja per a TEXT sobre paper clar: el taronja pur
+  // no s'hi llegeix (contrast 2,3).
+  terra: '#FF7A1A', terraSoft: '#FFEDDD', terraDark: '#C4530A', terraTint: '#FFEDDD',
+  navy: '#0B4F8A', navySoft: '#E2EDF7', ink: '#15151C', inkSoft: '#4A463F',
+  green: '#186B47',
 };
 
 function Ic({ n, s = 22, c = 'currentColor', w = 2 }: { n: string; s?: number; c?: string; w?: number }) {
@@ -215,7 +217,7 @@ export default function Home() {
         <div className="lp-wrap">
           <div className="lp-heroin">
             <NewsletterBanner />
-            <div className="lp-mono" style={{ color: C.terra, marginTop: 18 }}>Policia Local de Catalunya</div>
+            <div className="lp-mono" style={{ color: C.terraDark, marginTop: 18 }}>Policia Local de Catalunya</div>
             <h1>
               Tot el que necessites al carrer
               <br />
@@ -267,7 +269,7 @@ export default function Home() {
       <section className="lp-sec" id="apartats">
         <div className="lp-wrap">
           <div className="lp-sechead">
-            <div className="lp-mono" style={{ color: C.terra }}>Què inclou</div>
+            <div className="lp-mono" style={{ color: C.terraDark }}>Què inclou</div>
             <h2>Quatre eines, un sol lloc.</h2>
           </div>
 
@@ -276,7 +278,7 @@ export default function Home() {
             <article className="lp-c" style={{ background: '#FDFBF7' }}>
               <div className="lp-ctop">
                 <div className="lp-ico" style={{ background: C.terraSoft }}><Ic n="book" s={27} c={C.terra} /></div>
-                <div className="lp-mono" style={{ color: C.terra }}>Per a opositors</div>
+                <div className="lp-mono" style={{ color: C.terraDark }}>Per a opositors</div>
               </div>
               <h3>Acadèmia</h3>
               <p className="lp-ph">
@@ -448,7 +450,7 @@ export default function Home() {
       <section className="lp-sec" style={{ paddingTop: 0 }}>
         <div className="lp-wrap">
           <div className="lp-trust">
-            <div className="lp-mono" style={{ color: C.terra }}>Qui hi ha darrere</div>
+            <div className="lp-mono" style={{ color: C.terraDark }}>Qui hi ha darrere</div>
             <h2 style={{ marginTop: 10 }}>Fet per algú que hi treballa</h2>
             <p>
               InfoPol el manté un agent de policia local en actiu. El contingut surt dels textos
@@ -479,7 +481,7 @@ export default function Home() {
             <div className="lp-aglow" />
             <div className="lp-alines" />
             <div className="lp-appb-txt">
-              <div className="lp-mono" style={{ color: C.terra }}>Ja disponible</div>
+              <div className="lp-mono" style={{ color: C.terraDark }}>Ja disponible</div>
               <h2>Porta l&apos;InfoPol a la butxaca.</h2>
               <p>
                 L&apos;app per a iPhone ja és a l&apos;App Store. Mateix contingut, pensat per
