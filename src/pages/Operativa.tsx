@@ -9,6 +9,7 @@ import { MODULES } from '../lib/content';
 import { useNoticiesAll } from '../lib/noticiesRemote';
 import { searchCataleg, getLawColor, type CatalegRow } from '../lib/cataleg-parser';
 import HtmlInline from '../components/HtmlInline';
+import { I, Mono as MonoV, RV, TitolV, V, type NomIc } from '../lib/v3';
 // El catàleg SCT 2026 (nomenclàtor) es mostra incrustat dins de la secció
 // "Catàleg SCT", sense redirigir a la fitxa de la llei.
 import catalegRaw from '../../content/transit/cataleg-d-infraccions-de-transit-sct-2026.ca.html?raw';
@@ -149,83 +150,141 @@ const RowLabel = ({ icon, children }: { icon: string; children: ReactNode }) => 
   <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '4px 0 14px' }}><Ic name={icon} size={15} color={A.inkMuted} sw={2.2} /><Mono color={A.inkSoft}>{children}</Mono></div>
 );
 
-/* ── INICI ── */
+/* ── INICI (disseny v3 · "Web Operativa") ── */
+// Dues portes grans a dalt (el que més s'obre en servei) i sota, la
+// graella d'eines. Sense gradients ni etiquetes de "més usat": al carrer
+// el que cal és trobar-ho de seguida, no que et venguin res.
+function TargetaGran({ fons, fg, tint, tintFg, icona, titol, sub, onClick }: {
+  fons: string; fg: string; tint: string; tintFg: string;
+  icona: NomIc; titol: string; sub: string; onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      style={{
+        textAlign: 'left', cursor: 'pointer', border: 'none', borderRadius: RV.xl, padding: 24,
+        background: fons, color: fg,
+        boxShadow: fons === V.surface ? V.shadow : '0 14px 30px rgba(153,27,27,.3)',
+        display: 'flex', alignItems: 'center', gap: 18,
+      }}>
+      <span style={{
+        width: 50, height: 50, flexShrink: 0, borderRadius: RV.md, background: tint, color: tintFg,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}>
+        <I n={icona} size={23} sw={1.9} />
+      </span>
+      <span style={{ flex: 1, minWidth: 0 }}>
+        <span style={{ display: 'block', fontSize: 20, fontWeight: 800, letterSpacing: -0.65 }}>{titol}</span>
+        <span style={{
+          display: 'block', fontSize: 13, marginTop: 5,
+          color: fons === V.surface ? V.muted : undefined,
+          opacity: fons === V.surface ? 1 : 0.85,
+        }}>{sub}</span>
+      </span>
+    </button>
+  );
+}
+
+function EinaOperativa({ icona, titol, sub, tint, accent, onClick }: {
+  icona: NomIc; titol: string; sub: string; tint: string; accent: string; onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      style={{
+        textAlign: 'left', cursor: 'pointer', border: 'none', borderRadius: RV.lg, padding: 18,
+        background: V.surface, color: V.ink, boxShadow: V.shadow,
+        display: 'flex', flexDirection: 'column', minHeight: 132,
+      }}>
+      <span style={{
+        width: 40, height: 40, borderRadius: 13, background: tint, color: accent,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}>
+        <I n={icona} size={19} sw={1.9} />
+      </span>
+      <span style={{ display: 'block', fontSize: 15, fontWeight: 800, letterSpacing: -0.4, marginTop: 'auto', paddingTop: 14 }}>
+        {titol}
+      </span>
+      <span style={{ display: 'block', fontSize: 12, color: V.muted, marginTop: 4 }}>{sub}</span>
+    </button>
+  );
+}
+
 function OpInici({ ctx }: { ctx: OCtx }) {
   const news = useNoticiesAll().slice(0, 3);
-  const bigs = [
-    { grad: `linear-gradient(150deg, ${A.purple}, #7C3AED)`, accent: A.purple, kicker: 'Superbuscador · SCT', title: 'Troba qualsevol infracció en 2 segons', desc: 'Busca per concepte, article, multa o punts en LSV, RGC, RGCond, RGV i CP.', chips: ['LSV', 'RGC', 'RGCond', 'CP'], cta: 'Obrir buscador', onClick: () => ctx.nav('/superbuscador') },
-    { grad: `linear-gradient(150deg, ${A.terracota}, #E8590C)`, accent: A.terracota, badge: 'Més usat', kicker: 'Trànsit', title: 'Catàleg SCT 2026', desc: 'Nomenclàtor complet per infracció amb quantia, punts i DTE.', chips: ['SCT 2026', 'Punts', 'Quanties', 'L1/L2/L3'], cta: 'Obrir catàleg', onClick: () => ctx.go('cataleg') },
+
+  const eines: { icona: NomIc; titol: string; sub: string; tint: string; accent: string; onClick: () => void }[] = [
+    { icona: 'car', titol: 'Catàleg SCT', sub: 'Nomenclàtor 2026', tint: V.terraSoft, accent: V.terraInk, onClick: () => ctx.go('cataleg') },
+    { icona: 'search', titol: 'Superbuscador', sub: 'Infracció, article o multa', tint: V.blueSoft, accent: V.blue, onClick: () => ctx.nav('/superbuscador') },
+    { icona: 'scales', titol: 'Lleis', sub: 'Biblioteca de normativa', tint: V.warnSoft, accent: V.warn, onClick: () => ctx.nav('/leyes') },
+    { icona: 'doc', titol: 'SC i Penal', sub: 'Identificació i escorcoll', tint: V.granateSoft, accent: V.granate, onClick: () => ctx.nav('/operativa/penal') },
+    { icona: 'lock', titol: 'Detencions', sub: 'Terminis i drets', tint: V.blueSoft, accent: V.blue, onClick: () => ctx.nav('/operativa/penal/drets-detingut') },
+    { icona: 'siren', titol: 'Trànsit', sub: 'Accidents i retirades', tint: V.terraSoft, accent: V.terraInk, onClick: () => ctx.nav('/operativa/trafico') },
+    { icona: 'crash', titol: 'Croquis', sub: "Esquema d'accident", tint: V.okSoft, accent: V.ok, onClick: () => ctx.nav('/croquis') },
+    { icona: 'bell', titol: 'Recursos', sub: 'Eines i telèfons', tint: V.okSoft, accent: V.ok, onClick: () => ctx.nav('/recursos') },
   ];
-  const smalls = [
-    { tone: 'pink', kicker: 'Recursos', title: 'Alcoholèmia', icon: 'flask', desc: 'Sanció per mg/l, factor professional/novell i via penal.', onClick: () => ctx.nav('/calculadora-alcohol') },
-    { tone: 'amber', kicker: 'Biblioteca', title: 'Lleis', icon: 'scale', desc: 'CE, CP, LECrim, EAC i +40 normes amb esquemes.', onClick: () => ctx.nav('/leyes') },
-    { tone: 'green', kicker: 'Recursos', title: 'Eines i telèfons', icon: 'star', desc: 'Farmàcia de guàrdia, AIAC, validador DNI, alfabet i telèfons.', onClick: () => ctx.nav('/recursos') },
-  ];
-  const arees = [
-    { tone: 'terracota', icon: 'car', title: 'Catàleg SCT', desc: 'Nomenclàtor oficial 2026: article, gravetat, quantia i punts.', meta: 'LSV · RGC · RGV', onClick: () => ctx.go('cataleg') },
-    { tone: 'night', icon: 'shield', title: 'SC / Penal', desc: 'Identificació, registres, escorcoll i cacheig.', meta: '20 proc.', onClick: () => ctx.nav('/operativa/penal') },
-    { tone: 'purple', icon: 'scale', title: 'Detencions', desc: 'Terminis, drets, assistència lletrada i atestat.', meta: '5 proc.', onClick: () => ctx.nav('/operativa/penal/drets-detingut') },
-    { tone: 'pink', icon: 'heart', title: 'Violència de gènere', desc: 'Valoració risc, mesures urgents i VioGén.', meta: '4 proc.', onClick: () => ctx.nav('/operativa/penal/violencia-genere') },
-    { tone: 'blue', icon: 'car', title: 'Procediments de trànsit', desc: "Alcoholèmia, drogues, accidents i retirades.", meta: 'Checklists', onClick: () => ctx.nav('/operativa/trafico') },
-    { tone: 'green', icon: 'star', title: 'Recursos i telèfons', desc: 'Farmàcia, AIAC, DNI, alcoholèmia i telèfons útils.', meta: '112 · 016 · 024', onClick: () => ctx.nav('/recursos') },
-  ];
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 26 }}>
-      <Head kicker="Operativa · Consulta al carrer" title="Norma, procediment i dreceres" desc="Tot el que necessites en servei: cerca una infracció, obre un protocol o consulta una llei en segons." />
-      <div>
-        <RowLabel icon="bolt">Eines ràpides · el més usat</RowLabel>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }} className="a-grid-fork">
-          {bigs.map((t, i) => (
-            <div key={i} onClick={t.onClick} className="a-hover" style={{ cursor: 'pointer', position: 'relative', overflow: 'hidden', borderRadius: A.rxl, backgroundImage: t.grad, color: '#fff', padding: 24, boxShadow: A.shadowMd, minHeight: 200, display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(255,255,255,0.18)', borderRadius: 999, padding: '5px 12px' }}><span style={{ width: 7, height: 7, borderRadius: 999, background: '#fff' }} /><Mono size={10} color="#fff" style={{ letterSpacing: 1 }}>{t.kicker}</Mono></span>
-                {t.badge && <span style={{ background: A.gold, color: A.ink, fontFamily: A.mono, fontWeight: 700, fontSize: 10, padding: '4px 10px', borderRadius: 999, letterSpacing: 0.5 }}>{t.badge.toUpperCase()}</span>}
-              </div>
-              <h3 style={{ margin: '16px 0 6px', fontFamily: A.display, fontWeight: 700, fontSize: 23, letterSpacing: -0.5, lineHeight: 1.15, maxWidth: 420 }}>{t.title}</h3>
-              <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.45, opacity: 0.92, maxWidth: 420 }}>{t.desc}</p>
-              <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', margin: '16px 0 0' }}>{t.chips.map((ch) => <span key={ch} style={{ background: 'rgba(255,255,255,0.16)', borderRadius: 8, padding: '4px 10px', fontFamily: A.mono, fontWeight: 600, fontSize: 11 }}>{ch}</span>)}</div>
-              <div style={{ marginTop: 'auto', paddingTop: 18 }}><span className="a-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff', color: t.accent, borderRadius: 12, padding: '10px 18px', fontFamily: A.display, fontWeight: 700, fontSize: 14, boxShadow: '0 6px 16px rgba(0,0,0,0.18)' }}>{t.cta} <Ic name="arrow" size={15} color={t.accent} /></span></div>
-            </div>
-          ))}
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, marginTop: 14 }} className="a-grid-stats">
-          {smalls.map((t, i) => { const k = toneOf(t.tone);
-            return <div key={i} onClick={t.onClick} className="a-hover" style={{ cursor: 'pointer', position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: k.soft, padding: 20, minHeight: 150, border: `1px solid ${A.line}` }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(255,255,255,0.6)', borderRadius: 999, padding: '5px 11px' }}><Ic name={t.icon} size={13} color={k.solid} sw={2.2} /><Mono size={9} color={k.ink}>{t.kicker}</Mono></span>
-                <span style={{ width: 32, height: 32, borderRadius: 999, background: 'rgba(255,255,255,0.7)', display: 'grid', placeItems: 'center' }}><Ic name="arrow" size={15} color={k.solid} /></span>
-              </div>
-              <h3 style={{ margin: '0 0 6px', fontFamily: A.display, fontWeight: 700, fontSize: 20, letterSpacing: -0.4, color: k.ink }}>{t.title}</h3>
-              <p style={{ margin: 0, fontSize: 13, lineHeight: 1.45, color: k.ink, opacity: 0.85 }}>{t.desc}</p>
-            </div>; })}
+    <div className="v3-page v3-anim">
+      <div style={{
+        display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between',
+        gap: 20, flexWrap: 'wrap', marginBottom: 6,
+      }}>
+        <TitolV fort="Operativa" post="de carrer" />
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: 9, background: V.okSoft,
+          borderRadius: RV.pill, padding: '9px 15px', flexShrink: 0,
+        }}>
+          <span style={{ width: 8, height: 8, borderRadius: '50%', background: V.ok }} />
+          <MonoV size={10} color={V.ok}>DISPONIBLE SENSE XARXA</MonoV>
         </div>
       </div>
-      <div>
-        <RowLabel icon="grid">Àrees operatives</RowLabel>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14 }} className="a-grid-stats">
-          {arees.map((a, i) => { const k = toneOf(a.tone); const dark = a.tone === 'night'; const soft = a.tone === 'purpleSoft';
-            const bg = dark ? `linear-gradient(150deg, #2A2D40, ${A.night})` : soft ? A.purpleSoft : k.solid; const fg = soft ? A.purpleInk : '#fff';
-            return <div key={i} onClick={a.onClick} className="a-hover" style={{ cursor: 'pointer', position: 'relative', overflow: 'hidden', borderRadius: A.rxl, backgroundImage: dark ? bg : undefined, background: dark ? undefined : bg, color: fg, padding: 22, boxShadow: A.shadowMd, display: 'flex', flexDirection: 'column', border: soft ? `1px solid ${A.line}` : 'none', minHeight: 150 }}>
-              <span style={{ width: 46, height: 46, borderRadius: 13, background: soft ? '#fff' : 'rgba(255,255,255,0.2)', display: 'grid', placeItems: 'center', marginBottom: 14 }}><Ic name={a.icon} size={24} color={soft ? A.purple : '#fff'} sw={2.1} /></span>
-              <h3 style={{ margin: '0 0 6px', fontFamily: A.display, fontWeight: 700, fontSize: 19, letterSpacing: -0.5, lineHeight: 1.1 }}>{a.title}</h3>
-              <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.4, opacity: soft ? 0.8 : 0.9 }}>{a.desc}</p>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 16 }}>
-                <Mono size={10} color={soft ? A.purple : '#fff'} style={{ opacity: 0.9 }}>{a.meta}</Mono>
-                <span style={{ width: 30, height: 30, borderRadius: 999, background: soft ? '#fff' : 'rgba(255,255,255,0.22)', display: 'grid', placeItems: 'center' }}><Ic name="arrow" size={15} color={soft ? A.purple : '#fff'} /></span>
-              </div>
-            </div>; })}
-        </div>
+      <p style={{ fontSize: 13.5, color: V.muted, lineHeight: 1.5, margin: '0 0 20px' }}>
+        Consulta ràpida durant el servei. El contingut es desa al navegador.
+      </p>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 16, marginBottom: 16 }}>
+        <TargetaGran
+          fons={V.granate} fg="#fff" tint="rgba(255,255,255,.2)" tintFg="#fff"
+          icona="tree" titol="Checklists penals" sub="Escenaris amb arbre de decisió"
+          onClick={() => ctx.nav('/operativa/penal')}
+        />
+        <TargetaGran
+          fons={V.surface} fg={V.ink} tint={V.warnSoft} tintFg={V.warn}
+          icona="pill" titol="Alcoholèmia" sub="Taxa, sanció i via penal"
+          onClick={() => ctx.nav('/calculadora-alcohol')}
+        />
       </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(165px,1fr))', gap: 14 }}>
+        {eines.map((e) => <EinaOperativa key={e.titol} {...e} />)}
+      </div>
+
       {news.length > 0 && (
-        <div>
-          <RowLabel icon="news">Actualitat normativa</RowLabel>
+        <div style={{ marginTop: 26 }}>
+          <div style={{ fontSize: 17, fontWeight: 800, letterSpacing: -0.5, marginBottom: 14 }}>Actualitat normativa</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {news.map((n) => (
-              <Card key={n.slug} pad={16} hover onClick={() => ctx.nav(`/noticies/${encodeURIComponent(n.slug)}`)} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                <span style={{ width: 40, height: 40, borderRadius: 11, background: A.blueSoft, display: 'grid', placeItems: 'center', flexShrink: 0 }}><Ic name="news" size={19} color={A.blue} sw={2.1} /></span>
-                <span style={{ flex: 1, fontFamily: A.display, fontWeight: 600, fontSize: 14.5, color: A.ink, minWidth: 0 }}>{n.title}</span>
-                <Mono size={10}>{n.publishedAt.slice(5)}</Mono>
-              </Card>
+              <button
+                key={n.slug}
+                type="button"
+                onClick={() => ctx.nav(`/noticies/${encodeURIComponent(n.slug)}`)}
+                style={{
+                  textAlign: 'left', cursor: 'pointer', border: 'none', borderRadius: RV.md, padding: 16,
+                  background: V.surface, color: V.ink, boxShadow: V.shadow,
+                  display: 'flex', alignItems: 'center', gap: 14,
+                }}>
+                <span style={{
+                  width: 40, height: 40, flexShrink: 0, borderRadius: 11, background: V.blueSoft, color: V.blue,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  <I n="news" size={19} sw={1.9} />
+                </span>
+                <span style={{ flex: 1, minWidth: 0, fontSize: 14.5, fontWeight: 700, letterSpacing: -0.25 }}>{n.title}</span>
+                <MonoV size={10} color={V.faint}>{n.publishedAt.slice(5)}</MonoV>
+              </button>
             ))}
           </div>
         </div>
