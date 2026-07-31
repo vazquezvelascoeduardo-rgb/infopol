@@ -5,10 +5,13 @@
 // biblioteca de normes, no un temari, i barrejava coses que no entren a
 // l'examen amb coses que sí.
 //
-// La numeració és la de la convocatòria i té forats a propòsit (del 13
-// salta al 20): són temes que no formen part d'aquest temari. No s'han
-// de renumerar per fer-los seguits — el número és com el troba l'opositor
-// a les bases.
+// Els temes van numerats de l'1 al 31, seguits. La llista de partida
+// saltava números (del 13 al 20) perquè venia d'una convocatòria amb
+// temes que aquí no hi són; conservar aquells forats només feia que el
+// temari semblés incomplet.
+//
+// El número del fitxer ha de coincidir amb el del tema: si es reordena
+// la llista, s'han de renombrar també els .md de `content/temari-pl/`.
 //
 // Un tema surt com a "disponible" quan té fitxer de contingut a
 // `content/`. Mentre no en tingui, es veu però es diu que encara no hi
@@ -53,28 +56,28 @@ export const TEMES: TemaPL[] = [
   { num: 13, bloc: 'institucional', fitxer: '13-proteccio-civil', titol: 'Llei 4/1997, de protecció civil de Catalunya' },
 
   // ── Seguretat pública i règim policial ───────────────────────
-  { num: 20, bloc: 'seguretat', fitxer: '20-lofcs', titol: 'LO 2/1986, de forces i cossos de seguretat' },
-  { num: 21, bloc: 'seguretat', fitxer: '21-policies-locals', titol: 'Llei 16/1991, de les policies locals de Catalunya' },
-  { num: 22, bloc: 'seguretat', fitxer: '22-sistema-seguretat', titol: 'Llei 4/2003, de ordenació del sistema de seguretat pública de Catalunya' },
-  { num: 23, bloc: 'seguretat', fitxer: '23-lopsc', titol: 'LO 4/2015, de protecció de la seguretat ciutadana' },
-  { num: 24, bloc: 'seguretat', fitxer: '24-codi-etica', titol: 'Acord GOV/25/2015 — Codi d\'ètica de la policia de Catalunya' },
-  { num: 25, bloc: 'seguretat', fitxer: '25-lopdgdd', titol: 'LO 3/2018, de protecció de dades personals i garantia dels drets digitals' },
-  { num: 26, bloc: 'seguretat', fitxer: '26-dades-penals', titol: 'LO 7/2021, de protecció de dades amb finalitats penals' },
-  { num: 27, bloc: 'seguretat', fitxer: '27-espectacles', titol: 'Llei 11/2009, de regulació administrativa dels espectacles públics i activitats recreatives' },
+  { num: 14, bloc: 'seguretat', fitxer: '14-lofcs', titol: 'LO 2/1986, de forces i cossos de seguretat' },
+  { num: 15, bloc: 'seguretat', fitxer: '15-policies-locals', titol: 'Llei 16/1991, de les policies locals de Catalunya' },
+  { num: 16, bloc: 'seguretat', fitxer: '16-sistema-seguretat', titol: 'Llei 4/2003, de ordenació del sistema de seguretat pública de Catalunya' },
+  { num: 17, bloc: 'seguretat', fitxer: '17-lopsc', titol: 'LO 4/2015, de protecció de la seguretat ciutadana' },
+  { num: 18, bloc: 'seguretat', fitxer: '18-codi-etica', titol: 'Acord GOV/25/2015 — Codi d\'ètica de la policia de Catalunya' },
+  { num: 19, bloc: 'seguretat', fitxer: '19-lopdgdd', titol: 'LO 3/2018, de protecció de dades personals i garantia dels drets digitals' },
+  { num: 20, bloc: 'seguretat', fitxer: '20-dades-penals', titol: 'LO 7/2021, de protecció de dades amb finalitats penals' },
+  { num: 21, bloc: 'seguretat', fitxer: '21-espectacles', titol: 'Llei 11/2009, de regulació administrativa dels espectacles públics i activitats recreatives' },
 
   // ── Àmbit penal i processal ──────────────────────────────────
-  { num: 28, bloc: 'penal', fitxer: '28-lecrim', titol: 'Llei d\'enjudiciament criminal — policia judicial i detenció' },
-  { num: 29, bloc: 'penal', fitxer: '29-habeas-corpus', titol: 'LO 6/1984, de procediment d\'habeas corpus' },
-  { num: 30, bloc: 'penal', fitxer: '30-dret-reunio', titol: 'LO 9/1983, reguladora del dret de reunió' },
-  { num: 31, bloc: 'penal', fitxer: '31-codi-penal', titol: 'LO 10/1995, Codi penal' },
-  { num: 32, bloc: 'penal', fitxer: '32-armes', titol: 'RD 137/1993 (Reglament d\'armes) i Decret 219/1996 (armament de les policies locals)' },
-  { num: 33, bloc: 'penal', fitxer: '33-menors', titol: 'LO 5/2000, de responsabilitat penal dels menors' },
+  { num: 22, bloc: 'penal', fitxer: '22-lecrim', titol: 'Llei d\'enjudiciament criminal — policia judicial i detenció' },
+  { num: 23, bloc: 'penal', fitxer: '23-habeas-corpus', titol: 'LO 6/1984, de procediment d\'habeas corpus' },
+  { num: 24, bloc: 'penal', fitxer: '24-dret-reunio', titol: 'LO 9/1983, reguladora del dret de reunió' },
+  { num: 25, bloc: 'penal', fitxer: '25-codi-penal', titol: 'LO 10/1995, Codi penal' },
+  { num: 26, bloc: 'penal', fitxer: '26-armes', titol: 'RD 137/1993 (Reglament d\'armes) i Decret 219/1996 (armament de les policies locals)' },
+  { num: 27, bloc: 'penal', fitxer: '27-menors', titol: 'LO 5/2000, de responsabilitat penal dels menors' },
 
   // ── Trànsit i seguretat viària ───────────────────────────────
-  { num: 34, bloc: 'transit', fitxer: '34-lsv', titol: 'RDL 6/2015, Llei sobre trànsit, circulació de vehicles a motor i seguretat viària' },
-  { num: 35, bloc: 'transit', fitxer: '35-conductors', titol: 'RD 818/2009, Reglament general de conductors' },
-  { num: 36, bloc: 'transit', fitxer: '36-circulacio', titol: 'RD 1428/2003, Reglament general de circulació' },
-  { num: 37, bloc: 'transit', fitxer: '37-vehicles', titol: 'RD 2822/1998, Reglament general de vehicles' },
+  { num: 28, bloc: 'transit', fitxer: '28-lsv', titol: 'RDL 6/2015, Llei sobre trànsit, circulació de vehicles a motor i seguretat viària' },
+  { num: 29, bloc: 'transit', fitxer: '29-conductors', titol: 'RD 818/2009, Reglament general de conductors' },
+  { num: 30, bloc: 'transit', fitxer: '30-circulacio', titol: 'RD 1428/2003, Reglament general de circulació' },
+  { num: 31, bloc: 'transit', fitxer: '31-vehicles', titol: 'RD 2822/1998, Reglament general de vehicles' },
 ];
 
 export const temesDelBloc = (clau: string): TemaPL[] =>
