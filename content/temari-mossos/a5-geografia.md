@@ -1,0 +1,118 @@
+---
+subtitol: Tema A.5 · Relleu, aigües, clima i organització territorial
+---
+
+## Situació i dimensions
+> On és i quant fa
+
+Catalunya se situa a l'==**extrem nord-est de la península Ibèrica**==, oberta a la Mediterrània.
+
+:::articles
+Superfície | Extensió
+==**32.108 km²**==, aproximadament ==**32.000 km²**==. Representa poc més del 6 % del territori de l'Estat.
+
+Límits | Fronteres
+Al ==**nord, França i Andorra**== (pels Pirineus) · a l'==**est, el mar Mediterrani**== · al ==**sud, el País Valencià**== · a l'==**oest, l'Aragó**==.
+
+Litoral | La costa
+Uns ==**580 km**== de costa mediterrània, de la Costa Brava al delta de l'Ebre.
+:::
+
+:::clau
+Les dues xifres que cauen: ==**32.108 km²**== de superfície exacta i el fet que ==**limita al nord amb França i Andorra**==. Andorra s'oblida sovint a les respostes.
+:::
+
+## El relleu
+> Tres grans unitats
+
+:::articles
+Els Pirineus | El nord
+Frontera natural amb França i Andorra. S'hi troba el ==**cim més alt de Catalunya: la Pica d'Estats, de 3.143 m**==, al Pallars Sobirà. Es divideixen en ==Pirineu axial== (el més alt) i ==Prepirineu==.
+
+La Depressió Central | L'interior
+Plana interior entre els Pirineus i la Serralada Prelitoral, drenada per l'Ebre i els seus afluents. Terreny de secà i regadiu.
+
+El Sistema Mediterrani | La costa
+Dues serralades paral·leles al mar — la ==**Serralada Litoral**== (Montnegre, Garraf, Collserola) i la ==**Serralada Prelitoral**== (Montseny, Montserrat, Ports) — separades per la ==**Depressió Prelitoral**==, on hi ha les comarques més poblades.
+:::
+
+:::avis
+El cim més alt és la ==**Pica d'Estats (3.143 m)**==, no el Puigmal ni l'Aneto — l'Aneto és el sostre dels Pirineus però ==**és a l'Aragó**==. El punt més alt del Montseny, el Turó de l'Home, no arriba als 1.712 m i sovint apareix com a distractor.
+:::
+
+## Les aigües
+> Rius i vessants
+
+:::articles
+L'Ebre | El riu més llarg
+El ==**riu més llarg que travessa Catalunya**==. Neix a Cantàbria i desemboca al ==**delta de l'Ebre**==, el ==principal aiguamoll del país== i parc natural.
+
+Els rius pirinencs | Cabal regular
+==Segre== (afluent de l'Ebre, el més llarg dels rius interiors catalans), ==Ter==, ==Llobregat==, ==Fluvià== i ==Muga==.
+
+Els rius mediterranis | Cabal irregular
+==Besòs==, ==Foix==, ==Gaià==, ==Francolí==: curts, de fort estiatge i crescudes sobtades.
+:::
+
+:::clau
+Distingeix bé els dos superlatius: l'==**Ebre** és el riu **més llarg que travessa** Catalunya== (però neix fora), mentre que el ==**Segre** és el riu **més llarg dels que neixen i discorren** majoritàriament al país==.
+:::
+
+## El clima
+> Mediterrani, amb matisos
+
+El clima predominant a la ==**Catalunya central i litoral és el mediterrani**==: estius secs i calorosos, hiverns suaus i precipitacions concentrades a la tardor i la primavera.
+
+:::articles
+Mediterrani litoral | La costa
+Temperatures suaus, poca oscil·lació tèrmica, pluges de tardor (les ==llevantades==).
+
+Mediterrani continental | La Depressió Central
+Estius calorosos, hiverns freds amb ==boires persistents==, poca pluja.
+
+Alta muntanya | Els Pirineus
+Hiverns llargs i freds amb ==neu abundant==, estius curts i frescos. Precipitacions elevades.
+:::
+
+## L'organització territorial
+> Províncies, vegueries i comarques
+
+:::articles
+Províncies | 4
+==**Barcelona, Girona, Lleida i Tarragona**==. Divisió de l'Estat, vigent des del 1833.
+
+Vegueries | 8
+==**Barcelona, Girona, Lleida, Camp de Tarragona, Terres de l'Ebre, Catalunya Central, Alt Pirineu i Aran i el Penedès**==. La ==**vuitena vegueria, el Penedès, es va afegir l'any 2017**==.
+
+Comarques | 42
+Catalunya s'organitza en ==**42 comarques**==, xifra assolida ==**després de la creació del Moianès el 2015**==. La més extensa és la ==**Noguera**==.
+
+Municipis | 947
+Els municipis són l'==ens local bàsic==, i l'Aran té a més un règim especial propi (el ==Conselh Generau d'Aran==).
+:::
+
+:::clau
+La combinació que es demana literalment: ==**4 províncies, 8 vegueries i 42 comarques**==. I les dues dates que la sostenen: ==**Moianès, 2015**== (comarca 42) i ==**Penedès, 2017**== (vegueria 8). La comarca més extensa és la ==**Noguera**==.
+:::
+
+## Espais naturals protegits
+> El que cal saber-ne
+
+:::articles
+Aigüestortes i Estany de Sant Maurici | Parc Nacional
+L'==**únic parc nacional de Catalunya**==, situat als ==**Pirineus de Lleida**==. Declarat el 1955.
+
+Parcs naturals | Alguns
+==Delta de l'Ebre==, ==Montseny== (reserva de la biosfera), ==Cadí-Moixeró==, ==Aiguamolls de l'Empordà==, ==Ports==, ==Montsant==, ==Cap de Creus== (el primer marítimoterrestre).
+
+PEIN i Xarxa Natura 2000
+Instruments de protecció que cobreixen prop d'un ==**30 % del territori**==.
+:::
+
+:::avis
+Catalunya té ==**un sol parc nacional**==, el d'==**Aigüestortes i Estany de Sant Maurici**==, i és ==**als Pirineus de Lleida**==. El delta de l'Ebre i el Montseny són ==**parcs naturals**==, categoria diferent.
+:::
+
+:::avis
+Aquest material d'estudi segueix la **guia d'estudi oficial** per accedir a la categoria de mosso/a del Cos de Mossos d'Esquadra (Departament d'Interior i Seguretat Pública), reordenada i marcada per a l'estudi. **No és una font oficial**: per a la preparació definitiva, consulta sempre la guia publicada pel Departament.
+:::
