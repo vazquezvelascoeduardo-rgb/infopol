@@ -30,10 +30,8 @@ import GdprBanner from './components/GdprBanner';
 
 const Inici = lazy(() => import('./pages/Inici'));
 const Estudi = lazy(() => import('./pages/Estudi'));
-const EstudiModul = lazy(() => import('./pages/EstudiModul'));
-const EstudiDoc = lazy(() => import('./pages/EstudiDoc'));
+const EstudiTema = lazy(() => import('./pages/EstudiTema'));
 const Repas = lazy(() => import('./pages/Repas'));
-const Resums = lazy(() => import('./pages/Resums'));
 const Diagnostic = lazy(() => import('./pages/Diagnostic'));
 const Quadrant = lazy(() => import('./pages/Quadrant'));
 const Leyes = lazy(() => import('./pages/Leyes'));
@@ -137,12 +135,15 @@ export default function App() {
               <Route path="/leyes/s/:moduleSlug/:slug" element={<CardPage />} />
               <Route path="/recursos" element={<Recursos />} />
 
-              {/* Mode estudi — el temari amb subratllats, com a l'app */}
+              {/* Estudia per tema — el temari propi (no les fitxes de lleis) */}
               <Route path="/estudi" element={<Estudi />} />
-              <Route path="/estudi/:moduleSlug" element={<EstudiModul />} />
-              <Route path="/estudi/:moduleSlug/:slug" element={<EstudiDoc />} />
+              <Route path="/estudi/tema/:num" element={<EstudiTema />} />
+              {/* Enllaços vells al temari per mòduls: cap al temari nou. */}
+              <Route path="/estudi/:moduleSlug" element={<Navigate to="/estudi" replace />} />
+              <Route path="/estudi/:moduleSlug/:slug" element={<Navigate to="/estudi" replace />} />
               <Route path="/repas" element={<Repas />} />
-              <Route path="/resums" element={<Resums />} />
+              {/* "Resums" fora: només queden els esquemes. */}
+              <Route path="/resums" element={<Navigate to="/policia-local/esquemes" replace />} />
               <Route path="/diagnostic" element={<Diagnostic />} />
               <Route path="/quadrant" element={<Quadrant />} />
 

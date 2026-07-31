@@ -67,11 +67,11 @@ function modes(cos: Cos, lleis: number): Mode[] {
       to: cos === 'mossos' ? '/mossos' : '/policia-local',
     },
     {
-      titol: 'Resums i esquemes',
-      sub: 'El temari condensat, per repassar de pressa',
+      titol: 'Esquemes',
+      sub: 'La matèria en quadres, per repassar de pressa',
       icona: 'layers',
       insignia: 'PL · MOSSOS',
-      to: '/resums',
+      to: cos === 'mossos' ? '/mossos/esquemes' : '/policia-local/esquemes',
       modul: 'esquemes',
     },
     {

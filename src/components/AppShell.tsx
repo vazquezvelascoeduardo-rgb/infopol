@@ -45,10 +45,11 @@ const NAV: Seccio[] = [
   {
     id: 'academia', label: 'Acadèmia', icona: 'cap', to: '/academia', compte: TEMES_PL,
     sub: [
-      { label: 'Estudia per tema', to: '/leyes' },
+      { label: 'Estudia per tema', to: '/estudi' },
       { label: 'Test', to: '/policia-local' },
-      { label: 'Repàs intel·ligent', to: '/policia-local/debilitats' },
-      { label: 'Resums i esquemes', to: '/policia-local/esquemes' },
+      { label: 'Repàs intel·ligent', to: '/repas' },
+      { label: 'Esquemes', to: '/policia-local/esquemes' },
+      { label: 'Diagnòstic', to: '/diagnostic' },
       { label: 'Flashcards', to: '/policia-local/flashcards' },
       { label: 'Mossos', to: '/mossos' },
       { label: 'Reptes', to: '/retos' },
@@ -76,11 +77,62 @@ const NAV: Seccio[] = [
   },
 ];
 
+/**
+ * On ets exactament, dins de la secció.
+ *
+ * La barra deia només la secció ("Acadèmia"), i un cop dins de tres
+ * nivells ja no sabies on eres. Això mira la ruta i en treu el nom del
+ * lloc concret, que es pinta sota la secció activa i a la capçalera.
+ *
+ * Es fa per prefix i de més llarg a més curt: la primera que casa mana.
+ */
+const ON_ETS: { prefix: string; nom: string }[] = [
+  { prefix: '/estudi/tema', nom: 'Tema' },
+  { prefix: '/estudi', nom: 'Estudia per tema' },
+  { prefix: '/repas', nom: 'Repàs intel·ligent' },
+  { prefix: '/diagnostic', nom: 'Diagnòstic' },
+  { prefix: '/policia-local/esquemes', nom: 'Esquemes' },
+  { prefix: '/policia-local/flashcards', nom: 'Flashcards' },
+  { prefix: '/policia-local/debilitats', nom: 'Debilitats' },
+  { prefix: '/policia-local/logros', nom: 'Logros' },
+  { prefix: '/policia-local', nom: 'Test' },
+  { prefix: '/mossos/esquemes', nom: 'Esquemes · Mossos' },
+  { prefix: '/mossos/temari', nom: 'Temari Mossos' },
+  { prefix: '/mossos/flashcards', nom: 'Flashcards · Mossos' },
+  { prefix: '/mossos', nom: 'Test · Mossos' },
+  { prefix: '/cultura-general', nom: 'Cultura general' },
+  { prefix: '/actualitat', nom: 'Actualitat' },
+  { prefix: '/retos', nom: 'Reptes' },
+  { prefix: '/academia', nom: 'Portada' },
+
+  { prefix: '/operativa/penal', nom: 'SC i Penal' },
+  { prefix: '/operativa/trafico', nom: 'Trànsit' },
+  { prefix: '/superbuscador', nom: 'Superbuscador' },
+  { prefix: '/calculadora-alcohol', nom: 'Alcoholèmia' },
+  { prefix: '/croquis', nom: "Croquis d'accident" },
+  { prefix: '/recursos', nom: 'Recursos' },
+  { prefix: '/leyes', nom: 'Lleis' },
+  { prefix: '/operativa', nom: 'Portada' },
+
+  { prefix: '/quadrant', nom: 'El meu quadrant' },
+  { prefix: '/noticies', nom: 'Notícies' },
+  { prefix: '/perfil', nom: 'Portada' },
+  { prefix: '/cerca', nom: 'Cerca' },
+];
+
+export function onEts(pathname: string): string | null {
+  const trobat = [...ON_ETS]
+    .sort((a, b) => b.prefix.length - a.prefix.length)
+    .find((x) => pathname === x.prefix || pathname.startsWith(`${x.prefix}/`));
+  return trobat?.nom ?? null;
+}
+
 /** Quina secció de la barra s'ha de marcar segons la ruta actual. */
 export function seccioActiva(pathname: string): string {
   const p = pathname;
   if (p.startsWith('/academia') || p.startsWith('/policia-local') || p.startsWith('/mossos')
-    || p.startsWith('/cultura-general') || p.startsWith('/actualitat') || p.startsWith('/retos')) return 'academia';
+    || p.startsWith('/cultura-general') || p.startsWith('/actualitat') || p.startsWith('/retos')
+    || p.startsWith('/estudi') || p.startsWith('/repas') || p.startsWith('/diagnostic')) return 'academia';
   if (p.startsWith('/operativa') || p.startsWith('/leyes') || p.startsWith('/recursos')
     || p.startsWith('/superbuscador') || p.startsWith('/calculadora-alcohol') || p.startsWith('/croquis')) return 'operativa';
   if (p.startsWith('/perfil') || p.startsWith('/noticies')) return 'perfil';
@@ -141,11 +193,13 @@ function PestanyaMobil({ s, on, onClick }: { s: Seccio; on: boolean; onClick: ()
 }
 
 function BotoNav({
-  s, on, obert, onNavega, onDesplega,
+  s, on, obert, lloc, onNavega, onDesplega,
 }: {
   s: Seccio;
   on: boolean;
   obert: boolean;
+  /** On ets dins d'aquesta secció, si hi ets. */
+  lloc: string | null;
   onNavega: (to: string) => void;
   onDesplega: () => void;
 }) {
@@ -164,10 +218,23 @@ function BotoNav({
           display: 'flex', alignItems: 'center', gap: 12, transition: 'background .18s ease',
         }}>
         <I n={s.icona} size={19} sw={on ? 2.1 : 1.8} />
-        <span style={{ flex: 1, fontSize: 14, fontWeight: on ? 800 : 600, letterSpacing: -0.2 }}>{s.label}</span>
+        <span style={{ flex: 1, minWidth: 0 }}>
+          <span style={{ display: 'block', fontSize: 14, fontWeight: on ? 800 : 600, letterSpacing: -0.2 }}>
+            {s.label}
+          </span>
+          {/* On ets de debò dins de la secció. */}
+          {on && lloc && lloc !== 'Portada' && (
+            <span style={{
+              display: 'block', fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,.75)',
+              marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+            }}>
+              {lloc}
+            </span>
+          )}
+        </span>
         {s.compte !== undefined && (
           <span style={{
-            fontFamily: V.mono, fontSize: 9.5, fontWeight: 700,
+            fontFamily: V.mono, fontSize: 9.5, fontWeight: 700, flexShrink: 0,
             color: on ? '#fff' : 'rgba(255,255,255,.5)',
             background: on ? 'rgba(255,255,255,.22)' : 'rgba(255,255,255,.08)',
             borderRadius: 7, padding: '4px 7px',
@@ -202,9 +269,11 @@ function BotoNav({
 
 /** Barra lateral de tinta. És la mateixa a l'escriptori i dins del calaix. */
 function Lateral({
-  activa, desplegada, onDesplega, onNavega, progres, nom, inicial, tema, onTema,
+  activa, lloc, desplegada, onDesplega, onNavega, progres, nom, inicial, tema, onTema,
 }: {
   activa: string;
+  /** On ets dins de la secció activa. */
+  lloc: string | null;
   desplegada: string | null;
   onDesplega: (id: string) => void;
   onNavega: (to: string) => void;
@@ -244,6 +313,7 @@ function Lateral({
             s={s}
             on={activa === s.id}
             obert={desplegada === s.id}
+            lloc={activa === s.id ? lloc : null}
             onNavega={onNavega}
             onDesplega={() => onDesplega(s.id)}
           />
@@ -373,6 +443,10 @@ export default function AppShell() {
   const [triaFeta, setTriaFeta] = useState<PerfilUs | null>(null);
 
   const activa = seccioActiva(pathname);
+  const lloc = onEts(pathname);
+  // La fletxa d'enrere només té sentit si no ets a la portada d'una
+  // secció: allà no hi ha res darrere dins de l'app.
+  const potTornar = !!lloc && lloc !== 'Portada' && pathname !== '/app';
 
   useEffect(() => { applyInitialTheme(); }, []);
   useEffect(() => { setCalaix(false); }, [pathname]);
@@ -419,6 +493,7 @@ export default function AppShell() {
   const lateral = (
     <Lateral
       activa={activa}
+      lloc={lloc}
       desplegada={desplegada}
       onDesplega={(id) => setDesplegada((d) => (d === id ? null : id))}
       onNavega={anar}
@@ -466,6 +541,39 @@ export default function AppShell() {
             }}>
             <I n="menu" size={19} sw={2.2} />
           </button>
+
+          {/* Enrere. Només surt quan hi ha on tornar: a la portada d'una
+              secció no serveix de res i només fa nosa. */}
+          {potTornar && (
+            <button
+              type="button"
+              onClick={() => nav(-1)}
+              aria-label="Enrere"
+              title="Enrere"
+              style={{
+                width: 38, height: 38, flexShrink: 0, border: `1px solid ${V.border}`,
+                borderRadius: '50%', background: V.surface, color: V.ink, cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+              <I n="back" size={16} sw={2} />
+            </button>
+          )}
+
+          {/* On ets, a la capçalera: secció › lloc. */}
+          {lloc && lloc !== 'Portada' && (
+            <div className="v3-amaga-mobil" style={{ minWidth: 0, flexShrink: 0 }}>
+              <Mono size={9} color={V.faint} style={{ letterSpacing: 1.4, display: 'block' }}>
+                {(NAV.find((s) => s.id === activa)?.label ?? '').toUpperCase()}
+              </Mono>
+              <div style={{
+                fontSize: 14, fontWeight: 800, letterSpacing: -0.3, color: V.ink,
+                marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+                maxWidth: 220,
+              }}>
+                {lloc}
+              </div>
+            </div>
+          )}
 
           <form onSubmit={cerca} style={{ flex: 1, maxWidth: 460, minWidth: 0 }}>
             <div style={{

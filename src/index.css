@@ -6814,3 +6814,28 @@ html[data-text-size="lg"] { font-size: 18px; }
   border-radius: 4px;
 }
 .estudi-oclusio mark.hl.destapat { color: inherit !important; }
+
+/* Temari — el text de dins dels apartats. */
+.temari-text > :first-child { margin-top: 0; }
+.temari-text > :last-child { margin-bottom: 0; }
+.temari-text p { margin: 0 0 14px; }
+.temari-text h4 {
+  font-size: 16.5px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  margin: 20px 0 10px;
+}
+.temari-text ul, .temari-text ol { margin: 0 0 14px; padding-left: 1.3em; }
+.temari-text li { margin-bottom: 6px; }
+.temari-text code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.9em;
+  background: var(--v-surface2);
+  border-radius: 5px;
+  padding: 1px 5px;
+}
+
+/* L'índex d'apartats es plega a mòbil: allà mana el contingut. */
+@media (max-width: 900px) {
+  .temari-toc { display: none !important; }
+}
