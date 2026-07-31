@@ -75,7 +75,7 @@ Comarques cedides a França pel ==**Tractat dels Pirineus (1659)**==.
 > Estatut, Llei 1/1998 i Llei 35/2010
 
 :::articles
-Estatut d'autonomia | art. 6
+art. 6 | Estatut d'autonomia
 La ==**llengua pròpia de Catalunya és el català**==. És llengua oficial, ==**igual que el castellà**==, i tothom té el ==dret d'usar-les== i ==**el dret i el deure de conèixer-les**==.
 
 Llei 1/1998 | Política lingüística

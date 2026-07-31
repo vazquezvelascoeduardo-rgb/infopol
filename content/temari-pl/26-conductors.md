@@ -8,7 +8,7 @@ subtitol: Reial decret 818/2009, de 8 de maig, pel qual s'aprova el Reglament ge
 El **Reglament general de conductors** desenvolupa la LSV en tot el que fa a ==**qui pot conduir**==: les autoritzacions administratives per conduir, els requisits per obtenir-les, la seva vigència, les pròrrogues i els centres de formació i de reconeixement.
 
 :::articles
-Autoritzacions per conduir | art. 3
+art. 3 | Autoritzacions per conduir
 · El ==**permís de conducció**==.
 · La ==**llicència de conducció**==.
 · L'==**autorització especial**== per conduir vehicles que transporten mercaderies perilloses o de transport especial.
@@ -58,14 +58,14 @@ Les edats són pregunta segura i s'ordenen així: ==**15** AM · **16** A1 · **
 > Articles 7 a 14
 
 :::articles
-Requisits | art. 7
+art. 7 | Requisits
 · ==Tenir la **residència normal a Espanya**== o acreditar la condició d'estudiant durant almenys ==sis mesos==.
 · ==Haver complert l'edat== requerida.
 · ==No estar privat per resolució judicial== del dret a conduir ni tenir suspesa o intervinguda l'autorització.
 · ==Reunir les **aptituds psicofísiques** requerides==, acreditades amb l'informe d'un centre de reconeixement.
 · ==Superar les proves== que corresponguin.
 
-Vigència | art. 12
+art. 12 | Vigència
 · Permisos ==**C1, C1+E, C, C+E, D1, D1+E, D i D+E**: **5 anys** fins als 65, i **3 anys** a partir d'aquesta edat==.
 · ==**La resta de permisos i les llicències**: **10 anys** fins als 65, i **5 anys** a partir d'aquesta edat==.
 · El període es pot ==**reduir**== si es comprova una malaltia o deficiència susceptible d'agreujar-se.
@@ -85,10 +85,10 @@ Les proves per obtenir el permís són: ==**de control de coneixements**== (teò
 Els conductors novells estan sotmesos a limitacions específiques durant els ==**dos primers anys**==:
 
 :::articles
-Taxa d'alcohol | art. 20 RGC
+art. 20 RGC | Taxa d'alcohol
 Els conductors ==**no poden superar 0,3 g/l en sang ni 0,15 mg/l en aire espirat durant els dos anys següents** a l'obtenció del permís==.
 
-Crèdit de punts | art. 63.2 LSV
+art. 63.2 LSV | Crèdit de punts
 El titular amb una ==antiguitat **no superior a tres anys**== té un crèdit inicial de ==**8 punts**==, no de 12.
 :::
 

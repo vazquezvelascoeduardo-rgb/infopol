@@ -21,22 +21,22 @@ L'**art. 1.4** és la clau de tota la llei: el ciutadà té dret a la **mateixa 
 L'**article 2** enumera els **nou principis** que inspiren el sistema:
 
 :::articles
-Prevenció | art. 2.a
+art. 2.a | Prevenció
 Prevenció dels riscs i de les amenaces.
 
-Adequació i proximitat | art. 2.b i 2.c
+art. 2.b i 2.c | Adequació i proximitat
 Adequació del servei públic a la demanda social · proximitat als ciutadans i descentralització.
 
-Eficàcia i planificació | art. 2.d i 2.e
+art. 2.d i 2.e | Eficàcia i planificació
 Eficàcia de l'acció pública i eficiència en els recursos · planificació i avaluació de les actuacions.
 
-Proporcionalitat | art. 2.f
+art. 2.f | Proporcionalitat
 Proporcionalitat de la intervenció pública.
 
-Coresponsabilitat i coordinació | art. 2.g i 2.h
+art. 2.g i 2.h | Coresponsabilitat i coordinació
 Coresponsabilitat i complementarietat d'autoritats i administracions · coordinació i cooperació.
 
-Transparència | art. 2.i
+art. 2.i | Transparència
 Transparència i informació als ciutadans.
 :::
 
@@ -93,22 +93,22 @@ Retén les xifres: la Comissió del Govern per a la Seguretat es reuneix **cada 
 L'**article 9** la crea i la composa:
 
 :::articles
-Quan existeix | art. 9.1
+art. 9.1 | Quan existeix
 ==**Als municipis que tenen policia local ha d'existir una junta local de seguretat**==, com a òrgan col·legiat de ==col·laboració i coordinació general dels diversos cossos de policia i altres serveis de seguretat== que operen al territori i de ==participació ciutadana== en el sistema de seguretat.
 
-Composició | art. 9.2
+art. 9.2 | Composició
 La ==**presideix l'alcalde o alcaldessa**==, amb veu i vot, i en són ==**vocals permanents**==, també amb veu i vot: el ==**delegat territorial del Govern**==; el ==**regidor delegat en matèria de seguretat ciutadana**==; el ==**cap de la comissaria dels Mossos d'Esquadra**== del municipi (o el de l'àrea bàsica policial); i el ==**cap de la policia local**==. Si ho acorda l'Administració de l'Estat, també en són vocals els ==caps de la Guàrdia Civil i del Cos Nacional de Policia== amb responsabilitats funcionals al municipi.
 
-Altres assistents | art. 9.3, 9.4 i 9.5
+art. 9.3, 9.4 i 9.5 | Altres assistents
 Amb ==**veu però sense vot**==: representants de la ==judicatura i la fiscalia== si ho acorda l'Estat; les ==associacions i entitats veïnals== que puguin resultar afectades; i els ==tècnics== que es considerin convenients (emergències, serveis socials, trànsit, joc i espectacles).
 
-Delegació | art. 9.6
+art. 9.6 | Delegació
 L'alcalde pot delegar ==**excepcionalment**== la presidència de les sessions al ==regidor de seguretat ciutadana==.
 
-Sessions | art. 9.7
+art. 9.7 | Sessions
 Sessió ordinària de caràcter ==**trimestral**==. ==**Una de les sessions anuals ha de ser plenària**==, amb invitació als vocals no permanents i a les entitats, per conèixer el ==pla de seguretat local== i debatre la situació general de seguretat al municipi.
 
-Acords | art. 9.8
+art. 9.8 | Acords
 Els acords de la junta local de seguretat s'han d'adoptar ==**per unanimitat**== i tenen ==**caràcter executiu**==.
 :::
 

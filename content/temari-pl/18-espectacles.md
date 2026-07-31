@@ -19,7 +19,7 @@ Els tres eixos que se citen com a resum de la llei són ==**convivència, segure
 La llei ordena drets i obligacions de tres col·lectius: ==espectadors i usuaris== (arts. 5 i 6), ==titulars i organitzadors== (arts. 7 i 8) i ==artistes i personal== (art. 9). Els espectadors tenen dret a rebre informació veraç, a la seguretat, a un tracte no discriminatori i a fulls de reclamació; i el deure de ==complir les condicions d'admissió i les instruccions del personal i dels agents de l'autoritat==.
 
 :::articles
-Dret d'admissió | art. 10
+art. 10 | Dret d'admissió
 L'exercici del dret d'admissió ==**no pot comportar en cap cas discriminació**== per raó de ==naixement, raça, sexe, religió, opinió, discapacitat, orientació sexual, identitat de gènere== o qualsevol altra condició o circumstància personal o social, ni en les ==condicions d'accés== ni en la ==permanència== ni en l'==ús dels serveis==.
 :::
 
@@ -31,17 +31,17 @@ El dret d'admissió **existeix**, però té dos límits que cauen sempre: ==no p
 > Títol II · articles 11 a 13
 
 :::articles
-Generalitat | art. 11
+art. 11 | Generalitat
 a) ==Dictar les normes de desplegament reglamentari==.
 b) ==Planificar territorialment els establiments oberts al públic==.
 c) ==Autoritzar els establiments de **règim especial**== i els ==espectacles i activitats **de caràcter extraordinari**== que no siguin de competència municipal.
 d) ==Inspeccionar i sancionar els que hagi autoritzat==.
 e) ==Inspeccionar i sancionar els autoritzats pels ajuntaments quan aquests no hagin acordat assumir-ne la competència==.
 
-Ajuntaments | art. 13
+art. 13 | Ajuntaments
 Atorgar les ==llicències municipals== d'establiments oberts al públic, d'establiments de règim especial quan tinguin la competència delegada, d'espectacles de ==circ i altres activitats en espais oberts==, i les d'activitats ==extraordinàries== que els corresponguin; ==inspeccionar i sancionar==; i ==dictar ordenances== en la matèria.
 
-Delegació | art. 12
+art. 12 | Delegació
 La Generalitat ==pot delegar als ajuntaments que ho sol·licitin== les competències d'autoritzar establiments de règim especial i les sancionadores, sempre que acreditin ==capacitat de gestió tècnica suficient== i que ja exerceixen efectivament les de l'art. 13.1.d.
 :::
 
@@ -51,16 +51,16 @@ La Generalitat ==pot delegar als ajuntaments que ho sol·licitin== les competèn
 La regla base (art. 29.1): l'==obertura d'establiments oberts al públic i l'organització d'espectacles i activitats recreatives requereixen l'obtenció **prèvia** de la llicència o autorització==. Cada establiment ha de tenir una ==**única llicència o autorització**==, que pot donar cobertura a diversos espectacles o activitats (art. 29.4), i ==qualsevol modificació== de l'establiment (transformació, adaptació, reforma, canvi d'emplaçament, ampliació o reducció) ==també està sotmesa a llicència== (art. 29.5).
 
 :::articles
-Vigència | art. 35
+art. 35 | Vigència
 Les llicències i autoritzacions ==tenen vigència indefinida, llevat que se n'estableixi una de determinada==, però estan sotmeses a ==**controls i revisions periòdiques**== (art. 31) per verificar que es mantenen les condicions.
 
-Transmissió | art. 36
+art. 36 | Transmissió
 És possible, i s'ha de ==comunicar a l'administració== que la va atorgar; ==transmitent i adquirent en responen solidàriament== fins que la comunicació es fa efectiva.
 
-Extinció | art. 37
+art. 37 | Extinció
 Per ==transcurs del termini== quan és temporal, per ==renúncia del titular==, per ==revocació sancionadora==, per ==cessament definitiu de l'activitat==, per ==canvi essencial de les condicions== o per ==incompliment de les condicions o de les mesures correctores==.
 
-Activitats extraordinàries | art. 42
+art. 42 | Activitats extraordinàries
 Són les que es fan ==esporàdicament== en establiments amb llicència per a una activitat **diferent**, o en espais i locals que no tenen la condició d'establiment obert al públic però compleixen les condicions exigibles. Estan sotmeses a ==**autorització de la Generalitat**==, ==**llevat** que es facin en municipis de més de **50.000 habitants**== o ==amb motiu de **festes i revetlles populars**==: en aquests casos, ==**llicència municipal**==.
 :::
 
@@ -74,16 +74,16 @@ L'**article 33** aplica el silenci: transcorregut el termini per resoldre sense 
 > Articles 44 i 45
 
 :::articles
-Deure de facilitar-la | art. 44.1
+art. 44.1 | Deure de facilitar-la
 Titulars i organitzadors ==han de permetre i facilitar les inspeccions==. El personal d'inspecció pot ==accedir a qualsevol lloc, instal·lació o dependència, pública o privada==, ==amb el límit constitucional de l'entrada al domicili==.
 
-Qui inspecciona | art. 44.2
+art. 44.2 | Qui inspecciona
 Els ==**membres dels cossos i forces de seguretat**== i altres serveis d'inspecció, que en l'exercici de les seves funcions ==tenen el caràcter d'**agents de l'autoritat**==. També hi poden col·laborar persones o empreses amb l'especialització tècnica requerida.
 
-Acta | art. 44.3
+art. 44.3 | Acta
 De la inspecció se n'estén ==**acta**==, on els interessats poden fer constar la seva ==disconformitat i observacions==. L'acta s'ha de notificar als interessats i a l'òrgan administratiu competent.
 
-Conseqüències | art. 44.4
+art. 44.4 | Conseqüències
 Si es constaten irregularitats, l'òrgan competent pot: a) ==requerir les modificacions o millores, fixar termini i obrir expedient si no es fan==; o b) ==acordar directament l'obertura de l'expedient sancionador==, amb les mesures provisionals que escaiguin.
 :::
 
@@ -173,7 +173,7 @@ A més, són lleus (art. 49.2 i 49.3) qualsevol ==acció o omissió que comporti
 ### Sancions (articles 50 a 52)
 
 :::articles
-Molt greus | art. 50
+art. 50 | Molt greus
 a) Multa de ==**10.001 a 100.000 €**==, i en cas de ==reincidència, fins a **200.000 €**==.
 b) ==Prohibició d'utilitzar l'establiment (tancament i precinte) entre **6 i 18 mesos**==.
 c) ==Suspensió de l'autorització o llicència entre **6 i 12 mesos**==.
@@ -183,12 +183,12 @@ f) ==Comís entre 6 i 12 mesos== o destrucció dels béns; ==pot ser **indefinit
 g) ==Publicitat de la conducta infractora==.
 h) ==Avançament de l'hora de tancament entre 6 i 12 mesos==.
 
-Greus | art. 51
+art. 51 | Greus
 a) Multa de ==**1.001 a 10.000 €**==, i en cas de reincidència ==fins a 20.000 €==.
 b) a i) ==Tancament, suspensió, inhabilitació, comís, publicitat, avançament de l'hora de tancament i suspensió o revocació de l'habilitació del personal de control d'accés==, en tots els casos per un ==període **màxim de 6 mesos**==.
 j) ==Si els infractors són **espectadors o usuaris**: multa de **151 a 500 €**==, i en cas de reincidència ==fins a 1.000 €==.
 
-Lleus | art. 52
+art. 52 | Lleus
 a) Multa de ==**300 a 1.000 €**==, i en cas de reincidència ==fins a 2.000 €==.
 b) ==Si els infractors són **espectadors o usuaris**: multa de **50 a 150 €**==, i en cas de reincidència ==fins a 300 €==.
 :::
@@ -200,16 +200,16 @@ Fixa't que la llei té ==**dues escales de multa**==: una per als ==titulars, or
 ### Prescripció i caducitat (article 57)
 
 :::articles
-Faltes | art. 57.1
+art. 57.1 | Faltes
 Molt greus: ==**3 anys**== · Greus: ==**2 anys**== · Lleus: ==**6 mesos**==.
 
-Sancions | art. 57.3
+art. 57.3 | Sancions
 Per faltes molt greus: ==**3 anys**== · Greus: ==**2 anys**== · Lleus: ==**1 any**==.
 
-Còmput | art. 57.2
+art. 57.2 | Còmput
 Des que es cometen ==**o des que l'Administració en té coneixement**==. En les infraccions derivades d'activitat continuada, des de la ==finalització de l'activitat o l'últim acte== amb què la infracció es consuma.
 
-Caducitat | art. 57.5
+art. 57.5 | Caducitat
 El procediment sancionador s'ha de ==resoldre i notificar en el termini màxim de **nou mesos**== des de l'obertura; vençut aquest termini, ==es produeix la **caducitat**==.
 :::
 
@@ -229,18 +229,18 @@ A l'==**Administració de la Generalitat**==, els òrgans centrals i territorial
 Aquest és **el precepte operatiu de la llei per a la policia local**.
 
 :::articles
-Quan | art. 65.1
+art. 65.1 | Quan
 Els ==**agents dels cossos i forces de seguretat** poden adoptar mesures provisionals immediates== en casos d'==**urgència absoluta**==, davant d'espectacles i activitats recreatives que comportin un ==**risc immediat d'afectar greument la seguretat de les persones i els béns o la convivència** entre els ciutadans==. Per valorar la gravetat i la urgència poden ==disposar de suport tècnic especialitzat immediat==.
 
-Quines | art. 65.3
+art. 65.3 | Quines
 a) La ==**suspensió immediata de les activitats i el precinte** dels establiments, instal·lacions o instruments==, quan puguin produir-se greus problemes de seguretat.
 b) El ==**desallotjament** dels establiments i espais oberts al públic== quan, pel nombre d'assistents o altres circumstàncies, es posi ==en greu perill de forma concreta i manifesta la seguretat de les persones== o s'afecti greument la convivència. Aquesta mesura comporta la ==**prohibició que el públic hi entri fins a l'hora d'obertura del dia o sessió següent**==.
 c) ==Altres mesures menys restrictives==, proporcionades i adequades a les circumstàncies.
 
-Comís i precinte | art. 65.5
+art. 65.5 | Comís i precinte
 Els agents poden ==**decomissar o precintar els béns** relacionats amb l'activitat o les entrades de revenda o venda ambulant==, per garantir l'efectivitat de les prohibicions i suspensions i evitar la continuïtat d'activitats il·legals.
 
-Terminis | art. 65.2
+art. 65.2 | Terminis
 Els agents ho han de ==**comunicar dins de les 48 hores següents**== a l'òrgan competent, el qual ha de ==**confirmar-les, modificar-les o revocar-les en el termini de 5 dies**== a comptar des del primer dia hàbil següent al de la comunicació. ==L'incompliment d'aquests terminis comporta **automàticament l'aixecament** de les mesures==.
 :::
 

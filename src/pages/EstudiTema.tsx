@@ -107,8 +107,16 @@ function Bloc({ b }: { b: BlocContingut }) {
           }}>
             {a.ref}
           </div>
-          <div style={{ fontSize: 14.5, fontWeight: 800, letterSpacing: -0.35, marginTop: 11 }}>{a.titol}</div>
-          <div style={{ fontSize: 13, color: V.muted, lineHeight: 1.5, marginTop: 5 }}>{a.text}</div>
+          <div
+            className="temari-text"
+            style={{ fontSize: 14.5, fontWeight: 800, letterSpacing: -0.35, marginTop: 11 }}
+            dangerouslySetInnerHTML={{ __html: a.titol }}
+          />
+          <div
+            className="temari-text"
+            style={{ fontSize: 13, color: V.muted, lineHeight: 1.5, marginTop: 5 }}
+            dangerouslySetInnerHTML={{ __html: a.text }}
+          />
         </div>
       ))}
     </div>

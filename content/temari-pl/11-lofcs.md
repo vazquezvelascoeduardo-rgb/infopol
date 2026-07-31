@@ -86,16 +86,16 @@ La **dedicació professional** de l'art. 5.4 és el fonament de l'actuació **fo
 L'**article 6è** conté el règim estatutari comú a tots els cossos, i tres dels seus apartats són pregunta habitual:
 
 :::articles
-Incompatibilitat | art. 6.7
+art. 6.7 | Incompatibilitat
 La ==**pertinença a les forces i cossos de seguretat és causa d'incompatibilitat per exercir qualsevol altra activitat pública o privada**==, llevat de les exceptuades per la legislació d'incompatibilitats.
 
-Dret de vaga | art. 6.8
+art. 6.8 | Dret de vaga
 Els membres de les forces i cossos de seguretat ==**no poden exercir en cap cas el dret de vaga**==, ni accions substitutives d'aquesta o concertades amb la finalitat d'alterar el normal funcionament dels serveis.
 
-Règim disciplinari | art. 6.9
+art. 6.9 | Règim disciplinari
 Inspirat en principis d'acord amb la ==missió constitucional== i amb l'==estructura i organització **jerarquitzada i disciplinada**== pròpies dels cossos.
 
-Agents de l'autoritat | art. 7.1
+art. 7.1 | Agents de l'autoritat
 En l'exercici de les seves funcions, els membres de les forces i cossos de seguretat tenen ==**a tots els efectes legals el caràcter d'agents de l'autoritat**==.
 :::
 

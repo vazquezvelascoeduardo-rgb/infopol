@@ -19,16 +19,16 @@ L'**article 4** conté una remissió que t'afecta directament: les disposicions 
 L'**article 8.1** defineix l'empleat públic: qui ==exerceix funcions retribuïdes a les administracions públiques al servei dels interessos generals==. I l'apartat 2 en fa ==**quatre classes**==:
 
 :::articles
-Funcionaris de carrera | art. 9
+art. 9 | Funcionaris de carrera
 Vinculats per ==nomenament legal== i una ==relació estatutària regulada pel dret administratiu== per exercir serveis professionals retribuïts ==de caràcter **permanent**==. L'apartat 2 reserva ==**exclusivament als funcionaris públics** l'exercici de funcions que impliquin participació directa o indirecta en les **potestats públiques** o en la **salvaguarda dels interessos generals**==.
 
-Funcionaris interins | art. 10
+art. 10 | Funcionaris interins
 Nomenats ==amb caràcter temporal== per raons ==expressament justificades de necessitat i urgència==, per exercir funcions pròpies de funcionaris de carrera. Supòsits: places vacants (màxim ==3 anys==), substitució transitòria de titulars, execució de programes temporals (màxim ==3 anys ampliables 12 mesos==) i excés o acumulació de tasques (màxim ==9 mesos dins d'un període de 18==).
 
-Personal laboral | art. 11
+art. 11 | Personal laboral
 En virtut de ==contracte de treball formalitzat per escrit==. Pot ser ==fix, per temps indefinit o temporal==.
 
-Personal eventual | art. 12
+art. 12 | Personal eventual
 Per ==nomenament i amb caràcter no permanent==, només fa funcions ==de confiança o assessorament especial==. ==Nomenament i cessament lliures==; cessa ==en tot cas quan cessa l'autoritat== a qui assisteix. La seva condició ==**no pot constituir mèrit** per accedir a la funció pública ni per a la promoció interna==.
 :::
 
@@ -61,7 +61,7 @@ El límit de l'obediència apareix tres vegades a la teva normativa i sempre igu
 L'**article 55.1** parteix dels principis constitucionals d'==igualtat, mèrit i capacitat== (art. 23.2 i 103.3 CE) i hi afegeix els d'==publicitat de les convocatòries i les bases==, ==transparència==, ==imparcialitat i professionalitat dels membres dels òrgans de selecció==, ==independència i discrecionalitat tècnica== d'aquests òrgans, ==adequació entre el contingut dels processos i les funcions== i ==agilitat==.
 
 :::articles
-Requisits generals | art. 56.1
+art. 56.1 | Requisits generals
 a) ==Nacionalitat espanyola== (amb les excepcions de l'art. 57 per a nacionals de la UE, que **no** s'apliquen als cossos policials, reservats als espanyols).
 b) ==Capacitat funcional== per exercir les tasques.
 c) ==Tenir 16 anys complerts== i no excedir l'edat màxima de jubilació forçosa. ==Només per llei== es pot establir una altra edat màxima.
@@ -78,10 +78,10 @@ L'**article 76** classifica els cossos i escales segons la ==titulació exigida=
 > Articles 63 a 92
 
 :::articles
-Situacions administratives | art. 85.1
+art. 85.1 | Situacions administratives
 a) ==Servei actiu== · b) ==Serveis especials== · c) ==Servei en altres administracions públiques== · d) ==Excedència== · e) ==Suspensió de funcions==.
 
-Pèrdua de la condició de funcionari de carrera | art. 63
+art. 63 | Pèrdua de la condició de funcionari de carrera
 a) ==Renúncia== a la condició de funcionari.
 b) ==Pèrdua de la nacionalitat==.
 c) ==Jubilació total==.
@@ -190,13 +190,13 @@ Dos límits que cauen: la ==**separació del servei** i l'**acomiadament discipl
 ### Prescripció (article 97)
 
 :::articles
-Faltes | art. 97.1
+art. 97.1 | Faltes
 Molt greus: ==3 anys== · Greus: ==2 anys== · Lleus: ==6 mesos==.
 
-Sancions | art. 97.1
+art. 97.1 | Sancions
 Per faltes molt greus: ==3 anys== · Per faltes greus: ==2 anys== · Per faltes lleus: ==1 any==.
 
-Còmput | art. 97.2
+art. 97.2 | Còmput
 Les **faltes**, des que s'han comès; en les ==continuades, des del cessament de la seva comissió==. Les **sancions**, ==des de la fermesa de la resolució sancionadora==.
 :::
 

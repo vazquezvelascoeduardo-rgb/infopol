@@ -12,16 +12,16 @@ Per a tu és una llei doblement important. Primer, perquè és curta i s'aprèn 
 L'**article 1r** defineix **quatre supòsits** de persona il·legalment detinguda:
 
 :::articles
-a) Sense empara legal | art. 1.a
+art. 1.a | a) Sense empara legal
 ==Detingudes per una autoritat, agent, funcionari públic o **particular** sense que concorrin els supòsits legals, o sense complir les formalitats i requisits exigits per les lleis.==
 
-b) Internament il·lícit | art. 1.b
+art. 1.b | b) Internament il·lícit
 ==Persones il·lícitament internades en qualsevol establiment o lloc.==
 
-c) Termini excedit | art. 1.c
+art. 1.c | c) Termini excedit
 ==Detingudes per un **termini superior al legal** si, un cop transcorregut, no són posades en llibertat ni lliurades al jutge més pròxim al lloc de la detenció.==
 
-d) Drets vulnerats | art. 1.d
+art. 1.d | d) Drets vulnerats
 ==Privades de llibertat a qui **no els són respectats els drets** que la Constitució i les lleis processals garanteixen a tota persona detinguda.==
 :::
 

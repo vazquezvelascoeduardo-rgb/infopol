@@ -8,10 +8,10 @@ subtitol: Reial decret 2822/1998, de 23 de desembre, pel qual s'aprova el Reglam
 Si el Reglament de conductors diu **qui** pot conduir i el de circulació diu **com** s'ha de circular, aquest diu ==**amb què**==: les autoritzacions administratives dels vehicles, les seves condicions tècniques, la documentació que han de portar, la matriculació i les plaques.
 
 :::articles
-Regla base | art. 1
+art. 1 | Regla base
 La circulació de vehicles exigeix ==**obtenir prèviament l'autorització administrativa** corresponent==, dirigida a verificar que estan en perfecte estat de funcionament i s'ajusten a les prescripcions tècniques. ==**Es prohibeix la circulació de vehicles que no disposin d'aquesta autorització.**==
 
-Conseqüència | art. 1.2
+art. 1.2 | Conseqüència
 La circulació d'un vehicle ==**sense autorització** — per no haver-la obtingut, per anul·lació o per pèrdua de vigència — ==dona lloc a la seva ==**immobilització**== fins que es disposi de l'autorització.
 :::
 
@@ -93,7 +93,7 @@ Circular amb la ==**ITV caducada**== és infracció ==**greu**== i habilita la =
 > Article 26
 
 :::articles
-El conductor està obligat a portar i exhibir | art. 26.1
+art. 26.1 | El conductor està obligat a portar i exhibir
 a) El ==**permís de circulació**== (o ==llicència de circulació== en els ciclomotors). Pot ser substituït per una ==autorització provisional== expedida per la Prefectura de Trànsit.
 b) La ==**targeta d'inspecció tècnica**== (o ==certificat de característiques tècniques== en els ciclomotors).
 c) En els conjunts amb remolc de MMA ==igual o inferior a 750 kg==, la targeta d'ITV del remolc.

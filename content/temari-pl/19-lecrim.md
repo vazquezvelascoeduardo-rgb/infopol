@@ -8,7 +8,7 @@ subtitol: Reial decret de 14 de setembre de 1882, Llei d'enjudiciament criminal 
 La **LECrim** és la llei que regula el ==procés penal a l'Estat espanyol==. Té més de 140 anys —és de ==**1882**==— però està profundament reformada. Els seus principis: ==només s'imposa pena en virtut de sentència dictada pel jutge o tribunal competent== (art. 1) i el jutge ha de fer constar ==tant les circumstàncies adverses com les favorables== a l'investigat (art. 2).
 
 :::articles
-Qui instrueix | art. 14
+art. 14 | Qui instrueix
 Amb caràcter general, la instrucció de les causes per delicte correspon al ==**jutge d'instrucció**== del partit judicial on s'ha comès el delicte.
 
 Qui jutja els delictes lleus
@@ -27,22 +27,22 @@ L'==**Audiència Provincial**==. Determinats delictes (homicidi, amenaces, omiss
 La **denúncia** és l'acte pel qual es posa en coneixement de l'autoritat la ==notícia d'un fet possiblement delictiu==. No és una acusació: ==**qui denuncia no esdevé part del procés** pel sol fet de denunciar==.
 
 :::articles
-Deure de denunciar | art. 259
+art. 259 | Deure de denunciar
 ==Qui **presenciï** la perpetració de qualsevol delicte públic està obligat a posar-ho immediatament en coneixement== del jutge d'instrucció, de pau o del funcionari fiscal més pròxim.
 
-Exempts per condició | art. 260
+art. 260 | Exempts per condició
 ==No comprèn els **impúbers** ni els qui **no gaudeixin del ple ús de la seva raó**.==
 
-Exempts per parentiu | art. 261
+art. 261 | Exempts per parentiu
 ==El **cònjuge** del delinqüent no separat legalment o de fet, o qui hi convisqui en anàloga relació d'afectivitat; els **ascendents i descendents**; i els **parents col·laterals fins al segon grau** inclusivament.== Aquesta exempció ==**no s'aplica** quan es tracti d'un delicte contra la vida, la integritat, la llibertat o la indemnitat sexual, o de tracta== quan la víctima sigui menor o persona amb discapacitat necessitada d'especial protecció.
 
-Deure per raó del càrrec | art. 262
+art. 262 | Deure per raó del càrrec
 Els qui ==per raó dels seus càrrecs, professions o oficis== tinguin notícia d'un delicte públic ==estan obligats a denunciar-lo **immediatament**== al Ministeri Fiscal, al tribunal competent o al jutge d'instrucció.
 
-Forma | arts. 265 a 267
+arts. 265 a 267 | Forma
 Es pot presentar ==**per escrit o verbalment**==, ==**personalment o per mandatari**==. Si és verbal, ==se n'estén **acta**== que signen el denunciant i qui la rep.
 
-Efectes | art. 269
+art. 269 | Efectes
 Formalitzada la denúncia, ==s'ha de procedir immediatament a la comprovació del fet==, ==**llevat** que no revesteixi caràcter de delicte o que la denúncia sigui **manifestament falsa**==.
 :::
 
@@ -72,16 +72,16 @@ La diferència **denúncia / querella** és pregunta garantida:
 L'**article 282** defineix la funció: la policia judicial té per objecte ==**esbrinar els delictes públics** que es cometin en el seu territori, practicar les **diligències necessàries per comprovar-los i descobrir els delinqüents**, i **recollir tots els efectes, instruments o proves** del delicte de la desaparició dels quals hi hagi perill, posant-los a disposició de l'autoritat judicial==.
 
 :::articles
-Qui la compon | art. 283 i art. 29 LOFCS
+art. 283 i art. 29 LOFCS | Qui la compon
 Formen la policia judicial ==**tots els membres de les forces i cossos de seguretat**, incloses les policies locals==, quan actuen en aquestes funcions. Existeixen, a més, ==**unitats orgàniques de policia judicial**== adscrites als jutjats i fiscalies.
 
-Dependència | art. 126 CE i art. 31 LOFCS
+art. 126 CE i art. 31 LOFCS | Dependència
 La policia judicial depèn ==**orgànicament** de la seva administració== i ==**funcionalment** dels jutges, tribunals i del Ministeri Fiscal== en les funcions d'esbrinament del delicte i descobriment i assegurament del delinqüent.
 
-Comunicació | art. 284.1
+art. 284.1 | Comunicació
 Immediatament que tinguin coneixement d'un delicte públic, ==ho han de participar a l'autoritat judicial o al Ministeri Fiscal==, si poden fer-ho sense deixar de practicar les diligències de prevenció; si no, ==així que les hagin acabades==.
 
-Atestat sense autor conegut | art. 284.2
+art. 284.2 | Atestat sense autor conegut
 Quan ==**no hi hagi autor conegut**==, la policia judicial ==**conserva l'atestat a disposició** del Ministeri Fiscal i de l'autoritat judicial, **sense enviar-lo**==, llevat que hi hagi víctima, s'hagin practicat diligències que requereixin control judicial, es tracti de determinats delictes o el fiscal o el jutge el requereixin.
 :::
 
@@ -101,7 +101,7 @@ L'atestat s'estructura amb un ==encapçalament o diligència d'inici== (identifi
 L'**article 489** parteix del principi: ==**ningú pot ser detingut sinó en els casos i en la forma que les lleis prescriuen**==.
 
 :::articles
-Qualsevol persona pot detenir | art. 490
+art. 490 | Qualsevol persona pot detenir
 1r ==Qui intenti cometre un delicte **en el moment d'anar a cometre'l**.==
 2n ==El **delinqüent in fraganti**.==
 3r ==Qui s'escapi de l'establiment penal on compleixi condemna.==
@@ -110,13 +110,13 @@ Qualsevol persona pot detenir | art. 490
 6è ==Qui s'escapi en ser conduït davant l'autoritat judicial.==
 7è ==El processat o condemnat que estigui en rebel·lia.==
 
-L'autoritat o agent està OBLIGAT a detenir | art. 492
+art. 492 | L'autoritat o agent està OBLIGAT a detenir
 1r ==Qualsevol que es trobi en algun dels casos de l'article 490.==
 2n ==Qui estigui processat per delicte amb pena superior a la de presó correccional.==
 3r ==El processat per delicte amb pena inferior, si els antecedents o les circumstàncies fan presumir que **no comparerà** quan sigui cridat== (llevat que presti fiança bastant).
 4t ==Qui estigui processat o **cridat i cercat**== per l'autoritat judicial.
 
-Delictes lleus | art. 495
+art. 495 | Delictes lleus
 ==**No es pot detenir per la presumpta comissió de delictes lleus**==, ==llevat que el presumpte responsable **no tingui domicili conegut ni doni fiança bastant**==, a judici de l'autoritat o agent.
 :::
 
@@ -129,13 +129,13 @@ Les dues asimetries de la detenció:
 ### Terminis
 
 :::articles
-Regla general | art. 520.1 i art. 17.2 CE
+art. 520.1 i art. 17.2 CE | Regla general
 La detenció preventiva ==**no pot durar més del temps estrictament necessari**== per fer les esbrinaments tendents a l'esclariment dels fets. En tot cas, ==en el **termini màxim de 72 hores** el detingut ha de ser posat **en llibertat o a disposició de l'autoritat judicial**==. A l'atestat s'ha de reflectir ==el lloc i l'hora de la detenció i de la posada a disposició judicial o en llibertat==.
 
-Particular que deté | art. 496
+art. 496 | Particular que deté
 Ha de ==posar en llibertat o lliurar el detingut al jutge més pròxim **dins de les 24 hores**== següents a la detenció.
 
-Terrorisme | art. 520 bis
+art. 520 bis | Terrorisme
 La detenció es ==pot prolongar el temps necessari per als fins investigadors **fins a un màxim de 48 hores més**==, sempre que la pròrroga se sol·liciti mitjançant comunicació motivada ==dins de les primeres 48 hores== i sigui ==autoritzada pel jutge en les 24 hores següents==. Total màxim: ==**120 hores**==.
 
 Menors | LO 5/2000, art. 17

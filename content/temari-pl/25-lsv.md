@@ -53,13 +53,13 @@ La lletra a) conté les ==**cinc potestats municipals**== que has de saber recit
 > Articles 10 a 21
 
 :::articles
-Conducció diligent | art. 13
+art. 13 | Conducció diligent
 El conductor ha d'estar ==**en tot moment en condicions de controlar el vehicle**== i adoptar les precaucions necessàries en aproximar-se a altres usuaris, ==especialment nens, gent gran, persones cegues o amb discapacitat o problemes de mobilitat==. Ha de mantenir la ==llibertat de moviments, el camp de visió necessari i l'atenció permanent==. Es prohibeix conduir ==utilitzant qualsevol tipus de casc d'àudio o auricular== connectat a aparells de so.
 
-Alcohol i drogues | art. 14
+art. 14 | Alcohol i drogues
 No pot circular el conductor amb ==taxes d'alcohol superiors a les reglamentàries==. ==**En cap cas el conductor menor d'edat pot circular amb una taxa superior a 0 g/l en sang o 0 mg/l en aire espirat.**== Tampoc pot conduir amb ==presència de drogues a l'organisme==, excloses les prescrites facultativament amb finalitat terapèutica. El conductor ==**està obligat a sotmetre's a les proves**== de detecció, i també ==**la resta d'usuaris de la via**== quan estiguin implicats en un accident o hagin comès una infracció.
 
-Límits de velocitat | art. 21
+art. 21 | Límits de velocitat
 El conductor ha de respectar els límits establerts i, a més, adequar la velocitat a les seves condicions físiques i psíquiques, l'estat de la via i del vehicle, les condicions meteorològiques i de circulació, ==de manera que sempre pugui **detenir el vehicle dins dels límits del seu camp de visió**==.
 :::
 
@@ -71,22 +71,22 @@ L'obligació de sotmetre's a les proves ==**no és només del conductor**==: tam
 > Articles 60 a 71
 
 :::articles
-Assignació | art. 63.1
+art. 63.1 | Assignació
 Al titular d'un permís o llicència se li assigna un ==**crèdit inicial de 12 punts**==.
 
-Excepcions | art. 63.2
+art. 63.2 | Excepcions
 ==**8 punts**== quan: a) el titular té el permís amb una ==antiguitat **no superior a tres anys**== (llevat que ja fos titular d'un altre permís amb aquella antiguitat); b) el titular ==ha recuperat el permís després d'haver perdut la totalitat dels punts==.
 
-Crèdit únic | art. 63.3
+art. 63.3 | Crèdit únic
 El crèdit de punts és ==**únic per a totes les autoritzacions**== de què sigui titular el conductor.
 
-Increment | art. 63.4 i 63.5
+art. 63.4 i 63.5 | Increment
 Als ==dos anys== sense ser sancionat en ferm per infraccions que comportin pèrdua de punts, el titular ==incrementa el seu crèdit en **2 punts**==; als ==tres anys==, en ==**2 punts més**==, fins a un ==**màxim de 15 punts**==.
 
-Recuperació | art. 65
+art. 65 | Recuperació
 Transcorreguts ==**dos anys** sense ser sancionat en ferm==, el titular afectat per una pèrdua parcial ==recupera la totalitat del crèdit inicial de 12 punts==. També es poden recuperar ==fins a **6 punts** fent un curs de sensibilització i reeducació viària==, un cop cada ==dos anys== (o cada ==any== per als professionals).
 
-Pèrdua de vigència | art. 66 i 68
+art. 66 i 68 | Pèrdua de vigència
 El permís perd la vigència ==quan s'esgota el crèdit total de punts==. Per obtenir-lo de nou cal ==fer un curs== i ==superar la prova de control de coneixements==, transcorregut el termini de ==**6 mesos**== (o ==**3 mesos** per als conductors professionals==) des de la pèrdua de vigència.
 :::
 
@@ -98,13 +98,13 @@ Les xifres del carnet per punts que cauen totes juntes: ==**12** punts inicials=
 > Articles 104 a 106 · el que faràs al carrer
 
 :::articles
-Immobilització | art. 104
+art. 104 | Immobilització
 Els agents poden immobilitzar el vehicle, entre altres casos, quan: el conductor ==superi les taxes d'alcohol o presenti drogues==, es ==negui a les proves==, ==no disposi de l'assegurança obligatòria==, el vehicle ==no compleixi les condicions tècniques o superi els nivells de gasos, fums o soroll==, ==manqui de l'autorització administrativa== o dels dispositius obligatoris, el conductor ==no tingui permís o el tingui perdut per punts==, o ==el vehicle transporti un excés de persones o mercaderies perilloses sense complir la normativa==.
 
-Retirada i dipòsit | art. 105
+art. 105 | Retirada i dipòsit
 L'autoritat pot retirar el vehicle i dipositar-lo quan: a) ==constitueixi perill, causi greus pertorbacions a la circulació de vehicles o vianants o deteriori un servei o patrimoni públic==; b) ==en cas d'accident que impedeixi continuar la marxa==; c) quan, procedint la immobilització, ==no hi hagi lloc adequat per practicar-la sense obstaculitzar la circulació==; d) quan, ==immobilitzat un vehicle, no cessin les causes==; e) quan estigui ==estacionat en places reservades per a persones amb discapacitat sense el distintiu==; f) quan estigui ==estacionat en zones d'estacionament limitat sense títol o excedint-ne el temps==; g) quan ==obstaculitzi o dificulti la circulació o suposi un perill==.
 
-Tractament residual | art. 106
+art. 106 | Tractament residual
 Es pot ==tractar el vehicle com a residu== quan ==hagin transcorregut més de **dos mesos** al dipòsit== i el titular no l'hagi retirat, o quan romangui ==estacionat per un període **superior a un mes** al mateix lloc i presenti desperfectes que facin impossible el desplaçament pels seus propis mitjans==.
 :::
 
@@ -118,19 +118,19 @@ Els dos terminis de l'article 106 es confonen: ==**2 mesos al dipòsit**== per t
 El catàleg complet d'infraccions de trànsit no s'estudia de memòria: és molt extens i es consulta. Aquestes són, però, les dades que sí apareixen als exàmens:
 
 :::articles
-Classificació | art. 74 a 77
+art. 74 a 77 | Classificació
 Les infraccions es classifiquen en ==**lleus, greus i molt greus**==.
 
-Prescripció d'infraccions | art. 112.1
+art. 112.1 | Prescripció d'infraccions
 ==**3 mesos** les lleus== i ==**6 mesos** les greus i molt greus==, a comptar ==des del mateix dia en què s'hagin comès els fets==.
 
-Prescripció de sancions | art. 112.4
+art. 112.4 | Prescripció de sancions
 El termini de prescripció de les sancions consistents en ==**multa és de 4 anys**==, i el de la ==**suspensió** del permís de l'art. 80, d'**1 any**==, computats des de l'endemà del dia en què la sanció adquireix fermesa en via administrativa.
 
-Caducitat | art. 112.3
+art. 112.3 | Caducitat
 Si no s'ha dictat resolució sancionadora ==transcorregut **un any** des de la iniciació del procediment==, es produeix la ==caducitat== i s'arxiven les actuacions.
 
-Procediment abreujat | art. 94
+art. 94 | Procediment abreujat
 Fet el pagament voluntari ==en l'acte de lliurament de la denúncia o dins dels **20 dies naturals**== següents a la notificació, el procediment conclou amb: a) ==**reducció del 50 %** de l'import==; b) ==renúncia a formular al·legacions==; c) ==terminació sense resolució expressa==; d) ==esgotament de la via administrativa==, recurrible només davant la jurisdicció contenciosa administrativa; f) ==fermesa de la sanció des del pagament==; g) ==la sanció **no computa com a antecedent** al Registre de Conductors i Infractors, sempre que sigui greu i **no comporti pèrdua de punts**==.
 :::
 

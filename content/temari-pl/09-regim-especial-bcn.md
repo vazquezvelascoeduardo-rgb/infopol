@@ -41,13 +41,13 @@ La part més extensa: hisenda municipal, tributs, Consell Tributari, planificaci
 Aquest capítol és el que has de dominar. Recull les competències municipals en seguretat que **només l'Estat podia atribuir**.
 
 :::articles
-Competències de l'Ajuntament | art. 30.1
+art. 30.1 | Competències de l'Ajuntament
 Correspon a l'Ajuntament de Barcelona ==**col·laborar** amb les administracions competents en la **prevenció, manteniment i restabliment** de la seguretat ciutadana==, i ==tractar de garantir-la pel que fa als actes que ocasionin **molèstia social o danys sobre béns i persones a la via pública**==, sense perjudici de les competències de la Carta municipal.
 
-Infraccions i comís | art. 30.2
+art. 30.2 | Infraccions i comís
 Les ordenances municipals poden considerar ==infracció administrativa **tant la prestació de serveis o el subministrament de béns a l'espai públic sense llicència municipal com la demanda o adquisició** d'aquests serveis o béns==. I, per garantir el compliment de les ordenances, els ==**agents de l'autoritat poden decomissar els estris, el gènere i els diners**== objecte de la infracció.
 
-Mesures alternatives | art. 30.3
+art. 30.3 | Mesures alternatives
 En la imposició de sancions per incompliment de deures, prohibicions o limitacions de les ordenances, per ==resolució motivada== es pot ==**substituir la sanció econòmica** per **treballs en benefici de la comunitat**, l'assistència obligatòria a cursos de formació, sessions individualitzades o qualsevol altra mesura alternativa== que tingui la finalitat de sensibilitzar l'infractor o ==reparar el dany moral de les víctimes==.
 :::
 
@@ -59,16 +59,16 @@ L'article 30 conté tres eines molt preguntades i molt operatives:
 :::
 
 :::articles
-Junta Local de Seguretat | art. 31
+art. 31 | Junta Local de Seguretat
 Exerceix les funcions de la seva normativa reguladora. A les sessions hi poden participar ==com a **vocals**==, d'acord amb l'Administració de l'Estat, els ==comandaments de les FCSE amb responsabilitats funcionals al municipi==, i si escau ==un jutge o magistrat designat per la Sala de Govern del TSJ== i ==un fiscal designat pel fiscal en cap del TSJ==.
 
-Òrgans consultius | art. 32
+art. 32 | Òrgans consultius
 Si l'Ajuntament constitueix un òrgan consultiu i de participació en seguretat ciutadana, la ==Sala de Govern del TSJC i el fiscal en cap del TSJC hi poden designar representants==.
 
-Competències de l'alcalde | art. 33
+art. 33 | Competències de l'alcalde
 En l'execució dels acords de la Junta Local de Seguretat, disposa de les competències que li atorguen la legislació estatal i autonòmica. L'alcalde ==**ha d'informar anualment el Ple** sobre el seguiment dels acords de la Junta Local de Seguretat==.
 
-La Guàrdia Urbana | art. 34
+art. 34 | La Guàrdia Urbana
 Sota la ==**dependència jeràrquica de l'alcalde**==, actua com a ==**policia administrativa**, **policia de seguretat i assistencial** i **policia judicial**==, en els termes de la normativa estatal i autonòmica.
 :::
 

@@ -31,16 +31,16 @@ La responsabilitat per danys de l'art. 4.3 és **directa del participant** i nom
 L'**article 5è** enumera els **quatre supòsits** en què l'autoritat governativa **suspendrà i, si escau, dissoldrà** les reunions i manifestacions:
 
 :::articles
-a) Il·lícites penalment | art. 5.a
+art. 5.a | a) Il·lícites penalment
 ==Quan es considerin **il·lícites de conformitat amb les lleis penals**.==
 
-b) Alteració amb perill | art. 5.b
+art. 5.b | b) Alteració amb perill
 ==Quan es produeixin **alteracions de l'ordre públic amb perill per a persones o béns**.==
 
-c) Uniformes paramilitars | art. 5.c
+art. 5.c | c) Uniformes paramilitars
 ==Quan els assistents facin ús d'**uniformes paramilitars**.==
 
-d) Convocades per militars o GC | art. 5.d
+art. 5.d | d) Convocades per militars o GC
 ==Quan siguin organitzades per membres de les **Forces Armades o de la Guàrdia Civil** infringint les limitacions de la seva legislació específica.==
 :::
 

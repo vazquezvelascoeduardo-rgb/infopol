@@ -39,7 +39,13 @@
 // Cada `##` és un apartat i surt a l'índex de l'esquerra. La resta
 // (subapartats, llistes, caixes i targetes) va dins de l'apartat obert.
 
-export type Article = { ref: string; titol: string; text: string };
+export type Article = {
+  ref: string;
+  /** Títol ja formatat (pot portar negreta o marcador). */
+  titol: string;
+  /** Cos de la targeta, ja convertit a HTML. */
+  text: string;
+};
 
 export type BlocContingut =
   | { tipus: 'text'; html: string }
@@ -124,22 +130,35 @@ function aHtml(linies: string[]): string {
   return out.join('\n');
 }
 
-/** Les targetes d'article: "ref | títol" i, a sota, el text. */
+/**
+ * Les targetes d'article: "ref | títol" i, a sota, el text.
+ *
+ * El títol i el cos passen pel format en línia com qualsevol altre text
+ * del tema: si no ho fessin, dins de les targetes s'hi veurien els
+ * `**` i els `==` en cru.
+ */
 function llegeixArticles(linies: string[]): Article[] {
-  const out: Article[] = [];
-  let actual: Article | null = null;
+  type Cru = { ref: string; titol: string; cos: string[] };
+  const crus: Cru[] = [];
+  let actual: Cru | null = null;
   for (const l of linies) {
     if (/^\s*$/.test(l)) continue;
     const cap = l.match(/^(.+?)\s*\|\s*(.+)$/);
     if (cap) {
-      if (actual) out.push(actual);
-      actual = { ref: cap[1].trim(), titol: cap[2].trim(), text: '' };
+      if (actual) crus.push(actual);
+      actual = { ref: cap[1].trim(), titol: cap[2].trim(), cos: [] };
       continue;
     }
-    if (actual) actual.text += (actual.text ? ' ' : '') + l.trim();
+    if (actual) actual.cos.push(l.trim());
   }
-  if (actual) out.push(actual);
-  return out;
+  if (actual) crus.push(actual);
+
+  return crus.map((c) => ({
+    // La referència va dins d'un xip monoespaiat: hi sobra tot el format.
+    ref: c.ref.replace(/[*=]/g, ''),
+    titol: inline(c.titol),
+    text: inline(c.cos.join(' ')),
+  }));
 }
 
 /** ~200 paraules per minut, mínim 1. */

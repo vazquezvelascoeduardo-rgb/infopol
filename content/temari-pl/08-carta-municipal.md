@@ -23,7 +23,7 @@ El **terme municipal** només el pot alterar el ==Parlament de Catalunya, mitjan
 L'**article 8** fixa els principis: el govern municipal actua d'acord amb ==eficàcia, jerarquia, descentralització, desconcentració i coordinació==, i com a criteris essencials d'organització ha de ==diferenciar les funcions **deliberants** (ordenació, programació i control) de les **executives** (govern i administració)== i desenvolupar la ==descentralització i desconcentració territorial==.
 
 :::articles
-Òrgans de govern | art. 9
+art. 9 | Òrgans de govern
 a) El ==**Consell Municipal**== · b) L'==**alcalde o alcaldessa**== · c) La ==**Comissió de Govern**== · d) Els ==**presidents i regidors de districte**==, si escau · e) Els ==**consells de districte**==.
 :::
 
@@ -39,16 +39,16 @@ El **Consell Municipal** és l'òrgan de màxima representació política dels c
 Els districtes són la marca distintiva de l'organització de Barcelona.
 
 :::articles
-Naturalesa | art. 20
+art. 20 | Naturalesa
 Són ==**òrgans territorials** per a la **desconcentració de la gestió** i la **descentralització de la participació ciutadana**==, i per aplicar una política municipal orientada a ==corregir els desequilibris== i representar els interessos dels barris i zones. La seva actuació s'ajusta als principis d'==unitat de govern, eficàcia, coordinació i solidaritat==.
 
-Creació | art. 21.1
+art. 21.1 | Creació
 Correspon al ==**Consell Municipal**== acordar l'establiment de districtes i fixar-ne el ==nombre, límits territorials, organització i funcions==.
 
-Finançament | art. 21.3
+art. 21.3 | Finançament
 El pressupost municipal ha de garantir que ==cada any un **mínim del 15 %** dels recursos ordinaris siguin gestionats pels districtes==.
 
-President del Consell de Districte | art. 22
+art. 22 | President del Consell de Districte
 El ==nomena i separa l'**alcalde** d'entre els **regidors**, a proposta del Consell de Districte==. Representa l'Ajuntament i el districte, convoca i presideix les sessions i eleva propostes a la resta d'òrgans municipals.
 :::
 
@@ -64,12 +64,12 @@ El títol VI és el més extens de la Carta i recorre matèria per matèria: urb
 ### Seguretat ciutadana (capítol XVI, articles 128 a 135)
 
 :::articles
-Competències de l'Ajuntament | art. 128.1
+art. 128.1 | Competències de l'Ajuntament
 a) ==Col·laborar en la funció de policia de seguretat ciutadana==, d'acord amb el que estableix la ==Junta Local de Seguretat==.
 b) ==Sancionar en les ordenances municipals els actes contraris a l'ordre i la seguretat ciutadana en l'àmbit de les relacions de veïnatge==, respectant els drets i llibertats fonamentals.
 c) Exercir les ==atribucions en matèria d'espectacles== que estableix la legislació sectorial.
 
-Qui les exerceix | art. 128.2
+art. 128.2 | Qui les exerceix
 Aquestes competències les ==desenvolupa la **Guàrdia Urbana de Barcelona**==, sense perjudici de les que corresponguin a altres forces i cossos de seguretat.
 :::
 
@@ -90,13 +90,13 @@ Aquest article 129 és el fonament legal de l'**Ordenança de convivència** de 
 :::
 
 :::articles
-Manifestacions | art. 130
+art. 130 | Manifestacions
 L'Ajuntament ha de ==tenir coneixement de les sol·licituds i propostes de manifestacions== presentades davant l'Administració competent i ha d'==emetre informe preceptiu sobre el recorregut proposat==. També pot ==retirar els objectes dipositats a la via pública per companyies de servei públic== si poden ser utilitzats per provocar desordres.
 
-Junta Local de Seguretat de Barcelona | art. 131
+art. 131 | Junta Local de Seguretat de Barcelona
 Funcions: a) ==elaborar les polítiques i plans de seguretat ciutadana i de prevenció del delicte== en l'àmbit municipal; b) ==elaborar els programes de coordinació, col·laboració i cooperació de les forces i cossos de seguretat== que operen a la ciutat, adoptar-ne les decisions, fer-ne el seguiment i executar-les; c) ==intercanviar informació== entre els diferents cossos. ==L'alcalde la presideix== i té ==capacitat executiva per garantir el compliment dels acords==.
 
-L'alcalde com a autoritat de seguretat | art. 132
+art. 132 | L'alcalde com a autoritat de seguretat
 L'alcalde de Barcelona té la ==condició d'autoritat competent en matèria de seguretat== quan actua en exercici de les competències municipals, i ==pot imposar les sancions establertes per la llei==.
 :::
 
@@ -107,7 +107,7 @@ L'**article 133** en fixa la triple naturalesa: la Guàrdia Urbana actua com a =
 Com a ==**policia d'autoritat**== (art. 134), vetlla —a partir de les instruccions generals i ordres de les autoritats municipals, especialment de l'alcalde— pel ==compliment de les ordenances, bans i altres disposicions municipals==.
 
 :::articles
-Funcions | art. 135
+art. 135 | Funcions
 a) ==Protegir les autoritats de l'Ajuntament i els edificis i instal·lacions municipals.==
 b) ==Ordenar i dirigir la mobilitat i l'ús de la via pública== al terme municipal, d'acord amb les normes de circulació.
 c) ==Instruir atestats per accidents de circulació== dins del terme municipal.

@@ -15,16 +15,16 @@ El **Reglament general de circulació** és el que diu ==**com s'ha de circular*
 > Articles 20 a 28
 
 :::articles
-Taxes generals | art. 20
+art. 20 | Taxes generals
 No poden circular els conductors de vehicles ==**ni els conductors de bicicletes**== amb una taxa d'alcohol ==**superior a 0,5 g/l en sang o 0,25 mg/l en aire espirat**==.
 
-Taxes especials | art. 20
+art. 20 | Taxes especials
 ==**0,3 g/l en sang o 0,15 mg/l en aire espirat**== per als conductors de: vehicles de ==transport de mercaderies amb MMA superior a 3.500 kg==, ==transport de viatgers de més de nou places o de servei públic==, ==transport escolar i de menors==, ==mercaderies perilloses==, ==servei d'urgència o transports especials==. La mateixa taxa reduïda s'aplica a ==**qualsevol conductor durant els dos anys següents a l'obtenció del permís**==.
 
-Menors | art. 14 LSV
+art. 14 LSV | Menors
 ==**El conductor menor d'edat: 0 g/l en sang i 0 mg/l en aire espirat.**==
 
-Obligats a sotmetre's a les proves | art. 21
+art. 21 | Obligats a sotmetre's a les proves
 · ==Qualsevol usuari de la via o conductor de vehicle **implicat directament com a possible responsable en un accident** de circulació.==
 · ==Qui condueixi qualsevol vehicle amb **símptomes evidents, manifestacions que denotin o fets que permetin raonablement presumir** que es troba sota la influència de begudes alcohòliques.==
 · ==Els conductors **denunciats per una infracció** de les normes de la llei o dels seus reglaments.==
@@ -42,24 +42,24 @@ Els quatre supòsits de l'article 21 són els que has de saber recitar quan et p
 > Articles 45 a 53
 
 :::articles
-Fora de poblat | art. 48
+art. 48 | Fora de poblat
 ==**Autopista i autovia**==: turismes, motocicletes i autocaravanes de fins a 3.500 kg ==**120 km/h**== · camions, furgonetes, articulats i vehicles amb remolc ==**90**== · autobusos ==**100**==.
 ==**Carretera convencional**==: turismes i motocicletes ==**90**== · camions i furgonetes ==**80**== · autobusos ==**90**==.
 Els vehicles de ==transport escolar i de menors o de mercaderies perilloses redueixen **10 km/h**== el límit que els correspondria.
 
-Vies urbanes | art. 50
+art. 50 | Vies urbanes
 · ==**20 km/h** en vies de **plataforma única** de calçada i vorera.==
 · ==**30 km/h** en vies d'**un únic carril per sentit**.==
 · ==**50 km/h** en vies de **dos o més carrils per sentit**.==
 No es compten els carrils reservats a determinats usuaris ni els de transport públic. L'autoritat municipal pot ==**rebaixar**== aquests límits amb senyalització específica, i ==**excepcionalment augmentar** fins a 50 km/h les vies d'un únic carril per sentit==.
 
-Travessies | art. 50.5
+art. 50.5 | Travessies
 ==**50 km/h** per a tot tipus de vehicles==, rebaixable per acord de l'autoritat municipal amb el titular de la via.
 
-Autopistes i autovies dins de poblat | art. 50.6
+art. 50.6 | Autopistes i autovies dins de poblat
 ==**80 km/h**==, ampliable per acord entre l'autoritat municipal i el titular de la via.
 
-Mercaderies perilloses en via urbana | art. 50.4
+art. 50.4 | Mercaderies perilloses en via urbana
 ==**40 km/h**== a les vies de dos o més carrils per sentit i a les travessies.
 :::
 
@@ -71,17 +71,17 @@ Els límits urbans ==**20 / 30 / 50**== són la modificació del ==**RD 970/2020
 > Articles 56 a 71
 
 :::articles
-Interseccions senyalitzades | art. 56
+art. 56 | Interseccions senyalitzades
 La preferència s'ajusta ==**a la senyalització**== que la reguli. Els conductors han de detenir-se davant l'ordre d'un ==agent== i obeir els ==semàfors==.
 
-Interseccions sense senyalitzar | art. 57
+art. 57 | Interseccions sense senyalitzar
 En defecte de senyal, cal ==**cedir el pas als vehicles que s'aproximin per la dreta**==, amb aquestes excepcions:
 a) ==Els vehicles que circulen per **via pavimentada** tenen preferència sobre els que vénen d'una **sense pavimentar**.==
 b) ==Els vehicles que **circulen per rails** tenen prioritat sobre la resta.==
 c) ==A les **glorietes**, els que ja són dins de la via circular tenen preferència sobre els que hi volen accedir.==
 d) ==Els que circulen per **autopista o autovia** tenen preferència sobre els que hi volen accedir.==
 
-Cessió de pas | art. 65 i 66
+art. 65 i 66 | Cessió de pas
 Tenen preferència, en tot cas, els ==vehicles de **servei d'urgència** en servei urgent==, els ==vianants en els passos senyalitzats i quan el vehicle giri per entrar en una altra via==, i els ==ciclistes en els carrils bici, vorals i passos per a ciclistes==.
 :::
 
@@ -104,13 +104,13 @@ En avançar ==**vianants, animals, vehicles de tracció animal, ciclomotors, veh
 > Articles 90 a 94
 
 :::articles
-Modus | art. 91
+art. 91 | Modus
 La parada i l'estacionament s'han de fer de manera que el vehicle ==no obstaculitzi la circulació ni constitueixi un risc==, tenint cura de la col·locació i ==evitant que es pugui posar en moviment en absència del conductor==.
 
-Parada o estacionament perillosos | art. 91.2
+art. 91.2 | Parada o estacionament perillosos
 Es consideren en lloc perillós o que obstaculitzen greument la circulació, entre d'altres, quan la ==distància entre el vehicle i la vora oposada de la calçada (o una marca longitudinal que en prohibeixi el travessament) sigui **inferior a 3 metres**== o quan ==impedeixin incorporar-se a la circulació a un altre vehicle correctament estacionat==, ==obstrueixin la sortida o entrada d'un immoble==, o s'efectuïn en ==**doble filera** sense conductor==.
 
-Prohibit **parar** | art. 94.1
+art. 94.1 | Prohibit **parar**
 a) ==Corbes i canvis de rasant de visibilitat reduïda==, les seves proximitats, ==túnels i passos inferiors==.
 b) ==Passos a nivell, passos per a ciclistes i **passos per a vianants**==.
 c) ==Carrils o parts de la via reservats exclusivament== a determinats usuaris.
@@ -122,7 +122,7 @@ h) ==Trams senyalitzats amb marca vial longitudinal contínua== sense espai per 
 i) ==Zona d'influència d'una parada de transport públic.==
 j) ==Sobre les voreres, passeigs i altres zones destinades al pas de vianants.==
 
-Prohibit **estacionar** | art. 94.2
+art. 94.2 | Prohibit **estacionar**
 A més de tots els anteriors: ==vies o trams de vies senyalitzats com a zona de vianants== · ==sobre voreres, passeigs i mitjanes== · ==davant de guals senyalitzats== · ==zones reservades a persones amb **discapacitat**== · ==zones reservades a càrrega i descàrrega== · ==parades de transport públic== · ==**doble filera**== · ==davant de sortides d'emergència, locals de pública concurrència i serveis de vigilància== · ==zones de servei de bombers==.
 :::
 
@@ -134,13 +134,13 @@ La distinció ==**parada / estacionament**== és el fonament de tot: la **parada
 > Articles 121 a 126
 
 :::articles
-Prioritat | art. 121
+art. 121 | Prioritat
 Els vianants, ==especialment els de **mobilitat reduïda**, amb discapacitat, **nens** i **persones grans**==, gaudeixen de ==**prioritat de pas i estança a les vies públiques**==. Els usuaris que circulin amb qualsevol tipus de vehicle han de ==prestar especial cura per no posar en risc la seva integritat física==.
 
-Circulació per la calçada | art. 122
+art. 122 | Circulació per la calçada
 Quan no hi ha zona per a vianants practicable, han de circular pel ==**voral esquerre en el sentit de la seva marxa**== o, si no n'hi ha, per la calçada, sempre ==el més allunyats possible del trànsit==. Excepcionalment poden fer-ho pel costat dret quan hi hagi raons de seguretat.
 
-Passos per a vianants | art. 124
+art. 124 | Passos per a vianants
 On hi ha passos per a vianants, ==**cal travessar precisament per ells**==, sense fer-ho per les proximitats. Si el pas té ==semàfor per a vianants==, cal obeir-ne les indicacions; si no en té però la circulació està regulada per ==agent o semàfor==, no es pot penetrar a la calçada mentre aquests permetin la circulació de vehicles.
 :::
 
@@ -152,7 +152,7 @@ La regla del ==**voral esquerre**== per als vianants és contraintuïtiva i cau 
 > Articles 130 a 172
 
 :::articles
-Ordre de preferència | art. 133
+art. 133 | Ordre de preferència
 a) ==**Senyals i ordres dels agents** de l'autoritat encarregats de la vigilància del trànsit.==
 b) ==**Senyalització i abalisament circumstancial** que modifiqui el règim normal d'utilització de la via.==
 c) ==**Semàfors.**==

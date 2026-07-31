@@ -8,10 +8,10 @@ subtitol: Llei orgànica 5/2000, de 12 de gener, reguladora de la responsabilita
 L'**article 1.1** delimita l'àmbit: aquesta llei s'aplica per exigir la responsabilitat de les persones ==**majors de catorze anys i menors de divuit**== per la comissió de fets tipificats com a delictes al Codi penal o a les lleis penals especials.
 
 :::articles
-Menors de 14 anys | art. 3
+art. 3 | Menors de 14 anys
 ==**No se'ls exigeix responsabilitat** amb aquesta llei==: se'ls apliquen les ==normes de **protecció de menors**== del Codi civil i la ==LO 1/1996, de protecció jurídica del menor==. El ==Ministeri Fiscal ha de remetre a l'**entitat pública de protecció de menors**== els particulars que consideri necessaris perquè valori la situació i promogui les mesures de protecció adequades.
 
-Competència | art. 2
+art. 2 | Competència
 El ==**Jutge de Menors**== del lloc on s'hagi comès el fet. També resol sobre les ==responsabilitats civils== derivades.
 :::
 
@@ -75,19 +75,19 @@ n) Privació del permís de conduir ciclomotors o vehicles, o del dret a obtenir
 > Articles 9 i 10
 
 :::articles
-Regla general | art. 9.3
+art. 9.3 | Regla general
 La durada de les mesures ==**no pot excedir de 2 anys**==, computant-hi el temps ja complert en mesura cautelar. Les ==prestacions en benefici de la comunitat no poden superar les **100 hores**== i la ==permanència de cap de setmana, els **8 caps de setmana**==.
 
-Quan es pot imposar internament tancat | art. 9.2
+art. 9.2 | Quan es pot imposar internament tancat
 a) Fets tipificats com a ==**delicte greu**==.
 b) Fets tipificats com a ==delicte **menys greu** en què s'hagi emprat **violència o intimidació** en les persones o s'hagi generat **greu risc** per a la vida o la integritat==.
 c) Fets ==comesos **en grup**== o quan el menor pertanyi o actuï al servei d'una ==banda, organització o associació==, fins i tot transitòria.
 
-Regles especials — fets de l'art. 9.2 | art. 10.1
+art. 10.1 | Regles especials — fets de l'art. 9.2
 a) Menor de ==**14 o 15 anys**: la mesura pot arribar a **3 anys**==; ==150 hores== de prestacions o ==12 caps de setmana==.
 b) Menor de ==**16 o 17 anys**: durada màxima de **6 anys**==; ==200 hores== o ==16 caps de setmana==. Si el fet és d'==**extrema gravetat**==, el jutge ==**ha d'imposar** internament en règim tancat d'**1 a 6 anys**==, complementat amb ==llibertat vigilada amb assistència educativa fins a **5 anys**==. S'entén sempre extrema gravetat quan hi ha ==**reincidència**==.
 
-Delictes molt greus | art. 10.2
+art. 10.2 | Delictes molt greus
 Per als delictes dels arts. ==138, 139, 178.2 i 3, 179, 180, 181.2, 4, 5 i 6 i 571 a 580 del Codi penal==, o qualsevol altre amb ==pena de presó **igual o superior a 15 anys**==, el jutge ==**ha d'imposar**==:
 a) ==14 o 15 anys: internament en règim tancat d'**1 a 5 anys**==, complementat amb llibertat vigilada de fins a ==3 anys==.
 b) ==16 o 17 anys: internament en règim tancat d'**1 a 8 anys**==, complementat amb llibertat vigilada amb assistència educativa de fins a ==5 anys==.
@@ -107,22 +107,22 @@ La xifra de ==**8 anys** només existeix per a **16-17 anys** i en els supòsits
 Aquest és **l'article operatiu** del tema per a la policia local.
 
 :::articles
-Forma i informació | art. 17.1
+art. 17.1 | Forma i informació
 La detenció s'ha de practicar ==**de la forma que menys perjudiqui el menor**==. Cal informar-lo ==**en un llenguatge clar i comprensible i de forma immediata**== dels fets que se li imputen, de les raons de la detenció i dels drets que l'assisteixen, ==especialment els de l'**article 520 de la LECrim**==.
 
-Notificacions | art. 17.1
+art. 17.1 | Notificacions
 S'ha de ==**notificar immediatament** el fet de la detenció i el lloc de custòdia als **representants legals** del menor i al **Ministeri Fiscal**==. Si el menor és estranger, s'ha de notificar a les ==autoritats consulars== quan tingui la residència habitual fora d'Espanya o quan ho sol·licitin ell o els seus representants.
 
-Declaració | art. 17.2
+art. 17.2 | Declaració
 ==Tota declaració del menor detingut s'ha de fer **en presència del seu lletrat** i **dels qui exerceixin la pàtria potestat, tutela o guarda**==, llevat que les circumstàncies aconsellin el contrari; ==si no n'hi ha, en presència del **Ministeri Fiscal**==, representat per persona distinta de l'instructor. El menor té dret a ==**entrevista reservada amb el seu advocat abans i després** de la declaració==.
 
-Custòdia | art. 17.3
+art. 17.3 | Custòdia
 Els menors han d'estar custodiats en ==**dependències adequades i separades de les dels majors d'edat**==, i han de rebre els ==cuidatges, protecció i assistència social, psicològica, mèdica i física== que requereixin.
 
-Terminis | art. 17.4 i 17.5
+art. 17.4 i 17.5 | Terminis
 La detenció ==**no pot durar més del temps estrictament necessari** i, en tot cas, dins del termini màxim de **24 hores**== el menor ha de ser posat ==en llibertat o a disposició del **Ministeri Fiscal**==. El fiscal disposa llavors de ==**48 hores**== des de la detenció per ==deixar-lo en llibertat o desistir, o bé instar del Jutge de Menors les mesures cautelars procedents==.
 
-Habeas corpus | art. 17.6
+art. 17.6 | Habeas corpus
 El menor detingut ==pot instar el procediment d'**habeas corpus**== per si mateix, o a través dels seus representants legals o del Ministeri Fiscal.
 :::
 
@@ -149,7 +149,7 @@ El tret distintiu és qui instrueix: a diferència del procés penal d'adults, =
 L'==**equip tècnic**== (psicòleg, educador i treballador social) elabora un ==informe sobre la situació psicològica, educativa i familiar del menor== que és ==**preceptiu**== i que orienta la mesura.
 
 :::articles
-Mesures cautelars | art. 28
+art. 28 | Mesures cautelars
 El fiscal pot sol·licitar al Jutge de Menors, ==en qualsevol moment==, mesures cautelars per a la custòdia i defensa del menor o la protecció de la víctima: ==internament en centre en el règim adequat, llibertat vigilada, prohibició d'aproximar-se o comunicar-se amb la víctima, o convivència amb una altra persona, família o grup educatiu==. Es poden mantenir ==fins que recaigui sentència ferma==.
 :::
 

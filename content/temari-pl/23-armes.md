@@ -70,10 +70,10 @@ La definició de **punyal** de la lletra f) és exacta i molt preguntada: ==**fu
 ### Les llicències d'armes (article 96)
 
 :::articles
-Regla general | art. 96.1 i 96.2
+art. 96.1 i 96.2 | Regla general
 ==Ningú pot portar ni posseir armes de foc sense l'autorització corresponent==. La tinença i ús de les armes de les categories ==**1a, 2a i 3a** requereix **llicència d'armes**==.
 
-Llicència A | art. 96.3
+art. 96.3 | Llicència A
 Documenta les armes de les categories ==1a, 2a i 3a **de propietat privada**== del personal dels Exèrcits, de les ==**forces i cossos de seguretat**== i del Servei de Vigilància Duanera. Té ==l'eficàcia de les llicències **B, D i E**==.
 
 Llicència B | Armes de foc curtes de particulars.
@@ -84,10 +84,10 @@ Llicència F | Armes de ==concurs de tir esportiu== de federats.
 :::
 
 :::articles
-Com s'acredita | art. 114
+art. 114 | Com s'acredita
 Al personal en ==servei actiu o disponible== li ==**és considerada llicència A la seva targeta d'identitat militar o carnet professional**==. S'hi inclouen expressament: Guàrdia Civil, Cos Nacional de Policia, ==**membres dels cossos de policia de les comunitats autònomes i de les corporacions locals**== i Servei de Vigilància Duanera.
 
-Guia de pertinença | art. 115
+art. 115 | Guia de pertinença
 Aquest personal ha d'estar proveït d'una ==**guia de pertinença per a cada arma** que posseeixi==. Per als cossos de policia autonòmics i locals, la ==**expedeix la Direcció General de la Guàrdia Civil**==.
 :::
 
@@ -103,16 +103,16 @@ Aquest decret desplega l'==article 18 de la Llei 16/1991== i s'aplica ==a tots e
 ### Dotació i adjudicació
 
 :::articles
-Dotació | art. 2
+art. 2 | Dotació
 ==**Tots** els membres dels cossos de policia local de Catalunya han de ser dotats d'una **arma reglamentària de foc curta**== per a l'exercici de les seves funcions. Tant les armes com la munició ==són **propietat dels ajuntaments** respectius==.
 
-Adjudicació | art. 3
+art. 3 | Adjudicació
 Correspon a ==l'**alcalde**== l'adjudicació de l'arma de foc als funcionaris de carrera nomenats policies locals i als aspirants que, després de superar el curs selectiu a l'==Escola de Policia de Catalunya==, facin el període de pràctiques. Amb l'arma se'ls lliura la ==**guia de pertinença** i el **carnet professional**==.
 
-Serveis amb armes | art. 4
+art. 4 | Serveis amb armes
 L'arma de foc ==**es durà sempre que s'estigui de servei**==. No obstant això, ==**excepcionalment i motivadament**, l'alcalde o persona en qui delegui pot establir que determinats serveis, per les seves peculiars característiques, es prestin **sense armes de foc**==.
 
-Prohibicions | art. 5
+art. 5 | Prohibicions
 Queda prohibida la tinença d'arma de foc: ==als **vigilants**==, als ==agents nomenats a l'empara de la DA 4a de la Llei 16/1991==, als ==**funcionaris en pràctiques** que encara no hagin superat el curs selectiu== de l'Escola de Policia de Catalunya, i als ==funcionaris als quals se'ls hagi retirat==.
 :::
 
@@ -123,13 +123,13 @@ Aquesta és **la pregunta amb trampa** del tema: "pot un policia local prestar s
 ### Models d'arma (article 8)
 
 :::articles
-Dotació ordinària | art. 8.1
+art. 8.1 | Dotació ordinària
 ==**Revòlver de calibre 0.38 SPL** amb una longitud de canó **entre 3" i 4"**.==
 
-Dotació opcional | art. 8.2
+art. 8.2 | Dotació opcional
 ==**Pistola semiautomàtica de calibre 9 mm parabellum** amb longitud de canó **entre 7 i 12,5 cm**==, quan així ho estableixi el reglament propi del cos i les pràctiques de perfeccionament de tir palesin una ==major preparació==.
 
-Altres models | art. 8.3
+art. 8.3 | Altres models
 Altres models d'armes de foc curtes ==per decret del Govern==, amb informe previ de la ==Comissió de Coordinació de les Policies Locals==.
 :::
 
@@ -142,23 +142,23 @@ Els **altres mitjans de defensa** (defensa reglamentària, esprai, grillons, arm
 ### Control i seguretat
 
 :::articles
-Expedient d'armes | art. 11
+art. 11 | Expedient d'armes
 Els ajuntaments obren ==a **cadascun** dels membres de la policia local un **expedient**== amb totes les dades de conservació, tinença i ús de les armes i municions, ==les revisions periòdiques, les pràctiques i els cursos== realitzats.
 
-Modificacions | art. 12
+art. 12 | Modificacions
 El titular de la guia ==**no pot, sota cap concepte, modificar les característiques de l'arma** ni addicionar-hi elements aliens==. Davant d'anomalies, ho ha de comunicar al comandament i ==**abstenir-se de manipular-la**== o de fer gestions particulars per reparar-la.
 
-Pèrdua o sostracció | arts. 13 i 14
+arts. 13 i 14 | Pèrdua o sostracció
 S'ha de ==**comunicar immediatament al comandament**==, i s'instrueix un ==expedient d'informació== per determinar la possible responsabilitat. El ==**cap del cos ho comunica de forma immediata a la Intervenció d'Armes de la Guàrdia Civil**==.
 
-Invalidació de la guia | art. 16
+art. 16 | Invalidació de la guia
 a) ==En deixar el servei actiu.==
 b) Per ==**mesura cautelar de retirada**== quan hi hagi indicis de deficiències físiques, psíquiques o formatives.
 c) En ==passar a la **segona activitat**== quan el servei no es presti al mateix cos o quan el dictamen palesi malalties o defectes causa de retirada.
 d) Per ==**mesura cautelar de suspensió de funcions**== en la incoació d'expedient disciplinari.
 e) Per ==**sanció disciplinària de suspensió de funcions**==.
 
-Mesures cautelars | art. 17
+art. 17 | Mesures cautelars
 La retirada cautelar de l'arma l'ordena ==l'**alcalde** o persona en qui delegui, per un període **no superior a quinze dies**==, i ==ha de ser **motivada**==. Si les causes subsisteixen, es demanen informes als especialistes.
 :::
 
@@ -171,16 +171,16 @@ Els ajuntaments han de disposar d'un ==**armer** dotat amb les màximes garantie
 ### Control de les condicions per portar armes (articles 22 a 27)
 
 :::articles
-Revisions psicotècniques | art. 23
+art. 23 | Revisions psicotècniques
 ==Com a mínim **cada dos anys**==, mitjançant bateria aptitudinal, qüestionaris de personalitat i altres proves. L'interessat ==té dret a ser informat del resultat== mitjançant entrevista. Qui obtingui ==**no apte** pot sol·licitar noves proves passats **sis mesos**==.
 
-Revisions mèdiques | art. 24
+art. 24 | Revisions mèdiques
 ==Com a mínim **cada dos anys**==. És causa de retirada de l'arma qualsevol de les ==malalties o defectes físics considerats causa de denegació de llicències== a la legislació d'armament.
 
-Formació en tir | art. 25
+art. 25 | Formació en tir
 Tots els membres, excepte els que tinguin l'arma retirada, han de fer ==**obligatòriament** i **com a mínim dues vegades l'any** exercicis de perfeccionament en tir policíac== sota supervisió d'instructors qualificats. ==**Un cop l'any com a mínim**==, les pràctiques s'han de fer d'acord amb el programa que estableixi l'==**Escola de Policia de Catalunya**==.
 
-Revisions extraordinàries | art. 26
+art. 26 | Revisions extraordinàries
 L'alcalde pot sol·licitar una revisió dels efectius per comprovar si mantenen la capacitat. ==**Tots** els membres estan obligats a sotmetre-s'hi.== Els policies en ==**excedència**, en incorporar-se al servei actiu, també==.
 :::
 

@@ -8,7 +8,7 @@ subtitol: Llei orgànica 10/1995, de 23 de novembre, del Codi penal · BOE-A-199
 L'**article 10** dona la definició bàsica: són delictes ==les **accions i omissions doloses o imprudents** penades per la llei==.
 
 :::articles
-Classificació | art. 13
+art. 13 | Classificació
 1. ==**Delictes greus**==: els que la llei castiga amb ==pena greu==.
 2. ==**Delictes menys greus**==: els que castiga amb ==pena menys greu==.
 3. ==**Delictes lleus**==: els que castiga amb ==pena lleu==.
@@ -27,13 +27,13 @@ El **grau d'execució** (arts. 15 i 16): són punibles el ==**delicte consumat**
 > Articles 27 a 31
 
 :::articles
-Responsables | art. 27
+art. 27 | Responsables
 ==Són responsables criminalment dels delictes els **autors** i els **còmplices**.==
 
-Autors | art. 28
+art. 28 | Autors
 Els qui ==realitzen el fet **per si sols, conjuntament o per mitjà d'un altre** del qual se serveixen com a instrument==. També es consideren autors: a) els ==**inductors**== i b) els ==**cooperadors necessaris**==.
 
-Còmplices | art. 29
+art. 29 | Còmplices
 Els qui ==cooperen a l'execució del fet amb **actes anteriors o simultanis**== sense estar compresos a l'article 28.
 :::
 
@@ -57,7 +57,7 @@ L'==**encobriment** ja **no és una forma de participació**==: des del Codi de 
 :::
 
 :::articles
-Requisits de la legítima defensa | art. 20.4t
+art. 20.4t | Requisits de la legítima defensa
 1r ==**Agressió il·legítima**==. En defensa dels béns és agressió il·legítima ==l'atac que constitueixi delicte i els posi en greu perill de deteriorament o pèrdua imminents==; en defensa de la ==morada==, ==l'entrada indeguda==.
 2n ==**Necessitat racional del mitjà emprat**== per impedir-la o repel·lir-la.
 3r ==**Falta de provocació suficient**== per part del defensor.
@@ -107,7 +107,7 @@ L'**article 23** conté la ==**circumstància mixta de parentiu**==, que ==pot a
 L'**article 33** les classifica ==per la seva naturalesa i durada== en ==**greus, menys greus i lleus**==.
 
 :::articles
-Penes greus | art. 33.2
+art. 33.2 | Penes greus
 · ==**Presó permanent revisable**==.
 · ==**Presó superior a 5 anys**==.
 · ==Inhabilitació absoluta==.
@@ -116,7 +116,7 @@ Penes greus | art. 33.2
 · ==Privació del dret a residir en determinats llocs, i prohibicions d'aproximació i comunicació, **superiors a 5 anys**==.
 · ==Privació de la pàtria potestat==.
 
-Penes menys greus | art. 33.3
+art. 33.3 | Penes menys greus
 · ==**Presó de 3 mesos a 5 anys**==.
 · ==Inhabilitacions especials i suspensió **fins a 5 anys**==.
 · ==Privació del dret a conduir i de tinença i port d'armes **d'1 any i 1 dia a 8 anys**==.
@@ -124,7 +124,7 @@ Penes menys greus | art. 33.3
 · ==**Multa de més de 3 mesos**== i la ==multa proporcional==.
 · ==**Treballs en benefici de la comunitat de 31 dies a 1 any**==.
 
-Penes lleus | art. 33.4
+art. 33.4 | Penes lleus
 · ==Privació del dret a conduir i de tinença i port d'armes **de 3 mesos a 1 any**==.
 · ==Privació de residència i prohibicions d'aproximació i comunicació **de menys de 6 mesos**==.
 · ==**Multa de fins a 3 mesos**==.
@@ -145,14 +145,14 @@ L'**article 49** regula els ==**treballs en benefici de la comunitat**==, que ==
 > Articles 130 a 135
 
 :::articles
-Prescripció dels delictes | art. 131.1
+art. 131.1 | Prescripció dels delictes
 ==**20 anys**== si la pena màxima assenyalada és presó de 15 o més anys.
 ==**15 anys**== si és inhabilitació de més de 10 anys, o presó de més de 10 i menys de 15.
 ==**10 anys**== si és presó o inhabilitació de més de 5 i que no excedeixi de 10.
 ==**5 anys**== la resta de delictes.
 ==**1 any**== els ==**delictes lleus**== i els d'==**injúries i calúmnies**==.
 
-Imprescriptibles | art. 131.3 i 131.4
+art. 131.3 i 131.4 | Imprescriptibles
 Els delictes de ==lesa humanitat, genocidi i contra persones i béns protegits en cas de conflicte armat==, i els de ==**terrorisme** si han causat la mort d'una persona==.
 :::
 
@@ -166,16 +166,16 @@ El termini de prescripció es determina per la ==**pena màxima assenyalada al d
 ### Contra la vida i la integritat
 
 :::articles
-Homicidi | art. 138
+art. 138 | Homicidi
 ==Matar un altre==: presó de ==10 a 15 anys==.
 
-Assassinat | art. 139
+art. 139 | Assassinat
 Matar concorrent ==**traïdoria**==, ==**preu, recompensa o promesa**==, ==**acarnissament**== o ==per facilitar la comissió d'un altre delicte o evitar-ne el descobriment==: presó de ==15 a 25 anys==.
 
-Lesions | art. 147
+art. 147 | Lesions
 ==Causar a un altre una lesió que menyscabi la seva integritat corporal o la seva salut física o mental==, sempre que ==**requereixi objectivament per a la seva sanitat tractament mèdic o quirúrgic** a més de la primera assistència facultativa==: presó de ==3 mesos a 3 anys== o multa. La lesió que ==**no** requereix tractament== és ==**delicte lleu**== (art. 147.2), perseguible ==només a denúncia de la persona agreujada==.
 
-Omissió del deure de socors | art. 195
+art. 195 | Omissió del deure de socors
 ==No socórrer una persona desemparada i en perill manifest i greu, podent fer-ho sense risc propi ni de tercers==: multa de ==3 a 12 mesos==. Si la víctima ho és per accident ocasionat ==**fortuïtament**== per qui va ometre l'auxili: presó de ==6 mesos a 18 mesos==; si l'accident va ser per ==**imprudència**==: presó de ==6 mesos a 4 anys==.
 :::
 
@@ -196,22 +196,22 @@ L'**article 153** castiga qui ==per qualsevol mitjà causi menyscapte psíquic o
 ### Contra el patrimoni
 
 :::articles
-Furt | art. 234
+art. 234 | Furt
 ==Prendre les coses mobles alienes **amb ànim de lucre i sense la voluntat del seu amo**==. Presó de ==6 a 18 mesos si la quantia excedeix de **400 €**==; multa d'==1 a 3 mesos si no excedeix de 400 €== (delicte lleu), llevat que hi concorrin les circumstàncies de l'art. 235 o que el culpable hagi estat condemnat executòriament ==almenys per tres delictes de la mateixa naturalesa== (multireincidència).
 
-Robatori | art. 237
+art. 237 | Robatori
 Apoderar-se de les coses mobles alienes amb ànim de lucre ==emprant **força en les coses** per accedir o abandonar el lloc, o **violència o intimidació en les persones**==, sigui en cometre el delicte, per protegir la fugida o sobre els qui acudeixin en auxili de la víctima o el persegueixin.
 
-Força en les coses | art. 238
+art. 238 | Força en les coses
 ==**Escalament** · **Trencament de paret, sostre o terra, o fractura de porta o finestra** · **Fractura d'armaris, arques o altres objectes tancats o segellats**, o forçament dels seus panys o descobriment de les seves claus · **Ús de claus falses** · **Inutilització de sistemes específics d'alarma o guarda**==.
 
-Robatori amb violència o intimidació | art. 242
+art. 242 | Robatori amb violència o intimidació
 Presó de ==**2 a 5 anys**==, sense perjudici de la pena pels actes de violència física. Si es comet ==en casa habitada, edifici o local oberts al públic== o les seves dependències: presó de ==3 anys i 6 mesos a 5 anys==. Les penes s'imposen ==**en la meitat superior** si s'usen armes== o altres mitjans igualment perillosos.
 
-Estafa | art. 248
+art. 248 | Estafa
 ==Amb ànim de lucre, utilitzar **engany** bastant per produir **error** en un altre, induint-lo a fer un **acte de disposició** en perjudici propi o d'un tercer.==
 
-Danys | art. 263
+art. 263 | Danys
 ==Causar danys en propietat aliena== no compresos en altres títols del Codi.
 :::
 
@@ -222,25 +222,25 @@ La diferència **furt / robatori** és la pregunta més repetida de tot el Codi:
 ### Contra la seguretat viària (articles 379 a 385)
 
 :::articles
-Velocitat | art. 379.1
+art. 379.1 | Velocitat
 Conduir un vehicle de motor o ciclomotor a velocitat superior en ==**60 km/h en via urbana**== o ==**80 km/h en via interurbana**== a la permesa reglamentàriament: presó de ==3 a 6 mesos==, o multa de ==6 a 12 mesos==, o treballs en benefici de la comunitat de ==31 a 90 dies==, i ==**en tot cas** privació del dret a conduir de **més d'1 fins a 4 anys**==.
 
-Alcohol i drogues | art. 379.2
+art. 379.2 | Alcohol i drogues
 Conduir ==**sota la influència**== de drogues, estupefaents, psicòtrops o begudes alcohòliques. ==**En tot cas**== serà condemnat qui condueixi amb una taxa ==**superior a 0,60 mg/l en aire espirat**== o ==**superior a 1,2 g/l en sang**==. Mateixes penes que el 379.1.
 
-Conducció temerària | art. 380
+art. 380 | Conducció temerària
 Conduir ==amb **temeritat manifesta** posant en **concret perill** la vida o la integritat de les persones==: presó de ==6 mesos a 2 anys== i privació del dret a conduir de ==més d'1 fins a 6 anys==. Es reputa manifestament temerària la conducció que uneix ==**l'excés de velocitat de l'art. 379.1** amb **la taxa d'alcohol de l'art. 379.2**==.
 
-Menyspreu per la vida | art. 381
+art. 381 | Menyspreu per la vida
 Conduir amb temeritat manifesta i ==**manifest menyspreu per la vida** dels altres==: presó de ==2 a 5 anys==, multa de ==12 a 24 mesos== i privació del dret a conduir de ==6 a 10 anys==.
 
-Negativa a les proves | art. 383
+art. 383 | Negativa a les proves
 El conductor que, ==requerit per un agent de l'autoritat, es negui a sotmetre's a les proves== legalment establertes per comprovar les taxes d'alcoholèmia i la presència de drogues: presó de ==**6 mesos a 1 any**== i privació del dret a conduir de ==més d'1 fins a 4 anys==.
 
-Conduir sense permís | art. 384
+art. 384 | Conduir sense permís
 Conduir ==havent perdut la vigència del permís per **pèrdua total dels punts**==: presó de ==3 a 6 mesos==, o multa de ==12 a 24 mesos==, o treballs en benefici de la comunitat de ==31 a 90 dies==. ==La mateixa pena== per conduir després d'haver estat ==privat cautelarment o definitivament del permís per decisió judicial== i per qui condueixi ==**sense haver obtingut mai** permís o llicència==.
 
-Risc a la circulació | art. 385
+art. 385 | Risc a la circulació
 ==Originar un greu risc per a la circulació== col·locant obstacles imprevisibles, vessant substàncies lliscants o inflamables, mutant o alterant la senyalització, o ==no restablint la seguretat de la via quan s'hi està obligat==.
 :::
 
@@ -255,13 +255,13 @@ Un exemple que apareix als tests: una taxa de ==**0,83 mg/l**== en aire espirat 
 ### Contra l'ordre públic
 
 :::articles
-Atemptat | art. 550
+art. 550 | Atemptat
 Són reus d'atemptat els qui ==**agredeixin** o, amb **intimidació greu o violència**, oposin **resistència greu** a l'autoritat, als seus agents o funcionaris públics, o els **escometin**, quan es trobin en l'exercici de les funcions dels seus càrrecs o amb ocasió d'aquestes==. També ho són els comesos contra ==funcionaris docents o sanitaris==. Penes: presó d'==1 a 4 anys i multa de 3 a 6 mesos si l'atemptat és contra **autoritat**==; presó de ==6 mesos a 3 anys en els altres casos==.
 
-Resistència i desobediència | art. 556.1
+art. 556.1 | Resistència i desobediència
 Els qui, ==**sense estar compresos a l'article 550**, resisteixin o desobeeixin **greument** l'autoritat o els seus agents== en l'exercici de les seves funcions, o el personal de seguretat privada degudament identificat que actuï en cooperació i sota el comandament de les FCS: presó de ==3 mesos a 1 any== o multa de ==6 a 18 mesos==.
 
-Falta de respecte | art. 556.2
+art. 556.2 | Falta de respecte
 Els qui ==faltin al respecte i consideració deguda a l'autoritat== en l'exercici de les seves funcions: ==multa d'1 a 3 mesos==.
 :::
 

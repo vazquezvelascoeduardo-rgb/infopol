@@ -302,13 +302,13 @@ L'**article 51** estén la responsabilitat: qui **indueixi** altres a cometre fa
 L'**article 52** relaciona faltes i sancions:
 
 :::articles
-Per falta MOLT GREU | art. 52.2
+art. 52.2 | Per falta MOLT GREU
 Separació del servei · suspensió de funcions per més d'un any i menys de sis, amb pèrdua de retribucions.
 
-Per falta GREU | art. 52.3
+art. 52.3 | Per falta GREU
 Suspensió de funcions per més de quinze dies i menys d'un any, amb pèrdua de retribucions · trasllat a un altre lloc de treball.
 
-Per falta LLEU | art. 52.4
+art. 52.4 | Per falta LLEU
 Suspensió de funcions d'un a quinze dies amb pèrdua de retribucions · trasllat a un altre lloc de treball · deducció proporcional de retribucions en faltes de puntualitat i assistència · amonestació.
 :::
 

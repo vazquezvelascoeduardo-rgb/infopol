@@ -44,16 +44,16 @@ L'art. 6.3 exigeix les **dues** condicions alhora: competència **i** necessitat
 L'**article 9** obliga el responsable a **distingir**, en la mesura del possible, entre categories d'interessats:
 
 :::articles
-a) Sospitosos | art. 9.a
+art. 9.a | a) Sospitosos
 ==Persones respecte de les quals hi ha **motius fundats** per presumir que han comès, poden cometre o col·laborar en una infracció penal.==
 
-b) Condemnats | art. 9.b
+art. 9.b | b) Condemnats
 Persones condemnades o sancionades per una infracció penal.
 
-c) Víctimes | art. 9.c
+art. 9.c | c) Víctimes
 Víctimes o afectats per una infracció penal, o que puguin ser-ho.
 
-d) Tercers | art. 9.d
+art. 9.d | d) Tercers
 Testimonis, persones que puguin facilitar informació, i persones de contacte o associats de les lletres a) i b).
 :::
 

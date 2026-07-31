@@ -23,16 +23,16 @@ L'**article 10** regula les relacions entre administracions: s'ajusten als deure
 L'**article 20.1** fixa les **regles d'organització** i, sobretot, **quins òrgans són obligatoris i a partir de quina població**:
 
 :::articles
-Sempre | art. 20.1.a
+art. 20.1.a | Sempre
 ==L'**Alcalde**, els **Tinents d'Alcalde** i el **Ple** existeixen a **TOTS** els ajuntaments.==
 
-Junta de Govern Local | art. 20.1.b
+art. 20.1.b | Junta de Govern Local
 A tots els municipis de ==**més de 5.000 habitants**==. Als de menys, ==si ho disposa el reglament orgànic o ho acorda el Ple==.
 
-Òrgans d'estudi i seguiment | art. 20.1.c
+art. 20.1.c | Òrgans d'estudi i seguiment
 A municipis de més de 5.000 habitants (i als de menys si ho decideixen). Tots els grups polítics hi tenen dret a participar en proporció al nombre de regidors.
 
-Comissió Especial de Comptes | art. 20.1.e
+art. 20.1.e | Comissió Especial de Comptes
 ==Existeix a **TOTS** els municipis.==
 :::
 
@@ -74,16 +74,16 @@ L'apartat 3 exigeix que les competències municipals es determinin **per llei**,
 L'**article 26.1** fixa què han de prestar **en tot cas** els municipis, en una escala acumulativa:
 
 :::articles
-Tots els municipis | art. 26.1.a
+art. 26.1.a | Tots els municipis
 ==Enllumenat públic · cementiri · recollida de residus · neteja viària · abastament domiciliari d'aigua potable · clavegueram · accés als nuclis de població · pavimentació de les vies públiques.==
 
-Més de 5.000 habitants | art. 26.1.b
+art. 26.1.b | Més de 5.000 habitants
 A més: ==**parc públic · biblioteca pública · tractament de residus**==.
 
-Més de 20.000 habitants | art. 26.1.c
+art. 26.1.c | Més de 20.000 habitants
 A més: ==**protecció civil** · avaluació i informació de situacions de necessitat social · **prevenció i extinció d'incendis** · instal·lacions esportives d'ús públic==.
 
-Més de 50.000 habitants | art. 26.1.d
+art. 26.1.d | Més de 50.000 habitants
 A més: ==**transport col·lectiu urbà de viatgers** · medi ambient urbà==.
 :::
 
@@ -104,18 +104,18 @@ Tres escales de població que es barregen i s'han de tenir separades:
 > Articles 46 a 48 · sessions i majories
 
 :::articles
-Sessions ordinàries del Ple | art. 46.2.a
+art. 46.2.a | Sessions ordinàries del Ple
 · ==**Cada mes**== als ajuntaments de ==**més de 20.000 habitants**== i a les diputacions provincials.
 · ==**Cada dos mesos**== als municipis d'entre ==**5.001 i 20.000**== habitants.
 · ==**Cada tres mesos**== als municipis de ==**fins a 5.000**== habitants.
 
-Sessions extraordinàries | art. 46.2.a
+art. 46.2.a | Sessions extraordinàries
 Quan ho decideixi el president o ho sol·liciti ==**la quarta part, com a mínim, del nombre legal de membres**==, sense que cap regidor en pugui demanar ==més de tres a l'any==. La celebració ==no es pot demorar més de **quinze dies hàbils**== des que s'ha sol·licitat.
 
-Majoria simple | art. 47.1
+art. 47.1 | Majoria simple
 La regla general: hi ha majoria simple quan els ==**vots afirmatius són més que els negatius**==.
 
-Majoria absoluta | art. 47.2
+art. 47.2 | Majoria absoluta
 Cal el vot favorable de la ==**majoria absoluta del nombre legal de membres**== per a, entre d'altres: ==creació i supressió de municipis i alteració de termes municipals==; ==aprovació de la delimitació del terme municipal==; ==alteració del **nom i de la capitalitat** del municipi==; ==aprovació i modificació del **reglament orgànic**==; ==creació, modificació o dissolució de **mancomunitats**==; ==transferència de funcions a altres administracions==; ==**cessió gratuïta de béns** a altres administracions o institucions públiques==; ==**municipalització** o declaració de servei municipalitzat==; i ==**alienació de patrimoni** quan superi el 20 % dels recursos ordinaris==.
 :::
 
@@ -127,13 +127,13 @@ Els tres números de les sessions del Ple van amb els mateixos llindars de sempr
 > Articles 31 a 44 i títol X
 
 :::articles
-La província | art. 31
+art. 31 | La província
 ==**Entitat local determinada per l'agrupació de municipis**==, amb personalitat jurídica pròpia. El seu govern i administració autònoma corresponen a la ==**Diputació**==, i el ==**president de la Diputació l'elegeixen els diputats provincials d'entre els seus membres**==.
 
-Mancomunitats | art. 44
+art. 44 | Mancomunitats
 Es reconeix als municipis el ==**dret a associar-se amb altres en mancomunitats per a l'execució en comú d'obres i serveis determinats de la seva competència**==. Tenen ==personalitat i capacitat jurídiques pròpies== i es regeixen pels seus ==**estatuts**==.
 
-Títol X — grans poblacions | art. 121
+art. 121 | Títol X — grans poblacions
 S'aplica als municipis de ==**més de 250.000 habitants**==, a les ==capitals de província de **més de 175.000**==, a les ==capitals de província, capitals autonòmiques o seus d'institucions autonòmiques== i als de ==**més de 75.000 habitants** amb circumstàncies especials== (en els dos últims casos, ==ho ha de decidir l'assemblea legislativa autonòmica a iniciativa de l'ajuntament==).
 :::
 

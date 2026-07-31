@@ -27,22 +27,22 @@ La jerarquia és aquesta i es pregunta: ==**RGPD (Reglament UE 2016/679)** és d
 > Articles 4 a 10
 
 :::articles
-Exactitud | art. 4
+art. 4 | Exactitud
 Les dades han de ser exactes. ==No és imputable al responsable la inexactitud== quan les hagi rebut de l'afectat o d'un mediador i les tracti emparat en una de les excepcions de la llei, sempre que hagi adoptat mesures raonables per suprimir-les o rectificar-les.
 
-Deure de confidencialitat | art. 5
+art. 5 | Deure de confidencialitat
 Els responsables, encarregats i ==**totes les persones que intervinguin en qualsevol fase del tractament**== estan subjectes al deure de confidencialitat. És ==**complementari** del secret professional== i ==**es manté encara que hagi acabat la relació**== amb el responsable.
 
-Consentiment | art. 6
+art. 6 | Consentiment
 ==Manifestació de voluntat **lliure, específica, informada i inequívoca**== per la qual l'afectat accepta, mitjançant declaració o ==**clara acció afirmativa**==, el tractament. Per a una pluralitat de finalitats, ha de constar ==de manera específica i inequívoca per a totes==.
 
-Consentiment de menors | art. 7
+art. 7 | Consentiment de menors
 El tractament basat en el consentiment del menor només és possible ==**a partir dels 14 anys**==. Per sota, ==cal el consentiment del titular de la pàtria potestat o tutela==.
 
-Categories especials | art. 9
+art. 9 | Categories especials
 El ==**sol consentiment no basta**== per aixecar la prohibició de tractar dades la finalitat principal de les quals sigui identificar ==ideologia, afiliació sindical, religió, orientació sexual, creences o origen racial o ètnic==.
 
-Dades de naturalesa penal | art. 10
+art. 10 | Dades de naturalesa penal
 El tractament de dades relatives a ==condemnes i infraccions penals== per a finalitats **distintes** de la prevenció i persecució penals només es pot fer ==emparat en una norma de dret de la Unió, en aquesta llei orgànica o en una altra norma de rang legal==.
 :::
 
@@ -56,13 +56,13 @@ Els ==**14 anys**== de l'art. 7 és la xifra més preguntada de tota la llei. I 
 Aquest és l'article que més t'afecta a la feina diària, perquè les càmeres municipals hi cauen de ple.
 
 :::articles
-Finalitat i límits | art. 22.1 i 22.2
+art. 22.1 i 22.2 | Finalitat i límits
 Les persones físiques o jurídiques, públiques o privades, poden tractar imatges de càmeres o videocàmeres amb la finalitat de ==**preservar la seguretat de les persones i béns, així com de les seves instal·lacions**==. ==Només es poden captar imatges de la via pública en la mesura que resulti **imprescindible** per a aquesta finalitat==. Es permet una extensió superior de via pública quan calgui per a la seguretat de ==béns o instal·lacions estratègics o infraestructures de transport==, però ==**mai** es poden captar imatges de l'interior d'un domicili privat==.
 
-Termini de conservació | art. 22.3
+art. 22.3 | Termini de conservació
 Les dades ==**s'han de suprimir en el termini màxim d'un mes** des de la captació==, llevat que s'hagin de conservar per acreditar la comissió d'actes que atemptin contra la integritat de persones, béns o instal·lacions; en aquest cas s'han de posar a disposició de l'autoritat competent en el termini màxim de ==**72 hores**== des que se'n coneix l'existència.
 
-Deure d'informar | art. 22.4
+art. 22.4 | Deure d'informar
 S'ha de col·locar un ==**dispositiu informatiu en lloc prou visible**== identificant l'existència del tractament, el responsable i la possibilitat d'exercir els drets.
 :::
 
@@ -86,22 +86,22 @@ L'**article 90** fa el mateix amb la ==**geolocalització**==: es permet per al 
 La LOPDGDD desenvolupa els drets del RGPD. Els sis clàssics, amb la regla de l'==**article 12**==: el responsable ha d'atendre'ls i ==el mitjà preferent és l'electrònic==, sense que se'n pugui exigir cap contraprestació.
 
 :::articles
-Accés | art. 13
+art. 13 | Accés
 Dret a obtenir ==confirmació de si es tracten dades seves== i a accedir-hi. Es considera atorgat si es dona accés a un ==sistema de consulta permanent== i segur.
 
-Rectificació | art. 14
+art. 14 | Rectificació
 L'afectat ha d'==indicar en la seva sol·licitud a quines dades es refereix i la correcció== que s'hi ha de fer, aportant la documentació justificativa.
 
-Supressió ("dret a l'oblit") | art. 15
+art. 15 | Supressió ("dret a l'oblit")
 Es tramita d'acord amb l'art. 17 del RGPD. Quan es basi en l'art. 17.1.d, es pot ==substituir per la limitació del tractament== si la supressió pot causar perjudicis a l'afectat.
 
-Limitació del tractament | art. 16
+art. 16 | Limitació del tractament
 Les dades ==només es conserven== per a l'exercici o defensa de reclamacions.
 
-Portabilitat | art. 17
+art. 17 | Portabilitat
 Rebre les dades en un ==format estructurat, d'ús comú i lectura mecànica== i transmetre-les a un altre responsable.
 
-Oposició | art. 18
+art. 18 | Oposició
 Dret a oposar-se al tractament, especialment ==al màrqueting directe==, cas en què ==el responsable ha de deixar de tractar-les immediatament==.
 :::
 
@@ -185,16 +185,16 @@ Són les ==**restants infraccions de caràcter merament formal**== i, en particu
 ### Sancions i prescripció (articles 75 a 78)
 
 :::articles
-Quanties | art. 83 RGPD
+art. 83 RGPD | Quanties
 Les de l'==article 83.5 i 83.6==: fins a ==**20.000.000 €** o el **4 %** del volum de negoci anual global==, la quantia que sigui superior. Les de l'==article 83.4==: fins a ==**10.000.000 €** o el **2 %**==.
 
-Prescripció d'infraccions | arts. 72 a 74
+arts. 72 a 74 | Prescripció d'infraccions
 Molt greus: ==**3 anys**== · Greus: ==**2 anys**== · Lleus: ==**1 any**==.
 
-Interrupció | art. 75
+art. 75 | Interrupció
 La interromp la ==iniciació, amb coneixement de l'interessat, del procediment sancionador==, i es reinicia si l'expedient està aturat ==més de **sis mesos**== per causes no imputables al presumpte infractor.
 
-Prescripció de sancions | art. 78
+art. 78 | Prescripció de sancions
 Segons l'**import**, no segons la gravetat: ==fins a 40.000 € → **1 any**== · ==de 40.001 a 300.000 € → **2 anys**== · ==més de 300.000 € → **3 anys**==.
 :::
 

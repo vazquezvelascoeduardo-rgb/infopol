@@ -22,19 +22,19 @@ L'**article 3.1** recull els **principis generals** d'actuació: les administrac
 L'**article 8** fixa la regla d'or: la ==competència és irrenunciable== i s'exerceix pels òrgans que la tenen atribuïda com a pròpia, ==llevat dels casos de delegació i avocació==. I una precisió que cau molt: la **delegació de competències**, les **encomanes de gestió**, la **delegació de signatura** i la **suplència** ==no alteren la titularitat de la competència==, només els elements del seu exercici.
 
 :::articles
-Delegació de competències | art. 9
+art. 9 | Delegació de competències
 Un òrgan delega l'exercici de les seves competències en un altre òrgan de la mateixa administració, ==encara que no en depengui jeràrquicament==. S'ha de ==publicar al butlletí oficial== corresponent. Les resolucions dictades per delegació ==s'han de considerar dictades per l'òrgan delegant== i ho han d'indicar expressament.
 
-Avocació | art. 10
+art. 10 | Avocació
 L'òrgan ==superior== reclama per a si el coneixement d'un o diversos assumptes que corresponen ordinàriament o per delegació als seus òrgans dependents, quan ho facin convenient circumstàncies tècniques, econòmiques, socials, jurídiques o territorials. S'ha de motivar i ==no és recurrible== per si sola (només amb el recurs contra la resolució final).
 
-Encomana de gestió | art. 11
+art. 11 | Encomana de gestió
 Trasllada la ==realització d'activitats materials o tècniques==, no la titularitat de la competència ni els elements substantius del seu exercici. ==No pot tenir per objecte prestacions pròpies dels contractes públics==.
 
-Delegació de signatura | art. 12
+art. 12 | Delegació de signatura
 El titular d'un òrgan delega la ==signatura== de les seves resolucions en titulars d'òrgans o unitats que en ==depenguin==. ==No altera la competència== i ==no cal publicar-la==. No es pot delegar la signatura en resolucions sancionadores.
 
-Suplència | art. 13
+art. 13 | Suplència
 Cobreix la ==vacant, absència o malaltia== del titular. ==No implica alteració de la competència== i no cal publicar-la, però sí publicitat.
 :::
 
@@ -52,17 +52,17 @@ Tot òrgan col·legiat té **president**, **membres** i **secretari**. El **secr
 Són **el mateix supòsit vist des de dues bandes**: si concorre una causa que compromet la imparcialitat, l'autoritat o l'empleat ==s'ha d'abstenir== (art. 23); si no ho fa, ==l'interessat el pot recusar== (art. 24).
 
 :::articles
-Causes | art. 23.2
+art. 23.2 | Causes
 a) ==Tenir interès personal== en l'assumpte, ser administrador de societat interessada o tenir qüestió litigiosa pendent amb un interessat.
 b) ==Parentiu de consanguinitat dins del quart grau o d'afinitat dins del segon== amb qualsevol interessat, administradors o assessors.
 c) ==Amistat íntima o enemistat manifesta==.
 d) Haver intervingut com a ==pèrit o testimoni== en el procediment.
 e) Tenir ==relació de servei== amb la persona interessada o haver-li prestat serveis professionals els ==dos últims anys==.
 
-Efectes de no abstenir-se | art. 23.4
+art. 23.4 | Efectes de no abstenir-se
 ==No implica, necessàriament, la invalidesa dels actes== en què s'hagi intervingut, però ==dona lloc a responsabilitat==.
 
-Recusació | art. 24
+art. 24 | Recusació
 Es pot promoure ==en qualsevol moment de la tramitació==, per escrit i expressant la causa. ==L'endemà== el recusat manifesta al superior si hi concorre la causa; si la nega, el superior resol en ==tres dies==, amb els informes i comprovacions que consideri. ==Contra les resolucions en matèria de recusació no es pot interposar recurs== (sense perjudici d'al·legar-ho contra l'acte que posi fi al procediment).
 :::
 
@@ -76,22 +76,22 @@ Dues dades molt preguntades: el ==parentiu és fins al **quart grau de consangui
 Aquest capítol és **la columna vertebral de tot expedient sancionador** que tramitaràs — de trànsit, de l'ordenança de convivència o de la LOPSC.
 
 :::articles
-Legalitat | art. 25
+art. 25 | Legalitat
 La potestat sancionadora s'exerceix ==quan hagi estat expressament reconeguda per una norma amb rang de llei==. En les entitats locals, d'acord amb el títol XI de la Llei 7/1985.
 
-Irretroactivitat | art. 26
+art. 26 | Irretroactivitat
 S'apliquen les disposicions ==vigents en el moment dels fets==. Però ==tenen efecte retroactiu les que afavoreixin== el presumpte infractor o l'infractor, tant en la tipificació com en la sanció i els terminis de prescripció, ==fins i tot en sancions pendents de compliment==.
 
-Tipicitat | art. 27
+art. 27 | Tipicitat
 Només són infraccions les vulneracions ==previstes com a tals per una llei==, i es classifiquen en ==lleus, greus i molt greus==. El reglament pot **especificar o graduar**, però ==no pot crear noves infraccions ni sancions==.
 
-Responsabilitat | art. 28
+art. 28 | Responsabilitat
 Només poden ser sancionades les persones ==físiques i jurídiques== (i els grups, unions i patrimonis sense personalitat quan una llei els reconegui capacitat d'obrar) responsables ==a títol de dol o culpa==. La sanció és ==compatible amb la reposició de la situació alterada i amb la indemnització de danys i perjudicis==.
 
-Proporcionalitat | art. 29
+art. 29 | Proporcionalitat
 Les sancions administratives ==en cap cas poden implicar, directament o subsidiàriament, privació de llibertat==. La comissió de la infracció ==no pot resultar més beneficiosa== que complir la norma. Criteris de graduació: ==grau de culpabilitat o existència d'intencionalitat==, ==continuïtat o persistència==, ==naturalesa dels perjudicis causats== i ==reincidència== (comissió en el termini d'un any de més d'una infracció de la mateixa naturalesa declarada per resolució ferma en via administrativa).
 
-Non bis in idem | art. 31
+art. 31 | Non bis in idem
 ==No es poden sancionar els fets que ja ho hagin estat penalment o administrativament== quan hi hagi ==identitat de subjecte, fet i fonament==.
 :::
 
@@ -104,13 +104,13 @@ La frase clau de l'art. 29.1 és absoluta: ==una sanció administrativa **mai** 
 Quan la llei sectorial **no fixa terminis**, s'apliquen aquests:
 
 :::articles
-Infraccions | art. 30.1
+art. 30.1 | Infraccions
 Molt greus: ==3 anys== · Greus: ==2 anys== · Lleus: ==6 mesos==.
 
-Sancions | art. 30.1
+art. 30.1 | Sancions
 Per faltes molt greus: ==3 anys== · Per faltes greus: ==2 anys== · Per faltes lleus: ==1 any==.
 
-Còmput | art. 30.2
+art. 30.2 | Còmput
 Des del dia en què s'ha comès la infracció; en les ==continuades o permanents==, des que ==finalitza la conducta infractora==. S'interromp per la iniciació del procediment sancionador amb coneixement de l'interessat, i es ==reinicia si l'expedient s'atura més d'un mes== per causa no imputable al presumpte responsable.
 :::
 

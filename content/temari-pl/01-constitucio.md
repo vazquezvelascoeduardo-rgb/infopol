@@ -227,13 +227,13 @@ El ==**Rei és el cap de l'Estat**== (art. 56). ==**Sanciona i promulga les llei
 Les Corts Generals | Títol III
 Formades pel ==**Congrés dels Diputats i el Senat**== (art. 66). El Congrés es compon d'un ==**mínim de 300 i un màxim de 400 diputats**== (a la pràctica, ==**350**==), elegits per ==quatre anys== (art. 68). El ==**Senat és la cambra de representació territorial**== (art. 69). La ==**iniciativa legislativa popular exigeix 500.000 signatures**== acreditades i ==**no pot versar sobre matèries pròpies de llei orgànica, tributàries, de caràcter internacional ni sobre la prerrogativa de gràcia**== (art. 87.3).
 
-El decret llei | art. 86
+art. 86 | El decret llei
 En cas d'==extraordinària i urgent necessitat==. ==**No pot afectar** les institucions bàsiques de l'Estat, els drets, deures i llibertats del títol I, el règim de les comunitats autònomes ni el dret electoral general==. S'ha de sotmetre a debat i votació de totalitat del Congrés ==**en el termini de 30 dies**== per convalidar-lo o derogar-lo.
 
 Govern i Corts | Títol V
 ==**Moció de censura**== (art. 113): té caràcter ==**constructiu**== — ha d'==**incloure un candidat a president**==, ser proposada per ==**almenys una desena part dels diputats**== i aprovar-se per ==**majoria absoluta**== del Congrés. No es pot votar fins que passin ==5 dies== des de la presentació. ==**Qüestió de confiança**== (art. 112): la planteja el ==**president del Govern**, prèvia deliberació del Consell de Ministres==, i s'entén atorgada per ==**majoria simple**==.
 
-Estats excepcionals | art. 116
+art. 116 | Estats excepcionals
 ==**Alarma**: el declara el **Govern** per un termini màxim de **15 dies**==, donant compte al Congrés, sense l'autorització del qual no es pot prorrogar.
 ==**Excepció**: el declara el **Govern amb autorització prèvia del Congrés**, per un màxim de **30 dies prorrogables per un altre termini igual**==.
 ==**Setge**: el declara la **majoria absoluta del Congrés dels Diputats, a proposta exclusiva del Govern**==.

@@ -44,19 +44,19 @@ L'**article 14** distingeix qui **pot** i qui **ha de** relacionar-se electròni
 > Articles 29 a 33
 
 :::articles
-Regla general | art. 30.2
+art. 30.2 | Regla general
 Quan els terminis s'assenyalen ==per dies, s'entén que són **hàbils**==, i ==s'exclouen del còmput els dissabtes, els diumenges i els declarats festius==. Si una llei els fixa en dies naturals, ho ha de fer constar a la notificació.
 
-Inici del còmput | art. 30.3
+art. 30.3 | Inici del còmput
 Els terminis en dies es compten ==a partir de l'**endemà**== de la notificació o publicació de l'acte, o de l'endemà que es produeixi l'estimació o desestimació per silenci.
 
-Mesos i anys | art. 30.4
+art. 30.4 | Mesos i anys
 Es compten també des de l'endemà, i el termini ==conclou el mateix dia en què es va produir la notificació== del mes o any de venciment. Si no hi ha dia equivalent, ==acaba l'últim dia del mes==.
 
-Dia inhàbil final | art. 30.5
+art. 30.5 | Dia inhàbil final
 Si l'últim dia del termini és ==inhàbil, s'entén prorrogat al primer dia hàbil següent==.
 
-Terminis per hores | art. 30.1
+art. 30.1 | Terminis per hores
 ==Són hores hàbils== les del dia que formi part d'un dia hàbil; es compten ==d'hora en hora i de minut en minut== i ==no poden superar les 24 hores== (si no, s'expressen en dies).
 :::
 
@@ -72,23 +72,23 @@ L'**article 32** permet l'**ampliació** de terminis: d'ofici o a petició, ==fi
 L'**article 21.1** és taxatiu: l'Administració està ==obligada a dictar resolució expressa i a notificar-la en tots els procediments==, sigui quina sigui la forma d'iniciació.
 
 :::articles
-Termini màxim | art. 21.2
+art. 21.2 | Termini màxim
 El que fixi la norma reguladora del procediment. ==No pot excedir de sis mesos== llevat que una norma amb rang de llei o el dret de la Unió n'estableixi un de superior.
 
-Termini supletori | art. 21.3
+art. 21.3 | Termini supletori
 Si la norma no en fixa cap, el termini és de ==**tres mesos**==. Es compta: en els iniciats ==d'ofici, des de la data de l'acord d'iniciació==; en els iniciats ==a sol·licitud, des que la sol·licitud té entrada al registre electrònic== de l'Administració competent.
 :::
 
 ### El silenci (articles 24 i 25)
 
 :::articles
-A sol·licitud de l'interessat | art. 24
+art. 24 | A sol·licitud de l'interessat
 El venciment del termini sense resolució expressa legitima l'interessat per ==entendre-la **estimada** per silenci== (silenci **positiu**), llevat que una norma amb rang de llei o de dret de la Unió disposi el contrari. ==Té efecte **desestimatori**== en els procediments relatius al ==dret de petició==, els que impliquin ==transferència de facultats sobre el domini públic o el servei públic==, els que impliquin ==l'exercici d'activitats que puguin danyar el medi ambient== i els de ==**recurs**== (amb l'excepció de sota).
 
-Silenci en el recurs d'alçada | art. 24.1
+art. 24.1 | Silenci en el recurs d'alçada
 ==Si el recurs d'alçada s'interposa contra la desestimació per silenci d'una sol·licitud i no es resol en termini, s'entén **estimat**== (doble silenci positiu).
 
-Iniciats d'ofici | art. 25
+art. 25 | Iniciats d'ofici
 El venciment ==no eximeix l'Administració de resoldre==. Efectes: en els que puguin reconèixer drets o situacions favorables, els interessats ==poden entendre desestimades== les seves pretensions; en els ==**susceptibles de produir efectes desfavorables o de gravamen** — i el sancionador ho és — es produeix la **caducitat**==, amb arxivament de les actuacions.
 :::
 
@@ -102,7 +102,7 @@ Aquesta és la trampa més cara en la pràctica policial: en un ==**expedient sa
 Els actes s'han de produir per l'==òrgan competent==, ajustant-se al ==procediment establert==, amb un ==contingut determinat i adequat a la seva finalitat==, i s'han de ==**motivar**== en els casos de l'art. 35 — entre els quals, i això t'importa: els que ==limitin drets subjectius o interessos legítims==, els que ==resolguin recursos==, els que se separin del criteri seguit en actuacions precedents, i els ==**acords de suspensió d'actes**== i les ==**mesures provisionals**==.
 
 :::articles
-Nul·litat de ple dret | art. 47
+art. 47 | Nul·litat de ple dret
 a) Els que ==lesionin drets i llibertats susceptibles d'empara constitucional==.
 b) Els dictats per ==òrgan manifestament incompetent per raó de la matèria o del territori==.
 c) Els de ==contingut impossible==.
@@ -111,7 +111,7 @@ e) Els dictats ==prescindint total i absolutament del procediment== legalment es
 f) Els actes expressos o presumptes ==contraris a l'ordenament jurídic pels quals s'adquireixen facultats o drets quan no es tinguin els requisits essencials==.
 g) Qualsevol altre que s'estableixi expressament en una disposició amb rang de llei.
 
-Anul·labilitat | art. 48
+art. 48 | Anul·labilitat
 Són anul·lables els actes que incorrin en ==qualsevol infracció de l'ordenament jurídic, inclosa la **desviació de poder**==. El ==defecte de forma== només determina l'anul·labilitat quan l'acte ==manqui dels requisits formals indispensables per assolir el seu fi== o ==doni lloc a indefensió==. L'actuació ==fora de termini== només anul·la quan ho imposi la naturalesa del termini.
 :::
 
@@ -141,10 +141,10 @@ Dades numèriques de notificació que cauen: ==10 dies== per cursar-la · ==14 a
 **Terminació** — resolució, desistiment, renúncia, caducitat, o l'==acord, pacte o conveni== (art. 86).
 
 :::articles
-Reconeixement i pagament voluntari | art. 85
+art. 85 | Reconeixement i pagament voluntari
 Iniciat un procediment sancionador, si l'infractor ==reconeix la seva responsabilitat==, es pot resoldre imposant la sanció. Si la sanció és ==només pecuniària==, el ==pagament voluntari en qualsevol moment anterior a la resolució== implica la terminació del procediment.
 
-Reduccions | art. 85.3
+art. 85.3 | Reduccions
 En tots dos casos s'apliquen reduccions ==d'almenys el **20 %**== sobre l'import de la sanció proposada, ==**acumulables entre si**== (per tant, fins a un 40 %). Han de constar a la ==notificació d'iniciació== i la seva efectivitat queda condicionada al ==desistiment o renúncia de qualsevol acció o recurs en via administrativa==.
 :::
 
@@ -160,13 +160,13 @@ Aquest ==20 % + 20 % acumulable== de l'art. 85.3 és el fonament legal del "pron
 > Articles 112 a 126
 
 :::articles
-Alçada | art. 121–122
+art. 121–122 | Alçada
 Contra les resolucions i actes de tràmit qualificats que ==**no** posin fi a la via administrativa==. Es presenta davant l'òrgan que va dictar l'acte o davant el superior. Termini d'interposició: ==**1 mes** si l'acte és exprés==; si no ho és, ==en qualsevol moment== a partir de l'endemà que es produeixin els efectes del silenci. Termini per resoldre: ==**3 mesos**==; transcorreguts, el silenci és ==**desestimatori**== (llevat del cas del doble silenci de l'art. 24.1).
 
-Reposició | art. 123–124
+art. 123–124 | Reposició
 ==**Potestatiu**== i contra actes que ==**sí** posen fi a la via administrativa==, davant el ==mateix òrgan que els va dictar==. Termini d'interposició: ==**1 mes** si l'acte és exprés==. Termini per resoldre: ==**1 mes**==; transcorregut, el silenci és ==**desestimatori**==. ==No es pot interposar dues vegades==.
 
-Revisió extraordinari | art. 125
+art. 125 | Revisió extraordinari
 Contra actes ==ferms en via administrativa== i només per les ==quatre causes taxades== de l'art. 125.1 (error de fet als propis documents; documents essencials apareguts després; documents o testimonis declarats falsos per sentència ferma; prevaricació, suborn, violència o maquinació fraudulenta). Terminis: ==4 anys== per a l'error de fet i ==3 mesos== per a la resta. Es resol en ==3 mesos== i el silenci és ==desestimatori==.
 :::
 

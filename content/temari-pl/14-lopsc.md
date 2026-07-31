@@ -112,13 +112,13 @@ L'**article 34** classifica les infraccions en ==**molt greus, greus i lleus**==
 L'**article 39** fixa les **quanties**:
 
 :::articles
-Molt greus | art. 39.1
+art. 39.1 | Molt greus
 ==De **30.001 a 600.000 €**==. Grau mínim: 30.001–220.000 · mitjà: 220.001–410.000 · màxim: 410.001–600.000.
 
-Greus | art. 39.1
+art. 39.1 | Greus
 ==De **601 a 30.000 €**.==
 
-Lleus | art. 39.1
+art. 39.1 | Lleus
 ==De **100 a 600 €**.==
 :::
 
@@ -130,16 +130,16 @@ Els **trams** encaixen encadenats: lleus fins a **600**, greus de **601** a **30
 > Article 35 · les quatre
 
 :::articles
-1. Reunions en serveis bàsics | art. 35.1
+art. 35.1 | 1. Reunions en serveis bàsics
 ==Reunions o manifestacions **no comunicades o prohibides** en **infraestructures on es presten serveis bàsics** per a la comunitat o les seves immediacions, i la intrusió en aquests recintes —inclòs el sobrevol— **quan s'hagi generat risc per a la vida o la integritat física**.== En reunions i manifestacions responen els organitzadors o promotors.
 
-2. Armes i explosius amb perjudicis molt greus | art. 35.2
+art. 35.2 | 2. Armes i explosius amb perjudicis molt greus
 Fabricació, reparació, emmagatzematge, circulació, comerç, transport, distribució, adquisició, certificació, alienació o utilització d'armes reglamentàries, explosius catalogats, cartutxeria o articles pirotècnics incomplint la normativa, sense documentació o autorització o excedint els límits, quan no sigui delicte; també l'omissió, insuficiència o falta d'eficàcia de les mesures de seguretat obligatòries. Sempre que es causin perjudicis molt greus.
 
-3. Espectacles prohibits o suspesos | art. 35.3
+art. 35.3 | 3. Espectacles prohibits o suspesos
 Celebrar espectacles públics o activitats recreatives trencant la prohibició o suspensió ordenada per l'autoritat per raons de seguretat pública.
 
-4. Enlluernament de conductors | art. 35.4
+art. 35.4 | 4. Enlluernament de conductors
 Projectar feixos de llum, amb qualsevol dispositiu, sobre pilots o conductors de mitjans de transport que els pugui enlluernar o distreure i provocar accidents.
 :::
 
@@ -151,73 +151,73 @@ Fixa't en la **doble exigència** de l'art. 35.1: no n'hi ha prou que la manifes
 > Article 36 · les vint-i-tres
 
 :::articles
-1 · Perturbació en actes públics | art. 36.1
+art. 36.1 | 1 · Perturbació en actes públics
 ==Perturbar la seguretat ciutadana en **actes públics, espectacles esportius o culturals**, solemnitats i oficis religiosos o altres reunions amb nombroses persones, **quan no sigui infracció penal**.==
 
-2 · Davant de seus parlamentàries | art. 36.2
+art. 36.2 | 2 · Davant de seus parlamentàries
 Perturbació greu amb ocasió de reunions o manifestacions davant del Congrés, el Senat i les assemblees legislatives autonòmiques, encara que no estiguin reunides, quan no sigui delicte.
 
-3 · Desordres i obstaculització de la via | art. 36.3
+art. 36.3 | 3 · Desordres i obstaculització de la via
 Causar desordres a vies, espais o establiments públics, o obstaculitzar la via pública amb mobiliari urbà, vehicles, contenidors, pneumàtics o altres objectes, quan s'ocasioni alteració greu de la seguretat ciutadana.
 
-4 · Obstrucció a l'autoritat | art. 36.4
+art. 36.4 | 4 · Obstrucció a l'autoritat
 Actes d'obstrucció que pretenguin impedir a una autoritat, empleat públic o corporació oficial l'exercici legítim de les seves funcions o l'execució d'acords o resolucions, al marge dels procediments legals i quan no sigui delicte.
 
-5 · Impedir serveis d'emergència | art. 36.5
+art. 36.5 | 5 · Impedir serveis d'emergència
 Accions i omissions que impedeixin o obstaculitzin el funcionament dels serveis d'emergència, provocant o incrementant un risc per a la vida, la integritat o els béns, o agreujant les conseqüències del succés.
 
-6 · Desobediència i negativa a identificar-se | art. 36.6
+art. 36.6 | 6 · Desobediència i negativa a identificar-se
 ==**Desobediència o resistència** a l'autoritat o als seus agents **quan no sigui delicte**, així com la **negativa a identificar-se** a requeriment o l'**al·legació de dades falses o inexactes** en la identificació.==
 
-7 · Negativa a dissoldre's | art. 36.7
+art. 36.7 | 7 · Negativa a dissoldre's
 Negativa a la dissolució de reunions i manifestacions en llocs de trànsit públic ordenada per l'autoritat competent quan concorrin els supòsits de l'art. 5 de la LO 9/1983.
 
-8 · Pertorbar una reunió lícita | art. 36.8
+art. 36.8 | 8 · Pertorbar una reunió lícita
 Perturbar el desenvolupament d'una reunió o manifestació lícita, quan no sigui delicte.
 
-9 · Intrusió en serveis bàsics | art. 36.9
+art. 36.9 | 9 · Intrusió en serveis bàsics
 Intrusió en infraestructures on es presten serveis bàsics, inclòs el sobrevol, quan s'hagi produït una interferència greu en el seu funcionament.
 
-10 · Armes prohibides o ús indegut | art. 36.10
+art. 36.10 | 10 · Armes prohibides o ús indegut
 Portar, exhibir o usar armes prohibides; o portar, exhibir o usar armes de manera negligent, temerària o intimidatòria, o fora dels llocs habilitats, fins i tot amb llicència, quan no sigui delicte.
 
-11 · Serveis sexuals en zones sensibles | art. 36.11
+art. 36.11 | 11 · Serveis sexuals en zones sensibles
 Sol·licitar o acceptar serveis sexuals retribuïts en zones de trànsit públic pròximes a llocs d'ús de menors —centres educatius, parcs infantils, espais d'oci— o quan pugui generar risc per a la seguretat viària. Els agents requeriran qui els ofereixi que s'hi abstingui, informant que desobeir podria ser una infracció del punt 6.
 
-12 · Armes i explosius | art. 36.12
+art. 36.12 | 12 · Armes i explosius
 El mateix supòsit del 35.2, però sense que es causin perjudicis molt greus.
 
-13 · Obstrucció d'inspeccions | art. 36.13
+art. 36.13 | 13 · Obstrucció d'inspeccions
 Negativa d'accés o obstrucció deliberada de les inspeccions o controls reglamentaris en fàbriques, locals, establiments, embarcacions i aeronaus.
 
-14 · Ús indegut d'uniformes | art. 36.14
+art. 36.14 | 14 · Ús indegut d'uniformes
 Ús públic i indegut d'uniformes, insígnies o condecoracions oficials o rèpliques, i d'altres elements de l'equipament policial o dels serveis d'emergència que puguin generar engany sobre la condició de qui els usa, quan no sigui delicte.
 
-15 · Falta de col·laboració | art. 36.15
+art. 36.15 | 15 · Falta de col·laboració
 Falta de col·laboració amb les FCS en l'esbrinament de delictes o en la prevenció d'accions de risc per a la seguretat ciutadana, en els supòsits de l'art. 7.
 
-16 · Consum o tinença de drogues | art. 36.16
+art. 36.16 | 16 · Consum o tinença de drogues
 ==**Consum o tinença il·lícits de drogues** tòxiques, estupefaents o substàncies psicotròpiques —**encara que no siguin per al tràfic**— **en llocs, vies, establiments públics o transports col·lectius**, i l'abandonament dels instruments emprats.==
 
-17 · Trasllat per facilitar drogues | art. 36.17
+art. 36.17 | 17 · Trasllat per facilitar drogues
 Traslladar persones, amb qualsevol vehicle, per facilitar-los l'accés a drogues, sempre que no sigui delicte.
 
-18 · Plantació i cultiu visibles | art. 36.18
+art. 36.18 | 18 · Plantació i cultiu visibles
 Actes de plantació i cultiu il·lícits de drogues en llocs visibles al públic, quan no siguin delicte.
 
-19 · Tolerància en locals | art. 36.19
+art. 36.19 | 19 · Tolerància en locals
 Tolerar el consum il·legal o el tràfic de drogues en locals o establiments públics, o la falta de diligència per impedir-ho per part de propietaris, administradors o encarregats.
 
-20 · Falta de registres | art. 36.20
+art. 36.20 | 20 · Falta de registres
 Manca dels registres previstos en aquesta llei per a activitats amb transcendència per a la seguretat ciutadana, o omissió de comunicacions obligatòries.
 
-21 · Dades falses per obtenir documentació | art. 36.21
+art. 36.21 | 21 · Dades falses per obtenir documentació
 Al·legar dades o circumstàncies falses per obtenir les documentacions previstes en aquesta llei, quan no sigui delicte.
 
-22 · Restriccions a la navegació | art. 36.22
+art. 36.22 | 22 · Restriccions a la navegació
 Incompliment de les restriccions a la navegació imposades reglamentàriament a embarcacions d'alta velocitat i aeronaus lleugeres.
 
-23 · Ús d'imatges d'agents | art. 36.23
+art. 36.23 | 23 · Ús d'imatges d'agents
 Ús no autoritzat d'imatges o dades personals o professionals d'autoritats o membres de les FCS que pugui posar en perill la seva seguretat personal o familiar, la de les instal·lacions protegides o el èxit d'una operació.
 :::
 
@@ -236,55 +236,55 @@ L'apartat que més faràs servir és el **36.6**: hi caben tres conductes distin
 > Article 37 · les disset
 
 :::articles
-1 · Reunions incomplint la LO 9/1983 | art. 37.1
+art. 37.1 | 1 · Reunions incomplint la LO 9/1983
 Celebrar reunions en llocs de trànsit públic o manifestacions incomplint els articles 4.2, 8, 9, 10 i 11 de la LO 9/1983. Responsabilitat dels organitzadors o promotors.
 
-2 · Exhibició d'objectes perillosos | art. 37.2
+art. 37.2 | 2 · Exhibició d'objectes perillosos
 Exhibir objectes perillosos per a la vida i la integritat física amb ànim intimidatori, sempre que no sigui delicte ni infracció greu.
 
-3 · Incompliment de restriccions de pas | art. 37.3
+art. 37.3 | 3 · Incompliment de restriccions de pas
 Incomplir les restriccions de circulació de vianants o d'itinerari amb ocasió d'un acte públic, reunió o manifestació, quan provoquin alteracions menors.
 
-4 · Faltes de respecte a agents | art. 37.4
+art. 37.4 | 4 · Faltes de respecte a agents
 Faltes de respecte i consideració a un membre de les FCS en l'exercici de les seves funcions de protecció de la seguretat, quan no siguin infracció penal.
 
-5 · Actes contra la llibertat sexual | art. 37.5
+art. 37.5 | 5 · Actes contra la llibertat sexual
 Realitzar o incitar actes que atemptin contra la llibertat i indemnitat sexual, o executar actes d'exhibició obscena, quan no sigui infracció penal.
 
-6 · Feixos de llum contra agents | art. 37.6
+art. 37.6 | 6 · Feixos de llum contra agents
 Projectar feixos de llum, amb qualsevol dispositiu, sobre membres de les FCS per impedir o dificultar l'exercici de les seves funcions.
 
-7 · Ocupació d'immobles i de la via pública | art. 37.7
+art. 37.7 | 7 · Ocupació d'immobles i de la via pública
 ==Ocupar qualsevol **immoble, habitatge o edifici aliè**, o romandre-hi, contra la voluntat del propietari, arrendatari o titular d'un altre dret, quan no siguin infracció penal.== També l'==**ocupació de la via pública** infringint la llei o la decisió de l'autoritat competent, inclosa la **venda ambulant no autoritzada**==.
 
-8 · Documentació d'armes i explosius | art. 37.8
+art. 37.8 | 8 · Documentació d'armes i explosius
 Omissió o insuficiència de mesures per garantir la conservació de la documentació d'armes i explosius, i la falta de denúncia de la seva pèrdua o sostracció.
 
-9 · Irregularitats en els registres | art. 37.9
+art. 37.9 | 9 · Irregularitats en els registres
 Irregularitats en l'emplenament dels registres previstos en aquesta llei amb transcendència per a la seguretat ciutadana, incloent-hi l'al·legació de dades falses o l'omissió de comunicacions obligatòries dins de termini, quan no sigui infracció penal.
 
-10 · No obtenir la documentació personal | art. 37.10
+art. 37.10 | 10 · No obtenir la documentació personal
 ==Incomplir l'obligació d'**obtenir la documentació personal legalment exigida**==, i l'omissió negligent de la denúncia de la seva sostracció o extraviament.
 
-11 · Negligència en la custòdia | art. 37.11
+art. 37.11 | 11 · Negligència en la custòdia
 Negligència en la custòdia i conservació de la documentació personal: es considera com a tal la ==**tercera i posteriors pèrdues o extraviaments en el termini d'un any**==.
 
-12 · No entregar la documentació | art. 37.12
+art. 37.12 | 12 · No entregar la documentació
 Negativa a entregar la documentació personal legalment exigida quan se n'hagi acordat la retirada o retenció.
 
-13 · Danys i desllustrament | art. 37.13
+art. 37.13 | 13 · Danys i desllustrament
 ==**Danys o desllustrament de béns mobles o immobles d'ús o servei públic**==, i de béns privats situats a la via pública, quan no constitueixin infracció penal.
 
-14 · Escalament d'edificis | art. 37.14
+art. 37.14 | 14 · Escalament d'edificis
 Escalar edificis o monuments sense autorització quan hi hagi ==risc cert de causar danys a persones o béns==.
 
-15 · Remoure tanques i precintes | art. 37.15
+art. 37.15 | 15 · Remoure tanques i precintes
 ==Remoure **tanques, encintats o altres elements** col·locats per les FCS per **delimitar perímetres de seguretat**==, fins i tot amb caràcter preventiu, quan no sigui infracció greu.
 
-16 · Animals ferotges o abandonats | art. 37.16
+art. 37.16 | 16 · Animals ferotges o abandonats
 ==**Deixar solts o en condicions de causar danys animals ferotges o nocius**==, i ==abandonar animals domèstics en condicions en què pugui perillar la seva vida==.
 
-17 · Consum d'alcohol a la via pública | art. 37.17
+art. 37.17 | 17 · Consum d'alcohol a la via pública
 ==**Consum de begudes alcohòliques** en llocs, vies, establiments o transports públics **quan pertorbi greument la tranquil·litat ciutadana**==.
 :::
 
@@ -298,19 +298,19 @@ Compara els dos **feixos de llum**: el **35.4** (molt greu) és contra **pilots 
 L'**article 32.1** reparteix la competència dins de l'Administració General de l'Estat:
 
 :::articles
-Ministre de l'Interior | art. 32.1.a
+art. 32.1.a | Ministre de l'Interior
 Sanció de les infraccions ==molt greus en grau màxim==.
 
-Secretari d'Estat de Seguretat | art. 32.1.b
+art. 32.1.b | Secretari d'Estat de Seguretat
 Sanció de les infraccions ==molt greus en grau mitjà i en grau mínim==.
 
-Delegats del Govern | art. 32.1.c
+art. 32.1.c | Delegats del Govern
 Sanció de les infraccions ==greus i lleus==.
 
-Comunitats autònomes | art. 32.2
+art. 32.2 | Comunitats autònomes
 Les autoritats autonòmiques, en l'àmbit de les seves competències en seguretat ciutadana.
 
-Alcaldes | art. 32.3
+art. 32.3 | Alcaldes
 Quan les infraccions ==es cometin en espais públics municipals o afectin béns de titularitat local==, si en tenen competència.
 :::
 
@@ -324,10 +324,10 @@ El repartiment estatal segueix el **grau**, no només la classe: el **ministre**
 Aquí hi ha dues escales distintes que **no s'han de barrejar mai**: una per a les **infraccions** i una altra per a les **sancions**.
 
 :::articles
-Prescripció d'INFRACCIONS | art. 38.1
+art. 38.1 | Prescripció d'INFRACCIONS
 Lleus: ==6 mesos== · Greus: ==1 any== · Molt greus: ==2 anys==. Es compten des del dia en què s'ha comès la infracció.
 
-Prescripció de SANCIONS | art. 40.1
+art. 40.1 | Prescripció de SANCIONS
 Lleus: ==1 any== · Greus: ==2 anys== · Molt greus: ==3 anys==. Es compten des de l'endemà que la resolució adquireix fermesa en via administrativa.
 :::
 

@@ -84,13 +84,13 @@ Memoritza aquests dos números: ==41 perspectiva de gènere== i ==48 mobilitat i
 El Parlament ==representa el poble de Catalunya==, exerceix la **potestat legislativa**, aprova els pressupostos i **controla i impulsa** l'acció política i de govern. És ==inviolable== (art. 55).
 
 :::articles
-Composició | art. 56.1
+art. 56.1 | Composició
 Es compon d'un ==mínim de 100 i un màxim de 150 diputats==, elegits per ==quatre anys== per sufragi universal, lliure, igual, directe i secret. *(A la pràctica, i mentre no hi hagi llei electoral pròpia, el nombre és de ==135 diputats==.)*
 
-Sistema electoral | art. 56.2
+art. 56.2 | Sistema electoral
 ==Representació proporcional==, assegurant la representació adequada de totes les zones del territori.
 
-Iniciativa legislativa | art. 62.1
+art. 62.1 | Iniciativa legislativa
 Correspon als ==diputats, als grups parlamentaris i al Govern==; també als ==ciutadans per iniciativa legislativa popular== i als òrgans representatius dels ens supramunicipals.
 :::
 
@@ -111,16 +111,16 @@ Per a la investidura cal, en primera votació, la ==majoria absoluta==; si no s'
 ### Les institucions estatutàries (articles 76 a 82)
 
 :::articles
-Consell de Garanties Estatutàries | art. 76–77
+art. 76–77 | Consell de Garanties Estatutàries
 Vetlla per l'==adequació a l'Estatut i a la Constitució== de les disposicions de la Generalitat. Emet **dictàmens** sobre projectes i proposicions de llei, decrets llei i decrets legislatius. Els dictàmens són ==vinculants quan es refereixen a projectes i proposicions de llei que desenvolupin o afectin drets estatutaris==; la resta són preceptius o facultatius, però no vinculants. Els membres els nomena el President: ==2/3 a proposta del Parlament per majoria de 3/5== i ==1/3 a proposta del Govern==.
 
-Síndic de Greuges | art. 78–79
+art. 78–79 | Síndic de Greuges
 ==Protegeix i defensa els drets i llibertats== reconeguts per la Constitució i l'Estatut. Supervisa ==amb caràcter exclusiu== l'activitat de l'Administració de la Generalitat i dels ens que en depenen, i també la de les empreses privades que gestionen serveis públics. És elegit pel ==Parlament per majoria de 3/5==. És **inviolable, inamovible** i actua amb independència.
 
-Sindicatura de Comptes | art. 80–81
+art. 80–81 | Sindicatura de Comptes
 És l'==òrgan fiscalitzador extern dels comptes, de la gestió econòmica i del control d'eficiència== de la Generalitat, dels ens locals i de la resta del sector públic de Catalunya. ==Depèn orgànicament del Parlament==. Els síndics els designa el ==Parlament per majoria de 3/5== i escullen entre ells el síndic major.
 
-Consell de l'Audiovisual de Catalunya (CAC) | art. 82
+art. 82 | Consell de l'Audiovisual de Catalunya (CAC)
 ==Autoritat reguladora independent== en l'àmbit de la comunicació audiovisual pública i privada. Actua amb plena independència del Govern.
 :::
 
@@ -143,15 +143,15 @@ El ==Tribunal Superior de Justícia de Catalunya (TSJC)== és l'==òrgan jurisdi
 L'Estatut classifica les competències en **tres tipus**, i aquesta classificació és matèria d'examen segura:
 
 :::articles
-Exclusives | art. 110
+art. 110 | Exclusives
 La Generalitat té ==de forma íntegra la potestat legislativa, la reglamentària i la funció executiva==. Pot establir polítiques pròpies i el dret català s'aplica **amb preferència** sobre qualsevol altre.
 Exemples: ordenació administrativa del comerç, dret civil català, cultura, protecció civil, turisme.
 
-Compartides | art. 111
+art. 111 | Compartides
 La Generalitat té la potestat legislativa, la reglamentària i la funció executiva ==dins del marc de les bases que fixi l'Estat== com a principis o mínim comú normatiu en normes amb rang de llei.
 Exemples: educació, sanitat, medi ambient, règim local.
 
-Executives | art. 112
+art. 112 | Executives
 La Generalitat té la ==potestat reglamentària d'execució== de la normativa estatal i la ==funció executiva==, que inclou l'autoorganització de la seva administració.
 Exemples: treball i relacions laborals, propietat intel·lectual.
 :::

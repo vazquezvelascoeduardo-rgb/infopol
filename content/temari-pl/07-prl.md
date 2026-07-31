@@ -10,7 +10,7 @@ La Llei 31/1995 transposa la **Directiva marc 89/391/CEE** i desenvolupa l'==art
 L'**article 3.1** és el que et posa dins: la llei s'aplica ==tant a les relacions laborals de l'Estatut dels treballadors com a les **relacions administratives o estatutàries del personal al servei de les administracions públiques**==. Quan la llei diu "treballador" i "empresari", cal llegir-hi també ==el funcionari i l'Administració per a la qual presta serveis==.
 
 :::articles
-Exclusió parcial | art. 3.2
+art. 3.2 | Exclusió parcial
 La llei ==**no s'aplica** en aquelles activitats les particularitats de les quals ho impedeixin== en l'àmbit de les funcions públiques de:
 · ==**Policia, seguretat i resguard duaner**==
 · ==Serveis operatius de protecció civil i peritatge forense== en casos de greu risc, catàstrofe i calamitat pública
@@ -26,19 +26,19 @@ Aquesta és **la pregunta de l'article 3 per a policia local** i té una respost
 > Article 4 · definicions
 
 :::articles
-Prevenció | art. 4.1r
+art. 4.1r | Prevenció
 ==Conjunt d'activitats o mesures adoptades o previstes en totes les fases d'activitat de l'empresa== amb la finalitat d'==evitar o disminuir els riscos== derivats del treball.
 
-Risc laboral | art. 4.2n
+art. 4.2n | Risc laboral
 ==Possibilitat que un treballador pateixi un determinat dany derivat del treball==. Per qualificar-ne la gravetat es valoren conjuntament la ==probabilitat que es produeixi el dany i la seva severitat==.
 
-Danys derivats del treball | art. 4.3r
+art. 4.3r | Danys derivats del treball
 Les ==malalties, patologies o lesions patides amb motiu o ocasió del treball==.
 
-Risc greu i imminent | art. 4.4t
+art. 4.4t | Risc greu i imminent
 El que resulti ==probable racionalment que es materialitzi en un futur immediat== i pugui suposar un ==dany greu== per a la salut dels treballadors.
 
-Equip de protecció individual (EPI) | art. 4.8è
+art. 4.8è | Equip de protecció individual (EPI)
 ==Qualsevol equip destinat a ser portat o subjectat pel treballador== perquè el protegeixi d'un o diversos riscos que puguin amenaçar la seva seguretat o salut, així com qualsevol complement destinat a la mateixa finalitat.
 :::
 
@@ -73,22 +73,22 @@ Els tres primers principis van en **ordre jeràrquic i sempre es pregunten en or
 > Articles 16 a 28
 
 :::articles
-Pla de prevenció | art. 16
+art. 16 | Pla de prevenció
 La prevenció s'ha d'==integrar en el sistema general de gestió== de l'empresa. Els instruments essencials són l'==**avaluació de riscos** i la **planificació de l'activitat preventiva**==. L'avaluació s'ha d'actualitzar quan canviïn les condicions i s'han d'investigar els danys que es produeixin.
 
-Equips i EPI | art. 17
+art. 17 | Equips i EPI
 L'empresari ha de proporcionar equips de treball adequats i ==**EPI adequats**==, i ==vetllar per l'ús efectiu== d'aquests quan siguin necessaris. Els EPI s'han d'==utilitzar quan els riscos no es puguin evitar o limitar suficientment per mitjans tècnics de protecció col·lectiva==.
 
-Informació, consulta i participació | art. 18
+art. 18 | Informació, consulta i participació
 Els treballadors han de rebre informació sobre els ==riscos generals i específics==, les ==mesures de protecció i prevenció== i les ==mesures d'emergència==.
 
-Formació | art. 19
+art. 19 | Formació
 L'empresari ha de garantir formació ==teòrica i pràctica, suficient i adequada==, ==en el moment de la contractació== i quan hi hagi canvis. S'ha d'impartir ==dins de la jornada de treball== o, si no és possible, en altres hores però ==amb descompte del temps invertit==, i el ==**cost no pot recaure en cap cas sobre els treballadors**==.
 
-Mesures d'emergència | art. 20
+art. 20 | Mesures d'emergència
 Analitzar les possibles situacions d'emergència i adoptar mesures de ==primers auxilis, lluita contra incendis i evacuació==, ==designant el personal encarregat== i comprovant-ne periòdicament el funcionament.
 
-Vigilància de la salut | art. 22
+art. 22 | Vigilància de la salut
 L'empresari ha de garantir la vigilància periòdica de l'estat de salut. És ==**voluntària** per al treballador==, ==**llevat** de tres excepcions==: que sigui ==imprescindible per avaluar els efectes de les condicions de treball==, que calgui ==verificar si l'estat de salut del treballador pot constituir un perill per a ell mateix, per als altres treballadors o per a tercers==, o que ho estableixi una ==disposició legal== per a riscos específics. Les dades de salut són ==confidencials i no es poden usar amb fins discriminatoris==; a l'empresari només se li comuniquen les ==conclusions d'aptitud==, no les dades clíniques.
 :::
 
@@ -133,13 +133,13 @@ Els treballadors designats i els integrants del servei de prevenció ==no poden 
 > Articles 33 a 40
 
 :::articles
-Delegats de Prevenció | art. 35
+art. 35 | Delegats de Prevenció
 Són els ==representants dels treballadors amb funcions específiques en matèria de prevenció==. Es designen ==per i entre els representants del personal==, segons aquesta escala:
 · Fins a 30 treballadors: ==el Delegat de Personal==.
 · De 31 a 49: ==1 Delegat de Prevenció==, elegit per i entre els delegats de personal.
 · De ==50 a 100: **2**== · De 101 a 500: **3** · De 501 a 1.000: **4** · De 1.001 a 2.000: **5** · De 2.001 a 3.000: **6** · De 3.001 a 4.000: **7** · De ==4.001 en endavant: **8**==.
 
-Comitè de Seguretat i Salut | art. 38
+art. 38 | Comitè de Seguretat i Salut
 És l'==òrgan **paritari i col·legiat** de participació== destinat a la consulta regular i periòdica de les actuacions de l'empresa en matèria de prevenció. Es constitueix a ==totes les empreses o centres de treball amb **50 o més treballadors**==. El formen els ==Delegats de Prevenció, d'una banda, i l'empresari o els seus representants **en nombre igual**, de l'altra==. Es reuneix ==**trimestralment**== i sempre que ho sol·liciti alguna de les representacions.
 :::
 

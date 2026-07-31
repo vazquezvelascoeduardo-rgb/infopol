@@ -12,13 +12,13 @@ La protecció civil ==**és un servei públic**, no un cos policial ni armat==. 
 :::
 
 :::articles
-Principis inspiradors | art. 2.1
+art. 2.1 | Principis inspiradors
 ==Solidaritat== en l'assumpció de riscos i danys · ==Responsabilitat pública i autoprotecció== · ==Proximitat i immediatesa== de l'acció pública · ==Integració de plans i recursos==.
 
-Principis d'organització i actuació | art. 2.2
+art. 2.2 | Principis d'organització i actuació
 ==Continuïtat, descentralització, planificació, coordinació, subsidiarietat, proporcionalitat, celeritat i eficàcia==.
 
-Finalitats bàsiques | art. 3
+art. 3 | Finalitats bàsiques
 a) La ==**previsió**== dels riscos greus: anàlisi objectiva i localització en el territori.
 b) La ==**prevenció**==: evitar o reduir els riscos en origen.
 c) La ==**planificació**== de les respostes.
@@ -36,16 +36,16 @@ No confonguis **previsió** amb **prevenció**: la ==previsió és **analitzar i
 L'**article 15.1** estableix les **classes** de plans: ==**territorials, especials i d'autoprotecció**==. El desenvolupament reglamentari (el **Decret 155/2014**, que fixa el contingut mínim dels plans municipals) hi afegeix els **plans específics** i els **plans d'actuació municipal**, que concreten a escala local els plans especials de la Generalitat.
 
 :::articles
-Pla de protecció civil de Catalunya | art. 16
+art. 16 | Pla de protecció civil de Catalunya
 L'aprova el ==Govern==, a proposta del conseller competent, ==amb informe previ de la Comissió de Protecció Civil de Catalunya==. ==Integra els plans territorials i especials== i conté la previsió d'emergències, el catàleg de recursos i els protocols. És el ==**PROCICAT**==.
 
-Plans territorials | art. 17
+art. 17 | Plans territorials
 Preveuen ==**amb caràcter general** les emergències que es poden produir== en el seu àmbit. Els nivells bàsics de planificació són ==el conjunt de Catalunya i els municipis==.
 
-Plans especials | art. 18
+art. 18 | Plans especials
 Estableixen les ==emergències generades per **riscos concrets** la naturalesa dels quals requereix mètodes tècnics i científics adequats per avaluar-los i tractar-los==. Els aprova el ==Govern==, amb informe previ de la Comissió de Protecció Civil de Catalunya, i ==es declaren d'interès de Catalunya==.
 
-Plans d'autoprotecció | art. 19
+art. 19 | Plans d'autoprotecció
 Preveuen, per a ==determinats centres, empreses i instal·lacions==, les emergències que es poden produir ==com a conseqüència de la seva pròpia activitat== i les mesures de resposta. Els obligats a adoptar-los surten del ==**catàleg** de l'art. 7==, avui el ==**Decret 30/2015**==.
 :::
 
@@ -75,7 +75,7 @@ Tots acaben en **-CAT** i la primera part és el risc: ==INUN**dacions**==, ==IN
 ### Els plans bàsics d'emergència municipal (article 17.2)
 
 :::articles
-Qui està obligat | art. 17.2
+art. 17.2 | Qui està obligat
 · Els municipis amb una població ==superior a **20.000 habitants**==.
 · Els que, sense arribar-hi, tenen la consideració de ==**turístics**==.
 · Els ==considerats de **risc especial**== per la seva situació geogràfica o activitat industrial, segons la Comissió de Protecció Civil de Catalunya.
@@ -93,23 +93,23 @@ Aquest repartiment és el que decideix la pregunta: ==**elabora l'alcalde, aprov
 > Articles 39 a 51
 
 :::articles
-Autoritats de protecció civil | art. 40.1
+art. 40.1 | Autoritats de protecció civil
 a) L'==**alcalde o alcaldessa**, en l'àmbit **municipal**==.
 b) El ==**conseller o consellera** competent, en l'àmbit de Catalunya==, sense perjudici de les funcions del President de la Generalitat en cas de delegació en emergències declarades "d'interès nacional".
 
-Direcció dels plans | art. 40.2
+art. 40.2 | Direcció dels plans
 Les autoritats de protecció civil ==**són els directors dels plans**== dels seus àmbits territorials. L'alcalde pot encomanar la direcció dels plans municipals als ==tinents d'alcalde== i, si no n'hi ha, a la resta de regidors.
 
-Els municipis | art. 47.1
+art. 47.1 | Els municipis
 Són les ==**entitats bàsiques** de la protecció civil a Catalunya== i disposen de capacitat general d'actuació i planificació en la matèria.
 
-Competències de l'alcalde | art. 48
+art. 48 | Competències de l'alcalde
 És l'==**autoritat local superior** de protecció civil==. Li correspon elaborar els plans i sotmetre'ls al ple, elaborar i mantenir el ==catàleg de recursos i serveis mobilitzables==, ==disposar l'activació dels plans municipals i informar-ne el CECAT==, i ==exercir la direcció i el comandament superior de la coordinació i inspecció== de tots els serveis i recursos afectes al pla.
 
-CECOPAL | art. 49
+art. 49 | CECOPAL
 Els ==**Centres Municipals de Coordinació Operativa**== són l'òrgan des del qual es dirigeix i coordina l'emergència en l'àmbit municipal.
 
-Comissió Municipal de Protecció Civil | art. 51
+art. 51 | Comissió Municipal de Protecció Civil
 Obligatòria als municipis de ==més de **50.000 habitants**==, als que tenen al terme empreses o centres obligats a l'autoprotecció i als de caràcter especial de l'art. 17.2. A la resta, ==**facultativa**, i la crea el ple==. La ==presideix l'alcalde== i té caràcter ==consultiu, deliberant i coordinador==.
 :::
 
@@ -203,12 +203,12 @@ e) | ==Denegar informació als ciutadans sobre aspectes de la planificació== de
 ### Sancions i competència (articles 75 i 76)
 
 :::articles
-Quanties | art. 75
+art. 75 | Quanties
 Molt greus: multa de ==fins a 601.012,10 €==, i a més es pot ordenar la ==clausura temporal del local o la suspensió temporal de les activitats de risc==.
 Greus: multa de ==fins a 150.253,03 €==.
 Lleus: multa de ==fins a 6.010,12 €==.
 
-Competència sancionadora | art. 76.2
+art. 76.2 | Competència sancionadora
 a) ==Alcaldes de municipis de **menys de 20.000** habitants: fins a 12.020,24 €==.
 b) ==Alcaldes de municipis de **més de 20.000** habitants: fins a 60.101,21 €==.
 c) ==Conseller competent: fins a 150.253,03 €==.
