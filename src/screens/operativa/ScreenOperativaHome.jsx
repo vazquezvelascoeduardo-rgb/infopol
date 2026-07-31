@@ -43,6 +43,16 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  // 31·07·2026
+  { date: '07·31', tag: 'Premis', title: 'Almirall guanya el Premi Nacional d\'Innovació 2026', desc: 'El Ministeri de Ciència distingeix la farmacèutica catalana com a Gran Empresa Innovadora 2026.' },
+  { date: '07·31', tag: 'Clima', title: 'Comença El Niño: podria ser el més intens en dècades', desc: 'L\'OMM confirma un episodi El Niño al Pacífic amb efectes globals en precipitacions i temperatures.' },
+  { date: '07·31', tag: 'Internacional', title: 'Trump anuncia un acord de desarmament de Hamas a Gaza', desc: 'Principi d\'acord anunciat per EUA i mediadors. Persisteix la incertesa mentre segueixen els atacs a l\'Iran.' },
+  { date: '07·31', tag: 'Judicial', title: 'La Fiscalia demana l\'absolució de Begoña Gómez', desc: 'El Ministeri Fiscal confirma la petició d\'absolució per a la dona del president Sánchez en el judici en curs.' },
+  { date: '07·31', tag: 'Crisi Ceuta', title: 'Fins a 40.000 persones entren a Ceuta en 48 hores des del Marroc', desc: 'Almenys 10 morts per ofegament. L\'Estat declara la fi de l\'emergència nacional migratòria.' },
+  { date: '07·31', tag: 'Economia', title: 'L\'Euríbor tanca juliol al 2,964%, en tendència alcista', desc: 'L\'índex hipotecari puja lleugerament i tanca juliol amb una mitjana provisional en alça.' },
+  { date: '07·31', tag: 'Successos BCN', title: 'Socavó al Putxet: 93 habitatges desallotjats a Gràcia', desc: 'Un enfonsament al barri del Putxet força el desallotjament de 93 habitatges. Junts demana dimissions.' },
+  { date: '07·31', tag: 'Parlament CAT', title: 'El Parlament aprova els primers Pressupostos del Govern Illa', desc: 'Aprovació dels comptes de la Generalitat per al 2026. El CEO registra l\'ascens d\'Aliança Catalana.' },
+  // Normativa anterior
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
