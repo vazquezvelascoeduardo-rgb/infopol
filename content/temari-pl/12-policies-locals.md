@@ -154,6 +154,176 @@ Compte amb els grups: l'escala **intermèdia** i la **bàsica** estan **totes du
 L'ordre complet de categories, de dalt a baix: **superintendent · intendent major · intendent · inspector · sots-inspector · sergent · caporal · agent**. Vuit categories en quatre escales. Val la pena aprendre-se-les en ordre.
 :::
 
+## Règim disciplinari: les faltes molt greus
+> Títol 5, capítol 1 · articles 46 a 48
+
+L'**article 46** estableix que el règim disciplinari aplicable als policies locals és el d'aquesta llei, **sens perjudici de les responsabilitats civils o criminals**. L'**article 47** classifica les faltes en **molt greus, greus i lleus**.
+
+L'**article 48** enumera les **faltes molt greus**:
+
+:::articles
+a · Fidelitat constitucional
+Incomplir el deure de fidelitat a la Constitució o a l'Estatut d'Autonomia en l'exercici de les funcions.
+
+b · Discriminació
+Tota actuació que signifiqui discriminació per raó de raça, sexe, orientació sexual, religió, llengua, opinió, lloc de naixement, veïnatge o qualsevol altra condició personal o social.
+
+b bis · Assetjament
+Assetjament per raó d'origen racial o ètnic, religió o conviccions, discapacitat o edat; i assetjament laboral, moral, sexual i per raó de sexe, orientació sexual o identitat de gènere.
+
+c · Llibertats públiques
+Obstaculitzar l'exercici de les llibertats públiques i dels drets sindicals.
+
+d · Tortures i maltractaments
+Infligir tortures, maltractaments o penes cruels, inhumanes o degradants; instigar-los, tolerar-los o col·laborar-hi; i qualsevol actuació abusiva, arbitrària o discriminatòria amb violència física, psíquica o moral.
+
+e · Delicte dolós
+Qualsevol conducta o actuació constitutiva de delicte dolós.
+
+f · Prevaricació i suborn
+Qualsevol acte de prevaricació o suborn, i el fet de no evitar-lo o no denunciar-lo.
+
+g · Abandonament del servei
+L'abandonament del servei.
+
+h · Insubordinació
+Insubordinació individual o col·lectiva envers autoritats o comandaments, i desobediència a les seves instruccions legítimes.
+
+i · Denegació d'auxili
+Denegació d'auxili i manca d'intervenció urgent en qualsevol fet en què l'actuació sigui obligada o convenient.
+
+j · Pèrdua d'armes
+Perdre les armes o permetre'n la sostracció per negligència inexcusable.
+
+k · Vaga
+Participar en vagues, accions substitutives o actuacions concertades per alterar el funcionament normal dels serveis.
+
+l · Secrets
+Publicar o utilitzar indegudament secrets oficials, i violar el secret professional.
+
+m · Manca de rendiment
+Manca notòria de rendiment que comporti inhibició en el compliment de les tasques.
+
+n · Incompatibilitats
+Incomplir les normes sobre incompatibilitats.
+
+o · Danys molt greus
+Causar, per negligència o mala fe, danys molt greus al patrimoni i els béns de la corporació.
+
+p · Manipulació de proves
+Ocultar o alterar una prova per perjudicar o ajudar l'encausat.
+
+q · Documents del servei
+Falsificar, sostreure, simular o destruir documents del servei sota custòdia pròpia o d'un altre funcionari.
+
+r · Alcohol i drogues
+Embriagar-se o consumir drogues durant el servei o habitualment, i negar-se a les comprovacions tècniques en situació d'anormalitat física o psíquica evident.
+
+s · Drets dels detinguts
+Conculcar els drets dels detinguts o presos custodiats i subministrar-los drogues o begudes alcohòliques.
+
+t · Ús de l'arma i distintius
+Exhibir l'arma reglamentària o els distintius del càrrec sense causa justificada, i fer-ne un mal ús.
+
+u · Reincidència
+Reincidir en la comissió de faltes greus.
+
+v · Manca de col·laboració
+Manca de col·laboració manifesta amb altres membres de les Forces o Cossos de Seguretat quan s'hagi de prestar.
+
+w · Assetjament sexual i laboral
+Assetjament sexual i assetjament laboral consistent en la reiteració d'actes d'assetjament psicològic.
+:::
+
+:::clau
+Fixa't en les que porten **doble reprovació**: la lletra **f)** no sanciona només prevaricar o subornar, sinó **no evitar-ho ni denunciar-ho**; i la **d)** inclou **tolerar** la tortura o **col·laborar-hi**. Al règim disciplinari policial, mirar cap a una altra banda també és falta.
+:::
+
+## Faltes greus i lleus
+> Articles 49 i 50
+
+L'**article 49** enumera les **faltes greus**:
+
+:::articles
+a, b, c · Disciplina i imatge
+Desobediència als superiors i incompliment d'ordres · faltes de respecte greus i manifestes envers superiors, companys, subordinats o ciutadans · actes que atempten contra el decor i la dignitat dels funcionaris, la imatge del cos i el prestigi de la corporació.
+
+d, e · Danys i enfrontaments
+Causar danys greus al patrimoni de la corporació per negligència o mala fe · originar enfrontaments en el servei o al lloc de treball i prendre-hi part.
+
+f, g · Informació
+Incomplir l'obligació de donar compte als superiors dels assumptes que han de conèixer · incomplir el deure de reserva professional.
+
+h, i · Abús i abstenció
+Intervenir en un procediment administratiu havent-hi motius legals d'abstenció · actuar amb abús d'atribucions en perjudici dels ciutadans, si no és falta molt greu.
+
+j, k, n · Alcohol, credencials i armes
+Consumir begudes alcohòliques durant el servei i negar-se a les comprovacions · perdre les credencials per negligència inexcusable · perdre les armes per negligència simple.
+
+l, m, o · Assistència i deures
+Manca d'assistència sense causa justificada · reincidència en faltes lleus · incompliment per negligència greu dels deures de la funció.
+
+p · Videocàmeres
+Conductes que contravinguin la LO 4/1997 de videocàmeres i que no siguin ja falta molt greu.
+
+q · Protecció de dades
+Accedir indegudament, amb dol o negligència greu, a dades personals de titularitat municipal —incloses les tractades amb finalitats policials—, o permetre'n l'accés a tercers sense autorització.
+:::
+
+L'**article 50** enumera les **faltes lleus**:
+
+:::articles
+a, b · Tracte i diligència
+Incorrecció envers superiors, companys, subordinats o ciutadans · retard, negligència i descuit en el compliment de les funcions o de les ordres.
+
+c, d · Presentació i conservació
+Descurança en la presentació personal · descurança en la conservació de locals, material i documents del servei, si no produeix perjudicis greus.
+
+e, h · Jornada i puntualitat
+Incompliment de la jornada de treball sense causa justificada · faltes repetides de puntualitat dins un mateix mes sense causa justificada.
+
+f, g · Permutes i conducte
+Sol·licitar o aconseguir permuta de destinació o canvi de serveis amb afany de lucre o amb falsedat · prescindir del conducte reglamentari en formular sol·licituds o reclamacions, excepte urgència o impossibilitat física.
+:::
+
+:::avis
+Compara les tres **pèrdues d'arma**: per **negligència inexcusable** és **molt greu** (art. 48.j); per **negligència simple**, **greu** (art. 49.n). I la pèrdua de **credencials** per negligència inexcusable és **greu** (art. 49.k), no molt greu. El grau de negligència i l'objecte perdut canvien la qualificació.
+:::
+
+:::clau
+Diferència entre l'art. 49.b i el 50.a: les **faltes de respecte greus i manifestes** són **greus**; la simple **incorrecció** és **lleu**. La frontera és la gravetat i que sigui manifesta.
+:::
+
+## Inducció, encobriment i sancions
+> Articles 51 a 53
+
+L'**article 51** estén la responsabilitat: qui **indueixi** altres a cometre falta disciplinària **incorre en la mateixa responsabilitat**, i també els **comandaments que la toleren** (51.1). Qui **encobreixi** faltes molt greus i greus consumades incorre en una **falta d'un grau inferior** (51.2).
+
+L'**article 52** relaciona faltes i sancions:
+
+:::articles
+Per falta MOLT GREU | art. 52.2
+Separació del servei · suspensió de funcions per més d'un any i menys de sis, amb pèrdua de retribucions.
+
+Per falta GREU | art. 52.3
+Suspensió de funcions per més de quinze dies i menys d'un any, amb pèrdua de retribucions · trasllat a un altre lloc de treball.
+
+Per falta LLEU | art. 52.4
+Suspensió de funcions d'un a quinze dies amb pèrdua de retribucions · trasllat a un altre lloc de treball · deducció proporcional de retribucions en faltes de puntualitat i assistència · amonestació.
+:::
+
+:::clau
+Els **terminis de suspensió** encaixen encadenats i per això es pregunten: **1 a 15 dies** (lleu) · **més de 15 dies i menys d'1 any** (greu) · **més d'1 any i menys de 6** (molt greu). I la **separació del servei** només és possible per falta **molt greu**.
+:::
+
+L'**article 53** fixa els **criteris de graduació**, d'acord amb el principi de **proporcionalitat**: la **intencionalitat**, la **pertorbació dels serveis**, els **danys i perjudicis** produïts a l'Administració o als administrats, la **reincidència**, el **grau de participació** i la **transcendència per a la seguretat pública**.
+
+L'**article 54** afegeix una garantia processal: **no es poden imposar sancions per faltes greus o molt greus si no és en virtut d'un expedient** instruït a aquest efecte, regit pels principis de **sumarietat i celeritat** però **sense causar mai indefensió**. La sanció per **faltes lleus** sí que es pot imposar sense aquest tràmit.
+
+:::avis
+La regla de l'art. 54 és de les que decideixen supòsits pràctics: **falta greu o molt greu → expedient obligatori**. Sense expedient, la sanció és nul·la per molt evident que sembli el fet.
+:::
+
 :::avis
 Aquest material d'estudi s'ha elaborat a partir del **text consolidat del Portal Jurídic de Catalunya** (Llei 16/1991, marcada com a VIGENT). **No és una font oficial**: per a qualsevol actuació professional, consulta sempre el text vigent al DOGC.
 :::
