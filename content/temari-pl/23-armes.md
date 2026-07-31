@@ -43,9 +43,9 @@ Armes d'ús lúdic-esportiu (pintura, avancàrrega), ==armes detonadores i llan�
 
 :::clau
 Les tres categories que més cauen:
-· ==**1a categoria = pistoles i revòlvers** (armes de foc curtes)==, la de l'arma reglamentària del policia local.
-· ==**3a categoria = escopetes de caça** (armes llargues d'ànima llisa)==. És l'error típic: molta gent respon 2a o 4a.
-· ==**5a categoria = armes blanques** no prohibides==.
+· ==**1a categoria → pistoles i revòlvers** (armes de foc curtes)==, la de l'arma reglamentària del policia local.
+· ==**3a categoria → escopetes de caça** (armes llargues d'ànima llisa)==. És l'error típic: molta gent respon 2a o 4a.
+· ==**5a categoria → armes blanques** no prohibides==.
 :::
 
 ### Armes prohibides (article 4)

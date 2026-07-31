@@ -3,8 +3,10 @@
 > **Font:** *Guia d'estudi per accedir a la categoria de mosso/a del Cos de
 > Mossos d'Esquadra*, 1a edició, juny de 2026.
 > © Generalitat de Catalunya, Departament d'Interior i Seguretat Pública.
-> Contingut reutilitzat sense alteracions a l'empara de la Llicència Oberta
+> Contingut reutilitzat a l'empara de la Llicència Oberta
 > d'Ús d'Informació – Catalunya (art. 17.1 de la Llei 19/2014, de transparència).
+> Única modificació: s'hi han afegit marques d'estudi (==text==) sobre el que
+> es pregunta als tests. El text de la guia no s'ha reescrit.
 > Darrera actualització de la font: juny de 2026.
 
 La sociolingüística és una disciplina que estudia l’ús lingüístic condicionat pel context social, la

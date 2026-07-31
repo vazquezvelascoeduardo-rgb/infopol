@@ -95,9 +95,9 @@ b) ==16 o 17 anys: internament en règim tancat d'**1 a 8 anys**==, complementat
 
 :::avis
 Les durades es barregen contínuament als tests. Fixa-les així:
-· ==**2 anys** = regla **general** (art. 9.3), per a qualsevol edat.==
-· ==**3 anys** (14-15) i **6 anys** (16-17) = fets de l'art. 9.2 (delictes greus, violència, grup).==
-· ==**5 anys** (14-15) i **8 anys** (16-17) = internament tancat pels delictes **més greus** de l'art. 10.2 (homicidi, assassinat, agressions sexuals qualificades, terrorisme, o pena ≥ 15 anys).==
+· ==**2 anys** → regla **general** (art. 9.3), per a qualsevol edat.==
+· ==**3 anys** (14-15) i **6 anys** (16-17) → fets de l'art. 9.2 (delictes greus, violència, grup).==
+· ==**5 anys** (14-15) i **8 anys** (16-17) → internament tancat pels delictes **més greus** de l'art. 10.2 (homicidi, assassinat, agressions sexuals qualificades, terrorisme, o pena ≥ 15 anys).==
 La xifra de ==**8 anys** només existeix per a **16-17 anys** i en els supòsits de l'art. 10.2==.
 :::
 

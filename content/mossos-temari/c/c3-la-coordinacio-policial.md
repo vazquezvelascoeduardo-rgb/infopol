@@ -3,8 +3,10 @@
 > **Font:** *Guia d'estudi per accedir a la categoria de mosso/a del Cos de
 > Mossos d'Esquadra*, 1a edició, juny de 2026.
 > © Generalitat de Catalunya, Departament d'Interior i Seguretat Pública.
-> Contingut reutilitzat sense alteracions a l'empara de la Llicència Oberta
+> Contingut reutilitzat a l'empara de la Llicència Oberta
 > d'Ús d'Informació – Catalunya (art. 17.1 de la Llei 19/2014, de transparència).
+> Única modificació: s'hi han afegit marques d'estudi (==text==) sobre el que
+> es pregunta als tests. El text de la guia no s'ha reescrit.
 > Darrera actualització de la font: juny de 2026.
 
 ## 1. El concepte de coordinació policial
@@ -113,15 +115,15 @@ Així, l’any 1994, el cos de Mossos d’Esquadra va començar el desplegament 
 assumir les competències que té atribuïdes estatutàriament, i va substituir progressivament les
 FCSE. En acords posteriors, s’ha fixat el projecte cronològic de desplegament de la PG-ME.
 
-L’article 50 de la Llei orgànica 2/1986 estableix que la Junta de Seguretat és l’òrgan competent
+==L’**article 50 de la Llei orgànica 2/1986** estableix que la **Junta de Seguretat** és l’òrgan competent
 per resoldre les incidències que es produeixin en la col·laboració entre els membres de les
-forces i cossos de seguretat de l’Estat i el cos de Mossos d’Esquadra. Per tant, ha de rebre
+forces i cossos de seguretat de l’Estat i el cos de Mossos d’Esquadra.== Per tant, ha de rebre
 informació periòdica del subdelegat del Govern central i de les autoritats autonòmiques de les
 deficiències que s’observin en la coordinació, l’auxili mutu i la informació recíproca. Aquests han
 d’indicar les mesures correctes per resoldre els problemes suscitats.
 
 La regulació de la Junta de Seguretat està prevista per Resolució de 28 de desembre de 1982.
-Funciona com els òrgans col·legiats i pren els acords per unanimitat.
+Funciona com els òrgans col·legiats i ==**pren els acords per unanimitat**==.
 
 Les funcions de la Junta de Seguretat són:
 
@@ -142,10 +144,10 @@ l’actuació de les policies locals.
 corresponen a Catalunya a les diverses forces i cossos de seguretat de l’Estat, a la policia
 autònoma i a les policies locals.
 
-La Junta de Seguretat de Catalunya està formada per 5 persones en representació del Govern
-central i 5 en representació de la Generalitat de Catalunya.
+==La Junta de Seguretat de Catalunya està formada per **5 persones en representació del Govern
+central i 5 en representació de la Generalitat de Catalunya**.==
 
-Està presidida pel president de la Generalitat de Catalunya, i els representants de la Generalitat són:
+==Està **presidida pel president de la Generalitat de Catalunya**==, i els representants de la Generalitat són:
 • La persona titular del Departament d’Interior i Seguretat Pública.
 • La persona titular de la Secretaria General del Departament d’Interior i Seguretat Pública.
 • La persona titular de la Direcció General de la Policia.
@@ -157,14 +159,14 @@ Hi ha diferents òrgans per possibilitar la coordinació en l’àmbit operatiu,
 Sala de Coordinació Interpolicial de Catalunya i les comissions de coordinació policial de diferents
 àmbits territorials i no permanents.
 
-La Junta de Seguretat de Catalunya va acordar crear la Sala Interpolicial de Catalunya, com a
-instrument d’intercanvi d’informació, desenvolupament de col·laboració tècnica, alimentació de
+La Junta de Seguretat de Catalunya va acordar crear la ==**Sala Interpolicial de Catalunya**==, com a
+==instrument d’intercanvi d’informació==, desenvolupament de col·laboració tècnica, alimentació de
 bases de dades corporatives i per tal d’anar incrementant les relacions entre els cossos policials.
 
 D’entre les coordinacions policials, cal destacar la coordinació en matèria de policia judicial.
 
-El Reial decret 769/1987, de 19 de juny, sobre regulació de la policia judicial, modificat pel Reial
-decret 54/2002, de 18 de gener, va crear dos tipus de comissions amb la finalitat d’harmonitzar
+==El **Reial decret 769/1987, de 19 de juny**, sobre regulació de la **policia judicial**, modificat pel **Reial
+decret 54/2002, de 18 de gener**==, va crear dos tipus de comissions amb la finalitat d’harmonitzar
 i unificar la direcció en les forces policials adscrites a la investigació criminal en els seus diferents
 àmbits territorials. Aquestes comissions són:
 
@@ -409,8 +411,8 @@ delinqüència organitzada que ultrapassen l’àmbit de les nostres fronteres, 
 primer ordre dels cossos policials. Només farem referència a dues organitzacions internacionals
 basades en la cooperació i el suport entre els diferents cossos policials: la Interpol i l’Europol.
 
-Les principals funcions de la Interpol són aconseguir i desenvolupar l’assistència mútua entre les
-policies d’investigació criminal dels estats membres de l’organització. L’Europol és l’organització
+==Les principals funcions de la **Interpol** són aconseguir i desenvolupar l’**assistència mútua entre les
+policies d’investigació criminal** dels estats membres de l’organització.== L’Europol és l’organització
 policial en l’àmbit de la Unió Europea que gestiona la informació policial entre els estats membres.
 
 4.1.  La Interpol
@@ -491,13 +493,13 @@ moneda falsa, i tràfic il·lícit de drogues.
 
 4.2. L’Europol
 
-Europol és la sigla que correspon a Oficina Europea de Policia. Els principals motius per a la creació
+==**Europol** és la sigla que correspon a **Oficina Europea de Policia**.== Els principals motius per a la creació
 de l’Europol van ser la lliure circulació de persones, béns i serveis, la desigualtat dels sistemes
 legals, les barreres culturals i lingüístiques en la cooperació, la dificultat de coordinar recursos, així
-com l’absència d’una visió europea del crim organitzat. El 7 de febrer de l’any 1992 es va signar el
-Tractat de Maastricht sobre la Unió Europea, i es va considerar necessari crear una oficina europea
-de policia per superar aquestes dificultats. L’Europol neix amb la idea d’assolir una millora en la
-cooperació policial contra el terrorisme, el tràfic il·lícit de drogues i altres tipus de delinqüència
+com l’absència d’una visió europea del crim organitzat. ==El 7 de febrer de l’any 1992 es va signar el
+**Tractat de Maastricht** sobre la Unió Europea, i es va considerar necessari crear una oficina europea
+de policia== per superar aquestes dificultats. ==L’Europol neix amb la idea d’assolir una millora en la
+cooperació policial contra el **terrorisme**, el **tràfic il·lícit de drogues**== i altres tipus de delinqüència
 internacional, mitjançant l’intercanvi d’informació permanent.
 
 El 3 de gener de 1994 va iniciar la seva activitat la Unitat de Drogues de l’Europol (EDU), amb seu a
@@ -549,8 +551,8 @@ en els sistemes informàtics, i, finalment, vigila la legalitat en cada operaci�
 
 Schengen (SIS)
 
-El Tractat de Schengen té el seu origen en l’acord signat en aquesta localitat de Luxemburg el 14 de
-juny de 1985 pels governs de Bèlgica, els Països Baixos, Luxemburg, França i Alemanya. Així es va
+==El Tractat de **Schengen** té el seu origen en l’acord signat en aquesta localitat de Luxemburg el **14 de
+juny de 1985** pels governs de **Bèlgica, els Països Baixos, Luxemburg, França i Alemanya**.== Així es va
 constituir l’Acord de Schengen, relatiu a la supressió gradual dels controls a les fronteres comunes.
 Posteriorment, van adherir-s’hi Itàlia, Espanya, Portugal, Grècia, Àustria, Dinamarca, Suècia, Finlàndia,
 Islàndia i Noruega. L’objectiu d’aquest Acord fou la creació d’una zona de lliure circulació, que

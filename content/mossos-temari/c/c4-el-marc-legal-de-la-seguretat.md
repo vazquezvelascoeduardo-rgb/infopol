@@ -3,8 +3,10 @@
 > **Font:** *Guia d'estudi per accedir a la categoria de mosso/a del Cos de
 > Mossos d'Esquadra*, 1a edició, juny de 2026.
 > © Generalitat de Catalunya, Departament d'Interior i Seguretat Pública.
-> Contingut reutilitzat sense alteracions a l'empara de la Llicència Oberta
+> Contingut reutilitzat a l'empara de la Llicència Oberta
 > d'Ús d'Informació – Catalunya (art. 17.1 de la Llei 19/2014, de transparència).
+> Única modificació: s'hi han afegit marques d'estudi (==text==) sobre el que
+> es pregunta als tests. El text de la guia no s'ha reescrit.
 > Darrera actualització de la font: juny de 2026.
 
 ## 1. La Llei orgànica 2/1986, de 13 de març, de forces i cossos de seguretat.
@@ -441,24 +443,24 @@ als articles 18 i 19.
 La Llei determina que la Policia de la Generalitat - Mossos d’Esquadra, s’estructura jeràrquicament
 en les escales i les categories següents:
 
-a)  Escala bàsica, que comprèn les categories de mosso i de caporal.
+a)  ==**Escala bàsica**, que comprèn les categories de **mosso i de caporal**.==
 Les tasques executives derivades del compliment de les funcions policials, i les funcions
 de comandament d’un o més funcionaris de la mateixa escala en els diferents serveis
 policials.
 
-b)  Escala intermèdia, que comprèn les categories de sergent i de sotsinspector.
+b)  ==**Escala intermèdia**, que comprèn les categories de **sergent i de sotsinspector**.==
 El comandament operatiu i la supervisió de les tasques executives de les unitats, els grups
 i els subgrups policials.
 
-c)  Escala executiva, que comprèn la categoria d’inspector.
+c)  ==**Escala executiva**, que comprèn la categoria d’**inspector**.==
 La gestió de les diverses àrees i unitats dels Mossos d’Esquadra i, si s’escau, el
 comandament de l’activitat policial.
 
-d)  Escala superior, que comprèn les categories d’intendent, de comissari i de major.
+d)  ==**Escala superior**, que comprèn les categories d’**intendent, de comissari i de major**.==
 El comandament, la direcció, l’orientació, la coordinació i la inspecció, en el nivell superior,
 dels serveis policials.
 
-e)  Escala de suport, que comprèn les categories de facultatiu i de tècnic.
+e)  ==**Escala de suport**, que comprèn les categories de **facultatiu i de tècnic**.==
 El suport i la cobertura a la funció policial amb les tasques pròpies de la professió per
 a l’exercici de la qual habilita la titulació que els hagi estat exigida per ingressar al cos, i
 també funcions que requereixen coneixements propis i específics d’una formació concreta,
@@ -499,17 +501,17 @@ jerarquitzada entre escales i comandaments de les diferents unitats, torns i ser
 l’estructura orgànica. En aquest sentit, l’article 24 de la Llei 16/1991, de les policies locals, disposa
 que els cossos de policia local s’estructuren en les escales i les categories següents:
 
-• Escala superior, que comprèn les categories de superintendent, d’intendent major i
-d’intendent.
+• ==**Escala superior**, que comprèn les categories de **superintendent, d’intendent major i
+d’intendent**.==
 
-• Escala executiva, que comprèn la categoria d’inspector.
+• ==**Escala executiva**, que comprèn la categoria d’**inspector**.==
 
-• Escala intermèdia, que comprèn les categories de sotsinspector i de sergent.
+• ==**Escala intermèdia**, que comprèn les categories de **sotsinspector i de sergent**.==
 
-• Escala bàsica, que comprèn les categories de caporal i d’agent.
+• ==**Escala bàsica**, que comprèn les categories de **caporal i d’agent**.==
 
-La policia local només pot actuar en el territori del seu municipi, i excepcionalment, per raons
-d’emergència excepcional, i donant-ne compte al conseller o consellera del Departament amb
+==La policia local **només pot actuar en el territori del seu municipi**==, i excepcionalment, per raons
+==d’**emergència excepcional**==, i donant-ne compte al conseller o consellera del Departament amb
 competències en matèria de seguretat pública, pot actuar en els municipis limítrofes.
 
 La Llei dota d’altres figures en matèria de seguretat per a aquells municipis que no disposin de

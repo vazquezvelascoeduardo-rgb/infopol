@@ -3,8 +3,10 @@
 > **Font:** *Guia d'estudi per accedir a la categoria de mosso/a del Cos de
 > Mossos d'Esquadra*, 1a edició, juny de 2026.
 > © Generalitat de Catalunya, Departament d'Interior i Seguretat Pública.
-> Contingut reutilitzat sense alteracions a l'empara de la Llicència Oberta
+> Contingut reutilitzat a l'empara de la Llicència Oberta
 > d'Ús d'Informació – Catalunya (art. 17.1 de la Llei 19/2014, de transparència).
+> Única modificació: s'hi han afegit marques d'estudi (==text==) sobre el que
+> es pregunta als tests. El text de la guia no s'ha reescrit.
 > Darrera actualització de la font: juny de 2026.
 
 ## 1. Funcions del Departament d’Interior i Seguretat Pública
@@ -43,7 +45,7 @@ Vegeu, en concret, els articles:
 
 ## 3. Funcions i estructura de la Direcció General de la Policia
 
-El Decret 57/2023, de 21 de març, de reestructuració de la Direcció General de la Policia, en recull
+==El **Decret 57/2023, de 21 de març**, de **reestructuració de la Direcció General de la Policia**==, en recull
 les funcions i l’estructura actuals.
 
 Podeu consultar aquesta estructura i el text complet del Decret a https://portaljuridic.gencat.cat/ca/
@@ -365,7 +367,7 @@ desplegament de substitució a la ciutat de Barcelona. Constitueix, pel pes demo
 de la ciutat, una fita important en el procés de desplegament del cos. A Barcelona hi ha deu
 comissaries, que coincideixen amb els deu districtes de la ciutat, a més d’oficines de denúncies
 a les estacions de Sants i de la plaça Catalunya. Les comarques del Camp de Tarragona i de les
-Terres de l’Ebre conclouen el desplegament territorial el novembre de 2008.
+Terres de l’Ebre conclouen el ==**desplegament territorial el novembre de 2008**==.
 
 El desplegament territorial es complementa amb l’assumpció progressiva de competències especia­
 litzades, de les quals cal destacar especialment la investigació criminal i el trànsit. En el primer cas,
@@ -486,7 +488,7 @@ relleu generacional, el qual ha de comportar una necessària transmissió de con
 de valors. En paral·lel, es despleguen les accions necessàries per modernitzar els recursos materials
 i adequar-les a les noves necessitats i tecnologies disponibles.
 
-El 2022 es posa en marxa el Pla Mossos 2030, un pla estratègic que ha d’orientar l’evolució de la
+==El **2022** es posa en marxa el **Pla Mossos 2030**, un pla estratègic que ha d’orientar l’evolució de la==
 Policia de la Generalitat-Mossos d’Esquadra (PGME) en el període 2022-2030, establint les línies
 de millora i d’acció prioritàries en aquest període i que ha de projectar una organització policial
 adaptada a les necessitats d’una societat plenament abocada a la realitat del segle xxi.

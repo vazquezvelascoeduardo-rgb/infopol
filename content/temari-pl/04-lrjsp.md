@@ -150,7 +150,7 @@ La llei diferencia tres conceptes que sovint es confonen:
 - **Coordinació** (art. 145): una administració té la ==competència per fixar mitjans i sistemes de relació== que facin possible la informació recíproca, l'homogeneïtat tècnica i l'acció conjunta.
 
 :::clau
-==Cooperació = **voluntària**== · ==Coordinació = **imposada** per qui en té la competència==. És l'única diferència que cal per encertar la pregunta. Aplicat al teu ofici: la **coordinació de les policies locals** correspon a la Generalitat (art. 164.2 EAC), i per això és una imposició legal, no un acord voluntari.
+==Cooperació → **voluntària**== · ==Coordinació → **imposada** per qui en té la competència==. És l'única diferència que cal per encertar la pregunta. Aplicat al teu ofici: la **coordinació de les policies locals** correspon a la Generalitat (art. 164.2 EAC), i per això és una imposició legal, no un acord voluntari.
 :::
 
 :::avis
