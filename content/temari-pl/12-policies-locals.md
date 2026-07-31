@@ -7,19 +7,19 @@ subtitol: Llei 16/1991, de 10 de juliol, de les policies locals de Catalunya · 
 
 La Llei 16/1991 és **la vostra llei**. Neix de l'habilitació de l'**art. 39 de la LOFCS**, que atribueix a les comunitats autònomes la coordinació de les policies locals, i de les competències que l'Estatut reconeix a la Generalitat en règim local i en coordinació de les policies locals.
 
-L'**article 1** en fixa l'àmbit: s'aplica a **tots els cossos de policia que depenen dels municipis de Catalunya**, denominats genèricament **"policies locals"** (1.1). Els municipis que **no en disposen** es poden dotar de **guàrdies, vigilants, agents, algutzirs o similars** per exercir les funcions de l'article 13; aquest personal rep la denominació genèrica de **"vigilants"** (1.2). I un límit important: el servei l'han de prestar **directament** les corporacions locals, que **no poden** constituir òrgans especials de gestió ni aprovar concessió, arrendament ni cap forma de **gestió indirecta** (1.3).
+L'**article 1** en fixa l'àmbit: s'aplica a ==**tots els cossos de policia que depenen dels municipis de Catalunya**==, denominats genèricament ==**"policies locals"**== (1.1). Els municipis que **no en disposen** es poden dotar de **guàrdies, vigilants, agents, algutzirs o similars** per exercir les funcions de l'article 13; aquest personal rep la denominació genèrica de **"vigilants"** (1.2). I un límit important: el servei l'han de prestar **directament** les corporacions locals, que **no poden** constituir òrgans especials de gestió ni aprovar concessió, arrendament ni cap forma de **gestió indirecta** (1.3).
 
 :::clau
 L'**art. 1.3** prohibeix externalitzar el servei de policia local. No és una qüestió organitzativa menor: la funció policial és indelegable a un tercer privat.
 :::
 
-L'**article 2** defineix la naturalesa: les policies locals són **instituts armats de naturalesa civil amb estructura i organització jerarquitzades** (2.1) — la mateixa definició de l'art. 52.1 LOFCS. L'apartat 3 permet que, per **raons de tradició històrica** i si ho acorda la corporació, rebin la denominació específica de **"policia municipal"** o de **"guàrdia urbana"**.
+L'**article 2** defineix la naturalesa: les policies locals són ==**instituts armats de naturalesa civil amb estructura i organització jerarquitzades**== (2.1) — la mateixa definició de l'art. 52.1 LOFCS. L'apartat 3 permet que, per **raons de tradició històrica** i si ho acorda la corporació, rebin la denominació específica de ==**"policia municipal"** o de **"guàrdia urbana"**==.
 
-L'**article 3** fixa quan hi pot haver cos: als municipis de **més de deu mil habitants** (3.1). Als de **menys de deu mil**, cal acord de la **majoria absoluta del nombre legal de membres** de la corporació i **autorització** del conseller competent, amb informe previ de la **Comissió de Coordinació de les Policies Locals** (3.2).
+L'**article 3** fixa quan hi pot haver cos: als municipis de ==**més de deu mil habitants**== (3.1). Als de ==**menys de deu mil**==, cal acord de la ==**majoria absoluta del nombre legal de membres**== de la corporació i ==**autorització**== del conseller competent, amb informe previ de la **Comissió de Coordinació de les Policies Locals** (3.2).
 
-L'**article 4** imposa el **cos únic** per municipi (4.1); el **comandament** el té l'**alcalde**, que pot delegar-lo (4.2), i el **comandament immediat** correspon al **cap del cos** (4.3).
+L'**article 4** imposa el ==**cos únic**== per municipi (4.1); el ==**comandament superior el té l'alcalde**==, que pot delegar-lo (4.2), i el ==**comandament immediat** correspon al **cap del cos**== (4.3).
 
-L'**article 5** és el de l'àmbit territorial: l'actuació es limita al **territori del municipi** (5.1) i **només** se'n pot sortir en **situacions d'emergència i amb autorització prèvia** de les autoritats competents, donant-ne compte al departament competent (5.2).
+L'**article 5** és el de l'àmbit territorial: l'actuació es limita al ==**territori del municipi**== (5.1) i ==**només** se'n pot sortir en **situacions d'emergència i amb autorització prèvia**== de les autoritats competents, donant-ne compte al departament competent (5.2).
 
 :::articles
 art. 2.1 | Naturalesa
@@ -32,12 +32,12 @@ art. 5.2 | Sortir del municipi
 Només en situacions d'emergència i amb autorització prèvia. Cal donar-ne compte.
 
 art. 7.1 | Agents de l'autoritat
-Els policies locals ho són a tots els efectes en l'exercici de les seves funcions.
+==Els policies locals ho són **a tots els efectes** en l'exercici de les seves funcions.==
 :::
 
 L'**article 6** exigeix, abans de prendre possessió, **jurar o prometre acatar la Constitució** i respectar i observar l'**Estatut d'Autonomia**.
 
-L'**article 7** atorga als policies locals la condició d'**agents de l'autoritat a tots els efectes** (7.1). Els **vigilants** també la tenen (7.2), però **només si** actuen degudament identificats i en exercici de les funcions de l'art. 13 amb els límits de l'art. 8.3, **i** el municipi no disposa de policia local. Ho diu expressament: **no són agents de l'autoritat, en cap cas**, els vigilants o algutzirs que actuen de manera complementària o auxiliar a una policia local ja existent.
+L'**article 7** atorga als policies locals la condició d'==**agents de l'autoritat a tots els efectes**== (7.1). Els **vigilants** també la tenen (7.2), però **només si** actuen degudament identificats i en exercici de les funcions de l'art. 13 amb els límits de l'art. 8.3, **i** el municipi no disposa de policia local. Ho diu expressament: **no són agents de l'autoritat, en cap cas**, els vigilants o algutzirs que actuen de manera complementària o auxiliar a una policia local ja existent.
 
 :::avis
 La condició d'agent de l'autoritat dels **vigilants** és **condicionada i excloent**: cal que al municipi **no hi hagi** policia local. Si n'hi ha, els vigilants que hi treballin al costat **no** són agents de l'autoritat. És una pregunta que es falla molt.
@@ -46,7 +46,7 @@ La condició d'agent de l'autoritat dels **vigilants** és **condicionada i excl
 ## Armament i uniforme
 > Articles 8 i 9
 
-L'**article 8** parteix del fet que la policia local és un **institut armat**: els seus membres **han de dur l'armament reglamentari** que se'ls assigni i han de disposar dels altres mitjans tècnics i operatius necessaris (8.1). Ara bé, l'**alcalde ha de determinar, de forma motivada**, les circumstàncies i els serveis en què **no** s'han de dur armes de foc (8.2). I un límit taxatiu: els **vigilants no poden dur armes de foc** (8.3).
+L'**article 8** parteix del fet que la policia local és un **institut armat**: els seus membres ==**han de dur l'armament reglamentari**== que se'ls assigni i han de disposar dels altres mitjans tècnics i operatius necessaris (8.1). Ara bé, l'==**alcalde ha de determinar, de forma motivada**, les circumstàncies i els serveis en què **no** s'han de dur armes de foc== (8.2). I un límit taxatiu: els ==**vigilants no poden dur armes de foc**== (8.3).
 
 L'**article 9** obliga a dur l'**uniforme reglamentari**, que **només** es pot fer servir per al compliment del servei (9.1). L'alcalde pot autoritzar que **determinats serveis** es prestin **sense uniforme**; en aquest cas, l'agent **ha de portar la documentació acreditativa** de la seva condició (9.2).
 
@@ -70,18 +70,18 @@ Quan a l'examen et preguntin pels principis d'actuació, fixa't **de quina llei*
 
 L'**article 11** enumera **tretze funcions** — quatre més que l'art. 53.1 de la LOFCS, i aquesta és una de les comparacions que més cau:
 
-- **a)** **Protegir les autoritats** de les corporacions locals i vigilar i custodiar els seus edificis, instal·lacions i dependències.
-- **b)** **Ordenar, senyalitzar i dirigir el trànsit** al nucli urbà.
-- **c)** **Instruir atestats per accidents** de circulació dins el nucli urbà, **comunicant** les actuacions a les forces o cossos de seguretat competents.
-- **d)** Exercir de **policia administrativa**, per assegurar el compliment de reglaments, ordenances, bans, resolucions i altres disposicions i actes municipals.
-- **e)** Exercir de **policia judicial**, d'acord amb l'article 12.
-- **f)** Dur a terme **diligències de prevenció** i actuacions destinades a evitar la comissió d'actes delictuosos, **comunicant** les actuacions als cossos competents.
-- **g)** **Col·laborar** amb les forces i cossos de seguretat de l'Estat i amb la policia autonòmica en la **protecció de manifestacions** i el manteniment de l'ordre en **grans concentracions humanes**, **quan siguin requerides**.
-- **h)** **Cooperar en la resolució de conflictes privats**, quan siguin requerides.
-- **i)** **Vigilar els espais públics.**
-- **j)** Prestar **auxili en accidents, catàstrofes i calamitats públiques**, participant en l'execució dels plans de **protecció civil**.
-- **k)** Vetllar pel compliment de la normativa de **medi ambient i protecció de l'entorn**.
-- **l)** Dur a terme les actuacions destinades a garantir la **seguretat viària** al municipi.
+- **a)** ==**Protegir les autoritats** de les corporacions locals i vigilar i custodiar els seus edificis, instal·lacions i dependències==.
+- **b)** ==**Ordenar, senyalitzar i dirigir el trànsit** al nucli urbà==.
+- **c)** ==**Instruir atestats per accidents** de circulació **dins el nucli urbà**==, ==**comunicant** les actuacions== a les forces o cossos de seguretat competents.
+- **d)** Exercir de ==**policia administrativa**, per assegurar el compliment de reglaments, ordenances, bans, resolucions i altres disposicions i actes municipals==.
+- **e)** Exercir de ==**policia judicial**==, d'acord amb l'article 12.
+- **f)** Dur a terme ==**diligències de prevenció**== i actuacions destinades a evitar la comissió d'actes delictuosos, ==**comunicant** les actuacions== als cossos competents.
+- **g)** ==**Col·laborar**== amb les forces i cossos de seguretat de l'Estat i amb la policia autonòmica en la ==**protecció de manifestacions**== i el manteniment de l'ordre en ==**grans concentracions humanes**==, ==**quan siguin requerides**==.
+- **h)** ==**Cooperar en la resolució de conflictes privats**, quan siguin requerides==.
+- **i)** ==**Vigilar els espais públics.**==
+- **j)** Prestar ==**auxili en accidents, catàstrofes i calamitats públiques**==, participant en l'execució dels plans de ==**protecció civil**==.
+- **k)** Vetllar pel compliment de la normativa de ==**medi ambient i protecció de l'entorn**==.
+- **l)** Dur a terme les actuacions destinades a garantir la ==**seguretat viària**== al municipi.
 - **m)** **Qualsevol altra funció** de policia i seguretat que la legislació els encomani.
 
 :::clau
@@ -97,8 +97,8 @@ Fixa't en quines funcions porten **deure de comunicar**: els atestats per accide
 
 L'**article 12** concreta què vol dir exercir de policia judicial:
 
-- **a)** **Auxiliar els jutges, tribunals i el ministeri fiscal** en la investigació dels delictes i en el descobriment i la detenció dels delinqüents, **quan siguin requerides**.
-- **b)** Practicar, **per iniciativa pròpia o a requeriment** de l'autoritat judicial, del ministeri fiscal o dels superiors jeràrquics, les **primeres diligències de prevenció**, la **custòdia de detinguts** i la prevenció i custòdia dels **objectes provinents del delicte** o relacionats amb la seva execució, donant-ne compte en els terminis legals a l'autoritat judicial o al ministeri fiscal.
+- **a)** ==**Auxiliar els jutges, tribunals i el ministeri fiscal**== en la investigació dels delictes i en el descobriment i la detenció dels delinqüents, ==**quan siguin requerides**==.
+- **b)** Practicar, ==**per iniciativa pròpia o a requeriment**== de l'autoritat judicial, del ministeri fiscal o dels superiors jeràrquics, les ==**primeres diligències de prevenció**==, la ==**custòdia de detinguts**== i la prevenció i custòdia dels ==**objectes provinents del delicte**== o relacionats amb la seva execució, donant-ne compte en els terminis legals a l'autoritat judicial o al ministeri fiscal.
 
 L'apartat 2 recorda que aquestes funcions s'han de complir d'acord amb els principis de **cooperació mútua i col·laboració recíproca** amb la resta de forces i cossos.
 
@@ -130,16 +130,16 @@ L'**article 24** estructura els cossos de policia local en **quatre escales**:
 
 :::articles
 Escala superior | Grup A, subgrup A1
-Superintendent · intendent major · intendent
+==**Superintendent · intendent major · intendent**==
 
 Escala executiva | Grup A, subgrup A2
-Inspector
+==**Inspector**==
 
 Escala intermèdia | Grup C, subgrup C1
-Sots-inspector · sergent
+==**Sots-inspector · sergent**==
 
 Escala bàsica | Grup C, subgrup C1
-Caporal · agent
+==**Caporal · agent**==
 :::
 
 Per accedir-hi cal, a més dels requisits del capítol 2 del títol 4, **la titulació i els coneixements lingüístics** que la normativa de funció pública de la Generalitat estableix per a cada grup.
