@@ -77,14 +77,15 @@ const topic: TestTopic = {
     },
     {
       id: 'proteccio-civil-7',
-      text: 'Segons la Llei 4/1997, els plans de protecció civil es classifiquen en:',
+      text: 'Segons l\'article 15 de la Llei 4/1997, els plans de protecció civil poden ser:',
       options: [
-        'territorials, especials i específics',
+        "territorials, especials i d'autoprotecció",
         'bàsics i complementaris',
         'civils i militars',
         'generals i particulars',
       ],
       correct: 0,
+      reference: 'Art. 15.1',
     },
     {
       id: 'proteccio-civil-8',
