@@ -32,6 +32,9 @@ const Inici = lazy(() => import('./pages/Inici'));
 const Estudi = lazy(() => import('./pages/Estudi'));
 const EstudiModul = lazy(() => import('./pages/EstudiModul'));
 const EstudiDoc = lazy(() => import('./pages/EstudiDoc'));
+const Repas = lazy(() => import('./pages/Repas'));
+const Resums = lazy(() => import('./pages/Resums'));
+const Diagnostic = lazy(() => import('./pages/Diagnostic'));
 const Leyes = lazy(() => import('./pages/Leyes'));
 const Section = lazy(() => import('./pages/Section'));
 const CardPage = lazy(() => import('./pages/CardPage'));
@@ -137,6 +140,9 @@ export default function App() {
               <Route path="/estudi" element={<Estudi />} />
               <Route path="/estudi/:moduleSlug" element={<EstudiModul />} />
               <Route path="/estudi/:moduleSlug/:slug" element={<EstudiDoc />} />
+              <Route path="/repas" element={<Repas />} />
+              <Route path="/resums" element={<Resums />} />
+              <Route path="/diagnostic" element={<Diagnostic />} />
 
               {/* Acadèmia */}
               <Route path="/academia" element={<Academia />} />

@@ -62,7 +62,7 @@ export default function TestList() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
       {/* HERO */}
-      <header style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `linear-gradient(150deg, ${PL}, #14266B)`, color: '#fff', padding: 'clamp(24px,3.2vw,34px)', boxShadow: A.shadowMd }}>
+      <header style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `${PL}`, color: '#fff', padding: 'clamp(24px,3.2vw,34px)', boxShadow: A.shadow }}>
         <div style={{ position: 'absolute', top: -60, right: -50, width: 240, height: 240, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
         <div style={{ position: 'relative' }}>
           <Mono size={11} color="rgba(255,255,255,0.85)">Acadèmia · Policia Local</Mono>
@@ -79,16 +79,16 @@ export default function TestList() {
       {/* STATS PERSONALS */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }} className="a-grid-stats">
         <PStat icon="star" color={A.amber} label="Encerts" value={`${accuracy}%`} />
-        <PStat icon="fire" color={A.terracota} label="Ratxa" value={`${streak}`} sub="dies" />
+        <PStat icon="fire" color={A.terraInk} label="Ratxa" value={`${streak}`} sub="dies" />
         <PStat icon="check" color={A.green} label="Tests fets" value={`${attempts}`} />
         <PStat icon="trophy" color={A.blue} label="Nivell" value={avgGrade > 0 ? avgGrade.toFixed(1) : '–'} sub={LEVEL_LABEL[bestLevel]} />
       </div>
 
       {/* MODES RÀPIDS: Mix general + Errors anteriors */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }} className="a-grid-fork">
-        <BigMode to="/policia-local/tot" grad={`linear-gradient(150deg, ${A.blue}, #1E3A8A)`}
+        <BigMode to="/policia-local/tot" fons={`${A.blue}`}
           tag="Mix general" title="Tot el temari" desc="Totes les preguntes de teoria barrejades en un sol test." meta={`${teoriaQ} preguntes · ${teoria.length} temes`} cta="Començar" />
-        <BigMode to="/policia-local/repas" grad={`linear-gradient(150deg, ${A.terracota}, #C2410C)`}
+        <BigMode to="/policia-local/repas" fons={`${A.terracota}`}
           tag="Errors anteriors" title="Repàs intel·ligent" desc={failures.total > 0 ? 'Repassa les preguntes que has fallat fins dominar-les.' : 'Quan falles preguntes, apareixen aquí per repassar-les.'}
           meta={`${failures.due} per repassar · ${failures.total} acumulades`} cta="Repassar" />
       </div>
@@ -97,7 +97,7 @@ export default function TestList() {
       {failures.total > 0 && (
         <Link to="/policia-local/debilitats" style={{ textDecoration: 'none', marginTop: -14 }}>
           <Card pad={14} hover style={{ display: 'flex', alignItems: 'center', gap: 13 }}>
-            <span style={{ width: 40, height: 40, borderRadius: 12, background: A.terraSoft, display: 'grid', placeItems: 'center', flexShrink: 0 }}><Ic name="grid" size={20} color={A.terracota} sw={2.1} /></span>
+            <span style={{ width: 40, height: 40, borderRadius: 12, background: A.terraSoft, display: 'grid', placeItems: 'center', flexShrink: 0 }}><Ic name="grid" size={20} color={A.terraInk} sw={2.1} /></span>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 15.5, color: A.ink }}>Les teves debilitats</div>
               <Mono size={10} color={A.inkMuted}>On falles més i el teu pla de repàs personalitzat</Mono>
@@ -123,7 +123,7 @@ export default function TestList() {
         <section>
           <SecHead icon="star" color={A.purple} title="Cultura general" sub={`${culturaQ} preguntes · mesclat`} />
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }} className="a-grid-fork">
-            <BigMode to="/cultura-general/tot" grad={`linear-gradient(150deg, ${A.purple}, #5B2C9E)`}
+            <BigMode to="/cultura-general/tot" fons={`${A.purple}`}
               tag="Mix cultura" title="Test de cultura general" desc="Història, geografia, art, ciència, literatura i música barrejades." meta={`${culturaQ} preguntes`} cta="Començar" min={150} />
             <Link to="/cultura-general/temari" style={{ textDecoration: 'none' }}>
               <Card pad={20} hover style={{ height: '100%', display: 'flex', flexDirection: 'column', gap: 10, borderTop: `3px solid ${A.purple}` }}>
@@ -140,8 +140,8 @@ export default function TestList() {
       {/* ACTUALITAT */}
       {actualitatQ > 0 && (
         <section>
-          <SecHead icon="news" color={A.terracota} title="Actualitat" sub={`${actualitatQ} preguntes · 2025–2026`} />
-          <BigMode to="/actualitat/tot" grad={`linear-gradient(150deg, ${A.terracota}, #C64A13)`} wide
+          <SecHead icon="news" color={A.terraInk} title="Actualitat" sub={`${actualitatQ} preguntes · 2025–2026`} />
+          <BigMode to="/actualitat/tot" fons={`${A.terracota}`} wide
             tag="Mix actualitat" title="Test d'actualitat" desc="Càrrecs vigents, premis, esports i fets clau de 2025 i 2026." meta={`${actualitatQ} preguntes`} cta="Començar" />
         </section>
       )}

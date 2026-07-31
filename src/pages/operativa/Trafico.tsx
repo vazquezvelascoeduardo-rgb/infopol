@@ -34,7 +34,7 @@ function ChecklistList() {
       </nav>
 
       {/* Header compacte amb escut + títol + descripció + comptador */}
-      <header className="op-subhero" style={{ ['--accent' as never]: '#FF7A1A' } as React.CSSProperties}>
+      <header className="op-subhero" style={{ ['--accent' as never]: '#C4530A' } as React.CSSProperties}>
         <span className="op-subhero-icon" aria-hidden>🚦</span>
         <div className="op-subhero-text">
           <span className="eyebrow">{t('operativa.title').toUpperCase()}</span>
@@ -49,7 +49,7 @@ function ChecklistList() {
 
       <div
         className="section-head"
-        style={{ ['--accent' as never]: '#FF7A1A', marginTop: 24 } as React.CSSProperties}
+        style={{ ['--accent' as never]: '#C4530A', marginTop: 24 } as React.CSSProperties}
       >
         <span className="eyebrow">📋 ESCENARIS DISPONIBLES</span>
         <span className="rule" />
@@ -62,7 +62,7 @@ function ChecklistList() {
             to={`/operativa/trafico/${encodeURIComponent(e.id)}`}
             className="op-proc"
             style={{
-              ['--accent' as never]: '#FF7A1A',
+              ['--accent' as never]: '#C4530A',
               ['--accent-bg' as never]: '#FFEFE4',
             } as React.CSSProperties}
           >
@@ -96,7 +96,7 @@ function ChecklistList() {
             Catàleg complet de plantilles del cos i quan procedeix cadascuna.
           </span>
         </span>
-        <span style={{ color: 'var(--terracotta)', fontWeight: 700 }}>→</span>
+        <span style={{ color: 'var(--terracotta-2)', fontWeight: 700 }}>→</span>
       </Link>
     </div>
   );
@@ -132,7 +132,7 @@ function ChecklistRunnerScreen({ id }: { id: string }) {
 
       <header
         className="op-runner-head"
-        style={{ ['--accent' as never]: '#FF7A1A' } as React.CSSProperties}
+        style={{ ['--accent' as never]: '#C4530A' } as React.CSSProperties}
       >
         <span className="op-runner-icon" aria-hidden>
           {extractEmoji(entry.titol) ?? checklist.icono ?? '🚦'}

@@ -106,7 +106,7 @@ export default function PenalDretsDetingut() {
 
       <div
         className="section-head"
-        style={{ ['--accent' as never]: '#9c7a1f', marginTop: 28 } as React.CSSProperties}
+        style={{ ['--accent' as never]: '#9A5B00', marginTop: 28 } as React.CSSProperties}
       >
         <span className="eyebrow">⚠️ {t('penal.dretsDetingut.special').toUpperCase()}</span>
         <span className="rule" />

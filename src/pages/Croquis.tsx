@@ -1915,7 +1915,7 @@ export default function Croquis() {
           {/* Pista mentre dibuixa la via lliure */}
           {drawingPath && (
             <div style={{ position: 'absolute', left: '50%', bottom: 14, transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: 10, background: A.card, border: `1px solid ${A.terracota}`, borderRadius: 14, padding: '8px 14px', boxShadow: A.shadowLg, flexWrap: 'wrap' }}>
-              <Mono size={10} color={A.terracota}>Dibuixant via · {drawingPath.points.length / 2} pts</Mono>
+              <Mono size={10} color={A.terraInk}>Dibuixant via · {drawingPath.points.length / 2} pts</Mono>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, paddingLeft: 8, borderLeft: `1px solid ${A.line}` }}>
                 <Mono size={9} color={A.inkMuted}>Amplada</Mono>
                 <input type="range" min={80} max={500} value={drawingPath.width} onChange={(e) => setDrawingPath({ ...drawingPath, width: Number(e.target.value) })} style={{ width: 130, accentColor: A.terracota }} />
@@ -2210,7 +2210,7 @@ function SkidCalcModal({ onClose }: { onClose: () => void }) {
           <Mono size={9} color={A.inkMuted}>Resultat</Mono>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 8 }}>
             <div>
-              <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 34, color: A.terracota, lineHeight: 1 }}>
+              <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 34, color: A.terraInk, lineHeight: 1 }}>
                 {vKmh > 0 ? vKmh.toFixed(1) : '—'} <span style={{ fontSize: 14, color: A.inkSoft }}>km/h</span>
               </div>
               <Mono size={9} color={A.inkMuted} style={{ marginTop: 4 }}>Velocitat MÍNIMA a l'inici de la frenada</Mono>

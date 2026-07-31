@@ -81,7 +81,7 @@ function activeId(pathname: string, search: string): string {
 function Logo({ onClick, size = 26 }: { onClick?: () => void; size?: number }) {
   return <button onClick={onClick} style={{ display: 'flex', alignItems: 'center', gap: 9, border: 'none', background: 'transparent', cursor: onClick ? 'pointer' : 'default', padding: 0 }}>
     <svg width={size} height={size} viewBox="0 0 64 64" fill="none"><path d="M32 4 L56 12 V32 C56 46 45 56 32 60 C19 56 8 46 8 32 V12 Z" fill={A.ink} /><circle cx="32" cy="22" r="4.2" fill={A.terracota} /><rect x="28.4" y="30" width="7.2" height="20" rx="3.6" fill={A.terracota} /></svg>
-    <span style={{ fontFamily: A.sans, fontWeight: 800, fontSize: size * 0.72, letterSpacing: -0.6, color: A.ink }}>info<span style={{ color: A.terracota }}>pol</span></span>
+    <span style={{ fontFamily: A.sans, fontWeight: 800, fontSize: size * 0.72, letterSpacing: -0.6, color: A.ink }}>info<span style={{ color: A.terraInk }}>pol</span></span>
   </button>;
 }
 

@@ -79,7 +79,7 @@ export default function CardPage() {
   }
 
   const modTitle = t(`module.${mod.slug}.title`);
-  const accent = MODULE_ACCENT[mod.slug] ?? 'var(--terracotta)';
+  const accent = MODULE_ACCENT[mod.slug] ?? 'var(--terracotta-2)';
   // Context: si la fitxa s'obre des del temari de l'Acadèmia, els enllaços
   // de tornada es queden al marc de l'Acadèmia (no salten a Operativa).
   const inAcademia = location.pathname.startsWith('/academia/temari');

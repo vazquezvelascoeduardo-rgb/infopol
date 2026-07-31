@@ -55,10 +55,10 @@ export default function Superbuscador() {
   return (
     <Shell max={960}>
       {/* Capçalera */}
-      <div style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `linear-gradient(150deg, ${A.purple}, #7C3AED)`, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadowMd, marginBottom: 18 }}>
+      <div style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `${A.purple}`, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadow, marginBottom: 18 }}>
         <div style={{ position: 'absolute', top: -50, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
         <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-          <span style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0, boxShadow: A.inset }}><Ic name="search" size={28} color="#fff" sw={2.2} /></span>
+          <span style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0 }}><Ic name="search" size={28} color="#fff" sw={2.2} /></span>
           <div style={{ minWidth: 0 }}>
             <Mono size={11} color="rgba(255,255,255,0.85)">Catàleg SCT 2026</Mono>
             <h1 style={{ margin: '6px 0 0', fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: -1, lineHeight: 1.05 }}>Superbuscador d'infraccions</h1>
@@ -82,7 +82,7 @@ export default function Superbuscador() {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Ex.: conduir sense permís, mòbil, 0,30 mg/l, 500…"
-          style={{ width: '100%', border: `2px solid ${A.purple}`, background: A.card, borderRadius: 16, padding: '16px 44px 16px 50px', fontFamily: A.display, fontWeight: 600, fontSize: 16.5, color: A.ink, outline: 'none', boxShadow: A.shadowMd, boxSizing: 'border-box' }}
+          style={{ width: '100%', border: `2px solid ${A.purple}`, background: A.card, borderRadius: 16, padding: '16px 44px 16px 50px', fontFamily: A.display, fontWeight: 600, fontSize: 16.5, color: A.ink, outline: 'none', boxShadow: A.shadow, boxSizing: 'border-box' }}
         />
         {q && (
           <button type="button" onClick={() => setQ('')} aria-label="Esborrar" style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', border: 'none', background: A.bgDeep, cursor: 'pointer', width: 30, height: 30, borderRadius: 999, display: 'grid', placeItems: 'center', color: A.inkSoft }}>

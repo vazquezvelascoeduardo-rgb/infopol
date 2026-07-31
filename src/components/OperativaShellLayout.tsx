@@ -43,7 +43,7 @@ function activeId(pathname: string, sec: string | null): string {
 function Logo({ onClick, size = 26 }: { onClick?: () => void; size?: number }) {
   return <button onClick={onClick} style={{ display: 'flex', alignItems: 'center', gap: 9, border: 'none', background: 'transparent', cursor: onClick ? 'pointer' : 'default', padding: 0 }}>
     <svg width={size} height={size} viewBox="0 0 64 64" fill="none"><path d="M32 4 L56 12 V32 C56 46 45 56 32 60 C19 56 8 46 8 32 V12 Z" fill={A.ink} /><circle cx="32" cy="22" r="4.2" fill={A.terracota} /><rect x="28.4" y="30" width="7.2" height="20" rx="3.6" fill={A.terracota} /></svg>
-    <span style={{ fontFamily: A.sans, fontWeight: 800, fontSize: size * 0.72, letterSpacing: -0.6, color: A.ink }}>info<span style={{ color: A.terracota }}>pol</span></span>
+    <span style={{ fontFamily: A.sans, fontWeight: 800, fontSize: size * 0.72, letterSpacing: -0.6, color: A.ink }}>info<span style={{ color: A.terraInk }}>pol</span></span>
   </button>;
 }
 
@@ -80,8 +80,8 @@ export default function OperativaShellLayout() {
         </nav>
         <button onClick={() => nav('/academia')} className="a-navitem" style={{ marginTop: 'auto', border: 'none', cursor: 'pointer', background: A.terraSoft, borderRadius: 14, padding: '13px 14px', display: 'flex', alignItems: 'center', gap: 11, textAlign: 'left' }}>
           <span style={{ width: 34, height: 34, borderRadius: 10, background: A.terracota, display: 'grid', placeItems: 'center', boxShadow: A.inset, flexShrink: 0 }}><Ic name="book" size={18} color="#fff" sw={2.2} /></span>
-          <div style={{ flex: 1 }}><div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 13.5, color: A.terraInk }}>Anar a l'Acadèmia</div><Mono size={9} color={A.terracota}>Prepara l'oposició</Mono></div>
-          <Ic name="arrow" size={16} color={A.terracota} />
+          <div style={{ flex: 1 }}><div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 13.5, color: A.terraInk }}>Anar a l'Acadèmia</div><Mono size={9} color={A.terraInk}>Prepara l'oposició</Mono></div>
+          <Ic name="arrow" size={16} color={A.terraInk} />
         </button>
       </aside>
 

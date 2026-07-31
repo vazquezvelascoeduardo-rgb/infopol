@@ -5,9 +5,9 @@ import { listEsquemesDetall } from '../../data/esquemes-mossos-detall';
 import { AMBIT_META } from '../../lib/mossosTemari';
 import { useT } from '../../lib/i18n';
 
-const TERRACOTA = '#FF7A1A';
-const TERRACOTA_INK = '#7A2E04';
-const TERRACOTA_SOFT = '#FFE0CB';
+const TERRACOTA = '#C4530A';   // variant de text: el pur no es llegeix sobre paper
+const TERRACOTA_INK = '#C4530A';
+const TERRACOTA_SOFT = '#FFEDDD';
 
 export default function MossosEsquemes() {
   const { t } = useT();

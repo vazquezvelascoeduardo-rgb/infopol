@@ -141,7 +141,7 @@ export default function MossosList() {
       </nav>
 
       {/* HERO — mateix estil que TestList però en granate Mossos */}
-      <header style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `linear-gradient(150deg, ${MOSSOS}, #4C0519)`, color: '#fff', padding: 'clamp(24px,3.2vw,34px)', boxShadow: A.shadowMd }}>
+      <header style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `${MOSSOS}`, color: '#fff', padding: 'clamp(24px,3.2vw,34px)', boxShadow: A.shadow }}>
         <div style={{ position: 'absolute', top: -60, right: -50, width: 240, height: 240, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
         <div style={{ position: 'relative' }}>
           <Mono size={11} color="rgba(255,255,255,0.85)">Acadèmia · Mossos d'Esquadra</Mono>
@@ -205,7 +205,7 @@ export default function MossosList() {
       {/* STATS PERSONALS — PStat compartit */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }} className="a-grid-stats">
         <PStat icon="star" color={A.amber} label={t('test.list.stat.accuracy')} value={`${accuracy}%`} />
-        <PStat icon="fire" color={A.terracota} label={t('test.list.stat.streak')} value={`${streakDays}`} sub={t('test.list.stat.days')} />
+        <PStat icon="fire" color={A.terraInk} label={t('test.list.stat.streak')} value={`${streakDays}`} sub={t('test.list.stat.days')} />
         <PStat icon="check" color={A.green} label={t('test.list.stat.completed')} value={`${completedTests}`} />
         <PStat icon="trophy" color={MOSSOS} label={t('test.list.stat.level')} value={avgGrade > 0 ? avgGrade.toFixed(1) : '–'} sub={LEVEL_LBL[bestLevel]} />
       </div>
@@ -214,7 +214,7 @@ export default function MossosList() {
       <div id="mossos-tests" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, scrollMarginTop: 80 }} className="a-grid-fork">
         <BigMode
           to="/mossos/tot"
-          grad={`linear-gradient(150deg, ${MOSSOS}, #4C0519)`}
+          fons={`${MOSSOS}`}
           tag={t('test.list.modes.featured.tag')}
           title={t('test.list.modes.featured.title')}
           desc={t('test.list.modes.featured.sub')}
@@ -223,7 +223,7 @@ export default function MossosList() {
         />
         <BigMode
           to="/mossos/repas"
-          grad={`linear-gradient(150deg, ${A.terracota}, #C2410C)`}
+          fons={`${A.terracota}`}
           tag={t('test.list.modes.repas.tag')}
           title={t('test.list.modes.repas.title')}
           desc={
@@ -290,7 +290,7 @@ export default function MossosList() {
       >
         <div
           className="section-head"
-          style={{ ['--accent' as never]: '#9c7a1f', marginTop: 32 } as React.CSSProperties}
+          style={{ ['--accent' as never]: '#9A5B00', marginTop: 32 } as React.CSSProperties}
         >
           <span className="eyebrow">📚 {t('mossos.temari.eyebrow')}</span>
           <span className="rule" />
@@ -330,7 +330,7 @@ export default function MossosList() {
           <Link
             to="/mossos/temari"
             className="text-sm font-bold underline"
-            style={{ color: '#9c7a1f' }}
+            style={{ color: '#9A5B00' }}
           >
             {t('mossosTemari.openAll')} →
           </Link>
@@ -345,7 +345,7 @@ export default function MossosList() {
       >
         <div
           className="section-head"
-          style={{ ['--accent' as never]: '#FF7A1A', marginTop: 32 } as React.CSSProperties}
+          style={{ ['--accent' as never]: '#C4530A', marginTop: 32 } as React.CSSProperties}
         >
           <span className="eyebrow">📝 Esquemes detallats</span>
           <span className="rule" />
@@ -390,7 +390,7 @@ export default function MossosList() {
           <Link
             to="/mossos/esquemes"
             className="text-sm font-bold underline"
-            style={{ color: '#FF7A1A' }}
+            style={{ color: '#C4530A' }}
           >
             Veure tots els esquemes →
           </Link>

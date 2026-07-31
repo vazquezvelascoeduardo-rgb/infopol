@@ -58,7 +58,7 @@ export default function AvisLegal() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mt-6">
-      <h2 style={{ fontFamily: A.display, fontWeight: 700, fontSize: 18, letterSpacing: -0.4, color: A.terracota, marginBottom: 8 }}>{title}</h2>
+      <h2 style={{ fontFamily: A.display, fontWeight: 700, fontSize: 18, letterSpacing: -0.4, color: A.terraInk, marginBottom: 8 }}>{title}</h2>
       <div className="space-y-2 leading-relaxed" style={{ fontSize: 15, color: A.inkSoft }}>
         {children}
       </div>

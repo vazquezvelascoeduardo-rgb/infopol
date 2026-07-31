@@ -21,7 +21,7 @@ export default function SearchResults() {
   return (
     <Shell max={920}>
       <div style={{ marginBottom: 22 }}>
-        <Mono color={A.terracota} style={{ letterSpacing: 1.4 }}>Resultats de cerca</Mono>
+        <Mono color={A.terraInk} style={{ letterSpacing: 1.4 }}>Resultats de cerca</Mono>
         <h1 style={{ margin: '8px 0 0', fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(24px,3.2vw,34px)', letterSpacing: -1, color: A.ink, lineHeight: 1.1 }}>
           «{q}»
         </h1>

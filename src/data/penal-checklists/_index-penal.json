@@ -6,7 +6,7 @@
   "blocs": [
     {
       "bloc": "OPERATIU / LOPSC",
-      "color": "#3b82f6",
+      "color": "#0B4F8A",
       "icono": "🛡️",
       "escenaris": [
         { "id": "identificacio",         "titol": "🪪 Identificació de persones",                     "fitxer": "identificacio.json",          "ordre": 1 },
@@ -19,7 +19,7 @@
     },
     {
       "bloc": "PERSONES",
-      "color": "#ef4444",
+      "color": "#991B1B",
       "icono": "👤",
       "escenaris": [
         { "id": "lesions",               "titol": "🤕 Lesions",                                       "fitxer": "lesions.json",                "ordre": 7 },
@@ -32,7 +32,7 @@
     },
     {
       "bloc": "PATRIMONI",
-      "color": "#f59e0b",
+      "color": "#9A5B00",
       "icono": "💰",
       "escenaris": [
         { "id": "robatori-furt",         "titol": "💰 Robatori / furt",                                "fitxer": "robatori-furt.json",          "ordre": 13 },
@@ -42,7 +42,7 @@
     },
     {
       "bloc": "ORDRE PÚBLIC",
-      "color": "#8b5cf6",
+      "color": "#0B4F8A",
       "icono": "🚨",
       "escenaris": [
         { "id": "drogues-via-publica",   "titol": "💊 Drogues via pública",                            "fitxer": "drogues-via-publica.json",    "ordre": 16 },
@@ -51,7 +51,7 @@
     },
     {
       "bloc": "EMERGÈNCIES",
-      "color": "#10b981",
+      "color": "#186B47",
       "icono": "🆘",
       "escenaris": [
         { "id": "cadaver",               "titol": "⚰️ Troballa de cadàver",                            "fitxer": "cadaver.json",                "ordre": 18 },

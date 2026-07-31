@@ -59,9 +59,9 @@ export function SecHead({
 
 /* ── Mode gran (Tot el temari · Repàs · etc.) ── */
 export function BigMode({
-  to, grad, tag, title, desc, meta, cta, wide = false, min = 170,
+  to, fons, tag, title, desc, meta, cta, wide = false, min = 170,
 }: {
-  to: string; grad: string; tag: string; title: string; desc: string;
+  to: string; fons: string; tag: string; title: string; desc: string;
   meta: string; cta: string; wide?: boolean; min?: number;
 }) {
   return (
@@ -70,7 +70,7 @@ export function BigMode({
         className="a-hover"
         style={{
           position: 'relative', overflow: 'hidden', borderRadius: A.rxl,
-          backgroundImage: grad, color: '#fff', padding: 24,
+          background: fons, color: '#fff', padding: 24,
           boxShadow: A.shadowMd, minHeight: min,
           display: 'flex', flexDirection: 'column', height: '100%',
         }}

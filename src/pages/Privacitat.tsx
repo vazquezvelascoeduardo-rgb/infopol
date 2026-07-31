@@ -77,7 +77,7 @@ export default function Privacitat() {
                 límits del servei. No desem el contingut de les consultes.
               </li>
             </ul>
-            <p className="font-semibold" style={{ color: A.terracota }}>
+            <p className="font-semibold" style={{ color: A.terraInk }}>
               Important: no adjuntis ni escriguis dades personals que no siguin imprescindibles
               (DNI, matrícules, imatges de persones o documents identificatius). Ets responsable de
               la informació que hi introdueixes i del deure de secret professional que t&apos;afecti.
@@ -117,7 +117,7 @@ export default function Privacitat() {
                 aplicar los límites del servicio. No guardamos el contenido de las consultas.
               </li>
             </ul>
-            <p className="font-semibold" style={{ color: A.terracota }}>
+            <p className="font-semibold" style={{ color: A.terraInk }}>
               Importante: no adjuntes ni escribas datos personales que no sean imprescindibles (DNI,
               matrículas, imágenes de personas o documentos identificativos). Eres responsable de la
               información que introduces y del deber de secreto profesional que te afecte.
@@ -148,7 +148,7 @@ export default function Privacitat() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mt-6">
-      <h2 style={{ fontFamily: A.display, fontWeight: 700, fontSize: 18, letterSpacing: -0.4, color: A.terracota, marginBottom: 8 }}>{title}</h2>
+      <h2 style={{ fontFamily: A.display, fontWeight: 700, fontSize: 18, letterSpacing: -0.4, color: A.terraInk, marginBottom: 8 }}>{title}</h2>
       <div className="space-y-2 leading-relaxed" style={{ fontSize: 15, color: A.inkSoft }}>
         {children}
       </div>

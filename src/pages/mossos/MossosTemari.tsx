@@ -34,17 +34,17 @@ export default function MossosTemari() {
       {/* Hero card */}
       <header
         className="card card-accent"
-        style={{ ['--accent' as never]: '#9c7a1f' } as React.CSSProperties}
+        style={{ ['--accent' as never]: '#9A5B00' } as React.CSSProperties}
       >
         <div className="card-grid">
           <span
             className="appicon lg"
-            style={{ ['--accent' as never]: '#9c7a1f' } as React.CSSProperties}
+            style={{ ['--accent' as never]: '#9A5B00' } as React.CSSProperties}
           >
             <IconBook />
           </span>
           <div>
-            <div className="eyebrow" style={{ color: '#9c7a1f' }}>
+            <div className="eyebrow" style={{ color: '#9A5B00' }}>
               📚 {t('mossos.temari.eyebrow')}
             </div>
             <h1 className="card-title xl mt-1">{t('mossosTemari.title')}</h1>
@@ -62,7 +62,7 @@ export default function MossosTemari() {
       {/* Section head */}
       <div
         className="section-head"
-        style={{ ['--accent' as never]: '#9c7a1f' } as React.CSSProperties}
+        style={{ ['--accent' as never]: '#9A5B00' } as React.CSSProperties}
       >
         <span className="eyebrow">{t('mossosTemari.ambits')}</span>
         <span className="rule" />

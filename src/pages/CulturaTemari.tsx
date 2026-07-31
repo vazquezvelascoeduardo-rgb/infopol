@@ -328,7 +328,7 @@ export default function CulturaTemari() {
           <span style={{ fontFamily: MONO, fontSize: 12, fontWeight: 700, color: INK_MUTED, letterSpacing: 1.4, textTransform: 'uppercase' }}>FITXA DE REPÀS</span>
         </div>
         <h1 style={{ margin: 0, fontSize: 'clamp(34px, 7vw, 58px)', fontWeight: 900, letterSpacing: -1.8, lineHeight: 1.0, color: INK }}>
-          Cultura <span style={{ color: '#FF7A1A' }}>general</span>
+          Cultura <span style={{ color: '#C4530A' }}>general</span>
         </h1>
         <p style={{ margin: '14px 0 0', fontSize: 18, color: INK_SOFT, maxWidth: 680, lineHeight: 1.5 }}>
           Tot el temari de cultura condensat en una sola fitxa: <strong>{AREAS.length} àrees</strong> i més de <strong>{Math.round(TOTAL_FACTS / 10) * 10} fets clau</strong> organitzats per repassar de pressa abans del test.

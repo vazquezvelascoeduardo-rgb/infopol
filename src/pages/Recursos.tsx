@@ -38,10 +38,10 @@ export default function Recursos() {
   return (
     <div className="shell">
       {/* Hero amb degradat (estil Claude Design) */}
-      <header style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `linear-gradient(150deg, ${A.green}, #0B7A55)`, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadowMd, marginBottom: 8 }}>
+      <header style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `${A.green}`, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadow, marginBottom: 8 }}>
         <div style={{ position: 'absolute', top: -50, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
         <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-          <span style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0, boxShadow: A.inset }}><Ic name="star" size={28} color="#fff" sw={2.2} /></span>
+          <span style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0 }}><Ic name="star" size={28} color="#fff" sw={2.2} /></span>
           <div style={{ minWidth: 0 }}>
             <Mono size={11} color="rgba(255,255,255,0.85)">{t('recursos.badge')}</Mono>
             <h1 style={{ margin: '6px 0 0', fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: -1, lineHeight: 1.05 }}>{t('recursos.title')}</h1>
@@ -55,7 +55,7 @@ export default function Recursos() {
       <section className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {PHONES.map((p) => (
           <a key={p.num} href={`tel:${p.num}`} className="a-hover" style={{ textDecoration: 'none', background: A.card, border: `1px solid ${A.line}`, borderRadius: 18, boxShadow: A.shadow, padding: 18, textAlign: 'center', display: 'block' }}>
-            <span style={{ width: 46, height: 46, borderRadius: 13, background: p.color, display: 'grid', placeItems: 'center', margin: '0 auto 10px', boxShadow: A.inset }}><Ic name="phone" size={22} color="#fff" sw={2.1} /></span>
+            <span style={{ width: 46, height: 46, borderRadius: 13, background: p.color, display: 'grid', placeItems: 'center', margin: '0 auto 10px' }}><Ic name="phone" size={22} color="#fff" sw={2.1} /></span>
             <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 24, color: A.ink, letterSpacing: -0.5 }}>{p.show}</div>
             <div style={{ fontFamily: A.sans, fontWeight: 600, fontSize: 12.5, color: A.inkSoft, marginTop: 2 }}>{p.label}</div>
           </a>

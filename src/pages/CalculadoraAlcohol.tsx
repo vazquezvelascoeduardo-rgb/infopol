@@ -7,10 +7,10 @@ import { A, Ic, Mono, Card, Shell } from '../lib/design';
 export default function CalculadoraAlcohol() {
   return (
     <Shell max={780}>
-      <div style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `linear-gradient(150deg, ${A.pink}, #C2185B)`, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadowMd, marginBottom: 18 }}>
+      <div style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `${A.pink}`, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadow, marginBottom: 18 }}>
         <div style={{ position: 'absolute', top: -50, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
         <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-          <span style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0, boxShadow: A.inset }}><Ic name="flask" size={28} color="#fff" sw={2.2} /></span>
+          <span style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0 }}><Ic name="flask" size={28} color="#fff" sw={2.2} /></span>
           <div style={{ minWidth: 0 }}>
             <Mono size={11} color="rgba(255,255,255,0.85)">Eina ràpida · trànsit</Mono>
             <h1 style={{ margin: '6px 0 0', fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: -1, lineHeight: 1.05 }}>Calculadora d'alcoholèmia</h1>

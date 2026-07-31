@@ -393,10 +393,10 @@ export default function Retos() {
           {/* Customize / personalization */}
           {(() => {
             const COLORS = [
-              { grad: 'linear-gradient(135deg, #F26B1F, #D9531A)', name: 'Terracotta' },
-              { grad: 'linear-gradient(135deg, #2F6BD8, #1f4ea0)', name: 'Blau' },
-              { grad: 'linear-gradient(135deg, #2FB66B, #1f8a4d)', name: 'Verd' },
-              { grad: 'linear-gradient(135deg, #9747D6, #6c2bb4)', name: 'Lila' },
+              { grad: '#F26B1F', name: 'Terracotta' },
+              { grad: '#2F6BD8', name: 'Blau' },
+              { grad: '#2FB66B', name: 'Verd' },
+              { grad: '#9747D6', name: 'Lila' },
             ];
             const PETS = ['🦉', '🐺', '🦊'];
             const BADGES = [
@@ -476,8 +476,8 @@ export default function Retos() {
                             title={c.name}
                           />
                         ))}
-                        <span className="swatch lock" style={{ background: 'linear-gradient(135deg, #0E0E0E, #2a2a2a)' }} />
-                        <span className="swatch lock" style={{ background: 'linear-gradient(135deg, #E89A1C, #b87a14)' }} />
+                        <span className="swatch lock" style={{ background: '#0E0E0E' }} />
+                        <span className="swatch lock" style={{ background: '#E89A1C' }} />
                       </div>
                     </div>
                     <div className="cu-block">
@@ -539,7 +539,7 @@ export default function Retos() {
                         ))}
                         <span
                           className="swatch lock"
-                          style={{ background: 'linear-gradient(135deg, #1f2a44, #0e1530)' }}
+                          style={{ background: '#1f2a44' }}
                         />
                       </div>
                     </div>
@@ -553,7 +553,7 @@ export default function Retos() {
           <section className="ach-section">
             <div
               className="section-head"
-              style={{ ['--accent' as never]: 'var(--terracotta)' } as React.CSSProperties}
+              style={{ ['--accent' as never]: 'var(--terracotta-2)' } as React.CSSProperties}
             >
               <span className="eyebrow">
                 🏅 INSÍGNIES · {globalStats.achievements.length} / {REAL_ACHIEVEMENTS.length}{' '}

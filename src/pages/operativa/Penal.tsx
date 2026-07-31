@@ -53,7 +53,7 @@ function PenalList() {
       {/* Accés ràpid a pantalles de referència */}
       <div
         className="section-head"
-        style={{ ['--accent' as never]: 'var(--terracotta)', marginTop: 24 } as React.CSSProperties}
+        style={{ ['--accent' as never]: 'var(--terracotta-2)', marginTop: 24 } as React.CSSProperties}
       >
         <span className="eyebrow">⚡ {t('penal.references').toUpperCase()}</span>
         <span className="rule" />

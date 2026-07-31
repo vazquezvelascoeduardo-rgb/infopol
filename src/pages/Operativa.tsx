@@ -398,7 +398,7 @@ function OpProcediments({ ctx }: { ctx: OCtx }) {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }} className="a-grid-fork">
         {groups.map((g) => { const k = toneOf(g.tone); const dark = g.tone === 'night';
           const bg = dark ? `linear-gradient(150deg, #2A2D40, ${A.night})` : k.solid;
-          return <div key={g.title} className="a-hover" onClick={() => ctx.nav(g.route)} style={{ cursor: 'pointer', position: 'relative', overflow: 'hidden', borderRadius: A.rxl, backgroundImage: dark ? bg : undefined, background: dark ? undefined : bg, color: '#fff', padding: 24, boxShadow: A.shadowMd, minHeight: 210, display: 'flex', flexDirection: 'column' }}>
+          return <div key={g.title} className="a-hover" onClick={() => ctx.nav(g.route)} style={{ cursor: 'pointer', position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: bg, color: '#fff', padding: 24, boxShadow: A.shadowMd, minHeight: 210, display: 'flex', flexDirection: 'column' }}>
             <span style={{ width: 50, height: 50, borderRadius: 14, background: 'rgba(255,255,255,0.2)', display: 'grid', placeItems: 'center', marginBottom: 14 }}><Ic name={g.icon} size={26} color="#fff" sw={2.1} /></span>
             <h3 style={{ margin: '0 0 6px', fontFamily: A.display, fontWeight: 700, fontSize: 21, letterSpacing: -0.5, lineHeight: 1.15 }}>{g.title}</h3>
             <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.45, opacity: 0.92 }}>{g.desc}</p>

@@ -6,9 +6,9 @@ import { getEsquemaDetall } from '../../data/esquemes-mossos-detall';
 import { AMBIT_META } from '../../lib/mossosTemari';
 import { Markdown } from '../../lib/markdown';
 
-const TERRACOTA = '#FF7A1A';
-const TERRACOTA_INK = '#7A2E04';
-const TERRACOTA_SOFT = '#FFE0CB';
+const TERRACOTA = '#C4530A';   // variant de text: el pur no es llegeix sobre paper
+const TERRACOTA_INK = '#C4530A';
+const TERRACOTA_SOFT = '#FFEDDD';
 
 export default function MossosEsquemaRapid() {
   const { slug = '' } = useParams();
@@ -87,7 +87,7 @@ export default function MossosEsquemaRapid() {
         .esquema-detall h2 {
           margin: 30px 0 12px; font-size: clamp(18px,2.6vw,23px); font-weight: 800; letter-spacing: -0.4px;
           color: var(--ink); padding: 10px 14px; border-radius: 12px;
-          background: linear-gradient(90deg, #FFE0CB, rgba(255,224,203,0.16));
+          background: #FFE0CB;
           border-left: 4px solid #FF7A1A;
         }
         .esquema-detall h3 {
