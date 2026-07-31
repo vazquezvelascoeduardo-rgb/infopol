@@ -144,7 +144,7 @@ export default function Home() {
 
   // Si arribes amb sessió oberta, la portada no t'ha de vendre res: et porta
   // directament on treballes.
-  const ctaPrincipal = user ? { to: '/academia', label: "Entrar a l'Acadèmia" } : { to: '/login', label: 'Començar gratis' };
+  const ctaPrincipal = user ? { to: '/app', label: "Entrar a l'app" } : { to: '/login', label: 'Començar gratis' };
 
   useEffect(() => {
     if (!menu) return;
@@ -182,7 +182,7 @@ export default function Home() {
               <Link className="lp-btn lp-btn-g lp-btn-sm" to="/login">Entrar</Link>
             )}
             <Link className="lp-btn lp-btn-p lp-btn-sm" to={ctaPrincipal.to}>
-              {user ? 'Continuar' : 'Crear compte'}
+              {user ? 'Entrar a l’app' : "Registra't"}
             </Link>
             <button className="lp-burger" onClick={() => setMenu((v) => !v)} aria-label="Menú" aria-expanded={menu}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#44444F" strokeWidth="2.2" strokeLinecap="round">
@@ -204,7 +204,7 @@ export default function Home() {
             {user ? 'El meu perfil' : 'Entrar'}
           </Link>
           <Link className="lp-btn lp-btn-p lp-btn-sm" to={ctaPrincipal.to} onClick={() => setMenu(false)}>
-            {user ? 'Continuar' : 'Crear compte'}
+            {user ? 'Entrar a l’app' : "Registra't"}
           </Link>
         </div>
       </div>

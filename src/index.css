@@ -8,24 +8,53 @@
    TOKENS DEL SISTEMA (rebranding 2026)
    ════════════════════════════════════════════════════════════════════ */
 :root {
+  /* ── Paleta v3 (disseny "InfoPol Web App") ──────────────────────────
+     Aquests són ara els tokens mestres. Els noms antics (--paper,
+     --ink, --terracotta…) es mantenen com a àlies perquè tot el CSS
+     i les pàgines que ja existien segueixin funcionant sense tocar-les:
+     només canvien de valor i queden dins de la nova paleta. */
+  --v-paper: #F4F1EC;
+  --v-surface: #FFFFFF;
+  --v-surface2: #EFEAE2;
+  --v-ink: #15151C;
+  --v-ink-fixed: #15151C;   /* tinta de la barra lateral: no s'inverteix */
+  --v-fill: #15151C;
+  --v-fill-fg: #FFFFFF;
+  --v-muted: #6E6A63;
+  --v-faint: #9A938A;
+  --v-border: #E5DFD5;
+  --v-hair: rgba(21, 21, 28, 0.07);
+  --v-terra: #FF7A1A;
+  --v-terra-ink: #C4530A;
+  --v-terra-soft: #FFEDDD;
+  --v-blue: #0B4F8A;
+  --v-blue-soft: #E2EDF7;
+  --v-granate: #991B1B;
+  --v-granate-soft: #F7E5E5;
+  --v-ok: #186B47;
+  --v-ok-soft: #E1F0E8;
+  --v-warn: #9A5B00;
+  --v-warn-soft: #FBEEDC;
+  --v-shadow: rgba(21, 21, 28, 0.07);
+
   /* Tinta i paper */
-  --ink: #0E0E0E;
-  --ink-2: #1c1c1c;
-  --ink-3: #2a2a2a;
-  --paper: #FAF6EF;
-  --paper-2: #F2EDE3;
-  --white: #FFFFFF;
+  --ink: var(--v-ink);
+  --ink-2: #24242E;
+  --ink-3: #33333E;
+  --paper: var(--v-paper);
+  --paper-2: var(--v-surface2);
+  --white: var(--v-surface);
 
   /* Marca terracotta */
-  --terracotta: #F26B1F;
-  --terracotta-2: #D9531A;
-  --terracotta-soft: #FFE9D8;
+  --terracotta: var(--v-terra);
+  --terracotta-2: var(--v-terra-ink);
+  --terracotta-soft: var(--v-terra-soft);
 
   /* Text */
-  --text: #0E0E0E;
-  --text-2: #4a4744;
-  --text-3: #807c77;
-  --text-4: #b3afaa;
+  --text: var(--v-ink);
+  --text-2: var(--v-muted);
+  --text-3: var(--v-faint);
+  --text-4: #B7B0A6;
 
   /* Accents per secció */
   --c-leyes: #E89A1C;
@@ -49,26 +78,43 @@
   --tint-cream: #FBF6E8;
 
   /* Línies i ombres */
-  --line: rgba(14, 14, 14, 0.10);
-  --line-2: rgba(14, 14, 14, 0.06);
+  --line: var(--v-border);
+  --line-2: var(--v-hair);
   --shadow-sm: 0 1px 2px rgba(14,14,14,0.04), 0 1px 0 rgba(14,14,14,0.02);
   --shadow-md: 0 1px 2px rgba(14,14,14,0.04), 0 8px 24px -8px rgba(14,14,14,0.10);
   --shadow-lg: 0 1px 2px rgba(14,14,14,0.04), 0 24px 60px -20px rgba(14,14,14,0.18);
 }
 
 html.dark {
-  --ink: #F2EDE3;
-  --ink-2: #d6cfc1;
-  --ink-3: #b8b1a3;
-  --paper: #0E0E0E;
-  --paper-2: #1a1916;
-  --white: #1a1916;
-  --text: #F2EDE3;
-  --text-2: #b8b1a3;
-  --text-3: #807c77;
-  --text-4: #5b5751;
-  --line: rgba(242, 237, 227, 0.10);
-  --line-2: rgba(242, 237, 227, 0.06);
+  /* Mode fosc de la paleta v3. Els àlies antics hereten sols perquè
+     apunten a les variables --v-*. */
+  --v-paper: #0E0E13;
+  --v-surface: #191921;
+  --v-surface2: #23232D;
+  --v-ink: #F4F1EB;
+  --v-ink-fixed: #262633;
+  --v-fill: #F4F1EB;
+  --v-fill-fg: #15151C;
+  --v-muted: #9C978E;
+  --v-faint: #7A746B;
+  --v-border: #2A2A34;
+  --v-hair: rgba(255, 255, 255, 0.07);
+  --v-terra: #FF8A34;
+  --v-terra-ink: #FFAE73;
+  --v-terra-soft: #3A2412;
+  --v-blue: #5AA9E6;
+  --v-blue-soft: #16283B;
+  --v-granate: #C4494D;
+  --v-granate-soft: #331819;
+  --v-ok: #54B487;
+  --v-ok-soft: #14291F;
+  --v-warn: #D6A24E;
+  --v-warn-soft: #2E2313;
+  --v-shadow: rgba(0, 0, 0, 0.4);
+
+  --ink-2: #D9D5CD;
+  --ink-3: #BFBAB1;
+  --text-4: #5F5A52;
 }
 
 html {
@@ -6647,3 +6693,58 @@ html[data-text-size="lg"] { font-size: 18px; }
 /* Migues de pa (breadcrumbs) eliminades de tota la web per petició:
    eren poc estètiques (Home › Lleis › CE78 …). */
 .crumbs { display: none !important; }
+
+/* ════════════════════════════════════════════════════════════════════
+   MARC v3 — barra lateral, capçalera i barra inferior
+   ════════════════════════════════════════════════════════════════════ */
+
+/* La lupa i l'hamburguesa només tenen sentit quan la lateral està plegada. */
+.v3-nomes-mobil { display: none !important; }
+
+@media (max-width: 900px) {
+  .v3-aside { display: none !important; }
+  .v3-nomes-mobil { display: flex !important; }
+  /* Espai per a la pastilla flotant de sota. */
+  .v3-main { padding-bottom: 92px; }
+}
+
+@media (max-width: 560px) {
+  .v3-amaga-mobil { display: none !important; }
+}
+
+/* Pastilla flotant de navegació (mòbil) — la mateixa peça que a l'app. */
+.v3-tabbar { display: none; }
+@media (max-width: 900px) {
+  .v3-tabbar {
+    display: flex;
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    z-index: 50;
+    height: 66px;
+    align-items: center;
+    padding: 0 8px;
+    border-radius: 99px;
+    background: var(--v-ink-fixed);
+    box-shadow: 0 14px 20px rgba(21, 21, 28, 0.35);
+  }
+}
+
+/* Contingut de pantalla del marc v3: el padding estàndard del disseny. */
+.v3-page { padding: clamp(18px, 2.6vw, 28px); }
+
+@keyframes v3In { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes v3Grow { from { transform: scaleY(.1); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+.v3-anim { animation: v3In .35s ease; }
+
+/* Graella de dues columnes del disseny (contingut + costat). */
+.v3-cols {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 1000px) {
+  .v3-cols { grid-template-columns: 1fr; }
+}
