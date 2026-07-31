@@ -18,9 +18,9 @@ La llei distingeix dues coses que s'han de tenir sempre separades: les **diligè
 
 L'**article 14** habilita les autoritats competents a dictar les **ordres i prohibicions** i disposar les actuacions policials **estrictament necessàries** per assegurar els fins de la llei, sempre mitjançant **resolució degudament motivada**.
 
-L'**article 15** regula l'**entrada i registre en domicili**. El punt de partida (15.1) és que els agents **només** hi poden entrar **en els casos permesos per la Constitució** i en els termes de les lleis — és a dir, consentiment del titular, resolució judicial o delicte flagrant (art. 18.2 CE).
+L'**article 15** regula l'**entrada i registre en domicili**. El punt de partida (15.1) és que els agents ==**només** hi poden entrar **en els casos permesos per la Constitució**== i en els termes de les lleis — és a dir, consentiment del titular, resolució judicial o delicte flagrant (art. 18.2 CE).
 
-Però l'apartat 2 hi afegeix una **causa legítima suficient** pròpia d'aquesta llei: la **necessitat d'evitar danys imminents i greus a les persones i a les coses**, en supòsits de **catàstrofe, calamitat, ruïna imminent o altres semblants d'extrema i urgent necessitat**.
+Però l'apartat 2 hi afegeix una ==**causa legítima suficient**== pròpia d'aquesta llei: la ==**necessitat d'evitar danys imminents i greus a les persones i a les coses**==, en supòsits de ==**catàstrofe, calamitat, ruïna imminent o altres semblants d'extrema i urgent necessitat**==.
 
 L'apartat 3 aclareix que per entrar en **edificis ocupats per organismes oficials** o entitats públiques **no cal el consentiment** de l'autoritat o funcionari que els tingui a càrrec.
 
@@ -28,16 +28,16 @@ I l'apartat 4 imposa una obligació que sovint s'oblida: quan els agents entrin 
 
 :::articles
 art. 15.1 LOPSC | Regla general
-Només en els casos permesos per la Constitució: consentiment, resolució judicial o flagrant delicte.
+==Només en els casos permesos per la Constitució: **consentiment, resolució judicial o flagrant delicte**.==
 
 art. 15.2 LOPSC | Estat de necessitat
-Causa legítima suficient: evitar danys imminents i greus en catàstrofe, calamitat, ruïna imminent o extrema i urgent necessitat.
+==Causa legítima suficient: evitar **danys imminents i greus** en catàstrofe, calamitat, ruïna imminent o extrema i urgent necessitat.==
 
 art. 15.3 LOPSC | Edificis oficials
 No cal el consentiment de l'autoritat o funcionari que en tingui la càrrega.
 
 art. 15.4 LOPSC | Deure posterior
-Entrada en domicili particular: remetre sense dilació l'acta o atestat a l'autoritat judicial.
+==Entrada en domicili particular: **remetre sense dilació l'acta o atestat a l'autoritat judicial**.==
 :::
 
 :::avis
@@ -49,18 +49,18 @@ L'art. 15.2 **no** és un xec en blanc. Exigeix **danys imminents i greus** i su
 
 L'**article 16.1** fixa **dos únics supòsits** en què els agents poden requerir la identificació:
 
-- **a)** Quan hi hagi **indicis que hagin pogut participar en la comissió d'una infracció**.
-- **b)** Quan, **en atenció a les circumstàncies concurrents**, es consideri **raonablement necessari** que acreditin la seva identitat **per prevenir la comissió d'un delicte**.
+- **a)** Quan hi hagi ==**indicis que hagin pogut participar en la comissió d'una infracció**==.
+- **b)** Quan, ==**en atenció a les circumstàncies concurrents**==, es consideri ==**raonablement necessari**== que acreditin la seva identitat ==**per prevenir la comissió d'un delicte**==.
 
 En aquests supòsits es poden fer les comprovacions a la **via pública o al lloc del requeriment**, inclosa la identificació de persones **amb el rostre no visible** total o parcialment per una peça o objecte que el cobreixi i n'impedeixi o dificulti la identificació.
 
-I hi afegeix un mandat exprés: en la pràctica de la identificació **es respectaran estrictament els principis de proporcionalitat, igualtat de tracte i no discriminació** per raó de naixement, nacionalitat, origen racial o ètnic, sexe, religió o creences, edat, discapacitat, orientació o identitat sexual, opinió o qualsevol altra condició personal o social.
+I hi afegeix un mandat exprés: en la pràctica de la identificació ==**es respectaran estrictament els principis de proporcionalitat, igualtat de tracte i no discriminació**== per raó de naixement, nacionalitat, origen racial o ètnic, sexe, religió o creences, edat, discapacitat, orientació o identitat sexual, opinió o qualsevol altra condició personal o social.
 
 :::clau
 Els **dos supòsits** de l'art. 16.1 són tancats: **indicis de participació en una infracció** o **necessitat raonable per prevenir un delicte**. Fora d'aquí no hi ha habilitació per identificar. I la clàusula antidiscriminació no és decorativa: és part del tipus legal.
 :::
 
-L'**article 16.2** regula el **trasllat a dependències**. Només quan **no sigui possible la identificació per cap mitjà** —inclosos els telemàtics o telefònics— o la persona **s'hi negui**, els agents poden requerir-la que els acompanyi a les dependències policials més pròximes amb mitjans adequats, **als sols efectes d'identificació** i **pel temps estrictament necessari**, que **en cap cas pot superar les sis hores**.
+L'**article 16.2** regula el **trasllat a dependències**. Només quan **no sigui possible la identificació per cap mitjà** —inclosos els telemàtics o telefònics— o la persona **s'hi negui**, els agents poden requerir-la que els acompanyi a les dependències policials més pròximes amb mitjans adequats, ==**als sols efectes d'identificació**== i ==**pel temps estrictament necessari**==, que ==**en cap cas pot superar les sis hores**==.
 
 La persona ha de ser informada **de manera immediata i comprensible** de les raons de la sol·licitud i, si escau, del requeriment per acompanyar els agents.
 
@@ -68,9 +68,9 @@ La persona ha de ser informada **de manera immediata i comprensible** de les rao
 Les **sis hores** de l'art. 16.2 **no són una detenció**. És una diligència d'identificació amb un màxim temporal propi. No confonguis aquest termini amb les **72 hores** de l'art. 17.2 CE, que és el de la detenció preventiva.
 :::
 
-L'**article 16.3** obliga a portar un **llibre-registre** a les dependències, on només s'hi practiquen assentaments relacionats amb la seguretat ciutadana: hi han de constar les **diligències d'identificació** practicades i els seus **motius, circumstàncies i durada**. Les dades només es poden comunicar a l'**autoritat judicial** i al **Ministeri Fiscal**; l'òrgan competent remetrà **mensualment** al Fiscal un extracte amb el temps emprat en cada diligència, i els assentaments es **cancel·len d'ofici als tres anys**.
+L'**article 16.3** obliga a portar un **llibre-registre** a les dependències, on només s'hi practiquen assentaments relacionats amb la seguretat ciutadana: hi han de constar les **diligències d'identificació** practicades i els seus **motius, circumstàncies i durada**. Les dades només es poden comunicar a l'**autoritat judicial** i al **Ministeri Fiscal**; l'òrgan competent remetrà **mensualment** al Fiscal un extracte amb el temps emprat en cada diligència, i els assentaments es ==**cancel·len d'ofici als tres anys**==.
 
-L'**article 16.4** exigeix expedir a la sortida un **volant acreditatiu** del temps de permanència, la causa i la identitat dels agents actuants.
+L'**article 16.4** exigeix expedir a la sortida un ==**volant acreditatiu**== del temps de permanència, la causa i la identitat dels agents actuants.
 
 :::clau
 Xifres de l'art. 16 que cauen: **6 hores** de màxim, remissió **mensual** al Fiscal i cancel·lació d'ofici als **3 anys**. I el **volant acreditatiu** de sortida (16.4) és un dret de la persona, no una cortesia.
@@ -85,20 +85,20 @@ L'**article 17.2** habilita a establir **controls** en vies, llocs o establiment
 
 L'**article 18** regula les **comprovacions i registres en llocs públics**: els agents poden practicar les comprovacions **en persones, béns i vehicles** necessàries per impedir que es portin o utilitzin il·legalment **armes, explosius, substàncies perilloses o altres objectes** que generin un **risc potencialment greu** per a les persones, quan tinguin **indicis** de la seva presència. Els ciutadans tenen el **deure de col·laborar i no obstaculitzar**.
 
-L'apartat 2 permet l'**ocupació temporal** de qualsevol objecte, instrument o mitjà d'agressió, **fins i tot de les armes que es portin amb llicència**, si s'estima necessari per prevenir un delicte o quan hi hagi perill per a la seguretat de persones o béns.
+L'apartat 2 permet l'==**ocupació temporal**== de qualsevol objecte, instrument o mitjà d'agressió, ==**fins i tot de les armes que es portin amb llicència**==, si s'estima necessari per prevenir un delicte o quan hi hagi perill per a la seguretat de persones o béns.
 
 :::avis
 L'art. 18.2 permet ocupar temporalment **armes amb llicència legal**. No cal que l'arma sigui il·legal: n'hi ha prou amb el **perill** o la **prevenció d'un delicte**. És una potestat que sorprèn i per això es pregunta.
 :::
 
-L'**article 19** conté les **disposicions comunes**. L'apartat 1 desvincula aquestes diligències de les formalitats de la detenció. L'apartat 2 exigeix que l'**aprehensió** d'armes, drogues, substàncies psicotròpiques o altres efectes procedents d'un delicte o infracció es faci constar en **acta signada per l'interessat**; si s'hi nega, se n'ha de deixar **constància expressa**. I afegeix que l'acta **gaudeix de presumpció de veracitat** dels fets consignats, **llevat de prova en contrari**.
+L'**article 19** conté les **disposicions comunes**. L'apartat 1 desvincula aquestes diligències de les formalitats de la detenció. L'apartat 2 exigeix que l'**aprehensió** d'armes, drogues, substàncies psicotròpiques o altres efectes procedents d'un delicte o infracció es faci constar en **acta signada per l'interessat**; si s'hi nega, se n'ha de deixar **constància expressa**. I afegeix que l'acta ==**gaudeix de presumpció de veracitat** dels fets consignats, **llevat de prova en contrari**==.
 
-L'**article 20** regula els **registres corporals externs**. Es pot practicar el registre **corporal extern i superficial** quan hi hagi **indicis racionals** per suposar que pot conduir a la troballa d'instruments, efectes o objectes rellevants per a les funcions d'indagació i prevenció.
+L'**article 20** regula els **registres corporals externs**. Es pot practicar el registre ==**corporal extern i superficial**== quan hi hagi ==**indicis racionals**== per suposar que pot conduir a la troballa d'instruments, efectes o objectes rellevants per a les funcions d'indagació i prevenció.
 
 I fixa dues garanties, **llevat de situació d'urgència per risc greu i imminent per als agents**:
 
-- **a)** El registre el fa un **agent del mateix sexe** que la persona registrada.
-- **b)** Si exigeix **deixar a la vista parts del cos normalment cobertes** per la roba, es fa en un **lloc reservat i fora de la vista de tercers**, deixant-ne **constància escrita** amb les causes i la identitat de l'agent que ho va acordar.
+- **a)** El registre el fa un ==**agent del mateix sexe**== que la persona registrada.
+- **b)** Si exigeix ==**deixar a la vista parts del cos normalment cobertes**== per la roba, es fa en un ==**lloc reservat i fora de la vista de tercers**==, deixant-ne ==**constància escrita**== amb les causes i la identitat de l'agent que ho va acordar.
 
 :::clau
 Les dues garanties de l'art. 20.2 —**agent del mateix sexe** i **lloc reservat amb constància escrita**— només decauen davant d'una **urgència per risc greu i imminent per als agents**. No per comoditat ni per pressa.
@@ -107,19 +107,19 @@ Les dues garanties de l'art. 20.2 —**agent del mateix sexe** i **lloc reservat
 ## El règim sancionador: classes i quanties
 > Articles 34 i 39
 
-L'**article 34** classifica les infraccions en **molt greus, greus i lleus**.
+L'**article 34** classifica les infraccions en ==**molt greus, greus i lleus**==.
 
 L'**article 39** fixa les **quanties**:
 
 :::articles
 Molt greus | art. 39.1
-De 30.001 a 600.000 €. Grau mínim: 30.001–220.000 · mitjà: 220.001–410.000 · màxim: 410.001–600.000.
+==De **30.001 a 600.000 €**==. Grau mínim: 30.001–220.000 · mitjà: 220.001–410.000 · màxim: 410.001–600.000.
 
 Greus | art. 39.1
-De 601 a 30.000 €.
+==De **601 a 30.000 €**.==
 
 Lleus | art. 39.1
-De 100 a 600 €.
+==De **100 a 600 €**.==
 :::
 
 :::clau
@@ -131,7 +131,7 @@ Els **trams** encaixen encadenats: lleus fins a **600**, greus de **601** a **30
 
 :::articles
 1. Reunions en serveis bàsics | art. 35.1
-Reunions o manifestacions no comunicades o prohibides en infraestructures on es presten serveis bàsics per a la comunitat o les seves immediacions, i la intrusió en aquests recintes —inclòs el sobrevol— quan s'hagi generat risc per a la vida o la integritat física. En reunions i manifestacions responen els organitzadors o promotors.
+==Reunions o manifestacions **no comunicades o prohibides** en **infraestructures on es presten serveis bàsics** per a la comunitat o les seves immediacions, i la intrusió en aquests recintes —inclòs el sobrevol— **quan s'hagi generat risc per a la vida o la integritat física**.== En reunions i manifestacions responen els organitzadors o promotors.
 
 2. Armes i explosius amb perjudicis molt greus | art. 35.2
 Fabricació, reparació, emmagatzematge, circulació, comerç, transport, distribució, adquisició, certificació, alienació o utilització d'armes reglamentàries, explosius catalogats, cartutxeria o articles pirotècnics incomplint la normativa, sense documentació o autorització o excedint els límits, quan no sigui delicte; també l'omissió, insuficiència o falta d'eficàcia de les mesures de seguretat obligatòries. Sempre que es causin perjudicis molt greus.
@@ -152,7 +152,7 @@ Fixa't en la **doble exigència** de l'art. 35.1: no n'hi ha prou que la manifes
 
 :::articles
 1 · Perturbació en actes públics | art. 36.1
-Perturbar la seguretat ciutadana en actes públics, espectacles esportius o culturals, solemnitats i oficis religiosos o altres reunions amb nombroses persones, quan no sigui infracció penal.
+==Perturbar la seguretat ciutadana en **actes públics, espectacles esportius o culturals**, solemnitats i oficis religiosos o altres reunions amb nombroses persones, **quan no sigui infracció penal**.==
 
 2 · Davant de seus parlamentàries | art. 36.2
 Perturbació greu amb ocasió de reunions o manifestacions davant del Congrés, el Senat i les assemblees legislatives autonòmiques, encara que no estiguin reunides, quan no sigui delicte.
@@ -167,7 +167,7 @@ Actes d'obstrucció que pretenguin impedir a una autoritat, empleat públic o co
 Accions i omissions que impedeixin o obstaculitzin el funcionament dels serveis d'emergència, provocant o incrementant un risc per a la vida, la integritat o els béns, o agreujant les conseqüències del succés.
 
 6 · Desobediència i negativa a identificar-se | art. 36.6
-Desobediència o resistència a l'autoritat o als seus agents quan no sigui delicte, així com la negativa a identificar-se a requeriment o l'al·legació de dades falses o inexactes en la identificació.
+==**Desobediència o resistència** a l'autoritat o als seus agents **quan no sigui delicte**, així com la **negativa a identificar-se** a requeriment o l'**al·legació de dades falses o inexactes** en la identificació.==
 
 7 · Negativa a dissoldre's | art. 36.7
 Negativa a la dissolució de reunions i manifestacions en llocs de trànsit públic ordenada per l'autoritat competent quan concorrin els supòsits de l'art. 5 de la LO 9/1983.
@@ -197,7 +197,7 @@ Negativa d'accés o obstrucció deliberada de les inspeccions o controls reglame
 Falta de col·laboració amb les FCS en l'esbrinament de delictes o en la prevenció d'accions de risc per a la seguretat ciutadana, en els supòsits de l'art. 7.
 
 16 · Consum o tinença de drogues | art. 36.16
-Consum o tinença il·lícits de drogues tòxiques, estupefaents o substàncies psicotròpiques —encara que no siguin per al tràfic— en llocs, vies, establiments públics o transports col·lectius, i l'abandonament dels instruments emprats.
+==**Consum o tinença il·lícits de drogues** tòxiques, estupefaents o substàncies psicotròpiques —**encara que no siguin per al tràfic**— **en llocs, vies, establiments públics o transports col·lectius**, i l'abandonament dels instruments emprats.==
 
 17 · Trasllat per facilitar drogues | art. 36.17
 Traslladar persones, amb qualsevol vehicle, per facilitar-los l'accés a drogues, sempre que no sigui delicte.
@@ -233,7 +233,7 @@ L'apartat que més faràs servir és el **36.6**: hi caben tres conductes distin
 :::
 
 ## Catàleg complet: infraccions lleus
-> Article 37 · les set
+> Article 37 · les disset
 
 :::articles
 1 · Reunions incomplint la LO 9/1983 | art. 37.1
@@ -254,8 +254,38 @@ Realitzar o incitar actes que atemptin contra la llibertat i indemnitat sexual, 
 6 · Feixos de llum contra agents | art. 37.6
 Projectar feixos de llum, amb qualsevol dispositiu, sobre membres de les FCS per impedir o dificultar l'exercici de les seves funcions.
 
-7 · Ocupació d'immobles | art. 37.7
-Ocupar qualsevol immoble, habitatge o edifici aliè, o romandre-hi, contra la voluntat del propietari, arrendatari o titular d'un altre dret, quan no siguin infracció penal.
+7 · Ocupació d'immobles i de la via pública | art. 37.7
+==Ocupar qualsevol **immoble, habitatge o edifici aliè**, o romandre-hi, contra la voluntat del propietari, arrendatari o titular d'un altre dret, quan no siguin infracció penal.== També l'==**ocupació de la via pública** infringint la llei o la decisió de l'autoritat competent, inclosa la **venda ambulant no autoritzada**==.
+
+8 · Documentació d'armes i explosius | art. 37.8
+Omissió o insuficiència de mesures per garantir la conservació de la documentació d'armes i explosius, i la falta de denúncia de la seva pèrdua o sostracció.
+
+9 · Irregularitats en els registres | art. 37.9
+Irregularitats en l'emplenament dels registres previstos en aquesta llei amb transcendència per a la seguretat ciutadana, incloent-hi l'al·legació de dades falses o l'omissió de comunicacions obligatòries dins de termini, quan no sigui infracció penal.
+
+10 · No obtenir la documentació personal | art. 37.10
+==Incomplir l'obligació d'**obtenir la documentació personal legalment exigida**==, i l'omissió negligent de la denúncia de la seva sostracció o extraviament.
+
+11 · Negligència en la custòdia | art. 37.11
+Negligència en la custòdia i conservació de la documentació personal: es considera com a tal la ==**tercera i posteriors pèrdues o extraviaments en el termini d'un any**==.
+
+12 · No entregar la documentació | art. 37.12
+Negativa a entregar la documentació personal legalment exigida quan se n'hagi acordat la retirada o retenció.
+
+13 · Danys i desllustrament | art. 37.13
+==**Danys o desllustrament de béns mobles o immobles d'ús o servei públic**==, i de béns privats situats a la via pública, quan no constitueixin infracció penal.
+
+14 · Escalament d'edificis | art. 37.14
+Escalar edificis o monuments sense autorització quan hi hagi ==risc cert de causar danys a persones o béns==.
+
+15 · Remoure tanques i precintes | art. 37.15
+==Remoure **tanques, encintats o altres elements** col·locats per les FCS per **delimitar perímetres de seguretat**==, fins i tot amb caràcter preventiu, quan no sigui infracció greu.
+
+16 · Animals ferotges o abandonats | art. 37.16
+==**Deixar solts o en condicions de causar danys animals ferotges o nocius**==, i ==abandonar animals domèstics en condicions en què pugui perillar la seva vida==.
+
+17 · Consum d'alcohol a la via pública | art. 37.17
+==**Consum de begudes alcohòliques** en llocs, vies, establiments o transports públics **quan pertorbi greument la tranquil·litat ciutadana**==.
 :::
 
 :::clau
