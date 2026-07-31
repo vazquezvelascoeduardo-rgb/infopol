@@ -6699,9 +6699,15 @@ html[data-text-size="lg"] { font-size: 18px; }
 /* La lupa i l'hamburguesa només tenen sentit quan la lateral està plegada. */
 .v3-nomes-mobil { display: none !important; }
 
+/* La capçalera de dalt: a l'escriptori no hi és. La navegació i la cerca
+   viuen a la barra lateral, i tenir-hi també una barra superior duplicava
+   la fletxa d'enrere de cada pantalla i menjava alçada al contingut. */
+.v3-nomes-mobil-flex { display: none !important; }
+
 @media (max-width: 900px) {
   .v3-aside { display: none !important; }
   .v3-nomes-mobil { display: flex !important; }
+  .v3-nomes-mobil-flex { display: flex !important; }
   /* Espai per a la pastilla flotant de sota. */
   .v3-main { padding-bottom: 92px; }
 }

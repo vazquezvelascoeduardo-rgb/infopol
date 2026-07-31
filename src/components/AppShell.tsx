@@ -13,7 +13,7 @@
 // A mòbil la lateral es plega en un calaix i apareix la pastilla
 // flotant de sota, com a l'app.
 import { Suspense, useEffect, useMemo, useState } from 'react';
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import TriaPerfilUs from './TriaPerfilUs';
 import { useAuth } from '../lib/auth';
@@ -306,6 +306,22 @@ function Lateral({
         </div>
       </div>
 
+      {/* Cerca. Va a la lateral perquè és on hi ha la navegació: a dalt
+          hi havia una barra sencera només per a això. */}
+      <button
+        type="button"
+        onClick={() => onNavega('/cerca')}
+        style={{
+          width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none',
+          borderRadius: RV.md, padding: '11px 13px', marginBottom: 14,
+          background: 'rgba(255,255,255,.08)',
+          display: 'flex', alignItems: 'center', gap: 10,
+        }}>
+        <I n="search" size={16} sw={2} color="rgba(255,255,255,.6)" />
+        <span style={{ flex: 1, fontSize: 13, color: 'rgba(255,255,255,.6)' }}>Cerca…</span>
+        <Mono size={8.5} color="rgba(255,255,255,.35)" style={{ letterSpacing: 0.5 }}>⌘K</Mono>
+      </button>
+
       <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         {NAV.map((s) => (
           <BotoNav
@@ -397,27 +413,6 @@ function Lateral({
 }
 
 /** Indicador de la capçalera: icona plena + xifra, sobre pastilla tenyida. */
-function XipHud({ icona, valor, tint, accent }: {
-  icona: NomIc; valor: string; tint: string; accent: string;
-}) {
-  return (
-    <div className="v3-amaga-mobil" style={{
-      display: 'flex', alignItems: 'center', gap: 7, background: tint,
-      borderRadius: RV.pill, padding: '8px 13px',
-    }}>
-      <I n={icona} size={14} ple color={accent} />
-      <span style={{ fontSize: 13, fontWeight: 800, color: accent, letterSpacing: -0.2 }}>{valor}</span>
-    </div>
-  );
-}
-
-/** 17300 → "17,3k". Al disseny les xifres grans van abreujades. */
-export function abreuja(n: number): string {
-  if (n < 1000) return String(n);
-  const k = n / 1000;
-  return `${k.toFixed(1).replace('.', ',')}k`;
-}
-
 function ContentFallback() {
   return (
     <div style={{ display: 'grid', placeItems: 'center', padding: '80px 0' }}>
@@ -446,7 +441,6 @@ export default function AppShell() {
   const lloc = onEts(pathname);
   // La fletxa d'enrere només té sentit si no ets a la portada d'una
   // secció: allà no hi ha res darrere dins de l'app.
-  const potTornar = !!lloc && lloc !== 'Portada' && pathname !== '/app';
 
   useEffect(() => { applyInitialTheme(); }, []);
   useEffect(() => { setCalaix(false); }, [pathname]);
@@ -522,11 +516,15 @@ export default function AppShell() {
           <main>. Ho necessita el xat, que és una pantalla d'alçada fixa amb
           la llista de missatges scrollant per dins. */}
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', height: '100dvh' }}>
+        {/* La capçalera només existeix a mòbil, on cal alguna manera
+            d'obrir el calaix. A l'escriptori la navegació i la cerca ja
+            són a la barra lateral: tenir-hi també una barra a dalt
+            duplicava la fletxa d'enrere i menjava alçada al contingut. */}
         <header
-          className="v3-topbar"
+          className="v3-topbar v3-nomes-mobil-flex"
           style={{
-            flexShrink: 0, minHeight: 66, borderBottom: `1px solid ${V.hair}`,
-            display: 'flex', alignItems: 'center', gap: 16, padding: '0 clamp(14px,2.4vw,26px)',
+            flexShrink: 0, minHeight: 62, borderBottom: `1px solid ${V.hair}`,
+            alignItems: 'center', gap: 12, padding: '0 14px',
             background: V.surface,
           }}>
           <button
@@ -541,39 +539,6 @@ export default function AppShell() {
             }}>
             <I n="menu" size={19} sw={2.2} />
           </button>
-
-          {/* Enrere. Només surt quan hi ha on tornar: a la portada d'una
-              secció no serveix de res i només fa nosa. */}
-          {potTornar && (
-            <button
-              type="button"
-              onClick={() => nav(-1)}
-              aria-label="Enrere"
-              title="Enrere"
-              style={{
-                width: 38, height: 38, flexShrink: 0, border: `1px solid ${V.border}`,
-                borderRadius: '50%', background: V.surface, color: V.ink, cursor: 'pointer',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-              <I n="back" size={16} sw={2} />
-            </button>
-          )}
-
-          {/* On ets, a la capçalera: secció › lloc. */}
-          {lloc && lloc !== 'Portada' && (
-            <div className="v3-amaga-mobil" style={{ minWidth: 0, flexShrink: 0 }}>
-              <Mono size={9} color={V.faint} style={{ letterSpacing: 1.4, display: 'block' }}>
-                {(NAV.find((s) => s.id === activa)?.label ?? '').toUpperCase()}
-              </Mono>
-              <div style={{
-                fontSize: 14, fontWeight: 800, letterSpacing: -0.3, color: V.ink,
-                marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
-                maxWidth: 220,
-              }}>
-                {lloc}
-              </div>
-            </div>
-          )}
 
           <form onSubmit={cerca} style={{ flex: 1, maxWidth: 460, minWidth: 0 }}>
             <div style={{
@@ -598,27 +563,6 @@ export default function AppShell() {
             </div>
           </form>
 
-          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 9 }}>
-            <XipHud
-              icona="flame" valor={String(progres?.streak_count ?? 0)}
-              tint={V.terraSoft} accent={V.terraInk}
-            />
-            <XipHud
-              icona="bolt" valor={abreuja(progres?.xp ?? 0)}
-              tint={V.blueSoft} accent={V.blue}
-            />
-            <Link
-              to="/noticies"
-              aria-label="Novetats"
-              title="Novetats"
-              style={{
-                width: 38, height: 38, border: `1px solid ${V.border}`, borderRadius: 12,
-                background: V.surface, color: V.muted,
-                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-              }}>
-              <I n="bell" size={17} sw={1.8} />
-            </Link>
-          </div>
         </header>
 
         <main
