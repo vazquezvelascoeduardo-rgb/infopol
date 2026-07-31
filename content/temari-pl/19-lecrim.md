@@ -117,7 +117,7 @@ L'autoritat o agent està OBLIGAT a detenir | art. 492
 4t ==Qui estigui processat o **cridat i cercat**== per l'autoritat judicial.
 
 Delictes lleus | art. 495
-==**No es pot detenir per la presumpta comissió de delictes lleus**==, ==llevat que el presumpte responsable ==**no tingui domicili conegut ni doni fiança bastant**==, a judici de l'autoritat o agent.
+==**No es pot detenir per la presumpta comissió de delictes lleus**==, ==llevat que el presumpte responsable **no tingui domicili conegut ni doni fiança bastant**==, a judici de l'autoritat o agent.
 :::
 
 :::clau

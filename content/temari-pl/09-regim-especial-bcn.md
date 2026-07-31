@@ -48,7 +48,7 @@ Infraccions i comís | art. 30.2
 Les ordenances municipals poden considerar ==infracció administrativa **tant la prestació de serveis o el subministrament de béns a l'espai públic sense llicència municipal com la demanda o adquisició** d'aquests serveis o béns==. I, per garantir el compliment de les ordenances, els ==**agents de l'autoritat poden decomissar els estris, el gènere i els diners**== objecte de la infracció.
 
 Mesures alternatives | art. 30.3
-En la imposició de sancions per incompliment de deures, prohibicions o limitacions de les ordenances, per ==resolució motivada== es pot ==**substituir la sanció econòmica** per **treballs en benefici de la comunitat**, l'==assistència obligatòria a cursos de formació==, sessions individualitzades ==o qualsevol altra mesura alternativa== que tingui la finalitat de sensibilitzar l'infractor o ==reparar el dany moral de les víctimes==.
+En la imposició de sancions per incompliment de deures, prohibicions o limitacions de les ordenances, per ==resolució motivada== es pot ==**substituir la sanció econòmica** per **treballs en benefici de la comunitat**, l'assistència obligatòria a cursos de formació, sessions individualitzades o qualsevol altra mesura alternativa== que tingui la finalitat de sensibilitzar l'infractor o ==reparar el dany moral de les víctimes==.
 :::
 
 :::clau

@@ -70,7 +70,7 @@ S'ha de col·locar un ==**dispositiu informatiu en lloc prou visible**== identif
 El ==**mes**== de conservació i les ==**72 hores**== per posar les imatges a disposició de l'autoritat són dues xifres que cauen juntes i que es confonen contínuament. I recorda l'exclusió absoluta: ==**mai** l'interior d'un domicili privat==, ni tan sols per protegir una instal·lació estratègica.
 :::
 
-L'**article 22.6** conté una remissió clau: el tractament d'imatges ==per part de les **forces i cossos de seguretat** i dels òrgans competents per a la ==vigilància i control als centres penitenciaris i per al control, regulació, vigilància i disciplina del **trànsit**== ==es regeix per la seva legislació específica i per la LO 7/2021==.
+L'**article 22.6** conté una remissió clau: el tractament d'imatges ==per part de les **forces i cossos de seguretat** i dels òrgans competents per al control, regulació, vigilància i disciplina del **trànsit**== ==es regeix per la seva legislació específica i per la LO 7/2021==.
 
 :::clau
 Les ==càmeres de trànsit i les de les forces i cossos de seguretat **no es regeixen per l'article 22**==: van per la seva llei específica i per la ==LO 7/2021==. Aquesta remissió de l'art. 22.6 és una pregunta habitual precisament perquè trenca la regla general.
