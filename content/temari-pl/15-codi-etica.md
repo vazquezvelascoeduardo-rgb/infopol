@@ -5,16 +5,16 @@ subtitol: Acord GOV/25/2015, de 24 de febrer · Codi d'ètica de la Policia de C
 ## Què és i d'on surt
 > Naturalesa i marc jurídic
 
-El Codi d'ètica de la Policia de Catalunya s'aprova per l'**Acord GOV/25/2015, de 24 de febrer**, i es publica al **DOGC núm. 6819, de 26 de febrer de 2015**. L'Acord té tres punts: aprova el Codi que s'adjunta com a **annex**, en disposa la publicació al DOGC i n'ordena la **màxima difusió** pels webs corporatius.
+El Codi d'ètica de la Policia de Catalunya s'aprova per l'==**Acord GOV/25/2015, de 24 de febrer**==, i es publica al ==**DOGC núm. 6819, de 26 de febrer de 2015**==. L'Acord té tres punts: aprova el Codi que s'adjunta com a **annex**, en disposa la publicació al DOGC i n'ordena la **màxima difusió** pels webs corporatius.
 
-El primer que cal entendre és **quina naturalesa té**. No és una llei ni un reglament disciplinari: és una **eina pedagògica i inspiradora** que identifica els **mínims principis ètics, valors i competències** perquè serveixin de pauta en l'actuació policial. No tipifica infraccions ni imposa sancions — això ho fa el règim disciplinari, que va a part.
+El primer que cal entendre és **quina naturalesa té**. No és una llei ni un reglament disciplinari: és una ==**eina pedagògica i inspiradora**== que identifica els ==**mínims principis ètics, valors i competències**== perquè serveixin de pauta en l'actuació policial. ==**No tipifica infraccions ni imposa sancions**== — això ho fa el règim disciplinari, que va a part.
 
 El seu marc jurídic encadena tres normes que ja coneixes: l'**article 164 de l'Estatut d'autonomia** (competències de la Generalitat en seguretat pública i coordinació de les policies locals), la **LO 2/1986** (que estableix l'aplicació directa dels principis bàsics d'actuació a la policia autonòmica i a les locals) i la **Llei 16/1991** de les policies locals de Catalunya.
 
-A més, s'inspira expressament en la **Recomanació REC (2001)10** del Comitè de Ministres del Consell d'Europa, sobre el **Codi europeu d'ètica de la policia**.
+A més, s'inspira expressament en la ==**Recomanació REC (2001)10** del **Comitè de Ministres del Consell d'Europa**==, sobre el ==**Codi europeu d'ètica de la policia**==. Els altres dos textos internacionals de referència són el ==**Codi de conducta per a funcionaris encarregats de fer complir la llei**, aprovat per l'**Assemblea General de les Nacions Unides** (Resolució **34/169**, de 1979)== i la ==**Declaració sobre la policia** del **Consell d'Europa** (Resolució **690/1979**)==
 
 :::clau
-El Codi s'aplica a **tots els professionals de la Policia de Catalunya** —Mossos i policies locals— **indistintament del servei que prestin, d'on el desenvolupin i del cos a què pertanyin**. No és un codi només per als Mossos.
+El Codi s'aplica a ==**tots els professionals de la Policia de Catalunya**== —Mossos i policies locals— ==**indistintament del servei que prestin, d'on el desenvolupin i del cos a què pertanyin**==. No és un codi només per als Mossos.
 :::
 
 ## Els tres principis
@@ -26,17 +26,17 @@ Els **principis** són "aquelles bases que **en cap cas** un policia no pot deix
 
 :::articles
 a) Drets i llibertats
-Garantir els drets i les llibertats de totes les persones.
+==**Garantir els drets i les llibertats de totes les persones.**==
 
 b) Manera d'actuar
-Actuar amb integritat, proporcionalitat, congruència i oportunitat.
+==**Actuar amb integritat, proporcionalitat, congruència i oportunitat.**==
 
 c) Neutralitat
-Actuar amb absoluta neutralitat política i imparcialitat.
+==**Actuar amb absoluta neutralitat política i imparcialitat.**==
 :::
 
 :::clau
-Els **principis són tres i són irrenunciables**. Els **valors**, en canvi, són "horitzons de referència", realitats intangibles que mouen a obrar amb excel·lència. La diferència no és retòrica: el principi és un mínim que no es pot travessar; el valor és una direcció cap a on tendir.
+Els ==**principis són tres i són irrenunciables**==. Els ==**valors**==, en canvi, són =="horitzons de referència"==, realitats intangibles que mouen a obrar amb excel·lència. La diferència no és retòrica: el principi és un mínim que no es pot travessar; el valor és una direcció cap a on tendir.
 :::
 
 Fixa't que el principi **b)** repeteix la tríada de l'**art. 5.2.c de la LOFCS** —congruència, oportunitat i proporcionalitat— i hi afegeix la **integritat**. És el pont directe entre el Codi i la llei.

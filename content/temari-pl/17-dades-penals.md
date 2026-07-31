@@ -7,7 +7,7 @@ subtitol: Llei orgànica 7/2021, de 26 de maig, de protecció de dades personals
 
 Aquesta és la llei de protecció de dades **de la policia**. Fins a la LO 7/2021, el tractament policial de dades s'encabia com podia dins de la normativa general; ara té llei pròpia, i saber **quan s'aplica cadascuna** és el primer que cal entendre.
 
-L'**article 1** en fixa l'objecte: establir les normes de protecció de les persones físiques pel que fa al tractament de dades personals **per part de les autoritats competents**, amb finalitats de **prevenció, detecció, investigació i enjudiciament d'infraccions penals o d'execució de sancions penals**, incloses la **protecció i prevenció davant d'amenaces contra la seguretat pública**.
+L'**article 1** en fixa l'objecte: establir les normes de protecció de les persones físiques pel que fa al tractament de dades personals ==**per part de les autoritats competents**==, amb finalitats de ==**prevenció, detecció, investigació i enjudiciament d'infraccions penals o d'execució de sancions penals**==, incloses la ==**protecció i prevenció davant d'amenaces contra la seguretat pública**==.
 
 L'**article 2** l'aplica al tractament **total o parcialment automatitzat** de dades personals i també al **no automatitzat** de dades contingudes o destinades a un fitxer, sempre que el faci una autoritat competent amb aquelles finalitats.
 
@@ -23,12 +23,12 @@ Ho diu l'art. 6.2: si les dades es tracten per a altres fins, s'aplica el Reglam
 
 L'**article 6.1** enumera com han de ser les dades personals:
 
-- **a)** Tractades de manera **lícita i lleial**.
-- **b)** Recollides amb fins **determinats, explícits i legítims**, i no tractades de forma incompatible amb aquests fins.
-- **c)** **Adequades, pertinents i no excessives** en relació amb els fins.
-- **d)** **Exactes** i, si cal, actualitzades, amb totes les mesures raonables per suprimir o rectificar sense dilació indeguda les inexactes.
-- **e)** **Conservades** de manera que permetin identificar l'interessat **no més temps del necessari**.
-- **f)** Tractades garantint una **seguretat adequada**, inclosa la protecció contra el tractament no autoritzat o il·lícit i contra la pèrdua, destrucció o dany accidental.
+- **a)** Tractades de manera ==**lícita i lleial**==.
+- **b)** Recollides amb fins ==**determinats, explícits i legítims**==, i no tractades de forma incompatible amb aquests fins.
+- **c)** ==**Adequades, pertinents i no excessives**== en relació amb els fins.
+- **d)** ==**Exactes**== i, si cal, actualitzades, amb totes les mesures raonables per suprimir o rectificar sense dilació indeguda les inexactes.
+- **e)** ==**Conservades**== de manera que permetin identificar l'interessat ==**no més temps del necessari**==.
+- **f)** Tractades garantint una ==**seguretat adequada**==, inclosa la protecció contra el tractament no autoritzat o il·lícit i contra la pèrdua, destrucció o dany accidental.
 
 L'apartat 3 permet tractar les dades **per a un fi distint** d'aquell per al qual es van recollir, però només si **concorren acumulativament** dues circumstàncies: que el responsable sigui **competent** per tractar-les per a aquell altre fi, i que el tractament sigui **necessari i proporcionat**.
 
@@ -45,7 +45,7 @@ L'**article 9** obliga el responsable a **distingir**, en la mesura del possible
 
 :::articles
 a) Sospitosos | art. 9.a
-Persones respecte de les quals hi ha motius fundats per presumir que han comès, poden cometre o col·laborar en una infracció penal.
+==Persones respecte de les quals hi ha **motius fundats** per presumir que han comès, poden cometre o col·laborar en una infracció penal.==
 
 b) Condemnats | art. 9.b
 Persones condemnades o sancionades per una infracció penal.
