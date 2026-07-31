@@ -7,26 +7,34 @@
 // + footer), per això aquí no hi ha shell; només els blocs interiors.
 import { type CSSProperties, type ReactNode } from 'react';
 
-/* ── Tokens ── */
+/* ── Tokens ──
+   Són els mateixos colors que les variables --v-* de index.css, però
+   escrits en hexadecimal. Cal que ho siguin: el croquis dibuixa sobre
+   un <canvas> (Konva) i allà una variable CSS no vol dir res.
+
+   La paleta v3 és curta a propòsit — terracota, blau, granat, verd i
+   ambre. El lila, el rosa i el turquesa que hi havia abans ara hi
+   apunten; es manté el nom perquè les pàgines que els feien servir no
+   s'hagin de tocar una per una. */
 export const A = {
-  bg: '#F4F1EA', bgDeep: '#ECE7DC', bgSoft: '#FBF9F4', card: '#FFFFFF',
-  ink: '#15151C', inkSoft: '#44444F', inkMuted: '#82828D', inkFaint: '#B4B4BC',
-  line: 'rgba(21,21,28,0.07)', line2: 'rgba(21,21,28,0.12)', night: '#15161E',
-  terracota: '#FF7A1A', terraSoft: '#FFE7D2', terraInk: '#7A2E04',
-  blue: '#3B6BF5', blueSoft: '#E2E9FE', blueInk: '#0E2B7A',
-  green: '#1FB286', greenSoft: '#D2F0E2', greenInk: '#0B5A3D',
-  red: '#E0455A', redSoft: '#FBDCE0', redInk: '#7A1B22',
-  purple: '#9C4FE0', purpleSoft: '#EEE0FB', purpleInk: '#4A1B7A',
-  amber: '#E89421', amberSoft: '#FBE7C2', pink: '#E8519B', pinkSoft: '#FCDDEC',
-  teal: '#0BB4C2', tealSoft: '#CCEEF1', gold: '#F0B400',
-  display: '"Poppins", "Manrope", system-ui, sans-serif',
+  bg: '#F4F1EC', bgDeep: '#EFEAE2', bgSoft: '#FFFFFF', card: '#FFFFFF',
+  ink: '#15151C', inkSoft: '#4A463F', inkMuted: '#6E6A63', inkFaint: '#9A938A',
+  line: 'rgba(21,21,28,0.07)', line2: '#E5DFD5', night: '#15151C',
+  terracota: '#FF7A1A', terraSoft: '#FFEDDD', terraInk: '#C4530A',
+  blue: '#0B4F8A', blueSoft: '#E2EDF7', blueInk: '#0B4F8A',
+  green: '#186B47', greenSoft: '#E1F0E8', greenInk: '#186B47',
+  red: '#991B1B', redSoft: '#F7E5E5', redInk: '#991B1B',
+  purple: '#0B4F8A', purpleSoft: '#E2EDF7', purpleInk: '#0B4F8A',
+  amber: '#9A5B00', amberSoft: '#FBEEDC', pink: '#991B1B', pinkSoft: '#F7E5E5',
+  teal: '#186B47', tealSoft: '#E1F0E8', gold: '#9A5B00',
+  display: '"Plus Jakarta Sans", system-ui, sans-serif',
   mono: '"JetBrains Mono", ui-monospace, Menlo, monospace',
-  sans: '"Manrope", system-ui, sans-serif',
-  rlg: 22, rxl: 28,
-  shadow: '0 1px 0 rgba(21,21,28,0.03), 0 6px 18px rgba(21,21,28,0.05)',
-  shadowMd: '0 2px 4px rgba(21,21,28,0.04), 0 14px 36px rgba(21,21,28,0.09)',
+  sans: '"Plus Jakarta Sans", system-ui, sans-serif',
+  rlg: 22, rxl: 24,
+  shadow: '0 4px 14px rgba(21,21,28,0.07)',
+  shadowMd: '0 14px 30px rgba(21,21,28,0.09)',
   shadowLg: '0 30px 70px rgba(21,21,28,0.16)',
-  inset: 'inset 0 -4px 0 rgba(0,0,0,0.16)',
+  inset: 'none',
 };
 
 export type Tone = { solid: string; soft: string; ink: string };

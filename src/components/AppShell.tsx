@@ -309,7 +309,10 @@ export default function AppShell() {
         {lateral}
       </aside>
 
-      <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+      {/* L'àrea de la dreta té l'alçada del viewport i el que scrolleja és
+          <main>. Ho necessita el xat, que és una pantalla d'alçada fixa amb
+          la llista de missatges scrollant per dins. */}
+      <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', height: '100dvh' }}>
         <header
           className="v3-topbar"
           style={{
@@ -389,7 +392,9 @@ export default function AppShell() {
           </div>
         </header>
 
-        <main className="v3-main" style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+        <main
+          className="v3-main"
+          style={{ flex: 1, minWidth: 0, minHeight: 0, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
           <Suspense fallback={<ContentFallback />}>
             <Outlet />
           </Suspense>

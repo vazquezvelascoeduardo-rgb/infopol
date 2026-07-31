@@ -7,7 +7,7 @@ import { useT } from '../lib/i18n';
 import { TOPICS } from '../data/tests';
 import { A, Mono } from '../lib/design';
 
-const ACCENT = '#F26B1F'; // terracotta — encaixa amb el rebranding 2026
+const ACCENT = '#FF7A1A'; // terracotta — encaixa amb el rebranding 2026
 
 // Blocs temàtics inclosos al pool d'Actualitat (informatiu, sense link).
 const BLOCS = [

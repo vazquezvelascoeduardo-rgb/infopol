@@ -22,15 +22,15 @@ type Att = { name: string; media_type: string; data: string };
 
 /* ── Paleta fosca del disseny ─────────────────────────────────── */
 const D = {
-  bg: '#07070C',
-  panel: 'rgba(10,10,16,.72)',
-  ink: '#F2EFEA',
-  mut: '#9691A0',
-  mut2: '#8B8796',
-  faint: '#5E5A68',
-  line: 'rgba(255,255,255,.09)',
-  line2: 'rgba(255,255,255,.11)',
-  glass: 'linear-gradient(168deg,rgba(255,255,255,.055),rgba(255,255,255,.015))',
+  bg: 'var(--v-paper)',
+  panel: 'var(--v-surface)',
+  ink: 'var(--v-ink)',
+  mut: 'var(--v-muted)',
+  mut2: 'var(--v-muted)',
+  faint: 'var(--v-faint)',
+  line: 'var(--v-hair)',
+  line2: 'var(--v-border)',
+  glass: 'var(--v-surface)',
   mono: "'JetBrains Mono',ui-monospace,monospace",
   sans: "'Plus Jakarta Sans',system-ui,sans-serif",
 };
@@ -44,7 +44,7 @@ type Cat = {
 const CATS: Cat[] = [
   {
     key: 'diligencia', icon: '📝', num: '01', title: 'Diligenciador', kicker: 'MINUTES I ATESTATS',
-    accent: '#FF7A1A', glow: 'rgba(255,122,26,.22)', tint: 'rgba(255,122,26,.14)', border: 'rgba(255,122,26,.32)',
+    accent: '#FF7A1A', glow: 'rgba(255,122,26,.22)', tint: 'var(--v-terra-soft)', border: 'var(--v-terra-soft)',
     desc: 'Converteix les teves notes de servei en una minuta ben estructurada, amb els fets ordenats i el llenguatge jurídic correcte.',
     tags: ['MINUTES', 'ATESTATS', 'COMPAREIXENCES'],
     placeholder: 'Dicta els fets: hora, lloc, persones, indicis…',
@@ -53,7 +53,7 @@ const CATS: Cat[] = [
   },
   {
     key: 'operativa', icon: '⚖️', num: '02', title: 'Consultes operatives', kicker: 'NORMATIVA I ACTUACIÓ',
-    accent: '#6FB6EE', glow: 'rgba(46,139,212,.22)', tint: 'rgba(46,139,212,.14)', border: 'rgba(46,139,212,.34)',
+    accent: 'var(--v-blue)', glow: 'rgba(11,79,138,.22)', tint: 'var(--v-blue-soft)', border: 'var(--v-blue-soft)',
     desc: 'Quina infracció correspon, quin import, com actuar en un escenari concret i què diu exactament l\'article aplicable.',
     tags: ['INFRACCIONS', 'PROCEDIMENT', 'BASE LEGAL'],
     placeholder: 'Descriu la situació o pregunta per un article…',
@@ -62,7 +62,7 @@ const CATS: Cat[] = [
   },
   {
     key: 'servei', icon: '🗂️', num: '03', title: 'Redacció de serveis', kicker: 'INFORMES DE SERVEI',
-    accent: '#3FCF95', glow: 'rgba(47,179,122,.2)', tint: 'rgba(47,179,122,.13)', border: 'rgba(47,179,122,.32)',
+    accent: 'var(--v-ok)', glow: 'rgba(24,107,71,.2)', tint: 'var(--v-ok-soft)', border: 'var(--v-ok-soft)',
     desc: 'Informes de servei, novetats de torn i comunicats interns redactats amb el to institucional que toca.',
     tags: ['INFORMES', 'NOVETATS', 'COMUNICATS'],
     placeholder: 'Explica el servei: torn, incidències, actuacions…',
@@ -308,10 +308,10 @@ export default function Chat() {
   const card: CSSProperties = {
     border: `1px solid ${D.line}`, borderRadius: 20, padding: 20, background: D.glass,
     backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', marginBottom: 14,
-    boxShadow: '0 16px 40px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.06)',
+    boxShadow: '0 16px 40px rgba(0,0,0,.32), inset 0 1px 0 var(--v-surface2)',
   };
   const field: CSSProperties = {
-    width: '100%', background: 'rgba(255,255,255,.04)', border: `1px solid ${D.line2}`,
+    width: '100%', background: 'var(--v-surface2)', border: `1px solid ${D.line2}`,
     borderRadius: 12, outline: 'none', color: D.ink, fontFamily: D.sans, fontSize: 14.5, padding: '12px 14px',
   };
   const lbl: CSSProperties = {
@@ -320,25 +320,25 @@ export default function Chat() {
   const secTitle = (n: string) => (
     <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 16 }}>
       <span style={{ fontFamily: D.mono, fontSize: 9, letterSpacing: 2.2, color: c.accent }}>{n}</span>
-      <span style={{ flex: 1, height: 1, background: 'rgba(255,255,255,.08)' }} />
+      <span style={{ flex: 1, height: 1, background: 'var(--v-surface2)' }} />
     </div>
   );
 
   // Pantalla completa: el chat ocupa tot el viewport, sense el chrome del web.
   const shellStyle: CSSProperties = {
     background: D.bg, color: D.ink, fontFamily: D.sans,
-    overflow: 'hidden', position: 'relative', height: '100dvh', display: 'flex',
+    overflow: 'hidden', position: 'relative', height: '100%', display: 'flex',
     width: '100%', WebkitFontSmoothing: 'antialiased',
   };
   const ambient = (
     <>
       <style>{`
-        .ipc-scroll{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.16) transparent}
+        .ipc-scroll{scrollbar-width:thin;scrollbar-color:var(--v-hair) transparent}
         .ipc-scroll::-webkit-scrollbar{width:10px;height:10px}
         .ipc-scroll::-webkit-scrollbar-track{background:transparent}
-        .ipc-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:99px;
+        .ipc-scroll::-webkit-scrollbar-thumb{background:var(--v-hair);border-radius:99px;
           border:2px solid transparent;background-clip:padding-box}
-        .ipc-scroll::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.26);
+        .ipc-scroll::-webkit-scrollbar-thumb:hover{background:var(--v-border);
           border:2px solid transparent;background-clip:padding-box}
         .ipc-scroll::-webkit-scrollbar-corner{background:transparent}
         .ipc-md>:first-child{margin-top:0}
@@ -351,16 +351,16 @@ export default function Chat() {
         .ipc-md strong{font-weight:700;color:#fff}
         .ipc-md em{font-style:italic}
         .ipc-md a{color:#FFB27A}
-        .ipc-md hr{border:0;border-top:1px solid rgba(255,255,255,.1);margin:13px 0}
-        .ipc-md code{font-family:${D.mono};font-size:12.5px;background:rgba(255,255,255,.08);
+        .ipc-md hr{border:0;border-top:1px solid var(--v-hair);margin:13px 0}
+        .ipc-md code{font-family:${D.mono};font-size:12.5px;background:var(--v-surface2);
           padding:1px 5px;border-radius:5px}
         .ipc-md table{border-collapse:collapse;margin:0 0 10px;font-size:13.5px;display:block;
           overflow-x:auto;max-width:100%}
-        .ipc-md th,.ipc-md td{border:1px solid rgba(255,255,255,.13);padding:7px 10px;text-align:left;
+        .ipc-md th,.ipc-md td{border:1px solid var(--v-hair);padding:7px 10px;text-align:left;
           vertical-align:top}
-        .ipc-md th{background:rgba(255,255,255,.06);font-weight:700;white-space:nowrap}
+        .ipc-md th{background:var(--v-surface2);font-weight:700;white-space:nowrap}
       `}</style>
-      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', backgroundImage: 'linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px)', backgroundSize: '52px 52px' }} />
+      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', backgroundImage: 'linear-gradient(var(--v-surface2) 1px,transparent 1px),linear-gradient(90deg,var(--v-surface2) 1px,transparent 1px)', backgroundSize: '52px 52px' }} />
       <div style={{ position: 'absolute', left: '20%', top: 0, width: 620, height: 620, borderRadius: '50%', pointerEvents: 'none', background: 'radial-gradient(circle,rgba(255,122,26,.16),transparent 62%)', filter: 'blur(10px)' }} />
       <div style={{ position: 'absolute', right: '-8%', bottom: '-16%', width: 560, height: 560, borderRadius: '50%', pointerEvents: 'none', background: 'radial-gradient(circle,rgba(46,139,212,.14),transparent 64%)', filter: 'blur(10px)' }} />
     </>
@@ -369,7 +369,7 @@ export default function Chat() {
   /* ── HOME ───────────────────────────────────────────────────── */
   if (screen === 'home') {
     return (
-      <div style={{ background: D.bg, height: '100dvh', overflow: 'hidden' }}>
+      <div style={{ background: D.bg, flex: 1, minHeight: 0, overflow: 'hidden' }}>
         <div style={shellStyle}>
           {ambient}
           <div style={{ position: 'relative', flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
@@ -377,20 +377,20 @@ export default function Chat() {
               <Escut />
               <div>
                 <div style={{ fontWeight: 800, fontSize: 17, letterSpacing: -0.4, lineHeight: 1 }}>
-                  infopol<span style={{ color: '#FF7A1A' }}>·chat</span>
+                  infopol<span style={{ color: 'var(--v-terra-ink)' }}>·chat</span>
                 </div>
-                <div style={{ fontFamily: D.mono, fontSize: 8.5, letterSpacing: 2.4, color: '#6E6A78', marginTop: 3 }}>
+                <div style={{ fontFamily: D.mono, fontSize: 8.5, letterSpacing: 2.4, color: 'var(--v-faint)', marginTop: 3 }}>
                   ASSISTENT IA POLICIAL
                 </div>
               </div>
               <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
                 {count != null && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontFamily: D.mono, fontSize: 9.5, letterSpacing: 1.6, color: D.mut2, border: `1px solid ${D.line}`, borderRadius: 99, padding: '7px 13px', background: 'rgba(255,255,255,.03)' }}>
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#2FB37A', boxShadow: '0 0 8px #2FB37A' }} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontFamily: D.mono, fontSize: 9.5, letterSpacing: 1.6, color: D.mut2, border: `1px solid ${D.line}`, borderRadius: 99, padding: '7px 13px', background: 'var(--v-surface2)' }}>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--v-ok)', boxShadow: '0 0 8px #2FB37A' }} />
                     {count} FRAGMENTS · CORPUS INFOPOL
                   </div>
                 )}
-                <div style={{ width: 34, height: 34, borderRadius: 11, background: 'linear-gradient(150deg,#FF9A47,#EC5F06)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 14, color: '#fff', boxShadow: '0 6px 16px rgba(236,95,6,.4)' }}>
+                <div style={{ width: 34, height: 34, borderRadius: 11, background: '#FF7A1A', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 14, color: '#fff', boxShadow: '0 6px 16px rgba(236,95,6,.4)' }}>
                   {inicial}
                 </div>
               </div>
@@ -400,7 +400,7 @@ export default function Chat() {
               {/* margin:auto centra verticalment PERÒ sense retallar quan no hi cap. */}
               <div style={{ width: '100%', maxWidth: 1030, margin: 'auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: 34 }}>
-                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 9, fontFamily: D.mono, fontSize: 9.5, letterSpacing: 3, color: '#FFA05C', border: '1px solid rgba(255,122,26,.28)', background: 'rgba(255,122,26,.07)', borderRadius: 99, padding: '7px 15px', marginBottom: 20 }}>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 9, fontFamily: D.mono, fontSize: 9.5, letterSpacing: 3, color: 'var(--v-terra-ink)', border: '1px solid rgba(255,122,26,.28)', background: 'rgba(255,122,26,.07)', borderRadius: 99, padding: '7px 15px', marginBottom: 20 }}>
                     <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#FF7A1A', boxShadow: '0 0 8px #FF7A1A' }} />
                     DILIGENCIADOR OBERT · GRATUÏT
                   </div>
@@ -430,24 +430,24 @@ export default function Chat() {
                         background: D.glass, backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
                         color: D.ink,
                         boxShadow: obert
-                          ? '0 20px 50px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.07)'
-                          : 'inset 0 1px 0 rgba(255,255,255,.05)',
+                          ? '0 20px 50px rgba(0,0,0,.4), inset 0 1px 0 var(--v-surface2)'
+                          : 'inset 0 1px 0 var(--v-surface2)',
                       }}>
                       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 2, background: `linear-gradient(90deg,transparent,${k.accent},transparent)` }} />
                       <div style={{ position: 'absolute', right: -46, top: -46, width: 170, height: 170, borderRadius: '50%', background: `radial-gradient(circle,${k.glow},transparent 68%)` }} />
                       <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
                         <div style={{ width: 54, height: 54, borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 25, background: k.tint, border: `1px solid ${k.border}` }}>{k.icon}</div>
-                        <div style={{ fontFamily: D.mono, fontSize: 22, fontWeight: 700, color: 'rgba(255,255,255,.1)', letterSpacing: -1 }}>{k.num}</div>
+                        <div style={{ fontFamily: D.mono, fontSize: 22, fontWeight: 700, color: 'var(--v-hair)', letterSpacing: -1 }}>{k.num}</div>
                       </div>
                       <div style={{ position: 'relative', fontFamily: D.mono, fontSize: 9, letterSpacing: 2.2, color: k.accent, margin: '20px 0 7px' }}>{k.kicker}</div>
                       <div style={{ position: 'relative', fontSize: 23, fontWeight: 800, letterSpacing: -0.8, lineHeight: 1.1 }}>{k.title}</div>
-                      <div style={{ position: 'relative', color: '#9994A2', fontSize: 13.5, lineHeight: 1.5, marginTop: 9, minHeight: 60 }}>{k.desc}</div>
+                      <div style={{ position: 'relative', color: 'var(--v-muted)', fontSize: 13.5, lineHeight: 1.5, marginTop: 9, minHeight: 60 }}>{k.desc}</div>
                       <div style={{ position: 'relative', display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 14 }}>
                         {k.tags.map((t) => (
-                          <span key={t} style={{ fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.2, color: '#B4AFBC', border: `1px solid ${D.line}`, background: 'rgba(255,255,255,.04)', borderRadius: 7, padding: '5px 8px' }}>{t}</span>
+                          <span key={t} style={{ fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.2, color: 'var(--v-muted)', border: `1px solid ${D.line}`, background: 'var(--v-surface2)', borderRadius: 7, padding: '5px 8px' }}>{t}</span>
                         ))}
                       </div>
-                      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 8, marginTop: 20, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,.07)', fontFamily: D.mono, fontSize: 9.5, letterSpacing: 1.6, color: obert ? k.accent : '#7C7788' }}>
+                      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 8, marginTop: 20, paddingTop: 16, borderTop: '1px solid var(--v-surface2)', fontFamily: D.mono, fontSize: 9.5, letterSpacing: 1.6, color: obert ? k.accent : 'var(--v-faint)' }}>
                         {obert
                           ? <>OBRE EL MÒDUL <span style={{ fontSize: 14 }}>→</span></>
                           : <>ARRIBA AVIAT</>}
@@ -457,18 +457,18 @@ export default function Chat() {
                   })}
                 </div>
 
-                <div style={{ marginTop: 26, display: 'flex', alignItems: 'center', gap: 13, border: `1px solid ${D.line}`, borderRadius: 18, padding: '7px 8px 7px 20px', background: 'rgba(255,255,255,.035)' }}>
-                  <span style={{ fontFamily: D.mono, fontSize: 9, letterSpacing: 1.8, color: '#6E6A78', flexShrink: 0 }}>O DICTA DIRECTE</span>
+                <div style={{ marginTop: 26, display: 'flex', alignItems: 'center', gap: 13, border: `1px solid ${D.line}`, borderRadius: 18, padding: '7px 8px 7px 20px', background: 'var(--v-surface2)' }}>
+                  <span style={{ fontFamily: D.mono, fontSize: 9, letterSpacing: 1.8, color: 'var(--v-faint)', flexShrink: 0 }}>O DICTA DIRECTE</span>
                   <input value={draft} onChange={(e) => setDraft(e.target.value)}
                     onKeyDown={(e) => { if (e.key === 'Enter' && draft.trim()) { setCat(MODE_PER_DEFECTE); setScreen('chat'); void send(draft); } }}
                     placeholder="Ex.: a les 18.30 h, av. de Roureda, col·lisió per abast…"
                     style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: D.ink, fontFamily: D.sans, fontSize: 15, padding: '12px 0' }} />
                   <button onClick={() => { if (draft.trim()) { setCat(MODE_PER_DEFECTE); setScreen('chat'); void send(draft); } }}
-                    style={{ flexShrink: 0, border: 'none', cursor: 'pointer', borderRadius: 13, width: 46, height: 46, background: 'linear-gradient(150deg,#FF9A47,#EC5F06)', color: '#fff', fontSize: 18, fontWeight: 800, boxShadow: '0 10px 24px rgba(236,95,6,.42)' }}>↑</button>
+                    style={{ flexShrink: 0, border: 'none', cursor: 'pointer', borderRadius: 13, width: 46, height: 46, background: '#FF7A1A', color: '#fff', fontSize: 18, fontWeight: 800, boxShadow: '0 10px 24px rgba(236,95,6,.42)' }}>↑</button>
                 </div>
 
                 {!user && (
-                  <div style={{ marginTop: 18, textAlign: 'center', fontFamily: D.mono, fontSize: 9, letterSpacing: 1.4, color: '#FFA05C' }}>
+                  <div style={{ marginTop: 18, textAlign: 'center', fontFamily: D.mono, fontSize: 9, letterSpacing: 1.4, color: 'var(--v-terra-ink)' }}>
                     CAL INICIAR SESSIÓ PER FER SERVIR L&apos;ASSISTENT
                   </div>
                 )}
@@ -493,22 +493,22 @@ export default function Chat() {
                       d: 'Treballa sobre el corpus normatiu d\'InfoPol: lleis estatals i catalanes consolidades, reglaments de trànsit i les ordenances municipals. Cada resposta porta la referència a la vista, i si no ho troba amb seguretat t\'ho diu en comptes d\'inventar-s\'ho.',
                     },
                   ].map((b) => (
-                    <div key={b.t} style={{ border: `1px solid ${D.line}`, borderRadius: 18, padding: '18px 18px 20px', background: 'rgba(255,255,255,.03)' }}>
+                    <div key={b.t} style={{ border: `1px solid ${D.line}`, borderRadius: 18, padding: '18px 18px 20px', background: 'var(--v-surface2)' }}>
                       <div style={{ fontSize: 20, lineHeight: 1, marginBottom: 11 }}>{b.ic}</div>
                       <div style={{ fontWeight: 700, fontSize: 14, letterSpacing: -0.2, lineHeight: 1.25, marginBottom: 8 }}>{b.t}</div>
-                      <div style={{ color: '#9994A2', fontSize: 12.5, lineHeight: 1.55 }}>{b.d}</div>
+                      <div style={{ color: 'var(--v-muted)', fontSize: 12.5, lineHeight: 1.55 }}>{b.d}</div>
                     </div>
                   ))}
                 </div>
 
-                <div style={{ marginTop: 16, fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.3, color: '#615D6C', lineHeight: 1.7 }}>
+                <div style={{ marginTop: 16, fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.3, color: 'var(--v-faint)', lineHeight: 1.7 }}>
                   INFOPOL NO ÉS UNA FONT OFICIAL · CONTRASTA SEMPRE AMB EL TEXT VIGENT ABANS DE SIGNAR
                 </div>
 
                 {isAdmin && (
                   <div style={{ marginTop: 22 }}>
                     <button onClick={() => setShowAdmin((v) => !v)}
-                      style={{ border: `1px solid ${D.line2}`, background: 'rgba(255,255,255,.04)', color: D.ink, cursor: 'pointer', borderRadius: 11, padding: '9px 13px', fontFamily: D.sans, fontWeight: 700, fontSize: 13.5 }}>
+                      style={{ border: `1px solid ${D.line2}`, background: 'var(--v-surface2)', color: D.ink, cursor: 'pointer', borderRadius: 11, padding: '9px 13px', fontFamily: D.sans, fontWeight: 700, fontSize: 13.5 }}>
                       📚 {showAdmin ? 'Amagar' : 'Carregar coneixement'} (admin)
                     </button>
                     {showAdmin && <AdminIngest onDone={(t) => setCount(t)} />}
@@ -525,11 +525,11 @@ export default function Chat() {
   /* ── FORM (Diligenciador, pas 1) ────────────────────────────── */
   if (screen === 'form') {
     return (
-      <div style={{ background: D.bg, height: '100dvh', overflow: 'hidden' }}>
+      <div style={{ background: D.bg, flex: 1, minHeight: 0, overflow: 'hidden' }}>
         <div style={{ ...shellStyle, flexDirection: 'column' }}>
           {ambient}
-          <header style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 13, padding: '18px 26px', borderBottom: `1px solid ${D.line}`, background: 'rgba(10,10,16,.5)' }}>
-            <button onClick={() => setScreen('home')} style={{ width: 36, height: 36, borderRadius: 11, border: `1px solid ${D.line2}`, background: 'rgba(255,255,255,.05)', color: D.ink, fontSize: 17, fontWeight: 800, cursor: 'pointer' }}>‹</button>
+          <header style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 13, padding: '18px 26px', borderBottom: `1px solid ${D.line}`, background: D.panel }}>
+            <button onClick={() => setScreen('home')} style={{ width: 36, height: 36, borderRadius: 11, border: `1px solid ${D.line2}`, background: 'var(--v-surface2)', color: D.ink, fontSize: 17, fontWeight: 800, cursor: 'pointer' }}>‹</button>
             <div style={{ width: 38, height: 38, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 19, background: c.tint, border: `1px solid ${c.border}` }}>{c.icon}</div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontWeight: 800, fontSize: 16, letterSpacing: -0.4 }}>Diligenciador</div>
@@ -567,17 +567,17 @@ export default function Chat() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {people.map((p, i) => (
                     <div key={i} style={{ display: 'grid', gridTemplateColumns: '34px 1.1fr 1fr 34px', gap: 10, alignItems: 'end' }}>
-                      <div style={{ height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 11, background: 'rgba(255,122,26,.1)', border: '1px solid rgba(255,122,26,.24)', fontFamily: D.mono, fontSize: 11, fontWeight: 700, color: '#FFA05C' }}>{i + 1}</div>
+                      <div style={{ height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 11, background: 'rgba(255,122,26,.1)', border: '1px solid rgba(255,122,26,.24)', fontFamily: D.mono, fontSize: 11, fontWeight: 700, color: 'var(--v-terra-ink)' }}>{i + 1}</div>
                       <label><span style={lbl}>NOM I COGNOMS</span>
                         <input value={p.name} onChange={(e) => setPeople(people.map((x, j) => j === i ? { ...x, name: e.target.value } : x))} placeholder="Nom complet" style={{ ...field, height: 44, padding: '0 13px', fontSize: 14 }} /></label>
                       <label><span style={lbl}>DNI / NIE</span>
                         <input value={p.dni} onChange={(e) => setPeople(people.map((x, j) => j === i ? { ...x, dni: e.target.value } : x))} placeholder="00000000X" style={{ ...field, height: 44, padding: '0 13px', fontFamily: D.mono, fontSize: 13.5 }} /></label>
                       <button onClick={() => setPeople(people.filter((_, j) => j !== i))} disabled={people.length === 1}
-                        style={{ height: 44, borderRadius: 11, border: `1px solid ${D.line}`, background: 'rgba(255,255,255,.04)', color: D.mut, fontSize: 16, cursor: 'pointer', opacity: people.length === 1 ? 0.35 : 1 }}>✕</button>
+                        style={{ height: 44, borderRadius: 11, border: `1px solid ${D.line}`, background: 'var(--v-surface2)', color: D.mut, fontSize: 16, cursor: 'pointer', opacity: people.length === 1 ? 0.35 : 1 }}>✕</button>
                       <div />
                       <label style={{ gridColumn: 'span 2' }}><span style={lbl}>ROL</span>
                         <select value={p.role} onChange={(e) => setPeople(people.map((x, j) => j === i ? { ...x, role: e.target.value } : x))}
-                          style={{ ...field, height: 42, background: 'rgba(255,122,26,.08)', border: '1px solid rgba(255,122,26,.26)', color: '#FFB27A', fontFamily: D.mono, fontSize: 12, fontWeight: 600, padding: '0 12px', cursor: 'pointer' }}>
+                          style={{ ...field, height: 42, background: 'rgba(255,122,26,.08)', border: '1px solid rgba(255,122,26,.26)', color: 'var(--v-terra-ink)', fontFamily: D.mono, fontSize: 12, fontWeight: 600, padding: '0 12px', cursor: 'pointer' }}>
                           {ROLES.map((r) => <option key={r} value={r} style={{ background: '#15151C', color: D.ink }}>{r}</option>)}
                         </select></label>
                       <div />
@@ -585,7 +585,7 @@ export default function Chat() {
                   ))}
                 </div>
                 <button onClick={() => setPeople([...people, { name: '', dni: '', role: 'Implicat' }])}
-                  style={{ marginTop: 13, width: '100%', cursor: 'pointer', border: '1px dashed rgba(255,122,26,.34)', background: 'rgba(255,122,26,.06)', color: '#FFB27A', borderRadius: 13, padding: 13, fontWeight: 700, fontSize: 13.5 }}>
+                  style={{ marginTop: 13, width: '100%', cursor: 'pointer', border: '1px dashed rgba(255,122,26,.34)', background: 'rgba(255,122,26,.06)', color: 'var(--v-terra-ink)', borderRadius: 13, padding: 13, fontWeight: 700, fontSize: 13.5 }}>
                   ＋ Afegeix implicat
                 </button>
               </div>
@@ -610,8 +610,8 @@ export default function Chat() {
                       style={{
                         flexShrink: 0, cursor: 'pointer', borderRadius: 11, padding: '8px 13px',
                         border: dictatFets.escoltant ? 'none' : `1px solid ${D.line2}`,
-                        background: dictatFets.escoltant ? '#E0455A' : 'rgba(255,255,255,.05)',
-                        color: '#fff', fontFamily: D.sans, fontWeight: 700, fontSize: 12.5,
+                        background: dictatFets.escoltant ? 'var(--v-granate)' : 'var(--v-surface2)',
+                        color: dictatFets.escoltant ? '#fff' : 'var(--v-ink)', fontFamily: D.sans, fontWeight: 700, fontSize: 12.5,
                         boxShadow: dictatFets.escoltant ? '0 0 0 4px rgba(224,69,90,.22)' : 'none',
                       }}>
                       {dictatFets.escoltant ? '■ Parar' : '🎙 Dictar'}
@@ -623,7 +623,7 @@ export default function Chat() {
               <button onClick={submitForm} disabled={!formValid}
                 style={{
                   width: '100%', border: 'none', borderRadius: 17, padding: 17, fontWeight: 800, fontSize: 15.5,
-                  background: formValid ? 'linear-gradient(150deg,#FF9A47,#EC5F06)' : 'rgba(255,255,255,.06)',
+                  background: formValid ? '#FF7A1A' : 'var(--v-surface2)',
                   color: formValid ? '#fff' : D.faint, cursor: formValid ? 'pointer' : 'not-allowed',
                   boxShadow: formValid ? '0 12px 30px rgba(236,95,6,.35)' : 'none',
                 }}>
@@ -642,18 +642,17 @@ export default function Chat() {
   /* ── CHAT ───────────────────────────────────────────────────── */
 
   return (
-    <div style={{ background: D.bg, height: '100dvh', overflow: 'hidden' }}>
+    <div style={{ background: D.bg, flex: 1, minHeight: 0, overflow: 'hidden' }}>
       <div style={shellStyle}>
         {ambient}
 
-        <aside style={{ position: 'relative', width: 250, flexShrink: 0, borderRight: `1px solid ${D.line}`, background: D.panel, display: 'flex', flexDirection: 'column', padding: '20px 14px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '0 4px 18px' }}>
-            <Escut small />
-            <div style={{ fontWeight: 800, fontSize: 15, letterSpacing: -0.4 }}>infopol<span style={{ color: '#FF7A1A' }}>·chat</span></div>
-          </div>
+        {/* Panell d'eines. La marca ja la porta el marc de l'app, així que
+            aquí només hi ha els mòduls i l'historial. */}
+        <aside className="ipc-eines" style={{ position: 'relative', width: 264, flexShrink: 0, borderRight: `1px solid ${D.line}`, background: D.panel, display: 'flex', flexDirection: 'column', padding: '20px 14px' }}>
+          <div style={{ fontSize: 17, fontWeight: 800, letterSpacing: -0.5, padding: '0 4px 14px' }}>Eines</div>
 
           <button onClick={novaConversa}
-            style={{ width: '100%', cursor: 'pointer', border: '1px solid rgba(255,122,26,.3)', background: 'rgba(255,122,26,.1)', color: '#FFB27A', borderRadius: 13, padding: 12, fontWeight: 700, fontSize: 13.5, marginBottom: 22 }}>
+            style={{ width: '100%', cursor: 'pointer', border: '1px solid rgba(255,122,26,.3)', background: 'rgba(255,122,26,.1)', color: 'var(--v-terra-ink)', borderRadius: 13, padding: 12, fontWeight: 700, fontSize: 13.5, marginBottom: 22 }}>
             ＋ Nova conversa
           </button>
 
@@ -669,7 +668,7 @@ export default function Chat() {
                   <span style={{ width: 30, height: 30, flexShrink: 0, borderRadius: 9, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, background: k.tint, border: `1px solid ${k.border}` }}>{k.icon}</span>
                   <span style={{ flex: 1, minWidth: 0 }}>
                     <span style={{ display: 'block', fontWeight: 700, fontSize: 12.5, lineHeight: 1.2 }}>{k.title}</span>
-                    <span style={{ display: 'block', fontFamily: D.mono, fontSize: 8, letterSpacing: 1.2, color: '#7C7788', marginTop: 2 }}>
+                    <span style={{ display: 'block', fontFamily: D.mono, fontSize: 8, letterSpacing: 1.2, color: 'var(--v-faint)', marginTop: 2 }}>
                       {obert ? k.kicker : 'ARRIBA AVIAT'}
                     </span>
                   </span>
@@ -688,7 +687,7 @@ export default function Chat() {
                     if (!confirm('Vols esborrar totes les converses desades? No es pot desfer.')) return;
                     void esborraTotesLesConverses().then(() => { setDesades([]); setConversaId(null); });
                   }}
-                  style={{ marginLeft: 'auto', border: 'none', background: 'transparent', cursor: 'pointer', fontFamily: D.mono, fontSize: 8, letterSpacing: 1, color: '#615D6C' }}
+                  style={{ marginLeft: 'auto', border: 'none', background: 'transparent', cursor: 'pointer', fontFamily: D.mono, fontSize: 8, letterSpacing: 1, color: 'var(--v-faint)' }}
                   title="Esborrar-ho tot">
                   ESBORRA-HO TOT
                 </button>
@@ -696,10 +695,10 @@ export default function Chat() {
               <div className="ipc-scroll" style={{ display: 'flex', flexDirection: 'column', gap: 3, overflowY: 'auto' }}>
                 {desades.map((c) => (
                   <div key={c.id}
-                    style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '9px 6px 9px 11px', borderRadius: 10, borderLeft: `2px solid ${catOf(c.mode as Mode).accent}`, background: c.id === conversaId ? 'rgba(255,255,255,.05)' : 'transparent' }}>
+                    style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '9px 6px 9px 11px', borderRadius: 10, borderLeft: `2px solid ${catOf(c.mode as Mode).accent}`, background: c.id === conversaId ? 'var(--v-surface2)' : 'transparent' }}>
                     <div onClick={() => void obreDesada(c)} style={{ flex: 1, minWidth: 0, cursor: 'pointer' }}>
-                      <div style={{ fontSize: 12.5, fontWeight: 600, color: '#C9C4D0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.titol}</div>
-                      <div style={{ fontFamily: D.mono, fontSize: 8, letterSpacing: 1, color: '#615D6C', marginTop: 3 }}>
+                      <div style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--v-ink)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.titol}</div>
+                      <div style={{ fontFamily: D.mono, fontSize: 8, letterSpacing: 1, color: 'var(--v-faint)', marginTop: 3 }}>
                         {catOf(c.mode as Mode).kicker} · {new Date(c.updatedAt).toLocaleDateString('ca-ES', { day: '2-digit', month: '2-digit' })}
                       </div>
                     </div>
@@ -708,30 +707,30 @@ export default function Chat() {
                         setDesades((p) => p.filter((x) => x.id !== c.id));
                         if (c.id === conversaId) setConversaId(null);
                       })}
-                      style={{ flexShrink: 0, border: 'none', background: 'transparent', cursor: 'pointer', color: '#615D6C', fontSize: 13, padding: 4 }}
+                      style={{ flexShrink: 0, border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--v-faint)', fontSize: 13, padding: 4 }}
                       title="Esborrar aquesta conversa">
                       ×
                     </button>
                   </div>
                 ))}
               </div>
-              <div style={{ fontFamily: D.mono, fontSize: 7.5, letterSpacing: 0.8, color: '#4E4A57', lineHeight: 1.6, padding: '10px 5px 0' }}>
+              <div style={{ fontFamily: D.mono, fontSize: 7.5, letterSpacing: 0.8, color: 'var(--v-faint)', lineHeight: 1.6, padding: '10px 5px 0' }}>
                 DESAT SENSE DADES PERSONALS: ELS DNI I MATRÍCULES HI SURTEN COM A MARCADORS
               </div>
             </>
           )}
 
-          <div style={{ marginTop: 'auto', paddingTop: 16, borderTop: '1px solid rgba(255,255,255,.07)', display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(150deg,#FF9A47,#EC5F06)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 13, color: '#fff' }}>{inicial}</div>
+          <div style={{ marginTop: 'auto', paddingTop: 16, borderTop: '1px solid var(--v-surface2)', display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div style={{ width: 32, height: 32, borderRadius: 10, background: '#FF7A1A', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 13, color: '#fff' }}>{inicial}</div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontWeight: 700, fontSize: 12.5, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{user?.email ?? 'Convidat'}</div>
-              {quota && <div style={{ fontFamily: D.mono, fontSize: 8, letterSpacing: 1.2, color: '#7C7788' }}>{quota.count}/{quota.limit} CONSULTES AVUI</div>}
+              {quota && <div style={{ fontFamily: D.mono, fontSize: 8, letterSpacing: 1.2, color: 'var(--v-faint)' }}>{quota.count}/{quota.limit} CONSULTES AVUI</div>}
             </div>
           </div>
         </aside>
 
         <div style={{ position: 'relative', flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-          <header style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 14, padding: '16px 24px', borderBottom: `1px solid ${D.line}`, background: 'rgba(10,10,16,.5)' }}>
+          <header style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 14, padding: '16px 24px', borderBottom: `1px solid ${D.line}`, background: D.panel }}>
             <div style={{ width: 38, height: 38, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 19, background: c.tint, border: `1px solid ${c.border}` }}>{c.icon}</div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontWeight: 800, fontSize: 16, letterSpacing: -0.4 }}>{c.title}</div>
@@ -756,10 +755,10 @@ export default function Chat() {
                 const meu = m.role === 'user';
                 return (
                   <div key={i} style={{ display: 'flex', gap: 13, flexDirection: meu ? 'row-reverse' : 'row', alignItems: 'flex-start' }}>
-                    <div style={{ width: 32, height: 32, flexShrink: 0, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, fontWeight: 800, background: meu ? 'linear-gradient(150deg,#FF9A47,#EC5F06)' : c.tint, border: `1px solid ${meu ? 'transparent' : c.border}`, color: '#fff' }}>
+                    <div style={{ width: 32, height: 32, flexShrink: 0, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, fontWeight: 800, background: meu ? '#FF7A1A' : c.tint, border: `1px solid ${meu ? 'transparent' : c.border}`, color: '#fff' }}>
                       {meu ? inicial : c.icon}
                     </div>
-                    <div style={{ maxWidth: '78%', border: `1px solid ${meu ? 'transparent' : D.line2}`, background: meu ? 'rgba(255,122,26,.16)' : 'rgba(255,255,255,.045)', borderRadius: meu ? '16px 4px 16px 16px' : '4px 16px 16px 16px', padding: '15px 17px', boxShadow: '0 10px 28px rgba(0,0,0,.28)' }}>
+                    <div style={{ maxWidth: '78%', border: `1px solid ${meu ? 'transparent' : D.line2}`, background: meu ? 'rgba(255,122,26,.16)' : 'var(--v-surface2)', borderRadius: meu ? '16px 4px 16px 16px' : '4px 16px 16px 16px', padding: '15px 17px', boxShadow: '0 10px 28px rgba(0,0,0,.28)' }}>
                       {meu ? (
                         <div style={{ fontSize: 14.5, lineHeight: 1.62, color: D.ink, whiteSpace: 'pre-wrap' }}>{m.text}</div>
                       ) : (
@@ -767,7 +766,7 @@ export default function Chat() {
                           dangerouslySetInnerHTML={{ __html: mdToHtml(m.text) }} />
                       )}
                       {!meu && (m.sources?.length ?? 0) > 0 && (
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 13, paddingTop: 12, borderTop: '1px solid rgba(255,255,255,.08)' }}>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 13, paddingTop: 12, borderTop: '1px solid var(--v-surface2)' }}>
                           {dedupe(m.sources ?? []).slice(0, 4).map((r, j) => (
                             <span key={j} style={{ fontFamily: D.mono, fontSize: 9, fontWeight: 600, letterSpacing: 0.8, color: c.accent, border: `1px solid ${c.border}`, background: c.tint, borderRadius: 7, padding: '5px 9px' }}>
                               📖 {(r.title || r.source || '').slice(0, 40)}
@@ -778,7 +777,7 @@ export default function Chat() {
                       {!meu && m.text && (
                         <div style={{ display: 'flex', gap: 7, marginTop: 13 }}>
                           <button onClick={() => navigator.clipboard.writeText(m.text)}
-                            style={{ cursor: 'pointer', fontFamily: D.mono, fontSize: 9, fontWeight: 600, letterSpacing: 1.2, color: '#C9C4D0', border: `1px solid ${D.line2}`, background: 'rgba(255,255,255,.04)', borderRadius: 8, padding: '7px 11px' }}>
+                            style={{ cursor: 'pointer', fontFamily: D.mono, fontSize: 9, fontWeight: 600, letterSpacing: 1.2, color: 'var(--v-ink)', border: `1px solid ${D.line2}`, background: 'var(--v-surface2)', borderRadius: 8, padding: '7px 11px' }}>
                             📋 COPIAR
                           </button>
                         </div>
@@ -791,7 +790,7 @@ export default function Chat() {
               {typing && (
                 <div style={{ display: 'flex', gap: 13, alignItems: 'flex-start' }}>
                   <div style={{ width: 32, height: 32, flexShrink: 0, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, background: c.tint, border: `1px solid ${c.border}` }}>{c.icon}</div>
-                  <div style={{ border: `1px solid ${D.line2}`, background: 'rgba(255,255,255,.045)', borderRadius: '4px 16px 16px 16px', padding: '16px 18px', display: 'flex', alignItems: 'center', gap: 11 }}>
+                  <div style={{ border: `1px solid ${D.line2}`, background: 'var(--v-surface2)', borderRadius: '4px 16px 16px 16px', padding: '16px 18px', display: 'flex', alignItems: 'center', gap: 11 }}>
                     <span style={{ fontFamily: D.mono, fontSize: 9, letterSpacing: 1.6, color: D.mut2 }}>{c.typingLabel}…</span>
                   </div>
                 </div>
@@ -804,7 +803,7 @@ export default function Chat() {
               {atts.length > 0 && (
                 <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginBottom: 10 }}>
                   {atts.map((a, i) => (
-                    <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,.05)', border: `1px solid ${D.line2}`, borderRadius: 99, padding: '5px 10px', fontFamily: D.sans, fontSize: 12, color: '#C9C4D0' }}>
+                    <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'var(--v-surface2)', border: `1px solid ${D.line2}`, borderRadius: 99, padding: '5px 10px', fontFamily: D.sans, fontSize: 12, color: 'var(--v-ink)' }}>
                       {a.media_type === 'application/pdf' ? '📄' : '🖼️'} {a.name.slice(0, 22)}
                       <button onClick={() => setAtts(atts.filter((_, k) => k !== i))} style={{ border: 'none', background: 'none', cursor: 'pointer', color: D.mut, fontSize: 13 }}>✕</button>
                     </span>
@@ -815,13 +814,13 @@ export default function Chat() {
               <div style={{ display: 'flex', gap: 7, marginBottom: 11, overflowX: 'auto' }}>
                 {c.chips.map((ch) => (
                   <button key={ch} onClick={() => setDraft(ch)}
-                    style={{ flexShrink: 0, cursor: 'pointer', fontFamily: D.mono, fontSize: 9.5, fontWeight: 600, letterSpacing: 1.1, color: '#B4AFBC', border: `1px solid ${D.line2}`, background: 'rgba(255,255,255,.035)', borderRadius: 9, padding: '8px 12px', whiteSpace: 'nowrap' }}>
+                    style={{ flexShrink: 0, cursor: 'pointer', fontFamily: D.mono, fontSize: 9.5, fontWeight: 600, letterSpacing: 1.1, color: 'var(--v-muted)', border: `1px solid ${D.line2}`, background: 'var(--v-surface2)', borderRadius: 9, padding: '8px 12px', whiteSpace: 'nowrap' }}>
                     {ch}
                   </button>
                 ))}
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'flex-end', gap: 11, border: `1px solid ${D.line2}`, borderRadius: 20, padding: '9px 9px 9px 14px', background: 'rgba(255,255,255,.045)' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-end', gap: 11, border: `1px solid ${D.line2}`, borderRadius: 20, padding: '9px 9px 9px 14px', background: 'var(--v-surface2)' }}>
                 <input ref={fileRef} type="file" accept="image/*,application/pdf" multiple hidden onChange={(e) => void onFiles(e.target.files)} />
                 <button onClick={() => fileRef.current?.click()} disabled={atts.length >= MAX_ATT} title="Adjuntar foto o PDF"
                   style={{ flexShrink: 0, border: 'none', background: 'none', cursor: 'pointer', fontSize: 18, opacity: atts.length >= MAX_ATT ? 0.4 : 1 }}>📎</button>
@@ -835,7 +834,7 @@ export default function Chat() {
                     style={{
                       flexShrink: 0, cursor: 'pointer', borderRadius: 14, width: 42, height: 42,
                       border: dictat.escoltant ? 'none' : `1px solid ${D.line2}`,
-                      background: dictat.escoltant ? '#E0455A' : 'rgba(255,255,255,.05)',
+                      background: dictat.escoltant ? 'var(--v-granate)' : 'var(--v-surface2)',
                       color: '#fff', fontSize: 17, opacity: typing ? 0.4 : 1,
                       boxShadow: dictat.escoltant ? '0 0 0 4px rgba(224,69,90,.22)' : 'none',
                     }}>
@@ -854,12 +853,12 @@ export default function Chat() {
               {/* El dictat no el fem nosaltres: el fa el navegador, i l'àudio
                   hi va. Val més dir-ho que amagar-ho. */}
               {dictat.escoltant && (
-                <div style={{ textAlign: 'center', fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.4, color: '#FFA05C', marginTop: 5 }}>
+                <div style={{ textAlign: 'center', fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.4, color: 'var(--v-terra-ink)', marginTop: 5 }}>
                   🎙 EL DICTAT EL TRANSCRIU EL NAVEGADOR · L&apos;ÀUDIO PASSA PELS SEUS SERVIDORS
                 </div>
               )}
               {dictat.error && (
-                <div style={{ textAlign: 'center', fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.4, color: '#E0455A', marginTop: 5 }}>
+                <div style={{ textAlign: 'center', fontFamily: D.mono, fontSize: 8.5, letterSpacing: 1.4, color: 'var(--v-granate)', marginTop: 5 }}>
                   {dictat.error.toUpperCase()}
                 </div>
               )}
@@ -881,7 +880,7 @@ function Escut({ small }: { small?: boolean }) {
   const s = small ? 30 : 36;
   return (
     <svg width={s} height={s} viewBox="0 0 64 64" fill="none" aria-hidden style={{ flexShrink: 0, filter: 'drop-shadow(0 6px 18px rgba(255,122,26,.22))' }}>
-      <path d="M32 4 L56 12 V32 C56 46 45 56 32 60 C19 56 8 46 8 32 V12 Z" fill="#F2EFEA" />
+      <path d="M32 4 L56 12 V32 C56 46 45 56 32 60 C19 56 8 46 8 32 V12 Z" fill="var(--v-ink)" />
       <circle cx="32" cy="22" r="4.2" fill="#FF7A1A" />
       <rect x="28.4" y="30" width="7.2" height="20" rx="3.6" fill="#FF7A1A" />
     </svg>
@@ -979,7 +978,7 @@ function AdminIngest({ onDone }: { onDone: (total: number) => void }) {
 
   const inp: CSSProperties = {
     width: '100%', border: `1px solid ${D.line2}`, borderRadius: 10, padding: '9px 12px',
-    fontFamily: D.sans, fontSize: 14, color: D.ink, background: 'rgba(255,255,255,.04)', outline: 'none',
+    fontFamily: D.sans, fontSize: 14, color: D.ink, background: 'var(--v-surface2)', outline: 'none',
   };
 
   useEffect(() => {
@@ -1040,7 +1039,7 @@ function AdminIngest({ onDone }: { onDone: (total: number) => void }) {
                 </div>
               </div>
               <button onClick={() => bulkIngest(file, label)} disabled={!corpus || bulkBusy !== null}
-                style={{ border: 'none', background: '#EC5F06', color: '#fff', borderRadius: 11, padding: '10px 16px', fontWeight: 700, fontSize: 13.5, cursor: 'pointer', opacity: !corpus || bulkBusy !== null ? 0.5 : 1 }}>
+                style={{ border: 'none', background: 'var(--v-terra-ink)', color: '#fff', borderRadius: 11, padding: '10px 16px', fontWeight: 700, fontSize: 13.5, cursor: 'pointer', opacity: !corpus || bulkBusy !== null ? 0.5 : 1 }}>
                 {actiu ? `${bulkPct}%…` : 'Indexar'}
               </button>
             </div>
@@ -1073,7 +1072,7 @@ function AdminIngest({ onDone }: { onDone: (total: number) => void }) {
       <textarea style={{ ...inp, minHeight: 150, resize: 'vertical', fontFamily: D.mono, fontSize: 12.5 }} value={content} onChange={(e) => setContent(e.target.value)} placeholder="Enganxa aquí el text del document…" />
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <button onClick={load} disabled={busy || !content.trim()}
-          style={{ border: 'none', background: '#F2EFEA', color: '#15151C', borderRadius: 11, padding: '10px 18px', fontWeight: 700, fontSize: 14, cursor: 'pointer', opacity: busy || !content.trim() ? 0.5 : 1 }}>
+          style={{ border: 'none', background: 'var(--v-ink)', color: '#15151C', borderRadius: 11, padding: '10px 18px', fontWeight: 700, fontSize: 14, cursor: 'pointer', opacity: busy || !content.trim() ? 0.5 : 1 }}>
           Carregar i indexar
         </button>
         {msg && <span style={{ fontSize: 13, color: D.mut }}>{msg}</span>}

@@ -1602,7 +1602,9 @@ export default function Croquis() {
     <div style={{ position: 'fixed', inset: 0, zIndex: 110, background: A.bg, display: 'flex', flexDirection: 'column', fontFamily: A.sans }}>
       {/* Top bar */}
       <header style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 8, padding: '9px clamp(12px,2vw,18px)', borderBottom: `1px solid ${A.line}`, background: A.bgSoft }}>
-        <button onClick={() => nav('/')} style={{ ...btnG, padding: 9 }} aria-label="Tornar a l'inici"><Ic name="arrowL" size={18} color={A.inkSoft} /></button>
+        {/* L'editor tapa el marc de l'app (va a pantalla completa), així que
+            la fletxa ha de tornar a Operativa, que és d'on s'obre. */}
+        <button onClick={() => nav('/operativa')} style={{ ...btnG, padding: 9 }} aria-label="Tornar a Operativa"><Ic name="arrowL" size={18} color={A.inkSoft} /></button>
         <div className="cq-title" style={{ display: 'flex', alignItems: 'center', gap: 9, marginRight: 'auto', minWidth: 0 }}>
           <span style={{ width: 34, height: 34, borderRadius: 10, background: A.terracota, display: 'grid', placeItems: 'center', boxShadow: A.inset, flexShrink: 0 }}><Ic name="car" size={19} color="#fff" sw={2.2} /></span>
           <div style={{ minWidth: 0 }}>

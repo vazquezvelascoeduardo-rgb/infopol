@@ -15,7 +15,7 @@ const MODULE_ACCENT: Record<string, string> = {
   'menors': '#E85D8C',
   'municipi': '#2FB66B',
   'sc': '#2a3a52',
-  'transit': '#F26B1F',
+  'transit': '#FF7A1A',
 };
 
 export default function Leyes() {

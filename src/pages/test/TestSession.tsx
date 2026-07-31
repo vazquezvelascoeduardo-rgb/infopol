@@ -603,15 +603,15 @@ function SelectPhase({
 
 // ── Paleta i icones del Mode Focus (disseny "Test Focus") ───────────
 const FP = {
-  bg: '#F4F1EA', bgDeep: '#ECE7DC', card: '#FFFFFF',
-  ink: '#13131A', inkSoft: '#44444F', inkMuted: '#8A8A95', inkFaint: '#B6B6BE',
-  hairline: 'rgba(19,19,26,0.08)', line2: 'rgba(19,19,26,0.12)',
-  terracota: '#FF7A1A', terraSoft: '#FFE7D2', terraInk: '#7A2E04',
-  green: '#1FB286', greenSoft: '#D2F0E2', greenInk: '#0B5A3D',
-  red: '#E0455A', redSoft: '#FBDCE0', redInk: '#7A1B22',
-  display: '"Poppins", "Manrope", system-ui, sans-serif',
+  bg: '#F4F1EC', bgDeep: '#EFEAE2', card: '#FFFFFF',
+  ink: '#15151C', inkSoft: '#4A463F', inkMuted: '#6E6A63', inkFaint: '#9A938A',
+  hairline: 'rgba(21,21,28,0.07)', line2: '#E5DFD5',
+  terracota: '#FF7A1A', terraSoft: '#FFEDDD', terraInk: '#C4530A',
+  green: '#186B47', greenSoft: '#E1F0E8', greenInk: '#186B47',
+  red: '#991B1B', redSoft: '#F7E5E5', redInk: '#991B1B',
+  display: '"Plus Jakarta Sans", system-ui, sans-serif',
   mono: '"JetBrains Mono", ui-monospace, monospace',
-  sans: '"Manrope", system-ui, sans-serif',
+  sans: '"Plus Jakarta Sans", system-ui, sans-serif',
 };
 
 function FIc({ name, size = 20, color = 'currentColor', sw = 2 }:

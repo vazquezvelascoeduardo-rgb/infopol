@@ -14,7 +14,8 @@ import { useAuth } from '../lib/auth';
 import { useT } from '../lib/i18n';
 import { updateProfile } from '../lib/db';
 import MfaSection from '../components/MfaSection';
-import { A } from '../lib/design';
+import { applyTheme, getInitialTheme, type Theme } from '../lib/theme';
+import { I, RV, TitolV, V } from '../lib/v3';
 
 // Email de suport principal (peticions d'eliminació de compte, etc.).
 const SUPPORT_EMAIL = 'info@infopol.app';
@@ -24,6 +25,13 @@ export default function Profile() {
   const { t } = useT();
   const navigate = useNavigate();
   const [signingOut, setSigningOut] = useState(false);
+  const [tema, setTema] = useState<Theme>(() => getInitialTheme());
+
+  function canviaTema() {
+    const seguent: Theme = tema === 'dark' ? 'light' : 'dark';
+    setTema(seguent);
+    applyTheme(seguent);
+  }
 
   // ── Estat del formulari d'editar perfil ──────────────────────
   const [name, setName] = useState('');
@@ -157,48 +165,67 @@ export default function Profile() {
   }
 
   return (
-    <div className="shell max-w-3xl py-8 sm:py-10 flex flex-col gap-6">
-      {/* Capçalera */}
-      <div className="flex items-center gap-4">
-        <div
-          className="user-avatar-btn"
-          style={{ width: 64, height: 64, fontSize: 24, pointerEvents: 'none' }}
-          aria-hidden
-        >
-          {initial}
-        </div>
-        <div className="flex flex-col min-w-0">
-          <h1 className="text-2xl sm:text-3xl tracking-tight text-ink truncate" style={{ fontFamily: A.display, fontWeight: 700, letterSpacing: '-0.03em' }}>
-            {displayName || email}
-          </h1>
-          {profile?.cuerpo && (
-            <p className="text-sm text-text-2 truncate">
-              {profile.cuerpo}
-              {profile.department ? ` · ${profile.department}` : ''}
-            </p>
-          )}
-          {!profile?.cuerpo && displayName !== email && email && (
-            <p className="text-sm text-text-2 truncate">{email}</p>
-          )}
-        </div>
-      </div>
+    <div className="v3-page v3-anim flex flex-col gap-6" style={{ maxWidth: 900 }}>
+      <TitolV pre="El teu" fort="perfil" />
 
-      {/* Estadístiques */}
-      <section className="rounded-2xl border border-line bg-paper p-5">
-        <h2 className="eyebrow mb-4">{t('profile.stats')}</h2>
+      {/* Capçalera + estadístiques, en una sola targeta com al disseny */}
+      <section className="v3-card" style={{ padding: 24 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
+          <div
+            style={{
+              width: 74, height: 74, flexShrink: 0, borderRadius: 24, background: V.terra,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 30, fontWeight: 800, color: '#fff',
+              boxShadow: '0 10px 22px rgba(255,122,26,.35)',
+            }}
+            aria-hidden>
+            {initial}
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 25, fontWeight: 800, letterSpacing: -0.9 }} className="truncate">
+              {displayName || email}
+            </div>
+            <div style={{ fontSize: 13, color: V.muted, marginTop: 4 }} className="truncate">
+              {profile?.cuerpo
+                ? `${profile.cuerpo}${profile.department ? ` · ${profile.department}` : ''}`
+                : email}
+            </div>
+            <div style={{
+              display: 'inline-flex', alignItems: 'center', gap: 7, background: V.okSoft,
+              borderRadius: RV.pill, padding: '6px 12px', marginTop: 10,
+            }}>
+              <span style={{ width: 7, height: 7, borderRadius: '50%', background: V.ok }} />
+              <span style={{ fontSize: 11.5, fontWeight: 700, color: V.ok }}>
+                Sincronitzat amb l'app mòbil
+              </span>
+            </div>
+          </div>
+        </div>
+
         {hasStats ? (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <Stat label={t('profile.xp')} value={progress!.xp.toLocaleString('ca-ES')} />
-            <Stat label={t('profile.level')} value={String(progress!.level)} />
-            <Stat label={t('profile.gems')} value={String(progress!.gems)} />
-            <Stat label={t('profile.streak')} value={String(progress!.streak_count)} />
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(120px,1fr))',
+            gap: 12, marginTop: 22,
+          }}>
+            {[
+              { label: t('profile.xp'), value: progress!.xp.toLocaleString('ca-ES'), color: V.ink },
+              { label: t('profile.level'), value: String(progress!.level), color: V.terraInk },
+              { label: t('profile.gems'), value: String(progress!.gems), color: V.blue },
+              { label: t('profile.streak'), value: String(progress!.streak_count), color: V.ok },
+            ].map((p) => (
+              <div key={p.label} style={{ background: V.paper, borderRadius: RV.md, padding: 15 }}>
+                <div style={{ fontSize: 19, fontWeight: 800, letterSpacing: -0.7, color: p.color }}>{p.value}</div>
+                <div style={{ fontSize: 11.5, color: V.muted, fontWeight: 600, marginTop: 4 }}>{p.label}</div>
+              </div>
+            ))}
           </div>
         ) : (
-          <div className="flex flex-col gap-3">
-            <p className="text-sm text-text-2">{t('profile.statsEmpty')}</p>
+          <div className="flex flex-col gap-3" style={{ marginTop: 20 }}>
+            <p className="text-sm" style={{ color: V.muted }}>{t('profile.statsEmpty')}</p>
             <Link
               to="/policia-local"
-              className="self-start text-sm font-bold text-ink underline underline-offset-4"
+              className="self-start text-sm font-bold underline underline-offset-4"
+              style={{ color: V.ink }}
             >
               {t('profile.statsLink')} →
             </Link>
@@ -206,8 +233,38 @@ export default function Profile() {
         )}
       </section>
 
+      {/* Aparença */}
+      <section className="v3-card">
+        <h2 className="eyebrow mb-4">Aparença</h2>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          <span style={{
+            width: 38, height: 38, flexShrink: 0, borderRadius: 12, background: V.surface2, color: V.ink,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <I n={tema === 'dark' ? 'sun' : 'moon'} size={18} sw={1.8} />
+          </span>
+          <span style={{ flex: 1, fontSize: 14.5, fontWeight: 700 }}>Mode fosc</span>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={tema === 'dark'}
+            aria-label="Mode fosc"
+            onClick={canviaTema}
+            style={{
+              width: 50, height: 29, borderRadius: RV.pill, border: 'none', cursor: 'pointer',
+              background: tema === 'dark' ? V.terra : V.surface2, position: 'relative', transition: 'background .2s',
+            }}>
+            <span style={{
+              position: 'absolute', top: 3, left: tema === 'dark' ? 24 : 3,
+              width: 23, height: 23, borderRadius: '50%', background: '#fff',
+              boxShadow: '0 2px 5px rgba(0,0,0,.28)', transition: 'left .2s',
+            }} />
+          </button>
+        </div>
+      </section>
+
       {/* Editar perfil */}
-      <section className="rounded-2xl border border-line bg-paper p-5">
+      <section className="v3-card">
         <h2 className="eyebrow mb-4">{t('profile.edit.title')}</h2>
         <form onSubmit={onSaveProfile} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field
@@ -275,7 +332,7 @@ export default function Profile() {
       </section>
 
       {/* Compte (read-only) */}
-      <section className="rounded-2xl border border-line bg-paper p-5">
+      <section className="v3-card">
         <h2 className="eyebrow mb-4">{t('profile.account')}</h2>
         <dl className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 text-sm">
           {email && <Row label={t('profile.email')} value={email} />}
@@ -288,7 +345,7 @@ export default function Profile() {
       <NewsletterSection />
 
       {/* Seguretat */}
-      <section className="rounded-2xl border border-line bg-paper p-5">
+      <section className="v3-card">
         <h2 className="eyebrow mb-4">{t('profile.security.title')}</h2>
         {isEmailProvider ? (
           <form onSubmit={onChangePassword} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -408,7 +465,7 @@ function NewsletterSection() {
   }
 
   return (
-    <section className="rounded-2xl border border-line bg-paper p-5">
+    <section className="v3-card">
       <h2 className="eyebrow mb-4">Comunicacions</h2>
       <label className="flex items-start gap-3 cursor-pointer select-none">
         <input
