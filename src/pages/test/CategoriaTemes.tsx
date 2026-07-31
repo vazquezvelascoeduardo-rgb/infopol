@@ -9,13 +9,14 @@
 // Els municipis s'agrupen pel nom del municipi, perquè cada ajuntament
 // té diversos temes (ordenances, cultura, examen oficial…) i barrejar-los
 // tots en una sola llista no diu res.
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { getMossosByAmbit, getMunicipiGroups, getTopicsByCategory } from '../../data/tests';
 import type { TestTopic } from '../../data/tests/types';
 import { useGlobalStats, type GlobalStats } from '../../lib/testStats';
 import { I, Mono, V, type NomIc } from '../../lib/v3';
+import ConfigTest, { type ConfigEscollida } from './ConfigTest';
 import type { Cos } from './ZonaTest';
 
 const ACCENTS: Record<Cos, { accent: string; ink: string; soft: string; glow: string; kicker: string }> = {
@@ -116,6 +117,7 @@ export default function CategoriaTemes({ cos: cosProp }: { cos?: Cos }) {
   const cos: Cos = cosProp ?? 'pl';
   const a = ACCENTS[cos];
   const stats = useGlobalStats();
+  const [triat, setTriat] = useState<TestTopic | null>(null);
 
   const v = useMemo(() => vista(cos, clau), [cos, clau]);
 
@@ -223,7 +225,7 @@ export default function CategoriaTemes({ cos: cosProp }: { cos?: Cos }) {
                 <button
                   key={t.slug}
                   type="button"
-                  onClick={() => nav(`${v.base}/${t.slug}`)}
+                  onClick={() => setTriat(t)}
                   style={{
                     width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none', borderRadius: 18,
                     padding: 16, background: V.surface, color: V.ink, boxShadow: V.shadow,
@@ -269,6 +271,25 @@ export default function CategoriaTemes({ cos: cosProp }: { cos?: Cos }) {
           </div>
         </section>
       ))}
+
+      {/* El full de configuració: l'últim pas abans de començar. */}
+      {triat && (
+        <ConfigTest
+          titol={triat.title}
+          meta={`${triat.questions.length} preguntes${nota(triat.slug, stats) !== null
+            ? ` · millor nota ${nota(triat.slug, stats)!.toFixed(1).replace('.', ',')}`
+            : ' · encara no l\'has fet'}`}
+          total={triat.questions.length}
+          disponibles={triat.questions.length}
+          onTanca={() => setTriat(null)}
+          onComenca={(c: ConfigEscollida) => {
+            const p = new URLSearchParams({ mode: c.format });
+            if (c.quantes) p.set('n', String(c.quantes));
+            else p.set('n', 'totes');
+            nav(`${v.base}/${triat.slug}?${p.toString()}`);
+          }}
+        />
+      )}
     </div>
   );
 }

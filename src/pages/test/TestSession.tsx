@@ -141,6 +141,24 @@ export default function TestSession() {
         : topic!.title;
   const remaining = isRepas ? pool.length : pool.length - answeredIds.size;
 
+  // Quan s'hi arriba des del full de configuració, la pantalla de
+  // selecció ja s'ha contestat: el test arrenca sol amb el que s'hi ha
+  // triat. Sense això, es demanaria dues vegades el mateix.
+  const params = new URLSearchParams(location.search);
+  const nDemanat = params.get('n');
+  const modeDemanat = params.get('mode') === 'exam' ? 'exam' : 'study';
+  useEffect(() => {
+    if (!nDemanat || state.phase !== 'select' || isRepas) return;
+    if (nDemanat === 'totes') startTest(pool.length, modeDemanat, true);
+    else {
+      const n = Number(nDemanat);
+      if (Number.isFinite(n) && n > 0) startTest(n, modeDemanat);
+    }
+    // Només al primer muntatge de cada tema: si l'usuari torna enrere des
+    // del resultat, ha de poder veure la pantalla de selecció.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug, nDemanat]);
+
   function startTest(count: number, mode: Mode, all = false) {
     // 'all' = totes les preguntes del tema (ignora les ja respostes i el
     // límit de 50). La resta de comptes filtren les ja respostes.
