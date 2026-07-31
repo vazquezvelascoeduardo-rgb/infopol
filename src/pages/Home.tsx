@@ -153,9 +153,11 @@ export default function Home() {
             <Logo />
             <b>info<span style={{ color: C.terra }}>pol</span></b>
           </Link>
-          {/* A la barra només hi ha entrar i registrar-se. Els enllaços a
-              les seccions no hi pinten res: sense compte no s'hi entra. */}
+          {/* A la barra hi ha entrar i registrar-se, i el croquis: és
+              l'única eina que funciona sencera sense compte, i l'Eduardo
+              la vol tenir a mà des de fora de l'app. */}
           <div className="lp-navcta">
+            <Link className="lp-btn lp-btn-g lp-btn-sm" to="/croquis">Croquis d'accident</Link>
             {user ? (
               <Link className="lp-btn lp-btn-g lp-btn-sm" to="/perfil">El meu perfil</Link>
             ) : (

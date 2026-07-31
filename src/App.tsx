@@ -14,7 +14,8 @@
 //               /app         → resum de la preparació
 //               /academia/*, /policia-local/*, /mossos/*, /retos
 //               /operativa/*, /leyes/*, /recursos, /superbuscador…
-//               /croquis, /noticies, /chat, /perfil
+//               /noticies, /chat, /perfil
+//   El croquis és públic: és una eina de dibuix i no toca dades.
 //
 // Lazy loading: les pàgines es carreguen sota demanda per reduir el
 // bundle inicial. Home s'inclou directament (és la primera vista).
@@ -108,13 +109,15 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/avis-legal" element={<AvisLegal />} />
             <Route path="/privacitat" element={<Privacitat />} />
+            {/* El croquis és una eina de dibuix que funciona sencera al
+                navegador: no hi ha res a protegir darrere del compte. */}
+            <Route path="/croquis" element={<Croquis />} />
 
             {/* ═══ Privat — tot dins del marc v3 ═══ */}
             <Route element={<RequireAuth><AppShell /></RequireAuth>}>
               <Route path="/app" element={<Inici />} />
               <Route path="/cerca" element={<SearchResults />} />
               <Route path="/chat" element={<Chat />} />
-              <Route path="/croquis" element={<Croquis />} />
               <Route path="/perfil" element={<Profile />} />
 
               {/* Notícies */}
