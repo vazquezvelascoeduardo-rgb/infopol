@@ -19,6 +19,7 @@ import {
 import { recordFailure, recordSuccess, buildRepasPool, useAllFailures, removeFailure, resetAllFailures, LEARNED_THRESHOLD, type FailureRecord } from '../../lib/failures';
 import { checkAchievements, type Achievement } from '../../lib/achievements';
 import { useT } from '../../lib/i18n';
+import { I, Mono, V } from '../../lib/v3';
 import ReportQuestionButton from '../../components/ReportQuestionButton';
 
 type Mode = 'exam' | 'study'; // exam = simulacre, study = interactiu
@@ -138,13 +139,6 @@ export default function TestSession() {
       : isAll
         ? t('test.list.allMixed')
         : topic!.title;
-  const accent = isRepas
-    ? 'from-rose-500 to-orange-600'
-    : isEverything
-      ? 'from-indigo-500 to-purple-700'
-      : isAll
-        ? 'from-purple-500 to-fuchsia-700'
-        : topic!.accent;
   const remaining = isRepas ? pool.length : pool.length - answeredIds.size;
 
   function startTest(count: number, mode: Mode, all = false) {
@@ -399,7 +393,6 @@ export default function TestSession() {
         ) : (
           <SelectPhase
             title={title}
-            accent={accent}
             total={pool.length}
             remaining={remaining}
             onStart={startTest}
@@ -438,9 +431,9 @@ export default function TestSession() {
 // ════════════════════════════════════════════════════════════════════
 
 function SelectPhase({
-  title, accent, total, remaining, onStart, onReset, isRepas = false,
+  title, total, remaining, onStart, onReset, isRepas = false,
 }: {
-  title: string; accent: string;
+  title: string;
   total: number; remaining: number;
   onStart: (count: number, mode: Mode, all?: boolean) => void;
   onReset: () => void;
@@ -460,140 +453,179 @@ function SelectPhase({
     choices.push(cappedRemaining);
   }
   const exhausted = remaining === 0;
+  const fet = Math.max(0, total - remaining);
+  const pct = total > 0 ? Math.round((fet / total) * 100) : 0;
 
   return (
-    <>
-      <header className="rounded-2xl border border-line bg-paper-2 p-5 sm:p-6 mb-5">
-        <div className="flex items-start gap-4">
-          <span aria-hidden className={`inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${accent} text-3xl text-white shadow-inner`}>
-            {isRepas ? '🔁' : '📝'}
-          </span>
-          <div className="min-w-0">
-            <h1 className="text-2xl sm:text-3xl tracking-tight text-ink" style={{ fontFamily: '"Poppins","Manrope",system-ui,sans-serif', fontWeight: 700, letterSpacing: '-0.03em' }}>{title}</h1>
-            <p className="mt-1 text-sm text-text-2">
-              {isRepas
-                ? t('test.repas.poolStatus').replace('{n}', String(remaining))
-                : t('test.session.poolStatus')
-                    .replace('{remaining}', String(remaining))
-                    .replace('{total}', String(total))}
-            </p>
+    <div className="v3-anim">
+      <header style={{ marginBottom: 20 }}>
+        <Mono size={10} color={V.terraInk} style={{ letterSpacing: 1.8 }}>
+          {isRepas ? 'REPÀS' : 'TEST'}
+        </Mono>
+        <h1 style={{ fontSize: 29, fontWeight: 800, letterSpacing: -1.3, lineHeight: 1.12, margin: '6px 0 0' }}>
+          {title}
+        </h1>
+        <p style={{ fontSize: 13.5, color: V.muted, margin: '7px 0 0' }}>
+          {isRepas
+            ? t('test.repas.poolStatus').replace('{n}', String(remaining))
+            : t('test.session.poolStatus')
+                .replace('{remaining}', String(remaining))
+                .replace('{total}', String(total))}
+        </p>
+        {/* Barra de progrés del tema: quantes preguntes ja has contestat
+            alguna vegada. Sense números repetits, només la proporció. */}
+        {!isRepas && total > 0 && (
+          <div style={{ marginTop: 14 }}>
+            <div style={{ height: 6, borderRadius: 999, background: V.surface2, overflow: 'hidden' }}>
+              <div style={{ width: `${pct}%`, height: '100%', background: V.terra, borderRadius: 999 }} />
+            </div>
+            <Mono size={9.5} color={V.faint} style={{ display: 'block', marginTop: 7, letterSpacing: 1.2 }}>
+              {pct}% DEL TEMA VIST
+            </Mono>
           </div>
-        </div>
+        )}
       </header>
 
       {exhausted ? (
-        isRepas ? (
-          <div className="rounded-2xl border-2 border-dashed border-emerald-300 bg-emerald-50/50 dark:bg-emerald-400/5 p-6 text-center">
-            <div className="text-4xl mb-2" aria-hidden>✨</div>
-            <h2 className="font-bold text-lg mb-1 text-emerald-800 dark:text-emerald-300">
-              {t('test.repas.emptyTitle')}
-            </h2>
-            <p className="text-sm text-emerald-700 dark:text-emerald-200/80">
-              {t('test.repas.emptyDesc')}
-            </p>
-          </div>
-        ) : (
-          <div className="rounded-2xl border-2 border-dashed border-amber-300 bg-amber-50/50 dark:bg-amber-400/5 p-6 text-center">
-            <div className="text-4xl mb-2" aria-hidden>🎓</div>
-            <h2 className="font-bold text-lg mb-1 text-amber-800 dark:text-amber-300">
-              {t('test.session.exhaustedTitle')}
-            </h2>
-            <p className="text-sm text-amber-700 dark:text-amber-200/80 mb-4">
-              {t('test.session.exhaustedDesc')}
-            </p>
+        <div style={{
+          borderRadius: 22, padding: 26, textAlign: 'center',
+          background: isRepas ? V.okSoft : V.warnSoft, color: isRepas ? V.ok : V.warn,
+        }}>
+          <div style={{ fontSize: 34, marginBottom: 8 }} aria-hidden>{isRepas ? '✨' : '🎓'}</div>
+          <h2 style={{ fontSize: 18, fontWeight: 800, letterSpacing: -0.5, margin: 0 }}>
+            {isRepas ? t('test.repas.emptyTitle') : t('test.session.exhaustedTitle')}
+          </h2>
+          <p style={{ fontSize: 13.5, margin: '8px 0 0', opacity: 0.9 }}>
+            {isRepas ? t('test.repas.emptyDesc') : t('test.session.exhaustedDesc')}
+          </p>
+          {!isRepas && (
             <button
               type="button"
               onClick={onReset}
-              className="rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold px-5 py-2.5 shadow-md"
-            >
-              🔄 {t('test.session.reset')}
+              style={{
+                marginTop: 18, cursor: 'pointer', border: 'none', borderRadius: 999,
+                padding: '12px 24px', background: V.ink, color: V.fillFg,
+                fontSize: 14, fontWeight: 800, letterSpacing: -0.3,
+              }}>
+              {t('test.session.reset')}
             </button>
-          </div>
-        )
+          )}
+        </div>
       ) : (
-        <div className="rounded-2xl border p-5 border-line bg-white dark:bg-[#0f1d34] dark:border-white/10">
-          {/* Selector de mode */}
-          <div className="text-xs uppercase tracking-wider font-semibold text-text-3 dark:text-slate-400 mb-2">
+        <>
+          <Mono size={10} color={V.faint} style={{ display: 'block', letterSpacing: 1.4, marginBottom: 10 }}>
             {t('test.session.modeLabel')}
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-5">
-            <button
-              type="button"
-              onClick={() => setMode('exam')}
-              aria-pressed={mode === 'exam'}
-              className={`text-left rounded-xl border-2 p-4 transition
-                ${mode === 'exam'
-                  ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-400/10'
-                  : 'border-line bg-white hover:border-line dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20'}`}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-lg" aria-hidden>🧪</span>
-                <span className="font-bold">{t('test.session.modeExam')}</span>
-              </div>
-              <div className="text-xs text-text-2 dark:text-slate-300 leading-snug">
-                {t('test.session.modeExamDesc')}
-              </div>
-            </button>
-            <button
-              type="button"
-              onClick={() => setMode('study')}
-              aria-pressed={mode === 'study'}
-              className={`text-left rounded-xl border-2 p-4 transition
-                ${mode === 'study'
-                  ? 'border-emerald-500 bg-emerald-50 dark:border-emerald-400 dark:bg-emerald-400/10'
-                  : 'border-line bg-white hover:border-line dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20'}`}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-lg" aria-hidden>🎯</span>
-                <span className="font-bold">{t('test.session.modeStudy')}</span>
-              </div>
-              <div className="text-xs text-text-2 dark:text-slate-300 leading-snug">
-                {t('test.session.modeStudyDesc')}
-              </div>
-            </button>
+          </Mono>
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))',
+            gap: 10, marginBottom: 24,
+          }}>
+            {([
+              { m: 'study' as Mode, ic: 'brain' as const, tit: t('test.session.modeStudy'), des: t('test.session.modeStudyDesc') },
+              { m: 'exam' as Mode, ic: 'clock' as const, tit: t('test.session.modeExam'), des: t('test.session.modeExamDesc') },
+            ]).map((o) => {
+              const on = mode === o.m;
+              return (
+                <button
+                  key={o.m}
+                  type="button"
+                  onClick={() => setMode(o.m)}
+                  aria-pressed={on}
+                  style={{
+                    textAlign: 'left', cursor: 'pointer', borderRadius: 18, padding: 18,
+                    border: on ? `2px solid ${V.terra}` : `1px solid ${V.border}`,
+                    background: on ? V.terraSoft : V.surface,
+                    color: V.ink, display: 'flex', gap: 13, alignItems: 'flex-start',
+                  }}>
+                  <span style={{
+                    width: 38, height: 38, flexShrink: 0, borderRadius: 12,
+                    background: on ? V.terra : V.surface2, color: on ? '#fff' : V.muted,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <I n={o.ic} size={18} sw={1.9} color={on ? '#fff' : undefined} />
+                  </span>
+                  <span style={{ minWidth: 0 }}>
+                    <span style={{ display: 'block', fontSize: 15, fontWeight: 800, letterSpacing: -0.4 }}>
+                      {o.tit}
+                    </span>
+                    <span style={{ display: 'block', fontSize: 12.5, color: V.muted, lineHeight: 1.45, marginTop: 4 }}>
+                      {o.des}
+                    </span>
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
-          <div className="text-xs uppercase tracking-wider font-semibold text-text-3 dark:text-slate-400 mb-3">
+          <Mono size={10} color={V.faint} style={{ display: 'block', letterSpacing: 1.4, marginBottom: 10 }}>
             {t('test.session.howMany')}
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          </Mono>
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(96px,1fr))', gap: 10,
+          }}>
             {choices.map((n) => (
               <button
                 key={n}
                 type="button"
                 onClick={() => onStart(n, mode)}
-                className={`rounded-xl border-2 px-4 py-3 text-base font-bold transition
-                  border-line bg-white text-text-2 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700
-                  dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-blue-400 dark:hover:bg-blue-400/10`}
-              >
-                {n === cappedRemaining && cappedRemaining < 50 ? `${n} (${t('test.session.allRemaining')})` : n}
+                style={{
+                  cursor: 'pointer', border: `1px solid ${V.border}`, borderRadius: 18,
+                  padding: '20px 12px', background: V.surface, color: V.ink,
+                  fontSize: 22, fontWeight: 800, letterSpacing: -0.8, lineHeight: 1,
+                }}>
+                {n}
+                {n === cappedRemaining && cappedRemaining < 50 && (
+                  <Mono size={9} color={V.faint} style={{ display: 'block', marginTop: 6, letterSpacing: 1 }}>
+                    {t('test.session.allRemaining').toUpperCase()}
+                  </Mono>
+                )}
               </button>
             ))}
-            {/* Totes: el tema sencer, ignorant el límit de 50 i les ja respostes */}
-            {!isRepas && total > 0 && (
-              <button
-                type="button"
-                onClick={() => onStart(total, mode, true)}
-                className={`col-span-2 sm:col-span-4 rounded-xl border-2 px-4 py-3 text-base font-bold transition
-                  border-purple-300 bg-purple-50 text-purple-700 hover:border-purple-500 hover:bg-purple-100
-                  dark:border-purple-400/40 dark:bg-purple-400/10 dark:text-purple-200 dark:hover:border-purple-400`}
-              >
-                🎯 Totes ({total})
-              </button>
-            )}
           </div>
+
+          {!isRepas && total > 0 && (
+            <button
+              type="button"
+              onClick={() => onStart(total, mode, true)}
+              style={{
+                width: '100%', marginTop: 12, cursor: 'pointer', border: 'none', borderRadius: 20,
+                padding: 20, background: V.terra, color: '#fff',
+                boxShadow: '0 14px 30px rgba(255,122,26,.30)',
+                display: 'flex', alignItems: 'center', gap: 15, textAlign: 'left',
+              }}>
+              <span style={{
+                width: 42, height: 42, flexShrink: 0, borderRadius: 14, background: 'rgba(255,255,255,.24)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <I n="play" size={18} ple color="#fff" />
+              </span>
+              <span style={{ flex: 1, minWidth: 0 }}>
+                <span style={{ display: 'block', fontSize: 17, fontWeight: 800, letterSpacing: -0.55 }}>
+                  El tema sencer
+                </span>
+                <span style={{ display: 'block', fontSize: 12.5, opacity: 0.9, marginTop: 3 }}>
+                  Les {total} preguntes, incloses les que ja has fet
+                </span>
+              </span>
+            </button>
+          )}
+
           {total > remaining && (
             <button
               type="button"
               onClick={onReset}
-              className="mt-4 text-xs uppercase tracking-wider font-semibold text-text-3 hover:text-ink dark:hover:text-slate-200"
-            >
-              🔄 {t('test.session.resetProgress')}
+              style={{
+                marginTop: 16, cursor: 'pointer', border: 'none', background: 'transparent',
+                color: V.faint, padding: 0,
+              }}>
+              <Mono size={10} color={V.faint} style={{ letterSpacing: 1.3 }}>
+                {t('test.session.resetProgress').toUpperCase()}
+              </Mono>
             </button>
           )}
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 }
 
