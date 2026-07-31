@@ -7,7 +7,7 @@
 //
 // Els estils viuen a `home.css` amb prefix `lp-` per no xocar amb les
 // classes del rebranding 2026.
-import { useEffect, useState, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import NewsletterBanner from '../components/NewsletterBanner';
@@ -130,30 +130,14 @@ function IconaApple({ s = 22, c = '#fff' }: { s?: number; c?: string }) {
   );
 }
 
-const NAV = [
-  { to: '/academia', label: 'Acadèmia' },
-  { to: '/operativa', label: 'Operativa' },
-  { to: '/croquis', label: 'Croquis' },
-  { to: '/chat', label: 'Chat', dot: true },
-  { to: '/noticies', label: 'Notícies' },
-];
-
 export default function Home() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const noticies = useNoticiesAll().slice(0, 3);
-  const [menu, setMenu] = useState(false);
 
   // Si arribes amb sessió oberta, la portada no t'ha de vendre res: et porta
   // directament on treballes.
   const ctaPrincipal = user ? { to: '/app', label: "Entrar a l'app" } : { to: '/login', label: 'Començar gratis' };
-
-  useEffect(() => {
-    if (!menu) return;
-    const tanca = () => setMenu(false);
-    window.addEventListener('resize', tanca);
-    return () => window.removeEventListener('resize', tanca);
-  }, [menu]);
 
   const dataCurta = (iso: string) => {
     const d = new Date(iso);
@@ -165,18 +149,12 @@ export default function Home() {
       {/* Navegació */}
       <nav className="lp-nav">
         <div className="lp-wrap">
-          <Link className="lp-logo" to="/" onClick={() => setMenu(false)}>
+          <Link className="lp-logo" to="/">
             <Logo />
             <b>info<span style={{ color: C.terra }}>pol</span></b>
           </Link>
-          <div className="lp-links">
-            {NAV.map((n) => (
-              <Link key={n.to} to={n.to}>
-                {n.label}
-                {n.dot && <span className="lp-dot" />}
-              </Link>
-            ))}
-          </div>
+          {/* A la barra només hi ha entrar i registrar-se. Els enllaços a
+              les seccions no hi pinten res: sense compte no s'hi entra. */}
           <div className="lp-navcta">
             {user ? (
               <Link className="lp-btn lp-btn-g lp-btn-sm" to="/perfil">El meu perfil</Link>
@@ -186,30 +164,9 @@ export default function Home() {
             <Link className="lp-btn lp-btn-p lp-btn-sm" to={ctaPrincipal.to}>
               {user ? 'Entrar a l’app' : "Registra't"}
             </Link>
-            <button className="lp-burger" onClick={() => setMenu((v) => !v)} aria-label="Menú" aria-expanded={menu}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#44444F" strokeWidth="2.2" strokeLinecap="round">
-                <path d={menu ? 'M6 6l12 12M18 6L6 18' : 'M4 7h16M4 12h16M4 17h16'} />
-              </svg>
-            </button>
           </div>
         </div>
       </nav>
-      <div className={`lp-mnav${menu ? ' on' : ''}`}>
-        {NAV.map((n) => (
-          <Link key={n.to} to={n.to} onClick={() => setMenu(false)}>
-            {n.label}
-            {n.dot && <span className="lp-dot" />}
-          </Link>
-        ))}
-        <div className="lp-mrow">
-          <Link className="lp-btn lp-btn-g lp-btn-sm" to={user ? '/perfil' : '/login'} onClick={() => setMenu(false)}>
-            {user ? 'El meu perfil' : 'Entrar'}
-          </Link>
-          <Link className="lp-btn lp-btn-p lp-btn-sm" to={ctaPrincipal.to} onClick={() => setMenu(false)}>
-            {user ? 'Entrar a l’app' : "Registra't"}
-          </Link>
-        </div>
-      </div>
 
       {/* 1 · Hero */}
       <header className="lp-hero">

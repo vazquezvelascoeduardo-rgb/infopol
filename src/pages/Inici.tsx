@@ -1,21 +1,28 @@
-// Pantalla d'inici de l'àrea privada (disseny v3 · "Web Inici").
+// Pantalla d'inici de l'àrea privada — disseny v3 ("Web Inici"), tal qual.
 //
-// Tot el que es veu aquí surt de l'activitat real de l'usuari: els temes
-// que ha tocat, les notes que ha tret i els errors que té pendents. Si
-// encara no ha fet res, es diu clarament en comptes d'ensenyar xifres
-// inventades.
-import { useMemo } from 'react';
+// Estructura del disseny: titular + filtres a la dreta; a l'esquerra el
+// tema en curs, l'activitat setmanal i tres indicadors (ratxa,
+// experiència i gemmes); a la dreta el test ràpid, "Avui et toca" i les
+// novetats.
+//
+// Les xifres surten de l'activitat real: els indicadors, de
+// `user_progress` (el mateix que alimenta l'app mòbil); l'activitat
+// setmanal i el tema en curs, dels tests que has fet.
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { TOPICS } from '../data/tests';
 import { useAuth } from '../lib/auth';
-import type { PerfilUs } from '../lib/db';
+import { getUserProgress, type PerfilUs, type UserProgress } from '../lib/db';
 import { useFailuresCounts } from '../lib/failures';
 import { NOTICIES } from '../lib/noticies';
-import { globalAverage, useGlobalStats } from '../lib/testStats';
+import { useGlobalStats } from '../lib/testStats';
 import { CardV, I, Mono, RV, TitolV, V, XipV, type NomIc } from '../lib/v3';
 
 const DIES = ['DL', 'DT', 'DC', 'DJ', 'DV', 'DS', 'DG'];
+
+const FILTRES = ['Tot', 'Acadèmia', 'Operativa', 'Reptes'] as const;
+type Filtre = typeof FILTRES[number];
 
 /** "Dijous, 31 de juliol" — la data d'avui en català. */
 function dataAvui(): string {
@@ -25,12 +32,29 @@ function dataAvui(): string {
   return `${dia.charAt(0).toUpperCase()}${dia.slice(1)}, ${d.getDate()} de ${mes}`;
 }
 
+/** "juliol 2026", per a la fila d'actualitat. */
+function mesAny(): string {
+  const d = new Date();
+  return `${d.toLocaleDateString('ca-ES', { month: 'long' })} ${d.getFullYear()}`;
+}
+
+/** 17300 → "17,3" + "k XP". Al disseny la xifra i la unitat van separades. */
+function xp(n: number): { valor: string; unitat: string } {
+  if (n < 1000) return { valor: String(n), unitat: 'XP' };
+  return { valor: (n / 1000).toFixed(1).replace('.', ','), unitat: 'k XP' };
+}
+
+/** 7235 → "7.235". */
+function milers(n: number): string {
+  return n.toLocaleString('ca-ES');
+}
+
 /**
  * Activitat dels darrers set dies.
  *
  * No desem un historial dia a dia, així que es dedueix de `lastAt`: cada
- * tema recorda quan el vas tocar per última vegada. Compta temes per dia,
- * no preguntes — és una mesura modesta, però és certa.
+ * tema recorda quan el vas tocar per última vegada. Compta temes per
+ * dia, no preguntes — és una mesura modesta, però és certa.
  */
 function setmana(topics: Record<string, { lastAt: number }>) {
   const ara = new Date();
@@ -48,8 +72,65 @@ function setmana(topics: Record<string, { lastAt: number }>) {
   return DIES.map((d, i) => ({ d, valor: compte[i] / max, avui: i === avui }));
 }
 
-function nota(v: number): string {
-  return Number.isInteger(v) ? String(v) : v.toFixed(1).replace('.', ',');
+type Tasca = {
+  titol: string; sub: string; icona: NomIc; tint: string; accent: string; to: string;
+  /** A quin filtre pertany. */
+  grup: Exclude<Filtre, 'Tot'>;
+};
+
+/**
+ * Les files d'"Avui et toca".
+ *
+ * Les tres primeres són les del disseny; les d'operativa s'hi afegeixen
+ * perquè qui està en servei també hi trobi el seu. El filtre de dalt
+ * decideix quines es veuen.
+ */
+function tasques(pendents: number, ratxa: number): Tasca[] {
+  return [
+    {
+      titol: 'Fes un test ràpid',
+      sub: ratxa > 0 ? `Mantén la ratxa de ${ratxa} dies` : 'Comença una ratxa',
+      icona: 'check', tint: V.terraSoft, accent: V.terraInk, to: '/policia-local', grup: 'Acadèmia',
+    },
+    {
+      titol: pendents > 0 ? `${pendents} preguntes de repàs` : 'Repàs intel·ligent',
+      sub: pendents > 0 ? 'El sistema te les ha programat' : 'Cap pregunta pendent',
+      icona: 'brain', tint: V.blueSoft, accent: V.blue, to: '/policia-local/debilitats', grup: 'Acadèmia',
+    },
+    {
+      titol: `Actualitat · ${mesAny()}`,
+      sub: 'Nou aquesta setmana',
+      icona: 'news', tint: V.okSoft, accent: V.ok, to: '/actualitat', grup: 'Acadèmia',
+    },
+    {
+      titol: 'Catàleg SCT',
+      sub: 'Infracció, quantia i punts',
+      icona: 'car', tint: V.terraSoft, accent: V.terraInk, to: '/operativa?sec=cataleg', grup: 'Operativa',
+    },
+    {
+      titol: 'Checklists penals',
+      sub: 'Arbre de decisió per escenari',
+      icona: 'tree', tint: V.granateSoft, accent: V.granate, to: '/operativa/penal', grup: 'Operativa',
+    },
+    {
+      titol: "Croquis d'accident",
+      sub: 'Dibuixa i exporta a PNG',
+      icona: 'crash', tint: V.okSoft, accent: V.ok, to: '/croquis', grup: 'Operativa',
+    },
+    {
+      titol: 'Reptes',
+      sub: 'Missions i objectius',
+      icona: 'medal', tint: V.warnSoft, accent: V.warn, to: '/retos', grup: 'Reptes',
+    },
+  ];
+}
+
+/** Ordre de les tasques quan el filtre és "Tot", segons el perfil d'ús. */
+function ordena(llista: Tasca[], perfil: PerfilUs | null): Tasca[] {
+  if (perfil === 'actiu') {
+    return [...llista].sort((a, b) => Number(b.grup === 'Operativa') - Number(a.grup === 'Operativa'));
+  }
+  return llista;
 }
 
 function MiniStat({ icona, valor, unitat, etiqueta, tint, accent }: {
@@ -72,80 +153,43 @@ function MiniStat({ icona, valor, unitat, etiqueta, tint, accent }: {
   );
 }
 
-function Tasca({ icona, titol, sub, tint, accent, to }: {
-  icona: NomIc; titol: string; sub: string; tint: string; accent: string; to: string;
-}) {
+function FilaTasca({ t }: { t: Tasca }) {
   return (
     <Link
-      to={to}
+      to={t.to}
       style={{
         width: '100%', background: V.paper, color: V.ink, borderRadius: RV.md, padding: 14,
         display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none',
       }}>
       <span style={{
-        width: 36, height: 36, flexShrink: 0, borderRadius: 12, background: tint, color: accent,
+        width: 36, height: 36, flexShrink: 0, borderRadius: 12, background: t.tint, color: t.accent,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
-        <I n={icona} size={17} sw={1.9} />
+        <I n={t.icona} size={17} sw={1.9} />
       </span>
       <span style={{ flex: 1, minWidth: 0 }}>
-        <span style={{ display: 'block', fontSize: 13.5, fontWeight: 700, letterSpacing: -0.25 }}>{titol}</span>
-        <span style={{ display: 'block', fontSize: 11.5, color: V.muted, marginTop: 2 }}>{sub}</span>
+        <span style={{ display: 'block', fontSize: 13.5, fontWeight: 700, letterSpacing: -0.25 }}>{t.titol}</span>
+        <span style={{ display: 'block', fontSize: 11.5, color: V.muted, marginTop: 2 }}>{t.sub}</span>
       </span>
       <I n="arrow" size={14} sw={2.4} color={V.faint} />
     </Link>
   );
 }
 
-/**
- * Les dreceres del costat dret, segons per a què fa servir l'app.
- *
- * Qui està en actiu no vol flashcards com a primera opció: vol el
- * catàleg i les checklists. Qui s'ho prepara, al revés. Qui fa les dues
- * coses veu una barreja. Res queda amagat — tot segueix a la barra
- * lateral.
- */
-function dreceresPer(perfil: PerfilUs | null, pendents: number): Parameters<typeof Tasca>[0][] {
-  const repas = {
-    icona: 'brain' as NomIc, titol: 'Repàs intel·ligent',
-    sub: pendents > 0 ? `${pendents} preguntes pendents` : 'Cap pregunta pendent',
-    tint: V.terraSoft, accent: V.terraInk, to: '/policia-local/debilitats',
-  };
-  const flash = {
-    icona: 'cards' as NomIc, titol: 'Flashcards', sub: 'Memoritza articles i xifres',
-    tint: V.blueSoft, accent: V.blue, to: '/policia-local/flashcards',
-  };
-  const reptes = {
-    icona: 'medal' as NomIc, titol: 'Reptes', sub: 'Missions i objectius',
-    tint: V.warnSoft, accent: V.warn, to: '/retos',
-  };
-  const cataleg = {
-    icona: 'car' as NomIc, titol: 'Catàleg SCT', sub: 'Infracció, quantia i punts',
-    tint: V.terraSoft, accent: V.terraInk, to: '/operativa?sec=cataleg',
-  };
-  const checklists = {
-    icona: 'tree' as NomIc, titol: 'Checklists penals', sub: 'Arbre de decisió',
-    tint: V.granateSoft, accent: V.granate, to: '/operativa/penal',
-  };
-  const croquis = {
-    icona: 'crash' as NomIc, titol: 'Croquis', sub: "Esquema d'accident",
-    tint: V.okSoft, accent: V.ok, to: '/croquis',
-  };
-
-  if (perfil === 'actiu') return [cataleg, checklists, croquis];
-  if (perfil === 'ambdos') return [repas, cataleg, checklists];
-  return [repas, flash, reptes];
-}
-
 export default function Inici() {
   const nav = useNavigate();
-  const { profile } = useAuth();
+  const { user, profile } = useAuth();
   const stats = useGlobalStats();
   const failures = useFailuresCounts();
-  const { attempts, avgGrade } = globalAverage(stats);
+  const [filtre, setFiltre] = useState<Filtre>('Tot');
+  const [progres, setProgres] = useState<UserProgress | null>(null);
 
-  const perfil = profile?.perfil_us ?? null;
-  const dreceres = useMemo(() => dreceresPer(perfil, failures.due), [perfil, failures.due]);
+  useEffect(() => {
+    let viu = true;
+    if (!user) { setProgres(null); return; }
+    getUserProgress(user.id).then((p) => { if (viu) setProgres(p); }).catch(() => {});
+    return () => { viu = false; };
+  }, [user]);
 
   const barres = useMemo(() => setmana(stats.topics), [stats.topics]);
 
@@ -158,8 +202,7 @@ export default function Inici() {
     }
     if (!millor) return null;
     const topic = TOPICS.find((t) => t.slug === millor!.slug);
-    if (!topic) return null;
-    return { topic, nota: millor.last };
+    return topic ? { topic, nota: millor.last } : null;
   }, [stats.topics]);
 
   const novetats = useMemo(
@@ -167,7 +210,16 @@ export default function Inici() {
     [],
   );
 
-  const temesTocats = Object.keys(stats.topics).length;
+  const ratxa = progres?.streak_count ?? 0;
+  const experiencia = xp(progres?.xp ?? 0);
+  const gemmes = progres?.gems ?? 0;
+
+  const llista = useMemo(() => {
+    const totes = ordena(tasques(failures.due, ratxa), profile?.perfil_us ?? null);
+    return filtre === 'Tot' ? totes : totes.filter((t) => t.grup === filtre);
+  }, [failures.due, ratxa, filtre, profile?.perfil_us]);
+
+  const apartats = enCurs ? Math.max(0, Math.round((10 - enCurs.nota))) : 0;
 
   return (
     <div className="v3-page v3-anim">
@@ -179,8 +231,28 @@ export default function Inici() {
           <TitolV fort="Resum" post="de la teva preparació" />
           <p style={{ fontSize: 13.5, color: V.muted, margin: '8px 0 0' }}>
             {dataAvui()}
-            {failures.due > 0 && ` · Tens ${failures.due} pregunta${failures.due === 1 ? '' : 's'} per repassar`}
+            {enCurs && apartats > 0 && ` · Et queden ${apartats} apartats del tema en curs`}
           </p>
+        </div>
+        <div style={{ display: 'flex', gap: 7, flexShrink: 0, flexWrap: 'wrap' }}>
+          {FILTRES.map((f) => {
+            const on = filtre === f;
+            return (
+              <button
+                key={f}
+                type="button"
+                onClick={() => setFiltre(f)}
+                aria-pressed={on}
+                style={{
+                  cursor: 'pointer', border: `1px solid ${on ? 'transparent' : V.border}`,
+                  background: on ? V.fill : V.surface, color: on ? V.fillFg : V.ink,
+                  borderRadius: RV.pill, padding: '9px 16px', fontSize: 12.5, fontWeight: 700,
+                  whiteSpace: 'nowrap',
+                }}>
+                {f}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -196,7 +268,7 @@ export default function Inici() {
                 </div>
                 <div style={{ fontSize: 25, fontWeight: 800, letterSpacing: -0.9 }}>{enCurs.topic.title}</div>
                 <div style={{ fontSize: 13.5, color: V.muted, marginTop: 6, lineHeight: 1.45 }}>
-                  Última nota: {nota(enCurs.nota)} sobre 10.
+                  Última nota: {enCurs.nota.toFixed(1).replace('.', ',')} sobre 10.
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 20, flexWrap: 'wrap' }}>
                   <div style={{ flex: 1, minWidth: 120, height: 9, borderRadius: RV.pill, background: V.surface2, overflow: 'hidden' }}>
@@ -212,7 +284,7 @@ export default function Inici() {
                       border: 'none', background: V.fill, color: V.fillFg, borderRadius: RV.pill,
                       padding: '12px 22px', fontSize: 13.5, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap',
                     }}>
-                    Torna-hi
+                    Continua estudiant
                   </button>
                 </div>
               </>
@@ -241,7 +313,9 @@ export default function Inici() {
           <CardV>
             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 12 }}>
               <div style={{ fontSize: 16.5, fontWeight: 800, letterSpacing: -0.45 }}>Activitat setmanal</div>
-              <Mono size={10.5} color={V.muted}>{temesTocats} TEMES TOCATS</Mono>
+              <Mono size={10.5} color={V.muted}>
+                {Object.keys(stats.topics).length} TEMES TOCATS
+              </Mono>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-end', gap: 11, height: 126, marginTop: 20 }}>
               {barres.map((b, i) => (
@@ -250,7 +324,7 @@ export default function Inici() {
                     width: '100%', height: `${Math.max(6, Math.round(b.valor * 100))}%`,
                     borderRadius: RV.pill, background: b.avui ? V.terra : V.surface2,
                     position: 'relative', transformOrigin: 'bottom',
-                    animation: `v3Grow .5s ease both`, animationDelay: `${i * 0.05}s`,
+                    animation: 'v3Grow .5s ease both', animationDelay: `${i * 0.05}s`,
                   }}>
                     {b.avui && (
                       <span style={{
@@ -267,16 +341,16 @@ export default function Inici() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: 16 }}>
             <MiniStat
-              icona="check" valor={String(attempts)} etiqueta="Tests fets"
-              tint={V.okSoft} accent={V.ok}
-            />
-            <MiniStat
-              icona="chart" valor={attempts ? nota(avgGrade) : '—'} unitat={attempts ? '/10' : undefined}
-              etiqueta="Nota mitjana" tint={V.blueSoft} accent={V.blue}
-            />
-            <MiniStat
-              icona="brain" valor={String(failures.total)} etiqueta="Preguntes fallades"
+              icona="flame" valor={String(ratxa)} unitat="dies" etiqueta="Ratxa"
               tint={V.terraSoft} accent={V.terraInk}
+            />
+            <MiniStat
+              icona="bolt" valor={experiencia.valor} unitat={experiencia.unitat} etiqueta="Experiència"
+              tint={V.blueSoft} accent={V.blue}
+            />
+            <MiniStat
+              icona="gem" valor={milers(gemmes)} etiqueta="Gemmes"
+              tint={V.okSoft} accent={V.ok}
             />
           </div>
         </div>
@@ -301,13 +375,11 @@ export default function Inici() {
                 width: 36, height: 36, borderRadius: '50%', background: '#fff', color: V.terra,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>
-                <svg viewBox="0 0 24 24" style={{ width: 15, height: 15 }} fill="currentColor" aria-hidden>
-                  <path d="M9 5.5v13l10-6.5Z" />
-                </svg>
+                <I n="play" size={15} ple color={V.terra} />
               </span>
             </span>
             <span style={{ display: 'block', fontSize: 23, fontWeight: 800, letterSpacing: -0.9, marginTop: 18 }}>
-              Fes un test
+              Test ràpid
             </span>
             <span style={{ display: 'block', fontSize: 13.5, opacity: 0.92, marginTop: 5, lineHeight: 1.45 }}>
               Tria tema i posa't a prova
@@ -315,11 +387,11 @@ export default function Inici() {
           </button>
 
           <CardV>
-            <div style={{ fontSize: 16.5, fontWeight: 800, letterSpacing: -0.45, marginBottom: 14 }}>
-              {perfil === 'actiu' ? 'Per al servei' : 'Avui et toca'}
-            </div>
+            <div style={{ fontSize: 16.5, fontWeight: 800, letterSpacing: -0.45, marginBottom: 14 }}>Avui et toca</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
-              {dreceres.map((d) => <Tasca key={d.titol} {...d} />)}
+              {llista.length > 0
+                ? llista.map((t) => <FilaTasca key={t.titol} t={t} />)
+                : <p style={{ fontSize: 13, color: V.muted, margin: 0 }}>Res pendent en aquest filtre.</p>}
             </div>
           </CardV>
 
@@ -327,7 +399,7 @@ export default function Inici() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
               <div style={{ fontSize: 16.5, fontWeight: 800, letterSpacing: -0.45 }}>Novetats</div>
               <Link to="/noticies" style={{ textDecoration: 'none' }}>
-                <Mono size={9.5} color={V.terraInk}>VEURE-LES</Mono>
+                <Mono size={9.5} color={V.terraInk}>{novetats.length} NOVES</Mono>
               </Link>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -339,8 +411,8 @@ export default function Inici() {
                   <span style={{ width: 4, alignSelf: 'stretch', borderRadius: RV.pill, background: V.terra, flexShrink: 0 }} />
                   <span style={{ flex: 1, minWidth: 0 }}>
                     <Mono size={9} color={V.muted} style={{ display: 'block', letterSpacing: 1.2 }}>
-                      {new Date(n.publishedAt).toLocaleDateString('ca-ES', { day: 'numeric', month: 'short' }).toUpperCase()}
-                      {n.source ? ` · ${n.source}` : ''}
+                      {n.source ? `${n.source} · ` : ''}
+                      {new Date(n.publishedAt).toLocaleDateString('ca-ES', { day: '2-digit', month: 'short' }).toUpperCase()}
                     </Mono>
                     <span style={{ display: 'block', fontSize: 13, fontWeight: 700, lineHeight: 1.35, marginTop: 4 }}>
                       {n.title}

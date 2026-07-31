@@ -100,11 +100,30 @@ const ICO: Record<string, string[]> = {
 
 export type NomIc = keyof typeof ICO | string;
 
-/** Icona de traç del disseny. */
+/**
+ * Icona del disseny.
+ *
+ * Per defecte va de traç. Els indicadors de la capçalera (ratxa,
+ * experiència) la volen **plena**: allà la icona és petita i de traç no
+ * es llegiria. Per això `ple`, que dibuixa només el primer path amb
+ * farciment, igual que fa el disseny.
+ */
 export function I({
-  n, size = 20, color = 'currentColor', sw = 1.9, style = {},
-}: { n: NomIc; size?: number; color?: string; sw?: number; style?: CSSProperties }) {
+  n, size = 20, color = 'currentColor', sw = 1.9, ple = false, style = {},
+}: { n: NomIc; size?: number; color?: string; sw?: number; ple?: boolean; style?: CSSProperties }) {
   const paths = ICO[n] || [];
+  if (ple) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        style={{ width: size, height: size, flexShrink: 0, ...style }}
+        fill={color}
+        aria-hidden
+      >
+        <path d={paths[0] ?? ''} />
+      </svg>
+    );
+  }
   return (
     <svg
       viewBox="0 0 24 24"

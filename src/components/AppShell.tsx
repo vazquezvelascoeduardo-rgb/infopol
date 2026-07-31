@@ -1,31 +1,79 @@
-// Marc de l'àrea privada: el disseny v3 "InfoPol Web App".
+// Marc de l'àrea privada — disseny v3 "InfoPol Web App", tal qual.
 //
-// Substitueix els tres marcs que hi havia abans (Layout global,
-// OperativaShellLayout i AcademiaShellLayout). Un cop has entrat, ja no
-// se surt d'aquí: barra lateral de tinta a l'esquerra, capçalera amb
-// cercador a dalt i el contingut al mig via <Outlet/>.
+// Barra lateral de tinta (246 px) amb la marca a dalt, quatre seccions
+// amb el seu comptador, el botó del xat, la ratxa i la fitxa d'usuari a
+// baix. A la dreta, capçalera de 66 px amb cercador, els dos indicadors
+// (ratxa i experiència) i la campana.
 //
-// A mòbil la barra lateral es plega en un calaix i apareix una barra
-// inferior amb les quatre seccions i el xat.
+// Afegit sobre el disseny: en clicar una secció es desplega el seu
+// submenú, perquè des de la barra es pugui saltar directament a Test,
+// Estudia per tema, Catàleg SCT… sense passar per la pantalla de la
+// secció.
+//
+// A mòbil la lateral es plega en un calaix i apareix la pastilla
+// flotant de sota, com a l'app.
 import { Suspense, useEffect, useMemo, useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import TriaPerfilUs from './TriaPerfilUs';
 import { useAuth } from '../lib/auth';
+import { TOPICS } from '../data/tests';
 import { getUserProgress, type PerfilUs, type UserProgress } from '../lib/db';
+import { PENAL_ALL_ENTRIES } from '../lib/operativa-penal';
 import { applyInitialTheme, applyTheme, getInitialTheme, type Theme } from '../lib/theme';
 import { I, Mono, RV, V, type NomIc } from '../lib/v3';
 
 const AMPLE_SIDEBAR = 246;
 
-type Seccio = { id: string; label: string; icona: NomIc; to: string };
+type Subseccio = { label: string; to: string };
+type Seccio = {
+  id: string;
+  label: string;
+  icona: NomIc;
+  to: string;
+  /** Quantes coses hi ha a dins. Es calcula del contingut real. */
+  compte?: number;
+  sub?: Subseccio[];
+};
+
+/** Temes del temari de Policia Local (els de Mossos van a part). */
+const TEMES_PL = TOPICS.filter((t) => (t.category ?? 'temari') !== 'mossos').length;
+const ESCENARIS_PENAL = PENAL_ALL_ENTRIES.length;
 
 const NAV: Seccio[] = [
   { id: 'inici', label: 'Inici', icona: 'home', to: '/app' },
-  { id: 'academia', label: 'Acadèmia', icona: 'cap', to: '/academia' },
-  { id: 'operativa', label: 'Operativa', icona: 'siren', to: '/operativa' },
-  { id: 'croquis', label: 'Croquis', icona: 'crash', to: '/croquis' },
-  { id: 'noticies', label: 'Notícies', icona: 'news', to: '/noticies' },
+  {
+    id: 'academia', label: 'Acadèmia', icona: 'cap', to: '/academia', compte: TEMES_PL,
+    sub: [
+      { label: 'Estudia per tema', to: '/leyes' },
+      { label: 'Test', to: '/policia-local' },
+      { label: 'Repàs intel·ligent', to: '/policia-local/debilitats' },
+      { label: 'Resums i esquemes', to: '/policia-local/esquemes' },
+      { label: 'Flashcards', to: '/policia-local/flashcards' },
+      { label: 'Mossos', to: '/mossos' },
+      { label: 'Reptes', to: '/retos' },
+    ],
+  },
+  {
+    id: 'operativa', label: 'Operativa', icona: 'siren', to: '/operativa', compte: ESCENARIS_PENAL,
+    sub: [
+      { label: 'Catàleg SCT', to: '/operativa?sec=cataleg' },
+      { label: 'Superbuscador', to: '/superbuscador' },
+      { label: 'Lleis', to: '/leyes' },
+      { label: 'SC i Penal', to: '/operativa/penal' },
+      { label: 'Trànsit', to: '/operativa/trafico' },
+      { label: 'Alcoholèmia', to: '/calculadora-alcohol' },
+      { label: "Croquis d'accident", to: '/croquis' },
+      { label: 'Recursos', to: '/recursos' },
+    ],
+  },
+  {
+    id: 'perfil', label: 'Perfil', icona: 'person', to: '/perfil',
+    sub: [
+      { label: 'Els meus logros', to: '/policia-local/logros' },
+      { label: 'Notícies', to: '/noticies' },
+    ],
+  },
 ];
 
 /** Quina secció de la barra s'ha de marcar segons la ruta actual. */
@@ -34,10 +82,8 @@ export function seccioActiva(pathname: string): string {
   if (p.startsWith('/academia') || p.startsWith('/policia-local') || p.startsWith('/mossos')
     || p.startsWith('/cultura-general') || p.startsWith('/actualitat') || p.startsWith('/retos')) return 'academia';
   if (p.startsWith('/operativa') || p.startsWith('/leyes') || p.startsWith('/recursos')
-    || p.startsWith('/superbuscador') || p.startsWith('/calculadora-alcohol')) return 'operativa';
-  if (p.startsWith('/croquis')) return 'croquis';
-  if (p.startsWith('/noticies')) return 'noticies';
-  if (p.startsWith('/perfil')) return 'perfil';
+    || p.startsWith('/superbuscador') || p.startsWith('/calculadora-alcohol') || p.startsWith('/croquis')) return 'operativa';
+  if (p.startsWith('/perfil') || p.startsWith('/noticies')) return 'perfil';
   if (p.startsWith('/chat')) return 'chat';
   return 'inici';
 }
@@ -71,26 +117,7 @@ function OnesXat({ mida = 38 }: { mida?: number }) {
   );
 }
 
-function BotoNav({ s, on, onClick }: { s: Seccio; on: boolean; onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-current={on ? 'page' : undefined}
-      style={{
-        width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none',
-        borderRadius: 13, padding: '11px 12px',
-        background: on ? V.terra : 'transparent',
-        color: on ? '#fff' : 'rgba(255,255,255,.6)',
-        display: 'flex', alignItems: 'center', gap: 12, transition: 'background .18s ease',
-      }}>
-      <I n={s.icona} size={19} sw={on ? 2.1 : 1.8} />
-      <span style={{ flex: 1, fontSize: 14, fontWeight: on ? 800 : 600, letterSpacing: -0.2 }}>{s.label}</span>
-    </button>
-  );
-}
-
-/** Pestanya de la pastilla flotant: només icona, cercle taronja si és l'activa. */
+/** Pestanya de la pastilla flotant (mòbil): només icona. */
 function PestanyaMobil({ s, on, onClick }: { s: Seccio; on: boolean; onClick: () => void }) {
   return (
     <button
@@ -113,11 +140,73 @@ function PestanyaMobil({ s, on, onClick }: { s: Seccio; on: boolean; onClick: ()
   );
 }
 
+function BotoNav({
+  s, on, obert, onNavega, onDesplega,
+}: {
+  s: Seccio;
+  on: boolean;
+  obert: boolean;
+  onNavega: (to: string) => void;
+  onDesplega: () => void;
+}) {
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => { onNavega(s.to); if (s.sub) onDesplega(); }}
+        aria-current={on ? 'page' : undefined}
+        aria-expanded={s.sub ? obert : undefined}
+        style={{
+          width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none',
+          borderRadius: 13, padding: '11px 12px',
+          background: on ? V.terra : 'transparent',
+          color: on ? '#fff' : 'rgba(255,255,255,.6)',
+          display: 'flex', alignItems: 'center', gap: 12, transition: 'background .18s ease',
+        }}>
+        <I n={s.icona} size={19} sw={on ? 2.1 : 1.8} />
+        <span style={{ flex: 1, fontSize: 14, fontWeight: on ? 800 : 600, letterSpacing: -0.2 }}>{s.label}</span>
+        {s.compte !== undefined && (
+          <span style={{
+            fontFamily: V.mono, fontSize: 9.5, fontWeight: 700,
+            color: on ? '#fff' : 'rgba(255,255,255,.5)',
+            background: on ? 'rgba(255,255,255,.22)' : 'rgba(255,255,255,.08)',
+            borderRadius: 7, padding: '4px 7px',
+          }}>
+            {s.compte}
+          </span>
+        )}
+      </button>
+
+      {/* Submenú: apareix en clicar la secció. */}
+      {s.sub && obert && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 1, padding: '4px 0 6px 22px' }}>
+          {s.sub.map((x) => (
+            <button
+              key={x.to + x.label}
+              type="button"
+              onClick={() => onNavega(x.to)}
+              style={{
+                width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none',
+                background: 'transparent', color: 'rgba(255,255,255,.5)',
+                borderLeft: '1px solid rgba(255,255,255,.12)',
+                borderRadius: 0, padding: '7px 12px', fontSize: 12.5, fontWeight: 600,
+              }}>
+              {x.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
 /** Barra lateral de tinta. És la mateixa a l'escriptori i dins del calaix. */
 function Lateral({
-  activa, onNavega, progres, nom, inicial, tema, onTema,
+  activa, desplegada, onDesplega, onNavega, progres, nom, inicial, tema, onTema,
 }: {
   activa: string;
+  desplegada: string | null;
+  onDesplega: (id: string) => void;
   onNavega: (to: string) => void;
   progres: UserProgress | null;
   nom: string;
@@ -125,7 +214,7 @@ function Lateral({
   tema: Theme;
   onTema: () => void;
 }) {
-  // Els set dies de la ratxa: només marquem els que realment té.
+  // Els set dies de la ratxa: només s'encenen els que realment té.
   const dies = useMemo(() => {
     const n = Math.min(7, progres?.streak_count ?? 0);
     return Array.from({ length: 7 }, (_, i) => i < n);
@@ -150,7 +239,14 @@ function Lateral({
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         {NAV.map((s) => (
-          <BotoNav key={s.id} s={s} on={activa === s.id} onClick={() => onNavega(s.to)} />
+          <BotoNav
+            key={s.id}
+            s={s}
+            on={activa === s.id}
+            obert={desplegada === s.id}
+            onNavega={onNavega}
+            onDesplega={() => onDesplega(s.id)}
+          />
         ))}
       </div>
 
@@ -168,28 +264,26 @@ function Lateral({
         <span style={{ flex: 1, minWidth: 0 }}>
           <span style={{ display: 'block', fontSize: 14, fontWeight: 800, color: '#fff', letterSpacing: -0.3 }}>Chat IA</span>
           <Mono size={8.5} color="rgba(255,255,255,.5)" style={{ display: 'block', marginTop: 3, letterSpacing: 1.4 }}>
-            DILIGENCIADOR
+            3 EINES
           </Mono>
         </span>
       </button>
 
       <div style={{ marginTop: 'auto' }}>
-        {progres && (
-          <div style={{ background: 'rgba(255,255,255,.06)', borderRadius: RV.md, padding: 15, marginBottom: 12 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <Mono size={8.5} color="rgba(255,255,255,.5)">RATXA</Mono>
-              <span style={{ fontSize: 15, fontWeight: 800, color: V.terra }}>{progres.streak_count}</span>
-            </div>
-            <div style={{ display: 'flex', gap: 4, marginTop: 11 }}>
-              {dies.map((ple, i) => (
-                <span key={i} style={{
-                  flex: 1, height: 5, borderRadius: RV.pill,
-                  background: ple ? V.terra : 'rgba(255,255,255,.14)',
-                }} />
-              ))}
-            </div>
+        <div style={{ background: 'rgba(255,255,255,.06)', borderRadius: RV.md, padding: 15, marginBottom: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Mono size={8.5} color="rgba(255,255,255,.5)">RATXA</Mono>
+            <span style={{ fontSize: 15, fontWeight: 800, color: V.terra }}>{progres?.streak_count ?? 0}</span>
           </div>
-        )}
+          <div style={{ display: 'flex', gap: 4, marginTop: 11 }}>
+            {dies.map((ple, i) => (
+              <span key={i} style={{
+                flex: 1, height: 5, borderRadius: RV.pill,
+                background: ple ? V.terra : 'rgba(255,255,255,.14)',
+              }} />
+            ))}
+          </div>
+        </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '4px 6px' }}>
           <button
@@ -211,7 +305,7 @@ function Lateral({
               whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
             }}>{nom}</span>
             <span style={{ display: 'block', fontSize: 10.5, color: 'rgba(255,255,255,.45)', marginTop: 2 }}>
-              {progres ? `Nivell ${progres.level}` : 'El teu perfil'}
+              Nivell {progres?.level ?? 1}
             </span>
           </button>
           <button
@@ -230,6 +324,28 @@ function Lateral({
       </div>
     </>
   );
+}
+
+/** Indicador de la capçalera: icona plena + xifra, sobre pastilla tenyida. */
+function XipHud({ icona, valor, tint, accent }: {
+  icona: NomIc; valor: string; tint: string; accent: string;
+}) {
+  return (
+    <div className="v3-amaga-mobil" style={{
+      display: 'flex', alignItems: 'center', gap: 7, background: tint,
+      borderRadius: RV.pill, padding: '8px 13px',
+    }}>
+      <I n={icona} size={14} ple color={accent} />
+      <span style={{ fontSize: 13, fontWeight: 800, color: accent, letterSpacing: -0.2 }}>{valor}</span>
+    </div>
+  );
+}
+
+/** 17300 → "17,3k". Al disseny les xifres grans van abreujades. */
+export function abreuja(n: number): string {
+  if (n < 1000) return String(n);
+  const k = n / 1000;
+  return `${k.toFixed(1).replace('.', ',')}k`;
 }
 
 function ContentFallback() {
@@ -251,6 +367,7 @@ export default function AppShell() {
   const [q, setQ] = useState('');
   const [progres, setProgres] = useState<UserProgress | null>(null);
   const [tema, setTema] = useState<Theme>(() => getInitialTheme());
+  const [desplegada, setDesplegada] = useState<string | null>(null);
   // Si ja ha triat en aquesta sessió no li tornem a preguntar encara que
   // el perfil del servidor trigui a refrescar-se.
   const [triaFeta, setTriaFeta] = useState<PerfilUs | null>(null);
@@ -259,6 +376,8 @@ export default function AppShell() {
 
   useEffect(() => { applyInitialTheme(); }, []);
   useEffect(() => { setCalaix(false); }, [pathname]);
+  // En canviar de secció, obre el submenú de la nova.
+  useEffect(() => { setDesplegada((d) => (d === activa ? d : activa)); }, [activa]);
 
   useEffect(() => {
     let viu = true;
@@ -284,14 +403,24 @@ export default function AppShell() {
     if (v) nav(`/cerca?q=${encodeURIComponent(v)}`);
   }
 
-  const nom = (user?.user_metadata?.name as string | undefined)
+  const nom = profile?.name
+    || (user?.user_metadata?.name as string | undefined)
     || user?.email?.split('@')[0]
     || 'El meu compte';
   const inicial = nom.charAt(0).toUpperCase();
 
+  // La pregunta d'entrada: només a qui té sessió i encara no l'ha
+  // contestada. Sense backend (mode local) no es pregunta res.
+  const perfilUs = triaFeta ?? profile?.perfil_us ?? null;
+  if (user && profile && !perfilUs) {
+    return <TriaPerfilUs onFet={setTriaFeta} />;
+  }
+
   const lateral = (
     <Lateral
       activa={activa}
+      desplegada={desplegada}
+      onDesplega={(id) => setDesplegada((d) => (d === id ? null : id))}
       onNavega={anar}
       progres={progres}
       nom={nom}
@@ -301,13 +430,6 @@ export default function AppShell() {
     />
   );
 
-  // La pregunta d'entrada: només a qui té sessió i encara no l'ha
-  // contestada. Si no hi ha backend (mode local) no es pregunta res.
-  const perfilUs = triaFeta ?? profile?.perfil_us ?? null;
-  if (user && profile && !perfilUs) {
-    return <TriaPerfilUs onFet={setTriaFeta} />;
-  }
-
   return (
     <div className="v3-shell" style={{ display: 'flex', minHeight: '100dvh', background: V.paper, color: V.ink }}>
       <aside
@@ -316,6 +438,7 @@ export default function AppShell() {
           width: AMPLE_SIDEBAR, flexShrink: 0, background: V.inkFixed,
           display: 'flex', flexDirection: 'column', padding: '20px 14px',
           height: '100dvh', position: 'sticky', top: 0, boxSizing: 'border-box',
+          overflowY: 'auto',
         }}>
         {lateral}
       </aside>
@@ -329,7 +452,7 @@ export default function AppShell() {
           style={{
             flexShrink: 0, minHeight: 66, borderBottom: `1px solid ${V.hair}`,
             display: 'flex', alignItems: 'center', gap: 16, padding: '0 clamp(14px,2.4vw,26px)',
-            background: V.surface, position: 'sticky', top: 0, zIndex: 40,
+            background: V.surface,
           }}>
           <button
             type="button"
@@ -368,37 +491,24 @@ export default function AppShell() {
           </form>
 
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 9 }}>
-            {progres && (
-              <>
-                <div className="v3-amaga-mobil" style={{
-                  display: 'flex', alignItems: 'center', gap: 7, background: V.terraSoft,
-                  borderRadius: RV.pill, padding: '8px 13px',
-                }}>
-                  <I n="flame" size={14} sw={2} color={V.terraInk} />
-                  <span style={{ fontSize: 13, fontWeight: 800, color: V.terraInk, letterSpacing: -0.2 }}>
-                    {progres.streak_count}
-                  </span>
-                </div>
-                <div className="v3-amaga-mobil" style={{
-                  display: 'flex', alignItems: 'center', gap: 7, background: V.blueSoft,
-                  borderRadius: RV.pill, padding: '8px 13px',
-                }}>
-                  <I n="gem" size={14} sw={2} color={V.blue} />
-                  <span style={{ fontSize: 13, fontWeight: 800, color: V.blue, letterSpacing: -0.2 }}>
-                    {progres.gems}
-                  </span>
-                </div>
-              </>
-            )}
+            <XipHud
+              icona="flame" valor={String(progres?.streak_count ?? 0)}
+              tint={V.terraSoft} accent={V.terraInk}
+            />
+            <XipHud
+              icona="bolt" valor={abreuja(progres?.xp ?? 0)}
+              tint={V.blueSoft} accent={V.blue}
+            />
             <Link
-              to="/perfil"
-              aria-label="El meu perfil"
+              to="/noticies"
+              aria-label="Novetats"
+              title="Novetats"
               style={{
                 width: 38, height: 38, border: `1px solid ${V.border}`, borderRadius: 12,
                 background: V.surface, color: V.muted,
                 display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
               }}>
-              <I n="person" size={17} sw={1.8} />
+              <I n="bell" size={17} sw={1.8} />
             </Link>
           </div>
         </header>
