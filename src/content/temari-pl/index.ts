@@ -5,10 +5,11 @@
 // biblioteca de normes, no un temari, i barrejava coses que no entren a
 // l'examen amb coses que sí.
 //
-// Els temes van numerats de l'1 al 31, seguits. La llista de partida
-// saltava números (del 13 al 20) perquè venia d'una convocatòria amb
-// temes que aquí no hi són; conservar aquells forats només feia que el
-// temari semblés incomplet.
+// Els temes van numerats de l'1 al 28, seguits. La llista de partida
+// saltava números i incloïa tres entrades que no són normes (el pla
+// d'igualtat municipal, el coneixement de la ciutat i l'organigrama):
+// s'han tret perquè no es poden estudiar com una llei ni tenen text
+// consolidat on comprovar-ne les cites.
 //
 // El número del fitxer ha de coincidir amb el del tema: si es reordena
 // la llista, s'han de renombrar també els .md de `content/temari-pl/`.
@@ -48,36 +49,33 @@ export const TEMES: TemaPL[] = [
   { num: 5, bloc: 'institucional', fitxer: '05-lpac', titol: 'Llei 39/2015, del procediment administratiu comú' },
   { num: 6, bloc: 'institucional', fitxer: '06-ebep', titol: "RDL 5/2015, Estatut bàsic de l'empleat públic" },
   { num: 7, bloc: 'institucional', fitxer: '07-prl', titol: 'Llei 31/1995, de prevenció de riscos laborals' },
-  { num: 8, bloc: 'institucional', fitxer: '08-igualtat', titol: "Pla d'igualtat d'oportunitats de l'Ajuntament de Barcelona i LO 3/2007" },
-  { num: 9, bloc: 'institucional', fitxer: '09-carta-municipal', titol: 'Llei 22/1998, Carta municipal de Barcelona' },
-  { num: 10, bloc: 'institucional', fitxer: '10-regim-especial-bcn', titol: 'Llei 1/2006, règim especial del municipi de Barcelona' },
-  { num: 11, bloc: 'institucional', fitxer: '11-ciutat-barcelona', titol: 'Coneixement de la ciutat de Barcelona' },
-  { num: 12, bloc: 'institucional', fitxer: '12-organigrama-municipal', titol: 'Decret de la Comissió de Govern de 30 de maig de 2024 — organigrama municipal' },
-  { num: 13, bloc: 'institucional', fitxer: '13-proteccio-civil', titol: 'Llei 4/1997, de protecció civil de Catalunya' },
+  { num: 8, bloc: 'institucional', fitxer: '08-carta-municipal', titol: 'Llei 22/1998, Carta municipal de Barcelona' },
+  { num: 9, bloc: 'institucional', fitxer: '09-regim-especial-bcn', titol: 'Llei 1/2006, règim especial del municipi de Barcelona' },
+  { num: 10, bloc: 'institucional', fitxer: '10-proteccio-civil', titol: 'Llei 4/1997, de protecció civil de Catalunya' },
 
   // ── Seguretat pública i règim policial ───────────────────────
-  { num: 14, bloc: 'seguretat', fitxer: '14-lofcs', titol: 'LO 2/1986, de forces i cossos de seguretat' },
-  { num: 15, bloc: 'seguretat', fitxer: '15-policies-locals', titol: 'Llei 16/1991, de les policies locals de Catalunya' },
-  { num: 16, bloc: 'seguretat', fitxer: '16-sistema-seguretat', titol: 'Llei 4/2003, de ordenació del sistema de seguretat pública de Catalunya' },
-  { num: 17, bloc: 'seguretat', fitxer: '17-lopsc', titol: 'LO 4/2015, de protecció de la seguretat ciutadana' },
-  { num: 18, bloc: 'seguretat', fitxer: '18-codi-etica', titol: 'Acord GOV/25/2015 — Codi d\'ètica de la policia de Catalunya' },
-  { num: 19, bloc: 'seguretat', fitxer: '19-lopdgdd', titol: 'LO 3/2018, de protecció de dades personals i garantia dels drets digitals' },
-  { num: 20, bloc: 'seguretat', fitxer: '20-dades-penals', titol: 'LO 7/2021, de protecció de dades amb finalitats penals' },
-  { num: 21, bloc: 'seguretat', fitxer: '21-espectacles', titol: 'Llei 11/2009, de regulació administrativa dels espectacles públics i activitats recreatives' },
+  { num: 11, bloc: 'seguretat', fitxer: '11-lofcs', titol: 'LO 2/1986, de forces i cossos de seguretat' },
+  { num: 12, bloc: 'seguretat', fitxer: '12-policies-locals', titol: 'Llei 16/1991, de les policies locals de Catalunya' },
+  { num: 13, bloc: 'seguretat', fitxer: '13-sistema-seguretat', titol: 'Llei 4/2003, de ordenació del sistema de seguretat pública de Catalunya' },
+  { num: 14, bloc: 'seguretat', fitxer: '14-lopsc', titol: 'LO 4/2015, de protecció de la seguretat ciutadana' },
+  { num: 15, bloc: 'seguretat', fitxer: '15-codi-etica', titol: 'Acord GOV/25/2015 — Codi d\'ètica de la policia de Catalunya' },
+  { num: 16, bloc: 'seguretat', fitxer: '16-lopdgdd', titol: 'LO 3/2018, de protecció de dades personals i garantia dels drets digitals' },
+  { num: 17, bloc: 'seguretat', fitxer: '17-dades-penals', titol: 'LO 7/2021, de protecció de dades amb finalitats penals' },
+  { num: 18, bloc: 'seguretat', fitxer: '18-espectacles', titol: 'Llei 11/2009, de regulació administrativa dels espectacles públics i activitats recreatives' },
 
   // ── Àmbit penal i processal ──────────────────────────────────
-  { num: 22, bloc: 'penal', fitxer: '22-lecrim', titol: 'Llei d\'enjudiciament criminal — policia judicial i detenció' },
-  { num: 23, bloc: 'penal', fitxer: '23-habeas-corpus', titol: 'LO 6/1984, de procediment d\'habeas corpus' },
-  { num: 24, bloc: 'penal', fitxer: '24-dret-reunio', titol: 'LO 9/1983, reguladora del dret de reunió' },
-  { num: 25, bloc: 'penal', fitxer: '25-codi-penal', titol: 'LO 10/1995, Codi penal' },
-  { num: 26, bloc: 'penal', fitxer: '26-armes', titol: 'RD 137/1993 (Reglament d\'armes) i Decret 219/1996 (armament de les policies locals)' },
-  { num: 27, bloc: 'penal', fitxer: '27-menors', titol: 'LO 5/2000, de responsabilitat penal dels menors' },
+  { num: 19, bloc: 'penal', fitxer: '19-lecrim', titol: 'Llei d\'enjudiciament criminal — policia judicial i detenció' },
+  { num: 20, bloc: 'penal', fitxer: '20-habeas-corpus', titol: 'LO 6/1984, de procediment d\'habeas corpus' },
+  { num: 21, bloc: 'penal', fitxer: '21-dret-reunio', titol: 'LO 9/1983, reguladora del dret de reunió' },
+  { num: 22, bloc: 'penal', fitxer: '22-codi-penal', titol: 'LO 10/1995, Codi penal' },
+  { num: 23, bloc: 'penal', fitxer: '23-armes', titol: 'RD 137/1993 (Reglament d\'armes) i Decret 219/1996 (armament de les policies locals)' },
+  { num: 24, bloc: 'penal', fitxer: '24-menors', titol: 'LO 5/2000, de responsabilitat penal dels menors' },
 
   // ── Trànsit i seguretat viària ───────────────────────────────
-  { num: 28, bloc: 'transit', fitxer: '28-lsv', titol: 'RDL 6/2015, Llei sobre trànsit, circulació de vehicles a motor i seguretat viària' },
-  { num: 29, bloc: 'transit', fitxer: '29-conductors', titol: 'RD 818/2009, Reglament general de conductors' },
-  { num: 30, bloc: 'transit', fitxer: '30-circulacio', titol: 'RD 1428/2003, Reglament general de circulació' },
-  { num: 31, bloc: 'transit', fitxer: '31-vehicles', titol: 'RD 2822/1998, Reglament general de vehicles' },
+  { num: 25, bloc: 'transit', fitxer: '25-lsv', titol: 'RDL 6/2015, Llei sobre trànsit, circulació de vehicles a motor i seguretat viària' },
+  { num: 26, bloc: 'transit', fitxer: '26-conductors', titol: 'RD 818/2009, Reglament general de conductors' },
+  { num: 27, bloc: 'transit', fitxer: '27-circulacio', titol: 'RD 1428/2003, Reglament general de circulació' },
+  { num: 28, bloc: 'transit', fitxer: '28-vehicles', titol: 'RD 2822/1998, Reglament general de vehicles' },
 ];
 
 export const temesDelBloc = (clau: string): TemaPL[] =>
