@@ -194,11 +194,14 @@ export default function EstudiTema({ cos = 'pl' }: { cos?: CosTemari }) {
   }
 
   return (
-    <div style={{ flex: 1, minWidth: 0, display: 'flex' }} className="v3-anim">
-      {/* Índex dels apartats */}
+    <div style={{ flex: 1, minWidth: 0, display: 'flex', alignItems: 'flex-start' }} className="v3-anim">
+      {/* Índex dels apartats. Va enganxat a dalt i ocupa tota l'alçada de
+          la finestra: si només fes l'alçada del seu contingut, la banda
+          blanca quedava tallada a mitja pantalla. */}
       <div className="temari-toc" style={{
         width: 270, flexShrink: 0, borderRight: `1px solid ${V.hair}`,
-        overflowY: 'auto', padding: '24px 18px', background: V.surface,
+        position: 'sticky', top: 0, height: '100dvh', overflowY: 'auto',
+        padding: '24px 18px', background: V.surface, boxSizing: 'border-box',
       }}>
         <button
           type="button"

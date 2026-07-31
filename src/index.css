@@ -6452,13 +6452,17 @@ html[data-text-size="lg"] { font-size: 18px; }
 
   .temari-main { min-width: 0; }
 
-  .temari-toc {
+  /* L'índex lateral de la fitxa antiga. El del temari nou porta els seus
+     estils en línia; aquesta regla és per a les fitxes de `content/`, que
+     el pinten dins d'una graella. El `top` és 0 perquè des que la barra
+     superior no hi és, qui scrolleja és el contingut. */
+  .temari-toc:not([style*='sticky']) {
     position: sticky;
-    top: 80px;
+    top: 0;
     align-self: start;
     border-left: 1px solid var(--line);
     padding-left: 18px;
-    max-height: calc(100vh - 100px);
+    max-height: 100dvh;
     overflow-y: auto;
   }
   .temari-toc-head { margin-bottom: 10px; }
