@@ -96,6 +96,31 @@ i dona-li el seu propi marc (com fa la portada).
 - Mode fosc: `html.dark` redefineix les `--v-*`. El commutador és a la barra
   lateral i a Perfil > Aparença.
 - Mòduls de pagament: `lib/pla.ts`. Avui `MODULS_PRO` és buit (tot obert).
+- **Res de degradats.** El disseny v3 no en fa servir: fons plans i el color
+  als accents. Els únics `linear-gradient` que hi ha d'haver són
+  `repeating-*` (trames de ratlles).
+- El **taronja pur** (`--v-terra`) és per a fons i icones. Com a color de
+  TEXT sobre paper dona 2,3 de contrast i no es llegeix: cal
+  `--v-terra-ink`. El mateix per als accents de secció, ja alineats.
+
+## Paritat amb l'app mòbil
+
+La web i l'app han de tenir el mateix contingut i la mateixa organització.
+Pantalles que comparteixen nom i destí: `/estudi` (temari amb subratllats),
+`/repas`, `/resums`, `/diagnostic`, `/quadrant`.
+
+Fitxers **bessons** entre els dos repos — si es toca un, s'ha de tocar
+l'altre el mateix dia:
+
+| Web | App | Per què |
+|---|---|---|
+| `lib/subratllats.ts` | `lib/subratllats.ts` | Mateixa taula `highlights` |
+| `lib/estudi-cos.ts` | dins de `lib/estudi-webview.ts` | Els subratllats s'ancoren per índex de bloc: si parteixen el text diferent, es desancoren |
+| `lib/repaso/scheduler.ts` i `queue.ts` | els mateixos | Còpia literal: les dues han de programar el repàs igual |
+| `lib/quadrant.ts` | `lib/storage.ts` (part quadrant) | Mateixa clau `ip.quadrant.v1` i mateix format |
+
+El diagnòstic no es calcula al client a cap dels dos: surt de la RPC
+`topic_diagnostics` de Supabase.
 - Iconografia: SVG inline + emojis. La marca usa `BrandShield` (escut amb la "i" en cercle + barra terracota).
 - i18n: `useT()` retorna `t(key)`. Claus duplicades en `'es'` i `'ca'` dins `lib/i18n.tsx`. Idioma per defecte: castellà; toggle al sidebar.
 - Per afegir contingut legal: crea `.md` o `.html` a `content/<modul>/`. Veure `README.md`.
