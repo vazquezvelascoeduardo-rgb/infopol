@@ -35,6 +35,7 @@ const EstudiDoc = lazy(() => import('./pages/EstudiDoc'));
 const Repas = lazy(() => import('./pages/Repas'));
 const Resums = lazy(() => import('./pages/Resums'));
 const Diagnostic = lazy(() => import('./pages/Diagnostic'));
+const Quadrant = lazy(() => import('./pages/Quadrant'));
 const Leyes = lazy(() => import('./pages/Leyes'));
 const Section = lazy(() => import('./pages/Section'));
 const CardPage = lazy(() => import('./pages/CardPage'));
@@ -143,6 +144,7 @@ export default function App() {
               <Route path="/repas" element={<Repas />} />
               <Route path="/resums" element={<Resums />} />
               <Route path="/diagnostic" element={<Diagnostic />} />
+              <Route path="/quadrant" element={<Quadrant />} />
 
               {/* Acadèmia */}
               <Route path="/academia" element={<Academia />} />

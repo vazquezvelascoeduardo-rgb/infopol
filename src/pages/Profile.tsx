@@ -247,6 +247,34 @@ export default function Profile() {
         )}
       </section>
 
+      {/* El meu quadrant — igual que a l'app, s'hi entra des del perfil */}
+      <button
+        type="button"
+        onClick={() => navigate('/quadrant')}
+        className="v3-card"
+        style={{
+          border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%',
+          background: 'var(--v-ink-fixed)', color: '#fff',
+          display: 'flex', alignItems: 'center', gap: 14,
+          boxShadow: '0 14px 30px rgba(21,21,28,.24)',
+        }}>
+        <span style={{
+          width: 44, height: 44, flexShrink: 0, borderRadius: 14, background: V.terra,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <I n="calendar" size={20} sw={1.9} color="#fff" />
+        </span>
+        <span style={{ flex: 1, minWidth: 0 }}>
+          <span style={{ display: 'block', fontSize: 17, fontWeight: 800, letterSpacing: -0.5 }}>
+            El meu quadrant
+          </span>
+          <span style={{ display: 'block', fontSize: 12.5, color: 'rgba(255,255,255,.65)', marginTop: 4 }}>
+            Els teus torns, mes a mes
+          </span>
+        </span>
+        <I n="arrow" size={16} sw={2.2} color="rgba(255,255,255,.6)" />
+      </button>
+
       {/* Com fa servir InfoPol — ordena la interfície, no dona accés */}
       <section className="v3-card">
         <h2 className="eyebrow mb-4">Com fas servir InfoPol</h2>
