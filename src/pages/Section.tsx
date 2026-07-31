@@ -1,6 +1,6 @@
 // Pàgina d'un mòdul · rebranding 2026.
 // Hero amb stripe del mòdul + llistat de fitxes (.tool-style row).
-import { Link, useParams, useLocation } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { MODULES, getCardsByModule } from '../lib/content';
 import { plural, useT } from '../lib/i18n';
 import { A, Mono } from '../lib/design';
@@ -19,12 +19,9 @@ const MODULE_ACCENT: Record<string, string> = {
 
 export default function Section() {
   const { moduleSlug = '' } = useParams();
-  const location = useLocation();
   const mod = MODULES.find((m) => m.slug === moduleSlug);
   const { t } = useT();
-  // Si venim del temari de l'Acadèmia, els enllaços a les fitxes es queden
-  // dins del marc de l'Acadèmia (no salten al shell d'Operativa).
-  const cardBase = location.pathname.startsWith('/academia/temari') ? '/academia/temari' : '/leyes/s';
+  const cardBase = '/leyes/s';
 
   if (!mod) {
     return (

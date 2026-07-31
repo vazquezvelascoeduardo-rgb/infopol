@@ -149,8 +149,10 @@ export default function App() {
 
               {/* Acadèmia */}
               <Route path="/academia" element={<Academia />} />
-              <Route path="/academia/temari/:moduleSlug" element={<Section />} />
-              <Route path="/academia/temari/:moduleSlug/:slug" element={<CardPage />} />
+              {/* El temari antic vivia també sota /academia/temari, duplicant
+                  les fitxes de lleis. Ja no: qui hi arribi per un enllaç vell
+                  va a parar a la biblioteca, que és on són de debò. */}
+              <Route path="/academia/temari/*" element={<Navigate to="/leyes" replace />} />
               <Route path="/cultura-general" element={<CulturaGeneral />} />
               <Route path="/cultura-general/temari" element={<CulturaTemari />} />
               <Route path="/cultura-general/:slug" element={<TestSession />} />

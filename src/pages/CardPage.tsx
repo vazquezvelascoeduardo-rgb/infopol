@@ -82,8 +82,7 @@ export default function CardPage() {
   const accent = MODULE_ACCENT[mod.slug] ?? 'var(--terracotta-2)';
   // Context: si la fitxa s'obre des del temari de l'Acadèmia, els enllaços
   // de tornada es queden al marc de l'Acadèmia (no salten a Operativa).
-  const inAcademia = location.pathname.startsWith('/academia/temari');
-  const sectionBack = inAcademia ? `/academia/temari/${mod.slug}` : `/leyes/s/${mod.slug}`;
+  const sectionBack = `/leyes/s/${mod.slug}`;
   const { body, lang: bodyLang } = pickBody(card, locale);
   const langMismatch = bodyLang !== locale;
 
