@@ -56,7 +56,7 @@ const AvisLegal = lazy(() => import('./pages/AvisLegal'));
 const Privacitat = lazy(() => import('./pages/Privacitat'));
 const Academia = lazy(() => import('./pages/Academia'));
 const Retos = lazy(() => import('./pages/Retos'));
-const TestList = lazy(() => import('./pages/test/TestList'));
+const ZonaTest = lazy(() => import('./pages/test/ZonaTest'));
 const Debilitats = lazy(() => import('./pages/test/Debilitats'));
 const TestSession = lazy(() => import('./pages/test/TestSession'));
 const Achievements = lazy(() => import('./pages/test/Achievements'));
@@ -67,7 +67,6 @@ const Actualitat = lazy(() => import('./pages/Actualitat'));
 const CulturaTemari = lazy(() => import('./pages/CulturaTemari'));
 const Login = lazy(() => import('./pages/Login'));
 const Profile = lazy(() => import('./pages/Profile'));
-const MossosList = lazy(() => import('./pages/mossos/MossosList'));
 const MossosTemari = lazy(() => import('./pages/mossos/MossosTemari'));
 const MossosTemariAmbit = lazy(() => import('./pages/mossos/MossosTemariAmbit'));
 const MossosTemariTema = lazy(() => import('./pages/mossos/MossosTemariTema'));
@@ -163,7 +162,7 @@ export default function App() {
               {/* Policia Local */}
               <Route path="/policia-local/esquemes" element={<PoliciaLocalEsquemes />} />
               <Route path="/policia-local/esquemes/:slug" element={<PoliciaLocalEsquemaLlei />} />
-              <Route path="/policia-local" element={<TestList />} />
+              <Route path="/policia-local" element={<ZonaTest cos="pl" />} />
               <Route path="/policia-local/debilitats" element={<Debilitats />} />
               <Route path="/policia-local/logros" element={<Achievements />} />
               <Route path="/policia-local/flashcards" element={<Flashcards />} />
@@ -171,7 +170,7 @@ export default function App() {
               <Route path="/policia-local/:slug" element={<TestSession />} />
 
               {/* Mossos */}
-              <Route path="/mossos" element={<MossosList />} />
+              <Route path="/mossos" element={<ZonaTest cos="mossos" />} />
               <Route path="/mossos/flashcards" element={<Flashcards />} />
               <Route path="/mossos/flashcards/:slug" element={<Navigate to="/mossos/flashcards" replace />} />
               <Route path="/mossos/temari" element={<MossosTemari />} />
