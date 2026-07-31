@@ -5,7 +5,7 @@ subtitol: Constitució espanyola de 27 de desembre de 1978 · BOE-A-1978-31229
 ## Estructura de la Constitució
 > Com està ordenada i què hi ha a cada part
 
-La Constitució de 1978 té **169 articles** repartits en un **títol preliminar** i **deu títols**, més quatre disposicions addicionals, nou transitòries, una derogatòria i una final. Saber-ne l'esquelet estalvia molts errors: la protecció d'un dret depèn del lloc exacte on està escrit.
+La Constitució de 1978 té ==**169 articles**== repartits en un ==**títol preliminar** i **deu títols**==, més ==**4 disposicions addicionals, 9 transitòries, 1 derogatòria i 1 final**==. Saber-ne l'esquelet estalvia molts errors: la protecció d'un dret depèn del lloc exacte on està escrit.
 
 - **Títol preliminar** (art. 1-9) — què és l'Estat i quins principis el regeixen.
 - **Títol I** (art. 10-55) — drets i deures fonamentals.
@@ -27,32 +27,32 @@ Dos articles fora del títol I que cauen sempre a les oposicions de policia:
 ## Principis generals de l'Estat
 > Títol preliminar · art. 1 a 9 CE
 
-L'**article 1** conté tres definicions encadenades. L'apartat 1 defineix Espanya com un **Estat social i democràtic de Dret** i proclama quatre **valors superiors** de l'ordenament jurídic: **llibertat, justícia, igualtat i pluralisme polític**. L'apartat 2 situa la **sobirania nacional en el poble espanyol**, del qual emanen els poders de l'Estat. L'apartat 3 fixa la forma política: **monarquia parlamentària**.
+L'**article 1** conté tres definicions encadenades. L'apartat 1 defineix Espanya com un ==**Estat social i democràtic de Dret**== i proclama quatre ==**valors superiors**== de l'ordenament jurídic: ==**llibertat, justícia, igualtat i pluralisme polític**==. L'apartat 2 situa la ==**sobirania nacional en el poble espanyol**==, del qual emanen els poders de l'Estat. L'apartat 3 fixa la forma política: ==**monarquia parlamentària**==.
 
-L'**article 2** conté la tensió que recorre tot el text: es fonamenta en la **indissoluble unitat de la Nació espanyola**, pàtria comuna i indivisible, i alhora **reconeix i garanteix el dret a l'autonomia** de les nacionalitats i regions que la integren, i la solidaritat entre totes elles.
+L'**article 2** conté la tensió que recorre tot el text: es fonamenta en la ==**indissoluble unitat de la Nació espanyola**==, pàtria comuna i indivisible, i alhora ==**reconeix i garanteix el dret a l'autonomia de les nacionalitats i regions**== que la integren, i la solidaritat entre totes elles.
 
-L'**article 3** regula les llengües. El **castellà** és la llengua espanyola oficial de l'Estat: tots els espanyols tenen el **deure de conèixer-la i el dret a usar-la**. Les altres llengües espanyoles són **també oficials** a les respectives comunitats autònomes d'acord amb els seus estatuts. L'apartat 3 declara la riquesa de les modalitats lingüístiques patrimoni cultural objecte d'especial respecte i protecció.
+L'**article 3** regula les llengües. El ==**castellà**== és la llengua espanyola oficial de l'Estat: tots els espanyols tenen el ==**deure de conèixer-la i el dret a usar-la**==. Les altres llengües espanyoles són **també oficials** a les respectives comunitats autònomes d'acord amb els seus estatuts. L'apartat 3 declara la riquesa de les modalitats lingüístiques patrimoni cultural objecte d'especial respecte i protecció.
 
 :::clau
 Fixa't en l'asimetria de l'art. 3.1: del castellà se'n té **deure de conèixer** i **dret a usar**. De les altres llengües oficials, la Constitució només diu que ho són; el deure de conèixer-les no hi surt. És una pregunta clàssica.
 :::
 
-Els articles **4 a 8** completen els símbols i els actors: la **bandera** de tres franges horitzontals — roja, groga i roja, la groga del doble d'amplada (art. 4.1), amb possibilitat de banderes pròpies de les comunitats (art. 4.2); la **capital**, la vila de **Madrid** (art. 5); els **partits polítics**, que expressen el pluralisme polític i han de tenir estructura i funcionament **democràtics** (art. 6); els **sindicats i les associacions empresarials**, amb la mateixa exigència democràtica (art. 7); i les **Forces Armades** (art. 8), formades per Exèrcit de Terra, Armada i Exèrcit de l'Aire, amb la missió de garantir la sobirania i la independència d'Espanya, defensar-ne la integritat territorial i l'ordenament constitucional.
+Els articles **4 a 8** completen els símbols i els actors: la **bandera** de tres franges horitzontals — roja, groga i roja, la groga del doble d'amplada (art. 4.1), amb possibilitat de banderes pròpies de les comunitats (art. 4.2); la ==**capital**, la vila de **Madrid** (art. 5)==; els **partits polítics**, que expressen el pluralisme polític i han de tenir estructura i funcionament **democràtics** (art. 6); els **sindicats i les associacions empresarials**, amb la mateixa exigència democràtica (art. 7); i les ==**Forces Armades** (art. 8)==, formades per Exèrcit de Terra, Armada i Exèrcit de l'Aire, amb la missió de ==garantir la sobirania i la independència d'Espanya==, defensar-ne la integritat territorial i l'ordenament constitucional.
 
-L'**article 9** tanca el títol amb tres apartats de pes desigual. El 9.1 sotmet **ciutadans i poders públics** a la Constitució i a la resta de l'ordenament. El 9.2 encarrega als poders públics **promoure** les condicions perquè la llibertat i la igualtat siguin **reals i efectives** i **remoure els obstacles** que ho impedeixin. El 9.3 és el que més cau: garanteix **set principis**.
+L'**article 9** tanca el títol amb tres apartats de pes desigual. El 9.1 sotmet **ciutadans i poders públics** a la Constitució i a la resta de l'ordenament. El 9.2 encarrega als poders públics **promoure** les condicions perquè la llibertat i la igualtat siguin **reals i efectives** i **remoure els obstacles** que ho impedeixin. El ==**9.3**== és el que més cau: garanteix ==**set principis**==.
 
 :::articles
 art. 1.1 CE | Valors superiors
 Llibertat, justícia, igualtat i pluralisme polític. Estat social i democràtic de Dret.
 
 art. 9.3 CE | Els set principis garantits
-Legalitat · jerarquia normativa · publicitat de les normes · irretroactivitat de les disposicions sancionadores no favorables o restrictives de drets individuals · seguretat jurídica · responsabilitat · interdicció de l'arbitrarietat dels poders públics.
+==Legalitat · jerarquia normativa · publicitat de les normes · irretroactivitat de les disposicions sancionadores no favorables o restrictives de drets individuals · seguretat jurídica · responsabilitat · interdicció de l'arbitrarietat dels poders públics.==
 
 art. 8 CE | Forces Armades
 Exèrcit de Terra, Armada i Exèrcit de l'Aire. Garanteixen sobirania, independència, integritat territorial i ordenament constitucional.
 
 art. 104 CE | Forces i Cossos de Seguretat
-Sota la dependència del Govern. Missió: protegir el lliure exercici dels drets i llibertats i garantir la seguretat ciutadana. Una llei orgànica en fixa funcions, principis bàsics d'actuació i estatuts.
+==Sota la dependència del **Govern**==. Missió: ==**protegir el lliure exercici dels drets i llibertats i garantir la seguretat ciutadana**==. Una ==**llei orgànica**== en fixa funcions, principis bàsics d'actuació i estatuts.
 :::
 
 :::avis
@@ -77,7 +77,7 @@ L'estructura del títol determina el nivell de protecció:
 - **Capítol V** (art. 55) — suspensió.
 
 :::clau
-Els **drets fonamentals en sentit estricte** són l'**art. 14 i la secció 1a (art. 15-29)**. Són els únics que tenen **recurs d'empara** davant del Tribunal Constitucional i procediment preferent i sumari, i els únics que exigeixen **llei orgànica** per desenvolupar-se (art. 81.1).
+Els **drets fonamentals en sentit estricte** són l'==**article 14 i la secció 1a (art. 15-29)**==. Són els únics que tenen ==**recurs d'empara**== davant del Tribunal Constitucional i procediment preferent i sumari, i els únics que exigeixen **llei orgànica** per desenvolupar-se (art. 81.1).
 :::
 
 ## Espanyols, estrangers i igualtat
@@ -85,11 +85,11 @@ Els **drets fonamentals en sentit estricte** són l'**art. 14 i la secció 1a (a
 
 L'**article 11** remet a la llei l'adquisició, conservació i pèrdua de la nacionalitat, però hi posa un límit constitucional: **cap espanyol d'origen pot ser privat de la seva nacionalitat** (11.2). L'apartat 3 permet tractats de doble nacionalitat amb països iberoamericans o vinculats històricament a Espanya.
 
-L'**article 12** és el més curt del títol: **els espanyols són majors d'edat als divuit anys**.
+L'**article 12** és el més curt del títol: ==**els espanyols són majors d'edat als divuit anys**==.
 
 L'**article 13** regula els estrangers. Gaudeixen a Espanya de les llibertats públiques del títol I **en els termes que estableixin els tractats i la llei** (13.1). Només els espanyols són titulars dels drets de l'**art. 23** (participació i accés a càrrecs públics), amb l'excepció del **sufragi actiu i passiu a les eleccions municipals**, que pot estendre's per tractat o llei atenent a criteris de **reciprocitat** (13.2). L'**extradició** només es concedeix en compliment d'un tractat o de la llei, amb reciprocitat, i **queden exclosos els delictes polítics** — precisant que **els actes de terrorisme no es consideren delictes polítics** (13.3). L'apartat 4 remet a la llei el **dret d'asil**.
 
-L'**article 14** proclama que els espanyols són **iguals davant la llei**, sense que pugui prevaler cap discriminació per raó de **naixement, raça, sexe, religió, opinió o qualsevol altra condició o circumstància personal o social**.
+L'**article 14** proclama que els espanyols són ==**iguals davant la llei**==, sense que pugui prevaler cap discriminació per raó de ==**naixement, raça, sexe, religió, opinió o qualsevol altra condició o circumstància personal o social**==.
 
 :::avis
 L'art. 14 **no** és a la secció 1a: està just abans, encapçalant el capítol II. Tot i així, l'art. 53.2 li dona la **mateixa protecció reforçada** que als art. 15-29. Per això es diu sempre "l'article 14 i la secció primera".
@@ -98,17 +98,17 @@ L'art. 14 **no** és a la secció 1a: està just abans, encapçalant el capítol
 ## Drets fonamentals I — vida, llibertat i intimitat
 > Art. 15 a 20 CE · els que toca l'actuació policial
 
-L'**article 15** reconeix el dret **a la vida i a la integritat física i moral**, prohibeix en tot cas la **tortura i les penes o tractes inhumans o degradants** i **aboleix la pena de mort**, llevat del que puguin disposar les lleis penals militars en temps de guerra.
+L'**article 15** reconeix el dret ==**a la vida i a la integritat física i moral**==, prohibeix en tot cas la ==**tortura i les penes o tractes inhumans o degradants**== i ==**aboleix la pena de mort**==, llevat del que puguin disposar les lleis penals militars en temps de guerra.
 
-L'**article 16** garanteix la **llibertat ideològica, religiosa i de culte** dels individus i les comunitats, **sense més limitació en les seves manifestacions que la necessària per al manteniment de l'ordre públic protegit per la llei** (16.1). Ningú pot ser obligat a declarar sobre la seva ideologia, religió o creences (16.2). **Cap confessió tindrà caràcter estatal**, però els poders públics tindran en compte les creences religioses i mantindran relacions de cooperació amb l'Església catòlica i les altres confessions (16.3).
+L'**article 16** garanteix la ==**llibertat ideològica, religiosa i de culte**== dels individus i les comunitats, **sense més limitació en les seves manifestacions que la necessària per al manteniment de l'ordre públic protegit per la llei** (16.1). Ningú pot ser obligat a declarar sobre la seva ideologia, religió o creences (16.2). **Cap confessió tindrà caràcter estatal**, però els poders públics tindran en compte les creences religioses i mantindran relacions de cooperació amb l'Església catòlica i les altres confessions (16.3).
 
 :::clau
 L'**ordre públic protegit per la llei** de l'art. 16.1 és **l'únic límit** que la Constitució posa expressament a la llibertat religiosa, i només a les seves **manifestacions**, no a la creença. És l'exemple típic de límit constitucional exprés.
 :::
 
-L'**article 17** és el nucli de la detenció. Reconeix el dret a la **llibertat i la seguretat** i estableix que ningú pot ser privat de llibertat sinó amb l'observança d'aquest article i en els casos i la forma previstos a la llei (17.1). La **detenció preventiva** no pot durar **més del temps estrictament necessari** per fer les averiguacions tendents a l'esclariment dels fets i, **en tot cas, en el termini màxim de 72 hores**, el detingut ha de ser posat en llibertat o a disposició de l'autoritat judicial (17.2). Tota persona detinguda ha de ser informada **de forma immediata i de manera comprensible** dels seus drets i de les raons de la detenció, **no pot ser obligada a declarar** i se li garanteix **assistència d'advocat** en les diligències policials i judicials (17.3). L'apartat 4 remet a la llei el procediment d'**habeas corpus** i la durada màxima de la presó provisional.
+L'**article 17** és el nucli de la detenció. Reconeix el dret a la **llibertat i la seguretat** i estableix que ningú pot ser privat de llibertat sinó amb l'observança d'aquest article i en els casos i la forma previstos a la llei (17.1). La **detenció preventiva** no pot durar **més del temps estrictament necessari** per fer les averiguacions tendents a l'esclariment dels fets i, ==**en tot cas, en el termini màxim de 72 hores**, el detingut ha de ser posat en **llibertat o a disposició de l'autoritat judicial**== (17.2). Tota persona detinguda ha de ser informada **de forma immediata i de manera comprensible** dels seus drets i de les raons de la detenció, **no pot ser obligada a declarar** i se li garanteix **assistència d'advocat** en les diligències policials i judicials (17.3). L'apartat 4 remet a la llei el procediment d'**habeas corpus** i la durada màxima de la presó provisional.
 
-L'**article 18** protegeix l'esfera privada en quatre apartats. Garanteix l'**honor, la intimitat personal i familiar i la pròpia imatge** (18.1). Declara el **domicili inviolable**: cap entrada ni registre s'hi pot fer **sense consentiment del titular o resolució judicial, llevat de delicte flagrant** (18.2). Garanteix el **secret de les comunicacions**, en especial les postals, telegràfiques i telefòniques, **llevat de resolució judicial** (18.3). I encarrega a la llei limitar l'ús de la informàtica per garantir l'honor i la intimitat (18.4).
+L'**article 18** protegeix l'esfera privada en quatre apartats. Garanteix l'==**honor, la intimitat personal i familiar i la pròpia imatge**== (18.1). Declara el ==**domicili inviolable**==: cap entrada ni registre s'hi pot fer ==**sense consentiment del titular o resolució judicial, llevat de delicte flagrant**== (18.2). Garanteix el ==**secret de les comunicacions**==, en especial les postals, telegràfiques i telefòniques, ==**llevat de resolució judicial**== (18.3). I encarrega a la llei limitar l'ús de la informàtica per garantir l'honor i la intimitat (18.4).
 
 :::articles
 art. 17.2 CE | Durada de la detenció
@@ -130,24 +130,24 @@ Compte amb la diferència entre l'art. 18.2 i el 18.3: al **domicili** hi ha tre
 
 L'**article 19** reconeix als espanyols el dret a **triar lliurement la residència i a circular pel territori nacional**, i a **entrar i sortir lliurement d'Espanya** en els termes que la llei estableixi, **sense que aquest dret es pugui limitar per motius polítics o ideològics**.
 
-L'**article 20** reconeix les llibertats d'expressió i informació: expressar i difondre lliurement pensaments, idees i opinions (20.1.a); la producció i creació literària, artística, científica i tècnica (20.1.b); la **llibertat de càtedra** (20.1.c); i comunicar o rebre lliurement **informació veraç** (20.1.d). L'exercici d'aquests drets **no pot restringir-se mitjançant cap tipus de censura prèvia** (20.2). Tenen el seu límit en els drets del títol I i **especialment en el dret a l'honor, a la intimitat, a la pròpia imatge i a la protecció de la joventut i de la infància** (20.4). I el **segrest de publicacions** i altres mitjans d'informació **només es pot acordar per resolució judicial** (20.5).
+L'**article 20** reconeix les llibertats d'expressió i informació: expressar i difondre lliurement pensaments, idees i opinions (20.1.a); la producció i creació literària, artística, científica i tècnica (20.1.b); la ==**llibertat de càtedra** (20.1.c)==; i comunicar o rebre lliurement ==**informació veraç** (20.1.d)==. L'exercici d'aquests drets **no pot restringir-se mitjançant cap tipus de censura prèvia** (20.2). Tenen el seu límit en els drets del títol I i **especialment en el dret a l'honor, a la intimitat, a la pròpia imatge i a la protecció de la joventut i de la infància** (20.4). I el **segrest de publicacions** i altres mitjans d'informació **només es pot acordar per resolució judicial** (20.5).
 
 ## Drets fonamentals II — reunió, associació i garanties penals
 > Art. 21 a 29 CE
 
-L'**article 21** reconeix el dret de **reunió pacífica i sense armes**, i deixa clar que el seu exercici **no necessita autorització prèvia** (21.1). En els casos de **reunions en llocs de trànsit públic i manifestacions**, es dona **comunicació prèvia** a l'autoritat, que **només les pot prohibir quan hi hagi raons fundades d'alteració de l'ordre públic, amb perill per a persones o béns** (21.2).
+L'**article 21** reconeix el dret de ==**reunió pacífica i sense armes**==, i deixa clar que el seu exercici ==**no necessita autorització prèvia**== (21.1). En els casos de **reunions en llocs de trànsit públic i manifestacions**, es dona **comunicació prèvia** a l'autoritat, que **només les pot prohibir quan hi hagi raons fundades d'alteració de l'ordre públic, amb perill per a persones o béns** (21.2).
 
 :::clau
 Comunicació ≠ autorització. La reunió en lloc de trànsit públic es **comunica**, no es demana permís. I la prohibició no és discrecional: exigeix **raons fundades** d'alteració de l'ordre públic **amb perill per a persones o béns**. És l'article que sustenta tota l'actuació policial en manifestacions.
 :::
 
-L'**article 22** reconeix el dret d'**associació**. Són **il·legals** les associacions que persegueixin fins o utilitzin mitjans **tipificats com a delicte** (22.2); les constituïdes s'han d'inscriure en un registre **als sols efectes de publicitat** (22.3); **només poden ser dissoltes o suspeses en virtut de resolució judicial motivada** (22.4); i queden **prohibides les associacions secretes i les de caràcter paramilitar** (22.5).
+L'**article 22** reconeix el dret d'==**associació**==. Són **il·legals** les associacions que persegueixin fins o utilitzin mitjans **tipificats com a delicte** (22.2); les constituïdes s'han d'inscriure en un registre **als sols efectes de publicitat** (22.3); **només poden ser dissoltes o suspeses en virtut de resolució judicial motivada** (22.4); i queden **prohibides les associacions secretes i les de caràcter paramilitar** (22.5).
 
 L'**article 23** reconeix el dret a **participar en els assumptes públics**, directament o per mitjà de representants lliurement elegits en eleccions periòdiques per sufragi universal (23.1), i a **accedir en condicions d'igualtat a les funcions i càrrecs públics** amb els requisits que assenyalin les lleis (23.2).
 
-L'**article 24** és la garantia processal. L'apartat 1 reconeix el dret a la **tutela judicial efectiva** sense que en cap cas es pugui produir **indefensió**. L'apartat 2 desplega el catàleg: **jutge ordinari predeterminat per la llei**, defensa i assistència de lletrat, ser informat de l'acusació, **procés públic sense dilacions indegudes i amb totes les garanties**, utilitzar els mitjans de prova pertinents, **no declarar contra si mateix**, **no confessar-se culpable** i **presumpció d'innocència**.
+L'**article 24** és la garantia processal. L'apartat 1 reconeix el dret a la ==**tutela judicial efectiva**== sense que en cap cas es pugui produir ==**indefensió**==. L'apartat 2 desplega el catàleg: **jutge ordinari predeterminat per la llei**, defensa i assistència de lletrat, ser informat de l'acusació, **procés públic sense dilacions indegudes i amb totes les garanties**, utilitzar els mitjans de prova pertinents, ==**no declarar contra si mateix**==, ==**no confessar-se culpable**== i ==**presumpció d'innocència**==.
 
-L'**article 25** conté el **principi de legalitat penal i sancionadora**: ningú pot ser condemnat o sancionat per accions o omissions que en el moment de produir-se **no constituïen delicte, falta o infracció administrativa** segons la legislació vigent (25.1). Les penes privatives de llibertat i les mesures de seguretat s'orienten a la **reeducació i reinserció social** i no poden consistir en treballs forçats (25.2). I un límit capital per a l'Administració: **l'Administració civil no pot imposar sancions que, directament o subsidiàriament, impliquin privació de llibertat** (25.3).
+L'**article 25** conté el ==**principi de legalitat penal i sancionadora**==: ningú pot ser condemnat o sancionat per accions o omissions que en el moment de produir-se **no constituïen delicte, falta o infracció administrativa** segons la legislació vigent (25.1). Les penes privatives de llibertat i les mesures de seguretat s'orienten a la **reeducació i reinserció social** i no poden consistir en treballs forçats (25.2). I un límit capital per a l'Administració: ==**l'Administració civil no pot imposar sancions que, directament o subsidiàriament, impliquin privació de llibertat**== (25.3).
 
 :::articles
 art. 21 CE | Reunió
@@ -163,9 +163,9 @@ art. 25.3 CE | Límit a l'Administració
 L'Administració civil no pot imposar sancions que impliquin privació de llibertat.
 :::
 
-L'**article 28** reconeix el dret a **sindicar-se lliurement**, però permet expressament que **la llei limiti o excepcioni** aquest dret **a les Forces o Instituts armats o als altres cossos sotmesos a disciplina militar**, i que reguli les peculiaritats del seu exercici per als funcionaris públics. Ningú pot ser obligat a afiliar-se a un sindicat. L'apartat 2 reconeix el **dret a la vaga** dels treballadors, amb garanties per al manteniment dels **serveis essencials** de la comunitat.
+L'**article 28** reconeix el dret a **sindicar-se lliurement**, però permet expressament que **la llei limiti o excepcioni** aquest dret **a les Forces o Instituts armats o als altres cossos sotmesos a disciplina militar**, i que reguli les peculiaritats del seu exercici per als funcionaris públics. Ningú pot ser obligat a afiliar-se a un sindicat. L'apartat 2 (==**art. 28.2**==) reconeix el ==**dret a la vaga**== dels treballadors, amb garanties per al manteniment dels ==**serveis essencials**== de la comunitat.
 
-L'**article 29** reconeix el dret de **petició** individual i col·lectiva, **per escrit**. Els membres de les Forces o Instituts armats o de cossos sotmesos a disciplina militar només el poden exercir **individualment** i d'acord amb la seva legislació específica.
+L'**article 29** reconeix el dret de ==**petició** individual i col·lectiva, **per escrit**==. Els membres de les Forces o Instituts armats o de cossos sotmesos a disciplina militar només el poden exercir **individualment** i d'acord amb la seva legislació específica.
 
 :::clau
 Els art. 28.1 i 29.2 són els dos únics llocs del títol I on la Constitució **preveu expressament un règim distint per als cossos armats**. Per a una oposició de policia, són preguntes gairebé segures.
@@ -215,16 +215,63 @@ L'**article 55** regula la suspensió i distingeix dos supòsits que no s'han de
 L'**estat d'alarma no suspèn** drets fonamentals: només els pot limitar. La suspensió de l'art. 55.1 exigeix estat d'**excepció o de setge**. I fixa't que l'art. 55.1 **no inclou** l'art. 15 (vida) ni l'art. 24 (tutela judicial): aquests **no es poden suspendre mai**.
 :::
 
+## Les institucions de l'Estat
+> Títols II a VI i IX · les dades que cauen als tests
+
+Encara que el gruix del temari sigui el títol I i el títol VIII, els exàmens pregunten sistemàticament un grapat de dades de la resta de la Constitució. Aquestes són:
+
+:::articles
+La Corona | Títol II
+El ==**Rei és el cap de l'Estat**== (art. 56). ==**Sanciona i promulga les lleis en el termini de 15 dies**== (arts. 62.a i 91). Li correspon ==convocar i dissoldre les Corts==, ==proposar el candidat a president del Govern i nomenar-lo==, ==nomenar i separar els membres del Govern a proposta del president==, el ==comandament suprem de les Forces Armades== i ==**declarar la guerra i fer la pau, prèvia autorització de les Corts Generals**== (art. 63.3). La ==**successió** segueix l'ordre de **primogenitura i representació**, preferint la **línia anterior a les posteriors**; en el mateix grau, ==**el baró a la dona**==; i en el mateix sexe, la persona de més edat (art. 57.1).
+
+Les Corts Generals | Títol III
+Formades pel ==**Congrés dels Diputats i el Senat**== (art. 66). El Congrés es compon d'un ==**mínim de 300 i un màxim de 400 diputats**== (a la pràctica, ==**350**==), elegits per ==quatre anys== (art. 68). El ==**Senat és la cambra de representació territorial**== (art. 69). La ==**iniciativa legislativa popular exigeix 500.000 signatures**== acreditades i ==**no pot versar sobre matèries pròpies de llei orgànica, tributàries, de caràcter internacional ni sobre la prerrogativa de gràcia**== (art. 87.3).
+
+El decret llei | art. 86
+En cas d'==extraordinària i urgent necessitat==. ==**No pot afectar** les institucions bàsiques de l'Estat, els drets, deures i llibertats del títol I, el règim de les comunitats autònomes ni el dret electoral general==. S'ha de sotmetre a debat i votació de totalitat del Congrés ==**en el termini de 30 dies**== per convalidar-lo o derogar-lo.
+
+Govern i Corts | Títol V
+==**Moció de censura**== (art. 113): té caràcter ==**constructiu**== — ha d'==**incloure un candidat a president**==, ser proposada per ==**almenys una desena part dels diputats**== i aprovar-se per ==**majoria absoluta**== del Congrés. No es pot votar fins que passin ==5 dies== des de la presentació. ==**Qüestió de confiança**== (art. 112): la planteja el ==**president del Govern**, prèvia deliberació del Consell de Ministres==, i s'entén atorgada per ==**majoria simple**==.
+
+Estats excepcionals | art. 116
+==**Alarma**: el declara el **Govern** per un termini màxim de **15 dies**==, donant compte al Congrés, sense l'autorització del qual no es pot prorrogar.
+==**Excepció**: el declara el **Govern amb autorització prèvia del Congrés**, per un màxim de **30 dies prorrogables per un altre termini igual**==.
+==**Setge**: el declara la **majoria absoluta del Congrés dels Diputats, a proposta exclusiva del Govern**==.
+
+Poder judicial | Títol VI
+La ==**justícia emana del poble**== (art. 117.1). El ==**Tribunal Suprem** és l'**òrgan jurisdiccional superior en tots els ordres**, llevat del que disposi la matèria de garanties constitucionals== (art. 123). El ==**Consell General del Poder Judicial és l'òrgan de govern del poder judicial**== (art. 122.2).
+
+Tribunal Constitucional | Títol IX
+Es compon de ==**12 membres nomenats pel Rei**==: ==**4 a proposta del Congrés per majoria de 3/5**==, ==**4 a proposta del Senat amb idèntica majoria**==, ==**2 a proposta del Govern**== i ==**2 a proposta del CGPJ**==. Es designen per ==**9 anys**== i ==**es renoven per terceres parts cada 3 anys**==. El ==president el nomena el Rei entre els seus membres, a proposta del Ple, per **3 anys**==.
+
+Reforma constitucional | Títol X
+==**Ordinària (art. 167)**: aprovació per **3/5 de cada cambra**==; referèndum ==**només si el demana una desena part dels membres de qualsevol cambra dins dels 15 dies següents**==.
+==**Agravada (art. 168)**: per a la **revisió total** o la que afecti el **títol preliminar**, la **secció 1a del capítol II del títol I** o el **títol II** — aprovació de principi per **2/3 de cada cambra**, **dissolució immediata de les Corts**, **ratificació per les noves Corts i aprovació per 2/3**, i **referèndum obligatori**==.
+:::
+
+:::clau
+Les majories i els terminis són el que decideix aquestes preguntes. Agrupa'ls així:
+· ==**15 dies**: sanció de les lleis pel Rei · durada màxima de l'estat d'alarma.==
+· ==**30 dies**: convalidació del decret llei · durada de l'estat d'excepció.==
+· ==**3/5**: reforma ordinària i proposta parlamentària de magistrats del TC.==
+· ==**2/3**: reforma agravada.==
+· ==**Majoria absoluta**: moció de censura i declaració de l'estat de setge.==
+:::
+
+:::avis
+Dos errors molt repetits: el ==**Tribunal Constitucional té 12 membres, no 15**== (15 anys és l'exercici professional mínim que se'ls exigeix, i d'aquí ve la confusió); i el ==**Defensor del Poble** és **alt comissionat de les Corts Generals i el designen elles**==, ==**no** el nomena el Rei a proposta del president del Govern==.
+:::
+
 ## Títol VIII — Principis generals i Administració local
 > Art. 137 a 142 CE
 
-L'**article 137** és la peça de volta de tot el títol: l'Estat s'organitza territorialment en **municipis, províncies i comunitats autònomes**, i **totes gaudeixen d'autonomia per a la gestió dels seus respectius interessos**.
+L'**article 137** és la peça de volta de tot el títol: l'Estat s'organitza territorialment en ==**municipis, províncies i comunitats autònomes**==, i ==**totes gaudeixen d'autonomia per a la gestió dels seus respectius interessos**==.
 
 L'**article 138** garanteix el principi de **solidaritat** de l'art. 2, vetllant per un equilibri econòmic adequat i just entre les parts del territori i atenent en particular les circumstàncies del **fet insular**; les diferències entre estatuts **no poden implicar privilegis econòmics o socials** (138.2).
 
 L'**article 139** estableix que tots els espanyols tenen **els mateixos drets i obligacions a qualsevol part del territori** (139.1) i prohibeix a **qualsevol autoritat** adoptar mesures que obstaculitzin, directament o indirecta, la **llibertat de circulació i establiment** de persones i la lliure circulació de béns (139.2).
 
-L'**article 140** garanteix l'**autonomia dels municipis**, els reconeix **personalitat jurídica plena** i atribueix el seu govern i administració als **ajuntaments**, integrats per **alcaldes i regidors**. Els **regidors** s'elegeixen pels veïns mitjançant **sufragi universal, igual, lliure, directe i secret**; els **alcaldes**, **pels regidors o pels veïns**. La llei regula el règim de **consell obert**.
+L'**article 140** garanteix l'==**autonomia dels municipis**==, els reconeix ==**personalitat jurídica plena**== i atribueix el seu govern i administració als ==**ajuntaments**, integrats per **alcaldes i regidors**==. Els **regidors** s'elegeixen pels veïns mitjançant **sufragi universal, igual, lliure, directe i secret**; els **alcaldes**, **pels regidors o pels veïns**. La llei regula el règim de **consell obert**.
 
 L'**article 141** defineix la **província** com a **entitat local amb personalitat jurídica pròpia**, determinada per l'agrupació de municipis i divisió territorial per al compliment de les activitats de l'Estat. L'**article 142** exigeix que les **hisendes locals** disposin de **mitjans suficients** per exercir les seves funcions.
 
@@ -239,7 +286,7 @@ art. 141 CE | La província
 Entitat local amb personalitat jurídica pròpia, agrupació de municipis i divisió territorial per a les activitats de l'Estat.
 
 art. 149.1.29a CE | Seguretat pública
-Competència exclusiva de l'Estat, sens perjudici de la creació de policies per les comunitats autònomes en la forma que estableixin els estatuts i el marc d'una llei orgànica.
+==Competència **exclusiva de l'Estat**==, sens perjudici de la ==creació de policies per les comunitats autònomes== en la forma que estableixin els estatuts i el marc d'una llei orgànica.
 :::
 
 ## Títol VIII — Comunitats autònomes
