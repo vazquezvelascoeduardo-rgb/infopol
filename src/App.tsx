@@ -29,6 +29,9 @@ import ProgressSync from './components/ProgressSync';
 import GdprBanner from './components/GdprBanner';
 
 const Inici = lazy(() => import('./pages/Inici'));
+const Estudi = lazy(() => import('./pages/Estudi'));
+const EstudiModul = lazy(() => import('./pages/EstudiModul'));
+const EstudiDoc = lazy(() => import('./pages/EstudiDoc'));
 const Leyes = lazy(() => import('./pages/Leyes'));
 const Section = lazy(() => import('./pages/Section'));
 const CardPage = lazy(() => import('./pages/CardPage'));
@@ -129,6 +132,11 @@ export default function App() {
               <Route path="/leyes/s/:moduleSlug" element={<Section />} />
               <Route path="/leyes/s/:moduleSlug/:slug" element={<CardPage />} />
               <Route path="/recursos" element={<Recursos />} />
+
+              {/* Mode estudi — el temari amb subratllats, com a l'app */}
+              <Route path="/estudi" element={<Estudi />} />
+              <Route path="/estudi/:moduleSlug" element={<EstudiModul />} />
+              <Route path="/estudi/:moduleSlug/:slug" element={<EstudiDoc />} />
 
               {/* Acadèmia */}
               <Route path="/academia" element={<Academia />} />

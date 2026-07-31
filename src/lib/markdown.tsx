@@ -141,3 +141,87 @@ export function Markdown({ source }: { source: string }) {
     </Fragment>
   );
 }
+
+/**
+ * El mateix Markdown, però a HTML en text.
+ *
+ * El lector del mode estudi necessita HTML de veritat, no JSX: hi ha
+ * d'anar tallant nodes de text per pintar-hi els subratllats, i això no
+ * es pot fer sobre un arbre que React torna a dibuixar. Cada bloc de
+ * primer nivell d'aquest HTML és una unitat ancorable — el mateix
+ * criteri que fa servir l'app.
+ */
+export function mdToHtml(source: string): string {
+  const esc = (t: string) =>
+    t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  // Format en línia. S'escapa PRIMER i després es posen les etiquetes,
+  // perquè el contingut de les fitxes no pugui injectar HTML pel seu compte.
+  const inline = (t: string) =>
+    esc(t)
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>');
+
+  const linies = source.replace(/\r\n/g, '\n').split('\n');
+  const out: string[] = [];
+  let i = 0;
+
+  while (i < linies.length) {
+    const l = linies[i];
+
+    if (/^\s*$/.test(l)) { i++; continue; }
+
+    // Separador
+    if (/^\s*---+\s*$/.test(l)) { out.push('<hr>'); i++; continue; }
+
+    // Encapçalaments
+    const h = l.match(/^(#{1,6})\s+(.*)$/);
+    if (h) {
+      const n = h[1].length;
+      out.push(`<h${n}>${inline(h[2].trim())}</h${n}>`);
+      i++;
+      continue;
+    }
+
+    // Cita
+    if (/^\s*>\s?/.test(l)) {
+      const buf: string[] = [];
+      while (i < linies.length && /^\s*>\s?/.test(linies[i])) {
+        buf.push(linies[i].replace(/^\s*>\s?/, ''));
+        i++;
+      }
+      out.push(`<blockquote>${inline(buf.join(' '))}</blockquote>`);
+      continue;
+    }
+
+    // Llistes
+    const ordenada = /^\s*\d+[.)]\s+/.test(l);
+    const sensOrdre = /^\s*[-*+]\s+/.test(l);
+    if (ordenada || sensOrdre) {
+      const tag = ordenada ? 'ol' : 'ul';
+      const re = ordenada ? /^\s*\d+[.)]\s+/ : /^\s*[-*+]\s+/;
+      const items: string[] = [];
+      while (i < linies.length && re.test(linies[i])) {
+        items.push(`<li>${inline(linies[i].replace(re, ''))}</li>`);
+        i++;
+      }
+      out.push(`<${tag}>${items.join('')}</${tag}>`);
+      continue;
+    }
+
+    // Paràgraf: línies seguides fins a la següent en blanc.
+    const buf: string[] = [];
+    while (i < linies.length && !/^\s*$/.test(linies[i])
+      && !/^(#{1,6})\s/.test(linies[i]) && !/^\s*[-*+]\s/.test(linies[i])
+      && !/^\s*\d+[.)]\s/.test(linies[i]) && !/^\s*>/.test(linies[i])
+      && !/^\s*---+\s*$/.test(linies[i])) {
+      buf.push(linies[i].trim());
+      i++;
+    }
+    if (buf.length) out.push(`<p>${inline(buf.join(' '))}</p>`);
+  }
+
+  return out.join('\n');
+}

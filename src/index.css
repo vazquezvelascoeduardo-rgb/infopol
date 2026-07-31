@@ -6763,3 +6763,56 @@ html[data-text-size="lg"] { font-size: 18px; }
 @media (max-width: 900px) {
   .ipc-eines { display: none !important; }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   MODE ESTUDI — el lector amb subratllats
+   ════════════════════════════════════════════════════════════════════ */
+.estudi-cos {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--v-ink);
+  max-width: 720px;
+}
+.estudi-cos > * { margin: 0 0 1em; }
+.estudi-cos h1, .estudi-cos h2, .estudi-cos h3 {
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin: 1.6em 0 0.6em;
+}
+.estudi-cos h1 { font-size: 26px; }
+.estudi-cos h2 { font-size: 21px; }
+.estudi-cos h3 { font-size: 17px; }
+.estudi-cos ul, .estudi-cos ol { padding-left: 1.3em; }
+.estudi-cos li { margin-bottom: 0.4em; }
+.estudi-cos table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92em;
+  display: block;
+  overflow-x: auto;
+}
+.estudi-cos th, .estudi-cos td {
+  border: 1px solid var(--v-border);
+  padding: 7px 10px;
+  text-align: left;
+}
+.estudi-cos blockquote {
+  padding-left: 14px;
+  border-left: 3px solid var(--v-border);
+  color: var(--v-muted);
+}
+/* Seleccionar text ha de ser còmode: sense això el doble clic al mòbil
+   arrossega la pàgina en comptes de marcar. */
+.estudi-llegir { user-select: text; -webkit-user-select: text; }
+
+/* Repàs: s'apaga tot menys els blocs que tenen subratllat. */
+.estudi-repas .bloc { opacity: 0.28; transition: opacity 0.2s; }
+.estudi-repas .bloc.te-hl { opacity: 1; }
+
+/* Oclusió: el subratllat surt tapat fins que el toques. */
+.estudi-oclusio mark.hl {
+  color: transparent !important;
+  border-radius: 4px;
+}
+.estudi-oclusio mark.hl.destapat { color: inherit !important; }

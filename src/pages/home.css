@@ -80,7 +80,7 @@
 }
 .lp-links a:hover { background: rgba(21, 21, 28, 0.05); color: var(--lpInk); }
 .lp-dot { width: 6px; height: 6px; border-radius: 99px; background: var(--lpTerra); flex-shrink: 0; }
-.lp-navcta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.lp-navcta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; margin-left: auto; }
 .lp-navcta > * { flex-shrink: 0; }
 .lp-burger {
   display: none; width: 42px; height: 42px; border: 1px solid var(--lpLine2);
@@ -284,7 +284,6 @@
 @media (max-width: 1060px) {
   .lp-links { display: none; }
   .lp-burger { display: flex; }
-  .lp-navcta .lp-btn-g { display: none; }
 }
 @media (max-width: 920px) {
   .lp-appb { justify-content: center; }

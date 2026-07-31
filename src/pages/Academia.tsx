@@ -11,6 +11,7 @@ import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { TOPICS, getTopicsByCategory } from '../data/tests';
+import { MODULES } from '../lib/content';
 import { useFailuresCounts } from '../lib/failures';
 import { globalAverage, useGlobalStats } from '../lib/testStats';
 import { useAuth } from '../lib/auth';
@@ -35,27 +36,52 @@ type Mode = {
   modul?: ModulPro;
 };
 
-function modes(cos: Cos, pendents: number): Mode[] {
-  const base = cos === 'mossos' ? '/mossos' : '/policia-local';
+/**
+ * Les cinc maneres d'estudiar. Són exactament les de l'app mòbil —
+ * mateixos títols, mateix ordre i mateixos destins — perquè qui faci
+ * servir les dues no hagi d'aprendre-se-les dues vegades.
+ */
+function modes(cos: Cos, lleis: number): Mode[] {
   return [
     {
       titol: 'Estudia per tema',
-      sub: 'El temari sencer, tema a tema',
+      sub: 'Temari complet amb subratllats i repàs',
       icona: 'book',
-      to: cos === 'mossos' ? '/mossos/temari' : '/leyes',
-      destacat: true,
+      insignia: `${lleis} LLEIS`,
+      to: '/estudi',
       modul: 'temari-complet',
     },
-    { titol: 'Test', sub: "Posa't a prova per temes", icona: 'check', to: base },
     {
       titol: 'Repàs intel·ligent',
-      sub: 'Torna a les que has fallat',
+      sub: 'El sistema et diu què toca repassar avui',
       icona: 'brain',
-      to: '/policia-local/debilitats',
-      insignia: pendents > 0 ? String(pendents) : undefined,
+      insignia: 'DIARI',
+      to: '/repas',
     },
-    { titol: 'Resums i esquemes', sub: 'Les lleis en una pàgina', icona: 'layers', to: `${base}/esquemes`, modul: 'esquemes' },
-    { titol: 'Flashcards', sub: 'Memoritza articles i xifres', icona: 'cards', to: `${base}/flashcards`, modul: 'flashcards' },
+    {
+      titol: 'Test',
+      sub: 'Tria tema i comença en dos tocs',
+      icona: 'check',
+      insignia: 'TESTS',
+      destacat: true,
+      to: cos === 'mossos' ? '/mossos' : '/policia-local',
+    },
+    {
+      titol: 'Resums i esquemes',
+      sub: 'El temari condensat, per repassar de pressa',
+      icona: 'layers',
+      insignia: 'PL · MOSSOS',
+      to: '/resums',
+      modul: 'esquemes',
+    },
+    {
+      titol: 'Diagnòstic per tema',
+      sub: "Detecta on fluixeges abans de l'examen",
+      icona: 'chart',
+      insignia: 'PROGRÉS',
+      to: '/diagnostic',
+      modul: 'diagnostic',
+    },
   ];
 }
 
@@ -258,7 +284,7 @@ export default function Academia() {
 
           <div style={{ fontSize: 17, fontWeight: 800, letterSpacing: -0.5 }}>Com vols estudiar</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 14 }}>
-            {modes(cos, failures.due).map((m) => {
+            {modes(cos, MODULES.length).map((m) => {
               const tancat = !!m.modul && esBloquejat(m.modul, pla);
               return (
                 <TargetaMode

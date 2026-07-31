@@ -92,42 +92,120 @@ export function Ic({ name, size = 22, color = 'currentColor', sw = 2, fill = fal
   }
 }
 
-/* ── Àtoms ── */
+/* ── Àtoms ──
+   Aquestes cinc peces les fan servir totes les pàgines interiors
+   (lleis, tests, esquemes, recursos, mossos…). Per això el disseny v3
+   s'aplica AQUÍ i no pàgina per pàgina: canviant-les, tot l'interior
+   passa al llenguatge nou de cop i amb la mateixa coherència. */
+
 export function Mono({ children, color, size = 11, style = {} }: { children: ReactNode; color?: string; size?: number; style?: CSSProperties }) {
   return <span style={{ fontFamily: A.mono, fontWeight: 600, fontSize: size, letterSpacing: 1.2, textTransform: 'uppercase', color: color || A.inkMuted, ...style }}>{children}</span>;
 }
 
-export function Card({ children, pad = 20, style = {}, onClick, hover = false, className = '' }: { children: ReactNode; pad?: number; style?: CSSProperties; onClick?: () => void; hover?: boolean; className?: string }) {
-  return <div onClick={onClick} className={`${hover ? 'a-hover' : ''} ${className}`.trim()} style={{ background: A.card, borderRadius: A.rlg, padding: pad, boxShadow: A.shadow, border: `1px solid ${A.line}`, cursor: onClick ? 'pointer' : 'default', ...style }}>{children}</div>;
-}
-
-// Capçalera de pàgina: eyebrow (mono) + títol gran + descripció.
-export function PageHead({ kicker, title, desc, accent = A.terracota, align = 'left' }: { kicker?: string; title: string; desc?: ReactNode; accent?: string; align?: 'left' | 'center' }) {
+/**
+ * Targeta v3: blanca, cantonada de 24 i ombra suau. Sense vora — la
+ * vora i l'ombra alhora embrutaven, i el disseny fa servir només ombra.
+ */
+export function Card({ children, pad = 22, style = {}, onClick, hover = false, className = '' }: { children: ReactNode; pad?: number; style?: CSSProperties; onClick?: () => void; hover?: boolean; className?: string }) {
   return (
-    <div style={{ marginBottom: 24, textAlign: align, maxWidth: align === 'center' ? 720 : undefined, marginLeft: align === 'center' ? 'auto' : undefined, marginRight: align === 'center' ? 'auto' : undefined }}>
-      {kicker && <Mono color={accent} style={{ letterSpacing: 1.4 }}>{kicker}</Mono>}
-      <h1 style={{ margin: kicker ? '8px 0 0' : 0, fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(26px,3.6vw,40px)', letterSpacing: -1.2, color: A.ink, lineHeight: 1.08 }}>{title}</h1>
-      {desc && <p style={{ margin: '10px 0 0', fontFamily: A.sans, fontSize: 16, color: A.inkSoft, maxWidth: 620, lineHeight: 1.5, marginLeft: align === 'center' ? 'auto' : undefined, marginRight: align === 'center' ? 'auto' : undefined }}>{desc}</p>}
+    <div
+      onClick={onClick}
+      className={`${hover ? 'a-hover' : ''} ${className}`.trim()}
+      style={{
+        background: A.card, borderRadius: 24, padding: pad, boxShadow: A.shadow,
+        cursor: onClick ? 'pointer' : 'default', ...style,
+      }}>
+      {children}
     </div>
   );
 }
 
-// Botó sòlid amb accent (per a CTAs).
+/**
+ * Capçalera de pàgina v3.
+ *
+ * El titular va en dos pesos: gris fi per al context i negre gruixut per
+ * a la paraula que importa. Si es passa `kicker`, va a sobre en mono,
+ * però discret — al disseny els kickers no criden.
+ */
+export function PageHead({ kicker, title, desc, accent = A.terraInk, align = 'left' }: { kicker?: string; title: string; desc?: ReactNode; accent?: string; align?: 'left' | 'center' }) {
+  // "Lleis i normativa" → "Lleis" fort + " i normativa" fi.
+  const tall = title.indexOf(' ');
+  const fort = tall > 0 ? title.slice(0, tall) : title;
+  const resta = tall > 0 ? title.slice(tall) : '';
+  return (
+    <div style={{
+      marginBottom: 22, textAlign: align,
+      maxWidth: align === 'center' ? 720 : undefined,
+      marginLeft: align === 'center' ? 'auto' : undefined,
+      marginRight: align === 'center' ? 'auto' : undefined,
+    }}>
+      {kicker && <Mono color={accent} size={9.5} style={{ letterSpacing: 1.6, display: 'block', marginBottom: 8 }}>{kicker}</Mono>}
+      <h1 style={{
+        margin: 0, fontFamily: A.display, fontWeight: 400, color: A.inkMuted,
+        fontSize: 'clamp(25px,3.4vw,32px)', letterSpacing: -1.5, lineHeight: 1.08,
+      }}>
+        <span style={{ fontWeight: 800, color: A.ink }}>{fort}</span>{resta}
+      </h1>
+      {desc && (
+        <p style={{
+          margin: '8px 0 0', fontFamily: A.sans, fontSize: 13.5, color: A.inkMuted,
+          maxWidth: 620, lineHeight: 1.5,
+          marginLeft: align === 'center' ? 'auto' : undefined,
+          marginRight: align === 'center' ? 'auto' : undefined,
+        }}>
+          {desc}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/** Botó v3: píndola de tinta plena, sense ombra de color. */
 export function Btn({ children, onClick, type = 'button', tone = A.ink, fg = '#fff', icon, full = false, style = {} }: { children: ReactNode; onClick?: () => void; type?: 'button' | 'submit'; tone?: string; fg?: string; icon?: string; full?: boolean; style?: CSSProperties }) {
   return (
-    <button type={type} onClick={onClick} className="a-btn" style={{ display: 'inline-flex', width: full ? '100%' : undefined, justifyContent: 'center', alignItems: 'center', gap: 9, background: tone, color: fg, border: 'none', cursor: 'pointer', borderRadius: 14, padding: '13px 22px', fontFamily: A.display, fontWeight: 700, fontSize: 15, boxShadow: A.shadowMd, ...style }}>
+    <button
+      type={type}
+      onClick={onClick}
+      className="a-btn"
+      style={{
+        display: 'inline-flex', width: full ? '100%' : undefined, justifyContent: 'center',
+        alignItems: 'center', gap: 9, background: tone, color: fg, border: 'none',
+        cursor: 'pointer', borderRadius: 999, padding: '13px 22px',
+        fontFamily: A.display, fontWeight: 700, fontSize: 14.5, ...style,
+      }}>
       {children}{icon && <Ic name={icon} size={17} color={fg} sw={2.3} />}
     </button>
   );
 }
 
-// Píndola/etiqueta petita amb to.
+/** Píndola d'etiqueta v3: sense mono ni versaletes, com al disseny. */
 export function Chip({ children, tone = 'blue', solid = false }: { children: ReactNode; tone?: string; solid?: boolean }) {
   const k = toneOf(tone);
-  return <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: solid ? k.solid : k.soft, color: solid ? '#fff' : k.ink, fontFamily: A.mono, fontWeight: 600, fontSize: 11, letterSpacing: 0.6, padding: '5px 11px', borderRadius: 999 }}>{children}</span>;
+  return (
+    <span style={{
+      display: 'inline-flex', alignItems: 'center', gap: 6,
+      background: solid ? k.solid : k.soft, color: solid ? '#fff' : k.ink,
+      fontFamily: A.sans, fontWeight: 700, fontSize: 11.5,
+      padding: '6px 13px', borderRadius: 999, whiteSpace: 'nowrap',
+    }}>
+      {children}
+    </span>
+  );
 }
 
-// Contenidor d'amplada llegible centrat (per a pàgines de contingut).
-export function Shell({ children, max = 1080, style = {} }: { children: ReactNode; max?: number; style?: CSSProperties }) {
-  return <div style={{ width: '100%', maxWidth: max, margin: '0 auto', padding: 'clamp(18px,3vw,30px) clamp(16px,4vw,24px) 48px', ...style }}>{children}</div>;
+/**
+ * Contenidor de pàgina.
+ *
+ * Ja no centra amb marge propi: dins del marc v3 el contingut comença on
+ * comença la resta de pantalles, amb el mateix padding. Així una fitxa de
+ * llei i la pantalla d'Acadèmia queden alineades.
+ */
+export function Shell({ children, max = 1100, style = {} }: { children: ReactNode; max?: number; style?: CSSProperties }) {
+  return (
+    <div
+      className="v3-page v3-anim"
+      style={{ width: '100%', maxWidth: max, margin: '0 auto', ...style }}>
+      {children}
+    </div>
+  );
 }
