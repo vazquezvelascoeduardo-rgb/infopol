@@ -141,9 +141,9 @@ const lopsc: TestTopic = {
     {
       id: 'lopsc-12',
       text: 'El termini de prescripció de les infraccions MOLT GREUS és de:',
-      options: ['3 anys.', '1 any.', '6 mesos.', '5 anys.'],
+      options: ['2 anys.', '1 any.', '6 mesos.', '3 anys.'],
       correct: 0,
-      reference: 'Art. 38',
+      reference: 'Art. 38.1',
     },
     {
       id: 'lopsc-13',
@@ -953,7 +953,7 @@ const lopsc: TestTopic = {
         'sis mesos',
         'tres anys',
       ],
-      correct: 3,
+      correct: 1,
     },
     {
       id: 'lopsc-85',
@@ -964,7 +964,7 @@ const lopsc: TestTopic = {
         'dos anys',
         'un any',
       ],
-      correct: 2,
+      correct: 3,
     },
     {
       id: 'lopsc-86',

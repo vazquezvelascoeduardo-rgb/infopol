@@ -262,6 +262,65 @@ Ocupar qualsevol immoble, habitatge o edifici aliè, o romandre-hi, contra la vo
 Compara els dos **feixos de llum**: el **35.4** (molt greu) és contra **pilots o conductors** i pot provocar accidents; el **37.6** (lleu) és contra **agents** per dificultar-los la feina. Mateix mitjà, gravetat molt distinta segons a qui s'apunta i quin risc genera.
 :::
 
+## Òrgans competents per sancionar
+> Article 32
+
+L'**article 32.1** reparteix la competència dins de l'Administració General de l'Estat:
+
+:::articles
+Ministre de l'Interior | art. 32.1.a
+Sanció de les infraccions ==molt greus en grau màxim==.
+
+Secretari d'Estat de Seguretat | art. 32.1.b
+Sanció de les infraccions ==molt greus en grau mitjà i en grau mínim==.
+
+Delegats del Govern | art. 32.1.c
+Sanció de les infraccions ==greus i lleus==.
+
+Comunitats autònomes | art. 32.2
+Les autoritats autonòmiques, en l'àmbit de les seves competències en seguretat ciutadana.
+
+Alcaldes | art. 32.3
+Quan les infraccions ==es cometin en espais públics municipals o afectin béns de titularitat local==, si en tenen competència.
+:::
+
+:::clau
+El repartiment estatal segueix el **grau**, no només la classe: el **ministre** només sanciona les molt greus **en grau màxim**; les molt greus de grau **mitjà i mínim** són del **Secretari d'Estat**. Les **greus i lleus**, dels **delegats del Govern**.
+:::
+
+## Prescripció
+> Articles 38 i 40
+
+Aquí hi ha dues escales distintes que **no s'han de barrejar mai**: una per a les **infraccions** i una altra per a les **sancions**.
+
+:::articles
+Prescripció d'INFRACCIONS | art. 38.1
+Lleus: ==6 mesos== · Greus: ==1 any== · Molt greus: ==2 anys==. Es compten des del dia en què s'ha comès la infracció.
+
+Prescripció de SANCIONS | art. 40.1
+Lleus: ==1 any== · Greus: ==2 anys== · Molt greus: ==3 anys==. Es compten des de l'endemà que la resolució adquireix fermesa en via administrativa.
+:::
+
+:::avis
+Aquesta és **la confusió més perillosa de tot el tema**, perquè les dues escales comparteixen números (1 any, 2 anys) però desplaçats un graó:
+· **Infraccions**: 6 mesos · 1 any · 2 anys.
+· **Sancions**: 1 any · 2 anys · 3 anys.
+Els **3 anys** només existeixen a les **sancions** per infracció molt greu. Si una pregunta diu que una infracció molt greu prescriu als 3 anys, és **falsa**.
+:::
+
+El còmput de les infraccions (art. 38.2) es fa des del dia en què es va cometre; en les **infraccions continuades** des del dia de l'**última infracció**, i en les de **efectes permanents** des que **s'ha eliminat la situació il·lícita**. La prescripció **s'interromp** per qualsevol actuació administrativa amb coneixement formal de l'interessat, i es **reprèn** si el procediment queda paralitzat més d'un mes per causa no imputable al presumpte responsable.
+
+## El Document Nacional d'Identitat
+> Articles 8 a 13
+
+L'**article 8** configura el DNI com el document públic que ==acredita la identitat i les dades personals del titular, i la nacionalitat espanyola==. La seva obtenció és ==obligatòria a partir dels catorze anys==, tot i que es pot obtenir voluntàriament abans.
+
+El DNI té ==suficiència per acreditar la identitat i les dades personals== del titular davant de qualsevol persona o entitat, pública o privada.
+
+:::clau
+Dues dades del DNI que es pregunten sempre: ==obligatori des dels 14 anys== i ==acredita identitat, dades personals i nacionalitat espanyola==. Es confon amb l'edat de la majoria d'edat (18, art. 12 CE) i amb la de responsabilitat penal del menor (14, LO 5/2000) — aquesta última coincideix per casualitat.
+:::
+
 :::avis
 Aquest material d'estudi s'ha elaborat a partir del **text consolidat publicat al BOE** (BOE-A-2015-3442). **No és una font oficial**: per a qualsevol actuació professional, consulta sempre el text vigent al BOE.
 :::

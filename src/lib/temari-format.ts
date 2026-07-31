@@ -67,9 +67,18 @@ function esc(t: string): string {
   return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-/** Negreta, cursiva, codi i enllaços. S'escapa primer. */
+/**
+ * Format en línia: negreta, cursiva, codi, enllaços i marcador.
+ *
+ * El marcador `==així==` pinta el text com si l'haguessis repassat amb
+ * un retolador. Es reserva per al que cau a l'examen: si es marca tot,
+ * no destaca res.
+ *
+ * S'escapa primer, sempre: el contingut no ha de poder injectar HTML.
+ */
 function inline(t: string): string {
   return esc(t)
+    .replace(/==([^=]+)==/g, '<mark class="tm">$1</mark>')
     .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
     .replace(/(^|[^*])\*([^*]+)\*/g, '$1<i>$2</i>')
     .replace(/`([^`]+)`/g, '<code>$1</code>')
