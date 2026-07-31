@@ -11,7 +11,7 @@ import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { TOPICS, getTopicsByCategory } from '../data/tests';
-import { MODULES } from '../lib/content';
+import { TEMES } from '../content/temari-pl';
 import { useFailuresCounts } from '../lib/failures';
 import { globalAverage, useGlobalStats } from '../lib/testStats';
 import { useAuth } from '../lib/auth';
@@ -41,13 +41,13 @@ type Mode = {
  * mateixos títols, mateix ordre i mateixos destins — perquè qui faci
  * servir les dues no hagi d'aprendre-se-les dues vegades.
  */
-function modes(cos: Cos, lleis: number): Mode[] {
+function modes(cos: Cos, temes: number): Mode[] {
   return [
     {
       titol: 'Estudia per tema',
       sub: 'Temari complet amb subratllats i repàs',
       icona: 'book',
-      insignia: `${lleis} LLEIS`,
+      insignia: `${temes} TEMES`,
       to: '/estudi',
       modul: 'temari-complet',
     },
@@ -284,7 +284,7 @@ export default function Academia() {
 
           <div style={{ fontSize: 17, fontWeight: 800, letterSpacing: -0.5 }}>Com vols estudiar</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 14 }}>
-            {modes(cos, MODULES.length).map((m) => {
+            {modes(cos, TEMES.length).map((m) => {
               const tancat = !!m.modul && esBloquejat(m.modul, pla);
               return (
                 <TargetaMode

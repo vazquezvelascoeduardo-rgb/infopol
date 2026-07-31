@@ -17,7 +17,7 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import TriaPerfilUs from './TriaPerfilUs';
 import { useAuth } from '../lib/auth';
-import { TOPICS } from '../data/tests';
+import { TEMES } from '../content/temari-pl';
 import { getUserProgress, type PerfilUs, type UserProgress } from '../lib/db';
 import { PENAL_ALL_ENTRIES } from '../lib/operativa-penal';
 import { applyInitialTheme, applyTheme, getInitialTheme, type Theme } from '../lib/theme';
@@ -36,8 +36,8 @@ type Seccio = {
   sub?: Subseccio[];
 };
 
-/** Temes del temari de Policia Local (els de Mossos van a part). */
-const TEMES_PL = TOPICS.filter((t) => (t.category ?? 'temari') !== 'mossos').length;
+/** Temes del temari de Policia Local. El comptador de la barra els diu. */
+const TEMES_PL = TEMES.length;
 const ESCENARIS_PENAL = PENAL_ALL_ENTRIES.length;
 
 const NAV: Seccio[] = [
