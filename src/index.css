@@ -6842,9 +6842,12 @@ html[data-text-size="lg"] { font-size: 18px; }
 
 /* Marcador del temari: el que cau a l'examen, repassat amb retolador.
    Es fa amb un degradat parcial perquè es vegi com una passada de
-   retolador i no com un bloc de color pla que tapi el text. */
-.temari-text mark.tm,
-.estudi-cos mark.tm {
+   retolador i no com un bloc de color pla que tapi el text.
+
+   Va sense prefix de context: el temari de Policia Local, el de Mossos i
+   les fitxes es pinten amb lectors diferents, i el marcador ha de ser el
+   mateix a tot arreu. */
+mark.tm {
   background: linear-gradient(180deg, transparent 58%, var(--v-terra-soft) 58%);
   color: inherit;
   padding: 0 1px;
@@ -6853,7 +6856,6 @@ html[data-text-size="lg"] { font-size: 18px; }
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
-html.dark .temari-text mark.tm,
-html.dark .estudi-cos mark.tm {
+html.dark mark.tm {
   background: linear-gradient(180deg, transparent 58%, rgba(255, 138, 52, 0.32) 58%);
 }

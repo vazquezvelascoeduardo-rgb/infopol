@@ -1,15 +1,19 @@
 // Renderer Markdown minimalista i sense dependències externes.
 // Suporta: # h1..h6, paràgrafs, llistes (ul/ol), cites, codi en línia,
-// **negreta**, *cursiva*, enllaços [text](url), `---` com a separador.
+// **negreta**, *cursiva*, ==marcador==, enllaços [text](url) i `---`.
 // Prou per a fitxes senzilles com les d'aquesta app.
 import { Fragment, type ReactNode } from 'react';
 
-// Aplica el format en línia (negreta, cursiva, codi, enllaços) a un fragment
-// de text i retorna un array de nodes React.
+// Aplica el format en línia (negreta, cursiva, marcador, codi, enllaços) a
+// un fragment de text i retorna un array de nodes React.
+//
+// El marcador `==així==` pinta el text com si l'haguessis repassat amb un
+// retolador, igual que al temari de Policia Local. Es reserva per al que
+// cau a l'examen: si es marca tot, no destaca res.
 function renderInline(text: string): ReactNode[] {
   const nodes: ReactNode[] = [];
   // Expressió que captura una de les marques de format en línia.
-  const regex = /(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
+  const regex = /(\*\*[^*]+\*\*|==[^=]+==|\*[^*]+\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
   let key = 0;
@@ -20,6 +24,10 @@ function renderInline(text: string): ReactNode[] {
     const token = match[0];
     if (token.startsWith('**')) {
       nodes.push(<strong key={key++}>{token.slice(2, -2)}</strong>);
+    } else if (token.startsWith('==')) {
+      nodes.push(
+        <mark className="tm" key={key++}>{renderInline(token.slice(2, -2))}</mark>,
+      );
     } else if (token.startsWith('`')) {
       nodes.push(<code key={key++}>{token.slice(1, -1)}</code>);
     } else if (token.startsWith('[')) {
@@ -159,6 +167,7 @@ export function mdToHtml(source: string): string {
   // perquè el contingut de les fitxes no pugui injectar HTML pel seu compte.
   const inline = (t: string) =>
     esc(t)
+      .replace(/==([^=]+)==/g, '<mark class="tm">$1</mark>')
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
       .replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>')
       .replace(/`([^`]+)`/g, '<code>$1</code>')
