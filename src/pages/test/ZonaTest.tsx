@@ -61,18 +61,21 @@ function categories(cos: Cos): Categoria[] {
       titol: `Bloc ${g.ambit}`,
       sub: `${g.topics.length} temes de la guia oficial`,
       icona: 'layers' as NomIc,
-      to: `/mossos/${g.topics[0]?.slug ?? ''}`,
+      to: `/mossos/cat/${g.ambit}`,
       temes: g.topics,
     }));
   }
   const municipis = getMunicipiGroups().flatMap((g) => g.topics);
+  // Totes porten a la llista de temes de la categoria: qui vulgui el test
+  // barrejat el té allà dins i a la barra gran de baix. Portar directament
+  // a un test de tot deixava sense manera d'escollir un tema concret.
   return [
     {
       clau: 'temari',
       titol: 'Temari',
       sub: 'Lleis i normativa del temari oficial',
       icona: 'book',
-      to: '/policia-local/tot',
+      to: '/policia-local/cat/temari',
       temes: getTopicsByCategory('temari'),
     },
     {
@@ -80,7 +83,7 @@ function categories(cos: Cos): Categoria[] {
       titol: 'Cultura general',
       sub: 'Història, geografia, art i institucions',
       icona: 'globe',
-      to: '/cultura-general/tot',
+      to: '/policia-local/cat/cultura',
       temes: getTopicsByCategory('cultura'),
     },
     {
@@ -88,7 +91,7 @@ function categories(cos: Cos): Categoria[] {
       titol: 'Actualitat',
       sub: 'Càrrecs vigents, premis i fets recents',
       icona: 'news',
-      to: '/actualitat/tot',
+      to: '/policia-local/cat/actualitat',
       temes: getTopicsByCategory('actualitat'),
     },
     {
@@ -96,7 +99,7 @@ function categories(cos: Cos): Categoria[] {
       titol: 'Municipis',
       sub: "Temari propi de cada ajuntament",
       icona: 'city',
-      to: '/policia-local',
+      to: '/policia-local/cat/municipi',
       temes: municipis,
     },
   ].filter((c) => c.temes.length > 0);

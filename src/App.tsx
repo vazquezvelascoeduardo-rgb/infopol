@@ -57,6 +57,7 @@ const Privacitat = lazy(() => import('./pages/Privacitat'));
 const Academia = lazy(() => import('./pages/Academia'));
 const Retos = lazy(() => import('./pages/Retos'));
 const ZonaTest = lazy(() => import('./pages/test/ZonaTest'));
+const CategoriaTemes = lazy(() => import('./pages/test/CategoriaTemes'));
 const Debilitats = lazy(() => import('./pages/test/Debilitats'));
 const TestSession = lazy(() => import('./pages/test/TestSession'));
 const Achievements = lazy(() => import('./pages/test/Achievements'));
@@ -163,6 +164,7 @@ export default function App() {
               <Route path="/policia-local/esquemes" element={<PoliciaLocalEsquemes />} />
               <Route path="/policia-local/esquemes/:slug" element={<PoliciaLocalEsquemaLlei />} />
               <Route path="/policia-local" element={<ZonaTest cos="pl" />} />
+              <Route path="/policia-local/cat/:clau" element={<CategoriaTemes cos="pl" />} />
               <Route path="/policia-local/debilitats" element={<Debilitats />} />
               <Route path="/policia-local/logros" element={<Achievements />} />
               <Route path="/policia-local/flashcards" element={<Flashcards />} />
@@ -171,6 +173,7 @@ export default function App() {
 
               {/* Mossos */}
               <Route path="/mossos" element={<ZonaTest cos="mossos" />} />
+              <Route path="/mossos/cat/:clau" element={<CategoriaTemes cos="mossos" />} />
               <Route path="/mossos/flashcards" element={<Flashcards />} />
               <Route path="/mossos/flashcards/:slug" element={<Navigate to="/mossos/flashcards" replace />} />
               <Route path="/mossos/temari" element={<MossosTemari />} />
