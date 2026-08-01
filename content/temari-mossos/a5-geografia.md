@@ -36,8 +36,22 @@ El Sistema Mediterrani | La costa
 Dues serralades paral·leles al mar — la ==**Serralada Litoral**== (Montnegre, Garraf, Collserola) i la ==**Serralada Prelitoral**== (Montseny, Montserrat, Ports) — separades per la ==**Depressió Prelitoral**==, on hi ha les comarques més poblades.
 :::
 
+:::articles
+Les altituds que es pregunten
+El ==**Pirineu axial és la part més elevada**==, on hi ha la Pica d'Estats. El ==**Cadí fa 2.648 m**==. El ==**Turó de l'Home, punt culminant del Sistema Mediterrani, fa 1.706 m**==.
+
+Els altiplans de la Depressió Central
+Els típics són el ==**Lluçanès, el Moianès i la Segarra**==.
+
+El vulcanisme | On és
+L'==**activitat volcànica de Catalunya es localitza al Pla d'Olot**==: ==Santa Margarida, el Croscat i Castellfollit de la Roca==.
+
+El litoral | Quant fa
+De ==**Portbou a la Sénia, 515 km**== de costa.
+:::
+
 :::avis
-El cim més alt és la ==**Pica d'Estats (3.143 m)**==, no el Puigmal ni l'Aneto — l'Aneto és el sostre dels Pirineus però ==**és a l'Aragó**==. El punt més alt del Montseny, el Turó de l'Home, no arriba als 1.712 m i sovint apareix com a distractor.
+El cim més alt és la ==**Pica d'Estats (3.143 m)**==, no el Puigmal ni l'Aneto — l'Aneto és el sostre dels Pirineus però ==**és a l'Aragó**==. I el ==**Turó de l'Home fa 1.706 m**==: és el sostre del Sistema Mediterrani, no de Catalunya.
 :::
 
 ## Les aigües
@@ -52,6 +66,14 @@ Els rius pirinencs | Cabal regular
 
 Els rius mediterranis | Cabal irregular
 ==Besòs==, ==Foix==, ==Gaià==, ==Francolí==: curts, de fort estiatge i crescudes sobtades.
+:::
+
+:::articles
+La Garona | L'excepció
+És l'==**únic riu català del vessant atlàntic**==: neix a la Vall d'Aran i va a parar a l'Atlàntic per França. Tota la resta van al Mediterrani.
+
+El delta de l'Ebre | La superfície
+Ocupa uns ==**320 km²**==.
 :::
 
 :::clau
@@ -72,6 +94,26 @@ Estius calorosos, hiverns freds amb ==boires persistents==, poca pluja.
 
 Alta muntanya | Els Pirineus
 Hiverns llargs i freds amb ==neu abundant==, estius curts i frescos. Precipitacions elevades.
+
+La inversió tèrmica | On passa
+És típica de la ==**plana de Vic**==: l'aire fred queda atrapat al fons de la plana i s'hi formen boires persistents.
+
+El règim pluvionival | On
+El règim ==**pluvionival, el més regular**==, és característic del ==**Pirineu occidental**==: la neu acumulada a l'hivern regula el cabal a la primavera.
+:::
+
+## Les regions biogeogràfiques
+> Quina vegetació, on
+
+:::articles
+Mediterrània | La més extensa
+Hi són típics els ==**alzinars i les brolles**==, adaptats a l'estiu sec.
+
+Boreoalpina | L'alta muntanya
+Hi són típiques les ==**avetoses i el pi negre**==, per damunt del bosc caducifoli.
+
+Eurosiberiana | La transició
+Fagedes i rouredes, a la muntanya mitjana humida i al nord-est plujós.
 :::
 
 ## L'organització territorial

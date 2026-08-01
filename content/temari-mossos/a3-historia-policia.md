@@ -27,8 +27,19 @@ La funció | Ordre rural
 Perseguir ==bandolers, contrabandistes i partides armades== en un territori on l'exèrcit no arribava.
 :::
 
+:::articles
+1721 · La retallada | Només en queda una
+Dos anys després de la creació, ==**es dissolen totes les esquadres excepte la de Valls**==, que és la que continua i la que dona continuïtat al cos.
+
+1880 · El Reglament
+S'aprova el ==**Reglament dels Mossos d'Esquadra l'any 1880**==.
+
+1892 · El fur militar
+Es ==**reinstaura el fur militar dels Mossos d'Esquadra el 1892**==.
+:::
+
 :::avis
-Tres dades que van sempre juntes i que cal no confondre: ==**segle XVIII**== (l'origen), ==**1719**== (les primeres esquadres) i ==**Pere Anton Veciana**== (el fundador), amb seu a ==**Valls**==.
+Tres dades que van sempre juntes i que cal no confondre: ==**segle XVIII**== (l'origen), ==**1719**== (les primeres esquadres) i ==**Pere Anton Veciana**== (el fundador), amb seu a ==**Valls**==. I la que s'oblida: el ==**1721 es dissolen totes menys la de Valls**==.
 :::
 
 ## El segle XIX: neixen els cossos moderns
@@ -47,6 +58,11 @@ Es funda la ==**Guàrdia Civil**== l'any ==**1844**==, com a cos d'àmbit estata
 La llei de policia governativa estatal crea els dos cossos ==**Vigilancia** i **Seguridad**==, origen de l'actual Policia Nacional.
 :::
 
+:::articles
+1812 · La Constitució de Cadis | Els alcaldes
+La ==**Constitució de 1812**== establia que els ==**alcaldes eren responsables de la pau i la seguretat**== del seu terme: és el primer antecedent de la policia municipal.
+:::
+
 :::clau
 Les dates dels tres cossos van seguides: ==**1843 Guàrdia Municipal de Barcelona**== · ==**1844 Guàrdia Civil**== · ==**1905-1908 Vigilancia i Seguridad**==. Fixa't que la municipal de Barcelona és **anterior** a la Guàrdia Civil.
 :::
@@ -57,6 +73,11 @@ Les dates dels tres cossos van seguides: ==**1843 Guàrdia Municipal de Barcelon
 Proclamada la República el ==14 d'abril de 1931==, els Mossos d'Esquadra passen a dependre de la Generalitat restaurada: el ==**capità Frederic Escofet**== es posa ==**a les ordres de Francesc Macià**== al capdavant del cos.
 
 Amb la Generalitat republicana, Catalunya arriba a disposar de competències en ordre públic i d'una estructura policial pròpia, que la victòria franquista desmantellarà.
+
+:::articles
+Els Fets d'Octubre de 1934 | El càstig
+Van comportar que els ==**Mossos fossin desarmats per haver atacat l'exèrcit**==. És el moment en què el cos perd la confiança de l'Estat i queda arraconat fins a la guerra.
+:::
 
 :::articles
 Franquisme | La suspensió
@@ -86,6 +107,18 @@ El ==**desplegament territorial complet**== com a ==**policia integral de Catalu
 
 :::clau
 Les quatre dates del cos modern són seguretat de pregunta: ==**1980** restauració== · ==**1985** Escola de Policia a **Mollet del Vallès**== · ==**1994** primer desplegament a **Osona**== · ==**2008** desplegament complet==.
+:::
+
+:::articles
+El tancament del desplegament | Amb detall
+Es va culminar el ==**novembre de 2008, amb les Terres de l'Ebre i el Camp de Tarragona**==.
+
+El centre de formació, avui
+L'Escola de Policia de Catalunya forma part de l'==**Institut de Seguretat Pública de Catalunya (ISPC)**==, que és el ==**centre únic de formació policial de Catalunya**==.
+:::
+
+:::clau
+El model policial que dibuixa la ==**Constitució de 1978 és pluralista i té tres nivells: estatal, autonòmic i local**==. És la resposta que es demana quan pregunten "quants nivells té el model policial espanyol".
 :::
 
 :::avis
