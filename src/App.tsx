@@ -52,8 +52,9 @@ const Recursos = lazy(() => import('./pages/Recursos'));
 const CalculadoraAlcohol = lazy(() => import('./pages/CalculadoraAlcohol'));
 const Croquis = lazy(() => import('./pages/Croquis'));
 const Chat = lazy(() => import('./pages/Chat'));
-const AvisLegal = lazy(() => import('./pages/AvisLegal'));
-const Privacitat = lazy(() => import('./pages/Privacitat'));
+const AvisLegal = lazy(() => import('./pages/legal/Legals').then((m) => ({ default: m.AvisLegal })));
+const Privacitat = lazy(() => import('./pages/legal/Legals').then((m) => ({ default: m.Privacitat })));
+const Condicions = lazy(() => import('./pages/legal/Legals').then((m) => ({ default: m.Condicions })));
 const Academia = lazy(() => import('./pages/Academia'));
 const Retos = lazy(() => import('./pages/Retos'));
 const ZonaTest = lazy(() => import('./pages/test/ZonaTest'));
@@ -106,6 +107,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/avis-legal" element={<AvisLegal />} />
             <Route path="/privacitat" element={<Privacitat />} />
+            <Route path="/condicions" element={<Condicions />} />
             {/* El croquis és una eina de dibuix que funciona sencera al
                 navegador: no hi ha res a protegir darrere del compte. */}
             <Route path="/croquis" element={<Croquis />} />

@@ -7,10 +7,12 @@
 //   - Compte (correu, mètode d'accés, membre des de — read-only)
 //   - Seguretat (canvi de contrasenya, només per usuaris d'email)
 //   - Sortir
-//   - Zona de perill (sol·licitar eliminació de compte via mailto)
+//   - Zona de perill (eliminació real del compte via la funció delete-account)
+//   - Legal (privacitat, avís legal i condicions)
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
+import { supabase } from '../lib/supabase';
 import { useT } from '../lib/i18n';
 import { updateProfile, type PerfilUs } from '../lib/db';
 import MfaSection from '../components/MfaSection';
@@ -18,14 +20,12 @@ import QuadrantMini from '../components/QuadrantMini';
 import { applyTheme, getInitialTheme, type Theme } from '../lib/theme';
 import { I, RV, TitolV, V } from '../lib/v3';
 
-// Email de suport principal (peticions d'eliminació de compte, etc.).
-const SUPPORT_EMAIL = 'info@infopol.app';
-
 export default function Profile() {
   const { user, profile, progress, signOut, refresh, updatePassword } = useAuth();
   const { t } = useT();
   const navigate = useNavigate();
   const [signingOut, setSigningOut] = useState(false);
+  const [esborrant, setEsborrant] = useState(false);
   const [tema, setTema] = useState<Theme>(() => getInitialTheme());
   const [desantUs, setDesantUs] = useState(false);
 
@@ -158,15 +158,49 @@ export default function Profile() {
     }
   }
 
-  function onRequestDelete() {
-    const subject = encodeURIComponent("Sol·licitud d'eliminació de compte InfoPol");
-    const body = encodeURIComponent(
-      `Hola,\n\nVull eliminar el meu compte d'InfoPol associat al correu: ${email}\n` +
-        `(ID intern: ${user!.id}).\n\n` +
-        'Confirmo que entenc que aquesta acció esborrarà tot el meu progrés i és irreversible.\n\n' +
-        `Gràcies.`,
+  /**
+   * Esborra el compte de debò.
+   *
+   * Abans això obria un correu demanant que algú l'esborrés a mà: la
+   * persona es quedava esperant i les seves dades, al servidor. L'app
+   * mòbil ja crida la funció `delete-account`, que valida la sessió i
+   * esborra l'usuari; la resta de taules se'n van en cascada.
+   */
+  async function onRequestDelete() {
+    if (esborrant) return;
+    const segur = window.confirm(
+      "Segur que vols eliminar el compte?\n\nS'esborraran el perfil, tot el progrés, els "
+      + 'subratllats i les converses del xat. No es pot desfer.',
     );
-    window.location.href = `mailto:${SUPPORT_EMAIL}?subject=${subject}&body=${body}`;
+    if (!segur) return;
+    if (window.prompt('Escriu ESBORRAR per confirmar-ho:')?.trim().toUpperCase() !== 'ESBORRAR') return;
+
+    setEsborrant(true);
+    try {
+      const { data } = await supabase!.auth.getSession();
+      const token = data.session?.access_token;
+      if (!token) throw new Error('Sessió caducada. Torna a entrar i prova-ho un altre cop.');
+
+      const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/delete-account`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!res.ok) {
+        const cos = await res.json().catch(() => null);
+        throw new Error(cos?.error ?? 'No hem pogut eliminar el compte.');
+      }
+      await signOut();
+      navigate('/', { replace: true });
+    } catch (err) {
+      setEsborrant(false);
+      window.alert(
+        err instanceof Error ? err.message : 'No hem pogut eliminar el compte. Torna-ho a provar.',
+      );
+    }
   }
 
   async function onSignOut() {
@@ -474,12 +508,55 @@ export default function Profile() {
         <button
           type="button"
           onClick={onRequestDelete}
+          disabled={esborrant}
           className="rounded-xl border-2 px-4 py-2.5 text-sm font-bold transition"
           style={{ borderColor: '#9b3030', color: '#9b3030', background: 'white' }}
         >
-          {t('profile.danger.requestDelete')}
+          {esborrant ? 'Eliminant…' : 'Elimina el compte definitivament'}
         </button>
-        <p className="text-xs text-text-3 mt-2">{t('profile.danger.note')}</p>
+        <p className="text-xs text-text-3 mt-2">
+          És immediat i no es pot desfer: s&apos;esborren el perfil, el progrés, els subratllats
+          i les converses del xat.
+        </p>
+      </section>
+
+      {/* Textos legals. Han de ser accessibles des de dins de l'app, no
+          només des del peu de la portada: qui té compte és qui té dades. */}
+      <section className="v3-card">
+        <h2 className="eyebrow mb-4">Legal</h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {[
+            { to: '/privacitat', titol: 'Política de privacitat', sub: 'Què es guarda, qui hi intervé i els teus drets' },
+            { to: '/avis-legal', titol: 'Avís legal', sub: 'Titularitat, ús del contingut i responsabilitat' },
+            { to: '/condicions', titol: "Condicions d'ús", sub: 'El compte, l\'assistent i l\'ús acceptable' },
+          ].map((l) => (
+            <button
+              key={l.to}
+              type="button"
+              onClick={() => navigate(l.to)}
+              style={{
+                textAlign: 'left', cursor: 'pointer', border: `1px solid ${V.hair}`,
+                borderRadius: 14, padding: '13px 15px', background: V.surface, color: V.ink,
+                display: 'flex', alignItems: 'center', gap: 12,
+              }}>
+              <span style={{
+                width: 34, height: 34, flexShrink: 0, borderRadius: 11,
+                background: V.surface2, color: V.muted,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <I n="doc" size={16} sw={1.9} />
+              </span>
+              <span style={{ flex: 1, minWidth: 0 }}>
+                <span style={{ display: 'block', fontSize: 14.5, fontWeight: 700 }}>{l.titol}</span>
+                <span style={{ display: 'block', fontSize: 12, color: V.muted, marginTop: 2 }}>{l.sub}</span>
+              </span>
+              <span style={{ fontSize: 18, fontWeight: 800, color: V.faint }}>›</span>
+            </button>
+          ))}
+        </div>
+        <p className="text-xs text-text-3 mt-3">
+          Suport: <a href="mailto:info@infopol.app" style={{ color: V.terraInk, fontWeight: 600 }}>info@infopol.app</a>
+        </p>
       </section>
     </div>
   );
