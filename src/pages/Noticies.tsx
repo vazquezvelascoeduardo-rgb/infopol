@@ -114,6 +114,28 @@ export default function Noticies() {
         })}
       </nav>
 
+      {/* El test d'actualitat penja d'aquí. Abans vivia a una pàgina
+          sense cap enllaç i no hi arribava ningú; el seu lloc natural és
+          al costat del que s'hi pregunta. */}
+      <Link
+        to="/actualitat"
+        style={{
+          display: 'flex', alignItems: 'center', gap: 13, textDecoration: 'none',
+          border: `1px solid ${activeCatMeta.color}`, background: activeCatMeta.bg,
+          borderRadius: 16, padding: '13px 16px', margin: '4px 0 18px',
+        }}>
+        <span aria-hidden style={{ fontSize: 20 }}>📝</span>
+        <span style={{ flex: 1, minWidth: 0 }}>
+          <span style={{ display: 'block', fontSize: 14.5, fontWeight: 800, color: activeCatMeta.color, letterSpacing: -0.3 }}>
+            Posa&apos;t a prova amb el test d&apos;actualitat
+          </span>
+          <span style={{ display: 'block', fontSize: 12.5, color: 'var(--v-muted)', marginTop: 2 }}>
+            Càrrecs vigents, premis, esports i fets recents que cauen a l&apos;examen
+          </span>
+        </span>
+        <span style={{ fontSize: 19, fontWeight: 800, color: activeCatMeta.color }}>›</span>
+      </Link>
+
       {/* DIRECTORI DE PERSONALITATS — vista pròpia (no cards) */}
       {activeCat === 'personalitats' && (
         <PersonalitatsDirectory query={query} setQuery={setQuery} />
