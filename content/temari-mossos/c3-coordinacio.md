@@ -65,6 +65,24 @@ Mesa de Coordinació Operativa | art. 11
 Òrgan ==permanent i estable== de coordinació operativa al municipi. ==**Depèn de la Junta Local de Seguretat**==, que la crea i a la qual eleva propostes. La integren els ==caps dels Mossos i de la policia local==.
 :::
 
+Comissió de Coordinació de les Policies Locals | La successora
+És l'òrgan que ==**substitueix la Comissió de Policia de Catalunya**== en la coordinació amb els cossos locals.
+
+Sala Interpolicial de Catalunya | El dia a dia operatiu
+És qui ==**duu a terme la coordinació operativa dels Mossos amb els cossos policials nacionals**== quan cal una ==actuació conjunta==.
+:::
+
+:::articles
+Pla general de seguretat de Catalunya | Qui l'aprova
+L'==**aprova el Govern de la Generalitat**==, a proposta del conseller competent, i és l'instrument que fixa les ==prioritats de seguretat del país==.
+
+Pla local de seguretat | Qui el proposa
+El proposa la ==**Junta Local de Seguretat**== per al seu municipi.
+
+La ràtio de Catalunya | Una xifra que cau
+La proporció és d'aproximadament ==**4,5 policies per cada 1.000 habitants**==.
+:::
+
 :::clau
 No confonguis els quatre òrgans:
 · ==**Junta de Seguretat de Catalunya** → Generalitat ↔ **Estat**.==
@@ -98,7 +116,7 @@ Compte amb l'enunciat "quan la policia judicial depèn del Ministeri Fiscal": la
 
 :::articles
 Interpol | Àmbit mundial
-Organització policial d'==**àmbit mundial**==. Les seves ==**principals funcions són aconseguir i desenvolupar l'assistència mútua entre les policies d'investigació criminal**== dels estats membres. El seu objectiu general: ==assolir l'assistència recíproca entre les autoritats de policia criminal dins del marc de les lleis dels països i el respecte a la Declaració Universal dels Drets Humans==. Els orígens són del ==**1914**==; l'any ==**1956**== passa a anomenar-se definitivament ==Organització Internacional de Policia Criminal==. L'Oficina Central Nacional a Espanya funciona des del ==**1929**==.
+El seu ==**Comitè Executiu el formen 13 membres**==. Organització policial d'==**àmbit mundial**==. Les seves ==**principals funcions són aconseguir i desenvolupar l'assistència mútua entre les policies d'investigació criminal**== dels estats membres. El seu objectiu general: ==assolir l'assistència recíproca entre les autoritats de policia criminal dins del marc de les lleis dels països i el respecte a la Declaració Universal dels Drets Humans==. Els orígens són del ==**1914**==; l'any ==**1956**== passa a anomenar-se definitivament ==Organització Internacional de Policia Criminal==. L'Oficina Central Nacional a Espanya funciona des del ==**1929**==.
 
 Europol | Àmbit europeu
 ==**Oficina Europea de Policia**==. Neix del ==**Tractat de Maastricht (7 de febrer de 1992)**== amb la idea de millorar la cooperació policial contra el ==**terrorisme i el tràfic il·lícit de drogues**== i altres formes de delinqüència greu.

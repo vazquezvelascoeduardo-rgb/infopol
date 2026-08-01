@@ -90,6 +90,50 @@ Escales | art. 24
 Dues preguntes literals sobre policia local: ==**la instrucció d'atestats de circulació dins del nucli urbà és competència exclusiva de les policies locals**==; i la categoria d'==**intendent pertany a l'escala superior**==, mentre que ==**sergent i sotsinspector són l'escala intermèdia**== i ==**caporal, l'escala bàsica**==.
 :::
 
+:::articles
+Qui pot crear cos de policia local | art. 1
+Poden crear-ne els municipis ==**amb població superior a 10.000 habitants**==; per sota, cal ==**autorització del Govern de la Generalitat**== —de manera que un municipi català de menys de 10.000 habitants ==**sí que en pot crear, però amb autorització**==.
+
+Armes de foc | art. 26
+El ==**ple de l'ajuntament**== és qui ==decideix en quins serveis els agents no han de dur arma de foc==.
+
+Investigació en flagrant delicte
+Les policies locals ==**poden practicar investigacions completes en cas de flagrant delicte**==, i sempre les primeres diligències de prevenció.
+
+Dependència | De qui són
+La policia local és un ==**cos que depèn de les corporacions locals**== i que ==participa en el manteniment de la seguretat pública==, no de la Conselleria d'Interior ni de la Direcció General de la Policia.
+:::
+
+## El marc constitucional i el règim comú
+> On ho diu la Constitució
+
+:::articles
+Article 104 CE | La missió
+És l'article que ==**consagra la missió de les forces i cossos de seguretat**==: protegir el lliure exercici dels drets i llibertats i garantir la seguretat ciutadana, sota la dependència del Govern.
+
+Article 126 CE | La policia judicial
+És l'article que ==**tracta de la policia judicial**==, que depèn dels jutges, dels tribunals i del Ministeri Fiscal.
+
+El règim comú | On es troba
+Les ==**línies mestres del règim comú de les forces i cossos de seguretat es troben a la LO 2/1986**==, de forces i cossos de seguretat.
+
+Naturalesa dels cossos autonòmics
+Són ==**instituts armats de naturalesa civil**==, amb estructura i organització jerarquitzades.
+
+Responsabilitat | Dels propis actes
+El personal de policia és ==**responsable personalment i directament dels actes que dugui a terme**== en la seva actuació professional.
+
+Corresponsabilitat | Generalitat i ajuntaments
+La ==**Llei 4/2003 incorpora la cultura de la corresponsabilitat**== entre la Generalitat i els ajuntaments.
+
+Conflictes privats
+La Policia de la Generalitat ==**sí que pot intervenir en la resolució amistosa de conflictes privats, si és requerida**== per a fer-ho.
+:::
+
+:::avis
+Els dos articles de la Constitució es confonen sempre: ==**104 → missió de les FCS**== · ==**126 → policia judicial**==. I són ==**Forces i Cossos de Seguretat**== les ==policies locals, el Cos Nacional de Policia, la Guàrdia Civil i les policies autonòmiques==; la seguretat privada no ho és.
+:::
+
 ## El model de proximitat
 > Com s'entén avui la funció policial
 

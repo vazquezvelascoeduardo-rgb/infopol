@@ -105,7 +105,47 @@ El ==**control i la vigilància del trànsit**== són ==**competència pròpia**
 :::
 
 :::avis
-No confonguis les dues lleis del 1997: la ==**LO 6/1997 transfereix** la competència== i la ==**Llei 14/1997 crea el Servei Català de Trànsit**==. I compte: la ==**Llei 14/1997 no regula la seguretat pública**== — això és la ==**Llei 4/2003**==.
+No confonguis les dues lleis del 1997: la ==**LO 6/1997 transfereix** la competència== i la ==**Llei 14/1997 crea el Servei Català de Trànsit**==, l'any ==**1997**==. I compte: la ==**Llei 14/1997 no regula la seguretat pública**== — això és la ==**Llei 4/2003**==.
+:::
+
+:::articles
+Què pot fer la Generalitat en trànsit
+==**Regular la circulació i sancionar-ne les infraccions**==.
+
+Retirada de vehicles a la via urbana
+La ==**retirada i el dipòsit dels vehicles que obstaculitzen la circulació a les vies urbanes**== és competència ==**dels ajuntaments**==, a través de la seva policia local.
+:::
+
+## Altres competències que cauen
+> Les que es pregunten una per una
+
+:::articles
+Joc i apostes | Quin tipus
+La ==creació i autorització de jocs i apostes dins del territori== és una competència ==**executiva**== de la Generalitat.
+
+Dret de reunió i manifestació
+La Generalitat hi té ==**funcions exclusivament executives**==: la regulació del dret és estatal (LO 9/1983).
+
+Emergències i protecció civil
+Quan es parla de ==**prevenció, planificació i previsió**==, es parla de les competències de la Generalitat en ==**emergències i protecció civil**==.
+
+Seguretat privada
+==**Vigilar, inspeccionar i controlar les empreses de seguretat privada**== és una funció dels Mossos com a ==**policia administrativa**==.
+
+Videovigilància | Decret 134/1999
+El ==**Decret 134/1999, de 18 de maig**==, regula la ==**videovigilància per part de la policia de la Generalitat i de les policies locals de Catalunya**==.
+
+Política internacional
+La Generalitat hi participa a través de ==**convenis bilaterals amb estats membres de la UE**==.
+
+Comandament suprem
+El ==**comandament suprem de la Policia de la Generalitat**== correspon al ==**director general de la Policia**== (el comandament superior polític és del conseller; el màxim operatiu, el major).
+
+Funcions segons la Llei 10/1994
+Entre les funcions de la Policia de la Generalitat hi ha ==**protegir les persones i els béns**==.
+
+Àmbit competencial dels cossos autonòmics
+Els cossos de policia autonòmica poden desenvolupar ==**les funcions que els pertoquen segons el seu règim competencial, al territori que els correspon**==: ni només policia administrativa, ni totes les funcions de les FCS de l'Estat.
 :::
 
 :::avis
