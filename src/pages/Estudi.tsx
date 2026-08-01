@@ -7,7 +7,6 @@
 // El temari antic de la web (les fitxes de `content/` per mòduls) ja no
 // surt aquí: era una biblioteca de normes, no un temari. Les fitxes
 // segueixen accessibles des d'Operativa > Lleis, que és on toquen.
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { BLOCS, TEMES, temesDelBloc } from '../content/temari-pl';
@@ -15,20 +14,13 @@ import { nDisponibles, teContingut } from '../content/temari-pl/carrega';
 import { BLOCS_MOSSOS, TEMES_MOSSOS, temesDeAmbit } from '../content/temari-mossos';
 import { nDisponiblesMossos, teContingutMossos } from '../content/temari-mossos/carrega';
 import { I, Mono, V } from '../lib/v3';
-
-type Cos = 'pl' | 'mossos';
-
-/** Els dos cossos, amb el seu accent. El de Mossos és el granat. */
-const COSSOS: { id: Cos; label: string; icona: 'escut' | 'cap'; accent: string; accentInk: string; accentSoft: string }[] = [
-  { id: 'pl', label: 'Policia Local', icona: 'cap', accent: '#FF7A1A', accentInk: '#C4530A', accentSoft: '#FFEDDD' },
-  { id: 'mossos', label: 'Mossos', icona: 'escut', accent: '#991B1B', accentInk: '#991B1B', accentSoft: '#F7E5E5' },
-];
+import { COSSOS, metaCos, useCos } from '../lib/cos';
 
 export default function Estudi() {
   const nav = useNavigate();
-  const [cos, setCos] = useState<Cos>('pl');
+  const [cos, setCos] = useCos();
 
-  const meta = COSSOS.find((c) => c.id === cos)!;
+  const meta = metaCos(cos);
   const disponibles = nDisponibles();
 
   const subtitol = cos === 'pl'
@@ -71,7 +63,22 @@ export default function Estudi() {
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: 5, padding: 5, background: V.surface2, borderRadius: 14, flexShrink: 0 }}>
+        {/* Mateix commutador que a Acadèmia: la pastilla del cos actiu es
+            tenyeix del seu color i llisca en canviar. */}
+        <div style={{
+          position: 'relative', display: 'flex', gap: 5, padding: 5,
+          background: V.surface2, borderRadius: 14, flexShrink: 0,
+        }}>
+          <span
+            aria-hidden
+            style={{
+              position: 'absolute', top: 5, bottom: 5, left: 5,
+              width: `calc((100% - 15px) / ${COSSOS.length})`,
+              transform: `translateX(calc(${COSSOS.findIndex((c) => c.id === cos)} * (100% + 5px)))`,
+              borderRadius: 11, background: meta.accent,
+              transition: 'transform .32s cubic-bezier(.4,0,.2,1), background .32s ease',
+            }}
+          />
           {COSSOS.map((c) => {
             const on = c.id === cos;
             return (
@@ -81,10 +88,11 @@ export default function Estudi() {
                 onClick={() => setCos(c.id)}
                 aria-pressed={on}
                 style={{
-                  cursor: 'pointer', border: 'none', borderRadius: 11, padding: '10px 17px',
-                  background: on ? V.surface : 'transparent', color: on ? V.ink : V.muted,
-                  boxShadow: on ? V.shadow : 'none',
+                  position: 'relative', cursor: 'pointer', border: 'none', borderRadius: 11,
+                  padding: '10px 17px', background: 'transparent',
+                  color: on ? '#fff' : V.muted,
                   fontSize: 13, fontWeight: 800, letterSpacing: -0.3, whiteSpace: 'nowrap',
+                  transition: 'color .24s ease',
                 }}>
                 {c.label}
               </button>

@@ -7,7 +7,7 @@
 //
 // Els itineraris que hi havia abans van fora: a l'app mòbil ja es van
 // treure i les dues han d'ensenyar el mateix.
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { TOPICS, getTopicsByCategory } from '../data/tests';
@@ -17,13 +17,7 @@ import { globalAverage, useGlobalStats } from '../lib/testStats';
 import { useAuth } from '../lib/auth';
 import { esBloquejat, plaDelPerfil, type ModulPro } from '../lib/pla';
 import { CadenatPro, I, Mono, RV, TitolV, V, type NomIc } from '../lib/v3';
-
-type Cos = 'pl' | 'mossos';
-
-const COSSOS: { id: Cos; label: string }[] = [
-  { id: 'pl', label: 'Policia Local' },
-  { id: 'mossos', label: 'Mossos' },
-];
+import { COSSOS, RUTES, metaCos, useCos, type Cos } from '../lib/cos';
 
 type Mode = {
   titol: string;
@@ -42,13 +36,14 @@ type Mode = {
  * servir les dues no hagi d'aprendre-se-les dues vegades.
  */
 function modes(cos: Cos, temes: number): Mode[] {
+  const r = RUTES[cos];
   return [
     {
       titol: 'Estudia per tema',
       sub: 'Temari complet amb subratllats i repàs',
       icona: 'book',
       insignia: `${temes} TEMES`,
-      to: '/estudi',
+      to: r.estudi,
       modul: 'temari-complet',
     },
     {
@@ -64,14 +59,14 @@ function modes(cos: Cos, temes: number): Mode[] {
       icona: 'check',
       insignia: 'TESTS',
       destacat: true,
-      to: cos === 'mossos' ? '/mossos' : '/policia-local',
+      to: r.test,
     },
     {
       titol: 'Esquemes',
       sub: 'La matèria en quadres, per repassar de pressa',
       icona: 'layers',
-      insignia: 'PL · MOSSOS',
-      to: cos === 'mossos' ? '/mossos/esquemes' : '/policia-local/esquemes',
+      insignia: cos === 'mossos' ? 'MOSSOS' : 'POLICIA LOCAL',
+      to: r.esquemes,
       modul: 'esquemes',
     },
     {
@@ -85,11 +80,30 @@ function modes(cos: Cos, temes: number): Mode[] {
   ];
 }
 
+/**
+ * El commutador de cos.
+ *
+ * La pastilla activa es tenyeix del color del cos i llisca d'un costat a
+ * l'altre: així el canvi es veu i no cal buscar quin dels dos està premut.
+ */
 function SelectorCos({ cos, onCanvia }: { cos: Cos; onCanvia: (c: Cos) => void }) {
+  const i = COSSOS.findIndex((c) => c.id === cos);
   return (
     <div style={{
-      display: 'inline-flex', background: V.surface2, borderRadius: RV.pill, padding: 4, gap: 4,
+      position: 'relative', display: 'inline-flex', background: V.surface2,
+      borderRadius: RV.pill, padding: 4, gap: 4,
     }}>
+      <span
+        aria-hidden
+        style={{
+          position: 'absolute', top: 4, bottom: 4, left: 4,
+          width: `calc((100% - 12px) / ${COSSOS.length})`,
+          transform: `translateX(calc(${i} * (100% + 4px)))`,
+          borderRadius: RV.pill, background: 'var(--accent)',
+          boxShadow: '0 6px 16px var(--accent-ombra)',
+          transition: 'transform .32s cubic-bezier(.4,0,.2,1), background .32s ease',
+        }}
+      />
       {COSSOS.map((c) => {
         const on = c.id === cos;
         return (
@@ -99,11 +113,11 @@ function SelectorCos({ cos, onCanvia }: { cos: Cos; onCanvia: (c: Cos) => void }
             onClick={() => onCanvia(c.id)}
             aria-pressed={on}
             style={{
-              border: 'none', cursor: 'pointer', borderRadius: RV.pill, padding: '9px 18px',
+              position: 'relative', border: 'none', cursor: 'pointer', borderRadius: RV.pill,
+              padding: '9px 18px', background: 'transparent',
               fontSize: 13, fontWeight: on ? 800 : 600, letterSpacing: -0.2,
-              background: on ? V.surface : 'transparent',
-              color: on ? V.ink : V.muted,
-              boxShadow: on ? V.shadow : 'none',
+              color: on ? '#fff' : V.muted,
+              transition: 'color .24s ease',
             }}>
             {c.label}
           </button>
@@ -114,7 +128,7 @@ function SelectorCos({ cos, onCanvia }: { cos: Cos; onCanvia: (c: Cos) => void }
 }
 
 function TargetaMode({ m, bloquejat, onClick }: { m: Mode; bloquejat: boolean; onClick: () => void }) {
-  const fons = m.destacat ? V.terra : V.surface;
+  const fons = m.destacat ? 'var(--accent)' : V.surface;
   const text = m.destacat ? '#fff' : V.ink;
   const sub = m.destacat ? 'rgba(255,255,255,.9)' : V.muted;
   return (
@@ -126,23 +140,26 @@ function TargetaMode({ m, bloquejat, onClick }: { m: Mode; bloquejat: boolean; o
         position: 'relative',
         textAlign: 'left', cursor: bloquejat ? 'not-allowed' : 'pointer', border: 'none', borderRadius: 22, padding: 20,
         background: fons, color: text,
-        boxShadow: m.destacat ? '0 14px 30px rgba(255,122,26,.3)' : V.shadow,
+        boxShadow: m.destacat ? '0 14px 30px var(--accent-ombra)' : V.shadow,
         display: 'flex', flexDirection: 'column', minHeight: 150,
+        transition: 'background .32s ease, box-shadow .32s ease',
       }}>
       <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
         <span style={{
           width: 44, height: 44, borderRadius: 14,
-          background: m.destacat ? 'rgba(255,255,255,.24)' : V.terraSoft,
-          color: m.destacat ? '#fff' : V.terraInk,
+          background: m.destacat ? 'rgba(255,255,255,.24)' : 'var(--accent-soft)',
+          color: m.destacat ? '#fff' : 'var(--accent-ink)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
+          transition: 'background .32s ease, color .32s ease',
         }}>
           <I n={m.icona} size={20} sw={1.9} />
         </span>
         {m.insignia && (
           <span style={{
             fontSize: 11, fontWeight: 700, borderRadius: RV.pill, padding: '6px 11px',
-            background: m.destacat ? 'rgba(255,255,255,.24)' : V.terraSoft,
-            color: m.destacat ? '#fff' : V.terraInk,
+            background: m.destacat ? 'rgba(255,255,255,.24)' : 'var(--accent-soft)',
+            color: m.destacat ? '#fff' : 'var(--accent-ink)',
+            transition: 'background .32s ease, color .32s ease',
           }}>
             {m.insignia}
           </span>
@@ -159,8 +176,10 @@ function TargetaMode({ m, bloquejat, onClick }: { m: Mode; bloquejat: boolean; o
   );
 }
 
-function AccesRapid({ icona, titol, sub, valor, to }: {
+function AccesRapid({ icona, titol, sub, valor, to, destacat }: {
   icona: NomIc; titol: string; sub: string; valor?: string; to: string;
+  /** Amb vora de color i icona plena: es veu que no és un més de la llista. */
+  destacat?: boolean;
 }) {
   const nav = useNavigate();
   return (
@@ -168,13 +187,19 @@ function AccesRapid({ icona, titol, sub, valor, to }: {
       type="button"
       onClick={() => nav(to)}
       style={{
-        textAlign: 'left', cursor: 'pointer', border: 'none', borderRadius: 22, padding: 18,
-        background: V.surface, color: V.ink, boxShadow: V.shadow,
+        textAlign: 'left', cursor: 'pointer', borderRadius: 22, padding: 18,
+        border: destacat ? '1.5px solid var(--accent)' : 'none',
+        background: V.surface, color: V.ink,
+        boxShadow: destacat ? '0 10px 24px var(--accent-ombra)' : V.shadow,
         display: 'flex', alignItems: 'center', gap: 14, width: '100%',
+        transition: 'border-color .32s ease, box-shadow .32s ease',
       }}>
       <span style={{
-        width: 42, height: 42, flexShrink: 0, borderRadius: 14, background: V.surface2, color: V.ink,
+        width: 42, height: 42, flexShrink: 0, borderRadius: 14,
+        background: destacat ? 'var(--accent)' : V.surface2,
+        color: destacat ? '#fff' : V.ink,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
+        transition: 'background .32s ease',
       }}>
         <I n={icona} size={19} sw={1.9} />
       </span>
@@ -183,9 +208,12 @@ function AccesRapid({ icona, titol, sub, valor, to }: {
         <span style={{ display: 'block', fontSize: 12, color: V.muted, marginTop: 3 }}>{sub}</span>
       </span>
       {valor && (
-        <span style={{ flexShrink: 0, fontSize: 20, fontWeight: 800, letterSpacing: -0.7, color: V.terraInk }}>
+        <span style={{ flexShrink: 0, fontSize: 20, fontWeight: 800, letterSpacing: -0.7, color: 'var(--accent-ink)' }}>
           {valor}
         </span>
+      )}
+      {destacat && !valor && (
+        <span style={{ flexShrink: 0, fontSize: 20, fontWeight: 800, color: 'var(--accent)' }}>›</span>
       )}
     </button>
   );
@@ -193,7 +221,7 @@ function AccesRapid({ icona, titol, sub, valor, to }: {
 
 export default function Academia() {
   const nav = useNavigate();
-  const [cos, setCos] = useState<Cos>('pl');
+  const [cos, setCos] = useCos();
   const { profile } = useAuth();
   const pla = plaDelPerfil(profile);
   const stats = useGlobalStats();
@@ -218,10 +246,19 @@ export default function Academia() {
   const RADI = 46;
   const VOLTA = 2 * Math.PI * RADI;
 
-  const nomCos = cos === 'mossos' ? "Mossos d'Esquadra" : 'Policia Local';
+  const meta = metaCos(cos);
+  const nomCos = meta.nom;
 
   return (
-    <div className="v3-page v3-anim">
+    <div
+      className="v3-page v3-anim"
+      style={{
+        // L'accent del cos tenyeix tota la pantalla i canvia amb transició.
+        ['--accent' as never]: meta.accent,
+        ['--accent-ink' as never]: meta.accentInk,
+        ['--accent-soft' as never]: meta.accentSoft,
+        ['--accent-ombra' as never]: meta.ombra,
+      } as React.CSSProperties}>
       <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         gap: 16, flexWrap: 'wrap', marginBottom: 22,
@@ -242,8 +279,15 @@ export default function Academia() {
               <svg viewBox="0 0 110 110" style={{ width: 110, height: 110, transform: 'rotate(-90deg)' }} aria-hidden>
                 <circle cx="55" cy="55" r={RADI} fill="none" stroke="rgba(255,255,255,.16)" strokeWidth="10" />
                 <circle
-                  cx="55" cy="55" r={RADI} fill="none" stroke={V.terra} strokeWidth="10" strokeLinecap="round"
+                  cx="55" cy="55" r={RADI} fill="none" strokeWidth="10" strokeLinecap="round"
                   strokeDasharray={`${(VOLTA * pct) / 100} ${VOLTA}`}
+                  // Color literal, no `var(--accent)`: amb una variable, la
+                  // transició d'`stroke` es queda amb el color d'abans i
+                  // l'anell no canviava en passar de cos.
+                  style={{
+                    stroke: meta.accent,
+                    transition: 'stroke .32s ease, stroke-dasharray .5s cubic-bezier(.4,0,.2,1)',
+                  }}
                 />
               </svg>
               <div style={{
@@ -301,14 +345,17 @@ export default function Academia() {
         {/* ── Columna lateral ── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14, minWidth: 0 }}>
           <div style={{ fontSize: 17, fontWeight: 800, letterSpacing: -0.5 }}>Accés ràpid</div>
-          <AccesRapid icona="brain" titol="Debilitats" sub="Els temes que et costen" to="/policia-local/debilitats" />
+          {/* Cultura general va primera i destacada: cau a l'examen i
+              abans quedava perduda entre els altres accessos. Porta al
+              temari, que és el que s'estudia; el test ja és a dins. */}
           <AccesRapid
-            icona="cards" titol="Flashcards" sub="Repàs espaiat"
-            to={cos === 'mossos' ? '/mossos/flashcards' : '/policia-local/flashcards'}
+            icona="globe" titol="Cultura general" sub="16 àrees per repassar abans del test"
+            to="/cultura-general/temari" destacat
           />
+          <AccesRapid icona="brain" titol="Debilitats" sub="Els temes que et costen" to={RUTES[cos].debilitats} />
+          <AccesRapid icona="cards" titol="Flashcards" sub="Repàs espaiat" to={RUTES[cos].flashcards} />
           <AccesRapid icona="medal" titol="Reptes" sub="Missions i objectius" to="/retos" />
-          <AccesRapid icona="globe" titol="Cultura general" sub="Cultura i actualitat" to="/cultura-general" />
-          <AccesRapid icona="chart" titol="Els meus logros" sub="El que has desbloquejat" to="/policia-local/logros" />
+          <AccesRapid icona="chart" titol="Els meus logros" sub="El que has desbloquejat" to={RUTES[cos].logros} />
         </div>
       </div>
     </div>
