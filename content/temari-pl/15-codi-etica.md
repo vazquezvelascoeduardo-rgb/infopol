@@ -109,6 +109,43 @@ Sobre les **responsabilitats dels policies**, el Codi estableix que han de **fom
 El **punt 15** és el més exigent del Codi: davant de pràctiques il·legals dins del propi cos, **no n'hi ha prou amb no participar-hi** — el Codi diu que **cal denunciar-les**. Preservar la bona imatge del cos no vol dir tapar-lo; vol dir precisament el contrari.
 :::
 
+## L'actuació policial: els àmbits que fixa el Codi
+> Apartat IV
+
+L'apartat IV baixa dels principis a la feina i marca com s'ha d'actuar en les situacions que més es repeteixen. És l'apartat que més es pregunta perquè connecta el Codi amb el carrer.
+
+:::articles
+Ús de la força | El darrer recurs
+La força és l'==**últim recurs**==, quan els mitjans ==dissuasius i de persuasió han estat esgotats o són inviables==. Ha de ser ==**proporcionada, congruent i oportuna**==, adequada a l'objectiu legítim que es persegueix, i s'ha de fer servir ==**durant el temps estrictament necessari**==. L'ús de les ==**armes de foc**== queda reservat als casos de ==**risc greu per a la vida o la integritat física**== pròpia o de tercers.
+
+Detenció i persones sota custòdia | La responsabilitat
+Qui deté ==**és responsable de la vida, la integritat i la seguretat**== de la persona detinguda. S'han de ==**respectar la dignitat i els drets**== en tot moment, ==**informar-la dels seus drets**== i ==**facilitar-ne l'exercici**==. Els mitjans de subjecció s'han de fer servir ==**només quan siguin necessaris**== i ==**pel temps imprescindible**==.
+
+Persones en situació de vulnerabilitat | Un tracte específic
+El Codi obliga a una ==**atenció adequada a les víctimes**==, especialment de ==violència masclista i domèstica==, i a ==menors, gent gran, persones amb discapacitat, persones migrades i persones sense llar==, evitant la ==**victimització secundària**==.
+
+Diversitat i no-discriminació | Actuació sense biaix
+S'ha d'==**actuar sense cap discriminació**== per raó de ==naixement, ètnia, sexe, orientació o identitat sexual, religió, opinió, llengua, discapacitat o qualsevol altra condició personal o social==. Es prohibeixen expressament les ==**identificacions per perfil ètnic**==.
+
+Identificació de l'agent | Sempre
+El policia s'ha d'==**identificar amb el seu número professional**== quan actuï, ==**llevat que la seguretat de l'actuació ho impedeixi**==, i sempre que la persona interessada ho demani.
+:::
+
+## Justícia i informació
+> Apartats V i VI
+
+:::articles
+Apartat V | Policia i Administració de justícia
+El policia ha de ==**col·laborar amb l'Administració de justícia**==, ==**complir les resolucions judicials**== i, quan actuï com a ==**policia judicial**==, treballar amb ==objectivitat i imparcialitat==, ==sense manipular ni ocultar== elements de prova i ==preservant la cadena de custòdia==. Ha de declarar amb ==**veracitat**== i respondre del contingut dels seus atestats.
+
+Apartat VI | Gestió de la informació
+Les dades obtingudes en l'exercici de la funció policial ==**només es poden fer servir per a la finalitat per a la qual s'han recollit**==. S'ha de garantir la ==**confidencialitat i el secret professional**==, ==**no difondre imatges ni dades**== de persones detingudes o investigades, i ==**no accedir a bases de dades policials per motius aliens al servei**==.
+:::
+
+:::avis
+La ==**consulta de bases de dades policials per curiositat o per motius particulars**== no és una falta menor: vulnera l'apartat VI del Codi, la normativa de protecció de dades i pot ser el ==delicte de descobriment i revelació de secrets per funcionari (art. 198 CP)==. És una de les infraccions disciplinàries que més expedients genera.
+:::
+
 :::avis
 El límit de l'obediència deguda apareix tres vegades al teu temari, amb formulacions lleugerament distintes: **art. 5.1.d LOFCS** (ordres que "manifestament constitueixin delicte" o siguin contràries a la Constitució o les lleis), **art. 10 de la Llei 16/1991** i **punt 17 del Codi d'ètica** ("actes contraris a l'ordenament legal"). Si a l'examen et donen una redacció, mira de quina norma parlen.
 :::

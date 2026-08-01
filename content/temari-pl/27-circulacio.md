@@ -166,6 +166,59 @@ Aquest ordre és **la pregunta de senyalització per excel·lència** i es deman
 
 Els **tipus de senyals** del catàleg oficial (art. 134) són: ==senyalització de trams amb obres==, ==senyals d'advertiment de perill==, ==senyals de reglamentació== (prioritat, prohibició d'entrada, restricció de pas, altres prohibicions o restriccions, obligació i fi de prohibició o restricció), ==senyals d'indicació== i ==marques vials==.
 
+## Cinturó, casc i sistemes de retenció
+> Articles 117 a 119 · el bloc de seguretat passiva
+
+:::articles
+art. 117 | Cinturó de seguretat
+És ==**obligatori per al conductor i els passatgers**==, ==**tant en vies urbanes com interurbanes**==. Estan ==**exceptuats**==: els ==conductors en maniobres de marxa enrere o d'estacionament==; les persones amb un ==**certificat mèdic**== per raons de salut o discapacitat; els ==conductors de taxi en servei urbà o de la seva àrea de prestació conjunta==; els ==conductors i acompanyants dels vehicles en servei d'urgència==; i els ==distribuïdors de mercaderies quan facin repartiment amb parades freqüents a curta distància== en poblat.
+
+art. 117 | Menors i sistemes de retenció
+Els menors d'==**edat de talla igual o inferior a 135 cm**== han d'utilitzar ==**sistemes de retenció homologats adaptats a la seva talla i pes**== i ==**han d'anar als seients del darrere**==. Poden anar davant, amb el sistema adequat, si ==**tots els seients del darrere ja estan ocupats per altres menors**== en la mateixa situació, si el vehicle ==**no en té**==, o si ==**no s'hi poden instal·lar**== els sistemes.
+
+art. 118 | Casc i elements de protecció
+És ==**obligatori** per als conductors i passatgers de **motocicletes, ciclomotors, vehicles de tres rodes i quadricicles**==. Els ==**ciclistes majors de 16 anys** l'han de portar **en vies interurbanes**==; els ==**menors de 16 anys, sempre**==, també en vies urbanes. Els ==**VMP**== han de portar casc ==quan ho estableixi l'ordenança municipal==.
+
+art. 119 | Auriculars i telèfon
+Es ==**prohibeix conduir utilitzant auriculars connectats a receptors o reproductors de so**==, i ==**fer servir el telèfon mòbil o qualsevol dispositiu que impliqui subjecció manual**==. Sí que es permet el ==**mans lliures**== sempre que no impliqui ==auricular==.
+:::
+
+:::clau
+Els números que decideixen la pregunta: el ==**cinturó és obligatori també en urbana**== (i l'excepció del ==taxi és només en servei urbà==), els sistemes de retenció van pels ==**135 cm de talla**== i no per l'edat, i el casc del ciclista és ==**obligatori sempre fins als 16 anys**== i ==**només en interurbana**== a partir d'aquesta edat.
+:::
+
+## Enllumenat, càrrega i remolcat
+> Articles 98 a 116
+
+:::articles
+art. 98 a 104 | Enllumenat
+S'han de portar els llums de ==**posició des de la posta fins a la sortida del sol**== i sempre que hi hagi ==condicions meteorològiques o ambientals que disminueixin la visibilitat==. Els llums de ==**carretera (llarga)**== s'han de substituir pels de ==**encreuament (curta)**== quan es pugui ==enlluernar== altres conductors, i sempre en ==poblat il·luminat==, en ==túnels il·luminats== i en ==vies amb prohibició d'avançar==. Els ==**antiboira davanters**== es poden fer servir amb ==boira, pluja intensa o nevada==; els ==**antiboira posteriors**==, ==**només amb boira densa, pluja intensa o nevada**==, perquè enlluernen.
+
+art. 109 a 114 | La càrrega
+La càrrega ha d'anar ==**col·locada i subjecta de manera que no pugui caure, arrossegar, desplaçar-se ni comprometre l'estabilitat**== del vehicle. Si ==**sobresurt per darrere**==, s'ha de senyalitzar amb el ==**panell V-19**==; de nit o amb poca visibilitat, també amb ==llum vermell==. Els vehicles de ==**menys de 3.500 kg**== poden portar càrrega que sobresurti fins a ==**un 10 % de la longitud**== (o ==**15 % si és indivisible**==) per la part posterior.
+
+art. 106 a 108 | Remolcat d'avaria
+Només poden remolcar un vehicle avariat els ==**vehicles destinats a aquest fi**==. Excepcionalment, un altre vehicle pot fer-ho ==**fins al lloc més proper on es pugui immobilitzar sense entorpir**== la circulació, sempre que ==**no es circuli per autopista o autovia**== i que el vehicle remolcat ==**pugui ser dirigit i frenat**==.
+:::
+
+## Ciclistes, animals i accidents
+> Articles 15, 18, 121 i 129
+
+:::articles
+Ciclistes | Prioritats i avançament
+Els ciclistes tenen ==**prioritat**== quan circulen per un ==carril bici, pas per a ciclistes o vorera-bici degudament senyalitzats==; quan el vehicle giri a la ==dreta o a l'esquerra== i hi hagi un ciclista a prop; i quan circulin en ==**grup i el primer ja hagi iniciat el creuament**== o hagi entrat en una glorieta. Per ==**avançar-los**== cal deixar ==**almenys 1,5 metres**== de separació lateral i es pot ==**ocupar part o la totalitat del carril contigu**==, fins i tot trepitjant la línia contínua.
+
+Animals | Conducció per la via
+La conducció d'==animals per la via== s'ha de fer pel ==**camí adequat i, si no n'hi ha, per la vorera esquerra**==, i per la ==dreta si es fa de nit o amb poca visibilitat==. No es pot fer per ==autopistes ni autovies==.
+
+Accidents | Què està obligat a fer qui hi és
+Qui es vegi implicat en un accident, o hi passi per davant, ha de: ==**aturar-se**== sense crear un nou perill; ==**auxiliar o demanar auxili**== per als ferits; ==**col·laborar a evitar perills majors**==; ==**restablir la seguretat de la circulació**== i, si escau, ==**senyalitzar**==; ==**avisar l'autoritat**== quan hi hagi ferits; i ==**facilitar les seves dades**== als altres implicats i als agents.
+:::
+
+:::avis
+Dues confusions freqüents: l'==**antiboira posterior només és per a boira densa, pluja intensa o nevada**== —fer-lo servir sense això és infracció—, i l'obligació d'==**auxiliar**== no és només de qui provoca l'accident: és de ==**qualsevol persona implicada o que hi passi**==. Abandonar el lloc pot arribar a ser el delicte d'==omissió del deure de socors (art. 195 CP)== o el d'==abandonament del lloc de l'accident (art. 382 bis CP)==.
+:::
+
 :::avis
 Aquest material d'estudi s'ha elaborat a partir del **text consolidat publicat al BOE** (BOE-A-2003-23514). **No és una font oficial**: per a qualsevol actuació professional, consulta sempre el text vigent al BOE.
 :::
