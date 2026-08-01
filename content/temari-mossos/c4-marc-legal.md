@@ -61,8 +61,8 @@ Escales i categories | arts. 18 i 19
 
 :::avis
 No barregis les escales dels dos cossos, que és l'error més car d'aquest tema:
-· ==**Mossos**: superior = intendent, **comissari i major**.==
-· ==**Policia local**: superior = **superintendent, intendent major i intendent**.==
+· ==**Mossos**: superior → intendent, **comissari i major**.==
+· ==**Policia local**: superior → **superintendent, intendent major i intendent**.==
 En tots dos casos l'==**executiva és només l'inspector**==, i a Mossos hi ha una ==**escala de suport**== que a la policia local no existeix.
 :::
 
