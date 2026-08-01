@@ -17,6 +17,17 @@
   .cq-palette .cq-graella { grid-template-columns: 1fr !important; }
 }
 
+/* El panell de propietats i la barreta flotant fan la mateixa feina: qui
+   mana depèn de si hi ha amplada per al panell. A partir de 1100 px el
+   panell hi és i la barreta es queda només amb el que és de posició
+   (davant, darrere, voltejar) i amb els punts de la via lliure. */
+@media (min-width: 1100px) {
+  .cq-mini-props { display: none !important; }
+}
+@media (max-width: 1099px) {
+  .cq-props { display: none !important; }
+}
+
 .cq-palette button { transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s; }
 .cq-palette button:hover { transform: translateY(-2px); }
 .cq-palette button:active { transform: none; }

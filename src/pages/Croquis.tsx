@@ -13,6 +13,7 @@ import {
 } from 'react-konva';
 import type Konva from 'konva';
 import { A, Ic, Mono } from '../lib/design';
+import PanellPropietats from './croquis/PanellPropietats';
 import './croquis.css';
 import {
   BOARD, PX_PER_M, VEHICLES, buildTimeline, stateAt, simRateAt, cineViewAt, fmtRel,
@@ -722,7 +723,7 @@ function Node({ el, onSelect, onChange, onContext, override, animating }: {
     id: el.id,
     x: override ? override.x : el.x, y: override ? override.y : el.y,
     rotation: override ? override.rotation : el.rotation, scaleX: el.scaleX, scaleY: el.scaleY,
-    draggable: !animating, onClick: onSelect, onTap: onSelect,
+    draggable: !animating && !el.locked, onClick: onSelect, onTap: onSelect,
     onContextMenu: (e: Konva.KonvaEventObject<PointerEvent>) => { e.evt.preventDefault(); onSelect(); onContext(e.evt.clientX, e.evt.clientY); },
     onDragEnd: (e: Konva.KonvaEventObject<DragEvent>) => onChange({ x: e.target.x(), y: e.target.y() }),
     onTransformEnd: () => {
@@ -801,7 +802,7 @@ function Node({ el, onSelect, onChange, onContext, override, animating }: {
   const estat = el.data?.estat;
   const kmh = parseInt(el.data?.kmh || '') || 0;
   return (
-    <Group ref={ref} {...common} opacity={el.ghost ? 0.42 : 1}>
+    <Group ref={ref} {...common} opacity={(el.opacity ?? 1) * (el.ghost ? 0.42 : 1)}>
       {el.ghost && <Rect x={-30} y={-52} width={60} height={104} cornerRadius={12} stroke={DARK} strokeWidth={1.5} dash={[8, 6]} listening={false} />}
       <Shape kind={el.kind} color={el.color || DEFAULT_COLOR(el.kind)} text={el.text} />
       {veh && !el.ghost && estat === 'mov' && (() => {
@@ -1982,22 +1983,26 @@ export default function Croquis() {
                 </div>
               )}
               {COLORABLE.includes(selEl.kind) && (
-                <div style={{ display: 'flex', gap: 5, alignItems: 'center', paddingRight: 7, borderRight: `1px solid ${A.line}` }}>
+                <div className="cq-mini-props" style={{ display: 'flex', gap: 5, alignItems: 'center', paddingRight: 7, borderRight: `1px solid ${A.line}` }}>
                   {VEH_COLORS.map((c) => (
                     <button key={c} onClick={() => update(selEl.id, { color: c })} aria-label="color"
                       style={{ width: 19, height: 19, borderRadius: '50%', background: c, cursor: 'pointer', border: selEl.color === c ? `2px solid ${A.ink}` : `1px solid ${A.line2}` }} />
                   ))}
                 </div>
               )}
+              <span className="cq-mini-props" style={{ display: 'contents' }}>
               <button onClick={() => rotate(-15)} style={btn} aria-label="Girar esquerra">⟲</button>
               <button onClick={() => rotate(15)} style={btn} aria-label="Girar dreta">⟳</button>
               <button onClick={() => scaleBy(0.85)} style={btn} aria-label="Reduir">−</button>
               <button onClick={() => scaleBy(1.18)} style={btn} aria-label="Ampliar">+</button>
+              </span>
               <button onClick={flipH} style={btn} aria-label="Voltejar">⇋</button>
               <button onClick={toBack} style={btn} title="Enviar al darrere">▽</button>
               <button onClick={toFront} style={btn} title="Portar al davant">△</button>
+              <span className="cq-mini-props" style={{ display: 'contents' }}>
               <button onClick={duplicate} style={btn}>Duplicar</button>
               <button onClick={remove} style={{ ...btn, color: A.red, borderColor: A.redSoft }}><Ic name="x" size={14} color={A.red} /></button>
+              </span>
             </div>
           )}
 
@@ -2062,6 +2067,12 @@ export default function Croquis() {
             );
           })()}
         </main>
+        <PanellPropietats
+          el={selEl ?? null}
+          els={els}
+          etiqueta={(e) => VEH_LABEL[e.kind] || e.kind}
+          accions={{ update, duplica: duplicate, elimina: remove, selecciona: setSel }}
+        />
       </div>
 
       {/* Modal de dades del vehicle */}
