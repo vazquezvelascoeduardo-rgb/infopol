@@ -64,9 +64,9 @@ const TestSession = lazy(() => import('./pages/test/TestSession'));
 const Achievements = lazy(() => import('./pages/test/Achievements'));
 const Noticies = lazy(() => import('./pages/Noticies'));
 const NoticiaDetall = lazy(() => import('./pages/NoticiaDetall'));
-const CulturaGeneral = lazy(() => import('./pages/CulturaGeneral'));
+const CulturaIndex = lazy(() => import('./pages/cultura/CulturaIndex'));
 const Actualitat = lazy(() => import('./pages/Actualitat'));
-const CulturaTemari = lazy(() => import('./pages/CulturaTemari'));
+const CulturaTema = lazy(() => import('./pages/cultura/CulturaTema'));
 const Login = lazy(() => import('./pages/Login'));
 const Profile = lazy(() => import('./pages/Profile'));
 // El temari de Mossos ja es llegeix amb el mateix lector que el de
@@ -158,8 +158,9 @@ export default function App() {
                   les fitxes de lleis. Ja no: qui hi arribi per un enllaç vell
                   va a parar a la biblioteca, que és on són de debò. */}
               <Route path="/academia/temari/*" element={<Navigate to="/leyes" replace />} />
-              <Route path="/cultura-general" element={<CulturaGeneral />} />
-              <Route path="/cultura-general/temari" element={<CulturaTemari />} />
+              <Route path="/cultura-general" element={<CulturaIndex />} />
+              <Route path="/cultura-general/temari" element={<Navigate to="/cultura-general" replace />} />
+              <Route path="/cultura-general/tema/:id" element={<CulturaTema />} />
               <Route path="/cultura-general/:slug" element={<TestSession />} />
               <Route path="/actualitat" element={<Actualitat />} />
               <Route path="/actualitat/:slug" element={<TestSession />} />
