@@ -131,7 +131,7 @@ function toBase64(file: File): Promise<string> {
   });
 }
 
-type Person = { name: string; dni: string; role: string };
+type Person = { name: string; dni: string; role: string; plate: string };
 
 export default function Chat() {
   useSeo({
@@ -169,7 +169,7 @@ export default function Chat() {
     time: today.toTimeString().slice(0, 5),
     location: '', patrol: '', unit: '', facts: '',
   });
-  const [people, setPeople] = useState<Person[]>([{ name: '', dni: '', role: 'Víctima' }]);
+  const [people, setPeople] = useState<Person[]>([{ name: '', dni: '', role: 'Víctima', plate: '' }]);
 
   const c = catOf(cat);
   const msgs = threads[cat] ?? [];
@@ -201,8 +201,11 @@ export default function Chat() {
   function submitForm() {
     if (!formValid) return;
     const who = people
-      .filter((p) => p.name.trim() || p.dni.trim())
-      .map((p) => `· ${(p.role || 'Implicat').toUpperCase()}: ${p.name.trim() || '⟨nom⟩'} · DNI ${p.dni.trim() || '⟨pendent⟩'}`)
+      .filter((p) => p.name.trim() || p.dni.trim() || p.plate.trim())
+      .map((p) => {
+        const matricula = p.plate.trim() ? ` · Matrícula ${p.plate.trim().toUpperCase()}` : '';
+        return `· ${(p.role || 'Implicat').toUpperCase()}: ${p.name.trim() || '⟨nom⟩'} · DNI ${p.dni.trim() || '⟨pendent⟩'}${matricula}`;
+      })
       .join('\n');
     const body = [
       'DADES DEL SERVEI',
@@ -575,16 +578,26 @@ export default function Chat() {
                       <button onClick={() => setPeople(people.filter((_, j) => j !== i))} disabled={people.length === 1}
                         style={{ height: 44, borderRadius: 11, border: `1px solid ${D.line}`, background: 'var(--v-surface2)', color: D.mut, fontSize: 16, cursor: 'pointer', opacity: people.length === 1 ? 0.35 : 1 }}>✕</button>
                       <div />
-                      <label style={{ gridColumn: 'span 2' }}><span style={lbl}>ROL</span>
+                      <label><span style={lbl}>ROL</span>
                         <select value={p.role} onChange={(e) => setPeople(people.map((x, j) => j === i ? { ...x, role: e.target.value } : x))}
                           style={{ ...field, height: 42, background: 'rgba(255,122,26,.08)', border: '1px solid rgba(255,122,26,.26)', color: 'var(--v-terra-ink)', fontFamily: D.mono, fontSize: 12, fontWeight: 600, padding: '0 12px', cursor: 'pointer' }}>
-                          {ROLES.map((r) => <option key={r} value={r} style={{ background: '#15151C', color: D.ink }}>{r}</option>)}
+                          {ROLES.map((r) => (
+                            // Colors del tema, no un negre fix: així es
+                            // llegeix igual de dia i de nit.
+                            <option key={r} value={r} style={{ background: 'var(--v-surface)', color: 'var(--v-ink)' }}>{r}</option>
+                          ))}
                         </select></label>
+                      <label><span style={lbl}>MATRÍCULA</span>
+                        <input
+                          value={p.plate}
+                          onChange={(e) => setPeople(people.map((x, j) => j === i ? { ...x, plate: e.target.value } : x))}
+                          placeholder="0000 XXX"
+                          style={{ ...field, height: 42, padding: '0 12px', fontFamily: D.mono, fontSize: 13, textTransform: 'uppercase' }} /></label>
                       <div />
                     </div>
                   ))}
                 </div>
-                <button onClick={() => setPeople([...people, { name: '', dni: '', role: 'Implicat' }])}
+                <button onClick={() => setPeople([...people, { name: '', dni: '', role: 'Implicat', plate: '' }])}
                   style={{ marginTop: 13, width: '100%', cursor: 'pointer', border: '1px dashed rgba(255,122,26,.34)', background: 'rgba(255,122,26,.06)', color: 'var(--v-terra-ink)', borderRadius: 13, padding: 13, fontWeight: 700, fontSize: 13.5 }}>
                   ＋ Afegeix implicat
                 </button>
