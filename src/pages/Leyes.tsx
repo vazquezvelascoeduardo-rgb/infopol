@@ -1,11 +1,12 @@
-// Pàgina de "Lleis" · rebranding 2026.
-// Hero card amb stripe groc + grid de 9 mòduls (.ley-card) amb accent per mòdul.
-import { Link } from 'react-router-dom';
+// Pàgina de "Lleis" — la biblioteca de fitxes de norma, agrupada per mòdul.
+import { useNavigate } from 'react-router-dom';
+
+import Capcalera from '../components/Capcalera';
 import { MODULES, getCardsByModule } from '../lib/content';
 import { plural, useT } from '../lib/i18n';
-import { A, Ic, Mono } from '../lib/design';
+import { Mono, V } from '../lib/v3';
 
-// Accent de color per mòdul (rebranding 2026).
+/** Accent de cada mòdul. Serveix per distingir-los d'un cop d'ull. */
 const MODULE_ACCENT: Record<string, string> = {
   'ce78': '#E5484D',
   'codi-penal': '#C13030',
@@ -15,78 +16,62 @@ const MODULE_ACCENT: Record<string, string> = {
   'menors': '#E85D8C',
   'municipi': '#2FB66B',
   'sc': '#2a3a52',
-  'transit': '#FF7A1A',
+  'transit': '#C4530A',
 };
 
 export default function Leyes() {
   const { t } = useT();
+  const nav = useNavigate();
   const totalCards = MODULES.reduce((acc, m) => acc + getCardsByModule(m.slug).length, 0);
 
   return (
-    <div className="shell">
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <span className="here">{t('leyes.title')}</span>
-      </nav>
+    <div className="v3-page v3-anim">
+      <Capcalera
+        kicker={t('home.leyes.badge')}
+        titol={t('leyes.title')}
+        lead={t('leyes.subtitle')}
+        xifres={[
+          { valor: String(MODULES.length), label: t('home.sections') },
+          { valor: String(totalCards), label: plural(t, totalCards, 'cards') },
+        ]}
+      />
 
-      {/* Hero amb degradat (estil Claude Design) */}
-      <header style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `${A.amber}`, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadow, marginBottom: 8 }}>
-        <div style={{ position: 'absolute', top: -50, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
-        <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-          <span style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0 }}><Ic name="scale" size={28} color="#fff" sw={2.2} /></span>
-          <div style={{ minWidth: 0 }}>
-            <Mono size={11} color="rgba(255,255,255,0.85)">{t('home.leyes.badge')}</Mono>
-            <h1 style={{ margin: '6px 0 0', fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: -1, lineHeight: 1.05 }}>{t('leyes.title')}</h1>
-            <p style={{ margin: '8px 0 0', fontFamily: A.sans, fontSize: 14.5, lineHeight: 1.5, opacity: 0.92, maxWidth: 520 }}>
-              {t('leyes.subtitle')} · {MODULES.length} {t('home.sections').toLowerCase()} · {totalCards} {plural(t, totalCards, 'cards')}
-            </p>
-          </div>
-        </div>
-      </header>
-
-      {/* Section head */}
-      <div
-        className="section-head"
-        style={{ ['--accent' as never]: 'var(--c-leyes)' } as React.CSSProperties}
-      >
-        <span className="eyebrow">{t('home.sections')}</span>
-        <span className="rule" />
-      </div>
-
-      {/* Grid de mòduls */}
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 mb-10">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: 12 }}>
         {MODULES.map((m) => {
           const count = getCardsByModule(m.slug).length;
-          const title = t(`module.${m.slug}.title`);
-          const desc = t(`module.${m.slug}.desc`);
-          const accent = MODULE_ACCENT[m.slug] ?? 'var(--terracotta-2)';
+          const accent = MODULE_ACCENT[m.slug] ?? V.terraInk;
           return (
-            <li key={m.slug}>
-              <Link
-                to={`/leyes/s/${m.slug}`}
-                className="ley-card"
-                style={{ ['--accent' as never]: accent } as React.CSSProperties}
-              >
-                <span
-                  className="appicon"
-                  style={{ ['--accent' as never]: accent } as React.CSSProperties}
-                >
-                  {m.icon}
+            <button
+              key={m.slug}
+              type="button"
+              onClick={() => nav(`/leyes/s/${m.slug}`)}
+              style={{
+                textAlign: 'left', cursor: 'pointer', border: `1px solid ${V.hair}`,
+                borderRadius: 18, padding: 17, background: V.surface, color: V.ink,
+                boxShadow: V.shadow, display: 'flex', alignItems: 'flex-start', gap: 13,
+              }}>
+              <span style={{
+                width: 44, height: 44, flexShrink: 0, borderRadius: 14,
+                background: `${accent}1F`, color: accent, fontSize: 20,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                {m.icon}
+              </span>
+              <span style={{ flex: 1, minWidth: 0 }}>
+                <span style={{ display: 'block', fontSize: 15.5, fontWeight: 800, letterSpacing: -0.4, lineHeight: 1.25 }}>
+                  {t(`module.${m.slug}.title`)}
                 </span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{desc}</p>
-                  <span className="chip">
-                    📑 {count} {plural(t, count, 'cards')}
-                  </span>
-                </div>
-                <span className="arr">→</span>
-              </Link>
-            </li>
+                <span style={{ display: 'block', fontSize: 12.5, color: V.muted, lineHeight: 1.4, marginTop: 4 }}>
+                  {t(`module.${m.slug}.desc`)}
+                </span>
+                <Mono size={9.5} color={accent} style={{ display: 'block', marginTop: 8, letterSpacing: 1.2 }}>
+                  {count} {plural(t, count, 'cards').toUpperCase()}
+                </Mono>
+              </span>
+            </button>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 }
