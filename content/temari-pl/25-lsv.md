@@ -141,6 +141,85 @@ Compte amb tres confusions freqüents:
 · Els números de prescripció van per parelles: ==infraccions **3 i 6 mesos**== · ==sancions de multa **4 anys**== · ==suspensió del permís **1 any**== · ==caducitat del procediment **1 any**==.
 :::
 
+## Quant es multa i qui respon
+> Articles 80 a 84
+
+:::articles
+art. 80 | Els imports
+· ==**Infraccions lleus: fins a 100 €**==.
+· ==**Infraccions greus: 200 €**==.
+· ==**Infraccions molt greus: 500 €**==.
+· ==**Conduir amb taxes d'alcohol superiors, amb drogues, o negar-se a les proves: 1.000 €**==. També són de ==**1.000 €**== les infraccions per ==excés d'alcohol dels conductors professionals i novells reincidents== i les de l'art. 77.a.
+· Les infraccions ==**greus i molt greus**== poden portar, a més, la ==**suspensió del permís fins a 3 mesos**==.
+
+art. 82 | Qui respon
+· La ==**responsabilitat és del conductor**==, com a regla general.
+· Del ==**titular**== quan la infracció sigui per ==incompliment d'obligacions que li corresponen== (ITV, assegurança, deure d'identificar el conductor).
+· De l'==**arrendatari a llarg termini**== en lloc del titular quan així consti al Registre.
+· Dels ==**pares, tutors o guardadors**== quan l'autor és un ==**menor**==: responen ==**solidàriament**== de la multa.
+· Als ==estacionaments indeguts sense conductor identificat, respon el **titular**==.
+
+art. 11.1 i 77.j | El deure d'identificar
+El ==**titular està obligat a identificar el conductor responsable**== quan se li requereix. Si ==**no ho fa sense causa justificada**==, comet una infracció ==**molt greu**==, sancionada amb el ==**doble de la multa de la infracció original si és lleu**== i el ==**triple si és greu o molt greu**==.
+:::
+
+:::clau
+El deure d'identificar és una de les preguntes més repetides: la infracció és ==**molt greu**== i la multa és el ==**doble o el triple**== de l'original segons la seva gravetat. I els quatre imports base es memoritzen en escala: ==**100 · 200 · 500 · 1.000**==.
+:::
+
+## La pèrdua de punts
+> Annex II · el quadre que es pregunta
+
+:::articles
+6 punts | Les més greus
+==Conduir amb taxes d'alcohol superiors al **doble** de les permeses== · ==**negar-se** a les proves d'alcohol o drogues== · ==conduir amb **presència de drogues**== · ==conduir de manera **temerària**, en sentit contrari o participar en curses il·legals== · ==conduir un vehicle amb un **detector de radars**== · ==excés d'ocupants de **més del 50 %**==.
+
+6 punts | Des de la Llei 18/2021
+==Fer servir el **telèfon mòbil agafat amb la mà**== mentre es condueix · ==**llançar a la via objectes** que puguin provocar incendis o accidents==.
+
+4 punts | Molt habituals
+==Conduir amb taxa d'alcohol superior a la permesa **sense arribar al doble**== · ==incomplir les normes de **prioritat de pas, avançament, canvi de sentit o marxa enrere**== · ==conduir amb el **permís suspès** o intervingut== · ==**no mantenir la distància de seguretat**== · ==**no fer servir el cinturó, el casc o els sistemes de retenció**== · ==circular amb **menors sense el sistema de retenció adequat**==.
+
+Excés de velocitat | Una escala pròpia
+La pèrdua depèn de quant es passa del límit: va de ==**0 punts**== (excés petit, només multa) a ==**2, 4 i 6 punts**== segons el tram. El màxim de ==**6 punts**== és per als excessos més grans.
+:::
+
+:::avis
+La ==**Llei 18/2021**== va moure les fitxes i molts manuals antics encara van amb els números vells. Els tres canvis que has de tenir actualitzats:
+· ==**Telèfon mòbil agafat amb la mà**: de 3 a **6 punts**==.
+· ==**No fer servir cinturó, casc o sistemes de retenció**: de 3 a **4 punts**==.
+· ==**Llançar objectes a la via** que puguin provocar incendis o accidents: de 4 a **6 punts**==.
+:::
+
+:::avis
+Compte amb el mòbil: des de la ==**Llei 18/2021**==, ==**agafar el telèfon amb la mà**== mentre es condueix són ==**6 punts**==, no 3. És un dels canvis recents que més cauen, i molts manuals antics encara diuen 3.
+:::
+
+:::articles
+Recuperació de punts | Els terminis
+· Es ==**recupera el crèdit inicial**== si es passa ==**2 anys sense cometre infraccions que en restin**== (==**3 anys**== si l'última va ser molt greu).
+· Un ==**curs de sensibilització i reeducació viària de 12 hores**== permet recuperar ==**fins a 6 punts**==, ==**un cop cada 2 anys**==.
+· Qui ha ==**perdut tot el crèdit**== ha de fer el ==**curs de 24 hores**== i superar una ==**prova de control de coneixements**==; recupera un crèdit de ==**8 punts**== i ha d'esperar ==**6 mesos**== (==**3 mesos** els professionals==) des de la pèrdua.
+· El ==**crèdit màxim**== és de ==**15 punts**==: s'arriba als 14 als ==**3 anys**== sense perdre'n cap i als 15 als ==**6 anys**==.
+:::
+
+## Com t'arriba la multa
+> Articles 90 a 95 · notificacions i recursos
+
+:::articles
+Notificació a l'acte | La regla
+Les denúncies ==**s'han de notificar a l'acte al denunciat**==. Només es notifiquen després si ==no hi és el conductor==, si ==no s'ha pogut aturar el vehicle sense risc per a la circulació==, si la denúncia és per ==captació d'imatges (radars i càmeres)== o si ==l'agent és fora de servei==.
+
+DEV | La bústia electrònica
+La ==**Direcció Electrònica Vial**== és l'adreça electrònica assignada per la DGT. És ==**obligatòria per a persones jurídiques**== i ==**voluntària per a les persones físiques**==; qui la té, hi rep les notificacions.
+
+TESTRA | L'últim recurs
+Si la notificació al domicili ==falla dues vegades== o no hi ha DEV, es publica al ==**Tauler Edictal de Sancions de Trànsit (TESTRA)**==, i s'entén notificada als ==**20 dies naturals**== des de la publicació.
+
+Recurs | Un mes
+Contra la resolució sancionadora es pot interposar ==**recurs de reposició, potestatiu, en el termini d'un mes**==. No suspèn l'execució de la sanció, i s'entén desestimat si no es resol en ==**un mes**==.
+:::
+
 :::avis
 Aquest material d'estudi s'ha elaborat a partir del **text consolidat publicat al BOE** (BOE-A-2015-11722). **No és una font oficial**: per a qualsevol actuació professional, consulta sempre el text vigent al BOE.
 :::
