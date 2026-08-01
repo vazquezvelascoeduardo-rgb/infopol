@@ -130,13 +130,13 @@ Poden interposar-hi recurs, per defensar els drets del Conveni Europeu, ==**grup
 
 :::articles
 Estat d'alarma | art. 116.2 CE
-==**No es poden suspendre drets constitucionals**==: ==només es poden establir restriccions al seu exercici==. El declara el ==Govern per un màxim de 15 dies==.
+==**No es poden suspendre drets constitucionals**==: ==només es poden establir restriccions al seu exercici==. El declara el ==**Govern, per decret acordat en Consell de Ministres**==, per un màxim de ==**15 dies**==; ==**dona compte al Congrés**== i ==**només el pot prorrogar amb la seva autorització**==.
 
 Estat d'excepció | art. 55.1 i LO 4/1981
-==Sí que permet suspendre drets==. Si se suspèn l'==**article 17**==, la detenció governativa pot arribar a una durada màxima de ==**10 dies**==.
+==Sí que permet suspendre drets==. El declara el ==**Govern amb autorització prèvia del Congrés dels Diputats**==, que aprova o modifica els efectes, l'àmbit i la durada. Màxim ==**30 dies, prorrogables per 30 més**==. Si se suspèn l'==**article 17**==, la detenció governativa pot arribar a una durada màxima de ==**10 dies**==.
 
 Estat de setge | art. 55.1
-Permet suspendre també l'==art. 17.3== (drets del detingut). El declara la ==majoria absoluta del Congrés==.
+Permet suspendre també l'==art. 17.3== (drets del detingut). El declara el ==**Congrés dels Diputats per majoria absoluta, a proposta exclusiva del Govern**==, i és el Congrés qui en fixa l'==àmbit, la durada i les condicions==.
 
 Suspensió individual | art. 55.2
 Per ==llei orgànica==, de forma individual i amb ==intervenció judicial i control parlamentari==, per a investigacions de ==bandes armades o elements terroristes==. Afecta els arts. ==17.2, 18.2 i 18.3==.

@@ -215,6 +215,33 @@ L'**article 55** regula la suspensió i distingeix dos supòsits que no s'han de
 L'**estat d'alarma no suspèn** drets fonamentals: només els pot limitar. La suspensió de l'art. 55.1 exigeix estat d'**excepció o de setge**. I fixa't que l'art. 55.1 **no inclou** l'art. 15 (vida) ni l'art. 24 (tutela judicial): aquests **no es poden suspendre mai**.
 :::
 
+### Com s'aprova cada estat excepcional
+
+Els tests no es queden en què suspèn cada estat: pregunten **qui el declara, amb quina majoria i per quant de temps**. Ho regulen l'**article 116 CE** i la **LO 4/1981, d'1 de juny**.
+
+:::articles
+Estat d'alarma | El declara el Govern
+El declara el ==**Govern**== mitjançant ==**decret acordat en Consell de Ministres**==, per un termini màxim de ==**15 dies**==. ==**Ha de donar compte al Congrés dels Diputats**==, reunit immediatament a l'efecte, i ==**sense l'autorització del Congrés no el pot prorrogar**==. El decret fixa l'==àmbit territorial==, la durada i els efectes.
+
+Estat d'excepció | Cal permís abans
+El declara el ==**Govern mitjançant decret acordat en Consell de Ministres, amb autorització prèvia del Congrés dels Diputats**==. El Govern hi presenta una ==sol·licitud amb els efectes, l'àmbit territorial i la durada==; el Congrés pot ==aprovar-la o modificar-la==. Durada màxima de ==**30 dies, prorrogables per un altre termini igual**== amb els mateixos requisits.
+
+Estat de setge | El declara el Congrés
+El declara el ==**Congrés dels Diputats per majoria absoluta**==, ==**a proposta exclusiva del Govern**==. És el Congrés qui ==**determina l'àmbit territorial, la durada i les condicions**==.
+:::
+
+:::clau
+La diferència està en **qui decideix** i **quan**:
+· ==**Alarma** → el declara el **Govern**; al Congrés només se li **dona compte**. Permís només per **prorrogar**.==
+· ==**Excepció** → el declara el **Govern**, però amb **autorització prèvia** del Congrés.==
+· ==**Setge** → el declara el **Congrés per majoria absoluta**, a **proposta exclusiva del Govern**.==
+I les durades: ==**alarma 15 dies**== · ==**excepció 30 + 30**== · ==**setge, la que fixi el Congrés**== (la Constitució no li posa límit).
+:::
+
+:::avis
+Les regles comunes de l'**art. 116.5 i 116.6** també cauen: mentre duri qualsevol dels tres estats ==**no es pot dissoldre el Congrés**== i, si estigués dissolt o s'hagués acabat el mandat, ==**les cambres queden automàticament convocades**==. El ==**funcionament dels poders constitucionals de l'Estat no s'interromp**==, i la declaració ==**no modifica el principi de responsabilitat del Govern i dels seus agents**==: qui s'excedeix, respon igualment.
+:::
+
 ## Les institucions de l'Estat
 > Títols II a VI i IX · les dades que cauen als tests
 
@@ -234,9 +261,7 @@ Govern i Corts | Títol V
 ==**Moció de censura**== (art. 113): té caràcter ==**constructiu**== — ha d'==**incloure un candidat a president**==, ser proposada per ==**almenys una desena part dels diputats**== i aprovar-se per ==**majoria absoluta**== del Congrés. No es pot votar fins que passin ==5 dies== des de la presentació. ==**Qüestió de confiança**== (art. 112): la planteja el ==**president del Govern**, prèvia deliberació del Consell de Ministres==, i s'entén atorgada per ==**majoria simple**==.
 
 art. 116 | Estats excepcionals
-==**Alarma**: el declara el **Govern** per un termini màxim de **15 dies**==, donant compte al Congrés, sense l'autorització del qual no es pot prorrogar.
-==**Excepció**: el declara el **Govern amb autorització prèvia del Congrés**, per un màxim de **30 dies prorrogables per un altre termini igual**==.
-==**Setge**: el declara la **majoria absoluta del Congrés dels Diputats, a proposta exclusiva del Govern**==.
+==**Alarma**: el declara el **Govern**, **15 dies**== · ==**excepció**: el **Govern amb autorització prèvia del Congrés**, **30 + 30**== · ==**setge**: el **Congrés per majoria absoluta**, a proposta del Govern==. El procediment sencer és a l'apartat de ==garanties i suspensió dels drets==, que és on es demana amb detall.
 
 Poder judicial | Títol VI
 La ==**justícia emana del poble**== (art. 117.1). El ==**Tribunal Suprem** és l'**òrgan jurisdiccional superior en tots els ordres**, llevat del que disposi la matèria de garanties constitucionals== (art. 123). El ==**Consell General del Poder Judicial és l'òrgan de govern del poder judicial**== (art. 122.2).
