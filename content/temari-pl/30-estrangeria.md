@@ -110,6 +110,45 @@ La devolució | art. 58.3
 Les tres respostes que més cauen d'aquest bloc: l'estada irregular és una ==**infracció administrativa greu**==, no un delicte; la ==**multa i l'expulsió són alternatives**==, no acumulables; i la ==**devolució no necessita expedient**==, a diferència de l'expulsió.
 :::
 
+## Menors, víctimes i col·laboradors
+> Articles 35, 59 i 59 bis · els casos que et tocaran de prop
+
+:::articles
+art. 35 | Menors no acompanyats
+Quan els cossos policials localitzen un ==**estranger indocumentat la minoria d'edat del qual no es pot establir amb seguretat**==, els serveis de protecció de menors n'assumeixen la ==**atenció immediata**== i s'ha de posar el fet en coneixement del ==**Ministeri Fiscal**==, que disposa la ==**determinació de l'edat**== amb la col·laboració de les institucions sanitàries. Un cop determinada la minoria d'edat, el ==**Fiscal el posa a disposició dels serveis de protecció de menors**== de la comunitat autònoma. La ==**repatriació**== només procedeix si es donen les condicions per a la reagrupació familiar o per a la tutela pel servei de protecció del seu país, i sempre que ==**no hi hagi risc per al menor o la seva família**==.
+
+art. 59 | Col·laboradors contra les xarxes
+L'estranger en situació irregular que ==**denunciï els autors o cooperadors del tràfic il·lícit de mà d'obra, immigració clandestina, explotació laboral o tràfic d'éssers humans**== i ==**col·labori amb les autoritats**== pot quedar ==**exempt de responsabilitat administrativa**== i no ser expulsat, i se li pot facilitar ==autorització de residència i treball per circumstàncies excepcionals== o el ==retorn assistit al seu país==.
+
+art. 59 bis | Víctimes de tràfic d'éssers humans
+Davant d'indicis raonables que una persona és víctima de tràfic, se la informa i, si està en situació irregular, se li ha de concedir un ==**període de restabliment i reflexió d'almenys 90 dies**==. Durant aquest període ==**s'ha de suspendre l'expedient sancionador**== o l'execució de l'expulsió, i se li ha de garantir la ==subsistència, la seguretat i la protecció==. Pot quedar ==exempta de responsabilitat administrativa==.
+:::
+
+:::clau
+Tres reflexos que has de tenir: davant d'un possible ==**menor**==, l'edat la decideix el ==**Ministeri Fiscal**==, no tu, i el menor va a ==**protecció de menors**==, no a un procediment d'estrangeria. Davant d'indicis de ==**tràfic d'éssers humans**==, hi ha ==**90 dies de restabliment**== i l'expulsió ==**se suspèn**==. I qui ==**denuncia una xarxa**== pot quedar ==exempt==: si l'expulses, mai més ningú d'aquell entorn denunciarà.
+:::
+
+## Entrada, mesures cautelars i procediments
+> Articles 25, 61 i 63
+
+:::articles
+art. 25 | Requisits d'entrada
+L'estrany ha d'entrar ==**pels llocs habilitats**==, amb ==**passaport o document de viatge en vigor**== i, si escau, ==**visat**==; ha d'acreditar ==**mitjans econòmics suficients**== per al temps d'estada i per al retorn, i pot haver de justificar ==l'objecte i les condicions de l'estada== (reserva, carta d'invitació). ==**No pot estar subjecte a prohibició d'entrada**== ni figurar com a rebutjable.
+
+art. 61 | Mesures cautelars
+Durant l'expedient sancionador, l'instructor pot acordar: ==**presentació periòdica**== davant les autoritats competents; ==**residència obligatòria**== en un lloc determinat; ==**retirada del passaport**== o document acreditatiu de la nacionalitat, contra resguard; ==**detenció cautelar**== per un màxim de ==**72 hores**== abans de sol·licitar l'internament; ==**internament preventiu**==; i mesures de ==**seguiment telemàtic**==.
+
+art. 63 | Procediment preferent
+S'aplica als supòsits de l'art. 53.1.a (estada irregular) quan hi hagi ==risc d'incompareixença==, ==evitació o dificultat de l'expulsió==, o ==amenaça per a l'ordre públic o la seguretat==. El termini per formular al·legacions és de ==**48 hores**==, i la resolució d'expulsió és d'==**execució immediata**==.
+
+art. 63 bis | Procediment ordinari
+L'expulsió acordada per aquesta via porta un ==**termini de compliment voluntari de 7 a 30 dies**==, prorrogable, per abandonar el territori. Si no s'hi compleix, s'executa forçosament.
+:::
+
+:::avis
+Distingeix bé els tres camins i els seus temps: ==**devolució**== (sense expedient, per entrada il·legal o per contravenir una prohibició), ==**expulsió per procediment preferent**== (48 h d'al·legacions i execució immediata) i ==**expulsió per procediment ordinari**== (7 a 30 dies per marxar pel seu compte). I la ==**detenció cautelar de l'art. 61 és de 72 hores com a màxim**==: no és la detenció penal, però comparteix límit.
+:::
+
 ## L'internament
 > Article 62 · el CIE
 

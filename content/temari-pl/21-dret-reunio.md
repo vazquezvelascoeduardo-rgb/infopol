@@ -2,6 +2,33 @@
 subtitol: Llei orgànica 9/1983, de 15 de juliol, reguladora del dret de reunió · BOE-A-1983-19946
 ---
 
+## Què és una reunió i quan s'aplica la llei
+> Articles 1r i 2n · la xifra que cau sempre
+
+Abans de res, la llei diu a qui s'aplica, i aquí hi ha el número que més es pregunta de tot el tema.
+
+:::articles
+art. 1.1 | El dret
+El ==**dret de reunió pacífica i sense armes**== s'exerceix ==**lliurement, sense necessitat d'autorització prèvia**==, en els termes d'aquesta llei.
+
+art. 1.2 | Quan NO s'aplica
+La llei ==**no s'aplica a les reunions de menys de vint persones**==. Per sota d'aquest nombre no hi ha ni comunicació ni règim especial: és una trobada qualsevol.
+
+art. 2 | Concepte de reunió
+Es considera reunió la ==**concurrència concertada i temporal de més de 20 persones, amb una finalitat determinada**==. Els tres elements —==**concertada**== (hi ha acord previ), ==**temporal**== (no permanent) i amb ==**finalitat determinada**==— són els que la distingeixen d'una aglomeració qualsevol.
+
+art. 1.3 | Reunions excloses
+Queden fora de la llei: les que ==celebren les persones **físiques al seu propi domicili**==; les que ==celebren les persones físiques en **locals públics o privats per raons familiars o d'amistat**==; les que ==celebren els **partits polítics, sindicats, organitzacions empresarials, societats civils i mercantils, associacions, corporacions, fundacions, cooperatives, comunitats de propietaris** i altres entitats legalment constituïdes **en llocs tancats, per als seus propis fins i mitjançant convocatòria que abasti exclusivament els seus membres**==; i les ==**concentracions de persones en actes de culte, cerimònies i altres actes religiosos** en llocs destinats a aquesta finalitat==.
+:::
+
+:::clau
+Els ==**20**== decideixen la pregunta: per sota, la llei ==**no s'aplica**==; el concepte de l'art. 2 parla de ==**més de 20 persones**==. I recorda que una assemblea d'un sindicat en un local propi, per als seus socis, ==**està exclosa**== encara que hi hagi 200 persones.
+:::
+
+:::avis
+Que la llei no s'apliqui ==**no vol dir que no hi hagi dret de reunió**==: el dret és de l'article 21 CE i el tenen tots. El que no hi ha, per sota de 20 persones o als supòsits exclosos, és el ==deure de comunicació prèvia==.
+:::
+
 ## El principi: cap autorització prèvia
 > Articles 3r i 4t
 
@@ -96,6 +123,27 @@ Els terminis d'aquest tema es confonen entre ells. Ordena'ls així:
 
 :::clau
 Connecta aquest tema amb els altres dos que el toquen: l'**art. 21 CE** (comunicació, no autorització; prohibició només amb raons fundades d'alteració amb perill) i l'**art. 35.1 de la LOPSC**, que converteix en **infracció molt greu** les manifestacions no comunicades en infraestructures de serveis bàsics **quan s'hagi generat risc per a la vida o la integritat**.
+:::
+
+## El tema al carrer
+> El que et trobaràs de servei
+
+:::articles
+Manifestació no comunicada | Què fas
+La ==**manca de comunicació no la converteix automàticament en il·lícita**==: el Tribunal Constitucional té dit que la comunicació és un ==requisit de garantia==, no una condició d'existència del dret. Només es pot dissoldre pels ==**supòsits taxats de l'article 5è**==, no per no haver-la comunicat. La falta de comunicació es tramita com a ==**infracció administrativa**== (LOPSC), no com a motiu de dissolució.
+
+Ús de la força | El límit
+Si cal dissoldre, s'apliquen els principis de la ==**LO 2/1986: congruència, oportunitat i proporcionalitat**==, amb ==**avís previ als concurrents**== (art. 5è in fine) i ==**donant temps material per dispersar-se**==. La dissolució sense avís previ és el vici que més recursos guanya.
+
+Contramanifestacions | Dues alhora
+Si dues convocatòries coincideixen en lloc i hora, l'autoritat governativa pot ==**proposar la modificació**== (art. 10) d'una o de les dues. El deure de l'agent segueix sent el de l'==**art. 3.2: protegir-les totes dues**== i evitar que l'una impedeixi l'altra.
+
+Armes i objectes | Pacífica i sense armes
+El dret és ==**de reunió pacífica i SENSE ARMES**==. Portar-hi armes o objectes perillosos treu l'empara constitucional als qui ho fan, i pot ser ==infracció de la LOPSC== o ==delicte de desordres públics (art. 557 CP)== segons el cas.
+:::
+
+:::avis
+Els tres errors que més es cometen en aquest tema: creure que una manifestació ==**es prohibeix per no comunicar-la**== (no: només pels supòsits de l'art. 5è), que ==**el tall de trànsit és per si sol motiu de dissolució**== (no: cal perill per a persones o béns) i que ==**l'informe de l'ajuntament obliga**== (no: no és vinculant).
 :::
 
 :::avis
