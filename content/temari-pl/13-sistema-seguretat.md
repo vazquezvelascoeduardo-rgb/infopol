@@ -116,6 +116,51 @@ Els acords de la junta local de seguretat s'han d'adoptar ==**per unanimitat**==
 Tres dades de la Junta Local que decideixen la pregunta: ==**existeix als municipis que tenen policia local**== · sessions ==**trimestrals**== amb ==**una plenària l'any**== · i els acords ==**per unanimitat i executius**==. Aquesta última és la més oblidada: no s'hi vota per majoria.
 :::
 
+L'**article 10** li dona les ==**funcions**==: ==analitzar i valorar la situació de seguretat== al municipi; ==elaborar i aprovar el **pla de seguretat local** i els plans d'actuació específics==; ==concretar la col·laboració entre els cossos== i les altres administracions; ==impulsar mesures de prevenció==; i ==establir criteris d'actuació conjunta i canals d'informació recíproca==.
+
+:::articles
+art. 11 | La mesa de coordinació operativa
+Les ==**juntes locals de seguretat han de constituir una mesa de coordinació operativa**==, ==**òrgan permanent i estable**== de coordinació i cooperació dels diversos cossos i serveis de seguretat presents al municipi. La ==**integren els caps dels Mossos d'Esquadra i de la policia local**== que en són membres i, si escau, els comandaments que la junta determini. La seva primera funció és ==**executar els acords de la junta local**==.
+:::
+
+:::avis
+La ==**mesa de coordinació operativa depèn de la junta local de seguretat**==, no del Departament ni de la Generalitat. És l'error més comú d'aquest article.
+:::
+
+## Els plans de seguretat
+> Articles 26 a 30 · l'instrument de planificació
+
+:::articles
+Pla general de seguretat de Catalunya | El de dalt
+L'==**aprova el Govern de la Generalitat**==, a proposta del ==conseller competent en matèria de seguretat pública== i amb l'informe previ del ==**Consell de Seguretat de Catalunya**==. Fixa les ==prioritats i els objectius generals== del sistema per a un ==període determinat==, i se n'ha de donar compte al ==**Parlament**==.
+
+Pla local de seguretat | El del municipi
+El ==**proposa i aprova la junta local de seguretat**==, dins del marc del pla general. Recull el ==diagnòstic de seguretat del municipi==, els ==objectius==, els ==programes d'actuació== i els ==recursos== de cada cos.
+
+Plans específics | Per matèria o per zona
+El Govern i les juntes poden aprovar ==plans d'actuació específics== per a ==matèries concretes== (violència masclista, seguretat viària, oci nocturn) o per a ==àmbits territorials determinats==.
+:::
+
+## La Policia de Catalunya i la formació
+> Articles 24 i següents
+
+La llei fa una cosa que es pregunta sovint i que sorprèn: crea un ==**concepte integrador**==. La ==**Policia de Catalunya**== és el conjunt format pel ==**cos de Mossos d'Esquadra i els cossos de policia local**== dels municipis de Catalunya. No és un cos nou ni una fusió: és el ==**sistema policial únic**== dins del qual cada cos manté la seva dependència.
+
+:::articles
+Efectes pràctics | Què comporta
+==**Uniformitat d'imatge i identificació comuna**== (el distintiu de la Policia de Catalunya), ==**sistemes d'informació compartits**==, ==**formació homogènia**== i ==**criteris comuns d'actuació**==.
+
+Institut de Seguretat Pública de Catalunya | La formació
+És l'==**òrgan encarregat de la formació, la capacitació i el perfeccionament**== dels membres dels cossos de policia de Catalunya, de les policies locals, dels bombers i del personal del sistema de seguretat i emergències. Té la seu a ==**Mollet del Vallès**==.
+
+Sala i telèfon d'emergències | El 112
+El ==**Centre d'Atenció i Gestió de Trucades d'Urgència 112 Catalunya**== és el ==telèfon únic europeu d'emergències== i el punt d'entrada de les demandes ciutadanes al sistema; deriva l'avís al servei que correspongui (policia, bombers, emergències mèdiques o protecció civil).
+:::
+
+:::clau
+==**Policia de Catalunya = Mossos d'Esquadra + policies locals**==. Si un enunciat diu que és un cos nou, o que hi entren les forces i cossos de seguretat de l'Estat, va errat. I la formació de tots dos cossos passa pel mateix lloc: l'==**Institut de Seguretat Pública de Catalunya, a Mollet del Vallès**==.
+:::
+
 L'**article 10** n'enumera les **funcions**:
 
 - **a)** **Analitzar i valorar** la situació de la seguretat pública al municipi i concretar-hi les polítiques de seguretat.
