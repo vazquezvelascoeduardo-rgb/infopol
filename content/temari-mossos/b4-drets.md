@@ -88,6 +88,23 @@ El ==**dret de vaga**== dels treballadors. Està classificat dins dels drets ==*
 Dues respostes que sorprenen i per això es pregunten: el ==**dret d'associació el pot exercir qualsevol estranger**==, no només els espanyols (a diferència del dret de l'art. 23, de participació política); i les ==**proves obtingudes vulnerant el secret de les comunicacions són invàlides i no es poden utilitzar en un procés**== (prova il·lícita, art. 11.1 LOPJ).
 :::
 
+## Com es classifiquen i com s'interpreten
+> Dues preguntes de context
+
+:::articles
+La classificació | Els tres grups
+Els drets constitucionals es poden classificar en ==**drets personals, drets de participació i drets econòmics i socials**==. El ==**dret a l'honor és un dret personal**==; el ==**dret de vaga, un dret econòmic i social**==.
+
+Com s'interpreten | art. 10.2
+Les normes relatives als drets fonamentals i a les llibertats s'han d'interpretar de conformitat amb la ==**Declaració Universal dels Drets Humans i els tractats i acords internacionals sobre aquestes matèries**== ratificats per Espanya.
+
+La privació de llibertat | La reserva
+Les ==**causes de privació de llibertat s'han d'establir per llei orgànica**==.
+
+Estrangers i vot | La regla
+Un estranger ==**no pot votar mai a unes eleccions autonòmiques**==. A les municipals sí que hi pot votar si hi ha reciprocitat o es tracta de ciutadans de la UE.
+:::
+
 ## Les garanties
 > Article 53
 
@@ -100,6 +117,12 @@ Vinculen els poders públics i es regulen per llei, ==**però sense recurs d'emp
 
 Nivell 3 | Capítol III (39-52)
 ==Informen la legislació, la pràctica judicial i l'actuació dels poders públics==; només es poden ==al·legar d'acord amb les lleis que els desenvolupin==.
+
+Defensor del Poble | art. 54
+És una ==**garantia institucional**== dels drets: alt comissionat de les Corts Generals per defensar-los, amb facultat de ==supervisar l'Administració== i de ==donar-ne compte a les Corts==.
+
+Tribunal Europeu de Drets Humans | Qui hi pot anar
+Poden interposar-hi recurs, per defensar els drets del Conveni Europeu, ==**grups particulars, organitzacions no governamentals i persones físiques**==, un cop esgotades les vies internes.
 :::
 
 ## La suspensió de drets
