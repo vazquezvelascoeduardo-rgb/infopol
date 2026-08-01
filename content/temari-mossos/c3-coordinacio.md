@@ -66,7 +66,6 @@ Junta Local de Seguretat | art. 9
 
 Mesa de Coordinació Operativa | art. 11
 Òrgan ==permanent i estable== de coordinació i cooperació dels diversos cossos i serveis de seguretat al municipi. Diu l'article que ==**les juntes locals de seguretat han de crear una mesa de coordinació operativa**==: per tant, ==**depèn de la Junta Local de Seguretat**==, no del president de la Generalitat. La integren els ==**caps dels Mossos i de la policia local que són membres de la junta local**== i, si escau, els altres comandaments que la junta determini. La seva primera funció és ==**executar els acords de la junta local**==.
-:::
 
 Comissió de Coordinació de les Policies Locals | La successora
 És l'òrgan que ==**substitueix la Comissió de Policia de Catalunya**== en la coordinació amb els cossos locals.
