@@ -139,17 +139,6 @@ export default function ZonaTest({ cos: cosProp }: { cos?: Cos }) {
         gap: 20, flexWrap: 'wrap', marginBottom: 22,
       }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-          <button
-            type="button"
-            onClick={() => nav('/academia')}
-            aria-label="Tornar a l'Acadèmia"
-            style={{
-              width: 40, height: 40, flexShrink: 0, marginTop: 4, borderRadius: '50%',
-              border: `1px solid ${V.border}`, background: V.surface, cursor: 'pointer',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', color: V.ink,
-            }}>
-            <I n="back" size={16} sw={2} />
-          </button>
           <div>
             <Mono size={10} color={a.ink} style={{ letterSpacing: 1.8 }}>{a.kicker}</Mono>
             <h1 style={{ fontSize: 30, fontWeight: 800, letterSpacing: -1.3, lineHeight: 1.1, margin: '6px 0 0' }}>

@@ -15,6 +15,7 @@
 import { Suspense, useEffect, useMemo, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
+import Enrere from './Enrere';
 import TriaPerfilUs from './TriaPerfilUs';
 import { useAuth } from '../lib/auth';
 import { TEMES } from '../content/temari-pl';
@@ -24,6 +25,12 @@ import { applyInitialTheme, applyTheme, getInitialTheme, type Theme } from '../l
 import { I, Mono, RV, V, type NomIc } from '../lib/v3';
 
 const AMPLE_SIDEBAR = 246;
+
+/**
+ * Les pantalles de primer nivell: hi arribes des de la barra lateral o de
+ * la pastilla del mòbil, així que no hi ha "enrere" que valgui.
+ */
+const ARRELS = new Set(['/app', '/academia', '/operativa', '/perfil', '/chat']);
 
 type Subseccio = { label: string; to: string };
 type Seccio = {
@@ -441,6 +448,7 @@ export default function AppShell() {
   const lloc = onEts(pathname);
   // La fletxa d'enrere només té sentit si no ets a la portada d'una
   // secció: allà no hi ha res darrere dins de l'app.
+  const mostraEnrere = !ARRELS.has(pathname.replace(/\/$/, '') || '/');
 
   useEffect(() => { applyInitialTheme(); }, []);
   useEffect(() => { setCalaix(false); }, [pathname]);
@@ -568,6 +576,15 @@ export default function AppShell() {
         <main
           className="v3-main"
           style={{ flex: 1, minWidth: 0, minHeight: 0, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
+          {/* La fletxa d'enrere viu aquí i no a cada pàgina: així hi és
+              sempre, al mateix lloc, i cap pantalla interior queda sense
+              sortida. A les seccions de primer nivell no cal —la barra
+              lateral ja hi porta— i per això no s'hi pinta. */}
+          {mostraEnrere && (
+            <div style={{ padding: 'clamp(18px,2.6vw,28px) clamp(18px,2.6vw,28px) 0' }}>
+              <Enrere a="/app" titol="Enrere" />
+            </div>
+          )}
           <Suspense fallback={<ContentFallback />}>
             <Outlet />
           </Suspense>

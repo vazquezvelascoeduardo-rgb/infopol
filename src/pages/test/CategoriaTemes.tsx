@@ -128,15 +128,6 @@ export default function CategoriaTemes({ cos: cosProp }: { cos?: Cos }) {
         <p style={{ fontSize: 14, color: V.muted, marginTop: 8 }}>
           Torna a la pantalla de tests i tria'n una de la llista.
         </p>
-        <button
-          type="button"
-          onClick={() => nav(cos === 'mossos' ? '/mossos' : '/policia-local')}
-          style={{
-            marginTop: 18, cursor: 'pointer', border: 'none', borderRadius: 999,
-            padding: '12px 22px', background: V.ink, color: V.fillFg, fontSize: 14, fontWeight: 800,
-          }}>
-          Tornar als tests
-        </button>
       </div>
     );
   }
