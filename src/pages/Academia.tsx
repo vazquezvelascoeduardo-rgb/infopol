@@ -350,7 +350,7 @@ export default function Academia() {
               temari, que és el que s'estudia; el test ja és a dins. */}
           <AccesRapid
             icona="globe" titol="Cultura general" sub="16 àrees per repassar abans del test"
-            to="/cultura-general/temari" destacat
+            to="/cultura-general" destacat
           />
           <AccesRapid icona="brain" titol="Debilitats" sub="Els temes que et costen" to={RUTES[cos].debilitats} />
           <AccesRapid icona="cards" titol="Flashcards" sub="Repàs espaiat" to={RUTES[cos].flashcards} />

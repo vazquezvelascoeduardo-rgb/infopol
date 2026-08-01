@@ -79,12 +79,6 @@ export default function Noticies() {
 
   return (
     <div className="v3-page v3-anim">
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <span className="here">{t('noticies.title')}</span>
-      </nav>
-
       <Capcalera
         kicker={t(`noticies.badge`)}
         titol={t(`noticies.title`)}
