@@ -1,13 +1,10 @@
 // Índex d'Esquemes ràpids de Lleis · Policia Local.
 // Categoria pròpia paral·lela a Tests, Flashcards i Temari.
 // Agrupa per CATEGORIA_META (CE, Codi Penal, FCS, Trànsit, etc.).
+import { useNavigate } from 'react-router-dom';
 
-import { Link } from 'react-router-dom';
 import { listEsquemasLleis, CATEGORIA_META, type LleiCategoria } from '../../data/esquemas-pl';
-
-const BLUE = '#3B6BF5';
-const BLUE_INK = '#0E2B7A';
-const BLUE_SOFT = '#D8E2FE';
+import { Mono, V } from '../../lib/v3';
 
 const CATEGORIA_ORDER: LleiCategoria[] = [
   'constitucio', 'eac', 'codi-penal', 'lecrim', 'menors',
@@ -15,6 +12,7 @@ const CATEGORIA_ORDER: LleiCategoria[] = [
 ];
 
 export default function PoliciaLocalEsquemes() {
+  const nav = useNavigate();
   const esquemas = listEsquemasLleis();
 
   // Agrupar respectant l'ordre de definició.
@@ -24,151 +22,90 @@ export default function PoliciaLocalEsquemes() {
   }, {});
 
   return (
-    <div className="shell pb-10">
-      <nav className="crumbs">
-        <Link to="/">Inici</Link>
-        <span className="sep">/</span>
-        <Link to="/policia-local">Policia Local</Link>
-        <span className="sep">/</span>
-        <span className="here">Esquemes ràpids</span>
-      </nav>
+    <div className="v3-page v3-anim">
+      <Mono size={10} color={V.terraInk} style={{ letterSpacing: 1.8 }}>POLICIA LOCAL</Mono>
+      <h1 style={{ fontSize: 30, fontWeight: 800, letterSpacing: -1.3, lineHeight: 1.1, margin: '6px 0 0' }}>
+        Esquemes ràpids
+      </h1>
+      <p style={{ fontSize: 13.5, color: V.muted, margin: '7px 0 0', maxWidth: 580 }}>
+        Una llei sencera en cinc minuts: cronologia, articles i fets clau ordenats per època,
+        en comptes d&apos;un mur de pics.
+      </p>
 
-      {/* HERO */}
-      <header className="ts-hero" style={{ ['--accent' as never]: BLUE } as React.CSSProperties}>
-        <div className="eyebrow">✨ Format nou</div>
-        <h1>
-          Esquemes <em style={{ color: BLUE }}>ràpids</em>
-        </h1>
-        <p className="lead">
-          Repàs visual d'una llei sencera en 5 minuts. Cronologia, ponents, articles
-          i fets clau organitzats per època — l'antídot al mur de bullets.
-        </p>
-        <div className="ts-stats">
-          <span className="ts-pill">
-            <b>{esquemas.length}</b> esquema{esquemas.length === 1 ? '' : 's'} disponible{esquemas.length === 1 ? '' : 's'}
-          </span>
-          <span className="ts-pill">4 seccions per llei</span>
-          <span className="ts-pill">~ 5 min lectura</span>
-        </div>
-      </header>
+      <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap', margin: '20px 0 26px' }}>
+        {[
+          { valor: String(esquemas.length), label: 'ESQUEMES' },
+          { valor: '4', label: 'SECCIONS PER LLEI' },
+          { valor: '~5 min', label: 'DE LECTURA' },
+        ].map((x) => (
+          <div key={x.label}>
+            <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: -0.8 }}>{x.valor}</div>
+            <Mono size={9} color={V.faint} style={{ display: 'block', marginTop: 3, letterSpacing: 1.4 }}>
+              {x.label}
+            </Mono>
+          </div>
+        ))}
+      </div>
 
-      {/* CARDS per categoria */}
       {CATEGORIA_ORDER.map((cat) => {
         const items = byCategoria[cat];
         if (!items || items.length === 0) return null;
         const meta = CATEGORIA_META[cat];
         return (
-          <section key={cat} style={{ marginTop: 28 }}>
-            <div
-              className="section-head"
-              style={{ ['--accent' as never]: meta.color } as React.CSSProperties}
-            >
-              <span className="eyebrow">
-                <span aria-hidden>{meta.emoji}</span> {meta.label}
+          <div key={cat} style={{ marginBottom: 26 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 11, marginBottom: 13 }}>
+              <span style={{ fontSize: 17, fontWeight: 800, letterSpacing: -0.5 }}>
+                {meta.emoji} {meta.label}
               </span>
-              <span className="rule" />
+              <span style={{ flex: 1, height: 1, background: V.hair }} />
+              <Mono size={10} color={V.muted}>{items.length}</Mono>
             </div>
-            <div
-              style={{
-                marginTop: 14,
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                gap: 16,
-              }}
-            >
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(300px,1fr))', gap: 12 }}>
               {items.map((e) => (
-                <Link
+                <button
                   key={e.id}
-                  to={`/policia-local/esquemes/${e.slug}`}
+                  type="button"
+                  onClick={() => nav(`/policia-local/esquemes/${e.slug}`)}
                   style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 10,
-                    padding: 18,
-                    background: '#fff',
-                    border: '1px solid var(--line)',
-                    borderRadius: 16,
-                    textDecoration: 'none',
-                    color: 'var(--ink)',
-                    position: 'relative',
-                    overflow: 'hidden',
-                  }}
-                >
-                  <span
-                    aria-hidden
-                    style={{
-                      position: 'absolute', top: 0, left: 0, right: 0, height: 5,
-                      background: BLUE,
-                    }}
-                  />
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 6, flexWrap: 'wrap' }}>
-                    <span style={{
-                      display: 'inline-flex', alignItems: 'center', gap: 6,
-                      padding: '4px 10px', borderRadius: 999,
-                      background: BLUE_SOFT, color: BLUE_INK,
-                      fontFamily: 'JetBrains Mono, ui-monospace, monospace',
-                      fontSize: 10.5, fontWeight: 800,
-                      letterSpacing: 1.6, textTransform: 'uppercase',
-                    }}>
-                      <span style={{ width: 5, height: 5, borderRadius: 3, background: BLUE }} />
-                      {e.kicker}
-                    </span>
-                  </div>
-
-                  <h3 style={{
-                    margin: 0, fontSize: 20, fontWeight: 900,
-                    letterSpacing: -0.5, lineHeight: 1.18, color: 'var(--ink)',
+                    textAlign: 'left', cursor: 'pointer', border: `1px solid ${V.hair}`,
+                    borderRadius: 18, padding: 17, background: V.surface, color: V.ink,
+                    boxShadow: V.shadow, display: 'flex', flexDirection: 'column', gap: 9,
+                    borderTop: `3px solid ${meta.color}`,
                   }}>
+                  <Mono size={9.5} color={meta.color} style={{ letterSpacing: 1.5 }}>
+                    {e.kicker.toUpperCase()}
+                  </Mono>
+                  <span style={{ fontSize: 17, fontWeight: 800, letterSpacing: -0.5, lineHeight: 1.2 }}>
                     {e.title}
-                    {e.titleHighlight && (
-                      <span style={{ color: BLUE }}>{' '}{e.titleHighlight}</span>
-                    )}
-                  </h3>
-
-                  <p style={{
-                    margin: 0, fontSize: 13.5, color: 'var(--text-2)', lineHeight: 1.45,
-                  }}>
-                    {e.introOneLiner.length > 140
-                      ? e.introOneLiner.slice(0, 137) + '…'
-                      : e.introOneLiner}
-                  </p>
-
-                  <div style={{
-                    marginTop: 6,
-                    display: 'flex', flexWrap: 'wrap', gap: 8,
-                    paddingTop: 10, borderTop: '1px solid var(--line)',
-                  }}>
-                    {e.kpis.slice(0, 4).map((k, i) => (
-                      <span key={i} style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--text-2)' }}>
-                        <b style={{ color: 'var(--ink)' }}>{k.value}</b>{' '}{k.label}
-                        {i < 3 && i < e.kpis.length - 1 ? ' · ' : ''}
-                      </span>
-                    ))}
-                  </div>
-
-                  <span style={{
-                    marginTop: 6, alignSelf: 'flex-end',
-                    color: BLUE, fontWeight: 800, fontSize: 14,
-                  }}>Obrir esquema →</span>
-                </Link>
+                    {e.titleHighlight && <span style={{ color: meta.color }}> {e.titleHighlight}</span>}
+                  </span>
+                  <span style={{ fontSize: 13, color: V.muted, lineHeight: 1.45 }}>
+                    {e.introOneLiner.length > 140 ? `${e.introOneLiner.slice(0, 137)}…` : e.introOneLiner}
+                  </span>
+                  {e.kpis.length > 0 && (
+                    <span style={{
+                      display: 'flex', flexWrap: 'wrap', gap: 10, paddingTop: 10,
+                      borderTop: `1px solid ${V.hair}`, marginTop: 'auto',
+                    }}>
+                      {e.kpis.slice(0, 4).map((k, i) => (
+                        <span key={i} style={{ fontSize: 11.5, fontWeight: 600, color: V.muted }}>
+                          <b style={{ color: V.ink }}>{k.value}</b> {k.label}
+                        </span>
+                      ))}
+                    </span>
+                  )}
+                </button>
               ))}
             </div>
-          </section>
+          </div>
         );
       })}
 
-      <p
-        style={{
-          marginTop: 32,
-          fontSize: 13.5,
-          color: 'var(--text-3)',
-          textAlign: 'center',
-          lineHeight: 1.55,
-        }}
-      >
-        Anirem afegint més lleis · prioritzem les que cauen sempre a l'examen.
-        Vols una llei concreta? Escriu-nos a{' '}
-        <a href="mailto:info@infopol.app" style={{ color: BLUE, textDecoration: 'underline' }}>
+      <p style={{ marginTop: 8, fontSize: 13, color: V.faint, textAlign: 'center', lineHeight: 1.55 }}>
+        Anirem afegint més lleis; prioritzem les que cauen sempre. Si en vols una de concreta,
+        escriu a{' '}
+        <a href="mailto:info@infopol.app" style={{ color: V.terraInk, fontWeight: 700 }}>
           info@infopol.app
         </a>
       </p>

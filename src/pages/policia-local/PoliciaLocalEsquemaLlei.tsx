@@ -11,6 +11,7 @@ import {
   type LleiMilestone,
   type LleiItem,
 } from '../../data/esquemas-pl';
+import { V } from '../../lib/v3';
 
 type SectionId = 'resum' | 'timeline' | 'items' | 'examen';
 
@@ -18,8 +19,8 @@ const BLUE = '#3B6BF5';
 const BLUE_SOFT = '#D8E2FE';
 const BLUE_INK = '#0E2B7A';
 const NAVY = '#0E1A36';
-const CREAM_BLUE = '#EAF0FC';
-const CREAM_BORDER = '#B8C6F0';
+const CREAM_BLUE = 'var(--v-blue-soft)';
+const CREAM_BORDER = 'var(--v-border)';
 
 function useActive(ids: SectionId[]): SectionId {
   const [active, setActive] = useState<SectionId>(ids[0]);
@@ -60,7 +61,7 @@ export default function PoliciaLocalEsquemaLlei() {
 
   if (!esquema) {
     return (
-      <div className="shell py-6">
+      <div className="v3-page v3-anim">
         <p style={{ color: 'var(--text-2)' }}>
           No existeix esquema ràpid per a aquesta llei encara.
         </p>
@@ -76,17 +77,8 @@ export default function PoliciaLocalEsquemaLlei() {
   const itemsById: Record<string, LleiItem> = Object.fromEntries(esquema.items.map((p) => [p.id, p]));
 
   return (
-    <article className="shell" style={{ maxWidth: 1100, paddingBottom: 80 }}>
+    <div className="v3-page v3-anim" style={{ maxWidth: 1100, width: '100%' }}>
       {/* Breadcrumb */}
-      <nav className="crumbs">
-        <Link to="/">Inici</Link>
-        <span className="sep">/</span>
-        <Link to="/policia-local">Policia Local</Link>
-        <span className="sep">/</span>
-        <Link to="/policia-local/esquemes">Esquemes ràpids</Link>
-        <span className="sep">/</span>
-        <span className="here">{esquema.kicker.replace(/^.*·\s+/, '')}</span>
-      </nav>
 
       {/* HERO */}
       <header style={{ paddingTop: 12 }}>
@@ -184,7 +176,7 @@ export default function PoliciaLocalEsquemaLlei() {
           <div style={{
             position: 'absolute', top: -12, left: 18,
             padding: '4px 12px', borderRadius: 999,
-            background: '#fff', border: `1px solid ${CREAM_BORDER}`,
+            background: V.surface, border: `1px solid ${CREAM_BORDER}`,
             fontFamily: 'JetBrains Mono, ui-monospace, monospace',
             fontSize: 11, fontWeight: 800, letterSpacing: 2,
             textTransform: 'uppercase', color: BLUE_INK,
@@ -206,7 +198,7 @@ export default function PoliciaLocalEsquemaLlei() {
             {esquema.eras.map((e, i) => (
               <div key={e.id} style={{
                 padding: '14px 16px', borderRadius: 14,
-                background: '#fff', border: '1px solid var(--line)',
+                background: V.surface, border: '1px solid var(--line)',
                 display: 'flex', flexDirection: 'column', gap: 4,
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -304,7 +296,7 @@ export default function PoliciaLocalEsquemaLlei() {
             <div key={i} style={{
               display: 'flex', alignItems: 'flex-start', gap: 14,
               padding: '16px 18px', borderRadius: 14,
-              background: '#fff', border: '1px solid var(--line)',
+              background: V.surface, border: '1px solid var(--line)',
             }}>
               <span style={{
                 width: 30, height: 30, borderRadius: 15,
@@ -401,7 +393,7 @@ export default function PoliciaLocalEsquemaLlei() {
           .esq-people-grid { grid-template-columns: 1fr; }
         }
       `}</style>
-    </article>
+    </div>
   );
 }
 

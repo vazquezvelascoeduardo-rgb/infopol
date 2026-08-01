@@ -72,8 +72,6 @@ const Profile = lazy(() => import('./pages/Profile'));
 // El temari de Mossos ja es llegeix amb el mateix lector que el de
 // Policia Local (EstudiTema). Aquestes dues pàgines només queden per als
 // enllaços vells, que hi arribin i no es trobin un 404.
-const MossosTemariAmbit = lazy(() => import('./pages/mossos/MossosTemariAmbit'));
-const MossosTemariTema = lazy(() => import('./pages/mossos/MossosTemariTema'));
 const MossosEsquemes = lazy(() => import('./pages/mossos/MossosEsquemes'));
 const MossosEsquemaRapid = lazy(() => import('./pages/mossos/MossosEsquemaRapid'));
 const PoliciaLocalEsquemes = lazy(() => import('./pages/policia-local/PoliciaLocalEsquemes'));
@@ -184,8 +182,8 @@ export default function App() {
               <Route path="/mossos/flashcards/:slug" element={<Navigate to="/mossos/flashcards" replace />} />
               <Route path="/mossos/temari" element={<Navigate to="/estudi" replace />} />
               <Route path="/mossos/estudi/:num" element={<EstudiTema cos="mossos" />} />
-              <Route path="/mossos/temari/:ambit" element={<MossosTemariAmbit />} />
-              <Route path="/mossos/temari/:ambit/:slug" element={<MossosTemariTema />} />
+              <Route path="/mossos/temari/:ambit" element={<Navigate to="/estudi" replace />} />
+              <Route path="/mossos/temari/:ambit/:slug" element={<Navigate to="/estudi" replace />} />
               <Route path="/mossos/esquemes" element={<MossosEsquemes />} />
               <Route path="/mossos/esquemes/:slug" element={<MossosEsquemaRapid />} />
               <Route path="/mossos/:slug" element={<TestSession />} />

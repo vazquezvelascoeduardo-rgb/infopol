@@ -12,10 +12,12 @@
 //
 // Estat persistit a localStorage (separat per cos).
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import { TOPICS } from '../../data/tests';
 import { shuffleQuestion, type ShuffledQuestion } from '../../lib/testRunner';
-import { useT } from '../../lib/i18n';
+import { metaCos } from '../../lib/cos';
+import { I, Mono, V } from '../../lib/v3';
 import {
   buildStudyPool,
   getSRSStats,
@@ -25,13 +27,52 @@ import {
 
 const SESSION_SIZE = 20;
 
+/** Milers amb punt, com a la resta de l'app. */
+const mil = (n: number) => n.toLocaleString('ca-ES');
+
+/** Caixa de xifra: el número gros a dalt i què és a sota. */
+function Xifra({ valor, label, color }: { valor: string; label: string; color?: string }) {
+  return (
+    <div style={{
+      flex: '1 1 120px', background: V.surface, border: `1px solid ${V.hair}`,
+      borderRadius: 18, padding: '15px 16px', boxShadow: V.shadow,
+    }}>
+      <div style={{ fontSize: 24, fontWeight: 800, letterSpacing: -0.9, color: color ?? V.ink }}>{valor}</div>
+      <Mono size={9} color={V.faint} style={{ display: 'block', marginTop: 5, letterSpacing: 1.3 }}>{label}</Mono>
+    </div>
+  );
+}
+
+function BotoGros({ children, onClick, to, disabled, principal, accent }: {
+  children: React.ReactNode; onClick?: () => void; to?: string;
+  disabled?: boolean; principal?: boolean; accent: string;
+}) {
+  const nav = useNavigate();
+  return (
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={onClick ?? (to ? () => nav(to) : undefined)}
+      style={{
+        flex: '1 1 200px', cursor: disabled ? 'not-allowed' : 'pointer',
+        border: principal ? 'none' : `1px solid ${V.border}`, borderRadius: 18,
+        padding: '15px 20px', fontSize: 15, fontWeight: 800, letterSpacing: -0.3,
+        background: principal ? accent : V.surface,
+        color: principal ? '#fff' : V.ink,
+        opacity: disabled ? 0.5 : 1,
+      }}>
+      {children}
+    </button>
+  );
+}
+
 export default function Flashcards() {
   const location = useLocation();
+  const nav = useNavigate();
   const isMossosRoute = location.pathname.startsWith('/mossos');
   const corps: 'pl' | 'mossos' = isMossosRoute ? 'mossos' : 'pl';
+  const meta = metaCos(corps);
   const corpsRoot = isMossosRoute ? '/mossos' : '/policia-local';
-  const corpsLabel = isMossosRoute ? "Mossos d'Esquadra" : 'Policia Local';
-  const { t } = useT();
 
   // Tots els card IDs del cos (mescla de tots els temes).
   const allCards = useMemo(() => {
@@ -141,40 +182,71 @@ export default function Flashcards() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, revealed, index, pool]);
 
-  // ─── Render ──────────────────────────────────────────────────────
+  // ─── Portada ─────────────────────────────────────────────────────
   if (phase === 'intro') {
     return (
-      <FlashcardsIntro
-        corpsRoot={corpsRoot}
-        corpsLabel={corpsLabel}
-        stats={stats}
-        onStart={startSession}
-        t={t}
-      />
+      <div className="v3-page v3-anim">
+        <Mono size={10} color={meta.accentInk} style={{ letterSpacing: 1.8 }}>
+          {meta.kicker} · REPÀS ESPAIAT
+        </Mono>
+        <h1 style={{ fontSize: 30, fontWeight: 800, letterSpacing: -1.3, lineHeight: 1.1, margin: '6px 0 0' }}>
+          Flashcards
+        </h1>
+        <p style={{ fontSize: 13.5, color: V.muted, margin: '7px 0 22px', maxWidth: 560 }}>
+          Totes les preguntes del temari de {meta.nom}, barrejades. Cada carta torna a sortir
+          a l&apos;1, 3, 7, 14, 30… dies segons com la valoris.
+        </p>
+
+        <div style={{ display: 'flex', gap: 11, flexWrap: 'wrap', marginBottom: 20 }}>
+          <Xifra valor={mil(stats.total)} label="CARTES" />
+          <Xifra valor={mil(stats.due)} label="TOCA REPASSAR" color={stats.due > 0 ? V.terraInk : undefined} />
+          <Xifra valor={mil(stats.newCards)} label="NOVES" />
+          <Xifra valor={mil(stats.mastered)} label="DOMINADES" />
+        </div>
+
+        <div style={{ display: 'flex', gap: 11, flexWrap: 'wrap' }}>
+          <BotoGros principal accent={meta.accent} onClick={startSession} disabled={stats.total === 0}>
+            Començar sessió · {Math.min(SESSION_SIZE, stats.due + stats.newCards)} cartes
+          </BotoGros>
+          <BotoGros accent={meta.accent} to={corpsRoot}>Tornar a {meta.label}</BotoGros>
+        </div>
+      </div>
     );
   }
 
+  // ─── Final de sessió ─────────────────────────────────────────────
   if (phase === 'done') {
     return (
-      <FlashcardsDone
-        corpsRoot={corpsRoot}
-        corpsLabel={corpsLabel}
-        stats={stats}
-        seenCount={seenCount}
-        onAgain={startSession}
-        t={t}
-      />
+      <div className="v3-page v3-anim">
+        <Mono size={10} color={V.ok} style={{ letterSpacing: 1.8 }}>SESSIÓ ACABADA</Mono>
+        <h1 style={{ fontSize: 30, fontWeight: 800, letterSpacing: -1.3, lineHeight: 1.1, margin: '6px 0 0' }}>
+          {seenCount > 0 ? `Has revisat ${seenCount} cartes` : 'Ara mateix no queden cartes'}
+        </h1>
+        <p style={{ fontSize: 13.5, color: V.muted, margin: '7px 0 22px', maxWidth: 560 }}>
+          {stats.due > 0
+            ? `Encara en tens ${stats.due} per repassar.`
+            : 'Torna demà: et tocaran les que avui has marcat com a bona o fàcil.'}
+        </p>
+
+        <div style={{ display: 'flex', gap: 11, flexWrap: 'wrap' }}>
+          <BotoGros principal accent={meta.accent} onClick={startSession}>Una altra sessió</BotoGros>
+          <BotoGros accent={meta.accent} to={corpsRoot}>Tornar a {meta.label}</BotoGros>
+        </div>
+      </div>
     );
   }
 
+  // ─── Sessió ──────────────────────────────────────────────────────
   const cardId = pool[index];
   const ref = questionById.get(cardId);
   if (!ref) {
     // Pregunta inexistent (se l'ha esborrat del codi). Saltem.
     return (
-      <div className="shell py-10">
-        <p className="text-text-2">Pregunta no trobada. Reinicia la sessió.</p>
-        <button className="fc-btn primary mt-3" onClick={startSession}>Reiniciar</button>
+      <div className="v3-page v3-anim">
+        <p style={{ fontSize: 15, color: V.muted }}>Pregunta no trobada. Reinicia la sessió.</p>
+        <div style={{ display: 'flex', gap: 11, marginTop: 14 }}>
+          <BotoGros principal accent={meta.accent} onClick={startSession}>Reiniciar</BotoGros>
+        </div>
       </div>
     );
   }
@@ -183,82 +255,80 @@ export default function Flashcards() {
   const topic = TOPICS.find((tp) => tp.slug === ref.topicSlug);
 
   return (
-    <div className="shell pb-10">
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <Link to={corpsRoot}>{corpsLabel}</Link>
-        <span className="sep">/</span>
-        <span className="here">Flashcards</span>
-      </nav>
-
-      {/* Progrés */}
-      <div className="flex items-center justify-between mt-4 mb-3 text-sm font-bold text-text-2">
-        <span>
-          {index + 1} <span className="text-text-3">/ {pool.length}</span>
-          {requeue.length > 0 && (
-            <span className="text-text-3"> · {requeue.length} per repetir</span>
-          )}
-        </span>
+    <div className="v3-page v3-anim" style={{ maxWidth: 780, margin: '0 auto', width: '100%' }}>
+      {/* Progrés de la sessió */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 9 }}>
+        <Mono size={11} color={V.muted}>
+          {index + 1} / {pool.length}
+          {requeue.length > 0 && ` · ${requeue.length} PER REPETIR`}
+        </Mono>
         <button
           type="button"
           onClick={endSession}
-          className="text-xs font-semibold uppercase tracking-wide text-ink underline underline-offset-4"
-        >
+          style={{
+            border: 'none', background: 'transparent', cursor: 'pointer', color: V.muted,
+            fontSize: 12, fontWeight: 700, padding: 0,
+          }}>
           Acabar sessió
         </button>
       </div>
-      <div className="h-1.5 rounded-full bg-line mb-5 overflow-hidden">
-        <div
-          className="h-full transition-all"
-          style={{
-            width: `${((index + 1) / pool.length) * 100}%`,
-            background: 'var(--ink)',
-          }}
-        />
+      <div style={{ height: 6, borderRadius: 999, background: V.surface2, overflow: 'hidden', marginBottom: 18 }}>
+        <div style={{
+          height: '100%', width: `${((index + 1) / pool.length) * 100}%`,
+          background: meta.accent, transition: 'width .3s ease',
+        }} />
       </div>
 
-      {/* Tag del tema (per donar context, però no és el "filtre") */}
       {topic && (
-        <div className="mb-2 text-xs font-mono text-text-3">
-          {topic.icon} {topic.title}
-        </div>
+        <Mono size={10} color={V.faint} style={{ display: 'block', marginBottom: 9, letterSpacing: 1.2 }}>
+          {topic.title.toUpperCase()}
+        </Mono>
       )}
 
-      {/* La carta */}
+      {/* La carta. Es gira tocant-la. */}
       <button
         type="button"
         onClick={() => setRevealed((v) => !v)}
-        className="fc-card"
         style={{
-          ['--accent' as never]: 'var(--ink)',
-          ['--accent-bg' as never]: 'var(--paper-2)',
-        } as React.CSSProperties}
-      >
-        <div className="fc-side fc-question">
-          <span className="fc-tag">PREGUNTA</span>
-          <p className="fc-text">{shuffled.question.text}</p>
-          {!revealed && (
-            <span className="fc-hint">Toca la carta per veure la resposta</span>
-          )}
-        </div>
+          width: '100%', textAlign: 'left', cursor: 'pointer', border: `1px solid ${V.hair}`,
+          borderRadius: 24, padding: 'clamp(20px,3vw,30px)', background: V.surface, color: V.ink,
+          boxShadow: V.shadowLg, minHeight: 220,
+          display: 'flex', flexDirection: 'column', gap: 14,
+        }}>
+        <Mono size={9.5} color={meta.accentInk} style={{ letterSpacing: 1.6 }}>PREGUNTA</Mono>
+        <p style={{ margin: 0, fontSize: 19, fontWeight: 700, lineHeight: 1.4, letterSpacing: -0.4 }}>
+          {shuffled.question.text}
+        </p>
 
-        {revealed && (
-          <div className="fc-side fc-answer">
-            <span className="fc-tag good">RESPOSTA</span>
-            <ul className="fc-options">
+        {!revealed ? (
+          <Mono size={10} color={V.faint} style={{ marginTop: 'auto', letterSpacing: 1.2 }}>
+            TOCA LA CARTA PER VEURE LA RESPOSTA
+          </Mono>
+        ) : (
+          <div style={{ borderTop: `1px solid ${V.hair}`, paddingTop: 16, marginTop: 4 }}>
+            <Mono size={9.5} color={V.ok} style={{ letterSpacing: 1.6 }}>RESPOSTA</Mono>
+            <ul style={{ listStyle: 'none', margin: '11px 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 7 }}>
               {shuffled.options.map((opt, i) => {
-                const isCorrect = i === shuffled.correctIndex;
+                const bo = i === shuffled.correctIndex;
                 return (
-                  <li key={i} className={isCorrect ? 'opt correct' : 'opt'}>
-                    <span className="opt-letter">{isCorrect ? '✓' : ''}</span>
-                    <span className="opt-text">{opt}</span>
+                  <li key={i} style={{
+                    display: 'flex', alignItems: 'flex-start', gap: 10, padding: '11px 13px',
+                    borderRadius: 13, fontSize: 14.5, lineHeight: 1.4,
+                    background: bo ? V.okSoft : V.paper,
+                    color: bo ? V.ink : V.muted,
+                    fontWeight: bo ? 700 : 500,
+                    border: `1px solid ${bo ? V.ok : 'transparent'}`,
+                  }}>
+                    <span style={{ width: 16, flexShrink: 0, color: V.ok, fontWeight: 800 }}>{bo ? '✓' : ''}</span>
+                    <span style={{ minWidth: 0 }}>{opt}</span>
                   </li>
                 );
               })}
             </ul>
             {shuffled.question.reference && (
-              <p className="fc-ref">📖 {shuffled.question.reference}</p>
+              <Mono size={10} color={V.faint} style={{ display: 'block', marginTop: 12, letterSpacing: 0.8 }}>
+                {shuffled.question.reference}
+              </Mono>
             )}
           </div>
         )}
@@ -266,179 +336,57 @@ export default function Flashcards() {
 
       {/* Controls */}
       {!revealed ? (
-        <div className="fc-controls fc-controls-1">
-          <button
-            type="button"
-            onClick={() => setRevealed(true)}
-            className="fc-btn primary"
-          >
-            Veure resposta
-          </button>
-        </div>
-      ) : (
-        <div className="fc-rate">
-          <button
-            type="button"
-            onClick={() => onRate('again')}
-            className="fc-rate-btn again"
-          >
-            <span className="key">1</span>
-            <span className="lbl">Encara no</span>
-            <span className="when">avui</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => onRate('good')}
-            className="fc-rate-btn good"
-          >
-            <span className="key">2</span>
-            <span className="lbl">Bona</span>
-            <span className="when">{nextIntervalLabel('good', cardId, corps)}</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => onRate('easy')}
-            className="fc-rate-btn easy"
-          >
-            <span className="key">3</span>
-            <span className="lbl">Fàcil</span>
-            <span className="when">{nextIntervalLabel('easy', cardId, corps)}</span>
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ─── Intro ──────────────────────────────────────────────────────────
-function FlashcardsIntro({
-  corpsRoot, corpsLabel, stats, onStart, t,
-}: {
-  corpsRoot: string;
-  corpsLabel: string;
-  stats: ReturnType<typeof getSRSStats>;
-  onStart: () => void;
-  t: (k: string) => string;
-}) {
-  return (
-    <div className="shell pb-10">
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <Link to={corpsRoot}>{corpsLabel}</Link>
-        <span className="sep">/</span>
-        <span className="here">Flashcards</span>
-      </nav>
-
-      <header className="ts-hero">
-        <div className="eyebrow">🃏 Flashcards · estil Anki</div>
-        <h1>
-          Memoritza amb la<br />
-          <em>corba de l'oblit</em>
-        </h1>
-        <p className="lead">
-          Totes les preguntes del temari de {corpsLabel} barrejades.
-          La carta torna a aparèixer als 1, 3, 7, 14, 30… dies segons com
-          la valoris. El teu progrés es guarda al navegador.
-        </p>
-      </header>
-
-      <section className="my-stats">
-        <div className="my-stat done">
-          <span className="lab">📚 Total</span>
-          <div className="num">{stats.total.toLocaleString('ca-ES')}</div>
-        </div>
-        <div className="my-stat acc">
-          <span className="lab">⏰ Toca repassar</span>
-          <div className="num" style={{ color: stats.due > 0 ? '#C13030' : 'var(--ink)' }}>
-            {stats.due}
-          </div>
-        </div>
-        <div className="my-stat streak">
-          <span className="lab">✨ Noves</span>
-          <div className="num">{stats.newCards}</div>
-        </div>
-        <div className="my-stat lvl">
-          <span className="lab">🏆 Dominades</span>
-          <div className="num">{stats.mastered}</div>
-        </div>
-      </section>
-
-      <div className="mt-5">
         <button
           type="button"
-          onClick={onStart}
-          className="fc-btn primary"
-          style={{ width: '100%', padding: '16px 20px', fontSize: 16 }}
-          disabled={stats.total === 0}
-        >
-          ▶ Començar sessió ({Math.min(SESSION_SIZE, stats.due + stats.newCards)} cartes)
+          onClick={() => setRevealed(true)}
+          style={{
+            marginTop: 14, width: '100%', cursor: 'pointer', border: 'none', borderRadius: 18,
+            padding: '15px 20px', background: meta.accent, color: '#fff',
+            fontSize: 15, fontWeight: 800, letterSpacing: -0.3,
+          }}>
+          Veure resposta
         </button>
-      </div>
+      ) : (
+        <div style={{ display: 'flex', gap: 10, marginTop: 14, flexWrap: 'wrap' }}>
+          {([
+            { r: 'again' as Rating, tecla: '1', lbl: 'Encara no', color: V.terraInk, fons: V.terraSoft },
+            { r: 'good' as Rating, tecla: '2', lbl: 'Bona', color: V.ok, fons: V.okSoft },
+            { r: 'easy' as Rating, tecla: '3', lbl: 'Fàcil', color: V.blue, fons: V.blueSoft },
+          ]).map((b) => (
+            <button
+              key={b.r}
+              type="button"
+              onClick={() => onRate(b.r)}
+              style={{
+                flex: '1 1 130px', cursor: 'pointer', border: `1px solid ${b.color}33`,
+                borderRadius: 18, padding: '13px 14px', background: b.fons, color: b.color,
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3,
+              }}>
+              <Mono size={9} color={b.color} style={{ opacity: 0.7 }}>{b.tecla}</Mono>
+              <span style={{ fontSize: 14.5, fontWeight: 800, letterSpacing: -0.3 }}>{b.lbl}</span>
+              <Mono size={9.5} color={b.color} style={{ opacity: 0.75 }}>
+                {etiquetaInterval(b.r, cardId, corps).toUpperCase()}
+              </Mono>
+            </button>
+          ))}
+        </div>
+      )}
 
-      <div className="mt-3 text-center">
-        <Link
-          to={corpsRoot}
-          className="text-xs font-semibold uppercase tracking-wide text-text-3 hover:text-ink"
-        >
-          ← Tornar a {corpsLabel}
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-// ─── Done ──────────────────────────────────────────────────────────
-function FlashcardsDone({
-  corpsRoot, corpsLabel, stats, seenCount, onAgain, t,
-}: {
-  corpsRoot: string;
-  corpsLabel: string;
-  stats: ReturnType<typeof getSRSStats>;
-  seenCount: number;
-  onAgain: () => void;
-  t: (k: string) => string;
-}) {
-  return (
-    <div className="shell pb-10">
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <Link to={corpsRoot}>{corpsLabel}</Link>
-        <span className="sep">/</span>
-        <span className="here">Flashcards</span>
-      </nav>
-
-      <header className="ts-hero">
-        <div className="eyebrow">✅ Sessió completada</div>
-        <h1>
-          {seenCount > 0 ? (
-            <>Has revisat <em>{seenCount}</em> cartes</>
-          ) : (
-            <>No queden cartes per estudiar ara mateix</>
-          )}
-        </h1>
-        <p className="lead">
-          {stats.due > 0
-            ? `Encara tens ${stats.due} cartes per repassar.`
-            : 'Tornes demà i et tocaran les que avui has marcat com a "bona/fàcil".'}
-        </p>
-      </header>
-
-      <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <button type="button" onClick={onAgain} className="fc-btn primary" style={{ padding: '14px 18px' }}>
-          ▶ Una altra sessió
-        </button>
-        <Link to={corpsRoot} className="fc-btn" style={{ padding: '14px 18px', textAlign: 'center' }}>
-          ← Tornar a {corpsLabel}
-        </Link>
-      </div>
+      <button
+        type="button"
+        onClick={() => nav(corpsRoot)}
+        style={{
+          margin: '18px auto 0', display: 'block', border: 'none', background: 'transparent',
+          cursor: 'pointer', color: V.faint, fontSize: 12, fontWeight: 700,
+        }}>
+        <I n="back" size={12} sw={2.4} /> Sortir a {meta.label}
+      </button>
     </div>
   );
 }
 
 // ─── Helpers ───────────────────────────────────────────────────────
-function nextIntervalLabel(rating: Rating, cardId: string, corps: 'pl' | 'mossos'): string {
+function etiquetaInterval(rating: Rating, cardId: string, corps: 'pl' | 'mossos'): string {
   // Calcula etiqueta humana del proper interval.
   const INTERVALS = [1, 3, 7, 14, 30, 60, 120, 240];
   const state = (() => {
