@@ -17,6 +17,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import Enrere from './Enrere';
 import TriaPerfilUs from './TriaPerfilUs';
+import { amunt } from '../lib/amunt';
 import { useAuth } from '../lib/auth';
 import { TEMES } from '../content/temari-pl';
 import { getUserProgress, type PerfilUs, type UserProgress } from '../lib/db';
@@ -464,6 +465,10 @@ export default function AppShell() {
 
   useEffect(() => { applyInitialTheme(); }, []);
   useEffect(() => { setCalaix(false); }, [pathname]);
+  // Cada pàgina nova comença per dalt. Qui scrolleja és el <main>, i com
+  // que no es desmunta en canviar de ruta es quedava a l'alçada de la
+  // pàgina anterior: obries un tema des de mig llistat i queia a mitges.
+  useEffect(() => { amunt(); }, [pathname]);
   // En canviar de secció, obre el submenú de la nova.
   useEffect(() => { setDesplegada((d) => (d === activa ? d : activa)); }, [activa]);
 

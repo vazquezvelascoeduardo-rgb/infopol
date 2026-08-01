@@ -14,6 +14,7 @@ import { temaPerNum } from '../content/temari-pl';
 import { contingutDe } from '../content/temari-pl/carrega';
 import { temaMossosPerNum } from '../content/temari-mossos';
 import { contingutDeMossos } from '../content/temari-mossos/carrega';
+import { amunt } from '../lib/amunt';
 import type { BlocContingut } from '../lib/temari-format';
 import { I, Mono, RV, V } from '../lib/v3';
 
@@ -145,6 +146,11 @@ export default function EstudiTema({ cos = 'pl' }: { cos?: CosTemari }) {
 
   useEffect(() => { setFets(llegits()[clau] ?? []); }, [clau]);
   useEffect(() => { setI(0); }, [clau]);
+
+  // Cada apartat comença per dalt, tant si hi arribes pel botó de
+  // "següent" com si el tries a l'índex de l'esquerra. Abans es quedava
+  // a l'alçada on havies deixat l'apartat anterior i calia pujar a mà.
+  useEffect(() => { amunt(); }, [clau, i]);
 
   // Llegir un apartat el marca. No cal fer res més.
   useEffect(() => {
@@ -298,7 +304,7 @@ export default function EstudiTema({ cos = 'pl' }: { cos?: CosTemari }) {
             {i + 1 < total && (
               <button
                 type="button"
-                onClick={() => { setI(i + 1); window.scrollTo(0, 0); }}
+                onClick={() => setI(i + 1)}
                 style={{
                   cursor: 'pointer', border: `1px solid ${V.border}`, borderRadius: RV.md,
                   padding: '16px 22px', background: V.surface, color: V.ink,
