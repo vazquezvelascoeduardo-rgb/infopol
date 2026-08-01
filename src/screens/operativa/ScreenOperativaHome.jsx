@@ -43,6 +43,18 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  // 01·08·2026
+  { date: '08·01', tag: 'Policial · Ceuta', title: 'Crisis migratòria a Ceuta: 67 morts i 50.000 entrades des del Marroc', desc: '50.000 migrants han creuat la frontera en pocs dies. La UE convoca reunió d\'emergència; Itàlia imposa controls fronterers des d\'Espanya.' },
+  { date: '08·01', tag: 'Política · Catalunya', title: 'Illa exigeix explicacions a Niubó pels resultats PISA', desc: 'El president ratifica la confiança en la consellera però demana aclariments. Els Comuns amenacen amb demanar la dimissió a l\'inici de curs.' },
+  { date: '08·01', tag: 'Clima · Catalunya', title: 'Juliol 2026: el mes més calorós mai registrat a Catalunya', desc: 'Temperatures rècord absolutes tanquen el juliol més càlid de la història. Alertes per tempestes al Pirineu i Terres de l\'Ebre.' },
+  { date: '08·01', tag: 'Esports', title: 'Espanya, campiona del Món 2026 davant Argentina (1-0)', desc: 'Ferran Torres va marcar en la pròrroga al MetLife Stadium el 19 de juliol. Rodri, Millor Jugador del torneig.' },
+  { date: '08·01', tag: 'Internacional', title: 'Acord històric a Gaza: Hamàs accepta el desarmament', desc: 'Trump anuncia el pacte on Hamàs es desarma a canvi de la retirada israeliana. La comunitat internacional el qualifica de «fita sense precedents».' },
+  { date: '08·01', tag: 'Internacional · Seguretat', title: 'Hamburg reforça el dispositiu policial al CSD per l\'atac de Berlín', desc: 'Seguretat reforçada al desfilament de l\'Orgull un mes després de l\'atemptat letal de Berlín del 25 de juliol.' },
+  { date: '08·01', tag: 'Internacional', title: 'Terratrèmol de 7,1 a Kumamoto (Japó): 35 morts', desc: 'El sisme ha causat almenys 35 morts i desenes de desapareguts. Els equips de rescat treballen entre les runes amb alerta de tsunami activa.' },
+  { date: '08·01', tag: 'Cultura', title: 'Rosalía enceta la gira LUX Tour 2026 a Buenos Aires', desc: 'La cantant catalana inicia la seva gira mundial amb quatre concerts al Movistar Arena de Buenos Aires.' },
+  { date: '08·01', tag: 'Patrimoni', title: 'Descoberta a Mèrida una làpida sepulcral intacta del 519 dC', desc: 'Arqueòlegs troben la làpida funerària d\'un infant en perfecte estat en una residència de Mèrida. Peça única de la Hispania tardoromana.' },
+  { date: '08·01', tag: 'Premis · Espanya', title: 'Ministeri de Ciència atorga els Premis Nacionals d\'Innovació i Disseny 2026', desc: 'La ministra Morant presenta els guanyadors dels Premis Nacionals d\'Innovació i de Disseny 2026 en transferència tecnològica i disseny industrial.' },
+  // Arxiu normatiu
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
