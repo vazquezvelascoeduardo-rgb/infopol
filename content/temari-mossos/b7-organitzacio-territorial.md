@@ -35,7 +35,18 @@ Els ==**regidors s'elegeixen per sufragi universal, igual, lliure, directe i sec
 :::
 
 :::clau
-Els cinc òrgans mínims es demanen sencers: ==**alcalde, regidors, tinents d'alcalde, ple i comissió especial de comptes**==. I el llindar de la ==**junta de govern són 5.000 habitants**==.
+Els cinc òrgans mínims es demanen sencers: ==**alcalde, regidors, tinents d'alcalde, ple i comissió especial de comptes**==. I el llindar de la ==**junta de govern són 5.000 habitants**==. La ==**comissió especial de comptes és un òrgan necessari a tots els ajuntaments**==, i la ==**figura de l'alcalde és obligatòria a tots els municipis**==.
+:::
+
+:::articles
+Què és el municipi | La definició
+És la ==**unitat local bàsica de l'organització territorial de l'Estat**==.
+
+Quines potestats té
+La llei li reconeix potestats ==**executives i normatives de tipus reglamentari**==: pot dictar ordenances i bans, però ==**no pot fer lleis**==.
+
+Els regidors
+Són una figura ==**pròpia dels municipis**==, no de cap altre ens local.
 :::
 
 ## La província
@@ -48,6 +59,14 @@ El seu govern i administració s'encomana a les ==**diputacions**== o altres cor
 :::articles
 art. 141.3 | Les agrupacions
 ==La CE **no crea la institució comarcal**==, però a l'==**article 141.3**== preveu la possibilitat que ==es creïn **agrupacions de municipis diferents de la província**==.
+:::
+
+:::articles
+Caràcter bifront | Les dues cares
+Quan es parla del ==**caràcter "bifront" de les províncies**== es vol dir que són alhora ==**divisió administrativa i circumscripció electoral**==.
+
+La definició que es demana
+La ==**província**== és la que respon a la definició de ==**divisió territorial per al compliment de les activitats de l'Estat**==.
 :::
 
 :::avis
@@ -68,7 +87,10 @@ Els consells de vegueria | art. 91
 El govern i l'administració de la vegueria corresponen al ==**Consell de vegueria**==. I la clau del tema: ==**els consells de vegueria substitueixen les diputacions**==.
 
 Les comarques | Llei catalana
-Catalunya té ==**42 comarques**== (des de la creació del ==Moianès, el 2015==) i ==**8 vegueries**== (des de l'afegit del ==Penedès, el 2017==).
+Catalunya té ==**42 comarques**== (des de la creació del ==Moianès, el 2015==) i ==**8 vegueries**== (des de l'afegit del ==Penedès, el 2017==). El ==**règim jurídic de les comarques es regula al Decret legislatiu 2/2003**==, i les ==**competències que exerceix la comarca són d'origen municipal o de la Generalitat**==.
+
+La vegueria com a govern local
+Té ==naturalesa territorial== i gaudeix d'==**autonomia per a la gestió dels seus interessos**==.
 :::
 
 :::clau
@@ -90,7 +112,26 @@ Competències | arts. 148 i 149
 L'==art. 148== llista les que poden assumir les comunitats; l'==**art. 149.1**== les ==**exclusives de l'Estat**==, entre elles la ==**seguretat pública (149.1.29a)**==.
 
 Organització | art. 152
-==Assemblea legislativa== elegida per sufragi universal amb representació proporcional, ==consell de govern== amb funcions executives, ==president== i ==**tribunal superior de justícia**==.
+==Assemblea legislativa== elegida per sufragi universal amb representació proporcional, ==consell de govern== amb funcions executives, ==president== i ==**tribunal superior de justícia**== — que és el tribunal a què es refereix l'==**article 152**==.
+
+Reforma per la via lenta | El termini
+Les comunitats que van accedir a l'autonomia per la ==**via ordinària de l'article 143**== havien d'esperar ==**cinc anys**== per reformar els seus estatuts i ampliar competències.
+
+Lleis d'harmonització | art. 150.3
+Són l'instrument amb què l'==**Estat pot dictar lleis que estableixin els principis necessaris per harmonitzar les disposicions normatives de les comunitats autònomes**==.
+
+El mapa | Com va quedar
+Un cop desplegat, Espanya està constituïda per ==**17 comunitats autònomes i 2 ciutats autònomes**==.
+
+Autonomia política | El concepte
+La ==**descentralització legislativa**==, que permet a les comunitats fer lleis, és el mateix que l'==**autonomia política**== — i és el que la distingeix de l'autonomia merament administrativa dels ens locals.
+
+Estat unitari | D'on ve el concepte
+El concepte d'==**Estat unitari neix a França**==.
+:::
+
+:::clau
+Dos articles que es confonen: l'==**article 2 CE reconeix el dret a l'autonomia de les nacionalitats i regions**==; l'==**article 137 diu com s'organitza territorialment l'Estat: municipis, províncies i les comunitats autònomes que es constitueixin**==.
 :::
 
 :::avis
