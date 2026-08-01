@@ -19,8 +19,15 @@ const mossosC3: TestTopic = {
     { id: 'mossos-c3-5', text: 'El principi de coordinació entre cossos policials està previst:', options: ['Amb caràcter general per a tots els cossos policials', 'Només per a Mossos i policies locals', 'Exclusivament en àmbit municipal', 'Únicament per als cossos estatals'], correct: 0 },
     { id: 'mossos-c3-6', text: 'Quina és la norma que regula la seguretat pública a Catalunya?', options: ["Llei 10/1994, d'11 de juliol", "Llei 4/2003, de 7 d'abril", 'Llei 14/1997, de 24 de desembre', 'Llei 16/1991, de 10 de juliol'], correct: 1 },
     { id: 'mossos-c3-7', text: "La Llei 4/2003, de 7 d'abril, té per objecte:", options: ["L'ordenació de les competències de la Generalitat en matèria de seguretat pública, especialment les de policia, integració amb protecció civil, trànsit, joc i espectacles i seguretat privada", 'Regular les policies locals de Catalunya', 'Regular únicament la Policia de la Generalitat', 'Crear el Servei Català de Trànsit'], correct: 0 },
-    { id: 'mossos-c3-8', text: "Quin organisme és l'encarregat de coordinar les polítiques de seguretat a nivell nacional?", options: ['Junta Local de Seguretat', 'Comissió de Coordinació de Policies Locals', 'Consell de Política de Seguretat', 'Mesa de Coordinació Operativa'], correct: 2 },
-    { id: 'mossos-c3-9', text: 'De qui depèn la Mesa de Coordinació Operativa?', options: ["Del Conseller d'Interior", 'Del Govern de la Generalitat', 'Del President de la Generalitat', 'Del Director General de la Policia'], correct: 1 },
+    // El nom "Consell de Política de Seguretat" no existeix a la Llei
+    // 4/2003: l'òrgan consultiu i de participació superior de Catalunya en
+    // matèria de seguretat és el Consell de Seguretat de Catalunya (art. 6).
+    { id: 'mossos-c3-8', text: "Quin és l'òrgan consultiu i de participació superior de Catalunya en matèria de seguretat?", options: ['Junta Local de Seguretat', 'Comissió de Coordinació de Policies Locals', 'Consell de Seguretat de Catalunya', 'Mesa de Coordinació Operativa'], correct: 2 },
+    // Art. 11.1 de la Llei 4/2003: "les juntes locals de seguretat han de
+    // crear una mesa de coordinació operativa". Depenia, segons aquesta
+    // pregunta, del president de la Generalitat: era fals i contradeia el
+    // temari. Corregit amb el text consolidat (BOE-A-2003-9620).
+    { id: 'mossos-c3-9', text: 'De qui depèn la Mesa de Coordinació Operativa?', options: ["Del Conseller d'Interior", 'De la Junta Local de Seguretat', 'Del President de la Generalitat', 'Del Director General de la Policia'], correct: 1 },
     { id: 'mossos-c3-10', text: 'Les Juntes Locals de Seguretat són obligatòries:', options: ['Als municipis amb policia municipal pròpia', 'En capitals de comarca', 'Únicament en municipis de més de 20.000 habitants', 'En tots els municipis catalans'], correct: 0 },
     { id: 'mossos-c3-11', text: "En quin article de la Llei 10/1994 es recullen els principis de coordinació, cooperació i col·laboració mútua segons els quals han d'operar Mossos i FCS de l'Estat?", options: ['Article 11', 'Article 12.2', 'Article 38', 'Article 164'], correct: 1 },
     { id: 'mossos-c3-12', text: "Des de quin any funciona l'Oficina Central Nacional d'Interpol a Espanya?", options: ['1923', '1956', '1989', '1929'], correct: 3 },

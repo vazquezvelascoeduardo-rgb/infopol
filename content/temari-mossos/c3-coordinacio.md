@@ -52,6 +52,9 @@ La ==**norma que regula la seguretat pública a Catalunya és la Llei 4/2003, de
 Govern de la Generalitat | art. 4
 És l'==**òrgan col·legiat superior en matèria de seguretat a Catalunya**==.
 
+Consell de Seguretat de Catalunya | art. 6
+És l'==**òrgan consultiu i de participació superior de Catalunya en matèria de seguretat**==. El ==**presideix el conseller**== competent i l'integren representants de les ==entitats ciutadanes, les administracions locals i la Generalitat== i, si l'Estat hi està d'acord, de l'==Administració de l'Estat, la judicatura i la fiscalia==.
+
 Comissió del Govern per a la Seguretat | art. 7
 La presideix el ==president de la Generalitat== i la integren els ==**consellers responsables de matèries relacionades amb la seguretat**==. Es reuneix ==com a mínim un cop cada trimestre==.
 
@@ -62,7 +65,7 @@ Junta Local de Seguretat | art. 9
 ==**Obligatòria als municipis que tenen policia local pròpia**==. La presideix l'==alcalde==, es reuneix ==**trimestralment**== amb ==una sessió anual plenària==, i els seus ==**acords s'adopten per unanimitat i són executius**==.
 
 Mesa de Coordinació Operativa | art. 11
-Òrgan ==permanent i estable== de coordinació operativa al municipi. ==**Depèn de la Junta Local de Seguretat**==, que la crea i a la qual eleva propostes. La integren els ==caps dels Mossos i de la policia local==.
+Òrgan ==permanent i estable== de coordinació i cooperació dels diversos cossos i serveis de seguretat al municipi. Diu l'article que ==**les juntes locals de seguretat han de crear una mesa de coordinació operativa**==: per tant, ==**depèn de la Junta Local de Seguretat**==, no del president de la Generalitat. La integren els ==**caps dels Mossos i de la policia local que són membres de la junta local**== i, si escau, els altres comandaments que la junta determini. La seva primera funció és ==**executar els acords de la junta local**==.
 :::
 
 Comissió de Coordinació de les Policies Locals | La successora
