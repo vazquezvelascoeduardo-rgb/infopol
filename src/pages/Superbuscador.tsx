@@ -16,7 +16,8 @@ import {
   type Severity,
 } from '../lib/cataleg-parser';
 import { findOfficialConcept } from '../lib/cataleg-nomenclator';
-import { A, Ic, Mono, Card, Shell } from '../lib/design';
+import Capcalera from '../components/Capcalera';
+import { A, Ic, Mono, Card } from '../lib/design';
 
 export default function Superbuscador() {
   // La cerca pot arribar pre-omplida des d'altres pàgines (Operativa,
@@ -53,25 +54,13 @@ export default function Superbuscador() {
   const laws = getCatalegLaws();
 
   return (
-    <Shell max={960}>
-      {/* Capçalera */}
-      <div style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, background: `${A.purple}`, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadow, marginBottom: 18 }}>
-        <div style={{ position: 'absolute', top: -50, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
-        <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-          <span style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0 }}><Ic name="search" size={28} color="#fff" sw={2.2} /></span>
-          <div style={{ minWidth: 0 }}>
-            <Mono size={11} color="rgba(255,255,255,0.85)">Catàleg SCT 2026</Mono>
-            <h1 style={{ margin: '6px 0 0', fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: -1, lineHeight: 1.05 }}>Superbuscador d'infraccions</h1>
-            <p style={{ margin: '8px 0 0', fontFamily: A.sans, fontSize: 14.5, lineHeight: 1.5, opacity: 0.92, maxWidth: 480 }}>Cerca per concepte, article, multa o punts a totes les normes alhora.</p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7, marginTop: 14 }}>
-              {laws.map((l) => (
-                <span key={l.id} title={l.full} style={{ background: 'rgba(255,255,255,0.16)', borderRadius: 8, padding: '4px 10px', fontFamily: A.mono, fontWeight: 600, fontSize: 11 }}>{l.short}</span>
-              ))}
-              <span style={{ alignSelf: 'center', fontFamily: A.mono, fontSize: 11, opacity: 0.8 }}>· {allRows.length} infraccions</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="v3-page v3-anim" style={{ maxWidth: 1000, width: '100%' }}>
+      <Capcalera
+        kicker="Catàleg SCT 2026"
+        titol="Superbuscador d'infraccions"
+        lead="Cerca per concepte, article, multa o punts a totes les normes alhora."
+        xifres={[{ valor: allRows.length.toLocaleString('ca-ES'), label: 'infraccions' }, { valor: String(laws.length), label: 'normes' }]}
+      />
 
       {/* Input gran */}
       <div style={{ position: 'relative', marginBottom: 18 }}>
@@ -117,7 +106,7 @@ export default function Superbuscador() {
       )}
 
       <DetailDrawer row={selected} onClose={() => setSelected(null)} />
-    </Shell>
+    </div>
   );
 }
 

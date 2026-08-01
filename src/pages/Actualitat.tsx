@@ -1,13 +1,12 @@
 // Pàgina d'índex d'Actualitat 2025-2026.
-// Mateix patró que CulturaGeneral: hero + CTA gros al pool mesclat
-// (totes les preguntes barrejades) + llegenda dels blocs temàtics.
+// Mateix patró que Cultura general: capçalera, blocs temàtics inclosos al
+// pool i el test mesclat al final.
 // Categoria 'actualitat' — no entra al pool combinat del temari oficial.
-import { Link } from 'react-router-dom';
-import { useT } from '../lib/i18n';
-import { TOPICS } from '../data/tests';
-import { A, Mono } from '../lib/design';
+import { useNavigate } from 'react-router-dom';
 
-const ACCENT = '#C4530A';   // terracota de text: el pur no es llegeix sobre paper
+import Capcalera from '../components/Capcalera';
+import { TOPICS } from '../data/tests';
+import { I, Mono, V } from '../lib/v3';
 
 // Blocs temàtics inclosos al pool d'Actualitat (informatiu, sense link).
 const BLOCS = [
@@ -22,115 +21,63 @@ const BLOCS = [
 ];
 
 export default function Actualitat() {
-  const { t } = useT();
+  const nav = useNavigate();
   const topics = TOPICS.filter((tp) => tp.category === 'actualitat');
   const totalQuestions = topics.reduce((acc, tp) => acc + tp.questions.length, 0);
 
   return (
-    <div className="shell pb-10">
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <span className="here">Actualitat</span>
-      </nav>
+    <div className="v3-page v3-anim">
+      <Capcalera
+        kicker="Actualitat 2025–2026"
+        titol="Actualitat"
+        lead="Càrrecs vigents, premis, esports i fets clau que cauen a l'examen. Actualitzat el maig del 2026."
+        xifres={[
+          { valor: totalQuestions.toLocaleString('ca-ES'), label: 'preguntes' },
+          { valor: String(BLOCS.length), label: 'blocs temàtics' },
+        ]}
+      />
 
-      {/* HERO amb degradat */}
-      <header style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadow, background: `${A.terracota}`, marginBottom: 8 }}>
-        <div style={{ position: 'absolute', top: -50, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
-        <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-          <span style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0, fontSize: 28 }}>📰</span>
-          <div style={{ minWidth: 0 }}>
-            <Mono size={11} color="rgba(255,255,255,0.85)">Actualitat 2025–2026</Mono>
-            <h1 style={{ margin: '6px 0 0', fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: -1, lineHeight: 1.05 }}>Actualitat — Policia Local</h1>
-            <p style={{ margin: '8px 0 0', fontFamily: A.sans, fontSize: 14.5, lineHeight: 1.5, opacity: 0.92, maxWidth: 520 }}>Càrrecs vigents, premis, esports i fets clau (actualitzat maig 2026). · {totalQuestions} preguntes · {BLOCS.length} blocs temàtics</p>
-          </div>
-        </div>
-      </header>
+      <Mono size={10} color={V.muted} style={{ letterSpacing: 1.6 }}>QUÈ HI ENTRA</Mono>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, margin: '11px 0 24px' }}>
+        {BLOCS.map((b) => (
+          <span
+            key={b.label}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 7,
+              padding: '8px 13px', background: V.surface, border: `1px solid ${V.hair}`,
+              borderRadius: 999, fontSize: 12.5, fontWeight: 600, color: V.muted,
+            }}>
+            <span aria-hidden>{b.ico}</span>
+            {b.label}
+          </span>
+        ))}
+      </div>
 
-      {/* ZONA DE TESTS · només el mode mesclat */}
-      <section
-        className="tests-zone"
+      <button
+        type="button"
+        onClick={() => nav('/actualitat/tot')}
         style={{
-          background: '#FFE9D8 0%',
-          borderColor: 'color-mix(in oklab, #F26B1F 28%, transparent)',
-          boxShadow: '0 2px 14px -8px rgba(242, 107, 31, 0.22)',
-        }}
-      >
-        <header className="tests-zone-head">
-          <div className="eyebrow" style={{ color: ACCENT }}>
-            📰 Test d'actualitat
-          </div>
-          <h2>Test d'actualitat 2025–2026</h2>
-          <p>
-            {totalQuestions} preguntes mesclades sobre càrrecs vigents, premis i fets
-            recents — patrons d'exàmens oficials de Policia Local de Catalunya.
-          </p>
-        </header>
-
-        {/* CTA gros: test mesclat de totes les preguntes d'actualitat */}
-        <div className="tests-zone-modes" style={{ gridTemplateColumns: '1fr' }}>
-          <Link to="/actualitat/tot" className="ts-mode featured">
-            <span className="mtag">⚡ Pool d'actualitat</span>
-            <div>
-              <h3>Test mesclat d'actualitat</h3>
-              <p>
-                Totes les preguntes d'actualitat barrejades — càrrecs, premis,
-                esports i fets recents.
-              </p>
-            </div>
-            <div className="footer">
-              <div className="specs">
-                <span>{totalQuestions} preguntes</span>
-                <span>·</span>
-                <span>{BLOCS.length} blocs temàtics</span>
-              </div>
-              <span className="cta">
-                ▶ {t('test.start')} <span className="arr">→</span>
-              </span>
-            </div>
-          </Link>
-        </div>
-
-        {/* Llegenda informativa dels blocs (sense links a tests individuals) */}
-        <div
-          style={{
-            marginTop: 24,
-            padding: '16px 18px',
-            background: 'rgba(255, 255, 255, 0.6)',
-            border: '1px solid var(--line)',
-            borderRadius: 14,
-          }}
-        >
-          <div
-            className="eyebrow"
-            style={{ color: 'var(--text-3)', marginBottom: 10 }}
-          >
-            🗂️ Blocs temàtics inclosos al pool
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {BLOCS.map((b) => (
-              <span
-                key={b.label}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  padding: '6px 12px',
-                  background: 'var(--paper-2)',
-                  border: '1px solid var(--line)',
-                  borderRadius: 999,
-                  fontSize: 12.5,
-                  fontWeight: 600,
-                  color: 'var(--text-2)',
-                }}
-              >
-                <span aria-hidden>{b.ico}</span>
-                {b.label}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+          width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none',
+          borderRadius: 22, padding: 20, background: V.terra, color: '#fff',
+          boxShadow: '0 14px 30px rgba(255,122,26,.3)',
+          display: 'flex', alignItems: 'center', gap: 15,
+        }}>
+        <span style={{
+          width: 46, height: 46, flexShrink: 0, borderRadius: 15, background: 'rgba(255,255,255,.24)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <I n="check" size={21} sw={2} />
+        </span>
+        <span style={{ flex: 1, minWidth: 0 }}>
+          <span style={{ display: 'block', fontSize: 17, fontWeight: 800, letterSpacing: -0.5 }}>
+            Test mesclat d&apos;actualitat
+          </span>
+          <span style={{ display: 'block', fontSize: 12.5, color: 'rgba(255,255,255,.9)', marginTop: 4 }}>
+            {totalQuestions.toLocaleString('ca-ES')} preguntes de tots els blocs, barrejades
+          </span>
+        </span>
+        <span style={{ fontSize: 22, fontWeight: 800 }}>›</span>
+      </button>
     </div>
   );
 }

@@ -5,6 +5,7 @@
 // directori correponent en seccions amb capçalera coloreada.
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Capcalera from '../components/Capcalera';
 import { useT } from '../lib/i18n';
 import {
   type Noticia, type NoticiaCategoria, groupByMonth, getMonthLabel,
@@ -15,7 +16,6 @@ import {
   type LeaderSection,
 } from '../lib/personalitats';
 import { useDirectory } from '../lib/directoriesRemote';
-import { A, Mono } from '../lib/design';
 
 // Metadades visuals de cada categoria — color sòlid (rebranding 2026)
 // + emoji + soft background per a estats no-actius.
@@ -78,25 +78,19 @@ export default function Noticies() {
   const activeCatMeta = CATEGORIES.find((c) => c.id === activeCat) ?? CATEGORIES[0];
 
   return (
-    <div className="shell pb-10">
+    <div className="v3-page v3-anim">
       <nav className="crumbs">
         <Link to="/">{t('nav.home')}</Link>
         <span className="sep">/</span>
         <span className="here">{t('noticies.title')}</span>
       </nav>
 
-      {/* Hero amb degradat */}
-      <header style={{ position: 'relative', overflow: 'hidden', borderRadius: A.rxl, color: '#fff', padding: 'clamp(22px,3vw,30px)', boxShadow: A.shadow, background: `${activeCatMeta.color}`, marginBottom: 8 }}>
-        <div style={{ position: 'absolute', top: -50, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
-        <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-          <span style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0, fontSize: 28 }}>{activeCatMeta.icon}</span>
-          <div style={{ minWidth: 0 }}>
-            <Mono size={11} color="rgba(255,255,255,0.85)">{t('noticies.badge')}</Mono>
-            <h1 style={{ margin: '6px 0 0', fontFamily: A.display, fontWeight: 700, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: -1, lineHeight: 1.05 }}>{t('noticies.title')}</h1>
-            <p style={{ margin: '8px 0 0', fontFamily: A.sans, fontSize: 14.5, lineHeight: 1.5, opacity: 0.92, maxWidth: 520 }}>{t('noticies.subtitle')}</p>
-          </div>
-        </div>
-      </header>
+      <Capcalera
+        kicker={t(`noticies.badge`)}
+        titol={t(`noticies.title`)}
+        lead={t(`noticies.subtitle`)}
+        accent={activeCatMeta.color}
+      />
 
       {/* TABS DE CATEGORIA — pills amb color de categoria */}
       <nav
