@@ -34,8 +34,12 @@ const json = (status: number, body: unknown) =>
 const QUOTAS: Record<string, number> = { free: 10, opositor: 15, actiu: 60, premium: 80 };
 const MAX_IMAGES = 3;
 const MAX_FILE_BYTES = 4 * 1024 * 1024;
-const MAX_HISTORY = 12;
+const MAX_HISTORY = 8;
 const MAX_CHARS = 6000;
+/** Els missatges anteriors només fan falta per no perdre el fil. */
+const MAX_CHARS_HISTORIAL = 1800;
+/** Quant enviem de cada fragment del corpus: el gra és a dalt. */
+const MAX_CHARS_FRAGMENT = 1500;
 
 const AMBIT = `ÀMBIT (INNEGOCIABLE):
 - Actues NOMÉS per a CATALUNYA i, concretament, per al municipi de VILADECANS.
@@ -327,7 +331,7 @@ async function callClaude(
   attachments: Att[],
 ): Promise<{ text: string; webSources: WebSrc[] }> {
   const messages: unknown[] = history.slice(0, -1).map((m) => ({
-    role: m.role, content: m.content.slice(0, MAX_CHARS),
+    role: m.role, content: m.content.slice(0, MAX_CHARS_HISTORIAL),
   }));
 
   const last = history[history.length - 1];
@@ -351,7 +355,14 @@ async function callClaude(
   for (let volta = 0; volta < 3; volta++) {
     const body: Record<string, unknown> = {
       model: cfg.model, max_tokens: cfg.maxTokens, messages,
-      system: `${cfg.system}\n\nARA MATEIX SON LES ${avuiText()} (hora de Catalunya).`,
+      // En dos blocs a posta: el primer no canvia mai i es marca com a
+      // memoritzable (el proveïdor el cobra molt més barat i no l'ha de
+      // tornar a llegir); el segon porta l'hora, que sí que canvia, i
+      // per això va a part per no trencar la memòria del primer.
+      system: [
+        { type: 'text', text: cfg.system, cache_control: { type: 'ephemeral' } },
+        { type: 'text', text: `ARA MATEIX SON LES ${avuiText()} (hora de Catalunya).` },
+      ],
     };
     if (tools) body.tools = tools;
 
@@ -524,7 +535,18 @@ Deno.serve(async (req: Request) => {
           query_embedding: JSON.stringify(vec), match_count: actiu.matches, p_mode: mode,
         });
         const rows = (hits ?? []) as { title: string; source: string; kind: string; content: string }[];
-        context = rows.map((h, i) => `[${i + 1}] (${h.title})\n${h.content}`).join('\n\n---\n\n');
+        // Es mantenen tots els fragments (les fonts són el que fa que
+        // la resposta sigui correcta), però cadascun es talla: n'hi ha
+        // de 17.000 caràcters i un de sol pot doblar el cost d'una
+        // consulta sense aportar-hi res.
+        context = rows
+          .map((h, i) => {
+            const cos = h.content.length > MAX_CHARS_FRAGMENT
+              ? `${h.content.slice(0, MAX_CHARS_FRAGMENT)}…`
+              : h.content;
+            return `[${i + 1}] (${h.title})\n${cos}`;
+          })
+          .join('\n\n---\n\n');
         for (const h of rows) sources.push({ title: h.title, source: h.source, kind: h.kind });
       } catch (_e) {
         context = '';
