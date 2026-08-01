@@ -787,13 +787,18 @@ function RunPhase({
           <span style={{ fontFamily: FP.mono, fontWeight: 700, fontSize: 13, color: FP.greenInk, background: FP.greenSoft, padding: isMobile ? '8px 12px' : '9px 14px', borderRadius: 999, display: 'flex', alignItems: 'center', gap: 7, whiteSpace: 'nowrap' }}>
             <FIc name="check" size={14} color={FP.green} sw={3} />{correctCount}/{total}
           </span>
-          {!isMobile && (
-            <button onClick={requestFinish} style={{
-              fontFamily: FP.mono, fontWeight: 700, fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase',
-              color: FP.greenInk, background: FP.greenSoft, border: `1px solid ${FP.green}`,
-              padding: '9px 16px', borderRadius: 999, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 7,
-            }}><FIc name="check" size={14} color={FP.green} sw={3} />{t('test.session.finishNow')}</button>
-          )}
+          {/* Acabar el test. A mòbil també hi ha de ser: la creu de
+              l'esquerra fa el mateix, però ningú diria que "sortir"
+              vol dir corregir i veure la nota. */}
+          <button onClick={requestFinish} style={{
+            fontFamily: FP.mono, fontWeight: 700, fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase',
+            color: FP.greenInk, background: FP.greenSoft, border: `1px solid ${FP.green}`,
+            padding: isMobile ? '8px 12px' : '9px 16px', borderRadius: 999, cursor: 'pointer',
+            display: 'flex', alignItems: 'center', gap: 7, whiteSpace: 'nowrap',
+          }}>
+            {!isMobile && <FIc name="check" size={14} color={FP.green} sw={3} />}
+            {t('test.session.finishNow')}
+          </button>
         </div>
       </div>
 
