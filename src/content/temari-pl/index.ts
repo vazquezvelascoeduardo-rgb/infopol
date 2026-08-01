@@ -38,6 +38,7 @@ export const BLOCS: BlocTemari[] = [
   { clau: 'seguretat', titol: 'Seguretat pública i règim policial' },
   { clau: 'penal', titol: 'Àmbit penal i processal' },
   { clau: 'transit', titol: 'Trànsit i seguretat viària' },
+  { clau: 'proteccio', titol: 'Protecció de les persones' },
 ];
 
 export const TEMES: TemaPL[] = [
@@ -76,6 +77,13 @@ export const TEMES: TemaPL[] = [
   { num: 26, bloc: 'transit', fitxer: '26-conductors', titol: 'RD 818/2009, Reglament general de conductors' },
   { num: 27, bloc: 'transit', fitxer: '27-circulacio', titol: 'RD 1428/2003, Reglament general de circulació' },
   { num: 28, bloc: 'transit', fitxer: '28-vehicles', titol: 'RD 2822/1998, Reglament general de vehicles' },
+
+  // ── Protecció de les persones ────────────────────────────────
+  // Tres matèries que ja tenien test però no tema escrit: es podien
+  // practicar i no es podien estudiar.
+  { num: 29, bloc: 'proteccio', fitxer: '29-igualtat-violencia', titol: "LO 3/2007 d'igualtat, LO 1/2004 de violència de gènere i Llei 17/2015" },
+  { num: 30, bloc: 'proteccio', fitxer: '30-estrangeria', titol: 'LO 4/2000, sobre drets i llibertats dels estrangers a Espanya' },
+  { num: 31, bloc: 'proteccio', fitxer: '31-ordre-proteccio', titol: "Llei 27/2003, reguladora de l'ordre de protecció de les víctimes de violència domèstica" },
 ];
 
 export const temesDelBloc = (clau: string): TemaPL[] =>
