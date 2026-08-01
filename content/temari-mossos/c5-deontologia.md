@@ -85,6 +85,64 @@ Els ==**valors**==, en canvi, són ==**horitzons de referència**==: no són mí
 El Codi ==**no és un règim disciplinari**==: ==no tipifica infraccions ni imposa sancions==. Ara bé, els seus principis ==**informen la interpretació i aplicació del règim disciplinari**==, igual que el codi de conducta de l'EBEP. Confondre codi ètic amb règim disciplinari és l'error més freqüent del tema.
 :::
 
+## Els principis ètics, un per un
+> El vocabulari que es pregunta
+
+Les preguntes d'aquest tema no demanen articles: demanen ==què vol dir cada principi==. Val la pena saber-los dir amb les paraules justes.
+
+:::articles
+Dignitat humana | El punt de partida
+El respecte a la dignitat de la persona és un ==**principi fonamental d'actuació policial**==, no un objectiu llunyà. La ==**prioritat de tota actuació policial és la protecció de la persona**==.
+
+Igualtat de tracte | La no-discriminació
+És el principi que estableix la ==**no-discriminació**==. El tracte policial ha de ser ==**humà, respectuós i sense discriminar ningú**==.
+
+Pluralitat | La societat real
+Implica ==**acceptar la diversitat ètnica, cultural i social**== de les persones amb qui es tracta.
+
+Imparcialitat | Sense interessos
+Vol dir ==**no actuar en funció d'interessos personals o polítics**==.
+
+Integritat | Sense corrupció
+Exigeix ==**honestedat i absència de corrupció**==.
+
+Proporcionalitat | La força
+És el principi que ==**regula l'ús de la força**==: només és legítima quan és ==**necessària i proporcionada a la situació**==.
+
+Transparència | Retre comptes
+Implica el ==**retiment de comptes davant la ciutadania**==. La ==**confiança ciutadana es guanya amb professionalitat i transparència**==.
+
+Servei a la comunitat | Per a què hi ets
+Implica ==**posar-se al servei de les necessitats de la ciutadania**==.
+
+Intimitat | Sempre
+El dret a la intimitat s'ha de protegir ==**en tota intervenció policial**==, no només en les que afecten el domicili.
+
+Eficàcia | Amb què es mesura
+Com a principi, implica el ==**compliment dels objectius amb eficiència**==: no n'hi ha prou d'arribar-hi, cal fer-ho amb els mitjans justos.
+:::
+
+:::clau
+El que el codi ==**prohibeix**== de manera absoluta: ==**maltractaments, tortures i tractes degradants**==. I el que els cossos han d'==**evitar**==: l'==**arbitrarietat i l'abús de poder**==. Del perfil professional, la resposta esperada és que un bon agent ha de ser ==**format, responsable i autònom**==.
+:::
+
+## Dos conceptes de context
+> Els que apareixen barrejats
+
+:::articles
+Norma reguladora | Què vol dir
+Una norma reguladora és la que ==**fixa les regles d'una activitat**==.
+
+Mandat constitucional | Què vol dir
+Fa referència a l'==**obligació de respectar la Constitució**== i el que en deriva.
+
+L'estructura del cos | El repàs que hi cau
+Encara que sigui d'un altre tema, aquí es pregunta: la ==**unitat territorial bàsica de la PG-ME és l'àrea bàsica policial (ABP)**==, la ==**Regió Policial coordina un conjunt d'ABP**==, les ==**comissaries generals són estructures organitzatives policials**== i el cos s'estructura jeràrquicament en ==**5 escales**==.
+
+El model de proximitat | El fonament
+Es fonamenta en l'==**aproximació al ciutadà**==. I la ==**policia administrativa**== és el concepte que implica la ==**vigilància i el control normatiu municipal**==.
+:::
+
 :::avis
 Aquest material d'estudi segueix la **guia d'estudi oficial** per accedir a la categoria de mosso/a del Cos de Mossos d'Esquadra (Departament d'Interior i Seguretat Pública), reordenada i marcada per a l'estudi. **No és una font oficial**: per a la preparació definitiva, consulta sempre la guia publicada pel Departament.
 :::

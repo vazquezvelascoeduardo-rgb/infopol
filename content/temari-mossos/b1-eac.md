@@ -15,8 +15,40 @@ Llei orgànica de l'Estat | La vessant estatal
 S'aprova com a ==**llei orgànica de les Corts Generals**== i forma part del ==**bloc de constitucionalitat**==: serveix de paràmetre per jutjar la constitucionalitat d'altres lleis.
 :::
 
+:::articles
+Com es qualifica | La fórmula literal
+L'Estatut és una norma de ==**naturalesa especial i de caràcter paccionat**==, amb una ==**doble naturalesa jurídica**==. Paccionat vol dir ==pactat== entre Catalunya i l'Estat: ni l'un ni l'altre no el poden canviar tot sols.
+
+On se situa | La posició a l'ordenament
+Està ==**subordinat a la Constitució espanyola i supraordenat a la resta de normes de l'ordenament**==, tant estatals com autonòmiques, en el seu àmbit.
+
+Quines normes l'integren
+El desenvolupen ==**lleis, decrets legislatius, decrets llei i reglaments**==.
+
+Les dues parts del text
+S'hi distingeix una part ==**dogmàtica**== (drets, deures i principis) i una part ==**orgànica**== (institucions i competències).
+:::
+
 :::clau
 Aquesta doble naturalesa és la primera pregunta possible: l'Estatut ==**no és només una llei catalana**==, és alhora ==**llei orgànica estatal**== i part del ==**bloc de constitucionalitat**==. Per això no el pot modificar unilateralment ni la Generalitat ni l'Estat.
+:::
+
+## Els tres estatuts de Catalunya
+> D'on venim
+
+:::articles
+Estatut de Núria | 1932
+El primer, de la ==**Segona República**==.
+
+Estatut de Sau | 1979
+El de la ==**recuperació de l'autogovern**== després de la Constitució.
+
+Estatut de Miravet | 2006
+L'==**actual**==, aprovat com a LO 6/2006.
+:::
+
+:::clau
+Els noms es demanen amb el seu any: ==**Núria (1932)**== · ==**Sau (1979)**== · ==**Miravet (2006)**==. I la via per la qual Catalunya va accedir a l'autonomia és l'==**article 151.2 CE, mitjançant l'aprovació de l'Estatut de 1979**== — la via ràpida, no la de l'article 143.
 :::
 
 ## El contingut mínim
@@ -46,11 +78,17 @@ Els quatre punts de l'art. 147.2 es demanen sencers i en ordre: ==**denominació
 > La cronologia de la reforma
 
 :::articles
-Novembre de 2003 | L'inici
-Després de les ==eleccions autonòmiques de **novembre de 2003**== s'inicia el procés de reforma de l'Estatut de 1979.
+Novembre de 2003 | El punt de partida
+Després de les ==eleccions autonòmiques de **novembre de 2003**== s'obre la voluntat de reformar l'Estatut de 1979.
+
+9 de febrer de 2004 | L'inici formal
+El ==**procés de reforma s'inicia el 9 de febrer de 2004**==, amb la constitució de la ponència al Parlament.
 
 30 de setembre de 2005 | El Parlament
-El ==Parlament de Catalunya aprova la proposta de reforma==.
+El ==**Ple del Parlament aprova el text el 30 de setembre de 2005**==.
+
+21 de març de 2006 | El dictamen
+A la ==**segona fase, a les Corts Generals**==, l'acord sobre el text es formalitza amb el ==**Dictamen de 21 de març de 2006**==.
 
 30 de març de 2006 | El Congrés
 El ==Congrés dels Diputats l'aprova== amb modificacions substancials respecte del text del Parlament.
@@ -133,7 +171,27 @@ art. 6 | La llengua
 El ==**català és la llengua pròpia**== i, com el castellà, ==llengua oficial==. Tothom té el ==**dret i el deure de conèixer les dues llengües oficials**==.
 
 art. 8 | Els símbols
-La ==bandera de quatre barres==, la ==festa de l'Onze de Setembre== i l'==himne, Els Segadors==.
+Els ==**símbols nacionals**== són la ==**bandera tradicional quadribarrada**==, la ==**Diada de l'Onze de Setembre**== i l'himne ==**"Els Segadors"**==.
+
+art. 2 | Què és la Generalitat
+La Generalitat es defineix com el ==**sistema institucional en què s'organitza políticament l'autogovern de Catalunya**==.
+:::
+
+## Competències i drets: dues dades que hi cauen
+> Del títol IV i de la Constitució
+
+:::articles
+Els tres tipus de competència | art. 110-112
+Segons l'EAC, les competències es classifiquen en ==**exclusives, compartides i executives**==.
+
+Seguretat pública | art. 164
+Les competències de la Generalitat són el ==**control i la vigilància del trànsit**==, la ==**creació i organització dels Mossos d'Esquadra**== i la ==**planificació i regulació del sistema de seguretat pública de Catalunya**==.
+
+Competències per la via estatal | art. 150 CE
+Al marge de l'Estatut, la comunitat pot rebre'n de noves per l'==**article 150 CE**==: la ==**llei marc**== i la ==**llei orgànica de transferència o delegació**==.
+
+Drets fonamentals | On són i com es desenvolupen
+A la Constitució són al ==**títol I**==, i només es poden desenvolupar per ==**llei orgànica**==.
 :::
 
 ## La reforma de l'Estatut

@@ -51,7 +51,20 @@ Senat | art. 69
 ==**Cambra de representació territorial**==. A cada província es trien ==**quatre senadors**== per sufragi directe; les comunitats autònomes en designen ==un i un altre per cada milió d'habitants==.
 
 Funcions | art. 66
-==Exerceixen la potestat legislativa de l'Estat==, ==aproven els pressupostos== i ==controlen l'acció del Govern==.
+==Exerceixen la potestat legislativa de l'Estat==, ==aproven els pressupostos== i ==controlen l'acció del Govern==. En matèria pressupostària, a les Corts els correspon l'==**aprovació**== —no l'elaboració, que és del Govern— i la ==**Llei de Pressupostos té caràcter anual**==.
+
+Ceuta i Melilla | La representació
+Cada ciutat autònoma tria ==**un diputat**== al Congrés.
+
+Autonomia | art. 72
+Les Corts són ==autònomes==: ==**aproven els seus propis pressupostos**== i tenen ==**autonomia administrativa**==, que vol dir que el ==**personal al seu servei no forma part de l'administració pública controlada pel Govern**==.
+
+Suplicatori | art. 71
+Els diputats i senadors ==**no poden ser processats sense l'autorització prèvia de la seva cambra**==. Aquesta autorització és el ==**suplicatori**==.
+:::
+
+:::clau
+Les dues regles per triar senadors no són la mateixa i s'intercanvien: a cada ==**província** se n'elegeixen **quatre** per sufragi directe==; les ==**comunitats autònomes** en designen **un, més un per cada milió d'habitants**==.
 :::
 
 ## El Govern
@@ -71,6 +84,28 @@ Moció de censura | art. 113
 
 Qüestió de confiança | art. 112
 La planteja el ==president, prèvia deliberació del Consell de Ministres==, i s'entén atorgada per ==majoria simple==.
+
+Consell de Ministres | L'òrgan col·legiat
+És l'==**òrgan col·legiat que actua sota la direcció del president del Govern**==.
+
+Qui tria els ministres | art. 100
+Els ==**designa el president del Govern**== i els ==**nomena i separa el Rei a proposta seva**==.
+
+Vicepresidents | Si en cal
+El seu càrrec és d'existència ==**potestativa**==: pot haver-n'hi o no.
+
+Organització | El principi
+El Govern s'organitza segons el principi de ==**jerarquia**==, amb direcció presidencial i responsabilitat de cada ministre en el seu departament.
+
+Incompatibilitats | art. 98.3
+Els membres del Govern ==**no poden exercir altres funcions representatives**== que les pròpies del mandat parlamentari, ni cap altra funció pública o activitat professional o mercantil.
+
+Responsabilitat | art. 108
+El Govern respon ==**solidàriament de la seva gestió davant el Congrés dels Diputats**==.
+:::
+
+:::avis
+La ==**monarquia parlamentària és la forma política de govern de l'Estat espanyol**== (art. 1.3 CE). El ==**Rei representa la unitat i la permanència de l'Estat**==, la seva persona és ==**inviolable i no subjecta a responsabilitat**==, i si un acte seu ==**no és refrendat no té validesa jurídica**==. El que ==**no**== és atribució seva: ==**aprovar els Pressupostos Generals de l'Estat**==, que és de les Corts.
 :::
 
 ## Els òrgans auxiliars
