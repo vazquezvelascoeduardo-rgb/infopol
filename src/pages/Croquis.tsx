@@ -1609,7 +1609,7 @@ export default function Croquis() {
           <span style={{ width: 34, height: 34, borderRadius: 10, background: A.terracota, display: 'grid', placeItems: 'center', boxShadow: A.inset, flexShrink: 0 }}><Ic name="car" size={19} color="#fff" sw={2.2} /></span>
           <div style={{ minWidth: 0 }}>
             <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 15.5, color: A.ink, letterSpacing: -0.3, whiteSpace: 'nowrap' }}>Croquis d'accident</div>
-            <Mono size={9} color={A.inkMuted}>Editor professional · exporta PNG</Mono>
+            <Mono size={8.5} color={A.inkMuted} style={{ letterSpacing: 1.6 }}>EDITOR PROFESSIONAL</Mono>
           </div>
         </div>
 
@@ -1631,6 +1631,11 @@ export default function Croquis() {
           {drawingPath ? `✏️ Dibuixant (${drawingPath.points.length / 2} pts)` : '✏️ Via lliure'}
         </button>
         <button className="cq-sec" onClick={() => setEditAtestat(true)} style={btn}><Ic name="doc" size={15} color={A.inkSoft} /> Atestat</button>
+        {/* Indicador de desat: el disseny el vol a la capçalera, en verd. */}
+        <span className="cq-sec" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '8px 12px', borderRadius: 999, background: A.greenSoft, flexShrink: 0 }}>
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: A.green }} />
+          <Mono size={9} color={A.green} style={{ letterSpacing: 1.2 }}>DESAT</Mono>
+        </span>
         <span className="cq-sec" style={{ display: 'contents' }}>{separador}</span>
 
         {/* Tot el que no es fa a cada croquis, darrere d'un sol botó */}
@@ -1665,16 +1670,41 @@ export default function Croquis() {
         <input ref={fileRef} type="file" accept="application/json,.json" style={{ display: 'none' }}
           onChange={(e) => { const f = e.target.files?.[0]; if (f) importJson(f); e.target.value = ''; }} />
 
-        <button onClick={exportPng} style={{ ...btn, background: A.ink, color: '#fff', border: 'none', boxShadow: A.inset }}>
+        <button onClick={exportPng} style={{ ...btn, background: A.terracota, color: '#fff', border: 'none', fontWeight: 800 }}>
           <Ic name="doc" size={16} color="#fff" /> <span className="cq-sec">Exportar</span> PNG
         </button>
       </header>
+
+      {/* Barra d'estat: les dades del croquis sempre a la vista, com al
+          disseny. Abans calia obrir menús per saber en quina escala o amb
+          quants elements estaves treballant. */}
+      <footer className="cq-estat" style={{
+        order: 3, flexShrink: 0, display: 'flex', alignItems: 'center', gap: 18,
+        padding: '7px clamp(12px,2vw,18px)', borderTop: `1px solid ${A.line}`,
+        background: A.bgSoft, overflowX: 'auto',
+      }}>
+        {[
+          ['ATESTAT', header.num || '—'],
+          ['ESCALA', `1:${Math.max(1, Math.round(200 / view.scale))}`],
+          ['ELEMENTS', String(els.length)],
+        ].map(([k, v]) => (
+          <span key={k} style={{ display: 'inline-flex', alignItems: 'center', gap: 7, flexShrink: 0 }}>
+            <Mono size={8.5} color={A.inkFaint} style={{ letterSpacing: 1.3 }}>{k}</Mono>
+            <Mono size={10} color={A.inkSoft}>{v}</Mono>
+          </span>
+        ))}
+        <span className="cq-sec" style={{ marginLeft: 'auto', flexShrink: 0 }}>
+          <Mono size={8.5} color={A.inkFaint} style={{ letterSpacing: 1.1 }}>
+            ESPAI + ARROSSEGA PER MOURE EL LLENÇ · CTRL+Z DESFER
+          </Mono>
+        </span>
+      </footer>
 
       <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
         {/* Paleta: rail de categories + graella de la categoria activa */}
         <aside className="cq-palette" style={{ display: 'flex', flexShrink: 0, borderRight: `1px solid ${A.line}`, background: A.bgSoft }}>
           {/* Rail */}
-          <div style={{ width: 74, flexShrink: 0, borderRight: `1px solid ${A.line}`, padding: '10px 8px', display: 'flex', flexDirection: 'column', gap: 3, overflowY: 'auto' }}>
+          <div style={{ width: 74, flexShrink: 0, background: A.night, padding: '10px 8px', display: 'flex', flexDirection: 'column', gap: 3, overflowY: 'auto' }}>
             {PALETTE.map((g, i) => {
               const on = !resultats && cat === i;
               // El nom curt: "Senyals · Perill" al rail només hi cap "Perill".
@@ -1684,12 +1714,11 @@ export default function Croquis() {
                   style={{
                     position: 'relative', border: 'none', cursor: 'pointer', borderRadius: 12,
                     padding: '9px 0 7px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
-                    background: on ? A.card : 'transparent',
-                    boxShadow: on ? A.shadow : 'none',
+                    background: on ? A.terracota : 'transparent',
+                    boxShadow: 'none',
                   }}>
-                  {on && <span style={{ position: 'absolute', left: -4, top: '50%', transform: 'translateY(-50%)', width: 3, height: 20, borderRadius: 99, background: A.terracota }} />}
                   <span style={{ fontSize: 18, lineHeight: 1 }}>{CAT_ICONA[i] ?? '▫️'}</span>
-                  <span style={{ fontFamily: A.sans, fontWeight: 700, fontSize: 8.5, lineHeight: 1.15, textAlign: 'center', color: on ? A.ink : A.inkMuted }}>{curt}</span>
+                  <span style={{ fontFamily: A.sans, fontWeight: 700, fontSize: 8.5, lineHeight: 1.15, textAlign: 'center', color: on ? '#fff' : 'rgba(255,255,255,.55)' }}>{curt}</span>
                 </button>
               );
             })}
@@ -1874,6 +1903,7 @@ export default function Croquis() {
             <button onClick={() => zoom(0.83)} style={{ ...btn, padding: '5px 11px', fontSize: 18, border: 'none', background: 'transparent' }} aria-label="Allunyar">−</button>
             <button onClick={() => setView(fitView())} style={{ ...btn, padding: '6px 8px', border: 'none', background: 'transparent', fontFamily: A.mono, fontSize: 12, minWidth: 46, justifyContent: 'center' }} title="Ajustar a la pantalla">{pct}%</button>
             <button onClick={() => zoom(1.2)} style={{ ...btn, padding: '5px 11px', fontSize: 18, border: 'none', background: 'transparent' }} aria-label="Apropar">+</button>
+            <button onClick={() => setView(fitView())} style={{ ...btn, padding: '6px 10px', border: 'none', background: A.bgDeep, fontFamily: A.mono, fontSize: 10, letterSpacing: 1 }} title="Ajustar a la pantalla">AJUSTA</button>
           </div>
 
           {/* Panell del fons de mapa */}
