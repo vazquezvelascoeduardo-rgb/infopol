@@ -18,6 +18,7 @@ import lopvvd from './lopvvd-27-2003';
 import lorpm from './lorpm-5-2000';
 import lepar from './lepar-11-2009';
 import lpac from './lpac-39-40-2015';
+import trebep from './trebep-5-2015';
 import cultura from './cultura-general';
 import culturaHistoria from './cultura-historia';
 import culturaGeografia from './cultura-geografia';
@@ -56,6 +57,7 @@ import mossosC3 from './mossos-c3';
 import mossosC4 from './mossos-c4';
 import mossosC5 from './mossos-c5';
 import actualitatPl2026 from './actualitat-pl-2026';
+import actualitatJulAgo2026 from './actualitat-jul-ago-2026';
 import calafell from './calafell';
 import sabadell from './sabadell';
 import rgc1428 from './rgc-1428-2003';
@@ -90,6 +92,7 @@ export const TOPICS: TestTopic[] = [
   lorpm,
   lepar,
   lpac,
+  trebep,
   cultura,
   culturaHistoria,
   culturaGeografia,
@@ -128,6 +131,7 @@ export const TOPICS: TestTopic[] = [
   mossosC4,
   mossosC5,
   actualitatPl2026,
+  actualitatJulAgo2026,
   calafell,
   sabadell,
   rgc1428,
