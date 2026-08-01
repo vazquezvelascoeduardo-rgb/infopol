@@ -54,6 +54,12 @@ Les edats són pregunta segura i s'ordenen així: ==**15** AM · **16** A1 · **
 · El permís B autoritza a conduir ==**ciclomotors**== sense necessitat de l'AM.
 :::
 
+La ==**llicència de conducció**== és l'altra autorització de l'article 3 i es demana poc perquè s'estudia poc. No habilita per als vehicles ordinaris: serveix per a ==**vehicles per a persones de mobilitat reduïda**==, per a ==**vehicles especials agrícoles autopropulsats**== i els seus conjunts, i per a ==**vehicles especials no agrícoles**== dins dels límits de massa i velocitat que fixa el reglament. L'edat mínima és de ==**16 anys**==, i de ==**18**== per als vehicles especials de més massa.
+
+:::avis
+El ==**permís**== habilita per als vehicles de motor en general; la ==**llicència**==, només per als vehicles taxats que acabem de veure. Quan un enunciat parla de "llicència de conducció" per a un turisme, va errat: per a un turisme cal ==**permís de la classe B**==.
+:::
+
 ## Requisits i vigència
 > Articles 7 a 14
 
@@ -75,6 +81,45 @@ art. 12 | Vigència
 
 :::avis
 Aquest article 12.4 té conseqüència operativa directa: davant d'un permís caducat, els agents ==**l'intervenen en l'acte**== i el remeten a Trànsit. Ara bé, conduir amb el permís ==**caducat és infracció administrativa**==, ==**no** el delicte de l'article 384 del Codi penal==, que exigeix pèrdua **total** de punts, privació judicial o no haver-lo obtingut mai.
+:::
+
+## Pròrroga, duplicats i permisos estrangers
+> Articles 15 a 30 · el dia a dia de la finestreta
+
+:::articles
+Pròrroga de vigència | Qui i com
+La ==**pròrroga la concedeix la Prefectura Provincial de Trànsit**== del domicili del titular, amb l'==**informe d'aptitud psicofísica**== d'un centre de reconeixement de conductors en vigor. Es pot demanar ==**abans o després**== de la caducitat: si es demana després, el permís ==**no ha caducat com a títol**==, però ==**mentre no es prorroga no autoritza a conduir**==.
+
+Duplicats | Quan calen
+S'expedeix ==**duplicat**== per ==**pèrdua, sostracció, deteriorament o destrucció**== del document, i també per ==**canvi de domicili o de dades**== del titular. El duplicat ==**manté la data de caducitat de l'original**==: no és una pròrroga.
+
+Bescanvi | Permisos d'altres països
+Els permisos expedits per ==**estats de la Unió Europea o de l'Espai Econòmic Europeu**== són ==**vàlids a Espanya**== en els seus propis termes. Els de ==**països tercers**== només valen si hi ha ==**conveni de bescanvi**== o, si no n'hi ha, ==**durant els sis primers mesos**== des de l'entrada, i després s'ha d'obtenir el permís espanyol.
+
+Permís internacional | Per conduir a fora
+L'expedeix la ==**Prefectura Provincial de Trànsit**== a qui ja té permís espanyol en vigor. La seva vigència és d'==**un any**== i ==**no val sol**==: ha d'anar sempre ==**acompanyat del permís nacional**==.
+:::
+
+## Aptituds psicofísiques i escoles
+> Annex IV i títol V
+
+L'==**informe d'aptitud psicofísica**== l'expedeixen els ==**centres de reconeixement de conductors**== autoritzats, que han d'estar ==dirigits per un metge== i comprovar les condicions de l'==**annex IV**==: capacitat visual i auditiva, sistema locomotor, cardiovascular, trastorns hematològics, renals, respiratoris, endocrins i neurològics, trastorns mentals i de conducta, i ==**dependència de l'alcohol i d'altres substàncies**==. Si hi ha una malaltia o deficiència que es pugui agreujar, el centre pot ==**reduir el període de vigència**== o proposar ==**restriccions o adaptacions**==.
+
+Aquestes limitacions es fan constar al document amb ==**codis numèrics**== (annex II). Els que es veuen més al carrer:
+
+:::articles
+Codis més habituals | El que hi ha darrere del número
+· ==**01** — correcció o protecció de la visió== (ulleres o lents de contacte).
+· ==**02** — pròtesi auditiva.==
+· ==**78** — vehicles de **canvi automàtic** únicament.==
+· ==**96** — permís **B amb remolc** de més de 750 kg== quan el conjunt no passa de ==**4.250 kg**== de massa màxima.
+· ==**Codis del 10 al 50** — adaptacions del vehicle== (embragatge, frens, direcció, comandaments adaptats).
+:::
+
+Les ==**escoles particulars de conductors**== (autoescoles) requereixen ==**autorització administrativa**== i han de tenir un ==director==, ==professors de formació vial titulats== i els ==vehicles i les instal·lacions== que fixa el reglament. Els vehicles d'ensenyament han de portar la ==**doble pedalera**== i el distintiu corresponent, i els conductors en pràctiques, la ==**placa "L"**== a la part posterior.
+
+:::clau
+Tres números petits que cauen: la ==**vigència d'un any**== del permís internacional (i que ==no val sol==), els ==**6 mesos**== durant els quals val un permís de país tercer sense conveni, i el ==**codi 96**== amb el seu límit de ==**4.250 kg**== de conjunt.
 :::
 
 ## Les proves i el període de pràctiques
