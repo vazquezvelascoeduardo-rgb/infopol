@@ -68,7 +68,7 @@ function BotoAccio({ simbol, children, onClick, perill }: {
 }
 
 export default function PanellPropietats({
-  el, els, etiqueta, accions,
+  el, els, etiqueta, lletra, accions,
 }: {
   /** Element seleccionat, o null si no n'hi ha cap. */
   el: El | null;
@@ -76,10 +76,17 @@ export default function PanellPropietats({
   els: El[];
   /** Com es diu cada element a la llista. */
   etiqueta: (e: El) => string;
+  /** Lletra del vehicle a la llegenda (A, B, C…), si en té. */
+  lletra: (e: El) => string | undefined;
   accions: AccionsPanell;
 }) {
   const { update, duplica, elimina, selecciona } = accions;
   const capes = els.filter((e) => e.kind !== 'fons').slice().reverse();
+  // Subtítol amb les dades de l'atestat, com al disseny ("Seat Ibiza · 2589 KRT").
+  const d = el?.data;
+  const subtitol = d
+    ? [[d.marca, d.model].filter(Boolean).join(' '), d.plate].filter(Boolean).join(' · ')
+    : '';
 
   return (
     <aside
@@ -90,6 +97,20 @@ export default function PanellPropietats({
       }}>
       {el ? (
         <>
+          {/* Qui és l'element seleccionat: el disseny ho posa a dalt de tot */}
+          <div style={seccio}>
+            <Mono size={8.5} color={A.inkFaint} style={{ letterSpacing: 1.4, display: 'block', marginBottom: 8 }}>
+              ELEMENT SELECCIONAT
+            </Mono>
+            <div style={{ fontFamily: A.sans, fontSize: 14.5, fontWeight: 800, color: A.ink }}>
+              {etiqueta(el)}
+              {lletra(el) && <span style={{ color: A.terraInk }}> · {lletra(el)}</span>}
+            </div>
+            {subtitol && (
+              <div style={{ fontFamily: A.sans, fontSize: 12, color: A.inkMuted, marginTop: 3 }}>{subtitol}</div>
+            )}
+          </div>
+
           {/* Color: només per als elements que en tenen */}
           {(VEHICLES.includes(el.kind) || el.kind === 'via-lliure') && (
             <div style={seccio}>

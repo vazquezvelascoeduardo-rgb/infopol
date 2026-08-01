@@ -926,6 +926,11 @@ function MenuItem({ children, onClick, danger, active }: { children: ReactNode; 
 }
 
 const VEH_LABEL: Record<string, string> = Object.fromEntries(PALETTE[0].items.map((i) => [i.kind, i.label]));
+/* Nom llegible de qualsevol element de la paleta, no només dels vehicles:
+   la llista de capes del panell dret els ha de saber anomenar tots. */
+const ETIQUETA: Record<string, string> = Object.fromEntries(
+  PALETTE.flatMap((g) => g.items.map((i) => [i.kind, i.label])),
+);
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 /* Maniobres tipus (per a l'informe i la llegenda). */
@@ -2070,7 +2075,8 @@ export default function Croquis() {
         <PanellPropietats
           el={selEl ?? null}
           els={els}
-          etiqueta={(e) => VEH_LABEL[e.kind] || e.kind}
+          etiqueta={(e) => ETIQUETA[e.kind] || e.kind}
+          lletra={(e) => vehLetters[e.id]}
           accions={{ update, duplica: duplicate, elimina: remove, selecciona: setSel }}
         />
       </div>
