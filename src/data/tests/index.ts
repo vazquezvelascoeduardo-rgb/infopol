@@ -19,6 +19,8 @@ import lorpm from './lorpm-5-2000';
 import lepar from './lepar-11-2009';
 import lpac from './lpac-39-40-2015';
 import trebep from './trebep-5-2015';
+import habeasCorpus from './habeas-corpus-6-1984';
+import lopdgdd from './lopdgdd-3-2018';
 import cultura from './cultura-general';
 import culturaHistoria from './cultura-historia';
 import culturaGeografia from './cultura-geografia';
@@ -93,6 +95,8 @@ export const TOPICS: TestTopic[] = [
   lepar,
   lpac,
   trebep,
+  habeasCorpus,
+  lopdgdd,
   cultura,
   culturaHistoria,
   culturaGeografia,
