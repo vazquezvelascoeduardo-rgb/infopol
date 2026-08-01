@@ -32,6 +32,14 @@ const AMPLE_SIDEBAR = 246;
  */
 const ARRELS = new Set(['/app', '/academia', '/operativa', '/perfil', '/chat']);
 
+/**
+ * Pantalles que ja porten la seva pròpia sortida i que, a més, tenen una
+ * columna que ha d'arribar fins a dalt de tot. El lector del temari en té
+ * una de blanca amb l'índex dels apartats: si li posem una barra a sobre,
+ * la banda comença a mitja pantalla i queda tallada.
+ */
+const SENSE_FLETXA = [/^\/estudi\/tema\//, /^\/mossos\/estudi\//];
+
 type Subseccio = { label: string; to: string };
 type Seccio = {
   id: string;
@@ -433,7 +441,7 @@ function ContentFallback() {
 
 export default function AppShell() {
   const nav = useNavigate();
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   const { user, profile } = useAuth();
   const [calaix, setCalaix] = useState(false);
   const [q, setQ] = useState('');
@@ -448,7 +456,11 @@ export default function AppShell() {
   const lloc = onEts(pathname);
   // La fletxa d'enrere només té sentit si no ets a la portada d'una
   // secció: allà no hi ha res darrere dins de l'app.
-  const mostraEnrere = !ARRELS.has(pathname.replace(/\/$/, '') || '/');
+  const ruta = pathname.replace(/\/$/, '') || '/';
+  // Operativa fa les seves seccions amb ?sec=…: la portada és arrel, però
+  // el catàleg o el cercador ja són pantalles de dins i han de poder tornar.
+  const dinsDeSeccio = new URLSearchParams(search).has('sec');
+  const mostraEnrere = (!ARRELS.has(ruta) || dinsDeSeccio) && !SENSE_FLETXA.some((r) => r.test(ruta));
 
   useEffect(() => { applyInitialTheme(); }, []);
   useEffect(() => { setCalaix(false); }, [pathname]);
@@ -581,7 +593,14 @@ export default function AppShell() {
               sortida. A les seccions de primer nivell no cal —la barra
               lateral ja hi porta— i per això no s'hi pinta. */}
           {mostraEnrere && (
-            <div style={{ padding: 'clamp(18px,2.6vw,28px) clamp(18px,2.6vw,28px) 0' }}>
+            // Enganxada a dalt: a les pàgines llargues d'Operativa la
+            // fletxa se n'anava amunt amb el text i, a mitja pàgina, ja no
+            // hi havia manera de tornar sense el botó del navegador.
+            <div style={{
+              position: 'sticky', top: 0, zIndex: 5,
+              padding: 'clamp(12px,2vw,18px) clamp(18px,2.6vw,28px) 10px',
+              background: V.paper,
+            }}>
               <Enrere a="/app" titol="Enrere" />
             </div>
           )}

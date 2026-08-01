@@ -215,9 +215,10 @@ function EinaOperativa({ icona, titol, sub, tint, accent, onClick }: {
 function OpInici({ ctx }: { ctx: OCtx }) {
   const news = useNoticiesAll().slice(0, 3);
 
+  // Les tres de dalt (checklists, superbuscador i catàleg) són les que es
+  // fan servir al carrer i van destacades; aquí queda la resta.
   const eines: { icona: NomIc; titol: string; sub: string; tint: string; accent: string; onClick: () => void }[] = [
-    { icona: 'car', titol: 'Catàleg SCT', sub: 'Nomenclàtor 2026', tint: V.terraSoft, accent: V.terraInk, onClick: () => ctx.go('cataleg') },
-    { icona: 'search', titol: 'Superbuscador', sub: 'Infracció, article o multa', tint: V.blueSoft, accent: V.blue, onClick: () => ctx.nav('/superbuscador') },
+    { icona: 'pill', titol: 'Alcoholèmia', sub: 'Taxa, sanció i via penal', tint: V.warnSoft, accent: V.warn, onClick: () => ctx.nav('/calculadora-alcohol') },
     { icona: 'scales', titol: 'Lleis', sub: 'Biblioteca de normativa', tint: V.warnSoft, accent: V.warn, onClick: () => ctx.nav('/leyes') },
     { icona: 'doc', titol: 'SC i Penal', sub: 'Identificació i escorcoll', tint: V.granateSoft, accent: V.granate, onClick: () => ctx.nav('/operativa/penal') },
     { icona: 'lock', titol: 'Detencions', sub: 'Terminis i drets', tint: V.blueSoft, accent: V.blue, onClick: () => ctx.nav('/operativa/penal/drets-detingut') },
@@ -245,16 +246,22 @@ function OpInici({ ctx }: { ctx: OCtx }) {
         Consulta ràpida durant el servei. El contingut es desa al navegador.
       </p>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 16, marginBottom: 16 }}>
+      {/* Les tres que es toquen més al carrer, en gros i primer de tot. */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 16, marginBottom: 16 }}>
         <TargetaGran
           fons={V.granate} fg="#fff" tint="rgba(255,255,255,.2)" tintFg="#fff"
           icona="tree" titol="Checklists penals" sub="Escenaris amb arbre de decisió"
           onClick={() => ctx.nav('/operativa/penal')}
         />
         <TargetaGran
-          fons={V.surface} fg={V.ink} tint={V.warnSoft} tintFg={V.warn}
-          icona="pill" titol="Alcoholèmia" sub="Taxa, sanció i via penal"
-          onClick={() => ctx.nav('/calculadora-alcohol')}
+          fons={V.blue} fg="#fff" tint="rgba(255,255,255,.2)" tintFg="#fff"
+          icona="search" titol="Superbuscador" sub="Infracció, article, multa o punts"
+          onClick={() => ctx.nav('/superbuscador')}
+        />
+        <TargetaGran
+          fons={V.terra} fg="#fff" tint="rgba(255,255,255,.22)" tintFg="#fff"
+          icona="car" titol="Catàleg SCT" sub="Nomenclàtor complet 2026"
+          onClick={() => ctx.go('cataleg')}
         />
       </div>
 
