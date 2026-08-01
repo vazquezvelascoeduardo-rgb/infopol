@@ -1,8 +1,8 @@
 // Pàgina d'una fitxa concreta · rebranding 2026.
-// Chrome estilitzat (crumbs + page-actions amb ★/share + page-foot prev/next).
+// Chrome del disseny v3: accions de fitxa (★/compartir) i peu amb tornada.
 // El cos de la fitxa (HTML/Markdown) es preserva tal com està.
 import { useMemo } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams, useNavigate } from 'react-router-dom';
 import { MODULES, getCard, pickBody } from '../lib/content';
 import { Markdown } from '../lib/markdown';
 import HtmlInline from '../components/HtmlInline';
@@ -46,6 +46,7 @@ export default function CardPage() {
   const params = useParams<{ moduleSlug?: string; slug?: string }>();
   const location = useLocation();
   const { t, locale } = useT();
+  const nav = useNavigate();
 
   // Les rutes públiques de PUBLIC_LEYES_CARDS a App.tsx usen paths
   // hardcodejats (sense ':moduleSlug/:slug'), de manera que useParams
@@ -69,7 +70,7 @@ export default function CardPage() {
 
   if (!mod || !card) {
     return (
-      <div className="shell py-6">
+      <div className="v3-page v3-anim">
         <p className="text-text-2">{t('card.notFound')}</p>
         <Link to="/" className="text-terracotta underline">
           {t('back.home')}
@@ -86,23 +87,21 @@ export default function CardPage() {
   const { body, lang: bodyLang } = pickBody(card, locale);
   const langMismatch = bodyLang !== locale;
 
-  const crumbs = (
-    <nav className="crumbs" style={{ padding: 0 }}>
-      <Link to="/">{t('nav.home')}</Link>
-      <span className="sep">/</span>
-      <Link to="/leyes">{t('leyes.title')}</Link>
-      <span className="sep">/</span>
-      <Link to={`/leyes/s/${mod.slug}`} className="inline-flex items-center gap-1.5">
-        <span
-          aria-hidden
-          className="inline-block h-2 w-2 rounded-full"
-          style={{ background: accent }}
-        />
-        {modTitle}
-      </Link>
-      <span className="sep">/</span>
-      <span className="here truncate">{card.title}</span>
-    </nav>
+  /* De quin mòdul és la fitxa. Abans ho deien les molles de pa; ara que
+     no hi són, el context es perdia i no sabies d'on venies. */
+  const contextModul = (
+    <button
+      type="button"
+      onClick={() => nav(sectionBack)}
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: 8, border: 'none',
+        background: 'transparent', cursor: 'pointer', padding: 0, marginBottom: 4,
+        fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+        fontSize: 10, fontWeight: 700, letterSpacing: 1.6, color: accent,
+      }}>
+      <span aria-hidden style={{ width: 7, height: 7, borderRadius: 4, background: accent }} />
+      {modTitle.toUpperCase()}
+    </button>
   );
 
   const langNotice = langMismatch ? (
@@ -138,9 +137,9 @@ export default function CardPage() {
     return (
       <article>
         <div className="topbar" style={{ position: 'static', borderBottom: '1px solid var(--line)' }}>
-          <div className="shell">
+          <div className="v3-page" style={{ paddingTop: 0 }}>
+            {contextModul}
             <div className="page-actions">
-              {crumbs}
               <FavButton moduleSlug={mod.slug} slug={card.slug} title={card.title} />
             </div>
             {langNotice && <div className="pb-2">{langNotice}</div>}
@@ -148,10 +147,10 @@ export default function CardPage() {
         </div>
         {/* Wrapper centrat per a la fitxa (max 5xl). La fitxa interna
             té el seu propi max (.wrapper a 720px) i conserva l'estil. */}
-        <div className="shell" style={{ paddingTop: 16 }}>
+        <div className="v3-page" style={{ paddingTop: 16 }}>
           <HtmlInline html={body} title={card.title} key={bodyLang} />
         </div>
-        <div className="shell">
+        <div className="v3-page" style={{ paddingTop: 0 }}>
           <div className="page-foot">
             <Link to={sectionBack} className="btn btn-ghost">
               ← {t('section.back')}
@@ -166,9 +165,9 @@ export default function CardPage() {
   }
 
   return (
-    <article className="shell" style={{ maxWidth: 760 }}>
+    <article className="v3-page v3-anim" style={{ maxWidth: 800, width: '100%' }}>
+      {contextModul}
       <div className="page-actions">
-        {crumbs}
         <FavButton moduleSlug={mod.slug} slug={card.slug} title={card.title} />
       </div>
       {langNotice && <div className="mt-2 mb-3">{langNotice}</div>}

@@ -1,6 +1,5 @@
 // Pàgina de referència ràpida — Taula de quantitats consum propi vs
 // tràfic (Pautes UF 3.3). Dades hardcoded segons l'spec d'InfoPol.
-import { Link } from 'react-router-dom';
 import { useT } from '../../lib/i18n';
 
 const TAULA_DROGUES: Array<{
@@ -24,16 +23,7 @@ const TAULA_DROGUES: Array<{
 export default function PenalTaulaDrogues() {
   const { t } = useT();
   return (
-    <div className="shell pb-10" style={{ maxWidth: 760 }}>
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa">{t('operativa.title')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa/penal">{t('operativa.seguretat-ciutadana.title')}</Link>
-        <span className="sep">/</span>
-        <span className="here">{t('penal.taulaDrogues')}</span>
-      </nav>
+    <div className="v3-page v3-anim" style={{ maxWidth: 760 }}>
 
       <header
         className="op-runner-head"

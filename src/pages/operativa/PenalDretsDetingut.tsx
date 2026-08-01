@@ -2,7 +2,6 @@
 // Pensada per a llegir-se ràpidament durant una intervenció. Inclou
 // botó per copiar el text complet (per exemple per imprimir o
 // adjuntar a l'atestat).
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useT } from '../../lib/i18n';
 
@@ -49,16 +48,7 @@ export default function PenalDretsDetingut() {
   }
 
   return (
-    <div className="shell pb-10" style={{ maxWidth: 760 }}>
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa">{t('operativa.title')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa/penal">{t('operativa.seguretat-ciutadana.title')}</Link>
-        <span className="sep">/</span>
-        <span className="here">{t('penal.dretsDetingut')}</span>
-      </nav>
+    <div className="v3-page v3-anim" style={{ maxWidth: 760 }}>
 
       <header
         className="op-runner-head"

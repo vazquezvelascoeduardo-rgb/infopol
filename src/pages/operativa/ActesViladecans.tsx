@@ -3,8 +3,6 @@
 // "quan procedeix" de cadascuna, cercables i agrupades per sèrie.
 // Les fitxes d'Operativa hi remeten des del camp «Actes a emplenar».
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useT } from '../../lib/i18n';
 import { ACTES_VILADECANS, SERIES_LABEL, type ActaVilad } from '../../data/actes-viladecans';
 
 const AMBIT_CHIP: Record<NonNullable<ActaVilad['ambit']>, { label: string; bg: string; fg: string }> = {
@@ -17,9 +15,7 @@ const AMBIT_CHIP: Record<NonNullable<ActaVilad['ambit']>, { label: string; bg: s
 // Normalitza per a cerca sense accents ni majúscules.
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
-export default function ActesViladecans() {
-  const { t } = useT();
-  const [q, setQ] = useState('');
+export default function ActesViladecans() {  const [q, setQ] = useState('');
   const [ambit, setAmbit] = useState<'tots' | NonNullable<ActaVilad['ambit']>>('tots');
 
   const filtered = useMemo(() => {
@@ -41,14 +37,7 @@ export default function ActesViladecans() {
   }, [filtered]);
 
   return (
-    <div className="shell pb-10" style={{ maxWidth: 880 }}>
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa">{t('operativa.title')}</Link>
-        <span className="sep">/</span>
-        <span className="here">Actes PL Viladecans</span>
-      </nav>
+    <div className="v3-page v3-anim" style={{ maxWidth: 880 }}>
 
       <header
         className="op-runner-head"

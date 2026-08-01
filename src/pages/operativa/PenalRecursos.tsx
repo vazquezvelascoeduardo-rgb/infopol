@@ -1,7 +1,6 @@
 // Pàgina de recursos d'atenció a víctimes — telèfons i serveis útils
 // per a casos de violència de gènere, domèstica, sexual, suïcidi,
 // desaparició, menors, etc.
-import { Link } from 'react-router-dom';
 import { useT } from '../../lib/i18n';
 
 type Recurs = {
@@ -51,16 +50,7 @@ export default function PenalRecursos() {
   }
 
   return (
-    <div className="shell pb-10" style={{ maxWidth: 760 }}>
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa">{t('operativa.title')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa/penal">{t('operativa.seguretat-ciutadana.title')}</Link>
-        <span className="sep">/</span>
-        <span className="here">{t('penal.recursos')}</span>
-      </nav>
+    <div className="v3-page v3-anim" style={{ maxWidth: 760 }}>
 
       <header
         className="op-runner-head"

@@ -34,7 +34,7 @@ export default function NoticiaDetall() {
 
   if (!noticia) {
     return (
-      <div className="shell py-6">
+      <div className="v3-page v3-anim">
         <p className="text-text-2">{t('noticies.notFound')}</p>
         <Link to="/noticies" className="text-terracotta underline">
           ← {t('noticies.backToList')}
@@ -51,20 +51,13 @@ export default function NoticiaDetall() {
 
   return (
     <div
-      className="shell pb-10"
+      className="v3-page v3-anim"
       style={{
         ['--accent' as never]: ACCENT,
         ['--accent-bg' as never]: ACCENT_BG,
         maxWidth: 820,
       } as React.CSSProperties}
     >
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <Link to="/noticies">{t('noticies.title')}</Link>
-        <span className="sep">/</span>
-        <span className="here truncate">{noticia.title}</span>
-      </nav>
 
       <article className="noticia-detall">
         <span className="nd-stripe" aria-hidden />

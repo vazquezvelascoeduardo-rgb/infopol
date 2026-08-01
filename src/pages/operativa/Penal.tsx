@@ -25,14 +25,7 @@ export default function Penal() {
 function PenalList() {
   const { t } = useT();
   return (
-    <div className="shell pb-10">
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa">{t('operativa.title')}</Link>
-        <span className="sep">/</span>
-        <span className="here">{t('operativa.seguretat-ciutadana.title')}</span>
-      </nav>
+    <div className="v3-page v3-anim">
 
       <header
         className="op-subhero"
@@ -144,7 +137,7 @@ function PenalRunnerScreen({ id }: { id: string }) {
 
   if (!entry || !checklist) {
     return (
-      <div className="shell py-10">
+      <div className="v3-page v3-anim">
         <p className="text-text-2">{t('checklist.notFound')}</p>
         <Link to="/operativa/penal" className="text-sm font-bold text-ink underline mt-3 inline-block">
           ← {t('penal.backToList')}
@@ -156,16 +149,7 @@ function PenalRunnerScreen({ id }: { id: string }) {
   const principiClau = (checklist as unknown as { principi_clau?: string }).principi_clau;
 
   return (
-    <div className="shell pb-10" style={{ maxWidth: 760 }}>
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa">{t('operativa.title')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa/penal">{t('operativa.seguretat-ciutadana.title')}</Link>
-        <span className="sep">/</span>
-        <span className="here truncate">{stripEmoji(entry.titol)}</span>
-      </nav>
+    <div className="v3-page v3-anim" style={{ maxWidth: 760 }}>
 
       <header
         className="op-runner-head"

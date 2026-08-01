@@ -6,8 +6,6 @@
 //
 // El JSON és força flexible (cada secció és array d'objectes O array
 // de strings), així que aquesta pàgina pinta dinàmicament el que troba.
-import { Link } from 'react-router-dom';
-import { useT } from '../../lib/i18n';
 
 // Importem el JSON via Vite. Tipat com a `any` perquè el contingut és
 // flexible i preferim no enumerar-ho tot.
@@ -47,19 +45,8 @@ const FIELD_LABELS: Record<string, string> = {
   diligencies_habituals: 'Diligències habituals',
 };
 
-export default function PenalTaulaActes() {
-  const { t } = useT();
-  return (
-    <div className="shell pb-10" style={{ maxWidth: 880 }}>
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa">{t('operativa.title')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa/penal">{t('operativa.seguretat-ciutadana.title')}</Link>
-        <span className="sep">/</span>
-        <span className="here">{t('penal.taulaActes')}</span>
-      </nav>
+export default function PenalTaulaActes() {  return (
+    <div className="v3-page v3-anim" style={{ maxWidth: 880 }}>
 
       <header
         className="op-runner-head"

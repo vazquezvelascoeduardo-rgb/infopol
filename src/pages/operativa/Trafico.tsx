@@ -24,14 +24,7 @@ export default function Trafico() {
 function ChecklistList() {
   const { t } = useT();
   return (
-    <div className="shell pb-10">
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa">{t('operativa.title')}</Link>
-        <span className="sep">/</span>
-        <span className="here">{t('operativa.trafico.title')}</span>
-      </nav>
+    <div className="v3-page v3-anim">
 
       {/* Header compacte amb escut + títol + descripció + comptador */}
       <header className="op-subhero" style={{ ['--accent' as never]: '#C4530A' } as React.CSSProperties}>
@@ -109,7 +102,7 @@ function ChecklistRunnerScreen({ id }: { id: string }) {
 
   if (!entry || !checklist) {
     return (
-      <div className="shell py-10">
+      <div className="v3-page v3-anim">
         <p className="text-text-2">{t('checklist.notFound')}</p>
         <Link to="/operativa/trafico" className="text-sm font-bold text-ink underline mt-3 inline-block">
           ← {t('checklist.backToList')}
@@ -119,16 +112,7 @@ function ChecklistRunnerScreen({ id }: { id: string }) {
   }
 
   return (
-    <div className="shell pb-10" style={{ maxWidth: 760 }}>
-      <nav className="crumbs">
-        <Link to="/">{t('nav.home')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa">{t('operativa.title')}</Link>
-        <span className="sep">/</span>
-        <Link to="/operativa/trafico">{t('operativa.trafico.title')}</Link>
-        <span className="sep">/</span>
-        <span className="here truncate">{stripEmoji(entry.titol)}</span>
-      </nav>
+    <div className="v3-page v3-anim" style={{ maxWidth: 760 }}>
 
       <header
         className="op-runner-head"
