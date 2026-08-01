@@ -9,12 +9,42 @@
       "color": "#0B4F8A",
       "icono": "🛡️",
       "escenaris": [
-        { "id": "identificacio",         "titol": "🪪 Identificació de persones",                     "fitxer": "identificacio.json",          "ordre": 1 },
-        { "id": "escorcoll",             "titol": "🔍 Escorcoll / registre corporal",                 "fitxer": "escorcoll.json",              "ordre": 2 },
-        { "id": "entrada-domicili",      "titol": "🏠 Entrada a domicili",                            "fitxer": "entrada-domicili.json",       "ordre": 3 },
-        { "id": "detencio",              "titol": "🚔 Detenció",                                       "fitxer": "detencio.json",               "ordre": 4 },
-        { "id": "atemptat-resistencia",  "titol": "🛡️ Atemptat / resistència / desobediència",         "fitxer": "atemptat-resistencia.json",   "ordre": 5 },
-        { "id": "armes",                 "titol": "🔫 Armes prohibides / il·legals",                  "fitxer": "armes.json",                  "ordre": 6 }
+        {
+          "id": "identificacio",
+          "titol": "🪪 Identificació de persones",
+          "fitxer": "identificacio.json",
+          "ordre": 1
+        },
+        {
+          "id": "escorcoll",
+          "titol": "🔍 Escorcoll / registre corporal",
+          "fitxer": "escorcoll.json",
+          "ordre": 2
+        },
+        {
+          "id": "entrada-domicili",
+          "titol": "🏠 Entrada a domicili",
+          "fitxer": "entrada-domicili.json",
+          "ordre": 3
+        },
+        {
+          "id": "detencio",
+          "titol": "🚔 Detenció",
+          "fitxer": "detencio.json",
+          "ordre": 4
+        },
+        {
+          "id": "atemptat-resistencia",
+          "titol": "🛡️ Atemptat / resistència / desobediència",
+          "fitxer": "atemptat-resistencia.json",
+          "ordre": 5
+        },
+        {
+          "id": "armes",
+          "titol": "🔫 Armes prohibides / il·legals",
+          "fitxer": "armes.json",
+          "ordre": 6
+        }
       ]
     },
     {
@@ -22,12 +52,42 @@
       "color": "#991B1B",
       "icono": "👤",
       "escenaris": [
-        { "id": "lesions",               "titol": "🤕 Lesions",                                       "fitxer": "lesions.json",                "ordre": 7 },
-        { "id": "amenaces-coaccions",    "titol": "😡 Amenaces i coaccions",                          "fitxer": "amenaces-coaccions.json",     "ordre": 8 },
-        { "id": "violencia-genere",      "titol": "💔 Violència de gènere (VG)",                      "fitxer": "violencia-genere.json",       "ordre": 9 },
-        { "id": "violencia-domestica",   "titol": "🏚️ Violència domèstica (VD)",                      "fitxer": "violencia-domestica.json",    "ordre": 10 },
-        { "id": "llibertat-sexual",      "titol": "⚠️ Llibertat sexual",                              "fitxer": "llibertat-sexual.json",       "ordre": 11 },
-        { "id": "desaparicio",           "titol": "🔎 Desaparició de persones",                       "fitxer": "desaparicio.json",            "ordre": 12 }
+        {
+          "id": "lesions",
+          "titol": "🤕 Lesions",
+          "fitxer": "lesions.json",
+          "ordre": 7
+        },
+        {
+          "id": "amenaces-coaccions",
+          "titol": "😡 Amenaces i coaccions",
+          "fitxer": "amenaces-coaccions.json",
+          "ordre": 8
+        },
+        {
+          "id": "violencia-genere",
+          "titol": "💔 Violència de gènere (VG)",
+          "fitxer": "violencia-genere.json",
+          "ordre": 9
+        },
+        {
+          "id": "violencia-domestica",
+          "titol": "🏚️ Violència domèstica (VD)",
+          "fitxer": "violencia-domestica.json",
+          "ordre": 10
+        },
+        {
+          "id": "llibertat-sexual",
+          "titol": "⚠️ Llibertat sexual",
+          "fitxer": "llibertat-sexual.json",
+          "ordre": 11
+        },
+        {
+          "id": "desaparicio",
+          "titol": "🔎 Desaparició de persones",
+          "fitxer": "desaparicio.json",
+          "ordre": 12
+        }
       ]
     },
     {
@@ -35,9 +95,24 @@
       "color": "#9A5B00",
       "icono": "💰",
       "escenaris": [
-        { "id": "robatori-furt",         "titol": "💰 Robatori / furt",                                "fitxer": "robatori-furt.json",          "ordre": 13 },
-        { "id": "danys",                 "titol": "🔨 Danys",                                          "fitxer": "danys.json",                  "ordre": 14 },
-        { "id": "ocupacio",              "titol": "🏘️ Ocupació d'immobles",                            "fitxer": "ocupacio.json",               "ordre": 15 }
+        {
+          "id": "robatori-furt",
+          "titol": "💰 Robatori / furt",
+          "fitxer": "robatori-furt.json",
+          "ordre": 13
+        },
+        {
+          "id": "danys",
+          "titol": "🔨 Danys",
+          "fitxer": "danys.json",
+          "ordre": 14
+        },
+        {
+          "id": "ocupacio",
+          "titol": "🏘️ Ocupació d'immobles",
+          "fitxer": "ocupacio.json",
+          "ordre": 15
+        }
       ]
     },
     {
@@ -45,8 +120,18 @@
       "color": "#0B4F8A",
       "icono": "🚨",
       "escenaris": [
-        { "id": "drogues-via-publica",   "titol": "💊 Drogues via pública",                            "fitxer": "drogues-via-publica.json",    "ordre": 16 },
-        { "id": "desordres-baralla",     "titol": "👊 Desordres / baralla",                            "fitxer": "desordres-baralla.json",      "ordre": 17 }
+        {
+          "id": "drogues-via-publica",
+          "titol": "💊 Drogues via pública",
+          "fitxer": "drogues-via-publica.json",
+          "ordre": 16
+        },
+        {
+          "id": "desordres-baralla",
+          "titol": "👊 Desordres / baralla",
+          "fitxer": "desordres-baralla.json",
+          "ordre": 17
+        }
       ]
     },
     {
@@ -54,8 +139,18 @@
       "color": "#186B47",
       "icono": "🆘",
       "escenaris": [
-        { "id": "cadaver",               "titol": "⚰️ Troballa de cadàver",                            "fitxer": "cadaver.json",                "ordre": 18 },
-        { "id": "suicidi",               "titol": "🆘 Crisi suïcida / temptativa",                    "fitxer": "suicidi.json",                "ordre": 19 }
+        {
+          "id": "cadaver",
+          "titol": "⚰️ Troballa de cadàver",
+          "fitxer": "cadaver.json",
+          "ordre": 18
+        },
+        {
+          "id": "suicidi",
+          "titol": "🆘 Crisi suïcida / temptativa",
+          "fitxer": "suicidi.json",
+          "ordre": 19
+        }
       ]
     }
   ],

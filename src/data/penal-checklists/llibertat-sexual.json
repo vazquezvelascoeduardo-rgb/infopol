@@ -129,13 +129,6 @@
         "Dret a recursos especialitzats (CIMASCAM, SARA)",
         "Dret a no repetir declaració (prova preconstituïda)",
         "Dret a privacitat absoluta"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima (+N 02e)",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 10 — Preservació de proves (mostres biològiques)",
-        "I 55 — Cadena de custòdia"
       ]
     },
     "fi_178_agreujada": {
@@ -153,14 +146,7 @@
         "7a. SUBMISSIÓ QUÍMICA: anul·lar la voluntat de la víctima subministrant-li fàrmacs, drogues o altres substàncies"
       ],
       "pena_180": "Presó 2-8 anys per a les agressions del 178 (sense penetració); 7-15 anys per a les del 179 (amb penetració). Si concorren DUES o més circumstàncies: meitat superior (180.2)",
-      "accions": "Mateixes que 178 bàsica + UFAM + DIC + GAV Mossos",
-      "actes_viladecans": [
-        "N 02 — Drets víctima (+N 02e)",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 10 — Preservació de proves (mostres biològiques)",
-        "I 55 — Cadena de custòdia"
-      ]
+      "accions": "Mateixes que 178 bàsica + UFAM + DIC + GAV Mossos"
     },
     "fi_178_180_5": {
       "final": true,
@@ -174,13 +160,6 @@
         "Investigació consum involuntari (begudes amb GHB, escopolamina, etc.)",
         "Càmeres lloc del consum",
         "Informe toxicològic urgent"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima (+N 02e)",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 10 — Preservació de proves (mostres biològiques)",
-        "I 55 — Cadena de custòdia"
       ]
     },
     "fi_179_basica": {
@@ -195,13 +174,6 @@
         "GAV Mossos / UFAM",
         "Píndola anticonceptiva oferida si pertinent",
         "Informe forense"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima (+N 02e)",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 10 — Preservació de proves (mostres biològiques)",
-        "I 55 — Cadena de custòdia"
       ]
     },
     "fi_179_agreujada": {
@@ -210,14 +182,7 @@
       "titol": "🚔 DELICTE MOLT GREU — Violació agreujada (Art. 180 CP)",
       "pena": "Presó 7-15 anys (amb agreujants 180)",
       "agreujants": "Veure 178 agreujada (art. 180.1, circumstàncies 1a-7a)",
-      "info": "Si concorren dues o més circumstàncies del 180.1: pena en meitat superior (180.2)",
-      "actes_viladecans": [
-        "N 02 — Drets víctima (+N 02e)",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 10 — Preservació de proves (mostres biològiques)",
-        "I 55 — Cadena de custòdia"
-      ]
+      "info": "Si concorren dues o més circumstàncies del 180.1: pena en meitat superior (180.2)"
     },
     "fi_181_menor_16": {
       "final": true,
@@ -238,13 +203,6 @@
         "8️⃣ Recollida mostres + lesions + roba",
         "9️⃣ Informe pediatra forense",
         "🔟 Atestat al Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima (+N 02e)",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 10 — Preservació de proves (mostres biològiques)",
-        "I 55 — Cadena de custòdia"
       ]
     },
     "fi_181_violacio_menor": {
@@ -252,14 +210,7 @@
       "tipus": "penal",
       "titol": "🚔 DELICTE MOLT GREU — Violació menor 16 anys",
       "pena": "Presó 6-12 anys (181.3); amb violència/intimidació: 10-15 anys",
-      "accions": "Veure 181 menor 16 — UFAM, DGAIA, prova preconstituïda",
-      "actes_viladecans": [
-        "N 02 — Drets víctima (+N 02e)",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 10 — Preservació de proves (mostres biològiques)",
-        "I 55 — Cadena de custòdia"
-      ]
+      "accions": "Veure 181 menor 16 — UFAM, DGAIA, prova preconstituïda"
     },
     "fi_181_violacio_menor_12": {
       "final": true,
@@ -267,14 +218,7 @@
       "titol": "🚔 DELICTE EXTREMADAMENT GREU — Violació menor 12 anys",
       "pena": "Presó 6-12 anys (181.3) en meitat superior si concorre el 180.1 (víctima menor de 4 anys: en tot cas); amb violència/intimidació: 10-15 anys",
       "info": "Investigació exhaustiva possible context familiar / autoritat. Si ascendent o germà: a més inhabilitació pàtria potestat.",
-      "accions": "Mateixes 181 + valorar context familiar (incest possible)",
-      "actes_viladecans": [
-        "N 02 — Drets víctima (+N 02e)",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 10 — Preservació de proves (mostres biològiques)",
-        "I 55 — Cadena de custòdia"
-      ]
+      "accions": "Mateixes 181 + valorar context familiar (incest possible)"
     },
     "fi_183_grooming": {
       "final": true,
@@ -292,12 +236,6 @@
         "6. Si possible, identificació autor (IP, perfil)",
         "7. Comunicació DGAIA",
         "8. Atestat amb prova digital"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima (+N 02e)",
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "I 55 — Cadena de custòdia (evidència digital)"
       ]
     },
     "fi_197_7_sexting": {
@@ -314,11 +252,6 @@
         "Coordinar amb DGTC",
         "Atestat amb prova digital",
         "Si menor: DGAIA + Fiscalia"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima (+N 02e)",
-        "N 03/N 01 — Drets denunciat o detingut",
-        "I 55 — Cadena de custòdia (evidència digital)"
       ]
     },
     "fi_187_explotacio": {
@@ -340,12 +273,6 @@
         "Documentació exhaustiva",
         "Possible tracta: Article 177 bis CP",
         "Si menor: prioritat absoluta DGAIA"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima (+N 02e)",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "I 55 — Cadena de custòdia"
       ]
     },
     "fi_185_exhibicionisme": {
@@ -359,13 +286,6 @@
         "Identificar víctimes (poden ser múltiples si lloc públic)",
         "Comunicació DGAIA",
         "Atestat penal"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima (+N 02e)",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "D 33 — Infraccions administratives llibertat sexual (si conducta no penal)",
-        "D 33.b — Denúncia administrativa (víctima/testimoni)"
       ]
     }
   },

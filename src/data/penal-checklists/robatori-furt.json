@@ -165,19 +165,7 @@
         "7. Si autor menor 14 anys: no responsabilitat penal — comunicació tutors + Fiscalia Menors",
         "8. Si autor 14-17 anys: Fiscalia Menors"
       ],
-      "documentacio": "Atestat + acta intervenció efectes + denúncia perjudicat",
-      "actes_viladecans": [
-        "D24 — Furt establiment comercial (si furt en establiment)",
-        "G31 — Minuta furt establiment (si furt en establiment)",
-        "A 57 — Declaració del perjudicat per sostracció a establiment comercial (si establiment)",
-        "D 04 — Denúncia furt, versions ANG/FRA (si denunciant turista estranger)",
-        "D 29 — Delicte lleu estafa/furt a benzinera (si fets en benzinera)",
-        "D 06 — Llista d'objectes sostrets-perduts-intervinguts (sempre que hi hagi efectes)",
-        "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "N 09 — Drets i fets persona denunciada per delicte lleu (JIDL, si autor identificat no detingut)",
-        "N 10 — Citació judici ràpid per delicte lleu (JIDL, si citació immediata)",
-        "A 16 — Recollida-lliurament objectes (si es restitueixen efectes)"
-      ]
+      "documentacio": "Atestat + acta intervenció efectes + denúncia perjudicat"
     },
     "fi_furt_basic": {
       "final": true,
@@ -198,18 +186,7 @@
         "8. Atestat penal complet",
         "9. Posada a disposició Jutjat Guàrdia"
       ],
-      "documentacio": "Atestat penal + acta intervenció + cadena custòdia + tasació + gravacions càmeres si n'hi ha",
-      "actes_viladecans": [
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "D24 — Furt establiment comercial (si furt en establiment)",
-        "G31 — Minuta furt establiment (si furt en establiment)",
-        "A 57 — Declaració del perjudicat per sostracció a establiment comercial (si establiment)",
-        "D 06 — Llista d'objectes sostrets-perduts-intervinguts (sempre que hi hagi efectes)",
-        "A 16 — Recollida-lliurament objectes (si restitució efectes)",
-        "A 56 — Reconeixement i entrega d'efectes (si el perjudicat reconeix efectes recuperats)"
-      ]
+      "documentacio": "Atestat penal + acta intervenció + cadena custòdia + tasació + gravacions càmeres si n'hi ha"
     },
     "fi_furt_habitual_235": {
       "final": true,
@@ -224,15 +201,7 @@
         "Atestat amb HISTORIAL ANTECEDENTS adjunt",
         "Posada a disposició Jutjat Guàrdia"
       ],
-      "documentacio": "Atestat + antecedents + acta intervenció efectes",
-      "actes_viladecans": [
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "D24 — Furt establiment comercial (si furt en establiment)",
-        "G31 — Minuta furt establiment (si furt en establiment)",
-        "D 06 — Llista d'objectes sostrets-perduts-intervinguts (si efectes)"
-      ]
+      "documentacio": "Atestat + antecedents + acta intervenció efectes"
     },
     "fi_furt_agreujat_235": {
       "final": true,
@@ -253,12 +222,6 @@
         "Documentació pericial valor",
         "Si amb menors: comunicació DGAIA + Fiscalia Menors",
         "Atestat + Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "D 06 — Llista d'objectes sostrets-perduts-intervinguts (si efectes)"
       ]
     },
     "fi_240_basic": {
@@ -279,29 +242,14 @@
         "8. Detenció si autor localitzat",
         "9. Atestat penal + Jutjat Guàrdia"
       ],
-      "documentacio_clau": "Atestat + acta inspecció ocular + recollida indicis (empremtes, ADN) + inventari + tasació + càmeres",
-      "actes_viladecans": [
-        "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "D 05 — Robatori interior vehicle, versió ANG (si sostracció d'interior de vehicle amb víctima estrangera)",
-        "D 06 — Llista d'objectes sostrets-perduts-intervinguts (sempre)",
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 16 — Recollida-lliurament objectes (si restitució)",
-        "A 56 — Reconeixement i entrega d'efectes (si el perjudicat reconeix efectes recuperats)"
-      ]
+      "documentacio_clau": "Atestat + acta inspecció ocular + recollida indicis (empremtes, ADN) + inventari + tasació + càmeres"
     },
     "fi_240_agreujat_235": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Robatori amb força + agreujants 235 (Art. 240.2 CP)",
       "pena": "Presó 2-5 anys (Art. 240.2 CP: robatori amb força quan concorre alguna circumstància de l'art. 235)",
-      "accions": "Mateixes que 240 bàsic + comunicació especialitzada (si infraestructura crítica)",
-      "actes_viladecans": [
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "D 06 — Llista d'objectes sostrets-perduts-intervinguts (si efectes)"
-      ]
+      "accions": "Mateixes que 240 bàsic + comunicació especialitzada (si infraestructura crítica)"
     },
     "fi_241_habitatge": {
       "final": true,
@@ -327,14 +275,7 @@
         "9. Atestat penal complet",
         "10. Jutjat Guàrdia urgent"
       ],
-      "documentacio": "Atestat + inspecció ocular + acta intervenció efectes + cadena custòdia + tasació + gravacions càmeres + testimonis",
-      "actes_viladecans": [
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "D 06 — Llista d'objectes sostrets-perduts-intervinguts (sempre)",
-        "A 56 — Reconeixement i entrega d'efectes (si es recuperen efectes)"
-      ]
+      "documentacio": "Atestat + inspecció ocular + acta intervenció efectes + cadena custòdia + tasació + gravacions càmeres + testimonis"
     },
     "fi_242_1_basic": {
       "final": true,
@@ -352,13 +293,7 @@
         "8. Atestat penal",
         "9. Jutjat Guàrdia"
       ],
-      "documentacio": "Atestat + parte mèdic + descripció autor + identificació posada a disposició",
-      "actes_viladecans": [
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "D 06 — Llista d'objectes sostrets-perduts-intervinguts (sempre)"
-      ]
+      "documentacio": "Atestat + parte mèdic + descripció autor + identificació posada a disposició"
     },
     "fi_242_2_habitat": {
       "final": true,
@@ -371,12 +306,6 @@
         "Preservar escena",
         "DIC / Científica",
         "Atestat + Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "D 06 — Llista d'objectes sostrets-perduts-intervinguts (sempre)"
       ]
     },
     "fi_242_3_armes": {
@@ -394,12 +323,6 @@
         "Avisar Mossos DIC (atracaments)",
         "Si arma intervinguda: cadena custòdia rigorosa + balística",
         "Atestat + Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "D 06 — Llista d'objectes sostrets-perduts-intervinguts (sempre)"
       ]
     },
     "fi_242_concurs": {
@@ -407,13 +330,7 @@
       "tipus": "penal",
       "titol": "🚔 DELICTE MOLT GREU — Robatori violent amb arma a casa habitada",
       "pena": "Meitat superior del 242.2 (Art. 242.3): presó 4 anys i 3 mesos - 5 anys. Els delictes contra les persones que es cometin (lesions, homicidi…) es castiguen A PART en concurs",
-      "accions": "Mateixes 242.3 + actuació coordinada Mossos DIC",
-      "actes_viladecans": [
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "D 06 — Llista d'objectes sostrets-perduts-intervinguts (sempre)"
-      ]
+      "accions": "Mateixes 242.3 + actuació coordinada Mossos DIC"
     },
     "fi_244_sostraccio": {
       "final": true,
@@ -430,13 +347,6 @@
         "3. Si localitzat: inspecció + restitució titular",
         "4. Comprovació estat (desperfectes per sostracció)",
         "5. Atestat + Jutjat"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 16 — Recollida-lliurament objectes (si restitució del vehicle/efectes)",
-        "D 06 — Llista d'objectes sostrets-perduts-intervinguts (si efectes a l'interior)"
       ]
     },
     "fi_243_extorsio": {
@@ -456,11 +366,6 @@
         "Investigar mètode (telefonia, missatges, presencial)",
         "Si en línia: preservació proves digitals",
         "Atestat + Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)"
       ]
     },
     "fi_255_defraudacio": {
@@ -475,11 +380,6 @@
         "Documentació empresa subministradora",
         "Atestat amb informe pericial",
         "Si concorre amb ocupació: concurs"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima/persona perjudicada (companyia subministradora)",
-        "N 09 — Drets i fets persona denunciada per delicte lleu (JIDL, si ≤ 400 €)",
-        "N 10 — Citació judici ràpid per delicte lleu (JIDL, si ≤ 400 €)"
       ]
     },
     "fi_temptativa": {
@@ -491,13 +391,6 @@
         "Documentar intent (acte d'execució objectiu)",
         "Detenció si flagrant",
         "Atestat com a temptativa"
-      ],
-      "actes_viladecans": [
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "N 02 — Drets víctima/persona perjudicada (sempre)",
-        "N 09 — Drets i fets persona denunciada per delicte lleu (JIDL, si temptativa de furt lleu)",
-        "N 10 — Citació judici ràpid per delicte lleu (JIDL, si temptativa de furt lleu)"
       ]
     }
   },

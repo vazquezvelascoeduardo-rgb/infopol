@@ -147,13 +147,7 @@
         "4. Dipòsit a Intervenció d'Armes (Guàrdia Civil)",
         "5. Si reincidència o context delictiu: valorar via penal"
       ],
-      "documentacio": "Acta D-10 (denúncia) + Acta D-10.b (intervenció temporal) + cadena custòdia",
-      "actes_viladecans": [
-        "D 10 — Denúncia LOPSC (36.10 armes prohibides)",
-        "D 10.b — Intervenció temporal de l'arma",
-        "I 55 — Cadena de custòdia",
-        "A 16 — Recollida-lliurament objectes"
-      ]
+      "documentacio": "Acta D-10 (denúncia) + Acta D-10.b (intervenció temporal) + cadena custòdia"
     },
     "fi_36_10_navalla": {
       "final": true,
@@ -163,12 +157,7 @@
       "article_butlleta": "Art. 36.10 LOPSC",
       "import": "601 € - 30.000 €",
       "info": "Navalla no automàtica amb fulla > 11 cm: tinença prohibida fora del domicili (art. 5.3 RD 137/1993). Si fulla < 11 cm: pot no ser sancionable si no concorre ús negligent, temerari o intimidatori.",
-      "documentacio": "Acta D-10 + D-10.b",
-      "actes_viladecans": [
-        "D 10 — Denúncia LOPSC (36.10)",
-        "D 10.b — Intervenció temporal de l'arma",
-        "I 55 — Cadena de custòdia"
-      ]
+      "documentacio": "Acta D-10 + D-10.b"
     },
     "fi_36_11_no_porta": {
       "final": true,
@@ -183,12 +172,7 @@
         "Si confirma legalitat: tornar arma + butlletí",
         "Si NO té llicència: anar a 564 CP (penal)"
       ],
-      "documentacio": "Acta D-10 + D-10.b",
-      "actes_viladecans": [
-        "D 10 — Denúncia LOPSC (36.12 sense documentació)",
-        "D 10.b — Intervenció temporal de l'arma",
-        "I 55 — Cadena de custòdia"
-      ]
+      "documentacio": "Acta D-10 + D-10.b"
     },
     "fi_36_12_doc": {
       "final": true,
@@ -198,11 +182,7 @@
       "article_butlleta": "Art. 36.12 LOPSC",
       "import": "601 € - 30.000 €",
       "exemples": "Permís caducat, incompliment normativa transport, defectes documentació",
-      "documentacio": "Acta D-10",
-      "actes_viladecans": [
-        "D 10 — Denúncia LOPSC (36.12)",
-        "D 10.b — Intervenció temporal de l'arma (si escau)"
-      ]
+      "documentacio": "Acta D-10"
     },
     "fi_36_10_defensa": {
       "final": true,
@@ -216,13 +196,7 @@
         "Defenses elèctriques (TASER) particular",
         "Porres particulars"
       ],
-      "documentacio": "Acta D-10 + D-10.b + dipòsit IGC",
-      "actes_viladecans": [
-        "D 10 — Denúncia LOPSC (36.10 armes prohibides)",
-        "D 10.b — Intervenció temporal de l'arma",
-        "I 55 — Cadena de custòdia",
-        "A 16 — Recollida-lliurament objectes"
-      ]
+      "documentacio": "Acta D-10 + D-10.b + dipòsit IGC"
     },
     "fi_37_armes": {
       "final": true,
@@ -231,12 +205,7 @@
       "concepte_butlleta": "Portar, exhibir o utilitzar armes prohibides (imitacions d'armes de foc que per les seves característiques externes poden induir a confusió — art. 5.1.b RD 137/1993) / utilització d'armes reglamentàries sense la documentació requerida",
       "article_butlleta": "Art. 36.10 LOPSC (imitació que indueix a confusió) / Art. 36.12 LOPSC (airsoft-pneumàtica de 4a categoria sense targeta d'armes)",
       "import": "601 € - 30.000 € (greu)",
-      "info": "Airsoft i pneumàtiques són armes de 4a CATEGORIA: requereixen targeta d'armes expedida per l'Alcaldia. Les IMITACIONS realistes que poden confondre's amb armes de foc reals són prohibides (art. 5.1.b RD 137/1993). Si causa alarma amb ànim intimidatori sense arribar a greu: 37.2 LOPSC.",
-      "actes_viladecans": [
-        "D 10 — Denúncia LOPSC (36.10 imitació prohibida / 36.12 sense documentació)",
-        "D 10.b — Intervenció temporal de l'arma",
-        "I 55 — Cadena de custòdia"
-      ]
+      "info": "Airsoft i pneumàtiques són armes de 4a CATEGORIA: requereixen targeta d'armes expedida per l'Alcaldia. Les IMITACIONS realistes que poden confondre's amb armes de foc reals són prohibides (art. 5.1.b RD 137/1993). Si causa alarma amb ànim intimidatori sense arribar a greu: 37.2 LOPSC."
     },
     "fi_37_armes_alarma": {
       "final": true,
@@ -246,11 +215,7 @@
       "article_butlleta": "Art. 37.2 LOPSC",
       "import": "100 € - 600 €",
       "info": "Si porta o exhibeix ARMES de manera negligent, temerària o intimidatòria: infracció GREU de l'art. 36.10 LOPSC.",
-      "documentacio": "Acta D-10 + intervenció reproducció",
-      "actes_viladecans": [
-        "D 10 — Denúncia LOPSC (37.2)",
-        "D 10.b — Intervenció temporal de l'objecte"
-      ]
+      "documentacio": "Acta D-10 + intervenció reproducció"
     },
     "fi_18_2_intervencio": {
       "final": true,
@@ -263,11 +228,7 @@
         "Custòdia provisional",
         "Decisió: retorn al ciutadà (un cop cessat el risc) o destrucció"
       ],
-      "documentacio": "Acta D-10.b",
-      "actes_viladecans": [
-        "D 10.b — Intervenció temporal de l'objecte",
-        "A 16 — Recollida-lliurament objectes"
-      ]
+      "documentacio": "Acta D-10.b"
     },
     "fi_arma_intimidacio": {
       "final": true,
@@ -285,12 +246,6 @@
         "Atestat penal del delicte principal + arma simulada com a instrument",
         "Cadena custòdia",
         "Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "I 55 — Cadena de custòdia",
-        "A 16 — Recollida-lliurament objectes"
       ]
     },
     "fi_penal_564": {
@@ -309,13 +264,7 @@
         "6. Comunicació Intervenció d'Armes (IGC)",
         "7. Posada a disposició Jutjat Guàrdia"
       ],
-      "documentacio": "Atestat + acta intervenció + cadena custòdia + fotos arma + sol·licitud informe balístic",
-      "actes_viladecans": [
-        "N 01 — Drets detingut (delicte 564 CP)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "I 55 — Cadena de custòdia",
-        "A 16 — Recollida-lliurament objectes"
-      ]
+      "documentacio": "Atestat + acta intervenció + cadena custòdia + fotos arma + sol·licitud informe balístic"
     },
     "fi_penal_564_modificada": {
       "final": true,
@@ -330,12 +279,6 @@
         "Informe balístic + pericial",
         "Atestat penal",
         "Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 01 — Drets detingut (delicte 564.2 CP)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "I 55 — Cadena de custòdia",
-        "A 16 — Recollida-lliurament objectes"
       ]
     },
     "fi_penal_566": {
@@ -351,12 +294,6 @@
         "3. Intervenció amb màxima cura (perill)",
         "4. Atestat penal",
         "5. Comunicació immediata Jutjat Guàrdia (Audiència Nacional només si vinculació amb terrorisme o crim organitzat)"
-      ],
-      "actes_viladecans": [
-        "N 01 — Drets detingut (delicte 566 CP)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "I 55 — Cadena de custòdia",
-        "A 16 — Recollida-lliurament objectes"
       ]
     },
     "fi_penal_568": {
@@ -372,11 +309,6 @@
         "4. Esperar Mossos / GEDEX",
         "5. Atestat amb peritatge",
         "6. Possible competència Audiència Nacional"
-      ],
-      "actes_viladecans": [
-        "N 01 — Drets detingut (delicte 568 CP)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "I 55 — Cadena de custòdia"
       ]
     }
   },

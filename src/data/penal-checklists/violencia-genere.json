@@ -167,11 +167,6 @@
         "Dret a teleassistència ATENPRO",
         "Dret a punts de trobada",
         "Dret a no comparèixer al judici en presència de l'agressor"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 18PL — Declaració testimonis",
-        "N 07 — Notificació de citació judicial (NOMÉS si el jutjat n'encarrega el lliurament a la PL; la instrucció VG/OP correspon a PG-ME)"
       ]
     },
     "fi_perill_imminent": {
@@ -189,12 +184,6 @@
         "8️⃣ Casa d'acollida si necessari (coordinar amb Serveis Socials)",
         "9️⃣ ATESTAT URGENT al JVM",
         "🔟 VPR immediata"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut"
       ]
     },
     "fi_oficials_indicis": {
@@ -210,10 +199,6 @@
         "Informar víctima dels seus drets (encara que no denunciï)",
         "Comunicació SIAD/SARA per acompanyament",
         "VPR amb dades disponibles"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 18PL — Declaració testimonis"
       ]
     },
     "fi_anotacio_seguiment": {
@@ -255,14 +240,6 @@
         "Declaració víctima",
         "Diligència detenció + lectura drets",
         "Comunicació DGAIA si menors"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració testimonis",
-        "N 07 — Notificació de citació judicial (NOMÉS si el jutjat n'encarrega el lliurament a la PL; la instrucció VG/OP correspon a PG-ME)"
       ]
     },
     "fi_148_4_VG": {
@@ -279,14 +256,6 @@
         "6. VPR",
         "7. Atestat penal exhaustiu al JVM",
         "8. Posada a disposició JVM"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració testimonis",
-        "N 07 — Notificació de citació judicial (NOMÉS si el jutjat n'encarrega el lliurament a la PL; la instrucció VG/OP correspon a PG-ME)"
       ]
     },
     "fi_lesions_greus_VG": {
@@ -302,13 +271,6 @@
         "Avisar Mossos DIC / UFAM",
         "Atestat urgent al JVM o Guàrdia segons cas",
         "VPR EXTREMA"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració testimonis"
       ]
     },
     "fi_171_4_VG": {
@@ -322,13 +284,6 @@
         "Recollida proves (missatges)",
         "VPR",
         "Atestat al JVM"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 18PL — Declaració testimonis",
-        "N 07 — Notificació de citació judicial (NOMÉS si el jutjat n'encarrega el lliurament a la PL; la instrucció VG/OP correspon a PG-ME)"
       ]
     },
     "fi_172_2_VG": {
@@ -340,12 +295,6 @@
         "Detenció",
         "VPR",
         "Atestat JVM"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "N 07 — Notificació de citació judicial (NOMÉS si el jutjat n'encarrega el lliurament a la PL; la instrucció VG/OP correspon a PG-ME)"
       ]
     },
     "fi_173_4_VG": {
@@ -358,11 +307,6 @@
         "Declaració víctima",
         "VPR",
         "Atestat simplificat"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 18PL — Declaració testimonis",
-        "N 07 — Citació judicial"
       ]
     },
     "fi_amenaces_greus_VG": {
@@ -370,13 +314,7 @@
       "tipus": "penal",
       "titol": "🚔 DELICTE — Amenaces greus en context VG",
       "info": "Amenaces greus del 169 CP en context VG: aplicar l'agreujant genèric de gènere (22.4a CP) i competència del JVM.",
-      "accions": "Mateixes que amenaces 169 + VPR + JVM",
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 18PL — Declaració testimonis"
-      ]
+      "accions": "Mateixes que amenaces 169 + VPR + JVM"
     },
     "fi_468_trencament": {
       "final": true,
@@ -394,14 +332,7 @@
         "7. REVISAR VPR (el trencament eleva el risc)",
         "8. Posada a disposició Jutjat Guàrdia (excepcionalment, si urgent) o JVM"
       ],
-      "info_VPR": "El trencament és INDICADOR fort de risc — sempre cal revaluar VPR cap amunt",
-      "actes_viladecans": [
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "N 02 — Drets víctima",
-        "N 07 — Citació judicial"
-      ]
+      "info_VPR": "El trencament és INDICADOR fort de risc — sempre cal revaluar VPR cap amunt"
     }
   },
   "notes_finals": [

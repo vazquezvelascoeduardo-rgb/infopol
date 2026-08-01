@@ -2,7 +2,6 @@
   "id": "_taula-actes-policials",
   "titol": "Actes policials — taula de referència",
   "descripcio": "Document transversal a tot el mòdul. Estipula quan usar cada tipus d'acta segons la situació i la base legal.",
-
   "actes_administratives": [
     {
       "tipus": "D-10",
@@ -59,7 +58,6 @@
       "destrucció": "UTPC tràmits destrucció substàncies sense propietari (ABP regió policial)"
     }
   ],
-
   "actes_penals": [
     {
       "tipus": "A-20",
@@ -84,7 +82,6 @@
       "destinacio": "Atestat penal → Jutjat Guàrdia + Toxicologia (laboratori INTCF)"
     }
   ],
-
   "documents_atestat": [
     {
       "tipus": "Atestat policial",
@@ -125,12 +122,10 @@
       "us": "Síntesi inicial dels fets, narrativa cronològica, observacions agent"
     }
   ],
-
   "frases_prohibides_pautes_UF_3_3": [
     "❌ NO usar: 'utilitzant la mínima força imprescindible' (subjectiva)",
     "✅ Concretar: 'es va aplicar una clau d'immobilització al braç dret per neutralitzar la resistència...'"
   ],
-
   "consideracions_transversals": [
     "Tots els atestats penals: posada a disposició Jutjat de Guàrdia (excepte VG: JVM)",
     "Menors detinguts: atestat a Fiscalia de Menors",

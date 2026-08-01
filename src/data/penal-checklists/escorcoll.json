@@ -16,30 +16,51 @@
   },
   "inici": "context",
   "nodes": {
-
     "context": {
       "titol": "Context de l'escorcoll",
       "text": "En quin context vols fer l'escorcoll?",
       "info": "L'escorcoll incident a detenció no requereix Art. 20 — és inherent a la detenció (sistemàtic per seguretat). Fora de detenció, sí cal causa objectiva.",
       "opcions": [
-        { "etiqueta": "Detenció consumada (escorcoll incident)",                "va_a": "fi_registre_detencio" },
-        { "etiqueta": "Indicis racionals d'infracció/delicte",                  "va_a": "tipus_intrusio" },
-        { "etiqueta": "Seguretat agents (control armes)",                       "va_a": "tipus_intrusio" },
-        { "etiqueta": "Sospita en escorcoll d'un local/vehicle",                "va_a": "vehicle_local" },
-        { "etiqueta": "Sense indicis objectius",                                "va_a": "fi_no_procedeix" }
+        {
+          "etiqueta": "Detenció consumada (escorcoll incident)",
+          "va_a": "fi_registre_detencio"
+        },
+        {
+          "etiqueta": "Indicis racionals d'infracció/delicte",
+          "va_a": "tipus_intrusio"
+        },
+        {
+          "etiqueta": "Seguretat agents (control armes)",
+          "va_a": "tipus_intrusio"
+        },
+        {
+          "etiqueta": "Sospita en escorcoll d'un local/vehicle",
+          "va_a": "vehicle_local"
+        },
+        {
+          "etiqueta": "Sense indicis objectius",
+          "va_a": "fi_no_procedeix"
+        }
       ]
     },
-
     "tipus_intrusio": {
       "titol": "Nivell d'intrusió necessari",
       "text": "Quin nivell?",
       "opcions": [
-        { "etiqueta": "Superficial (butxaques, bossa, palpació)",               "va_a": "fi_superficial" },
-        { "etiqueta": "Despullament parcial/total",                              "va_a": "verificar_requisits_despullament" },
-        { "etiqueta": "Cavitats corporals (rectal/vaginal/oral)",                "va_a": "fi_cavitats" }
+        {
+          "etiqueta": "Superficial (butxaques, bossa, palpació)",
+          "va_a": "fi_superficial"
+        },
+        {
+          "etiqueta": "Despullament parcial/total",
+          "va_a": "verificar_requisits_despullament"
+        },
+        {
+          "etiqueta": "Cavitats corporals (rectal/vaginal/oral)",
+          "va_a": "fi_cavitats"
+        }
       ]
     },
-
     "verificar_requisits_despullament": {
       "titol": "Requisits del registre amb despullament (Art. 20.2 LOPSC)",
       "text": "Es donen TOTS aquests requisits acumulatius?",
@@ -52,21 +73,34 @@
         "✓ MOTIVACIÓ específica documentada"
       ],
       "opcions": [
-        { "etiqueta": "Sí, els 5 requisits es compleixen",                      "va_a": "fi_despullament_ok" },
-        { "etiqueta": "Falta algun requisit",                                   "va_a": "fi_no_procedeix" }
+        {
+          "etiqueta": "Sí, els 5 requisits es compleixen",
+          "va_a": "fi_despullament_ok"
+        },
+        {
+          "etiqueta": "Falta algun requisit",
+          "va_a": "fi_no_procedeix"
+        }
       ]
     },
-
     "vehicle_local": {
       "titol": "Escorcoll de vehicle o local",
       "text": "Tipus d'espai?",
       "opcions": [
-        { "etiqueta": "Vehicle (no domicili)",                                  "va_a": "fi_vehicle" },
-        { "etiqueta": "Local obert al públic",                                  "va_a": "fi_local_obert" },
-        { "etiqueta": "Domicili / part privada",                                "va_a": "fi_remetre_domicili" }
+        {
+          "etiqueta": "Vehicle (no domicili)",
+          "va_a": "fi_vehicle"
+        },
+        {
+          "etiqueta": "Local obert al públic",
+          "va_a": "fi_local_obert"
+        },
+        {
+          "etiqueta": "Domicili / part privada",
+          "va_a": "fi_remetre_domicili"
+        }
       ]
     },
-
     "fi_superficial": {
       "final": true,
       "tipus": "procediment",
@@ -84,14 +118,8 @@
         "Cinturó, peces externes (jaqueta, abric)",
         "Palpació externa de la roba"
       ],
-      "documentacio_si_intervencio": "Acta D-10.b (intervenció temporal) o A-20 si drogues/diners — segons cas",
-      "actes_viladecans": [
-        "D 10.b — Acta d'intervenció temporal LO 4/2015 (si s'intervenen objectes)",
-        "D 10 — Denúncia infracció Llei 4/2015 (si es constata infracció LOPSC)",
-        "A 20 — Pesada de substàncies estupefaents (si s'intervenen drogues)"
-      ]
+      "documentacio_si_intervencio": "Acta D-10.b (intervenció temporal) o A-20 si drogues/diners — segons cas"
     },
-
     "fi_despullament_ok": {
       "final": true,
       "tipus": "procediment",
@@ -105,13 +133,8 @@
         "6. Acta intervenció si troba alguna cosa",
         "7. Si no troba res: diligència igualment per constància"
       ],
-      "documentacio": "Diligència motivada de l'escorcoll + acta intervenció efectes (D-10.b o A-20 segons cas)",
-      "actes_viladecans": [
-        "D 10.b — Acta d'intervenció temporal LO 4/2015 (si s'intervenen objectes)",
-        "I 55 — Cadena de custòdia (si els efectes estan relacionats amb un delicte)"
-      ]
+      "documentacio": "Diligència motivada de l'escorcoll + acta intervenció efectes (D-10.b o A-20 segons cas)"
     },
-
     "fi_cavitats": {
       "final": true,
       "tipus": "avis",
@@ -126,7 +149,6 @@
       ],
       "accio_immediata": "Sol·licitar autorització Jutjat de Guàrdia + trasllat a centre sanitari acompanyat de l'agent. Si urgència extrema: contactar amb fiscalia/jutjat per resolució urgent."
     },
-
     "fi_registre_detencio": {
       "final": true,
       "tipus": "procediment",
@@ -141,13 +163,8 @@
         "6. Custòdia separada dels efectes personals (es retornen al final)",
         "7. Inventari signat pel detingut (si s'hi nega: fer constar 'es nega a signar')"
       ],
-      "documentacio": "Acta intervenció d'efectes + cadena de custòdia + inventari amb signatura",
-      "actes_viladecans": [
-        "PD 06 — Objectes persona detinguda (inventari i dipòsit dels efectes del detingut)",
-        "I 55 — Cadena de custòdia (efectes relacionats amb el delicte)"
-      ]
+      "documentacio": "Acta intervenció d'efectes + cadena de custòdia + inventari amb signatura"
     },
-
     "fi_vehicle": {
       "final": true,
       "tipus": "procediment",
@@ -160,14 +177,8 @@
         "4. Acta d'intervenció si troba alguna cosa",
         "5. Ull als 'amagatalls': revestiments, sostre, paragolps, dipòsits"
       ],
-      "documentacio": "Diligència d'escorcoll vehicle + acta intervenció (D-10.b, A-20 o atestat segons cas)",
-      "actes_viladecans": [
-        "D 10.b — Acta d'intervenció temporal LO 4/2015 (objectes intervinguts)",
-        "A 20 — Pesada de substàncies estupefaents (si s'intervenen drogues)",
-        "I 55 — Cadena de custòdia (si efectes relacionats amb delicte)"
-      ]
+      "documentacio": "Diligència d'escorcoll vehicle + acta intervenció (D-10.b, A-20 o atestat segons cas)"
     },
-
     "fi_local_obert": {
       "final": true,
       "tipus": "procediment",
@@ -180,14 +191,12 @@
         "Si entrar en part privada: consentiment exprés (millor escrit) o mandat"
       ]
     },
-
     "fi_remetre_domicili": {
       "final": true,
       "tipus": "procediment",
       "titol": "🔀 Anar a checklist 'Entrada domicili'",
       "accio": "L'entrada a part privada / domicili requereix anar al checklist específic d'Entrada a domicili."
     },
-
     "fi_no_procedeix": {
       "final": true,
       "tipus": "avis",

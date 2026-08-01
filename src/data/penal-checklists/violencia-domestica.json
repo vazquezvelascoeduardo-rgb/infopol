@@ -140,14 +140,6 @@
         "6. Si menors: DGAIA",
         "7. Atestat al Jutjat de GUÀRDIA (NO JVM — és VD, no VG)",
         "8. Valorar risc i mesures protecció"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració testimonis",
-        "M 06 — Oferiment mesura educativa (si l'agressor és menor)"
       ]
     },
     "fi_171_5": {
@@ -162,12 +154,6 @@
         "Intervenció de l'arma",
         "Atestat Jutjat Guàrdia",
         "Recollir proves"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 18PL — Declaració testimonis"
       ]
     },
     "fi_172_3": {
@@ -180,10 +166,6 @@
       "accions": [
         "Declaracions",
         "Atestat Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 18PL — Declaració testimonis"
       ]
     },
     "fi_173_2_habitual": {
@@ -213,15 +195,7 @@
         "6. Atestat EXHAUSTIU al Jutjat de Guàrdia",
         "7. Sol·licitar mesura protecció"
       ],
-      "documentacio_clau": "Atestat amb cronologia + recopilació antecedents + parte mèdic + declaracions múltiples",
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració testimonis",
-        "N 07 — Notificació de citació judicial (NOMÉS si el jutjat n'encarrega el lliurament a la PL; la instrucció VG/OP correspon a PG-ME)"
-      ]
+      "documentacio_clau": "Atestat amb cronologia + recopilació antecedents + parte mèdic + declaracions múltiples"
     },
     "fi_VD_menor_153": {
       "final": true,
@@ -237,13 +211,6 @@
         "6. Atestat + Jutjat Guàrdia + comunicació Fiscalia Menors",
         "7. UFAM Mossos si possible",
         "8. NO repetir interrogatoris al menor"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 35 — Entrega menor o discapacitat (protecció de menors)",
-        "A 18PL — Declaració testimonis"
       ]
     },
     "fi_negligencia_229": {
@@ -264,10 +231,6 @@
         "Si perill imminent: retirada cautelar",
         "Atestat si indicis penals (229 CP)",
         "Si només negligència sense perill greu: comunicar SS i fer informe"
-      ],
-      "actes_viladecans": [
-        "A 35 — Entrega menor o discapacitat (protecció de menors)",
-        "A 18PL — Declaració testimonis"
       ]
     },
     "fi_abus_sexual_ref": {
@@ -288,14 +251,7 @@
       "tipus": "penal",
       "titol": "🚔 DELICTE MOLT GREU — Lesions greus VD (149/150 CP)",
       "info": "Presó 6-12 anys (149) o 3-6 anys (150) + circumstància mixta de parentiu (art. 23 CP) com a agreujant",
-      "accions": "Auxili vital + detenció + atestat exhaustiu Jutjat Guàrdia",
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració testimonis"
-      ]
+      "accions": "Auxili vital + detenció + atestat exhaustiu Jutjat Guàrdia"
     }
   },
   "notes_finals": [

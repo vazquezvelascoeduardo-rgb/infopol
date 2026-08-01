@@ -10,7 +10,6 @@
     "Art. 379.1 CP",
     "Ordre ICT/155/2020, annex XII (control metrològic — cinemòmetres)"
   ],
-
   "marges_error_cinemometres": {
     "fix_estatic": "± 5% (per damunt de 100 km/h) o ± 5 km/h (per sota de 100 km/h)",
     "movil_dinamic_en_moviment": "± 7% (>100 km/h) o ± 7 km/h (<100 km/h)",
@@ -20,7 +19,6 @@
     "exemple_2": "Radar mòbil 145 km/h en zona 120. Marge 7% × 145 = 10,15 km/h. 145-10=135 imputable.",
     "tolerància_practica": "Habitualment es deixa marge addicional (5 km/h més) per evitar litigis a tram baix"
   },
-
   "tipus_cinemometres": {
     "fix": "Cabines fixes (Pegasus, Velolaser fix), pòrtics. Marge ±5%/5 km/h.",
     "mobil": "Radar dins vehicle policial (parat o en moviment). Marge ±7%/7 km/h.",
@@ -29,7 +27,6 @@
     "homologacio": "Anual obligatòria (CEM — Centre Espanyol de Metrologia)",
     "dret_conductor": "Sol·licitar certificat homologació i última verificació (si recurs)"
   },
-
   "limits_genics_via": {
     "autopista_autovia": "Turisme/moto 120 km/h · Camió/bus >3500kg 90 km/h · Novell 80 km/h",
     "convencional": "Turisme/moto 90 km/h · Camió >3500kg 80 km/h · Novell 80 km/h",
@@ -38,10 +35,8 @@
     "zona_20_plataforma_unica": "20 km/h",
     "mmpp_urba": "40 km/h màxim per camions amb mercaderies perilloses"
   },
-
   "inici": "tipus_via",
   "nodes": {
-
     "tipus_via": {
       "titol": "Determinar el límit de la via",
       "text": "Quin és el límit genèric / específic de la via on es detecta l'excés?",
@@ -52,171 +47,426 @@
         "Identificar si conductor és novell (límit reduït)"
       ],
       "opcions": [
-        { "etiqueta": "20 km/h",   "va_a": "via_20" },
-        { "etiqueta": "30 km/h",   "va_a": "via_30" },
-        { "etiqueta": "40 km/h",   "va_a": "via_40" },
-        { "etiqueta": "50 km/h (urbana general)", "va_a": "via_50" },
-        { "etiqueta": "60 km/h",   "va_a": "via_60" },
-        { "etiqueta": "70 km/h",   "va_a": "via_70" },
-        { "etiqueta": "80 km/h",   "va_a": "via_80" },
-        { "etiqueta": "90 km/h",   "va_a": "via_90" },
-        { "etiqueta": "100 km/h",  "va_a": "via_100" },
-        { "etiqueta": "110 km/h",  "va_a": "via_110" },
-        { "etiqueta": "120 km/h",  "va_a": "via_120" },
-        { "etiqueta": "130 km/h",  "va_a": "via_130" }
+        {
+          "etiqueta": "20 km/h",
+          "va_a": "via_20"
+        },
+        {
+          "etiqueta": "30 km/h",
+          "va_a": "via_30"
+        },
+        {
+          "etiqueta": "40 km/h",
+          "va_a": "via_40"
+        },
+        {
+          "etiqueta": "50 km/h (urbana general)",
+          "va_a": "via_50"
+        },
+        {
+          "etiqueta": "60 km/h",
+          "va_a": "via_60"
+        },
+        {
+          "etiqueta": "70 km/h",
+          "va_a": "via_70"
+        },
+        {
+          "etiqueta": "80 km/h",
+          "va_a": "via_80"
+        },
+        {
+          "etiqueta": "90 km/h",
+          "va_a": "via_90"
+        },
+        {
+          "etiqueta": "100 km/h",
+          "va_a": "via_100"
+        },
+        {
+          "etiqueta": "110 km/h",
+          "va_a": "via_110"
+        },
+        {
+          "etiqueta": "120 km/h",
+          "va_a": "via_120"
+        },
+        {
+          "etiqueta": "130 km/h",
+          "va_a": "via_130"
+        }
       ]
     },
-
     "via_20": {
       "titol": "Excés en via 20 km/h",
       "text": "Velocitat IMPUTABLE (ja descomptat marge error)?",
       "opcions": [
-        { "etiqueta": "21-40 km/h", "va_a": "fi_lleu_100" },
-        { "etiqueta": "41-50 km/h", "va_a": "fi_greu_300" },
-        { "etiqueta": "51-60 km/h", "va_a": "fi_greu_400" },
-        { "etiqueta": "61-70 km/h", "va_a": "fi_greu_500" },
-        { "etiqueta": "+71 km/h",   "va_a": "fi_mg_600" },
-        { "etiqueta": "Excés > 60 km/h sobre límit (urbà) → DELICTE", "va_a": "avis_penal_urba" }
+        {
+          "etiqueta": "21-40 km/h",
+          "va_a": "fi_lleu_100"
+        },
+        {
+          "etiqueta": "41-50 km/h",
+          "va_a": "fi_greu_300"
+        },
+        {
+          "etiqueta": "51-60 km/h",
+          "va_a": "fi_greu_400"
+        },
+        {
+          "etiqueta": "61-70 km/h",
+          "va_a": "fi_greu_500"
+        },
+        {
+          "etiqueta": "+71 km/h",
+          "va_a": "fi_mg_600"
+        },
+        {
+          "etiqueta": "Excés > 60 km/h sobre límit (urbà) → DELICTE",
+          "va_a": "avis_penal_urba"
+        }
       ]
     },
     "via_30": {
       "titol": "Excés via 30",
       "text": "Velocitat imputable?",
       "opcions": [
-        { "etiqueta": "31-50",   "va_a": "fi_lleu_100" },
-        { "etiqueta": "51-60",   "va_a": "fi_greu_300" },
-        { "etiqueta": "61-70",   "va_a": "fi_greu_400" },
-        { "etiqueta": "71-80",   "va_a": "fi_greu_500" },
-        { "etiqueta": "+81",     "va_a": "fi_mg_600" },
-        { "etiqueta": "Excés > 60 km/h → DELICTE", "va_a": "avis_penal_urba" }
+        {
+          "etiqueta": "31-50",
+          "va_a": "fi_lleu_100"
+        },
+        {
+          "etiqueta": "51-60",
+          "va_a": "fi_greu_300"
+        },
+        {
+          "etiqueta": "61-70",
+          "va_a": "fi_greu_400"
+        },
+        {
+          "etiqueta": "71-80",
+          "va_a": "fi_greu_500"
+        },
+        {
+          "etiqueta": "+81",
+          "va_a": "fi_mg_600"
+        },
+        {
+          "etiqueta": "Excés > 60 km/h → DELICTE",
+          "va_a": "avis_penal_urba"
+        }
       ]
     },
     "via_40": {
       "titol": "Excés via 40",
       "opcions": [
-        { "etiqueta": "41-60", "va_a": "fi_lleu_100" },
-        { "etiqueta": "61-70", "va_a": "fi_greu_300" },
-        { "etiqueta": "71-80", "va_a": "fi_greu_400" },
-        { "etiqueta": "81-90", "va_a": "fi_greu_500" },
-        { "etiqueta": "+91",   "va_a": "fi_mg_600" },
-        { "etiqueta": "Excés > 60 → DELICTE", "va_a": "avis_penal_urba" }
+        {
+          "etiqueta": "41-60",
+          "va_a": "fi_lleu_100"
+        },
+        {
+          "etiqueta": "61-70",
+          "va_a": "fi_greu_300"
+        },
+        {
+          "etiqueta": "71-80",
+          "va_a": "fi_greu_400"
+        },
+        {
+          "etiqueta": "81-90",
+          "va_a": "fi_greu_500"
+        },
+        {
+          "etiqueta": "+91",
+          "va_a": "fi_mg_600"
+        },
+        {
+          "etiqueta": "Excés > 60 → DELICTE",
+          "va_a": "avis_penal_urba"
+        }
       ]
     },
     "via_50": {
       "titol": "Excés via 50 (urbana general)",
       "opcions": [
-        { "etiqueta": "51-70",  "va_a": "fi_lleu_100" },
-        { "etiqueta": "71-80",  "va_a": "fi_greu_300" },
-        { "etiqueta": "81-90",  "va_a": "fi_greu_400" },
-        { "etiqueta": "91-100", "va_a": "fi_greu_500" },
-        { "etiqueta": "+101",   "va_a": "fi_mg_600" },
-        { "etiqueta": "Excés > 60 → DELICTE", "va_a": "avis_penal_urba" }
+        {
+          "etiqueta": "51-70",
+          "va_a": "fi_lleu_100"
+        },
+        {
+          "etiqueta": "71-80",
+          "va_a": "fi_greu_300"
+        },
+        {
+          "etiqueta": "81-90",
+          "va_a": "fi_greu_400"
+        },
+        {
+          "etiqueta": "91-100",
+          "va_a": "fi_greu_500"
+        },
+        {
+          "etiqueta": "+101",
+          "va_a": "fi_mg_600"
+        },
+        {
+          "etiqueta": "Excés > 60 → DELICTE",
+          "va_a": "avis_penal_urba"
+        }
       ]
     },
     "via_60": {
       "titol": "Excés via 60",
       "opcions": [
-        { "etiqueta": "61-90",   "va_a": "fi_lleu_100" },
-        { "etiqueta": "91-110",  "va_a": "fi_greu_300" },
-        { "etiqueta": "111-120", "va_a": "fi_greu_400" },
-        { "etiqueta": "121-130", "va_a": "fi_greu_500" },
-        { "etiqueta": "+131",    "va_a": "fi_mg_600" },
-        { "etiqueta": "Excés > 80 → DELICTE", "va_a": "avis_penal_inter" }
+        {
+          "etiqueta": "61-90",
+          "va_a": "fi_lleu_100"
+        },
+        {
+          "etiqueta": "91-110",
+          "va_a": "fi_greu_300"
+        },
+        {
+          "etiqueta": "111-120",
+          "va_a": "fi_greu_400"
+        },
+        {
+          "etiqueta": "121-130",
+          "va_a": "fi_greu_500"
+        },
+        {
+          "etiqueta": "+131",
+          "va_a": "fi_mg_600"
+        },
+        {
+          "etiqueta": "Excés > 80 → DELICTE",
+          "va_a": "avis_penal_inter"
+        }
       ]
     },
     "via_70": {
       "titol": "Excés via 70",
       "opcions": [
-        { "etiqueta": "71-100",  "va_a": "fi_lleu_100" },
-        { "etiqueta": "101-120", "va_a": "fi_greu_300" },
-        { "etiqueta": "121-130", "va_a": "fi_greu_400" },
-        { "etiqueta": "131-140", "va_a": "fi_greu_500" },
-        { "etiqueta": "+141",    "va_a": "fi_mg_600" },
-        { "etiqueta": "Excés > 80 → DELICTE", "va_a": "avis_penal_inter" }
+        {
+          "etiqueta": "71-100",
+          "va_a": "fi_lleu_100"
+        },
+        {
+          "etiqueta": "101-120",
+          "va_a": "fi_greu_300"
+        },
+        {
+          "etiqueta": "121-130",
+          "va_a": "fi_greu_400"
+        },
+        {
+          "etiqueta": "131-140",
+          "va_a": "fi_greu_500"
+        },
+        {
+          "etiqueta": "+141",
+          "va_a": "fi_mg_600"
+        },
+        {
+          "etiqueta": "Excés > 80 → DELICTE",
+          "va_a": "avis_penal_inter"
+        }
       ]
     },
     "via_80": {
       "titol": "Excés via 80",
       "opcions": [
-        { "etiqueta": "81-110",  "va_a": "fi_lleu_100" },
-        { "etiqueta": "111-130", "va_a": "fi_greu_300" },
-        { "etiqueta": "131-140", "va_a": "fi_greu_400" },
-        { "etiqueta": "141-150", "va_a": "fi_greu_500" },
-        { "etiqueta": "+151",    "va_a": "fi_mg_600" },
-        { "etiqueta": "Excés > 80 → DELICTE", "va_a": "avis_penal_inter" }
+        {
+          "etiqueta": "81-110",
+          "va_a": "fi_lleu_100"
+        },
+        {
+          "etiqueta": "111-130",
+          "va_a": "fi_greu_300"
+        },
+        {
+          "etiqueta": "131-140",
+          "va_a": "fi_greu_400"
+        },
+        {
+          "etiqueta": "141-150",
+          "va_a": "fi_greu_500"
+        },
+        {
+          "etiqueta": "+151",
+          "va_a": "fi_mg_600"
+        },
+        {
+          "etiqueta": "Excés > 80 → DELICTE",
+          "va_a": "avis_penal_inter"
+        }
       ]
     },
     "via_90": {
       "titol": "Excés via 90 (convencional)",
       "opcions": [
-        { "etiqueta": "91-120",  "va_a": "fi_lleu_100" },
-        { "etiqueta": "121-140", "va_a": "fi_greu_300" },
-        { "etiqueta": "141-150", "va_a": "fi_greu_400" },
-        { "etiqueta": "151-160", "va_a": "fi_greu_500" },
-        { "etiqueta": "+161",    "va_a": "fi_mg_600" },
-        { "etiqueta": "Excés > 80 → DELICTE", "va_a": "avis_penal_inter" }
+        {
+          "etiqueta": "91-120",
+          "va_a": "fi_lleu_100"
+        },
+        {
+          "etiqueta": "121-140",
+          "va_a": "fi_greu_300"
+        },
+        {
+          "etiqueta": "141-150",
+          "va_a": "fi_greu_400"
+        },
+        {
+          "etiqueta": "151-160",
+          "va_a": "fi_greu_500"
+        },
+        {
+          "etiqueta": "+161",
+          "va_a": "fi_mg_600"
+        },
+        {
+          "etiqueta": "Excés > 80 → DELICTE",
+          "va_a": "avis_penal_inter"
+        }
       ]
     },
     "via_100": {
       "titol": "Excés via 100",
       "opcions": [
-        { "etiqueta": "101-130", "va_a": "fi_lleu_100" },
-        { "etiqueta": "131-150", "va_a": "fi_greu_300" },
-        { "etiqueta": "151-160", "va_a": "fi_greu_400" },
-        { "etiqueta": "161-170", "va_a": "fi_greu_500" },
-        { "etiqueta": "+171",    "va_a": "fi_mg_600" },
-        { "etiqueta": "Excés > 80 → DELICTE", "va_a": "avis_penal_inter" }
+        {
+          "etiqueta": "101-130",
+          "va_a": "fi_lleu_100"
+        },
+        {
+          "etiqueta": "131-150",
+          "va_a": "fi_greu_300"
+        },
+        {
+          "etiqueta": "151-160",
+          "va_a": "fi_greu_400"
+        },
+        {
+          "etiqueta": "161-170",
+          "va_a": "fi_greu_500"
+        },
+        {
+          "etiqueta": "+171",
+          "va_a": "fi_mg_600"
+        },
+        {
+          "etiqueta": "Excés > 80 → DELICTE",
+          "va_a": "avis_penal_inter"
+        }
       ]
     },
     "via_110": {
       "titol": "Excés via 110",
       "opcions": [
-        { "etiqueta": "111-140", "va_a": "fi_lleu_100" },
-        { "etiqueta": "141-160", "va_a": "fi_greu_300" },
-        { "etiqueta": "161-170", "va_a": "fi_greu_400" },
-        { "etiqueta": "171-180", "va_a": "fi_greu_500" },
-        { "etiqueta": "+181",    "va_a": "fi_mg_600" },
-        { "etiqueta": "Excés > 80 → DELICTE", "va_a": "avis_penal_inter" }
+        {
+          "etiqueta": "111-140",
+          "va_a": "fi_lleu_100"
+        },
+        {
+          "etiqueta": "141-160",
+          "va_a": "fi_greu_300"
+        },
+        {
+          "etiqueta": "161-170",
+          "va_a": "fi_greu_400"
+        },
+        {
+          "etiqueta": "171-180",
+          "va_a": "fi_greu_500"
+        },
+        {
+          "etiqueta": "+181",
+          "va_a": "fi_mg_600"
+        },
+        {
+          "etiqueta": "Excés > 80 → DELICTE",
+          "va_a": "avis_penal_inter"
+        }
       ]
     },
     "via_120": {
       "titol": "Excés via 120 (autopista)",
       "opcions": [
-        { "etiqueta": "121-150", "va_a": "fi_lleu_100" },
-        { "etiqueta": "151-170", "va_a": "fi_greu_300" },
-        { "etiqueta": "171-180", "va_a": "fi_greu_400" },
-        { "etiqueta": "181-190", "va_a": "fi_greu_500" },
-        { "etiqueta": "+191",    "va_a": "fi_mg_600" },
-        { "etiqueta": "Excés > 80 → DELICTE", "va_a": "avis_penal_inter" }
+        {
+          "etiqueta": "121-150",
+          "va_a": "fi_lleu_100"
+        },
+        {
+          "etiqueta": "151-170",
+          "va_a": "fi_greu_300"
+        },
+        {
+          "etiqueta": "171-180",
+          "va_a": "fi_greu_400"
+        },
+        {
+          "etiqueta": "181-190",
+          "va_a": "fi_greu_500"
+        },
+        {
+          "etiqueta": "+191",
+          "va_a": "fi_mg_600"
+        },
+        {
+          "etiqueta": "Excés > 80 → DELICTE",
+          "va_a": "avis_penal_inter"
+        }
       ]
     },
     "via_130": {
       "titol": "Excés via 130",
       "opcions": [
-        { "etiqueta": "131-150", "va_a": "fi_lleu_100" },
-        { "etiqueta": "151-170", "va_a": "fi_greu_300" },
-        { "etiqueta": "171-180", "va_a": "fi_greu_400" },
-        { "etiqueta": "181-190", "va_a": "fi_greu_500" },
-        { "etiqueta": "+191",    "va_a": "fi_mg_600" },
-        { "etiqueta": "Excés > 80 → DELICTE", "va_a": "avis_penal_inter" }
+        {
+          "etiqueta": "131-150",
+          "va_a": "fi_lleu_100"
+        },
+        {
+          "etiqueta": "151-170",
+          "va_a": "fi_greu_300"
+        },
+        {
+          "etiqueta": "171-180",
+          "va_a": "fi_greu_400"
+        },
+        {
+          "etiqueta": "181-190",
+          "va_a": "fi_greu_500"
+        },
+        {
+          "etiqueta": "+191",
+          "va_a": "fi_mg_600"
+        },
+        {
+          "etiqueta": "Excés > 80 → DELICTE",
+          "va_a": "avis_penal_inter"
+        }
       ]
     },
-
     "avis_penal_urba": {
       "titol": "🚔 Confirmar via penal URBANA",
       "text": "Excés > 60 km/h sobre el límit en via urbana = Art. 379.1 CP. Exemples: >110 km/h en zona 50, >90 km/h en zona 30.",
       "opcions": [
-        { "etiqueta": "Confirmar i procedir", "va_a": "fi_penal_velocitat" }
+        {
+          "etiqueta": "Confirmar i procedir",
+          "va_a": "fi_penal_velocitat"
+        }
       ]
     },
     "avis_penal_inter": {
       "titol": "🚔 Confirmar via penal INTERURBANA",
       "text": "Excés > 80 km/h sobre el límit en via interurbana = Art. 379.1 CP. Exemples: >170 km/h en zona 90, >200 km/h en autopista 120.",
       "opcions": [
-        { "etiqueta": "Confirmar i procedir", "va_a": "fi_penal_velocitat" }
+        {
+          "etiqueta": "Confirmar i procedir",
+          "va_a": "fi_penal_velocitat"
+        }
       ]
     },
-
     "fi_lleu_100": {
       "final": true,
       "tipus": "administrativa",
@@ -225,10 +475,7 @@
       "article_butlleta": "Art. 48 RGC",
       "import": "100 € (DTE 50 €)",
       "punts": "0 punts",
-      "info_butlleta": "INDICAR a la butlleta: velocitat detectada, velocitat imputable (descomptat marge), límit de la via, model i serial del cinemòmetre, data última verificació, fotografia o tiquet adjunt",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "info_butlleta": "INDICAR a la butlleta: velocitat detectada, velocitat imputable (descomptat marge), límit de la via, model i serial del cinemòmetre, data última verificació, fotografia o tiquet adjunt"
     },
     "fi_greu_300": {
       "final": true,
@@ -237,10 +484,7 @@
       "concepte_butlleta": "Circular a velocitat superior a la limitació genèrica (indicar velocitat mesurada i cinemòmetre utilitzat)",
       "article_butlleta": "Art. 48 RGC",
       "import": "300 € (DTE 150 €)",
-      "punts": "–2 punts",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "punts": "–2 punts"
     },
     "fi_greu_400": {
       "final": true,
@@ -248,10 +492,7 @@
       "titol": "⚠️ Tram 3 — GREU",
       "article_butlleta": "Art. 48 RGC",
       "import": "400 € (DTE 200 €)",
-      "punts": "–4 punts",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "punts": "–4 punts"
     },
     "fi_greu_500": {
       "final": true,
@@ -259,10 +500,7 @@
       "titol": "⚠️ Tram 4 — GREU",
       "article_butlleta": "Art. 48 RGC",
       "import": "500 € (DTE 250 €)",
-      "punts": "–6 punts",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "punts": "–6 punts"
     },
     "fi_mg_600": {
       "final": true,
@@ -271,12 +509,8 @@
       "article_butlleta": "Art. 77.a TRLSV",
       "import": "600 € (DTE 300 € — la reducció del 50% de l'Art. 94 TRLSV també s'aplica a les molt greus de velocitat)",
       "punts": "–6 punts",
-      "info": "Per via penal: si excés > 60 (urbà) o 80 (inter) → 379.1 CP, no MG administrativa",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa (velocitat detectada, imputable, límit, cinemòmetre i verificació)"
-      ]
+      "info": "Per via penal: si excés > 60 (urbà) o 80 (inter) → 379.1 CP, no MG administrativa"
     },
-
     "fi_penal_velocitat": {
       "final": true,
       "tipus": "penal",
@@ -310,13 +544,7 @@
         "Identificació plena del vehicle (matrícula, marca, model)",
         "Identificació del conductor"
       ],
-      "competencia": "Jutjat d'Instrucció de Guàrdia",
-      "actes_viladecans": [
-        "N 11 — Citació per a judici ràpid (Art. 379.1 CP)",
-        "N 08 — Drets persona investigada no detinguda JR (si es tramita per citació)",
-        "N 01 — Informació drets persona detinguda (si detenció)",
-        "A 13 — Immobilització de vehicle (el conductor no pot continuar conduint)"
-      ]
+      "competencia": "Jutjat d'Instrucció de Guàrdia"
     }
   },
   "notes_finals": [

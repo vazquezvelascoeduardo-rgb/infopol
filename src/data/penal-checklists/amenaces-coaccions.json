@@ -12,57 +12,98 @@
     "Art. 172 ter CP (assetjament — stalking)",
     "Art. 173 CP (tracte degradant)"
   ],
-
   "diferencia_amenaces_coaccions": {
     "amenaces": "Anunci de causar un MAL futur a la persona/família",
     "coaccions": "Impedir amb VIOLÈNCIA actual fer alguna cosa lícita o forçar a fer-la",
     "stalking_172_ter": "Persecució persistent que altera vida quotidiana"
   },
-
   "inici": "tipus_conducta",
   "nodes": {
-
     "tipus_conducta": {
       "titol": "Tipus de conducta",
       "opcions": [
-        { "etiqueta": "Amenaça mal CONSTITUTIU de delicte (matar, lesions greus, segrest, violar)", "va_a": "amenaca_169_condicional" },
-        { "etiqueta": "Amenaça mal NO constitutiu de delicte ('et faré la vida impossible'…)",        "va_a": "fi_171_lleu" },
-        { "etiqueta": "Coaccions (impedir/forçar amb violència actual)",                              "va_a": "coaccions_gravetat" },
-        { "etiqueta": "Stalking — persecució persistent",                                              "va_a": "fi_172_ter_stalking" },
-        { "etiqueta": "Matrimoni forçat",                                                              "va_a": "fi_172_bis" },
-        { "etiqueta": "Tracte degradant continuat (no familiar)",                                     "va_a": "fi_173_degradant" },
-        { "etiqueta": "Context PARELLA DONA (VG)",                                                     "va_a": "fi_vg_amenaces_ref" },
-        { "etiqueta": "Context FAMILIAR convivent (VD)",                                               "va_a": "fi_vd_amenaces_ref" },
-        { "etiqueta": "Amenaça a COL·LECTIVITAT / grup",                                                "va_a": "fi_170_col_lectivitat" }
+        {
+          "etiqueta": "Amenaça mal CONSTITUTIU de delicte (matar, lesions greus, segrest, violar)",
+          "va_a": "amenaca_169_condicional"
+        },
+        {
+          "etiqueta": "Amenaça mal NO constitutiu de delicte ('et faré la vida impossible'…)",
+          "va_a": "fi_171_lleu"
+        },
+        {
+          "etiqueta": "Coaccions (impedir/forçar amb violència actual)",
+          "va_a": "coaccions_gravetat"
+        },
+        {
+          "etiqueta": "Stalking — persecució persistent",
+          "va_a": "fi_172_ter_stalking"
+        },
+        {
+          "etiqueta": "Matrimoni forçat",
+          "va_a": "fi_172_bis"
+        },
+        {
+          "etiqueta": "Tracte degradant continuat (no familiar)",
+          "va_a": "fi_173_degradant"
+        },
+        {
+          "etiqueta": "Context PARELLA DONA (VG)",
+          "va_a": "fi_vg_amenaces_ref"
+        },
+        {
+          "etiqueta": "Context FAMILIAR convivent (VD)",
+          "va_a": "fi_vd_amenaces_ref"
+        },
+        {
+          "etiqueta": "Amenaça a COL·LECTIVITAT / grup",
+          "va_a": "fi_170_col_lectivitat"
+        }
       ]
     },
-
     "amenaca_169_condicional": {
       "titol": "Amenaça constitutiva de delicte — condicional?",
       "text": "L'amenaça es fa condicionada a alguna cosa (exigir diners, acció…)?",
       "opcions": [
-        { "etiqueta": "Sí, condicionada (per obtenir alguna cosa)",                                    "va_a": "amenaca_complerta" },
-        { "etiqueta": "No, amenaça INCONDICIONADA",                                                    "va_a": "fi_169_2_no_condicional" }
+        {
+          "etiqueta": "Sí, condicionada (per obtenir alguna cosa)",
+          "va_a": "amenaca_complerta"
+        },
+        {
+          "etiqueta": "No, amenaça INCONDICIONADA",
+          "va_a": "fi_169_2_no_condicional"
+        }
       ]
     },
-
     "amenaca_complerta": {
       "titol": "S'ha complert el propòsit?",
       "opcions": [
-        { "etiqueta": "Sí, ha aconseguit el propòsit (extorsió consumada)",                             "va_a": "fi_169_1_aconseguit" },
-        { "etiqueta": "No, no ha aconseguit el propòsit",                                              "va_a": "fi_169_1_no_aconseguit" }
+        {
+          "etiqueta": "Sí, ha aconseguit el propòsit (extorsió consumada)",
+          "va_a": "fi_169_1_aconseguit"
+        },
+        {
+          "etiqueta": "No, no ha aconseguit el propòsit",
+          "va_a": "fi_169_1_no_aconseguit"
+        }
       ]
     },
-
     "coaccions_gravetat": {
       "titol": "Coaccions — gravetat",
       "opcions": [
-        { "etiqueta": "Coaccions GREUS amb violència física",                                          "va_a": "fi_172_basic" },
-        { "etiqueta": "Coaccions LLEUS sense violència greu",                                          "va_a": "fi_172_3_lleu" },
-        { "etiqueta": "Coaccions amb DRETS FONAMENTALS afectats",                                     "va_a": "fi_172_agreujat" }
+        {
+          "etiqueta": "Coaccions GREUS amb violència física",
+          "va_a": "fi_172_basic"
+        },
+        {
+          "etiqueta": "Coaccions LLEUS sense violència greu",
+          "va_a": "fi_172_3_lleu"
+        },
+        {
+          "etiqueta": "Coaccions amb DRETS FONAMENTALS afectats",
+          "va_a": "fi_172_agreujat"
+        }
       ]
     },
-
     "fi_171_lleu": {
       "final": true,
       "tipus": "penal",
@@ -80,15 +121,8 @@
         "5. Atestat simplificat",
         "6. Lliurar còpia denúncia a víctima"
       ],
-      "documentacio": "Atestat + còpia missatges/proves + declaració víctima",
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 18PL — Declaració",
-        "N 03 — Drets denunciat",
-        "N 09/N 10 — JIDL (delicte lleu)"
-      ]
+      "documentacio": "Atestat + còpia missatges/proves + declaració víctima"
     },
-
     "fi_169_2_no_condicional": {
       "final": true,
       "tipus": "penal",
@@ -107,16 +141,8 @@
         "7. Jutjat Guàrdia"
       ],
       "documentacio": "Atestat + còpia proves + declaracions + valoració risc",
-      "info_clau": "Anotar LITERAL l'amenaça, paraula per paraula. Important per acreditar la naturalesa delictiva del mal anunciat.",
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 18PL — Declaració",
-        "N 03 — Drets denunciat",
-        "N 06 — Citació policial",
-        "N 07 — Citació judicial"
-      ]
+      "info_clau": "Anotar LITERAL l'amenaça, paraula per paraula. Important per acreditar la naturalesa delictiva del mal anunciat."
     },
-
     "fi_169_1_no_aconseguit": {
       "final": true,
       "tipus": "penal",
@@ -128,15 +154,8 @@
         "Detenció si flagrant o risc",
         "Preservar evidències (missatges, gravacions)",
         "Atestat penal + Jutjat"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 18PL — Declaració",
-        "N 03 — Drets denunciat",
-        "N 07 — Citació judicial"
       ]
     },
-
     "fi_169_1_aconseguit": {
       "final": true,
       "tipus": "penal",
@@ -150,14 +169,8 @@
         "Acreditar el propòsit aconseguit",
         "Atestat penal complet",
         "Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 18PL — Declaració",
-        "N 07 — Citació judicial"
       ]
     },
-
     "fi_172_basic": {
       "final": true,
       "tipus": "penal",
@@ -177,30 +190,16 @@
         "Detenció si flagrant",
         "Atestat penal",
         "Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 18PL — Declaració",
-        "N 03 — Drets denunciat",
-        "N 07 — Citació judicial"
       ]
     },
-
     "fi_172_3_lleu": {
       "final": true,
       "tipus": "penal",
       "titol": "⚖️ DELICTE LLEU — Coaccions lleus (Art. 172.3 CP)",
       "pena": "Multa 1-3 mesos",
       "perseguibilitat": "NOMÉS denúncia de la persona agreujada — EXCEPTE àmbit VG/VD: si la víctima és dona parella/exparella és SEMPRE delicte de l'art. 172.2 CP (d'ofici)",
-      "exemples": "Empenta breu, retenció momentània sense violència greu",
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 18PL — Declaració",
-        "N 03 — Drets denunciat",
-        "N 09/N 10 — JIDL (delicte lleu)"
-      ]
+      "exemples": "Empenta breu, retenció momentània sense violència greu"
     },
-
     "fi_172_agreujat": {
       "final": true,
       "tipus": "penal",
@@ -210,15 +209,8 @@
         "Impedir exercici dret de manifestació, vot o culte",
         "Impedir el legítim gaudi de l'habitatge",
         "Coaccionar pels drets de gènere/orientació"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 18PL — Declaració",
-        "N 03 — Drets denunciat",
-        "N 07 — Citació judicial"
       ]
     },
-
     "fi_172_ter_stalking": {
       "final": true,
       "tipus": "penal",
@@ -242,15 +234,8 @@
         "VPR si VG",
         "Atestat penal + Jutjat"
       ],
-      "documentacio_clau": "Atestat + cronologia fets + còpies missatges/gravacions + testimonis",
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 18PL — Declaració",
-        "N 03 — Drets denunciat",
-        "N 07 — Citació judicial"
-      ]
+      "documentacio_clau": "Atestat + cronologia fets + còpies missatges/gravacions + testimonis"
     },
-
     "fi_172_bis": {
       "final": true,
       "tipus": "penal",
@@ -266,14 +251,8 @@
         "Detenció autors",
         "Atestat penal",
         "Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 18PL — Declaració",
-        "N 07 — Citació judicial"
       ]
     },
-
     "fi_173_degradant": {
       "final": true,
       "tipus": "penal",
@@ -286,14 +265,8 @@
         "Declaracions víctima i testimonis",
         "Atestat amb cronologia",
         "Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 18PL — Declaració",
-        "N 03 — Drets denunciat"
       ]
     },
-
     "fi_170_col_lectivitat": {
       "final": true,
       "tipus": "penal",
@@ -306,20 +279,14 @@
         "Valorar risc poblacional",
         "Atestat amb totes les proves",
         "Possible competència Audiència Nacional si terrorisme"
-      ],
-      "actes_viladecans": [
-        "A 18PL — Declaració",
-        "N 03 — Drets denunciat"
       ]
     },
-
     "fi_vg_amenaces_ref": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 Amenaces VG — anar a checklist específic",
       "accio": "Veure 'Violència de gènere'. Aplica Art. 171.4 CP (amenaces lleus VG) o 172.2 CP (coaccions lleus VG) — SEMPRE delicte i d'ofici, mai delicte lleu del 171.7/172.3. Si amenaça de mal delictiu: concurs amb 169 CP."
     },
-
     "fi_vd_amenaces_ref": {
       "final": true,
       "tipus": "penal",

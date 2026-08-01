@@ -18,60 +18,108 @@
   ],
   "inici": "comprovacio",
   "nodes": {
-
     "comprovacio": {
       "titol": "Comprovació al FIVA",
       "text": "Resultat de la consulta?",
       "opcions": [
-        { "etiqueta": "ASSEGURAT — pòlissa vigent",                "va_a": "fi_ok_assegurat" },
-        { "etiqueta": "Sense assegurança vigent al FIVA",          "va_a": "requerir_justificant" },
-        { "etiqueta": "FIVA sense resposta / no consulta possible","va_a": "requerir_justificant" }
+        {
+          "etiqueta": "ASSEGURAT — pòlissa vigent",
+          "va_a": "fi_ok_assegurat"
+        },
+        {
+          "etiqueta": "Sense assegurança vigent al FIVA",
+          "va_a": "requerir_justificant"
+        },
+        {
+          "etiqueta": "FIVA sense resposta / no consulta possible",
+          "va_a": "requerir_justificant"
+        }
       ]
     },
-
     "requerir_justificant": {
       "titol": "Requerir justificant al conductor/titular",
       "text": "Es demana pòlissa, rebut o certificat. Què presenta?",
       "opcions": [
-        { "etiqueta": "Justificant vàlid i vigent",                 "va_a": "fi_ok_assegurat" },
-        { "etiqueta": "Pòlissa caducada / no vigent",              "va_a": "tipus_vehicle_permis" },
-        { "etiqueta": "No pot acreditar (sense documentació)",      "va_a": "tipus_vehicle_permis" },
-        { "etiqueta": "Diu que la té però no acredita",            "va_a": "advertencia_acreditar" }
+        {
+          "etiqueta": "Justificant vàlid i vigent",
+          "va_a": "fi_ok_assegurat"
+        },
+        {
+          "etiqueta": "Pòlissa caducada / no vigent",
+          "va_a": "tipus_vehicle_permis"
+        },
+        {
+          "etiqueta": "No pot acreditar (sense documentació)",
+          "va_a": "tipus_vehicle_permis"
+        },
+        {
+          "etiqueta": "Diu que la té però no acredita",
+          "va_a": "advertencia_acreditar"
+        }
       ]
     },
-
     "advertencia_acreditar": {
       "titol": "Termini per acreditar",
       "text": "Donar termini raonable (presentar pòlissa). Si no, butlletí.",
       "opcions": [
-        { "etiqueta": "Acredita en termini",                        "va_a": "fi_ok_assegurat" },
-        { "etiqueta": "No acredita",                                "va_a": "tipus_vehicle_permis" }
+        {
+          "etiqueta": "Acredita en termini",
+          "va_a": "fi_ok_assegurat"
+        },
+        {
+          "etiqueta": "No acredita",
+          "va_a": "tipus_vehicle_permis"
+        }
       ]
     },
-
     "tipus_vehicle_permis": {
       "titol": "Tipus de vehicle (determina l'import)",
       "text": "Categoria del vehicle?",
       "opcions": [
-        { "etiqueta": "VMP considerat vehicle a motor (per MOM)",                       "va_a": "fi_vmp_motor" },
-        { "etiqueta": "VPL — Vehicle Personal Lleuger (certificat i inscrit RNV)",       "va_a": "fi_vmp" },
-        { "etiqueta": "Vehicle agrícola / cotxe minusvàlid (llicència LCC, LVA)",      "va_a": "fi_lleuger" },
-        { "etiqueta": "Ciclomotor (permís AM)",                                        "va_a": "fi_am" },
-        { "etiqueta": "Motocicleta (permís A1, A2, A)",                                "va_a": "fi_moto" },
-        { "etiqueta": "Turisme / furgoneta (permís B, B+E)",                           "va_a": "fi_turisme" },
-        { "etiqueta": "Camió (permís C1, C1+E, C, C+E)",                               "va_a": "fi_camio" },
-        { "etiqueta": "Autobús (permís D1, D1+E, D, D+E)",                             "va_a": "fi_bus" },
-        { "etiqueta": "Vehicle ressenyat genèric (no encaixa categories)",             "va_a": "fi_resenyat" }
+        {
+          "etiqueta": "VMP considerat vehicle a motor (per MOM)",
+          "va_a": "fi_vmp_motor"
+        },
+        {
+          "etiqueta": "VPL — Vehicle Personal Lleuger (certificat i inscrit RNV)",
+          "va_a": "fi_vmp"
+        },
+        {
+          "etiqueta": "Vehicle agrícola / cotxe minusvàlid (llicència LCC, LVA)",
+          "va_a": "fi_lleuger"
+        },
+        {
+          "etiqueta": "Ciclomotor (permís AM)",
+          "va_a": "fi_am"
+        },
+        {
+          "etiqueta": "Motocicleta (permís A1, A2, A)",
+          "va_a": "fi_moto"
+        },
+        {
+          "etiqueta": "Turisme / furgoneta (permís B, B+E)",
+          "va_a": "fi_turisme"
+        },
+        {
+          "etiqueta": "Camió (permís C1, C1+E, C, C+E)",
+          "va_a": "fi_camio"
+        },
+        {
+          "etiqueta": "Autobús (permís D1, D1+E, D, D+E)",
+          "va_a": "fi_bus"
+        },
+        {
+          "etiqueta": "Vehicle ressenyat genèric (no encaixa categories)",
+          "va_a": "fi_resenyat"
+        }
       ]
     },
-
     "fi_ok_assegurat": {
       "final": true,
       "tipus": "ok",
       "titol": "✅ Assegurança vigent",
       "accio": "Es deixa circular"
     },
-
     "fi_vmp": {
       "final": true,
       "tipus": "administrativa",
@@ -87,14 +135,8 @@
         "Dipòsit fins a justificar pòlissa o titular abonar la franquícia",
         "Si propietari distint del conductor: butlletí al titular",
         "⚠️ Si és VMP \"considerat vehicle a motor\" (per MOM): l'import és 800 € (no 300 €)"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
       ]
     },
-
     "fi_vmp_motor": {
       "final": true,
       "tipus": "administrativa",
@@ -109,14 +151,8 @@
         "Notificació al Consorci de Compensació d'Assegurances",
         "Si el VMP no està inscrit al RNV: consignar OBLIGATÒRIAMENT el pes (MOM) a la butlleta",
         "Si propietari distint del conductor: butlletí al titular"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
       ]
     },
-
     "fi_lleuger": {
       "final": true,
       "tipus": "administrativa",
@@ -128,14 +164,8 @@
       "accions_operatives": [
         "Butlletí + immobilització + Consorci",
         "Avís al titular si distint"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
       ]
     },
-
     "fi_am": {
       "final": true,
       "tipus": "administrativa",
@@ -144,14 +174,8 @@
       "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "1.000 € (DTE 500 €)",
       "punts": "0",
-      "accions_operatives": "Butlletí + immobilització + Consorci",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
-      ]
+      "accions_operatives": "Butlletí + immobilització + Consorci"
     },
-
     "fi_moto": {
       "final": true,
       "tipus": "administrativa",
@@ -159,14 +183,8 @@
       "concepte_butlleta": "No tenir concertada l'assegurança obligatòria de responsabilitat civil, el vehicle ressenyat, la conducció del qual s'autoritza mitjançant permís de conducció de la classe A2, A1 o A",
       "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "1.250 € (DTE 625 €)",
-      "punts": "0",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
-      ]
+      "punts": "0"
     },
-
     "fi_turisme": {
       "final": true,
       "tipus": "administrativa",
@@ -174,14 +192,8 @@
       "concepte_butlleta": "No tenir concertada l'assegurança obligatòria de responsabilitat civil, el vehicle ressenyat, la conducció del qual s'autoritza mitjançant permís de conducció de la classe B i B+E",
       "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "1.500 € (DTE 750 €)",
-      "punts": "0",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
-      ]
+      "punts": "0"
     },
-
     "fi_camio": {
       "final": true,
       "tipus": "administrativa",
@@ -195,14 +207,8 @@
         "Comunicació Consorci",
         "Avís a Inspecció de Transports si transport professional",
         "Avís a empresa titular"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
       ]
     },
-
     "fi_bus": {
       "final": true,
       "tipus": "administrativa",
@@ -215,14 +221,8 @@
         "Butlletí + immobilització immediata",
         "Si transport viatgers: traslladar passatgers amb seguretat (vehicle alternatiu)",
         "Comunicació Consorci + Inspecció de Transports + empresa titular"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
       ]
     },
-
     "fi_resenyat": {
       "final": true,
       "tipus": "administrativa",
@@ -230,12 +230,7 @@
       "concepte_butlleta": "Circular el vehicle ressenyat sense que consti que el propietari tingui subscrit i mantingui en vigor un contracte d'assegurança que cobreixi la responsabilitat civil derivada de la seva circulació",
       "article_butlleta": "Art. 2.1 RDL 8/2004",
       "import": "800 € (DTE 400 €)",
-      "punts": "0",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (fins acreditar assegurança)",
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
-      ]
+      "punts": "0"
     }
   },
   "notes_finals": [

@@ -38,7 +38,6 @@
   "barem_oficial_sct": "Catàleg SCT + Comunicat 6/2026. Totes les infraccions amb 50% de descompte per pagament anticipat.",
   "inici": "que_tens_davant",
   "nodes": {
-
     "que_tens_davant": {
       "titol": "Pas 1 — Què tens davant?",
       "text": "Identifica l'aparell (30 segons):",
@@ -50,32 +49,78 @@
         "Busca l'etiqueta (M0000BBB / Z0000BBB) o la placa del fabricant."
       ],
       "opcions": [
-        { "etiqueta": "🛴 Patinet elèctric estàndard (VMP, ≤25 km/h, 1 plaça)", "va_a": "que_ha_passat" },
-        { "etiqueta": "🚲 Bicicleta elèctrica de pedaleig assistit (EPAC)", "va_a": "fi_epac" },
-        { "etiqueta": "⚠️ Supera els 25 km/h / trucat / amb seient tipus moto", "va_a": "fi_ciclomotor_encobert" },
-        { "etiqueta": "🧸 Joguina (≤6 km/h) o vehicle de mobilitat reduïda", "va_a": "fi_joguina" },
-        { "etiqueta": "📋 Vull la comprovació documental completa (etiquetes M/Z, RNV, AOV)", "va_a": "tipus_vehicle" }
+        {
+          "etiqueta": "🛴 Patinet elèctric estàndard (VMP, ≤25 km/h, 1 plaça)",
+          "va_a": "que_ha_passat"
+        },
+        {
+          "etiqueta": "🚲 Bicicleta elèctrica de pedaleig assistit (EPAC)",
+          "va_a": "fi_epac"
+        },
+        {
+          "etiqueta": "⚠️ Supera els 25 km/h / trucat / amb seient tipus moto",
+          "va_a": "fi_ciclomotor_encobert"
+        },
+        {
+          "etiqueta": "🧸 Joguina (≤6 km/h) o vehicle de mobilitat reduïda",
+          "va_a": "fi_joguina"
+        },
+        {
+          "etiqueta": "📋 Vull la comprovació documental completa (etiquetes M/Z, RNV, AOV)",
+          "va_a": "tipus_vehicle"
+        }
       ]
     },
-
     "que_ha_passat": {
       "titol": "Pas 2 — Què ha passat?",
       "text": "Tria la situació que has vist:",
       "opcions": [
-        { "etiqueta": "Circula per la VORERA o zona de vianants", "va_a": "fi_vorera" },
-        { "etiqueta": "Porta AURICULARS o va amb el MÒBIL", "va_a": "fi_auriculars_mobil" },
-        { "etiqueta": "Hi van DUES persones", "va_a": "fi_dues_persones" },
-        { "etiqueta": "Sense CASC", "va_a": "fi_casc" },
-        { "etiqueta": "El condueix un MENOR", "va_a": "fi_menor" },
-        { "etiqueta": "Símptomes d'ALCOHOL o DROGUES", "va_a": "fi_alcohol_drogues" },
-        { "etiqueta": "S'ha saltat un SEMÀFOR vermell o un STOP/cediu", "va_a": "fi_semafor_stop" },
-        { "etiqueta": "De NIT sense llums ni reflectors", "va_a": "fi_llums" },
-        { "etiqueta": "Circula per AUTOPISTA / autovia / interurbana / travessera", "va_a": "fi_via_prohibida" },
-        { "etiqueta": "Conducció TEMERÀRIA o negligent", "va_a": "fi_temeraria" },
-        { "etiqueta": "Documentació: etiqueta / registre / assegurança", "va_a": "tipus_vehicle" }
+        {
+          "etiqueta": "Circula per la VORERA o zona de vianants",
+          "va_a": "fi_vorera"
+        },
+        {
+          "etiqueta": "Porta AURICULARS o va amb el MÒBIL",
+          "va_a": "fi_auriculars_mobil"
+        },
+        {
+          "etiqueta": "Hi van DUES persones",
+          "va_a": "fi_dues_persones"
+        },
+        {
+          "etiqueta": "Sense CASC",
+          "va_a": "fi_casc"
+        },
+        {
+          "etiqueta": "El condueix un MENOR",
+          "va_a": "fi_menor"
+        },
+        {
+          "etiqueta": "Símptomes d'ALCOHOL o DROGUES",
+          "va_a": "fi_alcohol_drogues"
+        },
+        {
+          "etiqueta": "S'ha saltat un SEMÀFOR vermell o un STOP/cediu",
+          "va_a": "fi_semafor_stop"
+        },
+        {
+          "etiqueta": "De NIT sense llums ni reflectors",
+          "va_a": "fi_llums"
+        },
+        {
+          "etiqueta": "Circula per AUTOPISTA / autovia / interurbana / travessera",
+          "va_a": "fi_via_prohibida"
+        },
+        {
+          "etiqueta": "Conducció TEMERÀRIA o negligent",
+          "va_a": "fi_temeraria"
+        },
+        {
+          "etiqueta": "Documentació: etiqueta / registre / assegurança",
+          "va_a": "tipus_vehicle"
+        }
       ]
     },
-
     "fi_epac": {
       "final": true,
       "tipus": "avis",
@@ -88,7 +133,6 @@
         "Semàfors i senyals: mateixes sancions que el VMP (arts. 143/145 RGC)"
       ]
     },
-
     "fi_ciclomotor_encobert": {
       "final": true,
       "tipus": "administrativa",
@@ -104,14 +148,8 @@
         "3. IMMOBILITZACIÓ del vehicle (no pot circular sense complir el règim de ciclomotor).",
         "4. Si el conductor no té permís AM i és reincident o mai n'ha tingut: valora la via penal (Art. 384 CP) — aquí SÍ és vehicle de motor.",
         "5. Menor: dades dels pares/tutors (art. 82 LSV)."
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa (una per infracció)",
-        "A 13 — Immobilització de vehicle",
-        "I 104 / G 58 — Identificació de menor si escau"
       ]
     },
-
     "fi_joguina": {
       "final": true,
       "tipus": "ok",
@@ -122,7 +160,6 @@
         "Si genera perill real a la vorera: ordenança de convivència (A 10cc)"
       ]
     },
-
     "fi_vorera": {
       "final": true,
       "tipus": "administrativa",
@@ -136,13 +173,8 @@
         "Butlletí de denúncia",
         "Menor: dades dels pares/tutors (art. 82 LSV — responsabilitat solidària)",
         "Si a més va amb auriculars/mòbil/2 persones: denúncies independents"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "I 104 / G 58 — Identificació (menor o sense documentació)"
       ]
     },
-
     "fi_auriculars_mobil": {
       "final": true,
       "tipus": "administrativa",
@@ -155,12 +187,8 @@
       "accions_operatives": [
         "Butlletí de denúncia",
         "Menor: dades dels pares/tutors (art. 82 LSV)"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
       ]
     },
-
     "fi_dues_persones": {
       "final": true,
       "tipus": "administrativa",
@@ -174,12 +202,8 @@
         "Butlletí de denúncia",
         "Si el passatger és un menor petit: valora comunicació a Serveis Socials si hi ha perill manifest",
         "Menor conduint: dades dels pares/tutors (art. 82 LSV)"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
       ]
     },
-
     "fi_casc": {
       "final": true,
       "tipus": "avis",
@@ -193,12 +217,8 @@
         "Comprova QUÈ diu exactament l'ordenança local abans de denunciar (àmbit: tothom? només menors?)",
         "Si no hi ha ordenança que l'exigeixi: només consell de seguretat, SENSE denúncia",
         "Menor: dades dels pares/tutors (art. 82 LSV)"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa (infracció d'ordenança)"
       ]
     },
-
     "fi_menor": {
       "final": true,
       "tipus": "avis",
@@ -214,15 +234,8 @@
         "3. Anota les dades completes dels tutors a la butlleta (art. 82 LSV: en respondran solidàriament).",
         "4. Si el menor és molt petit o hi ha desemparament: comunica-ho a Serveis Socials.",
         "5. El VMP es lliura als tutors (no el pot continuar conduint el menor)."
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "I 104 — Drets persona desplaçada per identificació",
-        "G 58 — Volant d'estada en dependències",
-        "A 35 — Entrega de menor als pares/tutors"
       ]
     },
-
     "fi_alcohol_drogues": {
       "final": true,
       "tipus": "administrativa",
@@ -238,17 +251,8 @@
         "3. IMMOBILITZA el VMP fins que el conductor estigui en condicions o vingui algú a fer-se'n càrrec.",
         "4. Menor: dades dels tutors + valora comunicació a Fiscalia de Menors si reiteració.",
         "5. ⚠️ Si l'aparell és un ciclomotor encobert (>25 km/h): aleshores SÍ és via penal (379/383 CP) — torna a la identificació."
-      ],
-      "actes_viladecans": [
-        "A 27 — Drets en proves d'alcoholèmia i drogues",
-        "T 15 — Tiquets d'alcoholèmia / drogues",
-        "A 21 — Simptomatologia d'alcohol (si signes evidents)",
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització del VMP",
-        "Butlleta estadística (alcohol o drogues, segons prova)"
       ]
     },
-
     "fi_semafor_stop": {
       "final": true,
       "tipus": "administrativa",
@@ -260,12 +264,8 @@
       "accions_operatives": [
         "Butlletí de denúncia",
         "Menor: dades dels pares/tutors (art. 82 LSV)"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
       ]
     },
-
     "fi_llums": {
       "final": true,
       "tipus": "administrativa",
@@ -279,13 +279,8 @@
         "Butlletí de denúncia",
         "Valora immobilitzar fins a l'alba o fins que reculli el vehicle un tercer",
         "Menor: dades dels pares/tutors"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització del VMP (si el perill és immediat)"
       ]
     },
-
     "fi_via_prohibida": {
       "final": true,
       "tipus": "administrativa",
@@ -300,12 +295,8 @@
         "2. Butlletí de denúncia (art. 38.4 RGC).",
         "3. Si no hi ha itinerari alternatiu segur: trasllat del VMP i la persona.",
         "4. Menor: dades dels pares/tutors."
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
       ]
     },
-
     "fi_temeraria": {
       "final": true,
       "tipus": "administrativa",
@@ -320,14 +311,8 @@
         "Testimonis si n'hi ha (A 18PL)",
         "Valora immobilització si persisteix l'actitud",
         "Menor: dades dels pares/tutors"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització (si persisteix el perill)",
-        "A 18PL — Acta de declaració (testimonis)"
       ]
     },
-
     "tipus_vehicle": {
       "titol": "Comprovació documental (Com. 6/2026) — Tipus de vehicle",
       "text": "Quin tipus de VMP tenim davant?",
@@ -343,14 +328,28 @@
         "Consultar AOV al FIVA (només per a VMP a motor o VPL certificat i inscrit)"
       ],
       "opcions": [
-        { "etiqueta": "VMP comercialitzat a partir del 22/01/2024 (etiqueta M)",      "va_a": "comprovar_etiqueta_m" },
-        { "etiqueta": "VMP no certificat (anterior 22/01/2024, etiqueta Z)",         "va_a": "comprovar_etiqueta_z" },
-        { "etiqueta": "VMP considerat vehicle a motor (MOM elevada)",                "va_a": "comprovar_aov_vmp_motor" },
-        { "etiqueta": "VPL — Vehicle Personal Lleuger (certificat i inscrit)",        "va_a": "comprovar_aov_vpl" },
-        { "etiqueta": "VMP sense cap identificació",                                  "va_a": "sense_identificacio" }
+        {
+          "etiqueta": "VMP comercialitzat a partir del 22/01/2024 (etiqueta M)",
+          "va_a": "comprovar_etiqueta_m"
+        },
+        {
+          "etiqueta": "VMP no certificat (anterior 22/01/2024, etiqueta Z)",
+          "va_a": "comprovar_etiqueta_z"
+        },
+        {
+          "etiqueta": "VMP considerat vehicle a motor (MOM elevada)",
+          "va_a": "comprovar_aov_vmp_motor"
+        },
+        {
+          "etiqueta": "VPL — Vehicle Personal Lleuger (certificat i inscrit)",
+          "va_a": "comprovar_aov_vpl"
+        },
+        {
+          "etiqueta": "VMP sense cap identificació",
+          "va_a": "sense_identificacio"
+        }
       ]
     },
-
     "comprovar_etiqueta_m": {
       "titol": "VMP amb etiqueta M (comercialitzat des del 22/01/2024)",
       "text": "Comprovacions a fer:",
@@ -362,16 +361,36 @@
         "Compliment Annex XXI RGV (il·luminació, dispositius, etc.)"
       ],
       "opcions": [
-        { "etiqueta": "TOT correcte — circular",                            "va_a": "fi_ok" },
-        { "etiqueta": "No té etiqueta NI placa de marcatge",                "va_a": "fi_inf_1" },
-        { "etiqueta": "Té placa però NO està inscrit al RNV",               "va_a": "fi_inf_2" },
-        { "etiqueta": "Manipulació velocitat / modificació estructural",    "va_a": "fi_inf_3" },
-        { "etiqueta": "Sistema il·luminació o rodes defectuoses",           "va_a": "fi_inf_4" },
-        { "etiqueta": "Dispositiu sonor o cavallet defectuós",              "va_a": "fi_inf_5" },
-        { "etiqueta": "Circula sense AOV (i és inscrit + obligat)",          "va_a": "fi_aov" }
+        {
+          "etiqueta": "TOT correcte — circular",
+          "va_a": "fi_ok"
+        },
+        {
+          "etiqueta": "No té etiqueta NI placa de marcatge",
+          "va_a": "fi_inf_1"
+        },
+        {
+          "etiqueta": "Té placa però NO està inscrit al RNV",
+          "va_a": "fi_inf_2"
+        },
+        {
+          "etiqueta": "Manipulació velocitat / modificació estructural",
+          "va_a": "fi_inf_3"
+        },
+        {
+          "etiqueta": "Sistema il·luminació o rodes defectuoses",
+          "va_a": "fi_inf_4"
+        },
+        {
+          "etiqueta": "Dispositiu sonor o cavallet defectuós",
+          "va_a": "fi_inf_5"
+        },
+        {
+          "etiqueta": "Circula sense AOV (i és inscrit + obligat)",
+          "va_a": "fi_aov"
+        }
       ]
     },
-
     "comprovar_etiqueta_z": {
       "titol": "VMP amb etiqueta Z (règim transitori fins 22/01/2027)",
       "text": "Comprovacions a fer:",
@@ -383,36 +402,66 @@
         "⚠️ Caducitat: 22/01/2027 — després NO podrà circular"
       ],
       "opcions": [
-        { "etiqueta": "TOT correcte — circular",                                "va_a": "fi_ok_z" },
-        { "etiqueta": "No té etiqueta Z",                                       "va_a": "fi_inf_1" },
-        { "etiqueta": "No està inscrit al RNV",                                 "va_a": "fi_inf_2" },
-        { "etiqueta": "Manipulació velocitat / modificació estructural",        "va_a": "fi_inf_3" },
-        { "etiqueta": "Requisits Annex XXI no complerts (greus)",                "va_a": "fi_inf_4" }
+        {
+          "etiqueta": "TOT correcte — circular",
+          "va_a": "fi_ok_z"
+        },
+        {
+          "etiqueta": "No té etiqueta Z",
+          "va_a": "fi_inf_1"
+        },
+        {
+          "etiqueta": "No està inscrit al RNV",
+          "va_a": "fi_inf_2"
+        },
+        {
+          "etiqueta": "Manipulació velocitat / modificació estructural",
+          "va_a": "fi_inf_3"
+        },
+        {
+          "etiqueta": "Requisits Annex XXI no complerts (greus)",
+          "va_a": "fi_inf_4"
+        }
       ]
     },
-
     "comprovar_aov_vmp_motor": {
       "titol": "VMP considerat vehicle a motor — AOV obligatòria",
       "text": "Té assegurança obligatòria?",
       "info": "El VMP considerat vehicle a motor (per la seva MOM al RNV) SEMPRE necessita AOV (art. 2.1 Llei RC i assegurança). Sanció: 800 €.",
       "opcions": [
-        { "etiqueta": "SÍ té AOV vigent (FIVA o pòlissa)",     "va_a": "fi_ok" },
-        { "etiqueta": "NO té AOV",                              "va_a": "fi_aov_motor" }
+        {
+          "etiqueta": "SÍ té AOV vigent (FIVA o pòlissa)",
+          "va_a": "fi_ok"
+        },
+        {
+          "etiqueta": "NO té AOV",
+          "va_a": "fi_aov_motor"
+        }
       ]
     },
-
     "comprovar_aov_vpl": {
       "titol": "VPL certificat i inscrit — AOV obligatòria",
       "text": "Té assegurança obligatòria?",
       "info": "El VPL certificat I inscrit al RNV ha de tenir AOV (DA 1a Llei 5/2025). Si està certificat però NO inscrit, o NO certificat: no és obligat (però sí denúncia per manca d'inscripció).",
       "opcions": [
-        { "etiqueta": "SÍ té AOV vigent",                                      "va_a": "fi_ok" },
-        { "etiqueta": "NO té AOV (és certificat i inscrit)",                    "va_a": "fi_aov" },
-        { "etiqueta": "Certificat però NO inscrit (no obligat AOV)",            "va_a": "fi_inf_2" },
-        { "etiqueta": "No certificat (no obligat AOV però sí denúncia)",        "va_a": "fi_inf_2" }
+        {
+          "etiqueta": "SÍ té AOV vigent",
+          "va_a": "fi_ok"
+        },
+        {
+          "etiqueta": "NO té AOV (és certificat i inscrit)",
+          "va_a": "fi_aov"
+        },
+        {
+          "etiqueta": "Certificat però NO inscrit (no obligat AOV)",
+          "va_a": "fi_inf_2"
+        },
+        {
+          "etiqueta": "No certificat (no obligat AOV però sí denúncia)",
+          "va_a": "fi_inf_2"
+        }
       ]
     },
-
     "sense_identificacio": {
       "titol": "VMP sense cap número d'identificació",
       "text": "Què consignar a la butlleta:",
@@ -425,10 +474,12 @@
         "Identificació del conductor"
       ],
       "opcions": [
-        { "etiqueta": "Documentar i denunciar per (1) + (2)",   "va_a": "fi_doble" }
+        {
+          "etiqueta": "Documentar i denunciar per (1) + (2)",
+          "va_a": "fi_doble"
+        }
       ]
     },
-
     "fi_ok": {
       "final": true,
       "tipus": "ok",
@@ -439,7 +490,6 @@
         "Recordatori del compliment normatiu (alcoholèmia, mòbil, casc, voreres)"
       ]
     },
-
     "fi_ok_z": {
       "final": true,
       "tipus": "avis",
@@ -450,7 +500,6 @@
         "A partir d'aquesta data el vehicle NO podrà circular"
       ]
     },
-
     "fi_inf_1": {
       "final": true,
       "tipus": "administrativa",
@@ -463,14 +512,8 @@
         "Butlletí de denúncia",
         "Si VMP no inscrit: indicar pes (MOM) a la butlleta",
         "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "I 104 — Drets persona desplaçada per identificació (menor/sense ID)",
-        "G 58 — Volant d'estada en dependències (si trasllat per identificació)"
       ]
     },
-
     "fi_inf_2": {
       "final": true,
       "tipus": "administrativa",
@@ -485,14 +528,8 @@
         "Adreçat al CONDUCTOR (el VMP no consta inscrit, no hi ha titular al RNV)",
         "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)",
         "⚠️ NO denunciar alhora per 'sense certificat' si és > 22/01/2024 (concurrència)"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "I 104 — Drets persona desplaçada per identificació (menor/sense ID)",
-        "G 58 — Volant d'estada en dependències (si trasllat per identificació)"
       ]
     },
-
     "fi_inf_3": {
       "final": true,
       "tipus": "administrativa",
@@ -508,13 +545,8 @@
         "⚠️ L'única MOLT GREU de les 5 noves del Com. 6/2026",
         "⚠️ Si la manipulació fa superar els 25 km/h: tracta'l com a CICLOMOTOR ENCOBERT (règim complet)",
         "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització del VMP (per perill objectiu)"
       ]
     },
-
     "fi_inf_4": {
       "final": true,
       "tipus": "administrativa",
@@ -528,12 +560,8 @@
         "Documentar (fotografia) el defecte tècnic",
         "Recordar al conductor que cal reparar abans de tornar a circular",
         "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
       ]
     },
-
     "fi_inf_5": {
       "final": true,
       "tipus": "administrativa",
@@ -546,12 +574,8 @@
         "Butlletí de denúncia",
         "Documentar (fotografia) el defecte",
         "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
       ]
     },
-
     "fi_aov": {
       "final": true,
       "tipus": "administrativa",
@@ -565,14 +589,8 @@
         "Acta d'IMMOBILITZACIÓ (Art. 3 LRCSCVM)",
         "Notificació al Consorci de Compensació d'Assegurances",
         "Dipòsit fins a justificar pòlissa o titular abonar franquícia"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització del VPL",
-        "S 02 — Notificació de recuperació de vehicle (en retirar-lo del dipòsit)"
       ]
     },
-
     "fi_aov_motor": {
       "final": true,
       "tipus": "administrativa",
@@ -587,14 +605,8 @@
         "Notificació al Consorci de Compensació d'Assegurances",
         "Si VMP no inscrit: indicar PES (MOM) a la butlleta",
         "Dipòsit fins a justificar pòlissa o titular abonar franquícia"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització del vehicle",
-        "S 02 — Notificació de recuperació de vehicle"
       ]
     },
-
     "fi_doble": {
       "final": true,
       "tipus": "mixta",
@@ -609,10 +621,6 @@
         "⚠️ Concurrència: NO acumular 'sense certificat' + 'no inscrit' (art. 22 RGV ja les contempla)",
         "Adreçat al CONDUCTOR (no hi ha titular inscrit)",
         "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "I 104 / G 58 — Identificació si escau"
       ]
     }
   },

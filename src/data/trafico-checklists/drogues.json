@@ -20,19 +20,29 @@
   ],
   "inici": "indicis_inicial",
   "nodes": {
-
     "indicis_inicial": {
       "titol": "Pas previ — context de la prova",
       "text": "En quin context fas la prova?",
       "info": "El control de drogues pot ser preventiu (sense indicis) com l'alcohol — STS 24/03/2017",
       "opcions": [
-        { "etiqueta": "Control preventiu rutinari",                                "va_a": "oferiment_test" },
-        { "etiqueta": "Conductor amb símptomes evidents",                          "va_a": "documentar_simptomes" },
-        { "etiqueta": "Implicat en accident",                                      "va_a": "oferiment_test_obligatori" },
-        { "etiqueta": "Cometent una altra infracció",                              "va_a": "oferiment_test" }
+        {
+          "etiqueta": "Control preventiu rutinari",
+          "va_a": "oferiment_test"
+        },
+        {
+          "etiqueta": "Conductor amb símptomes evidents",
+          "va_a": "documentar_simptomes"
+        },
+        {
+          "etiqueta": "Implicat en accident",
+          "va_a": "oferiment_test_obligatori"
+        },
+        {
+          "etiqueta": "Cometent una altra infracció",
+          "va_a": "oferiment_test"
+        }
       ]
     },
-
     "documentar_simptomes": {
       "titol": "DOCUMENTAR símptomes ABANS de la prova",
       "text": "Anotar al diari/PDA els símptomes observats. Aquests són clau si el cas deriva a penal.",
@@ -52,40 +62,57 @@
         "Substància o útils de consum visibles al vehicle"
       ],
       "opcions": [
-        { "etiqueta": "Símptomes documentats — continuar prova", "va_a": "oferiment_test" }
+        {
+          "etiqueta": "Símptomes documentats — continuar prova",
+          "va_a": "oferiment_test"
+        }
       ]
     },
-
     "oferiment_test": {
       "titol": "Oferiment formal del test salival",
       "text": "Li requereixes la prova. Resposta?",
       "info": "L'advertiment de conseqüències penals si es nega és OBLIGATORI per poder aplicar després l'Art. 383 CP.",
       "frase_advertiment": "'Li requereixo formalment a sotmetre's a la prova de detecció de drogues. L'adverteixo que la negativa pot constituir un delicte de l'article 383 del Codi Penal, castigat amb presó de 6 mesos a 1 any i privació del permís d'1 a 4 anys.'",
       "opcions": [
-        { "etiqueta": "Accepta la prova",                                          "va_a": "resultat_indiciari" },
-        { "etiqueta": "Es nega (advertit i reiterat)",                             "va_a": "fi_383_drogues" }
+        {
+          "etiqueta": "Accepta la prova",
+          "va_a": "resultat_indiciari"
+        },
+        {
+          "etiqueta": "Es nega (advertit i reiterat)",
+          "va_a": "fi_383_drogues"
+        }
       ]
     },
-
     "oferiment_test_obligatori": {
       "titol": "Prova obligatòria — accident",
       "text": "En accidents, TOTS els conductors implicats han de fer prova (Art. 14.2 TRLSV). La negativa és delicte sí o sí.",
       "opcions": [
-        { "etiqueta": "Accepta",                                                   "va_a": "resultat_indiciari" },
-        { "etiqueta": "Es nega",                                                   "va_a": "fi_383_drogues" }
+        {
+          "etiqueta": "Accepta",
+          "va_a": "resultat_indiciari"
+        },
+        {
+          "etiqueta": "Es nega",
+          "va_a": "fi_383_drogues"
+        }
       ]
     },
-
     "resultat_indiciari": {
       "titol": "Resultat prova indiciària salival",
       "text": "Resultat del cribratge salival (Dräger DrugTest 5000 o equivalent)?",
       "info": "Drogotest indiciari té un cert percentatge de falsos positius — sempre confirmar amb evidencial al laboratori.",
       "opcions": [
-        { "etiqueta": "NEGATIU a totes les substàncies",                           "va_a": "fi_negativa_drogues" },
-        { "etiqueta": "POSITIU a una o més substàncies",                           "va_a": "recollida_evidencial" }
+        {
+          "etiqueta": "NEGATIU a totes les substàncies",
+          "va_a": "fi_negativa_drogues"
+        },
+        {
+          "etiqueta": "POSITIU a una o més substàncies",
+          "va_a": "recollida_evidencial"
+        }
       ]
     },
-
     "recollida_evidencial": {
       "titol": "Recollida mostra evidencial salival",
       "text": "Procediment de recollida amb cadena de custòdia per al laboratori.",
@@ -99,34 +126,42 @@
       ],
       "info": "Comprovar a continuació SÍMPTOMES INFLUÈNCIA per derivar via penal o administrativa",
       "opcions": [
-        { "etiqueta": "Símptomes clars d'INFLUÈNCIA en la conducció",              "va_a": "fi_penal_379_2_drogues" },
-        { "etiqueta": "Sense símptomes d'influència acreditats",                   "va_a": "comprovacio_recepta" }
+        {
+          "etiqueta": "Símptomes clars d'INFLUÈNCIA en la conducció",
+          "va_a": "fi_penal_379_2_drogues"
+        },
+        {
+          "etiqueta": "Sense símptomes d'influència acreditats",
+          "va_a": "comprovacio_recepta"
+        }
       ]
     },
-
     "comprovacio_recepta": {
       "titol": "Comprovació de prescripció mèdica",
       "text": "Si el positiu és per benzodiazepines o opiacis, té recepta mèdica vigent?",
       "info": "Recepta mèdica eximeix de la sanció administrativa — sempre que no hi hagi influència. Si hi ha influència, la recepta NO eximeix del 379.2 CP.",
       "opcions": [
-        { "etiqueta": "Presenta recepta mèdica vàlida (i no hi ha influència)",   "va_a": "fi_recepta_ok" },
-        { "etiqueta": "No presenta recepta / no és justificada",                  "va_a": "fi_admin_drogues" },
-        { "etiqueta": "Recepta vàlida però hi ha influència en la conducció",     "va_a": "fi_penal_379_2_drogues" }
+        {
+          "etiqueta": "Presenta recepta mèdica vàlida (i no hi ha influència)",
+          "va_a": "fi_recepta_ok"
+        },
+        {
+          "etiqueta": "No presenta recepta / no és justificada",
+          "va_a": "fi_admin_drogues"
+        },
+        {
+          "etiqueta": "Recepta vàlida però hi ha influència en la conducció",
+          "va_a": "fi_penal_379_2_drogues"
+        }
       ]
     },
-
     "fi_negativa_drogues": {
       "final": true,
       "tipus": "ok",
       "titol": "✅ Negativa a drogues",
       "accio": "Es deixa marxar el conductor",
-      "documentacio": "Anotació al servei",
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la prova)",
-        "Butlleta estadística substàncies estupefaents (una per cada prova practicada, també si és negativa)"
-      ]
+      "documentacio": "Anotació al servei"
     },
-
     "fi_recepta_ok": {
       "final": true,
       "tipus": "ok",
@@ -137,15 +172,8 @@
         "Anotar al servei",
         "Aconsellar conduir amb prudència",
         "Si dubtes greus: enviar mostra a laboratori igualment per confirmar"
-      ],
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la prova)",
-        "T 15 — Tiquets drogues (resultat indiciari de saliva, per a constància)",
-        "T 12 — Cadena de custòdia + mostra per analítica (només si es decideix enviar la mostra al laboratori per dubtes)",
-        "Butlleta estadística substàncies estupefaents (una per cada prova practicada)"
       ]
     },
-
     "fi_admin_drogues": {
       "final": true,
       "tipus": "administrativa",
@@ -165,19 +193,8 @@
         "7. Informar del dret a contrastació (anàlisi de sang)"
       ],
       "documentacio": "Butlletí + acta intervenció mostra + cadena custòdia + tiquet drogotest",
-      "info_extra": "Si en confirmar-se al laboratori NO surt positiu: anul·lació de la sanció (raons, anar a l'instructor)",
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la prova)",
-        "T 15 — Tiquets drogues (resultat indiciari de saliva, adjuntar al butlletí)",
-        "T 12 — Cadena de custòdia de drogues ampliatòria + mostra per analítica",
-        "A 66 — Lliurament de bossa amb mostres per a estudi toxicològic (enviament al laboratori)",
-        "I 55 — Cadena de custòdia",
-        "T 16 — Full de denúncia administrativa (Art. 14.1 TRLSV)",
-        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
-        "Butlleta estadística substàncies estupefaents"
-      ]
+      "info_extra": "Si en confirmar-se al laboratori NO surt positiu: anul·lació de la sanció (raons, anar a l'instructor)"
     },
-
     "fi_penal_379_2_drogues": {
       "final": true,
       "tipus": "penal",
@@ -211,21 +228,8 @@
         "Possibles testimonis",
         "Substància intervinguda al vehicle si n'hi ha"
       ],
-      "competencia": "Jutjat d'Instrucció de Guàrdia",
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la prova)",
-        "A 76 — Acta simptomatologia drogues PENAL (IMPRESCINDIBLE per acreditar la influència — Art. 379.2 CP)",
-        "T 15 — Tiquets drogues (resultat indiciari de saliva, adjuntar a l'atestat)",
-        "T 12 — Cadena de custòdia de drogues ampliatòria + mostra per analítica",
-        "A 66 — Lliurament de bossa amb mostres per a estudi toxicològic (enviament al laboratori)",
-        "I 55 — Cadena de custòdia",
-        "N 11 — Citació per a judici ràpid (Art. 379.2 CP)",
-        "N 08 — Drets persona investigada no detinguda JR (si es tramita per citació)",
-        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
-        "Butlleta estadística substàncies estupefaents"
-      ]
+      "competencia": "Jutjat d'Instrucció de Guàrdia"
     },
-
     "fi_383_drogues": {
       "final": true,
       "tipus": "penal",
@@ -244,15 +248,7 @@
         "Atestat penal amb diligència específica de la negativa",
         "Posada a disposició Jutjat de Guàrdia"
       ],
-      "compatible_amb": "Art. 379.2 CP si hi ha indicis d'influència (símptomes) — concurs",
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de requerir la prova: acredita l'advertiment de l'Art. 383 CP)",
-        "A 76 — Acta simptomatologia drogues PENAL (documenta l'estat del conductor davant la negativa)",
-        "N 01 — Informació drets persona detinguda (si detenció)",
-        "N 08 — Drets persona investigada no detinguda JR (si finalment es tramita per citació)",
-        "N 11 — Citació per a judici ràpid (Art. 383 CP)",
-        "A 13 — Immobilització de vehicle"
-      ]
+      "compatible_amb": "Art. 379.2 CP si hi ha indicis d'influència (símptomes) — concurs"
     }
   },
   "notes_finals": [

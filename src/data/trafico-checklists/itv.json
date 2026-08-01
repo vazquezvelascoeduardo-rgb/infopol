@@ -22,38 +22,61 @@
   },
   "inici": "estat_itv",
   "nodes": {
-
     "estat_itv": {
       "titol": "Comprovació estat ITV",
       "text": "Consulta DGT / adhesiu parabrisa. Estat?",
       "opcions": [
-        { "etiqueta": "FAVORABLE vigent",                                  "va_a": "fi_ok_itv" },
-        { "etiqueta": "Caducada (no presentada en termini)",               "va_a": "fi_caducada" },
-        { "etiqueta": "Desfavorable (encara dins els 2 mesos)",            "va_a": "desfavorable_us" },
-        { "etiqueta": "Desfavorable (més de 2 mesos)",                     "va_a": "fi_desfavorable_fora" },
-        { "etiqueta": "NEGATIVA (defectes greus)",                          "va_a": "fi_negativa" },
-        { "etiqueta": "Mai no ha passat ITV (vehicle sense estrenar ITV)", "va_a": "fi_mai_itv" },
-        { "etiqueta": "Reforma sense homologar",                           "va_a": "fi_reforma" }
+        {
+          "etiqueta": "FAVORABLE vigent",
+          "va_a": "fi_ok_itv"
+        },
+        {
+          "etiqueta": "Caducada (no presentada en termini)",
+          "va_a": "fi_caducada"
+        },
+        {
+          "etiqueta": "Desfavorable (encara dins els 2 mesos)",
+          "va_a": "desfavorable_us"
+        },
+        {
+          "etiqueta": "Desfavorable (més de 2 mesos)",
+          "va_a": "fi_desfavorable_fora"
+        },
+        {
+          "etiqueta": "NEGATIVA (defectes greus)",
+          "va_a": "fi_negativa"
+        },
+        {
+          "etiqueta": "Mai no ha passat ITV (vehicle sense estrenar ITV)",
+          "va_a": "fi_mai_itv"
+        },
+        {
+          "etiqueta": "Reforma sense homologar",
+          "va_a": "fi_reforma"
+        }
       ]
     },
-
     "desfavorable_us": {
       "titol": "ITV desfavorable — destinació del vehicle",
       "text": "On va el vehicle?",
       "info": "Amb ITV desfavorable, només es pot circular per anar AL TALLER o a una nova ITV. Termini màxim 2 mesos.",
       "opcions": [
-        { "etiqueta": "Va al taller / nova ITV (acreditat)",  "va_a": "fi_ok_desfavorable_camí" },
-        { "etiqueta": "Circulació normal (no va al taller)",   "va_a": "fi_desfavorable_circulant" }
+        {
+          "etiqueta": "Va al taller / nova ITV (acreditat)",
+          "va_a": "fi_ok_desfavorable_camí"
+        },
+        {
+          "etiqueta": "Circulació normal (no va al taller)",
+          "va_a": "fi_desfavorable_circulant"
+        }
       ]
     },
-
     "fi_ok_itv": {
       "final": true,
       "tipus": "ok",
       "titol": "✅ ITV en regla",
       "accio": "Es deixa circular"
     },
-
     "fi_ok_desfavorable_camí": {
       "final": true,
       "tipus": "ok",
@@ -61,7 +84,6 @@
       "accio": "Es permet continuar només si va al taller/ITV. Advertir.",
       "documentacio": "Anotar al servei. Si dubte d'autenticitat: butlletí preventiu"
     },
-
     "fi_caducada": {
       "final": true,
       "tipus": "administrativa",
@@ -76,12 +98,8 @@
         "NO immobilitzar (excepte risc evident)",
         "Si el vehicle no s'utilitza: aconsellar baixa temporal"
       ],
-      "info": "La sanció es considera infracció continuada — pot arribar més d'una sanció si no es passa ITV",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "info": "La sanció es considera infracció continuada — pot arribar més d'una sanció si no es passa ITV"
     },
-
     "fi_desfavorable_circulant": {
       "final": true,
       "tipus": "administrativa",
@@ -94,27 +112,16 @@
         "Butlletí al titular",
         "Possible immobilització si risc per la seguretat",
         "Indicar que cal anar al taller / nova ITV"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització (ITV desfavorable/negativa circulant)",
-        "T 04 — Proposta extraordinària ITV (defectes que exigeixen inspecció)"
       ]
     },
-
     "fi_desfavorable_fora": {
       "final": true,
       "tipus": "administrativa",
       "titol": "⚠️ GREU — ITV desfavorable fora dels 2 mesos",
       "article_butlleta": "Art. 10.1 RGV",
       "import": "200 € (DTE 100 €)",
-      "punts": "0",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització (ITV desfavorable/negativa circulant)"
-      ]
+      "punts": "0"
     },
-
     "fi_negativa": {
       "final": true,
       "tipus": "administrativa",
@@ -128,13 +135,8 @@
         "Grua a taller (no a domicili)",
         "Butlletí al titular",
         "No pot circular fins reparació + nova ITV favorable"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització (ITV desfavorable/negativa circulant)"
       ]
     },
-
     "fi_mai_itv": {
       "final": true,
       "tipus": "administrativa",
@@ -148,13 +150,8 @@
         "Comprovar que efectivament està matriculat",
         "Si no matriculat: Art. 1.1 RGV (MG 500€)",
         "Comprovar assegurança"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització (només si deficiències que comprometin la seguretat)"
       ]
     },
-
     "fi_reforma": {
       "final": true,
       "tipus": "administrativa",
@@ -171,10 +168,6 @@
         "Tracció afegida / modificada",
         "Sistema d'escapament modificat (sense homologació)",
         "Sistema d'enllumenat (LEDs no homologats, cèrcols, etc.)"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "T 04 — Proposta extraordinària ITV (reforma que exigeix inspecció)"
       ]
     }
   },

@@ -92,12 +92,7 @@
         "3. Si s'aclareix que és vàlid: retornar i fi del cas",
         "4. Si es confirma falsedat: passar a via penal (Art. 392 CP)"
       ],
-      "documentacio": "Diligència de retenció amb constància de l'hora i motiu",
-      "actes_viladecans": [
-        "I 55 — Cadena de custòdia (document intervingut)",
-        "A 58 — Presentació d'estranger a efectes d'identificació (si escau)",
-        "G 58 — Volant d'estada en dependències per identificació (si escau)"
-      ]
+      "documentacio": "Diligència de retenció amb constància de l'hora i motiu"
     },
     "fi_penal_392": {
       "final": true,
@@ -114,15 +109,7 @@
         "6. Possible Art. 400 CP (tinença útils falsificació) si es troben al vehicle/domicili",
         "7. Posada a disposició Jutjat Guàrdia"
       ],
-      "documentacio": "Atestat + acta intervenció + cadena custòdia + fotografies",
-      "actes_viladecans": [
-        "N 01 — Drets persona detinguda (+ versions idiomes si estranger)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes persona detinguda",
-        "I 55 — Cadena de custòdia (document intervingut)",
-        "A 58 — Presentació d'estranger a efectes d'identificació (si escau)",
-        "G 58 — Volant d'estada en dependències per identificació (si escau)"
-      ]
+      "documentacio": "Atestat + acta intervenció + cadena custòdia + fotografies"
     },
     "fi_penal_392_matricula": {
       "final": true,
@@ -138,14 +125,6 @@
         "5. Atestat penal — possible concurs amb robatori (237-242 CP) si vehicle sustret",
         "6. Cadena custòdia matrícules",
         "7. Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 01 — Drets persona detinguda (+ versions idiomes si estranger)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes persona detinguda",
-        "I 55 — Cadena de custòdia (matrícules/documents intervinguts)",
-        "A 58 — Presentació d'estranger a efectes d'identificació (si escau)",
-        "G 58 — Volant d'estada en dependències per identificació (si escau)"
       ]
     },
     "fi_penal_392_bastidor": {
@@ -160,14 +139,6 @@
         "Atestat amb informe pericial sol·licitat (laboratori)",
         "Cadena custòdia",
         "Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 01 — Drets persona detinguda (+ versions idiomes si estranger)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes persona detinguda",
-        "I 55 — Cadena de custòdia (vehicle/elements intervinguts)",
-        "A 58 — Presentació d'estranger a efectes d'identificació (si escau)",
-        "G 58 — Volant d'estada en dependències per identificació (si escau)"
       ]
     },
     "fi_matricula_tapada": {
@@ -178,10 +149,7 @@
       "article_butlleta": "Art. 76.P TRLSV",
       "import": "200 € (DTE 100 €)",
       "punts": "0",
-      "info": "Si hi ha intencionalitat clara (per evitar radars/càmeres): valorar concurs amb obstaculització a vigilància i Art. 77.H TRLSV (inhibidors)",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "info": "Si hi ha intencionalitat clara (per evitar radars/càmeres): valorar concurs amb obstaculització a vigilància i Art. 77.H TRLSV (inhibidors)"
     }
   }
 }

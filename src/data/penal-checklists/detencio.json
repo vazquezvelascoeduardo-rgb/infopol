@@ -94,11 +94,7 @@
       "final": true,
       "tipus": "avis",
       "titol": "⚠️ No procedeix detenció — anar a Identificació Art. 16 LOPSC",
-      "accio": "Sense delicte no es detén. Si cal identificar i no és possible al lloc → trasllat a dependències de l'art. 16.2 LOPSC (temps estrictament necessari, màxim 6 hores).",
-      "actes_viladecans": [
-        "I 104 — Drets persona desplaçada per identificació (si es practica el trasllat a dependències de l'art. 16.2 LOPSC)",
-        "G 58 — Volant d'estada en dependències per identificació (en sortir de dependències)"
-      ]
+      "accio": "Sense delicte no es detén. Si cal identificar i no és possible al lloc → trasllat a dependències de l'art. 16.2 LOPSC (temps estrictament necessari, màxim 6 hores)."
     },
     "fi_citacio_lleu": {
       "final": true,
@@ -156,18 +152,7 @@
         "[Estrangers] Dret a notificació consular",
         "[Menors] Dret a presència de pares/tutors"
       ],
-      "competencia": "Jutjat d'Instrucció de Guàrdia (excepte VG → JVM)",
-      "actes_viladecans": [
-        "N 01 — Informació drets persona detinguda (sempre, en el moment de la detenció; disponible CAT/CAST + idiomes ALB/ALE/ANG/AR/BUL/FR/IT)",
-        "N 01b — Drets menor detingut (si el detingut és menor d'edat)",
-        "PD 06 — Objectes persona detinguda (escorcoll incident: inventari i dipòsit d'efectes)",
-        "PD 01 — Sol·licitud d'Habeas Corpus (si el detingut l'exercita)",
-        "A 29 — Deixar sense efecte una detenció (si s'allibera sense posada a disposició judicial)",
-        "A 54 — Sol·licitud custòdia detingut per PG-ME (si es traspassa la custòdia a Mossos)",
-        "A 55 — Detenció per reclamació judicial (si la detenció és per ordre judicial / busca i captura)",
-        "G 58 — Volant d'estada en dependències (en sortir de dependències)",
-        "M 06 — Oferiment al menor d'acolliment a mesura educativa (menors)"
-      ]
+      "competencia": "Jutjat d'Instrucció de Guàrdia (excepte VG → JVM)"
     }
   },
   "notes_finals": [

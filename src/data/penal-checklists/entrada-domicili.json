@@ -23,18 +23,31 @@
   ],
   "inici": "supost",
   "nodes": {
-
     "supost": {
       "titol": "Per quina via es planteja l'entrada?",
       "opcions": [
-        { "etiqueta": "Consentiment del titular",                               "va_a": "verificar_consentiment" },
-        { "etiqueta": "Flagrant delicte",                                       "va_a": "verificar_flagrancia" },
-        { "etiqueta": "Autorització judicial (mandat)",                          "va_a": "fi_judicial" },
-        { "etiqueta": "Estat de necessitat (vida/incendi/auxili urgent)",       "va_a": "fi_necessitat" },
-        { "etiqueta": "Cap dels anteriors",                                     "va_a": "fi_no_entrar" }
+        {
+          "etiqueta": "Consentiment del titular",
+          "va_a": "verificar_consentiment"
+        },
+        {
+          "etiqueta": "Flagrant delicte",
+          "va_a": "verificar_flagrancia"
+        },
+        {
+          "etiqueta": "Autorització judicial (mandat)",
+          "va_a": "fi_judicial"
+        },
+        {
+          "etiqueta": "Estat de necessitat (vida/incendi/auxili urgent)",
+          "va_a": "fi_necessitat"
+        },
+        {
+          "etiqueta": "Cap dels anteriors",
+          "va_a": "fi_no_entrar"
+        }
       ]
     },
-
     "verificar_consentiment": {
       "titol": "Requisits del consentiment",
       "text": "Es donen TOTS aquests requisits?",
@@ -46,13 +59,24 @@
         "✓ Pot REVOCAR-SE en qualsevol moment"
       ],
       "opcions": [
-        { "etiqueta": "Sí, tots els requisits",                                 "va_a": "fi_consentiment_ok" },
-        { "etiqueta": "Cotitulars i un s'oposa",                                "va_a": "fi_no_entrar_cotitular" },
-        { "etiqueta": "Menor sol",                                              "va_a": "fi_no_entrar_menor" },
-        { "etiqueta": "Sospita coacció / por",                                  "va_a": "fi_no_entrar_coaccio" }
+        {
+          "etiqueta": "Sí, tots els requisits",
+          "va_a": "fi_consentiment_ok"
+        },
+        {
+          "etiqueta": "Cotitulars i un s'oposa",
+          "va_a": "fi_no_entrar_cotitular"
+        },
+        {
+          "etiqueta": "Menor sol",
+          "va_a": "fi_no_entrar_menor"
+        },
+        {
+          "etiqueta": "Sospita coacció / por",
+          "va_a": "fi_no_entrar_coaccio"
+        }
       ]
     },
-
     "verificar_flagrancia": {
       "titol": "Requisits acumulatius del flagrant delicte (TC)",
       "text": "Es donen els TRES requisits acumulatius?",
@@ -64,11 +88,16 @@
       ],
       "info_clau": "Crits, soroll de violència, persona demanant auxili, perill imminent vida = causes típiques que JUSTIFIQUEN.",
       "opcions": [
-        { "etiqueta": "Sí, els 3 requisits acumulatius",                        "va_a": "fi_flagrant_ok" },
-        { "etiqueta": "Només sospita / dubte",                                  "va_a": "fi_no_entrar_sospita" }
+        {
+          "etiqueta": "Sí, els 3 requisits acumulatius",
+          "va_a": "fi_flagrant_ok"
+        },
+        {
+          "etiqueta": "Només sospita / dubte",
+          "va_a": "fi_no_entrar_sospita"
+        }
       ]
     },
-
     "fi_consentiment_ok": {
       "final": true,
       "tipus": "procediment",
@@ -82,12 +111,8 @@
         "6. EXCEPCIÓ: si entretant apareix flagrant delicte, es pot continuar (canvi de via legal)",
         "7. Diligència d'actuació amb tot el procés"
       ],
-      "documentacio": "Diligència d'entrada + acta de consentiment signada + acta d'intervenció si troba alguna cosa",
-      "actes_viladecans": [
-        "A 10 — Genèrica (per documentar el consentiment informat del titular i les circumstàncies de l'entrada)"
-      ]
+      "documentacio": "Diligència d'entrada + acta de consentiment signada + acta d'intervenció si troba alguna cosa"
     },
-
     "fi_flagrant_ok": {
       "final": true,
       "tipus": "procediment",
@@ -103,12 +128,8 @@
         "8. Si menors al lloc: comunicació DGAIA"
       ],
       "documentacio_clau": "Atestat + diligència de la urgència i flagrància (descrivint els 3 requisits) + acta d'intervenció",
-      "info": "L'entrada per flagrant és per a actuació immediata, NO per a un registre exhaustiu. Per registrar exhaustivament, sol·licitar mandat al Jutjat.",
-      "actes_viladecans": [
-        "A 01 — Entrada urgent a un domicili (SEMPRE que s'entri sense consentiment del titular ni ordre judicial: flagrància)"
-      ]
+      "info": "L'entrada per flagrant és per a actuació immediata, NO per a un registre exhaustiu. Per registrar exhaustivament, sol·licitar mandat al Jutjat."
     },
-
     "fi_judicial": {
       "final": true,
       "tipus": "procediment",
@@ -125,7 +146,6 @@
       ],
       "documentacio_clau": "Acta d'entrada i registre + acta de cadena de custòdia + còpia signada per testimonis i lletrat"
     },
-
     "fi_necessitat": {
       "final": true,
       "tipus": "procediment",
@@ -147,19 +167,14 @@
         "6. Comunicar Jutjat de Guàrdia"
       ],
       "documentacio": "Diligència d'urgència justificant l'estat de necessitat + informe complet",
-      "base_legal_extra": "Art. 15.2 LOPSC (causa legítima: evitar danys imminents i greus a persones i coses en supòsits de catàstrofe, calamitat, ruïna imminent o extrema i urgent necessitat) + Art. 20.5 CP (exempció responsabilitat per estat de necessitat)",
-      "actes_viladecans": [
-        "A 01 — Entrada urgent a un domicili (SEMPRE que s'entri sense consentiment del titular ni ordre judicial: auxili / estat de necessitat)"
-      ]
+      "base_legal_extra": "Art. 15.2 LOPSC (causa legítima: evitar danys imminents i greus a persones i coses en supòsits de catàstrofe, calamitat, ruïna imminent o extrema i urgent necessitat) + Art. 20.5 CP (exempció responsabilitat per estat de necessitat)"
     },
-
     "fi_no_entrar": {
       "final": true,
       "tipus": "avis",
       "titol": "⚠️ NO entrar — falta via legal",
       "accio": "Sense una de les 4 vies, l'entrada és il·lícita. Mantenir l'immoble vigilat i sol·licitar mandat al Jutjat."
     },
-
     "fi_no_entrar_cotitular": {
       "final": true,
       "tipus": "avis",
@@ -167,21 +182,18 @@
       "info": "El TS (sentència 13/05/2014) estableix que en cas de cotitularitat (matrimoni, parella, copropietaris), si UN s'oposa, no es pot entrar amb el sol consentiment de l'altre.",
       "accio": "No entrar. Sol·licitar autorització judicial o esperar evolució"
     },
-
     "fi_no_entrar_menor": {
       "final": true,
       "tipus": "avis",
       "titol": "⚠️ Menor sol no pot consentir",
       "accio": "No entrar. Esperar tutors o sol·licitar mandat. Si emergència → estat de necessitat."
     },
-
     "fi_no_entrar_coaccio": {
       "final": true,
       "tipus": "avis",
       "titol": "⚠️ Sospita de coacció",
       "accio": "Si el consentiment no és lliure (por, amenaça): no és vàlid. Documentar i actuar segons cas."
     },
-
     "fi_no_entrar_sospita": {
       "final": true,
       "tipus": "avis",

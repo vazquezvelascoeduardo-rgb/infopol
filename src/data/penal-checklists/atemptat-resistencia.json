@@ -134,13 +134,7 @@
         "7️⃣ Posada a disposició Jutjat de Guàrdia"
       ],
       "frases_prohibides_pautes_3_3": "NO usar 'utilitzant la mínima força imprescindible'. CAL concretar exactament com es va utilitzar la força i com es van produir les lesions",
-      "documentacio": "Atestat penal + diligències + parte mèdic amb TIP",
-      "actes_viladecans": [
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració (testimonis)"
-      ]
+      "documentacio": "Atestat penal + diligències + parte mèdic amb TIP"
     },
     "fi_atemptat_550_escomesa": {
       "final": true,
@@ -149,13 +143,7 @@
       "text": "Intent d'agressió que no es consuma o no produeix resultat lesiu (llançament d'objectes, intent puntada que no arriba…).",
       "pena": "Presó 6 mesos-3 anys (contra agent/funcionari) / 1-4 anys + multa 3-6 mesos (contra autoritat) — art. 550.2 CP",
       "exemples_pautes": "Llançament de pedres o objectes, intent de cop que no arriba",
-      "accions": "Mateixes que atemptat consumat",
-      "actes_viladecans": [
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració (testimonis)"
-      ]
+      "accions": "Mateixes que atemptat consumat"
     },
     "fi_atemptat_550_resistencia_greu": {
       "final": true,
@@ -164,13 +152,7 @@
       "text": "Resistència ACTIVA + GREU (intimidació greu o violència).",
       "exemples_pautes": "Donar puntades de peu i cops de puny per evitar la detenció",
       "pena": "Presó 6 mesos-3 anys (contra agent/funcionari) / 1-4 anys + multa 3-6 mesos (contra autoritat) — art. 550.2 CP",
-      "diferenciacio": "Si fos resistència PASSIVA greu: 556 CP (resistència). Si activa NO greu: 556 CP (resistència). Aquí: ACTIVA + GREU = atemptat.",
-      "actes_viladecans": [
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració (testimonis)"
-      ]
+      "diferenciacio": "Si fos resistència PASSIVA greu: 556 CP (resistència). Si activa NO greu: 556 CP (resistència). Aquí: ACTIVA + GREU = atemptat."
     },
     "fi_atemptat_lesions_lleu": {
       "final": true,
@@ -178,13 +160,7 @@
       "titol": "🚔 DELICTE — Atemptat + delicte lleu de lesions",
       "regla_concurs_pautes": "Si l'agent pateix lesions, s'instrueix per atemptat MÉS el delicte/delicte lleu de lesions corresponent (concurs)",
       "articles": "Art. 550 CP + Art. 147.2 CP (lesions sense tractament — delicte lleu)",
-      "pena_combinada": "Pena de l'atemptat (presó 6 mesos-3 anys si contra agent) + multa 1-3 mesos (delicte lleu de lesions 147.2 CP)",
-      "actes_viladecans": [
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració (testimonis)"
-      ]
+      "pena_combinada": "Pena de l'atemptat (presó 6 mesos-3 anys si contra agent) + multa 1-3 mesos (delicte lleu de lesions 147.2 CP)"
     },
     "fi_atemptat_lesions_147": {
       "final": true,
@@ -193,13 +169,7 @@
       "articles": "Art. 550 CP + Art. 147.1 CP",
       "pena_combinada": "Presó 6 mesos-3 anys (atemptat contra agent) + presó 3 mesos-3 anys o multa 6-12 mesos (lesions 147.1 CP)",
       "regla_concurs_pautes": "Si una persona agredeix DIVERSOS agents en un sol acte: s'imputa UN sol delicte d'atemptat, però se SUMEN les lesions individuals de cada agent",
-      "documentacio_clau": "Parte mèdic exhaustiu de l'agent. Important: dades professionals (TIP) — no personals",
-      "actes_viladecans": [
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració (testimonis)"
-      ]
+      "documentacio_clau": "Parte mèdic exhaustiu de l'agent. Important: dades professionals (TIP) — no personals"
     },
     "fi_atemptat_lesions_greus": {
       "final": true,
@@ -207,13 +177,7 @@
       "titol": "🚔 DELICTE GREU — Atemptat + lesions greus (Art. 149/150 CP)",
       "pena_lesions_149": "Presó 6-12 anys (pèrdua òrgan principal/sentit)",
       "pena_lesions_150": "Presó 3-6 anys (membre no principal, deformitat)",
-      "pena_combinada": "Concurs ideal amb atemptat (art. 77 CP) — pena del delicte més greu en la meitat superior",
-      "actes_viladecans": [
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració (testimonis)"
-      ]
+      "pena_combinada": "Concurs ideal amb atemptat (art. 77 CP) — pena del delicte més greu en la meitat superior"
     },
     "fi_556_resistencia_activa_no_greu": {
       "final": true,
@@ -223,13 +187,7 @@
       "exemples_pautes": "Forçament per intentar ser neutralitzat o escorcollat",
       "pena": "Presó 3 mesos - 1 any O multa 6-18 mesos",
       "subjectes": "NOMÉS contra autoritats i agents (no funcionaris públics — al revés que 550)",
-      "accions": "Detenció + atestat penal + lectura drets + Jutjat Guàrdia",
-      "actes_viladecans": [
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració (testimonis)"
-      ]
+      "accions": "Detenció + atestat penal + lectura drets + Jutjat Guàrdia"
     },
     "fi_556_resistencia_passiva_greu": {
       "final": true,
@@ -238,13 +196,7 @@
       "text": "Resistència PASSIVA però GREU.",
       "exemples_pautes": "Encadenar-se a un bidó de ciment per intentar evitar el treball de la maquinària (desnonament, manifestació, etc.)",
       "pena": "Presó 3 mesos - 1 any O multa 6-18 mesos",
-      "diferencia_admin": "La passiva NO greu (seure al terra) és 36.6 LOPSC administrativa",
-      "actes_viladecans": [
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració (testimonis)"
-      ]
+      "diferencia_admin": "La passiva NO greu (seure al terra) és 36.6 LOPSC administrativa"
     },
     "fi_556_desobediencia_greu": {
       "final": true,
@@ -258,13 +210,7 @@
       ],
       "exemples_pautes": "Negativa formal i clara a identificar-se amb actitud de rebel·lia (no simple inactivitat)",
       "pena": "Presó 3 mesos - 1 any O multa 6-18 mesos",
-      "diferencia_lleu": "Desobediència LLEU = 36.6 LOPSC. Per exemple, donar dades falses verbals.",
-      "actes_viladecans": [
-        "N 01 — Drets detingut",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes detingut",
-        "A 18PL — Declaració (testimonis)"
-      ]
+      "diferencia_lleu": "Desobediència LLEU = 36.6 LOPSC. Per exemple, donar dades falses verbals."
     },
     "fi_36_6_passiva_no_greu": {
       "final": true,
@@ -277,10 +223,7 @@
         "Col·locar-se davant la porta d'un edifici per intentar evitar un desnonament",
         "Seure al terra per evitar una actuació policial i que els agents hagin d'\"arrencar cebes\""
       ],
-      "documentacio": "Acta D-10 (denúncia LOPSC)",
-      "actes_viladecans": [
-        "D 10 — Denúncia LOPSC 36.6 (desobediència/resistència no delictiva)"
-      ]
+      "documentacio": "Acta D-10 (denúncia LOPSC)"
     },
     "fi_36_6_desobediencia_lleu": {
       "final": true,
@@ -294,10 +237,7 @@
         "Dificultar una identificació",
         "Donar dades falses o inexactes verbalment en la identificació"
       ],
-      "documentacio": "Acta D-10",
-      "actes_viladecans": [
-        "D 10 — Denúncia LOPSC 36.6 (desobediència no delictiva)"
-      ]
+      "documentacio": "Acta D-10"
     },
     "fi_delicte_lleu_respecte_autoritat": {
       "final": true,
@@ -306,11 +246,7 @@
       "info": "Faltar al respecte i consideració deguda a l'AUTORITAT (jutge, alcalde, regidor…) en l'exercici de les seves funcions = delicte lleu de l'art. 556.2 CP.",
       "pena": "Multa 1-3 mesos (art. 556.2 CP)",
       "perseguibilitat": "D'ofici (no requereix denúncia de l'autoritat)",
-      "accions": "Atestat simplificat + identificació autor + posada en coneixement Jutjat",
-      "actes_viladecans": [
-        "A 18PL — Declaració (testimonis)",
-        "N 10 — Citació JIDL (delicte lleu)"
-      ]
+      "accions": "Atestat simplificat + identificació autor + posada en coneixement Jutjat"
     },
     "fi_37_4_respecte_agent": {
       "final": true,
@@ -320,10 +256,7 @@
       "article_butlleta": "Art. 37.4 LOPSC",
       "import": "100 € - 600 €",
       "exemples": "Insults verbals, gestos despectius, frases ofensives sense violència",
-      "documentacio": "Acta D-10",
-      "actes_viladecans": [
-        "D 10 — Denúncia LOPSC 37.4 (manca de respecte a agent)"
-      ]
+      "documentacio": "Acta D-10"
     },
     "fi_amenaces_169": {
       "final": true,
@@ -333,12 +266,7 @@
       "pena_169_2": "Presó 6 mesos - 2 anys (amenaces de mal constitutiu de delicte)",
       "pena_169_1": "Presó 1-5 anys (amenaces condicionades)",
       "accions": "Veure checklist 'Amenaces i coaccions' per detalls",
-      "info_concurs": "L'atemptat ABSORBEIX conductes més lleus (desobediència, resistència) que tinguin lloc en la mateixa actuació. Però les amenaces greus van per separat.",
-      "actes_viladecans": [
-        "N 01 — Drets detingut (si detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "A 18PL — Declaració (testimonis)"
-      ]
+      "info_concurs": "L'atemptat ABSORBEIX conductes més lleus (desobediència, resistència) que tinguin lloc en la mateixa actuació. Però les amenaces greus van per separat."
     }
   },
   "notes_finals": [

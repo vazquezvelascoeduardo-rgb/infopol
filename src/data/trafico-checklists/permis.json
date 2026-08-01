@@ -30,31 +30,58 @@
   "permis_internacional": "El Permís Internacional de Conducció (1949/1968) NO substitueix el permís nacional: és una traducció oficial. Cal portar SEMPRE tots dos a sobre i només val 1 any des de l'entrada a Espanya. No serveix per a residents (han de fer canje).",
   "inici": "situacio",
   "nodes": {
-
     "situacio": {
       "titol": "Situació del permís",
       "text": "Quina és la situació?",
       "opcions": [
-        { "etiqueta": "Vigent i adequat al vehicle",                                "va_a": "fi_ok_permis" },
-        { "etiqueta": "Permís caducat (administrativa)",                            "va_a": "fi_caducat" },
-        { "etiqueta": "Permís que no habilita pel vehicle (classe inadequada)",     "va_a": "fi_classe_inadequada" },
-        { "etiqueta": "Permís estranger (necessita comprovació pas a pas)",         "va_a": "estranger_origen" },
-        { "etiqueta": "MAI no ha obtingut permís",                                  "va_a": "fi_penal_384_mai" },
-        { "etiqueta": "Pèrdua TOTAL de punts (notificada i ferma)",                "va_a": "fi_penal_384_punts" },
-        { "etiqueta": "Permís suspès cautelarment (no ferm)",                      "va_a": "fi_suspes_cautelar" },
-        { "etiqueta": "Retirat per resolució judicial",                            "va_a": "fi_penal_384_judicial" },
-        { "etiqueta": "No el porta físicament a sobre (té permís vigent)",         "va_a": "fi_lleu_no_porta" },
-        { "etiqueta": "Permís amb condicions restrictives no complertes",          "va_a": "fi_condicions_restrictives" }
+        {
+          "etiqueta": "Vigent i adequat al vehicle",
+          "va_a": "fi_ok_permis"
+        },
+        {
+          "etiqueta": "Permís caducat (administrativa)",
+          "va_a": "fi_caducat"
+        },
+        {
+          "etiqueta": "Permís que no habilita pel vehicle (classe inadequada)",
+          "va_a": "fi_classe_inadequada"
+        },
+        {
+          "etiqueta": "Permís estranger (necessita comprovació pas a pas)",
+          "va_a": "estranger_origen"
+        },
+        {
+          "etiqueta": "MAI no ha obtingut permís",
+          "va_a": "fi_penal_384_mai"
+        },
+        {
+          "etiqueta": "Pèrdua TOTAL de punts (notificada i ferma)",
+          "va_a": "fi_penal_384_punts"
+        },
+        {
+          "etiqueta": "Permís suspès cautelarment (no ferm)",
+          "va_a": "fi_suspes_cautelar"
+        },
+        {
+          "etiqueta": "Retirat per resolució judicial",
+          "va_a": "fi_penal_384_judicial"
+        },
+        {
+          "etiqueta": "No el porta físicament a sobre (té permís vigent)",
+          "va_a": "fi_lleu_no_porta"
+        },
+        {
+          "etiqueta": "Permís amb condicions restrictives no complertes",
+          "va_a": "fi_condicions_restrictives"
+        }
       ]
     },
-
     "fi_ok_permis": {
       "final": true,
       "tipus": "ok",
       "titol": "✅ Permís correcte",
       "accio": "Es deixa circular"
     },
-
     "fi_lleu_no_porta": {
       "final": true,
       "tipus": "administrativa",
@@ -67,12 +94,8 @@
         "Comprovar a base de dades que efectivament té permís vigent",
         "Si confirmat: butlletí lleu i deixar continuar",
         "Si no es pot confirmar: retenció fins aclarir"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa (Art. 3.2 RGCond, lleu)"
       ]
     },
-
     "fi_caducat": {
       "final": true,
       "tipus": "administrativa",
@@ -86,13 +109,8 @@
         "Butlletí",
         "Immobilització POSSIBLE si no hi ha conductor sustitut (recomanable)",
         "Indicar que ha de renovar a la prefectura DGT"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa (Art. 12.4 RGCond)",
-        "A 13 — Immobilització de vehicle (si no hi ha conductor substitut)"
       ]
     },
-
     "fi_classe_inadequada": {
       "final": true,
       "tipus": "administrativa",
@@ -112,13 +130,8 @@
         "IMMOBILITZACIÓ del vehicle (no pot continuar conduint-lo)",
         "Buscar conductor habilitat o grua",
         "Comunicar a empresa si transport professional"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa (Art. 1.1 RGCond, MG)",
-        "A 13 — Immobilització de vehicle"
       ]
     },
-
     "estranger_origen": {
       "titol": "Permís estranger · Pas 1 — Origen",
       "text": "Quin és l'origen del permís que presenta?",
@@ -128,24 +141,43 @@
         "Si presenta Permís Internacional (PIC 1949/1968): NO substitueix el nacional, és una traducció. Cal el nacional a sobre."
       ],
       "opcions": [
-        { "etiqueta": "UE / EEE / Suïssa", "va_a": "estranger_ue" },
-        { "etiqueta": "Tercer país AMB conveni bilateral (Llatinoamèrica, Marroc, Suïssa…)", "va_a": "estranger_conveni" },
-        { "etiqueta": "Tercer país SENSE conveni bilateral", "va_a": "estranger_sense_conveni" },
-        { "etiqueta": "No presenta cap permís físic acreditatiu", "va_a": "fi_estranger_no_acredita" }
+        {
+          "etiqueta": "UE / EEE / Suïssa",
+          "va_a": "estranger_ue"
+        },
+        {
+          "etiqueta": "Tercer país AMB conveni bilateral (Llatinoamèrica, Marroc, Suïssa…)",
+          "va_a": "estranger_conveni"
+        },
+        {
+          "etiqueta": "Tercer país SENSE conveni bilateral",
+          "va_a": "estranger_sense_conveni"
+        },
+        {
+          "etiqueta": "No presenta cap permís físic acreditatiu",
+          "va_a": "fi_estranger_no_acredita"
+        }
       ]
     },
-
     "estranger_ue": {
       "titol": "Permís UE/EEE · Pas 2 — Validesa",
       "text": "Quina és la situació del permís UE/EEE?",
       "info_clau": "Un permís UE/EEE és vàlid a Espanya sempre que sigui vigent al país d'origen. Si el titular és RESIDENT a Espanya: ha de RENOVAR a la DGT espanyola en arribar a la caducitat (Art. 21 RGCond). NO cal canjear.",
       "opcions": [
-        { "etiqueta": "Vigent al país d'origen", "va_a": "fi_ok_permis" },
-        { "etiqueta": "CADUCAT al país d'origen", "va_a": "fi_caducat" },
-        { "etiqueta": "Resident a Espanya >2 anys i permís UE caducat (cal renovar a DGT)", "va_a": "fi_ue_no_renova" }
+        {
+          "etiqueta": "Vigent al país d'origen",
+          "va_a": "fi_ok_permis"
+        },
+        {
+          "etiqueta": "CADUCAT al país d'origen",
+          "va_a": "fi_caducat"
+        },
+        {
+          "etiqueta": "Resident a Espanya >2 anys i permís UE caducat (cal renovar a DGT)",
+          "va_a": "fi_ue_no_renova"
+        }
       ]
     },
-
     "estranger_conveni": {
       "titol": "Tercer país AMB conveni · Pas 2 — Termini de residència",
       "text": "Quants mesos fa que va establir la residència a Espanya?",
@@ -156,13 +188,24 @@
         "Si encara és turista (no resident): vàlid fins a 6 mesos sense canje."
       ],
       "opcions": [
-        { "etiqueta": "Encara NO és resident (turista, <6 mesos a Espanya)", "va_a": "fi_estranger_turista" },
-        { "etiqueta": "Resident i DINS els 6 mesos de gràcia", "va_a": "fi_estranger_gracia" },
-        { "etiqueta": "Resident i FORA del termini (>6 mesos sense canje)", "va_a": "fi_estranger_no_canje" },
-        { "etiqueta": "Ha tramitat el canje (té resguard de la DGT)", "va_a": "fi_estranger_resguard" }
+        {
+          "etiqueta": "Encara NO és resident (turista, <6 mesos a Espanya)",
+          "va_a": "fi_estranger_turista"
+        },
+        {
+          "etiqueta": "Resident i DINS els 6 mesos de gràcia",
+          "va_a": "fi_estranger_gracia"
+        },
+        {
+          "etiqueta": "Resident i FORA del termini (>6 mesos sense canje)",
+          "va_a": "fi_estranger_no_canje"
+        },
+        {
+          "etiqueta": "Ha tramitat el canje (té resguard de la DGT)",
+          "va_a": "fi_estranger_resguard"
+        }
       ]
     },
-
     "estranger_sense_conveni": {
       "titol": "Tercer país SENSE conveni · Pas 2 — Termini",
       "text": "Quants mesos fa que va establir la residència a Espanya?",
@@ -173,12 +216,20 @@
         "Si resident >6 mesos: el permís estranger JA NO és vàlid per circular. Cal permís espanyol obtingut per examen."
       ],
       "opcions": [
-        { "etiqueta": "Turista (<6 mesos a Espanya)", "va_a": "fi_estranger_turista" },
-        { "etiqueta": "Resident i DINS els 6 mesos de gràcia", "va_a": "fi_estranger_gracia_no_conveni" },
-        { "etiqueta": "Resident i FORA del termini (>6 mesos) sense examen DGT", "va_a": "fi_estranger_no_examen" }
+        {
+          "etiqueta": "Turista (<6 mesos a Espanya)",
+          "va_a": "fi_estranger_turista"
+        },
+        {
+          "etiqueta": "Resident i DINS els 6 mesos de gràcia",
+          "va_a": "fi_estranger_gracia_no_conveni"
+        },
+        {
+          "etiqueta": "Resident i FORA del termini (>6 mesos) sense examen DGT",
+          "va_a": "fi_estranger_no_examen"
+        }
       ]
     },
-
     "fi_estranger_turista": {
       "final": true,
       "tipus": "ok",
@@ -196,7 +247,6 @@
         "Si dubtes raonables d'autenticitat: contacta amb Sala / Estrangeria."
       ]
     },
-
     "fi_estranger_gracia": {
       "final": true,
       "tipus": "ok",
@@ -209,7 +259,6 @@
         "4. SENSE butlletí — només advertència informativa."
       ]
     },
-
     "fi_estranger_gracia_no_conveni": {
       "final": true,
       "tipus": "avis",
@@ -221,7 +270,6 @@
         "3. SENSE butlletí — només advertència."
       ]
     },
-
     "fi_estranger_resguard": {
       "final": true,
       "tipus": "ok",
@@ -233,7 +281,6 @@
         "Si tot OK: deixar circular."
       ]
     },
-
     "fi_estranger_no_canje": {
       "final": true,
       "tipus": "administrativa",
@@ -250,14 +297,8 @@
         "4. Buscar conductor sustitut amb permís vàlid o grua.",
         "5. Comprovar VIGÈNCIA del permís estranger al país d'origen: si està caducat o anul·lat → escalar a Art. 384 CP (delicte penal).",
         "6. Indicar al conductor que ha d'iniciar el canje immediatament a la seu electrònica de la DGT."
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa (Art. 1.1 RGCond, MG)",
-        "A 13 — Immobilització de vehicle",
-        "A 58 — Presentació d'estranger a efectes d'identificació (si el permís estranger no queda plenament acreditat)"
       ]
     },
-
     "fi_estranger_no_examen": {
       "final": true,
       "tipus": "administrativa",
@@ -280,14 +321,8 @@
         "4. Comprovar la VIGÈNCIA del permís estranger al país d'origen (data caducitat al document; consulta SIRENE/Interpol si dubte). Si està CADUCAT o anul·lat → escalar a Art. 384 CP.",
         "5. Advertir el conductor: sense conveni, només pot obtenir permís espanyol per EXAMEN complet a la DGT.",
         "6. Informar Estrangeria si hi ha indicis d'irregularitat administrativa."
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa (Art. 1.1 RGCond, MG)",
-        "A 13 — Immobilització de vehicle",
-        "A 58 — Presentació d'estranger a efectes d'identificació (si el permís estranger no queda plenament acreditat)"
       ]
     },
-
     "fi_estranger_no_acredita": {
       "final": true,
       "tipus": "penal",
@@ -305,17 +340,8 @@
         "6. INTERVENCIÓ i immobilització del vehicle.",
         "7. Atestat penal + posada a disposició Jutjat de Guàrdia."
       ],
-      "competencia": "Jutjat Instrucció Guàrdia",
-      "actes_viladecans": [
-        "A 58 — Presentació d'estranger a efectes d'identificació (permís estranger no acreditat)",
-        "N 11 — Citació per a judici ràpid (Art. 384 CP)",
-        "N 08 — Drets persona investigada no detinguda JR (si citació)",
-        "N 01 — Informació drets persona detinguda (si detenció)",
-        "A 13 — Immobilització de vehicle",
-        "T 16 — Full de denúncia administrativa (només si finalment s'acredita que TÉ permís i queda en Art. 3.2 RGCond, via administrativa)"
-      ]
+      "competencia": "Jutjat Instrucció Guàrdia"
     },
-
     "fi_ue_no_renova": {
       "final": true,
       "tipus": "administrativa",
@@ -329,13 +355,8 @@
         "Butlletí Art. 12.4 RGCond.",
         "Immobilització possible si no hi ha conductor sustitut.",
         "Indicar que ha de renovar a la seu electrònica de la DGT."
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa (Art. 12.4 RGCond)",
-        "A 13 — Immobilització de vehicle (si no hi ha conductor substitut)"
       ]
     },
-
     "fi_suspes_cautelar": {
       "final": true,
       "tipus": "administrativa",
@@ -344,14 +365,8 @@
       "article_butlleta": "Art. 39.3 RG Conductors",
       "import": "200 € (DTE 100 €)",
       "punts": "–4 punts",
-      "info": "La mesura cautelar (suspensió no ferma, recurs pendent) és VIA ADMINISTRATIVA. Si la suspensió és FERMA → Art. 384 CP (delicte).",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa (Art. 39.3 RGCond)",
-        "I 10 — Intervenció permís de conducció (si el porta físicament i escau la retirada)",
-        "A 13 — Immobilització de vehicle (si no hi ha conductor substitut)"
-      ]
+      "info": "La mesura cautelar (suspensió no ferma, recurs pendent) és VIA ADMINISTRATIVA. Si la suspensió és FERMA → Art. 384 CP (delicte)."
     },
-
     "fi_condicions_restrictives": {
       "final": true,
       "tipus": "administrativa",
@@ -367,12 +382,8 @@
         "Codi 70 — Vehicle adaptat",
         "Codi 105 — Condicions específiques de l'autoritat sanitària"
       ],
-      "accions_operatives": "Butlletí + indicació de la condició incomplerta",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa (Art. 3.1 RGCond, indicant la condició incomplerta)"
-      ]
+      "accions_operatives": "Butlletí + indicació de la condició incomplerta"
     },
-
     "fi_penal_384_mai": {
       "final": true,
       "tipus": "penal",
@@ -390,15 +401,8 @@
         "7. Posada a disposició Jutjat Guàrdia"
       ],
       "info": "Aplicable quan el vehicle requereix permís (no si bici/VMP). Pels que no requereixen permís: simple infracció administrativa o cap.",
-      "competencia": "Jutjat Instrucció Guàrdia",
-      "actes_viladecans": [
-        "N 11 — Citació per a judici ràpid (Art. 384 CP)",
-        "N 08 — Drets persona investigada no detinguda JR (si citació)",
-        "N 01 — Informació drets persona detinguda (si detenció)",
-        "A 13 — Immobilització de vehicle"
-      ]
+      "competencia": "Jutjat Instrucció Guàrdia"
     },
-
     "fi_penal_384_punts": {
       "final": true,
       "tipus": "penal",
@@ -419,17 +423,8 @@
         "Immobilització vehicle",
         "Atestat amb consulta DGT",
         "Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "I 10 — Intervenció permís de conducció (retirada física del permís)",
-        "A 67 — Comunicació pèrdua de vigència del carnet per edictal (si la notificació de la pèrdua consta feta per edictes: acreditar-ho a l'atestat)",
-        "N 11 — Citació per a judici ràpid (Art. 384 CP)",
-        "N 08 — Drets persona investigada no detinguda JR (si citació)",
-        "N 01 — Informació drets persona detinguda (si detenció)",
-        "A 13 — Immobilització de vehicle"
       ]
     },
-
     "fi_penal_384_judicial": {
       "final": true,
       "tipus": "penal",
@@ -445,12 +440,6 @@
         "Atestat amb antecedents",
         "Comunicació al Jutjat que va dictar la privació",
         "Posada a disposició Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "I 10 — Intervenció permís de conducció (si encara el porta físicament)",
-        "N 01 — Informació drets persona detinguda (si detenció)",
-        "N 11 — Citació per a judici ràpid (Art. 384 CP) + N 08 — Drets investigat no detingut (si es tramita per citació)",
-        "A 13 — Immobilització de vehicle"
       ]
     }
   },

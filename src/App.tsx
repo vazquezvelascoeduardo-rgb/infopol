@@ -47,7 +47,6 @@ const PenalTaulaActes = lazy(() => import('./pages/operativa/PenalTaulaActes'));
 const PenalTaulaDrogues = lazy(() => import('./pages/operativa/PenalTaulaDrogues'));
 const PenalRecursos = lazy(() => import('./pages/operativa/PenalRecursos'));
 const PenalDretsDetingut = lazy(() => import('./pages/operativa/PenalDretsDetingut'));
-const ActesViladecans = lazy(() => import('./pages/operativa/ActesViladecans'));
 const Superbuscador = lazy(() => import('./pages/Superbuscador'));
 const Recursos = lazy(() => import('./pages/Recursos'));
 const CalculadoraAlcohol = lazy(() => import('./pages/CalculadoraAlcohol'));
@@ -128,9 +127,7 @@ export default function App() {
               <Route path="/operativa/penal/taula-actes" element={<PenalTaulaActes />} />
               <Route path="/operativa/penal/taula-drogues" element={<PenalTaulaDrogues />} />
               <Route path="/operativa/penal/recursos" element={<PenalRecursos />} />
-              <Route path="/operativa/penal/drets-detingut" element={<PenalDretsDetingut />} />
-              <Route path="/operativa/actes-viladecans" element={<ActesViladecans />} />
-              <Route path="/operativa/penal/*" element={<Penal />} />
+              <Route path="/operativa/penal/drets-detingut" element={<PenalDretsDetingut />} />              <Route path="/operativa/penal/*" element={<Penal />} />
               <Route path="/superbuscador" element={<Superbuscador />} />
               <Route path="/calculadora-alcohol" element={<CalculadoraAlcohol />} />
               <Route path="/leyes" element={<Leyes />} />

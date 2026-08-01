@@ -10,52 +10,86 @@
     "Art. 225 bis CP (sostracció de menors per progenitor)",
     "Arts. 163-168 CP (detencions il·legals i segrestos)"
   ],
-
   "principi_clau": "NO HI HA TEMPS MÍNIM d'espera per denunciar. El mite de les 24/48h és FALS (Instrucció SES 1/2019). Cal denunciar i tramitar IMMEDIATAMENT. Menors i persones vulnerables = activació immediata SEMPRE, sense cap espera.",
-
   "nivells_risc_oficial": {
     "alt": "Indicadors greus de perill (suïcidi, malaltia, edat extrema, indicis violència)",
     "mig": "Sense indicadors greus però sense localització en temps raonable",
     "baix": "Adult sense indicadors, probable desaparició voluntària"
   },
-
   "registre_obligatori": "Tota desaparició s'introdueix al CNDES (Centre Nacional Desapareguts) — base de dades nacional connectada amb Schengen i Interpol.",
-
   "inici": "tipus_persona",
   "nodes": {
-
     "tipus_persona": {
       "titol": "Tipus de persona desapareguda",
       "opcions": [
-        { "etiqueta": "Menor d'edat",                                                   "va_a": "menor_context" },
-        { "etiqueta": "Adult vulnerable (Alzheimer, demència, malaltia mental greu)",   "va_a": "fi_alt_risc_vulnerable" },
-        { "etiqueta": "Adult amb indicis suïcides / depressió greu coneguda",          "va_a": "fi_alt_risc_suïcida" },
-        { "etiqueta": "Adult sense vulnerabilitat — circumstàncies",                    "va_a": "adult_circumstancies" },
-        { "etiqueta": "Persona de la 3a edat sense vulnerabilitat coneguda",            "va_a": "adult_circumstancies" }
+        {
+          "etiqueta": "Menor d'edat",
+          "va_a": "menor_context"
+        },
+        {
+          "etiqueta": "Adult vulnerable (Alzheimer, demència, malaltia mental greu)",
+          "va_a": "fi_alt_risc_vulnerable"
+        },
+        {
+          "etiqueta": "Adult amb indicis suïcides / depressió greu coneguda",
+          "va_a": "fi_alt_risc_suïcida"
+        },
+        {
+          "etiqueta": "Adult sense vulnerabilitat — circumstàncies",
+          "va_a": "adult_circumstancies"
+        },
+        {
+          "etiqueta": "Persona de la 3a edat sense vulnerabilitat coneguda",
+          "va_a": "adult_circumstancies"
+        }
       ]
     },
-
     "menor_context": {
       "titol": "Context del menor",
       "opcions": [
-        { "etiqueta": "Sostracció parental (custòdia disputada)",                       "va_a": "fi_225_bis" },
-        { "etiqueta": "Fugida d'un centre de protecció",                                "va_a": "fi_fugida_centre" },
-        { "etiqueta": "Fugida de casa",                                                 "va_a": "fi_alt_risc_menor" },
-        { "etiqueta": "Desconeguda — possible segrest",                                  "va_a": "fi_segrest_163" },
-        { "etiqueta": "Nadó / menor de 5 anys",                                          "va_a": "fi_alta_prioritat" }
+        {
+          "etiqueta": "Sostracció parental (custòdia disputada)",
+          "va_a": "fi_225_bis"
+        },
+        {
+          "etiqueta": "Fugida d'un centre de protecció",
+          "va_a": "fi_fugida_centre"
+        },
+        {
+          "etiqueta": "Fugida de casa",
+          "va_a": "fi_alt_risc_menor"
+        },
+        {
+          "etiqueta": "Desconeguda — possible segrest",
+          "va_a": "fi_segrest_163"
+        },
+        {
+          "etiqueta": "Nadó / menor de 5 anys",
+          "va_a": "fi_alta_prioritat"
+        }
       ]
     },
-
     "adult_circumstancies": {
       "titol": "Circumstàncies de la desaparició adulta",
       "opcions": [
-        { "etiqueta": "Indicis VIOLÈNCIA / desaparició forçada",                        "va_a": "fi_alt_risc_violencia" },
-        { "etiqueta": "Cap indicador, possible desaparició voluntària",                  "va_a": "fi_baix_risc" },
-        { "etiqueta": "Primera absència inexplicada (rutines alterades)",                "va_a": "fi_risc_mitja" },
-        { "etiqueta": "Sortida amb tercer sospitós",                                     "va_a": "fi_risc_mitja_tercer" }
+        {
+          "etiqueta": "Indicis VIOLÈNCIA / desaparició forçada",
+          "va_a": "fi_alt_risc_violencia"
+        },
+        {
+          "etiqueta": "Cap indicador, possible desaparició voluntària",
+          "va_a": "fi_baix_risc"
+        },
+        {
+          "etiqueta": "Primera absència inexplicada (rutines alterades)",
+          "va_a": "fi_risc_mitja"
+        },
+        {
+          "etiqueta": "Sortida amb tercer sospitós",
+          "va_a": "fi_risc_mitja_tercer"
+        }
       ]
     },
-
     "fi_alt_risc_vulnerable": {
       "final": true,
       "tipus": "procediment",
@@ -72,15 +106,8 @@
         "9️⃣ Si malaltia mental greu: contacte Salut Mental",
         "🔟 Atestat + actualització contínua CNDES"
       ],
-      "documentacio": "Denúncia + fitxa CNDES + atestat",
-      "actes_viladecans": [
-        "A 10 — Genèrica (ressenya inicial)",
-        "A 18PL — Acta de declaració (denunciant)",
-        "N 02 — Drets víctima (família)",
-        "A 59 — Esbrinament de domicili per a notificacions"
-      ]
+      "documentacio": "Denúncia + fitxa CNDES + atestat"
     },
-
     "fi_alt_risc_suïcida": {
       "final": true,
       "tipus": "procediment",
@@ -93,14 +120,8 @@
         "Família + entorn proper",
         "Trucada al telèfon (geolocalització si possible)",
         "Telèfon 024 (atenció conducta suïcida)"
-      ],
-      "actes_viladecans": [
-        "A 10 — Genèrica (ressenya inicial)",
-        "A 18PL — Acta de declaració (denunciant)",
-        "N 02 — Drets víctima (família)"
       ]
     },
-
     "fi_alt_risc_violencia": {
       "final": true,
       "tipus": "procediment",
@@ -113,14 +134,8 @@
         "Recerca telefonia (Jutjat) — geolocalització",
         "Càmeres de la zona",
         "Si tracta éssers humans sospita: protocol especialitzat"
-      ],
-      "actes_viladecans": [
-        "A 10 — Genèrica (ressenya inicial)",
-        "A 18PL — Acta de declaració (denunciant)",
-        "N 02 — Drets víctima (família)"
       ]
     },
-
     "fi_alt_risc_menor": {
       "final": true,
       "tipus": "procediment",
@@ -136,14 +151,8 @@
         "8️⃣ Activar ALERTA MENOR DESAPARECIDO (CNDES) si pertinent",
         "9️⃣ Reunir pares/tutors (coordinació informació)",
         "🔟 Si possible, coordinació Interpol si sortida fronteres"
-      ],
-      "actes_viladecans": [
-        "A 10 — Genèrica (ressenya inicial)",
-        "A 18PL — Acta de declaració (denunciant)",
-        "N 02 — Drets víctima (família)"
       ]
     },
-
     "fi_alta_prioritat": {
       "final": true,
       "tipus": "procediment",
@@ -159,14 +168,8 @@
         "7️⃣ ALERTA MENOR DESAPARECIDO (CNDES) / crida massiva mitjans",
         "8️⃣ Coordinació amb gènere si VG en context",
         "9️⃣ Vigilància aeroports, estacions, ports si fugida"
-      ],
-      "actes_viladecans": [
-        "A 10 — Genèrica (ressenya inicial)",
-        "A 18PL — Acta de declaració (denunciant)",
-        "N 02 — Drets víctima (família)"
       ]
     },
-
     "fi_225_bis": {
       "final": true,
       "tipus": "penal",
@@ -183,15 +186,8 @@
         "6. Atestat + Jutjat",
         "7. Si VG en context: coordinar amb JVM",
         "8. Comunicació DGAIA"
-      ],
-      "actes_viladecans": [
-        "A 10 — Genèrica (ressenya inicial)",
-        "A 18PL — Acta de declaració (denunciant)",
-        "N 02 — Drets víctima (família)",
-        "A 59 — Esbrinament de domicili per a notificacions"
       ]
     },
-
     "fi_segrest_163": {
       "final": true,
       "tipus": "penal",
@@ -206,14 +202,8 @@
         "Telefonia + càmeres",
         "Cooperació internacional si pertinent",
         "Atestat + Jutjat / Audiència Nacional"
-      ],
-      "actes_viladecans": [
-        "A 10 — Genèrica (ressenya inicial)",
-        "A 18PL — Acta de declaració (denunciant)",
-        "N 02 — Drets víctima (família)"
       ]
     },
-
     "fi_risc_mitja": {
       "final": true,
       "tipus": "procediment",
@@ -225,14 +215,8 @@
         "Entrevista entorn",
         "Seguiment 24-48h",
         "Si no apareix: ESCALAR a alt risc"
-      ],
-      "actes_viladecans": [
-        "A 10 — Genèrica (ressenya inicial)",
-        "A 18PL — Acta de declaració (denunciant)",
-        "A 59 — Esbrinament de domicili per a notificacions"
       ]
     },
-
     "fi_risc_mitja_tercer": {
       "final": true,
       "tipus": "procediment",
@@ -242,13 +226,8 @@
         "Si conegut: comprovar antecedents",
         "Càmeres zona",
         "Si indicis delictius: escalar a alt risc"
-      ],
-      "actes_viladecans": [
-        "A 10 — Genèrica (ressenya inicial)",
-        "A 18PL — Acta de declaració (denunciant)"
       ]
     },
-
     "fi_baix_risc": {
       "final": true,
       "tipus": "procediment",
@@ -260,14 +239,8 @@
         "Comprovacions rutinàries",
         "Arxiu si es localitza",
         "Reobertura si s'allarga el temps"
-      ],
-      "actes_viladecans": [
-        "A 10 — Genèrica (ressenya inicial)",
-        "A 18PL — Acta de declaració (denunciant)",
-        "A 59 — Esbrinament de domicili per a notificacions"
       ]
     },
-
     "fi_fugida_centre": {
       "final": true,
       "tipus": "procediment",
@@ -279,10 +252,6 @@
         "Coordinació DGAIA",
         "Localització → retorn al centre + acta",
         "Si reiteració: informe DGAIA"
-      ],
-      "actes_viladecans": [
-        "A 10 — Genèrica (ressenya inicial)",
-        "A 18PL — Acta de declaració (denunciant)"
       ]
     }
   },

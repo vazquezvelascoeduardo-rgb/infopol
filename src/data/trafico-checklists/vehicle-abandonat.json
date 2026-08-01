@@ -3,40 +3,79 @@
   "titol": "Vehicle abandonat / immobilització / retirada grua",
   "categoria": "transit",
   "icono": "🚗",
-  "base_legal": ["Art. 104 TRLSV (immobilització)", "Art. 105 TRLSV (retirada)", "Art. 106 TRLSV (vehicle abandonat)"],
+  "base_legal": [
+    "Art. 104 TRLSV (immobilització)",
+    "Art. 105 TRLSV (retirada)",
+    "Art. 106 TRLSV (vehicle abandonat)"
+  ],
   "inici": "supost",
   "nodes": {
     "supost": {
       "titol": "Tipus de supòsit",
       "text": "Quina és la situació del vehicle?",
       "opcions": [
-        { "etiqueta": "Immobilització per infracció (alcohol, assegurança, ITV…)","va_a": "fi_immobilitzacio" },
-        { "etiqueta": "Estacionament que destorba / perillós",      "va_a": "estacionament_tipus" },
-        { "etiqueta": "Vehicle en runes / semiabandonat a la via",  "va_a": "abandonat_temps" },
-        { "etiqueta": "Vehicle sense placa / bastidor esborrat",    "va_a": "fi_abandonat_directe" }
+        {
+          "etiqueta": "Immobilització per infracció (alcohol, assegurança, ITV…)",
+          "va_a": "fi_immobilitzacio"
+        },
+        {
+          "etiqueta": "Estacionament que destorba / perillós",
+          "va_a": "estacionament_tipus"
+        },
+        {
+          "etiqueta": "Vehicle en runes / semiabandonat a la via",
+          "va_a": "abandonat_temps"
+        },
+        {
+          "etiqueta": "Vehicle sense placa / bastidor esborrat",
+          "va_a": "fi_abandonat_directe"
+        }
       ]
     },
     "estacionament_tipus": {
       "titol": "Tipus d'estacionament problemàtic",
       "text": "Quin motiu justifica la retirada?",
       "opcions": [
-        { "etiqueta": "Obstrueix la circulació / perill per altres", "va_a": "fi_grua_perill" },
-        { "etiqueta": "Lloc reservat (minusvàlids, càrrega…)",       "va_a": "fi_grua_reservat" },
-        { "etiqueta": "Passos de vianants / guals",                  "va_a": "fi_grua_gual" },
-        { "etiqueta": "Zona blava/verda excedint molt el temps",     "va_a": "fi_grua_zona" },
-        { "etiqueta": "Esdeveniment / treballs senyalitzats",        "va_a": "fi_grua_esdeveniment" }
+        {
+          "etiqueta": "Obstrueix la circulació / perill per altres",
+          "va_a": "fi_grua_perill"
+        },
+        {
+          "etiqueta": "Lloc reservat (minusvàlids, càrrega…)",
+          "va_a": "fi_grua_reservat"
+        },
+        {
+          "etiqueta": "Passos de vianants / guals",
+          "va_a": "fi_grua_gual"
+        },
+        {
+          "etiqueta": "Zona blava/verda excedint molt el temps",
+          "va_a": "fi_grua_zona"
+        },
+        {
+          "etiqueta": "Esdeveniment / treballs senyalitzats",
+          "va_a": "fi_grua_esdeveniment"
+        }
       ]
     },
     "abandonat_temps": {
       "titol": "Temps a la via",
       "text": "Quant temps porta en l'estat d'abandonament? Presenta signes (pols, rodes desinflades, vegetació, brutícia…)?",
       "opcions": [
-        { "etiqueta": "Més d'1 mes al mateix lloc amb signes evidents",          "va_a": "fi_abandonat_106" },
-        { "etiqueta": "Baixa de circulació i abandonat a la via",    "va_a": "fi_abandonat_baixa" },
-        { "etiqueta": "Tècnicament abandonat — no es pot moure pels seus mitjans (art. 106.1.b TRLSV)",    "va_a": "fi_abandonat_106_2" }
+        {
+          "etiqueta": "Més d'1 mes al mateix lloc amb signes evidents",
+          "va_a": "fi_abandonat_106"
+        },
+        {
+          "etiqueta": "Baixa de circulació i abandonat a la via",
+          "va_a": "fi_abandonat_baixa"
+        },
+        {
+          "etiqueta": "Tècnicament abandonat — no es pot moure pels seus mitjans (art. 106.1.b TRLSV)",
+          "va_a": "fi_abandonat_106_2"
+        }
       ]
     },
-
     "fi_immobilitzacio": {
       "final": true,
       "tipus": "procediment",
@@ -49,12 +88,7 @@
         "El vehicle queda fins que se solucioni la causa",
         "Les despeses són a càrrec del titular o conductor"
       ],
-      "document": "Acta d'immobilització + butlletí",
-      "actes_viladecans": [
-        "A 13 — Immobilització",
-        "A 14 — Precintament de vehicle (si escau)",
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
-      ]
+      "document": "Acta d'immobilització + butlletí"
     },
     "fi_grua_perill": {
       "final": true,
@@ -67,9 +101,8 @@
         "Anotació del trasllat al dipòsit",
         "Avís al titular si és possible"
       ],
-      "base_legal": ["Art. 105.1.a TRLSV"],
-      "actes_viladecans": [
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
+      "base_legal": [
+        "Art. 105.1.a TRLSV"
       ]
     },
     "fi_grua_reservat": {
@@ -77,30 +110,41 @@
       "tipus": "procediment",
       "titol": "🚛 Retirada per ocupar lloc reservat",
       "text": "Places PMR (minusvàlids), càrrega/descàrrega, taxis, emergències…",
-      "accions": ["Fotografies", "Butlletí", "Grua", "Especial atenció plaça PMR: sanció més alta"],
-      "base_legal": ["Art. 105 TRLSV"],
-      "actes_viladecans": [
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
+      "accions": [
+        "Fotografies",
+        "Butlletí",
+        "Grua",
+        "Especial atenció plaça PMR: sanció més alta"
+      ],
+      "base_legal": [
+        "Art. 105 TRLSV"
       ]
     },
     "fi_grua_gual": {
       "final": true,
       "tipus": "procediment",
       "titol": "🚛 Retirada per ocupar gual / pas vianants",
-      "accions": ["Fotografies", "Butlletí per estacionament prohibit", "Grua"],
-      "base_legal": ["Art. 105 TRLSV"],
-      "actes_viladecans": [
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
+      "accions": [
+        "Fotografies",
+        "Butlletí per estacionament prohibit",
+        "Grua"
+      ],
+      "base_legal": [
+        "Art. 105 TRLSV"
       ]
     },
     "fi_grua_zona": {
       "final": true,
       "tipus": "procediment",
       "titol": "🚛 Retirada per excés zona regulada",
-      "accions": ["Comprovar tiquet/app", "Butlletí", "Valorar grua segons ordenança"],
-      "base_legal": ["Art. 105 TRLSV", "Ordenança municipal"],
-      "actes_viladecans": [
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
+      "accions": [
+        "Comprovar tiquet/app",
+        "Butlletí",
+        "Valorar grua segons ordenança"
+      ],
+      "base_legal": [
+        "Art. 105 TRLSV",
+        "Ordenança municipal"
       ]
     },
     "fi_grua_esdeveniment": {
@@ -112,9 +156,6 @@
         "Verificar senyalització prèvia (fotografies)",
         "Grua",
         "Notificació al titular de l'adreça on es trasllada"
-      ],
-      "actes_viladecans": [
-        "S 02 — Notificació recuperació de vehicle (quan es retorna del dipòsit)"
       ]
     },
     "fi_abandonat_directe": {
@@ -126,11 +167,6 @@
         "Comunicació a l'ajuntament (departament medi ambient)",
         "Possible tractament com a residu — VFU, vehicle al final de la seva vida útil (RD 265/2021)",
         "Trasllat a dipòsit municipal"
-      ],
-      "actes_viladecans": [
-        "VFU01 — Vehicle fora d'ús (tractament residu)",
-        "A 14 — Precintament de vehicle (si escau)",
-        "S 02 — Notificació recuperació de vehicle (si el titular el recupera del dipòsit)"
       ]
     },
     "fi_abandonat_106": {
@@ -144,10 +180,8 @@
         "Si no respon: tramitació com a abandonat",
         "Passat el termini: baixa i trasllat a centre autoritzat de tractament (CAT)"
       ],
-      "base_legal": ["Art. 106.1.b i 106.2 TRLSV"],
-      "actes_viladecans": [
-        "VFU01 — Vehicle fora d'ús (tractament residu)",
-        "S 02 — Notificació recuperació de vehicle (si el titular el recupera del dipòsit)"
+      "base_legal": [
+        "Art. 106.1.b i 106.2 TRLSV"
       ]
     },
     "fi_abandonat_baixa": {
@@ -159,10 +193,8 @@
         "Tramitar com a abandonat",
         "Trasllat directe a dipòsit/desguàs"
       ],
-      "base_legal": ["Art. 106 TRLSV"],
-      "actes_viladecans": [
-        "VFU01 — Vehicle fora d'ús (tractament residu)",
-        "S 02 — Notificació recuperació de vehicle (si el titular el recupera del dipòsit)"
+      "base_legal": [
+        "Art. 106 TRLSV"
       ]
     },
     "fi_abandonat_106_2": {
@@ -174,10 +206,6 @@
         "Fotografies",
         "Notificació al titular amb termini de retirada d'1 mes (art. 106.2 TRLSV)",
         "Sense resposta → tractament com a residu (VFU)"
-      ],
-      "actes_viladecans": [
-        "VFU01 — Vehicle fora d'ús (tractament residu)",
-        "S 02 — Notificació recuperació de vehicle (si el titular el recupera del dipòsit)"
       ]
     }
   }

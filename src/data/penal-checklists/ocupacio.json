@@ -16,14 +16,12 @@
     "Instrucció 1/2020 Fiscalia General de l'Estat (ocupació d'immobles)",
     "Art. 13 LECrim (mesures cautelars — desallotjament en procés penal)"
   ],
-
   "diferencia_clau_pautes": {
     "habitatge_202_CP": "Habitatge habitual o segona residència (morada) = VIOLACIÓ DE DOMICILI (allanament) — pena 6m-2anys (sense violència) o 1-4 anys + multa (amb violència/intimidació)",
     "usurpacio_245_2": "Immoble que NO constitueix domicili = USURPACIÓ pacífica — multa 3-6 mesos",
     "usurpacio_245_1": "Ocupació AMB violència o intimidació sobre les persones = art. 245.1 CP — presó 1-2 anys, a més de les penes pels actes violents",
     "diferencia_temporal": "Recent (primeres 24-72h): FLAGRÀNCIA permet actuació policial directa (criteri operatiu; Instrucció FGE 1/2020). Consolidada: cal via judicial. Si és MORADA (202 CP), el delicte és permanent i la flagrància persisteix mentre duri l'ocupació."
   },
-
   "concepte_domicili": [
     "Habitatge habitual",
     "Segona residència en ús",
@@ -31,33 +29,59 @@
     "Caravana/autocaravana com a residència",
     "Embarcació amb cabines residencials"
   ],
-
   "inici": "estat_immoble",
   "nodes": {
-
     "estat_immoble": {
       "titol": "Estat de l'immoble ocupat",
       "opcions": [
-        { "etiqueta": "Habitatge habitual (algú hi viu actualment)",                       "va_a": "fi_202_allanament" },
-        { "etiqueta": "Segona residència en ús (titular ve regularment)",                  "va_a": "fi_202_allanament" },
-        { "etiqueta": "Habitatge buit però privat (particular / SAREB / banca)",           "va_a": "temps_ocupacio" },
-        { "etiqueta": "Local / nau / solar NO habitable",                                  "va_a": "fi_245_usurpacio" },
-        { "etiqueta": "Local comercial obert al públic (allanament establiment)",          "va_a": "fi_203_establiment" },
-        { "etiqueta": "Habitatge social / amb conveni",                                    "va_a": "temps_ocupacio" }
+        {
+          "etiqueta": "Habitatge habitual (algú hi viu actualment)",
+          "va_a": "fi_202_allanament"
+        },
+        {
+          "etiqueta": "Segona residència en ús (titular ve regularment)",
+          "va_a": "fi_202_allanament"
+        },
+        {
+          "etiqueta": "Habitatge buit però privat (particular / SAREB / banca)",
+          "va_a": "temps_ocupacio"
+        },
+        {
+          "etiqueta": "Local / nau / solar NO habitable",
+          "va_a": "fi_245_usurpacio"
+        },
+        {
+          "etiqueta": "Local comercial obert al públic (allanament establiment)",
+          "va_a": "fi_203_establiment"
+        },
+        {
+          "etiqueta": "Habitatge social / amb conveni",
+          "va_a": "temps_ocupacio"
+        }
       ]
     },
-
     "temps_ocupacio": {
       "titol": "Temps transcorregut des de l'ocupació",
       "info": "Clau operativa: dins les primeres 24-72h hi ha FLAGRÀNCIA — actuació policial directa amb denúncia titular. Consolidada → via judicial.",
       "opcions": [
-        { "etiqueta": "FLAGRANT (menys de 24-48h)",                                        "va_a": "fi_flagrant" },
-        { "etiqueta": "Recent (48-72h)",                                                    "va_a": "fi_flagrant_consultar" },
-        { "etiqueta": "Consolidada (dies/setmanes)",                                        "va_a": "fi_via_judicial_civil" },
-        { "etiqueta": "Molt consolidada (mesos)",                                           "va_a": "fi_via_judicial_civil" }
+        {
+          "etiqueta": "FLAGRANT (menys de 24-48h)",
+          "va_a": "fi_flagrant"
+        },
+        {
+          "etiqueta": "Recent (48-72h)",
+          "va_a": "fi_flagrant_consultar"
+        },
+        {
+          "etiqueta": "Consolidada (dies/setmanes)",
+          "va_a": "fi_via_judicial_civil"
+        },
+        {
+          "etiqueta": "Molt consolidada (mesos)",
+          "va_a": "fi_via_judicial_civil"
+        }
       ]
     },
-
     "fi_202_allanament": {
       "final": true,
       "tipus": "penal",
@@ -79,14 +103,8 @@
         "9. Atestat penal complet",
         "10. Posada a disposició Jutjat Guàrdia"
       ],
-      "documentacio": "Atestat + acta intervenció + declaracions + inspecció ocular + fotografies",
-      "actes_viladecans": [
-        "A 18PL — Declaració del propietari/perjudicat",
-        "N 02 — Drets víctima",
-        "G 70 — Informe d'ocupació d'un immoble"
-      ]
+      "documentacio": "Atestat + acta intervenció + declaracions + inspecció ocular + fotografies"
     },
-
     "fi_203_establiment": {
       "final": true,
       "tipus": "penal",
@@ -100,13 +118,8 @@
         "Desallotjament",
         "Detenció si flagrant + violència",
         "Atestat + Jutjat"
-      ],
-      "actes_viladecans": [
-        "A 18PL — Declaració del propietari/perjudicat",
-        "N 02 — Drets víctima"
       ]
     },
-
     "fi_flagrant": {
       "final": true,
       "tipus": "penal",
@@ -124,15 +137,8 @@
         "7. Si defraudació elèctrica: Art. 255 CP concurs",
         "8. Atestat + Jutjat Guàrdia"
       ],
-      "info_dubte_jutjat": "Si dubtes sobre flagrància, consulta Jutjat de Guàrdia abans d'entrar.",
-      "actes_viladecans": [
-        "A 10uv — Acta comprovació d'ocupació de béns immobles sense violència/intimidació",
-        "G 70 — Informe d'ocupació d'un immoble",
-        "A 18PL — Declaració del propietari/perjudicat",
-        "N 02 — Drets víctima"
-      ]
+      "info_dubte_jutjat": "Si dubtes sobre flagrància, consulta Jutjat de Guàrdia abans d'entrar."
     },
-
     "fi_flagrant_consultar": {
       "final": true,
       "tipus": "procediment",
@@ -144,13 +150,8 @@
         "Consultar Jutjat de Guàrdia (telèfon de guàrdia)",
         "Si JG autoritza: actuació immediata",
         "Si JG diu via civil: derivar al propietari"
-      ],
-      "actes_viladecans": [
-        "A 10uv — Acta comprovació d'ocupació de béns immobles sense violència/intimidació",
-        "A 18PL — Declaració del propietari/perjudicat"
       ]
     },
-
     "fi_245_usurpacio": {
       "final": true,
       "tipus": "penal",
@@ -166,17 +167,8 @@
         "Fotografies, comprovació titularitat (Registre Propietat)",
         "Atestat + Jutjat (procediment lent)",
         "Si fets concrets concurrents: actuar (drogues, danys, defraudació)"
-      ],
-      "actes_viladecans": [
-        "A 10uv — Acta comprovació d'ocupació de béns immobles sense violència/intimidació",
-        "G 70 — Informe d'ocupació d'un immoble",
-        "A 10h — Control ocupació d'habitatges padró (2 idiomes)",
-        "A 10h.MOD — Inspecció habitatges ocupats",
-        "A 18PL — Declaració del propietari/perjudicat",
-        "N 02 — Drets víctima"
       ]
     },
-
     "fi_via_judicial_civil": {
       "final": true,
       "tipus": "procediment",
@@ -194,14 +186,7 @@
         "NO desallotjar sense resolució",
         "Si fets concrets paral·lels (robatori electricitat, danys, amenaces, drogues): actuar independentment"
       ],
-      "informacio_propietari": "Recomanar consulta amb advocat / via civil ràpida (Llei 5/2018) si vol recuperar abans",
-      "actes_viladecans": [
-        "G 70 — Informe d'ocupació d'un immoble",
-        "A 10h — Control ocupació d'habitatges padró (2 idiomes)",
-        "A 10h.MOD — Inspecció habitatges ocupats",
-        "A10j — Acta notificació llançaments",
-        "A 18PL — Declaració del propietari/perjudicat"
-      ]
+      "informacio_propietari": "Recomanar consulta amb advocat / via civil ràpida (Llei 5/2018) si vol recuperar abans"
     }
   },
   "notes_finals": [

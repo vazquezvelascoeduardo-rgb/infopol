@@ -84,10 +84,7 @@
       "article_butlleta": "Art. 76.G TRLSV",
       "import": "200 € (DTE 100 €)",
       "punts": "–6 punts",
-      "info": "Inclou consultar pantalla, escriure, parlar, fotografiar, etc., qualsevol manipulació amb el dispositiu a la mà",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "info": "Inclou consultar pantalla, escriure, parlar, fotografiar, etc., qualsevol manipulació amb el dispositiu a la mà"
     },
     "fi_mobil_casc": {
       "final": true,
@@ -96,10 +93,7 @@
       "concepte_butlleta": "Utilitzar, mantenint-lo ajustat entre el casc i el cap, un dispositiu de telefonia mòbil mentre es condueix",
       "article_butlleta": "Art. 76.G TRLSV",
       "import": "200 € (DTE 100 €)",
-      "punts": "–3 punts",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "punts": "–3 punts"
     },
     "fi_mobil_manipulant": {
       "final": true,
@@ -109,10 +103,7 @@
       "article_butlleta": "Art. 18.2 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "–3 punts",
-      "info": "Permet mans lliures (Bluetooth, micròfons) si NO requereix manipulació manual",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "info": "Permet mans lliures (Bluetooth, micròfons) si NO requereix manipulació manual"
     },
     "fi_auriculars": {
       "final": true,
@@ -122,10 +113,7 @@
       "article_butlleta": "Art. 18.2 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "–3 punts",
-      "excepcions": "Ensenyament conducció + proves examen moto",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "excepcions": "Ensenyament conducció + proves examen moto"
     },
     "fi_pantalla": {
       "final": true,
@@ -135,10 +123,7 @@
       "article_butlleta": "Art. 18.1 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "–3 punts",
-      "exemples": "TV, vídeo/DVD, pantalles amb internet (Netflix, etc.). Permès: GPS, càmera maniobres, accés/baixada vianants",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "exemples": "TV, vídeo/DVD, pantalles amb internet (Netflix, etc.). Permès: GPS, càmera maniobres, accés/baixada vianants"
     },
     "fi_cinturo_adult": {
       "final": true,
@@ -147,10 +132,7 @@
       "concepte_butlleta": "No utilitzar, o utilitzar inadequadament, la persona denunciada, el cinturó de seguretat",
       "article_butlleta": "Art. 117.1 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "–4 punts (només al conductor)",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "punts": "–4 punts (només al conductor)"
     },
     "fi_cinturo_passatger": {
       "final": true,
@@ -160,10 +142,7 @@
       "article_butlleta": "Art. 117.1 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "0 al passatger / 4 al conductor si passatger és menor",
-      "info": "Si passatger és adult: sanció al passatger. Si menor: sanció al conductor (responsabilitat). Si vehicle transport >9 places: sanció al passatger directament.",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "info": "Si passatger és adult: sanció al passatger. Si menor: sanció al conductor (responsabilitat). Si vehicle transport >9 places: sanció al passatger directament."
     },
     "fi_menor_srif_darrere": {
       "final": true,
@@ -173,10 +152,7 @@
       "article_butlleta": "Art. 117.3 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "–4 punts al CONDUCTOR",
-      "responsabilitat": "Sempre del CONDUCTOR del vehicle (vehicles <9 places)",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "responsabilitat": "Sempre del CONDUCTOR del vehicle (vehicles <9 places)"
     },
     "fi_menor_davant": {
       "final": true,
@@ -191,10 +167,7 @@
         "Tots els seients posteriors estan ocupats per altres menors",
         "No es pot instal·lar tots els SRI als seients posteriors"
       ],
-      "info": "Si l'excepció es compleix, el menor pot anar al davant però SEMPRE amb SRI homologat",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "info": "Si l'excepció es compleix, el menor pot anar al davant però SEMPRE amb SRI homologat"
     },
     "fi_no_instal_lats": {
       "final": true,
@@ -204,10 +177,7 @@
       "article_butlleta": "Art. 117.5 RGC",
       "import": "500 € (DTE 250 €)",
       "punts": "0",
-      "info_aplicabilitat": "Obligatoris en vehicles matriculats des del 15-06-1992. Vehicles transport > 8 places i mercaderies > 3.500 kg: matriculats des del 20-10-2007.",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "info_aplicabilitat": "Obligatoris en vehicles matriculats des del 15-06-1992. Vehicles transport > 8 places i mercaderies > 3.500 kg: matriculats des del 20-10-2007."
     },
     "fi_no_informar": {
       "final": true,
@@ -217,10 +187,7 @@
       "article_butlleta": "Art. 117.2 RGC",
       "import": "80 € (DTE 40 €)",
       "punts": "0",
-      "info": "Conductors d'autobusos: obligació d'informar abans de l'inici del trajecte",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "info": "Conductors d'autobusos: obligació d'informar abans de l'inici del trajecte"
     },
     "fi_casc_conductor": {
       "final": true,
@@ -230,10 +197,7 @@
       "article_butlleta": "Art. 118.1 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "–4 punts",
-      "excepcions": "Motos/quads/ciclomotors amb estructura d'autoprotecció + cinturons (si consta a fitxa tècnica)",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "excepcions": "Motos/quads/ciclomotors amb estructura d'autoprotecció + cinturons (si consta a fitxa tècnica)"
     },
     "fi_casc_passatger": {
       "final": true,
@@ -242,10 +206,7 @@
       "concepte_butlleta": "No utilitzar, o utilitzar inadequadament, la persona denunciada, el casc de protecció homologat",
       "article_butlleta": "Art. 118.1 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "0 passatger / 4 al conductor si passatger menor",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "punts": "0 passatger / 4 al conductor si passatger menor"
     },
     "fi_casc_bici": {
       "final": true,
@@ -255,10 +216,7 @@
       "article_butlleta": "Art. 118.1 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "0",
-      "obligatorietat": "Vies interurbanes SEMPRE (excepte rampes ascendents llargues, raons mèdiques, calor extrema). Vies urbanes: només menors de 16 anys.",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "obligatorietat": "Vies interurbanes SEMPRE (excepte rampes ascendents llargues, raons mèdiques, calor extrema). Vies urbanes: només menors de 16 anys."
     },
     "fi_armilla": {
       "final": true,
@@ -268,10 +226,7 @@
       "article_butlleta": "Art. 118.3 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "–4 punts",
-      "obligatorietat": "Vies INTERURBANES quan el conductor surt del vehicle i ocupa la calçada/voral",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "obligatorietat": "Vies INTERURBANES quan el conductor surt del vehicle i ocupa la calçada/voral"
     }
   },
   "notes_finals": [

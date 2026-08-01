@@ -18,7 +18,6 @@
   },
   "inici": "preliminar",
   "nodes": {
-
     "preliminar": {
       "titol": "Pas previ — preparació del control",
       "text": "Comprova abans de fer la prova:",
@@ -30,146 +29,252 @@
         "Vehicle i tipus de permís (necessari per determinar tram)"
       ],
       "opcions": [
-        { "etiqueta": "Tot llest, continuar", "va_a": "tipus_conductor" }
+        {
+          "etiqueta": "Tot llest, continuar",
+          "va_a": "tipus_conductor"
+        }
       ]
     },
-
     "tipus_conductor": {
       "titol": "Tipus de conductor (determina el barem)",
       "text": "Quin tipus de conductor és?",
       "info": "Aquest pas és CRÍTIC: el barem aplicable depèn del tipus de conductor i vehicle.",
       "opcions": [
-        { "etiqueta": "Conductor general (permís > 2 anys)",                     "va_a": "indiciari_general" },
-        { "etiqueta": "Conductor novell (permís < 2 anys, qualsevol vehicle)",   "va_a": "indiciari_especial" },
-        { "etiqueta": "Professional (transport mercaderies > 3.500 kg)",         "va_a": "indiciari_especial" },
-        { "etiqueta": "Professional (transport viatgers > 9 places, escolar, públic, urgència, MMPP)", "va_a": "indiciari_especial" },
-        { "etiqueta": "MENOR D'EDAT (taxa zero — qualsevol vehicle, inclou bici/VMP)", "va_a": "indiciari_menor" },
-        { "etiqueta": "Bicicleta o VMP (adult)",                                  "va_a": "indiciari_bici_vmp" }
+        {
+          "etiqueta": "Conductor general (permís > 2 anys)",
+          "va_a": "indiciari_general"
+        },
+        {
+          "etiqueta": "Conductor novell (permís < 2 anys, qualsevol vehicle)",
+          "va_a": "indiciari_especial"
+        },
+        {
+          "etiqueta": "Professional (transport mercaderies > 3.500 kg)",
+          "va_a": "indiciari_especial"
+        },
+        {
+          "etiqueta": "Professional (transport viatgers > 9 places, escolar, públic, urgència, MMPP)",
+          "va_a": "indiciari_especial"
+        },
+        {
+          "etiqueta": "MENOR D'EDAT (taxa zero — qualsevol vehicle, inclou bici/VMP)",
+          "va_a": "indiciari_menor"
+        },
+        {
+          "etiqueta": "Bicicleta o VMP (adult)",
+          "va_a": "indiciari_bici_vmp"
+        }
       ]
     },
-
     "indiciari_general": {
       "titol": "Prova indiciària (cribratge) — conductor GENERAL",
       "text": "Límit: 0,25 mg/l aire / 0,5 g/l sang. Aplica marge d'error de l'aparell indiciari. Resultat?",
       "info": "Conceptes catàleg aplicables: Art. 20 RGC. Article a la butlleta: 20 RGC.",
       "opcions": [
-        { "etiqueta": "Es nega a bufar (advertit conseqüències penals)",         "va_a": "fi_383_cp" },
-        { "etiqueta": "Lectura ≤ 0,25 mg/l (taxa imputable negativa)",           "va_a": "fi_negativa" },
-        { "etiqueta": "Lectura entre 0,26 i 0,40 mg/l (positiva indiciària)",    "va_a": "evidencial_general_baixa" },
-        { "etiqueta": "Lectura > 0,40 mg/l (positiva indiciària)",                "va_a": "evidencial_general_alta" }
+        {
+          "etiqueta": "Es nega a bufar (advertit conseqüències penals)",
+          "va_a": "fi_383_cp"
+        },
+        {
+          "etiqueta": "Lectura ≤ 0,25 mg/l (taxa imputable negativa)",
+          "va_a": "fi_negativa"
+        },
+        {
+          "etiqueta": "Lectura entre 0,26 i 0,40 mg/l (positiva indiciària)",
+          "va_a": "evidencial_general_baixa"
+        },
+        {
+          "etiqueta": "Lectura > 0,40 mg/l (positiva indiciària)",
+          "va_a": "evidencial_general_alta"
+        }
       ]
     },
-
     "indiciari_especial": {
       "titol": "Prova indiciària — NOVELL/PROFESSIONAL",
       "text": "Límit: 0,15 mg/l aire / 0,3 g/l sang. Resultat?",
       "info": "Article RGC: 20 (taxa especial). Article TRLSV: 14.1.",
       "opcions": [
-        { "etiqueta": "Es nega a bufar",                                          "va_a": "fi_383_cp" },
-        { "etiqueta": "Lectura ≤ 0,15 mg/l (negativa)",                          "va_a": "fi_negativa" },
-        { "etiqueta": "Lectura entre 0,16 i 0,40 mg/l",                          "va_a": "evidencial_especial_baixa" },
-        { "etiqueta": "Lectura > 0,40 mg/l",                                      "va_a": "evidencial_general_alta" }
+        {
+          "etiqueta": "Es nega a bufar",
+          "va_a": "fi_383_cp"
+        },
+        {
+          "etiqueta": "Lectura ≤ 0,15 mg/l (negativa)",
+          "va_a": "fi_negativa"
+        },
+        {
+          "etiqueta": "Lectura entre 0,16 i 0,40 mg/l",
+          "va_a": "evidencial_especial_baixa"
+        },
+        {
+          "etiqueta": "Lectura > 0,40 mg/l",
+          "va_a": "evidencial_general_alta"
+        }
       ]
     },
-
     "indiciari_menor": {
       "titol": "Prova indiciària — MENOR (tolerància 0)",
       "text": "Qualsevol taxa > 0 és infracció (Art. 14.1 TRLSV — taxa zero menors). Resultat?",
       "opcions": [
-        { "etiqueta": "Es nega a bufar",                                          "va_a": "fi_383_cp" },
-        { "etiqueta": "Lectura 0,00 mg/l",                                        "va_a": "fi_negativa" },
-        { "etiqueta": "Lectura > 0,00 i ≤ 0,15 mg/l",                            "va_a": "fi_admin_menor_500" },
-        { "etiqueta": "Lectura entre 0,16 i 0,30 mg/l",                          "va_a": "evidencial_menor_mig" },
-        { "etiqueta": "Lectura > 0,30 mg/l",                                      "va_a": "evidencial_general_alta" }
+        {
+          "etiqueta": "Es nega a bufar",
+          "va_a": "fi_383_cp"
+        },
+        {
+          "etiqueta": "Lectura 0,00 mg/l",
+          "va_a": "fi_negativa"
+        },
+        {
+          "etiqueta": "Lectura > 0,00 i ≤ 0,15 mg/l",
+          "va_a": "fi_admin_menor_500"
+        },
+        {
+          "etiqueta": "Lectura entre 0,16 i 0,30 mg/l",
+          "va_a": "evidencial_menor_mig"
+        },
+        {
+          "etiqueta": "Lectura > 0,30 mg/l",
+          "va_a": "evidencial_general_alta"
+        }
       ]
     },
-
     "indiciari_bici_vmp": {
       "titol": "Prova indiciària — BICICLETA o VMP (adult)",
       "text": "Aplica el barem general (>0,25 mg/l) PERÒ sense pèrdua de punts (no requereix permís).",
       "opcions": [
-        { "etiqueta": "Es nega a bufar",                                          "va_a": "fi_negativa_bufar_bici" },
-        { "etiqueta": "Lectura ≤ 0,25 mg/l",                                      "va_a": "fi_negativa" },
-        { "etiqueta": "Lectura entre 0,26 i 0,50 mg/l",                          "va_a": "fi_admin_500_bici" },
-        { "etiqueta": "Lectura > 0,50 mg/l",                                      "va_a": "fi_admin_1000_bici" }
+        {
+          "etiqueta": "Es nega a bufar",
+          "va_a": "fi_negativa_bufar_bici"
+        },
+        {
+          "etiqueta": "Lectura ≤ 0,25 mg/l",
+          "va_a": "fi_negativa"
+        },
+        {
+          "etiqueta": "Lectura entre 0,26 i 0,50 mg/l",
+          "va_a": "fi_admin_500_bici"
+        },
+        {
+          "etiqueta": "Lectura > 0,50 mg/l",
+          "va_a": "fi_admin_1000_bici"
+        }
       ]
     },
-
     "evidencial_general_baixa": {
       "titol": "Prova evidencial (etilòmetre homologat) — tram baix",
       "text": "Cal repetir amb l'etilòmetre EVIDENCIAL homologat passats MÍNIM 10 minuts entre proves. Aplicar marge ±0,02 mg/l. Resultat de la 2a lectura?",
       "info": "Cal informar al conductor: dret a 2a prova evidencial i a contrastació per anàlisi de sang en centre sanitari (cost a càrrec del conductor si confirma positiu).",
       "opcions": [
-        { "etiqueta": "Taxa imputable ≤ 0,25 mg/l (cau a negativa)",              "va_a": "fi_negativa" },
-        { "etiqueta": "Taxa imputable 0,26 a 0,50 mg/l",                          "va_a": "comprovacio_reincidencia_4p" },
-        { "etiqueta": "Lectura confirmada 0,51 a 0,65 mg/l (admin tram alt)",     "va_a": "fi_admin_1000_6p" },
-        { "etiqueta": "Lectura confirmada > 0,65 mg/l (DELICTE — criteri prudent amb marge)", "va_a": "fi_penal_379_2_alcohol" }
+        {
+          "etiqueta": "Taxa imputable ≤ 0,25 mg/l (cau a negativa)",
+          "va_a": "fi_negativa"
+        },
+        {
+          "etiqueta": "Taxa imputable 0,26 a 0,50 mg/l",
+          "va_a": "comprovacio_reincidencia_4p"
+        },
+        {
+          "etiqueta": "Lectura confirmada 0,51 a 0,65 mg/l (admin tram alt)",
+          "va_a": "fi_admin_1000_6p"
+        },
+        {
+          "etiqueta": "Lectura confirmada > 0,65 mg/l (DELICTE — criteri prudent amb marge)",
+          "va_a": "fi_penal_379_2_alcohol"
+        }
       ]
     },
-
     "evidencial_general_alta": {
       "titol": "Prova evidencial — tram alt",
       "text": "Lectura indiciària > 0,40 mg/l. Cal evidencial. Resultat 2a lectura?",
       "info": "Criteri operatiu: per damunt de 0,60 mg/l aplicarem el marge d'error abans de qualificar penal. La franja 0,60-0,65 es manté com a infracció administrativa molt greu (1.000€/6 pts) per evitar nul·litats.",
       "opcions": [
-        { "etiqueta": "0,26 a 0,50 mg/l",                                         "va_a": "comprovacio_reincidencia_4p" },
-        { "etiqueta": "0,51 a 0,65 mg/l",                                         "va_a": "fi_admin_1000_6p" },
-        { "etiqueta": "> 0,65 mg/l (DELICTE objectiu — criteri prudent amb marge)", "va_a": "fi_penal_379_2_alcohol" }
+        {
+          "etiqueta": "0,26 a 0,50 mg/l",
+          "va_a": "comprovacio_reincidencia_4p"
+        },
+        {
+          "etiqueta": "0,51 a 0,65 mg/l",
+          "va_a": "fi_admin_1000_6p"
+        },
+        {
+          "etiqueta": "> 0,65 mg/l (DELICTE objectiu — criteri prudent amb marge)",
+          "va_a": "fi_penal_379_2_alcohol"
+        }
       ]
     },
-
     "evidencial_especial_baixa": {
       "titol": "Evidencial — Novell / Professional",
       "text": "Resultat 2a prova?",
       "opcions": [
-        { "etiqueta": "≤ 0,15 mg/l (negativa)",                                   "va_a": "fi_negativa" },
-        { "etiqueta": "0,16 a 0,30 mg/l",                                          "va_a": "comprovacio_reincidencia_especial" },
-        { "etiqueta": "> 0,30 i ≤ 0,65 mg/l",                                     "va_a": "fi_admin_1000_6p_especial" },
-        { "etiqueta": "> 0,65 mg/l (DELICTE — criteri prudent amb marge)",        "va_a": "fi_penal_379_2_alcohol" }
+        {
+          "etiqueta": "≤ 0,15 mg/l (negativa)",
+          "va_a": "fi_negativa"
+        },
+        {
+          "etiqueta": "0,16 a 0,30 mg/l",
+          "va_a": "comprovacio_reincidencia_especial"
+        },
+        {
+          "etiqueta": "> 0,30 i ≤ 0,65 mg/l",
+          "va_a": "fi_admin_1000_6p_especial"
+        },
+        {
+          "etiqueta": "> 0,65 mg/l (DELICTE — criteri prudent amb marge)",
+          "va_a": "fi_penal_379_2_alcohol"
+        }
       ]
     },
-
     "evidencial_menor_mig": {
       "titol": "Evidencial — MENOR amb permís",
       "text": "Si el menor té permís AM/A1, aplicar barem novell (0,16-0,30). Resultat?",
       "opcions": [
-        { "etiqueta": "0,16 a 0,30 mg/l (amb permís)",                            "va_a": "fi_admin_menor_500_4p" },
-        { "etiqueta": "> 0,30 mg/l",                                               "va_a": "fi_admin_menor_1000_6p" }
+        {
+          "etiqueta": "0,16 a 0,30 mg/l (amb permís)",
+          "va_a": "fi_admin_menor_500_4p"
+        },
+        {
+          "etiqueta": "> 0,30 mg/l",
+          "va_a": "fi_admin_menor_1000_6p"
+        }
       ]
     },
-
     "comprovacio_reincidencia_4p": {
       "titol": "Comprovació de reincidència",
       "text": "Consultar a la sala / DGT: ha estat sancionat per superar la taxa d'alcoholèmia en l'any immediatament anterior?",
       "info": "Reincidència = sanció FERMA per alcohol en els 12 mesos anteriors. Duplica l'import (500€→1000€) però manté els 4 punts.",
       "opcions": [
-        { "etiqueta": "NO és reincident",                                         "va_a": "fi_admin_500_4p" },
-        { "etiqueta": "SÍ, reincident (any anterior)",                            "va_a": "fi_admin_1000_4p_reincident" }
+        {
+          "etiqueta": "NO és reincident",
+          "va_a": "fi_admin_500_4p"
+        },
+        {
+          "etiqueta": "SÍ, reincident (any anterior)",
+          "va_a": "fi_admin_1000_4p_reincident"
+        }
       ]
     },
-
     "comprovacio_reincidencia_especial": {
       "titol": "Reincidència — novell/professional",
       "text": "Sancionat per alcohol l'any anterior?",
       "opcions": [
-        { "etiqueta": "No reincident",                                            "va_a": "fi_admin_500_4p_especial" },
-        { "etiqueta": "Sí reincident",                                             "va_a": "fi_admin_1000_4p_reincident" }
+        {
+          "etiqueta": "No reincident",
+          "va_a": "fi_admin_500_4p_especial"
+        },
+        {
+          "etiqueta": "Sí reincident",
+          "va_a": "fi_admin_1000_4p_reincident"
+        }
       ]
     },
-
     "fi_negativa": {
       "final": true,
       "tipus": "ok",
       "titol": "✅ PROVA NEGATIVA",
       "accio": "Es deixa marxar el conductor",
       "documentacio": "No cal butlletí. Si era control preventiu: anotar al full de control",
-      "tiquet": "Conservar tiquet per arxiu del servei",
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
-        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada, també si és negativa)"
-      ]
+      "tiquet": "Conservar tiquet per arxiu del servei"
     },
-
     "fi_negativa_bufar_bici": {
       "final": true,
       "tipus": "administrativa",
@@ -178,15 +283,8 @@
       "article_butlleta": "Art. 14.2 TRLSV",
       "import": "1.000 € (DTE 500 €)",
       "punts": "0 punts (no requereix permís)",
-      "info": "Per bicicletes/VMP la negativa NO és delicte (no permís implicat) però sí infracció MOLT GREU administrativa.",
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de requerir la prova: acredita l'advertiment)",
-        "A 21 — Simptomatologia d'alcohol (imprescindible en cas de negativa)",
-        "T 16 — Full de denúncia administrativa (Art. 14.2 TRLSV)",
-        "A 13 — Immobilització de vehicle (si l'estat del conductor no permet continuar)"
-      ]
+      "info": "Per bicicletes/VMP la negativa NO és delicte (no permís implicat) però sí infracció MOLT GREU administrativa."
     },
-
     "fi_admin_500_4p": {
       "final": true,
       "tipus": "administrativa",
@@ -212,17 +310,8 @@
         "Dret a contrastació per anàlisi de sang en centre sanitari (cost del conductor si confirma)",
         "Dret a presentar al·legacions en 20 dies",
         "Reducció 50% per pagament voluntari sense impugnar"
-      ],
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova; versió catalana i castellana)",
-        "T 15 — Tiquets alcoholèmia (adjuntar els 2 tiquets de l'etilòmetre evidencial al butlletí)",
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
-        "T 12 — Mostra per analítica de sang (només si demana prova de contrast en sang)",
-        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
       ]
     },
-
     "fi_admin_500_4p_especial": {
       "final": true,
       "tipus": "administrativa",
@@ -233,17 +322,8 @@
       "import": "500 € (DTE 250 €)",
       "punts": "–4 punts",
       "accions_operatives": "Veure tram 1 general — mateix procediment",
-      "info_extra": "Si és transport escolar/menors o MMPP: comunicar a l'empresa i a inspecció de transport",
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
-        "T 15 — Tiquets alcoholèmia (adjuntar els 2 tiquets de l'etilòmetre evidencial al butlletí)",
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
-        "T 12 — Mostra per analítica de sang (només si demana prova de contrast en sang)",
-        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
-      ]
+      "info_extra": "Si és transport escolar/menors o MMPP: comunicar a l'empresa i a inspecció de transport"
     },
-
     "fi_admin_1000_4p_reincident": {
       "final": true,
       "tipus": "administrativa",
@@ -257,17 +337,8 @@
         "Mateix procediment que tram 1 + acreditar reincidència (consulta DGT/Sala)",
         "Indicar a la butlleta la data de la sanció anterior i número expedient si es coneix",
         "Immobilització + grua o sustitut"
-      ],
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
-        "T 15 — Tiquets alcoholèmia (adjuntar els 2 tiquets de l'etilòmetre evidencial al butlletí)",
-        "T 16 — Full de denúncia administrativa (fer constar la sanció anterior)",
-        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
-        "T 12 — Mostra per analítica de sang (només si demana prova de contrast en sang)",
-        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
       ]
     },
-
     "fi_admin_1000_6p": {
       "final": true,
       "tipus": "administrativa",
@@ -282,18 +353,8 @@
         "Mateixes que tram 1",
         "ATENCIÓ: si pèrdua total de punts, comunicació especial DGT",
         "Vigilància addicional a símptomes — si > 0,65 confirmat, derivar a via penal"
-      ],
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
-        "T 15 — Tiquets alcoholèmia (adjuntar els 2 tiquets de l'etilòmetre evidencial al butlletí)",
-        "A 21 — Simptomatologia d'alcohol (recomanable en tram alt: reforça la denúncia i cobreix una eventual derivació penal)",
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
-        "T 12 — Mostra per analítica de sang (només si demana prova de contrast en sang)",
-        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
       ]
     },
-
     "fi_admin_1000_6p_especial": {
       "final": true,
       "tipus": "administrativa",
@@ -302,17 +363,8 @@
       "article_butlleta": "Art. 20 RGC",
       "barem": "0,31 a 0,65 mg/l (criteri prudent amb marge d'error)",
       "import": "1.000 € (DTE 500 €)",
-      "punts": "–6 punts",
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
-        "T 15 — Tiquets alcoholèmia (adjuntar els 2 tiquets de l'etilòmetre evidencial al butlletí)",
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
-        "T 12 — Mostra per analítica de sang (només si demana prova de contrast en sang)",
-        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
-      ]
+      "punts": "–6 punts"
     },
-
     "fi_admin_menor_500": {
       "final": true,
       "tipus": "administrativa",
@@ -327,48 +379,23 @@
         "AVÍS A PARES/TUTORS — comparèixer per recollir el menor",
         "Comunicació Serveis Socials si reincidència",
         "Si en festes/oci nocturn: investigar venda d'alcohol a menors"
-      ],
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
-        "T 15 — Tiquets alcoholèmia (adjuntar tiquets al butlletí)",
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (fins a compareixença de pares/tutors o conductor alternatiu)",
-        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
       ]
     },
-
     "fi_admin_menor_500_4p": {
       "final": true,
       "tipus": "administrativa",
       "titol": "⚠️ MOLT GREU — Menor amb permís (tram baix)",
       "import": "500 € (DTE 250 €)",
       "punts": "–4 punts",
-      "article_butlleta": "Art. 20 RGC",
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
-        "T 15 — Tiquets alcoholèmia (adjuntar tiquets al butlletí)",
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (fins a compareixença de pares/tutors o conductor alternatiu)",
-        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
-      ]
+      "article_butlleta": "Art. 20 RGC"
     },
-
     "fi_admin_menor_1000_6p": {
       "final": true,
       "tipus": "administrativa",
       "titol": "🔴 MOLT GREU — Menor amb permís (tram alt)",
       "import": "1.000 € (DTE 500 €)",
-      "punts": "–6 punts",
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
-        "T 15 — Tiquets alcoholèmia (adjuntar tiquets al butlletí)",
-        "A 21 — Simptomatologia d'alcohol (recomanable en tram alt)",
-        "T 16 — Full de denúncia administrativa",
-        "A 13 — Immobilització de vehicle (fins a compareixença de pares/tutors o conductor alternatiu)",
-        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
-      ]
+      "punts": "–6 punts"
     },
-
     "fi_admin_500_bici": {
       "final": true,
       "tipus": "administrativa",
@@ -376,30 +403,15 @@
       "concepte_butlleta": "Conduir bicicleta/VMP amb taxa superior a 0,25 mg/l",
       "article_butlleta": "Art. 20 RGC",
       "import": "500 € (DTE 250 €)",
-      "punts": "0 punts (no permís)",
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
-        "T 15 — Tiquets alcoholèmia (adjuntar tiquets al butlletí)",
-        "T 16 — Full de denúncia administrativa",
-        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
-      ]
+      "punts": "0 punts (no permís)"
     },
-
     "fi_admin_1000_bici": {
       "final": true,
       "tipus": "administrativa",
       "titol": "🔴 MOLT GREU — Bicicleta/VMP tram alt",
       "import": "1.000 € (DTE 500 €)",
-      "punts": "0 punts",
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova)",
-        "T 15 — Tiquets alcoholèmia (adjuntar tiquets al butlletí)",
-        "A 21 — Simptomatologia d'alcohol (recomanable en tram alt)",
-        "T 16 — Full de denúncia administrativa",
-        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
-      ]
+      "punts": "0 punts"
     },
-
     "fi_penal_379_2_alcohol": {
       "final": true,
       "tipus": "penal",
@@ -505,17 +517,6 @@
         "Si n'hi ha: vídeo de càmera corporal o testimonis"
       ],
       "competencia": "Jutjat d'Instrucció de Guàrdia (en zona Gavà segons partit judicial). Còpia al Ministeri Fiscal. Termini de compareixença en judici ràpid: 72 hores des de la citació",
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de la 1a prova; versió catalana i castellana)",
-        "T 15 — Tiquets alcoholèmia (adjuntar els 2 tiquets de l'etilòmetre evidencial a l'atestat)",
-        "A 21 — Simptomatologia d'alcohol (SEMPRE en via penal: clau si la taxa cau a zona gris al judici)",
-        "T 12 — Mostra per analítica de sang (si demana prova de contrast en sang o hi ha evacuació hospitalària)",
-        "A 13 — Immobilització de vehicle (si no hi ha conductor alternatiu)",
-        "N 11 — Citació per a judici ràpid (Art. 379.2 CP)",
-        "N 08 — Drets persona investigada no detinguda JR (si es tramita per citació sense detenció)",
-        "N 01 — Informació drets persona detinguda (només si detenció excepcional)",
-        "Butlleta estadístic d'alcoholèmia (una per cada prova practicada)"
-      ],
       "base_legal": [
         "Art. 379.2 CP",
         "Art. 795 i ss. LECrim (judici ràpid)",
@@ -527,7 +528,6 @@
         "Art. 104 TRLSV (immobilització)"
       ]
     },
-
     "fi_383_cp": {
       "final": true,
       "tipus": "penal",
@@ -558,15 +558,7 @@
         "Identificació de testimonis (altres agents)",
         "Si gravació disponible: acta de cadena de custòdia"
       ],
-      "info": "Compatible amb Art. 379.2 CP si hi ha indicis d'alcoholèmia delictiva (per ex. símptomes evidents) — però cal acreditar els indicis perquè concursin",
-      "actes_viladecans": [
-        "A 27 — Drets alcoholèmia i drogues (llegit i signat ABANS de requerir la prova: acredita l'advertiment de l'Art. 383 CP)",
-        "A 21 — Simptomatologia d'alcohol (IMPRESCINDIBLE en cas de negativa: única prova d'estat)",
-        "N 01 — Informació drets persona detinguda (si detenció)",
-        "N 08 — Drets persona investigada no detinguda JR (si finalment es tramita per citació)",
-        "N 11 — Citació per a judici ràpid (Art. 383 CP)",
-        "A 13 — Immobilització de vehicle"
-      ]
+      "info": "Compatible amb Art. 379.2 CP si hi ha indicis d'alcoholèmia delictiva (per ex. símptomes evidents) — però cal acreditar els indicis perquè concursin"
     }
   },
   "notes_finals": [

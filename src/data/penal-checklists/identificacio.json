@@ -184,12 +184,7 @@
         "CITACIÓ JUDICIAL no atesa: notificar i anotar",
         "REQUERIMENT POLICIAL: comunicar comissaria que el va emetre"
       ],
-      "documentacio": "Diligència de localització + atestat si detenció",
-      "actes_viladecans": [
-        "A 55 — Detenció per reclamació judicial (si ordre de detenció / busca i captura)",
-        "N 01 — Informació drets persona detinguda (si es practica detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)"
-      ]
+      "documentacio": "Diligència de localització + atestat si detenció"
     },
     "fi_trasllat_17": {
       "final": true,
@@ -209,12 +204,7 @@
         "9. Quan identificat → deixar marxar + diligència de l'actuació",
         "10. Si en aquest temps surt requeriment/delicte → conversió a detenció"
       ],
-      "documentacio": "Diligència d'identificació art. 16.2 LOPSC + anotació llibre-registre OAC",
-      "actes_viladecans": [
-        "I 104 — Drets persona desplaçada per identificació (lliurar en el moment del trasllat a dependències, art. 16.2 LOPSC)",
-        "G 58 — Volant d'estada en dependències per identificació (en sortir de dependències)",
-        "A 58 — Presentació d'estranger a efectes d'identificació (si es tracta d'un estranger indocumentat)"
-      ]
+      "documentacio": "Diligència d'identificació art. 16.2 LOPSC + anotació llibre-registre OAC"
     },
     "fi_36_6_lopsc": {
       "final": true,
@@ -240,11 +230,6 @@
         "Trencament d'immobilització",
         "Dificultar una identificació (allunyar-se, donar evasives)",
         "Donar dades falses o inexactes verbalment en la identificació"
-      ],
-      "actes_viladecans": [
-        "D 10 — Denúncia infracció Llei 4/2015 (negativa a identificar-se, art. 36.6 LOPSC)",
-        "I 104 — Drets persona desplaçada per identificació (si cal trasllat a dependències, art. 16.2 LOPSC)",
-        "G 58 — Volant d'estada en dependències per identificació (si hi ha hagut trasllat)"
       ]
     },
     "fi_dades_falses": {
@@ -253,10 +238,7 @@
       "titol": "⚠️ GREU — Dades falses verbals (Art. 36.6 LOPSC)",
       "info": "Si dona dades inexactes/falses VERBALMENT (no document fals): infracció 36.6. Si presenta DOCUMENT FALS: anar a checklist Documentació falsa (Art. 392/393 CP).",
       "import": "601 € a 30.000 €",
-      "documentacio": "Acta D-10 + descripció de les dades falses donades",
-      "actes_viladecans": [
-        "D 10 — Denúncia infracció Llei 4/2015 (al·legació de dades falses o inexactes en la identificació, art. 36.6 LOPSC)"
-      ]
+      "documentacio": "Acta D-10 + descripció de les dades falses donades"
     },
     "fi_doc_sospitos": {
       "final": true,
@@ -290,25 +272,14 @@
         "   - Testimonis (altres agents)",
         "8. Posada a disposició Jutjat de Guàrdia"
       ],
-      "documentacio_clau": "Atestat penal + diligència drets + parte mèdic si lesions",
-      "actes_viladecans": [
-        "N 01 — Informació drets persona detinguda (en el moment de la detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes persona detinguda (escorcoll incident a la detenció)",
-        "G 58 — Volant d'estada en dependències (en sortir de dependències)"
-      ]
+      "documentacio_clau": "Atestat penal + diligència drets + parte mèdic si lesions"
     },
     "fi_atemptat_550": {
       "final": true,
       "tipus": "penal",
       "titol": "🚔 DELICTE — Atemptat (Art. 550 CP) — anar a checklist específic",
       "text": "Si hi ha agressió física, escomesa o resistència activa amb violència/intimidació greu: és atemptat. Veure checklist 'Atemptat / resistència / desobediència'.",
-      "accio": "Detenció + atestat penal Art. 550 CP",
-      "actes_viladecans": [
-        "N 01 — Informació drets persona detinguda (en el moment de la detenció)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes persona detinguda (escorcoll incident a la detenció)"
-      ]
+      "accio": "Detenció + atestat penal Art. 550 CP"
     }
   },
   "notes_finals": [

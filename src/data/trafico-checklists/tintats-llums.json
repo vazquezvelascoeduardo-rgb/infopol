@@ -81,10 +81,6 @@
         "Fotografies",
         "NO es pot exigir passar ITV per aquest motiu si la ITV vigent és FAVORABLE",
         "Possible immobilització si visibilitat molt deficient i risc"
-      ],
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "T 04 — Proposta extraordinària ITV (reforma no legalitzada)"
       ]
     },
     "fi_tintats_sense_miralls": {
@@ -94,10 +90,7 @@
       "concepte_butlleta": "Circular amb un vehicle proveït de làmines adhesives o cortinetes contra el sol en les finestres posteriors sense dur els dos miralls retrovisors exteriors reglamentaris",
       "article_butlleta": "Art. 19.1 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "0",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "punts": "0"
     },
     "fi_tintats_no_homologats": {
       "final": true,
@@ -106,11 +99,7 @@
       "concepte_butlleta": "Col·locar en un vehicle vidres tintats o acolorits no homologats",
       "article_butlleta": "Art. 19.2 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "0",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "T 04 — Proposta extraordinària ITV (reforma no legalitzada)"
-      ]
+      "punts": "0"
     },
     "fi_llums_cap": {
       "final": true,
@@ -120,10 +109,7 @@
       "article_butlleta": "Art. 99.1 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "0",
-      "info_immobilitzacio": "Considerar IMMOBILITZACIÓ per perill greu — Art. 104 TRLSV",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "info_immobilitzacio": "Considerar IMMOBILITZACIÓ per perill greu — Art. 104 TRLSV"
     },
     "fi_llums_una": {
       "final": true,
@@ -133,10 +119,7 @@
       "article_butlleta": "Art. 16 RGV",
       "import": "200 € (DTE 100 €)",
       "punts": "0",
-      "accions": "Advertir i butlletí. Si els 2 frontals fosos: immobilitzar",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "accions": "Advertir i butlletí. Si els 2 frontals fosos: immobilitzar"
     },
     "fi_llums_antireg": {
       "final": true,
@@ -146,11 +129,7 @@
       "article_butlleta": "Art. 15 RGV",
       "import": "200 € (DTE 100 €)",
       "punts": "0",
-      "exemples": "LEDs no homologats, llums de color (blau, verd particulars), neons baix vehicle, llums extra no autoritzades",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa",
-        "T 04 — Proposta extraordinària ITV (reforma no legalitzada)"
-      ]
+      "exemples": "LEDs no homologats, llums de color (blau, verd particulars), neons baix vehicle, llums extra no autoritzades"
     },
     "fi_llums_no_encendre": {
       "final": true,
@@ -160,10 +139,7 @@
       "article_butlleta": "Art. 101.1 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "0",
-      "obligatorietat": "Entre vespre i alba, túnels, condicions meteorològiques que disminueixin visibilitat",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "obligatorietat": "Entre vespre i alba, túnels, condicions meteorològiques que disminueixin visibilitat"
     },
     "fi_enlluernament": {
       "final": true,
@@ -172,10 +148,7 @@
       "concepte_butlleta": "No substituir els llums de carretera pels d'encreuament i enlluernar als usuaris que circulen en sentit contrari",
       "article_butlleta": "Art. 102.1 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "0",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "punts": "0"
     },
     "fi_boira_sense_motiu": {
       "final": true,
@@ -184,10 +157,7 @@
       "concepte_butlleta": "Utilitzar els llums de boira de davant sense una causa que ho justifiqui",
       "article_butlleta": "Art. 106.2 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "0",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "punts": "0"
     },
     "fi_llargues_parat": {
       "final": true,
@@ -196,10 +166,7 @@
       "concepte_butlleta": "Utilitzar els llums de carretera quan el vehicle està parat o estacionat",
       "article_butlleta": "Art. 100.2 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "0",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "punts": "0"
     },
     "fi_centelleig": {
       "final": true,
@@ -208,10 +175,7 @@
       "concepte_butlleta": "Utilitzar alternativament els llums de carretera i els d'encreuament (centelleigs) amb finalitats diferents a les previstes reglamentàriament",
       "article_butlleta": "Art. 100.2 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "0",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "punts": "0"
     },
     "fi_placa_no_iluminada": {
       "final": true,
@@ -220,10 +184,7 @@
       "concepte_butlleta": "No portar il·luminada la placa posterior de matrícula quan s'està obligat",
       "article_butlleta": "Art. 103 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "0",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "punts": "0"
     },
     "fi_moto_dia": {
       "final": true,
@@ -232,10 +193,7 @@
       "concepte_butlleta": "Circular amb una motocicleta amb els llums d'encreuament apagats",
       "article_butlleta": "Art. 104 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "0",
-      "actes_viladecans": [
-        "T 16 — Full de denúncia administrativa"
-      ]
+      "punts": "0"
     }
   }
 }

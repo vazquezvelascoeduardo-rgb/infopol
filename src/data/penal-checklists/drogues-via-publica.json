@@ -182,15 +182,7 @@
         "9. Si menor: comunicació tutors + Servei Menors"
       ],
       "documentacio": "Acta D-10 + acta intervenció substància + cadena custòdia",
-      "info_suspensio_80_2": "DA 5a LOPSC: si l'infractor és MENOR d'edat i, a sol·licitud seva i dels seus representants legals, se sotmet a tractament, rehabilitació o activitats de reeducació, la multa pot ser suspesa. Si abandona el tractament, s'executa la sanció. Per a majors d'edat, la LO 4/2015 NO preveu aquesta suspensió.",
-      "actes_viladecans": [
-        "D 10 — Denúncia infracció Llei 4/2015 (art. 36.16)",
-        "D 10.b — Intervenció temporal (substància intervinguda)",
-        "A 20 — Pesada de substàncies estupefaents (amb testimoni; pes brut)",
-        "I 55 — Cadena de custòdia",
-        "A 66 — Lliurament bossa amb mostres per estudi toxicològic (si tramesa al laboratori)",
-        "M 06 — Oferiment mesura educativa al menor (si l'infractor és menor — suspensió sanció DA 5a)"
-      ]
+      "info_suspensio_80_2": "DA 5a LOPSC: si l'infractor és MENOR d'edat i, a sol·licitud seva i dels seus representants legals, se sotmet a tractament, rehabilitació o activitats de reeducació, la multa pot ser suspesa. Si abandona el tractament, s'executa la sanció. Per a majors d'edat, la LO 4/2015 NO preveu aquesta suspensió."
     },
     "fi_tinenca_36_16": {
       "final": true,
@@ -205,12 +197,6 @@
         "Cadena custòdia",
         "Si menor: informar del dret de suspensió de la sanció (DA 5a LOPSC)",
         "Si dubte quantitat → laboratori"
-      ],
-      "actes_viladecans": [
-        "D 10 — Denúncia infracció Llei 4/2015 (art. 36.16)",
-        "D 10.b — Intervenció temporal (substància intervinguda)",
-        "A 20 — Pesada de substàncies estupefaents (amb testimoni; pes brut)",
-        "I 55 — Cadena de custòdia"
       ]
     },
     "fi_368_2_menor": {
@@ -233,15 +219,7 @@
         "🔟 Atestat penal + Jutjat Guàrdia"
       ],
       "documentacio_clau": "Atestat + acta A-20 (pesada) + cadena custòdia + identificacions + diligència manifestacions",
-      "info_acta_A20": "L'acta A-20 ha de contenir: origen, embolcall, característiques externes, aparença, mètode obtenció, bàscula utilitzada (ABP/farmàcia amb segell), descripció detallada (paperina, pols blanca, bossa, paquet tabac…), circumstàncies localització (mans, butxaques, indumentària, cavitats naturals, llençat a terra), nombre unitats, pes en brut",
-      "actes_viladecans": [
-        "N 01 — Informació drets persona detinguda (delicte 368 CP)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes persona detinguda",
-        "A 20 — Pesada de substàncies estupefaents (pes brut, davant l'interessat)",
-        "A 66 — Lliurament bossa amb mostres per a estudi toxicològic",
-        "I 55 — Cadena de custòdia"
-      ]
+      "info_acta_A20": "L'acta A-20 ha de contenir: origen, embolcall, característiques externes, aparença, mètode obtenció, bàscula utilitzada (ABP/farmàcia amb segell), descripció detallada (paperina, pols blanca, bossa, paquet tabac…), circumstàncies localització (mans, butxaques, indumentària, cavitats naturals, llençat a terra), nombre unitats, pes en brut"
     },
     "fi_368_1_greu": {
       "final": true,
@@ -256,14 +234,6 @@
         "Cadena custòdia",
         "Atestat penal exhaustiu",
         "Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 01 — Informació drets persona detinguda (delicte 368.1 CP)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes persona detinguda",
-        "A 20 — Pesada de substàncies estupefaents",
-        "A 66 — Lliurament bossa amb mostres per a estudi toxicològic",
-        "I 55 — Cadena de custòdia"
       ]
     },
     "fi_368_1_no_greu": {
@@ -271,15 +241,7 @@
       "tipus": "penal",
       "titol": "🚔 DELICTE — Tràfic no greu dany (Art. 368.1 CP)",
       "pena": "Presó 1-3 anys + multa del tant al doble",
-      "accions": "Mateixes que 368.1 greu",
-      "actes_viladecans": [
-        "N 01 — Informació drets persona detinguda (delicte 368.1 CP)",
-        "A 54 — Sol·licitud de custòdia a PG-ME (el detingut es LLIURA a Mossos: la PL de Viladecans no fa custòdia ni practica la declaració)",
-        "PD 06 — Objectes persona detinguda",
-        "A 20 — Pesada de substàncies estupefaents",
-        "A 66 — Lliurament bossa amb mostres per a estudi toxicològic",
-        "I 55 — Cadena de custòdia"
-      ]
+      "accions": "Mateixes que 368.1 greu"
     },
     "fi_369_agreujat": {
       "final": true,
@@ -300,14 +262,6 @@
         "Investigació coordinada (intervencions telefòniques si cal)",
         "Atestat exhaustiu",
         "Possible competència Audiència Nacional"
-      ],
-      "actes_viladecans": [
-        "N 01 — Informació drets persona detinguda (delicte 369 CP)",
-        "PD 06 — Objectes persona detinguda",
-        "A 20 — Pesada de substàncies estupefaents",
-        "A 66 — Lliurament bossa amb mostres per a estudi toxicològic",
-        "I 55 — Cadena de custòdia",
-        "A 54 — Sol·licitud custòdia detingut per PG-ME (delicte de la seva competència)"
       ]
     },
     "fi_cultiu_36_18": {
@@ -327,13 +281,7 @@
         "7. Foto plantació in situ",
         "8. Identificar titular del lloc"
       ],
-      "diferencia_penal": "Si no és visible al públic / quantitat industrial / context tràfic → 368 CP penal",
-      "actes_viladecans": [
-        "D 10 — Denúncia infracció Llei 4/2015 (Art. 36.18)",
-        "A 10 — Acta genèrica (descripció de la plantació i visibilitat des de via pública)",
-        "A 20 — Pesada de substàncies estupefaents (si s'intervé)",
-        "I 55 — Cadena de custòdia"
-      ]
+      "diferencia_penal": "Si no és visible al públic / quantitat industrial / context tràfic → 368 CP penal"
     },
     "fi_tolerancia_36_19": {
       "final": true,
@@ -349,10 +297,6 @@
         "Documentar fets (testimonis, observació, càmeres)",
         "Comunicació Departament responsable establiment",
         "Si TITULAR PROMOU activament: passa a delicte 368 CP — atestat"
-      ],
-      "actes_viladecans": [
-        "D 10 — Denúncia infracció Llei 4/2015 (Art. 36.19 — preferent Llei 11/2009 Art. 47.b)",
-        "A 47 — Inspecció d'establiments (constatació de la tolerància al local)"
       ]
     },
     "fi_36_17_trasllat": {
@@ -362,11 +306,7 @@
       "concepte_butlleta": "El trasllat de persones, amb qualsevol tipus de vehicle, a llocs on es faciliti l'accés a drogues",
       "article_butlleta": "Art. 36.17 LOPSC",
       "import": "601 € - 30.000 €",
-      "info": "Sovint anomenat 'narcotaxi'. Cal acreditar el trasllat conscient amb finalitat de facilitar accés.",
-      "actes_viladecans": [
-        "D 10 — Denúncia infracció Llei 4/2015 (Art. 36.17)",
-        "A 18PL — Acta de declaració (testimonis del trasllat)"
-      ]
+      "info": "Sovint anomenat 'narcotaxi'. Cal acreditar el trasllat conscient amb finalitat de facilitar accés."
     },
     "fi_menor_drogues": {
       "final": true,
@@ -383,12 +323,6 @@
         "7. Si menor en RISC: trasllat dependències + comunicació tutors",
         "8. Si DESEMPARAMENT: trasllat + comunicació Fiscalia Menors + DGAIA",
         "9. Investigar origen substància (possible 368 CP per qui l'hagi proveït a menor)"
-      ],
-      "actes_viladecans": [
-        "D 10 — Denúncia infracció Llei 4/2015 (Art. 36.16; notificació als tutors)",
-        "M 06 — Oferiment al menor de mesura educativa (suspensió de la sanció)",
-        "A 20 — Pesada de substàncies estupefaents",
-        "A 35 — Entrega de menor als pares/tutors si escau"
       ]
     },
     "fi_troballa_a10": {
@@ -406,13 +340,7 @@
         "4. Tipificar com 'Faltes administratives Llei 4/15 — No es detecta cap infracció'",
         "5. UTPC s'encarrega tràmits DESTRUCCIÓ posterior"
       ],
-      "documentacio": "Acta A-10 oberta + cadena custòdia",
-      "actes_viladecans": [
-        "A 10 — Acta genèrica (troballa de substància sense propietari)",
-        "A 20 — Pesada de substàncies estupefaents",
-        "A 16 — Recollida-lliurament objectes",
-        "I 55 — Cadena de custòdia (fins a destrucció per UTPC)"
-      ]
+      "documentacio": "Acta A-10 oberta + cadena custòdia"
     },
     "fi_abandon_instruments": {
       "final": true,
@@ -425,11 +353,6 @@
         "Si autor identificat: butlletí + acta D-10",
         "Si no: recollida + servei neteja",
         "ATENCIÓ: xeringues — risc punxada accidental — usar pinces"
-      ],
-      "actes_viladecans": [
-        "D 10 — Denúncia infracció Llei 4/2015 (Art. 36.16 in fine)",
-        "D 10.b — Acta d'intervenció temporal (instruments abandonats)",
-        "I 55 — Cadena de custòdia"
       ]
     }
   },

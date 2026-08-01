@@ -13,7 +13,6 @@
     "Art. 267 CP (danys imprudents > 80.000 €)",
     "Art. 323 CP (danys béns patrimoni cultural)"
   ],
-
   "diferencia_clau": {
     "danys_lleus_263_1_paragraf_2": "≤ 400 € — multa 1-3 mesos — perseguible d'ofici (delicte lleu)",
     "danys_basics_263_1": "> 400 € — multa 6-24 mesos — d'ofici",
@@ -21,35 +20,70 @@
     "danys_informatics_264": "Esborrar dades/sistemes — presó 6 mesos - 3 anys",
     "danys_imprudents_267": "Només si imprudència GREU i quantia > 80.000 € — multa 3-9 mesos — NOMÉS perseguible amb denúncia de la persona agreujada"
   },
-
   "inici": "tipus_dany",
   "nodes": {
-
     "tipus_dany": {
       "titol": "Tipus de dany causat",
       "opcions": [
-        { "etiqueta": "Dany a bé MATERIAL (dolós)",                                    "va_a": "valor_dany" },
-        { "etiqueta": "Grafits / pintades (vandalisme)",                                "va_a": "fi_grafits_mixt" },
-        { "etiqueta": "Dany a bé PÚBLIC (mobiliari urbà, fonts, monuments)",             "va_a": "fi_263_2_servei_public" },
-        { "etiqueta": "Dany a PATRIMONI CULTURAL/HISTÒRIC",                             "va_a": "fi_323_patrimoni" },
-        { "etiqueta": "Dany INFORMÀTIC (dades, sistemes)",                              "va_a": "fi_264_informatic" },
-        { "etiqueta": "Dany per IMPRUDÈNCIA",                                           "va_a": "fi_267_imprudent" },
-        { "etiqueta": "Dany amb INCENDI",                                                "va_a": "fi_266_incendi" },
-        { "etiqueta": "Dany a SERVEI PÚBLIC ESSENCIAL (aigua, llum, transport…)",       "va_a": "fi_263_2_servei_public" },
-        { "etiqueta": "Dany animal (no propi) — maltractament animal",                   "va_a": "fi_337_animal" },
-        { "etiqueta": "Dany propi simulat (frau assegurança)",                           "va_a": "fi_frau_assegurança" }
+        {
+          "etiqueta": "Dany a bé MATERIAL (dolós)",
+          "va_a": "valor_dany"
+        },
+        {
+          "etiqueta": "Grafits / pintades (vandalisme)",
+          "va_a": "fi_grafits_mixt"
+        },
+        {
+          "etiqueta": "Dany a bé PÚBLIC (mobiliari urbà, fonts, monuments)",
+          "va_a": "fi_263_2_servei_public"
+        },
+        {
+          "etiqueta": "Dany a PATRIMONI CULTURAL/HISTÒRIC",
+          "va_a": "fi_323_patrimoni"
+        },
+        {
+          "etiqueta": "Dany INFORMÀTIC (dades, sistemes)",
+          "va_a": "fi_264_informatic"
+        },
+        {
+          "etiqueta": "Dany per IMPRUDÈNCIA",
+          "va_a": "fi_267_imprudent"
+        },
+        {
+          "etiqueta": "Dany amb INCENDI",
+          "va_a": "fi_266_incendi"
+        },
+        {
+          "etiqueta": "Dany a SERVEI PÚBLIC ESSENCIAL (aigua, llum, transport…)",
+          "va_a": "fi_263_2_servei_public"
+        },
+        {
+          "etiqueta": "Dany animal (no propi) — maltractament animal",
+          "va_a": "fi_337_animal"
+        },
+        {
+          "etiqueta": "Dany propi simulat (frau assegurança)",
+          "va_a": "fi_frau_assegurança"
+        }
       ]
     },
-
     "valor_dany": {
       "titol": "Valor del dany",
       "opcions": [
-        { "etiqueta": "≤ 400 € (DELICTE LLEU)",                                        "va_a": "fi_263_1_lleu" },
-        { "etiqueta": "> 400 € sense agreujants",                                       "va_a": "fi_263_1_basic" },
-        { "etiqueta": "> 400 € amb agreujants 263.2",                                   "va_a": "fi_263_2_agreujats" }
+        {
+          "etiqueta": "≤ 400 € (DELICTE LLEU)",
+          "va_a": "fi_263_1_lleu"
+        },
+        {
+          "etiqueta": "> 400 € sense agreujants",
+          "va_a": "fi_263_1_basic"
+        },
+        {
+          "etiqueta": "> 400 € amb agreujants 263.2",
+          "va_a": "fi_263_2_agreujats"
+        }
       ]
     },
-
     "fi_grafits_mixt": {
       "final": true,
       "tipus": "mixta",
@@ -71,15 +105,8 @@
         "6. SEGONS VALOR I BÉ: butlletí ordenança o atestat penal",
         "7. Si autor desconegut: arxiu provisional fins identificació"
       ],
-      "documentacio": "Acta + fotografies + valoració + denúncia perjudicat",
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 31 — Comprovació danys immobles",
-        "N 09 — Drets denunciat delicte lleu (JIDL)",
-        "N 10 — Citació JIDL"
-      ]
+      "documentacio": "Acta + fotografies + valoració + denúncia perjudicat"
     },
-
     "fi_263_1_lleu": {
       "final": true,
       "tipus": "penal",
@@ -92,17 +119,8 @@
         "Fotografies",
         "Atestat simplificat",
         "Si autor present: identificació + citació"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 28 — Manifestació per danys a vehicle (si vehicle)",
-        "A 33 — Comprovació danys vehicles",
-        "A 31 — Comprovació danys immobles",
-        "N 09 — Drets denunciat delicte lleu (JIDL)",
-        "N 10 — Citació JIDL"
       ]
     },
-
     "fi_263_1_basic": {
       "final": true,
       "tipus": "penal",
@@ -115,15 +133,8 @@
         "Fotografies exhaustives",
         "Detenció si flagrant",
         "Atestat penal + Jutjat"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 28 — Manifestació per danys a vehicle (si vehicle)",
-        "A 33 — Comprovació danys vehicles",
-        "A 31 — Comprovació danys immobles"
       ]
     },
-
     "fi_263_2_agreujats": {
       "final": true,
       "tipus": "penal",
@@ -142,13 +153,8 @@
         "Documentació fotogràfica",
         "Declaracions responsables servei afectat",
         "Atestat + Jutjat"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 31 — Comprovació danys immobles"
       ]
     },
-
     "fi_263_2_servei_public": {
       "final": true,
       "tipus": "penal",
@@ -167,13 +173,8 @@
         "Si flagrant: detenció",
         "Si càmeres ciutat: requeriment urgent",
         "Atestat penal + Jutjat"
-      ],
-      "actes_viladecans": [
-        "A 31 — Comprovació danys immobles",
-        "N 02 — Drets víctima (representant del servei/titular)"
       ]
     },
-
     "fi_323_patrimoni": {
       "final": true,
       "tipus": "penal",
@@ -188,13 +189,8 @@
         "Fotografies amb escala",
         "Atestat amb informe peritatge",
         "Jutjat"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 31 — Comprovació danys immobles"
       ]
     },
-
     "fi_264_informatic": {
       "final": true,
       "tipus": "penal",
@@ -212,12 +208,8 @@
         "6. Si IP coneguda: preservar logs",
         "7. Atestat + Jutjat"
       ],
-      "documentacio_clau": "Atestat + informe pericial digital + cadena custòdia digital",
-      "actes_viladecans": [
-        "N 02 — Drets víctima"
-      ]
+      "documentacio_clau": "Atestat + informe pericial digital + cadena custòdia digital"
     },
-
     "fi_267_imprudent": {
       "final": true,
       "tipus": "penal",
@@ -235,15 +227,8 @@
         "Valoració pericial",
         "Atestat si supera quantia",
         "Si menys de 80.000 €: via civil — informar perjudicat"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 28 — Manifestació per danys a vehicle (si vehicle)",
-        "A 33 — Comprovació danys vehicles",
-        "A 31 — Comprovació danys immobles"
       ]
     },
-
     "fi_266_incendi": {
       "final": true,
       "tipus": "penal",
@@ -257,13 +242,8 @@
         "Avisar Mossos DIC",
         "Pericial especialitzat causes incendi",
         "Atestat + Jutjat Guàrdia"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima",
-        "A 31 — Comprovació danys immobles"
       ]
     },
-
     "fi_337_animal": {
       "final": true,
       "tipus": "penal",
@@ -279,12 +259,8 @@
         "Si animal abandonat: Servei municipal animals + acta",
         "Comunicació SEPRONA (Guàrdia Civil) si rural",
         "Atestat + Jutjat"
-      ],
-      "actes_viladecans": [
-        "N 02 — Drets víctima (propietari de l'animal, si és aliè)"
       ]
     },
-
     "fi_frau_assegurança": {
       "final": true,
       "tipus": "penal",
@@ -297,10 +273,6 @@
         "Pericial",
         "Coordinació amb companyia asseguradora",
         "Atestat penal per estafa"
-      ],
-      "actes_viladecans": [
-        "A 28 — Manifestació per danys a vehicle",
-        "A 33 — Comprovació danys vehicles"
       ]
     }
   },

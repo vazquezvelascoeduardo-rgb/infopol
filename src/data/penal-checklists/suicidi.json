@@ -12,19 +12,16 @@
     "Art. 195 CP (omissió de socors)",
     "Llei 14/2010 (LDOIA — situacions de risc de menors)"
   ],
-
   "principi_clau": "L'objectiu PRIORITARI és preservar la vida. La crisi suïcida és emergència sanitària, no policial-disciplinària. Coordinació amb Salut Mental imprescindible.",
-
   "recursos_clau": {
-    "024": "Telèfon atenció conducta suïcida — 24h gratuït — assistència especialitzada",
     "112": "Emergències general",
+    "024": "Telèfon atenció conducta suïcida — 24h gratuït — assistència especialitzada",
     "061": "Emergències sanitàries Catalunya",
     "telefon_esperanza": "717 003 717 (Telèfon de l'Esperança)",
     "112_text": "112 per persones amb dificultats auditives (SMS)",
     "fundacio_anar": "900 20 20 10 (menors)",
     "salut_mental": "Centre Salut Mental referència"
   },
-
   "factors_risc": [
     "Intents previs (× 40 risc)",
     "Ideació suïcida verbal o escrita",
@@ -37,35 +34,70 @@
     "Antecedents familiars",
     "Context bullying / assetjament (especialment menors)"
   ],
-
   "inici": "situacio",
   "nodes": {
-
     "situacio": {
       "titol": "Quina situació tens davant?",
       "opcions": [
-        { "etiqueta": "Persona en CRISI ACTIVA — encara viva, considera suïcidar-se ARA",   "va_a": "crisi_activa_lloc" },
-        { "etiqueta": "TEMPTATIVA en curs — persona ferida amb intent",                     "va_a": "fi_temptativa_curs" },
-        { "etiqueta": "Suïcidi CONSUMAT (ja mort) — anar a checklist Cadàver",               "va_a": "fi_remetre_cadaver" },
-        { "etiqueta": "IDEACIÓ verbalitzada (ha dit 'em vull matar')",                       "va_a": "fi_ideacio" },
-        { "etiqueta": "Familiar/conegut detecta indicadors — demana ajuda",                  "va_a": "fi_familiar_alerta" },
-        { "etiqueta": "Avís de tercer per persona desapareguda + indicis suïcides",         "va_a": "fi_remetre_desaparicio" },
-        { "etiqueta": "Menor amb ideació o conducta autolesiva",                            "va_a": "fi_menor_suicidi" }
+        {
+          "etiqueta": "Persona en CRISI ACTIVA — encara viva, considera suïcidar-se ARA",
+          "va_a": "crisi_activa_lloc"
+        },
+        {
+          "etiqueta": "TEMPTATIVA en curs — persona ferida amb intent",
+          "va_a": "fi_temptativa_curs"
+        },
+        {
+          "etiqueta": "Suïcidi CONSUMAT (ja mort) — anar a checklist Cadàver",
+          "va_a": "fi_remetre_cadaver"
+        },
+        {
+          "etiqueta": "IDEACIÓ verbalitzada (ha dit 'em vull matar')",
+          "va_a": "fi_ideacio"
+        },
+        {
+          "etiqueta": "Familiar/conegut detecta indicadors — demana ajuda",
+          "va_a": "fi_familiar_alerta"
+        },
+        {
+          "etiqueta": "Avís de tercer per persona desapareguda + indicis suïcides",
+          "va_a": "fi_remetre_desaparicio"
+        },
+        {
+          "etiqueta": "Menor amb ideació o conducta autolesiva",
+          "va_a": "fi_menor_suicidi"
+        }
       ]
     },
-
     "crisi_activa_lloc": {
       "titol": "Localització de la persona en crisi",
       "opcions": [
-        { "etiqueta": "Lloc accessible (carrer, vorera, plaça)",                            "va_a": "fi_crisi_carrer" },
-        { "etiqueta": "Domicili (a la finestra, balcó, dins amb porta tancada)",            "va_a": "fi_crisi_domicili" },
-        { "etiqueta": "PONT, edifici alt, terrassa…",                                        "va_a": "fi_crisi_alçada" },
-        { "etiqueta": "Vies tren / metro",                                                   "va_a": "fi_crisi_via_tren" },
-        { "etiqueta": "Mar / riu / aigua",                                                   "va_a": "fi_crisi_aigua" },
-        { "etiqueta": "Amb ARMA (foc, blanca)",                                              "va_a": "fi_crisi_arma" }
+        {
+          "etiqueta": "Lloc accessible (carrer, vorera, plaça)",
+          "va_a": "fi_crisi_carrer"
+        },
+        {
+          "etiqueta": "Domicili (a la finestra, balcó, dins amb porta tancada)",
+          "va_a": "fi_crisi_domicili"
+        },
+        {
+          "etiqueta": "PONT, edifici alt, terrassa…",
+          "va_a": "fi_crisi_alçada"
+        },
+        {
+          "etiqueta": "Vies tren / metro",
+          "va_a": "fi_crisi_via_tren"
+        },
+        {
+          "etiqueta": "Mar / riu / aigua",
+          "va_a": "fi_crisi_aigua"
+        },
+        {
+          "etiqueta": "Amb ARMA (foc, blanca)",
+          "va_a": "fi_crisi_arma"
+        }
       ]
     },
-
     "fi_temptativa_curs": {
       "final": true,
       "tipus": "procediment",
@@ -86,13 +118,8 @@
         "12. Atestat: DILIGÈNCIA d'auxili — NO és atestat penal contra la víctima (el suïcidi i la temptativa NO són delicte; només ho és induir-hi o cooperar-hi, art. 143 CP)"
       ],
       "documentacio": "Diligència auxili + parte mèdic + identificació + comunicació Salut Mental",
-      "actes_viladecans": [
-        "AV 01 — Trasllat voluntari (a centre sanitari)",
-        "Acta Serveis Socials (persones vulnerables/sense llar)"
-      ],
       "internament_involuntari_763_LEC": "Si la persona, un cop estabilitzada, NO accepta tractament i continua en risc imminent: el metge pot sol·licitar internament urgent (763 LEC). Comunicació Jutjat en 24h."
     },
-
     "fi_crisi_carrer": {
       "final": true,
       "tipus": "procediment",
@@ -111,10 +138,6 @@
         "11. Buscar PERSONA SIGNIFICATIVA (família, amic) si la persona ho accepta",
         "12. Trasllat voluntari hospital o, si rebuig + risc imminent: trasllat involuntari per indicació facultativa amb auxili policial (art. 763 LEC — internament urgent, comunicació al Jutjat en 24h)"
       ],
-      "actes_viladecans": [
-        "AV 01 — Trasllat voluntari (a centre sanitari)",
-        "Acta Serveis Socials (persones vulnerables/sense llar)"
-      ],
       "frases_utils": [
         "'Veig que estàs passant un moment molt dur'",
         "'No estàs sol/a en això'",
@@ -128,7 +151,6 @@
         "❌ 'Demà ho veuràs diferent'"
       ]
     },
-
     "fi_crisi_domicili": {
       "final": true,
       "tipus": "procediment",
@@ -144,12 +166,8 @@
         "8. Si arma al lloc: precaució extrema, sol·licitar suport",
         "9. Si finalment desisteix voluntàriament: no detenció — SÍ trasllat Salut Mental",
         "10. Si menor: DGAIA + tutors"
-      ],
-      "actes_viladecans": [
-        "AV 01 — Trasllat voluntari (a centre sanitari)"
       ]
     },
-
     "fi_crisi_alçada": {
       "final": true,
       "tipus": "procediment",
@@ -168,7 +186,6 @@
         "10. Si tem els bombers / sirenes: silenciar discretament"
       ]
     },
-
     "fi_crisi_via_tren": {
       "final": true,
       "tipus": "procediment",
@@ -183,7 +200,6 @@
         "7. Atenció a possible electrificació (catenàries)"
       ]
     },
-
     "fi_crisi_aigua": {
       "final": true,
       "tipus": "procediment",
@@ -196,7 +212,6 @@
         "5. Coordinació amb embarcacions"
       ]
     },
-
     "fi_crisi_arma": {
       "final": true,
       "tipus": "procediment",
@@ -214,7 +229,6 @@
         "9. ÚS DE FORÇA: només com a últim recurs proporcional (legítima defensa o tercers)"
       ]
     },
-
     "fi_ideacio": {
       "final": true,
       "tipus": "procediment",
@@ -230,13 +244,8 @@
         "7. Família/amic de confiança presència",
         "8. Si refusa tot: anotació al servei + comunicació Salut Mental + seguiment",
         "9. Recursos: 024, 061, telèfon esperança"
-      ],
-      "actes_viladecans": [
-        "AV 01 — Trasllat voluntari (a centre sanitari)",
-        "Acta Serveis Socials (persones vulnerables/sense llar)"
       ]
     },
-
     "fi_familiar_alerta": {
       "final": true,
       "tipus": "procediment",
@@ -250,7 +259,6 @@
         "6. Si risc imminent: actuació crisi"
       ]
     },
-
     "fi_menor_suicidi": {
       "final": true,
       "tipus": "procediment",
@@ -264,23 +272,14 @@
         "5. Si autolesions sense intent: no minimitzar, derivació especialitzada",
         "6. Comunicació Fiscalia Menors si menor desemparat / sense adequada cura",
         "7. Recursos: ANAR (900 20 20 10), CSMIJ"
-      ],
-      "actes_viladecans": [
-        "AV 01 — Trasllat voluntari (a centre sanitari)"
       ]
     },
-
     "fi_remetre_cadaver": {
       "final": true,
       "tipus": "procediment",
       "titol": "🔀 Anar a checklist 'Cadàver'",
-      "accio": "Si suïcidi consumat: protocol Cadàver — preservació, Mossos DIC, aixecament judicial.",
-      "actes_viladecans": [
-        "A 60 — Aixecament de cadàver",
-        "A 18PL — Declaracions"
-      ]
+      "accio": "Si suïcidi consumat: protocol Cadàver — preservació, Mossos DIC, aixecament judicial."
     },
-
     "fi_remetre_desaparicio": {
       "final": true,
       "tipus": "procediment",
