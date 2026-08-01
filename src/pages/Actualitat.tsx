@@ -30,9 +30,10 @@ export default function Actualitat() {
       <Capcalera
         kicker="Actualitat 2025–2026"
         titol="Actualitat"
-        lead="Càrrecs vigents, premis, esports i fets clau que cauen a l'examen. Actualitzat el maig del 2026."
+        lead="Càrrecs vigents, premis, esports i fets clau que cauen a l'examen. Actualitzat l'1 d'agost del 2026."
         xifres={[
           { valor: totalQuestions.toLocaleString('ca-ES'), label: 'preguntes' },
+          { valor: String(topics.length), label: 'reculls' },
           { valor: String(BLOCS.length), label: 'blocs temàtics' },
         ]}
       />
@@ -50,6 +51,44 @@ export default function Actualitat() {
             <span aria-hidden>{b.ico}</span>
             {b.label}
           </span>
+        ))}
+      </div>
+
+      {/* Cada recull, per separat. Abans només hi havia el test mesclat i
+          no hi havia manera de fer només l'últim, que és el que interessa
+          quan ja t'has estudiat la resta. */}
+      <Mono size={10} color={V.muted} style={{ letterSpacing: 1.6 }}>ELS RECULLS</Mono>
+      <div style={{ display: 'grid', gap: 10, margin: '11px 0 22px' }}>
+        {topics.map((tp) => (
+          <button
+            key={tp.slug}
+            type="button"
+            onClick={() => nav(`/actualitat/${tp.slug}`)}
+            style={{
+              width: '100%', textAlign: 'left', cursor: 'pointer',
+              border: `1px solid ${V.border}`, borderRadius: 18, padding: 16,
+              background: V.surface, color: V.ink,
+              display: 'flex', alignItems: 'center', gap: 14,
+            }}>
+            <span style={{
+              width: 42, height: 42, flexShrink: 0, borderRadius: 13, background: V.surface2,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20,
+            }} aria-hidden>{tp.icon}</span>
+            <span style={{ flex: 1, minWidth: 0 }}>
+              <span style={{ display: 'block', fontSize: 15.5, fontWeight: 800, letterSpacing: -0.3 }}>
+                {tp.title}
+              </span>
+              <span style={{ display: 'block', fontSize: 12.5, color: V.muted, marginTop: 3, lineHeight: 1.35 }}>
+                {tp.description}
+              </span>
+            </span>
+            <span style={{
+              flexShrink: 0, fontFamily: V.mono, fontSize: 11, fontWeight: 700,
+              color: V.muted, background: V.surface2, borderRadius: 999, padding: '5px 10px',
+            }}>
+              {tp.questions.length}
+            </span>
+          </button>
         ))}
       </div>
 

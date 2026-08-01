@@ -352,6 +352,13 @@ export default function Academia() {
             icona="globe" titol="Cultura general" sub="16 àrees per repassar abans del test"
             to="/cultura-general" destacat
           />
+          {/* Actualitat també destacada i just a sota: la pàgina existia
+              però no hi havia cap enllaç enlloc, així que no hi arribava
+              ningú. */}
+          <AccesRapid
+            icona="news" titol="Actualitat" sub="El que ha passat i cau a l'examen"
+            to="/actualitat" destacat
+          />
           <AccesRapid icona="brain" titol="Debilitats" sub="Els temes que et costen" to={RUTES[cos].debilitats} />
           <AccesRapid icona="cards" titol="Flashcards" sub="Repàs espaiat" to={RUTES[cos].flashcards} />
           <AccesRapid icona="medal" titol="Reptes" sub="Missions i objectius" to="/retos" />
