@@ -160,8 +160,26 @@ export function Markdown({ source }: { source: string }) {
  * criteri que fa servir l'app.
  */
 export function mdToHtml(source: string): string {
+  // Les cometes també s'escapen: sense això, un enllaç com
+  // `[x](" onmouseover="…)` tancava l'atribut href i n'hi afegia un de
+  // seu. El text del xat el redacta un model, i un model es pot
+  // convèncer d'escriure gairebé qualsevol cosa.
   const esc = (t: string) =>
-    t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    t
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+
+  /** Només deixem passar enllaços que porten a algun lloc de debò. */
+  const urlSegura = (u: string): string | null => {
+    const net = u.trim();
+    if (/^(https?:|mailto:)/i.test(net)) return net;
+    // Relatius dins de la mateixa app, però mai `//host` ni `javascript:`.
+    if (/^\/(?!\/)/.test(net) || /^#/.test(net)) return net;
+    return null;
+  };
 
   // Format en línia. S'escapa PRIMER i després es posen les etiquetes,
   // perquè el contingut de les fitxes no pugui injectar HTML pel seu compte.
@@ -171,7 +189,13 @@ export function mdToHtml(source: string): string {
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
       .replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>')
       .replace(/`([^`]+)`/g, '<code>$1</code>')
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>');
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_tot, text: string, url: string) => {
+        const segura = urlSegura(url);
+        // Si no és una adreça acceptable, es queda el text i prou.
+        return segura
+          ? `<a href="${segura}" target="_blank" rel="noreferrer noopener">${text}</a>`
+          : text;
+      });
 
   const linies = source.replace(/\r\n/g, '\n').split('\n');
   const out: string[] = [];
