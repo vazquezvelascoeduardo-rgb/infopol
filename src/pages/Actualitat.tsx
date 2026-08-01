@@ -33,7 +33,6 @@ export default function Actualitat() {
         lead="Càrrecs vigents, premis, esports i fets clau que cauen a l'examen. Actualitzat l'1 d'agost del 2026."
         xifres={[
           { valor: totalQuestions.toLocaleString('ca-ES'), label: 'preguntes' },
-          { valor: String(topics.length), label: 'reculls' },
           { valor: String(BLOCS.length), label: 'blocs temàtics' },
         ]}
       />
@@ -57,6 +56,8 @@ export default function Actualitat() {
       {/* Cada recull, per separat. Abans només hi havia el test mesclat i
           no hi havia manera de fer només l'últim, que és el que interessa
           quan ja t'has estudiat la resta. */}
+      {topics.length > 1 && (
+        <>
       <Mono size={10} color={V.muted} style={{ letterSpacing: 1.6 }}>ELS RECULLS</Mono>
       <div style={{ display: 'grid', gap: 10, margin: '11px 0 22px' }}>
         {topics.map((tp) => (
@@ -91,6 +92,8 @@ export default function Actualitat() {
           </button>
         ))}
       </div>
+        </>
+      )}
 
       <button
         type="button"

@@ -59,7 +59,6 @@ import mossosC3 from './mossos-c3';
 import mossosC4 from './mossos-c4';
 import mossosC5 from './mossos-c5';
 import actualitatPl2026 from './actualitat-pl-2026';
-import actualitatJulAgo2026 from './actualitat-jul-ago-2026';
 import calafell from './calafell';
 import sabadell from './sabadell';
 import rgc1428 from './rgc-1428-2003';
@@ -135,7 +134,6 @@ export const TOPICS: TestTopic[] = [
   mossosC4,
   mossosC5,
   actualitatPl2026,
-  actualitatJulAgo2026,
   calafell,
   sabadell,
   rgc1428,
