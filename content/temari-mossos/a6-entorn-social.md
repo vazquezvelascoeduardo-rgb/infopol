@@ -40,6 +40,28 @@ Immigració ==**estrangera**==: Marroc, Romania, Amèrica Llatina, Àsia. Divers
 La pregunta acostuma a ser sobre la ==**segona onada**==: la de la ==postguerra fins als anys 70==, que venia d'==**Andalusia i altres regions espanyoles**==. No confonguis-la amb la tercera, que ja és estrangera.
 :::
 
+### Els models d'integració
+
+:::articles
+Assimilació | El que es critica
+L'immigrant ha d'adoptar la cultura d'acollida i abandonar la pròpia. És el model ==**criticat per imposar la pèrdua d'identitat**==.
+
+Melting pot | El gresol
+==**Natius i immigrants creen una nova cultura comuna**==, resultat de la barreja de totes dues.
+
+Multiculturalisme
+Les cultures conviuen i es mantenen diferenciades, amb reconeixement de la diversitat.
+
+Interculturalitat | El model de referència
+Va més enllà de la convivència: busca la ==interacció i l'intercanvi== entre cultures en un marc de drets comuns.
+
+Pacte nacional per a la immigració | 2008
+És del ==**2008**==, i fixa el consens polític i social sobre la gestió de la immigració a Catalunya.
+
+De temporal a permanent | El canvi de perfil
+El pas d'una immigració d'homes sols a una ==immigració familiar== comporta una immigració de tipus ==**permanent**==: qui ve amb la família, es queda.
+:::
+
 ### El marc legal de l'acollida
 
 :::articles
@@ -93,8 +115,22 @@ Llei 11/2014 | LGBTI
 Per garantir els drets ==**LGBTI**== i per eradicar l'homofòbia, la bifòbia i la transfòbia.
 :::
 
+:::articles
+LO 3/2007 | La llei estatal d'igualtat
+La ==**Llei orgànica 3/2007, de 22 de març**==, regula la ==**igualtat efectiva entre dones i homes**==.
+
+RDL 6/2019 | El permís de l'altre progenitor
+El ==**permís de 16 setmanes per a l'altre progenitor**== s'estableix mitjançant el ==**Reial decret llei 6/2019, d'1 de març**==.
+
+Llei 12/2007 | Serveis socials
+És la ==**llei catalana de referència en matèria de serveis socials**==.
+
+L'Estat del benestar | Les quatre dimensions
+==Transferències socials==, ==serveis==, ==intervencions normatives== i l'==**estímul a la creació d'ocupació**==.
+:::
+
 :::clau
-L'any de l'==**ICD és el 1989**==. I les tres lleis catalanes d'igualtat s'ordenen per data: ==**5/2008** violència masclista== · ==**11/2014** LGBTI== · ==**17/2015** igualtat efectiva==.
+L'any de l'==**ICD és el 1989**==. I les tres lleis catalanes d'igualtat s'ordenen per data: ==**5/2008** violència masclista== · ==**11/2014** LGBTI== · ==**17/2015** igualtat efectiva==. La ==**LO 3/2007 és l'estatal**==, i la de ==**serveis socials, la 12/2007**==.
 :::
 
 :::avis

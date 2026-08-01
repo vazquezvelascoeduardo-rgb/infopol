@@ -33,6 +33,40 @@ El concepte de ==**bretxa digital**== fa referència a les ==**desigualtats en l
 
 Afecta especialment ==gent gran, població amb rendes baixes i zones rurals==, i té conseqüències directes en l'accés a drets: administració electrònica, sanitat, educació i feina.
 
+## Què han canviat les TIC
+> Els efectes que es pregunten
+
+:::articles
+A la comunicació | L'efecte principal
+L'==**augment de la rapidesa i la immediatesa**==: la distància deixa de ser una barrera i la informació circula a l'instant.
+
+A l'economia | El sector que més creix
+El sector que més ha crescut gràcies a les TIC és el de ==**serveis**==: comerç electrònic, banca, logística, oci i administració.
+
+Internet de les coses (IoT) | Què és
+Una ==**xarxa de dispositius connectats que poden intercanviar dades**== entre ells sense intervenció humana: sensors, electrodomèstics, vehicles, càmeres.
+
+Safety i security | Dues paraules, dues coses
+En anglès es distingeixen: ==**safety és la seguretat física o ambiental**== (que no et facis mal) i ==**security és la seguretat lògica i el control d'accés**== (que ningú entri on no ha d'entrar). En català les dues es diuen "seguretat", i per això es pregunta.
+:::
+
+## L'administració electrònica i la signatura
+> Relacionar-se amb l'Administració per internet
+
+:::articles
+Llei 39/2015 | L'obligació d'anar per via electrònica
+La ==**Llei 39/2015, d'1 d'octubre**==, del procediment administratiu comú, estableix la ==**relació electrònica obligatòria amb les persones jurídiques**== (i amb altres col·lectius obligats), que ja no poden presentar paper.
+
+Signatura electrònica | Quina val com la de mà
+La que té el ==**mateix valor jurídic que la manuscrita**== és la ==**signatura reconeguda o qualificada**==: la basada en un certificat qualificat i generada amb un dispositiu segur.
+
+Reglament eIDAS | La norma europea
+La signatura electrònica reconeguda a la Unió Europea la regula el ==**Reglament (UE) 910/2014**==, conegut com a ==**eIDAS**==.
+
+Videovigilància | Les dues normes
+La videovigilància en espais públics està regulada per la ==**LO 4/1997**== i la ==**LO 7/2021**==.
+:::
+
 ## Protecció de dades
 > El marc normatiu
 

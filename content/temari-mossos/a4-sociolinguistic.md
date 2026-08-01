@@ -30,10 +30,18 @@ Ramon Llull | Segles XIII-XIV
 Crea la ==prosa culta catalana== i converteix la llengua en instrument de filosofia i ciència.
 
 Les quatre grans cròniques | Segles XIII-XIV
-Jaume I, Bernat Desclot, Ramon Muntaner i Pere el Cerimoniós.
+Jaume I, Bernat Desclot, Ramon Muntaner i Pere el Cerimoniós. La ==**més extensa és la Crònica de Ramon Muntaner**==.
+
+Bernat Metge | Segle XIV
+Autor de ==**Lo somni**==, considerada la ==**primera obra humanística d'Espanya**==.
 
 Tirant lo Blanc | Segle XV
 Obra cabdal del ==**segle d'Or**== valencià, escrita per ==**Joanot Martorell**==.
+:::
+
+:::articles
+Concili de Tours | 813
+Va manar a l'Església ==**predicar en la llengua del poble**==, i és la fita que documenta que el llatí ja no s'entenia: el naixement reconegut de les llengües romàniques.
 :::
 
 :::avis
@@ -91,6 +99,24 @@ Les tres normes que cauen, amb els seus números: ==**article 6 de l'Estatut**==
 
 :::avis
 El ==**deure de conèixer**== de l'article 6.2 EAC es refereix a ==**les dues llengües oficials**==, no només al català. És la trampa més repetida d'aquest bloc, i la mateixa que apareix al temari de Policia Local.
+:::
+
+## Les prohibicions i la resistència
+> Les dates de la persecució
+
+:::articles
+1700 | L'edicte de Lluís XIV
+==**Prohibeix el català en els documents públics al Rosselló**==, després del tractat dels Pirineus.
+
+1707 i 1716 | Els decrets de Nova Planta
+El de ==**València és del 1707**==; el de ==**Catalunya, del 1716**==. Substitueixen les institucions pròpies i imposen el castellà a l'Administració i la justícia.
+
+1961 | Òmnium Cultural
+Es crea l'any ==**1961**==, en plena dictadura, per promoure la llengua i la cultura catalanes.
+:::
+
+:::clau
+Les dues dates de Nova Planta no són la mateixa i s'intercanvien: ==**València 1707**== · ==**Catalunya 1716**==. I l'edicte de ==**Lluís XIV al Rosselló és del 1700**==.
 :::
 
 ## La realitat sociolingüística
