@@ -54,6 +54,40 @@ S'apliquen ==en defecte de llei i de costum==, sens perjudici del seu ==caràcte
 L'ordre de l'article 1.1 del Codi civil es demana literalment: ==**la llei, el costum i els principis generals del dret**==. La ==**jurisprudència no és font del dret**==: ==complementa l'ordenament== amb la doctrina reiterada del Tribunal Suprem.
 :::
 
+:::articles
+Directes i indirectes | La primera classificació
+Les fonts del dret es divideixen en ==**directes i indirectes**==. Dins de les directes, el ==**costum i els principis generals del dret**== són les de ==**caràcter subsidiari**==: només s'apliquen a falta de llei.
+
+Reserva de llei | El mètode
+És el nom del ==**mètode pel qual la Constitució estableix que determinades matèries només es poden regular per llei**==.
+
+Supletorietat | El dret estatal
+Pel principi de ==**supletorietat o subsidiarietat**==, ==**s'aplica el dret estatal quan no n'hi ha d'autonòmic**==.
+
+Tractat internacional | Què és
+És un ==**acord escrit entre un o més estats pel qual les parts signants adquireixen drets i obligacions**==. La seva conclusió té ==**tres fases**==: la ==**negociació**==, l'==**adopció i autenticació**== i la ==**manifestació del consentiment**==.
+:::
+
+## Com és l'ordenament jurídic
+> Característiques i principis
+
+:::articles
+Les cinc característiques
+==**Unitat, coherència, plenitud, dinamisme i pluralitat**==.
+
+Plenitud | Què vol dir
+Que ==**hi ha d'haver una norma aplicable per a cada supòsit**==: l'ordenament no pot deixar buits.
+
+Rang jeràrquic | Què vol dir
+És la ==**posició d'una norma dins de l'ordenament jurídic**==.
+
+Els principis per triar la norma aplicable
+==**Jerarquia, temporalitat, especialitat i competència**==.
+
+Principi de competència | El més preguntat
+És el que determina la norma aplicable ==**segons quin òrgan tingui atribuïda la competència per regular aquella matèria**==. És el que ordena la relació entre normes estatals i autonòmiques, que no van per jerarquia sinó per competència.
+:::
+
 ## Les normes amb rang de llei del Govern
 > Decret llei i decret legislatiu
 

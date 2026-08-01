@@ -40,6 +40,32 @@ Funcions | art. 55.2
 Aprovar les lleis i els ==pressupostos==, ==elegir el president de la Generalitat==, ==controlar el Govern== i ==designar els senadors== que representen la Generalitat al Senat.
 :::
 
+## Com funciona el Parlament per dins
+> Mesa, grups i comissions
+
+:::articles
+La Mesa | art. 59
+L'article ==**59 de l'EAC**== estableix que el Parlament ha de tenir un ==president i una mesa==. La Mesa la formen ==**1 president, 2 vicepresidents i 4 secretaris**==.
+
+Grups parlamentaris | El mínim
+Calen ==**5 diputats com a mínim**== per constituir-ne un.
+
+Comissions | Dos tipus
+Poden ser ==**permanents i no permanents**==.
+
+Sessions extraordinàries | Qui les demana
+El Parlament es pot reunir en sessió extraordinària a petició d'==**una quarta part dels diputats**==, del president de la Generalitat o del Govern.
+
+Circumscripcions | On hi ha més diputats
+Les quatre circumscripcions són les províncies, i ==**Barcelona és la que té més diputats**==.
+
+Fur, segons on | Una distinció fina
+Les causes penals contra un diputat del Parlament ==**dins de Catalunya**== les jutja el ==**Tribunal Superior de Justícia de Catalunya**==; ==**fora de Catalunya**==, el ==**Tribunal Suprem**==.
+
+Retirar una reforma de l'Estatut
+El Parlament pot retirar una proposta de reforma per ==**majoria absoluta**==.
+:::
+
 ## La Presidència de la Generalitat
 > Articles 67 i 68 EAC
 
@@ -48,7 +74,7 @@ Naturalesa | art. 67.1
 Té la ==**més alta representació de la Generalitat**== i també la ==**representació ordinària de l'Estat a Catalunya**==. ==Dirigeix l'acció del Govern==.
 
 Elecció | art. 67.2 i 67.3
-==**Elegit pel Parlament d'entre els seus membres**== i ==**nomenat pel Rei**==. Cal ==**majoria absoluta en primera votació**==; si no, ==majoria simple== 48 hores després. Si en ==**dos mesos**== ningú no surt elegit, el ==Parlament queda dissolt automàticament==.
+El president ==**ha de ser diputat al Parlament**==: és ==**elegit pel Parlament d'entre els seus membres**== i ==**nomenat pel Rei**==. Cal ==**majoria absoluta en primera votació**==; si no, ==majoria simple== 48 hores després. Si en ==**dos mesos**== ningú no surt elegit, el ==Parlament queda dissolt automàticament==.
 
 Competències | art. 67.6
 ==**Nomenar i separar els consellers**==, convocar i presidir el Govern, ==dissoldre anticipadament el Parlament==, ==signar les lleis== i ordenar-ne la publicació.
@@ -63,6 +89,10 @@ La pregunta clàssica és "per a què és competent el president": la resposta q
 
 És l'==**òrgan superior col·legiat que dirigeix l'acció política i l'Administració de la Generalitat**==. Exerceix la ==**funció executiva i la potestat reglamentària**==. El componen el ==president, el conseller primer (si escau) i els consellers==.
 
+:::avis
+Perquè una norma o disposició de l'Administració de la Generalitat ==**entri en vigor cal publicar-la al Diari Oficial de la Generalitat de Catalunya (DOGC)**==. Sense publicació no hi ha vigència: és la mateixa regla que al BOE per a les normes estatals.
+:::
+
 ## Les institucions estatutàries
 > Articles 76 a 82 EAC
 
@@ -74,7 +104,7 @@ Síndic de Greuges | art. 78 i 79
 ==Protegeix i defensa els drets i llibertats== reconeguts per la Constitució i l'Estatut, i ==**supervisa amb caràcter exclusiu**== l'activitat de l'Administració de la Generalitat i la de l'Administració local de Catalunya. És ==**elegit pel Parlament per majoria de tres cinquenes parts**==, per un mandat de ==**sis anys**==, i ==**no pot ser reelegit**==.
 
 Sindicatura de Comptes | art. 80 i 81
-==Òrgan fiscalitzador extern== dels comptes, la gestió econòmica i el control d'eficiència de la Generalitat, dels ens locals i de la resta del sector públic. ==Depèn orgànicament del Parlament==. Els síndics els designa el Parlament per ==**3/5**==, per ==sis anys==.
+==Òrgan fiscalitzador extern== dels comptes, la gestió econòmica i el control d'eficiència de la Generalitat, dels ens locals i de la resta del sector públic. ==Depèn orgànicament del Parlament==. El seu ==**Ple el formen 7 síndics**==, designats pel Parlament per ==**3/5**==, per ==sis anys==.
 
 Consell de l'Audiovisual de Catalunya | art. 82
 L'==**autoritat reguladora independent en l'àmbit de la comunicació audiovisual pública i privada**==.
