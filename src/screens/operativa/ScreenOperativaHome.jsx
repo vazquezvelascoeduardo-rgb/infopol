@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
+import { DAILY_NEWS } from '../../data/news';
 
 function BigCatCard({ cat, icon, kicker, title, desc, cta, onClick }) {
   const k = T.cat[cat];
@@ -117,6 +118,28 @@ export default function ScreenOperativaHome() {
             <Chip icon="car" label="Control trànsit" />
             <Chip icon="siren" label="Detenció" />
           </div>
+        </div>
+      </div>
+
+      {/* Notícies del dia */}
+      <div style={{ padding: '14px 0 0' }}>
+        <SectionHead kicker="02 d'agost · 2026" kickerColor={T.cat.atajos.solid} title="Notícies del dia" action="Tot →" />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {DAILY_NEWS.map((n) => (
+            <div key={n.id} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.atajos.solid}`, boxShadow: T.shadow.card }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.atajos.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.dateLabel}</span>
+              </div>
+              <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+              <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: T.cat.atajos.solid, marginTop: 6, display: 'block', fontWeight: 700, textDecoration: 'none' }}>
+                  Llegir la notícia completa →
+                </a>
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
