@@ -26,56 +26,62 @@ type Mode = {
   to: string;
   insignia?: string;
   destacat?: boolean;
+  /** El que abans era una targeta pròpia i ara viu dins d'aquest verb. */
+  dins?: { label: string; to: string }[];
   /** Mòdul de pagament al qual pertany, si un dia n'hi ha (lib/pla.ts). */
   modul?: ModulPro;
 };
 
 /**
- * Les cinc maneres d'estudiar. Són exactament les de l'app mòbil —
- * mateixos títols, mateix ordre i mateixos destins — perquè qui faci
- * servir les dues no hagi d'aprendre-se-les dues vegades.
+ * Tres verbs, no nou portes.
+ *
+ * Hi havia cinc targetes a dalt i cinc accessos ràpids al costat, i entre
+ * les dues llistes sortien dotze maneres d'entrar que en realitat són tres
+ * moments: llegir-t'ho, posar-t'ho a prova i tornar-hi. Qui porta mig any
+ * s'hi orienta; qui entra el primer dia, no.
+ *
+ * El que hi havia no desapareix: passa a dins del verb que li toca, en
+ * una fila d'enllaços petits sota cada targeta.
  */
 function modes(cos: Cos, temes: number): Mode[] {
   const r = RUTES[cos];
   return [
     {
-      titol: 'Estudia per tema',
-      sub: 'Temari complet amb subratllats i repàs',
+      titol: 'Estudiar',
+      sub: 'El temari, tema a tema, amb els teus subratllats',
       icona: 'book',
       insignia: `${temes} TEMES`,
       to: r.estudi,
       modul: 'temari-complet',
+      dins: [
+        { label: 'Esquemes', to: r.esquemes },
+        { label: 'Cultura general', to: '/cultura-general' },
+        { label: 'Actualitat', to: '/noticies' },
+      ],
     },
     {
-      titol: 'Repàs intel·ligent',
-      sub: 'El sistema et diu què toca repassar avui',
-      icona: 'brain',
-      insignia: 'DIARI',
-      to: '/repas',
-    },
-    {
-      titol: 'Test',
-      sub: 'Tria tema i comença en dos tocs',
+      titol: 'Practicar',
+      sub: 'Tests per tema, per blocs o de tot alhora',
       icona: 'check',
       insignia: 'TESTS',
       destacat: true,
       to: r.test,
+      dins: [
+        { label: 'Flashcards', to: r.flashcards },
+        { label: 'Reptes', to: '/retos' },
+      ],
     },
     {
-      titol: 'Esquemes',
-      sub: 'La matèria en quadres, per repassar de pressa',
-      icona: 'layers',
-      insignia: cos === 'mossos' ? 'MOSSOS' : 'POLICIA LOCAL',
-      to: r.esquemes,
-      modul: 'esquemes',
-    },
-    {
-      titol: 'Diagnòstic per tema',
-      sub: "Detecta on fluixeges abans de l'examen",
-      icona: 'chart',
-      insignia: 'PROGRÉS',
-      to: '/diagnostic',
-      modul: 'diagnostic',
+      titol: 'Repassar',
+      sub: 'Què toca avui i on fluixeges abans de l\'examen',
+      icona: 'brain',
+      insignia: 'DIARI',
+      to: '/repas',
+      dins: [
+        { label: 'Diagnòstic per tema', to: '/diagnostic' },
+        { label: 'Debilitats', to: r.debilitats },
+        { label: 'Els meus logros', to: r.logros },
+      ],
     },
   ];
 }
@@ -331,12 +337,28 @@ export default function Academia() {
             {modes(cos, TEMES.length).map((m) => {
               const tancat = !!m.modul && esBloquejat(m.modul, pla);
               return (
-                <TargetaMode
-                  key={m.titol}
-                  m={m}
-                  bloquejat={tancat}
-                  onClick={() => nav(tancat ? '/perfil' : m.to)}
-                />
+                <div key={m.titol} style={{ display: 'flex', flexDirection: 'column', gap: 8, minWidth: 0 }}>
+                  <TargetaMode m={m} bloquejat={tancat} onClick={() => nav(tancat ? '/perfil' : m.to)} />
+                  {/* El que abans era una targeta pròpia. Va aquí, petit:
+                      qui ho busca ho troba, i qui no, no hi ensopega. */}
+                  {m.dins && (
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 12px', padding: '0 4px' }}>
+                      {m.dins.map((d) => (
+                        <button
+                          key={d.to}
+                          type="button"
+                          onClick={() => nav(d.to)}
+                          style={{
+                            border: 'none', background: 'transparent', cursor: 'pointer', padding: 0,
+                            fontSize: 12.5, fontWeight: 600, color: V.muted, textDecoration: 'underline',
+                            textDecorationColor: V.border, textUnderlineOffset: 3,
+                          }}>
+                          {d.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               );
             })}
           </div>
@@ -348,21 +370,18 @@ export default function Academia() {
           {/* Cultura general va primera i destacada: cau a l'examen i
               abans quedava perduda entre els altres accessos. Porta al
               temari, que és el que s'estudia; el test ja és a dins. */}
+          {/* Aquí només hi ha el que NO és cap dels tres verbs. Cultura
+              general i actualitat entren a l'examen però no són el temari;
+              la resta ja viu a dins d'Estudiar, Practicar o Repassar. */}
           <AccesRapid
             icona="globe" titol="Cultura general" sub="16 àrees per repassar abans del test"
             to="/cultura-general" destacat
           />
-          {/* Actualitat també destacada i just a sota. Porta a la secció
-              de notícies —que és on hi ha personalitats, premis i
-              esports—, no al test: el test ja s'ofereix des d'allà. */}
           <AccesRapid
             icona="news" titol="Actualitat" sub="Notícies, personalitats, premis i esports"
             to="/noticies" destacat
           />
-          <AccesRapid icona="brain" titol="Debilitats" sub="Els temes que et costen" to={RUTES[cos].debilitats} />
-          <AccesRapid icona="cards" titol="Flashcards" sub="Repàs espaiat" to={RUTES[cos].flashcards} />
-          <AccesRapid icona="medal" titol="Reptes" sub="Missions i objectius" to="/retos" />
-          <AccesRapid icona="chart" titol="Els meus logros" sub="El que has desbloquejat" to={RUTES[cos].logros} />
+          <AccesRapid icona="cards" titol="Quadrant" sub="Els teus torns de servei" to="/quadrant" />
         </div>
       </div>
     </div>

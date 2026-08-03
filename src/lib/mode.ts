@@ -14,15 +14,24 @@
 // troba igual. El que canvia és què et proposa la navegació.
 import { useEffect, useState } from 'react';
 
-export type Mode = 'opositor' | 'actiu' | 'ambdos';
+// Dos modes, no tres. Hi havia un "Tot" que ho ensenyava tot alhora, i era
+// precisament el que volíem evitar: qui el triava tornava a tenir les dotze
+// portes de sempre. Qui fa les dues coses canvia de mode amb un toc.
+export type Mode = 'opositor' | 'actiu';
 
 const CLAU = 'ip.mode.v1';
 const EVENT = 'ip:mode';
 
+/** El perfil desat pot dir 'ambdos' (ve d'abans): compta com a opositor. */
+export function normalitza(v: string | null | undefined): Mode | null {
+  if (v === 'actiu') return 'actiu';
+  if (v === 'opositor' || v === 'ambdos') return 'opositor';
+  return null;
+}
+
 export function llegeixMode(): Mode | null {
   if (typeof localStorage === 'undefined') return null;
-  const v = localStorage.getItem(CLAU);
-  return v === 'opositor' || v === 'actiu' || v === 'ambdos' ? v : null;
+  return normalitza(localStorage.getItem(CLAU));
 }
 
 export function desaMode(m: Mode) {
@@ -50,20 +59,21 @@ export function useMode(perDefecte: Mode | null): { mode: Mode; setMode: (m: Mod
   }, []);
 
   return {
-    mode: local ?? perDefecte ?? 'ambdos',
+    mode: local ?? perDefecte ?? 'opositor',
     setMode: (m: Mode) => { desaMode(m); setLocal(m); },
   };
 }
 
+export const MODES: Mode[] = ['opositor', 'actiu'];
+
 export const NOMS: Record<Mode, { curt: string; llarg: string; sub: string }> = {
   opositor: { curt: 'Campus', llarg: 'Em preparo una oposició', sub: 'Temari, tests i repàs' },
   actiu: { curt: 'Operativa', llarg: 'Estic en actiu', sub: 'Consulta i eines de servei' },
-  ambdos: { curt: 'Tot', llarg: 'Les dues coses', sub: 'Campus i Operativa alhora' },
 };
 
 /** Si en aquest mode toca ensenyar cada cosa. */
 export const mostra = {
-  academia: (m: Mode) => m !== 'actiu',
-  operativa: (m: Mode) => m !== 'opositor',
-  xat: (m: Mode) => m !== 'opositor',
+  academia: (m: Mode) => m === 'opositor',
+  operativa: (m: Mode) => m === 'actiu',
+  xat: (m: Mode) => m === 'actiu',
 };

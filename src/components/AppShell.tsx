@@ -22,7 +22,7 @@ import { useAuth } from '../lib/auth';
 import { TEMES } from '../content/temari-pl';
 import { getUserProgress, type PerfilUs, type UserProgress } from '../lib/db';
 import { PENAL_ALL_ENTRIES } from '../lib/operativa-penal';
-import { mostra, useMode, NOMS, type Mode } from '../lib/mode';
+import { mostra, useMode, normalitza, MODES, NOMS, type Mode } from '../lib/mode';
 import { applyInitialTheme, applyTheme, getInitialTheme, type Theme } from '../lib/theme';
 import { I, Mono, RV, V, type NomIc } from '../lib/v3';
 
@@ -63,15 +63,14 @@ const NAV: Seccio[] = [
   SEC_INICI,
   {
     id: 'academia', label: 'Acadèmia', icona: 'cap', to: '/academia', compte: TEMES_PL,
+    // Els mateixos tres verbs que la portada d'Acadèmia. La barra deia
+    // vuit coses i la portada cinc, i no eren les mateixes.
     sub: [
-      { label: 'Estudia per tema', to: '/estudi' },
-      { label: 'Test', to: '/policia-local' },
-      { label: 'Repàs intel·ligent', to: '/repas' },
-      { label: 'Esquemes', to: '/policia-local/esquemes' },
-      { label: 'Diagnòstic', to: '/diagnostic' },
-      { label: 'Flashcards', to: '/policia-local/flashcards' },
+      { label: 'Estudiar', to: '/estudi' },
+      { label: 'Practicar', to: '/policia-local' },
+      { label: 'Repassar', to: '/repas' },
+      { label: 'Cultura general', to: '/cultura-general' },
       { label: 'Mossos', to: '/mossos' },
-      { label: 'Reptes', to: '/retos' },
     ],
   },
   {
@@ -368,7 +367,7 @@ function Lateral({
           display: 'flex', gap: 3, padding: 3, marginBottom: 14,
           background: 'rgba(255,255,255,.07)', borderRadius: RV.md,
         }}>
-        {(['opositor', 'actiu', 'ambdos'] as Mode[]).map((m) => (
+        {MODES.map((m) => (
           <button
             key={m}
             type="button"
@@ -563,7 +562,7 @@ export default function AppShell() {
   const perfilUs = triaFeta ?? profile?.perfil_us ?? null;
   // El mode de la barra surt del perfil d'ús, però el que hagi triat al
   // navegador mana: així es pot mirar l'altra banda sense canviar el compte.
-  const { mode, setMode } = useMode(perfilUs as Mode | null);
+  const { mode, setMode } = useMode(normalitza(perfilUs));
   if (user && profile && !perfilUs) {
     return <TriaPerfilUs onFet={setTriaFeta} />;
   }

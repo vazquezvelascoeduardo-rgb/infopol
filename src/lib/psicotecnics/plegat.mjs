@@ -129,14 +129,131 @@ export function vistaDe(cub) {
   });
 }
 
+// ── Orientació amb volteig ───────────────────────────────────────
+// `quarts` només sap tornar girs, i amb girs no n'hi ha prou: una cara
+// vista des de dins —que és el que passa amb el mirall— surt capgirada, i
+// cap gir no fa això. `orientacio` torna { q, volteig }: primer s'inverteix
+// esquerra-dreta si toca, i després es gira q quarts de volta.
+//
+// El marc de referència pot ser dels dos sentits. Per això el gir de 90°
+// no es fa al voltant de la normal de fora, sinó al voltant de v×u, que és
+// cap a on mira el marc: així ρ(u)=v i ρ(v)=−u sempre.
+export function orientacio(cara, ref) {
+  const eix = creu(ref.v, ref.u);
+  const rho = (w) => creu(w, eix);
+  let u = ref.u, v = ref.v;
+  for (let q = 0; q < 4; q++) {
+    if (igual(cara.u, u) && igual(cara.v, v)) return { q, volteig: false };
+    if (igual(cara.u, neg(u)) && igual(cara.v, v)) return { q, volteig: true };
+    u = rho(u); v = rho(v);
+  }
+  return null;   // no pot passar: les vuit possibilitats hi són totes
+}
+
+// ── Les dues vistes: el cub i el seu mirall ──────────────────────
+// El cub es mira des del vèrtex (1,1,1). Es veuen les cares +Y, +Z i +X.
+//
+// El mirall és un pla darrere del cub, de cara a qui mira. Amb aquesta
+// col·locació —i només amb aquesta— el reflex ensenya justament les tres
+// cares amagades. I com que el pla del mirall no toca les direccions de la
+// pantalla, el reflex es projecta exactament on es projectaria el cub: el
+// mateix hexàgon, però amb les cares del darrere. Per això no cal reflectir
+// res per dibuixar-lo; n'hi ha prou de dibuixar les cares de darrere.
+//
+// Es veuen des de dins, i per això els seus marcs tenen v×u = −n: qualsevol
+// cara de veritat hi surt amb volteig. Aquesta és la marca del mirall.
+export const VISTA_CUB = [
+  { nom: 'dalt',     n: V(0, 1, 0), o: V(0, 1, 0), u: V(1, 0, 0),  v: V(0, 0, 1) },
+  { nom: 'esquerra', n: V(0, 0, 1), o: V(0, 1, 1), u: V(1, 0, 0),  v: V(0, -1, 0) },
+  { nom: 'dreta',    n: V(1, 0, 0), o: V(1, 1, 1), u: V(0, 0, -1), v: V(0, -1, 0) },
+];
+
+export const VISTA_MIRALL = [
+  { nom: 'baix',      n: V(0, -1, 0), o: V(0, 0, 0), u: V(1, 0, 0),  v: V(0, 0, 1) },
+  { nom: 'darrere-d', n: V(0, 0, -1), o: V(0, 1, 0), u: V(1, 0, 0),  v: V(0, -1, 0) },
+  { nom: 'darrere-e', n: V(-1, 0, 0), o: V(0, 1, 0), u: V(0, -1, 0), v: V(0, 0, 1) },
+];
+
+// Les sis cares mirades des de fora. Serveix per fer l'empremta d'un cub:
+// dos cubs són el mateix si alguna de les 24 orientacions els iguala.
+export const CARES = [
+  { nom: '+Y', n: V(0, 1, 0),  o: V(0, 1, 0), u: V(1, 0, 0),  v: V(0, 0, 1) },
+  { nom: '+Z', n: V(0, 0, 1),  o: V(0, 1, 1), u: V(1, 0, 0),  v: V(0, -1, 0) },
+  { nom: '+X', n: V(1, 0, 0),  o: V(1, 1, 1), u: V(0, 0, -1), v: V(0, -1, 0) },
+  { nom: '-Y', n: V(0, -1, 0), o: V(0, 0, 1), u: V(1, 0, 0),  v: V(0, 0, -1) },
+  { nom: '-Z', n: V(0, 0, -1), o: V(0, 0, 0), u: V(1, 0, 0),  v: V(0, 1, 0) },
+  { nom: '-X', n: V(-1, 0, 0), o: V(0, 1, 0), u: V(0, 0, 1),  v: V(0, -1, 0) },
+];
+
+/** Què es veu a cada posició d'una vista: el dibuix, el gir i el volteig. */
+export function vista(cub, refs) {
+  return refs.map((ref) => {
+    const cara = cub.find((f) => igual(f.n, ref.n));
+    const { q, volteig } = orientacio(cara, ref);
+    return { dibuix: cara.dibuix, q, volteig };
+  });
+}
+
+// ── El mirall de l'examen ────────────────────────────────────────
+// Un mirall pla, VERTICAL, posat darrere del cub i girat 45°. És el que es
+// veu dibuixat al material: un paral·lelogram inclinat al darrere.
+//
+// Cap mirall pla no pot ensenyar les TRES cares amagades en la postura
+// isomètrica de sempre. Això no és una limitació del dibuix, és que no
+// existeix; i per això l'enunciat de l'examen diu "algunes de les cares
+// ocultes". Aquest n'ensenya dues —la del darrere i la de l'esquerra— i
+// repeteix la de DALT, que és justament la que permet orientar el reflex.
+//
+// La que no es veu enlloc és la de BAIX. Aquesta és la casella que als
+// desplegables de l'examen va en blanc.
+//
+// El pla del mirall és el que contenen la vertical i la direcció (1,0,−1);
+// la seva normal és (1,0,1), que mira cap a qui llegeix.
+export const reflex = (p) => V(-p.z, p.y, -p.x);
+
+/** La imatge d'un cub al mirall. Surt girada del revés: v×u passa a ser −n. */
+export function reflecteix(cub) {
+  return cub.map((f) => ({
+    dibuix: f.dibuix, u: reflex(f.u), v: reflex(f.v), n: reflex(f.n),
+  }));
+}
+
+// ── Projecció isomètrica ─────────────────────────────────────────
+// El cub va de 0 a 1 als tres eixos. +Y puja a la pantalla; +X baixa cap a
+// la dreta i +Z cap a l'esquerra. La y de la pantalla creix cap avall.
+export const K = Math.cos(Math.PI / 6);
+export const projecta = (p, s = 1) => ({
+  x: (p.x - p.z) * K * s,
+  y: ((p.x + p.z) * 0.5 - p.y) * s,
+});
+export const suma = (a, b) => V(a.x + b.x, a.y + b.y, a.z + b.z);
+export const escala = (a, k) => V(a.x * k, a.y * k, a.z * k);
+
+const punt = (a, b) => a.x * b.x + a.y * b.y + a.z * b.z;
+
+/** El cantó de la cara on comença el marc (o, o+u, o+v i o+u+v hi són tots). */
+export function origen(cara) {
+  const vertexs = [];
+  for (const x of [0, 1]) for (const y of [0, 1]) for (const z of [0, 1]) vertexs.push(V(x, y, z));
+  // El pla de la cara: els quatre vèrtexs que van més enllà en la normal.
+  const top = Math.max(...vertexs.map((p) => punt(p, cara.n)));
+  const cantons = vertexs.filter((p) => punt(p, cara.n) === top);
+  const dins = (p) => cantons.some((c) => igual(c, p));
+  return cantons.find((o) => dins(suma(o, cara.u)) && dins(suma(o, cara.v))
+    && dins(suma(suma(o, cara.u), cara.v)));
+}
+
 // ── Formes de desenvolupament ────────────────────────────────────
 // Perquè no vagin tots amb la mateixa creu: als exàmens n'hi ha de creu,
 // de T, de tira amb esglaons i de L.
+// Totes sis passen el control de `valid`. N'hi havia tres que no plegaven
+// —dues peces del mateix costat de la tira, i un quadrat de 2×2— i el
+// control les va enxampar. Si se'n toca cap, que les proves ho tornin a dir.
 export const FORMES = {
   creu: [[1, 1], [1, 0], [0, 1], [2, 1], [3, 1], [1, 2]],
-  te: [[1, 1], [0, 1], [2, 1], [3, 1], [1, 0], [2, 0]],
-  zigazaga: [[0, 1], [1, 1], [1, 0], [2, 0], [2, 1], [3, 1]],
-  ela: [[0, 0], [1, 0], [2, 0], [3, 0], [3, 1], [2, 1]],
+  te: [[0, 1], [1, 1], [2, 1], [3, 1], [1, 0], [2, 2]],
+  zigazaga: [[0, 2], [1, 2], [1, 1], [2, 1], [2, 0], [3, 0]],
+  ela: [[0, 1], [1, 1], [2, 1], [3, 1], [0, 0], [3, 2]],
   escala: [[0, 1], [1, 1], [1, 0], [2, 1], [2, 2], [3, 2]],
   tira: [[0, 1], [1, 1], [2, 1], [2, 0], [3, 1], [3, 2]],
 };

@@ -15,7 +15,7 @@ import { useAuth } from '../lib/auth';
 import { supabase } from '../lib/supabase';
 import { useT } from '../lib/i18n';
 import { updateProfile, type PerfilUs } from '../lib/db';
-import { desaMode } from '../lib/mode';
+import { desaMode, normalitza } from '../lib/mode';
 import MfaSection from '../components/MfaSection';
 import QuadrantMini from '../components/QuadrantMini';
 import { applyTheme, getInitialTheme, type Theme } from '../lib/theme';
@@ -44,7 +44,8 @@ export default function Profile() {
       // El mode de la barra té memòria pròpia al navegador i mana sobre
       // el perfil desat. Si aquí no s'actualitzés, canviaries el perfil i
       // la barra es quedaria igual, que és pitjor que no tenir-ho.
-      desaMode(id);
+      const m = normalitza(id);
+      if (m) desaMode(m);
       await refresh();
     } catch {
       /* si falla, es queda com estava */

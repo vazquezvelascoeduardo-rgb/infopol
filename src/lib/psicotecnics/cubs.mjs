@@ -46,7 +46,11 @@ function rng(seed) { let s = (seed * 2654435761) >>> 0;
   return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
 const tria = (r, a) => a[Math.floor(r() * a.length)];
 
-export function generaItem(seed) {
+// Als exàmens ho pregunten de les dues maneres, i cal saber-ho fer:
+//  · 'correcta'   — quina de les quatre és el cub. Una encaixa, tres no.
+//  · 'incorrecta' — quina NO ho és. Aleshores en encaixen TRES, que són
+//    tres vistes diferents del mateix cub, i només una no.
+export function generaItem(seed, mena = 'correcta') {
   const r = rng(seed);
   const forma = tria(r, FORMES);
   const dib = [...DIBUIXOS].sort(() => r() - 0.5).slice(0, 6);
@@ -57,8 +61,20 @@ export function generaItem(seed) {
   const possibles = new Set(totes.map(P.vistaDe).map((v) => v.join('|')));
   const bona = P.vistaDe(tria(r, totes));
 
+  // Si es demana la que NO és, calen tres vistes diferents del mateix cub.
+  const bones = [bona];
+  if (mena === 'incorrecta') {
+    for (let i = 0; i < 4000 && bones.length < 3; i++) {
+      const v = P.vistaDe(tria(r, totes));
+      if (bones.some((b) => b.join('|') === v.join('|'))) continue;
+      bones.push(v);
+    }
+    if (bones.length < 3) throw new Error(`el cub ${seed} no dona tres vistes diferents`);
+  }
+
+  const calen = mena === 'incorrecta' ? 1 : 3;
   const dolentes = [];
-  for (let i = 0; i < 8000 && dolentes.length < 3; i++) {
+  for (let i = 0; i < 8000 && dolentes.length < calen; i++) {
     const t = P.vistaDe(tria(r, totes)).slice();
     const pos = Math.floor(r() * 3);
     if (r() < 0.55) {
@@ -73,10 +89,33 @@ export function generaItem(seed) {
     if (possibles.has(k) || dolentes.some((d) => d.join('|') === k)) continue;
     dolentes.push(t);
   }
+  if (mena === 'incorrecta') {
+    // La marcada és la que NO és el cub; les altres tres sí que ho són.
+    const correcta = Math.floor(r() * 4);
+    const opcions = [];
+    let b = 0;
+    for (let i = 0; i < 4; i++) opcions.push(i === correcta ? dolentes[0] : bones[b++]);
+    return {
+      mena, celles, opcions, correcta,
+      control: {
+        caresValides: P.valid(cares),
+        orientacions: totes.length,
+        vistes: possibles.size,
+        quantesEncaixen: opcions.filter((o) => possibles.has(o.join('|'))).length,
+        marcadaNoEncaixa: !possibles.has(opcions[correcta].join('|')),
+        opcionsDiferents: new Set(opcions.map((o) => o.join('|'))).size === 4,
+      },
+    };
+  }
+
   const opcions = [bona, ...dolentes].sort(() => r() - 0.5);
   return {
-    celles, opcions, correcta: opcions.findIndex((o) => o.join('|') === bona.join('|')),
-    control: { caresValides: P.valid(cares), orientacions: totes.length, vistes: possibles.size },
+    mena, celles, opcions, correcta: opcions.findIndex((o) => o.join('|') === bona.join('|')),
+    control: {
+      caresValides: P.valid(cares), orientacions: totes.length, vistes: possibles.size,
+      quantesEncaixen: opcions.filter((o) => possibles.has(o.join('|'))).length,
+      opcionsDiferents: new Set(opcions.map((o) => o.join('|'))).size === 4,
+    },
   };
 }
 
@@ -134,6 +173,30 @@ export function svgItem(item, num) {
   const norm = item.celles.map((c) => ({ ...c, nx: c.nx - minX, ny: c.ny - minY }));
   const op = item.opcions.map((o, i) => cub(330 + i * 104, 130, o)
     + `<text x="${330 + i * 104}" y="205" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" font-weight="700" fill="#15151C">${'ABCD'[i]}</text>`).join('');
-  return `<g><text x="20" y="28" font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" fill="#15151C"><tspan font-weight="700">${num}.</tspan> Quina de les opcions correspon amb el cub desplegat una vegada muntat?</text>
+  const pregunta = item.mena === 'incorrecta'
+    ? 'Quina de les opcions <tspan font-weight="700">NO</tspan> correspon amb el cub desplegat una vegada muntat?'
+    : 'Quina de les opcions correspon amb el cub desplegat una vegada muntat?';
+  return `<g><text x="20" y="28" font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" fill="#15151C"><tspan font-weight="700">${num}.</tspan> ${pregunta}</text>
   ${desplegable(28, 52, norm)}${op}</g>`;
+}
+
+// ── Dibuix per peces, per a l'app ────────────────────────────────
+const embolcall = (w, h, cos) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="100%">${cos}</svg>`;
+
+export function svgEnunciat(item, c = 34) {
+  const minX = Math.min(...item.celles.map((x) => x.nx));
+  const minY = Math.min(...item.celles.map((x) => x.ny));
+  const w = (Math.max(...item.celles.map((x) => x.nx)) - minX + 1) * c;
+  const h = (Math.max(...item.celles.map((x) => x.ny)) - minY + 1) * c;
+  const norm = item.celles.map((x) => ({ ...x, nx: x.nx - minX, ny: x.ny - minY }));
+  return embolcall(w + 3, h + 3, desplegable(1.5, 1.5, norm, c));
+}
+
+export function svgOpcio(item, i, s = 30) {
+  // El cub projectat va de −K·s a +K·s d'ample i de −s a +s d'alt, mesurat
+  // des del punt que se li passa. O sigui que el punt ha d'anar al mig del
+  // marc i prou: qualsevol desplaçament l'estira fora i el talla.
+  const w = 2 * K * s + 6, h = 2 * s + 6;
+  return embolcall(w, h, cub(w / 2, h / 2, item.opcions[i], s));
 }
