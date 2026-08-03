@@ -48,6 +48,65 @@ const NEWS = [
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
 
+const NOTICIAS_DIA = [
+  {
+    date: '08·03',
+    tag: 'Política · CAT',
+    title: 'Aliança Catalana s\'enlaira als sondejos mentre Junts retrocedeix',
+    desc: 'El CEO publica el primer baròmetre de 2026: el PSC aguanta el lideratge però el mapa parlamentari canvia significativament.',
+    link: 'https://www.democrata.es/catalunya/',
+  },
+  {
+    date: '08·03',
+    tag: 'Economia · ESP',
+    title: 'Espanya liderarà la zona euro amb un PIB del 2,5% el 2026',
+    desc: 'Consum, ocupació i turisme sostenen el creixement. Fons europeus: 17.500 M€ en subvencions previstes per a enguany.',
+    link: 'https://www.democrata.es/democrata-pro/comunicados/espana-seguira-creciendo-por-encima-de-la-eurozona-con-una-expansion-del-2-5-en-2026/',
+  },
+  {
+    date: '08·03',
+    tag: 'Internacional',
+    title: 'Trump suspèn els atacs a l\'Iran i obre la porta a negociacions',
+    desc: 'La Casa Blanca paralitza els bombardejos conjunts amb Aràbia Saudita. Irak nega haver autoritzat operacions al seu territori.',
+    link: 'https://es.euronews.com/video/2026/08/02/ultimas-noticias-02-agosto-2026-manana',
+  },
+  {
+    date: '08·03',
+    tag: 'Esports · FCB',
+    title: 'El Barça fitxa Anthony Gordon del Newcastle per 80 M€',
+    desc: 'L\'extrem anglès reforça l\'atac blaugrana per a la temporada 2026-27. Lewandowski no renovarà i rumb a la MLS.',
+    link: 'https://www.dazn.com/es-MX/news/f%C3%BAtbol/fichajes-fc-barcelona-2026-altas-bajas-rumores-plantilla-actualizada/60ssnw9qoh321715m2b6fm9gz',
+  },
+  {
+    date: '08·03',
+    tag: 'Succés · CAT',
+    title: '35 ofegaments a Catalunya el 2026: Protecció Civil demana màxima prudència',
+    desc: '29 víctimes mortals en platges, piscines i aigües interiors; 55 ferits. Tarragona concentra la meitat dels casos.',
+    link: 'https://www.moncloa.com/2026/08/02/ahogamientos-catalunya-proteccio-civil-prudencia-3409429',
+  },
+  {
+    date: '08·03',
+    tag: 'Mossos · Op.',
+    title: 'Detingut un menor de 17 anys, cap a Espanya de la xarxa extremista 764',
+    desc: 'Operació conjunta dels Mossos, la Guàrdia Civil i l\'Ertzaintza. La xarxa captava menors per Internet per a explotació.',
+    link: 'https://beteve.cat/societat/detingut-menor-referent-espanya-xarxa-explotacio-764/',
+  },
+  {
+    date: '08·03',
+    tag: 'Emergències · CAT',
+    title: 'Meteocat activa alerta d\'incendi extrem a 50 municipis catalans',
+    desc: 'Previsió de calamarsa de 2 cm i possibles tornados. Onada de calor amb nivell d\'alerta màxim actiu.',
+    link: 'https://www.moncloa.com/2026/08/02/meteocat-riesgo-incendios-cataluna-granizo-tornados-3409526/',
+  },
+  {
+    date: '08·03',
+    tag: 'Internacional',
+    title: 'Keiko Fujimori guanya les presidencials del Perú al quart intent',
+    desc: 'Governarà en minoria i haurà de negociar per estabilitzar el país. El Perú afronta una dècada d\'inestabilitat política.',
+    link: 'https://lapatilla.com/2026/08/02/portadas-de-la-prensa-internacional-de-este-lunes-3-de-agosto-de-2026/',
+  },
+];
+
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
   return (
@@ -117,6 +176,30 @@ export default function ScreenOperativaHome() {
             <Chip icon="car" label="Control trànsit" />
             <Chip icon="siren" label="Detenció" />
           </div>
+        </div>
+      </div>
+
+      {/* Notícies del dia */}
+      <div style={{ padding: '14px 0 0' }}>
+        <SectionHead kicker="08 · 03 · 2026" kickerColor={T.cat.leyes.solid} title="Notícies del dia" action="Tot →" />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {NOTICIAS_DIA.map((n, i) => (
+            <div
+              key={i}
+              onClick={() => n.link && window.open(n.link, '_blank')}
+              style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.leyes.solid}`, boxShadow: T.shadow.card, cursor: n.link ? 'pointer' : 'default' }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.leyes.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+              </div>
+              <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+              <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.link && (
+                <div style={{ marginTop: 6, fontSize: 11, fontWeight: 700, color: T.cat.leyes.solid }}>Llegir més →</div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
