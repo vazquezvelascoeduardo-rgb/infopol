@@ -15,6 +15,7 @@ import { useAuth } from '../lib/auth';
 import { supabase } from '../lib/supabase';
 import { useT } from '../lib/i18n';
 import { updateProfile, type PerfilUs } from '../lib/db';
+import { desaMode } from '../lib/mode';
 import MfaSection from '../components/MfaSection';
 import QuadrantMini from '../components/QuadrantMini';
 import { applyTheme, getInitialTheme, type Theme } from '../lib/theme';
@@ -40,6 +41,10 @@ export default function Profile() {
     setDesantUs(true);
     try {
       await updateProfile(user.id, { perfil_us: id });
+      // El mode de la barra té memòria pròpia al navegador i mana sobre
+      // el perfil desat. Si aquí no s'actualitzés, canviaries el perfil i
+      // la barra es quedaria igual, que és pitjor que no tenir-ho.
+      desaMode(id);
       await refresh();
     } catch {
       /* si falla, es queda com estava */

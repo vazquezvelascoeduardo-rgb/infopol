@@ -22,6 +22,7 @@ import { useAuth } from '../lib/auth';
 import { TEMES } from '../content/temari-pl';
 import { getUserProgress, type PerfilUs, type UserProgress } from '../lib/db';
 import { PENAL_ALL_ENTRIES } from '../lib/operativa-penal';
+import { mostra, useMode, NOMS, type Mode } from '../lib/mode';
 import { applyInitialTheme, applyTheme, getInitialTheme, type Theme } from '../lib/theme';
 import { I, Mono, RV, V, type NomIc } from '../lib/v3';
 
@@ -56,8 +57,10 @@ type Seccio = {
 const TEMES_PL = TEMES.length;
 const ESCENARIS_PENAL = PENAL_ALL_ENTRIES.length;
 
+const SEC_INICI: Seccio = { id: 'inici', label: 'Inici', icona: 'home', to: '/app' };
+
 const NAV: Seccio[] = [
-  { id: 'inici', label: 'Inici', icona: 'home', to: '/app' },
+  SEC_INICI,
   {
     id: 'academia', label: 'Acadèmia', icona: 'cap', to: '/academia', compte: TEMES_PL,
     sub: [
@@ -92,6 +95,21 @@ const NAV: Seccio[] = [
     ],
   },
 ];
+
+/**
+ * La barra que toca segons el mode.
+ *
+ * A qui es prepara l'oposició no li surt Operativa, i a qui està en
+ * actiu no li surt Acadèmia. Cap ruta es tanca: només deixa de
+ * proposar-se el que ara no fa servir. Inici i Perfil hi són sempre.
+ */
+function navPer(mode: Mode): Seccio[] {
+  return NAV.filter((s) => {
+    if (s.id === 'academia') return mostra.academia(mode);
+    if (s.id === 'operativa') return mostra.operativa(mode);
+    return true;
+  });
+}
 
 /**
  * On ets exactament, dins de la secció.
@@ -285,7 +303,7 @@ function BotoNav({
 
 /** Barra lateral de tinta. És la mateixa a l'escriptori i dins del calaix. */
 function Lateral({
-  activa, lloc, desplegada, onDesplega, onNavega, progres, nom, inicial, tema, onTema,
+  activa, lloc, desplegada, onDesplega, onNavega, progres, nom, inicial, tema, onTema, mode, onMode,
 }: {
   activa: string;
   /** On ets dins de la secció activa. */
@@ -298,6 +316,8 @@ function Lateral({
   inicial: string;
   tema: Theme;
   onTema: () => void;
+  mode: Mode;
+  onMode: (m: Mode) => void;
 }) {
   // Els set dies de la ratxa: només s'encenen els que realment té.
   const dies = useMemo(() => {
@@ -338,8 +358,38 @@ function Lateral({
         <Mono size={8.5} color="rgba(255,255,255,.35)" style={{ letterSpacing: 0.5 }}>⌘K</Mono>
       </button>
 
+      {/* Commutador de mode. Qui es prepara l'oposició i qui està en
+          actiu no volen el mateix, i abans ho tenien tot barrejat. Es
+          canvia aquí mateix i es recorda; no toca el perfil desat. */}
+      <div
+        role="tablist"
+        aria-label="Mode"
+        style={{
+          display: 'flex', gap: 3, padding: 3, marginBottom: 14,
+          background: 'rgba(255,255,255,.07)', borderRadius: RV.md,
+        }}>
+        {(['opositor', 'actiu', 'ambdos'] as Mode[]).map((m) => (
+          <button
+            key={m}
+            type="button"
+            role="tab"
+            aria-selected={mode === m}
+            onClick={() => onMode(m)}
+            title={NOMS[m].llarg}
+            style={{
+              flex: 1, cursor: 'pointer', border: 'none', borderRadius: RV.sm,
+              padding: '7px 4px', fontFamily: V.mono, fontSize: 9.5, fontWeight: 700,
+              letterSpacing: 0.4, textTransform: 'uppercase',
+              background: mode === m ? V.terra : 'transparent',
+              color: mode === m ? '#fff' : 'rgba(255,255,255,.55)',
+            }}>
+            {NOMS[m].curt}
+          </button>
+        ))}
+      </div>
+
       <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-        {NAV.map((s) => (
+        {navPer(mode).map((s) => (
           <BotoNav
             key={s.id}
             s={s}
@@ -352,6 +402,10 @@ function Lateral({
         ))}
       </div>
 
+      {/* El xat és l'eina de servei: no surt a qui només es prepara
+          l'oposició. Es recupera canviant de mode. */}
+      {mostra.xat(mode) && (
+        <>
       <div style={{ height: 1, background: 'rgba(255,255,255,.1)', margin: '18px 6px' }} />
 
       <button
@@ -370,6 +424,8 @@ function Lateral({
           </Mono>
         </span>
       </button>
+        </>
+      )}
 
       <div style={{ marginTop: 'auto' }}>
         <div style={{ background: 'rgba(255,255,255,.06)', borderRadius: RV.md, padding: 15, marginBottom: 12 }}>
@@ -505,6 +561,9 @@ export default function AppShell() {
   // La pregunta d'entrada: només a qui té sessió i encara no l'ha
   // contestada. Sense backend (mode local) no es pregunta res.
   const perfilUs = triaFeta ?? profile?.perfil_us ?? null;
+  // El mode de la barra surt del perfil d'ús, però el que hagi triat al
+  // navegador mana: així es pot mirar l'altra banda sense canviar el compte.
+  const { mode, setMode } = useMode(perfilUs as Mode | null);
   if (user && profile && !perfilUs) {
     return <TriaPerfilUs onFet={setTriaFeta} />;
   }
@@ -521,6 +580,8 @@ export default function AppShell() {
       inicial={inicial}
       tema={tema}
       onTema={canviaTema}
+      mode={mode}
+      onMode={setMode}
     />
   );
 
@@ -619,20 +680,36 @@ export default function AppShell() {
           El xat va al mig, en cercle taronja; la secció activa es marca
           només amb el cercle, sense text. */}
       <nav className="v3-tabbar" aria-label="Navegació principal">
-        {NAV.slice(0, 2).map((s) => <PestanyaMobil key={s.id} s={s} on={activa === s.id} onClick={() => anar(s.to)} />)}
-        <button
-          type="button"
-          onClick={() => anar('/chat')}
-          aria-label="Chat IA"
-          style={{
-            width: 56, height: 56, flexShrink: 0, borderRadius: 28, margin: '0 4px', border: 'none',
-            background: V.terra, cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 8px 12px rgba(255,122,26,.5)',
-          }}>
-          <OnesXat mida={30} />
-        </button>
-        {NAV.slice(2, 4).map((s) => <PestanyaMobil key={s.id} s={s} on={activa === s.id} onClick={() => anar(s.to)} />)}
+        {/* Les pestanyes surten del mateix filtre que la barra lateral, i
+            per això es parteixen pel mig en comptes d'anar a índexs fixos:
+            segons el mode n'hi ha tres o quatre. */}
+        {(() => {
+          const seccions = navPer(mode);
+          const tall = Math.ceil(seccions.length / 2);
+          const pestanya = (s: Seccio) => (
+            <PestanyaMobil key={s.id} s={s} on={activa === s.id} onClick={() => anar(s.to)} />
+          );
+          return (
+            <>
+              {seccions.slice(0, tall).map(pestanya)}
+              {mostra.xat(mode) && (
+                <button
+                  type="button"
+                  onClick={() => anar('/chat')}
+                  aria-label="Chat IA"
+                  style={{
+                    width: 56, height: 56, flexShrink: 0, borderRadius: 28, margin: '0 4px', border: 'none',
+                    background: V.terra, cursor: 'pointer',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: '0 8px 12px rgba(255,122,26,.5)',
+                  }}>
+                  <OnesXat mida={30} />
+                </button>
+              )}
+              {seccions.slice(tall).map(pestanya)}
+            </>
+          );
+        })()}
       </nav>
 
       {/* Calaix a mòbil */}
