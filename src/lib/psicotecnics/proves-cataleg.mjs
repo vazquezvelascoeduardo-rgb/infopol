@@ -122,6 +122,35 @@ for (const cat of C.CATEGORIES) {
   console.log(`  ${cat.id.padEnd(20)} ${mirats} dibuixos mesurats`);
 }
 
+titol('1c. Dos-cents ítems diferents de cada categoria, com a mínim');
+// L'empremta és estricta a posta: la MATEIXA pregunta amb les respostes en
+// un altre ordre NO és un ítem nou. Si no es comparessin ordenades, sortiria
+// molta més varietat de la que hi ha de veritat, i seria mentida.
+//
+// Aquesta prova hi és perquè hi havia una família que no hi arribava. Les
+// tretze primeres fabriquen ítems a partir d'una llavor i no s'acaben mai;
+// la verbal surt d'una taula escrita a mà, i quan la taula era de trenta
+// paraules el sostre era de 216. Ara hi ha 111 paraules i 79 parelles.
+{
+  const empremta = (it) => `${it.enunciat}|${it.svg || ''}|`
+    + it.opcions.map((o) => o.svg || o.text).sort().join('~');
+  for (const cat of C.CATEGORIES) {
+    const vistes = new Set();
+    for (let seed = 1; seed <= 400; seed++) vistes.add(empremta(C.genera(cat.id, seed)));
+    cal(`${cat.id}: dos-cents ítems diferents de 400 llavors`, vistes.size >= 200,
+      `${cat.id}: només ${vistes.size}`);
+    // I que cap ítem no porti dues opcions iguals: seria una pregunta amb
+    // dues respostes idèntiques i quedaria en evidència.
+    for (let seed = 1; seed <= 120; seed++) {
+      const it = C.genera(cat.id, seed);
+      const cares = it.opcions.map((o) => o.svg || o.text);
+      cal(`${cat.id}: cap opció repetida dins d'un ítem`,
+        new Set(cares).size === cares.length, `${cat.id} ${seed}`);
+    }
+    console.log(`  ${cat.id.padEnd(20)} ${String(vistes.size).padStart(3)} diferents de 400`);
+  }
+}
+
 titol('2. Dues llavors iguals donen el mateix ítem, i dues de diferents no');
 for (const cat of C.CATEGORIES) {
   const a = C.genera(cat.id, 77), b = C.genera(cat.id, 77), c = C.genera(cat.id, 78);
