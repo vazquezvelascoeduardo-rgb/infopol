@@ -19,6 +19,7 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
   BLOCS, PER_ID, genera, segonsPer, simulacre, type ItemPsico,
 } from '../../lib/psicotecnics/cataleg.mjs';
+import { desaSessio } from '../../lib/psicoStats';
 import { I, RV, V } from '../../lib/v3';
 import './psico.css';
 
@@ -68,6 +69,9 @@ export default function PsicoSessio({ cos }: { cos: Cos }) {
   const [triada, setTriada] = useState<number | null>(null);
   const [acabat, setAcabat] = useState(false);
   const [segons, setSegons] = useState(ambTemps ? segonsPer(quantes) : 0);
+  // El resultat es dibuixa cada cop que React repinta; el progrés, una sola
+  // vegada. Sense això, sortir i tornar duplicaria la sessió.
+  const desat = useRef(false);
 
   useEffect(() => {
     if (acabat || !preguntes.length) return undefined;
@@ -114,6 +118,27 @@ export default function PsicoSessio({ cos }: { cos: Cos }) {
       per[p.categoria].total++;
       if (respostes[k] === p.correcta) per[p.categoria].be++;
     });
+
+    // Es desa un cop, quan s'arriba aquí. Només compten les preguntes
+    // contestades: si has deixat el simulacre a mitges, no té sentit
+    // penalitzar-te per les que no has arribat a veure.
+    if (!desat.current) {
+      desat.current = true;
+      const fetes = respostes.filter((r) => r !== null && r !== undefined).length;
+      if (fetes > 0) {
+        const perDesar: Record<string, { fetes: number; encerts: number }> = {};
+        preguntes.forEach((p, k) => {
+          if (respostes[k] === null || respostes[k] === undefined) return;
+          perDesar[p.categoria] = perDesar[p.categoria] || { fetes: 0, encerts: 0 };
+          perDesar[p.categoria].fetes++;
+          if (respostes[k] === p.correcta) perDesar[p.categoria].encerts++;
+        });
+        desaSessio({
+          per: perDesar,
+          segons: ambTemps ? segonsPer(quantes) - segons : segons,
+        });
+      }
+    }
     const titol = esCategoria ? PER_ID[categoria].nom
       : bloc ? bloc.nom : 'Simulacre complet';
 

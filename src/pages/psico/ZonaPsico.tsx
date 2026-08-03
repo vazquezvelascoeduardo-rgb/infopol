@@ -13,6 +13,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { BLOCS, PER_ID, tempsText } from '../../lib/psicotecnics/cataleg.mjs';
+import {
+  blocMesFluix, encertBloc, encertDe, totalFetes, usePsicoStats,
+} from '../../lib/psicoStats';
 import ConfigPsico, { type ConfigPsicoTria } from './ConfigPsico';
 import { I, Mono, RV, V, type NomIc } from '../../lib/v3';
 
@@ -35,6 +38,9 @@ export default function ZonaPsico({ cos }: { cos: Cos }) {
   const arrel = cos === 'pl' ? '/policia-local' : '/mossos';
   const [obert, setObert] = useState<string | null>(null);
   const [config, setConfig] = useState<Tria | null>(null);
+  const stats = usePsicoStats();
+  const fetes = totalFetes(stats);
+  const fluix = blocMesFluix(stats);
 
   const comenca = (c: ConfigPsicoTria) => {
     if (!config) return;
@@ -82,6 +88,42 @@ export default function ZonaPsico({ cos }: { cos: Cos }) {
         i no s'acaben mai.
       </p>
 
+      {/* El que portes fet. Només si n'has fet: un comptador a zero no diu
+          res i fa la pantalla més espessa. */}
+      {fetes > 0 && (
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: 12, background: V.surface,
+          border: `1px solid ${V.border}`, borderRadius: RV.md, padding: '11px 13px',
+          marginBottom: 14,
+        }}>
+          <span style={{ flex: 1, minWidth: 0 }}>
+            <span style={{ display: 'block', fontSize: 13.5, color: V.ink }}>
+              {fetes.toLocaleString('ca-ES')} preguntes fetes
+            </span>
+            {fluix && (
+              <span style={{ display: 'block', fontSize: 12.5, color: V.muted, marginTop: 1 }}>
+                On més fluixeges: {BLOCS.find((b) => b.id === fluix.id)?.nom} · {fluix.pct}%
+              </span>
+            )}
+          </span>
+          {fluix && (
+            <button
+              onClick={() => {
+                const b = BLOCS.find((x) => x.id === fluix.id)!;
+                setConfig({ id: b.id, titol: b.nom, sub: b.descripcio });
+              }}
+              style={{
+                border: `1.5px solid ${a.accent}`, background: a.soft, color: a.ink,
+                borderRadius: RV.sm, padding: '8px 12px', font: 'inherit',
+                fontWeight: 650, fontSize: 13.5, cursor: 'pointer', flexShrink: 0,
+              }}
+            >
+              Entrenar-ho
+            </button>
+          )}
+        </div>
+      )}
+
       {targeta({
         id: 'tot',
         titol: 'Tot alhora',
@@ -125,6 +167,20 @@ export default function ZonaPsico({ cos }: { cos: Cos }) {
                     {' · '}{b.descripcio}
                   </span>
                 </span>
+                {/* La nota del bloc. Si encara no n'has fet cap, no s'inventa
+                    res: senzillament no hi és. */}
+                {encertBloc(stats, b.id) !== null && (
+                  <span style={{
+                    flexShrink: 0, fontFamily: V.mono, fontSize: 12.5, fontWeight: 700,
+                    padding: '4px 8px', borderRadius: RV.xs,
+                    background: encertBloc(stats, b.id)! >= 70 ? V.okSoft
+                      : encertBloc(stats, b.id)! >= 50 ? V.warnSoft : V.granateSoft,
+                    color: encertBloc(stats, b.id)! >= 70 ? V.ok
+                      : encertBloc(stats, b.id)! >= 50 ? V.warn : V.granate,
+                  }}>
+                    {encertBloc(stats, b.id)}%
+                  </span>
+                )}
               </button>
               <button
                 onClick={() => setObert(obert === b.id ? null : b.id)}
@@ -165,6 +221,14 @@ export default function ZonaPsico({ cos }: { cos: Cos }) {
                         {PER_ID[id].descripcio}
                       </span>
                     </span>
+                    {encertDe(stats, id) !== null && (
+                      <span style={{
+                        flexShrink: 0, fontFamily: V.mono, fontSize: 11.5,
+                        color: V.muted, marginRight: 2,
+                      }}>
+                        {encertDe(stats, id)}%
+                      </span>
+                    )}
                     <I n="arrow" size={15} color={V.faint} />
                   </button>
                 ))}
