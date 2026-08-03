@@ -260,13 +260,11 @@ function BotoNav({
 
 /** Barra lateral de tinta. És la mateixa a l'escriptori i dins del calaix. */
 function Lateral({
-  activa, lloc, desplegada, onDesplega, onNavega, progres, nom, inicial, tema, onTema, mode, onMode,
+  activa, lloc, onNavega, progres, nom, inicial, tema, onTema, mode, onMode,
 }: {
   activa: string;
   /** On ets dins de la secció activa. */
   lloc: string | null;
-  desplegada: string | null;
-  onDesplega: (id: string) => void;
   onNavega: (to: string) => void;
   progres: UserProgress | null;
   nom: string;
@@ -459,7 +457,6 @@ export default function AppShell() {
   const [q, setQ] = useState('');
   const [progres, setProgres] = useState<UserProgress | null>(null);
   const [tema, setTema] = useState<Theme>(() => getInitialTheme());
-  const [desplegada, setDesplegada] = useState<string | null>(null);
   // Si ja ha triat en aquesta sessió no li tornem a preguntar encara que
   // el perfil del servidor trigui a refrescar-se.
   const [triaFeta, setTriaFeta] = useState<PerfilUs | null>(null);
@@ -480,8 +477,6 @@ export default function AppShell() {
   // que no es desmunta en canviar de ruta es quedava a l'alçada de la
   // pàgina anterior: obries un tema des de mig llistat i queia a mitges.
   useEffect(() => { amunt(); }, [pathname]);
-  // En canviar de secció, obre el submenú de la nova.
-  useEffect(() => { setDesplegada((d) => (d === activa ? d : activa)); }, [activa]);
 
   useEffect(() => {
     let viu = true;
@@ -527,8 +522,6 @@ export default function AppShell() {
     <Lateral
       activa={activa}
       lloc={lloc}
-      desplegada={desplegada}
-      onDesplega={(id) => setDesplegada((d) => (d === id ? null : id))}
       onNavega={anar}
       progres={progres}
       nom={nom}
