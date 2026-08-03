@@ -70,6 +70,10 @@ export function verbs(cos: Cos, temes: number): Verb[] {
           icona: 'check', to: r.test, insignia: 'TESTS', destacat: true,
         },
         {
+          titol: 'Psicotècnics', sub: 'Aptitud: figures, cubs, sèries i càlcul',
+          icona: 'brain', to: `${r.test}/psicotecnics`,
+        },
+        {
           titol: 'Flashcards', sub: 'Targetes ràpides, per fixar dades',
           icona: 'cards', to: r.flashcards,
         },
