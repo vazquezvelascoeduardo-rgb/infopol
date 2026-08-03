@@ -1,0 +1,148 @@
+/* Psicotècnics — la sessió ha de cabre a la pantalla, sense scroll.
+ *
+ * És el que més es nota quan fas un test: si has de baixar per veure les
+ * respostes, perds el fil i perds temps. I al simulacre el temps compta.
+ *
+ * La idea és senzilla: l'alçada mana. La capçalera i l'enunciat ocupen el
+ * que necessiten, i el que queda se'l reparteixen el dibuix i les opcions.
+ * El dibuix no imposa mida —porta viewBox i prou— o sigui que s'encongeix
+ * fins a cabre-hi.
+ *
+ * Les opcions van SEMPRE en graella de dues columnes, portin dibuix o
+ * text. Així no hi ha un salt de format entre una pregunta de paraules i
+ * una de cubs: totes es responen amb el mateix gest i al mateix lloc.
+ */
+
+.psico-sessio {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 10px 12px 12px;
+  box-sizing: border-box;
+}
+
+.psico-dins {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* L'enunciat: com a molt tres línies, i si no hi cap, s'escurça. Val més
+   perdre una coma que fer baixar la pantalla. */
+.psico-enunciat {
+  flex-shrink: 0;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.psico-cos {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+/* Quan no hi ha dibuix, les opcions se’n queden tot l’espai. */
+.psico-cos.sense-dibuix { grid-template-rows: minmax(0, 1fr); }
+
+.psico-estimul {
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  padding: 8px;
+  overflow: hidden;
+}
+
+/* La clau de tot: el dibuix s'encongeix fins a cabre a la seva caixa. */
+.psico-estimul svg {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+.psico-ops {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  align-content: end;
+}
+
+/* Cinc opcions —la matriu abstracta— van de tres en tres. */
+.psico-ops.cinc { grid-template-columns: repeat(3, 1fr); }
+
+.psico-op {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 52px;
+  min-width: 0;
+  border-radius: 13px;
+  border: 1.5px solid;
+  padding: 9px 11px;
+  font: inherit;
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.psico-op.amb-dibuix {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  padding: 7px;
+}
+
+.psico-op svg {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+}
+
+.psico-op .lletra {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.psico-op .text { min-width: 0; overflow-wrap: anywhere; }
+
+/* Pantalla ampla o mòbil de costat: el dibuix a l'esquerra i les respostes
+   a la dreta. Així el dibuix es fa gran sense empènyer res cap avall. */
+@media (min-width: 700px), (orientation: landscape) and (min-height: 380px) {
+  .psico-cos {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    gap: 14px;
+  }
+  .psico-cos.sense-dibuix { grid-template-columns: minmax(0, 1fr); }
+  .psico-ops { align-content: center; }
+  .psico-enunciat { font-size: 16px; -webkit-line-clamp: 2; }
+}
+
+/* Molt estret: les opcions de text van una sota l'altra, que amb dues
+   columnes no hi cabrien les respostes llargues. */
+@media (max-width: 340px) {
+  .psico-ops.text-llarg { grid-template-columns: 1fr; }
+}

@@ -42,7 +42,6 @@ const ARRELS = new Set(['/app', '/academia', '/operativa', '/perfil', '/chat']);
  */
 const SENSE_FLETXA = [/^\/estudi\/tema\//, /^\/mossos\/estudi\//];
 
-type Subseccio = { label: string; to: string };
 type Seccio = {
   id: string;
   label: string;
@@ -50,7 +49,6 @@ type Seccio = {
   to: string;
   /** Quantes coses hi ha a dins. Es calcula del contingut real. */
   compte?: number;
-  sub?: Subseccio[];
 };
 
 /** Temes del temari de Policia Local. El comptador de la barra els diu. */
@@ -63,34 +61,12 @@ const NAV: Seccio[] = [
   SEC_INICI,
   {
     id: 'academia', label: 'Acadèmia', icona: 'cap', to: '/academia', compte: TEMES_PL,
-    // Els mateixos tres verbs que la portada d'Acadèmia. La barra deia
-    // vuit coses i la portada cinc, i no eren les mateixes.
-    sub: [
-      { label: 'Estudiar', to: '/academia/estudiar' },
-      { label: 'Practicar', to: '/academia/practicar' },
-      { label: 'Repassar', to: '/academia/repassar' },
-      { label: 'Mossos', to: '/mossos' },
-    ],
   },
   {
     id: 'operativa', label: 'Operativa', icona: 'siren', to: '/operativa', compte: ESCENARIS_PENAL,
-    sub: [
-      { label: 'Catàleg SCT', to: '/operativa?sec=cataleg' },
-      { label: 'Superbuscador', to: '/superbuscador' },
-      { label: 'Lleis', to: '/leyes' },
-      { label: 'SC i Penal', to: '/operativa/penal' },
-      { label: 'Trànsit', to: '/operativa/trafico' },
-      { label: 'Alcoholèmia', to: '/calculadora-alcohol' },
-      { label: "Croquis d'accident", to: '/croquis' },
-      { label: 'Recursos', to: '/recursos' },
-    ],
   },
   {
     id: 'perfil', label: 'Perfil', icona: 'person', to: '/perfil',
-    sub: [
-      { label: 'Els meus logros', to: '/policia-local/logros' },
-      { label: 'Notícies', to: '/noticies' },
-    ],
   },
 ];
 
@@ -228,23 +204,20 @@ function PestanyaMobil({ s, on, onClick }: { s: Seccio; on: boolean; onClick: ()
 }
 
 function BotoNav({
-  s, on, obert, lloc, onNavega, onDesplega,
+  s, on, lloc, onNavega,
 }: {
   s: Seccio;
   on: boolean;
-  obert: boolean;
   /** On ets dins d'aquesta secció, si hi ets. */
   lloc: string | null;
   onNavega: (to: string) => void;
-  onDesplega: () => void;
 }) {
   return (
     <>
       <button
         type="button"
-        onClick={() => { onNavega(s.to); if (s.sub) onDesplega(); }}
+        onClick={() => onNavega(s.to)}
         aria-current={on ? 'page' : undefined}
-        aria-expanded={s.sub ? obert : undefined}
         style={{
           width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none',
           borderRadius: 13, padding: '11px 12px',
@@ -280,24 +253,7 @@ function BotoNav({
       </button>
 
       {/* Submenú: apareix en clicar la secció. */}
-      {s.sub && obert && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 1, padding: '4px 0 6px 22px' }}>
-          {s.sub.map((x) => (
-            <button
-              key={x.to + x.label}
-              type="button"
-              onClick={() => onNavega(x.to)}
-              style={{
-                width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none',
-                background: 'transparent', color: 'rgba(255,255,255,.5)',
-                borderLeft: '1px solid rgba(255,255,255,.12)',
-                borderRadius: 0, padding: '7px 12px', fontSize: 12.5, fontWeight: 600,
-              }}>
-              {x.label}
-            </button>
-          ))}
-        </div>
-      )}
+
     </>
   );
 }
@@ -395,10 +351,8 @@ function Lateral({
             key={s.id}
             s={s}
             on={activa === s.id}
-            obert={desplegada === s.id}
             lloc={activa === s.id ? lloc : null}
             onNavega={onNavega}
-            onDesplega={() => onDesplega(s.id)}
           />
         ))}
       </div>

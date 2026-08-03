@@ -212,14 +212,14 @@ export function svgFull(items) {
   const alt = 145;
   const cos = items.map((it, i) => svgItem(it, i + 1, i * alt)).join('\n');
   return `<svg xmlns="http://www.w3.org/2000/svg" width="620" height="${items.length * alt + 20}" viewBox="0 0 620 ${items.length * alt + 20}">
-  <rect width="100%" height="100%" fill="#fff"/>
+  <rect preserveAspectRatio="xMidYMid meet" height="100%" fill="#fff"/>
   ${cos}
 </svg>`;
 }
 
 // ── Dibuix per peces, per a l'app ────────────────────────────────
 const embolcall = (w, h, cos) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="100%">${cos}</svg>`;
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet">${cos}</svg>`;
 
 function marcAmbFigura(fig, c) {
   const cau = N * c + 12;

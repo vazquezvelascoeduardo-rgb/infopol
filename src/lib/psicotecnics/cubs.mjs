@@ -182,7 +182,7 @@ export function svgItem(item, num) {
 
 // ── Dibuix per peces, per a l'app ────────────────────────────────
 const embolcall = (w, h, cos) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="100%">${cos}</svg>`;
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet">${cos}</svg>`;
 
 export function svgEnunciat(item, c = 34) {
   const minX = Math.min(...item.celles.map((x) => x.nx));

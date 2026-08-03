@@ -250,6 +250,48 @@ export const CATEGORIES = [
 
 export const PER_ID = Object.fromEntries(CATEGORIES.map((c) => [c.id, c]));
 
+// ── Els blocs d'aptituds ─────────────────────────────────────────
+// Els exàmens no van per categories soltes: van per aptituds, i la nota
+// surt de com et vagi a cadascuna. Les catorze categories reparteixen en
+// cinc blocs, que són els de sempre a les proves policials.
+export const BLOCS = [
+  {
+    id: 'verbal',
+    nom: 'Aptitud verbal',
+    descripcio: 'Vocabulari i relacions entre paraules',
+    categories: ['sinonims', 'analogies'],
+  },
+  {
+    id: 'numeric',
+    nom: 'Aptitud numèrica',
+    descripcio: 'Càlcul, proporcions, gràfics i sèries de números',
+    categories: ['numeric', 'dades'],
+  },
+  {
+    id: 'espacial',
+    nom: 'Aptitud espacial',
+    descripcio: 'Cubs, plegats, girs i reflexos',
+    categories: ['cubs-desplegat', 'cubs-mirall', 'figura-reflectida',
+      'figura-girada', 'disc', 'dau-planol'],
+  },
+  {
+    id: 'abstracte',
+    nom: 'Raonament abstracte',
+    descripcio: 'Trobar la regla i continuar-la',
+    categories: ['abstracte', 'series-figures'],
+  },
+  {
+    id: 'atencio',
+    nom: 'Atenció i percepció',
+    descripcio: 'Comptar i comparar de pressa i sense equivocar-se',
+    categories: ['comptar-simbols', 'correspondencies'],
+  },
+];
+
+export const BLOC_DE = Object.fromEntries(
+  BLOCS.flatMap((b) => b.categories.map((c) => [c, b.id])),
+);
+
 /** Un ítem de la categoria que sigui, sempre amb la mateixa forma. */
 export function genera(categoriaId, seed) {
   const cat = PER_ID[categoriaId];
@@ -296,9 +338,23 @@ export function repartiment(perfil, quantes) {
   return out.filter((e) => e.n > 0).map(({ id, n }) => ({ id, n }));
 }
 
+/**
+ * Un examen d'un sol bloc d'aptitud, repartit entre les seves categories.
+ * Serveix per treballar la que et falla sense fer l'examen sencer.
+ */
+export function repartimentBloc(blocId, quantes) {
+  const cats = BLOCS.find((b) => b.id === blocId).categories;
+  const out = cats.map((id) => ({ id, n: Math.floor(quantes / cats.length) }));
+  let falten = quantes - out.reduce((s, e) => s + e.n, 0);
+  for (let i = 0; falten > 0; i = (i + 1) % out.length, falten--) out[i].n++;
+  return out.filter((e) => e.n > 0);
+}
+
 /** Un simulacre sencer, ja barrejat però amb les categories repartides. */
 export function simulacre(perfil, quantes, llavor = 1) {
-  const plan = repartiment(perfil, quantes);
+  const plan = BLOCS.some((b) => b.id === perfil)
+    ? repartimentBloc(perfil, quantes)
+    : repartiment(perfil, quantes);
   const items = [];
   let k = 0;
   for (const { id, n } of plan) {

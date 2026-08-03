@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { TOPICS, getTopicsByCategory } from '../data/tests';
 import { TEMES } from '../content/temari-pl';
+import { TEMES_MOSSOS } from '../content/temari-mossos';
 import { useFailuresCounts } from '../lib/failures';
 import { globalAverage, useGlobalStats } from '../lib/testStats';
 import type { ModulPro } from '../lib/pla';
@@ -174,9 +175,7 @@ export default function Academia() {
         <SelectorCos cos={cos} onCanvia={setCos} />
       </div>
 
-      <div className="v3-cols">
-        {/* ── Columna principal ── */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, minWidth: 0 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16, minWidth: 0 }}>
           <div style={{
             background: 'var(--v-ink-fixed)', borderRadius: RV.xl, padding: 24, color: '#fff',
             display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap',
@@ -239,7 +238,7 @@ export default function Academia() {
           {/* Tres botons i prou. Cadascun obre la seva pantalla, i allà
               hi ha tot el que li pertoca amb el principal destacat. */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 14 }}>
-            {verbs(cos, TEMES.length).map((v) => (
+            {verbs(cos, cos === 'mossos' ? TEMES_MOSSOS.length : TEMES.length).map((v) => (
               <TargetaMode
                 key={v.id}
                 m={{ titol: v.titol, sub: v.sub, icona: v.icona, insignia: v.insignia, to: '', destacat: v.id === 'practicar' }}
@@ -247,9 +246,7 @@ export default function Academia() {
                 onClick={() => nav(`/academia/${v.id}`)}
               />
             ))}
-          </div>
         </div>
-
       </div>
     </div>
   );

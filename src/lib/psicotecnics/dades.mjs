@@ -365,7 +365,7 @@ export function svgFull(items) {
     return svg;
   }).join('\n');
   return `<svg xmlns="http://www.w3.org/2000/svg" width="520" height="${y + 20}" viewBox="0 0 520 ${y + 20}">
-  <rect width="100%" height="100%" fill="#fff"/>
+  <rect preserveAspectRatio="xMidYMid meet" height="100%" fill="#fff"/>
   ${cos}
 </svg>`;
 }
@@ -381,5 +381,5 @@ export function svgEnunciat(item) {
   } else {
     cos = dibuixaBarres(item, 62, 4); w = 250; h = item.gent.length * 36 + 46;
   }
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="100%">${cos}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet">${cos}</svg>`;
 }

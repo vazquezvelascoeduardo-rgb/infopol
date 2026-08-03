@@ -202,7 +202,7 @@ export function svgFull(items) {
   const alt = 200;
   const cos = items.map((it, i) => svgItem(it, i + 1, i * alt)).join('\n');
   return `<svg xmlns="http://www.w3.org/2000/svg" width="530" height="${items.length * alt + 20}" viewBox="0 0 530 ${items.length * alt + 20}">
-  <rect width="100%" height="100%" fill="#fff"/>
+  <rect preserveAspectRatio="xMidYMid meet" height="100%" fill="#fff"/>
   ${cos}
 </svg>`;
 }
@@ -211,7 +211,7 @@ export function svgFull(items) {
 // A la pantalla d'un mòbil l'enunciat i cada opció han d'anar per separat:
 // les opcions són botons, i un sol SVG gegant no es podria prémer.
 const embolcall = (w, h, cos) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="100%">${cos}</svg>`;
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet">${cos}</svg>`;
 
 export function svgEnunciat(item, c = 54) {
   const cos = item.files.map((f, i) => f.map((conj, j) => {

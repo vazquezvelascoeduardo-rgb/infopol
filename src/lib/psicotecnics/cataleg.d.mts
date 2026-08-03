@@ -36,14 +36,25 @@ export type CategoriaPsico = {
 
 export type Perfil = 'mossos' | 'iopos';
 
+/** Un bloc d aptitud: com reparteixen els exàmens. */
+export type BlocPsico = {
+  id: string;
+  nom: string;
+  descripcio: string;
+  categories: string[];
+};
+
 export const CATEGORIES: CategoriaPsico[];
 export const PER_ID: Record<string, CategoriaPsico>;
 export const SIMULACRES: Record<Perfil, { nom: string; pesos: Record<string, number> }>;
+export const BLOCS: BlocPsico[];
+export const BLOC_DE: Record<string, string>;
 export const LLARGADES: readonly number[];
 export const SEGONS_PER_PREGUNTA: number;
 
 export function genera(categoriaId: string, seed: number): ItemPsico;
 export function repartiment(perfil: Perfil, quantes: number): { id: string; n: number }[];
-export function simulacre(perfil: Perfil, quantes: number, llavor?: number): ItemPsico[];
+export function repartimentBloc(blocId: string, quantes: number): { id: string; n: number }[];
+export function simulacre(perfilOBloc: string, quantes: number, llavor?: number): ItemPsico[];
 export function segonsPer(quantes: number): number;
 export function tempsText(quantes: number): string;

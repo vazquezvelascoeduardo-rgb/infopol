@@ -254,6 +254,34 @@ export default function ZonaTest({ cos: cosProp }: { cos?: Cos }) {
         </span>
       </button>
 
+      {/* Psicotècnics. Van a part del temari perquè no són temari: no hi ha
+          res per estudiar, s'entrenen. I no tenen banc de preguntes, es
+          fabriquen, o sigui que no s'acaben mai. */}
+      <button
+        type="button"
+        onClick={() => nav(cos === 'mossos' ? '/mossos/psicotecnics' : '/policia-local/psicotecnics')}
+        style={{
+          width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none', borderRadius: 22,
+          padding: 20, marginTop: 14, background: V.surface, color: V.ink, boxShadow: V.shadow,
+          display: 'flex', alignItems: 'center', gap: 16,
+        }}>
+        <span style={{
+          width: 46, height: 46, flexShrink: 0, borderRadius: 15, background: a.soft, color: a.ink,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <I n="layers" size={21} sw={1.9} />
+        </span>
+        <span style={{ flex: 1, minWidth: 0 }}>
+          <span style={{ display: 'block', fontSize: 17, fontWeight: 800, letterSpacing: -0.5 }}>
+            Psicotècnics
+          </span>
+          <span style={{ display: 'block', fontSize: 12.5, color: V.muted, marginTop: 4 }}>
+            Cinc blocs d'aptitud · es fabriquen, no s'acaben mai
+          </span>
+        </span>
+        <I n="arrow" size={16} sw={2.2} color={V.faint} />
+      </button>
+
       {/* Errors anteriors: només si en tens. Un botó que no porta enlloc
           fa dubtar de si has fet alguna cosa malament. */}
       {failures.total > 0 && (

@@ -227,7 +227,7 @@ export function svgFull(items) {
   const alt = 250;
   const cos = items.map((it, i) => svgItem(it, i + 1, i * alt)).join('\n');
   return `<svg xmlns="http://www.w3.org/2000/svg" width="480" height="${items.length * alt + 20}" viewBox="0 0 480 ${items.length * alt + 20}">
-  <rect width="100%" height="100%" fill="#fff"/>
+  <rect preserveAspectRatio="xMidYMid meet" height="100%" fill="#fff"/>
   ${cos}
 </svg>`;
 }
@@ -273,5 +273,5 @@ export function svgEnunciat(item, s = 26) {
     + cara([dx + 1, 1, dz + 1], [0, 0, -1], [0, -1, 0], item.dau.dreta);
 
   const w = 2 * COSTAT_ * P.K * s + 12, h = COSTAT_ * s + s * 2.4;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="100%">${cos}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet">${cos}</svg>`;
 }

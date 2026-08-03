@@ -227,7 +227,7 @@ export function svgFull(items) {
     return s;
   }).join('\n');
   return `<svg xmlns="http://www.w3.org/2000/svg" width="560" height="${y + 20}" viewBox="0 0 560 ${y + 20}">
-  <rect width="100%" height="100%" fill="#fff"/>
+  <rect preserveAspectRatio="xMidYMid meet" height="100%" fill="#fff"/>
   ${cos}
 </svg>`;
 }
@@ -236,7 +236,7 @@ export function svgFull(items) {
 // Aquestes dues famílies tenen les opcions en números, o sigui que només
 // cal dibuixar l'enunciat.
 const embolcall = (w, h, cos) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="100%">${cos}</svg>`;
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet">${cos}</svg>`;
 
 export function svgEnunciat(item) {
   if (item.graella) {

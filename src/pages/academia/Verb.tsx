@@ -28,11 +28,12 @@ function Targeta({ e, gran, bloquejat, onClick }: {
       aria-disabled={bloquejat}
       style={{
         position: 'relative', textAlign: 'left', width: '100%',
-        cursor: bloquejat ? 'not-allowed' : 'pointer', border: 'none', borderRadius: 22,
+        cursor: bloquejat ? 'not-allowed' : 'pointer', border: 'none', borderRadius: 20,
+        transition: 'transform .18s ease, box-shadow .18s ease',
         padding: gran ? 22 : 18,
         background: gran ? 'var(--accent)' : V.surface,
         color: gran ? '#fff' : V.ink,
-        boxShadow: gran ? '0 14px 30px var(--accent-ombra)' : V.shadow,
+        boxShadow: gran ? '0 10px 26px var(--accent-ombra)' : '0 1px 2px rgba(21,21,28,.04), 0 6px 18px rgba(21,21,28,.05)',
         display: 'flex', alignItems: 'center', gap: 15,
       }}>
       <span style={{
@@ -92,13 +93,14 @@ export default function Verb() {
     <div className="v3-page v3-anim" style={{ ['--accent' as never]: meta.accent }}>
       <Capcalera kicker={`ACADÈMIA · ${meta.label.toUpperCase()}`} titol={v.titol} lead={v.sub} />
 
-      <div style={{ display: 'grid', gap: 12, maxWidth: 720 }}>
+      <div style={{ display: 'grid', gap: 12 }}>
         <Targeta
           e={principal}
           gran
           bloquejat={!!principal.modul && esBloquejat(principal.modul, pla)}
           onClick={() => nav(principal.modul && esBloquejat(principal.modul, pla) ? '/perfil' : principal.to)}
         />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(230px,1fr))', gap: 12 }}>
         {resta.map((e) => {
           const tancat = !!e.modul && esBloquejat(e.modul, pla);
           return (
@@ -111,6 +113,7 @@ export default function Verb() {
             />
           );
         })}
+        </div>
       </div>
     </div>
   );
