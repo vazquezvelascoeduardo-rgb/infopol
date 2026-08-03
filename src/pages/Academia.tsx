@@ -85,15 +85,18 @@ function TargetaMode({ m, bloquejat, onClick }: { m: Mode; bloquejat: boolean; o
   return (
     <button
       type="button"
+      className={m.destacat ? 'v3-sura' : undefined}
       onClick={onClick}
       aria-disabled={bloquejat}
       style={{
         position: 'relative',
         textAlign: 'left', cursor: bloquejat ? 'not-allowed' : 'pointer', border: 'none', borderRadius: 22, padding: 20,
         background: fons, color: text,
-        boxShadow: m.destacat ? '0 14px 30px var(--accent-ombra)' : V.shadow,
+        boxShadow: m.destacat
+          ? '0 2px 6px var(--accent-ombra), 0 18px 40px var(--accent-ombra)'
+          : V.shadow,
         display: 'flex', flexDirection: 'column', minHeight: 150,
-        transition: 'background .32s ease, box-shadow .32s ease',
+        transition: 'background .32s ease, box-shadow .32s ease, transform .34s cubic-bezier(.22, 1, .36, 1)',
       }}>
       <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
         <span style={{

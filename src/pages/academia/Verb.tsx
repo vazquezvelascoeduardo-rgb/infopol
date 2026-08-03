@@ -24,16 +24,19 @@ function Targeta({ e, gran, bloquejat, onClick }: {
   return (
     <button
       type="button"
+      className={gran ? 'v3-sura' : undefined}
       onClick={onClick}
       aria-disabled={bloquejat}
       style={{
         position: 'relative', textAlign: 'left', width: '100%',
         cursor: bloquejat ? 'not-allowed' : 'pointer', border: 'none', borderRadius: 20,
-        transition: 'transform .18s ease, box-shadow .18s ease',
+        transition: 'box-shadow .34s cubic-bezier(.22, 1, .36, 1), transform .34s cubic-bezier(.22, 1, .36, 1)',
         padding: gran ? 22 : 18,
         background: gran ? 'var(--accent)' : V.surface,
         color: gran ? '#fff' : V.ink,
-        boxShadow: gran ? '0 10px 26px var(--accent-ombra)' : '0 1px 2px rgba(21,21,28,.04), 0 6px 18px rgba(21,21,28,.05)',
+        boxShadow: gran
+          ? '0 2px 6px var(--accent-ombra), 0 18px 40px var(--accent-ombra)'
+          : '0 1px 2px rgba(21,21,28,.04), 0 6px 18px rgba(21,21,28,.05)',
         display: 'flex', alignItems: 'center', gap: 15,
       }}>
       <span style={{

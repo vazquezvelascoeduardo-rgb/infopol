@@ -6869,3 +6869,27 @@ mark.tm {
 html.dark mark.tm {
   background: linear-gradient(180deg, transparent 58%, rgba(255, 138, 52, 0.32) 58%);
 }
+
+/* La targeta destacada: sura sobre el paper i creix una mica en
+   passar-hi el ratolí. Poc a posta — ha de cridar l'ull, no saltar. La
+   corba és la d'Apple: surt de pressa i frena suau, que és el que fa que
+   sembli que pesa alguna cosa i no que s'estira de cop. */
+.v3-sura {
+  transition: transform .34s cubic-bezier(.22, 1, .36, 1),
+              box-shadow .34s cubic-bezier(.22, 1, .36, 1);
+  will-change: transform;
+}
+.v3-sura:hover {
+  transform: translateY(-4px) scale(1.018);
+}
+.v3-sura:active {
+  transform: translateY(-1px) scale(1.004);
+  transition-duration: .12s;
+}
+
+/* Qui té el sistema amb les animacions reduïdes no vol que res es mogui. */
+@media (prefers-reduced-motion: reduce) {
+  .v3-sura { transition: none; }
+  .v3-sura:hover,
+  .v3-sura:active { transform: none; }
+}
