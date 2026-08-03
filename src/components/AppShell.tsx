@@ -66,10 +66,9 @@ const NAV: Seccio[] = [
     // Els mateixos tres verbs que la portada d'Acadèmia. La barra deia
     // vuit coses i la portada cinc, i no eren les mateixes.
     sub: [
-      { label: 'Estudiar', to: '/estudi' },
-      { label: 'Practicar', to: '/policia-local' },
-      { label: 'Repassar', to: '/repas' },
-      { label: 'Cultura general', to: '/cultura-general' },
+      { label: 'Estudiar', to: '/academia/estudiar' },
+      { label: 'Practicar', to: '/academia/practicar' },
+      { label: 'Repassar', to: '/academia/repassar' },
       { label: 'Mossos', to: '/mossos' },
     ],
   },
@@ -136,6 +135,9 @@ const ON_ETS: { prefix: string; nom: string }[] = [
   { prefix: '/cultura-general', nom: 'Cultura general' },
   { prefix: '/actualitat', nom: 'Actualitat' },
   { prefix: '/retos', nom: 'Reptes' },
+  { prefix: '/academia/estudiar', nom: 'Estudiar' },
+  { prefix: '/academia/practicar', nom: 'Practicar' },
+  { prefix: '/academia/repassar', nom: 'Repassar' },
   { prefix: '/academia', nom: 'Portada' },
 
   { prefix: '/operativa/penal', nom: 'SC i Penal' },

@@ -56,6 +56,7 @@ const AvisLegal = lazy(() => import('./pages/legal/Legals').then((m) => ({ defau
 const Privacitat = lazy(() => import('./pages/legal/Legals').then((m) => ({ default: m.Privacitat })));
 const Condicions = lazy(() => import('./pages/legal/Legals').then((m) => ({ default: m.Condicions })));
 const Academia = lazy(() => import('./pages/Academia'));
+const AcademiaVerb = lazy(() => import('./pages/academia/Verb'));
 const ZonaPsico = lazy(() => import('./pages/psico/ZonaPsico'));
 const PsicoSessio = lazy(() => import('./pages/psico/PsicoSessio'));
 const Retos = lazy(() => import('./pages/Retos'));
@@ -153,6 +154,7 @@ export default function App() {
 
               {/* Acadèmia */}
               <Route path="/academia" element={<Academia />} />
+              <Route path="/academia/:verb" element={<AcademiaVerb />} />
               {/* El temari antic vivia també sota /academia/temari, duplicant
                   les fitxes de lleis. Ja no: qui hi arribi per un enllaç vell
                   va a parar a la biblioteca, que és on són de debò. */}
