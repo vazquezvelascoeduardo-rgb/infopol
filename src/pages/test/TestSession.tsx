@@ -3,7 +3,7 @@
 // es 'tot' fem mescla de tots els temes.
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
-import { TOPICS, getAllQuestions, getAllMossosQuestions, getAllCulturaQuestions, getAllActualitatQuestions, getEverythingQuestions, getTopic } from '../../data/tests';
+import { TOPICS, getAllQuestions, getAllMossosQuestions, getAllCulturaQuestions, getAllActualitatQuestions, getEverythingQuestions, getMixQuestions, getTopic } from '../../data/tests';
 import type { TestQuestion } from '../../data/tests/types';
 import {
   getAnsweredIds, markAnswered, resetProgress,
@@ -52,7 +52,11 @@ type SessionState =
 
 const ALL_TOPICS_SLUG = 'tot';
 const EVERYTHING_SLUG = 'totes';
+const MIX_SLUG = 'mixt';
 const REPAS_SLUG = 'repas';
+
+/** Categories que entren al test aleatori (slug 'mixt'). */
+const CATEGORIES_MIXT = new Set(['temari', 'cultura', 'actualitat']);
 
 export default function TestSession() {
   const { slug = '' } = useParams();
@@ -61,9 +65,12 @@ export default function TestSession() {
 
   // 'totes' = pool absolut (totes les preguntes de tots els temes).
   const isEverything = slug === EVERYTHING_SLUG;
-  // isAll cobreix tant 'tot' (per cos) com 'totes' (absolut): comparteixen
-  // la mateixa lògica de pool combinat, badge d'origen i distribució.
-  const isAll = slug === ALL_TOPICS_SLUG || isEverything;
+  // 'mixt' = el test aleatori: temari + cultura general + actualitat.
+  const isMix = slug === MIX_SLUG;
+  // isAll cobreix 'tot' (per cos), 'totes' (absolut) i 'mixt' (aleatori):
+  // tots tres comparteixen la lògica de pool combinat, badge d'origen i
+  // distribució del progrés al tema d'on ve cada pregunta.
+  const isAll = slug === ALL_TOPICS_SLUG || isEverything || isMix;
   const isRepas = slug === REPAS_SLUG;
   const topic = (isAll || isRepas) ? null : getTopic(slug);
 
@@ -87,13 +94,14 @@ export default function TestSession() {
     if (isRepas) return buildRepasPool({ onlyDue: true, max: 50 });
     if (isAll) {
       if (isEverything) return getEverythingQuestions();
+      if (isMix) return getMixQuestions();
       if (isMossosRoute) return getAllMossosQuestions();
       if (isCulturaRoute) return getAllCulturaQuestions();
       if (isActualitatRoute) return getAllActualitatQuestions();
       return getAllQuestions();
     }
     return topic?.questions ?? [];
-  }, [isAll, isEverything, isRepas, isMossosRoute, isCulturaRoute, isActualitatRoute, topic]);
+  }, [isAll, isEverything, isMix, isRepas, isMossosRoute, isCulturaRoute, isActualitatRoute, topic]);
 
   // Per a 'tot', el progrés és la unió dels temes del cos corresponent.
   // Per a 'repas', no usem progrés (les preguntes es repeteixen segons SRS).
@@ -103,7 +111,9 @@ export default function TestSession() {
       const set = new Set<string>();
       for (const tp of TOPICS) {
         const cat = tp.category ?? 'temari';
-        if (!isEverything) {
+        if (isMix) {
+          if (!CATEGORIES_MIXT.has(cat)) continue;
+        } else if (!isEverything) {
           if (isMossosRoute && cat !== 'mossos') continue;
           if (isCulturaRoute && cat !== 'cultura') continue;
           if (isActualitatRoute && cat !== 'actualitat') continue;
@@ -114,7 +124,7 @@ export default function TestSession() {
       return set;
     }
     return getAnsweredIds(slug);
-  }, [slug, isAll, isEverything, isRepas, isMossosRoute, isCulturaRoute, isActualitatRoute]);
+  }, [slug, isAll, isEverything, isMix, isRepas, isMossosRoute, isCulturaRoute, isActualitatRoute]);
 
   // Nomes per al hook reactiu (re-render quan canvia localStorage).
   useTopicProgress(slug);
@@ -136,9 +146,11 @@ export default function TestSession() {
     ? t('test.repas.title')
     : isEverything
       ? 'Totes les preguntes'
-      : isAll
-        ? t('test.list.allMixed')
-        : topic!.title;
+      : isMix
+        ? 'Test aleatori'
+        : isAll
+          ? t('test.list.allMixed')
+          : topic!.title;
   const remaining = isRepas ? pool.length : pool.length - answeredIds.size;
 
   // Quan s'hi arriba des del full de configuració, la pantalla de
@@ -365,7 +377,7 @@ export default function TestSession() {
     // ── 4) Calculem el resum, registrem stats i comprovem logros ──
     const score = computeScore(state.questions, state.answers);
     const durationSec = Math.max(1, Math.round((Date.now() - state.startedAt) / 1000));
-    const statsSlug = isEverything ? 'totes' : isAll ? 'tot' : slug;
+    const statsSlug = isEverything ? 'totes' : isMix ? 'mixt' : isAll ? 'tot' : slug;
     const prevStatsSnapshot = getGlobalStats(); // copia ABANS de gravar
     const prevTopicStats = getTopicStats(statsSlug);
     recordTestResult({

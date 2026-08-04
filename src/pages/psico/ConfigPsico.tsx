@@ -50,31 +50,26 @@ export default function ConfigPsico({
   }, [onTanca]);
 
   return (
-    <div style={{
-      position: 'fixed', inset: 0, zIndex: 200,
-      display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
-    }}>
+    <div className="ap-vel">
       <button
         onClick={onTanca}
         aria-label="Tancar"
         style={{
-          position: 'absolute', inset: 0, background: 'rgba(0,0,0,.34)',
+          position: 'absolute', inset: 0, background: 'none',
           border: 'none', cursor: 'pointer',
         }}
       />
-      <div style={{
-        position: 'relative', width: '100%', maxWidth: 520,
-        background: V.paper, borderRadius: `${RV.xl}px ${RV.xl}px 0 0`,
-        padding: '16px 16px 22px', boxShadow: V.shadowLg,
-        maxHeight: '88vh', overflowY: 'auto',
-      }}>
-        <div style={{
-          width: 38, height: 4, borderRadius: 9, background: V.border,
-          margin: '0 auto 14px',
-        }} />
-
-        <Mono color={accent.ink}>{meta}</Mono>
-        <h2 style={{ margin: '4px 0 16px', fontSize: 20, fontWeight: 750, color: V.ink }}>
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Configura ${titol}`}
+        className="ap-full"
+        style={{ padding: '20px 20px 24px' }}>
+        <Mono color={accent.ink} style={{ letterSpacing: 1.6 }}>{meta.toUpperCase()}</Mono>
+        <h2 style={{
+          margin: '5px 0 18px', fontSize: 21, fontWeight: 800,
+          letterSpacing: -0.6, color: V.ink,
+        }}>
           {titol}
         </h2>
 
@@ -147,11 +142,12 @@ export default function ConfigPsico({
         </label>
 
         <button
+          className="ap-prem"
           onClick={() => onComenca({ quantes, format, ambTemps })}
           style={{
-            width: '100%', padding: 13, borderRadius: RV.sm, border: 'none',
+            width: '100%', padding: 15, borderRadius: RV.md, border: 'none',
             background: accent.accent, color: '#fff', font: 'inherit',
-            fontWeight: 700, fontSize: 15.5, cursor: 'pointer',
+            fontWeight: 800, fontSize: 15.5, letterSpacing: -0.3, cursor: 'pointer',
           }}
         >
           Començar

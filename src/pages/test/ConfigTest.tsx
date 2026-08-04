@@ -53,27 +53,20 @@ export default function ConfigTest({
   const n = quantes || total;
 
   return (
-    <div style={{
-      position: 'fixed', inset: 0, zIndex: 200,
-      display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
-    }}>
+    <div className="ap-vel">
       <button
         type="button"
         aria-label="Tanca"
         onClick={onTanca}
-        style={{ position: 'absolute', inset: 0, background: 'rgba(21,21,28,.5)', border: 'none', cursor: 'pointer' }}
+        style={{ position: 'absolute', inset: 0, background: 'none', border: 'none', cursor: 'pointer' }}
       />
 
       <div
         role="dialog"
         aria-modal="true"
         aria-label={`Configura el test de ${titol}`}
-        className="v3-config-full"
-        style={{
-          position: 'relative', width: '100%', maxWidth: 560, maxHeight: '92dvh', overflowY: 'auto',
-          background: V.paper, borderRadius: '26px 26px 0 0', padding: 24,
-          boxShadow: '0 -18px 50px rgba(21,21,28,.28)',
-        }}>
+        className="ap-full"
+        style={{ maxWidth: 560, padding: 24 }}>
         {/* Capçalera */}
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 13, marginBottom: 22 }}>
           <span style={{
@@ -204,6 +197,7 @@ export default function ConfigTest({
           </button>
           <button
             type="button"
+            className="ap-prem"
             onClick={() => onComenca({ quantes, format })}
             style={{
               flex: 1, cursor: 'pointer', border: 'none', borderRadius: RV.md, padding: 16,

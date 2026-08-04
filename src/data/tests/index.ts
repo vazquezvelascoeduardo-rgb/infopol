@@ -173,6 +173,26 @@ export function getAllQuestions(): TaggedQuestion[] {
   return out;
 }
 
+/** Categories que entren al test aleatori de Policia Local. */
+const CATEGORIES_MIXT = new Set(['temari', 'cultura', 'actualitat']);
+
+/**
+ * Pool del **test aleatori**: temari, cultura general i actualitat
+ * barrejats. Els municipis en queden fora a posta — cada ajuntament té
+ * el seu temari i no té sentit que li caiguin les ordenances d'un altre
+ * poble en un test general.
+ */
+export function getMixQuestions(): TaggedQuestion[] {
+  const out: TaggedQuestion[] = [];
+  for (const t of TOPICS) {
+    if (!CATEGORIES_MIXT.has(t.category ?? 'temari')) continue;
+    for (const q of t.questions) {
+      out.push({ ...q, topicSlug: t.slug });
+    }
+  }
+  return out;
+}
+
 /** Pool ABSOLUT: TOTES les preguntes de TOTS els temes (qualsevol
  *  categoria: temari, cultura, municipi, mossos i actualitat). Per al
  *  mode "totes les preguntes de cop". */
