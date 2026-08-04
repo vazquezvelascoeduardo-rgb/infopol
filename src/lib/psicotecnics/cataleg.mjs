@@ -21,6 +21,7 @@ import * as comptar from './comptar.mjs';
 import * as numeric from './numeric.mjs';
 import * as dades from './dades.mjs';
 import * as verbal from './verbal.mjs';
+import * as rubik from './rubik.mjs';
 
 const opcionsSvg = (mod, it, n) =>
   Array.from({ length: n }, (_, i) => ({ svg: mod.svgOpcio(it, i) }));
@@ -221,6 +222,21 @@ export const CATEGORIES = [
     },
   },
   {
+    id: 'rubik',
+    nom: 'Cub de Rubik',
+    descripcio: 'Com queda el cub després dels moviments',
+    grafica: true,
+    fes: (seed) => {
+      const it = rubik.generaItem(seed);
+      return {
+        enunciat: 'Com quedarà el cub després dels moviments?',
+        svg: rubik.svgEnunciat(it),
+        opcions: Array.from({ length: 4 }, (_, i) => ({ svg: rubik.svgOpcio(it, i) })),
+        correcta: it.correcta,
+      };
+    },
+  },
+  {
     id: 'sinonims',
     nom: 'Sinònims i antònims',
     descripcio: 'La paraula de significat més semblant o més oposat',
@@ -272,7 +288,7 @@ export const BLOCS = [
     nom: 'Aptitud espacial',
     descripcio: 'Cubs, plegats, girs i reflexos',
     categories: ['cubs-desplegat', 'cubs-mirall', 'figura-reflectida',
-      'figura-girada', 'disc', 'dau-planol'],
+      'figura-girada', 'disc', 'dau-planol', 'rubik'],
   },
   {
     id: 'abstracte',
