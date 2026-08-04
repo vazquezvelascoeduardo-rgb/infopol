@@ -19,8 +19,12 @@ import {
 import { recordFailure, recordSuccess, buildRepasPool, useAllFailures, removeFailure, resetAllFailures, LEARNED_THRESHOLD, type FailureRecord } from '../../lib/failures';
 import { checkAchievements, type Achievement } from '../../lib/achievements';
 import { useT } from '../../lib/i18n';
+import {
+  BarraFocus, DialegFocus, FIc, FP, MarcFocus, PeuFocus, ProgresFocus, useEsMobil,
+} from '../../lib/focus';
 import { I, Mono, V } from '../../lib/v3';
 import ReportQuestionButton from '../../components/ReportQuestionButton';
+import ConfigTest, { type ConfigEscollida } from './ConfigTest';
 
 type Mode = 'exam' | 'study'; // exam = simulacre, study = interactiu
 
@@ -470,18 +474,10 @@ function SelectPhase({
   isRepas?: boolean;
 }) {
   const { t } = useT();
-  // Mode 'study' (interactiu) per defecte sempre — l'usuari va
-  // demanar tenir el feedback immediat com a opció principal. Si vol
-  // simular un examen real ha de canviar a 'exam' manualment.
-  const [mode, setMode] = useState<Mode>('study');
-  // Maxim 50 preguntes per test (encara que el pool tingui mes).
-  const MAX_PER_TEST = 50;
-  const cappedRemaining = Math.min(remaining, MAX_PER_TEST);
-  const choices = [10, 25, 50].filter((n) => n <= cappedRemaining);
-  // Si queden < 50, afegim el nombre exacte com a opcio (p.ex. 37).
-  if (cappedRemaining > 0 && cappedRemaining < 50 && !choices.includes(cappedRemaining)) {
-    choices.push(cappedRemaining);
-  }
+  // El full de configuració s'obre tot sol en arribar: si has clicat un
+  // test, ja has dit que en vols fer un. Es pot tancar i tornar a obrir
+  // amb el botó de sota.
+  const [obert, setObert] = useState(true);
   const exhausted = remaining === 0;
   const fet = Math.max(0, total - remaining);
   const pct = total > 0 ? Math.round((fet / total) * 100) : 0;
@@ -495,13 +491,14 @@ function SelectPhase({
         <h1 style={{ fontSize: 29, fontWeight: 800, letterSpacing: -1.3, lineHeight: 1.12, margin: '6px 0 0' }}>
           {title}
         </h1>
-        <p style={{ fontSize: 13.5, color: V.muted, margin: '7px 0 0' }}>
-          {isRepas
-            ? t('test.repas.poolStatus').replace('{n}', String(remaining))
-            : t('test.session.poolStatus')
-                .replace('{remaining}', String(remaining))
-                .replace('{total}', String(total))}
-        </p>
+        {/* Al repàs sí que interessa quantes en tens: és el motiu pel qual
+            hi entres. A un tema normal, el comptador no fa decidir res —
+            la barra de sota ja diu per on vas. */}
+        {isRepas && (
+          <p style={{ fontSize: 13.5, color: V.muted, margin: '7px 0 0' }}>
+            {t('test.repas.poolStatus').replace('{n}', String(remaining))}
+          </p>
+        )}
         {/* Barra de progrés del tema: quantes preguntes ja has contestat
             alguna vegada. Sense números repetits, només la proporció. */}
         {!isRepas && total > 0 && (
@@ -543,102 +540,35 @@ function SelectPhase({
         </div>
       ) : (
         <>
-          <Mono size={10} color={V.faint} style={{ display: 'block', letterSpacing: 1.4, marginBottom: 10 }}>
-            {t('test.session.modeLabel')}
-          </Mono>
-          <div style={{
-            display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))',
-            gap: 10, marginBottom: 24,
-          }}>
-            {([
-              { m: 'study' as Mode, ic: 'brain' as const, tit: t('test.session.modeStudy'), des: t('test.session.modeStudyDesc') },
-              { m: 'exam' as Mode, ic: 'clock' as const, tit: t('test.session.modeExam'), des: t('test.session.modeExamDesc') },
-            ]).map((o) => {
-              const on = mode === o.m;
-              return (
-                <button
-                  key={o.m}
-                  type="button"
-                  onClick={() => setMode(o.m)}
-                  aria-pressed={on}
-                  style={{
-                    textAlign: 'left', cursor: 'pointer', borderRadius: 18, padding: 18,
-                    border: on ? `2px solid ${V.terra}` : `1px solid ${V.border}`,
-                    background: on ? V.terraSoft : V.surface,
-                    color: V.ink, display: 'flex', gap: 13, alignItems: 'flex-start',
-                  }}>
-                  <span style={{
-                    width: 38, height: 38, flexShrink: 0, borderRadius: 12,
-                    background: on ? V.terra : V.surface2, color: on ? '#fff' : V.muted,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}>
-                    <I n={o.ic} size={18} sw={1.9} color={on ? '#fff' : undefined} />
-                  </span>
-                  <span style={{ minWidth: 0 }}>
-                    <span style={{ display: 'block', fontSize: 15, fontWeight: 800, letterSpacing: -0.4 }}>
-                      {o.tit}
-                    </span>
-                    <span style={{ display: 'block', fontSize: 12.5, color: V.muted, lineHeight: 1.45, marginTop: 4 }}>
-                      {o.des}
-                    </span>
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          <Mono size={10} color={V.faint} style={{ display: 'block', letterSpacing: 1.4, marginBottom: 10 }}>
-            {t('test.session.howMany')}
-          </Mono>
-          <div style={{
-            display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(96px,1fr))', gap: 10,
-          }}>
-            {choices.map((n) => (
-              <button
-                key={n}
-                type="button"
-                onClick={() => onStart(n, mode)}
-                style={{
-                  cursor: 'pointer', border: `1px solid ${V.border}`, borderRadius: 18,
-                  padding: '20px 12px', background: V.surface, color: V.ink,
-                  fontSize: 22, fontWeight: 800, letterSpacing: -0.8, lineHeight: 1,
-                }}>
-                {n}
-                {n === cappedRemaining && cappedRemaining < 50 && (
-                  <Mono size={9} color={V.faint} style={{ display: 'block', marginTop: 6, letterSpacing: 1 }}>
-                    {t('test.session.allRemaining').toUpperCase()}
-                  </Mono>
-                )}
-              </button>
-            ))}
-          </div>
-
-          {!isRepas && total > 0 && (
-            <button
-              type="button"
-              onClick={() => onStart(total, mode, true)}
-              style={{
-                width: '100%', marginTop: 12, cursor: 'pointer', border: 'none', borderRadius: 20,
-                padding: 20, background: V.terra, color: '#fff',
-                boxShadow: '0 14px 30px rgba(255,122,26,.30)',
-                display: 'flex', alignItems: 'center', gap: 15, textAlign: 'left',
-              }}>
-              <span style={{
-                width: 42, height: 42, flexShrink: 0, borderRadius: 14, background: 'rgba(255,255,255,.24)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <I n="play" size={18} ple color="#fff" />
+          {/* Com i quantes es tria al full que sura, no en aquesta pàgina:
+              és el mateix full que surt quan tries un tema d'una categoria
+              o una pràctica de psicotècnics. Un sol lloc per decidir. */}
+          <button
+            type="button"
+            className="ap-prem"
+            onClick={() => setObert(true)}
+            style={{
+              width: '100%', cursor: 'pointer', border: 'none', borderRadius: 22,
+              padding: 22, background: V.terra, color: '#fff',
+              boxShadow: '0 14px 30px rgba(255,122,26,.30)',
+              display: 'flex', alignItems: 'center', gap: 16, textAlign: 'left',
+            }}>
+            <span style={{
+              width: 46, height: 46, flexShrink: 0, borderRadius: 15, background: 'rgba(255,255,255,.22)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <I n="play" size={19} ple color="#fff" />
+            </span>
+            <span style={{ flex: 1, minWidth: 0 }}>
+              <span style={{ display: 'block', fontSize: 19, fontWeight: 800, letterSpacing: -0.6 }}>
+                Comença el test
               </span>
-              <span style={{ flex: 1, minWidth: 0 }}>
-                <span style={{ display: 'block', fontSize: 17, fontWeight: 800, letterSpacing: -0.55 }}>
-                  El tema sencer
-                </span>
-                <span style={{ display: 'block', fontSize: 12.5, opacity: 0.9, marginTop: 3 }}>
-                  Les {total} preguntes, incloses les que ja has fet
-                </span>
+              <span style={{ display: 'block', fontSize: 13, opacity: 0.9, marginTop: 4 }}>
+                Tria quantes preguntes i en quin format
               </span>
-            </button>
-          )}
+            </span>
+            <I n="arrow" size={18} sw={2.2} color="rgba(255,255,255,.85)" />
+          </button>
 
           {total > remaining && (
             <button
@@ -653,6 +583,23 @@ function SelectPhase({
               </Mono>
             </button>
           )}
+
+          {obert && (
+            <ConfigTest
+              titol={title}
+              meta={isRepas
+                ? t('test.repas.poolStatus').replace('{n}', String(remaining))
+                : 'Tria quantes en vols fer i com'}
+              total={total}
+              disponibles={remaining}
+              onTanca={() => setObert(false)}
+              onComenca={(c: ConfigEscollida) => {
+                setObert(false);
+                if (c.quantes) onStart(c.quantes, c.format);
+                else onStart(total, c.format, true);
+              }}
+            />
+          )}
         </>
       )}
     </div>
@@ -662,36 +609,6 @@ function SelectPhase({
 // ════════════════════════════════════════════════════════════════════
 // FASE 2 — RUN
 // ════════════════════════════════════════════════════════════════════
-
-// ── Paleta i icones del Mode Focus (disseny "Test Focus") ───────────
-const FP = {
-  bg: '#F4F1EC', bgDeep: '#EFEAE2', card: '#FFFFFF',
-  ink: '#15151C', inkSoft: '#4A463F', inkMuted: '#6E6A63', inkFaint: '#9A938A',
-  hairline: 'rgba(21,21,28,0.07)', line2: '#E5DFD5',
-  terracota: '#FF7A1A', terraSoft: '#FFEDDD', terraInk: '#C4530A',
-  green: '#186B47', greenSoft: '#E1F0E8', greenInk: '#186B47',
-  red: '#991B1B', redSoft: '#F7E5E5', redInk: '#991B1B',
-  display: '"Plus Jakarta Sans", system-ui, sans-serif',
-  mono: '"JetBrains Mono", ui-monospace, monospace',
-  sans: '"Plus Jakarta Sans", system-ui, sans-serif',
-};
-
-function FIc({ name, size = 20, color = 'currentColor', sw = 2 }:
-  { name: string; size?: number; color?: string; sw?: number }) {
-  const c = {
-    width: size, height: size, viewBox: '0 0 24 24', fill: 'none',
-    stroke: color, strokeWidth: sw, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const,
-  };
-  switch (name) {
-    case 'x': return <svg {...c}><path d="M6 6l12 12M18 6L6 18" /></svg>;
-    case 'check': return <svg {...c}><path d="M5 12l4 4 10-10" /></svg>;
-    case 'clock': return <svg {...c}><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>;
-    case 'arrow': return <svg {...c}><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
-    case 'arrowL': return <svg {...c}><path d="M19 12H5M11 6l-6 6 6 6" /></svg>;
-    case 'keyboard': return <svg {...c}><rect x="3" y="6" width="18" height="12" rx="2" /><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10" /></svg>;
-    default: return <svg {...c}><circle cx="12" cy="12" r="9" /></svg>;
-  }
-}
 
 function RunPhase({
   state, title, onAnswer, onNext, onBack, onFinish,
@@ -715,14 +632,8 @@ function RunPhase({
 
   // Amplada de finestra → adaptem el layout a mòbil: les opcions passen
   // a 1 columna (per no partir el text paraula a paraula) i la barra
-  // superior s'aclareix (s'amaguen rellotge i botó "Acabar ara").
-  const [vw, setVw] = useState(() => (typeof window !== 'undefined' ? window.innerWidth : 1024));
-  useEffect(() => {
-    const onR = () => setVw(window.innerWidth);
-    window.addEventListener('resize', onR);
-    return () => window.removeEventListener('resize', onR);
-  }, []);
-  const isMobile = vw < 640;
+  // superior s'aclareix (s'amaga el rellotge).
+  const isMobile = useEsMobil();
 
   // Cronòmetre reactiu.
   const [, setNow] = useState(() => Date.now());
@@ -766,73 +677,24 @@ function RunPhase({
   const chipIcon = qTopic ? qTopic.icon : '📝';
   const chipLabel = qTopic ? qTopic.title : title;
 
-  const pill = {
-    fontFamily: FP.mono, fontWeight: 600, fontSize: 13, background: FP.card,
-    padding: '9px 14px', borderRadius: 999,
-    boxShadow: '0 1px 0 rgba(19,19,26,0.04), 0 4px 12px rgba(19,19,26,0.05)',
-  } as const;
-
   return (
-    <div style={{
-      position: 'fixed', inset: 0, zIndex: 120, background: FP.bg,
-      display: 'flex', flexDirection: 'column',
-      padding: isMobile ? '12px 14px calc(12px + env(safe-area-inset-bottom))' : '20px clamp(16px,5vw,64px)',
-      gap: isMobile ? 11 : 16, overflowY: isMobile ? 'auto' : 'hidden', overflowX: 'hidden',
-      WebkitOverflowScrolling: 'touch', fontFamily: FP.sans,
-    }}>
-      {/* Top bar */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, flexShrink: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 8 : 10, minWidth: 0 }}>
-          <button onClick={requestFinish} aria-label={t('test.session.finishNow')} style={{
-            width: 40, height: 40, borderRadius: 12, border: 'none', cursor: 'pointer', background: FP.card,
-            boxShadow: '0 1px 0 rgba(19,19,26,0.04), 0 4px 12px rgba(19,19,26,0.06)',
-            display: 'grid', placeItems: 'center', color: FP.inkSoft, flexShrink: 0,
-          }}><FIc name="x" size={18} /></button>
-          <span style={{ ...pill, fontSize: isMobile ? 12 : 13, padding: isMobile ? '8px 12px' : '9px 14px', color: FP.inkSoft, whiteSpace: 'nowrap' }}>{isMobile ? '' : 'Pregunta '}<span style={{ color: FP.ink }}>{state.index + 1}</span>/{total}</span>
-          {!isMobile && (
-            <span style={{ ...pill, color: FP.inkMuted, display: 'flex', alignItems: 'center', gap: 7 }}>
-              <FIc name="clock" size={14} color={FP.inkMuted} />{formatMMSS(elapsedSec)}
-            </span>
-          )}
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
-          <span style={{ fontFamily: FP.mono, fontWeight: 700, fontSize: 13, color: FP.greenInk, background: FP.greenSoft, padding: isMobile ? '8px 12px' : '9px 14px', borderRadius: 999, display: 'flex', alignItems: 'center', gap: 7, whiteSpace: 'nowrap' }}>
-            <FIc name="check" size={14} color={FP.green} sw={3} />{correctCount}/{total}
-          </span>
-          {/* Acabar el test. A mòbil també hi ha de ser: la creu de
-              l'esquerra fa el mateix, però ningú diria que "sortir"
-              vol dir corregir i veure la nota. */}
-          <button onClick={requestFinish} style={{
-            fontFamily: FP.mono, fontWeight: 700, fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase',
-            color: FP.greenInk, background: FP.greenSoft, border: `1px solid ${FP.green}`,
-            padding: isMobile ? '8px 12px' : '9px 16px', borderRadius: 999, cursor: 'pointer',
-            display: 'flex', alignItems: 'center', gap: 7, whiteSpace: 'nowrap',
-          }}>
-            {!isMobile && <FIc name="check" size={14} color={FP.green} sw={3} />}
-            {t('test.session.finishNow')}
-          </button>
-        </div>
-      </div>
+    <MarcFocus esMobil={isMobile} style={{ overflowY: isMobile ? 'auto' : 'hidden' }}>
+      <BarraFocus
+        index={state.index}
+        total={total}
+        encerts={correctCount}
+        temps={formatMMSS(elapsedSec)}
+        etiquetaAcabar={t('test.session.finishNow')}
+        onAcabar={requestFinish}
+        esMobil={isMobile}
+      />
 
-      {/* Progrés: segments per a tests curts; barra contínua per a llargs
-          (p.ex. "tot el temari" amb >60 preguntes — evitem renderitzar
-          centenars de divs i que es vegin com una ratlla borrosa). */}
-      {total <= 60 ? (
-        <div style={{ display: 'flex', gap: 4, flexShrink: 0, height: 6 }}
-          role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={answeredCount}>
-          {Array.from({ length: total }).map((_, i) => {
-            let bg: string = FP.line2;
-            if (state.answers[i] != null) bg = state.answers[i] === state.questions[i].correctIndex ? FP.green : FP.red;
-            if (i === state.index) bg = FP.terracota;
-            return <div key={i} style={{ flex: 1, height: '100%', borderRadius: 999, background: bg, transition: 'background .25s' }} />;
-          })}
-        </div>
-      ) : (
-        <div style={{ flexShrink: 0, height: 6, borderRadius: 999, background: FP.line2, overflow: 'hidden' }}
-          role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={state.index + 1}>
-          <div style={{ width: `${Math.round(((state.index + 1) / total) * 100)}%`, height: '100%', borderRadius: 999, background: FP.terracota, transition: 'width .25s' }} />
-        </div>
-      )}
+      <ProgresFocus
+        index={state.index}
+        estat={state.questions.map((q, i) => (
+          state.answers[i] == null ? null : state.answers[i] === q.correctIndex
+        ))}
+      />
 
       {/* Contingut */}
       <div style={{ flex: isMobile ? '0 0 auto' : 1, minHeight: 0, display: 'flex', flexDirection: 'column', maxWidth: 1040, width: '100%', margin: '0 auto' }}>
@@ -863,7 +725,7 @@ function RunPhase({
             let s: 'idle' | 'selected' | 'correct' | 'wrong' | 'dimmed' = 'idle';
             if (revealed) s = i === cur.correctIndex ? 'correct' : (isSel ? 'wrong' : 'dimmed');
             else if (isSel) s = 'selected';
-            let bg = FP.card, border: string = FP.hairline, fg: string = FP.ink,
+            let bg: string = FP.card, border: string = FP.hairline, fg: string = FP.ink,
               badgeBg: string = FP.bgDeep, badgeFg: string = FP.inkSoft;
             let icon: string | null = null;
             if (s === 'selected') { border = FP.terracota; badgeBg = FP.terracota; badgeFg = '#fff'; bg = '#FFFAF5'; }
@@ -915,48 +777,28 @@ function RunPhase({
               )}
             </div>
           )}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0, width: isMobile ? '100%' : 'auto' }}>
-            <button onClick={onBack} disabled={state.index === 0} aria-label={t('test.session.previous')} style={{
-              width: 48, height: 50, borderRadius: 14, cursor: state.index === 0 ? 'default' : 'pointer', flexShrink: 0,
-              background: FP.card, border: `1px solid ${FP.line2}`, color: state.index === 0 ? FP.inkFaint : FP.inkSoft,
-              display: 'grid', placeItems: 'center', opacity: state.index === 0 ? 0.5 : 1,
-              boxShadow: '0 1px 0 rgba(19,19,26,0.04), 0 4px 12px rgba(19,19,26,0.05)',
-            }}><FIc name="arrowL" size={20} /></button>
-            <button onClick={() => (isLast ? requestFinish() : onNext())} style={{
-              height: 50, flex: isMobile ? 1 : undefined, padding: '0 24px', borderRadius: 14, border: 'none', cursor: 'pointer',
-              background: FP.terracota, color: '#fff', fontFamily: FP.display, fontWeight: 700, fontSize: 16,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, boxShadow: 'inset 0 -4px 0 rgba(0,0,0,0.18)',
-            }}>
-              {isLast ? t('test.session.finish') : t('test.session.next')}
-              <FIc name="arrow" size={19} color="#fff" sw={2.4} />
-            </button>
-          </div>
+          <PeuFocus
+            potEnrere={state.index > 0}
+            onEnrere={onBack}
+            onSeguent={() => (isLast ? requestFinish() : onNext())}
+            etiquetaSeguent={isLast ? t('test.session.finish') : t('test.session.next')}
+            etiquetaEnrere={t('test.session.previous')}
+            esMobil={isMobile}
+          />
         </div>
       </div>
 
-      {/* Modal de confirmació */}
       {confirmOpen && (
-        <div role="dialog" aria-modal="true" className="ts-modal-backdrop" onClick={() => setConfirmOpen(false)}>
-          <div className="ts-modal" onClick={(e) => e.stopPropagation()}>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 4 }}>
-              <span style={{ fontSize: 28, flex: 'none' }} aria-hidden>⚠️</span>
-              <div>
-                <h3>{t('test.session.confirmTitle')}</h3>
-                <p>{t('test.session.confirmFinish').replace('{n}', String(blanks))}</p>
-              </div>
-            </div>
-            <div className="ts-modal-actions">
-              <button type="button" onClick={() => setConfirmOpen(false)} className="ts-btn">
-                {t('test.session.confirmCancel')}
-              </button>
-              <button type="button" onClick={() => { setConfirmOpen(false); onFinish(); }} className="ts-btn ts-btn-primary finish">
-                {t('test.session.confirmYes')}
-              </button>
-            </div>
-          </div>
-        </div>
+        <DialegFocus
+          titol={t('test.session.confirmTitle')}
+          text={t('test.session.confirmFinish').replace('{n}', String(blanks))}
+          cancella={t('test.session.confirmCancel')}
+          confirma={t('test.session.confirmYes')}
+          onCancella={() => setConfirmOpen(false)}
+          onConfirma={() => { setConfirmOpen(false); onFinish(); }}
+        />
       )}
-    </div>
+    </MarcFocus>
   );
 }
 
