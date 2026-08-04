@@ -9,7 +9,11 @@
 //   (rombe + creu) i (creu)
 //     → la creu hi és als dos i marxa; queda el rombe.
 //
-// Als exàmens n'hi ha CINC opcions, de la a a la e, no quatre.
+// Quatre opcions, com totes les altres famílies. La bateria d'abstracte
+// del campus en porta cinc, i d'allà les vaig treure; però això és material
+// d'entrenament de l'acadèmia, no el format de l'examen. Les instruccions
+// oficials diuen «tindreu quatre alternatives de resposta», i als dos
+// exàmens de referència totes les preguntes en porten quatre.
 //
 // El perill d'aquesta família és que la matriu tingui dues explicacions
 // bones —la unió i l'o-exclusiu coincideixen si els dos quadres no
@@ -120,14 +124,14 @@ export function generaItem(seed) {
       if (iguals(cand.c, bona)) continue;
       if (dolents.some((d) => iguals(d.c, cand.c))) continue;
       dolents.push(cand);
-      if (dolents.length === 4) break;
+      if (dolents.length === 3) break;
     }
-    if (dolents.length < 4) continue;
+    if (dolents.length < 3) continue;
 
-    const correcta = posicioBona(seed, 5, 'abstracte');
+    const correcta = posicioBona(seed, 4, 'abstracte');
     const opcions = [];
     let d = 0;
-    for (let i = 0; i < 5; i++) opcions.push(i === correcta ? bona : dolents[d++].c);
+    for (let i = 0; i < 4; i++) opcions.push(i === correcta ? bona : dolents[d++].c);
 
     return {
       seed, files, opcions, correcta,
@@ -137,7 +141,7 @@ export function generaItem(seed) {
         laReglaEsXor: explica[0] === 'xor',
         // Cada fila, comprovada a part de com s'ha construït.
         totesLesFilesCompleixen: files.every((f) => iguals(REGLES.xor(f[0], f[1]), f[2])),
-        cincOpcionsDiferents: new Set(opcions.map(clau)).size === 5,
+        quatreOpcionsDiferents: new Set(opcions.map(clau)).size === 4,
         nomesUnaEsLaBona: opcions.filter((o) => iguals(o, bona)).length === 1,
         capCasellaRepetida: new Set(totes).size === 9,
         filesQueComparteixen: files.filter((f) => f[0].some((e) => f[1].includes(e))).length,

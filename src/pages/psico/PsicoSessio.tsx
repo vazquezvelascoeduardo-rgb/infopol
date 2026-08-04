@@ -329,7 +329,7 @@ export default function PsicoSessio({ cos }: { cos: Cos }) {
             </div>
           )}
 
-          <div className={`psico-ops${it.opcions.length === 5 ? ' cinc' : ''}${textLlarg ? ' text-llarg' : ''}`}>
+          <div className={`psico-ops${textLlarg ? ' text-llarg' : ''}`}>
             {it.opcions.map((o, k) => {
               const sel = triada === k;
               const bona = revelada && k === it.correcta;

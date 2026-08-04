@@ -36,7 +36,7 @@ titol('1. L\'o-exclusiu es comporta com ha de fer-ho');
 
 const N = 250;
 titol(`2. ${N} matrius, amb la regla aplicada de nou`);
-const lletres = [0, 0, 0, 0, 0];
+const lletres = [0, 0, 0, 0];
 for (let seed = 1; seed <= N; seed++) {
   const it = A.generaItem(seed);
   lletres[it.correcta]++;
@@ -44,7 +44,7 @@ for (let seed = 1; seed <= N; seed++) {
     if (typeof v === 'boolean') cal(`control ${nom}`, v, `llavor ${seed}`);
   }
 
-  cal('cinc opcions', it.opcions.length === 5, `llavor ${seed}`);
+  cal('quatre opcions, com totes les famílies', it.opcions.length === 4, `llavor ${seed}`);
   cal('tres files de tres', it.files.length === 3 && it.files.every((f) => f.length === 3),
     `llavor ${seed}`);
 
@@ -79,9 +79,9 @@ for (let seed = 1; seed <= N; seed++) {
   cal('almenys dues files comparteixen elements', it.control.filesQueComparteixen >= 2,
     `llavor ${seed}: ${it.control.filesQueComparteixen}`);
 }
-console.log(`  lletra bona:  a ${lletres[0]}   b ${lletres[1]}   c ${lletres[2]}   d ${lletres[3]}   e ${lletres[4]}`);
-cal('la lletra bona va repartida entre les cinc',
-  lletres.every((l) => Math.abs(l - N / 5) < N / 8), lletres.join('/'));
+console.log(`  lletra bona:  a ${lletres[0]}   b ${lletres[1]}   c ${lletres[2]}   d ${lletres[3]}`);
+cal('la lletra bona va repartida',
+  lletres.every((l) => Math.abs(l - N / 4) < N / 8), lletres.join('/'));
 
 titol('3. El dibuix surt sencer');
 {
@@ -89,9 +89,9 @@ titol('3. El dibuix surt sencer');
   cal('cap número espatllat', !/NaN|Infinity|undefined/.test(svg));
   cal('hi ha els cinc enunciats', (svg.match(/completa millor la matriu/g) || []).length === 5);
   cal('hi ha la incògnita a cada matriu', (svg.match(/>\?</g) || []).length === 5);
-  // Nou caselles de matriu + cinc opcions, per ítem.
+  // Nou caselles de matriu + quatre opcions, per ítem.
   const marcs = (svg.match(/<rect [^>]*stroke-width="1.3"/g) || []).length;
-  cal('hi ha 14 caselles per ítem', marcs === 5 * 14, `${marcs}`);
+  cal('hi ha 13 caselles per ítem', marcs === 5 * 13, `${marcs}`);
 }
 
 console.log(`\n${fets - fallats}/${fets} proves passades` + (fallats ? `  —  ${fallats} FALLADES` : '  —  tot correcte'));

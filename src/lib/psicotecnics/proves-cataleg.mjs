@@ -26,8 +26,10 @@ titol('1. Les catorze categories, amb cent ítems cadascuna');
       cal('té id', typeof it.id === 'string' && it.id.includes(':'), cat.id);
       cal('té enunciat', typeof it.enunciat === 'string' && it.enunciat.length > 10, `${cat.id} ${seed}`);
       cal('l\'enunciat no té forats', !/undefined|NaN|\$\{/.test(it.enunciat), `${cat.id} ${seed}`);
-      cal('té entre quatre i cinc opcions',
-        it.opcions.length === 4 || it.opcions.length === 5, `${cat.id} ${seed}: ${it.opcions.length}`);
+      // Sempre quatre. Les instruccions de l'examen ho diuen amb aquestes
+      // paraules: «tindreu quatre alternatives de resposta».
+      cal('sempre quatre opcions', it.opcions.length === 4,
+        `${cat.id} ${seed}: ${it.opcions.length}`);
       cal('la correcta és un índex vàlid',
         Number.isInteger(it.correcta) && it.correcta >= 0 && it.correcta < it.opcions.length,
         `${cat.id} ${seed}`);

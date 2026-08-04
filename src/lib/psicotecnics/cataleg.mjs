@@ -122,7 +122,7 @@ export const CATEGORIES = [
       return {
         enunciat: 'Trieu la imatge que completa millor la matriu:',
         svg: abstracte.svgEnunciat(it),
-        opcions: opcionsSvg(abstracte, it, 5),
+        opcions: opcionsSvg(abstracte, it, 4),
         correcta: it.correcta,
       };
     },

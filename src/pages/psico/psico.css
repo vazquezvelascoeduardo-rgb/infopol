@@ -84,9 +84,6 @@
   align-content: end;
 }
 
-/* Cinc opcions —la matriu abstracta— van de tres en tres. */
-.psico-ops.cinc { grid-template-columns: repeat(3, 1fr); }
-
 /* Mateixa forma que les opcions del test de temari: cantonada de 16,
    vora de 2 i la lletra dins d'una plaqueta. */
 .psico-op {
