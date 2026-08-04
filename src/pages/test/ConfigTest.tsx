@@ -5,6 +5,7 @@
 // quin format. Abans això era una pantalla sencera; en un full que es
 // desplega es veu el tema que has triat al darrere i s'hi entra d'un clic.
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import { I, Mono, RV, V } from '../../lib/v3';
 
@@ -52,7 +53,11 @@ export default function ConfigTest({
 
   const n = quantes || total;
 
-  return (
+  // Penjat del <body>, no d'on s'ha obert. Les pantalles entren amb una
+  // animació que les mou (`.v3-anim`), i mentre dura, qualsevol cosa
+  // fixa que hi hagi a dins es posiciona respecte a la pantalla i no
+  // respecte a la finestra: el full sortiria descol·locat.
+  return createPortal((
     <div className="ap-vel">
       <button
         type="button"
@@ -209,5 +214,5 @@ export default function ConfigTest({
         </div>
       </div>
     </div>
-  );
+  ), document.body);
 }

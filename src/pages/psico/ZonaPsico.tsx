@@ -111,9 +111,10 @@ export default function ZonaPsico({ cos }: { cos: Cos }) {
             { et: 'ENCERT GLOBAL', val: global === null ? '—' : `${global}%`, color: global === null ? V.ink : colorsPct(global).fg },
             { et: 'PREGUNTES FETES', val: fetes.toLocaleString('ca-ES'), color: V.ink },
             {
-              et: 'ON FLUIXEGES',
+              // El bloc que pitjor et va, amb el nom curt: "ON FLUIXEGES"
+              // tot sol no diu en què, i el nom sencer no hi cap.
+              et: fluix ? `ON FLUIXEGES · ${fluix.id.toUpperCase()}` : 'ON FLUIXEGES',
               val: fluix ? `${fluix.pct}%` : '—',
-              peu: fluix ? BLOCS.find((b) => b.id === fluix.id)?.nom : undefined,
               color: fluix ? colorsPct(fluix.pct).fg : V.ink,
             },
           ].map((c, i) => (
@@ -126,9 +127,7 @@ export default function ZonaPsico({ cos }: { cos: Cos }) {
               <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: -1, color: c.color }}>
                 {c.val}
               </div>
-              <Mono size={9} color={V.faint} style={{ letterSpacing: 1.4 }}>
-                {c.peu ? c.peu.toUpperCase() : c.et}
-              </Mono>
+              <Mono size={9} color={V.faint} style={{ letterSpacing: 1.4 }}>{c.et}</Mono>
             </div>
           ))}
         </div>

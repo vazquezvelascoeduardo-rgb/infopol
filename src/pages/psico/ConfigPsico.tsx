@@ -10,6 +10,7 @@
 // els formats curts mantenen el mateix ritme, i per això es pot treure el
 // rellotge quan el que vols és entendre-les, no córrer.
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import { LLARGADES, tempsText } from '../../lib/psicotecnics/cataleg.mjs';
 import { I, Mono, RV, V } from '../../lib/v3';
@@ -49,7 +50,8 @@ export default function ConfigPsico({
     return () => window.removeEventListener('keydown', t);
   }, [onTanca]);
 
-  return (
+  // Penjat del <body>: veure el comentari del bessó, ConfigTest.
+  return createPortal((
     <div className="ap-vel">
       <button
         onClick={onTanca}
@@ -154,5 +156,5 @@ export default function ConfigPsico({
         </button>
       </div>
     </div>
-  );
+  ), document.body);
 }
