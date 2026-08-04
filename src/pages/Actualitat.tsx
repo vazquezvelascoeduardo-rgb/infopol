@@ -23,7 +23,6 @@ const BLOCS = [
 export default function Actualitat() {
   const nav = useNavigate();
   const topics = TOPICS.filter((tp) => tp.category === 'actualitat');
-  const totalQuestions = topics.reduce((acc, tp) => acc + tp.questions.length, 0);
 
   return (
     <div className="v3-page v3-anim">
@@ -32,7 +31,6 @@ export default function Actualitat() {
         titol="Actualitat"
         lead="Càrrecs vigents, premis, esports i fets clau que cauen a l'examen. Actualitzat l'1 d'agost del 2026."
         xifres={[
-          { valor: totalQuestions.toLocaleString('ca-ES'), label: 'preguntes' },
           { valor: String(BLOCS.length), label: 'blocs temàtics' },
         ]}
       />
@@ -83,12 +81,7 @@ export default function Actualitat() {
                 {tp.description}
               </span>
             </span>
-            <span style={{
-              flexShrink: 0, fontFamily: V.mono, fontSize: 11, fontWeight: 700,
-              color: V.muted, background: V.surface2, borderRadius: 999, padding: '5px 10px',
-            }}>
-              {tp.questions.length}
-            </span>
+            <I n="arrow" size={15} sw={2.2} color={V.faint} />
           </button>
         ))}
       </div>
@@ -115,7 +108,7 @@ export default function Actualitat() {
             Test mesclat d&apos;actualitat
           </span>
           <span style={{ display: 'block', fontSize: 12.5, color: 'rgba(255,255,255,.9)', marginTop: 4 }}>
-            {totalQuestions.toLocaleString('ca-ES')} preguntes de tots els blocs, barrejades
+            Preguntes de tots els blocs, barrejades
           </span>
         </span>
         <span style={{ fontSize: 22, fontWeight: 800 }}>›</span>

@@ -8,7 +8,6 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { CULTURA_AREAS } from '../../data/cultura-temari';
-import { TOPICS } from '../../data/tests';
 import { I, Mono, V } from '../../lib/v3';
 import { compta, palDe } from './blocs';
 
@@ -20,9 +19,6 @@ export default function CulturaIndex() {
     [],
   );
   const totalFets = arees.reduce((s, a) => s + a.fets, 0);
-  const preguntes = TOPICS
-    .filter((t) => t.category === 'cultura')
-    .reduce((s, t) => s + t.questions.length, 0);
 
   return (
     <div className="v3-page v3-anim">
@@ -40,7 +36,6 @@ export default function CulturaIndex() {
         {[
           { valor: String(arees.length), label: 'ÀREES' },
           { valor: totalFets.toLocaleString('ca-ES'), label: 'FETS CLAU' },
-          { valor: preguntes.toLocaleString('ca-ES'), label: 'PREGUNTES' },
         ].map((x) => (
           <div key={x.label}>
             <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: -0.8 }}>{x.valor}</div>
@@ -106,7 +101,7 @@ export default function CulturaIndex() {
             Test de tota la cultura general
           </span>
           <span style={{ display: 'block', fontSize: 12.5, color: 'rgba(255,255,255,.9)', marginTop: 4 }}>
-            {preguntes.toLocaleString('ca-ES')} preguntes barrejades de les setze àrees
+            Preguntes barrejades de les setze àrees
           </span>
         </span>
         <span style={{ fontSize: 22, fontWeight: 800 }}>›</span>
