@@ -43,6 +43,11 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '08·04', tag: 'Internacional', title: 'Vaixell Minoan Pioneer atacat davant les costes d\'Oman', desc: 'Incendi a la sala de màquines après d\'un impacte de projectil. Washington i Teheran negocien l\'estret d\'Ormuz.' },
+  { date: '08·04', tag: 'Internacional', title: 'Quatre morts en un tiroteig a la Crimea ocupada', desc: 'Un soldat rus obre foc contra els seus companys. Segon incident d\'aquest tipus en menys d\'un mes al territori ocupat.' },
+  { date: '08·04', tag: 'Internacional', title: 'Marlaska: la UE avala la resposta a Ceuta i exigeix a Itàlia restablir Schengen', desc: 'Reunió extraordinària de ministres d\'Interior europeus amb Frontex i Europol. Itàlia manté la suspensió de Schengen.' },
+  { date: '08·04', tag: 'Migració', title: '70.000 dels 72.000 migrants entrats a Ceuta retornen al Marroc', desc: 'La Guàrdia Civil continua buscant cossos al mar. La crisi ha deixat 67 morts confirmats al costat espanyol.' },
+  { date: '08·04', tag: 'Política', title: 'PP demana la compareixença del director del Gabinet de Sánchez', desc: 'Ofensiva parlamentària per la destitució de la responsable de comunicació de Seguretat Nacional.' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
