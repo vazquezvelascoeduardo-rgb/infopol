@@ -17,8 +17,8 @@ const titol = (t) => console.log(`\n${t}`);
 
 titol('1. Les quinze categories, amb cent ítems cadascuna');
 {
-  cal('n\'hi ha quinze', C.CATEGORIES.length === 15, `${C.CATEGORIES.length}`);
-  cal('cap id repetit', new Set(C.CATEGORIES.map((c) => c.id)).size === 15);
+  cal('n\'hi ha quinze', C.CATEGORIES.length === 16, `${C.CATEGORIES.length}`);
+  cal('cap id repetit', new Set(C.CATEGORIES.map((c) => c.id)).size === 16);
   for (const cat of C.CATEGORIES) {
     let grafics = 0, textos = 0;
     for (let seed = 1; seed <= 100; seed++) {
@@ -63,11 +63,17 @@ titol('1. Les quinze categories, amb cent ítems cadascuna');
 //
 // Es miren els elements de primer nivell, que són els que fan la silueta.
 // El que va dins d'un <g transform> està en coordenades seves i no es pot
-// comparar directament, o sigui que es treu abans de mirar.
+// comparar directament, o sigui que es treu abans de mirar. I el que va dins
+// d'un <g clip-path> tampoc compta: allà el dibuix ja està retallat i el que
+// en sobresurt no es veu —a les escenes del punt de fuga la carretera és una
+// barra llarga que se'n va molt més enllà del disc i no passa res.
 function extrems(svg) {
   const vb = svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
   if (!vb) return null;
-  const net = svg.replace(/<g transform="[^"]*">.*?<\/g>/gs, '');
+  const net = svg
+    .replace(/<g transform="[^"]*">.*?<\/g>/gs, '')
+    .replace(/<clipPath\b.*?<\/clipPath>/gs, '')
+    .replace(/<g clip-path="[^"]*">.*?<\/g>/gs, '');
   const xs = [], ys = [];
   for (const m of net.matchAll(/points="([^"]+)"/g)) {
     for (const p of m[1].trim().split(/\s+/)) {
@@ -82,6 +88,10 @@ function extrems(svg) {
   for (const m of net.matchAll(/<circle cx="([-\d.]+)" cy="([-\d.]+)" r="([-\d.]+)"/g)) {
     xs.push(Number(m[1]) - Number(m[3]), Number(m[1]) + Number(m[3]));
     ys.push(Number(m[2]) - Number(m[3]), Number(m[2]) + Number(m[3]));
+  }
+  for (const m of net.matchAll(/<ellipse cx="([-\d.]+)" cy="([-\d.]+)" rx="([-\d.]+)" ry="([-\d.]+)"/g)) {
+    xs.push(Number(m[1]) - Number(m[3]), Number(m[1]) + Number(m[3]));
+    ys.push(Number(m[2]) - Number(m[4]), Number(m[2]) + Number(m[4]));
   }
   for (const m of net.matchAll(/<line x1="([-\d.]+)" y1="([-\d.]+)" x2="([-\d.]+)" y2="([-\d.]+)"/g)) {
     xs.push(Number(m[1]), Number(m[3]));

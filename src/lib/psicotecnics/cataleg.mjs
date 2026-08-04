@@ -22,6 +22,7 @@ import * as numeric from './numeric.mjs';
 import * as dades from './dades.mjs';
 import * as verbal from './verbal.mjs';
 import * as rubik from './rubik.mjs';
+import * as fuga from './fuga.mjs';
 
 const opcionsSvg = (mod, it, n) =>
   Array.from({ length: n }, (_, i) => ({ svg: mod.svgOpcio(it, i) }));
@@ -237,6 +238,21 @@ export const CATEGORIES = [
     },
   },
   {
+    id: 'punt-fuga',
+    nom: 'Punt de fuga',
+    descripcio: 'La mateixa escena vista des d\'un altre lloc',
+    grafica: true,
+    fes: (seed) => {
+      const it = fuga.generaItem(seed);
+      return {
+        enunciat: 'Troba la mateixa imatge canviant la posició de l\'ull.',
+        svg: fuga.svgEnunciat(it),
+        opcions: Array.from({ length: 4 }, (_, i) => ({ svg: fuga.svgOpcio(it, i) })),
+        correcta: it.correcta,
+      };
+    },
+  },
+  {
     id: 'sinonims',
     nom: 'Sinònims i antònims',
     descripcio: 'La paraula de significat més semblant o més oposat',
@@ -288,7 +304,7 @@ export const BLOCS = [
     nom: 'Aptitud espacial',
     descripcio: 'Cubs, plegats, girs i reflexos',
     categories: ['cubs-desplegat', 'cubs-mirall', 'figura-reflectida',
-      'figura-girada', 'disc', 'dau-planol', 'rubik'],
+      'figura-girada', 'disc', 'dau-planol', 'rubik', 'punt-fuga'],
   },
   {
     id: 'abstracte',
