@@ -221,6 +221,51 @@ export default function ZonaTest({ cos: cosProp }: { cos?: Cos }) {
             </button>
           );
         })}
+
+        {/* Psicotècnics, una categoria més. Van a part del temari perquè
+            no són temari —no hi ha res per estudiar, s'entrenen— però qui
+            ve a fer un test els busca aquí, amb la resta. */}
+        <button
+          type="button"
+          onClick={() => nav(cos === 'mossos' ? '/mossos/psicotecnics' : '/policia-local/psicotecnics')}
+          style={{
+            textAlign: 'left', cursor: 'pointer', border: 'none', borderRadius: 22, padding: 22,
+            background: V.surface, color: V.ink, boxShadow: V.shadow,
+            display: 'flex', flexDirection: 'column', minHeight: 176,
+          }}>
+          <span style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+            <span style={{
+              width: 46, height: 46, borderRadius: 15, background: a.soft, color: a.ink,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <I n="layers" size={21} sw={1.9} />
+            </span>
+            <span style={{
+              width: 34, height: 34, borderRadius: '50%', background: a.accent, color: '#fff',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <I n="play" size={14} ple color="#fff" />
+            </span>
+          </span>
+          <span style={{ display: 'block', fontSize: 18, fontWeight: 800, letterSpacing: -0.55, marginTop: 'auto', paddingTop: 16 }}>
+            Psicotècnics
+          </span>
+          <span style={{ display: 'block', fontSize: 12.5, color: V.muted, lineHeight: 1.45, marginTop: 5 }}>
+            Figures, cubs, sèries, càlcul i verbal
+          </span>
+          <span style={{ display: 'flex', gap: 7, marginTop: 12, flexWrap: 'wrap' }}>
+            <Mono size={9.5} color={a.ink} style={{
+              fontWeight: 700, background: a.soft, borderRadius: 8, padding: '5px 9px',
+            }}>
+              NO S'ACABEN MAI
+            </Mono>
+            <Mono size={9.5} color={V.muted} style={{
+              fontWeight: 700, background: V.surface2, borderRadius: 8, padding: '5px 9px',
+            }}>
+              CINC BLOCS
+            </Mono>
+          </span>
+        </button>
       </div>
 
       <button
@@ -252,34 +297,6 @@ export default function ZonaTest({ cos: cosProp }: { cos?: Cos }) {
         }}>
           <I n="play" size={15} ple color={a.accent} />
         </span>
-      </button>
-
-      {/* Psicotècnics. Van a part del temari perquè no són temari: no hi ha
-          res per estudiar, s'entrenen. I no tenen banc de preguntes, es
-          fabriquen, o sigui que no s'acaben mai. */}
-      <button
-        type="button"
-        onClick={() => nav(cos === 'mossos' ? '/mossos/psicotecnics' : '/policia-local/psicotecnics')}
-        style={{
-          width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none', borderRadius: 22,
-          padding: 20, marginTop: 14, background: V.surface, color: V.ink, boxShadow: V.shadow,
-          display: 'flex', alignItems: 'center', gap: 16,
-        }}>
-        <span style={{
-          width: 46, height: 46, flexShrink: 0, borderRadius: 15, background: a.soft, color: a.ink,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-          <I n="layers" size={21} sw={1.9} />
-        </span>
-        <span style={{ flex: 1, minWidth: 0 }}>
-          <span style={{ display: 'block', fontSize: 17, fontWeight: 800, letterSpacing: -0.5 }}>
-            Psicotècnics
-          </span>
-          <span style={{ display: 'block', fontSize: 12.5, color: V.muted, marginTop: 4 }}>
-            Cinc blocs d'aptitud · es fabriquen, no s'acaben mai
-          </span>
-        </span>
-        <I n="arrow" size={16} sw={2.2} color={V.faint} />
       </button>
 
       {/* Errors anteriors: només si en tens. Un botó que no porta enlloc
