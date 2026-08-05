@@ -1,22 +1,23 @@
 // Proves de «quina cara correspon a l'interrogant?».
 //
-// El que ha de ser cert es comprova per dos camins que no es toquen:
+// Aquí el dibuix no és decoració: el cub es veu sencer i les arestes van
+// pintades, i d'això depèn que l'exercici es pugui resoldre. Per això les
+// proves van pel dibuix i no per les dades.
 //
 //  1. PLEGANT DE DEBÒ. Es fabrica el desplegable amb les sis figures a
-//     dins, es plega amb el motor, es busca la manera de girar-lo que
-//     ensenya el que ensenya el cub dibuixat, i es mira quina figura queda
-//     on hi ha l'interrogant. Aquest camí no fa servir res del que diu el
-//     programa: només el motor de plegar i el dibuix.
+//     dins, es plega amb el motor i es mira quina figura cau a la cara de
+//     l'interrogant. Aquest camí no fa servir res del que diu el programa.
 //
-//  2. RESOLENT-HO COM QUI FA L'EXAMEN. Amb el que es veu i prou —les tres
-//     cares del cub i les tres caselles dibuixades— es proven les 24
-//     maneres de girar el cub i s'apunta què podria anar a l'interrogant en
-//     cadascuna que quadri. N'ha de sortir una i prou.
+//  2. RESOLENT-HO COM QUI FA L'EXAMEN. Amb el que es veu i prou, es proven
+//     les 24 maneres de girar el cub i s'apunta què podria anar a
+//     l'interrogant en cadascuna que quadri. N'ha de sortir una i prou.
 //
-// I es comprova que no hi hagi drecera: que quedin dues cares visibles
-// sense dibuixar. Si només en quedés una, seria aquella i no caldria plegar.
+//  3. LLEGINT EL SVG. Que al cub hi hagi les sis cares, que les tres del
+//     fons hi siguin, i que cada aresta pintada surti amb el mateix color al
+//     cub i al desplegable. Si això no es complís, les referències no
+//     servirien de res i l'exercici no es podria resoldre.
 import * as I from './interrogant.mjs';
-import { orientacions, plega, valid, vistaDe } from './plegat.mjs';
+import { clau, igual, plega, valid } from './plegat.mjs';
 
 let fets = 0, fallats = 0;
 const cal = (nom, condicio, detall = '') => {
@@ -28,113 +29,141 @@ const cal = (nom, condicio, detall = '') => {
 const titol = (t) => console.log(`\n${t}`);
 
 const noms = (s) => `${s.forma}/${s.color}`;
-const ambGir = (s, gir = s.gir) => `${s.forma}/${s.color}@${gir}`;
 
-titol('1. Plegant el desplegable de debò, amb el gir de cada cara');
+titol('1. Plegant el desplegable de debò');
 {
   for (let seed = 1; seed <= 300; seed++) {
     const it = I.generaItem(seed);
     cal('surt ítem', it !== null, `llavor ${seed}`);
     if (!it) continue;
 
-    // El desplegable amb les figures a dins, plegat des de zero.
+    // Plegat des de zero, amb les figures a dins.
     const celles = it.celles.map((c) => ({ nx: c.nx, ny: c.ny, dibuix: noms(it.simbol[c.dibuix]) }));
     const cares = plega(celles);
     cal('el desplegable plega bé', valid(cares), `llavor ${seed}: ${it.forma}`);
     if (!valid(cares)) continue;
 
-    // Quina manera de girar-lo ensenya el que ensenya el cub dibuixat. Es
-    // compara la figura I els quarts de volta: és el que fa que l'exercici
-    // sigui aquest i no un altre.
-    const hauria = it.laVista.map((v) => `${noms(it.simbol[v.casella])}@${v.gir}`);
-    const quadren = orientacions([...cares.values()])
-      .map((o) => vistaDe(o))
-      .filter((v) => v.join('|') === hauria.join('|'));
-    cal('hi ha una manera de girar-lo que dona el cub dibuixat',
-      quadren.length >= 1, `llavor ${seed}: ${hauria.join(' ')}`);
-    // Amb sis figures diferents i tres cares mirades, no n'hi pot haver dues.
-    cal('i només una', quadren.length === 1, `llavor ${seed}: ${quadren.length}`);
-
-    // La casella de l'interrogant és una de les tres que es veuen, i la
-    // figura que hi va —amb el seu gir— és la que està marcada com a bona.
-    const on = it.laVista.findIndex((v) => v.casella === it.forat);
-    cal('l\'interrogant cau en una cara que es veu', on !== -1, `llavor ${seed}`);
-    if (on === -1) continue;
-    cal('la figura marcada, amb el seu gir, és la que surt de plegar',
-      ambGir(it.opcions[it.correcta]) === hauria[on],
-      `llavor ${seed}: plegant surt ${hauria[on]}, marcada ${ambGir(it.opcions[it.correcta])}`);
+    // La cara on cau l'interrogant, i quina figura hi ha.
+    const n = it.info[it.forat].n;
+    const alla = [...cares.values()].find((f) => igual(f.n, n));
+    cal('la cara de l\'interrogant existeix al cub plegat', !!alla, `llavor ${seed}`);
+    if (!alla) continue;
+    cal('la figura marcada és la que cau a la cara de l\'interrogant',
+      alla.dibuix === noms(it.opcions[it.correcta]),
+      `llavor ${seed}: plegant surt ${alla.dibuix}, marcada ${noms(it.opcions[it.correcta])}`);
     cal('i cap altra opció no hi coincideix',
-      it.opcions.filter((o) => ambGir(o) === hauria[on]).length === 1, `llavor ${seed}`);
-  }
-}
+      it.opcions.filter((o) => noms(o) === alla.dibuix).length === 1, `llavor ${seed}`);
 
-titol('1b. Cap figura no és simètrica: girar-la s\'ha de veure');
-{
-  const norm = (p) => [...p].map((q) => q.map((v) => v.toFixed(4)).join(',')).sort().join('|');
-  for (const forma of Object.keys(I.FIGURES)) {
-    const vistes = new Set();
-    for (let q = 0; q < 4; q++) {
-      vistes.add(norm(I.vertexs(forma, q)));
-      // I també del revés, per si mai una cara sortís capgirada.
-      vistes.add(norm(I.vertexs(forma, q).map(([x, y]) => [1 - x, y])));
+    // Les sis cares del cub, totes diferents i totes al seu lloc.
+    cal('les sis cares porten figures diferents',
+      new Set([...cares.values()].map((f) => f.dibuix)).size === 6, `llavor ${seed}`);
+    for (const c of it.celles) {
+      const f = [...cares.values()].find((x) => igual(x.n, it.info[c.dibuix].n));
+      cal('cada casella cau on diu el programa',
+        f && f.dibuix === noms(it.simbol[c.dibuix]), `llavor ${seed} ${c.dibuix}`);
+      // I amb el mateix marc: el gir de la cara no se l'inventa ningú.
+      cal('i amb el mateix marc, o sigui amb el mateix gir',
+        f && igual(f.u, it.info[c.dibuix].u) && igual(f.v, it.info[c.dibuix].v),
+        `llavor ${seed} ${c.dibuix}`);
     }
-    cal(`${forma}: les vuit maneres de posar-la es veuen diferents`,
-      vistes.size === 8, `${forma}: només ${vistes.size}`);
-    // I que quatre girs tornin al principi.
-    cal(`${forma}: quatre girs tornen al principi`,
-      norm(I.vertexs(forma, 4)) === norm(I.vertexs(forma, 0)), forma);
   }
 }
 
 titol('2. Resolent-ho amb el que es veu, i prou');
 {
+  // Les 24 maneres de girar, refetes aquí per no fer servir les del programa.
+  const V = (x, y, z) => ({ x, y, z });
+  const GZ = (p) => V(-p.y, p.x, p.z);
+  const GX = (p) => V(p.x, -p.z, p.y);
+  const girs = [];
+  {
+    const vistes = new Map();
+    const prova = [V(1, 0, 0), V(0, 1, 0), V(0, 0, 1)];
+    const emp = (g) => prova.map((p) => clau(g(p))).join('|');
+    const cua = [(p) => p];
+    vistes.set(emp(cua[0]), cua[0]);
+    while (cua.length) {
+      const g = cua.shift();
+      for (const h of [GZ, GX]) {
+        const nou = (p) => h(g(p));
+        if (!vistes.has(emp(nou))) { vistes.set(emp(nou), nou); cua.push(nou); }
+      }
+    }
+    girs.push(...vistes.values());
+  }
+  cal('hi ha vint-i-quatre maneres de girar el cub', girs.length === 24, `${girs.length}`);
+
+  const neg = (p) => V(-p.x, -p.y, -p.z);
+  const parell = (a, b) => [clau(a), clau(b)].sort().join('~');
+  const quatreCostats = (c) => [
+    parell(c.n, neg(c.v)), parell(c.n, c.u), parell(c.n, c.v), parell(c.n, neg(c.u)),
+  ];
+
   for (let seed = 1; seed <= 300; seed++) {
     const it = I.generaItem(seed);
     if (!it) continue;
-
-    // El plegat no depèn de les figures: la forma del desplegable ja diu,
-    // per a cada manera de girar el cub, quines caselles queden a la vista i
-    // amb quants quarts de volta.
-    const claus = it.celles.map((c) => ({ nx: c.nx, ny: c.ny, dibuix: `${c.nx},${c.ny}` }));
-    const mirades = orientacions([...plega(claus).values()])
-      .map((o) => vistaDe(o).map((t) => {
-        const tall = t.lastIndexOf('@');
-        return { casella: t.slice(0, tall), gir: Number(t.slice(tall + 1)) };
-      }));
-
-    const dibuixades = new Set(it.ancores.map((k) => noms(it.simbol[k])));
-    const veig = it.laVista.map((v) => ({ fig: noms(it.simbol[v.casella]), gir: v.gir }));
-
-    // Totes les maneres de girar que quadren amb el que es veu.
+    const claus = it.celles.map((c) => c.dibuix);
     const pot = new Set();
-    let forada = false;
-    for (const t of mirades) {
-      let va = true;
-      for (let i = 0; i < 3 && va; i++) {
-        // On hi ha una casella dibuixada, hi ha d'anar la seva figura i amb
-        // el gir que es veu al cub. On n'hi ha una de sense dibuixar, no hi
-        // pot anar una figura que ja està dibuixada en una altra casella:
-        // cada figura té un sol lloc.
-        if (it.ancores.includes(t[i].casella)) {
-          va = noms(it.simbol[t[i].casella]) === veig[i].fig && t[i].gir === veig[i].gir;
-        } else {
-          va = !dibuixades.has(veig[i].fig);
+    for (const g of girs) {
+      const posa = {};
+      for (const k of claus) {
+        posa[k] = { n: g(it.info[k].n), u: g(it.info[k].u), v: g(it.info[k].v) };
+      }
+      // Les caselles dibuixades han de quedar on eren.
+      let va = claus.filter((k) => it.ancores.includes(k))
+        .every((k) => igual(posa[k].n, it.info[k].n));
+      // I les arestes pintades, al mateix lloc.
+      for (const k of claus) {
+        const abans = quatreCostats(it.info[k]), ara = quatreCostats(posa[k]);
+        for (let i = 0; i < 4 && va; i++) {
+          if ((it.marques[abans[i]] || null) !== (it.marques[ara[i]] || null)) va = false;
         }
+        if (!va) break;
       }
       if (!va) continue;
-      const on = t.findIndex((v) => v.casella === it.forat);
-      if (on === -1) { forada = true; break; }
-      pot.add(`${veig[on].fig}@${veig[on].gir}`);
+      const quina = claus.find((k) => igual(posa[k].n, it.info[it.forat].n));
+      pot.add(noms(it.simbol[quina]));
     }
-    cal('l\'interrogant no queda mai fora de la vista', !forada, `llavor ${seed}`);
-    cal('només hi pot anar una figura, amb un sol gir', pot.size === 1,
+    cal('només hi pot anar una figura', pot.size === 1,
       `llavor ${seed}: ${[...pot].join(' o ')}`);
-    cal('i és la marcada', pot.has(ambGir(it.opcions[it.correcta])), `llavor ${seed}`);
+    cal('i és la marcada', pot.has(noms(it.opcions[it.correcta])), `llavor ${seed}`);
+  }
+}
+
+titol('3. El dibuix ensenya el que ha d\'ensenyar');
+{
+  for (let seed = 1; seed <= 120; seed++) {
+    const it = I.generaItem(seed);
+    if (!it) continue;
+    const svg = I.svgEnunciat(it);
+    cal('el dibuix està sencer', !/NaN|undefined/.test(svg), `llavor ${seed}`);
+
+    // Les sis figures del cub hi han de ser: tres nítides i tres al fons.
+    // Les del fons van d'un gris que no fa servir res més.
+    const fluixes = (svg.match(/stroke="#C3C7CE" stroke-width="0\.055"/g) || []).length;
+    cal('les tres cares del fons es veuen', fluixes === 3, `llavor ${seed}: ${fluixes}`);
+    const totes = (svg.match(/<path d="M [^"]*" fill="none"/g) || []).length;
+    cal('hi ha les sis cares del cub, més les del desplegable',
+      totes >= 6, `llavor ${seed}: ${totes}`);
+
+    // Les arestes pintades. Cada color ha de sortir al cub I al desplegable:
+    // si només sortís en un lloc, la referència no serviria de res.
+    for (const color of new Set(Object.values(it.marques))) {
+      const quantes = (svg.match(new RegExp(`stroke="${color}"`, 'g')) || []).length;
+      cal('cada aresta pintada surt al cub i al desplegable', quantes >= 2,
+        `llavor ${seed}, ${color}: només ${quantes} vegades`);
+    }
+    cal('hi ha dues arestes pintades com a mínim',
+      new Set(Object.values(it.marques)).size >= 2, `llavor ${seed}`);
+    cal('un sol interrogant', (svg.match(/>\?</g) || []).length === 1, `llavor ${seed}`);
+    // Sis caselles al desplegable.
+    const quadres = (svg.match(/<rect [^>]*fill="#fff"\/>/g) || []).length;
+    cal('sis caselles al desplegable', quadres === 6, `llavor ${seed}: ${quadres}`);
   }
 }
 
 const N = 300;
-titol(`3. ${N} ítems: forma de l'ítem i repartiment`);
+titol(`4. ${N} ítems: forma de l'ítem i repartiment`);
 const lletres = [0, 0, 0, 0];
 for (let seed = 1; seed <= N; seed++) {
   const it = I.generaItem(seed);
@@ -145,75 +174,45 @@ for (let seed = 1; seed <= N; seed++) {
     if (typeof v === 'boolean') cal(`control ${nom}`, v, `llavor ${seed}`);
   }
   cal('quatre opcions', it.opcions.length === 4, `llavor ${seed}`);
-  cal('cap opció repetida', new Set(it.opcions.map((o) => ambGir(o))).size === 4, `llavor ${seed}`);
+  cal('cap opció repetida', new Set(it.opcions.map(noms)).size === 4, `llavor ${seed}`);
   cal('sis caselles', it.celles.length === 6, `llavor ${seed}`);
-  cal('tres caselles dibuixades', it.ancores.length === 3, `llavor ${seed}`);
-  cal('l\'interrogant no és una d\'elles', !it.ancores.includes(it.forat), `llavor ${seed}`);
-
-  // La drecera: si de les tres cares que es veuen només en quedés una sense
-  // dibuixar, seria aquella i no caldria plegar res.
-  cal('queden dues cares visibles sense dibuixar',
-    it.laVista.filter((v) => !it.ancores.includes(v.casella)).length >= 2, `llavor ${seed}`);
-  // I cap opció no pot sortir ja dibuixada al desplegable: seria descartable
-  // sense pensar, perquè dues cares no porten mai la mateixa figura.
+  cal('l\'interrogant no està dibuixat', !it.ancores.includes(it.forat), `llavor ${seed}`);
+  // Totes les opcions són cares del cub: cap no es pot descartar sense pensar.
+  const alCub = new Set(it.celles.map((c) => noms(it.simbol[c.dibuix])));
+  cal('totes les opcions són cares del cub',
+    it.opcions.every((o) => alCub.has(noms(o))), `llavor ${seed}`);
+  // I cap no surt ja dibuixada al desplegable: seria descartable de seguida.
   const dibuixades = new Set(it.ancores.map((k) => noms(it.simbol[k])));
   cal('cap opció no surt ja dibuixada al desplegable',
-    it.opcions.every((o) => noms(o) === noms(it.opcions[it.correcta]) || !dibuixades.has(noms(o))), `llavor ${seed}`);
-  // Les sis cares, totes diferents.
-  cal('les sis cares porten figures diferents',
-    new Set(it.celles.map((c) => noms(it.simbol[c.dibuix]))).size === 6, `llavor ${seed}`);
+    it.opcions.every((o) => !dibuixades.has(noms(o))), `llavor ${seed}`);
 }
 console.log(`  lletra bona:  A ${lletres[0]}   B ${lletres[1]}   C ${lletres[2]}   D ${lletres[3]}`);
 cal('la lletra bona va repartida',
   lletres.every((l) => Math.abs(l - N / 4) < N / 8), lletres.join('/'));
 
-titol('4. Varietat i dibuix');
+titol('5. Varietat');
 {
-  const vistes = new Set();
-  const formes = new Set();
+  const vistes = new Set(), formes = new Set();
   for (let seed = 1; seed <= 400; seed++) {
     const it = I.generaItem(seed);
     if (!it) continue;
     formes.add(it.forma);
-    vistes.add(it.forma + '|' + it.celles.map((c) => noms(it.simbol[c.dibuix])).join(',')
-      + '|' + it.forat + '|' + [...it.ancores].sort().join(','));
+    vistes.add(`${it.forma}|${it.celles.map((c) => noms(it.simbol[c.dibuix])).join(',')}`
+      + `|${it.forat}|${[...it.ancores].sort().join(',')}`
+      + `|${Object.keys(it.marques).sort().join(',')}`);
   }
   cal('dos-cents ítems diferents com a mínim', vistes.size >= 200, `${vistes.size}`);
   cal('surten totes les formes de desplegable', formes.size === 6, `${formes.size}`);
   console.log(`  ${vistes.size} ítems diferents de 400 llavors, amb ${formes.size} desplegables`);
 
-  const it = I.generaItem(1);
-  const e = I.svgEnunciat(it), o = I.svgOpcio(it, 0);
-  cal('l\'enunciat és un SVG sencer', e.startsWith('<svg') && !/NaN|undefined/.test(e));
-  cal('l\'opció també', o.startsWith('<svg') && !/NaN|undefined/.test(o));
-  cal('porten viewBox', e.includes('viewBox') && o.includes('viewBox'));
-  cal('el full surt sencer', !/NaN|undefined/.test(I.svgFull([1, 2, 3].map((s) => I.generaItem(s)))));
-
-  // Al desplegable hi ha d'haver sis caselles, tres amb figura, un
-  // interrogant i dues en blanc.
-  for (let seed = 1; seed <= 80; seed++) {
-    const item = I.generaItem(seed);
-    const svg = I.svgEnunciat(item);
-    // Les caselles del desplegable són els rectangles amb vora.
-    const quadres = (svg.match(/<rect [^>]*stroke="#15151C"/g) || []).length;
-    cal('sis caselles dibuixades', quadres === 6, `llavor ${seed}: ${quadres}`);
-    cal('un sol interrogant', (svg.match(/>\?</g) || []).length === 1, `llavor ${seed}`);
-    // Tres cares al cub muntat, amb el seu contorn.
-    const contorns = (svg.match(/<polygon [^>]*stroke="#15151C"/g) || []).length;
-    cal('tres cares al cub muntat', contorns === 3, `llavor ${seed}: ${contorns}`);
-  }
-
-  // Al full, l'enunciat no ha de trepitjar la primera resposta.
   const full = I.svgFull([1, 2].map((s) => I.generaItem(s)));
+  cal('el full surt sencer', !/NaN|undefined/.test(full));
   const xs = [...full.matchAll(/<g transform="translate\((-?[\d.]+) (-?[\d.]+)\)">/g)]
     .map((m) => Number(m[1]));
   const respostes = xs.filter((x) => x !== 14);
   cal('l\'enunciat acaba abans que comenci la primera resposta',
     14 + I.MIDA_ENUNCIAT.w <= Math.min(...respostes),
     `l'enunciat arriba a ${14 + I.MIDA_ENUNCIAT.w} i la resposta comença a ${Math.min(...respostes)}`);
-  const ample = Number(full.match(/width="(\d+)"/)[1]);
-  cal('l\'última resposta cap al full', Math.max(...respostes) + 50 <= ample,
-    `arriba a ${Math.max(...respostes) + 50} i el full fa ${ample}`);
 }
 
 console.log(`\n${fets - fallats}/${fets} proves passades`

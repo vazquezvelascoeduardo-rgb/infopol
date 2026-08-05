@@ -359,26 +359,40 @@ function dibuixaMoviment(cx, cy, mov, s) {
     for (const i of idx) cub[c][i] = 'capa';
   }
 
-  // On va l'arc, mesurat al llarg de la normal. Les tres capes ocupen
-  // [2/3, 1], [1/3, 2/3] i [0, 1/3] comptant des del costat que es veu.
-  //
-  //  · Si el bloc toca la cara de fora, l'arc va PER FORA d'aquesta cara,
-  //    que és com es dibuixa de tota la vida «gira aquesta cara».
-  //  · Si no, l'arc es posa a l'alçada del bloc i amb el radi més gros, de
-  //    manera que surt per fora de la silueta i queda fet un cinturó. Amb el
-  //    radi de la cara quedaria amagat dins del cub.
-  const cinturo = mov.desde > 0;
-  const alt = cinturo ? 1 - (2 * mov.desde + mov.quantes) / 6 : 1.14;
-  const R0 = cinturo ? 0.88 : 0.62;
-  const PASSOS = 26;
-  const TOMB = (Math.PI * 3) / 2;
-  const desde = (mov.eix === 'y' || cinturo) ? Math.PI * 0.15 : -Math.PI * 0.35;
+  // On va l'arc, mesurat al llarg de la normal: a l'alçada del bloc que
+  // gira. Les tres capes ocupen [2/3, 1], [1/3, 2/3] i [0, 1/3] comptant des
+  // del costat que es veu, o sigui que el mig del bloc cau aquí.
+  const alt = 1 - (2 * mov.desde + mov.quantes) / 6;
+  // El radi, una mica més gran que el cub, perquè la fletxa surti de la
+  // silueta i no es confongui amb les ratlles de les caselles.
+  const R0 = 1.02;
+  const PASSOS = 14;
+
+  // CURTA. La primera que vaig fer donava tres quarts de volta al voltant
+  // del cub i no s'entenia: massa ratlla i massa lluny de la capa que
+  // gira. La del quadern és un ganxo curt al costat del cub, i amb això n'hi
+  // ha prou —una fletxa no ha de fer el camí, ha de dir cap on.
+  const TOMB = Math.PI * 0.52;
+
+  // I es posa a la part de baix, que és la que queda per davant i lliure.
+  // On cau això depèn de l'eix, o sigui que en comptes de calcular-ho a mà
+  // es prova tota la volta i es tria l'angle que baixa més a la pantalla.
+  let centre = 0, mesAvall = -Infinity;
+  for (let i = 0; i < 72; i++) {
+    const th = (i * 2 * Math.PI) / 72;
+    const co = Math.cos(th), si = Math.sin(th);
+    const p = [0, 1, 2].map((k) =>
+      0.5 + pla.n[k] * (alt - 0.5) + R0 * (co * pla.a[k] + si * pla.b[k]));
+    const y = proj(p[0], p[1], p[2], 1).y;
+    if (y > mesAvall) { mesAvall = y; centre = th; }
+  }
   const signe = mov.horari ? -1 : 1;        // horari = angle que decreix
+  const desde = centre - signe * (TOMB / 2);
 
   // La fletxa és una CINTA, no una ratlla. Al quadern és una fletxa negra
   // ben gruixuda i es llegeix de lluny; una ratlla de dos punts, no. Es fa
   // amb dos arcs, un per fora i un per dins, tancats en un sol polígon.
-  const GRUIX = 0.075;
+  const GRUIX = 0.10;
   const punt = (t, r) => {
     const th = desde + signe * t * TOMB;
     const co = Math.cos(th), si = Math.sin(th);
@@ -401,7 +415,7 @@ function dibuixaMoviment(cx, cy, mov, s) {
   // quadern: el que es veu primer d'una fletxa és cap on apunta.
   const fi = cami[PASSOS], abans = cami[PASSOS - 2];
   const ang = Math.atan2(fi.y - abans.y, fi.x - abans.x);
-  const L = s * 0.42, OBRE = 0.52;
+  const L = s * 0.40, OBRE = 0.55;
   const ala = (g) => `${(fi.x - L * Math.cos(ang + g)).toFixed(1)},`
     + `${(fi.y - L * Math.sin(ang + g)).toFixed(1)}`;
   const punta = `<polygon points="${fi.x.toFixed(1)},${fi.y.toFixed(1)} ${ala(OBRE)} `

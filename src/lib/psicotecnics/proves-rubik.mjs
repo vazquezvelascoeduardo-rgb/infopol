@@ -344,13 +344,14 @@ titol('5. La fletxa gira cap on gira el cub');
       cal('la fletxa gira cap on toca',
         horari ? g.total > 0 : g.total < 0,
         `${mov.eix}${mov.desde}+${mov.quantes} ${horari ? 'horari' : 'antihorari'}: ${graus.toFixed(0)}°`);
-      // El gir ha de ser gros i d'una tirada. No es pot demanar que siguin
-      // just els 270° que fa l'arc al pla de la cara: la cara es veu de
-      // gairell, el cercle surt fet una el·lipse i un tros de 270° del
-      // cercle no en fa 270 de l'el·lipse —surten entre 240 i 270 segons on
-      // comenci—. El que sí que ha de ser cert sempre és que doni clarament
-      // la volta, i cap a un sol costat.
-      cal('i fa una volta llarga', Math.abs(graus) > 200 && Math.abs(graus) < 355,
+      // La fletxa és curta a posta —un ganxo, com la del quadern— però ha de
+      // corbar-se prou perquè es vegi que és un gir i no una ratlla recta.
+      // El número exacte no es pot demanar: la capa es veu de gairell, el
+      // cercle surt fet una el·lipse i un tros de 94° del cercle no en fa 94
+      // de l'el·lipse. El que ha de ser cert sempre és que es corbi, i cap a
+      // un sol costat.
+      cal('i es corba prou per veure que és un gir',
+        Math.abs(graus) > 30 && Math.abs(graus) < 130,
         `${mov.eix}${mov.desde}+${mov.quantes}: ${Math.abs(graus).toFixed(0)}°`);
       cal('sense canviar de sentit enmig', g.sempreIgual, `${mov.eix}${mov.desde}`);
       // I que es vegi: una fletxa curta no diu res.
@@ -359,7 +360,12 @@ titol('5. La fletxa gira cap on gira el cub');
         llarg += Math.hypot(camins[0][k].x - camins[0][k - 1].x,
           camins[0][k].y - camins[0][k - 1].y);
       }
-      cal('la fletxa és prou llarga per veure-la', llarg > 45,
+      // Curta, però no un pessic: ha de fer com a mínim un terç de l'ample
+      // del cub petit, que és d'uns 40 punts.
+      cal('la fletxa és prou llarga per veure-la', llarg > 25,
+        `${mov.eix}${mov.desde}: ${llarg.toFixed(0)} de llarg`);
+      // I la punta ha de ser ben visible al costat del cos.
+      cal('la punta és gran comparada amb el cos', llarg < 60,
         `${mov.eix}${mov.desde}: ${llarg.toFixed(0)} de llarg`);
     }
   }
