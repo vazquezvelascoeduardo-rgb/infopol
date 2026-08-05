@@ -140,7 +140,7 @@ titol('3. El dibuix ensenya el que ha d\'ensenyar');
 
     // Les sis figures del cub hi han de ser: tres nítides i tres al fons.
     // Les del fons van d'un gris que no fa servir res més.
-    const fluixes = (svg.match(/stroke-opacity="0\.32"/g) || []).length;
+    const fluixes = (svg.match(/stroke-opacity="0\.55"/g) || []).length;
     cal('les tres cares del fons es veuen', fluixes === 3, `llavor ${seed}: ${fluixes}`);
     const totes = (svg.match(/<path d="M [^"]*" fill="none"/g) || []).length;
     cal('hi ha les sis cares del cub, més les del desplegable',

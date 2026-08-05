@@ -272,8 +272,8 @@ function cubTransparent(cx, cy, item, s) {
     // hauria amagat de quin color és cada figura, que és mitja resposta.
     const fig = fosca
       ? `<path d="${FIGURES[item.simbol[k].forma]}" fill="none"`
-        + ` stroke="${pinta(item.simbol[k].color)}" stroke-opacity="0.32"`
-        + ` stroke-width="0.075" stroke-linejoin="round" stroke-linecap="round"/>`
+        + ` stroke="${pinta(item.simbol[k].color)}" stroke-opacity="0.55"`
+        + ` stroke-width="0.09" stroke-linejoin="round" stroke-linecap="round"/>`
       : figuraSvg(item.simbol[k]);
     return (fosca ? '' : `<polygon points="${pts}" fill="#fff" fill-opacity="0.82"/>`)
       + `<g transform="${m}">${fig}</g>`
@@ -288,7 +288,7 @@ function cubTransparent(cx, cy, item, s) {
           + ` stroke="${color || (fosca ? FLUIX : NEGRE)}"`
           + ` stroke-width="${color ? 2.6 : 1.4}"`
           + `${color ? ' stroke-dasharray="4 3"' : ''}`
-          + `${fosca && !color ? ' stroke-opacity="0.55"' : ''} stroke-linecap="round"/>`;
+          + `${fosca && !color ? ' stroke-opacity="0.7"' : ''} stroke-linecap="round"/>`;
       }).join('');
   };
 

@@ -420,34 +420,47 @@ function dibuixaMoviment(cx, cy, mov, s) {
       + ` fill="${NEGRE}" stroke="none"/>`
       + puntaA(fi, Math.atan2(fi.y - abans.y, fi.x - abans.x));
   } else {
-    // LES ALTRES DUES, RECTES. Aquí el pla de la capa es veu gairebé de
-    // cantell: la volta surt feta una el·lipse xafada i la corba no diu res.
-    // L'Eduardo ho va dir: «las horizontales están bien, pero las verticales,
-    // ¿por qué no simplemente haces para arriba o para abajo? Es mucho más
-    // simple de entender».
+    // LES ALTRES DUES. Aquí el pla de la capa es veu gairebé de cantell: la
+    // volta surt feta una el·lipse xafada i seguir-la no diu res. El que sí
+    // que es veu és que, al costat del cub, la capa PUJA o BAIXA.
     //
-    // I ho és, i a més és exacte: al costat del cub, la capa puja o baixa, i
-    // prou. La fletxa es posa a l'extrem de fora —a la dreta si gira la capa
-    // de la dreta, a l'esquerra si gira la de davant— que és on la volta es
-    // veu de perfil, i allà la direcció del moviment és vertical clavada.
+    // Així que la fletxa es posa al costat i acaba apuntant amunt o avall,
+    // ben clar. Però no és una barra recta: és un ganxo, una corba que
+    // arrenca de fora i s'adreça just al final. Rectes no s'entenien —«te
+    // vas acercando pero no me gusta»— i amb el ganxo es veu que hi ha un
+    // gir i cap on va, que és el que ha de dir una fletxa.
+    //
+    // On es posa: a l'extrem de fora del pla, que és on el moviment és
+    // vertical clavat. Cap on apunta no s'escull, es calcula: és la marxa
+    // real de la volta en aquell punt.
     const fora = mov.eix === 'x' ? 1 : -1;
     const th = cap(fora, 0);
     const on = puntDe(th);
-    const m = marxaDe(th);
-    const llarg = Math.hypot(m.x, m.y) || 1;
-    // Només se'n guarda el sentit vertical: amunt o avall, res de mig i mig.
-    const amunt = m.y < 0 ? -1 : 1;
-    const D = s * 0.62;
-    const cap0 = { x: on.x, y: on.y - amunt * D * 0.5 };
-    const fi = { x: on.x, y: on.y + amunt * D * 0.5 };
-    const w = s * GRUIX;
-    fletxa = `<polygon points="${(cap0.x - w).toFixed(1)},${cap0.y.toFixed(1)} `
-      + `${(cap0.x + w).toFixed(1)},${cap0.y.toFixed(1)} `
-      + `${(fi.x + w).toFixed(1)},${fi.y.toFixed(1)} `
-      + `${(fi.x - w).toFixed(1)},${fi.y.toFixed(1)}" fill="${NEGRE}" stroke="none"/>`
+    const amunt = marxaDe(th).y < 0 ? -1 : 1;
+
+    // El ganxo. La punta cau a `fi`, i com que el radi hi arriba horitzontal,
+    // la tangent hi és vertical clavada: la fletxa acaba mirant amunt o
+    // avall i no de gairell.
+    const RG = s * 0.60, TOMB = Math.PI * 0.58, PASSOS = 12;
+    const centreCub = pt([0.5, 0.5, 0.5]);
+    const banda = on.x >= centreCub.x ? 1 : -1;      // cap a on s'obre
+    const fi = { x: on.x, y: on.y };
+    const C = { x: fi.x + banda * RG, y: fi.y };
+    const thFi = banda > 0 ? Math.PI : 0;
+    const gir = banda > 0 ? -amunt : amunt;
+
+    const arc = (t, r) => {
+      const a = thFi - gir * (1 - t) * TOMB;
+      return { x: C.x + r * Math.cos(a), y: C.y + r * Math.sin(a) };
+    };
+    const g = s * GRUIX * 1.15;
+    const defora = Array.from({ length: PASSOS + 1 }, (_, i) => arc(i / PASSOS, RG + g));
+    const dedins = Array.from({ length: PASSOS + 1 }, (_, i) => arc(i / PASSOS, RG - g));
+    const cami = Array.from({ length: PASSOS + 1 }, (_, i) => arc(i / PASSOS, RG));
+    const cos = [...defora, ...[...dedins].reverse()];
+    fletxa = `<polygon points="${cos.map((q) => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' ')}"`
+      + ` fill="${NEGRE}" stroke="none"/>`
       + puntaA(fi, amunt > 0 ? Math.PI / 2 : -Math.PI / 2);
-    // `llarg` només serveix per no dividir per zero més amunt.
-    void llarg;
   }
 
   return dibuixaCub(cx, cy, cub, s) + fletxa;
@@ -463,7 +476,7 @@ const embolcall = (w, h, cos) =>
  * resposta. L'Eduardo ho va veure de seguida: «el primer cubo sale colapsado
  * con el ejemplo». Ara la mida surt d'aquí i el full la fa servir.
  */
-export const MIDA_ENUNCIAT = { w: 344, h: 128 };
+export const MIDA_ENUNCIAT = { w: 356, h: 152 };
 
 /** L'enunciat: el cub de partida i els dos moviments. */
 export function svgEnunciat(item, s = 34) {
@@ -476,15 +489,18 @@ export function svgEnunciat(item, s = 34) {
     + ` font-family="ui-sans-serif,system-ui,sans-serif" font-size="${mida}"`
     + ` font-weight="${pes}" fill="${NEGRE}">${t}</text>`;
 
-  const cos = dibuixaCub(72, 66, item.inici, s)
+  const cos = dibuixaCub(74, 84, item.inici, s)
     + item.moviments.map((m, i) => {
-      const x = 196 + i * 92;
-      // A sota, només quin moviment és. Res de dir quina capa gira ni cap on:
-      // això és la feina de la fletxa, i si la fletxa no s'entén, el que
-      // s'ha d'arreglar és la fletxa. Al quadern tampoc no hi diu res més
-      // que «primer moviment» i «segon moviment».
-      return dibuixaMoviment(x, 62, m, petit)
-        + lletra(x, 116, i === 0 ? 'PRIMER MOVIMENT' : 'SEGON MOVIMENT', 10, 700);
+      const x = 200 + i * 104;
+      // El rètol, a DUES línies i a sobre del cub, com al quadern. En una
+      // sola línia «PRIMER MOVIMENT» fa més ample que el lloc que té i els
+      // dos rètols s'encavalcaven: sortia «PRIMER MOVIMENTSEGON MOVIMENT».
+      //
+      // I no hi diu res més. Quina capa gira i cap on és la feina de la
+      // fletxa; si la fletxa no s'entén, el que s'ha d'arreglar és la fletxa.
+      return lletra(x, 22, i === 0 ? 'PRIMER' : 'SEGON', 9.5, 700)
+        + lletra(x, 34, 'MOVIMENT', 9.5, 700)
+        + dibuixaMoviment(x, 94, m, petit);
     }).join('');
   return embolcall(w, h, cos);
 }

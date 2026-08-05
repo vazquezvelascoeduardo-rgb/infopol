@@ -399,26 +399,44 @@ titol('5e. Les fletxes rectes pugen o baixen cap on va la capa de debò');
       const svg = R.svgMoviment(m, S);
       const oM = centreDelMarc(svg);
 
-      // El cos de la fletxa: el polígon negre de quatre punts. La punta: el
-      // de tres. De l'un a l'altre surt cap on apunta.
-      const negres = [...svg.matchAll(/<polygon points="([^"]+)" fill="#15151C"/g)]
-        .map((x) => x[1].trim().split(/\s+/).map((q) => q.split(',').map(Number)));
-      const cossos = negres.filter((p) => p.length === 4);
-      const puntes = negres.filter((p) => p.length === 3);
-      cal('hi ha un cos de fletxa', cossos.length === 1, `${mov.eix}${mov.desde}: ${cossos.length}`);
+      // El cos de la fletxa és una cinta, com les corbes: se'n treu la línia
+      // del mig. La punta és el polígon negre de tres vèrtexs.
+      const camins = cintes(svg);
+      const puntes = [...svg.matchAll(/<polygon points="([^"]+)" fill="#15151C"/g)]
+        .map((x) => x[1].trim().split(/\s+/).map((q) => q.split(',').map(Number)))
+        .filter((p) => p.length === 3);
+      cal('hi ha un cos de fletxa', camins.length === 1, `${mov.eix}${mov.desde}: ${camins.length}`);
       cal('i una punta', puntes.length === 1, `${mov.eix}${mov.desde}: ${puntes.length}`);
-      if (!cossos.length || !puntes.length) continue;
-      const cos = centreDe(cossos[0]), pun = centreDe(puntes[0]);
-      const amunt = pun.y < cos.y ? -1 : 1;
-      cal('la fletxa és vertical de debò', Math.abs(pun.x - cos.x) < 1.5,
-        `${mov.eix}${mov.desde}: es desvia ${Math.abs(pun.x - cos.x).toFixed(1)}`);
-      // Cap on gira la fletxa. Una fletxa recta no és una fletxa «sense
-      // gir»: està posada a un costat de l'eix i apunta en una direcció, i
-      // això ja diu un sentit de rotació. Es mesura amb el producte creuat
-      // de la posició per la direcció: positiu vol dir cap a la dreta, a la
-      // pantalla, on la y creix cap avall.
-      const P = { x: cos.x - oM.x, y: cos.y - oM.y };
-      const D = { x: pun.x - cos.x, y: pun.y - cos.y };
+      if (!camins.length || !puntes.length) continue;
+      const cami = camins[0];
+      const fi = cami[cami.length - 1];
+      const pun = centreDe(puntes[0]);
+      // Cap on mira. El MORRO de la punta va per davant i el centre del
+      // triangle queda darrere, o sigui que la fletxa apunta amunt quan el
+      // morro és per sobre del centre. Ho vaig escriure al revés i totes
+      // les comprovacions de sentit sortien capgirades.
+      const amunt = fi.y < pun.y ? -1 : 1;
+      // El ganxo ha d'acabar mirant amunt o avall: el darrer tros de la
+      // corba ha de ser molt més vertical que horitzontal.
+      const cua = { x: cami[cami.length - 1].x - cami[cami.length - 3].x,
+        y: cami[cami.length - 1].y - cami[cami.length - 3].y };
+      cal('la fletxa acaba mirant amunt o avall', Math.abs(cua.y) > Math.abs(cua.x) * 2.5,
+        `${mov.eix}${mov.desde}: acaba (${cua.x.toFixed(1)}, ${cua.y.toFixed(1)})`);
+      // I ha de ser un ganxo, no una ratlla: s'ha de corbar.
+      const g = girAcumulat(cami);
+      cal('i es corba, que per això és una fletxa de gir',
+        Math.abs(g.total * 180 / Math.PI) > 40, `${mov.eix}${mov.desde}`);
+      // Cap on gira la fletxa. Una fletxa que acaba amunt o avall no és una
+      // fletxa «sense gir»: està posada a un costat de l'eix i apunta cap a
+      // algun lloc, i això ja diu un sentit de rotació. Es mesura amb el
+      // producte creuat de la posició per la direcció: positiu vol dir cap a
+      // la dreta, a la pantalla, on la y creix cap avall.
+      //
+      // El punt on s'aplica és on ACABA la fletxa, que és el que toca el pla
+      // del gir. El centre del cos no serveix: el ganxo s'obre cap enfora i
+      // el seu centre queda desplaçat.
+      const P = { x: fi.x - oM.x, y: fi.y - oM.y };
+      const D = { x: fi.x - cami[cami.length - 3].x, y: fi.y - cami[cami.length - 3].y };
       const giraLaFletxa = Math.sign(P.x * D.y - P.y * D.x);
       cal('la fletxa diu algun sentit', giraLaFletxa !== 0, `${mov.eix}${mov.desde}`);
 
