@@ -23,6 +23,7 @@ import * as dades from './dades.mjs';
 import * as verbal from './verbal.mjs';
 import * as rubik from './rubik.mjs';
 import * as fuga from './fuga.mjs';
+import * as ruleta from './ruleta.mjs';
 
 const opcionsSvg = (mod, it, n) =>
   Array.from({ length: n }, (_, i) => ({ svg: mod.svgOpcio(it, i) }));
@@ -238,6 +239,21 @@ export const CATEGORIES = [
     },
   },
   {
+    id: 'ruleta',
+    nom: 'Ruleta',
+    descripcio: 'Una sèrie posada en cercle, amb un forat',
+    grafica: true,
+    fes: (seed) => {
+      const it = ruleta.generaItem(seed);
+      return {
+        enunciat: 'Quina figura falta a la ruleta?',
+        svg: ruleta.svgEnunciat(it),
+        opcions: Array.from({ length: 4 }, (_, i) => ({ svg: ruleta.svgOpcio(it, i) })),
+        correcta: it.correcta,
+      };
+    },
+  },
+  {
     id: 'punt-fuga',
     nom: 'Punt de fuga',
     descripcio: 'La mateixa escena vista des d\'un altre lloc',
@@ -310,7 +326,7 @@ export const BLOCS = [
     id: 'abstracte',
     nom: 'Raonament abstracte',
     descripcio: 'Trobar la regla i continuar-la',
-    categories: ['abstracte', 'series-figures'],
+    categories: ['abstracte', 'series-figures', 'ruleta'],
   },
   {
     id: 'atencio',

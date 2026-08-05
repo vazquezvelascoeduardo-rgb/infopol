@@ -15,10 +15,10 @@ const cal = (nom, condicio, detall = '') => {
 };
 const titol = (t) => console.log(`\n${t}`);
 
-titol('1. Les quinze categories, amb cent ítems cadascuna');
+titol('1. Les disset categories, amb cent ítems cadascuna');
 {
-  cal('n\'hi ha quinze', C.CATEGORIES.length === 16, `${C.CATEGORIES.length}`);
-  cal('cap id repetit', new Set(C.CATEGORIES.map((c) => c.id)).size === 16);
+  cal('n\'hi ha disset', C.CATEGORIES.length === 17, `${C.CATEGORIES.length}`);
+  cal('cap id repetit', new Set(C.CATEGORIES.map((c) => c.id)).size === 17);
   for (const cat of C.CATEGORIES) {
     let grafics = 0, textos = 0;
     for (let seed = 1; seed <= 100; seed++) {
