@@ -331,9 +331,7 @@ titol('5. La fletxa gira cap on gira el cub');
   // mateix sentit que la cara que tenen a sobre —això ho garanteix la prova
   // 4b, on U · MU · D' resulta ser el cub sencer girat—, i com que la fletxa
   // es dibuixa al mateix pla, ha de girar cap al mateix costat.
-  // Només les de l'eix horitzontal són corbes. Les altres dues són rectes i
-  // es comproven a la 5e, que és una altra cosa.
-  for (const mov of TOTS.filter((m) => m.eix === 'y')) {
+  for (const mov of TOTS) {
     for (const horari of [true, false]) {
       const fals = { inici: R.CARES.reduce((c, x) => ({ ...c, [x]: Array(9).fill('blanc') }), {}),
         moviments: [{ ...mov, horari }, { ...mov, horari }] };
@@ -389,7 +387,7 @@ titol('5e. Les fletxes rectes pugen o baixen cap on va la capa de debò');
     const [w, h] = svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/).slice(1).map(Number);
     return { x: w / 2, y: h / 2 };
   };
-  for (const mov of TOTS.filter((m) => m.eix !== 'y')) {
+  for (const mov of TOTS) {
     for (const horari of [true, false]) {
       const m = { ...mov, horari };
       // El moviment dibuixat tot sol, amb el cub al mig del marc: així es
@@ -416,16 +414,11 @@ titol('5e. Les fletxes rectes pugen o baixen cap on va la capa de debò');
       // morro és per sobre del centre. Ho vaig escriure al revés i totes
       // les comprovacions de sentit sortien capgirades.
       const amunt = fi.y < pun.y ? -1 : 1;
-      // El ganxo ha d'acabar mirant amunt o avall: el darrer tros de la
-      // corba ha de ser molt més vertical que horitzontal.
-      const cua = { x: cami[cami.length - 1].x - cami[cami.length - 3].x,
-        y: cami[cami.length - 1].y - cami[cami.length - 3].y };
-      cal('la fletxa acaba mirant amunt o avall', Math.abs(cua.y) > Math.abs(cua.x) * 2.5,
-        `${mov.eix}${mov.desde}: acaba (${cua.x.toFixed(1)}, ${cua.y.toFixed(1)})`);
-      // I ha de ser un ganxo, no una ratlla: s'ha de corbar.
-      const g = girAcumulat(cami);
-      cal('i es corba, que per això és una fletxa de gir',
-        Math.abs(g.total * 180 / Math.PI) > 40, `${mov.eix}${mov.desde}`);
+      // La punta ha d'anar al final del recorregut i mirar cap on va.
+      const marxa = { x: fi.x - cami[cami.length - 3].x, y: fi.y - cami[cami.length - 3].y };
+      const capDavant = (fi.x - pun.x) * marxa.x + (fi.y - pun.y) * marxa.y;
+      cal('la punta va al final i mira cap on va la fletxa', capDavant > 0,
+        `${mov.eix}${mov.desde}: ${capDavant.toFixed(1)}`);
       // Cap on gira la fletxa. Una fletxa que acaba amunt o avall no és una
       // fletxa «sense gir»: està posada a un costat de l'eix i apunta cap a
       // algun lloc, i això ja diu un sentit de rotació. Es mesura amb el
@@ -475,7 +468,7 @@ titol('5e. Les fletxes rectes pugen o baixen cap on va la capa de debò');
 
 titol('5b. La punta de la fletxa va on acaba el camí i apunta on va');
 {
-  for (const mov of TOTS.filter((m) => m.eix === 'y')) {
+  for (const mov of TOTS) {
     for (const horari of [true, false]) {
       const fals = { inici: R.CARES.reduce((c, x) => ({ ...c, [x]: Array(9).fill('blanc') }), {}),
         moviments: [{ ...mov, horari }, { ...mov, horari }] };
