@@ -24,6 +24,7 @@ import * as verbal from './verbal.mjs';
 import * as rubik from './rubik.mjs';
 import * as fuga from './fuga.mjs';
 import * as ruleta from './ruleta.mjs';
+import * as interrogant from './interrogant.mjs';
 
 const opcionsSvg = (mod, it, n) =>
   Array.from({ length: n }, (_, i) => ({ svg: mod.svgOpcio(it, i) }));
@@ -239,6 +240,21 @@ export const CATEGORIES = [
     },
   },
   {
+    id: 'cara-interrogant',
+    nom: 'La cara de l\'interrogant',
+    descripcio: 'El cub muntat i el seu desplegable amb un forat',
+    grafica: true,
+    fes: (seed) => {
+      const it = interrogant.generaItem(seed);
+      return {
+        enunciat: 'Quina cara correspon a l\'interrogant?',
+        svg: interrogant.svgEnunciat(it),
+        opcions: Array.from({ length: 4 }, (_, i) => ({ svg: interrogant.svgOpcio(it, i) })),
+        correcta: it.correcta,
+      };
+    },
+  },
+  {
     id: 'ruleta',
     nom: 'Ruleta',
     descripcio: 'Una sèrie posada en cercle, amb un forat',
@@ -320,7 +336,7 @@ export const BLOCS = [
     nom: 'Aptitud espacial',
     descripcio: 'Cubs, plegats, girs i reflexos',
     categories: ['cubs-desplegat', 'cubs-mirall', 'figura-reflectida',
-      'figura-girada', 'disc', 'dau-planol', 'rubik', 'punt-fuga'],
+      'figura-girada', 'disc', 'dau-planol', 'rubik', 'punt-fuga', 'cara-interrogant'],
   },
   {
     id: 'abstracte',

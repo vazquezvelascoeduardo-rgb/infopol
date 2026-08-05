@@ -176,11 +176,22 @@ export function generaItem(seed) {
 // ── El dibuix ────────────────────────────────────────────────────
 const pinta = (id) => (COLORS.find((c) => c.id === id) || COLORS[0]).pinta;
 
-/** Una forma centrada a (cx, cy) que cap en un cercle de radi r. */
-export function formaSvg(nom, cx, cy, r, color) {
+/**
+ * Una forma centrada a (cx, cy) que cap en un cercle de radi r.
+ *
+ * Amb `contorn` surt buida i pintada només de ratlla, que és com es dibuixen
+ * als desplegables: allà van dins d'una casella petita i plenes taparien.
+ * `gruix` i `decimals` hi són pel mateix motiu: quan la forma es dibuixa en
+ * un quadrat de costat 1 i després s'escala, un decimal no arriba.
+ */
+export function formaSvg(nom, cx, cy, r, color, opcions = {}) {
+  const { contorn = false, gruix = 1.1, decimals = 1 } = opcions;
+  const pinta = contorn
+    ? `fill="none" stroke="${color}" stroke-width="${gruix}"`
+    : `fill="${color}" stroke="${NEGRE}" stroke-width="${gruix}"`;
+  const n = (v) => v.toFixed(decimals);
   const p = (punts) => `<polygon points="${punts.map(([x, y]) =>
-    `${x.toFixed(1)},${y.toFixed(1)}`).join(' ')}" fill="${color}" `
-    + `stroke="${NEGRE}" stroke-width="1.1" stroke-linejoin="round"/>`;
+    `${n(x)},${n(y)}`).join(' ')}" ${pinta} stroke-linejoin="round"/>`;
   const regular = (costats, gir) => p(Array.from({ length: costats }, (_, i) => {
     const a = gir + (i * 2 * Math.PI) / costats;
     return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
@@ -188,13 +199,11 @@ export function formaSvg(nom, cx, cy, r, color) {
 
   switch (nom) {
     case 'cercle':
-      return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r.toFixed(1)}" `
-        + `fill="${color}" stroke="${NEGRE}" stroke-width="1.1"/>`;
+      return `<circle cx="${n(cx)}" cy="${n(cy)}" r="${n(r)}" ${pinta}/>`;
     case 'quadrat': {
       const c = r * 0.76;
-      return `<rect x="${(cx - c).toFixed(1)}" y="${(cy - c).toFixed(1)}" `
-        + `width="${(c * 2).toFixed(1)}" height="${(c * 2).toFixed(1)}" `
-        + `fill="${color}" stroke="${NEGRE}" stroke-width="1.1"/>`;
+      return `<rect x="${n(cx - c)}" y="${n(cy - c)}" `
+        + `width="${n(c * 2)}" height="${n(c * 2)}" ${pinta}/>`;
     }
     case 'triangle': return regular(3, -Math.PI / 2);
     case 'rombe': return regular(4, -Math.PI / 2);
