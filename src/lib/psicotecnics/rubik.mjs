@@ -32,7 +32,7 @@ export const COLORS = {
   groc: '#F2C14E',
   // No és un color del cub: és el tint de la capa que gira, al dibuix dels
   // moviments. Allà el cub va tot blanc i això és l'únic que hi ha pintat.
-  capa: '#CFE0EF',
+  capa: '#C6C9CE',
 };
 const TINTES = ['magenta', 'blau', 'groc'];
 
@@ -375,23 +375,33 @@ function dibuixaMoviment(cx, cy, mov, s) {
   const desde = (mov.eix === 'y' || cinturo) ? Math.PI * 0.15 : -Math.PI * 0.35;
   const signe = mov.horari ? -1 : 1;        // horari = angle que decreix
 
-  const punt = (t) => {
+  // La fletxa és una CINTA, no una ratlla. Al quadern és una fletxa negra
+  // ben gruixuda i es llegeix de lluny; una ratlla de dos punts, no. Es fa
+  // amb dos arcs, un per fora i un per dins, tancats en un sol polígon.
+  const GRUIX = 0.075;
+  const punt = (t, r) => {
     const th = desde + signe * t * TOMB;
     const co = Math.cos(th), si = Math.sin(th);
     return pt([0, 1, 2].map((k) =>
-      0.5 + pla.n[k] * (alt - 0.5) + R0 * (co * pla.a[k] + si * pla.b[k])));
+      0.5 + pla.n[k] * (alt - 0.5) + r * (co * pla.a[k] + si * pla.b[k])));
   };
 
-  const cami = Array.from({ length: PASSOS + 1 }, (_, i) => punt(i / PASSOS));
-  const linia = `<polyline points="${cami.map((q) => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' ')}"`
-    + ` fill="none" stroke="${NEGRE}" stroke-width="2.4" stroke-linecap="round"`
-    + ` stroke-linejoin="round"/>`;
+  // El cos: PASSOS+1 punts per fora i els mateixos per dins, a l'inrevés.
+  // Així les proves poden retrobar la línia del mig fent la mitjana del punt
+  // i del seu company, que és el que diu cap on gira la fletxa.
+  const defora = Array.from({ length: PASSOS + 1 }, (_, i) => punt(i / PASSOS, R0 + GRUIX / 2));
+  const dedins = Array.from({ length: PASSOS + 1 }, (_, i) => punt(i / PASSOS, R0 - GRUIX / 2));
+  const cami = Array.from({ length: PASSOS + 1 }, (_, i) => punt(i / PASSOS, R0));
+  const cos = [...defora, ...[...dedins].reverse()];
+  const linia = `<polygon points="${cos.map((q) => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' ')}"`
+    + ` fill="${NEGRE}" stroke="none"/>`;
 
   // La punta, orientada amb la tangent d'on acaba l'arc. Així apunta on va
-  // de veritat, i canvia sola quan canvia el sentit.
+  // de veritat, i canvia sola quan canvia el sentit. Va ampla, com la del
+  // quadern: el que es veu primer d'una fletxa és cap on apunta.
   const fi = cami[PASSOS], abans = cami[PASSOS - 2];
   const ang = Math.atan2(fi.y - abans.y, fi.x - abans.x);
-  const L = s * 0.30, OBRE = 0.44;
+  const L = s * 0.42, OBRE = 0.52;
   const ala = (g) => `${(fi.x - L * Math.cos(ang + g)).toFixed(1)},`
     + `${(fi.y - L * Math.sin(ang + g)).toFixed(1)}`;
   const punta = `<polygon points="${fi.x.toFixed(1)},${fi.y.toFixed(1)} ${ala(OBRE)} `
@@ -410,7 +420,7 @@ const embolcall = (w, h, cos) =>
  * resposta. L'Eduardo ho va veure de seguida: «el primer cubo sale colapsado
  * con el ejemplo». Ara la mida surt d'aquí i el full la fa servir.
  */
-export const MIDA_ENUNCIAT = { w: 366, h: 142 };
+export const MIDA_ENUNCIAT = { w: 344, h: 128 };
 
 /** L'enunciat: el cub de partida i els dos moviments. */
 export function svgEnunciat(item, s = 34) {
@@ -423,16 +433,15 @@ export function svgEnunciat(item, s = 34) {
     + ` font-family="ui-sans-serif,system-ui,sans-serif" font-size="${mida}"`
     + ` font-weight="${pes}" fill="${NEGRE}">${t}</text>`;
 
-  const cos = dibuixaCub(74, 76, item.inici, s)
+  const cos = dibuixaCub(72, 66, item.inici, s)
     + item.moviments.map((m, i) => {
-      const x = 208 + i * 104;
-      // Tres línies a sota: quin moviment és, quines capes giren i cap on.
-      // El sentit sempre va dit des d'on es mira, perquè «horari» tot sol no
-      // vol dir res si no es diu des de quin costat.
-      return dibuixaMoviment(x, 58, m, petit)
-        + lletra(x, 103, `${i === 0 ? '1r' : '2n'} moviment`, 9.5, 600)
-        + lletra(x, 118, `gira ${nomDelMoviment(m)}`, 10.5, 700)
-        + lletra(x, 133, `${m.horari ? 'horari' : 'antihorari'} des de ${EIXOS[m.eix].des}`, 9, 500);
+      const x = 196 + i * 92;
+      // A sota, només quin moviment és. Res de dir quina capa gira ni cap on:
+      // això és la feina de la fletxa, i si la fletxa no s'entén, el que
+      // s'ha d'arreglar és la fletxa. Al quadern tampoc no hi diu res més
+      // que «primer moviment» i «segon moviment».
+      return dibuixaMoviment(x, 62, m, petit)
+        + lletra(x, 116, i === 0 ? 'PRIMER MOVIMENT' : 'SEGON MOVIMENT', 10, 700);
     }).join('');
   return embolcall(w, h, cos);
 }

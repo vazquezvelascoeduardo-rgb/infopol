@@ -151,6 +151,30 @@ function trobaColor(svg, pinta) {
  * gir acumulat, en canvi, no depèn de res més que de la forma de la corba, i
  * a sobre diu quants graus fa, que també s'ha de comprovar.
  */
+/**
+ * La línia del mig de cada fletxa.
+ *
+ * La fletxa és una cinta, no una ratlla: un polígon amb la meitat dels punts
+ * per fora de l'arc i l'altra meitat per dins, a l'inrevés. La línia que diu
+ * cap on gira és la del mig, i s'obté fent la mitjana de cada punt amb el
+ * seu company de l'altra vora.
+ */
+function cintes(svg) {
+  const fora = [];
+  for (const m of svg.matchAll(/<polygon points="([^"]+)" fill="#15151C" stroke="none"\/>/g)) {
+    const p = m[1].trim().split(/\s+/).map((q) => {
+      const [x, y] = q.split(',').map(Number); return { x, y };
+    });
+    if (p.length < 8 || p.length % 2 !== 0) continue;
+    const n = p.length / 2;
+    fora.push(Array.from({ length: n }, (_, i) => ({
+      x: (p[i].x + p[p.length - 1 - i].x) / 2,
+      y: (p[i].y + p[p.length - 1 - i].y) / 2,
+    })));
+  }
+  return fora;
+}
+
 function girAcumulat(punts) {
   let total = 0, signes = new Set();
   for (let i = 1; i < punts.length - 1; i++) {
@@ -312,10 +336,7 @@ titol('5. La fletxa gira cap on gira el cub');
       const fals = { inici: R.CARES.reduce((c, x) => ({ ...c, [x]: Array(9).fill('blanc') }), {}),
         moviments: [{ ...mov, horari }, { ...mov, horari }] };
       const svg = R.svgEnunciat(fals);
-      const camins = [...svg.matchAll(/<polyline points="([^"]+)"/g)]
-        .map((m) => m[1].trim().split(/\s+/).map((p) => {
-          const [x, y] = p.split(',').map(Number); return { x, y };
-        }));
+      const camins = cintes(svg);
       cal('hi ha una fletxa per moviment', camins.length === 2, `${mov.eix}${mov.desde}: ${camins.length}`);
       if (camins.length !== 2) continue;
       const g = girAcumulat(camins[0]);
@@ -351,8 +372,9 @@ titol('5b. La punta de la fletxa va on acaba el camí i apunta on va');
       const fals = { inici: R.CARES.reduce((c, x) => ({ ...c, [x]: Array(9).fill('blanc') }), {}),
         moviments: [{ ...mov, horari }, { ...mov, horari }] };
       const svg = R.svgEnunciat(fals);
-      const cami = svg.match(/<polyline points="([^"]+)"/)[1].trim().split(/\s+/)
-        .map((p) => { const [x, y] = p.split(',').map(Number); return { x, y }; });
+      const cami = cintes(svg)[0];
+      cal('hi ha cinta', !!cami, `${mov.eix}${mov.desde}`);
+      if (!cami) continue;
       // La punta és el primer polígon de tres vèrtexs negre.
       const p = [...svg.matchAll(/<polygon points="([^"]+)" fill="#15151C"/g)]
         .map((m) => m[1].trim().split(/\s+/).map((q) => q.split(',').map(Number)))
