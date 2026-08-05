@@ -43,6 +43,50 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  // — Notícies generals 05·08·2026 —
+  {
+    date: '08·04',
+    tag: 'Operació',
+    title: 'Caiguda del líder de la Red 764 a Espanya',
+    desc: 'Mossos, GC i Ertzaintza detenen un menor de 17 anys a Gipuzkoa com a referent de la xarxa extremista de captació de menors en línia.',
+    url: 'https://spain.news-pravda.com/spain/2026/08/04/107526.html',
+  },
+  {
+    date: '08·03',
+    tag: 'Successos',
+    title: 'Desarticulada banda de robatoris violents a joieries de França',
+    desc: 'Operació coordinada amb Europol amb detencions a Barcelona, Tarragona, Alacant i Suècia. Tres detinguts i joies per valor de 300.000 € recuperades.',
+    url: 'https://www.moncloa.com/2026/08/03/banda-robo-joyerias-francia-detenciones-3410014',
+  },
+  {
+    date: '08·02',
+    tag: 'Seguretat CAT',
+    title: '35 ofegaments a Catalunya el 2026: Protecció Civil demana prudència',
+    desc: '29 víctimes mortals i 55 ferits des de l\'inici de temporada, un 32% més que l\'any anterior. Riscos principals a platges i piscines.',
+    url: 'https://www.moncloa.com/2026/08/02/ahogamientos-catalunya-proteccio-civil-prudencia-3409429',
+  },
+  {
+    date: '08·02',
+    tag: 'Emergències CAT',
+    title: 'Meteocat: risc extrem d\'incendis en 50 municipis de Catalunya',
+    desc: 'Alerta activa al Prepirineu, Ponent i Catalunya Central. Vent fort, pedra de 2 cm i tornados previstos per la tarda.',
+    url: 'https://www.moncloa.com/2026/08/02/meteocat-riesgo-incendios-cataluna-granizo-tornados-3409526',
+  },
+  {
+    date: '08·12',
+    tag: 'Ciència',
+    title: 'Eclipse solar total el 12 d\'agost: primer a Espanya des de 1905',
+    desc: 'La totalitat serà visible a Astúries, Burgos, Saragossa, Castelló i Palma de 20:29 a 20:31 h. Mossos desplegaran 700 efectius per gestionar l\'afluència.',
+    url: 'https://astronomia.ign.es/en/eclipses-de-sol-y-luna/eclipse-total-sol-de-12-de-agosto-2026',
+  },
+  {
+    date: '07·19',
+    tag: 'Esports',
+    title: 'Espanya, campiona del Mundial 2026 davant Argentina',
+    desc: 'La Roja guanya 1-0 en la final a Nova Jersey amb gol de Ferrán Torres a la pròrroga. Quarta Copa del Món per a la selecció espanyola.',
+    url: 'https://cnnespanol.cnn.com/2026/07/19/deportes/live-news/espana-argentina-final-mundial-2026-en-vivo-resultado-goles-orix',
+  },
+  // — Normativa —
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -122,16 +166,23 @@ export default function ScreenOperativaHome() {
 
       {/* Actualitat normativa */}
       <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
+        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
-            <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
+            <div
+              key={i}
+              onClick={n.url ? () => window.open(n.url, '_blank') : undefined}
+              style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card, cursor: n.url ? 'pointer' : 'default' }}
+            >
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                 <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
                 <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <div style={{ fontSize: 10.5, color: T.cat.operativa.solid, marginTop: 6, fontWeight: 600 }}>Llegir notícia →</div>
+              )}
             </div>
           ))}
         </div>
