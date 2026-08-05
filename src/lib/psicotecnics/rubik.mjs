@@ -93,9 +93,59 @@ export function mou(cub, cara, horari = true) {
   return out;
 }
 
-/** Aplica una llista de moviments, cadascun { cara, horari }. */
-export const mouTot = (cub, moviments) =>
-  moviments.reduce((c, m) => mou(c, m.cara, m.horari), cub);
+// ── Els moviments que es demanen ─────────────────────────────────
+// Un moviment és un EIX, un BLOC DE CAPES seguides i un SENTIT. Amb això hi
+// entra tot: una cara sola, la capa del mig, la de darrere, i també «les
+// dues de dalt» o «les dues de baix», que és el que va demanar l'Eduardo.
+//
+// El sentit es diu sempre mirant des del costat que es veu —des de dalt,
+// des de davant o des de la dreta—, i per això la capa del fons va marcada
+// per girar-la al revés: la de baix girada «horària des de dalt» és, per a
+// la funció `mou`, un gir antihorari, perquè `mou` la mira des de sota.
+//
+// Que això estigui ben lligat no és cosa de creure-s'ho: girar les tres
+// capes d'un eix alhora ha de ser girar EL CUB SENCER, i amb un cub que té
+// cada cara d'un color es veu de seguida si no ho fos.
+export const EIXOS = {
+  y: {
+    des: 'dalt',
+    capes: [['U', true], ['MU', true], ['D', false]],
+    soles: ['la de dalt', 'la del mig', 'la de baix'],
+    dobles: ['les 2 de dalt', 'les 2 de baix'],
+  },
+  z: {
+    des: 'davant',
+    capes: [['F', true], ['MF', true], ['B', false]],
+    soles: ['la de davant', 'la del mig', 'la del darrere'],
+    dobles: ['les 2 de davant', 'les 2 del darrere'],
+  },
+  x: {
+    des: 'la dreta',
+    capes: [['R', true], ['MR', true], ['L', false]],
+    soles: ['la de la dreta', 'la del mig', "la de l'esquerra"],
+    dobles: ['les 2 de la dreta', "les 2 de l'esquerra"],
+  },
+};
+
+/** Fa un moviment { eix, desde, quantes, horari }. */
+export function aplica(cub, mov) {
+  const e = EIXOS[mov.eix];
+  let c = cub;
+  for (let i = mov.desde; i < mov.desde + mov.quantes; i++) {
+    const [cara, mateixSentit] = e.capes[i];
+    c = mou(c, cara, mov.horari === mateixSentit);
+  }
+  return c;
+}
+
+/** Aplica una llista de moviments. */
+export const mouTot = (cub, moviments) => moviments.reduce(aplica, cub);
+
+/** Com es diu, per escriure-ho a sota del dibuix. */
+export function nomDelMoviment(mov) {
+  const e = EIXOS[mov.eix];
+  return mov.quantes === 1 ? e.soles[mov.desde] : e.dobles[mov.desde === 0 ? 0 : 1];
+}
 
 /** Com es veu un cub. Dos cubs són el mateix si això coincideix. */
 export const clau = (cub) => CARES.map((c) => cub[c].join('')).join('|');
@@ -122,17 +172,10 @@ function cubNou(r) {
   return posades.size >= 4 ? cub : null;
 }
 
-const MOVIMENTS = ['U', 'D', 'F', 'B', 'L', 'R'];
-
-// Els moviments que es demanen són només de les tres cares que es veuen.
-// No és per fer-ho més fàcil: és perquè la fletxa es dibuixa sobre la cara
-// que gira, i si la cara fos de les del darrere, la fletxa quedaria amagada
-// pel cub o s'hauria de posar al costat, i llavors es veuria des de l'altre
-// costat i el sentit sortiria capgirat. Val més tres cares que es vegin bé
-// que sis que enganyin.
-// Les tres capes del mig també s'hi val: giren en el mateix sentit que la
-// cara que tenen a sobre, o sigui que la fletxa es veu igual de bé.
-const GIRABLES = ['U', 'F', 'R', 'MU', 'MF', 'MR'];
+// Els blocs de capes que es poden demanar: cadascuna sola, les dues de
+// davant i les dues del fons. Les tres alhora no: això és girar el cub
+// sencer i no canvia res de lloc.
+const BLOCS = [[0, 1], [1, 1], [2, 1], [0, 2], [1, 2]];
 
 export function generaItem(seed) {
   const r = rng(seed, 31);
@@ -140,11 +183,13 @@ export function generaItem(seed) {
     const inici = cubNou(r);
     if (!inici) continue;
 
-    const moviments = [0, 1].map(() => ({
-      cara: tria(r, GIRABLES), horari: r() < 0.5,
-    }));
+    const moviments = [0, 1].map(() => {
+      const [desde, quantes] = tria(r, BLOCS);
+      return { eix: tria(r, Object.keys(EIXOS)), desde, quantes, horari: r() < 0.5 };
+    });
     // Dos moviments que es desfan l'un a l'altre deixarien el cub igual.
-    if (moviments[0].cara === moviments[1].cara
+    const mateix = (a, b) => a.eix === b.eix && a.desde === b.desde && a.quantes === b.quantes;
+    if (mateix(moviments[0], moviments[1])
       && moviments[0].horari !== moviments[1].horari) continue;
 
     const bona = mouTot(inici, moviments);
@@ -168,7 +213,10 @@ export function generaItem(seed) {
         c: mouTot(inici, [moviments[0], { ...moviments[1], horari: !moviments[1].horari }]),
         error: 'girar el segon al revés',
       },
-      { c: mouTot(bona, [{ cara: tria(r, MOVIMENTS), horari: true }]), error: 'un moviment de més' },
+      {
+        c: aplica(bona, { eix: tria(r, Object.keys(EIXOS)), desde: 0, quantes: 1, horari: true }),
+        error: 'un moviment de més',
+      },
     ];
     const dolents = [];
     for (const cand of barreja(r, cands)) {
@@ -273,21 +321,11 @@ function dibuixaCub(cx, cy, cub, s) {
 // —giren en el mateix sentit—, però amb el centre al mig del cub i un radi
 // més gros, de manera que l'arc surt per fora de la silueta i es veu com un
 // cinturó. Si tingués el radi de la cara quedaria amagat dins del cub.
+// Un pla per eix, amb la normal cap al costat que es veu.
 const PLA = {
-  U: { c: [0.5, 1, 0.5], n: [0, 1, 0], a: [1, 0, 0], b: [0, 0, -1] },
-  F: { c: [0.5, 0.5, 1], n: [0, 0, 1], a: [1, 0, 0], b: [0, 1, 0] },
-  R: { c: [1, 0.5, 0.5], n: [1, 0, 0], a: [0, 0, -1], b: [0, 1, 0] },
-  MU: { c: [0.5, 0.5, 0.5], n: [0, 1, 0], a: [1, 0, 0], b: [0, 0, -1], cinturo: true },
-  MF: { c: [0.5, 0.5, 0.5], n: [0, 0, 1], a: [1, 0, 0], b: [0, 1, 0], cinturo: true },
-  MR: { c: [0.5, 0.5, 0.5], n: [1, 0, 0], a: [0, 0, -1], b: [0, 1, 0], cinturo: true },
-};
-
-/** Els noms del que gira, per escriure'ls a sota. */
-export const NOM_CARA = {
-  U: 'dalt', D: 'baix', F: 'davant', B: 'darrere', L: 'esquerra', R: 'dreta',
-  MU: 'la capa del mig, horitzontal',
-  MF: 'la capa del mig, frontal',
-  MR: 'la capa del mig, vertical',
+  y: { n: [0, 1, 0], a: [1, 0, 0], b: [0, 0, -1] },
+  z: { n: [0, 0, 1], a: [1, 0, 0], b: [0, 1, 0] },
+  x: { n: [1, 0, 0], a: [0, 0, -1], b: [0, 1, 0] },
 };
 
 /**
@@ -295,16 +333,20 @@ export const NOM_CARA = {
  * del moviment: es llegeixen dels mateixos cicles que fan el gir, no d'una
  * llista a part, o sigui que no poden dir una cosa diferent.
  */
-export function casellesQueEsMouen(cara) {
-  const fora = Object.fromEntries(CARES.map((c) => [c, []]));
-  if (!CICLES_MIG[cara]) fora[cara] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-  for (const [c, idx] of CICLES[cara]) fora[c].push(...idx);
-  return fora;
+export function casellesQueEsMouen(mov) {
+  const fora = Object.fromEntries(CARES.map((c) => [c, new Set()]));
+  const e = EIXOS[mov.eix];
+  for (let i = mov.desde; i < mov.desde + mov.quantes; i++) {
+    const cara = e.capes[i][0];
+    if (!CICLES_MIG[cara]) for (let k = 0; k < 9; k++) fora[cara].add(k);
+    for (const [c, idx] of CICLES[cara]) for (const k of idx) fora[c].add(k);
+  }
+  return Object.fromEntries(Object.entries(fora).map(([c, s]) => [c, [...s]]));
 }
 
-/** Un cub petit amb la capa que gira pintada i una fletxa a sobre. */
+/** Un cub petit amb el que gira pintat i una fletxa a sobre. */
 function dibuixaMoviment(cx, cy, mov, s) {
-  const pla = PLA[mov.cara];
+  const pla = PLA[mov.eix];
   const pt = (p) => {
     const q = proj(p[0], p[1], p[2], s);
     return { x: cx + q.x, y: cy + q.y };
@@ -313,25 +355,31 @@ function dibuixaMoviment(cx, cy, mov, s) {
   // El que es mou, pintat, perquè es vegi sense llegir res. Surt dels
   // mateixos cicles que fan el gir.
   const cub = cubBlanc();
-  for (const [c, idx] of Object.entries(casellesQueEsMouen(mov.cara))) {
+  for (const [c, idx] of Object.entries(casellesQueEsMouen(mov))) {
     for (const i of idx) cub[c][i] = 'capa';
   }
 
-  // L'arc: tres quarts de volta, una mica separat de la cara perquè no es
-  // confongui amb les ratlles de les caselles. A les capes del mig el radi
-  // és més gros perquè l'arc surti de la silueta i no quedi amagat.
-  const R0 = pla.cinturo ? 0.88 : 0.62;
-  const FORA = pla.cinturo ? 0 : 0.14;
+  // On va l'arc, mesurat al llarg de la normal. Les tres capes ocupen
+  // [2/3, 1], [1/3, 2/3] i [0, 1/3] comptant des del costat que es veu.
+  //
+  //  · Si el bloc toca la cara de fora, l'arc va PER FORA d'aquesta cara,
+  //    que és com es dibuixa de tota la vida «gira aquesta cara».
+  //  · Si no, l'arc es posa a l'alçada del bloc i amb el radi més gros, de
+  //    manera que surt per fora de la silueta i queda fet un cinturó. Amb el
+  //    radi de la cara quedaria amagat dins del cub.
+  const cinturo = mov.desde > 0;
+  const alt = cinturo ? 1 - (2 * mov.desde + mov.quantes) / 6 : 1.14;
+  const R0 = cinturo ? 0.88 : 0.62;
   const PASSOS = 26;
   const TOMB = (Math.PI * 3) / 2;
-  const desde = (mov.cara === 'U' || pla.cinturo) ? Math.PI * 0.15 : -Math.PI * 0.35;
+  const desde = (mov.eix === 'y' || cinturo) ? Math.PI * 0.15 : -Math.PI * 0.35;
   const signe = mov.horari ? -1 : 1;        // horari = angle que decreix
 
   const punt = (t) => {
     const th = desde + signe * t * TOMB;
     const co = Math.cos(th), si = Math.sin(th);
     return pt([0, 1, 2].map((k) =>
-      pla.c[k] + pla.n[k] * FORA + R0 * (co * pla.a[k] + si * pla.b[k])));
+      0.5 + pla.n[k] * (alt - 0.5) + R0 * (co * pla.a[k] + si * pla.b[k])));
   };
 
   const cami = Array.from({ length: PASSOS + 1 }, (_, i) => punt(i / PASSOS));
@@ -362,7 +410,7 @@ const embolcall = (w, h, cos) =>
  * resposta. L'Eduardo ho va veure de seguida: «el primer cubo sale colapsado
  * con el ejemplo». Ara la mida surt d'aquí i el full la fa servir.
  */
-export const MIDA_ENUNCIAT = { w: 340, h: 146 };
+export const MIDA_ENUNCIAT = { w: 366, h: 142 };
 
 /** L'enunciat: el cub de partida i els dos moviments. */
 export function svgEnunciat(item, s = 34) {
@@ -375,20 +423,16 @@ export function svgEnunciat(item, s = 34) {
     + ` font-family="ui-sans-serif,system-ui,sans-serif" font-size="${mida}"`
     + ` font-weight="${pes}" fill="${NEGRE}">${t}</text>`;
 
-  const cos = dibuixaCub(78, 78, item.inici, s)
+  const cos = dibuixaCub(74, 76, item.inici, s)
     + item.moviments.map((m, i) => {
-      const x = 200 + i * 90;
-      // Tres línies a sota: quin moviment és, quina cara gira i cap on. La
-      // fletxa ja ho diu, però escrit no hi ha res a interpretar.
-      // El nom de la capa del mig no cap en una línia: se separa per la coma.
-      const [qui, com] = NOM_CARA[m.cara].includes(',')
-        ? NOM_CARA[m.cara].split(', ')
-        : [`cara de ${NOM_CARA[m.cara]}`, null];
+      const x = 208 + i * 104;
+      // Tres línies a sota: quin moviment és, quines capes giren i cap on.
+      // El sentit sempre va dit des d'on es mira, perquè «horari» tot sol no
+      // vol dir res si no es diu des de quin costat.
       return dibuixaMoviment(x, 58, m, petit)
-        + lletra(x, 101, `${i === 0 ? '1r' : '2n'} moviment`, 9.5, 600)
-        + lletra(x, 114, qui, 10.5, 700)
-        + (com ? lletra(x, 125, com, 10.5, 700) : '')
-        + lletra(x, com ? 137 : 127, m.horari ? 'sentit horari' : 'sentit antihorari', 9.5, 500);
+        + lletra(x, 103, `${i === 0 ? '1r' : '2n'} moviment`, 9.5, 600)
+        + lletra(x, 118, `gira ${nomDelMoviment(m)}`, 10.5, 700)
+        + lletra(x, 133, `${m.horari ? 'horari' : 'antihorari'} des de ${EIXOS[m.eix].des}`, 9, 500);
     }).join('');
   return embolcall(w, h, cos);
 }

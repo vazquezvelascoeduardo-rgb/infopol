@@ -164,6 +164,11 @@ function girAcumulat(punts) {
   return { total, sempreIgual: signes.size === 1 };
 }
 
+// Els quinze moviments que es poden demanar: tres eixos per cinc blocs de
+// capes. Cadascun, en els dos sentits.
+const TOTS = Object.keys(R.EIXOS).flatMap((eix) =>
+  [[0, 1], [1, 1], [2, 1], [0, 2], [1, 2]].map(([desde, quantes]) => ({ eix, desde, quantes })));
+
 titol('4b. Les capes del mig');
 {
   // La prova que ho tanca, i que no me la puc inventar: girar una cara, la
@@ -186,6 +191,36 @@ titol('4b. Les capes del mig');
     cal(`girar el cub sencer per l'eix de ${nom} deixa cada cara d'un color`,
       R.CARES.every((x) => new Set(c[x]).size === 1), nom);
     cal('...i el cub no es queda igual', R.clau(c) !== R.clau(uniforme()), nom);
+  }
+
+  // I el mateix per als blocs de dues capes: «les dues de dalt» més «la de
+  // baix» ha de ser, altre cop, el cub sencer girat. Això comprova que un
+  // bloc estigui ben compost, que és el que va demanar l'Eduardo: «también
+  // puedes mover las 2 de abajo, las 2 de arriba».
+  for (const eix of Object.keys(R.EIXOS)) {
+    for (const [bloc, resta] of [[[0, 2], [2, 1]], [[1, 2], [0, 1]]]) {
+      for (const horari of [true, false]) {
+        let c = R.aplica(uniforme(), { eix, desde: bloc[0], quantes: bloc[1], horari });
+        c = R.aplica(c, { eix, desde: resta[0], quantes: resta[1], horari });
+        cal(`el bloc ${bloc.join('+')} i la capa que queda fan el cub sencer`,
+          R.CARES.every((x) => new Set(c[x]).size === 1), `${eix} ${bloc.join('+')}`);
+        cal('...i el cub no es queda igual', R.clau(c) !== R.clau(uniforme()), eix);
+      }
+    }
+    // Un bloc i el mateix bloc al revés es desfan.
+    for (const [desde, quantes] of [[0, 1], [1, 1], [2, 1], [0, 2], [1, 2]]) {
+      const anada = R.aplica(cubMarcat(), { eix, desde, quantes, horari: true });
+      const tornada = R.aplica(anada, { eix, desde, quantes, horari: false });
+      cal('un bloc i el seu contrari es desfan', R.clau(tornada) === R.clau(cubMarcat()),
+        `${eix} ${desde}+${quantes}`);
+      cal('i fer-lo una vegada canvia alguna cosa',
+        R.clau(anada) !== R.clau(cubMarcat()), `${eix} ${desde}+${quantes}`);
+      // Quatre vegades, la volta sencera.
+      let q = cubMarcat();
+      for (let i = 0; i < 4; i++) q = R.aplica(q, { eix, desde, quantes, horari: true });
+      cal('quatre vegades torna al punt de partida', R.clau(q) === R.clau(cubMarcat()),
+        `${eix} ${desde}+${quantes}`);
+    }
   }
 
   const base = cubMarcat();
@@ -272,22 +307,22 @@ titol('5. La fletxa gira cap on gira el cub');
   // mateix sentit que la cara que tenen a sobre —això ho garanteix la prova
   // 4b, on U · MU · D' resulta ser el cub sencer girat—, i com que la fletxa
   // es dibuixa al mateix pla, ha de girar cap al mateix costat.
-  for (const cara of [...CARES_VISIBLES, ...R.CAPES_MIG]) {
+  for (const mov of TOTS) {
     for (const horari of [true, false]) {
       const fals = { inici: R.CARES.reduce((c, x) => ({ ...c, [x]: Array(9).fill('blanc') }), {}),
-        moviments: [{ cara, horari }, { cara, horari }] };
+        moviments: [{ ...mov, horari }, { ...mov, horari }] };
       const svg = R.svgEnunciat(fals);
       const camins = [...svg.matchAll(/<polyline points="([^"]+)"/g)]
         .map((m) => m[1].trim().split(/\s+/).map((p) => {
           const [x, y] = p.split(',').map(Number); return { x, y };
         }));
-      cal('hi ha una fletxa per moviment', camins.length === 2, `${cara}: ${camins.length}`);
+      cal('hi ha una fletxa per moviment', camins.length === 2, `${mov.eix}${mov.desde}: ${camins.length}`);
       if (camins.length !== 2) continue;
       const g = girAcumulat(camins[0]);
       const graus = (g.total * 180) / Math.PI;
       cal('la fletxa gira cap on toca',
         horari ? g.total > 0 : g.total < 0,
-        `${cara} ${horari ? 'horari' : 'antihorari'}: ${graus.toFixed(0)}°`);
+        `${mov.eix}${mov.desde}+${mov.quantes} ${horari ? 'horari' : 'antihorari'}: ${graus.toFixed(0)}°`);
       // El gir ha de ser gros i d'una tirada. No es pot demanar que siguin
       // just els 270° que fa l'arc al pla de la cara: la cara es veu de
       // gairell, el cercle surt fet una el·lipse i un tros de 270° del
@@ -295,8 +330,8 @@ titol('5. La fletxa gira cap on gira el cub');
       // comenci—. El que sí que ha de ser cert sempre és que doni clarament
       // la volta, i cap a un sol costat.
       cal('i fa una volta llarga', Math.abs(graus) > 200 && Math.abs(graus) < 355,
-        `${cara}: ${Math.abs(graus).toFixed(0)}°`);
-      cal('sense canviar de sentit enmig', g.sempreIgual, `${cara}`);
+        `${mov.eix}${mov.desde}+${mov.quantes}: ${Math.abs(graus).toFixed(0)}°`);
+      cal('sense canviar de sentit enmig', g.sempreIgual, `${mov.eix}${mov.desde}`);
       // I que es vegi: una fletxa curta no diu res.
       let llarg = 0;
       for (let k = 1; k < camins[0].length; k++) {
@@ -304,17 +339,17 @@ titol('5. La fletxa gira cap on gira el cub');
           camins[0][k].y - camins[0][k - 1].y);
       }
       cal('la fletxa és prou llarga per veure-la', llarg > 45,
-        `${cara}: ${llarg.toFixed(0)} de llarg`);
+        `${mov.eix}${mov.desde}: ${llarg.toFixed(0)} de llarg`);
     }
   }
 }
 
 titol('5b. La punta de la fletxa va on acaba el camí i apunta on va');
 {
-  for (const cara of ['U', 'F', 'R', ...R.CAPES_MIG]) {
+  for (const mov of TOTS) {
     for (const horari of [true, false]) {
       const fals = { inici: R.CARES.reduce((c, x) => ({ ...c, [x]: Array(9).fill('blanc') }), {}),
-        moviments: [{ cara, horari }, { cara, horari }] };
+        moviments: [{ ...mov, horari }, { ...mov, horari }] };
       const svg = R.svgEnunciat(fals);
       const cami = svg.match(/<polyline points="([^"]+)"/)[1].trim().split(/\s+/)
         .map((p) => { const [x, y] = p.split(',').map(Number); return { x, y }; });
@@ -322,37 +357,37 @@ titol('5b. La punta de la fletxa va on acaba el camí i apunta on va');
       const p = [...svg.matchAll(/<polygon points="([^"]+)" fill="#15151C"/g)]
         .map((m) => m[1].trim().split(/\s+/).map((q) => q.split(',').map(Number)))
         .filter((q) => q.length === 3)[0];
-      cal('hi ha punta', !!p, `${cara}`);
+      cal('hi ha punta', !!p, `${mov.eix}${mov.desde}`);
       if (!p) continue;
       const fi = cami[cami.length - 1];
       const morro = { x: p[0][0], y: p[0][1] };
       cal('el morro de la punta és on acaba el camí',
-        Math.hypot(morro.x - fi.x, morro.y - fi.y) < 0.5, `${cara}`);
+        Math.hypot(morro.x - fi.x, morro.y - fi.y) < 0.5, `${mov.eix}${mov.desde}`);
       // Apunta cap on anava el camí: el morro va per davant del centre de la
       // punta, en la direcció de la marxa.
       const centre = { x: (p[0][0] + p[1][0] + p[2][0]) / 3, y: (p[0][1] + p[1][1] + p[2][1]) / 3 };
       const marxa = { x: fi.x - cami[cami.length - 3].x, y: fi.y - cami[cami.length - 3].y };
       const cap = (morro.x - centre.x) * marxa.x + (morro.y - centre.y) * marxa.y;
       cal('i la punta apunta en el sentit de la marxa', cap > 0,
-        `${cara} ${horari ? 'horari' : 'antihorari'}: ${cap.toFixed(1)}`);
+        `${mov.eix}${mov.desde} ${horari ? 'horari' : 'antihorari'}: ${cap.toFixed(1)}`);
     }
   }
 }
 
 titol('5c. Al dibuix del moviment hi ha pintat exactament el que es mou');
 {
-  for (const cara of ['U', 'F', 'R', ...R.CAPES_MIG]) {
+  for (const mov of TOTS) {
     const fals = { inici: R.CARES.reduce((c, x) => ({ ...c, [x]: Array(9).fill('blanc') }), {}),
-      moviments: [{ cara, horari: true }, { cara, horari: true }] };
+      moviments: [{ ...mov, horari: true }, { ...mov, horari: true }] };
     const svg = R.svgEnunciat(fals);
     const pintades = trobaColor(svg, R.COLORS.capa).length;
     // Del dibuix només se'n veuen tres cares, o sigui que es compten les
     // caselles que es mouen d'aquestes tres. I hi ha dos cubs de moviment.
-    const mou = R.casellesQueEsMouen(cara);
+    const mou = R.casellesQueEsMouen(mov);
     const toca = ['U', 'F', 'R'].reduce((s, c) => s + new Set(mou[c]).size, 0);
     cal('hi ha pintat el que es mou, ni més ni menys', pintades === toca * 2,
-      `${cara}: pintades ${pintades}, n'hi hauria d'haver ${toca * 2}`);
-    cal('i alguna cosa hi ha pintada', toca > 0, cara);
+      `${mov.eix}${mov.desde}+${mov.quantes}: pintades ${pintades}, n'hi hauria d'haver ${toca * 2}`);
+    cal('i alguna cosa hi ha pintada', toca > 0, mov.eix + mov.desde);
   }
 }
 
@@ -420,7 +455,7 @@ titol('7. Varietat i dibuix');
   const vistes = new Set();
   for (let seed = 1; seed <= 400; seed++) {
     const it = R.generaItem(seed);
-    vistes.add(R.clauVisible(it.inici) + '|' + it.moviments.map((m) => m.cara + (m.horari ? '' : "'")).join(''));
+    vistes.add(R.clauVisible(it.inici) + '|' + it.moviments.map((m) => m.eix + m.desde + m.quantes + (m.horari ? '' : "'")).join(''));
   }
   cal('dos-cents ítems diferents com a mínim', vistes.size >= 200, `${vistes.size}`);
   console.log(`  ${vistes.size} ítems diferents de 400 llavors`);
