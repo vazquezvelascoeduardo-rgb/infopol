@@ -93,12 +93,6 @@ titol('2. Resolent-ho amb el que es veu, i prou');
   }
   cal('hi ha vint-i-quatre maneres de girar el cub', girs.length === 24, `${girs.length}`);
 
-  const neg = (p) => V(-p.x, -p.y, -p.z);
-  const parell = (a, b) => [clau(a), clau(b)].sort().join('~');
-  const quatreCostats = (c) => [
-    parell(c.n, neg(c.v)), parell(c.n, c.u), parell(c.n, c.v), parell(c.n, neg(c.u)),
-  ];
-
   for (let seed = 1; seed <= 300; seed++) {
     const it = I.generaItem(seed);
     if (!it) continue;
@@ -106,27 +100,22 @@ titol('2. Resolent-ho amb el que es veu, i prou');
     const pot = new Set();
     for (const g of girs) {
       const posa = {};
-      for (const k of claus) {
-        posa[k] = { n: g(it.info[k].n), u: g(it.info[k].u), v: g(it.info[k].v) };
-      }
-      // Les caselles dibuixades han de quedar on eren.
-      let va = claus.filter((k) => it.ancores.includes(k))
-        .every((k) => igual(posa[k].n, it.info[k].n));
-      // I les arestes pintades, al mateix lloc.
-      for (const k of claus) {
-        const abans = quatreCostats(it.info[k]), ara = quatreCostats(posa[k]);
-        for (let i = 0; i < 4 && va; i++) {
-          if ((it.marques[abans[i]] || null) !== (it.marques[ara[i]] || null)) va = false;
-        }
-        if (!va) break;
-      }
-      if (!va) continue;
+      for (const k of claus) posa[k] = { n: g(it.info[k].n) };
+      // Les caselles dibuixades han de quedar on eren. Això és tot el que
+      // lliga el desplegable amb el cub: ja no hi ha arestes de colors.
+      if (!it.ancores.every((k) => igual(posa[k].n, it.info[k].n))) continue;
       const quina = claus.find((k) => igual(posa[k].n, it.info[it.forat].n));
       pot.add(noms(it.simbol[quina]));
     }
     cal('només hi pot anar una figura', pot.size === 1,
       `llavor ${seed}: ${[...pot].join(' o ')}`);
     cal('i és la marcada', pot.has(noms(it.opcions[it.correcta])), `llavor ${seed}`);
+    // Les dues caselles dibuixades no poden ser cares OPOSADES: llavors el
+    // cub encara pot girar al seu voltant i la resposta no seria única. El
+    // generador ho descarta, i aquí es comprova que ho hagi fet.
+    const [a, b] = it.ancores.map((k) => it.info[k].n);
+    cal('les dues caselles dibuixades no són cares oposades',
+      !(a.x === -b.x && a.y === -b.y && a.z === -b.z), `llavor ${seed}`);
   }
 }
 
@@ -139,22 +128,22 @@ titol('3. El dibuix ensenya el que ha d\'ensenyar');
     cal('el dibuix està sencer', !/NaN|undefined/.test(svg), `llavor ${seed}`);
 
     // Les sis figures del cub hi han de ser: tres nítides i tres al fons.
-    // Les del fons van d'un gris que no fa servir res més.
-    const fluixes = (svg.match(/stroke-opacity="0\.55"/g) || []).length;
-    cal('les tres cares del fons es veuen', fluixes === 3, `llavor ${seed}: ${fluixes}`);
+    // Les del fons són mitja resposta —si no es veiessin, la figura de
+    // l'interrogant es podria haver d'endevinar sense haver-la vist mai— i
+    // per això no n'hi ha prou que hi siguin: han de tapar-se poc. El blanc
+    // que hi ha al davant les esborrava quasi del tot i no es veien.
+    const fluixes = (svg.match(/stroke-opacity="0\.9"/g) || []).length;
+    cal('les tres cares del fons hi són', fluixes === 3, `llavor ${seed}: ${fluixes}`);
+    const tapa = Number((svg.match(/fill="#fff" fill-opacity="([\d.]+)"/) || [])[1]);
+    cal('i el blanc del davant no les esborra', tapa <= 0.6, `llavor ${seed}: ${tapa}`);
     const totes = (svg.match(/<path d="M [^"]*" fill="none"/g) || []).length;
     cal('hi ha les sis cares del cub, més les del desplegable',
       totes >= 6, `llavor ${seed}: ${totes}`);
 
-    // Les arestes pintades. Cada color ha de sortir al cub I al desplegable:
-    // si només sortís en un lloc, la referència no serviria de res.
-    for (const color of new Set(Object.values(it.marques))) {
-      const quantes = (svg.match(new RegExp(`stroke="${color}"`, 'g')) || []).length;
-      cal('cada aresta pintada surt al cub i al desplegable', quantes >= 2,
-        `llavor ${seed}, ${color}: només ${quantes} vegades`);
-    }
-    cal('hi ha dues arestes pintades com a mínim',
-      new Set(Object.values(it.marques)).size >= 2, `llavor ${seed}`);
+    // I cap ratlla de colors a les arestes: es van treure perquè donaven
+    // massa. Amb elles no calia plegar res, n'hi havia prou de fer coincidir
+    // colors. Que no en torni a sortir cap sense que se n'adoni ningú.
+    cal('cap aresta pintada de colors', !/stroke-dasharray/.test(svg), `llavor ${seed}`);
     cal('un sol interrogant', (svg.match(/>\?</g) || []).length === 1, `llavor ${seed}`);
     // Sis caselles al desplegable.
     const quadres = (svg.match(/<rect [^>]*fill="#fff"\/>/g) || []).length;
@@ -198,8 +187,7 @@ titol('5. Varietat');
     if (!it) continue;
     formes.add(it.forma);
     vistes.add(`${it.forma}|${it.celles.map((c) => noms(it.simbol[c.dibuix])).join(',')}`
-      + `|${it.forat}|${[...it.ancores].sort().join(',')}`
-      + `|${Object.keys(it.marques).sort().join(',')}`);
+      + `|${it.forat}|${[...it.ancores].sort().join(',')}`);
   }
   cal('dos-cents ítems diferents com a mínim', vistes.size >= 200, `${vistes.size}`);
   cal('surten totes les formes de desplegable', formes.size === 6, `${formes.size}`);

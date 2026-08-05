@@ -15,27 +15,29 @@
 //    cara del fons es mira per la banda de dins. Sense això, la figura de
 //    l'interrogant es podia haver d'endevinar sense haver-la vist mai.
 //
-// 2. HI HA MARQUES A LES ARESTES. Unes quantes arestes del cub van pintades
-//    amb una ratlla de colors, i les mateixes arestes surten al desplegable.
-//    És el truc del quadern, que ho diu amb aquestes paraules: «fixa't en
-//    les referències, on hi ha buits i com connecten amb altres cares». Són
-//    les que permeten saber com encaixa el desplegable amb el cub, i les que
-//    fan que es vegi el gir de cada cara encara que la figura sigui rodona.
-//
-// 3. LES CARES ES GIREN SOLES. La figura no es dibuixa «girada tants
+// 2. LES CARES ES GIREN SOLES. La figura no es dibuixa «girada tants
 //    quarts»: es dibuixa damunt del quadrat de la cara tal com queda en
 //    plegar, fent servir el marc que dona el motor. Girar el cub, doncs, és
 //    literalment retallar el desplegable i plegar-lo.
 //
+// Hi va haver una versió amb les arestes pintades de colors, com a
+// referència per lligar el desplegable amb el cub. Es va treure: donava
+// massa. «Quítalo, porque si no es demasiado fácil.» Amb les arestes
+// marcades no calia plegar res, n'hi havia prou de fer coincidir colors.
+//
 // ── Que la resposta sigui única ──────────────────────────────────
 //
-// No es dona per fet: es compta. Es proven totes les maneres de girar el cub
-// i es mira quines quadren amb el que es veu —les figures, i les arestes
-// pintades al lloc que toca—. Si en surt més d'una resposta possible per a
-// l'interrogant, l'ítem es llença i es prova una altra combinació.
+// No es dona per fet: es compta. Es proven les 24 maneres de girar el cub i
+// es miren les que deixen les caselles dibuixades on són. Si en surt més
+// d'una resposta possible per a l'interrogant, l'ítem es llença.
+//
+// De les 360 combinacions de forat i caselles dibuixades, 288 tenen resposta
+// única i 72 no: les que dibuixen dues cares OPOSADES. Aquestes no lliguen
+// res, perquè el cub encara pot girar al seu voltant, i el forat pot caure a
+// quatre llocs diferents.
 import { barreja, posicioBona, rng, tria } from './atzar.mjs';
 import {
-  clau, creu, igual, neg, origen, plega, projecta, suma, valid, V, FORMES,
+  clau, igual, origen, plega, projecta, suma, valid, V, FORMES,
 } from './plegat.mjs';
 import { COLORS } from './ruleta.mjs';
 
@@ -43,9 +45,7 @@ const NEGRE = '#15151C';
 const FLUIX = '#C3C7CE';
 
 // ── Les figures ─────────────────────────────────────────────────
-// Les del quadern: geomètriques, de ratlla i de colors. Que siguin
-// simètriques no fa res, perquè el que diu com està posada la cara són les
-// marques de les arestes, no la figura.
+// Les del quadern: geomètriques, de ratlla i de colors.
 export const FIGURES = {
   quadrat: 'M 0.24 0.24 H 0.76 V 0.76 H 0.24 Z',
   cercle: 'M 0.5 0.22 A 0.28 0.28 0 1 1 0.4999 0.22 Z',
@@ -66,42 +66,15 @@ for (const forma of Object.keys(FIGURES)) {
 const noms = (s) => `${s.forma}/${s.color}`;
 const pinta = (id) => (COLORS.find((c) => c.id === id) || COLORS[0]).pinta;
 
-// ── Les arestes ─────────────────────────────────────────────────
-// Una aresta del cub és el tros que comparteixen dues cares. Es reconeix
-// pel parell de normals, sense ordre: {dalt, davant} és la mateixa aresta
-// que {davant, dalt}.
-const clauAresta = (a, b) => [clau(a), clau(b)].sort().join('~');
-
-/** Els dos vèrtexs d'una aresta: els del cub que són a totes dues cares. */
-function vertexsAresta(a, b) {
-  const punt = (p, q) => p.x * q.x + p.y * q.y + p.z * q.z;
-  const tots = [];
-  for (const x of [0, 1]) for (const y of [0, 1]) for (const z of [0, 1]) tots.push(V(x, y, z));
-  const toca = (p, n) => punt(p, n) === Math.max(...tots.map((q) => punt(q, n)));
-  return tots.filter((p) => toca(p, a) && toca(p, b));
-}
-
-/** Les dotze arestes del cub. */
-const ARESTES = [];
-{
-  const dirs = [V(1, 0, 0), V(-1, 0, 0), V(0, 1, 0), V(0, -1, 0), V(0, 0, 1), V(0, 0, -1)];
-  for (let i = 0; i < dirs.length; i++) {
-    for (let j = i + 1; j < dirs.length; j++) {
-      if (igual(dirs[i], neg(dirs[j]))) continue;      // cares oposades: no toquen
-      ARESTES.push({ a: dirs[i], b: dirs[j], k: clauAresta(dirs[i], dirs[j]) });
-    }
-  }
-}
-
 /**
- * Els quatre costats d'una cara, amb quina aresta del cub és cadascun.
- * El marc de la cara és (u, v): u cap a la dreta del paper i v cap avall.
+ * Els quatre costats d'una cara, per dibuixar-ne el contorn. El marc de la
+ * cara és (u, v): u cap a la dreta del paper i v cap avall.
  */
 const costats = (cara) => [
-  { de: V(0, 0, 0), a: cara.u, aresta: clauAresta(cara.n, neg(cara.v)) },   // de dalt
-  { de: cara.u, a: suma(cara.u, cara.v), aresta: clauAresta(cara.n, cara.u) },   // de la dreta
-  { de: cara.v, a: suma(cara.u, cara.v), aresta: clauAresta(cara.n, cara.v) },   // de baix
-  { de: V(0, 0, 0), a: cara.v, aresta: clauAresta(cara.n, neg(cara.u)) },   // de l'esquerra
+  { de: V(0, 0, 0), a: cara.u },                       // de dalt
+  { de: cara.u, a: suma(cara.u, cara.v) },             // de la dreta
+  { de: cara.v, a: suma(cara.u, cara.v) },             // de baix
+  { de: V(0, 0, 0), a: cara.v },                       // de l'esquerra
 ];
 
 // ── Fer un ítem ──────────────────────────────────────────────────
@@ -124,21 +97,15 @@ export function generaItem(seed) {
     const simbol = {};
     claus.forEach((k, i) => { simbol[k] = figures[i]; });
 
-    // Dues o tres arestes pintades, de colors diferents. Són les
-    // referències: el que permet saber com encaixa el desplegable amb el cub.
-    const quantes = 2 + Math.floor(r() * 2);
-    const triades = barreja(r, ARESTES).slice(0, quantes);
-    const colorsMarca = barreja(r, COLORS).slice(0, quantes);
-    const marques = {};
-    triades.forEach((e, i) => { marques[e.k] = colorsMarca[i].pinta; });
-
-    // El forat i les caselles dibuixades. Es prova, i si no serveix es torna
-    // a provar: quines combinacions valen depèn de la forma del desplegable
-    // i de quines arestes hagin sortit.
+    // El forat i les dues caselles dibuixades. Es prova, i si no serveix es
+    // torna a provar: de les 360 combinacions possibles, 288 tenen resposta
+    // única i 72 no —les que dibuixen dues cares OPOSADES, que deixen el cub
+    // lliure de girar al seu voltant i llavors el forat pot caure a quatre
+    // llocs diferents. Aquestes es llencen aquí sota.
     const forat = tria(r, claus);
     const ancores = barreja(r, claus.filter((k) => k !== forat)).slice(0, 2);
 
-    const possibles = respostes({ info, claus, simbol, marques, ancores, forat });
+    const possibles = respostes({ info, claus, simbol, ancores, forat });
     if (possibles.size !== 1) continue;
     if (!possibles.has(noms(simbol[forat]))) continue;
 
@@ -154,7 +121,7 @@ export function generaItem(seed) {
     opcions.splice(desti, 0, simbol[forat]);
 
     return {
-      seed, forma, celles, info, ancores, forat, simbol, marques,
+      seed, forma, celles, info, ancores, forat, simbol,
       opcions,
       correcta: desti,
       control: {
@@ -162,7 +129,6 @@ export function generaItem(seed) {
         duesAncores: ancores.length === 2,
         respostaUnica: possibles.size === 1,
         sisFiguresDiferents: new Set(claus.map((k) => noms(simbol[k]))).size === 6,
-        arestesPintades: Object.keys(marques).length >= 2,
         totesLesOpcionsSonCaresDelCub:
           opcions.every((o) => claus.some((k) => noms(simbol[k]) === noms(o))),
       },
@@ -176,41 +142,23 @@ export function generaItem(seed) {
  *
  * Es proven les 24 maneres de girar el cub. Una serveix si tot quadra:
  *
- *  · on hi ha una casella dibuixada, la cara on va a parar ha de portar
- *    aquella figura al cub;
- *  · i les arestes pintades han de caure on es veuen pintades.
+ *  · on hi ha una casella dibuixada, la cara on va a parar ha de ser la
+ *    mateixa que al cub de veritat.
  *
  * Com que el cub es veu sencer —les tres cares del davant i les tres del
  * darrere—, la figura de l'interrogant sempre es pot llegir. El que cal
  * comprovar és que no n'hi hagi dues de possibles.
  */
-function respostes({ info, claus, simbol, marques, ancores, forat }) {
+function respostes({ info, claus, simbol, ancores, forat }) {
   const fora = new Set();
   for (const g of GIRS) {
     // El cub girat: cada casella va a parar a una cara.
     const posa = {};
-    for (const k of claus) {
-      posa[k] = { n: g(info[k].n), u: g(info[k].u), v: g(info[k].v) };
-    }
+    for (const k of claus) posa[k] = { n: g(info[k].n) };
     // Les figures han de coincidir a les caselles dibuixades. Com que la
     // figura de cada casella no canvia, això és mirar que la cara on cau
     // sigui la mateixa que al cub de veritat.
-    let va = true;
-    for (const k of ancores) {
-      if (!igual(posa[k].n, info[k].n)) { va = false; break; }
-    }
-    if (!va) continue;
-    // I les arestes pintades: cada costat de cada casella ha de caure sobre
-    // una aresta del mateix color que al cub.
-    for (const k of claus) {
-      for (let i = 0; i < 4 && va; i++) {
-        const abans = costats(info[k])[i].aresta;
-        const ara = costats(posa[k])[i].aresta;
-        if ((marques[abans] || null) !== (marques[ara] || null)) va = false;
-      }
-      if (!va) break;
-    }
-    if (!va) continue;
+    if (!ancores.every((k) => igual(posa[k].n, info[k].n))) continue;
     // Quina casella cau on cau la de l'interrogant.
     const quina = claus.find((k) => igual(posa[k].n, info[forat].n));
     fora.add(noms(simbol[quina]));
@@ -272,23 +220,19 @@ function cubTransparent(cx, cy, item, s) {
     // hauria amagat de quin color és cada figura, que és mitja resposta.
     const fig = fosca
       ? `<path d="${FIGURES[item.simbol[k].forma]}" fill="none"`
-        + ` stroke="${pinta(item.simbol[k].color)}" stroke-opacity="0.55"`
+        + ` stroke="${pinta(item.simbol[k].color)}" stroke-opacity="0.9"`
         + ` stroke-width="0.09" stroke-linejoin="round" stroke-linecap="round"/>`
       : figuraSvg(item.simbol[k]);
-    return (fosca ? '' : `<polygon points="${pts}" fill="#fff" fill-opacity="0.82"/>`)
+    return (fosca ? '' : `<polygon points="${pts}" fill="#fff" fill-opacity="0.55"/>`)
       + `<g transform="${m}">${fig}</g>`
       // Els costats: negres els del davant, fluixos els del fons, i de
       // color els que estan marcats.
       + costats(c).map((costat) => {
         const P = pt(suma(O3, costat.de)), Q = pt(suma(O3, costat.a));
-        const color = item.marques[costat.aresta];
-        if (!color && fosca) return '';
         return `<line x1="${P.x.toFixed(1)}" y1="${P.y.toFixed(1)}"`
           + ` x2="${Q.x.toFixed(1)}" y2="${Q.y.toFixed(1)}"`
-          + ` stroke="${color || (fosca ? FLUIX : NEGRE)}"`
-          + ` stroke-width="${color ? 2.6 : 1.4}"`
-          + `${color ? ' stroke-dasharray="4 3"' : ''}`
-          + `${fosca && !color ? ' stroke-opacity="0.7"' : ''} stroke-linecap="round"/>`;
+          + ` stroke="${fosca ? FLUIX : NEGRE}" stroke-width="1.4"`
+          + `${fosca ? ' stroke-opacity="0.7"' : ''} stroke-linecap="round"/>`;
       }).join('');
   };
 
@@ -297,7 +241,7 @@ function cubTransparent(cx, cy, item, s) {
     + claus.filter((k) => davant(item.info[k].n)).map((k) => cara(k, false)).join('');
 }
 
-/** El desplegable: les caselles dibuixades, l'interrogant i les marques. */
+/** El desplegable: les caselles dibuixades i l'interrogant. */
 function desplegable(x, y, item, c) {
   const minX = Math.min(...item.celles.map((q) => q.nx));
   const minY = Math.min(...item.celles.map((q) => q.ny));
@@ -312,20 +256,9 @@ function desplegable(x, y, item, c) {
       dins = `<g transform="matrix(${c} 0 0 ${c} ${px} ${py})">`
         + `${figuraSvg(item.simbol[ce.dibuix])}</g>`;
     }
-    // Els quatre costats, en el mateix ordre que al cub: dalt, dreta, baix,
-    // esquerra. Els marcats van del seu color.
-    const vores = [
-      [px, py, px + c, py], [px + c, py, px + c, py + c],
-      [px, py + c, px + c, py + c], [px, py, px, py + c],
-    ];
-    const cs = costats(item.info[ce.dibuix]);
     return `<rect x="${px}" y="${py}" width="${c}" height="${c}" fill="#fff"/>${dins}`
-      + vores.map(([x1, y1, x2, y2], i) => {
-        const color = item.marques[cs[i].aresta];
-        return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"`
-          + ` stroke="${color || NEGRE}" stroke-width="${color ? 3 : 1.4}"`
-          + `${color ? ' stroke-dasharray="4 3"' : ''} stroke-linecap="round"/>`;
-      }).join('');
+      + `<rect x="${px}" y="${py}" width="${c}" height="${c}" fill="none" `
+      + `stroke="${NEGRE}" stroke-width="1.4"/>`;
   }).join('');
 }
 
