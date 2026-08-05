@@ -30,6 +30,9 @@ export const COLORS = {
   magenta: '#C2185B',
   blau: '#2C3E56',
   groc: '#F2C14E',
+  // No és un color del cub: és el tint de la capa que gira, al dibuix dels
+  // moviments. Allà el cub va tot blanc i això és l'únic que hi ha pintat.
+  capa: '#CFE0EF',
 };
 const TINTES = ['magenta', 'blau', 'groc'];
 
@@ -97,6 +100,14 @@ function cubNou(r) {
 
 const MOVIMENTS = ['U', 'D', 'F', 'B', 'L', 'R'];
 
+// Els moviments que es demanen són només de les tres cares que es veuen.
+// No és per fer-ho més fàcil: és perquè la fletxa es dibuixa sobre la cara
+// que gira, i si la cara fos de les del darrere, la fletxa quedaria amagada
+// pel cub o s'hauria de posar al costat, i llavors es veuria des de l'altre
+// costat i el sentit sortiria capgirat. Val més tres cares que es vegin bé
+// que sis que enganyin.
+const GIRABLES = ['U', 'F', 'R'];
+
 export function generaItem(seed) {
   const r = rng(seed, 31);
   for (let intent = 0; intent < 400; intent++) {
@@ -104,7 +115,7 @@ export function generaItem(seed) {
     if (!inici) continue;
 
     const moviments = [0, 1].map(() => ({
-      cara: tria(r, MOVIMENTS), horari: r() < 0.5,
+      cara: tria(r, GIRABLES), horari: r() < 0.5,
     }));
     // Dos moviments que es desfan l'un a l'altre deixarien el cub igual.
     if (moviments[0].cara === moviments[1].cara
@@ -213,24 +224,75 @@ function dibuixaCub(cx, cy, cub, s) {
   return out;
 }
 
-/** Un cub petit amb una fletxa que diu quina cara gira i cap on. */
+// ── La fletxa del moviment ───────────────────────────────────────
+// La primera fletxa que vaig fer no servia: era un mig arc al costat del
+// cub, sempre horitzontal, i la punta anava clavada al mateix lloc apuntant
+// sempre igual. Girar a la dreta i girar a l'esquerra només es diferenciaven
+// perquè l'arc passava per sobre o per sota. L'Eduardo ho va dir de seguida:
+// «no se aprecia hacia dónde giran».
+//
+// Ara la fletxa es dibuixa AL PLA DE LA CARA que gira, o sigui que s'inclina
+// amb el cub, i la punta surt de la tangent de debò de l'arc. A més, la capa
+// que es mou va pintada, i a sota hi ha el nom de la cara i el sentit escrit.
+// Tres coses que diuen el mateix: si una no es veu bé, les altres dues
+// encara hi són.
+//
+// Per a cada cara: on és el centre, cap on mira i una base del seu pla
+// escollida perquè a × b apunti cap a fora. Amb aquesta base, l'angle que
+// creix gira en sentit ANTIhorari per a qui mira la cara de front —el
+// conveni de tota la vida—, i per tant el sentit horari és l'angle que
+// decreix.
+const PLA = {
+  U: { c: [0.5, 1, 0.5], n: [0, 1, 0], a: [1, 0, 0], b: [0, 0, -1] },
+  F: { c: [0.5, 0.5, 1], n: [0, 0, 1], a: [1, 0, 0], b: [0, 1, 0] },
+  R: { c: [1, 0.5, 0.5], n: [1, 0, 0], a: [0, 0, -1], b: [0, 1, 0] },
+};
+
+/** Els noms de les cares, per escriure'ls a sota. */
+export const NOM_CARA = { U: 'dalt', D: 'baix', F: 'davant', B: 'darrere', L: 'esquerra', R: 'dreta' };
+
+/** Un cub petit amb la capa que gira pintada i una fletxa a sobre. */
 function dibuixaMoviment(cx, cy, mov, s) {
-  const cub = dibuixaCub(cx, cy, cubBlanc(), s);
-  // La fletxa va per fora, a l'alçada de la cara que gira.
-  const on = {
-    U: { x: 0, y: -s * 1.15 }, D: { x: 0, y: s * 1.15 },
-    L: { x: -s * 1.05, y: s * 0.2 }, R: { x: s * 1.05, y: s * 0.2 },
-    F: { x: -s * 0.6, y: s * 0.75 }, B: { x: s * 0.6, y: -s * 0.75 },
-  }[mov.cara];
-  const r = s * 0.42;
-  const x = cx + on.x, y = cy + on.y;
-  const d = mov.horari ? 1 : -1;
-  return cub
-    + `<path d="M ${(x - r).toFixed(1)} ${y.toFixed(1)} A ${r} ${r} 0 0 ${d === 1 ? 1 : 0} `
-    + `${(x + r).toFixed(1)} ${y.toFixed(1)}" fill="none" stroke="${NEGRE}" stroke-width="2.1"/>`
-    + `<polygon points="${(x + r).toFixed(1)},${(y - 4).toFixed(1)} `
-    + `${(x + r + 5).toFixed(1)},${(y + 1).toFixed(1)} ${(x + r - 4).toFixed(1)},${(y + 3).toFixed(1)}"`
-    + ` fill="${NEGRE}"/>`;
+  const pla = PLA[mov.cara];
+  const pt = (p) => {
+    const q = proj(p[0], p[1], p[2], s);
+    return { x: cx + q.x, y: cy + q.y };
+  };
+
+  // La capa que es mou, pintada, perquè es vegi quina és sense llegir res.
+  const cub = cubBlanc();
+  cub[mov.cara] = Array(9).fill('capa');
+
+  // L'arc: tres quarts de volta, una mica separat de la cara perquè no es
+  // confongui amb les ratlles de les caselles.
+  const R0 = 0.62, FORA = 0.14, PASSOS = 26;
+  const TOMB = (Math.PI * 3) / 2;
+  const desde = mov.cara === 'U' ? Math.PI * 0.15 : -Math.PI * 0.35;
+  const signe = mov.horari ? -1 : 1;        // horari = angle que decreix
+
+  const punt = (t) => {
+    const th = desde + signe * t * TOMB;
+    const co = Math.cos(th), si = Math.sin(th);
+    return pt([0, 1, 2].map((k) =>
+      pla.c[k] + pla.n[k] * FORA + R0 * (co * pla.a[k] + si * pla.b[k])));
+  };
+
+  const cami = Array.from({ length: PASSOS + 1 }, (_, i) => punt(i / PASSOS));
+  const linia = `<polyline points="${cami.map((q) => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' ')}"`
+    + ` fill="none" stroke="${NEGRE}" stroke-width="2.4" stroke-linecap="round"`
+    + ` stroke-linejoin="round"/>`;
+
+  // La punta, orientada amb la tangent d'on acaba l'arc. Així apunta on va
+  // de veritat, i canvia sola quan canvia el sentit.
+  const fi = cami[PASSOS], abans = cami[PASSOS - 2];
+  const ang = Math.atan2(fi.y - abans.y, fi.x - abans.x);
+  const L = s * 0.30, OBRE = 0.44;
+  const ala = (g) => `${(fi.x - L * Math.cos(ang + g)).toFixed(1)},`
+    + `${(fi.y - L * Math.sin(ang + g)).toFixed(1)}`;
+  const punta = `<polygon points="${fi.x.toFixed(1)},${fi.y.toFixed(1)} ${ala(OBRE)} `
+    + `${ala(-OBRE)}" fill="${NEGRE}"/>`;
+
+  return dibuixaCub(cx, cy, cub, s) + linia + punta;
 }
 
 const embolcall = (w, h, cos) =>
@@ -238,19 +300,36 @@ const embolcall = (w, h, cos) =>
 
 /** L'enunciat: el cub de partida i els dos moviments. */
 export function svgEnunciat(item, s = 34) {
-  const w = 300, h = 130;
-  const petit = s * 0.42;
-  const cos = dibuixaCub(72, 74, item.inici, s)
-    + item.moviments.map((m, i) => dibuixaMoviment(178 + i * 78, 66, m, petit)).join('')
-    + item.moviments.map((_, i) => `<text x="${178 + i * 78}" y="118" text-anchor="middle"`
-      + ` font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" font-weight="600"`
-      + ` fill="${NEGRE}">${i === 0 ? '1r' : '2n'} moviment</text>`).join('');
+  // Els cubs dels moviments són gairebé tan grossos com el de partida. Al
+  // principi eren la meitat i la fletxa hi quedava com una molla de pa: hi
+  // cabia un arc de dotze punts d'ample, i no s'entenia res.
+  const w = 340, h = 140;
+  const petit = s * 0.76;
+  const lletra = (x, y, t, mida, pes) => `<text x="${x}" y="${y}" text-anchor="middle"`
+    + ` font-family="ui-sans-serif,system-ui,sans-serif" font-size="${mida}"`
+    + ` font-weight="${pes}" fill="${NEGRE}">${t}</text>`;
+
+  const cos = dibuixaCub(78, 78, item.inici, s)
+    + item.moviments.map((m, i) => {
+      const x = 200 + i * 90;
+      // Tres línies a sota: quin moviment és, quina cara gira i cap on. La
+      // fletxa ja ho diu, però escrit no hi ha res a interpretar.
+      return dibuixaMoviment(x, 60, m, petit)
+        + lletra(x, 104, `${i === 0 ? '1r' : '2n'} moviment`, 9.5, 600)
+        + lletra(x, 118, `cara de ${NOM_CARA[m.cara]}`, 10.5, 700)
+        + lletra(x, 131, m.horari ? 'sentit horari' : 'sentit antihorari', 9.5, 500);
+    }).join('');
   return embolcall(w, h, cos);
 }
 
 export function svgOpcio(item, i, s = 30) {
+  return svgCub(item.opcions[i], s);
+}
+
+/** Un cub sol, dibuixat. Les proves el fan servir per mirar on va cada casella. */
+export function svgCub(cub, s = 30) {
   const w = 2 * K * s + 8, h = 2 * s + 8;
-  return embolcall(w, h, dibuixaCub(w / 2, h / 2, item.opcions[i], s));
+  return embolcall(w, h, dibuixaCub(w / 2, h / 2, cub, s));
 }
 
 export function svgFull(items) {
