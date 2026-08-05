@@ -20,8 +20,8 @@ const POSICIONS = 12;                 // les hores del rellotge
 const mod = (n) => ((n % POSICIONS) + POSICIONS) % POSICIONS;
 
 // ── Les escenes ──────────────────────────────────────────────────
-// Cada escena té un fons partit per una franja (la carretera o la riba) i
-// uns objectes a banda i banda.
+// Cada escena té un fons partit per una franja —la carretera, la riba, la
+// taula de fusta— i uns objectes a banda i banda.
 export const ESCENES = {
   carretera: {
     fons: '#8CC26B', franja: '#B9BEC4', ratlla: '#FFFFFF',
@@ -34,6 +34,18 @@ export const ESCENES = {
   riu: {
     fons: '#9AD46F', franja: '#6FB7E8', ratlla: null,
     objectes: ['barca', 'arbre', 'roca'],
+  },
+  // Les dues de sota són del quadern nou: una taula parada amb estovalles de
+  // quadres i un escriptori. Es resolen igual que les altres —el motor no
+  // sap de què va l'escena— però es miren molt millor.
+  taula: {
+    fons: '#F4F7FA', quadres: '#6BA3D6',
+    franja: '#C9A66B', ratlla: '#A9834B',
+    objectes: ['pa', 'plat', 'tassa'],
+  },
+  escriptori: {
+    fons: '#584B3F', franja: '#F0EBDF', ratlla: null,
+    objectes: ['tassa', 'llapis', 'llibreta'],
   },
 };
 
@@ -146,32 +158,90 @@ function objecte(cx, cy, rad, o) {
   const s = rad * 0.16;
   const g = (cos) => `<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)})`
     + `${o.volteig ? ' scale(-1 1)' : ''}">${cos}</g>`;
+  // Tots els objectes estan dibuixats de manera que MIRIN cap a un costat.
+  // No és un caprici: els distractors són reflexos, i un reflex es nota
+  // perquè les coses queden del revés. Si un objecte estigués dibuixat
+  // simètric —un cotxe amb la finestra al mig, un arbre amb la copa
+  // centrada— voltejar-lo no es veuria, i llavors hi hauria ítems amb dues
+  // respostes que es miren igual. N'hi havia sis de cada quatre mil. Ara
+  // cap objecte no és simètric i les proves ho mesuren un per un.
+  //
+  // I res de corbes: tot amb polígons, rectangles, cercles i ratlles, que
+  // són les formes que les proves saben mesurar. Amb una corba no podrien
+  // dir si l'objecte és simètric o no.
+  const pol = (punts, fill, vora = NEGRE) =>
+    `<polygon points="${punts.map(([px, py]) => `${(px * s).toFixed(1)},${(py * s).toFixed(1)}`).join(' ')}"`
+    + ` fill="${fill}"${vora ? ` stroke="${vora}" stroke-width="1"` : ''} stroke-linejoin="round"/>`;
+  const rect = (rx, ry, rw, rh, fill) => `<rect x="${(rx * s).toFixed(1)}" y="${(ry * s).toFixed(1)}"`
+    + ` width="${(rw * s).toFixed(1)}" height="${(rh * s).toFixed(1)}" fill="${fill}"/>`;
+  const cer = (ccx, ccy, cr, fill, vora = null) => `<circle cx="${(ccx * s).toFixed(1)}"`
+    + ` cy="${(ccy * s).toFixed(1)}" r="${(cr * s).toFixed(1)}" fill="${fill}"`
+    + `${vora ? ` stroke="${vora}" stroke-width="1"` : ''}/>`;
+
   switch (o.tipus) {
+    // Un cotxe mirat des de dalt, amb el morro a la dreta: el parabrisa i
+    // el far no van al mig, i per això es nota quan està del revés.
     case 'cotxe':
-      return g(`<rect x="${-s}" y="${-s * 0.62}" width="${s * 2}" height="${s * 1.24}" rx="${s * 0.3}"`
-        + ` fill="#3B5BA5" stroke="${NEGRE}" stroke-width="1"/>`
-        + `<rect x="${-s * 0.45}" y="${-s * 0.4}" width="${s * 0.85}" height="${s * 0.8}" fill="#CFE3F5"/>`);
+      return g(pol([[-1, -0.6], [0.75, -0.6], [1.05, -0.3], [1.05, 0.3], [0.75, 0.6], [-1, 0.6]], '#3B5BA5')
+        + rect(-0.1, -0.42, 0.62, 0.84, '#CFE3F5')
+        + cer(0.85, 0, 0.16, '#FFE9A8'));
+    // Una barca amb la proa a la dreta i la vela cap enrere.
     case 'barca':
-      return g(`<path d="M ${-s * 1.1} 0 L ${s * 1.1} 0 L ${s * 0.6} ${s * 0.7} L ${-s * 0.6} ${s * 0.7} Z"`
-        + ` fill="#C0532F" stroke="${NEGRE}" stroke-width="1"/>`
-        + `<line x1="0" y1="0" x2="0" y2="${-s}" stroke="${NEGRE}" stroke-width="1.4"/>`);
+      return g(pol([[-1.05, -0.25], [0.7, -0.25], [1.15, 0.15], [0.55, 0.6], [-0.85, 0.6]], '#C0532F')
+        + pol([[-0.5, -0.3], [-0.5, -1.15], [0.35, -0.35]], '#F2F2F0'));
+    // La copa desplaçada del tronc.
     case 'arbre':
-      return g(`<rect x="${-s * 0.16}" y="0" width="${s * 0.32}" height="${s * 0.8}" fill="#7A5230"/>`
-        + `<circle cx="0" cy="${-s * 0.3}" r="${s * 0.8}" fill="#3E7D3A" stroke="${NEGRE}" stroke-width="0.9"/>`);
+      return g(rect(-0.16, -0.1, 0.32, 0.9, '#7A5230')
+        + cer(0.22, -0.5, 0.72, '#3E7D3A', NEGRE)
+        + cer(-0.3, -0.28, 0.42, '#4E9647'));
+    // El tronc tort i les fulles totes cap a un costat.
     case 'palmera':
-      return g(`<rect x="${-s * 0.13}" y="${-s * 0.2}" width="${s * 0.26}" height="${s}" fill="#8A6A3A"/>`
-        + `<path d="M 0 ${-s * 0.3} q ${-s} ${-s * 0.45} ${-s * 1.15} ${s * 0.25}`
-        + ` M 0 ${-s * 0.3} q ${s} ${-s * 0.45} ${s * 1.15} ${s * 0.25}"`
-        + ` fill="none" stroke="#2F7D4F" stroke-width="${(s * 0.4).toFixed(1)}" stroke-linecap="round"/>`);
+      return g(pol([[-0.05, 0.85], [0.24, 0.85], [0.42, -0.5], [0.2, -0.5]], '#8A6A3A', null)
+        + pol([[0.3, -0.55], [-0.95, -0.9], [-0.55, -0.3]], '#2F7D4F')
+        + pol([[0.3, -0.55], [-0.7, 0.1], [-0.15, 0.12]], '#3E9460')
+        + pol([[0.3, -0.55], [1.1, -0.95], [0.95, -0.35]], '#2F7D4F'));
     case 'roca':
-      return g(`<path d="M ${-s * 0.9} ${s * 0.5} L ${-s * 0.4} ${-s * 0.6} L ${s * 0.5} ${-s * 0.4}`
-        + ` L ${s * 0.9} ${s * 0.5} Z" fill="#9AA0A6" stroke="${NEGRE}" stroke-width="1"/>`);
-    default:  // arbust
-      return g(`<circle cx="${-s * 0.4}" cy="0" r="${s * 0.5}" fill="#4E8C46"/>`
-        + `<circle cx="${s * 0.35}" cy="${s * 0.1}" r="${s * 0.6}" fill="#3E7D3A"`
-        + ` stroke="${NEGRE}" stroke-width="0.8"/>`);
+      return g(pol([[-0.9, 0.5], [-0.4, -0.6], [0.5, -0.4], [0.9, 0.5]], '#9AA0A6'));
+    case 'arbust':
+      return g(cer(-0.4, 0, 0.5, '#4E8C46') + cer(0.35, 0.1, 0.6, '#3E7D3A', NEGRE));
+    // ── Els de la taula i l'escriptori ──────────────────────────
+    // Una barra de pa, amb els talls a un costat.
+    case 'pa':
+      return g(pol([[-1.1, 0.1], [-0.85, -0.42], [0.9, -0.42], [1.15, 0.1], [0.8, 0.5], [-0.8, 0.5]], '#D9A45B')
+        + pol([[-0.5, -0.36], [-0.28, -0.36], [-0.4, 0.02], [-0.62, 0.02]], '#B27C36', null)
+        + pol([[0.1, -0.36], [0.32, -0.36], [0.2, 0.02], [-0.02, 0.02]], '#B27C36', null));
+    // Un plat amb el menjar carregat a un costat.
+    case 'plat':
+      return g(cer(0, 0, 0.95, '#FBFBF7', NEGRE)
+        + cer(-0.28, -0.12, 0.42, '#D4574B')
+        + cer(0.3, 0.22, 0.26, '#6FA84C'));
+    // Una tassa amb l'ansa a la dreta: no hi ha res més asimètric.
+    case 'tassa':
+      return g(cer(-0.12, 0, 0.7, '#FFFFFF', NEGRE)
+        + cer(-0.12, 0, 0.46, '#8B5E3C')
+        + pol([[0.55, -0.32], [0.98, -0.2], [0.98, 0.2], [0.55, 0.32], [0.55, 0.12],
+          [0.78, 0.06], [0.78, -0.06], [0.55, -0.12]], '#FFFFFF'));
+    // Un llapis amb la punta a la dreta.
+    case 'llapis':
+      return g(pol([[-1.1, -0.18], [0.45, -0.18], [0.45, 0.18], [-1.1, 0.18]], '#E0B93E')
+        + pol([[0.45, -0.18], [1.15, 0], [0.45, 0.18]], '#E8CFA6')
+        + pol([[0.92, -0.07], [1.15, 0], [0.92, 0.07]], '#2C2C2C', null)
+        + rect(-1.1, -0.18, 0.26, 0.36, '#D2574B'));
+    // Una llibreta amb l'espiral a l'esquerra.
+    default:
+      return g(pol([[-0.75, -0.9], [0.95, -0.9], [0.95, 0.9], [-0.75, 0.9]], '#F5F2E8')
+        + rect(-1.05, -0.9, 0.3, 1.8, '#4A7BA8')
+        + cer(-0.9, -0.55, 0.11, '#D8D2C4')
+        + cer(-0.9, 0, 0.11, '#D8D2C4')
+        + cer(-0.9, 0.55, 0.11, '#D8D2C4'));
   }
 }
+
+/** Un objecte tot sol, per poder-lo mesurar a les proves. */
+export const svgObjecte = (tipus, rad = 100) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 -50 100 100">`
+  + objecte(0, 0, rad, { tipus, pos: 3, volteig: false }).replace(
+    /<g transform="translate\([^)]*\)[^"]*">/, '<g>') + '</svg>';
 
 /** L'escena sencera: el disc, la franja i el que hi ha a sobre. */
 function escena(cx, cy, rad, e, id) {
@@ -198,8 +268,21 @@ function escena(cx, cy, rad, e, id) {
   const ang = Math.atan2(vy - uy, vx - ux);
   const punta = (t2, l) => `${(vx - l * Math.cos(ang + t2)).toFixed(1)},${(vy - l * Math.sin(ang + t2)).toFixed(1)}`;
 
-  return `<clipPath id="c${id}"><circle cx="${cx}" cy="${cy}" r="${rad}"/></clipPath>`
-    + `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="${def.fons}"/>`
+  // Les estovalles de quadres. L'identificador ha de ser el mateix que fa
+  // servir el retall, perquè si dues escenes del mateix full en compartissin
+  // un, el dibuix d'una es ficaria dins de l'altra.
+  const q = rad * 0.19;
+  const quadres = def.quadres
+    ? `<pattern id="q${id}" width="${(q * 2).toFixed(1)}" height="${(q * 2).toFixed(1)}"`
+      + ` patternUnits="userSpaceOnUse">`
+      + `<rect width="${(q * 2).toFixed(1)}" height="${(q * 2).toFixed(1)}" fill="${def.fons}"/>`
+      + `<rect width="${q.toFixed(1)}" height="${q.toFixed(1)}" fill="${def.quadres}"/>`
+      + `<rect x="${q.toFixed(1)}" y="${q.toFixed(1)}" width="${q.toFixed(1)}"`
+      + ` height="${q.toFixed(1)}" fill="${def.quadres}"/></pattern>`
+    : '';
+
+  return `<clipPath id="c${id}"><circle cx="${cx}" cy="${cy}" r="${rad}"/></clipPath>${quadres}`
+    + `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="${def.quadres ? `url(#q${id})` : def.fons}"/>`
     + `<g clip-path="url(#c${id})">${franja}`
     + e.objectes.map((o) => objecte(cx, cy, rad, o)).join('') + '</g>'
     + `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="${NEGRE}" stroke-width="2"/>`
