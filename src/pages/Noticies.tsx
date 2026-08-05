@@ -122,7 +122,7 @@ export default function Noticies() {
         style={{
           display: 'flex', alignItems: 'center', gap: 13, textDecoration: 'none',
           border: `1px solid ${activeCatMeta.color}`, background: activeCatMeta.bg,
-          borderRadius: 16, padding: '13px 16px', margin: '4px 0 18px',
+          borderRadius: 18, padding: '13px 16px', margin: '4px 0 18px',
         }}>
         <span aria-hidden style={{ fontSize: 20 }}>📝</span>
         <span style={{ flex: 1, minWidth: 0 }}>

@@ -73,11 +73,11 @@ function MobilAmbCaptura() {
   return (
     <div className="lp-phone" aria-hidden>
       {senseCaptura ? (
-        <div style={{ borderRadius: 29, background: '#F4F1EA', padding: '26px 14px 14px', position: 'relative', height: 410, overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', top: 9, left: '50%', transform: 'translateX(-50%)', width: 66, height: 19, borderRadius: 11, background: '#0A0A10' }} />
+        <div style={{ borderRadius: 28, background: '#F4F1EA', padding: '26px 14px 14px', position: 'relative', height: 410, overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: 9, left: '50%', transform: 'translateX(-50%)', width: 66, height: 19, borderRadius: 10, background: '#0A0A10' }} />
           {files.map((f) => (
-            <div key={f.t} style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#fff', border: '1px solid rgba(21,21,28,.08)', borderRadius: 12, padding: '9px 10px', marginBottom: 7 }}>
-              <span style={{ width: 26, height: 26, borderRadius: 8, display: 'grid', placeItems: 'center', flexShrink: 0, background: f.bg }}>
+            <div key={f.t} style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#fff', border: '1px solid rgba(21,21,28,.08)', borderRadius: 14, padding: '9px 10px', marginBottom: 7 }}>
+              <span style={{ width: 26, height: 26, borderRadius: 10, display: 'grid', placeItems: 'center', flexShrink: 0, background: f.bg }}>
                 <Ic n={f.i} s={14} c={f.c} w={2.2} />
               </span>
               <div>
@@ -86,8 +86,8 @@ function MobilAmbCaptura() {
               </div>
             </div>
           ))}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#15161E', borderRadius: 12, padding: '9px 10px' }}>
-            <span style={{ width: 26, height: 26, borderRadius: 8, display: 'grid', placeItems: 'center', flexShrink: 0, background: 'rgba(255,255,255,.12)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#15161E', borderRadius: 14, padding: '9px 10px' }}>
+            <span style={{ width: 26, height: 26, borderRadius: 10, display: 'grid', placeItems: 'center', flexShrink: 0, background: 'rgba(255,255,255,.12)' }}>
               <Ic n="chat" s={14} c="#fff" w={2.2} />
             </span>
             <div>
@@ -322,7 +322,7 @@ export default function Home() {
                   className="lp-ico"
                   style={{ background: 'rgba(255,255,255,.1)', border: '1px solid rgba(255,255,255,.14)', position: 'relative' }}>
                   <Ic n="chat" s={27} c="#fff" />
-                  <span style={{ position: 'absolute', top: 9, right: 9, width: 7, height: 7, borderRadius: 99, background: C.terra }} />
+                  <span style={{ position: 'absolute', top: 9, right: 9, width: 7, height: 7, borderRadius: 999, background: C.terra }} />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                   <div className="lp-mono" style={{ color: 'rgba(255,255,255,.7)' }}>Intel·ligència artificial</div>
@@ -494,7 +494,7 @@ export default function Home() {
             <div className="lp-news">
               {noticies.map((n) => (
                 <Link className="lp-nw" key={n.slug} to={`/noticies/${n.slug}`}>
-                  <span className="lp-ico" style={{ width: 40, height: 40, borderRadius: 11, background: C.navySoft }}>
+                  <span className="lp-ico" style={{ width: 40, height: 40, borderRadius: 10, background: C.navySoft }}>
                     <Ic n="news" s={19} c={C.navy} />
                   </span>
                   <span className="t">{n.title}</span>

@@ -58,7 +58,7 @@ export default function CulturaIndex() {
               display: 'flex', alignItems: 'flex-start', gap: 13,
             }}>
             <span style={{
-              width: 42, height: 42, flexShrink: 0, borderRadius: 13,
+              width: 42, height: 42, flexShrink: 0, borderRadius: 14,
               background: a.c.soft, color: a.c.ink,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontFamily: V.mono, fontSize: 13, fontWeight: 800,
@@ -91,7 +91,7 @@ export default function CulturaIndex() {
           display: 'flex', alignItems: 'center', gap: 15,
         }}>
         <span style={{
-          width: 46, height: 46, flexShrink: 0, borderRadius: 15, background: 'rgba(255,255,255,.24)',
+          width: 46, height: 46, flexShrink: 0, borderRadius: 14, background: 'rgba(255,255,255,.24)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
           <I n="check" size={21} sw={2} />

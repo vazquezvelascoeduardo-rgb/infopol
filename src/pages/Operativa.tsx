@@ -199,7 +199,7 @@ function EinaOperativa({ icona, titol, sub, tint, accent, onClick }: {
         display: 'flex', flexDirection: 'column', minHeight: 132,
       }}>
       <span style={{
-        width: 40, height: 40, borderRadius: 13, background: tint, color: accent,
+        width: 40, height: 40, borderRadius: 14, background: tint, color: accent,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
         <I n={icona} size={19} sw={1.9} />
@@ -284,7 +284,7 @@ function OpInici({ ctx }: { ctx: OCtx }) {
                   display: 'flex', alignItems: 'center', gap: 14,
                 }}>
                 <span style={{
-                  width: 40, height: 40, flexShrink: 0, borderRadius: 11, background: V.blueSoft, color: V.blue,
+                  width: 40, height: 40, flexShrink: 0, borderRadius: 10, background: V.blueSoft, color: V.blue,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   <I n="news" size={19} sw={1.9} />
@@ -330,7 +330,7 @@ function OpCercador({ ctx }: { ctx: OCtx }) {
       <Head kicker="Superbuscador · SCT" title="Troba qualsevol infracció" desc="Cerca per concepte, article, multa o punts a tot el catàleg SCT 2026 (LSV, RGC, RGCond, RGV, Assegurança i CP)." />
       <form onSubmit={(e) => { e.preventDefault(); openSuper(trimmed); }} style={{ position: 'relative' }}>
         <span style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)' }}><Ic name="search" size={20} color={A.purple} /></span>
-        <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="Ex.: conduir sense permís, mòbil, 0,30 mg/l…" style={{ width: '100%', border: `2px solid ${A.purple}`, background: A.card, borderRadius: 16, padding: '16px 18px 16px 50px', fontFamily: A.display, fontWeight: 600, fontSize: 17, color: A.ink, outline: 'none', boxShadow: A.shadowMd, boxSizing: 'border-box' }} />
+        <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="Ex.: conduir sense permís, mòbil, 0,30 mg/l…" style={{ width: '100%', border: `2px solid ${A.purple}`, background: A.card, borderRadius: 18, padding: '16px 18px 16px 50px', fontFamily: A.display, fontWeight: 600, fontSize: 17, color: A.ink, outline: 'none', boxShadow: A.shadowMd, boxSizing: 'border-box' }} />
       </form>
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>{['LSV', 'RGC', 'RGCond', 'RGV', 'CP', 'Assegurança'].map((c) => <button key={c} onClick={() => setQ(c)} style={{ cursor: 'pointer', border: 'none', background: A.purpleSoft, color: A.purpleInk, fontFamily: A.mono, fontWeight: 600, fontSize: 12, padding: '7px 13px', borderRadius: 999 }}>{c}</button>)}</div>
 
@@ -374,7 +374,7 @@ function OpLleis({ ctx }: { ctx: OCtx }) {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
         {MODULES.map((m) => (
           <Card key={m.slug} pad={18} hover onClick={() => ctx.nav(`/leyes/s/${m.slug}`)} style={{ display: 'flex', alignItems: 'center', gap: 14, borderTop: `3px solid ${A.blue}` }}>
-            <span style={{ width: 46, height: 46, borderRadius: 13, background: A.blueSoft, display: 'grid', placeItems: 'center', flexShrink: 0, fontSize: 22 }}>{m.icon}</span>
+            <span style={{ width: 46, height: 46, borderRadius: 14, background: A.blueSoft, display: 'grid', placeItems: 'center', flexShrink: 0, fontSize: 22 }}>{m.icon}</span>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontFamily: A.display, fontWeight: 800, fontSize: 15, color: A.ink }}>{m.title}</div>
               {m.description && <div style={{ fontFamily: A.sans, fontSize: 13, color: A.inkMuted, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{m.description}</div>}
@@ -409,8 +409,8 @@ function OpProcediments({ ctx }: { ctx: OCtx }) {
             <span style={{ width: 50, height: 50, borderRadius: 14, background: 'rgba(255,255,255,0.2)', display: 'grid', placeItems: 'center', marginBottom: 14 }}><Ic name={g.icon} size={26} color="#fff" sw={2.1} /></span>
             <h3 style={{ margin: '0 0 6px', fontFamily: A.display, fontWeight: 700, fontSize: 21, letterSpacing: -0.5, lineHeight: 1.15 }}>{g.title}</h3>
             <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.45, opacity: 0.92 }}>{g.desc}</p>
-            <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', margin: '16px 0 0' }}>{g.items.map((it) => <span key={it} style={{ background: 'rgba(255,255,255,0.16)', borderRadius: 8, padding: '4px 10px', fontFamily: A.mono, fontWeight: 600, fontSize: 11 }}>{it}</span>)}</div>
-            <div style={{ marginTop: 'auto', paddingTop: 18 }}><span className="a-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff', color: dark ? A.night : k.solid, borderRadius: 12, padding: '10px 18px', fontFamily: A.display, fontWeight: 700, fontSize: 14, boxShadow: '0 6px 16px rgba(0,0,0,0.18)' }}>Obrir procediments <Ic name="arrow" size={15} color={dark ? A.night : k.solid} /></span></div>
+            <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', margin: '16px 0 0' }}>{g.items.map((it) => <span key={it} style={{ background: 'rgba(255,255,255,0.16)', borderRadius: 10, padding: '4px 10px', fontFamily: A.mono, fontWeight: 600, fontSize: 11 }}>{it}</span>)}</div>
+            <div style={{ marginTop: 'auto', paddingTop: 18 }}><span className="a-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff', color: dark ? A.night : k.solid, borderRadius: 14, padding: '10px 18px', fontFamily: A.display, fontWeight: 700, fontSize: 14, boxShadow: '0 6px 16px rgba(0,0,0,0.18)' }}>Obrir procediments <Ic name="arrow" size={15} color={dark ? A.night : k.solid} /></span></div>
           </div>; })}
       </div>
       <div>

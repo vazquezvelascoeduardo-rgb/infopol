@@ -79,7 +79,7 @@ export default function ZonaPsico({ cos }: { cos: Cos }) {
           type="button"
           onClick={() => nav(arrel)}
           aria-label="Tornar als tests"
-          className="ap-prem"
+          className="ap-prem ap-toc"
           style={{
             width: 40, height: 40, flexShrink: 0, marginTop: 4, borderRadius: '50%',
             border: `1px solid ${V.border}`, background: V.surface, cursor: 'pointer',
@@ -104,7 +104,7 @@ export default function ZonaPsico({ cos }: { cos: Cos }) {
       {fetes > 0 && (
         <div style={{
           display: 'grid', gridTemplateColumns: 'repeat(3,1fr)',
-          background: V.surface, borderRadius: 20, boxShadow: V.shadow,
+          background: V.surface, borderRadius: 22, boxShadow: V.shadow,
           padding: '16px 6px', marginBottom: 16,
         }}>
           {[
@@ -149,7 +149,7 @@ export default function ZonaPsico({ cos }: { cos: Cos }) {
           display: 'flex', alignItems: 'center', gap: 16,
         }}>
         <span style={{
-          width: 46, height: 46, flexShrink: 0, borderRadius: 15, background: 'rgba(255,255,255,.22)',
+          width: 46, height: 46, flexShrink: 0, borderRadius: 14, background: 'rgba(255,255,255,.22)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
           <I n="play" size={19} ple color="#fff" />
@@ -189,7 +189,7 @@ export default function ZonaPsico({ cos }: { cos: Cos }) {
                   onClick={() => setConfig({ id: b.id, titol: b.nom, sub: b.descripcio })}
                   style={{ flex: 1, minWidth: 0, paddingRight: 6 }}>
                   <span style={{
-                    width: 36, height: 36, flexShrink: 0, borderRadius: 11, background: a.soft,
+                    width: 36, height: 36, flexShrink: 0, borderRadius: 10, background: a.soft,
                     color: a.ink, display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
                     <I n={ICONA_BLOC[b.id] ?? 'brain'} size={18} sw={1.9} />
@@ -210,7 +210,7 @@ export default function ZonaPsico({ cos }: { cos: Cos }) {
                   {c && (
                     <span style={{
                       flexShrink: 0, fontSize: 13, fontWeight: 800, letterSpacing: -0.3,
-                      color: c.fg, background: c.bg, borderRadius: 99, padding: '4px 10px',
+                      color: c.fg, background: c.bg, borderRadius: 999, padding: '4px 10px',
                     }}>
                       {pct}%
                     </span>
@@ -252,7 +252,7 @@ export default function ZonaPsico({ cos }: { cos: Cos }) {
                         style={{
                           display: 'flex', alignItems: 'center', gap: 10, width: '100%',
                           textAlign: 'left', background: V.surface2, border: 'none',
-                          borderRadius: 13, padding: '10px 12px', cursor: 'pointer',
+                          borderRadius: 14, padding: '10px 12px', cursor: 'pointer',
                           font: 'inherit', color: V.ink,
                         }}>
                         <span style={{ flex: 1, minWidth: 0 }}>
@@ -266,7 +266,7 @@ export default function ZonaPsico({ cos }: { cos: Cos }) {
                         {pc && (
                           <span style={{
                             flexShrink: 0, fontSize: 12, fontWeight: 800,
-                            color: pc.fg, background: pc.bg, borderRadius: 99, padding: '3px 9px',
+                            color: pc.fg, background: pc.bg, borderRadius: 999, padding: '3px 9px',
                           }}>
                             {p}%
                           </span>

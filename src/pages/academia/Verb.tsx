@@ -29,7 +29,7 @@ function Targeta({ e, gran, bloquejat, onClick }: {
       aria-disabled={bloquejat}
       style={{
         position: 'relative', textAlign: 'left', width: '100%',
-        cursor: bloquejat ? 'not-allowed' : 'pointer', border: 'none', borderRadius: 20,
+        cursor: bloquejat ? 'not-allowed' : 'pointer', border: 'none', borderRadius: 22,
         transition: 'box-shadow .34s cubic-bezier(.22, 1, .36, 1), transform .34s cubic-bezier(.22, 1, .36, 1)',
         padding: gran ? 22 : 18,
         background: gran ? 'var(--accent)' : V.surface,
@@ -40,7 +40,7 @@ function Targeta({ e, gran, bloquejat, onClick }: {
         display: 'flex', alignItems: 'center', gap: 15,
       }}>
       <span style={{
-        width: gran ? 52 : 42, height: gran ? 52 : 42, flexShrink: 0, borderRadius: 15,
+        width: gran ? 52 : 42, height: gran ? 52 : 42, flexShrink: 0, borderRadius: 14,
         background: gran ? 'rgba(255,255,255,.24)' : 'var(--accent-soft)',
         color: gran ? '#fff' : 'var(--accent-ink)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',

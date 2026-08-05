@@ -43,7 +43,7 @@ export default function CulturaTema() {
     <div className="v3-page v3-anim">
       <div style={{ display: 'flex', alignItems: 'center', gap: 15, marginBottom: 8 }}>
         <span style={{
-          width: 52, height: 52, flexShrink: 0, borderRadius: 16,
+          width: 52, height: 52, flexShrink: 0, borderRadius: 18,
           background: c.soft, color: c.ink,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontFamily: V.mono, fontSize: 16, fontWeight: 800,

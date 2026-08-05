@@ -38,7 +38,7 @@ export default function GdprBanner() {
     >
       <div className="mx-auto max-w-3xl" style={{ background: A.card, border: `1px solid ${A.line2}`, borderRadius: A.rxl, boxShadow: A.shadowLg, padding: 'clamp(16px,3vw,22px)' }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-          <span style={{ width: 44, height: 44, borderRadius: 12, background: A.terraSoft, display: 'grid', placeItems: 'center', flexShrink: 0, fontSize: 22 }} aria-hidden>🔒</span>
+          <span style={{ width: 44, height: 44, borderRadius: 14, background: A.terraSoft, display: 'grid', placeItems: 'center', flexShrink: 0, fontSize: 22 }} aria-hidden>🔒</span>
           <div style={{ flex: 1, minWidth: 0 }}>
             <h2 style={{ margin: 0, fontFamily: A.display, fontWeight: 700, fontSize: 16, letterSpacing: -0.3, color: A.ink }}>
               {t('rgpd.title')}

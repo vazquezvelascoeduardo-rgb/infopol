@@ -554,7 +554,7 @@ function SelectPhase({
               display: 'flex', alignItems: 'center', gap: 16, textAlign: 'left',
             }}>
             <span style={{
-              width: 46, height: 46, flexShrink: 0, borderRadius: 15, background: 'rgba(255,255,255,.22)',
+              width: 46, height: 46, flexShrink: 0, borderRadius: 14, background: 'rgba(255,255,255,.22)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               <I n="play" size={19} ple color="#fff" />
@@ -738,7 +738,7 @@ function RunPhase({
                 disabled={revealed}
                 style={{
                   textAlign: 'left', cursor: revealed ? 'default' : 'pointer', background: bg,
-                  border: `2px solid ${border}`, borderRadius: 16, padding: isMobile ? '13px 14px' : '0 18px', minHeight: isMobile ? 56 : 60, height: isMobile ? 'auto' : '100%',
+                  border: `2px solid ${border}`, borderRadius: 18, padding: isMobile ? '13px 14px' : '0 18px', minHeight: isMobile ? 56 : 60, height: isMobile ? 'auto' : '100%',
                   boxShadow: (s === 'idle' || s === 'selected') ? '0 1px 0 rgba(19,19,26,0.04), 0 6px 16px rgba(19,19,26,0.05)' : 'none',
                   display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 14,
                   transition: 'transform .12s, box-shadow .12s, border-color .15s, background .15s',

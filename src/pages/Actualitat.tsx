@@ -70,7 +70,7 @@ export default function Actualitat() {
               display: 'flex', alignItems: 'center', gap: 14,
             }}>
             <span style={{
-              width: 42, height: 42, flexShrink: 0, borderRadius: 13, background: V.surface2,
+              width: 42, height: 42, flexShrink: 0, borderRadius: 14, background: V.surface2,
               display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20,
             }} aria-hidden>{tp.icon}</span>
             <span style={{ flex: 1, minWidth: 0 }}>
@@ -98,7 +98,7 @@ export default function Actualitat() {
           display: 'flex', alignItems: 'center', gap: 15,
         }}>
         <span style={{
-          width: 46, height: 46, flexShrink: 0, borderRadius: 15, background: 'rgba(255,255,255,.24)',
+          width: 46, height: 46, flexShrink: 0, borderRadius: 14, background: 'rgba(255,255,255,.24)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
           <I n="check" size={21} sw={2} />

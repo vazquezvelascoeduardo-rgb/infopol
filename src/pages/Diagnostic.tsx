@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../lib/auth';
 import { supabase } from '../lib/supabase';
-import { CardV, I, Mono, RV, TitolV, V } from '../lib/v3';
+import { CardV, I, Mono, RV, SegV, TitolV, V } from '../lib/v3';
 
 type Cos = 'pl' | 'mossos';
 
@@ -171,26 +171,11 @@ export default function Diagnostic() {
         gap: 16, flexWrap: 'wrap', marginBottom: 20,
       }}>
         <TitolV fort="Diagnòstic" post="per tema" />
-        <div style={{ display: 'inline-flex', background: V.surface2, borderRadius: RV.pill, padding: 4, gap: 4 }}>
-          {([{ id: 'pl', label: 'Policia Local' }, { id: 'mossos', label: 'Mossos' }] as { id: Cos; label: string }[]).map((c) => {
-            const on = c.id === cos;
-            return (
-              <button
-                key={c.id}
-                type="button"
-                onClick={() => setCos(c.id)}
-                aria-pressed={on}
-                style={{
-                  border: 'none', cursor: 'pointer', borderRadius: RV.pill, padding: '9px 18px',
-                  fontSize: 13, fontWeight: on ? 800 : 600,
-                  background: on ? V.surface : 'transparent', color: on ? V.ink : V.muted,
-                  boxShadow: on ? V.shadow : 'none',
-                }}>
-                {c.label}
-              </button>
-            );
-          })}
-        </div>
+        <SegV
+          opcions={[{ id: 'pl' as Cos, label: 'Policia Local' }, { id: 'mossos' as Cos, label: 'Mossos' }]}
+          valor={cos}
+          onTria={setCos}
+        />
       </div>
 
       {files === null && <p style={{ fontSize: 13.5, color: V.muted }}>Calculant…</p>}

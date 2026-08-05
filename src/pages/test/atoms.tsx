@@ -44,7 +44,7 @@ export function SecHead({
 }: { icon: string; color: string; title: string; sub?: string }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
-      <span style={{ width: 38, height: 38, borderRadius: 11, background: color, display: 'grid', placeItems: 'center', boxShadow: A.inset, flexShrink: 0 }}>
+      <span style={{ width: 38, height: 38, borderRadius: 10, background: color, display: 'grid', placeItems: 'center', boxShadow: A.inset, flexShrink: 0 }}>
         <Ic name={icon} size={20} color="#fff" sw={2.1} />
       </span>
       <div>
@@ -88,7 +88,7 @@ export function BigMode({
         </p>
         <div style={{ position: 'relative', marginTop: 'auto', paddingTop: 18, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
           <Mono size={10} color="#fff" style={{ opacity: 0.85 }}>{meta}</Mono>
-          <span className="a-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff', color: A.ink, borderRadius: 12, padding: '10px 18px', fontFamily: A.display, fontWeight: 700, fontSize: 14, boxShadow: '0 6px 16px rgba(0,0,0,0.18)' }}>
+          <span className="a-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff', color: A.ink, borderRadius: 14, padding: '10px 18px', fontFamily: A.display, fontWeight: 700, fontSize: 14, boxShadow: '0 6px 16px rgba(0,0,0,0.18)' }}>
             {cta} <Ic name="arrow" size={15} color={A.ink} />
           </span>
         </div>
@@ -149,7 +149,7 @@ export function RecentRow({
   return (
     <Link to={`${basePath}/${slug}`} style={{ textDecoration: 'none' }}>
       <Card pad={14} hover style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-        <span style={{ width: 44, height: 44, borderRadius: 12, background: tone, color: '#fff', display: 'grid', placeItems: 'center', fontFamily: A.display, fontWeight: 700, fontSize: 16, flexShrink: 0, boxShadow: A.inset }}>
+        <span style={{ width: 44, height: 44, borderRadius: 14, background: tone, color: '#fff', display: 'grid', placeItems: 'center', fontFamily: A.display, fontWeight: 700, fontSize: 16, flexShrink: 0, boxShadow: A.inset }}>
           {score10}
         </span>
         <div style={{ flex: 1, minWidth: 0 }}>

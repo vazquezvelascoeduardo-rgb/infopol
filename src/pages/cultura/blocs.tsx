@@ -58,7 +58,7 @@ export function textBloc(b: CulturaBlock): string {
 }
 
 const targeta: React.CSSProperties = {
-  background: V.surface, borderRadius: 20, border: `1px solid ${V.hair}`,
+  background: V.surface, borderRadius: 22, border: `1px solid ${V.hair}`,
   padding: 22, boxShadow: V.shadow,
 };
 
@@ -89,7 +89,7 @@ export function Bloc({ b, i, c }: { b: CulturaBlock; i: number; c: Pal }) {
           <TitolBloc c={c}>{b.title}</TitolBloc>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
             {b.items.map((it, j) => (
-              <div key={j} style={{ display: 'flex', gap: 12, padding: '12px 14px', borderRadius: 12, alignItems: 'flex-start' }}>
+              <div key={j} style={{ display: 'flex', gap: 12, padding: '12px 14px', borderRadius: 14, alignItems: 'flex-start' }}>
                 <span style={{ width: 9, height: 9, borderRadius: 5, background: c.solid, marginTop: 7, flexShrink: 0 }} />
                 <div style={{ minWidth: 0 }}>
                   <div style={{ fontSize: 15, fontWeight: 800, color: V.ink, letterSpacing: -0.2, lineHeight: 1.3 }}>{it[0]}</div>
@@ -128,7 +128,7 @@ export function Bloc({ b, i, c }: { b: CulturaBlock; i: number; c: Pal }) {
           <TitolBloc c={c}>{b.title}</TitolBloc>
           {/* La taula scrolleja dins la seva caixa: a mòbil, si no, empeny
               tota la pàgina cap a la dreta. */}
-          <div style={{ overflowX: 'auto', borderRadius: 12, border: `1px solid ${V.hair}` }}>
+          <div style={{ overflowX: 'auto', borderRadius: 14, border: `1px solid ${V.hair}` }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, minWidth: 420 }}>
               <thead>
                 <tr>

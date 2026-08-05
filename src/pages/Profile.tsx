@@ -228,7 +228,7 @@ export default function Profile() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
           <div
             style={{
-              width: 74, height: 74, flexShrink: 0, borderRadius: 24, background: V.terra,
+              width: 74, height: 74, flexShrink: 0, borderRadius: 28, background: V.terra,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: 30, fontWeight: 800, color: '#fff',
               boxShadow: '0 10px 22px rgba(255,122,26,.35)',
@@ -330,7 +330,7 @@ export default function Profile() {
         <h2 className="eyebrow mb-4">Aparença</h2>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
           <span style={{
-            width: 38, height: 38, flexShrink: 0, borderRadius: 12, background: V.surface2, color: V.ink,
+            width: 38, height: 38, flexShrink: 0, borderRadius: 14, background: V.surface2, color: V.ink,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
             <I n={tema === 'dark' ? 'sun' : 'moon'} size={18} sw={1.8} />
@@ -546,7 +546,7 @@ export default function Profile() {
                 display: 'flex', alignItems: 'center', gap: 12,
               }}>
               <span style={{
-                width: 34, height: 34, flexShrink: 0, borderRadius: 11,
+                width: 34, height: 34, flexShrink: 0, borderRadius: 10,
                 background: V.surface2, color: V.muted,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>

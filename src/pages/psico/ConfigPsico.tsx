@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import { LLARGADES, tempsText } from '../../lib/psicotecnics/cataleg.mjs';
-import { I, Mono, RV, V } from '../../lib/v3';
+import { I, Mono, RV, useSortida, V } from '../../lib/v3';
 
 export type FormatPsico = 'study' | 'exam';
 
@@ -44,17 +44,19 @@ export default function ConfigPsico({
   // El simulacre porta rellotge per defecte; l'estudi, no.
   useEffect(() => { setAmbTemps(format === 'exam'); }, [format]);
 
+  const { surt, tanca } = useSortida(onTanca);
+
   useEffect(() => {
-    const t = (e: KeyboardEvent) => { if (e.key === 'Escape') onTanca(); };
+    const t = (e: KeyboardEvent) => { if (e.key === 'Escape') tanca(); };
     window.addEventListener('keydown', t);
     return () => window.removeEventListener('keydown', t);
-  }, [onTanca]);
+  }, [tanca]);
 
   // Penjat del <body>: veure el comentari del bessó, ConfigTest.
   return createPortal((
-    <div className="ap-vel">
+    <div className={surt ? 'ap-vel surt' : 'ap-vel'}>
       <button
-        onClick={onTanca}
+        onClick={tanca}
         aria-label="Tancar"
         style={{
           position: 'absolute', inset: 0, background: 'none',

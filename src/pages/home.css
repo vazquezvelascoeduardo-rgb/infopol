@@ -61,7 +61,7 @@
 .lp .lp-btn-w, .lp a.lp-btn-w, .lp .lp-btn-w:hover, .lp a.lp-btn-w:hover {
   background: #fff; color: var(--lpTerra); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
 }
-.lp-btn-sm { font-size: 14px; padding: 11px 18px; border-radius: 12px; }
+.lp-btn-sm { font-size: 14px; padding: 11px 18px; border-radius: 14px; }
 
 /* navegació */
 .lp-nav {
@@ -79,12 +79,12 @@
   padding: 8px 13px; border-radius: 10px; display: inline-flex; align-items: center; gap: 6px;
 }
 .lp-links a:hover { background: rgba(21, 21, 28, 0.05); color: var(--lpInk); }
-.lp-dot { width: 6px; height: 6px; border-radius: 99px; background: var(--lpTerra); flex-shrink: 0; }
+.lp-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--lpTerra); flex-shrink: 0; }
 .lp-navcta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; margin-left: auto; }
 .lp-navcta > * { flex-shrink: 0; }
 .lp-burger {
   display: none; width: 42px; height: 42px; border: 1px solid var(--lpLine2);
-  background: #fff; border-radius: 12px; cursor: pointer; align-items: center; justify-content: center;
+  background: #fff; border-radius: 14px; cursor: pointer; align-items: center; justify-content: center;
 }
 .lp-mnav {
   display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 59;
@@ -95,7 +95,7 @@
 .lp-mnav.on { display: flex; }
 .lp-mnav a {
   font-family: var(--lpDisplay); font-weight: 600; font-size: 16px; color: var(--lpInk);
-  padding: 13px 12px; border-radius: 12px; display: flex; align-items: center; gap: 8px;
+  padding: 13px 12px; border-radius: 14px; display: flex; align-items: center; gap: 8px;
 }
 .lp-mnav a:hover { background: rgba(21, 21, 28, 0.05); }
 .lp-mnav .lp-mrow { display: flex; gap: 10px; margin-top: 10px; }
@@ -132,14 +132,14 @@
 /* targetes */
 .lp-cards { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 1.6vw, 20px); }
 .lp-c {
-  border-radius: 24px; background: var(--lpCard); border: 1px solid var(--lpLine);
+  border-radius: 28px; background: var(--lpCard); border: 1px solid var(--lpLine);
   padding: clamp(22px, 2.4vw, 30px); display: flex; flex-direction: column;
   transition: transform 0.16s, box-shadow 0.16s;
   box-shadow: 0 1px 0 rgba(21, 21, 28, 0.03), 0 8px 26px rgba(21, 21, 28, 0.05);
 }
 .lp-c:hover { transform: translateY(-4px); box-shadow: 0 2px 4px rgba(21, 21, 28, 0.05), 0 22px 50px rgba(21, 21, 28, 0.12); }
 .lp-ctop { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
-.lp-ico { width: 52px; height: 52px; border-radius: 15px; display: grid; place-items: center; flex-shrink: 0; }
+.lp-ico { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; flex-shrink: 0; }
 .lp-c h3 { font-size: clamp(23px, 2.4vw, 28px); font-weight: 700; margin-bottom: 8px; }
 .lp-ph { font-size: 15px; line-height: 1.55; color: var(--lpInkSoft); max-width: 440px; }
 .lp-pts { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-direction: column; gap: 9px; }
@@ -175,9 +175,9 @@
 }
 .lp-chat h3 { font-size: clamp(26px, 3vw, 34px); }
 .lp-chat .lp-ph { color: rgba(255, 255, 255, 0.72); max-width: 640px; }
-.lp-badge { font-family: var(--lpMono); font-weight: 700; font-size: 10px; letter-spacing: 0.1em; padding: 4px 9px; border-radius: 99px; }
+.lp-badge { font-family: var(--lpMono); font-weight: 700; font-size: 10px; letter-spacing: 0.1em; padding: 4px 9px; border-radius: 999px; }
 .lp-subs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 26px; }
-.lp-sub { background: rgba(255, 255, 255, 0.055); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 18px; }
+.lp-sub { background: rgba(255, 255, 255, 0.055); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 18px; padding: 18px; }
 .lp-subh { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
 .lp-subt { font-family: var(--lpDisplay); font-weight: 700; font-size: 15px; color: #fff; }
 .lp-sub p { font-size: 13px; line-height: 1.5; color: rgba(255, 255, 255, 0.6); }
@@ -186,24 +186,24 @@
 .lp-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 40px); }
 .lp-three h3 { font-size: 19px; font-weight: 700; margin: 14px 0 8px; letter-spacing: -0.02em; }
 .lp-three p { font-size: 14.5px; line-height: 1.55; color: var(--lpInkSoft); }
-.lp-icosm { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: #fff; border: 1px solid var(--lpLine); }
+.lp-icosm { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; background: #fff; border: 1px solid var(--lpLine); }
 
 /* confiança */
-.lp-trust { background: var(--lpCream); border: 1px solid var(--lpLine); border-radius: 26px; padding: clamp(26px, 3.4vw, 44px); }
+.lp-trust { background: var(--lpCream); border: 1px solid var(--lpLine); border-radius: 28px; padding: clamp(26px, 3.4vw, 44px); }
 .lp-trust h2 { font-size: clamp(24px, 2.8vw, 32px); font-weight: 700; max-width: 520px; }
 .lp-trust p { margin-top: 16px; font-size: 15.5px; line-height: 1.65; color: var(--lpInkSoft); max-width: 760px; }
 .lp-seals { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
-.lp-seal { display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--lpLine); border-radius: 99px; padding: 9px 15px; }
+.lp-seal { display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--lpLine); border-radius: 999px; padding: 9px 15px; }
 .lp-seal span { font-family: var(--lpMono); font-weight: 600; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lpInkSoft); }
 
 /* app mòbil */
 .lp-iostag {
   display: inline-flex; align-items: center; gap: 9px; background: #fff;
-  border: 1px solid var(--lpLine2); border-radius: 99px; padding: 7px 14px 7px 9px;
+  border: 1px solid var(--lpLine2); border-radius: 999px; padding: 7px 14px 7px 9px;
   margin-top: 26px; box-shadow: 0 1px 0 rgba(21, 21, 28, 0.03), 0 6px 18px rgba(21, 21, 28, 0.06);
 }
 .lp-iostag b { font-family: var(--lpDisplay); font-weight: 700; font-size: 13px; color: var(--lpInk); white-space: nowrap; }
-.lp-iostag .pip { width: 7px; height: 7px; border-radius: 99px; background: #1fb286; flex-shrink: 0; margin-left: 5px; }
+.lp-iostag .pip { width: 7px; height: 7px; border-radius: 999px; background: #1fb286; flex-shrink: 0; margin-left: 5px; }
 .lp .lp-btn-ios, .lp a.lp-btn-ios, .lp .lp-btn-ios:hover, .lp a.lp-btn-ios:hover {
   background: var(--lpNight); color: #fff; padding-left: 20px;
 }
@@ -216,7 +216,7 @@
 .lp-ioslines s { text-decoration: none; font-family: var(--lpDisplay); font-weight: 700; font-size: 15px; }
 
 .lp-appb {
-  position: relative; overflow: hidden; background: var(--lpNight); border-radius: 26px;
+  position: relative; overflow: hidden; background: var(--lpNight); border-radius: 28px;
   padding: clamp(26px, 3.4vw, 44px); display: flex; align-items: center;
   gap: clamp(24px, 4vw, 56px); flex-wrap: wrap;
 }
@@ -236,7 +236,7 @@
 .lp-appb-feat { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .lp-appb-feat span {
   display: inline-flex; align-items: center; gap: 7px; background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 99px; padding: 7px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 999px; padding: 7px 13px;
   font-family: var(--lpMono); font-weight: 600; font-size: 10px; letter-spacing: 0.1em;
   text-transform: uppercase; color: rgba(255, 255, 255, 0.72);
 }
@@ -244,13 +244,13 @@
   width: 210px; border-radius: 34px; background: #0a0a10; padding: 5px;
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5); flex-shrink: 0;
 }
-.lp-phone img { display: block; width: 100%; height: auto; border-radius: 29px; }
+.lp-phone img { display: block; width: 100%; height: auto; border-radius: 28px; }
 
 /* notícies */
 .lp-news { display: flex; flex-direction: column; gap: 10px; }
 .lp-nw {
   display: flex; align-items: center; gap: 16px; background: var(--lpCard);
-  border: 1px solid var(--lpLine); border-radius: 16px; padding: 16px 18px;
+  border: 1px solid var(--lpLine); border-radius: 18px; padding: 16px 18px;
   transition: transform 0.14s, box-shadow 0.14s;
 }
 .lp-nw:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(21, 21, 28, 0.08); }

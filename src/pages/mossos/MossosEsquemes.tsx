@@ -51,7 +51,7 @@ export default function MossosEsquemes() {
           <div key={ambit} style={{ marginBottom: 26 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 11, marginBottom: 13 }}>
               <span style={{
-                width: 26, height: 26, borderRadius: 8, background: meta.accent, color: '#fff',
+                width: 26, height: 26, borderRadius: 10, background: meta.accent, color: '#fff',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: 12.5, fontWeight: 800,
               }}>
@@ -74,7 +74,7 @@ export default function MossosEsquemes() {
                     boxShadow: V.shadow, display: 'flex', gap: 13, alignItems: 'flex-start',
                   }}>
                   <span style={{
-                    width: 42, height: 42, flexShrink: 0, borderRadius: 13,
+                    width: 42, height: 42, flexShrink: 0, borderRadius: 14,
                     background: meta.accentSoft, color: meta.accentInk,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontFamily: V.mono, fontSize: 12.5, fontWeight: 800,

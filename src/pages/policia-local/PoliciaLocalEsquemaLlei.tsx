@@ -203,7 +203,7 @@ export default function PoliciaLocalEsquemaLlei() {
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                   <span style={{
-                    width: 28, height: 28, borderRadius: 8, background: e.soft, color: e.color,
+                    width: 28, height: 28, borderRadius: 10, background: e.soft, color: e.color,
                     display: 'grid', placeItems: 'center',
                     fontWeight: 900, fontSize: 12,
                   }}>0{i + 1}</span>
@@ -235,7 +235,7 @@ export default function PoliciaLocalEsquemaLlei() {
         <div style={{ marginTop: 18, marginBottom: 14, display: 'flex', gap: 4, flexWrap: 'wrap' }}>
           {esquema.eras.map((e) => (
             <div key={e.id} style={{
-              flex: '1 1 100px', padding: '8px 10px', borderRadius: 8,
+              flex: '1 1 100px', padding: '8px 10px', borderRadius: 10,
               background: e.soft, color: e.color,
               fontSize: 11, fontWeight: 800, letterSpacing: 0.4,
               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -299,7 +299,7 @@ export default function PoliciaLocalEsquemaLlei() {
               background: V.surface, border: '1px solid var(--line)',
             }}>
               <span style={{
-                width: 30, height: 30, borderRadius: 15,
+                width: 30, height: 30, borderRadius: 14,
                 background: BLUE, color: '#fff',
                 display: 'grid', placeItems: 'center',
                 fontFamily: 'JetBrains Mono, ui-monospace, monospace',
@@ -448,7 +448,7 @@ function TimelineRow({
     }}>
       <div style={{
         position: 'absolute', left: -10, top: 16,
-        width: 22, height: 22, borderRadius: 11,
+        width: 22, height: 22, borderRadius: 10,
         background: era.color, color: '#fff',
         display: 'grid', placeItems: 'center',
         border: '3px solid var(--paper)',

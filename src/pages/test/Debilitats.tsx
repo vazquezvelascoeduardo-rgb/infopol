@@ -94,7 +94,7 @@ export default function Debilitats() {
 
           {/* CTA repàs */}
           <Card pad={18} style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 22, background: counts.due ? A.terraSoft : A.card, border: `1px solid ${counts.due ? A.terracota : A.line}` }}>
-            <span style={{ width: 46, height: 46, borderRadius: 13, background: counts.due ? A.terracota : A.bgSoft, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+            <span style={{ width: 46, height: 46, borderRadius: 14, background: counts.due ? A.terracota : A.bgSoft, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
               <Ic name="bolt" size={24} color={counts.due ? '#fff' : A.inkMuted} fill={!!counts.due} />
             </span>
             <div style={{ flex: 1, minWidth: 180 }}>

@@ -71,7 +71,7 @@ export default function Superbuscador() {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Ex.: conduir sense permís, mòbil, 0,30 mg/l, 500…"
-          style={{ width: '100%', border: `2px solid ${A.purple}`, background: A.card, borderRadius: 16, padding: '16px 44px 16px 50px', fontFamily: A.display, fontWeight: 600, fontSize: 16.5, color: A.ink, outline: 'none', boxShadow: A.shadow, boxSizing: 'border-box' }}
+          style={{ width: '100%', border: `2px solid ${A.purple}`, background: A.card, borderRadius: 18, padding: '16px 44px 16px 50px', fontFamily: A.display, fontWeight: 600, fontSize: 16.5, color: A.ink, outline: 'none', boxShadow: A.shadow, boxSizing: 'border-box' }}
         />
         {q && (
           <button type="button" onClick={() => setQ('')} aria-label="Esborrar" style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', border: 'none', background: A.bgDeep, cursor: 'pointer', width: 30, height: 30, borderRadius: 999, display: 'grid', placeItems: 'center', color: A.inkSoft }}>
@@ -114,7 +114,7 @@ function EmptyState({ onPick }: { onPick: (q: string) => void }) {
   const tips = ['mòbil', 'alcohol', 'sense permís', 'velocitat', 'assegurança', 'cinturó'];
   return (
     <Card pad={28} style={{ textAlign: 'center', borderStyle: 'dashed', background: A.bgSoft }}>
-      <div style={{ width: 52, height: 52, borderRadius: 15, background: A.purpleSoft, display: 'grid', placeItems: 'center', margin: '0 auto 14px' }}><Ic name="bolt" size={26} color={A.purple} /></div>
+      <div style={{ width: 52, height: 52, borderRadius: 14, background: A.purpleSoft, display: 'grid', placeItems: 'center', margin: '0 auto 14px' }}><Ic name="bolt" size={26} color={A.purple} /></div>
       <p style={{ fontFamily: A.display, fontWeight: 700, fontSize: 16, color: A.ink, margin: '0 0 6px' }}>Comença a escriure per cercar</p>
       <p style={{ fontFamily: A.sans, fontSize: 13.5, color: A.inkMuted, margin: '0 0 16px' }}>Busca per concepte, article (14.1), multa (500) o punts.</p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center' }}>
@@ -130,7 +130,7 @@ function LawSection({ lawId, items, q, onSelect }: { lawId: string; items: Catal
   const color = getLawColor(lawId);
   return (
     <section>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 9, padding: '8px 13px', borderRadius: 12, background: color + '14', borderLeft: `4px solid ${color}` }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 9, padding: '8px 13px', borderRadius: 14, background: color + '14', borderLeft: `4px solid ${color}` }}>
         <span style={{ fontFamily: A.mono, fontWeight: 700, fontSize: 13, color }}>{items[0].lawShort}</span>
         <span style={{ fontFamily: A.sans, fontSize: 12, fontWeight: 500, opacity: 0.85, color }}>{items[0].lawFull}</span>
         <span style={{ marginLeft: 'auto', fontFamily: A.mono, fontSize: 12, opacity: 0.7, color }}>{items.length}</span>
@@ -168,7 +168,7 @@ function ResultRow({ row, q, color, onSelect }: { row: CatalegRow; q: string; co
 }
 
 function Pill({ text, bg, fg, bold = false }: { text: string; bg: string; fg: string; bold?: boolean }) {
-  return <span style={{ fontFamily: A.mono, fontWeight: bold ? 700 : 600, fontSize: 11.5, whiteSpace: 'nowrap', background: bg, color: fg, borderRadius: 8, padding: '4px 8px' }}>{text}</span>;
+  return <span style={{ fontFamily: A.mono, fontWeight: bold ? 700 : 600, fontSize: 11.5, whiteSpace: 'nowrap', background: bg, color: fg, borderRadius: 10, padding: '4px 8px' }}>{text}</span>;
 }
 
 function SeverityPill({ severity }: { severity: Severity }) {
@@ -178,7 +178,7 @@ function SeverityPill({ severity }: { severity: Severity }) {
     L: { label: 'L', bg: A.blueSoft, fg: A.blueInk, title: 'Lleu' },
   };
   const m = meta[severity];
-  return <span title={m.title} style={{ fontFamily: A.mono, fontWeight: 700, fontSize: 11.5, background: m.bg, color: m.fg, borderRadius: 8, padding: '4px 8px' }}>{m.label}</span>;
+  return <span title={m.title} style={{ fontFamily: A.mono, fontWeight: 700, fontSize: 11.5, background: m.bg, color: m.fg, borderRadius: 10, padding: '4px 8px' }}>{m.label}</span>;
 }
 
 function isNumericFine(s: string): boolean {
@@ -276,21 +276,21 @@ function DetailDrawer({ row, onClose }: { row: CatalegRow | null; onClose: () =>
       <button aria-label="Tancar" onClick={onClose} style={{ position: 'absolute', inset: 0, border: 'none', background: 'rgba(21,21,28,0.5)', backdropFilter: 'blur(3px)', cursor: 'pointer' }} />
       <div style={{ position: 'relative', width: '100%', maxWidth: 560, maxHeight: '92vh', overflowY: 'auto', background: A.card, borderTopLeftRadius: 24, borderTopRightRadius: 24, boxShadow: A.shadowLg, borderTop: `4px solid ${color}` }} className="sb-sheet">
         <div style={{ position: 'sticky', top: 0, zIndex: 10, display: 'flex', alignItems: 'center', gap: 8, padding: '13px 18px', borderBottom: `1px solid ${A.line}`, background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(8px)' }}>
-          <span style={{ fontFamily: A.mono, fontWeight: 700, fontSize: 13, borderRadius: 8, padding: '3px 9px', background: color + '18', color }}>{row.lawShort}</span>
+          <span style={{ fontFamily: A.mono, fontWeight: 700, fontSize: 13, borderRadius: 10, padding: '3px 9px', background: color + '18', color }}>{row.lawShort}</span>
           <span style={{ fontFamily: A.sans, fontSize: 12, opacity: 0.7, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: A.inkSoft }}>{row.lawFull}</span>
-          <button onClick={onClose} aria-label="Tancar" style={{ marginLeft: 'auto', border: 'none', background: A.bgDeep, cursor: 'pointer', width: 32, height: 32, borderRadius: 9, display: 'grid', placeItems: 'center' }}><Ic name="x" size={17} color={A.inkSoft} /></button>
+          <button onClick={onClose} aria-label="Tancar" style={{ marginLeft: 'auto', border: 'none', background: A.bgDeep, cursor: 'pointer', width: 32, height: 32, borderRadius: 10, display: 'grid', placeItems: 'center' }}><Ic name="x" size={17} color={A.inkSoft} /></button>
         </div>
         <div style={{ padding: '18px', display: 'flex', flexDirection: 'column', gap: 16 }}>
           {ctx && <Mono size={11} color={color}>{ctx}</Mono>}
           <h2 style={{ margin: 0, fontFamily: A.display, fontWeight: 700, fontSize: 20, lineHeight: 1.25, color: A.ink }}>{official.text}</h2>
           {official.official && (
-            <span style={{ alignSelf: 'flex-start', display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: A.sans, fontSize: 12, fontWeight: 600, borderRadius: 8, padding: '5px 10px', background: A.greenSoft, color: A.greenInk }}>
+            <span style={{ alignSelf: 'flex-start', display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: A.sans, fontSize: 12, fontWeight: 600, borderRadius: 10, padding: '5px 10px', background: A.greenSoft, color: A.greenInk }}>
               <Ic name="check" size={13} color={A.greenInk} sw={3} /> Concepte oficial del nomenclàtor
             </span>
           )}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: 10 }}>
             {attrs.map((at) => { const k = at.tone === 'amber' ? { soft: A.amberSoft, ink: '#6B3F08' } : at.tone === 'red' ? { soft: A.redSoft, ink: A.redInk } : at.tone === 'green' ? { soft: A.greenSoft, ink: A.greenInk } : { soft: A.blueSoft, ink: A.blueInk };
-              return <div key={at.label} style={{ borderRadius: 12, padding: '10px 13px', background: k.soft }}>
+              return <div key={at.label} style={{ borderRadius: 14, padding: '10px 13px', background: k.soft }}>
                 <Mono size={10} color={k.ink} style={{ opacity: 0.85 }}>{at.label}</Mono>
                 <div style={{ marginTop: 3, fontFamily: A.display, fontWeight: 700, fontSize: 15, color: k.ink }}>{at.value}</div>
               </div>; })}
@@ -298,7 +298,7 @@ function DetailDrawer({ row, onClose }: { row: CatalegRow | null; onClose: () =>
           <section style={{ borderRadius: 14, padding: 16, background: A.purpleSoft }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, marginBottom: 10 }}>
               <Mono size={11} color={A.purpleInk}>Text per al butlletí</Mono>
-              <button onClick={copyText} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, border: 'none', cursor: 'pointer', borderRadius: 9, padding: '6px 12px', background: A.card, color: A.purpleInk, fontFamily: A.display, fontWeight: 700, fontSize: 12.5 }}>
+              <button onClick={copyText} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, border: 'none', cursor: 'pointer', borderRadius: 10, padding: '6px 12px', background: A.card, color: A.purpleInk, fontFamily: A.display, fontWeight: 700, fontSize: 12.5 }}>
                 {copied ? <><Ic name="check" size={14} color={A.purpleInk} sw={3} /> Copiat</> : <><Ic name="doc" size={14} color={A.purpleInk} /> Copiar</>}
               </button>
             </div>

@@ -16,8 +16,8 @@ import { TEMES_MOSSOS } from '../content/temari-mossos';
 import { useFailuresCounts } from '../lib/failures';
 import { globalAverage, useGlobalStats } from '../lib/testStats';
 import type { ModulPro } from '../lib/pla';
-import { CadenatPro, I, Mono, RV, TitolV, V, type NomIc } from '../lib/v3';
-import { COSSOS, metaCos, useCos, type Cos } from '../lib/cos';
+import { CadenatPro, I, Mono, RV, SegV, TitolV, V, type NomIc } from '../lib/v3';
+import { COSSOS, metaCos, useCos } from '../lib/cos';
 import { verbs } from '../lib/verbs';
 
 type Mode = {
@@ -30,53 +30,6 @@ type Mode = {
   /** Mòdul de pagament al qual pertany, si un dia n'hi ha (lib/pla.ts). */
   modul?: ModulPro;
 };
-
-/**
- * El commutador de cos.
- *
- * La pastilla activa es tenyeix del color del cos i llisca d'un costat a
- * l'altre: així el canvi es veu i no cal buscar quin dels dos està premut.
- */
-function SelectorCos({ cos, onCanvia }: { cos: Cos; onCanvia: (c: Cos) => void }) {
-  const i = COSSOS.findIndex((c) => c.id === cos);
-  return (
-    <div style={{
-      position: 'relative', display: 'inline-flex', background: V.surface2,
-      borderRadius: RV.pill, padding: 4, gap: 4,
-    }}>
-      <span
-        aria-hidden
-        style={{
-          position: 'absolute', top: 4, bottom: 4, left: 4,
-          width: `calc((100% - 12px) / ${COSSOS.length})`,
-          transform: `translateX(calc(${i} * (100% + 4px)))`,
-          borderRadius: RV.pill, background: 'var(--accent)',
-          boxShadow: '0 6px 16px var(--accent-ombra)',
-          transition: 'transform .32s cubic-bezier(.4,0,.2,1), background .32s ease',
-        }}
-      />
-      {COSSOS.map((c) => {
-        const on = c.id === cos;
-        return (
-          <button
-            key={c.id}
-            type="button"
-            onClick={() => onCanvia(c.id)}
-            aria-pressed={on}
-            style={{
-              position: 'relative', border: 'none', cursor: 'pointer', borderRadius: RV.pill,
-              padding: '9px 18px', background: 'transparent',
-              fontSize: 13, fontWeight: on ? 800 : 600, letterSpacing: -0.2,
-              color: on ? '#fff' : V.muted,
-              transition: 'color .24s ease',
-            }}>
-            {c.label}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
 
 function TargetaMode({ m, bloquejat, onClick }: { m: Mode; bloquejat: boolean; onClick: () => void }) {
   const fons = m.destacat ? 'var(--accent)' : V.surface;
@@ -175,7 +128,7 @@ export default function Academia() {
         display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap', marginBottom: 22,
       }}>
         <TitolV fort="Acadèmia" post="de preparació" />
-        <SelectorCos cos={cos} onCanvia={setCos} />
+        <SegV opcions={COSSOS.map((c) => ({ id: c.id, label: c.label }))} valor={cos} onTria={setCos} />
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16, minWidth: 0 }}>
@@ -195,7 +148,7 @@ export default function Academia() {
                   // l'anell no canviava en passar de cos.
                   style={{
                     stroke: meta.accent,
-                    transition: 'stroke .32s ease, stroke-dasharray .5s cubic-bezier(.4,0,.2,1)',
+                    transition: 'stroke .32s ease, stroke-dasharray .5s var(--mou)',
                   }}
                 />
               </svg>

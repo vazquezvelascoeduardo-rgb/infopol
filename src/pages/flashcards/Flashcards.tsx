@@ -291,7 +291,7 @@ export default function Flashcards() {
         onClick={() => setRevealed((v) => !v)}
         style={{
           width: '100%', textAlign: 'left', cursor: 'pointer', border: `1px solid ${V.hair}`,
-          borderRadius: 24, padding: 'clamp(20px,3vw,30px)', background: V.surface, color: V.ink,
+          borderRadius: 28, padding: 'clamp(20px,3vw,30px)', background: V.surface, color: V.ink,
           boxShadow: V.shadowLg, minHeight: 220,
           display: 'flex', flexDirection: 'column', gap: 14,
         }}>
@@ -313,7 +313,7 @@ export default function Flashcards() {
                 return (
                   <li key={i} style={{
                     display: 'flex', alignItems: 'flex-start', gap: 10, padding: '11px 13px',
-                    borderRadius: 13, fontSize: 14.5, lineHeight: 1.4,
+                    borderRadius: 14, fontSize: 14.5, lineHeight: 1.4,
                     background: bo ? V.okSoft : V.paper,
                     color: bo ? V.ink : V.muted,
                     fontWeight: bo ? 700 : 500,

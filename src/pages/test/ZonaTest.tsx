@@ -15,7 +15,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getMossosByAmbit, getMunicipiGroups, getTopicsByCategory } from '../../data/tests';
 import type { TestTopic } from '../../data/tests/types';
 import { useFailuresCounts } from '../../lib/failures';
-import { I, Mono, V, type NomIc } from '../../lib/v3';
+import { I, Mono, SegV, V, type NomIc } from '../../lib/v3';
 
 export type Cos = 'pl' | 'mossos';
 
@@ -145,18 +145,15 @@ export default function ZonaTest({ cos: cosProp }: { cos?: Cos }) {
 
         {/* El commutador de cos. La pastilla llisca d'una banda a l'altra
             en comptes de saltar-hi: el canvi es veu venir. */}
-        <div className="ap-seg" style={{ minWidth: 230 }}>
-          <span className={cos === 'mossos' ? 'ap-seg-pastilla dreta' : 'ap-seg-pastilla'} />
-          {(['pl', 'mossos'] as Cos[]).map((c) => (
-            <button
-              key={c}
-              type="button"
-              onClick={() => nav(c === 'mossos' ? '/mossos' : '/policia-local')}
-              aria-pressed={c === cos}>
-              {c === 'pl' ? 'Policia Local' : 'Mossos'}
-            </button>
-          ))}
-        </div>
+        <SegV
+          opcions={[
+            { id: 'pl', label: 'Policia Local' },
+            { id: 'mossos', label: 'Mossos' },
+          ]}
+          valor={cos}
+          onTria={(c) => nav(c === 'mossos' ? '/mossos' : '/policia-local')}
+          style={{ minWidth: 230 }}
+        />
       </div>
 
       {/* El test aleatori, a dalt: és el que fa més gent i abans quedava
@@ -172,7 +169,7 @@ export default function ZonaTest({ cos: cosProp }: { cos?: Cos }) {
           display: 'flex', alignItems: 'center', gap: 16,
         }}>
         <span style={{
-          width: 46, height: 46, flexShrink: 0, borderRadius: 15, background: 'rgba(255,255,255,.22)',
+          width: 46, height: 46, flexShrink: 0, borderRadius: 14, background: 'rgba(255,255,255,.22)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
           <I n="play" size={19} ple color="#fff" />
@@ -232,7 +229,7 @@ export default function ZonaTest({ cos: cosProp }: { cos?: Cos }) {
           className="v3-sura"
           onClick={() => nav('/policia-local/debilitats')}
           style={{
-            width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none', borderRadius: 20,
+            width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none', borderRadius: 22,
             padding: 18, marginTop: 13, background: V.surface, color: V.ink, boxShadow: V.shadow,
             display: 'flex', alignItems: 'center', gap: 14,
           }}>

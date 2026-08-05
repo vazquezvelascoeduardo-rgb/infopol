@@ -163,7 +163,7 @@ export default function MfaSection() {
         padding: '20px 22px',
         background: '#fff',
         border: '1px solid var(--line)',
-        borderRadius: 16,
+        borderRadius: 18,
       }}
     >
       <h3
@@ -222,7 +222,7 @@ export default function MfaSection() {
               onClick={() => disableMfa(factors[0].id)}
               style={{
                 padding: '7px 14px',
-                borderRadius: 8,
+                borderRadius: 10,
                 border: '1px solid #fca5a5',
                 background: 'transparent',
                 color: '#b91c1c',

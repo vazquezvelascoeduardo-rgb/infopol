@@ -179,7 +179,7 @@ export default function CategoriaTemes({ cos: cosProp }: { cos?: Cos }) {
           type="button"
           onClick={() => nav(cos === 'mossos' ? '/mossos' : '/policia-local')}
           aria-label="Tornar als tests"
-          className="ap-prem"
+          className="ap-prem ap-toc"
           style={{
             width: 40, height: 40, flexShrink: 0, marginTop: 4, borderRadius: '50%',
             border: `1px solid ${V.border}`, background: V.surface, cursor: 'pointer',
@@ -203,7 +203,7 @@ export default function CategoriaTemes({ cos: cosProp }: { cos?: Cos }) {
       {r.tests > 0 && (
         <div style={{
           display: 'grid', gridTemplateColumns: 'repeat(3,1fr)',
-          background: V.surface, borderRadius: 20, boxShadow: V.shadow,
+          background: V.surface, borderRadius: 22, boxShadow: V.shadow,
           padding: '16px 6px', marginBottom: 16,
         }}>
           {[
@@ -282,7 +282,7 @@ export default function CategoriaTemes({ cos: cosProp }: { cos?: Cos }) {
                   className="ap-fila"
                   onClick={() => setTriat(t)}>
                   <span style={{
-                    width: 36, height: 36, flexShrink: 0, borderRadius: 11, background: a.soft,
+                    width: 36, height: 36, flexShrink: 0, borderRadius: 10, background: a.soft,
                     display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17,
                   }}>
                     {t.icon}
@@ -296,7 +296,7 @@ export default function CategoriaTemes({ cos: cosProp }: { cos?: Cos }) {
                   {t.badge && (
                     <span style={{
                       flexShrink: 0, fontSize: 11, fontWeight: 700, color: V.blue,
-                      background: V.blueSoft, borderRadius: 99, padding: '3px 9px',
+                      background: V.blueSoft, borderRadius: 999, padding: '3px 9px',
                     }}>
                       {t.badge}
                     </span>
@@ -306,7 +306,7 @@ export default function CategoriaTemes({ cos: cosProp }: { cos?: Cos }) {
                   {c && (
                     <span style={{
                       flexShrink: 0, fontSize: 13, fontWeight: 800, letterSpacing: -0.3,
-                      color: c.fg, background: c.bg, borderRadius: 99, padding: '4px 10px',
+                      color: c.fg, background: c.bg, borderRadius: 999, padding: '4px 10px',
                     }}>
                       {ambDecimal(millor!)}
                     </span>

@@ -68,7 +68,7 @@ export default function SearchResults() {
               return (
                 <Link key={`${c.moduleSlug}/${c.slug}`} to={`/leyes/s/${c.moduleSlug}/${c.slug}`} style={{ textDecoration: 'none' }}>
                   <Card pad={16} hover style={{ display: 'flex', alignItems: 'flex-start', gap: 14, borderLeft: `4px solid ${A.amber}` }}>
-                    <span style={{ width: 40, height: 40, borderRadius: 11, background: A.amberSoft, display: 'grid', placeItems: 'center', flexShrink: 0, fontSize: 20 }}>{c.icon}</span>
+                    <span style={{ width: 40, height: 40, borderRadius: 10, background: A.amberSoft, display: 'grid', placeItems: 'center', flexShrink: 0, fontSize: 20 }}>{c.icon}</span>
                     <div style={{ minWidth: 0, flex: 1 }}>
                       <Mono size={10} color={A.amber}>{modTitle}</Mono>
                       <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 15.5, color: A.ink, margin: '2px 0 4px', letterSpacing: -0.2 }}>{c.title}</div>

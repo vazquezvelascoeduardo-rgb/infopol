@@ -57,7 +57,7 @@ function Caixa({ tipus, html }: { tipus: 'clau' | 'avis'; html: string }) {
     <div style={{ background: fons, borderRadius: RV.lg, padding: 20, marginBottom: 16 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
         <span style={{
-          width: 28, height: 28, borderRadius: 9, background: punt,
+          width: 28, height: 28, borderRadius: 10, background: punt,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
           <I n={esClau ? 'check' : 'bell'} size={15} sw={2.2} color="#fff" />
@@ -104,7 +104,7 @@ function Bloc({ b }: { b: BlocContingut }) {
             fontFamily: V.mono, fontSize: 11, fontWeight: 700,
             color: 'var(--accent-ink, var(--v-terra-ink))',
             background: 'var(--accent-soft, var(--v-terra-soft))',
-            borderRadius: 8, padding: '5px 9px', display: 'inline-block',
+            borderRadius: 10, padding: '5px 9px', display: 'inline-block',
           }}>
             {a.ref}
           </div>
@@ -234,7 +234,7 @@ export default function EstudiTema({ cos = 'pl' }: { cos?: CosTemari }) {
                 aria-current={on ? 'true' : undefined}
                 style={{
                   width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none',
-                  borderRadius: 11, padding: '11px 12px',
+                  borderRadius: 10, padding: '11px 12px',
                   background: on ? 'var(--accent-soft, var(--v-terra-soft))' : 'transparent',
                   color: on ? 'var(--accent-ink, var(--v-terra-ink))' : V.ink,
                   display: 'flex', alignItems: 'center', gap: 10,

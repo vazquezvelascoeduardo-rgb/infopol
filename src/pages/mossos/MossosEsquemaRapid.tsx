@@ -40,7 +40,7 @@ export default function MossosEsquemaRapid() {
     <div className="v3-page v3-anim" style={{ maxWidth: 860, width: '100%' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 15, marginBottom: 8 }}>
         <span style={{
-          width: 52, height: 52, flexShrink: 0, borderRadius: 16,
+          width: 52, height: 52, flexShrink: 0, borderRadius: 18,
           background: cos.accentSoft, color: cos.accentInk,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontFamily: V.mono, fontSize: 14, fontWeight: 800,
@@ -82,13 +82,13 @@ export default function MossosEsquemaRapid() {
           igual de bé en clar i en fosc. Abans anava amb colors fixos. */}
       <style>{`
         .esquema-detall {
-          background: var(--v-surface); border: 1px solid var(--v-hair); border-radius: 20px;
+          background: var(--v-surface); border: 1px solid var(--v-hair); border-radius: 22px;
           padding: clamp(18px, 3vw, 30px); box-shadow: 0 4px 14px var(--v-shadow);
         }
         .esquema-detall > :first-child { margin-top: 0; }
         .esquema-detall h2 {
           margin: 30px 0 12px; font-size: clamp(18px,2.6vw,23px); font-weight: 800; letter-spacing: -0.4px;
-          color: var(--v-ink); padding: 10px 14px; border-radius: 12px;
+          color: var(--v-ink); padding: 10px 14px; border-radius: 14px;
           background: var(--v-granate-soft);
           border-left: 4px solid var(--v-granate);
         }

@@ -61,7 +61,7 @@ export default function RegisterNudge() {
         style={{
           width: '100%', maxWidth: 460,
           background: 'var(--paper)',
-          borderRadius: 20,
+          borderRadius: 22,
           border: '1px solid var(--line)',
           padding: '24px 22px',
           boxShadow: '0 20px 50px rgba(15, 23, 42, 0.25)',
@@ -88,7 +88,7 @@ export default function RegisterNudge() {
             type="button"
             onClick={goRegister}
             style={{
-              width: '100%', padding: '12px 18px', borderRadius: 12,
+              width: '100%', padding: '12px 18px', borderRadius: 14,
               border: 'none', background: 'var(--terracotta)', color: '#fff',
               fontWeight: 700, fontSize: 15, cursor: 'pointer', fontFamily: 'inherit',
             }}
@@ -99,7 +99,7 @@ export default function RegisterNudge() {
             type="button"
             onClick={close}
             style={{
-              width: '100%', padding: '10px 18px', borderRadius: 12,
+              width: '100%', padding: '10px 18px', borderRadius: 14,
               border: '1px solid var(--line)', background: 'transparent',
               color: 'var(--text-2)', fontWeight: 600, fontSize: 14,
               cursor: 'pointer', fontFamily: 'inherit',

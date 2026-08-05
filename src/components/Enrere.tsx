@@ -93,6 +93,7 @@ export default function Enrere({
       type="button"
       onClick={enrere}
       aria-label={etiqueta}
+      className="ap-prem ap-toc"
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 9,
         height: 40, padding: titol ? '0 15px 0 11px' : 0, width: titol ? undefined : 40,

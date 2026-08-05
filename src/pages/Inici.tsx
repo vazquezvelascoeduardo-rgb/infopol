@@ -139,7 +139,7 @@ function MiniStat({ icona, valor, unitat, etiqueta, tint, accent }: {
   return (
     <CardV pad={18} r={RV.lg}>
       <span style={{
-        width: 34, height: 34, borderRadius: 11, background: tint, color: accent,
+        width: 34, height: 34, borderRadius: 10, background: tint, color: accent,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
         <I n={icona} size={17} sw={1.9} />
@@ -162,7 +162,7 @@ function FilaTasca({ t }: { t: Tasca }) {
         display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none',
       }}>
       <span style={{
-        width: 36, height: 36, flexShrink: 0, borderRadius: 12, background: t.tint, color: t.accent,
+        width: 36, height: 36, flexShrink: 0, borderRadius: 14, background: t.tint, color: t.accent,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
         <I n={t.icona} size={17} sw={1.9} />

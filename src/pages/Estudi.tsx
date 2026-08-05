@@ -13,7 +13,7 @@ import { BLOCS, TEMES, temesDelBloc } from '../content/temari-pl';
 import { nDisponibles, teContingut } from '../content/temari-pl/carrega';
 import { BLOCS_MOSSOS, TEMES_MOSSOS, temesDeAmbit } from '../content/temari-mossos';
 import { nDisponiblesMossos, teContingutMossos } from '../content/temari-mossos/carrega';
-import { I, Mono, V } from '../lib/v3';
+import { I, Mono, SegV, V } from '../lib/v3';
 import { COSSOS, metaCos, useCos } from '../lib/cos';
 
 export default function Estudi() {
@@ -52,42 +52,8 @@ export default function Estudi() {
           </div>
         </div>
 
-        {/* Mateix commutador que a Acadèmia: la pastilla del cos actiu es
-            tenyeix del seu color i llisca en canviar. */}
-        <div style={{
-          position: 'relative', display: 'flex', gap: 5, padding: 5,
-          background: V.surface2, borderRadius: 14, flexShrink: 0,
-        }}>
-          <span
-            aria-hidden
-            style={{
-              position: 'absolute', top: 5, bottom: 5, left: 5,
-              width: `calc((100% - 15px) / ${COSSOS.length})`,
-              transform: `translateX(calc(${COSSOS.findIndex((c) => c.id === cos)} * (100% + 5px)))`,
-              borderRadius: 11, background: meta.accent,
-              transition: 'transform .32s cubic-bezier(.4,0,.2,1), background .32s ease',
-            }}
-          />
-          {COSSOS.map((c) => {
-            const on = c.id === cos;
-            return (
-              <button
-                key={c.id}
-                type="button"
-                onClick={() => setCos(c.id)}
-                aria-pressed={on}
-                style={{
-                  position: 'relative', cursor: 'pointer', border: 'none', borderRadius: 11,
-                  padding: '10px 17px', background: 'transparent',
-                  color: on ? '#fff' : V.muted,
-                  fontSize: 13, fontWeight: 800, letterSpacing: -0.3, whiteSpace: 'nowrap',
-                  transition: 'color .24s ease',
-                }}>
-                {c.label}
-              </button>
-            );
-          })}
-        </div>
+        {/* El mateix commutador que a tot arreu. */}
+        <SegV opcions={COSSOS.map((c) => ({ id: c.id, label: c.label }))} valor={cos} onTria={setCos} />
       </div>
 
       {cos === 'pl' ? (
@@ -152,7 +118,7 @@ export default function Estudi() {
             <div key={b.clau} style={{ marginBottom: 24 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 11, marginBottom: 13 }}>
                 <span style={{
-                  width: 26, height: 26, borderRadius: 8, background: meta.accent, color: '#fff',
+                  width: 26, height: 26, borderRadius: 10, background: meta.accent, color: '#fff',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: 12.5, fontWeight: 800,
                 }}>

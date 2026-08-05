@@ -49,7 +49,7 @@ export default function Recursos() {
       <section className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {PHONES.map((p) => (
           <a key={p.num} href={`tel:${p.num}`} className="a-hover" style={{ textDecoration: 'none', background: A.card, border: `1px solid ${A.line}`, borderRadius: 18, boxShadow: A.shadow, padding: 18, textAlign: 'center', display: 'block' }}>
-            <span style={{ width: 46, height: 46, borderRadius: 13, background: p.color, display: 'grid', placeItems: 'center', margin: '0 auto 10px' }}><Ic name="phone" size={22} color="#fff" sw={2.1} /></span>
+            <span style={{ width: 46, height: 46, borderRadius: 14, background: p.color, display: 'grid', placeItems: 'center', margin: '0 auto 10px' }}><Ic name="phone" size={22} color="#fff" sw={2.1} /></span>
             <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 24, color: A.ink, letterSpacing: -0.5 }}>{p.show}</div>
             <div style={{ fontFamily: A.sans, fontWeight: 600, fontSize: 12.5, color: A.inkSoft, marginTop: 2 }}>{p.label}</div>
           </a>

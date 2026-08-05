@@ -919,7 +919,7 @@ function MenuItem({ children, onClick, danger, active }: { children: ReactNode; 
   return (
     <button onClick={onClick} className="cq-mi" style={{
       display: 'flex', alignItems: 'center', gap: 9, width: '100%', textAlign: 'left', border: 'none',
-      background: active ? A.terraSoft : 'transparent', cursor: 'pointer', borderRadius: 8, padding: '8px 10px',
+      background: active ? A.terraSoft : 'transparent', cursor: 'pointer', borderRadius: 10, padding: '8px 10px',
       fontFamily: A.sans, fontWeight: 600, fontSize: 13.5, color: danger ? A.red : A.ink,
     }}>{children}</button>
   );
@@ -982,7 +982,7 @@ function VehModal({ el, onClose, onSave }: { el: El; onClose: () => void; onSave
   const lbl: CSSProperties = { display: 'block', fontFamily: A.display, fontWeight: 700, fontSize: 12, color: A.inkSoft, marginBottom: 5 };
   return (
     <div onMouseDown={onClose} style={{ position: 'fixed', inset: 0, zIndex: 130, background: 'rgba(21,21,28,0.45)', display: 'grid', placeItems: 'center', padding: 16 }}>
-      <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 'min(440px, 96vw)', maxHeight: '92vh', overflowY: 'auto', background: A.card, borderRadius: 20, boxShadow: A.shadowLg, padding: 22 }}>
+      <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 'min(440px, 96vw)', maxHeight: '92vh', overflowY: 'auto', background: A.card, borderRadius: 22, boxShadow: A.shadowLg, padding: 22 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
           <span style={{ width: 36, height: 36, borderRadius: 10, background: A.terracota, display: 'grid', placeItems: 'center', boxShadow: A.inset }}><Ic name="car" size={20} color="#fff" sw={2.2} /></span>
           <div style={{ marginRight: 'auto' }}>
@@ -1005,7 +1005,7 @@ function VehModal({ el, onClose, onSave }: { el: El; onClose: () => void; onSave
             {(Object.keys(ESTATS) as Estat[]).map((s) => (
               <button key={s} onClick={() => set({ estat: s })} style={{
                 border: `1.5px solid ${d.estat === s ? ESTATS[s].color : A.line2}`, background: d.estat === s ? ESTATS[s].color : A.card,
-                color: d.estat === s ? '#fff' : A.inkSoft, cursor: 'pointer', borderRadius: 11, padding: '10px 6px',
+                color: d.estat === s ? '#fff' : A.inkSoft, cursor: 'pointer', borderRadius: 10, padding: '10px 6px',
                 fontFamily: A.display, fontWeight: 700, fontSize: 12.5,
               }}>{ESTATS[s].label}</button>
             ))}
@@ -1031,7 +1031,7 @@ function VehModal({ el, onClose, onSave }: { el: El; onClose: () => void; onSave
                       border: `1.5px solid ${sel ? A.terracota : A.line2}`,
                       background: sel ? A.terraSoft : A.card,
                       color: sel ? A.ink : A.inkSoft,
-                      cursor: 'pointer', borderRadius: 11, padding: '10px 6px',
+                      cursor: 'pointer', borderRadius: 10, padding: '10px 6px',
                       fontFamily: A.display, fontWeight: 700, fontSize: 12.5,
                     }}>{label}</button>
                   );
@@ -1071,8 +1071,8 @@ function VehModal({ el, onClose, onSave }: { el: El; onClose: () => void; onSave
         </div>
 
         <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
-          <button onClick={onClose} style={{ flex: 1, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 12, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14, color: A.ink }}>Cancel·lar</button>
-          <button onClick={() => onSave(d)} style={{ flex: 1.4, border: 'none', background: A.ink, color: '#fff', cursor: 'pointer', borderRadius: 12, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14, boxShadow: A.shadowMd }}>Desar dades</button>
+          <button onClick={onClose} style={{ flex: 1, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 14, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14, color: A.ink }}>Cancel·lar</button>
+          <button onClick={() => onSave(d)} style={{ flex: 1.4, border: 'none', background: A.ink, color: '#fff', cursor: 'pointer', borderRadius: 14, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14, boxShadow: A.shadowMd }}>Desar dades</button>
         </div>
       </div>
     </div>
@@ -1545,7 +1545,7 @@ export default function Croquis() {
   h1 { font-size: 22px; margin: 0 0 4px; } h2 { font-size: 15px; margin: 26px 0 8px; border-bottom: 2px solid #B6531F; padding-bottom: 4px; }
   .meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12px; color: #44444F; margin: 8px 0 4px; }
   .meta b { color: #15151C; }
-  img { width: 100%; border: 1px solid #ddd; border-radius: 8px; }
+  img { width: 100%; border: 1px solid #ddd; border-radius: 10px; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   figure { margin: 0; } figcaption { font-size: 11px; color: #44444F; margin-top: 3px; font-weight: 600; }
   table { width: 100%; border-collapse: collapse; font-size: 10.5px; margin-top: 6px; }
@@ -1577,7 +1577,7 @@ export default function Croquis() {
   // Neteja del rAF en desmuntar.
   useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
 
-  const btn: CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: 7, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 11, padding: '9px 13px', fontFamily: A.display, fontWeight: 700, fontSize: 13.5, color: A.ink };
+  const btn: CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: 7, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 10, padding: '9px 13px', fontFamily: A.display, fontWeight: 700, fontSize: 13.5, color: A.ink };
   /** Botó fantasma: sense marc fins que hi passes per sobre. */
   const btnG: CSSProperties = { ...btn, border: '1px solid transparent', background: 'transparent' };
   const separador = <span style={{ width: 1, height: 26, background: A.line2, margin: '0 2px', flexShrink: 0 }} />;
@@ -1652,7 +1652,7 @@ export default function Croquis() {
           {mesObert && (
             <>
               <div onClick={() => setMesObert(false)} style={{ position: 'fixed', inset: 0, zIndex: 40 }} />
-              <div style={{ position: 'absolute', top: 'calc(100% + 8px)', right: 0, zIndex: 41, width: 268, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 16, boxShadow: A.shadowLg, padding: 7, display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <div style={{ position: 'absolute', top: 'calc(100% + 8px)', right: 0, zIndex: 41, width: 268, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 18, boxShadow: A.shadowLg, padding: 7, display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <Mono size={8.5} color={A.inkMuted} style={{ display: 'block', padding: '7px 10px 4px' }}>FONS DEL CROQUIS</Mono>
                 <MenuItem onClick={() => { setMesObert(false); bgFileRef.current?.click(); }}>📷 Posar una imatge de fons</MenuItem>
                 <MenuItem onClick={() => { setMesObert(false); openMaps(); }}>🗺️ Obrir a Google Maps</MenuItem>
@@ -1718,7 +1718,7 @@ export default function Croquis() {
               return (
                 <button key={g.group} onClick={() => { setCerca(''); setCat(i); }} title={g.group}
                   style={{
-                    position: 'relative', border: 'none', cursor: 'pointer', borderRadius: 12,
+                    position: 'relative', border: 'none', cursor: 'pointer', borderRadius: 14,
                     padding: '9px 0 7px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
                     background: on ? A.terracota : 'transparent',
                     boxShadow: 'none',
@@ -1745,7 +1745,7 @@ export default function Croquis() {
               <div className="cq-graella" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 7 }}>
                 {(resultats ?? PALETTE[cat].items).map((it) => (
                   <button key={`${it.kind}-${it.label}`} onClick={() => add(it.kind)} title={it.label}
-                    style={{ border: `1px solid ${A.line}`, background: A.card, cursor: 'pointer', borderRadius: 12, padding: '9px 5px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, boxShadow: A.shadow }}>
+                    style={{ border: `1px solid ${A.line}`, background: A.card, cursor: 'pointer', borderRadius: 14, padding: '9px 5px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, boxShadow: A.shadow }}>
                     <span style={{ fontSize: 21, lineHeight: 1 }}>{it.emoji}</span>
                     <span style={{ fontFamily: A.sans, fontWeight: 600, fontSize: 10, color: A.inkSoft, textAlign: 'center', lineHeight: 1.1 }}>{it.label}</span>
                   </button>
@@ -1904,7 +1904,7 @@ export default function Croquis() {
           <div style={{
             position: 'absolute', right: 14, bottom: 14, display: 'flex', alignItems: 'center', gap: 2,
             background: 'rgba(255,255,255,.9)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)',
-            border: `1px solid ${A.line2}`, borderRadius: 13, padding: 4, boxShadow: A.shadowLg,
+            border: `1px solid ${A.line2}`, borderRadius: 14, padding: 4, boxShadow: A.shadowLg,
           }}>
             <button onClick={() => zoom(0.83)} style={{ ...btn, padding: '5px 11px', fontSize: 18, border: 'none', background: 'transparent' }} aria-label="Allunyar">−</button>
             <button onClick={() => setView(fitView())} style={{ ...btn, padding: '6px 8px', border: 'none', background: 'transparent', fontFamily: A.mono, fontSize: 12, minWidth: 46, justifyContent: 'center' }} title="Ajustar a la pantalla">{pct}%</button>
@@ -1914,7 +1914,7 @@ export default function Croquis() {
 
           {/* Panell del fons de mapa */}
           {bgEl && (
-            <div style={{ position: 'absolute', left: 14, top: 14, zIndex: 8, display: 'flex', alignItems: 'center', gap: 10, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 13, padding: '8px 12px', boxShadow: A.shadowLg }}>
+            <div style={{ position: 'absolute', left: 14, top: 14, zIndex: 8, display: 'flex', alignItems: 'center', gap: 10, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 14, padding: '8px 12px', boxShadow: A.shadowLg }}>
               <span style={{ fontSize: 16 }}>🗺️</span>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <Mono size={8.5} color={A.inkMuted}>Fons · opacitat</Mono>
@@ -2029,7 +2029,7 @@ export default function Croquis() {
             return (
               <>
                 <div onMouseDown={() => setMenu(null)} onContextMenu={(e) => { e.preventDefault(); setMenu(null); }} style={{ position: 'absolute', inset: 0, zIndex: 20 }} />
-                <div style={{ position: 'absolute', left, top, zIndex: 21, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 13, boxShadow: A.shadowLg, padding: 6, minWidth: 206, maxHeight: size.h - 16, overflowY: 'auto' }}>
+                <div style={{ position: 'absolute', left, top, zIndex: 21, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 14, boxShadow: A.shadowLg, padding: 6, minWidth: 206, maxHeight: size.h - 16, overflowY: 'auto' }}>
                   {isVeh && (<>
                     <MenuItem onClick={() => { setEditVeh(el.id); setMenu(null); }}>🚗 Dades del vehicle…</MenuItem>
                     {sep}
@@ -2125,7 +2125,7 @@ function AtestatModal({ h, legend, onClose, onSave }: { h: Header; legend: boole
   );
   return (
     <div onMouseDown={onClose} style={{ position: 'fixed', inset: 0, zIndex: 130, background: 'rgba(21,21,28,0.45)', display: 'grid', placeItems: 'center', padding: 16 }}>
-      <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 'min(560px, 96vw)', maxHeight: '92vh', overflowY: 'auto', background: A.card, borderRadius: 20, boxShadow: A.shadowLg, padding: 22 }}>
+      <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 'min(560px, 96vw)', maxHeight: '92vh', overflowY: 'auto', background: A.card, borderRadius: 22, boxShadow: A.shadowLg, padding: 22 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
           <span style={{ width: 36, height: 36, borderRadius: 10, background: A.terracota, display: 'grid', placeItems: 'center', boxShadow: A.inset }}><Ic name="doc" size={19} color="#fff" sw={2.2} /></span>
           <div style={{ marginRight: 'auto' }}>
@@ -2165,8 +2165,8 @@ function AtestatModal({ h, legend, onClose, onSave }: { h: Header; legend: boole
         </label>
 
         <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
-          <button onClick={onClose} style={{ flex: 1, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 12, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14, color: A.ink }}>Cancel·lar</button>
-          <button onClick={() => onSave(d, lg)} style={{ flex: 1.4, border: 'none', background: A.ink, color: '#fff', cursor: 'pointer', borderRadius: 12, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14, boxShadow: A.shadowMd }}>Desar atestat</button>
+          <button onClick={onClose} style={{ flex: 1, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 14, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14, color: A.ink }}>Cancel·lar</button>
+          <button onClick={() => onSave(d, lg)} style={{ flex: 1.4, border: 'none', background: A.ink, color: '#fff', cursor: 'pointer', borderRadius: 14, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14, boxShadow: A.shadowMd }}>Desar atestat</button>
         </div>
       </div>
     </div>
@@ -2207,7 +2207,7 @@ function SkidCalcModal({ onClose }: { onClose: () => void }) {
   ];
   return (
     <div onMouseDown={onClose} style={{ position: 'fixed', inset: 0, zIndex: 130, background: 'rgba(21,21,28,0.45)', display: 'grid', placeItems: 'center', padding: 16 }}>
-      <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 'min(540px, 96vw)', maxHeight: '92vh', overflowY: 'auto', background: A.card, borderRadius: 20, boxShadow: A.shadowLg, padding: 22 }}>
+      <div onMouseDown={(e) => e.stopPropagation()} style={{ width: 'min(540px, 96vw)', maxHeight: '92vh', overflowY: 'auto', background: A.card, borderRadius: 22, boxShadow: A.shadowLg, padding: 22 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
           <span style={{ width: 36, height: 36, borderRadius: 10, background: A.terracota, display: 'grid', placeItems: 'center', boxShadow: A.inset, fontSize: 18 }}>🧮</span>
           <div style={{ marginRight: 'auto' }}>
@@ -2236,7 +2236,7 @@ function SkidCalcModal({ onClose }: { onClose: () => void }) {
               <button key={s.id} onClick={() => setMu(s.mu)} style={{
                 border: `1.5px solid ${mu === s.mu ? A.terracota : A.line2}`,
                 background: mu === s.mu ? A.terraSoft : A.card,
-                color: A.ink, cursor: 'pointer', borderRadius: 11, padding: '10px 6px',
+                color: A.ink, cursor: 'pointer', borderRadius: 10, padding: '10px 6px',
                 fontFamily: A.display, fontWeight: 700, fontSize: 11.5, lineHeight: 1.2,
               }}>
                 <div style={{ fontSize: 17, marginBottom: 4 }}>{s.emoji}</div>
@@ -2276,7 +2276,7 @@ function SkidCalcModal({ onClose }: { onClose: () => void }) {
         </div>
 
         <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
-          <button onClick={onClose} style={{ flex: 1, border: 'none', background: A.ink, color: '#fff', cursor: 'pointer', borderRadius: 12, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14 }}>Tancar</button>
+          <button onClick={onClose} style={{ flex: 1, border: 'none', background: A.ink, color: '#fff', cursor: 'pointer', borderRadius: 14, padding: '12px', fontFamily: A.display, fontWeight: 700, fontSize: 14 }}>Tancar</button>
         </div>
       </div>
     </div>

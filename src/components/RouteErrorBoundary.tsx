@@ -66,7 +66,7 @@ export default class RouteErrorBoundary extends Component<Props, State> {
             background: 'var(--paper, #F4F1EC)',
             color: 'var(--ink, #0E0E0E)',
             border: '1px solid var(--line, rgba(14,14,14,0.10))',
-            borderRadius: 16,
+            borderRadius: 18,
             fontFamily: 'Plus Jakarta Sans, system-ui, sans-serif',
           }}
         >
@@ -87,7 +87,7 @@ export default class RouteErrorBoundary extends Component<Props, State> {
             }}
             style={{
               padding: '10px 18px',
-              borderRadius: 12,
+              borderRadius: 14,
               border: 'none',
               background: 'var(--ink, #0E0E0E)',
               color: 'var(--paper, #F4F1EC)',

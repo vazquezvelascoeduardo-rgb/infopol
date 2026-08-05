@@ -995,14 +995,14 @@ export default function Croquis3D({ els, road, onClose }: { els: El[]; road: Roa
   const bg = els.find((e) => e.kind === 'fons');
   const followLetter = follow ? letters[follow] : null;
 
-  const btn: CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: 6, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 11, padding: '8px 12px', fontFamily: A.display, fontWeight: 700, fontSize: 13, color: A.ink };
+  const btn: CSSProperties = { display: 'inline-flex', alignItems: 'center', gap: 6, border: `1px solid ${A.line2}`, background: A.card, cursor: 'pointer', borderRadius: 10, padding: '8px 12px', fontFamily: A.display, fontWeight: 700, fontSize: 13, color: A.ink };
   const activeBtn: CSSProperties = { background: A.terracota, color: '#fff', border: `1px solid ${A.terracota}` };
 
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 140, background: '#0E0F13', display: 'flex', flexDirection: 'column' }}>
       {/* Barra superior */}
       <header style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', background: 'rgba(14,15,19,0.92)', borderBottom: '1px solid rgba(255,255,255,0.08)', flexWrap: 'wrap' }}>
-        <span style={{ width: 32, height: 32, borderRadius: 9, background: A.terracota, display: 'grid', placeItems: 'center' }}><Ic name="car" size={18} color="#fff" sw={2.2} /></span>
+        <span style={{ width: 32, height: 32, borderRadius: 10, background: A.terracota, display: 'grid', placeItems: 'center' }}><Ic name="car" size={18} color="#fff" sw={2.2} /></span>
         <div style={{ marginRight: 'auto' }}>
           <div style={{ fontFamily: A.display, fontWeight: 700, fontSize: 14.5, color: '#fff', letterSpacing: -0.2 }}>Recreació 3D</div>
           <Mono size={8.5} color="rgba(255,255,255,0.55)">El motor usa les velocitats reals dels vehicles</Mono>
@@ -1094,7 +1094,7 @@ export default function Croquis3D({ els, road, onClose }: { els: El[]; road: Roa
         {tl.vehs.length > 0 && (uiT > 0 || playing) && (
           <div style={{ position: 'absolute', top: 12, right: 12, display: 'flex', flexDirection: 'column', gap: 5, pointerEvents: 'none' }}>
             {tl.vehs.map((v) => (
-              <div key={v.id} style={{ background: 'rgba(21,21,28,0.82)', color: '#fff', borderRadius: 9, padding: '5px 11px', fontFamily: A.mono, fontWeight: 700, fontSize: 12 }}>
+              <div key={v.id} style={{ background: 'rgba(21,21,28,0.82)', color: '#fff', borderRadius: 10, padding: '5px 11px', fontFamily: A.mono, fontWeight: 700, fontSize: 12 }}>
                 {letters[v.id] || '?'} · {Math.round(live.current.kmh[v.id] ?? 0)} km/h
               </div>
             ))}

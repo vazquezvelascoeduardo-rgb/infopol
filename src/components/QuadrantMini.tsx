@@ -33,7 +33,7 @@ export default function QuadrantMini({ onObre }: { onObre: () => void }) {
       }}>
       <span style={{ display: 'flex', alignItems: 'center', gap: 13, marginBottom: 16 }}>
         <span style={{
-          width: 40, height: 40, flexShrink: 0, borderRadius: 13, background: V.terra,
+          width: 40, height: 40, flexShrink: 0, borderRadius: 14, background: V.terra,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
           <I n="calendar" size={19} sw={1.9} color="#fff" />
@@ -57,7 +57,7 @@ export default function QuadrantMini({ onObre }: { onObre: () => void }) {
             <span
               key={i}
               style={{
-                aspectRatio: '1', borderRadius: 8,
+                aspectRatio: '1', borderRadius: 10,
                 background: t ? t.color : 'rgba(255,255,255,.07)',
                 color: t ? '#fff' : 'rgba(255,255,255,.45)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',

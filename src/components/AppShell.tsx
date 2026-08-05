@@ -220,7 +220,7 @@ function BotoNav({
         aria-current={on ? 'page' : undefined}
         style={{
           width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none',
-          borderRadius: 13, padding: '11px 12px',
+          borderRadius: 14, padding: '11px 12px',
           background: on ? V.terra : 'transparent',
           color: on ? '#fff' : 'rgba(255,255,255,.6)',
           display: 'flex', alignItems: 'center', gap: 12, transition: 'background .18s ease',
@@ -284,7 +284,7 @@ function Lateral({
     <>
       <div style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '0 6px 22px' }}>
         <div style={{
-          width: 40, height: 40, borderRadius: 13, background: V.terra,
+          width: 40, height: 40, borderRadius: 14, background: V.terra,
           display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
         }}>
           <Escut />
@@ -401,7 +401,7 @@ function Lateral({
             type="button"
             onClick={() => onNavega('/perfil')}
             style={{
-              width: 36, height: 36, flexShrink: 0, borderRadius: 12, background: V.terra, border: 'none',
+              width: 36, height: 36, flexShrink: 0, borderRadius: 14, background: V.terra, border: 'none',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: 14, fontWeight: 800, color: '#fff', cursor: 'pointer',
             }}>
@@ -567,7 +567,7 @@ export default function AppShell() {
             onClick={() => setCalaix(true)}
             aria-label="Obre el menú"
             style={{
-              width: 40, height: 40, flexShrink: 0, border: `1px solid ${V.border}`, borderRadius: 12,
+              width: 40, height: 40, flexShrink: 0, border: `1px solid ${V.border}`, borderRadius: 14,
               background: V.surface, color: V.ink, cursor: 'pointer',
               alignItems: 'center', justifyContent: 'center',
             }}>
@@ -577,7 +577,7 @@ export default function AppShell() {
           <form onSubmit={cerca} style={{ flex: 1, maxWidth: 460, minWidth: 0 }}>
             <div style={{
               display: 'flex', alignItems: 'center', gap: 10, background: V.paper,
-              borderRadius: 12, padding: '10px 14px',
+              borderRadius: 14, padding: '10px 14px',
             }}>
               <I n="search" size={16} sw={2} color={V.muted} />
               <input

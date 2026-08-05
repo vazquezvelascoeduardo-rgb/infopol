@@ -112,7 +112,7 @@ export function Card({ children, pad = 22, style = {}, onClick, hover = false, c
       onClick={onClick}
       className={`${hover ? 'a-hover' : ''} ${className}`.trim()}
       style={{
-        background: A.card, borderRadius: 24, padding: pad, boxShadow: A.shadow,
+        background: A.card, borderRadius: 28, padding: pad, boxShadow: A.shadow,
         cursor: onClick ? 'pointer' : 'default', ...style,
       }}>
       {children}

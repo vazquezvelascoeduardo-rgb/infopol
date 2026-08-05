@@ -56,7 +56,7 @@ function BotoAccio({ simbol, children, onClick, perill }: {
       onClick={onClick}
       style={{
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
-        padding: '13px 6px', cursor: 'pointer', borderRadius: 13,
+        padding: '13px 6px', cursor: 'pointer', borderRadius: 14,
         border: `1px solid ${perill ? A.redSoft : A.line2}`, background: A.card,
         color: perill ? A.red : A.inkSoft,
         fontFamily: A.sans, fontSize: 11.5, fontWeight: 700,
@@ -125,7 +125,7 @@ export default function PanellPropietats({
                     onClick={() => update(el.id, { color: c })}
                     aria-label={`Color ${c}`}
                     style={{
-                      width: 27, height: 27, borderRadius: 9, background: c, cursor: 'pointer',
+                      width: 27, height: 27, borderRadius: 10, background: c, cursor: 'pointer',
                       border: el.color === c ? `2.5px solid ${A.ink}` : `1px solid ${A.line2}`,
                     }}
                   />

@@ -17,7 +17,7 @@ import {
   COLORS, afegeix, canviaColor, colorInfo, esborra, llegeix,
   type ColorSubratllat, type Subratllat,
 } from '../lib/subratllats';
-import { I, RV, V } from '../lib/v3';
+import { I, RV, SegV, V } from '../lib/v3';
 
 export type ModeLectura = 'llegir' | 'repas' | 'oclusio';
 
@@ -229,26 +229,11 @@ export default function LectorEstudi({
         marginBottom: 16, position: 'sticky', top: 0, zIndex: 20,
         background: V.paper, paddingBottom: 10,
       }}>
-        <div style={{ display: 'inline-flex', background: V.surface2, borderRadius: RV.pill, padding: 4, gap: 4 }}>
-          {MODES.map((m) => {
-            const on = mode === m.key;
-            return (
-              <button
-                key={m.key}
-                type="button"
-                onClick={() => setMode(m.key)}
-                aria-pressed={on}
-                style={{
-                  border: 'none', cursor: 'pointer', borderRadius: RV.pill, padding: '8px 16px',
-                  fontSize: 12.5, fontWeight: on ? 800 : 600,
-                  background: on ? V.surface : 'transparent', color: on ? V.ink : V.muted,
-                  boxShadow: on ? V.shadow : 'none',
-                }}>
-                {m.etiqueta}
-              </button>
-            );
-          })}
-        </div>
+        <SegV
+          opcions={MODES.map((m) => ({ id: m.key, label: m.etiqueta }))}
+          valor={mode}
+          onTria={setMode}
+        />
         <span style={{ fontSize: 12.5, color: V.muted }}>{ajuda}</span>
         {subs.length > 0 && (
           <span style={{ marginLeft: 'auto', fontSize: 12.5, color: V.muted }}>

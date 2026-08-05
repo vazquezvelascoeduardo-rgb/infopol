@@ -70,11 +70,11 @@ export default function Section() {
               onClick={() => nav(`/leyes/s/${c.moduleSlug}/${c.slug}`)}
               style={{
                 textAlign: 'left', cursor: 'pointer', border: `1px solid ${V.hair}`,
-                borderRadius: 16, padding: '14px 15px', background: V.surface, color: V.ink,
+                borderRadius: 18, padding: '14px 15px', background: V.surface, color: V.ink,
                 boxShadow: V.shadow, display: 'flex', alignItems: 'center', gap: 13,
               }}>
               <span style={{
-                width: 40, height: 40, flexShrink: 0, borderRadius: 13,
+                width: 40, height: 40, flexShrink: 0, borderRadius: 14,
                 background: `${accent}1F`, fontSize: 18,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>

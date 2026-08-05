@@ -12,6 +12,8 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
+import { useSortida } from './v3';
+
 /** La paleta del mode focus. Va a part de les `--v-*` perquè aquesta
  *  pantalla no canvia amb el tema: sempre és clara, com un examen. */
 export const FP = {
@@ -83,8 +85,8 @@ export function BarraFocus({
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, flexShrink: 0 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: esMobil ? 8 : 10, minWidth: 0 }}>
-        <button onClick={onAcabar} aria-label={etiquetaAcabar} style={{
-          width: 40, height: 40, borderRadius: 12, border: 'none', cursor: 'pointer', background: FP.card,
+        <button onClick={onAcabar} aria-label={etiquetaAcabar} className="ap-prem ap-toc" style={{
+          width: 40, height: 40, borderRadius: 14, border: 'none', cursor: 'pointer', background: FP.card,
           boxShadow: '0 1px 0 rgba(19,19,26,0.04), 0 4px 12px rgba(19,19,26,0.06)',
           display: 'grid', placeItems: 'center', color: FP.inkSoft, flexShrink: 0,
         }}><FIc name="x" size={18} /></button>
@@ -206,15 +208,17 @@ export function DialegFocus({
   onCancella: () => void;
   onConfirma: () => void;
 }) {
+  const { surt, tanca } = useSortida(onCancella);
+
   useEffect(() => {
-    const k = (e: KeyboardEvent) => { if (e.key === 'Escape') onCancella(); };
+    const k = (e: KeyboardEvent) => { if (e.key === 'Escape') tanca(); };
     window.addEventListener('keydown', k);
     return () => window.removeEventListener('keydown', k);
-  }, [onCancella]);
+  }, [tanca]);
 
   return createPortal((
-    <div className="ap-vel">
-      <button type="button" aria-label={cancella} onClick={onCancella}
+    <div className={surt ? 'ap-vel surt' : 'ap-vel'}>
+      <button type="button" aria-label={cancella} onClick={tanca}
         style={{ position: 'absolute', inset: 0, background: 'none', border: 'none', cursor: 'pointer' }} />
       <div role="dialog" aria-modal="true" className="ap-full" style={{ maxWidth: 420, padding: 24 }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 13, marginBottom: 18 }}>
@@ -229,13 +233,13 @@ export function DialegFocus({
           </div>
         </div>
         <div style={{ display: 'flex', gap: 10 }}>
-          <button type="button" onClick={onCancella} style={{
-            flex: 1, cursor: 'pointer', border: '1px solid var(--v-border)', borderRadius: 16,
+          <button type="button" onClick={tanca} style={{
+            flex: 1, cursor: 'pointer', border: '1px solid var(--v-border)', borderRadius: 18,
             padding: '14px 18px', background: 'var(--v-surface)', color: 'var(--v-ink)',
             fontSize: 14.5, fontWeight: 700,
           }}>{cancella}</button>
           <button type="button" className="ap-prem" onClick={onConfirma} style={{
-            flex: 1, cursor: 'pointer', border: 'none', borderRadius: 16, padding: '14px 18px',
+            flex: 1, cursor: 'pointer', border: 'none', borderRadius: 18, padding: '14px 18px',
             background: 'var(--v-granate)', color: '#fff', fontSize: 14.5, fontWeight: 800,
           }}>{confirma}</button>
         </div>

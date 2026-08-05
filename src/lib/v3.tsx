@@ -4,7 +4,32 @@
 // així el mode fosc funciona sol i el JS no ha de saber en quin tema
 // estem. Aquí només hi ha el joc d'icones i uns quants components que
 // es repeteixen a totes les pantalles.
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
+
+/**
+ * Tancar un full amb l'animació de sortida.
+ *
+ * Els fulls arribaven surant i marxaven de cop. Això retarda el tancament
+ * real el temps que dura l'animació i, mentrestant, marca el vel amb la
+ * classe `surt` perquè el CSS el faci fondre.
+ */
+export function useSortida(onTanca: () => void, ms = 200) {
+  const [surt, setSurt] = useState(false);
+  const rellotge = useRef<number | null>(null);
+
+  useEffect(() => () => {
+    if (rellotge.current !== null) window.clearTimeout(rellotge.current);
+  }, []);
+
+  const tanca = useCallback(() => {
+    if (rellotge.current !== null) return; // ja s'està tancant
+    setSurt(true);
+    rellotge.current = window.setTimeout(onTanca, ms);
+  }, [onTanca, ms]);
+
+  return { surt, tanca };
+}
 
 /** Variables de la paleta, per fer servir des de JS. */
 export const V = {
@@ -35,8 +60,21 @@ export const V = {
   mono: "'JetBrains Mono', ui-monospace, Menlo, monospace",
 } as const;
 
-/** Radis del disseny. */
-export const RV = { xs: 8, sm: 11, md: 16, lg: 20, xl: 24, pill: 99 } as const;
+/**
+ * Radis del disseny. Sis passos i cap més.
+ *
+ * Hi havia vint-i-quatre radis diferents escampats pel codi —10, 11, 12,
+ * 13, 14, 15…— i encara que un de sol no es noti, tots junts fan que res
+ * sembli de la mateixa família. Aquesta és l'escala:
+ *
+ *   xs 10  pastilles petites, plaques de lletra
+ *   sm 14  botons, camps, icones quadrades
+ *   md 18  files de llista, opcions
+ *   lg 22  targetes
+ *   xl 28  fulls i capçaleres grosses
+ *   pill   tot el que ha de ser rodó del tot
+ */
+export const RV = { xs: 10, sm: 14, md: 18, lg: 22, xl: 28, pill: 999 } as const;
 
 // Traços de les icones, tal com venen del disseny. Cada entrada és una
 // llista de paths que es dibuixen amb el mateix gruix.
@@ -201,13 +239,58 @@ export function CadenatPro({ titol = 'Amb subscripció' }: { titol?: string }) {
       gap: 8, textAlign: 'center', padding: 12,
     }}>
       <span style={{
-        width: 38, height: 38, borderRadius: 12, background: V.ink,
+        width: 38, height: 38, borderRadius: 14, background: V.ink,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
         <I n="lock" size={18} sw={1.9} color="var(--v-fill-fg)" />
       </span>
       <span style={{ fontSize: 12, fontWeight: 800, letterSpacing: -0.2, color: V.ink }}>{titol}</span>
     </span>
+  );
+}
+
+/**
+ * Commutador de dues a quatre opcions.
+ *
+ * N'hi havia cinc de diferents per la web: el de l'Acadèmia amb la
+ * pastilla taronja, el dels tests amb la pastilla blanca, el del
+ * Diagnòstic sense pastilla, el del lector… Cadascun amb el seu radi i
+ * el seu color. Ara tots són aquest: pastilla blanca que llisca, com la
+ * del telèfon. La resta de la pantalla ja porta l'accent; el commutador
+ * no l'ha de repetir.
+ */
+export function SegV<T extends string>({
+  opcions, valor, onTria, ample = false, style = {},
+}: {
+  opcions: { id: T; label: string }[];
+  valor: T;
+  onTria: (id: T) => void;
+  /** Ocupa tota l'amplada disponible en comptes d'ajustar-se al text. */
+  ample?: boolean;
+  style?: CSSProperties;
+}) {
+  const i = Math.max(0, opcions.findIndex((o) => o.id === valor));
+  return (
+    <div
+      className="ap-seg"
+      role="group"
+      style={{
+        ['--n' as never]: opcions.length,
+        ['--i' as never]: i,
+        ...(ample ? { display: 'flex', width: '100%' } : {}),
+        ...style,
+      } as CSSProperties}>
+      <span className="ap-seg-pastilla" aria-hidden />
+      {opcions.map((o) => (
+        <button
+          key={o.id}
+          type="button"
+          onClick={() => onTria(o.id)}
+          aria-pressed={o.id === valor}>
+          {o.label}
+        </button>
+      ))}
+    </div>
   );
 }
 

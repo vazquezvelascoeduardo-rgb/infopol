@@ -48,8 +48,8 @@ function Logo({ onClick, size = 26 }: { onClick?: () => void; size?: number }) {
 }
 
 function NavItem({ n, on, onClick }: { n: typeof NAV[number]; on: boolean; onClick: () => void }) {
-  return <button onClick={onClick} className="a-navitem" style={{ border: on ? `1px solid ${A.line}` : '1px solid transparent', cursor: 'pointer', textAlign: 'left', background: on ? A.card : 'transparent', boxShadow: on ? A.shadow : 'none', borderRadius: 13, padding: '10px 12px', display: 'flex', alignItems: 'center', gap: 12 }}>
-    <span style={{ width: 30, height: 30, borderRadius: 9, flexShrink: 0, background: on ? OP : A.bgDeep, display: 'grid', placeItems: 'center', boxShadow: on ? A.inset : 'none' }}><Ic name={n.icon} size={17} color={on ? '#fff' : A.inkSoft} sw={2.2} /></span>
+  return <button onClick={onClick} className="a-navitem" style={{ border: on ? `1px solid ${A.line}` : '1px solid transparent', cursor: 'pointer', textAlign: 'left', background: on ? A.card : 'transparent', boxShadow: on ? A.shadow : 'none', borderRadius: 14, padding: '10px 12px', display: 'flex', alignItems: 'center', gap: 12 }}>
+    <span style={{ width: 30, height: 30, borderRadius: 10, flexShrink: 0, background: on ? OP : A.bgDeep, display: 'grid', placeItems: 'center', boxShadow: on ? A.inset : 'none' }}><Ic name={n.icon} size={17} color={on ? '#fff' : A.inkSoft} sw={2.2} /></span>
     <span style={{ flex: 1 }}>
       <span style={{ display: 'block', fontFamily: A.display, fontWeight: on ? 700 : 600, fontSize: 14.5, color: on ? A.ink : A.inkSoft }}>{n.label}</span>
       {'kicker' in n && n.kicker && <Mono size={9} color={on ? OP : A.inkFaint} style={{ letterSpacing: 0.6 }}>{n.kicker}</Mono>}
@@ -87,7 +87,7 @@ export default function OperativaShellLayout() {
 
       <div id="a-scroll" style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', maxHeight: '100vh', overflowY: 'auto' }}>
         <header style={{ position: 'sticky', top: 0, zIndex: 30, background: 'rgba(244,241,234,0.82)', backdropFilter: 'blur(18px) saturate(160%)', WebkitBackdropFilter: 'blur(18px) saturate(160%)', borderBottom: `1px solid ${A.line}`, padding: '12px clamp(16px,3vw,34px)', display: 'flex', alignItems: 'center', gap: 14 }}>
-          <button onClick={() => setDrawer(true)} className="a-only-mobile" style={{ border: 'none', background: A.card, width: 42, height: 42, borderRadius: 12, boxShadow: A.shadow, cursor: 'pointer', placeItems: 'center', flexShrink: 0 }}><Ic name="menu" size={20} color={A.inkSoft} /></button>
+          <button onClick={() => setDrawer(true)} className="a-only-mobile" style={{ border: 'none', background: A.card, width: 42, height: 42, borderRadius: 14, boxShadow: A.shadow, cursor: 'pointer', placeItems: 'center', flexShrink: 0 }}><Ic name="menu" size={20} color={A.inkSoft} /></button>
           <form onSubmit={(e) => { e.preventDefault(); const v = topQ.trim(); nav(v ? `/superbuscador?q=${encodeURIComponent(v)}` : '/superbuscador'); }} style={{ flex: 1, maxWidth: 620, position: 'relative' }}>
             <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)' }}><Ic name="search" size={17} color={A.inkMuted} /></span>
             <input value={topQ} onChange={(e) => setTopQ(e.target.value)} placeholder="Cerca infracció, article, multa, punts…" style={{ width: '100%', border: `1px solid ${A.line2}`, background: A.card, borderRadius: 999, padding: '11px 16px 11px 40px', fontFamily: A.sans, fontSize: 14, color: A.ink, outline: 'none', boxShadow: A.shadow, boxSizing: 'border-box' }} />

@@ -7,7 +7,7 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { I, Mono, RV, V } from '../../lib/v3';
+import { I, Mono, RV, useSortida, V } from '../../lib/v3';
 
 export type FormatTest = 'study' | 'exam';
 
@@ -44,12 +44,15 @@ export default function ConfigTest({
   const opcions = [10, 25, 50].filter((n) => n <= total);
   useEffect(() => { setQuantes(opcions[1] ?? opcions[0] ?? 0); }, [total]);
 
+  // Tancar-lo el fa marxar avall abans de treure'l del tot.
+  const { surt, tanca } = useSortida(onTanca);
+
   // Amb Escape es tanca: és un full, no una pantalla.
   useEffect(() => {
-    const t = (e: KeyboardEvent) => { if (e.key === 'Escape') onTanca(); };
+    const t = (e: KeyboardEvent) => { if (e.key === 'Escape') tanca(); };
     window.addEventListener('keydown', t);
     return () => window.removeEventListener('keydown', t);
-  }, [onTanca]);
+  }, [tanca]);
 
   const n = quantes || total;
 
@@ -58,11 +61,11 @@ export default function ConfigTest({
   // fixa que hi hagi a dins es posiciona respecte a la pantalla i no
   // respecte a la finestra: el full sortiria descol·locat.
   return createPortal((
-    <div className="ap-vel">
+    <div className={surt ? 'ap-vel surt' : 'ap-vel'}>
       <button
         type="button"
         aria-label="Tanca"
-        onClick={onTanca}
+        onClick={tanca}
         style={{ position: 'absolute', inset: 0, background: 'none', border: 'none', cursor: 'pointer' }}
       />
 
@@ -93,8 +96,9 @@ export default function ConfigTest({
           </div>
           <button
             type="button"
-            onClick={onTanca}
+            onClick={tanca}
             aria-label="Tanca"
+            className="ap-prem ap-toc"
             style={{
               width: 34, height: 34, flexShrink: 0, borderRadius: '50%', cursor: 'pointer',
               border: `1px solid ${V.border}`, background: V.surface, color: V.muted,
@@ -146,13 +150,13 @@ export default function ConfigTest({
                   onClick={() => setFormat(f.id)}
                   aria-pressed={on}
                   style={{
-                    textAlign: 'left', cursor: 'pointer', borderRadius: 16, padding: 15,
+                    textAlign: 'left', cursor: 'pointer', borderRadius: 18, padding: 15,
                     border: on ? '2px solid var(--accent, var(--v-terra))' : `1px solid ${V.border}`,
                     background: on ? 'var(--accent-soft, var(--v-terra-soft))' : V.surface,
                     color: V.ink, display: 'flex', alignItems: 'center', gap: 12,
                   }}>
                   <span style={{
-                    width: 36, height: 36, flexShrink: 0, borderRadius: 12,
+                    width: 36, height: 36, flexShrink: 0, borderRadius: 14,
                     background: on ? 'var(--accent, var(--v-terra))' : V.surface2,
                     color: on ? '#fff' : V.muted,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -192,7 +196,7 @@ export default function ConfigTest({
         <div style={{ display: 'flex', gap: 10 }}>
           <button
             type="button"
-            onClick={onTanca}
+            onClick={tanca}
             style={{
               cursor: 'pointer', border: `1px solid ${V.border}`, borderRadius: RV.md,
               padding: '16px 20px', background: V.surface, color: V.ink,

@@ -103,7 +103,7 @@ export default function OnboardingTour() {
           width: '100%',
           maxWidth: 460,
           background: 'var(--paper)',
-          borderRadius: 20,
+          borderRadius: 22,
           border: '1px solid var(--line)',
           padding: '28px 24px',
           boxShadow: '0 20px 50px rgba(15, 23, 42, 0.25)',
@@ -189,7 +189,7 @@ export default function OnboardingTour() {
             style={{
               width: '100%',
               padding: '13px 20px',
-              borderRadius: 12,
+              borderRadius: 14,
               border: 'none',
               background: 'var(--ink)',
               color: 'var(--paper)',
@@ -208,7 +208,7 @@ export default function OnboardingTour() {
               style={{
                 width: '100%',
                 padding: '11px 20px',
-                borderRadius: 12,
+                borderRadius: 14,
                 border: '1px solid var(--line)',
                 background: 'transparent',
                 color: 'var(--text-2)',

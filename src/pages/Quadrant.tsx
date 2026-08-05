@@ -162,7 +162,7 @@ export default function Quadrant() {
                     aria-label={`${dia} de ${MESOS[mes]}${meta ? `, ${meta.nom}` : ''}`}
                     style={{
                       aspectRatio: '1', border: esAvui(dia) ? `2px solid ${V.ink}` : '2px solid transparent',
-                      borderRadius: 12, cursor: 'pointer',
+                      borderRadius: 14, cursor: 'pointer',
                       background: meta ? meta.color : V.paper,
                       color: meta ? '#fff' : V.ink,
                       display: 'flex', flexDirection: 'column',
