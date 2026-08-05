@@ -331,7 +331,9 @@ titol('5. La fletxa gira cap on gira el cub');
   // mateix sentit que la cara que tenen a sobre —això ho garanteix la prova
   // 4b, on U · MU · D' resulta ser el cub sencer girat—, i com que la fletxa
   // es dibuixa al mateix pla, ha de girar cap al mateix costat.
-  for (const mov of TOTS) {
+  // Només les de l'eix horitzontal són corbes. Les altres dues són rectes i
+  // es comproven a la 5e, que és una altra cosa.
+  for (const mov of TOTS.filter((m) => m.eix === 'y')) {
     for (const horari of [true, false]) {
       const fals = { inici: R.CARES.reduce((c, x) => ({ ...c, [x]: Array(9).fill('blanc') }), {}),
         moviments: [{ ...mov, horari }, { ...mov, horari }] };
@@ -371,9 +373,91 @@ titol('5. La fletxa gira cap on gira el cub');
   }
 }
 
+titol('5e. Les fletxes rectes pugen o baixen cap on va la capa de debò');
+{
+  // Als eixos vertical i frontal la fletxa és una barra recta amunt o avall.
+  // Que apunti bé no es pot deduir del dibuix mateix: s'ha de comparar amb
+  // el que fa el cub. Es pinta una casella del bloc, es fa el moviment, i es
+  // mira si al dibuix ha pujat o ha baixat. La casella que es mira és la que
+  // cau més a prop de la fletxa, que és on el moviment és vertical clavat.
+  const centreDe = (punts) => ({
+    x: punts.reduce((s, p) => s + p[0], 0) / punts.length,
+    y: punts.reduce((s, p) => s + p[1], 0) / punts.length,
+  });
+  const S = 24;
+  const centreDelMarc = (svg) => {
+    const [w, h] = svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/).slice(1).map(Number);
+    return { x: w / 2, y: h / 2 };
+  };
+  for (const mov of TOTS.filter((m) => m.eix !== 'y')) {
+    for (const horari of [true, false]) {
+      const m = { ...mov, horari };
+      // El moviment dibuixat tot sol, amb el cub al mig del marc: així es
+      // pot comparar amb `svgCub`, que també va centrat i a la mateixa
+      // escala. És l'única manera de saber quina casella queda sota la
+      // fletxa sense endevinar-ho.
+      const svg = R.svgMoviment(m, S);
+      const oM = centreDelMarc(svg);
+
+      // El cos de la fletxa: el polígon negre de quatre punts. La punta: el
+      // de tres. De l'un a l'altre surt cap on apunta.
+      const negres = [...svg.matchAll(/<polygon points="([^"]+)" fill="#15151C"/g)]
+        .map((x) => x[1].trim().split(/\s+/).map((q) => q.split(',').map(Number)));
+      const cossos = negres.filter((p) => p.length === 4);
+      const puntes = negres.filter((p) => p.length === 3);
+      cal('hi ha un cos de fletxa', cossos.length === 1, `${mov.eix}${mov.desde}: ${cossos.length}`);
+      cal('i una punta', puntes.length === 1, `${mov.eix}${mov.desde}: ${puntes.length}`);
+      if (!cossos.length || !puntes.length) continue;
+      const cos = centreDe(cossos[0]), pun = centreDe(puntes[0]);
+      const amunt = pun.y < cos.y ? -1 : 1;
+      cal('la fletxa és vertical de debò', Math.abs(pun.x - cos.x) < 1.5,
+        `${mov.eix}${mov.desde}: es desvia ${Math.abs(pun.x - cos.x).toFixed(1)}`);
+      // Cap on gira la fletxa. Una fletxa recta no és una fletxa «sense
+      // gir»: està posada a un costat de l'eix i apunta en una direcció, i
+      // això ja diu un sentit de rotació. Es mesura amb el producte creuat
+      // de la posició per la direcció: positiu vol dir cap a la dreta, a la
+      // pantalla, on la y creix cap avall.
+      const P = { x: cos.x - oM.x, y: cos.y - oM.y };
+      const D = { x: pun.x - cos.x, y: pun.y - cos.y };
+      const giraLaFletxa = Math.sign(P.x * D.y - P.y * D.x);
+      cal('la fletxa diu algun sentit', giraLaFletxa !== 0, `${mov.eix}${mov.desde}`);
+
+      // I cap on gira el cub: se sumen els moments de totes les caselles que
+      // es mouen. Es va provar de triar «la casella que hi ha sota la
+      // fletxa» i no funciona: la fletxa és fora del cub i la perspectiva la
+      // puja, o sigui que la més propera a la pantalla acaba sent una
+      // cantonada que es mou de gairell. El moment de totes plegades, en
+      // canvi, és el sentit del gir i prou.
+      let moment = 0, seguides = 0;
+      for (const [c, idx] of Object.entries(R.casellesQueEsMouen(m))) {
+        for (const i of idx) {
+          const abans = R.CARES.reduce((o, x) => ({ ...o, [x]: Array(9).fill('blanc') }), {});
+          abans[c] = [...abans[c]];
+          abans[c][i] = 'magenta';
+          const svgA = R.svgCub(abans, S);
+          const oC = centreDelMarc(svgA);
+          const A = trobaColor(svgA, R.COLORS.magenta);
+          const B = trobaColor(R.svgCub(R.aplica(abans, m), S), R.COLORS.magenta);
+          // Si desapareix cap al darrere, no es pot seguir.
+          if (A.length !== 1 || B.length !== 1) continue;
+          seguides++;
+          const rx = A[0].x - oC.x, ry = A[0].y - oC.y;
+          moment += rx * (B[0].y - A[0].y) - ry * (B[0].x - A[0].x);
+        }
+      }
+      cal('hi ha caselles que es puguin seguir', seguides >= 2,
+        `${mov.eix}${mov.desde}: ${seguides}`);
+      cal('la fletxa gira cap on gira la capa', Math.sign(moment) === giraLaFletxa,
+        `${mov.eix}${mov.desde}+${mov.quantes} ${horari ? 'horari' : 'antihorari'}: `
+        + `la fletxa va ${amunt < 0 ? 'amunt' : 'avall'} i el cub gira `
+        + `${moment > 0 ? 'cap a la dreta' : 'cap a l\'esquerra'}`);
+    }
+  }
+}
+
 titol('5b. La punta de la fletxa va on acaba el camí i apunta on va');
 {
-  for (const mov of TOTS) {
+  for (const mov of TOTS.filter((m) => m.eix === 'y')) {
     for (const horari of [true, false]) {
       const fals = { inici: R.CARES.reduce((c, x) => ({ ...c, [x]: Array(9).fill('blanc') }), {}),
         moviments: [{ ...mov, horari }, { ...mov, horari }] };

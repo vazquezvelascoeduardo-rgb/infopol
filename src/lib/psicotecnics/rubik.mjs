@@ -366,62 +366,91 @@ function dibuixaMoviment(cx, cy, mov, s) {
   // El radi, una mica més gran que el cub, perquè la fletxa surti de la
   // silueta i no es confongui amb les ratlles de les caselles.
   const R0 = 1.02;
-  const PASSOS = 14;
-
-  // CURTA. La primera que vaig fer donava tres quarts de volta al voltant
-  // del cub i no s'entenia: massa ratlla i massa lluny de la capa que
-  // gira. La del quadern és un ganxo curt al costat del cub, i amb això n'hi
-  // ha prou —una fletxa no ha de fer el camí, ha de dir cap on.
-  const TOMB = Math.PI * 0.52;
-
-  // I es posa a la part de baix, que és la que queda per davant i lliure.
-  // On cau això depèn de l'eix, o sigui que en comptes de calcular-ho a mà
-  // es prova tota la volta i es tria l'angle que baixa més a la pantalla.
-  let centre = 0, mesAvall = -Infinity;
-  for (let i = 0; i < 72; i++) {
-    const th = (i * 2 * Math.PI) / 72;
-    const co = Math.cos(th), si = Math.sin(th);
-    const p = [0, 1, 2].map((k) =>
-      0.5 + pla.n[k] * (alt - 0.5) + R0 * (co * pla.a[k] + si * pla.b[k]));
-    const y = proj(p[0], p[1], p[2], 1).y;
-    if (y > mesAvall) { mesAvall = y; centre = th; }
-  }
-  const signe = mov.horari ? -1 : 1;        // horari = angle que decreix
-  const desde = centre - signe * (TOMB / 2);
-
-  // La fletxa és una CINTA, no una ratlla. Al quadern és una fletxa negra
-  // ben gruixuda i es llegeix de lluny; una ratlla de dos punts, no. Es fa
-  // amb dos arcs, un per fora i un per dins, tancats en un sol polígon.
   const GRUIX = 0.10;
-  const punt = (t, r) => {
-    const th = desde + signe * t * TOMB;
-    const co = Math.cos(th), si = Math.sin(th);
-    return pt([0, 1, 2].map((k) =>
-      0.5 + pla.n[k] * (alt - 0.5) + r * (co * pla.a[k] + si * pla.b[k])));
+  const signe = mov.horari ? -1 : 1;        // horari = angle que decreix
+
+  // Un punt de la volta i la direcció cap on es mou, tots dos ja a la
+  // pantalla. La direcció surt de derivar la volta: si l'angle creix cap a
+  // un costat, el punt tira cap allà.
+  const enPla = (th, r) => [0, 1, 2].map((k) =>
+    0.5 + pla.n[k] * (alt - 0.5) + r * (Math.cos(th) * pla.a[k] + Math.sin(th) * pla.b[k]));
+  const puntDe = (th, r = R0) => pt(enPla(th, r));
+  const marxaDe = (th) => {
+    const q = pt([0, 1, 2].map((k) =>
+      0.5 + pla.n[k] * (alt - 0.5)
+      + R0 * (-Math.sin(th) * pla.a[k] + Math.cos(th) * pla.b[k])));
+    const c = pt([0, 1, 2].map((k) => 0.5 + pla.n[k] * (alt - 0.5)));
+    return { x: signe * (q.x - c.x), y: signe * (q.y - c.y) };
+  };
+  /** L'angle de la volta que va més lluny en la direcció que es demani. */
+  const cap = (dx, dy) => {
+    let quin = 0, val = -Infinity;
+    for (let i = 0; i < 180; i++) {
+      const th = (i * 2 * Math.PI) / 180;
+      const p = puntDe(th);
+      const v = p.x * dx + p.y * dy;
+      if (v > val) { val = v; quin = th; }
+    }
+    return quin;
   };
 
-  // El cos: PASSOS+1 punts per fora i els mateixos per dins, a l'inrevés.
-  // Així les proves poden retrobar la línia del mig fent la mitjana del punt
-  // i del seu company, que és el que diu cap on gira la fletxa.
-  const defora = Array.from({ length: PASSOS + 1 }, (_, i) => punt(i / PASSOS, R0 + GRUIX / 2));
-  const dedins = Array.from({ length: PASSOS + 1 }, (_, i) => punt(i / PASSOS, R0 - GRUIX / 2));
-  const cami = Array.from({ length: PASSOS + 1 }, (_, i) => punt(i / PASSOS, R0));
-  const cos = [...defora, ...[...dedins].reverse()];
-  const linia = `<polygon points="${cos.map((q) => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' ')}"`
-    + ` fill="${NEGRE}" stroke="none"/>`;
-
-  // La punta, orientada amb la tangent d'on acaba l'arc. Així apunta on va
-  // de veritat, i canvia sola quan canvia el sentit. Va ampla, com la del
-  // quadern: el que es veu primer d'una fletxa és cap on apunta.
-  const fi = cami[PASSOS], abans = cami[PASSOS - 2];
-  const ang = Math.atan2(fi.y - abans.y, fi.x - abans.x);
   const L = s * 0.40, OBRE = 0.55;
-  const ala = (g) => `${(fi.x - L * Math.cos(ang + g)).toFixed(1)},`
-    + `${(fi.y - L * Math.sin(ang + g)).toFixed(1)}`;
-  const punta = `<polygon points="${fi.x.toFixed(1)},${fi.y.toFixed(1)} ${ala(OBRE)} `
-    + `${ala(-OBRE)}" fill="${NEGRE}"/>`;
+  const puntaA = (fi, ang) => {
+    const ala = (g) => `${(fi.x - L * Math.cos(ang + g)).toFixed(1)},`
+      + `${(fi.y - L * Math.sin(ang + g)).toFixed(1)}`;
+    return `<polygon points="${fi.x.toFixed(1)},${fi.y.toFixed(1)} ${ala(OBRE)} `
+      + `${ala(-OBRE)}" fill="${NEGRE}"/>`;
+  };
 
-  return dibuixaCub(cx, cy, cub, s) + linia + punta;
+  let fletxa;
+  if (mov.eix === 'y') {
+    // LES HORITZONTALS, corbes. El pla es veu de pla i la corba es llegeix
+    // bé: un ganxo curt al costat del bloc, com al quadern.
+    const TOMB = Math.PI * 0.52;
+    const PASSOS = 14;
+    const centre = cap(0, 1);                 // a la part de baix, que és lliure
+    const desde = centre - signe * (TOMB / 2);
+    const punt = (t, r) => puntDe(desde + signe * t * TOMB, r);
+    const defora = Array.from({ length: PASSOS + 1 }, (_, i) => punt(i / PASSOS, R0 + GRUIX / 2));
+    const dedins = Array.from({ length: PASSOS + 1 }, (_, i) => punt(i / PASSOS, R0 - GRUIX / 2));
+    const cami = Array.from({ length: PASSOS + 1 }, (_, i) => punt(i / PASSOS, R0));
+    const cos = [...defora, ...[...dedins].reverse()];
+    const fi = cami[PASSOS], abans = cami[PASSOS - 2];
+    fletxa = `<polygon points="${cos.map((q) => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' ')}"`
+      + ` fill="${NEGRE}" stroke="none"/>`
+      + puntaA(fi, Math.atan2(fi.y - abans.y, fi.x - abans.x));
+  } else {
+    // LES ALTRES DUES, RECTES. Aquí el pla de la capa es veu gairebé de
+    // cantell: la volta surt feta una el·lipse xafada i la corba no diu res.
+    // L'Eduardo ho va dir: «las horizontales están bien, pero las verticales,
+    // ¿por qué no simplemente haces para arriba o para abajo? Es mucho más
+    // simple de entender».
+    //
+    // I ho és, i a més és exacte: al costat del cub, la capa puja o baixa, i
+    // prou. La fletxa es posa a l'extrem de fora —a la dreta si gira la capa
+    // de la dreta, a l'esquerra si gira la de davant— que és on la volta es
+    // veu de perfil, i allà la direcció del moviment és vertical clavada.
+    const fora = mov.eix === 'x' ? 1 : -1;
+    const th = cap(fora, 0);
+    const on = puntDe(th);
+    const m = marxaDe(th);
+    const llarg = Math.hypot(m.x, m.y) || 1;
+    // Només se'n guarda el sentit vertical: amunt o avall, res de mig i mig.
+    const amunt = m.y < 0 ? -1 : 1;
+    const D = s * 0.62;
+    const cap0 = { x: on.x, y: on.y - amunt * D * 0.5 };
+    const fi = { x: on.x, y: on.y + amunt * D * 0.5 };
+    const w = s * GRUIX;
+    fletxa = `<polygon points="${(cap0.x - w).toFixed(1)},${cap0.y.toFixed(1)} `
+      + `${(cap0.x + w).toFixed(1)},${cap0.y.toFixed(1)} `
+      + `${(fi.x + w).toFixed(1)},${fi.y.toFixed(1)} `
+      + `${(fi.x - w).toFixed(1)},${fi.y.toFixed(1)}" fill="${NEGRE}" stroke="none"/>`
+      + puntaA(fi, amunt > 0 ? Math.PI / 2 : -Math.PI / 2);
+    // `llarg` només serveix per no dividir per zero més amunt.
+    void llarg;
+  }
+
+  return dibuixaCub(cx, cy, cub, s) + fletxa;
 }
 
 const embolcall = (w, h, cos) =>
@@ -468,6 +497,20 @@ export function svgOpcio(item, i, s = 30) {
 export function svgCub(cub, s = 30) {
   const w = 2 * K * s + 8, h = 2 * s + 8;
   return embolcall(w, h, dibuixaCub(w / 2, h / 2, cub, s));
+}
+
+/**
+ * Un moviment sol, amb el cub CENTRAT al mig del marc.
+ *
+ * Hi és per a les proves: així es pot mirar on cau la fletxa i comparar-ho
+ * amb on cau cada casella a `svgCub`, que també va centrat. Sense això no hi
+ * havia manera de saber quina casella queda sota la fletxa, i la prova
+ * acabava triant-ne una de qualsevol —una cantonada, o la del mig del cub—
+ * que es mou en una altra direcció.
+ */
+export function svgMoviment(mov, s = 24) {
+  const w = s * 3;
+  return embolcall(w, w, dibuixaMoviment(w / 2, w / 2, mov, s));
 }
 
 export function svgFull(items) {

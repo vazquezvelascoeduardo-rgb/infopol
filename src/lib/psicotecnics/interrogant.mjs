@@ -267,9 +267,13 @@ function cubTransparent(cx, cy, item, s) {
     const m = `matrix(${(A.x - O.x).toFixed(4)} ${(A.y - O.y).toFixed(4)} `
       + `${(B.x - O.x).toFixed(4)} ${(B.y - O.y).toFixed(4)} `
       + `${O.x.toFixed(3)} ${O.y.toFixed(3)})`;
+    // Les del fons van del SEU color, però esvaïdes: és un cub de vidre, no
+    // un cub amb ombres. Al quadern es veuen així, i pintar-les de gris
+    // hauria amagat de quin color és cada figura, que és mitja resposta.
     const fig = fosca
-      ? `<path d="${FIGURES[item.simbol[k].forma]}" fill="none" stroke="${FLUIX}"`
-        + ` stroke-width="0.055" stroke-linejoin="round" stroke-linecap="round"/>`
+      ? `<path d="${FIGURES[item.simbol[k].forma]}" fill="none"`
+        + ` stroke="${pinta(item.simbol[k].color)}" stroke-opacity="0.32"`
+        + ` stroke-width="0.075" stroke-linejoin="round" stroke-linecap="round"/>`
       : figuraSvg(item.simbol[k]);
     return (fosca ? '' : `<polygon points="${pts}" fill="#fff" fill-opacity="0.82"/>`)
       + `<g transform="${m}">${fig}</g>`
