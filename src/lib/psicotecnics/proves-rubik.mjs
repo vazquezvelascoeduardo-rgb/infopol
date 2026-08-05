@@ -164,6 +164,52 @@ function girAcumulat(punts) {
   return { total, sempreIgual: signes.size === 1 };
 }
 
+titol('4b. Les capes del mig');
+{
+  // La prova que ho tanca, i que no me la puc inventar: girar una cara, la
+  // seva capa del mig i la de l'altra banda al revés és girar EL CUB SENCER.
+  // Si es fa amb un cub que té cada cara d'un color, cada cara ha de seguir
+  // sent d'un sol color. Si els cicles de la capa del mig estiguessin mal
+  // posats, quedarien caselles barrejades i es veuria.
+  const uniforme = () => Object.fromEntries(R.CARES.map((c) => [c, Array(9).fill(c)]));
+  const eixos = [
+    ['dalt', [['U', true], ['MU', true], ['D', false]]],
+    ['dalt al revés', [['U', false], ['MU', false], ['D', true]]],
+    ['davant', [['F', true], ['MF', true], ['B', false]]],
+    ['davant al revés', [['F', false], ['MF', false], ['B', true]]],
+    ['dreta', [['R', true], ['MR', true], ['L', false]]],
+    ['dreta al revés', [['R', false], ['MR', false], ['L', true]]],
+  ];
+  for (const [nom, passos] of eixos) {
+    let c = uniforme();
+    for (const [cara, h] of passos) c = R.mou(c, cara, h);
+    cal(`girar el cub sencer per l'eix de ${nom} deixa cada cara d'un color`,
+      R.CARES.every((x) => new Set(c[x]).size === 1), nom);
+    cal('...i el cub no es queda igual', R.clau(c) !== R.clau(uniforme()), nom);
+  }
+
+  const base = cubMarcat();
+  for (const m of R.CAPES_MIG) {
+    let c = base;
+    for (let i = 0; i < 4; i++) c = R.mou(c, m, true);
+    cal(`${m} quatre vegades torna al punt de partida`, R.clau(c) === R.clau(base), m);
+    cal(`${m} una vegada canvia alguna cosa`, R.clau(R.mou(base, m, true)) !== R.clau(base), m);
+    cal(`${m} i ${m}' es desfan`,
+      R.clau(R.mou(R.mou(base, m, true), m, false)) === R.clau(base), m);
+    // Una capa del mig no fa girar cap cara sobre ella mateixa: els centres
+    // de les sis cares es queden on són? No: quatre en canvien. El que sí
+    // que és cert és que mou dotze caselles i cap més.
+    const despres = R.mou(base, m, true);
+    const mogudes = R.CARES.flatMap((x) => base[x].filter((v, i) => despres[x][i] !== v));
+    cal(`${m} mou dotze caselles, ni una més`, mogudes.length === 12,
+      `${m}: ${mogudes.length}`);
+    // I no toca cap cantonada: les capes del mig només mouen arestes i
+    // centres. Les cantonades són els índexs 0, 2, 6 i 8.
+    const cantonades = R.CARES.flatMap((x) => [0, 2, 6, 8].filter((i) => despres[x][i] !== base[x][i]));
+    cal(`${m} no toca cap cantonada`, cantonades.length === 0, `${m}: ${cantonades.length}`);
+  }
+}
+
 titol('5. La fletxa gira cap on gira el cub');
 {
   const CARES_VISIBLES = ['U', 'F', 'R'];
@@ -221,9 +267,12 @@ titol('5. La fletxa gira cap on gira el cub');
     }
   }
 
-  // I ara la fletxa. Es dibuixa un ítem amb el moviment que es vol i se'n
-  // llegeix el camí.
-  for (const cara of CARES_VISIBLES) {
+  // I ara la fletxa, per als sis moviments que es demanen: les tres cares
+  // que es veuen i les tres capes del mig. Les capes del mig giren en el
+  // mateix sentit que la cara que tenen a sobre —això ho garanteix la prova
+  // 4b, on U · MU · D' resulta ser el cub sencer girat—, i com que la fletxa
+  // es dibuixa al mateix pla, ha de girar cap al mateix costat.
+  for (const cara of [...CARES_VISIBLES, ...R.CAPES_MIG]) {
     for (const horari of [true, false]) {
       const fals = { inici: R.CARES.reduce((c, x) => ({ ...c, [x]: Array(9).fill('blanc') }), {}),
         moviments: [{ cara, horari }, { cara, horari }] };
@@ -262,7 +311,7 @@ titol('5. La fletxa gira cap on gira el cub');
 
 titol('5b. La punta de la fletxa va on acaba el camí i apunta on va');
 {
-  for (const cara of ['U', 'F', 'R']) {
+  for (const cara of ['U', 'F', 'R', ...R.CAPES_MIG]) {
     for (const horari of [true, false]) {
       const fals = { inici: R.CARES.reduce((c, x) => ({ ...c, [x]: Array(9).fill('blanc') }), {}),
         moviments: [{ cara, horari }, { cara, horari }] };
@@ -288,6 +337,49 @@ titol('5b. La punta de la fletxa va on acaba el camí i apunta on va');
         `${cara} ${horari ? 'horari' : 'antihorari'}: ${cap.toFixed(1)}`);
     }
   }
+}
+
+titol('5c. Al dibuix del moviment hi ha pintat exactament el que es mou');
+{
+  for (const cara of ['U', 'F', 'R', ...R.CAPES_MIG]) {
+    const fals = { inici: R.CARES.reduce((c, x) => ({ ...c, [x]: Array(9).fill('blanc') }), {}),
+      moviments: [{ cara, horari: true }, { cara, horari: true }] };
+    const svg = R.svgEnunciat(fals);
+    const pintades = trobaColor(svg, R.COLORS.capa).length;
+    // Del dibuix només se'n veuen tres cares, o sigui que es compten les
+    // caselles que es mouen d'aquestes tres. I hi ha dos cubs de moviment.
+    const mou = R.casellesQueEsMouen(cara);
+    const toca = ['U', 'F', 'R'].reduce((s, c) => s + new Set(mou[c]).size, 0);
+    cal('hi ha pintat el que es mou, ni més ni menys', pintades === toca * 2,
+      `${cara}: pintades ${pintades}, n'hi hauria d'haver ${toca * 2}`);
+    cal('i alguna cosa hi ha pintada', toca > 0, cara);
+  }
+}
+
+titol('5d. Al full, l\'enunciat no trepitja la primera resposta');
+{
+  // Això hi és perquè va passar: en fer els cubs dels moviments més grossos,
+  // l'enunciat va passar de 300 a 340 d'ample i al full va quedar per sobre
+  // del primer cub de resposta. Ara es mira amb números.
+  const full = R.svgFull([1, 2].map((s) => R.generaItem(s)));
+  cal('el full surt sencer', !/NaN|undefined/.test(full));
+  const grups = [...full.matchAll(/<g transform="translate\((-?[\d.]+) (-?[\d.]+)\)">/g)]
+    .map((m) => ({ x: Number(m[1]), y: Number(m[2]) }));
+  const enunciats = grups.filter((g) => g.x === 10);
+  cal('hi ha un enunciat per pregunta', enunciats.length === 2, `${enunciats.length}`);
+  const respostes = grups.filter((g) => g.x !== 10).map((g) => g.x);
+  const primera = Math.min(...respostes);
+  // El cub de la resposta va centrat al seu punt, o sigui que comença mig
+  // cub abans.
+  const mitjCub = Math.cos(Math.PI / 6) * 26;
+  cal('l\'enunciat acaba abans que comenci la primera resposta',
+    10 + R.MIDA_ENUNCIAT.w <= primera - mitjCub,
+    `l'enunciat arriba a ${10 + R.MIDA_ENUNCIAT.w} i la resposta comença a `
+    + `${(primera - mitjCub).toFixed(0)}`);
+  // I que el full sigui prou ample per a l'última.
+  const ample = Number(full.match(/width="(\d+)"/)[1]);
+  cal('l\'última resposta cap al full', Math.max(...respostes) + mitjCub <= ample,
+    `arriba a ${(Math.max(...respostes) + mitjCub).toFixed(0)} i el full fa ${ample}`);
 }
 
 const N = 250;

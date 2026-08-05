@@ -46,6 +46,7 @@ const giraCara = (c) => [c[6], c[3], c[0], c[7], c[4], c[1], c[8], c[5], c[2]];
 // Els cicles de cada moviment: quines tres caselles de quina cara van a
 // parar a quines. Es llegeix «el que hi ha a A passa a B».
 const CICLES = {
+  // eslint-disable-next-line -- les capes del mig s'hi afegeixen més avall
   U: [['F', [0, 1, 2]], ['L', [0, 1, 2]], ['B', [0, 1, 2]], ['R', [0, 1, 2]]],
   D: [['F', [6, 7, 8]], ['R', [6, 7, 8]], ['B', [6, 7, 8]], ['L', [6, 7, 8]]],
   F: [['U', [6, 7, 8]], ['R', [0, 3, 6]], ['D', [2, 1, 0]], ['L', [8, 5, 2]]],
@@ -54,11 +55,34 @@ const CICLES = {
   R: [['U', [8, 5, 2]], ['B', [0, 3, 6]], ['D', [8, 5, 2]], ['F', [8, 5, 2]]],
 };
 
-/** Aplica un moviment. `cara` és una de les sis; `horari`, cap on gira. */
+// Les tres capes del mig. No són cares: són la llesca central del cub, i
+// quan giren no hi ha cap cara que roti sobre ella mateixa, només la cinta.
+//
+// Cadascuna gira en el mateix sentit que la cara que té a sobre, o sigui
+// que «horari» vol dir el mateix mirant des del mateix costat. La notació
+// de tota la vida no ho fa així —la M gira com l'esquerra i la E com la de
+// baix— però aquí la fletxa s'ha de veure des de davant, i si la llesca
+// girés com una cara amagada, el sentit sortiria capgirat a la pantalla.
+//
+// Els índexs són els de la cara del costat, però de la fila o la columna
+// del mig: on la de dalt agafa 0,1,2 la del mig agafa 3,4,5.
+const CICLES_MIG = {
+  MU: [['F', [3, 4, 5]], ['L', [3, 4, 5]], ['B', [3, 4, 5]], ['R', [3, 4, 5]]],
+  MF: [['U', [3, 4, 5]], ['R', [1, 4, 7]], ['D', [5, 4, 3]], ['L', [7, 4, 1]]],
+  MR: [['U', [7, 4, 1]], ['B', [1, 4, 7]], ['D', [7, 4, 1]], ['F', [7, 4, 1]]],
+};
+Object.assign(CICLES, CICLES_MIG);
+
+/** Les capes del mig, per saber quines no fan girar cap cara. */
+export const CAPES_MIG = Object.keys(CICLES_MIG);
+
+/** Aplica un moviment. `cara` és una de les sis o una capa del mig. */
 export function mou(cub, cara, horari = true) {
   const out = Object.fromEntries(Object.entries(cub).map(([k, v]) => [k, [...v]]));
-  // La cara que gira.
-  out[cara] = horari ? giraCara(cub[cara]) : giraCara(giraCara(giraCara(cub[cara])));
+  // La cara que gira. Les capes del mig no en tenen cap.
+  if (!CICLES_MIG[cara]) {
+    out[cara] = horari ? giraCara(cub[cara]) : giraCara(giraCara(giraCara(cub[cara])));
+  }
   // I la cinta de caselles de les quatre cares del voltant.
   const cicle = CICLES[cara];
   for (let i = 0; i < 4; i++) {
@@ -106,7 +130,9 @@ const MOVIMENTS = ['U', 'D', 'F', 'B', 'L', 'R'];
 // pel cub o s'hauria de posar al costat, i llavors es veuria des de l'altre
 // costat i el sentit sortiria capgirat. Val més tres cares que es vegin bé
 // que sis que enganyin.
-const GIRABLES = ['U', 'F', 'R'];
+// Les tres capes del mig també s'hi val: giren en el mateix sentit que la
+// cara que tenen a sobre, o sigui que la fletxa es veu igual de bé.
+const GIRABLES = ['U', 'F', 'R', 'MU', 'MF', 'MR'];
 
 export function generaItem(seed) {
   const r = rng(seed, 31);
@@ -242,14 +268,39 @@ function dibuixaCub(cx, cy, cub, s) {
 // creix gira en sentit ANTIhorari per a qui mira la cara de front —el
 // conveni de tota la vida—, i per tant el sentit horari és l'angle que
 // decreix.
+//
+// Les capes del mig fan servir el mateix pla que la cara que tenen a sobre
+// —giren en el mateix sentit—, però amb el centre al mig del cub i un radi
+// més gros, de manera que l'arc surt per fora de la silueta i es veu com un
+// cinturó. Si tingués el radi de la cara quedaria amagat dins del cub.
 const PLA = {
   U: { c: [0.5, 1, 0.5], n: [0, 1, 0], a: [1, 0, 0], b: [0, 0, -1] },
   F: { c: [0.5, 0.5, 1], n: [0, 0, 1], a: [1, 0, 0], b: [0, 1, 0] },
   R: { c: [1, 0.5, 0.5], n: [1, 0, 0], a: [0, 0, -1], b: [0, 1, 0] },
+  MU: { c: [0.5, 0.5, 0.5], n: [0, 1, 0], a: [1, 0, 0], b: [0, 0, -1], cinturo: true },
+  MF: { c: [0.5, 0.5, 0.5], n: [0, 0, 1], a: [1, 0, 0], b: [0, 1, 0], cinturo: true },
+  MR: { c: [0.5, 0.5, 0.5], n: [1, 0, 0], a: [0, 0, -1], b: [0, 1, 0], cinturo: true },
 };
 
-/** Els noms de les cares, per escriure'ls a sota. */
-export const NOM_CARA = { U: 'dalt', D: 'baix', F: 'davant', B: 'darrere', L: 'esquerra', R: 'dreta' };
+/** Els noms del que gira, per escriure'ls a sota. */
+export const NOM_CARA = {
+  U: 'dalt', D: 'baix', F: 'davant', B: 'darrere', L: 'esquerra', R: 'dreta',
+  MU: 'la capa del mig, horitzontal',
+  MF: 'la capa del mig, frontal',
+  MR: 'la capa del mig, vertical',
+};
+
+/**
+ * Quines caselles de cada cara es mouen. Serveix per pintar-les al dibuix
+ * del moviment: es llegeixen dels mateixos cicles que fan el gir, no d'una
+ * llista a part, o sigui que no poden dir una cosa diferent.
+ */
+export function casellesQueEsMouen(cara) {
+  const fora = Object.fromEntries(CARES.map((c) => [c, []]));
+  if (!CICLES_MIG[cara]) fora[cara] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+  for (const [c, idx] of CICLES[cara]) fora[c].push(...idx);
+  return fora;
+}
 
 /** Un cub petit amb la capa que gira pintada i una fletxa a sobre. */
 function dibuixaMoviment(cx, cy, mov, s) {
@@ -259,15 +310,21 @@ function dibuixaMoviment(cx, cy, mov, s) {
     return { x: cx + q.x, y: cy + q.y };
   };
 
-  // La capa que es mou, pintada, perquè es vegi quina és sense llegir res.
+  // El que es mou, pintat, perquè es vegi sense llegir res. Surt dels
+  // mateixos cicles que fan el gir.
   const cub = cubBlanc();
-  cub[mov.cara] = Array(9).fill('capa');
+  for (const [c, idx] of Object.entries(casellesQueEsMouen(mov.cara))) {
+    for (const i of idx) cub[c][i] = 'capa';
+  }
 
   // L'arc: tres quarts de volta, una mica separat de la cara perquè no es
-  // confongui amb les ratlles de les caselles.
-  const R0 = 0.62, FORA = 0.14, PASSOS = 26;
+  // confongui amb les ratlles de les caselles. A les capes del mig el radi
+  // és més gros perquè l'arc surti de la silueta i no quedi amagat.
+  const R0 = pla.cinturo ? 0.88 : 0.62;
+  const FORA = pla.cinturo ? 0 : 0.14;
+  const PASSOS = 26;
   const TOMB = (Math.PI * 3) / 2;
-  const desde = mov.cara === 'U' ? Math.PI * 0.15 : -Math.PI * 0.35;
+  const desde = (mov.cara === 'U' || pla.cinturo) ? Math.PI * 0.15 : -Math.PI * 0.35;
   const signe = mov.horari ? -1 : 1;        // horari = angle que decreix
 
   const punt = (t) => {
@@ -298,13 +355,22 @@ function dibuixaMoviment(cx, cy, mov, s) {
 const embolcall = (w, h, cos) =>
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet">${cos}</svg>`;
 
+/**
+ * Què ocupa l'enunciat. Va a part perquè el full de paper hi ha de deixar
+ * lloc: quan vaig fer els cubs dels moviments més grossos, l'enunciat va
+ * passar de 300 a 340 d'ample i al full va quedar per sobre de la primera
+ * resposta. L'Eduardo ho va veure de seguida: «el primer cubo sale colapsado
+ * con el ejemplo». Ara la mida surt d'aquí i el full la fa servir.
+ */
+export const MIDA_ENUNCIAT = { w: 340, h: 146 };
+
 /** L'enunciat: el cub de partida i els dos moviments. */
 export function svgEnunciat(item, s = 34) {
   // Els cubs dels moviments són gairebé tan grossos com el de partida. Al
   // principi eren la meitat i la fletxa hi quedava com una molla de pa: hi
   // cabia un arc de dotze punts d'ample, i no s'entenia res.
-  const w = 340, h = 140;
-  const petit = s * 0.76;
+  const w = MIDA_ENUNCIAT.w, h = MIDA_ENUNCIAT.h;
+  const petit = s * 0.70;
   const lletra = (x, y, t, mida, pes) => `<text x="${x}" y="${y}" text-anchor="middle"`
     + ` font-family="ui-sans-serif,system-ui,sans-serif" font-size="${mida}"`
     + ` font-weight="${pes}" fill="${NEGRE}">${t}</text>`;
@@ -314,10 +380,15 @@ export function svgEnunciat(item, s = 34) {
       const x = 200 + i * 90;
       // Tres línies a sota: quin moviment és, quina cara gira i cap on. La
       // fletxa ja ho diu, però escrit no hi ha res a interpretar.
-      return dibuixaMoviment(x, 60, m, petit)
-        + lletra(x, 104, `${i === 0 ? '1r' : '2n'} moviment`, 9.5, 600)
-        + lletra(x, 118, `cara de ${NOM_CARA[m.cara]}`, 10.5, 700)
-        + lletra(x, 131, m.horari ? 'sentit horari' : 'sentit antihorari', 9.5, 500);
+      // El nom de la capa del mig no cap en una línia: se separa per la coma.
+      const [qui, com] = NOM_CARA[m.cara].includes(',')
+        ? NOM_CARA[m.cara].split(', ')
+        : [`cara de ${NOM_CARA[m.cara]}`, null];
+      return dibuixaMoviment(x, 58, m, petit)
+        + lletra(x, 101, `${i === 0 ? '1r' : '2n'} moviment`, 9.5, 600)
+        + lletra(x, 114, qui, 10.5, 700)
+        + (com ? lletra(x, 125, com, 10.5, 700) : '')
+        + lletra(x, com ? 137 : 127, m.horari ? 'sentit horari' : 'sentit antihorari', 9.5, 500);
     }).join('');
   return embolcall(w, h, cos);
 }
@@ -333,11 +404,13 @@ export function svgCub(cub, s = 30) {
 }
 
 export function svgFull(items) {
-  const alt = 180;
+  const alt = 190;
+  // Les respostes comencen just després de l'enunciat, amb un dit de marge.
+  const X0 = 10 + MIDA_ENUNCIAT.w + 30;
   const cos = items.map((it, i) => {
     const y = i * alt;
     const op = it.opcions.map((_, k) => {
-      const x = 330 + k * 92;
+      const x = X0 + k * 72;
       return `<g transform="translate(${x} ${y + 74})">`
         + dibuixaCub(0, 0, it.opcions[k], 26) + '</g>'
         + `<text x="${x}" y="${y + 126}" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif"`
