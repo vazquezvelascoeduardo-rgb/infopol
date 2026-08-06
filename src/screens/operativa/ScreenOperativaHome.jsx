@@ -48,6 +48,15 @@ const NEWS = [
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
 
+// Actualitzat: 6 d'agost de 2026
+const NOTICIAS_DIA = [
+  { date: '08·06', tag: 'Internacional', title: 'La UE estudia més ajuda per Espanya per la crisi de Ceuta', desc: '72.000 persones van entrar des del Marroc, amb 75 morts. La GC alerta d\'una possible nova entrada massiva el 15 d\'agost.', url: 'https://es.euronews.com/my-europe/2026/08/06/comision-europea-estudia-ayuda-espana-crisis-migratoria-record-ceuta' },
+  { date: '08·04', tag: 'Successos', title: 'Detingut el cap a Espanya de la Xarxa 764, que extorquia menors per internet', desc: 'Operació conjunta de Mossos, Guàrdia Civil i Ertzaintza. Menor de 17 anys de Gipuzkoa ingressat en centre especialitzat.', url: 'https://spain.news-pravda.com/spain/2026/08/04/107526.html' },
+  { date: '08·06', tag: 'Esport', title: 'Infantino anuncia candidatura a la reelecció de la FIFA el 2027', desc: 'Malgrat el fracàs del pla comercial FIFA Forward Enterprise i l\'oposició creixent, es presenta com a únic candidat.', url: 'https://inside.fifa.com/es/news/gianni-infantino-presidente-reeleccion-2027-congreso-vancouver' },
+  { date: '08·06', tag: 'Internacional', title: 'Drons russos ataquen un vaixell de càrrega alemany al mar Negre', desc: 'Nou incident naval en el conflicte de l\'est d\'Europa. El Papa inicia viatge apostòlic a Mèxic i Uruguai.', url: 'https://es.euronews.com/video/2026/08/06/euronews-hoy-las-noticias-del-jueves-6-de-agosto-la-ue-estudia-mas-ayuda-para-espana-por-l' },
+  { date: '08·06', tag: 'Societat', title: 'La població d\'Espanya arriba als 49,8 milions, màxim de la sèrie', desc: 'Augment de 104.178 persones en el segon trimestre de 2026, la xifra més alta registrada fins ara.', url: 'https://www.eleconomista.es/economia/' },
+];
+
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
   return (
@@ -117,6 +126,23 @@ export default function ScreenOperativaHome() {
             <Chip icon="car" label="Control trànsit" />
             <Chip icon="siren" label="Detenció" />
           </div>
+        </div>
+      </div>
+
+      {/* Notícies del dia */}
+      <div style={{ padding: '14px 0 0' }}>
+        <SectionHead kicker="6 d'agost" kickerColor={T.cat.leyes.solid} title="Notícies del dia" action="Tot →" />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {NOTICIAS_DIA.map((n, i) => (
+            <div key={i} onClick={() => n.url && window.open(n.url, '_blank')} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.leyes.solid}`, boxShadow: T.shadow.card, cursor: 'pointer' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.leyes.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+              </div>
+              <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+              <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+            </div>
+          ))}
         </div>
       </div>
 
