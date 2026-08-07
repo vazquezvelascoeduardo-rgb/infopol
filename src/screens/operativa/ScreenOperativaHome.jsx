@@ -43,6 +43,11 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '08·07', tag: 'Política', title: 'Crisi migratòria a Ceuta — 60.000 entrades des del 30 de juliol', desc: 'El PP reclama compareixença de quatre ministres al Senat per explicar el desbordament a la frontera amb el Marroc.' },
+  { date: '08·07', tag: 'Economia', title: 'Espanya supera els 49,8 milions d\'habitants — màxim històric', desc: 'El PIB creixerà un 2,5% el 2026 liderant la zona euro. El lloguer baixa per primer cop en 52 mesos.' },
+  { date: '08·07', tag: 'Esports', title: 'El Barça tanca el fitxatge de Rodri per ~50 M€', desc: 'Incorporació prevista el 12 d\'agost. Plata per a l\'equip de gimnàstica rítmica a la competició per equips.' },
+  { date: '08·07', tag: 'Internacional', title: 'Venezuela reprèn el diàleg de transició set mesos després de Maduro', desc: 'Govern interí de Delcy Rodríguez i oposició negocien sota pressió dels EUA. Resten 379 presos polítics.' },
+  { date: '08·07', tag: 'Ciència', title: 'Telescopi Inouye descobreix vòrtexs de plasma inèdits al Sol', desc: 'Imatges de major resolució de la fotosfera solar revelen per primera vegada la inestabilitat de Kelvin-Helmholtz. Publicat a Nature.' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
