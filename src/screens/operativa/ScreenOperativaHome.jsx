@@ -48,6 +48,51 @@ const NEWS = [
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
 
+const DAILY_NEWS = [
+  {
+    date: '08·08',
+    tag: 'Successos ES',
+    title: 'Incendis forestals a Castelló i Huelva es compliquen',
+    desc: '275 efectius i 20 mitjans aeris. El foc de Niebla afecta 4.000 ha i obliga a evacuar 70 persones.',
+    url: 'https://es.euronews.com/my-europe/2026/08/08/los-incendios-forestales-en-espana-se-complican-en-castellon-y-huelva',
+  },
+  {
+    date: '08·08',
+    tag: 'Internacional',
+    title: 'Zelenski visita Sèrbia — primer viatge al país europeu aliat de Putin',
+    desc: 'Primera visita oficial a Belgrad. Agenda: economia, seguretat i relació de Sèrbia amb la UE.',
+    url: 'https://es.euronews.com/my-europe/2026/08/08/zelenski-pisa-por-primera-vez-serbia-el-pais-europeo-que-aun-no-ha-roto-con-putin',
+  },
+  {
+    date: '08·08',
+    tag: 'Economia ES',
+    title: 'Espanya, 4a economia de la UE — supera Bèlgica',
+    desc: 'Eurostat confirma un PIB de 1,69 bilions d\'euros (2025). Creix i s\'apropa a Itàlia (2,26 B€).',
+    url: 'https://es.euronews.com/business/2026/08/08/espana-es-la-4-economia-de-la-union-europea-por-delante-de-belgica-y-muy-cerca-de-italia',
+  },
+  {
+    date: '08·08',
+    tag: 'Internacional',
+    title: 'EE.UU. anunciarà 1.000 milions de dòlars d\'ajuda a Colòmbia',
+    desc: 'Paquet d\'assistència nord-americà coincidint amb la investidura del nou president colombià.',
+    url: 'https://es.euronews.com/video/2026/08/08/ultimas-noticias-08-agosto-2026-mediodia',
+  },
+  {
+    date: '08·07',
+    tag: 'Successos CAT',
+    title: 'Socavó del Putxet: el 40% dels veïns no tornarà fins al setembre',
+    desc: 'Un mes del forat de la L9 a Sant Gervasi. Nou sot detectat allarga la incertesa dels afectats.',
+    url: 'https://metropoliabierta.elespanol.com/sarria-sant-gervasi/20260807/incertidumbre-vecinos-desalojados-putxet-mes-socavon-l9-no-podra-volver-casa-septiembre/1003742785229_0.html',
+  },
+  {
+    date: '08·06',
+    tag: 'Successos ES',
+    title: 'Detingut a València per matar un client d\'un bar d\'un cop',
+    desc: 'El propietari de 62 anys, sense antecedents, colpeja un jove de 20 anys amb un objecte contundent.',
+    url: 'https://www.moncloa.com/2026/08/06/detenido-homicidio-bar-valencia-3411443',
+  },
+];
+
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
   return (
@@ -117,6 +162,24 @@ export default function ScreenOperativaHome() {
             <Chip icon="car" label="Control trànsit" />
             <Chip icon="siren" label="Detenció" />
           </div>
+        </div>
+      </div>
+
+      {/* Notícies del dia */}
+      <div style={{ padding: '14px 0 0' }}>
+        <SectionHead kicker="Avui · 8 ag." kickerColor={T.cat.leyes.solid} title="Notícies del dia" action="Tot →" />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {DAILY_NEWS.map((n, i) => (
+            <div key={i} onClick={() => n.url && window.open(n.url, '_blank')} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.leyes.solid}`, boxShadow: T.shadow.card, cursor: n.url ? 'pointer' : 'default' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.leyes.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+              </div>
+              <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+              <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && <div style={{ fontSize: 10.5, color: T.cat.leyes.solid, marginTop: 6, fontWeight: 700 }}>Llegir notícia →</div>}
+            </div>
+          ))}
         </div>
       </div>
 
