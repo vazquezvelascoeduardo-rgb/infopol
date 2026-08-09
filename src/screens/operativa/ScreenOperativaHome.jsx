@@ -43,6 +43,12 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '08·09', tag: 'OPE Mossos 46/26', title: 'OPE Mossos: termini 13 d\'agost per acreditar el català', desc: 'Fins al 13 d\'agost, els aspirants a les 1.587 places (634 reservades a dones) poden quedar exempts de la prova de català.', url: 'https://oposicionesmossosesquadra.com/convocatoria-mossos/' },
+  { date: '08·09', tag: 'Ciència · Astronomia', title: 'Eclipse solar total el 12 d\'agost — la totalitat passa per Catalunya', desc: 'Primer des del 1905. Franja: Terres de l\'Ebre, Camp de Tarragona i Ponent. Generalitat activa dispositiu especial de trànsit.', url: 'https://www.moncloa.com/2026/07/31/eclipse-solar-cataluna-12-agosto-3408456/' },
+  { date: '08·07', tag: 'Policial · Europol', title: '78 detinguts en una gran operació contra el tràfic de persones al Mediterrani', desc: 'Policia Nacional, Guàrdia Civil i Europol desmantellen la xarxa. 2.000 migrants, 18 embarcacions i 24 M€ decomissats.', url: 'https://www.moncloa.com/2026/08/07/red-trafico-personas-espana-78-detenidos-3412053/' },
+  { date: '08·07', tag: 'Judicial · TC', title: 'TC: Stc. 54/2026 sobre el recurs contra la Llei d\'Amnistia', desc: 'Castella-La Manxa impugnà la LO 1/2024 (normalització a Catalunya). El TC resol el recurs d\'inconstitucionalitat 6552-2024.', url: 'https://www.tribunalconstitucional.es/es/jurisprudencia/Paginas/Sentencias.aspx' },
+  { date: '08·04', tag: 'Economia · Habitatge', title: 'La vivenda a Catalunya arriba a 3.504 €/m², nou rècord històric', desc: '+13,1% interanual al juliol a Catalunya. A tot l\'Estat: +15,8% al segon trimestre, superant el màxim de la bombolla del 2007.', url: 'https://www.pressdigital.es/articulo/economia/2026-08-04/5974883-vivienda-usada-alcanza-nuevo-maximo-historico-subir-131-julio-segun-idealista' },
+  { date: '08·01', tag: 'Esports · Natació', title: 'Europeu natació artística: Espanya guanya vuit medalles a París', desc: 'Iris Tió / Lilou Lluís, subcampiones en rutina lliure. L\'equip guanya la plata amb "Berghain" de Rosalía. París, 31 jul – 16 ago.', url: 'https://www.olympics.com/es/noticias/nataciona-artistica-espana-berghain-plata-impresion-artistica-europeo-2026-acrobatico' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -132,6 +138,11 @@ export default function ScreenOperativaHome() {
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 6, fontSize: 11, fontWeight: 700, color: T.cat.operativa.solid, textDecoration: 'none' }}>
+                  Llegir més →
+                </a>
+              )}
             </div>
           ))}
         </div>
