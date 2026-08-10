@@ -43,6 +43,14 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '08·10', tag: 'Internacional', title: 'Netanyahu rebutja el pla de pau de Trump per a Gaza', desc: 'Israel exigeix el desarmament total de Hamas abans de qualsevol retirada. Tensió diplomàtica entre Jerusalem i Washington.' },
+  { date: '08·10', tag: 'Internacional', title: 'Inundacions a l\'Assam (Índia): 100 morts i 700.000 desplaçats', desc: 'Les pluges del monsó han desbordat el Brahmaputra. Prop de 300.000 persones evacuen a camps governamentals.' },
+  { date: '08·10', tag: 'Política', title: 'Junts exigeix excloure Catalunya del repartiment de menors de Ceuta', desc: 'La formació avisa que retirarà el suport legislatiu al Govern si s\'imposen quotes. Nogueras acusa Illa d\'anteponer els interessos de Sánchez als de Catalunya.' },
+  { date: '08·10', tag: 'Medi Ambient', title: 'Impugnen el pla català de renovables malgrat el retard de l\'autonomia', desc: 'Una coalició porta als tribunals el pla energètic de la Generalitat, posant en risc els objectius de transició energètica de Catalunya.' },
+  { date: '08·10', tag: 'Astronomia', title: 'Eclipse solar total: dimecres el primer visible a Espanya en més d\'un segle', desc: 'El 12 d\'agost la franja de totalitat creuarà la meitat nord peninsular. El proper eclipsi total des d\'Espanya no serà fins al 2180.' },
+  { date: '08·10', tag: 'Ciència', title: 'Espanya atorga els Premis Nacionals d\'Investigació 2026', desc: 'Ángel Carracedo i Carmen Gutiérrez entre els guardonats. Per primera vegada, els premis joves recauen en dones.' },
+  { date: '08·10', tag: 'Esports', title: 'El Barça prioritza Julián Álvarez com a davanter en l\'últim mes de mercat', desc: 'Deco i Flick acorden tres fitxatges més per tancar la plantilla 2026-27. Cancelo, Bisiwu, Adeyemi i Gordon ja estan incorporats.' },
+  { date: '08·10', tag: 'Economia', title: 'Espanya creix un 2,5% el 2026 i lidera la zona euro', desc: 'Consum, turisme i fons NextGenerationEU consoliden el diferencial positiu respecte a la resta de la zona euro.' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
