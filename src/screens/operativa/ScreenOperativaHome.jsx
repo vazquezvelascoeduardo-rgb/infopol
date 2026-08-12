@@ -43,9 +43,19 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
-  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
-  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
-  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
+  // — 12 agost 2026 —
+  { date: '08·12', tag: 'Astronomia', title: 'Eclipse solar total — primer a la Península Ibèrica des de 1905', desc: 'El camí de totalitat cobreix Galícia, Aragó, Lleida, Tarragona, el País Valencià i Balears. Entre 1 i 2 minuts de foscor total a la posta de sol.', url: 'https://cnnespanol.cnn.com/2026/08/12/espana/live-news/eclipse-solar-total-en-vivo-imagenes-videos-orix' },
+  { date: '08·12', tag: 'Seguretat', title: 'Catalunya: 30 tiroteus en 2026 vinculats al crim organitzat', desc: 'Els Mossos registren un augment significatiu respecte al 2025. L\'últim incident, al carrer Balmes de Barcelona. La Fiscalia investiga xarxes de narcotràfic.', url: 'https://prensaygente.com/cataluna-registra-30-tiroteos-en-2026-es-una-ejecucion-y-un-nivel-de-profesionalidad-dificil-de-ver/' },
+  { date: '08·12', tag: 'Esport', title: 'La Vuelta a Espanya 2026 comença el 22 d\'agost des de Mònaco', desc: '81a edició amb 3.275 km, 21 etapes i nou finals en alt. La cursa passa per Andorra i conclou a Granada, substituint Madrid com a meta final.', url: 'https://www.eurosport.es/ciclismo/vuelta-a-espana/2026/fechas-perfiles-recorrido-etapas-favoritos-horarios-donde-ver-por-television-online-streaming_sto23327107/story.shtml' },
+  { date: '08·12', tag: 'Ciència', title: 'Premis Breakthrough 2026: sis guardons de 3 M$ per a la ciència', desc: 'Els "Òscar de la ciència" reconeixen investigadors en biociències, física fonamental i matemàtiques. Cerimònia a Santa Mònica amb presència de Hollywood.', url: 'https://www.porlalinea.com.do/premios-breakthrough-2026-hollywood-ciencia/' },
+  { date: '08·12', tag: 'Economia', title: 'Espanya lidera el creixement de la eurozona el 2026 (+2,1% PIB)', desc: 'La inversió en fons europeus i la creació d\'ocupació (+2%) impulsen l\'economia espanyola per sobre Alemanya i França.', url: 'https://www.caixabank.com/es/esfera/content/perspectivas-crecimiento-economia-espana-2026' },
+  { date: '08·11', tag: 'Emergències', title: 'Incendis a Espanya: 800 evacuats i 20.000 ha cremades a Huelva', desc: 'Quatre focus actius a Huelva, Castelló, Segòvia i Lleó. L\'incendi de Niebla, fora de capacitat d\'extinció, mobilitza 600 bombers i 26 aeronaus.', url: 'https://es.euronews.com/my-europe/2026/08/11/incendios-espana-fuego-avanza-huelva-huesca-tregua-segovia' },
+  { date: '08·05', tag: 'Internacional', title: 'Terratremol de 7,4 a Colòmbia: 181 morts i 2.500 ferits', desc: 'Sisme de gran magnitud amb 195 desapareguts i milers d\'habitatges danyats. L\'emergència humanitària s\'estén per diverses regions del país.', url: 'https://havanatimesenespanol.org/noticias/las-noticias-internacionales-en-breve-del-miercoles-5-de-agosto-de-2026/' },
+  { date: '08·04', tag: 'Geopolítica', title: 'Trump suspèn atacs a l\'Iran enmig de negociacions nuclears', desc: 'EUA atura les operacions militars mentre continuen les converses sobre el programa nuclear i la reobertura de l\'Estret d\'Ormuz, bloquejat per la Guàrdia Revolucionària iraniana.', url: 'https://havanatimesenespanol.org/noticias/las-noticias-internacionales-en-breve-del-lunes-3-de-agosto-de-2026/' },
+  // — normativa vigent —
+  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.', url: null },
+  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.', url: null },
+  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.', url: null },
 ];
 
 export default function ScreenOperativaHome() {
@@ -132,6 +142,11 @@ export default function ScreenOperativaHome() {
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: T.cat.operativa.solid, fontWeight: 700, marginTop: 7, display: 'inline-block', textDecoration: 'none' }}>
+                  Llegir notícia →
+                </a>
+              )}
             </div>
           ))}
         </div>
