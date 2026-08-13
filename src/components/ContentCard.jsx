@@ -1,6 +1,7 @@
 import { T } from '../tokens';
 import Icon from './Icon';
 import { useContent } from '../content/ContentProvider';
+import { APP_VERSION, buildDateLabel, platformLabel, deviceLabel } from '../content/buildInfo';
 
 function statusInfo(meta) {
   switch (meta.status) {
@@ -68,6 +69,22 @@ export default function ContentCard() {
         >
           {busy ? 'Comprovant…' : 'Actualitzar'}
         </button>
+      </div>
+
+      {/* Identitat del build: compara aquests valors entre dispositius per
+          saber si tots dos executen exactament el mateix. */}
+      <div style={{ marginTop: 12, paddingTop: 10, borderTop: `1px solid ${T.hairline}`, display: 'flex', flexWrap: 'wrap', gap: '4px 10px' }}>
+        {[
+          ['App', `v${APP_VERSION}`],
+          ['Build', buildDateLabel()],
+          ['Entorn', platformLabel()],
+          ['Dispositiu', deviceLabel()],
+        ].map(([label, value]) => (
+          <div key={label} style={{ fontSize: 10.5, color: T.inkFaint, fontFamily: T.fontMono }}>
+            <span style={{ textTransform: 'uppercase', letterSpacing: 0.4 }}>{label}</span>{' '}
+            <span style={{ color: T.inkMuted, fontWeight: 700 }}>{value}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
