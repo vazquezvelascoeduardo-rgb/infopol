@@ -89,5 +89,5 @@ npm run deploy:android
 - **Android Package**: `app.infopol.mossos`
 
 ## Versió actual
-- Version: 1.0.0
-- Build: 1
+- Version: 1.1.0
+- Build: 2
