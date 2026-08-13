@@ -2,6 +2,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { T } from '../tokens';
 import Icon from '../components/Icon';
 import { StatusBar, TabBar, ProgressBar } from '../components/Shared';
+import ContentCard from '../components/ContentCard';
 
 const OP_TABS = [
   { id: 'home', label: 'Inici', icon: 'home', path: '/operativa' },
@@ -106,6 +107,11 @@ export default function ScreenPerfil() {
         </div>
 
         {/* settings */}
+        <div style={{ padding: '16px 16px 0' }}>
+          <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 8 }}>Contingut</div>
+          <ContentCard />
+        </div>
+
         <div style={{ padding: '16px 16px 0' }}>
           <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 8 }}>Configuració</div>
           <div style={{ background: '#fff', borderRadius: T.r.lg, boxShadow: T.shadow.card, overflow: 'hidden' }}>

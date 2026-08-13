@@ -3,7 +3,8 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { StatusBar, SearchField, NavHeader } from '../../components/Shared';
-import { INFRACTIONS, searchInfractions } from '../../data/infractions';
+import { searchInfractions } from '../../data/infractions';
+import { useContent } from '../../content/ContentProvider';
 
 const SEV_COLOR = {
   mg: 'alcohol',
@@ -11,14 +12,16 @@ const SEV_COLOR = {
   l: 'atajos',
 };
 
-const FILTERS = [
-  { id: 'totes', label: 'Totes', count: INFRACTIONS.length },
-  { id: 'mg', label: 'Molt greus', count: INFRACTIONS.filter(i => i.sev === 'mg').length },
-  { id: 'g', label: 'Greus', count: INFRACTIONS.filter(i => i.sev === 'g').length },
-  { id: 'l', label: 'Lleus', count: INFRACTIONS.filter(i => i.sev === 'l').length },
-  { id: 'lsv', label: 'LSV', count: INFRACTIONS.filter(i => i.article.includes('LSV')).length },
-  { id: 'rgc', label: 'RGC', count: INFRACTIONS.filter(i => i.article.includes('RGC')).length },
-];
+function buildFilters(list) {
+  return [
+    { id: 'totes', label: 'Totes', count: list.length },
+    { id: 'mg', label: 'Molt greus', count: list.filter(i => i.sev === 'mg').length },
+    { id: 'g', label: 'Greus', count: list.filter(i => i.sev === 'g').length },
+    { id: 'l', label: 'Lleus', count: list.filter(i => i.sev === 'l').length },
+    { id: 'lsv', label: 'LSV', count: list.filter(i => i.article.includes('LSV')).length },
+    { id: 'rgc', label: 'RGC', count: list.filter(i => i.article.includes('RGC')).length },
+  ];
+}
 
 function InfraccionRow({ inf, onClick }) {
   const sevCat = T.cat[SEV_COLOR[inf.sev] || 'atajos'];
@@ -49,7 +52,9 @@ export default function ScreenInfraccions() {
   const [query, setQuery] = useState(params.get('q') || '');
   const [filter, setFilter] = useState('totes');
 
-  const results = useMemo(() => searchInfractions(query, filter), [query, filter]);
+  const { infractions: INFRACTIONS = [] } = useContent();
+  const FILTERS = useMemo(() => buildFilters(INFRACTIONS), [INFRACTIONS]);
+  const results = useMemo(() => searchInfractions(query, filter, INFRACTIONS), [query, filter, INFRACTIONS]);
 
   return (
     <div className="screen">

@@ -18,6 +18,9 @@ import ScreenTest from './screens/academia/ScreenTest';
 import ScreenFlashcards from './screens/academia/ScreenFlashcards';
 import ScreenStats from './screens/academia/ScreenStats';
 import ScreenFisiques from './screens/academia/ScreenFisiques';
+import ScreenTemaDetall from './screens/academia/ScreenTemaDetall';
+import ScreenPsicotecnics from './screens/academia/ScreenPsicotecnics';
+import ScreenPsicoTest from './screens/academia/ScreenPsicoTest';
 
 const OP_TABS = [
   { id: 'home', label: 'Inici', icon: 'home', path: '/operativa' },
@@ -55,7 +58,7 @@ function AcademiaShell() {
   const p = loc.pathname;
   let active = 'home';
   if (p.includes('/temari')) active = 'temari';
-  else if (p.includes('/test') || p.includes('/flashcards')) active = 'tests';
+  else if (p.includes('/test') || p.includes('/flashcards') || p.includes('/psicotecnics')) active = 'tests';
   else if (p.includes('/stats') || p.includes('/fisiques')) active = 'stats';
   return (
     <>
@@ -81,6 +84,9 @@ export default function App() {
       <Route path="/academia" element={<AcademiaShell />}>
         <Route index element={<ScreenAcademiaHome />} />
         <Route path="temari" element={<ScreenTemari />} />
+        <Route path="temari/:temaId" element={<ScreenTemaDetall />} />
+        <Route path="psicotecnics" element={<ScreenPsicotecnics />} />
+        <Route path="psicotecnics/:catId" element={<ScreenPsicoTest />} />
         <Route path="test" element={<ScreenTest />} />
         <Route path="flashcards" element={<ScreenFlashcards />} />
         <Route path="stats" element={<ScreenStats />} />

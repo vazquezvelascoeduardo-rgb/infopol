@@ -405,9 +405,9 @@ export const INFRACTIONS = [
   },
 ];
 
-export function searchInfractions(query = '', filter = 'totes') {
+export function searchInfractions(query = '', filter = 'totes', list = INFRACTIONS) {
   const q = query.toLowerCase().trim();
-  return INFRACTIONS.filter(inf => {
+  return (list || []).filter(inf => {
     const matchFilter =
       filter === 'totes' ||
       (filter === 'mg' && inf.sev === 'mg') ||

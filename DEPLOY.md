@@ -16,6 +16,18 @@
 
 ## Cada cop que facis canvis a l'app
 
+### Només contingut (temari, psicotècnics, tests, infraccions…)
+
+**No cal build ni passar per les botigues.** Vegeu [CONTENT.md](CONTENT.md):
+
+```bash
+npm run content:build   # genera content/content.json amb la versió +1
+npm run content:check   # valida el fitxer
+git push -u origin main # les apps instal·lades s'actualitzen soles
+```
+
+### Canvis de codi, disseny o pantalles noves
+
 ```bash
 npm run build          # Compila el web
 npx cap sync           # Copia el build a iOS i Android

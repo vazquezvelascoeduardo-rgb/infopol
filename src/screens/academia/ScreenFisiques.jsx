@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { StatusBar, ProgressBar, CatIcon } from '../../components/Shared';
-import { PHYSICAL_TESTS } from '../../data/academia';
+import { useContent } from '../../content/ContentProvider';
 
 const SEXE_OPTIONS = ['Home', 'Dona'];
 const EDAT_RANGES = ['18–30 anys', '31–40 anys'];
@@ -55,6 +55,7 @@ function PhysicRow({ test, sexe, edatKey, edatLabel }) {
 export default function ScreenFisiques() {
   const [sexe, setSexe] = useState('Home');
   const [edat, setEdat] = useState('18–30 anys');
+  const { physicalTests: PHYSICAL_TESTS = [] } = useContent();
   const edatKey = edat.replace(' anys', '');
   const sexeKey = sexe === 'Home' ? 'H' : 'D';
 

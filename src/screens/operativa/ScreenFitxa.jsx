@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { StatusBar, NavHeader, Pill, SectionTitle } from '../../components/Shared';
-import { INFRACTIONS } from '../../data/infractions';
+import { useContent } from '../../content/ContentProvider';
 
 const SEV_COLOR = { mg: 'alcohol', g: 'psico', l: 'atajos' };
 
@@ -23,7 +23,24 @@ export default function ScreenFitxa() {
   const navigate = useNavigate();
   const [tab, setTab] = useState(0);
 
+  const { infractions: INFRACTIONS = [] } = useContent();
+
   const inf = INFRACTIONS.find(i => i.id === id) || INFRACTIONS[0];
+
+  if (!inf) {
+    return (
+      <div className="screen">
+        <StatusBar />
+        <NavHeader cat="operativa" kicker="Infracció" title="No disponible" back />
+        <div style={{ padding: '16px' }}>
+          <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 18, boxShadow: T.shadow.card, fontSize: 13, color: T.inkMuted, lineHeight: 1.5 }}>
+            Aquesta fitxa no és al contingut descarregat.
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const catKey = SEV_COLOR[inf.sev] || 'atajos';
   const cat = T.cat[catKey];
 

@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SectionHead, CatIcon, ProgressBar, Streak, GemBadge } from '../../components/Shared';
+import { useContent } from '../../content/ContentProvider';
 
 function Mission({ cat, icon, title, sub, status, pct, xp, onClick }) {
   const k = T.cat[cat];
@@ -50,6 +51,15 @@ const LEADERBOARD = [
 
 export default function ScreenAcademiaHome() {
   const navigate = useNavigate();
+  const { temes = [], testQuestions = [], flashcards = [], psicoCategories = [], psicoQuestions = {} } = useContent();
+
+  const temariPct = (() => {
+    const total = temes.reduce((s, t) => s + t.lessons, 0);
+    const done = temes.reduce((s, t) => s + t.done, 0);
+    return total > 0 ? Math.round((done / total) * 100) : 0;
+  })();
+  const psicoCount = psicoCategories.reduce((s, c) => s + (psicoQuestions[c.id]?.length || 0), 0);
+
   return (
     <div className="screen" style={{ background: T.bg }}>
       <StatusBar />
@@ -100,12 +110,12 @@ export default function ScreenAcademiaHome() {
       <div style={{ padding: '20px 16px 0' }}>
         <SectionHead kicker="Eines" kickerColor={T.inkMuted} title="Estudia com vulguis" />
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-          <ToolTile cat="leyes" icon="book" title="Temari" desc="17 blocs · 64% completat" pct={64} onClick={() => navigate('/academia/temari')} />
-          <ToolTile cat="tests" icon="check" title="Tests Mossos" desc="412 preguntes contestades" onClick={() => navigate('/academia/test')} />
-          <ToolTile cat="academia" icon="cards" title="Flashcards" desc="Repàs espaiat · 6 categories" onClick={() => navigate('/academia/flashcards')} />
+          <ToolTile cat="leyes" icon="book" title="Temari" desc={`${temes.length} blocs · ${temariPct}% completat`} pct={temariPct} onClick={() => navigate('/academia/temari')} />
+          <ToolTile cat="tests" icon="check" title="Tests Mossos" desc={`${testQuestions.length} preguntes disponibles`} onClick={() => navigate('/academia/test')} />
+          <ToolTile cat="academia" icon="cards" title="Flashcards" desc={`Repàs espaiat · ${flashcards.length} cartes`} onClick={() => navigate('/academia/flashcards')} />
           <ToolTile cat="alcohol" icon="clock" title="Simulacre" desc="100 preg · 90 min" onClick={() => navigate('/academia/test')} />
           <ToolTile cat="physical" icon="gauge" title="Físiques" desc="Calculadora de marques" onClick={() => navigate('/academia/fisiques')} />
-          <ToolTile cat="psico" icon="spark" title="Psicotècnics" desc="Sèries · numèric · verbal" />
+          <ToolTile cat="psico" icon="spark" title="Psicotècnics" desc={`${psicoCategories.length} categories · ${psicoCount} preguntes`} onClick={() => navigate('/academia/psicotecnics')} />
         </div>
       </div>
 

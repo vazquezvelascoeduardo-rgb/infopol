@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { StatusBar, ProgressBar, Pill, DuoButton } from '../../components/Shared';
-import { FLASHCARDS } from '../../data/academia';
+import { useContent } from '../../content/ContentProvider';
 
 const RATINGS = [
   { cat: 'alcohol', label: 'Malament', sub: '<1d' },
@@ -17,10 +17,11 @@ export default function ScreenFlashcards() {
   const [cardIdx, setCardIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [done, setDone] = useState([]);
+  const { flashcards: FLASHCARDS = [] } = useContent();
 
-  const card = FLASHCARDS[cardIdx % FLASHCARDS.length];
   const total = FLASHCARDS.length;
-  const pct = (cardIdx / total) * 100;
+  const card = total > 0 ? FLASHCARDS[cardIdx % total] : null;
+  const pct = total > 0 ? (cardIdx / total) * 100 : 0;
 
   const handleRating = () => {
     setDone(d => [...d, cardIdx]);
@@ -31,6 +32,25 @@ export default function ScreenFlashcards() {
       setCardIdx(i => i + 1);
     }
   };
+
+  if (!card) {
+    return (
+      <div className="screen" style={{ background: T.bg }}>
+        <StatusBar />
+        <div style={{ padding: '6px 16px 14px', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <button onClick={() => navigate('/academia')} style={{ width: 36, height: 36, borderRadius: 999, border: 'none', background: '#fff', boxShadow: T.shadow.card, cursor: 'pointer', display: 'grid', placeItems: 'center' }}>
+            <Icon name="x" size={18} color={T.ink} />
+          </button>
+          <h1 style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 22, letterSpacing: -0.5, margin: 0 }}>Flashcards</h1>
+        </div>
+        <div style={{ padding: '10px 16px' }}>
+          <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 18, boxShadow: T.shadow.card, fontSize: 13, color: T.inkMuted, lineHeight: 1.5 }}>
+            Encara no hi ha cartes publicades. Apareixeran quan s'actualitzi el contingut.
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const catK = T.cat[card.cat] || T.cat.leyes;
 

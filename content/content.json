@@ -1,0 +1,2027 @@
+{
+  "version": 2,
+  "updatedAt": "2026-08-13",
+  "label": "Contingut v2",
+  "temes": [
+    {
+      "id": 1,
+      "title": "La Constitució Espanyola de 1978",
+      "cat": "leyes",
+      "icon": "scale",
+      "lessons": 14,
+      "done": 14,
+      "status": "done"
+    },
+    {
+      "id": 2,
+      "title": "L'Estatut d'Autonomia de Catalunya",
+      "cat": "leyes",
+      "icon": "book",
+      "lessons": 10,
+      "done": 10,
+      "status": "done"
+    },
+    {
+      "id": 3,
+      "title": "Drets fonamentals i llibertats públiques",
+      "cat": "operativa",
+      "icon": "shield",
+      "lessons": 12,
+      "done": 7,
+      "status": "active"
+    },
+    {
+      "id": 4,
+      "title": "L'organització policial de Catalunya",
+      "cat": "academia",
+      "icon": "briefcase",
+      "lessons": 8,
+      "done": 0,
+      "status": "locked"
+    },
+    {
+      "id": 5,
+      "title": "El Codi Penal (delictes rellevants)",
+      "cat": "transito",
+      "icon": "hash",
+      "lessons": 18,
+      "done": 0,
+      "status": "locked"
+    },
+    {
+      "id": 6,
+      "title": "La Llei d'Enjudiciament Criminal",
+      "cat": "leyes",
+      "icon": "book",
+      "lessons": 12,
+      "done": 0,
+      "status": "locked"
+    },
+    {
+      "id": 7,
+      "title": "La Llei de Seguretat Ciutadana",
+      "cat": "operativa",
+      "icon": "shield",
+      "lessons": 8,
+      "done": 0,
+      "status": "locked"
+    },
+    {
+      "id": 8,
+      "title": "La Llei de Seguretat Vial i trànsit",
+      "cat": "transito",
+      "icon": "car",
+      "lessons": 14,
+      "done": 0,
+      "status": "locked"
+    },
+    {
+      "id": 9,
+      "title": "Dret administratiu i procediment",
+      "cat": "leyes",
+      "icon": "pen",
+      "lessons": 10,
+      "done": 0,
+      "status": "locked"
+    },
+    {
+      "id": 10,
+      "title": "Dret penal general",
+      "cat": "alcohol",
+      "icon": "lock",
+      "lessons": 12,
+      "done": 0,
+      "status": "locked"
+    },
+    {
+      "id": 11,
+      "title": "La Llei Orgànica de Forces i Cossos",
+      "cat": "operativa",
+      "icon": "badge",
+      "lessons": 6,
+      "done": 0,
+      "status": "locked"
+    },
+    {
+      "id": 12,
+      "title": "Relacions internacionals i cooperació policial",
+      "cat": "academia",
+      "icon": "map",
+      "lessons": 8,
+      "done": 0,
+      "status": "locked"
+    },
+    {
+      "id": 13,
+      "title": "Psicologia i sociologia aplicades",
+      "cat": "psico",
+      "icon": "spark",
+      "lessons": 10,
+      "done": 0,
+      "status": "locked"
+    },
+    {
+      "id": 14,
+      "title": "Informàtica i tecnologies policials",
+      "cat": "tests",
+      "icon": "bolt",
+      "lessons": 6,
+      "done": 0,
+      "status": "locked"
+    },
+    {
+      "id": 15,
+      "title": "Llengua catalana (nivell B2)",
+      "cat": "academia",
+      "icon": "book",
+      "lessons": 8,
+      "done": 0,
+      "status": "locked"
+    },
+    {
+      "id": 16,
+      "title": "Cultura general i actualitat",
+      "cat": "psico",
+      "icon": "star",
+      "lessons": 8,
+      "done": 0,
+      "status": "locked"
+    },
+    {
+      "id": 17,
+      "title": "Deontologia policial i ètica",
+      "cat": "atajos",
+      "icon": "heart",
+      "lessons": 6,
+      "done": 0,
+      "status": "locked"
+    }
+  ],
+  "temari": {
+    "1": {
+      "intro": "Norma suprema de l'ordenament jurídic espanyol. És el bloc amb més pes a l'examen.",
+      "lessons": [
+        {
+          "id": "t1-l1",
+          "title": "Estructura i característiques de la CE",
+          "minutes": 12,
+          "summary": "Títol preliminar, 10 títols, 169 articles, 4 disposicions addicionals.",
+          "blocks": [
+            {
+              "h": "Estructura",
+              "p": "La Constitució de 1978 consta d'un preàmbul, un títol preliminar, deu títols numerats amb 169 articles, quatre disposicions addicionals, nou de transitòries, una de derogatòria i una de final."
+            },
+            {
+              "h": "Característiques",
+              "list": [
+                "Rígida: la reforma segueix els procediments dels arts. 167 i 168 CE.",
+                "Consensuada: fruit del pacte entre les forces polítiques de la Transició.",
+                "Extensa i derivada de l'experiència constitucional europea.",
+                "Directament aplicable, especialment en matèria de drets fonamentals."
+              ]
+            },
+            {
+              "note": "Pregunta clàssica: 169 articles (no 159 ni 176)."
+            }
+          ]
+        },
+        {
+          "id": "t1-l2",
+          "title": "Títol preliminar (arts. 1 a 9)",
+          "minutes": 14,
+          "summary": "Valors superiors, sobirania, llengües, banderes i principis de l'art. 9.3.",
+          "blocks": [
+            {
+              "h": "Art. 1 CE",
+              "p": "Espanya es constitueix en un Estat social i democràtic de Dret, que propugna com a valors superiors del seu ordenament jurídic la llibertat, la justícia, la igualtat i el pluralisme polític. La sobirania nacional resideix en el poble espanyol. La forma política és la Monarquia parlamentària."
+            },
+            {
+              "h": "Art. 9.3 CE — principis garantits",
+              "list": [
+                "Legalitat",
+                "Jerarquia normativa",
+                "Publicitat de les normes",
+                "Irretroactivitat de les disposicions sancionadores no favorables o restrictives de drets individuals",
+                "Seguretat jurídica",
+                "Responsabilitat i interdicció de l'arbitrarietat dels poders públics"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "t1-l3",
+          "title": "La reforma constitucional",
+          "minutes": 10,
+          "summary": "Procediment ordinari (art. 167) i agravat (art. 168).",
+          "blocks": [
+            {
+              "h": "Procediment ordinari (art. 167)",
+              "p": "Aprovació per majoria de 3/5 de cada cambra. Si no hi ha acord, comissió mixta i, si cal, majoria absoluta al Senat i 2/3 al Congrés. Referèndum si ho demana 1/10 dels membres de qualsevol cambra."
+            },
+            {
+              "h": "Procediment agravat (art. 168)",
+              "p": "S'aplica a la revisió total o a la que afecti el títol preliminar, la secció 1a del capítol II del títol I o el títol II. Exigeix 2/3 de cada cambra, dissolució de les Corts, ratificació per les noves cambres per 2/3 i referèndum obligatori."
+            }
+          ]
+        }
+      ]
+    },
+    "3": {
+      "intro": "Drets fonamentals i llibertats públiques: el bloc que més es pregunta en l'actuació policial.",
+      "lessons": [
+        {
+          "id": "t3-l1",
+          "title": "Classificació dels drets al títol I",
+          "minutes": 12,
+          "summary": "Secció 1a, secció 2a, principis rectors i els seus nivells de protecció.",
+          "blocks": [
+            {
+              "h": "Nivells de protecció",
+              "list": [
+                "Arts. 15–29 (secció 1a) + art. 14 i objecció de consciència: recurs d'empara, reserva de llei orgànica i procediment preferent i sumari.",
+                "Arts. 30–38 (secció 2a): reserva de llei ordinària i respecte al contingut essencial.",
+                "Arts. 39–52 (principis rectors): informen la legislació, però només són al·legables segons el que disposin les lleis que els despleguin."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "t3-l2",
+          "title": "Dret a la llibertat: la detenció (art. 17 CE)",
+          "minutes": 16,
+          "summary": "Límit de 72 hores, habeas corpus i drets del detingut.",
+          "blocks": [
+            {
+              "h": "Termini",
+              "p": "La detenció preventiva no pot durar més del temps estrictament necessari per a les investigacions. En tot cas, en el termini màxim de 72 hores el detingut ha de ser posat en llibertat o a disposició de l'autoritat judicial."
+            },
+            {
+              "h": "Drets del detingut (art. 520 LECrim)",
+              "list": [
+                "Ser informat dels fets i dels motius de la detenció, de forma comprensible.",
+                "Guardar silenci i no declarar contra si mateix ni declarar-se culpable.",
+                "Designar advocat i ser assistit per ell sense demora.",
+                "Accés als elements de les actuacions essencials per impugnar la detenció.",
+                "Comunicar la detenció i el lloc de custòdia a un familiar o tercer.",
+                "Ser assistit per intèrpret i reconegut pel metge forense."
+              ]
+            },
+            {
+              "note": "L'habeas corpus (LO 6/1984) permet posar immediatament a disposició judicial qualsevol persona detinguda il·legalment."
+            }
+          ]
+        },
+        {
+          "id": "t3-l3",
+          "title": "Inviolabilitat del domicili i secret de les comunicacions (art. 18 CE)",
+          "minutes": 14,
+          "summary": "Honor, intimitat, pròpia imatge, domicili i comunicacions.",
+          "blocks": [
+            {
+              "h": "Entrada al domicili",
+              "p": "Cap entrada o registre pot fer-se sense consentiment del titular o resolució judicial, llevat del cas de delicte flagrant."
+            },
+            {
+              "h": "Comunicacions",
+              "p": "Es garanteix el secret de les comunicacions, especialment de les postals, telegràfiques i telefòniques, excepte resolució judicial motivada."
+            }
+          ]
+        },
+        {
+          "id": "t3-l4",
+          "title": "Suspensió de drets (art. 55 CE)",
+          "minutes": 8,
+          "summary": "Estats d'alarma, excepció i setge, i suspensió individual.",
+          "blocks": [
+            {
+              "p": "Els arts. 17, 18.2 i 3, 19, 20.1 a) i d) i 5, 21, 28.2 i 37.2 poden ser suspesos quan s'acordi la declaració de l'estat d'excepció o de setge. L'art. 17.3 només se suspèn en estat de setge."
+            }
+          ]
+        }
+      ]
+    },
+    "4": {
+      "intro": "Organització i estructura de la Policia de la Generalitat – Mossos d'Esquadra.",
+      "lessons": [
+        {
+          "id": "t4-l1",
+          "title": "Marc legal del cos",
+          "minutes": 12,
+          "summary": "Llei 10/1994, LO 2/1986 i Llei 4/2003.",
+          "blocks": [
+            {
+              "h": "Normes clau",
+              "list": [
+                "LO 2/1986, de 13 de març, de Forces i Cossos de Seguretat.",
+                "Llei 10/1994, d'11 de juliol, de la Policia de la Generalitat – Mossos d'Esquadra.",
+                "Llei 4/2003, de 7 d'abril, d'ordenació del sistema de seguretat pública de Catalunya."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "t4-l2",
+          "title": "Escales, categories i funcions",
+          "minutes": 14,
+          "summary": "Escala bàsica, intermèdia, executiva i superior.",
+          "blocks": [
+            {
+              "h": "Escales",
+              "list": [
+                "Escala bàsica: mosso/a i caporal/a.",
+                "Escala intermèdia: sergent/a i sotsinspector/a.",
+                "Escala executiva: inspector/a.",
+                "Escala superior: intendent/a, comissari/ària i major."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "t4-l3",
+          "title": "Desplegament territorial",
+          "minutes": 10,
+          "summary": "Regions policials, àrees bàsiques policials i comissaries.",
+          "blocks": [
+            {
+              "p": "El territori s'organitza en regions policials, que es divideixen en àrees bàsiques policials (ABP), unitat bàsica de desplegament amb comissaria de referència."
+            }
+          ]
+        }
+      ]
+    },
+    "7": {
+      "intro": "LO 4/2015, de protecció de la seguretat ciutadana: la norma d'ús diari en via pública.",
+      "lessons": [
+        {
+          "id": "t7-l1",
+          "title": "Identificació de persones (art. 16)",
+          "minutes": 12,
+          "summary": "Requisits, trasllat a dependències i límit de 6 hores.",
+          "blocks": [
+            {
+              "h": "Requisits",
+              "p": "Els agents poden requerir la identificació quan hi hagi indicis que la persona pot haver participat en una infracció, o quan sigui necessari per prevenir un delicte."
+            },
+            {
+              "h": "Trasllat a dependències",
+              "p": "Si no es pot identificar la persona per cap mitjà, se la pot traslladar a dependències properes per a la seva identificació. La diligència no pot durar més de sis hores i s'ha d'estendre un llibre-registre."
+            }
+          ]
+        },
+        {
+          "id": "t7-l2",
+          "title": "Registres corporals externs (art. 20)",
+          "minutes": 10,
+          "summary": "Proporcionalitat, respecte a la dignitat i registre amb despullament.",
+          "blocks": [
+            {
+              "list": [
+                "Cal respectar els principis d'injerència mínima, igualtat i proporcionalitat.",
+                "Es fa preferentment per agent del mateix sexe.",
+                "El registre amb despullament parcial exigeix motivació i lloc reservat, i s'ha de deixar constància escrita."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "t7-l3",
+          "title": "Règim sancionador",
+          "minutes": 14,
+          "summary": "Infraccions molt greus, greus i lleus i les seves quanties.",
+          "blocks": [
+            {
+              "h": "Quanties",
+              "list": [
+                "Molt greus: de 30.001 a 600.000 €.",
+                "Greus: de 601 a 30.000 €.",
+                "Lleus: de 100 a 600 €."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "8": {
+      "intro": "Trànsit, circulació de vehicles de motor i seguretat viària.",
+      "lessons": [
+        {
+          "id": "t8-l1",
+          "title": "Taxes d'alcohol i drogues",
+          "minutes": 12,
+          "summary": "Límits administratius i el llindar penal de l'art. 379.2 CP.",
+          "blocks": [
+            {
+              "h": "Límits administratius",
+              "list": [
+                "Conductors en general: 0,25 mg/l en aire espirat (0,5 g/l en sang).",
+                "Conductors novells i professionals: 0,15 mg/l en aire espirat (0,3 g/l en sang)."
+              ]
+            },
+            {
+              "h": "Llindar penal",
+              "p": "Superar 0,60 mg/l en aire espirat (1,2 g/l en sang) constitueix delicte de l'art. 379.2 CP en tot cas."
+            }
+          ]
+        },
+        {
+          "id": "t8-l2",
+          "title": "Classificació de les infraccions de trànsit",
+          "minutes": 12,
+          "summary": "Lleus, greus i molt greus; punts i imports.",
+          "blocks": [
+            {
+              "list": [
+                "Lleus: fins a 100 €, sense pèrdua de punts.",
+                "Greus: 200 €, amb pèrdua de fins a 6 punts en alguns supòsits.",
+                "Molt greus: 500 € (o 1.000 € en alcohol i drogues), amb pèrdua de fins a 6 punts."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "17": {
+      "intro": "Deontologia policial, ètica professional i codi de conducta.",
+      "lessons": [
+        {
+          "id": "t17-l1",
+          "title": "Principis bàsics d'actuació (art. 5 LO 2/1986)",
+          "minutes": 12,
+          "summary": "Adequació a l'ordenament, relacions amb la comunitat, tractament de detinguts i secret professional.",
+          "blocks": [
+            {
+              "list": [
+                "Actuar amb absolut respecte a la Constitució i a la resta de l'ordenament jurídic.",
+                "Actuar amb integritat i dignitat, sense recórrer a la tortura ni a tractes inhumans o degradants.",
+                "Impedir qualsevol pràctica abusiva, arbitrària o discriminatòria.",
+                "Utilitzar les armes només en les situacions de risc racionalment greu per a la vida o la integritat.",
+                "Guardar rigorós secret professional de les informacions conegudes per raó del càrrec."
+              ]
+            },
+            {
+              "note": "Congruència, oportunitat i proporcionalitat són els tres criteris rectors de l'ús de la força."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "testQuestions": [
+    {
+      "id": "q001",
+      "tema": 8,
+      "temaTitle": "Tema 8 · Drets fonamentals",
+      "question": "Quin article de la Constitució Espanyola estableix que tothom té dret a la vida i a la integritat física i moral?",
+      "options": [
+        "Article 14 CE",
+        "Article 15 CE",
+        "Article 16 CE",
+        "Article 17 CE"
+      ],
+      "correct": 1,
+      "explanation": "L'art. 15 CE protegeix el dret a la vida i la integritat física i moral, prohibint la tortura i les penes inhumanes i degradants.",
+      "xp": 24
+    },
+    {
+      "id": "q002",
+      "tema": 1,
+      "temaTitle": "Tema 1 · Constitució",
+      "question": "Quants articles té la Constitució Espanyola de 1978?",
+      "options": [
+        "159 articles",
+        "169 articles",
+        "176 articles",
+        "152 articles"
+      ],
+      "correct": 1,
+      "explanation": "La Constitució Espanyola consta de 169 articles, distribuïts en un Títol Preliminar i nou Títols numerats.",
+      "xp": 18
+    },
+    {
+      "id": "q003",
+      "tema": 1,
+      "temaTitle": "Tema 1 · Constitució",
+      "question": "Quin article de la CE estableix l'Estat espanyol com a Estat social i democràtic de Dret?",
+      "options": [
+        "Art. 1.1 CE",
+        "Art. 2 CE",
+        "Art. 3 CE",
+        "Art. 9.3 CE"
+      ],
+      "correct": 0,
+      "explanation": "L'article 1.1 CE proclama que \"España se constituye en un Estado social y democrático de Derecho, que propugna como valores superiores de su ordenamiento jurídico la libertad, la justicia, la igualdad y el pluralismo político.\"",
+      "xp": 20
+    },
+    {
+      "id": "q004",
+      "tema": 8,
+      "temaTitle": "Tema 8 · Drets fonamentals",
+      "question": "El dret a la tutela judicial efectiva es recull a quin article de la CE?",
+      "options": [
+        "Art. 23 CE",
+        "Art. 24 CE",
+        "Art. 25 CE",
+        "Art. 17 CE"
+      ],
+      "correct": 1,
+      "explanation": "L'article 24 CE reconeix el dret fonamental a la tutela judicial efectiva, que inclou el dret a un jutge predeterminat per la llei i a no patir indefensió.",
+      "xp": 22
+    },
+    {
+      "id": "q005",
+      "tema": 3,
+      "temaTitle": "Tema 3 · Mossos d'Esquadra",
+      "question": "Quina llei regula l'organització dels Mossos d'Esquadra?",
+      "options": [
+        "LO 2/1986 de Forces i Cossos de Seguretat",
+        "Llei 10/1994 de la Policia de la Generalitat - Mossos d'Esquadra",
+        "Llei 4/2003 d'ordenació del sistema de seguretat pública",
+        "Estatut d'Autonomia de Catalunya"
+      ],
+      "correct": 1,
+      "explanation": "La Llei 10/1994, de 11 de juliol, de la Policia de la Generalitat - Mossos d'Esquadra, és la norma bàsica que regula l'estructura, funcions i règim dels Mossos d'Esquadra.",
+      "xp": 26
+    },
+    {
+      "id": "q006",
+      "tema": 8,
+      "temaTitle": "Tema 8 · Drets fonamentals",
+      "question": "L'article 18 de la CE protegeix quin dret?",
+      "options": [
+        "Llibertat ideològica i religiosa",
+        "Dret a l'honor, intimitat i pròpia imatge",
+        "Llibertat d'expressió i d'informació",
+        "Dret de reunió i manifestació"
+      ],
+      "correct": 1,
+      "explanation": "L'art. 18 CE garanteix el dret a l'honor, a la intimitat personal i familiar i a la pròpia imatge. També reconeix la inviolabilitat del domicili i el secret de les comunicacions.",
+      "xp": 20
+    },
+    {
+      "id": "q007",
+      "tema": 5,
+      "temaTitle": "Tema 5 · Codi Penal",
+      "question": "Quin article del Codi Penal tipifica el delicte de lesions greus?",
+      "options": [
+        "Art. 147 CP",
+        "Art. 148 CP",
+        "Art. 150 CP",
+        "Art. 153 CP"
+      ],
+      "correct": 2,
+      "explanation": "L'art. 150 CP tipifica el delicte de lesions que produeixin la pèrdua o la inutilitat d'un òrgan o membre principal, o una greu deformitat.",
+      "xp": 28
+    },
+    {
+      "id": "q008",
+      "tema": 6,
+      "temaTitle": "Tema 6 · LECrim",
+      "question": "Quant temps màxim pot durar una detenció policial sense posada a disposició judicial?",
+      "options": [
+        "24 hores",
+        "48 hores",
+        "72 hores",
+        "96 hores"
+      ],
+      "correct": 2,
+      "explanation": "Segons l'art. 17.2 CE i l'art. 520 LECrim, el detingut ha de ser posat en llibertat o a disposició de l'autoritat judicial en el termini màxim de 72 hores des de la detenció.",
+      "xp": 30
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc001",
+      "tema": "Tema 12 · CP",
+      "question": "Quina és la pena per al delicte d'omissió del deure de socors (art. 195 CP)?",
+      "answer": "Multa de 3 a 12 mesos. Si la víctima ho és per causa de l'omissor: presó de 6 mesos a 4 anys.",
+      "cat": "leyes"
+    },
+    {
+      "id": "fc002",
+      "tema": "Tema 1 · CE",
+      "question": "Quins són els valors superiors de l'ordenament jurídic espanyol (art. 1.1 CE)?",
+      "answer": "La llibertat, la justícia, la igualtat i el pluralisme polític.",
+      "cat": "leyes"
+    },
+    {
+      "id": "fc003",
+      "tema": "Tema 8 · Drets fonamentals",
+      "question": "Quins drets reconeix l'art. 17 CE?",
+      "answer": "El dret a la llibertat i a la seguretat personal. Ningú pot ser privat de llibertat, tret dels casos i en la forma prevista a la llei.",
+      "cat": "operativa"
+    },
+    {
+      "id": "fc004",
+      "tema": "Tema 5 · CP",
+      "question": "Quins elements integren el delicte de conducció sota la influència de l'alcohol (art. 379.2 CP)?",
+      "answer": "Conduir vehicle de motor o ciclomotor: (a) sota la influència de begudes alcohòliques, o (b) amb taxa d'alcohol en aire > 0,60 mg/l o en sang > 1,2 g/l.",
+      "cat": "alcohol"
+    },
+    {
+      "id": "fc005",
+      "tema": "Tema 6 · LECrim",
+      "question": "Quins drets té el detingut en el moment de la detenció (art. 520 LECrim)?",
+      "answer": "1) No declarar. 2) No declarar-se culpable. 3) Designar advocat. 4) Ser assistit per intèrpret. 5) Comunicar la detenció a un familiar. 6) Reconeixement mèdic forense.",
+      "cat": "operativa"
+    },
+    {
+      "id": "fc006",
+      "tema": "Tema 7 · LO 4/2015",
+      "question": "Quines infraccions es consideren molt greus a la LO 4/2015 de Seguretat Ciutadana?",
+      "answer": "Reunions o manifestacions davant el Congrés, el Senat o les assemblees legislatives autonòmiques; pertorbació greu de la seguretat; ús no autoritzat d'uniforme o placa; obstrucció a les FCSE.",
+      "cat": "leyes"
+    }
+  ],
+  "psicoCategories": [
+    {
+      "id": "series-num",
+      "cat": "psico",
+      "icon": "hash",
+      "title": "Sèries numèriques",
+      "desc": "Progressions, alternances i sèries de dos ritmes.",
+      "minutes": 12
+    },
+    {
+      "id": "series-alfa",
+      "cat": "leyes",
+      "icon": "book",
+      "title": "Sèries alfanumèriques",
+      "desc": "Lletres, posicions de l'abecedari i combinacions.",
+      "minutes": 10
+    },
+    {
+      "id": "abstracte",
+      "cat": "transito",
+      "icon": "spark",
+      "title": "Raonament abstracte",
+      "desc": "Matrius, analogies de figures i lògica no verbal.",
+      "minutes": 15
+    },
+    {
+      "id": "verbal",
+      "cat": "operativa",
+      "icon": "pen",
+      "title": "Aptitud verbal",
+      "desc": "Sinònims, antònims, analogies i comprensió.",
+      "minutes": 12
+    },
+    {
+      "id": "numeric",
+      "cat": "atajos",
+      "icon": "gauge",
+      "title": "Aptitud numèrica",
+      "desc": "Percentatges, proporcions, velocitat i temps.",
+      "minutes": 15
+    },
+    {
+      "id": "percepcio",
+      "cat": "alcohol",
+      "icon": "eye",
+      "title": "Atenció i percepció",
+      "desc": "Comparació de sèries, recompte i detecció d'errors.",
+      "minutes": 8
+    }
+  ],
+  "psicoQuestions": {
+    "series-num": [
+      {
+        "id": "ps-n01",
+        "question": "Quin número continua la sèrie? 3 · 6 · 12 · 24 · 48 · ?",
+        "options": [
+          "72",
+          "96",
+          "86",
+          "60"
+        ],
+        "correct": 1,
+        "explanation": "Cada terme és el doble de l'anterior (×2). 48 × 2 = 96.",
+        "xp": 14
+      },
+      {
+        "id": "ps-n02",
+        "question": "Quin número continua la sèrie? 2 · 5 · 11 · 23 · 47 · ?",
+        "options": [
+          "94",
+          "95",
+          "93",
+          "96"
+        ],
+        "correct": 1,
+        "explanation": "La regla és ×2 + 1. 47 × 2 + 1 = 95.",
+        "xp": 18
+      },
+      {
+        "id": "ps-n03",
+        "question": "Quin número falta? 7 · 10 · 9 · 12 · 11 · 14 · ?",
+        "options": [
+          "13",
+          "16",
+          "12",
+          "15"
+        ],
+        "correct": 0,
+        "explanation": "Sèrie alterna: +3 i −1. Després de 14 toca −1, per tant 13.",
+        "xp": 18
+      },
+      {
+        "id": "ps-n04",
+        "question": "Quin número continua? 1 · 4 · 9 · 16 · 25 · ?",
+        "options": [
+          "30",
+          "36",
+          "35",
+          "49"
+        ],
+        "correct": 1,
+        "explanation": "Són els quadrats perfectes: 1², 2², 3², 4², 5², 6² = 36.",
+        "xp": 14
+      },
+      {
+        "id": "ps-n05",
+        "question": "Quin número continua? 100 · 92 · 85 · 79 · 74 · ?",
+        "options": [
+          "69",
+          "70",
+          "68",
+          "71"
+        ],
+        "correct": 1,
+        "explanation": "Les diferències decreixen: −8, −7, −6, −5, i ara −4. 74 − 4 = 70.",
+        "xp": 20
+      },
+      {
+        "id": "ps-n06",
+        "question": "Quin número falta? 5 · 8 · 14 · 26 · 50 · ?",
+        "options": [
+          "98",
+          "100",
+          "96",
+          "102"
+        ],
+        "correct": 0,
+        "explanation": "La regla és ×2 − 2. 50 × 2 − 2 = 98.",
+        "xp": 20
+      }
+    ],
+    "series-alfa": [
+      {
+        "id": "ps-a01",
+        "question": "Quina lletra continua la sèrie? A · C · E · G · ?",
+        "options": [
+          "H",
+          "I",
+          "J",
+          "K"
+        ],
+        "correct": 1,
+        "explanation": "S'avança de dues en dues lletres (se n'salta una). Després de G ve I.",
+        "xp": 12
+      },
+      {
+        "id": "ps-a02",
+        "question": "Quina parella continua? A1 · C3 · E5 · G7 · ?",
+        "options": [
+          "H8",
+          "I9",
+          "I8",
+          "J9"
+        ],
+        "correct": 1,
+        "explanation": "La lletra avança de dues en dues (A, C, E, G, I) i el número segueix la posició de la lletra a l'abecedari (1, 3, 5, 7, 9).",
+        "xp": 16
+      },
+      {
+        "id": "ps-a03",
+        "question": "Quina lletra falta? Z · X · V · T · ?",
+        "options": [
+          "S",
+          "R",
+          "Q",
+          "P"
+        ],
+        "correct": 1,
+        "explanation": "La sèrie va cap enrere saltant una lletra: Z, X, V, T, R.",
+        "xp": 16
+      },
+      {
+        "id": "ps-a04",
+        "question": "Continua la sèrie: AB · DE · GH · JK · ?",
+        "options": [
+          "LM",
+          "MN",
+          "KL",
+          "NO"
+        ],
+        "correct": 1,
+        "explanation": "Cada parella salta una lletra respecte a la següent: AB (salta C), DE (salta F), GH (salta I), JK (salta L), MN.",
+        "xp": 20
+      },
+      {
+        "id": "ps-a05",
+        "question": "Quin element continua? B2 · D4 · F6 · H8 · ?",
+        "options": [
+          "I9",
+          "J10",
+          "J9",
+          "K10"
+        ],
+        "correct": 1,
+        "explanation": "Lletres parelles de l'abecedari (B=2, D=4, F=6, H=8, J=10) amb el seu número de posició.",
+        "xp": 18
+      },
+      {
+        "id": "ps-a06",
+        "question": "Quina és la lletra que ocupa la posició 15 de l'abecedari català (sense dígrafs)?",
+        "options": [
+          "N",
+          "O",
+          "M",
+          "P"
+        ],
+        "correct": 1,
+        "explanation": "A(1) B(2) C(3) D(4) E(5) F(6) G(7) H(8) I(9) J(10) K(11) L(12) M(13) N(14) O(15).",
+        "xp": 14
+      }
+    ],
+    "abstracte": [
+      {
+        "id": "ps-b01",
+        "question": "Si tots els agents de la unitat porten armilla i en Marc porta armilla, què es pot afirmar amb certesa?",
+        "options": [
+          "En Marc és agent de la unitat",
+          "No es pot afirmar que en Marc sigui agent de la unitat",
+          "En Marc no és agent de la unitat",
+          "Tots els que porten armilla són agents"
+        ],
+        "correct": 1,
+        "explanation": "La premissa només diu que tot agent porta armilla, no que tot qui porta armilla sigui agent. És la fal·làcia d'afirmació del conseqüent.",
+        "xp": 22
+      },
+      {
+        "id": "ps-b02",
+        "question": "CERCLE és a RODÓ el que QUADRAT és a…",
+        "options": [
+          "Recte",
+          "Equilàter",
+          "Angular",
+          "Pla"
+        ],
+        "correct": 2,
+        "explanation": "La relació és figura → propietat característica de la seva forma. El cercle és rodó; el quadrat és angular (té angles).",
+        "xp": 18
+      },
+      {
+        "id": "ps-b03",
+        "question": "Una figura gira 90° a la dreta a cada pas. Si comença apuntant al nord, cap on apunta després de 7 passos?",
+        "options": [
+          "Nord",
+          "Sud",
+          "Est",
+          "Oest"
+        ],
+        "correct": 3,
+        "explanation": "7 girs de 90° = 630°. 630 ÷ 360 deixa un residu de 270°, és a dir 3 girs efectius a la dreta des del nord: est, sud, oest.",
+        "xp": 24
+      },
+      {
+        "id": "ps-b04",
+        "question": "Quin element no encaixa amb els altres?",
+        "options": [
+          "Triangle",
+          "Pentàgon",
+          "Hexàgon",
+          "Circumferència"
+        ],
+        "correct": 3,
+        "explanation": "Triangle, pentàgon i hexàgon són polígons (formats per segments rectes). La circumferència és una corba tancada, no un polígon.",
+        "xp": 16
+      },
+      {
+        "id": "ps-b05",
+        "question": "Si A > B, B > C i C > D, quina afirmació és necessàriament certa?",
+        "options": [
+          "D > A",
+          "A > D",
+          "B > A",
+          "C > B"
+        ],
+        "correct": 1,
+        "explanation": "Per transitivitat: A > B > C > D, per tant A > D.",
+        "xp": 16
+      },
+      {
+        "id": "ps-b06",
+        "question": "En una matriu 3×3 cada fila suma 15. Si una fila conté 4 i 9, quin és el tercer valor?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "correct": 1,
+        "explanation": "15 − 4 − 9 = 2.",
+        "xp": 14
+      }
+    ],
+    "verbal": [
+      {
+        "id": "ps-v01",
+        "question": "Quin és el sinònim més proper de \"diligent\"?",
+        "options": [
+          "Negligent",
+          "Acurat",
+          "Indolent",
+          "Displicent"
+        ],
+        "correct": 1,
+        "explanation": "Diligent vol dir que actua amb cura, promptitud i zel. \"Acurat\" n'és el sinònim; els altres tres són antònims.",
+        "xp": 14
+      },
+      {
+        "id": "ps-v02",
+        "question": "Quin és l'antònim de \"eximir\"?",
+        "options": [
+          "Alliberar",
+          "Dispensar",
+          "Obligar",
+          "Absoldre"
+        ],
+        "correct": 2,
+        "explanation": "Eximir és alliberar d'una obligació o càrrega. El seu contrari és obligar.",
+        "xp": 16
+      },
+      {
+        "id": "ps-v03",
+        "question": "ATESTAT és a POLICIA el que SENTÈNCIA és a…",
+        "options": [
+          "Fiscal",
+          "Jutge",
+          "Advocat",
+          "Secretari judicial"
+        ],
+        "correct": 1,
+        "explanation": "Analogia de document → autor que el dicta. L'atestat el redacta la policia; la sentència la dicta el jutge o tribunal.",
+        "xp": 18
+      },
+      {
+        "id": "ps-v04",
+        "question": "Quina paraula no pertany al grup?",
+        "options": [
+          "Denúncia",
+          "Querella",
+          "Atestat",
+          "Prescripció"
+        ],
+        "correct": 3,
+        "explanation": "Denúncia, querella i atestat són formes d'iniciar un procediment penal. La prescripció és una causa d'extinció de la responsabilitat.",
+        "xp": 18
+      },
+      {
+        "id": "ps-v05",
+        "question": "Què significa \"fefaent\"?",
+        "options": [
+          "Que fa fe, que dona testimoni fidedigne",
+          "Que és urgent",
+          "Que és provisional",
+          "Que és confidencial"
+        ],
+        "correct": 0,
+        "explanation": "Fefaent és allò que fa fe, que acredita de manera fidedigna un fet (p. ex. una notificació fefaent).",
+        "xp": 18
+      },
+      {
+        "id": "ps-v06",
+        "question": "Quin és el sinònim de \"coacció\"?",
+        "options": [
+          "Persuasió",
+          "Constrenyiment",
+          "Consentiment",
+          "Suggeriment"
+        ],
+        "correct": 1,
+        "explanation": "La coacció és la força o violència que s'exerceix sobre algú per obligar-lo a fer o no fer alguna cosa: constrenyiment.",
+        "xp": 16
+      }
+    ],
+    "numeric": [
+      {
+        "id": "ps-c01",
+        "question": "Una patrulla recorre 45 km en 50 minuts. Quina és la seva velocitat mitjana en km/h?",
+        "options": [
+          "50 km/h",
+          "54 km/h",
+          "58 km/h",
+          "60 km/h"
+        ],
+        "correct": 1,
+        "explanation": "45 km ÷ (50/60 h) = 45 × 60 ÷ 50 = 54 km/h.",
+        "xp": 20
+      },
+      {
+        "id": "ps-c02",
+        "question": "D'una plantilla de 240 agents, el 35% fa torn de nit. Quants agents fan torn de nit?",
+        "options": [
+          "74",
+          "84",
+          "80",
+          "96"
+        ],
+        "correct": 1,
+        "explanation": "240 × 0,35 = 84 agents.",
+        "xp": 14
+      },
+      {
+        "id": "ps-c03",
+        "question": "Una multa de 500 € té una bonificació del 50% per pagament immediat i després un recàrrec del 20% sobre l'import bonificat. Quant es paga finalment?",
+        "options": [
+          "250 €",
+          "300 €",
+          "270 €",
+          "350 €"
+        ],
+        "correct": 1,
+        "explanation": "500 × 0,5 = 250 €. Després 250 × 1,20 = 300 €.",
+        "xp": 22
+      },
+      {
+        "id": "ps-c04",
+        "question": "Si 6 agents completen un control en 4 hores, quant trigarien 8 agents al mateix ritme?",
+        "options": [
+          "3 h",
+          "3 h 30 min",
+          "2 h 30 min",
+          "5 h"
+        ],
+        "correct": 0,
+        "explanation": "Proporció inversa: 6 × 4 = 24 hores-agent. 24 ÷ 8 = 3 hores.",
+        "xp": 20
+      },
+      {
+        "id": "ps-c05",
+        "question": "Un vehicle circula a 120 km/h. Quants metres recorre en 1 segon?",
+        "options": [
+          "30,3 m",
+          "33,3 m",
+          "36,6 m",
+          "40 m"
+        ],
+        "correct": 1,
+        "explanation": "120 km/h ÷ 3,6 = 33,33 m/s.",
+        "xp": 20
+      },
+      {
+        "id": "ps-c06",
+        "question": "Les denúncies han passat de 320 a 400 en un any. Quin és l'increment percentual?",
+        "options": [
+          "20%",
+          "25%",
+          "30%",
+          "80%"
+        ],
+        "correct": 1,
+        "explanation": "(400 − 320) ÷ 320 = 80 ÷ 320 = 0,25 → 25%.",
+        "xp": 18
+      }
+    ],
+    "percepcio": [
+      {
+        "id": "ps-p01",
+        "question": "Quantes vegades apareix el dígit 7 a la sèrie: 7 1 7 4 7 9 2 7 7 3 0 7",
+        "options": [
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "correct": 2,
+        "explanation": "Posicions 1, 3, 5, 8, 9 i 12 → 6 aparicions.",
+        "xp": 16
+      },
+      {
+        "id": "ps-p02",
+        "question": "Quina matrícula és diferent de la resta?",
+        "options": [
+          "4837 KLM",
+          "4837 KLM",
+          "4B37 KLM",
+          "4837 KLM"
+        ],
+        "correct": 2,
+        "explanation": "La tercera conté una B en lloc del 8: \"4B37 KLM\".",
+        "xp": 16
+      },
+      {
+        "id": "ps-p03",
+        "question": "Compara les dues cadenes. Quantes diferències hi ha? \"MOSSOS-4471-B\" / \"MOSSOS-4417-B\"",
+        "options": [
+          "Cap",
+          "1",
+          "2",
+          "3"
+        ],
+        "correct": 2,
+        "explanation": "El 7 i el 1 estan intercanviats: hi ha dues posicions diferents (la tercera i la quarta xifra).",
+        "xp": 18
+      },
+      {
+        "id": "ps-p04",
+        "question": "Quantes lletres \"R\" hi ha a la frase: \"PATRULLA RURAL DE CARRETERES\"?",
+        "options": [
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "correct": 2,
+        "explanation": "PATRULLA (1) · RURAL (2) · CARRETERES (3) → 1 + 2 + 3 = 6.",
+        "xp": 18
+      },
+      {
+        "id": "ps-p05",
+        "question": "Quin codi NO coincideix amb el model \"TIP-18742-MX\"?",
+        "options": [
+          "TIP-18742-MX",
+          "TIP-18742-MX",
+          "TIP-18742-MX",
+          "TIP-18472-MX"
+        ],
+        "correct": 3,
+        "explanation": "A l'última opció les xifres 4 i 7 estan permutades: 18472 en lloc de 18742.",
+        "xp": 16
+      },
+      {
+        "id": "ps-p06",
+        "question": "A la sèrie \"A B A C A B A D A B A C\", quantes vegades apareix la lletra A?",
+        "options": [
+          "5",
+          "6",
+          "7",
+          "8"
+        ],
+        "correct": 1,
+        "explanation": "La A ocupa totes les posicions senars: 1, 3, 5, 7, 9 i 11 → 6 aparicions.",
+        "xp": 16
+      }
+    ]
+  },
+  "physicalTests": [
+    {
+      "id": "course-navette",
+      "icon": "bolt",
+      "name": "Course-navette",
+      "unit": "palets",
+      "description": "Test de resistència aeròbica progressiva (Léger). S'ha d'arribar al mínim especificat segons edat i sexe.",
+      "minimums": {
+        "H_18_30": {
+          "min": 9,
+          "label": "Home 18–30 anys"
+        },
+        "H_31_40": {
+          "min": 8,
+          "label": "Home 31–40 anys"
+        },
+        "D_18_30": {
+          "min": 7,
+          "label": "Dona 18–30 anys"
+        },
+        "D_31_40": {
+          "min": 6,
+          "label": "Dona 31–40 anys"
+        }
+      }
+    },
+    {
+      "id": "circuit-agilitat",
+      "icon": "flame",
+      "name": "Circuit d'agilitat",
+      "unit": "seg.",
+      "description": "Circuit cronometrat amb obstacles, girs i desplaçaments ràpids. Cal no superar el temps màxim.",
+      "minimums": {
+        "H_18_30": {
+          "min": 13,
+          "label": "Home 18–30 anys",
+          "inverse": true
+        },
+        "H_31_40": {
+          "min": 14,
+          "label": "Home 31–40 anys",
+          "inverse": true
+        },
+        "D_18_30": {
+          "min": 15,
+          "label": "Dona 18–30 anys",
+          "inverse": true
+        },
+        "D_31_40": {
+          "min": 16,
+          "label": "Dona 31–40 anys",
+          "inverse": true
+        }
+      }
+    },
+    {
+      "id": "press-banca",
+      "icon": "briefcase",
+      "name": "Press de banca",
+      "unit": "reps",
+      "description": "Força del tren superior. Repeticions amb el 70% del pes corporal fins al màxim.",
+      "minimums": {
+        "H_18_30": {
+          "min": 18,
+          "label": "Home 18–30 anys"
+        },
+        "H_31_40": {
+          "min": 14,
+          "label": "Home 31–40 anys"
+        },
+        "D_18_30": {
+          "min": 10,
+          "label": "Dona 18–30 anys"
+        },
+        "D_31_40": {
+          "min": 8,
+          "label": "Dona 31–40 anys"
+        }
+      }
+    },
+    {
+      "id": "salt-horitzontal",
+      "icon": "route",
+      "name": "Salt horitzontal",
+      "unit": "m",
+      "description": "Força explosiva del tren inferior. Salt des de parada amb els dos peus junts.",
+      "minimums": {
+        "H_18_30": {
+          "min": 2,
+          "label": "Home 18–30 anys"
+        },
+        "H_31_40": {
+          "min": 1.85,
+          "label": "Home 31–40 anys"
+        },
+        "D_18_30": {
+          "min": 1.6,
+          "label": "Dona 18–30 anys"
+        },
+        "D_31_40": {
+          "min": 1.5,
+          "label": "Dona 31–40 anys"
+        }
+      }
+    }
+  ],
+  "infractions": [
+    {
+      "id": "A-001",
+      "code": "A·001",
+      "cat": "alcohol",
+      "sev": "mg",
+      "article": "Art. 77.c LSV",
+      "title": "Conduir amb taxa d'alcohol > 0,60 mg/l en aire espirat",
+      "fine": 1000,
+      "points": 6,
+      "tag": "Molt greu",
+      "keywords": [
+        "alcohol",
+        "alcoholèmia",
+        "taxa"
+      ],
+      "crimeArticle": "Art. 379.2 CP",
+      "detention": "Procedeix (indicis delicte)",
+      "licenseRevoked": "Sí, immediat",
+      "formType": "Atestat + Judici Ràpid",
+      "legalText": "Amb les mateixes penes serà castigat el que conduís un vehicle de motor o ciclomotor sota la influència de begudes alcohòliques. En tot cas serà condemnat amb aquestes penes el que condueixi amb una taxa d'alcohol en aire espirat superior a 0,60 mg/l…",
+      "penalties": [
+        "3–6 mesos presó o multa",
+        "Privació permís 1–4 anys"
+      ],
+      "steps": [
+        "Aturar el vehicle i identificar el conductor",
+        "Realitzar primera prova de detecció d'alcohol (etilòmetre)",
+        "Si positiu > 0,60: informar del resultat i dels seus drets",
+        "Repetir prova al cap de 10 minuts (prova contraprova)",
+        "Procedir a la detenció per indicis d'art. 379.2 CP",
+        "Lectura de drets (art. 520 LECrim)",
+        "Retirar el permís de conduir en l'acte",
+        "Comunicar a la sala. Trasllat a comissaria",
+        "Aixecar atestat i remetre al Jutjat de Guàrdia (judici ràpid)"
+      ]
+    },
+    {
+      "id": "A-002",
+      "code": "A·002",
+      "cat": "alcohol",
+      "sev": "g",
+      "article": "Art. 76.l LSV",
+      "title": "Conduir amb taxa d'alcohol entre 0,25 i 0,50 mg/l en aire espirat",
+      "fine": 500,
+      "points": 4,
+      "tag": "Greu",
+      "keywords": [
+        "alcohol",
+        "alcoholèmia",
+        "taxa"
+      ],
+      "steps": [
+        "Realitzar prova de detecció (etilòmetre homologat)",
+        "Informar del resultat de la prova",
+        "Oferir prova contraprova",
+        "Formular denúncia administrativa (DTE)",
+        "Retenir el vehicle si no hi ha conductor alternatiu"
+      ]
+    },
+    {
+      "id": "A-003",
+      "code": "A·003",
+      "cat": "alcohol",
+      "sev": "mg",
+      "article": "Art. 77.c LSV",
+      "title": "Conduir sota la influència de drogues tòxiques o estupefaents",
+      "fine": 1000,
+      "points": 6,
+      "tag": "Molt greu",
+      "keywords": [
+        "drogues",
+        "estupefaents",
+        "narcòtics",
+        "THC",
+        "cocaïna"
+      ],
+      "crimeArticle": "Art. 379.2 CP",
+      "detention": "Procedeix si hi ha influència evident",
+      "licenseRevoked": "Sí, immediat",
+      "formType": "Atestat",
+      "steps": [
+        "Observar i documentar signes d'influència (pupil·les, coordinació, parla)",
+        "Realitzar prova de detecció de drogues (saliva/orina)",
+        "Si positiu: informar dels resultats i dels seus drets",
+        "Retenir el vehicle",
+        "Traslladar a centre sanitari per extracció de sang si refusa prova",
+        "Aixecar atestat si hi ha indicis de delicte (art. 379.2 CP)"
+      ]
+    },
+    {
+      "id": "A-004",
+      "code": "A·004",
+      "cat": "alcohol",
+      "sev": "mg",
+      "article": "Art. 383 CP",
+      "title": "Negativa a realitzar les proves de detecció d'alcohol o drogues",
+      "fine": 0,
+      "points": 6,
+      "tag": "Delicte",
+      "keywords": [
+        "negativa",
+        "refusa",
+        "alcohol",
+        "proves"
+      ],
+      "crimeArticle": "Art. 383 CP — Desobediència greu",
+      "detention": "Procedeix",
+      "formType": "Atestat",
+      "steps": [
+        "Advertir verbalment de l'obligatorietat de la prova (art. 14 LSV)",
+        "Repetir l'advertència i documentar la negativa",
+        "Procedir a la detenció per delicte de desobediència greu (art. 383 CP)",
+        "Aixecar atestat complet"
+      ]
+    },
+    {
+      "id": "M-001",
+      "code": "M·001",
+      "cat": "transito",
+      "sev": "g",
+      "article": "Art. 76.a LSV",
+      "title": "Ús manual de dispositiu de telefonia o de qualsevol sistema de comunicació en moviment",
+      "fine": 200,
+      "points": 6,
+      "tag": "Greu",
+      "keywords": [
+        "telèfon",
+        "mòbil",
+        "dispositiu",
+        "comunicació"
+      ],
+      "steps": [
+        "Identificar l'ús del dispositiu (observació visual o enregistrament)",
+        "Aturar el vehicle en lloc segur",
+        "Identificar el conductor (art. 9 i 10 RGC)",
+        "Formular denúncia administrativa i entregar còpia al denunciat"
+      ]
+    },
+    {
+      "id": "M-002",
+      "code": "M·002",
+      "cat": "transito",
+      "sev": "g",
+      "article": "Art. 76.a LSV",
+      "title": "Ús d'auriculars o cascs estèreo durant la conducció",
+      "fine": 200,
+      "points": 3,
+      "tag": "Greu",
+      "keywords": [
+        "auriculars",
+        "cascs",
+        "estèreo",
+        "so"
+      ],
+      "steps": [
+        "Identificar la infracció per observació directa",
+        "Aturar el vehicle",
+        "Formular denúncia administrativa (DTE)"
+      ]
+    },
+    {
+      "id": "V-001",
+      "code": "V·001",
+      "cat": "transito",
+      "sev": "mg",
+      "article": "Art. 77.a LSV",
+      "title": "Excedir el límit de velocitat en més de 50 km/h en via urbana",
+      "fine": 600,
+      "points": 6,
+      "tag": "Molt greu",
+      "keywords": [
+        "velocitat",
+        "excés",
+        "límit",
+        "urbana"
+      ],
+      "steps": [
+        "Verificar la mesura amb equip homologat (radar, pistola làser)",
+        "Documentar la velocitat mesurada, la permesa i l'excés",
+        "Aturar el vehicle i identificar el conductor",
+        "Formular denúncia i informar de la pèrdua de punts"
+      ]
+    },
+    {
+      "id": "V-002",
+      "code": "V·002",
+      "cat": "transito",
+      "sev": "mg",
+      "article": "Art. 77.a LSV",
+      "title": "Excedir el límit de velocitat en més de 60 km/h en via interurbana",
+      "fine": 600,
+      "points": 6,
+      "tag": "Molt greu",
+      "keywords": [
+        "velocitat",
+        "excés",
+        "interurbana",
+        "autovia",
+        "autopista"
+      ]
+    },
+    {
+      "id": "V-003",
+      "code": "V·003",
+      "cat": "transito",
+      "sev": "g",
+      "article": "Art. 76.m LSV",
+      "title": "Excedir el límit de velocitat entre 21 i 40 km/h",
+      "fine": 300,
+      "points": 4,
+      "tag": "Greu",
+      "keywords": [
+        "velocitat",
+        "excés",
+        "límit"
+      ]
+    },
+    {
+      "id": "C-001",
+      "code": "C·001",
+      "cat": "transito",
+      "sev": "g",
+      "article": "Art. 76.c LSV",
+      "title": "No portar cinturó de seguretat ni dispositiu de retenció homologat",
+      "fine": 200,
+      "points": 3,
+      "tag": "Greu",
+      "keywords": [
+        "cinturó",
+        "seguretat",
+        "retenció"
+      ]
+    },
+    {
+      "id": "C-002",
+      "code": "C·002",
+      "cat": "transito",
+      "sev": "g",
+      "article": "Art. 76.b LSV",
+      "title": "No portar casc homologat en ciclomotor o motocicleta",
+      "fine": 200,
+      "points": 4,
+      "tag": "Greu",
+      "keywords": [
+        "casc",
+        "motocicleta",
+        "ciclomotor",
+        "moto"
+      ]
+    },
+    {
+      "id": "C-003",
+      "code": "C·003",
+      "cat": "transito",
+      "sev": "g",
+      "article": "Art. 76.d LSV",
+      "title": "Transportar menor de 12 anys sense sistema de retenció",
+      "fine": 200,
+      "points": 3,
+      "tag": "Greu",
+      "keywords": [
+        "menor",
+        "infant",
+        "retenció",
+        "cadira",
+        "seggiolino"
+      ]
+    },
+    {
+      "id": "S-001",
+      "code": "S·001",
+      "cat": "transito",
+      "sev": "mg",
+      "article": "Art. 77.h LSV",
+      "title": "No respectar la llum vermella del semàfor",
+      "fine": 200,
+      "points": 6,
+      "tag": "Molt greu",
+      "keywords": [
+        "semàfor",
+        "llum",
+        "vermella",
+        "stop"
+      ]
+    },
+    {
+      "id": "S-002",
+      "code": "S·002",
+      "cat": "transito",
+      "sev": "mg",
+      "article": "Art. 77.f LSV",
+      "title": "No cedir el pas als vehicles d'emergència amb senyals activats",
+      "fine": 300,
+      "points": 4,
+      "tag": "Molt greu",
+      "keywords": [
+        "emergència",
+        "ambulància",
+        "policia",
+        "prioritat",
+        "sirena"
+      ]
+    },
+    {
+      "id": "D-001",
+      "code": "D·001",
+      "cat": "leyes",
+      "sev": "g",
+      "article": "Art. 76.e LSV",
+      "title": "Conduir sense permís de conduir de la classe corresponent",
+      "fine": 500,
+      "points": 0,
+      "tag": "Greu",
+      "keywords": [
+        "permís",
+        "carnet",
+        "llicència",
+        "conduir",
+        "sense"
+      ],
+      "crimeArticle": "Art. 384 CP si el permís ha estat retirat judicialment",
+      "steps": [
+        "Verificar la documentació del conductor",
+        "Comprovar la vigència del permís en la base de dades",
+        "Si no té permís de cap classe: immobilitzar el vehicle",
+        "Si el permís fou retirat judicialment: detenció per art. 384 CP",
+        "Formular denúncia administrativa o aixecar atestat (delicte)"
+      ]
+    },
+    {
+      "id": "D-002",
+      "code": "D·002",
+      "cat": "leyes",
+      "sev": "g",
+      "article": "Art. 76.f LSV",
+      "title": "Circular sense assegurança obligatòria en vigor",
+      "fine": 1000,
+      "points": 0,
+      "tag": "Greu",
+      "keywords": [
+        "assegurança",
+        "segur",
+        "RC",
+        "obligatòria"
+      ],
+      "steps": [
+        "Verificar la vigència de l'assegurança (VeriCar, FIVA)",
+        "Si no té assegurança: immobilitzar el vehicle en lloc segur",
+        "Formular denúncia administrativa",
+        "Comunicar a la Consorcio de Compensación de Seguros"
+      ]
+    },
+    {
+      "id": "D-003",
+      "code": "D·003",
+      "cat": "leyes",
+      "sev": "l",
+      "article": "Art. 75 LSV",
+      "title": "Circular sense portar la documentació (permís o documentació del vehicle)",
+      "fine": 80,
+      "points": 0,
+      "tag": "Lleu",
+      "keywords": [
+        "documentació",
+        "permís",
+        "ITV",
+        "fiança"
+      ]
+    },
+    {
+      "id": "E-001",
+      "code": "E·001",
+      "cat": "transito",
+      "sev": "g",
+      "article": "Art. 39.1 RGC",
+      "title": "Estacionar en lloc prohibit obstaculitzant la circulació",
+      "fine": 200,
+      "points": 0,
+      "tag": "Greu",
+      "keywords": [
+        "estacionament",
+        "aparcar",
+        "prohibit",
+        "obstrucció"
+      ]
+    },
+    {
+      "id": "E-002",
+      "code": "E·002",
+      "cat": "transito",
+      "sev": "l",
+      "article": "Art. 94.2.k LSV",
+      "title": "Estacionar en zona de càrrega i descàrrega fora d'horari permès",
+      "fine": 80,
+      "points": 0,
+      "tag": "Lleu",
+      "keywords": [
+        "càrrega",
+        "descàrrega",
+        "zona",
+        "estacionar"
+      ]
+    },
+    {
+      "id": "E-003",
+      "code": "E·003",
+      "cat": "transito",
+      "sev": "g",
+      "article": "Art. 39.3 RGC",
+      "title": "Estacionar en zona reservada per a persones amb mobilitat reduïda sense la targeta",
+      "fine": 200,
+      "points": 0,
+      "tag": "Greu",
+      "keywords": [
+        "mobilitat",
+        "reduïda",
+        "targeta",
+        "PMR",
+        "discapacitat"
+      ]
+    },
+    {
+      "id": "K-001",
+      "code": "K·001",
+      "cat": "transito",
+      "sev": "mg",
+      "article": "Art. 77.d LSV",
+      "title": "Circular en sentit contrari al establert",
+      "fine": 500,
+      "points": 6,
+      "tag": "Molt greu",
+      "keywords": [
+        "contrasens",
+        "sentit contrari",
+        "mano"
+      ]
+    },
+    {
+      "id": "K-002",
+      "code": "K·002",
+      "cat": "transito",
+      "sev": "mg",
+      "article": "Art. 77.b LSV",
+      "title": "Fer mitja volta o marxa enrere en autovia o autopista",
+      "fine": 600,
+      "points": 6,
+      "tag": "Molt greu",
+      "keywords": [
+        "autovia",
+        "autopista",
+        "mitja volta",
+        "marxa enrere"
+      ]
+    },
+    {
+      "id": "I-001",
+      "code": "I·001",
+      "cat": "leyes",
+      "sev": "g",
+      "article": "Art. 76.h LSV",
+      "title": "Circular sense la inspecció tècnica del vehicle (ITV) en vigor",
+      "fine": 200,
+      "points": 0,
+      "tag": "Greu",
+      "keywords": [
+        "ITV",
+        "inspecció",
+        "tècnica",
+        "revisió",
+        "caducada"
+      ],
+      "steps": [
+        "Verificar la ITV al sistema VeriCar o a la documentació del vehicle",
+        "Si caduca > 2 anys: immobilitzar el vehicle fins a passar ITV",
+        "Formular denúncia administrativa"
+      ]
+    },
+    {
+      "id": "SC-001",
+      "code": "SC·001",
+      "cat": "operativa",
+      "sev": "g",
+      "article": "Art. 36.7 LO 4/2015",
+      "title": "Desobeir o resistir-se als agents de l'autoritat",
+      "fine": 601,
+      "points": 0,
+      "tag": "Infracció greu",
+      "keywords": [
+        "desobediència",
+        "resistència",
+        "agent",
+        "autoritat"
+      ],
+      "crimeArticle": "Art. 550-556 CP si hi ha violència (atemptat/resistència)"
+    },
+    {
+      "id": "SC-002",
+      "code": "SC·002",
+      "cat": "operativa",
+      "sev": "g",
+      "article": "Art. 36.4 LO 4/2015",
+      "title": "Negar-se a identificar-se o facilitar una identitat falsa a l'agent",
+      "fine": 601,
+      "points": 0,
+      "tag": "Infracció greu",
+      "keywords": [
+        "identificació",
+        "identitat",
+        "falsa",
+        "negar"
+      ]
+    }
+  ],
+  "protocols": [
+    {
+      "id": "alcohol",
+      "cat": "alcohol",
+      "icon": "beaker",
+      "category": "Trànsit · Control",
+      "title": "Control d'alcoholèmia",
+      "desc": "Procediment complet per a controls preventius i positius per alcohol o drogues.",
+      "tags": [
+        "Alcohol",
+        "Drogues",
+        "Trànsit"
+      ],
+      "steps": [
+        {
+          "n": 1,
+          "title": "Aturar el vehicle",
+          "desc": "Senyalitzar l'aturada amb la targeta STOP o llums del vehicle policial. Situar-se en posició de seguretat al costat del conductor.",
+          "warning": null
+        },
+        {
+          "n": 2,
+          "title": "Identificació i comprovació documental",
+          "desc": "Sol·licitar permís de conduir, documentació del vehicle i assegurança en vigor. Verificar al sistema.",
+          "warning": null
+        },
+        {
+          "n": 3,
+          "title": "Prova de detecció d'alcohol",
+          "desc": "Informar el conductor de l'obligatorietat de la prova (art. 14 LSV). Realitzar la prova amb etilòmetre homologat.",
+          "warning": "Si es nega: delicte art. 383 CP — desobediència greu. Procedir a detenció."
+        },
+        {
+          "n": 4,
+          "title": "Lectura del resultat i decisió",
+          "desc": "Inferior a 0,25: sense infracció. Entre 0,25 i 0,50: infracció art. 76.l LSV (500€ + 4 pts). Superior a 0,50: infracció molt greu. Superior a 0,60: possible delicte.",
+          "warning": null
+        },
+        {
+          "n": 5,
+          "title": "Prova contraprova (si > 0,25)",
+          "desc": "Esperar 10 minuts i repetir la prova amb un nou etilòmetre. Informar el conductor del dret a la segona prova.",
+          "warning": null
+        },
+        {
+          "n": 6,
+          "title": "Si el resultat és > 0,60 mg/l (DELICTE)",
+          "desc": "Procedir a la detenció per indicis d'infracció penal (art. 379.2 CP). Lectura de drets (art. 520 LECrim). Retirar el permís de conduir en l'acte.",
+          "warning": "Atenció: Comunicar al metge forense si hi ha signes d'intoxicació greu. No deixar el conductor sol."
+        }
+      ]
+    },
+    {
+      "id": "identificacio",
+      "cat": "operativa",
+      "icon": "user",
+      "category": "Seguretat Ciutadana",
+      "title": "Identificació de persones",
+      "desc": "Procediment d'identificació en via pública. Art. 20 LO 4/2015 i art. 492 LECrim.",
+      "tags": [
+        "Identificació",
+        "LO 4/2015",
+        "Seguretat"
+      ],
+      "steps": [
+        {
+          "n": 1,
+          "title": "Fonament i motivació",
+          "desc": "L'agent ha de disposar de motius fundats (no conjectures) per requerir la identificació. Documentar la raó concreta (actitud sospitosa, zona de vigilància, concordança amb descripció).",
+          "warning": null
+        },
+        {
+          "n": 2,
+          "title": "Sol·licitud d'identificació",
+          "desc": "Identificar-se com a agent de l'autoritat (placa o TIP). Sol·licitar documentació identificativa: DNI, NIE, passaport o permís de conduir.",
+          "warning": null
+        },
+        {
+          "n": 3,
+          "title": "Si no porta documentació",
+          "desc": "Pot identificar-se per altres mitjans (testimony de dues persones que el coneguin). Si no és possible: trasllat a dependències policials per identificació (màxim 6 hores).",
+          "warning": "El trasllat per identificació NO és detenció. La persona no ha de ser posada en cel·la."
+        },
+        {
+          "n": 4,
+          "title": "Documentació de l'actuació",
+          "desc": "Anotar l'hora d'inici i fi de l'actuació. Reflectir les dades del requerit i la motivació. Lliurar còpia si el requerit la sol·licita.",
+          "warning": null
+        }
+      ]
+    },
+    {
+      "id": "detencio",
+      "cat": "alcohol",
+      "icon": "lock",
+      "category": "Seguretat Ciutadana · CP",
+      "title": "Detenció cautelar",
+      "desc": "Procediment de detenció per delicte flagrant. Art. 492 i 520 LECrim.",
+      "tags": [
+        "Detenció",
+        "Drets",
+        "LECrim"
+      ],
+      "steps": [
+        {
+          "n": 1,
+          "title": "Verificar el supòsit de detenció",
+          "desc": "Delicte flagrant (s'està cometent o s'acaba de cometre). Indicis racionals de participació. Fuga previsible o risc de destrucció de proves.",
+          "warning": "No es pot detenir per infracció administrativa. Cal fonament penal."
+        },
+        {
+          "n": 2,
+          "title": "Comunicar la detenció",
+          "desc": "Informar clarament el detingut: \"Queda vostè detingut per indicis de [delicte]. Té el dret a no declarar i a un advocat.\"",
+          "warning": null
+        },
+        {
+          "n": 3,
+          "title": "Lectura de drets (art. 520 LECrim)",
+          "desc": "1) Dret a no declarar. 2) Dret a no declarar-se culpable. 3) Dret a advocat. 4) Dret a intèrpret. 5) Dret a informar un familiar. 6) Dret a reconeixement mèdic. 7) Dret a intèrpret.",
+          "warning": null
+        },
+        {
+          "n": 4,
+          "title": "Registre de pertinences i escorcoll",
+          "desc": "Escorcoll de seguretat per a objectes perillosos. Registrar i inventariar totes les pertinences. Lliurar rebut del dipòsit.",
+          "warning": "L'escorcoll personal requereix motiu justificat. Documentar sempre."
+        },
+        {
+          "n": 5,
+          "title": "Comunicació a dependències",
+          "desc": "Comunicar la detenció a la sala. Anotar l'hora exacta (el termini de 72h comença des de la detenció). Avisar el familiar designat (si ho autoritza el detingut).",
+          "warning": null
+        },
+        {
+          "n": 6,
+          "title": "Aixecar atestat",
+          "desc": "Redactar atestat complet amb: dades del detingut, motiu de la detenció, hora, lloc, diligències practicades i drets llegits. Presentar al Jutjat de Guàrdia.",
+          "warning": null
+        }
+      ]
+    },
+    {
+      "id": "accident",
+      "cat": "operativa",
+      "icon": "car",
+      "category": "Trànsit · Accidents",
+      "title": "Accident de trànsit",
+      "desc": "Actuació en accidents de circulació. Lesions, danys i atestat.",
+      "tags": [
+        "Accident",
+        "Lesions",
+        "Atestat"
+      ],
+      "steps": [
+        {
+          "n": 1,
+          "title": "Seguretat i protecció de la zona",
+          "desc": "Senyalitzar la zona amb triangles de prevenció i luces. Establir un perímetre de seguretat. Sol·licitar ambulància si hi ha ferits.",
+          "warning": null
+        },
+        {
+          "n": 2,
+          "title": "Atenció als ferits",
+          "desc": "Valorar l'estat dels implicats. No moure ferits greus tret que hi hagi perill imminent. Mantenir conversa per monitoritzar l'estat de consciència.",
+          "warning": null
+        },
+        {
+          "n": 3,
+          "title": "Identificació d'implicats i testimonis",
+          "desc": "Identificar tots els conductors, passatgers i testimonis. Recollir dades d'assegurança de tots els vehicles implicats.",
+          "warning": null
+        },
+        {
+          "n": 4,
+          "title": "Inspecció ocular del lloc",
+          "desc": "Documentar la posició dels vehicles, marques de frenada, focus d'impacte i restes. Prendre fotografies i croquis. Mesurar les distàncies.",
+          "warning": null
+        },
+        {
+          "n": 5,
+          "title": "Prova d'alcohol i drogues",
+          "desc": "Practicar prova d'alcoholèmia a tots els conductors (obligatori si hi ha víctimes). Documentar el resultat.",
+          "warning": "Si el conductor té alcohol > 0,60 mg/l: procedir a detenció (art. 379.2 CP)."
+        },
+        {
+          "n": 6,
+          "title": "Aixecar atestat o diligències",
+          "desc": "Si hi ha ferits o possible delicte: atestat complert. Si són danys materials: diligències d'accident + DTE si escau.",
+          "warning": null
+        }
+      ]
+    },
+    {
+      "id": "violencia-domestica",
+      "cat": "operativa",
+      "icon": "shield",
+      "category": "Seguretat Ciutadana · VD",
+      "title": "Violència domèstica",
+      "desc": "Actuació davant d'episodis de violència en l'àmbit domèstic i familiar.",
+      "tags": [
+        "Violència domèstica",
+        "Víctima",
+        "VIOGEN"
+      ],
+      "steps": [
+        {
+          "n": 1,
+          "title": "Accés al domicili i primera valoració",
+          "desc": "Si hi ha risc imminent: entrada forçada és possible sense ordre judicial (art. 18.2 CE, causa de justificació). Valorar el risc per a la víctima.",
+          "warning": "La seguretat de la víctima és prioritària. No deixar mai la víctima sola amb l'agressor."
+        },
+        {
+          "n": 2,
+          "title": "Separació i entrevista",
+          "desc": "Separar víctima i agressor en espais físics independents. Entrevistar la víctima en privat. Documentar lesions (fotografies si autoritza).",
+          "warning": null
+        },
+        {
+          "n": 3,
+          "title": "Valoració del risc (VIOGEN)",
+          "desc": "Aplicar el formulari de valoració policial del risc (VPR). Classificar el nivell de risc: no apreciat, baix, mitjà, alt, extrem.",
+          "warning": null
+        },
+        {
+          "n": 4,
+          "title": "Detenció de l'agressor",
+          "desc": "Si hi ha indicis de delicte flagrant o si la víctima ha patit lesions: procedir a la detenció. Aplicar mesures cautelars (retenció d'armes si n'hi ha).",
+          "warning": null
+        },
+        {
+          "n": 5,
+          "title": "Atestat i comunicació judicial",
+          "desc": "Aixecar atestat complet. Notificar al Jutjat de Guàrdia i al Ministeri Fiscal. Informar la víctima dels seus drets i dels recursos disponibles (OAV).",
+          "warning": null
+        }
+      ]
+    }
+  ],
+  "news": []
+}

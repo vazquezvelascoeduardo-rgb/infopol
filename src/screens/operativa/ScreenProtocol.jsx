@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { StatusBar, SectionHead, ProgressBar, DuoButton, Pill, CatIcon, SectionTitle } from '../../components/Shared';
-import { PROTOCOLS } from '../../data/protocols';
+import { useContent } from '../../content/ContentProvider';
 
 function ProtocolCard({ protocol, onClick }) {
   const k = T.cat[protocol.cat] || T.cat.operativa;
@@ -104,8 +104,9 @@ function StepView({ protocol, stepIdx, onPrev, onNext, onClose }) {
 export default function ScreenProtocol() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { protocols: PROTOCOLS = [] } = useContent();
   const [activeProtocol, setActiveProtocol] = useState(
-    id ? PROTOCOLS.find(p => p.id === id) || null : null
+    () => (id ? PROTOCOLS.find(p => p.id === id) || null : null)
   );
   const [stepIdx, setStepIdx] = useState(0);
 
