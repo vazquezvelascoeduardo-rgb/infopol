@@ -43,9 +43,22 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
-  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
-  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
-  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
+  // ── 14·08·2026 ──
+  { date: '08·14', tag: 'Successos', title: 'Detingut al centre de Barcelona un fugitiu recercat per cadena perpètua', desc: 'La Policía Nacional arresta al casc antic un fugitiu sobre qui pesava una ordre de cerca i captura de la justícia islandesa per un crim violent.', url: 'https://www.catalunyapress.es/articulo/sucesos-cataluna/2026-08-14/5984107-detenido-pleno-centro-barcelona-peligroso-fugitivo-enfrenta-cadena-perpetua' },
+  { date: '08·14', tag: 'Meteorologia', title: 'Alerta taronja per calor a Catalunya: temperatures de fins a 40 °C', desc: 'El Meteocat activa l\'alerta taronja a Barcelona i el litoral català. S\'esperen tempestes a partir del cap de setmana.', url: 'https://www.catalunyapress.es/articulo/sociedad/2026-08-14/5983894-meteocat-alerta-naranja-calor-catalunya-40-grados' },
+  { date: '08·14', tag: 'Política', title: 'Rollán visita Ceuta per abordar la crisi migratòria amb Vivas', desc: 'El president del Senat viatja a Ceuta per analitzar la situació que travessa la ciutat autònoma juntament amb el president Juan Jesús Vivas.', url: 'https://www.elespanol.com/espana/politica/20260814/ultima-hora-politica-directo-presidente-senado-visita-ceuta-analizar-situacion-atraviesa-ciudad-junto-vivas/1003744352778_10.html' },
+  { date: '08·14', tag: 'Esports', title: 'Barça 26/27: Gordon arriba per 70 M€ i Ferran Torres marxa cap al PSG', desc: 'El FC Barcelona tanca la incorporació d\'Anthony Gordon (Newcastle) per 70 M€. Paral·lelament, Ferran Torres enfilaria cap al PSG per 50 M€.', url: 'https://sports.yahoo.com/articles/fc-barcelona-news-14-august-090000737.html' },
+  // ── 12·08·2026 ──
+  { date: '08·12', tag: 'Política', title: 'El govern aprova la pròrroga de la nuclear d\'Almaraz fins al 2030', desc: 'El Consell de Ministres autoritza la pròrroga d\'explotació de la central nuclear d\'Almaraz, generant crítiques de Sumar i Aliança Verda.', url: 'https://www.eldiario.es/politica/ultima-hora-actualidad-politica-directo_6_13441846.html' },
+  { date: '08·12', tag: 'Ciència', title: 'L\'eclipse total del 12 d\'agost: el proper complet sobre Europa no arribarà fins al 2180', desc: 'L\'eclipsi solar total és un fenomen irrepetible per a generacions futures. Científics de tot el món han aprofitat el pas de l\'ombra per a observacions úniques.', url: 'https://okdiario.com/ciencia/noticias-cientificas-que-definiran-2026-16260734' },
+  // ── 08·08·2026 ──
+  { date: '08·08', tag: 'Economia', title: 'La Fed manté la política restrictiva: la inflació segueix per sobre dels objectius', desc: 'La Fed de Kansas City avisa que la política monetària haurà de mantenir-se restrictiva. Cauen les expectatives de retallades de tipus a curt termini.', url: 'https://digitalfuentes7.wordpress.com/2026/08/08/5-noticias-economicas-de-hoy-8-de-agosto-2026-ee-uu-petroleo-e-ia/' },
+  // ── 30·07·2026 ──
+  { date: '07·30', tag: 'Ciència', title: 'Premis Nacionals d\'Investigació 2026: 20 categories i dues primeres vegades femenines', desc: 'El Ministeri de Ciència atorga els Premis Nacionals d\'Investigació 2026. Per primera vegada els premis Margarita Salas i Ángela Ruiz Robles recauen en dones.', url: 'https://www.infosalus.com/salud-investigacion/noticia-ciencia-concede-premios-nacionales-investigacion-2026-reconocen-excelencia-investigadores-20260730172439.html' },
+  // ── Normativa anterior ──
+  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.', url: null },
+  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.', url: null },
+  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.', url: null },
 ];
 
 export default function ScreenOperativaHome() {
@@ -122,7 +135,7 @@ export default function ScreenOperativaHome() {
 
       {/* Actualitat normativa */}
       <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
+        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
             <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
@@ -132,6 +145,11 @@ export default function ScreenOperativaHome() {
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: T.cat.operativa.solid, fontWeight: 700, marginTop: 6, display: 'inline-block', textDecoration: 'none' }}>
+                  Llegir la notícia →
+                </a>
+              )}
             </div>
           ))}
         </div>

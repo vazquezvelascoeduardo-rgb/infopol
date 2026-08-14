@@ -44,6 +44,83 @@ const USER = {
 };
 
 const NEWS = [
+  // ── 14·08·2026 ──────────────────────────────────────────────
+  {
+    id: 'n004',
+    date: '2026-08-14',
+    dateLabel: '08·14',
+    tag: 'Successos',
+    title: 'Detingut al centre de Barcelona un fugitiu recercat per cadena perpètua',
+    desc: 'La Policía Nacional arresta al casc antic un fugitiu sobre qui pesava una ordre de cerca i captura de la justícia islandesa per un crim violent. Enfrontava presó perpètua.',
+    url: 'https://www.catalunyapress.es/articulo/sucesos-cataluna/2026-08-14/5984107-detenido-pleno-centro-barcelona-peligroso-fugitivo-enfrenta-cadena-perpetua',
+  },
+  {
+    id: 'n005',
+    date: '2026-08-14',
+    dateLabel: '08·14',
+    tag: 'Meteorologia',
+    title: 'Alerta taronja per calor a Catalunya: temperatures de fins a 40 °C',
+    desc: 'El Meteocat activa l\'alerta taronja a Barcelona i el litoral català. Les temperatures poden arribar als 40 °C i s\'esperen tempestes a partir del cap de setmana.',
+    url: 'https://www.catalunyapress.es/articulo/sociedad/2026-08-14/5983894-meteocat-alerta-naranja-calor-catalunya-40-grados',
+  },
+  {
+    id: 'n006',
+    date: '2026-08-14',
+    dateLabel: '08·14',
+    tag: 'Política',
+    title: 'Rollán visita Ceuta per abordar la crisi migratòria amb Vivas',
+    desc: 'El president del Senat, Pedro Rollán, viatja a Ceuta per analitzar la situació que travessa la ciutat autònoma juntament amb el president local, Juan Jesús Vivas.',
+    url: 'https://www.elespanol.com/espana/politica/20260814/ultima-hora-politica-directo-presidente-senado-visita-ceuta-analizar-situacion-atraviesa-ciudad-junto-vivas/1003744352778_10.html',
+  },
+  {
+    id: 'n007',
+    date: '2026-08-14',
+    dateLabel: '08·14',
+    tag: 'Esports',
+    title: 'Barça 26/27: Gordon arriba per 70 M€ i Ferran Torres marxa cap al PSG',
+    desc: 'El FC Barcelona tanca la incorporació d\'Anthony Gordon (Newcastle) per 70 M€ per a la temporada 2026/27. Paral·lelament, Ferran Torres enfilaria cap al PSG per 50 M€.',
+    url: 'https://sports.yahoo.com/articles/fc-barcelona-news-14-august-090000737.html',
+  },
+  // ── 12·08·2026 ──────────────────────────────────────────────
+  {
+    id: 'n008',
+    date: '2026-08-12',
+    dateLabel: '08·12',
+    tag: 'Política',
+    title: 'El govern aprova la pròrroga de la nuclear d\'Almaraz fins al 2030',
+    desc: 'El Consell de Ministres autoritza la pròrroga d\'explotació de la central nuclear d\'Almaraz. La mesura ha generat crítiques de Sumar i Aliança Verda.',
+    url: 'https://www.eldiario.es/politica/ultima-hora-actualidad-politica-directo_6_13441846.html',
+  },
+  {
+    id: 'n009',
+    date: '2026-08-12',
+    dateLabel: '08·12',
+    tag: 'Ciència',
+    title: 'L\'eclipse total del 12 d\'agost: el proper complet sobre Europa no arribarà fins al 2180',
+    desc: 'L\'eclipsi solar total d\'avui és un fenomen irrepetible per a generacions futures. Científics de tot el món han aprofitat el pas de l\'ombra per realitzar observacions úniques.',
+    url: 'https://okdiario.com/ciencia/noticias-cientificas-que-definiran-2026-16260734',
+  },
+  // ── 08·08·2026 ──────────────────────────────────────────────
+  {
+    id: 'n010',
+    date: '2026-08-08',
+    dateLabel: '08·08',
+    tag: 'Economia',
+    title: 'La Fed manté la política restrictiva: la inflació segueix per sobre dels objectius',
+    desc: 'El president de la Fed de Kansas City avisa que la inflació és massa alta i que la política monetària haurà de mantenir-se restrictiva. Cauen les expectatives de retallades de tipus a curt termini.',
+    url: 'https://digitalfuentes7.wordpress.com/2026/08/08/5-noticias-economicas-de-hoy-8-de-agosto-2026-ee-uu-petroleo-e-ia/',
+  },
+  // ── 30·07·2026 ──────────────────────────────────────────────
+  {
+    id: 'n011',
+    date: '2026-07-30',
+    dateLabel: '07·30',
+    tag: 'Ciència',
+    title: 'Premis Nacionals d\'Investigació 2026: 20 categories i dues primeres vegades femenines',
+    desc: 'El Ministeri de Ciència atorga els Premis Nacionals d\'Investigació 2026. Per primera vegada el premi Margarita Salas i l\'Ángela Ruiz Robles recauen en dones investigadores.',
+    url: 'https://www.infosalus.com/salud-investigacion/noticia-ciencia-concede-premios-nacionales-investigacion-2026-reconocen-excelencia-investigadores-20260730172439.html',
+  },
+  // ── Normativa anterior ──────────────────────────────────────
   {
     id: 'n001',
     date: '2026-04-18',
