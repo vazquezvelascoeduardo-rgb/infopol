@@ -43,6 +43,16 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '08·15', tag: 'Política · Espanya', title: 'Ceuta reforça la frontera davant una nova convocatòria d\'entrada massiva', desc: 'El Marroc deté 148 persones mentre Espanya desplega efectius. Cinc mil persones romanen al territori des de la crisi del 30 de juliol.' },
+  { date: '08·15', tag: 'Política · Catalunya', title: 'Aliança Catalana s\'enfila als sondejos mentre Junts perd suport al Parlament', desc: 'El primer baròmetre del CEO del 2026 mostra un nou escenari: el PSC d\'Illa es manté, però Aliança Catalana experimenta un ascens meteòric.' },
+  { date: '08·15', tag: 'Internacional', title: 'Terratrèmol de 7,7 sacseja les costes d\'Indonèsia i força evacuacions', desc: 'Un sisme de gran magnitud va colpir la zona de Maumere, causant danys materials i forçant evacuacions massives.' },
+  { date: '08·15', tag: 'Internacional', title: 'Líban denuncia 11 morts en atacs israelians — Hezbollah amenaça represàlies', desc: 'El president libanès qualifica els atacs d\'un "missatge clar". Hezbollah avisa que la resposta serà "adequada".' },
+  { date: '08·15', tag: 'Internacional', title: 'Els talibans celebren el cinquè aniversari al poder a l\'Afganistan', desc: 'L\'ONU alerta sobre la greu situació dels drets humans. Les dones segueixen excloses de l\'educació i la vida pública.' },
+  { date: '08·15', tag: 'Policial', title: 'Detingut per matar la seva parella a Marbella — denúncies mútues una setmana abans', desc: 'Un home de 59 anys confessa l\'atac amb arma blanca a San Pedro Alcántara. La víctima havia presentat denúncia el dia 1 d\'agost.' },
+  { date: '08·15', tag: 'Ciència', title: 'Premis Breakthrough 2026 — sis guardons de 3 M$ en física, biomedicina i matemàtiques', desc: 'Els "Oscar de la ciència" reconeixen investigadors pioners. Matthias Mann guanya el Gairdner per les bases de la proteòmica moderna.' },
+  { date: '08·15', tag: 'Esports', title: 'La LaLiga 2026-27 arrencarà sense Barça ni Reial Madrid a la primera jornada', desc: 'Tots dos clubs descansen a l\'estrena. El Reial Madrid debutarà el 22 d\'agost visitant l\'Espanyol; el Barça juga el Joan Gamper el dia 19.' },
+  { date: '08·15', tag: 'Medi Ambient', title: 'La sequera deixa rius alemanys gairebé secs i amenaça l\'ecosistema fluvial', desc: 'La calor extrema i la manca de pluja han reduït els cabals. La baixa oxigenació posa en risc la fauna piscícola a tot el país.' },
+  { date: '08·15', tag: 'Economia · Catalunya', title: 'Catalunya defensa un model turístic que prioritzi el resident davant el massiu', desc: 'Sàmper reivindica al Parlament mesures per reforçar el comerç local i augmentar el retorn econòmic del turisme.' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
