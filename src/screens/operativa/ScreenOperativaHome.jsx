@@ -43,9 +43,16 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
-  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
-  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
-  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
+  { date: '08·17', tag: 'Esports · Bàsquet', title: 'Willy Hernangómez, presentat com a nou jugador de l\'Unicaja', desc: 'El pivot es presenta al Martín Carpena de Màlaga. Exjugador de Real Madrid, Barça i diverses franquícies de l\'NBA.', url: 'https://www.merchanendirecto.es/willy-hernangomez-una-bienvenida-al-unicaja-fuera-del-foco/' },
+  { date: '08·17', tag: 'Esports · Ciclisme', title: 'La Vuelta a Espanya 2026 s\'acosta: Pogačar, gran favorit', desc: 'La ronda espanyola arrencarà el 22 d\'agost a Mònaco. Pogačar debuta a La Vuelta per primera vegada des de 2019.', url: 'https://www.olympics.com/es/noticias/vuelta-espana-2026-ciclismo-recorrido-etapas-ciclistas-donde-ver' },
+  { date: '08·17', tag: 'Cultura', title: 'Jesús Cisneros, Premio Nacional d\'Il·lustració 2026', desc: 'El Ministeri de Cultura distingeix l\'il·lustrador aragonès. Treball "potent i expressiu" i de "qualitat excepcional". Premi dotat amb 30.000 €.', url: 'https://www.cultura.gob.es/actualidad/2026/06/260609-premio-nacional-ilustracion-2026.html' },
+  { date: '08·17', tag: 'Internacional · Defensa', title: 'Espanya i els EUA renoven el conveni de Rota i Morón malgrat la tensió per l\'Iran', desc: 'Madrid i Washington mantenen l\'acord de bases almenys un any més. La negativa espanyola va generar amenaces comercials de Trump.', url: 'https://www.elespanol.com/observatorio-defensa/20260522/espana-unidos-renuevan-convenio-moron-rota-pese-conflicto-trump-sanchez/1003744256306_0.html' },
+  { date: '08·17', tag: 'Política', title: 'Sánchez convoca reunió d\'urgència per la crisi migratòria a Ceuta', desc: 'El Govern reforça la seguretat. Dels 9 imams radicals detectats a Espanya, 5 eren a Catalunya. Barreres a l\'Arc de Triomf de Barcelona.', url: 'https://www.elespanol.com/espana/politica/20260817/ultima-hora-politica-directo-elma-saiz-reune-lunes-vivas-ceuta-hablar-situacion-atraviesa-ciudad/1003744354791_10.html' },
+  { date: '08·17', tag: 'Economia', title: 'Ibex 35 perd els 20.000 punts per la tensió a Orient Mitjà', desc: 'La borsa espanyola cau un 0,87% fins als 19.981,90 punts. Cellnex, Inditex i Amadeus, els valors més penalitzats.', url: 'https://www.infobae.com/espana/agencias/2026/08/17/el-ibex-35-baja-el-087-y-pierde-los-20000-puntos-por-falta-de-acuerdo-en-oriente-medio/' },
+  { date: '08·17', tag: 'Catalunya', title: 'Barcelona commemora el 9è aniversari dels atemptats del 17A', desc: 'La Rambla i Cambrils van acollir actes de record. Presència de Mossos d\'Esquadra i autoritats polítiques.', url: 'https://cronicaglobal.elespanol.com/politica/20260817/barcelona-rinde-tributo-victimas-lejos-ramblas/1003742787322_0.html' },
+  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.', url: null },
+  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.', url: null },
+  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.', url: null },
 ];
 
 export default function ScreenOperativaHome() {
@@ -132,6 +139,11 @@ export default function ScreenOperativaHome() {
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 6, fontSize: 11, fontWeight: 700, color: T.cat.operativa.solid, textDecoration: 'none' }}>
+                  Llegir notícia →
+                </a>
+              )}
             </div>
           ))}
         </div>
