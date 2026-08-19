@@ -48,6 +48,21 @@ const NEWS = [
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
 
+// cat: leyes=polític/legal · operativa=succés/seguretat · transito=esports · academia=economia/ciència
+const NEWS_GENERAL = [
+  { date: '08·19', cat: 'operativa', tag: 'Succés · Cat', title: 'Mossos disparen contra un multireincident que intenta atropellar agents a l\'Hospitalet', desc: 'Un conductor amb antecedents va intentar atropellar agents de la Guàrdia Urbana i Mossos durant un control. Els agents van obrir foc en defensa pròpia.', url: 'https://www.youtube.com/watch?v=DuBTy0GqNwM' },
+  { date: '08·19', cat: 'leyes', tag: 'Política · Cat', title: 'Baròmetre CEO: PSC es manté líder, Aliança Catalana puja i Junts baixa', desc: 'El primer sondeig de 2026 del Centre d\'Estudis d\'Opinió dibuixa un nou escenari polític: l\'ascens meteòric d\'Aliança Catalana sacseja el Parlament.', url: 'https://www.elnacional.cat/es' },
+  { date: '08·19', cat: 'leyes', tag: 'Política · Cat', title: 'Junts demana la dimissió de Paneque i Nadal pel socavó del Putxet', desc: 'El despreniment ha obligat a desallotjar 93 habitatges al barri barceloní. Junts exigeix responsabilitats polítiques immediates a l\'Ajuntament.', url: 'https://www.elnacional.cat/es' },
+  { date: '08·19', cat: 'operativa', tag: 'Política · Esp', title: 'Crisi a Ceuta: 60.000 persones creuen la frontera en dies', desc: 'Sánchez demana una reunió d\'urgència dels ministres d\'Interior de la UE. Marroc nega haver relaxat deliberadament els controls fronterers.', url: 'https://www.infobae.com/espana/2026/08/02/la-crisis-de-ceuta-en-cinco-claves-de-las-falsas-promesas-de-asilo-a-la-avalancha-de-60000-personas-y-el-papel-de-marruecos/' },
+  { date: '08·19', cat: 'academia', tag: 'Economia · Esp', title: 'El 52,5% dels espanyols retalla la cistella de la compra per la pujada de preus', desc: 'La inflació persisteix i afecta el consum de les llars. La crisi forrajera al nord per la sequera agreuja la situació del sector ramader.', url: 'https://www.periodistadigital.com/periodismo/20260819/espana-amanece-calor-extremo-incendios-ceuta-granada-futbol-estreno-noticia-689405239189/' },
+  { date: '08·18', cat: 'transito', tag: 'Esports', title: 'Oficial: el Barça fitxa Rodri per 10 M€ — campió del món i Baló d\'Or 2024', desc: 'El migcampista de la selecció espanyola signa fins al 2030 procedent del Manchester City. Va rebutjar el Reial Madrid per apostar pel projecte de Flick.', url: 'https://cronicaglobal.elespanol.com/culemania/primer-equipo/20260818/oficial-barca-gran-golpe-anuncia-fichaje-rodri/1003742787586_0.html' },
+  { date: '08·19', cat: 'transito', tag: 'Esports', title: 'Tenis: eliminació per marejos al Masters 1.000 de Cincinnati', desc: 'Un tennista va haver d\'abandonar el torneig per dificultats respiratòries i marejos durant el partit en plena onada de calor.', url: 'https://www.elnacional.cat/es/deportes.html' },
+  { date: '08·19', cat: 'leyes', tag: 'Internacional', title: 'La UE dóna suport a la Cort Penal Internacional davant la pressió dels EUA', desc: 'La Unió Europea reafirma el seu compromís amb el dret internacional i planta cara a les pressions nord-americanes sobre la CPI.', url: 'https://es.euronews.com/video/2026/08/19/ultimas-noticias-19-agosto-2026-tarde' },
+  { date: '08·19', cat: 'operativa', tag: 'Internacional', title: 'EAU suspèn el comerç amb l\'Iran per l\'atac amb míssil balístic', desc: 'Els Emirats Àrabs Units han anunciat la suspensió de totes les relacions comercials amb Iran en resposta al llançament d\'un míssil balístic.', url: 'https://es.euronews.com/video/2026/08/19/ultimas-noticias-19-agosto-2026-tarde' },
+  { date: '08·19', cat: 'academia', tag: 'Ciència', title: 'Premis Fronteres del Coneixement XVIII: grafè, CAR-T i criptografia quàntica', desc: 'La FBBVA reconeix 10 personalitats per descobriments com l\'angle màgic del grafè, la immunoteràpia CAR-T i avenços en criptografia postquàntica.', url: 'https://www.elespanol.com/ciencia/investigacion/20260618/premios-fronteras-ensalzan-poder-unificador-ciencia-cultura-frente-mundo-marcado-incertidumbre/1003744288962_0.html' },
+  { date: '08·19', cat: 'academia', tag: 'Ciència · Premi', title: 'Premi Nacional de Recerca: Ángel Carracedo per medicina forense i genòmica', desc: 'El catedràtic de la Universitat de Santiago de Compostela rep el Premi Gregorio Marañón per la seva trajectòria pionera en genètica forense.', url: 'https://www.consalud.es/profesionales/espana-premia-la-excelencia-cientifica-de-20-investigadores-y-marca-un-hito-en-el-talento-joven-femenino.html' },
+];
+
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
   return (
@@ -134,6 +149,31 @@ export default function ScreenOperativaHome() {
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Notícies del dia */}
+      <div style={{ padding: '18px 0 24px' }}>
+        <SectionHead kicker="19 agost 2026" kickerColor={T.cat.leyes.solid} title="Notícies del dia" action="Tot →" />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {NEWS_GENERAL.map((n, i) => {
+            const k = T.cat[n.cat] || T.cat.operativa;
+            return (
+              <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${k.solid}`, boxShadow: T.shadow.card }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                  <span style={{ fontSize: 10, fontWeight: 800, color: k.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                  <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+                {n.url && (
+                  <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginTop: 8, color: k.solid, fontWeight: 700, fontSize: 11.5, textDecoration: 'none' }}>
+                    Llegir notícia <Icon name="arrow-right" size={12} color={k.solid} />
+                  </a>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
