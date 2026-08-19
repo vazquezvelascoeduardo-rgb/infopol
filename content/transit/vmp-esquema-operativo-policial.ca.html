@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="infopol-icon" content="🛴">
+<title>VMP · Arbre operatiu de decisions — Comunicat SCT 7/2026</title>
+<style>
+  :root{
+    --ink:#0E1621;
+    --ink-soft:#3A4757;
+    --line:#C9D2DC;
+    --paper:#FFFFFF;
+    --wash:#EEF2F6;
+    --sct:#0B4F8A;
+    --stop:#B3261E;
+    --go:#186B47;
+    --warn:#9A5B00;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--wash);
+    line-height:1.45;
+    -webkit-text-size-adjust:100%;
+  }
+  .card{max-width:760px;margin:0 auto;background:var(--paper)}
+
+  /* ---------- capçalera ---------- */
+  header{background:var(--ink);color:#fff;padding:18px 16px 16px}
+  .kicker{
+    font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;color:#8FB4D6
+  }
+  h1{font-size:26px;line-height:1.1;font-weight:800;letter-spacing:-.02em;margin:6px 0 8px}
+  h1 span{color:#8FB4D6;font-weight:400}
+  .meta{font-family:var(--mono);font-size:11px;color:#B9C6D4}
+
+  /* ---------- seccions ---------- */
+  section{border-top:3px solid var(--ink);padding:16px}
+  .stepnum{
+    font-family:var(--mono);font-size:11px;font-weight:700;
+    background:var(--ink);color:#fff;padding:2px 7px;border-radius:2px;margin-right:8px
+  }
+  h2{font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;
+     display:flex;align-items:center;margin-bottom:12px}
+  h3{font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;
+     color:var(--ink-soft);margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--line)}
+  p{font-size:13.5px;margin-bottom:10px}
+  p.lead{font-size:14px}
+
+  /* ---------- porta de decisió ---------- */
+  .gate{border:2px solid var(--ink);border-radius:3px;overflow:hidden;margin-bottom:12px}
+  .gate-q{background:var(--wash);padding:10px 12px;font-weight:700;font-size:14px}
+  .gate-q small{display:block;font-weight:500;font-size:12px;color:var(--ink-soft);margin-top:4px}
+  .gate-a{display:flex;border-top:1px solid var(--line)}
+  .gate-a > div{flex:1;padding:10px 12px;font-size:13px}
+  .gate-a > div + div{border-left:1px solid var(--line)}
+  .tag{font-family:var(--mono);font-size:11px;font-weight:700;display:block;margin-bottom:3px}
+  .t-si{color:var(--go)}
+  .t-no{color:var(--stop)}
+  .t-motor{color:var(--stop)}
+  .t-vpl{color:var(--sct)}
+
+  /* ---------- passos d'una via ---------- */
+  .step{border-left:3px solid var(--line);padding:9px 0 9px 12px;margin-bottom:10px}
+  .step.hit{border-left-color:var(--stop)}
+  .step.ok{border-left-color:var(--go)}
+  .step.no{border-left-color:var(--ink-soft)}
+  .step .code{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--ink-soft)}
+  .step .ttl{font-weight:700;font-size:13.5px;margin:2px 0 4px}
+  .step .body{font-size:13px;color:var(--ink-soft)}
+  .step .body b{color:var(--ink)}
+
+  /* ---------- imports ---------- */
+  .eur{font-family:var(--mono);font-weight:700;white-space:nowrap}
+  .eur.stop{color:var(--stop)}
+  .eur.go{color:var(--go)}
+  .never{color:var(--stop);font-weight:700}
+
+  /* ---------- avisos ---------- */
+  .box{border:1px solid var(--line);border-left:4px solid var(--sct);
+       background:var(--wash);padding:10px 12px;font-size:13px;margin-bottom:12px}
+  .box.warn{border-left-color:var(--warn)}
+  .box.stop{border-left-color:var(--stop)}
+  .box.go{border-left-color:var(--go)}
+  .box b{display:block;margin-bottom:3px}
+
+  /* ---------- principis ---------- */
+  ol.principis{list-style:none;counter-reset:p}
+  ol.principis li{
+    counter-increment:p;position:relative;padding:10px 0 10px 46px;
+    border-bottom:1px solid var(--line);font-size:13px
+  }
+  ol.principis li:last-child{border-bottom:0}
+  ol.principis li::before{
+    content:"P" counter(p);position:absolute;left:0;top:10px;
+    font-family:var(--mono);font-size:11px;font-weight:700;
+    background:var(--ink);color:#fff;padding:2px 7px;border-radius:2px
+  }
+
+  /* ---------- taules ---------- */
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:6px}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:6px}
+  th{
+    text-align:left;font-family:var(--mono);font-size:10px;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--ink-soft);border-bottom:2px solid var(--ink);
+    padding:5px 6px;font-weight:700
+  }
+  td{border-bottom:1px solid var(--line);padding:7px 6px;vertical-align:top}
+  td.num{font-family:var(--mono);font-weight:700;text-align:right;white-space:nowrap}
+  td.art{font-family:var(--mono);font-size:11px;color:var(--ink-soft);white-space:nowrap}
+  caption{caption-side:top;text-align:left;font-family:var(--mono);font-size:10px;
+          letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);padding-bottom:6px}
+
+  /* ---------- llistes ---------- */
+  ul.check{list-style:none}
+  ul.check li{position:relative;padding:6px 0 6px 26px;font-size:13px;border-bottom:1px solid var(--line)}
+  ul.check li:last-child{border-bottom:0}
+  ul.check li::before{
+    content:"";position:absolute;left:0;top:9px;width:13px;height:13px;
+    border:1.5px solid var(--ink-soft);border-radius:2px
+  }
+  ul.check li.must::before{border-color:var(--stop);border-width:2px}
+  ul.plain{list-style:none;font-size:13px}
+  ul.plain li{padding:4px 0 4px 14px;position:relative}
+  ul.plain li::before{content:"·";position:absolute;left:2px;font-weight:700;color:var(--ink-soft)}
+
+  /* ---------- descripcions del fet ---------- */
+  .fet{border:1px solid var(--line);padding:10px 12px;margin-bottom:10px;background:var(--wash)}
+  .fet .ttl{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+            color:var(--ink-soft);margin-bottom:5px}
+  .fet q{font-size:13px;font-style:italic;display:block}
+  .fet .nota{font-size:12px;color:var(--ink-soft);margin-top:6px}
+
+  footer{padding:14px 16px 22px;font-size:11.5px;color:var(--ink-soft);border-top:3px solid var(--ink)}
+</style>
+</head>
+<body>
+<div class="card">
+
+<header>
+  <div class="kicker">Policia Local de Viladecans</div>
+  <h1>Arbre operatiu de decisions <span>VMP / VPL</span></h1>
+  <div class="meta">Qualificació i denúncia · Comunicat SCT 7/2026 · en vigor 20/07/2026</div>
+</header>
+
+<section>
+  <div class="box">
+    <b>Norma de referència única</b>
+    Comunicat Informatiu SCT <b style="display:inline">7/2026</b>. Refon i substitueix els Comunicats 3/2026, 4/2026 i 6/2026. Preval sobre l'Operativa PL Viladecans (02/2026) i el Nomenclàtor SCT (02/2026) en cas de discrepància.
+  </div>
+  <p style="font-size:12.5px;color:var(--ink-soft)">
+    <b>Suport normatiu:</b> RD 970/2020 · Llei 5/2025 (DA 1a) · RD 52/2026 (REVEMP) · RDL 8/2004 art. 1 bis · RGV arts. 1, 22 bis i annexos XIX i XXI · Reg. (UE) 168/2013 · LSV arts. 82 i 104 · RGCon art. 1.1
+  </p>
+</section>
+
+<!-- 1 -->
+<section>
+  <h2><span class="stepnum">1</span>Les tres dades que ho decideixen tot</h2>
+  <div class="scroll">
+  <table>
+    <tr><th>Dada</th><th>On la trobes</th><th>Frontera</th></tr>
+    <tr>
+      <td><b>MOM</b><br>massa en ordre de marxa (kg)</td>
+      <td>RNV / REVEMP · ATEX: «Massa servei (kg) (G)». Si no consta: <b>pesar o estimar i fer-ho constar</b></td>
+      <td class="num">25 kg</td>
+    </tr>
+    <tr>
+      <td><b>Velocitat màxima</b><br>de fabricació (km/h)</td>
+      <td>Placa de marcatge · certificat · fitxa del fabricant · display</td>
+      <td class="num">14 i 25</td>
+    </tr>
+    <tr>
+      <td><b>Seient i alçada</b><br>mm des del terra</td>
+      <td>Mesura <i>in situ</i></td>
+      <td class="num">540 mm<br>400 mm</td>
+    </tr>
+  </table>
+  </div>
+  <p style="font-size:12.5px;color:var(--ink-soft)">
+    540 mm per a L1e/L3e/L4e (2 rodes) · 400 mm per a L2e/L5e/L6e/L7e (3 o més rodes).
+  </p>
+  <div class="box warn">
+    <b>Complementàries obligatòries</b>
+    Marca, model, número de sèrie o bastidor, potència (W), any de fabricació i <b style="display:inline">fotografia</b>.
+  </div>
+</section>
+
+<!-- 2 -->
+<section>
+  <h2><span class="stepnum">2</span>Els cinc principis que no pots violar</h2>
+  <ol class="principis">
+    <li>Si duu <b>placa de marcatge</b> → és <b>VMP sempre</b>. No discuteixis la categoria.</li>
+    <li>La manca de <b>certificat</b> no treu el vehicle de la categoria VMP. Un VMP sense certificat segueix sent VMP. <span class="never">No</span> li apliquis l'art. 1.1 RGV (500 €) ni immobilització.</li>
+    <li>Se surt de VMP per <b>prestacions</b>, mai per <b>documentació</b>: velocitat &gt; 25 km/h · no 100 % elèctric · més d'una plaça · seient sense autoequilibratge · tensió &gt; 100 VCC / 240 VAC.</li>
+    <li>L'<b>assegurança del VPL</b> és una obligació <b>condicionada</b>. Sense certificat + RNV + etiqueta → no denunciable per SOA.</li>
+    <li><span class="never">Mai</span> dues butlletes d'identificació al mateix vehicle. <span class="never">Mai</span> denúncia per manca de permís de conduir en VMP. <span class="never">Mai</span> detracció de punts en VMP.</li>
+  </ol>
+</section>
+
+<!-- 3 -->
+<section>
+  <h2><span class="stepnum">3</span>Arbre mestre — determinació de família</h2>
+
+  <div class="gate">
+    <div class="gate-q">Q0 · Duu placa de marcatge?</div>
+    <div class="gate-a">
+      <div><span class="tag t-si">SÍ</span> És <b>VMP sempre</b> i té certificat. Salta a <b>Q2</b>.</div>
+      <div><span class="tag t-no">NO</span> Continua a <b>Q1</b>.</div>
+    </div>
+  </div>
+
+  <div class="gate">
+    <div class="gate-q">Q1 · Té seient, i l'alçada supera els límits?
+      <small>540 mm en 2 rodes (L1e/L3e/L4e) · 400 mm en 3 o més rodes (L2e/L5e/L6e/L7e)</small>
+    </div>
+    <div class="gate-a">
+      <div><span class="tag t-motor">SÍ · FAMÍLIA D</span> Dins del Reg. 168/2013. <b>Matriculable</b>. → <b>Via 4</b></div>
+      <div><span class="tag t-no">NO</span> Continua a <b>Q2</b>.</div>
+    </div>
+  </div>
+
+  <div class="gate">
+    <div class="gate-q">Q2 · Compleix TOTS aquests requisits?
+      <small>velocitat màxima de fabricació 6–25 km/h · propulsió exclusivament elèctrica · una sola plaça · seient només si té autoequilibratge · tensió ≤ 100 VCC / 240 VAC</small>
+    </div>
+    <div class="gate-a">
+      <div><span class="tag t-si">SÍ</span> Continua a <b>Q3</b>.</div>
+      <div><span class="tag t-motor">NO · FAMÍLIA C</span> No és VMP i queda fora del 168/2013. <b>No pot circular.</b> → <b>Via 3</b></div>
+    </div>
+  </div>
+
+  <div class="gate">
+    <div class="gate-q">Q3 · MOM &gt; 25 kg <b>i</b> velocitat &gt; 14 km/h?
+      <small>art. 1 bis RDL 8/2004</small>
+    </div>
+    <div class="gate-a">
+      <div><span class="tag t-motor">SÍ · FAMÍLIA A</span> VMP = <b>vehicle de motor</b>. SOA incondicional. → <b>Via 1</b></div>
+      <div><span class="tag t-vpl">NO · FAMÍLIA B</span> VMP = <b>VPL</b>. SOA condicionat. → <b>Via 2</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section>
+  <h2><span class="stepnum">4</span>Via 1 — Família A · VMP vehicle de motor</h2>
+  <p class="lead">MOM <b>&gt; 25 kg</b> <b>i</b> velocitat <b>&gt; 14 km/h</b> (topall 25 km/h).</p>
+
+  <div class="step hit">
+    <div class="code">A.1</div>
+    <div class="ttl">Assegurança — obligació incondicional</div>
+    <div class="body">Sense contracte de SOA en vigor → <span class="eur stop">800 € (400 €)</span> · art. 2.1 AOV.<br>
+      És <b>irrellevant</b> que tingui certificat, RNV o etiqueta.</div>
+  </div>
+
+  <div class="step hit">
+    <div class="code">A.2</div>
+    <div class="ttl">Certificat de circulació</div>
+    <div class="body">Comercialitzat <b>abans del 22/01/2024</b> → exempt fins al 22/01/2027, passa a A.3.<br>
+      Comercialitzat després i sense certificat → <span class="eur stop">200 € (100 €)</span> · art. 22 bis.2 RGV.
+      <b>Absorbeix A.3 i A.4</b> → salta a A.5.</div>
+  </div>
+
+  <div class="step hit">
+    <div class="code">A.3</div>
+    <div class="ttl">Inscripció al RNV / REVEMP</div>
+    <div class="body">No inscrit → <span class="eur stop">100 € (50 €)</span> · art. 22 bis.2 RGV. <b>Absorbeix A.4</b> → salta a A.5.</div>
+  </div>
+
+  <div class="step hit">
+    <div class="code">A.4</div>
+    <div class="ttl">Etiqueta identificativa o placa de marcatge</div>
+    <div class="body">No present o no llegible → <span class="eur stop">80 € (40 €)</span> · art. 22 bis.2 RGV.<br>
+      Especifica a la butlleta <b>quin dels dos</b> incompleix.</div>
+  </div>
+
+  <div class="step hit">
+    <div class="code">A.5</div>
+    <div class="ttl">Requisits tècnics de l'annex XXI · art. 22 bis.2 RGV</div>
+    <div class="body">
+      Només si constates un incompliment <b>concret i observat</b>. No el dedueixis de la manca de certificat (<i>non bis in idem</i>).
+      <ul class="plain">
+        <li>Manipulació de velocitat · modificació estructural → <span class="eur stop">500 € (250 €)</span> MG</li>
+        <li>Enllumenat inexistent o inoperatiu · rodes → <span class="eur stop">200 € (100 €)</span> G</li>
+        <li>Sense timbre · sense cavallet → <span class="eur stop">80 € (40 €)</span> L</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step no">
+    <div class="code">A.6 · A.7</div>
+    <div class="ttl">Permís de conduir i punts</div>
+    <div class="body"><span class="never">Mai es denuncia</span> el permís. <span class="never">Mai</span> hi ha detracció de punts.</div>
+  </div>
+
+  <div class="step ok">
+    <div class="code">A.8 · A.9</div>
+    <div class="ttl">Circulació i immobilització</div>
+    <div class="body">Les infraccions de circulació són sempre acumulables (§12).<br>
+      Immobilització: <span class="never">no</span> per manca de papers · <b>sí</b> per alcohol, drogues o risc greu.</div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section>
+  <h2><span class="stepnum">5</span>Via 2 — Família B · VMP considerat VPL</h2>
+  <p class="lead">MOM <b>≤ 25 kg</b> (fins a 25 km/h) <b>o</b> MOM &gt; 25 kg amb velocitat <b>6–14 km/h</b>.</p>
+
+  <div class="box stop">
+    <b>B.1 · Assegurança — obligació condicionada. Punt crític.</b>
+    Només és exigible si concorren <b>els tres</b> requisits: (a) certificat de circulació, (b) inscripció al RNV i (c) etiqueta identificativa.
+  </div>
+
+  <div class="gate">
+    <div class="gate-q">Hi són els tres?</div>
+    <div class="gate-a">
+      <div><span class="tag t-si">SÍ · i sense SOA</span> <span class="eur stop">300 € (150 €)</span> · art. 2.1 AOV</div>
+      <div><span class="tag t-no">FALTA'N ALGUN</span> <b>No denunciable per assegurança.</b> Denuncia el requisit absent (B.2 / B.3 / B.4).</div>
+    </div>
+  </div>
+
+  <div class="step hit">
+    <div class="code">B.2</div>
+    <div class="ttl">Certificat de circulació</div>
+    <div class="body"><span class="eur stop">200 € (100 €)</span> · <b>absorbeix B.3 i B.4</b></div>
+  </div>
+  <div class="step hit">
+    <div class="code">B.3</div>
+    <div class="ttl">Inscripció al RNV</div>
+    <div class="body"><span class="eur stop">100 € (50 €)</span> · <b>absorbeix B.4</b></div>
+  </div>
+  <div class="step hit">
+    <div class="code">B.4</div>
+    <div class="ttl">Etiqueta o placa</div>
+    <div class="body"><span class="eur stop">80 € (40 €)</span></div>
+  </div>
+  <div class="step hit">
+    <div class="code">B.5</div>
+    <div class="ttl">Requisits tècnics de l'annex XXI</div>
+    <div class="body"><span class="eur stop">500 € / 200 € / 80 €</span> segons gravetat</div>
+  </div>
+  <div class="step no">
+    <div class="code">B.6 · B.7</div>
+    <div class="ttl">Permís de conduir i punts</div>
+    <div class="body"><span class="never">Mai</span>, ni l'un ni els altres.</div>
+  </div>
+  <div class="step ok">
+    <div class="code">B.8 · B.9</div>
+    <div class="ttl">Circulació i immobilització</div>
+    <div class="body">Infraccions de circulació segons §12. Immobilització: <span class="never">no</span> per manca de papers.</div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section>
+  <h2><span class="stepnum">6</span>Via 3 — Família C · No VMP i fora del Reg. 168/2013</h2>
+  <div class="box stop">
+    <b>No poden circular</b>
+    Cas típic: VMP amb limitador manipulat per damunt de 25 km/h; patinets «sport» sense homologació L.
+  </div>
+
+  <div class="step hit">
+    <div class="code">C.1</div>
+    <div class="ttl">Assegurança</div>
+    <div class="body">És vehicle de motor segons l'art. 1 bis RDL 8/2004 (velocitat &gt; 25 km/h <b>o</b> pes net &gt; 25 kg amb &gt; 14 km/h)?<br>
+      Sí → <span class="eur stop">800 € (400 €)</span> · art. 2.1 AOV · No → <b>no denunciable</b> per assegurança.</div>
+  </div>
+
+  <div class="step hit">
+    <div class="code">C.2</div>
+    <div class="ttl">Autorització administrativa per circular</div>
+    <div class="body"><span class="eur stop">500 € (250 €)</span> · art. 1.1 RGV<br>
+      <b>Immobilització</b> (art. 104.1.a LSV) · acta A-13 · safata H02</div>
+  </div>
+
+  <div class="step no">
+    <div class="code">C.3 · C.4</div>
+    <div class="ttl">Requisits tècnics i permís de conduir</div>
+    <div class="body">No es denuncien.</div>
+  </div>
+
+  <div class="step ok">
+    <div class="code">C.5 · C.6</div>
+    <div class="ttl">Circulació i documentació obligatòria</div>
+    <div class="body">Infraccions de circulació segons §12.<br>
+      Documenta <b>sempre</b>: fotografia de la manipulació i mètode de determinació de la velocitat (cinemòmetre, seguiment, display o manifestació del conductor).</div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section>
+  <h2><span class="stepnum">7</span>Via 4 — Família D · Dins del Reg. 168/2013 (matriculable)</h2>
+  <div class="box warn">
+    <b>Règim ordinari de vehicle a motor</b>
+    Aquí <b>sí</b> hi ha permís de conduir i <b>sí</b> hi ha punts.
+  </div>
+
+  <div class="step">
+    <div class="code">D.1</div>
+    <div class="ttl">Categorització</div>
+    <div class="body">Seient per damunt de 540 mm (L1e/L3e/L4e) o de 400 mm (L2e/L5e/L6e/L7e).
+      <ul class="plain">
+        <li>Potència ≤ 4.000 W <b>i</b> velocitat ≤ 45 km/h → <b>L1e-B</b>, ciclomotor de 2 rodes → permís AM</li>
+        <li>Supera potència o velocitat → <b>L3e</b>, motocicleta de 2 rodes:</li>
+        <li>L3e-A1 ≤ 11 kW i ≤ 0,1 kW/kg → A1 (o B amb més de 3 anys)</li>
+        <li>L3e-A2 ≤ 35 kW i ≤ 0,2 kW/kg → A2</li>
+        <li>L3e-A3 la resta → A</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step hit">
+    <div class="code">D.2 · D.3 · D.4</div>
+    <div class="ttl">Assegurança, matrícula i condicions tècniques</div>
+    <div class="body">Assegurança segons la categoria del vehicle.<br>
+      No matriculat → <span class="eur stop">500 € (250 €)</span> · art. 1.2 RGV · <b>immobilització</b>.<br>
+      Condicions tècniques segons el RGV.</div>
+  </div>
+
+  <div class="step hit">
+    <div class="code">D.5 · D.6 · D.7</div>
+    <div class="ttl">Permís, punts i circulació</div>
+    <div class="body">Sense permís → art. 1.1 RGCon, opció segons categoria. <b>Valora l'art. 384 CP</b> (§14).<br>
+      Punts: <b>sí</b>, detracció segons infracció. Circulació segons §12, amb punts.</div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section>
+  <h2><span class="stepnum">8</span>Subarbre — certificat de circulació</h2>
+  <p><b>Què és:</b> l'acreditació que <b>el model</b> compleix el Manual de característiques dels VMP (DGT, res. 12/01/2022) i l'annex XXI RGV. L'emet un laboratori autoritzat i es materialitza a la <b>placa de marcatge</b> de fàbrica.</p>
+  <p><b>Certificat ≠ inscripció.</b> El certificat valida el <b>model</b>; la inscripció identifica <b>l'exemplar</b> i el titular. Consulta de models certificats: <b>dgt.es/vmp</b>.</p>
+
+  <div class="box warn">
+    <b>Atenció</b>
+    L'annex XIX RGV permet <b>comercialitzar</b> VMP sense homologació. Això <b>no</b> habilita a circular-hi. Per tant existeixen legalment al mercat patinets de 2025-2026 sense certificat.
+  </div>
+
+  <div class="gate">
+    <div class="gate-q">Duu placa de marcatge?</div>
+    <div class="gate-a">
+      <div><span class="tag t-si">SÍ</span> Té certificat. No denunciable per aquesta via → passa a RNV.</div>
+      <div><span class="tag t-no">NO</span> Mira la data de comercialització →</div>
+    </div>
+  </div>
+
+  <div class="gate">
+    <div class="gate-q">Comercialitzat abans del 22/01/2024?</div>
+    <div class="gate-a">
+      <div><span class="tag t-si">SÍ</span> Exempt fins al 22/01/2027. No denunciable.<br>
+        Però <b>ha d'estar inscrit</b> (número Z) i <b>dur etiqueta</b>. No li cal placa de marcatge.</div>
+      <div><span class="tag t-no">NO</span> <span class="eur stop">200 € (100 €)</span> · art. 22 bis.2 RGV<br><b>Absorbeix</b> RNV i placa.</div>
+    </div>
+  </div>
+
+  <h3>Les quatre opcions</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>#</th><th>Comercialització</th><th>Certificat</th><th>Situació</th><th>Denúncia</th></tr>
+    <tr><td class="num">1</td><td>Abans 22/01/2024</td><td>No</td><td>Exempt fins al 22/01/2027. Inscripció <b>Z</b> + etiqueta. Sense placa</td><td>—</td></tr>
+    <tr><td class="num">2</td><td>Abans 22/01/2024</td><td>Sí</td><td>Ordinari. Número <b>M</b></td><td>—</td></tr>
+    <tr><td class="num">3</td><td>Després 22/01/2024</td><td>Sí</td><td>Ordinari. Placa de marcatge + número <b>M</b></td><td>—</td></tr>
+    <tr><td class="num">4</td><td><b>Després 22/01/2024</b></td><td><b>No</b></td><td>Comercialització lícita · <b>circulació il·lícita</b></td><td class="num"><span class="eur stop">200 €</span></td></tr>
+  </table>
+  </div>
+
+  <h3>Càrrega de la prova — criteri operatiu</h3>
+  <p>La denúncia de 200 € <b>només és sostenible si pots situar el vehicle després del 22/01/2024</b>.</p>
+  <ul class="plain">
+    <li>Placa de marcatge present → té certificat → res a denunciar per aquesta via.</li>
+    <li>Model al llistat dgt.es/vmp però exemplar sense placa → indici de rèplica o manipulació: fotografia i fes-ho constar.</li>
+    <li>Manifestació del conductor sobre la data de compra → consigna-la <b>literalment</b>.</li>
+    <li>Factura o embalatge → adjunta'ls.</li>
+  </ul>
+  <div class="box go">
+    <b>Si no ho pots determinar — criteri prudent</b>
+    Denuncia per <b>manca d'inscripció al RNV</b> (100 €). L'obligació d'inscripció afecta <b>tots</b> els VMP, certificats o no, i no depèn de cap data. És inatacable en al·legacions.
+  </div>
+</section>
+
+<!-- 9 -->
+<section>
+  <h2><span class="stepnum">9</span>Subarbre — assegurança</h2>
+  <p class="lead">És el punt on més butlletes cauen.</p>
+
+  <div class="gate">
+    <div class="gate-q">MOM &gt; 25 kg <b>i</b> velocitat &gt; 14 km/h?</div>
+    <div class="gate-a">
+      <div><span class="tag t-motor">SÍ · VEHICLE DE MOTOR</span>
+        Obligació <b>incondicional</b>: encara que no tingui certificat, ni RNV, ni etiqueta.<br>
+        <span class="eur stop">800 € (400 €)</span></div>
+      <div><span class="tag t-vpl">NO · VPL</span>
+        Obligació <b>condicionada</b>. Exigeix els tres: certificat, inscripció al RNV i etiqueta.<br>
+        Els tres → <span class="eur stop">300 € (150 €)</span><br>
+        En falta algun → <b>no denunciable</b>, denuncia el que falti.</div>
+    </div>
+  </div>
+
+  <div class="box stop">
+    <b>Vici de nul·litat</b>
+    Els VPL <b>no certificats</b>, o certificats però <b>no inscrits</b>, <b>no tenen obligació de SOA</b>. Denunciar-los per assegurança és un vici de nul·litat.
+  </div>
+
+  <div class="box warn">
+    <b>Dada imprescindible a la butlleta</b>
+    Si el vehicle no està inscrit, l'agent <b>ha d'indicar el pes</b>. Sense MOM no es pot sostenir la diferència entre 800 € i 300 €.
+  </div>
+</section>
+
+<!-- 10 -->
+<section>
+  <h2><span class="stepnum">10</span>Subarbre — identificació física</h2>
+
+  <h3>Placa de marcatge vs etiqueta identificativa</h3>
+  <div class="scroll">
+  <table>
+    <tr><th></th><th>Placa de marcatge</th><th>Etiqueta identificativa</th></tr>
+    <tr><td>Qui la posa</td><td><b>Fabricant</b>, de fàbrica</td><td><b>Titular</b>, després d'inscriure</td></tr>
+    <tr><td>Què acredita</td><td>El <b>certificat</b> (el model)</td><td>La <b>inscripció al RNV</b> (l'exemplar)</td></tr>
+    <tr><td>Conté</td><td>Núm. de certificat i dades tècniques</td><td>Núm. d'identificació M / Z</td></tr>
+    <tr><td>Format</td><td>—</td><td><b>M</b> + 4 xifres + 3 consonants · <b>Z</b> si no certificat</td></tr>
+    <tr><td>Naturalesa</td><td>Placa de fàbrica</td><td><b>Adhesiu</b> oficial (≈ 52,8 × 65 mm)</td></tr>
+    <tr><td>On es compra</td><td>—</td><td>Manipulador de plaques autoritzat o centre homologat</td></tr>
+    <tr><td>Si falta</td><td class="num">80 € (40 €)</td><td class="num">80 € (40 €)</td></tr>
+  </table>
+  </div>
+
+  <h3>Col·locació — regla exacta</h3>
+  <div class="gate">
+    <div class="gate-q">El VMP té porta-identificador (suport destinat a l'efecte)?</div>
+    <div class="gate-a">
+      <div><span class="tag t-si">SÍ</span> L'etiqueta hi ha d'anar col·locada.</div>
+      <div><span class="tag t-no">NO</span> N'hi ha prou amb un <b>lloc visible</b>: pal de direcció, parafang posterior o lateral del xassís. Ha de poder llegir-se sense manipular el vehicle.</div>
+    </div>
+  </div>
+  <div class="box stop">
+    <b>No denunciïs perquè no la dugui «al darrere com una moto»</b>
+    La infracció és <b>no disposar-ne o no exhibir-la</b>, no la ubicació concreta. En VMP no certificats es pot col·locar expressament en un lloc visible.
+  </div>
+
+  <h3>Quan s'apliquen realment els 80 €</h3>
+  <div class="gate">
+    <div class="gate-q">Està inscrit al RNV?</div>
+    <div class="gate-a">
+      <div><span class="tag t-no">NO</span> <span class="eur stop">100 €</span> per manca d'inscripció. <b>Absorbeix</b> l'etiqueta.</div>
+      <div><span class="tag t-si">SÍ · i sense adhesiu</span> <span class="eur stop">80 € (40 €)</span></div>
+    </div>
+  </div>
+  <p style="font-size:12.5px;color:var(--ink-soft)">Els 80 € només operen en un escenari estret: <b>inscrit però sense l'adhesiu</b>.</p>
+
+  <div class="box warn">
+    <b>Cautela — etiquetes falses</b>
+    Circulen rèpliques comercials i adhesius no oficials. Indicis: text mal imprès o corromput (l'oficial diu «VEHÍCULO DE MOVILIDAD PERSONAL»), format alfanumèric que no encaixa amb M/Z + 4 xifres + 3 consonants, absència del número de certificat i de sèrie. <b>Contrasta sempre el número a l'aplicatiu</b> abans de donar el vehicle per inscrit.
+  </div>
+
+  <h3>Certificat digital al mòbil</h3>
+  <p>Portar el certificat en PDF (miDGT) <b>no substitueix</b> l'etiqueta física. Però si el conductor te'l mostra i hi consta el número M i el titular, el vehicle és <b>identificable</b>:</p>
+  <ul class="plain">
+    <li>Denuncia l'etiqueta (80 €).</li>
+    <li><b>No</b> denunciïs manca d'inscripció.</li>
+    <li><b>No</b> immobilitzis.</li>
+  </ul>
+</section>
+
+<!-- 11 -->
+<section>
+  <h2><span class="stepnum">11</span>Regles d'absorció</h2>
+  <div class="scroll">
+  <table>
+    <tr><th>Aquesta…</th><th></th><th>…absorbeix aquesta</th></tr>
+    <tr><td>Certificat <span class="eur stop">200 €</span></td><td class="art">→</td><td>Inscripció RNV <span class="eur">100 €</span></td></tr>
+    <tr><td>Certificat <span class="eur stop">200 €</span></td><td class="art">→</td><td>Placa de marcatge <span class="eur">80 €</span></td></tr>
+    <tr><td>RNV <span class="eur stop">100 €</span></td><td class="art">→</td><td>Etiqueta identificativa <span class="eur">80 €</span></td></tr>
+  </table>
+  </div>
+  <ul class="plain">
+    <li>Sense certificat <b>i</b> no inscrit → només <b>certificat, 200 €</b>.</li>
+    <li>Sense placa <b>i</b> sense certificat → només <b>certificat, 200 €</b>.</li>
+    <li>Sense etiqueta <b>i</b> no inscrit → només <b>RNV, 100 €</b>.</li>
+  </ul>
+  <div class="box stop">
+    <b>Sempre una sola butlleta d'identificació per vehicle</b>
+    Acumulables sense restricció: assegurança + annex XXI + infraccions de circulació.
+  </div>
+</section>
+
+<!-- 12 -->
+<section>
+  <h2><span class="stepnum">12</span>Infraccions de circulació</h2>
+  <p class="lead">Punts: <span class="never">mai</span> en VMP i VPL · <b>sí</b> en Família D.</p>
+
+  <h3>12.1 · Alcohol i drogues</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>Conducta</th><th>Norma</th><th>Import</th><th>Mesura</th></tr>
+    <tr><td>Alcohol &gt; 0,25 mg/l aire espirat</td><td class="art">art. 20 RGC</td><td>Segons barem</td><td>Immobilització</td></tr>
+    <tr><td>Negativa a proves d'alcohol</td><td class="art">art. 21 RGC</td><td class="num">1.000 €</td><td>Immob. + valorar <b>art. 383 CP</b></td></tr>
+    <tr><td>Positiu en drogues</td><td class="art">art. 14 LSV</td><td class="num">1.000 €</td><td>Immobilització</td></tr>
+    <tr><td>Negativa a proves de drogues</td><td class="art">art. 14 LSV</td><td class="num">1.000 €</td><td>Immob. + valorar <b>art. 383 CP</b></td></tr>
+  </table>
+  </div>
+  <div class="box">
+    <b>Barem (aire espirat)</b>
+    Menors i permís de menys de 2 anys: més de 0 fins a 0,15 → 500 € · 0,16–0,30 → 500 € · més de 0,30 → 1.000 €.<br>
+    Permís de més de 2 anys: 0,26–0,50 → 500 € · més de 0,50 → 1.000 €.<br>
+    Reincidència l'any anterior → 1.000 €.
+  </div>
+
+  <h3>12.2 · Circulació</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>Conducta</th><th>Norma</th><th>Grav.</th><th>Import</th></tr>
+    <tr><td><b>Vorera o zona de vianants</b></td><td class="art">art. 121.5 RGC</td><td><b>Greu</b></td><td class="num"><b>200 € (100 €)</b></td></tr>
+    <tr><td>Circulació prohibida (travessia, interurbana, autopista, túnel)</td><td class="art">art. 38.4 RGC</td><td>Greu</td><td class="num">200 €</td></tr>
+    <tr><td>Mòbil o auriculars</td><td class="art">art. 18.2 RGC</td><td>Greu</td><td class="num">200 €<br><small>sense punts</small></td></tr>
+    <tr><td>Dues o més persones</td><td class="art">art. 9.1 RGC</td><td>Lleu</td><td class="num">100 €</td></tr>
+    <tr><td>Sense enllumenat nocturn</td><td class="art">art. 123 RGC</td><td>Lleu</td><td class="num">80 €</td></tr>
+    <tr><td>STOP o cediu el pas</td><td class="art">art. 145.2-A RGC<br><small>abans 151.2</small></td><td>Greu</td><td class="num">200 €</td></tr>
+    <tr><td>Semàfor</td><td class="art">art. 143.1-D RGC<br><small>abans 146</small></td><td>Greu</td><td class="num">200 €</td></tr>
+    <tr><td>Ordres dels agents</td><td class="art">art. 141.1 RGC<br><small>abans 143.1</small></td><td>Greu</td><td class="num">200 €</td></tr>
+    <tr><td>Canvi de sentit prohibit</td><td class="art">art. 79.1 RGC</td><td>Greu</td><td class="num">200 €</td></tr>
+    <tr><td>Conducció negligent</td><td class="art">art. 3.1 RGC</td><td>Greu</td><td class="num">200 €</td></tr>
+    <tr><td>Conducció temerària</td><td class="art">art. 3.1 RGC</td><td>MG</td><td class="num">500 €</td></tr>
+    <tr><td><b>Sense casc</b></td><td class="art">art. 13.bis G<br><small>Ordenança Viladecans</small></td><td>Lleu</td><td class="num"><b>90 €</b></td></tr>
+  </table>
+  </div>
+  <div class="box warn">
+    <b>Renumeració del RGC</b>
+    El Comunicat SCT 2/2026 (RD 465/2025, en vigor 27/01/2026) va renumerar els títols IV i V. <b>Verifica el numeral a l'aplicatiu</b> abans de tancar la butlleta.
+  </div>
+
+  <h3>12.3 · Vies permeses</h3>
+  <p>Carrils bici segregats, voreres-bici, pistes-bici i sendes ciclables, llevat de prohibició expressa del titular de la via (Instrucció DGT 22/MOV 21). <b>Mai vorera ni zona de vianants.</b></p>
+</section>
+
+<!-- 13 -->
+<section>
+  <h2><span class="stepnum">13</span>Responsabilitat</h2>
+  <div class="gate">
+    <div class="gate-q">El VMP consta inscrit al RNV?</div>
+    <div class="gate-a">
+      <div><span class="tag t-si">SÍ</span> Respon el <b>titular inscrit</b>.</div>
+      <div><span class="tag t-no">NO</span> Respon <b>el conductor</b>.</div>
+    </div>
+  </div>
+  <div class="box stop">
+    <b>Si és menor d'edat</b>
+    Pares, tutors, acollidors i guardadors legals o de fet responen <b>solidàriament</b> (art. 82 LSV).
+    <b style="display:inline">Consigna a la butlleta</b> nom, cognoms, DNI/NIE i domicili del pare, mare o tutor. És obligatori.
+  </div>
+</section>
+
+<!-- 14 -->
+<section>
+  <h2><span class="stepnum">14</span>Immobilització i alertes penals</h2>
+
+  <h3>14.1 · Immobilització</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>Supòsit</th><th>Base</th><th>Actuació</th></tr>
+    <tr><td>Famílies <b>C i D</b> sense autorització administrativa</td><td class="art">art. 104.1.a LSV</td><td>Immobilització + <b>acta A-13</b> → safata <b>H02</b></td></tr>
+    <tr><td>Positiu o negativa d'alcohol o drogues</td><td class="art">art. 104.1.d LSV</td><td>Immobilització</td></tr>
+    <tr><td>Delicte contra la seguretat viària</td><td class="art">—</td><td>Valorar</td></tr>
+    <tr><td>Risc greu o immediat</td><td class="art">—</td><td>Valorar</td></tr>
+    <tr><td>Negativa a identificar-se o impossibilitat de fer cessar la conducta</td><td class="art">—</td><td>Valorar</td></tr>
+  </table>
+  </div>
+  <div class="box stop">
+    <b>En VMP (famílies A i B)</b>
+    La manca de registre, certificat o assegurança <b>no comporta immobilització automàtica</b>.
+  </div>
+
+  <h3>14.2 · Alertes</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>Si detectes…</th><th>Fes…</th></tr>
+    <tr><td><b>Menor de 18</b></td><td>Identifica pares o tutors i consigna'ls (art. 82 LSV)</td></tr>
+    <tr><td><b>Menor de 14</b></td><td>Exempt de responsabilitat penal. Responsabilitat administrativa dels tutors</td></tr>
+    <tr><td><b>Limitador manipulat</b></td><td>Família C → 500 € art. 1.1 RGV + immobilització. <b>Fotografia obligatòria</b></td></tr>
+    <tr><td><b>Negativa a proves</b></td><td><b>Art. 383 CP</b> → atestat, no butlleta</td></tr>
+    <tr><td><b>Conducció sota efectes amb risc</b></td><td>Arts. 379/380/381 CP → preval la via penal (art. 45 LO 4/2015)</td></tr>
+    <tr><td><b>Família D sense permís</b></td><td><b>Art. 384 CP.</b> No s'aplica si ha obtingut vàlidament algun permís → només administratiu</td></tr>
+    <tr><td><b>Lesions o accident</b></td><td>Comunicat de lesions + atestat. Arts. 142 i 152 CP</td></tr>
+    <tr><td><b>Concurrència administrativa i penal</b></td><td>Suspèn la via administrativa. <i>Non bis in idem</i></td></tr>
+  </table>
+  </div>
+</section>
+
+<!-- 15 -->
+<section>
+  <h2><span class="stepnum">15</span>Checklist de butlleta</h2>
+  <ul class="check">
+    <li>Data, hora i lloc exacte</li>
+    <li>Filiació del conductor: nom, cognoms, DNI/NIE, domicili i telèfon</li>
+    <li class="must">Si és menor: filiació completa del pare, mare o tutor</li>
+    <li>Titular del RNV si difereix del conductor</li>
+    <li>Núm. d'identificació: M0000BBB (certificats) / Z0000BBB (no certificats)</li>
+    <li>Si no en té: núm. de sèrie + núm. de certificat de la placa</li>
+    <li class="must">Si no té cap número: <b>pes (kg) i velocitat màxima (km/h)</b></li>
+    <li>Marca, model, potència (W) i any de fabricació</li>
+    <li>Velocitat a què circulava i mètode de determinació</li>
+    <li>Fotografia: vehicle, placa o etiqueta (o la seva absència) i manipulació</li>
+    <li>Article i opció normativa (Nomenclàtor SCT)</li>
+    <li>Descripció del fet, literal (§16)</li>
+    <li>Manifestacions rellevants del conductor (data de compra, etc.)</li>
+    <li>Mesures adoptades: immobilització, acta A-13, dipòsit</li>
+    <li class="must">Verifica que no hi ha doble butlleta d'identificació (§11)</li>
+  </ul>
+</section>
+
+<!-- 16 -->
+<section>
+  <h2><span class="stepnum">16</span>Descripcions del fet</h2>
+
+  <div class="fet">
+    <div class="ttl">Assegurança · VMP vehicle de motor — 800 €</div>
+    <q>Circular el vehicle ressenyat sense que consti que el propietari tingui subscrit i mantingui en vigor un contracte d'assegurança que cobreixi la responsabilitat civil derivada de la seva circulació.</q>
+    <div class="nota">Consigna MOM [__] kg i velocitat màxima [__] km/h.</div>
+  </div>
+
+  <div class="fet">
+    <div class="ttl">Assegurança · VPL — 300 €</div>
+    <q>Circular el vehicle personal lleuger sense que consti que el propietari tingui subscrit i mantingui en vigor un contracte d'assegurança que cobreixi la responsabilitat civil derivada de la seva circulació.</q>
+  </div>
+
+  <div class="fet">
+    <div class="ttl">Certificat de circulació — 200 €</div>
+    <q>Circular amb un VMP que no disposa del certificat de circulació.</q>
+  </div>
+
+  <div class="fet">
+    <div class="ttl">Inscripció al RNV — 100 €</div>
+    <q>No inscriure un vehicle de mobilitat personal al Registre Nacional de Vehicles.</q>
+  </div>
+
+  <div class="fet">
+    <div class="ttl">Etiqueta o placa — 80 €</div>
+    <q>No disposar i exhibir en un vehicle de mobilitat personal l'etiqueta identificativa o la placa de marcatge del fabricant.</q>
+    <div class="nota">Especifica quin dels dos incompleix.</div>
+  </div>
+
+  <div class="fet">
+    <div class="ttl">Annex XXI · molt greu — 500 €</div>
+    <q>No complir el vehicle de mobilitat personal els requisits tècnics regulats a l'annex XXI i que afecten greument la seguretat viària.</q>
+  </div>
+
+  <div class="fet">
+    <div class="ttl">Annex XXI · greu (200 €) i lleu (80 €)</div>
+    <q>No complir el vehicle de mobilitat personal els requisits tècnics regulats a l'annex XXI.</q>
+  </div>
+
+  <div class="fet">
+    <div class="ttl">Autorització administrativa · Família C — 500 €</div>
+    <q>Circular amb un vehicle que no té la corresponent autorització administrativa.</q>
+  </div>
+
+  <div class="fet">
+    <div class="ttl">Matrícula · Família D — 500 €</div>
+    <q>Circular amb el vehicle ressenyat sense haver obtingut, prèviament, l'autorització administrativa corresponent.</q>
+  </div>
+
+  <div class="fet">
+    <div class="ttl">Vorera o zona de vianants — 200 €</div>
+    <q>Circular amb qualsevol classe de vehicle per una vorera o una zona de vianants.</q>
+  </div>
+</section>
+
+<!-- 17 -->
+<section>
+  <h2><span class="stepnum">17</span>Errors freqüents</h2>
+  <div class="scroll">
+  <table>
+    <tr><th>Error</th><th>Correcte</th></tr>
+    <tr><td>«No duu placa → 200 €»</td><td>Comprova la data. Anterior al 22/01/2024 → <b>exempt</b></td></tr>
+    <tr><td>«Sense certificat → no és legal → 500 € art. 1.1 RGV»</td><td>Segueix sent VMP. <b>200 € i prou.</b> Se surt de VMP per prestacions, no per papers</td></tr>
+    <tr><td>«Sense certificat → també incompleix l'annex XXI»</td><td><i>Non bis in idem.</i> L'annex XXI exigeix un incompliment <b>observat i concret</b></td></tr>
+    <tr><td>«Té certificat però no assegurança → 300 €»</td><td>Només si a més està <b>inscrit</b> i duu <b>etiqueta</b>. Si no, no és denunciable</td></tr>
+    <tr><td>«Sense certificat i sense inscripció → dues butlletes»</td><td>Absorció. <b>Una de sola</b></td></tr>
+    <tr><td>«No duu l'etiqueta al darrere → 80 €»</td><td>Si no té porta-identificador, <b>qualsevol lloc visible compleix</b></td></tr>
+    <tr><td>«Pesa 25 kg però fa 55 km/h → 800 € per pes»</td><td>El pes és irrellevant: és vehicle de motor per <b>velocitat &gt; 25 km/h</b>. I és <b>Família C</b>, no VMP</td></tr>
+    <tr><td>«VMP sense permís de conduir»</td><td><span class="never">Mai</span></td></tr>
+    <tr><td>«VMP amb detracció de punts»</td><td><span class="never">Mai</span></td></tr>
+    <tr><td>«Vorera 100 €, lleu»</td><td><b>200 €, greu</b>, art. 121.5 RGC</td></tr>
+    <tr><td>«VPL sense AOV 350 €»</td><td><b>300 € (150 €)</b></td></tr>
+  </table>
+  </div>
+</section>
+
+<!-- 18 -->
+<section>
+  <h2><span class="stepnum">18</span>Calendari i punts a verificar</h2>
+
+  <h3>18.1 · Calendari crític</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>Data</th><th>Efecte</th></tr>
+    <tr><td class="art">22/01/2022</td><td>Entrada en vigor del Manual de característiques dels VMP</td></tr>
+    <tr><td class="art"><b>22/01/2024</b></td><td>Només es poden comercialitzar VMP certificats. <i>L'annex XIX permet comercialitzar sense homologació, però això no habilita a circular</i></td></tr>
+    <tr><td class="art">30/01/2026</td><td>RD 52/2026 · Registre de Vehicles Personals Lleugers (REVEMP)</td></tr>
+    <tr><td class="art"><b>20/07/2026</b></td><td>Comunicat SCT <b>7/2026</b> — criteris vigents</td></tr>
+    <tr><td class="art"><b>22/01/2027</b></td><td>Fi del règim transitori. Els VMP no certificats <b>no podran circular</b>. La identificació <b>Z</b> deixa de tenir efecte. Des del 23/01/2027 es denuncien per manca de certificat</td></tr>
+  </table>
+  </div>
+
+  <h3>18.2 · Discrepàncies documentals</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>Font</th><th>Diu</th><th>Correcte (Com. 7/2026)</th></tr>
+    <tr><td>Operativa PL Viladecans 02/2026 · Nomenclàtor 02/2026</td><td>VPL sense AOV 350 €</td><td><b>300 € (150 €)</b></td></tr>
+    <tr><td>Operativa PL Viladecans 02/2026</td><td>Vorera 100 €, lleu</td><td><b>200 €, greu</b> (art. 121.5 RGC)</td></tr>
+    <tr><td>Operativa PL Viladecans 02/2026</td><td>Sense placa: art. 8 RGV, 200 €</td><td><b>80 €</b>, art. 22 bis.2 RGV</td></tr>
+    <tr><td>Operativa PL Viladecans 02/2026</td><td>Família C: art. 1 RGVEH opció 1.1.5B</td><td><b>art. 1.1 RGV</b>, 500 € (250 €)</td></tr>
+    <tr><td>Operativa PL Viladecans 02/2026</td><td>Arts. 143.1 / 146 / 151.2 RGC</td><td><b>141.1 / 143.1-D / 145.2-A</b> (Com. 2/2026)</td></tr>
+  </table>
+  </div>
+
+  <h3>18.3 · Pendent de verificar</h3>
+  <ul class="check">
+    <li><b>Edat mínima</b> per conduir VMP a Viladecans (ordenança municipal)</li>
+    <li><b>Opcions normatives</b> del Nomenclàtor SCT per als imports actualitzats (300 € VPL i les tres de l'annex XXI)</li>
+    <li>Import per <b>incomplir l'obligació d'assegurar sense circular</b> (documentació anterior: 610 €)</li>
+    <li><b>Assegurança Família D</b>: opció i import segons L1e / L3e</li>
+    <li>Numerals RGC definitius posteriors al RD 465/2025 a l'aplicatiu</li>
+  </ul>
+</section>
+
+<footer>
+  <b>Clàusula.</b> Eina de suport a la decisió operativa. La qualificació definitiva i la responsabilitat de l'actuació recauen en l'agent actuant i el seu comandament, d'acord amb la valoració presencial dels fets.<br><br>
+  Elaborat a partir del Comunicat Informatiu SCT 7/2026 i documentació complementària. Revisió: agost del 2026.
+</footer>
+
+</div>
+</body>
+</html>
