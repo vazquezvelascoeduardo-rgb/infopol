@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
+import { NOTICIES, NOTICIES_META } from '../../data/noticies';
 
 function BigCatCard({ cat, icon, kicker, title, desc, cta, onClick }) {
   const k = T.cat[cat];
@@ -117,6 +118,36 @@ export default function ScreenOperativaHome() {
             <Chip icon="car" label="Control trànsit" />
             <Chip icon="siren" label="Detenció" />
           </div>
+        </div>
+      </div>
+
+      {/* Notícies del dia */}
+      <div style={{ padding: '14px 0 0' }}>
+        <SectionHead
+          kicker={`Notícies · ${NOTICIES_META.updatedLabel}`}
+          kickerColor={T.cat.transito.solid}
+          title="Actualitat diària"
+          action="Veure totes →"
+          onAction={() => navigate('/noticies')}
+        />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {NOTICIES.slice(0, 3).map((n) => (
+            <a key={n.id} href={n.url} target="_blank" rel="noopener noreferrer" style={{
+              display: 'block', textDecoration: 'none', color: 'inherit',
+              background: '#fff', borderRadius: T.r.md, padding: 14,
+              borderLeft: `2px solid ${T.cat.transito.solid}`, boxShadow: T.shadow.card,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.transito.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+              </div>
+              <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+              <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              <div style={{ marginTop: 8, fontSize: 11, color: T.cat.transito.solid, fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                Llegir a {n.source}
+              </div>
+            </a>
+          ))}
         </div>
       </div>
 

@@ -7,6 +7,7 @@ import ScreenOnboarding from './screens/ScreenOnboarding';
 import ScreenPerfil from './screens/ScreenPerfil';
 
 import ScreenOperativaHome from './screens/operativa/ScreenOperativaHome';
+import ScreenNoticies from './screens/noticies/ScreenNoticies';
 import ScreenInfraccions from './screens/operativa/ScreenInfraccions';
 import ScreenFitxa from './screens/operativa/ScreenFitxa';
 import ScreenProtocol from './screens/operativa/ScreenProtocol';
@@ -87,6 +88,7 @@ export default function App() {
         <Route path="fisiques" element={<ScreenFisiques />} />
       </Route>
       <Route path="/perfil" element={<ScreenPerfil />} />
+      <Route path="/noticies" element={<ScreenNoticies />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

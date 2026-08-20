@@ -54,6 +54,9 @@ export default function Icon({ name, size = 22, color = 'currentColor', strokeWi
     case 'wifi': return <svg {...common}><path d="M2 8.5a13 13 0 0 1 20 0"/><path d="M6 12.5a7 7 0 0 1 12 0"/><path d="M10 16.5a3 3 0 0 1 4 0"/><circle cx="12" cy="20" r="1" fill={color}/></svg>;
     case 'battery': return <svg {...common}><rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 11v2"/><rect x="4" y="9" width="12" height="6" rx="1" fill={color} stroke="none"/></svg>;
     case 'signal': return <svg {...common}><rect x="2" y="16" width="3" height="6" rx="1" fill={color} stroke="none"/><rect x="7" y="12" width="3" height="10" rx="1" fill={color} stroke="none"/><rect x="12" y="8" width="3" height="14" rx="1" fill={color} stroke="none"/><rect x="17" y="4" width="3" height="18" rx="1" fill={color} stroke="none"/></svg>;
+    case 'newspaper': return <svg {...common}><path d="M4 4h13v16H5a1 1 0 0 1-1-1V4z"/><path d="M17 8h3v10a2 2 0 0 1-2 2h-1"/><path d="M7 8h7M7 12h7M7 16h4"/></svg>;
+    case 'external-link': return <svg {...common}><path d="M14 4h6v6"/><path d="M20 4L10 14"/><path d="M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"/></svg>;
+    case 'globe': return <svg {...common}><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14 0 18M12 3c-3 3.5-3 14 0 18"/></svg>;
     default: return <svg {...common}><circle cx="12" cy="12" r="9"/></svg>;
   }
 }
