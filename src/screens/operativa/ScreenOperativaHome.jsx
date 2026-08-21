@@ -48,6 +48,67 @@ const NEWS = [
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
 
+const TAG_COLORS = {
+  'Política':  T.cat.operativa.solid,
+  'Economia':  T.cat.leyes.solid,
+  'Esports':   T.cat.atajos.solid,
+  'Successos': T.cat.alcohol.solid,
+  'Ciència':   T.cat.transito.solid,
+  'Cultura':   T.cat.academia.solid,
+};
+
+const GENERAL_NEWS = [
+  {
+    date: '08·21',
+    tag: 'Política',
+    title: 'Crisi a Ceuta: militars de Canàries reforcen la frontera sud',
+    desc: 'Ayuso critica l\'executiu per mantenir les vacances mentre s\'aguditza la pressió migratòria al sud.',
+    link: 'https://www.elespanol.com/espana/politica/20260821/ultima-hora-politica-directo-militares-canarias-desplazan-ceuta-reforzar-capacidades-ejercito-tierra/1003744358988_10.html',
+  },
+  {
+    date: '08·20',
+    tag: 'Economia',
+    title: 'Santander tanca la compra de Webster Bank als EUA',
+    desc: 'L\'operació, anunciada al febrer i completada en sis mesos, integra Webster al grup Santander als Estats Units.',
+    link: 'https://www.elespanol.com/invertia/empresas/banca/20260820/banco-santander-cierra-compra-webster-crecer-unidos/1003744357961_0.html',
+  },
+  {
+    date: '08·21',
+    tag: 'Esports',
+    title: 'La Vuelta a Espanya arrenca demà a Mònaco',
+    desc: '21 etapes i 3.275 km de recorregut amb sortida des del Principat i final a Granada el 13 de setembre.',
+    link: 'https://www.semana.com/deportes/ciclismo/articulo/cuando-empieza-la-vuelta-a-espana-2026-fechas-recorrido-oficial-y-equipos-confirmados/202610/',
+  },
+  {
+    date: '08·21',
+    tag: 'Ciència',
+    title: 'Investigadora de l\'Institut Josep Carreras guanya el Premi Gabriella Morreale',
+    desc: 'Biola Javierre Martínez, del centre barceloní, premiada per les seves recerques en epigenètica i genòmica funcional.',
+    link: 'https://www.ciencia.gob.es/Noticias/2026/julio/MICIU-concede-Premios-Nacionales-Investigacion-2026.html',
+  },
+  {
+    date: '08·15',
+    tag: 'Successos',
+    title: 'Mossos detenen 6 persones per robatoris de joies al carrer a Barcelona',
+    desc: 'Operació Kanpai Càtena: sis arrestats i nombroses identificacions en controls per furts de cadenes i polseres.',
+    link: 'https://www.catalunyapress.es/articulo/sucesos-cataluna/2026-08-15/5984992-mossos-detienen-seis-personas-barcelona-robos-cadenas-pulseras',
+  },
+  {
+    date: '08·12',
+    tag: 'Successos',
+    title: 'Quatre detinguts per tràfic de persones a Barcelona i Tarragona',
+    desc: 'La Policia Nacional allibera cinc dones en una operació contra l\'explotació sexual a Castelldefels i Reus.',
+    link: 'https://www.moncloa.com/2026/08/12/trata-seres-humanos-barcelona-tarragona-3414303',
+  },
+  {
+    date: '08·05',
+    tag: 'Successos',
+    title: 'Desarticulada xarxa que amagava 2,5 t de metanfetamina en vainilla',
+    desc: 'Operació conjunta contra el càrtel Jalisco Nova Generació que usava aromes líquides com a camuflatge del narcotràfic.',
+    link: 'https://www.catalunyapress.es/articulo/sucesos-cataluna/2026-08-05/5976217-catalunya-desmantela-red-internacional-escondia-25-toneladas-metanfetamina-vainilla',
+  },
+];
+
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
   return (
@@ -134,6 +195,33 @@ export default function ScreenOperativaHome() {
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Notícies del dia */}
+      <div style={{ padding: '14px 0 24px' }}>
+        <SectionHead kicker="Notícies" kickerColor={T.cat.leyes.solid} title="Actualitat del dia" action="Tot →" />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {GENERAL_NEWS.map((n, i) => {
+            const color = TAG_COLORS[n.tag] || T.cat.leyes.solid;
+            return (
+              <div
+                key={i}
+                onClick={() => n.link && window.open(n.link, '_blank')}
+                style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${color}`, boxShadow: T.shadow.card, cursor: n.link ? 'pointer' : 'default' }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                  <span style={{ fontSize: 10, fontWeight: 800, color, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                  <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+                {n.link && (
+                  <div style={{ marginTop: 6, fontSize: 11, fontWeight: 700, color }}>Llegir notícia completa →</div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
