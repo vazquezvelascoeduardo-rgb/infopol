@@ -48,6 +48,58 @@ const NEWS = [
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
 
+const NOTICIAS = [
+  {
+    date: '08·22',
+    tag: 'Internacional',
+    title: 'Turquia emet ordre d\'arrest internacional contra Netanyahu',
+    desc: 'Ankara l\'acusa de crims contra la humanitat per la detenció de la Flotilla Global Sumud rumb a Gaza.',
+    url: 'https://www.infobae.com/america/agencias/2026/08/22/sabado-22-de-agosto-de-2026-0200-gmt/',
+  },
+  {
+    date: '08·22',
+    tag: 'LaLiga',
+    title: 'Real Madrid – Espanyol: Mourinho debuta en el banc blanc',
+    desc: 'El tècnic portuguès dirigeix el seu primer partit oficial tretze anys després de la seva primera etapa al club.',
+    url: 'https://libero.pe/futbol-internacional/2026/08/21/partidos-de-hoy-sabado-22-de-agosto-en-vivo-horarios-donde-ver-futbol-tv-real-madrid-vs-espanyol-bayern-munich-vs-borussia-dortmund-1329468',
+  },
+  {
+    date: '08·22',
+    tag: 'Ciclisme',
+    title: 'Arrenca la Vuelta a Espanya 2026',
+    desc: 'Pogačar i Carapaz, grans favorits per la victòria final. Primera etapa al País Basc.',
+    url: 'https://elmercurio.com.ec/deportes/2026/08/21/agenda-deportiva-agosto/',
+  },
+  {
+    date: '08·22',
+    tag: 'Economia',
+    title: 'Espanya lidera el creixement de la zona euro amb un 2,1%',
+    desc: 'Les tensions energètiques al golf Pèrsic encaren els costos, però l\'ocupació i els fons NGEU sostenen l\'expansió.',
+    url: 'https://juanjoserubioguerrero.wordpress.com/2026/08/10/espana-2026-milagro-economico-o-crecimiento-con-pies-de-barro/',
+  },
+  {
+    date: '08·22',
+    tag: 'Ciència',
+    title: 'La Xina llança la sonda Chang\'e-7 cap al pol sud lunar',
+    desc: 'La missió busca gel d\'aigua al cràter Shackleton per obrir la porta a futures bases lunars habitades.',
+    url: 'https://www.milenio.com/cultura/laberinto/ciencia-2026-avances-cientificos-tecnologicos-esperan',
+  },
+  {
+    date: '08·22',
+    tag: 'Internacional',
+    title: 'Cali: 329 morts al terratrèmol de magnitud 7,4',
+    desc: 'Quasi dues setmanes del sisme a Colòmbia, les autoritats continuen retirant runa als barris del centre.',
+    url: 'https://www.infobae.com/america/agencias/2026/08/22/sabado-22-de-agosto-de-2026-0200-gmt/',
+  },
+  {
+    date: '08·22',
+    tag: 'F1',
+    title: 'La F1 torna de l\'atur estiuenc al GP dels Països Baixos',
+    desc: 'Antonelli lidera el mundial i Hamilton pressiona. Zandvoort acull el primer GP de la represa de temporada.',
+    url: 'https://www.clarosports.com/futbol/partidos-de-hoy-22-de-agosto-de-2026-y-donde-ver-en-vivo-todo-el-futbol-de-este-sabado/',
+  },
+];
+
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
   return (
@@ -132,6 +184,28 @@ export default function ScreenOperativaHome() {
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Notícies del dia */}
+      <div style={{ padding: '14px 0 24px' }}>
+        <SectionHead kicker="22 Agost 2026" kickerColor={T.cat.atajos.solid} title="Notícies del dia" action="Totes →" />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {NOTICIAS.map((n, i) => (
+            <div
+              key={i}
+              onClick={() => n.url && window.open(n.url, '_blank')}
+              style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.atajos.solid}`, boxShadow: T.shadow.card, cursor: 'pointer' }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.atajos.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+              </div>
+              <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+              <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              <div style={{ marginTop: 6, fontSize: 11, fontWeight: 700, color: T.cat.atajos.solid }}>Llegir complet →</div>
             </div>
           ))}
         </div>
