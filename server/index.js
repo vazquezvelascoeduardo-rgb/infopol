@@ -44,6 +44,93 @@ const USER = {
 };
 
 const NEWS = [
+  // ── Noticias 23/08/2026 ──────────────────────────────────────
+  {
+    id: 'n010',
+    date: '2026-08-23',
+    dateLabel: '08·23',
+    tag: 'Policial · CAT',
+    title: 'Mort a la Ràpita en una baralla multitudinària',
+    desc: 'Els Mossos reben l\'avís a les 3.30 h. Un home mor al lloc de l\'incident. La Divisió d\'Investigació Criminal de les Terres de l\'Ebre investiga les circumstàncies de l\'agressió entre grups.',
+    url: 'https://www.catalunyapress.es/articulo/sucesos-cataluna/2026-08-23/5991464-muere-hombre-rpita-agresion-entre-varios-grupos',
+  },
+  {
+    id: 'n011',
+    date: '2026-08-23',
+    dateLabel: '08·23',
+    tag: 'Internacional',
+    title: 'Jackson Hole i G20: el deute dels EUA, al centre del debat global',
+    desc: 'Els EUA acullen els dos grans fòrums financers de la setmana. El creixent volum del deute federal i la política de tipus d\'interès centren l\'agenda dels ministres de Finances del G20.',
+    url: 'https://www.infobae.com/america/agencias/2026/08/23/domingo-23-de-agosto-de-2026-1200-gmt/',
+  },
+  {
+    id: 'n012',
+    date: '2026-08-23',
+    dateLabel: '08·23',
+    tag: 'Internacional',
+    title: '\'Veus per la vida\': concert solidari pel terratrèmol de Colòmbia',
+    desc: 'Karol G, Miguel Bosé, Maluma i altres artistes actuen per recaptar fons per a les zones afectades pel sisme de magnitud 7,4 del 10 d\'agost, que va causar centenars de víctimes.',
+    url: 'https://www.infobae.com/america/agencias/2026/08/23/domingo-23-de-agosto-de-2026-1200-gmt/',
+  },
+  // ── Noticias 22/08/2026 ──────────────────────────────────────
+  {
+    id: 'n009',
+    date: '2026-08-22',
+    dateLabel: '08·22',
+    tag: 'Policial · CAT',
+    title: 'Dispositiu Kanpai a Puigcerdà: 4 detinguts i 162 identificats',
+    desc: 'Operació conjunta de Mossos, Policia Local, Policia Nacional i Guàrdia Civil. S\'han efectuat inspeccions a establiments i diverses denúncies administratives i penals.',
+    url: 'https://www.catalunyapress.es/articulo/sucesos-cataluna/2026-08-22/5991023-dispositivo-kanpai-pone-foco-puigcerd-cuatro-detenidos-162-identificados',
+  },
+  {
+    id: 'n008',
+    date: '2026-08-22',
+    dateLabel: '08·22',
+    tag: 'Política · CAT',
+    title: 'Pressupostos 2026: el Govern afronta la tardor sota pressió de Junts i ERC',
+    desc: 'Malgrat l\'aprovació de les segones comptes de la legislatura el 2 de juliol (49.162 M€), el Govern d\'Illa enfronta noves negociacions sobre finançament singular i habitatge.',
+    url: 'https://www.moncloa.com/2026/08/22/presupuestos-cataluna-2026-illa-prorroga-3419232/',
+  },
+  {
+    id: 'n007',
+    date: '2026-08-22',
+    dateLabel: '08·22',
+    tag: 'Esports · ES',
+    title: 'La Vuelta a Espanya 2026 arrenca a Mònaco',
+    desc: '21 etapes i 3.275 km fins a la meta de Granada el 13 de setembre. La ronda espanyola comença al Principat de Mònaco en una edició de recorregut particularment exigent.',
+    url: 'https://www.olympics.com/es/noticias/calendario-deportes-2026',
+  },
+  // ── Noticias 19/08/2026 ──────────────────────────────────────
+  {
+    id: 'n006',
+    date: '2026-08-19',
+    dateLabel: '08·19',
+    tag: 'Ciència',
+    title: 'Conferència Mundial de Robòtica a Pequín: 300 empreses exhibeixen robots humanoides',
+    desc: 'Més de 300 companyies han presentat robots humanoides, industrials i de servei. La indústria accelera el desplegament de robots a fàbriques i entorns comercials a escala global.',
+    url: 'https://es.euronews.com/video/2026/08/23/ultimas-noticias-23-agosto-2026-manana',
+  },
+  // ── Noticias 07/08/2026 ──────────────────────────────────────
+  {
+    id: 'n005',
+    date: '2026-08-07',
+    dateLabel: '08·07',
+    tag: 'Societat · CAT',
+    title: 'Socavó del Putxet: el 40% dels veïns no tornarà fins al setembre',
+    desc: 'Un mes després del sot de vuit metres al barri de Sant Gervasi–la Bonanova (L9), uns 93 habitatges continuen desallotjats. Nous sondejos del terreny allarguen l\'espera.',
+    url: 'https://metropoliabierta.elespanol.com/sarria-sant-gervasi/20260807/incertidumbre-vecinos-desalojados-putxet-mes-socavon-l9-no-podra-volver-casa-septiembre/1003742785229_0.html',
+  },
+  // ── Noticias 30/07/2026 ──────────────────────────────────────
+  {
+    id: 'n004',
+    date: '2026-07-30',
+    dateLabel: '07·30',
+    tag: 'Economia · ES',
+    title: 'Espanya lidera la UE: PIB del 0,7% al segon trimestre de 2026',
+    desc: 'La zona euro creix el 0,4% en el segon trimestre, mentre Espanya s\'anota el 0,7%. El país es consolida com a motor econòmic europeu per tercer any consecutiu.',
+    url: 'https://www.moncloa.com/2026/07/30/pib-eurozona-segundo-trimestre-2026-espana-3408106',
+  },
+  // ── Normativa ────────────────────────────────────────────────
   {
     id: 'n001',
     date: '2026-04-18',

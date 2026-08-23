@@ -43,9 +43,11 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
-  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
-  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
-  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
+  { date: '08·23', tag: 'Policial · CAT', title: 'Mort a la Ràpita en una baralla multitudinària', desc: 'Els Mossos reben l\'avís a les 3.30 h. Un home mor al lloc. La Divisió d\'Investigació Criminal investiga les circumstàncies.' },
+  { date: '08·22', tag: 'Policial · CAT', title: 'Dispositiu Kanpai a Puigcerdà: 4 detinguts i 162 identificats', desc: 'Operació conjunta de Mossos, Policia Local, Policia Nacional i Guàrdia Civil.' },
+  { date: '08·22', tag: 'Política · CAT', title: 'Pressupostos 2026: el Govern afronta la tardor sota pressió de Junts i ERC', desc: 'El Govern d\'Illa obre noves negociacions sobre finançament singular i habitatge després de l\'aprovació de les comptes al juliol.' },
+  { date: '08·22', tag: 'Esports · ES', title: 'La Vuelta a Espanya 2026 arrenca a Mònaco', desc: '21 etapes i 3.275 km fins a Granada el 13 de setembre.' },
+  { date: '07·30', tag: 'Economia · ES', title: 'Espanya lidera la UE: PIB del 0,7% al segon trimestre de 2026', desc: 'La zona euro creix el 0,4%; Espanya s\'anota el 0,7% i es consolida com a motor europeu.' },
 ];
 
 export default function ScreenOperativaHome() {
