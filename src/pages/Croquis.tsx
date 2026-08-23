@@ -194,6 +194,28 @@ function loadScene(): Scene | null {
 function syncCounter(els: El[]) {
   for (const e of els) { const n = parseInt(String(e.id).replace('el-', '')); if (n > counter) counter = n; }
 }
+
+// El fons (mapa/ortofoto/foto) SEMPRE ha d'ocupar la primera posició de
+// la llista: Konva pinta en l'ordre de l'array, així que qualsevol
+// element que hi quedés per davant es dibuixaria SOTA la imatge i
+// desapareixeria de la vista. Aquesta funció normalitza l'ordre i es fa
+// servir a cada `setEls`, de manera que cap operació (afegir un vehicle,
+// marcar posicions, "enviar al fons", desfer, importar…) pot amagar
+// elements darrere del fons.
+function ambFonsAlDarrere(list: El[]): El[] {
+  const idx = list.findIndex((e) => e.kind === 'fons');
+  if (idx < 0) return list;                       // sense fons: res a fer
+  const fons = list.filter((e) => e.kind === 'fons');
+  if (idx === 0 && fons.length === 1) return list; // ja hi és: no toquem la referència
+  return [...fons, ...list.filter((e) => e.kind !== 'fons')];
+}
+
+// En obrir o importar una escena el fons torna a quedar FIXAT: és un
+// calc de referència, no una peça del croquis. Per recol·locar-lo o
+// escalar-lo cal desbloquejar-lo expressament amb el cadenat del panell.
+function normalitzaEscena(list: El[]): El[] {
+  return ambFonsAlDarrere(list).map((e) => (e.kind === 'fons' ? { ...e, locked: true } : e));
+}
 const DEFAULT_COLOR = (k: string) =>
   k === 'cotxe' ? '#3B6BF5'
   : k === 'camio' || k === 'trailer' || k === 'bus' || k === 'furgo' ? '#9AA0AA'
@@ -1083,7 +1105,12 @@ function VehModal({ el, onClose, onSave }: { el: El; onClose: () => void; onSave
 export default function Croquis() {
   const nav = useNavigate();
   const [road, setRoad] = useState<Road>(() => loadScene()?.road ?? 'cruilla');
-  const [els, setEls] = useState<El[]>(() => { const s = loadScene(); if (s) syncCounter(s.els); return s?.els ?? []; });
+  const [els, setElsRaw] = useState<El[]>(() => { const s = loadScene(); if (s) syncCounter(s.els); return normalitzaEscena(s?.els ?? []); });
+  // Tots els canvis d'elements passen per aquí perquè el fons no pugui
+  // quedar mai per damunt d'una altra peça (vegeu `ambFonsAlDarrere`).
+  const setEls = useCallback((v: El[] | ((prev: El[]) => El[])) => {
+    setElsRaw((prev) => ambFonsAlDarrere(typeof v === 'function' ? (v as (p: El[]) => El[])(prev) : v));
+  }, []);
   const [header, setHeader] = useState<Header>(() => loadScene()?.header ?? {});
   const [showLegend, setShowLegend] = useState<boolean>(() => loadScene()?.legend ?? true);
   const [sel, setSel] = useState<string | null>(null);
@@ -1271,15 +1298,17 @@ export default function Croquis() {
   function scaleBy(f: number) { if (selEl) update(selEl.id, { scaleX: Math.max(0.25, Math.min(6, Math.abs(selEl.scaleX) * f)) * Math.sign(selEl.scaleX || 1), scaleY: Math.max(0.25, Math.min(6, selEl.scaleY * f)) }); }
   function flipH() { if (selEl) update(selEl.id, { scaleX: -selEl.scaleX }); }
   function toFront() { if (!selEl) return; pushUndo(); setEls((p) => [...p.filter((e) => e.id !== selEl.id), selEl]); }
-  function toBack() { if (!selEl) return; pushUndo(); setEls((p) => [selEl, ...p.filter((e) => e.id !== selEl.id)]); }
+  function toBack() { if (!selEl) return; pushUndo(); setEls((p) => [selEl, ...p.filter((e) => e.id !== selEl.id)]); } // el fons es reordena sol i queda per sota
   function clearAll() { if (els.length && !confirm('Esborrar tot el croquis?')) return; pushUndo(); setEls([]); setSel(null); }
   function changeRoad(r: Road) { pushUndo(); setRoad(r); }
 
   // Fons de mapa/foto: l'afegim darrere de tot i amaguem la via dibuixada.
   function addBackground(src: string) {
     const id = nextId(); pushUndo();
-    setEls((p) => [{ id, kind: 'fons', src, x: BOARD.w / 2, y: BOARD.h / 2, rotation: 0, scaleX: 1, scaleY: 1, opacity: 1, locked: false }, ...p.filter((e) => e.kind !== 'fons')]);
-    setRoad('cap'); setSel(id);
+    setEls((p) => [{ id, kind: 'fons', src, x: BOARD.w / 2, y: BOARD.h / 2, rotation: 0, scaleX: 1, scaleY: 1, opacity: 1, locked: true }, ...p.filter((e) => e.kind !== 'fons')]);
+    // Neix FIXAT i sense selecció: així no es mou en arrossegar damunt
+    // seu i tot el que s'hi dibuixi a sobre queda visible.
+    setRoad('cap'); setSel(null);
   }
   function setBgOpacity(v: number) { setEls((p) => p.map((e) => (e.kind === 'fons' ? { ...e, opacity: v } : e))); }
   function removeBg() { pushUndo(); setEls((p) => p.filter((e) => e.kind !== 'fons')); setSel(null); }
@@ -1343,7 +1372,7 @@ export default function Croquis() {
         const s = JSON.parse(String(r.result)) as Scene;
         if (!Array.isArray(s.els)) throw new Error('bad');
         pushUndo(); syncCounter(s.els);
-        setRoad(s.road || 'cruilla'); setEls(s.els); setHeader(s.header || {}); setShowLegend(s.legend !== false); setSel(null);
+        setRoad(s.road || 'cruilla'); setEls(normalitzaEscena(s.els)); setHeader(s.header || {}); setShowLegend(s.legend !== false); setSel(null);
       } catch { alert('El fitxer no és un croquis vàlid.'); }
     };
     r.readAsText(file);
@@ -1920,7 +1949,15 @@ export default function Croquis() {
                 <Mono size={8.5} color={A.inkMuted}>Fons · opacitat</Mono>
                 <input type="range" min={20} max={100} value={Math.round((bgEl.opacity ?? 1) * 100)} onChange={(e) => setBgOpacity(Number(e.target.value) / 100)} style={{ width: 116, accentColor: A.terracota }} />
               </div>
-              <button onClick={() => { update(bgEl.id, { locked: !bgEl.locked }); setSel(null); }} style={{ ...btn, padding: '7px 10px' }} title={bgEl.locked ? 'Desbloquejar per moure\'l' : 'Bloquejar (dibuixa per sobre)'}>{bgEl.locked ? '🔒' : '🔓'}</button>
+              {/* Cadenat: el fons neix FIXAT (no es mou ni es pot seleccionar
+                  en arrossegar-hi a sobre). Desbloquejar-lo el torna a fer
+                  mòbil i escalable per encaixar-lo amb el croquis. */}
+              <button
+                onClick={() => { const fixar = !bgEl.locked; update(bgEl.id, { locked: fixar }); setSel(fixar ? null : bgEl.id); }}
+                style={{ ...btn, padding: '7px 10px', gap: 5, ...(bgEl.locked ? {} : { borderColor: A.terracota }) }}
+                title={bgEl.locked ? 'Fons fixat. Clica per desbloquejar-lo i moure\'l o escalar-lo.' : 'Fixar el fons perquè no es mogui mentre dibuixes a sobre.'}>
+                {bgEl.locked ? '🔒' : '🔓'} <Mono size={9} color={bgEl.locked ? A.inkMuted : A.terraInk}>{bgEl.locked ? 'FIXAT' : 'LLIURE'}</Mono>
+              </button>
               <button onClick={removeBg} style={{ ...btn, padding: '7px 10px', color: A.red, borderColor: A.redSoft }} title="Treure el fons"><Ic name="x" size={14} color={A.red} /></button>
             </div>
           )}
