@@ -43,6 +43,12 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '08·24', tag: 'Política · ES', title: 'Espanya sol·licita a Brussel·les finançament d\'emergència per la crisi de Ceuta', desc: 'El Govern formalitza la petició de fons FAMI per atendre els més de 80.000 migrants entrats des del Marroc el 30 de juliol.' },
+  { date: '08·24', tag: 'Política · CAT', title: 'Catalunya s\'enfronta a una tardor política de màxima tensió', desc: 'La Diada, el finançament singular, el retorn de Puigdemont i l\'expansió del PP marquen múltiples fronts oberts per al govern d\'Illa.' },
+  { date: '08·24', tag: 'Internacional', title: 'Brasil: primer debat presidencial del 2026 sense Lula ni Flávio Bolsonaro', desc: 'Cap dels dos favorits acudeix al debat de la cadena Band. Eleccions presidencials al mes d\'octubre.' },
+  { date: '08·24', tag: 'Ciència · Premis', title: 'Premis Nacionals d\'Investigació 2026: primera vegada que dues dones guanyen en categories joves', desc: 'El MICIU atorga 20 premis de 30.000 € cadascun. Daniel Maspoch i investigadors del CSIC entre els guardonats.' },
+  { date: '08·24', tag: 'Esports', title: 'Yeremay es recupera i apunta a la convocatòria del Deportivo davant el Màlaga', desc: 'L\'extrem supera les molèsties físiques. El club confia en retenir-lo durant tota la temporada.' },
+  { date: '08·24', tag: 'Internacional', title: 'Noruega: el Tribunal Suprem examina llicències petrolières al Mar del Nord', desc: 'El tribunal avalua si tres concessions petrolieres violen la legislació mediambiental noruega.' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -122,7 +128,7 @@ export default function ScreenOperativaHome() {
 
       {/* Actualitat normativa */}
       <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
+        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
             <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
