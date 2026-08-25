@@ -96,6 +96,34 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias del dia */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 10 }}>Actualitat</div>
+        <div
+          onClick={() => navigate('/noticias')}
+          style={{
+            background: '#fff', borderRadius: T.r.lg, padding: 16,
+            borderLeft: `3px solid ${T.cat.academia.solid}`,
+            boxShadow: T.shadow.card, cursor: 'pointer',
+            display: 'flex', alignItems: 'center', gap: 14,
+          }}
+        >
+          <div style={{
+            width: 44, height: 44, borderRadius: 12,
+            background: T.cat.academia.soft,
+            display: 'grid', placeItems: 'center', flexShrink: 0,
+          }}>
+            <Icon name="newspaper" size={22} color={T.cat.academia.solid} strokeWidth={2.2} />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10.5, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.academia.ink }}>Notícies del dia · 25 ago</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 16, letterSpacing: -0.3, marginTop: 1 }}>Catalunya · Espanya · Món</div>
+            <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 2 }}>Política, economia, esports, cultura i successos.</div>
+          </div>
+          <Icon name="chevron-right" size={16} color={T.inkMuted} />
+        </div>
+      </div>
+
       {/* testimonial */}
       <div style={{ padding: '16px 18px 0' }}>
         <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.academia.solid}` }}>

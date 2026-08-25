@@ -136,6 +136,18 @@ export default function ScreenOperativaHome() {
           ))}
         </div>
       </div>
+
+      {/* Notícies del dia */}
+      <div style={{ padding: '14px 16px 0' }}>
+        <div onClick={() => navigate('/noticias')} style={{ background: T.cat.psico.soft, borderRadius: T.r.md, padding: 14, borderLeft: `3px solid ${T.cat.psico.solid}`, boxShadow: T.shadow.card, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 10, fontWeight: 800, color: T.cat.psico.ink, letterSpacing: 0.8, textTransform: 'uppercase' }}>Notícies · Avui</div>
+            <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, marginTop: 2 }}>Catalunya · Espanya · Món</div>
+            <div style={{ fontSize: 11.5, color: T.inkSoft, marginTop: 2, lineHeight: 1.35 }}>Política, economia, esports, cultura i successos.</div>
+          </div>
+          <Icon name="chevron-right" size={16} color={T.inkMuted} />
+        </div>
+      </div>
     </div>
   );
 }
