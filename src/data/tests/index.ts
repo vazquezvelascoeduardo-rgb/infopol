@@ -76,7 +76,9 @@ import premiaDeMarOrdenances from './premia-de-mar-ordenances';
 import molletDelVallesCultura from './mollet-del-valles-cultura';
 import molletDelVallesOrdenances from './mollet-del-valles-ordenances';
 import vilanovaILaGeltru from './vilanova-i-la-geltru';
+import vilanovaILaGeltruCultura from './vilanova-i-la-geltru-cultura';
 import barberaDelValles from './barbera-del-valles';
+import barberaDelVallesCultura from './barbera-del-valles-cultura';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -153,7 +155,9 @@ export const TOPICS: TestTopic[] = [
   molletDelVallesCultura,
   molletDelVallesOrdenances,
   vilanovaILaGeltru,
+  vilanovaILaGeltruCultura,
   barberaDelValles,
+  barberaDelVallesCultura,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
