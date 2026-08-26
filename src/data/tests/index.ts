@@ -79,6 +79,14 @@ import vilanovaILaGeltru from './vilanova-i-la-geltru';
 import vilanovaILaGeltruCultura from './vilanova-i-la-geltru-cultura';
 import barberaDelValles from './barbera-del-valles';
 import barberaDelVallesCultura from './barbera-del-valles-cultura';
+import olesaDeMontserrat from './olesa-de-montserrat';
+import olesaDeMontserratCultura from './olesa-de-montserrat-cultura';
+import piera from './piera';
+import pieraCultura from './piera-cultura';
+import martorell from './martorell';
+import martorellCultura from './martorell-cultura';
+import sitges from './sitges';
+import sitgesCultura from './sitges-cultura';
 
 export const TOPICS: TestTopic[] = [
   ce78,
@@ -158,6 +166,14 @@ export const TOPICS: TestTopic[] = [
   vilanovaILaGeltruCultura,
   barberaDelValles,
   barberaDelVallesCultura,
+  olesaDeMontserrat,
+  olesaDeMontserratCultura,
+  piera,
+  pieraCultura,
+  martorell,
+  martorellCultura,
+  sitges,
+  sitgesCultura,
 ];
 
 export function getTopic(slug: string): TestTopic | undefined {
@@ -260,7 +276,14 @@ export function getTopicsByCategory(
   return TOPICS.filter((t) => (t.category ?? 'temari') === category);
 }
 
-/** Agrupa els temes 'municipi' pel camp `municipi` (ex. Terrassa → [...]). */
+/**
+ * Agrupa els temes 'municipi' pel camp `municipi` (ex. Terrassa → [...]).
+ *
+ * Ordenat alfabèticament: quan només hi havia quatre pobles l'ordre del
+ * registre era igual de bo, però amb la llista creixent l'única manera de
+ * trobar el teu és que estigui on toca. `localeCompare` amb 'ca' perquè
+ * els accents i la ela geminada no se'n vagin al final.
+ */
 export function getMunicipiGroups(): { municipi: string; topics: TestTopic[] }[] {
   const groups = new Map<string, TestTopic[]>();
   for (const t of TOPICS) {
@@ -269,7 +292,9 @@ export function getMunicipiGroups(): { municipi: string; topics: TestTopic[] }[]
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key)!.push(t);
   }
-  return Array.from(groups, ([municipi, topics]) => ({ municipi, topics }));
+  return Array.from(groups, ([municipi, topics]) => ({ municipi, topics })).sort((a, b) =>
+    a.municipi.localeCompare(b.municipi, 'ca'),
+  );
 }
 
 /** Temes de Mossos d'Esquadra agrupats per àmbit (A, B, C, D, E). */

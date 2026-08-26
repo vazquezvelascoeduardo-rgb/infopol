@@ -38,6 +38,11 @@ const ACCENTS: Record<Cos, { accent: string; ink: string; soft: string; glow: st
 /** Un grup de temes amb capçalera pròpia (els municipis en tenen; la resta, no). */
 type Grup = { titol?: string; temes: TestTopic[] };
 
+/** Minúscules i sense accents: qui escriu "barbera" ha de trobar "Barberà". */
+function sensAccents(s: string): string {
+  return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
 type Vista = {
   titol: string;
   sub: string;
@@ -47,6 +52,8 @@ type Vista = {
   /** Ruta del test barrejat de la categoria, si en té. */
   tot?: string;
   grups: Grup[];
+  /** Mostra el cercador de grups (només té sentit amb molts municipis). */
+  cercador?: boolean;
 };
 
 function vista(cos: Cos, clau: string): Vista | null {
@@ -71,6 +78,7 @@ function vista(cos: Cos, clau: string): Vista | null {
       icona: 'city',
       base: '/policia-local',
       grups,
+      cercador: true,
     };
   }
 
@@ -149,8 +157,23 @@ export default function CategoriaTemes({ cos: cosProp }: { cos?: Cos }) {
   const a = ACCENTS[cos];
   const stats = useGlobalStats();
   const [triat, setTriat] = useState<TestTopic | null>(null);
+  const [cerca, setCerca] = useState('');
 
   const v = useMemo(() => vista(cos, clau), [cos, clau]);
+
+  // Grups que passen el filtre del cercador. Es busca pel nom del grup
+  // (el municipi) i també pel títol dels temes, perquè qui escriu
+  // "ordenances" trobi els municipis que en tenen.
+  const grupsVisibles = useMemo(() => {
+    if (!v) return [];
+    const q = sensAccents(cerca.trim());
+    if (!q) return v.grups;
+    return v.grups.filter(
+      (g) =>
+        sensAccents(g.titol ?? '').includes(q) ||
+        g.temes.some((t) => sensAccents(t.title).includes(q)),
+    );
+  }, [v, cerca]);
 
   if (!v) {
     return (
@@ -258,7 +281,66 @@ export default function CategoriaTemes({ cos: cosProp }: { cos?: Cos }) {
         </button>
       )}
 
-      {v.grups.map((g, gi) => (
+      {/* Cercador de municipis. Amb la llista creixent, baixar amb el dit
+          fins al teu poble deixava de ser raonable. */}
+      {v.cercador && (
+        <div style={{ marginBottom: 16 }}>
+          <div
+            style={{
+              display: 'flex', alignItems: 'center', gap: 10,
+              background: V.surface, borderRadius: 18, boxShadow: V.shadow,
+              padding: '0 14px',
+            }}>
+            <I n="search" size={16} sw={2} color={V.faint} />
+            <input
+              type="search"
+              value={cerca}
+              onChange={(e) => setCerca(e.target.value)}
+              placeholder="Cerca el teu municipi…"
+              aria-label="Cerca el teu municipi"
+              style={{
+                flex: 1, minWidth: 0, border: 'none', outline: 'none', background: 'transparent',
+                font: 'inherit', fontSize: 15, color: V.ink, padding: '13px 0',
+              }}
+            />
+            {cerca && (
+              <button
+                type="button"
+                onClick={() => setCerca('')}
+                aria-label="Neteja la cerca"
+                className="ap-prem ap-toc"
+                style={{
+                  border: 'none', background: 'transparent', cursor: 'pointer',
+                  color: V.faint, display: 'flex', padding: 0,
+                }}>
+                <I n="x" size={15} sw={2} />
+              </button>
+            )}
+          </div>
+          {cerca && (
+            <Mono size={10} color={V.faint} style={{ letterSpacing: 1.2, paddingLeft: 16, marginTop: 8, display: 'block' }}>
+              {grupsVisibles.length === 0
+                ? 'CAP MUNICIPI'
+                : `${grupsVisibles.length} ${grupsVisibles.length === 1 ? 'MUNICIPI' : 'MUNICIPIS'}`}
+            </Mono>
+          )}
+        </div>
+      )}
+
+      {grupsVisibles.length === 0 && v.cercador && (
+        <div style={{
+          background: V.surface, borderRadius: 22, boxShadow: V.shadow,
+          padding: 24, textAlign: 'center', marginBottom: 20,
+        }}>
+          <p style={{ fontSize: 14, color: V.muted, margin: 0 }}>
+            No tenim cap municipi que es digui així.
+            <br />
+            Si vols que hi afegim el teu, digues-nos-ho.
+          </p>
+        </div>
+      )}
+
+      {grupsVisibles.map((g, gi) => (
         <section key={g.titol ?? gi} style={{ marginBottom: 20 }}>
           {g.titol && (
             <h2 style={{
