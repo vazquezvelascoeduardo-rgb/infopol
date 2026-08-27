@@ -1,635 +1,825 @@
 {
   "id": "vmp-vpl-identificacio",
-  "titol": "VMP / patinets — Guia completa (actualitzada 2026)",
+  "titol": "🛴 VMP / VPL · Identificació i denúncia (Com. SCT 7/2026)",
   "categoria": "transit",
   "icono": "🛴",
   "base_legal": [
-    "RD 970/2020 (10 nov.) — Marc jurídic VMP",
-    "RGC arts. 3, 18, 38, 121, 143, 145-146 — Normes de circulació aplicables",
-    "Llei 5/2025, DA 1a (24 jul.) — Obligació AOV per a VPL",
-    "RD 52/2026 (28 gen.) — Registre Nacional de Vehicles Personals Lleugers · vigor 30/01/2026",
-    "Comunicat 6/2026 SCT — 5 noves infraccions · vigor 18/05/2026",
-    "Art. 22 i Annex XXI RGV — requisits tècnics",
-    "Art. 82 LSV — responsabilitat solidària menors",
-    "Ordenança municipal de mobilitat (casc, edat, zones)"
+    "Comunicat Informatiu SCT 7/2026 (en vigor 20/07/2026) — refon i substitueix els 3/2026, 4/2026 i 6/2026",
+    "RD 970/2020 · Llei 5/2025 (DA 1a) · RD 52/2026 (REVEMP)",
+    "RDL 8/2004 art. 1 bis · RGV arts. 1, 22 bis i Annexos XIX i XXI",
+    "Reg. (UE) 168/2013 · LSV arts. 82 i 104 · RGCon art. 1.1"
   ],
-  "identificacio_rapida": {
-    "VMP": "Vehicle d'1+ rodes, UNA sola plaça, propulsat EXCLUSIVAMENT per motor elèctric, velocitat per disseny 6-25 km/h. El patinet elèctric estàndard. NO necessita permís, matrícula ni ITV.",
-    "bicicleta_electrica_EPAC": "Pedaleig assistit fins a 25 km/h i motor ≤250W que NOMÉS actua pedalant. És una BICICLETA a tots els efectes (no VMP): normes de bici, pot dur cadireta homologada de menor.",
-    "ciclomotor_L1e_encobert": "Si supera els 25 km/h per disseny (o està trucat), té seient per a persona en peu no dissenyat, acceleradors sense pedaleig >25 km/h… és un CICLOMOTOR (L1e): necessita permís AM, matrícula, casc i assegurança. Sense això: infraccions de ciclomotor + IMMOBILITZACIÓ.",
-    "joguina": "≤6 km/h per disseny = joguina. El seu usuari és un VIANANT (voreres sí, calçada no).",
-    "mobilitat_reduida": "Cadires i escúters de mobilitat reduïda = vianants a tots els efectes."
-  },
-  "estat_normatiu_juliol_2026": {
-    "casc": "SENSE obligació estatal encara per a VMP (a diferència de motos). Obligatori NOMÉS si l'ordenança municipal ho exigeix — comprova l'ordenança de mobilitat local (Viladecans: consulta la versió vigent). La reforma estatal resta pendent de desplegament reglamentari.",
-    "asseguranca_AOV": "Obligatòria per a: (1) VPL certificat I inscrit al RNV (DA 1a Llei 5/2025) → 300 €; (2) VMP considerat vehicle a motor per MOM → 800 €. El VMP estàndard no inscrit NO té obligació d'AOV (però sí de registre).",
-    "registre_RNV": "Obligatori des del 30/01/2026 (RD 52/2026). Etiqueta M (comercialitzats des del 22/01/2024) o Z (anteriors, transitori fins al 22/01/2027).",
-    "edat_minima": "No fixada per norma estatal: la determina l'ordenança municipal (habitualment 15-16 anys). Menors: responsabilitat SOLIDÀRIA de pares/tutors (art. 82 LSV).",
-    "punts": "Les infraccions en VMP NO detrauen punts (criteri DGT): la detracció exigeix conduir un vehicle per al qual cal permís.",
-    "via_penal": "El VMP NO és 'vehicle de motor' a efectes penals (criteri DGT/FGE): NO s'apliquen els delictes 379/383 CP (alcohol, velocitat, negativa). Tot va per VIA ADMINISTRATIVA. Excepció: si l'aparell és realment un ciclomotor encobert (L1e), sí que pot haver-hi via penal."
-  },
   "regles_dor": [
-    "🚫 MAI per vorera ni zones de vianants (RGC 121.5 — greu 200 €).",
-    "🚫 MAI per autopista, autovia, via interurbana o travessera (RGC 38.4 — greu 200 €).",
-    "1️⃣ Una sola persona (vehicle unipersonal).",
-    "🎧 Sense auriculars ni mòbil (RGC 18.2 — greu 200 €).",
-    "🍺 Alcohol i drogues: mateixes taxes que qualsevol conductor, però via ADMINISTRATIVA (mai penal) i sense punts."
+    "Si duu placa de marcatge, és VMP sempre. No discuteixis la categoria.",
+    "La manca de certificat NO el treu de VMP. No li apliquis art. 1.1 RGV ni immobilització.",
+    "Se surt de VMP per com és l'aparell (velocitat, places, seient), mai pels papers.",
+    "L'assegurança del VPL només es denuncia si té certificat, RNV i etiqueta alhora.",
+    "Mai dues butlletes d'identificació al mateix vehicle. Mai permís de conduir en VMP. Mai punts en VMP."
   ],
-  "barem_oficial_sct": "Catàleg SCT + Comunicat 6/2026. Totes les infraccions amb 50% de descompte per pagament anticipat.",
-  "inici": "que_tens_davant",
+  "inici": "que_tinc",
   "nodes": {
-    "que_tens_davant": {
-      "titol": "Pas 1 — Què tens davant?",
-      "text": "Identifica l'aparell (30 segons):",
-      "info": "La classificació ho determina TOT: un patinet estàndard és VMP (règim propi), un que corre més de 25 km/h és un ciclomotor encobert (règim molt més dur), i una bici elèctrica de pedaleig assistit és una bicicleta.",
-      "checklist_previ": [
-        "Mira la velocitat que agafa: si supera clarament els 25 km/h en pla → sospita de ciclomotor encobert o trucat.",
-        "Té pedals amb assistència elèctrica? → probablement EPAC (bicicleta).",
-        "Té seient tipus moto o plataforma per a 2? → NO és VMP estàndard.",
-        "Busca l'etiqueta (M0000BBB / Z0000BBB) o la placa del fabricant."
+    "que_tinc": {
+      "titol": "Què tinc al davant?",
+      "text": "Mira l'aparell i tria el que s'hi assembli més.",
+      "info": "Aquest arbre només val per a patinets i similars. Si és una bicicleta amb pedals, no és cap VMP i aquí no hi trobaràs res.",
+      "opcions": [
+        {
+          "etiqueta": "🛴 Un patinet elèctric, de peu",
+          "va_a": "velocitat"
+        },
+        {
+          "etiqueta": "🏍️ Té seient tipus moto, i alt",
+          "va_a": "seient"
+        },
+        {
+          "etiqueta": "⚡ No és 100% elèctric, o hi caben dos",
+          "va_a": "familia_c"
+        }
+      ]
+    },
+    "seient": {
+      "titol": "Fes una mesura: el seient",
+      "text": "Mesura des del terra fins al seient.",
+      "info": "És l'única mesura que separa un VMP d'una moto petita. Amb 2 rodes la frontera són 540 mm; amb 3 o més, 400 mm.",
+      "opcions": [
+        {
+          "etiqueta": "📏 Passa de 540 mm (o de 400 si té 3 rodes)",
+          "va_a": "familia_d"
+        },
+        {
+          "etiqueta": "📏 No hi arriba",
+          "va_a": "velocitat"
+        }
+      ]
+    },
+    "velocitat": {
+      "titol": "Passa dels 25 km/h?",
+      "text": "La velocitat màxima que pot fer, no la que anava.",
+      "info": "On mirar-ho: la placa de marcatge, el certificat, la fitxa del fabricant o el display. Si el limitador està trucat, val la velocitat real.",
+      "info_clau": "Si passa de 25 km/h JA NO ÉS UN VMP, encara que pesi poc. El pes aquí no compta.",
+      "opcions": [
+        {
+          "etiqueta": "🚀 Sí, passa de 25 km/h",
+          "va_a": "familia_c"
+        },
+        {
+          "etiqueta": "✅ No, va fins a 25 km/h",
+          "va_a": "placa"
+        }
+      ]
+    },
+    "placa": {
+      "titol": "Duu placa de marcatge?",
+      "text": "La posa el fabricant a la fàbrica. No la confonguis amb l'adhesiu del RNV.",
+      "info": "Si la duu, ja saps que és un VMP i que té certificat: no discuteixis la categoria.",
+      "opcions": [
+        {
+          "etiqueta": "🏷️ Sí, la duu",
+          "va_a": "pes"
+        },
+        {
+          "etiqueta": "❌ No la duu",
+          "va_a": "requisits"
+        }
+      ]
+    },
+    "requisits": {
+      "titol": "Compleix TOTES aquestes cinc?",
+      "text": "Si en falla una de sola, ja no és un VMP.",
+      "requisits": [
+        "Va entre 6 i 25 km/h",
+        "Funciona només amb electricitat",
+        "Té una sola plaça",
+        "Si té seient, s'autoequilibra",
+        "Tensió de 100 VCC / 240 VAC o menys"
       ],
+      "info": "La manca de papers NO el treu de VMP. Se surt de VMP per com és l'aparell, mai per la documentació.",
       "opcions": [
         {
-          "etiqueta": "🛴 Patinet elèctric estàndard (VMP, ≤25 km/h, 1 plaça)",
-          "va_a": "que_ha_passat"
+          "etiqueta": "✅ Les compleix totes",
+          "va_a": "pes"
         },
         {
-          "etiqueta": "🚲 Bicicleta elèctrica de pedaleig assistit (EPAC)",
-          "va_a": "fi_epac"
-        },
-        {
-          "etiqueta": "⚠️ Supera els 25 km/h / trucat / amb seient tipus moto",
-          "va_a": "fi_ciclomotor_encobert"
-        },
-        {
-          "etiqueta": "🧸 Joguina (≤6 km/h) o vehicle de mobilitat reduïda",
-          "va_a": "fi_joguina"
-        },
-        {
-          "etiqueta": "📋 Vull la comprovació documental completa (etiquetes M/Z, RNV, AOV)",
-          "va_a": "tipus_vehicle"
+          "etiqueta": "❌ En falla alguna",
+          "va_a": "familia_c"
         }
       ]
     },
-    "que_ha_passat": {
-      "titol": "Pas 2 — Què ha passat?",
-      "text": "Tria la situació que has vist:",
+    "pes": {
+      "titol": "Quant pesa?",
+      "text": "És el pes en ordre de marxa (MOM), en quilos.",
+      "info": "On mirar-ho: al RNV/REVEMP, o a l'ATEX com «Massa servei (kg) (G)». Si no consta enlloc, pesa'l o estima'l i fes-ho constar a la butlleta.",
+      "info_clau": "Aquesta pregunta decideix l'assegurança: 800 € o 300 €.",
       "opcions": [
         {
-          "etiqueta": "Circula per la VORERA o zona de vianants",
-          "va_a": "fi_vorera"
+          "etiqueta": "⚖️ Més de 25 kg i passa de 14 km/h",
+          "va_a": "familia_a"
         },
         {
-          "etiqueta": "Porta AURICULARS o va amb el MÒBIL",
-          "va_a": "fi_auriculars_mobil"
+          "etiqueta": "🪶 25 kg o menys",
+          "va_a": "familia_b"
         },
         {
-          "etiqueta": "Hi van DUES persones",
-          "va_a": "fi_dues_persones"
-        },
-        {
-          "etiqueta": "Sense CASC",
-          "va_a": "fi_casc"
-        },
-        {
-          "etiqueta": "El condueix un MENOR",
-          "va_a": "fi_menor"
-        },
-        {
-          "etiqueta": "Símptomes d'ALCOHOL o DROGUES",
-          "va_a": "fi_alcohol_drogues"
-        },
-        {
-          "etiqueta": "S'ha saltat un SEMÀFOR vermell o un STOP/cediu",
-          "va_a": "fi_semafor_stop"
-        },
-        {
-          "etiqueta": "De NIT sense llums ni reflectors",
-          "va_a": "fi_llums"
-        },
-        {
-          "etiqueta": "Circula per AUTOPISTA / autovia / interurbana / travessera",
-          "va_a": "fi_via_prohibida"
-        },
-        {
-          "etiqueta": "Conducció TEMERÀRIA o negligent",
-          "va_a": "fi_temeraria"
-        },
-        {
-          "etiqueta": "Documentació: etiqueta / registre / assegurança",
-          "va_a": "tipus_vehicle"
+          "etiqueta": "🐢 Més de 25 kg però no passa de 14 km/h",
+          "va_a": "familia_b"
         }
       ]
     },
-    "fi_epac": {
-      "final": true,
-      "tipus": "avis",
-      "titol": "🚲 És una BICICLETA (EPAC) — no s'aplica el règim VMP",
-      "info": "Pedaleig assistit ≤25 km/h i motor ≤250W que només actua pedalant = bicicleta a tots els efectes. Normes de bicicleta: pot dur cadireta homologada amb menor, casc obligatori en interurbana (i per a menors de 16 anys a tot arreu), pot circular per vies interurbanes pel voral.",
-      "info_clau": "Si el motor funciona SENSE pedalar (accelerador) o supera els 25 km/h → ja no és EPAC: és VMP o ciclomotor L1e segons característiques.",
-      "accions_operatives": [
-        "Aplica les normes de bicicleta (no les de VMP)",
-        "Alcohol/drogues: mateixes taxes, via administrativa (art. 14 LSV)",
-        "Semàfors i senyals: mateixes sancions que el VMP (arts. 143/145 RGC)"
-      ]
-    },
-    "fi_ciclomotor_encobert": {
+    "familia_a": {
       "final": true,
       "tipus": "administrativa",
-      "titol": "🚨 CICLOMOTOR ENCOBERT (L1e) — règim complet de ciclomotor",
-      "info_clau": "Un aparell que per disseny (o per manipulació) supera els 25 km/h NO és un VMP: és un ciclomotor L1e. Li és exigible TOT: permís AM, matrícula, assegurança obligatòria i casc. La manca de cadascun és una infracció independent.",
-      "concepte_butlleta": "Circular amb un vehicle que, per les seves característiques (velocitat per disseny superior a 25 km/h), té la consideració de ciclomotor, sense matrícula / sense permís / sense assegurança / sense casc (indicar el que pertoqui)",
-      "article_butlleta": "Annex I RGV (definició) + arts. 1.1 RGCond (permís), 2.1 LRCSCVM (AOV), 118 RGC (casc)",
-      "import": "Permís: 500 € · AOV: 601-1.000 € · Casc: 200 € · Sense matrícula: 200 €",
-      "punts": "Les que pertoquin com a ciclomotor (aquí SÍ pot haver-hi punts i via penal)",
-      "accions_ordenades": [
-        "1. Documentar la velocitat/manipulació (fotografia, display, app del fabricant si visible).",
-        "2. Si està trucat: també infracció MOLT GREU de l'Annex XXI (500 €) — Com. 6/2026.",
-        "3. IMMOBILITZACIÓ del vehicle (no pot circular sense complir el règim de ciclomotor).",
-        "4. Si el conductor no té permís AM i és reincident o mai n'ha tingut: valora la via penal (Art. 384 CP) — aquí SÍ és vehicle de motor.",
-        "5. Menor: dades dels pares/tutors (art. 82 LSV)."
-      ]
-    },
-    "fi_joguina": {
-      "final": true,
-      "tipus": "ok",
-      "titol": "🧸 Joguina o mobilitat reduïda — és un VIANANT",
-      "info": "Els aparells que no superen els 6 km/h per disseny són joguines, i les cadires/escúters de mobilitat reduïda són vianants: circulen per VORERES i zones de vianants, mai per la calçada.",
-      "accions_operatives": [
-        "Cap denúncia de trànsit per l'aparell en si",
-        "Si genera perill real a la vorera: ordenança de convivència (A 10cc)"
-      ]
-    },
-    "fi_vorera": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "🟠 GREU — Circular per vorera o zona de vianants",
-      "concepte_butlleta": "Circular amb un vehicle de mobilitat personal per la vorera o zona de vianants",
-      "article_butlleta": "Art. 121.5 RGC",
-      "import": "200 € (DTE 100 €)",
-      "punts": "0 (les infraccions en VMP no detrauen punts)",
-      "info": "És LA infracció estrella de VMP. El VMP ha de circular per la calçada o pels carrils bici. L'ordenança municipal pot concretar més zones prohibides o permeses (consulta-la).",
-      "accions_operatives": [
-        "Butlletí de denúncia",
-        "Menor: dades dels pares/tutors (art. 82 LSV — responsabilitat solidària)",
-        "Si a més va amb auriculars/mòbil/2 persones: denúncies independents"
-      ]
-    },
-    "fi_auriculars_mobil": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "🟠 GREU — Auriculars o mòbil conduint el VMP",
-      "concepte_butlleta": "Conduir utilitzant cascos o auriculars connectats a aparells receptors o reproductors de so / utilitzar manualment el telèfon mòbil durant la conducció",
-      "article_butlleta": "Art. 18.2 RGC",
-      "import": "200 € (DTE 100 €)",
-      "punts": "0 en VMP",
-      "info": "La prohibició d'auriculars i mòbil s'aplica a TOT conductor, també de VMP i bicicleta. En cotxe/moto el mòbil detrau 6 punts; en VMP no n'hi ha.",
-      "accions_operatives": [
-        "Butlletí de denúncia",
-        "Menor: dades dels pares/tutors (art. 82 LSV)"
-      ]
-    },
-    "fi_dues_persones": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "🟢 Dues persones en un VMP (vehicle unipersonal)",
-      "concepte_butlleta": "Transportar un passatger en un vehicle de mobilitat personal, que és per definició unipersonal",
-      "article_butlleta": "Art. 9.1 RGC (criteri DGT) + ordenança municipal",
-      "import": "100 € (criteri DGT — verifica el quadre SCT / ordenança local)",
-      "punts": "0",
-      "info": "El VMP és d'UNA plaça per definició (RD 970/2020). Si porta un menor a sobre, valora a més la posada en perill i la responsabilitat dels tutors.",
-      "accions_operatives": [
-        "Butlletí de denúncia",
-        "Si el passatger és un menor petit: valora comunicació a Serveis Socials si hi ha perill manifest",
-        "Menor conduint: dades dels pares/tutors (art. 82 LSV)"
-      ]
-    },
-    "fi_casc": {
-      "final": true,
-      "tipus": "avis",
-      "titol": "⛑️ Sense casc — depèn de l'ORDENANÇA municipal (estat juliol 2026)",
-      "info_clau": "A juliol de 2026 NO hi ha encara obligació estatal de casc per a VMP (la reforma resta pendent de desplegament). El casc només és denunciable si l'ORDENANÇA MUNICIPAL l'exigeix — moltes ordenances catalanes l'exigeixen com a mínim per a menors.",
-      "concepte_butlleta": "Circular amb un VMP sense el casc de protecció exigit per l'ordenança municipal de mobilitat (citar l'article de l'ordenança)",
-      "article_butlleta": "Ordenança municipal de mobilitat (Viladecans: consulta la versió vigent)",
-      "import": "Segons ordenança (habitualment 80-100 €)",
-      "punts": "0",
-      "accions_operatives": [
-        "Comprova QUÈ diu exactament l'ordenança local abans de denunciar (àmbit: tothom? només menors?)",
-        "Si no hi ha ordenança que l'exigeixi: només consell de seguretat, SENSE denúncia",
-        "Menor: dades dels pares/tutors (art. 82 LSV)"
-      ]
-    },
-    "fi_menor": {
-      "final": true,
-      "tipus": "avis",
-      "titol": "🧒 Menor conduint un VMP — edat segons ordenança",
-      "info_clau": "L'edat mínima per conduir un VMP NO la fixa cap norma estatal: la determina l'ordenança municipal (el més habitual a Catalunya és 15 o 16 anys). Si el menor no arriba a l'edat de l'ordenança → denúncia per ordenança amb responsabilitat SOLIDÀRIA dels pares/tutors (art. 82 LSV).",
-      "concepte_butlleta": "Conduir un VMP un menor de l'edat mínima fixada per l'ordenança municipal de mobilitat (citar article)",
-      "article_butlleta": "Ordenança municipal + Art. 82 LSV (responsabilitat solidària)",
-      "import": "Segons ordenança",
-      "punts": "0",
-      "accions_ordenades": [
-        "1. Atura el menor amb seguretat i identifica'l.",
-        "2. Contacta amb els pares/tutors i fes-los comparèixer (o acompanya el menor).",
-        "3. Anota les dades completes dels tutors a la butlleta (art. 82 LSV: en respondran solidàriament).",
-        "4. Si el menor és molt petit o hi ha desemparament: comunica-ho a Serveis Socials.",
-        "5. El VMP es lliura als tutors (no el pot continuar conduint el menor)."
-      ]
-    },
-    "fi_alcohol_drogues": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "🍺 Alcohol o drogues en VMP — SEMPRE via administrativa",
-      "info_clau": "CRITERI CLAU: el VMP no és 'vehicle de motor' a efectes penals → NO s'apliquen els delictes 379.2 ni 383 CP. Tot va per via administrativa, PERÒ el conductor de VMP està obligat a sotmetre's a les proves igualment.",
-      "concepte_butlleta": "Conduir un VMP amb taxes d'alcohol superiors a les reglamentàries / amb presència de drogues a l'organisme / negar-se a sotmetre's a les proves",
-      "article_butlleta": "Art. 14.1 i 14.2 TRLSV (+ art. 21 RGC)",
-      "import": "Alcohol >0,25 mg/l: 500 € · >0,50 mg/l o reincident: 1.000 € · Drogues: 1.000 € · NEGATIVA a les proves: 1.000 €",
-      "punts": "0 (en VMP mai es detrauen punts)",
-      "accions_ordenades": [
-        "1. Practica les proves amb les MATEIXES garanties que a un cotxe (A 27 drets + 2 proves amb 10 min).",
-        "2. Positiu o negativa → butlletí administratiu (MAI atestat penal per VMP estàndard).",
-        "3. IMMOBILITZA el VMP fins que el conductor estigui en condicions o vingui algú a fer-se'n càrrec.",
-        "4. Menor: dades dels tutors + valora comunicació a Fiscalia de Menors si reiteració.",
-        "5. ⚠️ Si l'aparell és un ciclomotor encobert (>25 km/h): aleshores SÍ és via penal (379/383 CP) — torna a la identificació."
-      ]
-    },
-    "fi_semafor_stop": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "🚦 GREU — Saltar-se semàfor vermell o STOP/cediu",
-      "concepte_butlleta": "No respectar, el conductor d'un vehicle de mobilitat personal, el llum vermell d'un semàfor / no detenir-se en un senyal de detenció obligatòria (STOP) / no obeir un senyal de cediu el pas",
-      "article_butlleta": "Semàfor: Art. 143.1 RGC · STOP/cediu: Art. 145.2 RGC",
-      "import": "200 € (DTE 100 €)",
-      "punts": "0 en VMP (en cotxe serien 4)",
-      "accions_operatives": [
-        "Butlletí de denúncia",
-        "Menor: dades dels pares/tutors (art. 82 LSV)"
-      ]
-    },
-    "fi_llums": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "🌙 GREU — De nit sense enllumenat ni reflectors",
-      "concepte_butlleta": "Circular amb un VMP sense el sistema d'enllumenat i els elements reflectors exigits per l'Annex XXI del RGV en condicions de visibilitat reduïda",
-      "article_butlleta": "Art. 22 RGV · Annex XXI · Com. 6/2026 SCT",
-      "import": "200 € (DTE 100 €)",
-      "punts": "0",
-      "info": "Els requisits d'il·luminació de l'Annex XXI són infracció GREU segons el Com. 6/2026 SCT. De nit i sense llums, valora també la immobilització preventiva fins que es resolgui (perill real).",
-      "accions_operatives": [
-        "Butlletí de denúncia",
-        "Valora immobilitzar fins a l'alba o fins que reculli el vehicle un tercer",
-        "Menor: dades dels pares/tutors"
-      ]
-    },
-    "fi_via_prohibida": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "🛣️ GREU — Circular per autopista, autovia, interurbana o travessera",
-      "concepte_butlleta": "Circular per una autopista / autovia / via interurbana / travessera amb un vehicle de mobilitat personal",
-      "article_butlleta": "Art. 38.4 RGC",
-      "import": "200 € (DTE 100 €)",
-      "punts": "0",
-      "info": "Els VMP tenen PROHIBIT circular per qualsevol via interurbana, travessera, autopista i autovia — i també pels túnels urbans on ho digui la senyalització.",
-      "accions_ordenades": [
-        "1. Fes-lo sortir de la via IMMEDIATAMENT (perill greu).",
-        "2. Butlletí de denúncia (art. 38.4 RGC).",
-        "3. Si no hi ha itinerari alternatiu segur: trasllat del VMP i la persona.",
-        "4. Menor: dades dels pares/tutors."
-      ]
-    },
-    "fi_temeraria": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "⚡ Conducció temerària o negligent amb VMP",
-      "concepte_butlleta": "Conduir un vehicle de mobilitat personal de forma temerària / de forma negligent",
-      "article_butlleta": "Art. 3.1 RGC",
-      "import": "Temerària: 500 € (MG) · Negligent: 200 € (G)",
-      "punts": "0 en VMP",
-      "info": "Zig-zag entre vianants, baixades a tota velocitat esquivant gent, fer curses… Temerària (500 €) si hi ha perill concret per a terceres persones; negligent (200 €) si és falta de diligència sense perill concret.",
-      "accions_operatives": [
-        "Descriu els FETS amb detall a la butlleta (la diferència temerària/negligent és fàctica)",
-        "Testimonis si n'hi ha (A 18PL)",
-        "Valora immobilització si persisteix l'actitud",
-        "Menor: dades dels pares/tutors"
-      ]
-    },
-    "tipus_vehicle": {
-      "titol": "Comprovació documental (Com. 6/2026) — Tipus de vehicle",
-      "text": "Quin tipus de VMP tenim davant?",
-      "info": "La distinció VMP a motor / VPL es fa per la MOM (Massa en Ordre de Marxa) que consta al RNV. Si no està inscrit, l'agent ha d'indicar el pes a la butlleta.",
-      "checklist_previ": [
-        "Identificar tipus de vehicle: VMP \"a motor\" (per MOM) o VPL (certificat i inscrit)",
-        "Demanar identificació al conductor (DNI, NIE, passaport)",
-        "Si és menor: demanar dades dels pares/tutors (art. 82 LSV — responsabilitat solidària)",
-        "Buscar l'etiqueta identificativa al vehicle (format M0000BBB o Z0000BBB)",
-        "Si no té etiqueta: buscar la placa de marcatge (dades del fabricant)",
-        "Si no té cap número: anotar pes, velocitat màxima, marca, model i fer fotografia",
-        "Consultar inscripció al Registre Nacional de Vehicles (RNV)",
-        "Consultar AOV al FIVA (només per a VMP a motor o VPL certificat i inscrit)"
+      "titol": "És un VMP i compta com a vehicle de motor",
+      "en_dues_paraules": "Pesa més de 25 kg i corre més de 14 km/h. Això el converteix en vehicle de motor: l'assegurança és obligatòria sempre, sense excuses.",
+      "info_clau": "MAI li denunciïs la manca de permís de conduir. MAI li treguis punts. En VMP no existeix cap de les dues coses.",
+      "infraccions": [
+        {
+          "titol": "Sense assegurança (VMP)",
+          "article": "art. 2.1 AOV",
+          "import": "800 €",
+          "importReduit": "400 € amb pagament immediat",
+          "gravetat": "MG",
+          "butlleta": "Circular el vehicle ressenyat sense que consti que el propietari tingui subscrit i mantingui en vigor un contracte d'assegurança que cobreixi la responsabilitat civil derivada de la seva circulació.",
+          "nota": "Consigna a la butlleta el pes (MOM) en kg i la velocitat màxima en km/h."
+        },
+        {
+          "titol": "Sense certificat de circulació",
+          "article": "art. 22 bis.2 RGV",
+          "import": "200 €",
+          "importReduit": "100 € amb pagament immediat",
+          "gravetat": "G",
+          "butlleta": "Circular amb un VMP que no disposa del certificat de circulació.",
+          "nota": "Absorbeix la manca de RNV i la d'etiqueta: una sola butlleta."
+        },
+        {
+          "titol": "No inscrit al RNV / REVEMP",
+          "article": "art. 22 bis.2 RGV",
+          "import": "100 €",
+          "importReduit": "50 € amb pagament immediat",
+          "gravetat": "G",
+          "butlleta": "No inscriure un vehicle de mobilitat personal al Registre Nacional de Vehicles.",
+          "nota": "Absorbeix la manca d'etiqueta."
+        },
+        {
+          "titol": "Sense etiqueta o placa",
+          "article": "art. 22 bis.2 RGV",
+          "import": "80 €",
+          "importReduit": "40 € amb pagament immediat",
+          "gravetat": "L",
+          "butlleta": "No disposar i exhibir en un vehicle de mobilitat personal l'etiqueta identificativa o la placa de marcatge del fabricant.",
+          "nota": "Digues a la butlleta quina de les dues falta."
+        },
+        {
+          "titol": "Requisits tècnics — manipulació",
+          "article": "Annex XXI RGV",
+          "import": "500 €",
+          "importReduit": "250 € amb pagament immediat",
+          "gravetat": "MG",
+          "butlleta": "No complir el vehicle de mobilitat personal els requisits tècnics regulats a l'annex XXI i que afecten greument la seguretat viària.",
+          "nota": "Només si HAS VIST l'incompliment. No el dedueixis de la manca de certificat."
+        },
+        {
+          "titol": "Requisits tècnics — llums o rodes",
+          "article": "Annex XXI RGV",
+          "import": "200 € (greu) / 80 € (lleu)",
+          "importReduit": "100 € / 40 € amb pagament immediat",
+          "gravetat": "G / L",
+          "butlleta": "No complir el vehicle de mobilitat personal els requisits tècnics regulats a l'annex XXI.",
+          "nota": "Llums o rodes → 200 €. Sense timbre o cavallet → 80 €."
+        }
       ],
-      "opcions": [
-        {
-          "etiqueta": "VMP comercialitzat a partir del 22/01/2024 (etiqueta M)",
-          "va_a": "comprovar_etiqueta_m"
-        },
-        {
-          "etiqueta": "VMP no certificat (anterior 22/01/2024, etiqueta Z)",
-          "va_a": "comprovar_etiqueta_z"
-        },
-        {
-          "etiqueta": "VMP considerat vehicle a motor (MOM elevada)",
-          "va_a": "comprovar_aov_vmp_motor"
-        },
-        {
-          "etiqueta": "VPL — Vehicle Personal Lleuger (certificat i inscrit)",
-          "va_a": "comprovar_aov_vpl"
-        },
-        {
-          "etiqueta": "VMP sense cap identificació",
-          "va_a": "sense_identificacio"
-        }
-      ]
-    },
-    "comprovar_etiqueta_m": {
-      "titol": "VMP amb etiqueta M (comercialitzat des del 22/01/2024)",
-      "text": "Comprovacions a fer:",
-      "info": "Els VMP comercialitzats a partir del 22/01/2024 han de portar etiqueta M, placa de marcatge i estar inscrits al RNV. NO denunciar alhora 'sense certificat' i 'no inscrit'.",
-      "checklist_previ": [
-        "Etiqueta identificativa visible amb format M0000BBB",
-        "Placa de marcatge del fabricant amb dades tècniques",
-        "Inscripció al Registre Nacional de Vehicles (RNV)",
-        "Compliment Annex XXI RGV (il·luminació, dispositius, etc.)"
+      "ordre_de_denuncia": [
+        "Assegurança: va a part, es denuncia sempre que falti.",
+        "Dels tres papers (certificat, RNV, etiqueta) NOMÉS UNA butlleta: el certificat absorbeix els altres dos, i el RNV absorbeix l'etiqueta.",
+        "Els requisits tècnics, només si n'has vist un incompliment concret.",
+        "Les infraccions de circulació se sumen sempre."
       ],
-      "opcions": [
+      "immobilitzacio": "NO per manca de papers. SÍ per alcohol, drogues o risc greu.",
+      "infraccions_de_circulacio": [
         {
-          "etiqueta": "TOT correcte — circular",
-          "va_a": "fi_ok"
+          "titol": "Per la vorera o zona de vianants",
+          "article": "art. 121.5 RGC",
+          "import": "200 €",
+          "importReduit": "100 €",
+          "gravetat": "G",
+          "butlleta": "Circular amb qualsevol classe de vehicle per una vorera o una zona de vianants."
         },
         {
-          "etiqueta": "No té etiqueta NI placa de marcatge",
-          "va_a": "fi_inf_1"
+          "titol": "Per on no pot (travessia, interurbana, autopista, túnel)",
+          "article": "art. 38.4 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "Circular amb el vehicle ressenyat per una via on li està prohibit."
         },
         {
-          "etiqueta": "Té placa però NO està inscrit al RNV",
-          "va_a": "fi_inf_2"
+          "titol": "Amb el mòbil o auriculars",
+          "article": "art. 18.2 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "Conduir utilitzant el telèfon mòbil o auriculars connectats a aparells reproductors de so.",
+          "nota": "Sense detracció de punts: en VMP no n'hi ha mai."
         },
         {
-          "etiqueta": "Manipulació velocitat / modificació estructural",
-          "va_a": "fi_inf_3"
+          "titol": "Dues persones a sobre",
+          "article": "art. 9.1 RGC",
+          "import": "100 €",
+          "gravetat": "L",
+          "butlleta": "Circular amb el vehicle ressenyat transportant més persones de les places autoritzades."
         },
         {
-          "etiqueta": "Sistema il·luminació o rodes defectuoses",
-          "va_a": "fi_inf_4"
+          "titol": "Sense llums de nit",
+          "article": "art. 123 RGC",
+          "import": "80 €",
+          "gravetat": "L",
+          "butlleta": "Circular sense l'enllumenat reglamentari en condicions de baixa visibilitat."
         },
         {
-          "etiqueta": "Dispositiu sonor o cavallet defectuós",
-          "va_a": "fi_inf_5"
+          "titol": "Saltar-se un STOP o un cediu el pas",
+          "article": "art. 145.2-A RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "No respectar el senyal de detenció obligatòria o de cediu el pas."
         },
         {
-          "etiqueta": "Circula sense AOV (i és inscrit + obligat)",
-          "va_a": "fi_aov"
+          "titol": "Saltar-se un semàfor",
+          "article": "art. 143.1-D RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "No respectar la llum vermella d'un semàfor."
+        },
+        {
+          "titol": "No obeir els agents",
+          "article": "art. 141.1 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "No obeir les ordres o els senyals dels agents de l'autoritat."
+        },
+        {
+          "titol": "Conducció negligent",
+          "article": "art. 3.1 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "Conduir de manera negligent."
+        },
+        {
+          "titol": "Conducció temerària",
+          "article": "art. 3.1 RGC",
+          "import": "500 €",
+          "gravetat": "MG",
+          "butlleta": "Conduir de manera temerària."
+        },
+        {
+          "titol": "Sense casc (ordenança municipal)",
+          "article": "art. 13 bis G Ordenança",
+          "import": "90 €",
+          "gravetat": "L",
+          "butlleta": "Circular sense el casc de protecció exigit per l'ordenança municipal."
         }
-      ]
-    },
-    "comprovar_etiqueta_z": {
-      "titol": "VMP amb etiqueta Z (règim transitori fins 22/01/2027)",
-      "text": "Comprovacions a fer:",
-      "info": "Els VMP no certificats comercialitzats abans del 22/01/2024 estan en règim transitori. NO necessiten placa de marcatge (no tenen certificat). SÍ s'han d'inscriure al RNV amb marca, model i núm. sèrie.",
-      "checklist_previ": [
-        "Etiqueta identificativa Z visible (Z0000BBB)",
-        "Inscripció al RNV amb marca, model i núm. sèrie",
-        "Data de fabricació anterior al 22/01/2024",
-        "⚠️ Caducitat: 22/01/2027 — després NO podrà circular"
       ],
-      "opcions": [
+      "alcohol_i_drogues": [
         {
-          "etiqueta": "TOT correcte — circular",
-          "va_a": "fi_ok_z"
+          "titol": "Alcohol per sobre de 0,25 mg/l",
+          "article": "art. 20 RGC",
+          "import": "Segons barem",
+          "gravetat": "G / MG",
+          "butlleta": "Conduir amb una taxa d'alcohol en aire espirat superior a la reglamentàriament establerta.",
+          "nota": "Porta immobilització."
         },
         {
-          "etiqueta": "No té etiqueta Z",
-          "va_a": "fi_inf_1"
+          "titol": "Negativa a les proves d'alcohol",
+          "article": "art. 21 RGC",
+          "import": "1.000 €",
+          "gravetat": "MG",
+          "butlleta": "Negar-se a sotmetre's a les proves de detecció d'alcohol.",
+          "nota": "Immobilització + valora art. 383 CP: llavors és atestat, no butlleta."
         },
         {
-          "etiqueta": "No està inscrit al RNV",
-          "va_a": "fi_inf_2"
+          "titol": "Positiu en drogues",
+          "article": "art. 14 LSV",
+          "import": "1.000 €",
+          "gravetat": "MG",
+          "butlleta": "Conduir amb presència de drogues a l'organisme.",
+          "nota": "Porta immobilització."
         },
         {
-          "etiqueta": "Manipulació velocitat / modificació estructural",
-          "va_a": "fi_inf_3"
-        },
-        {
-          "etiqueta": "Requisits Annex XXI no complerts (greus)",
-          "va_a": "fi_inf_4"
+          "titol": "Negativa a les proves de drogues",
+          "article": "art. 14 LSV",
+          "import": "1.000 €",
+          "gravetat": "MG",
+          "butlleta": "Negar-se a sotmetre's a les proves de detecció de drogues.",
+          "nota": "Immobilització + valora art. 383 CP."
         }
-      ]
-    },
-    "comprovar_aov_vmp_motor": {
-      "titol": "VMP considerat vehicle a motor — AOV obligatòria",
-      "text": "Té assegurança obligatòria?",
-      "info": "El VMP considerat vehicle a motor (per la seva MOM al RNV) SEMPRE necessita AOV (art. 2.1 Llei RC i assegurança). Sanció: 800 €.",
-      "opcions": [
-        {
-          "etiqueta": "SÍ té AOV vigent (FIVA o pòlissa)",
-          "va_a": "fi_ok"
-        },
-        {
-          "etiqueta": "NO té AOV",
-          "va_a": "fi_aov_motor"
-        }
-      ]
-    },
-    "comprovar_aov_vpl": {
-      "titol": "VPL certificat i inscrit — AOV obligatòria",
-      "text": "Té assegurança obligatòria?",
-      "info": "El VPL certificat I inscrit al RNV ha de tenir AOV (DA 1a Llei 5/2025). Si està certificat però NO inscrit, o NO certificat: no és obligat (però sí denúncia per manca d'inscripció).",
-      "opcions": [
-        {
-          "etiqueta": "SÍ té AOV vigent",
-          "va_a": "fi_ok"
-        },
-        {
-          "etiqueta": "NO té AOV (és certificat i inscrit)",
-          "va_a": "fi_aov"
-        },
-        {
-          "etiqueta": "Certificat però NO inscrit (no obligat AOV)",
-          "va_a": "fi_inf_2"
-        },
-        {
-          "etiqueta": "No certificat (no obligat AOV però sí denúncia)",
-          "va_a": "fi_inf_2"
-        }
-      ]
-    },
-    "sense_identificacio": {
-      "titol": "VMP sense cap número d'identificació",
-      "text": "Què consignar a la butlleta:",
-      "info": "Si el VMP no té etiqueta ni placa de marcatge, l'agent ha de consignar els requisits tècnics i fer fotografia. Indicar pes obligatòriament.",
-      "checklist_previ": [
-        "Pes del vehicle (per determinar VMP a motor vs VPL)",
-        "Velocitat màxima (per disseny)",
-        "Marca i model si visible",
-        "Fotografia del vehicle",
-        "Identificació del conductor"
       ],
-      "opcions": [
+      "si_es_menor": [
+        "Menys de 16 anys: no pot conduir VMP. Denuncia i identifica el responsable legal (art. 82 LSV).",
+        "Menys de 18: identifica el pare, la mare o el tutor i consigna'ls.",
+        "Menys de 14: no té responsabilitat penal; la administrativa és dels tutors."
+      ]
+    },
+    "familia_b": {
+      "final": true,
+      "tipus": "administrativa",
+      "titol": "És un VPL (vehicle personal lleuger)",
+      "en_dues_paraules": "Pesa 25 kg o menys (o pesa més però va molt lent). L'assegurança aquí NO és automàtica: només si té els papers en regla.",
+      "info_clau": "Només li pots denunciar l'assegurança si té les TRES coses: certificat, inscripció al RNV i etiqueta. Si en falta una, denuncia la que falta i prou.",
+      "infraccions": [
         {
-          "etiqueta": "Documentar i denunciar per (1) + (2)",
-          "va_a": "fi_doble"
+          "titol": "Sense assegurança (VPL)",
+          "article": "art. 2.1 AOV",
+          "import": "300 €",
+          "importReduit": "150 € amb pagament immediat",
+          "gravetat": "G",
+          "butlleta": "Circular el vehicle personal lleuger sense que consti que el propietari tingui subscrit i mantingui en vigor un contracte d'assegurança que cobreixi la responsabilitat civil derivada de la seva circulació.",
+          "nota": "NOMÉS si té les tres coses: certificat, inscripció al RNV i etiqueta. Si en falta una, no li pots denunciar l'assegurança."
+        },
+        {
+          "titol": "Sense certificat de circulació",
+          "article": "art. 22 bis.2 RGV",
+          "import": "200 €",
+          "importReduit": "100 € amb pagament immediat",
+          "gravetat": "G",
+          "butlleta": "Circular amb un VMP que no disposa del certificat de circulació.",
+          "nota": "Absorbeix la manca de RNV i la d'etiqueta: una sola butlleta."
+        },
+        {
+          "titol": "No inscrit al RNV / REVEMP",
+          "article": "art. 22 bis.2 RGV",
+          "import": "100 €",
+          "importReduit": "50 € amb pagament immediat",
+          "gravetat": "G",
+          "butlleta": "No inscriure un vehicle de mobilitat personal al Registre Nacional de Vehicles.",
+          "nota": "Absorbeix la manca d'etiqueta."
+        },
+        {
+          "titol": "Sense etiqueta o placa",
+          "article": "art. 22 bis.2 RGV",
+          "import": "80 €",
+          "importReduit": "40 € amb pagament immediat",
+          "gravetat": "L",
+          "butlleta": "No disposar i exhibir en un vehicle de mobilitat personal l'etiqueta identificativa o la placa de marcatge del fabricant.",
+          "nota": "Digues a la butlleta quina de les dues falta."
+        },
+        {
+          "titol": "Requisits tècnics — manipulació",
+          "article": "Annex XXI RGV",
+          "import": "500 €",
+          "importReduit": "250 € amb pagament immediat",
+          "gravetat": "MG",
+          "butlleta": "No complir el vehicle de mobilitat personal els requisits tècnics regulats a l'annex XXI i que afecten greument la seguretat viària.",
+          "nota": "Només si HAS VIST l'incompliment. No el dedueixis de la manca de certificat."
+        },
+        {
+          "titol": "Requisits tècnics — llums o rodes",
+          "article": "Annex XXI RGV",
+          "import": "200 € (greu) / 80 € (lleu)",
+          "importReduit": "100 € / 40 € amb pagament immediat",
+          "gravetat": "G / L",
+          "butlleta": "No complir el vehicle de mobilitat personal els requisits tècnics regulats a l'annex XXI.",
+          "nota": "Llums o rodes → 200 €. Sense timbre o cavallet → 80 €."
         }
+      ],
+      "ordre_de_denuncia": [
+        "Mira primer els tres papers. Si en falta un, ja no hi ha butlleta d'assegurança.",
+        "Dels tres papers NOMÉS UNA butlleta: el certificat absorbeix els altres dos.",
+        "Permís de conduir i punts: no existeixen en VPL."
+      ],
+      "immobilitzacio": "NO per manca de papers.",
+      "infraccions_de_circulacio": [
+        {
+          "titol": "Per la vorera o zona de vianants",
+          "article": "art. 121.5 RGC",
+          "import": "200 €",
+          "importReduit": "100 €",
+          "gravetat": "G",
+          "butlleta": "Circular amb qualsevol classe de vehicle per una vorera o una zona de vianants."
+        },
+        {
+          "titol": "Per on no pot (travessia, interurbana, autopista, túnel)",
+          "article": "art. 38.4 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "Circular amb el vehicle ressenyat per una via on li està prohibit."
+        },
+        {
+          "titol": "Amb el mòbil o auriculars",
+          "article": "art. 18.2 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "Conduir utilitzant el telèfon mòbil o auriculars connectats a aparells reproductors de so.",
+          "nota": "Sense detracció de punts: en VMP no n'hi ha mai."
+        },
+        {
+          "titol": "Dues persones a sobre",
+          "article": "art. 9.1 RGC",
+          "import": "100 €",
+          "gravetat": "L",
+          "butlleta": "Circular amb el vehicle ressenyat transportant més persones de les places autoritzades."
+        },
+        {
+          "titol": "Sense llums de nit",
+          "article": "art. 123 RGC",
+          "import": "80 €",
+          "gravetat": "L",
+          "butlleta": "Circular sense l'enllumenat reglamentari en condicions de baixa visibilitat."
+        },
+        {
+          "titol": "Saltar-se un STOP o un cediu el pas",
+          "article": "art. 145.2-A RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "No respectar el senyal de detenció obligatòria o de cediu el pas."
+        },
+        {
+          "titol": "Saltar-se un semàfor",
+          "article": "art. 143.1-D RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "No respectar la llum vermella d'un semàfor."
+        },
+        {
+          "titol": "No obeir els agents",
+          "article": "art. 141.1 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "No obeir les ordres o els senyals dels agents de l'autoritat."
+        },
+        {
+          "titol": "Conducció negligent",
+          "article": "art. 3.1 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "Conduir de manera negligent."
+        },
+        {
+          "titol": "Conducció temerària",
+          "article": "art. 3.1 RGC",
+          "import": "500 €",
+          "gravetat": "MG",
+          "butlleta": "Conduir de manera temerària."
+        },
+        {
+          "titol": "Sense casc (ordenança municipal)",
+          "article": "art. 13 bis G Ordenança",
+          "import": "90 €",
+          "gravetat": "L",
+          "butlleta": "Circular sense el casc de protecció exigit per l'ordenança municipal."
+        }
+      ],
+      "alcohol_i_drogues": [
+        {
+          "titol": "Alcohol per sobre de 0,25 mg/l",
+          "article": "art. 20 RGC",
+          "import": "Segons barem",
+          "gravetat": "G / MG",
+          "butlleta": "Conduir amb una taxa d'alcohol en aire espirat superior a la reglamentàriament establerta.",
+          "nota": "Porta immobilització."
+        },
+        {
+          "titol": "Negativa a les proves d'alcohol",
+          "article": "art. 21 RGC",
+          "import": "1.000 €",
+          "gravetat": "MG",
+          "butlleta": "Negar-se a sotmetre's a les proves de detecció d'alcohol.",
+          "nota": "Immobilització + valora art. 383 CP: llavors és atestat, no butlleta."
+        },
+        {
+          "titol": "Positiu en drogues",
+          "article": "art. 14 LSV",
+          "import": "1.000 €",
+          "gravetat": "MG",
+          "butlleta": "Conduir amb presència de drogues a l'organisme.",
+          "nota": "Porta immobilització."
+        },
+        {
+          "titol": "Negativa a les proves de drogues",
+          "article": "art. 14 LSV",
+          "import": "1.000 €",
+          "gravetat": "MG",
+          "butlleta": "Negar-se a sotmetre's a les proves de detecció de drogues.",
+          "nota": "Immobilització + valora art. 383 CP."
+        }
+      ],
+      "si_es_menor": [
+        "Menys de 16 anys: no pot conduir VMP. Denuncia i identifica el responsable legal (art. 82 LSV).",
+        "Menys de 18: identifica el pare, la mare o el tutor i consigna'ls.",
+        "Menys de 14: no té responsabilitat penal; la administrativa és dels tutors."
       ]
     },
-    "fi_ok": {
+    "familia_c": {
       "final": true,
-      "tipus": "ok",
-      "titol": "✅ Tot correcte",
-      "accio": "Es deixa circular. No procedeix denúncia.",
-      "accions_operatives": [
-        "Verificar que la documentació del conductor estigui en regla",
-        "Recordatori del compliment normatiu (alcoholèmia, mòbil, casc, voreres)"
+      "tipus": "penal",
+      "titol": "NO és un VMP i no pot circular",
+      "en_dues_paraules": "Passa de 25 km/h, o no compleix alguna condició bàsica. Queda fora del règim de VMP i també fora del de motos: no té cap manera legal de ser al carrer.",
+      "info_clau": "Cas típic: patinet amb el limitador trucat. Fes fotografia de la manipulació i fes constar com has determinat la velocitat.",
+      "infraccions": [
+        {
+          "titol": "Sense autorització per circular",
+          "article": "art. 1.1 RGV",
+          "import": "500 €",
+          "importReduit": "250 € amb pagament immediat",
+          "gravetat": "MG",
+          "butlleta": "Circular amb un vehicle que no té la corresponent autorització administrativa.",
+          "nota": "Porta IMMOBILITZACIÓ (art. 104.1.a LSV) · acta A-13 · safata H02."
+        },
+        {
+          "titol": "Sense assegurança (VMP)",
+          "article": "art. 2.1 AOV",
+          "import": "800 €",
+          "importReduit": "400 € amb pagament immediat",
+          "gravetat": "MG",
+          "butlleta": "Circular el vehicle ressenyat sense que consti que el propietari tingui subscrit i mantingui en vigor un contracte d'assegurança que cobreixi la responsabilitat civil derivada de la seva circulació.",
+          "nota": "Consigna a la butlleta el pes (MOM) en kg i la velocitat màxima en km/h."
+        }
+      ],
+      "ordre_de_denuncia": [
+        "Autorització administrativa (500 €) + IMMOBILITZACIÓ.",
+        "Assegurança només si passa de 25 km/h, o si pesa més de 25 kg i passa de 14.",
+        "Els requisits tècnics NO es denuncien aquí.",
+        "El permís de conduir NO es denuncia aquí."
+      ],
+      "immobilitzacio": "SÍ. Art. 104.1.a LSV · acta A-13 · safata H02.",
+      "infraccions_de_circulacio": [
+        {
+          "titol": "Per la vorera o zona de vianants",
+          "article": "art. 121.5 RGC",
+          "import": "200 €",
+          "importReduit": "100 €",
+          "gravetat": "G",
+          "butlleta": "Circular amb qualsevol classe de vehicle per una vorera o una zona de vianants."
+        },
+        {
+          "titol": "Per on no pot (travessia, interurbana, autopista, túnel)",
+          "article": "art. 38.4 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "Circular amb el vehicle ressenyat per una via on li està prohibit."
+        },
+        {
+          "titol": "Amb el mòbil o auriculars",
+          "article": "art. 18.2 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "Conduir utilitzant el telèfon mòbil o auriculars connectats a aparells reproductors de so.",
+          "nota": "Sense detracció de punts: en VMP no n'hi ha mai."
+        },
+        {
+          "titol": "Dues persones a sobre",
+          "article": "art. 9.1 RGC",
+          "import": "100 €",
+          "gravetat": "L",
+          "butlleta": "Circular amb el vehicle ressenyat transportant més persones de les places autoritzades."
+        },
+        {
+          "titol": "Sense llums de nit",
+          "article": "art. 123 RGC",
+          "import": "80 €",
+          "gravetat": "L",
+          "butlleta": "Circular sense l'enllumenat reglamentari en condicions de baixa visibilitat."
+        },
+        {
+          "titol": "Saltar-se un STOP o un cediu el pas",
+          "article": "art. 145.2-A RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "No respectar el senyal de detenció obligatòria o de cediu el pas."
+        },
+        {
+          "titol": "Saltar-se un semàfor",
+          "article": "art. 143.1-D RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "No respectar la llum vermella d'un semàfor."
+        },
+        {
+          "titol": "No obeir els agents",
+          "article": "art. 141.1 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "No obeir les ordres o els senyals dels agents de l'autoritat."
+        },
+        {
+          "titol": "Conducció negligent",
+          "article": "art. 3.1 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "Conduir de manera negligent."
+        },
+        {
+          "titol": "Conducció temerària",
+          "article": "art. 3.1 RGC",
+          "import": "500 €",
+          "gravetat": "MG",
+          "butlleta": "Conduir de manera temerària."
+        },
+        {
+          "titol": "Sense casc (ordenança municipal)",
+          "article": "art. 13 bis G Ordenança",
+          "import": "90 €",
+          "gravetat": "L",
+          "butlleta": "Circular sense el casc de protecció exigit per l'ordenança municipal."
+        }
+      ],
+      "alcohol_i_drogues": [
+        {
+          "titol": "Alcohol per sobre de 0,25 mg/l",
+          "article": "art. 20 RGC",
+          "import": "Segons barem",
+          "gravetat": "G / MG",
+          "butlleta": "Conduir amb una taxa d'alcohol en aire espirat superior a la reglamentàriament establerta.",
+          "nota": "Porta immobilització."
+        },
+        {
+          "titol": "Negativa a les proves d'alcohol",
+          "article": "art. 21 RGC",
+          "import": "1.000 €",
+          "gravetat": "MG",
+          "butlleta": "Negar-se a sotmetre's a les proves de detecció d'alcohol.",
+          "nota": "Immobilització + valora art. 383 CP: llavors és atestat, no butlleta."
+        },
+        {
+          "titol": "Positiu en drogues",
+          "article": "art. 14 LSV",
+          "import": "1.000 €",
+          "gravetat": "MG",
+          "butlleta": "Conduir amb presència de drogues a l'organisme.",
+          "nota": "Porta immobilització."
+        },
+        {
+          "titol": "Negativa a les proves de drogues",
+          "article": "art. 14 LSV",
+          "import": "1.000 €",
+          "gravetat": "MG",
+          "butlleta": "Negar-se a sotmetre's a les proves de detecció de drogues.",
+          "nota": "Immobilització + valora art. 383 CP."
+        }
+      ],
+      "si_es_menor": [
+        "Menys de 16 anys: no pot conduir VMP. Denuncia i identifica el responsable legal (art. 82 LSV).",
+        "Menys de 18: identifica el pare, la mare o el tutor i consigna'ls.",
+        "Menys de 14: no té responsabilitat penal; la administrativa és dels tutors."
       ]
     },
-    "fi_ok_z": {
+    "familia_d": {
       "final": true,
-      "tipus": "avis",
-      "titol": "✅ VMP Z correcte — règim transitori",
-      "accio": "Es deixa circular. Recordar al conductor que la caducitat és el 22/01/2027.",
-      "accions_operatives": [
-        "Informar verbalment de la caducitat 22/01/2027",
-        "A partir d'aquesta data el vehicle NO podrà circular"
-      ]
-    },
-    "fi_inf_1": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "🟢 LLEU — Sense etiqueta o placa de marcatge",
-      "concepte_butlleta": "No disposar i exhibir en un VMP l'etiqueta identificativa o la placa de marcatge del fabricant",
-      "article_butlleta": "Art. 22 RGV · Comunicat 6/2026 SCT",
-      "import": "80 € (DTE 40 €)",
-      "punts": "0",
-      "accions_operatives": [
-        "Butlletí de denúncia",
-        "Si VMP no inscrit: indicar pes (MOM) a la butlleta",
-        "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
-      ]
-    },
-    "fi_inf_2": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "🟢 LLEU — No inscrit al RNV",
-      "concepte_butlleta": "No inscriure un VMP al Registre Nacional de Vehicles",
-      "article_butlleta": "Art. 22 RGV · RD 52/2026 · Comunicat 6/2026 SCT",
-      "import": "100 € (DTE 50 €)",
-      "punts": "0",
-      "accions_operatives": [
-        "Butlletí de denúncia",
-        "Indicar OBLIGATÒRIAMENT el pes (MOM) a la butlleta — permet determinar VMP a motor vs VPL",
-        "Adreçat al CONDUCTOR (el VMP no consta inscrit, no hi ha titular al RNV)",
-        "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)",
-        "⚠️ NO denunciar alhora per 'sense certificat' si és > 22/01/2024 (concurrència)"
-      ]
-    },
-    "fi_inf_3": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "🔴 MOLT GREU — Annex XXI · afecta greument seguretat viària",
-      "concepte_butlleta": "No complir els requisits tècnics de l'Annex XXI del RGV en aspectes que afecten greument la seguretat viària (manipulació del control de velocitat, modificació estructural, etc.)",
-      "article_butlleta": "Art. 22 RGV · Annex XXI · Comunicat 6/2026 SCT",
-      "import": "500 € (DTE 250 €)",
-      "punts": "0",
-      "accions_operatives": [
-        "Butlletí de denúncia",
-        "Documentar (fotografia) la manipulació/modificació",
-        "Plantejar IMMOBILITZACIÓ del vehicle (per perill objectiu)",
-        "⚠️ L'única MOLT GREU de les 5 noves del Com. 6/2026",
-        "⚠️ Si la manipulació fa superar els 25 km/h: tracta'l com a CICLOMOTOR ENCOBERT (règim complet)",
-        "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
-      ]
-    },
-    "fi_inf_4": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "🟠 GREU — Annex XXI · il·luminació, rodes",
-      "concepte_butlleta": "No complir els requisits tècnics de l'Annex XXI del RGV (sistema d'il·luminació, rodes, etc.)",
-      "article_butlleta": "Art. 22 RGV · Annex XXI · Comunicat 6/2026 SCT",
-      "import": "200 € (DTE 100 €)",
-      "punts": "0",
-      "accions_operatives": [
-        "Butlletí de denúncia",
-        "Documentar (fotografia) el defecte tècnic",
-        "Recordar al conductor que cal reparar abans de tornar a circular",
-        "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
-      ]
-    },
-    "fi_inf_5": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "🟢 LLEU — Annex XXI · dispositiu sonor, cavallet",
-      "concepte_butlleta": "No complir els requisits tècnics de l'Annex XXI del RGV (dispositiu sonor, cavallet, etc.)",
-      "article_butlleta": "Art. 22 RGV · Annex XXI · Comunicat 6/2026 SCT",
-      "import": "80 € (DTE 40 €)",
-      "punts": "0",
-      "accions_operatives": [
-        "Butlletí de denúncia",
-        "Documentar (fotografia) el defecte",
-        "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
-      ]
-    },
-    "fi_aov": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "🔴 MOLT GREU — VPL sense AOV",
-      "concepte_butlleta": "Circular el vehicle personal lleuger (VPL certificat i inscrit al RNV) sense que consti subscrit i en vigor un contracte d'assegurança obligatòria",
-      "article_butlleta": "Art. 2.1 RDL 8/2004 · DA 1a Llei 5/2025 · Com. 6/2026 SCT",
-      "import": "300 € (DTE 150 €) — MODIFICAT 2026 (abans 350 €)",
-      "punts": "0",
-      "accions_operatives": [
-        "Butlletí de denúncia",
-        "Acta d'IMMOBILITZACIÓ (Art. 3 LRCSCVM)",
-        "Notificació al Consorci de Compensació d'Assegurances",
-        "Dipòsit fins a justificar pòlissa o titular abonar franquícia"
-      ]
-    },
-    "fi_aov_motor": {
-      "final": true,
-      "tipus": "administrativa",
-      "titol": "🚨 MOLT GREU — VMP a motor sense AOV",
-      "concepte_butlleta": "Circular amb un VMP considerat vehicle a motor (per MOM) sense AOV vigent",
-      "article_butlleta": "Art. 2.1 Llei sobre RC i assegurança en circulació de vehicles a motor",
-      "import": "800 €",
-      "punts": "0",
-      "accions_operatives": [
-        "Butlletí de denúncia",
-        "Acta d'IMMOBILITZACIÓ (Art. 3 LRCSCVM)",
-        "Notificació al Consorci de Compensació d'Assegurances",
-        "Si VMP no inscrit: indicar PES (MOM) a la butlleta",
-        "Dipòsit fins a justificar pòlissa o titular abonar franquícia"
-      ]
-    },
-    "fi_doble": {
-      "final": true,
-      "tipus": "mixta",
-      "titol": "⚠️ Denúncia per manca d'identificació i registre",
-      "concepte_butlleta": "VMP sense etiqueta identificativa, placa de marcatge ni inscripció al Registre Nacional de Vehicles",
-      "article_butlleta": "Art. 22 RGV · Com. 6/2026 SCT (infraccions 1 i 2)",
-      "import": "80 € (sense etiqueta/placa) + 100 € (sense RNV) = 180 €",
-      "punts": "0",
-      "accions_operatives": [
-        "Consignar a la butlleta: pes, velocitat màxima, marca, model",
-        "Fotografia del vehicle",
-        "⚠️ Concurrència: NO acumular 'sense certificat' + 'no inscrit' (art. 22 RGV ja les contempla)",
-        "Adreçat al CONDUCTOR (no hi ha titular inscrit)",
-        "Si conductor menor: dades del pare/mare/tutor (art. 82 LSV — solidaris)"
+      "tipus": "penal",
+      "titol": "És un ciclomotor o una moto",
+      "en_dues_paraules": "Pel seient i l'alçada entra al Reglament europeu 168/2013. Aquí sí que hi ha permís de conduir i sí que es treuen punts.",
+      "categories": [
+        "L1e-B: fins a 4.000 W i 45 km/h → permís AM",
+        "L3e-A1: fins a 11 kW → permís A1 (o B amb més de 3 anys)",
+        "L3e-A2: fins a 35 kW → permís A2",
+        "L3e-A3: la resta → permís A"
+      ],
+      "infraccions": [
+        {
+          "titol": "Sense matricular",
+          "article": "art. 1.2 RGV",
+          "import": "500 €",
+          "importReduit": "250 € amb pagament immediat",
+          "gravetat": "MG",
+          "butlleta": "Circular amb el vehicle ressenyat sense haver obtingut, prèviament, l'autorització administrativa corresponent.",
+          "nota": "Porta IMMOBILITZACIÓ."
+        },
+        {
+          "titol": "Sense permís de conduir",
+          "article": "art. 1.1 RGCon",
+          "import": "Segons categoria",
+          "gravetat": "MG",
+          "butlleta": "Conduir un vehicle sense el permís de conduir corresponent a la seva categoria.",
+          "nota": "Valora si toca art. 384 CP. NO s'aplica si ha tingut mai algun permís vàlid."
+        }
+      ],
+      "ordre_de_denuncia": [
+        "Si no està matriculat: 500 € + immobilització.",
+        "Si no té permís: valora si toca art. 384 CP (llavors és atestat).",
+        "Assegurança i condicions tècniques, segons la categoria del vehicle.",
+        "Aquí SÍ hi ha detracció de punts."
+      ],
+      "immobilitzacio": "SÍ si no té autorització administrativa.",
+      "infraccions_de_circulacio": [
+        {
+          "titol": "Per la vorera o zona de vianants",
+          "article": "art. 121.5 RGC",
+          "import": "200 €",
+          "importReduit": "100 €",
+          "gravetat": "G",
+          "butlleta": "Circular amb qualsevol classe de vehicle per una vorera o una zona de vianants."
+        },
+        {
+          "titol": "Per on no pot (travessia, interurbana, autopista, túnel)",
+          "article": "art. 38.4 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "Circular amb el vehicle ressenyat per una via on li està prohibit."
+        },
+        {
+          "titol": "Amb el mòbil o auriculars",
+          "article": "art. 18.2 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "Conduir utilitzant el telèfon mòbil o auriculars connectats a aparells reproductors de so.",
+          "nota": "Sense detracció de punts: en VMP no n'hi ha mai."
+        },
+        {
+          "titol": "Dues persones a sobre",
+          "article": "art. 9.1 RGC",
+          "import": "100 €",
+          "gravetat": "L",
+          "butlleta": "Circular amb el vehicle ressenyat transportant més persones de les places autoritzades."
+        },
+        {
+          "titol": "Sense llums de nit",
+          "article": "art. 123 RGC",
+          "import": "80 €",
+          "gravetat": "L",
+          "butlleta": "Circular sense l'enllumenat reglamentari en condicions de baixa visibilitat."
+        },
+        {
+          "titol": "Saltar-se un STOP o un cediu el pas",
+          "article": "art. 145.2-A RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "No respectar el senyal de detenció obligatòria o de cediu el pas."
+        },
+        {
+          "titol": "Saltar-se un semàfor",
+          "article": "art. 143.1-D RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "No respectar la llum vermella d'un semàfor."
+        },
+        {
+          "titol": "No obeir els agents",
+          "article": "art. 141.1 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "No obeir les ordres o els senyals dels agents de l'autoritat."
+        },
+        {
+          "titol": "Conducció negligent",
+          "article": "art. 3.1 RGC",
+          "import": "200 €",
+          "gravetat": "G",
+          "butlleta": "Conduir de manera negligent."
+        },
+        {
+          "titol": "Conducció temerària",
+          "article": "art. 3.1 RGC",
+          "import": "500 €",
+          "gravetat": "MG",
+          "butlleta": "Conduir de manera temerària."
+        },
+        {
+          "titol": "Sense casc (ordenança municipal)",
+          "article": "art. 13 bis G Ordenança",
+          "import": "90 €",
+          "gravetat": "L",
+          "butlleta": "Circular sense el casc de protecció exigit per l'ordenança municipal."
+        }
+      ],
+      "alcohol_i_drogues": [
+        {
+          "titol": "Alcohol per sobre de 0,25 mg/l",
+          "article": "art. 20 RGC",
+          "import": "Segons barem",
+          "gravetat": "G / MG",
+          "butlleta": "Conduir amb una taxa d'alcohol en aire espirat superior a la reglamentàriament establerta.",
+          "nota": "Porta immobilització."
+        },
+        {
+          "titol": "Negativa a les proves d'alcohol",
+          "article": "art. 21 RGC",
+          "import": "1.000 €",
+          "gravetat": "MG",
+          "butlleta": "Negar-se a sotmetre's a les proves de detecció d'alcohol.",
+          "nota": "Immobilització + valora art. 383 CP: llavors és atestat, no butlleta."
+        },
+        {
+          "titol": "Positiu en drogues",
+          "article": "art. 14 LSV",
+          "import": "1.000 €",
+          "gravetat": "MG",
+          "butlleta": "Conduir amb presència de drogues a l'organisme.",
+          "nota": "Porta immobilització."
+        },
+        {
+          "titol": "Negativa a les proves de drogues",
+          "article": "art. 14 LSV",
+          "import": "1.000 €",
+          "gravetat": "MG",
+          "butlleta": "Negar-se a sotmetre's a les proves de detecció de drogues.",
+          "nota": "Immobilització + valora art. 383 CP."
+        }
+      ],
+      "si_es_menor": [
+        "Menys de 16 anys: no pot conduir VMP. Denuncia i identifica el responsable legal (art. 82 LSV).",
+        "Menys de 18: identifica el pare, la mare o el tutor i consigna'ls.",
+        "Menys de 14: no té responsabilitat penal; la administrativa és dels tutors."
       ]
     }
   },
   "notes_finals": [
-    "Regla pràctica: primer CLASSIFICA l'aparell (VMP / EPAC / ciclomotor encobert / joguina) i després tria la infracció. La majoria d'errors de butlleta vénen de classificar malament.",
-    "Les infraccions de circulació (vorera, semàfor, auriculars…) i les documentals (etiqueta, RNV, AOV) són INDEPENDENTS: es poden denunciar alhora.",
-    "En VMP mai hi ha detracció de punts ni via penal per alcohol/velocitat — però la NEGATIVA a les proves també és sancionable (1.000 €).",
-    "Ordenança municipal: casc, edat mínima i zones de circulació les concreta cada municipi — porta-la sempre al dia.",
-    "Règim transitori etiqueta Z: caduca el 22/01/2027. A partir d'aleshores només podran circular els VMP amb certificat.",
-    "Darrera revisió normativa d'aquesta fitxa: juliol 2026 (Com. 6/2026 SCT + RD 52/2026 + Llei 5/2025)."
+    "Eina de suport a la decisió: la qualificació definitiva recau en l'agent actuant.",
+    "Sempre a la butlleta: pes en kg i velocitat màxima en km/h, encara que tinguis el número d'identificació.",
+    "Si hi ha via penal oberta (arts. 379-384 CP), suspèn l'administrativa: non bis in idem."
   ]
 }
