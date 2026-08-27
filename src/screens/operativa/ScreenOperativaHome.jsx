@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
+import { DAILY_NEWS, NEWS_CAT_MAP } from '../../data/news';
 
 function BigCatCard({ cat, icon, kicker, title, desc, cta, onClick }) {
   const k = T.cat[cat];
@@ -134,6 +135,36 @@ export default function ScreenOperativaHome() {
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Noticias del dia */}
+      <div style={{ padding: '14px 0 16px' }}>
+        <SectionHead kicker="27 agost 2026" kickerColor={T.cat.leyes.solid} title="Noticias del dia" action="Tot →" />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {DAILY_NEWS.map((n, i) => {
+            const catKey = NEWS_CAT_MAP[n.cat] || 'operativa';
+            const k = T.cat[catKey];
+            return (
+              <div
+                key={i}
+                onClick={() => n.url && window.open(n.url, '_blank')}
+                style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${k.solid}`, boxShadow: T.shadow.card, cursor: n.url ? 'pointer' : 'default' }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                  <span style={{ fontSize: 10, fontWeight: 800, color: k.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
+                  <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+                {n.url && (
+                  <div style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 4, color: k.solid, fontSize: 11, fontWeight: 700 }}>
+                    Llegir notícia completa <Icon name="arrow-right" size={12} color={k.solid} />
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
