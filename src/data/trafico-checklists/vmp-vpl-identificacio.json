@@ -148,7 +148,8 @@
           "importReduit": "100 € amb pagament immediat",
           "gravetat": "G",
           "butlleta": "Circular amb un VMP que no disposa del certificat de circulació.",
-          "nota": "Absorbeix la manca de RNV i la d'etiqueta: una sola butlleta."
+          "nota": "Només és denunciable si es va comercialitzar després del 22/01/2024. Absorbeix la manca de RNV i la de placa de marcatge: una sola butlleta. Consigna la data de compra que et digui el conductor.",
+          "avis": "ATENCIÓ: si el VMP es va comercialitzar ABANS del 22/01/2024 està EXEMPT fins al 22/01/2027. Avui, no li posis aquesta butlleta."
         },
         {
           "titol": "No inscrit al RNV / REVEMP",
@@ -157,7 +158,7 @@
           "importReduit": "50 € amb pagament immediat",
           "gravetat": "G",
           "butlleta": "No inscriure un vehicle de mobilitat personal al Registre Nacional de Vehicles.",
-          "nota": "Absorbeix la manca d'etiqueta."
+          "nota": "Absorbeix la manca d'etiqueta identificativa."
         },
         {
           "titol": "Sense etiqueta o placa",
@@ -166,11 +167,11 @@
           "importReduit": "40 € amb pagament immediat",
           "gravetat": "L",
           "butlleta": "No disposar i exhibir en un vehicle de mobilitat personal l'etiqueta identificativa o la placa de marcatge del fabricant.",
-          "nota": "Digues a la butlleta quina de les dues falta."
+          "nota": "Digues a la butlleta quina de les dues falta. Si no té certificat, la placa ja hi queda absorbida; si no està inscrit al RNV, l'etiqueta també."
         },
         {
           "titol": "Requisits tècnics — manipulació",
-          "article": "Annex XXI RGV",
+          "article": "art. 22 bis.2 RGV (Annex XXI)",
           "import": "500 €",
           "importReduit": "250 € amb pagament immediat",
           "gravetat": "MG",
@@ -179,18 +180,19 @@
         },
         {
           "titol": "Requisits tècnics — llums o rodes",
-          "article": "Annex XXI RGV",
+          "article": "art. 22 bis.2 RGV (Annex XXI)",
           "import": "200 € (greu) / 80 € (lleu)",
           "importReduit": "100 € / 40 € amb pagament immediat",
           "gravetat": "G / L",
           "butlleta": "No complir el vehicle de mobilitat personal els requisits tècnics regulats a l'annex XXI.",
-          "nota": "Llums o rodes → 200 €. Sense timbre o cavallet → 80 €."
+          "nota": "Llums o rodes → 200 € (greu). Sense timbre o cavallet → 80 € (lleu)."
         }
       ],
       "ordre_de_denuncia": [
-        "Assegurança: va a part, es denuncia sempre que falti.",
-        "Dels tres papers (certificat, RNV, etiqueta) NOMÉS UNA butlleta: el certificat absorbeix els altres dos, i el RNV absorbeix l'etiqueta.",
-        "Els requisits tècnics, només si n'has vist un incompliment concret.",
+        "Assegurança: va a part i es denuncia sempre que falti, tingui o no els papers.",
+        "Dels tres papers, NOMÉS UNA butlleta: el certificat absorbeix el RNV i la placa; el RNV absorbeix l'etiqueta.",
+        "Certificat: comprovar primer la data de compra (exempt si és anterior al 22/01/2024).",
+        "Requisits tècnics: només si n'has vist un incompliment concret.",
         "Les infraccions de circulació se sumen sempre."
       ],
       "immobilitzacio": "NO per manca de papers. SÍ per alcohol, drogues o risc greu.",
@@ -313,6 +315,11 @@
         "Menys de 16 anys: no pot conduir VMP. Denuncia i identifica el responsable legal (art. 82 LSV).",
         "Menys de 18: identifica el pare, la mare o el tutor i consigna'ls.",
         "Menys de 14: no té responsabilitat penal; la administrativa és dels tutors."
+      ],
+      "qui_respon": [
+        "El titular inscrit al RNV respon de totes les infraccions.",
+        "Si el vehicle no consta inscrit, el procediment s'adreça al conductor.",
+        "Si és menor, els pares o tutors responen solidàriament de la multa (art. 82 LSV): fes constar les seves dades a la butlleta."
       ]
     },
     "familia_b": {
@@ -338,7 +345,8 @@
           "importReduit": "100 € amb pagament immediat",
           "gravetat": "G",
           "butlleta": "Circular amb un VMP que no disposa del certificat de circulació.",
-          "nota": "Absorbeix la manca de RNV i la d'etiqueta: una sola butlleta."
+          "nota": "Només és denunciable si es va comercialitzar després del 22/01/2024. Absorbeix la manca de RNV i la de placa de marcatge: una sola butlleta. Consigna la data de compra que et digui el conductor.",
+          "avis": "ATENCIÓ: si el VMP es va comercialitzar ABANS del 22/01/2024 està EXEMPT fins al 22/01/2027. Avui, no li posis aquesta butlleta."
         },
         {
           "titol": "No inscrit al RNV / REVEMP",
@@ -347,7 +355,7 @@
           "importReduit": "50 € amb pagament immediat",
           "gravetat": "G",
           "butlleta": "No inscriure un vehicle de mobilitat personal al Registre Nacional de Vehicles.",
-          "nota": "Absorbeix la manca d'etiqueta."
+          "nota": "Absorbeix la manca d'etiqueta identificativa."
         },
         {
           "titol": "Sense etiqueta o placa",
@@ -356,11 +364,11 @@
           "importReduit": "40 € amb pagament immediat",
           "gravetat": "L",
           "butlleta": "No disposar i exhibir en un vehicle de mobilitat personal l'etiqueta identificativa o la placa de marcatge del fabricant.",
-          "nota": "Digues a la butlleta quina de les dues falta."
+          "nota": "Digues a la butlleta quina de les dues falta. Si no té certificat, la placa ja hi queda absorbida; si no està inscrit al RNV, l'etiqueta també."
         },
         {
           "titol": "Requisits tècnics — manipulació",
-          "article": "Annex XXI RGV",
+          "article": "art. 22 bis.2 RGV (Annex XXI)",
           "import": "500 €",
           "importReduit": "250 € amb pagament immediat",
           "gravetat": "MG",
@@ -369,17 +377,18 @@
         },
         {
           "titol": "Requisits tècnics — llums o rodes",
-          "article": "Annex XXI RGV",
+          "article": "art. 22 bis.2 RGV (Annex XXI)",
           "import": "200 € (greu) / 80 € (lleu)",
           "importReduit": "100 € / 40 € amb pagament immediat",
           "gravetat": "G / L",
           "butlleta": "No complir el vehicle de mobilitat personal els requisits tècnics regulats a l'annex XXI.",
-          "nota": "Llums o rodes → 200 €. Sense timbre o cavallet → 80 €."
+          "nota": "Llums o rodes → 200 € (greu). Sense timbre o cavallet → 80 € (lleu)."
         }
       ],
       "ordre_de_denuncia": [
-        "Mira primer els tres papers. Si en falta un, ja no hi ha butlleta d'assegurança.",
-        "Dels tres papers NOMÉS UNA butlleta: el certificat absorbeix els altres dos.",
+        "Mira primer els tres papers. Si en falta un de sol, JA NO hi ha butlleta d'assegurança.",
+        "Dels tres papers, NOMÉS UNA butlleta: el certificat absorbeix el RNV i la placa; el RNV absorbeix l'etiqueta.",
+        "Certificat: comprovar primer la data de compra (exempt si és anterior al 22/01/2024).",
         "Permís de conduir i punts: no existeixen en VPL."
       ],
       "immobilitzacio": "NO per manca de papers.",
@@ -502,6 +511,11 @@
         "Menys de 16 anys: no pot conduir VMP. Denuncia i identifica el responsable legal (art. 82 LSV).",
         "Menys de 18: identifica el pare, la mare o el tutor i consigna'ls.",
         "Menys de 14: no té responsabilitat penal; la administrativa és dels tutors."
+      ],
+      "qui_respon": [
+        "El titular inscrit al RNV respon de totes les infraccions.",
+        "Si el vehicle no consta inscrit, el procediment s'adreça al conductor.",
+        "Si és menor, els pares o tutors responen solidàriament de la multa (art. 82 LSV): fes constar les seves dades a la butlleta."
       ]
     },
     "familia_c": {
@@ -656,6 +670,11 @@
         "Menys de 16 anys: no pot conduir VMP. Denuncia i identifica el responsable legal (art. 82 LSV).",
         "Menys de 18: identifica el pare, la mare o el tutor i consigna'ls.",
         "Menys de 14: no té responsabilitat penal; la administrativa és dels tutors."
+      ],
+      "qui_respon": [
+        "El titular inscrit al RNV respon de totes les infraccions.",
+        "Si el vehicle no consta inscrit, el procediment s'adreça al conductor.",
+        "Si és menor, els pares o tutors responen solidàriament de la multa (art. 82 LSV): fes constar les seves dades a la butlleta."
       ]
     },
     "familia_d": {
@@ -814,12 +833,18 @@
         "Menys de 16 anys: no pot conduir VMP. Denuncia i identifica el responsable legal (art. 82 LSV).",
         "Menys de 18: identifica el pare, la mare o el tutor i consigna'ls.",
         "Menys de 14: no té responsabilitat penal; la administrativa és dels tutors."
+      ],
+      "qui_respon": [
+        "El titular inscrit al RNV respon de totes les infraccions.",
+        "Si el vehicle no consta inscrit, el procediment s'adreça al conductor.",
+        "Si és menor, els pares o tutors responen solidàriament de la multa (art. 82 LSV): fes constar les seves dades a la butlleta."
       ]
     }
   },
   "notes_finals": [
     "Eina de suport a la decisió: la qualificació definitiva recau en l'agent actuant.",
-    "Sempre a la butlleta: pes en kg i velocitat màxima en km/h, encara que tinguis el número d'identificació.",
+    "El número d'identificació SEMPRE comença per M (M0000BBB). Si no en té, posa el número de sèrie i el de certificat de la placa.",
+    "Si no té cap número, has de fer constar el pes i la velocitat màxima: sense això no es pot graduar la multa.",
     "Si hi ha via penal oberta (arts. 379-384 CP), suspèn l'administrativa: non bis in idem."
   ]
 }
