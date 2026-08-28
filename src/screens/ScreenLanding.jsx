@@ -96,6 +96,24 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 12 }}>Actualitat</div>
+        <div
+          onClick={() => navigate('/noticias')}
+          style={{ background: T.cat.atajos.solid, borderRadius: T.r.xl, padding: 18, color: '#fff', position: 'relative', overflow: 'hidden', cursor: 'pointer' }}
+        >
+          <div style={{ position: 'absolute', right: -28, top: -28, width: 120, height: 120, borderRadius: 200, background: 'rgba(255,255,255,0.12)' }} />
+          <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: 1.2, textTransform: 'uppercase', opacity: 0.8, marginBottom: 8 }}>📰 Noticias del dia</div>
+          <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 20, letterSpacing: -0.4, lineHeight: 1.2 }}>Catalunya · Espanya<br/>Internacional</div>
+          <div style={{ fontSize: 13, opacity: 0.9, marginTop: 8, lineHeight: 1.4 }}>Política, economia, succeis, esports, cultura i més — actualitzat cada dia.</div>
+          <div style={{ marginTop: 14, display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.2)', padding: '7px 14px', borderRadius: T.r.pill }}>
+            <span style={{ fontSize: 12, fontWeight: 700 }}>Veure notícies</span>
+            <Icon name="arrow-right" size={14} color="#fff" />
+          </div>
+        </div>
+      </div>
+
       {/* testimonial */}
       <div style={{ padding: '16px 18px 0' }}>
         <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.academia.solid}` }}>
