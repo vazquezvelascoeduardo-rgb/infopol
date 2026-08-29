@@ -43,6 +43,13 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  // --- 29·08·2026 ---
+  { date: '08·29', tag: 'Economia · ESP', title: 'IPC d\'agost es dispara al 4,3%: màxim en 5 mesos per l\'energia', desc: 'L\'INE publica el dato adelantado. La inflació puja 7 dècimes respecte al juliol, impulsada pels carburants i el xoc d\'Iran.', url: 'https://www.moncloa.com/2026/08/28/inflacion-agosto-espana-4-3-bce-3422402/' },
+  { date: '08·29', tag: 'Política · CAT', title: 'Illa preveu "soroll intens" i aposta pel consens en renovables', desc: 'El president obre la reunió de govern al Monestir de les Avellanes i advoca per no aturar el desplegament del Plater.', url: 'https://cronicaglobal.elespanol.com/politica/20260829/illa-insta-dialogo-energias-renovables-petroleo-suelo/1003742790199_0.html' },
+  { date: '08·29', tag: 'Successos · ESP', title: 'Crisi migratòria a Ceuta: 60.000 entrades en poques setmanes', desc: 'La crisi, la major des del 2021, s\'ha anat contenint amb una barrera marina al Tarajal i repatriacions accelerades.', url: 'https://www.infobae.com/espana/2026/08/02/la-crisis-de-ceuta-en-cinco-claves-de-las-falsas-promesas-de-asilo-a-la-avalancha-de-60000-personas-y-el-papel-de-marruecos/' },
+  { date: '08·29', tag: 'Medi Ambient', title: 'Incendi de Segorbe (Castelló) estabilitzat: 630 ha calcinades', desc: 'El foc, declarat per un llamp, va obligar a evacuar 1.000 veïns de Gàtova. Estabilitzat a les 7:30 h del diumenge.', url: 'https://theobjective.com/sociedad/suceso/2026-08-23/estabilizado-incendio-forestal-segorbe-castellon/' },
+  { date: '08·29', tag: 'Internacional', title: 'Corea del Nord llança 10 míssils balístics; Seül en alerta màxima', desc: 'El major llançament des de 2023 eleva la tensió a la península coreana. Corea del Sud activa els protocols de defensa.', url: 'https://es.euronews.com/video/2026/08/26/ultimas-noticias-26-agosto-2026-manana' },
+  // --- Normativa ---
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -132,6 +139,11 @@ export default function ScreenOperativaHome() {
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <div onClick={() => window.open(n.url, '_blank')} style={{ marginTop: 6, fontSize: 11, color: T.cat.operativa.solid, fontWeight: 700, cursor: 'pointer' }}>
+                  Llegir complet →
+                </div>
+              )}
             </div>
           ))}
         </div>
