@@ -43,6 +43,16 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  // 30 agost 2026
+  { date: '08·30', tag: 'Política · CAT', title: 'Finançament singular: la tornada de Puigdemont encén la tardor política', desc: 'El debat sobre el nou model de finançament per a Catalunya torna a primera línia. Junts haurà d\'explicar per què rebutja 4.700 M€ addicionals per a la Generalitat.', url: 'https://www.moncloa.com/2026/08/24/financiacion-singular-cataluna-otono-politico-3420051/' },
+  { date: '08·30', tag: 'Política · CAT', title: 'Illa es prepara per a una pròrroga pressupostària amb Junts i ERC en contra', desc: 'Els comptes catalans de 2026 segueixen sense acord. El president Salvador Illa contempla la pròrroga com a opció davant la pressió dels seus socis parlamentaris.', url: 'https://www.moncloa.com/2026/08/22/presupuestos-cataluna-2026-illa-prorroga-3419232/' },
+  { date: '08·30', tag: 'Política · ESP', title: 'Crisi de Ceuta: les ministres compareixen al Congrés per l\'entrada massiva de migrants', desc: 'Les titulars d\'Igualtat i Joventut expliquen la gestió de la crisi. Més de 70.000 persones van entrar per la frontera amb el Marroc el passat mes de juliol.', url: 'https://es.wikipedia.org/wiki/Incidentes_fronterizos_entre_Espa%C3%B1a_y_Marruecos_de_2026' },
+  { date: '08·30', tag: 'Economia · ESP', title: 'El gasoil s\'encareix un 1,8% setmanal i arriba als 1,861 €/l, màxims des d\'abril', desc: 'Els carburants repunten amb força a Espanya. La gasolina toca els 1,723 €/l. La rendibilitat del lloguer puja fins al 8%, impulsada per l\'escassetat d\'oferta.', url: 'https://www.eleconomista.es/' },
+  { date: '08·30', tag: 'Esports', title: 'LaLiga 2026/27 arrenca amb el Barça com a campió defensor i tres ascendits nous', desc: 'El FC Barcelona defensa el títol. Deportivo, Racing de Santander i Málaga CF debuten a la màxima categoria. La temporada ja és activa amb tecnologia Connected Ball en tots els estadis.', url: 'https://www.laliga.com/es-ES/laliga-easports/calendario' },
+  { date: '08·30', tag: 'Internacional', title: 'Islàndia: el vot afirmatiu avança al referèndum per negociar l\'adhesió a la UE', desc: 'El país nòrdic debat el seu futur europeu. Els sondejos apunten a una majoria ajustada favorable a iniciar les negociacions d\'adhesió a la Unió Europea.', url: 'https://es.euronews.com/video/2026/08/30/ultimas-noticias-30-agosto-2026-tarde' },
+  { date: '08·30', tag: 'Internacional', title: 'Almenys 7 morts en naufragi de vaixell amb centenars de persones davant Xipre', desc: 'El sinistre, amb desapareguts, es produeix en ruta migratòria. Les autoritats cipriotes coordinen els equips de rescat en les aigues del Mediterrani oriental.', url: 'https://es.euronews.com/video/2026/08/30/ultimas-noticias-30-agosto-2026-mediodia' },
+  { date: '08·30', tag: 'Ciència', title: 'La NASA llança una "màquina de descobriments" per explorar l\'univers invisible', desc: 'El nou observatori espacial té com a objectiu detectar fenòmens còsmics fins ara inaccessibles per a la ciència. S\'esperen resultats pionersals primers mesos de missió.', url: 'https://es.euronews.com/video/2026/08/30/ultimas-noticias-30-agosto-2026-manana' },
+  // Normatiu
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -125,13 +135,20 @@ export default function ScreenOperativaHome() {
         <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
-            <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
+            <div
+              key={i}
+              onClick={n.url ? () => window.open(n.url, '_blank') : undefined}
+              style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card, cursor: n.url ? 'pointer' : 'default' }}
+            >
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                 <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
                 <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <div style={{ marginTop: 6, fontSize: 11, color: T.cat.operativa.solid, fontWeight: 700 }}>Llegeix la notícia →</div>
+              )}
             </div>
           ))}
         </div>
