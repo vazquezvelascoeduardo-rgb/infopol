@@ -96,6 +96,23 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* notícies */}
+      <div style={{ padding: '16px 18px 0' }}>
+        <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 10 }}>Actualitat · Avui</div>
+        <div onClick={() => navigate('/noticies')} style={{ background: T.ink, borderRadius: T.r.lg, padding: 16, color: '#fff', display: 'flex', alignItems: 'center', gap: 14, cursor: 'pointer', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', right: -20, top: -20, width: 100, height: 100, borderRadius: 200, background: 'rgba(255,255,255,0.06)' }} />
+          <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(255,255,255,0.12)', display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+            <Icon name="book" size={22} color="#fff" />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', opacity: 0.6, marginBottom: 3 }}>Diari InfoPol · 01·09·2026</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 17, letterSpacing: -0.3, lineHeight: 1.2 }}>Notícies del dia</div>
+            <div style={{ fontSize: 12, opacity: 0.75, marginTop: 3 }}>Política · Economia · Esports · Judicial · Ciència</div>
+          </div>
+          <Icon name="arrow-right" size={18} color="rgba(255,255,255,0.5)" />
+        </div>
+      </div>
+
       {/* testimonial */}
       <div style={{ padding: '16px 18px 0' }}>
         <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.academia.solid}` }}>
