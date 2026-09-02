@@ -43,6 +43,15 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '09·02', tag: 'CENIF · Ceuta', title: 'Agents marroquins van guiar l\'entrada massiva de migrants a Ceuta', desc: 'Un informe de 55 pàgines del CENIF conclou que les forces de seguretat del Marroc van planificar i guiar activament més de 70.000 migrants per les costes ceutíes el 30 i 31 de juliol.', url: 'https://www.infobae.com/espana/2026/09/02/el-informe-policial-sostiene-que-la-entrada-de-migrantes-en-ceuta-se-produjo-con-agente-marroquies-guiando-el-cruce-a-traves-del-agua/' },
+  { date: '09·02', tag: 'SEPE · Agost 2026', title: 'L\'atur puja 44.419 persones a l\'agost però marca el mínim des del 2007', desc: 'Espanya registra 2,35 milions d\'aturats, la xifra més baixa per a un mes d\'agost en 19 anys. La Seguretat Social assoleix el rècord de 22,34 milions d\'afiliats.', url: 'https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/trabajo14/Paginas/2026/020926-datos-paro-agosto.aspx' },
+  { date: '09·02', tag: 'Atur · Catalunya', title: 'Catalunya lidera la pujada de l\'atur a l\'agost amb 14.592 nous desocupats', desc: 'La pujada catalana del 4,63% supera la mitjana estatal. Les dades interanuals marquen mínims des del 2008 amb 116.437 nous cotitzants respecte l\'any anterior.', url: 'https://www.moncloa.com/2026/09/02/paro-cataluna-agosto-2026-minimos-3425033' },
+  { date: '09·02', tag: 'Govern · Ceuta', title: 'El govern aprova un pla de xoc de 309 M€ per a Ceuta', desc: 'El Consell de Ministres mobilitza 309 milions d\'euros en mesures de suport econòmic, reforç de serveis públics, seguretat i acollida de migrants a la ciutat autònoma.', url: 'https://www.infobae.com/espana/agencias/2026/09/01/temas-del-dia-de-efe-espana-del-miercoles-2-de-septiembre-de-2026/' },
+  { date: '09·02', tag: 'CEO · Baròmetre', title: 'Aliança Catalana puja de forma meteòrica i Junts cau al primer baròmetre de 2026', desc: 'El CEO publica el primer baròmetre de l\'any: el PSC d\'Illa consolida posicions, Aliança Catalana es converteix en la tercera força i Junts perd suport al Parlament.', url: 'https://www.elnacional.cat/es' },
+  { date: '09·02', tag: 'UE · Seguretat', title: 'La UE promet una resposta ferma als atacs híbrids russos a Leipzig', desc: 'Els líders europeus es reuneixen a Leipzig per coordinar la resposta als atacs d\'interferència i sabotatge atribuïts a Rússia en territori de la Unió Europea.', url: 'https://es.euronews.com/2026/09/02/euronews-hoy-las-noticias-del-2-de-septiembre-de-2026-la-policia-senala-a-marruecos-por-la' },
+  { date: '09·02', tag: 'Suïssa · Argòvia', title: 'Detenen un sospitós pel tirotejo en una festa rave al cantó suís d\'Argòvia', desc: 'La policia d\'Argòvia informa de la investigació i la captura d\'un home com a presumpte autor del tiroteig ocorregut durant el cap de setmana en una rave multitudinària.', url: 'https://es.euronews.com/2026/09/02/euronews-hoy-las-noticias-del-2-de-septiembre-de-2026-la-policia-senala-a-marruecos-por-la' },
+  { date: '09·02', tag: 'Srebrenica · Mladic', title: 'Srebrenica es manifesta contra la glorificació de Mladic, mort la setmana passada', desc: 'La ciutat bosniana convoca concentracions per rebutjar els homenatges al criminal de guerra serbobosnià Ratko Mladic, condemnat pel genocidi de Srebrenica el 1995.', url: 'https://es.euronews.com/2026/09/02/euronews-hoy-las-noticias-del-2-de-septiembre-de-2026-la-policia-senala-a-marruecos-por-la' },
+  { date: '09·02', tag: 'Breakthrough 2026', title: 'Els Premis Breakthrough 2026, els "Oscars de la ciència", reconeixen la innovació mundial', desc: 'Hollywood reuneix estrelles i científics en la gala dels Premis Breakthrough amb reconeixements milionaris als avenços en biomedicina, física fonamental i matemàtiques.', url: 'https://www.porlalinea.com.do/premios-breakthrough-2026-hollywood-ciencia/' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -132,6 +141,11 @@ export default function ScreenOperativaHome() {
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 6, fontSize: 11, fontWeight: 700, color: T.cat.operativa.solid, textDecoration: 'none' }}>
+                  Llegir notícia →
+                </a>
+              )}
             </div>
           ))}
         </div>
