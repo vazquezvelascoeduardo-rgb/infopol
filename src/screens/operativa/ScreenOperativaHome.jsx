@@ -43,9 +43,12 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
-  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
-  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
-  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
+  { date: '09·04', tag: 'Successos · Catalunya', title: 'Mossos i PN detenen tres fugitius internacionals a Barcelona i Salou', desc: 'Un turc per dos homicidis a Istanbul, un francès condemnat a cadena perpètua i el cap del càrtel "El Mesa" capturats en operació conjunta.', url: 'https://www.catalunyapress.es/articulo/sucesos/2026-09-03/6002184-detenidos-catalunya-tres-fugitivos-internacionales-acusados-homicidio-crimen-organizado' },
+  { date: '09·04', tag: 'Política · Catalunya', title: 'Finançament autonòmic: la Generalitat veu una "finestra d\'oportunitat" i demana a Junts no bloquejar-la', desc: 'La consellera Romero celebra la proposta d\'Hisenda; PP i Madrid la rebutgen per "trencament de la igualtat".', url: 'https://www.moncloa.com/2026/09/04/financiacion-autonomica-cataluna-ventana-junts-3426221/' },
+  { date: '09·04', tag: 'Internacional', title: 'Iran ataca bases americanes a Kuwait i els Emirats Àrabs amb míssils i drons', desc: 'Kuwait intercepta part de l\'atac i el qualifica de "violació greu del dret internacional". Escalada de tensió al Pròxim Orient.', url: 'https://es.euronews.com/2026/09/04/euronews-hoy-las-noticias-del-4-de-septiembre-de-2026-milei-reivindica-la-soberania-sobre-' },
+  { date: '09·04', tag: 'Economia · Espanya', title: 'El preu de la llum supera els 200 €/MWh enmig de la calor anòmala de setembre', desc: 'La AEMET activa avisos grocs i taronges a 15 comunitats. Un estiu de calor extrema i pluges escasses posa a prova la resiliència hídrica.', url: 'https://www.periodistadigital.com/periodismo/20260904/10-asuntos-marcan-politica-periodismo-espana-viernes-4-septiembre-2026-calor-ceuta-noticia-689405243759/' },
+  { date: '09·04', tag: 'Esports · Bàsquet', title: 'La selecció femenina debuta al Mundial de Berlín contra Alemanya', desc: 'Espanya obre el Mundial (17.45 h) amb entrades exhaurides. FCB i Reial Madrid coneixeran avui els seus rivals a la Champions Femenina.', url: null },
+  { date: '09·04', tag: 'Ciència', title: 'Premis Ig Nobel 2026: l\'anàlisi dels mocs i l\'urinari antisalpicades, entre els guardonats', desc: 'La 36a edició dels Ig Nobel premia investigacions que "fan riure i després pensar". Ciència curiosa amb mètode.', url: 'https://www.periodismo.com/2026/09/04/ganadores-de-los-premios-ig-nobel-2026-a-lo-mas-insolito-de-la-ciencia/' },
 ];
 
 export default function ScreenOperativaHome() {
@@ -132,6 +135,11 @@ export default function ScreenOperativaHome() {
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 8, fontSize: 11, fontWeight: 700, color: T.cat.operativa.solid, textDecoration: 'none' }}>
+                  Llegir notícia →
+                </a>
+              )}
             </div>
           ))}
         </div>
