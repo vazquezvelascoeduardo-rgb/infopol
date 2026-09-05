@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
+import { NOTICIAS } from '../../data/news';
 
 function BigCatCard({ cat, icon, kicker, title, desc, cta, onClick }) {
   const k = T.cat[cat];
@@ -56,7 +57,7 @@ export default function ScreenOperativaHome() {
       <div style={{ padding: '10px 16px 6px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <InfoPolWordmark height={18} />
         <div style={{ display: 'flex', gap: 8 }}>
-          <RoundIconBtn icon="bell" />
+          <RoundIconBtn icon="bell" onClick={() => navigate('/noticias')} />
           <RoundIconBtn icon="user" onClick={() => navigate('/perfil')} />
         </div>
       </div>
@@ -117,6 +118,52 @@ export default function ScreenOperativaHome() {
             <Chip icon="car" label="Control trànsit" />
             <Chip icon="siren" label="Detenció" />
           </div>
+        </div>
+      </div>
+
+      {/* Noticias del dia — preview */}
+      <div style={{ padding: '14px 0 0' }}>
+        <SectionHead
+          kicker="Noticias"
+          kickerColor={T.cat.atajos.solid}
+          title="Noticias del dia"
+          action="Tot →"
+          onAction={() => navigate('/noticias')}
+        />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {NOTICIAS.slice(0, 3).map((n) => {
+            const k = T.cat[n.cat] || T.cat.operativa;
+            return (
+              <div
+                key={n.id}
+                onClick={() => navigate('/noticias')}
+                style={{
+                  background: '#fff', borderRadius: T.r.md, padding: 14,
+                  borderLeft: `2px solid ${k.solid}`, boxShadow: T.shadow.card, cursor: 'pointer',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                  <span style={{
+                    fontSize: 9.5, fontWeight: 800, letterSpacing: 0.8, textTransform: 'uppercase',
+                    color: k.ink, background: k.soft, padding: '2px 7px', borderRadius: T.r.pill,
+                  }}>{n.catLabel}</span>
+                  <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 13, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ padding: '8px 16px 0', textAlign: 'right' }}>
+          <button
+            onClick={() => navigate('/noticias')}
+            style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              color: T.cat.atajos.solid, fontWeight: 700, fontSize: 13, fontFamily: T.font,
+            }}
+          >
+            Veure totes les noticias →
+          </button>
         </div>
       </div>
 

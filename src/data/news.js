@@ -1,0 +1,170 @@
+// Noticias diàries — actualitzades automàticament cada dia a les 22:00
+// cat → clau de T.cat per als colors (operativa=Política, leyes=Economia,
+//        alcohol=Judicial, physical=Esports, psico=Cultura,
+//        atajos=Internacional, academia=Ciència)
+
+export const NOTICIAS = [
+  // ── POLÍTICA ──────────────────────────────────────────────
+  {
+    id: 'N-001',
+    date: '05·09·26',
+    cat: 'operativa',
+    catLabel: 'Política',
+    zona: 'Catalunya',
+    title: 'El pacte de finançament amb ERC ja és al Congrés i afectarà sanitat i educació',
+    desc: 'El Consell de Política Fiscal i Financera va aprovar el 4 de setembre la reforma del sistema de finançament autonòmic pactada amb ERC com a condició de la investidura de Salvador Illa. El PP hi va votar en contra. El nou model determinarà com es repartirà el finançament de la sanitat, l\'educació i la dependència entre les comunitats.',
+    url: 'https://www.que.es/2026/09/05/reforma-financiacion-autonomica-cataluna/',
+  },
+  {
+    id: 'N-002',
+    date: '05·09·26',
+    cat: 'operativa',
+    catLabel: 'Política',
+    zona: 'Espanya',
+    title: 'Hisenda ofereix 21.000 milions addicionals a les comunitats i negocia amb Junts',
+    desc: 'El Ministeri d\'Hisenda ha ofert a les comunitats autònomes 21.000 milions d\'euros addicionals per als pròxims anys i ha anunciat que negociarà el nou model de finançament amb Junts per Cataluny en paral·lel als treballs del CPFF.',
+    url: 'https://vive.click/hacienda-ofrece-21-000-millones-mas-a-las-comunidades-y-negociara-la-financiacion-con-junts/',
+  },
+
+  // ── ECONOMIA ──────────────────────────────────────────────
+  {
+    id: 'N-003',
+    date: '05·09·26',
+    cat: 'leyes',
+    catLabel: 'Economia',
+    zona: 'Catalunya',
+    title: 'El Govern es compromet a lluitar "incansablement" per mantenir la marca SEAT a Martorell',
+    desc: 'La consellera d\'Economia i Finances, Alícia Romero, ha assegurat que el Govern de la Generalitat treballarà sense descans per garantir que Volkswagen mantingui la marca SEAT i que no es produeixin reduccions de plantilla a la planta de Martorell, davant les incerteses sobre el futur del grup alemany.',
+    url: 'https://vive.click/el-govern-trabajara-incansablemente-para-mantener-la-marca-seat/',
+  },
+
+  // ── JUDICIAL / POLICIAL ────────────────────────────────────
+  {
+    id: 'N-004',
+    date: '05·09·26',
+    cat: 'alcohol',
+    catLabel: 'Judicial',
+    zona: 'Catalunya',
+    title: 'Judici per la lesió ocular a Roger Español durant l\'1-O a l\'Audiència de Barcelona',
+    desc: 'Arrenca a l\'Audiència Provincial de Barcelona el judici contra un escopeter, un inspector i dos subinspectors de la Policia Nacional acusats de causar una lesió ocular greu a Roger Español amb una pilota de goma el dia del referèndum de l\'1 d\'octubre de 2017. Els fets es remunten a l\'operatiu policial al col·legi electoral del Palau de Sant Jordi.',
+    url: 'https://diariosocialista.net/2025/10/31/juicio-en-2026-contra-policias-que-causaron-lesion-ocular-grave-a-roger-espanol/',
+  },
+  {
+    id: 'N-005',
+    date: '05·09·26',
+    cat: 'alcohol',
+    catLabel: 'Judicial',
+    zona: 'Espanya',
+    title: 'Setembre judicial: Plus Ultra, Begoña Gómez, Cerdán i Leire Díez tornen al focus',
+    desc: 'El mes de setembre s\'obre amb una agenda judicial intensa a Espanya. El president i el conseller delegat de Plus Ultra han estat citats a declarar. Simultàniament, els casos Begoña Gómez, Cerdán i Leire Díez reprenen activitat als tribunals després de l\'aturada estiuenca.',
+    url: 'https://www.democrata.es/politica/calendario-judicial-septiembre-2026/',
+  },
+
+  // ── ESPORTS ───────────────────────────────────────────────
+  {
+    id: 'N-006',
+    date: '05·09·26',
+    cat: 'physical',
+    catLabel: 'Esports',
+    zona: 'Espanya',
+    title: 'Vuelta a Espanya — Etapa 11: Matthew Brennan guanya a Lorca; Enric Mas líder',
+    desc: 'Matthew Brennan s\'imposa a l\'etapa 11 de la Vuelta a España (Cartagena–Lorca, 153,8 km) per davant de Bryan Coquard i Jordi Meeus. Enric Mas continua defensant el mallot vermell de líder de la classificació general amb avantatge sobre els seus immediats perseguidors.',
+    url: 'https://www.lavuelta.es/en/stage-11',
+  },
+  {
+    id: 'N-007',
+    date: '05·09·26',
+    cat: 'physical',
+    catLabel: 'Esports',
+    zona: 'Internacional',
+    title: 'F1 GP Itàlia — Gasly aconsegueix la pole a Monza; Antonelli sortirà des del fons',
+    desc: 'Pierre Gasly signa la seva primera pole position de la temporada al circuit de Monza en la classificació del Gran Premi d\'Itàlia 2026. El jove Kimi Antonelli (Mercedes), líder del campionat, sortirà des del fons de la graella per penalitzacions tècniques i una actuació decebedora al seu Gran Premi natal.',
+    url: 'https://blog.f1livepulse.com/2026-italian-grand-prix-saturday-recap-gasly-pole-monza',
+  },
+  {
+    id: 'N-008',
+    date: '05·09·26',
+    cat: 'physical',
+    catLabel: 'Esports',
+    zona: 'Espanya',
+    title: 'Supercopa de Futbol Sala: FC Barcelona i ElPozo Murcia disputen la final a Barcelona',
+    desc: 'El FC Barcelona i ElPozo Murcia se citen a Barcelona per disputar la final de la Supercopa d\'Espanya de futbol sala. El Barça, campió de lliga, i ElPozo, guanyador de la Copa del Rei, protagonitzaran un dels enfrontaments més esperats de la temporada en el pavelló barceloní.',
+    url: 'https://www.infobae.com/espana/agencias/2026/09/05/domingo-6-de-septiembre-de-2026/',
+  },
+  {
+    id: 'N-009',
+    date: '05·09·26',
+    cat: 'physical',
+    catLabel: 'Esports',
+    zona: 'Espanya',
+    title: 'SailGP València: jornada de final a les aigues de la ciutat del Turia',
+    desc: 'La prova espanyola del SailGP celebra la jornada decisiva de final a les aigues de València. Les millors embarcacions de vela de foil del món es mesuraran en una jornada que pot definir posicions en el rànquing global de la lliga.',
+    url: 'https://www.infobae.com/espana/agencias/2026/09/05/domingo-6-de-septiembre-de-2026/',
+  },
+
+  // ── CULTURA ───────────────────────────────────────────────
+  {
+    id: 'N-010',
+    date: '05·09·26',
+    cat: 'psico',
+    catLabel: 'Cultura',
+    zona: 'Espanya',
+    title: 'Faro Santander obre portes: art mexicà, fons bancari i exposicions internacionals',
+    desc: 'El nou centre cultural Faro Santander inaugura les seves instal·lacions. L\'equipament acollirà la col·lecció d\'art del Banco Santander, la prestigiosa col·lecció Gelman amb obres del modernisme mexicà, i un programa d\'exposicions temporals amb noms internacionals de primer nivell.',
+    url: 'https://www.infobae.com/espana/agencias/2026/09/05/domingo-6-de-septiembre-de-2026/',
+  },
+  {
+    id: 'N-011',
+    date: '05·09·26',
+    cat: 'psico',
+    catLabel: 'Cultura',
+    zona: 'Espanya',
+    title: 'CometCon Gijón: 14a edició de la gran cita de la cultura jove del nord d\'Espanya',
+    desc: 'El Recinte Firal Luis Adaro de Gijón acull la 14a edició de CometCon, l\'event de cultura jove i oci alternatiu de referència al nord d\'Espanya, amb més de 200 activitats programades entre concerts, exposicions de còmic i il·lustració, tallers de videojocs i espectacles d\'animació.',
+    url: 'https://www.infobae.com/espana/agencias/2026/09/05/domingo-6-de-septiembre-de-2026/',
+  },
+
+  // ── CIÈNCIA / DESCOBRIMENTS ───────────────────────────────
+  {
+    id: 'N-012',
+    date: '05·09·26',
+    cat: 'academia',
+    catLabel: 'Ciència',
+    zona: 'Espanya',
+    title: '17 paleontòlegs investiguen a Conca una transició climàtica de fa 30 milions d\'anys',
+    desc: 'Un equip de 17 paleontòlegs de diverses universitats internacionals treballa des de fa quatre anys a la conca del Loranca (Conca) per reconstruir, a partir de fòssils de fauna, els canvis ambientals d\'una transició climàtica ocorreguda fa 30 milions d\'anys. El projecte pot aportar claus sobre les extincions massives del passat.',
+    url: 'https://www.infobae.com/espana/agencias/2026/09/05/domingo-6-de-septiembre-de-2026/',
+  },
+  {
+    id: 'N-013',
+    date: '05·09·26',
+    cat: 'academia',
+    catLabel: 'Ciència',
+    zona: 'Espanya',
+    title: 'Premis Nacionals d\'Investigació 2026: 20 distincions de 30.000 € per a científics espanyols',
+    desc: 'El Ministeri de Ciència, Innovació i Universitats ha concedit els Premis Nacionals d\'Investigació 2026. S\'atorguen deu premis sèniors i deu per a joves investigadors —cadascun dotat amb 30.000 euros— reconeixent trajectòries científiques i contribucions sobresortints en ciències, humanitats i biociències.',
+    url: 'https://www.agenciasinc.es/Noticias/El-ministerio-de-Ciencia-concede-los-Premios-Nacionales-de-Investigacion-2026',
+  },
+
+  // ── INTERNACIONAL ─────────────────────────────────────────
+  {
+    id: 'N-014',
+    date: '05·09·26',
+    cat: 'atajos',
+    catLabel: 'Internacional',
+    zona: 'Internacional',
+    title: 'ELN ataca amb 20 drons el quarter militar El Trapiche a Colòmbia: 2 morts i 5 ferits',
+    desc: 'El Frente Camilo Torres Restrepo de l\'Exèrcit d\'Alliberament Nacional (ELN) ha atacat amb una vintena de drons carregats d\'explosius el cantó militar El Trapiche, a Ocaña (Norte de Santander, Colòmbia, frontera amb Veneçuela). El balanç és d\'un oficial i un soldat professional morts, i cinc soldats ferits. Colòmbia intensifica operacions contra el grup armat.',
+    url: 'https://www.latercera.com/mundo/noticia/ataque-con-al-menos-20-drones-contra-guarnicion-militar-en-colombia-deja-dos-soldados-muertos-y-cinco-heridos/',
+  },
+  {
+    id: 'N-015',
+    date: '05·09·26',
+    cat: 'atajos',
+    catLabel: 'Internacional',
+    zona: 'Internacional',
+    title: 'Israel ataca amb drons el sud del Líban: dos civils morts a Kfar Rumman',
+    desc: 'Un dron de combat israelià ha impactat sobre dos joves que viatjaven en motocicleta a la localitat de Kfar Rumman, al districte de Nabatieh (sud del Líban), causant la mort dels dos civils. L\'incident agrava la tensió a la zona i s\'afegeix a una espiral d\'atacs creuats a la frontera libaneso-israeliana.',
+    url: 'https://www.teleprensa.com/articulo/internacional/menos-dos-muertos-ataque-drones-israelies-sur-libano/202609050807202500464.html',
+  },
+];
