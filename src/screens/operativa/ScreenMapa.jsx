@@ -2,6 +2,12 @@ import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { StatusBar, NavHeader, CatIcon, SectionTitle } from '../../components/Shared';
 
+// DADES DE DEMOSTRACIÓ. No són incidències reals i no provenen de cap sala.
+// La pantalla ho ha d'advertir de manera visible: un control preventiu o un
+// avís presentats com a reals indueixen l'usuari a error, i publicar la
+// ubicació d'un control que sí que ho fos seria un problema molt més gran.
+const ES_DEMO = true;
+
 const INCIDENTS = [
   { cat: 'operativa', icon: 'siren', d: '0,3 km', t: '14:02', title: 'Aldarull · C/ Indústria 88', tag: 'En curs', x: 150, y: 240 },
   { cat: 'alcohol', icon: 'beaker', d: '0,8 km', t: '13:48', title: 'Control alcohol · Av. Diagonal', tag: 'Programat', x: 70, y: 110 },
@@ -86,6 +92,17 @@ export default function ScreenMapa() {
             );
           })}
         </div>
+
+        {ES_DEMO && (
+          <div style={{
+            background: T.cat.leyes.soft, color: T.cat.leyes.ink, borderRadius: T.r.md,
+            padding: 12, marginBottom: 14, fontSize: 12, lineHeight: 1.5,
+          }}>
+            <b>Dades de demostració.</b> Aquestes incidències són fictícies i no
+            provenen de cap sala ni de cap font operativa. La pantalla no està
+            connectada a cap sistema real.
+          </div>
+        )}
 
         <SectionTitle>Properes a tu</SectionTitle>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>

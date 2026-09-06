@@ -96,20 +96,9 @@ export default function ScreenLanding() {
         </div>
       </div>
 
-      {/* testimonial */}
-      <div style={{ padding: '16px 18px 0' }}>
-        <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.academia.solid}` }}>
-          <div style={{ display: 'flex', gap: 2, marginBottom: 8 }}>
-            {[0,1,2,3,4].map(i => <Icon key={i} name="star" size={14} color={T.cat.psico.solid} />)}
-          </div>
-          <div style={{ fontSize: 14, color: T.ink, lineHeight: 1.5, fontWeight: 500, fontStyle: 'italic' }}>
-            "Vaig aprovar a la primera. Els tests són idèntics als reals i el pla diari et manté constant."
-          </div>
-          <div style={{ marginTop: 10, fontSize: 12, color: T.inkMuted }}>
-            <b style={{ color: T.ink }}>Marta C.</b> · Mossos d'Esquadra promo 2025
-          </div>
-        </div>
-      </div>
+      {/* Sense testimonis fins que n'hi hagi de reals i verificables.
+          Una ressenya inventada en una pàgina amb preu és publicitat enganyosa
+          (art. 5 Llei 3/1991 i art. 20 i 21 TRLGDCU). */}
 
       {/* pricing */}
       <div style={{ padding: '20px 18px 0' }}>
