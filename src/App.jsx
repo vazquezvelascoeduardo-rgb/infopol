@@ -9,6 +9,7 @@ import ScreenPerfil from './screens/ScreenPerfil';
 import ScreenOperativaHome from './screens/operativa/ScreenOperativaHome';
 import ScreenInfraccions from './screens/operativa/ScreenInfraccions';
 import ScreenFitxa from './screens/operativa/ScreenFitxa';
+import ScreenBarems from './screens/operativa/ScreenBarems';
 import ScreenProtocol from './screens/operativa/ScreenProtocol';
 import ScreenMapa from './screens/operativa/ScreenMapa';
 
@@ -39,7 +40,7 @@ function OperativaShell() {
   const loc = useLocation();
   const p = loc.pathname;
   let active = 'home';
-  if (p.includes('/infraccions')) active = 'leyes';
+  if (p.includes('/infraccions') || p.includes('/barems')) active = 'leyes';
   else if (p.includes('/protocol')) active = 'protocol';
   else if (p.includes('/mapa')) active = 'mapa';
   return (
@@ -74,6 +75,7 @@ export default function App() {
         <Route index element={<ScreenOperativaHome />} />
         <Route path="infraccions" element={<ScreenInfraccions />} />
         <Route path="infraccions/:id" element={<ScreenFitxa />} />
+        <Route path="barems" element={<ScreenBarems />} />
         <Route path="protocol" element={<ScreenProtocol />} />
         <Route path="protocol/:id" element={<ScreenProtocol />} />
         <Route path="mapa" element={<ScreenMapa />} />

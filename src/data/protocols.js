@@ -1,3 +1,22 @@
+// ─────────────────────────────────────────────────────────────────────────────
+//  PROTOCOLS D'ACTUACIÓ
+//
+//  ATENCIÓ — abast d'aquest fitxer:
+//  Aquests passos són una guia de consulta redactada a partir de normativa
+//  pública (TRLSV, RGC, LECrim, LO 4/2015, CP i CE). NO reprodueixen cap
+//  procediment normalitzat de treball, instrucció interna ni doctrina de cap
+//  cos policial, i no els substitueixen. Davant de qualsevol discrepància
+//  preval la instrucció del cos.
+//
+//  Cada pas ha de citar la norma pública que l'empara. Si un pas no es pot
+//  fonamentar en una norma publicada, no ha de constar aquí.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const PROTOCOLS_AVIS =
+  "Guia de consulta elaborada a partir de normativa pública. No reprodueix ni " +
+  "substitueix cap procediment normalitzat de treball ni cap instrucció interna " +
+  "del cos; davant de discrepància, preval la instrucció del cos.";
+
 // Operational protocols for police agents — based on Spanish/Catalan police procedures
 
 export const PROTOCOLS = [
@@ -25,13 +44,13 @@ export const PROTOCOLS = [
       {
         n: 3,
         title: 'Prova de detecció d\'alcohol',
-        desc: 'Informar el conductor de l\'obligatorietat de la prova (art. 14 LSV). Realitzar la prova amb etilòmetre homologat.',
-        warning: 'Si es nega: delicte art. 383 CP — desobediència greu. Procedir a detenció.',
+        desc: 'Informar el conductor de l\'obligatorietat de sotmetre\'s a la prova (art. 14.2 TRLSV). Realitzar-la amb etilòmetre homologat.',
+        warning: 'Si es nega: delicte de l\'art. 383 CP (negativa a les proves), amb pena de presó de 6 mesos a 1 any i privació del permís de més d\'1 i fins a 4 anys. Procedir a detenció.',
       },
       {
         n: 4,
         title: 'Lectura del resultat i decisió',
-        desc: 'Inferior a 0,25: sense infracció. Entre 0,25 i 0,50: infracció art. 76.l LSV (500€ + 4 pts). Superior a 0,50: infracció molt greu. Superior a 0,60: possible delicte.',
+        desc: 'Precepte infringit: art. 14.1 TRLSV. Conductor general: fins a 0,25 sense infracció; de 0,26 a 0,50 → 500 € i 4 punts; superior a 0,50 → 1.000 € i 6 punts. Professionals i novells: el tram sancionable comença a 0,16. Menors: qualsevol taxa superior a 0. Consulta el barem complet a Barems · Alcoholèmia.',
         warning: null,
       },
       {
@@ -43,7 +62,7 @@ export const PROTOCOLS = [
       {
         n: 6,
         title: 'Si el resultat és > 0,60 mg/l (DELICTE)',
-        desc: 'Procedir a la detenció per indicis d\'infracció penal (art. 379.2 CP). Lectura de drets (art. 520 LECrim). Retirar el permís de conduir en l\'acte.',
+        desc: 'A partir de 0,60 mg/l en aire espirat (o 1,2 g/l en sang) el fet és delicte de l\'art. 379.2 CP en tot cas. Decau la via administrativa: no es formula denúncia, s\'instrueix atestat. Lectura de drets (art. 520 LECrim).',
         warning: 'Atenció: Comunicar al metge forense si hi ha signes d\'intoxicació greu. No deixar el conductor sol.',
       },
     ],
@@ -54,13 +73,13 @@ export const PROTOCOLS = [
     icon: 'user',
     category: 'Seguretat Ciutadana',
     title: 'Identificació de persones',
-    desc: 'Procediment d\'identificació en via pública. Art. 20 LO 4/2015 i art. 492 LECrim.',
+    desc: 'Procediment d\'identificació en via pública. Art. 16 LO 4/2015 (l\'art. 20 regula els registres corporals externs, no la identificació).',
     tags: ['Identificació', 'LO 4/2015', 'Seguretat'],
     steps: [
       {
         n: 1,
         title: 'Fonament i motivació',
-        desc: 'L\'agent ha de disposar de motius fundats (no conjectures) per requerir la identificació. Documentar la raó concreta (actitud sospitosa, zona de vigilància, concordança amb descripció).',
+        desc: 'L\'art. 16.1 LO 4/2015 només empara el requeriment quan hi ha indicis que la persona ha participat en la comissió d\'una infracció, o quan és raonablement necessari per prevenir un delicte. Documentar quin dels dos supòsits concorre.',
         warning: null,
       },
       {
@@ -72,7 +91,7 @@ export const PROTOCOLS = [
       {
         n: 3,
         title: 'Si no porta documentació',
-        desc: 'Pot identificar-se per altres mitjans (testimony de dues persones que el coneguin). Si no és possible: trasllat a dependències policials per identificació (màxim 6 hores).',
+        desc: 'Pot identificar-se per qualsevol altre mitjà. Si no és possible o s\'hi nega: trasllat a dependències per identificar-la, pel temps estrictament necessari i mai per damunt de 6 hores (art. 16.2 LO 4/2015).',
         warning: 'El trasllat per identificació NO és detenció. La persona no ha de ser posada en cel·la.',
       },
       {
@@ -167,7 +186,7 @@ export const PROTOCOLS = [
         n: 5,
         title: 'Prova d\'alcohol i drogues',
         desc: 'Practicar prova d\'alcoholèmia a tots els conductors (obligatori si hi ha víctimes). Documentar el resultat.',
-        warning: 'Si el conductor té alcohol > 0,60 mg/l: procedir a detenció (art. 379.2 CP).',
+        warning: 'Si el conductor dona una taxa superior a 0,60 mg/l en aire espirat: delicte de l\'art. 379.2 CP. No s\'acumula sanció administrativa.',
       },
       {
         n: 6,
@@ -189,7 +208,7 @@ export const PROTOCOLS = [
       {
         n: 1,
         title: 'Accés al domicili i primera valoració',
-        desc: 'Si hi ha risc imminent: entrada forçada és possible sense ordre judicial (art. 18.2 CE, causa de justificació). Valorar el risc per a la víctima.',
+        desc: 'L\'entrada sense consentiment ni resolució judicial només és possible en cas de flagrant delicte (art. 18.2 CE i art. 553 LECrim) o estat de necessitat acreditat. Documentar què s\'ha percebut que ho justifica.',
         warning: 'La seguretat de la víctima és prioritària. No deixar mai la víctima sola amb l\'agressor.',
       },
       {

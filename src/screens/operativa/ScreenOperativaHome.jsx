@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
+import { INFRACTIONS, FONT } from '../../data/infractions';
+import { PROTOCOLS } from '../../data/protocols';
 
 function BigCatCard({ cat, icon, kicker, title, desc, cta, onClick }) {
   const k = T.cat[cat];
@@ -42,11 +44,6 @@ function Chip({ icon, label }) {
   );
 }
 
-const NEWS = [
-  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
-  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
-  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
-];
 
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
@@ -75,7 +72,7 @@ export default function ScreenOperativaHome() {
       </div>
 
       <div style={{ padding: '16px 16px 8px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-        <BigCatCard cat="leyes" icon="scale" kicker="Consulta jurídica" title="Lleis" desc="CP, LECrim, FCS, LSV, Seg. Ciutadana, Estrangeria." cta="Obrir" onClick={() => navigate('/operativa/infraccions')} />
+        <BigCatCard cat="leyes" icon="scale" kicker="Consulta jurídica" title="Lleis" desc="Catàleg de trànsit del SCT i infraccions de seguretat ciutadana." cta="Obrir" onClick={() => navigate('/operativa/infraccions')} />
         <BigCatCard cat="operativa" icon="siren" kicker="A peu de carrer" title="Operativa" desc="Procediments per situació pas a pas." cta="Entrar" onClick={() => navigate('/operativa/protocol')} />
       </div>
 
@@ -87,7 +84,7 @@ export default function ScreenOperativaHome() {
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10.5, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.transito.ink }}>Trànsit · Catàleg SCT</div>
               <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 17, letterSpacing: -0.3, marginTop: 2 }}>Superbuscador d'infraccions</div>
-              <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>LSV, RGC, RGV, Assegurança i CP. Resultats amb quantia, punts i DTE.</div>
+              <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{INFRACTIONS.length} supòsits del catàleg del SCT ({FONT.versioLabel}) amb article, quantia, DTE i punts.</div>
             </div>
           </div>
           <div style={{ display: 'flex', gap: 6, marginTop: 12, flexWrap: 'wrap' }}>
@@ -101,8 +98,8 @@ export default function ScreenOperativaHome() {
       {/* Grid 2x2 */}
       <div style={{ padding: '12px 16px 4px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
         <SmallCatCard cat="leyes" icon="book" kicker="Trànsit · SCT" title="Catàleg infraccions" onClick={() => navigate('/operativa/infraccions')} />
-        <SmallCatCard cat="alcohol" icon="beaker" kicker="Calculadora" title="Alcoholèmia" onClick={() => navigate('/operativa/infraccions?q=alcohol')} />
-        <SmallCatCard cat="atajos" icon="bolt" kicker="Dreceres" title="Recursos ràpids" />
+        <SmallCatCard cat="alcohol" icon="beaker" kicker="Barem" title="Alcoholèmia" onClick={() => navigate('/operativa/barems?b=alcohol')} />
+        <SmallCatCard cat="transito" icon="gauge" kicker="Barem" title="Velocitat" onClick={() => navigate('/operativa/barems?b=velocitat')} />
         <SmallCatCard cat="operativa" icon="map" kicker="Patrullatge" title="Mapa d'incidències" onClick={() => navigate('/operativa/mapa')} />
       </div>
 
@@ -111,7 +108,7 @@ export default function ScreenOperativaHome() {
         <div onClick={() => navigate('/operativa/protocol')} style={{ background: T.cat.operativa.solid, borderRadius: T.r.lg, padding: 16, color: '#fff', position: 'relative', overflow: 'hidden', cursor: 'pointer' }}>
           <Pill bg="rgba(255,255,255,0.18)" fg="#fff">★ Estrella d'InfoPol</Pill>
           <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 18, marginTop: 10, letterSpacing: -0.3 }}>Protocols pas a pas</div>
-          <div style={{ fontSize: 12.5, opacity: 0.9, marginTop: 4 }}>132 situacions cobertes amb article, sanció i diligència.</div>
+          <div style={{ fontSize: 12.5, opacity: 0.9, marginTop: 4 }}>{PROTOCOLS.length} situacions amb els passos, els articles aplicables i la diligència.</div>
           <div style={{ display: 'flex', gap: 8, marginTop: 12, flexWrap: 'wrap' }}>
             <Chip icon="route" label="Identificació" />
             <Chip icon="car" label="Control trànsit" />
@@ -120,20 +117,18 @@ export default function ScreenOperativaHome() {
         </div>
       </div>
 
-      {/* Actualitat normativa */}
+      {/* Actualitat normativa — pendent de connectar a una font verificable */}
       <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
-        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {NEWS.map((n, i) => (
-            <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
-                <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
-              </div>
-              <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
-              <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" />
+        <div style={{ padding: '0 16px' }}>
+          <div style={{ background: '#fff', borderRadius: T.r.md, padding: 14, boxShadow: T.shadow.card }}>
+            <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink }}>Secció pendent</div>
+            <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 4, lineHeight: 1.5 }}>
+              Aquesta secció encara no està connectada a cap font oficial (BOE, DOGC, SCT).
+              Fins que ho estigui no s'hi mostra cap contingut: una novetat normativa inventada
+              és pitjor que cap novetat.
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </div>

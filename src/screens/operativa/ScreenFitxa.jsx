@@ -3,9 +3,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { StatusBar, NavHeader, Pill, SectionTitle } from '../../components/Shared';
-import { INFRACTIONS } from '../../data/infractions';
+import FontFooter from '../../components/FontFooter';
+import {
+  NORMES, FONT, findInfraction, INFRACTIONS,
+  LLINDAR_PENAL_ALCOHOL, LLINDAR_PENAL_VELOCITAT, DELICTES_TRANSIT,
+} from '../../data/infractions';
 
-const SEV_COLOR = { mg: 'alcohol', g: 'psico', l: 'atajos' };
+const SEV_COLOR = { mg: 'alcohol', gmg: 'alcohol', g: 'psico', l: 'atajos' };
 
 function StatCard({ label, value, inverted }) {
   return (
@@ -16,38 +20,78 @@ function StatCard({ label, value, inverted }) {
   );
 }
 
-const TABS = ['Resum', 'Llei', 'Procediment', 'Diligència'];
+function Card({ children, style = {} }) {
+  return (
+    <div style={{ background: '#fff', borderRadius: T.r.md, padding: 14, boxShadow: T.shadow.card, marginBottom: 12, ...style }}>
+      {children}
+    </div>
+  );
+}
+
+const TABS = ['Resum', 'Font', 'Penal'];
 
 export default function ScreenFitxa() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [tab, setTab] = useState(0);
 
-  const inf = INFRACTIONS.find(i => i.id === id) || INFRACTIONS[0];
-  const catKey = SEV_COLOR[inf.sev] || 'atajos';
+  const inf = findInfraction(id) || INFRACTIONS[0];
+  const catKey = SEV_COLOR[inf.sev] || 'operativa';
   const cat = T.cat[catKey];
+  const norma = NORMES[inf.norm];
+  const esCataleg = !!norma; // fora del catàleg del SCT: seguretat ciutadana
+
+  // Delictes que poden desplaçar la sanció administrativa d'aquesta fitxa.
+  const penalRelacionat = DELICTES_TRANSIT.filter(d =>
+    (inf.barem === 'alcohol' && d.id === 'CP-379-2') ||
+    (inf.barem === 'velocitat' && d.id === 'CP-379-1') ||
+    (inf.crimeArticle || '').includes(d.article.replace('Art. ', '').replace(' CP', '')),
+  );
+
+  const importPrincipal = inf.fineLabel || (inf.fine > 0 ? `${inf.fine.toLocaleString('ca')} €` : '—');
 
   return (
     <div className="screen">
       <StatusBar />
-      <NavHeader cat={catKey} kicker={`${inf.article} · LSV`} title={inf.tag} back />
+      <NavHeader
+        cat={catKey}
+        kicker={inf.article}
+        title={inf.tag}
+        back
+      />
 
       {/* hero */}
       <div style={{ padding: '0 16px' }}>
-        <div style={{ background: cat.solid, color: '#fff', borderRadius: T.r.lg, padding: 16, position: 'relative', overflow: 'hidden' }}>
-          <Pill bg="rgba(255,255,255,0.2)" fg="#fff">{inf.tag}{inf.crimeArticle ? ' · Penal' : ''}</Pill>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 12 }}>
-            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 36, letterSpacing: -1.2, lineHeight: 1 }}>
-              {inf.fine > 0 ? `${inf.fine.toLocaleString('ca')} €` : 'DELICTE'}
+        <div style={{ background: cat.solid, color: '#fff', borderRadius: T.r.lg, padding: 16 }}>
+          <Pill bg="rgba(255,255,255,0.2)" fg="#fff">{inf.tag}</Pill>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 12, flexWrap: 'wrap' }}>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: inf.fineLabel ? 22 : 36, letterSpacing: -1, lineHeight: 1.05 }}>
+              {importPrincipal}
             </div>
-            {inf.points > 0 && <div style={{ fontWeight: 700, fontSize: 14, opacity: 0.85 }}>+ {inf.points} pts</div>}
+            {inf.points > 0 && <div style={{ fontWeight: 700, fontSize: 14, opacity: 0.85 }}>−{inf.points} punts</div>}
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 14 }}>
+            {inf.fine50 != null && <StatCard label="Amb DTE 50%" value={`${inf.fine50} €`} inverted />}
+            {inf.dteNo && <StatCard label="Descompte" value="No aplicable" inverted />}
+            {inf.fineMax && <StatCard label="Màxim legal" value={`${inf.fineMax.toLocaleString('ca')} €`} inverted />}
+            {inf.barem && (
+              <StatCard
+                label="Barem"
+                value={inf.barem === 'alcohol' ? 'Alcoholèmia' : 'Velocitat'}
+                inverted
+              />
+            )}
             {inf.crimeArticle && <StatCard label="Possible delicte" value={inf.crimeArticle} inverted />}
-            {inf.detention && <StatCard label="Detenció" value={inf.detention} inverted />}
-            {inf.licenseRevoked && <StatCard label="Permís retirat" value={inf.licenseRevoked} inverted />}
-            {inf.formType && <StatCard label="Diligència" value={inf.formType} inverted />}
           </div>
+          {inf.barem && (
+            <button onClick={() => navigate(`/operativa/barems?b=${inf.barem}`)} style={{
+              marginTop: 12, width: '100%', border: 'none', borderRadius: 10, cursor: 'pointer',
+              background: 'rgba(255,255,255,0.22)', color: '#fff', padding: '10px 0',
+              fontFamily: T.font, fontWeight: 800, fontSize: 13,
+            }}>
+              Obrir el barem i calcular la sanció
+            </button>
+          )}
         </div>
       </div>
 
@@ -59,79 +103,117 @@ export default function ScreenFitxa() {
             background: tab === i ? cat.solid : '#fff',
             color: tab === i ? '#fff' : T.inkSoft,
             fontFamily: T.font, fontWeight: 700, fontSize: 12, flexShrink: 0,
-            boxShadow: tab === i ? `inset 0 -2px 0 rgba(0,0,0,0.18)` : T.shadow.card,
+            boxShadow: tab === i ? 'inset 0 -2px 0 rgba(0,0,0,0.18)' : T.shadow.card,
           }}>{t}</button>
         ))}
       </div>
 
-      {/* Content by tab */}
       <div style={{ padding: '14px 16px' }}>
         {tab === 0 && (
           <>
-            <SectionTitle>Descripció</SectionTitle>
-            <div style={{ background: '#fff', borderRadius: T.r.md, padding: 14, boxShadow: T.shadow.card, marginBottom: 14 }}>
-              <div style={{ fontFamily: T.fontMono, fontSize: 12, color: cat.ink, marginBottom: 6, fontWeight: 700 }}>{inf.article}</div>
-              <div style={{ fontWeight: 700, fontSize: 14, color: T.ink, lineHeight: 1.4 }}>{inf.title}</div>
-              {inf.keywords && (
+            <SectionTitle>Concepte de la infracció</SectionTitle>
+            <Card>
+              <div style={{ fontFamily: T.fontMono, fontSize: 12, color: cat.ink, marginBottom: 6, fontWeight: 700 }}>
+                {inf.article}
+              </div>
+              <div style={{ fontWeight: 700, fontSize: 14, color: T.ink, lineHeight: 1.45 }}>{inf.title}</div>
+              {inf.note && (
+                <div style={{ marginTop: 10, padding: 10, background: T.bg, borderRadius: 9, fontSize: 12.5, color: T.inkSoft, lineHeight: 1.5 }}>
+                  {inf.note}
+                </div>
+              )}
+              {!!(inf.keywords || []).length && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 12 }}>
                   {inf.keywords.map(kw => (
                     <span key={kw} style={{ background: cat.soft, color: cat.ink, padding: '3px 8px', borderRadius: 999, fontSize: 10.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.3 }}>{kw}</span>
                   ))}
                 </div>
               )}
-            </div>
-          </>
-        )}
+            </Card>
 
-        {tab === 1 && inf.legalText && (
-          <>
-            <SectionTitle>Text legal</SectionTitle>
-            <div style={{ background: '#fff', borderRadius: T.r.md, padding: 14, boxShadow: T.shadow.card, marginBottom: 14 }}>
-              <div style={{ fontSize: 13, color: T.inkSoft, lineHeight: 1.6, fontStyle: 'italic' }}>
-                <i>"{inf.legalText.slice(0, 200)}…"</i>
-              </div>
-              {inf.penalties && (
-                <div style={{ display: 'flex', gap: 6, marginTop: 12, flexWrap: 'wrap' }}>
-                  {inf.penalties.map(p => (
-                    <Pill key={p} bg={cat.soft} fg={cat.ink}>{p}</Pill>
-                  ))}
+            {esCataleg ? (
+              <>
+                <SectionTitle>Ubicació al catàleg</SectionTitle>
+                <Card>
+                  <Row label="Norma" value={`${norma.nom} (${norma.ref})`} />
+                  {inf.block && <Row label="Bloc" value={inf.block} />}
+                  {inf.sub && <Row label="Epígraf" value={inf.sub} />}
+                  {inf.page && <Row label="Pàgina del catàleg" value={`${inf.page} de 41`} last />}
+                </Card>
+
+                <div style={{
+                  background: T.cat.leyes.soft, borderRadius: T.r.md, padding: 12,
+                  fontSize: 12, color: T.cat.leyes.ink, lineHeight: 1.5,
+                }}>
+                  <b>La butlleta no es redacta des d'aquí.</b> Si el fet no encaixa exactament amb
+                  aquest redactat, l'agent l'ha d'adaptar al fet realment ocorregut i consignar
+                  l'article i l'apartat aplicables ({FONT.document}, pàg. 4).
                 </div>
-              )}
-            </div>
-          </>
-        )}
-
-        {tab === 2 && (
-          <>
-            <SectionTitle>Procediment recomanat</SectionTitle>
-            {inf.steps ? (
-              <div style={{ background: '#fff', borderRadius: T.r.md, boxShadow: T.shadow.card, overflow: 'hidden' }}>
-                {inf.steps.map((step, i, arr) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 14px', borderBottom: i < arr.length - 1 ? `1px solid ${T.hairline}` : 'none' }}>
-                    <div style={{ width: 24, height: 24, borderRadius: 999, background: cat.soft, color: cat.ink, display: 'grid', placeItems: 'center', fontFamily: T.fontMono, fontWeight: 700, fontSize: 11, flexShrink: 0 }}>{i + 1}</div>
-                    <div style={{ fontSize: 13.5, color: T.ink, fontWeight: 500, lineHeight: 1.4 }}>{step}</div>
-                  </div>
-                ))}
-              </div>
+              </>
             ) : (
-              <div style={{ background: '#fff', borderRadius: T.r.md, padding: 16, boxShadow: T.shadow.card, color: T.inkMuted, fontSize: 13 }}>
-                Consulta el protocol específic des de la pestanya Protocols.
+              <div style={{
+                background: T.cat.operativa.soft, borderRadius: T.r.md, padding: 12,
+                fontSize: 12, color: T.cat.operativa.ink, lineHeight: 1.5,
+              }}>
+                <b>Fora del catàleg de trànsit.</b> Aquest supòsit no consta al catàleg del SCT.
+                Font: {inf.fontDoc}. La quantia la fixa la resolució sancionadora dins del grau
+                que correspongui.
               </div>
             )}
           </>
         )}
 
-        {tab === 3 && (
+        {tab === 1 && (
           <>
-            <SectionTitle>Diligència / documentació</SectionTitle>
-            <div style={{ background: '#fff', borderRadius: T.r.md, padding: 14, boxShadow: T.shadow.card }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                <DocItem icon="pen" label="Tipus de diligència" value={inf.formType || 'Denúncia administrativa (DTE)'} />
-                <DocItem icon="scale" label="Fonament legal" value={inf.article} />
-                {inf.crimeArticle && <DocItem icon="book" label="Tipus penal" value={inf.crimeArticle} />}
-                <DocItem icon="flag" label="Resolució" value={inf.sev === 'mg' ? 'Expedient sancionador + notificació' : inf.sev === 'g' ? 'Expedient sancionador' : 'Notificació directa'} />
-              </div>
-            </div>
+            <SectionTitle>Procedència d'aquesta fitxa</SectionTitle>
+            <Card>
+              <Row
+                label="Document"
+                value={esCataleg ? `${FONT.entitat} — «${FONT.document}»` : inf.fontDoc}
+              />
+              {esCataleg && <Row label="Versió" value={FONT.versioLabel} />}
+              <Row label="Norma infringida" value={esCataleg ? norma.ref : inf.article} />
+              <Row label="Naturalesa" value={inf.tag} />
+              <Row label="Quantia" value={importPrincipal} />
+              <Row label="Amb DTE" value={inf.dteNo ? 'Sense descompte' : inf.fine50 != null ? `${inf.fine50} €` : '—'} />
+              <Row label="Pèrdua de punts" value={inf.points > 0 ? `${inf.points}` : 'Cap'} last />
+            </Card>
+            {esCataleg && <FontFooter compact />}
+          </>
+        )}
+
+        {tab === 2 && (
+          <>
+            <SectionTitle>Llindar penal</SectionTitle>
+            {inf.barem === 'alcohol' && <PenalAvis avis={LLINDAR_PENAL_ALCOHOL.avis} article={LLINDAR_PENAL_ALCOHOL.article} />}
+            {inf.barem === 'velocitat' && <PenalAvis avis={LLINDAR_PENAL_VELOCITAT.avis} article={LLINDAR_PENAL_VELOCITAT.article} />}
+            {penalRelacionat.length === 0 && !inf.barem && !inf.crimeArticle && (
+              <Card>
+                <div style={{ fontSize: 13, color: T.inkMuted, lineHeight: 1.5 }}>
+                  El catàleg no associa cap tipus penal a aquest supòsit. Si els fets concrets
+                  poden ser delicte, la via administrativa decau i s'ha d'instruir atestat.
+                </div>
+              </Card>
+            )}
+            {inf.crimeArticle && (
+              <Card>
+                <div style={{ fontFamily: T.fontMono, fontSize: 12, fontWeight: 700, color: T.cat.alcohol.ink }}>
+                  {inf.crimeArticle}
+                </div>
+              </Card>
+            )}
+            {penalRelacionat.map(d => (
+              <Card key={d.id}>
+                <div style={{ fontFamily: T.fontMono, fontSize: 12, color: T.cat.alcohol.ink, fontWeight: 700 }}>{d.article}</div>
+                <div style={{ fontWeight: 800, fontSize: 14, marginTop: 3 }}>{d.title}</div>
+                <div style={{ fontSize: 12.5, color: T.inkSoft, lineHeight: 1.55, marginTop: 8, fontStyle: 'italic' }}>
+                  «{d.text}»
+                </div>
+                <div style={{ display: 'flex', gap: 6, marginTop: 10, flexWrap: 'wrap' }}>
+                  {d.penes.map(p => <Pill key={p} bg={T.cat.alcohol.soft} fg={T.cat.alcohol.ink}>{p}</Pill>)}
+                </div>
+              </Card>
+            ))}
           </>
         )}
       </div>
@@ -139,16 +221,28 @@ export default function ScreenFitxa() {
   );
 }
 
-function DocItem({ icon, label, value }) {
+function PenalAvis({ avis, article }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '8px 0', borderBottom: `1px solid ${T.hairline}` }}>
-      <div style={{ width: 32, height: 32, borderRadius: 9, background: T.bg, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
-        <Icon name={icon} size={16} color={T.inkSoft} />
+    <div style={{
+      background: T.cat.alcohol.soft, borderRadius: T.r.md, padding: 14, marginBottom: 12,
+      borderLeft: `3px solid ${T.cat.alcohol.solid}`,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <Icon name="siren" size={16} color={T.cat.alcohol.ink} />
+        <div style={{ fontWeight: 800, fontSize: 12.5, color: T.cat.alcohol.ink, textTransform: 'uppercase', letterSpacing: 0.4 }}>
+          {article}
+        </div>
       </div>
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 10.5, fontWeight: 700, color: T.inkMuted, textTransform: 'uppercase', letterSpacing: 0.5 }}>{label}</div>
-        <div style={{ fontSize: 13, fontWeight: 700, color: T.ink, marginTop: 1 }}>{value}</div>
-      </div>
+      <div style={{ fontSize: 12.5, color: T.cat.alcohol.ink, lineHeight: 1.55, marginTop: 8 }}>{avis}</div>
+    </div>
+  );
+}
+
+function Row({ label, value, last }) {
+  return (
+    <div style={{ padding: '8px 0', borderBottom: last ? 'none' : `1px solid ${T.hairline}` }}>
+      <div style={{ fontSize: 10, fontWeight: 800, color: T.inkMuted, textTransform: 'uppercase', letterSpacing: 0.5 }}>{label}</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: T.ink, marginTop: 2, lineHeight: 1.4 }}>{value}</div>
     </div>
   );
 }
