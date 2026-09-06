@@ -111,6 +111,32 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{
+          background: '#fff', borderRadius: T.r.xl, padding: 18,
+          boxShadow: T.shadow.card, borderTop: `3px solid ${T.cat.leyes.solid}`,
+          cursor: 'pointer',
+        }} onClick={() => navigate('/noticias')}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+            <div style={{
+              width: 36, height: 36, borderRadius: 10, background: T.cat.leyes.soft,
+              display: 'grid', placeItems: 'center', flexShrink: 0,
+            }}>
+              <Icon name="newspaper" size={20} color={T.cat.leyes.solid} strokeWidth={2} />
+            </div>
+            <div>
+              <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.leyes.ink }}>Actualitat diària</div>
+              <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 17, letterSpacing: -0.3, color: T.ink }}>Notícies</div>
+            </div>
+            <Icon name="chevron-right" size={20} color={T.inkMuted} style={{ marginLeft: 'auto' }} />
+          </div>
+          <p style={{ fontFamily: T.font, fontSize: 13, color: T.inkSoft, margin: 0, lineHeight: 1.5 }}>
+            Política, economia, successos, esports i cultura. Les notícies més rellevants de Catalunya, Espanya i el món, cada dia.
+          </p>
+        </div>
+      </div>
+
       {/* pricing */}
       <div style={{ padding: '20px 18px 0' }}>
         <div style={{ background: T.ink, borderRadius: T.r.xl, padding: 20, color: '#fff', position: 'relative', overflow: 'hidden' }}>
