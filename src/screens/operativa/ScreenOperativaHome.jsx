@@ -43,6 +43,13 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '09·07', tag: 'Ciència · Tech', title: 'IA agentiva i computació quàntica: els avanços que marquen 2026', desc: 'Nous sistemes d\'IA autònoms. Correcció d\'errors quàntics en xips de nova generació. Teràpies CRISPR ja operatives a hospitals europeus.' },
+  { date: '09·07', tag: 'Cultura · Premis', title: 'Shakira, Aitana i Karol G brillen als Premios Juventud 2026 a Marbella', desc: 'Primera edició europea. Karol G, millor àlbum amb "Tropicoqueta". Shakira i Aitana, tres guardons cadascuna.' },
+  { date: '09·07', tag: 'Esports · LaLiga', title: 'Arrenca la LaLiga EA Sports 2026/27 — Getafe-Celta i Elche-R. Sociedad avui', desc: 'Nova temporada en marxa. El Reial Madrid rep el Rayo Vallecano el 13 de setembre.' },
+  { date: '09·07', tag: 'Economia · CAT', title: 'L\'Estat distribueix 27,3 M€ d\'ajuts als pagesos catalans per fertilitzants', desc: 'Línia d\'ajuts estatals activa. El sector agrícola català n\'és un dels principals beneficiaris.' },
+  { date: '09·07', tag: 'Policial · Penal', title: 'L\'Audiència de Gipuzkoa redueix condemnes per coaccions a dos agents de policia', desc: 'Dos absolts totalment; els altres set reconduïts a temptativa. Impacte en la protecció del personal policial.' },
+  { date: '09·07', tag: 'Judicial · AN', title: 'L\'Audiència Nacional assumeix la investigació de la crisi de Ceuta', desc: 'Més de 70.000 entrades el 30-31 de juliol. Fiscalia avala la causa. Informes apunten a acció planificada des del Marroc.' },
+  { date: '09·07', tag: 'Política · CAT', title: 'Junts reta el PSC: el concert econòmic és possible si els seus diputats ho defensen', desc: 'Debat sobre finançament singular. Junts diu que el model basc té majoria parlamentària si el PSC s\'implica a Madrid.' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
