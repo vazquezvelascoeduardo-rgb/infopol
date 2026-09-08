@@ -111,6 +111,38 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '24px 18px 0' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+          <div>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 2 }}>Avui</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 20, letterSpacing: -0.4 }}>Notícies</div>
+          </div>
+          <button onClick={() => navigate('/noticias')} style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            color: T.cat.operativa.solid, fontWeight: 700, fontSize: 13, fontFamily: T.font,
+          }}>Veure totes</button>
+        </div>
+        {[
+          { label: 'Catalunya', color: T.cat.operativa.solid, headline: 'Generalitat eleva el sostre de despesa un 5% fins a 43.191 M€ per als Pressupostos 2027' },
+          { label: 'Espanya', color: T.cat.leyes.solid, headline: 'Inditex: benefici net de 1.375 M€ al 1r semestre (+5,4%)' },
+          { label: 'Internacional', color: T.cat.psico.solid, headline: 'S\'obre la 81a Assemblea General de l\'ONU' },
+        ].map((n, i) => (
+          <button key={i} onClick={() => navigate('/noticias')} style={{
+            display: 'flex', alignItems: 'flex-start', gap: 10,
+            background: T.card, borderRadius: T.r.md, padding: '12px 14px',
+            boxShadow: T.shadow.card, border: 'none', cursor: 'pointer',
+            width: '100%', marginBottom: 8, textAlign: 'left',
+          }}>
+            <div style={{ width: 3, alignSelf: 'stretch', borderRadius: 2, background: n.color, flexShrink: 0 }} />
+            <div>
+              <div style={{ fontFamily: T.font, fontWeight: 700, fontSize: 10, color: n.color, letterSpacing: 0.6, textTransform: 'uppercase', marginBottom: 3 }}>{n.label}</div>
+              <div style={{ fontFamily: T.font, fontWeight: 600, fontSize: 13, color: T.ink, lineHeight: 1.35 }}>{n.headline}</div>
+            </div>
+          </button>
+        ))}
+      </div>
+
       {/* pricing */}
       <div style={{ padding: '20px 18px 0' }}>
         <div style={{ background: T.ink, borderRadius: T.r.xl, padding: 20, color: '#fff', position: 'relative', overflow: 'hidden' }}>
