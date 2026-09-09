@@ -96,6 +96,37 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* notícies del dia */}
+      <div style={{ padding: '16px 18px 0' }}>
+        <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 12 }}>Notícies del dia</div>
+        <div onClick={() => navigate('/noticias')} style={{
+          background: '#fff', borderRadius: T.r.xl, padding: 18,
+          boxShadow: T.shadow.card, cursor: 'pointer',
+          borderLeft: `4px solid ${T.cat.alcohol.solid}`,
+          display: 'flex', alignItems: 'center', gap: 16,
+        }}>
+          <div style={{
+            width: 52, height: 52, borderRadius: 16, flexShrink: 0,
+            background: T.cat.alcohol.soft,
+            display: 'grid', placeItems: 'center',
+          }}>
+            <Icon name="bell" size={26} color={T.cat.alcohol.solid} strokeWidth={2.2} />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10.5, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.alcohol.ink, marginBottom: 3 }}>
+              Actualitzat · 22:00 h
+            </div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 17, letterSpacing: -0.3, color: T.ink }}>
+              Notícies del dia
+            </div>
+            <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 3 }}>
+              Catalunya · Espanya · Internacional
+            </div>
+          </div>
+          <Icon name="chevron-right" size={18} color={T.inkMuted} />
+        </div>
+      </div>
+
       {/* testimonial */}
       <div style={{ padding: '16px 18px 0' }}>
         <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.academia.solid}` }}>
