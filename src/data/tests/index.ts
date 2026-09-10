@@ -58,6 +58,13 @@ import mossosC2 from './mossos-c2';
 import mossosC3 from './mossos-c3';
 import mossosC4 from './mossos-c4';
 import mossosC5 from './mossos-c5';
+
+// Examens oficials sencers de convocatories passades.
+import mossosExamen2017 from './mossos-examen-2017';
+import mossosExamen2020 from './mossos-examen-2020';
+import mossosExamen2023 from './mossos-examen-2023';
+import mossosExamen2024 from './mossos-examen-2024';
+import mossosExamen2025 from './mossos-examen-2025';
 import actualitatPl2026 from './actualitat-pl-2026';
 import calafell from './calafell';
 import sabadell from './sabadell';
@@ -145,6 +152,11 @@ export const TOPICS: TestTopic[] = [
   mossosC3,
   mossosC4,
   mossosC5,
+  mossosExamen2017,
+  mossosExamen2020,
+  mossosExamen2023,
+  mossosExamen2024,
+  mossosExamen2025,
   actualitatPl2026,
   calafell,
   sabadell,
@@ -271,7 +283,7 @@ export function getAllActualitatQuestions(): TaggedQuestion[] {
 
 /** Filtre per categoria. */
 export function getTopicsByCategory(
-  category: 'temari' | 'cultura' | 'municipi' | 'mossos' | 'actualitat',
+  category: 'temari' | 'cultura' | 'municipi' | 'mossos' | 'mossos-examens' | 'actualitat',
 ): TestTopic[] {
   return TOPICS.filter((t) => (t.category ?? 'temari') === category);
 }

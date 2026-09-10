@@ -41,7 +41,12 @@ export type TestTopic = {
    * 'actualitat': preguntes d'actualitat (càrrecs vigents, premis, esports,
    * fets recents) — no entra al pool combinat del temari oficial.
    */
-  category?: 'temari' | 'cultura' | 'municipi' | 'mossos' | 'actualitat';
+  /*
+   * 'mossos-examens': exàmens oficials sencers de convocatòries passades,
+   * tal com van caure. Van a part dels tests per temes: aquí l'interès és
+   * fer l'examen d'aquell any de cap a peus, no repassar una matèria.
+   */
+  category?: 'temari' | 'cultura' | 'municipi' | 'mossos' | 'mossos-examens' | 'actualitat';
   /**
    * Si category='municipi', nom del municipi al qual pertany (ex. 'Terrassa').
    */
