@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { StatusBar, ProgressBar, CatIcon } from '../../components/Shared';
-import { PHYSICAL_TESTS } from '../../data/academia';
+import { PHYSICAL_TESTS, PHYSICAL_TESTS_AVIS } from '../../data/academia';
 
 const SEXE_OPTIONS = ['Home', 'Dona'];
 const EDAT_RANGES = ['18–30 anys', '31–40 anys'];
@@ -97,6 +97,13 @@ export default function ScreenFisiques() {
 
       {/* tests */}
       <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{
+          background: T.cat.leyes.soft, color: T.cat.leyes.ink, borderRadius: T.r.md,
+          padding: 12, marginBottom: 12, fontSize: 12, lineHeight: 1.5,
+        }}>
+          <b>Marques no oficials.</b> {PHYSICAL_TESTS_AVIS}
+        </div>
+
         {PHYSICAL_TESTS.map(test => (
           <PhysicRow key={test.id} test={test} sexe={sexe} edatKey={edatKey} edatLabel={edat} />
         ))}

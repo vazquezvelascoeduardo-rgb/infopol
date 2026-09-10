@@ -16,7 +16,12 @@ app.use((req, res, next) => {
 
 // ── Mock data ──────────────────────────────────────────────────
 
+// DADES DE DEMOSTRACIÓ. Cap d'aquests valors és real: ni l'agent, ni el TIP,
+// ni el nivell, ni la ratxa, ni les estadístiques. Serveixen per poder veure
+// les pantalles mentre no hi ha autenticació ni persistència reals, i el
+// client ho ha d'advertir a l'usuari (camp `demo`).
 const USER = {
+  demo: true,
   id: 'u001',
   name: 'Jordi Roca',
   initials: 'JR',
@@ -53,6 +58,7 @@ const NEWS = [];
 
 
 const STATS = {
+  demo: true,
   streak: 23,
   streakRecord: 41,
   accuracy: 78,

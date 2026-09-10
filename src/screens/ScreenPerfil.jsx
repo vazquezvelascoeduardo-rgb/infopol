@@ -33,7 +33,7 @@ const BADGES = [
 const SETTINGS = [
   { i: 'bolt', t: 'Mode operativa per defecte', d: 'Activat' },
   { i: 'bell', t: 'Notificacions', d: 'Diari · 19:00' },
-  { i: 'graduation', t: 'Oposició objectiu', d: 'Mossos d\'Esquadra 2027' },
+  { i: 'graduation', t: 'Oposició objectiu', d: 'Sense definir' },
   { i: 'lock', t: 'Privacitat i seguretat' },
 ];
 
@@ -54,13 +54,13 @@ export default function ScreenPerfil() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
             <div style={{ width: 64, height: 64, borderRadius: 999, background: T.cat.academia.solid, color: '#fff', display: 'grid', placeItems: 'center', flexShrink: 0, fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 24, border: '3px solid #fff' }}>JR</div>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 18 }}>Jordi Roca</div>
-              <div style={{ fontSize: 12, opacity: 0.9 }}>Agent · TIP 18742 · Regió Policial Metropolitana Nord</div>
+              <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 18 }}>Perfil de demostració</div>
+              <div style={{ fontSize: 12, opacity: 0.9 }}>Dades d'exemple · encara no hi ha compte real</div>
             </div>
             <button style={{ border: '1.5px solid rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.12)', color: '#fff', padding: '7px 12px', borderRadius: 999, cursor: 'pointer', fontSize: 11, fontWeight: 700, letterSpacing: 0.4, textTransform: 'uppercase' }}>Editar</button>
           </div>
           <div style={{ marginTop: 16, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
-            {[{ l: 'Nivell', v: '12' }, { l: 'XP total', v: '14.820' }, { l: 'Ratxa', v: '23 dies' }].map((s, i) => (
+            {[{ l: 'Nivell', v: '—' }, { l: 'XP total', v: '—' }, { l: 'Ratxa', v: '—' }].map((s, i) => (
               <div key={i} style={{ background: 'rgba(255,255,255,0.14)', borderRadius: 12, padding: 10 }}>
                 <div style={{ fontSize: 10, opacity: 0.8, fontWeight: 700, letterSpacing: 0.5, textTransform: 'uppercase' }}>{s.l}</div>
                 <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 18, marginTop: 2 }}>{s.v}</div>

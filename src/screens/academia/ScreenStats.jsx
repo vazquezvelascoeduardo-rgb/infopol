@@ -4,14 +4,31 @@ import { StatusBar, ProgressBar, Pill, CatIcon } from '../../components/Shared';
 
 const WEEKLY = [62, 48, 71, 55, 80, 45, 68, 72, 35, 58, 90, 64];
 
+// Numeració alineada amb TEMES de src/data/academia.js.
+// Els percentatges són de demostració: no hi ha encara cap seguiment real.
+const ES_DEMO = true;
+
 const TOPICS = [
   { t: 'T1 · Constitució', pct: 92, hue: 'atajos' },
-  { t: 'T8 · Drets fonamentals', pct: 78, hue: 'tests' },
-  { t: 'T3 · Organització Mossos', pct: 70, hue: 'operativa' },
-  { t: 'T12 · Codi penal', pct: 64, hue: 'psico' },
-  { t: 'T5 · Org. policial', pct: 41, hue: 'alcohol' },
-  { t: 'T6 · LECrim', pct: 28, hue: 'transito' },
+  { t: 'T3 · Drets fonamentals', pct: 78, hue: 'tests' },
+  { t: 'T4 · Organització policial', pct: 70, hue: 'operativa' },
+  { t: 'T5 · Codi penal', pct: 64, hue: 'psico' },
+  { t: 'T6 · LECrim', pct: 41, hue: 'alcohol' },
+  { t: 'T7 · Seguretat Ciutadana', pct: 28, hue: 'transito' },
 ];
+
+function DemoAvis() {
+  if (!ES_DEMO) return null;
+  return (
+    <div style={{
+      background: T.cat.leyes.soft, color: T.cat.leyes.ink, borderRadius: T.r.md,
+      padding: 12, margin: '0 16px 14px', fontSize: 12, lineHeight: 1.5,
+    }}>
+      <b>Dades de demostració.</b> Encara no hi ha seguiment real del teu progrés:
+      aquestes xifres són d'exemple i no reflecteixen la teva activitat.
+    </div>
+  );
+}
 
 function BigStat({ cat, icon, big, label, sub }) {
   const k = T.cat[cat];
@@ -29,6 +46,7 @@ export default function ScreenStats() {
   return (
     <div className="screen">
       <StatusBar />
+      <DemoAvis />
       <div style={{ padding: '6px 16px 14px' }}>
         <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10.5, letterSpacing: 1.1, textTransform: 'uppercase', color: T.cat.academia.ink, marginBottom: 4 }}>El teu progrés</div>
         <h1 style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 26, letterSpacing: -0.6, margin: 0 }}>Estadístiques</h1>

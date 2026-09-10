@@ -23,8 +23,8 @@ export const TEMES = [
 export const TEST_QUESTIONS = [
   {
     id: 'q001',
-    tema: 8,
-    temaTitle: 'Tema 8 · Drets fonamentals',
+    tema: 3,
+    temaTitle: 'Tema 3 · Drets fonamentals',
     question: 'Quin article de la Constitució Espanyola estableix que tothom té dret a la vida i a la integritat física i moral?',
     options: ['Article 14 CE', 'Article 15 CE', 'Article 16 CE', 'Article 17 CE'],
     correct: 1,
@@ -53,8 +53,8 @@ export const TEST_QUESTIONS = [
   },
   {
     id: 'q004',
-    tema: 8,
-    temaTitle: 'Tema 8 · Drets fonamentals',
+    tema: 3,
+    temaTitle: 'Tema 3 · Drets fonamentals',
     question: 'El dret a la tutela judicial efectiva es recull a quin article de la CE?',
     options: ['Art. 23 CE', 'Art. 24 CE', 'Art. 25 CE', 'Art. 17 CE'],
     correct: 1,
@@ -63,18 +63,18 @@ export const TEST_QUESTIONS = [
   },
   {
     id: 'q005',
-    tema: 3,
-    temaTitle: 'Tema 3 · Mossos d\'Esquadra',
-    question: 'Quina llei regula l\'organització dels Mossos d\'Esquadra?',
+    tema: 4,
+    temaTitle: 'Tema 4 · Organització policial de Catalunya',
+    question: 'Quina és la norma legal específica que regula el cos de la Policia de la Generalitat - Mossos d\'Esquadra?',
     options: ['LO 2/1986 de Forces i Cossos de Seguretat', 'Llei 10/1994 de la Policia de la Generalitat - Mossos d\'Esquadra', 'Llei 4/2003 d\'ordenació del sistema de seguretat pública', 'Estatut d\'Autonomia de Catalunya'],
     correct: 1,
-    explanation: 'La Llei 10/1994, de 11 de juliol, de la Policia de la Generalitat - Mossos d\'Esquadra, és la norma bàsica que regula l\'estructura, funcions i règim dels Mossos d\'Esquadra.',
+    explanation: 'La Llei 10/1994, d\'11 de juliol. Matís, perquè aquí és on es falla: la LO 2/1986 és la norma estatal marc de tots els cossos; la Llei 4/2003 ordena el sistema de seguretat pública de Catalunya en conjunt (no el cos); i l\'Estatut atribueix la competència, però no regula el cos.',
     xp: 26,
   },
   {
     id: 'q006',
-    tema: 8,
-    temaTitle: 'Tema 8 · Drets fonamentals',
+    tema: 3,
+    temaTitle: 'Tema 3 · Drets fonamentals',
     question: 'L\'article 18 de la CE protegeix quin dret?',
     options: ['Llibertat ideològica i religiosa', 'Dret a l\'honor, intimitat i pròpia imatge', 'Llibertat d\'expressió i d\'informació', 'Dret de reunió i manifestació'],
     correct: 1,
@@ -95,10 +95,10 @@ export const TEST_QUESTIONS = [
     id: 'q008',
     tema: 6,
     temaTitle: 'Tema 6 · LECrim',
-    question: 'Quant temps màxim pot durar una detenció policial sense posada a disposició judicial?',
+    question: 'Com a regla general, i fora dels supòsits especials de l\'art. 520 bis LECrim, quant pot durar com a màxim una detenció policial sense posada a disposició judicial?',
     options: ['24 hores', '48 hores', '72 hores', '96 hores'],
     correct: 2,
-    explanation: 'Segons l\'art. 17.2 CE i l\'art. 520 LECrim, el detingut ha de ser posat en llibertat o a disposició de l\'autoritat judicial en el termini màxim de 72 hores des de la detenció.',
+    explanation: 'Art. 17.2 CE i art. 520 LECrim: 72 hores com a màxim, i sempre pel temps estrictament necessari. Matís imprescindible: en els delictes de l\'art. 384 bis (bandes armades o terrorisme) l\'art. 520 bis LECrim permet una pròrroga de fins a 48 hores més, prèvia autorització judicial. Per això la pregunta acota «com a regla general».',
     xp: 30,
   },
 ];
@@ -106,7 +106,7 @@ export const TEST_QUESTIONS = [
 export const FLASHCARDS = [
   {
     id: 'fc001',
-    tema: 'Tema 12 · CP',
+    tema: 'Tema 5 · CP',
     question: 'Quina és la pena per al delicte d\'omissió del deure de socors (art. 195 CP)?',
     answer: 'Art. 195.1: multa de 3 a 12 mesos. Art. 195.3: si la víctima ho és per un accident ocasionat fortuïtament per qui va ometre l\'auxili, presó de 6 a 18 mesos; si l\'accident es deu a imprudència, presó de 6 mesos a 4 anys.',
     cat: 'leyes',
@@ -120,7 +120,7 @@ export const FLASHCARDS = [
   },
   {
     id: 'fc003',
-    tema: 'Tema 8 · Drets fonamentals',
+    tema: 'Tema 3 · Drets fonamentals',
     question: 'Quins drets reconeix l\'art. 17 CE?',
     answer: 'El dret a la llibertat i a la seguretat personal. Ningú pot ser privat de llibertat, tret dels casos i en la forma prevista a la llei.',
     cat: 'operativa',
@@ -128,8 +128,8 @@ export const FLASHCARDS = [
   {
     id: 'fc004',
     tema: 'Tema 5 · CP',
-    question: 'Quins elements integren el delicte de conducció sota la influència de l\'alcohol (art. 379.2 CP)?',
-    answer: 'Conduir vehicle de motor o ciclomotor: (a) sota la influència de begudes alcohòliques, o (b) amb taxa d\'alcohol en aire > 0,60 mg/l o en sang > 1,2 g/l.',
+    question: 'Quines conductes integren el delicte de l\'art. 379.2 CP?',
+    answer: 'Conduir un vehicle de motor o ciclomotor sota la influència de drogues tòxiques, estupefaents, substàncies psicotròpiques O de begudes alcohòliques. I, «en tot cas», amb una taxa d\'alcohol en aire espirat superior a 0,60 mg/l o en sang superior a 1,2 g/l. Dos matisos: l\'article no és només d\'alcohol, i per sota de 0,60 encara hi pot haver delicte si es prova la influència.',
     cat: 'alcohol',
   },
   {
@@ -147,6 +147,15 @@ export const FLASHCARDS = [
     cat: 'leyes',
   },
 ];
+
+// ATENCIÓ: aquestes marques NO són les del barem oficial de cap convocatòria.
+// Els mínims de les proves físiques els fixen les bases de cada convocatòria
+// publicades al DOGC i canvien d'una a una altra. Serveixen com a referència
+// d'entrenament i la pantalla ho ha d'advertir.
+export const PHYSICAL_TESTS_AVIS =
+  "Marques de referència per entrenar, NO oficials. Els mínims exigibles els " +
+  "fixen les bases de cada convocatòria publicades al DOGC: consulta-les sempre " +
+  "abans de donar una marca per bona.";
 
 export const PHYSICAL_TESTS = [
   {

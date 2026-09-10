@@ -1,0 +1,16 @@
+# Dependències: es reinstal·len amb `npm install`, no es versionen.
+node_modules/
+
+# Sortida de compilació: es regenera amb `npm run build`.
+dist/
+
+# Entorns i sistema
+.env
+.env.*
+.DS_Store
+*.log
+
+# Plataformes natives (generades per Capacitor)
+ios/App/Pods/
+android/.gradle/
+android/app/build/
