@@ -13,6 +13,7 @@ import ScreenProtocol from './screens/operativa/ScreenProtocol';
 import ScreenMapa from './screens/operativa/ScreenMapa';
 
 import ScreenAcademiaHome from './screens/academia/ScreenAcademiaHome';
+import ScreenNoticiasHome from './screens/noticias/ScreenNoticiasHome';
 import ScreenTemari from './screens/academia/ScreenTemari';
 import ScreenTest from './screens/academia/ScreenTest';
 import ScreenFlashcards from './screens/academia/ScreenFlashcards';
@@ -86,6 +87,7 @@ export default function App() {
         <Route path="stats" element={<ScreenStats />} />
         <Route path="fisiques" element={<ScreenFisiques />} />
       </Route>
+      <Route path="/noticias" element={<ScreenNoticiasHome />} />
       <Route path="/perfil" element={<ScreenPerfil />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
