@@ -43,6 +43,12 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '09·12', tag: 'Política · Cat', title: 'Diada 2026 — 45.000 persones surten al carrer a Barcelona', desc: 'La manifestació de l\'ANC i Òmnium finalitza amb 18 detencions per desordres; la cimera independentista apunta a la tardor del 2027.', link: 'https://www.infobae.com/espana/2026/09/12/45000-manifestantes-salen-a-la-calle-en-barcelona-para-reclamar-la-independencia-en-una-diada-marcada-por-el-auge-de-alianca-catalana-y-que-se-ha-saldado-con-18-detenidos/' },
+  { date: '09·12', tag: 'Internacional', title: 'Crisi EE.UU.–Iran — l\'Estret d\'Ormuz, tres mesos bloquejat', desc: 'El tancament del corredor marítim és el factor més nociu per a l\'economia global, amb doble amenaça sobre el comerç i el subministrament energètic.', link: 'https://www.caixabankresearch.com/en/economics-markets/activity-growth/macroeconomic-outlook-spain-2026-resilience-uncertain-times' },
+  { date: '09·12', tag: 'Esports · UEFA', title: 'Champions — Barça debuta contra el Feyenoord; Atlètic viatja a Anfield', desc: 'Els clubs catalans i madrileny inicien la fase de lliga de la Lliga de Campions en jornades clau per al posicionament europeu.', link: 'https://www.elnacional.cat/es/deportes.html' },
+  { date: '09·12', tag: 'Esports · FIBA', title: 'Mundial bàsquet femení — Espanya als quarts de final de Berlín', desc: 'La selecció espanyola, primera classificada del Grup A, s\'enfrontarà als quarts del Campionat del Món femení de bàsquet.', link: 'https://www.elnacional.cat/es/deportes.html' },
+  { date: '09·10', tag: 'Esports · UCI', title: 'Vuelta — Enric Mas manté el mallot vermell; Küng guanya la CRI', desc: 'El mallorquí lidera la classificació general amb 1:37 sobre Roglič; Stefan Küng s\'imposa en la contrarellotge de 32,1 km a Jerez.', link: 'https://www.lavuelta.es/en/stage-18' },
+  { date: '09·10', tag: 'Ciència · Premi', title: 'Premi Kavli — Amina Helmi descobreix l\'origen fòssil de la Via Làctia', desc: 'L\'astrofísica argentina rep el Kavli d\'Astrofísica per identificar restes fòssils dels orígens de la galàxia, considerat l\'equivalent del Nobel en la disciplina.', link: 'https://hoydia.com.ar/ciencia/la-astronoma-argentina-amina-helmi-fue-distinguida-con-el-prestigioso-premio-kavli-en-astrofisica/' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -122,16 +128,17 @@ export default function ScreenOperativaHome() {
 
       {/* Actualitat normativa */}
       <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
+        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
-            <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
+            <div key={i} onClick={() => n.link && window.open(n.link, '_blank')} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card, cursor: n.link ? 'pointer' : 'default' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                 <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
                 <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.link && <div style={{ fontSize: 10.5, color: T.cat.operativa.solid, marginTop: 6, fontWeight: 600 }}>Llegir notícia completa →</div>}
             </div>
           ))}
         </div>
