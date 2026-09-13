@@ -80,6 +80,20 @@ export function AvisLegal() {
         danys que se&apos;n puguin derivar.
       </p>
 
+      <h2>Fonts oficials</h2>
+      <p>
+        Aquests són els butlletins i portals on es publica la normativa en què es basa el
+        contingut d&apos;InfoPol. La versió que hi trobis és l&apos;única que val:
+      </p>
+      <ul>
+        <li><a href="https://www.boe.es" target="_blank" rel="noreferrer">BOE — Boletín Oficial del Estado</a></li>
+        <li><a href="https://dogc.gencat.cat" target="_blank" rel="noreferrer">DOGC — Diari Oficial de la Generalitat de Catalunya</a></li>
+        <li><a href="https://portaljuridic.gencat.cat" target="_blank" rel="noreferrer">Portal Jurídic de Catalunya</a> (text consolidat)</li>
+        <li><a href="https://interior.gencat.cat" target="_blank" rel="noreferrer">Departament d&apos;Interior</a></li>
+        <li><a href="https://transit.gencat.cat" target="_blank" rel="noreferrer">Servei Català de Trànsit</a></li>
+        <li><a href="https://ispc.gencat.cat" target="_blank" rel="noreferrer">Institut de Seguretat Pública de Catalunya</a></li>
+      </ul>
+
       <h2>Propietat del contingut</h2>
       <p>
         Els textos legals reproduïts o resumits són d&apos;accés públic i pertanyen als
