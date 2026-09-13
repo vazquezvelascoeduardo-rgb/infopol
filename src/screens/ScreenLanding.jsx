@@ -111,6 +111,35 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.cat.noticias.solid, marginBottom: 10 }}>Cada dia a les 22:00 h</div>
+        <div
+          onClick={() => navigate('/noticias')}
+          style={{
+            background: '#fff', borderRadius: T.r.xl, padding: 18,
+            borderTop: `3px solid ${T.cat.noticias.solid}`,
+            boxShadow: T.shadow.card, cursor: 'pointer',
+            position: 'relative', overflow: 'hidden',
+          }}
+        >
+          <div style={{ position: 'absolute', right: -28, top: -28, width: 130, height: 130, borderRadius: 200, background: T.cat.noticias.soft }} />
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            background: T.cat.noticias.soft, color: T.cat.noticias.ink,
+            padding: '4px 10px', borderRadius: T.r.pill,
+            fontFamily: T.font, fontWeight: 800, fontSize: 10.5, letterSpacing: 0.4, textTransform: 'uppercase',
+          }}>
+            Notícies del dia
+          </div>
+          <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 20, letterSpacing: -0.3, marginTop: 10, color: T.ink }}>Catalunya · Espanya<br/>Internacional</div>
+          <div style={{ fontSize: 12.5, color: T.inkSoft, marginTop: 6, lineHeight: 1.45 }}>Política, economia, esports, successos, judicial i ciència. Resum diari actualitzat cada nit.</div>
+          <div style={{ marginTop: 12, color: T.cat.noticias.solid, fontWeight: 700, fontSize: 12, display: 'flex', alignItems: 'center', gap: 4 }}>
+            Veure totes les notícies <Icon name="arrow-right" size={14} color={T.cat.noticias.solid} />
+          </div>
+        </div>
+      </div>
+
       {/* pricing */}
       <div style={{ padding: '20px 18px 0' }}>
         <div style={{ background: T.ink, borderRadius: T.r.xl, padding: 20, color: '#fff', position: 'relative', overflow: 'hidden' }}>
