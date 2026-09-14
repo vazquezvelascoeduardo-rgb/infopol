@@ -57,6 +57,13 @@ Comprova després que el nombre de files coincideix amb el que diu
 ## Compte amb el cron
 
 A Supabase hi ha l'edge function `update-directories` (crons
-`update-directories-weekly` i `update-directories-thursday`), que revisa
-aquests grups amb Claude Haiku i en pot reescriure les files. Si torna a
-estar activa, pot desfer dades verificades.
+`update-directories-weekly` i `update-directories-thursday`), que revisava
+aquests grups amb Claude Haiku i en reescrivia les files. **Els dos crons
+estan pausats des del 14/09/2026** per decisió de l'Eduardo: no els
+reactivis, desfarien dades verificades i desincronitzarien la web de l'app.
+
+## Web i app, sempre iguals
+
+Qualsevol canvi s'ha de veure a la web i a l'app el mateix dia. Si canvia
+un càrrec, revisa també les preguntes de `actualitat-pl-2026.ts` a tots dos
+repos.
