@@ -1023,7 +1023,9 @@ export const PERSONALITATS: LeaderSection[] = [
           {
             "flag": "👮",
             "position": "Director General de la Policia",
-            "name": "Josep Lluís Trapero"
+            "name": "Ferran López",
+            "detail": "Pren possessió el 15 de setembre de 2026; substitueix Josep Lluís Trapero, que va dimitir el 9 de setembre. Ja havia estat cap dels Mossos el 2017-2018",
+            "recent": true
           },
           {
             "flag": "👮",
@@ -2257,9 +2259,16 @@ export const PERSONALITATS: LeaderSection[] = [
           },
           {
             "flag": "👮",
+            "position": "9 de setembre de 2026",
+            "name": "Dimiteix Josep Lluís Trapero",
+            "detail": "Deixa la direcció general de la Policia després de perdre la confiança de la consellera Parlon; el substitueix Ferran López",
+            "recent": true
+          },
+          {
+            "flag": "👮",
             "position": "15 de setembre de 2026",
             "name": "Sílvia Catà, primera comissària en cap dels Mossos",
-            "detail": "Substitueix Miquel Esquius",
+            "detail": "Substitueix Miquel Esquius. El mateix dia, Ferran López pren possessió com a director general",
             "recent": true
           }
         ]

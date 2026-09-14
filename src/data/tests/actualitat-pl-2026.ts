@@ -49,14 +49,14 @@ const actualitat: TestTopic = {
     },
     {
       id: 'actualitat-4',
-      text: 'Qui és l\'actual Director General de la Policia de la Generalitat - Mossos d\'Esquadra?',
+      text: 'Qui és l\'actual director general de la Policia de la Generalitat - Mossos d\'Esquadra (des del 15 de setembre de 2026)?',
       options: [
+        'Josep Lluís Trapero i Álvarez',
+        'Ferran López Navarro',
         'Eduard Sallent i Peña',
         'Pere Ferrer i Costa',
-        'Albert Batlle i Bastardas',
-        'Josep Lluís Trapero i Álvarez',
       ],
-      correct: 3,
+      correct: 1,
     },
     {
       id: 'actualitat-5',

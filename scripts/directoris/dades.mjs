@@ -290,7 +290,7 @@ export const PERSONALITATS = [
         title: 'Seguretat',
         icon: '👮',
         entries: [
-          E('👮', 'Director General de la Policia', 'Josep Lluís Trapero'),
+          E('👮', 'Director General de la Policia', 'Ferran López', "Pren possessió el 15 de setembre de 2026; substitueix Josep Lluís Trapero, que va dimitir el 9 de setembre. Ja havia estat cap dels Mossos el 2017-2018", true),
           E('👮', "Comissària en cap dels Mossos d'Esquadra", 'Sílvia Catà', 'Pren possessió el 15 de setembre de 2026; primera dona al capdavant del cos; substitueix Miquel Esquius, que es jubila', true),
         ],
       },
@@ -638,7 +638,8 @@ export const PERSONALITATS = [
           E('⚖️', 'Novembre de 2025', "Dimiteix el fiscal general de l'Estat", 'Álvaro García Ortiz, condemnat pel Tribunal Suprem per revelació de secrets; el substitueix Teresa Peramato'),
           E('🏦', 'Octubre de 2025', "Fracassa l'OPA del BBVA sobre el Sabadell", "L'oferta hostil no arriba al mínim d'acceptació"),
           E('🎤', 'Maig de 2026', 'Espanya no va a Eurovisió', "Boicot de RTVE per la participació d'Israel"),
-          E('👮', '15 de setembre de 2026', 'Sílvia Catà, primera comissària en cap dels Mossos', 'Substitueix Miquel Esquius', true),
+          E('👮', '9 de setembre de 2026', 'Dimiteix Josep Lluís Trapero', "Deixa la direcció general de la Policia després de perdre la confiança de la consellera Parlon; el substitueix Ferran López", true),
+          E('👮', '15 de setembre de 2026', 'Sílvia Catà, primera comissària en cap dels Mossos', 'Substitueix Miquel Esquius. El mateix dia, Ferran López pren possessió com a director general', true),
         ],
       },
     ],
