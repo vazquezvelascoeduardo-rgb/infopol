@@ -5156,16 +5156,17 @@ const elprat: TestTopic = {
       correct: 1,
     },
     {
-      id: 'elprat-474',
-      text: 'Quines categories integren l\'escala superior segons la Llei 16/1991?',
-      options: [
-        'Sergent i caporal',
-        'Inspector i sotsinspector',
-        'Agent',
-        'Intendent major, intendent i sotsintendent',
-      ],
-      correct: 3,
-    },
+  "id": "elprat-474",
+  "text": "Quines categories integren l'escala superior segons la Llei 16/1991?",
+  "options": [
+    "Sergent i caporal",
+    "Inspector i sotsinspector",
+    "Agent",
+    "Superintendent, intendent major i intendent"
+  ],
+  "correct": 3,
+  "reference": "Art. 24.1.a Llei 16/1991"
+},
     {
       id: 'elprat-475',
       text: 'Quin article de la Llei 16/1991 recull les funcions de les policies locals?',
@@ -5200,16 +5201,18 @@ const elprat: TestTopic = {
       correct: 0,
     },
     {
-      id: 'elprat-478',
-      text: 'Segons la Llei 16/1991, la prescripció de les faltes és:',
-      options: [
-        'Molt greus 6 anys, greus 2 anys i lleus 1 mes',
-        'Molt greus 2 anys, greus 1 any i lleus 15 dies',
-        'Molt greus 5 anys, greus 1 any i lleus 1 mes',
-        'Molt greus 3 anys, greus 2 anys i lleus 1 mes',
-      ],
-      correct: 3,
-    },
+  "id": "elprat-478",
+  "text": "Segons la Llei 16/1991, la prescripció de les faltes és:",
+  "options": [
+    "Molt greus 6 anys, greus 2 anys i lleus 1 mes",
+    "Molt greus 2 anys, greus 1 any i lleus 15 dies",
+    "Molt greus 5 anys, greus 1 any i lleus 1 mes",
+    "Molt greus 3 anys, greus 2 anys i lleus 1 mes"
+  ],
+  "correct": 0,
+  "reference": "Art. 58.2 Llei 16/1991",
+  "explanation": "Segons el text d'aquest article: sis anys, dos anys i un mes, respectivament."
+},
     {
       id: 'elprat-479',
       text: 'Segons la Llei 16/1991, l\'extinció de la responsabilitat disciplinària per les sancions imposades és:',
@@ -6113,16 +6116,17 @@ const elprat: TestTopic = {
       correct: 1,
     },
     {
-      id: 'elprat-561',
-      text: 'Segons la Llei 16/1991, l\'escala superior de les policies locals comprèn les categories de:',
-      options: [
-        'Intendent major, intendent i sotsintendent',
-        'Inspector i sotsinspector',
-        'Sergent i caporal',
-        'Agent i caporal',
-      ],
-      correct: 0,
-    },
+  "id": "elprat-561",
+  "text": "Segons la Llei 16/1991, l'escala superior de les policies locals comprèn les categories de:",
+  "options": [
+    "Superintendent, intendent major i intendent",
+    "Inspector i sotsinspector",
+    "Sergent i caporal",
+    "Agent i caporal"
+  ],
+  "correct": 0,
+  "reference": "Art. 24.1.a Llei 16/1991"
+},
     {
       id: 'elprat-562',
       text: 'Segons la Llei 16/1991, a quina escala pertany la categoria de sergent?',
@@ -6135,16 +6139,17 @@ const elprat: TestTopic = {
       correct: 0,
     },
     {
-      id: 'elprat-563',
-      text: 'Segons la Llei 16/1991, les faltes molt greus prescriuen al cap de:',
-      options: [
-        '6 mesos',
-        '1 any',
-        '3 anys',
-        '2 anys',
-      ],
-      correct: 2,
-    },
+  "id": "elprat-563",
+  "text": "Segons la Llei 16/1991, les faltes molt greus prescriuen al cap de:",
+  "options": [
+    "6 mesos",
+    "1 any",
+    "6 anys",
+    "2 anys"
+  ],
+  "correct": 2,
+  "reference": "Art. 58.2 Llei 16/1991"
+},
     {
       id: 'elprat-564',
       text: 'Segons la Llei 16/1991, les sancions per faltes molt greus prescriuen al cap de:',

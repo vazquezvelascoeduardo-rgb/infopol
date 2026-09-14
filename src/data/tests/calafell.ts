@@ -366,16 +366,17 @@ const calafell: TestTopic = {
       correct: 1,
     },
     {
-      id: 'calafell-33',
-      text: 'Quina categoria NO pertany a l\'escala superior segons la Llei 16/1991?',
-      options: [
-        'Intendent major',
-        'Intendent',
-        'Sots-intendent',
-        'Inspector',
-      ],
-      correct: 3,
-    },
+  "id": "calafell-33",
+  "text": "Quina categoria NO pertany a l'escala superior segons la Llei 16/1991?",
+  "options": [
+    "Intendent major",
+    "Intendent",
+    "Superintendent",
+    "Inspector"
+  ],
+  "correct": 3,
+  "reference": "Art. 24.1 Llei 16/1991"
+},
     {
       id: 'calafell-34',
       text: 'Segons la Llei 16/1991, les faltes comeses pels policies locals poden ser:',

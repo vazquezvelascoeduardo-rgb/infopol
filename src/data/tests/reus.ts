@@ -8895,17 +8895,18 @@ const topic: TestTopic = {
       reference: 'Reus 2024',
     },
     {
-      id: 'reus-741',
-      text: 'Quantes comunitats autònomes té Espanya?',
-      options: [
-        '19',
-        '20',
-        '18',
-        '17',
-      ],
-      correct: 0,
-      reference: 'Reus 2024',
-    },
+  "id": "reus-741",
+  "text": "Quantes comunitats autònomes té Espanya?",
+  "options": [
+    "19",
+    "20",
+    "18",
+    "17"
+  ],
+  "correct": 3,
+  "reference": "Organització territorial — La Moncloa",
+  "explanation": "Espanya té 17 comunitats autònomes. Ceuta i Melilla són dues ciutats autònomes, no dues comunitats addicionals."
+},
     {
       id: 'reus-742',
       text: 'A quina localitat es van celebrar els premis Max de 2024?',

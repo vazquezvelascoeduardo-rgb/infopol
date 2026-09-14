@@ -33,41 +33,41 @@ const lpc: TestTopic = {
       correct: 0,
     },
     {
-      id: 'lpc-3',
-      text: 'Segons la Llei 16/1991, les policies locals són:',
-      options: [
-        'Òrgans dependents de la Generalitat amb funcions delegades als municipis.',
-        'Cossos auxiliars del Cos Nacional de Policia en matèria local.',
-        'Instituts armats de naturalesa civil amb estructura jeràrquica.',
-        'Cossos administratius sense estructura armada ni jeràrquica formal.',
-      ],
-      correct: 2,
-      reference: 'Art. 1',
-    },
+  "id": "lpc-3",
+  "text": "Segons la Llei 16/1991, les policies locals són:",
+  "options": [
+    "Òrgans dependents de la Generalitat amb funcions delegades als municipis.",
+    "Cossos auxiliars del Cos Nacional de Policia en matèria local.",
+    "Instituts armats de naturalesa civil amb estructura jeràrquica.",
+    "Cossos administratius sense estructura armada ni jeràrquica formal."
+  ],
+  "correct": 2,
+  "reference": "Art. 2.1 Llei 16/1991"
+},
     {
-      id: 'lpc-4',
-      text: "L'àmbit territorial d'actuació de les policies locals és:",
-      options: [
-        'Tot el territori de Catalunya, amb caràcter general i sense límits.',
-        'La comarca corresponent al municipi i els seus límits administratius.',
-        "El municipi i la província on s'integra el cos local respectiu.",
-        "El terme del municipi, amb les excepcions que la llei estableix.",
-      ],
-      correct: 3,
-      reference: 'Art. 11',
-    },
+  "id": "lpc-4",
+  "text": "L'àmbit territorial d'actuació de les policies locals és:",
+  "options": [
+    "Tot el territori de Catalunya, amb caràcter general i sense límits.",
+    "La comarca corresponent al municipi i els seus límits administratius.",
+    "El municipi i la província on s'integra el cos local respectiu.",
+    "El terme del municipi, amb les excepcions que la llei estableix."
+  ],
+  "correct": 3,
+  "reference": "Art. 5 Llei 16/1991"
+},
     {
-      id: 'lpc-5',
-      text: 'Quina afirmació sobre les policies locals és CORRECTA?',
-      options: [
-        "Són cossos armats que depenen jeràrquicament de l'alcalde.",
-        'Són cossos sense estructura jeràrquica ni dependència política.',
-        'Depenen de la Direcció General de la Policia de la Generalitat.',
-        "Tenen el seu màxim comandament en el conseller d'Interior.",
-      ],
-      correct: 0,
-      reference: 'Art. 1 i 9',
-    },
+  "id": "lpc-5",
+  "text": "Quina afirmació sobre les policies locals és CORRECTA?",
+  "options": [
+    "Són cossos armats que depenen jeràrquicament de l'alcalde.",
+    "Són cossos sense estructura jeràrquica ni dependència política.",
+    "Depenen de la Direcció General de la Policia de la Generalitat.",
+    "Tenen el seu màxim comandament en el conseller d'Interior."
+  ],
+  "correct": 0,
+  "reference": "Arts. 2 i 4 Llei 16/1991"
+},
     {
       id: 'lpc-6',
       text: "Quina d'aquestes NO és una funció de la policia local segons l'article 11?",
@@ -81,17 +81,17 @@ const lpc: TestTopic = {
       reference: 'Art. 11',
     },
     {
-      id: 'lpc-7',
-      text: 'Quina de les següents és una funció pròpia de la policia local?',
-      options: [
-        'La direcció dels expedients sancionadors per faltes administratives estatals.',
-        "La intervenció en conflictes laborals d'àmbit empresarial privat.",
-        'Vetllar pel compliment de les ordenances, els bans i les disposicions municipals.',
-        "La regulació íntegra del trànsit en vies interurbanes i autovies de l'Estat.",
-      ],
-      correct: 2,
-      reference: 'Art. 11.a)',
-    },
+  "id": "lpc-7",
+  "text": "Quina de les següents és una funció pròpia de la policia local?",
+  "options": [
+    "La direcció dels expedients sancionadors per faltes administratives estatals.",
+    "La intervenció en conflictes laborals d'àmbit empresarial privat.",
+    "Vetllar pel compliment de les ordenances, els bans i les disposicions municipals.",
+    "La regulació íntegra del trànsit en vies interurbanes i autovies de l'Estat."
+  ],
+  "correct": 2,
+  "reference": "Art. 11.d Llei 16/1991"
+},
     {
       id: 'lpc-8',
       text: 'La policia local pot exercir funcions de policia judicial:',
@@ -105,41 +105,41 @@ const lpc: TestTopic = {
       reference: 'Art. 11',
     },
     {
-      id: 'lpc-9',
-      text: 'La policia local pot intervenir en conflictes privats:',
-      options: [
-        'En cap cas, atès que es limiten a infraccions administratives.',
-        'De forma habitual i sense necessitat de requeriment dels interessats.',
-        'Únicament en presència del jutge instructor competent en la matèria.',
-        "Quan sigui requerida i per a evitar danys a persones o béns.",
-      ],
-      correct: 3,
-      reference: 'Art. 11',
-    },
+  "id": "lpc-9",
+  "text": "La policia local pot intervenir en conflictes privats:",
+  "options": [
+    "En cap cas, atès que es limiten a infraccions administratives.",
+    "De forma habitual i sense necessitat de requeriment dels interessats.",
+    "Únicament en presència del jutge instructor competent en la matèria.",
+    "Quan sigui requerida per cooperar en la resolució del conflicte."
+  ],
+  "correct": 3,
+  "reference": "Art. 11.h Llei 16/1991"
+},
     {
-      id: 'lpc-10',
-      text: 'La policia local té la condició de policia administrativa per:',
-      options: [
-        "Vetllar pel compliment del Codi penal i de la legislació processal.",
-        "La regulació íntegra del trànsit en autovies i autopistes interurbanes.",
-        "La intervenció en conflictes privats sense requeriment dels interessats.",
-        "Vetllar pel compliment de les ordenances, bans i disposicions municipals.",
-      ],
-      correct: 3,
-      reference: 'Art. 11.a)',
-    },
+  "id": "lpc-10",
+  "text": "La policia local té la condició de policia administrativa per:",
+  "options": [
+    "Vetllar pel compliment del Codi penal i de la legislació processal.",
+    "La regulació íntegra del trànsit en autovies i autopistes interurbanes.",
+    "La intervenció en conflictes privats sense requeriment dels interessats.",
+    "Vetllar pel compliment de les ordenances, bans i disposicions municipals."
+  ],
+  "correct": 3,
+  "reference": "Art. 11.d Llei 16/1991"
+},
     {
-      id: 'lpc-11',
-      text: 'Indica una funció exclusiva de la policia local:',
-      options: [
-        'La regulació del trànsit a les vies de comunicació interurbanes.',
-        'La direcció dels expedients sancionadors estatals en matèria penal.',
-        "Instruir atestats per accidents de circulació al casc urbà.",
-        "La inspecció de mercaderies en àmbit duaner i fronterer.",
-      ],
-      correct: 2,
-      reference: 'Art. 11.f)',
-    },
+  "id": "lpc-11",
+  "text": "Quina funció atribueix l'article 11.c de la Llei 16/1991 a la policia local?",
+  "options": [
+    "La regulació del trànsit a les vies de comunicació interurbanes.",
+    "La direcció dels expedients sancionadors estatals en matèria penal.",
+    "Instruir atestats per accidents de circulació al casc urbà.",
+    "La inspecció de mercaderies en àmbit duaner i fronterer."
+  ],
+  "correct": 2,
+  "reference": "Art. 11.c Llei 16/1991"
+},
     {
       id: 'lpc-12',
       text: 'La policia local col·labora amb les FCSE en:',
@@ -153,17 +153,17 @@ const lpc: TestTopic = {
       reference: 'Art. 11',
     },
     {
-      id: 'lpc-13',
-      text: 'La policia local protegeix:',
-      options: [
-        "Únicament les autoritats de l'Estat designades pel Govern central.",
-        "Únicament els representants polítics de la Generalitat al territori.",
-        "Les autoritats de les corporacions locals i els edificis municipals.",
-        "Únicament els ciutadans que ho sol·licitin per escrit motivat.",
-      ],
-      correct: 2,
-      reference: 'Art. 11.b)',
-    },
+  "id": "lpc-13",
+  "text": "La policia local protegeix:",
+  "options": [
+    "Únicament les autoritats de l'Estat designades pel Govern central.",
+    "Únicament els representants polítics de la Generalitat al territori.",
+    "Les autoritats de les corporacions locals i els edificis municipals.",
+    "Únicament els ciutadans que ho sol·licitin per escrit motivat."
+  ],
+  "correct": 2,
+  "reference": "Art. 11.a Llei 16/1991"
+},
     {
       id: 'lpc-14',
       text: 'En matèria de protecció civil, la policia local:',
@@ -177,41 +177,41 @@ const lpc: TestTopic = {
       reference: 'Art. 11.j)',
     },
     {
-      id: 'lpc-15',
-      text: 'La vigilància d\'espais públics municipals correspon a:',
-      options: [
-        "El Cos Nacional de Policia en exclusiva i sense excepcions.",
-        "Els Mossos d'Esquadra com a policia ordinària de Catalunya.",
-        "Les policies locals dels municipis, com a funció pròpia.",
-        "Les empreses privades de seguretat contractades per ajuntaments.",
-      ],
-      correct: 2,
-      reference: 'Art. 11.h)',
-    },
+  "id": "lpc-15",
+  "text": "La vigilància d'espais públics municipals correspon a:",
+  "options": [
+    "El Cos Nacional de Policia en exclusiva i sense excepcions.",
+    "Els Mossos d'Esquadra com a policia ordinària de Catalunya.",
+    "Les policies locals dels municipis, com a funció pròpia.",
+    "Les empreses privades de seguretat contractades per ajuntaments."
+  ],
+  "correct": 2,
+  "reference": "Art. 11.i Llei 16/1991"
+},
     {
-      id: 'lpc-16',
-      text: 'El comandament superior de la policia local correspon a:',
-      options: [
-        'El conseller competent en matèria de seguretat pública.',
-        "L'alcalde o l'alcaldessa, que pot delegar les seves atribucions.",
-        "El cap del cos, designat pel Ple de l'ajuntament municipal.",
-        "El director general de la policia de la Generalitat de Catalunya.",
-      ],
-      correct: 1,
-      reference: 'Art. 9',
-    },
+  "id": "lpc-16",
+  "text": "El comandament superior de la policia local correspon a:",
+  "options": [
+    "El conseller competent en matèria de seguretat pública.",
+    "L'alcalde o l'alcaldessa, que pot delegar les seves atribucions.",
+    "El cap del cos, designat pel Ple de l'ajuntament municipal.",
+    "El director general de la policia de la Generalitat de Catalunya."
+  ],
+  "correct": 1,
+  "reference": "Art. 4.2 Llei 16/1991"
+},
     {
-      id: 'lpc-17',
-      text: "L'alcalde pot delegar la direcció de la policia local en:",
-      options: [
-        "El regidor o regidora de l'àrea corresponent.",
-        "Únicament en el cap del cos amb la categoria més alta.",
-        "Qualsevol funcionari de l'ajuntament del municipi corresponent.",
-        "Únicament en un membre del Govern autonòmic respectiu.",
-      ],
-      correct: 0,
-      reference: 'Art. 9',
-    },
+  "id": "lpc-17",
+  "text": "L'alcalde pot delegar la direcció de la policia local en:",
+  "options": [
+    "El regidor o regidora de l'àrea corresponent.",
+    "Únicament en el cap del cos amb la categoria més alta.",
+    "Qualsevol funcionari de l'ajuntament del municipi corresponent.",
+    "Únicament en un membre del Govern autonòmic respectiu."
+  ],
+  "correct": 0,
+  "reference": "Art. 4.2 Llei 16/1991"
+},
     {
       id: 'lpc-18',
       text: "Els òrgans de comandament del cos de policia local s'estableixen segons:",
@@ -225,29 +225,29 @@ const lpc: TestTopic = {
       reference: 'Art. 24',
     },
     {
-      id: 'lpc-19',
-      text: 'La imposició de sancions per faltes molt greus a la policia local correspon a:',
-      options: [
-        "El cap del cos, mitjançant resolució administrativa motivada.",
-        "L'alcalde, en tots els casos llevat de la separació del servei.",
-        "El conseller d'Interior de la Generalitat de Catalunya.",
-        "La Junta de Govern Local del municipi corresponent.",
-      ],
-      correct: 1,
-      reference: 'Art. 53',
-    },
+  "id": "lpc-19",
+  "text": "La imposició de sancions per faltes molt greus a la policia local correspon a:",
+  "options": [
+    "El cap del cos, mitjançant resolució administrativa motivada.",
+    "L'alcalde, en tots els casos llevat de la separació del servei.",
+    "El conseller d'Interior de la Generalitat de Catalunya.",
+    "La Junta de Govern Local del municipi corresponent."
+  ],
+  "correct": 1,
+  "reference": "Art. 54.3 Llei 16/1991"
+},
     {
-      id: 'lpc-20',
-      text: "La separació del servei d'un agent de policia local correspon a:",
-      options: [
-        "L'alcalde, mitjançant decret motivat de l'Alcaldia municipal.",
-        "El cap del cos, prèvia incoació d'expedient disciplinari.",
-        "La Junta de Govern Local del municipi corresponent.",
-        "El Ple de l'ajuntament, prèvia incoació d'expedient disciplinari.",
-      ],
-      correct: 3,
-      reference: 'Art. 53',
-    },
+  "id": "lpc-20",
+  "text": "La separació del servei d'un agent de policia local correspon a:",
+  "options": [
+    "L'alcalde, mitjançant decret motivat de l'Alcaldia municipal.",
+    "El cap del cos, prèvia incoació d'expedient disciplinari.",
+    "La Junta de Govern Local del municipi corresponent.",
+    "El Ple de l'ajuntament, prèvia incoació d'expedient disciplinari."
+  ],
+  "correct": 3,
+  "reference": "Art. 54.3 Llei 16/1991"
+},
     {
       id: 'lpc-21',
       text: "L'estructura del cos de policia local s'organitza en:",
@@ -303,65 +303,66 @@ const lpc: TestTopic = {
       reference: 'Art. 24',
     },
     {
-      id: 'lpc-28',
-      text: 'La selecció dels agents de policia local es realitza mitjançant:',
-      options: [
-        "Sistema d'oposició lliure, amb les bases que estableix la normativa.",
-        "Concurs de mèrits exclusiu, sense proves selectives addicionals.",
-        "Designació directa del Ple municipal entre els funcionaris locals.",
-        "Decisió de l'alcalde a proposta del cap del cos local respectiu.",
-      ],
-      correct: 0,
-      reference: 'Art. 26',
-    },
+  "id": "lpc-28",
+  "text": "La selecció dels agents de policia local es realitza mitjançant:",
+  "options": [
+    "Oposició o concurs oposició, en convocatòria lliure.",
+    "Concurs de mèrits exclusiu, sense proves selectives addicionals.",
+    "Designació directa del Ple municipal entre els funcionaris locals.",
+    "Decisió de l'alcalde a proposta del cap del cos local respectiu."
+  ],
+  "correct": 0,
+  "reference": "Art. 29.1 Llei 16/1991",
+  "explanation": "La llei admet tots dos sistemes en convocatòria lliure; no limita l'accés a l'oposició."
+},
     {
-      id: 'lpc-29',
-      text: 'La promoció interna a les escales superiors es realitza mitjançant:',
-      options: [
-        'Concurs de mèrits exclusiu entre membres del cos local.',
-        "Designació directa del cap del cos amb informe motivat de l'alcalde.",
-        "Sistema de concurs-oposició restringit als membres del cos.",
-        "Antiguitat acreditada en el cos amb un mínim de cinc anys.",
-      ],
-      correct: 2,
-      reference: 'Art. 27',
-    },
+  "id": "lpc-29",
+  "text": "Segons l'article 30.1 de la Llei 16/1991, l'accés a caporal, sergent i sotsinspector es realitza mitjançant:",
+  "options": [
+    "Concurs de mèrits exclusiu entre membres del cos local.",
+    "Designació directa del cap del cos amb informe motivat de l'alcalde.",
+    "Promoció interna, per concurs oposició, amb els requisits d'antiguitat, titulació i formació exigits.",
+    "Antiguitat acreditada en el cos amb un mínim de cinc anys."
+  ],
+  "correct": 2,
+  "reference": "Art. 30.1 Llei 16/1991"
+},
     {
-      id: 'lpc-30',
-      text: "L'edat mínima per accedir a la categoria d'agent de policia local és:",
-      options: [
-        '16 anys, amb autorització paterna preceptiva i acreditada.',
-        '18 anys, complerts en la data de finalització del termini.',
-        '21 anys, com a edat de plena capacitat civil i laboral.',
-        '25 anys, atesa la responsabilitat especial del càrrec.',
-      ],
-      correct: 1,
-      reference: 'Art. 26',
-    },
+  "id": "lpc-30",
+  "text": "Segons l’article 29.1.b de la Llei 16/1991, quin requisit d’edat s’exigeix per accedir a agent?",
+  "options": [
+    "16 anys, amb autorització paterna preceptiva i acreditada.",
+    "Tenir l’edat compresa entre el mínim i el màxim fixats pel reglament del cos o la convocatòria, abans que finalitzi el termini de sol·licituds.",
+    "21 anys, com a edat de plena capacitat civil i laboral.",
+    "25 anys, atesa la responsabilitat especial del càrrec."
+  ],
+  "correct": 1,
+  "reference": "Art. 29.1.b Llei 16/1991"
+},
     {
-      id: 'lpc-31',
-      text: 'Els policies locals tenen reconegut el dret a:',
-      options: [
-        'La vaga, en igualtat amb la resta de funcionaris públics.',
-        "La sindicació il·limitada, amb idèntic règim que el sector privat.",
-        "La negociació col·lectiva en matèries de seguretat operativa.",
-        "La sindicació, amb les limitacions que estableix la normativa.",
-      ],
-      correct: 3,
-      reference: 'Art. 33',
-    },
+  "id": "lpc-31",
+  "text": "Els policies locals tenen reconegut el dret a:",
+  "options": [
+    "La vaga, en igualtat amb la resta de funcionaris públics.",
+    "La sindicació il·limitada, amb idèntic règim que el sector privat.",
+    "La negociació col·lectiva en matèries de seguretat operativa.",
+    "La sindicació, amb les limitacions que estableix la normativa."
+  ],
+  "correct": 3,
+  "reference": "Disposició addicional primera Llei 16/1991; LO 11/1985"
+},
     {
-      id: 'lpc-32',
-      text: 'Quina afirmació sobre el dret de vaga dels policies locals és CORRECTA?',
-      options: [
-        'No tenen reconegut el dret de vaga, en cap circumstància.',
-        'Tenen dret de vaga amb les mateixes condicions que altres funcionaris.',
-        'Poden exercir el dret de vaga prèvia comunicació al conseller.',
-        'Poden exercir el dret de vaga només en serveis no essencials.',
-      ],
-      correct: 0,
-      reference: 'Art. 33.5',
-    },
+  "id": "lpc-32",
+  "text": "Quina afirmació sobre el dret de vaga dels policies locals és CORRECTA?",
+  "options": [
+    "No tenen reconegut el dret de vaga, en cap circumstància.",
+    "Tenen dret de vaga amb les mateixes condicions que altres funcionaris.",
+    "Poden exercir el dret de vaga prèvia comunicació al conseller.",
+    "Poden exercir el dret de vaga només en serveis no essencials."
+  ],
+  "correct": 0,
+  "reference": "Art. 38 Llei 16/1991"
+},
     {
       id: 'lpc-33',
       text: 'Constitueix una falta molt greu, segons la Llei 16/1991:',
@@ -387,197 +388,202 @@ const lpc: TestTopic = {
       reference: 'Art. 48-49',
     },
     {
-      id: 'lpc-35',
-      text: "La negativa a sotmetre's a comprovacions tècniques d'alcoholèmia o drogues és:",
-      options: [
-        "Una falta lleu, sense més transcendència en el règim disciplinari.",
-        "Una falta greu, sancionada amb suspensió de funcions limitada.",
-        "Una falta molt greu, segons l'article 48 de la Llei 16/1991.",
-        "Una infracció administrativa ordinària sense sanció disciplinària.",
-      ],
-      correct: 2,
-      reference: 'Art. 48',
-    },
+  "id": "lpc-35",
+  "text": "Segons l'article 48.1.r de la Llei 16/1991, negar-se a les comprovacions tècniques pertinents en situació d'anormalitat física o psíquica evident és:",
+  "options": [
+    "Una falta lleu, sense més transcendència en el règim disciplinari.",
+    "Una falta greu, sancionada amb suspensió de funcions limitada.",
+    "Una falta molt greu, segons l'article 48 de la Llei 16/1991.",
+    "Una infracció administrativa ordinària sense sanció disciplinària."
+  ],
+  "correct": 2,
+  "reference": "Art. 48.1.r Llei 16/1991",
+  "explanation": "L'enunciat concreta la situació exigida per a la falta molt greu; l'article 49.j també regula una negativa dins les faltes greus."
+},
     {
-      id: 'lpc-36',
-      text: 'Constitueix una falta greu, segons la Llei 16/1991:',
-      options: [
-        "L'incompliment de les normes sobre incompatibilitats del càrrec.",
-        "La separació del servei sense autorització per més de tres dies.",
-        "La participació en actes de violació greu dels drets fonamentals.",
-        "Qualsevol incorrecció en el tracte amb els ciutadans afectats.",
-      ],
-      correct: 0,
-      reference: 'Art. 49',
-    },
+  "id": "lpc-36",
+  "text": "Constitueix una falta greu, segons la Llei 16/1991:",
+  "options": [
+    "Originar enfrontaments durant el servei i prendre-hi part.",
+    "Abandonar el servei.",
+    "Incomplir les normes sobre incompatibilitats.",
+    "Participar en una vaga."
+  ],
+  "correct": 0,
+  "reference": "Art. 49.e Llei 16/1991",
+  "explanation": "L'incompliment de les incompatibilitats es classifica com a falta molt greu a l'article 48.1.n, no com a greu."
+},
     {
-      id: 'lpc-37',
-      text: 'La sanció corresponent a una falta molt greu pot consistir en:',
-      options: [
-        "Separació del servei o suspensió de funcions de tres a sis anys.",
-        "Suspensió de funcions per un període màxim d'un any natural.",
-        "Advertiment escrit i deducció proporcional de retribucions.",
-        "Multa econòmica entre 3.000 i 30.000 euros, segons la gravetat.",
-      ],
-      correct: 0,
-      reference: 'Art. 51',
-    },
+  "id": "lpc-37",
+  "text": "La sanció corresponent a una falta molt greu pot consistir en:",
+  "options": [
+    "Separació del servei o suspensió de funcions per més d'un any i menys de sis.",
+    "Suspensió de funcions per un període màxim d'un any natural.",
+    "Advertiment escrit i deducció proporcional de retribucions.",
+    "Multa econòmica entre 3.000 i 30.000 euros, segons la gravetat."
+  ],
+  "correct": 0,
+  "reference": "Art. 52.2 Llei 16/1991",
+  "explanation": "El període de suspensió previst no és de tres a sis anys: els dos límits legals són més d'un i menys de sis."
+},
     {
-      id: 'lpc-38',
-      text: 'La sanció corresponent a una falta greu pot consistir en:',
-      options: [
-        "Separació del servei en supòsits de reiteració acreditada.",
-        "Suspensió de funcions inferior a 15 dies amb pèrdua de retribució.",
-        "Advertiment verbal o multa entre 100 i 600 euros aproximadament.",
-        "Suspensió de funcions de més de 15 dies fins menys d'un any.",
-      ],
-      correct: 3,
-      reference: 'Art. 51',
-    },
+  "id": "lpc-38",
+  "text": "La sanció corresponent a una falta greu pot consistir en:",
+  "options": [
+    "Separació del servei en supòsits de reiteració acreditada.",
+    "Suspensió de funcions inferior a 15 dies amb pèrdua de retribució.",
+    "Advertiment verbal o multa entre 100 i 600 euros aproximadament.",
+    "Suspensió de funcions de més de 15 dies fins menys d'un any."
+  ],
+  "correct": 3,
+  "reference": "Art. 52.3 Llei 16/1991"
+},
     {
-      id: 'lpc-39',
-      text: 'La sanció corresponent a una falta lleu pot consistir en:',
-      options: [
-        "Suspensió de funcions fins a 15 dies o advertiment escrit.",
-        "Suspensió de funcions superior a 15 dies amb pèrdua de retribució.",
-        "Trasllat forçós a una destinació diferent del cos local.",
-        "Separació definitiva del servei amb pèrdua de drets adquirits.",
-      ],
-      correct: 0,
-      reference: 'Art. 51',
-    },
+  "id": "lpc-39",
+  "text": "La sanció corresponent a una falta lleu pot consistir en:",
+  "options": [
+    "Suspensió de funcions d'un a quinze dies o amonestació.",
+    "Suspensió de funcions de més de quinze dies i menys d'un any.",
+    "Multa de 3.000 euros.",
+    "Separació definitiva del servei."
+  ],
+  "correct": 0,
+  "reference": "Art. 52.4 Llei 16/1991"
+},
     {
-      id: 'lpc-40',
-      text: 'La prescripció de les faltes molt greus és de:',
-      options: [
-        '1 any des de la data de la comissió dels fets.',
-        '3 anys des de la data de la comissió dels fets.',
-        '6 anys des de la data de la notificació de la sanció.',
-        '5 anys des de la data en què hagi estat coneguda.',
-      ],
-      correct: 1,
-      reference: 'Art. 52',
-    },
+  "id": "lpc-40",
+  "text": "Segons l'article 58.2 de la Llei 16/1991, quan prescriuen les faltes molt greus?",
+  "options": [
+    "1 any des de la data de la comissió dels fets.",
+    "6 anys des de la comissió de la falta.",
+    "6 anys des de la data de la notificació de la sanció.",
+    "5 anys des de la data en què hagi estat coneguda."
+  ],
+  "correct": 1,
+  "reference": "Art. 58.2 Llei 16/1991",
+  "explanation": "L'article 58.2 estableix sis anys. No s'ha de confondre el termini d'aquesta llei amb el d'altres règims disciplinaris."
+},
     {
-      id: 'lpc-41',
-      text: 'La prescripció de les faltes greus és de:',
-      options: [
-        '6 mesos des de la comissió dels fets imputats.',
-        '1 mes des del coneixement de la conducta sancionable.',
-        '3 anys des de la data de la comissió dels fets.',
-        '2 anys des de la data de la comissió dels fets.',
-      ],
-      correct: 3,
-      reference: 'Art. 52',
-    },
+  "id": "lpc-41",
+  "text": "La prescripció de les faltes greus és de:",
+  "options": [
+    "6 mesos des de la comissió dels fets imputats.",
+    "1 mes des del coneixement de la conducta sancionable.",
+    "3 anys des de la data de la comissió dels fets.",
+    "2 anys des de la data de la comissió dels fets."
+  ],
+  "correct": 3,
+  "reference": "Art. 58.2 Llei 16/1991"
+},
     {
-      id: 'lpc-42',
-      text: 'La prescripció de les faltes lleus és de:',
-      options: [
-        '6 mesos des de la comissió dels fets sancionables.',
-        '1 mes des de la data de la comissió dels fets.',
-        '3 mesos des del coneixement de la falta comesa.',
-        '1 any des de la data de la comissió dels fets.',
-      ],
-      correct: 1,
-      reference: 'Art. 52',
-    },
+  "id": "lpc-42",
+  "text": "La prescripció de les faltes lleus és de:",
+  "options": [
+    "6 mesos des de la comissió dels fets sancionables.",
+    "1 mes des de la data de la comissió dels fets.",
+    "3 mesos des del coneixement de la falta comesa.",
+    "1 any des de la data de la comissió dels fets."
+  ],
+  "correct": 1,
+  "reference": "Art. 58.2 Llei 16/1991"
+},
     {
-      id: 'lpc-43',
-      text: 'La prescripció de les sancions imposades per faltes molt greus és de:',
-      options: [
-        '1 any des de la notificació formal de la sanció.',
-        '3 anys des de la fermesa de la resolució sancionadora.',
-        '6 anys des de la fermesa de la resolució sancionadora.',
-        '10 anys des de la data de la comissió dels fets.',
-      ],
-      correct: 2,
-      reference: 'Art. 52',
-    },
+  "id": "lpc-43",
+  "text": "La prescripció de les sancions imposades per faltes molt greus és de:",
+  "options": [
+    "1 any des de la notificació formal de la sanció.",
+    "3 anys des de la fermesa de la resolució sancionadora.",
+    "6 anys des de la notificació de la sanció.",
+    "10 anys des de la data de la comissió dels fets."
+  ],
+  "correct": 2,
+  "reference": "Art. 58.3 Llei 16/1991",
+  "explanation": "El text de l'article 58.3 situa l'inici del còmput en la notificació de la sanció."
+},
     {
-      id: 'lpc-44',
-      text: 'La prescripció de les sancions imposades per faltes greus és de:',
-      options: [
-        '1 any des de la fermesa de la resolució sancionadora.',
-        '3 anys des de la fermesa de la resolució sancionadora.',
-        '6 mesos des de la notificació formal de la sanció.',
-        '2 anys des de la fermesa de la resolució sancionadora.',
-      ],
-      correct: 3,
-      reference: 'Art. 52',
-    },
+  "id": "lpc-44",
+  "text": "La prescripció de les sancions imposades per faltes greus és de:",
+  "options": [
+    "1 any des de la fermesa de la resolució sancionadora.",
+    "3 anys des de la fermesa de la resolució sancionadora.",
+    "6 mesos des de la notificació formal de la sanció.",
+    "2 anys des de la notificació de la sanció."
+  ],
+  "correct": 3,
+  "reference": "Art. 58.3 Llei 16/1991"
+},
     {
-      id: 'lpc-45',
-      text: "L'òrgan consultiu superior en matèria de coordinació entre Mossos i policies locals és:",
-      options: [
-        'La Junta de Seguretat de Catalunya.',
-        'La Mesa de Coordinació Operativa territorial.',
-        'La Comissió de Policia de Catalunya.',
-        "El Comitè d'Ètica de la Policia de Catalunya.",
-      ],
-      correct: 2,
-      reference: 'Art. 4',
-    },
+  "id": "lpc-45",
+  "text": "L'òrgan consultiu superior en matèria de coordinació entre Mossos i policies locals és:",
+  "options": [
+    "La Junta de Seguretat de Catalunya.",
+    "La Mesa de Coordinació Operativa territorial.",
+    "La Comissió de Policia de Catalunya.",
+    "El Comitè d'Ètica de la Policia de Catalunya."
+  ],
+  "correct": 2,
+  "reference": "Art. 8.1 Llei 4/2003"
+},
     {
-      id: 'lpc-46',
-      text: 'Quina és la funció principal de la Comissió de Policia de Catalunya?',
-      options: [
-        "Imposar sancions disciplinàries als membres dels cossos policials.",
-        "Òrgan consultiu superior en matèria de coordinació policial.",
-        "Coordinar les actuacions operatives dels Mossos d'Esquadra.",
-        "Aprovar els criteris ètics de l'actuació policial diària.",
-      ],
-      correct: 1,
-      reference: 'Art. 4',
-    },
+  "id": "lpc-46",
+  "text": "Quina és la funció principal de la Comissió de Policia de Catalunya?",
+  "options": [
+    "Imposar sancions disciplinàries als membres dels cossos policials.",
+    "Òrgan consultiu superior en matèria de coordinació policial.",
+    "Coordinar les actuacions operatives dels Mossos d'Esquadra.",
+    "Aprovar els criteris ètics de l'actuació policial diària."
+  ],
+  "correct": 1,
+  "reference": "Art. 8.1 Llei 4/2003"
+},
     {
-      id: 'lpc-47',
-      text: 'El cap del cos de policia local, en municipis amb diverses categories, és:',
-      options: [
-        "El regidor de Seguretat designat per l'alcalde corresponent.",
-        "El membre del cos amb la categoria més alta o el designat per l'alcalde.",
-        "El sergent més antic del cos local respectiu del municipi.",
-        "El funcionari designat directament pel conseller d'Interior.",
-      ],
-      correct: 1,
-      reference: 'Art. 9',
-    },
+  "id": "lpc-47",
+  "text": "El cap del cos de policia local, en municipis amb diverses categories, és:",
+  "options": [
+    "El regidor de Seguretat designat per l'alcalde corresponent.",
+    "El membre de major graduació; en cas d'igualtat, el nomenat per l'alcalde segons els principis legals.",
+    "El sergent més antic del cos local respectiu del municipi.",
+    "El funcionari designat directament pel conseller d'Interior."
+  ],
+  "correct": 1,
+  "reference": "Art. 26.2 Llei 16/1991"
+},
     {
-      id: 'lpc-48',
-      text: 'La Junta Local de Seguretat és presidida per:',
-      options: [
-        "L'alcalde o alcaldessa del municipi corresponent.",
-        "El cap del cos de policia local del municipi.",
-        "El delegat o delegada del Govern de la Generalitat.",
-        "El responsable de l'àrea de Seguretat Pública del Govern.",
-      ],
-      correct: 0,
-      reference: 'Art. 8',
-    },
+  "id": "lpc-48",
+  "text": "La Junta Local de Seguretat és presidida per:",
+  "options": [
+    "L'alcalde o alcaldessa del municipi corresponent.",
+    "El cap del cos de policia local del municipi.",
+    "El delegat o delegada del Govern de la Generalitat.",
+    "El responsable de l'àrea de Seguretat Pública del Govern."
+  ],
+  "correct": 0,
+  "reference": "Art. 9.2 Llei 4/2003"
+},
     {
-      id: 'lpc-49',
-      text: "La uniformitat de la policia local s'estableix per:",
-      options: [
-        "Decret de l'alcalde de cada municipi de Catalunya.",
-        "Reglament intern aprovat pel Ple de cada ajuntament.",
-        "Norma del Govern de la Generalitat amb caràcter homogeni.",
-        "Decisió de la Comissió de Policia en cada cas concret.",
-      ],
-      correct: 2,
-      reference: 'Art. 27 bis',
-    },
+  "id": "lpc-49",
+  "text": "Segons l’article 15.1.a de la Llei 16/1991, la coordinació de les policies locals pot incloure:",
+  "options": [
+    "Decret de l'alcalde de cada municipi de Catalunya.",
+    "Reglament intern aprovat pel Ple de cada ajuntament.",
+    "Promoure l’homogeneïtzació dels mitjans tècnics i la uniformitat dels altres elements comuns.",
+    "Decisió de la Comissió de Policia en cada cas concret."
+  ],
+  "correct": 2,
+  "reference": "Art. 15.1.a Llei 16/1991"
+},
     {
-      id: 'lpc-50',
-      text: 'Els acords entre municipis per a la prestació conjunta de serveis de policia local:',
-      options: [
-        "Estan prohibits per la Llei 16/1991 en tot cas i circumstància.",
-        "Es poden signar lliurement sense intervenció de la Generalitat.",
-        "Requereixen l'autorització expressa del Ministeri de l'Interior.",
-        "Es poden formalitzar amb l'aprovació del departament competent.",
-      ],
-      correct: 3,
-      reference: 'Art. 11 bis',
-    },
+  "id": "lpc-50",
+  "text": "Segons l’article 23.3 de la Llei 16/1991, en cas de necessitat els municipis limítrofs poden subscriure acords de cooperació entre les seves policies:",
+  "options": [
+    "Estan prohibits per la Llei 16/1991 en tot cas i circumstància.",
+    "Es poden signar lliurement sense intervenció de la Generalitat.",
+    "Requereixen l'autorització expressa del Ministeri de l'Interior.",
+    "Amb l’autorització prèvia del conseller o consellera del departament competent."
+  ],
+  "correct": 3,
+  "reference": "Art. 23.3 Llei 16/1991"
+},
     {
       id: 'lpc-51',
       text: 'Quina llei regula les policies locals de Catalunya?',
@@ -590,16 +596,18 @@ const lpc: TestTopic = {
       correct: 1,
     },
     {
-      id: 'lpc-52',
-      text: 'Quina llei va derogar la Llei 16/1991?',
-      options: [
-        'La Llei 8/1987',
-        'La Llei 4/2003',
-        'La Llei 10/1984, de Coordinació de les Policies Locals',
-        'La Llei Orgànica 2/1986',
-      ],
-      correct: 2,
-    },
+  "id": "lpc-52",
+  "text": "Quina llei anterior va quedar derogada per la Llei 16/1991?",
+  "options": [
+    "La Llei 8/1987",
+    "La Llei 4/2003",
+    "La Llei 10/1984, de Coordinació de les Policies Locals",
+    "La Llei Orgànica 2/1986"
+  ],
+  "correct": 2,
+  "reference": "Disposició derogatòria Llei 16/1991",
+  "explanation": "La Llei 16/1991 va derogar la Llei 10/1984, i no a l'inrevés."
+},
     {
       id: 'lpc-53',
       text: 'Segons la Llei 16/1991, l\'existència de la policia local en un municipi és:',
@@ -678,16 +686,18 @@ const lpc: TestTopic = {
       correct: 0,
     },
     {
-      id: 'lpc-60',
-      text: 'Quines categories integren l\'escala superior segons la Llei 16/1991?',
-      options: [
-        'Inspector i sots-inspector',
-        'Agent únicament',
-        'Sergent i caporal',
-        'Intendent major i intendent',
-      ],
-      correct: 3,
-    },
+  "id": "lpc-60",
+  "text": "Quines categories integren l'escala superior segons la Llei 16/1991?",
+  "options": [
+    "Inspector i sots-inspector",
+    "Agent únicament",
+    "Sergent i caporal",
+    "Superintendent, intendent major i intendent"
+  ],
+  "correct": 3,
+  "reference": "Art. 24.1.a Llei 16/1991",
+  "explanation": "L'escala superior inclou tres categories; no existeix la categoria de sotsintendent en aquesta enumeració."
+},
     {
       id: 'lpc-61',
       text: 'Quina categoria integra l\'escala executiva?',
@@ -722,27 +732,29 @@ const lpc: TestTopic = {
       correct: 0,
     },
     {
-      id: 'lpc-64',
-      text: 'Segons la Llei 16/1991, el cap del cos de policia local ha de pertànyer, com a mínim, a:',
-      options: [
-        'l\'escala intermèdia',
-        'l\'escala superior',
-        'l\'escala executiva',
-        'l\'escala bàsica',
-      ],
-      correct: 2,
-    },
+  "id": "lpc-64",
+  "text": "Segons l'article 26.2 de la Llei 16/1991, qui ocupa la prefectura del cos?",
+  "options": [
+    "Sempre un sergent, encara que hi hagi categories superiors.",
+    "Sempre un membre de l'escala superior.",
+    "El membre de major graduació de la plantilla; en cas d'igualtat, el nomena l'alcalde segons els principis legals.",
+    "La persona amb més antiguitat, independentment de la categoria."
+  ],
+  "correct": 2,
+  "reference": "Art. 26.2 Llei 16/1991"
+},
     {
-      id: 'lpc-65',
-      text: 'Quina categoria NO pertany a l\'escala superior?',
-      options: [
-        'Intendent major',
-        'Sots-intendent',
-        'Intendent',
-        'Inspector',
-      ],
-      correct: 3,
-    },
+  "id": "lpc-65",
+  "text": "Quina categoria NO pertany a l'escala superior?",
+  "options": [
+    "Intendent major",
+    "Superintendent",
+    "Intendent",
+    "Inspector"
+  ],
+  "correct": 3,
+  "reference": "Art. 24.1 Llei 16/1991"
+},
     {
       id: 'lpc-66',
       text: 'Segons la Llei 16/1991, els membres de les policies locals, en l\'exercici de les seves funcions, tenen la condició de:',
@@ -821,16 +833,18 @@ const lpc: TestTopic = {
       correct: 3,
     },
     {
-      id: 'lpc-73',
-      text: 'En quins articles tipifica la Llei 16/1991 les faltes (molt greus, greus i lleus)?',
-      options: [
-        'Articles 30 a 33',
-        'Articles 10 a 13',
-        'Articles 60 a 63',
-        'Articles 48 a 51',
-      ],
-      correct: 3,
-    },
+  "id": "lpc-73",
+  "text": "En quins articles tipifica la Llei 16/1991 les faltes (molt greus, greus i lleus)?",
+  "options": [
+    "Articles 30 a 33",
+    "Articles 10 a 13",
+    "Articles 60 a 63",
+    "Articles 48, 49 i 50"
+  ],
+  "correct": 3,
+  "reference": "Arts. 48-50 Llei 16/1991",
+  "explanation": "El 48 enumera les molt greus, el 49 les greus i el 50 les lleus. El 51 regula altres formes de responsabilitat."
+},
     {
       id: 'lpc-74',
       text: 'Segons la Llei 16/1991, les faltes molt greus prescriuen al cap de:',
@@ -1085,16 +1099,17 @@ const lpc: TestTopic = {
       correct: 2,
     },
     {
-      id: 'lpc-97',
-      text: 'Segons la Llei 16/1991, qui presideix la junta local de seguretat en l\'àmbit municipal?',
-      options: [
-        'L\'alcalde',
-        'El cap del cos de policia local',
-        'El delegat del Govern',
-        'El conseller d\'Interior',
-      ],
-      correct: 0,
-    },
+  "id": "lpc-97",
+  "text": "Segons la Llei 4/2003, qui presideix la junta local de seguretat en l’àmbit municipal?",
+  "options": [
+    "L'alcalde",
+    "El cap del cos de policia local",
+    "El delegat del Govern",
+    "El conseller d'Interior"
+  ],
+  "correct": 0,
+  "reference": "Art. 9.2 Llei 4/2003"
+},
   ],
 };
 
