@@ -159,12 +159,12 @@ const actualitat: TestTopic = {
     },
     {
       id: 'actualitat-14',
-      text: 'Qui és l\'actual Primera Vicepresidenta del Govern d\'Espanya (des de setembre de 2024, després de la marxa de Calviño al BEI)?',
+      text: 'Qui és l\'actual vicepresident primer del Govern d\'Espanya (des de la remodelació de març de 2026)?',
       options: [
+        'Carlos Cuerpo Caballero',
         'María Jesús Montero Cuadrado',
         'Yolanda Díaz Pérez',
-        'Nadia Calviño Santamaría',
-        'Teresa Ribera Rodríguez',
+        'Sara Aagesen Muñoz',
       ],
       correct: 0,
     },
@@ -324,14 +324,14 @@ const actualitat: TestTopic = {
     },
     {
       id: 'actualitat-29',
-      text: 'Qui és l\'actual Primer Ministre del Regne Unit?',
+      text: 'Qui és l\'actual primer ministre del Regne Unit (des del juliol de 2026)?',
       options: [
         'Rishi Sunak',
         'Keir Starmer',
+        'Andy Burnham',
         'Boris Johnson',
-        'Liz Truss',
       ],
-      correct: 1,
+      correct: 2,
     },
     {
       id: 'actualitat-30',
