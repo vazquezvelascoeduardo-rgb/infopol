@@ -33,288 +33,690 @@ export type AwardSection = {
   subsections: AwardSubsection[];
 };
 
-export const PREMIS_UPDATED_AT = '2026-05-15';
+export const PREMIS_UPDATED_AT = '2026-09-14';
 
+// Generat per scripts/directoris/publica.mjs a partir de dades.mjs.
+// No ho editis a mà: canvia dades.mjs i torna'l a executar.
 export const PREMIS: AwardSection[] = [
   {
-    id: 'maig-2026-premis',
-    title: 'Maig 2026',
-    shortLabel: "Mai '26",
-    icon: '📅',
-    accent: 'from-emerald-500 to-teal-700',
-    subsections: [
+    "id": "nobel-2025",
+    "title": "Premis Nobel 2025",
+    "shortLabel": "Nobel",
+    "icon": "🥇",
+    "accent": "from-amber-400 to-yellow-600",
+    "subsections": [
       {
-        title: "Premis Princesa d'Astúries 2026 — categories anunciades",
-        icon: '🏆',
-        entries: [
+        "title": "Els sis Nobel de 2025 (els de 2026 s'anuncien a l'octubre)",
+        "icon": "🥇",
+        "entries": [
           {
-            flag: '🇺🇸',
-            position: "PREMI PRINCESA D'ASTÚRIES DE LES ARTS 2026",
-            name: 'Patti Smith',
-            detail: "Cantant, compositora, artista visual i escriptora nord-americana, icona del rock i la poesia. La Fundació en destaca la trajectòria llarga i poliforme com a referent de l'art contemporani.",
-            recent: true,
+            "flag": "🇻🇪",
+            "position": "Nobel de la Pau",
+            "name": "María Corina Machado",
+            "detail": "Líder opositora veneçolana, per la lluita pels drets democràtics a Veneçuela"
           },
           {
-            flag: '🇯🇵',
-            position: "PREMI PRINCESA D'ASTÚRIES DE COMUNICACIÓ I HUMANITATS 2026",
-            name: 'Studio Ghibli',
-            detail: "Estudi d'animació japonès fundat el 1985 per Hayao Miyazaki, Isao Takahata i Toshio Suzuki. +20 llargmetratges com 'El viatge de Chihiro' (Oscar 2003) o 'El noi i la garsa' (2024). Reconegut per la qualitat artística i la influència cultural global.",
-            recent: true,
+            "flag": "🇭🇺",
+            "position": "Nobel de Literatura",
+            "name": "László Krasznahorkai",
+            "detail": "Escriptor hongarès"
           },
           {
-            flag: '🏛️',
-            position: "PREMIS PRINCESA D'ASTÚRIES · ALTRES CATEGORIES",
-            name: 'Pendents d\'anunciar fins juny 2026',
-            detail: 'Resten per anunciar: Lletres, Ciències Socials, Investigació Científica i Tècnica, Cooperació Internacional, Concòrdia i Esports. Gala oficial el 24 octubre 2026 a Oviedo.',
+            "flag": "🔬",
+            "position": "Nobel de Medicina",
+            "name": "Mary E. Brunkow, Fred Ramsdell i Shimon Sakaguchi",
+            "detail": "Per la tolerància immunitària perifèrica (cèl·lules T reguladores)"
           },
-        ],
-      },
-    ],
+          {
+            "flag": "⚛️",
+            "position": "Nobel de Física",
+            "name": "John Clarke, Michel H. Devoret i John M. Martinis",
+            "detail": "Per l'efecte túnel quàntic macroscòpic en circuits elèctrics"
+          },
+          {
+            "flag": "🧪",
+            "position": "Nobel de Química",
+            "name": "Susumu Kitagawa, Richard Robson i Omar M. Yaghi",
+            "detail": "Per les estructures metal·lorgàniques (MOF)"
+          },
+          {
+            "flag": "💶",
+            "position": "Nobel d'Economia",
+            "name": "Joel Mokyr, Philippe Aghion i Peter Howitt",
+            "detail": "Per explicar el creixement econòmic impulsat per la innovació"
+          }
+        ]
+      }
+    ]
   },
-
   {
-    id: 'marc-2026-premis',
-    title: 'Març 2026',
-    shortLabel: "Mar '26",
-    icon: '📅',
-    accent: 'from-rose-500 to-orange-600',
-    subsections: [
+    "id": "princesa-asturies",
+    "title": "Premis Princesa d'Astúries",
+    "shortLabel": "Princesa d'Astúries",
+    "icon": "👑",
+    "accent": "from-blue-500 to-indigo-700",
+    "subsections": [
       {
-        title: 'Cinema · 98a Edició dels Oscars',
-        icon: '🎬',
-        entries: [
+        "title": "Edició 2026 · lliurament a Oviedo el 23 d'octubre",
+        "icon": "👑",
+        "entries": [
           {
-            flag: '🇺🇸',
-            position: 'OSCARS 2026 · GALA 15 MARÇ · DOLBY THEATRE',
-            name: 'Millor pel·lícula: One Battle After Another (6 estatuetes)',
-            detail: 'Direcció: Paul Thomas Anderson. Pel·lícula més premiada de la nit.',
-            recent: true,
+            "flag": "🇬🇧",
+            "position": "Lletres",
+            "name": "Julian Barnes",
+            "detail": "Escriptor britànic"
           },
           {
-            flag: '🇺🇸',
-            position: 'OSCAR · MILLOR ACTOR',
-            name: 'Michael B. Jordan — Sinners',
-            detail: 'Película dirigida per Ryan Coogler.',
+            "flag": "🇺🇸",
+            "position": "Arts",
+            "name": "Patti Smith",
+            "detail": "Cantant, poeta i escriptora"
           },
           {
-            flag: '🇮🇪',
-            position: 'OSCAR · MILLOR ACTRIU',
-            name: 'Jessie Buckley — Hamnet',
-            detail: 'Adaptació de la novel·la de Maggie O\'Farrell.',
+            "flag": "🇯🇵",
+            "position": "Comunicació i Humanitats",
+            "name": "Studio Ghibli",
+            "detail": "Estudi d'animació japonès"
           },
           {
-            flag: '🇺🇸',
-            position: 'OSCAR · MILLOR ACTOR DE REPARTIMENT',
-            name: 'Sean Penn',
+            "flag": "🇬🇧",
+            "position": "Ciències Socials",
+            "name": "Timothy Garton Ash",
+            "detail": "Historiador britànic"
           },
           {
-            flag: '🇳🇴',
-            position: 'OSCAR · MILLOR PEL·LÍCULA INTERNACIONAL',
-            name: 'Sentimental Value (Noruega)',
-            detail: 'Primera pel·lícula noruega que guanya aquesta categoria. Direcció: Joachim Trier.',
-            recent: true,
+            "flag": "🔬",
+            "position": "Investigació Científica i Tècnica",
+            "name": "David Klenerman, Shankar Balasubramanian i Pascal Mayer",
+            "detail": "Per la seqüenciació de nova generació de l'ADN"
           },
-        ],
+          {
+            "flag": "🇳🇴",
+            "position": "Cooperació Internacional",
+            "name": "Reserva Mundial de Llavors de Svalbard"
+          },
+          {
+            "flag": "🇦🇷",
+            "position": "Esports",
+            "name": "Leo Messi"
+          },
+          {
+            "flag": "🚀",
+            "position": "Concòrdia",
+            "name": "Christina Koch",
+            "detail": "Astronauta de la NASA (missió Artemis II)"
+          }
+        ]
       },
-    ],
+      {
+        "title": "Edició 2025",
+        "icon": "📜",
+        "compact": true,
+        "entries": [
+          {
+            "flag": "🇪🇸",
+            "position": "Lletres",
+            "name": "Eduardo Mendoza"
+          },
+          {
+            "flag": "🇲🇽",
+            "position": "Arts",
+            "name": "Graciela Iturbide",
+            "detail": "Fotògrafa"
+          },
+          {
+            "flag": "🇩🇪",
+            "position": "Comunicació i Humanitats",
+            "name": "Byung-Chul Han",
+            "detail": "Filòsof"
+          },
+          {
+            "flag": "🇺🇸",
+            "position": "Ciències Socials",
+            "name": "Douglas Massey"
+          },
+          {
+            "flag": "🧬",
+            "position": "Investigació Científica i Tècnica",
+            "name": "Mary-Claire King"
+          },
+          {
+            "flag": "🇮🇹",
+            "position": "Cooperació Internacional",
+            "name": "Mario Draghi"
+          },
+          {
+            "flag": "🇺🇸",
+            "position": "Esports",
+            "name": "Serena Williams"
+          },
+          {
+            "flag": "🇲🇽",
+            "position": "Concòrdia",
+            "name": "Museu Nacional d'Antropologia de Mèxic"
+          }
+        ]
+      }
+    ]
   },
-
   {
-    id: 'febrer-2026-premis',
-    title: 'Febrer 2026',
-    shortLabel: "Feb '26",
-    icon: '📅',
-    accent: 'from-cyan-500 to-blue-700',
-    subsections: [
+    "id": "cinema",
+    "title": "Cinema",
+    "shortLabel": "Cinema",
+    "icon": "🎬",
+    "accent": "from-rose-500 to-red-700",
+    "subsections": [
       {
-        title: 'Cinema · 40a Edició Premis Goya',
-        icon: '🎬',
-        entries: [
+        "title": "Oscars 2026 (98a edició, 15 de març)",
+        "icon": "🏆",
+        "entries": [
           {
-            flag: '🇪🇸',
-            position: 'PREMIS GOYA 2026 · GALA 28 FEBRER · BARCELONA',
-            name: 'Millor pel·lícula: Los Domingos (Alauda Ruiz de Azúa)',
-            detail: 'Triplet històric: Millor pel·lícula + Millor direcció + Millor guió original, tots per a Alauda Ruiz de Azúa.',
-            recent: true,
+            "flag": "🎬",
+            "position": "Millor pel·lícula",
+            "name": "One Battle After Another",
+            "detail": "La gran guanyadora, amb sis Oscars"
           },
           {
-            flag: '🇪🇸',
-            position: 'GOYA · MILLOR ACTRIU PROTAGONISTA',
-            name: 'Patricia López Arnaiz — Los Domingos',
+            "flag": "🎬",
+            "position": "Millor direcció",
+            "name": "Paul Thomas Anderson",
+            "detail": "One Battle After Another"
           },
           {
-            flag: '🇪🇸',
-            position: 'GOYA · MILLOR ACTOR PROTAGONISTA',
-            name: 'José Ramón Soroiz — Maspalomas',
+            "flag": "🎬",
+            "position": "Millor actor",
+            "name": "Michael B. Jordan",
+            "detail": "Sinners"
           },
           {
-            flag: '🇪🇸',
-            position: 'GOYA · MÉS PREMIADA EN CATEGORIES TÈCNIQUES',
-            name: 'Sirât (Oliver Laxe) — 6 estatuetes',
-            detail: 'Domini absolut a fotografia, muntatge, so i altres categories tècniques.',
+            "flag": "🎬",
+            "position": "Millor actriu",
+            "name": "Jessie Buckley",
+            "detail": "Hamnet"
           },
           {
-            flag: '🇪🇸',
-            position: 'GOYA D\'HONOR',
-            name: 'Gonzalo Suárez',
-            detail: 'Trajectòria del director, escriptor i guionista asturià.',
+            "flag": "🎬",
+            "position": "Millor actor secundari",
+            "name": "Sean Penn",
+            "detail": "One Battle After Another"
           },
           {
-            flag: '🇺🇸',
-            position: 'GOYA INTERNACIONAL',
-            name: 'Susan Sarandon',
+            "flag": "🎬",
+            "position": "Millor actriu secundària",
+            "name": "Amy Madigan",
+            "detail": "Weapons"
           },
-        ],
+          {
+            "flag": "🇳🇴",
+            "position": "Millor pel·lícula internacional",
+            "name": "Sentimental Value",
+            "detail": "Noruega"
+          },
+          {
+            "flag": "🎬",
+            "position": "Millor pel·lícula d'animació",
+            "name": "KPop Demon Hunters"
+          }
+        ]
       },
-    ],
+      {
+        "title": "Goya 2026 (40a edició)",
+        "icon": "🇪🇸",
+        "entries": [
+          {
+            "flag": "🎬",
+            "position": "Millor pel·lícula",
+            "name": "Los domingos",
+            "detail": "D'Alauda Ruiz de Azúa; també guió original i actriu"
+          },
+          {
+            "flag": "🎬",
+            "position": "Millor direcció",
+            "name": "Alauda Ruiz de Azúa",
+            "detail": "Los domingos"
+          },
+          {
+            "flag": "🎬",
+            "position": "Millor actor protagonista",
+            "name": "José Ramón Soroiz",
+            "detail": "Maspalomas"
+          },
+          {
+            "flag": "🎬",
+            "position": "Millor actriu protagonista",
+            "name": "Patricia López Arnaiz",
+            "detail": "Los domingos"
+          },
+          {
+            "flag": "🎬",
+            "position": "Millor direcció novella",
+            "name": "Eva Libertad",
+            "detail": "Sorda"
+          },
+          {
+            "flag": "🎬",
+            "position": "Millor actor secundari",
+            "name": "Álvaro Cervantes",
+            "detail": "Sorda"
+          },
+          {
+            "flag": "🎬",
+            "position": "Millor actriu revelació",
+            "name": "Miriam Garlo",
+            "detail": "Sorda"
+          }
+        ]
+      },
+      {
+        "title": "Premis Gaudí 2026",
+        "icon": "🎞️",
+        "entries": [
+          {
+            "flag": "🎬",
+            "position": "Millor pel·lícula",
+            "name": "Frontera",
+            "detail": "De Judith Colell"
+          },
+          {
+            "flag": "🎬",
+            "position": "Millor pel·lícula en llengua no catalana",
+            "name": "Sorda"
+          },
+          {
+            "flag": "🎬",
+            "position": "Més premiada",
+            "name": "Sirât",
+            "detail": "D'Oliver Laxe, amb vuit premis"
+          }
+        ]
+      },
+      {
+        "title": "Festivals i altres premis",
+        "icon": "🌟",
+        "entries": [
+          {
+            "flag": "🇷🇴",
+            "position": "Palma d'Or de Canes 2026",
+            "name": "Fjord",
+            "detail": "De Cristian Mungiu, la seva segona Palma"
+          },
+          {
+            "flag": "🇪🇸",
+            "position": "Millor direcció a Canes 2026 (ex aequo)",
+            "name": "Javier Ambrossi i Javier Calvo (Los Javis)",
+            "detail": "Per La bola negra; comparteixen el premi amb Pawel Pawlikowski"
+          },
+          {
+            "flag": "🇷🇺",
+            "position": "Gran Premi de Canes 2026",
+            "name": "Minotaure",
+            "detail": "D'Andrei Zviàguintsev"
+          },
+          {
+            "flag": "🇩🇰",
+            "position": "Lleó d'Or de Venècia 2026",
+            "name": "Woman Unknown",
+            "detail": "De May el-Toukhy · millor actor: John Malkovich",
+            "recent": true
+          },
+          {
+            "flag": "🇩🇪",
+            "position": "Os d'Or de Berlín 2026",
+            "name": "Yellow Letters",
+            "detail": "D'İlker Çatak"
+          },
+          {
+            "flag": "🇪🇸",
+            "position": "Conxa d'Or de Sant Sebastià 2025",
+            "name": "Los domingos",
+            "detail": "D'Alauda Ruiz de Azúa"
+          },
+          {
+            "flag": "🇬🇧",
+            "position": "Globus d'Or 2026 · drama",
+            "name": "Hamnet",
+            "detail": "Comèdia o musical: One Battle After Another"
+          },
+          {
+            "flag": "🇬🇧",
+            "position": "BAFTA 2026 · millor pel·lícula",
+            "name": "One Battle After Another"
+          }
+        ]
+      }
+    ]
   },
-
   {
-    id: 'gener-2026-premis',
-    title: 'Gener 2026',
-    shortLabel: "Gen '26",
-    icon: '📅',
-    accent: 'from-purple-500 to-violet-700',
-    subsections: [
+    "id": "lletres",
+    "title": "Lletres",
+    "shortLabel": "Lletres",
+    "icon": "📚",
+    "accent": "from-emerald-500 to-teal-700",
+    "subsections": [
       {
-        title: 'Literatura — gala Hotel Palace de Barcelona, nit del 6 gener',
-        icon: '📚',
-        entries: [
+        "title": "En català",
+        "icon": "📗",
+        "entries": [
           {
-            flag: '🇪🇸',
-            position: '82è PREMI NADAL 2026 · 30.000 €',
-            name: 'David Uclés (Úbeda, 1990) — La ciudad de las luces muertas',
-            detail: 'Novel·la guanyadora del premi de novel·la en castellà més antic d\'Espanya (des de 1944).',
-            recent: true,
+            "flag": "📖",
+            "position": "Premi d'Honor de les Lletres Catalanes 2026",
+            "name": "Biel Mesquida",
+            "detail": "58a edició, atorgat per Òmnium Cultural"
           },
           {
-            flag: '🟥',
-            position: '58è PREMI JOSEP PLA 2026',
-            name: 'Francesc Torralba — Anatomia de l\'esperança (assaig)',
-            detail: 'Filòsof, teòleg i historiador. Lliurat la mateixa nit que el Nadal.',
+            "flag": "📖",
+            "position": "Premi Sant Jordi de novel·la 2025",
+            "name": "Roc Casagran",
+            "detail": "Somiàvem una illa"
           },
           {
-            flag: '🟥',
-            position: '46è PREMI RAMON LLULL 2026 · 60.000 €',
-            name: 'Agnès Marquès Pujolar — La segona vida de Ginebra Vern',
-            detail: 'Periodista mallorquina (Palma, 1979). Dirigeix el programa "Catalunya nit" de Catalunya Ràdio.',
-            recent: true,
-          },
-          {
-            flag: '🟥',
-            position: 'PREMI ÒMNIUM A LA MILLOR NOVEL·LA 2025 (9a edició)',
-            name: 'Reconeixement a una obra catalana destacada del 2025',
-            detail: 'Atorgat per Òmnium Cultural.',
-          },
-        ],
+            "flag": "📖",
+            "position": "Premi Ramon Llull 2026",
+            "name": "Agnès Marquès",
+            "detail": "La segona vida de Ginebra Vern"
+          }
+        ]
       },
-    ],
+      {
+        "title": "En castellà",
+        "icon": "📘",
+        "entries": [
+          {
+            "flag": "🇲🇽",
+            "position": "Premi Cervantes 2025",
+            "name": "Gonzalo Celorio",
+            "detail": "Escriptor mexicà; el va rebre dels Reis el 23 d'abril de 2026 a Alcalá de Henares · 125.000 €"
+          },
+          {
+            "flag": "🇪🇸",
+            "position": "Premi Nacional de les Lletres Espanyoles 2025",
+            "name": "María Victoria Atencia",
+            "detail": "Poeta malaguenya"
+          },
+          {
+            "flag": "🇪🇸",
+            "position": "Premi Nacional de Narrativa 2025",
+            "name": "Paco Cerdà",
+            "detail": "Presentes"
+          },
+          {
+            "flag": "📖",
+            "position": "Premi Planeta 2025",
+            "name": "Juan del Val",
+            "detail": "Vera, una historia de amor · finalista: Ángela Banzas · 1.000.000 €"
+          },
+          {
+            "flag": "📖",
+            "position": "Premi Nadal 2026",
+            "name": "David Uclés",
+            "detail": "La ciudad de las luces muertas"
+          },
+          {
+            "flag": "🇲🇽",
+            "position": "Premi Alfaguara 2026",
+            "name": "David Toscana",
+            "detail": "El ejército ciego"
+          }
+        ]
+      },
+      {
+        "title": "Internacionals",
+        "icon": "🌍",
+        "entries": [
+          {
+            "flag": "🇬🇧",
+            "position": "Premi Booker 2025",
+            "name": "David Szalay",
+            "detail": "Flesh"
+          },
+          {
+            "flag": "🇫🇷",
+            "position": "Premi Goncourt 2025",
+            "name": "Laurent Mauvignier",
+            "detail": "La maison vide"
+          },
+          {
+            "flag": "🇺🇸",
+            "position": "Premi Pulitzer de ficció 2026",
+            "name": "Daniel Kraus",
+            "detail": "Angel Down"
+          }
+        ]
+      }
+    ]
   },
-
   {
-    id: 'desembre-2025-premis',
-    title: 'Desembre 2025',
-    shortLabel: "Des '25",
-    icon: '📅',
-    accent: 'from-blue-500 to-indigo-700',
-    subsections: [
+    "id": "musica",
+    "title": "Música",
+    "shortLabel": "Música",
+    "icon": "🎵",
+    "accent": "from-fuchsia-500 to-purple-700",
+    "subsections": [
       {
-        title: 'Cultura i Societat',
-        icon: '🎯',
-        entries: [
+        "title": "Grammy 2026 (68a edició)",
+        "icon": "🎤",
+        "entries": [
           {
-            flag: '🟥',
-            position: 'PREMI CATALÀ DE L\'ANY 2025',
-            name: 'Generació de la recerca contra el càncer',
-            detail: 'Vinculat a La Marató de 3Cat 2025 (dedicada al càncer). Recaptació rècord: 9.741.627 € (la més alta dels últims 5 anys).',
-            recent: true,
+            "flag": "🇵🇷",
+            "position": "Àlbum de l'any",
+            "name": "Bad Bunny",
+            "detail": "DeBÍ TiRAR MáS FOToS · el primer àlbum majoritàriament en castellà que ho guanya"
           },
-        ],
+          {
+            "flag": "🇺🇸",
+            "position": "Enregistrament de l'any",
+            "name": "Kendrick Lamar i SZA",
+            "detail": "luther"
+          },
+          {
+            "flag": "🇺🇸",
+            "position": "Cançó de l'any",
+            "name": "Billie Eilish",
+            "detail": "Wildflower"
+          },
+          {
+            "flag": "🇬🇧",
+            "position": "Millor artista revelació",
+            "name": "Olivia Dean"
+          }
+        ]
       },
       {
-        title: 'Futbol — The Best FIFA 2025',
-        icon: '⚽',
-        entries: [
+        "title": "Grammy Llatins 2025",
+        "icon": "🎸",
+        "entries": [
           {
-            flag: '🇫🇷',
-            position: 'THE BEST FIFA · MILLOR JUGADOR',
-            name: 'Ousmane Dembélé (PSG)',
-            recent: true,
+            "flag": "🇵🇷",
+            "position": "Àlbum de l'any",
+            "name": "Bad Bunny",
+            "detail": "DeBÍ TiRAR MáS FOToS"
           },
           {
-            flag: '🇪🇸',
-            position: 'THE BEST FIFA · MILLOR JUGADORA',
-            name: 'Aitana Bonmatí (FC Barcelona)',
-            detail: 'Confirma la seva hegemonia als premis individuals dels darrers anys.',
-            recent: true,
+            "flag": "🇪🇸",
+            "position": "Enregistrament de l'any",
+            "name": "Alejandro Sanz",
+            "detail": "Palmeras en el jardín"
           },
-        ],
+          {
+            "flag": "🇨🇴",
+            "position": "Cançó de l'any",
+            "name": "Karol G",
+            "detail": "Si antes te hubiera conocido"
+          },
+          {
+            "flag": "🎶",
+            "position": "Millor artista revelació",
+            "name": "Paloma Morphy"
+          }
+        ]
       },
       {
-        title: 'Llengua — Neologisme de l\'any',
-        icon: '📖',
-        entries: [
+        "title": "Eurovisió",
+        "icon": "🎙️",
+        "entries": [
           {
-            flag: '🟥',
-            position: 'NEOLOGISME DE L\'ANY · CATALÀ (IEC)',
-            name: '"butpregària"',
+            "flag": "🇧🇬",
+            "position": "Eurovisió 2026 (Viena)",
+            "name": "Bulgària",
+            "detail": "Dara, amb «Bangaranga» · 516 punts; primera victòria del país"
           },
           {
-            flag: '🇪🇸',
-            position: 'NEOLOGISMO DEL AÑO · CASTELLÀ (FUNDÉU)',
-            name: '"apagón"',
-            detail: 'Reconeixement per l\'impacte de l\'apagada ibèrica del 2025.',
+            "flag": "🇪🇸",
+            "position": "Espanya a Eurovisió 2026",
+            "name": "No hi va participar",
+            "detail": "Boicot per la participació d'Israel"
           },
-        ],
-      },
-    ],
+          {
+            "flag": "🇪🇸",
+            "position": "Benidorm Fest 2026",
+            "name": "Tony Grox i Lucycalys",
+            "detail": "Primer guanyador que no va representar Espanya, pel boicot"
+          }
+        ]
+      }
+    ]
   },
-
   {
-    id: 'novembre-2025-premis',
-    title: 'Novembre 2025',
-    shortLabel: "Nov '25",
-    icon: '📅',
-    accent: 'from-slate-500 to-slate-700',
-    subsections: [
+    "id": "ciencia-societat",
+    "title": "Ciència, arquitectura i societat",
+    "shortLabel": "Ciència i societat",
+    "icon": "🔭",
+    "accent": "from-cyan-500 to-blue-700",
+    "subsections": [
       {
-        title: 'Literatura',
-        icon: '📚',
-        entries: [
+        "title": "Ciència i arquitectura",
+        "icon": "🔭",
+        "entries": [
           {
-            flag: '🇲🇽',
-            position: 'PREMIO CERVANTES 2025 · 125.000 €',
-            name: 'Gonzalo Celorio (Ciutat de Mèxic, 1948)',
-            detail: 'Màxim guardó de les lletres en castellà. Assagista, novel·lista i director de l\'Acadèmia Mexicana de la Llengua.',
-            recent: true,
+            "flag": "🇨🇱",
+            "position": "Premi Pritzker 2026 (arquitectura)",
+            "name": "Smiljan Radić",
+            "detail": "Arquitecte xilè"
           },
-        ],
+          {
+            "flag": "🇩🇪",
+            "position": "Premi Abel 2026 (matemàtiques)",
+            "name": "Gerd Faltings",
+            "detail": "Primer alemany que el guanya"
+          },
+          {
+            "flag": "📐",
+            "position": "Medalla Fields 2026",
+            "name": "Yu Deng, John Pardon, Jacob Tsimerman i Hong Wang",
+            "detail": "Per primera vegada, dos matemàtics xinesos en la mateixa edició"
+          }
+        ]
       },
       {
-        title: 'Futbol',
-        icon: '⚽',
-        entries: [
+        "title": "Societat i drets",
+        "icon": "🕊️",
+        "entries": [
           {
-            flag: '🇪🇸',
-            position: 'GOLDEN BOY 2025',
-            name: 'Lamine Yamal (FC Barcelona) — 2n any consecutiu',
-            detail: 'Premi al millor jugador sub-21 d\'Europa. Repeteix el guardó del 2024.',
-            recent: true,
+            "flag": "🇪🇺",
+            "position": "Premi Sàkharov 2025",
+            "name": "Andrzej Poczobut i Mzia Amaglobeli",
+            "detail": "Periodistes empresonats a Bielorússia i Geòrgia"
           },
-        ],
-      },
-      {
-        title: 'Periodisme i comunicació',
-        icon: '📺',
-        entries: [
           {
-            flag: '🇪🇸',
-            position: 'PREMIS ONDAS 2025 · 72a EDICIÓ',
-            name: 'Reconeixements a programes de RTVE, Atresmedia i Mediaset',
-            detail: 'Premis a presentadors i trajectòries del periodisme espanyol.',
+            "flag": "🇮🇹",
+            "position": "Premi Carlemany 2026",
+            "name": "Mario Draghi"
           },
-        ],
-      },
-    ],
+          {
+            "flag": "🤖",
+            "position": "Persona de l'Any 2025 de la revista Time",
+            "name": "Els arquitectes de la intel·ligència artificial",
+            "detail": "Entre d'altres, Jensen Huang, Sam Altman, Mark Zuckerberg i Elon Musk"
+          },
+          {
+            "flag": "🟥",
+            "position": "Creus de Sant Jordi 2026",
+            "name": "Sílvia Munt, Enric Majó, Júlia Otero, Fermí Puig, Victòria Camps, Maite Carranza i Joan Fontcuberta, entre d'altres",
+            "detail": "També la Universitat de Barcelona, entre les entitats"
+          }
+        ]
+      }
+    ]
   },
+  {
+    "id": "premis-esportius",
+    "title": "Premis esportius",
+    "shortLabel": "Premis esportius",
+    "icon": "🏅",
+    "accent": "from-yellow-500 to-orange-600",
+    "subsections": [
+      {
+        "title": "Futbol",
+        "icon": "⚽",
+        "entries": [
+          {
+            "flag": "🇫🇷",
+            "position": "Pilota d'Or 2025",
+            "name": "Ousmane Dembélé",
+            "detail": "PSG · la primera de la seva carrera"
+          },
+          {
+            "flag": "🇪🇸",
+            "position": "Pilota d'Or femenina 2025",
+            "name": "Aitana Bonmatí",
+            "detail": "Barça · la tercera seguida"
+          },
+          {
+            "flag": "🇪🇸",
+            "position": "Trofeu Kopa 2025 (millor jove)",
+            "name": "Lamine Yamal",
+            "detail": "El segon; en femení, Vicky López"
+          },
+          {
+            "flag": "🇫🇷",
+            "position": "The Best FIFA 2025",
+            "name": "Ousmane Dembélé i Aitana Bonmatí",
+            "detail": "Millors entrenadors: Luis Enrique i Sarina Wiegman"
+          },
+          {
+            "flag": "🇫🇷",
+            "position": "Golden Boy 2025",
+            "name": "Désiré Doué",
+            "detail": "PSG"
+          }
+        ]
+      },
+      {
+        "title": "Laureus 2026 (Madrid)",
+        "icon": "🏅",
+        "entries": [
+          {
+            "flag": "🇪🇸",
+            "position": "Esportista masculí",
+            "name": "Carlos Alcaraz"
+          },
+          {
+            "flag": "🇧🇾",
+            "position": "Esportista femenina",
+            "name": "Aryna Sabalenka"
+          },
+          {
+            "flag": "🇪🇸",
+            "position": "Esportista revelació jove",
+            "name": "Lamine Yamal"
+          },
+          {
+            "flag": "🇩🇪",
+            "position": "Premi a la inspiració",
+            "name": "Toni Kroos"
+          },
+          {
+            "flag": "🇫🇷",
+            "position": "Equip",
+            "name": "Paris Saint-Germain"
+          },
+          {
+            "flag": "🇬🇧",
+            "position": "Revelació",
+            "name": "Lando Norris"
+          }
+        ]
+      }
+    ]
+  }
 ];
