@@ -136,6 +136,28 @@ export default function Noticies() {
         <span style={{ fontSize: 19, fontWeight: 800, color: activeCatMeta.color }}>›</span>
       </Link>
 
+      {/* Les últimes notícies de premis, esports o personalitats, abans del
+          directori. Sense això, les notícies d'aquestes categories no es
+          veien enlloc: la pestanya només ensenyava el directori. */}
+      {activeCat !== 'noticies' && inCategory.length > 0 && (
+        <section style={{ marginBottom: 22 }}>
+          <div
+            className="section-head"
+            style={{ ['--accent' as never]: activeCatMeta.color } as React.CSSProperties}
+          >
+            <span className="eyebrow">📰 Últimes notícies</span>
+            <span className="rule" />
+          </div>
+          <ul className="noticies-list">
+            {inCategory.slice(0, 4).map((n) => (
+              <li key={n.slug}>
+                <NoticiaCard noticia={n} accent={activeCatMeta.color} accentBg={activeCatMeta.bg} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {/* DIRECTORI DE PERSONALITATS — vista pròpia (no cards) */}
       {activeCat === 'personalitats' && (
         <PersonalitatsDirectory query={query} setQuery={setQuery} />
