@@ -122,7 +122,7 @@ export default function ScreenOperativaHome() {
 
       {/* Actualitat normativa */}
       <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
+        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" onAction={() => navigate('/noticias')} />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
             <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
@@ -134,6 +134,14 @@ export default function ScreenOperativaHome() {
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
             </div>
           ))}
+          <button onClick={() => navigate('/noticias')} style={{
+            background: T.cat.operativa.soft, border: 'none', cursor: 'pointer',
+            borderRadius: T.r.md, padding: '12px 16px', fontFamily: T.font,
+            fontWeight: 700, fontSize: 13, color: T.cat.operativa.ink,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+          }}>
+            Veure totes les noticias del dia →
+          </button>
         </div>
       </div>
     </div>
