@@ -1,5 +1,5 @@
 // Test d'Actualitat 2025-2026 — Policia Local de Catalunya.
-// 345 preguntes (càrrecs CAT, ESP, INT, Vaticà, premis, esports, política,
+// 402 preguntes (càrrecs CAT, ESP, INT, Vaticà, premis, esports, política,
 // social), el recull del 24 de juliol a l'1 d'agost del 2026 i el d'agost
 // sencer: l'eclipsi del 12 d'agost, els incendis, la Vuelta i Collserola.
 // Inclou preguntes d'actualitat 2025/2026 vistes als exàmens reials de Reus.
@@ -9,7 +9,7 @@ import type { TestTopic } from './types';
 const actualitat: TestTopic = {
   slug: 'actualitat-pl-2026',
   title: 'Actualitat 2025–2026',
-  description: "Actualitat de novembre de 2025 a l'agost de 2026: càrrecs, política, esports, premis, ciència i economia (CAT + ESP + INT).",
+  description: "Actualitat de novembre de 2025 al 15 de setembre de 2026: càrrecs, política, esports, premis, ciència i economia (CAT + ESP + INT).",
   icon: '📰',
   accent: 'from-amber-500 to-orange-600',
   category: 'actualitat',
@@ -3808,6 +3808,633 @@ const actualitat: TestTopic = {
         'A Barcelona',
       ],
       correct: 3,
+    },
+    {
+      "id": "act-set26-1",
+      "text": "Quin ciclista va guanyar la Vuelta a Espanya 2026?",
+      "options": [
+        "Primož Roglič",
+        "Mikel Landa",
+        "Felix Gall",
+        "Enric Mas"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-set26-2",
+      "text": "A quin equip pertany el guanyador de la Vuelta a Espanya 2026?",
+      "options": [
+        "Al Movistar Team",
+        "Al Red Bull-Bora-Hansgrohe",
+        "A l'UAE Emirates-XRG",
+        "Al Bahrain-Victorious"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-3",
+      "text": "On i quan va acabar la Vuelta a Espanya 2026?",
+      "options": [
+        "A Madrid, el 13 de setembre",
+        "A Granada, el 6 de setembre",
+        "A Granada, el 13 de setembre",
+        "A Màlaga, el 12 de setembre"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-set26-4",
+      "text": "Quin va ser l'últim ciclista espanyol que havia guanyat la Vuelta abans d'Enric Mas?",
+      "options": [
+        "Alejandro Valverde, el 2009",
+        "Juan José Cobo, el 2011",
+        "Alberto Contador, el 2012",
+        "Alberto Contador, el 2014"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-set26-5",
+      "text": "Quants anys de sequera espanyola a la Vuelta va trencar la victòria d'Enric Mas?",
+      "options": [
+        "Dotze anys",
+        "Quinze anys",
+        "Vuit anys",
+        "Deu anys"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-6",
+      "text": "Quins ciclistes van completar el podi de la Vuelta a Espanya 2026?",
+      "options": [
+        "Primož Roglič, segon, i Felix Gall, tercer",
+        "Felix Gall, segon, i Primož Roglič, tercer",
+        "Primož Roglič, segon, i Richard Carapaz, tercer",
+        "Oscar Onley, segon, i Felix Gall, tercer"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-7",
+      "text": "Quin avantatge final va treure Enric Mas al segon classificat de la Vuelta 2026?",
+      "options": [
+        "1 minut i 18 segons",
+        "2 minuts i 15 segons",
+        "2 minuts i 44 segons",
+        "3 minuts i 2 segons"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-set26-8",
+      "text": "Quants podis havia aconseguit Enric Mas a la Vuelta abans de guanyar-la el 2026?",
+      "options": [
+        "Tres segons llocs i un tercer",
+        "Un segon lloc i tres tercers",
+        "Dos segons llocs i dos tercers",
+        "Quatre segons llocs"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-9",
+      "text": "Quines lesions va patir Tadej Pogačar en la caiguda que el va obligar a abandonar la Vuelta?",
+      "options": [
+        "Fractura de maluc i contusió cranial",
+        "Fractura de clavícula i fractura cervical",
+        "Fractura de fèmur i trencament de costelles",
+        "Fractura de canell i luxació d'espatlla"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-set26-10",
+      "text": "Quina etapa de la Vuelta 2026 va guanyar Enric Mas, la que li va consolidar el liderat?",
+      "options": [
+        "La del Refugio de Peñas Blancas",
+        "La de l'Alto de Aitana",
+        "La de Font-Romeu",
+        "La d'Andorra la Vella"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-set26-11",
+      "text": "Quin ciclista va guanyar la classificació de la muntanya de la Vuelta 2026?",
+      "options": [
+        "Wout van Aert",
+        "Oscar Onley",
+        "Mikel Landa",
+        "Santiago Buitrago"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-set26-12",
+      "text": "Quin ciclista va guanyar la classificació per punts de la Vuelta a Espanya 2026?",
+      "options": [
+        "Wout van Aert",
+        "Tobias Johannessen",
+        "Santiago Buitrago",
+        "Oscar Onley"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-13",
+      "text": "Quants països va travessar la Vuelta a Espanya 2026?",
+      "options": [
+        "Quatre: Mònaco, França, Andorra i Espanya",
+        "Dos: França i Espanya",
+        "Tres: Mònaco, França i Espanya",
+        "Cinc: Mònaco, França, Andorra, Portugal i Espanya"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-14",
+      "text": "Quin ciclista espanyol va guanyar la vintena etapa de la Vuelta 2026, l'etapa reina per terres granadines?",
+      "options": [
+        "Enric Mas",
+        "Juan Ayuso",
+        "Carlos Rodríguez",
+        "Mikel Landa"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-set26-15",
+      "text": "Qui va guanyar el torneig individual masculí de l'US Open 2026?",
+      "options": [
+        "Jannik Sinner",
+        "Ben Shelton",
+        "Carlos Alcaraz",
+        "Alexander Zverev"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-set26-16",
+      "text": "Contra quin tenista es va imposar el campió de l'US Open 2026 a la final?",
+      "options": [
+        "Contra Novak Djokovic",
+        "Contra Frances Tiafoe",
+        "Contra Jannik Sinner",
+        "Contra Ben Shelton"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-set26-17",
+      "text": "Qui va guanyar el torneig individual femení de l'US Open 2026?",
+      "options": [
+        "Elena Rybakina",
+        "Aryna Sabalenka",
+        "Coco Gauff",
+        "Jessica Pegula"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-18",
+      "text": "En quina ronda de l'US Open 2026 va caure Carlos Alcaraz, que hi defensava el títol?",
+      "options": [
+        "A quarts de final",
+        "A la final",
+        "A semifinals",
+        "A vuitens de final"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-set26-19",
+      "text": "On se celebrarà el Campionat del Món de ciclisme en ruta de 2026?",
+      "options": [
+        "A Kigali, a Ruanda",
+        "A Montreal, al Canadà",
+        "A Zuric, a Suïssa",
+        "A Hasselt, a Bèlgica"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-set26-20",
+      "text": "Sota quin lema es va convocar la manifestació independentista de la Diada de 2026?",
+      "options": [
+        "«Objectiu independència: tornem-hi»",
+        "«Un sol poble, un sol objectiu: la independència»",
+        "«Hi soc. Hi som. Pel present i pel futur: Independència»",
+        "«Ni un pas enrere: independència ara»"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-set26-21",
+      "text": "Quantes persones va xifrar la Guàrdia Urbana a la manifestació de la Diada a Barcelona?",
+      "options": [
+        "100.000 persones",
+        "45.000 persones",
+        "130.000 persones",
+        "62.000 persones"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-set26-22",
+      "text": "Quina xifra d'assistents va donar l'ANC per a la manifestació de Barcelona, molt per sobre de l'oficial?",
+      "options": [
+        "250.000 persones",
+        "75.000 persones",
+        "130.000 persones",
+        "100.000 persones"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-set26-23",
+      "text": "A quina hora va començar la manifestació de la Diada, i per què a aquesta hora?",
+      "options": [
+        "A les 17.14 h, en record dels fets de 1714",
+        "A les 14.11 h, en record de la data invertida de 1714",
+        "A les 11.09 h, en record de l'Onze de Setembre",
+        "A les 17.11 h, en record de l'Onze de Setembre de 1714"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-24",
+      "text": "En quines tres ciutats es va descentralitzar la mobilització de la Diada de 2026?",
+      "options": [
+        "Barcelona, Lleida i Tortosa",
+        "Barcelona, Tarragona i Girona",
+        "Barcelona, Girona i Amposta",
+        "Barcelona, Girona i Vic"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-set26-25",
+      "text": "Com es van estructurar les columnes de la manifestació de Barcelona?",
+      "options": [
+        "En dues columnes, Present i Futur, que van confluir a la plaça de Catalunya",
+        "En dues columnes, Passat i Present, que van confluir a la plaça de Sant Jaume",
+        "En tres columnes, Present, Futur i Llengua, que van confluir a l'Arc de Triomf",
+        "En una única columna que va recórrer la Gran Via fins a la plaça de Catalunya"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-26",
+      "text": "Des d'on va sortir la columna «Present» de la manifestació de Barcelona?",
+      "options": [
+        "De la Via Laietana amb la plaça de la Catedral",
+        "De la plaça d'Espanya amb l'avinguda del Paral·lel",
+        "De la Gran Via amb el carrer de Casanova",
+        "Del passeig de Sant Joan amb l'Arc de Triomf"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-set26-27",
+      "text": "Qui presidia l'Assemblea Nacional Catalana en la Diada de 2026, la primera del seu mandat?",
+      "options": [
+        "Josep Vila",
+        "Lluís Llach",
+        "Xavier Antich",
+        "Dolors Feliu"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-28",
+      "text": "Quin incident va protagonitzar l'acte final de la manifestació a la plaça de Catalunya?",
+      "options": [
+        "L'esfondrament parcial de l'escenari durant els parlaments",
+        "La crema d'una bandera espanyola per part de dues persones encaputxades",
+        "La irrupció d'un grup d'ultres que va intentar assaltar l'escenari",
+        "La retirada de la megafonia per ordre de la Guàrdia Urbana"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-set26-29",
+      "text": "Quants detinguts van deixar els aldarulls posteriors a la Diada a la zona de l'Arc de Triomf?",
+      "options": [
+        "Quatre detinguts",
+        "Setze detinguts",
+        "Dotze detinguts",
+        "Vuit detinguts"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-set26-30",
+      "text": "Els Mossos d'Esquadra van detenir vuit persones en els aldarulls de l'Arc de Triomf posteriors a la Diada de 2026. Per quin delicte van ser detingudes?",
+      "options": [
+        "Per atemptat contra l'autoritat",
+        "Per desordres públics",
+        "Per danys en béns d'ús públic",
+        "Per resistència i desobediència greu"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-set26-31",
+      "text": "Quina mobilització va anunciar l'ANC durant la Diada de 2026?",
+      "options": [
+        "Una gran mobilització la tardor del 2027, coincidint amb els deu anys de l'1-O",
+        "Una vaga general de país abans que acabi el 2026",
+        "Una consulta popular no vinculant per a la primavera del 2027",
+        "Una cadena humana per tot el litoral català el setembre del 2027"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-32",
+      "text": "Davant de quin monument es fan tradicionalment les ofrenes florals institucionals de l'Onze de Setembre a Barcelona?",
+      "options": [
+        "Davant del monument a Francesc Macià",
+        "Davant del monument a Lluís Companys",
+        "Davant del monument a Rafael Casanova",
+        "Davant del Fossar de les Moreres"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-set26-33",
+      "text": "Quin aniversari va commemorar Salvador Illa en els actes de la Diada de 2026?",
+      "options": [
+        "Els quaranta anys de la recuperació de la Generalitat",
+        "Els cinquanta anys de la Diada de Sant Boi",
+        "Els vint-i-cinc anys de l'Estatut d'autonomia",
+        "Els cent anys de la mort de Rafael Casanova"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-set26-34",
+      "text": "Quin col·lectiu va convocar una vaga a Catalunya el 8 de setembre de 2026, amb què va arrencar el curs?",
+      "options": [
+        "El professorat",
+        "Els treballadors de Rodalies",
+        "El personal sanitari",
+        "Els funcionaris de justícia"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-35",
+      "text": "Com va obrir Pedro Sánchez el curs polític el 7 de setembre de 2026?",
+      "options": [
+        "Presidint una conferència de presidents autonòmics a Madrid",
+        "Compareixent en un ple extraordinari del Congrés dels Diputats",
+        "Reunint al Congrés els seus diputats, senadors i eurodiputats",
+        "Presentant una qüestió de confiança davant del Congrés"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-set26-36",
+      "text": "Quin objectiu pressupostari es va fixar el Govern espanyol per a aquest curs polític?",
+      "options": [
+        "Aprovar els pressupostos del 2027 abans que acabi el 2026",
+        "Prorrogar formalment els pressupostos fins al 2028",
+        "Presentar els pressupostos del 2027 abans que acabi el 2026",
+        "Presentar uns pressupostos conjunts per al bienni 2027-2028"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-set26-37",
+      "text": "Per a quines dates estan previstes les pròximes eleccions autonòmiques i municipals a Espanya?",
+      "options": [
+        "Per a finals de maig de 2028",
+        "Per a principis de març de 2027",
+        "Per a finals de maig de 2027",
+        "Per a finals de juny de 2027"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-set26-38",
+      "text": "Quina crisi va marcar l'inici del curs polític espanyol el setembre de 2026?",
+      "options": [
+        "La crisi migratòria de Ceuta",
+        "La crisi de la sanitat pública per la vaga de metges",
+        "La crisi de l'habitatge a les grans ciutats",
+        "La crisi energètica pel preu de l'electricitat"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-39",
+      "text": "Qui és el president de la Ciutat Autònoma de Ceuta, que va protagonitzar el xoc amb el Govern central?",
+      "options": [
+        "Juan José Imbroda",
+        "Juan Jesús Vivas",
+        "Antonio Sanz",
+        "Manuel Domínguez"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-set26-40",
+      "text": "Quina ofensiva jurídica va anunciar el Senat contra el Govern l'inici de curs?",
+      "options": [
+        "Un recurs d'inconstitucionalitat contra la llei d'amnistia",
+        "Una querella davant del Tribunal Suprem per prevaricació",
+        "Un conflicte d'atribucions davant del Tribunal Constitucional",
+        "Una comissió d'investigació amb citacions obligatòries"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-set26-41",
+      "text": "Quins estudis va començar la princesa Leonor el setembre de 2026?",
+      "options": [
+        "Dret a la Universitat Complutense de Madrid",
+        "Relacions Internacionals a la Universitat de Navarra",
+        "Economia a la Universitat Autònoma de Madrid",
+        "Ciències Polítiques a la Universitat Carlos III"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-set26-42",
+      "text": "On es va celebrar la XVIII Cimera dels BRICS, els dies 12 i 13 de setembre de 2026?",
+      "options": [
+        "A Rio de Janeiro, al Brasil",
+        "A Johannesburg, a Sud-àfrica",
+        "A Kazan, a Rússia",
+        "A Nova Delhi, a l'Índia"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-set26-43",
+      "text": "Com es va denominar el document final aprovat per unanimitat a la cimera dels BRICS de 2026?",
+      "options": [
+        "La Carta de Bharat Mandapam",
+        "El Compromís dels BRICS+ 2026",
+        "La Declaració de Nova Delhi, de 140 punts",
+        "L'Acord Multipolar de Nova Delhi, de 90 punts"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-set26-44",
+      "text": "Quina reclamació va fer Vladímir Putin durant la cimera dels BRICS de Nova Delhi?",
+      "options": [
+        "L'expulsió dels Estats Units del G20",
+        "La creació d'una moneda única per als països del bloc",
+        "La suspensió de totes les sancions occidentals contra Rússia",
+        "L'ampliació del Consell de Seguretat de l'ONU"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-set26-45",
+      "text": "Quina iniciativa va presentar Xi Jinping a la cimera dels BRICS respecte a l'Orient Mitjà?",
+      "options": [
+        "Una conferència internacional de donants per a Gaza",
+        "Una proposta de pau de quatre punts",
+        "Un pla de desplegament de cascos blaus xinesos",
+        "Una moratòria comercial contra els països implicats"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-set26-46",
+      "text": "Què va respondre Volodímir Zelenski sobre una possible trobada amb Putin a la cimera del G20?",
+      "options": [
+        "Que només hi assistiria si Rússia retirava prèviament les tropes",
+        "Que no acudiria a cap cimera amb presència russa",
+        "Que hi enviaria el seu ministre d'Exteriors en representació seva",
+        "Que hi aniria, perquè cal reunir-se, parlar i prendre decisions"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-set26-47",
+      "text": "On i quan està prevista la cimera del G20 a què es referia Zelenski?",
+      "options": [
+        "A Johannesburg, el novembre de 2026",
+        "A Miami, el desembre de 2026",
+        "A Miami, el gener de 2027",
+        "A Nova York, el desembre de 2026"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-set26-48",
+      "text": "Quin partit va guanyar les eleccions regionals de Saxònia-Anhalt, a Alemanya, el setembre de 2026?",
+      "options": [
+        "La CDU",
+        "L'AfD",
+        "L'SPD",
+        "Els Verds"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-set26-49",
+      "text": "Què va certificar l'AEMET sobre l'estiu de 2026 a Espanya?",
+      "options": [
+        "Que va ser el segon més càlid, només per darrere del de 2025",
+        "Que va ser el més càlid de la sèrie històrica, iniciada el 1961",
+        "Que va ser el més càlid des de l'estiu de 2003",
+        "Que va ser el tercer més càlid, per darrere dels de 2022 i 2025"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-set26-50",
+      "text": "Quina temperatura mitjana va registrar l'estiu de 2026 a l'Espanya peninsular?",
+      "options": [
+        "23,8 graus",
+        "24,5 graus",
+        "25,1 graus",
+        "22,9 graus"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-set26-51",
+      "text": "Quants dies sota condicions d'onada de calor va acumular Espanya l'estiu de 2026?",
+      "options": [
+        "41 dies",
+        "52 dies",
+        "61 dies",
+        "74 dies"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-set26-52",
+      "text": "Quin era el rècord anterior de dies sota condicions d'onada de calor, superat el 2026?",
+      "options": [
+        "41 dies, l'any 2022",
+        "47 dies, l'any 2015",
+        "38 dies, l'any 2019",
+        "55 dies, l'any 2025"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-53",
+      "text": "Els 61 dies sota condicions d'onada de calor de l'estiu de 2026 es van repartir en diversos episodis. En quants?",
+      "options": [
+        "Tres episodis",
+        "Cinc episodis",
+        "Quatre episodis",
+        "Sis episodis"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-set26-54",
+      "text": "Quina anomalia tèrmica va presentar l'estiu de 2026 respecte del període de referència 1991-2020?",
+      "options": [
+        "1,7 graus per sobre de la mitjana",
+        "0,3 graus per sobre de la mitjana",
+        "2,4 graus per sobre de la mitjana",
+        "3,1 graus per sobre de la mitjana"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-set26-55",
+      "text": "Quina particularitat va tenir l'onada de calor registrada entre el 2 i el 7 de setembre de 2026?",
+      "options": [
+        "Va ser la primera onada de calor que va afectar totes les províncies",
+        "Va ser la primera onada de calor de setembre registrada a Espanya",
+        "Va ser l'onada de calor més llarga de tota la sèrie històrica",
+        "Va ser la cinquena onada de calor de setembre de tota la sèrie històrica"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-set26-56",
+      "text": "Què va concloure l'AEMET sobre els deu estius més càlids de la sèrie històrica?",
+      "options": [
+        "Que tots deu s'han produït al segle XXI",
+        "Que set d'ells s'han produït a la dècada dels noranta",
+        "Que es reparteixen de manera uniforme al llarg de la sèrie",
+        "Que vuit d'ells es concentren entre 2000 i 2010"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-set26-57",
+      "text": "Quina previsió estacional va fer l'AEMET per a la tardor de 2026?",
+      "options": [
+        "Temperatures per sota del normal i pluges abundants",
+        "Temperatures normals i pluges per sota del normal",
+        "Temperatures normals amb un descens brusc a l'octubre",
+        "Temperatures dins del terç més càlid, amb alta probabilitat"
+      ],
+      "correct": 3
     },
   ],
 };
