@@ -134,6 +134,8 @@ export function isFinalNode(n: ChecklistNode): n is ChecklistFinalNode {
 // runner com a notes desplegables (referències ràpides aplicables a
 // tot l'escenari, no a un node concret).
 export type Checklist = {
+  fonts?: { titol: string; url: string }[];
+  data_revisio?: string;
   id: string;
   titol: string;
   categoria: string;

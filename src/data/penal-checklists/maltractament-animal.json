@@ -1,0 +1,92 @@
+{
+  "id": "maltractament-animal",
+  "titol": "Maltractament animal",
+  "icono": "🐾",
+  "categoria": "persones",
+  "base_legal": [
+    "CP: arts. 340 bis, 340 ter i 340 quinquies",
+    "Llei 7/2023: àmbit i règim sancionador; DL 2/2008 de Catalunya"
+  ],
+  "fonts": [
+    {
+      "titol": "Codi penal consolidat",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1995-25444#a3-4"
+    },
+    {
+      "titol": "Llei de benestar animal",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2023-7936"
+    }
+  ],
+  "data_revisio": "2026-09-17",
+  "inici": "inici",
+  "nodes": {
+    "inici": {
+      "titol": "Quins indicis hi ha?",
+      "text": "Protegeix l'animal i activa veterinari. Documenta espècie, microxip, responsable, entorn, aigua, aliment i lesions.",
+      "opcions": [
+        {
+          "etiqueta": "Lesió, mort o maltractament greu",
+          "va_a": "penal"
+        },
+        {
+          "etiqueta": "Abandonament",
+          "va_a": "abandó"
+        },
+        {
+          "etiqueta": "Deficiències de cura sense indicis penals",
+          "va_a": "administrativa"
+        }
+      ]
+    },
+    "penal": {
+      "final": true,
+      "titol": "Possible delicte · art. 340 bis",
+      "tipus": "penal",
+      "text": "L'informe veterinari ha de precisar tractament, gravetat i causalitat. També pot haver-hi delicte sense tractament si concorren els requisits del 340 bis.4.",
+      "accions": [
+        "Recull proves, testimonis i informe veterinari; preserva cadena de custòdia.",
+        "Diferencia animal sota control humà i altres vertebrats, resultat i agreujants.",
+        "Atestat a l'autoritat competent; sol·licita mesures de protecció del 340 quinquies. La detenció no és automàtica."
+      ]
+    },
+    "abandó": {
+      "titol": "L'abandonament pot posar en perill vida o integritat?",
+      "text": "Documenta condicions reals; no pressuposis abandonament només perquè l'animal està perdut.",
+      "opcions": [
+        {
+          "etiqueta": "Sí",
+          "va_a": "perill"
+        },
+        {
+          "etiqueta": "No consta perill penal",
+          "va_a": "administrativa"
+        }
+      ]
+    },
+    "perill": {
+      "final": true,
+      "titol": "Possible abandonament penal",
+      "tipus": "penal",
+      "text": "Art. 340 ter: animal vertebrat sota responsabilitat de la persona i condicions de perill.",
+      "accions": [
+        "Assegura acollida i valoració veterinària.",
+        "Acredita responsabilitat, abandonament i perill; remet atestat."
+      ]
+    },
+    "administrativa": {
+      "final": true,
+      "titol": "Valorar infracció administrativa",
+      "tipus": "administrativa",
+      "text": "Determina àmbit de la Llei 7/2023, exclusions, normativa catalana i ordenança aplicable abans de tipificar.",
+      "accions": [
+        "Acta detallada i informe veterinari; deriva a l'autoritat competent.",
+        "Si apareixen indicis penals, comunica'ls i evita doble sanció.",
+        "No assignis una multa genèrica a qualsevol deficiència."
+      ]
+    }
+  },
+  "notes_finals": [
+    "No utilitzis els antics arts. 337/337 bis per a fets actuals.",
+    "L'entrada en domicili exigeix consentiment, resolució judicial o supòsit legal habilitant: una sospita no basta."
+  ]
+}

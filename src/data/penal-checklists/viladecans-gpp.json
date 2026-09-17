@@ -1,0 +1,111 @@
+{
+  "id": "viladecans-gpp",
+  "titol": "Gossos potencialment perillosos · Viladecans",
+  "icono": "🐕",
+  "categoria": "administrativa",
+  "base_legal": [
+    "Llei 50/1999: art. 13",
+    "Llei catalana 10/1999: arts. 2, 7 i 11"
+  ],
+  "fonts": [
+    {
+      "titol": "Llei estatal GPP",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1999-24419"
+    },
+    {
+      "titol": "Llei catalana GPP consolidada",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1999-18004"
+    }
+  ],
+  "data_revisio": "2026-09-17",
+  "inici": "inici",
+  "nodes": {
+    "inici": {
+      "titol": "Què s'ha comprovat?",
+      "text": "Assegura l'entorn. Verifica classificació GPP, microxip, titular, conductor, llicència, cens i assegurança.",
+      "opcions": [
+        {
+          "etiqueta": "Agressió o perill immediat",
+          "va_a": "risc"
+        },
+        {
+          "etiqueta": "Manca de llicència confirmada",
+          "va_a": "llicencia"
+        },
+        {
+          "etiqueta": "Sense morrió o sense cadena en espai públic",
+          "va_a": "morrió"
+        },
+        {
+          "etiqueta": "Sense assegurança",
+          "va_a": "asseguranca"
+        },
+        {
+          "etiqueta": "Tot correcte",
+          "va_a": "correcte"
+        }
+      ]
+    },
+    "risc": {
+      "final": true,
+      "titol": "Protegir persones i animal",
+      "tipus": "procediment",
+      "text": "Prioritza assistència a víctimes i control segur.",
+      "accions": [
+        "Demana suport especialitzat i veterinari; documenta lesions i testimonis.",
+        "La retirada cautelar necessita cobertura legal; no és una sanció automàtica."
+      ]
+    },
+    "llicencia": {
+      "final": true,
+      "titol": "Sense llicència · molt greu estatal",
+      "tipus": "administrativa",
+      "text": "No equival a no portar-la: comprova'n la inexistència.",
+      "accions": [
+        "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+        "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+        "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+      ],
+      "article_butlleta": "Art. 13.1.b i 13.5 Llei 50/1999",
+      "import": "2.404,06–15.025,30 €"
+    },
+    "morrió": {
+      "final": true,
+      "titol": "Mesures de seguretat incomplertes",
+      "tipus": "administrativa",
+      "text": "Via estatal: art. 13.2.d, greu, 300,52–2.404,05 €. A Catalunya existeix també el tipus de l'art. 7.3.e Llei 10/1999 (deslligat i sense morrió), greu: 3.001–9.000 €.",
+      "accions": [
+        "Consigna separadament cadena i morrió.",
+        "Determina el règim aplicable amb l'òrgan instructor; no dupliquis sancions pel mateix fet."
+      ]
+    },
+    "asseguranca": {
+      "final": true,
+      "titol": "Sense assegurança · greu catalana",
+      "tipus": "administrativa",
+      "text": "Comprova cobertura vigent abans de denunciar.",
+      "accions": [
+        "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+        "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+        "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+      ],
+      "article_butlleta": "Arts. 7.3.b i 11 Llei 10/1999",
+      "import": "3.001–9.000 €"
+    },
+    "correcte": {
+      "final": true,
+      "titol": "Comprovacions favorables",
+      "tipus": "ok",
+      "text": "No consta infracció.",
+      "accions": [
+        "Registra les comprovacions."
+      ]
+    }
+  },
+  "notes_finals": [
+    "Els imports estatals i catalans corresponen a normes diferents: no són intercanviables ni acumulables automàticament.",
+    "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+    "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+    "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "id": "viladecans-civisme",
+  "titol": "Civisme · Viladecans",
+  "icono": "🏘️",
+  "categoria": "administrativa",
+  "base_legal": [
+    "Ordenança de convivència i civisme: arts. 59, 66 i annex 1"
+  ],
+  "fonts": [
+    {
+      "titol": "Ordenança municipal vigent",
+      "url": "https://seu-e.cat/documents/4123793/18336324/08.Ordenan%C3%A7a%2BConvivencia%2Bi%2BCivisme(FINAL-PT).pdf/3bcbcf00-d0ae-40da-8458-c976e3083e70"
+    }
+  ],
+  "data_revisio": "2026-09-17",
+  "inici": "inici",
+  "nodes": {
+    "inici": {
+      "titol": "Quina conducta has observat?",
+      "text": "Descriu el fet concret i comprova autoria i autorització.",
+      "opcions": [
+        {
+          "etiqueta": "Pintades sense permís",
+          "va_a": "pintades"
+        },
+        {
+          "etiqueta": "Residus petits fora de papereres",
+          "va_a": "residus"
+        },
+        {
+          "etiqueta": "Possible delicte de danys",
+          "va_a": "penal"
+        },
+        {
+          "etiqueta": "No s'acredita cap infracció",
+          "va_a": "sense"
+        }
+      ]
+    },
+    "pintades": {
+      "titol": "Sobre quin suport?",
+      "text": "Fotografia el suport i l'afectació. Si hi ha danys, valora també la naturalesa penal.",
+      "opcions": [
+        {
+          "etiqueta": "Monument o edifici públic",
+          "va_a": "greu"
+        },
+        {
+          "etiqueta": "Altres suports",
+          "va_a": "lleu"
+        }
+      ]
+    },
+    "greu": {
+      "final": true,
+      "titol": "Pintades · infracció greu",
+      "tipus": "administrativa",
+      "text": "Art. 59 i annex 1.",
+      "accions": [
+        "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+        "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+        "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+      ],
+      "article_butlleta": "Art. 59",
+      "import": "751–1.500 €",
+      "concepte_butlleta": "Realitzar pintades sense autorització sobre un monument o edifici públic."
+    },
+    "lleu": {
+      "final": true,
+      "titol": "Pintades · infracció lleu",
+      "tipus": "administrativa",
+      "text": "Art. 59 i annex 1.",
+      "accions": [
+        "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+        "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+        "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+      ],
+      "article_butlleta": "Art. 59",
+      "import": "100–750 €"
+    },
+    "residus": {
+      "final": true,
+      "titol": "Residus · infracció lleu",
+      "tipus": "administrativa",
+      "text": "Art. 66 i annex 1.",
+      "accions": [
+        "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+        "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+        "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+      ],
+      "article_butlleta": "Art. 66",
+      "import": "100–750 €"
+    },
+    "penal": {
+      "final": true,
+      "titol": "Valorar danys penalment rellevants",
+      "tipus": "procediment",
+      "text": "L'import del dany no és l'únic criteri de qualificació.",
+      "accions": [
+        "Preserva proves, identifica perjudicats i documenta valoració o pressupost.",
+        "Coordina les diligències amb la unitat competent."
+      ]
+    },
+    "sense": {
+      "final": true,
+      "titol": "Sense denúncia automàtica",
+      "tipus": "ok",
+      "text": "No consta conducta típica acreditada.",
+      "accions": [
+        "Registra el servei i les comprovacions."
+      ]
+    }
+  },
+  "notes_finals": [
+    "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+    "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+    "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+  ]
+}

@@ -109,6 +109,14 @@ export default function ChecklistRunner({ checklist }: Props) {
         <QuestionPanel node={node} onSelect={goTo} />
       )}
 
+      {checklist.fonts && (
+        <aside className="rounded-xl border border-line p-4 text-sm">
+          <p className="font-bold">Fonts oficials · revisió {checklist.data_revisio}</p>
+          <ul className="list-disc pl-5 space-y-2 mt-2">
+            {checklist.fonts.map((font) => <li key={font.url}><a className="underline" href={font.url} target="_blank" rel="noopener noreferrer">{font.titol} ↗</a></li>)}
+          </ul>
+        </aside>
+      )}
       {/* Notes finals globals del checklist (recordatoris generals) */}
       {checklist.notes_finals && checklist.notes_finals.length > 0 && (
         <div className="rounded-xl border p-4 text-sm

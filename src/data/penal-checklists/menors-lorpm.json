@@ -1,0 +1,106 @@
+{
+  "id": "menors-lorpm",
+  "titol": "Menors · LORPM",
+  "icono": "🧒",
+  "categoria": "persones",
+  "base_legal": [
+    "LO 5/2000: arts. 1, 3, 16 i 17"
+  ],
+  "fonts": [
+    {
+      "titol": "LORPM consolidada",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-641"
+    }
+  ],
+  "data_revisio": "2026-09-17",
+  "inici": "inici",
+  "nodes": {
+    "inici": {
+      "titol": "Quina és l'edat als fets?",
+      "text": "Acredita data de naixement i distingeix investigat, víctima i menor en risc.",
+      "opcions": [
+        {
+          "etiqueta": "Menys de 14 anys",
+          "va_a": "petit"
+        },
+        {
+          "etiqueta": "14–17 anys, possible autor",
+          "va_a": "adolescent"
+        },
+        {
+          "etiqueta": "Víctima o situació de desprotecció",
+          "va_a": "proteccio"
+        },
+        {
+          "etiqueta": "Edat dubtosa",
+          "va_a": "dubte"
+        }
+      ]
+    },
+    "petit": {
+      "final": true,
+      "titol": "Menor de 14: protecció",
+      "tipus": "procediment",
+      "text": "No respon penalment per la LORPM (art. 3).",
+      "accions": [
+        "Documenta fets i comunica a Fiscalia perquè valori la derivació a protecció.",
+        "No practiquis detenció penal per aquests fets; identifica adults responsables i garanteix lliurament segur."
+      ]
+    },
+    "adolescent": {
+      "titol": "És necessària i legalment procedent la detenció?",
+      "text": "Valora els pressupòsits legals i documenta la necessitat.",
+      "opcions": [
+        {
+          "etiqueta": "Sí",
+          "va_a": "detingut"
+        },
+        {
+          "etiqueta": "No",
+          "va_a": "lliure"
+        }
+      ]
+    },
+    "detingut": {
+      "final": true,
+      "titol": "Detenció de menor · art. 17",
+      "tipus": "procediment",
+      "text": "Temps imprescindible; màxim policial 24 h fins a llibertat o disposició de Fiscalia. Les 48 h de Fiscalia compten des de la detenció, no s'afegeixen.",
+      "accions": [
+        "Informa de fets i drets en llenguatge entenedor; advocat i intèrpret quan calgui.",
+        "Comunica immediatament a representants legals i Fiscalia; consolat en els supòsits legals.",
+        "Declaració amb lletrat i representants, amb les excepcions de l'art. 17.2; entrevista reservada.",
+        "Custòdia separada d'adults; assistència mèdica i protecció. Registra hores i lliurament."
+      ]
+    },
+    "lliure": {
+      "final": true,
+      "titol": "Investigació sense detenció",
+      "tipus": "procediment",
+      "text": "Remet diligències a Fiscalia de Menors.",
+      "accions": [
+        "Garanteix defensa i citacions; evita interrogatoris informals per eludir garanties."
+      ]
+    },
+    "proteccio": {
+      "final": true,
+      "titol": "Protegir, no tractar com a investigat",
+      "tipus": "procediment",
+      "text": "Atén necessitats immediates i evita revictimització.",
+      "accions": [
+        "Activa serveis de protecció i Fiscalia segons el cas.",
+        "No lliuris el menor a una persona sospitosa de causar-li el risc."
+      ]
+    },
+    "dubte": {
+      "final": true,
+      "titol": "Verificar edat",
+      "tipus": "procediment",
+      "text": "No decideixis per aparença.",
+      "accions": [
+        "Consulta documentació i coordina amb Fiscalia; aplica protecció mentre s'aclareix."
+      ]
+    }
+  },
+  "notes_finals": []
+}

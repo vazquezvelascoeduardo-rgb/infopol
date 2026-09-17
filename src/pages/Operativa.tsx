@@ -390,6 +390,7 @@ function OpLleis({ ctx }: { ctx: OCtx }) {
 /* ── PROCEDIMENTS (SC/Penal i Trànsit, separats) ── */
 function OpProcediments({ ctx }: { ctx: OCtx }) {
   const groups = [
+    { tone: 'terracota', icon: 'doc', title: 'Ordenances · Viladecans', desc: 'Civisme, sorolls, venda ambulant, gossos potencialment perillosos i consum d’alcohol.', route: '/operativa/penal?ambit=administrativa', items: ['Civisme', 'Sorolls', 'Venda ambulant', 'GPP', 'Botelló'] },
     { tone: 'blue', icon: 'shield', title: 'Seguretat Ciutadana / Penal', desc: 'Identificació, escorcoll i cacheig, registres, detencions, drets del detingut i violència de gènere.', route: '/operativa/penal', items: ['Identificació', 'Escorcoll i cacheig', 'Detencions · drets', 'VioGén'] },
     { tone: 'terracota', icon: 'car', title: 'Trànsit', desc: "Control d'alcoholèmia i drogues, accidents amb víctimes, retirada de vehicles i atestats.", route: '/operativa/trafico', items: ['Alcoholèmia', 'Drogues', 'Accidents', 'Retirades'] },
   ];
@@ -401,7 +402,7 @@ function OpProcediments({ ctx }: { ctx: OCtx }) {
   ];
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-      <Head kicker="Procediments pas a pas" title="Procediments d'actuació" desc="Guies operatives per actuar amb seguretat jurídica, separades per àmbit: Seguretat Ciutadana / Penal i Trànsit." />
+      <Head kicker="Procediments pas a pas" title="Procediments d'actuació" desc="Guies operatives de policia administrativa, seguretat ciutadana, penal i trànsit. Inclou estrangeria, menors i maltractament animal." />
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }} className="a-grid-fork">
         {groups.map((g) => { const k = toneOf(g.tone); const dark = g.tone === 'night';
           const bg = dark ? `linear-gradient(150deg, #2A2D40, ${A.night})` : k.solid;

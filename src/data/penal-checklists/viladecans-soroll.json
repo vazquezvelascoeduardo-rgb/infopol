@@ -1,0 +1,123 @@
+{
+  "id": "viladecans-soroll",
+  "titol": "Sorolls i descans veïnal · Viladecans",
+  "icono": "🔊",
+  "categoria": "administrativa",
+  "base_legal": [
+    "Ordenança de sorolls: arts. 19, 20, 32, 34 i 37"
+  ],
+  "fonts": [
+    {
+      "titol": "Ordenança de sorolls i vibracions",
+      "url": "https://seu-e.cat/documents/4123793/18188050/37Ordenancasorollsvibracions.pdf/8e53fed1-befc-42f1-8471-fe7e1f0c92c0"
+    }
+  ],
+  "data_revisio": "2026-09-17",
+  "inici": "inici",
+  "nodes": {
+    "inici": {
+      "titol": "Quina prova tens?",
+      "text": "Identifica focus, horari, receptors i persistència. L'accés a domicili necessita cobertura legal.",
+      "opcions": [
+        {
+          "etiqueta": "Mesurament reglamentari amb superació",
+          "va_a": "mesura"
+        },
+        {
+          "etiqueta": "Molèsties de veïnatge constatades sense nivell mesurable",
+          "va_a": "molestia"
+        },
+        {
+          "etiqueta": "Només avís, sense constatació",
+          "va_a": "pendent"
+        }
+      ]
+    },
+    "mesura": {
+      "titol": "Quina superació s'ha acreditat?",
+      "text": "Verifica annex aplicable, franja horària, calibratge, soroll de fons i correccions; no usis una aplicació mòbil com a sonòmetre reglamentari.",
+      "opcions": [
+        {
+          "etiqueta": "Més de 0 i fins a 5 unitats",
+          "va_a": "lleu"
+        },
+        {
+          "etiqueta": "Més de 5 i fins a 10 unitats",
+          "va_a": "greu"
+        },
+        {
+          "etiqueta": "Més de 10 unitats",
+          "va_a": "moltgreu"
+        }
+      ]
+    },
+    "lleu": {
+      "final": true,
+      "titol": "Superació lleu",
+      "tipus": "administrativa",
+      "text": "Comprova el subapartat aplicable dels annexos 3, 4, 6 o 7.",
+      "accions": [
+        "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+        "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+        "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+      ],
+      "article_butlleta": "Art. 34.1.a/b/c i 37",
+      "import": "Fins a 900 €"
+    },
+    "greu": {
+      "final": true,
+      "titol": "Superació greu",
+      "tipus": "administrativa",
+      "text": "Comprova el subapartat aplicable.",
+      "accions": [
+        "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+        "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+        "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+      ],
+      "article_butlleta": "Art. 34.2.a/b/c i 37",
+      "import": "901–12.000 €"
+    },
+    "moltgreu": {
+      "final": true,
+      "titol": "Superació molt greu",
+      "tipus": "administrativa",
+      "text": "Comprova el subapartat aplicable.",
+      "accions": [
+        "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+        "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+        "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+      ],
+      "article_butlleta": "Art. 34.3.a/b/c i 37",
+      "import": "12.001–300.000 €"
+    },
+    "molestia": {
+      "final": true,
+      "titol": "Molèsties no mesurables · lleu",
+      "tipus": "administrativa",
+      "text": "Cal acreditar les condicions dels arts. 19/20 i 34.1.f; no inventis decibels.",
+      "accions": [
+        "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+        "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+        "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+      ],
+      "article_butlleta": "Art. 34.1.f i 37",
+      "import": "Fins a 900 €"
+    },
+    "pendent": {
+      "final": true,
+      "titol": "Completar comprovacions",
+      "tipus": "procediment",
+      "text": "La queixa no acredita per si sola una superació acústica.",
+      "accions": [
+        "Recull testimonis i comprova el focus; sol·licita inspecció o mesurament quan calgui."
+      ]
+    }
+  },
+  "notes_finals": [
+    "Acta d'inspecció amb còpia a la persona responsable (art. 32).",
+    "Els llindars indicats no substitueixen la valoració d'altres tipus o agreujants de l'art. 34.",
+    "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+    "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+    "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+  ]
+}

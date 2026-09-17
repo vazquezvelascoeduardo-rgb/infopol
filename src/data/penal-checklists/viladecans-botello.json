@@ -1,0 +1,85 @@
+{
+  "id": "viladecans-botello",
+  "titol": "Consum d'alcohol / botelló · Viladecans",
+  "icono": "🍺",
+  "categoria": "administrativa",
+  "base_legal": [
+    "Ordenança de convivència i civisme: arts. 106, 108 i annex 1"
+  ],
+  "fonts": [
+    {
+      "titol": "Ordenança municipal vigent",
+      "url": "https://seu-e.cat/documents/4123793/18336324/08.Ordenan%C3%A7a%2BConvivencia%2Bi%2BCivisme(FINAL-PT).pdf/3bcbcf00-d0ae-40da-8458-c976e3083e70"
+    }
+  ],
+  "data_revisio": "2026-09-17",
+  "inici": "inici",
+  "nodes": {
+    "inici": {
+      "titol": "Hi ha una urgència sanitària?",
+      "text": "Comprova consciència, respiració i risc immediat.",
+      "opcions": [
+        {
+          "etiqueta": "Sí",
+          "va_a": "urgent"
+        },
+        {
+          "etiqueta": "No",
+          "va_a": "molesties"
+        }
+      ]
+    },
+    "urgent": {
+      "final": true,
+      "titol": "Prioritat sanitària",
+      "tipus": "procediment",
+      "text": "Activa assistència i protegeix la persona.",
+      "accions": [
+        "Truca al 112/SEM; no deixis sola una persona vulnerable.",
+        "Si hi ha menors, identifica responsables i activa protecció quan calgui."
+      ]
+    },
+    "molesties": {
+      "titol": "Consum amb alteració o molèsties acreditades?",
+      "text": "Comprova espai i autorització; individualitza qui consumeix i quines molèsties causa.",
+      "opcions": [
+        {
+          "etiqueta": "Sí, fora del supòsit autoritzat",
+          "va_a": "denuncia"
+        },
+        {
+          "etiqueta": "No s'acrediten aquests elements",
+          "va_a": "sense"
+        }
+      ]
+    },
+    "denuncia": {
+      "final": true,
+      "titol": "Consum amb molèsties · lleu",
+      "tipus": "administrativa",
+      "text": "Art. 106; intervenció cautelar dels elements prohibits segons art. 108.",
+      "accions": [
+        "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+        "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+        "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+      ],
+      "article_butlleta": "Art. 106 i annex 1",
+      "import": "100–750 €",
+      "documentacio": "Acta de denúncia i inventari dels elements intervinguts."
+    },
+    "sense": {
+      "final": true,
+      "titol": "No denunciar per mera presència",
+      "tipus": "ok",
+      "text": "No pressuposis la infracció només per estar al grup.",
+      "accions": [
+        "Documenta únicament els fets comprovats; atén riscos sanitaris."
+      ]
+    }
+  },
+  "notes_finals": [
+    "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+    "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+    "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+  ]
+}

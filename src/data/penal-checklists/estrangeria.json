@@ -1,0 +1,112 @@
+{
+  "id": "estrangeria",
+  "titol": "Estrangeria · LO 4/2000",
+  "icono": "🌍",
+  "categoria": "operatiu",
+  "base_legal": [
+    "LO 4/2000: arts. 22, 31 bis, 35, 53.1.a, 57, 59 bis i 61–62",
+    "LO 4/2015: art. 16"
+  ],
+  "fonts": [
+    {
+      "titol": "LO 4/2000 consolidada",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2000-544"
+    },
+    {
+      "titol": "LO 4/2015",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442"
+    }
+  ],
+  "data_revisio": "2026-09-17",
+  "inici": "inici",
+  "nodes": {
+    "inici": {
+      "titol": "Quina situació requereix actuació?",
+      "text": "La nacionalitat o l'aparença no justifiquen per si soles una identificació. Motiva la intervenció.",
+      "opcions": [
+        {
+          "etiqueta": "Possible menor no acompanyat",
+          "va_a": "menor"
+        },
+        {
+          "etiqueta": "Demana asil o presenta indicis de tracta/violència",
+          "va_a": "proteccio"
+        },
+        {
+          "etiqueta": "Persona adulta: comprovació documental justificada",
+          "va_a": "documents"
+        }
+      ]
+    },
+    "menor": {
+      "final": true,
+      "titol": "Protecció del possible menor",
+      "tipus": "procediment",
+      "text": "Art. 35: activa protecció de menors i comunica a Fiscalia. La determinació de l'edat no correspon a la patrulla.",
+      "accions": [
+        "Garanteix atenció immediata, intèrpret i derivació segura.",
+        "No tramitis una expulsió com si fos adult."
+      ]
+    },
+    "proteccio": {
+      "final": true,
+      "titol": "Activar protecció específica",
+      "tipus": "procediment",
+      "text": "Recull la petició d'asil o els indicis de vulnerabilitat i comunica'ls a la unitat competent.",
+      "accions": [
+        "Facilita intèrpret, assistència i atenció urgent.",
+        "Aplica les garanties específiques dels arts. 31 bis/59 bis quan correspongui; evita retorns sense examinar la protecció."
+      ]
+    },
+    "documents": {
+      "titol": "Quin resultat tenen les comprovacions?",
+      "text": "Verifica passaport, règim UE/familiar, permisos, renovació, asil i requeriments vigents. Una TIE caducada no prova sola irregularitat.",
+      "opcions": [
+        {
+          "etiqueta": "Situació regular o renovació/protecció acreditada",
+          "va_a": "regular"
+        },
+        {
+          "etiqueta": "Possible estada irregular",
+          "va_a": "irregular"
+        },
+        {
+          "etiqueta": "Identitat no acreditada",
+          "va_a": "identitat"
+        }
+      ]
+    },
+    "regular": {
+      "final": true,
+      "titol": "Sense infracció d'estada acreditada",
+      "tipus": "ok",
+      "text": "Continua només les actuacions justificades per altres fets.",
+      "accions": [
+        "Anota la verificació."
+      ]
+    },
+    "irregular": {
+      "final": true,
+      "titol": "Comunicació a estrangeria",
+      "tipus": "procediment",
+      "text": "L'estada irregular pot ser administrativa (art. 53.1.a), no és delicte ni comporta detenció o expulsió automàtiques.",
+      "accions": [
+        "Remet fets i comprovacions a Policia Nacional/òrgan competent.",
+        "Les mesures de l'art. 61 exigeixen expedient i habilitació; l'internament de l'art. 62 requereix autorització judicial.",
+        "Garanteix assistència lletrada i intèrpret en els procediments previstos a l'art. 22."
+      ]
+    },
+    "identitat": {
+      "final": true,
+      "titol": "Identificació amb garanties",
+      "tipus": "procediment",
+      "text": "Aplica l'art. 16 LOPSC si concorren els seus requisits; no l'utilitzis per retenir una persona ja identificada per estrangeria.",
+      "accions": [
+        "Esgota comprovacions al lloc. Si procedeix trasllat: temps imprescindible, màxim 6 h, registre i volant de sortida."
+      ]
+    }
+  },
+  "notes_finals": [
+    "No confonguis identificació, detenció penal i mesura cautelar d'estrangeria."
+  ]
+}

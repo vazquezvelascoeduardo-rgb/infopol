@@ -1,0 +1,93 @@
+{
+  "id": "viladecans-venda-ambulant",
+  "titol": "Venda ambulant · Viladecans",
+  "icono": "🛍️",
+  "categoria": "administrativa",
+  "base_legal": [
+    "Llei 18/2017: arts. 15, 72, 73.5, 76 i 85",
+    "Ordenança de civisme: art. 48.3 i annex 1"
+  ],
+  "fonts": [
+    {
+      "titol": "Llei de comerç",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2017-11320"
+    },
+    {
+      "titol": "Ordenança municipal",
+      "url": "https://seu-e.cat/documents/4123793/18336324/08.Ordenan%C3%A7a%2BConvivencia%2Bi%2BCivisme(FINAL-PT).pdf/3bcbcf00-d0ae-40da-8458-c976e3083e70"
+    }
+  ],
+  "data_revisio": "2026-09-17",
+  "inici": "inici",
+  "nodes": {
+    "inici": {
+      "titol": "Hi ha autorització municipal?",
+      "text": "Comprova titular, productes, lloc, dies i horari. Distingeix mercat setmanal, venda no sedentària i simple ocupació.",
+      "opcions": [
+        {
+          "etiqueta": "Autorització vàlida i condicions respectades",
+          "va_a": "correcte"
+        },
+        {
+          "etiqueta": "No existeix autorització",
+          "va_a": "sense"
+        },
+        {
+          "etiqueta": "Hi ha autorització però se n'incompleixen condicions",
+          "va_a": "condicions"
+        },
+        {
+          "etiqueta": "No es pot comprovar al lloc",
+          "va_a": "pendent"
+        }
+      ]
+    },
+    "correcte": {
+      "final": true,
+      "titol": "Activitat autoritzada",
+      "tipus": "ok",
+      "text": "No consta infracció per manca d'autorització.",
+      "accions": [
+        "Anota les comprovacions."
+      ]
+    },
+    "sense": {
+      "final": true,
+      "titol": "Venda no sedentària no autoritzada",
+      "tipus": "administrativa",
+      "text": "Art. 73.5 Llei 18/2017: greu. L'art. 85 exigeix comprovar si hi ha règim sancionador municipal propi abans de determinar la via.",
+      "accions": [
+        "Consulta l'autorització amb comerç/mercats i documenta l'activitat real de venda.",
+        "Si hi ha una paradeta que ocupa l'espai sense permís: art. 48.3 de civisme, greu, 751–1.500 €. Aquest import correspon a l'ocupació, no a tota venda ambulant.",
+        "No acumulis automàticament denúncies pel mateix fet; remet l'acta a l'òrgan competent."
+      ],
+      "documentacio": "Acta d'inspecció amb productes, lloc, extensió, autorització comprovada i fotografies."
+    },
+    "condicions": {
+      "final": true,
+      "titol": "Concretar l'incompliment",
+      "tipus": "procediment",
+      "text": "Horaris, perímetre o manca d'exhibició no equivalen a inexistència d'autorització.",
+      "accions": [
+        "Aplica l'apartat corresponent de l'art. 72 o del règim municipal del mercat; documenta la condició incomplerta."
+      ]
+    },
+    "pendent": {
+      "final": true,
+      "titol": "Verificar abans de qualificar",
+      "tipus": "procediment",
+      "text": "No confonguis no mostrar el document amb no tenir autorització.",
+      "accions": [
+        "Consulta el registre municipal i deixa constància de la resposta."
+      ]
+    }
+  },
+  "notes_finals": [
+    "Aliments: documenta conservació i traçabilitat; avisa inspecció sanitària si hi ha risc.",
+    "La retirada de mercaderia requereix fonament legal i proporcionalitat: inventari, rebut, custòdia i destinació.",
+    "No pressuposis falsificació penal pel sol fet de vendre al carrer.",
+    "Consigna data, hora, lloc, persones implicades, fets observats, testimonis i fotografies pertinents.",
+    "Documenta els requeriments, la resposta i les mesures adoptades. L'import és un rang legal: la resolució correspon a l'òrgan competent.",
+    "Si concorren indicis de delicte, comunica'ls a l'autoritat competent; evita sancionar dues vegades el mateix subjecte, fet i fonament."
+  ]
+}

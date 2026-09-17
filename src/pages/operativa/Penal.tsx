@@ -3,7 +3,7 @@
 //   - Llistat: /operativa/penal → escenaris organitzats en blocs amb colors.
 //   - Runner: /operativa/penal/:id → executa un checklist concret amb
 //     el component ChecklistRunner.
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import {
   PENAL_INDEX,
   getPenalChecklist,
@@ -24,6 +24,9 @@ export default function Penal() {
 
 function PenalList() {
   const { t } = useT();
+  const [params] = useSearchParams();
+  const administrativa = params.get('ambit') === 'administrativa';
+  const blocs = PENAL_INDEX.blocs.filter((b) => !administrativa || b.bloc.startsWith('ORDENANCES'));
   return (
     <div className="v3-page v3-anim">
 
@@ -34,11 +37,11 @@ function PenalList() {
         <span className="op-subhero-icon" aria-hidden>🛡️</span>
         <div className="op-subhero-text">
           <span className="eyebrow">{t('operativa.title').toUpperCase()}</span>
-          <h1>{PENAL_INDEX.titol}</h1>
+          <h1>{administrativa ? 'Ordenances i sancions · Viladecans' : PENAL_INDEX.titol}</h1>
           {PENAL_INDEX.descripcio && <p>{PENAL_INDEX.descripcio}</p>}
         </div>
         <span className="op-subhero-count">
-          <b>{PENAL_INDEX.total_escenaris}</b>
+          <b>{blocs.reduce((total, b) => total + b.escenaris.length, 0)}</b>
           <span>escenaris</span>
         </span>
       </header>
@@ -61,7 +64,7 @@ function PenalList() {
       </div>
 
       {/* Blocs amb escenaris */}
-      {PENAL_INDEX.blocs.map((bloc) => (
+      {blocs.map((bloc) => (
         <BlockSection key={bloc.bloc} bloc={bloc} />
       ))}
     </div>
@@ -118,7 +121,7 @@ function ScenarioCard({ entry, color }: { entry: PenalIndexEntry; color: string 
     >
       <div className="top">
         <span className="op-proc-emoji" aria-hidden>{extractEmoji(entry.titol) ?? '📋'}</span>
-        <span className="lvl">SC / PENAL</span>
+        <span className="lvl">{entry.id.startsWith('viladecans-') ? 'ADMINISTRATIVA' : 'SC / PENAL'}</span>
       </div>
       <h4>{stripEmoji(entry.titol)}</h4>
       <div className="footer-row">

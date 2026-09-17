@@ -1,8 +1,8 @@
 {
   "modul": "seguretat_ciutadana_penal",
-  "titol": "Seguretat Ciutadana / Penal — Checklists operatius v2",
-  "descripcio": "Arbres de decisió contrastats amb Codi Penal (BOE-A-1995-25444 consolidat), LO 4/2015 LOPSC, LECrim, i Pautes Operatives ISPC UF 3.3 (febrer 2026). Inclou conceptes literals per actes/butlletins, articles exactes, ramificacions admin/penal, accions operatives, documentació obligatòria, frases prohibides i drets de la víctima/detingut.",
-  "data_versio": "2026-02",
+  "titol": "Seguretat ciutadana, penal i ordenances",
+  "descripcio": "Procediments pas a pas: identificació, delictes, estrangeria, menors, maltractament animal i policia administrativa de Viladecans.",
+  "data_versio": "2026-09-17",
   "blocs": [
     {
       "bloc": "OPERATIU / LOPSC",
@@ -152,9 +152,71 @@
           "ordre": 19
         }
       ]
+    },
+    {
+      "bloc": "ESTRANGERIA, MENORS I ANIMALS",
+      "color": "#186B47",
+      "icono": "📋",
+      "escenaris": [
+        {
+          "id": "estrangeria",
+          "titol": "🌍 Estrangeria · LO 4/2000",
+          "fitxer": "estrangeria.json",
+          "ordre": 20
+        },
+        {
+          "id": "menors-lorpm",
+          "titol": "🧒 Menors · LORPM",
+          "fitxer": "menors-lorpm.json",
+          "ordre": 21
+        },
+        {
+          "id": "maltractament-animal",
+          "titol": "🐾 Maltractament animal",
+          "fitxer": "maltractament-animal.json",
+          "ordre": 22
+        }
+      ]
+    },
+    {
+      "bloc": "ORDENANCES · VILADECANS",
+      "color": "#9A5B00",
+      "icono": "🏘️",
+      "escenaris": [
+        {
+          "id": "viladecans-civisme",
+          "titol": "🏘️ Civisme · Viladecans",
+          "fitxer": "viladecans-civisme.json",
+          "ordre": 23
+        },
+        {
+          "id": "viladecans-botello",
+          "titol": "🍺 Consum d'alcohol / botelló · Viladecans",
+          "fitxer": "viladecans-botello.json",
+          "ordre": 24
+        },
+        {
+          "id": "viladecans-soroll",
+          "titol": "🔊 Sorolls i descans veïnal · Viladecans",
+          "fitxer": "viladecans-soroll.json",
+          "ordre": 25
+        },
+        {
+          "id": "viladecans-venda-ambulant",
+          "titol": "🛍️ Venda ambulant · Viladecans",
+          "fitxer": "viladecans-venda-ambulant.json",
+          "ordre": 26
+        },
+        {
+          "id": "viladecans-gpp",
+          "titol": "🐕 Gossos potencialment perillosos · Viladecans",
+          "fitxer": "viladecans-gpp.json",
+          "ordre": 27
+        }
+      ]
     }
   ],
-  "total_escenaris": 19,
+  "total_escenaris": 27,
   "actes_referencies": [
     "D-10: Denúncia LOPSC (LO 4/2015) — número OAC",
     "D-10.b: Intervenció temporal objecte (Art. 18.2 LOPSC)",
