@@ -43,6 +43,16 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  // 17·09·2026
+  { date: '09·17', tag: 'Policial · CAT', title: 'Desarticulada xarxa albanesa que movia tones de cocaïna a Catalunya', desc: 'La Policia Nacional deté 15 persones i intervé 2.700 kg de cocaïna transportats des de la Costa del Sol amb escortes que superaven els 200 km/h.', url: 'https://www.catalunyapress.es/articulo/sucesos-cataluna/2026-09-17/6018465-desarticulada-red-albanesa-movia-toneladas-cocaina-desde-costa-sol-hasta-catalunya' },
+  { date: '09·17', tag: 'Sucesos · CAT', title: 'Condemnat per assassinat fuig durant una sortida programada a Tarragona', desc: 'Un intern de 52 anys del Mas d\'Enric va escapar per una sortida d\'emergència durant un àpat en un restaurant; recerca en curs.', url: 'https://www.catalunyapress.es/articulo/sucesos-cataluna/2026-09-17/6019142-preso-condenado-asesinato-fuga-durante-salida-programada-tarragona' },
+  { date: '09·17', tag: 'Política · CAT', title: 'Junts reclama la dimissió de Paneque i Nadal pel sot del Putxet', desc: '93 habitatges desallotjats a Barcelona; Junts exigeix responsabilitats als consellers de la Generalitat implicats.', url: 'https://metropoliabierta.elespanol.com/sucesos/' },
+  { date: '09·17', tag: 'Política · ESP', title: 'Comissari europeu de Migració es reuneix amb Marlaska per la crisi de Ceuta', desc: 'Magnus Brunner visita Madrid per debatre les mesures per recuperar la normalitat a Ceuta i reforçar la resposta europea.', url: 'https://www.infobae.com/espana/agencias/2026/09/17/hoy-sera-noticia-jueves-17-de-septiembre/' },
+  { date: '09·17', tag: 'Cultura · ESP', title: 'La Fira LIBER 2026 presenta la seva 44a edició a Barcelona', desc: 'La Fira Internacional del Llibre (18–20 de setembre) torna a la Fira de Barcelona amb novetats editorials nacionals i internacionals.', url: 'https://www.infobae.com/espana/agencias/2026/09/17/hoy-sera-noticia-jueves-17-de-septiembre/' },
+  { date: '09·17', tag: 'Esports · EUR', title: 'Champions 26/27: Reial Madrid 2-1 Inter en la primera jornada', desc: 'Els blancs s\'imposen a l\'Inter de Milà en l\'inici de la fase de lliga de la UEFA Champions League 2026/27.', url: 'https://es.uefa.com/uefachampionsleague/news/02a8-21767f6df81a-a97aaf2bf581-1000--champions-league-2026-27-calendario-fechas-y-horarios-de-los/' },
+  { date: '09·17', tag: 'Internacional', title: 'Takaichi remodelja per primer cop el seu gabinet al Japó', desc: 'La primera ministra japonesa Sanae Takaichi fa la primera reestructuració del seu executiu gairebé un any després d\'arribar al poder.', url: 'https://es-us.noticias.yahoo.com/noticias-17-septiembre-2026-mediod%C3%ADa-100026760.html' },
+  { date: '09·17', tag: 'Tech · UNESCO', title: 'La UNESCO clou el IV Fòrum Global sobre Ètica de la IA a Riad', desc: 'Experts mundials debaten marcs ètics per a la intel·ligència artificial en la clausura del fòrum internacional de la UNESCO.', url: 'https://www.infobae.com/america/agencias/2026/09/17/temas-del-dia-de-efe-internacional-del-jueves-17-de-septiembre-de-2026-1200-gmt/' },
+  // Normativa
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -125,13 +135,14 @@ export default function ScreenOperativaHome() {
         <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
-            <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
+            <div key={i} onClick={n.url ? () => window.open(n.url, '_blank') : undefined} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card, cursor: n.url ? 'pointer' : 'default' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                 <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
                 <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && <div style={{ fontSize: 10.5, color: T.cat.operativa.solid, marginTop: 6, fontWeight: 700 }}>Llegir més →</div>}
             </div>
           ))}
         </div>
