@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../tokens';
 import Icon from '../components/Icon';
 import { InfoPolWordmark, StatusBar, Pill, DuoButton, CatIcon } from '../components/Shared';
+import { NOTICIAS, NEWS_CATS } from '../data/news';
 
 export default function ScreenLanding() {
   const navigate = useNavigate();
@@ -75,6 +76,32 @@ export default function ScreenLanding() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* noticias preview */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+          <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted }}>Última hora</div>
+          <button onClick={() => navigate('/noticias')} style={{ background: 'none', border: 'none', color: '#3B6BF5', fontFamily: T.font, fontWeight: 700, fontSize: 12, cursor: 'pointer', padding: 0 }}>
+            Veure totes →
+          </button>
+        </div>
+        {NOTICIAS.slice(0, 3).map(n => {
+          const meta = NEWS_CATS[n.cat];
+          return (
+            <div key={n.id} onClick={() => navigate('/noticias')} style={{
+              background: '#fff', borderRadius: T.r.md, padding: '12px 14px',
+              borderLeft: `3px solid ${meta.color}`, boxShadow: T.shadow.card,
+              marginBottom: 8, cursor: 'pointer',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                <span style={{ background: meta.soft, color: meta.ink, borderRadius: T.r.pill, padding: '2px 7px', fontSize: 9.5, fontWeight: 800, letterSpacing: 0.5, textTransform: 'uppercase' }}>{meta.label}</span>
+                <span style={{ fontSize: 9.5, fontWeight: 700, color: T.inkFaint, marginLeft: 'auto' }}>{n.data}</span>
+              </div>
+              <div style={{ fontWeight: 700, fontSize: 13, color: T.ink, lineHeight: 1.35 }}>{n.title}</div>
+            </div>
+          );
+        })}
       </div>
 
       {/* features grid */}
