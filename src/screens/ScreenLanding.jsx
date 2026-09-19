@@ -96,6 +96,33 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias preview */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 10 }}>Actualitat</div>
+        <div
+          onClick={() => navigate('/noticias')}
+          style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, borderLeft: '3px solid #D63A3A', boxShadow: T.shadow.card, cursor: 'pointer' }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+            <span style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', color: '#D63A3A' }}>Notícies · Avui</span>
+            <span style={{ fontSize: 11, color: '#D63A3A', fontWeight: 700 }}>Tot →</span>
+          </div>
+          {[
+            { tag: 'Política', title: 'Illa desencalla l\'ampliació del Prat: 3.200 M€', area: 'CAT' },
+            { tag: 'Cultura', title: 'Carmen Machi rep el Premio Nacional de Cinematografía', area: 'ESP' },
+            { tag: 'Policial', title: 'Interior desaconsella el España-Mèxic Sub-20 a Ceuta', area: 'ESP' },
+          ].map((n, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginBottom: i < 2 ? 8 : 0, paddingBottom: i < 2 ? 8 : 0, borderBottom: i < 2 ? `1px solid ${T.hairline}` : 'none' }}>
+              <div style={{ flexShrink: 0, marginTop: 2, width: 6, height: 6, borderRadius: 3, background: '#D63A3A' }} />
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                <div style={{ fontSize: 10.5, color: T.inkMuted, marginTop: 2 }}>{n.area} · {n.tag}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* testimonial */}
       <div style={{ padding: '16px 18px 0' }}>
         <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.academia.solid}` }}>
