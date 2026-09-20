@@ -43,6 +43,14 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '09·20', tag: 'Política · CAT', title: 'Govern celebra dos anys — desplegament per Catalunya', desc: 'Els consellers recorren el territori reivindicant la finançació singular de 4.700 M€ anuals.', url: 'https://www.moncloa.com/2026/09/19/govern-cataluna-consellers-financiacion-singular-3434438' },
+  { date: '09·20', tag: 'Política · ESP', title: 'Sánchez presenta el pla IA360 — IA responsable', desc: 'El president del Govern anuncia el pla de desplegament responsable de la intel·ligència artificial a l\'administració.', url: 'https://www.lanocion.es/espanya/20260920/espanya-cierra-el-domingo-entre-pulso-politico-ten-9z8bc.html' },
+  { date: '09·20', tag: 'Economia · ESP', title: 'L\'economia espanyola creixerà un 2,5% el 2026', desc: 'Dues dècimes per sobre de les estimacions, impulsada pel consum privat i les exportacions de serveis.', url: 'https://www.cronista.com/espana/economia-finanzas/buenas-noticias-para-los-espanoles-la-economia-crecera-mas-de-lo-esperado-en-2026/' },
+  { date: '09·20', tag: 'Esports', title: 'MotoGP GP d\'Àustria — Dèrbi madrileny i Supercopa Endesa', desc: 'Jornada plena: MotoGP a les 14h, Atlètic-Madrid a les 16:15h, Copa Davis Espanya-Xile 17h i Joventut-Barça 19h.', url: 'https://donporque.com/que-deportes-ver-hoy-20-de-septiembre/' },
+  { date: '09·20', tag: 'Judicial · CAT', title: 'Judici als 4 agents de Policia pel cas Roger Español (1-O)', desc: 'La Fiscalia demana l\'absolució; les acusacions populars reclamen 13 anys per tortures. Amnistia Internacional observa el procés.', url: 'https://www.moncloa.com/2026/09/14/juicio-policias-1-o-fiscalia-3431141' },
+  { date: '09·20', tag: 'Seguretat · CAT', title: 'Delictes a Catalunya cauen un 8,4% fins a l\'agost', desc: '361.074 fets delictius registrats el 2026, la xifra més baixa dels últims tres anys per al mateix període.', url: 'https://www.catalunyapress.es/articulo/sucesos-cataluna/2026-09-19/6016129-delitos-caen-84-catalunya-hasta-agosto-361074-casos-registrados' },
+  { date: '09·20', tag: 'Policial · CAT', title: 'Detingut a Barcelona per tràfic de 410 kg de cànnabis', desc: 'La Policia Nacional deté un home de 25 anys reclamat per la justícia suïssa mitjançant ordre europea de detenció.', url: 'https://www.moncloa.com/2026/09/19/policia-nacional-fugitivo-barcelona-cannabis-3434391' },
+  { date: '09·20', tag: 'Ciència', title: 'Premis Ig Nobel 2026 — cerimònia a Zuric', desc: 'La ciència més insòlita premiada: estudis sobre bessons entre espècies i 1.000 calçotets enterrats en 25 països.', url: 'https://www.que.es/2026/09/05/premios-ig-nobel-2026-ganadores/' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -125,13 +133,14 @@ export default function ScreenOperativaHome() {
         <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
-            <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
+            <div key={i} onClick={() => n.url && window.open(n.url, '_blank')} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card, cursor: n.url ? 'pointer' : 'default' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                 <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
                 <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && <div style={{ fontSize: 10.5, color: T.cat.operativa.solid, marginTop: 6, fontWeight: 700 }}>Llegir notícia →</div>}
             </div>
           ))}
         </div>
