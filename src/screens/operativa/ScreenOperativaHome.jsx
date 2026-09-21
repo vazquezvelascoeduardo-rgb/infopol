@@ -120,6 +120,25 @@ export default function ScreenOperativaHome() {
         </div>
       </div>
 
+      {/* Noticias del dia */}
+      <div style={{ padding: '12px 16px 0' }}>
+        <div onClick={() => navigate('/noticias')} style={{
+          background: '#fff', borderRadius: T.r.lg, padding: 16,
+          borderTop: `3px solid ${T.cat.noticias.solid}`, boxShadow: T.shadow.card,
+          cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12,
+        }}>
+          <div style={{ width: 44, height: 44, borderRadius: 11, background: T.cat.noticias.soft, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+            <Icon name="newspaper" size={22} color={T.cat.noticias.solid} />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10.5, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.noticias.ink }}>Actualitzat cada dia · 22h</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 17, letterSpacing: -0.3, marginTop: 2 }}>Notícies del dia</div>
+            <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 3 }}>Catalunya · Espanya · Internacional</div>
+          </div>
+          <Icon name="chevron-right" size={16} color={T.inkMuted} />
+        </div>
+      </div>
+
       {/* Actualitat normativa */}
       <div style={{ padding: '14px 0 0' }}>
         <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />

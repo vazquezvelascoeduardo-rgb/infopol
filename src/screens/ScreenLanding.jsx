@@ -86,6 +86,7 @@ export default function ScreenLanding() {
             { c: 'transito', i: 'car', t: 'Infraccions', d: 'LSV, RGC, RGV…' },
             { c: 'operativa', i: 'route', t: 'Protocols', d: 'Pas a pas en ruta' },
             { c: 'tests', i: 'graduation', t: 'Tests Mossos', d: '17 temes oficials' },
+            { c: 'noticias', i: 'newspaper', t: 'Notícies', d: 'Política, esports, policial…' },
           ].map(x => (
             <div key={x.t} style={{ background: '#fff', borderRadius: T.r.lg, padding: 14, borderTop: `3px solid ${T.cat[x.c].solid}`, boxShadow: T.shadow.card }}>
               <CatIcon cat={x.c} icon={x.i} size={36} rounded={10} />
