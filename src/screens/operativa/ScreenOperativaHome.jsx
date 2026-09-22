@@ -43,6 +43,15 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  // 22·09 — Noticias del dia
+  { date: '09·22', tag: 'INTERNACIONAL', title: 'Trump a l\'AGNU: ha considerat "aniquilar" Iran i amenaça amb la força a Llatinoamèrica', desc: 'El president dels EUA compareix a Nova York en plena guerra amb Iran. Zelenski l\'escolta des del públic mentre Trump demana aturar la matança a Ucraïna.', url: 'https://www.primicias.ec/internacional/asamblea-general-onu-nueva-york-trump-guerra-iran-ia-133145/' },
+  { date: '09·22', tag: 'INTERNACIONAL', title: 'Guterres critica l\'expansió israeliana a Cisjordània i exigeix regular la IA', desc: 'El secretari general de l\'ONU obre la setmana d\'alt nivell amb Gaza, Ucraïna, Iran i intel·ligència artificial com a eixos centrals.', url: 'https://www.eltiempo.com/mundo/eeuu-y-canada/asamblea-general-de-la-onu-hoy-22-de-septiembre-antonio-guterres-critica-la-expansion-israeli-en-cisjordania-y-llama-a-regular-el-uso-de-la-ia-3587912' },
+  { date: '09·22', tag: 'ECONOMIA', title: 'Catalunya capta el 19% de la inversió estrangera d\'Espanya, millor dada en onze anys', desc: '2.358 M€ en el primer semestre de 2026, un 68,5% més que el 2025. Madrid baixa del 51% al 45% del capital estranger entrant.', url: 'https://www.moncloa.com/2026/09/22/inversion-extranjera-catalunya-record-once-anos-3435438/' },
+  { date: '09·22', tag: 'ECONOMIA', title: 'L\'Ibex 35 rebota més de l\'1% i recupera els 19.700 punts', desc: 'Els mercats espanyols obren en positiu en una sessió marcada per la moderació del creixement econòmic i els discursos de l\'AGNU.', url: 'https://www.euribor.com.es/2026/09/22/analisis-de-mercados-22-de-septiembre-de-2026-22-septiembre-2026/' },
+  { date: '09·22', tag: 'MOSSOS', title: 'Els Mossos investiguen tres segrestos exprés a Catalunya en quinze dies', desc: 'Tres casos amb modus operandi similar: captivitat breu, violència i alliberament amb ferides. El tercer va ser segrestat a Sant Martí i localitzat a Girona.', url: 'https://www.infobae.com/espana/agencias/2026/09/22/los-mossos-desquadra-investigan-tres-secuestros-en-cataluna-en-quince-dias/' },
+  { date: '09·22', tag: 'MOSSOS', title: 'Cop a una xarxa que movia 50 kg de cocaïna al mes en cotxes "caletejats" des de Barcelona', desc: 'Els agents van localitzar 45 kg de cocaïna envasats al buit en un dels vehicles. Les detencions es van practicar a principis de setembre.', url: 'https://www.infobae.com/espana/agencias/2026/09/22/golpe-a-una-red-que-movia-50-kilos-de-cocaina-al-mes-en-coches-caleteados-desde-barcelona/' },
+  { date: '09·22', tag: 'ESPORT', title: 'FC Barcelona: tres victòries consecutives a La Liga amb la golejada 1-3 a Sevilla (J7)', desc: 'El Barça encadena victòries davant Sevilla (1-3), Racing (7-2) i Llevant (2-4). Champions: 5-1 al Feyenoord el 9 de setembre.', url: 'https://www.fcbarcelona.es/es/futbol/primer-equipo/resultados' },
+  // Normativa anterior
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -122,7 +131,7 @@ export default function ScreenOperativaHome() {
 
       {/* Actualitat normativa */}
       <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
+        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora · Notícies" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
             <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
@@ -132,6 +141,11 @@ export default function ScreenOperativaHome() {
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 6, fontSize: 11, fontWeight: 700, color: T.cat.operativa.solid, textDecoration: 'none' }}>
+                  Llegir notícia →
+                </a>
+              )}
             </div>
           ))}
         </div>
