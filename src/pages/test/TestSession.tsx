@@ -25,6 +25,7 @@ import {
 import { I, Mono, V } from '../../lib/v3';
 import ReportQuestionButton from '../../components/ReportQuestionButton';
 import ConfigTest, { type ConfigEscollida } from './ConfigTest';
+import { SIMULACRE_MOSSOS, RUTA_PART2, desaPart1 } from '../../lib/simulacre';
 
 type Mode = 'exam' | 'study'; // exam = simulacre, study = interactiu
 
@@ -163,6 +164,12 @@ export default function TestSession() {
   const params = new URLSearchParams(location.search);
   const nDemanat = params.get('n');
   const modeDemanat = params.get('mode') === 'exam' ? 'exam' : 'study';
+  // Compte enrere en minuts (?temps=35): en acabar el temps, el test es
+  // corregeix sol, com a l'examen. I ?simulacre=mossos diu que és la 1a
+  // part del simulacre de Mossos.
+  const tempsDemanat = Number(params.get('temps'));
+  const limitSec = Number.isFinite(tempsDemanat) && tempsDemanat > 0 ? Math.round(tempsDemanat * 60) : undefined;
+  const esSimulacre = params.get('simulacre') === 'mossos';
   useEffect(() => {
     if (!nDemanat || state.phase !== 'select' || isRepas) return;
     if (nDemanat === 'totes') startTest(pool.length, modeDemanat, true);
@@ -444,6 +451,7 @@ export default function TestSession() {
           onNext={goNext}
           onBack={goBack}
           onFinish={finishTest}
+          limitSec={limitSec}
         />
       )}
 
@@ -453,6 +461,7 @@ export default function TestSession() {
           slug={slug}
           isAll={isAll}
           corpsRoot={corpsRoot}
+          esSimulacre={esSimulacre}
           onRestart={() => setState({ phase: 'select' })}
         />
       )}
@@ -611,12 +620,14 @@ function SelectPhase({
 // ════════════════════════════════════════════════════════════════════
 
 function RunPhase({
-  state, title, onAnswer, onNext, onBack, onFinish,
+  state, title, onAnswer, onNext, onBack, onFinish, limitSec,
 }: {
   state: Extract<SessionState, { phase: 'run' }>;
   title: string;
   onAnswer: (idx: number | null) => void;
   onNext: () => void; onBack: () => void; onFinish: () => void;
+  /** Si hi és, el rellotge compta enrere i el test s'acaba sol a zero. */
+  limitSec?: number;
 }) {
   const { t } = useT();
   const total = state.questions.length;
@@ -642,6 +653,11 @@ function RunPhase({
     return () => clearInterval(id);
   }, []);
   const elapsedSec = Math.max(0, Math.floor((Date.now() - state.startedAt) / 1000));
+  const restantSec = limitSec ? Math.max(0, limitSec - elapsedSec) : null;
+  const senseTemps = restantSec !== null && restantSec <= 0;
+  useEffect(() => {
+    if (senseTemps) onFinish();
+  }, [senseTemps, onFinish]);
 
   const revealed = state.mode === 'study' && state.revealedIdx.has(state.index);
   const isCorrectAns = revealed && selected === cur.correctIndex;
@@ -683,7 +699,7 @@ function RunPhase({
         index={state.index}
         total={total}
         encerts={correctCount}
-        temps={formatMMSS(elapsedSec)}
+        temps={formatMMSS(restantSec ?? elapsedSec)}
         etiquetaAcabar={t('test.session.finishNow')}
         onAcabar={requestFinish}
         esMobil={isMobile}
@@ -807,16 +823,20 @@ function RunPhase({
 // ════════════════════════════════════════════════════════════════════
 
 function ResultPhase({
-  state, slug, isAll, corpsRoot, onRestart,
+  state, slug, isAll, corpsRoot, esSimulacre, onRestart,
 }: {
   state: Extract<SessionState, { phase: 'result' }>;
   slug: string;
   isAll: boolean;
   corpsRoot: string;
+  esSimulacre?: boolean;
   onRestart: () => void;
 }) {
   const { t } = useT();
   const score = computeScore(state.questions, state.answers);
+  useEffect(() => {
+    if (esSimulacre) desaPart1(score.grade);
+  }, [esSimulacre, score.grade]);
   const durationSec = state.durationSec;
   const avgPerQuestion = score.total > 0 ? durationSec / score.total : 0;
 
@@ -894,6 +914,8 @@ function ResultPhase({
         </div>
       </div>
 
+      {esSimulacre && <SimulacrePart1 nota={score.grade} />}
+
       {/* Logros nous desbloquejats */}
       {state.newAchievements.length > 0 && (
         <div className="tr-achievements">
@@ -967,6 +989,33 @@ function ResultPhase({
         </Link>
         <span className="hidden">{slug}{isAll ? 'all' : ''}</span>
       </div>
+    </div>
+  );
+}
+
+/** Veredicte de la 1a part del simulacre de Mossos i pas a la 2a. */
+function SimulacrePart1({ nota }: { nota: number }) {
+  const { minim } = SIMULACRE_MOSSOS.coneixements;
+  const apte = nota >= minim;
+  return (
+    <div style={{
+      margin: '0 auto 18px', maxWidth: 620, padding: '18px 20px', borderRadius: 18,
+      background: apte ? FP.greenSoft : FP.redSoft,
+      border: `1px solid ${apte ? FP.green : FP.red}`,
+    }}>
+      <div style={{ fontFamily: FP.mono, fontSize: 11, fontWeight: 700, letterSpacing: '.07em', textTransform: 'uppercase', color: apte ? FP.greenInk : FP.redInk }}>
+        Simulacre {SIMULACRE_MOSSOS.convocatoria} · 1a part de 2
+      </div>
+      <div style={{ fontFamily: FP.display, fontWeight: 800, fontSize: 22, margin: '4px 0 6px', color: FP.ink }}>
+        {apte ? 'Apte a coneixements' : "Encara no arribes a l'apte"}
+      </div>
+      <p style={{ margin: '0 0 14px', color: FP.inkSoft, fontSize: 15, lineHeight: 1.45 }}>
+        A l'examen cal un {minim} sobre 10 per passar aquesta subprova. Ara ve la subprova aptitudinal:
+        {' '}{SIMULACRE_MOSSOS.aptitudinal.preguntes} psicotècnics en {SIMULACRE_MOSSOS.aptitudinal.minuts} minuts.
+      </p>
+      <Link to={RUTA_PART2} className="ts-btn ts-btn-primary" style={{ display: 'inline-flex' }}>
+        Comença la 2a part →
+      </Link>
     </div>
   );
 }

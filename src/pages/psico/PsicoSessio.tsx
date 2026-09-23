@@ -24,6 +24,7 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
   BLOCS, PER_ID, genera, segonsPer, simulacre, type ItemPsico,
 } from '../../lib/psicotecnics/cataleg.mjs';
+import { SIMULACRE_MOSSOS, llegeixPart1, notaOficial } from '../../lib/simulacre';
 import { desaSessio } from '../../lib/psicoStats';
 import {
   BarraFocus, DialegFocus, FIc, FP, MarcFocus, PeuFocus, ProgresFocus, useEsMobil,
@@ -42,6 +43,52 @@ function Dibuix({ svg }: { svg: string }) {
   return <span style={{ display: 'contents' }} dangerouslySetInnerHTML={{ __html: svg }} />;
 }
 
+/** Resultat de tot el simulacre de Mossos: les dues subproves, amb la nota oficial. */
+function ResumSimulacre({ part2 }: { part2: number }) {
+  const part1 = llegeixPart1();
+  const { coneixements: c, aptitudinal: a, convocatoria } = SIMULACRE_MOSSOS;
+  const files = [
+    { nom: 'Coneixements', nota: part1, minim: c.minim },
+    { nom: 'Aptitudinal', nota: part2, minim: a.minim },
+  ];
+  const totApte = files.every((f) => f.nota !== null && f.nota >= f.minim);
+  return (
+    <div style={{
+      background: FP.card, border: `1px solid ${FP.hairline}`, borderRadius: 18,
+      padding: '16px 18px', margin: '0 0 18px',
+    }}>
+      <div style={{ fontFamily: FP.mono, fontSize: 11, fontWeight: 700, letterSpacing: '.07em', color: FP.inkMuted, textTransform: 'uppercase' }}>
+        Simulacre {convocatoria} · resultat
+      </div>
+      <div style={{ display: 'grid', gap: 8, margin: '10px 0' }}>
+        {files.map((f) => {
+          const apte = f.nota !== null && f.nota >= f.minim;
+          return (
+            <div key={f.nom} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span style={{ flex: 1, fontSize: 15 }}>{f.nom} <span style={{ color: FP.inkMuted, fontSize: 13 }}>(apte amb {f.minim})</span></span>
+              <span style={{ fontFamily: FP.mono, fontWeight: 700, fontSize: 15 }}>
+                {f.nota === null ? '—' : f.nota.toFixed(2)}
+              </span>
+              <span style={{
+                fontFamily: FP.mono, fontSize: 11.5, fontWeight: 700, padding: '2px 9px', borderRadius: 99,
+                background: f.nota === null ? FP.bgDeep : apte ? FP.greenSoft : FP.redSoft,
+                color: f.nota === null ? FP.inkMuted : apte ? FP.greenInk : FP.redInk,
+              }}>
+                {f.nota === null ? 'no fet' : apte ? 'APTE' : 'NO APTE'}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+      <p style={{ margin: 0, fontSize: 14, color: FP.inkSoft, lineHeight: 1.45 }}>
+        {totApte
+          ? 'Hauries passat la 1a prova. Repeteix el simulacre uns quants cops abans del dia 17 per consolidar-ho.'
+          : "Cada error resta 1/4 d'encert, però si pots descartar alguna opció, arriscar-te surt a compte. Repeteix el simulacre i mira on fluixeges."}
+      </p>
+    </div>
+  );
+}
+
 export default function PsicoSessio({ cos }: { cos: Cos }) {
   const { categoria = '' } = useParams<{ categoria: string }>();
   const [params] = useSearchParams();
@@ -53,6 +100,8 @@ export default function PsicoSessio({ cos }: { cos: Cos }) {
   const esEstudi = params.get('f') !== 'exam';
   const ambTemps = params.get('t') === '1';
   const llavorFixa = Number(params.get('llavor')) || 0;
+  // 2a part del simulacre de Mossos: es puntua com a l'examen oficial.
+  const esSimulacre = params.get('simulacre') === 'mossos' && categoria === 'tot';
 
   // Què s'ha demanat: una categoria sola, un bloc d'aptituds o l'examen sencer.
   const esCategoria = !!PER_ID[categoria];
@@ -212,6 +261,16 @@ export default function PsicoSessio({ cos }: { cos: Cos }) {
               {be} de {preguntes.length} · {rellotge(ambTemps ? segonsPer(quantes) - segons : segons)}
             </div>
           </div>
+
+          {esSimulacre && (
+            <ResumSimulacre
+              part2={notaOficial(
+                be,
+                respostes.filter((r, k) => r !== null && r !== undefined && r !== preguntes[k].correcta).length,
+                preguntes.length,
+              )}
+            />
+          )}
 
           {Object.keys(per).length > 1 && (
             <>

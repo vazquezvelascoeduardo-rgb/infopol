@@ -15,6 +15,7 @@ const ROUTES = [
   ['/superbuscador', 'weekly', '0.8'],
   ['/calculadora-alcohol', 'monthly', '0.7'],
   ['/croquis', 'monthly', '0.7'],
+  ['/simulacre-mossos', 'weekly', '0.9'],
   ['/cultura-general', 'weekly', '0.7'],
   ['/actualitat', 'weekly', '0.6'],
   ['/noticies', 'daily', '0.8'],

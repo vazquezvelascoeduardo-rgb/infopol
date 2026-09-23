@@ -51,6 +51,7 @@ const Superbuscador = lazy(() => import('./pages/Superbuscador'));
 const Recursos = lazy(() => import('./pages/Recursos'));
 const CalculadoraAlcohol = lazy(() => import('./pages/CalculadoraAlcohol'));
 const Croquis = lazy(() => import('./pages/Croquis'));
+const SimulacreMossos = lazy(() => import('./pages/SimulacreMossos'));
 const Chat = lazy(() => import('./pages/Chat'));
 const AvisLegal = lazy(() => import('./pages/legal/Legals').then((m) => ({ default: m.AvisLegal })));
 const Privacitat = lazy(() => import('./pages/legal/Legals').then((m) => ({ default: m.Privacitat })));
@@ -114,6 +115,9 @@ export default function App() {
             {/* El croquis és una eina de dibuix que funciona sencera al
                 navegador: no hi ha res a protegir darrere del compte. */}
             <Route path="/croquis" element={<Croquis />} />
+            {/* Porta d'entrada de la campanya de l'examen de Mossos: pública
+                perquè hi arribin des de xarxes i Google sense compte. */}
+            <Route path="/simulacre-mossos" element={<SimulacreMossos />} />
 
             {/* ═══ Privat — tot dins del marc v3 ═══ */}
             <Route element={<RequireAuth><AppShell /></RequireAuth>}>

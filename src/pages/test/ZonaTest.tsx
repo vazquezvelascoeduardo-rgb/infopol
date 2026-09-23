@@ -185,6 +185,30 @@ export default function ZonaTest({ cos: cosProp }: { cos?: Cos }) {
         <I n="arrow" size={18} sw={2.2} color="rgba(255,255,255,.85)" />
       </button>
 
+      {/* Simulacre de la 1a prova (examen del 17/10/2026). Treure'l quan passi. */}
+      {cos === 'mossos' && (
+        <button
+          type="button"
+          className="v3-sura"
+          onClick={() => nav('/simulacre-mossos')}
+          style={{
+            width: '100%', textAlign: 'left', cursor: 'pointer', borderRadius: 22,
+            padding: '16px 20px', marginBottom: 16, background: V.surface, color: V.ink,
+            border: `2px solid ${a.accent}`, display: 'flex', alignItems: 'center', gap: 14,
+          }}>
+          <I n="clock" size={20} color={a.ink} />
+          <span style={{ flex: 1, minWidth: 0 }}>
+            <span style={{ display: 'block', fontSize: 16.5, fontWeight: 800, letterSpacing: -0.4 }}>
+              Simulacre 46/26: la 1a prova sencera
+            </span>
+            <span style={{ display: 'block', fontSize: 13, color: V.muted, marginTop: 3 }}>
+              30 preguntes + 80 psicotècnics, amb el temps i la penalització de l'examen
+            </span>
+          </span>
+          <I n="arrow" size={18} sw={2.2} color={a.ink} />
+        </button>
+      )}
+
       <div style={{
         display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(250px,1fr))',
         gap: 13,

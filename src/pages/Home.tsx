@@ -176,6 +176,14 @@ export default function Home() {
         <div className="lp-wrap">
           <div className="lp-heroin">
             <NewsletterBanner />
+            {/* Campanya de l'examen de Mossos del 17/10/2026. Treure-la quan passi. */}
+            <Link to="/simulacre-mossos" style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8, marginTop: 18,
+              padding: '8px 14px', borderRadius: 99, textDecoration: 'none',
+              background: C.terraSoft, color: C.terraDark, fontWeight: 700, fontSize: 14.5,
+            }}>
+              Simulacre gratuït de l'examen de Mossos 46/26 →
+            </Link>
             <div className="lp-mono" style={{ color: C.terraDark, marginTop: 18 }}>Policia Local de Catalunya</div>
             <h1>
               Tot el que necessites al carrer
@@ -183,7 +191,7 @@ export default function Home() {
               <span className="t">i per aprovar l'oposició.</span>
             </h1>
             <p className="lp-lede">
-              InfoPol és l'eina feta per un agent en actiu per a la policia local de Catalunya.
+              InfoPol és l'eina per a la policia local de Catalunya.
               Consulta la norma en segons quan estàs de servei, prepara't l'oposició amb el
               temari sencer i redacta les minutes amb ajuda de la intel·ligència artificial.
             </p>
