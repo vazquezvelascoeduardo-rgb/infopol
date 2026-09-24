@@ -43,6 +43,16 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  // 24·09·2026 — Actualització diària
+  { date: '09·24', tag: 'Seguretat', title: 'Mossos investiguen el 3r segrest exprés en menys d\'un mes a Catalunya', desc: 'Tres incidents similars a Sant Martí i Montornès del Vallès. Un dels casos podria estar vinculat al tràfic de marihuana.', url: 'https://www.cope.es/emisoras/catalunya/noticias/mossos-investigan-tercer-secuestro-expres-perpetrado-mes-cataluna-20260922_3441066.html' },
+  { date: '09·24', tag: 'Criminalitat', title: 'La criminalitat a Catalunya baixa un 7,4% el 2026', desc: 'Barcelona acumula un 16% menys de delictes durant l\'estiu. Dades provisionals dels Mossos d\'Esquadra.', url: 'https://es.headtopics.com/news/la-criminalidad-en-catalunya-baja-un-7-4-en-2026-tras-un-87871164' },
+  { date: '09·24', tag: 'Política', title: 'Illa convoca una cimera parlamentària per a un acord d\'estat en educació', desc: 'El president de la Generalitat encapçala la trobada amb els líders de tots els grups parlamentaris el 25 de setembre.', url: 'https://www.infobae.com/espana/agencias/2026/09/24/temas-del-dia-de-efe-espana-del-viernes-25-de-septiembre-de-2026/' },
+  { date: '09·24', tag: 'Economia', title: 'IBEX 35 als 19.632 pts; Euríbor al 3,332% per tensions a Orient Pròxim', desc: 'El Brent arriba als 100 $ i el Govern prepara un decret d\'ajudes per la crisi inflacionista per al 29 de setembre.', url: 'https://www.euribor.com.es/2026/09/24/analisis-de-mercados-24-de-septiembre-de-2026-24-septiembre-2026/' },
+  { date: '09·24', tag: 'Economia', title: 'El Marroc supera Espanya en competitivitat automobilística', desc: 'Cost laboral per vehicle: 106 $ al Marroc davant 955 $ a Espanya — una bretxa del 89% que preocupa el sector.', url: 'https://www.eleconomista.es/' },
+  { date: '09·24', tag: 'Esports', title: 'Espanya debuta a la Lliga de Nacions 26/27 contra Anglaterra a Londres', desc: 'La selecció espanyola entrena a Les Rozas (Madrid) amb atenció als mitjans a les 12.30 h. Dissabte a la nit a Wembley.', url: 'https://www.infobae.com/espana/agencias/2026/09/23/jueves-24-de-septiembre-de-2026/' },
+  { date: '09·24', tag: 'Esports', title: 'Xavi Hernàndez debuta com a seleccionador dels Països Baixos contra Alemanya', desc: 'El tècnic català dirigeix la seva primera convocatòria oficial al Johan Cruyff Arena d\'Amsterdam en la Lliga de Nacions.', url: 'https://www.infobae.com/espana/agencias/2026/09/23/jueves-24-de-septiembre-de-2026/' },
+  { date: '09·24', tag: 'Ciència', title: 'Premis Breakthrough 2026: sis guardons de 3 M$ per a avenços en ciències i física', desc: 'La gala celebrada a Santa Mònica reconeix descobriments en ciències de la vida, física fonamental i matemàtiques.', url: 'https://www.porlalinea.com.do/premios-breakthrough-2026-hollywood-ciencia/' },
+  // Normativa vigent
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -125,13 +135,14 @@ export default function ScreenOperativaHome() {
         <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
-            <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
+            <div key={i} onClick={() => n.url && window.open(n.url, '_blank')} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card, cursor: n.url ? 'pointer' : 'default' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                 <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
                 <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && <div style={{ fontSize: 11, color: T.cat.operativa.solid, fontWeight: 700, marginTop: 6 }}>Llegir més →</div>}
             </div>
           ))}
         </div>
