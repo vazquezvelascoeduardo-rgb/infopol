@@ -77,6 +77,24 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* Notícies d'avui */}
+      <div style={{ padding: '12px 18px 0' }}>
+        <div
+          onClick={() => navigate('/noticias')}
+          style={{ background: '#fff', borderRadius: T.r.xl, padding: 18, cursor: 'pointer', borderTop: `3px solid ${T.cat.physical.solid}`, boxShadow: T.shadow.card, display: 'flex', alignItems: 'center', gap: 14 }}
+        >
+          <div style={{ width: 48, height: 48, borderRadius: 14, background: T.cat.physical.solid, display: 'grid', placeItems: 'center', flexShrink: 0, boxShadow: 'inset 0 -3px 0 rgba(0,0,0,0.18)' }}>
+            <Icon name="bell" size={26} color="#fff" strokeWidth={2.2} />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.physical.ink }}>Actualitat · 25 set. 2026</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 17, letterSpacing: -0.3, marginTop: 1 }}>Notícies del dia</div>
+            <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 2 }}>Catalunya · Espanya · Internacional</div>
+          </div>
+          <Icon name="chevron-right" size={18} color={T.inkMuted} />
+        </div>
+      </div>
+
       {/* features grid */}
       <div style={{ padding: '24px 18px 8px' }}>
         <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 12 }}>Tot el que necessites</div>
