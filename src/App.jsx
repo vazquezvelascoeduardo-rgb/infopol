@@ -5,6 +5,7 @@ import { TabBar } from './components/Shared';
 import ScreenLanding from './screens/ScreenLanding';
 import ScreenOnboarding from './screens/ScreenOnboarding';
 import ScreenPerfil from './screens/ScreenPerfil';
+import ScreenNoticias from './screens/ScreenNoticias';
 
 import ScreenOperativaHome from './screens/operativa/ScreenOperativaHome';
 import ScreenInfraccions from './screens/operativa/ScreenInfraccions';
@@ -86,6 +87,7 @@ export default function App() {
         <Route path="stats" element={<ScreenStats />} />
         <Route path="fisiques" element={<ScreenFisiques />} />
       </Route>
+      <Route path="/noticias" element={<ScreenNoticias />} />
       <Route path="/perfil" element={<ScreenPerfil />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
