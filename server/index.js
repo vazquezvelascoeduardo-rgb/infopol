@@ -73,6 +73,25 @@ const NEWS = [
   },
 ];
 
+// Noticias generals diàries (actualitzades a les 22h)
+const GENERAL_NEWS = [
+  // ─── 28 · SET · 2026 ───────────────────────────────────────────
+  { id: 'g2026-09-28-01', date: '2026-09-28', dateLabel: '09·28', cat: 'politica', tag: 'Política · CAT', title: 'Aliança Catalana en ascens i Junts en caiguda, segons el CEO', desc: 'El baròmetre 2026 del Centre d\'Estudis d\'Opinió mostra un nou escenari al Parlament. El PSC d\'Illa es manté estable mentre AC puja meteòricament.', url: 'https://www.democrata.es/catalunya/' },
+  { id: 'g2026-09-28-02', date: '2026-09-28', dateLabel: '09·28', cat: 'politica', tag: 'Política · CAT', title: 'Junts demana la dimissió de Paneque i Nadal per l\'esvoranc del Putxet', desc: 'L\'enfonsament ha forçat l\'evacuació de 93 habitatges a Barcelona. Junts responsabilitza els consellers de Territori i Cultura de la gestió de la crisi.', url: 'https://www.infobae.com/espana/agencias/2026/09/28/temas-del-dia-de-efe-espana-del-lunes-28-de-septiembre-de-2026-1330-horas/' },
+  { id: 'g2026-09-28-03', date: '2026-09-28', dateLabel: '09·28', cat: 'politica', tag: 'Política · ES', title: 'Sánchez rep el primer ministre de Groenlàndia al Palau de Congressos de Catalunya', desc: 'Pedro Sánchez i Jens Frederik Nielsen s\'reunen a Barcelona per tractar cooperació àrtica, recursos naturals i relacions bilaterals.', url: 'https://www.infobae.com/espana/agencias/2026/09/28/temas-del-dia-de-efe-espana-del-lunes-28-de-septiembre-de-2026-1330-horas/' },
+  { id: 'g2026-09-28-04', date: '2026-09-28', dateLabel: '09·28', cat: 'economia', tag: 'Economia · ES', title: 'El Govern prepara noves mesures per intervenir el mercat del lloguer', desc: 'La proposta inclou la pròrroga de dos anys per als contractes que arribin al venciment. Díaz i Paneque inauguren 36 habitatges protegits a Cardedeu.', url: 'https://www.infobae.com/espana/agencias/2026/09/28/temas-del-dia-de-efe-espana-del-lunes-28-de-septiembre-de-2026-1330-horas/' },
+  { id: 'g2026-09-28-05', date: '2026-09-28', dateLabel: '09·28', cat: 'economia', tag: 'Economia · ES', title: 'El PIB creix un 0,7% al 2T i la CEOE revisa al alça la previsió fins al 2,6%', desc: 'El consum de les llars s\'accelera fins l\'1,2% i la inversió creix un 1,4%. L\'IPC d\'agost es situa al 4,3%, set dècimes per sobre del juliol.', url: 'https://www.merca2.es/2026/09/27/pib-espana-segundo-trimestre-empleo-2462792/' },
+  { id: 'g2026-09-28-06', date: '2026-09-28', dateLabel: '09·28', cat: 'policial', tag: 'Policial · CAT', title: 'Mossos investiguen el quart segrest exprés a Catalunya en un mes, ara a Calella', desc: 'És el novè cas de detencions il·legals vinculades al tràfic de drogues des de gener. La víctima va desaparèixer al Maresme cap a les 21:30 h del diumenge.', url: 'https://www.moncloa.com/2026/09/28/secuestro-calella-cuarto-cataluna-3439226/' },
+  { id: 'g2026-09-28-07', date: '2026-09-28', dateLabel: '09·28', cat: 'policial', tag: 'Policial · ES', title: 'Tres detinguts a Benidorm per l\'assassinat d\'una dona en presumpta violència de gènere', desc: 'L\'agressor, de 30 anys, hauria matat la seva parella amb arma blanca. Dos homes de 40 i 45 anys queden detinguts per encobrir el crim i traslladar el cadàver.', url: 'https://www.infobae.com/america/agencias/2026/09/28/la-policia-detiene-en-benidorm-a-un-hombre-por-el-asesinato-de-su-pareja-y-a-otros-dos-por-encubrirlo/' },
+  { id: 'g2026-09-28-08', date: '2026-09-28', dateLabel: '09·28', cat: 'policial', tag: 'Policial · ES', title: 'Cinc joves detinguts per dos intents d\'homicidi al districte de Ciudad Lineal de Madrid', desc: 'Dos dels detinguts són menors d\'edat. Les agressions, vinculades presumptament al grup DDP, van tenir lloc el mes d\'agost al barri de Ciudad Lineal.', url: 'https://www.madridactual.es/noticias-regionales/sucesos/policia-detiene-presuntos-miembros-ddp-intentos-homicidio-20260928-8120865.html' },
+  { id: 'g2026-09-28-09', date: '2026-09-28', dateLabel: '09·28', cat: 'internacional', tag: 'Internacional', title: 'Opositores veneçolans protesten exigint el retorn de Machado i eleccions lliures', desc: 'Centenars de persones surten als carrers de les principals ciutats de Veneçuela per denunciar el règim de Maduro i reclamar processos electorals democràtics.', url: 'https://es.euronews.com/video/2026/09/28/ultimas-noticias-28-septiembre-2026-tarde' },
+  { id: 'g2026-09-28-10', date: '2026-09-28', dateLabel: '09·28', cat: 'internacional', tag: 'Internacional', title: 'Sèrbia i Croàcia acceleren el rearmament enmig d\'una retòrica creixent als Balcans', desc: 'Els dos països reforcen els seus exèrcits amb nova maquinària i personal. Experts adverteixen d\'un augment de tensions regionals.', url: 'https://es.euronews.com/video/2026/09/28/ultimas-noticias-28-septiembre-2026-tarde' },
+  { id: 'g2026-09-28-11', date: '2026-09-28', dateLabel: '09·28', cat: 'esports', tag: 'Esports · ES', title: 'La selecció espanyola prepara el duel de la Lliga de Nacions contra Croàcia a Sevilla', desc: 'La vigent campiona del món entrena a la Ciutat del Futbol de Las Rozas. El partit es disputa dimarts i és clau per al lideratge del grup.', url: 'https://www.infobae.com/espana/agencias/2026/09/26/domingo-27-de-septiembre-de-2026/' },
+  { id: 'g2026-09-28-12', date: '2026-09-28', dateLabel: '09·28', cat: 'esports', tag: 'Esports · ES', title: 'Pontevedra tanca el Campionat Mundial de Triatló amb rècord d\'assistència', desc: 'La competició, celebrada del 24 al 27 de setembre, ha congregat atletes de més de 150 països. La ciutat gallega es consolida com a seu esportiva internacional.', url: 'https://www.olympics.com/es/noticias/calendario-deportes-2026' },
+  { id: 'g2026-09-28-13', date: '2026-09-28', dateLabel: '09·28', cat: 'cultura', tag: 'Cultura · ES', title: 'Iberseries & Platino Indústria inaugura la seva 6a edició a Madrid', desc: 'El major fòrum audiovisual de parla hispana i portuguesa reuneix professionals de cinema i televisió del 29 de setembre al 2 d\'octubre a Madrid.', url: 'https://www.infobae.com/espana/agencias/2026/09/28/temas-del-dia-de-efe-espana-del-lunes-28-de-septiembre-de-2026-1330-horas/' },
+  { id: 'g2026-09-28-14', date: '2026-09-28', dateLabel: '09·28', cat: 'cultura', tag: 'Cultura · CAT', title: 'IV edició dels Premis Vanguardia a Barcelona amb presència de Sánchez i Feijóo', desc: 'La gala de lliurament de premis de La Vanguardia reuneix les principals autoritats polítiques de l\'Estat a Barcelona a les 20:00 h.', url: 'https://www.infobae.com/espana/agencias/2026/09/28/temas-del-dia-de-efe-espana-del-lunes-28-de-septiembre-de-2026-1330-horas/' },
+];
+
 const STATS = {
   streak: 23,
   streakRecord: 41,
@@ -112,6 +131,14 @@ app.put('/api/user', (req, res) => {
 
 app.get('/api/news', (req, res) => {
   res.json(NEWS);
+});
+
+app.get('/api/general-news', (req, res) => {
+  const { cat, date } = req.query;
+  let result = GENERAL_NEWS;
+  if (cat && cat !== 'totes') result = result.filter(n => n.cat === cat);
+  if (date) result = result.filter(n => n.date === date);
+  res.json(result);
 });
 
 app.get('/api/stats', (req, res) => {
