@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../tokens';
 import Icon from '../components/Icon';
 import { InfoPolWordmark, StatusBar, Pill, DuoButton, CatIcon } from '../components/Shared';
+import { NEWS } from '../data/news';
 
 export default function ScreenLanding() {
   const navigate = useNavigate();
@@ -91,6 +92,24 @@ export default function ScreenLanding() {
               <CatIcon cat={x.c} icon={x.i} size={36} rounded={10} />
               <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1, textTransform: 'uppercase', color: T.cat[x.c].ink, marginTop: 10 }}>{x.t}</div>
               <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 2 }}>{x.d}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* noticias */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+          <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted }}>Notícies d'avui</div>
+          <button onClick={() => navigate('/noticias')} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontFamily: T.font, fontSize: 12, fontWeight: 700, color: T.cat.operativa.solid }}>
+            Veure totes <Icon name="chevron-right" size={14} color={T.cat.operativa.solid} />
+          </button>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {NEWS.slice(0, 3).map(item => (
+            <div key={item.id} onClick={() => navigate('/noticias')} style={{ background: T.card, borderRadius: T.r.lg, padding: '12px 14px', boxShadow: T.shadow.card, cursor: 'pointer', borderLeft: `3px solid ${T.cat.operativa.solid}` }}>
+              <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: 0.5, textTransform: 'uppercase', color: T.cat.operativa.solid, marginBottom: 4 }}>{item.category.charAt(0).toUpperCase() + item.category.slice(1)} · {item.source}</div>
+              <div style={{ fontFamily: T.font, fontWeight: 700, fontSize: 13, color: T.ink, lineHeight: 1.35 }}>{item.title}</div>
             </div>
           ))}
         </div>
