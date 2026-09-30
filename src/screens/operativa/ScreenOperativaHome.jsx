@@ -43,6 +43,16 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '09·30', tag: 'Economia', title: 'L\'IPC de setembre puja al 4,9%, màxim des del 2023', desc: 'L\'INE situa la inflació interanual al 4,9% el setembre. Els aliments acumulen una pujada del 2,7% en un any.' },
+  { date: '09·30', tag: 'Esports', title: 'Enric Mas guanya la Vuelta a España 2026, primer espanyol en dotze anys', desc: 'El ciclista mallorquí s\'imposa en la classificació general. Dotze anys sense triomf espanyol en la cursa.' },
+  { date: '09·30', tag: 'Policial', title: 'Nou segrest exprés a Calella: el 9è cas a Catalunya el 2026', desc: 'Els Mossos investigan el novè segrest exprés de l\'any al Maresme. Quatre sospitosos implicats.' },
+  { date: '09·29', tag: 'Política', title: 'Junqueras condiciona el suport al decret d\'habitatge', desc: 'ERC exigeix topalls de preus més amplis i una pròrroga de dos anys als contractes.' },
+  { date: '09·29', tag: 'Internacional', title: 'La UE desbloqueja 6.600 M€ d\'ajuda militar per a Ucraïna', desc: 'Els estats membres arriben a un acord per alliberar el finançament militar pendent des de l\'estiu.' },
+  { date: '09·29', tag: 'Internacional', title: 'Distensió entre EUA i la Xina en la visita de Xi Jinping a Washington', desc: 'La trobada entre Trump i Xi acaba amb menys confrontació de l\'esperada malgrat la guerra comercial.' },
+  { date: '09·26', tag: 'Política', title: 'Sumar amenaça d\'abandonar el Consell de Ministres pel decret d\'habitatge', desc: 'El soci de govern exigeix l\'aprovació urgent de les mesures de contenció del lloguer.' },
+  { date: '09·22', tag: 'Policial', title: 'Operació antidroga a Barcelona: 12 detinguts i 61 kg de cocaïna comissats', desc: 'La Policia Nacional desmantella una xarxa que distribuïa cocaïna des de Barcelona. 5 armes i 222.880 € intervinguts.' },
+  { date: '09·22', tag: 'Ciència', title: 'Premis Breakthrough 2026: 18,75 M$ per a teràpies gèniques i física', desc: 'La Fundació Breakthrough premia avenços en teràpies gèniques i mesuraments físics de precisió.' },
+  { date: '09·18', tag: 'Estadística', title: 'La criminalitat baixa un 7,4% a Catalunya però pugen assassinats i agressions sexuals', desc: 'Les agressions sexuals amb penetració creixen un 9%. La delinqüència global retrocedeix.' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
