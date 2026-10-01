@@ -16,6 +16,7 @@ import {
   type Severity,
 } from '../lib/cataleg-parser';
 import { findOfficialConcept } from '../lib/cataleg-nomenclator';
+import { avisVigencia, permetButlleta } from '../lib/sct-vigencia';
 import Capcalera from '../components/Capcalera';
 import { A, Ic, Mono, Card } from '../lib/design';
 
@@ -156,6 +157,7 @@ function ResultRow({ row, q, color, onSelect }: { row: CatalegRow; q: string; co
       <div style={{ flex: 1, minWidth: 0 }}>
         {ctx && <div style={{ fontFamily: A.mono, fontSize: 10, fontWeight: 600, letterSpacing: 0.6, textTransform: 'uppercase', color, marginBottom: 3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={ctx}><HighlightText text={ctx} query={q} /></div>}
         <div style={{ fontFamily: A.sans, fontSize: 14.5, lineHeight: 1.35, color: A.ink }}><HighlightText text={row.concepte} query={q} /></div>
+        {avisVigencia(row) && <p style={{color:'#9a3412',fontSize:12,margin:'6px 0'}}>{avisVigencia(row)}</p>}
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexShrink: 0, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
         {row.article && <Pill text={`§${row.article}`} bg={A.amberSoft} fg="#6B3F08" />}
@@ -210,16 +212,19 @@ function escapeRegExp(s: string): string {
 
 // ── Drawer de detall ─────────────────────────────────────────────
 function pickOfficialConcept(row: CatalegRow): { text: string; official: boolean } {
+  if (row.font) return { text: row.concepte, official: permetButlleta(row) };
   const found = findOfficialConcept(row.lawId, row.article, row.concepte);
   if (found) return { text: found.concept, official: true };
   return { text: row.concepte, official: false };
 }
 
 function buildBoletinText(row: CatalegRow): string {
+  if (!permetButlleta(row)) return `${avisVigencia(row)}. ${row.nota ?? ''}`;
   const parts: string[] = [];
   parts.push(pickOfficialConcept(row).text);
   const lawRef = row.article && row.article !== '—' ? `${row.lawShort} art. ${row.article}` : row.lawShort;
   parts.push(`(${lawRef})`);
+  if (row.opcio) parts.push(`Opció SCT ${row.opcio}`);
   if (row.severity) {
     const sev = row.severity === 'MG' ? 'Molt greu' : row.severity === 'G' ? 'Greu' : 'Lleu';
     parts.push(`— ${sev}`);
@@ -282,6 +287,9 @@ function DetailDrawer({ row, onClose }: { row: CatalegRow | null; onClose: () =>
         </div>
         <div style={{ padding: '18px', display: 'flex', flexDirection: 'column', gap: 16 }}>
           {ctx && <Mono size={11} color={color}>{ctx}</Mono>}
+          {avisVigencia(row) && <p style={{color:'#9a3412',margin:0}}>{avisVigencia(row)}</p>}
+          {row.nota && <p style={{margin:0}}>{row.nota}</p>}
+          {row.font && <p style={{margin:0,fontSize:12}}>{row.font} · Opció {row.opcio || 'no indicada'}</p>}
           <h2 style={{ margin: 0, fontFamily: A.display, fontWeight: 700, fontSize: 20, lineHeight: 1.25, color: A.ink }}>{official.text}</h2>
           {official.official && (
             <span style={{ alignSelf: 'flex-start', display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: A.sans, fontSize: 12, fontWeight: 600, borderRadius: 10, padding: '5px 10px', background: A.greenSoft, color: A.greenInk }}>

@@ -6,7 +6,8 @@
   "base_legal": [
     "Art. 18.1 i 18.2 RGC",
     "Arts. 117 i 118 RGC",
-    "Art. 76.G i 76.M TRLSV"
+    "Art. 76.G i 76.M TRLSV",
+    "RD 518/2026 · Comunicat SCT 8/2026 · des d’1-10-2026"
   ],
   "inici": "tipus_infraccio",
   "nodes": {
@@ -113,7 +114,7 @@
       "article_butlleta": "Art. 18.2 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "–3 punts",
-      "excepcions": "Ensenyament conducció + proves examen moto"
+      "excepcions": "Ensenyament i examen de moto en els termes reglamentaris. Des d’1-10-2026, també dispositius sense fils certificats/homologats integrats al casc de moto/ciclomotor per comunicació o navegació si no afecten la seguretat."
     },
     "fi_pantalla": {
       "final": true,
@@ -132,7 +133,8 @@
       "concepte_butlleta": "No utilitzar, o utilitzar inadequadament, la persona denunciada, el cinturó de seguretat",
       "article_butlleta": "Art. 117.1 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "–4 punts (només al conductor)"
+      "punts": "–4 punts (només al conductor)",
+      "info": "Des d’1-10-2026 se suprimeixen exempcions de taxi, repartiment i ensenyament. Comprovar les excepcions generals i específiques que es mantenen a l’art. 119; no confondre amb el SRI en taxi urbà."
     },
     "fi_cinturo_passatger": {
       "final": true,
@@ -197,7 +199,8 @@
       "article_butlleta": "Art. 118.1 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "–4 punts",
-      "excepcions": "Motos/quads/ciclomotors amb estructura d'autoprotecció + cinturons (si consta a fitxa tècnica)"
+      "excepcions": "Motos/quads/ciclomotors amb estructura d'autoprotecció + cinturons (si consta a fitxa tècnica)",
+      "info": "Ciclomotors: casc certificat admès durant el període transitori fins al 30-09-2027. No exigir anticipadament homologació UNECE R22."
     },
     "fi_casc_passatger": {
       "final": true,
@@ -206,26 +209,27 @@
       "concepte_butlleta": "No utilitzar, o utilitzar inadequadament, la persona denunciada, el casc de protecció homologat",
       "article_butlleta": "Art. 118.1 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "0 passatger / 4 al conductor si passatger menor"
+      "punts": "0 passatger / 4 al conductor si passatger menor",
+      "info": "Ciclomotors: casc certificat admès durant el període transitori fins al 30-09-2027. No exigir anticipadament homologació UNECE R22."
     },
     "fi_casc_bici": {
       "final": true,
       "tipus": "administrativa",
       "titol": "⚠️ GREU — Ciclista sense casc",
       "concepte_butlleta": "No utilitzar, el conductor o el passatger d'una bicicleta, un casc de protecció homologat",
-      "article_butlleta": "Art. 118.1 RGC",
+      "article_butlleta": "Fins 30-09-2026: art. 118.1 RGC; des d’1-10-2026: art. 118.2 RGC",
       "import": "200 € (DTE 100 €)",
       "punts": "0",
-      "obligatorietat": "Vies interurbanes SEMPRE (excepte rampes ascendents llargues, raons mèdiques, calor extrema). Vies urbanes: només menors de 16 anys."
+      "obligatorietat": "Des d’1-10-2026: interurbanes sense antigues exempcions de calor/rampes/mèdiques; menors de 16 anys a totes les vies; professionals també en urbanes i travessies. Per fets anteriors, contrastar les exempcions del redactat anterior."
     },
     "fi_armilla": {
       "final": true,
       "tipus": "administrativa",
       "titol": "⚠️ GREU — Sense armilla reflectant",
       "concepte_butlleta": "No utilitzar, o utilitzar inadequadament el conductor del vehicle ressenyat, que està fora del vehicle i ocupa la calçada o el voral de la via, una armilla reflectant d'alta visibilitat",
-      "article_butlleta": "Art. 118.3 RGC",
+      "article_butlleta": "Fins 30-09-2026: art. 118.3 RGC; des d’1-10-2026: art. 118.4 RGC",
       "import": "200 € (DTE 100 €)",
-      "punts": "–4 punts",
+      "punts": "4 al conductor segons opció 5000 del SCT 8/2026; no aplicar a VMP ni bicicletes",
       "obligatorietat": "Vies INTERURBANES quan el conductor surt del vehicle i ocupa la calçada/voral"
     }
   },
@@ -234,7 +238,8 @@
     "El mans lliures no exempta de la responsabilitat si distreu greument la conducció.",
     "Cinturons no instal·lats: vehicles antics (matriculats abans de 1992): NO obligatoris, però si en porten cal usar-los.",
     "SRI menors: la responsabilitat és SEMPRE del conductor del vehicle (vehicles <9 places).",
-    "Casc de bici: legalment menors de 16 anys SEMPRE (urbà i interurbà). Adults: només interurbà.",
-    "L'armilla reflectant s'ha de dur dins del vehicle i posar-se-la ABANS de baixar-ne. No confondre-la amb la balisa V-16 (dispositiu lluminós de presenyalització que des de l'1/1/2026 substitueix els triangles, connectada a DGT 3.0)."
+    "L'armilla reflectant s'ha de dur dins del vehicle i posar-se-la ABANS de baixar-ne. No confondre-la amb la balisa V-16 (dispositiu lluminós de presenyalització que des de l'1/1/2026 substitueix els triangles, connectada a DGT 3.0).",
+    "Des d’1-10-2026: calçat tancat en moto/ciclomotor a totes les vies; guants de protecció en interurbana. Les noves especificacions d’homologació dels guants esperen ordre ministerial; no la manca total de guants. Excepció d’autoprotecció amb cinturó documentada.",
+    "Professionals amb moto, ciclomotor, bici/cicle o VMP: armilla d’alta visibilitat a totes les vies des d’1-10-2026. Consulteu el Comunicat SCT 8/2026 al catàleg per a l’opció concreta."
   ]
 }

@@ -1,15 +1,17 @@
 {
   "id": "vmp-vpl-identificacio",
-  "titol": "🛴 VMP / VPL · Identificació i denúncia (Com. SCT 7/2026)",
+  "titol": "🛴 VMP / VPL · Identificació i circulació (SCT 7 i 8/2026)",
   "categoria": "transit",
   "icono": "🛴",
   "base_legal": [
     "Comunicat Informatiu SCT 7/2026 (en vigor 20/07/2026) — refon i substitueix els 3/2026, 4/2026 i 6/2026",
     "RD 970/2020 · Llei 5/2025 (DA 1a) · RD 52/2026 (REVEMP)",
     "RDL 8/2004 art. 1 bis · RGV arts. 1, 22 bis i Annexos XIX i XXI",
-    "Reg. (UE) 168/2013 · LSV arts. 82 i 104 · RGCon art. 1.1"
+    "Reg. (UE) 168/2013 · LSV arts. 82 i 104 · RGCon art. 1.1",
+    "Comunicat SCT 8/2026 · RD 518/2026, de 24 de juny · entrada general 1-10-2026"
   ],
   "regles_dor": [
+    "Data dels fets: noves regles de circulació des de l’1-10-2026; llums diürns des de l’1-10-2027. No anticipar sancions.",
     "Si duu placa de marcatge, és VMP sempre. No discuteixis la categoria.",
     "La manca de certificat NO el treu de VMP. No li apliquis art. 1.1 RGV ni immobilització.",
     "Se surt de VMP per com és l'aparell (velocitat, places, seient), mai pels papers.",
@@ -21,7 +23,7 @@
     "que_tinc": {
       "titol": "Què tinc al davant?",
       "text": "Mira l'aparell i tria el que s'hi assembli més.",
-      "info": "Aquest arbre només val per a patinets i similars. Si és una bicicleta amb pedals, no és cap VMP i aquí no hi trobaràs res.",
+      "info": "Aquest arbre només val per a patinets i similars. Si és una bicicleta amb pedals, no és cap VMP i aquí no hi trobaràs res. SCT 8/2026: noves regles des de l’1-10-2026; distingeix sempre VMP i vehicle de motor.",
       "opcions": [
         {
           "etiqueta": "🛴 Un patinet elèctric, de peu",
@@ -198,19 +200,19 @@
       "immobilitzacio": "NO per manca de papers. SÍ per alcohol, drogues o risc greu.",
       "infraccions_de_circulacio": [
         {
-          "titol": "Per la vorera o zona de vianants",
-          "article": "art. 121.5 RGC",
-          "import": "200 €",
-          "importReduit": "100 €",
-          "gravetat": "G",
-          "butlleta": "Circular amb qualsevol classe de vehicle per una vorera o una zona de vianants."
+          "titol": "Vorera · comprovar data dels fets",
+          "article": "Fins 30-09-2026: art. 121.5 RGC. Des d’1-10-2026: art. 152.1 RGC (opció 4000)",
+          "import": "Abans: 200 €. Des d’1-10-2026: 100 €",
+          "importReduit": "Abans: 100 €. Des d’1-10-2026: 50 €",
+          "gravetat": "Abans G; des d’1-10-2026 L",
+          "butlleta": "Des d’1-10-2026: circular amb un vehicle per la vorera. Diferenciar la resta de zones de vianants i les autoritzacions aplicables."
         },
         {
           "titol": "Per on no pot (travessia, interurbana, autopista, túnel)",
           "article": "art. 38.4 RGC",
           "import": "200 €",
           "gravetat": "G",
-          "butlleta": "Circular amb el vehicle ressenyat per una via on li està prohibit."
+          "butlleta": "Circular amb el vehicle ressenyat per una via on li està prohibit. Des d’1-10-2026, VMP: excepció per vies ciclistes i vies prohibides a vehicles de motor en interurbanes i túnels urbans, llevat de prohibició senyalitzada. No aplicar la prohibició de VMP a vehicles d’una altra categoria."
         },
         {
           "titol": "Amb el mòbil o auriculars",
@@ -229,10 +231,10 @@
         },
         {
           "titol": "Sense llums de nit",
-          "article": "art. 123 RGC",
-          "import": "80 €",
-          "gravetat": "L",
-          "butlleta": "Circular sense l'enllumenat reglamentari en condicions de baixa visibilitat."
+          "article": "VMP des d’1-10-2026: art. 155.5 RGC (opció 3005)",
+          "import": "200 € (només VMP i fets des d’1-10-2026)",
+          "gravetat": "G",
+          "butlleta": "VMP des d’1-10-2026: circular sense dur l’enllumenat encès entre la posta i la sortida del sol. Abans d’aquesta data o si és vehicle de motor: comprovar el precepte específic, no usar aquesta opció."
         },
         {
           "titol": "Saltar-se un STOP o un cediu el pas",
@@ -270,11 +272,18 @@
           "butlleta": "Conduir de manera temerària."
         },
         {
-          "titol": "Sense casc (ordenança municipal)",
-          "article": "art. 13 bis G Ordenança",
-          "import": "90 €",
-          "gravetat": "L",
-          "butlleta": "Circular sense el casc de protecció exigit per l'ordenança municipal."
+          "titol": "Casc VMP · comprovar data i categoria",
+          "article": "VMP des d’1-10-2026: art. 118.3 RGC (opció 5000)",
+          "import": "200 € (DTE 100 €), sense punts",
+          "gravetat": "G",
+          "butlleta": "Només VMP des d’1-10-2026: no utilitzar el casc de protecció en les condicions reglamentàries. Abans: verificar ordenança municipal i import. Si és ciclomotor o motocicleta: art. 118.1 RGC, no aquesta opció."
+        },
+        {
+          "titol": "Només VMP · edat i visibilitat (des d’1-10-2026)",
+          "article": "Art. 155.3 RGC (3003): menor de 15 anys; art. 118.3 RGC (5001): reflectant/lluminós",
+          "import": "200 € per l’opció que correspongui; sense punts",
+          "gravetat": "G",
+          "butlleta": "Comprovar la conducta concreta: menor de 15 anys conduint VMP; o manca d’element lluminós/reflectant visible a 150 m de nit o amb visibilitat reduïda. No acumular automàticament. Llums diürns del VMP: exigibles des d’1-10-2027."
         }
       ],
       "alcohol_i_drogues": [
@@ -394,19 +403,19 @@
       "immobilitzacio": "NO per manca de papers.",
       "infraccions_de_circulacio": [
         {
-          "titol": "Per la vorera o zona de vianants",
-          "article": "art. 121.5 RGC",
-          "import": "200 €",
-          "importReduit": "100 €",
-          "gravetat": "G",
-          "butlleta": "Circular amb qualsevol classe de vehicle per una vorera o una zona de vianants."
+          "titol": "Vorera · comprovar data dels fets",
+          "article": "Fins 30-09-2026: art. 121.5 RGC. Des d’1-10-2026: art. 152.1 RGC (opció 4000)",
+          "import": "Abans: 200 €. Des d’1-10-2026: 100 €",
+          "importReduit": "Abans: 100 €. Des d’1-10-2026: 50 €",
+          "gravetat": "Abans G; des d’1-10-2026 L",
+          "butlleta": "Des d’1-10-2026: circular amb un vehicle per la vorera. Diferenciar la resta de zones de vianants i les autoritzacions aplicables."
         },
         {
           "titol": "Per on no pot (travessia, interurbana, autopista, túnel)",
           "article": "art. 38.4 RGC",
           "import": "200 €",
           "gravetat": "G",
-          "butlleta": "Circular amb el vehicle ressenyat per una via on li està prohibit."
+          "butlleta": "Circular amb el vehicle ressenyat per una via on li està prohibit. Des d’1-10-2026, VMP: excepció per vies ciclistes i vies prohibides a vehicles de motor en interurbanes i túnels urbans, llevat de prohibició senyalitzada. No aplicar la prohibició de VMP a vehicles d’una altra categoria."
         },
         {
           "titol": "Amb el mòbil o auriculars",
@@ -425,10 +434,10 @@
         },
         {
           "titol": "Sense llums de nit",
-          "article": "art. 123 RGC",
-          "import": "80 €",
-          "gravetat": "L",
-          "butlleta": "Circular sense l'enllumenat reglamentari en condicions de baixa visibilitat."
+          "article": "VMP des d’1-10-2026: art. 155.5 RGC (opció 3005)",
+          "import": "200 € (només VMP i fets des d’1-10-2026)",
+          "gravetat": "G",
+          "butlleta": "VMP des d’1-10-2026: circular sense dur l’enllumenat encès entre la posta i la sortida del sol. Abans d’aquesta data o si és vehicle de motor: comprovar el precepte específic, no usar aquesta opció."
         },
         {
           "titol": "Saltar-se un STOP o un cediu el pas",
@@ -466,11 +475,18 @@
           "butlleta": "Conduir de manera temerària."
         },
         {
-          "titol": "Sense casc (ordenança municipal)",
-          "article": "art. 13 bis G Ordenança",
-          "import": "90 €",
-          "gravetat": "L",
-          "butlleta": "Circular sense el casc de protecció exigit per l'ordenança municipal."
+          "titol": "Casc VMP · comprovar data i categoria",
+          "article": "VMP des d’1-10-2026: art. 118.3 RGC (opció 5000)",
+          "import": "200 € (DTE 100 €), sense punts",
+          "gravetat": "G",
+          "butlleta": "Només VMP des d’1-10-2026: no utilitzar el casc de protecció en les condicions reglamentàries. Abans: verificar ordenança municipal i import. Si és ciclomotor o motocicleta: art. 118.1 RGC, no aquesta opció."
+        },
+        {
+          "titol": "Només VMP · edat i visibilitat (des d’1-10-2026)",
+          "article": "Art. 155.3 RGC (3003): menor de 15 anys; art. 118.3 RGC (5001): reflectant/lluminós",
+          "import": "200 € per l’opció que correspongui; sense punts",
+          "gravetat": "G",
+          "butlleta": "Comprovar la conducta concreta: menor de 15 anys conduint VMP; o manca d’element lluminós/reflectant visible a 150 m de nit o amb visibilitat reduïda. No acumular automàticament. Llums diürns del VMP: exigibles des d’1-10-2027."
         }
       ],
       "alcohol_i_drogues": [
@@ -553,19 +569,19 @@
       "immobilitzacio": "SÍ. Art. 104.1.a LSV · acta A-13 · safata H02.",
       "infraccions_de_circulacio": [
         {
-          "titol": "Per la vorera o zona de vianants",
-          "article": "art. 121.5 RGC",
-          "import": "200 €",
-          "importReduit": "100 €",
-          "gravetat": "G",
-          "butlleta": "Circular amb qualsevol classe de vehicle per una vorera o una zona de vianants."
+          "titol": "Vorera · comprovar data dels fets",
+          "article": "Fins 30-09-2026: art. 121.5 RGC. Des d’1-10-2026: art. 152.1 RGC (opció 4000)",
+          "import": "Abans: 200 €. Des d’1-10-2026: 100 €",
+          "importReduit": "Abans: 100 €. Des d’1-10-2026: 50 €",
+          "gravetat": "Abans G; des d’1-10-2026 L",
+          "butlleta": "Des d’1-10-2026: circular amb un vehicle per la vorera. Diferenciar la resta de zones de vianants i les autoritzacions aplicables."
         },
         {
           "titol": "Per on no pot (travessia, interurbana, autopista, túnel)",
           "article": "art. 38.4 RGC",
           "import": "200 €",
           "gravetat": "G",
-          "butlleta": "Circular amb el vehicle ressenyat per una via on li està prohibit."
+          "butlleta": "Circular amb el vehicle ressenyat per una via on li està prohibit. Des d’1-10-2026, VMP: excepció per vies ciclistes i vies prohibides a vehicles de motor en interurbanes i túnels urbans, llevat de prohibició senyalitzada. No aplicar la prohibició de VMP a vehicles d’una altra categoria."
         },
         {
           "titol": "Amb el mòbil o auriculars",
@@ -584,10 +600,10 @@
         },
         {
           "titol": "Sense llums de nit",
-          "article": "art. 123 RGC",
-          "import": "80 €",
-          "gravetat": "L",
-          "butlleta": "Circular sense l'enllumenat reglamentari en condicions de baixa visibilitat."
+          "article": "VMP des d’1-10-2026: art. 155.5 RGC (opció 3005)",
+          "import": "200 € (només VMP i fets des d’1-10-2026)",
+          "gravetat": "G",
+          "butlleta": "VMP des d’1-10-2026: circular sense dur l’enllumenat encès entre la posta i la sortida del sol. Abans d’aquesta data o si és vehicle de motor: comprovar el precepte específic, no usar aquesta opció."
         },
         {
           "titol": "Saltar-se un STOP o un cediu el pas",
@@ -625,11 +641,18 @@
           "butlleta": "Conduir de manera temerària."
         },
         {
-          "titol": "Sense casc (ordenança municipal)",
-          "article": "art. 13 bis G Ordenança",
-          "import": "90 €",
-          "gravetat": "L",
-          "butlleta": "Circular sense el casc de protecció exigit per l'ordenança municipal."
+          "titol": "Casc VMP · comprovar data i categoria",
+          "article": "VMP des d’1-10-2026: art. 118.3 RGC (opció 5000)",
+          "import": "200 € (DTE 100 €), sense punts",
+          "gravetat": "G",
+          "butlleta": "Només VMP des d’1-10-2026: no utilitzar el casc de protecció en les condicions reglamentàries. Abans: verificar ordenança municipal i import. Si és ciclomotor o motocicleta: art. 118.1 RGC, no aquesta opció."
+        },
+        {
+          "titol": "Només VMP · edat i visibilitat (des d’1-10-2026)",
+          "article": "Art. 155.3 RGC (3003): menor de 15 anys; art. 118.3 RGC (5001): reflectant/lluminós",
+          "import": "200 € per l’opció que correspongui; sense punts",
+          "gravetat": "G",
+          "butlleta": "Comprovar la conducta concreta: menor de 15 anys conduint VMP; o manca d’element lluminós/reflectant visible a 150 m de nit o amb visibilitat reduïda. No acumular automàticament. Llums diürns del VMP: exigibles des d’1-10-2027."
         }
       ],
       "alcohol_i_drogues": [
@@ -716,19 +739,19 @@
       "immobilitzacio": "SÍ si no té autorització administrativa.",
       "infraccions_de_circulacio": [
         {
-          "titol": "Per la vorera o zona de vianants",
-          "article": "art. 121.5 RGC",
-          "import": "200 €",
-          "importReduit": "100 €",
-          "gravetat": "G",
-          "butlleta": "Circular amb qualsevol classe de vehicle per una vorera o una zona de vianants."
+          "titol": "Vorera · comprovar data dels fets",
+          "article": "Fins 30-09-2026: art. 121.5 RGC. Des d’1-10-2026: art. 152.1 RGC (opció 4000)",
+          "import": "Abans: 200 €. Des d’1-10-2026: 100 €",
+          "importReduit": "Abans: 100 €. Des d’1-10-2026: 50 €",
+          "gravetat": "Abans G; des d’1-10-2026 L",
+          "butlleta": "Des d’1-10-2026: circular amb un vehicle per la vorera. Diferenciar la resta de zones de vianants i les autoritzacions aplicables."
         },
         {
           "titol": "Per on no pot (travessia, interurbana, autopista, túnel)",
           "article": "art. 38.4 RGC",
           "import": "200 €",
           "gravetat": "G",
-          "butlleta": "Circular amb el vehicle ressenyat per una via on li està prohibit."
+          "butlleta": "Circular amb el vehicle ressenyat per una via on li està prohibit. Des d’1-10-2026, VMP: excepció per vies ciclistes i vies prohibides a vehicles de motor en interurbanes i túnels urbans, llevat de prohibició senyalitzada. No aplicar la prohibició de VMP a vehicles d’una altra categoria."
         },
         {
           "titol": "Amb el mòbil o auriculars",
@@ -747,10 +770,10 @@
         },
         {
           "titol": "Sense llums de nit",
-          "article": "art. 123 RGC",
-          "import": "80 €",
-          "gravetat": "L",
-          "butlleta": "Circular sense l'enllumenat reglamentari en condicions de baixa visibilitat."
+          "article": "VMP des d’1-10-2026: art. 155.5 RGC (opció 3005)",
+          "import": "200 € (només VMP i fets des d’1-10-2026)",
+          "gravetat": "G",
+          "butlleta": "VMP des d’1-10-2026: circular sense dur l’enllumenat encès entre la posta i la sortida del sol. Abans d’aquesta data o si és vehicle de motor: comprovar el precepte específic, no usar aquesta opció."
         },
         {
           "titol": "Saltar-se un STOP o un cediu el pas",
@@ -788,11 +811,18 @@
           "butlleta": "Conduir de manera temerària."
         },
         {
-          "titol": "Sense casc (ordenança municipal)",
-          "article": "art. 13 bis G Ordenança",
-          "import": "90 €",
-          "gravetat": "L",
-          "butlleta": "Circular sense el casc de protecció exigit per l'ordenança municipal."
+          "titol": "Casc VMP · comprovar data i categoria",
+          "article": "VMP des d’1-10-2026: art. 118.3 RGC (opció 5000)",
+          "import": "200 € (DTE 100 €), sense punts",
+          "gravetat": "G",
+          "butlleta": "Només VMP des d’1-10-2026: no utilitzar el casc de protecció en les condicions reglamentàries. Abans: verificar ordenança municipal i import. Si és ciclomotor o motocicleta: art. 118.1 RGC, no aquesta opció."
+        },
+        {
+          "titol": "Només VMP · edat i visibilitat (des d’1-10-2026)",
+          "article": "Art. 155.3 RGC (3003): menor de 15 anys; art. 118.3 RGC (5001): reflectant/lluminós",
+          "import": "200 € per l’opció que correspongui; sense punts",
+          "gravetat": "G",
+          "butlleta": "Comprovar la conducta concreta: menor de 15 anys conduint VMP; o manca d’element lluminós/reflectant visible a 150 m de nit o amb visibilitat reduïda. No acumular automàticament. Llums diürns del VMP: exigibles des d’1-10-2027."
         }
       ],
       "alcohol_i_drogues": [

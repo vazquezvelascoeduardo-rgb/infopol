@@ -15,6 +15,12 @@ import catalegRaw from '../../content/transit/cataleg-d-infraccions-de-transit-s
 export type Severity = 'MG' | 'G' | 'L';
 
 export type CatalegRow = {
+  opcio?: string;
+  font?: string;
+  nota?: string;
+  estat?: string;
+  vigentDesDe?: string;
+  vigentFins?: string;
   // Codi curt de la llei/reglament (lsv, rgc, rgcond, rgv, seg, vel).
   lawId: string;
   lawShort: string; // "LSV"
@@ -139,7 +145,9 @@ function indexStandardTable(
     const tds = tr.querySelectorAll('td');
     if (tds.length < 2) continue;
     const conceptCell = tds[0] as HTMLElement;
-    const concepte = clean(conceptCell.textContent);
+    const copy = conceptCell.cloneNode(true) as HTMLElement;
+    copy.querySelectorAll('.sct8-historic').forEach(e => e.remove());
+    const concepte = clean(conceptCell.querySelector('.sct-concepte')?.textContent ?? copy.textContent);
     if (!concepte || concepte.length < 4) continue;
 
     const article = clean(tds[1]?.textContent);
@@ -168,13 +176,19 @@ function indexStandardTable(
       subgroup: ctx.subgroup,
       concepte,
       conceptHtml: conceptCell.innerHTML,
+      opcio: (tr as HTMLElement).dataset.opcio,
+      font: (tr as HTMLElement).dataset.font,
+      nota: (tr as HTMLElement).dataset.nota,
+      estat: (tr as HTMLElement).dataset.estat,
+      vigentDesDe: (tr as HTMLElement).dataset.vigentDesDe,
+      vigentFins: (tr as HTMLElement).dataset.vigentFins,
       article: article || undefined,
       severity,
       fine: fine && fine !== '—' ? fine : undefined,
       dte: dte && dte !== '—' ? dte : undefined,
       points,
       searchText: normalize(
-        `${ctx.sTitle} ${ctx.subgroup ?? ''} ${concepte} ${article ?? ''} ${fine ?? ''} ${ctx.meta.short} ${ctx.meta.full}`,
+        `${ctx.sTitle} ${ctx.subgroup ?? ''} ${concepte} ${article ?? ''} ${fine ?? ''} ${ctx.meta.short} ${ctx.meta.full} ${(tr as HTMLElement).dataset.opcio ?? ''}`,
       ),
     });
   }
@@ -381,7 +395,7 @@ export function getCatalegRows(): CatalegRow[] {
   const seen = new Set<string>();
   const deduped: CatalegRow[] = [];
   for (const r of rows) {
-    const key = `${r.lawId}|${normalize(r.article ?? '')}|${normalize(r.concepte).slice(0, 80)}`;
+    const key = `${r.lawId}|${normalize(r.article ?? '')}|${normalize(r.concepte).slice(0, 80)}|${r.opcio ?? ''}|${r.vigentDesDe ?? ''}|${r.vigentFins ?? ''}`;
     if (seen.has(key)) continue;
     seen.add(key);
     deduped.push(r);
