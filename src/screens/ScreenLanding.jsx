@@ -111,6 +111,31 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ marginBottom: 10 }}>
+          <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.cat.operativa.solid, marginBottom: 2 }}>
+            Actualitzat diàriament · 22h
+          </div>
+          <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 20, letterSpacing: -0.4 }}>Noticias del dia</div>
+        </div>
+        <div onClick={() => navigate('/noticias')} style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, borderLeft: `3px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card, cursor: 'pointer' }}>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+            <div style={{ width: 44, height: 44, borderRadius: 12, background: T.cat.operativa.solid, display: 'grid', placeItems: 'center', boxShadow: 'inset 0 -3px 0 rgba(0,0,0,0.18)', flexShrink: 0 }}>
+              <span style={{ fontSize: 20 }}>📰</span>
+            </div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10.5, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.operativa.ink }}>Catalunya · Espanya · Internacional</div>
+              <div style={{ fontWeight: 800, fontSize: 14, letterSpacing: -0.2, marginTop: 2 }}>Política, economia, esports, policial i cultura</div>
+              <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>Resums diaris amb link a la notícia completa. Actualitzat cada dia a les 22h.</div>
+            </div>
+          </div>
+          <div style={{ marginTop: 12, color: T.cat.operativa.solid, fontWeight: 700, fontSize: 12, display: 'flex', alignItems: 'center', gap: 4 }}>
+            Veure totes les noticias <span style={{ fontSize: 14 }}>→</span>
+          </div>
+        </div>
+      </div>
+
       {/* pricing */}
       <div style={{ padding: '20px 18px 0' }}>
         <div style={{ background: T.ink, borderRadius: T.r.xl, padding: 20, color: '#fff', position: 'relative', overflow: 'hidden' }}>

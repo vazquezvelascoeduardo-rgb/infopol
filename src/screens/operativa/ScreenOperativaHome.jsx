@@ -120,6 +120,18 @@ export default function ScreenOperativaHome() {
         </div>
       </div>
 
+      {/* Noticias */}
+      <div style={{ padding: '10px 16px 0' }}>
+        <div onClick={() => navigate('/noticias')} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `3px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ fontSize: 22 }}>📰</div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.operativa.ink }}>Noticias del dia · 22h</div>
+            <div style={{ fontWeight: 700, fontSize: 13.5, letterSpacing: -0.2, color: T.ink, marginTop: 1 }}>Política, esports, policial i més</div>
+          </div>
+          <Icon name="chevron-right" size={16} color={T.inkMuted} />
+        </div>
+      </div>
+
       {/* Actualitat normativa */}
       <div style={{ padding: '14px 0 0' }}>
         <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
