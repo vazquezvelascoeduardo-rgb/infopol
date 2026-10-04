@@ -111,6 +111,29 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias del dia */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ background: '#fff', borderRadius: T.r.xl, padding: 18, boxShadow: T.shadow.card, borderTop: `3px solid ${T.cat.noticias.solid}`, cursor: 'pointer' }}
+          onClick={() => navigate('/noticias')}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ width: 8, height: 8, borderRadius: 4, background: T.cat.noticias.solid }} />
+              <span style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.1, textTransform: 'uppercase', color: T.cat.noticias.ink }}>Noticias del dia</span>
+            </div>
+            <span style={{ fontFamily: T.fontMono, fontSize: 11, color: T.inkMuted }}>10·04</span>
+          </div>
+          <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 18, letterSpacing: -0.3, marginBottom: 4 }}>
+            DANA a Catalunya, TC amnistia procés, eleccions Brasil
+          </div>
+          <div style={{ fontSize: 12.5, color: T.inkMuted, lineHeight: 1.45 }}>
+            10 notícies d'avui: Catalunya · Espanya · Internacional
+          </div>
+          <div style={{ marginTop: 12, color: T.cat.noticias.solid, fontWeight: 700, fontSize: 12, display: 'flex', alignItems: 'center', gap: 4 }}>
+            Veure totes <span style={{ fontSize: 14 }}>→</span>
+          </div>
+        </div>
+      </div>
+
       {/* pricing */}
       <div style={{ padding: '20px 18px 0' }}>
         <div style={{ background: T.ink, borderRadius: T.r.xl, padding: 20, color: '#fff', position: 'relative', overflow: 'hidden' }}>
