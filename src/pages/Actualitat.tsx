@@ -29,7 +29,7 @@ export default function Actualitat() {
       <Capcalera
         kicker="Actualitat 2025–2026"
         titol="Actualitat"
-        lead="Càrrecs vigents, premis, esports i fets clau que cauen a l'examen. Actualitzat l'1 d'agost del 2026."
+        lead="Càrrecs vigents, premis, esports i fets clau que cauen a l'examen. Actualitzat el 5 d’octubre del 2026."
         xifres={[
           { valor: String(BLOCS.length), label: 'blocs temàtics' },
         ]}

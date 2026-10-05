@@ -1,7 +1,5 @@
 // Test d'Actualitat 2025-2026 — Policia Local de Catalunya.
-// 402 preguntes (càrrecs CAT, ESP, INT, Vaticà, premis, esports, política,
-// social), el recull del 24 de juliol a l'1 d'agost del 2026 i el d'agost
-// sencer: l'eclipsi del 12 d'agost, els incendis, la Vuelta i Collserola.
+// 469 preguntes d’actualitat fins al 5 d’octubre de 2026.
 // Inclou preguntes d'actualitat 2025/2026 vistes als exàmens reials de Reus.
 // Format igual que la resta de TestTopics (slug, title, icon, accent, questions[]).
 import type { TestTopic } from './types';
@@ -9,7 +7,7 @@ import type { TestTopic } from './types';
 const actualitat: TestTopic = {
   slug: 'actualitat-pl-2026',
   title: 'Actualitat 2025–2026',
-  description: "Actualitat de novembre de 2025 al 15 de setembre de 2026: càrrecs, política, esports, premis, ciència i economia (CAT + ESP + INT).",
+  description: "Actualitat de novembre de 2025 al 5 d’octubre de 2026: càrrecs, política, esports, premis, ciència i economia (CAT + ESP + INT).",
   icon: '📰',
   accent: 'from-amber-500 to-orange-600',
   category: 'actualitat',
@@ -4435,6 +4433,743 @@ const actualitat: TestTopic = {
         "Temperatures dins del terç més càlid, amb alta probabilitat"
       ],
       "correct": 3
+    },
+    {
+      "id": "act-oct26-318",
+      "text": "Qui es va proclamar campió del món de ciclisme en ruta masculí a Montreal el 27 de setembre de 2026?",
+      "options": [
+        "Brandon McNulty",
+        "Isaac del Toro",
+        "Remco Evenepoel",
+        "Mathieu van der Poel"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-319",
+      "text": "Brandon McNulty va guanyar el Mundial de ruta de 2026. Quina fita va assolir amb aquesta victòria?",
+      "options": [
+        "Ser el primer estatunidenc campió del món de ruta en 25 anys, des de Greg LeMond",
+        "Ser el primer estatunidenc de la història a guanyar el Mundial de ruta",
+        "Ser el primer ciclista que guanya el Mundial de ruta i el de contrarellotge el mateix any",
+        "Ser el primer estatunidenc campió del món de ruta en 33 anys, des de Lance Armstrong"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-320",
+      "text": "Quins ciclistes van completar el podi del Mundial de ruta masculí de 2026 darrere de Brandon McNulty?",
+      "options": [
+        "Remco Evenepoel, plata, i Michael Matthews, bronze",
+        "Mathieu van der Poel, plata, i Isaac del Toro, bronze",
+        "Michael Matthews, plata, i Quinn Simmons, bronze",
+        "Michael Matthews, plata, i Mathieu van der Poel, bronze"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-321",
+      "text": "Qui va guanyar la contrarellotge individual masculina del Mundial de ciclisme de Montreal 2026?",
+      "options": [
+        "Filippo Ganna",
+        "Paul Seixas",
+        "Remco Evenepoel",
+        "Brandon McNulty"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-322",
+      "text": "En quina posició va acabar el mexicà Isaac del Toro la prova en ruta del Mundial de Montreal 2026?",
+      "options": [
+        "Tercer",
+        "Cinquè",
+        "Quart",
+        "Dotzè"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-323",
+      "text": "A quin equip professional pertany Brandon McNulty, campió del món de ruta de 2026?",
+      "options": [
+        "Al Visma-Lease a Bike",
+        "Al Lidl-Trek",
+        "A l'EF Education-EasyPost",
+        "A l'UAE Emirates-XRG, el mateix equip que Tadej Pogačar"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-324",
+      "text": "Per quin motiu Tadej Pogačar no va defensar el títol mundial de ruta a Montreal el 2026?",
+      "options": [
+        "Per una malaltia vírica contreta durant la concentració prèvia",
+        "Per una decisió del seu equip de reservar-lo per a la Volta a Llombardia",
+        "Per la caiguda que va patir a la Vuelta a Espanya",
+        "Per una sanció de la Unió Ciclista Internacional"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-325",
+      "text": "Quantes vegades ha acollit el Canadà el Campionat del Món de ciclisme en ruta, comptant l'edició de Montreal 2026?",
+      "options": [
+        "Dues vegades",
+        "Tres vegades",
+        "Quatre vegades",
+        "Cinc vegades"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-326",
+      "text": "Qui va guanyar el Gran Premi d'Azerbaidjan de Fórmula 1, disputat a Bakú el 26 de setembre de 2026?",
+      "options": [
+        "Max Verstappen",
+        "Kimi Antonelli",
+        "George Russell",
+        "Charles Leclerc"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-327",
+      "text": "George Russell va guanyar el Gran Premi d'Azerbaidjan de 2026. Quins pilots van completar el podi?",
+      "options": [
+        "Max Verstappen i Charles Leclerc",
+        "Kimi Antonelli i Max Verstappen",
+        "Charles Leclerc i Lewis Hamilton, tots dos de Ferrari",
+        "Max Verstappen i Isack Hadjar, tots dos de Red Bull"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-328",
+      "text": "Qui liderava el Mundial de pilots de Fórmula 1 després del Gran Premi d'Azerbaidjan de 2026?",
+      "options": [
+        "George Russell, amb Mercedes",
+        "Lando Norris, amb McLaren",
+        "Kimi Antonelli, amb Mercedes",
+        "Max Verstappen, amb Red Bull"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-329",
+      "text": "On es va disputar el Gran Premi de Bahrain de Fórmula 1 de 2026, entre el 2 i el 4 d'octubre?",
+      "options": [
+        "Al circuit de Losail, a Qatar",
+        "Al circuit de Yas Marina, a Abu Dhabi",
+        "Al circuit de Sakhir, a Bahrain",
+        "Al circuit de Sepang, a Malàisia"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-330",
+      "text": "Per quin motiu el Gran Premi de Bahrain de 2026 es va traslladar fora del seu país?",
+      "options": [
+        "Per obres de remodelació del circuit original",
+        "Per la guerra a l'Orient Mitjà",
+        "Per la manca d'acord econòmic amb la Fórmula 1",
+        "Per les altes temperatures previstes a la península aràbiga"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-331",
+      "text": "Josep Lluís Trapero va dimitir com a director general de la Policia de la Generalitat el setembre de 2026. Qui el va substituir?",
+      "options": [
+        "Ferran López",
+        "Miquel Esquius",
+        "Eduard Sallent",
+        "Sílvia Catà"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-332",
+      "text": "Ferran López, nou director general de la Policia, ja havia substituït Trapero anteriorment. En quin context?",
+      "options": [
+        "Com a major dels Mossos, després de la jubilació de Trapero el 2020",
+        "Com a cap dels Mossos durant la investigació dels atemptats del 17-A",
+        "Com a director general de la Policia, després de les eleccions del 2021",
+        "Com a cap dels Mossos durant l'aplicació de l'article 155, el 2017-2018"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-333",
+      "text": "Quina fita històrica va representar el nomenament de Sílvia Catà en la remodelació de la cúpula dels Mossos d'Esquadra?",
+      "options": [
+        "Ser la primera dona directora general de la Policia",
+        "Ser la primera dona amb la categoria de major dels Mossos",
+        "Ser la primera dona al capdavant dels Mossos d'Esquadra com a comissària en cap",
+        "Ser la primera dona al capdavant de la Regió Policial Metropolitana Barcelona"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-334",
+      "text": "Sílvia Catà va ser nomenada nova comissària en cap dels Mossos d'Esquadra. A qui va rellevar?",
+      "options": [
+        "A Miquel Esquius, per jubilació",
+        "A Eduard Sallent, per cessament",
+        "A Ferran López, per nomenament polític",
+        "A Josep Lluís Trapero, per dimissió"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-335",
+      "text": "Quina regió policial dirigia Sílvia Catà abans de ser nomenada comissària en cap dels Mossos?",
+      "options": [
+        "La Regió Policial Camp de Tarragona",
+        "La Regió Policial Metropolitana Barcelona",
+        "La Regió Policial de Girona",
+        "La Regió Policial Metropolitana Nord"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-336",
+      "text": "Quina consellera d'Interior va anunciar la remodelació de la cúpula dels Mossos d'Esquadra el setembre de 2026?",
+      "options": [
+        "Sílvia Paneque",
+        "Núria Parlon",
+        "Alícia Romero",
+        "Mònica Martínez Bravo"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-337",
+      "text": "El president Salvador Illa va obrir el debat de política general al Parlament el 29 de setembre de 2026. Quin va ser el tema central del seu discurs?",
+      "options": [
+        "L'habitatge",
+        "El finançament singular de Catalunya",
+        "La crisi de Rodalies",
+        "La seguretat ciutadana"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-338",
+      "text": "Quina proposta d'habitatge anunciada per Illa al debat de política general de 2026 no va obtenir el suport del Parlament?",
+      "options": [
+        "Que la Generalitat compri la meitat d'un habitatge amb persones de més de 40 anys que s'hi acullin",
+        "Que la Generalitat avali el 20% de la hipoteca dels joves de menys de 35 anys",
+        "Que la Generalitat construeixi 50.000 habitatges públics fins al 2030",
+        "Que la Generalitat limiti per llei els lloguers de temporada a sis mesos"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-339",
+      "text": "Al debat de política general de 2026, el Parlament no va avalar la proposta d'Illa que la Generalitat compri la meitat d'un habitatge amb majors de 40 anys. Quin grup es va abstenir per enviar un «avís» al Govern?",
+      "options": [
+        "ERC",
+        "La CUP",
+        "Junts",
+        "Els Comuns"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-340",
+      "text": "Quin grup parlamentari va presentar la proposta de resolució per reprovar Salvador Illa i el seu govern en el debat de política general de 2026?",
+      "options": [
+        "El PP",
+        "Junts",
+        "Vox",
+        "Aliança Catalana"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-341",
+      "text": "Qui van ser els pregoners de les Festes de la Mercè 2026 de Barcelona?",
+      "options": [
+        "Antoni i Meritxell Falgueras, del Celler de Gelida",
+        "Carme Ruscalleda i el seu fill Raül Balam",
+        "Els germans Roca, del Celler de Can Roca",
+        "Joan i Josep Gelida, de la Bodega Gelida"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-342",
+      "text": "En quin barri de Barcelona es troba el Celler de Gelida, establiment dels pregoners de la Mercè 2026?",
+      "options": [
+        "Al barri de Sants",
+        "Al barri del Poblenou",
+        "Al barri de Gràcia",
+        "Al barri de Sant Andreu"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-343",
+      "text": "Quina va ser la ciutat convidada a les Festes de la Mercè 2026?",
+      "options": [
+        "Manchester",
+        "Xangai",
+        "Tòquio",
+        "Seül"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-344",
+      "text": "Xangai va ser la ciutat convidada de la Mercè 2026. Per què se la va escollir el 2026?",
+      "options": [
+        "Perquè Barcelona hi celebrava 25 anys d'agermanament",
+        "Perquè Barcelona hi celebrava 50 anys de relacions consulars",
+        "Perquè acollirà la propera Exposició Universal",
+        "Perquè Barcelona hi celebrava 10 anys d'agermanament"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-345",
+      "text": "Quina artista va dissenyar el cartell de la Mercè 2026, que també es va convertir en un mural?",
+      "options": [
+        "Cristina Losantos",
+        "Paula Bonet",
+        "Ana Juan",
+        "Cinta Vidal"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-346",
+      "text": "Quina novetat va incorporar la Mercè 2026 respecte a edicions anteriors?",
+      "options": [
+        "Per primera vegada no hi va haver piromusical de cloenda",
+        "Per primera vegada hi va haver festa major als deu districtes de la ciutat",
+        "Per primera vegada es va celebrar el pregó fora de l'Ajuntament",
+        "Per primera vegada la Mercè es va allargar a dues setmanes"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-347",
+      "text": "Quina distinció internacional ostenta Barcelona durant el 2026?",
+      "options": [
+        "Capital Europea de la Cultura",
+        "Capital Mundial de l'Arquitectura",
+        "Capital Mundial del Disseny",
+        "Capital Europea de l'Esport"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-348",
+      "text": "En quina ciutat catalana va convocar el Sindicat de Llogateres una manifestació per l'habitatge el dissabte 3 d'octubre de 2026?",
+      "options": [
+        "A Sabadell",
+        "A Badalona",
+        "A L'Hospitalet de Llobregat",
+        "A Terrassa"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-349",
+      "text": "El desnonament de la Maricarmen va desencadenar una onada de protestes per l'habitatge el setembre de 2026. Qui era la Maricarmen?",
+      "options": [
+        "Una veïna de 78 anys desnonada a Barcelona després de 50 anys al seu pis",
+        "Una veïna de 87 anys desnonada a València després de 60 anys a casa seva",
+        "Una veïna de 87 anys desnonada a Madrid després de 70 anys a casa seva",
+        "Una veïna de 92 anys desnonada a Madrid després de 70 anys a casa seva"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-350",
+      "text": "On es va instal·lar l'acampada per l'habitatge que molts van comparar amb el 15-M?",
+      "options": [
+        "A la plaça de Cibeles de Madrid",
+        "A la Puerta del Sol de Madrid",
+        "A la plaça de Catalunya de Barcelona",
+        "Davant del Congrés dels Diputats"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-351",
+      "text": "Quants decrets llei d'habitatge va aprovar el Consell de Ministres el 29 de setembre de 2026, coneguts popularment com a «decret Maricarmen»?",
+      "options": [
+        "Dos, separant la renovació automàtica dels lloguers de la resta de mesures",
+        "Tres, un per a cada àmbit de mesures",
+        "Un de sol, que integrava totes les mesures",
+        "Dos, separant les mesures fiscals de la resta de mesures"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-352",
+      "text": "Fins a quin any amplien els decrets d'habitatge de setembre de 2026 la protecció davant dels desnonaments?",
+      "options": [
+        "Fins al 2028",
+        "Fins al 2030",
+        "Fins al 2027",
+        "Fins al 2032"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-353",
+      "text": "Fins a quin any prohibeixen els decrets de 2026 la compra d'habitatge per part dels anomenats «fons voltor»?",
+      "options": [
+        "Fins al 2029",
+        "Fins al 2030",
+        "Fins al 2027",
+        "Fins al 2028"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-354",
+      "text": "Quina pròrroga dels contractes de lloguer van incloure els decrets d'habitatge de setembre de 2026?",
+      "options": [
+        "Una pròrroga de dos anys, que ha de sol·licitar el llogater, per als contractes que vencin abans del 31 de desembre de 2028",
+        "Una pròrroga de tres anys per als contractes que vencin abans del 2027",
+        "Una pròrroga automàtica d'un any per a tots els contractes en vigor",
+        "Una pròrroga de dos anys, d'aplicació automàtica, per als contractes que vencin abans del 30 de juny de 2028"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-355",
+      "text": "Qui és la ministra d'Habitatge i Agenda Urbana que va defensar els decrets d'habitatge de setembre de 2026?",
+      "options": [
+        "Sira Rego",
+        "Raquel Sánchez",
+        "Isabel Rodríguez",
+        "Pilar Alegría"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-356",
+      "text": "Quin tipus d'IVA preveu el primer decret d'habitatge de 2026 per a l'habitatge protegit?",
+      "options": [
+        "Un IVA del 10%",
+        "Un IVA del 4%",
+        "Un IVA del 0%",
+        "Un IVA del 21%"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-357",
+      "text": "Quin partit va decidir per unanimitat de la seva executiva, la nit de l'1 d'octubre de 2026, votar en contra dels dos decrets d'habitatge?",
+      "options": [
+        "El PNV",
+        "Coalició Canària",
+        "Junts per Catalunya",
+        "Podem"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-358",
+      "text": "Quina va ser la posició anunciada pel PNV davant dels dos decrets d'habitatge de setembre de 2026?",
+      "options": [
+        "A favor de tots dos decrets",
+        "A favor del primer decret i en contra del de la renovació automàtica dels lloguers",
+        "En contra de tots dos decrets",
+        "Abstenció en tots dos decrets"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-359",
+      "text": "Quina portaveu del grup parlamentari de Junts al Congrés es va declarar «decebuda i preocupada» pels decrets d'habitatge?",
+      "options": [
+        "Laura Borràs",
+        "Pilar Calvo",
+        "Míriam Nogueras",
+        "Marta Madrenas"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-360",
+      "text": "En quina taxa interanual va situar l'indicador avançat de l'INE l'IPC espanyol del setembre de 2026?",
+      "options": [
+        "En el 4,3%",
+        "En el 3,2%",
+        "En el 4,9%",
+        "En el 5,0%"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-361",
+      "text": "Quina va ser la taxa d'inflació subjacent del setembre de 2026, segons l'indicador avançat de l'INE?",
+      "options": [
+        "El 2,9%",
+        "El 3,1%",
+        "El 3,6%",
+        "El 4,9%"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-362",
+      "text": "L'IPC interanual del setembre de 2026 es va situar en el 4,9%, segons l'indicador avançat de l'INE. Quant va augmentar aquesta taxa respecte de la d'agost?",
+      "options": [
+        "Sis dècimes",
+        "Dues dècimes",
+        "Quatre dècimes",
+        "Un punt sencer"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-363",
+      "text": "Quin bloc va guanyar les eleccions legislatives de Suècia del 13 de setembre de 2026?",
+      "options": [
+        "El bloc d'esquerres liderat pels socialdemòcrates",
+        "El bloc de dretes del primer ministre Ulf Kristersson",
+        "Els Demòcrates de Suècia, en solitari",
+        "Cap bloc, perquè van empatar a 174 escons"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-364",
+      "text": "Amb quin repartiment d'escons va quedar el Parlament suec després de les eleccions de setembre de 2026?",
+      "options": [
+        "175 escons per a l'esquerra i 174 per a la dreta",
+        "176 escons per a l'esquerra i 173 per a la dreta",
+        "179 escons per a l'esquerra i 170 per a la dreta",
+        "173 escons per a l'esquerra i 176 per a la dreta"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-365",
+      "text": "Qui és la líder socialdemòcrata que va encapçalar el bloc guanyador de les eleccions sueques de 2026?",
+      "options": [
+        "Ebba Busch",
+        "Magdalena Andersson",
+        "Mette Frederiksen",
+        "Annie Lööf"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-366",
+      "text": "Què va fer el primer ministre suec Ulf Kristersson el 17 de setembre de 2026, en confirmar-se el recompte del vot exterior?",
+      "options": [
+        "Va convocar noves eleccions per al mes de desembre",
+        "Va impugnar el resultat davant l'Autoritat Electoral sueca",
+        "Va proposar un govern de gran coalició amb els socialdemòcrates",
+        "Va presentar la seva dimissió per facilitar la formació d'un nou govern"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-367",
+      "text": "Quin resultat va obtenir el Partit Socialdemòcrata suec a les eleccions de 2026?",
+      "options": [
+        "El 34%, el seu millor resultat de la dècada",
+        "El 19,8%, el seu pitjor resultat de la història",
+        "El 31%, en línia amb les eleccions anteriors",
+        "El 28%, el seu pitjor resultat en gairebé un segle"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-368",
+      "text": "Quin partit suec va perdre la condició de segona força parlamentària a les eleccions de 2026?",
+      "options": [
+        "El Partit Moderat",
+        "Els Liberals",
+        "El Partit de l'Esquerra",
+        "Els Demòcrates de Suècia"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-369",
+      "text": "Quants escons té el Parlament suec (Riksdag)?",
+      "options": [
+        "349 escons",
+        "350 escons",
+        "300 escons",
+        "375 escons"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-370",
+      "text": "Quina pel·lícula va guanyar la Concha de Oro de la 74a edició del Festival de Cinema de Sant Sebastià, el setembre de 2026?",
+      "options": [
+        "Brace Your Heart, d'Amanda Kernell",
+        "La bola negra, de Javier Calvo i Javier Ambrossi",
+        "Tender Loving Care, de Mike Leigh",
+        "Growth of the Soil"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-371",
+      "text": "Quin cineasta va presidir el jurat oficial del Festival de Sant Sebastià de 2026?",
+      "options": [
+        "Ira Sachs",
+        "Werner Herzog",
+        "Pedro Almodóvar",
+        "Jesse Eisenberg"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-372",
+      "text": "Quin actor espanyol va guanyar la Concha de Plata a la millor interpretació de repartiment al Festival de Sant Sebastià de 2026?",
+      "options": [
+        "Luis Tosar",
+        "José Ramón Soroiz",
+        "Eduard Fernández",
+        "Javier Cámara"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-373",
+      "text": "Quina pel·lícula espanyola va guanyar el Premi del Públic a Sant Sebastià 2026, amb la puntuació més alta de la història per a una pel·lícula espanyola?",
+      "options": [
+        "Los domingos",
+        "Sirât",
+        "5 minutos más",
+        "La bola negra"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-374",
+      "text": "Qui va dirigir per última vegada el Festival de Sant Sebastià el 2026, després de quinze anys al capdavant?",
+      "options": [
+        "Diego Galán",
+        "Mikel Olaciregui",
+        "José Luis Rebordinos",
+        "Ane Beloki"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-375",
+      "text": "Quin cineasta va rebre el Premi Donostia al Festival de Sant Sebastià de 2026?",
+      "options": [
+        "Mike Leigh",
+        "Ira Sachs",
+        "Werner Herzog",
+        "Cristian Mungiu"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-376",
+      "text": "Quina directora va guanyar la Concha de Plata a la millor direcció al Festival de Sant Sebastià de 2026?",
+      "options": [
+        "Alauda Ruiz de Azúa",
+        "Jane Schoenbrun",
+        "Amanda Kernell",
+        "Kate O'Flynn"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-377",
+      "text": "Com s'anomena el festival de cinema internacional que se celebra cada setembre a Sant Sebastià?",
+      "options": [
+        "Zinemaldia",
+        "Sitges Film Festival",
+        "Seminci",
+        "Festival de Màlaga"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-378",
+      "text": "Quin és el premi principal del Festival de Cinema de Sant Sebastià?",
+      "options": [
+        "La Concha de Oro",
+        "La Espiga de Oro",
+        "El Lleó d'Or",
+        "La Biznaga de Oro"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-379",
+      "text": "En honor de quina festivitat se celebra la festa major de Barcelona a finals de setembre?",
+      "options": [
+        "Sant Jordi",
+        "La Mare de Déu de la Mercè",
+        "Sant Joan",
+        "Santa Eulàlia"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "act-oct26-380",
+      "text": "Quin color de mallot distingeix durant un any el campió del món de ciclisme en ruta?",
+      "options": [
+        "El mallot arc de Sant Martí",
+        "El mallot groc",
+        "El mallot vermell",
+        "El mallot rosa"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "act-oct26-381",
+      "text": "Quin organisme publica a Espanya les dades oficials de l'IPC?",
+      "options": [
+        "El Banc d'Espanya",
+        "El Ministeri d'Economia",
+        "L'Autoritat Independent de Responsabilitat Fiscal (AIReF)",
+        "L'Institut Nacional d'Estadística (INE)"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-382",
+      "text": "Quin cos policial depèn de la Direcció General de la Policia de la Generalitat de Catalunya?",
+      "options": [
+        "La Guàrdia Urbana de Barcelona",
+        "La Policia Nacional",
+        "Les policies locals de Catalunya",
+        "Els Mossos d'Esquadra"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "act-oct26-383",
+      "text": "Com s'anomena el debat anual al Parlament de Catalunya en què el president fa balanç i presenta les seves propostes de govern?",
+      "options": [
+        "Debat d'investidura",
+        "Debat sobre l'estat de la nació",
+        "Debat de política general",
+        "Debat de pressupostos"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "act-oct26-384",
+      "text": "Què és un decret llei?",
+      "options": [
+        "Una norma reglamentària que dicta un ministre i que no necessita cap ratificació parlamentària",
+        "Una norma amb rang de llei que dicta el Govern en casos d'extraordinària i urgent necessitat, i que el Congrés ha de convalidar",
+        "Una llei aprovada pel Congrés per majoria absoluta en una sola votació",
+        "Una norma amb rang de llei que dicta el Govern per delegació expressa de les Corts"
+      ],
+      "correct": 1
     },
   ],
 };
