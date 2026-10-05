@@ -96,6 +96,19 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias banner */}
+      <div style={{ padding: '16px 18px 0' }}>
+        <div onClick={() => navigate('/noticias')} style={{ background: '#fff', borderRadius: T.r.lg, padding: 14, borderTop: `3px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12 }}>
+          <CatIcon cat="operativa" icon="bell" size={40} rounded={11} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.operativa.ink }}>Actualitat · Avui</div>
+            <div style={{ fontWeight: 800, fontSize: 15, color: T.ink, marginTop: 2 }}>Noticias del dia</div>
+            <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 2 }}>Catalunya, Espanya i Internacional</div>
+          </div>
+          <Icon name="chevron-right" size={16} color={T.inkMuted} />
+        </div>
+      </div>
+
       {/* testimonial */}
       <div style={{ padding: '16px 18px 0' }}>
         <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.academia.solid}` }}>
