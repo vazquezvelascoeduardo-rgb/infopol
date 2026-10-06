@@ -43,6 +43,16 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '10·06', tag: 'Judicial', title: 'Fiscalia demana 22 anys per l\'assassinat de Natalia S. a Vallecas', desc: '22 anys de presó sol·licitats per a cada acusat en el judici per l\'assassinat de Natalia S. a Puente de Vallecas, Madrid.' },
+  { date: '10·06', tag: 'Judicial', title: 'Absolts 11 activistes de Greenpeace al Port de Sagunt', desc: 'El tribunal conclou que el bloqueig al vaixell de gas no va constituir violència ni intimidació greu.' },
+  { date: '10·06', tag: 'Internacional', title: 'L\'últim partit de Messi amb l\'Argentina al Monumental', desc: 'Comiat oficial del capità Messi amb l\'Albiceleste en un amistós davant Benín a Buenos Aires.' },
+  { date: '10·06', tag: 'Esports · Futbol', title: 'Espanya – Croàcia a la Lliga de Nacions a Split', desc: 'La Roja, líder amb ple de victòries, debuta la samarreta blanca amb dues estrelles al Poljud. Croàcia, molt debilitada.' },
+  { date: '10·06', tag: 'Esports · Tennis', title: 'Alcaraz, final de l\'Obert de Tòquio davant Lehecka', desc: 'El tennista espanyol, defensor del títol, s\'enfronta al txec Jiri Lehecka en la final del torneig japonès.' },
+  { date: '10·05', tag: 'Nobel · Medicina', title: 'Nobel de Medicina per l\'optogenètica', desc: 'Karl Deisseroth, Peter Hegemann i Georg Nagel premiats per la tècnica que controla neurones amb llum.' },
+  { date: '10·06', tag: 'Nobel · Física', title: 'Francis Halzen, Nobel de Física per descobrir neutrins còsmics', desc: 'Premi per les contribucions a l\'Observatori IceCube al Pol Sud i el descobriment de neutrins d\'alta energia.' },
+  { date: '10·06', tag: 'Societat · Cat.', title: '120.000 persones a Barcelona per l\'accés a l\'habitatge', desc: 'Gran manifestació a Barcelona. Es planteja una vaga general per al novembre davant la crisi d\'habitatge.' },
+  { date: '10·06', tag: 'Política · Cat.', title: 'Llarena aixeca l\'ordre de detenció contra Puigdemont', desc: 'El Suprem arxiva la detenció de l\'expresident. Puigdemont pot retornar a Espanya.' },
+  { date: '10·06', tag: 'Política · Esp.', title: 'Eleccions generals convocades per al 29 de novembre', desc: 'El BOE publica el RD 806/2026 que dissol les Corts. Campanya del 13 al 27 de novembre.' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
