@@ -44,6 +44,83 @@ const USER = {
 };
 
 const NEWS = [
+  // ── 2026-10-10 ──────────────────────────────────────────────
+  {
+    id: 'n010',
+    date: '2026-10-10',
+    dateLabel: '10·10',
+    tag: 'Successos',
+    title: 'Barcelona: 11 dels 13 detinguts a la protesta per l\'habitatge, en llibertat',
+    desc: 'Onze dels tretze detinguts durant els disturbis posteriors a la manifestació per l\'habitatge a Barcelona han quedat en llibertat. Dos romanen als calabossos pendents de judici ràpid.',
+    url: 'https://metropoliabierta.elespanol.com/sucesos/',
+  },
+  {
+    id: 'n011',
+    date: '2026-10-10',
+    dateLabel: '10·10',
+    tag: 'Internacional',
+    title: 'Terratrèmol de 7,7 sacseja Panamà i activa alerta de tsunami',
+    desc: 'Un sisme de magnitud 7,7 ha sacsejat Panamà i activat una alerta per risc de tsunami a la costa del Pacífic. Les autoritats han evacuat zones costaneres com a mesura de precaució.',
+    url: 'https://es.euronews.com/video/2026/10/10/ultimas-noticias-10-octubre-2026-tarde',
+  },
+  {
+    id: 'n012',
+    date: '2026-10-10',
+    dateLabel: '10·10',
+    tag: 'Conflicte',
+    title: 'Ucraïna: atac rus destrueix un edifici residencial a Zaporíjia',
+    desc: 'Un atac aeri rus ha destruït un edifici residencial a Zaporíjia. Les autoritats ucraïneses han informat de víctimes i danys materials greus al barri afectat.',
+    url: 'https://es.euronews.com/video/2026/10/10/ultimas-noticias-10-octubre-2026-tarde',
+  },
+  {
+    id: 'n013',
+    date: '2026-10-10',
+    dateLabel: '10·10',
+    tag: 'Economia',
+    title: 'Banc d\'Espanya: PIB 2,6% però inflació puja al 3,9% i l\'ocupació frena',
+    desc: 'El Banc d\'Espanya eleva la previsió de creixement del PIB al 2,6% per al 2026, però revisa a l\'alça la inflació fins al 3,9% i rebaixa el ritme de creació d\'ocupació al 2%.',
+    url: 'https://que.es/2026/10/10/empleo-ralentiza-banco-espana-previsiones',
+  },
+  {
+    id: 'n014',
+    date: '2026-10-10',
+    dateLabel: '10·10',
+    tag: 'Esports',
+    title: 'LaLiga J8: Barça-Getafe, R.Madrid-Villarreal i Alavès-Atlètic',
+    desc: 'La jornada 8 de LaLiga porta tres partits destacats: el Barça rep el Getafe al Camp Nou, el Madrid afronta el Villarreal al Bernabéu, i l\'Atlètic visita l\'Alavès a Mendizorroza.',
+    url: 'https://www.clarosports.com/futbol/partidos-de-hoy-10-de-octubre-de-2026-y-donde-ver-en-vivo-todo-el-futbol-de-este-sabado/',
+  },
+  // ── 2026-10-09 ──────────────────────────────────────────────
+  {
+    id: 'n009',
+    date: '2026-10-09',
+    dateLabel: '10·09',
+    tag: 'Nobel Pau',
+    title: 'Navi Pillay, Nobel de la Pau 2026 per defensar el dret internacional',
+    desc: 'El Comitè Noruec ha concedit el Nobel de la Pau 2026 a la jurista sud-africana Navanethem "Navi" Pillay pels seus esforços per promoure la pau i el dret internacional humanitari.',
+    url: 'https://www.infobae.com/america/mundo/2026/10/09/en-vivo-el-comite-noruego-del-nobel-anuncia-al-ganador-del-premio-nobel-de-la-paz-2026/',
+  },
+  // ── 2026-10-08 ──────────────────────────────────────────────
+  {
+    id: 'n008',
+    date: '2026-10-08',
+    dateLabel: '10·08',
+    tag: 'Nobel Lit.',
+    title: 'Anne Carson, Nobel de Literatura 2026',
+    desc: 'L\'Acadèmia Sueca ha guardonat la poeta canadenca Anne Carson amb el Nobel de Literatura 2026. Reconeguda per la seva obra experimental que fusiona poesia clàssica i contemporània.',
+    url: 'https://es.wikipedia.org/wiki/Premio_Nobel_de_Literatura_2026',
+  },
+  // ── 2026-10-07 ──────────────────────────────────────────────
+  {
+    id: 'n007',
+    date: '2026-10-07',
+    dateLabel: '10·07',
+    tag: 'Laboral',
+    title: 'CCOO i UGT convoquen vaga general per al 11 de novembre',
+    desc: 'Els dos principals sindicats espanyols convoquen un paro de 24 hores per al dimecres 11N, dues setmanes i mitja abans de les eleccions generals del 29N. La reivindicació central: crisi de l\'habitatge i millora salarial.',
+    url: 'https://es.euronews.com/2026/10/07/huelga-general-vivienda-espana-11-noviembre-ccoo-ugt',
+  },
+  // ── Normativa anterior ───────────────────────────────────────
   {
     id: 'n001',
     date: '2026-04-18',

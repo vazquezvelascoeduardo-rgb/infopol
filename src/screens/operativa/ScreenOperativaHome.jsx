@@ -43,6 +43,14 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '10·10', tag: 'Successos', title: 'Barcelona: 11 dels 13 detinguts a la protesta per l\'habitatge, en llibertat', desc: 'Onze dels tretze detinguts durant els disturbis posteriors a la manifestació per l\'habitatge han quedat en llibertat. Dos resten als calabossos pendents de judici ràpid.', url: 'https://metropoliabierta.elespanol.com/sucesos/' },
+  { date: '10·10', tag: 'Internacional', title: 'Terratrèmol de 7,7 sacseja Panamà i activa alerta de tsunami', desc: 'Un sisme de magnitud 7,7 ha sacsejat Panamà i activat alerta per risc de tsunami al Pacífic. Les autoritats han evacuat zones costaneres com a precaució.', url: 'https://es.euronews.com/video/2026/10/10/ultimas-noticias-10-octubre-2026-tarde' },
+  { date: '10·10', tag: 'Conflicte', title: 'Ucraïna: atac rus destrueix un edifici residencial a Zaporíjia', desc: 'Un atac aeri rus ha destruït un edifici residencial a Zaporíjia, amb víctimes i danys greus. Les autoritats ucraïneses han obert investigació.', url: 'https://es.euronews.com/video/2026/10/10/ultimas-noticias-10-octubre-2026-tarde' },
+  { date: '10·10', tag: 'Economia', title: 'Banc d\'Espanya: PIB 2,6% però inflació puja al 3,9% i l\'ocupació frena', desc: 'El Banc d\'Espanya eleva el PIB al 2,6% per al 2026, però revisa la inflació fins al 3,9% i rebaixa el ritme de creació d\'ocupació al 2%.', url: 'https://que.es/2026/10/10/empleo-ralentiza-banco-espana-previsiones' },
+  { date: '10·10', tag: 'Esports', title: 'LaLiga J8: Barça-Getafe, R.Madrid-Villarreal i Alavès-Atlètic', desc: 'Jornada 8 de LaLiga amb tres duels destacats: Barça al Camp Nou contra el Getafe, Madrid vs Villarreal al Bernabéu, i Alavès-Atlètic a Mendizorroza.', url: 'https://www.clarosports.com/futbol/partidos-de-hoy-10-de-octubre-de-2026-y-donde-ver-en-vivo-todo-el-futbol-de-este-sabado/' },
+  { date: '10·09', tag: 'Nobel Pau', title: 'Navi Pillay, Nobel de la Pau 2026 per defensar el dret internacional', desc: 'El Comitè Noruec ha concedit el Nobel de la Pau 2026 a la jurista sud-africana Navanethem "Navi" Pillay pels seus esforços per la pau i el dret internacional humanitari.', url: 'https://www.infobae.com/america/mundo/2026/10/09/en-vivo-el-comite-noruego-del-nobel-anuncia-al-ganador-del-premio-nobel-de-la-paz-2026/' },
+  { date: '10·08', tag: 'Nobel Lit.', title: 'Anne Carson, Nobel de Literatura 2026', desc: 'L\'Acadèmia Sueca premia la poeta canadenca Anne Carson amb el Nobel de Literatura 2026. Reconeguda per la seva obra experimental que fusiona poesia clàssica i contemporània.', url: 'https://es.wikipedia.org/wiki/Premio_Nobel_de_Literatura_2026' },
+  { date: '10·07', tag: 'Laboral', title: 'CCOO i UGT convoquen vaga general per al 11 de novembre', desc: 'Els dos principals sindicats espanyols convoquen un paro de 24 hores per al 11N, dues setmanes i mitja abans de les eleccions generals del 29N, per la crisi de l\'habitatge.', url: 'https://es.euronews.com/2026/10/07/huelga-general-vivienda-espana-11-noviembre-ccoo-ugt' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -132,6 +140,11 @@ export default function ScreenOperativaHome() {
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && (
+                <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 6, fontSize: 11, fontWeight: 700, color: T.cat.operativa.solid, textDecoration: 'none' }}>
+                  Llegir més →
+                </a>
+              )}
             </div>
           ))}
         </div>
