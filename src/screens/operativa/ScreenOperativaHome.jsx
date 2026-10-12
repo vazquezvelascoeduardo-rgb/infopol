@@ -43,6 +43,18 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '10·12', tag: 'Policial · BCN', title: 'Mossos desarticulen la banda que robava a cases de futbolistes a Catalunya', desc: 'Dos homes i una dona detinguts a Gavà vinculats a almenys vuit robos. Entre les víctimes, el porter del FC Barcelona Joan García.', url: 'https://infobae.com/espana/agencias/2026/10/12/desarticulan-un-grupo-criminal-que-cometia-robos-en-casas-de-futbolistas-en-cataluna' },
+  { date: '10·12', tag: 'Policial · BCN', title: 'Mort violenta a Nou Barris investigada pels Mossos de matinada', desc: 'Agents de la DIC han obert diligències al districte barceloní per esclarir les circumstàncies del succés.', url: 'https://cronicaglobal.elespanol.com/vida/20261012/mossos-desquadra-investigan-nueva-muerte-violenta-barcelona/1003742801974_0.html' },
+  { date: '10·12', tag: 'Política · CAT', title: 'Illa reivindica Catalunya com a "defensora de l\'Espanya plural" el 12-O', desc: 'El president de la Generalitat va assistir al desfile de la Festa Nacional a Madrid i defensà un model d\'Espanya diversa.', url: 'https://cronicaglobal.elespanol.com/politica/20261012/illa-reivindica-octubre-cataluna-defensora-espana-plural/1003742801983_0.html' },
+  { date: '10·12', tag: 'Economia', title: 'L\'IBEX 35 tanca la jornada del 12-O amb una pujada de l\'1,33%', desc: 'La borsa espanyola va tancar en positiu impulsada per les finances, el petroli i les telecomunicacions.', url: 'https://mx.investing.com/news/stock-market-news/las-bolsas-de-valores-de-espana-cerraron-con-subidas-el-ibex-35-gano-un-133-3795469' },
+  { date: '10·12', tag: 'Economia · BCN', title: 'Barcelona aprova pujar l\'IBI un 150% als propietaris de quatre o més pisos turístics', desc: 'L\'Ajuntament vol limitar la proliferació d\'apartaments d\'ús turístic amb una mesura fiscal per a grans tenidors.', url: 'https://bolsamania.com/noticias/economia/cinco-noticias-mas-importantes-hoy-lunes-12-octubre--23818466.html' },
+  { date: '10·12', tag: 'Esports · FCB', title: 'El Barça s\'exercita per al primer desplaçament europeu de la temporada: visita al Galatasaray', desc: 'Amb vuit victòries en vuit partits a la Lliga, el club blaugrana arriba com a líder incontestable a Istanbul.', url: 'https://www.barcablaugranes.com/barcelona-news/134852/fc-barcelona-news-12-october-2026-preparations-begin-for-champions-league-trip-to-galatasaray' },
+  { date: '10·12', tag: 'Internacional', title: 'El Papa Lleó XIV serà operat d\'un nòdul pulmonar sense alterar el viatge a Amèrica', desc: 'El Vaticà confirma que la intervenció quirúrgica és programada i que la visita pastoral es mantindrà.', url: 'https://es.euronews.com/video/2026/10/12/ultimas-noticias-12-octubre-2026-tarde' },
+  { date: '10·12', tag: 'Internacional', title: 'Corea del Nord llança diversos míssils balístics cap al mar del Japó', desc: 'Seül i Tòquio confirmen els llançaments i activen els seus estats majors enmig d\'una tensió creixent a la península coreana.', url: 'https://www.infobae.com/america/agencias/2026/10/12/lunes-12-de-octubre-de-2026-0700-gmt/' },
+  { date: '10·12', tag: 'Internacional', title: 'FMI i Banc Mundial arranquen a Bangkok amb 191 delegats', desc: 'Les reunions anuals debaten sobre intel·ligència artificial, conflictes bèl·lics actius i l\'escalada del deute públic global.', url: 'https://www.infobae.com/america/agencias/2026/10/12/lunes-12-de-octubre-de-2026-0700-gmt/' },
+  { date: '10·08', tag: 'Premi Nobel', title: 'Anne Carson guanya el Nobel de Literatura 2026', desc: 'L\'Acadèmia Sueca reconeix la poetessa i assagista canadenca "per la seva obra audaç i inventiva".', url: 'https://www.diaridetarragona.com/cultura/272647/canadiense-anne-carson-premio-nobel-literatura-2026.html' },
+  { date: '10·07', tag: 'Premi Nobel', title: 'Nobel de Química per a Henri Kagan i Kenso Soai per la homoquiralitat molecular', desc: 'La Reial Acadèmia Sueca reconeix els seus treballs sobre molècules en mirall, claus per a la indústria farmacèutica.', url: 'https://www.infobae.com/america/mundo/2026/10/07/la-real-academia-sueca-de-ciencias-anuncia-al-ganador-del-premio-nobel-de-quimica-2026/' },
+  { date: '10·05', tag: 'Premi Nobel', title: 'Nobel de Medicina per Deisseroth, Hegemann i Nagel per la optogenètica', desc: 'El trio va demostrar com activar neurones amb llum, obrint nous camins per a tractaments de malalties cerebrals.', url: 'https://cnnespanol.cnn.com/2026/10/05/ciencia/premio-nobel-medicina-2026-trax' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -122,7 +134,7 @@ export default function ScreenOperativaHome() {
 
       {/* Actualitat normativa */}
       <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
+        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
             <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
@@ -132,6 +144,7 @@ export default function ScreenOperativaHome() {
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && <a href={n.url} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: 8, fontSize: 11, fontWeight: 700, color: T.cat.operativa.solid, textDecoration: 'none' }}>Llegir notícia →</a>}
             </div>
           ))}
         </div>
