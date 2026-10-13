@@ -77,6 +77,31 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticies banner */}
+      <div style={{ padding: '16px 18px 0' }}>
+        <div onClick={() => navigate('/noticies')} style={{
+          background: '#fff', borderRadius: T.r.lg, padding: 14,
+          borderTop: `3px solid ${T.cat.leyes.solid}`, boxShadow: T.shadow.card,
+          cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12,
+        }}>
+          <div style={{
+            width: 44, height: 44, borderRadius: 11, background: T.cat.leyes.solid,
+            display: 'grid', placeItems: 'center', flexShrink: 0,
+            boxShadow: 'inset 0 -3px 0 rgba(0,0,0,0.18)',
+          }}>
+            <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 5h16M4 9h16M4 13h10M4 17h7"/>
+            </svg>
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.leyes.ink }}>Actualitat · 13 oct 2026</div>
+            <div style={{ fontWeight: 800, fontSize: 14, letterSpacing: -0.2, color: T.ink, marginTop: 1 }}>Notícies del dia</div>
+            <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 2 }}>Política, economia, esports, premis i més.</div>
+          </div>
+          <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke={T.inkMuted} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </div>
+      </div>
+
       {/* features grid */}
       <div style={{ padding: '24px 18px 8px' }}>
         <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 12 }}>Tot el que necessites</div>
