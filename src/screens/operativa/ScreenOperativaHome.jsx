@@ -43,6 +43,14 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '10·14', tag: 'Política · CAT', title: 'El PSC guanyaria les catalanes amb 33-35 escons, segons el CEO', desc: 'ERC (24-26) i Aliança Catalana (23-25), en segon i tercer lloc.' },
+  { date: '10·14', tag: 'Política · ESP', title: 'El PSOE col·loca ministres a les llistes per a les eleccions del 29N', desc: 'Robles, número dos per Madrid. El Suprem manté oberta la causa Koldo.' },
+  { date: '10·14', tag: 'Judicial · CAT', title: 'Tribunal de Comptes aplica l\'amnistia i absol Puigdemont i 34 encausats', desc: 'Arxivades les diligències per malversació vinculades al Procés.' },
+  { date: '10·14', tag: 'Economia', title: 'La inflació s\'enfila al 4,9% per la disparada dels combustibles', desc: 'Carburants +28% al setembre. El lloguer marca màxims al 2,54%.' },
+  { date: '10·14', tag: 'Esports · FCB', title: 'El Barça arriba als 10 victories seguides i brilla davant el Galatasaray', desc: 'Lamine Yamal, gran protagonista a la Champions League.' },
+  { date: '10·14', tag: 'Mossos', title: 'Investigació interna als Mossos per una consigna política en un curs policial', desc: 'L\'incident va tenir lloc davant 200 policies i comandaments durant la clausura d\'un curs.' },
+  { date: '10·06', tag: 'Nobel 2026', title: 'Nobel de Medicina per la recerca en optogenètica', desc: 'Deisseroth, Hegemann i Nagel premiats per proteïnes algals que obren canals neuronals.' },
+  { date: '10·06', tag: 'Nobel 2026', title: 'Nobel de Física a Halzen pels neutrins i l\'Observatori IceCube', desc: 'Detecció de neutrins còsmics al Pol Sud; nova finestra per a l\'astronomia.' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
