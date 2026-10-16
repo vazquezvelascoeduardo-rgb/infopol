@@ -43,6 +43,14 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  { date: '10·16', tag: 'Esports · MLB', title: 'Els Brewers lideren 2-0 la NLCS davant els Dodgers', desc: 'Milwaukee aconsegueix la seva primera victòria a Los Ángeles i s\'acosta a la Sèrie Mundial per primera vegada des de 1982.', link: 'https://seatgeek.com/blog/brewers-vs-dodgers-2026-nlcs-6-keys-to-milwaukee-winning-the-series' },
+  { date: '10·16', tag: 'Esports · FIFA', title: 'Infantino es disculpa per la proposta de privatitzar el Mundial', desc: 'El president de la FIFA demana disculpes a la junta per la manera com va comunicar la proposta de privatitzar el torneig. El debat continua obert.', link: 'https://www.telemundo.com/noticias/noticias-telemundo/internacional/video/el-pelotazo-nos-trae-lo-que-es-noticia-en-los-deportes-este-viernes-16-de-octubre-de-2026-tmvo13234267' },
+  { date: '10·16', tag: 'Policial · CAT', title: '28 tiroteus a Catalunya des de gener — més d\'un per setmana', desc: 'El sindicat USPAC alerta de la proliferació de tiroteus vinculats al crim organitzat i el narcotràfic, amb casos a Barcelona, L\'Hospitalet, Figueres i Tordera.', link: 'https://www.eldebate.com/espana/cataluna/20260603/sindicato-mossos-desmonta-buenismo-illa-ante-tiroteos-cataluna-bienvenidos-far-west_424336.html' },
+  { date: '10·09', tag: 'Premi Nobel Pau', title: 'Nobel de la Pau per a la jurista Navi Pillay', desc: 'La jurista sudafricana i exalta comissionada de l\'ONU per als Drets Humans rep el Premi Nobel de la Pau 2026, anunciat des d\'Oslo.', link: 'https://en.wikipedia.org/wiki/2026_Nobel_Peace_Prize' },
+  { date: '10·07', tag: 'Premi Nobel Química', title: 'Nobel de Química per desxifrar el misteri de les molècules espill', desc: 'Henri B. Kagan i Kenso Soai premiats per explicar com sorgeix la homoquiralitat de manera espontània, amb aplicacions directes a la indústria farmacèutica.', link: 'https://cnnespanol.cnn.com/2026/10/07/mundo/premio-nobel-quimica-2026-asimetrica-trax' },
+  { date: '10·06', tag: 'Premi Nobel Medicina', title: 'Nobel de Medicina per a l\'optogenètica — apagar i encendre neurones amb llum', desc: 'Deisseroth, Hegemann i Nagel premiats per una tècnica revolucionària per controlar neurones amb llum, clau per a futures teràpies neurològiques.', link: 'https://www.nationalgeographic.com.es/ciencia/te-explicamos-detalle-ciencia-apagar-y-encender-neuronas-premio-nobel-fisiologia-o-medicina-2026_29571' },
+  { date: '10·05', tag: 'Política · ESP', title: 'Sánchez dissol les Corts i convoca eleccions per al 29 de novembre', desc: 'Decret 806/2026. Sánchez anuncia eleccions anticipades el 5 d\'octubre després que el Congrés rebutgés els seus decrets d\'habitatge. Campanya del 13 al 27-N.', link: 'https://primicias.ec/internacional/pedro-sanchez-convoca-elecciones-generales-espana-134126/' },
+  { date: '10·01', tag: 'Economia · ESP', title: 'L\'habitatge puja un 14,2% interanual — la pujada comença a moderar-se', desc: 'El preu de l\'habitatge nou i de segona mà s\'ha encarit un 14,2% en taxa interanual. El FMI preveu que el PIB real per càpita d\'Espanya desaccelerà fins al 0,8% el 2027.', link: 'https://www.eleconomista.es/' },
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -125,13 +133,14 @@ export default function ScreenOperativaHome() {
         <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
-            <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
+            <div key={i} onClick={n.link ? () => window.open(n.link, '_blank', 'noopener') : undefined} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card, cursor: n.link ? 'pointer' : 'default' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                 <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
                 <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.link && <div style={{ fontSize: 11, color: T.cat.operativa.solid, fontWeight: 700, marginTop: 6 }}>Llegir més →</div>}
             </div>
           ))}
         </div>
