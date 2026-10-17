@@ -111,6 +111,25 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 12 }}>Última hora</div>
+        <div
+          onClick={() => navigate('/noticias')}
+          style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, borderLeft: `3px solid ${T.cat.noticias.solid}`, boxShadow: T.shadow.card, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12 }}
+        >
+          <div style={{ width: 44, height: 44, borderRadius: 12, background: T.cat.noticias.soft, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+            <Icon name="newspaper" size={22} color={T.cat.noticias.solid} />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.noticias.ink }}>Noticias · Actualitat</div>
+            <div style={{ fontWeight: 800, fontSize: 15, letterSpacing: -0.2, color: T.ink, marginTop: 2 }}>Catalunya · Espanya · Món</div>
+            <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 2 }}>Resum diari de política, economia, esports, ciència i successos.</div>
+          </div>
+          <Icon name="chevron-right" size={16} color={T.inkMuted} />
+        </div>
+      </div>
+
       {/* pricing */}
       <div style={{ padding: '20px 18px 0' }}>
         <div style={{ background: T.ink, borderRadius: T.r.xl, padding: 20, color: '#fff', position: 'relative', overflow: 'hidden' }}>
