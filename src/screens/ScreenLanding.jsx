@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../tokens';
 import Icon from '../components/Icon';
 import { InfoPolWordmark, StatusBar, Pill, DuoButton, CatIcon } from '../components/Shared';
+import { NEWS, NEWS_CATS } from '../data/news';
 
 export default function ScreenLanding() {
   const navigate = useNavigate();
@@ -109,6 +110,52 @@ export default function ScreenLanding() {
             <b style={{ color: T.ink }}>Marta C.</b> · Mossos d'Esquadra promo 2025
           </div>
         </div>
+      </div>
+
+      {/* noticias */}
+      <div style={{ padding: '24px 18px 0' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+          <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted }}>Noticias del dia</div>
+          <button onClick={() => navigate('/noticias')} style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            fontFamily: T.font, fontWeight: 700, fontSize: 12,
+            color: T.cat.operativa.solid, display: 'flex', alignItems: 'center', gap: 3,
+          }}>
+            Veure-les totes <Icon name="chevron-right" size={12} color={T.cat.operativa.solid} />
+          </button>
+        </div>
+        {[...NEWS].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3).map(item => {
+          const cat = NEWS_CATS[item.cat] || NEWS_CATS.cultura;
+          return (
+            <div key={item.id} style={{
+              background: T.card, borderRadius: T.r.lg, padding: '12px 14px',
+              boxShadow: T.shadow.card, marginBottom: 10,
+              borderLeft: `3px solid ${cat.color}`,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
+                <span style={{
+                  background: cat.soft, color: cat.ink,
+                  fontSize: 10, fontWeight: 800, letterSpacing: 0.7,
+                  textTransform: 'uppercase', padding: '2px 8px',
+                  borderRadius: T.r.pill, fontFamily: T.font,
+                }}>{cat.label}</span>
+                <span style={{ fontSize: 11, color: T.inkMuted, fontFamily: T.font }}>{item.source}</span>
+              </div>
+              <div style={{
+                fontFamily: T.font, fontWeight: 700, fontSize: 13,
+                lineHeight: 1.35, color: T.ink,
+              }}>{item.title}</div>
+            </div>
+          );
+        })}
+        <button onClick={() => navigate('/noticias')} style={{
+          width: '100%', padding: '11px 0', borderRadius: T.r.lg,
+          border: `1.5px solid ${T.hairlineStrong}`, background: 'transparent',
+          fontFamily: T.font, fontWeight: 700, fontSize: 13, color: T.inkSoft,
+          cursor: 'pointer', marginTop: 2,
+        }}>
+          Totes les noticias →
+        </button>
       </div>
 
       {/* pricing */}
