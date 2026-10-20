@@ -1,0 +1,216 @@
+export const NOTICIAS = [
+  // ── POLÍTICA ─────────────────────────────────────────────────────
+  {
+    id: "n001",
+    data: "20·10·2026",
+    categoria: "politica",
+    titol: "PP i Vox estudien pactar al Senat per frenar la coalició d'esquerres",
+    resum: "Abascal ofereix \"sacrificis\" i acords al PP per bloquejar la majoria progressista a la cambra alta. Les negociacions s'aceleren de cara al ple de la setmana vinent.",
+    font: "https://www.elnacional.cat/es/politica.html",
+  },
+  {
+    id: "n002",
+    data: "20·10·2026",
+    categoria: "politica",
+    titol: "Podem i ERC pacten presentar-se junts a les generals del 29N a Catalunya",
+    resum: "Ambdues formacions han confirmat una aliança electoral per sumar escons a l'esquerra. Els Comuns han criticat la decisió, acusant Rufián de dividir el bloc progressista.",
+    font: "https://orain.eus/es/tag/cataluna/",
+  },
+  {
+    id: "n003",
+    data: "20·10·2026",
+    categoria: "politica",
+    titol: "CEO: Aliança Catalana supera Junts en el primer baròmetre de 2026",
+    resum: "El Centre d'Estudis d'Opinió situa el PSC d'Illa com a primera força, però amb Aliança Catalana creixent i per davant de Junts per primera vegada en intenció de vot.",
+    font: "https://www.democrata.es/catalunya/",
+  },
+  {
+    id: "n004",
+    data: "19·10·2026",
+    categoria: "politica",
+    titol: "Temporal a Catalunya: dos morts i un desaparegut",
+    resum: "Les pluges intenses han deixat víctimes mortals i destrosses a diverses comarques. Puigdemont ha convocat una cimera extraordinària. Les Rodalies han patit greus incidències a la línia de Gelida.",
+    font: "https://orain.eus/es/tag/cataluna/",
+  },
+
+  // ── ECONOMIA ──────────────────────────────────────────────────────
+  {
+    id: "n005",
+    data: "20·10·2026",
+    categoria: "economia",
+    titol: "El FMI puja al 2,5% la previsió de creixement d'Espanya per a 2026",
+    resum: "El Fons Monetari Internacional millora les previsions per a l'economia espanyola, que encadena el tercer any com a líder de creixement entre les economies avançades. El Banc d'Espanya alerta d'una inflació del 5%.",
+    font: "https://www.moncloa.com/2026/10/13/fmi-prevision-espana-crecimiento-2026-3447439",
+  },
+  {
+    id: "n006",
+    data: "20·10·2026",
+    categoria: "economia",
+    titol: "La inflació es dispara al 4,9% al setembre, el major repunt des de febrer",
+    resum: "L'IPC s'enfila per l'escalada dels carburants i els paquets turístics, en un context marcat per les tensions a l'Orient Mitjà que encarreixen l'energia. El petroli Brent supera els 111 dòlars.",
+    font: "https://www.eleconomista.es/noticias/fuente/el-economista/2026/octubre/1quin",
+  },
+  {
+    id: "n007",
+    data: "20·10·2026",
+    categoria: "economia",
+    titol: "Díaz encarrega als experts la proposta de pujada del SMI per a primers de novembre",
+    resum: "La vicepresidenta segona ha demanat al grup d'experts que tinguin la seva recomanació sobre el nou salari mínim interprofessional abans de finals d'octubre, sense una xifra concreta sobre la taula.",
+    font: "https://www.eleconomista.es/ultimas-noticias/",
+  },
+
+  // ── ESPORTS ───────────────────────────────────────────────────────
+  {
+    id: "n008",
+    data: "20·10·2026",
+    categoria: "esports",
+    titol: "El Barça golejà el Getafe i consolida el lideratge de LaLiga",
+    resum: "Els blaugrana s'imposen amb autoritat en un duel còmode que reforça la seva posició al capdavant de la classificació. El Madrid guanyà el Villarreal gràcies a Diomande, amb Vinicius expulsat.",
+    font: "https://theobjective.com/deportes/",
+  },
+  {
+    id: "n009",
+    data: "20·10·2026",
+    categoria: "esports",
+    titol: "PSG - Barça, Champions League avui a les 21h — en directe per M+",
+    resum: "El Paris Saint-Germain rep el FC Barcelona en un duel d'elit de la fase de grups. El partit es podrà seguir a través dels canals M+ Liga de Campeones.",
+    font: "https://depor.com/futbol-internacional/en-que-canal-tv-transmiten-fc-barcelona-vs-psg-en-vivo-hoy-por-la-champions-league-2026-en-mexico-espana-y-eeuu-canales-tv-online-en-directo-nnda-nnrt-noticia",
+  },
+  {
+    id: "n010",
+    data: "19·10·2026",
+    categoria: "esports",
+    titol: "Cristiano Ronaldo, suspès 30 dies sense poder ser convocat amb Portugal",
+    resum: "La federació portuguesa ha anunciat la sanció al davanter de l'Al-Nassr arran d'un incident durant l'últim cicle internacional. La mesura el deixa fora de la pròxima finestra de seleccions.",
+    font: "https://theobjective.com/deportes/",
+  },
+  {
+    id: "n011",
+    data: "19·10·2026",
+    categoria: "esports",
+    titol: "La Fiscalia obre diligències pels crits xenòfobs a l'Atlético-Villarreal",
+    resum: "El Ministeri Fiscal ha iniciat investigació per possibles delictes d'odi arran dels crits que es van produir a l'estadi Metropolità durant el partit de LaLiga del cap de setmana passat.",
+    font: "https://es.soccerway.com/noticias/espana/MyYCrJtqnZdPEiqF",
+  },
+
+  // ── POLICIAL / LEGAL ──────────────────────────────────────────────
+  {
+    id: "n012",
+    data: "08·10·2026",
+    categoria: "policial",
+    titol: "Desarticulada una xarxa que va enviar 42,5 tones de cocaïna a Europa",
+    resum: "La Policia Nacional ha desmantelat una organització transnacional investigada des del 2024 arran de la incautació de 13 tones de cocaïna ocultes entre plàtans al Port d'Algesires. L'operació acaba amb diverses detencions.",
+    font: "https://www.interior.gob.es/opencms/es/prensa/noticias/",
+  },
+  {
+    id: "n013",
+    data: "15·10·2026",
+    categoria: "policial",
+    titol: "Cinc detinguts en un narcopis a Malasaña (Madrid) amb 12 tipus de droga",
+    resum: "Agents de la Policia Nacional van irrompre en un habitatge del popular barri madrileny on van trobar milers d'euros en efectiu i dotze substàncies diferents. Els detinguts queden a disposició judicial.",
+    font: "https://www.telecinco.es/tags/policia/",
+  },
+  {
+    id: "n014",
+    data: "13·10·2026",
+    categoria: "policial",
+    titol: "Quatre detinguts i agents ferits en els aldarulls a Sol per la Festa Nacional",
+    resum: "Grups de manifestants van protagonitzar enfrontaments amb la Policia Nacional durant el desfilament militar del 12 d'octubre a Madrid. Quatre persones van ser detingudes i diversos agents van resultar ferits lleus.",
+    font: "https://www.telecinco.es/tags/policia/",
+  },
+  {
+    id: "n015",
+    data: "17·10·2026",
+    categoria: "policial",
+    titol: "Identificat el jove que va derrocar un pilar de l'Alhambra practicant parkour",
+    resum: "La Policia Nacional ha localitzat l'autor del dany al monument de Granada, que ja no es trobaria al territori espanyol. El cas ha generat debat sobre la protecció del patrimoni i les sancions per actes vandàlics.",
+    font: "https://www.telecinco.es/tags/policia/",
+  },
+
+  // ── PREMIS / CIÈNCIA ──────────────────────────────────────────────
+  {
+    id: "n016",
+    data: "07·10·2026",
+    categoria: "premis",
+    titol: "Nobel de Medicina pels pioners de l'optogenètica: Deisseroth, Hegemann i Nagel",
+    resum: "Karl Deisseroth (Stanford), Peter Hegemann (Berlín) i Georg Nagel (Würzburg) reben el Nobel per una tècnica que permet activar o desactivar neurones específiques amb llum, obrint nous camins per al tractament de malalties neurològiques.",
+    font: "https://www.cronista.com/usa/trending/premios-nobel-2026-quienes-son-los-ganadores-y-cuando-se-conocen-los-que-faltan/",
+  },
+  {
+    id: "n017",
+    data: "08·10·2026",
+    categoria: "premis",
+    titol: "Nobel de Física per a Francis Halzen pels treballs amb l'Observatori IceCube",
+    resum: "El físic de la Universitat de Wisconsin-Madison és reconegut per les seves contribucions decisives a la detecció de neutrins còsmics a través de l'observatori enterrat sota el gel de l'Antàrtida.",
+    font: "https://www.cronista.com/usa/trending/premios-nobel-2026-quienes-son-los-ganadores-y-cuando-se-conocen-los-que-faltan/",
+  },
+  {
+    id: "n018",
+    data: "11·10·2026",
+    categoria: "premis",
+    titol: "Nobel de la Pau per a la jurista sud-africana Navi Pillay",
+    resum: "El Comitè Nobel noruec ha guardonat Navanethem Pillay per la seva trajectòria en la defensa dels drets humans i la justícia internacional, especialment com a alta comissionada de l'ONU per als Drets Humans.",
+    font: "https://www.zolonoticias.com/2026/10/10/premios-nobel-2026-reconocimientos-a-la-paciencia-y-la-ciencia/",
+  },
+
+  // ── INTERNACIONAL ─────────────────────────────────────────────────
+  {
+    id: "n019",
+    data: "20·10·2026",
+    categoria: "internacional",
+    titol: "El Brent supera els 111 dòlars per barril per l'escalada a l'Orient Mitjà",
+    resum: "El preu del petroli de referència europeu segueix en màxims anuals. Analistes avisen que si la situació s'agreuja podrien assolir-se els 120 dòlars per barril abans de final d'any.",
+    font: "https://www.infobae.com/america/mundo/",
+  },
+  {
+    id: "n020",
+    data: "19·10·2026",
+    categoria: "internacional",
+    titol: "Drons russos ataquen regions de l'oest d'Ucraïna que fins ara servien de refugi",
+    resum: "Moscou ha ampliat l'abast dels seus bombardeigs a zones que havien quedat relativament protegides. L'OTAN ha convocat consultes d'urgència. Trump es mostra disposat a reunir-se amb Putin i Xi Jinping.",
+    font: "https://www.publico.es/internacional",
+  },
+  {
+    id: "n021",
+    data: "17·10·2026",
+    categoria: "internacional",
+    titol: "Colons israelians agredeixen diplomàtics de la UE a Cisjordània",
+    resum: "Un grup de colons va atacar amb pals una delegació europea que inspeccionava assentaments. Brussel·les ha convocat l'ambaixador israelià i exigeix explicacions, enmig de les crítiques per la paràlisi de la UE.",
+    font: "https://www.publico.es/internacional",
+  },
+  {
+    id: "n022",
+    data: "20·10·2026",
+    categoria: "internacional",
+    titol: "França decreta tocs de queda parcials en diverses ciutats per disturbis",
+    resum: "El Govern de París ha ordenat restriccions nocturnes de mobilitat en barris conflictius de Lyon, Marsella i banlieues de la capital arran d'onades de violència. La mesura ha generat debat sobre el model de seguretat.",
+    font: "https://www.publico.es/internacional",
+  },
+  {
+    id: "n023",
+    data: "20·10·2026",
+    categoria: "internacional",
+    titol: "Brasil: Lula i Flàvio Bolsonaro s'enfrontaran en la segona volta de les presidencials",
+    resum: "El Tribunal Electoral ha confirmat les candidatures per al balotatge i ha donat 24 hores a Meta per garantir condicions d'igualtat en xarxes socials entre els dos candidats. Les enquestes mostren un empat tècnic.",
+    font: "https://www.infobae.com/america/mundo/",
+  },
+];
+
+export const CATEGORIES = [
+  { id: "totes",         label: "Totes",         cat: null },
+  { id: "politica",      label: "Política",      cat: "politica" },
+  { id: "economia",      label: "Economia",      cat: "economia" },
+  { id: "esports",       label: "Esports",       cat: "esports" },
+  { id: "policial",      label: "Policial",      cat: "policial" },
+  { id: "premis",        label: "Premis",        cat: "premis" },
+  { id: "internacional", label: "Internacional", cat: "internacional" },
+];
+
+export const CAT_CONFIG = {
+  politica:      { color: "#3B6BF5", soft: "#D8E2FE", ink: "#0E2B7A", icon: "landmark" },
+  economia:      { color: "#E89421", soft: "#FBE7C2", ink: "#6B3F08", icon: "trending-up" },
+  esports:       { color: "#1FB286", soft: "#CDF0E1", ink: "#0B5A3D", icon: "trophy" },
+  policial:      { color: "#E04F5F", soft: "#FBDADC", ink: "#7A1B22", icon: "shield" },
+  premis:        { color: "#9C4FE0", soft: "#EBDAFB", ink: "#4A1B7A", icon: "award" },
+  internacional: { color: "#0BB4C2", soft: "#CCEEF1", ink: "#0A4F56", icon: "globe" },
+};

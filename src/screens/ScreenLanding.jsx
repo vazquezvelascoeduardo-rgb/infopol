@@ -96,6 +96,21 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div onClick={() => navigate('/noticias')} style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, borderTop: `3px solid ${T.cat.physical.solid}`, boxShadow: T.shadow.card, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14 }}>
+          <div style={{ width: 44, height: 44, borderRadius: 12, background: T.cat.physical.solid, display: 'grid', placeItems: 'center', flexShrink: 0, boxShadow: 'inset 0 -3px 0 rgba(0,0,0,0.18)' }}>
+            <Icon name="newspaper" size={24} color="#fff" strokeWidth={2.2} />
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.physical.ink }}>Actualitat · Avui</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 16, letterSpacing: -0.3, marginTop: 1 }}>Notícies del dia</div>
+            <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 2 }}>Catalunya · Espanya · Internacional</div>
+          </div>
+          <Icon name="chevron-right" size={18} color={T.inkMuted} />
+        </div>
+      </div>
+
       {/* testimonial */}
       <div style={{ padding: '16px 18px 0' }}>
         <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.academia.solid}` }}>
