@@ -8,6 +8,7 @@ import type { CSSProperties } from 'react';
 
 import { A, Mono } from '../../lib/design';
 import { VEHICLES, type El } from '../../lib/croquisPhysics';
+import ControlsVehicle from './ControlsVehicle';
 
 export type AccionsPanell = {
   update: (id: string, patch: Partial<El>) => void;
@@ -111,6 +112,13 @@ export default function PanellPropietats({
             )}
           </div>
 
+          {VEHICLES.includes(el.kind) && <div style={seccio}><ControlsVehicle el={el} update={update} /></div>}
+          {typeof el.text === 'string' && <div style={seccio}>
+            <label>Text
+              <input aria-label="Text de l'element" value={el.text} style={{ width: '100%', boxSizing: 'border-box' }}
+                onChange={(e) => update(el.id, { text: e.target.value })} />
+            </label>
+          </div>}
           {/* Color: només per als elements que en tenen */}
           {(VEHICLES.includes(el.kind) || el.kind === 'via-lliure') && (
             <div style={seccio}>
@@ -211,14 +219,14 @@ export default function PanellPropietats({
                 </button>
                 <button
                   type="button"
-                  onClick={() => update(c.id, { opacity: (c.opacity ?? 1) < 0.15 ? 1 : 0.1 })}
-                  aria-label={(c.opacity ?? 1) < 0.15 ? 'Mostrar' : 'Amagar'}
-                  title={(c.opacity ?? 1) < 0.15 ? 'Mostrar' : 'Amagar'}
+                  onClick={() => update(c.id, { hidden: !c.hidden })}
+                  aria-label={c.hidden ? 'Mostrar' : 'Amagar'}
+                  title={c.hidden ? 'Mostrar' : 'Amagar'}
                   style={{
                     border: 'none', background: 'transparent', cursor: 'pointer', padding: 2,
-                    opacity: (c.opacity ?? 1) < 0.15 ? 0.35 : 1, flexShrink: 0,
+                    opacity: c.hidden ? 0.35 : 1, flexShrink: 0,
                   }}>
-                  <span style={{ fontSize: 13, lineHeight: 1 }} aria-hidden>{(c.opacity ?? 1) < 0.15 ? '🚫' : '👁'}</span>
+                  <span style={{ fontSize: 13, lineHeight: 1 }} aria-hidden>{c.hidden ? '🚫' : '👁'}</span>
                 </button>
               </div>
             );

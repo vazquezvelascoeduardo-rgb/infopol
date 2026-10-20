@@ -23,6 +23,7 @@
    (davant, darrere, voltejar) i amb els punts de la via lliure. */
 @media (min-width: 1100px) {
   .cq-mini-props { display: none !important; }
+  .cq-mobile-vehicle { display: none !important; }
 }
 @media (max-width: 1099px) {
   .cq-props { display: none !important; }

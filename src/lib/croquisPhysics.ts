@@ -30,6 +30,10 @@ export type El = {
   rotation: number; scaleX: number; scaleY: number;
   color?: string; text?: string; data?: VehData; ghost?: boolean; phase?: 'inicial' | 'final';
   src?: string; locked?: boolean; opacity?: number; // fons (mapa/foto)
+  backgroundFit?: 'cover' | 'contain';
+  showLabel?: boolean; labelText?: string; labelX?: number; labelY?: number;
+  showState?: boolean;
+  hidden?: boolean;
   parent?: string; // vehicle d'origen (fantasmes inicial/final i punts de pas)
   // Via lliure (kind === 'via-lliure'): polilínia editable.
   // `points` són en COORDENADES DEL TAULELL (no relatives a x/y).

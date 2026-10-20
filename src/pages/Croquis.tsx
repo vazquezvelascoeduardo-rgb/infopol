@@ -14,6 +14,7 @@ import {
 import type Konva from 'konva';
 import { A, Ic, Mono } from '../lib/design';
 import PanellPropietats from './croquis/PanellPropietats';
+import ControlsVehicle from './croquis/ControlsVehicle';
 import './croquis.css';
 import {
   BOARD, PX_PER_M, VEHICLES, buildTimeline, stateAt, simRateAt, cineViewAt, fmtRel,
@@ -695,6 +696,7 @@ function useHtmlImage(src?: string) {
   useEffect(() => {
     if (!src) { setImg(undefined); return; }
     const im = new window.Image();
+    im.crossOrigin = 'anonymous';
     im.onload = () => setImg(im);
     im.src = src;
     return () => { im.onload = null; };
@@ -743,6 +745,7 @@ function Node({ el, onSelect, onChange, onContext, override, animating }: {
   const img = useHtmlImage(el.kind === 'fons' ? el.src : undefined);
   const common = {
     id: el.id,
+    visible: !el.hidden, opacity: el.opacity ?? 1,
     x: override ? override.x : el.x, y: override ? override.y : el.y,
     rotation: override ? override.rotation : el.rotation, scaleX: el.scaleX, scaleY: el.scaleY,
     draggable: !animating && !el.locked, onClick: onSelect, onTap: onSelect,
@@ -762,7 +765,7 @@ function Node({ el, onSelect, onChange, onContext, override, animating }: {
     const w = el.width ?? 240;
     const t = el.tension ?? 0.5;
     return (
-      <Group ref={ref} id={el.id} draggable={!animating} onClick={onSelect} onTap={onSelect}
+      <Group ref={ref} id={el.id} visible={!el.hidden} opacity={el.opacity ?? 1} draggable={!animating && !el.locked} onClick={onSelect} onTap={onSelect}
         onContextMenu={(e: Konva.KonvaEventObject<PointerEvent>) => { e.evt.preventDefault(); onSelect(); onContext(e.evt.clientX, e.evt.clientY); }}
         onDragEnd={(ev: Konva.KonvaEventObject<DragEvent>) => {
           const dx = ev.target.x(), dy = ev.target.y();
@@ -785,6 +788,13 @@ function Node({ el, onSelect, onChange, onContext, override, animating }: {
   }
   if (el.kind === 'fons') {
     if (!img) return null;
+    if (el.backgroundFit) {
+      const sc = (el.backgroundFit === 'cover' ? Math.max : Math.min)(BOARD.w / img.width, BOARD.h / img.height);
+      return <Group ref={ref} {...common} opacity={el.opacity ?? 1} listening={!el.locked}
+        clipX={-BOARD.w / 2} clipY={-BOARD.h / 2} clipWidth={BOARD.w} clipHeight={BOARD.h}>
+        <KImage image={img} x={-img.width * sc / 2} y={-img.height * sc / 2} width={img.width * sc} height={img.height * sc} />
+      </Group>;
+    }
     return <KImage ref={ref as never} {...common} image={img} offsetX={img.width / 2} offsetY={img.height / 2}
       opacity={el.opacity ?? 1} draggable={!el.locked} listening={!el.locked} />;
   }
@@ -827,7 +837,7 @@ function Node({ el, onSelect, onChange, onContext, override, animating }: {
     <Group ref={ref} {...common} opacity={(el.opacity ?? 1) * (el.ghost ? 0.42 : 1)}>
       {el.ghost && <Rect x={-30} y={-52} width={60} height={104} cornerRadius={12} stroke={DARK} strokeWidth={1.5} dash={[8, 6]} listening={false} />}
       <Shape kind={el.kind} color={el.color || DEFAULT_COLOR(el.kind)} text={el.text} />
-      {veh && !el.ghost && estat === 'mov' && (() => {
+      {veh && !el.ghost && el.showState !== false && estat === 'mov' && (() => {
         const enrere = el.data?.sentit === 'enrere';
         const len = Math.min(80, 26 + kmh * 0.7);
         const y0 = enrere ? 48 : -48;
@@ -838,7 +848,7 @@ function Node({ el, onSelect, onChange, onContext, override, animating }: {
             strokeWidth={5} dash={enrere ? [10, 6] : undefined} listening={false} />
         );
       })()}
-      {veh && !el.ghost && estat === 'estacionat' && (<>
+      {veh && !el.ghost && el.showState !== false && estat === 'estacionat' && (<>
         <Rect x={11} y={-52} width={20} height={20} cornerRadius={5} fill="#3B6BF5" listening={false} />
         <Text text="P" fontSize={15} fontStyle="bold" fill="#fff" width={20} align="center" x={11} y={-50} listening={false} />
       </>)}
@@ -847,16 +857,24 @@ function Node({ el, onSelect, onChange, onContext, override, animating }: {
 }
 
 /* Etiqueta flotant amb lletra (A·B) + matrícula / dades (no gira amb el vehicle). */
-function VehBadge({ el, letter }: { el: El; letter?: string }) {
+function VehBadge({ el, letter, onSelect, onChange }: {
+  el: El; letter?: string; onSelect: () => void; onChange: (patch: Partial<El>) => void;
+}) {
+  if (el.showLabel === false || el.hidden) return null;
   const d = el.data;
-  const estat = !el.ghost ? d?.estat : undefined;
+  const estat = !el.ghost && el.showState !== false ? d?.estat : undefined;
   const id = d?.plate || [d?.marca, d?.model].filter(Boolean).join(' ') || '';
   let label = [letter, id].filter(Boolean).join(' · ').toUpperCase();
   if (el.ghost) label = (letter ? letter + ' · ' : '') + (el.phase === 'final' ? 'FINAL' : 'INICIAL');
+  label = el.labelText?.trim() || label;
   if (!label) return null;
   const w = Math.max(44, label.length * 8.2 + (estat ? 26 : 16));
   return (
-    <Group x={el.x} y={el.y + 58} listening={false} opacity={el.ghost ? 0.8 : 1}>
+    <Group x={el.x + (el.labelX ?? 0)} y={el.y + (el.labelY ?? 58)}
+      draggable={!el.locked} onClick={onSelect} onTap={onSelect}
+      onDragStart={(e) => { e.cancelBubble = true; }}
+      onDragEnd={(e) => { e.cancelBubble = true; onChange({ labelX: e.target.x() - el.x, labelY: e.target.y() - el.y }); }}
+      opacity={(el.opacity ?? 1) * (el.ghost ? 0.8 : 1)}>
       <Rect x={-w / 2} y={-12} width={w} height={24} cornerRadius={7} fill={el.ghost ? '#F1EEE6' : '#fff'} stroke="rgba(21,21,28,0.18)" strokeWidth={1} shadowColor="#0006" shadowBlur={5} shadowOffsetY={1} />
       {estat && <Circle x={-w / 2 + 11} y={0} radius={5} fill={ESTATS[estat].color} />}
       <Text text={label} fontSize={12.5} fontStyle="bold" fontFamily="Manrope, sans-serif" fill="#15151C"
@@ -1219,7 +1237,8 @@ export default function Croquis() {
   // Transformer sobre el seleccionat.
   useEffect(() => {
     const tr = trRef.current, stage = stageRef.current; if (!tr || !stage) return;
-    const node = sel ? stage.findOne('#' + sel) : null;
+    const editable = els.find((el) => el.id === sel);
+    const node = sel && !editable?.locked && !editable?.hidden ? stage.findOne('#' + sel) : null;
     tr.nodes(node ? [node] : []);
     tr.getLayer()?.batchDraw();
   }, [sel, els]);
@@ -1305,12 +1324,12 @@ export default function Croquis() {
   // Fons de mapa/foto: l'afegim darrere de tot i amaguem la via dibuixada.
   function addBackground(src: string) {
     const id = nextId(); pushUndo();
-    setEls((p) => [{ id, kind: 'fons', src, x: BOARD.w / 2, y: BOARD.h / 2, rotation: 0, scaleX: 1, scaleY: 1, opacity: 1, locked: true }, ...p.filter((e) => e.kind !== 'fons')]);
+    setEls((p) => [{ id, kind: 'fons', src, backgroundFit: 'cover', x: BOARD.w / 2, y: BOARD.h / 2, rotation: 0, scaleX: 1, scaleY: 1, opacity: 1, locked: true }, ...p.filter((e) => e.kind !== 'fons')]);
     // Neix FIXAT i sense selecció: així no es mou en arrossegar damunt
     // seu i tot el que s'hi dibuixi a sobre queda visible.
     setRoad('cap'); setSel(null);
   }
-  function setBgOpacity(v: number) { setEls((p) => p.map((e) => (e.kind === 'fons' ? { ...e, opacity: v } : e))); }
+  function setBgOpacity(v: number) { if (bgEl) update(bgEl.id, { opacity: v }); }
   function removeBg() { pushUndo(); setEls((p) => p.filter((e) => e.kind !== 'fons')); setSel(null); }
   function openMaps() {
     const q = window.prompt('Adreça o coordenades del lloc (s\'obre Google Maps):', '');
@@ -1398,19 +1417,29 @@ export default function Croquis() {
 
   function exportPng() {
     const stage = stageRef.current; if (!stage) return;
-    setSel(null);
-    const prev = { ...view };
-    const f = fitView(size.w, size.h, 8);
-    setView(f);
-    setTimeout(() => {
-      const uri = stage.toDataURL({
-        x: f.x, y: f.y, width: BOARD.w * f.scale, height: BOARD.h * f.scale,
-        pixelRatio: 2 / f.scale, mimeType: 'image/png',
-      });
-      const a = document.createElement('a');
-      a.download = 'croquis-accident.png'; a.href = uri; a.click();
-      setView(prev);
-    }, 80);
+    const prev = { x: stage.x(), y: stage.y(), scaleX: stage.scaleX(), scaleY: stage.scaleY() };
+    const transformerVisible = trRef.current?.visible();
+    try {
+      // Resolució fixa: no multipliquem la memòria pel zoom de la pantalla.
+      stage.position({ x: 0, y: 0 }); stage.scale({ x: 1, y: 1 });
+      trRef.current?.hide();
+      const canvas = stage.toCanvas({ x: 0, y: 0, width: BOARD.w, height: BOARD.h, pixelRatio: 2 });
+      canvas.toBlob((blob) => {
+        if (!blob) { alert("No s'ha pogut generar el PNG. Torna-ho a provar."); return; }
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.download = 'croquis-accident.png'; a.href = url;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 60000);
+      }, 'image/png');
+    } catch (error) {
+      console.error('Error en exportar el croquis', error);
+      alert("No s'ha pogut exportar el croquis. Si el fons és una imatge externa, torna-la a carregar des del dispositiu.");
+    } finally {
+      stage.setAttrs(prev);
+      trRef.current?.visible(transformerVisible ?? true);
+      stage.batchDraw();
+    }
   }
 
   // ── Recreació / vídeo (motor físic de lib/croquisPhysics) ──
@@ -1861,7 +1890,8 @@ export default function Croquis() {
                 <Fragment key={el.id}>
                   <Node el={el} onSelect={() => setSel(el.id)} onChange={(patch) => update(el.id, patch)}
                     onContext={(cx, cy) => openMenu(el.id, cx, cy)} override={anim?.ov[el.id]} animating={animating} />
-                  {VEHICLES.includes(el.kind) && !animating && <VehBadge el={el} letter={vehLetters[el.id]} />}
+                  {VEHICLES.includes(el.kind) && !animating && <VehBadge el={el} letter={vehLetters[el.id]}
+                    onSelect={() => setSel(el.id)} onChange={(patch) => update(el.id, patch)} />}
                 </Fragment>
               ))}
               {/* Etiqueta de velocitat en directe sobre cada vehicle */}
@@ -1929,6 +1959,12 @@ export default function Croquis() {
             </Layer>
           </Stage>
 
+          {selEl && VEHICLES.includes(selEl.kind) && !animating && (
+            <details className="cq-mobile-vehicle" style={{ position: 'absolute', top: bgEl ? 86 : 12, right: 12, zIndex: 10, padding: 10, borderRadius: 12, background: A.card, maxWidth: 260, maxHeight: '55%', overflowY: 'auto', boxShadow: A.shadow }}>
+              <summary style={{ cursor: 'pointer', fontWeight: 700 }}>Personalitzar vehicle</summary>
+              <ControlsVehicle el={selEl} update={update} />
+            </details>
+          )}
           {/* Controls de zoom: pastilla flotant sobre el llenç */}
           <div style={{
             position: 'absolute', right: 14, bottom: 14, display: 'flex', alignItems: 'center', gap: 2,
@@ -1943,8 +1979,14 @@ export default function Croquis() {
 
           {/* Panell del fons de mapa */}
           {bgEl && (
-            <div style={{ position: 'absolute', left: 14, top: 14, zIndex: 8, display: 'flex', alignItems: 'center', gap: 10, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 14, padding: '8px 12px', boxShadow: A.shadowLg }}>
+            <div style={{ position: 'absolute', left: 14, top: 14, zIndex: 8, display: 'flex', flexWrap: 'wrap', maxWidth: 'calc(100% - 28px)', boxSizing: 'border-box', alignItems: 'center', gap: 10, background: A.card, border: `1px solid ${A.line2}`, borderRadius: 14, padding: '8px 12px', boxShadow: A.shadowLg }}>
               <span style={{ fontSize: 16 }}>🗺️</span>
+              <select aria-label="Encaix del fons" value={bgEl.backgroundFit ?? ''}
+                onChange={(e) => update(bgEl.id, { backgroundFit: e.target.value as 'cover' | 'contain', x: BOARD.w / 2, y: BOARD.h / 2, scaleX: 1, scaleY: 1, rotation: 0 })}>
+                <option value="" disabled>Encaix original</option>
+                <option value="cover">Omplir el llenç</option>
+                <option value="contain">Veure tota la imatge</option>
+              </select>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <Mono size={8.5} color={A.inkMuted}>Fons · opacitat</Mono>
                 <input type="range" min={20} max={100} value={Math.round((bgEl.opacity ?? 1) * 100)} onChange={(e) => setBgOpacity(Number(e.target.value) / 100)} style={{ width: 116, accentColor: A.terracota }} />
