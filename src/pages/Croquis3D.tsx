@@ -15,6 +15,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, RoundedBox } from '@react-three/drei';
 import * as THREE from 'three';
 import { A, Ic, Mono } from '../lib/design';
+import { geometria } from '../lib/croquisRoads';
 import {
   BOARD, PX_PER_M, VEHICLES, KIND_EMOJI, buildTimeline, stateAt, fmtRel,
   type El, type Road, type Timeline, type TimelineVeh,
@@ -547,7 +548,33 @@ function Billboard({ text, bg, y = 1.6, s = 1 }: { text: string; bg: string; y?:
   return <sprite position={[0, y, 0]} scale={[aspect * 0.62 * s, 0.62 * s, 1]}><spriteMaterial map={tex} transparent /></sprite>;
 }
 const SIGN_KINDS = new Set(['perill', 'corba-e', 'corba-d', 'nens', 'vianants-p', 'ciclistes', 'obres', 'semafor-p', 'rotonda-p', 'animals', 'estret', 'ressalt', 'stop', 'cediu', 'noentrar', 'prohibit', 'velocitat', 'no-avancar', 'no-gir-e', 'no-gir-d', 'no-estacionar', 'no-parar', 'pes-max', 'altura-max', 'sentit-o', 'oblig-d', 'oblig-e', 'carril-bici', 'vianants-o', 'rotonda-o', 'aparcament', 'hospital', 'bus-parada', 'pas-senyal']);
+function PecaCalcada3D({ el }: { el: El }) {
+  const g = geometria(el);
+  function cinta(points: number[], width: number) {
+    const vertices: number[] = [];
+    const sides: number[][] = [];
+    for (let i = 0; i < points.length; i += 2) {
+      const a = Math.max(0, i - 2), b = Math.min(points.length - 2, i + 2);
+      const dx = points[b] - points[a], dz = points[b + 1] - points[a + 1], len = Math.hypot(dx, dz) || 1;
+      const nx = -dz / len * width / 2, nz = dx / len * width / 2;
+      sides.push([(points[i] + nx) / M, 0, (points[i + 1] + nz) / M, (points[i] - nx) / M, 0, (points[i + 1] - nz) / M]);
+    }
+    for (let i = 1; i < sides.length; i++) {
+      const a = sides[i - 1], b = sides[i];
+      vertices.push(...a.slice(0, 3), ...a.slice(3), ...b.slice(0, 3), ...a.slice(3), ...b.slice(3), ...b.slice(0, 3));
+    }
+    return new Float32Array(vertices);
+  }
+  return <group position={[toX(el.x), 0, toZ(el.y)]} rotation-y={yawOf(el.rotation)} scale={[el.scaleX, 1, el.scaleY]}>
+    {[false, true].map((asfalt) => g.paths.map((path, i) => <mesh key={`${asfalt}-${i}`} position-y={asfalt ? 0.033 : 0.03}>
+      <bufferGeometry><bufferAttribute attach="attributes-position" args={[cinta(path.points, g.width - (asfalt ? 8 : 0)), 3]} /></bufferGeometry>
+      <meshBasicMaterial color={asfalt ? ROAD_COL : LINE} side={THREE.DoubleSide} />
+    </mesh>))}
+  </group>;
+}
 function StaticEl({ el }: { el: El }) {
+  if (el.hidden) return null;
+  if (el.kind === 'via-peca') return <PecaCalcada3D el={el} />;
   const k = el.kind;
   const sc = (Math.abs(el.scaleX) + Math.abs(el.scaleY)) / 2 || 1;
   const inner = (() => {

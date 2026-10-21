@@ -2,6 +2,11 @@
    La resta d'estils van en línia al component, amb els tokens de `lib/design`. */
 
 .cq-palette { width: 296px; }
+.cq-road-tools { display: grid; gap: 9px; margin-bottom: 16px; font-size: 12px; line-height: 1.4; }
+.cq-road-tools p { margin: 0; }
+.cq-road-tools button, .cq-road-tools input[type=number] { padding: 7px; border: 1px solid #d5d1c8; border-radius: 8px; background: #fff; color: #15151c; width: 100%; box-sizing: border-box; }
+.cq-road-tools button { cursor: pointer; }
+.cq-road-tools small { color: #65636a; }
 
 /* Botons de la capçalera que es poden amagar quan no hi ha amplada: passen
    al menú "Més", que sempre els conté. El que no s'amaga mai: tornar,

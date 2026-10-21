@@ -15,6 +15,8 @@ import type Konva from 'konva';
 import { A, Ic, Mono } from '../lib/design';
 import PanellPropietats from './croquis/PanellPropietats';
 import ControlsVehicle from './croquis/ControlsVehicle';
+import Calcades from './croquis/Calcades';
+import { PECES, esCalcada, geometria, boques, boquesLliures, encaixa, apropa, uneixVia, limitsCalcada } from '../lib/croquisRoads';
 import './croquis.css';
 import {
   BOARD, PX_PER_M, VEHICLES, buildTimeline, stateAt, simRateAt, cineViewAt, fmtRel,
@@ -119,7 +121,10 @@ const PALETTE: { group: string; items: { kind: string; label: string; emoji: str
   { group: 'Via personalitzada', items: [
     { kind: 'c-recta', label: 'Tram recte', emoji: '🛣️' },
     { kind: 'c-corba', label: 'Corba 90°', emoji: '↪️' },
+    { kind: 'c-corba-e', label: 'Corba 90° esquerra', emoji: '↩️' },
     { kind: 'c-corba-suau', label: 'Corba suau 45°', emoji: '↗️' },
+    { kind: 'c-corba-suau-e', label: 'Corba 45° esquerra', emoji: '↖️' },
+    { kind: 'c-te', label: 'Cruïlla en T', emoji: '⊤' },
     { kind: 'c-y', label: 'Junció en Y', emoji: '🔀' },
     { kind: 'c-ramal', label: 'Ramal incorp.', emoji: '➡️' },
     { kind: 'c-cruilla', label: 'Encreuament', emoji: '➕' },
@@ -239,7 +244,7 @@ const VISIB = ['Bona', 'Reduïda', 'Dolenta'];
 
 /* ════════════════════════ Fons de via ════════════════════════ */
 const ASPHALT = '#D7DAE0', ASPHALT_DK = '#C6C9D1', TERRAIN = '#E8E4D8';
-function RoadBg({ road }: { road: Road }) {
+function RoadBg({ road, bounds }: { road: Road; bounds: ReturnType<typeof limitsCalcada> }) {
   const W = BOARD.w, H = BOARD.h, cx = W / 2, cy = H / 2, lane = 165;
   const dash = [26, 20];
   const board = (
@@ -248,7 +253,7 @@ function RoadBg({ road }: { road: Road }) {
       <Rect x={0} y={0} width={W} height={H} stroke="#CFC9B8" strokeWidth={3} />
     </>
   );
-  if (road === 'cap') return <Group listening={false}>{board}</Group>;
+  if (road === 'cap') return <Rect {...bounds} fill={TERRAIN} listening={false} />;
 
   const vert = (
     <>
@@ -737,9 +742,10 @@ function CrashFx({ x, y, k }: { x: number; y: number; k: number }) {
 }
 
 /* ════════════════════════ Node editable ════════════════════════ */
-function Node({ el, onSelect, onChange, onContext, override, animating }: {
+function Node({ el, onSelect, onChange, onContext, override, animating, onPreview }: {
   el: El; onSelect: () => void; onChange: (e: Partial<El>) => void; onContext: (x: number, y: number) => void;
   override?: { x: number; y: number; rotation: number }; animating?: boolean;
+  onPreview?: (el: El) => void;
 }) {
   const ref = useRef<Konva.Group>(null);
   const img = useHtmlImage(el.kind === 'fons' ? el.src : undefined);
@@ -749,6 +755,8 @@ function Node({ el, onSelect, onChange, onContext, override, animating }: {
     x: override ? override.x : el.x, y: override ? override.y : el.y,
     rotation: override ? override.rotation : el.rotation, scaleX: el.scaleX, scaleY: el.scaleY,
     draggable: !animating && !el.locked, onClick: onSelect, onTap: onSelect,
+    onDragMove: () => { const n = ref.current; if (n && esCalcada(el)) onPreview?.({ ...el, x: n.x(), y: n.y() }); },
+    onTransform: () => { const n = ref.current; if (n && esCalcada(el)) onPreview?.({ ...el, x: n.x(), y: n.y(), rotation: n.rotation(), scaleX: n.scaleX(), scaleY: n.scaleY() }); },
     onContextMenu: (e: Konva.KonvaEventObject<PointerEvent>) => { e.evt.preventDefault(); onSelect(); onContext(e.evt.clientX, e.evt.clientY); },
     onDragEnd: (e: Konva.KonvaEventObject<DragEvent>) => onChange({ x: e.target.x(), y: e.target.y() }),
     onTransformEnd: () => {
@@ -766,6 +774,7 @@ function Node({ el, onSelect, onChange, onContext, override, animating }: {
     const t = el.tension ?? 0.5;
     return (
       <Group ref={ref} id={el.id} visible={!el.hidden} opacity={el.opacity ?? 1} draggable={!animating && !el.locked} onClick={onSelect} onTap={onSelect}
+        onDragMove={(ev) => onPreview?.({ ...el, points: pts.map((v, i) => v + (i % 2 === 0 ? ev.target.x() : ev.target.y())) })}
         onContextMenu={(e: Konva.KonvaEventObject<PointerEvent>) => { e.evt.preventDefault(); onSelect(); onContext(e.evt.clientX, e.evt.clientY); }}
         onDragEnd={(ev: Konva.KonvaEventObject<DragEvent>) => {
           const dx = ev.target.x(), dy = ev.target.y();
@@ -776,15 +785,18 @@ function Node({ el, onSelect, onChange, onContext, override, animating }: {
           }
         }}>
         {/* contorn (vorada) */}
-        <Line points={pts} stroke="#CFC9B8" strokeWidth={w + 8} lineCap="round" lineJoin="round" tension={t} listening={false} />
         {/* asfalt */}
-        <Line points={pts} stroke={ASPHALT} strokeWidth={w} lineCap="round" lineJoin="round" tension={t} listening={false} />
         {/* pintura central discontínua */}
-        <Line points={pts} stroke="#fff" strokeWidth={5} lineCap="round" lineJoin="round" tension={t} dash={[26, 20]} listening={false} />
         {/* zona clicable (invisible) per seleccionar */}
         <Line points={pts} stroke="rgba(0,0,0,0)" strokeWidth={w} lineCap="round" lineJoin="round" tension={t} hitStrokeWidth={w} />
       </Group>
     );
+  }
+  if (esCalcada(el)) {
+    const g = geometria(el);
+    return <Group ref={ref} {...common}>{g.paths.map((path, i) =>
+      <Line key={i} points={path.points} tension={path.tension ?? 0} stroke="rgba(0,0,0,0)" strokeWidth={g.width} lineCap="butt" lineJoin="round" />
+    )}</Group>;
   }
   if (el.kind === 'fons') {
     if (!img) return null;
@@ -971,6 +983,8 @@ const VEH_LABEL: Record<string, string> = Object.fromEntries(PALETTE[0].items.ma
 const ETIQUETA: Record<string, string> = Object.fromEntries(
   PALETTE.flatMap((g) => g.items.map((i) => [i.kind, i.label])),
 );
+ETIQUETA['via-peca'] = 'Tram de calçada';
+ETIQUETA['via-lliure'] = 'Via lliure';
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 /* Maniobres tipus (per a l'informe i la llegenda). */
@@ -1141,6 +1155,11 @@ export default function Croquis() {
   // Mode "dibuixar via lliure": cada clic al llenç afegeix un punt al
   // traçat actual. Doble clic o tecla Enter conclou la via.
   const [drawingPath, setDrawingPath] = useState<{ points: number[]; width: number } | null>(null);
+  const [encaixActiu, setEncaixActiu] = useState(true);
+  const [ampladaVia, setAmpladaVia] = useState(330);
+  const [connexio, setConnexio] = useState<{ id: string; index: number } | null>(null);
+  const [roadPreview, setRoadPreview] = useState<El | null>(null);
+  const limits = useMemo(() => limitsCalcada(els), [els]);
   // Edició de nodes d'una via lliure existent: l'usuari pot arrossegar
   // cadascun dels punts de control per modelar la corba.
   const [editPathNodes, setEditPathNodes] = useState<string | null>(null);
@@ -1198,9 +1217,9 @@ export default function Croquis() {
   function redo() { const h = hist.current; if (!h.future.length) return; h.past.push(snapshot()); applyScene(h.future.pop()!); setHistTick((t) => t + 1); }
 
   const fitView = useCallback((w = size.w, h = size.h, pad = 36) => {
-    const s = Math.min((w - pad * 2) / BOARD.w, (h - pad * 2) / BOARD.h);
-    return { scale: s, x: (w - BOARD.w * s) / 2, y: (h - BOARD.h * s) / 2 };
-  }, [size.w, size.h]);
+    const s = Math.min((w - pad * 2) / limits.width, (h - pad * 2) / limits.height);
+    return { scale: s, x: (w - limits.width * s) / 2 - limits.x * s, y: (h - limits.height * s) / 2 - limits.y * s };
+  }, [size.w, size.h, limits]);
 
   // Mida del contenidor + enquadrament inicial.
   useEffect(() => {
@@ -1253,7 +1272,7 @@ export default function Croquis() {
         setEls((prev) => [
           ...prev.filter((x) => x.kind === 'fons'),
           { id, kind: 'via-lliure', x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1,
-            points: drawingPath.points, width: drawingPath.width, tension: 0.5 },
+            points: encaixActiu ? uneixVia(drawingPath.points, els, drawingPath.width) : drawingPath.points, width: drawingPath.width, tension: 0.5 },
           ...prev.filter((x) => x.kind !== 'fons'),
         ]);
         setDrawingPath(null); setSel(id);
@@ -1274,9 +1293,39 @@ export default function Croquis() {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sel, els, drawingPath]);
+  }, [sel, els, drawingPath, encaixActiu]);
 
   const selEl = useMemo(() => els.find((e) => e.id === sel) || null, [els, sel]);
+  const extrems = boquesLliures(els);
+  const sortida = extrems.find((b) => b.id === sel && b.index === connexio?.index && connexio.id === sel)
+    ?? extrems.find((b) => b.id === sel && b.index === 1) ?? extrems.find((b) => b.id === sel);
+  const muntantVia = PALETTE[cat].group === 'Via personalitzada';
+
+  function afegeixPeca(kind: string) {
+    let el: El = { id: nextId(), kind: 'via-peca', roadPiece: PECES[kind], x: (size.w / 2 - view.x) / (view.scale || 1),
+      y: (size.h / 2 - view.y) / (view.scale || 1) + 180, rotation: 0, scaleX: 1, scaleY: 1,
+      width: encaixActiu && sortida ? sortida.width : ampladaVia, roadLength: 420 };
+    if (encaixActiu && sortida) el = encaixa(el, 0, sortida);
+    pushUndo(); setEls((prev) => [...prev, el]); setSel(el.id); setConnexio({ id: el.id, index: 1 });
+    // Manté visible la peça que acabem d'afegir, també en pantalles petites.
+    const end = boques(el)[1];
+    if (end && (end.x * view.scale + view.x < 40 || end.x * view.scale + view.x > size.w - 40 || end.y * view.scale + view.y < 40 || end.y * view.scale + view.y > size.h - 40)) {
+      setView((v) => ({ ...v, x: size.w / 2 - end.x * v.scale, y: size.h / 2 - end.y * v.scale }));
+    }
+  }
+  function mouElement(el: El, patch: Partial<El>) {
+    const next = esCalcada(el) && encaixActiu ? apropa({ ...el, ...patch }, els, 24 / (view.scale || 1)) : { ...el, ...patch };
+    update(el.id, next); setRoadPreview(null);
+  }
+  function puntVia(x: number, y: number) {
+    if (!drawingPath) return;
+    const target = encaixActiu ? extrems.find((b) => Math.hypot(b.x - x, b.y - y) < 24 / (view.scale || 1)
+      && (drawingPath.points.length === 0 || Math.abs(b.width - drawingPath.width) < 3)) : undefined;
+    const pts = drawingPath.points;
+    const nx = target?.x ?? x, ny = target?.y ?? y;
+    if (pts.length >= 2 && Math.hypot(nx - pts[pts.length - 2], ny - pts[pts.length - 1]) < 2) return;
+    setDrawingPath({ points: [...pts, nx, ny], width: pts.length === 0 && target ? target.width : drawingPath.width });
+  }
 
   // Genera un id únic garantit (per damunt de qualsevol existent),
   // robust davant de recàrregues, imports o desincronitzacions del comptador.
@@ -1290,6 +1339,7 @@ export default function Croquis() {
   // Peces que han de quedar SOTA la resta (asfalt, voreres, gespa…).
   const GROUND_KINDS = ['c-recta', 'c-corba', 'c-corba-suau', 'c-y', 'c-ramal', 'c-cruilla', 'pas-zebra', 'badenes', 'vorera', 'gespa', 'parking'];
   function add(kind: string) {
+    if (kind in PECES) { afegeixPeca(kind); return; }
     const id = nextId();
     const p = NEEDS_PROMPT[kind];
     const cx = (size.w / 2 - view.x) / (view.scale || 1);
@@ -1419,11 +1469,15 @@ export default function Croquis() {
     const stage = stageRef.current; if (!stage) return;
     const prev = { x: stage.x(), y: stage.y(), scaleX: stage.scaleX(), scaleY: stage.scaleY() };
     const transformerVisible = trRef.current?.visible();
+    const controls = stage.find('.editor-only');
     try {
       // Resolució fixa: no multipliquem la memòria pel zoom de la pantalla.
       stage.position({ x: 0, y: 0 }); stage.scale({ x: 1, y: 1 });
       trRef.current?.hide();
-      const canvas = stage.toCanvas({ x: 0, y: 0, width: BOARD.w, height: BOARD.h, pixelRatio: 2 });
+      controls.forEach((n) => n.hide());
+      const canvas = stage.toCanvas({ ...limits, pixelRatio: Math.min(2, 4096 / Math.max(limits.width, limits.height)) });
+      const ctx = canvas.getContext('2d');
+      if (ctx) { ctx.globalCompositeOperation = 'destination-over'; ctx.fillStyle = TERRAIN; ctx.fillRect(0, 0, canvas.width, canvas.height); }
       canvas.toBlob((blob) => {
         if (!blob) { alert("No s'ha pogut generar el PNG. Torna-ho a provar."); return; }
         const url = URL.createObjectURL(blob);
@@ -1438,6 +1492,7 @@ export default function Croquis() {
     } finally {
       stage.setAttrs(prev);
       trRef.current?.visible(transformerVisible ?? true);
+      controls.forEach((n) => n.show());
       stage.batchDraw();
     }
   }
@@ -1495,7 +1550,7 @@ export default function Croquis() {
     tlRef.current = tl; setDur(tl.tTotal); setRecording(true); setSel(null); setMenu(null);
     const prev = { ...view }; const f = fitView(size.w, size.h, 8); setView(f);
     await new Promise((r) => setTimeout(r, 160));
-    const RW = 1280, RH = Math.round(RW * BOARD.h / BOARD.w);
+    const RW = 1280, RH = Math.round(RW * limits.height / limits.width);
     const rc = document.createElement('canvas'); rc.width = RW; rc.height = RH;
     const rctx = rc.getContext('2d');
     const stream = rc.captureStream(30);
@@ -1515,7 +1570,7 @@ export default function Croquis() {
       if (cineRef.current) setView(cineViewAt(tl, t, f));
       applyAt(t);
       await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(() => r(null))));
-      if (rctx) { const sc = stage.toCanvas({ x: f.x, y: f.y, width: BOARD.w * f.scale, height: BOARD.h * f.scale, pixelRatio: 1 }); rctx.drawImage(sc as CanvasImageSource, 0, 0, RW, RH); }
+      if (rctx) { const sc = stage.toCanvas({ x: f.x + limits.x * f.scale, y: f.y + limits.y * f.scale, width: limits.width * f.scale, height: limits.height * f.scale, pixelRatio: 1 }); rctx.drawImage(sc as CanvasImageSource, 0, 0, RW, RH); }
     }
     await new Promise((r) => setTimeout(r, 400));
     rec.stop(); await stopped;
@@ -1527,13 +1582,18 @@ export default function Croquis() {
 
   // ── Informe imprimible (croquis + seqüència + taula de dades) ──
   function captureFrame(f: { scale: number; x: number; y: number }, pr: number): Promise<string> {
-    return new Promise((res) => {
+    return new Promise((res, reject) => {
       requestAnimationFrame(() => requestAnimationFrame(() => {
         const stage = stageRef.current!;
-        res(stage.toDataURL({
-          x: f.x, y: f.y, width: BOARD.w * f.scale, height: BOARD.h * f.scale,
-          pixelRatio: pr / f.scale, mimeType: 'image/jpeg', quality: 0.86,
-        }));
+        const controls = stage.find('.editor-only');
+        try {
+          controls.forEach((n) => n.hide());
+          res(stage.toDataURL({
+            x: f.x + limits.x * f.scale, y: f.y + limits.y * f.scale, width: limits.width * f.scale, height: limits.height * f.scale,
+            pixelRatio: Math.min(pr, 4096 / Math.max(limits.width, limits.height)) / f.scale, mimeType: 'image/jpeg', quality: 0.86,
+          }));
+        } catch (error) { reject(error); }
+        finally { controls.forEach((n) => n.show()); }
       }));
     });
   }
@@ -1689,7 +1749,7 @@ export default function Croquis() {
             {ROADS.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}
           </select>
         </label>
-        <button className="cq-sec" onClick={() => setDrawingPath((dp) => dp ? null : { points: [], width: 240 })}
+        <button className="cq-sec" onClick={() => setDrawingPath((dp) => dp ? null : { points: [], width: sortida?.width ?? ampladaVia })}
           style={{ ...btn, ...(drawingPath ? { background: A.terracota, color: '#fff', border: 'none' } : {}) }}
           title="Dibuixar via lliure: clica al llenç per posar punts (mín. 2). Doble clic o Enter per acabar. Esc per cancel·lar.">
           {drawingPath ? `✏️ Dibuixant (${drawingPath.points.length / 2} pts)` : '✏️ Via lliure'}
@@ -1797,6 +1857,26 @@ export default function Croquis() {
               style={{ width: '100%', border: `1px solid ${A.line2}`, background: A.card, borderRadius: 10, padding: '8px 10px', fontFamily: A.sans, fontWeight: 600, fontSize: 12.5, color: A.ink, outline: 'none' }} />
 
             <div>
+              {muntantVia && <div className="cq-road-tools">
+                <strong>Calçades per peces</strong>
+                <p>Tria un extrem blau i afegeix una peça. L'extrem taronja indica per on continuaràs.</p>
+                <button type="button" onClick={() => { pushUndo(); setRoad('cap'); setSel(null); setConnexio(null); }}>Començar un traçat nou</button>
+                <small>Amaga la via de plantilla; conserva els elements.</small>
+                <label><input type="checkbox" checked={encaixActiu} onChange={(e) => setEncaixActiu(e.target.checked)} /> Encaix automàtic</label>
+                <label>Amplada de calçada (px)
+                  <input aria-label="Amplada de calçada" type="number" min={80} max={600} step={10}
+                    value={selEl && esCalcada(selEl) ? geometria(selEl).width : ampladaVia}
+                    onChange={(e) => { const w = Number(e.target.value); if (w >= 80 && w <= 600) { setAmpladaVia(w); if (selEl && esCalcada(selEl)) update(selEl.id, { width: w }); } }} />
+                </label>
+                {selEl && esCalcada(selEl) && <>
+                  <label><input type="checkbox" checked={selEl.roadMarkings !== false} onChange={(e) => update(selEl.id, { roadMarkings: e.target.checked })} /> Línia central</label>
+                  {selEl.kind === 'via-peca' && <label>Longitud / radi (px)<input aria-label="Longitud o radi" type="number" min={240} max={1200} step={30} value={selEl.roadLength ?? 420}
+                    onChange={(e) => { const n = Number(e.target.value); if (n >= 240 && n <= 1200) update(selEl.id, { roadLength: n }); }} /></label>}
+                </>}
+                <button type="button" onClick={() => { setSel(null); setConnexio(null); }}>Peça independent</button>
+                <button type="button" onClick={() => setDrawingPath({ points: [], width: sortida?.width ?? ampladaVia })}>Dibuixar via lliure</button>
+                <small>{sortida && encaixActiu ? 'La peça següent continuarà des de l’extrem taronja.' : 'Tria una peça per començar.'}</small>
+              </div>}
               <Mono size={9} color={A.inkMuted} style={{ display: 'block', marginBottom: 8 }}>
                 {resultats ? `${resultats.length} RESULTATS` : PALETTE[cat].group}
               </Mono>
@@ -1834,7 +1914,7 @@ export default function Croquis() {
                 const ptr = stage?.getPointerPosition(); if (!ptr) return;
                 const s = view.scale || 1;
                 const x = (ptr.x - view.x) / s, y = (ptr.y - view.y) / s;
-                setDrawingPath({ ...drawingPath, points: [...drawingPath.points, x, y] });
+                puntVia(x, y);
                 return;
               }
               if (e.target === e.target.getStage()) setSel(null);
@@ -1847,7 +1927,7 @@ export default function Croquis() {
                 setEls((prev) => [
                   ...prev.filter((x) => x.kind === 'fons'),
                   { id, kind: 'via-lliure', x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1,
-                    points: drawingPath.points, width: drawingPath.width, tension: 0.5 },
+                    points: encaixActiu ? uneixVia(drawingPath.points, els, drawingPath.width) : drawingPath.points, width: drawingPath.width, tension: 0.5 },
                   ...prev.filter((x) => x.kind !== 'fons'),
                 ]);
                 setDrawingPath(null); setSel(id);
@@ -1861,13 +1941,15 @@ export default function Croquis() {
                 const ptr = stage?.getPointerPosition(); if (!ptr) return;
                 const s = view.scale || 1;
                 const x = (ptr.x - view.x) / s, y = (ptr.y - view.y) / s;
-                setDrawingPath({ ...drawingPath, points: [...drawingPath.points, x, y] });
+                puntVia(x, y);
                 return;
               }
               if (e.target === e.target.getStage()) setSel(null);
             }}>
-            <Layer listening={false}><RoadBg road={road} /></Layer>
+            <Layer listening={false}><RoadBg road={road} bounds={limits} /></Layer>
             <Layer>
+              {els.filter((el) => el.kind === 'fons').map((el) => <Node key={el.id} el={el} onSelect={() => setSel(el.id)} onChange={(patch) => update(el.id, patch)} onContext={(cx, cy) => openMenu(el.id, cx, cy)} />)}
+              <Calcades els={roadPreview ? els.map((el) => el.id === roadPreview.id ? roadPreview : el) : els} />
               {/* Marques de frenada (es van pintant durant la fase post-impacte) */}
               {anim && tlRef.current?.vehs.map((v) => {
                 const dVis = anim.skidD[v.id] ?? 0;
@@ -1886,9 +1968,9 @@ export default function Croquis() {
                   </Group>
                 );
               })}
-              {els.map((el) => (
+              {[...els.filter(esCalcada), ...els.filter((el) => el.kind !== 'fons' && !esCalcada(el))].map((el) => (
                 <Fragment key={el.id}>
-                  <Node el={el} onSelect={() => setSel(el.id)} onChange={(patch) => update(el.id, patch)}
+                  <Node el={el} onSelect={() => setSel(el.id)} onChange={(patch) => mouElement(el, patch)} onPreview={setRoadPreview}
                     onContext={(cx, cy) => openMenu(el.id, cx, cy)} override={anim?.ov[el.id]} animating={animating} />
                   {VEHICLES.includes(el.kind) && !animating && <VehBadge el={el} letter={vehLetters[el.id]}
                     onSelect={() => setSel(el.id)} onChange={(patch) => update(el.id, patch)} />}
@@ -1913,6 +1995,13 @@ export default function Croquis() {
               <Transformer ref={trRef} rotationSnaps={[0, 45, 90, 135, 180, 225, 270, 315]}
                 anchorSize={11} borderStroke={A.terracota} anchorStroke={A.terracota} anchorCornerRadius={3}
                 boundBoxFunc={(oldB, newB) => (newB.width < 14 || newB.height < 14 ? oldB : newB)} />
+              {(muntantVia || drawingPath || (selEl && esCalcada(selEl))) && !animating && !roadPreview && <Group name="editor-only">
+                {extrems.map((b) => <Circle key={`${b.id}-${b.index}`} x={b.x} y={b.y} radius={9 / (view.scale || 1)}
+                  fill={sortida?.id === b.id && sortida.index === b.index ? A.terracota : '#1565C0'} stroke="#fff" strokeWidth={2 / (view.scale || 1)}
+                  onMouseDown={(e) => { if (!drawingPath) e.cancelBubble = true; }} onTouchStart={(e) => { if (!drawingPath) e.cancelBubble = true; }}
+                  onClick={(e) => { e.cancelBubble = true; if (!drawingPath) { setSel(b.id); setConnexio({ id: b.id, index: b.index }); } }}
+                  onTap={(e) => { e.cancelBubble = true; if (!drawingPath) { setSel(b.id); setConnexio({ id: b.id, index: b.index }); } }} />)}
+              </Group>}
               {/* Previsualització mentre es dibuixa la via lliure */}
               {drawingPath && drawingPath.points.length >= 2 && (
                 <Group listening={false}>
@@ -2042,7 +2131,7 @@ export default function Croquis() {
                   setEls((prev) => [
                     ...prev.filter((x) => x.kind === 'fons'),
                     { id, kind: 'via-lliure', x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1,
-                      points: drawingPath.points, width: drawingPath.width, tension: 0.5 },
+                      points: encaixActiu ? uneixVia(drawingPath.points, els, drawingPath.width) : drawingPath.points, width: drawingPath.width, tension: 0.5 },
                     ...prev.filter((x) => x.kind !== 'fons'),
                   ]);
                   setDrawingPath(null); setSel(id);

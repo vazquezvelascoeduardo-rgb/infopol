@@ -34,6 +34,9 @@ export type El = {
   showLabel?: boolean; labelText?: string; labelX?: number; labelY?: number;
   showState?: boolean;
   hidden?: boolean;
+  roadPiece?: 'recta' | 'dreta90' | 'esquerra90' | 'dreta45' | 'esquerra45' | 'creu' | 'te' | 'y';
+  roadLength?: number;
+  roadMarkings?: boolean;
   parent?: string; // vehicle d'origen (fantasmes inicial/final i punts de pas)
   // Via lliure (kind === 'via-lliure'): polilínia editable.
   // `points` són en COORDENADES DEL TAULELL (no relatives a x/y).
