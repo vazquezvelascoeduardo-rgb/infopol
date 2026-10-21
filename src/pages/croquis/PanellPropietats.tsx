@@ -120,7 +120,7 @@ export default function PanellPropietats({
             </label>
           </div>}
           {/* Color: només per als elements que en tenen */}
-          {(VEHICLES.includes(el.kind) || el.kind === 'via-lliure') && (
+          {el.kind === 'via-lliure' && (
             <div style={seccio}>
               <Mono size={8.5} color={A.inkFaint} style={{ letterSpacing: 1.4, display: 'block', marginBottom: 11 }}>
                 COLOR

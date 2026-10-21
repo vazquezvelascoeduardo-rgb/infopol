@@ -1,4 +1,5 @@
 import type { El, Estat } from '../../lib/croquisPhysics';
+import ColorsVehicle from './ColorsVehicle';
 
 /** Opcions comunes per a mòbil i escriptori; es desen amb el croquis. */
 export default function ControlsVehicle({ el, update }: {
@@ -6,6 +7,7 @@ export default function ControlsVehicle({ el, update }: {
 }) {
   return (
     <div style={{ display: 'grid', gap: 10, fontSize: 13 }}>
+      <ColorsVehicle color={el.color} onChange={(color) => update(el.id, { color })} />
       <label>Estat del vehicle
         <select aria-label="Estat del vehicle" value={el.data?.estat ?? ''}
           onChange={(e) => update(el.id, { data: { ...el.data, estat: (e.target.value || undefined) as Estat | undefined } })}
