@@ -77,6 +77,21 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '16px 18px 0' }}>
+        <div onClick={() => navigate('/noticias')} style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, borderLeft: `3px solid #3B6BF5`, boxShadow: T.shadow.card, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14 }}>
+          <div style={{ width: 44, height: 44, borderRadius: 12, background: '#EEF2FF', display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+            <Icon name="newspaper" size={22} color="#3B6BF5" />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', color: '#3B6BF5' }}>Notícies · Actualitat</div>
+            <div style={{ fontWeight: 800, fontSize: 14, color: T.ink, marginTop: 2 }}>Última hora del dia</div>
+            <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 2 }}>Política · Economia · Esports · Internacional</div>
+          </div>
+          <Icon name="chevron-right" size={16} color={T.inkMuted} />
+        </div>
+      </div>
+
       {/* features grid */}
       <div style={{ padding: '24px 18px 8px' }}>
         <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 12 }}>Tot el que necessites</div>
