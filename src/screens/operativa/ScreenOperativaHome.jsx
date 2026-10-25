@@ -2,6 +2,17 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
+import { NOTICIAS } from '../../data/noticias';
+
+const NOTICIA_CAT_COLORS = {
+  policials:     T.cat.alcohol,
+  politica:      T.cat.operativa,
+  economia:      T.cat.leyes,
+  internacional: T.cat.transito,
+  esports:       T.cat.atajos,
+  cultura:       T.cat.psico,
+  ciencia:       T.cat.physical,
+};
 
 function BigCatCard({ cat, icon, kicker, title, desc, cta, onClick }) {
   const k = T.cat[cat];
@@ -134,6 +145,34 @@ export default function ScreenOperativaHome() {
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Notícies del dia */}
+      <div style={{ padding: '14px 0 0' }}>
+        <SectionHead kicker="Avui" kickerColor={T.cat.atajos.solid} title="Notícies del dia" action="Tot →" onAction={() => navigate('/noticias')} />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {NOTICIAS.slice(0, 3).map(n => {
+            const k = NOTICIA_CAT_COLORS[n.cat] || T.cat.operativa;
+            return (
+              <div
+                key={n.id}
+                onClick={() => window.open(n.url, '_blank', 'noopener,noreferrer')}
+                style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${k.solid}`, boxShadow: T.shadow.card, cursor: 'pointer' }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                  <span style={{
+                    fontSize: 9.5, fontWeight: 800, color: k.ink,
+                    letterSpacing: 0.7, textTransform: 'uppercase',
+                    background: k.soft, padding: '2px 7px', borderRadius: 999,
+                  }}>{n.tag}</span>
+                  <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

@@ -18,6 +18,7 @@ import ScreenTest from './screens/academia/ScreenTest';
 import ScreenFlashcards from './screens/academia/ScreenFlashcards';
 import ScreenStats from './screens/academia/ScreenStats';
 import ScreenFisiques from './screens/academia/ScreenFisiques';
+import ScreenNoticias from './screens/ScreenNoticias';
 
 const OP_TABS = [
   { id: 'home', label: 'Inici', icon: 'home', path: '/operativa' },
@@ -87,6 +88,7 @@ export default function App() {
         <Route path="fisiques" element={<ScreenFisiques />} />
       </Route>
       <Route path="/perfil" element={<ScreenPerfil />} />
+      <Route path="/noticias" element={<ScreenNoticias />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

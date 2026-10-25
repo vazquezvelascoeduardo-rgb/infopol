@@ -2,6 +2,17 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../tokens';
 import Icon from '../components/Icon';
 import { InfoPolWordmark, StatusBar, Pill, DuoButton, CatIcon } from '../components/Shared';
+import { NOTICIAS, CAT_NOTICIAS } from '../data/noticias';
+
+const CAT_COLORS_LANDING = {
+  policials:     T.cat.alcohol,
+  politica:      T.cat.operativa,
+  economia:      T.cat.leyes,
+  internacional: T.cat.transito,
+  esports:       T.cat.atajos,
+  cultura:       T.cat.psico,
+  ciencia:       T.cat.physical,
+};
 
 export default function ScreenLanding() {
   const navigate = useNavigate();
@@ -108,6 +119,56 @@ export default function ScreenLanding() {
           <div style={{ marginTop: 10, fontSize: 12, color: T.inkMuted }}>
             <b style={{ color: T.ink }}>Marta C.</b> · Mossos d'Esquadra promo 2025
           </div>
+        </div>
+      </div>
+
+      {/* noticias */}
+      <div style={{ padding: '24px 0 0' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', padding: '0 18px', marginBottom: 12 }}>
+          <div>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.cat.atajos.solid, marginBottom: 2 }}>Actualitat</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 20, letterSpacing: -0.4 }}>Notícies del dia</div>
+          </div>
+          <button onClick={() => navigate('/noticias')} style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            color: T.cat.operativa.solid, fontWeight: 700, fontSize: 13, fontFamily: T.font,
+          }}>Tot →</button>
+        </div>
+        <div style={{ padding: '0 18px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {NOTICIAS.slice(0, 4).map(n => {
+            const k = CAT_COLORS_LANDING[n.cat] || T.cat.operativa;
+            return (
+              <div
+                key={n.id}
+                onClick={() => window.open(n.url, '_blank', 'noopener,noreferrer')}
+                style={{
+                  background: '#fff', borderRadius: T.r.md, padding: 14,
+                  borderLeft: `3px solid ${k.solid}`, boxShadow: T.shadow.card, cursor: 'pointer',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                  <span style={{
+                    fontSize: 9.5, fontWeight: 800, color: k.ink,
+                    letterSpacing: 0.7, textTransform: 'uppercase',
+                    background: k.soft, padding: '2px 7px', borderRadius: 999,
+                  }}>{n.tag}</span>
+                  <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ padding: '10px 18px 0' }}>
+          <button onClick={() => navigate('/noticias')} style={{
+            width: '100%', border: `1px solid ${T.hairlineStrong}`, borderRadius: T.r.pill,
+            background: '#fff', padding: '12px', cursor: 'pointer',
+            fontFamily: T.font, fontWeight: 700, fontSize: 13, color: T.inkSoft,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+          }}>
+            Veure totes les notícies <Icon name="arrow-right" size={14} color={T.inkSoft} />
+          </button>
         </div>
       </div>
 
