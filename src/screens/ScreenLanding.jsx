@@ -86,8 +86,10 @@ export default function ScreenLanding() {
             { c: 'transito', i: 'car', t: 'Infraccions', d: 'LSV, RGC, RGV…' },
             { c: 'operativa', i: 'route', t: 'Protocols', d: 'Pas a pas en ruta' },
             { c: 'tests', i: 'graduation', t: 'Tests Mossos', d: '17 temes oficials' },
+            { c: 'atajos', i: 'bell', t: 'Notícies', d: 'Actualitat diària', path: '/noticias' },
           ].map(x => (
-            <div key={x.t} style={{ background: '#fff', borderRadius: T.r.lg, padding: 14, borderTop: `3px solid ${T.cat[x.c].solid}`, boxShadow: T.shadow.card }}>
+            <div key={x.t} onClick={x.path ? () => navigate(x.path) : undefined}
+              style={{ background: '#fff', borderRadius: T.r.lg, padding: 14, borderTop: `3px solid ${T.cat[x.c].solid}`, boxShadow: T.shadow.card, cursor: x.path ? 'pointer' : 'default' }}>
               <CatIcon cat={x.c} icon={x.i} size={36} rounded={10} />
               <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1, textTransform: 'uppercase', color: T.cat[x.c].ink, marginTop: 10 }}>{x.t}</div>
               <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 2 }}>{x.d}</div>
