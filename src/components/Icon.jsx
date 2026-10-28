@@ -25,7 +25,10 @@ export default function Icon({ name, size = 22, color = 'currentColor', strokeWi
     case 'arrow-right': return <svg {...common}><path d="M5 12h14M13 6l6 6-6 6"/></svg>;
     case 'arrow-left': return <svg {...common}><path d="M19 12H5M11 6l-6 6 6 6"/></svg>;
     case 'chevron-right': return <svg {...common}><path d="M9 6l6 6-6 6"/></svg>;
+    case 'chevron-left': return <svg {...common}><path d="M15 6l-6 6 6 6"/></svg>;
     case 'chevron-down': return <svg {...common}><path d="M6 9l6 6 6-6"/></svg>;
+    case 'newspaper': return <svg {...common}><path d="M4 4h16v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4z"/><path d="M8 8h8M8 12h5M8 16h3"/></svg>;
+    case 'external-link': return <svg {...common}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg>;
     case 'plus': return <svg {...common}><path d="M12 5v14M5 12h14"/></svg>;
     case 'home': return <svg {...common}><path d="M3 11l9-8 9 8"/><path d="M5 9v12h14V9"/></svg>;
     case 'graduation': return <svg {...common}><path d="M2 9l10-4 10 4-10 4L2 9z"/><path d="M6 11v5c0 1 3 2 6 2s6-1 6-2v-5"/></svg>;
