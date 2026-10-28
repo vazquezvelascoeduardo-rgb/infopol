@@ -65,6 +65,7 @@ const ZonaTest = lazy(() => import('./pages/test/ZonaTest'));
 const CategoriaTemes = lazy(() => import('./pages/test/CategoriaTemes'));
 const Debilitats = lazy(() => import('./pages/test/Debilitats'));
 const TestSession = lazy(() => import('./pages/test/TestSession'));
+const Ispc = lazy(() => import('./pages/test/Ispc'));
 const Achievements = lazy(() => import('./pages/test/Achievements'));
 const Noticies = lazy(() => import('./pages/Noticies'));
 const NoticiaDetall = lazy(() => import('./pages/NoticiaDetall'));
@@ -174,6 +175,8 @@ export default function App() {
               {/* Policia Local */}
               <Route path="/policia-local/esquemes" element={<PoliciaLocalEsquemes />} />
               <Route path="/policia-local/esquemes/:slug" element={<PoliciaLocalEsquemaLlei />} />
+              <Route path="/ispc" element={<Ispc />} />
+              <Route path="/ispc/:slug" element={<Ispc />} />
               <Route path="/policia-local" element={<ZonaTest cos="pl" />} />
               <Route path="/policia-local/cat/:clau" element={<CategoriaTemes cos="pl" />} />
               <Route path="/policia-local/debilitats" element={<Debilitats />} />

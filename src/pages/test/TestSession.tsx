@@ -4,7 +4,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
 import { TOPICS, getAllQuestions, getAllMossosQuestions, getAllCulturaQuestions, getAllActualitatQuestions, getEverythingQuestions, getMixQuestions, getTopic } from '../../data/tests';
-import type { TestQuestion } from '../../data/tests/types';
+import type { TestQuestion, TestTopic } from '../../data/tests/types';
 import {
   getAnsweredIds, markAnswered, resetProgress,
   useTopicProgress,
@@ -63,7 +63,7 @@ const REPAS_SLUG = 'repas';
 /** Categories que entren al test aleatori (slug 'mixt'). */
 const CATEGORIES_MIXT = new Set(['temari', 'cultura', 'actualitat']);
 
-export default function TestSession() {
+export default function TestSession({ privateTopic }: { privateTopic?: TestTopic } = {}) {
   const { slug = '' } = useParams();
   const { t } = useT();
   const location = useLocation();
@@ -77,7 +77,7 @@ export default function TestSession() {
   // distribució del progrés al tema d'on ve cada pregunta.
   const isAll = slug === ALL_TOPICS_SLUG || isEverything || isMix;
   const isRepas = slug === REPAS_SLUG;
-  const topic = (isAll || isRepas) ? null : getTopic(slug);
+  const topic = privateTopic ?? ((isAll || isRepas) ? null : getTopic(slug));
 
   // Detecta el cos d'origen (/mossos, /policia-local o /cultura-general)
   // per generar correctament les molles de pa, els enllaços "tornar al
@@ -85,7 +85,7 @@ export default function TestSession() {
   const isMossosRoute = location.pathname.startsWith('/mossos');
   const isCulturaRoute = location.pathname.startsWith('/cultura-general');
   const isActualitatRoute = location.pathname.startsWith('/actualitat');
-  const corpsRoot = isMossosRoute
+  const corpsRoot = privateTopic ? '/ispc' : isMossosRoute
     ? '/mossos'
     : isCulturaRoute
       ? '/cultura-general'
@@ -336,6 +336,7 @@ export default function TestSession() {
       // Slug d'origen: per 'tot' i 'repas' ve etiquetat al question;
       // altrament és el slug actual de la URL.
       const sourceSlug = q.topicSlug || slug;
+      if (privateTopic) continue;
       if (isCorrect) {
         recordSuccess(q.id);
       } else {
@@ -960,15 +961,16 @@ function ResultPhase({
                   <span className="badge">{String.fromCharCode(65 + q.correctIndex)}</span>
                   {q.options[q.correctIndex]}
                 </div>
+                {q.question.explanation && <p className="tr-review-ref">{q.question.explanation}</p>}
                 {q.question.reference && (
                   <div className="tr-review-ref">📖 {q.question.reference}</div>
                 )}
-                <ReportQuestionButton
+                {corpsRoot !== '/ispc' && <ReportQuestionButton
                   topicSlug={(q.question as TestQuestion & { topicSlug?: string }).topicSlug || slug}
                   questionId={q.question.id}
                   questionText={q.question.text}
                   markedCorrect={q.options[q.correctIndex]}
-                />
+                />}
               </div>
             </div>
           );

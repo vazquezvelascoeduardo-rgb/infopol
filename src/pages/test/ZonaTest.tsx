@@ -245,6 +245,11 @@ export default function ZonaTest({ cos: cosProp }: { cos?: Cos }) {
         ))}
       </div>
 
+      <button type="button" onClick={() => nav('/ispc')} className="v3-sura" style={{ width: '100%', textAlign: 'left', marginTop: 16, padding: 20, borderRadius: 22, background: V.surface, color: V.ink }}>
+        <strong>ISPC · Exàmens per temes</strong><br />
+        <span style={{ color: V.muted, fontSize: 13 }}>Accés privat per a usuaris autoritzats →</span>
+      </button>
+
       {/* Errors anteriors: només si en tens. Un botó que no porta enlloc
           fa dubtar de si has fet alguna cosa malament. */}
       {failures.total > 0 && (
