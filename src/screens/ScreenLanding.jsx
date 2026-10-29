@@ -111,6 +111,23 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* news teaser */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 10 }}>Actualitat</div>
+        <div
+          onClick={() => navigate('/noticies')}
+          style={{ background: '#fff', borderRadius: T.r.lg, padding: '14px 16px', boxShadow: T.shadow.card, borderTop: `3px solid ${T.cat.academia.solid}`, display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer' }}>
+          <div style={{ width: 44, height: 44, borderRadius: 12, background: T.cat.academia.solid, display: 'grid', placeItems: 'center', flexShrink: 0, boxShadow: 'inset 0 -3px 0 rgba(0,0,0,0.18)' }}>
+            <Icon name="newspaper" size={22} color="#fff" strokeWidth={2.2} />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 14, color: T.ink }}>Notícies del dia</div>
+            <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 2 }}>Política, esports, successos i més — actualitzat avui</div>
+          </div>
+          <Icon name="chevron-right" size={18} color={T.inkMuted} />
+        </div>
+      </div>
+
       {/* pricing */}
       <div style={{ padding: '20px 18px 0' }}>
         <div style={{ background: T.ink, borderRadius: T.r.xl, padding: 20, color: '#fff', position: 'relative', overflow: 'hidden' }}>

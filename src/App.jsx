@@ -19,6 +19,8 @@ import ScreenFlashcards from './screens/academia/ScreenFlashcards';
 import ScreenStats from './screens/academia/ScreenStats';
 import ScreenFisiques from './screens/academia/ScreenFisiques';
 
+import ScreenNoticies from './screens/ScreenNoticies';
+
 const OP_TABS = [
   { id: 'home', label: 'Inici', icon: 'home', path: '/operativa' },
   { id: 'leyes', label: 'Lleis', icon: 'scale', path: '/operativa/infraccions' },
@@ -86,6 +88,7 @@ export default function App() {
         <Route path="stats" element={<ScreenStats />} />
         <Route path="fisiques" element={<ScreenFisiques />} />
       </Route>
+      <Route path="/noticies" element={<ScreenNoticies />} />
       <Route path="/perfil" element={<ScreenPerfil />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
