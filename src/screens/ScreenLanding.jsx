@@ -42,6 +42,32 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* news banner */}
+      <div style={{ padding: '0 18px 14px' }}>
+        <div
+          onClick={() => navigate('/noticies')}
+          style={{
+            background: '#fff', borderRadius: T.r.lg, padding: 14,
+            borderLeft: `4px solid ${T.cat.alcohol.solid}`,
+            boxShadow: T.shadow.card, cursor: 'pointer',
+            display: 'flex', alignItems: 'center', gap: 12,
+          }}
+        >
+          <div style={{
+            width: 40, height: 40, borderRadius: 10, background: T.cat.alcohol.soft,
+            display: 'grid', placeItems: 'center', flexShrink: 0,
+          }}>
+            <span style={{ fontSize: 20 }}>📰</span>
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.alcohol.ink }}>Actualitat · Avui</div>
+            <div style={{ fontWeight: 800, fontSize: 14, color: T.ink, marginTop: 2, lineHeight: 1.25 }}>Notícies del 31 d'octubre de 2026</div>
+            <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 2 }}>Política · Policial · Economia · Internacional · Ciència · Esports</div>
+          </div>
+          <Icon name="chevron-right" size={16} color={T.inkMuted} />
+        </div>
+      </div>
+
       {/* dual modes */}
       <div style={{ padding: '6px 18px 0' }}>
         <div style={{ background: T.cat.operativa.solid, borderRadius: T.r.xl, padding: 18, color: '#fff', position: 'relative', overflow: 'hidden', marginBottom: 12, cursor: 'pointer' }}
