@@ -43,9 +43,9 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
-  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
-  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
-  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
+  { date: '11·02', tag: 'Política Cat.', title: 'CCOO i UGT convoquen vaga general a Catalunya per l\'11 de novembre', desc: 'Primera vaga general de l\'era Sánchez. Dirigida contra la CEOE i Foment del Treball.' },
+  { date: '10·31', tag: 'Successos BCN', title: 'Detingut a la Meridiana amb dues pistoles carregades', desc: 'La Guàrdia Urbana el va aturar durant un dispositiu especial de Halloween.' },
+  { date: '10·28', tag: 'Sinistre Esp.', title: 'Tragèdia d\'Urda: 69 morts al xoc de trens d\'alta velocitat a Toledo', desc: 'Ja s\'han identificat 66 víctimes. Cinc equips forenses segueixen treballant al lloc.' },
 ];
 
 export default function ScreenOperativaHome() {
@@ -122,7 +122,7 @@ export default function ScreenOperativaHome() {
 
       {/* Actualitat normativa */}
       <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
+        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" onAction={() => navigate('/operativa/noticias')} />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
             <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>

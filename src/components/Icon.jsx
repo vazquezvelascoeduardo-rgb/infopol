@@ -54,6 +54,9 @@ export default function Icon({ name, size = 22, color = 'currentColor', strokeWi
     case 'wifi': return <svg {...common}><path d="M2 8.5a13 13 0 0 1 20 0"/><path d="M6 12.5a7 7 0 0 1 12 0"/><path d="M10 16.5a3 3 0 0 1 4 0"/><circle cx="12" cy="20" r="1" fill={color}/></svg>;
     case 'battery': return <svg {...common}><rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 11v2"/><rect x="4" y="9" width="12" height="6" rx="1" fill={color} stroke="none"/></svg>;
     case 'signal': return <svg {...common}><rect x="2" y="16" width="3" height="6" rx="1" fill={color} stroke="none"/><rect x="7" y="12" width="3" height="10" rx="1" fill={color} stroke="none"/><rect x="12" y="8" width="3" height="14" rx="1" fill={color} stroke="none"/><rect x="17" y="4" width="3" height="18" rx="1" fill={color} stroke="none"/></svg>;
+    case 'newspaper': return <svg {...common}><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/><path d="M4 8H2V20a2 2 0 0 0 2 2"/></svg>;
+    case 'external-link': return <svg {...common}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg>;
+    case 'map-pin': return <svg {...common}><path d="M12 21s-7-7-7-12a7 7 0 0 1 14 0c0 5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>;
     default: return <svg {...common}><circle cx="12" cy="12" r="9"/></svg>;
   }
 }

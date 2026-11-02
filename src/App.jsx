@@ -19,11 +19,13 @@ import ScreenFlashcards from './screens/academia/ScreenFlashcards';
 import ScreenStats from './screens/academia/ScreenStats';
 import ScreenFisiques from './screens/academia/ScreenFisiques';
 
+import ScreenNoticias from './screens/noticias/ScreenNoticias';
+
 const OP_TABS = [
   { id: 'home', label: 'Inici', icon: 'home', path: '/operativa' },
   { id: 'leyes', label: 'Lleis', icon: 'scale', path: '/operativa/infraccions' },
   { id: 'protocol', label: 'Protocols', icon: 'route', path: '/operativa/protocol' },
-  { id: 'mapa', label: 'Mapa', icon: 'map', path: '/operativa/mapa' },
+  { id: 'noticias', label: 'Notícies', icon: 'newspaper', path: '/operativa/noticias' },
   { id: 'me', label: 'Tu', icon: 'user', path: '/perfil?from=op' },
 ];
 
@@ -41,7 +43,7 @@ function OperativaShell() {
   let active = 'home';
   if (p.includes('/infraccions')) active = 'leyes';
   else if (p.includes('/protocol')) active = 'protocol';
-  else if (p.includes('/mapa')) active = 'mapa';
+  else if (p.includes('/noticias')) active = 'noticias';
   return (
     <>
       <Outlet />
@@ -77,6 +79,7 @@ export default function App() {
         <Route path="protocol" element={<ScreenProtocol />} />
         <Route path="protocol/:id" element={<ScreenProtocol />} />
         <Route path="mapa" element={<ScreenMapa />} />
+        <Route path="noticias" element={<ScreenNoticias />} />
       </Route>
       <Route path="/academia" element={<AcademiaShell />}>
         <Route index element={<ScreenAcademiaHome />} />
