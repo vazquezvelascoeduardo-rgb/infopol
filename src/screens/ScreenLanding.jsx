@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../tokens';
 import Icon from '../components/Icon';
 import { InfoPolWordmark, StatusBar, Pill, DuoButton, CatIcon } from '../components/Shared';
+import { NEWS } from '../data/news';
 
 export default function ScreenLanding() {
   const navigate = useNavigate();
@@ -93,6 +94,49 @@ export default function ScreenLanding() {
               <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 2 }}>{x.d}</div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* noticias preview */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+          <div>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted }}>Actualitat</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 20, letterSpacing: -0.4 }}>Notícies</div>
+          </div>
+          <button onClick={() => navigate('/noticias')} style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            color: T.cat.operativa.solid, fontWeight: 700, fontSize: 13, fontFamily: T.font,
+          }}>Tot →</button>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {NEWS.slice(0, 3).map(n => {
+            const catColors = {
+              politica: T.cat.operativa, economia: T.cat.leyes, cultura: T.cat.atajos,
+              descobertes: T.cat.physical, premis: T.cat.psico, esports: T.cat.academia,
+              policial: T.cat.alcohol, internacional: T.cat.transito,
+            };
+            const k = catColors[n.categoria] || T.cat.operativa;
+            return (
+              <div key={n.id} style={{ background: '#fff', borderRadius: T.r.md, padding: 12, borderLeft: `3px solid ${k.solid}`, boxShadow: T.shadow.card }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                  <span style={{ fontSize: 10, fontWeight: 800, color: k.solid, letterSpacing: 0.5, textTransform: 'uppercase' }}>{n.ambit}</span>
+                  <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.data.slice(5).replace('-', '·')}</span>
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 13, color: T.ink, lineHeight: 1.3 }}>{n.titular}</div>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ marginTop: 10 }}>
+          <button onClick={() => navigate('/noticias')} style={{
+            width: '100%', padding: '12px 0', borderRadius: T.r.pill,
+            border: `1px solid ${T.hairlineStrong}`, background: '#fff',
+            fontFamily: T.font, fontWeight: 700, fontSize: 13, color: T.inkSoft, cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+          }}>
+            Veure totes les notícies <Icon name="arrow-right" size={14} color={T.inkSoft} />
+          </button>
         </div>
       </div>
 
