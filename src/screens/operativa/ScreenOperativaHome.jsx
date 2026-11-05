@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../../tokens';
 import Icon from '../../components/Icon';
 import { InfoPolWordmark, StatusBar, SearchField, SectionHead, CatIcon, Pill, RoundIconBtn } from '../../components/Shared';
+import { NOTICIAS } from '../../data/noticias';
 
 function BigCatCard({ cat, icon, kicker, title, desc, cta, onClick }) {
   const k = T.cat[cat];
@@ -47,6 +48,8 @@ const NEWS = [
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
 ];
+
+const LATEST_NEWS = NOTICIAS.slice(0, 3);
 
 export default function ScreenOperativaHome() {
   const navigate = useNavigate();
@@ -134,6 +137,42 @@ export default function ScreenOperativaHome() {
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Notícies del dia */}
+      <div style={{ padding: '20px 0 0' }}>
+        <SectionHead
+          kicker="Notícies"
+          kickerColor={T.cat.atajos.solid}
+          title="Avui al món"
+          action="Totes les notícies →"
+          onAction={() => navigate('/noticias')}
+        />
+        <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {LATEST_NEWS.map((n) => {
+            const k = T.cat[n.cat] || T.cat.operativa;
+            return (
+              <div key={n.id} onClick={() => navigate('/noticias')} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${k.solid}`, boxShadow: T.shadow.card, cursor: 'pointer' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                  <span style={{ fontSize: 10, fontWeight: 800, color: k.solid, letterSpacing: 0.6, textTransform: 'uppercase', background: k.soft, padding: '2px 6px', borderRadius: 999 }}>{n.tag}</span>
+                  <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
+                </div>
+                <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
+                <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc.length > 100 ? n.desc.slice(0, 100) + '…' : n.desc}</div>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ padding: '10px 16px 0' }}>
+          <button onClick={() => navigate('/noticias')} style={{
+            width: '100%', padding: '12px 0', borderRadius: T.r.md,
+            border: `1px solid ${T.cat.atajos.solid}`, background: T.cat.atajos.soft,
+            color: T.cat.atajos.ink, fontFamily: T.font, fontWeight: 700, fontSize: 13,
+            cursor: 'pointer',
+          }}>
+            Veure totes les notícies del dia →
+          </button>
         </div>
       </div>
     </div>
