@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { T } from '../tokens';
 import Icon from '../components/Icon';
 import { InfoPolWordmark, StatusBar, Pill, DuoButton, CatIcon } from '../components/Shared';
+import { NOTICIAS, CAT_NOTICIA_COLOR } from '../data/noticias';
 
 export default function ScreenLanding() {
   const navigate = useNavigate();
@@ -75,6 +76,53 @@ export default function ScreenLanding() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* noticias del dia */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+          <div>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.cat.leyes.solid, marginBottom: 2 }}>Avui</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 20, letterSpacing: -0.4 }}>Notícies del dia</div>
+          </div>
+          <button onClick={() => navigate('/noticias')} style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            color: T.cat.leyes.solid, fontWeight: 700, fontSize: 13, fontFamily: T.font,
+          }}>Veure totes</button>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {NOTICIAS.slice(0, 4).map(n => {
+            const colorKey = CAT_NOTICIA_COLOR[n.cat] || 'leyes';
+            const k = T.cat[colorKey];
+            return (
+              <div key={n.id} onClick={() => navigate(`/noticias/${n.id}`)} style={{
+                background: '#fff', borderRadius: T.r.lg, padding: 14,
+                boxShadow: T.shadow.card, borderLeft: `4px solid ${k.solid}`,
+                cursor: 'pointer',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                  <span style={{
+                    display: 'inline-block', padding: '3px 8px', borderRadius: T.r.pill,
+                    background: k.soft, color: k.ink,
+                    fontFamily: T.font, fontWeight: 700, fontSize: 10, letterSpacing: 0.4, textTransform: 'uppercase',
+                  }}>{n.categoria}</span>
+                  <span style={{ fontSize: 10, color: T.inkFaint, fontFamily: T.font }}>{n.zona}</span>
+                </div>
+                <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 14, lineHeight: 1.3, letterSpacing: -0.1, color: T.ink }}>{n.titol}</div>
+              </div>
+            );
+          })}
+        </div>
+        <button onClick={() => navigate('/noticias')} style={{
+          marginTop: 12, width: '100%',
+          padding: '12px 0', borderRadius: T.r.lg,
+          background: T.cat.leyes.soft, color: T.cat.leyes.ink,
+          border: 'none', cursor: 'pointer',
+          fontFamily: T.font, fontWeight: 700, fontSize: 13,
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+        }}>
+          Totes les notícies <Icon name="arrow-right" size={14} color={T.cat.leyes.ink} />
+        </button>
       </div>
 
       {/* features grid */}
