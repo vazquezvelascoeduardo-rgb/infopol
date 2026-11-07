@@ -77,6 +77,38 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* news card */}
+      <div style={{ padding: '12px 18px 0' }}>
+        <div onClick={() => navigate('/noticias')} style={{
+          background: T.cat.tests.soft, borderRadius: T.r.xl,
+          padding: 18, position: 'relative', overflow: 'hidden', cursor: 'pointer',
+          border: `1px solid ${T.cat.tests.soft}`,
+        }}>
+          <div style={{ position: 'absolute', right: -20, top: -20, width: 100, height: 100, borderRadius: 200, background: `${T.cat.tests.solid}18` }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+            <div style={{
+              width: 36, height: 36, borderRadius: 10, background: T.cat.tests.solid,
+              display: 'grid', placeItems: 'center', flexShrink: 0,
+              boxShadow: 'inset 0 -3px 0 rgba(0,0,0,0.18)',
+            }}>
+              <Icon name="newspaper" size={18} color="#fff" strokeWidth={2.2} />
+            </div>
+            <div>
+              <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1.1, textTransform: 'uppercase', color: T.cat.tests.ink }}>Actualitat · 7 Nov 2026</div>
+              <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 17, letterSpacing: -0.3, color: T.ink }}>Noticias del dia</div>
+            </div>
+            <div style={{ marginLeft: 'auto' }}>
+              <Icon name="chevron-right" size={20} color={T.cat.tests.solid} strokeWidth={2.4} />
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+            {['Política', 'Economia', 'Policial', 'Esports', 'Descobriments'].map(t => (
+              <span key={t} style={{ background: `${T.cat.tests.solid}20`, color: T.cat.tests.ink, padding: '4px 10px', borderRadius: 999, fontSize: 11, fontWeight: 700 }}>{t}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* features grid */}
       <div style={{ padding: '24px 18px 8px' }}>
         <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 12 }}>Tot el que necessites</div>
