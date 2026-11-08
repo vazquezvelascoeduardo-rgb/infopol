@@ -96,6 +96,29 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '16px 18px 0' }}>
+        <div onClick={() => navigate('/noticias')} style={{
+          background: '#fff', borderRadius: T.r.lg, padding: 16,
+          boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.operativa.solid}`,
+          cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14,
+        }}>
+          <div style={{
+            width: 44, height: 44, borderRadius: 12, background: T.cat.operativa.solid,
+            display: 'grid', placeItems: 'center', flexShrink: 0,
+            boxShadow: 'inset 0 -3px 0 rgba(0,0,0,0.18)',
+          }}>
+            <span style={{ fontSize: 22 }}>📰</span>
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10.5, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.operativa.ink }}>Actualitat diària</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 17, letterSpacing: -0.3, marginTop: 1 }}>Noticias</div>
+            <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 2, lineHeight: 1.35 }}>Política, economia, internacional, esports i policials.</div>
+          </div>
+          <div style={{ color: T.cat.operativa.solid, fontSize: 18 }}>›</div>
+        </div>
+      </div>
+
       {/* testimonial */}
       <div style={{ padding: '16px 18px 0' }}>
         <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.academia.solid}` }}>
