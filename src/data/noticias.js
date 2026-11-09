@@ -1,0 +1,68 @@
+// Noticias diàries — actualitzat automàticament cada nit a les 22:00
+export const NOTICIAS = [
+  // 09 novembre 2026
+  {
+    date: '11·09',
+    cat: 'Política · Catalunya',
+    color: 'operativa',
+    title: 'El Parlament aprova els primers pressupostos d\'Illa',
+    desc: 'PSC, ERC i Comuns donen llum verda als primers comptes del Govern de Salvador Illa: 49.162 milions. Tres anys sense pressupostos aprovats.',
+    link: 'https://www.vilaweb.cat/noticies/el-parlament-aprova-el-pressupost-i-illa-es-garanteix-la-continuitat-de-la-legislatura/',
+  },
+  {
+    date: '11·09',
+    cat: 'Seguretat · Catalunya',
+    color: 'leyes',
+    title: 'La criminalitat a Catalunya baixa un 7,4% el 2026',
+    desc: 'Barcelona registra un 16% menys de delictes durant l\'estiu. Els homicidis, però, pugen per tiroteos vinculats al narcotràfic.',
+    link: 'https://es.headtopics.com/news/la-criminalidad-en-catalunya-baja-un-7-4-en-2026-tras-un-87871164',
+  },
+  {
+    date: '11·09',
+    cat: 'Legal · España',
+    color: 'alcohol',
+    title: 'La Fiscalia alerta: delictes greus i violents a l\'alça a Madrid',
+    desc: 'La Memòria 2026 de la Fiscalia madrilenya avisa de saturació judicial i un augment de delictes sexuals, violents i econòmics.',
+    link: 'https://www.moncloa.com/2026/09/29/criminalidad-madrid-fiscalia-3438287',
+  },
+  {
+    date: '11·09',
+    cat: 'Economia · España',
+    color: 'atajos',
+    title: 'Ibex 35 avança 1,9% i flirteja amb els 20.000 punts',
+    desc: 'La caiguda del petroli (~4%) per les tensions a l\'Iran impulsa els mercats. El Nasdaq 100 puja un 3,3% en la mateixa sessió.',
+    link: 'https://www.eleconomista.es/flash/20261109',
+  },
+  {
+    date: '11·09',
+    cat: 'Esports · España',
+    color: 'transito',
+    title: 'La Finalissima de futbol sala: Espanya a Brasil sense Dani Olmo',
+    desc: 'La selecció masculina de futbol sala juga la Finalissima a Niteroi (Brasil) fins al 8 de novembre. Dani Olmo, lesionat, queda fora de la Nations League.',
+    link: 'https://rfef.es/es/noticias/espana-disputara-la-finalissima-en-brasil',
+  },
+  {
+    date: '11·09',
+    cat: 'Ciència · España',
+    color: 'physical',
+    title: 'El CSIC-UPV elimina el 100% dels microplàstics de la rentadora',
+    desc: 'Un sistema de sorra amb microesferes de sílice i diòxid de titani degrada completament les partícules de polièster de l\'aigua de rentat.',
+    link: 'https://www.upv.es/noticias-upv/noticia-16151-microplasticos-es.html',
+  },
+  {
+    date: '11·09',
+    cat: 'Ciència · Internacional',
+    color: 'physical',
+    title: 'Nanoflors magnètiques del CSIC destrosses nanoplàstics de l\'aigua',
+    desc: '1 gram de nanopartícules d\'òxid de ferro captura fins a 10.000 mg de nanoplàstics i els converteix en agents per retirar metalls pesants.',
+    link: 'https://es.euronews.com/2026/09/04/csic-disena-nanoflores-magneticas-capaces-de-atrapar-transformar-nanoplasticos-agua',
+  },
+  {
+    date: '11·09',
+    cat: 'Cultura · España',
+    color: 'psico',
+    title: 'Setmana de la Ciència: +300 activitats gratuïtes del CSIC arreu d\'Espanya',
+    desc: 'Del 3 al 16 de novembre, l\'edició XXVI acosta la ciència als ciutadans amb tallers, xerrades i rutes. Canàries destaca amb programació en astronomia i IA.',
+    link: 'https://www.diariosigloxxi.com/texto-ep/mostrar/20261103181209/arranca-semana-ciencia-cientos-actividades-toda-espana',
+  },
+];
