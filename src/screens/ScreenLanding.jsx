@@ -77,6 +77,46 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias card */}
+      <div style={{ padding: '10px 18px 0' }}>
+        <div
+          onClick={() => navigate('/noticias')}
+          style={{
+            background: '#fff',
+            borderRadius: T.r.xl,
+            padding: '16px 18px',
+            boxShadow: T.shadow.card,
+            border: `1.5px solid ${T.cat.noticias.soft}`,
+            borderLeft: `4px solid ${T.cat.noticias.solid}`,
+            cursor: 'pointer',
+            display: 'flex', alignItems: 'center', gap: 14,
+          }}
+        >
+          <div style={{
+            width: 46, height: 46, borderRadius: 14,
+            background: T.cat.noticias.soft,
+            display: 'grid', placeItems: 'center', flexShrink: 0,
+          }}>
+            <Icon name="newspaper" size={24} color={T.cat.noticias.solid} strokeWidth={2.2} />
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{
+              fontFamily: T.font, fontWeight: 800, fontSize: 11,
+              letterSpacing: 1, textTransform: 'uppercase',
+              color: T.cat.noticias.ink, marginBottom: 2,
+            }}>Actualitzat avui · 23 notícies</div>
+            <div style={{
+              fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 17,
+              letterSpacing: -0.3, color: T.ink,
+            }}>Notícies del dia</div>
+            <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 2, lineHeight: 1.4 }}>
+              Catalunya · Espanya · Internacional
+            </div>
+          </div>
+          <Icon name="chevron-right" size={18} color={T.inkFaint} strokeWidth={2.2} />
+        </div>
+      </div>
+
       {/* features grid */}
       <div style={{ padding: '24px 18px 8px' }}>
         <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 12 }}>Tot el que necessites</div>
