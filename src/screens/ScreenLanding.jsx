@@ -96,6 +96,42 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{
+          background: '#fff', borderRadius: T.r.xl, padding: 18,
+          borderTop: `3px solid ${T.cat.noticias.solid}`,
+          boxShadow: T.shadow.card, cursor: 'pointer',
+        }} onClick={() => navigate('/noticias')}>
+          <div style={{
+            fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2,
+            textTransform: 'uppercase', color: T.cat.noticias.solid, marginBottom: 6,
+          }}>Noticias · Avui 11·11</div>
+          <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 20, letterSpacing: -0.4, marginBottom: 8 }}>
+            Resum diari del món
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            {[
+              { tag: 'Policial', text: 'Vaga general 11N: 80 carreteres tallades a Catalunya', color: '#E04F5F', soft: '#FBDADC', ink: '#7A1B22' },
+              { tag: 'Internacional', text: 'Rússia i Ucraïna pacten intercanvi de presoners a Abu Dabi', color: '#3B6BF5', soft: '#D8E2FE', ink: '#0E2B7A' },
+              { tag: 'Ciència', text: 'Nobel de Física per detectar neutrins còsmics des de l\'Antàrtida', color: '#1FB286', soft: '#CDF0E1', ink: '#0B5A3D' },
+            ].map((n, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                <span style={{
+                  padding: '3px 7px', borderRadius: 999, flexShrink: 0,
+                  background: n.soft, color: n.ink,
+                  fontFamily: T.font, fontWeight: 800, fontSize: 9, letterSpacing: 0.5, textTransform: 'uppercase',
+                }}>{n.tag}</span>
+                <span style={{ fontSize: 12, color: T.inkSoft, lineHeight: 1.35, fontWeight: 600 }}>{n.text}</span>
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: 12, color: T.cat.noticias.solid, fontWeight: 700, fontSize: 12, display: 'flex', alignItems: 'center', gap: 4 }}>
+            Veure totes les notícies <Icon name="arrow-right" size={13} color={T.cat.noticias.solid} />
+          </div>
+        </div>
+      </div>
+
       {/* testimonial */}
       <div style={{ padding: '16px 18px 0' }}>
         <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.academia.solid}` }}>
