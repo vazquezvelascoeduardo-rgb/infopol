@@ -77,6 +77,38 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '16px 18px 0' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+          <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted }}>Actualitat d'avui</div>
+          <button onClick={() => navigate('/noticias')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: T.cat.noticias.solid, fontWeight: 700, fontSize: 13, fontFamily: T.font }}>Veure-les totes →</button>
+        </div>
+        <div onClick={() => navigate('/noticias')} style={{
+          background: T.cat.noticias.soft, borderRadius: T.r.xl, padding: 18,
+          cursor: 'pointer', position: 'relative', overflow: 'hidden',
+          borderLeft: `4px solid ${T.cat.noticias.solid}`,
+          boxShadow: T.shadow.card,
+        }}>
+          <div style={{ position: 'absolute', right: -20, top: -20, width: 100, height: 100, borderRadius: 200, background: `rgba(15,95,166,0.08)` }} />
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+            <div style={{ width: 42, height: 42, borderRadius: 12, background: T.cat.noticias.solid, display: 'grid', placeItems: 'center', flexShrink: 0, boxShadow: 'inset 0 -3px 0 rgba(0,0,0,0.18)' }}>
+              <Icon name="newspaper" size={22} color="#fff" strokeWidth={2.2} />
+            </div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.noticias.ink, marginBottom: 4 }}>Notícies · 16 Nov 2026</div>
+              <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 16, letterSpacing: -0.3, color: T.ink, lineHeight: 1.3 }}>
+                Xi, Trump i Putin es reuniran a Shenzhen · Illa alerta sobre el 29-N · Nobel de Medicina per l'optogenètica
+              </div>
+            </div>
+          </div>
+          <div style={{ marginTop: 12, display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+            {['Política', 'Economia', 'Internacional', 'Esports', 'Judicial', 'Ciència'].map(tag => (
+              <span key={tag} style={{ background: `rgba(15,95,166,0.12)`, color: T.cat.noticias.ink, padding: '4px 10px', borderRadius: 999, fontSize: 11, fontWeight: 700 }}>{tag}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* features grid */}
       <div style={{ padding: '24px 18px 8px' }}>
         <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 12 }}>Tot el que necessites</div>

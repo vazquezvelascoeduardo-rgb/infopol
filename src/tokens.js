@@ -18,6 +18,10 @@ export const T = {
     academia: { solid: '#FF7A1A', soft: '#FFE0CB', ink: '#7A2E04' },
     physical: { solid: '#0BB4C2', soft: '#CCEEF1', ink: '#0A4F56' },
     psico:    { solid: '#F0B400', soft: '#FCEFB8', ink: '#5C4400' },
+    noticias: { solid: '#0F5FA6', soft: '#D0E6F7', ink: '#062B52' },
+    judicial: { solid: '#C0392B', soft: '#FAD7D3', ink: '#6B1A13' },
+    internacional: { solid: '#1A7A5E', soft: '#C8EDDF', ink: '#0A3D2F' },
+    ciencia:  { solid: '#6C3DAB', soft: '#E8D8FB', ink: '#3A1870' },
   },
 
   font: '"Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',

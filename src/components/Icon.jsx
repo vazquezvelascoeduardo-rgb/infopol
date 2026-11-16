@@ -54,6 +54,11 @@ export default function Icon({ name, size = 22, color = 'currentColor', strokeWi
     case 'wifi': return <svg {...common}><path d="M2 8.5a13 13 0 0 1 20 0"/><path d="M6 12.5a7 7 0 0 1 12 0"/><path d="M10 16.5a3 3 0 0 1 4 0"/><circle cx="12" cy="20" r="1" fill={color}/></svg>;
     case 'battery': return <svg {...common}><rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 11v2"/><rect x="4" y="9" width="12" height="6" rx="1" fill={color} stroke="none"/></svg>;
     case 'signal': return <svg {...common}><rect x="2" y="16" width="3" height="6" rx="1" fill={color} stroke="none"/><rect x="7" y="12" width="3" height="10" rx="1" fill={color} stroke="none"/><rect x="12" y="8" width="3" height="14" rx="1" fill={color} stroke="none"/><rect x="17" y="4" width="3" height="18" rx="1" fill={color} stroke="none"/></svg>;
+    case 'globe': return <svg {...common}><circle cx="12" cy="12" r="9"/><path d="M12 3c-3 4-3 14 0 18M12 3c3 4 3 14 0 18M3 12h18M4 7h16M4 17h16"/></svg>;
+    case 'trending-up': return <svg {...common}><path d="M3 17l5-5 4 4 7-8"/><path d="M14 8h5v5"/></svg>;
+    case 'newspaper': return <svg {...common}><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10M7 11h10M7 15h6"/></svg>;
+    case 'flask': return <svg {...common}><path d="M9 3h6M10 3v6L5 19a1 1 0 0 0 1 2h12a1 1 0 0 0 1-2l-5-10V3"/></svg>;
+    case 'handcuffs': return <svg {...common}><circle cx="8" cy="12" r="4"/><circle cx="16" cy="12" r="4"/><path d="M12 12h0"/></svg>;
     default: return <svg {...common}><circle cx="12" cy="12" r="9"/></svg>;
   }
 }
