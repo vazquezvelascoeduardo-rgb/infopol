@@ -96,6 +96,33 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias del dia */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 12 }}>Avui al dia</div>
+        <div
+          onClick={() => navigate('/noticias')}
+          style={{
+            background: T.card, borderRadius: T.r.xl, padding: 18,
+            boxShadow: T.shadow.card, cursor: 'pointer',
+            borderLeft: `4px solid ${T.cat.leyes.solid}`,
+            display: 'flex', alignItems: 'center', gap: 14,
+          }}
+        >
+          <div style={{
+            width: 48, height: 48, borderRadius: 14,
+            background: T.cat.leyes.soft, display: 'grid', placeItems: 'center', flexShrink: 0,
+          }}>
+            <Icon name="bell" size={24} color={T.cat.leyes.solid} />
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.leyes.ink, marginBottom: 2 }}>Noticias</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 16, letterSpacing: -0.3, color: T.ink }}>Resum diari del dia</div>
+            <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 2 }}>Catalunya · Espanya · Internacional</div>
+          </div>
+          <Icon name="chevron-right" size={20} color={T.inkMuted} />
+        </div>
+      </div>
+
       {/* testimonial */}
       <div style={{ padding: '16px 18px 0' }}>
         <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.academia.solid}` }}>
