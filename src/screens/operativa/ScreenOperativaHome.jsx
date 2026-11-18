@@ -43,6 +43,16 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
+  // --- 18·11·2026 ---
+  { date: '11·18', tag: 'Eleccions 29N', title: 'Junts activa la campanya per al 29N amb acte a Terrassa', desc: 'Miriam Nogueras i Josep Rull lideren la mobilització independentista mentre Puigdemont es manté pendent de retorn.', url: 'https://www.infobae.com/espana/agencias/2026/11/18/temas-del-dia-de-efe-espana-del-miercoles-18-de-noviembre-de-2026-1345-horas/' },
+  { date: '11·18', tag: 'Judicial', title: 'L\'Audiència Nacional jutja 17 acusats pel cas 3%', desc: 'La Fiscalia Anticorrupció sol·licita entre 6 i 8 anys de presó per irregularitats en adjudicacions públiques a Catalunya.', url: 'https://www.infobae.com/espana/agencias/2026/11/18/temas-del-dia-de-efe-espana-del-miercoles-18-de-noviembre-de-2026-1345-horas/' },
+  { date: '11·18', tag: 'Economia', title: 'El Govern puja el SMI fins a 1.286€ bruts el 2027', desc: 'Augment del 5,3% aplicat en 14 pagues i exempt d\'IRPF, seguint la proposta del Ministeri de Treball.', url: 'https://www.bolsamania.com/noticias/economia/cinco-noticias-mas-importantes-miercoles-18-noviembre--24214790.html' },
+  { date: '11·18', tag: 'Internacional', title: 'Trump, Xi i Putin coincideixen a la cimera de l\'APEC a Shenzhen', desc: 'Negociacions trilaterals marquen l\'agenda; Ucraïna entra al debat a petició de Trump. La UE proposa un préstec de 45.000 M€ per a Ucraïna.', url: 'https://es.euronews.com/2026/11/18/euronews-hoy-las-noticias-del-miercoles-18-de-noviembre-de-2026-reunion-trilateral-entre-t' },
+  { date: '11·18', tag: 'Esports', title: 'Espanya espera rival de pes als quarts de la Nations League', desc: 'La Roja prepara el torneig de quarts; l\'equip arrenca el primer duel previstament divendres.', url: 'https://www.infobae.com/espana/agencias/2026/11/18/temas-del-dia-de-efe-espana-del-miercoles-18-de-noviembre-de-2026-1345-horas/' },
+  { date: '11·18', tag: 'Mossos', title: 'Desmantellen una plantació amb 327 plantes de marihuana a Tortosa', desc: 'Els Mossos d\'Esquadra van desarticular el punt de cultiu al centre de la ciutat, en una operació contra el tràfic de drogues a les Terres de l\'Ebre.', url: 'https://www.diaridetarragona.com/sucesos/' },
+  { date: '11·18', tag: 'Ciència', title: 'Tres investigadores guardonades als Premis La Vanguardia de la Ciència 2026', desc: 'Lliurats a La Pedrera de Barcelona, el premi reconeix recerques destacades en biomedicina, canvi climàtic i noves tecnologies.', url: 'https://www.39ymas.com/premios-la-vanguardia-de-la-ciencia-2026-tres-investigadoras-galardonadas/' },
+  { date: '11·18', tag: 'Cultura', title: 'Premis Nacionals de Cultura 2026: anunciats els guanyadors de Llibre i Lletres', desc: 'El guardó d\'investigació recau en una obra sobre la fam a la postguerra franquista. Cerimònia celebrada al Ministeri de Cultura de Madrid.', url: 'https://leseg.unav.edu/2026/11/17/premios-nacionales-de-cultura-2026-libro-lectura-y-letras/' },
+  // --- Normativa vigent ---
   { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
   { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
   { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
@@ -125,13 +135,16 @@ export default function ScreenOperativaHome() {
         <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
-            <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
+            <div key={i}
+              onClick={n.url ? () => window.open(n.url, '_blank', 'noopener') : undefined}
+              style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card, cursor: n.url ? 'pointer' : 'default' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                 <span style={{ fontSize: 10, fontWeight: 800, color: T.cat.operativa.solid, letterSpacing: 0.6, textTransform: 'uppercase' }}>{n.tag}</span>
                 <span style={{ fontFamily: T.fontMono, fontSize: 10, color: T.inkMuted, marginLeft: 'auto' }}>{n.date}</span>
               </div>
               <div style={{ fontWeight: 700, fontSize: 13.5, color: T.ink, lineHeight: 1.3 }}>{n.title}</div>
               <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>{n.desc}</div>
+              {n.url && <div style={{ marginTop: 6, fontSize: 11, color: T.cat.operativa.solid, fontWeight: 700 }}>Llegir més →</div>}
             </div>
           ))}
         </div>
