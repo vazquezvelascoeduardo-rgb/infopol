@@ -96,6 +96,22 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias banner */}
+      <div style={{ padding: '12px 18px 0' }}>
+        <div onClick={() => navigate('/noticias')} style={{ background: T.cat.noticias.solid, borderRadius: T.r.lg, padding: 16, color: '#fff', display: 'flex', alignItems: 'center', gap: 14, cursor: 'pointer', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', right: -20, top: -20, width: 100, height: 100, borderRadius: 999, background: 'rgba(255,255,255,0.08)' }} />
+          <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(255,255,255,0.18)', display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+            <Icon name="newspaper" size={24} color="#fff" />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', opacity: 0.8, marginBottom: 2 }}>Novetats del dia</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 16, letterSpacing: -0.3 }}>Noticias · Avui</div>
+            <div style={{ fontSize: 12, opacity: 0.85, marginTop: 2 }}>Catalunya · Espanya · Internacional</div>
+          </div>
+          <Icon name="arrow-right" size={18} color="rgba(255,255,255,0.7)" />
+        </div>
+      </div>
+
       {/* testimonial */}
       <div style={{ padding: '16px 18px 0' }}>
         <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.academia.solid}` }}>
