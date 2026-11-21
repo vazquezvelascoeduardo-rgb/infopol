@@ -111,6 +111,27 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 12 }}>Avui al dia</div>
+        <div
+          onClick={() => navigate('/noticias')}
+          style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderTop: `3px solid ${T.cat.alcohol.solid}`, cursor: 'pointer' }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div style={{ width: 40, height: 40, borderRadius: 11, background: T.cat.alcohol.soft, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+              <Icon name="newspaper" size={20} color={T.cat.alcohol.solid} />
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.alcohol.ink }}>Noticias · {new Date().toLocaleDateString('ca-ES', { day: 'numeric', month: 'long' })}</div>
+              <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 15, letterSpacing: -0.2, marginTop: 1 }}>Actualitat diària</div>
+              <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 2, lineHeight: 1.3 }}>Política, economia, esports, ciència i successos.</div>
+            </div>
+            <Icon name="chevron-right" size={16} color={T.inkMuted} />
+          </div>
+        </div>
+      </div>
+
       {/* pricing */}
       <div style={{ padding: '20px 18px 0' }}>
         <div style={{ background: T.ink, borderRadius: T.r.xl, padding: 20, color: '#fff', position: 'relative', overflow: 'hidden' }}>
