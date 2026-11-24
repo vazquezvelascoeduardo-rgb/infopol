@@ -96,6 +96,35 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 10 }}>Avui al dia</div>
+        <div
+          onClick={() => navigate('/noticias')}
+          style={{
+            background: '#fff', borderRadius: T.r.lg, padding: 16,
+            borderTop: `3px solid ${T.cat.operativa.solid}`,
+            boxShadow: T.shadow.card, cursor: 'pointer',
+            display: 'flex', gap: 14, alignItems: 'flex-start',
+          }}
+        >
+          <div style={{
+            width: 42, height: 42, borderRadius: 11, flexShrink: 0,
+            background: T.cat.operativa.solid,
+            display: 'grid', placeItems: 'center',
+            boxShadow: 'inset 0 -3px 0 rgba(0,0,0,0.18)',
+          }}>
+            <Icon name="list" size={22} color="#fff" strokeWidth={2.4} />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.operativa.ink }}>Actualitat · 24 Nov 2026</div>
+            <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 17, letterSpacing: -0.3, marginTop: 1 }}>Notícies del dia</div>
+            <div style={{ fontSize: 12, color: T.inkMuted, marginTop: 3, lineHeight: 1.4 }}>Política, economia, esports, judicial i ciència. 16 notícies resumides.</div>
+          </div>
+          <Icon name="chevron-right" size={18} color={T.inkMuted} style={{ marginTop: 2, flexShrink: 0 }} />
+        </div>
+      </div>
+
       {/* testimonial */}
       <div style={{ padding: '16px 18px 0' }}>
         <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.academia.solid}` }}>
