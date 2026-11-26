@@ -96,6 +96,26 @@ export default function ScreenLanding() {
         </div>
       </div>
 
+      {/* noticias del dia */}
+      <div style={{ padding: '20px 18px 0' }}>
+        <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 11, letterSpacing: 1.2, textTransform: 'uppercase', color: T.inkMuted, marginBottom: 10 }}>Noticias del dia</div>
+        <div onClick={() => navigate('/noticias')} style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderTop: `3px solid ${T.cat.operativa.solid}`, cursor: 'pointer' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+            <span style={{ fontFamily: T.fontMono, fontSize: 11, color: T.inkMuted }}>Dijous 26·11·2026</span>
+            <span style={{ fontSize: 11, fontWeight: 700, color: T.cat.operativa.solid }}>12 notícies</span>
+          </div>
+          <div style={{ fontFamily: T.fontDisplay, fontWeight: 800, fontSize: 15, letterSpacing: -0.2, lineHeight: 1.3, marginBottom: 6 }}>
+            Eleccions 29N · Ábalos condemnat · COP31 sense acord
+          </div>
+          <div style={{ fontSize: 12, color: T.inkMuted, lineHeight: 1.4 }}>
+            Catalunya · Espanya · Internacional · Esports · Economia
+          </div>
+          <div style={{ marginTop: 10, display: 'flex', alignItems: 'center', gap: 4, color: T.cat.operativa.solid, fontSize: 12, fontWeight: 700 }}>
+            Veure totes les noticias →
+          </div>
+        </div>
+      </div>
+
       {/* testimonial */}
       <div style={{ padding: '16px 18px 0' }}>
         <div style={{ background: '#fff', borderRadius: T.r.lg, padding: 16, boxShadow: T.shadow.card, borderLeft: `3px solid ${T.cat.academia.solid}` }}>

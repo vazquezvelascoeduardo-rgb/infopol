@@ -43,9 +43,9 @@ function Chip({ icon, label }) {
 }
 
 const NEWS = [
-  { date: '04·18', tag: 'LO 1/2026', title: 'Multireincidència — enduriment de furts i estafes lleus', desc: 'Reforma del CP i la LECrim. Vigent des del 10 d\'abril de 2026.' },
-  { date: '04·14', tag: 'RD 316/2026', title: 'Reforma del Reglament d\'Estrangeria', desc: 'Dues figures noves d\'arrelament social. Termini de regularització fins al 30 de juny.' },
-  { date: '03·28', tag: 'Circ. 2/2026', title: 'Instrucció sobre identificació i registre de persones', desc: 'Nova circular de la Fiscalia General sobre aplicació de l\'art. 20 LO 4/2015.' },
+  { date: '26·11', tag: 'Suprem · Cas Koldo', title: 'Ábalos condemnat fins al 2042: el Suprem fixa les penes', desc: 'Màxim de 6.015 dies per a l\'exministre. L\'exassessor Koldo García tindrà pena fins al 2040.' },
+  { date: '26·11', tag: 'Antiterrorisme · BCN', title: 'Presó per a dos joves per gihadisme reincident a Barcelona', desc: 'Ja havien estat condemnats per radicalisme islàmic quan eren menors i ara han reincidit.' },
+  { date: '26·11', tag: 'Eleccions 29N', title: 'Recta final de campanya: debat a quatre i CIS dóna avantatge al PSOE', desc: 'El tancament de campanya és demà divendres 27. Eleccions el diumenge 29 de novembre.' },
 ];
 
 export default function ScreenOperativaHome() {
@@ -122,7 +122,7 @@ export default function ScreenOperativaHome() {
 
       {/* Actualitat normativa */}
       <div style={{ padding: '14px 0 0' }}>
-        <SectionHead kicker="Actualitat" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" />
+        <SectionHead kicker="Actualitat · 26 Nov" kickerColor={T.cat.operativa.solid} title="Última hora normativa" action="Tot →" onAction={() => navigate('/noticias')} />
         <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {NEWS.map((n, i) => (
             <div key={i} style={{ background: '#fff', borderRadius: T.r.md, padding: 14, borderLeft: `2px solid ${T.cat.operativa.solid}`, boxShadow: T.shadow.card }}>
