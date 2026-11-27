@@ -136,6 +136,25 @@ export default function ScreenOperativaHome() {
           ))}
         </div>
       </div>
+
+      {/* Notícies generals */}
+      <div style={{ padding: '14px 16px 0' }}>
+        <div onClick={() => navigate('/noticias')} style={{
+          background: T.cat.leyes.soft, borderRadius: T.r.lg, padding: 16,
+          borderLeft: `4px solid ${T.cat.leyes.solid}`, cursor: 'pointer',
+          display: 'flex', alignItems: 'center', gap: 12,
+        }}>
+          <div style={{ width: 42, height: 42, borderRadius: 11, background: T.cat.leyes.solid, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+            <Icon name="newspaper" size={22} color="#fff" strokeWidth={2.2} />
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily: T.font, fontWeight: 800, fontSize: 10, letterSpacing: 1, textTransform: 'uppercase', color: T.cat.leyes.ink }}>Actualitat · 27 Nov</div>
+            <div style={{ fontWeight: 800, fontSize: 14, color: T.ink, marginTop: 1 }}>Notícies del dia</div>
+            <div style={{ fontSize: 11.5, color: T.inkMuted, marginTop: 2 }}>Catalunya · Espanya · Internacional</div>
+          </div>
+          <Icon name="chevron-right" size={18} color={T.cat.leyes.solid} />
+        </div>
+      </div>
     </div>
   );
 }
